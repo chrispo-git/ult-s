@@ -425,7 +425,7 @@ pub fn bone_rot(fighter : &mut L2CFighterCommon) {
 		//Falco 
 		bone_const(boma, *FIGHTER_KIND_FALCO, hash40("throw_hi"), hash40("handr"), 13.0, 37.0, 0.0, 0.0, stick_x*20.0 -15.0, stick_x*20.0 -15.0, 0.0, 0.0);
 		//Gun
-		bone_const(boma, *FIGHTER_KIND_MIIGUNNER, hash40("throw_hi"), hash40("handr"), 13.0, 37.0, 0.0, 0.0, stick_x*20.0 -15.0, stick_x*20.0 -15.0, 0.0, 0.0);
+		bone_const(boma, *FIGHTER_KIND_MIIGUNNER, hash40("throw_hi"), hash40("handr"), 10.0, 37.0, 0.0, 0.0, stick_x*20.0 -15.0, stick_x*20.0 -15.0, 0.0, 0.0);
 	};
 }
 #[fighter_frame_callback]
