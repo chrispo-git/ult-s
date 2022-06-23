@@ -1,0 +1,24 @@
+[package]
+name = "plugin"
+version = "0.1.0"
+authors = ["chrispo"]
+edition = "2018"
+
+[package.metadata.skyline]
+titleid = "01006A800016E000"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+skyline = { git = "https://github.com/ultimate-research/skyline-rs.git" }
+skyline_smash = { git = "https://github.com/blu-dev/skyline-smash.git", features = ["weak_l2cvalue"] }
+smash_script = { git = "https://github.com/blu-dev/smash-script.git", branch = "development" }
+smashline = { git = "https://github.com/blu-dev/smashline.git", branch = "development" }
+
+[profile.dev]
+panic = "abort"
+
+[profile.release]
+panic = "abort"
+lto = true
