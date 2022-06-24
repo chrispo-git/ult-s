@@ -561,6 +561,20 @@ unsafe fn doc_jab2_eff(fighter: &mut L2CAgentBase) {
 }
 #[acmd_script(
     agent = "mariod",
+    script =  "sound_attack12",
+    category = ACMD_SOUND)]
+unsafe fn doc_jab2_snd(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=2)
+		if(is_excute){
+			PLAY_SE(hash40("se_common_punch_kick_swing_l"))
+			PLAY_SEQUENCE(hash40("seq_mariod_rnd_attack"))
+		}
+    });
+}
+#[acmd_script(
+    agent = "mariod",
     scripts =  ["game_specials", "game_specialairs"],
     category = ACMD_GAME)]
 unsafe fn doc_sideb(fighter: &mut L2CAgentBase) {
@@ -698,6 +712,7 @@ pub fn install() {
 		doc_ftilt_snd,
 		doc_jab2,
 		doc_jab2_eff,
+		doc_jab2_snd,
 		doc_jab1,
 		doc_sideb,
 		doc_air_downb

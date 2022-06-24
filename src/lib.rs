@@ -16,6 +16,7 @@ mod faf_change;
 mod yink;
 mod sora;
 mod kazuya;
+mod peach;
 mod rosa;
 mod brawler;
 mod pacman;
@@ -99,6 +100,7 @@ pub fn main() {
 	hooks::install();
 	faf_change::install();
 	dk::install();
+	peach::install();
 	mythra::install();
 	yink::install();
 	sora::install();

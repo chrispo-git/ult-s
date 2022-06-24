@@ -140,6 +140,52 @@ unsafe fn gunner_dair(fighter: &mut L2CAgentBase) {
 		}
     });
 }		
+#[acmd_script(
+    agent = "miigunner",
+    script =  "game_attackairhi",
+    category = ACMD_GAME)]
+unsafe fn gunner_uair(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=11)
+		if(is_excute){
+			WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
+		}
+		frame(Frame=17)
+		if(is_excute){
+			ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=1.8, Angle=140, KBG=100, FKB=45, BKB=0, Size=4.5, X=0.0, Y=15.0, Z=-3.0, X2=0.0, Y2=15.0, Z2=3.0, Hitlag=1.0, SDI=0.8, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=1, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_rush"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_ENERGY)
+			AttackModule::set_add_reaction_frame(ID=0, Frames=6.0, Unk=false)
+		}
+		frame(Frame=18)
+		if(is_excute){
+			ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=1.8, Angle=367, KBG=100, FKB=25, BKB=0, Size=2.6, X=0.0, Y=50.0, Z=0.0, X2=0.0, Y2=15.0, Z2=0.0, Hitlag=1.0, SDI=0.8, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=3, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_A, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_rush"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_ENERGY)
+			ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=1.8, Angle=96, KBG=100, FKB=25, BKB=0, Size=2.6, X=0.0, Y=50.0, Z=0.0, X2=0.0, Y2=15.0, Z2=0.0, Hitlag=1.0, SDI=0.8, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=3, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_G, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_rush"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_ENERGY)
+			ATTACK(ID=2, Part=0, Bone=hash40("top"), Damage=1.8, Angle=130, KBG=100, FKB=25, BKB=0, Size=3.2, X=0.0, Y=13.0, Z=-0.8, X2=0.0, Y2=13.0, Z2=0.8, Hitlag=1.0, SDI=0.8, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=3, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_A, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_rush"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_ENERGY)
+			AttackModule::set_add_reaction_frame(ID=0, Frames=6.0, Unk=false)
+			AttackModule::set_add_reaction_frame(ID=1, Frames=6.0, Unk=false)
+			AttackModule::set_add_reaction_frame(ID=2, Frames=6.0, Unk=false)
+		}
+		FT_MOTION_RATE(FSM=0.5)
+		frame(Frame=22)
+		FT_MOTION_RATE(FSM=1)
+		frame(Frame=35)
+		if(is_excute){
+			AttackModule::clear_all()
+		}
+		frame(Frame=36)
+		if(is_excute){
+			ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=4.0, Angle=72, KBG=175, FKB=0, BKB=50, Size=4.0, X=0.0, Y=50.0, Z=0.0, X2=0.0, Y2=12.0, Z2=0.0, Hitlag=1.0, SDI=0.8, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_ENERGY)
+		}
+		frame(Frame=37)
+		if(is_excute){
+			AttackModule::clear_all()
+		}
+		frame(Frame=60)
+		if(is_excute){
+			WorkModule::off_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
+		}
+    });
+}		
 #[fighter_frame_callback]
 pub fn gunner(fighter : &mut L2CFighterCommon) {
     unsafe {
@@ -177,7 +223,8 @@ pub fn install() {
 		gunner_fp,
 		gunner_nade,
 		gunner_nade_end,
-		gunner_dair
+		gunner_dair,
+		gunner_uair
     );
 	smashline::install_agent_frame_callbacks!(gunner);
 }
