@@ -24,26 +24,8 @@ fn peach_frame(fighter: &mut L2CFighterCommon) {
         println!("It'sa me, Mario, wahoooooooo!");
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
-		let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-		let motion_kind = MotionModule::motion_kind(boma);
 		let frame = MotionModule::frame(boma);
-		let stick_x = ControlModule::get_stick_x(boma) * PostureModule::lr(boma);
-		let stick_y = ControlModule::get_stick_y(boma);
 		if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_N {
-			/*if frame >= 8.0 && frame <= 40.0 {
-				if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_SPECIAL) {
-					/*if stick_x >= 0.65 {
-						SPECIAL_N_TYPE[ENTRY_ID] = 2;
-					} else if stick_y >= 0.5 {
-						SPECIAL_N_TYPE[ENTRY_ID] = 3;
-					} else if stick_y <= -0.5 {
-						SPECIAL_N_TYPE[ENTRY_ID] = 4;
-					} else {
-						SPECIAL_N_TYPE[ENTRY_ID] = 1;
-					};*/
-					StatusModule::change_status_request_from_script(boma, *FIGHTER_PEACH_STATUS_KIND_SPECIAL_N_HIT, true);
-				};
-			};*/
 			if StatusModule::is_situation_changed(boma) {
 				ArticleModule::remove_exist(boma, *FIGHTER_PEACH_GENERATE_ARTICLE_KINOPIO,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
 			};
@@ -56,41 +38,29 @@ fn peach_frame(fighter: &mut L2CFighterCommon) {
 				StatusModule::set_keep_situation_air(boma, true);
 			};
 		};
-		if status_kind == *FIGHTER_PEACH_STATUS_KIND_SPECIAL_N_HIT {
-			/*if frame < 2.0 {
-				if SPECIAL_N_TYPE[ENTRY_ID] == 1 {
-					ArticleModule::change_motion(boma, *FIGHTER_PEACH_GENERATE_ARTICLE_KINOPIO,smash::phx::Hash40::new("catch_attack"),false,0.0);
-				};
-				if SPECIAL_N_TYPE[ENTRY_ID] == 2 {
-					ArticleModule::change_motion(boma, *FIGHTER_PEACH_GENERATE_ARTICLE_KINOPIO,smash::phx::Hash40::new("throw_f"),false,0.0);
-				};
-				if SPECIAL_N_TYPE[ENTRY_ID] == 3 {
-					ArticleModule::change_motion(boma, *FIGHTER_PEACH_GENERATE_ARTICLE_KINOPIO,smash::phx::Hash40::new("throw_hi"),false,0.0);
-				};
-				if SPECIAL_N_TYPE[ENTRY_ID] == 4 {
-					ArticleModule::change_motion(boma, *FIGHTER_PEACH_GENERATE_ARTICLE_KINOPIO,smash::phx::Hash40::new("throw_lw"),false,0.0);
-				};
-			};
-			if SPECIAL_N_TYPE[ENTRY_ID] == 1 && frame >= 20.0 {
+		
+    }
+}
+#[fighter_frame( agent = FIGHTER_KIND_KIRBY )]
+fn kirby_frame(fighter: &mut L2CFighterCommon) {
+    unsafe {
+        println!("It'sa me, Mario, wahoooooooo!");
+        let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
+		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
+		let frame = MotionModule::frame(boma);
+		if status_kind == *FIGHTER_KIRBY_STATUS_KIND_PEACH_SPECIAL_N {
+			if StatusModule::is_situation_changed(boma) {
 				ArticleModule::remove_exist(boma, *FIGHTER_PEACH_GENERATE_ARTICLE_KINOPIO,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
+			};
+			if frame >= 40.0 {
 				CancelModule::enable_cancel(boma);
 			};
-			if SPECIAL_N_TYPE[ENTRY_ID] == 2 && frame >= 32.0 {
-				ArticleModule::remove_exist(boma, *FIGHTER_PEACH_GENERATE_ARTICLE_KINOPIO,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
-				CancelModule::enable_cancel(boma);
+			if frame >= 36.0 {
+				StatusModule::set_keep_situation_air(boma, false);
+			} else {
+				StatusModule::set_keep_situation_air(boma, true);
 			};
-			if SPECIAL_N_TYPE[ENTRY_ID] == 3 && frame >= 33.0 {
-				ArticleModule::remove_exist(boma, *FIGHTER_PEACH_GENERATE_ARTICLE_KINOPIO,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
-				CancelModule::enable_cancel(boma);
-			};
-			if SPECIAL_N_TYPE[ENTRY_ID] == 4 && frame >= 43.0 {
-				ArticleModule::remove_exist(boma, *FIGHTER_PEACH_GENERATE_ARTICLE_KINOPIO,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
-				CancelModule::enable_cancel(boma);
-			};*/
 		};
-		/*if ![*FIGHTER_STATUS_KIND_SPECIAL_N, *FIGHTER_PEACH_STATUS_KIND_SPECIAL_N_HIT].contains(&status_kind) {
-			SPECIAL_N_TYPE[ENTRY_ID] = 0;
-		};*/
 		
     }
 }
@@ -154,13 +124,36 @@ unsafe fn peach_neutralb_eff(fighter: &mut L2CAgentBase) {
 		}
     });
 }
+#[acmd_script(
+    agent = "kirby",
+    scripts =  ["effect_peachspecialn", "effect_peachspecialairn"],
+    category = ACMD_EFFECT)]
+unsafe fn kirby_peach_neutralb_eff(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=11)
+		if(is_excute){
+			FOOT_EFFECT(hash40("sys_dash_smoke"), hash40("top"), -12, 0, 0, 0, 0, 0, 0.9, 0, 0, 0, 0, 0, 0, false)
+		}
+		frame(Frame=13)
+		if(is_excute){
+			EFFECT_FLIP(hash40("sys_attack_speedline"), hash40("sys_attack_speedline"), hash40("top"), -6, 5, -3, 0, 0, 0, 0.9, 0, 1, 0, 0, 0, 0, true, EF_FLIP_YZ)
+		}
+		frame(Frame=35)
+		if(is_excute){
+			EFFECT(hash40("sys_erace_smoke"), hash40("top"), 6, 5, 0, 0, 0, 0, 0.9, 0, 0, 0, 0, 0, 0, false)
+		}
+    });
+}
 
 pub fn install() {
     smashline::install_agent_frames!(
-        peach_frame
+        peach_frame,
+		kirby_frame
     );
 	smashline::install_acmd_scripts!(
 		peach_neutralb,
-		peach_neutralb_eff
+		peach_neutralb_eff,
+		kirby_peach_neutralb_eff
 	);
 }
