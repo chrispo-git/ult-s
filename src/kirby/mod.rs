@@ -623,6 +623,9 @@ fn kirby_frame(fighter: &mut L2CFighterCommon) {
 		if [*FIGHTER_STATUS_KIND_ATTACK_AIR].contains(&status_kind) == false {
 			ArticleModule::remove_exist(boma, *FIGHTER_KIRBY_GENERATE_ARTICLE_FINALCUTTER,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
 		};
+		if [*FIGHTER_STATUS_KIND_ATTACK_S4, *FIGHTER_STATUS_KIND_ATTACK_S4_START, *FIGHTER_STATUS_KIND_ATTACK_S4_HOLD].contains(&status_kind) == false {
+			ArticleModule::remove_exist(boma, *FIGHTER_KIRBY_GENERATE_ARTICLE_HAMMER,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
+		};
 		if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_S {
 			StatusModule::change_status_request_from_script(boma,*FIGHTER_KIRBY_STATUS_KIND_SPECIAL_S_ATTACK, true);
 		};
