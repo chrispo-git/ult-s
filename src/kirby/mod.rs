@@ -15,6 +15,11 @@ static mut UPB_ANGLE : [i32; 8] = [1; 8];
 //2 - Outwards
 static mut IS_FINAL : [bool; 8] = [false; 8];
 static NONE :  smash::phx::Vector3f =  smash::phx::Vector3f { x: 0.0, y: 5.0, z: 0.0 };
+static mut variance : [f32; 8] = [0.0; 8];
+static mut N1 :  smash::phx::Vector3f =  smash::phx::Vector3f { x: 0.0, y: 3.0, z: -15.0 };
+static mut N2 :  smash::phx::Vector3f =  smash::phx::Vector3f { x: 0.0, y: 8.0, z: -24.0 };
+static mut F3 : [u32; 8] = [0; 8];
+static mut F4 : [u32; 8] = [0; 8];
 #[acmd_script(
     agent = "kirby",
     script =  "game_attacklw3",
@@ -650,19 +655,60 @@ pub fn ball_frame(weapon : &mut L2CFighterBase) {
 		let ENTRY_ID = WorkModule::get_int(&mut *boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 		let frame = MotionModule::frame(weapon.module_accessor) as i32;
 		if frame < 15 {
+			if frame >= 2 {
+				if frame % 4 == 0 {
+					variance[ENTRY_ID] = 8.0;
+				} else if (frame+1) % 2 == 0 {
+					variance[ENTRY_ID] = 4.0;
+				} else {
+					variance[ENTRY_ID] = -2.0;
+				};
+			} else {
+				variance[ENTRY_ID] = 0.0;
+			};
 			if frame % 3 == 0 {
 				let f1: u32 = EffectModule::req_follow(weapon.module_accessor, smash::phx::Hash40::new("sys_fireflower_shot"), smash::phx::Hash40::new("top"), &NONE, &NONE, 1.0, true, 0, 0, 0, 0, 0, true, true) as u32;
 				EffectModule::set_rgb(weapon.module_accessor, f1, 1.0, 0.5, 3.0);
 				EffectModule::set_alpha(weapon.module_accessor, f1, 0.65);
 				EffectModule::set_rate(weapon.module_accessor, f1, 1.5);
+				if frame >= 2 {
+					let f2: u32 = EffectModule::req_follow(weapon.module_accessor, smash::phx::Hash40::new("sys_fireflower_shot"), smash::phx::Hash40::new("top"), &N1, &NONE, 0.4, true, 0, 0, 0, 0, 0, true, true) as u32;
+					EffectModule::set_rgb(weapon.module_accessor, f2, 1.0, 0.5, 3.0);
+					EffectModule::set_alpha(weapon.module_accessor, f2, 0.65);
+					EffectModule::set_rate(weapon.module_accessor, f2, 1.5);
+				};
+				if frame >= 5 {
+					let f3: u32 = EffectModule::req_follow(weapon.module_accessor, smash::phx::Hash40::new("sys_fireflower_shot"), smash::phx::Hash40::new("top"), &N2, &NONE, 0.35, true, 0, 0, 0, 0, 0, true, true) as u32;
+					EffectModule::set_rgb(weapon.module_accessor, f3, 1.0, 0.5, 3.0);
+					EffectModule::set_alpha(weapon.module_accessor, f3, 0.65);
+					EffectModule::set_rate(weapon.module_accessor, f3, 1.5);
+				};
 			};
 			if frame % 5 == 0 {
 				let f2: u32 = EffectModule::req_follow(weapon.module_accessor, smash::phx::Hash40::new("sys_smash_flash"), smash::phx::Hash40::new("top"), &NONE, &NONE, 0.9, true, 0, 0, 0, 0, 0, true, true) as u32;
 			};
-			if frame % 10 == 0 {
+			if frame % 20 == 0 {
 				EffectModule::kill_kind(weapon.module_accessor, Hash40::new("sys_sscope_bullet"), false, true);
 				let f2: u32 = EffectModule::req_follow(weapon.module_accessor, smash::phx::Hash40::new("sys_sscope_bullet"), smash::phx::Hash40::new("top"), &NONE, &NONE, 2.1, true, 0, 0, 0, 0, 0, true, true) as u32;
 				EffectModule::set_rgb(weapon.module_accessor, f2, 2.75, 0.5, 4.5);
+			};
+			if frame == 2 {
+				F3[ENTRY_ID] = EffectModule::req_follow(weapon.module_accessor, smash::phx::Hash40::new("sys_sscope_bullet"), smash::phx::Hash40::new("top"), &N1, &NONE, 0.84, true, 0, 0, 0, 0, 0, true, true) as u32;
+				EffectModule::set_rgb(weapon.module_accessor, F3[ENTRY_ID], 2.75, 0.5, 4.5);
+				EffectModule::set_alpha(weapon.module_accessor, F3[ENTRY_ID], 0.65);
+			};
+			if frame == 5 {
+				F4[ENTRY_ID] = EffectModule::req_follow(weapon.module_accessor, smash::phx::Hash40::new("sys_sscope_bullet"), smash::phx::Hash40::new("top"), &N2, &NONE, 0.735, true, 0, 0, 0, 0, 0, true, true) as u32;
+				EffectModule::set_rgb(weapon.module_accessor, F4[ENTRY_ID], 2.75, 0.5, 4.5);
+				EffectModule::set_alpha(weapon.module_accessor, F4[ENTRY_ID], 0.5);
+			};
+			if frame >= 2 {
+				let n1 =  smash::phx::Vector3f { x: 0.0, y: 2.0+variance[ENTRY_ID], z: -15.0 };
+				EffectModule::set_pos(boma, F3[ENTRY_ID], &n1);
+			};
+			if frame >= 5 {
+				let n2 =  smash::phx::Vector3f { x: 0.0, y: 8.0-variance[ENTRY_ID], z: -24.0 };
+				EffectModule::set_pos(boma, F4[ENTRY_ID], &n2);
 			};
 		} else {
 			EffectModule::kill_kind(weapon.module_accessor, Hash40::new("sys_sscope_bullet"), false, true);
