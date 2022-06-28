@@ -1522,6 +1522,7 @@ pub fn lucina(fighter : &mut L2CFighterCommon) {
 		if fighter_kind == *FIGHTER_KIND_LUCINA {
 			if [*FIGHTER_STATUS_KIND_ENTRY, *FIGHTER_STATUS_KIND_WIN, *FIGHTER_STATUS_KIND_LOSE].contains(&status_kind) || (smash::app::sv_information::is_ready_go() == false && !smash::app::smashball::is_training_mode()) {
 				LUCINA_STANCE[ENTRY_ID] = 0;
+				TIMER[ENTRY_ID] = 5;
 			};
 			TIMER[ENTRY_ID] += 1;
 			if [
