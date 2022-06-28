@@ -258,7 +258,7 @@ unsafe fn kirby_upb2_sound(fighter: &mut L2CAgentBase) {
 unsafe fn kirby_bair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {	
-		frame(Frame=7)
+		frame(Frame=8)
 		if(is_excute){
 			ArticleModule::generate_article(FIGHTER_KIRBY_GENERATE_ARTICLE_FINALCUTTER, false, 0)
 			ArticleModule::change_motion(FIGHTER_MASTER_GENERATE_ARTICLE_SWORD,smash::phx::Hash40::new("special_hi2"),false,0.0)
