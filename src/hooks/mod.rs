@@ -400,6 +400,12 @@ pub fn bone_rot(fighter : &mut L2CFighterCommon) {
 		bone_const(boma, *FIGHTER_KIND_SAMUSD, hash40("attack_air_f"), hash40("rot"), 0.0, 47.0, 22.5, 22.5, 0.0, 0.0, 0.0, 0.0);
 		bone_const(boma, *FIGHTER_KIND_SAMUSD, hash40("attack_air_f"), hash40("rot"), 47.0, 59.0, 22.5, 0.0, 0.0, 0.0, 0.0, 0.0);
 		
+		//Dsamus Dair reverse
+		bone_const(boma, *FIGHTER_KIND_SAMUSD, hash40("attack_air_lw"), hash40("rot"), 0.0, 31.0, 0.0, 0.0, 180.0, 180.0, 0.0, 0.0);
+		bone_const(boma, *FIGHTER_KIND_SAMUSD, hash40("attack_air_lw"), hash40("rot"), 31.0, 60.0, 0.0, 0.0, 180.0, 0.0, 0.0, 0.0);
+		bone_const(boma, *FIGHTER_KIND_SAMUSD, hash40("landing_air_lw"), hash40("rot"), 0.0, 15.0, 0.0, 0.0, 180.0, 180.0, 0.0, 0.0);
+		bone_const(boma, *FIGHTER_KIND_SAMUSD, hash40("landing_air_lw"), hash40("rot"), 15.0, 59.0, 0.0, 0.0, 180.0, 0.0, 0.0, 0.0);
+		
 		//Falcon nair angle down
 		bone_const(boma, *FIGHTER_KIND_CAPTAIN, hash40("attack_air_n"), hash40("rot"), 0.0, 24.0, 10.0, 10.0, 0.0, 0.0, 0.0, 0.0);
 		bone_const(boma, *FIGHTER_KIND_CAPTAIN, hash40("attack_air_n"), hash40("rot"), 24.0, 38.0, 10.0, 0.0, 0.0, 0.0, 0.0, 0.0);
@@ -424,6 +430,7 @@ pub fn bone_rot(fighter : &mut L2CFighterCommon) {
 		
 		//Falco 
 		bone_const(boma, *FIGHTER_KIND_FALCO, hash40("throw_hi"), hash40("handr"), 13.0, 37.0, 0.0, 0.0, stick_x*20.0 -15.0, stick_x*20.0 -15.0, 0.0, 0.0);
+	
 	};
 }
 #[fighter_frame_callback]
