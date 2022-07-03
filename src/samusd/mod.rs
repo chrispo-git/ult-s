@@ -381,7 +381,7 @@ unsafe fn dsamus_jab_eff(fighter: &mut L2CAgentBase) {
 		}
 		frame(Frame=3)
 		if(is_excute){
-			EFFECT_FOLLOW(hash40("sys_attack_speedline"), hash40("top"), 27, 25, 0, 70, 0, 0, 1.3, true)
+			EFFECT_FOLLOW(hash40("sys_attack_speedline"), hash40("top"), 0, 25, 0, 70, 0, 0, 1.2, true)
 			LAST_EFFECT_SET_COLOR(3.0/255.0, 194.0/255.0, 252.0/255.0)
 		}
 		frame(Frame=14)

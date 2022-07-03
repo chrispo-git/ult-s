@@ -129,9 +129,9 @@ pub fn charge_check(fighter : &mut L2CFighterCommon) {
 		if can_charge(fighter_kind) {
 			//println!("Is C-Stick on? {}", ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_CSTICK_ON)); 
 			//println!("Cstick Y? {}", SUB_STICK[ENTRY_ID].y); 
-			if [*FIGHTER_STATUS_KIND_GUARD_ON, *FIGHTER_STATUS_KIND_GUARD, *FIGHTER_STATUS_KIND_GUARD_DAMAGE, *FIGHTER_STATUS_KIND_THROW, *FIGHTER_STATUS_KIND_GUARD_OFF, *FIGHTER_STATUS_KIND_SQUAT, *FIGHTER_STATUS_KIND_SQUAT_B, *FIGHTER_STATUS_KIND_SQUAT_F, *FIGHTER_STATUS_KIND_WALK, *FIGHTER_STATUS_KIND_DASH, *FIGHTER_STATUS_KIND_SQUAT_WAIT, *FIGHTER_STATUS_KIND_SQUAT_RV, *FIGHTER_STATUS_KIND_ATTACK, *FIGHTER_STATUS_KIND_ATTACK_DASH, *FIGHTER_STATUS_KIND_ATTACK_HI3, *FIGHTER_STATUS_KIND_ATTACK_S3, *FIGHTER_STATUS_KIND_ATTACK_LW3, *FIGHTER_STATUS_KIND_ATTACK_HI4, *FIGHTER_STATUS_KIND_ATTACK_HI4_HOLD, *FIGHTER_STATUS_KIND_ATTACK_HI4_START, *FIGHTER_STATUS_KIND_ATTACK_S4, *FIGHTER_STATUS_KIND_ATTACK_S4_HOLD, *FIGHTER_STATUS_KIND_ATTACK_S4_START, *FIGHTER_STATUS_KIND_ATTACK_LW4, *FIGHTER_STATUS_KIND_ATTACK_LW4_HOLD, *FIGHTER_STATUS_KIND_ATTACK_LW4_START, *FIGHTER_STATUS_KIND_CATCH, *FIGHTER_STATUS_KIND_CATCH_DASH, *FIGHTER_STATUS_KIND_LANDING, *FIGHTER_STATUS_KIND_LANDING_ATTACK_AIR, *FIGHTER_STATUS_KIND_RUN, *FIGHTER_STATUS_KIND_WAIT, *FIGHTER_STATUS_KIND_WALK, *FIGHTER_STATUS_KIND_TURN_DASH, *FIGHTER_STATUS_KIND_TURN, *FIGHTER_STATUS_KIND_TURN_RUN, *FIGHTER_STATUS_KIND_ATTACK_100, *FIGHTER_STATUS_KIND_RUN_BRAKE, *FIGHTER_STATUS_KIND_TURN_RUN_BRAKE, *FIGHTER_STATUS_KIND_WALK_BRAKE].contains(&status_kind)
+			if /*[*FIGHTER_STATUS_KIND_OTTOTTO, *FIGHTER_STATUS_KIND_GUARD_ON, *FIGHTER_STATUS_KIND_GUARD, *FIGHTER_STATUS_KIND_GUARD_DAMAGE, *FIGHTER_STATUS_KIND_THROW, *FIGHTER_STATUS_KIND_GUARD_OFF, *FIGHTER_STATUS_KIND_SQUAT, *FIGHTER_STATUS_KIND_SQUAT_B, *FIGHTER_STATUS_KIND_SQUAT_F, *FIGHTER_STATUS_KIND_WALK, *FIGHTER_STATUS_KIND_DASH, *FIGHTER_STATUS_KIND_SQUAT_WAIT, *FIGHTER_STATUS_KIND_SQUAT_RV, *FIGHTER_STATUS_KIND_ATTACK, *FIGHTER_STATUS_KIND_ATTACK_DASH, *FIGHTER_STATUS_KIND_ATTACK_HI3, *FIGHTER_STATUS_KIND_ATTACK_S3, *FIGHTER_STATUS_KIND_ATTACK_LW3, *FIGHTER_STATUS_KIND_ATTACK_HI4, *FIGHTER_STATUS_KIND_ATTACK_HI4_HOLD, *FIGHTER_STATUS_KIND_ATTACK_HI4_START, *FIGHTER_STATUS_KIND_ATTACK_S4, *FIGHTER_STATUS_KIND_ATTACK_S4_HOLD, *FIGHTER_STATUS_KIND_ATTACK_S4_START, *FIGHTER_STATUS_KIND_ATTACK_LW4, *FIGHTER_STATUS_KIND_ATTACK_LW4_HOLD, *FIGHTER_STATUS_KIND_ATTACK_LW4_START, *FIGHTER_STATUS_KIND_CATCH, *FIGHTER_STATUS_KIND_CATCH_DASH, *FIGHTER_STATUS_KIND_LANDING, *FIGHTER_STATUS_KIND_LANDING_ATTACK_AIR, *FIGHTER_STATUS_KIND_RUN, *FIGHTER_STATUS_KIND_WAIT, *FIGHTER_STATUS_KIND_WALK, *FIGHTER_STATUS_KIND_TURN_DASH, *FIGHTER_STATUS_KIND_TURN, *FIGHTER_STATUS_KIND_TURN_RUN, *FIGHTER_STATUS_KIND_ATTACK_100, *FIGHTER_STATUS_KIND_RUN_BRAKE, *FIGHTER_STATUS_KIND_TURN_RUN_BRAKE, *FIGHTER_STATUS_KIND_WALK_BRAKE].contains(&status_kind)
 			   || /*Aerial statuses*/ [*FIGHTER_STATUS_KIND_PASS, *FIGHTER_STATUS_KIND_ATTACK_AIR, *FIGHTER_STATUS_KIND_FALL, *FIGHTER_STATUS_KIND_FALL_AERIAL, *FIGHTER_STATUS_KIND_JUMP, *FIGHTER_STATUS_KIND_JUMP_AERIAL, *FIGHTER_STATUS_KIND_JUMP_SQUAT].contains(&status_kind)
-			   || (fighter_kind == *FIGHTER_KIND_PITB && status_kind == 13){
+			   || (fighter_kind == *FIGHTER_KIND_PITB && status_kind == 13)*/ true{
 				if stick_y <= -0.625 || SUB_STICK[ENTRY_ID].y <= -0.625 || ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_CSTICK_ON){
 					if stick_y <= -0.625 {
 						CHARGE[ENTRY_ID] += 1;
@@ -178,15 +178,15 @@ pub fn charge_use(fighter : &mut L2CFighterCommon) {
 				INPUT_NUM[ENTRY_ID] = 0;
 				CHARGE[ENTRY_ID] = 0;
 			};
-			if StatusModule::situation_kind(boma) == *SITUATION_KIND_CLIFF {
+			if StatusModule::situation_kind(boma) == *SITUATION_KIND_CLIFF  || [*FIGHTER_STATUS_KIND_CLIFF_CATCH, *FIGHTER_STATUS_KIND_CLIFF_WAIT, *FIGHTER_STATUS_KIND_CLIFF_CLIMB, *FIGHTER_STATUS_KIND_CLIFF_JUMP1, *FIGHTER_STATUS_KIND_CLIFF_JUMP2, *FIGHTER_STATUS_KIND_CLIFF_JUMP3, *FIGHTER_STATUS_KIND_CLIFF_ATTACK, *FIGHTER_STATUS_KIND_CLIFF_ESCAPE, *FIGHTER_STATUS_KIND_CLIFF_ROBBED, *FIGHTER_STATUS_KIND_CLIFF_CATCH_MOVE].contains(&status_kind){
 				CHARGE[ENTRY_ID] = 0;
 				USE_CHARGE[ENTRY_ID] = false;
 			};
-			if BAN_CHARGE[ENTRY_ID] == true {
-				CHARGE[ENTRY_ID] = 0;
-			};
 			if StatusModule::situation_kind(boma) == *SITUATION_KIND_GROUND {
 				BAN_CHARGE[ENTRY_ID] = false;
+			};
+			if BAN_CHARGE[ENTRY_ID] == true {
+				CHARGE[ENTRY_ID] = 0;
 			};
 			if CHARGE[ENTRY_ID] >= MAX_CHARGE && ([*FIGHTER_STATUS_KIND_GUARD_ON, *FIGHTER_STATUS_KIND_GUARD, *FIGHTER_STATUS_KIND_GUARD_OFF, *FIGHTER_STATUS_KIND_SQUAT, *FIGHTER_STATUS_KIND_SQUAT_B, *FIGHTER_STATUS_KIND_SQUAT_F, *FIGHTER_STATUS_KIND_SQUAT_WAIT, *FIGHTER_STATUS_KIND_SQUAT_RV, *FIGHTER_STATUS_KIND_DASH, *FIGHTER_STATUS_KIND_WALK].contains(&status_kind) || (FighterMotionModuleImpl::get_cancel_frame(boma,smash::phx::Hash40::new_raw(MotionModule::motion_kind(boma)),false) as f32 != 0.0 && (FighterMotionModuleImpl::get_cancel_frame(boma,smash::phx::Hash40::new_raw(MotionModule::motion_kind(boma)),false) as f32 <= MotionModule::frame(boma) || MotionModule::frame(boma) < 2.0)) ){
 				if stick_y >= 0.625 && ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_ATTACK) && ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_CSTICK_ON) && ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_CATCH) && ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_SPECIAL){
@@ -220,6 +220,7 @@ pub fn char_charge(fighter : &mut L2CFighterCommon) {
 		let motion_kind = MotionModule::motion_kind(boma);
 		let lua_state = fighter.lua_state_agent;
 		let situation_kind = StatusModule::situation_kind(boma);
+		let frame = MotionModule::frame(boma);
 		//Line Checks if you are eligible for charge
 		if can_charge(fighter_kind) {
 			if fighter_kind == *FIGHTER_KIND_PITB {
@@ -293,8 +294,13 @@ pub fn char_charge(fighter : &mut L2CFighterCommon) {
 			if fighter_kind == *FIGHTER_KIND_PACKUN {
 				if USE_CHARGE[ENTRY_ID] == true {
 					if situation_kind == *SITUATION_KIND_GROUND {
-						StatusModule::change_status_request_from_script(boma, *FIGHTER_PACKUN_STATUS_KIND_SQUAT_TREAD_DAMAGE, true);
-						USE_CHARGE[ENTRY_ID] = false;
+						if status_kind == *FIGHTER_PACKUN_STATUS_KIND_SQUAT_TREAD_DAMAGE && USE_CHARGE[ENTRY_ID] == true {
+							if frame > 2.0 {
+								USE_CHARGE[ENTRY_ID] = false;
+							};
+						} else {
+							StatusModule::change_status_request_from_script(boma, *FIGHTER_PACKUN_STATUS_KIND_SQUAT_TREAD_DAMAGE, true);
+						};
 					} else {
 						if status_kind == *FIGHTER_STATUS_KIND_ATTACK_AIR {
 							if [hash40("squat_step_pose_back")].contains(&motion_kind) == false {
@@ -309,20 +315,31 @@ pub fn char_charge(fighter : &mut L2CFighterCommon) {
 				};
 			};
 			if fighter_kind == *FIGHTER_KIND_JACK {
-				if USE_CHARGE[ENTRY_ID] == true && status_kind != *FIGHTER_JACK_STATUS_KIND_SPECIAL_N_JUMP {
-					USE_CHARGE[ENTRY_ID] = false;
-					StatusModule::change_status_request_from_script(boma, *FIGHTER_JACK_STATUS_KIND_SPECIAL_N_JUMP, true);
+				if USE_CHARGE[ENTRY_ID] == true {
+						if status_kind == *FIGHTER_JACK_STATUS_KIND_SPECIAL_N_JUMP && USE_CHARGE[ENTRY_ID] == true {
+							if frame > 2.0 {
+								USE_CHARGE[ENTRY_ID] = false;
+							};
+						} else {
+							StatusModule::change_status_request_from_script(boma, *FIGHTER_JACK_STATUS_KIND_SPECIAL_N_JUMP, true);
+						};
 				};
 			};
 			if fighter_kind == *FIGHTER_KIND_CAPTAIN {
-				if USE_CHARGE[ENTRY_ID] == true && status_kind != *FIGHTER_CAPTAIN_STATUS_KIND_SPECIAL_S_END {
-					USE_CHARGE[ENTRY_ID] = false;
-					let stop  = smash::phx::Vector3f { x: 0.2, y: 0.2, z: 1.0 };
-					KineticModule::mul_speed(boma, &stop, *FIGHTER_KINETIC_ENERGY_ID_MOTION);
-					KineticModule::mul_speed(boma, &stop, *FIGHTER_KINETIC_ENERGY_ID_CONTROL);
-					macros::PLAY_SEQUENCE(fighter, Hash40::new("seq_captain_rnd_attack"));
-					macros::PLAY_SE(fighter, Hash40::new("se_captain_swing_ll"));
-					StatusModule::change_status_request_from_script(boma, *FIGHTER_CAPTAIN_STATUS_KIND_SPECIAL_S_END, true);
+				if USE_CHARGE[ENTRY_ID] == true  {
+						if status_kind == *FIGHTER_CAPTAIN_STATUS_KIND_SPECIAL_S_END && USE_CHARGE[ENTRY_ID] == true {
+							if frame >= 2.0 {
+								USE_CHARGE[ENTRY_ID] = false;
+							} else {
+								let stop  = smash::phx::Vector3f { x: 0.2, y: 0.2, z: 1.0 };
+								KineticModule::mul_speed(boma, &stop, *FIGHTER_KINETIC_ENERGY_ID_MOTION);
+								KineticModule::mul_speed(boma, &stop, *FIGHTER_KINETIC_ENERGY_ID_CONTROL);
+								macros::PLAY_SEQUENCE(fighter, Hash40::new("seq_captain_rnd_attack"));
+								macros::PLAY_SE(fighter, Hash40::new("se_captain_swing_ll"));
+							};
+						} else {
+							StatusModule::change_status_request_from_script(boma, *FIGHTER_CAPTAIN_STATUS_KIND_SPECIAL_S_END, true);
+						};
 				};
 			};
 			//Link Stasis
@@ -370,6 +387,8 @@ pub fn char_charge(fighter : &mut L2CFighterCommon) {
 					};
 				};
 			};
+		} else {
+			USE_CHARGE[ENTRY_ID] = false;
 		};
     };
 }	

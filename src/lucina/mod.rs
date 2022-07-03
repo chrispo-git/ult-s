@@ -1542,7 +1542,11 @@ pub fn lucina(fighter : &mut L2CFighterCommon) {
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_SPECIAL_LW, true);
 				};
 			};
-			if TIMER[ENTRY_ID] >= 6 {
+			if [*FIGHTER_STATUS_KIND_WIN, *FIGHTER_STATUS_KIND_LOSE].contains(&status_kind) {
+				macros::EFFECT_OFF_KIND(fighter, Hash40::new("sys_damage_fire"), false, true);
+				macros::EFFECT_OFF_KIND(fighter, Hash40::new("sys_damage_elec"), false, true);
+			};
+			if TIMER[ENTRY_ID] >= 6 && smash::app::sv_information::is_ready_go() && ![*FIGHTER_STATUS_KIND_WIN, *FIGHTER_STATUS_KIND_LOSE].contains(&status_kind){
 					TIMER[ENTRY_ID] = 0;
 					let elec1: u32 = EffectModule::req_follow(boma, smash::phx::Hash40::new("sys_damage_elec"), smash::phx::Hash40::new("sword1"), &S1, &S1, 0.075, true, 0, 0, 0, 0, 0, true, true) as u32;
 					let elec2: u32 = EffectModule::req_follow(boma, smash::phx::Hash40::new("sys_damage_elec"), smash::phx::Hash40::new("sword1"), &S2, &S2, 0.15, true, 0, 0, 0, 0, 0, true, true) as u32;
@@ -1573,6 +1577,14 @@ pub fn lucina(fighter : &mut L2CFighterCommon) {
 						EffectModule::set_visible(boma, fire1, false);
 						EffectModule::set_visible(boma, fire2, false);
 						EffectModule::set_visible(boma, fire3, false);
+					};
+					if [*FIGHTER_STATUS_KIND_WIN, *FIGHTER_STATUS_KIND_LOSE].contains(&status_kind) || smash::app::sv_information::is_ready_go() == false{
+						EffectModule::set_visible(boma, fire1, false);
+						EffectModule::set_visible(boma, fire2, false);
+						EffectModule::set_visible(boma, fire3, false);
+						EffectModule::set_visible(boma, elec1, false);
+						EffectModule::set_visible(boma, elec2, false);
+						EffectModule::set_visible(boma, elec3, false);
 					};
 			};
 			if [hash40("special_air_lw"), hash40("special_lw")].contains(&motion_kind) {
