@@ -1,0 +1,1083 @@
+<?xml version="1.0" encoding="utf-8"?>
+<struct>
+  <list hash="map_coll_data">
+    <struct index="0">
+      <hash40 hash="node">head</hash40>
+      <float hash="offset_x">0</float>
+      <float hash="offset_y">0</float>
+      <float hash="offset_z">0</float>
+    </struct>
+    <struct index="1">
+      <hash40 hash="node">armr</hash40>
+      <float hash="offset_x">0</float>
+      <float hash="offset_y">0</float>
+      <float hash="offset_z">0</float>
+    </struct>
+    <struct index="2">
+      <hash40 hash="node">arml</hash40>
+      <float hash="offset_x">0</float>
+      <float hash="offset_y">0</float>
+      <float hash="offset_z">0</float>
+    </struct>
+    <struct index="3">
+      <hash40 hash="node">kneer</hash40>
+      <float hash="offset_x">0</float>
+      <float hash="offset_y">0</float>
+      <float hash="offset_z">0</float>
+    </struct>
+    <struct index="4">
+      <hash40 hash="node">kneel</hash40>
+      <float hash="offset_x">0</float>
+      <float hash="offset_y">0</float>
+      <float hash="offset_z">0</float>
+    </struct>
+    <struct index="5">
+      <hash40 hash="node">hip</hash40>
+      <float hash="offset_x">0</float>
+      <float hash="offset_y">0</float>
+      <float hash="offset_z">0</float>
+    </struct>
+  </list>
+  <list hash="jostle_map_coll_data">
+    <struct index="0">
+      <hash40 hash="node">head</hash40>
+      <float hash="offset_x">0</float>
+      <float hash="offset_y">0</float>
+      <float hash="offset_z">0</float>
+    </struct>
+    <struct index="1">
+      <hash40 hash="node">armr</hash40>
+      <float hash="offset_x">0</float>
+      <float hash="offset_y">0</float>
+      <float hash="offset_z">0</float>
+    </struct>
+    <struct index="2">
+      <hash40 hash="node">arml</hash40>
+      <float hash="offset_x">0</float>
+      <float hash="offset_y">0</float>
+      <float hash="offset_z">0</float>
+    </struct>
+    <struct index="3">
+      <hash40 hash="node">kneer</hash40>
+      <float hash="offset_x">0</float>
+      <float hash="offset_y">0</float>
+      <float hash="offset_z">0</float>
+    </struct>
+    <struct index="4">
+      <hash40 hash="node">kneel</hash40>
+      <float hash="offset_x">0</float>
+      <float hash="offset_y">0</float>
+      <float hash="offset_z">0</float>
+    </struct>
+    <struct index="5">
+      <hash40 hash="node">hip</hash40>
+      <float hash="offset_x">0</float>
+      <float hash="offset_y">0</float>
+      <float hash="offset_z">0</float>
+    </struct>
+  </list>
+  <list hash="hit_data">
+    <struct index="0">
+      <float hash="offset1_x">0.3</float>
+      <float hash="offset1_y">0.2</float>
+      <float hash="offset1_z">0</float>
+      <float hash="offset2_x">0.3</float>
+      <float hash="offset2_y">0.2</float>
+      <float hash="offset2_z">0</float>
+      <float hash="size">2.1</float>
+      <hash40 hash="node_id">hip</hash40>
+      <hash40 hash="part">collision_part_body</hash40>
+      <hash40 hash="height">hit_height_center</hash40>
+      <hash40 hash="status">hit_status_normal</hash40>
+      <hash40 hash="check_type">collision_shape_type_capsule</hash40>
+    </struct>
+    <struct index="1">
+      <float hash="offset1_x">0.5</float>
+      <float hash="offset1_y">0.3</float>
+      <float hash="offset1_z">0</float>
+      <float hash="offset2_x">2.1</float>
+      <float hash="offset2_y">0.3</float>
+      <float hash="offset2_z">0</float>
+      <float hash="size">2.3</float>
+      <hash40 hash="node_id">waist</hash40>
+      <hash40 hash="part">collision_part_body</hash40>
+      <hash40 hash="height">hit_height_center</hash40>
+      <hash40 hash="status">hit_status_normal</hash40>
+      <hash40 hash="check_type">collision_shape_type_capsule</hash40>
+    </struct>
+    <struct index="2">
+      <float hash="offset1_x">0.7</float>
+      <float hash="offset1_y">1.5</float>
+      <float hash="offset1_z">0</float>
+      <float hash="offset2_x">1.5</float>
+      <float hash="offset2_y">-2.6</float>
+      <float hash="offset2_z">0</float>
+      <float hash="size">2.7</float>
+      <hash40 hash="node_id">head</hash40>
+      <hash40 hash="part">collision_part_head</hash40>
+      <hash40 hash="height">hit_height_high</hash40>
+      <hash40 hash="status">hit_status_normal</hash40>
+      <hash40 hash="check_type">collision_shape_type_capsule</hash40>
+    </struct>
+    <struct index="3">
+      <float hash="offset1_x">0</float>
+      <float hash="offset1_y">0</float>
+      <float hash="offset1_z">0</float>
+      <float hash="offset2_x">4.2</float>
+      <float hash="offset2_y">0</float>
+      <float hash="offset2_z">0</float>
+      <float hash="size">1.5</float>
+      <hash40 hash="node_id">kneer</hash40>
+      <hash40 hash="part">collision_part_body_legs</hash40>
+      <hash40 hash="height">hit_height_low</hash40>
+      <hash40 hash="status">hit_status_normal</hash40>
+      <hash40 hash="check_type">collision_shape_type_capsule</hash40>
+    </struct>
+    <struct index="4">
+      <float hash="offset1_x">0</float>
+      <float hash="offset1_y">0</float>
+      <float hash="offset1_z">0</float>
+      <float hash="offset2_x">4.2</float>
+      <float hash="offset2_y">0</float>
+      <float hash="offset2_z">0</float>
+      <float hash="size">1.5</float>
+      <hash40 hash="node_id">kneel</hash40>
+      <hash40 hash="part">collision_part_body_legs</hash40>
+      <hash40 hash="height">hit_height_low</hash40>
+      <hash40 hash="status">hit_status_normal</hash40>
+      <hash40 hash="check_type">collision_shape_type_capsule</hash40>
+    </struct>
+    <struct index="5">
+      <float hash="offset1_x">1.7</float>
+      <float hash="offset1_y">0</float>
+      <float hash="offset1_z">0</float>
+      <float hash="offset2_x">4.1</float>
+      <float hash="offset2_y">0</float>
+      <float hash="offset2_z">0</float>
+      <float hash="size">2.1</float>
+      <hash40 hash="node_id">legr</hash40>
+      <hash40 hash="part">collision_part_body_legs</hash40>
+      <hash40 hash="height">hit_height_low</hash40>
+      <hash40 hash="status">hit_status_normal</hash40>
+      <hash40 hash="check_type">collision_shape_type_capsule</hash40>
+    </struct>
+    <struct index="6">
+      <float hash="offset1_x">1.7</float>
+      <float hash="offset1_y">0</float>
+      <float hash="offset1_z">0</float>
+      <float hash="offset2_x">4.1</float>
+      <float hash="offset2_y">0</float>
+      <float hash="offset2_z">0</float>
+      <float hash="size">2.1</float>
+      <hash40 hash="node_id">legl</hash40>
+      <hash40 hash="part">collision_part_body_legs</hash40>
+      <hash40 hash="height">hit_height_low</hash40>
+      <hash40 hash="status">hit_status_normal</hash40>
+      <hash40 hash="check_type">collision_shape_type_capsule</hash40>
+    </struct>
+    <struct index="7">
+      <float hash="offset1_x">0</float>
+      <float hash="offset1_y">0</float>
+      <float hash="offset1_z">0</float>
+      <float hash="offset2_x">2.3</float>
+      <float hash="offset2_y">0</float>
+      <float hash="offset2_z">0</float>
+      <float hash="size">1.2</float>
+      <hash40 hash="node_id">shoulderr</hash40>
+      <hash40 hash="part">collision_part_body</hash40>
+      <hash40 hash="height">hit_height_center</hash40>
+      <hash40 hash="status">hit_status_normal</hash40>
+      <hash40 hash="check_type">collision_shape_type_capsule</hash40>
+    </struct>
+    <struct index="8">
+      <float hash="offset1_x">0</float>
+      <float hash="offset1_y">0</float>
+      <float hash="offset1_z">0</float>
+      <float hash="offset2_x">2.3</float>
+      <float hash="offset2_y">0</float>
+      <float hash="offset2_z">0</float>
+      <float hash="size">1.2</float>
+      <hash40 hash="node_id">shoulderl</hash40>
+      <hash40 hash="part">collision_part_body</hash40>
+      <hash40 hash="height">hit_height_center</hash40>
+      <hash40 hash="status">hit_status_normal</hash40>
+      <hash40 hash="check_type">collision_shape_type_capsule</hash40>
+    </struct>
+    <struct index="9">
+      <float hash="offset1_x">0</float>
+      <float hash="offset1_y">0</float>
+      <float hash="offset1_z">0</float>
+      <float hash="offset2_x">3.4</float>
+      <float hash="offset2_y">0</float>
+      <float hash="offset2_z">0</float>
+      <float hash="size">1.3</float>
+      <hash40 hash="node_id">armr</hash40>
+      <hash40 hash="part">collision_part_etc</hash40>
+      <hash40 hash="height">hit_height_center</hash40>
+      <hash40 hash="status">hit_status_normal</hash40>
+      <hash40 hash="check_type">collision_shape_type_capsule</hash40>
+    </struct>
+    <struct index="10">
+      <float hash="offset1_x">0</float>
+      <float hash="offset1_y">0</float>
+      <float hash="offset1_z">0</float>
+      <float hash="offset2_x">3.4</float>
+      <float hash="offset2_y">0</float>
+      <float hash="offset2_z">0</float>
+      <float hash="size">1.3</float>
+      <hash40 hash="node_id">arml</hash40>
+      <hash40 hash="part">collision_part_etc</hash40>
+      <hash40 hash="height">hit_height_center</hash40>
+      <hash40 hash="status">hit_status_normal</hash40>
+      <hash40 hash="check_type">collision_shape_type_capsule</hash40>
+    </struct>
+  </list>
+  <list hash="hit_target">
+    <int index="0">2</int>
+    <int index="1">0</int>
+    <int index="2">6</int>
+  </list>
+  <list hash="cliff_hang_data">
+    <struct index="0">
+      <float hash="p1_x">17.25</float>
+      <float hash="p1_y">24</float>
+      <float hash="p2_x">-10.35</float>
+      <float hash="p2_y">8</float>
+    </struct>
+    <struct index="1">
+      <float hash="p1_x">10.35</float>
+      <float hash="p1_y">13.6</float>
+      <float hash="p2_x">-6.21</float>
+      <float hash="p2_y">4</float>
+    </struct>
+  </list>
+  <list hash="squat_walk_data">
+    <struct index="0">
+      <float hash="speed_forward">0.7</float>
+      <float hash="speed_back">0.5</float>
+    </struct>
+  </list>
+  <list hash="virtual_node_data_hit">
+    <struct index="0">
+      <hash40 hash="node">virtualhit0</hash40>
+      <hash40 hash="node_parent">hip</hash40>
+      <float hash="x">2.7</float>
+      <float hash="y">-0.9</float>
+      <float hash="z">0</float>
+      <float hash="rot_x">0</float>
+      <float hash="rot_y">0</float>
+      <float hash="rot_z">-85</float>
+    </struct>
+    <struct index="1">
+      <hash40 hash="node">virtualhit1</hash40>
+      <hash40 hash="node_parent">waist</hash40>
+      <float hash="x">1.5</float>
+      <float hash="y">1.8</float>
+      <float hash="z">0</float>
+      <float hash="rot_x">-180</float>
+      <float hash="rot_y">3</float>
+      <float hash="rot_z">112</float>
+    </struct>
+    <struct index="2">
+      <hash40 hash="node">virtualhit2</hash40>
+      <hash40 hash="node_parent">head</hash40>
+      <float hash="x">2.3</float>
+      <float hash="y">0.3</float>
+      <float hash="z">0</float>
+      <float hash="rot_x">-180</float>
+      <float hash="rot_y">0</float>
+      <float hash="rot_z">10</float>
+    </struct>
+    <struct index="3">
+      <hash40 hash="node">virtualhit3</hash40>
+      <hash40 hash="node_parent">kneer</hash40>
+      <float hash="x">1.1</float>
+      <float hash="y">-0.4</float>
+      <float hash="z">-0.2</float>
+      <float hash="rot_x">178</float>
+      <float hash="rot_y">35.1</float>
+      <float hash="rot_z">-95.6</float>
+    </struct>
+    <struct index="4">
+      <hash40 hash="node">virtualhit4</hash40>
+      <hash40 hash="node_parent">kneel</hash40>
+      <float hash="x">1.1</float>
+      <float hash="y">-0.4</float>
+      <float hash="z">0</float>
+      <float hash="rot_x">178.8</float>
+      <float hash="rot_y">-30.1</float>
+      <float hash="rot_z">-95.8</float>
+    </struct>
+    <struct index="5">
+      <hash40 hash="node">virtualhit5</hash40>
+      <hash40 hash="node_parent">legr</hash40>
+      <float hash="x">2.2</float>
+      <float hash="y">-0.4</float>
+      <float hash="z">-1.3</float>
+      <float hash="rot_x">-80</float>
+      <float hash="rot_y">110</float>
+      <float hash="rot_z">20</float>
+    </struct>
+    <struct index="6">
+      <hash40 hash="node">virtualhit6</hash40>
+      <hash40 hash="node_parent">legl</hash40>
+      <float hash="x">2</float>
+      <float hash="y">-0.5</float>
+      <float hash="z">1.2</float>
+      <float hash="rot_x">50</float>
+      <float hash="rot_y">-120</float>
+      <float hash="rot_z">40</float>
+    </struct>
+    <struct index="7">
+      <hash40 hash="node">virtualhit7</hash40>
+      <hash40 hash="node_parent">shoulderr</hash40>
+      <float hash="x">2</float>
+      <float hash="y">-0.4</float>
+      <float hash="z">0</float>
+      <float hash="rot_x">180</float>
+      <float hash="rot_y">180</float>
+      <float hash="rot_z">92</float>
+    </struct>
+    <struct index="8">
+      <hash40 hash="node">virtualhit8</hash40>
+      <hash40 hash="node_parent">shoulderl</hash40>
+      <float hash="x">1.5</float>
+      <float hash="y">-0.5</float>
+      <float hash="z">0</float>
+      <float hash="rot_x">-180</float>
+      <float hash="rot_y">0</float>
+      <float hash="rot_z">-85</float>
+    </struct>
+    <struct index="9">
+      <hash40 hash="node">virtualhit9</hash40>
+      <hash40 hash="node_parent">armr</hash40>
+      <float hash="x">1.4</float>
+      <float hash="y">0</float>
+      <float hash="z">0.5</float>
+      <float hash="rot_x">90</float>
+      <float hash="rot_y">-90</float>
+      <float hash="rot_z">0</float>
+    </struct>
+    <struct index="10">
+      <hash40 hash="node">virtualhit10</hash40>
+      <hash40 hash="node_parent">arml</hash40>
+      <float hash="x">1.4</float>
+      <float hash="y">0</float>
+      <float hash="z">-0.6</float>
+      <float hash="rot_x">-90</float>
+      <float hash="rot_y">90</float>
+      <float hash="rot_z">0</float>
+    </struct>
+  </list>
+  <list hash="virtual_node_data_hit_flip">
+    <struct index="0">
+      <hash40 hash="node">virtualhit3</hash40>
+      <hash40 hash="flip">virtualhit4</hash40>
+    </struct>
+    <struct index="1">
+      <hash40 hash="node">virtualhit5</hash40>
+      <hash40 hash="flip">virtualhit6</hash40>
+    </struct>
+    <struct index="2">
+      <hash40 hash="node">virtualhit7</hash40>
+      <hash40 hash="flip">virtualhit8</hash40>
+    </struct>
+    <struct index="3">
+      <hash40 hash="node">virtualhit9</hash40>
+      <hash40 hash="flip">virtualhit10</hash40>
+    </struct>
+  </list>
+  <list hash="param_special_n">
+    <struct index="0">
+      <float hash="charge_frame_max">40</float>
+      <float hash="spd_x_mul_on_air">0.4</float>
+      <float hash="spd_y">1.6</float>
+      <int hash="charge_max_auto_shot">1</int>
+      <float hash="max_speed_x_after_shot">0.7</float>
+      <float hash="spd_x">0</float>
+      <float hash="motion_rate">1</float>
+    </struct>
+    <struct index="1">
+      <float hash="charge_frame_max">0</float>
+      <float hash="spd_x_mul_on_air">0</float>
+      <float hash="spd_y">0</float>
+      <int hash="charge_max_auto_shot">0</int>
+      <float hash="max_speed_x_after_shot">0</float>
+      <float hash="spd_x">0</float>
+      <float hash="motion_rate">0</float>
+    </struct>
+    <struct index="2">
+      <float hash="charge_frame_max">0</float>
+      <float hash="spd_x_mul_on_air">0</float>
+      <float hash="spd_y">0</float>
+      <int hash="charge_max_auto_shot">0</int>
+      <float hash="max_speed_x_after_shot">0</float>
+      <float hash="spd_x">0</float>
+      <float hash="motion_rate">0</float>
+    </struct>
+    <struct index="3">
+      <float hash="charge_frame_max">0</float>
+      <float hash="spd_x_mul_on_air">0</float>
+      <float hash="spd_y">0</float>
+      <int hash="charge_max_auto_shot">0</int>
+      <float hash="max_speed_x_after_shot">0</float>
+      <float hash="spd_x">0</float>
+      <float hash="motion_rate">0</float>
+    </struct>
+  </list>
+  <list hash="param_shuriken">
+    <struct index="0">
+      <float hash="shoot_offset_x">1</float>
+      <float hash="shoot_offset_y">0</float>
+      <float hash="life_min">16</float>
+      <float hash="life_max">36</float>
+      <float hash="speed_min">5</float>
+      <float hash="speed_max">2.2</float>
+      <float hash="scale_min">0.4</float>
+      <float hash="scale_max">1.2</float>
+      <float hash="shoot_hit_stop_frame">3</float>
+      <int hash="vanish_hit_count">5</int>
+      <int hash="vanish_frame">12</int>
+      <float hash="speed_mul_on_vanish">0.94</float>
+      <int hash="is_penetration">0</int>
+      <float hash="change_effect_rate">0.66</float>
+    </struct>
+    <struct index="1">
+      <float hash="shoot_offset_x">0</float>
+      <float hash="shoot_offset_y">0</float>
+      <float hash="life_min">0</float>
+      <float hash="life_max">0</float>
+      <float hash="speed_min">0</float>
+      <float hash="speed_max">0</float>
+      <float hash="scale_min">0</float>
+      <float hash="scale_max">0</float>
+      <float hash="shoot_hit_stop_frame">0</float>
+      <int hash="vanish_hit_count">0</int>
+      <int hash="vanish_frame">0</int>
+      <float hash="speed_mul_on_vanish">0</float>
+      <int hash="is_penetration">0</int>
+      <float hash="change_effect_rate">0</float>
+    </struct>
+    <struct index="2">
+      <float hash="shoot_offset_x">0</float>
+      <float hash="shoot_offset_y">0</float>
+      <float hash="life_min">0</float>
+      <float hash="life_max">0</float>
+      <float hash="speed_min">0</float>
+      <float hash="speed_max">0</float>
+      <float hash="scale_min">0</float>
+      <float hash="scale_max">0</float>
+      <float hash="shoot_hit_stop_frame">0</float>
+      <int hash="vanish_hit_count">0</int>
+      <int hash="vanish_frame">0</int>
+      <float hash="speed_mul_on_vanish">0</float>
+      <int hash="is_penetration">0</int>
+      <float hash="change_effect_rate">0</float>
+    </struct>
+    <struct index="3">
+      <float hash="shoot_offset_x">0</float>
+      <float hash="shoot_offset_y">0</float>
+      <float hash="life_min">0</float>
+      <float hash="life_max">0</float>
+      <float hash="speed_min">0</float>
+      <float hash="speed_max">0</float>
+      <float hash="scale_min">0</float>
+      <float hash="scale_max">0</float>
+      <float hash="shoot_hit_stop_frame">0</float>
+      <int hash="vanish_hit_count">0</int>
+      <int hash="vanish_frame">0</int>
+      <float hash="speed_mul_on_vanish">0</float>
+      <int hash="is_penetration">0</int>
+      <float hash="change_effect_rate">0</float>
+    </struct>
+  </list>
+  <struct hash="map_collision_shuriken">
+    <hash40 hash="shape_type">grcorrect_shape_circle</hash40>
+    <float hash="center_y">0</float>
+    <float hash="radius">0.5</float>
+  </struct>
+  <list hash="param_special_s">
+    <struct index="0">
+      <int hash="hold_start_frame">5</int>
+      <float hash="hold_x_speed">0.75</float>
+      <float hash="hold_air_x_speed">0.5</float>
+      <float hash="stick_play">0.3</float>
+      <float hash="init_air_speed_y">1.8</float>
+      <float hash="init_air_gravity">0.2</float>
+      <int hash="chance">8</int>
+      <int hash="warp_frame">10</int>
+      <float hash="search_enemy_radius">2.4</float>
+      <float hash="x_offset">2</float>
+      <float hash="ground_touch_angle">55</float>
+      <float hash="warp_spd">1.8</float>
+      <float hash="warp_distance_max">90</float>
+      <float hash="life">130</float>
+    </struct>
+    <struct index="1">
+      <int hash="hold_start_frame">0</int>
+      <float hash="hold_x_speed">0</float>
+      <float hash="hold_air_x_speed">0</float>
+      <float hash="stick_play">0</float>
+      <float hash="init_air_speed_y">0</float>
+      <float hash="init_air_gravity">0</float>
+      <int hash="chance">0</int>
+      <int hash="warp_frame">0</int>
+      <float hash="search_enemy_radius">0</float>
+      <float hash="x_offset">0</float>
+      <float hash="ground_touch_angle">0</float>
+      <float hash="warp_spd">0</float>
+      <float hash="warp_distance_max">0</float>
+      <float hash="life">0</float>
+    </struct>
+    <struct index="2">
+      <int hash="hold_start_frame">0</int>
+      <float hash="hold_x_speed">0</float>
+      <float hash="hold_air_x_speed">0</float>
+      <float hash="stick_play">0</float>
+      <float hash="init_air_speed_y">0</float>
+      <float hash="init_air_gravity">0</float>
+      <int hash="chance">0</int>
+      <int hash="warp_frame">0</int>
+      <float hash="search_enemy_radius">0</float>
+      <float hash="x_offset">0</float>
+      <float hash="ground_touch_angle">0</float>
+      <float hash="warp_spd">0</float>
+      <float hash="warp_distance_max">0</float>
+      <float hash="life">0</float>
+    </struct>
+    <struct index="3">
+      <int hash="hold_start_frame">0</int>
+      <float hash="hold_x_speed">0</float>
+      <float hash="hold_air_x_speed">0</float>
+      <float hash="stick_play">0</float>
+      <float hash="init_air_speed_y">0</float>
+      <float hash="init_air_gravity">0</float>
+      <int hash="chance">0</int>
+      <int hash="warp_frame">0</int>
+      <float hash="search_enemy_radius">0</float>
+      <float hash="x_offset">0</float>
+      <float hash="ground_touch_angle">0</float>
+      <float hash="warp_spd">0</float>
+      <float hash="warp_distance_max">0</float>
+      <float hash="life">0</float>
+    </struct>
+  </list>
+  <list hash="param_special_hi">
+    <struct index="0">
+      <int hash="move_wait_frame">16</int>
+      <int hash="decide_move_frame">10</int>
+      <float hash="warp_spd_add">3.7</float>
+      <float hash="warp_second">0.9</float>
+      <int hash="move_time">10</int>
+      <int hash="warp_angle">60</int>
+      <float hash="wall_hit_speed_x">0.3</float>
+      <float hash="wall_hit_speed_y">3.9</float>
+      <float hash="warp_end_speed_x_mul">0.5</float>
+      <float hash="warp_end_speed_y_mul">0.7</float>
+      <float hash="fall_x_mul_value">0.6</float>
+      <float hash="landing_frame">13</float>
+      <float hash="direction_effect_offset_y">11</float>
+      <float hash="direction_effect_radius">14</float>
+      <int hash="direction_effect_show_frame">4</int>
+      <int hash="direction_effect_second_frame">10</int>
+      <float hash="warp_stick">0.4</float>
+      <int hash="warp2_angle">0</int>
+      <float hash="warp_xmax">0.8</float>
+    </struct>
+    <struct index="1">
+      <int hash="move_wait_frame">0</int>
+      <int hash="decide_move_frame">0</int>
+      <float hash="warp_spd_add">0</float>
+      <float hash="warp_second">0</float>
+      <int hash="move_time">0</int>
+      <int hash="warp_angle">0</int>
+      <float hash="wall_hit_speed_x">0</float>
+      <float hash="wall_hit_speed_y">0</float>
+      <float hash="warp_end_speed_x_mul">0</float>
+      <float hash="warp_end_speed_y_mul">0</float>
+      <float hash="fall_x_mul_value">0</float>
+      <float hash="landing_frame">0</float>
+      <float hash="direction_effect_offset_y">0</float>
+      <float hash="direction_effect_radius">0</float>
+      <int hash="direction_effect_show_frame">0</int>
+      <int hash="direction_effect_second_frame">0</int>
+      <float hash="warp_stick">0</float>
+      <int hash="warp2_angle">0</int>
+      <float hash="warp_xmax">0</float>
+    </struct>
+    <struct index="2">
+      <int hash="move_wait_frame">0</int>
+      <int hash="decide_move_frame">0</int>
+      <float hash="warp_spd_add">0</float>
+      <float hash="warp_second">0</float>
+      <int hash="move_time">0</int>
+      <int hash="warp_angle">0</int>
+      <float hash="wall_hit_speed_x">0</float>
+      <float hash="wall_hit_speed_y">0</float>
+      <float hash="warp_end_speed_x_mul">0</float>
+      <float hash="warp_end_speed_y_mul">0</float>
+      <float hash="fall_x_mul_value">0</float>
+      <float hash="landing_frame">0</float>
+      <float hash="direction_effect_offset_y">0</float>
+      <float hash="direction_effect_radius">0</float>
+      <int hash="direction_effect_show_frame">0</int>
+      <int hash="direction_effect_second_frame">0</int>
+      <float hash="warp_stick">0</float>
+      <int hash="warp2_angle">0</int>
+      <float hash="warp_xmax">0</float>
+    </struct>
+    <struct index="3">
+      <int hash="move_wait_frame">0</int>
+      <int hash="decide_move_frame">0</int>
+      <float hash="warp_spd_add">0</float>
+      <float hash="warp_second">0</float>
+      <int hash="move_time">0</int>
+      <int hash="warp_angle">0</int>
+      <float hash="wall_hit_speed_x">0</float>
+      <float hash="wall_hit_speed_y">0</float>
+      <float hash="warp_end_speed_x_mul">0</float>
+      <float hash="warp_end_speed_y_mul">0</float>
+      <float hash="fall_x_mul_value">0</float>
+      <float hash="landing_frame">0</float>
+      <float hash="direction_effect_offset_y">0</float>
+      <float hash="direction_effect_radius">0</float>
+      <int hash="direction_effect_show_frame">0</int>
+      <int hash="direction_effect_second_frame">0</int>
+      <float hash="warp_stick">0</float>
+      <int hash="warp2_angle">0</int>
+      <float hash="warp_xmax">0</float>
+    </struct>
+  </list>
+  <list hash="param_water">
+    <struct index="0">
+      <float hash="life">17</float>
+      <float hash="speed">4</float>
+    </struct>
+    <struct index="1">
+      <float hash="life">0</float>
+      <float hash="speed">0</float>
+    </struct>
+    <struct index="2">
+      <float hash="life">0</float>
+      <float hash="speed">0</float>
+    </struct>
+    <struct index="3">
+      <float hash="life">0</float>
+      <float hash="speed">0</float>
+    </struct>
+  </list>
+  <struct hash="map_collision_water">
+    <hash40 hash="shape_type">grcorrect_shape_rhombus</hash40>
+    <float hash="up">2</float>
+    <float hash="down">-2</float>
+    <float hash="half_width">2</float>
+  </struct>
+  <list hash="param_special_lw">
+    <struct index="0">
+      <float hash="offset_x">0</float>
+      <float hash="offset_y">6.5</float>
+      <float hash="offset_z">0</float>
+      <float hash="motion_rate">1</float>
+      <float hash="warp_frame">35</float>
+      <float hash="wall_hit_speed_x">1</float>
+      <float hash="wall_hit_speed_y">3.4</float>
+      <float hash="start_x_speed_mul">0.5</float>
+      <float hash="fall_speed_accel">0.03</float>
+      <int hash="attack_time">22</int>
+      <float hash="doll_probability">50</float>
+      <float hash="distance">5</float>
+      <float hash="warp_offset_x">3</float>
+      <int hash="slow_speed_mul">4</int>
+      <int hash="slow_frame">50</int>
+      <float hash="slow_distance">5</float>
+      <int hash="no_collision_frame">10</int>
+      <float hash="rush_end_frame">10</float>
+      <float hash="lerp_angle">30</float>
+      <float hash="end_speed">2.5</float>
+      <float hash="end_brake">0.05</float>
+      <int hash="end_air_frame">3</int>
+      <float hash="end_speed_x_mul">0.5</float>
+      <hash40 hash="parts_no">top</hash40>
+      <float hash="radius_size">8</float>
+      <float hash="radius_max_up">3.6</float>
+      <float hash="warp_center_frame_up">10</float>
+      <float hash="attack_speed_min_up">4.5</float>
+      <float hash="radius_max_up_side">3.6</float>
+      <float hash="warp_center_frame_up_side">10</float>
+      <float hash="attack_speed_min_up_side">4.5</float>
+      <float hash="radius_max_side">3.6</float>
+      <float hash="warp_center_frame_side">10</float>
+      <float hash="attack_speed_min_side">4.5</float>
+      <float hash="radius_max_down_side">3.6</float>
+      <float hash="warp_center_frame_down_side">10</float>
+      <float hash="attack_speed_min_down_side">4.5</float>
+      <float hash="radius_max_down">3.6</float>
+      <float hash="warp_center_frame_down">10</float>
+      <float hash="attack_speed_min_down">4.5</float>
+      <float hash="fall_speed_max">0.6</float>
+      <float hash="stick_value_limit">0.3</float>
+    </struct>
+    <struct index="1">
+      <float hash="offset_x">0</float>
+      <float hash="offset_y">0</float>
+      <float hash="offset_z">0</float>
+      <float hash="motion_rate">0</float>
+      <float hash="warp_frame">0</float>
+      <float hash="wall_hit_speed_x">0</float>
+      <float hash="wall_hit_speed_y">0</float>
+      <float hash="start_x_speed_mul">0</float>
+      <float hash="fall_speed_accel">0</float>
+      <int hash="attack_time">0</int>
+      <float hash="doll_probability">0</float>
+      <float hash="distance">0</float>
+      <float hash="warp_offset_x">0</float>
+      <int hash="slow_speed_mul">0</int>
+      <int hash="slow_frame">0</int>
+      <float hash="slow_distance">0</float>
+      <int hash="no_collision_frame">0</int>
+      <float hash="rush_end_frame">0</float>
+      <float hash="lerp_angle">0</float>
+      <float hash="end_speed">0</float>
+      <float hash="end_brake">0</float>
+      <int hash="end_air_frame">0</int>
+      <float hash="end_speed_x_mul">0</float>
+      <hash40 hash="parts_no">top</hash40>
+      <float hash="radius_size">0</float>
+      <float hash="radius_max_up">0</float>
+      <float hash="warp_center_frame_up">0</float>
+      <float hash="attack_speed_min_up">0</float>
+      <float hash="radius_max_up_side">0</float>
+      <float hash="warp_center_frame_up_side">0</float>
+      <float hash="attack_speed_min_up_side">0</float>
+      <float hash="radius_max_side">0</float>
+      <float hash="warp_center_frame_side">0</float>
+      <float hash="attack_speed_min_side">0</float>
+      <float hash="radius_max_down_side">0</float>
+      <float hash="warp_center_frame_down_side">0</float>
+      <float hash="attack_speed_min_down_side">0</float>
+      <float hash="radius_max_down">0</float>
+      <float hash="warp_center_frame_down">0</float>
+      <float hash="attack_speed_min_down">0</float>
+      <float hash="fall_speed_max">0</float>
+      <float hash="stick_value_limit">0</float>
+    </struct>
+    <struct index="2">
+      <float hash="offset_x">0</float>
+      <float hash="offset_y">0</float>
+      <float hash="offset_z">0</float>
+      <float hash="motion_rate">0</float>
+      <float hash="warp_frame">0</float>
+      <float hash="wall_hit_speed_x">0</float>
+      <float hash="wall_hit_speed_y">0</float>
+      <float hash="start_x_speed_mul">0</float>
+      <float hash="fall_speed_accel">0</float>
+      <int hash="attack_time">0</int>
+      <float hash="doll_probability">0</float>
+      <float hash="distance">0</float>
+      <float hash="warp_offset_x">0</float>
+      <int hash="slow_speed_mul">0</int>
+      <int hash="slow_frame">0</int>
+      <float hash="slow_distance">0</float>
+      <int hash="no_collision_frame">0</int>
+      <float hash="rush_end_frame">0</float>
+      <float hash="lerp_angle">0</float>
+      <float hash="end_speed">0</float>
+      <float hash="end_brake">0</float>
+      <int hash="end_air_frame">0</int>
+      <float hash="end_speed_x_mul">0</float>
+      <hash40 hash="parts_no">top</hash40>
+      <float hash="radius_size">0</float>
+      <float hash="radius_max_up">0</float>
+      <float hash="warp_center_frame_up">0</float>
+      <float hash="attack_speed_min_up">0</float>
+      <float hash="radius_max_up_side">0</float>
+      <float hash="warp_center_frame_up_side">0</float>
+      <float hash="attack_speed_min_up_side">0</float>
+      <float hash="radius_max_side">0</float>
+      <float hash="warp_center_frame_side">0</float>
+      <float hash="attack_speed_min_side">0</float>
+      <float hash="radius_max_down_side">0</float>
+      <float hash="warp_center_frame_down_side">0</float>
+      <float hash="attack_speed_min_down_side">0</float>
+      <float hash="radius_max_down">0</float>
+      <float hash="warp_center_frame_down">0</float>
+      <float hash="attack_speed_min_down">0</float>
+      <float hash="fall_speed_max">0</float>
+      <float hash="stick_value_limit">0</float>
+    </struct>
+    <struct index="3">
+      <float hash="offset_x">0</float>
+      <float hash="offset_y">0</float>
+      <float hash="offset_z">0</float>
+      <float hash="motion_rate">0</float>
+      <float hash="warp_frame">0</float>
+      <float hash="wall_hit_speed_x">0</float>
+      <float hash="wall_hit_speed_y">0</float>
+      <float hash="start_x_speed_mul">0</float>
+      <float hash="fall_speed_accel">0</float>
+      <int hash="attack_time">0</int>
+      <float hash="doll_probability">0</float>
+      <float hash="distance">0</float>
+      <float hash="warp_offset_x">0</float>
+      <int hash="slow_speed_mul">0</int>
+      <int hash="slow_frame">0</int>
+      <float hash="slow_distance">0</float>
+      <int hash="no_collision_frame">0</int>
+      <float hash="rush_end_frame">0</float>
+      <float hash="lerp_angle">0</float>
+      <float hash="end_speed">0</float>
+      <float hash="end_brake">0</float>
+      <int hash="end_air_frame">0</int>
+      <float hash="end_speed_x_mul">0</float>
+      <hash40 hash="parts_no">top</hash40>
+      <float hash="radius_size">0</float>
+      <float hash="radius_max_up">0</float>
+      <float hash="warp_center_frame_up">0</float>
+      <float hash="attack_speed_min_up">0</float>
+      <float hash="radius_max_up_side">0</float>
+      <float hash="warp_center_frame_up_side">0</float>
+      <float hash="attack_speed_min_up_side">0</float>
+      <float hash="radius_max_side">0</float>
+      <float hash="warp_center_frame_side">0</float>
+      <float hash="attack_speed_min_side">0</float>
+      <float hash="radius_max_down_side">0</float>
+      <float hash="warp_center_frame_down_side">0</float>
+      <float hash="attack_speed_min_down_side">0</float>
+      <float hash="radius_max_down">0</float>
+      <float hash="warp_center_frame_down">0</float>
+      <float hash="attack_speed_min_down">0</float>
+      <float hash="fall_speed_max">0</float>
+      <float hash="stick_value_limit">0</float>
+    </struct>
+  </list>
+  <list hash="param_doll_log">
+    <struct index="0">
+      <int hash="life">600</int>
+      <float hash="speed_y">3.1</float>
+      <float hash="accel_y">0.15</float>
+      <float hash="rot_speed_z">9</float>
+      <float hash="reaction_mul">2</float>
+      <float hash="smash_max_speed_x">2.2</float>
+      <float hash="smash_max_speed_y">4</float>
+      <float hash="smash_ground_deccel_x">0.1</float>
+      <float hash="smash_air_deccel_x">0.04</float>
+      <float hash="smash_accel_y">0.15</float>
+      <float hash="rot_speed_min">8</float>
+      <float hash="rot_speed_max">18</float>
+      <float hash="power_min">5</float>
+      <float hash="power_max">25</float>
+      <float hash="life_dec_mul">4</float>
+      <float hash="min_degree_y">10</float>
+      <float hash="max_degree_y">45</float>
+      <float hash="rot_z_ratio">100</float>
+    </struct>
+    <struct index="1">
+      <int hash="life">0</int>
+      <float hash="speed_y">0</float>
+      <float hash="accel_y">0</float>
+      <float hash="rot_speed_z">0</float>
+      <float hash="reaction_mul">0</float>
+      <float hash="smash_max_speed_x">0</float>
+      <float hash="smash_max_speed_y">0</float>
+      <float hash="smash_ground_deccel_x">0</float>
+      <float hash="smash_air_deccel_x">0</float>
+      <float hash="smash_accel_y">0</float>
+      <float hash="rot_speed_min">0</float>
+      <float hash="rot_speed_max">0</float>
+      <float hash="power_min">0</float>
+      <float hash="power_max">0</float>
+      <float hash="life_dec_mul">0</float>
+      <float hash="min_degree_y">0</float>
+      <float hash="max_degree_y">0</float>
+      <float hash="rot_z_ratio">0</float>
+    </struct>
+    <struct index="2">
+      <int hash="life">0</int>
+      <float hash="speed_y">0</float>
+      <float hash="accel_y">0</float>
+      <float hash="rot_speed_z">0</float>
+      <float hash="reaction_mul">0</float>
+      <float hash="smash_max_speed_x">0</float>
+      <float hash="smash_max_speed_y">0</float>
+      <float hash="smash_ground_deccel_x">0</float>
+      <float hash="smash_air_deccel_x">0</float>
+      <float hash="smash_accel_y">0</float>
+      <float hash="rot_speed_min">0</float>
+      <float hash="rot_speed_max">0</float>
+      <float hash="power_min">0</float>
+      <float hash="power_max">0</float>
+      <float hash="life_dec_mul">0</float>
+      <float hash="min_degree_y">0</float>
+      <float hash="max_degree_y">0</float>
+      <float hash="rot_z_ratio">0</float>
+    </struct>
+    <struct index="3">
+      <int hash="life">0</int>
+      <float hash="speed_y">0</float>
+      <float hash="accel_y">0</float>
+      <float hash="rot_speed_z">0</float>
+      <float hash="reaction_mul">0</float>
+      <float hash="smash_max_speed_x">0</float>
+      <float hash="smash_max_speed_y">0</float>
+      <float hash="smash_ground_deccel_x">0</float>
+      <float hash="smash_air_deccel_x">0</float>
+      <float hash="smash_accel_y">0</float>
+      <float hash="rot_speed_min">0</float>
+      <float hash="rot_speed_max">0</float>
+      <float hash="power_min">0</float>
+      <float hash="power_max">0</float>
+      <float hash="life_dec_mul">0</float>
+      <float hash="min_degree_y">0</float>
+      <float hash="max_degree_y">0</float>
+      <float hash="rot_z_ratio">0</float>
+    </struct>
+  </list>
+  <list hash="map_collision_log">
+    <struct index="0">
+      <hash40 hash="shape_type">grcorrect_shape_rhombus</hash40>
+      <float hash="up">7.5</float>
+      <float hash="down">-7.5</float>
+      <float hash="half_width">3.5</float>
+    </struct>
+  </list>
+  <list hash="log_hit_data">
+    <struct index="0">
+      <float hash="offset1_x">0</float>
+      <float hash="offset1_y">-4.5</float>
+      <float hash="offset1_z">0</float>
+      <float hash="offset2_x">0</float>
+      <float hash="offset2_y">4.5</float>
+      <float hash="offset2_z">0</float>
+      <float hash="size">3.5</float>
+    </struct>
+  </list>
+  <list hash="map_collision_doll">
+    <struct index="0">
+      <hash40 hash="shape_type">grcorrect_shape_rhombus</hash40>
+      <float hash="up">5</float>
+      <float hash="down">-5</float>
+      <float hash="half_width">4</float>
+    </struct>
+  </list>
+  <list hash="doll_hit_data">
+    <struct index="0">
+      <float hash="offset1_x">0</float>
+      <float hash="offset1_y">0</float>
+      <float hash="offset1_z">0</float>
+      <float hash="offset2_x">0</float>
+      <float hash="offset2_y">0</float>
+      <float hash="offset2_z">0</float>
+      <float hash="size">4.5</float>
+    </struct>
+  </list>
+  <struct hash="param_gekkougas">
+    <int hash="final_enemy_interval">10</int>
+    <float hash="final_attack_upper_spd_y">0.02</float>
+    <float hash="final_target_pos_offset_x">30</float>
+    <float hash="final_target_pos_offset_y">0</float>
+    <int hash="final_arrive_frame">65</int>
+    <float hash="final_move_speed">5</float>
+    <int hash="black_out_frame">20</int>
+    <float hash="moon_target_pos_offset_y">-110</float>
+    <float hash="moon_target_pos_offset_z">-200</float>
+    <float hash="moon_depth_offset">0</float>
+  </struct>
+  <list hash="moon_data">
+    <struct index="0">
+      <float hash="speed">5</float>
+      <float hash="camera_range_x">0</float>
+      <float hash="scale">1.45</float>
+    </struct>
+    <struct index="1">
+      <float hash="speed">11</float>
+      <float hash="camera_range_x">900</float>
+      <float hash="scale">2.1</float>
+    </struct>
+  </list>
+  <list hash="0x1d9facc548">
+    <struct index="0">
+      <hash40 hash="node">hip</hash40>
+      <float hash="offset_x">0</float>
+      <float hash="offset_y">0</float>
+      <float hash="offset_z">0</float>
+      <float hash="scale">2</float>
+    </struct>
+    <struct index="1">
+      <hash40 hash="node">colonellm</hash40>
+      <float hash="offset_x">2</float>
+      <float hash="offset_y">0</float>
+      <float hash="offset_z">0</float>
+      <float hash="scale">0.8</float>
+    </struct>
+    <struct index="2">
+      <hash40 hash="node">kneel</hash40>
+      <float hash="offset_x">0</float>
+      <float hash="offset_y">0</float>
+      <float hash="offset_z">0</float>
+      <float hash="scale">1</float>
+    </struct>
+    <struct index="3">
+      <hash40 hash="node">armr</hash40>
+      <float hash="offset_x">2</float>
+      <float hash="offset_y">0</float>
+      <float hash="offset_z">0</float>
+      <float hash="scale">0.8</float>
+    </struct>
+    <struct index="4">
+      <hash40 hash="node">footr</hash40>
+      <float hash="offset_x">0</float>
+      <float hash="offset_y">0</float>
+      <float hash="offset_z">0</float>
+      <float hash="scale">1</float>
+    </struct>
+    <struct index="5">
+      <hash40 hash="node">head</hash40>
+      <float hash="offset_x">1</float>
+      <float hash="offset_y">0</float>
+      <float hash="offset_z">0</float>
+      <float hash="scale">1.2</float>
+    </struct>
+    <struct index="6">
+      <hash40 hash="node">shoulderl</hash40>
+      <float hash="offset_x">2</float>
+      <float hash="offset_y">0</float>
+      <float hash="offset_z">0</float>
+      <float hash="scale">0.8</float>
+    </struct>
+    <struct index="7">
+      <hash40 hash="node">kneer</hash40>
+      <float hash="offset_x">0</float>
+      <float hash="offset_y">0</float>
+      <float hash="offset_z">0</float>
+      <float hash="scale">1</float>
+    </struct>
+    <struct index="8">
+      <hash40 hash="node">arml</hash40>
+      <float hash="offset_x">2</float>
+      <float hash="offset_y">0</float>
+      <float hash="offset_z">0</float>
+      <float hash="scale">0.8</float>
+    </struct>
+    <struct index="9">
+      <hash40 hash="node">footl</hash40>
+      <float hash="offset_x">0</float>
+      <float hash="offset_y">0</float>
+      <float hash="offset_z">0</float>
+      <float hash="scale">1</float>
+    </struct>
+  </list>
+  <struct hash="camera_range_gekkougas">
+    <float hash="center_y">0</float>
+    <float hash="up">5</float>
+    <float hash="down">-5</float>
+    <float hash="front">5</float>
+    <float hash="back">-5</float>
+  </struct>
+  <struct hash="camera_clip_sphere_gekkougas">
+    <hash40 hash="node">top</hash40>
+    <float hash="x_offset">0</float>
+    <float hash="y_offset">24</float>
+    <float hash="z_offset">0</float>
+    <float hash="r">19</float>
+  </struct>
+</struct>
