@@ -352,7 +352,8 @@ pub fn llpc(fighter : &mut L2CFighterCommon) {
 						(ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_ATTACK_LW4) == 0 &&
 						(ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_ATTACK_LW3) == 0 &&
 						(ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_LW) == 0 &&
-						(ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_ESCAPE) == 0
+						(ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_ESCAPE) == 0 &&
+						(ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_JUMP))
 					) {
 						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_PASS, true);
 					};
