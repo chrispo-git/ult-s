@@ -315,12 +315,12 @@
     <struct index="2">
       <hash40 hash="node">virtualhit2</hash40>
       <hash40 hash="node_parent">bust</hash40>
-      <float hash="x">-0.4</float>
+      <float hash="x">1.1</float>
       <float hash="y">1.9</float>
-      <float hash="z">-0.6</float>
-      <float hash="rot_x">40</float>
-      <float hash="rot_y">140</float>
-      <float hash="rot_z">-50</float>
+      <float hash="z">-0.5</float>
+      <float hash="rot_x">-30</float>
+      <float hash="rot_y">-210</float>
+      <float hash="rot_z">240</float>
     </struct>
     <struct index="3">
       <hash40 hash="node">virtualhit3</hash40>
@@ -345,9 +345,9 @@
     <struct index="5">
       <hash40 hash="node">virtualhit5</hash40>
       <hash40 hash="node_parent">shoulderpadr</hash40>
-      <float hash="x">3.3</float>
+      <float hash="x">3.1</float>
       <float hash="y">0.3</float>
-      <float hash="z">0.8</float>
+      <float hash="z">0.6</float>
       <float hash="rot_x">90</float>
       <float hash="rot_y">-22</float>
       <float hash="rot_z">0</float>
@@ -355,9 +355,9 @@
     <struct index="6">
       <hash40 hash="node">virtualhit6</hash40>
       <hash40 hash="node_parent">shoulderpadl</hash40>
-      <float hash="x">3.3</float>
+      <float hash="x">3.1</float>
       <float hash="y">0.3</float>
-      <float hash="z">-0.8</float>
+      <float hash="z">-0.6</float>
       <float hash="rot_x">-90</float>
       <float hash="rot_y">22</float>
       <float hash="rot_z">0</float>
@@ -397,9 +397,9 @@
       <hash40 hash="node_parent">arml</hash40>
       <float hash="x">2.1</float>
       <float hash="y">0</float>
-      <float hash="z">-0.45</float>
+      <float hash="z">-0.5</float>
       <float hash="rot_x">-90</float>
-      <float hash="rot_y">86</float>
+      <float hash="rot_y">78</float>
       <float hash="rot_z">0</float>
     </struct>
     <struct index="11">
@@ -562,31 +562,35 @@
       <float hash="cshot_shot_spd_min">-0.1</float>
       <float hash="cshot_shot_spd_max">-0.8</float>
       <float hash="cshot_charge_frame">112</float>
+      <int hash="0x2bf59db69d">0</int>
       <float hash="cshot_land_f">0</float>
     </struct>
     <struct index="1">
       <float hash="cshot_shot_spd_min">0</float>
       <float hash="cshot_shot_spd_max">0</float>
       <float hash="cshot_charge_frame">0</float>
+      <int hash="0x2bf59db69d">0</int>
       <float hash="cshot_land_f">0</float>
     </struct>
     <struct index="2">
       <float hash="cshot_shot_spd_min">0</float>
       <float hash="cshot_shot_spd_max">0</float>
       <float hash="cshot_charge_frame">0</float>
+      <int hash="0x2bf59db69d">0</int>
       <float hash="cshot_land_f">0</float>
     </struct>
     <struct index="3">
       <float hash="cshot_shot_spd_min">0</float>
       <float hash="cshot_shot_spd_max">0</float>
       <float hash="cshot_charge_frame">0</float>
+      <int hash="0x2bf59db69d">0</int>
       <float hash="cshot_land_f">0</float>
     </struct>
   </list>
   <list hash="param_cshot">
     <struct index="0">
       <int hash="life">60</int>
-      <float hash="min_speed">1.6</float>
+      <float hash="min_speed">2.5</float>
       <float hash="max_speed">3.3</float>
       <float hash="min_scale">0.3</float>
       <float hash="max_scale">1</float>
@@ -667,14 +671,14 @@
   </list>
   <list hash="param_missile">
     <struct index="0">
-      <int hash="h_life">290</int>
-      <float hash="h_spd">0</float>
-      <float hash="h_anglemax">0</float>
-      <float hash="h_angle">0</float>
-      <float hash="h_angleplay">0</float>
-      <int hash="h_homingf">0</int>
-      <float hash="h_spdmul">0</float>
-      <float hash="h_spdmin">0</float>
+      <int hash="h_life">120</int>
+      <float hash="h_spd">1.15</float>
+      <float hash="h_anglemax">70</float>
+      <float hash="h_angle">0.65</float>
+      <float hash="h_angleplay">1</float>
+      <int hash="h_homingf">85</int>
+      <float hash="h_spdmul">0.95</float>
+      <float hash="h_spdmin">0.4</float>
     </struct>
     <struct index="1">
       <int hash="h_life">0</int>
@@ -759,11 +763,11 @@
   </struct>
   <list hash="param_special_hi">
     <struct index="0">
-      <float hash="sjump_ar_vy0">3.6</float>
+      <float hash="sjump_ar_vy0">3.3</float>
       <float hash="sjump_acc_x">0.017</float>
       <float hash="sjump_vx_max">0.57</float>
       <float hash="sjump_gr_vx0">0.35</float>
-      <float hash="sjump_fall_x_mul">1.3</float>
+      <float hash="sjump_fall_x_mul">0.66</float>
       <float hash="sjump_landing_frame">24</float>
       <float hash="sjump_lr_stick_x">0.25</float>
       <float hash="sjump_speed_mul">1</float>
