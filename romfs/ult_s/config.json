@@ -1,0 +1,172 @@
+{
+	"new-dir-files": {
+        "fighter/sonic/c00": [
+			"fighter/sonic/motion/body/c00/c00attack100.nuanmb"
+		],
+        "fighter/sonic/c01": [
+			"fighter/sonic/motion/body/c01/c00attack100.nuanmb"
+		],
+        "fighter/sonic/c02": [
+			"fighter/sonic/motion/body/c02/c00attack100.nuanmb"
+		],
+        "fighter/sonic/c03": [
+			"fighter/sonic/motion/body/c03/c00attack100.nuanmb"
+		],
+        "fighter/sonic/c04": [
+			"fighter/sonic/motion/body/c04/c00attack100.nuanmb"
+		],
+        "fighter/sonic/c05": [
+			"fighter/sonic/motion/body/c05/c00attack100.nuanmb"
+		],
+        "fighter/sonic/c06": [
+			"fighter/sonic/motion/body/c06/c00attack100.nuanmb"
+		],
+        "fighter/sonic/c07": [
+			"fighter/sonic/motion/body/c07/c00attack100.nuanmb"
+		],
+        "fighter/chrom/c00": [
+			"fighter/chrom/motion/body/c00/c00attack12.nuanmb",
+			"fighter/chrom/motion/body/c00/c01attacks3hi.nuanmb",
+			"fighter/chrom/motion/body/c00/c01attacks3lw.nuanmb"
+		],
+        "fighter/chrom/c01": [
+			"fighter/chrom/motion/body/c01/c00attack12.nuanmb",
+			"fighter/chrom/motion/body/c01/c01attacks3hi.nuanmb",
+			"fighter/chrom/motion/body/c01/c01attacks3lw.nuanmb"
+		],
+        "fighter/chrom/c02": [
+			"fighter/chrom/motion/body/c02/c00attack12.nuanmb",
+			"fighter/chrom/motion/body/c02/c01attacks3hi.nuanmb",
+			"fighter/chrom/motion/body/c02/c01attacks3lw.nuanmb"
+		],
+        "fighter/chrom/c03": [
+			"fighter/chrom/motion/body/c03/c00attack12.nuanmb",
+			"fighter/chrom/motion/body/c03/c01attacks3hi.nuanmb",
+			"fighter/chrom/motion/body/c03/c01attacks3lw.nuanmb"
+		],
+        "fighter/chrom/c04": [
+			"fighter/chrom/motion/body/c04/c00attack12.nuanmb",
+			"fighter/chrom/motion/body/c04/c01attacks3hi.nuanmb",
+			"fighter/chrom/motion/body/c04/c01attacks3lw.nuanmb"
+		],
+        "fighter/chrom/c05": [
+			"fighter/chrom/motion/body/c05/c00attack12.nuanmb",
+			"fighter/chrom/motion/body/c05/c01attacks3hi.nuanmb",
+			"fighter/chrom/motion/body/c05/c01attacks3lw.nuanmb"
+		],
+        "fighter/chrom/c06": [
+			"fighter/chrom/motion/body/c06/c00attack12.nuanmb",
+			"fighter/chrom/motion/body/c06/c01attacks3hi.nuanmb",
+			"fighter/chrom/motion/body/c06/c01attacks3lw.nuanmb"
+		],
+        "fighter/chrom/c07": [
+			"fighter/chrom/motion/body/c07/c00attack12.nuanmb",
+			"fighter/chrom/motion/body/c07/c01attacks3hi.nuanmb",
+			"fighter/chrom/motion/body/c07/c01attacks3lw.nuanmb"
+		],
+        "fighter/master/c00": [
+			"fighter/master/motion/body/c00/c05attackairn2.nuanmb"
+		],
+        "fighter/master/c01": [
+			"fighter/master/motion/body/c01/c05attackairn2.nuanmb"
+		],
+        "fighter/master/c02": [
+			"fighter/master/motion/body/c02/c05attackairn2.nuanmb"
+		],
+        "fighter/master/c03": [
+			"fighter/master/motion/body/c03/c05attackairn2.nuanmb"
+		],
+        "fighter/master/c04": [
+			"fighter/master/motion/body/c04/c05attackairn2.nuanmb"
+		],
+        "fighter/master/c05": [
+			"fighter/master/motion/body/c05/c05attackairn2.nuanmb"
+		],
+        "fighter/master/c06": [
+			"fighter/master/motion/body/c06/c05attackairn2.nuanmb"
+		],
+        "fighter/master/c07": [
+			"fighter/master/motion/body/c07/c05attackairn2.nuanmb"
+		],
+        "fighter/lucina/c00": [
+			"fighter/lucina/motion/body/c00/c05attackairhi2.nuanmb",
+			"fighter/lucina/motion/body/c00/c05attackairf2.nuanmb",
+			"fighter/lucina/motion/body/c00/c05attackairb2.nuanmb"
+		],
+        "fighter/lucina/c01": [
+			"fighter/lucina/motion/body/c01/c05attackairhi2.nuanmb",
+			"fighter/lucina/motion/body/c01/c05attackairf2.nuanmb",
+			"fighter/lucina/motion/body/c01/c05attackairb2.nuanmb"
+		],
+        "fighter/lucina/c02": [
+			"fighter/lucina/motion/body/c02/c05attackairhi2.nuanmb",
+			"fighter/lucina/motion/body/c02/c05attackairf2.nuanmb",
+			"fighter/lucina/motion/body/c02/c05attackairb2.nuanmb"
+		],
+        "fighter/lucina/c03": [
+			"fighter/lucina/motion/body/c03/c05attackairhi2.nuanmb",
+			"fighter/lucina/motion/body/c03/c05attackairf2.nuanmb",
+			"fighter/lucina/motion/body/c03/c05attackairb2.nuanmb"
+		],
+        "fighter/lucina/c04": [
+			"fighter/lucina/motion/body/c04/c05attackairhi2.nuanmb",
+			"fighter/lucina/motion/body/c04/c05attackairf2.nuanmb",
+			"fighter/lucina/motion/body/c04/c05attackairb2.nuanmb"
+		],
+        "fighter/lucina/c05": [
+			"fighter/lucina/motion/body/c05/c05attackairhi2.nuanmb",
+			"fighter/lucina/motion/body/c05/c05attackairf2.nuanmb",
+			"fighter/lucina/motion/body/c05/c05attackairb2.nuanmb"
+		],
+        "fighter/lucina/c06": [
+			"fighter/lucina/motion/body/c06/c05attackairhi2.nuanmb",
+			"fighter/lucina/motion/body/c06/c05attackairf2.nuanmb",
+			"fighter/lucina/motion/body/c06/c05attackairb2.nuanmb"
+		],
+        "fighter/lucina/c07": [
+			"fighter/lucina/motion/body/c07/c05attackairhi2.nuanmb",
+			"fighter/lucina/motion/body/c07/c05attackairf2.nuanmb",
+			"fighter/lucina/motion/body/c07/c05attackairb2.nuanmb"
+		],
+        "fighter/kirby/c00": [
+			"fighter/kirby/model/finalcutter/c00/def_ultrasword_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c00/def_ultrasword_001_nor.nutexb",
+			"fighter/kirby/model/finalcutter/c00/def_ultrasword_001_prm.nutexb"
+		],
+        "fighter/kirby/c01": [
+			"fighter/kirby/model/finalcutter/c01/def_ultrasword_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c01/def_ultrasword_001_nor.nutexb",
+			"fighter/kirby/model/finalcutter/c01/def_ultrasword_001_prm.nutexb"
+		],
+        "fighter/kirby/c02": [
+			"fighter/kirby/model/finalcutter/c02/def_ultrasword_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c02/def_ultrasword_001_nor.nutexb",
+			"fighter/kirby/model/finalcutter/c02/def_ultrasword_001_prm.nutexb"
+		],
+        "fighter/kirby/c03": [
+			"fighter/kirby/model/finalcutter/c03/def_ultrasword_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c04/def_ultrasword_001_nor.nutexb",
+			"fighter/kirby/model/finalcutter/c05/def_ultrasword_001_prm.nutexb"
+		],
+        "fighter/kirby/c04": [
+			"fighter/kirby/model/finalcutter/c04/def_ultrasword_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c04/def_ultrasword_001_nor.nutexb",
+			"fighter/kirby/model/finalcutter/c04/def_ultrasword_001_prm.nutexb"
+		],
+        "fighter/kirby/c05": [
+			"fighter/kirby/model/finalcutter/c05/def_ultrasword_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c05/def_ultrasword_001_nor.nutexb",
+			"fighter/kirby/model/finalcutter/c05/def_ultrasword_001_prm.nutexb"
+		],
+        "fighter/kirby/c06": [
+			"fighter/kirby/model/finalcutter/c06/def_ultrasword_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c06/def_ultrasword_001_nor.nutexb",
+			"fighter/kirby/model/finalcutter/c06/def_ultrasword_001_prm.nutexb"
+		],
+        "fighter/kirby/c07": [
+			"fighter/kirby/model/finalcutter/c07/def_ultrasword_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c07/def_ultrasword_001_nor.nutexb",
+			"fighter/kirby/model/finalcutter/c07/def_ultrasword_001_prm.nutexb"
+		]
+	}
+}
