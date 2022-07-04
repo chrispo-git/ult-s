@@ -1,5 +1,4 @@
 **/target
-**/build
 **/*.py
 **/*.pyc
 Cargo.lock
