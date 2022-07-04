@@ -1,1507 +1,810 @@
 <?xml version="1.0" encoding="utf-8"?>
 <struct>
-  <float hash="stick_clamp_max">120</float>
-  <float hash="stick_neutral">0.2</float>
-  <int hash="clatter_double_invalid_frame">3</int>
-  <int hash="0x21af4b1219">2</int>
-  <float hash="clatter_button_dec_frame_mul">1.8</float>
-  <float hash="reaction_fix_storage">10</float>
-  <float hash="reaction_damage_storage">0.1</float>
-  <float hash="reaction_attack">0.05</float>
-  <float hash="reaction_damage_mul">1.4</float>
-  <float hash="reaction_damage_add">18</float>
-  <float hash="reaction_effect_mul">0.01</float>
-  <float hash="power_up_reaction_effective_rate">0.8</float>
-  <float hash="power_up_reaction_effective_max_mag">3</float>
-  <float hash="power_up_reaction_effective_rate1">1</float>
-  <float hash="power_up_reaction_effective_rate2">1</float>
-  <float hash="power_up_reaction_effective_rate3">0.94</float>
-  <float hash="power_up_reaction_effective_rate4">0.85</float>
-  <float hash="reaction_max">2500</float>
-  <float hash="damage_max">999</float>
-  <float hash="damage_frame_mul">0.4</float>
-  <float hash="damage_frame_min">5</float>
-  <float hash="damage_level1">15</float>
-  <float hash="damage_level2">21</float>
-  <float hash="damage_level3">32</float>
-  <int hash="0x1c67f223e1">0</int>
-  <float hash="0x1a53290f14">2</float>
-  <float hash="change_damage_reaction_frame">60</float>
-  <float hash="0x294d96308d">13</float>
-  <float hash="0x2750119c3f">18</float>
-  <float hash="0x2657636c00">18</float>
-  <float hash="damage_speed_mul">0.03</float>
-  <float hash="damage_speed_limit">8.3</float>
-  <int hash="meteor_vector_min">230</int>
-  <int hash="meteor_vector_max">310</int>
-  <float hash="damage_angle_ground_zero_speed_mul">0.8</float>
-  <float hash="damage_angle_ground_reaction_min">60</float>
-  <float hash="damage_angle_ground_reaction_max">88</float>
-  <float hash="damage_angle_ground_max">38</float>
-  <float hash="damage_angle_zero_reaction_min">120</float>
-  <float hash="damage_angle_zero_damage_angle_max">32</float>
-  <float hash="damage_sync_speed_mul">0.5</float>
-  <float hash="damage_pull_speed_mul">0.2</float>
-  <float hash="damage_pull_speed_down_mul">0.3</float>
-  <float hash="damage_pull_attack_speed_max">3</float>
-  <float hash="damage_pull_ground_angle">80</float>
-  <float hash="damage_down_on_ground_y_speed_mul">0.8</float>
-  <float hash="damage_turn_speed_ground_mul">1</float>
-  <float hash="damage_turn_speed_air_mul">0.9</float>
-  <float hash="down_damage_reaction">7</float>
-  <float hash="down_damage_s_reaction">15</float>
-  <float hash="slip_damage_reaction">55</float>
-  <float hash="capture_cut_attack_power">11</float>
-  <float hash="capture_cut_damage">10</float>
-  <float hash="damage_fly_quake_m">50</float>
-  <float hash="damage_fly_quake_l">70</float>
-  <int hash="damage_fly_speed_up_reaction_frame_min">30</int>
-  <int hash="damage_fly_speed_up_reaction_frame_max">80</int>
-  <int hash="damage_fly_speed_up_end_rate">70</int>
-  <int hash="damage_fly_speed_up_max_mag">6</int>
-  <float hash="damage_fly_speed_up_angle_base">90</float>
-  <float hash="damage_fly_speed_up_min_max_angle">45</float>
-  <float hash="damage_fly_speed_up_angle_rate">100</float>
-  <float hash="damage_target_pos_reaction_frame">10</float>
-  <float hash="damage_target_pos_speed_limit">2</float>
-  <float hash="hitstop_frame_max">30</float>
-  <float hash="hitstop_frame_add">6</float>
-  <float hash="hitstop_frame_mul">0.65</float>
-  <float hash="hitstop_elec_mul">1.5</float>
-  <float hash="hitstop_frame_paralyze_max">90</float>
-  <float hash="hitstop_frame_paralyze_add">1</float>
-  <float hash="hitstop_frame_paralyze_mul">1</float>
-  <int hash="0x1b63c43ae1">10</int>
-  <int hash="just_shield_hitstop_frame_add">14</int>
-  <int hash="just_shield_hitstop_hit_xlu_extent_grow">2</int>
-  <int hash="0x28492c704c">7</int>
-  <int hash="0x323a6f8f63">-2</int>
-  <int hash="0x2bef82b907">2</int>
-  <int hash="just_shield_hitstop_frame_max">30</int>
-  <float hash="damage_shake_add_value">4</float>
-  <float hash="damage_shake_mul_value">0.75</float>
-  <int hash="0x22a00d63c4">60</int>
-  <float hash="0x1c2fab2856">0.6</float>
-  <float hash="capture_damage_shake_mul_value">0.66</float>
-  <int hash="0x1cfa62cbb2">30</int>
-  <float hash="0x1ebdc5f94a">15</float>
-  <float hash="0x27308926c5">0.3</float>
-  <int hash="0x2578843261">108</int>
-  <float hash="0x27d3b1a7c8">90</float>
-  <float hash="0x30125f75ea">0.2</float>
-  <int hash="0x23d2d966eb">10</int>
-  <float hash="rebound_reaction_mul">1</float>
-  <float hash="rebound_reaction_add">3</float>
-  <int hash="rebound_frame">16</int>
-  <int hash="rebound_reaction_max">30</int>
-  <float hash="rebound_power_diff">9</float>
-  <float hash="rebound_speed_add">0.5</float>
-  <float hash="rebound_speed_mul">0.007</float>
-  <int hash="reflect_count_max">7</int>
-  <float hash="just_shield_reflect_attack_mul">1.2</float>
-  <float hash="just_shield_reflect_speed_mul">1.5</float>
-  <float hash="just_shield_reflect_life_mul">2</float>
-  <int hash="just_shield_reflect_count_max">3</int>
-  <float hash="0x117e9b3582">0.037</float>
-  <float hash="0x112a8367c4">0.52</float>
-  <float hash="0x1176e209f3">0.5</float>
-  <float hash="0x114aef36aa">1.1</float>
-  <float hash="0x135d2f04a3">0.7</float>
-  <float hash="0x139ca1db63">1</float>
-  <float hash="0x16a568e4a4">0.04</float>
-  <float hash="0x16f170b6e2">0.45</float>
-  <float hash="0x16ad11d8d5">0.5</float>
-  <float hash="0x16911ce78c">1.3</float>
-  <float hash="0x186f25be36">0.8</float>
-  <float hash="0x18aeab61f6">1.2</float>
-  <float hash="0x2a9e6d7725">0.8</float>
-  <float hash="hit_effect_rand_ofs_x">2</float>
-  <float hash="hit_effect_rand_ofs_y">2</float>
-  <float hash="hit_effect_rand_ofs_z">0</float>
-  <float hash="rush_hit_effect_rand_ofs_x">7</float>
-  <float hash="rush_hit_effect_rand_ofs_y">7</float>
-  <float hash="rush_hit_effect_rand_ofs_z">0</float>
-  <float hash="0x239cfe6de5">0.4</float>
-  <float hash="attack_direction_max_down_angle">105</float>
-  <float hash="attack_direction_max_down_angle_sting">135</float>
-  <float hash="jostle_area_outside_rate">0.5</float>
-  <float hash="0x1cbc105376">0.5</float>
-  <float hash="0x1c0536c807">0.5</float>
-  <float hash="0x2390f6ee99">0.5</float>
-  <float hash="0x24751bf94c">0</float>
-  <float hash="jostle_weight_max">10</float>
-  <float hash="jostle_weight_min">1</float>
-  <float hash="jostle_weight_max_speed">8</float>
-  <float hash="jostle_weight_mid_speed">0.6</float>
-  <float hash="jostle_weight_min_speed">0.4</float>
-  <float hash="jostle_weight_mul_ga">0</float>
-  <float hash="jostle_weight_mul_aa">0</float>
-  <float hash="jostle_weight_mul_ag">0.6</float>
-  <float hash="jostle_pushed_max_speed">2</float>
-  <float hash="0x1dd35f2e72">0</float>
-  <float hash="0x1d850589f4">0</float>
-  <float hash="0x1d6c662cc1">0.6</float>
-  <float hash="jostle_team_overlap_rate">0.5</float>
-  <list hash="turn_param_damage_turn_angle">
-    <float index="0">34.6</float>
-    <float index="1">76.4</float>
-    <float index="2">113.4</float>
-    <float index="3">137.3</float>
-    <float index="4">152.8</float>
-    <float index="5">164</float>
-    <float index="6">173.7</float>
-    <float index="7">180</float>
+  <int hash="precede">5</int>
+  <int hash="precede_extension">1</int>
+  <float hash="clatter_cont_value">0.5</float>
+  <float hash="bitten_motion_rate_frame">5</float>
+  <float hash="bitten_motion_rate">2</float>
+  <float hash="stick_button_threshold">0.4</float>
+  <int hash="stick_button_repeat_wait_frame">16</int>
+  <int hash="stick_button_repeat_cycle_frame">8</int>
+  <int hash="0x26477bf73b">24</int>
+  <int hash="0x27dd5e1d47">12</int>
+  <int hash="0x273f65dc61">10</int>
+  <int hash="0x28664cc49c">6</int>
+  <int hash="stick_button_repeat_wait_min_frame">8</int>
+  <int hash="stick_button_repeat_cycle_min_frame">4</int>
+  <float hash="walk_stick_x">0.18</float>
+  <float hash="ground_speed_limit">3</float>
+  <float hash="stop_over_speed_brake_mul">2</float>
+  <float hash="turn_stick_x">-0.2</float>
+  <float hash="turn_frame">1</float>
+  <float hash="turn_speed_mul">0.3</float>
+  <float hash="walk_motion_rate_max">5</float>
+  <float hash="walk_brake_motion_rate">0.85</float>
+  <float hash="walk_slow_motion_rate_mul">0.8</float>
+  <float hash="walk_middle_fast_blend_weight_rate">0.8</float>
+  <float hash="walk_fast_middle_blend_weight_rate">0.6</float>
+  <int hash="dash_flick_x">2</int>
+  <float hash="dash_stick_x">0.85</float>
+  <float hash="dash_s4_frame">6</float>
+  <int hash="dash_speed_keep_frame">3</int>
+  <float hash="dash_escape_frame">5</float>
+  <int hash="turn_dash_frame">-1</int>
+  <int hash="re_dash_frame">15</int>
+  <float hash="dash_end_speed_mul">0.67</float>
+  <float hash="run_stick_x">0.75</float>
+  <float hash="run_motion_rate_max">5</float>
+  <float hash="turn_run_stick_x">-0.6</float>
+  <int hash="turn_run_frame">1</int>
+  <int hash="run_turn_cancel_start_frame">4</int>
+  <int hash="run_turn_cancel_enable_frame">10</int>
+  <int hash="turn_run_back_cancel_enable_frame">11</int>
+  <float hash="turn_run_stop_brake_mul">2</float>
+  <float hash="run_brake_brake_mul">1</float>
+  <int hash="run_brake_attack_dash_frame">1</int>
+  <float hash="run_brake_stop_shake_speed">0.2</float>
+  <float hash="run_brake_stop_shake_scale">0</float>
+  <float hash="run_speed_ratio_min">1</float>
+  <int hash="0x27173b8eb0">3</int>
+  <int hash="retry_turn_dash_frame">13</int>
+  <int hash="dash_enable_attack_frame">13</int>
+  <float hash="0x206138766c">0.5</float>
+  <float hash="squat_stick_y">-0.66</float>
+  <float hash="squat_damage_reaction_mul">0.85</float>
+  <float hash="squat_f_stick_x_min">0.38</float>
+  <float hash="squat_f_stick_x_max">0.6</float>
+  <int hash="jump_flick_y">3</int>
+  <float hash="jump_stick_y">0.7</float>
+  <int hash="jump_initial_frame">4</int>
+  <float hash="jump_neutral_y">0.75</float>
+  <float hash="jump_neutral_x">0.125</float>
+  <float hash="jump_speed_y_mul">0.3</float>
+  <int hash="jump_no_aerial_frame">3</int>
+  <float hash="jump_run_stick_y">0.5625</float>
+  <float hash="air_speed_x_limit">2.5</float>
+  <float hash="air_speed_y_limit">10</float>
+  <float hash="fall_brake_x">0.03</float>
+  <float hash="fall_comp_mul">0.1</float>
+  <float hash="fall_neutral">0.05</float>
+  <int hash="dive_flick_frame_value">4</int>
+  <float hash="dive_cont_value">-0.66</float>
+  <float hash="tread_jump_speed_dec">0.75</float>
+  <float hash="tread_jump_speed_limit">0.5</float>
+  <int hash="tread_attack_frame">8</int>
+  <int hash="tread_jump_after_xlu_frame">4</int>
+  <int hash="tread_jump_disable_frame">8</int>
+  <int hash="tread_jump_disable_frame_after_attack">16</int>
+  <int hash="jump_mini_button_frame">2</int>
+  <float hash="jostle_brake">0.045</float>
+  <float hash="jostle_pushed_brake">0.1</float>
+  <float hash="jostle_pushed_limit_speed">0.5</float>
+  <float hash="jostle_speed_attenuation_rate_min">0.55</float>
+  <float hash="0x24ac5df24f">0.65</float>
+  <float hash="0x24caf1aaf8">0.55</float>
+  <float hash="jostle_speed_attenuation_rate_comp_rate">0.05</float>
+  <float hash="0x1e5d949000">0.5</float>
+  <float hash="shield_max">50</float>
+  <float hash="shield_scale_min">0.15</float>
+  <int hash="shield_min_frame">3</int>
+  <float hash="shield_dec1">0.15</float>
+  <float hash="shield_recovery1">0.08</float>
+  <float hash="shield_damage_mul">1.19</float>
+  <float hash="shield_damage_add">0</float>
+  <float hash="shield_setoff_add">3</float>
+  <float hash="shield_setoff_mul">0.8</float>
+  <float hash="shield_setoff_mul_fighter_shot">0.29</float>
+  <float hash="shield_stiff_mul_attack_4">0.725</float>
+  <float hash="shield_stiff_mul_attack_air">0.33</float>
+  <float hash="shield_setoff_speed_mul">0.09</float>
+  <float hash="shield_setoff_speed_max">1.3</float>
+  <float hash="shield_rebound_speed_mul">0.04</float>
+  <float hash="shield_rebound_speed_add">0.025</float>
+  <float hash="shield_rebound_ground_brake">1.1</float>
+  <float hash="shield_rebound_air_brake">0.05</float>
+  <float hash="shield_ignore_capture_rate">0.8</float>
+  <int hash="guard_off_cancel_frame">11</int>
+  <int hash="guard_off_enable_shield_frame">0</int>
+  <int hash="guard_off_disable_shield_recovery">10</int>
+  <int hash="shield_just_frame">4</int>
+  <float hash="0x2cacbf2a63">3</float>
+  <float hash="just_shield_setoff_mul">1</float>
+  <float hash="just_shield_speed_rate">0.15</float>
+  <int hash="just_shield_precede_extension">20</int>
+  <int hash="continue_just_shield_count">4</int>
+  <int hash="furafura_stand_whole_hit_xlu_frame">31</int>
+  <float hash="shield_reset">37.5</float>
+  <float hash="shield_hop_angle">80</float>
+  <float hash="shield_comp_mul">0.5</float>
+  <float hash="shield_comp_reach_mul">0.3</float>
+  <int hash="shield_setoff_escape">10</int>
+  <float hash="0x20d241cd64">0.67</float>
+  <float hash="0x2434ca61df">0.6</float>
+  <int hash="guard_damage_just_shield_disable_frame">3</int>
+  <float hash="shield_stiff_frame_max">60</float>
+  <int hash="shield_break_xlu_frame">300</int>
+  <int hash="escape_flick_y">4</int>
+  <float hash="escape_stick_y">-0.7</float>
+  <int hash="escape_fb_flick_x">4</int>
+  <float hash="escape_fb_stick_x">0.7</float>
+  <int hash="landing_frame_escape_air">10</int>
+  <float hash="escape_air_slide_stick">0.66</float>
+  <float hash="escape_air_slide_landing_speed_max">2</float>
+  <int hash="hit_stop_delay_flick">4</int>
+  <float hash="hit_stop_delay_stick">0.7</float>
+  <float hash="hit_stop_delay_flick_mul">2</float>
+  <int hash="hit_stop_delay_flick_frame">1</int>
+  <int hash="hit_stop_delay_flick_max_count">16</int>
+  <int hash="0x256ea4745d">5</int>
+  <float hash="0x2373146726">1.15</float>
+  <int hash="0x29dae31932">8</int>
+  <int hash="0x339a45c8eb">20</int>
+  <float hash="hit_stop_delay_auto_mul">0.65</float>
+  <float hash="hit_stop_delay_guard_mul">0.66</float>
+  <float hash="hit_stop_squat_mul">0.67</float>
+  <int hash="hit_stop_invalid_jostle_frame">8</int>
+  <float hash="attack_hit_slow_rate">0.25</float>
+  <float hash="damage_reaction_mul_max">1.1</float>
+  <float hash="damage_reaction_mul_max_damage">150</float>
+  <float hash="damage_reaction_mul_min_damage">35</float>
+  <float hash="damage_reaction_mul_min_ratio">100</float>
+  <float hash="damage_reaction_mul_min_reaction">0</float>
+  <float hash="damage_reaction_mul_max_reaction">180</float>
+  <list hash="pattern_power_mul">
+    <float index="0">0.05</float>
+    <float index="1">0.09</float>
+    <float index="2">0.08545</float>
+    <float index="3">0.07635</float>
+    <float index="4">0.0679</float>
+    <float index="5">0.05945</float>
+    <float index="6">0.05035</float>
+    <float index="7">0.04255</float>
+    <float index="8">0.03345</float>
+    <float index="9">0.025</float>
   </list>
-  <list hash="turn_param">
+  <float hash="shield_pattern_power_mul">0.85</float>
+  <float hash="attack_100_rebound_speed">0.55</float>
+  <float hash="rebound_speed_no_cliff_stop">0.48</float>
+  <float hash="attack_s3_stick_x">0.25</float>
+  <float hash="attack_s3_stick_dir_hi">0.28</float>
+  <float hash="attack_s3_stick_dir_lw">-0.28</float>
+  <float hash="attack_hi3_stick_y">0.25</float>
+  <float hash="back_attack_hi3_stick_x">0.22</float>
+  <float hash="attack_lw3_stick_y">-0.25</float>
+  <float hash="0x1d2513544f">0.33</float>
+  <float hash="attack_lw3_rebound_speed">0.55</float>
+  <int hash="attack_lw3_rebound_frame">60</int>
+  <float hash="attack_s4_stick_dir_hi">0.28</float>
+  <float hash="attack_s4_stick_dir_lw">-0.28</float>
+  <int hash="attack_hi4_flick_y">4</int>
+  <float hash="attack_hi4_stick_y">0.72</float>
+  <int hash="attack_lw4_flick_y">4</int>
+  <float hash="attack_lw4_stick_y">-0.72</float>
+  <float hash="attack_air_neutral_x">0.4</float>
+  <float hash="attack_air_neutral_y">0.4</float>
+  <float hash="mini_jump_attack_mul">0.85</float>
+  <int hash="attack_jump_mini_attack_enable_frame">1</int>
+  <int hash="jump_mini_attack_enable_frame">2</int>
+  <int hash="landing_air_lasso_motion_rate">8</int>
+  <int hash="attack_air_lasso_enable_frame">3</int>
+  <float hash="0x1ef72a672d">0.1</float>
+  <int hash="status_start_turn_frame">4</int>
+  <float hash="status_start_turn_stick_x">0.3</float>
+  <float hash="special_stick_x">0.6</float>
+  <float hash="special_stick_y">0.5</float>
+  <int hash="special_smash_flick_x">4</int>
+  <int hash="special_air_n_turn_frame">10</int>
+  <int hash="damage_drop_smash_ball">2</int>
+  <int hash="damage_drop_smash_ball_handicap">30</int>
+  <float hash="final_end_fall_speed_y">2</float>
+  <float hash="final_dash_check_degree">45</float>
+  <int hash="discretion_final_point_diff">5</int>
+  <int hash="0x2937d404b4">2</int>
+  <float hash="discretion_final_rate">10</float>
+  <float hash="discretion_final_rate_add">2</float>
+  <float hash="discretion_final_rate_max">25</float>
+  <int hash="no_discretion_final_beat_count">6</int>
+  <byte hash="special_command_life_max">10</byte>
+  <byte hash="special_command_ab_button_life">3</byte>
+  <float hash="special_command_neutral_threshold">0.2</float>
+  <byte hash="super_special_command_life_max">20</byte>
+  <list hash="special_command_stick_range">
     <struct index="0">
-      <hash40 hash="id">damage_air</hash40>
-      <list hash="param">
-        <float index="0">34.6</float>
-        <float index="1">76.4</float>
-        <float index="2">113.4</float>
-        <float index="3">137.3</float>
-        <float index="4">152.8</float>
-        <float index="5">164</float>
-        <float index="6">173.7</float>
-        <float index="7">180</float>
-      </list>
+      <float hash="min_angle">-32.5</float>
+      <float hash="max_angle">32.5</float>
     </struct>
     <struct index="1">
-      <hash40 hash="id">item_lift</hash40>
-      <list hash="param">
-        <float index="0">34.6</float>
-        <float index="1">76.4</float>
-        <float index="2">113.4</float>
-        <float index="3">137.3</float>
-        <float index="4">152.8</float>
-        <float index="5">164</float>
-        <float index="6">173.7</float>
-        <float index="7">180</float>
-      </list>
+      <float hash="min_angle">32.5</float>
+      <float hash="max_angle">57.5</float>
     </struct>
     <struct index="2">
-      <hash40 hash="id">item_shoot</hash40>
-      <list hash="param">
-        <float index="0">34.6</float>
-        <float index="1">76.4</float>
-        <float index="2">113.4</float>
-        <float index="3">137.3</float>
-        <float index="4">152.8</float>
-        <float index="5">164</float>
-        <float index="6">173.7</float>
-        <float index="7">180</float>
-      </list>
+      <float hash="min_angle">57.5</float>
+      <float hash="max_angle">122.5</float>
     </struct>
     <struct index="3">
-      <hash40 hash="id">hammer</hash40>
-      <list hash="param">
-        <float index="0">10</float>
-        <float index="1">20</float>
-        <float index="2">30</float>
-        <float index="3">40</float>
-        <float index="4">50</float>
-        <float index="5">60</float>
-        <float index="6">70</float>
-        <float index="7">80</float>
-        <float index="8">90</float>
-        <float index="9">100</float>
-        <float index="10">110</float>
-        <float index="11">120</float>
-        <float index="12">130</float>
-        <float index="13">140</float>
-        <float index="14">150</float>
-        <float index="15">160</float>
-        <float index="16">170</float>
-        <float index="17">180</float>
-      </list>
+      <float hash="min_angle">122.5</float>
+      <float hash="max_angle">153.5</float>
     </struct>
     <struct index="4">
-      <hash40 hash="id">attack_s4</hash40>
-      <list hash="param">
-        <float index="0">34.6</float>
-        <float index="1">76.4</float>
-        <float index="2">113.4</float>
-        <float index="3">137.3</float>
-        <float index="4">152.8</float>
-        <float index="5">164</float>
-        <float index="6">173.7</float>
-        <float index="7">180</float>
-      </list>
+      <float hash="min_angle">32.5</float>
+      <float hash="max_angle">57.5</float>
     </struct>
     <struct index="5">
-      <hash40 hash="id">attack_s4_flip</hash40>
-      <list hash="param">
-        <float index="0">180</float>
-      </list>
+      <float hash="min_angle">57.5</float>
+      <float hash="max_angle">122.5</float>
     </struct>
     <struct index="6">
-      <hash40 hash="id">landing</hash40>
-      <list hash="param">
-        <float index="0">34.6</float>
-        <float index="1">76.4</float>
-        <float index="2">113.4</float>
-        <float index="3">137.3</float>
-        <float index="4">152.8</float>
-        <float index="5">164</float>
-        <float index="6">173.7</float>
-        <float index="7">180</float>
-      </list>
-    </struct>
-    <struct index="7">
-      <hash40 hash="id">back_damage</hash40>
-      <list hash="param">
-        <float index="0">0</float>
-        <float index="1">0</float>
-        <float index="2">0</float>
-        <float index="3">5</float>
-        <float index="4">15</float>
-        <float index="5">30</float>
-        <float index="6">50</float>
-        <float index="7">75</float>
-        <float index="8">105</float>
-        <float index="9">140</float>
-        <float index="10">180</float>
-      </list>
+      <float hash="min_angle">122.5</float>
+      <float hash="max_angle">153.5</float>
     </struct>
   </list>
-  <list hash="shake_data_param">
-    <struct index="0">
-      <list hash="param">
-        <struct index="0">
-          <float hash="x">2</float>
-          <float hash="y">0</float>
-        </struct>
-        <struct index="1">
-          <float hash="x">0</float>
-          <float hash="y">0</float>
-        </struct>
-        <struct index="2">
-          <float hash="x">-2</float>
-          <float hash="y">0</float>
-        </struct>
-      </list>
-      <hash40 hash="kind">damage_air</hash40>
-      <float hash="offset_z">0</float>
-      <int hash="pri">0</int>
-      <bool hash="anim">true</bool>
-      <hash40 hash="resource">a00damageairstop.nuanmb</hash40>
-      <bool hash="rolling">false</bool>
-      <float hash="shaker_rate">2</float>
-    </struct>
-    <struct index="1">
-      <list hash="param">
-        <struct index="0">
-          <float hash="x">2</float>
-          <float hash="y">0</float>
-        </struct>
-        <struct index="1">
-          <float hash="x">0</float>
-          <float hash="y">0</float>
-        </struct>
-        <struct index="2">
-          <float hash="x">-2</float>
-          <float hash="y">0</float>
-        </struct>
-      </list>
-      <hash40 hash="kind">damage_ground</hash40>
-      <float hash="offset_z">0</float>
-      <int hash="pri">0</int>
-      <bool hash="anim">true</bool>
-      <hash40 hash="resource">a00damagestop.nuanmb</hash40>
-      <bool hash="rolling">true</bool>
-      <float hash="shaker_rate">2</float>
-    </struct>
-    <struct index="2">
-      <list hash="param">
-        <struct index="0">
-          <float hash="x">0</float>
-          <float hash="y">0</float>
-        </struct>
-        <struct index="1">
-          <float hash="x">2</float>
-          <float hash="y">1</float>
-        </struct>
-        <struct index="2">
-          <float hash="x">-1</float>
-          <float hash="y">0</float>
-        </struct>
-        <struct index="3">
-          <float hash="x">0</float>
-          <float hash="y">5</float>
-        </struct>
-        <struct index="4">
-          <float hash="x">0.2</float>
-          <float hash="y">0</float>
-        </struct>
-      </list>
-      <hash40 hash="kind">damage_elec</hash40>
-      <float hash="offset_z">0</float>
-      <int hash="pri">0</int>
-      <bool hash="anim">true</bool>
-      <hash40 hash="resource">invalid</hash40>
-      <bool hash="rolling">false</bool>
-      <float hash="shaker_rate">1</float>
-    </struct>
-    <struct index="3">
-      <list hash="param">
-        <struct index="0">
-          <float hash="x">1</float>
-          <float hash="y">0</float>
-        </struct>
-        <struct index="1">
-          <float hash="x">-1</float>
-          <float hash="y">0</float>
-        </struct>
-        <struct index="2">
-          <float hash="x">0</float>
-          <float hash="y">-1</float>
-        </struct>
-        <struct index="3">
-          <float hash="x">0</float>
-          <float hash="y">1</float>
-        </struct>
-        <struct index="4">
-          <float hash="x">1</float>
-          <float hash="y">0</float>
-        </struct>
-        <struct index="5">
-          <float hash="x">-1</float>
-          <float hash="y">0</float>
-        </struct>
-        <struct index="6">
-          <float hash="x">0</float>
-          <float hash="y">-1</float>
-        </struct>
-        <struct index="7">
-          <float hash="x">0</float>
-          <float hash="y">1</float>
-        </struct>
-      </list>
-      <hash40 hash="kind">clatter</hash40>
-      <float hash="offset_z">0</float>
-      <int hash="pri">0</int>
-      <bool hash="anim">true</bool>
-      <hash40 hash="resource">invalid</hash40>
-      <bool hash="rolling">false</bool>
-      <float hash="shaker_rate">1</float>
-    </struct>
-    <struct index="4">
-      <list hash="param">
-        <struct index="0">
-          <float hash="x">0</float>
-          <float hash="y">0.8</float>
-        </struct>
-        <struct index="1">
-          <float hash="x">0</float>
-          <float hash="y">0.8</float>
-        </struct>
-        <struct index="2">
-          <float hash="x">0</float>
-          <float hash="y">-0.8</float>
-        </struct>
-        <struct index="3">
-          <float hash="x">0</float>
-          <float hash="y">-0.8</float>
-        </struct>
-      </list>
-      <hash40 hash="kind">attack_air</hash40>
-      <float hash="offset_z">0</float>
-      <int hash="pri">0</int>
-      <bool hash="anim">true</bool>
-      <hash40 hash="resource">invalid</hash40>
-      <bool hash="rolling">false</bool>
-      <float hash="shaker_rate">1</float>
-    </struct>
-    <struct index="5">
-      <list hash="param">
-        <struct index="0">
-          <float hash="x">1</float>
-          <float hash="y">0</float>
-        </struct>
-        <struct index="1">
-          <float hash="x">1</float>
-          <float hash="y">0</float>
-        </struct>
-        <struct index="2">
-          <float hash="x">-1</float>
-          <float hash="y">0</float>
-        </struct>
-        <struct index="3">
-          <float hash="x">-1</float>
-          <float hash="y">0</float>
-        </struct>
-      </list>
-      <hash40 hash="kind">attack_ground</hash40>
-      <float hash="offset_z">0</float>
-      <int hash="pri">0</int>
-      <bool hash="anim">true</bool>
-      <hash40 hash="resource">invalid</hash40>
-      <bool hash="rolling">true</bool>
-      <float hash="shaker_rate">1</float>
-    </struct>
-    <struct index="6">
-      <list hash="param">
-        <struct index="0">
-          <float hash="x">1.2</float>
-          <float hash="y">0</float>
-        </struct>
-        <struct index="1">
-          <float hash="x">0.5</float>
-          <float hash="y">0</float>
-        </struct>
-      </list>
-      <hash40 hash="kind">brake</hash40>
-      <float hash="offset_z">0</float>
-      <int hash="pri">0</int>
-      <bool hash="anim">true</bool>
-      <hash40 hash="resource">invalid</hash40>
-      <bool hash="rolling">true</bool>
-      <float hash="shaker_rate">1</float>
-    </struct>
-    <struct index="7">
-      <list hash="param">
-        <struct index="0">
-          <float hash="x">2</float>
-          <float hash="y">0</float>
-        </struct>
-        <struct index="1">
-          <float hash="x">0</float>
-          <float hash="y">0</float>
-        </struct>
-        <struct index="2">
-          <float hash="x">-2</float>
-          <float hash="y">0</float>
-        </struct>
-      </list>
-      <hash40 hash="kind">dedede_hammer_damage_air</hash40>
-      <float hash="offset_z">5</float>
-      <int hash="pri">0</int>
-      <bool hash="anim">true</bool>
-      <hash40 hash="resource">a00damageairstop.nuanmb</hash40>
-      <bool hash="rolling">false</bool>
-      <float hash="shaker_rate">2</float>
-    </struct>
-    <struct index="8">
-      <list hash="param">
-        <struct index="0">
-          <float hash="x">2</float>
-          <float hash="y">0</float>
-        </struct>
-        <struct index="1">
-          <float hash="x">0</float>
-          <float hash="y">0</float>
-        </struct>
-        <struct index="2">
-          <float hash="x">-2</float>
-          <float hash="y">0</float>
-        </struct>
-      </list>
-      <hash40 hash="kind">dedede_hammer_damage_ground</hash40>
-      <float hash="offset_z">5</float>
-      <int hash="pri">0</int>
-      <bool hash="anim">true</bool>
-      <hash40 hash="resource">a00damagestop.nuanmb</hash40>
-      <bool hash="rolling">true</bool>
-      <float hash="shaker_rate">2</float>
-    </struct>
-    <struct index="9">
-      <list hash="param">
-        <struct index="0">
-          <float hash="x">2.5</float>
-          <float hash="y">5</float>
-        </struct>
-        <struct index="1">
-          <float hash="x">1.2</float>
-          <float hash="y">-2</float>
-        </struct>
-        <struct index="2">
-          <float hash="x">-0.8</float>
-          <float hash="y">4.6</float>
-        </struct>
-        <struct index="3">
-          <float hash="x">-0.5</float>
-          <float hash="y">-2</float>
-        </struct>
-        <struct index="4">
-          <float hash="x">0.5</float>
-          <float hash="y">4.2</float>
-        </struct>
-        <struct index="5">
-          <float hash="x">1</float>
-          <float hash="y">-1.8</float>
-        </struct>
-        <struct index="6">
-          <float hash="x">-0.2</float>
-          <float hash="y">3.5</float>
-        </struct>
-        <struct index="7">
-          <float hash="x">0.2</float>
-          <float hash="y">-1.6</float>
-        </struct>
-      </list>
-      <hash40 hash="kind">capture_damage_air</hash40>
-      <float hash="offset_z">0</float>
-      <int hash="pri">0</int>
-      <bool hash="anim">true</bool>
-      <hash40 hash="resource">invalid</hash40>
-      <bool hash="rolling">false</bool>
-      <float hash="shaker_rate">2</float>
-    </struct>
-    <struct index="10">
-      <list hash="param">
-        <struct index="0">
-          <float hash="x">2.5</float>
-          <float hash="y">5</float>
-        </struct>
-        <struct index="1">
-          <float hash="x">1.2</float>
-          <float hash="y">-2</float>
-        </struct>
-        <struct index="2">
-          <float hash="x">-0.8</float>
-          <float hash="y">4.6</float>
-        </struct>
-        <struct index="3">
-          <float hash="x">-0.5</float>
-          <float hash="y">-2</float>
-        </struct>
-        <struct index="4">
-          <float hash="x">0.5</float>
-          <float hash="y">4.2</float>
-        </struct>
-        <struct index="5">
-          <float hash="x">1</float>
-          <float hash="y">-1.8</float>
-        </struct>
-        <struct index="6">
-          <float hash="x">-0.2</float>
-          <float hash="y">3.5</float>
-        </struct>
-        <struct index="7">
-          <float hash="x">0.2</float>
-          <float hash="y">-1.6</float>
-        </struct>
-      </list>
-      <hash40 hash="kind">capture_damage_ground</hash40>
-      <float hash="offset_z">0</float>
-      <int hash="pri">0</int>
-      <bool hash="anim">true</bool>
-      <hash40 hash="resource">invalid</hash40>
-      <bool hash="rolling">true</bool>
-      <float hash="shaker_rate">2</float>
-    </struct>
-    <struct index="11">
-      <list hash="param">
-        <struct index="0">
-          <float hash="x">0.8</float>
-          <float hash="y">0</float>
-        </struct>
-        <struct index="1">
-          <float hash="x">0.8</float>
-          <float hash="y">0</float>
-        </struct>
-        <struct index="2">
-          <float hash="x">-0.8</float>
-          <float hash="y">0</float>
-        </struct>
-        <struct index="3">
-          <float hash="x">-0.8</float>
-          <float hash="y">0</float>
-        </struct>
-      </list>
-      <hash40 hash="kind">0x12c078f57f</hash40>
-      <float hash="offset_z">0</float>
-      <int hash="pri">0</int>
-      <bool hash="anim">true</bool>
-      <hash40 hash="resource">invalid</hash40>
-      <bool hash="rolling">false</bool>
-      <float hash="shaker_rate">1</float>
-    </struct>
-    <struct index="12">
-      <list hash="param">
-        <struct index="0">
-          <float hash="x">0.2</float>
-          <float hash="y">0.3</float>
-        </struct>
-        <struct index="1">
-          <float hash="x">0</float>
-          <float hash="y">0.3</float>
-        </struct>
-        <struct index="2">
-          <float hash="x">0.2</float>
-          <float hash="y">-0.3</float>
-        </struct>
-        <struct index="3">
-          <float hash="x">0</float>
-          <float hash="y">-0.3</float>
-        </struct>
-      </list>
-      <hash40 hash="kind">0x0deb035928</hash40>
-      <float hash="offset_z">0</float>
-      <int hash="pri">0</int>
-      <bool hash="anim">true</bool>
-      <hash40 hash="resource">invalid</hash40>
-      <bool hash="rolling">true</bool>
-      <float hash="shaker_rate">2</float>
-    </struct>
-    <struct index="13">
-      <list hash="param">
-        <struct index="0">
-          <float hash="x">0</float>
-          <float hash="y">0</float>
-        </struct>
-        <struct index="1">
-          <float hash="x">0.1</float>
-          <float hash="y">0.6</float>
-        </struct>
-        <struct index="2">
-          <float hash="x">0.3</float>
-          <float hash="y">1.1</float>
-        </struct>
-        <struct index="3">
-          <float hash="x">0.3</float>
-          <float hash="y">1.1</float>
-        </struct>
-        <struct index="4">
-          <float hash="x">0.3</float>
-          <float hash="y">1.1</float>
-        </struct>
-        <struct index="5">
-          <float hash="x">0.1</float>
-          <float hash="y">0.6</float>
-        </struct>
-        <struct index="6">
-          <float hash="x">0</float>
-          <float hash="y">0</float>
-        </struct>
-      </list>
-      <hash40 hash="kind">yoshi_special_s</hash40>
-      <float hash="offset_z">0</float>
-      <int hash="pri">0</int>
-      <bool hash="anim">true</bool>
-      <hash40 hash="resource">invalid</hash40>
-      <bool hash="rolling">true</bool>
-      <float hash="shaker_rate">1</float>
-    </struct>
-    <struct index="14">
-      <list hash="param">
-        <struct index="0">
-          <float hash="x">0.5</float>
-          <float hash="y">0</float>
-        </struct>
-        <struct index="1">
-          <float hash="x">0</float>
-          <float hash="y">0</float>
-        </struct>
-        <struct index="2">
-          <float hash="x">-0.5</float>
-          <float hash="y">0</float>
-        </struct>
-      </list>
-      <hash40 hash="kind">damage_kozukata</hash40>
-      <float hash="offset_z">0</float>
-      <int hash="pri">0</int>
-      <bool hash="anim">true</bool>
-      <hash40 hash="resource">invalid</hash40>
-      <bool hash="rolling">true</bool>
-      <float hash="shaker_rate">1</float>
-    </struct>
-    <struct index="15">
-      <list hash="param">
-        <struct index="0">
-          <float hash="x">2</float>
-          <float hash="y">0</float>
-        </struct>
-        <struct index="1">
-          <float hash="x">0</float>
-          <float hash="y">0</float>
-        </struct>
-        <struct index="2">
-          <float hash="x">-2</float>
-          <float hash="y">0</float>
-        </struct>
-      </list>
-      <hash40 hash="kind">damage_air_finish</hash40>
-      <float hash="offset_z">0</float>
-      <int hash="pri">0</int>
-      <bool hash="anim">true</bool>
-      <hash40 hash="resource">a00damagestopf.nuanmb</hash40>
-      <bool hash="rolling">true</bool>
-      <float hash="shaker_rate">0</float>
-    </struct>
-    <struct index="16">
-      <list hash="param">
-        <struct index="0">
-          <float hash="x">2</float>
-          <float hash="y">0</float>
-        </struct>
-        <struct index="1">
-          <float hash="x">0</float>
-          <float hash="y">0</float>
-        </struct>
-        <struct index="2">
-          <float hash="x">-2</float>
-          <float hash="y">0</float>
-        </struct>
-      </list>
-      <hash40 hash="kind">damage_ground_finish</hash40>
-      <float hash="offset_z">0</float>
-      <int hash="pri">0</int>
-      <bool hash="anim">true</bool>
-      <hash40 hash="resource">a00damagestopf.nuanmb</hash40>
-      <bool hash="rolling">true</bool>
-      <float hash="shaker_rate">0</float>
-    </struct>
-    <struct index="17">
-      <list hash="param">
-        <struct index="0">
-          <float hash="x">1.3</float>
-          <float hash="y">0</float>
-        </struct>
-        <struct index="1">
-          <float hash="x">-1.3</float>
-          <float hash="y">0</float>
-        </struct>
-        <struct index="2">
-          <float hash="x">1.3</float>
-          <float hash="y">0</float>
-        </struct>
-        <struct index="3">
-          <float hash="x">-1.3</float>
-          <float hash="y">0</float>
-        </struct>
-        <struct index="4">
-          <float hash="x">1</float>
-          <float hash="y">0</float>
-        </struct>
-        <struct index="5">
-          <float hash="x">-1</float>
-          <float hash="y">0</float>
-        </struct>
-        <struct index="6">
-          <float hash="x">0.2</float>
-          <float hash="y">0</float>
-        </struct>
-        <struct index="7">
-          <float hash="x">-0.2</float>
-          <float hash="y">0</float>
-        </struct>
-        <struct index="8">
-          <float hash="x">0.2</float>
-          <float hash="y">0</float>
-        </struct>
-        <struct index="9">
-          <float hash="x">-0.2</float>
-          <float hash="y">0</float>
-        </struct>
-      </list>
-      <hash40 hash="kind">capture_fishingrod</hash40>
-      <float hash="offset_z">0</float>
-      <int hash="pri">0</int>
-      <bool hash="anim">true</bool>
-      <hash40 hash="resource">invalid</hash40>
-      <bool hash="rolling">false</bool>
-      <float hash="shaker_rate">2</float>
-    </struct>
-    <struct index="18">
-      <list hash="param">
-        <struct index="0">
-          <float hash="x">1</float>
-          <float hash="y">1</float>
-        </struct>
-        <struct index="1">
-          <float hash="x">0.4</float>
-          <float hash="y">0.4</float>
-        </struct>
-        <struct index="2">
-          <float hash="x">0.5</float>
-          <float hash="y">0.5</float>
-        </struct>
-        <struct index="3">
-          <float hash="x">0</float>
-          <float hash="y">0</float>
-        </struct>
-      </list>
-      <hash40 hash="kind">bury_clatter</hash40>
-      <float hash="offset_z">0</float>
-      <int hash="pri">0</int>
-      <bool hash="anim">true</bool>
-      <hash40 hash="resource">invalid</hash40>
-      <bool hash="rolling">false</bool>
-      <float hash="shaker_rate">1</float>
-    </struct>
-    <struct index="19">
-      <list hash="param">
-        <struct index="0">
-          <float hash="x">0.3</float>
-          <float hash="y">2</float>
-        </struct>
-        <struct index="1">
-          <float hash="x">0</float>
-          <float hash="y">-2</float>
-        </struct>
-        <struct index="2">
-          <float hash="x">-0.3</float>
-          <float hash="y">2</float>
-        </struct>
-        <struct index="3">
-          <float hash="x">0</float>
-          <float hash="y">-2</float>
-        </struct>
-        <struct index="4">
-          <float hash="x">0.3</float>
-          <float hash="y">2</float>
-        </struct>
-        <struct index="5">
-          <float hash="x">0</float>
-          <float hash="y">-2</float>
-        </struct>
-        <struct index="6">
-          <float hash="x">-0.3</float>
-          <float hash="y">1</float>
-        </struct>
-        <struct index="7">
-          <float hash="x">0</float>
-          <float hash="y">-1</float>
-        </struct>
-        <struct index="8">
-          <float hash="x">0.3</float>
-          <float hash="y">1</float>
-        </struct>
-        <struct index="9">
-          <float hash="x">0</float>
-          <float hash="y">-1</float>
-        </struct>
-        <struct index="10">
-          <float hash="x">0.2</float>
-          <float hash="y">0.8</float>
-        </struct>
-        <struct index="11">
-          <float hash="x">0</float>
-          <float hash="y">-0.8</float>
-        </struct>
-        <struct index="12">
-          <float hash="x">0.2</float>
-          <float hash="y">0.8</float>
-        </struct>
-        <struct index="13">
-          <float hash="x">0</float>
-          <float hash="y">-0.8</float>
-        </struct>
-        <struct index="14">
-          <float hash="x">0.2</float>
-          <float hash="y">0.8</float>
-        </struct>
-        <struct index="15">
-          <float hash="x">0</float>
-          <float hash="y">-0.8</float>
-        </struct>
-        <struct index="16">
-          <float hash="x">0.2</float>
-          <float hash="y">0.8</float>
-        </struct>
-        <struct index="17">
-          <float hash="x">0</float>
-          <float hash="y">-0.8</float>
-        </struct>
-        <struct index="18">
-          <float hash="x">0.2</float>
-          <float hash="y">0.8</float>
-        </struct>
-        <struct index="19">
-          <float hash="x">0</float>
-          <float hash="y">-0.8</float>
-        </struct>
-        <struct index="20">
-          <float hash="x">-0.2</float>
-          <float hash="y">0.6</float>
-        </struct>
-        <struct index="21">
-          <float hash="x">0</float>
-          <float hash="y">-0.6</float>
-        </struct>
-        <struct index="22">
-          <float hash="x">-0.2</float>
-          <float hash="y">0.6</float>
-        </struct>
-        <struct index="23">
-          <float hash="x">0</float>
-          <float hash="y">-0.6</float>
-        </struct>
-        <struct index="24">
-          <float hash="x">-0.2</float>
-          <float hash="y">0.6</float>
-        </struct>
-        <struct index="25">
-          <float hash="x">0</float>
-          <float hash="y">-0.6</float>
-        </struct>
-      </list>
-      <hash40 hash="kind">dolly_stage</hash40>
-      <float hash="offset_z">0</float>
-      <int hash="pri">0</int>
-      <bool hash="anim">true</bool>
-      <hash40 hash="resource">invalid</hash40>
-      <bool hash="rolling">false</bool>
-      <float hash="shaker_rate">2</float>
-    </struct>
-    <struct index="20">
-      <list hash="param">
-        <struct index="0">
-          <float hash="x">0.2</float>
-          <float hash="y">0.4</float>
-        </struct>
-        <struct index="1">
-          <float hash="x">0.1</float>
-          <float hash="y">0.4</float>
-        </struct>
-        <struct index="2">
-          <float hash="x">-0.1</float>
-          <float hash="y">-0.4</float>
-        </struct>
-        <struct index="3">
-          <float hash="x">-0.2</float>
-          <float hash="y">-0.4</float>
-        </struct>
-        <struct index="4">
-          <float hash="x">-0.1</float>
-          <float hash="y">0.4</float>
-        </struct>
-        <struct index="5">
-          <float hash="x">0.1</float>
-          <float hash="y">0.15</float>
-        </struct>
-        <struct index="6">
-          <float hash="x">0.2</float>
-          <float hash="y">0.3</float>
-        </struct>
-        <struct index="7">
-          <float hash="x">0.1</float>
-          <float hash="y">0.15</float>
-        </struct>
-        <struct index="8">
-          <float hash="x">-0.1</float>
-          <float hash="y">-0.15</float>
-        </struct>
-        <struct index="9">
-          <float hash="x">-0.2</float>
-          <float hash="y">-0.3</float>
-        </struct>
-        <struct index="10">
-          <float hash="x">-0.1</float>
-          <float hash="y">-0.15</float>
-        </struct>
-        <struct index="11">
-          <float hash="x">0.1</float>
-          <float hash="y">0.1</float>
-        </struct>
-        <struct index="12">
-          <float hash="x">0.2</float>
-          <float hash="y">0.2</float>
-        </struct>
-        <struct index="13">
-          <float hash="x">0.1</float>
-          <float hash="y">0.1</float>
-        </struct>
-        <struct index="14">
-          <float hash="x">-0.1</float>
-          <float hash="y">-0.1</float>
-        </struct>
-        <struct index="15">
-          <float hash="x">-0.2</float>
-          <float hash="y">-0.2</float>
-        </struct>
-        <struct index="16">
-          <float hash="x">-0.1</float>
-          <float hash="y">-0.1</float>
-        </struct>
-        <struct index="17">
-          <float hash="x">0.1</float>
-          <float hash="y">0.05</float>
-        </struct>
-        <struct index="18">
-          <float hash="x">0.2</float>
-          <float hash="y">0.1</float>
-        </struct>
-        <struct index="19">
-          <float hash="x">0.1</float>
-          <float hash="y">0.05</float>
-        </struct>
-        <struct index="20">
-          <float hash="x">-0.1</float>
-          <float hash="y">-0.05</float>
-        </struct>
-        <struct index="21">
-          <float hash="x">-0.2</float>
-          <float hash="y">-0.1</float>
-        </struct>
-        <struct index="22">
-          <float hash="x">-0.1</float>
-          <float hash="y">-0.05</float>
-        </struct>
-        <struct index="23">
-          <float hash="x">0.1</float>
-          <float hash="y">0.05</float>
-        </struct>
-        <struct index="24">
-          <float hash="x">0.2</float>
-          <float hash="y">0.1</float>
-        </struct>
-        <struct index="25">
-          <float hash="x">0.1</float>
-          <float hash="y">0.05</float>
-        </struct>
-        <struct index="26">
-          <float hash="x">-0.1</float>
-          <float hash="y">-0.05</float>
-        </struct>
-        <struct index="27">
-          <float hash="x">-0.2</float>
-          <float hash="y">-0.1</float>
-        </struct>
-      </list>
-      <hash40 hash="kind">dolly_stage_after_stop</hash40>
-    </struct>
-  </list>
-  <struct hash="spycloak_animation">
-    <list hash="data_">
-      <struct index="0">
-        <float hash="frame">0</float>
-        <float hash="value">0</float>
-        <float hash="coefficient">0</float>
-      </struct>
-      <struct index="1">
-        <float hash="frame">48</float>
-        <float hash="value">0</float>
-        <float hash="coefficient">0</float>
-      </struct>
-      <struct index="2">
-        <float hash="frame">52</float>
-        <float hash="value">-0.105525</float>
-        <float hash="coefficient">-0.063836</float>
-      </struct>
-      <struct index="3">
-        <float hash="frame">62</float>
-        <float hash="value">-0.88068</float>
-        <float hash="coefficient">-0.024753</float>
-      </struct>
-      <struct index="4">
-        <float hash="frame">64</float>
-        <float hash="value">-0.85488</float>
-        <float hash="coefficient">0.067949</float>
-      </struct>
-      <struct index="5">
-        <float hash="frame">69</float>
-        <float hash="value">-0.369534</float>
-        <float hash="coefficient">0.003151</float>
-      </struct>
-      <struct index="6">
-        <float hash="frame">75</float>
-        <float hash="value">-0.924188</float>
-        <float hash="coefficient">-0.058204</float>
-      </struct>
-      <struct index="7">
-        <float hash="frame">77</float>
-        <float hash="value">-0.892187</float>
-        <float hash="coefficient">0.112923</float>
-      </struct>
-      <struct index="8">
-        <float hash="frame">81</float>
-        <float hash="value">-0.150123</float>
-        <float hash="coefficient">0.112923</float>
-      </struct>
-      <struct index="9">
-        <float hash="frame">84</float>
-        <float hash="value">-0.121513</float>
-        <float hash="coefficient">-0.03433</float>
-      </struct>
-      <struct index="10">
-        <float hash="frame">101</float>
-        <float hash="value">-1.37883</float>
-        <float hash="coefficient">-0.021205</float>
-      </struct>
-      <struct index="11">
-        <float hash="frame">102</float>
-        <float hash="value">-1.39156</float>
-        <float hash="coefficient">0.087888</float>
-      </struct>
-      <struct index="12">
-        <float hash="frame">103</float>
-        <float hash="value">-1.20305</float>
-        <float hash="coefficient">0.303944</float>
-      </struct>
-      <struct index="13">
-        <float hash="frame">105</float>
-        <float hash="value">-0.363376</float>
-        <float hash="coefficient">0.305748</float>
-      </struct>
-      <struct index="14">
-        <float hash="frame">106</float>
-        <float hash="value">-0.172171</float>
-        <float hash="coefficient">0.071869</float>
-      </struct>
-      <struct index="15">
-        <float hash="frame">107</float>
-        <float hash="value">-0.219637</float>
-        <float hash="coefficient">-0.084939</float>
-      </struct>
-      <struct index="16">
-        <float hash="frame">112</float>
-        <float hash="value">-0.981594</float>
-        <float hash="coefficient">-0.084939</float>
-      </struct>
-      <struct index="17">
-        <float hash="frame">113</float>
-        <float hash="value">-1.02906</float>
-        <float hash="coefficient">0.036101</float>
-      </struct>
-      <struct index="18">
-        <float hash="frame">114</float>
-        <float hash="value">-0.909393</float>
-        <float hash="coefficient">0.191468</float>
-      </struct>
-      <struct index="19">
-        <float hash="frame">116</float>
-        <float hash="value">-0.382856</float>
-        <float hash="coefficient">0.191468</float>
-      </struct>
-      <struct index="20">
-        <float hash="frame">118</float>
-        <float hash="value">-0.235816</float>
-        <float hash="coefficient">0.046321</float>
-      </struct>
-      <struct index="21">
-        <float hash="frame">122</float>
-        <float hash="value">0</float>
-        <float hash="coefficient">0.013686</float>
-      </struct>
-      <struct index="22">
-        <float hash="frame">127</float>
-        <float hash="value">0</float>
-        <float hash="coefficient">0</float>
-      </struct>
-      <struct index="23">
-        <float hash="frame">213</float>
-        <float hash="value">0</float>
-        <float hash="coefficient">0</float>
-      </struct>
-      <struct index="24">
-        <float hash="frame">214</float>
-        <float hash="value">0</float>
-        <float hash="coefficient">-0.111555</float>
-      </struct>
-      <struct index="25">
-        <float hash="frame">215</float>
-        <float hash="value">-0.22311</float>
-        <float hash="coefficient">-0.320729</float>
-      </struct>
-      <struct index="26">
-        <float hash="frame">216</float>
-        <float hash="value">-0.641458</float>
-        <float hash="coefficient">-0.32773</float>
-      </struct>
-      <struct index="27">
-        <float hash="frame">217</float>
-        <float hash="value">-0.87857</float>
-        <float hash="coefficient">-0.116111</float>
-      </struct>
-      <struct index="28">
-        <float hash="frame">218</float>
-        <float hash="value">-0.873679</float>
-        <float hash="coefficient">0.026829</float>
-      </struct>
-      <struct index="29">
-        <float hash="frame">225</float>
-        <float hash="value">-0.2756</float>
-        <float hash="coefficient">0.043164</float>
-      </struct>
-      <struct index="30">
-        <float hash="frame">228</float>
-        <float hash="value">-0.435315</float>
-        <float hash="coefficient">-0.165504</float>
-      </struct>
-      <struct index="31">
-        <float hash="frame">235</float>
-        <float hash="value">-1.94802</float>
-        <float hash="coefficient">-0.085421</float>
-      </struct>
-      <struct index="32">
-        <float hash="frame">239</float>
-        <float hash="value">-1.78681</float>
-        <float hash="coefficient">0.117987</float>
-      </struct>
-      <struct index="33">
-        <float hash="frame">250</float>
-        <float hash="value">-0.104279</float>
-        <float hash="coefficient">0.065349</float>
-      </struct>
-      <struct index="34">
-        <float hash="frame">253</float>
-        <float hash="value">-0.153281</float>
-        <float hash="coefficient">-0.107919</float>
-      </struct>
-      <struct index="35">
-        <float hash="frame">260</float>
-        <float hash="value">-1.29511</float>
-        <float hash="coefficient">-0.08287</float>
-      </struct>
-      <struct index="36">
-        <float hash="frame">261</float>
-        <float hash="value">-1.3483</float>
-        <float hash="coefficient">0.518533</float>
-      </struct>
-      <struct index="37">
-        <float hash="frame">262</float>
-        <float hash="value">-0.258044</float>
-        <float hash="coefficient">0.539128</float>
-      </struct>
-      <struct index="38">
-        <float hash="frame">263</float>
-        <float hash="value">-0.270047</float>
-        <float hash="coefficient">-0.056141</float>
-      </struct>
-      <struct index="39">
-        <float hash="frame">268</float>
-        <float hash="value">-0.970924</float>
-        <float hash="coefficient">-0.070473</float>
-      </struct>
-      <struct index="40">
-        <float hash="frame">269</float>
-        <float hash="value">-1.00013</float>
-        <float hash="coefficient">0.070132</float>
-      </struct>
-      <struct index="41">
-        <float hash="frame">270</float>
-        <float hash="value">-0.83066</float>
-        <float hash="coefficient">0.255896</float>
-      </struct>
-      <struct index="42">
-        <float hash="frame">272</float>
-        <float hash="value">-0.151871</float>
-        <float hash="coefficient">0.244167</float>
-      </struct>
-      <struct index="43">
-        <float hash="frame">273</float>
-        <float hash="value">0</float>
-        <float hash="coefficient">0.075936</float>
-      </struct>
-      <struct index="44">
-        <float hash="frame">274</float>
-        <float hash="value">0</float>
-        <float hash="coefficient">0</float>
-      </struct>
-      <struct index="45">
-        <float hash="frame">313</float>
-        <float hash="value">0</float>
-        <float hash="coefficient">0</float>
-      </struct>
-      <struct index="46">
-        <float hash="frame">315</float>
-        <float hash="value">-0.087521</float>
-        <float hash="coefficient">-0.141488</float>
-      </struct>
-      <struct index="47">
-        <float hash="frame">317</float>
-        <float hash="value">-0.485702</float>
-        <float hash="coefficient">-0.15603</float>
-      </struct>
-      <struct index="48">
-        <float hash="frame">318</float>
-        <float hash="value">-0.595035</float>
-        <float hash="coefficient">-0.049416</float>
-      </struct>
-      <struct index="49">
-        <float hash="frame">321</float>
-        <float hash="value">-0.420659</float>
-        <float hash="coefficient">0.09276</float>
-      </struct>
-      <struct index="50">
-        <float hash="frame">324</float>
-        <float hash="value">-0.290828</float>
-        <float hash="coefficient">-0.076226</float>
-      </struct>
-      <struct index="51">
-        <float hash="frame">326</float>
-        <float hash="value">-0.672943</float>
-        <float hash="coefficient">-0.256896</float>
-      </struct>
-      <struct index="52">
-        <float hash="frame">329</float>
-        <float hash="value">-1.24161</float>
-        <float hash="coefficient">0.005278</float>
-      </struct>
-      <struct index="53">
-        <float hash="frame">335</float>
-        <float hash="value">-0.17358</float>
-        <float hash="coefficient">-0.054069</float>
-      </struct>
-      <struct index="54">
-        <float hash="frame">339</float>
-        <float hash="value">-1.39451</float>
-        <float hash="coefficient">-0.336546</float>
-      </struct>
-      <struct index="55">
-        <float hash="frame">340</float>
-        <float hash="value">-1.68909</float>
-        <float hash="coefficient">-0.212794</float>
-      </struct>
-      <struct index="56">
-        <float hash="frame">341</float>
-        <float hash="value">-1.82009</float>
-        <float hash="coefficient">0.107541</float>
-      </struct>
-      <struct index="57">
-        <float hash="frame">342</float>
-        <float hash="value">-1.47401</float>
-        <float hash="coefficient">0.513927</float>
-      </struct>
-      <struct index="58">
-        <float hash="frame">343</float>
-        <float hash="value">-0.792241</float>
-        <float hash="coefficient">0.548258</float>
-      </struct>
-      <struct index="59">
-        <float hash="frame">344</float>
-        <float hash="value">-0.377493</float>
-        <float hash="coefficient">0.225062</float>
-      </struct>
-      <struct index="60">
-        <float hash="frame">345</float>
-        <float hash="value">-0.342116</float>
-        <float hash="coefficient">-0.002101</float>
-      </struct>
-      <struct index="61">
-        <float hash="frame">351</float>
-        <float hash="value">-0.918401</float>
-        <float hash="coefficient">-0.04785</float>
-      </struct>
-      <struct index="62">
-        <float hash="frame">352</float>
-        <float hash="value">-0.936398</float>
-        <float hash="coefficient">0.099332</float>
-      </struct>
-      <struct index="63">
-        <float hash="frame">353</float>
-        <float hash="value">-0.719737</float>
-        <float hash="coefficient">0.29595</float>
-      </struct>
-      <struct index="64">
-        <float hash="frame">354</float>
-        <float hash="value">-0.344498</float>
-        <float hash="coefficient">0.277476</float>
-      </struct>
-      <struct index="65">
-        <float hash="frame">355</float>
-        <float hash="value">-0.164786</float>
-        <float hash="coefficient">0.056225</float>
-      </struct>
-      <struct index="66">
-        <float hash="frame">356</float>
-        <float hash="value">-0.232047</float>
-        <float hash="coefficient">-0.093359</float>
-      </struct>
-      <struct index="67">
-        <float hash="frame">363</float>
-        <float hash="value">-1.31119</float>
-        <float hash="coefficient">-0.085476</float>
-      </struct>
-      <struct index="68">
-        <float hash="frame">364</float>
-        <float hash="value">-1.36944</float>
-        <float hash="coefficient">0.443441</float>
-      </struct>
-      <struct index="69">
-        <float hash="frame">365</float>
-        <float hash="value">-0.424305</float>
-        <float hash="coefficient">0.490122</float>
-      </struct>
-      <struct index="70">
-        <float hash="frame">366</float>
-        <float hash="value">-0.389195</float>
-        <float hash="coefficient">0.012173</float>
-      </struct>
-      <struct index="71">
-        <float hash="frame">375</float>
-        <float hash="value">-0.691079</float>
-        <float hash="coefficient">0.081911</float>
-      </struct>
-      <struct index="72">
-        <float hash="frame">379</float>
-        <float hash="value">-0.138216</float>
-        <float hash="coefficient">0.146259</float>
-      </struct>
-      <struct index="73">
-        <float hash="frame">380</float>
-        <float hash="value">0</float>
-        <float hash="coefficient">0.069108</float>
-      </struct>
-      <struct index="74">
-        <float hash="frame">381</float>
-        <float hash="value">0</float>
-        <float hash="coefficient">0</float>
-      </struct>
-      <struct index="75">
-        <float hash="frame">600</float>
-        <float hash="value">0</float>
-        <float hash="coefficient">0</float>
-      </struct>
-    </list>
-  </struct>
-  <float hash="reaction_pattern_attack_rate">0.3</float>
-  <float hash="damage_angle_air">0.663225</float>
-  <float hash="damage_pull_attack_speed_y_max">-1</float>
-  <float hash="damage_down_on_ground_angle">0.174533</float>
-  <float hash="fly_top_angle_lw">1.22173</float>
-  <float hash="fly_top_angle_hi">1.91986</float>
-  <float hash="shield_attack_range_mul">0.7</float>
-  <float hash="shield_attack_range_mul_min">1.5</float>
-  <float hash="0x163cc39d64">8</float>
-  <float hash="0x1600cea23d">35</float>
-  <float hash="0x1b414bf630">1</float>
-  <float hash="0x1ba72b59d1">1.3</float>
-  <int hash="fly_roll_damage">100</int>
-  <float hash="fly_roll_rate">0.3</float>
-  <float hash="back_damage_fly_roll_rate">0</float>
-  <int hash="clatter_input_count_frame">14</int>
-  <list hash="0x192e58d48b">
+  <int hash="catch_dash_frame">3</int>
+  <float hash="catch_dash_brake_mul">1.6</float>
+  <int hash="catch_turn_frame">4</int>
+  <int hash="capture_cut_frame">90</int>
+  <float hash="capture_cut_frame_damage">1.7</float>
+  <float hash="capture_recovery">1</float>
+  <float hash="capture_clatter_frame">8</float>
+  <float hash="capture_cut_dist_x">6</float>
+  <float hash="capture_cut_dist_y">6</float>
+  <float hash="capture_cut_ground_speed">1.9</float>
+  <float hash="capture_cut_brake_mul">1</float>
+  <int hash="capture_cut_jump_button_count">4</int>
+  <float hash="capture_cut_speed_x">1.2</float>
+  <float hash="capture_cut_y">27</float>
+  <int hash="catch_rebound_stop_frame">10</int>
+  <int hash="catch_rebound_frame">15</int>
+  <float hash="catch_rebound_speed_x">1.5</float>
+  <float hash="catch_rebound_jump_speed_x">0.5</float>
+  <float hash="catch_rebound_jump_y">15</float>
+  <int hash="catch_rebound_jump_cancel_frame">16</int>
+  <int hash="shield_setoff_catch_frame">1</int>
+  <int hash="invalid_capture_frame">60</int>
+  <float hash="cliff_catch_cancel_stick_y">-0.66</float>
+  <int hash="cliff_catch_move_frame">2</int>
+  <int hash="cliff_catch_time_quick">360</int>
+  <float hash="cliff_next_stick">0.25</float>
+  <int hash="cliff_no_catch_frame">44</int>
+  <int hash="damage_cliff_no_catch_frame">30</int>
+  <int hash="cliff_wait_air_xlu_max_frame">60</int>
+  <int hash="cliff_wait_air_xlu_max_air_frame">300</int>
+  <int hash="cliff_wait_damage_xlu_max_frame">44</int>
+  <int hash="cliff_wait_damage_xlu_max_damage">120</int>
+  <int hash="cliff_wait_xlu_min_frame">4</int>
+  <float hash="cliff_robbed_speed_x">0.9</float>
+  <float hash="cliff_robbed_speed_y">20</float>
+  <int hash="cliff_robbed_no_control_frame">28</int>
+  <int hash="cliff_release_disable_wall_jump_frame">6</int>
+  <int hash="air_lasso_catch_num">3</int>
+  <int hash="air_lasso_cliff_wait_frame">20</int>
+  <float hash="air_lasso_fall_hit_speed_diff">0.1</float>
+  <int hash="air_lasso_landing_frame">30</int>
+  <int hash="cliff_jump_disable_attack_frame">2</int>
+  <float hash="0x2350989590">4</float>
+  <float hash="cliff_attack_ignore_boss_frame">30</float>
+  <float hash="cliff_climb_ignore_boss_frame">30</float>
+  <float hash="cliff_escape_ignore_boss_frame">30</float>
+  <int hash="cliff_max_count">6</int>
+  <int hash="0x189f0b0c96">7</int>
+  <int hash="cliff_dive_flick_frame_value">2</int>
+  <float hash="cliff_dive_cont_value">-0.85</float>
+  <list hash="cliff_catch_motion_rate">
     <float index="0">1</float>
-    <float index="1">0.925</float>
-    <float index="2">0.862</float>
-    <float index="3">0.8116</float>
-    <float index="4">0.77464</float>
-    <float index="5">0.752464</float>
-    <float index="6">0.75</float>
-  </list>
-  <list hash="0x1af80fd893">
-    <float index="0">1.2</float>
     <float index="1">1</float>
-    <float index="2">1</float>
-    <float index="3">1</float>
-    <float index="4">1</float>
-    <float index="5">1</float>
-    <float index="6">1</float>
+    <float index="2">0.9375</float>
+    <float index="3">0.875</float>
+    <float index="4">0.8125</float>
+    <float index="5">0.75</float>
+    <float index="6">0.75</float>
+    <float index="7">0.75</float>
   </list>
-  <float hash="max_ink_value">300</float>
-  <int hash="start_decrease_ink_frame">120</int>
-  <float hash="decrease_ink_value">0.25</float>
-  <float hash="max_ink_for_damage_mul">180</float>
-  <float hash="max_damage_mul_for_ink">1.5</float>
-  <int hash="ink_interpolate_frame">10</int>
-  <int hash="start_decrease_oil_frame">60</int>
-  <float hash="decrease_oil_value">0.1</float>
-  <struct hash="spirits_critical_attack_color">
-    <float hash="r">1.2</float>
-    <float hash="g">0.24</float>
-    <float hash="b">0.413</float>
+  <list hash="0x1dff572177">
+    <float index="0">1</float>
+    <float index="1">0.8</float>
+    <float index="2">0.5</float>
+    <float index="3">0</float>
+  </list>
+  <int hash="pass_flick_y">6</int>
+  <float hash="pass_stick_y">-0.6875</float>
+  <float hash="squat_pass_frame">1</float>
+  <float hash="pass_to_ground_attack_frame">2</float>
+  <float hash="pass_speed_y">-0.5</float>
+  <float hash="through_passable_ground_stick_y">0.56</float>
+  <int hash="slip_wait_frame">240</int>
+  <float hash="slip_damage_rate_max">0.12</float>
+  <float hash="slip_damage_rate_min">0.02</float>
+  <int hash="slip_damage_disable_frame">60</int>
+  <float hash="down_frame">220</float>
+  <float hash="stand_stick_y">0.2</float>
+  <float hash="stand_fb_stick_x">0.2</float>
+  <int hash="passive_trigger_frame">12</int>
+  <int hash="no_rapid_frame_value">28</int>
+  <float hash="passive_fb_cont_value">0.2</float>
+  <float hash="passive_ground_damage_speed_mul">0.1</float>
+  <int hash="passive_wall_stop_frame">5</int>
+  <int hash="air_escape_passive_trigger_frame">15</int>
+  <float hash="invalid_passive_speed">6</float>
+  <float hash="stop_ceil_speed_x_mul">0.8</float>
+  <float hash="stop_ceil_speed_y_mul">0.9</float>
+  <float hash="stop_ceil_speed_x_stable_mul">0.66</float>
+  <float hash="0x158bb5418d">1</float>
+  <int hash="wall_jump_flick_x">3</int>
+  <float hash="wall_jump_stick_x">0.8</float>
+  <int hash="wall_jump_stop_frame">5</int>
+  <float hash="wall_jump_speed_dec">0.96</float>
+  <float hash="wall_jump_x_speed_dec">0.9</float>
+  <int hash="wall_jump_disable_cont_frame">4</int>
+  <int hash="wall_jump_disable_frame">20</int>
+  <int hash="wall_jump_interval_frame">180</int>
+  <int hash="attach_wall_frame">180</int>
+  <float hash="attach_wall_frame_mul">0.5</float>
+  <float hash="attach_wall_slant_max">30</float>
+  <float hash="attach_wall_slant_min">-20</float>
+  <float hash="detach_wall_jump_x_mul">0.5</float>
+  <int hash="attach_wall_disable_frame">90</int>
+  <int hash="0x2fd348dc85">12</int>
+  <float hash="0x2e6937bde3">0.3</float>
+  <float hash="damage_ground_mul">1</float>
+  <float hash="damage_air_brake">0.051</float>
+  <float hash="damage_speed_composition_speed">2</float>
+  <float hash="damage_speed_composition_rate_max">0.9</float>
+  <float hash="damage_speed_composition_rate_min">0.5</float>
+  <float hash="damage_speed_no_cliff_stop">0.9</float>
+  <float hash="damage_speed_no_cliff_stop_guard">2</float>
+  <float hash="damage_speed_no_operation">0.2</float>
+  <float hash="damage_speed_landing">0.5</float>
+  <float hash="damage_speed_down">5</float>
+  <int hash="damage_down_damage_max_continue">2</int>
+  <int hash="0x1e7a52eb8a">3</int>
+  <float hash="damage_fly_speed_y_mul_base_accel">0.075</float>
+  <float hash="damage_fly_speed_y_mul">5</float>
+  <float hash="damage_fly_correction_max">9.74</float>
+  <float hash="damage_fly_length_mul_max">1.095</float>
+  <float hash="damage_fly_length_mul_min">0.92</float>
+  <int hash="damage_pull_speed_intp_frame">5</int>
+  <int hash="back_damage_effective_frame">10</int>
+  <float hash="wall_damage_start_frame">4</float>
+  <int hash="damage_stop_motion_intp_frame">3</int>
+  <int hash="damage_air_stop_motion_intp_frame">6</int>
+  <float hash="0x2f136d6218">30</float>
+  <float hash="0x24417028a1">0.5</float>
+  <float hash="0x1ef2617d6a">15</float>
+  <float hash="0x255c556cd3">25</float>
+  <float hash="damage_fix_gravity_accel">0.087</float>
+  <float hash="damage_fix_gravity_speed_y_stable">1.5</float>
+  <int hash="damage_fix_gravity_accel_frame">10</int>
+  <float hash="damage_fly_attack_speed">2</float>
+  <int hash="damage_fly_attack_frame">45</int>
+  <float hash="damage_fly_escape_speed">2.5</float>
+  <int hash="damage_fly_escape_frame">40</int>
+  <float hash="damage_fly_reflect_speed">1</float>
+  <float hash="damage_fly_reflect_speed_mul">0.95</float>
+  <float hash="damage_fly_reflect_down_speed_mul">0.2</float>
+  <float hash="damage_fly_reflect_down_speed_mul_damage">70</float>
+  <float hash="damage_fly_reflect_d_speed">0.8</float>
+  <float hash="damage_fly_reflect_d_speed_mul">0.9</float>
+  <float hash="damage_fly_reflect_reaction_frame_mul">0.8</float>
+  <float hash="damage_fly_reflect_stop_frame_rate">0.15</float>
+  <int hash="damage_fly_reflect_stop_frame_min">2</int>
+  <int hash="damage_fly_reflect_stop_frame_max">20</int>
+  <int hash="wall_damage_motion_stop_start_frame">3</int>
+  <int hash="damage_fly_reflect_xlu_frame">0</int>
+  <float hash="damage_fly_reflect_check_frame">3</float>
+  <int hash="damage_fly_reflect_disable_escape_frame">18</int>
+  <int hash="damage_fly_reflect_max">15</int>
+  <float hash="damage_fly_coll_stop_slidable_length">3</float>
+  <float hash="dead_up_damage_speed">2.4</float>
+  <float hash="0x29baab727b">4.7</float>
+  <float hash="dead_down_damage_speed">3</float>
+  <int hash="dead_rebirth_wait_frame">60</int>
+  <int hash="rebirth_move_frame">60</int>
+  <int hash="rebirth_move_frame_trainer">35</int>
+  <int hash="rebirth_move_frame_inkling">60</int>
+  <int hash="rebirth_wait_frame">240</int>
+  <int hash="rebirth_invincible_frame">60</int>
+  <int hash="0x27768e17f0">120</int>
+  <int hash="rebirth_invincible_add_frame">60</int>
+  <float hash="loupe_damage_limit">150</float>
+  <float hash="loupe_damage">1</float>
+  <int hash="loupe_damage_interval">60</int>
+  <float hash="0x26a11a0587">0.15</float>
+  <float hash="0x25151f93e9">1</float>
+  <float hash="damage_knock_back_area_width_rate">70</float>
+  <float hash="damage_knock_back_hitstop_frame_rate">70</float>
+  <float hash="damage_knock_back_speed_x_rate">10</float>
+  <float hash="0x1e6b5e39f0">80</float>
+  <float hash="0x1a12ca7663">0.6</float>
+  <float hash="0x2b4b8f1925">15</float>
+  <float hash="furafura_frame">400</float>
+  <float hash="furafura_recovery_frame">1</float>
+  <float hash="furafura_clatter_frame">3</float>
+  <float hash="damage_song_frame">10</float>
+  <float hash="damage_song_frame_bonus_reaction">25</float>
+  <float hash="damage_song_frame_bonus_damage">1</float>
+  <float hash="damage_song_frame_bonus_rank">10</float>
+  <float hash="damage_song_frame_bonus_handi">30</float>
+  <float hash="damage_song_recovery_frame">1</float>
+  <float hash="damage_song_clatter_frame">8</float>
+  <float hash="damage_song_fall_speed_limit">3</float>
+  <float hash="damage_sleep_fall_speed_y">2.3</float>
+  <float hash="damage_bind_frame">76</float>
+  <float hash="damage_bind_frame_bonus_reaction">1</float>
+  <float hash="damage_bind_frame_bonus_damage">0</float>
+  <float hash="damage_bind_frame_bonus_rank">15</float>
+  <float hash="damage_bind_frame_bonus_handi">50</float>
+  <float hash="damage_bind_recovery_frame">1</float>
+  <float hash="damage_bind_clatter_frame">5</float>
+  <int hash="invalid_bind_frame">70</int>
+  <float hash="bury_frame">10</float>
+  <float hash="bury_frame_bonus_reaction">1.5</float>
+  <float hash="bury_frame_bonus_damage">0.5</float>
+  <float hash="bury_frame_bonus_rank">15</float>
+  <float hash="bury_frame_bonus_handi">30</float>
+  <float hash="bury_recovery">1</float>
+  <float hash="bury_clatter_frame">8</float>
+  <float hash="bury_damage_reaction_sub">90</float>
+  <float hash="bury_jump_y_speed_mul">1.2</float>
+  <float hash="bury_jump_no_attack_frame_value">12</float>
+  <int hash="bury_invalid_frame">60</int>
+  <int hash="bury_down_frame">3</int>
+  <int hash="bury_physics_invalid_frame">8</int>
+  <float hash="damage_ice_frame_mul">5</float>
+  <float hash="damage_ice_frame_damage_mul">0.5</float>
+  <float hash="ice_damage_continue_frame_mul">0.67</float>
+  <int hash="ice_damage_continue_max">5</int>
+  <float hash="damage_ice_frame_max">250</float>
+  <float hash="damage_ice_frame_recovery">1</float>
+  <float hash="damage_ice_frame_recovery_clatter">4</float>
+  <float hash="damage_ice_frame_recovery_damage">4</float>
+  <float hash="damage_ice_damage_dec_mul">0.5</float>
+  <float hash="damage_ice_damage_reaction_dec_mul">0.25</float>
+  <float hash="damage_ice_damage_air_brake">0.03</float>
+  <float hash="damage_ice_fall_y_mul">0.7</float>
+  <float hash="add_ice_damage_mul">0.38</float>
+  <float hash="ice_damage_max">100</float>
+  <int hash="ice_damage_reset_frame">20</int>
+  <int hash="damage_ice_jump_stiff_frame">16</int>
+  <int hash="damage_ice_invalid_frame">60</int>
+  <float hash="damage_ice_reflect_speed_mul">0.8</float>
+  <float hash="damage_ice_reflect_break_speed">100</float>
+  <float hash="damage_ice_rot_speed_min">-25</float>
+  <float hash="damage_ice_rot_speed_max">-4</float>
+  <float hash="damage_ice_effect_radius">8.5</float>
+  <int hash="damage_turn_reverse_cont_frame">30</int>
+  <float hash="0x26a5243ff4">0.5</float>
+  <float hash="0x20a50442e7">15</float>
+  <float hash="0x223d4a2992">1.5</float>
+  <float hash="0x2747b09dbf">15</float>
+  <float hash="shouldered_frame_add">50</float>
+  <float hash="shouldered_frame_mul">1.5</float>
+  <float hash="0x188226f196">10</float>
+  <float hash="0x1c1d4e67b6">13</float>
+  <float hash="kirby_swallowed_offset_x">5.4</float>
+  <float hash="kirby_swallowed_offset_y">6.8</float>
+  <float hash="kirby_swallowed_speed_x">0.9</float>
+  <float hash="kirby_swallowed_speed_y">1.2</float>
+  <float hash="kirby_swallowed_comp_dist">1</float>
+  <float hash="kirby_swallowedthrown_clatter_recover">1</float>
+  <float hash="kirby_swallowedthrown_copy_star_frame">10</float>
+  <float hash="kirby_swallowedescape_speed_x">0.73</float>
+  <float hash="kirby_swallowedescape_speed_y">2.3</float>
+  <float hash="kirby_swallowedthrown_frame">4</float>
+  <float hash="damage_fly_ind_speed_max">3.8</float>
+  <float hash="damage_fly_ind_speed_min">2.3</float>
+  <float hash="damage_fly_ind_speed_succeed_mul">0.3</float>
+  <float hash="damage_fly_ind_weight_mul">1.2</float>
+  <float hash="marth_shield_breaker_damage_mul">1.15</float>
+  <int hash="ganon_special_s_reaction_frame">15</int>
+  <float hash="ganon_special_s_fall_speed">3.2</float>
+  <float hash="ganon_special_s_fall_hold_frame">100</float>
+  <float hash="ganon_special_s_fall_clatter_frame">4</float>
+  <float hash="ganon_special_s_fall_clatter_add_frame">1.5</float>
+  <float hash="ganon_special_s_fall_clatter_add_frame_up_limit">30</float>
+  <float hash="ganon_special_s_fall_clatter_add_frame_down_limit">10</float>
+  <float hash="ganon_special_s_cut_speed_x">1.2</float>
+  <float hash="ganon_special_s_cut_brake_x">0.03</float>
+  <float hash="ganon_special_s_cut_speed_y">1.5</float>
+  <float hash="ganon_special_s_cut_accel_y">0.05</float>
+  <int hash="ganon_special_s_cut_cancel_frame">30</int>
+  <int hash="ganon_special_s_passive_trigger_frame">8</int>
+  <float hash="0x2926d3af20">0.3</float>
+  <float hash="mewtwo_thrown_reaction_frame_mul">0.04</float>
+  <int hash="mewtwo_thrown_reaction_frame_max">6</int>
+  <float hash="damage_bind_extra_frame">0</float>
+  <float hash="damage_bind_extra_frame_bonus_reaction">1</float>
+  <float hash="damage_bind_extra_frame_bonus_damage">1.3</float>
+  <float hash="damage_bind_extra_frame_bonus_rank">16</float>
+  <float hash="damage_bind_extra_frame_bonus_handi">16</float>
+  <float hash="damage_bind_extra_recovery_frame">1</float>
+  <float hash="damage_bind_extra_clatter_frame">6</float>
+  <float hash="0x254ef48ec6">100</float>
+  <float hash="gamewatch_stock_icon_scale_max">2</float>
+  <float hash="0x2572f9b19f">5</float>
+  <float hash="gamewatch_stock_icon_scale_min">0.1</float>
+  <float hash="bitten_frame">120</float>
+  <float hash="bitten_frame_extend_damage_mul">0.5</float>
+  <float hash="bitten_clatter_frame">10</float>
+  <float hash="laydown_no_action_frame">3</float>
+  <float hash="laydown_no_action_frame_max">13</float>
+  <float hash="laydown_damage_max">170</float>
+  <float hash="ike_final_damage_fly_speed">3.5</float>
+  <float hash="ike_final_offset_y">0</float>
+  <float hash="diddy_clung_frame">70</float>
+  <float hash="diddy_clung_damage_mul">1.3</float>
+  <float hash="diddy_clung_handicap_frame">24</float>
+  <float hash="diddy_clung_air_mul">0.4</float>
+  <float hash="diddy_clung_clatter_frame">6</float>
+  <float hash="dedede_swallowed_offset_x">5.4</float>
+  <float hash="dedede_swallowed_offset_y">8.4</float>
+  <float hash="dedede_swallowed_speed_x">2.7</float>
+  <float hash="dedede_swallowed_speed_y">3.6</float>
+  <float hash="dedede_swallowed_comp_dist">1</float>
+  <float hash="dedede_swallowedthrown_clatter_recover">1</float>
+  <float hash="0x271637cd82">2.8</float>
+  <float hash="0x289f33225f">-1</float>
+  <float hash="0x28e83412c9">10</float>
+  <float hash="0x2ac7b91111">4</float>
+  <float hash="dedede_swallowedescape_speed_x">0.73</float>
+  <float hash="dedede_swallowedescape_speed_y">2.3</float>
+  <float hash="dedede_swallowedthrown_frame">4</float>
+  <float hash="dedede_swallowedthrown_clatter_frame">12</float>
+  <float hash="0x25e72e042c">90</float>
+  <float hash="0x216fd7d6e2">2.6</float>
+  <float hash="palutena_final_blackhole_motion_rate">2</float>
+  <float hash="lisire_frame">80</float>
+  <float hash="lisire_clatter_frame">1.5</float>
+  <float hash="lisire_clatter_invalid_damage">120</float>
+  <float hash="lisire_capture_cut_speed_x">1</float>
+  <float hash="lisire_capture_cut_speed_y">2</float>
+  <float hash="saving_damage_start_frame">6</float>
+  <float hash="saving_damage_base_frame">5</float>
+  <float hash="saving_damage_frame_lv2">38</float>
+  <float hash="saving_damage_frame_lv3">65</float>
+  <float hash="saving_damage_air_frame_lv2">38</float>
+  <float hash="saving_damage_air_frame_lv3">60</float>
+  <int hash="pierce_cut_frame">160</int>
+  <float hash="pierce_cut_frame_damage">2</float>
+  <float hash="pierce_recovery">1</float>
+  <float hash="pierce_clatter_frame">20</float>
+  <float hash="pierce_motion_rate">0.002</float>
+  <float hash="rollerink_max_speed_x_mul">0.7</float>
+  <float hash="rollerink_friction">0.7</float>
+  <int hash="ridley_s_interpolate_frame">3</int>
+  <int hash="ridley_s_base_frame">75</int>
+  <float hash="ridley_s_damage_frame_mul">0.36</float>
+  <int hash="ridley_s_max_frame">159</int>
+  <int hash="ridley_s_min_frame">48</int>
+  <int hash="ridley_s_recovery_frame">1</int>
+  <int hash="ridley_s_clatter_frame">2</int>
+  <float hash="ridley_s_dead_hop_y">3.5</float>
+  <float hash="ridley_s_capture_cut_speed_mul">0.9</float>
+  <float hash="stabbed_damage_start_frame">1</float>
+  <float hash="stabbed_damage_base_frame">30</float>
+  <float hash="stabbed_damage_frame">35</float>
+  <int hash="stabbed_damage_comp_frame">10</int>
+  <float hash="krool_swallowed_offset_x">25</float>
+  <float hash="krool_swallowed_offset_y">12</float>
+  <float hash="krool_swallowed_speed_x">0.8</float>
+  <float hash="krool_swallowed_speed_y">1.2</float>
+  <float hash="krool_swallowed_comp_dist">1</float>
+  <float hash="capture_fishingrod_cut_dist_x">25</float>
+  <float hash="capture_fishingrod_cut_dist_y">25</float>
+  <int hash="jack_final_finish_stop_frame">10</int>
+  <int hash="jack_final_effect_frame">90</int>
+  <int hash="jack_final_disable_color_blend_frame">5</int>
+  <float hash="jack_final_motion_rate">0.3</float>
+  <float hash="buddy_final_target_motion_rate">2</float>
+  <float hash="0x29a409f389">0.5</float>
+  <float hash="buddy_final_target_scale_scene02">0.8</float>
+  <float hash="buddy_final_target_scale_scene04">0.6</float>
+  <float hash="dolly_super_special2_capture_cut_dist_x">25</float>
+  <float hash="dolly_super_special2_capture_cut_dist_y">25</float>
+  <float hash="dolly_final_motion_rate">0.3</float>
+  <float hash="master_final_target_motion_rate_scene03">1</float>
+  <int hash="cloud_final2_move_frame">55</int>
+  <float hash="0x1c6b1d2d15">13</float>
+  <int hash="0x1a99c94c70">30</int>
+  <int hash="ground_damage_disable_frame">30</int>
+  <float hash="ground_speed_inherit_limit">1</float>
+  <float hash="wind_air_brake">0.081</float>
+  <float hash="damage_fly_cloud_through_speed">2</float>
+  <float hash="damage_fly_cloud_through_out_speed_mul">0.5</float>
+  <float hash="ladder_stick_y">0.6</float>
+  <int hash="ladder_cancel_frame">7</int>
+  <int hash="no_ladder_frame">16</int>
+  <float hash="ladder_speed_u_max">1.4</float>
+  <float hash="ladder_speed_d_max">1.8</float>
+  <float hash="ladder_attack_speed_mul">0.5</float>
+  <float hash="ladder_jump_y_mul">0.8</float>
+  <int hash="ladder_break_stick_frame">8</int>
+  <float hash="ladder_break_stick_x">0.7</float>
+  <int hash="0x21cccfef4d">10</int>
+  <float hash="swim_dive_speed_x_mul">0.8</float>
+  <float hash="swim_dive_speed_y_mul">0.8</float>
+  <float hash="swim_rise_accel_y">0.1</float>
+  <float hash="swim_rise_stable_speed_y">3</float>
+  <float hash="swim_accel_mul">0.05</float>
+  <float hash="swim_speed_mul">0.6</float>
+  <float hash="swim_brake">0.025</float>
+  <int hash="swim_jump_charge_frame">8</int>
+  <float hash="swim_jump_charge_accel_y">0.04</float>
+  <float hash="swim_jump_speed_y_mul">0.91</float>
+  <int hash="swim_jump_speed_y_dec_count">4</int>
+  <int hash="swim_effect_interval_frame">20</int>
+  <int hash="swim_drown_frame">240</int>
+  <float hash="swim_drown_frame_dec_damage_rate">2.5</float>
+  <float hash="swim_drown_speed_x_mul">0.6</float>
+  <int hash="swim_drown_out_frame">150</int>
+  <float hash="swim_drown_out_accel_y_mul">0.3</float>
+  <int hash="swim_drown_effect_interval_frame">10</int>
+  <int hash="fish_capture_cut_frame">90</int>
+  <float hash="fish_capture_cut_frame_damage">1.7</float>
+  <float hash="fish_capture_recovery">0</float>
+  <float hash="fish_capture_clatter_frame">8</float>
+  <float hash="fish_capture_motion_rate">1.8</float>
+  <int hash="drum_cut_frame">280</int>
+  <float hash="drum_cut_frame_damage">1.5</float>
+  <float hash="drum_recovery">0</float>
+  <float hash="drum_clatter_frame">8</float>
+  <float hash="tornado_gravity_accel">0.087</float>
+  <float hash="tornado_gravity_stable_speed">1.5</float>
+  <float hash="pipe_scale">0.27</float>
+  <int hash="pipe_scale_frame">25</int>
+  <float hash="dolly_stage_dead_effect_scale">0.8</float>
+  <float hash="dolly_stage_disable_wall_crash_degree">65</float>
+  <float hash="dolly_stage_disable_wall_crash_speed_x">1.5</float>
+  <float hash="dolly_stage_wall_crash_speed_x">7</float>
+  <float hash="dolly_stage_wall_crash_damage_min">40</float>
+  <float hash="dolly_stage_wall_crash_damage_max">999</float>
+  <float hash="dolly_stage_wall_crash_damage_mul_min">0.6</float>
+  <float hash="dolly_stage_wall_crash_damage_mul_max">1.15</float>
+  <float hash="dolly_stage_wall_crash_weight_min">0</float>
+  <float hash="dolly_stage_wall_crash_weight_max">150</float>
+  <float hash="dolly_stage_wall_crash_weight_mul_min">0.95</float>
+  <float hash="dolly_stage_wall_crash_weight_mul_max">1.1</float>
+  <float hash="dolly_stage_wall_effect_min_rate">10</float>
+  <float hash="dolly_stage_wall_effect_middle_rate">25</float>
+  <int hash="dolly_stage_wall_effect_max_slow_rate">3</int>
+  <int hash="dolly_stage_wall_effect_max_slow_frame">20</int>
+  <int hash="dolly_stage_lr_dead_wait_frame">60</int>
+  <int hash="dolly_stage_disable_remain_frame">300</int>
+  <float hash="dolly_stage_wall_break_speed_x_min">0.85</float>
+  <hash40 hash="dolly_stage_wall_dead_quake_1_on_1">l_dolly_stadium</hash40>
+  <hash40 hash="dolly_stage_wall_dead_quake">l_dolly_stadium</hash40>
+  <hash40 hash="dolly_stage_wall_dead_quake_finish">l</hash40>
+  <float hash="dolly_stage_wall_init_speed">0.85</float>
+  <float hash="dolly_stage_wall_accel">0.06</float>
+  <float hash="dolly_stage_wall_limit_speed">7</float>
+  <float hash="dolly_stage_wall_motion_rate">1</float>
+  <float hash="dolly_stage_wall_accel_after">0</float>
+  <float hash="dolly_stage_wall_limit_speed_after">20</float>
+  <int hash="dolly_stage_performance_frame">48</int>
+  <float hash="dolly_stage_slow_rate">3</float>
+  <int hash="dolly_stage_slow_frame">47</int>
+  <float hash="dolly_stage_zoom_rate">2.6</float>
+  <int hash="dolly_stage_zoom_in_frame">4</int>
+  <float hash="dolly_stage_camera_offset_x">12</float>
+  <float hash="dolly_stage_camera_offset_y">0</float>
+  <int hash="dolly_stage_critical_1_on_1">1</int>
+  <int hash="dolly_stage_finish_hit_stop_frame">3</int>
+  <float hash="dolly_stage_finish_zoom_rate">1.7</float>
+  <float hash="dolly_stage_finish_camera_offset_x">2</float>
+  <float hash="dolly_stage_finish_camera_offset_y">0</float>
+  <int hash="dolly_stage_other_stop_frame_1_on_1">11</int>
+  <int hash="dolly_stage_shake_frame_1_on_1">30</int>
+  <hash40 hash="dolly_stage_shake_kind_1_on_1">dolly_stage</hash40>
+  <int hash="dolly_stage_other_stop_frame">20</int>
+  <int hash="dolly_stage_shake_frame">20</int>
+  <hash40 hash="dolly_stage_shake_kind">dolly_stage</hash40>
+  <int hash="dolly_stage_shake_frame_after_stop">50</int>
+  <hash40 hash="dolly_stage_shake_kind_after_stop">dolly_stage_after_stop</hash40>
+  <int hash="0x299d40d0e4">30</int>
+  <int hash="0x2432db3f21">60</int>
+  <float hash="0x2ab1f047fe">0.6</float>
+  <float hash="0x2280060bab">0.5</float>
+  <int hash="0x19a0a89335">20</int>
+  <int hash="0x1b6ba65a59">70</int>
+  <int hash="0x1b0a9b5aef">2</int>
+  <int hash="0x1dcffb7a42">150</int>
+  <int hash="0x1de596c2e9">90</int>
+  <int hash="0x20104fc69e">20</int>
+  <int hash="0x299c29178b">15</int>
+  <float hash="team_attack_shot_rate">0.25</float>
+  <float hash="team_attack_heal_rate">0.5</float>
+  <float hash="charge_final_add_gauge_by_time">0.4</float>
+  <float hash="charge_final_add_gauge_by_attack">0.3</float>
+  <float hash="charge_final_add_gauge_by_damage_mul">0.3</float>
+  <float hash="charge_final_add_gauge_by_attack_mul">0.2</float>
+  <float hash="charge_final_add_gauge_by_time_mul">0.2</float>
+  <int hash="charge_final_gauge_decrease_start_frame">600</int>
+  <int hash="charge_final_remove_frame">1200</int>
+  <list hash="0x2873df4aed">
+    <float index="0">0.5</float>
+    <float index="1">0.47</float>
+    <float index="2">0.45</float>
+    <float index="3">0.4</float>
+    <float index="4">0.37</float>
+    <float index="5">0.33</float>
+    <float index="6">0.3</float>
+  </list>
+  <float hash="0x2d073b8b11">0.9</float>
+  <float hash="0x2d2bae85ee">70</float>
+  <float hash="0x2b0de64f73">0.9</float>
+  <float hash="0x223f5d53c2">0.5</float>
+  <float hash="0x2203506c9b">1.5</float>
+  <float hash="0x232ccb683f">70</float>
+  <float hash="0x2212ae242a">60</float>
+  <float hash="0x222ea31b73">90</float>
+  <float hash="0x3346e488ff">2</float>
+  <float hash="0x337ae9b7a6">4</float>
+  <float hash="0x33fe2103c5">1</float>
+  <float hash="0x33c22c3c9c">2</float>
+  <float hash="handi_boost_max">5</float>
+  <float hash="handi_boost_base_player_num">4.5</float>
+  <float hash="handi_boost_correct_player_max">1.2</float>
+  <float hash="handi_boost_correct_player_min">0.75</float>
+  <int hash="handi_boost_start_time">90</int>
+  <int hash="handi_boost_each_time">15</int>
+  <float hash="handi_boost_correct_time_add">0.1</float>
+  <float hash="handi_boost_correct_time_max">1.5</float>
+  <float hash="handi_boost_attack_reaction_mul">0.1</float>
+  <float hash="handi_boost_attack_damage_mul">0.15</float>
+  <float hash="handi_boost_defense_mul">0.08</float>
+  <float hash="handi_boost_min">1</float>
+  <float hash="handi_boost_attack_reaction_mul_max">1.3</float>
+  <float hash="handi_boost_attack_damage_mul_max">1.5</float>
+  <float hash="handi_boost_defense_mul_max">0.6</float>
+  <float hash="0x3801d6748a">15</float>
+  <float hash="ground_speed_x_limit">17</float>
+  <float hash="common_air_speed_x_limit">100</float>
+  <float hash="air_speed_up_limit">15</float>
+  <float hash="air_speed_down_limit">100</float>
+  <float hash="power_up_attack_limit">1000</float>
+  <int hash="power_up_point_max">1000</int>
+  <int hash="power_up_point_min">-1000</int>
+  <float hash="squat_b_stick_x_min">-0.38</float>
+  <float hash="squat_b_stick_x_max">-0.6</float>
+  <float hash="fall_stick_x">0.18</float>
+  <float hash="cliff_climb_stick">0.872665</float>
+  <float hash="0x25b62d6370">1.309</float>
+  <float hash="dead_down_damage_check_bottom">-15</float>
+  <int hash="bitten_flick_frame">4</int>
+  <float hash="shield_size">1</float>
+  <int hash="throw_invincible_frame">0</int>
+  <float hash="damage_motion_rate">1</float>
+  <int hash="passive_wall_xlu_frame">0</int>
+  <float hash="cliff_back_range_x_mul">0.6</float>
+  <float hash="capture_landing_offset">3</float>
+  <float hash="damage_reaction_fix_mul">0.2</float>
+  <float hash="escape_air_brake">1</float>
+  <float hash="bury_damage_reaction_mul">1</float>
+  <float hash="0x21624f7f0f">0.5</float>
+  <float hash="smash_hold_reaction_mul">1</float>
+  <float hash="run_brake_stop_speed">0.25</float>
+  <float hash="walk_accel_mul">0.5</float>
+  <float hash="run_accel_mul">0.4</float>
+  <int hash="run_brake_dash_frame">7</int>
+  <int hash="run_brake_attack_escape_frame">4</int>
+  <float hash="dash_s4_frame_easy">7</float>
+  <float hash="dash_s4_frame_hard">5</float>
+  <int hash="attack_hi4_flick_y_easy">5</int>
+  <int hash="attack_hi4_flick_y_hard">3</int>
+  <int hash="attack_lw4_flick_y_easy">5</int>
+  <int hash="attack_lw4_flick_y_hard">3</int>
+  <struct hash="jostle_data">
+    <float hash="speed_x_gg">0.7</float>
+    <float hash="speed_x_ga">0.15</float>
+    <float hash="speed_x_ag">0.6</float>
+    <float hash="speed_x_aa">0.4</float>
+    <float hash="speed_z">0.1</float>
+    <float hash="pos_z_max">0.5</float>
   </struct>
-  <struct hash="spirits_critical_defense_color">
-    <float hash="r">0.248</float>
-    <float hash="g">0.707</float>
-    <float hash="b">1</float>
-  </struct>
-  <struct hash="spirits_critical_throw_color">
-    <float hash="r">0.204</float>
-    <float hash="g">0.85</float>
-    <float hash="b">0.17</float>
-  </struct>
+  <int hash="escape_penalty_frame">60</int>
+  <int hash="escape_penalty_max_count">5</int>
+  <int hash="escape_penalty_recovry_frame">120</int>
+  <float hash="escape_penalty_motion_rate">0.06</float>
+  <float hash="escape_f_penalty_motion_rate">0.06</float>
+  <float hash="escape_b_penalty_motion_rate">0.1</float>
+  <float hash="escape_air_penalty_motion_rate">0</float>
+  <float hash="invalid_paralyze_frame">10</float>
 </struct>
