@@ -16,6 +16,7 @@ mod faf_change;
 mod yink;
 mod sora;
 mod kazuya;
+mod snake;
 mod peach;
 mod rosa;
 mod brawler;
@@ -109,6 +110,7 @@ pub fn main() {
 	swordfighter::install();
 	mario::install();
 	link::install();
+	snake::install();
 	samusd::install();
 	samus::install();
 	wft::install();

@@ -431,6 +431,12 @@ pub fn bone_rot(fighter : &mut L2CFighterCommon) {
 		
 		//Falco 
 		bone_const(boma, *FIGHTER_KIND_FALCO, hash40("throw_hi"), hash40("handr"), 13.0, 37.0, 0.0, 0.0, stick_x*20.0 -15.0, stick_x*20.0 -15.0, 0.0, 0.0);
+		
+		//Snake Fsmash angle up
+		bone_const(boma, *FIGHTER_KIND_SNAKE, hash40("attack_s4_s"), hash40("handr"), 21.0, 25.0, 0.0, -30.0, 0.0, 0.0, 0.0, 0.0);
+		bone_const(boma, *FIGHTER_KIND_SNAKE, hash40("attack_s4_s"), hash40("handr"), 25.0, 45.0, -30.0, -30.0, 0.0, 0.0, 0.0, 0.0);
+		bone_const(boma, *FIGHTER_KIND_SNAKE, hash40("attack_s4_s"), hash40("handr"), 45.0, 65.0, -30.0, 0.0, 0.0, 0.0, 0.0, 0.0);
+		bone_const(boma, *FIGHTER_KIND_SNAKE, hash40("attack_s4_hold"), hash40("handr"), 0.0, 60.0, -30.0, -30.0, 0.0, 0.0, 0.0, 0.0);
 	
 	};
 }
