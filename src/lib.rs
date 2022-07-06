@@ -18,6 +18,7 @@ mod sora;
 mod kazuya;
 mod snake;
 mod peach;
+mod daisy;
 mod rosa;
 mod brawler;
 mod pacman;
@@ -102,6 +103,7 @@ pub fn main() {
 	faf_change::install();
 	dk::install();
 	peach::install();
+	daisy::install();
 	mythra::install();
 	yink::install();
 	sora::install();
