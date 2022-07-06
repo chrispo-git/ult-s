@@ -38,13 +38,13 @@ unsafe fn daisy_downb(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "daisy",
     script =  "effect_speciallw",
-    category = ACMD_GAME)]
+    category = ACMD_EFFECT)]
 unsafe fn daisy_downb_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
 		frame(Frame=12)
 		if(is_excute){
-			EFFECT(hash40("sys_erace_smoke"), hash40("haver"), 0, 0, 0, 0, 0, 0, 1.2, 0, 0, 0, 0, 0, 0, false)
+			EFFECT(hash40("sys_erace_smoke"), hash40("top"), 0, 8, 10, 0, 0, 0, 1.2, 0, 0, 0, 0, 0, 0, false)
 		}
     });
 }
