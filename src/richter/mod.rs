@@ -1,12 +1,33 @@
-use smash::hash40;
-use smash::phx::Hash40;
-use smash::lib::lua_const::*;
-use smash::app::*;
 use smash::app::lua_bind::*;
-use smash::lua2cpp::{L2CFighterCommon, L2CAgentBase};
+use smash::lib::lua_const::*;
+use smash::app::utility::get_kind;
+use smash::hash40;
+use smash::lua2cpp::*;
 use smashline::*;
 use smash_script::*;
+use smash::phx::*;
+use smash::lib::{L2CValue, L2CAgent};
+use smash::phx::Vector2f;
 use crate::util::*;
+
+#[acmd_script(
+    agent = "richter",
+    scripts =  ["game_specialn", "game_specialairn"],
+    category = ACMD_GAME)]
+unsafe fn richter_neutralb(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		FT_MOTION_RATE(FSM=0.3)
+		frame(Frame=20)
+		FT_MOTION_RATE(FSM=1)
+		frame(Frame=31)
+		FT_MOTION_RATE(FSM=0.75)
+		if(is_excute){
+			ArticleModule::generate_article(FIGHTER_SIMON_GENERATE_ARTICLE_AXE, false, -1)
+			ArticleModule::shoot(FIGHTER_SIMON_GENERATE_ARTICLE_AXE, smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_LAST), false)
+		}
+    });
+}	
 #[acmd_script(
     agent = "richter",
     script =  "game_attackdash",
@@ -89,10 +110,23 @@ unsafe fn richter_axe(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
 		if(is_excute){
-			ATTACK(ID=0, Part=0, Bone=hash40("axe"), Damage=10.0, Angle=85, KBG=75, FKB=0, BKB=50, Size=3.5, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.75, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_SPEED, SetWeight=false, ShieldDamage=8, Trip=0.0, Rehit=0, Reflectable=true, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_OBJECT)
+			ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=10.0, Angle=85, KBG=75, FKB=0, BKB=50, Size=3.5, X=0.0, Y=6.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.75, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_SPEED, SetWeight=false, ShieldDamage=-5, Trip=0.0, Rehit=0, Reflectable=true, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_OBJECT)
+			AttackModule::enable_safe_pos()
 		}
     });
-}		
+}			
+#[acmd_script(
+    agent = "richter_axe",
+    script =  "effect_fly",
+    category = ACMD_EFFECT)]
+unsafe fn richter_axe_eff(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		if(is_excute){
+			EFFECT_FOLLOW(hash40("sys_greenshell_trace"), hash40("rot"), 0, -1, -4, 0, 0, 0, 1, true)
+		}
+    });
+}
 		
 #[acmd_script(
     agent = "richter",
@@ -368,9 +402,24 @@ fn richter_frame(fighter: &mut L2CFighterCommon) {
 		if [hash40("attack_air_hi")].contains(&motion_kind) && frame >= 33.0 {
 			MotionModule::change_motion(boma, smash::phx::Hash40::new("fall"), 0.0, 1.0, false, 0.0, false, false);
 		};
+		if ![hash40("haved"), hash40("fly")].contains(&ArticleModule::motion_kind(boma, *FIGHTER_SIMON_GENERATE_ARTICLE_AXE, smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL))) {
+			ArticleModule::remove_exist(boma, *FIGHTER_SIMON_GENERATE_ARTICLE_AXE, smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
+		};
     }
 }
-
+#[fighter_frame( agent = FIGHTER_KIND_KIRBY )]
+fn richter_kirby_frame(fighter: &mut L2CFighterCommon) {
+    unsafe {
+        let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
+		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
+		let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+		let motion_kind = MotionModule::motion_kind(boma);
+		let frame = MotionModule::frame(boma);
+		if ![hash40("haved"), hash40("fly")].contains(&ArticleModule::motion_kind(boma, *FIGHTER_SIMON_GENERATE_ARTICLE_AXE, smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL))) {
+			ArticleModule::remove_exist(boma, *FIGHTER_SIMON_GENERATE_ARTICLE_AXE, smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
+		};
+    }
+}
 
 		
 pub fn install() {
@@ -379,7 +428,6 @@ pub fn install() {
 		richter_uair_eff,
 		richter_uairs,
 		richter_utilt,
-		richter_axe,
 		richter_da,
 		richter_ftilt,
 		richter_nair,
@@ -387,7 +435,10 @@ pub fn install() {
 		richter_grab,
 		richter_pivotgrab,
 		richter_dashgrab,
-		richter_dashback
+		richter_dashback,
+		richter_axe,
+		richter_axe_eff,
+		richter_neutralb
     );
-    smashline::install_agent_frames!(richter_frame);
+    smashline::install_agent_frames!(richter_frame, richter_kirby_frame);
 }
