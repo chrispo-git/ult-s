@@ -187,7 +187,7 @@ pub fn jabcancel(fighter : &mut L2CFighterCommon) {
 		let stick_y = ControlModule::get_stick_y(boma);
 		let frame = MotionModule::frame(boma);
 		//Speeds up jab 2s and 3s for certain chars
-		if [*FIGHTER_KIND_DOLLY, *FIGHTER_KIND_YOUNGLINK].contains(&fighter_kind) {
+		if [*FIGHTER_KIND_DOLLY, *FIGHTER_KIND_YOUNGLINK, *FIGHTER_KIND_KROOL].contains(&fighter_kind) {
 			if [hash40("attack_12")].contains(&motion_kind) && frame < 2.0 {
 					MotionModule::change_motion(boma, Hash40::new("attack_12"), 2.0, 1.0, false, 0.0, false, false);
 			};
