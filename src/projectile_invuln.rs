@@ -33,16 +33,6 @@ pub fn projectile_invuln_master(fighter : &mut L2CFighterCommon) {
 					shield!(fighter, *MA_MSC_CMD_SHIELD_OFF, *COLLISION_KIND_REFLECTOR, 0, *FIGHTER_REFLECTOR_GROUP_HOMERUNBAT);
 				};
 			};
-		}else if fighter_kind == *FIGHTER_KIND_FALCO {
-			if [hash40("attack_air_f")].contains(&MotionModule::motion_kind(boma)) {
-				if MotionModule::frame(boma) >= 8.0 && MotionModule::frame(boma) < 37.0 {
-					acmd!(lua_state, {
-						sv_module_access::shield(MA_MSC_CMD_REFLECTOR, COLLISION_KIND_REFLECTOR, 0, hash40("top"), 7.0, 0.0, 5.5, 5.0, 0.0, 5.5, 15.5, dmg_mul, life_mul, reflector_max, false, speed_mul, FIGHTER_REFLECTOR_GROUP_HOMERUNBAT)
-					});
-				} else {
-					shield!(fighter, *MA_MSC_CMD_SHIELD_OFF, *COLLISION_KIND_REFLECTOR, 0, *FIGHTER_REFLECTOR_GROUP_HOMERUNBAT);
-				};
-			};
 		}else if fighter_kind == *FIGHTER_KIND_GANON {
 			if [hash40("special_lw")].contains(&MotionModule::motion_kind(boma)) {
 				if MotionModule::frame(boma) >= 7.0 && MotionModule::frame(boma) < 36.0 {
