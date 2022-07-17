@@ -1,9 +1,17 @@
-use smash::hash40;
-use smash::lib::lua_const::*;
+use smash::app::sv_animcmd::*;
+use smash::phx::Hash40;
 use smash::app::lua_bind::*;
+use smash::lib::lua_const::*;
+use smash::app::utility::get_kind;
+use smash::hash40;
 use smash::lua2cpp::*;
 use smashline::*;
 use smash_script::*;
+use smash::lib::{L2CValue, L2CAgent};
+use std::mem;
+use smash::app::*;
+use smash::phx::Vector3f;
+use crate::util::*;
 
 static mut SIDEB : [bool; 8] = [false; 8];
 static mut SPIN : [bool; 8] = [false; 8];
@@ -438,7 +446,7 @@ pub fn install() {
 		mario_ground_sideb,
 		mario_ground_sideb_eff,
 		mario_ground_sideb_snd,
-		mario_fireball,
+		mario_fireball
     );
     smashline::install_agent_frame_callbacks!(
         mario_frame
