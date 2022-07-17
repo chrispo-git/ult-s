@@ -616,8 +616,8 @@ unsafe fn zss_grab(fighter: &mut L2CAgentBase) {
 		frame(Frame=4)
 		FT_MOTION_RATE(FSM=1.0)
 		if(is_excute){
-			CATCH(ID=0, Bone=hash40("top"), Size=3.3, X=0.0, Y=8.0, Z=4.0, X2=0.0, Y2=8.0, Z2=7.4, Status=FIGHTER_STATUS_KIND_CAPTURE_PULLED, Ground_or_Air=COLLISION_SITUATION_MASK_G)
-			CATCH(ID=1, Bone=hash40("top"), Size=1.65, X=0.0, Y=8.0, Z=2.35, X2=0.0, Y2=8.0, Z2=9.05, Status=FIGHTER_STATUS_KIND_CAPTURE_PULLED, Ground_or_Air=COLLISION_SITUATION_MASK_A)
+			CATCH(ID=0, Bone=hash40("top"), Size=3.3, X=0.0, Y=8.0, Z=7.0, X2=0.0, Y2=8.0, Z2=13.4, Status=FIGHTER_STATUS_KIND_CAPTURE_PULLED, Ground_or_Air=COLLISION_SITUATION_MASK_G)
+			CATCH(ID=1, Bone=hash40("top"), Size=1.65, X=0.0, Y=8.0, Z=5.0, X2=0.0, Y2=8.0, Z2=16.05, Status=FIGHTER_STATUS_KIND_CAPTURE_PULLED, Ground_or_Air=COLLISION_SITUATION_MASK_A)
 		}
 		rust{
 			macros::game_CaptureCutCommon(fighter);
