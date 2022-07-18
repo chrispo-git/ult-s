@@ -9,13 +9,8 @@ use smash_script::*;
 use crate::util::*;
 
 static mut COUNTER_IS : [bool; 8] = [false; 8];
-static mut ENABLE_DOWNB_FORCE : [bool; 8] = [false; 8];
+static mut BAN_DOWNB : [bool; 8] = [false; 8];
 static mut ESK_CHARGE : [i32; 8] = [0; 8];
-static mut DOWNB_HOLD_DURATION : [i32; 8] = [0; 8];
-static MIN_DOWNB_RELEASE : i32 = 30;
-static DASH_FRAME_MAX : f32 = 12.0;
-static MIN_DOWNB_DASH : i32 = 25;
-static LATE_ARMOUR : i32 = 8;
 static mut ESK :  smash::phx::Vector3f =  smash::phx::Vector3f { x: 0.0, y: 0.0, z: 0.0 };
 
 #[acmd_script(
@@ -319,7 +314,7 @@ unsafe fn brawler_uair(fighter: &mut L2CAgentBase) {
 unsafe fn brawler_hoa(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
-		frame(Frame=8)
+		/*frame(Frame=8)
 		if(is_excute){
 			WorkModule::on_flag(Flag=FIGHTER_MIIFIGHTER_STATUS_WORK_ID_KUIUCHI_HEAD_FLAG_ENABLE_SPEED_X_FLAG)
 			ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=6.0, Angle=75, KBG=100, FKB=83, BKB=0, Size=3.0, X=0.0, Y=3.0, Z=8.0, X2=0.0, Y2=7.0, Z2=8.0, Hitlag=1.0, SDI=0.2, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=true, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
@@ -344,7 +339,8 @@ unsafe fn brawler_hoa(fighter: &mut L2CAgentBase) {
 		if(is_excute){
 			WorkModule::on_flag(Flag=FIGHTER_MIIFIGHTER_STATUS_WORK_ID_KUIUCHI_HEAD_FLAG_DISABLE_SPEED_X_FLAG)
 		}
-		FT_MOTION_RATE(FSM=0.9)
+		FT_MOTION_RATE(FSM=0.9)*/
+		//No Longer Needed
     });
 }
 #[acmd_script(
@@ -395,6 +391,27 @@ unsafe fn brawler_hoa_loop(fighter: &mut L2CAgentBase) {
 		frame(Frame=6)
 		if(is_excute){
 			ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=1.0, Angle=270, KBG=100, FKB=240, BKB=0, Size=7.0, X=0.0, Y=5.2, Z=-0.5, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.2, SDI=0.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=true, ShieldDamage=0, Trip=0.0, Rehit=2, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_HEAD)
+		}
+    });
+}
+#[acmd_script(
+    agent = "miifighter",
+    script =  "game_specialairlw1",
+    category = ACMD_GAME)]
+unsafe fn brawler_airdash(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=2)
+		if(is_excute){
+			SET_SPEED_EX(-0.7, 0, 0, KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN)
+		}
+		frame(Frame=6)
+		if(is_excute){
+			SET_SPEED_EX(3.0, 0.0, KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN)
+		}
+		frame(Frame=10)
+		if(is_excute){
+			SET_SPEED_EX(1.0, 0.0, KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN)
 		}
     });
 }
@@ -651,23 +668,38 @@ fn brawler_frame(fighter: &mut L2CFighterCommon) {
 		let last_frame_cancel = (end_frame-frame)-2.0;
 		let stick_x = ControlModule::get_stick_x(boma) * PostureModule::lr(boma);
 		if fighter_kind == *FIGHTER_KIND_MIIFIGHTER {
+			//HOA Replaced with Airdash
+			if status_kind == *FIGHTER_MIIFIGHTER_STATUS_KIND_SPECIAL_LW1_AIR {
+				BAN_DOWNB[ENTRY_ID] = true;
+				StatusModule::set_keep_situation_air(boma, true);
+				if frame >= 25.0 {
+					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL, true);
+				};
+				if frame >= 8.0 {
+					CancelModule::enable_cancel(boma);
+				};
+			};
+			if status_kind == *FIGHTER_MIIFIGHTER_STATUS_KIND_SPECIAL_LW1_GROUND {
+				if frame >= 2.0 {
+					StatusModule::change_status_request_from_script(boma, *FIGHTER_MIIFIGHTER_STATUS_KIND_SPECIAL_LW1_AIR, true);
+				};
+			};
+			if [hash40("special_lw1_loop")].contains(&MotionModule::motion_kind(boma)) {
+				StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL, true);
+			};
+			if situation_kind != *SITUATION_KIND_AIR {
+				BAN_DOWNB[ENTRY_ID] = false;
+			};
+			if BAN_DOWNB[ENTRY_ID] == true || situation_kind == *SITUATION_KIND_GROUND {
+				CAN_DOWNB[ENTRY_ID] = 1;
+			} else {
+				CAN_DOWNB[ENTRY_ID] = 0;
+			};
 			//HOA Special Kick 
 			if status_kind == *FIGHTER_MIIFIGHTER_STATUS_KIND_SPECIAL_LW2_KICK_LANDING && WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_CUSTOMIZE_SPECIAL_LW_NO) == 0{
 				if MotionModule::frame(boma) > 12.0 {
 					CancelModule::enable_cancel(boma);
 				};
-			};
-			if [*FIGHTER_MIIFIGHTER_STATUS_KIND_SPECIAL_LW1_AIR, /* *FIGHTER_STATUS_KIND_ATTACK_S3, *FIGHTER_STATUS_KIND_ATTACK_AIR*/].contains(&status_kind) {
-				if ENABLE_DOWNB_FORCE[ENTRY_ID] == true {
-					if situation_kind == *SITUATION_KIND_AIR {
-						MotionModule::change_motion(boma, smash::phx::Hash40::new("special_air_lw1"), 0.0, 1.0, false, 0.0, false, false);
-					} else {
-						MotionModule::change_motion(boma, smash::phx::Hash40::new("special_lw1"), 0.0, 1.0, false, 0.0, false, false);
-					};
-					ENABLE_DOWNB_FORCE[ENTRY_ID] = false;
-				};
-			} else {
-				ENABLE_DOWNB_FORCE[ENTRY_ID] = false;
 			};
 			//CT Special Kick Bounce
 			if status_kind == *FIGHTER_MIIFIGHTER_STATUS_KIND_SPECIAL_LW2_KICK && WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_CUSTOMIZE_SPECIAL_LW_NO) == 2 && AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_HIT){
@@ -847,7 +879,8 @@ pub fn install() {
 		brawler_sak_land,
 		brawler_shotput,
 		brawler_grounded_onslaught,
-		brawler_grounded_onslaught_start
+		brawler_grounded_onslaught_start,
+		brawler_airdash
     );
     smashline::install_agent_frames!(
         brawler_frame
