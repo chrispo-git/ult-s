@@ -344,6 +344,9 @@ pub fn faf_change_master(fighter : &mut L2CFighterCommon) {
 			if motion_kind == hash40("attack_lw3") && frame >= 26.0 {
 				CancelModule::enable_cancel(boma);
 			};
+			if motion_kind == hash40("throw_lw") && frame >= 39.0 {
+				CancelModule::enable_cancel(boma);
+			};
 			if motion_kind == hash40("attack_dash") && frame >= 30.0 {
 				CancelModule::enable_cancel(boma);
 			};
