@@ -435,11 +435,12 @@ unsafe fn sword_ss_rise(fighter: &mut L2CAgentBase) {
 unsafe fn sword_airgrab_start(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
-			FT_MOTION_RATE(FSM=1.5)
+			FT_MOTION_RATE(FSM=2.2)
 			frame(Frame=6)
 			FT_MOTION_RATE(FSM=1)
 			if(is_excute){
-				ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=1.0, Angle=368, KBG=100, FKB=20, BKB=0, Size=4.0, X=0.0, Y=6.0, Z=13.0, X2=0.0, Y2=6.0, Z2=6.0, Hitlag=0.0, SDI=0.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=hash40("no"), Trip=-1.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=true, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_fire"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_FIRE, Type=ATTACK_REGION_NONE)
+				SET_SPEED_EX(-0.0, 0.0, KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN)
+				ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=1.0, Angle=368, KBG=100, FKB=20, BKB=0, Size=4.0, X=0.0, Y=6.0, Z=13.0, X2=0.0, Y2=6.0, Z2=6.0, Hitlag=0.0, SDI=0.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=hash40("no"), Trip=-1.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=true, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_FIGHTER, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_fire"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_FIRE, Type=ATTACK_REGION_NONE)
 				AttackModule::set_attack_height_all(smash::app::AttackHeight(*ATTACK_HEIGHT_HIGH), false)
 				rust {
 					let hit = smash::phx::Vector2f { x: 8.0, y: 0.0 };
@@ -535,7 +536,7 @@ unsafe fn sword_airgrab_end(fighter: &mut L2CAgentBase) {
 			if(is_excute){
 				SET_SPEED_EX(-0.8, 0.7, KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN)
 				AttackModule::clear_all()
-				ATTACK(ID=0, Part=0, Bone=hash40("havel"), Damage=10.0, Angle=361, KBG=90, FKB=0, BKB=60, Size=9.0, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=0.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=-1.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_fire"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_FIRE, Type=ATTACK_REGION_NONE)
+				ATTACK(ID=0, Part=0, Bone=hash40("havel"), Damage=10.0, Angle=50, KBG=80, FKB=0, BKB=40, Size=9.0, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=0.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=-1.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_fire"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_FIRE, Type=ATTACK_REGION_NONE)
 			}
 			wait(Frames=6)
 			if(is_excute){
