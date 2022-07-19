@@ -10,6 +10,7 @@ use crate::util::*;
 
 static mut COUNTER_IS : [bool; 8] = [false; 8];
 static mut BAN_DOWNB : [bool; 8] = [false; 8];
+static mut DOWNB_COOLDOWN : [i32; 8] = [0; 8];
 static mut ESK_CHARGE : [i32; 8] = [0; 8];
 static mut ESK :  smash::phx::Vector3f =  smash::phx::Vector3f { x: 0.0, y: 0.0, z: 0.0 };
 
@@ -415,6 +416,19 @@ unsafe fn brawler_airdash(fighter: &mut L2CAgentBase) {
 		}
     });
 }
+#[acmd_script(
+    agent = "miifighter",
+    script =  "effect_specialairlw1",
+    category = ACMD_EFFECT)]
+unsafe fn brawler_airdash_eff(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=6)
+		if(is_excute){
+			LANDING_EFFECT(hash40("sys_atk_smoke"), hash40("top"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false)
+		}
+    });
+}
 	
 #[acmd_script(
     agent = "miifighter",
@@ -671,13 +685,17 @@ fn brawler_frame(fighter: &mut L2CFighterCommon) {
 			//HOA Replaced with Airdash
 			if status_kind == *FIGHTER_MIIFIGHTER_STATUS_KIND_SPECIAL_LW1_AIR {
 				BAN_DOWNB[ENTRY_ID] = true;
+				DOWNB_COOLDOWN[ENTRY_ID] = 30;
 				StatusModule::set_keep_situation_air(boma, true);
-				if frame >= 25.0 {
+				if frame >= last_frame_cancel {
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL, true);
 				};
 				if frame >= 8.0 {
 					CancelModule::enable_cancel(boma);
 				};
+			};
+			if DOWNB_COOLDOWN[ENTRY_ID] > 0 {
+				DOWNB_COOLDOWN[ENTRY_ID] -= 1;
 			};
 			if status_kind == *FIGHTER_MIIFIGHTER_STATUS_KIND_SPECIAL_LW1_GROUND {
 				if frame >= 2.0 {
@@ -690,7 +708,7 @@ fn brawler_frame(fighter: &mut L2CFighterCommon) {
 			if situation_kind != *SITUATION_KIND_AIR {
 				BAN_DOWNB[ENTRY_ID] = false;
 			};
-			if BAN_DOWNB[ENTRY_ID] == true || situation_kind == *SITUATION_KIND_GROUND {
+			if BAN_DOWNB[ENTRY_ID] == true || situation_kind == *SITUATION_KIND_GROUND || DOWNB_COOLDOWN[ENTRY_ID] > 0 {
 				CAN_DOWNB[ENTRY_ID] = 1;
 			} else {
 				CAN_DOWNB[ENTRY_ID] = 0;
@@ -880,7 +898,8 @@ pub fn install() {
 		brawler_shotput,
 		brawler_grounded_onslaught,
 		brawler_grounded_onslaught_start,
-		brawler_airdash
+		brawler_airdash,
+		brawler_airdash_eff
     );
     smashline::install_agent_frames!(
         brawler_frame
