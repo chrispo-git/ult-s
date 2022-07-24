@@ -401,11 +401,13 @@ pub fn bone_rot(fighter : &mut L2CFighterCommon) {
 		bone_const(boma, *FIGHTER_KIND_SAMUSD, hash40("attack_air_f"), hash40("rot"), 0.0, 47.0, 22.5, 22.5, 0.0, 0.0, 0.0, 0.0);
 		bone_const(boma, *FIGHTER_KIND_SAMUSD, hash40("attack_air_f"), hash40("rot"), 47.0, 59.0, 22.5, 0.0, 0.0, 0.0, 0.0, 0.0);
 		
+		/*
 		//Dsamus Dair reverse
 		bone_const(boma, *FIGHTER_KIND_SAMUSD, hash40("attack_air_lw"), hash40("rot"), 0.0, 31.0, 0.0, 0.0, 180.0, 180.0, 0.0, 0.0);
 		bone_const(boma, *FIGHTER_KIND_SAMUSD, hash40("attack_air_lw"), hash40("rot"), 31.0, 60.0, 0.0, 0.0, 180.0, 0.0, 0.0, 0.0);
 		bone_const(boma, *FIGHTER_KIND_SAMUSD, hash40("landing_air_lw"), hash40("rot"), 0.0, 15.0, 0.0, 0.0, 180.0, 180.0, 0.0, 0.0);
 		bone_const(boma, *FIGHTER_KIND_SAMUSD, hash40("landing_air_lw"), hash40("rot"), 15.0, 59.0, 0.0, 0.0, 180.0, 0.0, 0.0, 0.0);
+		*/
 		
 		//Falcon nair angle down
 		bone_const(boma, *FIGHTER_KIND_CAPTAIN, hash40("attack_air_n"), hash40("rot"), 0.0, 24.0, 10.0, 10.0, 0.0, 0.0, 0.0, 0.0);
@@ -579,7 +581,8 @@ pub(crate) fn is_edge_cancel(fighter_kind : i32, status_kind : i32) -> bool {
 		[*FIGHTER_KIND_CAPTAIN, *FIGHTER_STATUS_KIND_ATTACK_DASH],
 		[*FIGHTER_KIND_RIDLEY, *FIGHTER_STATUS_KIND_LANDING_FALL_SPECIAL],
 		[*FIGHTER_KIND_RIDLEY, *FIGHTER_STATUS_KIND_ATTACK_DASH],
-		[*FIGHTER_KIND_RICHTER, *FIGHTER_STATUS_KIND_ATTACK_LW3]
+		[*FIGHTER_KIND_RICHTER, *FIGHTER_STATUS_KIND_ATTACK_LW3],
+		[*FIGHTER_KIND_SAMUS, *FIGHTER_STATUS_KIND_ATTACK_LW3]
 	];
 	for i in &edge_cancel {
 		if fighter_kind == i[0] && status_kind == i[1] {
@@ -775,6 +778,9 @@ pub fn sword_size(fighter : &mut L2CFighterCommon) {
 unsafe fn init_settings_replace(module_accessor: &mut smash::app::BattleObjectModuleAccessor, situation_kind: i32, arg3: i32, arg4: u64, ground_cliff_check_kind: u64, arg6: bool, arg7: i32, arg8: i32, arg9: i32, arg10: i32) -> u64 {
     let status_kind = StatusModule::status_kind(module_accessor);
     let fighter_kind = smash::app::utility::get_kind(module_accessor);
+    if smash::app::utility::get_category(module_accessor) != *BATTLE_OBJECT_CATEGORY_FIGHTER {
+        return original!()(module_accessor, situation_kind, arg3, arg4, ground_cliff_check_kind, arg6, arg7, arg8, arg9, arg10);
+    }
     if is_edge_cancel(fighter_kind, status_kind) && situation_kind == SITUATION_KIND_GROUND {
         original!()(module_accessor, situation_kind, arg3, 1 as u64, ground_cliff_check_kind, arg6, arg7, arg8, arg9, arg10)
     } 
