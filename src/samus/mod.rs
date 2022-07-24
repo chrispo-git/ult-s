@@ -209,6 +209,69 @@ unsafe fn samus_zair(fighter: &mut L2CAgentBase) {
 		}
     });
 }		
+#[acmd_script(
+    agent = "samus",
+    script =  "game_attackhi3",
+    category = ACMD_GAME)]
+unsafe fn samus_utilt(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=8)
+		if(is_excute){
+			ATTACK(ID=0, Part=0, Bone=hash40("handr"), Damage=11.0, Angle=361, KBG=100, FKB=0, BKB=40, Size=5.3, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
+			ATTACK(ID=1, Part=0, Bone=hash40("armr"), Damage=11.0, Angle=361, KBG=100, FKB=0, BKB=40, Size=4.3, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
+			ATTACK(ID=2, Part=0, Bone=hash40("shoulderr"), Damage=11.0, Angle=361, KBG=100, FKB=0, BKB=40, Size=4.3, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
+			AttackModule::set_attack_height_all(smash::app::AttackHeight(*ATTACK_HEIGHT_LOW), false)
+			HIT_NODE(hash40("shoulderr"), HIT_STATUS_INVINCIBLE)
+			HIT_NODE(hash40("armr"), HIT_STATUS_INVINCIBLE)
+		}
+		frame(Frame=14)
+		if(is_excute){
+			HIT_NODE(hash40("shoulderr"), HIT_STATUS_NORMAL)
+			HIT_NODE(hash40("armr"), HIT_STATUS_NORMAL)
+			AttackModule::clear_all()
+		}
+    });
+}
+#[acmd_script(
+    agent = "samus",
+    script =  "effect_attackhi3",
+    category = ACMD_EFFECT)]
+unsafe fn samus_utilt_eff(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=8)
+		if(is_excute){
+			EFFECT_FOLLOW(hash40("sys_attack_arc_b"), hash40("top"), 1, 11, -2, 1.7, 10, 70, 1.4, true)
+		}
+    });
+}
+#[acmd_script(
+    agent = "samus_missile",
+    script =  "game_homing",
+    category = ACMD_GAME)]
+unsafe fn samus_homing(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		if(is_excute){
+			ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=11.0, Angle=0, KBG=25, FKB=0, BKB=26, Size=2.4, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.3, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_SPEED, SetWeight=false, ShieldDamage=1, Trip=0.0, Rehit=0, Reflectable=true, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_fire"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_FIRE, Type=ATTACK_REGION_OBJECT)
+			AttackModule::enable_safe_pos()
+		}
+    });
+}
+#[acmd_script(
+    agent = "samus_supermissile",
+    scripts =  ["game_ready", "game_straight"],
+    category = ACMD_GAME)]
+unsafe fn samus_super(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		if(is_excute){
+			ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=15.0, Angle=65, KBG=65, FKB=0, BKB=50, Size=2.5, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.3, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_SPEED, SetWeight=false, ShieldDamage=5, Trip=0.0, Rehit=0, Reflectable=true, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_fire"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_BOMB, Type=ATTACK_REGION_OBJECT)
+			AttackModule::enable_safe_pos()
+		}
+    });
+}
 #[fighter_frame( agent = FIGHTER_KIND_SAMUS )]
 fn samus_frame(fighter: &mut L2CFighterCommon) {
     unsafe {
@@ -234,7 +297,11 @@ pub fn install() {
 		samus_dtilt,
 		samus_dtilt_eff,
 		samus_dtilt_snd,
-		samus_dtilt_expr
+		samus_dtilt_expr,
+		samus_utilt,
+		samus_utilt_eff,
+		samus_homing,
+		samus_super
     );
 	smashline::install_agent_frames!(samus_frame);
 }
