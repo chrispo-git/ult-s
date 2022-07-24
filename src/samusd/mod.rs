@@ -81,17 +81,19 @@ fn samusd_frame(fighter: &mut L2CFighterCommon) {
 			};
 			if MotionModule::frame(boma) > 25.0 {
 				IS_ALLOWED[ENTRY_ID] = false;
+				CancelModule::enable_cancel(boma);
 			};
 			MotionModule::set_rate(fighter.module_accessor, 1.5);
 		};
+		/*
 		if IS_ALLOWED[ENTRY_ID] == false {
 			if status_kind == *FIGHTER_SAMUS_STATUS_KIND_SPECIAL_S2A || status_kind == *FIGHTER_SAMUS_STATUS_KIND_SPECIAL_S1A {
-					StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_SAMUS_STATUS_KIND_SPECIAL_N_JUMP_CANCEL, true);
+					StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_FALL, true);
 			};
 			if status_kind == *FIGHTER_SAMUS_STATUS_KIND_SPECIAL_S2G || status_kind == *FIGHTER_SAMUS_STATUS_KIND_SPECIAL_S1G {
 					StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_WAIT, true);
 			};
-		};
+		};*/
 		if status_kind == *FIGHTER_SAMUS_STATUS_KIND_SPECIAL_S2A{
 			StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_SAMUS_STATUS_KIND_SPECIAL_S1A, true);
 		};
@@ -107,8 +109,9 @@ fn samusd_frame(fighter: &mut L2CFighterCommon) {
 			StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_WAIT, false);
 		};
 		if motion_kind == hash40("attack_lw4") {
-			if frame >= 74.0 {
+			if frame >= 70.0 {
 					MotionModule::change_motion(boma, Hash40::new("wait_4"), 0.0, 1.0, false, 0.0, false, false);
+					StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_WAIT, false);
 			};
 		};
 		if motion_kind == hash40("wait_4") {
@@ -262,7 +265,7 @@ unsafe fn dsamus_da(fighter: &mut L2CAgentBase) {
 		frame(Frame=8)
 		if(is_excute){
 			ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=1.0, Angle=0, KBG=100, FKB=20, BKB=0, Size=4.0, X=0.0, Y=9.0, Z=6.0, X2=0.0, Y2=9.0, Z2=5.0, Hitlag=0.8, SDI=0.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=3, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_G, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_elec"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_ELEC, Type=ATTACK_REGION_BODY)
-			ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=1.0, Angle=367, KBG=100, FKB=50, BKB=0, Size=4.0, X=0.0, Y=9.0, Z=6.0, X2=0.0, Y2=9.0, Z2=5.0, Hitlag=0.8, SDI=0.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=3, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_A, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_elec"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_ELEC, Type=ATTACK_REGION_BODY)
+			ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=1.0, Angle=367, KBG=100, FKB=20, BKB=0, Size=4.0, X=0.0, Y=9.0, Z=6.0, X2=0.0, Y2=9.0, Z2=5.0, Hitlag=0.8, SDI=0.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=3, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_A, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_elec"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_ELEC, Type=ATTACK_REGION_BODY)
 		}
 		frame(Frame=14)
 		if(is_excute){
@@ -280,20 +283,57 @@ unsafe fn dsamus_da(fighter: &mut L2CAgentBase) {
 }
 #[acmd_script(
     agent = "samusd",
+    script =  "game_attackairlw",
+    category = ACMD_GAME)]
+unsafe fn dsamus_dair(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=5)
+		if(is_excute){
+			WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
+		}
+		frame(Frame=16)
+		if(is_excute){
+			ATTACK(ID=0, Part=0, Bone=hash40("armr"), Damage=13.0, Angle=361, KBG=90, FKB=0, BKB=6, Size=3.0, X=0.0, Y=6.5, Z=0.5, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_PUNCH)
+			ATTACK(ID=1, Part=0, Bone=hash40("arml"), Damage=13.0, Angle=361, KBG=90, FKB=0, BKB=6, Size=3.0, X=0.0, Y=6.5, Z=0.5, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_PUNCH)
+			ATTACK(ID=2, Part=0, Bone=hash40("armr"), Damage=13.0, Angle=270, KBG=90, FKB=0, BKB=6, Size=6.0, X=0.0, Y=6.5, Z=0.5, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_PUNCH)
+			ATTACK(ID=3, Part=0, Bone=hash40("arml"), Damage=13.0, Angle=270, KBG=90, FKB=0, BKB=6, Size=6.0, X=0.0, Y=6.5, Z=0.5, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_PUNCH)
+		}
+		wait(Frames=2)
+		if(is_excute){
+			AttackModule::clear_all()
+		}
+		frame(Frame=43)
+		if(is_excute){
+			WorkModule::off_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
+		}
+    });
+}		
+#[acmd_script(
+    agent = "samusd",
     script =  "effect_attackairlw",
     category = ACMD_EFFECT)]
 unsafe fn dsamus_dair_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
-		frame(Frame=9)
 		if(is_excute){
-			EFFECT(hash40("sys_smash_flash"), hash40("armr"), 4.289, -0.272, -0.135, 0, 0, 0, 0.8, 0, 0, 0, 0, 0, 360, true)
-			LAST_EFFECT_SET_RATE(1.2)
+			EFFECT_FOLLOW(hash40("samusd_win3_aura"), hash40("arml"), 0, 0, 0, 0, 0, 0, 1.9, true)
+			EFFECT_FOLLOW(hash40("samusd_win3_aura"), hash40("handl"), 0, 0, 0, 0, 0, 0, 1.9, true)
+			EFFECT_FOLLOW(hash40("samusd_win3_aura"), hash40("armr"), 0, 0, 0, 0, 0, 0, 1.9, true)
+			EFFECT_FOLLOW(hash40("samusd_win3_aura"), hash40("handr"), 0, 0, 0, 0, 0, 0, 1.9, true)
+			EFFECT_FOLLOW(hash40("samusd_win3_aura"), hash40("shoulderl"), 0, 0, 0, 0, 0, 0, 1.9, true)
+			EFFECT_FOLLOW(hash40("samusd_win3_aura"), hash40("shoulderr"), 0, 0, 0, 0, 0, 0, 1.9, true)
+			EFFECT_FOLLOW(hash40("samusd_win3_aura"), hash40("clavicler"), 0, 0, 0, 0, 0, 0, 1.9, true)
+			EFFECT_FOLLOW(hash40("samusd_win3_aura"), hash40("claviclel"), 0, 0, 0, 0, 0, 0, 1.9, true)
 		}
-		frame(Frame=18)
+		frame(Frame=15)
 		if(is_excute){
-			EFFECT_FOLLOW(0x11433b2c0du64, hash40("top"), 0, 12.5, 0, 180, -200, 90, 0.85, true)
-			LAST_EFFECT_SET_RATE(1.1)
+			EFFECT_FOLLOW(hash40("sys_attack_speedline"), hash40("top"), 0, 15, 0, 90, 0, 0, 1.7, true)
+			LAST_EFFECT_SET_COLOR(3.0/255.0, 194.0/255.0, 252.0/255.0)
+		}
+		frame(Frame=37)
+		if(is_excute){
+			EFFECT_OFF_KIND(hash40("samusd_win3_aura"), false, true)
 		}
     });
 }
@@ -389,7 +429,7 @@ unsafe fn dsamus_jab_eff(fighter: &mut L2CAgentBase) {
 		}
 		frame(Frame=3)
 		if(is_excute){
-			EFFECT_FOLLOW(hash40("sys_attack_speedline"), hash40("top"), 0, 25, 0, 70, 0, 0, 1.2, true)
+			EFFECT_FOLLOW(hash40("sys_attack_speedline"), hash40("top"), 0, 25, 0, 70, 0, 0, 1.3, true)
 			LAST_EFFECT_SET_COLOR(3.0/255.0, 194.0/255.0, 252.0/255.0)
 		}
 		frame(Frame=14)
@@ -569,6 +609,16 @@ unsafe fn dsamus_fair_snd(fighter: &mut L2CAgentBase) {
 		}
     });
 }	
+#[acmd_script(
+    agent = "samusd",
+    scripts =  ["effect_special", "effect_specialair"],
+    category = ACMD_EFFECT)]
+unsafe fn dsamus_special_eff(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {	
+	
+    });
+}		
 	
 #[acmd_script(
     agent = "samusd_missile",
@@ -646,6 +696,16 @@ unsafe fn dsamus_downb(fighter: &mut L2CAgentBase) {
 	
     });
 }	
+#[acmd_script(
+    agent = "samusd",
+    scripts =  ["sound_squat", "sound_squatrv"],
+    category = ACMD_SOUND)]
+unsafe fn dsamus_crouch_sound(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		
+    });
+}
 		
 pub fn install() {
     smashline::install_acmd_scripts!(
@@ -663,6 +723,7 @@ pub fn install() {
 		dsamus_da,
 		dsamus_da_eff,
 		dsamus_da_snd,
+		dsamus_dair,
 		dsamus_dair_eff,
 		dsamus_downb,
 		expr_dsamus_downb,
@@ -670,7 +731,9 @@ pub fn install() {
 		dsamus_dsmash,
 		dsamus_dsmash_eff,
 		dsamus_dsmash_snd,
-		dsamus_dsmash_expr
+		dsamus_dsmash_expr,
+		dsamus_special_eff,
+		dsamus_crouch_sound
 	);
     smashline::install_agent_frames!(
         samusd_frame,
