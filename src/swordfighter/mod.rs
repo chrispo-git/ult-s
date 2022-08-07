@@ -435,7 +435,7 @@ unsafe fn sword_ss_rise(fighter: &mut L2CAgentBase) {
 unsafe fn sword_airgrab_start(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
-			FT_MOTION_RATE(FSM=2.2)
+			FT_MOTION_RATE(FSM=1.5)
 			frame(Frame=6)
 			FT_MOTION_RATE(FSM=1)
 			if(is_excute){
