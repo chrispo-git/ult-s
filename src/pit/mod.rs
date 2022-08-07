@@ -299,6 +299,23 @@ unsafe fn pit_sideb(fighter: &mut L2CAgentBase) {
 		FT_MOTION_RATE(FSM=0.83)
     });
 }			
+#[acmd_script(
+    agent = "pit",
+    script =  "game_specialsend",
+    category = ACMD_GAME)]
+unsafe fn pit_sideb_ground(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=2)
+		if(is_excute){
+			ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=11.0, Angle=80, KBG=72, FKB=0, BKB=100, Size=6.0, X=0.0, Y=4.0, Z=9.0, X2=0.0, Y2=10.0, Z2=9.0, Hitlag=2.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_THRU, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=10, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_PUNCH)
+		}
+		frame(Frame=12)
+		if(is_excute){
+			AttackModule::clear_all()
+		}
+    });
+}			
 #[fighter_frame_callback]
 pub fn pit_arrow_land_cancel(fighter : &mut L2CFighterCommon) {
     unsafe {	
@@ -349,7 +366,8 @@ pub fn install() {
 		pit_uair,
 		pit_grab,
 		pit_dair,
-		pit_sideb
+		pit_sideb,
+		pit_sideb_ground
     );
 	smashline::install_agent_frame_callbacks!(pit_arrow_land_cancel);
 }
