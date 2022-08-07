@@ -12,9 +12,9 @@ pub fn projectile_invuln_master(fighter : &mut L2CFighterCommon) {
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
 		let fighter_kind = smash::app::utility::get_kind(boma);
 		let lua_state = fighter.lua_state_agent;
-		let life_mul = 0.05;
-		let speed_mul = 0.05;
-		let dmg_mul = 0.005;
+		let life_mul = 0.0;
+		let speed_mul = 1.0;
+		let dmg_mul = 0.0;
 		let reflector_max = 500.0;
 		//Example Character - Super Fucking Luigi
 		if fighter_kind == *FIGHTER_KIND_LUIGI {
