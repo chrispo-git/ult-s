@@ -64,7 +64,7 @@ pub fn once_per_fighter_frame(fighter : &mut L2CFighterCommon) {
 }
 //Edge Cancel List
 pub(crate) fn can_charge(fighter_kind : i32) -> bool {
-	let input_list = [*FIGHTER_KIND_PITB, *FIGHTER_KIND_MARIO, *FIGHTER_KIND_MARIOD, *FIGHTER_KIND_JACK, *FIGHTER_KIND_KAMUI, *FIGHTER_KIND_CAPTAIN, *FIGHTER_KIND_PACKUN, *FIGHTER_KIND_LINK];
+	let input_list = [*FIGHTER_KIND_PITB, *FIGHTER_KIND_MARIO, *FIGHTER_KIND_MARIOD, *FIGHTER_KIND_JACK, *FIGHTER_KIND_CAPTAIN, *FIGHTER_KIND_PACKUN, *FIGHTER_KIND_LINK];
 	if input_list.contains(&fighter_kind){
 		return true
 	} else {
