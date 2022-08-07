@@ -1,10 +1,17 @@
-use smash::hash40;
+use smash::app::sv_animcmd::*;
+use smash::phx::Hash40;
 use smash::app::lua_bind::*;
 use smash::lib::lua_const::*;
+use smash::app::utility::get_kind;
+use smash::hash40;
 use smash::lua2cpp::*;
 use smashline::*;
-use smash::phx::Hash40;
 use smash_script::*;
+use smash::lib::{L2CValue, L2CAgent};
+use std::mem;
+use smash::app::*;
+use smash::phx::Vector3f;
+use crate::util::*;
 static mut LIGHTSPEED :  smash::phx::Vector3f =  smash::phx::Vector3f { x: 0.0, y: 6.5, z: 0.0 };
 static mut LIGHTSPEED_ROT :  smash::phx::Vector3f =  smash::phx::Vector3f { x: 0.0, y: 180.0, z: 0.0 };
 use smash::phx::Vector2f;
@@ -357,7 +364,7 @@ unsafe fn sonic_da(fighter: &mut L2CAgentBase) {
 			ATTACK(ID=1, Part=0, Bone=hash40("kneel"), Damage=6.0, Angle=70, KBG=60, FKB=0, BKB=96, Size=4.2, X=0.5, Y=0.0, Z=0.5, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
 			ATK_SET_SHIELD_SETOFF_MUL_arg3(ID1=0, ID2=1, ShieldstunMul=1.05)
 		}
-		frame(Frame=21)
+		frame(Frame=16)
 		if(is_excute){
 			AttackModule::clear_all()
 		}
@@ -536,13 +543,21 @@ unsafe fn sonic_rapidjab(fighter: &mut L2CAgentBase) {
 unsafe fn sonic_rapidjab_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
-		for(4 Iterations){
+		for(2 Iterations){
 			if(is_excute){
-				EFFECT(hash40("sys_attack_impact"), hash40("havel"), 0, 0, 0, 0, 0, 0, 0.9, 0, 0, 0, 0, 0, 0, false)
+				EFFECT(hash40("sys_attack_impact"), hash40("top"), 15.5, 9.5, 0, 0, 0, 0, 0.9, 0, 0, 0, 0, 0, 0, false)
 			}
 			wait(Frames=1)
 			if(is_excute){
-				EFFECT(hash40("sys_attack_impact"), hash40("haver"), 0, 0, 0, 0, 0, 0, 0.9, 0, 0, 0, 0, 0, 0, false)
+				EFFECT(hash40("sys_attack_impact"), hash40("top"), 11.5, 3.5, 0, 0, 0, 0, 0.9, 0, 0, 0, 0, 0, 0, false)
+			}
+			wait(Frames=1)
+			if(is_excute){
+				EFFECT(hash40("sys_attack_impact"), hash40("top"), 17.5, 3.5, 0, 0, 0, 0, 0.9, 0, 0, 0, 0, 0, 0, false)
+			}
+			wait(Frames=1)
+			if(is_excute){
+				EFFECT(hash40("sys_attack_impact"), hash40("top"), 7.5, 9.5, 0, 0, 0, 0, 0.9, 0, 0, 0, 0, 0, 0, false)
 			}
 			wait(Frames=1)
 		}
@@ -582,6 +597,106 @@ unsafe fn sonic_rapidjabend(fighter: &mut L2CAgentBase) {
 		}
     });
 }	
+#[acmd_script(
+    agent = "sonic",
+    script =  "game_attackairlw",
+    category = ACMD_GAME)]
+unsafe fn sonic_dair(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=3)
+		if(is_excute){
+			WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
+		}
+		frame(Frame=13)
+		if(is_excute){
+			ATTACK(ID=0, Part=0, Bone=hash40("kneel"), Damage=11.0, Angle=300, KBG=100, FKB=0, BKB=25, Size=5.0, X=0.0, Y=0.0, Z=0.0,  X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.15, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_A, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
+			ATTACK(ID=1, Part=0, Bone=hash40("footl"), Damage=11.0, Angle=300, KBG=100, FKB=0, BKB=25, Size=5.0, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.15, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_G, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
+		}
+		frame(Frame=19)
+		if(is_excute){
+			AttackModule::clear_all()
+		}
+		frame(Frame=43)
+		if(is_excute){
+			WorkModule::off_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
+		}
+    });
+}	
+#[acmd_script(
+    agent = "sonic",
+    script =  "effect_attackairlw",
+    category = ACMD_EFFECT)]
+unsafe fn sonic_dair_eff(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=12)
+		if(is_excute){
+			EFFECT_FOLLOW(hash40("sys_attack_arc"), hash40("top"), -2, 5, 0, -60, 40, -130, 0.95, true)
+			LAST_EFFECT_SET_COLOR(1.5, 0.0, 0.0)
+		}
+		frame(Frame=19)
+		if(is_excute){
+			EFFECT_OFF_KIND(hash40("sys_attack_arc"), true, true)
+		}
+    });
+}
+#[acmd_script(
+    agent = "sonic",
+    script =  "expression_attackairlw",
+    category = ACMD_EXPRESSION)]
+unsafe fn sonic_dair_expr(fighter: &mut L2CAgentBase) {
+			let lua_state = fighter.lua_state_agent;
+			if macros::is_excute(fighter) {
+				ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("sonic_talkcenter"), false);
+				ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("sonic_talk"), false);
+				ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("sonic_talkcenterflip"), false);
+				ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("sonic_talkflip"), false);
+				ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("sonic_facen"), true);
+			};
+			frame(fighter.lua_state_agent, 42.0);
+			if macros::is_excute(fighter) {
+				ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("sonic_talkcenter"), false);
+				ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("sonic_talk"), false);
+				ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("sonic_talkcenterflip"), false);
+				ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("sonic_talkflip"), false);
+				ModelModule::set_mesh_visibility(fighter.module_accessor, Hash40::new("sonic_facen"), true);
+			};
+}
+#[acmd_script(
+    agent = "sonic",
+    script =  "sound_attackairlw",
+    category = ACMD_SOUND)]
+unsafe fn sonic_dair_snd(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=12)
+		if(is_excute){
+			PLAY_SE(hash40("se_sonic_smash_s02"))
+			PLAY_SEQUENCE(hash40("seq_sonic_rnd_attack"))
+		}
+    });
+}
+#[acmd_script(
+    agent = "sonic",
+    script =  "expression_landingairlw",
+    category = ACMD_EXPRESSION)]
+unsafe fn sonic_dair_land_expr(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+}
+#[acmd_script(
+    agent = "sonic",
+    script =  "sound_landingairlw",
+    category = ACMD_SOUND)]
+unsafe fn sonic_dair_land_snd(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		if(is_excute){
+			PLAY_LANDING_SE(hash40("se_sonic_landing02"))
+		}
+    });
+}
+
 #[fighter_frame_callback]
 pub fn sonic(fighter : &mut L2CFighterCommon) {
     unsafe {
@@ -769,7 +884,13 @@ pub fn install() {
 		sonic_rapidjab,
 		sonic_rapidjab_eff,
 		sonic_rapidjab_snd,
-		sonic_rapidjabend
+		sonic_rapidjabend,
+		sonic_dair,
+		sonic_dair_eff,
+		sonic_dair_snd,
+		sonic_dair_land_expr,
+		sonic_dair_land_snd,
+		sonic_dair_expr
     );
 	smashline::install_agent_frame_callbacks!(sonic);
 }
