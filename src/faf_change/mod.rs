@@ -496,6 +496,13 @@ pub fn faf_change_master(fighter : &mut L2CFighterCommon) {
 					MotionModule::set_rate(boma, 1.0);
 				};
 			};
+		}else if fighter_kind == *FIGHTER_KIND_PITB {
+			if [hash40("attack_air_hi")].contains(&motion_kind) && frame >= 36.0 {
+				CancelModule::enable_cancel(boma);
+			};
+			if [hash40("attack_air_n")].contains(&motion_kind) && frame >= 42.0 {
+				CancelModule::enable_cancel(boma);
+			};
 		}else if fighter_kind == *FIGHTER_KIND_PIKMIN {
 			if motion_kind == hash40("attack_lw3") && frame >= 25.0 {
 				CancelModule::enable_cancel(boma);
