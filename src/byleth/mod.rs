@@ -439,9 +439,21 @@ unsafe fn byleth_arrow_effect(fighter: &mut L2CAgentBase) {
     acmd!(lua_state, {
 		for(10 Iterations){
 			if(is_excute){
-				EFFECT_FOLLOW(hash40("sys_fireflower_shot"), hash40("top"), 0, 0, 0, 0, 0, 0, 1, true)
+				rust {
+					let scale = smash::phx::Vector3f { x: 0.75, y: 0.75, z: 0.75};
+					EffectModule::set_scale_last(fighter.module_accessor, &scale);
+				}
+				EFFECT(hash40("sys_fireflower_shot"), hash40("top"), 0, 0, 0, 0, 0, 0, 1.25, 0, 0, 0, 0, 0, 0, true)
+				EffectModule::set_rate_last(0.75)
 			}
 			wait(Frames=1)
+		}
+		wait(Frames=1)
+		if(is_excute){
+			rust {
+				let scale = smash::phx::Vector3f { x: 0.75, y: 0.75, z: 0.75};
+				EffectModule::set_scale_last(fighter.module_accessor, &scale);
+			}
 		}
 	});
 }
@@ -453,7 +465,7 @@ unsafe fn byleth_arrow(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
 		if(is_excute){
-			ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=9.0, Angle=361, KBG=78, FKB=0, BKB=33, Size=4.0, X=0.0, Y=0.0, Z=-1.5, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.8, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=5, Trip=0.0, Rehit=0, Reflectable=true, Absorbable=true, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_fire"), SFXLevel=ATTACK_SOUND_LEVEL_L,  SFXType=COLLISION_SOUND_ATTR_FIRE, Type=ATTACK_REGION_OBJECT)
+			ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=9.0, Angle=361, KBG=70, FKB=0, BKB=20, Size=4.0, X=0.0, Y=0.0, Z=-1.5, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.8, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=5, Trip=0.0, Rehit=0, Reflectable=true, Absorbable=true, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_fire"), SFXLevel=ATTACK_SOUND_LEVEL_L,  SFXType=COLLISION_SOUND_ATTR_FIRE, Type=ATTACK_REGION_OBJECT)
 			AttackModule::enable_safe_pos()
 		}
 	});
@@ -465,13 +477,12 @@ unsafe fn byleth_arrow(fighter: &mut L2CAgentBase) {
 unsafe fn byleth_neutralb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
-		FT_MOTION_RATE(FSM=2)
+		FT_MOTION_RATE(FSM=1)
 		if(is_excute){
 			WorkModule::on_flag(Flag=FIGHTER_MASTER_STATUS_SPECIAL_N_FLAG_ENABLE_CONTROL_ENERGY)
 		}
-		frame(frame=5)
+		frame(frame=9)
 		if(is_excute){
-			ArticleModule::remove_exist(FIGHTER_MASTER_GENERATE_ARTICLE_ARROW1, smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL))
 			rust {
 				let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);   
 				if ArticleModule::is_exist(boma, *FIGHTER_MASTER_GENERATE_ARTICLE_ARROW1) == false{
@@ -479,12 +490,12 @@ unsafe fn byleth_neutralb(fighter: &mut L2CAgentBase) {
 				};
 			}
 		}
-		frame(frame=7)
-		FT_MOTION_RATE(FSM=1.3)
+		frame(frame=10)
 		if(is_excute){
 			ArticleModule::shoot_exist(FIGHTER_MASTER_GENERATE_ARTICLE_ARROW1, smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL), false)
 		}
-		frame(frame=36)
+		frame(frame=43)
+		FT_MOTION_RATE(FSM=0.8)
 		if(is_excute){
 			CancelModule::enable_cancel()
 		}
@@ -507,6 +518,9 @@ unsafe fn byleth_air_neutralb_exp(fighter: &mut L2CAgentBase) {
 unsafe fn byleth_neutralb_start(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
+		if(is_excute){
+			StatusModule::change_status_request_from_script(FIGHTER_MASTER_STATUS_KIND_SPECIAL_N_SHOOT, true)
+		}
 	});
 }									
 #[acmd_script(
@@ -582,7 +596,7 @@ unsafe fn axe_downb(fighter: &mut L2CAgentBase) {
 		}
 		frame(Frame=42)
 		FT_MOTION_RATE(FSM=1)
-		frame(Frame=58)
+		frame(Frame=61)
 		if(is_excute){
 			ATTACK(ID=0, Part=0, Bone=hash40("haver"),  Damage=16.8, Angle=361, KBG=80, FKB=0, BKB=50, Size=6.7, X=0.0, Y=14.0, Z=1.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.45, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_THRU, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_MASTER_AXE, Type=ATTACK_REGION_OBJECT)
 		}
@@ -731,14 +745,8 @@ fn master_frame(fighter: &mut L2CFighterCommon) {
 				println!("Far Nair triggered");
 			};
 		}
-		if [*FIGHTER_MASTER_STATUS_KIND_SPECIAL_N_SHOOT].contains(&status_kind) && StatusModule::is_situation_changed(boma) {
-			StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_LANDING_FALL_SPECIAL, true);
-		};
 		if [*FIGHTER_MASTER_STATUS_KIND_SPECIAL_N_HOLD, *FIGHTER_STATUS_KIND_SPECIAL_N].contains(&status_kind){
 			StatusModule::change_status_request_from_script(boma, *FIGHTER_MASTER_STATUS_KIND_SPECIAL_N_SHOOT, true);
-		};
-		if status_kind == *FIGHTER_STATUS_KIND_LANDING_FALL_SPECIAL {
-			MotionModule::set_rate(boma, 3.0);
 		};
 		if MotionModule::motion_kind(boma) == hash40("special_s_front") || MotionModule::motion_kind(boma) == hash40("special_air_s_front")|| MotionModule::motion_kind(boma) == hash40("special_air_s_front_dash")|| MotionModule::motion_kind(boma) == hash40("special_s_front_dash"){
 			if AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_HIT) && ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_ATTACK) && ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_SPECIAL){
