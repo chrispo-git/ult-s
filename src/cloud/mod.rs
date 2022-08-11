@@ -37,36 +37,6 @@ unsafe fn cloud_grab(fighter: &mut L2CAgentBase) {
 }
 #[acmd_script(
     agent = "cloud",
-    script =  "game_attackairn",
-    category = ACMD_GAME)]
-unsafe fn cloud_nair(fighter: &mut L2CAgentBase) {
-    let lua_state = fighter.lua_state_agent;
-    acmd!(lua_state, {
-		FT_MOTION_RATE(FSM=1.6)
-		frame(Frame=2)
-		if(is_excute){
-			WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
-		}
-		frame(Frame=5)
-		FT_MOTION_RATE(FSM=0.75)
-		if(is_excute){
-			ATTACK(ID=0, Part=0, Bone=hash40("haver"), Damage=8.0, Angle=40, KBG=100, FKB=0, BKB=25, Size=3.8, X=3.0, Y=16.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_CLOUD_HIT, Type=ATTACK_REGION_SWORD)
-			ATTACK(ID=1, Part=0, Bone=hash40("haver"), Damage=8.0, Angle=40, KBG=100, FKB=0, BKB=25, Size=3.8, X=3.0, Y=11.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_CLOUD_HIT, Type=ATTACK_REGION_SWORD)
-			ATTACK(ID=2, Part=0, Bone=hash40("haver"), Damage=8.0, Angle=40, KBG=100, FKB=0, BKB=25, Size=3.8, X=3.0, Y=6.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_CLOUD_HIT, Type=ATTACK_REGION_SWORD)
-			ATK_SET_SHIELD_SETOFF_MUL_arg4(ID=0,ID=1,ID=2, ShieldstunMul=2.0)
-		}
-		frame(Frame=19)
-		if(is_excute){
-			AttackModule::clear_all()
-		}
-		frame(Frame=34)
-		if(is_excute){
-			WorkModule::off_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
-		}
-    });
-}
-#[acmd_script(
-    agent = "cloud",
     script =  "game_attackairhi",
     category = ACMD_GAME)]
 unsafe fn cloud_uair(fighter: &mut L2CAgentBase) {
@@ -161,7 +131,6 @@ unsafe fn cloud_dair(fighter: &mut L2CAgentBase) {
 pub fn install() {
     smashline::install_acmd_scripts!(
 		cloud_grab,
-		cloud_nair,
 		cloud_uair,
 		cloud_dthrow,
 		cloud_dair
