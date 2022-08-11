@@ -6,8 +6,10 @@ use smash::lua2cpp::*;
 use smashline::*;
 use smash_script::*;	
 use smash::phx::Vector2f;
+use smash::phx::Hash40;
 		
 use crate::util::*;
+static mut IS_THUNDER : [bool; 8] = [false; 8];
 
 		
 #[acmd_script(
@@ -188,6 +190,39 @@ unsafe fn byleth_nair(fighter: &mut L2CAgentBase) {
 }	
 #[acmd_script(
     agent = "master",
+    script =  "sound_attackairn",
+    category = ACMD_SOUND)]
+unsafe fn byleth_nair_sound(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=5)
+		if(is_excute){
+			PLAY_SEQUENCE(hash40("seq_master_rnd_attack02"))
+		}
+		frame(Frame=7)
+		if(is_excute){
+			PLAY_SE(hash40("se_master_attackair_n01"))
+		}
+		frame(Frame=13)
+		if(is_excute){
+			PLAY_SE(hash40("se_master_attackair_n02"))
+		}
+		frame(Frame=18)
+		if(is_excute){
+			PLAY_SE(hash40("se_master_attackair_n03"))
+		}
+		frame(Frame=23)
+		if(is_excute){
+			PLAY_SE(hash40("se_master_attackair_n04"))
+		}
+		frame(Frame=29)
+		if(is_excute){
+			PLAY_SE(hash40("se_master_attackair_n05"))
+		}
+	});
+}
+#[acmd_script(
+    agent = "master",
     script =  "sound_attackairn2",
     category = ACMD_SOUND)]
 unsafe fn byleth_nair2_sound(fighter: &mut L2CAgentBase) {
@@ -198,7 +233,47 @@ unsafe fn byleth_nair2_sound(fighter: &mut L2CAgentBase) {
 			PLAY_SE(hash40("se_master_attackhard_h01"))
 		}
 	});
-}		
+}	
+#[acmd_script(
+    agent = "master",
+    scripts =  ["sound_specialairsf", "sound_specialsf"],
+    category = ACMD_SOUND)]
+unsafe fn byleth_sideb_snd(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		if(is_excute){
+			PLAY_SEQUENCE(hash40("seq_master_rnd_attack02"))
+		}
+		frame(Frame=2)
+		if(is_excute){
+			PLAY_SE(hash40("se_master_special_s04"))
+		}
+		frame(Frame=25)
+		if(is_excute){
+			PLAY_SE(hash40("se_master_cloth_ll03"))
+		}
+	});
+}	
+#[acmd_script(
+    agent = "master",
+    scripts =  ["sound_specialairsfdash", "sound_specialsfdash"],
+    category = ACMD_SOUND)]
+unsafe fn byleth_sidebdash_snd(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		if(is_excute){
+			PLAY_SEQUENCE(hash40("seq_master_rnd_attack02"))
+		}
+		frame(Frame=2)
+		if(is_excute){
+			PLAY_SE(hash40("se_master_special_s05"))
+		}
+		frame(Frame=25)
+		if(is_excute){
+			PLAY_SE(hash40("se_master_cloth_ll03"))
+		}
+	});
+}	
 #[acmd_script(
     agent = "master",
     script =  "game_attackairn2",
@@ -485,25 +560,93 @@ unsafe fn byleth_neutralb(fighter: &mut L2CAgentBase) {
 		if(is_excute){
 			rust {
 				let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);   
-				if ArticleModule::is_exist(boma, *FIGHTER_MASTER_GENERATE_ARTICLE_ARROW1) == false{
+				let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+				if ArticleModule::is_exist(boma, *FIGHTER_MASTER_GENERATE_ARTICLE_ARROW1) == false && IS_THUNDER[ENTRY_ID] == false {
 					ArticleModule::generate_article(boma, *FIGHTER_MASTER_GENERATE_ARTICLE_ARROW1,false,0);
 				};
 			}
 		}
 		frame(frame=10)
 		if(is_excute){
-			ArticleModule::shoot_exist(FIGHTER_MASTER_GENERATE_ARTICLE_ARROW1, smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL), false)
+			rust {
+				let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);   
+				let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+				if IS_THUNDER[ENTRY_ID] == false {
+					ArticleModule::shoot_exist(boma, *FIGHTER_MASTER_GENERATE_ARTICLE_ARROW1, smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL), false);
+				} else {
+					macros::ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 6.0, /*Angle*/ 270, /*KBG*/ 98, /*FKB*/ 0, /*BKB*/ 40, /*Size*/ 3.6, /*X*/ 0.0, /*Y*/ 55.0, /*Z*/ 28.0, /*X2*/ Some(0.0), /*Y2*/ Some(40.0), /*Z2*/ Some(28.0), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 3, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ true, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_elec"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_ELEC, /*Type*/ *ATTACK_REGION_ENERGY);
+					AttackModule::enable_safe_pos(boma);
+					macros::ATTACK(fighter, /*ID*/ 2, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 6.0, /*Angle*/ 80, /*KBG*/ 98, /*FKB*/ 0, /*BKB*/ 40, /*Size*/ 3.6, /*X*/ 0.0, /*Y*/ 40.0, /*Z*/ 28.0, /*X2*/ Some(0.0), /*Y2*/ Some(4.0), /*Z2*/ Some(28.0), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 3, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ true, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_elec"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_ELEC, /*Type*/ *ATTACK_REGION_ENERGY);
+					AttackModule::enable_safe_pos(boma);
+					macros::ATTACK(fighter, /*ID*/ 	0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 12.0, /*Angle*/ 361, /*KBG*/ 90, /*FKB*/ 0, /*BKB*/ 40, /*Size*/ 6.0, /*X*/ 0.0, /*Y*/ 5.0, /*Z*/ 28.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.5, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 3, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ true, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_fire"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_ELEC, /*Type*/ *ATTACK_REGION_ENERGY);
+					AttackModule::enable_safe_pos(boma);
+				};
+			}
 		}
-		frame(frame=43)
-		FT_MOTION_RATE(FSM=0.8)
+		frame(frame=14)
 		if(is_excute){
-			CancelModule::enable_cancel()
+			AttackModule::clear_all()
+			rust {
+				let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);   
+				let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+				if IS_THUNDER[ENTRY_ID] == false {
+					IS_THUNDER[ENTRY_ID] = true;
+				} else {
+					IS_THUNDER[ENTRY_ID] = false;
+				};
+			}
 		}
 	});
-}			
+}		
 #[acmd_script(
     agent = "master",
-    script =  "game_specialairn",
+    scripts =  ["effect_specialn", "effect_specialairn"],
+    category = ACMD_EFFECT)]
+unsafe fn byleth_neutralb_eff(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(frame=9)
+		if(is_excute){
+			rust {
+				let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);  
+				let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize; 
+				if IS_THUNDER[ENTRY_ID] == true {
+					if StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR {
+						macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_thunder"), Hash40::new("haver"), 0, 0, 0, 0, 0, 0, 0.75, true);
+					} else {
+						macros::EFFECT(fighter, Hash40::new("sys_thunder"), Hash40::new("haver"), 0, 0, 0, 0, 0, 0, 0.75, 0, 0, 0, 0, 0, 0, true);
+					};
+					macros::EFFECT(fighter, Hash40::new("sys_thunder_flash"), Hash40::new("top"), 0, 0, 25, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, true);
+				}
+			}
+		}
+	});
+}	
+#[acmd_script(
+    agent = "master",
+    scripts =  ["sound_specialn", "sound_specialairn"],
+    category = ACMD_SOUND)]
+unsafe fn byleth_neutralb_snd(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(frame=10)
+		if(is_excute){
+			rust {
+				let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);  
+				let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize; 
+				if IS_THUNDER[ENTRY_ID] == true {
+					macros::PLAY_SE(fighter, Hash40::new("se_common_smashswing_02"));
+					macros::PLAY_SE(fighter, Hash40::new("se_common_down_m_02"));
+					macros::PLAY_SE(fighter, Hash40::new("se_common_electric_hit_s"));
+				};
+				macros::PLAY_SEQUENCE(fighter, Hash40::new("seq_master_rnd_attack02"));
+			}
+		}
+	});
+}				
+#[acmd_script(
+    agent = "master",
+    script =  "expression_specialairn",
     category = ACMD_EXPRESSION)]
 unsafe fn byleth_air_neutralb_exp(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
@@ -519,7 +662,14 @@ unsafe fn byleth_neutralb_start(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
 		if(is_excute){
-			StatusModule::change_status_request_from_script(FIGHTER_MASTER_STATUS_KIND_SPECIAL_N_SHOOT, true)
+			rust {
+				let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
+				if smash::app::utility::get_kind(boma) == *FIGHTER_KIND_MASTER {
+					StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_MASTER_STATUS_KIND_SPECIAL_N_SHOOT, true);
+				} else {
+					StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_KIRBY_STATUS_KIND_MASTER_SPECIAL_N_SHOOT, true);
+				};
+			}
 		}
 	});
 }									
@@ -592,7 +742,7 @@ unsafe fn axe_downb(fighter: &mut L2CAgentBase) {
     acmd!(lua_state, {
 		FT_MOTION_RATE(FSM=0.04761904)
 		if(is_excute){
-			WorkModule::set_int(1, WEAPON_MASTER_AXE_INSTANCE_WORK_ID_INT_CRITICAL_ATTACK_ID)
+			WorkModule::set_int(6, WEAPON_MASTER_AXE_INSTANCE_WORK_ID_INT_CRITICAL_ATTACK_ID)
 		}
 		frame(Frame=42)
 		FT_MOTION_RATE(FSM=1)
@@ -724,16 +874,67 @@ unsafe fn byleth_downb(fighter: &mut L2CAgentBase) {
 			ArticleModule::remove_exist(FIGHTER_MASTER_GENERATE_ARTICLE_AXE,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL))
 		}
 	});
-}								
+}			
+#[acmd_script(
+    agent = "master",
+    script =  "game_throwhi",
+    category = ACMD_GAME)]
+unsafe fn byleth_uthrow(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		if(is_excute){
+			ATTACK_ABS(Kind=FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, ID=0, Damage=6.0, Angle=90, KBG=120, FKB=0, BKB=50, Hitlag=0.0, Unk=1.0, FacingRestrict=ATTACK_LR_CHECK_F, Unk=0.0, Unk=true, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_NONE, Type=ATTACK_REGION_THROW)
+			ATTACK_ABS(Kind=FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, ID=0, Damage=3.0, Angle=361, KBG=100, FKB=0, BKB=40, Hitlag=0.0, Unk=1.0, FacingRestrict=ATTACK_LR_CHECK_F, Unk=0.0, Unk=true, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_NONE, Type=ATTACK_REGION_THROW)
+		}
+		frame(Frame=15)
+		if(is_excute){
+			ATK_HIT_ABS(FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, hash40("throw"), WorkModule::get_int64(module_accessor,*FIGHTER_STATUS_THROW_WORK_INT_TARGET_OBJECT), WorkModule::get_int64(module_accessor,*FIGHTER_STATUS_THROW_WORK_INT_TARGET_HIT_GROUP), WorkModule::get_int64(module_accessor,*FIGHTER_STATUS_THROW_WORK_INT_TARGET_HIT_NO))
+			AttackModule::clear_all()
+		}
+    });
+}		
+#[acmd_script(
+    agent = "master",
+    script =  "effect_throwhi",
+    category = ACMD_EFFECT)]
+unsafe fn byleth_uthrow_eff(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=26)
+		if(is_excute){
+			LANDING_EFFECT(hash40("sys_down_smoke"), hash40("top"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false)
+		}
+    });
+}		
+#[acmd_script(
+    agent = "master",
+    script =  "sound_throwhi",
+    category = ACMD_SOUND)]
+unsafe fn byleth_uthrow_snd(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=3)
+		if(is_excute){
+			PLAY_SE(hash40("se_common_throw_01"))
+		}
+		wait(Frames=7)
+		if(is_excute){
+			PLAY_SE(hash40("se_common_throw_02"))
+			PLAY_SEQUENCE(hash40("seq_master_rnd_attack01"))
+		}
+    });
+}			
 #[fighter_frame( agent = FIGHTER_KIND_MASTER )]
 fn master_frame(fighter: &mut L2CFighterCommon) {
     unsafe {
-        println!("It'sa me, Mario, wahoooooooo!");
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
 		let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 		if MotionModule::motion_kind(boma) == hash40("special_air_s_front") || MotionModule::motion_kind(boma) == hash40("special_air_s_front_dash") || MotionModule::motion_kind(boma) == hash40("special_s_front") || MotionModule::motion_kind(boma) == hash40("special_s_front_dash") || MotionModule::motion_kind(boma) == hash40("special_s_start") || MotionModule::motion_kind(boma) == hash40("special_air_s_start") {
 			ArticleModule::remove_exist(boma, *FIGHTER_MASTER_GENERATE_ARTICLE_SPEAR,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
+		};
+		if smash::app::sv_information::is_ready_go() == false {
+			IS_THUNDER[ENTRY_ID] = false;
 		};
 		if MotionModule::frame(boma) > 4.0 && MotionModule::motion_kind(boma) == hash40("attack_air_n") {
 			if AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_ALL) {
@@ -780,21 +981,17 @@ fn master_frame(fighter: &mut L2CFighterCommon) {
 			};
 		};
     }
-}
+}			
 #[fighter_frame( agent = FIGHTER_KIND_KIRBY )]
-fn kirby_master_frame(fighter: &mut L2CFighterCommon) {
+fn master_kirby_frame(fighter: &mut L2CFighterCommon) {
     unsafe {
-			let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
-			let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
-			let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-			if [*FIGHTER_KIRBY_STATUS_KIND_MASTER_SPECIAL_N_SHOOT].contains(&status_kind) && StatusModule::is_situation_changed(boma) {
-				StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_LANDING_FALL_SPECIAL, true);
-			};
-			if [*FIGHTER_KIRBY_STATUS_KIND_MASTER_SPECIAL_N_HOLD, *FIGHTER_KIRBY_STATUS_KIND_MASTER_SPECIAL_N].contains(&status_kind){
-				StatusModule::change_status_request_from_script(boma, *FIGHTER_KIRBY_STATUS_KIND_MASTER_SPECIAL_N_SHOOT, true);
-			};
-    }
-}		
+        let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
+		let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+		if smash::app::sv_information::is_ready_go() == false {
+			IS_THUNDER[ENTRY_ID] = false;
+		};
+	}
+}
 
 pub fn install() {
     smashline::install_acmd_scripts!(
@@ -813,6 +1010,8 @@ pub fn install() {
 		byleth_sideb_starte,
 		byleth_neutralb_start,
 		byleth_neutralb,
+		byleth_neutralb_eff,
+		byleth_neutralb_snd,
 		byleth_neutralbmax,
 		byleth_neutralbmaxe,
 		byleth_neutralbmaxs,
@@ -827,10 +1026,15 @@ pub fn install() {
 		byleth_air_neutralb_exp,
 		byleth_fair,
 		byleth_nair2_sound,
-		byleth_bair
+		byleth_bair,
+		byleth_nair_sound,
+		byleth_sideb_snd,
+		byleth_uthrow,
+		byleth_uthrow_eff,
+		byleth_uthrow_snd
     );
     smashline::install_agent_frames!(
         master_frame,
-		kirby_master_frame
+		master_kirby_frame
     );
 }
