@@ -827,11 +827,15 @@ fn brawler_frame(fighter: &mut L2CFighterCommon) {
 				};
 			};
 			if [hash40("special_air_lw1")].contains(&MotionModule::motion_kind(boma))  {
-				if KineticModule::get_kinetic_type(boma) != *FIGHTER_KINETIC_TYPE_MOTION_AIR {
-					KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_MOTION_AIR);
-				};
-				if frame >= 60.0 {
+				if MotionModule::frame(boma) >= 60.0 {
+					if KineticModule::get_kinetic_type(boma) != *FIGHTER_KINETIC_TYPE_FALL {
+						KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_FALL);
+					};
 					CancelModule::enable_cancel(boma);
+				} else {
+					if KineticModule::get_kinetic_type(boma) != *FIGHTER_KINETIC_TYPE_MOTION_AIR {
+						KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_MOTION_AIR);
+					};
 				};
 				if frame >= 61.0 {
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL, true);

@@ -352,9 +352,6 @@ pub fn mario_frame(fighter : &mut L2CFighterCommon) {
 					};
 				} else {
 					SIDEB[ENTRY_ID] = true;
-					if KineticModule::get_kinetic_type(boma) != *FIGHTER_KINETIC_TYPE_MOTION_AIR {
-						KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_MOTION_AIR);
-					};
 					if MotionModule::frame(boma) < 23.0 {
 						if MotionModule::frame(boma) < 2.0 {
 							KineticModule::clear_speed_all(boma);
@@ -372,7 +369,14 @@ pub fn mario_frame(fighter : &mut L2CFighterCommon) {
 						StatusModule::set_keep_situation_air(boma, false);
 					};
 					if MotionModule::frame(boma) > 74.0 {
+						if KineticModule::get_kinetic_type(boma) != *FIGHTER_KINETIC_TYPE_FALL {
+							KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_FALL);
+						};
 						CancelModule::enable_cancel(boma);
+					} else {
+						if KineticModule::get_kinetic_type(boma) != *FIGHTER_KINETIC_TYPE_MOTION_AIR {
+							KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_MOTION_AIR);
+						};
 					};
 					if MotionModule::frame(boma) > 56.0 && (ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_HI) != 0{
 						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_SPECIAL_HI, true);
