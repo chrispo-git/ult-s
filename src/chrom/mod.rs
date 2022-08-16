@@ -293,12 +293,15 @@ unsafe fn chrom_uair(fighter: &mut L2CAgentBase) {
 unsafe fn chrom_sideb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
+		frame(Frame=2)
+		FT_MOTION_RATE(FSM=1.666666666667)
 		frame(Frame=5)
+		FT_MOTION_RATE(FSM=1)
 		if(is_excute){
 			ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=0.5, Angle=10, KBG=100, FKB=50, BKB=0, Size=8.0, X=0.0, Y=6.0, Z=5.0, X2=0.0, Y2=6.0, Z2=5.5, Hitlag=1.4, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=true, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_CHROM_HIT, Type=ATTACK_REGION_SWORD)
 			ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=0.5, Angle=10, KBG=100, FKB=90, BKB=0, Size=8.0, X=0.0, Y=6.0, Z=2.5, X2=0.0, Y2=6.0, Z2=4.0, Hitlag=1.4, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=true, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_CHROM_HIT, Type=ATTACK_REGION_SWORD)
-			AttackModule::set_add_reaction_frame(ID=0, Frames=4.0, Unk=false)
-			AttackModule::set_add_reaction_frame(ID=1, Frames=4.0, Unk=false)
+			AttackModule::set_add_reaction_frame(ID=0, Frames=-1.0, Unk=false)
+			AttackModule::set_add_reaction_frame(ID=1, Frames=-1.0, Unk=false)
 		}
 		frame(Frame=15)
 		if(is_excute){
@@ -335,6 +338,7 @@ unsafe fn chrom_sideb_snd(fighter: &mut L2CAgentBase) {
 		if(is_excute){
 			PLAY_SE(hash40("se_chrom_dash_start"))
 			SET_PLAY_INHIVIT(hash40("se_chrom_dash_start"), 20)
+			PLAY_SE(hash40("vc_chrom_attack04"))
 		}
 		wait(Frames=8)
 		if(is_excute){

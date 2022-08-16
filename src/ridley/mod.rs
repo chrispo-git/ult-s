@@ -22,17 +22,28 @@ pub fn ridley(fighter : &mut L2CFighterCommon) {
 			if StatusModule::situation_kind(boma) != *SITUATION_KIND_AIR && ![*FIGHTER_RIDLEY_STATUS_KIND_SPECIAL_HI_CHARGE_B, *FIGHTER_RIDLEY_STATUS_KIND_SPECIAL_HI_CHARGE_F, *FIGHTER_RIDLEY_STATUS_KIND_SPECIAL_HI_CHARGE_HI].contains(&status_kind) {
 				HAS_DOUBLE_UPB[ENTRY_ID] = false;
 			};
-			if [hash40("special_s_start")].contains(&MotionModule::motion_kind(boma)) {
+			/*if [hash40("special_s_start")].contains(&MotionModule::motion_kind(boma)) {
 				if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_CATCH) {
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_CATCH_DASH, true);
 				} else if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_ATTACK){
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_ATTACK_DASH, true);
 				};
-			};
+			};*/
 			if [hash40("special_air_s_start")].contains(&MotionModule::motion_kind(boma)) {
 				if GroundModule::is_wall_touch_line(boma, *GROUND_TOUCH_FLAG_SIDE as u32) && MotionModule::frame(boma) > 27.0 && MotionModule::frame(boma) < 35.0 && stick_x < -0.7 {
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_PASSIVE_WALL_JUMP, true);
 				};
+			};
+			if status_kind == *FIGHTER_RIDLEY_STATUS_KIND_SPECIAL_S_FALL {
+				let speed = smash::phx::Vector3f { x: 0.05, y: -0.1, z: 0.0 };
+				KineticModule::add_speed(boma, &speed);
+				if MotionModule::frame(boma) < 2.0 {
+					macros::SET_SPEED_EX(fighter, 3.0, 1.75, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+				};
+				if MotionModule::frame(boma) > 32.0 {
+					StatusModule::change_status_request_from_script(boma, *FIGHTER_RIDLEY_STATUS_KIND_SPECIAL_S_CUT, true);
+				};
+				StatusModule::set_keep_situation_air(boma, true);
 			};
 			if [*FIGHTER_RIDLEY_STATUS_KIND_SPECIAL_HI_CHARGE_B, *FIGHTER_RIDLEY_STATUS_KIND_SPECIAL_HI_CHARGE_F, *FIGHTER_RIDLEY_STATUS_KIND_SPECIAL_HI_CHARGE_HI].contains(&status_kind) &&  WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_HIT_STOP_ATTACK_SUSPEND_FRAME) < 1 && AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_HIT) {
 				if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_ATTACK){
@@ -177,12 +188,40 @@ unsafe fn ridley_fair(fighter: &mut L2CAgentBase) {
 		}
     });
 }		
+#[acmd_script(
+    agent = "ridley",
+    script =  "game_specialairsfalljump",
+    category = ACMD_GAME)]
+unsafe fn ridley_sideb_end(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		if(is_excute){
+			ATTACK_ABS(Kind=FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, ID=0, Damage=7.0, Angle=75, KBG=75, FKB=0, BKB=70, Hitlag=0.0, Unk=1.0, FacingRestrict=ATTACK_LR_CHECK_F, Unk=0.0, Unk=true, Effect=hash40("collision_attr_sting"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_THROW)
+			ATTACK_ABS(Kind=FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, ID=0, Damage=3.0, Angle=75, KBG=75, FKB=0, BKB=70, Hitlag=0.0, Unk=1.0, FacingRestrict=ATTACK_LR_CHECK_F, Unk=0.0, Unk=true, Effect=hash40("collision_attr_sting"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_THROW)
+		}
+		frame(Frame=2)
+		if(is_excute){
+			WorkModule::on_flag(Flag=FIGHTER_RIDLEY_STATUS_SPECIAL_S_FLAG_THROW)
+			WorkModule::on_flag(Flag=FIGHTER_RIDLEY_STATUS_SPECIAL_S_FLAG_ENABLE_GRAVITY)
+		}
+		frame(Frame=25)
+		if(is_excute){
+			CancelModule::enable_cancel()
+		}
+		frame(Frame=38)
+		if(is_excute){
+			WorkModule::on_flag(Flag=FIGHTER_RIDLEY_STATUS_SPECIAL_S_FLAG_ENABLE_CONTROL_JUMP)
+			sv_battle_object::notify_event_msc_cmd(0x2127e37c07u64, GROUND_CLIFF_CHECK_KIND_ALWAYS_BOTH_SIDES)
+		}
+    });
+}		
 		
 pub fn install() {
     smashline::install_acmd_scripts!(
 		ridley_uair,
 		ridley_fair,
-		ridley_bair
+		ridley_bair,
+		ridley_sideb_end
     );
 	smashline::install_agent_frame_callbacks!(ridley);
 }

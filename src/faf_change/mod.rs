@@ -406,7 +406,7 @@ pub fn faf_change_master(fighter : &mut L2CFighterCommon) {
 					HitModule::set_whole(boma, smash::app::HitStatus(*HIT_STATUS_NORMAL), 0);
 				};
 			};
-			if [hash40("special_air_s4_s"), hash40("special_s4_s")].contains(&motion_kind) && frame >= 30.0 {
+			if [hash40("special_air_s4_s"), hash40("special_s4_s")].contains(&motion_kind) && frame >= 40.0 {
 				CancelModule::enable_cancel(boma);
 			};
 			if [hash40("attack_s3_s"), hash40("attack_s3_hi")].contains(&motion_kind) && frame >= 34.0 {
