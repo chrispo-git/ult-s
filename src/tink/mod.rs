@@ -5,6 +5,36 @@ use smashline::*;
 use smash_script::*;
 #[acmd_script(
     agent = "toonlink",
+    script =  "game_dash",
+    category = ACMD_GAME)]
+unsafe fn tink_dash(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=10)
+		if(is_excute){
+			WorkModule::enable_transition_term(FIGHTER_STATUS_TRANSITION_TERM_ID_DASH_TO_RUN)
+		}
+    });
+}	
+#[acmd_script(
+    agent = "toonlink",
+    script =  "game_turndash",
+    category = ACMD_GAME)]
+unsafe fn tink_dashback(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=3)
+		if(is_excute){
+			WorkModule::on_flag(Flag=FIGHTER_STATUS_DASH_FLAG_TURN_DASH)
+		}
+		frame(Frame=12)
+		if(is_excute){
+			WorkModule::enable_transition_term(FIGHTER_STATUS_TRANSITION_TERM_ID_DASH_TO_RUN)
+		}
+    });
+}
+#[acmd_script(
+    agent = "toonlink",
     script =  "game_attack11",
     category = ACMD_GAME)]
 unsafe fn tink_jab1(fighter: &mut L2CAgentBase) {
@@ -495,9 +525,7 @@ unsafe fn tink_uair_snd(fighter: &mut L2CAgentBase) {
 unsafe fn tink_bomb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
-		FT_MOTION_RATE(FSM=1.4117647)
 		frame(Frame=17)
-		FT_MOTION_RATE(FSM=1)
 		if(is_excute){
 			WorkModule::on_flag(Flag=FIGHTER_LINK_STATUS_WORK_ID_FLAG_BOMB_GENERATE_LINKBOMB)
 		}
@@ -526,6 +554,9 @@ pub fn install() {
 		tink_uair_eff,
 		tink_uair_snd,
 		//
-		tink_bomb
+		tink_bomb,
+		//
+		tink_dash,
+		tink_dashback
     );
 }
