@@ -218,7 +218,7 @@ pub fn fox(fighter : &mut L2CFighterCommon) {
 				*FIGHTER_FOX_STATUS_KIND_SPECIAL_LW_END,  
 				*FIGHTER_FOX_STATUS_KIND_SPECIAL_LW_HIT,  
 				*FIGHTER_FOX_STATUS_KIND_SPECIAL_LW_LOOP
-			].contains(&status_kind) && ControlModule::check_button_on_trriger(boma, *CONTROL_PAD_BUTTON_JUMP) && AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_HIT){
+			].contains(&status_kind) && ControlModule::check_button_on_trriger(boma, *CONTROL_PAD_BUTTON_JUMP) && !AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_SHIELD){
 				if WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT) < WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT_MAX) && StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR {
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_JUMP_AERIAL, true);
 				};
