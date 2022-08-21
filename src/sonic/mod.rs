@@ -15,6 +15,7 @@ use crate::util::*;
 static mut LIGHTSPEED :  smash::phx::Vector3f =  smash::phx::Vector3f { x: 0.0, y: 6.5, z: 0.0 };
 static mut LIGHTSPEED_ROT :  smash::phx::Vector3f =  smash::phx::Vector3f { x: 0.0, y: 180.0, z: 0.0 };
 use smash::phx::Vector2f;
+static mut BAN_SIDEB : [bool; 8] = [false; 8];
 
 #[acmd_script(
     agent = "sonic",
@@ -79,6 +80,42 @@ unsafe fn sonic_fthrow_eff(fighter: &mut L2CAgentBase) {
 		frame(Frame=12)
 		if(is_excute){
 			EFFECT_FLIP(hash40("sys_smash_flash_s"), hash40("sys_smash_flash_s"), hash40("throw"), 3, 2, 3, 0, 0, 0, 1.5, 0, 0, 0, 0, 0, 0, true, EF_FLIP_YZ)
+		}
+    });
+}	
+#[acmd_script(
+    agent = "sonic",
+    script =  "effect_throwb",
+    category = ACMD_EFFECT)]
+unsafe fn sonic_bthrow_eff(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=11)
+		if(is_excute){
+			LANDING_EFFECT(hash40("sys_landing_smoke_s"), hash40("top"), 0, 0, 0, 0, 0, 0, 0.6, 0, 0, 0, 0, 0, 0, true)
+		}
+		frame(Frame=17)
+		if(is_excute){
+			EFFECT_FOLLOW_FLIP_ALPHA(hash40("sys_spin_wind"), hash40("sys_spin_wind"), hash40("trans"), 0, 16, 0, 0, 0, 90, 0.65, true, EF_FLIP_YZ, 0.6)
+		}
+		frame(Frame=21)
+		if(is_excute){
+			EFFECT_FOLLOW_FLIP_ALPHA(hash40("sys_spin_wind"), hash40("sys_spin_wind"), hash40("trans"), 0, 16, 0, 0, 180, 90, 1, true, EF_FLIP_YZ, 0.6)
+		}
+		frame(Frame=41)
+		if(is_excute){
+			EFFECT_FOLLOW_NO_STOP_FLIP(hash40("sys_attack_arc"), hash40("sys_attack_arc_d"), hash40("top"), -2, 5, -1.5, 6, 110, 80, 0.9, true, EF_FLIP_YZ)
+			LAST_EFFECT_SET_COLOR(3, 0.0, 0.0)
+			LAST_EFFECT_SET_RATE(1.6)
+			EFFECT_FLIP(hash40("sys_smash_flash_s"), hash40("sys_smash_flash_s"), hash40("throw"), 3, 3, 10, 0, 0, 0, 1.5, 0, 0, 0, 0, 0, 0, true, EF_FLIP_YZ)
+		}
+		frame(Frame=41)
+		if(is_excute){
+			LANDING_EFFECT(hash40("sys_landing_smoke"), hash40("top"), 0, 0, -3, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false)
+		}
+		frame(Frame=45)
+		if(is_excute){
+			EFFECT_OFF_KIND(hash40("sys_attack_arc"), false, true)
 		}
     });
 }	
@@ -706,6 +743,9 @@ pub fn sonic(fighter : &mut L2CFighterCommon) {
 		let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 		let fighter_kind = smash::app::utility::get_kind(boma);
 		let motion_kind = MotionModule::motion_kind(boma);
+		let situation_kind = StatusModule::situation_kind(boma);
+		let mut stick_x = ControlModule::get_stick_x(boma) ;
+		stick_x *= PostureModule::lr(boma);
 		if fighter_kind == *FIGHTER_KIND_SONIC {
 			if motion_kind == hash40("attack_100") {
 				if MotionModule::frame(fighter.module_accessor) >= 15.0 {
@@ -716,11 +756,99 @@ pub fn sonic(fighter : &mut L2CFighterCommon) {
 					};
 				};
 			};
-			if [hash40("special_s_start")].contains(&MotionModule::motion_kind(boma)) {
-				WorkModule::unable_transition_term_forbid(boma, *FIGHTER_STATUS_TRANSITION_TERM_ID_JUMP_START);
+			if situation_kind != *SITUATION_KIND_AIR || (*FIGHTER_STATUS_KIND_DAMAGE..*FIGHTER_STATUS_KIND_DAMAGE_FALL).contains(&status_kind){
+				BAN_SIDEB[ENTRY_ID] = false;
+			};
+			if BAN_SIDEB[ENTRY_ID] == true {
+					CAN_SIDEB[ENTRY_ID] = 1;
+			} else {
+					CAN_SIDEB[ENTRY_ID] = 0;
+			};
+			if [hash40("special_s_start"), hash40("special_air_s_start")].contains(&MotionModule::motion_kind(boma)) {
+				/*println!("cliff check: {}", GroundModule::cliff_check(boma));
+				println!("is near cliff: {}", GroundModule::is_near_cliff(boma, PostureModule::pos_x(boma), PostureModule::pos_y(boma)));
+				println!("can entry cliff: {}", );*/
+				if GroundModule::can_entry_cliff(boma) == 1 && WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_CLIFF_COUNT) < 7 && WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_CLIFF_NO_CATCH_FRAME) < 1 {
+					fighter.change_status(FIGHTER_STATUS_KIND_CLIFF_CATCH_MOVE.into(),false.into());
+					macros::EFFECT_OFF_KIND(fighter, Hash40::new("sys_attack_speedline"), false, true);
+				};
+				/*WorkModule::unable_transition_term_forbid(boma, *FIGHTER_STATUS_TRANSITION_TERM_ID_JUMP_START);
 				WorkModule::unable_transition_term_forbid(boma, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_JUMP_SQUAT);
-				WorkModule::unable_transition_term_forbid(boma, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_JUMP_SQUAT_BUTTON);
+				WorkModule::unable_transition_term_forbid(boma, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_JUMP_SQUAT_BUTTON);*/
 				if StatusModule::situation_kind(boma) == *SITUATION_KIND_GROUND {
+					/*if MotionModule::frame(boma) >= 24.0 && AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_HIT){
+						if MotionModule::frame(boma) >= 43.0 {
+							StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_LANDING, true);
+						};
+					};*/
+					if MotionModule::frame(boma) >= 54.0 && MotionModule::frame(boma) < 75.0  {
+						MotionModule::set_rate(boma, 2.0);
+					} else {
+						MotionModule::set_rate(boma, 1.0);
+					};
+					if MotionModule::frame(boma) >= 85.0 {
+						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_WAIT, true);
+					};
+				} else {
+					/*if MotionModule::frame(boma) >= 24.0 && AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_HIT){
+						MotionModule::set_rate(boma, 2.0);
+					};*/
+					if MotionModule::frame(boma) >= 54.0 {
+						MotionModule::set_rate(boma, 2.0);
+					};
+					if MotionModule::frame(boma) >= 60.0 {
+						CancelModule::enable_cancel(boma);
+					};
+					if MotionModule::frame(boma) >= 70.0 {
+						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL, true);
+					};
+				};
+				if GroundModule::is_wall_touch_line(boma, *GROUND_TOUCH_FLAG_SIDE as u32) && MotionModule::frame(boma) < 28.0 && stick_x < -0.7 {
+					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_PASSIVE_WALL_JUMP, true);
+					macros::EFFECT_OFF_KIND(fighter, Hash40::new("sys_attack_speedline"), false, true);
+				};
+				if KineticModule::get_kinetic_type(boma) != *FIGHTER_KINETIC_TYPE_MOTION_AIR {
+					KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_MOTION_AIR);
+				};
+				
+				if StatusModule::situation_kind(boma) != *SITUATION_KIND_GROUND && MotionModule::motion_kind(boma) == hash40("special_s_start") {
+					if MotionModule::frame(boma) < 34.0 {
+						MotionModule::change_motion(boma, smash::phx::Hash40::new("special_air_s_start"), MotionModule::frame(boma)+1.0, 1.0, false, 0.0, false, false);
+					} else {
+						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL, true);
+					};
+				};
+				if StatusModule::situation_kind(boma) != *SITUATION_KIND_AIR && MotionModule::motion_kind(boma) == hash40("special_air_s_start") {
+					if MotionModule::frame(boma) < 42.0 {
+						MotionModule::change_motion(boma, smash::phx::Hash40::new("special_s_start"), MotionModule::frame(boma)+1.0, 1.0, false, 0.0, false, false);
+					} else {
+						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_LANDING, true);
+					};
+				};
+				if MotionModule::frame(boma) == 14.0 {
+					let lightspeed: u32 = EffectModule::req_follow(boma, smash::phx::Hash40::new("sys_attack_speedline"), smash::phx::Hash40::new("top"), &LIGHTSPEED, &LIGHTSPEED_ROT, 2.2, true, 0, 0, 0, 0, 0, true, true) as u32;
+					EffectModule::set_rgb(boma, lightspeed, 0.2, 0.4, 10.0);
+					EffectModule::set_rate(boma, lightspeed, 0.2);
+					acmd!(lua_state, {
+						STOP_SE(hash40("se_sonic_smash_h01"))
+						PLAY_SE(hash40("vc_sonic_attack05"))
+						PLAY_SE(hash40("se_sonic_swing_m"))
+						PLAY_SE(hash40("se_sonic_swing_l"))
+						PLAY_SE(hash40("se_sonic_attackair_l01"))
+					});
+				};
+				if MotionModule::frame(boma) == 1.0 {
+					acmd!(lua_state, {
+						PLAY_SE(hash40("se_sonic_smash_h01"))
+					});
+				};
+				notify_event_msc_cmd!(fighter, Hash40::new_raw(0x2127e37c07), *GROUND_CLIFF_CHECK_KIND_ALWAYS);
+				notify_event_msc_cmd!(fighter, Hash40::new_raw(0x2127e37c07 as u64), *GROUND_CLIFF_CHECK_KIND_ALWAYS);
+				notify_event_msc_cmd!(fighter, Hash40::new_raw(0x2127e37c07u64), *GROUND_CLIFF_CHECK_KIND_ALWAYS);
+				notify_event_msc_cmd!(fighter, 0x2127e37c07 as u64, *GROUND_CLIFF_CHECK_KIND_ALWAYS);
+				notify_event_msc_cmd!(fighter, 0x2127e37c07u64, *GROUND_CLIFF_CHECK_KIND_ALWAYS);
+				BAN_SIDEB[ENTRY_ID] = true;
+				/*if StatusModule::situation_kind(boma) == *SITUATION_KIND_GROUND {
 					MotionModule::set_rate(boma, 0.6075);
 				} else {
 					MotionModule::set_rate(boma, 0.43875);
@@ -782,66 +910,18 @@ pub fn sonic(fighter : &mut L2CFighterCommon) {
 						PLAY_SE(hash40("se_sonic_swing_l"))
 						PLAY_SE(hash40("se_sonic_attackair_l01"))
 					});
-				};
-			};
-			if [hash40("run_brake_r"), hash40("run_brake_l")].contains(&MotionModule::motion_kind(boma)) && status_kind != *FIGHTER_STATUS_KIND_RUN_BRAKE && StatusModule::situation_kind(boma) == *SITUATION_KIND_GROUND{
-				MotionModule::set_rate(boma, 0.5);
-				if MotionModule::frame(boma) >= 23.0 {
-					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_WAIT, true);
-				} else {
-					if (ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_ATTACK_HI3) != 0 {
-						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_ATTACK_HI3, true);
-					} else if (ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_ATTACK_LW3) != 0 {
-						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_ATTACK_LW3, true);
-					} else if (ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_ATTACK_S3) != 0 {
-						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_ATTACK_S3, true);
-					};
-				};
-			};
-			if [hash40("run_brake_r"), hash40("run_brake_l")].contains(&MotionModule::motion_kind(boma)) && StatusModule::situation_kind(boma) != *SITUATION_KIND_GROUND {
-				if MotionModule::frame(boma) >= 26.0 {
-					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL_AERIAL, false);
-				};
-			};
-			if [*FIGHTER_SONIC_STATUS_KIND_SPECIAL_S_HOLD, *FIGHTER_SONIC_STATUS_KIND_SPECIAL_S_HOLD_JUMP].contains(&status_kind) || (status_kind == *FIGHTER_STATUS_KIND_SPECIAL_S && [hash40("special_s_start"), hash40("run_brake_r"), hash40("run_brake_l")].contains(&MotionModule::motion_kind(boma)) == false ){
-				StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_WAIT, true);
+				};*/
 			};
 		};
 	};
 }
-
-#[acmd_script(
-    agent = "sonic",
-    script =  "expression_specialshold",
-    category = ACMD_EXPRESSION)]
-unsafe fn sonic_lightspeed_ball_fix(fighter: &mut L2CAgentBase) {
-    let lua_state = fighter.lua_state_agent;
-    acmd!(lua_state, {
-		rust {
-			StatusModule::change_status_request_from_script(module_accessor, *FIGHTER_STATUS_KIND_WAIT, true);
-		}
-    });
-}	
-#[acmd_script(
-    agent = "sonic",
-    script =  "expression_specialsholdjump",
-    category = ACMD_EXPRESSION)]
-unsafe fn sonic_lightspeed_ball_fix2(fighter: &mut L2CAgentBase) {
-    let lua_state = fighter.lua_state_agent;
-    acmd!(lua_state, {
-		rust {
-			StatusModule::change_status_request_from_script(module_accessor, *FIGHTER_STATUS_KIND_WAIT, true);
-		}
-    });
-}	
 #[acmd_script(
     agent = "sonic",
     script =  "effect_specialsstart",
     category = ACMD_EFFECT)]
-unsafe fn sonic_lightspeed_dash(fighter: &mut L2CAgentBase) {
+unsafe fn sonic_lightspeed_dash_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
-    acmd!(lua_state, {
-    });
+	let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 }	
 #[acmd_script(
     agent = "sonic",
@@ -849,9 +929,41 @@ unsafe fn sonic_lightspeed_dash(fighter: &mut L2CAgentBase) {
     category = ACMD_SOUND)]
 unsafe fn sonic_lightspeed_dash_sound(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
+}	
+#[acmd_script(
+    agent = "sonic",
+    script =  "game_specialsstart",
+    category = ACMD_GAME)]
+unsafe fn sonic_lightspeed_dash(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
 		if(is_excute){
-			PLAY_SE(hash40("se_sonic_smash_h01"))
+			WorkModule::enable_transition_term(FIGHTER_STATUS_TRANSITION_TERM_ID_CLIFF_CATCH)
+			rust {
+				notify_event_msc_cmd!(fighter, Hash40::new_raw(0x2127e37c07), *GROUND_CLIFF_CHECK_KIND_ALWAYS);
+				notify_event_msc_cmd!(fighter, Hash40::new_raw(0x2127e37c07 as u64), *GROUND_CLIFF_CHECK_KIND_ALWAYS);
+				notify_event_msc_cmd!(fighter, Hash40::new_raw(0x2127e37c07u64), *GROUND_CLIFF_CHECK_KIND_ALWAYS);
+				notify_event_msc_cmd!(fighter, 0x2127e37c07 as u64, *GROUND_CLIFF_CHECK_KIND_ALWAYS);
+				notify_event_msc_cmd!(fighter, 0x2127e37c07u64, *GROUND_CLIFF_CHECK_KIND_ALWAYS);
+			}
+			WorkModule::enable_transition_term(FIGHTER_STATUS_TRANSITION_TERM_ID_CLIFF_CATCH)
+		}
+		frame(Frame=15)
+		if(is_excute){
+			ATTACK(ID=0, Part=0, Bone=hash40("hip"), Damage=8.0, Angle=70, KBG=50, FKB=0, BKB=80, Size=13.0, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.2, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_THRU, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_BODY)
+			WorkModule::enable_transition_term(FIGHTER_STATUS_TRANSITION_TERM_ID_CLIFF_CATCH)
+			rust {
+				notify_event_msc_cmd!(fighter, Hash40::new_raw(0x2127e37c07), *GROUND_CLIFF_CHECK_KIND_ALWAYS);
+				notify_event_msc_cmd!(fighter, Hash40::new_raw(0x2127e37c07 as u64), *GROUND_CLIFF_CHECK_KIND_ALWAYS);
+				notify_event_msc_cmd!(fighter, Hash40::new_raw(0x2127e37c07u64), *GROUND_CLIFF_CHECK_KIND_ALWAYS);
+				notify_event_msc_cmd!(fighter, 0x2127e37c07 as u64, *GROUND_CLIFF_CHECK_KIND_ALWAYS);
+				notify_event_msc_cmd!(fighter, 0x2127e37c07u64, *GROUND_CLIFF_CHECK_KIND_ALWAYS);
+			}
+			WorkModule::enable_transition_term(FIGHTER_STATUS_TRANSITION_TERM_ID_CLIFF_CATCH)
+		}
+		frame(Frame=23)
+		if(is_excute){
+			AttackModule::clear_all()
 		}
     });
 }	
@@ -865,9 +977,8 @@ pub fn install() {
 		sonic_ftilt,
 		sonic_da,
 		sonic_lightspeed_dash,
+		sonic_lightspeed_dash_eff,
 		sonic_lightspeed_dash_sound,
-		sonic_lightspeed_ball_fix,
-		sonic_lightspeed_ball_fix2,
 		sonic_bair_eff,
 		sonic_da_eff,
 		sonic_dsmash_eff,
@@ -879,6 +990,7 @@ pub fn install() {
 		sonic_ftilthi_eff,
 		sonic_ftiltlw_eff,
 		sonic_fthrow_eff,
+		sonic_bthrow_eff,
 		sonic_jab2,
 		sonic_jab1,
 		sonic_rapidjab,
