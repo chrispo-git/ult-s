@@ -188,7 +188,6 @@ pub unsafe fn change_status_request_hook(boma: &mut smash::app::BattleObjectModu
 			let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 			if IS_WAVEDASH[ENTRY_ID] == true {
 				StatusModule::set_situation_kind(boma, smash::app::SituationKind(*SITUATION_KIND_GROUND), true);
-				GroundModule::attach_ground(boma, true);
 			}
 			original!()(boma, status_kind, arg3)
 		}	else {
@@ -203,8 +202,9 @@ pub unsafe fn change_status_request_hook(boma: &mut smash::app::BattleObjectModu
 pub unsafe fn status_pre_EscapeAir(fighter: &mut L2CFighterCommon) -> L2CValue {
     let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);    
 	let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+	let y = ControlModule::get_stick_y(boma);
     //Handles wavedash
-     if IS_WAVEDASH[ENTRY_ID] == true {
+    if IS_WAVEDASH[ENTRY_ID] == true && y < 0.5{
         GroundModule::attach_ground(fighter.module_accessor, true);
         fighter.change_status(FIGHTER_STATUS_KIND_LANDING.into(), false.into());
         return 0.into();
@@ -227,7 +227,6 @@ pub unsafe fn change_status_request_script_hook(boma: &mut smash::app::BattleObj
 			let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 			if IS_WAVEDASH[ENTRY_ID] == true {
 				StatusModule::set_situation_kind(boma, smash::app::SituationKind(*SITUATION_KIND_GROUND), true);
-				GroundModule::attach_ground(boma, true);
 			}
 			original!()(boma, status_kind, arg3)
 		}	else {
@@ -237,7 +236,6 @@ pub unsafe fn change_status_request_script_hook(boma: &mut smash::app::BattleObj
 		original!()(boma, status_kind, arg3)
 	}
 }
-
 
 //Jab Cancel
 #[fighter_frame_callback]
