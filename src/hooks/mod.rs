@@ -8,7 +8,6 @@ use smash_script::*;
 use smash::phx::*;
 use smash::lib::{L2CValue, L2CAgent};
 use smash::phx::Vector2f;
-
 use crate::util::*;
 
 static mut JUMPSQUAT_SPEED: [f32; 8] = [0.0; 8];
@@ -173,6 +172,72 @@ pub fn wavedash(fighter : &mut L2CFighterCommon) {
 		};
     };
 }
+#[skyline::hook(replace = smash::app::lua_bind::StatusModule::change_status_request)]
+pub unsafe fn change_status_request_hook(boma: &mut smash::app::BattleObjectModuleAccessor, status_kind: i32, arg3: bool) -> u64 {
+	let next_status = status_kind;
+	let curr_status = StatusModule::status_kind(boma);
+	let is_clear_buffer = arg3;
+	if smash::app::utility::get_category(boma) == *BATTLE_OBJECT_CATEGORY_FIGHTER {
+		if [*FIGHTER_STATUS_KIND_ESCAPE, *FIGHTER_STATUS_KIND_ESCAPE_F, *FIGHTER_STATUS_KIND_ESCAPE_B].contains(&next_status) {
+			if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP) || ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP_MINI) {
+				 original!()(boma, *FIGHTER_STATUS_KIND_JUMP_SQUAT, false)
+			} else {
+				original!()(boma, status_kind, arg3)
+			}
+		} else if [*FIGHTER_STATUS_KIND_ESCAPE_AIR, *FIGHTER_STATUS_KIND_ESCAPE_AIR_SLIDE].contains(&next_status) {
+			let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+			if IS_WAVEDASH[ENTRY_ID] == true {
+				StatusModule::set_situation_kind(boma, smash::app::SituationKind(*SITUATION_KIND_GROUND), true);
+				GroundModule::attach_ground(boma, true);
+			}
+			original!()(boma, status_kind, arg3)
+		}	else {
+			original!()(boma, status_kind, arg3)
+		}
+	} else {
+		original!()(boma, status_kind, arg3)
+	}
+}
+#[common_status_script(status = FIGHTER_STATUS_KIND_ESCAPE_AIR, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_PRE,
+    symbol = "_ZN7lua2cpp16L2CFighterCommon20status_pre_EscapeAirEv")]
+pub unsafe fn status_pre_EscapeAir(fighter: &mut L2CFighterCommon) -> L2CValue {
+    let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);    
+	let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+    //Handles wavedash
+     if IS_WAVEDASH[ENTRY_ID] == true {
+        GroundModule::attach_ground(fighter.module_accessor, true);
+        fighter.change_status(FIGHTER_STATUS_KIND_LANDING.into(), false.into());
+        return 0.into();
+    }
+    call_original!(fighter)
+}
+#[skyline::hook(replace = smash::app::lua_bind::StatusModule::change_status_request_from_script)]
+pub unsafe fn change_status_request_script_hook(boma: &mut smash::app::BattleObjectModuleAccessor, status_kind: i32, arg3: bool) -> u64 {
+	let next_status = status_kind;
+	let is_clear_buffer = arg3;
+	let curr_status = StatusModule::status_kind(boma);
+	if smash::app::utility::get_category(boma) == *BATTLE_OBJECT_CATEGORY_FIGHTER {
+		if [*FIGHTER_STATUS_KIND_ESCAPE, *FIGHTER_STATUS_KIND_ESCAPE_F, *FIGHTER_STATUS_KIND_ESCAPE_B].contains(&next_status) {
+			if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP) || ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP_MINI) {
+				 original!()(boma, *FIGHTER_STATUS_KIND_JUMP_SQUAT, false)
+			} else {
+				original!()(boma, status_kind, arg3)
+			}
+		} else if [*FIGHTER_STATUS_KIND_ESCAPE_AIR, *FIGHTER_STATUS_KIND_ESCAPE_AIR_SLIDE].contains(&next_status) {
+			let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+			if IS_WAVEDASH[ENTRY_ID] == true {
+				StatusModule::set_situation_kind(boma, smash::app::SituationKind(*SITUATION_KIND_GROUND), true);
+				GroundModule::attach_ground(boma, true);
+			}
+			original!()(boma, status_kind, arg3)
+		}	else {
+			original!()(boma, status_kind, arg3)
+		}
+	} else {
+		original!()(boma, status_kind, arg3)
+	}
+}
+
 
 //Jab Cancel
 #[fighter_frame_callback]
@@ -582,7 +647,8 @@ pub(crate) fn is_edge_cancel(fighter_kind : i32, status_kind : i32) -> bool {
 		[*FIGHTER_KIND_RIDLEY, *FIGHTER_STATUS_KIND_LANDING_FALL_SPECIAL],
 		[*FIGHTER_KIND_RIDLEY, *FIGHTER_STATUS_KIND_ATTACK_DASH],
 		[*FIGHTER_KIND_RICHTER, *FIGHTER_STATUS_KIND_ATTACK_LW3],
-		[*FIGHTER_KIND_SAMUS, *FIGHTER_STATUS_KIND_ATTACK_LW3]
+		[*FIGHTER_KIND_SAMUS, *FIGHTER_STATUS_KIND_ATTACK_LW3],
+		[*FIGHTER_KIND_SONIC, *FIGHTER_STATUS_KIND_SPECIAL_S]
 	];
 	for i in &edge_cancel {
 		if fighter_kind == i[0] && status_kind == i[1] {
@@ -826,6 +892,9 @@ pub fn install() {
 	smashline::install_agent_frame_callbacks!(footstool);
 	skyline::install_hooks!(
         init_settings_replace,
-        correct_replace
+        correct_replace,
+		change_status_request_hook,
+		change_status_request_script_hook
     );
+	smashline::install_status_scripts!(status_pre_EscapeAir);
 }
