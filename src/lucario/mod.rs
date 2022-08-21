@@ -315,13 +315,13 @@ pub fn lucario(fighter : &mut L2CFighterCommon) {
 					};
 					if ControlModule::get_stick_y(boma) > 0.5 {
 						if GroundModule::ray_check(fighter.module_accessor, &Vector2f{ x: PostureModule::pos_x(boma), y: PostureModule::pos_y(boma)}, &Vector2f{ x: 0.0, y: 20.0}, false) == 0 {
-							DOWNB_Y[ENTRY_ID] = PostureModule::pos_y(boma) + 15.0;
+							DOWNB_Y[ENTRY_ID] = PostureModule::pos_y(boma);
 						} else {
 							DOWNB_Y[ENTRY_ID] = PostureModule::pos_y(boma);
 						};
 					} else if  ControlModule::get_stick_y(boma) < -0.5 {
 						if GroundModule::ray_check(fighter.module_accessor, &Vector2f{ x: PostureModule::pos_x(boma), y: PostureModule::pos_y(boma)}, &Vector2f{ x: 0.0, y: -20.0}, false) == 0 {
-							DOWNB_Y[ENTRY_ID] = PostureModule::pos_y(boma) - 20.0;
+							DOWNB_Y[ENTRY_ID] = PostureModule::pos_y(boma);
 						} else {
 							DOWNB_Y[ENTRY_ID] = PostureModule::pos_y(boma);
 						};
@@ -346,13 +346,13 @@ pub fn lucario(fighter : &mut L2CFighterCommon) {
 				let pos = smash::phx::Vector3f { x: DOWNB_X[ENTRY_ID], y: DOWNB_Y[ENTRY_ID], z: 0.0 };
 				PostureModule::set_pos(boma, &pos);
 				PostureModule::init_pos(boma, &pos, true, true);
-				if ControlModule::get_stick_x(boma) > 0.2{
+				/*if ControlModule::get_stick_x(boma) > 0.2{
 					PostureModule::set_lr(boma, -1.0);
 					PostureModule::update_rot_y_lr(boma);
 				} else {
 					PostureModule::set_lr(boma, 1.0);
 					PostureModule::update_rot_y_lr(boma);
-				};
+				};*/
 				if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_ATTACK) && HAS_DOWNB[ENTRY_ID] == false {
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_ATTACK_AIR, false);
 					HAS_DOWNB[ENTRY_ID] = true;
