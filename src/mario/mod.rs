@@ -318,6 +318,55 @@ unsafe fn mario_nair_sound(fighter: &mut L2CAgentBase) {
 }		
 #[acmd_script(
     agent = "mario",
+    scripts =  ["sound_appealhir", "sound_appealhil"],
+    category = ACMD_SOUND)]
+unsafe fn mario_utaunt_snd(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=13)
+		if(is_excute){
+			PLAY_SE(hash40("se_item_mushroom"))
+		}
+		frame(Frame=118)
+		if(is_excute){
+			PLAY_SE(hash40("se_item_mushd"))
+		}
+    });
+}	
+#[acmd_script(
+    agent = "mario",
+    scripts =  ["effect_appealhir", "effect_appealhil"],
+    category = ACMD_EFFECT)]
+unsafe fn mario_utaunt_eff(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=11)
+		for(6 Iterations){
+			if(is_excute){
+				FLASH(1.0, 1.0, 0.502, 0.667)
+			}
+			wait(frames=1)
+			if(is_excute){
+				FLASH(0.313, 0.313, 0.313, 0.35)
+			}
+			wait(frames=3)
+			if(is_excute){
+				FLASH(0.313, 0.313, 0.313, 0.35)
+			}
+			wait(frames=3)
+			if(is_excute){
+				FLASH(1.0, 1.0, 0.502, 0.667)
+			}
+			wait(frames=3)
+		}
+		wait(frames=1)
+		if(is_excute){
+			COL_NORMAL()
+		}
+    });
+}	
+#[acmd_script(
+    agent = "mario",
     scripts =  ["game_specialn", "game_specialairn"],
     category = ACMD_GAME)]
 unsafe fn mario_fireball(fighter: &mut L2CAgentBase) {
@@ -450,7 +499,9 @@ pub fn install() {
 		mario_ground_sideb,
 		mario_ground_sideb_eff,
 		mario_ground_sideb_snd,
-		mario_fireball
+		mario_fireball,
+		mario_utaunt_eff,
+		mario_utaunt_snd
     );
     smashline::install_agent_frame_callbacks!(
         mario_frame
