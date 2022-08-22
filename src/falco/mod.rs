@@ -285,7 +285,7 @@ fn falco_frame(fighter: &mut L2CFighterCommon) {
 		let motion_kind = MotionModule::motion_kind(boma);
 		let frame = MotionModule::frame(boma);
 		if [hash40("special_lw"), hash40("special_lw_r"), hash40("special_lw_l"), hash40("special_air_lw"), hash40("special_air_lw_r"), hash40("special_air_lw_l")].contains(&motion_kind) {
-			if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP) && frame > 7.0 {
+			/*if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP) && frame > 7.0 {
 				if WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT) < WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT_MAX) && StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR {
 					if ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_SPECIAL) || ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_GUARD) {
 						CancelModule::enable_cancel(boma);
@@ -296,7 +296,7 @@ fn falco_frame(fighter: &mut L2CFighterCommon) {
 						CancelModule::enable_cancel(boma);
 					};
 				};
-			};
+			};*/
 			if frame > 32.0 {
 				CancelModule::enable_cancel(boma);
 			};

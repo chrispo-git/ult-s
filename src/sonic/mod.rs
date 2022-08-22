@@ -582,19 +582,35 @@ unsafe fn sonic_rapidjab_eff(fighter: &mut L2CAgentBase) {
     acmd!(lua_state, {
 		for(2 Iterations){
 			if(is_excute){
-				EFFECT(hash40("sys_attack_impact"), hash40("top"), 15.5, 9.5, 0, 0, 0, 0, 0.9, 0, 0, 0, 0, 0, 0, false)
+				rust {
+					let y_rand = (smash::app::sv_math::rand(hash40("fighter"), 100) as f32)/10.0;
+					let x_rand = (smash::app::sv_math::rand(hash40("fighter"), 100) as f32)/10.0;
+					macros::EFFECT(fighter, Hash40::new("sys_attack_impact"), Hash40::new("top"), 7.5+x_rand, 1.5+y_rand, 0, 0, 0, 0, 0.9, 0, 0, 0, 0, 0, 0, false);
+				}
 			}
 			wait(Frames=1)
 			if(is_excute){
-				EFFECT(hash40("sys_attack_impact"), hash40("top"), 11.5, 3.5, 0, 0, 0, 0, 0.9, 0, 0, 0, 0, 0, 0, false)
+				rust {
+					let y_rand = (smash::app::sv_math::rand(hash40("fighter"), 100) as f32)/10.0;
+					let x_rand = (smash::app::sv_math::rand(hash40("fighter"), 100) as f32)/10.0;
+					macros::EFFECT(fighter, Hash40::new("sys_attack_impact"), Hash40::new("top"), 7.5+x_rand, 1.5+y_rand, 0, 0, 0, 0, 0.9, 0, 0, 0, 0, 0, 0, false);
+				}
 			}
 			wait(Frames=1)
 			if(is_excute){
-				EFFECT(hash40("sys_attack_impact"), hash40("top"), 17.5, 3.5, 0, 0, 0, 0, 0.9, 0, 0, 0, 0, 0, 0, false)
+				rust {
+					let y_rand = (smash::app::sv_math::rand(hash40("fighter"), 100) as f32)/10.0;
+					let x_rand = (smash::app::sv_math::rand(hash40("fighter"), 100) as f32)/10.0;
+					macros::EFFECT(fighter, Hash40::new("sys_attack_impact"), Hash40::new("top"), 7.5+x_rand, 1.5+y_rand, 0, 0, 0, 0, 0.9, 0, 0, 0, 0, 0, 0, false);
+				}
 			}
 			wait(Frames=1)
 			if(is_excute){
-				EFFECT(hash40("sys_attack_impact"), hash40("top"), 7.5, 9.5, 0, 0, 0, 0, 0.9, 0, 0, 0, 0, 0, 0, false)
+				rust {
+					let y_rand = (smash::app::sv_math::rand(hash40("fighter"), 100) as f32)/10.0;
+					let x_rand = (smash::app::sv_math::rand(hash40("fighter"), 100) as f32)/10.0;
+					macros::EFFECT(fighter, Hash40::new("sys_attack_impact"), Hash40::new("top"), 7.5+x_rand, 1.5+y_rand, 0, 0, 0, 0, 0.9, 0, 0, 0, 0, 0, 0, false);
+				}
 			}
 			wait(Frames=1)
 		}

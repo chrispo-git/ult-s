@@ -240,5 +240,5 @@ pub fn install() {
 		fox_jab1,
 		fox_jab2
     );
-	smashline::install_agent_frame_callbacks!(fox);
+	//smashline::install_agent_frame_callbacks!(fox);
 }

@@ -93,7 +93,7 @@ pub fn wolf(fighter : &mut L2CFighterCommon) {
 				MotionModule::set_rate(boma, 1.0);
 			};
 		};
-		if fighter_kind == *FIGHTER_KIND_WOLF {
+		/*if fighter_kind == *FIGHTER_KIND_WOLF {
 			if [
 				*FIGHTER_STATUS_KIND_SPECIAL_LW,  
 				*FIGHTER_WOLF_STATUS_KIND_SPECIAL_LW_END,  
@@ -107,7 +107,7 @@ pub fn wolf(fighter : &mut L2CFighterCommon) {
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_JUMP_SQUAT, true);
 				};
 			};
-		};
+		};*/
     }
 }
 		
