@@ -37,6 +37,8 @@ pub static mut CAN_ATTACK_AIR: [i32; 8] = [0; 8];
 pub static mut CAN_AIRDODGE: [i32; 8] = [0; 8];
 pub static mut CAN_RAPID_JAB: [i32; 8] = [0; 8];
 pub static mut CAN_JAB: [i32; 8] = [0; 8];
+pub static mut CAN_DASH: [i32; 8] = [0; 8];
+pub static mut CAN_TURNDASH: [i32; 8] = [0; 8];
 
 //Jab Flags
 pub static mut HAS_ENABLE_COMBO_ON: [bool; 8] = [false; 8];
@@ -101,7 +103,19 @@ pub unsafe fn is_enable_transition_term_hook(boma: &mut smash::app::BattleObject
 			} else {
 				return true 
 			}
-		}  else {
+		}  else if CAN_DASH[ENTRY_ID] != 0  && flag == *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_DASH {
+			if CAN_DASH[ENTRY_ID] == 1 {
+				return false
+			} else {
+				return true 
+			}
+		}  else if CAN_TURNDASH[ENTRY_ID] != 0  && flag == *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_TURN_DASH {
+			if CAN_TURNDASH[ENTRY_ID] == 1 {
+				return false
+			} else {
+				return true 
+			}
+		}   else {
 			original!()(boma, flag)
 		}
 }

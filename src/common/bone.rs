@@ -67,8 +67,8 @@ pub fn bone_rot(fighter : &mut L2CFighterCommon) {
 		bone_const(boma, *FIGHTER_KIND_ROY, hash40("attack_air_f"), hash40("rot"), 16.0, 31.0, 5.0, 0.0, 0.0, 0.0, 0.0, 0.0);
 		
 		//Roy Dair angle side
-		bone_const(boma, *FIGHTER_KIND_ROY, hash40("attack_air_lw"), hash40("rot"), 0.0, 37.0, 0.0, 0.0, 45.0, 45.0, 0.0, 0.0);
-		bone_const(boma, *FIGHTER_KIND_ROY, hash40("attack_air_lw"), hash40("rot"), 37.0, 62.0, 0.0, 0.0, 45.0, 0.0, 0.0, 0.0);
+		/*bone_const(boma, *FIGHTER_KIND_ROY, hash40("attack_air_lw"), hash40("rot"), 0.0, 37.0, 0.0, 0.0, 45.0, 45.0, 0.0, 0.0);
+		bone_const(boma, *FIGHTER_KIND_ROY, hash40("attack_air_lw"), hash40("rot"), 37.0, 62.0, 0.0, 0.0, 45.0, 0.0, 0.0, 0.0);*/
 		
 		//Villy fair foot angle down
 		bone_const(boma, *FIGHTER_KIND_MURABITO, hash40("attack_air_f"), hash40("footl"), 0.0, 44.0, 35.0, 35.0, 0.0, 0.0, 0.0, 0.0);

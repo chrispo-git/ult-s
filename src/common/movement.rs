@@ -13,6 +13,38 @@ static mut STALE_MAX : f32 = 1.0;
 static mut STALE_TIMER_MAX : i32 = 480;
 static mut FOOTSTOOL_STALE: [f32; 8] = [21.0; 8];
 static mut FOOTSTOOL_STALE_TIMER: [i32; 8] = [0; 8];
+static mut PERFECT_PIVOT: [bool; 8] = [false; 8];
+
+//Perfect Pivot
+#[fighter_frame_callback]
+pub fn perfectpivot(fighter : &mut L2CFighterCommon) {
+    unsafe {
+        let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);  
+		let mut stickx = ControlModule::get_stick_x(boma);		
+		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
+		let lr = PostureModule::lr(boma);
+		stickx = stickx * lr;
+		let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+        if [*FIGHTER_STATUS_KIND_DASH, *FIGHTER_STATUS_KIND_TURN_DASH].contains(&status_kind) {
+			if MotionModule::frame(boma) <= 4.0 {
+				CAN_DASH[ENTRY_ID] = 1;
+				CAN_TURNDASH[ENTRY_ID] = 1;
+				if stickx <= -0.5 {
+					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_TURN, true);
+				};
+			} else {
+				CAN_DASH[ENTRY_ID] = 0;
+				CAN_TURNDASH[ENTRY_ID] = 0;
+			};
+		} else {
+			CAN_DASH[ENTRY_ID] = 0;
+			CAN_TURNDASH[ENTRY_ID] = 0;
+		};
+		if status_kind == *FIGHTER_STATUS_KIND_TURN {
+			JostleModule::set_status(boma, false);
+		};
+    };
+}
 
 #[fighter_frame_callback]
 pub fn footstool(fighter : &mut L2CFighterCommon) {
@@ -66,26 +98,6 @@ pub fn djc(fighter : &mut L2CFighterCommon) {
     };
 }
 
-//Perfect Pivot
-#[fighter_frame_callback]
-pub fn perfectpivot(fighter : &mut L2CFighterCommon) {
-    unsafe {
-        let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);  
-		let mut stickx = ControlModule::get_stick_x(boma);		
-		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
-		let lr = PostureModule::lr(boma);
-		stickx = stickx * lr;
-        if status_kind == *FIGHTER_STATUS_KIND_DASH && status_duration(boma) <= 8 {
-			if stickx < -0.5 {
-				StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_TURN, true);
-				//println!("Perfect pivot lets go!");
-			};
-		};
-		if status_kind == *FIGHTER_STATUS_KIND_TURN {
-			JostleModule::set_status(boma, false);
-		};
-    };
-}
 //Dash changes
 #[fighter_frame_callback]
 pub fn dash(fighter : &mut L2CFighterCommon) {

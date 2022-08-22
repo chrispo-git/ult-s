@@ -13,7 +13,6 @@ use crate::util::*;
 static mut IS_WAVEDASH: [bool; 8] = [false; 8];
 static mut WAVEDASH_DONE: [bool; 8] = [false; 8];
 
-
 #[fighter_frame_callback]
 pub fn wavedash(fighter : &mut L2CFighterCommon) {
     unsafe {
@@ -32,7 +31,7 @@ pub fn wavedash(fighter : &mut L2CFighterCommon) {
 			if [*FIGHTER_STATUS_KIND_ESCAPE_AIR, *FIGHTER_STATUS_KIND_ESCAPE_AIR_SLIDE].contains(&status_kind) && IS_WAVEDASH[ENTRY_ID] == true {
 				let y = ControlModule::get_stick_y(boma);
 				let x = ControlModule::get_stick_x(boma);
-				if y < 0.3 && (ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_JUMP) || ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP_MINI)){
+				/*if y < 0.3 && (ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_JUMP) || ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP_MINI)){
 					let stop_rise  = smash::phx::Vector3f { x: 1.0, y: 0.0, z: 1.0 };
 					KineticModule::mul_speed(boma, &stop_rise, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
 					let mut z = 0;
@@ -48,16 +47,16 @@ pub fn wavedash(fighter : &mut L2CFighterCommon) {
 						WAVEDASH_DONE[ENTRY_ID] = true;
 					};
 					StatusModule::set_situation_kind(boma, smash::app::SituationKind(*SITUATION_KIND_GROUND), true);
-				};
+				};*/
 				IS_WAVEDASH[ENTRY_ID] = false;
 			};
-			if WAVEDASH_DONE[ENTRY_ID] == true && status_kind == *FIGHTER_STATUS_KIND_LANDING{
+			/*if WAVEDASH_DONE[ENTRY_ID] == true && status_kind == *FIGHTER_STATUS_KIND_LANDING{
 				let stop_rise  = smash::phx::Vector3f { x: 0.0, y: 1.0, z: 1.0 };
 				KineticModule::mul_speed(boma, &stop_rise, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
 				let speed = smash::phx::Vector3f { x: 0.1, y: 0.0, z: 0.0 };
 				KineticModule::add_speed(boma, &speed);
 				WAVEDASH_DONE[ENTRY_ID] = false;
-			};
+			};*/
 		} else {
 			if status_kind == *FIGHTER_STATUS_KIND_JUMP_SQUAT {
 				IS_WAVEDASH[ENTRY_ID] = true;
@@ -103,7 +102,7 @@ pub unsafe fn change_status_request_hook(boma: &mut smash::app::BattleObjectModu
 				StatusModule::set_situation_kind(boma, smash::app::SituationKind(*SITUATION_KIND_GROUND), true);
 			}
 			original!()(boma, status_kind, arg3)
-		}	else {
+		} else {
 			original!()(boma, status_kind, arg3)
 		}
 	} else {
@@ -142,7 +141,7 @@ pub unsafe fn change_status_request_script_hook(boma: &mut smash::app::BattleObj
 				StatusModule::set_situation_kind(boma, smash::app::SituationKind(*SITUATION_KIND_GROUND), true);
 			}
 			original!()(boma, status_kind, arg3)
-		}	else {
+		} else {
 			original!()(boma, status_kind, arg3)
 		}
 	} else {
