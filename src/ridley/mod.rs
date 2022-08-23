@@ -38,10 +38,10 @@ pub fn ridley(fighter : &mut L2CFighterCommon) {
 				let speed = smash::phx::Vector3f { x: 0.05, y: -0.1, z: 0.0 };
 				KineticModule::add_speed(boma, &speed);
 				if MotionModule::frame(boma) < 2.0 {
-					macros::SET_SPEED_EX(fighter, 3.0, 1.75, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+					macros::SET_SPEED_EX(fighter, 3.0*0.8, 1.75*0.8, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
 				};
-				if MotionModule::frame(boma) > 32.0 {
-					StatusModule::change_status_request_from_script(boma, *FIGHTER_RIDLEY_STATUS_KIND_SPECIAL_S_CUT, true);
+				if MotionModule::frame(boma) > 32.0 || ControlModule::check_button_on_trriger(boma, *CONTROL_PAD_BUTTON_SPECIAL) {
+					StatusModule::change_status_request_from_script(boma, *FIGHTER_RIDLEY_STATUS_KIND_SPECIAL_S_FALL_JUMP, true);
 				};
 				StatusModule::set_keep_situation_air(boma, true);
 			};
