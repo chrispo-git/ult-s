@@ -34,13 +34,16 @@ pub fn ridley(fighter : &mut L2CFighterCommon) {
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_PASSIVE_WALL_JUMP, true);
 				};
 			};
+			if status_kind == *FIGHTER_RIDLEY_STATUS_KIND_SPECIAL_S_CATCH {
+				macros::SET_SPEED_EX(fighter, 3.0*0.8, 1.75*0.8, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+			};
 			if status_kind == *FIGHTER_RIDLEY_STATUS_KIND_SPECIAL_S_FALL {
 				let speed = smash::phx::Vector3f { x: 0.05, y: -0.1, z: 0.0 };
-				KineticModule::add_speed(boma, &speed);
 				if MotionModule::frame(boma) < 2.0 {
 					macros::SET_SPEED_EX(fighter, 3.0*0.8, 1.75*0.8, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
 				};
-				if MotionModule::frame(boma) > 32.0 || ControlModule::check_button_on_trriger(boma, *CONTROL_PAD_BUTTON_SPECIAL) {
+				KineticModule::add_speed(boma, &speed);
+				if MotionModule::frame(boma) > 27.0 || ControlModule::check_button_on_trriger(boma, *CONTROL_PAD_BUTTON_SPECIAL) {
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_RIDLEY_STATUS_KIND_SPECIAL_S_FALL_JUMP, true);
 				};
 				StatusModule::set_keep_situation_air(boma, true);
@@ -215,13 +218,21 @@ unsafe fn ridley_sideb_end(fighter: &mut L2CAgentBase) {
 		}
     });
 }		
+#[acmd_script(
+    agent = "ridley",
+    script =  "effect_specialairsfall",
+    category = ACMD_EFFECT)]
+unsafe fn ridley_sideb_fall_eff(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+}		
 		
 pub fn install() {
     smashline::install_acmd_scripts!(
 		ridley_uair,
 		ridley_fair,
 		ridley_bair,
-		ridley_sideb_end
+		ridley_sideb_end,
+		ridley_sideb_fall_eff
     );
 	smashline::install_agent_frame_callbacks!(ridley);
 }
