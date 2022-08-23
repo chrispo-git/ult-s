@@ -141,6 +141,7 @@ unsafe fn pichu_facade(fighter: &mut L2CAgentBase) {
 		};
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.5);
 		frame(fighter.lua_state_agent, 3.0);
+		macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.0);
 		if macros::is_excute(fighter) {
 			macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ hitbox_dmg, /*Angle*/ 80, /*KBG*/ 40, /*FKB*/ 0, /*BKB*/ 60, /*Size*/ hitbox_size, /*X*/ 0.0, /*Y*/ 6.0, /*Z*/ -3.0, /*X2*/ Some(0.0), /*Y2*/ Some(6.0), /*Z2*/ Some(3.0), /*Hitlag*/ new_hitlag, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ shielddamage, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_elec"), /*SFXLevel*/ sfx, /*SFXType*/ *COLLISION_SOUND_ATTR_ELEC, /*Type*/ *ATTACK_REGION_KICK);
 			AttackModule::set_add_reaction_frame(fighter.module_accessor, /*ID*/ 0, /*Frames*/ hitbox_bonus, /*Unk*/ false);
@@ -150,6 +151,10 @@ unsafe fn pichu_facade(fighter: &mut L2CAgentBase) {
 		frame(fighter.lua_state_agent, 6.0);
 		if macros::is_excute(fighter) {
 			AttackModule::clear_all(fighter.module_accessor);
+		};
+		frame(fighter.lua_state_agent, 24.0);
+		if macros::is_excute(fighter) {
+			CancelModule::enable_cancel(fighter.module_accessor);
 		};
 }	
 #[acmd_script(
