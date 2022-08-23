@@ -267,10 +267,13 @@ unsafe fn roy_dair_eff(fighter: &mut L2CAgentBase) {
 		frame(Frame=7)
 		if(is_excute){
 			AFTER_IMAGE4_ON_arg29(0x0e4d7b4c4bu64, 0x0ed4721df1u64, 7, hash40("sword1"), 0, 0, -0.8, hash40("sword1"), -0.0, -0.0, 14.5, true, 0x09e9785222u64, hash40("sword1"), 0, 0, 0, 0, 0, 0, 1, 0, EFFECT_AXIS_X, 0, TRAIL_BLEND_ALPHA, 101, TRAIL_CULL_NONE, 1.3, 0.2)
+			EFFECT_FOLLOW(0x08195da748u64, hash40("sword1"), 0, 0, 0, 0, 0, 0, 0.8, true)
+			LAST_EFFECT_SET_RATE(1.3)
 		}
 		frame(Frame=14)
 		if(is_excute){
 			AFTER_IMAGE_OFF(6)
+			EFFECT_OFF_KIND(0x08195da748u64, false, false)
 		}
     });
 }	
@@ -406,7 +409,6 @@ unsafe fn roy_ftilt(fighter: &mut L2CAgentBase) {
 		if(is_excute){
 			ATTACK(ID=0, Part=0, Bone=hash40("sword1"), Damage=12.5, Angle=361, KBG=105, FKB=0, BKB=30, Size=4.1, X=0.0, Y=0.0, Z=1.5, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.15, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_ROY_HIT, Type=ATTACK_REGION_SWORD)
 			ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=10.0, Angle=90, KBG=80, FKB=0, BKB=40, Size=7.0, X=0.0, Y=8.0, Z=25.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.85, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_fire"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_FIRE, Type=ATTACK_REGION_SWORD)
-			ATTACK(ID=2, Part=0, Bone=hash40("sword1"), Damage=8.0, Angle=361, KBG=80, FKB=0, BKB=40, Size=3.0, X=0.0, Y=0.0, Z=5.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.15, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_SWORD)
 		}
 		wait(Frames=3)
 		FT_MOTION_RATE(FSM=1.35)
@@ -442,6 +444,127 @@ unsafe fn roy_ftilt_eff(fighter: &mut L2CAgentBase) {
 		}
     });
 }		
+#[acmd_script(
+    agent = "roy",
+    script =  "sound_attacks3",
+    category = ACMD_SOUND)]
+unsafe fn roy_ftilt_snd(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=7)
+		if(is_excute){
+			PLAY_SEQUENCE(hash40("seq_roy_rnd_attack"))
+			PLAY_SE(hash40("se_roy_attackl_s01"))
+		}
+		frame(Frame=8)
+		if(is_excute){
+			PLAY_SE(hash40("se_roy_special_n02"))
+		}
+    });
+}		
+#[acmd_script(
+    agent = "roy",
+    script =  "game_attackdash",
+    category = ACMD_GAME)]
+unsafe fn roy_da(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=8)
+		if(is_excute){
+			ATTACK(ID=0, Part=0, Bone=hash40("kneer"), Damage=6.0, Angle=35, KBG=100, FKB=90, BKB=0, Size=5.0, X=-4.0, Y=0.0, Z=1.5, X2=5.0, Y2=0.0, Z2=1.5, Hitlag=0.75, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=true, ShieldDamage=0, Trip=-1.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
+		}
+		frame(Frame=11)
+		if(is_excute){
+			ATTACK(ID=0, Part=0, Bone=hash40("kneer"), Damage=6.0, Angle=35, KBG=100, FKB=85, BKB=0, Size=5.0, X=-4.0, Y=0.0, Z=1.5, X2=5.0, Y2=0.0, Z2=1.5, Hitlag=0.75, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=true, ShieldDamage=0, Trip=-1.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
+		}
+		frame(Frame=17)
+		if(is_excute){
+			AttackModule::clear_all()
+		}
+    });
+}	
+#[acmd_script(
+    agent = "roy",
+    script =  "game_attackdash2",
+    category = ACMD_GAME)]
+unsafe fn roy_da2(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=8)
+		if(is_excute){
+			ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=11.0, Angle=42, KBG=83, FKB=0, BKB=50, Size=7.0, X=0.0, Y=5.5, Z=18.0, X2=0.0, Y2=5.5, Z2=-2.5, Hitlag=1.15, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=1, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_ROY_HIT, Type=ATTACK_REGION_SWORD)
+		}
+		wait(Frames=3)
+		if(is_excute){
+			AttackModule::clear_all()
+		}
+    });
+}	
+#[acmd_script(
+    agent = "roy",
+    script =  "effect_attackdash2",
+    category = ACMD_EFFECT)]
+unsafe fn roy_da2_eff(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=7)
+		if(is_excute){
+			AFTER_IMAGE4_ON_arg29(0x0e4d7b4c4bu64, 0x0ed4721df1u64, 7, hash40("sword1"), 0, 0, -0.8, hash40("sword1"), -0.0, -0.0, 14.5, true, 0x09e9785222u64, hash40("sword1"), 0, 0, 0, 0, 0, 0, 1, 0, EFFECT_AXIS_X, 0, TRAIL_BLEND_ALPHA, 101, TRAIL_CULL_NONE, 1.3, 0.2)
+			EFFECT_FOLLOW(0x08195da748u64, hash40("sword1"), 0, 0, 0, 0, 0, 0, 0.8, true)
+			LAST_EFFECT_SET_ALPHA(0.4)
+		}
+		frame(Frame=13)
+		if(is_excute){
+			AFTER_IMAGE_OFF(3)
+			EFFECT_OFF_KIND(0x08195da748u64, false, false)
+		}
+    });
+}	
+#[acmd_script(
+    agent = "roy",
+    script =  "effect_attackdash",
+    category = ACMD_EFFECT)]
+unsafe fn roy_da_eff(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=6)
+		if(is_excute){
+			LANDING_EFFECT(hash40("sys_h_smoke_b"), hash40("top"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, true)
+		}
+    });
+}	
+#[acmd_script(
+    agent = "roy",
+    script =  "sound_attackdash2",
+    category = ACMD_SOUND)]
+unsafe fn roy_da2_snd(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=4)
+		if(is_excute){
+			PLAY_SE(hash40("se_common_swing_09"))
+		}
+		wait(Frames=3)
+		if(is_excute){
+			PLAY_SEQUENCE(hash40("seq_roy_rnd_attack_air"))
+			PLAY_SE(hash40("se_roy_attackair_b01"))
+		}
+    });
+}	
+#[acmd_script(
+    agent = "roy",
+    script =  "sound_attackdash",
+    category = ACMD_SOUND)]
+unsafe fn roy_da_snd(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=6)
+		if(is_excute){
+			PLAY_SEQUENCE(hash40("seq_roy_rnd_attack"))
+			PLAY_SE(hash40("se_roy_attackdash"))
+		}
+    });
+}	
 #[fighter_frame_callback]
 pub fn roy(fighter : &mut L2CFighterCommon) {
     unsafe {
@@ -451,7 +574,7 @@ pub fn roy(fighter : &mut L2CFighterCommon) {
 		let fighter_kind = smash::app::utility::get_kind(boma);
 		let speed = 5.8;
 		if fighter_kind == *FIGHTER_KIND_ROY {
-			if [hash40("attack_s3_s")].contains(&MotionModule::motion_kind(boma)) {
+			/*if [hash40("attack_s3_s")].contains(&MotionModule::motion_kind(boma)) {
 				if MotionModule::frame(boma) > 9.0 && MotionModule::frame(boma) < 20.0 {
 					if MotionModule::frame(boma) < 12.0 || AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_ALL) == false {
 						if MotionModule::frame(boma) < 19.0 {
@@ -472,6 +595,14 @@ pub fn roy(fighter : &mut L2CFighterCommon) {
 				} else {
 					EffectModule::kill_kind(boma, smash::phx::Hash40::new("sys_fireflower_shot"), false, false);
 				};
+			};*/
+			if [hash40("attack_dash")].contains(&MotionModule::motion_kind(boma)) {
+				if MotionModule::frame(boma) >= 36.0 {
+					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_SQUAT_RV, true);
+				};
+				if MotionModule::frame(boma) >= 22.0 && AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_ALL) == true {
+					MotionModule::change_motion(boma, smash::phx::Hash40::new("attack_dash_2"), 0.0, 1.0, false, 0.0, false, false);
+				};
 			};
 		};
 	};
@@ -482,6 +613,7 @@ pub fn install() {
 		roy_jab,
 		roy_ftilt,
 		roy_ftilt_eff,
+		roy_ftilt_snd,
 		roy_ded,
 		roy_dash,
 		roy_tdash,
@@ -495,7 +627,13 @@ pub fn install() {
 		roy_nair,
 		roy_dtilt,
 		roy_usmash,
-		roy_ded1
+		roy_ded1,
+		roy_da,
+		roy_da2,
+		roy_da2_eff,
+		roy_da_snd,
+		roy_da2_snd,
+		roy_da_eff
     );
-    //smashline::install_agent_frame_callbacks!(roy);
+    smashline::install_agent_frame_callbacks!(roy);
 }
