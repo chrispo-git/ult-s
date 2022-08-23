@@ -39,7 +39,7 @@ pub fn dacus(fighter : &mut L2CFighterCommon) {
 		let f16 = [
 			*FIGHTER_KIND_IKE, *FIGHTER_KIND_SHULK, *FIGHTER_KIND_EFLAME
 		];
-        if status_kind == *FIGHTER_STATUS_KIND_ATTACK_DASH && AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_SHIELD) == false{
+        if status_kind == *FIGHTER_STATUS_KIND_ATTACK_DASH && AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_SHIELD) == false && MotionModule::motion_kind(boma) == hash40("attack_dash"){
 				if ((f16.contains(&fighter_kind) && motion_duration(boma) <= 16) || 
 				(f14.contains(&fighter_kind) && motion_duration(boma) <= 14) || 
 				(f12.contains(&fighter_kind) && motion_duration(boma) <= 12) ||
