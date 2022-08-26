@@ -49,6 +49,9 @@ pub static mut HAS_ENABLE_100_ON: [bool; 8] = [false; 8];
 #[skyline::hook(replace = smash::app::lua_bind::WorkModule::is_enable_transition_term)]
 pub unsafe fn is_enable_transition_term_hook(boma: &mut smash::app::BattleObjectModuleAccessor, flag: i32) -> bool {
 		let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+		if smash::app::utility::get_category(boma) != *BATTLE_OBJECT_CATEGORY_FIGHTER {
+			original!()(boma, flag);
+		}
 		if CAN_UPB[ENTRY_ID] != 0 && flag == *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_SPECIAL_HI {
 			if CAN_UPB[ENTRY_ID] == 1 {
 				return false
@@ -121,6 +124,9 @@ pub unsafe fn is_enable_transition_term_hook(boma: &mut smash::app::BattleObject
 }
 #[skyline::hook(replace = smash::app::lua_bind::WorkModule::on_flag)]
 pub unsafe fn on_flag_hook(boma: &mut smash::app::BattleObjectModuleAccessor, int: c_int) -> () {
+	if smash::app::utility::get_category(boma) != *BATTLE_OBJECT_CATEGORY_FIGHTER {
+		original!()(boma, int);
+	}
 	if int == *FIGHTER_STATUS_ATTACK_FLAG_ENABLE_100 {
 		HAS_ENABLE_100_ON[WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize] = true;
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
@@ -148,6 +154,9 @@ pub unsafe fn on_flag_hook(boma: &mut smash::app::BattleObjectModuleAccessor, in
 }
 #[skyline::hook(replace = smash::app::lua_bind::WorkModule::off_flag)]
 pub unsafe fn off_flag_hook(boma: &mut smash::app::BattleObjectModuleAccessor, int: c_int) -> () {
+	if smash::app::utility::get_category(boma) != *BATTLE_OBJECT_CATEGORY_FIGHTER {
+		original!()(boma, int);
+	}
 	if int == *FIGHTER_STATUS_ATTACK_FLAG_ENABLE_100 {
 		HAS_ENABLE_100_ON[WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize] = false;
 		original!()(boma, int)
