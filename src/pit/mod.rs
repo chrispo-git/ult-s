@@ -97,7 +97,6 @@ unsafe fn pit_dtilt(fighter: &mut L2CAgentBase) {
 		frame(Frame=6)
 		if(is_excute){
 			ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=6.0, Angle=90, KBG=46, FKB=0, BKB=70, Size=2.5, X=0.0, Y=3.0, Z=16.0, X2=0.0, Y2=5.0, Z2=7.0, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.2, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_PALUTENA)
-			AttackModule::set_add_reaction_frame(ID=0, Frames=6.0, Unk=false)
 		}
 		wait(Frames=2)
 		if(is_excute){
