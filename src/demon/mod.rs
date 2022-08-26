@@ -54,6 +54,9 @@ fn kaz_frame(fighter: &mut L2CFighterCommon) {
 pub unsafe fn reaction_frame_hook(boma: &mut smash::app::BattleObjectModuleAccessor, int: c_int, float: f32, arg4: bool) -> () {
 	let fighter_kind = smash::app::utility::get_kind(boma);
 	let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
+	if smash::app::utility::get_category(boma) != *BATTLE_OBJECT_CATEGORY_FIGHTER {
+		original!()(boma, int, float, arg4);
+	}
 	if fighter_kind == *FIGHTER_KIND_DEMON {
 		if status_kind == *FIGHTER_DEMON_STATUS_KIND_ATTACK_STEP_2F {
 			if float as i32 ==  19 {
