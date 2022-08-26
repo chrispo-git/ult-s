@@ -797,8 +797,8 @@ pub fn char_input(fighter : &mut L2CFighterCommon) {
 					INPUT_WINDOW[ENTRY_ID] = 0;
 				};
 			};
+			/*
 			//Wario
-			/*Quarantined due to crashes relating to wario
 			if fighter_kind == *FIGHTER_KIND_WARIO {
 				if true{
 					if INPUT_NUM[ENTRY_ID] == 0 && STICK_NUM[ENTRY_ID] == 2 {
@@ -856,7 +856,8 @@ pub fn char_input(fighter : &mut L2CFighterCommon) {
 				if StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR  && MotionModule::motion_kind(boma) == hash40("attack_dash") && MotionModule::frame(boma) > 27.0 {
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL_SPECIAL, true);
 				};
-			};*/
+			};
+			*/
 			//Richter
 			if fighter_kind == *FIGHTER_KIND_RICHTER {
 				if true{
