@@ -580,7 +580,7 @@ fn kirby_frame(fighter: &mut L2CFighterCommon) {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 		let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
-		if status_kind == *FIGHTER_KIRBY_STATUS_KIND_SPECIAL_HI2 && MotionModule::frame(boma) >= 13.0 {
+		if status_kind == *FIGHTER_KIRBY_STATUS_KIND_SPECIAL_HI2 && MotionModule::frame(boma) >= 37.0 {
 			StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL_SPECIAL, true);
 		};
 		if status_kind == *FIGHTER_KIRBY_STATUS_KIND_SPECIAL_HI2 {
@@ -629,7 +629,7 @@ fn kirby_frame(fighter: &mut L2CFighterCommon) {
 			StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL_SPECIAL, true);
 		};
 		if status_kind == *FIGHTER_KIRBY_STATUS_KIND_SPECIAL_HI4 {
-			StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_LANDING, true);
+			StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_LANDING_FALL_SPECIAL, true);
 		};
 		if status_kind == *FIGHTER_STATUS_KIND_FINAL || status_kind == *FIGHTER_STATUS_KIND_FINAL_JUMP_END {
 			IS_FINAL[ENTRY_ID] = true;
