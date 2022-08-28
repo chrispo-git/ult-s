@@ -688,7 +688,7 @@ unsafe fn lucina_fair_hero(fighter: &mut L2CAgentBase) {
 						macros::ATTACK(fighter, /*ID*/ 2, /*Part*/ 0, /*Bone*/ Hash40::new("sword1"), /*Damage*/ 13.5, /*Angle*/ 361, /*KBG*/ 77, /*FKB*/ 0, /*BKB*/ 40, /*Size*/ 3.0*HERO_SWORD_MULT, /*X*/ 1.0, /*Y*/ 0.0, /*Z*/ ((9.5-4.5)*HERO_SWORD_MULT)+4.5, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.25, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_marth_shield_breaker"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_CUTUP, /*Type*/ *ATTACK_REGION_SWORD);
 						/*macros::ATK_SET_SHIELD_SETOFF_MUL_arg5(fighter, /*ID1*/ 0, /*ID2*/ 1, /*ID3*/ 2, /*ID4*/ 3, /*ShieldstunMul*/ 1.4);*/
 		};
-		frame(fighter.lua_state_agent, 17.0);
+		frame(fighter.lua_state_agent, 16.0);
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.68);
 		if macros::is_excute(fighter) {
 			AttackModule::clear_all(fighter.module_accessor);
@@ -719,13 +719,13 @@ unsafe fn lucina_fair_hero_snd(fighter: &mut L2CAgentBase) {
 unsafe fn lucina_fair_hero_eff(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-		frame(fighter.lua_state_agent, 8.0);
+		frame(fighter.lua_state_agent, 9.0);
 		if macros::is_excute(fighter) {
 			macros::AFTER_IMAGE4_ON_arg29(fighter, Hash40::new("tex_lucina_sword1"), Hash40::new("tex_lucina_sword2"), 9, Hash40::new("sword1"), 0.0, 0.0, 1.65, Hash40::new("sword1"), -0.0, -0.0, 12.4, true, Hash40::new("lucina_sword"), Hash40::new("haver"), 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0, *EFFECT_AXIS_X, 0, *TRAIL_BLEND_ALPHA, 101, *TRAIL_CULL_NONE, 1.2, 0.2);
 		};
-		frame(fighter.lua_state_agent, 15.0);
+		frame(fighter.lua_state_agent, 14.0);
 		if macros::is_excute(fighter) {
-			macros::AFTER_IMAGE_OFF(fighter, 4);
+			macros::AFTER_IMAGE_OFF(fighter, 3);
 		};
 }		
 #[acmd_script(
@@ -1717,10 +1717,10 @@ pub fn lucina(fighter : &mut L2CFighterCommon) {
 				} else if wrist_rot < 0.0 {
 					wrist_rot = 0.0;
 				};
-				bone_const(boma, *FIGHTER_KIND_LUCINA, hash40("attack_air_f2"), hash40("handr"), 0.0, 40.0, 0.0, 0.0, wrist_rot, wrist_rot, 0.0, 0.0);
+				/*bone_const(boma, *FIGHTER_KIND_LUCINA, hash40("attack_air_f2"), hash40("handr"), 0.0, 40.0, 0.0, 0.0, wrist_rot, wrist_rot, 0.0, 0.0);
 				bone_const(boma, *FIGHTER_KIND_LUCINA, hash40("attack_air_f2"), hash40("handr"), 40.0, 69.0, 0.0, 0.0, wrist_rot, 0.0, 0.0, 0.0);
 				bone_const(boma, *FIGHTER_KIND_LUCINA, hash40("attack_air_f2"), hash40("rot"), 0.0, 40.0, wrist_rot*0.8, wrist_rot*0.8, 0.0, 0.0, 0.0, 0.0);
-				bone_const(boma, *FIGHTER_KIND_LUCINA, hash40("attack_air_f2"), hash40("rot"), 40.0, 69.0, wrist_rot*0.8, 0.0, 0.0, 0.0, 0.0, 0.0);
+				bone_const(boma, *FIGHTER_KIND_LUCINA, hash40("attack_air_f2"), hash40("rot"), 40.0, 69.0, wrist_rot*0.8, 0.0, 0.0, 0.0, 0.0, 0.0);*/
 				let joint_scale = smash::phx::Vector3f { x: HERO_SWORD_MULT, y: HERO_SWORD_MULT, z: HERO_SWORD_MULT };
 				ModelModule::set_joint_scale(boma, smash::phx::Hash40::new("havel"), &joint_scale);	
 				ModelModule::set_joint_scale(boma, smash::phx::Hash40::new("sword1"), &joint_scale);	
