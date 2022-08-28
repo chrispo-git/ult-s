@@ -295,10 +295,10 @@ fn wario_frame(fighter: &mut L2CFighterCommon) {
 		let situation_kind = StatusModule::situation_kind(boma);
 		let is_near_ground = GroundModule::ray_check(boma, &Vector2f{ x: PostureModule::pos_x(boma), y: PostureModule::pos_y(boma)}, &Vector2f{ x: 0.0, y: -1.0}, true);
 		println!("is near ground {}", is_near_ground);
-		if ![*FIGHTER_STATUS_KIND_ENTRY, *FIGHTER_STATUS_KIND_WIN].contains(&status_kind) {
+		if ![*FIGHTER_STATUS_KIND_ENTRY, *FIGHTER_STATUS_KIND_WIN].contains(&status_kind) && smash::app::sv_information::is_ready_go() {
 			ArticleModule::remove_exist(boma, *FIGHTER_WARIO_GENERATE_ARTICLE_WARIOBIKE,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
 		};
-		if situation_kind != *SITUATION_KIND_AIR {
+		if situation_kind != *SITUATION_KIND_AIR && MotionModule::motion_kind(boma) != hash40("special_s_search"){
 			BAN_SIDEB[ENTRY_ID] = false;
 			HAS_BOUNCE[ENTRY_ID] = false;
 		};
@@ -315,11 +315,13 @@ fn wario_frame(fighter: &mut L2CFighterCommon) {
 						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL, true);
 					};
 				} else if MotionModule::frame(boma) > 31.0 {
-					if MotionModule::frame(boma) < 37.0 {
-						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_WAIT, true);
-					} else {
-						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_LANDING, true);
-					};
+						if MotionModule::frame(boma) < 37.0 {
+							if !HAS_BOUNCE[ENTRY_ID] {
+								StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_WAIT, true);
+							};
+						} else {
+							StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_LANDING, true);
+						};
 				};
 				if is_near_ground == 1 {
 					MotionModule::set_rate(boma, 0.5);
@@ -353,11 +355,13 @@ fn wario_frame(fighter: &mut L2CFighterCommon) {
 					KineticModule::suspend_energy(boma, *FIGHTER_KINETIC_ENERGY_ID_CONTROL);
 					macros::QUAKE(fighter, *CAMERA_QUAKE_KIND_M);
 				};
+				if AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_HIT) && !HAS_BOUNCE[ENTRY_ID] {
+					macros::PLAY_SE(fighter, Hash40::new("se_wario_landing01"));
+					macros::SET_SPEED_EX(fighter, -0.5, 2.0, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+					macros::QUAKE(fighter, *CAMERA_QUAKE_KIND_M);
+				};
 				HAS_BOUNCE[ENTRY_ID] = true;
 			}
-			if HAS_BOUNCE[ENTRY_ID] &&  WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_HIT_STOP_ATTACK_SUSPEND_FRAME) == 2 {
-				macros::SET_SPEED_EX(fighter, -0.5, 2.0, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
-			};
 			if HAS_BOUNCE[ENTRY_ID] &&  WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_HIT_STOP_ATTACK_SUSPEND_FRAME) < 1 {
 				if MotionModule::frame(boma) < 25.0 {
 					MotionModule::change_motion(boma, smash::phx::Hash40::new("special_s_search"), 25.0, 1.0, false, 0.0, false, false);
