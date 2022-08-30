@@ -111,6 +111,7 @@ pub fn robin(fighter : &mut L2CFighterCommon) {
 		let stick_y = ControlModule::get_stick_y(boma);
 		let speed_x = KineticModule::get_sum_speed_x(boma, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
 		let speed_y = KineticModule::get_sum_speed_y(boma, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+		let frame = MotionModule::frame(boma);
 		let end_frame = MotionModule::end_frame(boma);
 		let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
@@ -150,13 +151,15 @@ pub fn robin(fighter : &mut L2CFighterCommon) {
 					};
 					acmd!(lua_state, {PLAY_FLY_VOICE(hash40("seq_reflet_rnd_futtobi01"), hash40("seq_reflet_rnd_futtobi02"))});
 					macros::PLAY_SE(fighter, Hash40::new("se_reflet_special_l01"));
-				};
-				if MotionModule::frame(boma) > 20.0 {
-					if situation_kind == *SITUATION_KIND_AIR {
-						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL, false);
-					} else {
-						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_WAIT, false);
+					if StatusModule::is_situation_changed(boma) {
+						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_LANDING, true);
 					};
+				};
+				if end_frame-frame < 5.0 && situation_kind != *SITUATION_KIND_AIR {
+						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_WAIT, false);
+				};
+				if  end_frame-frame < 3.0 && situation_kind == *SITUATION_KIND_AIR {
+						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL, false);
 				};
 			};
 			if status_kind == *FIGHTER_REFLET_STATUS_KIND_SPECIAL_LW_END {
@@ -231,7 +234,12 @@ pub fn robin(fighter : &mut L2CFighterCommon) {
 						START_FLOAT[ENTRY_ID] = true;
 					};
 				};
-				if [*FIGHTER_STATUS_KIND_ESCAPE_AIR, *FIGHTER_STATUS_KIND_ESCAPE_AIR_SLIDE].contains(&status_kind) && FLOAT[ENTRY_ID] > 1{
+				if [
+					*FIGHTER_STATUS_KIND_ESCAPE_AIR, *FIGHTER_STATUS_KIND_ESCAPE_AIR_SLIDE, *FIGHTER_STATUS_KIND_SPECIAL_N, 
+					*FIGHTER_STATUS_KIND_SPECIAL_S,*FIGHTER_STATUS_KIND_SPECIAL_HI, *FIGHTER_STATUS_KIND_SPECIAL_LW,
+					*FIGHTER_REFLET_STATUS_KIND_SPECIAL_HI_2, *FIGHTER_REFLET_STATUS_KIND_SPECIAL_N_HOLD, *FIGHTER_REFLET_STATUS_KIND_SPECIAL_N_CANCEL,
+					*FIGHTER_REFLET_STATUS_KIND_SPECIAL_N_TRON_END, *FIGHTER_REFLET_STATUS_KIND_SPECIAL_N_TRON_START, *FIGHTER_REFLET_STATUS_KIND_SPECIAL_N_JUMP_CANCEL
+				].contains(&status_kind) && FLOAT[ENTRY_ID] > 1{
 					FLOAT[ENTRY_ID] = 1;
 				};
 				if FLOAT[ENTRY_ID] > 1 {
@@ -242,11 +250,14 @@ pub fn robin(fighter : &mut L2CFighterCommon) {
 					if ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_JUMP) {
 						FLOAT[ENTRY_ID] = 1;
 					};
+					if ControlModule::check_button_on_trriger(boma, *CONTROL_PAD_BUTTON_SPECIAL) {
+						FLOAT[ENTRY_ID] = 1;
+					};
 					let mut y_add = 0.0;
 					let mut x_add = 0.0;
 					if stick_x > 0.2 {
 						x_add = ((stick_x-0.2)*X_ACCEL_MUL) + X_ACCEL_ADD;
-						if speed_x > X_MAX || speed_x < -X_MAX{
+						if speed_x > X_MAX || speed_x < -X_MAX{{}
 							x_add = 0.0;
 						};
 					};

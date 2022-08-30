@@ -143,14 +143,20 @@ fn bowser_frame(fighter: &mut L2CFighterCommon) {
 			};
 		};
 		if [hash40("special_n")].contains(&MotionModule::motion_kind(boma)){
-			if end_frame-frame < 3.0 {
+			if end_frame-frame < 5.0 {
 				StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_WAIT, true);
+			};
+			if frame >= 19.0 {
+				CancelModule::enable_cancel(boma);
 			};
 			MotionModule::set_rate(boma, 0.775);
 		};
 		if [hash40("special_air_n")].contains(&MotionModule::motion_kind(boma)){
-			if end_frame-frame < 3.0 {
+			if end_frame-frame < 5.0 {
 				StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL, true);
+			};
+			if frame >= 19.0 {
+				CancelModule::enable_cancel(boma);
 			};
 			MotionModule::set_rate(boma, 0.775);
 		};
