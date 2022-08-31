@@ -166,10 +166,10 @@ unsafe fn ganon_teleport(fighter: &mut L2CAgentBase) {
     });
 }
 #[acmd_script(
-    agent = "ganon",
-    script =  "effect_specialn",
+    agent = "kirby",
+    script =  "effect_ganonspecialn",
     category = ACMD_EFFECT)]
-unsafe fn ganon_teleport_eff(fighter: &mut L2CAgentBase) {
+unsafe fn kirby_teleport_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
 		for(6 Iterations) {
@@ -200,6 +200,61 @@ unsafe fn ganon_teleport_eff(fighter: &mut L2CAgentBase) {
 }
 #[acmd_script(
     agent = "ganon",
+    script =  "effect_specialn",
+    category = ACMD_EFFECT)]
+unsafe fn ganon_teleport_eff(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		for(6 Iterations) {
+			if(is_excute){
+				EFFECT_FOLLOW(hash40("ganon_entry_aura"), hash40("emit"), 0, 0, 0, 0, 0, 0, 1, true)	
+			}
+			wait(Frames=1)
+		}
+		frame(Frame=12)
+		if(is_excute){
+			EFFECT(hash40("ganon_entry"), hash40("hip"), 0, 0, 0, 0, 0, 0, 0.45, 0, 0, 0, 0, 0, 0, true)
+			LAST_EFFECT_SET_RATE(2.5)
+		}
+		frame(Frame=35)
+		if(is_excute){
+			EFFECT(hash40("ganon_entry"), hash40("hip"), 0, 0, 0, 0, 0, 0, 0.45, 0, 0, 0, 0, 0, 0, true)
+			LAST_EFFECT_SET_RATE(2.5)
+		}
+		frame(Frame=41)
+		if(is_excute){
+			EFFECT_FOLLOW(hash40("ganon_majinken_start"), hash40("hip"), 0, 0, 0, 0, 0, 0, 1.75, true)
+			EFFECT_FOLLOW(hash40("ganon_majinken_start"), hash40("haver"), 0, 0, 0, 0, 0, 0, 1.0, true)
+			EFFECT_FOLLOW(hash40("ganon_majinken_start"), hash40("havel"), 0, 0, 0, 0, 0, 0, 1.0, true)
+			EFFECT_FOLLOW(hash40("ganon_majinken_start"), hash40("footr"), 0, 0, 0, 0, 0, 0, 1.0, true)
+			EFFECT_FOLLOW(hash40("ganon_majinken_start"), hash40("footl"), 0, 0, 0, 0, 0, 0, 1.0, true)
+		}
+    });
+}
+#[acmd_script(
+    agent = "kirby",
+    script =  "sound_ganonspecialn",
+    category = ACMD_SOUND)]
+unsafe fn kirby_teleport_snd(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=15)
+		if(is_excute){
+			PLAY_SE(hash40("se_ganon_appeal_h01"))
+		}
+		frame(Frame=35)
+		if(is_excute){
+			PLAY_SE(hash40("se_common_spirits_critical_l_tail"))
+		}
+		frame(Frame=39)
+		if(is_excute){
+			PLAY_SE(hash40("vc_ganon_appeal_h01"))
+			PLAY_SE(hash40("se_ganon_special_l02"))
+		}
+    });
+}
+#[acmd_script(
+    agent = "ganon",
     script =  "sound_specialn",
     category = ACMD_SOUND)]
 unsafe fn ganon_teleport_snd(fighter: &mut L2CAgentBase) {
@@ -217,6 +272,20 @@ unsafe fn ganon_teleport_snd(fighter: &mut L2CAgentBase) {
 		if(is_excute){
 			PLAY_SE(hash40("vc_ganon_appeal_h01"))
 			PLAY_SE(hash40("se_ganon_special_l02"))
+		}
+    });
+}
+#[acmd_script(
+    agent = "kirby",
+    script =  "expression_ganonspecialn",
+    category = ACMD_EXPRESSION)]
+unsafe fn kirby_teleport_expr(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=41)
+		if(is_excute){
+			QUAKE(CAMERA_QUAKE_KIND_L)
+			RUMBLE_HIT(hash40("rbkind_attack_critical"), 0)
 		}
     });
 }
@@ -489,6 +558,20 @@ unsafe fn ganon_uair(fighter: &mut L2CAgentBase) {
 		}
     });
 }		
+pub(crate) fn check_jump(boma: &mut smash::app::BattleObjectModuleAccessor) -> bool {
+	unsafe {
+		if ControlModule::check_button_on_trriger(boma, *CONTROL_PAD_BUTTON_JUMP) {
+			return true;
+		};
+		if ControlModule::check_button_on_trriger(boma, *CONTROL_PAD_BUTTON_FLICK_JUMP) {
+			return true;
+		};
+		if ControlModule::check_button_on_trriger(boma, *CONTROL_PAD_BUTTON_JUMP_MINI) {
+			return true;
+		};
+		return false;
+	}
+}
 #[fighter_frame_callback]
 pub fn ganon_float(fighter : &mut L2CFighterCommon) {
     unsafe {
@@ -551,6 +634,9 @@ pub fn ganon_float(fighter : &mut L2CFighterCommon) {
 					KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_MOTION_AIR);
 				};
 				if ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_SPECIAL){
+					FLOAT[ENTRY_ID] = 1;
+				};
+				if check_jump(boma) {
 					FLOAT[ENTRY_ID] = 1;
 				};
 				let mut y_add = 0.0;
@@ -635,6 +721,11 @@ pub fn ganon_float(fighter : &mut L2CFighterCommon) {
 					StatusModule::set_situation_kind(boma, smash::app::SituationKind(*SITUATION_KIND_AIR), true);
 					StatusModule::set_keep_situation_air(boma, true);
 			};
+			if FLOAT[ENTRY_ID] == 1 && WorkModule::get_int(boma, *FIGHTER_KIRBY_INSTANCE_WORK_ID_INT_COPY_CHARA) == *FIGHTER_KIND_GANON {
+				CAN_NEUTRALB[ENTRY_ID] = 1;
+			} else {
+				CAN_NEUTRALB[ENTRY_ID] = 0;
+			};
 			if FLOAT[ENTRY_ID] == 1{
 				if KineticModule::get_kinetic_type(boma) == *FIGHTER_KINETIC_TYPE_MOTION_AIR && [*FIGHTER_STATUS_KIND_SPECIAL_LW, *FIGHTER_STATUS_KIND_SPECIAL_HI, *FIGHTER_STATUS_KIND_SPECIAL_S, *FIGHTER_GANON_STATUS_KIND_SPECIAL_AIR_S_CATCH, *FIGHTER_GANON_STATUS_KIND_SPECIAL_AIR_S_END].contains(&status_kind) == false {
 					KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_FALL);
@@ -662,6 +753,9 @@ pub fn ganon_float(fighter : &mut L2CFighterCommon) {
 					KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_MOTION_AIR);
 				};
 				if ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_SPECIAL){
+					FLOAT[ENTRY_ID] = 1;
+				};
+				if check_jump(boma) {
 					FLOAT[ENTRY_ID] = 1;
 				};
 				let mut y_add = 0.0;
@@ -771,7 +865,10 @@ pub fn install() {
 		ganon_teleport_eff,
 		ganon_teleport_snd,
 		ganon_teleport_expr,
-		ganon_warlock
+		ganon_warlock,
+		kirby_teleport_eff,
+		kirby_teleport_snd,
+		kirby_teleport_expr
     );
     smashline::install_agent_frame_callbacks!(ganon_float);
 }
