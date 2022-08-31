@@ -180,12 +180,12 @@ unsafe fn kirby_teleport_eff(fighter: &mut L2CAgentBase) {
 		}
 		frame(Frame=12)
 		if(is_excute){
-			EFFECT(hash40("ganon_entry"), hash40("top"), 0, 12, 0, 0, 0, 0, 0.6, 0, 0, 0, 0, 0, 0, true)
+			EFFECT(hash40("ganon_entry"), hash40("hip"), 0, 0, 0, 0, 0, 0, 0.45, 0, 0, 0, 0, 0, 0, true)
 			LAST_EFFECT_SET_RATE(2.5)
 		}
 		frame(Frame=35)
 		if(is_excute){
-			EFFECT(hash40("ganon_entry"), hash40("top"), 0, 12, 0, 0, 0, 0, 0.6, 0, 0, 0, 0, 0, 0, true)
+			EFFECT(hash40("ganon_entry"), hash40("hip"), 0, 0, 0, 0, 0, 0, 0.45, 0, 0, 0, 0, 0, 0, true)
 			LAST_EFFECT_SET_RATE(2.5)
 		}
 		frame(Frame=41)
@@ -213,12 +213,12 @@ unsafe fn ganon_teleport_eff(fighter: &mut L2CAgentBase) {
 		}
 		frame(Frame=12)
 		if(is_excute){
-			EFFECT(hash40("ganon_entry"), hash40("hip"), 0, 0, 0, 0, 0, 0, 0.45, 0, 0, 0, 0, 0, 0, true)
+			EFFECT(hash40("ganon_entry"), hash40("hip"), 0, 0, 0, 0, 0, 0, 0.6, 0, 0, 0, 0, 0, 0, true)
 			LAST_EFFECT_SET_RATE(2.5)
 		}
 		frame(Frame=35)
 		if(is_excute){
-			EFFECT(hash40("ganon_entry"), hash40("hip"), 0, 0, 0, 0, 0, 0, 0.45, 0, 0, 0, 0, 0, 0, true)
+			EFFECT(hash40("ganon_entry"), hash40("hip"), 0, 0, 0, 0, 0, 0, 0.6, 0, 0, 0, 0, 0, 0, true)
 			LAST_EFFECT_SET_RATE(2.5)
 		}
 		frame(Frame=41)
@@ -738,7 +738,7 @@ pub fn ganon_float(fighter : &mut L2CFighterCommon) {
 				FLOAT[ENTRY_ID] = 1;
 			};
 			if [*FIGHTER_STATUS_KIND_SPECIAL_LW, *FIGHTER_STATUS_KIND_SPECIAL_HI, *FIGHTER_STATUS_KIND_SPECIAL_S, *FIGHTER_GANON_STATUS_KIND_SPECIAL_AIR_S_CATCH, *FIGHTER_GANON_STATUS_KIND_SPECIAL_AIR_S_END].contains(&status_kind){
-				FLOAT[ENTRY_ID] = 0;
+				FLOAT[ENTRY_ID] = 1;
 			};
 			if FLOAT[ENTRY_ID] > 1{
 				if FLOAT[ENTRY_ID] % 30 == 0 {

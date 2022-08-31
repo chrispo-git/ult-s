@@ -167,6 +167,22 @@ pub unsafe fn off_flag_hook(boma: &mut smash::app::BattleObjectModuleAccessor, i
 		original!()(boma, int)
 	}
 }
+#[skyline::hook(replace = smash::app::lua_bind::ArticleModule::generate_article)]
+pub unsafe fn article_hook(boma: &mut smash::app::BattleObjectModuleAccessor, int: c_int, arg3: bool, arg4: c_int) -> u64 {
+	if smash::app::utility::get_category(boma) != *BATTLE_OBJECT_CATEGORY_FIGHTER {
+		return original!()(boma, int, arg3, arg4)
+	}
+	if int == *FIGHTER_WARIO_GENERATE_ARTICLE_WARIOBIKE && smash::app::utility::get_kind(boma) == *FIGHTER_KIND_WARIO {
+		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
+		if ![*FIGHTER_STATUS_KIND_ENTRY, *FIGHTER_STATUS_KIND_WIN].contains(&status_kind) && smash::app::sv_information::is_ready_go() {
+			return 0
+		} else {
+			return original!()(boma, int, arg3, arg4)
+		}
+	} else {
+		return original!()(boma, int, arg3, arg4)
+	}
+}
 
 
 #[fighter_frame_callback]
@@ -325,4 +341,5 @@ pub fn install() {
 	skyline::install_hook!(is_enable_transition_term_hook);
 	skyline::install_hook!(on_flag_hook);
 	skyline::install_hook!(off_flag_hook);
+	skyline::install_hook!(article_hook);
 }
