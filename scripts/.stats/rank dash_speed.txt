@@ -1,4 +1,4 @@
- dash_speed Ranking:
+dash_speed Ranking:
 1. sonic 2.425
 2. fox 2.37
 3. littlemac 2.365

@@ -1,4 +1,4 @@
- run_speed_max Ranking:
+run_speed_max Ranking:
 1. captain 2.552
 2. littlemac 2.464
 3. sheik 2.42

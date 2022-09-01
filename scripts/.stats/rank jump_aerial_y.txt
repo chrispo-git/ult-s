@@ -1,4 +1,4 @@
- jump_aerial_y Ranking:
+jump_aerial_y Ranking:
 1. mewtwo 57.35
 2. yoshi 51.56
 3. demon 50.0

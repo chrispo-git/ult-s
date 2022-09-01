@@ -1,4 +1,4 @@
- air_accel_y Ranking:
+gravity Ranking:
 1. sonic 0.18
 2. gekkouga 0.18
 3. fox 0.175

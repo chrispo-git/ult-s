@@ -1,4 +1,4 @@
- air_speed_y_stable Ranking:
+fallspeed Ranking:
 1. fox 2.3
 2. littlemac 1.95
 3. packun 1.95

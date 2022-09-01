@@ -1,4 +1,4 @@
- walk_speed_max Ranking:
+walk_speed_max Ranking:
 1. fox 1.523
 2. gekkouga 1.502
 3. pit 1.5

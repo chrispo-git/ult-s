@@ -1,4 +1,4 @@
- jump_speed_x_max Ranking:
+jump_speed_x_max Ranking:
 1. captain 2.8
 2. fox 2.5
 3. falco 2.5

@@ -1,4 +1,4 @@
- ground_brake Ranking:
+traction Ranking:
 1. pitb 0.17
 2. szerosuit 0.144
 3. elight 0.14

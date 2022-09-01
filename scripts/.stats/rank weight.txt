@@ -1,4 +1,4 @@
- weight Ranking:
+weight Ranking:
 1. koopa 135.0
 2. krool 133.0
 3. donkey 127.0

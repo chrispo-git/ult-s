@@ -1,4 +1,4 @@
- air_speed_x_stable Ranking:
+air_speed Ranking:
 1. purin 1.332
 2. yoshi 1.285
 3. wolf 1.281

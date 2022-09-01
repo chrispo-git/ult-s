@@ -1,4 +1,4 @@
- jump_speed_x Ranking:
+jump_speed_x Ranking:
 1. inkling 1.4
 2. captain 1.2
 3. ness 1.0

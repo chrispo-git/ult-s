@@ -1,4 +1,4 @@
- jump_speed_x_mul Ranking:
+jump_speed_x_mul Ranking:
 1. inkling 1.6
 2. toonlink 1.5
 3. bayonetta 1.5

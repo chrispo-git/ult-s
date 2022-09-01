@@ -1,4 +1,4 @@
- jump_y Ranking:
+jump_y Ranking:
 1. gekkouga 46.0
 2. szerosuit 44.5
 3. luigi 44.0
