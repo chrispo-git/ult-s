@@ -392,7 +392,7 @@ pub fn mario_frame(fighter : &mut L2CFighterCommon) {
 			if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_S {
 				if StatusModule::situation_kind(boma) == *SITUATION_KIND_GROUND {
 					if MotionModule::frame(boma) > 9.0 && MotionModule::frame(boma) < 73.0 && AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_SHIELD) == false {
-						if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP) || ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_FLICK_JUMP) {
+						if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP) {//|| ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_FLICK_JUMP) {
 							StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_JUMP_SQUAT, true);
 						};
 					};

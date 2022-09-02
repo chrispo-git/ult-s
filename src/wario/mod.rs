@@ -336,7 +336,7 @@ fn wario_frame(fighter: &mut L2CFighterCommon) {
 				macros::COL_NORMAL(fighter);
 			};
 			if is_near_ground == 1 && !HAS_BOUNCE[ENTRY_ID]  && !IS_JUMP[ENTRY_ID]  && MotionModule::frame(boma) < 20.0 {
-				if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP) || ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP_MINI) || ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_FLICK_JUMP) {
+				if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP) || ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP_MINI) { //|| ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_FLICK_JUMP) {
 					WorkModule::on_flag(boma, *FIGHTER_INSTANCE_WORK_ID_FLAG_NO_SPEED_OPERATION_CHK);
 					macros::SET_SPEED_EX(fighter, 3.0, 2.5, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
 					WorkModule::off_flag(boma, *FIGHTER_INSTANCE_WORK_ID_FLAG_NO_SPEED_OPERATION_CHK);
