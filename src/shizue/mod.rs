@@ -12,7 +12,8 @@ static mut ISA_RESHOOT_TIME: [i32; 8] = [0; 8];
 #[acmd_script(
     agent = "shizue",
     script =  "game_attack11",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn isa_jab(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -46,7 +47,8 @@ unsafe fn isa_jab(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "shizue",
     script =  "game_attackairb",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn isa_bair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -77,7 +79,8 @@ unsafe fn isa_bair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "shizue_bullet",
     script =  "game_shootb",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn isa_bair_bullet(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -94,7 +97,8 @@ unsafe fn isa_bair_bullet(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "shizue",
     script =  "game_throwhi",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn isa_uthrow(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -112,7 +116,8 @@ unsafe fn isa_uthrow(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "shizue",
     script =  "game_throwf",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn isa_fthrow(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -130,7 +135,8 @@ unsafe fn isa_fthrow(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "shizue",
     scripts =  ["game_speciallwfire", "game_specialairlwfire"],
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn isa_lloid_end(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
@@ -142,7 +148,8 @@ unsafe fn isa_lloid_end(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "shizue",
     scripts =  ["game_speciallwset"],
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn isa_lloid_set(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {

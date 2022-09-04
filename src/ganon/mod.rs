@@ -22,7 +22,8 @@ static mut Y_ACCEL_MUL : f32 = 0.06;
 #[acmd_script(
     agent = "ganon",
     script =  "game_attackhi3",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn ganon_utilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -79,7 +80,8 @@ unsafe fn ganon_utilt(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "ganon",
     script =  "effect_attackhi3",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn ganon_utilt_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -103,7 +105,8 @@ unsafe fn ganon_utilt_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "ganon",
     script =  "expression_attackhi3",
-    category = ACMD_EXPRESSION)]
+    category = ACMD_EXPRESSION,
+	low_priority)]
 unsafe fn ganon_utilt_expr(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -116,7 +119,8 @@ unsafe fn ganon_utilt_expr(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "ganon",
     script =  "sound_attackhi3",
-    category = ACMD_SOUND)]
+    category = ACMD_SOUND,
+	low_priority)]
 unsafe fn ganon_utilt_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -134,7 +138,8 @@ unsafe fn ganon_utilt_snd(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "ganon",
     script =  "game_specialn",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn ganon_teleport(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -168,7 +173,8 @@ unsafe fn ganon_teleport(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "kirby",
     script =  "effect_ganonspecialn",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn kirby_teleport_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -201,7 +207,8 @@ unsafe fn kirby_teleport_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "ganon",
     script =  "effect_specialn",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn ganon_teleport_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -234,7 +241,8 @@ unsafe fn ganon_teleport_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "kirby",
     script =  "sound_ganonspecialn",
-    category = ACMD_SOUND)]
+    category = ACMD_SOUND,
+	low_priority)]
 unsafe fn kirby_teleport_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -256,7 +264,8 @@ unsafe fn kirby_teleport_snd(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "ganon",
     script =  "sound_specialn",
-    category = ACMD_SOUND)]
+    category = ACMD_SOUND,
+	low_priority)]
 unsafe fn ganon_teleport_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -278,7 +287,8 @@ unsafe fn ganon_teleport_snd(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "kirby",
     script =  "expression_ganonspecialn",
-    category = ACMD_EXPRESSION)]
+    category = ACMD_EXPRESSION,
+	low_priority)]
 unsafe fn kirby_teleport_expr(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -292,7 +302,8 @@ unsafe fn kirby_teleport_expr(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "ganon",
     script =  "expression_specialn",
-    category = ACMD_EXPRESSION)]
+    category = ACMD_EXPRESSION,
+	low_priority)]
 unsafe fn ganon_teleport_expr(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -306,7 +317,8 @@ unsafe fn ganon_teleport_expr(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "ganon",
     script =  "game_specialnturn",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn ganon_warlock(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -331,7 +343,8 @@ unsafe fn ganon_warlock(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "ganon",
     script =  "game_attackairf",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn ganon_fair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -359,7 +372,8 @@ unsafe fn ganon_fair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "ganon",
     script =  "effect_attackairf",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn ganon_fair_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -373,7 +387,8 @@ unsafe fn ganon_fair_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "ganon",
     script =  "game_attackhi4",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn ganon_usmash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -403,7 +418,8 @@ unsafe fn ganon_usmash(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "ganon",
     script =  "game_attack11",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn ganon_jab(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -426,7 +442,8 @@ unsafe fn ganon_jab(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "ganon",
     script =  "game_attacks4",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn ganon_fsmash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -465,7 +482,8 @@ unsafe fn ganon_fsmash(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "ganon",
     script =  "game_speciallw",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn ganon_downb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -498,35 +516,40 @@ unsafe fn ganon_downb(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "ganon",
     script =  "game_specialairn",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn ganon_float(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 }		
 #[acmd_script(
     agent = "kirby",
     script =  "sound_ganonspecialairn",
-    category = ACMD_SOUND)]
+    category = ACMD_SOUND,
+	low_priority)]
 unsafe fn kirb_ganon_floats(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 }		
 #[acmd_script(
     agent = "ganon",
     script =  "sound_specialairn",
-    category = ACMD_SOUND)]
+    category = ACMD_SOUND,
+	low_priority)]
 unsafe fn ganon_floats(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 }			
 #[acmd_script(
     agent = "ganon",
     script =  "effect_specialairn",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn ganon_floate(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 }		
 #[acmd_script(
     agent = "ganon",
     script =  "game_attackairhi",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn ganon_uair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -838,7 +861,8 @@ pub fn ganon_float(fighter : &mut L2CFighterCommon) {
 #[acmd_script(
     agent = "ganon",
     script =  "expression_specialairn",
-    category = ACMD_EXPRESSION)]
+    category = ACMD_EXPRESSION,
+	low_priority)]
 unsafe fn ganon_float_expr(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 }		

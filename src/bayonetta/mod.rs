@@ -7,7 +7,8 @@ use smash_script::*;
 #[acmd_script(
     agent = "bayonetta",
     script =  "game_attackairf",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn bayo_fair1(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -53,7 +54,8 @@ unsafe fn bayo_fair1(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "bayonetta",
     script =  "game_attackairf2",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn bayo_fair2(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -100,7 +102,8 @@ unsafe fn bayo_fair2(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "bayonetta",
     script =  "game_specials",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn bayo_sideb_start(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -147,7 +150,8 @@ unsafe fn bayo_sideb_start(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "bayonetta",
     script =  "game_specialsholdend",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn bayo_sideb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -182,7 +186,8 @@ unsafe fn bayo_sideb(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "bayonetta",
     script =  "game_attack11",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn bayo_jab1(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -224,7 +229,8 @@ unsafe fn bayo_jab1(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "bayonetta",
     script =  "game_attacklw3",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn bayo_dtilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -248,7 +254,8 @@ unsafe fn bayo_dtilt(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "bayonetta",
     script =  "game_attackhi3",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn bayo_utilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {

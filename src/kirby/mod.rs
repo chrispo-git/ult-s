@@ -23,7 +23,8 @@ static mut F4 : [u32; 8] = [0; 8];
 #[acmd_script(
     agent = "kirby",
     script =  "game_attacklw3",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn kirby_dtilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -41,7 +42,8 @@ unsafe fn kirby_dtilt(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "kirby",
     script =  "game_attackairf",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn kirby_fair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -83,7 +85,8 @@ unsafe fn kirby_fair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "kirby",
     scripts =  ["game_specialhi", "game_specialairhi"],
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn kirby_upb1(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -99,21 +102,24 @@ unsafe fn kirby_upb1(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "kirby",
     scripts =  ["sound_specialhi4"],
-    category = ACMD_SOUND)]
+    category = ACMD_SOUND,
+	low_priority)]
 unsafe fn kirby_upb4_sound(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 }		
 #[acmd_script(
     agent = "kirby",
     scripts =  ["expression_specialhi4"],
-    category = ACMD_EXPRESSION)]
+    category = ACMD_EXPRESSION,
+	low_priority)]
 unsafe fn kirby_upb4_exp(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 }		
 #[acmd_script(
     agent = "kirby",
     script =  "game_specialhi4",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn kirby_upb4(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -122,7 +128,8 @@ unsafe fn kirby_upb4(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "kirby",
     script =  "effect_specialairhi2",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn kirby_air_upb2_effect(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -170,7 +177,8 @@ unsafe fn kirby_air_upb2_effect(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "kirby",
     script =  "game_specialairhi2",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn kirby_air_upb2(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -202,7 +210,8 @@ unsafe fn kirby_air_upb2(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "kirby",
     script =  "game_throwlw",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn kirby_dthrow(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -241,7 +250,8 @@ unsafe fn kirby_dthrow(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "kirby",
     script =  "sound_specialairhi2",
-    category = ACMD_SOUND)]
+    category = ACMD_SOUND,
+	low_priority)]
 unsafe fn kirby_upb2_sound(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -254,7 +264,8 @@ unsafe fn kirby_upb2_sound(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "kirby",
     script =  "game_attackairb",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn kirby_bair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {	
@@ -288,7 +299,8 @@ unsafe fn kirby_bair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "kirby",
     scripts =  ["game_attacks3", "game_attacks3hi", "game_attacks3lw"],
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn kirby_ftilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {	
@@ -306,7 +318,8 @@ unsafe fn kirby_ftilt(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "kirby",
     scripts =  ["sound_attacks3", "sound_attacks3hi", "sound_attacks3lw"],
-    category = ACMD_SOUND)]
+    category = ACMD_SOUND,
+	low_priority)]
 unsafe fn kirby_ftilt_sound(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {	
@@ -320,7 +333,8 @@ unsafe fn kirby_ftilt_sound(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "kirby",
     scripts =  ["effect_attacks3", "effect_attacks3hi", "effect_attacks3lw"],
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn kirby_ftilt_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {	
@@ -342,7 +356,8 @@ unsafe fn kirby_ftilt_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "kirby",
     scripts =  ["game_attacks4", "game_attacks4hi", "game_attacks4lw"],
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn kirby_fsmash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {	
@@ -368,7 +383,8 @@ unsafe fn kirby_fsmash(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "kirby",
     scripts =  ["effect_attacks4", "effect_attacks4hi", "effect_attacks4lw"],
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn kirby_fsmash_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {	
@@ -389,7 +405,8 @@ unsafe fn kirby_fsmash_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "kirby",
     scripts =  ["sound_attacks4", "sound_attacks4hi", "sound_attacks4lw"],
-    category = ACMD_SOUND)]
+    category = ACMD_SOUND,
+	low_priority)]
 unsafe fn kirby_fsmash_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {	
@@ -410,7 +427,8 @@ unsafe fn kirby_fsmash_snd(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "kirby",
     scripts =  ["expression_attacks4", "expression_attacks4hi", "expression_attacks4s"],
-    category = ACMD_EXPRESSION)]
+    category = ACMD_EXPRESSION,
+	low_priority)]
 unsafe fn kirby_fsmash_expr(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {	
@@ -427,7 +445,8 @@ unsafe fn kirby_fsmash_expr(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "kirby",
     script =  "effect_attackairb",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn kirby_bair_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {	
@@ -441,7 +460,8 @@ unsafe fn kirby_bair_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "kirby",
     script =  "sound_attackairb",
-    category = ACMD_SOUND)]
+    category = ACMD_SOUND,
+	low_priority)]
 unsafe fn kirby_bair_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {	
@@ -455,7 +475,8 @@ unsafe fn kirby_bair_snd(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "kirby",
     script =  "game_landingairb",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn kirby_landing_bair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {	
@@ -467,7 +488,8 @@ unsafe fn kirby_landing_bair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "kirby_finalcuttershot",
     script =  "effect_finalcutterregular",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn kirby_beam_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -476,7 +498,8 @@ unsafe fn kirby_beam_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "kirby_finalcuttershot",
     script =  "game_finalcutterregular",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn kirby_beam(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -496,7 +519,8 @@ unsafe fn kirby_beam(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "kirby",
     scripts =  ["game_specialsstart", "game_specialairsstart"],
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn kirby_sideb_start(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {	
@@ -506,7 +530,8 @@ unsafe fn kirby_sideb_start(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "kirby",
     scripts =  ["game_specials", "game_specialairs", "game_specialss", "game_specialairss"],
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn kirby_sideb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {		
@@ -520,7 +545,8 @@ unsafe fn kirby_sideb(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "kirby",
     scripts =  ["effect_specials", "effect_specialairs", "effect_specialss", "effect_specialairss"],
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn kirby_sideb_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {	
@@ -533,7 +559,8 @@ unsafe fn kirby_sideb_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "kirby",
     scripts =  ["sound_specials", "sound_specialairs", "sound_specialss", "sound_specialairss"],
-    category = ACMD_SOUND)]
+    category = ACMD_SOUND,
+	low_priority)]
 unsafe fn kirby_sideb_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {	
@@ -555,7 +582,8 @@ unsafe fn kirby_sideb_snd(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "kirby",
     scripts =  ["expression_specials", "expression_specialairs", "expression_specialss", "expression_specialairss"],
-    category = ACMD_EXPRESSION)]
+    category = ACMD_EXPRESSION,
+	low_priority)]
 unsafe fn kirby_sideb_expr(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {		
@@ -564,7 +592,8 @@ unsafe fn kirby_sideb_expr(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "kirby",
     scripts =  ["sound_specialhi", "sound_specialairhi"],
-    category = ACMD_SOUND)]
+    category = ACMD_SOUND,
+	low_priority)]
 unsafe fn kirby_upb_sound(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {

@@ -13,7 +13,8 @@ use crate::util::*;
 #[acmd_script(
     agent = "richter",
     scripts =  ["game_specialn", "game_specialairn"],
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn richter_neutralb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -31,7 +32,8 @@ unsafe fn richter_neutralb(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "richter",
     script =  "game_attackdash",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn richter_da(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -62,7 +64,8 @@ unsafe fn richter_da(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "richter",
     script =  "game_attackairhi",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn richter_uair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -90,7 +93,8 @@ unsafe fn richter_uair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "richter",
     script =  "effect_attackairhi",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn richter_uair_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -105,7 +109,8 @@ unsafe fn richter_uair_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "richter_axe",
     script =  "game_fly",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn richter_axe(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -118,7 +123,8 @@ unsafe fn richter_axe(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "richter_axe",
     script =  "effect_fly",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn richter_axe_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -131,7 +137,8 @@ unsafe fn richter_axe_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "richter",
     script =  "sound_attackairhi",
-    category = ACMD_SOUND)]
+    category = ACMD_SOUND,
+	low_priority)]
 unsafe fn richter_uairs(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -144,7 +151,8 @@ unsafe fn richter_uairs(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "richter",
     script =  "game_attacks3",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn richter_ftilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -168,7 +176,8 @@ unsafe fn richter_ftilt(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "richter",
     script =  "game_turndash",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn richter_dashback(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -185,7 +194,8 @@ unsafe fn richter_dashback(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "richter",
     script =  "game_attack11",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn richter_jab1(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -217,7 +227,8 @@ unsafe fn richter_jab1(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "richter",
     script =  "game_attackhi3",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn richter_utilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -261,7 +272,8 @@ unsafe fn richter_utilt(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "richter",
     script =  "game_catch",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn richter_grab(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -295,7 +307,8 @@ unsafe fn richter_grab(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "richter",
     script =  "game_catchdash",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn richter_dashgrab(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -329,7 +342,8 @@ unsafe fn richter_dashgrab(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "richter",
     script =  "game_catchturn",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn richter_pivotgrab(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -363,7 +377,8 @@ unsafe fn richter_pivotgrab(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "richter",
     script =  "game_attackairn",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn richter_nair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {

@@ -22,7 +22,11 @@ fn mario_frame(fighter: &mut L2CFighterCommon) {
 
 //ItemModule::throw_item(fighter.module_accessor, angle, power, 1.0, 0, true, 0.0);
 // Uses the acmd! macro, if you're porting directly from Rubendal's data viewer.
-#[acmd_script( agent = "simon", scripts = ["game_speciallw", "game_specialairlw"], category = ACMD_GAME)]
+#[acmd_script( 
+	agent = "simon", 
+	scripts = ["game_speciallw", "game_specialairlw"], 
+	category = ACMD_GAME,
+	low_priority)]
 unsafe fn simon_downb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {

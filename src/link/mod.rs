@@ -19,7 +19,8 @@ static mut SHOOT :  smash::phx::Vector3f =  smash::phx::Vector3f { x: 0.0, y: 10
 #[acmd_script(
     agent = "link",
     script =  "game_attack11",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn link_jab(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -45,7 +46,8 @@ unsafe fn link_jab(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "link",
     script =  "game_attack12",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn link_jab2(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -74,7 +76,8 @@ unsafe fn link_jab2(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "link",
     script =  "game_attacklw3",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn link_dtilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -96,7 +99,8 @@ unsafe fn link_dtilt(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "link",
     script =  "game_attackhi3",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn link_utilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -116,7 +120,8 @@ unsafe fn link_utilt(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "link",
     script =  "game_attackairb",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn link_bair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -157,7 +162,8 @@ unsafe fn link_bair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "link",
     scripts =  ["game_specialnstart", "game_specialairnstart"],
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn link_arrow(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -175,7 +181,8 @@ unsafe fn link_arrow(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "link",
     script =  "game_attackairn",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn link_nair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -202,7 +209,8 @@ unsafe fn link_nair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "link",
     script =  "game_attackairf",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn link_fair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -245,7 +253,8 @@ unsafe fn link_fair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "link",
     scripts =  ["game_speciallwblast", "game_specialairlwblast"],
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn link_downb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	if StatusModule::status_kind(fighter.module_accessor) == *FIGHTER_LINK_STATUS_KIND_SPECIAL_LW_BLAST {
@@ -273,7 +282,8 @@ unsafe fn link_downb(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "link",
     scripts =  ["effect_speciallwblast", "effect_specialairlwblast"],
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn link_downb_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	if StatusModule::status_kind(fighter.module_accessor) != *FIGHTER_LINK_STATUS_KIND_SPECIAL_LW_BLAST {
@@ -291,7 +301,8 @@ unsafe fn link_downb_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "link",
     scripts =  ["sound_speciallwblast", "sound_specialairlwblast"],
-    category = ACMD_SOUND)]
+    category = ACMD_SOUND,
+	low_priority)]
 unsafe fn link_downb_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	if StatusModule::status_kind(fighter.module_accessor) != *FIGHTER_LINK_STATUS_KIND_SPECIAL_LW_BLAST {
@@ -309,7 +320,8 @@ unsafe fn link_downb_snd(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "link_boomerang",
     script =  "game_fly",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn linkerang(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {

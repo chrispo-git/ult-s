@@ -11,7 +11,8 @@ use crate::util::*;
 #[acmd_script(
     agent = "donkey",
     scripts =  ["game_attacks3", "game_attacks3hi", "game_attacks3lw"],
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn dk_ftilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -37,7 +38,8 @@ unsafe fn dk_ftilt(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "donkey",
     scripts =  ["game_attackairf"],
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn dk_fair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -71,7 +73,8 @@ unsafe fn dk_fair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "donkey",
     scripts =  ["game_attack11"],
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn dk_jab1(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -96,7 +99,8 @@ unsafe fn dk_jab1(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "donkey",
     scripts =  ["game_attack12"],
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn dk_jab2(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -119,7 +123,8 @@ unsafe fn dk_jab2(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "donkey",
     scripts =  ["game_specialairlw"],
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn dk_air_downb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {

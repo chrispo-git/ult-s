@@ -74,7 +74,8 @@ pub fn ridley(fighter : &mut L2CFighterCommon) {
 #[acmd_script(
     agent = "ridley",
     script =  "game_attackairhi",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn ridley_uair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -112,7 +113,8 @@ unsafe fn ridley_uair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "ridley",
     script =  "game_attackairb",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn ridley_bair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -142,7 +144,8 @@ unsafe fn ridley_bair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "ridley",
     script =  "game_attackairf",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn ridley_fair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -194,7 +197,8 @@ unsafe fn ridley_fair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "ridley",
     script =  "game_specialairsfalljump",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn ridley_sideb_end(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -221,7 +225,8 @@ unsafe fn ridley_sideb_end(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "ridley",
     script =  "effect_specialairsfall",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn ridley_sideb_fall_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 }		

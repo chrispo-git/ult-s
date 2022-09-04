@@ -24,7 +24,8 @@ static mut HANDS :  smash::phx::Vector3f =  smash::phx::Vector3f { x: 0.0, y: 0.
 #[acmd_script(
     agent = "rosetta",
     script =  "game_attack11",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn rosa_jab(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -50,7 +51,8 @@ unsafe fn rosa_jab(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "rosetta",
     scripts =  ["game_specialhistart", "game_specialairhistart"],
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn rosa_upb_start(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -63,7 +65,8 @@ unsafe fn rosa_upb_start(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "rosetta",
     scripts =  ["game_specialhi", "game_specialairhi"],
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn rosa_upb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -89,7 +92,8 @@ unsafe fn rosa_upb(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "rosetta",
     script =  "game_attackhi3",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn rosa_utilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {

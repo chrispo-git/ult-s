@@ -13,7 +13,8 @@ static mut IS_JUMP : [bool; 8] = [false; 8];
 #[acmd_script(
     agent = "wario",
     script =  "game_attackhi3",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn wario_utilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -36,7 +37,8 @@ unsafe fn wario_utilt(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "wario",
     script =  "game_attackairf",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn wario_fair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -68,7 +70,8 @@ unsafe fn wario_fair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "wario",
     scripts =  ["game_specialssearch", "game_specialairssearch"],
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn wario_sideb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
@@ -95,7 +98,8 @@ unsafe fn wario_sideb(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "wario",
     scripts =  ["effect_specialssearch", "effect_specialairssearch"],
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn wario_sideb_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
@@ -120,7 +124,8 @@ unsafe fn wario_sideb_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "wario",
     scripts =  ["sound_specialssearch", "sound_specialairssearch"],
-    category = ACMD_SOUND)]
+    category = ACMD_SOUND,
+	low_priority)]
 unsafe fn wario_sideb_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
@@ -129,7 +134,8 @@ unsafe fn wario_sideb_snd(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "wario",
     scripts =  ["sound_specialsdrive", "sound_specialsride", "sound_specialairs", "sound_specialairs", "sound_specials", "sound_specialsstart", "sound_specialairsstart"],
-    category = ACMD_SOUND)]
+    category = ACMD_SOUND,
+	low_priority)]
 unsafe fn wario_sideb_start_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
@@ -144,7 +150,8 @@ unsafe fn wario_sideb_start_snd(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "wario",
     script =  "game_catchattack",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn wario_pummel(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -163,7 +170,8 @@ unsafe fn wario_pummel(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "wario",
     script =  "game_attackdash",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn wario_da(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -190,7 +198,8 @@ unsafe fn wario_da(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "wario",
     script =  "effect_attackdash",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn wario_da_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -207,7 +216,8 @@ unsafe fn wario_da_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "wario",
     script =  "game_attacklw4",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn wario_dsmash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -242,7 +252,8 @@ unsafe fn wario_dsmash(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "wario",
     script =  "effect_attacklw4",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn wario_dsmash_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -263,7 +274,8 @@ unsafe fn wario_dsmash_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "wario",
     script =  "sound_attacklw4",
-    category = ACMD_SOUND)]
+    category = ACMD_SOUND,
+	low_priority)]
 unsafe fn wario_dsmash_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {

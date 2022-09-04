@@ -6,7 +6,8 @@ use smash_script::*;
 #[acmd_script(
     agent = "gekkouga",
     script =  "game_attackairn",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn gren_nair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -40,7 +41,8 @@ unsafe fn gren_nair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "gekkouga",
     scripts =  ["game_attacks3","game_attacks3s", "game_attacks3lw", "game_attacks3hi"],
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn gren_ftilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -62,7 +64,8 @@ unsafe fn gren_ftilt(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "gekkouga",
     scripts =  ["game_appeallwl", "game_appeallwr"],
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn gren_dtaunt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -89,7 +92,8 @@ unsafe fn gren_dtaunt(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "gekkouga",
     scripts =  ["effect_appeallwl", "effect_appeallwr"],
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn gren_dtaunt_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -105,7 +109,8 @@ unsafe fn gren_dtaunt_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "gekkouga",
     script =  "game_attackairb",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn gren_bair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -138,7 +143,8 @@ unsafe fn gren_bair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "gekkouga",
     script =  "game_attackairhi",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn gren_uair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -182,7 +188,8 @@ unsafe fn gren_uair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "gekkouga",
     script =  "game_attackairf",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn gren_fair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -219,7 +226,8 @@ unsafe fn gren_fair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "gekkouga",
     script =  "effect_attackairb",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn gren_bair_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -239,7 +247,8 @@ unsafe fn gren_bair_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "gekkouga",
     script =  "sound_attackairb",
-    category = ACMD_SOUND)]
+    category = ACMD_SOUND,
+	low_priority)]
 unsafe fn gren_bair_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {

@@ -11,7 +11,8 @@ use crate::util::*;
 #[acmd_script(
     agent = "inkling",
     script =  "game_attackairn",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn ink_nair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -44,7 +45,8 @@ unsafe fn ink_nair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "inkling",
     script =  "game_attackairf",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn ink_fair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -75,7 +77,8 @@ unsafe fn ink_fair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "inkling",
     script =  "game_attackairhi",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn ink_uair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -106,7 +109,8 @@ unsafe fn ink_uair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "inkling",
     script =  "game_attackhi3",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn ink_utilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -142,7 +146,8 @@ unsafe fn ink_utilt(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "inkling",
     script =  "effect_attackairhi",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn ink_uair_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -155,7 +160,8 @@ unsafe fn ink_uair_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "inkling",
     script =  "effect_attackhi3",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn ink_utilt_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -187,7 +193,8 @@ unsafe fn ink_utilt_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "inkling",
     script =  "sound_attackhi3",
-    category = ACMD_SOUND)]
+    category = ACMD_SOUND,
+	low_priority)]
 unsafe fn ink_utilt_sound(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -200,7 +207,8 @@ unsafe fn ink_utilt_sound(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "inkling",
     script =  "sound_attackairhi",
-    category = ACMD_SOUND)]
+    category = ACMD_SOUND,
+	low_priority)]
 unsafe fn ink_uair_sound(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {

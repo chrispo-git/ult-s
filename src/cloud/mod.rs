@@ -8,7 +8,8 @@ use smash_script::*;
 #[acmd_script(
     agent = "cloud",
     script =  "game_catch",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn cloud_grab(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -38,7 +39,8 @@ unsafe fn cloud_grab(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "cloud",
     script =  "game_attackairhi",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn cloud_uair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -74,7 +76,8 @@ unsafe fn cloud_uair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "cloud",
     script =  "game_throwlw",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn cloud_dthrow(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -96,7 +99,8 @@ unsafe fn cloud_dthrow(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "cloud",
     script =  "game_attackairlw",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn cloud_dair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {

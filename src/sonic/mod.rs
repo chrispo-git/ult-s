@@ -20,7 +20,8 @@ static mut BAN_SIDEB : [bool; 8] = [false; 8];
 #[acmd_script(
     agent = "sonic",
     script =  "effect_attackhi3",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn sonic_utilt_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -45,7 +46,8 @@ unsafe fn sonic_utilt_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "sonic",
     script =  "effect_attacks3",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn sonic_ftilt_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -67,7 +69,8 @@ unsafe fn sonic_ftilt_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "sonic",
     script =  "effect_throwf",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn sonic_fthrow_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -86,7 +89,8 @@ unsafe fn sonic_fthrow_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "sonic",
     script =  "effect_throwb",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn sonic_bthrow_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -122,7 +126,8 @@ unsafe fn sonic_bthrow_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "sonic",
     script =  "effect_attacks3lw",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn sonic_ftiltlw_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -144,7 +149,8 @@ unsafe fn sonic_ftiltlw_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "sonic",
     script =  "effect_attacks3hi",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn sonic_ftilthi_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -166,7 +172,8 @@ unsafe fn sonic_ftilthi_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "sonic",
     script =  "effect_attacklw3",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn sonic_dtilt_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -185,7 +192,8 @@ unsafe fn sonic_dtilt_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "sonic",
     script =  "effect_attackairb",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn sonic_bair_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -204,7 +212,8 @@ unsafe fn sonic_bair_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "sonic",
     script =  "effect_attackairhi",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn sonic_uair_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -231,7 +240,8 @@ unsafe fn sonic_uair_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "sonic",
     script =  "effect_attackdash",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn sonic_da_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -257,7 +267,8 @@ unsafe fn sonic_da_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "sonic",
     script =  "effect_attack13",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn sonic_jab_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -277,7 +288,8 @@ unsafe fn sonic_jab_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "sonic",
     script =  "effect_attacklw4",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn sonic_dsmash_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -311,7 +323,8 @@ unsafe fn sonic_dsmash_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "sonic",
     script =  "game_attackairb",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn sonic_bair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -345,7 +358,8 @@ unsafe fn sonic_bair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "sonic",
     script =  "game_attackairhi",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn sonic_uair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -385,7 +399,8 @@ unsafe fn sonic_uair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "sonic",
     script =  "game_attackdash",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn sonic_da(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -410,7 +425,8 @@ unsafe fn sonic_da(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "sonic",
     script =  "game_attacklw3",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn sonic_dtilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -433,7 +449,8 @@ unsafe fn sonic_dtilt(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "sonic",
     script =  "game_attackhi3",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn sonic_utilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -474,7 +491,8 @@ unsafe fn sonic_utilt(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "sonic",
     scripts =  ["game_attacks3", "game_attacks3hi", "game_attacks3lw"],
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn sonic_ftilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -501,7 +519,8 @@ unsafe fn sonic_ftilt(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "sonic",
     script =  "game_attack11",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn sonic_jab1(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -533,7 +552,8 @@ unsafe fn sonic_jab1(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "sonic",
     script =  "game_attack12",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn sonic_jab2(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -557,7 +577,8 @@ unsafe fn sonic_jab2(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "sonic",
     script =  "game_attack100",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn sonic_rapidjab(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -576,7 +597,8 @@ unsafe fn sonic_rapidjab(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "sonic",
     script =  "effect_attack100",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn sonic_rapidjab_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -619,7 +641,8 @@ unsafe fn sonic_rapidjab_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "sonic",
     script =  "sound_attack100",
-    category = ACMD_SOUND)]
+    category = ACMD_SOUND,
+	low_priority)]
 unsafe fn sonic_rapidjab_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -634,7 +657,8 @@ unsafe fn sonic_rapidjab_snd(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "sonic",
     script =  "game_attack100end",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn sonic_rapidjabend(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -653,7 +677,8 @@ unsafe fn sonic_rapidjabend(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "sonic",
     script =  "game_attackairlw",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn sonic_dair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -679,7 +704,8 @@ unsafe fn sonic_dair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "sonic",
     script =  "effect_attackairlw",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn sonic_dair_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -697,7 +723,8 @@ unsafe fn sonic_dair_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "sonic",
     script =  "expression_attackairlw",
-    category = ACMD_EXPRESSION)]
+    category = ACMD_EXPRESSION,
+	low_priority)]
 unsafe fn sonic_dair_expr(fighter: &mut L2CAgentBase) {
 			let lua_state = fighter.lua_state_agent;
 			if macros::is_excute(fighter) {
@@ -719,7 +746,8 @@ unsafe fn sonic_dair_expr(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "sonic",
     script =  "sound_attackairlw",
-    category = ACMD_SOUND)]
+    category = ACMD_SOUND,
+	low_priority)]
 unsafe fn sonic_dair_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -733,14 +761,16 @@ unsafe fn sonic_dair_snd(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "sonic",
     script =  "expression_landingairlw",
-    category = ACMD_EXPRESSION)]
+    category = ACMD_EXPRESSION,
+	low_priority)]
 unsafe fn sonic_dair_land_expr(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 }
 #[acmd_script(
     agent = "sonic",
     script =  "sound_landingairlw",
-    category = ACMD_SOUND)]
+    category = ACMD_SOUND,
+	low_priority)]
 unsafe fn sonic_dair_land_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -934,7 +964,8 @@ pub fn sonic(fighter : &mut L2CFighterCommon) {
 #[acmd_script(
     agent = "sonic",
     script =  "effect_specialsstart",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn sonic_lightspeed_dash_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
@@ -942,14 +973,16 @@ unsafe fn sonic_lightspeed_dash_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "sonic",
     script =  "sound_specialsstart",
-    category = ACMD_SOUND)]
+    category = ACMD_SOUND,
+	low_priority)]
 unsafe fn sonic_lightspeed_dash_sound(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 }	
 #[acmd_script(
     agent = "sonic",
     script =  "game_specialsstart",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn sonic_lightspeed_dash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {

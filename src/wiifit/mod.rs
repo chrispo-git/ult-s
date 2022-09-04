@@ -9,7 +9,8 @@ use smash_script::*;
 #[acmd_script( 
 agent = "wiifit", 
 scripts = ["game_attackairf"], 
-category = ACMD_GAME)]
+category = ACMD_GAME,
+low_priority)]
 unsafe fn wft_fair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -45,7 +46,8 @@ unsafe fn wft_fair(fighter: &mut L2CAgentBase) {
 #[acmd_script( 
 agent = "wiifit", 
 scripts = ["game_attackairhi"], 
-category = ACMD_GAME)]
+category = ACMD_GAME,
+low_priority)]
 unsafe fn wft_uair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -69,7 +71,8 @@ unsafe fn wft_uair(fighter: &mut L2CAgentBase) {
 #[acmd_script( 
 agent = "wiifit", 
 scripts = ["game_attackairb"], 
-category = ACMD_GAME)]
+category = ACMD_GAME,
+low_priority)]
 unsafe fn wft_bair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -104,7 +107,8 @@ unsafe fn wft_bair(fighter: &mut L2CAgentBase) {
 #[acmd_script( 
 agent = "wiifit", 
 scripts = ["game_attacklw3"], 
-category = ACMD_GAME)]
+category = ACMD_GAME,
+low_priority)]
 unsafe fn wft_dtilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {

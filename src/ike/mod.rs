@@ -22,7 +22,8 @@ static mut S3 :  smash::phx::Vector3f =  smash::phx::Vector3f { x: 0.0, y: 3.0, 
 #[acmd_script(
     agent = "ike",
     script =  "game_throwlw",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn ike_dthrow(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -48,7 +49,8 @@ unsafe fn ike_dthrow(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "ike",
     script =  "game_throwhi",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn ike_uthrow(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -74,7 +76,8 @@ unsafe fn ike_uthrow(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "ike",
     script =  "game_throwb",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn ike_bthrow(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -97,7 +100,8 @@ unsafe fn ike_bthrow(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "ike",
     script =  "game_attackairlw",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn ike_dair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -125,7 +129,8 @@ unsafe fn ike_dair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "ike",
     script =  "game_attack11",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn ike_jab1(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -149,7 +154,8 @@ unsafe fn ike_jab1(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "ike",
     script =  "game_attack12",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn ike_jab2(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -177,7 +183,8 @@ unsafe fn ike_jab2(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "ike",
     script =  "game_attack13",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn ike_jab3(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -197,7 +204,8 @@ unsafe fn ike_jab3(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "ike",
     script =  "game_attacklw3",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn ike_dtilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -217,7 +225,8 @@ unsafe fn ike_dtilt(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "ike",
     script =  "game_attackhi3",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn ike_utilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -241,7 +250,8 @@ unsafe fn ike_utilt(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "ike",
     scripts =  ["game_specialnend", "game_specialairnend"],
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn ike_neutralb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -266,7 +276,8 @@ unsafe fn ike_neutralb(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "ike",
     script =  "game_specialhi4",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn ike_upb4(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
@@ -292,7 +303,8 @@ unsafe fn ike_upb4(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "ike",
     script =  "game_attacks4",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn ike_fsmash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -327,7 +339,8 @@ unsafe fn ike_fsmash(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "ike",
     script =  "effect_attack13",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn ike_jab3_eff(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
@@ -352,7 +365,8 @@ unsafe fn ike_jab3_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "ike",
     script =  "effect_attackairb",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn ike_bair_eff(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
@@ -372,7 +386,8 @@ unsafe fn ike_bair_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "ike",
     script =  "effect_attackairf",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn ike_fair_eff(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
@@ -392,7 +407,8 @@ unsafe fn ike_fair_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "ike",
     script =  "effect_attackairhi",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn ike_uair_eff(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
@@ -412,7 +428,8 @@ unsafe fn ike_uair_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "ike",
     script =  "effect_attackairlw",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn ike_dair_eff(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
@@ -440,7 +457,8 @@ unsafe fn ike_dair_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "ike",
     script =  "effect_attackairn",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn ike_nair_eff(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
@@ -460,7 +478,8 @@ unsafe fn ike_nair_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "ike",
     script =  "effect_attackdash",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn ike_da_eff(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
@@ -484,7 +503,8 @@ unsafe fn ike_da_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "ike",
     script =  "effect_attackhi3",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn ike_utilt_eff(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
@@ -508,7 +528,8 @@ unsafe fn ike_utilt_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "ike",
     script =  "effect_attackhi4",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn ike_usmash_eff(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
@@ -537,7 +558,8 @@ unsafe fn ike_usmash_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "ike",
     script =  "effect_attacklw3",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn ike_dtilt_eff(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
@@ -561,7 +583,8 @@ unsafe fn ike_dtilt_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "ike",
     script =  "effect_specialhi4",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn ike_upb4_eff(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
@@ -581,7 +604,8 @@ unsafe fn ike_upb4_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "ike",
     script =  "sound_specialhi4",
-    category = ACMD_SOUND)]
+    category = ACMD_SOUND,
+	low_priority)]
 unsafe fn ike_upb4_snd(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
@@ -597,7 +621,8 @@ unsafe fn ike_upb4_snd(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "ike",
     script =  "effect_attacklw4",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn ike_dsmash_eff(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
@@ -641,7 +666,8 @@ unsafe fn ike_dsmash_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "ike",
     scripts =  ["effect_attacks3", "effect_attacks3hi", "effect_attacks3lw"],
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn ike_ftilt_eff(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
@@ -665,7 +691,8 @@ unsafe fn ike_ftilt_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "ike",
     script =  "effect_attacks4",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn ike_fsmash_eff(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
@@ -698,7 +725,8 @@ unsafe fn ike_fsmash_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "ike",
     scripts =  ["effect_specialsattack", "effect_specialairsattack"],
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn ike_sideb_eff(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;

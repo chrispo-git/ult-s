@@ -23,7 +23,8 @@ fn daisy_frame(fighter: &mut L2CFighterCommon) {
 #[acmd_script(
     agent = "daisy",
     script =  "game_speciallw",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn daisy_downb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -38,7 +39,8 @@ unsafe fn daisy_downb(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "daisy",
     script =  "effect_speciallw",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn daisy_downb_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {

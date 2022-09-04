@@ -20,7 +20,8 @@ static RECHARGE_MAX : i32 = 90;
 #[acmd_script(
     agent = "pichu",
     script =  "game_attacks3",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn pichu_ftilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -46,7 +47,8 @@ unsafe fn pichu_ftilt(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "pichu",
     script =  "game_attackairlw",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn pichu_dair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -84,7 +86,8 @@ unsafe fn pichu_dair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "pichu",
     script =  "game_attackdash",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn pichu_da(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -107,7 +110,8 @@ unsafe fn pichu_da(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "pichu",
     script =  "game_attack11",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn pichu_facade(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
@@ -160,7 +164,8 @@ unsafe fn pichu_facade(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "pichu",
     script =  "effect_attack11",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn pichu_facade_eff(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
@@ -207,7 +212,8 @@ unsafe fn pichu_facade_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "pichu",
     script =  "sound_attack11",
-    category = ACMD_SOUND)]
+    category = ACMD_SOUND,
+	low_priority)]
 unsafe fn pichu_facade_snd(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;

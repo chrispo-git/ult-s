@@ -7,7 +7,8 @@ use smash_script::*;
 #[acmd_script(
     agent = "pit",
     script =  "game_attackhi4",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn pit_usmash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -55,7 +56,8 @@ unsafe fn pit_usmash(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "pit",
     script =  "game_attackairn",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn pit_nair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -90,7 +92,8 @@ unsafe fn pit_nair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "pit",
     script =  "game_attacklw3",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn pit_dtilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -108,7 +111,8 @@ unsafe fn pit_dtilt(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "pit",
     script =  "game_attacks3",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn pit_ftilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -127,7 +131,8 @@ unsafe fn pit_ftilt(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "pit",
     script =  "game_attackairf",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn pit_fair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -162,7 +167,8 @@ unsafe fn pit_fair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "pit",
     script =  "game_attackairhi",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn pit_uair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -206,7 +212,8 @@ unsafe fn pit_uair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "pit",
     script =  "game_attackairlw",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn pit_dair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -240,7 +247,8 @@ unsafe fn pit_dair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "pit",
     script =  "game_catch",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn pit_grab(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -267,7 +275,8 @@ unsafe fn pit_grab(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "pit",
     script =  "game_specialairsend",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn pit_sideb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -301,7 +310,8 @@ unsafe fn pit_sideb(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "pit",
     script =  "game_specialsend",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn pit_sideb_ground(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {

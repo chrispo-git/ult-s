@@ -13,7 +13,8 @@ static MAX_FRAMES : i32 = 60;
 #[acmd_script(
     agent = "miigunner_rapidshot_bullet",
     script =  "game_fly",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn gun_laser(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -31,7 +32,8 @@ unsafe fn gun_laser(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "miigunner",
     scripts =  ["game_specialn3start", "game_specialairn3start"],
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn gunner_nade(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -46,7 +48,8 @@ unsafe fn gunner_nade(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "miigunner",
     scripts =  ["game_specialn3end", "game_specialairn3end"],
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn gunner_nade_end(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -60,7 +63,8 @@ unsafe fn gunner_nade_end(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "miigunner",
     scripts =  ["game_speciallw1start", "game_specialairlw1start"],
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn gunner_shine(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -74,7 +78,8 @@ unsafe fn gunner_shine(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "miigunner",
     scripts =  ["game_speciallw3hold", "game_specialairlw3hold"],
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn gunner_mag(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -91,7 +96,8 @@ unsafe fn gunner_mag(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "miigunner",
     scripts =  ["game_specials1", "game_specialairs1"],
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn gunner_fp(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -107,7 +113,8 @@ unsafe fn gunner_fp(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "miigunner",
     script =  "game_attackairlw",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn gunner_dair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -143,7 +150,8 @@ unsafe fn gunner_dair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "miigunner",
     script =  "game_attackairhi",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn gunner_uair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {

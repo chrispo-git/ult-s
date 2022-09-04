@@ -9,7 +9,8 @@ use crate::util::*;
 #[acmd_script(
     agent = "littlemac",
     script =  "game_attacklw3",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn mac_dtilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -35,7 +36,8 @@ unsafe fn mac_dtilt(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "littlemac",
     script =  "game_specialhi",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn mac_upb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -70,7 +72,8 @@ unsafe fn mac_upb(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "littlemac",
     script =  "game_attackairf",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn mac_fair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -98,7 +101,8 @@ unsafe fn mac_fair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "littlemac",
     script =  "game_attackairn",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn mac_nair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -132,7 +136,8 @@ unsafe fn mac_nair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "littlemac",
     script =  "game_attackairb",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn mac_bair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -159,7 +164,8 @@ unsafe fn mac_bair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "littlemac",
     script =  "game_attackairhi",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn mac_uair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -186,7 +192,8 @@ unsafe fn mac_uair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "littlemac",
     script =  "game_attackhi4",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn mac_usmash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -213,7 +220,8 @@ unsafe fn mac_usmash(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "littlemac",
     script =  "game_attacks4",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn mac_fsmash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -240,7 +248,8 @@ unsafe fn mac_fsmash(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "littlemac",
     script =  "game_attacks4hi",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn mac_fsmashhi(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -262,7 +271,8 @@ unsafe fn mac_fsmashhi(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "littlemac",
     script =  "game_attacks4lw",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn mac_fsmashlw(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -285,7 +295,8 @@ unsafe fn mac_fsmashlw(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "littlemac",
     script =  "game_attacklw4",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn mac_dsmash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -334,7 +345,8 @@ unsafe fn mac_dsmash(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "littlemac",
     script =  "game_specialndash",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn mac_neutralbdash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {	
@@ -356,7 +368,8 @@ unsafe fn mac_neutralbdash(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "littlemac",
     script =  "game_specialndashturn",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn mac_neutralbdashturn(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {	

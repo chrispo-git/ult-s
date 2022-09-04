@@ -47,7 +47,8 @@ fn mew2_frame(fighter: &mut L2CFighterCommon) {
 #[acmd_script(
     agent = "mewtwo",
     script =  "game_dash",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn m2_dash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -73,7 +74,8 @@ unsafe fn m2_dash(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "mewtwo",
     script =  "game_turndash",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn m2_turn_dash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -103,7 +105,8 @@ unsafe fn m2_turn_dash(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "mewtwo",
     script =  "game_attackairb",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn m2_bair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -140,7 +143,8 @@ unsafe fn m2_bair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "mewtwo",
     script =  "game_attackairhi",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn m2_uair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {

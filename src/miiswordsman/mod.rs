@@ -17,7 +17,8 @@ static mut BOMB_TIME: [i32; 8] = [0; 8];
 #[acmd_script(
     agent = "miiswordsman",
     script =  "game_catch",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn sword_grab(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -44,7 +45,8 @@ unsafe fn sword_grab(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "miiswordsman_lightshuriken",
     script =  "game_fly",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn sword_shuriken(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -73,7 +75,8 @@ unsafe fn sword_shuriken(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "miiswordsman_tornadoshot",
     script =  "game_fly",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn sword_nadoshot(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -98,7 +101,8 @@ unsafe fn sword_nadoshot(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "miiswordsman",
     script =  "game_specialhi3start",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn sword_hs_start(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -109,7 +113,8 @@ unsafe fn sword_hs_start(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "miiswordsman",
     script =  "game_throwhi",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn sword_uthrow(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -133,7 +138,8 @@ unsafe fn sword_uthrow(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "miiswordsman",
     script =  "sound_throwhi",
-    category = ACMD_SOUND)]
+    category = ACMD_SOUND,
+	low_priority)]
 unsafe fn sword_uthrow_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -147,7 +153,8 @@ unsafe fn sword_uthrow_snd(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "miiswordsman",
     script =  "expression_throwhi",
-    category = ACMD_EXPRESSION)]
+    category = ACMD_EXPRESSION,
+	low_priority)]
 unsafe fn sword_uthrow_expr(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -163,7 +170,8 @@ unsafe fn sword_uthrow_expr(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "miiswordsman",
     script =  "effect_throwhi",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn sword_uthrow_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -184,7 +192,8 @@ unsafe fn sword_uthrow_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "miiswordsman",
     scripts =  ["game_specialn1", "game_specialairn1"],
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn sword_nado(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -201,7 +210,8 @@ unsafe fn sword_nado(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "miiswordsman",
     scripts =  ["game_attackhi4"],
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn sword_usmash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -229,7 +239,8 @@ unsafe fn sword_usmash(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "miiswordsman",
     scripts =  ["sound_attackhi4"],
-    category = ACMD_SOUND)]
+    category = ACMD_SOUND,
+	low_priority)]
 unsafe fn sword_usmash_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -252,7 +263,8 @@ unsafe fn sword_usmash_snd(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "miiswordsman",
     scripts =  ["effect_attackhi4"],
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn sword_usmash_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -277,7 +289,8 @@ unsafe fn sword_usmash_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "miiswordsman",
     scripts =  ["game_speciallw1hit", "game_specialairlw1hit"],
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn sword_counter(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -307,7 +320,8 @@ unsafe fn sword_counter(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "miiswordsman",
     script =  "game_attacklw3",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn sword_dtilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -326,7 +340,8 @@ unsafe fn sword_dtilt(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "miiswordsman",
     script =  "game_attacks3",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn sword_ftilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -347,7 +362,8 @@ unsafe fn sword_ftilt(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "miiswordsman",
     script =  "effect_attacks3",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn sword_ftilt_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -364,7 +380,8 @@ unsafe fn sword_ftilt_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "miiswordsman",
     script =  "sound_attacks3",
-    category = ACMD_SOUND)]
+    category = ACMD_SOUND,
+	low_priority)]
 unsafe fn sword_ftilt_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -378,7 +395,8 @@ unsafe fn sword_ftilt_snd(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "miiswordsman",
     scripts =  ["game_specialhi1", "game_specialairhi1"],
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn sword_ss_rise(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let module_accessor = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);
@@ -431,7 +449,8 @@ unsafe fn sword_ss_rise(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "miiswordsman",
     scripts =  ["game_specialairn3start", "game_specialn3start"],
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn sword_airgrab_start(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -458,7 +477,8 @@ unsafe fn sword_airgrab_start(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "miiswordsman",
     scripts =  ["effect_specialairn3start", "effect_specialn3start"],
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn sword_airgrab_start_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -477,7 +497,8 @@ unsafe fn sword_airgrab_start_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "miiswordsman",
     scripts =  ["effect_specialairn3loop", "effect_specialn3loop"],
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn sword_airgrab_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -492,7 +513,8 @@ unsafe fn sword_airgrab_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "miiswordsman",
     scripts =  ["effect_specialairn3end", "effect_specialn3end"],
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn sword_airgrab_end_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -505,7 +527,8 @@ unsafe fn sword_airgrab_end_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "miiswordsman",
     script =  "game_specialairn3loop",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn sword_airgrab(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -529,7 +552,8 @@ unsafe fn sword_airgrab(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "miiswordsman",
     script =  "game_specialairn3end",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn sword_airgrab_end(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -547,7 +571,8 @@ unsafe fn sword_airgrab_end(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "miiswordsman",
     script =  "sound_specialairn3end",
-    category = ACMD_SOUND)]
+    category = ACMD_SOUND,
+	low_priority)]
 unsafe fn sword_airgrab_end_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -560,7 +585,8 @@ unsafe fn sword_airgrab_end_snd(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "miiswordsman",
     script =  "expression_specialairn3end",
-    category = ACMD_EXPRESSION)]
+    category = ACMD_EXPRESSION,
+	low_priority)]
 unsafe fn sword_airgrab_end_expr(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {

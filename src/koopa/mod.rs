@@ -14,7 +14,8 @@ static NONE :  smash::phx::Vector3f =  smash::phx::Vector3f { x: 0.0, y: 0.0, z:
 #[acmd_script(
     agent = "koopa",
     script =  "game_attackairlw",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn bowser_dair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -47,7 +48,8 @@ unsafe fn bowser_dair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "koopa_breath",
     script =  "game_move",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn bowser_fireball(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -60,7 +62,8 @@ unsafe fn bowser_fireball(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "koopa",
     script =  "effect_attackairlw",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn bowser_eff_dair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -73,7 +76,8 @@ unsafe fn bowser_eff_dair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "koopa",
     script =  "effect_landingairlw",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn bowser_eff_land_dair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -85,14 +89,16 @@ unsafe fn bowser_eff_land_dair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "koopa",
     script =  "game_landingairlw",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn bowser_land_dair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 }	
 #[acmd_script(
     agent = "koopa",
     script =  "sound_landingairlw",
-    category = ACMD_SOUND)]
+    category = ACMD_SOUND,
+	low_priority)]
 unsafe fn bowser_snd_land_dair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -105,7 +111,8 @@ unsafe fn bowser_snd_land_dair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "koopa",
     script =  "sound_attackairlw",
-    category = ACMD_SOUND)]
+    category = ACMD_SOUND,
+	low_priority)]
 unsafe fn bowser_snd_dair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {

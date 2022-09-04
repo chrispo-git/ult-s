@@ -9,7 +9,8 @@ use crate::util::*;
 #[acmd_script(
     agent = "brave",
     script =  "game_attackairb",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn hero_bair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -39,7 +40,8 @@ unsafe fn hero_bair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "brave",
     script =  "game_attackairhi",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn hero_uair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {	

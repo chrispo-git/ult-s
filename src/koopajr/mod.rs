@@ -48,7 +48,8 @@ pub fn jr(fighter : &mut L2CFighterCommon) {
 #[acmd_script(
     agent = "koopajr",
     script =  "game_throwlw",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn jr_dthrow(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {

@@ -17,7 +17,8 @@ static WINDOW : i32 = 20;
 #[acmd_script(
     agent = "szerosuit",
     script =  "game_specialairlwflip",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn zss_bury(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -35,7 +36,8 @@ unsafe fn zss_bury(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "szerosuit",
     script =  "game_attack11",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn zss_jab1(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -62,7 +64,8 @@ unsafe fn zss_jab1(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "szerosuit",
     script =  "effect_attack11",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn zss_jab_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -84,7 +87,8 @@ unsafe fn zss_jab_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "szerosuit",
     script =  "game_specialairlwkick",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn zss_kick(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -111,7 +115,8 @@ unsafe fn zss_kick(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "szerosuit",
     script =  "game_attacklw3",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn zss_dtilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -130,7 +135,8 @@ unsafe fn zss_dtilt(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "szerosuit",
     script =  "game_attackhi3",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn zss_utilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -157,7 +163,8 @@ unsafe fn zss_utilt(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "szerosuit",
     script =  "game_attackairn",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn zss_nair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -197,7 +204,8 @@ unsafe fn zss_nair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "szerosuit",
     script =  "game_attackairhi",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn zss_uair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -225,7 +233,8 @@ unsafe fn zss_uair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "szerosuit",
     script =  "game_attackairf",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn zss_fair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -263,7 +272,8 @@ unsafe fn zss_fair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "szerosuit",
     script =  "game_aircatchlanding",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn zss_zair_land(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -282,7 +292,8 @@ unsafe fn zss_zair_land(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "szerosuit",
     script =  "game_attackhi4",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn zss_usmash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -306,7 +317,8 @@ unsafe fn zss_usmash(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "szerosuit",
     script =  "effect_attackhi4",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn zss_usmash_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -320,7 +332,8 @@ unsafe fn zss_usmash_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "szerosuit",
     script =  "sound_attackhi4",
-    category = ACMD_SOUND)]
+    category = ACMD_SOUND,
+	low_priority)]
 unsafe fn zss_usmash_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -334,7 +347,8 @@ unsafe fn zss_usmash_snd(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "szerosuit",
     script =  "game_attacks4s",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn zss_fsmash_s(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -377,7 +391,8 @@ unsafe fn zss_fsmash_s(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "szerosuit",
     script =  "game_catchattack",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn zss_pummel(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -397,7 +412,8 @@ unsafe fn zss_pummel(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "szerosuit",
     script =  "effect_catchattack",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn zss_pummel_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -411,7 +427,8 @@ unsafe fn zss_pummel_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "szerosuit",
     script =  "game_throwhi",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn zss_uthrow(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -473,7 +490,8 @@ unsafe fn zss_uthrow(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "szerosuit",
     script =  "effect_throwhi",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn zss_uthrow_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -490,7 +508,8 @@ unsafe fn zss_uthrow_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "szerosuit",
     script =  "sound_throwhi",
-    category = ACMD_SOUND)]
+    category = ACMD_SOUND,
+	low_priority)]
 unsafe fn zss_uthrow_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -515,7 +534,8 @@ unsafe fn zss_uthrow_snd(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "szerosuit",
     script =  "game_throwlw",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn zss_dthrow(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -543,7 +563,8 @@ unsafe fn zss_dthrow(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "szerosuit",
     script =  "game_attackairlw",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn zss_dair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -575,7 +596,8 @@ unsafe fn zss_dair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "szerosuit",
     script =  "effect_attackairlw",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn zss_dair_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -590,7 +612,8 @@ unsafe fn zss_dair_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "szerosuit",
     script =  "sound_attackairlw",
-    category = ACMD_SOUND)]
+    category = ACMD_SOUND,
+	low_priority)]
 unsafe fn zss_dair_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -604,7 +627,8 @@ unsafe fn zss_dair_snd(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "szerosuit",
     script =  "game_catch",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn zss_grab(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -637,7 +661,8 @@ unsafe fn zss_grab(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "szerosuit",
     script =  "sound_catch",
-    category = ACMD_SOUND)]
+    category = ACMD_SOUND,
+	low_priority)]
 unsafe fn zss_grab_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -650,14 +675,16 @@ unsafe fn zss_grab_snd(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "szerosuit",
     script =  "effect_catch",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn zss_grab_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 }
 #[acmd_script(
     agent = "szerosuit",
     script =  "game_attackdash",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn zss_da(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -693,7 +720,8 @@ unsafe fn zss_da(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "szerosuit",
     script =  "effect_attackdash",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn zss_da_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -710,7 +738,8 @@ unsafe fn zss_da_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "szerosuit",
     script =  "sound_attackdash",
-    category = ACMD_SOUND)]
+    category = ACMD_SOUND,
+	low_priority)]
 unsafe fn zss_da_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -728,7 +757,8 @@ unsafe fn zss_da_snd(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "szerosuit",
     script =  "game_specialairs",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn zss_sideb_air(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -758,7 +788,8 @@ unsafe fn zss_sideb_air(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "szerosuit",
     scripts =  ["effect_specialairs"],
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn zss_sideb_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -782,7 +813,8 @@ unsafe fn zss_sideb_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "szerosuit",
     scripts =  ["sound_specialairs"],
-    category = ACMD_SOUND)]
+    category = ACMD_SOUND,
+	low_priority)]
 unsafe fn zss_sideb_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -800,7 +832,8 @@ unsafe fn zss_sideb_snd(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "szerosuit",
     script =  "game_specialairhi",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn zss_air_upb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -860,7 +893,8 @@ unsafe fn zss_air_upb(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "szerosuit",
     script =  "game_specialhi",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn zss_upb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -920,7 +954,8 @@ unsafe fn zss_upb(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "szerosuit",
     script =  "game_attacklw4",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn zss_dsmash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {

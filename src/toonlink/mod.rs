@@ -6,7 +6,8 @@ use smash_script::*;
 #[acmd_script(
     agent = "toonlink",
     script =  "game_dash",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn tink_dash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -19,7 +20,8 @@ unsafe fn tink_dash(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "toonlink",
     script =  "game_turndash",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn tink_dashback(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -36,7 +38,8 @@ unsafe fn tink_dashback(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "toonlink",
     script =  "game_attack11",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn tink_jab1(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -64,7 +67,8 @@ unsafe fn tink_jab1(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "toonlink",
     script =  "game_attack12",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn tink_jab2(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -89,7 +93,8 @@ unsafe fn tink_jab2(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "toonlink",
     script =  "game_attack13",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn tink_jab3(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -107,7 +112,8 @@ unsafe fn tink_jab3(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "toonlink",
     script =  "game_attackdash",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn tink_da(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -131,7 +137,8 @@ unsafe fn tink_da(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "toonlink",
     script =  "game_attacklw3",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn tink_dtilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -150,7 +157,8 @@ unsafe fn tink_dtilt(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "toonlink",
     script =  "game_attacks3",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn tink_ftilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -174,7 +182,8 @@ unsafe fn tink_ftilt(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "toonlink",
     script =  "game_attackhi3",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn tink_utilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -194,7 +203,8 @@ unsafe fn tink_utilt(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "toonlink",
     script =  "game_attacks4",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn tink_fsmash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -223,7 +233,8 @@ unsafe fn tink_fsmash(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "toonlink",
     script =  "game_attackhi4",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn tink_usmash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -256,7 +267,8 @@ unsafe fn tink_usmash(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "toonlink",
     script =  "game_attacklw4",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn tink_dsmash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -289,7 +301,8 @@ unsafe fn tink_dsmash(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "toonlink",
     script =  "game_attackairb",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn tink_bair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -316,7 +329,8 @@ unsafe fn tink_bair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "toonlink",
     script =  "game_attackairf",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn tink_fair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -343,7 +357,8 @@ unsafe fn tink_fair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "toonlink",
     script =  "game_attackairn",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn tink_nair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -384,7 +399,8 @@ unsafe fn tink_nair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "toonlink",
     script =  "game_attackairhi",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn tink_uair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -427,7 +443,8 @@ unsafe fn tink_uair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "toonlink",
     script =  "effect_attackairhi",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn tink_uair_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -491,7 +508,8 @@ unsafe fn tink_uair_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "toonlink",
     script =  "sound_attackairhi",
-    category = ACMD_SOUND)]
+    category = ACMD_SOUND,
+	low_priority)]
 unsafe fn tink_uair_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -521,7 +539,8 @@ unsafe fn tink_uair_snd(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "toonlink",
     scripts =  ["game_speciallw","game_specialairlw"],
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn tink_bomb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {

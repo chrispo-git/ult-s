@@ -28,7 +28,8 @@ static mut FEET :  smash::phx::Vector3f =  smash::phx::Vector3f { x: 1.0, y: 0.0
 #[acmd_script(
     agent = "ryu",
     script =  "game_attacklw4",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn ryu_dsmash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -64,7 +65,8 @@ unsafe fn ryu_dsmash(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "ryu",
     script =  "game_attackairf",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn ryu_fair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -104,7 +106,8 @@ unsafe fn ryu_fair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "ryu",
     script =  "game_attackdash",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn ryu_da(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -134,7 +137,8 @@ unsafe fn ryu_da(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "ken",
     script =  "game_attacklw4",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn ken_dsmash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -157,7 +161,8 @@ unsafe fn ken_dsmash(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "ken",
     script =  "game_attack13",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn ken_jab3(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -414,7 +419,8 @@ pub fn supers(fighter : &mut L2CFighterCommon) {
 #[acmd_script(
     agent = "ryu_shinkuhadoken",
     script =  "game_move",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn ryu_shinsu(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -440,7 +446,8 @@ unsafe fn ryu_shinsu(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "ryu_shinkuhadoken",
     script =  "effect_move",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn ryu_shinsue(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -456,7 +463,8 @@ unsafe fn ryu_shinsue(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "ryu",
     script =  "game_specialn",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn ryu_shinsu_hadou(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -484,7 +492,8 @@ unsafe fn ryu_shinsu_hadou(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "ken",
     script =  "game_attacknearw",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn ken_prox_ftilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -515,7 +524,8 @@ unsafe fn ken_prox_ftilt(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "ryu",
     script =  "game_specialairn",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn ryu_shinsu_hadou_air(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -543,7 +553,8 @@ unsafe fn ryu_shinsu_hadou_air(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "ken",
     script =  "game_specialhicommand",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn ken_shoryu(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let mut ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) as usize;

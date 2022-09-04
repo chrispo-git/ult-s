@@ -7,7 +7,8 @@ use smash_script::*;
 #[acmd_script(
     agent = "purin",
     script =  "game_attackdash",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn puff_da(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -30,7 +31,8 @@ unsafe fn puff_da(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "purin",
     script =  "game_attack12",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn puff_jab2(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -54,7 +56,8 @@ unsafe fn puff_jab2(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "purin",
     script =  "game_attackairhi",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn puff_uair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -82,7 +85,8 @@ unsafe fn puff_uair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "purin",
     script =  "game_attackairf",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn puff_fair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -113,7 +117,8 @@ unsafe fn puff_fair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "purin",
     scripts =  ["game_attacks3", "game_attacks3hi", "game_attacks3lw"],
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn puff_ftilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -134,7 +139,8 @@ unsafe fn puff_ftilt(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "purin",
     script =  "game_attackairlw",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn puff_dair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -168,7 +174,8 @@ unsafe fn puff_dair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "purin",
     script =  "game_attackhi4",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn puff_usmash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -192,7 +199,8 @@ unsafe fn puff_usmash(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "purin",
     script =  "game_attackairn",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn puff_nair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -224,7 +232,8 @@ unsafe fn puff_nair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "purin",
     scripts =  ["game_speciallwl", "game_speciallwr", "game_specialairlwl", "game_specialairlwr"],
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn puff_rest(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -245,7 +254,8 @@ unsafe fn puff_rest(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "purin",
     script =  "game_throwlw",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn puff_dthrow(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {

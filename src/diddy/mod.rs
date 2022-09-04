@@ -55,7 +55,8 @@ pub fn diddy(fighter : &mut L2CFighterCommon) {
 #[acmd_script(
     agent = "diddy",
     script =  "game_attackhi3",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn diddy_utilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -78,7 +79,8 @@ unsafe fn diddy_utilt(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "diddy",
     script =  "game_attacks3",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn diddy_ftilts(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -112,7 +114,8 @@ unsafe fn diddy_ftilts(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "diddy",
     script =  "game_attacks3hi",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn diddy_ftilthi(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -146,7 +149,8 @@ unsafe fn diddy_ftilthi(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "diddy",
     script =  "game_attacks3lw",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn diddy_ftiltlw(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -180,7 +184,8 @@ unsafe fn diddy_ftiltlw(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "diddy",
     script =  "game_attackairn",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn diddy_nair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {

@@ -6,7 +6,8 @@ use smash_script::*;
 #[acmd_script(
     agent = "krool",
     script =  "game_attack11",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn krool_jab1(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -36,7 +37,8 @@ unsafe fn krool_jab1(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "krool",
     script =  "game_attack12",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn krool_jab2(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {

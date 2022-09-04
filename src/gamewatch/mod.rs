@@ -9,7 +9,8 @@ use smash_script::*;use smash::phx::Hash40;
 #[acmd_script(
     agent = "gamewatch",
     script =  "game_specialhi",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn gnw_upb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -50,7 +51,8 @@ unsafe fn gnw_upb(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "gamewatch",
     script =  "game_attackairlw",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn gnw_dair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -81,7 +83,8 @@ unsafe fn gnw_dair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "gamewatch",
     script =  "game_landingairlw",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn gnw_dair_land(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -91,7 +94,8 @@ unsafe fn gnw_dair_land(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "gamewatch",
     script =  "game_attackairf",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn gnw_fair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -124,7 +128,8 @@ unsafe fn gnw_fair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "gamewatch",
     script =  "game_attacks3",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn gnw_ftilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -158,7 +163,8 @@ unsafe fn gnw_ftilt(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "gamewatch",
     script =  "game_attacklw4",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn gnw_dsmash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -185,7 +191,8 @@ unsafe fn gnw_dsmash(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "gamewatch",
     script =  "game_attacklw3",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn gnw_dtilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -215,7 +222,8 @@ unsafe fn gnw_dtilt(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "gamewatch",
     scripts =  ["game_attackhi3"],
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn gnw_utilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -257,7 +265,8 @@ unsafe fn gnw_utilt(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "gamewatch",
     script =  "game_attackdash",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn gnw_da(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -285,7 +294,8 @@ unsafe fn gnw_da(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "gamewatch_breath",
     script =  "game_attackairhi",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn gnw_uair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
