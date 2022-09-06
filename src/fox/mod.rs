@@ -8,7 +8,8 @@ use smash::app::lua_bind::*;
 #[acmd_script(
     agent = "fox",
     script =  "game_attack11",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn fox_jab1(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -40,7 +41,8 @@ unsafe fn fox_jab1(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "fox",
     script =  "game_attack12",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn fox_jab2(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -68,7 +70,8 @@ unsafe fn fox_jab2(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "fox",
     script =  "game_attacklw3",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn fox_dtilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -90,7 +93,8 @@ unsafe fn fox_dtilt(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "fox",
     script =  "game_attackairlw",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn fox_dair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -128,7 +132,8 @@ unsafe fn fox_dair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "fox",
     script =  "game_attackhi4",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn fox_usmash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	if StatusModule::situation_kind(fighter.module_accessor) != *SITUATION_KIND_AIR {
@@ -189,7 +194,8 @@ unsafe fn fox_usmash(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "fox",
     script =  "game_landingairlw",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn fox_dair2(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {

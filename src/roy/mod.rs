@@ -11,7 +11,8 @@ use smash::phx::Hash40;
 #[acmd_script(
     agent = "roy",
     script =  "game_dash",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn roy_dash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -24,7 +25,8 @@ unsafe fn roy_dash(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "roy",
     script =  "game_turndash",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn roy_tdash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -41,7 +43,8 @@ unsafe fn roy_tdash(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "roy",
     scripts =  ["game_specialairs4s", "game_specials4s"],
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn roy_ded(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -60,7 +63,8 @@ unsafe fn roy_ded(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "roy",
     script =  "game_specialairs1",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn roy_ded1(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -90,7 +94,8 @@ unsafe fn roy_ded1(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "roy",
     script =  "game_attackairb",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn roy_bair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -118,7 +123,8 @@ unsafe fn roy_bair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "roy",
     script =  "game_attackairhi",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn roy_uair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -147,7 +153,8 @@ unsafe fn roy_uair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "roy",
     script =  "game_attackairn",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn roy_nair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -184,7 +191,8 @@ unsafe fn roy_nair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "roy",
     script =  "game_attack11",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn roy_jab(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -203,7 +211,8 @@ unsafe fn roy_jab(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "roy",
     script =  "game_attacklw3",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn roy_dtilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -221,7 +230,8 @@ unsafe fn roy_dtilt(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "roy",
     script =  "game_attackairlw",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn roy_dair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -260,7 +270,8 @@ unsafe fn roy_dair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "roy",
     script =  "effect_attackairlw",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn roy_dair_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -280,7 +291,8 @@ unsafe fn roy_dair_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "roy",
     script =  "sound_attackairlw",
-    category = ACMD_SOUND)]
+    category = ACMD_SOUND,
+	low_priority)]
 unsafe fn roy_dair_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -294,7 +306,8 @@ unsafe fn roy_dair_snd(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "roy",
     script =  "game_attackairf",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn roy_fair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -326,7 +339,8 @@ unsafe fn roy_fair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "roy",
     script =  "game_attackhi4",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn roy_usmash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -372,7 +386,8 @@ unsafe fn roy_usmash(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "roy",
     script =  "game_attackhi3",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn roy_utilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -401,7 +416,8 @@ unsafe fn roy_utilt(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "roy",
     script =  "game_attacks3",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn roy_ftilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -424,7 +440,8 @@ unsafe fn roy_ftilt(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "roy",
     script =  "effect_attacks3",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn roy_ftilt_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -447,7 +464,8 @@ unsafe fn roy_ftilt_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "roy",
     script =  "sound_attacks3",
-    category = ACMD_SOUND)]
+    category = ACMD_SOUND,
+	low_priority)]
 unsafe fn roy_ftilt_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -465,7 +483,8 @@ unsafe fn roy_ftilt_snd(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "roy",
     script =  "game_attackdash",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn roy_da(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -486,7 +505,8 @@ unsafe fn roy_da(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "roy",
     script =  "game_attackdash2",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn roy_da2(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -503,7 +523,8 @@ unsafe fn roy_da2(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "roy",
     script =  "effect_attackdash2",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn roy_da2_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -523,7 +544,8 @@ unsafe fn roy_da2_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "roy",
     script =  "effect_attackdash",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn roy_da_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -536,7 +558,8 @@ unsafe fn roy_da_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "roy",
     script =  "sound_attackdash2",
-    category = ACMD_SOUND)]
+    category = ACMD_SOUND,
+	low_priority)]
 unsafe fn roy_da2_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -554,7 +577,8 @@ unsafe fn roy_da2_snd(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "roy",
     script =  "sound_attackdash",
-    category = ACMD_SOUND)]
+    category = ACMD_SOUND,
+	low_priority)]
 unsafe fn roy_da_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {

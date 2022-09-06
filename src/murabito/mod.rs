@@ -9,7 +9,8 @@ use smash::phx::Hash40;
 #[acmd_script(
     agent = "murabito",
     script =  "game_catch",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn villy_grab(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -44,7 +45,8 @@ unsafe fn villy_grab(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "murabito",
     script =  "game_catchdash",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn villy_dashgrab(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -79,7 +81,8 @@ unsafe fn villy_dashgrab(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "murabito",
     script =  "game_catchturn",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn villy_pivotgrab(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -114,7 +117,8 @@ unsafe fn villy_pivotgrab(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "murabito",
     script =  "game_attacks3",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn villy_ftilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -143,7 +147,8 @@ unsafe fn villy_ftilt(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "murabito",
     script =  "game_attacklw3",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn villy_dtilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -162,7 +167,8 @@ unsafe fn villy_dtilt(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "murabito",
     script =  "effect_attackairf",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn villy_fair_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -185,7 +191,8 @@ unsafe fn villy_fair_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "murabito",
     script =  "sound_attackairf",
-    category = ACMD_SOUND)]
+    category = ACMD_SOUND,
+	low_priority)]
 unsafe fn villy_fair_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -198,7 +205,8 @@ unsafe fn villy_fair_snd(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "murabito",
     script =  "game_attackairf",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn villy_fair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -241,14 +249,16 @@ unsafe fn villy_fair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "murabito",
     script =  "effect_specialairnfire",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn villy_fair_help1(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 }
 #[acmd_script(
     agent = "murabito",
     script =  "sound_specialairnfire",
-    category = ACMD_SOUND)]
+    category = ACMD_SOUND,
+	low_priority)]
 unsafe fn villy_fair_help2(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 }

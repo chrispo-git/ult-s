@@ -7,7 +7,8 @@ use smash_script::*;
 #[acmd_script(
     agent = "wolf",
     script =  "game_attacklw3",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn wolf_dtilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -30,7 +31,8 @@ unsafe fn wolf_dtilt(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "wolf",
     script =  "game_attackhi3",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn wolf_utilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -54,7 +56,8 @@ unsafe fn wolf_utilt(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "wolf",
     script =  "game_attackairb",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn wolf_bair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {

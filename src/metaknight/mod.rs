@@ -6,7 +6,8 @@ use smash_script::*;
 #[acmd_script(
     agent = "metaknight",
     script =  "game_attacks3",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn mk_ftilt1(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -35,7 +36,8 @@ unsafe fn mk_ftilt1(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "metaknight",
     script =  "game_attacks3s2",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn mk_ftilt2(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -60,7 +62,8 @@ unsafe fn mk_ftilt2(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "metaknight",
     script =  "game_attacks3s2",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn mk_ftilt3(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -78,7 +81,8 @@ unsafe fn mk_ftilt3(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "metaknight",
     script =  "game_attackairlw",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn mk_dair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -111,7 +115,8 @@ unsafe fn mk_dair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "metaknight",
     script =  "effect_attackairlw",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn mk_dair_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -128,7 +133,8 @@ unsafe fn mk_dair_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "metaknight",
     script =  "sound_attackairlw",
-    category = ACMD_SOUND)]
+    category = ACMD_SOUND,
+	low_priority)]
 unsafe fn mk_dair_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -143,7 +149,8 @@ unsafe fn mk_dair_snd(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "metaknight",
     script =  "sound_landingairlw",
-    category = ACMD_SOUND)]
+    category = ACMD_SOUND,
+	low_priority)]
 unsafe fn mk_dair_land_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -156,7 +163,8 @@ unsafe fn mk_dair_land_snd(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "metaknight",
     script =  "effect_landingairlw",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn mk_dair_land_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -169,7 +177,8 @@ unsafe fn mk_dair_land_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "metaknight",
     script =  "game_attackairf",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn mk_fair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -196,7 +205,8 @@ unsafe fn mk_fair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "metaknight",
     script =  "effect_attackairf",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn mk_fair_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -222,7 +232,8 @@ unsafe fn mk_fair_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "metaknight",
     script =  "sound_attackairf",
-    category = ACMD_SOUND)]
+    category = ACMD_SOUND,
+	low_priority)]
 unsafe fn mk_fair_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -239,7 +250,8 @@ unsafe fn mk_fair_snd(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "metaknight",
     script =  "game_attackhi4",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn mk_usmash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -288,7 +300,8 @@ unsafe fn mk_usmash(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "metaknight",
     script =  "game_attackairb",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn mk_bair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -335,7 +348,8 @@ unsafe fn mk_bair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "metaknight",
     script =  "game_attackairhi",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn mk_uair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {

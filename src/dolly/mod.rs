@@ -7,7 +7,8 @@ use smash_script::*;
 #[acmd_script(
     agent = "dolly",
     script =  "game_attacklw3",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn terry_dtilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -33,7 +34,8 @@ unsafe fn terry_dtilt(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "dolly",
     script =  "game_attack11",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn terry_jab1(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -71,7 +73,8 @@ unsafe fn terry_jab1(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "dolly",
     script =  "game_attackdash",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn terry_da(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -95,7 +98,8 @@ unsafe fn terry_da(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "dolly",
     script =  "game_attackhi4",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn terry_usmash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -125,7 +129,8 @@ unsafe fn terry_usmash(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "dolly",
     script =  "game_attackhi3",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn terry_utilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -166,7 +171,8 @@ unsafe fn terry_utilt(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "dolly",
     script =  "game_attackairlw",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn terry_dair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -205,7 +211,8 @@ unsafe fn terry_dair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "dolly",
     script =  "game_attackairf",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn terry_fair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -251,7 +258,8 @@ unsafe fn terry_fair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "dolly",
     script =  "game_attacks3",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn terry_ftilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {

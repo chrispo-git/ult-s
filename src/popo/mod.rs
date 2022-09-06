@@ -7,7 +7,8 @@ use smash_script::*;use smash::app::lua_bind::*;
 #[acmd_script(
     agent = "popo",
     scripts =  ["game_specialn", "game_specialairn"],
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn ics_shot(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -26,7 +27,8 @@ unsafe fn ics_shot(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "popo",
     scripts =  ["game_specialn_nana", "game_specialairn_nana"],
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn ics_shot2(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {

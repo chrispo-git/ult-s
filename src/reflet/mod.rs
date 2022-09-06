@@ -33,7 +33,8 @@ static mut Y_ACCEL_MUL : f32 = 0.06;
 #[acmd_script(
     agent = "reflet",
     script =  "game_attacklw3",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn robin_dtilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -50,7 +51,8 @@ unsafe fn robin_dtilt(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "reflet",
     script =  "game_attacks3",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn robin_ftilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -67,28 +69,32 @@ unsafe fn robin_ftilt(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "reflet",
     scripts =  ["effect_speciallwstart", "effect_specialairlwstart"],
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn robin_downb_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 }		
 #[acmd_script(
     agent = "reflet",
     scripts =  ["effect_speciallwend", "effect_specialairlwend"],
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn robin_downb_end_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 }	
 #[acmd_script(
     agent = "reflet",
     scripts =  ["sound_speciallwstart", "sound_specialairlwstart"],
-    category = ACMD_SOUND)]
+    category = ACMD_SOUND,
+	low_priority)]
 unsafe fn robin_downb_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 }		
 #[acmd_script(
     agent = "reflet",
     scripts =  ["game_speciallwstart", "game_specialairlwstart"],
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn robin_downb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {

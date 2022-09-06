@@ -9,7 +9,8 @@ use smash_script::*;
 #[acmd_script(
     agent = "pikmin",
     script =  "game_attackhi3",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn oli_utilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -39,7 +40,8 @@ unsafe fn oli_utilt(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "pikmin",
     script =  "game_attackairn",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn oli_nair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -80,7 +82,8 @@ unsafe fn oli_nair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "pikmin",
     script =  "game_attacks3",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn oli_ftilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -105,7 +108,8 @@ unsafe fn oli_ftilt(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "pikmin",
     script =  "game_attacks4",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn oli_fsmash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -125,7 +129,8 @@ unsafe fn oli_fsmash(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "pikmin",
     script =  "game_attackhi4",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn oli_usmash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -142,7 +147,8 @@ unsafe fn oli_usmash(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "pikmin",
     script =  "game_attackairf",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn oli_fair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -171,7 +177,8 @@ unsafe fn oli_fair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "pikmin",
     script =  "game_attackairhi",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn oli_uair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -200,7 +207,8 @@ unsafe fn oli_uair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "pikmin",
     script =  "game_attackairb",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn oli_bair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -232,7 +240,8 @@ unsafe fn oli_bair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "pikmin",
     script =  "game_attackairlw",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn oli_dair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -261,7 +270,8 @@ unsafe fn oli_dair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "pikmin",
     scripts =  ["game_specials", "game_specialairs"],
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn oli_sideb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -283,7 +293,8 @@ unsafe fn oli_sideb(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "pikmin_pikmin",
     script =  "game_attackairf_w",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn white_fair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -302,7 +313,8 @@ unsafe fn white_fair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "pikmin_pikmin",
     script =  "game_attacks4sjump_y",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn yellow_fsmash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -323,7 +335,8 @@ unsafe fn yellow_fsmash(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "pikmin_pikmin",
     script =  "game_attackhi4_y",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn yellow_usmash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {

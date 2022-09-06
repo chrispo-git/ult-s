@@ -6,7 +6,8 @@ use smash_script::*;
 #[acmd_script(
     agent = "packun",
     script =  "game_attackairlw",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn plant_dair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -32,7 +33,8 @@ unsafe fn plant_dair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "packun",
     script =  "game_attackairn",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn plant_nair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -70,7 +72,8 @@ unsafe fn plant_nair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "packun",
     script =  "game_attackairb",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn plant_bair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -99,7 +102,8 @@ unsafe fn plant_bair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "packun",
     script =  "game_attacklw3",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn plant_dtilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -126,7 +130,8 @@ unsafe fn plant_dtilt(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "packun",
     script =  "game_attackairf",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn plant_fair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -160,7 +165,8 @@ unsafe fn plant_fair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "packun",
     script =  "game_attackairhi",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn plant_uair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {

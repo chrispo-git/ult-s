@@ -7,7 +7,8 @@ use smash_script::*;
 #[acmd_script(
     agent = "edge",
     script =  "game_attackairn",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn seph_nair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -36,7 +37,8 @@ unsafe fn seph_nair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "edge",
     scripts =  ["game_specialairn1", "game_specialn1"],
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn seph_flare(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -53,7 +55,8 @@ unsafe fn seph_flare(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "edge",
     script =  "game_attackairhi",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn seph_uair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -98,7 +101,8 @@ unsafe fn seph_uair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "edge",
     script =  "game_attack11",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn seph_jab(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -132,7 +136,8 @@ unsafe fn seph_jab(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "edge",
     script =  "game_throwb",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn seph_bthrow(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -158,7 +163,8 @@ unsafe fn seph_bthrow(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "edge",
     script =  "game_throwhi",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn seph_uthrow(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -188,7 +194,8 @@ unsafe fn seph_uthrow(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "edge",
     script =  "game_throwlw",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn seph_dthrow(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {

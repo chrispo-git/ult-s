@@ -17,7 +17,8 @@ static mut HAS_WALLJUMP: [bool; 8] = [false; 8];
 #[acmd_script(
     agent = "trail",
     script =  "game_attack11",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn sora_jab1(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 1.0);
@@ -70,7 +71,8 @@ unsafe fn sora_jab1(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "trail",
     script =  "game_attack12",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn sora_jab2(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 7.0);
@@ -104,7 +106,8 @@ unsafe fn sora_jab2(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "trail",
     script =  "game_attackairlw",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn sora_dair(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 5.0);
@@ -131,7 +134,8 @@ unsafe fn sora_dair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "trail",
     script =  "sound_attackairlw",
-    category = ACMD_SOUND)]
+    category = ACMD_SOUND,
+	low_priority)]
 unsafe fn sora_dair_snd(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		frame(lua_state, 11.0);
@@ -143,7 +147,8 @@ unsafe fn sora_dair_snd(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "trail",
     scripts =  ["sound_landingairlw"],
-    category = ACMD_SOUND)]
+    category = ACMD_SOUND,
+	low_priority)]
 unsafe fn sora_dair_land_snd(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		frame(lua_state, 2.0);
@@ -154,7 +159,8 @@ unsafe fn sora_dair_land_snd(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "trail",
     scripts =  ["effect_landingairlw"],
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn sora_dair_land_eff(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
@@ -164,7 +170,8 @@ unsafe fn sora_dair_land_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "trail",
     scripts =  ["game_landingairlw"],
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn sora_dair_land(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
@@ -174,7 +181,8 @@ unsafe fn sora_dair_land(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "trail",
     scripts =  ["expression_landingairlw"],
-    category = ACMD_EXPRESSION)]
+    category = ACMD_EXPRESSION,
+	low_priority)]
 unsafe fn sora_dair_land_expr(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
@@ -184,7 +192,8 @@ unsafe fn sora_dair_land_expr(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "trail",
     script =  "game_attackairn",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn sora_nair_1(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 2.0);
@@ -253,7 +262,8 @@ unsafe fn sora_nair_1(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "trail",
     script =  "game_attackairf",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn sora_fair(fighter: &mut L2CAgentBase) {
 	let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -283,7 +293,8 @@ unsafe fn sora_fair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "trail",
     script =  "effect_attackairlw",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn sora_dair_eff(fighter: &mut L2CAgentBase) {
 	let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -303,7 +314,8 @@ unsafe fn sora_dair_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "trail",
     scripts =  ["game_speciallw", "game_specialairlw"],
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn sora_downb(fighter: &mut L2CAgentBase) {
 	let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -321,7 +333,8 @@ unsafe fn sora_downb(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "trail",
     scripts =  ["effect_speciallw", "effect_specialairlw"],
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn sora_downb_eff(fighter: &mut L2CAgentBase) {
 	let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -331,7 +344,8 @@ unsafe fn sora_downb_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "trail",
     scripts =  ["sound_speciallw", "sound_specialairlw"],
-    category = ACMD_SOUND)]
+    category = ACMD_SOUND,
+	low_priority)]
 unsafe fn sora_downb_snd(fighter: &mut L2CAgentBase) {
 	let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -373,7 +387,8 @@ unsafe fn sora_downb_snd(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "trail",
     scripts =  ["sound_speciallwstart", "sound_specialairlwstart"],
-    category = ACMD_SOUND)]
+    category = ACMD_SOUND,
+	low_priority)]
 unsafe fn sora_downb_start_snd(fighter: &mut L2CAgentBase) {
 	let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -382,7 +397,8 @@ unsafe fn sora_downb_start_snd(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "trail",
     scripts =  ["game_speciallwstart", "game_specialairlwstart"],
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn sora_downb_start(fighter: &mut L2CAgentBase) {
 	let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -392,7 +408,8 @@ unsafe fn sora_downb_start(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "trail",
     scripts =  ["effect_speciallwstart", "effect_specialairlwstart"],
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn sora_downb_start_eff(fighter: &mut L2CAgentBase) {
 	let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {

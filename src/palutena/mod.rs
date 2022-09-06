@@ -6,7 +6,8 @@ use smash_script::*;
 #[acmd_script(
     agent = "palutena",
     script =  "game_attackairhi",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn palu_uair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -44,7 +45,8 @@ unsafe fn palu_uair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "palutena",
     script =  "game_attacklw3",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn palu_dtilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -68,7 +70,8 @@ unsafe fn palu_dtilt(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "palutena",
     script =  "game_attackairf",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn palu_fair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -94,7 +97,8 @@ unsafe fn palu_fair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "palutena",
     script =  "game_attackairn",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn palu_nair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -142,7 +146,8 @@ unsafe fn palu_nair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "palutena",
     script =  "game_attack100end",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn palu_jab_100_end(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -161,7 +166,8 @@ unsafe fn palu_jab_100_end(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "palutena",
     script =  "game_attackhi3",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn palu_utilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -192,7 +198,8 @@ unsafe fn palu_utilt(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "palutena",
     script =  "game_attack11",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn palu_jab_1(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -227,7 +234,8 @@ unsafe fn palu_jab_1(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "palutena",
     script =  "game_attacks3",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn palu_ftilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {

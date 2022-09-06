@@ -14,7 +14,8 @@ use smash::app::*;
 #[acmd_script(
     agent = "kamui",
     scripts =  ["game_attack11"],
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn corrin_jab(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -43,7 +44,8 @@ unsafe fn corrin_jab(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "kamui",
     scripts =  ["game_attackdash"],
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn corrin_da(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -87,7 +89,8 @@ unsafe fn corrin_da(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "kamui",
     scripts =  ["effect_dash", "effect_turndash"],
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn corrin_dash_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -101,7 +104,11 @@ unsafe fn corrin_dash_eff(fighter: &mut L2CAgentBase) {
 		}
 	});
 }
-#[acmd_script( agent = "kamui", script = "effect_run", category = ACMD_EFFECT)]
+#[acmd_script( 
+	agent = "kamui", 
+	script = "effect_run", 
+	category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn corrin_run_eff(fighter: &mut L2CAgentBase) {
     for _ in 0..i32::MAX {
         frame(fighter.lua_state_agent, 4.0);
@@ -116,7 +123,8 @@ unsafe fn corrin_run_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "kamui",
     scripts =  ["effect_turnrun"],
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn corrin_turnrun_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -133,7 +141,8 @@ unsafe fn corrin_turnrun_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "kamui",
     scripts =  ["effect_runbrakel", "effect_runbraker"],
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn corrin_runbrake_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -151,7 +160,8 @@ unsafe fn corrin_runbrake_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "kamui",
     scripts =  ["effect_attackhi4"],
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn corrin_usmash_effect(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -175,7 +185,8 @@ unsafe fn corrin_usmash_effect(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "kamui",
     scripts =  ["sound_attackhi4"],
-    category = ACMD_SOUND)]
+    category = ACMD_SOUND,
+	low_priority)]
 unsafe fn corrin_usmash_sound(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -202,7 +213,8 @@ unsafe fn corrin_usmash_sound(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "kamui",
     scripts =  ["expression_attackhi4"],
-    category = ACMD_EXPRESSION)]
+    category = ACMD_EXPRESSION,
+	low_priority)]
 unsafe fn corrin_usmash_expr(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -223,7 +235,8 @@ unsafe fn corrin_usmash_expr(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "kamui",
     scripts =  ["game_attackhi4"],
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn corrin_usmash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {

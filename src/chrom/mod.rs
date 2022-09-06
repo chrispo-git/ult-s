@@ -11,7 +11,8 @@ use smash_script::*;
 #[acmd_script(
     agent = "chrom",
     script =  "game_throwlw",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn chrom_dthrow(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
@@ -38,7 +39,8 @@ unsafe fn chrom_dthrow(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "chrom",
     script =  "game_throwb",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn chrom_bthrow(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -59,7 +61,8 @@ unsafe fn chrom_bthrow(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "chrom",
     script =  "game_throwhi",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn chrom_uthrow(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -84,7 +87,8 @@ unsafe fn chrom_uthrow(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "chrom",
     script =  "game_attack11",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn chrom_jab(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -104,7 +108,8 @@ unsafe fn chrom_jab(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "chrom",
     script =  "game_attack12",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn chrom_jab_2(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -123,7 +128,8 @@ unsafe fn chrom_jab_2(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "chrom",
     script =  "effect_attack12",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn chrom_eff_jab_2(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -141,7 +147,8 @@ unsafe fn chrom_eff_jab_2(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "chrom",
     script =  "sound_attack12",
-    category = ACMD_SOUND)]
+    category = ACMD_SOUND,
+	low_priority)]
 unsafe fn chrom_snd_jab_2(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -158,7 +165,8 @@ unsafe fn chrom_snd_jab_2(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "chrom",
     script =  "game_attackairf",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn chrom_fair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -190,7 +198,8 @@ unsafe fn chrom_fair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "chrom",
     script =  "game_attacks3hi",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn chrom_ftilt_hi(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -214,7 +223,8 @@ unsafe fn chrom_ftilt_hi(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "chrom",
     script =  "game_attacks3lw",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn chrom_ftilt_lw(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -236,7 +246,8 @@ unsafe fn chrom_ftilt_lw(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "chrom",
     script =  "game_attacks3",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn chrom_ftilt_s(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -257,7 +268,8 @@ unsafe fn chrom_ftilt_s(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "chrom",
     script =  "game_attackairhi",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn chrom_uair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -289,7 +301,8 @@ unsafe fn chrom_uair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "chrom",
     scripts =  ["game_specials1", "game_specialairs1"],
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn chrom_sideb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -312,7 +325,8 @@ unsafe fn chrom_sideb(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "chrom",
     scripts =  ["effect_specials1", "effect_specialairs1"],
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn chrom_sideb_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -330,7 +344,8 @@ unsafe fn chrom_sideb_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "chrom",
     scripts =  ["sound_specials1", "sound_specialairs1"],
-    category = ACMD_SOUND)]
+    category = ACMD_SOUND,
+	low_priority)]
 unsafe fn chrom_sideb_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -349,7 +364,8 @@ unsafe fn chrom_sideb_snd(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "chrom",
     scripts =  ["sound_specials3lw", "sound_specials4s", "sound_specials4hi", "sound_specials3hi"],
-    category = ACMD_SOUND)]
+    category = ACMD_SOUND,
+	low_priority)]
 unsafe fn chrom_ftilt_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -366,7 +382,8 @@ unsafe fn chrom_ftilt_snd(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "chrom",
     script =  "game_attackairb",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn chrom_bair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -394,7 +411,8 @@ unsafe fn chrom_bair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "chrom",
     script =  "game_attackairn",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn chrom_nair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {

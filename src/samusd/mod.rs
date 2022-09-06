@@ -216,7 +216,8 @@ unsafe fn missile_exec(fighter: &mut L2CFighterBase) -> L2CValue {
 #[acmd_script(
     agent = "samusd",
     script =  "game_attackairn",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn dsamus_nair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -258,7 +259,8 @@ unsafe fn dsamus_nair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "samusd",
     script =  "game_attackdash",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn dsamus_da(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -284,7 +286,8 @@ unsafe fn dsamus_da(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "samusd",
     script =  "game_attackairlw",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn dsamus_dair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -312,7 +315,8 @@ unsafe fn dsamus_dair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "samusd",
     script =  "effect_attackairlw",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn dsamus_dair_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -340,7 +344,8 @@ unsafe fn dsamus_dair_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "samusd",
     script =  "effect_attackdash",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn dsamus_da_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -370,7 +375,8 @@ unsafe fn dsamus_da_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "samusd",
     script =  "sound_attackdash",
-    category = ACMD_SOUND)]
+    category = ACMD_SOUND,
+	low_priority)]
 unsafe fn dsamus_da_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -384,7 +390,8 @@ unsafe fn dsamus_da_snd(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "samusd",
     script =  "game_attacklw3",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn dsamus_dtilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -402,7 +409,8 @@ unsafe fn dsamus_dtilt(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "samusd",
     script =  "game_attack11",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn dsamus_jab(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -419,7 +427,8 @@ unsafe fn dsamus_jab(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "samusd",
     script =  "effect_attack11",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn dsamus_jab_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -441,7 +450,8 @@ unsafe fn dsamus_jab_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "samusd",
     script =  "game_attacklw4",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn dsamus_dsmash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -468,7 +478,8 @@ unsafe fn dsamus_dsmash(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "samusd",
     script =  "effect_attacklw4",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn dsamus_dsmash_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -494,7 +505,8 @@ unsafe fn dsamus_dsmash_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "samusd",
     script =  "sound_attacklw4",
-    category = ACMD_SOUND)]
+    category = ACMD_SOUND,
+	low_priority)]
 unsafe fn dsamus_dsmash_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -511,7 +523,8 @@ unsafe fn dsamus_dsmash_snd(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "samusd",
     script =  "expression_attacklw4",
-    category = ACMD_EXPRESSION)]
+    category = ACMD_EXPRESSION,
+	low_priority)]
 unsafe fn dsamus_dsmash_expr(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -524,7 +537,8 @@ unsafe fn dsamus_dsmash_expr(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "samusd_missile",
     script =  "game_homing",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn dsamus_homing(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {	
@@ -545,7 +559,8 @@ unsafe fn dsamus_homing(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "samusd_missile",
     script =  "sound_homing",
-    category = ACMD_SOUND)]
+    category = ACMD_SOUND,
+	low_priority)]
 unsafe fn sound_dsamus_homing(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {	
@@ -558,7 +573,8 @@ unsafe fn sound_dsamus_homing(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "samusd",
     script =  "game_attackairf",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn dsamus_fair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -586,7 +602,8 @@ unsafe fn dsamus_fair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "samusd",
     script =  "effect_attackairf",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn dsamus_fair_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -599,7 +616,8 @@ unsafe fn dsamus_fair_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "samusd",
     script =  "sound_attackairf",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn dsamus_fair_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -612,7 +630,8 @@ unsafe fn dsamus_fair_snd(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "samusd",
     scripts =  ["effect_special", "effect_specialair"],
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn dsamus_special_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {	
@@ -623,7 +642,8 @@ unsafe fn dsamus_special_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "samusd_missile",
     script =  "effect_hburst",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn eff_dsamus_burst(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {	
@@ -633,7 +653,8 @@ unsafe fn eff_dsamus_burst(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "samusd_missile",
     script =  "effect_homing",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn eff_dsamus_homing(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {	
@@ -669,7 +690,8 @@ unsafe fn eff_dsamus_homing(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "samusd",
     script =  "effect_speciallw",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn eff_dsamus_downb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {	
@@ -679,7 +701,8 @@ unsafe fn eff_dsamus_downb(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "samusd",
     script =  "expression_speciallw",
-    category = ACMD_EXPRESSION)]
+    category = ACMD_EXPRESSION,
+	low_priority)]
 unsafe fn expr_dsamus_downb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {	
@@ -689,7 +712,8 @@ unsafe fn expr_dsamus_downb(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "samusd",
     script =  "game_speciallw",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn dsamus_downb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {	
@@ -699,7 +723,8 @@ unsafe fn dsamus_downb(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "samusd",
     scripts =  ["sound_squat", "sound_squatrv"],
-    category = ACMD_SOUND)]
+    category = ACMD_SOUND,
+	low_priority)]
 unsafe fn dsamus_crouch_sound(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {

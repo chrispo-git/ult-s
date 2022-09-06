@@ -9,7 +9,8 @@ use smash_script::*;
 #[acmd_script(
     agent = "sheik",
     script =  "game_attacks3",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn sheik_ftilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -28,7 +29,8 @@ unsafe fn sheik_ftilt(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "sheik",
     script =  "game_attacklw3",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn sheik_dtilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -58,7 +60,8 @@ unsafe fn sheik_dtilt(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "sheik",
     script =  "game_attackairb",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn sheik_bair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -95,7 +98,8 @@ unsafe fn sheik_bair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "sheik",
     script =  "game_attackairf",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn sheik_fair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -139,7 +143,8 @@ unsafe fn sheik_fair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "sheik",
     script =  "game_attackairhi",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn sheik_uair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -170,7 +175,8 @@ unsafe fn sheik_uair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "sheik",
     script =  "game_attacks4",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn sheik_fsmash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -202,7 +208,8 @@ unsafe fn sheik_fsmash(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "sheik",
     script =  "game_throwhi",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn sheik_uthrow(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {

@@ -15,7 +15,8 @@ static mut IS_THUNDER : [bool; 8] = [false; 8];
 #[acmd_script(
     agent = "master",
     script =  "game_attacklw3",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn byleth_dtilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -43,7 +44,8 @@ unsafe fn byleth_dtilt(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "master",
     script =  "game_landingairn",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn byleth_land_nair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -56,7 +58,8 @@ unsafe fn byleth_land_nair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "master",
     script =  "game_attackairb",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn byleth_bair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -99,7 +102,8 @@ unsafe fn byleth_bair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "master",
     script =  "game_attackairf",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn byleth_fair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -141,7 +145,8 @@ unsafe fn byleth_fair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "master",
     script =  "game_attackairn",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn byleth_nair(fighter: &mut L2CAgentBase) {
 	let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);  
 	let mut is_close = true;
@@ -191,7 +196,8 @@ unsafe fn byleth_nair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "master",
     script =  "sound_attackairn",
-    category = ACMD_SOUND)]
+    category = ACMD_SOUND,
+	low_priority)]
 unsafe fn byleth_nair_sound(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -224,7 +230,8 @@ unsafe fn byleth_nair_sound(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "master",
     script =  "sound_attackairn2",
-    category = ACMD_SOUND)]
+    category = ACMD_SOUND,
+	low_priority)]
 unsafe fn byleth_nair2_sound(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -237,7 +244,8 @@ unsafe fn byleth_nair2_sound(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "master",
     scripts =  ["sound_specialairsf", "sound_specialsf"],
-    category = ACMD_SOUND)]
+    category = ACMD_SOUND,
+	low_priority)]
 unsafe fn byleth_sideb_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -257,7 +265,8 @@ unsafe fn byleth_sideb_snd(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "master",
     scripts =  ["sound_specialairsfdash", "sound_specialsfdash"],
-    category = ACMD_SOUND)]
+    category = ACMD_SOUND,
+	low_priority)]
 unsafe fn byleth_sidebdash_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -277,7 +286,8 @@ unsafe fn byleth_sidebdash_snd(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "master",
     script =  "game_attackairn2",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn byleth_nair2(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -339,7 +349,8 @@ unsafe fn byleth_nair2(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "master",
     script =  "effect_attackairn2",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn byleth_nair2e(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -356,7 +367,8 @@ unsafe fn byleth_nair2e(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "master",
     script =  "effect_attackairn",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn byleth_naire(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {	
@@ -383,7 +395,8 @@ unsafe fn byleth_naire(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "master",
     scripts =  ["game_specialsf", "game_specialairsf"],
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn byleth_sideb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -409,7 +422,8 @@ unsafe fn byleth_sideb(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "master",
     scripts =  ["game_specialsfdash", "game_specialairsfdash"],
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn byleth_sidebdash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -441,7 +455,8 @@ unsafe fn byleth_sidebdash(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "master",
     scripts =  ["effect_specialsf", "effect_specialairsf"],
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn byleth_sidebe(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -463,7 +478,8 @@ unsafe fn byleth_sidebe(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "master",
     scripts =  ["effect_specialsfdash", "effect_specialairsfdash"],
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn byleth_sidebedash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -489,7 +505,8 @@ unsafe fn byleth_sidebedash(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "master",
     scripts =  ["game_specialsstart", "game_specialairsstart"],
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn byleth_sideb_start(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -499,7 +516,8 @@ unsafe fn byleth_sideb_start(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "master",
     scripts =  ["effect_specialsstart", "effect_specialairsstart"],
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn byleth_sideb_starte(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -508,7 +526,8 @@ unsafe fn byleth_sideb_starte(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "master_arrow1",
     script =  "effect_fly",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn byleth_arrow_effect(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -535,7 +554,8 @@ unsafe fn byleth_arrow_effect(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "master_arrow1",
     script =  "game_fly",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn byleth_arrow(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -548,7 +568,8 @@ unsafe fn byleth_arrow(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "master",
     scripts =  ["game_specialn", "game_specialairn"],
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn byleth_neutralb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -601,7 +622,8 @@ unsafe fn byleth_neutralb(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "master",
     scripts =  ["effect_specialn", "effect_specialairn"],
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn byleth_neutralb_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -625,7 +647,8 @@ unsafe fn byleth_neutralb_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "master",
     scripts =  ["sound_specialn", "sound_specialairn"],
-    category = ACMD_SOUND)]
+    category = ACMD_SOUND,
+	low_priority)]
 unsafe fn byleth_neutralb_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -647,7 +670,8 @@ unsafe fn byleth_neutralb_snd(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "master",
     script =  "expression_specialairn",
-    category = ACMD_EXPRESSION)]
+    category = ACMD_EXPRESSION,
+	low_priority)]
 unsafe fn byleth_air_neutralb_exp(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -657,7 +681,8 @@ unsafe fn byleth_air_neutralb_exp(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "master",
     scripts =  ["game_specialnstart", "game_specialairnstart"],
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn byleth_neutralb_start(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -676,7 +701,8 @@ unsafe fn byleth_neutralb_start(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "master",
     script =  "game_specialnmax",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn byleth_neutralbmax(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -688,7 +714,8 @@ unsafe fn byleth_neutralbmax(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "master",
     script =  "effect_specialnmax",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn byleth_neutralbmaxe(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -697,7 +724,8 @@ unsafe fn byleth_neutralbmaxe(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "master",
     script =  "sound_specialnmax",
-    category = ACMD_SOUND)]
+    category = ACMD_SOUND,
+	low_priority)]
 unsafe fn byleth_neutralbmaxs(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -706,7 +734,8 @@ unsafe fn byleth_neutralbmaxs(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "master",
     script =  "game_specialairnmax",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn byleth_neutralbmaxair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -718,7 +747,8 @@ unsafe fn byleth_neutralbmaxair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "master",
     script =  "effect_specialairnmax",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn byleth_neutralbmaxaire(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -727,7 +757,8 @@ unsafe fn byleth_neutralbmaxaire(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "master",
     script =  "sound_specialairnmax",
-    category = ACMD_SOUND)]
+    category = ACMD_SOUND,
+	low_priority)]
 unsafe fn byleth_neutralbmaxairs(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -736,7 +767,8 @@ unsafe fn byleth_neutralbmaxairs(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "master_axe",
     scripts =  ["game_speciallw", "game_specialairlw"],
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn axe_downb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -759,7 +791,8 @@ unsafe fn axe_downb(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "master_axe",
     scripts =  ["effect_attacklw4"],
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn axe_dsmash_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -805,7 +838,8 @@ unsafe fn axe_dsmash_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "master",
     scripts =  ["effect_attacklw3"],
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn byleth_dtilt_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -831,7 +865,8 @@ unsafe fn byleth_dtilt_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "master",
     scripts =  ["game_speciallw", "game_specialairlw"],
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn byleth_downb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -878,7 +913,8 @@ unsafe fn byleth_downb(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "master",
     script =  "game_throwhi",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn byleth_uthrow(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -896,7 +932,8 @@ unsafe fn byleth_uthrow(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "master",
     script =  "effect_throwhi",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn byleth_uthrow_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -909,7 +946,8 @@ unsafe fn byleth_uthrow_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "master",
     script =  "sound_throwhi",
-    category = ACMD_SOUND)]
+    category = ACMD_SOUND,
+	low_priority)]
 unsafe fn byleth_uthrow_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {

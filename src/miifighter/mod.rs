@@ -16,7 +16,8 @@ static mut ESK :  smash::phx::Vector3f =  smash::phx::Vector3f { x: 0.0, y: 0.0,
 #[acmd_script(
     agent = "miifighter",
     script =  "game_specialairlw2kick",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn brawler_fjk(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -69,7 +70,8 @@ unsafe fn brawler_fjk(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "miifighter",
     script =  "game_attack11",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn brawler_jab1(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -98,7 +100,8 @@ unsafe fn brawler_jab1(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "miifighter",
     script =  "game_attack12",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn brawler_jab2(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -125,7 +128,8 @@ unsafe fn brawler_jab2(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "miifighter",
     script =  "game_attacklw4",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn brawler_dsmash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -149,7 +153,8 @@ unsafe fn brawler_dsmash(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "miifighter",
     script =  "game_attackairf",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn brawler_fair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -190,7 +195,8 @@ unsafe fn brawler_fair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "miifighter",
     scripts =  ["game_specialn3","game_specialairn3"],
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn brawler_esk(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -234,7 +240,8 @@ unsafe fn brawler_esk(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "miifighter",
     scripts =  ["sound_specialn3","sound_specialairn3"],
-    category = ACMD_SOUND)]
+    category = ACMD_SOUND,
+	low_priority)]
 unsafe fn brawler_esk_s(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -248,7 +255,8 @@ unsafe fn brawler_esk_s(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "miifighter",
     scripts =  ["effect_specialn3","effect_specialairn3"],
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn brawler_esk_e(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -282,7 +290,8 @@ unsafe fn brawler_esk_e(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "miifighter",
     script =  "game_attackairhi",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn brawler_uair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -310,7 +319,8 @@ unsafe fn brawler_uair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "miifighter",
     script =  "game_speciallw1landing",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn brawler_hoa_land(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -337,7 +347,8 @@ unsafe fn brawler_hoa_land(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "miifighter",
     script =  "game_speciallw1loop",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn brawler_hoa_loop(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -361,7 +372,8 @@ unsafe fn brawler_hoa_loop(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "miifighter",
     script =  "game_speciallw1",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn brawler_foot(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -389,7 +401,8 @@ unsafe fn brawler_foot(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "miifighter",
     script =  "game_specialairlw1",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn brawler_foot_air(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -433,7 +446,8 @@ unsafe fn brawler_foot_air(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "miifighter",
     script =  "effect_speciallw1",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn brawler_foot_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
@@ -483,7 +497,8 @@ unsafe fn brawler_foot_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "miifighter",
     script =  "sound_speciallw1",
-    category = ACMD_SOUND)]
+    category = ACMD_SOUND,
+	low_priority)]
 unsafe fn brawler_foot_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -520,7 +535,8 @@ unsafe fn brawler_foot_snd(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "miifighter",
     script =  "sound_specialairlw1",
-    category = ACMD_SOUND)]
+    category = ACMD_SOUND,
+	low_priority)]
 unsafe fn brawler_foot_air_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -543,7 +559,8 @@ unsafe fn brawler_foot_air_snd(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "miifighter",
     script =  "effect_specialairlw1",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn brawler_foot_air_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -563,7 +580,8 @@ unsafe fn brawler_foot_air_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "miifighter",
     scripts =  ["game_specialairlw3", "game_speciallw3"],
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn brawler_counter(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -593,7 +611,8 @@ unsafe fn brawler_counter(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "miifighter",
     script =  "game_attackairb",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn brawler_bair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -619,7 +638,8 @@ unsafe fn brawler_bair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "miifighter",
     scripts =  ["game_specialairhi11", "game_specialhi11"],
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn brawler_sak_start(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -629,7 +649,8 @@ unsafe fn brawler_sak_start(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "miifighter",
     script =  "game_specialhi14",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn brawler_sak_land(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -651,7 +672,8 @@ unsafe fn brawler_sak_land(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "miifighter",
     script =  "game_specials1start",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn brawler_grounded_onslaught_start(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -688,7 +710,8 @@ unsafe fn brawler_grounded_onslaught_start(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "miifighter",
     script =  "game_specials1end",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn brawler_grounded_onslaught(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -754,7 +777,8 @@ unsafe fn brawler_grounded_onslaught(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "miifighter_ironball",
     script =  "game_fly",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn brawler_shotput(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -767,7 +791,8 @@ unsafe fn brawler_shotput(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "miifighter",
     scripts =  ["game_specialairlw1end", "game_speciallw1end"],
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn brawler_hoa_end(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -788,7 +813,8 @@ unsafe fn brawler_hoa_end(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "miifighter_ironball",
     script =  "effect_fly",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn brawler_shotput_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -1033,7 +1059,8 @@ fn brawler_frame(fighter: &mut L2CFighterCommon) {
 #[acmd_script(
     agent = "miifighter",
     scripts =  ["effect_specialairlw2kick"],
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn brawler_eff_fjk(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {

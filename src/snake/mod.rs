@@ -12,7 +12,8 @@ static mut STATIC_MUT : [i32; 8] = [6; 8];
 
 #[acmd_script( agent = "snake", 
 script = "game_attacks4", 
-category = ACMD_GAME)]
+category = ACMD_GAME,
+low_priority)]
 unsafe fn snake_fsmash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -47,7 +48,8 @@ unsafe fn snake_fsmash(fighter: &mut L2CAgentBase) {
 }
 #[acmd_script( agent = "snake", 
 script = "effect_attacks4", 
-category = ACMD_EFFECT)]
+category = ACMD_EFFECT,
+low_priority)]
 unsafe fn snake_fsmash_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {

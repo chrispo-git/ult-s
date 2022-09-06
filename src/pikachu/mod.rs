@@ -9,7 +9,8 @@ use smash_script::*;
 #[acmd_script(
     agent = "pikachu",
     script =  "game_attackairn",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn pika_nair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -44,7 +45,8 @@ unsafe fn pika_nair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "pikachu",
     script =  "game_attackairf",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn pika_fair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -80,7 +82,8 @@ unsafe fn pika_fair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "pikachu",
     script =  "game_attackairb",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn pika_bair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -108,7 +111,8 @@ unsafe fn pika_bair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "pikachu",
     script =  "game_landingairb",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn pika_bair_land(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -117,7 +121,8 @@ unsafe fn pika_bair_land(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "pikachu",
     script =  "effect_attackairb",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn pika_bair_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -130,7 +135,8 @@ unsafe fn pika_bair_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "pikachu",
     script =  "sound_attackairb",
-    category = ACMD_SOUND)]
+    category = ACMD_SOUND,
+	low_priority)]
 unsafe fn pika_bair_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {

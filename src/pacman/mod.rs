@@ -11,7 +11,8 @@ use crate::util::*;
 // Uses the acmd! macro, if you're porting directly from Rubendal's data viewer.
 #[acmd_script( agent = "pacman", 
 script = "game_attackhi3", 
-category = ACMD_GAME)]
+category = ACMD_GAME,
+low_priority)]
 unsafe fn pac_utilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -45,7 +46,8 @@ unsafe fn pac_utilt(fighter: &mut L2CAgentBase) {
 }
 #[acmd_script( agent = "pacman", 
 script = "game_attack11", 
-category = ACMD_GAME)]
+category = ACMD_GAME,
+low_priority)]
 unsafe fn pac_jab1(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -80,7 +82,8 @@ unsafe fn pac_jab1(fighter: &mut L2CAgentBase) {
 }
 #[acmd_script( agent = "pacman", 
 script = "game_attack12", 
-category = ACMD_GAME)]
+category = ACMD_GAME,
+low_priority)]
 unsafe fn pac_jab2(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -99,7 +102,8 @@ unsafe fn pac_jab2(fighter: &mut L2CAgentBase) {
 }
 #[acmd_script( agent = "pacman", 
 script = "game_attack13", 
-category = ACMD_GAME)]
+category = ACMD_GAME,
+low_priority)]
 unsafe fn pac_jab3(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -116,7 +120,8 @@ unsafe fn pac_jab3(fighter: &mut L2CAgentBase) {
 }
 #[acmd_script( agent = "pacman", 
 script = "game_attackairhi", 
-category = ACMD_GAME)]
+category = ACMD_GAME,
+low_priority)]
 unsafe fn pac_uair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {

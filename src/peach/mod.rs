@@ -67,7 +67,8 @@ fn kirby_frame(fighter: &mut L2CFighterCommon) {
 #[acmd_script(
     agent = "peach",
     scripts =  ["game_specialn", "game_specialairn"],
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn peach_neutralb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -106,7 +107,8 @@ unsafe fn peach_neutralb(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "peach",
     scripts =  ["effect_specialn", "effect_specialairn"],
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn peach_neutralb_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -127,7 +129,8 @@ unsafe fn peach_neutralb_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "kirby",
     scripts =  ["effect_peachspecialn", "effect_peachspecialairn"],
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn kirby_peach_neutralb_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {

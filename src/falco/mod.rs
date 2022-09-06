@@ -7,7 +7,8 @@ use smash_script::*;
 #[acmd_script(
     agent = "falco",
     script =  "game_attackairb",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn falco_bair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -80,7 +81,8 @@ unsafe fn falco_fair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "falco",
     script =  "game_attackairf",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn falco_fair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -110,7 +112,8 @@ unsafe fn falco_fair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "falco",
     script =  "effect_attackairf",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn falco_fair_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -134,7 +137,8 @@ unsafe fn falco_fair_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "falco",
     script =  "sound_attackairf",
-    category = ACMD_SOUND)]
+    category = ACMD_SOUND,
+	low_priority)]
 unsafe fn falco_fair_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -148,7 +152,8 @@ unsafe fn falco_fair_snd(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "falco",
     script =  "game_landingairf",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn falco_fair_land(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -157,7 +162,8 @@ unsafe fn falco_fair_land(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "falco",
     script =  "game_attackdash",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn falco_da(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -179,7 +185,8 @@ unsafe fn falco_da(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "falco",
     script =  "game_attacklw3",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn falco_dtilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -204,7 +211,8 @@ unsafe fn falco_dtilt(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "falco_blaster_bullet",
     script =  "game_fly",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn falco_laser(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -225,7 +233,8 @@ unsafe fn falco_laser(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "falco",
     scripts =  ["game_speciallw", "game_specialairlw"],
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn falco_shine(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -246,7 +255,8 @@ unsafe fn falco_shine(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "falco",
     scripts =  ["effect_speciallw", "effect_specialairlw"],
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn falco_shine_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {	

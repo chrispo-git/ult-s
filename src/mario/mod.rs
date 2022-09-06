@@ -31,7 +31,8 @@ static mut NOSPIN :  smash::phx::Vector3f =  smash::phx::Vector3f { x: 0.0, y: 0
 #[acmd_script(
     agent = "mario",
     script =  "game_attacklw3",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn mario_dtilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -51,7 +52,8 @@ unsafe fn mario_dtilt(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "mario",
     script =  "game_attackairhi",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn mario_uair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -77,7 +79,8 @@ unsafe fn mario_uair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "mario",
     script =  "game_specials",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn mario_ground_sideb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -101,7 +104,8 @@ unsafe fn mario_ground_sideb(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "mario",
     script =  "effect_specialairs",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn mario_air_sideb_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -123,7 +127,8 @@ unsafe fn mario_air_sideb_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "mario",
     script =  "effect_specials",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn mario_ground_sideb_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -141,7 +146,8 @@ unsafe fn mario_ground_sideb_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "mario",
     script =  "sound_specials",
-    category = ACMD_SOUND)]
+    category = ACMD_SOUND,
+	low_priority)]
 unsafe fn mario_ground_sideb_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -166,7 +172,8 @@ unsafe fn mario_ground_sideb_snd(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "mario",
     script =  "sound_specialairs",
-    category = ACMD_SOUND)]
+    category = ACMD_SOUND,
+	low_priority)]
 unsafe fn mario_air_sideb_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -199,7 +206,8 @@ unsafe fn mario_air_sideb_snd(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "mario",
     script =  "game_specialairs",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn mario_air_sideb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -246,7 +254,8 @@ unsafe fn mario_air_sideb(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "mario",
     script =  "game_attackairn",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn mario_nair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -294,7 +303,8 @@ unsafe fn mario_nair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "mario",
     script =  "effect_attackairn",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn mario_nair_effect(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -303,7 +313,8 @@ unsafe fn mario_nair_effect(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "mario",
     script =  "sound_attackairn",
-    category = ACMD_SOUND)]
+    category = ACMD_SOUND,
+	low_priority)]
 unsafe fn mario_nair_sound(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -319,7 +330,8 @@ unsafe fn mario_nair_sound(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "mario",
     scripts =  ["sound_appealhir", "sound_appealhil"],
-    category = ACMD_SOUND)]
+    category = ACMD_SOUND,
+	low_priority)]
 unsafe fn mario_utaunt_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -336,7 +348,8 @@ unsafe fn mario_utaunt_snd(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "mario",
     scripts =  ["effect_appealhir", "effect_appealhil"],
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn mario_utaunt_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -368,7 +381,8 @@ unsafe fn mario_utaunt_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "mario",
     scripts =  ["game_specialn", "game_specialairn"],
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn mario_fireball(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {

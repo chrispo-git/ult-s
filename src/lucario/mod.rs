@@ -13,7 +13,8 @@ static mut DOWNB_Y : [f32; 8] = [0.0; 8];
 #[acmd_script(
     agent = "lucario",
     script =  "game_attackairlw",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn lucario_dair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -54,7 +55,8 @@ unsafe fn lucario_dair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "lucario",
     script =  "game_attackairf",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn lucario_fair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -81,7 +83,8 @@ unsafe fn lucario_fair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "lucario",
     script =  "game_attackairn",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn lucario_nair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -124,7 +127,8 @@ unsafe fn lucario_nair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "lucario",
     script =  "game_attacklw4",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn lucario_dsmash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -150,7 +154,8 @@ unsafe fn lucario_dsmash(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "lucario",
     script =  "sound_attacklw4",
-    category = ACMD_SOUND)]
+    category = ACMD_SOUND,
+	low_priority)]
 unsafe fn lucario_dsmashs(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -172,7 +177,8 @@ unsafe fn lucario_dsmashs(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "lucario",
     script =  "game_attacklw3",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn lucario_dtilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -191,7 +197,8 @@ unsafe fn lucario_dtilt(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "lucario",
     scripts =  ["game_attacks3", "game_attacks3lw", "game_attacks3hi"],
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn lucario_ftilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -217,7 +224,8 @@ unsafe fn lucario_ftilt(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "lucario",
     scripts =  ["game_speciallw"],
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn lucario_downb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -237,7 +245,8 @@ unsafe fn lucario_downb(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "lucario",
     scripts =  ["sound_speciallw"],
-    category = ACMD_SOUND)]
+    category = ACMD_SOUND,
+	low_priority)]
 unsafe fn lucario_sound_downb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -259,7 +268,8 @@ unsafe fn lucario_sound_downb(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "lucario",
     scripts =  ["effect_speciallw"],
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn lucario_downb_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {

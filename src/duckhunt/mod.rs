@@ -8,7 +8,8 @@ use smash_script::*;
 #[acmd_script(
     agent = "duckhunt",
     script =  "game_attacks3",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn dh_ftilts(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -25,7 +26,8 @@ unsafe fn dh_ftilts(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "duckhunt",
     script =  "game_attacks3hi",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn dh_ftilthi(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -43,7 +45,8 @@ unsafe fn dh_ftilthi(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "duckhunt",
     script =  "game_attacks3lw",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn dh_ftiltlw(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -60,7 +63,8 @@ unsafe fn dh_ftiltlw(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "duckhunt",
     script =  "game_attackhi3",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn dh_utilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -85,7 +89,8 @@ unsafe fn dh_utilt(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "duckhunt",
     script =  "game_attacklw3",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn dh_dtilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -103,7 +108,8 @@ unsafe fn dh_dtilt(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "duckhunt",
     script =  "game_throwhi",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn dh_uthrow(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -120,7 +126,8 @@ unsafe fn dh_uthrow(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "duckhunt",
     script =  "game_attackairn",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn dh_nair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -149,7 +156,8 @@ unsafe fn dh_nair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "duckhunt",
     script =  "game_attackairhi",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn dh_uair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {

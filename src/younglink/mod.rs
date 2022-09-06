@@ -11,7 +11,8 @@ static mut STATIC_MUT : [i32; 8] = [6; 8];
 
 #[acmd_script( agent = "younglink", 
 script = "game_attackairf",
-category = ACMD_GAME)]
+category = ACMD_GAME,
+low_priority)]
 unsafe fn yink_fair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -52,7 +53,8 @@ unsafe fn yink_fair(fighter: &mut L2CAgentBase) {
 }
 #[acmd_script( agent = "younglink", 
 script = "game_attackairb",
-category = ACMD_GAME)]
+category = ACMD_GAME,
+low_priority)]
 unsafe fn yink_bair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -98,7 +100,8 @@ unsafe fn yink_bair(fighter: &mut L2CAgentBase) {
 }		
 #[acmd_script( agent = "younglink", 
 script = "game_attackairhi",
-category = ACMD_GAME)]
+category = ACMD_GAME,
+low_priority)]
 unsafe fn yink_uair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -130,7 +133,8 @@ unsafe fn yink_uair(fighter: &mut L2CAgentBase) {
 }		
 #[acmd_script( agent = "younglink_bowarrow", 
 script = "game_fly",
-category = ACMD_GAME)]
+category = ACMD_GAME,
+low_priority)]
 unsafe fn yink_arrow(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {

@@ -86,7 +86,8 @@ pub unsafe fn reaction_frame_hook(boma: &mut smash::app::BattleObjectModuleAcces
 #[acmd_script( 
 agent = "demon", 
 scripts = ["game_attackstand4"], 
-category = ACMD_GAME)]
+category = ACMD_GAME,
+low_priority)]
 unsafe fn kaz_staturesmash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -117,7 +118,8 @@ unsafe fn kaz_staturesmash(fighter: &mut L2CAgentBase) {
 #[acmd_script( 
 agent = "demon", 
 scripts = ["game_attackstand5"], 
-category = ACMD_GAME)]
+category = ACMD_GAME,
+low_priority)]
 unsafe fn kaz_flashtornado(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {	
@@ -135,7 +137,8 @@ unsafe fn kaz_flashtornado(fighter: &mut L2CAgentBase) {
 #[acmd_script( 
 agent = "demon", 
 scripts = ["game_attackstep2f"], 
-category = ACMD_GAME)]
+category = ACMD_GAME,
+low_priority)]
 unsafe fn kaz_ewgf(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -245,7 +248,8 @@ unsafe fn kaz_ewgf(fighter: &mut L2CAgentBase) {
 #[acmd_script( 
 agent = "demon", 
 scripts = ["game_attackstep2"], 
-category = ACMD_GAME)]
+category = ACMD_GAME,
+low_priority)]
 unsafe fn kaz_wgf(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -331,7 +335,8 @@ unsafe fn kaz_wgf(fighter: &mut L2CAgentBase) {
 #[acmd_script( 
 agent = "demon", 
 scripts = ["game_attacks3","game_attacks3lw","game_attacks3hi"], 
-category = ACMD_GAME)]
+category = ACMD_GAME,
+low_priority)]
 unsafe fn kaz_ftilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {

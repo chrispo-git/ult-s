@@ -51,7 +51,8 @@ static mut S3 :  smash::phx::Vector3f =  smash::phx::Vector3f { x: 0.0, y: 0.0, 
 #[acmd_script(
     agent = "lucina",
     script =  "game_attacks3",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn lucina_ftilt(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
@@ -92,7 +93,8 @@ unsafe fn lucina_ftilt(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "lucina",
     script =  "game_attacklw3",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn lucina_dtilt(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
@@ -120,7 +122,8 @@ unsafe fn lucina_dtilt(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "lucina",
     script =  "game_specials4hi",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn lucina_sideb4(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
@@ -139,7 +142,8 @@ unsafe fn lucina_sideb4(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "lucina",
     script =  "game_specialairs4s",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn lucina_air_sideb4s(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
@@ -163,7 +167,8 @@ unsafe fn lucina_air_sideb4s(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "lucina",
     script =  "game_specials4s",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn lucina_sideb4s(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
@@ -188,7 +193,8 @@ unsafe fn lucina_sideb4s(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "lucina",
     script =  "game_specialairs4hi",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn lucina_airsideb4(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
@@ -207,7 +213,8 @@ unsafe fn lucina_airsideb4(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "lucina",
     script =  "game_attackairn",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn lucina_nair(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
@@ -271,7 +278,8 @@ unsafe fn lucina_nair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "lucina",
     script =  "game_attackairn2",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn lucina_nair_hero(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
@@ -304,7 +312,8 @@ unsafe fn lucina_nair_hero(fighter: &mut L2CAgentBase) {
 }#[acmd_script(
     agent = "lucina",
     script =  "sound_attackairn2",
-    category = ACMD_SOUND)]
+    category = ACMD_SOUND,
+	low_priority)]
 unsafe fn lucina_nair_hero_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -318,7 +327,8 @@ unsafe fn lucina_nair_hero_snd(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "lucina",
     script =  "effect_attackairn2",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn lucina_nair_hero_eff(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
@@ -334,7 +344,8 @@ unsafe fn lucina_nair_hero_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "lucina",
     scripts =  ["game_specialnendhi", "game_specialairnendhi"],
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn lucina_neutralb_hi(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
@@ -372,7 +383,8 @@ unsafe fn lucina_neutralb_hi(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "lucina",
     scripts =  ["game_specialnendlw", "game_specialairnendlw"],
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn lucina_neutralb_lw(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
@@ -411,7 +423,8 @@ unsafe fn lucina_neutralb_lw(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "lucina",
     scripts =  ["game_specialn"],
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn lucina_astra_end(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -430,7 +443,8 @@ unsafe fn lucina_astra_end(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "lucina",
     scripts =  ["game_specialairn"],
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn lucina_astra_air_end(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -450,7 +464,8 @@ unsafe fn lucina_astra_air_end(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "lucina",
     scripts =  ["expression_specialnendlw", "expression_specialairnendlw", "expression_specialnendhi", "expression_specialairnendhi"],
-    category = ACMD_EXPRESSION)]
+    category = ACMD_EXPRESSION,
+	low_priority)]
 unsafe fn lucina_neutralb_expr(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
@@ -472,7 +487,8 @@ unsafe fn lucina_neutralb_expr(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "lucina",
     script =  "game_attackairlw",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn lucina_dair(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
@@ -521,7 +537,8 @@ unsafe fn lucina_dair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "lucina",
     script =  "game_attackairb",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn lucina_bair(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
@@ -560,7 +577,8 @@ unsafe fn lucina_bair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "lucina",
     script =  "game_attackairb2",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn lucina_bair_sword(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
@@ -593,7 +611,8 @@ unsafe fn lucina_bair_sword(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "lucina",
     script =  "sound_attackairb2",
-    category = ACMD_SOUND)]
+    category = ACMD_SOUND,
+	low_priority)]
 unsafe fn lucina_bair_sword_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -607,7 +626,8 @@ unsafe fn lucina_bair_sword_snd(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "lucina",
     script =  "effect_attackairb2",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn lucina_bair_sword_eff(fighter: &mut L2CAgentBase) {
 	let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -630,7 +650,8 @@ unsafe fn lucina_bair_sword_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "lucina",
     script =  "game_attackairf",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn lucina_fair(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
@@ -672,7 +693,8 @@ unsafe fn lucina_fair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "lucina",
     script =  "game_attackairf2",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn lucina_fair_hero(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
@@ -701,7 +723,8 @@ unsafe fn lucina_fair_hero(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "lucina",
     script =  "sound_attackairf2",
-    category = ACMD_SOUND)]
+    category = ACMD_SOUND,
+	low_priority)]
 unsafe fn lucina_fair_hero_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -715,7 +738,8 @@ unsafe fn lucina_fair_hero_snd(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "lucina",
     script =  "effect_attackairf2",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn lucina_fair_hero_eff(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
@@ -731,7 +755,8 @@ unsafe fn lucina_fair_hero_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "lucina",
     script =  "game_attackairhi",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn lucina_uair(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
@@ -787,7 +812,8 @@ unsafe fn lucina_uair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "lucina",
     script =  "game_attackairhi2",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn lucina_uair_sword(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
@@ -817,7 +843,8 @@ unsafe fn lucina_uair_sword(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "lucina",
     script =  "effect_attackairhi2",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn lucina_uair_sword_eff(fighter: &mut L2CAgentBase) {
 		frame(fighter.lua_state_agent, 5.0);
 		if macros::is_excute(fighter) {
@@ -849,7 +876,8 @@ unsafe fn lucina_uair_sword_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "lucina",
     script =  "sound_attackairhi2",
-    category = ACMD_SOUND)]
+    category = ACMD_SOUND,
+	low_priority)]
 unsafe fn lucina_uair_sword_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -863,7 +891,8 @@ unsafe fn lucina_uair_sword_snd(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "lucina",
     script =  "game_attack11",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn lucina_jab1(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
@@ -897,7 +926,8 @@ unsafe fn lucina_jab1(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "lucina",
     script =  "game_attacks4",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn lucina_fsmash(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
@@ -921,7 +951,8 @@ unsafe fn lucina_fsmash(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "lucina",
     script =  "game_attackdash",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn lucina_da(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
@@ -955,7 +986,8 @@ unsafe fn lucina_da(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "lucina",
     script =  "game_attack12",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn lucina_jab2(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
@@ -982,7 +1014,8 @@ unsafe fn lucina_jab2(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "lucina",
     script =  "game_throwhi",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn lucina_uthrow(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
@@ -1007,7 +1040,8 @@ unsafe fn lucina_uthrow(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "lucina",
     script =  "game_attackhi3",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn lucina_utilt(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
@@ -1052,14 +1086,16 @@ unsafe fn lucina_utilt(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "lucina",
     scripts =  ["game_speciallw", "game_specialairlw"],
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn lucina_downb(fighter: &mut L2CAgentBase) {
 
 }
 #[acmd_script(
     agent = "lucina",
     scripts =  ["sound_speciallw", "sound_specialairlw"],
-    category = ACMD_SOUND)]
+    category = ACMD_SOUND,
+	low_priority)]
 unsafe fn lucina_downb_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -1082,7 +1118,8 @@ unsafe fn lucina_downb_snd(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "lucina",
     scripts =  ["effect_speciallw", "effect_specialairlw"],
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn lucina_downb_eff(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
@@ -1116,7 +1153,8 @@ unsafe fn lucina_downb_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "lucina",
     script =  "effect_attack11",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn lucina_jab_eff(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
@@ -1136,7 +1174,8 @@ unsafe fn lucina_jab_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "lucina",
     script =  "effect_attack12",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn lucina_jab2_eff(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
@@ -1156,7 +1195,8 @@ unsafe fn lucina_jab2_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "lucina",
     script =  "effect_attacks3",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn lucina_ftilt_eff(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
@@ -1176,7 +1216,8 @@ unsafe fn lucina_ftilt_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "lucina",
     script =  "effect_attackhi3",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn lucina_utilt_eff(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
@@ -1196,7 +1237,8 @@ unsafe fn lucina_utilt_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "lucina",
     script =  "effect_attacklw3",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn lucina_dtilt_eff(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
@@ -1216,7 +1258,8 @@ unsafe fn lucina_dtilt_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "lucina",
     script =  "effect_attackdash",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn lucina_da_eff(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
@@ -1240,7 +1283,8 @@ unsafe fn lucina_da_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "lucina",
     script =  "effect_attackairb",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn lucina_bair_eff(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
@@ -1260,7 +1304,8 @@ unsafe fn lucina_bair_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "lucina",
     script =  "effect_attackairf",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn lucina_fair_eff(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
@@ -1280,7 +1325,8 @@ unsafe fn lucina_fair_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "lucina",
     script =  "effect_attackairhi",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn lucina_uair_eff(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
@@ -1300,7 +1346,8 @@ unsafe fn lucina_uair_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "lucina",
     script =  "effect_cliffattack",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn lucina_cliff_eff(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
@@ -1328,7 +1375,8 @@ unsafe fn lucina_cliff_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "lucina",
     script =  "effect_downattackd",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn lucina_downd_eff(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
@@ -1356,7 +1404,8 @@ unsafe fn lucina_downd_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "lucina",
     script =  "effect_downattacku",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn lucina_downu_eff(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
@@ -1400,7 +1449,8 @@ unsafe fn lucina_downu_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "lucina",
     script =  "effect_attackairlw",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn lucina_dair_eff(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
@@ -1420,7 +1470,8 @@ unsafe fn lucina_dair_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "lucina",
     script =  "effect_attackairn",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn lucina_nair_eff(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
@@ -1452,7 +1503,8 @@ unsafe fn lucina_nair_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "lucina",
     scripts =  ["effect_specialhi", "effect_specialairhi"],
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn lucina_upb_eff(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
@@ -1499,7 +1551,8 @@ unsafe fn lucina_upb_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "lucina",
     scripts =  ["effect_specials", "effect_specialairs"],
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn lucina_sword_sideb_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -1517,7 +1570,8 @@ unsafe fn lucina_sword_sideb_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "lucina",
     scripts =  ["game_specials", "game_specialairs"],
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn lucina_sword_sideb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -1533,7 +1587,8 @@ unsafe fn lucina_sword_sideb(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "lucina",
     scripts =  ["sound_specials", "sound_specialairs"],
-    category = ACMD_SOUND)]
+    category = ACMD_SOUND,
+	low_priority)]
 unsafe fn lucina_sword_sideb_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {

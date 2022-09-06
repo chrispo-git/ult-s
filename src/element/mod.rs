@@ -90,7 +90,8 @@ fn pyra_frame(fighter: &mut L2CFighterCommon) {
 
 #[acmd_script( agent = "elight", 
 scripts = ["game_attacks3"], 
-category = ACMD_GAME)]
+category = ACMD_GAME,
+low_priority)]
 unsafe fn mythra_ftilt(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 5.0);
@@ -137,7 +138,8 @@ unsafe fn mythra_ftilt(fighter: &mut L2CAgentBase) {
 }
 #[acmd_script( agent = "elight", 
 scripts = ["game_attacklw3"], 
-category = ACMD_GAME)]
+category = ACMD_GAME,
+low_priority)]
 unsafe fn mythra_dtilt(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 1.0);
@@ -183,7 +185,8 @@ unsafe fn mythra_dtilt(fighter: &mut L2CAgentBase) {
 }
 #[acmd_script( agent = "elight", 
 scripts = ["game_attackhi3"], 
-category = ACMD_GAME)]
+category = ACMD_GAME,
+low_priority)]
 unsafe fn mythra_utilt(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 1.0);
@@ -264,7 +267,8 @@ unsafe fn mythra_utilt(fighter: &mut L2CAgentBase) {
 }
 #[acmd_script( agent = "elight", 
 scripts = ["game_attackairhi"], 
-category = ACMD_GAME)]
+category = ACMD_GAME,
+low_priority)]
 unsafe fn mythra_uair(fighter: &mut L2CAgentBase) {	
 		let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 2.0);
@@ -325,7 +329,8 @@ unsafe fn mythra_uair(fighter: &mut L2CAgentBase) {
 }		
 #[acmd_script( agent = "elight", 
 scripts = ["game_attackairb"], 
-category = ACMD_GAME)]
+category = ACMD_GAME,
+low_priority)]
 unsafe fn mythra_bair(fighter: &mut L2CAgentBase) {	
 		let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 2.0);
@@ -386,7 +391,8 @@ unsafe fn mythra_bair(fighter: &mut L2CAgentBase) {
 }
 #[acmd_script( agent = "elight", 
 scripts = ["game_attackairf"], 
-category = ACMD_GAME)]
+category = ACMD_GAME,
+low_priority)]
 unsafe fn mythra_fair(fighter: &mut L2CAgentBase) {	
 		let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 3.0);
@@ -450,7 +456,8 @@ unsafe fn mythra_fair(fighter: &mut L2CAgentBase) {
 }
 #[acmd_script( agent = "elight", 
 scripts = ["game_attackairlw"], 
-category = ACMD_GAME)]
+category = ACMD_GAME,
+low_priority)]
 unsafe fn mythra_dair(fighter: &mut L2CAgentBase) {	
 		let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 5.0);
@@ -525,7 +532,8 @@ unsafe fn mythra_dair(fighter: &mut L2CAgentBase) {
 }
 #[acmd_script( agent = "elight", 
 scripts = ["game_attackdash"], 
-category = ACMD_GAME)]
+category = ACMD_GAME,
+low_priority)]
 unsafe fn mythra_da(fighter: &mut L2CAgentBase) {	
 		let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 10.0);
@@ -563,7 +571,8 @@ unsafe fn mythra_da(fighter: &mut L2CAgentBase) {
 }		
 #[acmd_script( agent = "elight", 
 scripts = ["game_attack13"], 
-category = ACMD_GAME)]
+category = ACMD_GAME,
+low_priority)]
 unsafe fn mythra_jab(fighter: &mut L2CAgentBase) {	
 		let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 1.0);
@@ -619,7 +628,8 @@ unsafe fn mythra_jab(fighter: &mut L2CAgentBase) {
 }		
 #[acmd_script( agent = "elight", 
 scripts = ["game_attackairn"], 
-category = ACMD_GAME)]
+category = ACMD_GAME,
+low_priority)]
 unsafe fn mythra_nair(fighter: &mut L2CAgentBase) {	
 		let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 1.0);
@@ -676,7 +686,8 @@ unsafe fn mythra_nair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "elight",
     script =  "game_catchdash",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn mythra_dashgrab(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -707,7 +718,8 @@ unsafe fn mythra_dashgrab(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "elight",
     script =  "game_attack11",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn mythra_jab1(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {

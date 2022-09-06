@@ -8,7 +8,8 @@ use smash_script::*;
 #[acmd_script(
     agent = "robot",
     script =  "game_attackairhi",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn rob_uair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -69,7 +70,8 @@ unsafe fn rob_uair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "robot",
     script =  "game_attacklw3",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn rob_dtilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -89,7 +91,8 @@ unsafe fn rob_dtilt(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "robot",
     script =  "game_throwlw",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn rob_dthrow(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -107,7 +110,8 @@ unsafe fn rob_dthrow(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "robot",
     script =  "game_specialairsend",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn rob_sideb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {

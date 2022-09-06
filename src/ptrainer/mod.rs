@@ -8,7 +8,8 @@ use smash_script::*;use smash::app::lua_bind::*;
 #[acmd_script(
     agent = "pfushigisou",
     scripts =  ["game_attackdash"],
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn ivy_da(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -57,7 +58,8 @@ unsafe fn ivy_da(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "pfushigisou_leafcutter",
     scripts =  ["game_move"],
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn ivy_sideb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -78,7 +80,8 @@ unsafe fn ivy_sideb(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "pzenigame",
     scripts =  ["game_attacklw3"],
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn squirtle_dtilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {

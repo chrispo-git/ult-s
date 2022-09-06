@@ -7,7 +7,8 @@ use smash_script::*;
 #[acmd_script(
     agent = "dedede",
     script =  "game_attackairf",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn d3_fair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -36,7 +37,8 @@ unsafe fn d3_fair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "dedede",
     script =  "game_attackairb",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn d3_bair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -71,7 +73,8 @@ unsafe fn d3_bair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "dedede",
     script =  "effect_attackairb",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn d3_bair_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {	
@@ -81,7 +84,8 @@ unsafe fn d3_bair_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "dedede",
     script =  "expression_landingairb",
-    category = ACMD_EXPRESSION)]
+    category = ACMD_EXPRESSION,
+	low_priority)]
 unsafe fn d3_bair_expr(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {	
@@ -91,7 +95,8 @@ unsafe fn d3_bair_expr(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "dedede",
     script =  "game_throwlw",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn d3_dthrow(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -110,7 +115,8 @@ unsafe fn d3_dthrow(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "dedede",
     script =  "game_throwf",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn d3_fthrow(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -135,7 +141,8 @@ unsafe fn d3_fthrow(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "dedede",
     script =  "game_attackhi3",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn d3_utilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -161,7 +168,8 @@ unsafe fn d3_utilt(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "dedede",
     script =  "game_attacks3",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn d3_ftilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {

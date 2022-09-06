@@ -7,7 +7,8 @@ use smash_script::*;
 #[acmd_script(
     agent = "lucas",
     scripts =  ["game_speciallwend", "game_specialairlwend"],
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn lucas_downb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -24,7 +25,8 @@ unsafe fn lucas_downb(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "lucas",
     script =  "game_throwlw",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn lucas_dthrow(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -42,7 +44,8 @@ unsafe fn lucas_dthrow(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "lucas",
     script =  "game_attackairn",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn lucas_nair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -76,7 +79,8 @@ unsafe fn lucas_nair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "lucas",
     script =  "game_attackairf",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn lucas_fair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -106,7 +110,8 @@ unsafe fn lucas_fair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "lucas",
     script =  "game_attackairhi",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn lucas_uair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -135,7 +140,8 @@ unsafe fn lucas_uair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "lucas",
     script =  "game_attackairlw",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn lucas_dair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {

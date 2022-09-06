@@ -16,7 +16,8 @@ use crate::util::*;
 #[acmd_script(
     agent = "marth",
     script =  "game_specials4s",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn marth_db4(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -35,7 +36,8 @@ unsafe fn marth_db4(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "marth",
     script =  "game_attack11",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn marth_jab1(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -62,7 +64,8 @@ unsafe fn marth_jab1(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "marth",
     script =  "effect_attack11",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn marth_jab1_eff(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 5.0);
@@ -77,7 +80,8 @@ unsafe fn marth_jab1_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "marth",
     script =  "sound_attack11",
-    category = ACMD_SOUND)]
+    category = ACMD_SOUND,
+	low_priority)]
 unsafe fn marth_jab1_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -91,7 +95,8 @@ unsafe fn marth_jab1_snd(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "marth",
     script =  "game_attackdash",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn marth_da(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -119,7 +124,8 @@ unsafe fn marth_da(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "marth",
     script =  "game_attacks3",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn marth_ftilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -138,7 +144,8 @@ unsafe fn marth_ftilt(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "marth",
     script =  "game_attacks4",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn marth_fsmash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -165,7 +172,8 @@ unsafe fn marth_fsmash(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "marth",
     script =  "game_attackairhi",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn marth_uair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -193,7 +201,8 @@ unsafe fn marth_uair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "marth",
     script =  "game_attackairlw",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn marth_dair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -228,7 +237,8 @@ unsafe fn marth_dair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "marth",
     script =  "game_attacklw3",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn marth_dtilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -248,7 +258,8 @@ unsafe fn marth_dtilt(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "marth",
     script =  "game_throwlw",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn marth_dthrow(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -275,7 +286,8 @@ unsafe fn marth_dthrow(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "marth",
     script =  "game_throwhi",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn marth_uthrow(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -296,7 +308,8 @@ unsafe fn marth_uthrow(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "marth",
     script =  "game_attackairf",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn marth_fair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -324,7 +337,8 @@ unsafe fn marth_fair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "marth",
     script =  "game_attackairb",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn marth_bair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -352,7 +366,8 @@ unsafe fn marth_bair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "marth",
     script =  "game_specialhi",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn marth_upb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -382,7 +397,8 @@ unsafe fn marth_upb(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "marth",
     script =  "game_specialairs1",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn marth_sideb1(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {

@@ -7,7 +7,8 @@ use smash_script::*;
 #[acmd_script(
     agent = "buddy",
     scripts =  ["game_specialnfire", "game_specialairnfire"],
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn banjo_egg(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -25,7 +26,8 @@ unsafe fn banjo_egg(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "buddy",
     script =  "game_attack13",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn banjo_jab3(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -50,7 +52,8 @@ unsafe fn banjo_jab3(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "buddy",
     script =  "game_attackhi3",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn banjo_utilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -87,7 +90,8 @@ unsafe fn banjo_utilt(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "buddy",
     script =  "game_attackairn",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn banjo_nair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -128,7 +132,8 @@ unsafe fn banjo_nair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "buddy",
     script =  "game_attackairhi",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn banjo_uair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -172,7 +177,8 @@ unsafe fn banjo_uair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "buddy",
     script =  "game_attackdash",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn banjo_da(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -194,7 +200,8 @@ unsafe fn banjo_da(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "buddy",
     script =  "game_attackairb",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn banjo_bair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -240,7 +247,8 @@ unsafe fn banjo_bair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "buddy",
     script =  "game_throwf",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn banjo_fthrow(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -264,7 +272,8 @@ unsafe fn banjo_fthrow(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "buddy",
     script =  "game_attackairlw",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn banjo_dair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {

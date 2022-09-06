@@ -18,7 +18,8 @@ static mut HITLAG_MULT : f32 = 0.45;
 #[acmd_script(
     agent = "pitb",
     script =  "game_attackairhi",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn dpit_uair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -48,7 +49,8 @@ unsafe fn dpit_uair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "pitb",
     script =  "effect_attackairhi",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn dpit_uair_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -67,7 +69,8 @@ unsafe fn dpit_uair_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "pitb",
     script =  "sound_attackairhi",
-    category = ACMD_SOUND)]
+    category = ACMD_SOUND,
+	low_priority)]
 unsafe fn dpit_uair_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -80,7 +83,8 @@ unsafe fn dpit_uair_snd(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "pitb",
     script =  "game_attackairf",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn dpit_fair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -114,7 +118,8 @@ unsafe fn dpit_fair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "pitb",
     script =  "game_attack12",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn dpit_jab2(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -143,7 +148,8 @@ unsafe fn dpit_jab2(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "pitb",
     script =  "game_attacklw3",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn dpit_dtilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -161,7 +167,8 @@ unsafe fn dpit_dtilt(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "pitb",
     script =  "game_attackdash",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn dpit_da(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -181,7 +188,8 @@ unsafe fn dpit_da(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "pitb",
     script =  "game_attacks4",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn dpit_fsmash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -215,7 +223,8 @@ unsafe fn dpit_fsmash(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "pitb",
     script =  "game_attackairlw",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn dpit_dair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -249,7 +258,8 @@ unsafe fn dpit_dair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "pitb",
     script =  "game_attackairn",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn dpit_nair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -288,7 +298,8 @@ unsafe fn dpit_nair(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "pitb",
     script =  "effect_attackairn",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn dpit_nair_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -311,7 +322,8 @@ unsafe fn dpit_nair_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "pitb",
     script =  "sound_attackairn",
-    category = ACMD_SOUND)]
+    category = ACMD_SOUND,
+	low_priority)]
 unsafe fn dpit_nair_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -329,7 +341,8 @@ unsafe fn dpit_nair_snd(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "pitb_bowarrow",
     script =  "game_fly",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn dpit_arrow(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -342,7 +355,8 @@ unsafe fn dpit_arrow(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "pitb",
     script =  "game_specialairsend",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn dpit_upb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -366,7 +380,8 @@ unsafe fn dpit_upb(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "pitb",
     script =  "effect_specialairsend",
-    category = ACMD_EFFECT)]
+    category = ACMD_EFFECT,
+	low_priority)]
 unsafe fn dpit_upb_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -387,7 +402,8 @@ unsafe fn dpit_upb_eff(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "pitb",
     script =  "game_specialsend",
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn dpit_upb_ground(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -399,7 +415,8 @@ unsafe fn dpit_upb_ground(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "pitb",
     scripts =  ["game_specialairhistart", "game_specialhistart"],
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn dpit_upb_start(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -411,7 +428,8 @@ unsafe fn dpit_upb_start(fighter: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "pitb",
     scripts =  ["game_specialairsstart", "game_specialsstart"],
-    category = ACMD_GAME)]
+    category = ACMD_GAME,
+	low_priority)]
 unsafe fn dpit_sideb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
