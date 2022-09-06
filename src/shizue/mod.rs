@@ -73,6 +73,23 @@ unsafe fn isa_fthrow(fighter: &mut L2CAgentBase) {
     });
 }
 #[acmd_script(
+    agent = "shizue_pot",
+    script =  "game_attackdash",
+    category = ACMD_GAME, low_priority )]
+unsafe fn isa_da(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		if(is_excute){
+			ATTACK(ID=0, Part=0, Bone=hash40("have"), Damage=10.0, Angle=70, KBG=50, FKB=0, BKB=65, Size=4.2, X=0.0, Y=2.5, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.6, SDI=0.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=true, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_OBJECT)
+			AttackModule::enable_safe_pos()
+		}
+		wait(Frames=6)
+		if(is_excute){
+			ATTACK(ID=0, Part=0, Bone=hash40("have"), Damage=6.0, Angle=70, KBG=50, FKB=0, BKB=65, Size=3.7, X=0.0, Y=2.5, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.6, SDI=0.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=true, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_OBJECT)
+		}
+    });
+}
+#[acmd_script(
     agent = "shizue",
     script =  "game_attackairb",
     category = ACMD_GAME, low_priority )]
@@ -322,7 +339,8 @@ pub fn install() {
 		isa_bair,
 		isa_bairland,
 		isa_bair_eff,
-		isa_bair_snd
+		isa_bair_snd,
+		isa_da
     );
     smashline::install_agent_frames!(
         shizue_frame
