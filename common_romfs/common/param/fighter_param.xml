@@ -31,7 +31,7 @@
       <hash40 hash="bury_r_motion_height">hit_height_high</hash40>
       <hash40 hash="attack_combo_type">fighter_combo_type_hit</hash40>
       <hash40 hash="aerial_type">fighter_jump_aerial_type_normal</hash40>
-      <float hash="walk_accel_mul">0.105</float>
+      <float hash="walk_accel_mul">0.1050</float>
       <float hash="walk_accel_add">0.105</float>
       <float hash="walk_speed_max">1.155</float>
       <float hash="walk_slow_speed_mul">0.2</float>
@@ -23242,7 +23242,7 @@
       <float hash="walk_slow_speed_mul">0.2</float>
       <float hash="walk_middle_ratio">0.5</float>
       <float hash="walk_fast_ratio">0.75</float>
-      <float hash="ground_brake">0.131</float>
+      <float hash="ground_brake">0.075</float>
       <float hash="dash_speed">2.1583</float>
       <float hash="run_accel_mul">0.10978</float>
       <float hash="run_accel_add">0.044</float>
@@ -23257,7 +23257,7 @@
       <float hash="jump_aerial_y">32.5</float>
       <float hash="air_accel_x_mul">0.05</float>
       <float hash="air_accel_x_add">0.01</float>
-      <float hash="air_speed_x_stable">0.9</float>
+      <float hash="air_speed_x_stable">0.95</float>
       <float hash="air_brake_x">0.01</float>
       <float hash="air_accel_y">0.07</float>
       <float hash="air_speed_y_stable">1.675</float>
@@ -23265,16 +23265,16 @@
       <float hash="damage_fly_top_speed_y_stable">1.8</float>
       <float hash="air_brake_y">0.01</float>
       <float hash="dive_speed_y">2.68</float>
-      <float hash="weight">75</float>
+      <float hash="weight">85</float>
       <float hash="air_ground_speed_brake">0.03</float>
       <float hash="landing_attack_air_frame_n">5</float>
-      <float hash="landing_attack_air_frame_f">19</float>
-      <float hash="landing_attack_air_frame_b">13</float>
+      <float hash="landing_attack_air_frame_f">17</float>
+      <float hash="landing_attack_air_frame_b">9</float>
       <float hash="landing_attack_air_frame_hi">6</float>
       <float hash="landing_attack_air_frame_lw">6</float>
       <float hash="landing_frame_light">1</float>
       <float hash="landing_frame">4</float>
-      <float hash="scale">1</float>
+      <float hash="scale">1.05</float>
       <float hash="shield_radius">9.3</float>
       <float hash="shield_break_y">35</float>
       <float hash="guard_speed_limit">1.3</float>
