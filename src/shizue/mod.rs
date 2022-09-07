@@ -73,6 +73,86 @@ unsafe fn isa_fthrow(fighter: &mut L2CAgentBase) {
     });
 }
 #[acmd_script(
+    agent = "shizue_bullet",
+    scripts =  ["game_shootf", "game_shootb"],
+    category = ACMD_GAME, low_priority )]
+unsafe fn isa_neutralb_hit(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		if(is_excute){
+			ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=9.0, Angle=361, KBG=100, FKB=0, BKB=55, Size=5.0, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=-4.5, Trip=0.0, Rehit=0, Reflectable=true, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_OBJECT)
+			AttackModule::enable_safe_pos()
+		}
+		frame(Frame=5)
+		if(is_excute){
+			ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=3.0, Angle=361, KBG=100, FKB=5, BKB=0, Size=5.0, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.35, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=-1.5, Trip=0.0, Rehit=0, Reflectable=true, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_OBJECT)
+		}
+    });
+}
+#[acmd_script(
+    agent = "shizue",
+    scripts =  ["game_specialairn"],
+    category = ACMD_GAME, low_priority )]
+unsafe fn isa_neutralb_air(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		if(is_excute){
+			ArticleModule::generate_article(FIGHTER_SHIZUE_GENERATE_ARTICLE_SLINGSHOT, true, 0)
+		}
+		frame(Frame=14)
+		FT_MOTION_RATE(FSM=0.625)
+		frame(Frame=40)
+		if(is_excute){
+			ArticleModule::remove_exist(FIGHTER_SHIZUE_GENERATE_ARTICLE_SLINGSHOT,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL))
+		}
+    });
+}
+#[acmd_script(
+    agent = "shizue",
+    scripts =  ["game_specialn"],
+    category = ACMD_GAME, low_priority )]
+unsafe fn isa_neutralb_ground(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		if(is_excute){
+			ArticleModule::generate_article(FIGHTER_SHIZUE_GENERATE_ARTICLE_SLINGSHOT, true, 0)
+		}
+		frame(Frame=14)
+		FT_MOTION_RATE(FSM=0.75)
+		frame(Frame=40)
+		if(is_excute){
+			ArticleModule::remove_exist(FIGHTER_SHIZUE_GENERATE_ARTICLE_SLINGSHOT,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL))
+		}
+    });
+}
+#[acmd_script(
+    agent = "shizue",
+    scripts =  ["effect_specialn", "effect_specialairn"],
+    category = ACMD_EFFECT, low_priority )]
+unsafe fn isa_neutralb_eff(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=9)
+		if(is_excute){
+			EFFECT(hash40("sys_attack_impact"), hash40("havel"), 0, -4, 0, 0, 0, 0, 1.3, 0, 0, 0, 0, 0, 360, true)
+			LAST_EFFECT_SET_ALPHA(0.6)
+		}
+    });
+}
+#[acmd_script(
+    agent = "shizue",
+    scripts =  ["sound_specialn", "sound_specialairn"],
+    category = ACMD_SOUND, low_priority )]
+unsafe fn isa_neutralb_snd(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=3)
+		if(is_excute){
+			PLAY_SE(hash40("se_shizue_attackair_f01"))
+		}
+    });
+}
+#[acmd_script(
     agent = "shizue_pot",
     script =  "game_attackdash",
     category = ACMD_GAME, low_priority )]
@@ -107,8 +187,8 @@ unsafe fn isa_bair(fighter: &mut L2CAgentBase) {
 		frame(Frame=8)
 		FT_MOTION_RATE(FSM=1)
 		if(is_excute){
-			ATTACK(ID=0, Part=0, Bone=hash40("havel"), Damage=12.0, Angle=361, KBG=76, FKB=0, BKB=52, Size=3.5, X=0.0, Y=1.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_OBJECT)
-			ATTACK(ID=1, Part=0, Bone=hash40("havel"), Damage=12.0, Angle=361, KBG=76, FKB=0, BKB=52, Size=5.0, X=0.0, Y=7.5, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_OBJECT)
+			ATTACK(ID=0, Part=0, Bone=hash40("havel"), Damage=12.0, Angle=361, KBG=76, FKB=0, BKB=52, Size=3.5, X=0.0, Y=1.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_B, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_OBJECT)
+			ATTACK(ID=1, Part=0, Bone=hash40("havel"), Damage=12.0, Angle=361, KBG=76, FKB=0, BKB=52, Size=5.0, X=0.0, Y=7.5, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_B, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_OBJECT)
 		}
 		frame(Frame=12)
 		if(is_excute){
@@ -279,6 +359,7 @@ fn shizue_frame(fighter: &mut L2CFighterCommon) {
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
 		let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 		let fighter_kind = smash::app::utility::get_kind(boma);
+		let motion_kind = MotionModule::motion_kind(boma);
 		if [*FIGHTER_STATUS_KIND_DEAD, *FIGHTER_STATUS_KIND_LOSE, *FIGHTER_STATUS_KIND_WIN].contains(&status_kind) || smash::app::sv_information::is_ready_go() == false{
 			ISA_RESHOOT_TIME[ENTRY_ID] = 0;
 		};
@@ -305,6 +386,15 @@ fn shizue_frame(fighter: &mut L2CFighterCommon) {
 				ArticleModule::remove_exist(boma, *FIGHTER_SHIZUE_GENERATE_ARTICLE_SWING,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
 				ArticleModule::remove(boma, *FIGHTER_SHIZUE_GENERATE_ARTICLE_SWING,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
 				StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_ESCAPE_AIR, true);
+			};
+		};
+		if [hash40("special_n"), hash40("special_air_n")].contains(&motion_kind) {
+			if MotionModule::frame(boma) >= 52.0 {
+				if StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR {
+					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL, false);
+				} else {
+					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_WAIT, false);
+				};
 			};
 		};
 		if ISA_RESHOOT_TIME[ENTRY_ID] < 1{
@@ -340,7 +430,12 @@ pub fn install() {
 		isa_bairland,
 		isa_bair_eff,
 		isa_bair_snd,
-		isa_da
+		isa_da,
+		isa_neutralb_air,
+		isa_neutralb_ground,
+		isa_neutralb_eff,
+		isa_neutralb_snd,
+		isa_neutralb_hit
     );
     smashline::install_agent_frames!(
         shizue_frame
