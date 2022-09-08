@@ -486,6 +486,20 @@ unsafe fn kirby_landing_bair(fighter: &mut L2CAgentBase) {
     });
 }	
 #[acmd_script(
+    agent = "kirby",
+    script =  "game_specialairlw2",
+    category = ACMD_GAME,
+	low_priority)]
+unsafe fn kirby_downb_end_air(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {	
+		if(is_excute){
+			ArticleModule::change_motion(FIGHTER_KIRBY_GENERATE_ARTICLE_STONE,smash::phx::Hash40::new("special_air_lw2"),false,0.0)
+			SET_SPEED_EX(0.0, 1.2, KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN)
+		}
+    });
+}	
+#[acmd_script(
     agent = "kirby_finalcuttershot",
     script =  "effect_finalcutterregular",
     category = ACMD_EFFECT,
@@ -744,6 +758,35 @@ pub fn ball_frame(weapon : &mut L2CFighterBase) {
 		};
     }
 }
+#[status_script(agent = "kirby", status = FIGHTER_KIRBY_STATUS_KIND_SPECIAL_S_ATTACK, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_PRE)]
+unsafe fn special_s_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
+    StatusModule::init_settings(
+        fighter.module_accessor,
+        smash::app::SituationKind(*SITUATION_KIND_NONE),
+        *FIGHTER_KINETIC_TYPE_NONE,
+        *GROUND_CORRECT_KIND_KEEP as u32,
+		smash::app::GroundCliffCheckKind(*GROUND_CLIFF_CHECK_KIND_NONE),
+        true,
+        *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_FLAG,
+        *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_INT,
+        *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_FLOAT,
+        0
+    );
+
+    FighterStatusModuleImpl::set_fighter_status_data(
+        fighter.module_accessor,
+        false,
+        *FIGHTER_TREADED_KIND_NO_REAC,
+        false,
+        false,
+        false,
+        (*FIGHTER_LOG_MASK_FLAG_ATTACK_KIND_SPECIAL_S | *FIGHTER_LOG_MASK_FLAG_ATTACK_KIND_AIR_LASSO | *FIGHTER_LOG_MASK_FLAG_ACTION_TRIGGER_ON) as u64,
+        *FIGHTER_STATUS_ATTR_START_TURN as u32,
+        *FIGHTER_POWER_UP_ATTACK_BIT_SPECIAL_N as u32,
+        0
+    );
+    0.into()
+}
 	
 pub fn install() {
     smashline::install_acmd_scripts!(
@@ -775,7 +818,9 @@ pub fn install() {
 		kirby_fsmash_expr,
 		kirby_ftilt,
 		kirby_ftilt_eff,
-		kirby_ftilt_sound
+		kirby_ftilt_sound,
+		kirby_downb_end_air
     );
     smashline::install_agent_frames!( kirby_frame, ball_frame);
+	install_status_scripts!(special_s_pre);
 }
