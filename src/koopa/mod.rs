@@ -128,6 +128,46 @@ unsafe fn bowser_snd_dair(fighter: &mut L2CAgentBase) {
     });
 }		
 
+#[fighter_frame( agent = FIGHTER_KIND_KIRBY )]
+fn kirby_bowser_frame(fighter: &mut L2CFighterCommon) {
+    unsafe {
+		let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);   
+		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
+		let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize; 
+		let frame = MotionModule::frame(boma);
+		let end_frame = MotionModule::end_frame(boma);
+		if [hash40("koopa_special_n")].contains(&MotionModule::motion_kind(boma)){
+			if end_frame-frame < 5.0 {
+				StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_WAIT, true);
+			};
+			if frame >= 19.0 {
+				CancelModule::enable_cancel(boma);
+			};
+			MotionModule::set_rate(boma, 0.775);
+		};
+		if [hash40("koopa_special_air_n")].contains(&MotionModule::motion_kind(boma)){
+			if end_frame-frame < 5.0 {
+				StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL, true);
+			};
+			if frame >= 19.0 {
+				CancelModule::enable_cancel(boma);
+			};
+			MotionModule::set_rate(boma, 0.775);
+		};
+		if [hash40("koopa_special_n_end")].contains(&MotionModule::motion_kind(boma)){
+			StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_WAIT, true);
+		};
+		if [hash40("koopa_special_air_n_end")].contains(&MotionModule::motion_kind(boma)){
+				StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL, true);
+		};
+		if ArticleModule::is_exist(boma, *FIGHTER_KOOPA_GENERATE_ARTICLE_BREATH) {
+			FIREBALL[ENTRY_ID] += 1;
+		} else {
+			FIREBALL[ENTRY_ID] = 0;
+		};
+		macros::EFFECT_OFF_KIND(fighter, Hash40::new("koopa_breath_m_fire"), false, true);
+	}
+}		
 #[fighter_frame( agent = FIGHTER_KIND_KOOPA )]
 fn bowser_frame(fighter: &mut L2CFighterCommon) {
     unsafe {
@@ -208,6 +248,7 @@ pub fn install() {
     );
     smashline::install_agent_frames!(
         bowser_frame,
-		fireball_frame
+		fireball_frame,
+		kirby_bowser_frame
     );
 }
