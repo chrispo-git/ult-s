@@ -368,7 +368,6 @@ pub fn pit_arrow_land_cancel(fighter : &mut L2CFighterCommon) {
 pub fn install() {
     smashline::install_acmd_scripts!(
 		pit_usmash,
-		pit_nair,
 		pit_dtilt,
 		pit_ftilt,
 		pit_fair,
