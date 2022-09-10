@@ -2,9 +2,9 @@ name: Rust
 
 on:
   push:
-    run: cd scripts && python3 build.py
+    branches: ["main"]
   pull_request:
-    run: cd scripts && python3 build.py
+    branches: ["main"]
 
 env:
   CARGO_TERM_COLOR: always
@@ -14,6 +14,8 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    container: 
+      image: jugeeya/cargo-skyline:3.0.0-dkp-beta
     steps:
     - uses: actions/checkout@v3
     - name: Build
