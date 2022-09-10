@@ -7,6 +7,8 @@ use smash::lua2cpp::{L2CFighterCommon, L2CAgentBase};
 use smashline::*;
 use smash_script::*;
 use crate::util::*;
+use smash::lib::L2CValue;
+static mut IS_DK_START_ITEM_CHUCK: [bool; 8] = [false; 8];
 
 #[acmd_script(
     agent = "donkey",
@@ -152,8 +154,100 @@ unsafe fn dk_air_downb(fighter: &mut L2CAgentBase) {
 		}
     });
 }
+#[acmd_script(
+    agent = "donkey",
+    scripts =  ["game_specialairs", "game_specials"],
+    category = ACMD_GAME,
+	low_priority)]
+unsafe fn dk_sideb(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+	let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);   
+	let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize; 
+    acmd!(lua_state, {
+		frame(Frame=4)
+		if(is_excute){
+			rust {
+				ItemModule::have_item(fighter.module_accessor, smash::app::ItemKind(*ITEM_KIND_BARREL), 0, 0, false, false);
+				IS_DK_START_ITEM_CHUCK[ENTRY_ID] = true;
+			}
+		}
+		frame(Frame=33)
+		if(is_excute){
+			rust {
+				ItemModule::throw_item(fighter.module_accessor, 22.5, 4.0, 1.0, 0, true, 0.0);
+			}
+		}
+		frame(Frame=35)
+		if(is_excute){
+			rust {
+				IS_DK_START_ITEM_CHUCK[ENTRY_ID] = false;
+			}
+		}
+    });
+}
+#[acmd_script(
+    agent = "donkey",
+    scripts =  ["effect_specialairs", "effect_specials"],
+    category = ACMD_EFFECT,
+	low_priority)]
+unsafe fn dk_sideb_eff(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+	let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);   
+	let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize; 
+    acmd!(lua_state, {
+		frame(Frame=34)
+		if(is_excute){
+			EFFECT_FOLLOW(0x1356a16dd8u64, hash40("top"), 0, 12, -3, 0, -75, -85, 0.8, true)
+			LAST_EFFECT_SET_RATE(1.2)
+		}
+    });
+}
+#[acmd_script(
+    agent = "donkey",
+    scripts =  ["sound_specialairs", "sound_specials"],
+    category = ACMD_SOUND,
+	low_priority)]
+unsafe fn dk_sideb_snd(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+	let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);   
+	let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize; 
+    acmd!(lua_state, {
+		frame(Frame=29)
+		if(is_excute){
+			PLAY_SEQUENCE(hash40("seq_donkey_rnd_attack"))
+			PLAY_SE(hash40("se_donkey_attackhard_s01"))
+		}		
+    });
+}
+#[acmd_script(
+    agent = "donkey",
+    scripts =  ["expression_specialairs", "expression_specials"],
+    category = ACMD_EXPRESSION,
+	low_priority)]
+unsafe fn dk_sideb_expr(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+	let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);   
+	let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize; 
+}
+#[fighter_frame( agent = FIGHTER_KIND_DONKEY )]
+fn dk_frame(fighter: &mut L2CFighterCommon) {
+    unsafe {
+		let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);   
+		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
+		let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize; 
+		let frame = MotionModule::frame(boma);
+		let end_frame = MotionModule::end_frame(boma);
+		if IS_DK_START_ITEM_CHUCK[ENTRY_ID] == true {
+			if ![*FIGHTER_STATUS_KIND_SPECIAL_S].contains(&status_kind) {
+				ItemModule::throw_item(fighter.module_accessor, 0.0, 0.0, 1.0, 0, true, 0.0);
+				IS_DK_START_ITEM_CHUCK[ENTRY_ID] = false;
+			};
+		};
+	}
+}		
 
 
 pub fn install() {
-	smashline::install_acmd_scripts!(dk_ftilt, dk_fair, dk_jab1, dk_jab2, dk_air_downb);
+	smashline::install_acmd_scripts!(dk_ftilt, dk_fair, dk_jab1, dk_jab2, dk_air_downb, dk_sideb, dk_sideb_eff, dk_sideb_snd, dk_sideb_expr);
+	smashline::install_agent_frames!(dk_frame);
 }
