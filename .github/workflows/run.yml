@@ -1,17 +1,13 @@
-name: Rust
-  # You may pin to the exact commit or the version.
-  # uses: actions-rs/cargo@ae10961054e4aa8b4aa7dffede299aaf087aa33b
-on:
-  push:
-    branches: ["main"]
+name: pr_build
+on: 
   pull_request:
-    branches: ["main"]
+    branches:
+      - main
 
-env:
-  CARGO_TERM_COLOR: always
-  
 jobs:
-  build:
+  pr_build:
+    env:
+      PLUGIN_NAME: plugin
     runs-on: ubuntu-latest
     container: 
       image: jugeeya/cargo-skyline:3.0.0-dkp-beta
@@ -23,12 +19,10 @@ jobs:
     
     - name: checkout version
       uses: actions/checkout@v2
-    - name: rust-cargo
-      uses: actions-rs/cargo@v1.0.1
-      with: 
-        # Cargo command to run (ex. `check` or `build`)
-        command: 
-          skyline build
-    #- uses: actions/checkout@v3
-    #- name: Build
-      #run: cd scripts && python3 build.py
+
+    # build the project
+    - run: |
+        export PATH=$PATH:/root/.cargo/bin:/opt/devkitpro/devkitA64/bin \
+        && cd scripts && python3 build.py
+      env:
+        HOME: /root
