@@ -2,9 +2,9 @@ name: Rust
 
 on:
   push:
-    branches: [ "main" ]
+    run: cd scripts && python3 build.py
   pull_request:
-    branches: [ "main" ]
+    run: cd scripts && python3 build.py
 
 env:
   CARGO_TERM_COLOR: always
