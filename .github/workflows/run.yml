@@ -1,46 +1,31 @@
-name: Rust
-
-on:
+name: rust_build
+on: 
   push:
-    branches: [ "main" ]
+    branches:
+      - main
   pull_request:
-    branches: [ "main" ]
-
-env:
-  CARGO_TERM_COLOR: always
-[package]
-name = "plugin"
-version = "0.1.0"
-authors = ["chrispo"]
-edition = "2018"
-
-[package.metadata.skyline]
-titleid = "01006A800016E000"
-
-[lib]
-crate-type = ["cdylib"]
-
-[dependencies]
-skyline = "0.2.0"
-skyline_smash = { git = "https://github.com/blu-dev/skyline-smash.git", features = ["weak_l2cvalue"] }
-smash_script = { git = "https://github.com/blu-dev/smash-script.git", branch = "development" }
-smashline = { git = "https://github.com/blu-dev/smashline.git", branch = "development" }
-
-[profile.dev]
-panic = "abort"
-
-[profile.release]
-panic = "abort"
-lto = true
+    branches:
+      - main
 
 jobs:
-  build:
-
+  pr_build:
+    env:
+      PLUGIN_NAME: plugin
     runs-on: ubuntu-latest
-
+    container: 
+      image: jugeeya/cargo-skyline:3.0.0-dkp-beta
     steps:
-    - uses: actions/checkout@v3
-    - name: Build
-      run: cargo skyline build --verbose
-    - name: Run tests
-      run: cargo skyline test --verbose
+    - name: setup python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.9' 
+    
+    - name: checkout version
+      uses: actions/checkout@v2
+
+    # build the project
+    - run: |
+        export PATH=$PATH:/root/.cargo/bin:/opt/devkitpro/devkitA64/bin \
+        && cd scripts && python3 build.py
+      env:
+        HOME: /root
