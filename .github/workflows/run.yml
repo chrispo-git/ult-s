@@ -1,8 +1,5 @@
 name: rust_build
 on: 
-  push:
-    branches:
-      - main
   pull_request:
     branches:
       - main
@@ -29,3 +26,8 @@ jobs:
         && cd scripts && python3 build.py
       env:
         HOME: /root
+    - name: Upload plugin
+      uses: actions/upload-artifact@v3
+      with:
+        name: plugin
+        path: releases/plugin.nro
