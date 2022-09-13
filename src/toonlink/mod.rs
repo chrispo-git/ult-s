@@ -1,8 +1,12 @@
 use smash::hash40;
 use smash::lib::lua_const::*;
+use smash::app::lua_bind::*;
 use smash::lua2cpp::*;
 use smashline::*;
 use smash_script::*;
+use smash::phx::{Hash40, Vector2f};
+use crate::util::*;
+
 #[acmd_script(
     agent = "toonlink",
     script =  "game_dash",
@@ -200,6 +204,12 @@ unsafe fn tink_utilt(fighter: &mut L2CAgentBase) {
 		FT_MOTION_RATE(FSM=0.5384615384615385)
     });
 }	
+#[acmd_script( agent = "toonlink_bow", scripts = ["game_nstart", "game_n", "game_nend", "game_nairstart", "game_nair", "game_nairend"], category = ACMD_GAME, low_priority )]
+unsafe fn tink_hammer(fighter: &mut L2CAgentBase) {
+    if macros::is_excute(fighter) {
+        LinkModule::set_model_constraint_pos_ort(fighter.module_accessor, *LINK_NO_ARTICLE, Hash40::new("have"), Hash40::new("havel"), *CONSTRAINT_FLAG_ORIENTATION as u32 | *CONSTRAINT_FLAG_POSITION as u32, false);
+    }
+}
 #[acmd_script(
     agent = "toonlink",
     script =  "game_attacks4",
@@ -208,25 +218,79 @@ unsafe fn tink_utilt(fighter: &mut L2CAgentBase) {
 unsafe fn tink_fsmash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
-		frame(Frame=9)
+		if(is_excute){
+			ArticleModule::generate_article(FIGHTER_TOONLINK_GENERATE_ARTICLE_BOW, false, 0)
+		}
+		frame(Frame=6)
 		if(is_excute){
 			WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_FLAG_START_SMASH_HOLD)
 		}
-		frame(Frame=13)
+		frame(Frame=14)
 		if(is_excute){
-			JostleModule::set_status(false)
+			ATTACK(ID=0, Part=0, Bone=hash40("havel"), Damage=14.0, Angle=40, KBG=110, FKB=0, BKB=25, Size=4.5, X=0.0, Y=0.0, Z=-1.2, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.2, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_HEAVY, Type=ATTACK_REGION_SWORD)
+			ATTACK(ID=1, Part=0, Bone=hash40("havel"),Damage=14.0, Angle=40, KBG=110, FKB=0, BKB=25, Size=4.5, X=0.0, Y=3.0, Z=-1.2, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.2, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_HEAVY, Type=ATTACK_REGION_SWORD)
+			ATTACK(ID=2, Part=0, Bone=hash40("havel"), Damage=14.0, Angle=40, KBG=110, FKB=0, BKB=25, Size=4.5, X=0.0, Y=9.0, Z=-1.2, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.2, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_HEAVY, Type=ATTACK_REGION_SWORD)
+			ATTACK(ID=3, Part=0, Bone=hash40("havel"), Damage=14.0, Angle=40, KBG=110, FKB=0, BKB=25, Size=3.5, X=0.0, Y=14.0, Z=-1.2, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.2, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_HEAVY, Type=ATTACK_REGION_SWORD)
 		}
-		frame(Frame=16)
+		frame(Frame=15)
 		if(is_excute){
-			ATTACK(ID=0, Part=0, Bone=hash40("sword2"), Damage=14.0, Angle=40, KBG=110, FKB=0, BKB=25, Size=3.5, X=6.72, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.2, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_SWORD)
-			ATTACK(ID=1, Part=0, Bone=hash40("sword2"), Damage=14.0, Angle=40, KBG=110, FKB=0, BKB=25, Size=3.0, X=1.12, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.2, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_SWORD)
-			ATTACK(ID=2, Part=0, Bone=hash40("arml"), Damage=14.0, Angle=40, KBG=110, FKB=0, BKB=25, Size=3.0, X=1.2, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.2, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_SWORD)
-			ATTACK(ID=3, Part=0, Bone=hash40("colonellm"), Damage=14.0, Angle=40, KBG=110, FKB=0, BKB=20, Size=3.5, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.2, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_SWORD)
+			ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=14.0, Angle=40, KBG=110, FKB=0, BKB=25, Size=5.5, X=0.0, Y=6.0, Z=5.0, X2=0.0, Y2=6.0, Z2=18.0, Hitlag=1.2, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_HEAVY, Type=ATTACK_REGION_SWORD)
 		}
-		wait(Frames=2)
+		frame(Frame=18)
 		if(is_excute){
 			AttackModule::clear_all()
-			JostleModule::set_status(true)
+		}
+		frame(Frame=46)
+		if(is_excute){
+			ArticleModule::remove_exist(FIGHTER_TOONLINK_GENERATE_ARTICLE_BOW,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL))
+		}
+    });
+}	
+#[acmd_script(
+    agent = "toonlink",
+    script =  "effect_attacks4",
+    category = ACMD_EFFECT,
+	low_priority)]
+unsafe fn tink_fsmash_eff(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=2)
+		if(is_excute){
+			EFFECT(hash40("sys_smash_flash"), hash40("sword1"), 10.0, 0, 0.0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, true)
+		}
+		frame(Frame=11)
+		if(is_excute){
+			EFFECT_FOLLOW_FLIP_ALPHA(hash40("sys_attack_arc"), hash40("sys_attack_arc"), hash40("top"), 2, 12, 5, -9, -46, 32, 1.35, true, EF_FLIP_YZ, 1)
+			LAST_EFFECT_SET_RATE(1.2)
+		}
+		frame(Frame=15)
+		if(is_excute){
+			LANDING_EFFECT(hash40("sys_dash_smoke"), hash40("top"), -5, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false)
+		}
+		frame(Frame=23)
+		if(is_excute){
+			EFFECT_OFF_KIND(0x1546f0a0c8, false, false)
+		}
+		frame(Frame=44)
+		if(is_excute){
+			EFFECT(hash40("sys_erace_smoke"), hash40("havel"), 0, 0, 0, 0, 0, 0, 1.5, 0, 0, 0, 0, 0, 0, false)
+		}
+    });
+}	
+#[acmd_script(
+    agent = "toonlink",
+    script =  "expression_attacks4",
+    category = ACMD_EXPRESSION,
+	low_priority)]
+unsafe fn tink_fsmash_expr(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		if(is_excute){
+			VisibilityModule::set_int64(hash40("shield") as i64, hash40("shield_back") as i64)
+		}
+		frame(Frame=46)
+		if(is_excute){
+			VisibilityModule::set_int64(hash40("shield") as i64, hash40("shield_normal") as i64)
 		}
     });
 }	
@@ -550,6 +614,16 @@ unsafe fn tink_bomb(fighter: &mut L2CAgentBase) {
 		}
     });
 }	
+#[fighter_frame( agent = FIGHTER_KIND_TOONLINK )]
+fn tink_frame(fighter: &mut L2CFighterCommon) {
+    unsafe {
+        let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
+		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
+		if ![*FIGHTER_STATUS_KIND_ATTACK_S4, *FIGHTER_STATUS_KIND_ATTACK_S4_START, *FIGHTER_STATUS_KIND_ATTACK_S4_HOLD].contains(&status_kind) {
+			ArticleModule::remove_exist(boma, *FIGHTER_TOONLINK_GENERATE_ARTICLE_BOW,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
+		};
+	}
+}
 		
 pub fn install() {
     smashline::install_acmd_scripts!(
@@ -564,6 +638,8 @@ pub fn install() {
 		//
 		tink_dsmash,
 		tink_fsmash,
+		tink_fsmash_eff,
+		tink_fsmash_expr,
 		tink_usmash,
 		//
 		tink_nair,
@@ -576,6 +652,9 @@ pub fn install() {
 		tink_bomb,
 		//
 		tink_dash,
-		tink_dashback
+		tink_dashback,
+		//
+		tink_hammer
     );
+	smashline::install_agent_frames!(tink_frame);
 }
