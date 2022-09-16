@@ -280,6 +280,10 @@ unsafe fn tink_fsmash(fighter: &mut L2CAgentBase) {
 		if(is_excute){
 			WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_FLAG_START_SMASH_HOLD)
 		}
+		frame(Frame=17)
+		if(is_excute){
+			ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=14.0, Angle=40, KBG=110, FKB=0, BKB=25, Size=5.5, X=0.0, Y=9.0, Z=6.0, X2=0.0, Y2=19.0, Z2=18.0, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_G, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_HEAVY, Type=ATTACK_REGION_SWORD)
+		}
 		frame(Frame=18)
 		if(is_excute){
 			ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=14.0, Angle=40, KBG=110, FKB=0, BKB=25, Size=5.5, X=0.0, Y=7.0, Z=6.0, X2=0.0, Y2=15.0, Z2=18.0, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_G, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_HEAVY, Type=ATTACK_REGION_SWORD)
@@ -294,7 +298,7 @@ unsafe fn tink_fsmash(fighter: &mut L2CAgentBase) {
 		if(is_excute){
 			AttackModule::clear_all()
 		}
-		frame(Frame=37)
+		frame(Frame=35)
 		if(is_excute){
 			ArticleModule::remove_exist(FIGHTER_TOONLINK_GENERATE_ARTICLE_BOW,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL))
 		}
@@ -320,9 +324,10 @@ unsafe fn tink_fsmash_eff(fighter: &mut L2CAgentBase) {
 		if(is_excute){
 			EFFECT(hash40("sys_landing_smoke"), hash40("top"), 22.0, 0.0, -1.2, 0, 0, 0, 1.5, 0, 0, 0, 0, 0, 0, false)
 		}
-		frame(Frame=35)
+		frame(Frame=34)
 		if(is_excute){
-			EFFECT(hash40("sys_erace_smoke"), hash40("top"), 24.0, 3.0, 0, 0, 0, 0, 1.2, 0, 0, 0, 0, 0, 0, false)
+			EFFECT(hash40("sys_erace_smoke"), hash40("haver"), 0.0, 0.0, 0, 0, 0, 0, 0.8, 0, 0, 0, 0, 0, 0, false)
+			EFFECT(hash40("sys_erace_smoke"), hash40("top"), 18.0, 0.0, 0, 0, 0, 0, 1.2, 0, 0, 0, 0, 0, 0, false)
 		}
     });
 }	
@@ -345,11 +350,36 @@ unsafe fn tink_fsmash_expr(fighter: &mut L2CAgentBase) {
 			VisibilityModule::set_int64(hash40("sword") as i64, hash40("sword_back") as i64)
 			ItemModule::set_have_item_visibility(false, 0)
 		}
-		frame(Frame=37)
+		frame(Frame=62)
 		if(is_excute){
 			VisibilityModule::set_int64(hash40("shield") as i64, hash40("shield_normal") as i64)
 			VisibilityModule::set_int64(hash40("sword") as i64, hash40("sword_normal") as i64)
 			ItemModule::set_have_item_visibility(true, 0)
+		}
+    });
+}	
+#[acmd_script(
+    agent = "toonlink",
+    script =  "sound_attacks4",
+    category = ACMD_SOUND,
+	low_priority)]
+unsafe fn tink_fsmash_snd(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=10)
+		if(is_excute){
+			STOP_SE(hash40("se_common_smash_start"))
+		}
+		frame(Frame=16)
+		if(is_excute){
+			PLAY_SE(hash40("vc_toonlink_attack07"))
+			PLAY_SE(hash40("se_common_smashswing_03"))
+			PLAY_SE(hash40("se_toonlink_swing_ll"))
+		}
+		frame(Frame=19)
+		if(is_excute){
+			PLAY_SE(hash40("se_common_down_soil_s"))
+			PLAY_LANDING_SE(hash40("se_toonlink_attackair_l01"))
 		}
     });
 }	
@@ -737,6 +767,7 @@ pub fn install() {
 		tink_fsmash_eff,
 		tink_fsmash_expr,
 		tink_fsmash_charge_expr,
+		tink_fsmash_snd,
 		tink_usmash,
 		//
 		tink_nair,
