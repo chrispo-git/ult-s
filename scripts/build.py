@@ -22,24 +22,27 @@ if os.path.exists(r'target'):
         if os.path.exists(r'debug'):
             os.chdir(r'debug')
             print(os.listdir())
-            new = os.path.join(os.path.abspath(os.getcwd()), r'libplugin.nro')
+            old = os.path.join(os.path.abspath(os.getcwd()), r'libplugin.nro')
             os.chdir('../')
             os.chdir('../')
             os.chdir('../')
             print(os.getcwd())
             if os.path.exists(new) == False:
                 os.mkdir(new)
-
+            print(old)
             shutil.move(old, new)
-
+            print(os.listdir())
             os.chdir(r'releases')
             if os.path.exists('plugin.nro'):
+                print("old plugin.nro being deleted")
                 stream = os.popen('del plugin.nro')
                 output = stream.read()
                 output
+            print("old plugin.nro being deleted")
             stream = os.popen('rename libplugin.nro plugin.nro')
             output = stream.read()
             output
+            print(os.getcwd())
         else:
             print('aarch64-skyline-switch does not exist')
     else:
