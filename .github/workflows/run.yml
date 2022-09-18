@@ -24,12 +24,10 @@ jobs:
     - run: |
         export PATH=$PATH:/root/.cargo/bin:/opt/devkitpro/devkitA64/bin \
         && cd scripts && python3 build.py
-      env:
-        HOME: /root
     - name: Upload plugin
       uses: actions/upload-artifact@v3
       env:
         HOME: /root
       with:
-        name: plugin
+        name: plugin.nro
         path: releases
