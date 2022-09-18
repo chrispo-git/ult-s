@@ -4,6 +4,7 @@ use smash::lua2cpp::*;
 use smash::app::lua_bind::*;
 use smashline::*;
 use smash_script::*;
+
 #[acmd_script(
     agent = "bayonetta",
     script =  "game_attackairf",
