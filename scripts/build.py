@@ -21,13 +21,15 @@ if os.path.exists(r'target'):
         print(os.listdir())
         if os.path.exists(r'debug'):
             os.chdir(r'debug')
+            print(os.listdir())
         else:
             print('aarch64-skyline-switch does not exist')
     else:
         print('aarch64-skyline-switch does not exist')
 else:
     print('target does not exist')
-    
+
+"""
 if os.path.exists(old) == False:
     print("issue")
 
@@ -36,7 +38,7 @@ if os.path.exists(new) == False:
 
 shutil.move(old, new)
 
-"""
+
 os.chdir(r'releases')
 if os.path.exists('plugin.nro'):
     stream = os.popen('del plugin.nro')
