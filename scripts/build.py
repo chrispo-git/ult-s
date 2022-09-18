@@ -13,15 +13,28 @@ rename = r"plugin.nro"
 
 print(os.listdir())
 
+if os.path.exists(r'target'):
+    os.chdir(r'target')
+    print(os.listdir())
+    if os.path.exists(r'aarch64-skyline-switch'):
+        os.chdir(r'aarch64-skyline-switch')
+        print(os.listdir())
+        if os.path.exists(r'debug'):
+            os.chdir(r'debug')
+        else:
+            print('aarch64-skyline-switch does not exist')
+    else:
+        print('aarch64-skyline-switch does not exist')
+else:
+    print('target does not exist')
+    
 if os.path.exists(old) == False:
     print("issue")
 
 if os.path.exists(new) == False:
     os.mkdir(new)
-print(os.listdir())
 
 shutil.move(old, new)
-print(os.listdir())
 
 os.chdir(r'releases')
 if os.path.exists('plugin.nro'):
