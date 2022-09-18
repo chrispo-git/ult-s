@@ -38,7 +38,7 @@ if os.path.exists(r'target'):
                 stream = os.popen('del plugin.nro')
                 output = stream.read()
                 output
-            print("old plugin.nro being deleted")
+            print("renaming nro")
             stream = os.popen('rename libplugin.nro plugin.nro')
             output = stream.read()
             output
