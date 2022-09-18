@@ -36,6 +36,7 @@ if os.path.exists(new) == False:
 
 shutil.move(old, new)
 
+"""
 os.chdir(r'releases')
 if os.path.exists('plugin.nro'):
     stream = os.popen('del plugin.nro')
@@ -44,3 +45,4 @@ if os.path.exists('plugin.nro'):
 stream = os.popen('rename libplugin.nro plugin.nro')
 output = stream.read()
 output
+"""
