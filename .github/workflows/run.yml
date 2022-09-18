@@ -32,4 +32,4 @@ jobs:
         HOME: /root
       with:
         name: plugin
-        path: releases/plugin.nro
+        path: releases
