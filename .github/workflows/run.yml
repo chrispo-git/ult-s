@@ -26,8 +26,6 @@ jobs:
         && cd scripts && python3 build.py
     - name: Upload plugin
       uses: actions/upload-artifact@v3
-      env:
-        HOME: /root
       with:
-        name: plugin.nro
-        path: releases
+        name: plugin
+        path: releases/plugin.zip
