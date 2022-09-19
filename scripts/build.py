@@ -1,5 +1,6 @@
 import os
 import shutil
+from zipfile import ZipFile
 
 stream = os.popen('cargo skyline build')
 output = stream.read()
@@ -10,6 +11,22 @@ old = r"target\aarch64-skyline-switch\debug\libplugin.nro"
 new = r"releases"
 old_rename = r"libplugin.nro"
 rename = r"plugin.nro"
+file_name = "plugin.zip"
+
+def get_all_file_paths(directory):
+  
+    # initializing empty file paths list
+    file_paths = []
+  
+    # crawling through directory and subdirectories
+    for root, directories, files in os.walk(directory):
+        for filename in files:
+            # join the two strings in order to form the full filepath.
+            filepath = os.path.join(root, filename)
+            file_paths.append(filepath)
+  
+    # returning all file paths
+    return file_paths       
 
 print(os.listdir())
 
@@ -33,6 +50,11 @@ if os.path.exists(r'target'):
             shutil.move(old, new)
             print(os.listdir())
             shutil.move(os.path.join(new, r'libplugin.nro'), os.path.join(new, r'plugin.nro'))
+            file_paths = get_all_file_paths(new)
+            with ZipFile(r'releases/plugin.zip','w') as zip:
+                for file in file_paths:
+                    zip.write(file)
+            print("done")
         else:
             print('aarch64-skyline-switch does not exist')
     else:
