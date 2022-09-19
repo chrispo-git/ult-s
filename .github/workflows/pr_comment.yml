@@ -12,8 +12,3 @@ jobs:
         uses: tonyhallett/artifacts-url-comments@v1.1.0
         env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-            prefix: Here is the built plugin
-            suffix: Replace your Ultimate S Arcropolis plugin.nro with it
-            format: name
-            addTo: pullandissues
