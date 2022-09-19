@@ -33,13 +33,10 @@ jobs:
       with:
         name: plugin
         path: releases
-
-  pr_comment:
-    runs-on: ubuntu-latest
-    if: github.event.workflow_run.event == 'pull_request' && github.event.workflow_run.conclusion == 'success'
-    steps:
-      - uses: actions/github-script@v3
-        with:
+        
+    - name: Comment plugin
+    - uses: actions/github-script@v3
+      with:
           script: |
             const {owner, repo} = context.repo;
             const run_id = ${{github.event.workflow_run.id}};
