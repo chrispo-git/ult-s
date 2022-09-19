@@ -33,10 +33,3 @@ jobs:
       with:
         name: plugin
         path: releases
-    - name: Post comment to pull request with its artifacts
-      # You may pin to the exact commit or the version.
-      # uses: montogeek/github-action-comment-artifacts@4a5c3029b9110dd60bd29a9814c5ff168b5c2fe6
-      uses: montogeek/github-action-comment-artifacts@1.0
-      with:
-        # Prefix message
-        prefix: Plugin Built linked below
