@@ -4,6 +4,7 @@ use smash::lib::lua_const::*;
 use smash::lua2cpp::*;
 use smashline::*;
 use smash_script::*;
+
 #[acmd_script(
     agent = "wolf",
     script =  "game_attacklw3",
