@@ -25,7 +25,8 @@ jobs:
 
     # build the project
     - run: |
-        cd scripts && python3 build.py
+        export PATH=$PATH:/root/.cargo/bin:/opt/devkitpro/devkitA64/bin \
+        && cd scripts && python3 build.py
       env:
         HOME: /root
     - name: Upload plugin
