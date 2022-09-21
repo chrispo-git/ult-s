@@ -149,6 +149,68 @@ unsafe fn yink_arrow(fighter: &mut L2CAgentBase) {
 		}
     });
 }
+#[acmd_script( agent = "younglink", 
+script = "game_attackdash",
+category = ACMD_GAME,
+low_priority)]
+unsafe fn yink_da(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=1)
+		FT_MOTION_RATE(FSM=0.7)
+		frame(Frame=11)
+		FT_MOTION_RATE(FSM=1.0)
+		if(is_excute){
+			ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=11.0, Angle=45, KBG=70, FKB=0, BKB=70, Size=5.2, X=0.0, Y=5.8, Z=3.6, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_BODY)
+		}
+		frame(Frame=18)
+		if(is_excute){
+			ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=8.0, Angle=45, KBG=70, FKB=0, BKB=70, Size=4.2, X=0.0, Y=5.8, Z=3.6, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_BODY)
+		}
+		frame(Frame=27)
+		if(is_excute){
+			AttackModule::clear_all()
+		}
+    });
+}
+#[acmd_script( agent = "younglink", 
+script = "effect_attackdash",
+category = ACMD_EFFECT,
+low_priority)]
+unsafe fn yink_da_eff(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=7)
+		if(is_excute){
+			LANDING_EFFECT(hash40("sys_atk_smoke"), hash40("top"), 5, 0, 0, 0, 0, 0, 0.7, 0, 0, 0, 0, 0, 0, false)
+			LAST_EFFECT_SET_RATE(0.85)
+		}
+		frame(Frame=10)
+		if(is_excute){
+			EFFECT_FOLLOW_ALPHA(hash40("sys_spin_wind_s"), hash40("top"), 0, 6, 0, 0, 0, -90, 0.7, false, 0.2)
+			LAST_EFFECT_SET_RATE(1.6)
+		}
+		frame(Frame=15)
+		if(is_excute){
+			EFFECT_FOLLOW_ALPHA(hash40("sys_spin_wind_s"), hash40("top"), 0, 5, 0, 0, 0, -90, 0.7, false, 0.5)
+			LAST_EFFECT_SET_RATE(1.6)
+		}
+		frame(Frame=20)
+		if(is_excute){
+			LANDING_EFFECT(hash40("sys_down_smoke"), hash40("top"), 0, 0, 0, 0, 0, 0, 0.7, 0, 0, 0, 0, 0, 0, false)
+			LAST_EFFECT_SET_RATE(1.6)
+		}
+		frame(Frame=25)
+		if(is_excute){
+			LANDING_EFFECT(hash40("sys_down_smoke"), hash40("top"), 0, 0, 0, 0, 0, 0, 0.7, 0, 0, 0, 0, 0, 0, false)
+			LAST_EFFECT_SET_RATE(1.6)
+		}
+		frame(Frame=40)
+		if(is_excute){
+			LANDING_EFFECT(hash40("sys_turn_smoke"), hash40("top"), 0, 0, 2, 0, 0, 0, 0.85, 0, 0, 0, 0, 0, 0, false)
+		}
+    });
+}
 
 
 pub fn install() {
@@ -156,6 +218,8 @@ pub fn install() {
 		yink_arrow,
 		yink_fair,
 		yink_uair,
-		yink_bair
+		yink_bair,
+		yink_da,
+		yink_da_eff
 	);
 }
