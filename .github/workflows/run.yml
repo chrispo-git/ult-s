@@ -1,5 +1,8 @@
 name: rust_build
 on: 
+  push:
+    branches:
+      - main
   pull_request:
     branches:
       - main
@@ -28,6 +31,8 @@ jobs:
         HOME: /root
     - name: Upload plugin
       uses: actions/upload-artifact@v3
+      env:
+        HOME: /root
       with:
         name: plugin
-        path: releases/plugin.nro
+        path: releases
