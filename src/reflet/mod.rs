@@ -369,9 +369,11 @@ pub fn install() {
     smashline::install_acmd_scripts!(
 		robin_dtilt,
 		robin_ftilt,
+		//
 		robin_downb_eff,
 		robin_downb_snd,
 		robin_downb,
+		//
 		robin_elwind
     );
 	smashline::install_agent_frame_callbacks!(robin);
