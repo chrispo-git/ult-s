@@ -10,5 +10,18 @@ jobs:
     steps:
       - name: add artifact links to pull request and related issues step
         uses: tonyhallett/artifacts-url-comments@v1.1.0
+        with:
+          pullState: open
+          errorNoArtifacts: false
+          addTo: pull
+          format: name
+          caseSensitive: false
+          closeWords: close, closes, closed, fix, fixes, fixed, resolve, resolves, resolved
+          usePullTitle: true
+          usePullBody: true
+          useCommitMessages: true
+          useBranch: true
+          branchIssuesWords: issue, issues
+          branchDelimiters: _, -
         env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
