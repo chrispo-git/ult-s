@@ -53,8 +53,7 @@ pub(crate) fn is_edge_cancel(fighter_kind : i32, status_kind : i32) -> bool {
 		[*FIGHTER_KIND_RICHTER, *FIGHTER_STATUS_KIND_ATTACK_LW3],
 		[*FIGHTER_KIND_SAMUS, *FIGHTER_STATUS_KIND_ATTACK_LW3],
 		[*FIGHTER_KIND_SONIC, *FIGHTER_STATUS_KIND_SPECIAL_S],
-		[*FIGHTER_KIND_ROY, *FIGHTER_STATUS_KIND_ATTACK_DASH],
-		[*FIGHTER_KIND_FALCO, *FIGHTER_STATUS_KIND_ATTACK_DASH]
+		[*FIGHTER_KIND_ROY, *FIGHTER_STATUS_KIND_ATTACK_DASH]
 	];
 	for i in &edge_cancel {
 		if fighter_kind == i[0] && status_kind == i[1] {
