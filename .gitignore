@@ -1,5 +1,4 @@
 **/target
 **/releases
-**/*.py
 **/*.pyc
 Cargo.lock
