@@ -43,7 +43,8 @@ unsafe fn zss_jab1(fighter: &mut L2CAgentBase) {
     acmd!(lua_state, {
 		frame(Frame=4)
 		if(is_excute){
-			ATTACK(ID=0, Part=0, Bone=hash40("kneer"), Damage=4.5, Angle=361, KBG=40, FKB=0, BKB=20, Size=6.0, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.4, SDI=2.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_PUNCH)
+			//ATTACK(ID=0, Part=0, Bone=hash40("kneer"), Damage=4.5, Angle=361, KBG=40, FKB=0, BKB=20, Size=6.0, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.4, SDI=2.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_PUNCH)
+			ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=4.5, Angle=361, KBG=40, FKB=0, BKB=20, Size=2.0, X=0.0, Y=10.0, Z=5.5, X2=0.0, Y2=10.0, Z2=12.5, Hitlag=1.4, SDI=2.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_PUNCH)
 			AttackModule::set_add_reaction_frame(ID=0, Frames=2.0, Unk=false)
 			AttackModule::set_attack_height_all(smash::app::AttackHeight(*ATTACK_HEIGHT_HIGH), false)
 		}
@@ -69,7 +70,7 @@ unsafe fn zss_jab1(fighter: &mut L2CAgentBase) {
 unsafe fn zss_jab_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
-		frame(Frame=2)
+		/*frame(Frame=2)
 		if(is_excute){
 			EFFECT(hash40("sys_attack_speedline"), hash40("top"), -0.5, 5, -3, -38, 0, 0, 0.8, 0, 0, 0, 0, 0, 0, true)
 			LAST_EFFECT_SET_RATE(1.3)
@@ -77,10 +78,10 @@ unsafe fn zss_jab_eff(fighter: &mut L2CAgentBase) {
 		frame(Frame=3)
 		if(is_excute){
 			EFFECT(hash40("sys_turn_smoke"), hash40("top"), -1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false)
-		}
+		}*/
 		frame(Frame=4)
 		if(is_excute){
-			EFFECT(hash40("sys_attack_impact"), hash40("top"), 0, 14, 10.8, 0, 0, 0, 1.2, 0, 0, 0, 0, 0, 360, true)
+			EFFECT(hash40("sys_attack_impact"), hash40("havel"), 0, 0.0, 0.0, 0, 0, 0, 1.2, 0, 0, 0, 0, 0, 360, true)
 		}
     });
 }	
@@ -122,8 +123,8 @@ unsafe fn zss_dtilt(fighter: &mut L2CAgentBase) {
     acmd!(lua_state, {
 		frame(Frame=8)
 		if(is_excute){
-			ATTACK(ID=0, Part=0, Bone=hash40("kneel"), Damage=8.0, Angle=361, KBG=70, FKB=0, BKB=20, Size=4.2, X=2.7, Y=0.0, Z=0.0, X2=-2.0, Y2=0.0, Z2=0.0, Hitlag=1.0, SDI=1.2, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=-1.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
-			ATTACK(ID=1, Part=0, Bone=hash40("kneel"), Damage=6.0, Angle=361, KBG=70, FKB=0, BKB=20, Size=3.8, X=5.2, Y=0.0, Z=0.0, X2=-2.0, Y2=0.0, Z2=0.0, Hitlag=1.0, SDI=1.2, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=-1.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
+			ATTACK(ID=0, Part=0, Bone=hash40("kneel"), Damage=8.0, Angle=80, KBG=70, FKB=0, BKB=20, Size=4.2, X=2.7, Y=0.0, Z=0.0, X2=-2.0, Y2=0.0, Z2=0.0, Hitlag=1.0, SDI=1.2, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=-1.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
+			ATTACK(ID=1, Part=0, Bone=hash40("kneel"), Damage=8.0, Angle=80, KBG=70, FKB=0, BKB=20, Size=3.8, X=5.2, Y=0.0, Z=0.0, X2=-2.0, Y2=0.0, Z2=0.0, Hitlag=1.0, SDI=1.2, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=-1.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
 			AttackModule::set_attack_height_all(smash::app::AttackHeight(*ATTACK_HEIGHT_LOW), false)
 		}
 		wait(Frames=2)
@@ -324,7 +325,7 @@ unsafe fn zss_usmash_eff(fighter: &mut L2CAgentBase) {
     acmd!(lua_state, {
 		frame(Frame=9)
 		if(is_excute){
-			EFFECT_FOLLOW(hash40("sys_attack_arc_d"), hash40("top"), 2, 16, 0, -3, 23.6, 96.3, 1, true)
+			EFFECT_FOLLOW(hash40("sys_attack_arc_d"), hash40("top"), 2, 16, 0, -3, 23.6, 96.3, 1.1, true)
 			LAST_EFFECT_SET_RATE(1.3)
 		}
     });
@@ -1134,7 +1135,7 @@ pub fn install() {
 		zss_usmash,
 		zss_usmash_eff,
 		zss_usmash_snd,
-		zss_pummel,
+		//zss_pummel,
 		zss_uthrow,
 		zss_uthrow_eff,
 		zss_uthrow_snd,

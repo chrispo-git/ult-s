@@ -253,6 +253,19 @@ unsafe fn samus_utilt_eff(fighter: &mut L2CAgentBase) {
     });
 }
 #[acmd_script(
+    agent = "samus",
+    scripts =  ["effect_jumpfrontmini", "effect_jumpbackmini"],
+    category = ACMD_EFFECT,
+	low_priority)]
+unsafe fn samus_shorthop_eff(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		if(is_excute){
+			EFFECT_FOLLOW(hash40("sys_jump_smoke"), hash40("top"), 0, 0, 0, 0, 0, 0, 1, false)
+		}
+    });
+}
+#[acmd_script(
     agent = "samus_missile",
     script =  "game_homing",
     category = ACMD_GAME,
@@ -309,7 +322,8 @@ pub fn install() {
 		samus_utilt,
 		samus_utilt_eff,
 		samus_homing,
-		samus_super
+		samus_super,
+		samus_shorthop_eff
     );
 	smashline::install_agent_frames!(samus_frame);
 }
