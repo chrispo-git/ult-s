@@ -7,6 +7,7 @@ use smash_script::*;
 use smash::app::sv_animcmd::frame;
 use smash::phx::{Hash40, Vector2f};
 static mut HAS_DOWNB : [bool; 8] = [false; 8];
+static mut IS_MEGA : [bool; 8] = [false; 8];
 static mut DOWNB_X : [f32; 8] = [0.0; 8];
 static mut DOWNB_Y : [f32; 8] = [0.0; 8];
 
@@ -394,6 +395,24 @@ pub fn lucario(fighter : &mut L2CFighterCommon) {
 					};
 				};
 			};
+			/*if ControlModule::check_button_on_trriger(boma, *CONTROL_PAD_BUTTON_APPEAL_HI) {
+				if IS_MEGA[ENTRY_ID] == false {
+					IS_MEGA[ENTRY_ID] = true;
+				} else {
+					IS_MEGA[ENTRY_ID] = false;
+				};
+			};
+			if IS_MEGA[ENTRY_ID] {
+				VisibilityModule::set_whole(boma, false);
+				if !ArticleModule::is_exist(boma, *FIGHTER_LUCARIO_GENERATE_ARTICLE_LUCARIOM) {
+					ArticleModule::generate_article(boma, *FIGHTER_LUCARIO_GENERATE_ARTICLE_LUCARIOM, true, 0);
+				};
+			} else {
+				VisibilityModule::set_whole(boma, true);
+				if ArticleModule::is_exist(boma, *FIGHTER_LUCARIO_GENERATE_ARTICLE_LUCARIOM) {
+					ArticleModule::remove_exist(boma, *FIGHTER_LUCARIO_GENERATE_ARTICLE_LUCARIOM,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
+				};
+			};*/
 		};
     };
 }			

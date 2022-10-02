@@ -585,6 +585,7 @@ unsafe fn sonic_rapidjab(fighter: &mut L2CAgentBase) {
 		for(8 Iterations){
 			if(is_excute){
 				ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=0.5, Angle=361, KBG=20, FKB=0, BKB=7, Size=4.0, X=0.0, Y=6.5, Z=8.0, X2=0.0, Y2=3.5, Z2=14.5, Hitlag=0.6, SDI=0.2, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_rush"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_PUNCH)
+				AttackModule::set_add_reaction_frame(ID=0, Frames=6.0, Unk=false)
 			}
 			wait(Frames=1)
 			if(is_excute){
@@ -607,34 +608,26 @@ unsafe fn sonic_rapidjab_eff(fighter: &mut L2CAgentBase) {
 				rust {
 					let y_rand = (smash::app::sv_math::rand(hash40("fighter"), 100) as f32)/10.0;
 					let x_rand = (smash::app::sv_math::rand(hash40("fighter"), 100) as f32)/10.0;
-					macros::EFFECT(fighter, Hash40::new("sys_attack_impact"), Hash40::new("top"), 7.5+x_rand, 1.5+y_rand, 0, 0, 0, 0, 0.9, 0, 0, 0, 0, 0, 0, false);
+					macros::EFFECT(fighter, Hash40::new("sys_attack_impact"), Hash40::new("top"), 2.5+x_rand, 1.5+y_rand, 0, 0, 0, 0, 0.9, 0, 0, 0, 0, 0, 0, false);
 				}
 			}
-			wait(Frames=1)
+			wait(Frames=4)
 			if(is_excute){
 				rust {
 					let y_rand = (smash::app::sv_math::rand(hash40("fighter"), 100) as f32)/10.0;
 					let x_rand = (smash::app::sv_math::rand(hash40("fighter"), 100) as f32)/10.0;
-					macros::EFFECT(fighter, Hash40::new("sys_attack_impact"), Hash40::new("top"), 7.5+x_rand, 1.5+y_rand, 0, 0, 0, 0, 0.9, 0, 0, 0, 0, 0, 0, false);
+					macros::EFFECT(fighter, Hash40::new("sys_attack_impact"), Hash40::new("top"), 2.5+x_rand, 1.5+y_rand, 0, 0, 0, 0, 0.9, 0, 0, 0, 0, 0, 0, false);
 				}
 			}
-			wait(Frames=1)
+			wait(Frames=4)
 			if(is_excute){
 				rust {
 					let y_rand = (smash::app::sv_math::rand(hash40("fighter"), 100) as f32)/10.0;
 					let x_rand = (smash::app::sv_math::rand(hash40("fighter"), 100) as f32)/10.0;
-					macros::EFFECT(fighter, Hash40::new("sys_attack_impact"), Hash40::new("top"), 7.5+x_rand, 1.5+y_rand, 0, 0, 0, 0, 0.9, 0, 0, 0, 0, 0, 0, false);
+					macros::EFFECT(fighter, Hash40::new("sys_attack_impact"), Hash40::new("top"), 2.5+x_rand, 1.5+y_rand, 0, 0, 0, 0, 0.9, 0, 0, 0, 0, 0, 0, false);
 				}
 			}
-			wait(Frames=1)
-			if(is_excute){
-				rust {
-					let y_rand = (smash::app::sv_math::rand(hash40("fighter"), 100) as f32)/10.0;
-					let x_rand = (smash::app::sv_math::rand(hash40("fighter"), 100) as f32)/10.0;
-					macros::EFFECT(fighter, Hash40::new("sys_attack_impact"), Hash40::new("top"), 7.5+x_rand, 1.5+y_rand, 0, 0, 0, 0, 0.9, 0, 0, 0, 0, 0, 0, false);
-				}
-			}
-			wait(Frames=1)
+			wait(Frames=4)
 		}
     });
 }
@@ -794,7 +787,7 @@ pub fn sonic(fighter : &mut L2CFighterCommon) {
 		stick_x *= PostureModule::lr(boma);
 		if fighter_kind == *FIGHTER_KIND_SONIC {
 			if motion_kind == hash40("attack_100") {
-				if MotionModule::frame(fighter.module_accessor) >= 15.0 {
+				if MotionModule::frame(fighter.module_accessor) >= 16.0 {
 					if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_ATTACK) {
 						MotionModule::change_motion(boma, Hash40::new("attack_100"), 0.0, 1.0, false, 0.0, false, false);
 					} else {
