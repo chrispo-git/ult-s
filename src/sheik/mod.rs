@@ -5,7 +5,6 @@ use smash::lua2cpp::*;
 use smashline::*;
 use smash_script::*;
 
-
 #[acmd_script(
     agent = "sheik",
     script =  "game_attacks3",
@@ -228,6 +227,69 @@ unsafe fn sheik_uthrow(fighter: &mut L2CAgentBase) {
 		}
     });
 }
+#[acmd_script(
+    agent = "sheik",
+    script =  "game_specialinput",
+    category = ACMD_GAME,
+	low_priority)]
+unsafe fn sheik_input(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=2)
+		if(is_excute){
+			ArticleModule::generate_article(FIGHTER_SHEIK_GENERATE_ARTICLE_KNIFE, true, 0)
+			StatusModule::set_keep_situation_air(true)
+		}
+		frame(Frame=5)
+		if(is_excute){
+			ATTACK(ID=0, Part=0, Bone=hash40("shoulderr"), Damage=14.5, Angle=50, KBG=106, FKB=0, BKB=35, Size=5.0, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_PUNCH)
+			ATTACK(ID=1, Part=0, Bone=hash40("armr"), Damage=14.5, Angle=50, KBG=106, FKB=0, BKB=35, Size=5.0, X=2.5, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_PUNCH)
+			ATTACK(ID=2, Part=0, Bone=hash40("haver"), Damage=14.5, Angle=50, KBG=106, FKB=0, BKB=35, Size=5.0, X=2.5, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_PUNCH)
+			ATTACK(ID=3, Part=0, Bone=hash40("top"), Damage=14.5, Angle=50, KBG=106, FKB=0, BKB=35, Size=5.0, X=0.0, Y=0.0, Z=10.0, X2=0.0, Y2=18.0, Z2=15.0, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_PUNCH)
+		}
+		frame(Frame=8)
+		if(is_excute){
+			AttackModule::clear_all()
+		}
+		frame(Frame=20)
+		FT_MOTION_RATE(FSM=0.8)
+    });
+}
+#[acmd_script(
+    agent = "sheik",
+    script =  "effect_specialinput",
+    category = ACMD_EFFECT,
+	low_priority)]
+unsafe fn sheik_input_eff(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=4)
+		if(is_excute){
+			AFTER_IMAGE4_ON_arg29(0x1040595fe3u64, 0x10d9500e59u64, 3, hash40("haver"), 0, 0.5, 0, hash40("haver"), 0, 8.5, 0.4, true, hash40("null"), hash40("haver"), 0, 0, 0, 0, 0, 0, 1, 0, EFFECT_AXIS_X, 0, TRAIL_BLEND_ALPHA, 101, TRAIL_CULL_NONE, 1.3, 0.2)
+			EFFECT(0x0f70780352u64, hash40("top"), 0, 7, 15, -70, 0, 0, 0.3, 0, 0, 0, 0, 0, 0, true)
+		}
+		frame(Frame=9)
+		if(is_excute){
+			AFTER_IMAGE_OFF(1)
+		}
+    });
+}
+
+#[acmd_script(
+    agent = "sheik",
+    script =  "sound_specialinput",
+    category = ACMD_SOUND,
+	low_priority)]
+unsafe fn sheik_input_snd(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=4)
+		if(is_excute){
+			PLAY_SE(hash40("vc_sheik_attack06"))
+			PLAY_SE(hash40("se_sheik_smash_h01"))
+		}
+    });
+}
 
 		
 pub fn install() {
@@ -238,6 +300,9 @@ pub fn install() {
 		sheik_uair,
 		sheik_fsmash,
 		sheik_uthrow,
-		sheik_fair
+		sheik_fair,
+		sheik_input,
+		sheik_input_eff,
+		sheik_input_snd
     );
 }
