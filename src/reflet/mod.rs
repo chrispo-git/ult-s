@@ -29,6 +29,24 @@ static mut X_ACCEL_MUL : f32 = 0.12; //Air Accel Mul
 static mut Y_MAX : f32 = 0.65; //Max Vertical movespeed
 static mut Y_ACCEL_ADD : f32 = 0.06;
 static mut Y_ACCEL_MUL : f32 = 0.06;
+#[acmd_script(
+    agent = "reflet_elwind",
+    script =  "shoot0",
+    category = ACMD_GAME,
+	low_priority)]
+unsafe fn robin_elwind(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		if(is_excute){
+			ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=7.0, Angle=255, KBG=100, FKB=0, BKB=10, Size=4.0, X=0.0, Y=0.0, Z=0.5, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=true, Absorbable=true, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_A, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_MAGIC)
+			ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=5.0, Angle=80, KBG=30, FKB=0, BKB=100, Size=6.0, X=0.0, Y=2.0, Z=0.5, X2=0.0, Y2=-3.5, Z2=0.0, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=true, Absorbable=true, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_MAGIC)
+		}
+		wait(Frames=5)
+		if(is_excute){
+			ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=5.0, Angle=80, KBG=30, FKB=0, BKB=100, Size=7.0, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=true, Absorbable=true, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_MAGIC)
+		}			
+    });
+}	
 
 #[acmd_script(
     agent = "reflet",
@@ -350,9 +368,12 @@ pub fn install() {
     smashline::install_acmd_scripts!(
 		robin_dtilt,
 		robin_ftilt,
+		//
 		robin_downb_eff,
 		robin_downb_snd,
-		robin_downb
+		robin_downb,
+		//
+		robin_elwind
     );
 	smashline::install_agent_frame_callbacks!(robin);
 }
