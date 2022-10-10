@@ -50,6 +50,8 @@ if os.path.exists(r'target'):
             shutil.move(old, new)
             print(os.listdir())
             shutil.move(os.path.join(new, r'libplugin.nro'), os.path.join(new, r'plugin.nro'))
+            if os.path.exists(r'releases/plugin.zip'):
+                os.remove(r'releases/plugin.zip')
             file_paths = get_all_file_paths(new)
             with ZipFile(r'releases/plugin.zip','w') as zip:
                 for file in file_paths:

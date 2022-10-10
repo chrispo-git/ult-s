@@ -782,7 +782,7 @@ unsafe fn special_s_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
         false,
         (*FIGHTER_LOG_MASK_FLAG_ATTACK_KIND_SPECIAL_S | *FIGHTER_LOG_MASK_FLAG_ATTACK_KIND_AIR_LASSO | *FIGHTER_LOG_MASK_FLAG_ACTION_TRIGGER_ON) as u64,
         *FIGHTER_STATUS_ATTR_START_TURN as u32,
-        *FIGHTER_POWER_UP_ATTACK_BIT_SPECIAL_N as u32,
+        *FIGHTER_POWER_UP_ATTACK_BIT_SPECIAL_S as u32,
         0
     );
     0.into()

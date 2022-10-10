@@ -45,9 +45,6 @@ pub fn diddy(fighter : &mut L2CFighterCommon) {
 				println!("laser_land");
 				StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_LANDING, true);
 			};
-			if [hash40("special_n_shoot"), hash40("special_n_blow")].contains(&MotionModule::motion_kind(boma)) {
-				MotionModule::set_rate(boma, 0.5);
-			};
 		};
 	};
 }

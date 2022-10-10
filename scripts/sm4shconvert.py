@@ -32,11 +32,12 @@ def replacer_open():
 def converter():
   global i
   global replace
+  global input_file
   inputter()
   replacer_open()
-  if os.path.exists('output.smd'):
-    os.remove('output.smd')
-  with open(f"output.smd", 'a') as f:
+  if os.path.exists(input_file):
+    os.remove(input_file)
+  with open(input_file, 'a') as f:
       for i in inp:
         new = i
         for w in replace:
