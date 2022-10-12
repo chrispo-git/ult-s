@@ -198,6 +198,40 @@ unsafe fn puff_usmash(fighter: &mut L2CAgentBase) {
 }	
 #[acmd_script(
     agent = "purin",
+    script =  "game_attackairb",
+    category = ACMD_GAME,
+	low_priority)]
+unsafe fn puff_bair(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+        frame(Frame=1)
+        FT_MOTION_RATE(FSM=0.8)
+        frame(Frame=4)
+        if(is_excute){
+            WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
+        }
+        frame(Frame=10)
+        if(is_excute){
+            REVERSE_LR()
+        }
+        FT_MOTION_RATE(FSM=1)
+        frame(Frame=12)
+        if(is_excute){
+            ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=15.0, Angle=42, KBG=120, FKB=0, BKB=30, Size=4.0, X=0.0, Y=4.0, Z=-13.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.2, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
+            ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=13.0, Angle=42, KBG=120, FKB=0, BKB=0, Size=4.5, X=0.0, Y=4.0, Z=-8.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.2, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
+        }
+        frame(Frame=14)
+        if(is_excute){
+            AttackModule::clear_all()
+        }
+        frame(Frame=28)
+        if(is_excute){
+            WorkModule::off_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
+        }
+    });
+}
+#[acmd_script(
+    agent = "purin",
     script =  "game_attackairn",
     category = ACMD_GAME,
 	low_priority)]
@@ -285,6 +319,7 @@ pub fn install() {
 		puff_jab2,
 		puff_uair,
 		puff_fair,
+		puff_bair,
 		puff_ftilt,
 		puff_usmash,
 		puff_nair,
