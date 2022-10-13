@@ -356,8 +356,21 @@ unsafe fn kaz_ftilt(fighter: &mut L2CAgentBase) {
 		}
 	});
 }
+#[acmd_script(
+    agent = "demon",
+    script =  "effect_landingheavy",
+    category = ACMD_EFFECT)]
+unsafe fn kaz_landing(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=2)
+		if(is_excute){
+			LANDING_EFFECT(hash40("sys_landing_smoke"), hash40("top"), 0, 0, 0, 0, 0, 0, 0.9, 0, 0, 0, 0, 0, 0, true)
+		}
+    });
+}	
 pub fn install() {
-	smashline::install_acmd_scripts!(kaz_ftilt, kaz_flashtornado, kaz_staturesmash);
+	smashline::install_acmd_scripts!(kaz_ftilt, kaz_flashtornado, kaz_staturesmash, kaz_landing);
     smashline::install_agent_frames!(kaz_frame);
 	skyline::install_hook!(reaction_frame_hook);
 }
