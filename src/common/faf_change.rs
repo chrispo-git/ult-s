@@ -1006,7 +1006,7 @@ pub fn faf_change_master(fighter : &mut L2CFighterCommon) {
 					MotionModule::set_rate(boma, 1.0);
 				};
 			};
-			if [hash40("attack_air_f")].contains(&motion_kind)&& frame >= 28.0 {
+			if [hash40("attack_air_f")].contains(&motion_kind)&& frame >= 33.0 {
 				CancelModule::enable_cancel(boma);
 			};
 		};
