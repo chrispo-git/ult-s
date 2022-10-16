@@ -730,6 +730,7 @@ unsafe fn doc_air_downb(fighter: &mut L2CAgentBase) {
 		AttackModule::clear_all(fighter.module_accessor);
 	};
 }
+
 #[fighter_frame_callback]
 pub fn doc_frame(fighter : &mut L2CFighterCommon) {
     unsafe {
