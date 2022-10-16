@@ -1921,6 +1921,10 @@ pub fn mariod_frame(fighter : &mut L2CFighterCommon) {
 					macros::SET_SPEED_EX(fighter,0.0, -5.25, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
 				};
 				UPB_FALL[ENTRY_ID] = true;
+				if ray_check_pos(boma, 0.0, -3.0, true) == 1 {
+					MotionModule::change_motion(boma, smash::phx::Hash40::new("special_hi_landing"), 0.0, 1.0, false, 0.0, false, false);
+					StatusModule::set_situation_kind(boma, smash::app::SituationKind(*SITUATION_KIND_GROUND), true);
+				};
 			};
 			if ![*FIGHTER_STATUS_KIND_SPECIAL_HI, *FIGHTER_STATUS_KIND_LANDING_FALL_SPECIAL].contains(&status_kind) {
 				UPB_FALL[ENTRY_ID] = false;
