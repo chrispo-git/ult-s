@@ -14,6 +14,7 @@ use smash::phx::Vector3f;
 use crate::util::*;
 
 static mut UPB_FALL : [bool; 8] = [false; 8];
+static mut HAS_BUFFER_B : [bool; 8] = [false; 8];
 
 #[acmd_script(
     agent = "mariod",
@@ -892,8 +893,12 @@ pub fn mariod_frame(fighter : &mut L2CFighterCommon) {
 				if MotionModule::frame(boma) >= 42.0 {
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_MARIOD_STATUS_SPECIAL_S_FLAG_SPECIAL_FALL, true);
 				};
-				if MotionModule::frame(boma) >= 26.0 && ControlModule::check_button_on_trriger(boma, *CONTROL_PAD_BUTTON_SPECIAL) == true {
+				if MotionModule::frame(boma) >= 15.0 && ControlModule::check_button_on_trriger(boma, *CONTROL_PAD_BUTTON_SPECIAL) {
+					HAS_BUFFER_B[ENTRY_ID] = true;
+				};
+				if MotionModule::frame(boma) >= 26.0 && (ControlModule::check_button_on_trriger(boma, *CONTROL_PAD_BUTTON_SPECIAL) == true || HAS_BUFFER_B[ENTRY_ID]) {
 					MotionModule::change_motion(boma, smash::phx::Hash40::new("special_hi_2"), 0.0, 1.0, false, 0.0, false, false);
+					HAS_BUFFER_B[ENTRY_ID] = false;
 				};
 			};
 			if [hash40("special_input")].contains(&MotionModule::motion_kind(boma)) {
@@ -924,6 +929,7 @@ pub fn mariod_frame(fighter : &mut L2CFighterCommon) {
 			};
 			if ![*FIGHTER_STATUS_KIND_SPECIAL_HI, *FIGHTER_STATUS_KIND_LANDING_FALL_SPECIAL].contains(&status_kind) {
 				UPB_FALL[ENTRY_ID] = false;
+				HAS_BUFFER_B[ENTRY_ID] = false;
 			};
 			if UPB_FALL[ENTRY_ID] == true && (status_kind == *FIGHTER_STATUS_KIND_LANDING_FALL_SPECIAL || [hash40("special_hi"),hash40("special_air_hi")].contains(&MotionModule::motion_kind(boma))) {
 				MotionModule::change_motion(boma, smash::phx::Hash40::new("special_hi_landing"), 0.0, 1.0, false, 0.0, false, false);
