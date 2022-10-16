@@ -889,21 +889,6 @@ unsafe fn doc_upb_land(fighter: &mut L2CAgentBase) {
 
 #[acmd_script(
     agent = "mariod",
-    script =  "sound_specialhilanding",
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn doc_upb_land_snd(fighter: &mut L2CAgentBase) {
-    let lua_state = fighter.lua_state_agent;
-    acmd!(lua_state, {
-		frame(Frame=1)
-		if(is_excute){
-			PLAY_SE(hash40("se_koopa_special_l02"))
-		}
-    });
-}
-
-#[acmd_script(
-    agent = "mariod",
     script =  "effect_specialhilanding",
     category = ACMD_EFFECT,
 	low_priority)]
