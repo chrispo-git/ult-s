@@ -953,7 +953,6 @@ pub fn install() {
 		doc_air_downb,
 		doc_nair,
 		doc_upb,
-		doc_upb_air,
 		doc_upb2,
 		doc_upb_land,
 		doc_upb_land_snd,
