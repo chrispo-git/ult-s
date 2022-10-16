@@ -773,7 +773,7 @@ unsafe fn doc_nair(fighter: &mut L2CAgentBase) {
 
 #[acmd_script(
     agent = "mariod",
-    script =  ["game_specialhi", "game_specialairhi"],
+    scripts =  ["game_specialhi", "game_specialairhi"],
     category = ACMD_GAME,
 	low_priority)]
 unsafe fn doc_upb(fighter: &mut L2CAgentBase) {
