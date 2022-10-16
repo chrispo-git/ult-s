@@ -704,7 +704,7 @@ unsafe fn sonic_utilt(fighter: &mut L2CAgentBase) {
 		if(is_excute){
 			AttackModule::clear_all()
 		}
-		frame(Frame=25)
+		frame(Frame=26)
 		if(is_excute){
 			CancelModule::enable_cancel()
 		}
