@@ -893,10 +893,14 @@ pub fn mariod_frame(fighter : &mut L2CFighterCommon) {
 				if MotionModule::frame(boma) >= 42.0 {
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_MARIOD_STATUS_SPECIAL_S_FLAG_SPECIAL_FALL, true);
 				};
-				if MotionModule::frame(boma) >= 15.0 && ControlModule::check_button_on_trriger(boma, *CONTROL_PAD_BUTTON_SPECIAL) {
+				if MotionModule::frame(boma) >= 19.0 && ControlModule::check_button_on_trriger(boma, *CONTROL_PAD_BUTTON_SPECIAL) {
 					HAS_BUFFER_B[ENTRY_ID] = true;
 				};
-				if MotionModule::frame(boma) >= 26.0 && (ControlModule::check_button_on_trriger(boma, *CONTROL_PAD_BUTTON_SPECIAL) == true || HAS_BUFFER_B[ENTRY_ID]) {
+				if MotionModule::frame(boma) >= 26.0 && ControlModule::check_button_on_trriger(boma, *CONTROL_PAD_BUTTON_SPECIAL) {
+					MotionModule::change_motion(boma, smash::phx::Hash40::new("special_hi_2"), 0.0, 1.0, false, 0.0, false, false);
+					HAS_BUFFER_B[ENTRY_ID] = false;
+				};
+				if MotionModule::frame(boma) >= 28.0 && HAS_BUFFER_B[ENTRY_ID] {
 					MotionModule::change_motion(boma, smash::phx::Hash40::new("special_hi_2"), 0.0, 1.0, false, 0.0, false, false);
 					HAS_BUFFER_B[ENTRY_ID] = false;
 				};
