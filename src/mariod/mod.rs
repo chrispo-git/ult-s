@@ -886,6 +886,52 @@ unsafe fn doc_upb_land(fighter: &mut L2CAgentBase) {
     });
 }
 
+#[acmd_script(
+    agent = "mariod",
+    script =  "sound_specialhilanding",
+    category = ACMD_SOUND,
+	low_priority)]
+unsafe fn doc_upb_land_snd(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=1)
+		if(is_excute){
+			PLAY_SE(hash40("se_koopa_special_l02"))
+		}
+    });
+}
+
+#[acmd_script(
+    agent = "mariod",
+    script =  "effect_specialhilanding",
+    category = ACMD_EFFECT,
+	low_priority)]
+unsafe fn doc_upb_land_eff(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=1)
+		if(is_excute){
+			EFFECT(hash40("koopa_drop_impact"), hash40("top"), 0, 0, 0, 0, 0, 0, 0.5, 0, 0, 0, 0, 0, 0, false)
+			EFFECT(hash40("sys_crown"), hash40("top"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false)
+		}
+    });
+}
+
+#[acmd_script(
+    agent = "mariod",
+    script =  "sound_specialhilanding",
+    category = ACMD_SOUND,
+	low_priority)]
+unsafe fn doc_upb_land_snd(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=1)
+		if(is_excute){
+			PLAY_LANDING_SE(hash40("se_common_throw_01"))
+		}
+    });
+}
+
 #[fighter_frame(agent = FIGHTER_KIND_MARIOD)]
 pub fn mariod_frame(fighter : &mut L2CFighterCommon) {
     unsafe {
@@ -958,7 +1004,10 @@ pub fn install() {
 		doc_upb,
 		doc_upb_air,
 		doc_upb2,
-		doc_upb_land
+		doc_upb_land,
+		doc_upb_land_snd,
+		doc_upb_land_eff,
+		doc_upb_land_snd
 	);
 	smashline::install_agent_frames!(mariod_frame);
 }
