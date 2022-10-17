@@ -327,8 +327,8 @@ unsafe fn sword_dtilt(fighter: &mut L2CAgentBase) {
     acmd!(lua_state, {
 			frame(Frame=5)
 			if(is_excute){
-				ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=8.0, Angle=70, KBG=80, FKB=0, BKB=50, Size=2.4, X=0.0, Y=3.3, Z=13.0, X2=0.0, Y2=2.7, Z2=20.0, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.3, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_sting"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_SWORD)
-				ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=8.0, Angle=70, KBG=80, FKB=0, BKB=50, Size=2.4, X=0.0, Y=3.6, Z=8.5, X2=0.0, Y2=3.6, Z2=9.0, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.3, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_sting"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_SWORD)
+				ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=8.0, Angle=75, KBG=80, FKB=0, BKB=59, Size=2.4, X=0.0, Y=3.3, Z=13.0, X2=0.0, Y2=2.7, Z2=20.0, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.3, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_sting"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_SWORD)
+				ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=8.0, Angle=75, KBG=80, FKB=0, BKB=59, Size=2.4, X=0.0, Y=3.6, Z=8.5, X2=0.0, Y2=3.6, Z2=9.0, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.3, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_sting"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_SWORD)
 				AttackModule::set_attack_height_all(smash::app::AttackHeight(*ATTACK_HEIGHT_LOW), false)
 			}
 			wait(Frames=2)
@@ -595,6 +595,40 @@ unsafe fn sword_airgrab_end_expr(fighter: &mut L2CAgentBase) {
 		}
     });
 }
+#[acmd_script(
+    agent = "miiswordsman",
+    script =  "game_attackairn",
+    category = ACMD_GAME,
+	low_priority)]
+unsafe fn sword_nair(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=1)
+		FT_MOTION_RATE(FSM=0.6)
+		frame(Frame=6)
+		if(is_excute){
+			WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
+		}
+		frame(Frame=10)
+		FT_MOTION_RATE(FSM=1)
+		frame(Frame=11)
+		FT_MOTION_RATE(FSM=0.5)
+		if(is_excute){
+			ATTACK(ID=0, Part=0, Bone=hash40("haver"), Damage=10.0, Angle=45, KBG=100, FKB=0, BKB=20, Size=3.5, X=0.0, Y=9.5, Z=-1.2, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_SWORD)
+			ATTACK(ID=1, Part=0, Bone=hash40("haver"), Damage=10.0, Angle=45, KBG=100, FKB=0, BKB=20, Size=3.5, X=0.0, Y=2.0, Z=-1.2, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_SWORD)
+		}
+		frame(Frame=25)
+		FT_MOTION_RATE(FSM=1)
+		if(is_excute){
+		AttackModule::clear_all()
+		}
+		wait(Frames=15)
+		if(is_excute){
+			WorkModule::off_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
+		}
+    });
+}	
+
 #[fighter_frame_callback]
 pub fn sword(fighter : &mut L2CFighterCommon) {
     unsafe {
@@ -603,6 +637,7 @@ pub fn sword(fighter : &mut L2CFighterCommon) {
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
 		let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 		let frame = MotionModule::frame(boma);
+		let end_frame = MotionModule::end_frame(boma);
 		if fighter_kind == *FIGHTER_KIND_MIISWORDSMAN {
 			if [*FIGHTER_STATUS_KIND_DEAD, *FIGHTER_STATUS_KIND_LOSE, *FIGHTER_STATUS_KIND_WIN].contains(&status_kind) || smash::app::sv_information::is_ready_go() == false{
 				COUNTER_STORE[ENTRY_ID] = false;
@@ -675,7 +710,10 @@ pub fn sword(fighter : &mut L2CFighterCommon) {
 					KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_JUMP);
 				};
 				if frame >= 22.0 {
-					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL, false);
+					CancelModule::enable_cancel(boma);
+				};
+				if end_frame - frame < 3.0 {
+					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL, true);
 				};
 			};
 			if BOMB_TIME[ENTRY_ID] > 0 {
@@ -728,7 +766,8 @@ pub fn install() {
 		sword_airgrab_end_eff,
 		sword_airgrab_start_eff,
 		sword_airgrab_end_snd,
-		sword_airgrab_end_expr
+		sword_airgrab_end_expr,
+		sword_nair
     );
 	smashline::install_agent_frame_callbacks!(sword);
 }
