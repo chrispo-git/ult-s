@@ -318,6 +318,35 @@ unsafe fn sonic_dsmash_eff(fighter: &mut L2CAgentBase) {
 			LAST_EFFECT_SET_COLOR(3, 0.0, 0.0)
 		}
     });
+}	
+#[acmd_script(
+    agent = "sonic",
+    script =  "effect_downattacku",
+    category = ACMD_EFFECT,
+	low_priority)]
+unsafe fn sonic_getup_attack_eff(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=14)
+		if(is_excute){
+			LANDING_EFFECT_FLIP(hash40("sys_whirlwind_r"), hash40("sys_whirlwind_l"), hash40("top"), -2, 0, 0, 0, 0, 0, 1.2, 0, 0, 0, 0, 0, 0, false, EF_FLIP_NONE)
+		}
+		frame(Frame=15)
+		if(is_excute){
+			EFFECT_FOLLOW_FLIP(hash40("sys_attack_arc_d"), hash40("sys_attack_arc_d"), hash40("top"), -1, 5, 8, 185, 150, 5, 1.1, true, EF_FLIP_YZ)
+			LAST_EFFECT_SET_COLOR(3, 0.0, 0.0)
+		}
+		frame(Frame=19)
+		if(is_excute){
+			EFFECT_OFF_KIND(hash40("sys_attack_arc_d"), false, false)
+			EFFECT_FOLLOW_FLIP(hash40("sys_attack_arc_d"), hash40("sys_attack_arc_d"), hash40("top"), 0, 5, -6.5, 185, -20, 8, 1.1, true, EF_FLIP_YZ)
+			LAST_EFFECT_SET_COLOR(3, 0.0, 0.0)
+		}
+		frame(Frame=25)
+		if(is_excute){
+			EFFECT_OFF_KIND(hash40("sys_attack_arc_d"), false, false)
+		}
+    });
 }		
 #[acmd_script(
     agent = "sonic",
@@ -1254,6 +1283,7 @@ pub fn install() {
 		sonic_jab_eff,
 		sonic_uair_eff,
 		sonic_utilt_eff,
+		sonic_getup_attack_eff,
 		sonic_ftilt_eff,
 		sonic_ftilthi_eff,
 		sonic_ftiltlw_eff,
