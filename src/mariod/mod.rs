@@ -857,7 +857,6 @@ unsafe fn doc_upb_land_eff(fighter: &mut L2CAgentBase) {
 		frame(Frame=1)
 		if(is_excute){
 			QUAKE(CAMERA_QUAKE_KIND_M)
-			EFFECT(hash40("koopa_drop_impact"), hash40("top"), 0, 0, 0, 0, 0, 0, 0.5, 0, 0, 0, 0, 0, 0, false)
 			EFFECT(hash40("sys_crown"), hash40("top"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false)
 		}
     });
