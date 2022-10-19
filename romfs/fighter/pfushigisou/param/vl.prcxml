@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<struct>
+  <list hash="param_special_s">
+    <struct index="0">
+      <float hash="shoot_speed">1.25</float>
+    </struct>
+    <hash40 index="1">dummy</hash40>
+    <hash40 index="2">dummy</hash40>
+    <hash40 index="3">dummy</hash40>
+  </list>
+  <list hash="param_leafcutter">
+    <struct index="0">
+      <int hash="life">75</int>
+    </struct>
+    <hash40 index="1">dummy</hash40>
+    <hash40 index="2">dummy</hash40>
+    <hash40 index="3">dummy</hash40>
+  </list>
+</struct>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<struct>
+  <list hash="param_daisydaikon">
+    <struct index="0">
+      <float hash="daikon_throw_speed_mul">1</float>
+      <float hash="daikon_life_frame">200</float>
+      <float hash="daikon_1_power">3</float>
+      <float hash="daikon_2_power">3</float>
+      <float hash="daikon_3_power">3</float>
+      <float hash="daikon_4_power">3</float>
+      <float hash="daikon_5_power">3</float>
+      <float hash="daikon_6_power">3</float>
+      <float hash="daikon_7_power">3</float>
+      <float hash="daikon_8_power">3</float>
+    </struct>
+    <hash40 index="1">dummy</hash40>
+    <hash40 index="2">dummy</hash40>
+    <hash40 index="3">dummy</hash40>
+  </list>
+  <struct hash="param_private">
+    <int hash="uniq_float_float_frame">80</int>
+  </struct>
+</struct>

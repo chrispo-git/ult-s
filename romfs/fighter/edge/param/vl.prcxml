@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<struct>
+  <struct hash="param_one_winged">
+    <float hash="dash_speed_mul">1.13</float>
+    <float hash="air_accel_x_mul">1.2</float>
+    <float hash="air_speed_x_stable_mul">1.0857</float>
+  </struct>
+</struct>
