@@ -46,7 +46,7 @@ jobs:
       uses: actions/download-artifact@v3.0.0
       with:
         # Artifact name
-        name: Ultimate S Acropolis
+        name: Ultimate S Acropolis.zip
     - name: releases-action
       uses: nickatnight/releases-action@v2
       with:
