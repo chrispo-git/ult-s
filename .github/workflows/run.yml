@@ -36,3 +36,24 @@ jobs:
       with:
         name: Ultimate S Arcropolis
         path: releases
+  upload:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    needs:
+      - Ultimate S Arcropolis
+    steps:
+    - name: Download all artifacts
+      uses: actions/download-artifact@v2
+    - name: Update Release
+      uses: meeDamian/github-release@2.0
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        prerelease: true
+        allow_override: true
+        gzip: false
+        tag: nightly
+        name: Nightly
+        body: >
+          Nightly built off of the latest code in the repository. Probably unstable
+        files: >
+          plugin/* 
