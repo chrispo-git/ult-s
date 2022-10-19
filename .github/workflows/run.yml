@@ -40,7 +40,7 @@ jobs:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
     needs:
-      - Ultimate S Arcropolis
+      - pr_build
     steps:
     - name: Download all artifacts
       uses: actions/download-artifact@v2
