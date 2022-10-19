@@ -36,28 +36,4 @@ jobs:
       with:
         name: Ultimate S Arcropolis
         path: releases
-  upload_release:
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
-    needs:
-      - pr_build
-    steps:
-    - name: Download a Build Artifact
-      uses: actions/download-artifact@v3.0.0
-      with:
-        # Artifact name
-        name: Ultimate S Acropolis.zip
-    - name: releases-action
-      uses: nickatnight/releases-action@v2
-      with:
-        # Name of branch to release from
-        branch: main
-        # Name of the release
-        name: Nightly
-        # Message for the release
-        message: Nightly build containing the latest code from the repository. May be unstable.
-        # Pre-release or naw
-        prerelease: true
-        # Name of tag
-        tag: nightly
   
