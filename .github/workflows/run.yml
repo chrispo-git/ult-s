@@ -36,24 +36,28 @@ jobs:
       with:
         name: Ultimate S Arcropolis
         path: releases
-  upload:
+  upload_release:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
     needs:
       - pr_build
     steps:
-    - name: Download all artifacts
-      uses: actions/download-artifact@v2
-    - name: Update Release
-      uses: meeDamian/github-release@2.0
+    - name: Download a Build Artifact
+      uses: actions/download-artifact@v3.0.0
       with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        prerelease: true
-        allow_override: true
-        gzip: false
-        tag: nightly
+        # Artifact name
+        name: Ultimate S Acropolis
+    - name: releases-action
+      uses: nickatnight/releases-action@v2
+      with:
+        # Name of branch to release from
+        branch: main
+        # Name of the release
         name: Nightly
-        body: >
-          Nightly built off of the latest code in the repository. Probably unstable
-        files: >
-          Ultimate S Arcropolis.zip
+        # Message for the release
+        message: Nightly build containing the latest code from the repository. May be unstable.
+        # Pre-release or naw
+        prerelease: true
+        # Name of tag
+        tag: nightly
+  
