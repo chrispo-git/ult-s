@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<struct>
+  <list hash="param_special_s">
+    <struct index="0">
+      <float hash="boomerang_stick_y">0.4</float>
+      <float hash="boomerang_angle_max">66</float>
+    </struct>
+    <hash40 index="1">dummy</hash40>
+    <hash40 index="2">dummy</hash40>
+    <hash40 index="3">dummy</hash40>
+  </list>
+  <list hash="param_linkbomb">
+    <struct index="0">
+      <float hash="linkbomb_limit_frame">120</float>
+      <float hash="linkbomb_flash_frame">84</float>
+    </struct>
+    <hash40 index="1">dummy</hash40>
+    <hash40 index="2">dummy</hash40>
+    <hash40 index="3">dummy</hash40>
+  </list>
+</struct>
