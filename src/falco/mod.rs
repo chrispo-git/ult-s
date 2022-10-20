@@ -242,6 +242,10 @@ unsafe fn falco_da_eff(fighter: &mut L2CAgentBase) {
 			EFFECT_FOLLOW(hash40("sys_attack_line"), hash40("top"), -0.5, 6, -11, 0, 0, 0, 1.3, true)
 			LAST_EFFECT_SET_RATE(0.5)
 		}
+		frame(Frame=41)
+		if(is_excute){
+			EFFECT_OFF_KIND(hash40("sys_attack_line"), false, true)
+		}
 		frame(Frame=55)
 		if(is_excute){
 			LANDING_EFFECT(hash40("sys_down_smoke"), hash40("top"), 0, 0, 0, 0, 0, 0, 1.11, 0, 0, 0, 0, 0, 0, false)
