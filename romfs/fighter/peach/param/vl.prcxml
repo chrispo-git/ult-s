@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<struct>
+  <list hash="hit_data">
+    <hash40 index="0">dummy</hash40>
+    <hash40 index="1">dummy</hash40>
+    <hash40 index="2">dummy</hash40>
+    <hash40 index="3">dummy</hash40>
+    <hash40 index="4">dummy</hash40>
+    <hash40 index="5">dummy</hash40>
+    <hash40 index="6">dummy</hash40>
+    <hash40 index="7">dummy</hash40>
+    <hash40 index="8">dummy</hash40>
+    <hash40 index="9">dummy</hash40>
+    <hash40 index="10">dummy</hash40>
+    <struct index="11">
+      <float hash="offset1_x">0</float>
+      <float hash="offset1_y">7.5</float>
+      <float hash="offset1_z">3</float>
+      <float hash="offset2_x">0</float>
+      <float hash="offset2_y">7.5</float>
+      <float hash="offset2_z">7</float>
+      <float hash="size">7.5</float>
+      <hash40 hash="node_id">top</hash40>
+      <hash40 hash="part">collision_part_body</hash40>
+      <hash40 hash="height">hit_height_center</hash40>
+      <hash40 hash="status">hit_status_off</hash40>
+      <hash40 hash="check_type">collision_shape_type_capsule</hash40>
+    </struct>
+  </list>
+  <list hash="param_peachdaikon">
+    <struct index="0">
+      <float hash="daikon_life_frame">120</float>
+      <float hash="daikon_1_power">6</float>
+      <float hash="daikon_2_power">6</float>
+      <float hash="daikon_3_power">6</float>
+      <float hash="daikon_4_power">6</float>
+      <float hash="daikon_5_power">6</float>
+    </struct>
+    <hash40 index="1">dummy</hash40>
+    <hash40 index="2">dummy</hash40>
+    <hash40 index="3">dummy</hash40>
+  </list>
+  <struct hash="param_private">
+    <int hash="uniq_float_float_frame">120</int>
+  </struct>
+</struct>

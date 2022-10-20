@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<struct>
+  <list hash="param_axe">
+    <struct index="0">
+      <float hash="gravity">0</float>
+      <float hash="throw_angle">0</float>
+      <float hash="throw_speed">4</float>
+      <float hash="brake_x">0</float>
+      <float hash="rot_speed">0</float>
+      <int hash="life">15</int>
+      <float hash="throw_angle_stick_back">0</float>
+      <float hash="throw_angle_stick_front">0</float>
+      <float hash="throw_speed_stick_back">4</float>
+    </struct>
+    <hash40 index="1">dummy</hash40>
+    <hash40 index="2">dummy</hash40>
+    <hash40 index="3">dummy</hash40>
+  </list>
+  <list hash="param_special_hi">
+    <struct index="0">
+      <float hash="start_y_mul_air">1.1</float>
+      <float hash="limit_speed_y_air">2.1</float>
+    </struct>
+    <hash40 index="1">dummy</hash40>
+    <hash40 index="2">dummy</hash40>
+    <hash40 index="3">dummy</hash40>
+  </list>
+  <list hash="param_special_lw">
+    <struct index="0">
+      <float hash="throw_speed_ground">1.25</float>
+      <float hash="throw_speed_air">1.25</float>
+    </struct>
+    <hash40 index="1">dummy</hash40>
+    <hash40 index="2">dummy</hash40>
+    <hash40 index="3">dummy</hash40>
+  </list>
+  <list hash="param_holywater">
+    <struct index="0">
+      <int hash="fire_pillar_life_frame">45</int>
+    </struct>
+    <hash40 index="1">dummy</hash40>
+    <hash40 index="2">dummy</hash40>
+    <hash40 index="3">dummy</hash40>
+  </list>
+</struct>

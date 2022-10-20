@@ -1,0 +1,534 @@
+<?xml version="1.0" encoding="utf-8"?>
+<struct>
+  <list hash="fighter_param_motion_table">
+    <struct index="0">
+      <float hash="escape_air_cancel_frame">65</float>
+      <int hash="escape_air_slide_back_end_frame">-1</int>
+      <float hash="landing_frame_escape_air_slide_max">12</float>
+      <float hash="landing_frame_escape_air_slide">12</float>
+    </struct>
+    <struct index="1">
+      <float hash="escape_air_cancel_frame">59</float>
+      <int hash="escape_air_slide_back_end_frame">-1</int>
+      <float hash="landing_frame_escape_air_slide_max">12</float>
+      <float hash="landing_frame_escape_air_slide">12</float>
+    </struct>
+    <struct index="2">
+      <float hash="escape_air_cancel_frame">65</float>
+      <int hash="escape_air_slide_back_end_frame">-1</int>
+      <float hash="landing_frame_escape_air_slide_max">12</float>
+      <float hash="landing_frame_escape_air_slide">12</float>
+    </struct>
+    <struct index="3">
+      <float hash="escape_air_cancel_frame">67</float>
+      <int hash="escape_air_slide_back_end_frame">-1</int>
+      <float hash="landing_frame_escape_air_slide_max">12</float>
+      <float hash="landing_frame_escape_air_slide">12</float>
+    </struct>
+    <struct index="4">
+      <int hash="escape_air_slide_back_end_frame">-1</int>
+      <float hash="landing_frame_escape_air_slide_max">12</float>
+      <float hash="landing_frame_escape_air_slide">12</float>
+    </struct>
+    <struct index="5">
+      <int hash="escape_air_slide_back_end_frame">-1</int>
+      <float hash="landing_frame_escape_air_slide_max">12</float>
+      <float hash="landing_frame_escape_air_slide">12</float>
+    </struct>
+    <struct index="6">
+      <float hash="escape_air_cancel_frame">50</float>
+      <int hash="escape_air_slide_back_end_frame">-1</int>
+      <float hash="landing_frame_escape_air_slide_max">12</float>
+      <float hash="landing_frame_escape_air_slide">12</float>
+    </struct>
+    <struct index="7">
+      <float hash="escape_air_cancel_frame">65</float>
+      <int hash="escape_air_slide_back_end_frame">-1</int>
+      <float hash="landing_frame_escape_air_slide_max">12</float>
+      <float hash="landing_frame_escape_air_slide">12</float>
+    </struct>
+    <struct index="8">
+      <int hash="escape_air_slide_back_end_frame">-1</int>
+      <float hash="landing_frame_escape_air_slide_max">12</float>
+      <float hash="landing_frame_escape_air_slide">12</float>
+    </struct>
+    <struct index="9">
+      <int hash="escape_air_slide_back_end_frame">-1</int>
+      <float hash="landing_frame_escape_air_slide_max">12</float>
+      <float hash="landing_frame_escape_air_slide">12</float>
+    </struct>
+    <struct index="10">
+      <float hash="escape_air_cancel_frame">53</float>
+      <int hash="escape_air_slide_back_end_frame">-1</int>
+      <float hash="landing_frame_escape_air_slide_max">12</float>
+      <float hash="landing_frame_escape_air_slide">12</float>
+    </struct>
+    <struct index="11">
+      <int hash="escape_air_slide_back_end_frame">-1</int>
+      <float hash="landing_frame_escape_air_slide_max">12</float>
+      <float hash="landing_frame_escape_air_slide">12</float>
+    </struct>
+    <struct index="12">
+      <float hash="escape_air_cancel_frame">60</float>
+      <int hash="escape_air_slide_back_end_frame">-1</int>
+      <float hash="landing_frame_escape_air_slide_max">12</float>
+      <float hash="landing_frame_escape_air_slide">12</float>
+    </struct>
+    <struct index="13">
+      <int hash="escape_air_slide_back_end_frame">-1</int>
+      <float hash="landing_frame_escape_air_slide_max">12</float>
+      <float hash="landing_frame_escape_air_slide">12</float>
+    </struct>
+    <struct index="14">
+      <int hash="escape_air_slide_back_end_frame">-1</int>
+      <float hash="landing_frame_escape_air_slide_max">12</float>
+      <float hash="landing_frame_escape_air_slide">12</float>
+    </struct>
+    <struct index="15">
+      <int hash="escape_air_slide_back_end_frame">-1</int>
+      <float hash="landing_frame_escape_air_slide_max">12</float>
+      <float hash="landing_frame_escape_air_slide">12</float>
+    </struct>
+    <struct index="16">
+      <float hash="escape_air_cancel_frame">65</float>
+      <int hash="escape_air_slide_back_end_frame">-1</int>
+      <float hash="landing_frame_escape_air_slide_max">12</float>
+      <float hash="landing_frame_escape_air_slide">12</float>
+    </struct>
+    <struct index="17">
+      <float hash="escape_air_cancel_frame">60</float>
+      <int hash="escape_air_slide_back_end_frame">-1</int>
+      <float hash="landing_frame_escape_air_slide_max">12</float>
+      <float hash="landing_frame_escape_air_slide">12</float>
+    </struct>
+    <struct index="18">
+      <float hash="escape_air_cancel_frame">65</float>
+      <int hash="escape_air_slide_back_end_frame">-1</int>
+      <float hash="landing_frame_escape_air_slide_max">12</float>
+      <float hash="landing_frame_escape_air_slide">12</float>
+    </struct>
+    <struct index="19">
+      <int hash="escape_air_slide_back_end_frame">-1</int>
+      <float hash="landing_frame_escape_air_slide_max">12</float>
+      <float hash="landing_frame_escape_air_slide">12</float>
+    </struct>
+    <struct index="20">
+      <float hash="escape_air_cancel_frame">54</float>
+      <int hash="escape_air_slide_back_end_frame">-1</int>
+      <float hash="landing_frame_escape_air_slide_max">12</float>
+      <float hash="landing_frame_escape_air_slide">12</float>
+    </struct>
+    <struct index="21">
+      <int hash="escape_air_slide_back_end_frame">-1</int>
+      <float hash="landing_frame_escape_air_slide_max">12</float>
+      <float hash="landing_frame_escape_air_slide">12</float>
+    </struct>
+    <struct index="22">
+      <float hash="escape_air_cancel_frame">54</float>
+      <int hash="escape_air_slide_back_end_frame">-1</int>
+      <float hash="landing_frame_escape_air_slide_max">12</float>
+      <float hash="landing_frame_escape_air_slide">12</float>
+    </struct>
+    <struct index="23">
+      <float hash="escape_air_cancel_frame">57</float>
+      <int hash="escape_air_slide_back_end_frame">-1</int>
+      <float hash="landing_frame_escape_air_slide_max">12</float>
+      <float hash="landing_frame_escape_air_slide">12</float>
+    </struct>
+    <struct index="24">
+      <float hash="escape_air_cancel_frame">62</float>
+      <int hash="escape_air_slide_back_end_frame">-1</int>
+      <float hash="landing_frame_escape_air_slide_max">12</float>
+      <float hash="landing_frame_escape_air_slide">12</float>
+    </struct>
+    <struct index="25">
+      <int hash="escape_air_slide_back_end_frame">-1</int>
+      <float hash="landing_frame_escape_air_slide_max">12</float>
+      <float hash="landing_frame_escape_air_slide">12</float>
+    </struct>
+    <struct index="26">
+      <int hash="escape_air_slide_back_end_frame">-1</int>
+      <float hash="landing_frame_escape_air_slide_max">12</float>
+      <float hash="landing_frame_escape_air_slide">12</float>
+    </struct>
+    <struct index="27">
+      <float hash="escape_air_cancel_frame">65</float>
+      <int hash="escape_air_slide_back_end_frame">-1</int>
+      <float hash="landing_frame_escape_air_slide_max">12</float>
+      <float hash="landing_frame_escape_air_slide">12</float>
+    </struct>
+    <struct index="28">
+      <float hash="escape_air_cancel_frame">65</float>
+      <int hash="escape_air_slide_back_end_frame">-1</int>
+      <float hash="landing_frame_escape_air_slide_max">12</float>
+      <float hash="landing_frame_escape_air_slide">12</float>
+    </struct>
+    <struct index="29">
+      <float hash="escape_air_cancel_frame">50</float>
+      <int hash="escape_air_slide_back_end_frame">-1</int>
+      <float hash="landing_frame_escape_air_slide_max">12</float>
+      <float hash="landing_frame_escape_air_slide">12</float>
+    </struct>
+    <struct index="30">
+      <int hash="escape_air_slide_back_end_frame">-1</int>
+      <float hash="landing_frame_escape_air_slide_max">12</float>
+      <float hash="landing_frame_escape_air_slide">12</float>
+    </struct>
+    <struct index="31">
+      <float hash="escape_air_hit_xlu_frame">3</float>
+      <float hash="escape_air_cancel_frame">50</float>
+      <int hash="escape_air_slide_back_end_frame">-1</int>
+      <float hash="landing_frame_escape_air_slide_max">12</float>
+      <float hash="landing_frame_escape_air_slide">12</float>
+    </struct>
+    <struct index="32">
+      <float hash="escape_air_hit_xlu_frame">3</float>
+      <int hash="escape_air_slide_back_end_frame">-1</int>
+      <float hash="landing_frame_escape_air_slide_max">12</float>
+      <float hash="landing_frame_escape_air_slide">12</float>
+    </struct>
+    <struct index="33">
+      <float hash="escape_air_cancel_frame">61</float>
+      <int hash="escape_air_slide_back_end_frame">-1</int>
+      <float hash="landing_frame_escape_air_slide_max">12</float>
+      <float hash="landing_frame_escape_air_slide">12</float>
+    </struct>
+    <struct index="34">
+      <int hash="escape_air_slide_back_end_frame">-1</int>
+      <float hash="landing_frame_escape_air_slide_max">12</float>
+      <float hash="landing_frame_escape_air_slide">12</float>
+    </struct>
+    <struct index="35">
+      <float hash="escape_air_cancel_frame">54</float>
+      <int hash="escape_air_slide_back_end_frame">-1</int>
+      <float hash="landing_frame_escape_air_slide_max">12</float>
+      <float hash="landing_frame_escape_air_slide">12</float>
+    </struct>
+    <struct index="36">
+      <float hash="escape_air_cancel_frame">62</float>
+      <int hash="escape_air_slide_back_end_frame">-1</int>
+      <float hash="landing_frame_escape_air_slide_max">12</float>
+      <float hash="landing_frame_escape_air_slide">12</float>
+    </struct>
+    <struct index="37">
+      <int hash="escape_air_slide_back_end_frame">-1</int>
+      <float hash="landing_frame_escape_air_slide_max">12</float>
+      <float hash="landing_frame_escape_air_slide">12</float>
+    </struct>
+    <struct index="38">
+      <int hash="escape_air_slide_back_end_frame">-1</int>
+      <float hash="landing_frame_escape_air_slide_max">12</float>
+      <float hash="landing_frame_escape_air_slide">12</float>
+    </struct>
+    <struct index="39">
+      <int hash="escape_air_slide_back_end_frame">-1</int>
+      <float hash="landing_frame_escape_air_slide_max">12</float>
+      <float hash="landing_frame_escape_air_slide">12</float>
+    </struct>
+    <struct index="40">
+      <int hash="escape_air_slide_back_end_frame">-1</int>
+      <float hash="landing_frame_escape_air_slide_max">12</float>
+      <float hash="landing_frame_escape_air_slide">12</float>
+    </struct>
+    <struct index="41">
+      <float hash="escape_air_cancel_frame">60</float>
+      <int hash="escape_air_slide_back_end_frame">-1</int>
+      <float hash="landing_frame_escape_air_slide_max">12</float>
+      <float hash="landing_frame_escape_air_slide">12</float>
+    </struct>
+    <struct index="42">
+      <float hash="escape_air_hit_xlu_frame">4</float>
+      <int hash="escape_air_slide_back_end_frame">-1</int>
+      <float hash="landing_frame_escape_air_slide_max">12</float>
+      <float hash="landing_frame_escape_air_slide">12</float>
+    </struct>
+    <struct index="43">
+      <int hash="escape_air_slide_back_end_frame">-1</int>
+      <float hash="landing_frame_escape_air_slide_max">12</float>
+      <float hash="landing_frame_escape_air_slide">12</float>
+    </struct>
+    <struct index="44">
+      <float hash="escape_air_cancel_frame">55</float>
+      <int hash="escape_air_slide_back_end_frame">-1</int>
+      <float hash="landing_frame_escape_air_slide_max">12</float>
+      <float hash="landing_frame_escape_air_slide">12</float>
+    </struct>
+    <struct index="45">
+      <int hash="escape_air_slide_back_end_frame">-1</int>
+      <float hash="landing_frame_escape_air_slide_max">12</float>
+      <float hash="landing_frame_escape_air_slide">12</float>
+    </struct>
+    <struct index="46">
+      <int hash="escape_air_slide_back_end_frame">-1</int>
+      <float hash="landing_frame_escape_air_slide_max">12</float>
+      <float hash="landing_frame_escape_air_slide">12</float>
+    </struct>
+    <struct index="47">
+      <int hash="escape_air_slide_back_end_frame">-1</int>
+      <float hash="landing_frame_escape_air_slide_max">12</float>
+      <float hash="landing_frame_escape_air_slide">12</float>
+    </struct>
+    <struct index="48">
+      <int hash="escape_air_slide_back_end_frame">-1</int>
+      <float hash="landing_frame_escape_air_slide_max">12</float>
+      <float hash="landing_frame_escape_air_slide">12</float>
+    </struct>
+    <struct index="49">
+      <float hash="escape_air_cancel_frame">64</float>
+      <int hash="escape_air_slide_back_end_frame">-1</int>
+      <float hash="landing_frame_escape_air_slide_max">12</float>
+      <float hash="landing_frame_escape_air_slide">12</float>
+    </struct>
+    <struct index="50">
+      <float hash="escape_air_cancel_frame">52</float>
+      <int hash="escape_air_slide_back_end_frame">-1</int>
+      <float hash="landing_frame_escape_air_slide_max">12</float>
+      <float hash="landing_frame_escape_air_slide">12</float>
+    </struct>
+    <struct index="51">
+      <int hash="escape_air_slide_back_end_frame">-1</int>
+      <float hash="landing_frame_escape_air_slide_max">12</float>
+      <float hash="landing_frame_escape_air_slide">12</float>
+    </struct>
+    <struct index="52">
+      <float hash="escape_air_cancel_frame">65</float>
+      <int hash="escape_air_slide_back_end_frame">-1</int>
+      <float hash="landing_frame_escape_air_slide_max">12</float>
+      <float hash="landing_frame_escape_air_slide">12</float>
+    </struct>
+    <struct index="53">
+      <float hash="escape_air_cancel_frame">60</float>
+      <int hash="escape_air_slide_back_end_frame">-1</int>
+      <float hash="landing_frame_escape_air_slide_max">12</float>
+      <float hash="landing_frame_escape_air_slide">12</float>
+    </struct>
+    <struct index="54">
+      <int hash="escape_air_slide_back_end_frame">-1</int>
+      <float hash="landing_frame_escape_air_slide_max">12</float>
+      <float hash="landing_frame_escape_air_slide">12</float>
+    </struct>
+    <struct index="55">
+      <float hash="escape_air_cancel_frame">50</float>
+      <int hash="escape_air_slide_back_end_frame">-1</int>
+      <float hash="landing_frame_escape_air_slide_max">12</float>
+      <float hash="landing_frame_escape_air_slide">12</float>
+    </struct>
+    <struct index="56">
+      <int hash="escape_air_slide_back_end_frame">-1</int>
+      <float hash="landing_frame_escape_air_slide_max">12</float>
+      <float hash="landing_frame_escape_air_slide">12</float>
+    </struct>
+    <struct index="57">
+      <int hash="escape_air_slide_back_end_frame">-1</int>
+      <float hash="landing_frame_escape_air_slide_max">12</float>
+      <float hash="landing_frame_escape_air_slide">12</float>
+    </struct>
+    <struct index="58">
+      <float hash="escape_air_cancel_frame">60</float>
+      <int hash="escape_air_slide_back_end_frame">-1</int>
+      <float hash="landing_frame_escape_air_slide_max">12</float>
+      <float hash="landing_frame_escape_air_slide">12</float>
+    </struct>
+    <struct index="59">
+      <float hash="escape_air_cancel_frame">60</float>
+      <int hash="escape_air_slide_back_end_frame">-1</int>
+      <float hash="landing_frame_escape_air_slide_max">12</float>
+      <float hash="landing_frame_escape_air_slide">12</float>
+    </struct>
+    <struct index="60">
+      <int hash="escape_air_slide_back_end_frame">-1</int>
+      <float hash="landing_frame_escape_air_slide_max">12</float>
+      <float hash="landing_frame_escape_air_slide">12</float>
+    </struct>
+    <struct index="61">
+      <float hash="escape_air_cancel_frame">62</float>
+      <int hash="escape_air_slide_back_end_frame">-1</int>
+      <float hash="landing_frame_escape_air_slide_max">12</float>
+      <float hash="landing_frame_escape_air_slide">12</float>
+    </struct>
+    <struct index="62">
+      <int hash="escape_air_slide_back_end_frame">-1</int>
+      <float hash="landing_frame_escape_air_slide_max">12</float>
+      <float hash="landing_frame_escape_air_slide">12</float>
+    </struct>
+    <struct index="63">
+      <float hash="escape_air_cancel_frame">60</float>
+      <int hash="escape_air_slide_back_end_frame">-1</int>
+      <float hash="landing_frame_escape_air_slide_max">12</float>
+      <float hash="landing_frame_escape_air_slide">12</float>
+    </struct>
+    <struct index="64">
+      <float hash="escape_air_cancel_frame">57</float>
+      <int hash="escape_air_slide_back_end_frame">-1</int>
+      <float hash="landing_frame_escape_air_slide_max">12</float>
+      <float hash="landing_frame_escape_air_slide">12</float>
+    </struct>
+    <struct index="65">
+      <int hash="escape_air_slide_back_end_frame">-1</int>
+      <float hash="landing_frame_escape_air_slide_max">12</float>
+      <float hash="landing_frame_escape_air_slide">12</float>
+    </struct>
+    <struct index="66">
+      <float hash="escape_air_cancel_frame">55</float>
+      <int hash="escape_air_slide_back_end_frame">-1</int>
+      <float hash="landing_frame_escape_air_slide_max">12</float>
+      <float hash="landing_frame_escape_air_slide">12</float>
+    </struct>
+    <struct index="67">
+      <int hash="escape_air_slide_back_end_frame">-1</int>
+      <float hash="landing_frame_escape_air_slide_max">12</float>
+      <float hash="landing_frame_escape_air_slide">12</float>
+    </struct>
+    <struct index="68">
+      <float hash="escape_air_cancel_frame">60</float>
+      <int hash="escape_air_slide_back_end_frame">-1</int>
+      <float hash="landing_frame_escape_air_slide_max">12</float>
+      <float hash="landing_frame_escape_air_slide">12</float>
+    </struct>
+    <struct index="69">
+      <float hash="escape_air_cancel_frame">65</float>
+      <int hash="escape_air_slide_back_end_frame">-1</int>
+      <float hash="landing_frame_escape_air_slide_max">12</float>
+      <float hash="landing_frame_escape_air_slide">12</float>
+    </struct>
+    <struct index="70">
+      <float hash="escape_air_cancel_frame">60</float>
+      <int hash="escape_air_slide_back_end_frame">-1</int>
+      <float hash="landing_frame_escape_air_slide_max">12</float>
+      <float hash="landing_frame_escape_air_slide">12</float>
+    </struct>
+    <struct index="71">
+      <float hash="escape_air_cancel_frame">62</float>
+      <int hash="escape_air_slide_back_end_frame">-1</int>
+      <float hash="landing_frame_escape_air_slide_max">12</float>
+      <float hash="landing_frame_escape_air_slide">12</float>
+    </struct>
+    <struct index="72">
+      <float hash="escape_n_hit_xlu_frame">4</float>
+      <float hash="escape_n_hit_normal_frame">13</float>
+      <float hash="escape_f_hit_normal_frame">9</float>
+      <float hash="escape_b_hit_normal_frame">10</float>
+      <int hash="escape_air_slide_back_end_frame">-1</int>
+      <float hash="landing_frame_escape_air_slide_max">12</float>
+      <float hash="landing_frame_escape_air_slide">12</float>
+    </struct>
+    <struct index="73">
+      <int hash="escape_air_slide_back_end_frame">-1</int>
+      <float hash="landing_frame_escape_air_slide_max">12</float>
+      <float hash="landing_frame_escape_air_slide">12</float>
+    </struct>
+    <struct index="74">
+      <float hash="escape_air_cancel_frame">65</float>
+      <int hash="escape_air_slide_back_end_frame">-1</int>
+      <float hash="landing_frame_escape_air_slide_max">12</float>
+      <float hash="landing_frame_escape_air_slide">12</float>
+    </struct>
+    <struct index="75">
+      <float hash="escape_air_cancel_frame">60</float>
+      <int hash="escape_air_slide_back_end_frame">-1</int>
+      <float hash="landing_frame_escape_air_slide_max">12</float>
+      <float hash="landing_frame_escape_air_slide">12</float>
+    </struct>
+    <struct index="76">
+      <float hash="escape_air_cancel_frame">60</float>
+      <int hash="escape_air_slide_back_end_frame">-1</int>
+      <float hash="landing_frame_escape_air_slide_max">12</float>
+      <float hash="landing_frame_escape_air_slide">12</float>
+    </struct>
+    <struct index="77">
+      <float hash="escape_air_cancel_frame">60</float>
+      <int hash="escape_air_slide_back_end_frame">-1</int>
+      <float hash="landing_frame_escape_air_slide_max">12</float>
+      <float hash="landing_frame_escape_air_slide">12</float>
+    </struct>
+    <struct index="78">
+      <float hash="escape_air_cancel_frame">60</float>
+      <int hash="escape_air_slide_back_end_frame">-1</int>
+      <float hash="landing_frame_escape_air_slide_max">12</float>
+      <float hash="landing_frame_escape_air_slide">12</float>
+    </struct>
+    <struct index="79">
+      <float hash="escape_air_cancel_frame">60</float>
+      <int hash="escape_air_slide_back_end_frame">-1</int>
+      <float hash="landing_frame_escape_air_slide_max">12</float>
+      <float hash="landing_frame_escape_air_slide">12</float>
+    </struct>
+    <struct index="80">
+      <float hash="escape_air_cancel_frame">51</float>
+      <int hash="escape_air_slide_back_end_frame">-1</int>
+      <float hash="landing_frame_escape_air_slide_max">12</float>
+      <float hash="landing_frame_escape_air_slide">12</float>
+    </struct>
+    <struct index="81">
+      <float hash="escape_air_cancel_frame">65</float>
+      <int hash="escape_air_slide_back_end_frame">-1</int>
+      <float hash="landing_frame_escape_air_slide_max">12</float>
+      <float hash="landing_frame_escape_air_slide">12</float>
+    </struct>
+    <struct index="82">
+      <float hash="escape_air_cancel_frame">65</float>
+      <int hash="escape_air_slide_back_end_frame">-1</int>
+      <float hash="landing_frame_escape_air_slide_max">12</float>
+      <float hash="landing_frame_escape_air_slide">12</float>
+    </struct>
+    <struct index="83">
+      <float hash="escape_air_cancel_frame">67</float>
+      <int hash="escape_air_slide_back_end_frame">-1</int>
+      <float hash="landing_frame_escape_air_slide_max">12</float>
+      <float hash="landing_frame_escape_air_slide">12</float>
+    </struct>
+    <struct index="84">
+      <float hash="escape_air_cancel_frame">60</float>
+      <int hash="escape_air_slide_back_end_frame">-1</int>
+      <float hash="landing_frame_escape_air_slide_max">12</float>
+      <float hash="landing_frame_escape_air_slide">12</float>
+    </struct>
+    <struct index="85">
+      <int hash="escape_air_slide_back_end_frame">-1</int>
+      <float hash="landing_frame_escape_air_slide_max">12</float>
+      <float hash="landing_frame_escape_air_slide">12</float>
+    </struct>
+    <struct index="86">
+      <int hash="escape_air_slide_back_end_frame">-1</int>
+      <float hash="landing_frame_escape_air_slide_max">12</float>
+      <float hash="landing_frame_escape_air_slide">12</float>
+    </struct>
+    <struct index="87">
+      <float hash="escape_air_cancel_frame">65</float>
+      <int hash="escape_air_slide_back_end_frame">-1</int>
+      <float hash="landing_frame_escape_air_slide_max">12</float>
+      <float hash="landing_frame_escape_air_slide">12</float>
+    </struct>
+    <struct index="88">
+      <int hash="escape_air_slide_back_end_frame">-1</int>
+      <float hash="landing_frame_escape_air_slide_max">12</float>
+      <float hash="landing_frame_escape_air_slide">12</float>
+    </struct>
+    <struct index="89">
+      <float hash="escape_air_cancel_frame">60</float>
+      <int hash="escape_air_slide_back_end_frame">-1</int>
+      <float hash="landing_frame_escape_air_slide_max">12</float>
+      <float hash="landing_frame_escape_air_slide">12</float>
+    </struct>
+    <struct index="90">
+      <int hash="escape_air_slide_back_end_frame">-1</int>
+      <float hash="landing_frame_escape_air_slide_max">12</float>
+      <float hash="landing_frame_escape_air_slide">12</float>
+    </struct>
+    <struct index="91">
+      <int hash="escape_air_slide_back_end_frame">-1</int>
+      <float hash="landing_frame_escape_air_slide_max">12</float>
+      <float hash="landing_frame_escape_air_slide">12</float>
+    </struct>
+    <struct index="92">
+      <int hash="escape_air_slide_back_end_frame">-1</int>
+      <float hash="landing_frame_escape_air_slide_max">12</float>
+      <float hash="landing_frame_escape_air_slide">12</float>
+    </struct>
+    <struct index="93">
+      <int hash="escape_air_slide_back_end_frame">-1</int>
+      <float hash="landing_frame_escape_air_slide_max">12</float>
+      <float hash="landing_frame_escape_air_slide">12</float>
+    </struct>
+  </list>
+</struct>
