@@ -321,6 +321,74 @@ unsafe fn sora_dair_eff(fighter: &mut L2CAgentBase) {
 }
 #[acmd_script(
     agent = "trail",
+    script =  "game_specialinput",
+    category = ACMD_GAME,
+	low_priority)]
+unsafe fn sora_special_input(fighter: &mut L2CAgentBase) {
+	let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=19)
+		FT_MOTION_RATE(FSM=1.5)
+		if(is_excute){
+			ATTACK(ID=0, Part=0, Bone=hash40("haver"), Damage=9.0, Angle=90, KBG=75, FKB=0, BKB=75, Size=4.8, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.7, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_TRAIL_CLEAVE, Type=ATTACK_REGION_SWORD)
+			ATTACK(ID=1, Part=0, Bone=hash40("haver"), Damage=9.0, Angle=90, KBG=75, FKB=0, BKB=75, Size=4.8, X=0.0, Y=4.6, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.7, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_TRAIL_CLEAVE, Type=ATTACK_REGION_SWORD)
+			ATTACK(ID=2, Part=0, Bone=hash40("haver"), Damage=9.0, Angle=90, KBG=75, FKB=0, BKB=75, Size=4.8, X=0.0, Y=9.2, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.7, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_TRAIL_CLEAVE, Type=ATTACK_REGION_SWORD)
+		}
+		frame(Frame=34)
+		FT_MOTION_RATE(FSM=2)
+		frame(Frame=36)
+		FT_MOTION_RATE(FSM=1.5)
+		if(is_excute){
+			ATTACK(ID=0, Part=0, Bone=hash40("haver"), Damage=5.0, Angle=90, KBG=75, FKB=0, BKB=75, Size=3.8, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.5, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_TRAIL_STAB, Type=ATTACK_REGION_SWORD)
+			ATTACK(ID=1, Part=0, Bone=hash40("haver"), Damage=5.0, Angle=90, KBG=75, FKB=0, BKB=75, Size=3.8, X=0.0, Y=4.6, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.5, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_TRAIL_STAB, Type=ATTACK_REGION_SWORD)
+			ATTACK(ID=2, Part=0, Bone=hash40("haver"), Damage=5.0, Angle=90, KBG=75, FKB=0, BKB=75, Size=3.8, X=0.0, Y=9.2, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.5, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_TRAIL_STAB, Type=ATTACK_REGION_SWORD)
+		}
+		frame(Frame=44)
+		FT_MOTION_RATE(FSM=1)
+		if(is_excute){
+			AttackModule::clear_all()
+		}
+	});
+}
+#[acmd_script(
+    agent = "trail",
+    script =  "effect_specialinput",
+    category = ACMD_EFFECT,
+	low_priority)]
+unsafe fn sora_special_input_eff(fighter: &mut L2CAgentBase) {
+	let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=19)
+		if(is_excute){
+			EFFECT_FOLLOW(hash40("trail_keyblade_flare"), hash40("haver"), 0, 0, 0, 0, 0, 0, 1, true)
+			EFFECT_FOLLOW(hash40("trail_keyblade_light"), hash40("haver"), 0, 0, 0, 0, 0, 0, 1, true)
+			AFTER_IMAGE4_ON_arg29(0x13dcc5dae1u64, 0x1345cc8b5bu64, 20, hash40("haver"), 0, 2, 0, hash40("haver"), 0, 13.8, 0, true, hash40("null"), hash40("haver"), 0, 0, 0, 0, 0, 0, 1, 0, EFFECT_AXIS_X, 0, TRAIL_BLEND_ALPHA, 101, TRAIL_CULL_NONE, 1.4, 0.2)
+		}
+		frame(Frame=39)
+		if(is_excute){
+			EFFECT_OFF_KIND(hash40("trail_keyblade_flare"), false, true)
+			EFFECT_OFF_KIND(hash40("trail_keyblade_light"), false, true)
+			AFTER_IMAGE_OFF(5)
+		}
+	});
+}
+#[acmd_script(
+    agent = "trail",
+    script =  "sound_specialinput",
+    category = ACMD_SOUND,
+	low_priority)]
+unsafe fn sora_special_input_snd(fighter: &mut L2CAgentBase) {
+	let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=17)
+		if(is_excute){
+			PLAY_STATUS(hash40("se_trail_attackair_b01"))
+			PLAY_SEQUENCE(hash40("seq_trail_rnd_attack03"))
+		}
+	});
+}
+#[acmd_script(
+    agent = "trail",
     scripts =  ["game_speciallw", "game_specialairlw"],
     category = ACMD_GAME,
 	low_priority)]
@@ -594,8 +662,6 @@ pub unsafe fn init_attack_air(fighter: &mut L2CFighterCommon) -> L2CValue {
             MotionModule::add_motion_2nd(fighter.module_accessor, Hash40::new_raw(motion_kind), frame, 1.0, false, 1.0);
             MotionModule::set_weight(fighter.module_accessor, 1.0, true);
         }
-        if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_IGNORE_2ND_MOTION){
-        }
         if ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_JUMP) {
             KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_JUMP_AERIAL_MOTION_2ND);
         } else {
@@ -627,7 +693,10 @@ pub fn install() {
 		sora_dair_land_eff,
 		sora_dair_land_snd,
 		sora_dair_land_expr,
-		sora_fair
+		sora_fair,
+		sora_special_input,
+		sora_special_input_eff,
+		sora_special_input_snd
     );
     smashline::install_agent_frame_callbacks!(sora);
 	install_status_scripts!(fair_init, init_attack_air);
