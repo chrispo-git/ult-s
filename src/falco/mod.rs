@@ -4,6 +4,7 @@ use smash::app::lua_bind::*;
 use smash::lua2cpp::*;
 use smashline::*;
 use smash_script::*;
+use crate::util::*;
 #[acmd_script(
     agent = "falco",
     script =  "game_attackairb",
@@ -400,6 +401,8 @@ fn falco_frame(fighter: &mut L2CFighterCommon) {
 		let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 		let motion_kind = MotionModule::motion_kind(boma);
 		let frame = MotionModule::frame(boma);
+		let stick_y = ControlModule::get_stick_y(boma);
+
 		if [hash40("special_lw"), hash40("special_lw_r"), hash40("special_lw_l"), hash40("special_air_lw"), hash40("special_air_lw_r"), hash40("special_air_lw_l")].contains(&motion_kind) {
 			/*if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP) && frame > 7.0 {
 				if WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT) < WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT_MAX) && StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR {
@@ -417,8 +420,16 @@ fn falco_frame(fighter: &mut L2CFighterCommon) {
 				CancelModule::enable_cancel(boma);
 			};
 		};
-		if [*FIGHTER_STATUS_KIND_SPECIAL_N].contains(&status_kind) && StatusModule::is_situation_changed(boma) {
-			StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_LANDING, true);
+		if [*FIGHTER_STATUS_KIND_SPECIAL_N].contains(&status_kind) {
+			if StatusModule::is_situation_changed(boma) {
+				StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_LANDING, true);
+			};
+			if StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR {
+				let cat2 = ControlModule::get_command_flag_cat(boma, 1);
+				if (cat2 & *FIGHTER_PAD_CMD_CAT2_FLAG_FALL_JUMP) != 0 && stick_y < -0.66 && SPEED_Y[ENTRY_ID] <= 0.0 {
+					WorkModule::set_flag(boma, true, *FIGHTER_STATUS_WORK_ID_FLAG_RESERVE_DIVE);
+				}
+			};
 		};
     }
 }
