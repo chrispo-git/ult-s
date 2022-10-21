@@ -15,6 +15,19 @@ use crate::util::*;
 static mut NONE :  smash::phx::Vector3f =  smash::phx::Vector3f { x: 0.0, y: 0.0, z: 0.0 };
 static mut SHOOT :  smash::phx::Vector3f =  smash::phx::Vector3f { x: 0.0, y: 10.0, z: 20.0 };
 
+#[acmd_script(
+    agent = "link",
+    script =  "effect_landingheavy",
+    category = ACMD_EFFECT)]
+unsafe fn link_landing(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=2)
+		if(is_excute){
+			LANDING_EFFECT(hash40("sys_landing_smoke"), hash40("top"), 0, 0, 0, 0, 0, 0, 0.9, 0, 0, 0, 0, 0, 0, true)
+		}
+    });
+}		
 
 #[acmd_script(
     agent = "link",
@@ -348,6 +361,7 @@ pub fn install() {
 		linkerang,
 		link_downb,
 		link_downb_eff,
-		link_downb_snd
+		link_downb_snd,
+		link_landing
     );
 }

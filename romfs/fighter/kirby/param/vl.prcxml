@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<struct>
+  <list hash="param_finalcuttershot">
+    <struct index="0">
+      <int hash="is_penetration">1</int>
+      <float hash="life">40</float>
+      <float hash="speed">3.4</float>
+      <float hash="brake">0</float>
+    </struct>
+    <hash40 index="1">dummy</hash40>
+    <hash40 index="2">dummy</hash40>
+    <hash40 index="3">dummy</hash40>
+  </list>
+</struct>

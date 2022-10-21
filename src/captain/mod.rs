@@ -24,7 +24,21 @@ fn captain_frame(fighter: &mut L2CFighterCommon) {
 		};
     }
 }
+#[acmd_script(
+    agent = "captain",
+    script =  "effect_landingheavy",
+    category = ACMD_EFFECT)]
+unsafe fn captain_landing(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=2)
+		if(is_excute){
+			LANDING_EFFECT(hash40("sys_landing_smoke"), hash40("top"), 0, 0, 0, 0, 0, 0, 0.9, 0, 0, 0, 0, 0, 0, true)
+		}
+    });
+}	
 
 pub fn install() {
     smashline::install_agent_frames!(captain_frame);
+    smashline::install_acmd_scripts!(captain_landing);
 }
