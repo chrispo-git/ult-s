@@ -32,6 +32,53 @@ unsafe fn doc_fireball(fighter: &mut L2CAgentBase) {
 }	
 #[acmd_script(
     agent = "mariod",
+    scripts =  ["effect_specialairn"],
+    category = ACMD_EFFECT,
+	low_priority)]
+unsafe fn doc_neutralbair_eff(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=13)
+		if(is_excute){
+			EFFECT_FOLLOW_FLIP(hash40("mariod_capsule_shoot"), hash40("mariod_capsule_shoot"), hash40("top"), -1, 16, 0, 0, 0, 0, 0.46, true, EF_FLIP_YZ)
+		}
+		frame(Frame=17)
+		if(is_excute){
+			COL_NORMAL()
+		}
+		frame(Frame=22)
+		frame(Frame=27)
+		if(is_excute){
+			COL_NORMAL()
+		}
+    });
+}
+#[acmd_script(
+    agent = "mariod",
+    scripts =  ["effect_specialn"],
+    category = ACMD_EFFECT,
+	low_priority)]
+unsafe fn doc_neutralb_eff(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=13)
+		if(is_excute){
+			EFFECT_FOLLOW_FLIP(hash40("mariod_capsule_shoot"), hash40("mariod_capsule_shoot"), hash40("top"), -1, 14, 2, 0, 0, 0, 0.46, true, EF_FLIP_YZ)
+		}
+		frame(Frame=17)
+		if(is_excute){
+			COL_NORMAL()
+		}
+		frame(Frame=22)
+		frame(Frame=27)
+		if(is_excute){
+			COL_NORMAL()
+		}
+    });
+}
+
+#[acmd_script(
+    agent = "mariod",
     script =  "game_attackdash",
     category = ACMD_GAME,
 	low_priority)]
@@ -953,6 +1000,8 @@ pub fn mariod_frame(fighter : &mut L2CFighterCommon) {
 pub fn install() {
 	smashline::install_acmd_scripts!(
 		doc_fireball,
+		doc_neutralb_eff,
+		doc_neutralbair_eff,
 		doc_fair,
 		doc_fair_eff,
 		doc_fair_snd,
