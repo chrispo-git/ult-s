@@ -51,6 +51,9 @@ pub fn jabcancel(fighter : &mut L2CFighterCommon) {
 				};
 				if HAS_ENABLE_COMBO_ON[ENTRY_ID] {
 					WorkModule::set_flag(boma, true, *FIGHTER_STATUS_ATTACK_FLAG_ENABLE_COMBO);
+					if fighter_kind == *FIGHTER_KIND_DEMON {
+						WorkModule::set_flag(boma, true, *FIGHTER_DEMON_STATUS_ATTACK_COMBO_FLAG_CHANGE_STATUS);
+					};
 				};
 				if HAS_ENABLE_NO_HIT_COMBO_ON[ENTRY_ID] {
 					WorkModule::set_flag(boma, true, *FIGHTER_STATUS_ATTACK_FLAG_ENABLE_COMBO);

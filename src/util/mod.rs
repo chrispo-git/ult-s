@@ -148,7 +148,15 @@ pub unsafe fn on_flag_hook(boma: &mut smash::app::BattleObjectModuleAccessor, in
 		if status_kind != *FIGHTER_STATUS_KIND_ATTACK || [*FIGHTER_KIND_MURABITO].contains(&fighter_kind) {
 			original!()(boma, int)
 		};
-	} else {
+	} else if int == *FIGHTER_DEMON_STATUS_ATTACK_COMBO_FLAG_CHANGE_STATUS {
+		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
+		let fighter_kind = smash::app::utility::get_kind(boma);
+		if fighter_kind != *FIGHTER_KIND_DEMON {
+			original!()(boma, int)
+		} else if ![*FIGHTER_STATUS_KIND_ATTACK, *FIGHTER_DEMON_STATUS_KIND_ATTACK_COMBO].contains(&status_kind){
+			original!()(boma, int)
+		}
+	}	else {
 		original!()(boma, int)
 	}
 }

@@ -1,0 +1,302 @@
+{
+	"new-dir-files": {
+        "fighter/sheik/c00": [
+			"fighter/sheik/motion/body/c00/d00specialinput.nuanmb"
+		],
+        "fighter/sheik/c01": [
+			"fighter/sheik/motion/body/c01/d00specialinput.nuanmb"
+		],
+        "fighter/sheik/c02": [
+			"fighter/sheik/motion/body/c02/d00specialinput.nuanmb"
+		],
+        "fighter/sheik/c03": [
+			"fighter/sheik/motion/body/c03/d00specialinput.nuanmb"
+		],
+        "fighter/sheik/c04": [
+			"fighter/sheik/motion/body/c04/d00specialinput.nuanmb"
+		],
+        "fighter/sheik/c05": [
+			"fighter/sheik/motion/body/c05/d00specialinput.nuanmb"
+		],
+        "fighter/sheik/c06": [
+			"fighter/sheik/motion/body/c06/d00specialinput.nuanmb"
+		],
+        "fighter/sheik/c07": [
+			"fighter/sheik/motion/body/c07/d00specialinput.nuanmb"
+		],
+        "fighter/toonlink/c00": [
+			"fighter/toonlink/motion/bow/c00/c03attacks4s.nuanmb",
+			"fighter/toonlink/motion/bow/c00/d02specialairhi.nuanmb"
+		],
+        "fighter/toonlink/c01": [
+			"fighter/toonlink/motion/bow/c01/c03attacks4s.nuanmb",
+			"fighter/toonlink/motion/bow/c01/d02specialairhi.nuanmb"
+		],
+        "fighter/toonlink/c02": [
+			"fighter/toonlink/motion/bow/c02/c03attacks4s.nuanmb",
+			"fighter/toonlink/motion/bow/c02/d02specialairhi.nuanmb"
+		],
+        "fighter/toonlink/c03": [
+			"fighter/toonlink/motion/bow/c03/c03attacks4s.nuanmb",
+			"fighter/toonlink/motion/bow/c03/d02specialairhi.nuanmb"
+		],
+        "fighter/toonlink/c04": [
+			"fighter/toonlink/motion/bow/c04/c03attacks4s.nuanmb",
+			"fighter/toonlink/motion/bow/c04/d02specialairhi.nuanmb"
+		],
+        "fighter/toonlink/c05": [
+			"fighter/toonlink/motion/bow/c05/c03attacks4s.nuanmb",
+			"fighter/toonlink/motion/bow/c05/d02specialairhi.nuanmb"
+		],
+        "fighter/toonlink/c06": [
+			"fighter/toonlink/motion/bow/c06/c03attacks4s.nuanmb",
+			"fighter/toonlink/motion/bow/c06/d02specialairhi.nuanmb"
+		],
+        "fighter/toonlink/c07": [
+			"fighter/toonlink/motion/bow/c07/c03attacks4s.nuanmb",
+			"fighter/toonlink/motion/bow/c07/d02specialairhi.nuanmb"
+		],
+		"fighter/szerosuit/c06": [
+		  "fighter/szerosuit/model/body/c06/def_szerosuit_001_col.nutexb",
+		  "fighter/szerosuit/model/body/c06/def_szerosuit_001_nor.nutexb",
+		  "fighter/szerosuit/model/body/c06/def_szerosuit_001_prm.nutexb"
+		],
+		"fighter/szerosuit/c07": [
+		  "fighter/szerosuit/model/body/c07/def_szerosuit_001_col.nutexb",
+		  "fighter/szerosuit/model/body/c07/def_szerosuit_001_nor.nutexb",
+		  "fighter/szerosuit/model/body/c07/def_szerosuit_001_prm.nutexb"
+		],
+        "fighter/sonic/c00": [
+			"fighter/sonic/motion/body/c00/c00attack100.nuanmb",
+			"fighter/sonic/motion/body/c00/d01specialairsstart.nuanmb"
+		],
+        "fighter/sonic/c01": [
+			"fighter/sonic/motion/body/c01/c00attack100.nuanmb",
+			"fighter/sonic/motion/body/c01/d01specialairsstart.nuanmb"
+		],
+        "fighter/sonic/c02": [
+			"fighter/sonic/motion/body/c02/c00attack100.nuanmb",
+			"fighter/sonic/motion/body/c02/d01specialairsstart.nuanmb"
+		],
+        "fighter/sonic/c03": [
+			"fighter/sonic/motion/body/c03/c00attack100.nuanmb",
+			"fighter/sonic/motion/body/c03/d01specialairsstart.nuanmb"
+		],
+        "fighter/sonic/c04": [
+			"fighter/sonic/motion/body/c04/c00attack100.nuanmb",
+			"fighter/sonic/motion/body/c04/d01specialairsstart.nuanmb"
+		],
+        "fighter/sonic/c05": [
+			"fighter/sonic/motion/body/c05/c00attack100.nuanmb",
+			"fighter/sonic/motion/body/c05/d01specialairsstart.nuanmb"
+		],
+        "fighter/sonic/c06": [
+			"fighter/sonic/motion/body/c06/c00attack100.nuanmb",
+			"fighter/sonic/motion/body/c06/d01specialairsstart.nuanmb"
+		],
+        "fighter/sonic/c07": [
+			"fighter/sonic/motion/body/c07/c00attack100.nuanmb",
+			"fighter/sonic/motion/body/c07/d01specialairsstart.nuanmb"
+		],
+        "fighter/wario/c00": [
+			"fighter/wario/motion/body/c00/d01specialairssearch.nuanmb"
+		],
+        "fighter/wario/c01": [
+			"fighter/wario/motion/body/c01/d01specialairssearch.nuanmb"
+		],
+        "fighter/wario/c02": [
+			"fighter/wario/motion/body/c02/d01specialairssearch.nuanmb"
+		],
+        "fighter/wario/c03": [
+			"fighter/wario/motion/body/c03/d01specialairssearch.nuanmb"
+		],
+        "fighter/wario/c04": [
+			"fighter/wario/motion/body/c04/d01specialairssearch.nuanmb"
+		],
+        "fighter/wario/c05": [
+			"fighter/wario/motion/body/c05/d01specialairssearch.nuanmb"
+		],
+        "fighter/wario/c06": [
+			"fighter/wario/motion/body/c06/d01specialairssearch.nuanmb"
+		],
+        "fighter/wario/c07": [
+			"fighter/wario/motion/body/c07/d01specialairssearch.nuanmb"
+		],
+        "fighter/roy/c00": [
+			"fighter/roy/motion/body/c00/c00attackdash2.nuanmb"
+		],
+        "fighter/roy/c01": [
+			"fighter/roy/motion/body/c01/c00attackdash2.nuanmb"
+		],
+        "fighter/roy/c02": [
+			"fighter/roy/motion/body/c02/c00attackdash2.nuanmb"
+		],
+        "fighter/roy/c03": [
+			"fighter/roy/motion/body/c03/c00attackdash2.nuanmb"
+		],
+        "fighter/roy/c04": [
+			"fighter/roy/motion/body/c04/c00attackdash2.nuanmb"
+		],
+        "fighter/roy/c05": [
+			"fighter/roy/motion/body/c05/c00attackdash2.nuanmb"
+		],
+        "fighter/roy/c06": [
+			"fighter/roy/motion/body/c06/c00attackdash2.nuanmb"
+		],
+        "fighter/roy/c07": [
+			"fighter/roy/motion/body/c07/c00attackdash2.nuanmb"
+		],
+        "fighter/chrom/c00": [
+			"fighter/chrom/motion/body/c00/c00attack12.nuanmb",
+			"fighter/chrom/motion/body/c00/c01attacks3hi.nuanmb",
+			"fighter/chrom/motion/body/c00/c01attacks3lw.nuanmb"
+		],
+        "fighter/chrom/c01": [
+			"fighter/chrom/motion/body/c01/c00attack12.nuanmb",
+			"fighter/chrom/motion/body/c01/c01attacks3hi.nuanmb",
+			"fighter/chrom/motion/body/c01/c01attacks3lw.nuanmb"
+		],
+        "fighter/chrom/c02": [
+			"fighter/chrom/motion/body/c02/c00attack12.nuanmb",
+			"fighter/chrom/motion/body/c02/c01attacks3hi.nuanmb",
+			"fighter/chrom/motion/body/c02/c01attacks3lw.nuanmb"
+		],
+        "fighter/chrom/c03": [
+			"fighter/chrom/motion/body/c03/c00attack12.nuanmb",
+			"fighter/chrom/motion/body/c03/c01attacks3hi.nuanmb",
+			"fighter/chrom/motion/body/c03/c01attacks3lw.nuanmb"
+		],
+        "fighter/chrom/c04": [
+			"fighter/chrom/motion/body/c04/c00attack12.nuanmb",
+			"fighter/chrom/motion/body/c04/c01attacks3hi.nuanmb",
+			"fighter/chrom/motion/body/c04/c01attacks3lw.nuanmb"
+		],
+        "fighter/chrom/c05": [
+			"fighter/chrom/motion/body/c05/c00attack12.nuanmb",
+			"fighter/chrom/motion/body/c05/c01attacks3hi.nuanmb",
+			"fighter/chrom/motion/body/c05/c01attacks3lw.nuanmb"
+		],
+        "fighter/chrom/c06": [
+			"fighter/chrom/motion/body/c06/c00attack12.nuanmb",
+			"fighter/chrom/motion/body/c06/c01attacks3hi.nuanmb",
+			"fighter/chrom/motion/body/c06/c01attacks3lw.nuanmb"
+		],
+        "fighter/chrom/c07": [
+			"fighter/chrom/motion/body/c07/c00attack12.nuanmb",
+			"fighter/chrom/motion/body/c07/c01attacks3hi.nuanmb",
+			"fighter/chrom/motion/body/c07/c01attacks3lw.nuanmb"
+		],
+        "fighter/master/c00": [
+			"fighter/master/motion/body/c00/c05attackairn2.nuanmb"
+		],
+        "fighter/master/c01": [
+			"fighter/master/motion/body/c01/c05attackairn2.nuanmb"
+		],
+        "fighter/master/c02": [
+			"fighter/master/motion/body/c02/c05attackairn2.nuanmb"
+		],
+        "fighter/master/c03": [
+			"fighter/master/motion/body/c03/c05attackairn2.nuanmb"
+		],
+        "fighter/master/c04": [
+			"fighter/master/motion/body/c04/c05attackairn2.nuanmb"
+		],
+        "fighter/master/c05": [
+			"fighter/master/motion/body/c05/c05attackairn2.nuanmb"
+		],
+        "fighter/master/c06": [
+			"fighter/master/motion/body/c06/c05attackairn2.nuanmb"
+		],
+        "fighter/master/c07": [
+			"fighter/master/motion/body/c07/c05attackairn2.nuanmb"
+		],
+        "fighter/lucina/c00": [
+			"fighter/lucina/motion/body/c00/c05attackairhi2.nuanmb",
+			"fighter/lucina/motion/body/c00/c05attackairn2.nuanmb",
+			"fighter/lucina/motion/body/c00/c05attackairf2.nuanmb",
+			"fighter/lucina/motion/body/c00/c05attackairb2.nuanmb"
+		],
+        "fighter/lucina/c01": [
+			"fighter/lucina/motion/body/c01/c05attackairhi2.nuanmb",
+			"fighter/lucina/motion/body/c01/c05attackairf2.nuanmb",
+			"fighter/lucina/motion/body/c01/c05attackairn2.nuanmb",
+			"fighter/lucina/motion/body/c01/c05attackairb2.nuanmb"
+		],
+        "fighter/lucina/c02": [
+			"fighter/lucina/motion/body/c02/c05attackairhi2.nuanmb",
+			"fighter/lucina/motion/body/c02/c05attackairf2.nuanmb",
+			"fighter/lucina/motion/body/c02/c05attackairn2.nuanmb",
+			"fighter/lucina/motion/body/c02/c05attackairb2.nuanmb"
+		],
+        "fighter/lucina/c03": [
+			"fighter/lucina/motion/body/c03/c05attackairhi2.nuanmb",
+			"fighter/lucina/motion/body/c03/c05attackairf2.nuanmb",
+			"fighter/lucina/motion/body/c03/c05attackairn2.nuanmb",
+			"fighter/lucina/motion/body/c03/c05attackairb2.nuanmb"
+		],
+        "fighter/lucina/c04": [
+			"fighter/lucina/motion/body/c04/c05attackairhi2.nuanmb",
+			"fighter/lucina/motion/body/c04/c05attackairf2.nuanmb",
+			"fighter/lucina/motion/body/c04/c05attackairn2.nuanmb",
+			"fighter/lucina/motion/body/c04/c05attackairb2.nuanmb"
+		],
+        "fighter/lucina/c05": [
+			"fighter/lucina/motion/body/c05/c05attackairhi2.nuanmb",
+			"fighter/lucina/motion/body/c05/c05attackairf2.nuanmb",
+			"fighter/lucina/motion/body/c05/c05attackairn2.nuanmb",
+			"fighter/lucina/motion/body/c05/c05attackairb2.nuanmb"
+		],
+        "fighter/lucina/c06": [
+			"fighter/lucina/motion/body/c06/c05attackairhi2.nuanmb",
+			"fighter/lucina/motion/body/c06/c05attackairf2.nuanmb",
+			"fighter/lucina/motion/body/c06/c05attackairn2.nuanmb",
+			"fighter/lucina/motion/body/c06/c05attackairb2.nuanmb"
+		],
+        "fighter/lucina/c07": [
+			"fighter/lucina/motion/body/c07/c05attackairhi2.nuanmb",
+			"fighter/lucina/motion/body/c07/c05attackairf2.nuanmb",
+			"fighter/lucina/motion/body/c07/c05attackairn2.nuanmb",
+			"fighter/lucina/motion/body/c07/c05attackairb2.nuanmb"
+		],
+        "fighter/kirby/c00": [
+			"fighter/kirby/model/finalcutter/c00/def_ultrasword_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c00/def_ultrasword_001_nor.nutexb",
+			"fighter/kirby/model/finalcutter/c00/def_ultrasword_001_prm.nutexb"
+		],
+        "fighter/kirby/c01": [
+			"fighter/kirby/model/finalcutter/c01/def_ultrasword_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c01/def_ultrasword_001_nor.nutexb",
+			"fighter/kirby/model/finalcutter/c01/def_ultrasword_001_prm.nutexb"
+		],
+        "fighter/kirby/c02": [
+			"fighter/kirby/model/finalcutter/c02/def_ultrasword_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c02/def_ultrasword_001_nor.nutexb",
+			"fighter/kirby/model/finalcutter/c02/def_ultrasword_001_prm.nutexb"
+		],
+        "fighter/kirby/c03": [
+			"fighter/kirby/model/finalcutter/c03/def_ultrasword_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c04/def_ultrasword_001_nor.nutexb",
+			"fighter/kirby/model/finalcutter/c05/def_ultrasword_001_prm.nutexb"
+		],
+        "fighter/kirby/c04": [
+			"fighter/kirby/model/finalcutter/c04/def_ultrasword_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c04/def_ultrasword_001_nor.nutexb",
+			"fighter/kirby/model/finalcutter/c04/def_ultrasword_001_prm.nutexb"
+		],
+        "fighter/kirby/c05": [
+			"fighter/kirby/model/finalcutter/c05/def_ultrasword_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c05/def_ultrasword_001_nor.nutexb",
+			"fighter/kirby/model/finalcutter/c05/def_ultrasword_001_prm.nutexb"
+		],
+        "fighter/kirby/c06": [
+			"fighter/kirby/model/finalcutter/c06/def_ultrasword_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c06/def_ultrasword_001_nor.nutexb",
+			"fighter/kirby/model/finalcutter/c06/def_ultrasword_001_prm.nutexb"
+		],
+        "fighter/kirby/c07": [
+			"fighter/kirby/model/finalcutter/c07/def_ultrasword_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c07/def_ultrasword_001_nor.nutexb",
+			"fighter/kirby/model/finalcutter/c07/def_ultrasword_001_prm.nutexb"
+		]
+	}
+}

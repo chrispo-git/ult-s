@@ -34,5 +34,6 @@ jobs:
       env:
         HOME: /root
       with:
-        name: plugin
+        name: Ultimate S Arcropolis
         path: releases
+  

@@ -31,23 +31,25 @@ pub fn wavedash(fighter : &mut L2CFighterCommon) {
 			if [*FIGHTER_STATUS_KIND_ESCAPE_AIR, *FIGHTER_STATUS_KIND_ESCAPE_AIR_SLIDE].contains(&status_kind) && IS_WAVEDASH[ENTRY_ID] == true {
 				let y = ControlModule::get_stick_y(boma);
 				let x = ControlModule::get_stick_x(boma);
-				/*if y < 0.3 && (ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_JUMP) || ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP_MINI)){
-					let stop_rise  = smash::phx::Vector3f { x: 1.0, y: 0.0, z: 1.0 };
-					KineticModule::mul_speed(boma, &stop_rise, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
-					let mut z = 0;
-					while GroundModule::ray_check(boma, &Vector2f{ x: PostureModule::pos_x(boma), y: PostureModule::pos_y(boma)}, &Vector2f{ x: 0.0, y: -0.25}, true) == 0  && z < 30{
-						let pos = smash::phx::Vector3f { x: PostureModule::pos_x(boma), y: PostureModule::pos_y(boma)-0.25, z: 0.0 };
-						PostureModule::set_pos(boma, &pos);
-						PostureModule::init_pos(boma, &pos, true, true);
-						z += 1;
-					};
-					if x > -0.2 && x < 0.2 {
-						let stop_rise  = smash::phx::Vector3f { x: 0.0, y: 1.0, z: 1.0 };
+				if fighter_kind == *FIGHTER_KIND_DEMON && GroundModule::ray_check(boma, &Vector2f{ x: PostureModule::pos_x(boma), y: PostureModule::pos_y(boma)}, &Vector2f{ x: 0.0, y: -3.0}, true) == 1{
+					if y < 0.3 && (ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_JUMP) || ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP_MINI)){
+						let stop_rise  = smash::phx::Vector3f { x: 1.0, y: 0.0, z: 1.0 };
 						KineticModule::mul_speed(boma, &stop_rise, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
-						WAVEDASH_DONE[ENTRY_ID] = true;
+						let mut z = 0;
+						while GroundModule::ray_check(boma, &Vector2f{ x: PostureModule::pos_x(boma), y: PostureModule::pos_y(boma)}, &Vector2f{ x: 0.0, y: -0.25}, true) == 0  && z < 30 && GroundModule::ray_check(boma, &Vector2f{ x: PostureModule::pos_x(boma), y: PostureModule::pos_y(boma)}, &Vector2f{ x: 0.0, y: -3.0}, true) == 1{
+							let pos = smash::phx::Vector3f { x: PostureModule::pos_x(boma), y: PostureModule::pos_y(boma)-0.25, z: 0.0 };
+							PostureModule::set_pos(boma, &pos);
+							PostureModule::init_pos(boma, &pos, true, true);
+							z += 1;
+						};
+						if x > -0.2 && x < 0.2 {
+							let stop_rise  = smash::phx::Vector3f { x: 0.0, y: 1.0, z: 1.0 };
+							KineticModule::mul_speed(boma, &stop_rise, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+							WAVEDASH_DONE[ENTRY_ID] = true;
+						};
+						StatusModule::set_situation_kind(boma, smash::app::SituationKind(*SITUATION_KIND_GROUND), true);
 					};
-					StatusModule::set_situation_kind(boma, smash::app::SituationKind(*SITUATION_KIND_GROUND), true);
-				};*/
+				};
 				IS_WAVEDASH[ENTRY_ID] = false;
 			};
 			/*if WAVEDASH_DONE[ENTRY_ID] == true && status_kind == *FIGHTER_STATUS_KIND_LANDING{
@@ -84,6 +86,7 @@ pub fn wavedash(fighter : &mut L2CFighterCommon) {
 		};
     };
 }
+
 #[skyline::hook(replace = smash::app::lua_bind::StatusModule::change_status_request)]
 pub unsafe fn change_status_request_hook(boma: &mut smash::app::BattleObjectModuleAccessor, status_kind: i32, arg3: bool) -> u64 {
 	let next_status = status_kind;
@@ -117,9 +120,11 @@ pub unsafe fn status_pre_EscapeAir(fighter: &mut L2CFighterCommon) -> L2CValue {
     let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);    
 	let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 	let y = ControlModule::get_stick_y(boma);
+	let fighter_kind = smash::app::utility::get_kind(boma);
     //Handles wavedash
-    if IS_WAVEDASH[ENTRY_ID] == true && y < 0.5 && (ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_JUMP) || ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP_MINI)){
+    if IS_WAVEDASH[ENTRY_ID] == true && y < 0.5 && (ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_JUMP) || ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP_MINI)) && GroundModule::ray_check(boma, &Vector2f{ x: PostureModule::pos_x(boma), y: PostureModule::pos_y(boma)}, &Vector2f{ x: 0.0, y: -3.0}, true) == 1 && fighter_kind != *FIGHTER_KIND_DEMON{
         GroundModule::attach_ground(fighter.module_accessor, true);
+        GroundModule::set_attach_ground(fighter.module_accessor, true);
         fighter.change_status(FIGHTER_STATUS_KIND_LANDING.into(), false.into());
         return 0.into();
     }
