@@ -111,6 +111,16 @@ unsafe fn sora_jab2(fighter: &mut L2CAgentBase) {
 	low_priority)]
 unsafe fn sora_dair(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
+		if macros::is_excute(fighter) {
+			WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_WORK_ID_FLAG_RESERVE_GRAVITY_STABLE_UNABLE);
+			KineticModule::suspend_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_CONTROL);
+		};
+		frame(fighter.lua_state_agent, 2.0);
+		if macros::is_excute(fighter) {
+			KineticModule::resume_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_CONTROL);
+			KineticModule::resume_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_GRAVITY);
+			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_WORK_ID_FLAG_RESERVE_GRAVITY_STABLE_UNABLE);
+		};
 		frame(fighter.lua_state_agent, 5.0);
 		if macros::is_excute(fighter) {
 			WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
@@ -121,7 +131,7 @@ unsafe fn sora_dair(fighter: &mut L2CAgentBase) {
 			macros::ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("haver"), /*Damage*/ 9.8, /*Angle*/ 58, /*KBG*/ 90, /*FKB*/ 0, /*BKB*/ 66, /*Size*/ 3.8, /*X*/ 0.4, /*Y*/ 3.2, /*Z*/ 0.8, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.25, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_cutup"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_TRAIL_CLEAVE_SINGLE, /*Type*/ *ATTACK_REGION_SWORD);
 			macros::ATTACK(fighter, /*ID*/ 2, /*Part*/ 0, /*Bone*/ Hash40::new("haver"), /*Damage*/ 9.8, /*Angle*/ 58, /*KBG*/ 90, /*FKB*/ 0, /*BKB*/ 66, /*Size*/ 3.8, /*X*/ 0.4, /*Y*/ 6.4, /*Z*/ 0.8, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.25, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_cutup"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_TRAIL_CLEAVE_SINGLE, /*Type*/ *ATTACK_REGION_SWORD);
 		};
-		wait(fighter.lua_state_agent, 28.0);
+		wait(fighter.lua_state_agent, 3.0);
 		if macros::is_excute(fighter) {
 			macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("haver"), /*Damage*/ 14.8, /*Angle*/ 270, /*KBG*/ 90, /*FKB*/ 0, /*BKB*/ 25, /*Size*/ 3.8, /*X*/ 0.4, /*Y*/ 0.0, /*Z*/ 0.8, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.25, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_magic"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_LL, /*SFXType*/ *COLLISION_SOUND_ATTR_MAGIC, /*Type*/ *ATTACK_REGION_SWORD);
 			macros::ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("haver"), /*Damage*/ 14.8, /*Angle*/ 270, /*KBG*/ 90, /*FKB*/ 0, /*BKB*/ 25, /*Size*/ 3.8, /*X*/ 0.4, /*Y*/ 3.2, /*Z*/ 0.8, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.25, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_magic"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_LL, /*SFXType*/ *COLLISION_SOUND_ATTR_MAGIC, /*Type*/ *ATTACK_REGION_SWORD);
@@ -132,7 +142,7 @@ unsafe fn sora_dair(fighter: &mut L2CAgentBase) {
 		if macros::is_excute(fighter) {
 			AttackModule::clear_all(fighter.module_accessor);
 		};
-		frame(fighter.lua_state_agent, 50.0);
+		frame(fighter.lua_state_agent, 24.0);
 		if macros::is_excute(fighter) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		};
@@ -267,6 +277,52 @@ unsafe fn sora_nair_1(fighter: &mut L2CAgentBase) {
 }
 #[acmd_script(
     agent = "trail",
+    script =  "game_attackairn3",
+    category = ACMD_GAME,
+	low_priority)]
+unsafe fn sora_nair_3(fighter: &mut L2CAgentBase) {
+	let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		if(is_excute){
+			WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
+		}
+		frame(Frame=8)
+		if(is_excute){
+			ATTACK(ID=0, Part=0, Bone=hash40("haver"), Damage=6.8, Angle=68, KBG=88, FKB=0, BKB=68, Size=4.6, X=0.0, Y=0.0, Z=-1.8, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.8, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_TRAIL_SLASH, Type=ATTACK_REGION_SWORD)
+			ATTACK(ID=1, Part=0, Bone=hash40("haver"), Damage=6.8, Angle=68, KBG=88, FKB=0, BKB=68, Size=4.6, X=0.0, Y=6.2, Z=-1.8, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.8, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_TRAIL_SLASH, Type=ATTACK_REGION_SWORD)
+			ATTACK(ID=2, Part=0, Bone=hash40("haver"), Damage=6.8, Angle=68, KBG=88, FKB=0, BKB=68, Size=4.6, X=0.0, Y=10.6, Z=-1.8, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.8, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_TRAIL_SLASH, Type=ATTACK_REGION_SWORD)
+		}
+		wait(Frames=6)
+		if(is_excute){
+			AttackModule::clear_all()
+		}
+		frame(Frame=36)
+		if(is_excute){
+			WorkModule::off_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
+		}
+			
+	});
+}
+#[acmd_script(
+    agent = "trail",
+    script =  "effect_attackairn3",
+    category = ACMD_EFFECT,
+	low_priority)]
+unsafe fn sora_nair_3_eff(fighter: &mut L2CAgentBase) {
+	let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=5)
+		if(is_excute){
+			AFTER_IMAGE4_ON_arg29(0x13dcc5dae1u64, 0x1345cc8b5bu64, 20, hash40("haver"), 0, 2, 0, hash40("haver"), 0, 13.8, 0, true, hash40("null"), hash40("haver"), 0, 0, 0, 0, 0, 0, 1, 0, EFFECT_AXIS_X, 0, TRAIL_BLEND_ALPHA, 101, TRAIL_CULL_NONE, 1.4, 0.2)
+		}
+		frame(Frame=14)
+		if(is_excute){
+			AFTER_IMAGE_OFF(3)
+		}
+	});
+}
+#[acmd_script(
+    agent = "trail",
     script =  "game_attackairf",
     category = ACMD_GAME,
 	low_priority)]
@@ -311,7 +367,7 @@ unsafe fn sora_dair_eff(fighter: &mut L2CAgentBase) {
 			EFFECT_FOLLOW(hash40("trail_keyblade_light"), hash40("haver"), 0, 0, 0, 0, 0, 0, 1, true)
 			AFTER_IMAGE4_ON_arg29(0x1332cbbbcdu64, 0x1345cc8b5bu64, 20, hash40("haver"), 0, 2, 0, hash40("haver"), 0, 13.8, 0, true, hash40("null"), hash40("haver"), 0, 0, 0, 0, 0, 0, 1, 0, EFFECT_AXIS_X, 0, TRAIL_BLEND_ALPHA, 101, TRAIL_CULL_NONE, 1.4, 0.2)
 		}
-		frame(Frame=45)
+		frame(Frame=23)
 		if(is_excute){
 			EFFECT_OFF_KIND(hash40("trail_keyblade_flare"), false, true)
 			EFFECT_OFF_KIND(hash40("trail_keyblade_light"), false, true)
@@ -512,11 +568,11 @@ pub fn sora(fighter : &mut L2CFighterCommon) {
 			if [*FIGHTER_STATUS_KIND_DEAD, *FIGHTER_STATUS_KIND_LOSE, *FIGHTER_STATUS_KIND_WIN].contains(&status_kind) || smash::app::sv_information::is_ready_go() == false || StatusModule::situation_kind(boma) != *SITUATION_KIND_AIR {
 				HAS_WALLJUMP[ENTRY_ID] = false;
 			};
-			if motion_kind == hash40("attack_air_lw") {
+			/*if motion_kind == hash40("attack_air_lw") {
 				if frame > 14.0 && frame < 20.0 {
 					MotionModule::change_motion(boma, Hash40::new("attack_air_lw"), 41.0, 1.0, false, 0.0, false, false);
 				};
-			};
+			};*/
 			if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_LW {
 				HitModule::set_whole(boma, smash::app::HitStatus(*HIT_STATUS_NORMAL), 0);
 				if frame > 9.0 {
@@ -659,20 +715,47 @@ pub unsafe fn init_attack_air(fighter: &mut L2CFighterCommon) -> L2CValue {
     let frame = MotionModule::frame(fighter.module_accessor);
 
     fighter.sub_attack_air_kind();
-    if motion_kind == smash::hash40("jump_aerial_f") || motion_kind == smash::hash40("jump_aerial_b") {
-        if ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_JUMP) {
-            MotionModule::add_motion_2nd(fighter.module_accessor, Hash40::new_raw(motion_kind), frame, 1.0, false, 1.0);
-            MotionModule::set_weight(fighter.module_accessor, 1.0, true);
-        }
-        if ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_JUMP) {
-            KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_JUMP_AERIAL_MOTION_2ND);
-        } else {
+    if motion_kind != hash40("jump_aerial_f") {
+        if motion_kind == hash40("jump_aerial_b"){
+            if MotionModule::motion_kind(fighter.module_accessor) != 0xd40042152 as u64 {
+                if !WorkModule::is_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_IGNORE_2ND_MOTION) {
+                    if ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_JUMP) {
+                        MotionModule::add_motion_2nd(fighter.module_accessor, Hash40::new_raw(motion_kind), frame, 1.0, false, 1.0);
+                        MotionModule::set_weight(fighter.module_accessor, 1.0, true);
+                    }
+                }
+                if ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_JUMP) {
+                    KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_JUMP_AERIAL_MOTION_2ND);
+                }
+                else {
+                    KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_MOTION_FALL);
+                }
+                fighter.sub_attack_air_uniq_process_init();
+                return L2CValue::I32(0);
+            }
             KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_MOTION_FALL);
+            fighter.sub_attack_air_uniq_process_init();
+            return L2CValue::I32(0);
         }
-    } else {
-        KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_MOTION_FALL);
     }
-    let _ = fighter.sub_attack_air_uniq_process_init();
+    else {
+            if !WorkModule::is_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_IGNORE_2ND_MOTION) {
+                if ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_JUMP) {
+                    MotionModule::add_motion_2nd(fighter.module_accessor, Hash40::new_raw(motion_kind), frame, 1.0, false, 1.0);
+                    MotionModule::set_weight(fighter.module_accessor, 1.0, true);
+                }
+            }
+            if ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_JUMP) {
+                KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_JUMP_AERIAL_MOTION_2ND);
+            }
+            else {
+                KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_MOTION_FALL);
+            }
+            fighter.sub_attack_air_uniq_process_init();
+            return L2CValue::I32(0);
+    }
+    KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_MOTION_FALL);
+    fighter.sub_attack_air_uniq_process_init();
     0.into()
 }
 #[status_script(agent = "trail", status = FIGHTER_STATUS_KIND_ATTACK_AIR, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_PRE)]
@@ -697,12 +780,8 @@ pub unsafe fn pre_attack_air(fighter: &mut L2CFighterCommon) -> L2CValue {
 pub unsafe fn main_attack_air(fighter: &mut L2CFighterCommon) -> L2CValue {
     let motion_kind = MotionModule::motion_kind(fighter.module_accessor);
     let frame = MotionModule::frame(fighter.module_accessor);
-	if motion_kind != hash40("attack_air_n") {
-    	fighter.status_AttackAir_Main();
-		0.into()
-	} else {
-		original!(fighter)
-	}
+    fighter.status_AttackAir_Main();
+	0.into()
 }
 #[status_script(agent = "trail", status = FIGHTER_STATUS_KIND_ATTACK_AIR, condition = LUA_SCRIPT_STATUS_FUNC_EXEC_STATUS)]
 pub unsafe fn exec_attack_air(fighter: &mut L2CFighterCommon) -> L2CValue {
@@ -710,17 +789,21 @@ pub unsafe fn exec_attack_air(fighter: &mut L2CFighterCommon) -> L2CValue {
     let frame = MotionModule::frame(fighter.module_accessor);
 	let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 	if [hash40("attack_air_n"), 0x0d7484f6cfu64, 0x0d0383c659u64].contains(&motion_kind) {
-    	if AttackModule::is_infliction(fighter.module_accessor, *COLLISION_KIND_MASK_ALL) && !WorkModule::is_flag(fighter.module_accessor, *FIGHTER_STATUS_WORK_ID_FLAG_RESERVE_DIVE){
+    	if AttackModule::is_infliction(fighter.module_accessor, *COLLISION_KIND_MASK_ALL) && !WorkModule::is_flag(fighter.module_accessor, *FIGHTER_STATUS_WORK_ID_FLAG_RESERVE_DIVE) && frame > 4.0{
 			let new_speed = SPEED_X[ENTRY_ID]*PostureModule::lr(fighter.module_accessor);
 			macros::SET_SPEED_EX(fighter, new_speed, 1.0, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
 		};
 		if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_TRAIL_STATUS_ATTACK_AIR_N_FLAG_CHECK_COMBO_BUTTON_ON) && WorkModule::is_flag(fighter.module_accessor, *FIGHTER_TRAIL_STATUS_ATTACK_AIR_N_FLAG_ENABLE_COMBO) && ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_ATTACK) {
 			WorkModule::off_flag(fighter.module_accessor, *FIGHTER_TRAIL_STATUS_ATTACK_AIR_N_FLAG_CHECK_COMBO_BUTTON_ON);
 			if motion_kind == 0x0d7484f6cfu64 {
-				MotionModule::change_motion(fighter.module_accessor, Hash40::new_raw(0x0d0383c659), 0.0, 1.0, false, 0.0, false, false);
+				MotionModule::enable_remove_2nd_change_motion(fighter.module_accessor, false);
+				MotionModule::change_motion(fighter.module_accessor, Hash40::new_raw(0x0d0383c659), -1.0, 1.0, false, 0.0, false, false);
+				MotionModule::enable_remove_2nd_change_motion(fighter.module_accessor, true);
 			};
 			if motion_kind == hash40("attack_air_n") {
-				MotionModule::change_motion(fighter.module_accessor, Hash40::new_raw(0x0d7484f6cf), 0.0, 1.0, false, 0.0, false, false);
+				MotionModule::enable_remove_2nd_change_motion(fighter.module_accessor, false);
+				MotionModule::change_motion(fighter.module_accessor, Hash40::new_raw(0x0d7484f6cf), -1.0, 1.0, false, 0.0, false, false);
+				MotionModule::enable_remove_2nd_change_motion(fighter.module_accessor, true);
 			};
 		};
 	};
@@ -752,5 +835,5 @@ pub fn install() {
 		sora_special_input_snd
     );
     smashline::install_agent_frame_callbacks!(sora);
-	install_status_scripts!(fair_init, init_attack_air, pre_attack_air, main_attack_air, exec_attack_air);
+	install_status_scripts!(fair_init, init_attack_air, pre_attack_air, exec_attack_air);
 }
