@@ -470,6 +470,7 @@ unsafe fn sora_downb_start_snd(fighter: &mut L2CAgentBase) {
     acmd!(lua_state, {
     });
 }
+
 #[acmd_script(
     agent = "trail",
     scripts =  ["game_speciallwstart", "game_specialairlwstart"],
@@ -707,16 +708,19 @@ pub unsafe fn main_attack_air(fighter: &mut L2CFighterCommon) -> L2CValue {
 pub unsafe fn exec_attack_air(fighter: &mut L2CFighterCommon) -> L2CValue {
     let motion_kind = MotionModule::motion_kind(fighter.module_accessor);
     let frame = MotionModule::frame(fighter.module_accessor);
+	let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 	if [hash40("attack_air_n"), 0x0d7484f6cfu64, 0x0d0383c659u64].contains(&motion_kind) {
-    	if AttackModule::is_infliction(fighter.module_accessor, *COLLISION_KIND_MASK_ALL) {
-			macros::SET_SPEED_EX(fighter, 1.0, 1.0, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+    	if AttackModule::is_infliction(fighter.module_accessor, *COLLISION_KIND_MASK_ALL) && !WorkModule::is_flag(fighter.module_accessor, *FIGHTER_STATUS_WORK_ID_FLAG_RESERVE_DIVE){
+			let new_speed = SPEED_X[ENTRY_ID]*PostureModule::lr(fighter.module_accessor);
+			macros::SET_SPEED_EX(fighter, new_speed, 1.0, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
 		};
-		if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_TRAIL_STATUS_ATTACK_AIR_N_FLAG_ENABLE_COMBO) && ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_ATTACK) {
+		if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_TRAIL_STATUS_ATTACK_AIR_N_FLAG_CHECK_COMBO_BUTTON_ON) && WorkModule::is_flag(fighter.module_accessor, *FIGHTER_TRAIL_STATUS_ATTACK_AIR_N_FLAG_ENABLE_COMBO) && ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_ATTACK) {
+			WorkModule::off_flag(fighter.module_accessor, *FIGHTER_TRAIL_STATUS_ATTACK_AIR_N_FLAG_CHECK_COMBO_BUTTON_ON);
+			if motion_kind == 0x0d7484f6cfu64 {
+				MotionModule::change_motion(fighter.module_accessor, Hash40::new_raw(0x0d0383c659), 0.0, 1.0, false, 0.0, false, false);
+			};
 			if motion_kind == hash40("attack_air_n") {
 				MotionModule::change_motion(fighter.module_accessor, Hash40::new_raw(0x0d7484f6cf), 0.0, 1.0, false, 0.0, false, false);
-			};
-			if motion_kind == 0x0d7484f6cfu64 {
-				MotionModule::change_motion(fighter.module_accessor, Hash40::new_raw(0x0d0383c659), -1.0, 1.0, false, 0.0, false, false);
 			};
 		};
 	};
