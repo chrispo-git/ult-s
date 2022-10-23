@@ -713,6 +713,7 @@ unsafe fn fair_init(fighter: &mut L2CFighterCommon) -> L2CValue {
 pub unsafe fn init_attack_air(fighter: &mut L2CFighterCommon) -> L2CValue {
     let motion_kind = MotionModule::motion_kind(fighter.module_accessor);
     let frame = MotionModule::frame(fighter.module_accessor);
+	let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 
     fighter.sub_attack_air_kind();
     if motion_kind != hash40("jump_aerial_f") {
@@ -728,6 +729,10 @@ pub unsafe fn init_attack_air(fighter: &mut L2CFighterCommon) -> L2CValue {
                 }
                 else {
                     KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_MOTION_FALL);
+					if SPEED_Y[ENTRY_ID] > 2.5 {
+						let new_speed = SPEED_X[ENTRY_ID]*PostureModule::lr(fighter.module_accessor);
+						macros::SET_SPEED_EX(fighter, new_speed, 3.0, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+					};
                 }
                 fighter.sub_attack_air_uniq_process_init();
                 return L2CValue::I32(0);
@@ -745,6 +750,10 @@ pub unsafe fn init_attack_air(fighter: &mut L2CFighterCommon) -> L2CValue {
             }
             else {
                 KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_MOTION_FALL);
+				if SPEED_Y[ENTRY_ID] > 3.0 {
+					let new_speed = SPEED_X[ENTRY_ID]*PostureModule::lr(fighter.module_accessor);
+					macros::SET_SPEED_EX(fighter, new_speed, 3.0, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+				};
             }
             fighter.sub_attack_air_uniq_process_init();
             return L2CValue::I32(0);
