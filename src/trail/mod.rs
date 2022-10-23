@@ -717,7 +717,6 @@ pub unsafe fn init_attack_air(fighter: &mut L2CFighterCommon) -> L2CValue {
     fighter.sub_attack_air_kind();
     if motion_kind != hash40("jump_aerial_f") {
         if motion_kind == hash40("jump_aerial_b"){
-            if MotionModule::motion_kind(fighter.module_accessor) != 0xd40042152 as u64 {
                 if !WorkModule::is_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_IGNORE_2ND_MOTION) {
                     if ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_JUMP) {
                         MotionModule::add_motion_2nd(fighter.module_accessor, Hash40::new_raw(motion_kind), frame, 1.0, false, 1.0);
@@ -732,10 +731,6 @@ pub unsafe fn init_attack_air(fighter: &mut L2CFighterCommon) -> L2CValue {
                 }
                 fighter.sub_attack_air_uniq_process_init();
                 return L2CValue::I32(0);
-            }
-            KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_MOTION_FALL);
-            fighter.sub_attack_air_uniq_process_init();
-            return L2CValue::I32(0);
         }
     }
     else {
