@@ -1,4 +1,4 @@
-name: rust_build
+name: rust_build_small
 on: 
   push:
     branches:
