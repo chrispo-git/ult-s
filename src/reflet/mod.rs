@@ -18,15 +18,16 @@ static mut DMG_ADD : f32 = 1.5;
 //Float Stuff
 static mut FLOAT : [i32; 8] = [0; 8]; //Logs Float Time
 static mut START_FLOAT : [bool; 8] = [false; 8];
+static mut JUMPSQUAT_FLOAT : [bool; 8] = [false; 8];
 static mut CHECK_FLOAT : [i32; 8] = [0; 8];
 static mut CHECK_FLOAT_MAX : i32 = 15; //Frames where jump needs to be held to start floating
 static mut X : [f32; 8] = [0.0; 8]; //Logs speed
 static mut Y : [f32; 8] = [0.0; 8]; //Logs speed
 static mut FLOAT_MAX : i32 = 95; //Frames this bitch can float (In frames, 60 frames = 1 second)
-static mut X_MAX : f32 = 1.375; //Max Horizontal movespeed
-static mut X_ACCEL_ADD : f32 = 0.06; //Air Accel Add
-static mut X_ACCEL_MUL : f32 = 0.12; //Air Accel Mul
-static mut Y_MAX : f32 = 0.65; //Max Vertical movespeed
+static mut X_MAX : f32 = 1.208; //Max Horizontal movespeed
+static mut X_ACCEL_ADD : f32 = 0.02; //Air Accel Add
+static mut X_ACCEL_MUL : f32 = 0.09; //Air Accel Mul
+static mut Y_MAX : f32 = 0.0; //Max Vertical movespeed
 static mut Y_ACCEL_ADD : f32 = 0.06;
 static mut Y_ACCEL_MUL : f32 = 0.06;
 #[acmd_script(
@@ -248,15 +249,31 @@ pub fn robin(fighter : &mut L2CFighterCommon) {
 						KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_FALL);
 					};
 				};
+				if status_kind == *FIGHTER_STATUS_KIND_JUMP_SQUAT {
+					if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP) && ControlModule::get_stick_y(boma) < -0.5 {
+						JUMPSQUAT_FLOAT[ENTRY_ID] = true;
+					} else {
+						JUMPSQUAT_FLOAT[ENTRY_ID] = false;
+					};
+				};
 				if situation_kind == *SITUATION_KIND_AIR && (!(*FIGHTER_STATUS_KIND_DAMAGE..*FIGHTER_STATUS_KIND_DAMAGE_FALL).contains(&status_kind) && status_kind != *FIGHTER_STATUS_KIND_FALL_SPECIAL){
 					if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP) {
 						CHECK_FLOAT[ENTRY_ID] += 1;
 					} else {
 						CHECK_FLOAT[ENTRY_ID] = 0;
 					};
-					if CHECK_FLOAT[ENTRY_ID] >= CHECK_FLOAT_MAX && FLOAT[ENTRY_ID] == 0 {
+					if (CHECK_FLOAT[ENTRY_ID] >= CHECK_FLOAT_MAX || JUMPSQUAT_FLOAT[ENTRY_ID]) && FLOAT[ENTRY_ID] == 0 {
 						START_FLOAT[ENTRY_ID] = true;
 					};
+				};
+				if status_kind == *FIGHTER_STATUS_KIND_JUMP_SQUAT {
+					if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP) && ControlModule::get_stick_y(boma) < -0.5 {
+						JUMPSQUAT_FLOAT[ENTRY_ID] = true;
+					} else {
+						JUMPSQUAT_FLOAT[ENTRY_ID] = false;
+					};
+				} else {
+					JUMPSQUAT_FLOAT[ENTRY_ID] = false;
 				};
 				if [
 					*FIGHTER_STATUS_KIND_ESCAPE_AIR, *FIGHTER_STATUS_KIND_ESCAPE_AIR_SLIDE, *FIGHTER_STATUS_KIND_SPECIAL_N, 
@@ -349,12 +366,12 @@ pub fn robin(fighter : &mut L2CFighterCommon) {
 				if START_FLOAT[ENTRY_ID] == true {
 					FLOAT[ENTRY_ID] = FLOAT_MAX;
 					START_FLOAT[ENTRY_ID] = false;
-					if status_kind == *FIGHTER_STATUS_KIND_JUMP {
+					/*if status_kind == *FIGHTER_STATUS_KIND_JUMP {
 						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL, true);
 					};
 					if status_kind == *FIGHTER_STATUS_KIND_JUMP_AERIAL {
 						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL, true);
-					};
+					};*/
 				};
 				if [*FIGHTER_REFLET_STATUS_KIND_SPECIAL_N_SHOOT, *FIGHTER_REFLET_STATUS_KIND_SPECIAL_N_HOLD, *FIGHTER_REFLET_STATUS_KIND_SPECIAL_N_TRON_START, *FIGHTER_REFLET_STATUS_KIND_SPECIAL_N_TRON_HOLD, *FIGHTER_REFLET_STATUS_KIND_SPECIAL_N_TRON_END, *FIGHTER_REFLET_STATUS_KIND_SPECIAL_N_JUMP_CANCEL, *FIGHTER_REFLET_STATUS_KIND_SPECIAL_HI_2, *FIGHTER_REFLET_STATUS_KIND_SPECIAL_HI_FAIL, *FIGHTER_STATUS_KIND_SPECIAL_S].contains(&status_kind) {
 					MotionModule::set_rate(boma, 0.75);

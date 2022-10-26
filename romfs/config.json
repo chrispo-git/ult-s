@@ -1,5 +1,29 @@
 {
 	"new-dir-files": {
+        "fighter/reflet/c00": [
+			"fighter/reflet/motion/body/c00/d02specialhi.nuanmb"
+		],
+        "fighter/reflet/c01": [
+			"fighter/reflet/motion/body/c01/d02specialhi.nuanmb"
+		],
+        "fighter/reflet/c02": [
+			"fighter/reflet/motion/body/c02/d02specialhi.nuanmb"
+		],
+        "fighter/reflet/c03": [
+			"fighter/reflet/motion/body/c03/d02specialhi.nuanmb"
+		],
+        "fighter/reflet/c04": [
+			"fighter/reflet/motion/body/c04/d02specialhi.nuanmb"
+		],
+        "fighter/reflet/c05": [
+			"fighter/reflet/motion/body/c05/d02specialhi.nuanmb"
+		],
+        "fighter/reflet/c06": [
+			"fighter/reflet/motion/body/c06/d02specialhi.nuanmb"
+		],
+        "fighter/reflet/c07": [
+			"fighter/reflet/motion/body/c07/d02specialhi.nuanmb"
+		],
         "fighter/sheik/c00": [
 			"fighter/sheik/motion/body/c00/d00specialinput.nuanmb"
 		],
