@@ -30,6 +30,7 @@ static mut X_ACCEL_MUL : f32 = 0.09; //Air Accel Mul
 static mut Y_MAX : f32 = 0.0; //Max Vertical movespeed
 static mut Y_ACCEL_ADD : f32 = 0.06;
 static mut Y_ACCEL_MUL : f32 = 0.06;
+
 #[acmd_script(
     agent = "reflet_elwind",
     script =  "game_shoot0",
