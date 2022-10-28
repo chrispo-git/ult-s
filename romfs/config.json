@@ -1,5 +1,29 @@
 {
 	"new-dir-files": {
+    "fighter/trail/c00": [
+			"fighter/trail/motion/body/c00/d00specialinput.nuanmb"
+		],
+        "fighter/trail/c01": [
+			"fighter/trail/motion/body/c01/d00specialinput.nuanmb"
+		],
+        "fighter/trail/c02": [
+			"fighter/trail/motion/body/c02/d00specialinput.nuanmb"
+		],
+        "fighter/trail/c03": [
+			"fighter/trail/motion/body/c03/d00specialinput.nuanmb"
+		],
+        "fighter/trail/c04": [
+			"fighter/trail/motion/body/c04/d00specialinput.nuanmb"
+		],
+        "fighter/trail/c05": [
+			"fighter/trail/motion/body/c05/d00specialinput.nuanmb"
+		],
+        "fighter/trail/c06": [
+			"fighter/trail/motion/body/c06/d00specialinput.nuanmb"
+		],
+        "fighter/trail/c07": [
+			"fighter/trail/motion/body/c07/d00specialinput.nuanmb"
+		],
 	"fighter/mariod/c00": [
 			"fighter/mariod/motion/body/c00/d02specialhi2.nuanmb",
 			"fighter/mariod/motion/body/c00/d02specialhilanding.nuanmb",
