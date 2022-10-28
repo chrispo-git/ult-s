@@ -40,7 +40,7 @@ pub fn ridley(fighter : &mut L2CFighterCommon) {
 			if status_kind == *FIGHTER_RIDLEY_STATUS_KIND_SPECIAL_S_FALL {
 				let speed = smash::phx::Vector3f { x: 0.05, y: -0.1, z: 0.0 };
 				if MotionModule::frame(boma) < 2.0 {
-					macros::SET_SPEED_EX(fighter, 3.0*0.8, 1.75*0.8, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+					macros::SET_SPEED_EX(fighter, 2.75*0.8, 1.75*0.8, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
 				};
 				KineticModule::add_speed(boma, &speed);
 				if MotionModule::frame(boma) > 27.0 || ControlModule::check_button_on_trriger(boma, *CONTROL_PAD_BUTTON_SPECIAL) {
@@ -203,8 +203,8 @@ unsafe fn ridley_sideb_end(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
 		if(is_excute){
-			ATTACK_ABS(Kind=FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, ID=0, Damage=7.0, Angle=75, KBG=75, FKB=0, BKB=70, Hitlag=0.0, Unk=1.0, FacingRestrict=ATTACK_LR_CHECK_F, Unk=0.0, Unk=true, Effect=hash40("collision_attr_sting"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_THROW)
-			ATTACK_ABS(Kind=FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, ID=0, Damage=3.0, Angle=75, KBG=75, FKB=0, BKB=70, Hitlag=0.0, Unk=1.0, FacingRestrict=ATTACK_LR_CHECK_F, Unk=0.0, Unk=true, Effect=hash40("collision_attr_sting"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_THROW)
+			ATTACK_ABS(Kind=FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, ID=0, Damage=7.0, Angle=88, KBG=75, FKB=0, BKB=70, Hitlag=0.0, Unk=1.0, FacingRestrict=ATTACK_LR_CHECK_F, Unk=0.0, Unk=true, Effect=hash40("collision_attr_sting"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_THROW)
+			ATTACK_ABS(Kind=FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, ID=0, Damage=3.0, Angle=88, KBG=75, FKB=0, BKB=70, Hitlag=0.0, Unk=1.0, FacingRestrict=ATTACK_LR_CHECK_F, Unk=0.0, Unk=true, Effect=hash40("collision_attr_sting"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_THROW)
 		}
 		frame(Frame=2)
 		if(is_excute){
