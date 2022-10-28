@@ -918,10 +918,7 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
       <float hash="jump_y">32.69</float>
       <float hash="jump_aerial_y">32.69</float>
       <float hash="damage_fly_top_air_accel_y">0.076608</float>
-      <float hash="landing_attack_air_frame_n">10</float>
-      <float hash="landing_attack_air_frame_f">14</float>
-      <float hash="landing_attack_air_frame_b">11</float>
-      <float hash="landing_attack_air_frame_hi">10</float>
+      <float hash="landing_attack_air_frame_b">10</float>
       <float hash="landing_attack_air_frame_lw">21</float>
       <float hash="landing_frame">4</float>
       <int hash="jump_squat_frame">4</int>
