@@ -1,6 +1,6 @@
 {
 	"new-dir-files": {
-        "fighter/trail/c00": [
+    "fighter/trail/c00": [
 			"fighter/trail/motion/body/c00/d00specialinput.nuanmb"
 		],
         "fighter/trail/c01": [
@@ -23,6 +23,46 @@
 		],
         "fighter/trail/c07": [
 			"fighter/trail/motion/body/c07/d00specialinput.nuanmb"
+		],
+	"fighter/mariod/c00": [
+			"fighter/mariod/motion/body/c00/d02specialhi2.nuanmb",
+			"fighter/mariod/motion/body/c00/d02specialhilanding.nuanmb",
+			"fighter/mariod/motion/body/c00/d00specialinput.nuanmb"
+		],
+	"fighter/mariod/c01": [
+			"fighter/mariod/motion/body/c01/d02specialhi2.nuanmb",
+			"fighter/mariod/motion/body/c01/d02specialhilanding.nuanmb",
+			"fighter/mariod/motion/body/c01/d00specialinput.nuanmb"
+		],
+	"fighter/mariod/c02": [
+			"fighter/mariod/motion/body/c02/d02specialhi2.nuanmb",
+			"fighter/mariod/motion/body/c02/d02specialhilanding.nuanmb",
+			"fighter/mariod/motion/body/c02/d00specialinput.nuanmb"
+		],
+	"fighter/mariod/c03": [
+			"fighter/mariod/motion/body/c03/d02specialhi2.nuanmb",
+			"fighter/mariod/motion/body/c03/d02specialhilanding.nuanmb",
+			"fighter/mariod/motion/body/c03/d00specialinput.nuanmb"
+		],
+	"fighter/mariod/c04": [
+			"fighter/mariod/motion/body/c04/d02specialhi2.nuanmb",
+			"fighter/mariod/motion/body/c04/d02specialhilanding.nuanmb",
+			"fighter/mariod/motion/body/c04/d00specialinput.nuanmb"
+		],
+	"fighter/mariod/c05": [
+			"fighter/mariod/motion/body/c05/d02specialhi2.nuanmb",
+			"fighter/mariod/motion/body/c05/d02specialhilanding.nuanmb",
+			"fighter/mariod/motion/body/c05/d00specialinput.nuanmb"
+		],
+	"fighter/mariod/c06": [
+			"fighter/mariod/motion/body/c06/d02specialhi2.nuanmb",
+			"fighter/mariod/motion/body/c06/d02specialhilanding.nuanmb",
+			"fighter/mariod/motion/body/c06/d00specialinput.nuanmb"
+		],
+	"fighter/mariod/c07": [
+			"fighter/mariod/motion/body/c07/d02specialhi2.nuanmb",
+			"fighter/mariod/motion/body/c07/d02specialhilanding.nuanmb",
+			"fighter/mariod/motion/body/c07/d00specialinput.nuanmb"
 		],
         "fighter/sheik/c00": [
 			"fighter/sheik/motion/body/c00/d00specialinput.nuanmb"

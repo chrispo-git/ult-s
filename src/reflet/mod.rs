@@ -29,9 +29,10 @@ static mut X_ACCEL_MUL : f32 = 0.12; //Air Accel Mul
 static mut Y_MAX : f32 = 0.65; //Max Vertical movespeed
 static mut Y_ACCEL_ADD : f32 = 0.06;
 static mut Y_ACCEL_MUL : f32 = 0.06;
+
 #[acmd_script(
     agent = "reflet_elwind",
-    script =  "shoot0",
+    script =  "game_shoot0",
     category = ACMD_GAME,
 	low_priority)]
 unsafe fn robin_elwind(fighter: &mut L2CAgentBase) {

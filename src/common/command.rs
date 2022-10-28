@@ -64,7 +64,7 @@ pub fn once_per_fighter_frame(fighter : &mut L2CFighterCommon) {
 }
 //Edge Cancel List
 pub(crate) fn can_charge(fighter_kind : i32) -> bool {
-	let input_list = [ *FIGHTER_KIND_MARIO, *FIGHTER_KIND_MARIOD, *FIGHTER_KIND_JACK, *FIGHTER_KIND_CAPTAIN, *FIGHTER_KIND_PACKUN, *FIGHTER_KIND_LINK];
+	let input_list = [ *FIGHTER_KIND_MARIO, *FIGHTER_KIND_JACK, *FIGHTER_KIND_CAPTAIN, *FIGHTER_KIND_PACKUN, *FIGHTER_KIND_LINK];
 	if input_list.contains(&fighter_kind){
 		return true
 	} else {
@@ -271,7 +271,7 @@ pub fn char_charge(fighter : &mut L2CFighterCommon) {
 					};
 				};
 			};
-			if fighter_kind == *FIGHTER_KIND_MARIOD {
+			/*if fighter_kind == *FIGHTER_KIND_MARIOD {
 				if USE_CHARGE[ENTRY_ID] == true && status_kind != *FIGHTER_STATUS_KIND_SPECIAL_HI {
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_SPECIAL_HI, true);
 				};
@@ -290,7 +290,7 @@ pub fn char_charge(fighter : &mut L2CFighterCommon) {
 							USE_CHARGE[ENTRY_ID] = false;
 						};
 				};
-			};
+			};*/
 			if fighter_kind == *FIGHTER_KIND_PACKUN {
 				if USE_CHARGE[ENTRY_ID] == true {
 					if situation_kind == *SITUATION_KIND_GROUND {
@@ -858,6 +858,63 @@ pub fn char_input(fighter : &mut L2CFighterCommon) {
 				};
 			};
 			*/
+			//Dr Mario
+			if fighter_kind == *FIGHTER_KIND_MARIOD {
+				if true{
+					if INPUT_NUM[ENTRY_ID] == 0 && STICK_NUM[ENTRY_ID] == 2 {
+						INPUT_WINDOW[ENTRY_ID] = 0;
+						INPUT_START[ENTRY_ID] = true;
+						INPUT_NUM[ENTRY_ID] += 1;
+						//println!("Input 1!");
+					};
+					if INPUT_NUM[ENTRY_ID] == 1 && STICK_NUM[ENTRY_ID] == 3{
+						INPUT_NUM[ENTRY_ID] += 1;
+						//println!("Input 2!");
+					};
+					if INPUT_NUM[ENTRY_ID] == 2 && STICK_NUM[ENTRY_ID] == 6 {
+						INPUT_NUM[ENTRY_ID] += 1;
+						//println!("Input 3!");
+					};
+					if INPUT_WINDOW[ENTRY_ID] > INPUT_MAX {
+						INPUT_NUM[ENTRY_ID] = 0;
+						INPUT_START[ENTRY_ID] = false;
+						INPUT_WINDOW[ENTRY_ID] = 0;
+						//println!("Input missed!");
+					}; 
+				};
+				if INPUT_START[ENTRY_ID] == true {
+					INPUT_WINDOW[ENTRY_ID] += 1;
+				};
+				if INPUT_NUM[ENTRY_ID] == 3 && (FighterMotionModuleImpl::get_cancel_frame(boma,smash::phx::Hash40::new_raw(MotionModule::motion_kind(boma)),false) as f32 <= MotionModule::frame(boma) || MotionModule::frame(boma) < 2.0) && StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR{
+					if (ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_SPECIAL)  || ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_ATTACK)) &&  ((ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_CATCH) && ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_GUARD)) || StatusModule::situation_kind(boma) == *SITUATION_KIND_GROUND ) {
+						INPUT_WINDOW[ENTRY_ID] = 0;
+						INPUT_NUM[ENTRY_ID] += 1;
+						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_SPECIAL_HI, true);
+						//println!("Input 4!");
+					};
+				};
+				if ACTIVATE_MOTION_CHANGE[ENTRY_ID] == true {
+					MotionModule::change_motion_inherit_frame(boma, smash::phx::Hash40::new("special_input"), 0.0, 1.0, 0.0, false, false);
+					ACTIVATE_MOTION_CHANGE[ENTRY_ID] = false;
+				};
+				if INPUT_NUM[ENTRY_ID] == 4 && status_kind != *FIGHTER_STATUS_KIND_SPECIAL_HI {
+					ACTIVATE_MOTION_CHANGE[ENTRY_ID] = true;
+					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_SPECIAL_HI, true);
+					println!("Dancing Edge!");
+				};
+				if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_HI {
+					INPUT_NUM[ENTRY_ID] = 0;
+					INPUT_START[ENTRY_ID] = false;
+					INPUT_WINDOW[ENTRY_ID] = 0;
+				};
+				/*if  (StatusModule::situation_kind(boma) == *SITUATION_KIND_GROUND || StatusModule::is_situation_changed(boma)) && MotionModule::motion_kind(boma) == hash40("special_input"){
+					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_LANDING_FALL_SPECIAL, true);
+				};
+				if StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR && MotionModule::motion_kind(boma) == hash40("special_input") && MotionModule::frame(boma) >= 45.0 {
+					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL_SPECIAL, true);
+					macros::SET_SPEED_EX(fighter, 0.0, 0.0, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+				};*/
+			};
 			//Sheik
 			if fighter_kind == *FIGHTER_KIND_SHEIK {
 				if true{
