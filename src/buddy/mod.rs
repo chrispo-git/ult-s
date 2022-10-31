@@ -329,6 +329,7 @@ fn buddy_frame(fighter: &mut L2CFighterCommon) {
 		let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 		let motion_kind = MotionModule::motion_kind(boma);
 		let frame = MotionModule::frame(boma);
+		
 		if motion_kind == hash40("attack_air_lw") {
 			if AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_HIT) && !AttackModule::is_infliction(boma, *COLLISION_KIND_MASK_HIT) && frame < 50.0{
 				MotionModule::change_motion(boma, smash::phx::Hash40::new("attack_air_lw"), 51.0, 1.0, false, 0.0, false, false);
