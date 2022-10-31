@@ -26,7 +26,7 @@ jobs:
     # build the project
     - run: |
         export PATH=$PATH:/root/.cargo/bin:/opt/devkitpro/devkitA64/bin \
-        && cd scripts && python3 build_char.py ${{ github.event.pull_request.title }}
+        && cd scripts && python3 init_char_check.py ${{ github.event.pull_request.title }}
       env:
         HOME: /root
     - name: Upload plugin
