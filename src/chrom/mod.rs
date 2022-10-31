@@ -333,7 +333,7 @@ unsafe fn chrom_sideb_eff(fighter: &mut L2CAgentBase) {
 		frame(Frame=2)
 		if(is_excute){
 			EFFECT_FOLLOW(hash40("sys_attack_speedline"), hash40("top"), 0, 6.5, 0, 0, 180, 0, 2.0, true)
-			LAST_EFFECT_SET_COLOR(0.6, 0.7, 1.0)
+			LAST_EFFECT_SET_COLOR(0.60, 0.7, 1.0)
 		}
 		frame(Frame=23)
 		if(is_excute){
