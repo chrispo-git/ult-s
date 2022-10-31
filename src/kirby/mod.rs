@@ -453,7 +453,7 @@ unsafe fn kirby_bair_eff(fighter: &mut L2CAgentBase) {
 		frame(Frames=10)
 		if(is_excute){
 			EFFECT_FOLLOW_FLIP(hash40("kirby_onigoroshi_wind"), hash40("kirby_onigoroshi_wind"), hash40("top"), 1, 0, 0, 13, 180, 180, 1.5, false, EF_FLIP_YZ)
-			LAST_EFFECT_SET_COLOR(0.64, 1.0, 1.0)
+			LAST_EFFECT_SET_COLOR(0.642, 1.0, 1.0)
 		}
 	});
 }	
