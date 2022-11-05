@@ -367,6 +367,7 @@ unsafe fn d3_special_input_eff(fighter: &mut L2CAgentBase) {
 		frame(Frame=26)
 		if(is_excute){
 			LANDING_EFFECT(hash40("sys_landing_smoke"), hash40("top"), 10, 0, 0, 0, 0, 0, 1.2, 0, 0, 0, 0, 0, 0, false)
+			QUAKE(CAMERA_QUAKE_KIND_M)
 		}
     });
 }
