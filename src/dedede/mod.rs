@@ -443,7 +443,9 @@ pub fn install() {
 		d3_da_snd,
 		d3_special_input,
 		d3_special_input_eff,
-		d3_special_input_snd
+		d3_special_input_snd,
+		d3_dtilt,
+		d3_dtilt_eff
     );
 	smashline::install_agent_frames!(dedede_frame);
 }
