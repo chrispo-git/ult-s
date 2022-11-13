@@ -480,6 +480,9 @@ pub fn faf_change_master(fighter : &mut L2CFighterCommon) {
 			if motion_kind == hash40("attack_lw3") && frame >= 25.0 {
 				CancelModule::enable_cancel(boma);
 			};
+			if motion_kind == hash40("attack_hi3") && frame >= 34.0 {
+				CancelModule::enable_cancel(boma);
+			};
 			if [hash40("attack_hi4")].contains(&motion_kind) && frame < 2.0 {
 				MotionModule::change_motion(boma, Hash40::new("attack_hi4"), 5.0, 1.0, false, 0.0, false, false);
 			};
