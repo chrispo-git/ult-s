@@ -617,7 +617,7 @@ pub fn install() {
 		isa_neutralb_hit,
 		isa_dair,
 		isa_dair_land,
-		sa_grab,
+		isa_grab,
 		isa_pivotgrab,
 		isa_dashgrab
     );
