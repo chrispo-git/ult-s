@@ -10,94 +10,7 @@ use crate::util::CAN_ATTACK_AIR;
 
 static mut ISA_RESHOOT_TIME: [i32; 8] = [0; 8];
 
-#[acmd_script(
-    agent = "shizue",
-    script =  "game_catch",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn isa_grab(fighter: &mut L2CAgentBase) {
-    let lua_state = fighter.lua_state_agent;
-    acmd!(lua_state, {
-		frame(Frame=1)
-		FT_MOTION_RATE(FSM=0.7)
-		wait(Frames=10)
-		FT_MOTION_RATE(FSM=1)
-		frame(Frame=13)
-		if(is_excute){
-			GrabModule::set_rebound(CanCatchRebound=true)
-		}
-		frame(Frame=14)
-		if(is_excute){
-			CATCH(ID=0, Bone=hash40("top"), Size=5.0, X=0.0, Y=5.5, Z=4.0, X2=0.0, Y2=5.5, Z2=14.0, Status=FIGHTER_STATUS_KIND_CAPTURE_PULLED, Ground_or_Air=COLLISION_SITUATION_MASK_G)
-			CATCH(ID=1, Bone=hash40("top"), Size=2.5, X=0.0, Y=5.5, Z=1.5, X2=0.0, Y2=5.5, Z2=16.5, Status=FIGHTER_STATUS_KIND_CAPTURE_PULLED, Ground_or_Air=COLLISION_SITUATION_MASK_A)
-		}
-		rust{
-			macros::game_CaptureCutCommon(fighter);
-		}
-		wait(Frames=3)
-		if(is_excute){
-			sv_module_access::grab(MA_MSC_CMD_GRAB_CLEAR_ALL)
-			WorkModule::on_flag(Flag=FIGHTER_STATUS_CATCH_FLAG_CATCH_WAIT)
-			GrabModule::set_rebound(CanCatchRebound=false)
-		}
-    });
-}	
-#[acmd_script(
-    agent = "shizue",
-    script =  "game_catchdash",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn isa_dashgrab(fighter: &mut L2CAgentBase) {
-    let lua_state = fighter.lua_state_agent;
-    acmd!(lua_state, {
-		frame(Frame=15)
-		if(is_excute){
-			GrabModule::set_rebound(CanCatchRebound=true)
-		}
-		frame(Frame=16)
-		if(is_excute){
-			CATCH(ID=0, Bone=hash40("top"), Size=4.0, X=0.0, Y=5.6, Z=4.0, X2=0.0, Y2=5.5, Z2=13.0, Status=FIGHTER_STATUS_KIND_CAPTURE_PULLED, Ground_or_Air=COLLISION_SITUATION_MASK_G)
-			CATCH(ID=1, Bone=hash40("top"), Size=2.0, X=0.0, Y=5.5, Z=2.0, X2=0.0, Y2=5.5, Z2=15.0, Status=FIGHTER_STATUS_KIND_CAPTURE_PULLED, Ground_or_Air=COLLISION_SITUATION_MASK_A)
-		}
-		rust{
-			macros::game_CaptureCutCommon(fighter);
-		}
-		wait(Frames=3)
-		if(is_excute){
-			sv_module_access::grab(MA_MSC_CMD_GRAB_CLEAR_ALL)
-			WorkModule::on_flag(Flag=FIGHTER_STATUS_CATCH_FLAG_CATCH_WAIT)
-			GrabModule::set_rebound(CanCatchRebound=false)
-		}
-    });
-}		
-#[acmd_script(
-    agent = "shizue",
-    script =  "game_catchturn",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn isa_pivotgrab(fighter: &mut L2CAgentBase) {
-    let lua_state = fighter.lua_state_agent;
-    acmd!(lua_state, {
-		frame(Frame=16)
-		if(is_excute){
-			GrabModule::set_rebound(CanCatchRebound=true)
-		}
-		frame(Frame=17)
-		if(is_excute){
-			CATCH(ID=0, Bone=hash40("top"), Size=5.0, X=0.0, Y=5.5, Z=-5.0, X2=0.0, Y2=5.5, Z2=-14.0, Status=FIGHTER_STATUS_KIND_CAPTURE_PULLED, Ground_or_Air=COLLISION_SITUATION_MASK_G)
-			CATCH(ID=1, Bone=hash40("top"), Size=2.5, X=0.0, Y=5.5, Z=-2.5, X2=0.0, Y2=5.5, Z2=-16.5, Status=FIGHTER_STATUS_KIND_CAPTURE_PULLED, Ground_or_Air=COLLISION_SITUATION_MASK_A)
-		}
-		rust{
-			macros::game_CaptureCutCommon(fighter);
-		}
-		wait(Frames=3)
-		if(is_excute){
-			sv_module_access::grab(MA_MSC_CMD_GRAB_CLEAR_ALL)
-			WorkModule::on_flag(Flag=FIGHTER_STATUS_CATCH_FLAG_CATCH_WAIT)
-			GrabModule::set_rebound(CanCatchRebound=false)
-		}
-    });
-}		
+
 
 #[acmd_script(
     agent = "shizue",
@@ -616,10 +529,7 @@ pub fn install() {
 		isa_neutralb_snd,
 		isa_neutralb_hit,
 		isa_dair,
-		isa_dair_land,
-		isa_grab,
-		isa_pivotgrab,
-		isa_dashgrab
+		isa_dair_land
     );
     smashline::install_agent_frames!(
         shizue_frame
