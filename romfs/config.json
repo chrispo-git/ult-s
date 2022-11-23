@@ -278,49 +278,89 @@
 			"fighter/lucina/motion/body/c00/c05attackairhi2.nuanmb",
 			"fighter/lucina/motion/body/c00/c05attackairn2.nuanmb",
 			"fighter/lucina/motion/body/c00/c05attackairf2.nuanmb",
-			"fighter/lucina/motion/body/c00/c05attackairb2.nuanmb"
+			"fighter/lucina/motion/body/c00/c05attackairb2.nuanmb",
+			"fighter/lucina/motion/body/c00/d01specials.nuanmb",
+			"fighter/lucina/motion/body/c00/d01specialairs.nuanmb",
+			"fighter/lucina/motion/body/c00/d02specialhi1.nuanmb",
+			"fighter/lucina/motion/body/c00/d02specialhi2.nuanmb",
+			"fighter/lucina/motion/body/c00/d02specialhi3.nuanmb"
 		],
         "fighter/lucina/c01": [
 			"fighter/lucina/motion/body/c01/c05attackairhi2.nuanmb",
 			"fighter/lucina/motion/body/c01/c05attackairf2.nuanmb",
 			"fighter/lucina/motion/body/c01/c05attackairn2.nuanmb",
-			"fighter/lucina/motion/body/c01/c05attackairb2.nuanmb"
+			"fighter/lucina/motion/body/c01/c05attackairb2.nuanmb",
+			"fighter/lucina/motion/body/c01/d01specials.nuanmb",
+			"fighter/lucina/motion/body/c01/d01specialairs.nuanmb",
+			"fighter/lucina/motion/body/c01/d02specialhi1.nuanmb",
+			"fighter/lucina/motion/body/c01/d02specialhi2.nuanmb",
+			"fighter/lucina/motion/body/c01/d02specialhi3.nuanmb"
 		],
         "fighter/lucina/c02": [
 			"fighter/lucina/motion/body/c02/c05attackairhi2.nuanmb",
 			"fighter/lucina/motion/body/c02/c05attackairf2.nuanmb",
 			"fighter/lucina/motion/body/c02/c05attackairn2.nuanmb",
-			"fighter/lucina/motion/body/c02/c05attackairb2.nuanmb"
+			"fighter/lucina/motion/body/c02/c05attackairb2.nuanmb",
+			"fighter/lucina/motion/body/c02/d01specials.nuanmb",
+			"fighter/lucina/motion/body/c02/d01specialairs.nuanmb",
+			"fighter/lucina/motion/body/c02/d02specialhi1.nuanmb",
+			"fighter/lucina/motion/body/c02/d02specialhi2.nuanmb",
+			"fighter/lucina/motion/body/c02/d02specialhi3.nuanmb"
 		],
         "fighter/lucina/c03": [
 			"fighter/lucina/motion/body/c03/c05attackairhi2.nuanmb",
 			"fighter/lucina/motion/body/c03/c05attackairf2.nuanmb",
 			"fighter/lucina/motion/body/c03/c05attackairn2.nuanmb",
-			"fighter/lucina/motion/body/c03/c05attackairb2.nuanmb"
+			"fighter/lucina/motion/body/c03/c05attackairb2.nuanmb",
+			"fighter/lucina/motion/body/c03/d01specials.nuanmb",
+			"fighter/lucina/motion/body/c03/d01specialairs.nuanmb",
+			"fighter/lucina/motion/body/c03/d02specialhi1.nuanmb",
+			"fighter/lucina/motion/body/c03/d02specialhi2.nuanmb",
+			"fighter/lucina/motion/body/c03/d02specialhi3.nuanmb"
 		],
         "fighter/lucina/c04": [
 			"fighter/lucina/motion/body/c04/c05attackairhi2.nuanmb",
 			"fighter/lucina/motion/body/c04/c05attackairf2.nuanmb",
 			"fighter/lucina/motion/body/c04/c05attackairn2.nuanmb",
-			"fighter/lucina/motion/body/c04/c05attackairb2.nuanmb"
+			"fighter/lucina/motion/body/c04/c05attackairb2.nuanmb",
+			"fighter/lucina/motion/body/c04/d01specials.nuanmb",
+			"fighter/lucina/motion/body/c04/d01specialairs.nuanmb",
+			"fighter/lucina/motion/body/c04/d02specialhi1.nuanmb",
+			"fighter/lucina/motion/body/c04/d02specialhi2.nuanmb",
+			"fighter/lucina/motion/body/c04/d02specialhi3.nuanmb"
 		],
         "fighter/lucina/c05": [
 			"fighter/lucina/motion/body/c05/c05attackairhi2.nuanmb",
 			"fighter/lucina/motion/body/c05/c05attackairf2.nuanmb",
 			"fighter/lucina/motion/body/c05/c05attackairn2.nuanmb",
-			"fighter/lucina/motion/body/c05/c05attackairb2.nuanmb"
+			"fighter/lucina/motion/body/c05/c05attackairb2.nuanmb",
+			"fighter/lucina/motion/body/c05/d01specials.nuanmb",
+			"fighter/lucina/motion/body/c05/d01specialairs.nuanmb",
+			"fighter/lucina/motion/body/c05/d02specialhi1.nuanmb",
+			"fighter/lucina/motion/body/c05/d02specialhi2.nuanmb",
+			"fighter/lucina/motion/body/c05/d02specialhi3.nuanmb"
 		],
         "fighter/lucina/c06": [
 			"fighter/lucina/motion/body/c06/c05attackairhi2.nuanmb",
 			"fighter/lucina/motion/body/c06/c05attackairf2.nuanmb",
 			"fighter/lucina/motion/body/c06/c05attackairn2.nuanmb",
-			"fighter/lucina/motion/body/c06/c05attackairb2.nuanmb"
+			"fighter/lucina/motion/body/c06/c05attackairb2.nuanmb",
+			"fighter/lucina/motion/body/c06/d01specials.nuanmb",
+			"fighter/lucina/motion/body/c06/d01specialairs.nuanmb",
+			"fighter/lucina/motion/body/c06/d02specialhi1.nuanmb",
+			"fighter/lucina/motion/body/c06/d02specialhi2.nuanmb",
+			"fighter/lucina/motion/body/c06/d02specialhi3.nuanmb"
 		],
         "fighter/lucina/c07": [
 			"fighter/lucina/motion/body/c07/c05attackairhi2.nuanmb",
 			"fighter/lucina/motion/body/c07/c05attackairf2.nuanmb",
 			"fighter/lucina/motion/body/c07/c05attackairn2.nuanmb",
-			"fighter/lucina/motion/body/c07/c05attackairb2.nuanmb"
+			"fighter/lucina/motion/body/c07/c05attackairb2.nuanmb",
+			"fighter/lucina/motion/body/c07/d01specials.nuanmb",
+			"fighter/lucina/motion/body/c07/d01specialairs.nuanmb",
+			"fighter/lucina/motion/body/c07/d02specialhi1.nuanmb",
+			"fighter/lucina/motion/body/c07/d02specialhi2.nuanmb",
+			"fighter/lucina/motion/body/c07/d02specialhi3.nuanmb"
 		],
         "fighter/kirby/c00": [
 			"fighter/kirby/model/finalcutter/c00/def_ultrasword_001_col.nutexb",
