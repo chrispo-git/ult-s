@@ -77,8 +77,11 @@ unsafe fn captain_uair_eff(fighter: &mut L2CAgentBase) {
     acmd!(lua_state, {
 		frame(Frame=7)
 		if(is_excute){
-			EFFECT_FOLLOW_ALPHA(hash40("sys_attack_arc_d"), hash40("top"), 0, 14, 3, -4, 80, 96, 1.2, true, 1.0)
-			LAST_EFFECT_SET_RATE(0.8)
+			EFFECT_FOLLOW(hash40("sys_attack_arc_d"), hash40("top"), 0, 16, -0.5, 0, 30, 90, 1.3, true, 1.0)
+		}
+		frame(Frame=11)
+		if(is_excute){
+			EFFECT_FOLLOW(hash40("sys_attack_arc_d"), hash40("top"), 0, 16, -0.5, 0, 110, 90, 1.2, true, 1.5)
 		}
     });
 }	
