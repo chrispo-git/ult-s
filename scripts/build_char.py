@@ -146,12 +146,12 @@ def copytree(src, dst, symlinks=False, ignore=None):
         else:
             shutil.copy2(s, d)
 
-stream = os.popen('cargo skyline build')
+stream = os.popen('cargo skyline build --release')
 output = stream.read()
 output
 os.chdir('../')
 print(os.getcwd())
-old = r"target\aarch64-skyline-switch\debug\libplugin.nro"
+old = r"target\aarch64-skyline-switch\release\libplugin.nro"
 new = r"releases/ultimate/mods/Ultimate S Arcropolis (plugin, singular character)"
 old_rename = r"libplugin.nro"
 rename = r"plugin.nro"
@@ -191,8 +191,8 @@ if os.path.exists(r'target'):
     if os.path.exists(r'aarch64-skyline-switch'):
         os.chdir(r'aarch64-skyline-switch')
         print(os.listdir())
-        if os.path.exists(r'debug'):
-            os.chdir(r'debug')
+        if os.path.exists(r'release'):
+            os.chdir(r'release')
             #print(os.listdir())
             old = os.path.join(os.path.abspath(os.getcwd()), r'libplugin.nro')
             os.chdir('../')
@@ -212,6 +212,7 @@ if os.path.exists(r'target'):
             if os.path.exists(r'romfs'):
                 print("Starting copy")
                 copytree(r'romfs/fighter/common', r'releases/ultimate/mods/Ultimate S Arcropolis (plugin, singular character)/fighter/common')
+                shutil.copy(r'romfs/config.json', r'releases/ultimate/mods/Ultimate S Arcropolis (plugin, singular character)/config.json')
                 if os.path.exists(os.path.join(r'romfs/fighter', output_folder)):
                     copytree(os.path.join(r'romfs/fighter', output_folder), os.path.join(r'releases/ultimate/mods/Ultimate S Arcropolis (plugin, singular character)/fighter', output_folder) )
                 else:
