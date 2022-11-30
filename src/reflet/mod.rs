@@ -413,6 +413,9 @@ pub fn robin(fighter : &mut L2CFighterCommon) {
 					};
 					if (CHECK_FLOAT[ENTRY_ID] >= CHECK_FLOAT_MAX || JUMPSQUAT_FLOAT[ENTRY_ID]) && FLOAT[ENTRY_ID] == 0 {
 						START_FLOAT[ENTRY_ID] = true;
+						if status_kind == *FIGHTER_STATUS_KIND_JUMP {
+							StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL, true);
+						};
 					};
 				};
 				if status_kind == *FIGHTER_STATUS_KIND_JUMP_SQUAT {
