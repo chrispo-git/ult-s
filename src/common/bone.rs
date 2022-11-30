@@ -80,7 +80,7 @@ pub fn bone_rot(fighter : &mut L2CFighterCommon) {
 		bone_const(boma, *FIGHTER_KIND_MASTER, hash40("special_air_s_front_dash"), hash40("footr"), 0.0, 180.0, 0.0, 0.0, 0.0, 0.0, 55.0, 55.0);
 		
 		//Falco 
-		bone_const(boma, *FIGHTER_KIND_FALCO, hash40("throw_hi"), hash40("handr"), 13.0, 37.0, 0.0, 0.0, stick_x*20.0 -15.0, stick_x*20.0 -15.0, 0.0, 0.0);
+		bone_const(boma, *FIGHTER_KIND_FALCO, hash40("throw_hi"), hash40("handr"), 13.0, 37.0, 0.0, 0.0, stick_x*20.0, stick_x*20.0, 0.0, 0.0);
 		
 		//Snake Fsmash angle up
 		bone_const(boma, *FIGHTER_KIND_SNAKE, hash40("attack_s4_s"), hash40("handr"), 21.0, 25.0, 0.0, -30.0, 0.0, 0.0, 0.0, 0.0);
