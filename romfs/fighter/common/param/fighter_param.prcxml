@@ -530,7 +530,8 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
       <float hash="dive_speed_y">2.72</float>
       <float hash="weight">100</float>
       <float hash="landing_attack_air_frame_n">6</float>
-      <float hash="landing_attack_air_frame_b">6</float>
+      <float hash="landing_attack_air_frame_f">10</float>
+      <float hash="landing_attack_air_frame_b">13</float>
       <float hash="landing_frame">4</float>
       <float hash="scale">1.15</float>
     </struct>
@@ -918,10 +919,7 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
       <float hash="jump_y">32.69</float>
       <float hash="jump_aerial_y">32.69</float>
       <float hash="damage_fly_top_air_accel_y">0.076608</float>
-      <float hash="landing_attack_air_frame_n">10</float>
-      <float hash="landing_attack_air_frame_f">14</float>
-      <float hash="landing_attack_air_frame_b">11</float>
-      <float hash="landing_attack_air_frame_hi">10</float>
+      <float hash="landing_attack_air_frame_b">10</float>
       <float hash="landing_attack_air_frame_lw">21</float>
       <float hash="landing_frame">4</float>
       <int hash="jump_squat_frame">4</int>
@@ -965,7 +963,10 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
     </struct>
     <!--RIDLEY-->
     <struct index="62">
+      <float hash="dash_speed">1.97</float>
       <float hash="jump_speed_x_mul">1</float>
+      <float hash="landing_attack_air_frame_f">13</float>
+      <float hash="landing_attack_air_frame_hi">11</float>
       <float hash="landing_frame">4</float>
     </struct>
     <!--SIMON-->
@@ -1103,9 +1104,9 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
       <float hash="air_speed_x_stable">1.175</float>
       <float hash="air_speed_y_stable">1.75</float>
       <float hash="dive_speed_y">2.8</float>
-      <float hash="landing_attack_air_frame_n">11</float>
+      <float hash="landing_attack_air_frame_n">9</float>
       <float hash="landing_attack_air_frame_f">8</float>
-      <float hash="landing_attack_air_frame_hi">12</float>
+      <float hash="landing_attack_air_frame_hi">9</float>
     </struct>
     <!--PYRA-->
     <struct index="77">
