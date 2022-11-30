@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <struct>
   <struct hash="param_private">
-    <float hash="super_special_damage">120</float>
+    <float hash="super_special_damage">110</float>
   </struct>
   <list hash="param_special_s">
     <struct index="0">
