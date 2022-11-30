@@ -212,40 +212,98 @@ unsafe fn robin_grima_upb_snd(fighter: &mut L2CAgentBase) {
 }
 #[acmd_script(
     agent = "reflet",
-    scripts =  ["game_specialn"],
+    scripts =  ["game_specialnshoot", "game_specialairnshoot"],
     category = ACMD_GAME,
 	low_priority)]
 unsafe fn robin_grima_neutralb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
-    acmd!(lua_state, {
-		frame(Frame=1)
-		FT_MOTION_RATE(FSM=1.5)
-		frame(Frame=11)
-		if(is_excute){
-			ATTACK(ID=0, Part=1, Bone=hash40("top"), Damage=8.0, Angle=50, KBG=85, FKB=0, BKB=85, Size=3.0, X=0.0, Y=12.0, Z=27.0, X2=0.0, Y2=-12.0, Z2=15.0, Hitlag=0.6, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=5, Reflectable=true, Absorbable=true, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_elec"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_ELEC, Type=ATTACK_REGION_MAGIC)
-			ATTACK(ID=1, Part=1, Bone=hash40("top"), Damage=8.0, Angle=50, KBG=85, FKB=0, BKB=85, Size=3.0, X=0.0, Y=12.0, Z=15.0, X2=0.0, Y2=-12.0, Z2=27.0, Hitlag=0.6, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=5, Reflectable=true, Absorbable=true, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_elec"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_ELEC, Type=ATTACK_REGION_MAGIC)
-		}
-		FT_MOTION_RATE(FSM=1)
-		frame(Frame=18)
-		if(is_excute){
-			AttackModule::clear_all()
-		}
-    });
+	let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+	if IS_GRIMA[ENTRY_ID] {
+		acmd!(lua_state, {
+			frame(Frame=1)
+			FT_MOTION_RATE(FSM=5)
+			wait(Frames=1)
+			FT_MOTION_RATE(FSM=1)
+			if(is_excute){
+				sv_module_access::damage(MSC=MA_MSC_DAMAGE_DAMAGE_NO_REACTION, Type=DAMAGE_NO_REACTION_MODE_DAMAGE_POWER, DamageThreshold=11)
+			}
+			frame(Frame=11)
+			if(is_excute){
+				ATTACK(ID=0, Part=1, Bone=hash40("top"), Damage=18.0, Angle=361, KBG=73, FKB=0, BKB=65, Size=10.5, X=0.0, Y=12.0, Z=19.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.6, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=true, Absorbable=true, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, ffect=hash40("collision_attr_purple"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_FIRE, Type=ATTACK_REGION_MAGIC)
+			}
+			frame(Frame=18)
+			if(is_excute){
+				sv_module_access::damage(MSC=MA_MSC_DAMAGE_DAMAGE_NO_REACTION, Type=DAMAGE_NO_REACTION_MODE_NORMAL, DamageThreshold=0)
+				AttackModule::clear_all()
+			}
+		});
+	} else {
+		acmd!(lua_state, {
+			frame(Frame=1)
+			FT_MOTION_RATE(FSM=0.7)
+			frame(Frame=11)
+			if(is_excute){
+				WorkModule::on_flag(Flag=FIGHTER_REFLET_STATUS_SPECIAL_N_SHOOT_FLAG_TRY)
+			}
+			FT_MOTION_RATE(FSM=1)
+		});
+	};
 }	
 #[acmd_script(
     agent = "reflet",
-    scripts =  ["effect_specialn"],
+    scripts =  ["effect_specialnshoot", "effect_specialairnshoot"],
     category = ACMD_EFFECT,
 	low_priority)]
 unsafe fn robin_grima_neutralb_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
-    acmd!(lua_state, {
-		frame(Frame=11)
-		if(is_excute){
-			EFFECT(hash40("sys_thunder_flash"), hash40("top"), 0, 5, 15, 0, 0, 45, 0.5, 0, 0, 0, 0, 0, 0, true)
-			EFFECT(hash40("sys_thunder_flash"), hash40("top"), 0, 5, 15, 0, 0, -45, 0.5, 0, 0, 0, 0, 0, 0, true)
-		}
-    });
+	let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+	if IS_GRIMA[ENTRY_ID] {
+		acmd!(lua_state, {
+			frame(Frame=6)
+			if(is_excute){
+				EFFECT_FOLLOW_NO_STOP(hash40("sys_flash"), hash40("havel"), -1, 1, 0, 0, 0, 0, 0.45, true)
+			}
+			frame(Frame=11)
+			if(is_excute){
+				EFFECT(0x11c5fdc327u64, hash40("top"), -0.0, 12.5, 19, 0, 0, 0, 1.5, 0, 0, 0, 0, 0, 0, true)
+				LAST_EFFECT_SET_COLOR(0.125, 0.0, 3.0)
+				QUAKE(CAMERA_QUAKE_KIND_M)
+			}
+		});
+	} else {
+		acmd!(lua_state, {
+			frame(Frame=6)
+			if(is_excute){
+				EFFECT_FOLLOW_NO_STOP(hash40("sys_flash"), hash40("havel"), -1, 1, 0, 0, 0, 0, 0.45, true)
+			}
+		});
+	};
+}	
+#[acmd_script(
+    agent = "reflet",
+    scripts =  ["sound_specialnshoot", "sound_specialairnshoot"],
+    category = ACMD_SOUND,
+	low_priority)]
+unsafe fn robin_grima_neutralb_snd(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+	let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+	if IS_GRIMA[ENTRY_ID] {
+		acmd!(lua_state, {
+			frame(Frame=10)
+			if(is_excute){
+				PLAY_SE(hash40("vc_reflet_attack07"))
+				PLAY_SE(hash40("se_reflet_smash_l01"))
+				PLAY_SE(hash40("se_common_bomb_ll"))
+			}
+		});
+	} else if !WorkModule::is_flag(fighter.module_accessor, *FIGHTER_REFLET_STATUS_SPECIAL_S_FLAG_SHOOT_OK) {
+		acmd!(lua_state, {
+			if(is_excute){
+				PLAY_SE(hash40("se_reflet_mp_empty"))
+				PLAY_SEQUENCE(hash40("seq_reflet_rnd_special_empty"))
+			}
+		});
+	};
 }	
 #[fighter_frame_callback]
 pub fn robin(fighter : &mut L2CFighterCommon) {
@@ -286,6 +344,12 @@ pub fn robin(fighter : &mut L2CFighterCommon) {
 					};
 				} else{
 					MotionModule::change_motion(boma, smash::phx::Hash40::new("special_hi3"), 0.0, 1.0, false, 0.0, false, false);
+				};
+			};
+			if IS_GRIMA[ENTRY_ID]{
+				WorkModule::set_int(boma, 0, *FIGHTER_REFLET_INSTANCE_WORK_ID_INT_SPECIAL_N_THUNDER_KIND);
+				if status_kind == *FIGHTER_REFLET_STATUS_KIND_SPECIAL_N_HOLD {
+					StatusModule::change_status_request_from_script(boma, *FIGHTER_REFLET_STATUS_KIND_SPECIAL_N_SHOOT, true);
 				};
 			};
 			/*if [hash40("special_n_start")].contains(&motion_kind) {
@@ -372,7 +436,9 @@ pub fn robin(fighter : &mut L2CFighterCommon) {
 					DMG_COUNTER[ENTRY_ID] -= 1;
 				} else {
 					DMG_COUNTER[ENTRY_ID] = DMG_COUNTER_MAX;
-					macros::FT_ADD_DAMAGE(fighter, DMG_ADD);
+					if DamageModule::damage(boma, 0) < 120.0 {
+						macros::FT_ADD_DAMAGE(fighter, DMG_ADD);
+					};
 				};
 				//Dash Speed
 				if [*FIGHTER_STATUS_KIND_DASH].contains(&status_kind) {
@@ -398,13 +464,6 @@ pub fn robin(fighter : &mut L2CFighterCommon) {
 						KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_FALL);
 					};
 				};
-				if status_kind == *FIGHTER_STATUS_KIND_JUMP_SQUAT {
-					if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP) && ControlModule::get_stick_y(boma) < -0.5 {
-						JUMPSQUAT_FLOAT[ENTRY_ID] = true;
-					} else {
-						JUMPSQUAT_FLOAT[ENTRY_ID] = false;
-					};
-				};
 				if situation_kind == *SITUATION_KIND_AIR && (!(*FIGHTER_STATUS_KIND_DAMAGE..*FIGHTER_STATUS_KIND_DAMAGE_FALL).contains(&status_kind) && status_kind != *FIGHTER_STATUS_KIND_FALL_SPECIAL){
 					if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP) {
 						CHECK_FLOAT[ENTRY_ID] += 1;
@@ -413,10 +472,10 @@ pub fn robin(fighter : &mut L2CFighterCommon) {
 					};
 					if (CHECK_FLOAT[ENTRY_ID] >= CHECK_FLOAT_MAX || JUMPSQUAT_FLOAT[ENTRY_ID]) && FLOAT[ENTRY_ID] == 0 {
 						START_FLOAT[ENTRY_ID] = true;
-						if status_kind == *FIGHTER_STATUS_KIND_JUMP {
-							StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL, true);
-						};
 					};
+				};
+				if status_kind == *FIGHTER_STATUS_KIND_JUMP && JUMPSQUAT_FLOAT[ENTRY_ID] {
+					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL, true);
 				};
 				if status_kind == *FIGHTER_STATUS_KIND_JUMP_SQUAT {
 					if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP) && ControlModule::get_stick_y(boma) < -0.5 {
@@ -549,7 +608,8 @@ pub fn install() {
 		robin_grima_upb_snd,
 		//
 		robin_grima_neutralb,
-		robin_grima_neutralb_eff
+		robin_grima_neutralb_eff,
+		robin_grima_neutralb_snd
     );
 	smashline::install_agent_frame_callbacks!(robin);
 }
