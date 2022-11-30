@@ -1,11 +1,17 @@
-use smash::hash40;
+use smash::app::sv_animcmd::*;
 use smash::phx::Hash40;
-use smash::lib::lua_const::*;
-use smash::app::*;
 use smash::app::lua_bind::*;
-use smash::lua2cpp::{L2CFighterCommon, L2CAgentBase};
+use smash::lib::lua_const::*;
+use smash::app::utility::get_kind;
+use smash::hash40;
+use smash::lua2cpp::*;
 use smashline::*;
 use smash_script::*;
+use smash::lib::{L2CValue, L2CAgent};
+use std::mem;
+use smash::app::*;
+use smash::phx::Vector3f;
+use crate::util::*;
 
 
 
@@ -305,6 +311,85 @@ unsafe fn robin_grima_neutralb_snd(fighter: &mut L2CAgentBase) {
 		});
 	};
 }	
+#[acmd_script(
+    agent = "reflet",
+    scripts =  ["game_specials", "game_specialairs"],
+    category = ACMD_GAME,
+	low_priority)]
+unsafe fn robin_grima_sideb(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+	let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+	if IS_GRIMA[ENTRY_ID] {
+		acmd!(lua_state, {
+			FT_MOTION_RATE(FSM=0.7)
+			wait(Frames=20)
+			FT_MOTION_RATE(FSM=1)
+			if(is_excute){	
+				ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=0.8, Angle=367, KBG=100, FKB=80, BKB=0, Size=6.0, X=0.0, Y=10.0, Z=14.0, X2=0.0, Y2=10.0, Z2=11.2, Hitlag=0.4, SDI=0.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=3, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_purple"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_FIRE, Type=ATTACK_REGION_PUNCH)
+			}
+			wait(Frames=20)
+			if(is_excute){	
+				AttackModule::clear_all()
+				ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=5.0, Angle=55, KBG=130, FKB=0, BKB=50, Size=6.0, X=0.0, Y=10.0, Z=14.0, X2=0.0, Y2=10.0, Z2=11.2, Hitlag=1.3, SDI=0.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_purple"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_FIRE, Type=ATTACK_REGION_PUNCH)
+			}
+			wait(Frames=2)
+			if(is_excute){	
+				AttackModule::clear_all()
+			}
+		});
+	} else {
+		acmd!(lua_state, {
+			frame(Frame=17)
+			if(is_excute){
+				WorkModule::on_flag(Flag=FIGHTER_REFLET_STATUS_SPECIAL_S_FLAG_TRY)
+			}
+		});
+	};
+}	
+#[acmd_script(
+    agent = "reflet",
+    scripts =  ["effect_specials", "effect_specialairs"],
+    category = ACMD_EFFECT,
+	low_priority)]
+unsafe fn robin_grima_sideb_eff(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+	let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+	if IS_GRIMA[ENTRY_ID] {
+		acmd!(lua_state, {
+			frame(Frame=4)
+			if(is_excute){
+				EFFECT_FOLLOW(0x14285d8a3eu64, hash40("top"), -1, 22, 1.5, 0, 0, 0, 0.8, true)
+			}
+			frame(Frame=15)
+			if(is_excute){
+				EFFECT_FOLLOW(0x1410f5c5b6u64, hash40("handr"), 1, 1, 0, 0, 0, 0, 1, true)
+				EffectModule::enable_sync_init_pos_last()
+			}
+			frame(Frame=16)
+			if(is_excute){
+				EFFECT_FOLLOW(0x1410f5c5b6u64, hash40("handl"), 1, 1, 0, 0, 0, 0, 1, true)
+				EffectModule::enable_sync_init_pos_last()
+			}
+		});
+	} else {
+		acmd!(lua_state, {
+			frame(Frame=4)
+			if(is_excute){
+				EFFECT_FOLLOW(0x14285d8a3eu64, hash40("top"), -1, 22, 1.5, 0, 0, 0, 0.8, true)
+			}
+			frame(Frame=15)
+			if(is_excute){
+				EFFECT_FOLLOW(0x1410f5c5b6u64, hash40("handr"), 1, 1, 0, 0, 0, 0, 1, true)
+				EffectModule::enable_sync_init_pos_last()
+			}
+			frame(Frame=16)
+			if(is_excute){
+				EFFECT_FOLLOW(0x1410f5c5b6u64, hash40("handl"), 1, 1, 0, 0, 0, 0, 1, true)
+				EffectModule::enable_sync_init_pos_last()
+			}
+		});
+	};
+}	
 #[fighter_frame_callback]
 pub fn robin(fighter : &mut L2CFighterCommon) {
     unsafe {
@@ -415,7 +500,7 @@ pub fn robin(fighter : &mut L2CFighterCommon) {
 						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL, false);
 				};
 			};
-			if status_kind == *FIGHTER_REFLET_STATUS_KIND_SPECIAL_LW_END {
+			if status_kind == *FIGHTER_REFLET_STATUS_KIND_SPECIAL_LW_END && StatusModule::prev_status_kind(boma, 0) == *FIGHTER_STATUS_KIND_SPECIAL_LW {
 					if situation_kind == *SITUATION_KIND_AIR {
 						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL, true);
 					} else {
@@ -609,7 +694,9 @@ pub fn install() {
 		//
 		robin_grima_neutralb,
 		robin_grima_neutralb_eff,
-		robin_grima_neutralb_snd
+		robin_grima_neutralb_snd,
+		//
+		robin_grima_sideb
     );
 	smashline::install_agent_frame_callbacks!(robin);
 }
