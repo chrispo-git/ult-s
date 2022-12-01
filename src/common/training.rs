@@ -20,7 +20,7 @@ pub fn training(fighter : &mut L2CFighterCommon) {
         if !smash::app::smashball::is_training_mode() {
             IS_GLOW = false;
         } else {
-            if ControlModule::check_button_on_trriger(boma, *CONTROL_PAD_BUTTON_APPEAL_HI) {
+            if ControlModule::check_button_on_trriger(boma, *CONTROL_PAD_BUTTON_APPEAL_LW) {
                 if IS_GLOW {
                     IS_GLOW = false;
                 } else {
