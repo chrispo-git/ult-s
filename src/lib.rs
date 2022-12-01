@@ -7,9 +7,17 @@
 #![allow(non_upper_case_globals)]
 #![allow(warnings, unused)]
 
+#[macro_use]
+extern crate modular_bitfield;
+
+#[macro_use]
+extern crate lazy_static;
+
 pub static mut FIGHTER_MANAGER: usize = 0;
 
+
 mod util;
+mod controls;
 mod common;
 
 mod bayonetta;
@@ -98,6 +106,7 @@ pub fn main() {
 	//Common
 	util::install();
 	common::install();
+	controls::install();
 	
 	//Fighters
 	bayonetta::install();
