@@ -40,6 +40,33 @@ unsafe fn dk_ftilt(fighter: &mut L2CAgentBase) {
 
 #[acmd_script(
     agent = "donkey",
+    scripts =  ["game_throwfb"],
+    category = ACMD_GAME,
+	low_priority)]
+unsafe fn dk_fthrow_b(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		if(is_excute){
+			ATTACK_ABS(Kind=FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, ID=0, Damage=13.0, Angle=75, KBG=40, FKB=0, BKB=75, Hitlag=0.0, Unk=1.0, FacingRestrict=ATTACK_LR_CHECK_F, Unk=0.0, Unk=true, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_NONE, Type=ATTACK_REGION_THROW)
+			ATTACK_ABS(Kind=FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, ID=0, Damage=3.0, Angle=361, KBG=100, FKB=0, BKB=40, Hitlag=0.0, Unk=1.0, FacingRestrict=ATTACK_LR_CHECK_F, Unk=0.0, Unk=true, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_NONE, Type=ATTACK_REGION_THROW)
+		}
+		frame(Frame=15)
+		if(is_excute){
+			WorkModule::on_flag(Flag=FIGHTER_INSTANCE_WORK_ID_FLAG_REVERSE_LR_FINISH_CAMERA_THROW_ORBIT)
+			CHECK_FINISH_CAMERA(26, 14)
+			//FighterCutInManager::set_throw_finish_zoom_rate(1.4)
+			//FighterCutInManager::set_throw_finish_offset(12, 1, 0)
+		}
+		frame(Frame=16)
+		if(is_excute){
+			REVERSE_LR()
+			ATK_HIT_ABS(FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, hash40("throw"), WorkModule::get_int64(module_accessor,*FIGHTER_STATUS_THROW_WORK_INT_TARGET_OBJECT), WorkModule::get_int64(module_accessor,*FIGHTER_STATUS_THROW_WORK_INT_TARGET_HIT_GROUP), WorkModule::get_int64(module_accessor,*FIGHTER_STATUS_THROW_WORK_INT_TARGET_HIT_NO))
+		}
+    });
+}
+
+#[acmd_script(
+    agent = "donkey",
     scripts =  ["game_attackairf"],
     category = ACMD_GAME,
 	low_priority)]
@@ -259,6 +286,18 @@ fn dk_frame(fighter: &mut L2CFighterCommon) {
 }	
 
 pub fn install() {
-	smashline::install_acmd_scripts!(dk_ftilt, dk_fair, dk_jab1, dk_jab2, dk_air_downb, dk_fair_eff, dk_sideb, dk_sideb_eff, dk_sideb_snd, dk_sideb_expr);
+	smashline::install_acmd_scripts!(
+		dk_ftilt, 
+		dk_fair, 
+		dk_jab1, 
+		dk_jab2, 
+		dk_air_downb, 
+		dk_fair_eff, 
+		dk_sideb, 
+		dk_sideb_eff,
+		dk_sideb_snd, 
+		dk_sideb_expr, 
+		dk_fthrow_b
+	);
 	smashline::install_agent_frames!(dk_frame);
 }
