@@ -50,7 +50,7 @@ unsafe fn get_button_label_by_operation_kind(hashed_string: &mut HashedString, o
             hashed_string.contents[index] = *byte;
         }
         hashed_string.hash = smash::phx::Hash40::new("mnu_opt_btn_key_short_hop");
-    } else if operation == ext::InputKind::TiltAttack as u8 {
+    } else if operation == ext::InputKind::FullHop as u8 {
         for (index, byte) in "mnu_opt_btn_key_tilt_attack\0".as_bytes().iter().enumerate() {
             hashed_string.contents[index] = *byte;
         }
@@ -70,7 +70,7 @@ unsafe fn add_footstool_to_gc(ctx: &skyline::hooks::InlineCtx) {
             input_list_vector.push(ext::InputKind::AppealHi as u8);
             input_list_vector.push(ext::InputKind::JumpMini as u8);
             input_list_vector.push(ext::InputKind::SmashAttack as u8);
-            input_list_vector.push(ext::InputKind::TiltAttack as u8);
+            input_list_vector.push(ext::InputKind::FullHop as u8);
         }
     }
 }
@@ -87,7 +87,7 @@ unsafe fn add_footstool_to_fk(ctx: &skyline::hooks::InlineCtx) {
         input_list_vector.push(ext::InputKind::AppealHi as u8);
         input_list_vector.push(ext::InputKind::JumpMini as u8);
         input_list_vector.push(ext::InputKind::SmashAttack as u8);
-        input_list_vector.push(ext::InputKind::TiltAttack as u8);
+        input_list_vector.push(ext::InputKind::FullHop as u8);
     }
 }
 
@@ -99,7 +99,7 @@ unsafe fn add_footstool_to_jc(ctx: &skyline::hooks::InlineCtx) {
         input_list_vector.push(ext::InputKind::AppealHi as u8);
         input_list_vector.push(ext::InputKind::JumpMini as u8);
         input_list_vector.push(ext::InputKind::SmashAttack as u8);
-        input_list_vector.push(ext::InputKind::TiltAttack as u8);
+        input_list_vector.push(ext::InputKind::FullHop as u8);
     }
 }
 

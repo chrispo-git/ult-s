@@ -95,7 +95,7 @@ pub enum CommandCat {
     Cat2(Cat2),
     Cat3(Cat3),
     Cat4(Cat4),
-    CatHdr(CatHdr)
+    CatUltS(CatUltS)
 }
 
 impl Into<CommandCat> for Cat1 {
@@ -122,9 +122,9 @@ impl Into<CommandCat> for Cat4 {
     }
 }
 
-impl Into<CommandCat> for CatHdr {
+impl Into<CommandCat> for CatUltS {
     fn into(self) -> CommandCat {
-        CommandCat::CatHdr(self)
+        CommandCat::CatUltS(self)
     }
 }
 
@@ -254,8 +254,8 @@ bitflags! {
         const Command323Catch       = 0x4000000;
     }
 
-    pub struct CatHdr: i32 {
-        const TiltAttack = 0x1;
+    pub struct CatUltS: i32 {
+        const FullHop = 0x1;
         const Wavedash = 0x2;
         const ShieldDrop = 0x4;
     }
@@ -291,8 +291,8 @@ bitflags! {
         const GuardHold   = 0x10000;
         const SpecialRaw2 = 0x20000;
         // We leave a blank at 0x4000 because the internal control mapping will map 1 << InputKind to the button bitfield, and so our shorthop button
-        // would get mapped to TiltAttack (issue #776)
-        const TiltAttack  = 0x80000;
+        // would get mapped to FullHop (issue #776)
+        const FullHop  = 0x80000;
         const CStickOverride = 0x100000;
 
         const SpecialAll  = 0x20802;
@@ -333,10 +333,10 @@ impl Cat4 {
     }
 }
 
-impl CatHdr {
+impl CatUltS {
     pub fn new(boma: *mut BattleObjectModuleAccessor) -> Self {
         unsafe {
-            CatHdr::from_bits_unchecked(ControlModule::get_command_flag_cat(boma, 4))
+            CatUltS::from_bits_unchecked(ControlModule::get_command_flag_cat(boma, 4))
         }
     }
 }
@@ -483,7 +483,7 @@ impl BomaExt for BattleObjectModuleAccessor {
             CommandCat::Cat2(cat) => (1, cat.bits()),
             CommandCat::Cat3(cat) => (2, cat.bits()),
             CommandCat::Cat4(cat) => (3, cat.bits()),
-            CommandCat::CatHdr(cat) => (4, cat.bits())
+            CommandCat::CatUltS(cat) => (4, cat.bits())
         };
 
         crate::controls::modules::InputModule::clear_commands(self.object(), cat, bits);
@@ -496,7 +496,7 @@ impl BomaExt for BattleObjectModuleAccessor {
             CommandCat::Cat2(cat) => Cat2::new(self).intersects(cat),
             CommandCat::Cat3(cat) => Cat3::new(self).intersects(cat),
             CommandCat::Cat4(cat) => Cat4::new(self).intersects(cat),
-            CommandCat::CatHdr(cat) => CatHdr::new(self).intersects(cat)
+            CommandCat::CatUltS(cat) => CatUltS::new(self).intersects(cat)
         }
     }
 
@@ -507,7 +507,7 @@ impl BomaExt for BattleObjectModuleAccessor {
             CommandCat::Cat2(cat) => Cat2::new(self).contains(cat),
             CommandCat::Cat3(cat) => Cat3::new(self).contains(cat),
             CommandCat::Cat4(cat) => Cat4::new(self).contains(cat),
-            CommandCat::CatHdr(cat) => CatHdr::new(self).intersects(cat)
+            CommandCat::CatUltS(cat) => CatUltS::new(self).intersects(cat)
         }
     }
 
@@ -916,7 +916,7 @@ pub enum InputKind {
     AppealLw = 0xC,
     Unset = 0xD,
     JumpMini = 0x12, // this is ours :), also start at 0x12 to avoid masking errors
-    TiltAttack = 0x13, // also custom, this one is for tilts!
+    FullHop = 0x13, // also custom, this one is for tilts!
 }
 
 /// 0x50 Byte struct containing the information for controller mappings

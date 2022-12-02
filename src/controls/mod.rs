@@ -130,26 +130,28 @@ unsafe fn map_controls_hook(
         (*out).buttons |= apply_button_mappings!(
             controller,
             mappings,
-                (l, gc_l,   TiltAttack, Buttons::TiltAttack | Buttons::AttackAll)
-                (r, gc_r,   TiltAttack, Buttons::TiltAttack | Buttons::AttackAll)
-                (zl, gc_z,  TiltAttack, Buttons::TiltAttack | Buttons::AttackAll)
-                (zr, gc_z,  TiltAttack, Buttons::TiltAttack | Buttons::AttackAll)
-                (a, gc_a,   TiltAttack, Buttons::TiltAttack | Buttons::AttackAll)
-                (b, gc_b,   TiltAttack, Buttons::TiltAttack | Buttons::AttackAll)
-                (x, gc_x,   TiltAttack, Buttons::TiltAttack | Buttons::AttackAll)
-                (y, gc_y,   TiltAttack, Buttons::TiltAttack | Buttons::AttackAll)
+                (l, gc_l,   FullHop, Buttons::FullHop | Buttons::Jump)
+                (r, gc_r,   FullHop, Buttons::FullHop | Buttons::Jump)
+                (zl, gc_z,  FullHop, Buttons::FullHop | Buttons::Jump)
+                (zr, gc_z,  FullHop, Buttons::FullHop | Buttons::Jump)
+                (a, gc_a,   FullHop, Buttons::FullHop | Buttons::Jump)
+                (b, gc_b,   FullHop, Buttons::FullHop | Buttons::Jump)
+                (x, gc_x,   FullHop, Buttons::FullHop | Buttons::Jump)
+                (y, gc_y,   FullHop, Buttons::FullHop | Buttons::Jump)
         );
+        /*
         if (*mappings.add(player_idx as usize)).gc_absmash {
             if (*out).buttons.contains(Buttons::Attack | Buttons::Special) {
-                (*out).buttons &= !(Buttons::Special | Buttons::TiltAttack);
+                (*out).buttons &= !(Buttons::Special | Buttons::FullHop);
                 (*out).buttons |= Buttons::Smash;
                 (*mappings.add(player_idx as usize)).is_absmash = true;
             } else if !(*out).buttons.intersects(Buttons::Attack | Buttons::Special) {
                 (*mappings.add(player_idx as usize)).is_absmash = false;
             } else if (*mappings.add(player_idx as usize)).is_absmash {
-                (*out).buttons &= !(Buttons::Special | Buttons::TiltAttack);
+                (*out).buttons &= !(Buttons::Special | Buttons::FullHop);
             }
         }
+        */
     } else if controller.style == ControllerStyle::LeftJoycon || controller.style == ControllerStyle::RightJoycon {
         (*out).buttons |= apply_button_mappings!(
             controller,
@@ -190,14 +192,14 @@ unsafe fn map_controls_hook(
         (*out).buttons |= apply_button_mappings!(
             controller,
             mappings,
-                (l, joy_shoulder,   TiltAttack, Buttons::TiltAttack | Buttons::AttackAll)
-                (r, joy_shoulder,   TiltAttack, Buttons::TiltAttack | Buttons::AttackAll)
-                (zl, joy_zshoulder, TiltAttack, Buttons::TiltAttack | Buttons::AttackAll)
-                (zr, joy_zshoulder, TiltAttack, Buttons::TiltAttack | Buttons::AttackAll)
-                (left_sl, joy_sl,   TiltAttack, Buttons::TiltAttack | Buttons::AttackAll)
-                (left_sr, joy_sr,   TiltAttack, Buttons::TiltAttack | Buttons::AttackAll)
-                (right_sl, joy_sl,  TiltAttack, Buttons::TiltAttack | Buttons::AttackAll)
-                (right_sr, joy_sr,  TiltAttack, Buttons::TiltAttack | Buttons::AttackAll)
+                (l, joy_shoulder,   FullHop, Buttons::FullHop | Buttons::Jump)
+                (r, joy_shoulder,   FullHop, Buttons::FullHop | Buttons::Jump)
+                (zl, joy_zshoulder, FullHop, Buttons::FullHop | Buttons::Jump)
+                (zr, joy_zshoulder, FullHop, Buttons::FullHop | Buttons::Jump)
+                (left_sl, joy_sl,   FullHop, Buttons::FullHop | Buttons::Jump)
+                (left_sr, joy_sr,   FullHop, Buttons::FullHop | Buttons::Jump)
+                (right_sl, joy_sl,  FullHop, Buttons::FullHop | Buttons::Jump)
+                (right_sr, joy_sr,  FullHop, Buttons::FullHop | Buttons::Jump)
         );
 
         if controller.style == ControllerStyle::LeftJoycon {
@@ -228,10 +230,10 @@ unsafe fn map_controls_hook(
             (*out).buttons |= apply_button_mappings!(
                 controller,
                 mappings,
-                    (dpad_left, joy_down,   TiltAttack, Buttons::TiltAttack | Buttons::AttackAll)
-                    (dpad_right, joy_up,    TiltAttack, Buttons::TiltAttack | Buttons::AttackAll)
-                    (dpad_up, joy_left,     TiltAttack, Buttons::TiltAttack | Buttons::AttackAll)
-                    (dpad_down, joy_right,  TiltAttack, Buttons::TiltAttack | Buttons::AttackAll)
+                    (dpad_left, joy_down,   FullHop, Buttons::FullHop | Buttons::Jump)
+                    (dpad_right, joy_up,    FullHop, Buttons::FullHop | Buttons::Jump)
+                    (dpad_up, joy_left,     FullHop, Buttons::FullHop | Buttons::Jump)
+                    (dpad_down, joy_right,  FullHop, Buttons::FullHop | Buttons::Jump)
             );
         } else {
             (*out).buttons |= apply_button_mappings!(
@@ -261,23 +263,24 @@ unsafe fn map_controls_hook(
             (*out).buttons |= apply_button_mappings!(
                 controller,
                 mappings,
-                    (a, joy_down,   TiltAttack, Buttons::TiltAttack | Buttons::AttackAll)
-                    (y, joy_up,     TiltAttack, Buttons::TiltAttack | Buttons::AttackAll)
-                    (b, joy_left,   TiltAttack, Buttons::TiltAttack | Buttons::AttackAll)
-                    (x, joy_right,  TiltAttack, Buttons::TiltAttack | Buttons::AttackAll)
+                    (a, joy_down,   FullHop, Buttons::FullHop | Buttons::Jump)
+                    (y, joy_up,     FullHop, Buttons::FullHop | Buttons::Jump)
+                    (b, joy_left,   FullHop, Buttons::FullHop | Buttons::Jump)
+                    (x, joy_right,  FullHop, Buttons::FullHop | Buttons::Jump)
             );
         }
+        /*
         if (*mappings.add(player_idx as usize)).joy_absmash {
             if (*out).buttons.contains(Buttons::Attack | Buttons::Special) {
-                (*out).buttons &= !(Buttons::Special | Buttons::TiltAttack);
+                (*out).buttons &= !(Buttons::Special | Buttons::FullHop);
                 (*out).buttons |= Buttons::Smash;
                 (*mappings.add(player_idx as usize)).is_absmash = true;
             } else if !(*out).buttons.intersects(Buttons::Attack | Buttons::Special) {
                 (*mappings.add(player_idx as usize)).is_absmash = false;
             } else if (*mappings.add(player_idx as usize)).is_absmash {
-                (*out).buttons &= !(Buttons::Special | Buttons::TiltAttack);
+                (*out).buttons &= !(Buttons::Special | Buttons::FullHop);
             }
-        }
+        }*/
     } else {
         (*out).buttons |= apply_button_mappings!(
             controller,
@@ -318,27 +321,27 @@ unsafe fn map_controls_hook(
         (*out).buttons |= apply_button_mappings!(
             controller,
             mappings,
-                (l, pro_l,      TiltAttack, Buttons::TiltAttack | Buttons::AttackAll)
-                (r, pro_r,      TiltAttack, Buttons::TiltAttack | Buttons::AttackAll)
-                (zl, pro_zl,    TiltAttack, Buttons::TiltAttack | Buttons::AttackAll)
-                (zr, pro_zr,    TiltAttack, Buttons::TiltAttack | Buttons::AttackAll)
-                (a, pro_a,      TiltAttack, Buttons::TiltAttack | Buttons::AttackAll)
-                (b, pro_b,      TiltAttack, Buttons::TiltAttack | Buttons::AttackAll)
-                (x, pro_x,      TiltAttack, Buttons::TiltAttack | Buttons::AttackAll)
-                (y, pro_y,      TiltAttack, Buttons::TiltAttack | Buttons::AttackAll)
+                (l, pro_l,      FullHop, Buttons::FullHop | Buttons::Jump)
+                (r, pro_r,      FullHop, Buttons::FullHop | Buttons::Jump)
+                (zl, pro_zl,    FullHop, Buttons::FullHop | Buttons::Jump)
+                (zr, pro_zr,    FullHop, Buttons::FullHop | Buttons::Jump)
+                (a, pro_a,      FullHop, Buttons::FullHop | Buttons::Jump)
+                (b, pro_b,      FullHop, Buttons::FullHop | Buttons::Jump)
+                (x, pro_x,      FullHop, Buttons::FullHop | Buttons::Jump)
+                (y, pro_y,      FullHop, Buttons::FullHop | Buttons::Jump)
         );
-
+        /*
         if (*mappings.add(player_idx as usize)).pro_absmash {
             if (*out).buttons.contains(Buttons::Attack | Buttons::Special) {
-                (*out).buttons &= !(Buttons::Special | Buttons::TiltAttack);
+                (*out).buttons &= !(Buttons::Special | Buttons::FullHop);
                 (*out).buttons |= Buttons::Smash;
                 (*mappings.add(player_idx as usize)).is_absmash = true;
             } else if !(*out).buttons.intersects(Buttons::Attack | Buttons::Special) {
                 (*mappings.add(player_idx as usize)).is_absmash = false;
             } else if (*mappings.add(player_idx as usize)).is_absmash {
-                (*out).buttons &= !(Buttons::Special | Buttons::TiltAttack);
+                (*out).buttons &= !(Buttons::Special | Buttons::FullHop);
             }
-        }
+        }*/
     }
 
     // Check if the button combos are being pressed and then force Stock Share + AttackRaw/SpecialRaw depending on input

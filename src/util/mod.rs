@@ -10,6 +10,7 @@ use smash::phx::Vector2f;
 use crate::FIGHTER_MANAGER;
 use std::os::raw::c_int;
 use std::os::raw::c_ulong;
+use crate::controls::ext::*;
 
 static mut STATUS_DURATION : [i32; 8] = [0; 8];
 static mut MOTION_DURATION : [i32; 8] = [0; 8];
@@ -17,6 +18,7 @@ pub static mut SPEED_X : [f32; 8] = [0.0; 8];
 pub static mut SPEED_Y : [f32; 8] = [0.0; 8];
 pub static mut ACCEL_X : [f32; 8] = [0.0; 8];
 pub static mut ACCEL_Y : [f32; 8] = [0.0; 8];
+static mut FULL_HOP_ENABLE_DELAY : [i32; 8] = [0; 8];
 
 //Cstick
 pub static mut SUB_STICK: [Vector2f;9] = [Vector2f{x:0.0, y: 0.0};9];
@@ -157,7 +159,8 @@ pub unsafe fn on_flag_hook(boma: &mut smash::app::BattleObjectModuleAccessor, in
 			original!()(boma, int)
 		}
 	} else if int == *FIGHTER_STATUS_WORK_ID_FLAG_RESERVE_JUMP_MINI {
-		if ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_JUMP) || ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP_MINI) {
+		let ENTRY_ID =  WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+		if (ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_JUMP) || ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP_MINI)) && !(FULL_HOP_ENABLE_DELAY[ENTRY_ID] > 0) {
 			original!()(boma, int)
 		} else {
 			println!("SH height banned");
@@ -228,6 +231,21 @@ pub fn util_update(fighter : &mut L2CFighterCommon) {
 			CAN_JAB[ENTRY_ID] = 0;
 			HAS_ENABLE_COMBO_ON[ENTRY_ID] = false;
 			HAS_ENABLE_100_ON[ENTRY_ID] = false;
+			FULL_HOP_ENABLE_DELAY[ENTRY_ID] = 0;
+		};
+		if FULL_HOP_ENABLE_DELAY[ENTRY_ID] > 0 {
+			FULL_HOP_ENABLE_DELAY[ENTRY_ID] -= 1;
+		};
+
+		//This checks if the Full Hop button is pressed
+		let triggered_buttons: Buttons = unsafe {
+			Buttons::from_bits_unchecked(ControlModule::get_button(boma) & !ControlModule::get_button_prev(boma))
+		};
+		if triggered_buttons.intersects(Buttons::FullHop) {
+			FULL_HOP_ENABLE_DELAY[ENTRY_ID] = 14;
+		};
+		if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP_MINI) { //Removes possibility of FH coming out of a SH. Shorthop button has priority over Fullhop
+			FULL_HOP_ENABLE_DELAY[ENTRY_ID] = 0;
 		};
 		if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_CSTICK_ON) {
 			if ControlModule::get_stick_x(boma) != 0.0 {
