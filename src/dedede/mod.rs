@@ -571,6 +571,9 @@ pub fn dedede_frame(fighter : &mut L2CFighterCommon) {
 			if MotionModule::frame(boma) >= 79.0 {
 				StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_WAIT, true);
 			};
+			if KineticModule::get_kinetic_type(boma) != *FIGHTER_KINETIC_TYPE_MOTION {
+				KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_MOTION);
+			};
 		};
 		if [hash40("special_air_input"), hash40("special_air_input_2")].contains(&MotionModule::motion_kind(boma)) {
 			macros::SET_SPEED_EX(fighter,0.0, 0.0, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
