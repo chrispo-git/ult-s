@@ -46,37 +46,6 @@ pub fn perfectpivot(fighter : &mut L2CFighterCommon) {
     };
 }
 
-#[fighter_frame_callback]
-pub fn footstool(fighter : &mut L2CFighterCommon) {
-    unsafe {	
-        let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);    
-		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
-		let fighter_kind = smash::app::utility::get_kind(boma);
-		let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-		let lua_state = fighter.lua_state_agent;
-		if status_kind == *FIGHTER_STATUS_KIND_TREAD_DAMAGE && MotionModule::frame(boma) < 2.0 {
-			if FOOTSTOOL_STALE[ENTRY_ID] > STALE_MAX {
-				FOOTSTOOL_STALE[ENTRY_ID] *= 0.75;
-				println!("Footstool Stale");
-			};
-			FOOTSTOOL_STALE_TIMER[ENTRY_ID] = STALE_TIMER_MAX;
-		};
-		if status_kind == *FIGHTER_STATUS_KIND_TREAD_DAMAGE && FOOTSTOOL_STALE_TIMER[ENTRY_ID] != 0 && FOOTSTOOL_STALE[ENTRY_ID] < 21.0 {
-			// This formula is: 1/(staled footstool adv/regular footstool adv)
-			FOOTSTOOL_STALE_TIMER[ENTRY_ID] = STALE_TIMER_MAX;
-			MotionModule::set_rate(boma, 1.0/(FOOTSTOOL_STALE[ENTRY_ID]/ MotionModule::end_frame(boma))); 
-			println!("footstool clause - Rate:{}, End Frame:{}, Frame/Rate:{}", MotionModule::rate(boma), MotionModule::end_frame(boma), (MotionModule::end_frame(boma)/MotionModule::rate(boma)));
-		};
-		if FOOTSTOOL_STALE_TIMER[ENTRY_ID] > 0 {
-			FOOTSTOOL_STALE_TIMER[ENTRY_ID] -= 1;
-		};
-		if [*FIGHTER_STATUS_KIND_ENTRY, *FIGHTER_STATUS_KIND_WIN].contains(&status_kind) || smash::app::sv_information::is_ready_go() == false {
-			FOOTSTOOL_STALE[ENTRY_ID] = 21.0;
-			FOOTSTOOL_STALE_TIMER[ENTRY_ID] = 0;
-		};
-    }
-}
-
 //DJC
 #[fighter_frame_callback]
 pub fn djc(fighter : &mut L2CFighterCommon) {
@@ -280,6 +249,5 @@ pub fn install() {
 		dash,
 		djc
 	);
-	smashline::install_agent_frame_callbacks!(footstool);
     skyline::nro::add_hook(nro_hook);
 }
