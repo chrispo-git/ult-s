@@ -221,7 +221,7 @@ pub fn fox(fighter : &mut L2CFighterCommon) {
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
 		let fighter_kind = smash::app::utility::get_kind(boma);
 		if fighter_kind == *FIGHTER_KIND_FOX {
-			if [
+			/*if [
 				*FIGHTER_STATUS_KIND_SPECIAL_LW,  
 				*FIGHTER_FOX_STATUS_KIND_SPECIAL_LW_END,  
 				*FIGHTER_FOX_STATUS_KIND_SPECIAL_LW_HIT,  
@@ -232,6 +232,17 @@ pub fn fox(fighter : &mut L2CFighterCommon) {
 				};
 				if StatusModule::situation_kind(boma) == *SITUATION_KIND_GROUND {
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_JUMP_SQUAT, true);
+				};
+			};*/
+			if [*FIGHTER_STATUS_KIND_SPECIAL_N].contains(&status_kind) {
+				if StatusModule::is_situation_changed(boma) {
+					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_LANDING, true);
+				};
+				if StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR {
+					let cat2 = ControlModule::get_command_flag_cat(boma, 1);
+					if (cat2 & *FIGHTER_PAD_CMD_CAT2_FLAG_FALL_JUMP) != 0 && stick_y < -0.66 && SPEED_Y[ENTRY_ID] <= 0.0 {
+						WorkModule::set_flag(boma, true, *FIGHTER_STATUS_WORK_ID_FLAG_RESERVE_DIVE);
+					}
 				};
 			};
 		};
