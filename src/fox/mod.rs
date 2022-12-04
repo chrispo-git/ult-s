@@ -19,10 +19,10 @@ unsafe fn fox_jab1(fighter: &mut L2CAgentBase) {
 			ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=1.8, Angle=361, KBG=100, FKB=15, BKB=0, Size=2.5, X=0.0, Y=9.3, Z=8.5, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.8, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=true, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_PUNCH)
 			ATTACK(ID=2, Part=0, Bone=hash40("top"), Damage=1.8, Angle=180, KBG=100, FKB=15, BKB=0, Size=2.5, X=0.0, Y=9.3, Z=12.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.8, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=true, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_FIGHTER, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_PUNCH)
 			ATTACK(ID=3, Part=0, Bone=hash40("top"), Damage=1.8, Angle=361, KBG=100, FKB=15, BKB=0, Size=2.5, X=0.0, Y=9.3, Z=12.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.8, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=true, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_PUNCH)
-			AttackModule::set_add_reaction_frame(ID=0, Frames=-2.0, Unk=false)
-			AttackModule::set_add_reaction_frame(ID=1, Frames=-2.0, Unk=false)
-			AttackModule::set_add_reaction_frame(ID=2, Frames=-2.0, Unk=false)
-			AttackModule::set_add_reaction_frame(ID=3, Frames=-2.0, Unk=false)
+			AttackModule::set_add_reaction_frame(ID=0, Frames=-1.0, Unk=false)
+			AttackModule::set_add_reaction_frame(ID=1, Frames=-1.0, Unk=false)
+			AttackModule::set_add_reaction_frame(ID=2, Frames=-1.0, Unk=false)
+			AttackModule::set_add_reaction_frame(ID=3, Frames=-1.0, Unk=false)
 		}
 		wait(Frames=1)
 		if(is_excute){
@@ -106,6 +106,8 @@ unsafe fn fox_dair(fighter: &mut L2CAgentBase) {
 			if(is_excute){
 				ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=1.4, Angle=367, KBG=100, FKB=20, BKB=0, Size=4.0, X=0.0, Y=8.2, Z=-0.5, X2=0.0, Y2=9.0, Z2=2.0, Hitlag=0.66, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_rush"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
 				ATTACK(ID=1, Part=0, Bone=hash40("toel"), Damage=1.4, Angle=367, KBG=30, FKB=0, BKB=15, Size=4.2, X=-0.5, Y=-0.5, Z=0.0, X2=-0.5, Y2=-0.5, Z2=0.0, Hitlag=0.66, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_rush"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
+				AttackModule::set_add_reaction_frame(ID=0, Frames=3.0, Unk=false)
+				AttackModule::set_add_reaction_frame(ID=1, Frames=3.0, Unk=false)
 			}
 			wait(Frames=2)
 			if(is_excute){
