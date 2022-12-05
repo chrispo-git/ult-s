@@ -4,6 +4,7 @@ use smash::lua2cpp::*;
 use smashline::*;
 use smash_script::*;
 use smash::app::lua_bind::*;
+use crate::util::*;
 
 #[acmd_script(
     agent = "fox",
@@ -219,21 +220,12 @@ pub fn fox(fighter : &mut L2CFighterCommon) {
     unsafe {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
+		let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+		let motion_kind = MotionModule::motion_kind(boma);
+		let frame = MotionModule::frame(boma);
+		let stick_y = ControlModule::get_stick_y(boma);
 		let fighter_kind = smash::app::utility::get_kind(boma);
 		if fighter_kind == *FIGHTER_KIND_FOX {
-			/*if [
-				*FIGHTER_STATUS_KIND_SPECIAL_LW,  
-				*FIGHTER_FOX_STATUS_KIND_SPECIAL_LW_END,  
-				*FIGHTER_FOX_STATUS_KIND_SPECIAL_LW_HIT,  
-				*FIGHTER_FOX_STATUS_KIND_SPECIAL_LW_LOOP
-			].contains(&status_kind) && ControlModule::check_button_on_trriger(boma, *CONTROL_PAD_BUTTON_JUMP) && !AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_SHIELD){
-				if WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT) < WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT_MAX) && StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR {
-					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_JUMP_AERIAL, true);
-				};
-				if StatusModule::situation_kind(boma) == *SITUATION_KIND_GROUND {
-					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_JUMP_SQUAT, true);
-				};
-			};*/
 			if [*FIGHTER_STATUS_KIND_SPECIAL_N].contains(&status_kind) {
 				if StatusModule::is_situation_changed(boma) {
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_LANDING, true);
@@ -259,5 +251,5 @@ pub fn install() {
 		fox_jab1,
 		fox_jab2
     );
-	//smashline::install_agent_frame_callbacks!(fox);
+	smashline::install_agent_frame_callbacks!(fox);
 }
