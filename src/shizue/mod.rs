@@ -76,6 +76,40 @@ unsafe fn isa_fthrow(fighter: &mut L2CAgentBase) {
     });
 }
 #[acmd_script(
+    agent = "shizue_slingshot",
+    scripts =  ["game_attackairf", "game_attackairb"],
+    category = ACMD_GAME, low_priority )]
+unsafe fn isa_neutralb_shoot(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=12)
+		if(is_excute){
+			ArticleModule::generate_article(WEAPON_SHIZUE_SLINGSHOT_GENERATE_ARTICLE_BULLET, false, 0)
+			rust {
+				let rand_val = smash::app::sv_math::rand(hash40("fighter"), 8);
+				if rand_val == 0 {
+					ArticleModule::change_motion(fighter.module_accessor, *WEAPON_SHIZUE_SLINGSHOT_GENERATE_ARTICLE_BULLET,smash::phx::Hash40::new("item_1"),false,0.0);
+				} else if rand_val == 1 {
+					ArticleModule::change_motion(fighter.module_accessor, *WEAPON_SHIZUE_SLINGSHOT_GENERATE_ARTICLE_BULLET,smash::phx::Hash40::new("item_2"),false,0.0);
+				} else if rand_val == 2 {
+					ArticleModule::change_motion(fighter.module_accessor, *WEAPON_SHIZUE_SLINGSHOT_GENERATE_ARTICLE_BULLET,smash::phx::Hash40::new("item_3"),false,0.0);
+				} else if rand_val == 3 {
+					ArticleModule::change_motion(fighter.module_accessor, *WEAPON_SHIZUE_SLINGSHOT_GENERATE_ARTICLE_BULLET,smash::phx::Hash40::new("item_4"),false,0.0);
+				} else if rand_val == 4 {
+					ArticleModule::change_motion(fighter.module_accessor, *WEAPON_SHIZUE_SLINGSHOT_GENERATE_ARTICLE_BULLET,smash::phx::Hash40::new("item_5"),false,0.0);
+				} else if rand_val == 5 {
+					ArticleModule::change_motion(fighter.module_accessor, *WEAPON_SHIZUE_SLINGSHOT_GENERATE_ARTICLE_BULLET,smash::phx::Hash40::new("item_6"),false,0.0);
+				} else if rand_val == 6 {
+					ArticleModule::change_motion(fighter.module_accessor, *WEAPON_SHIZUE_SLINGSHOT_GENERATE_ARTICLE_BULLET,smash::phx::Hash40::new("item_7"),false,0.0);
+				} else {
+					ArticleModule::change_motion(fighter.module_accessor, *WEAPON_SHIZUE_SLINGSHOT_GENERATE_ARTICLE_BULLET,smash::phx::Hash40::new("item_8"),false,0.0);
+				};
+			}
+			ArticleModule::shoot(WEAPON_SHIZUE_SLINGSHOT_GENERATE_ARTICLE_BULLET, ARTICLE_OPE_TARGET_LAST, false)
+		}
+    });
+}
+#[acmd_script(
     agent = "shizue_bullet",
     scripts =  ["game_shootf", "game_shootb"],
     category = ACMD_GAME, low_priority )]
@@ -528,6 +562,7 @@ pub fn install() {
 		isa_neutralb_eff,
 		isa_neutralb_snd,
 		isa_neutralb_hit,
+		isa_neutralb_shoot
 		isa_dair,
 		isa_dair_land
     );
