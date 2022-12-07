@@ -735,5 +735,5 @@ pub fn install() {
     smashline::install_agent_frames!(
         shizue_frame
     );
-	smashline::install_status_scripts!(special_n_pre);
+	//smashline::install_status_scripts!(special_n_pre);
 }
