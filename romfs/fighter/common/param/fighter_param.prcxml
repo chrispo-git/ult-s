@@ -376,10 +376,13 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
     <!--LINK-->
     <struct index="2">
       <hash40 hash="clip_sphere_node">bust</hash40>
+      <float hash="ground_brake">0.08</float>
+      <float hash="dash_speed">2.01</float>
+      <float hash="run_speed_max">1.76</float>
       <float hash="jump_speed_x_mul">0.875</float>
       <float hash="mini_jump_y">12.7</float>
       <float hash="jump_aerial_y">26</float>
-      <float hash="air_speed_x_stable">0.95</float>
+      <float hash="air_speed_x_stable">1.08</float>
       <float hash="weight">102</float>
       <float hash="clip_sphere_offset_y">-2</float>
     </struct>
