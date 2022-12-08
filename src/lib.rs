@@ -7,8 +7,15 @@
 #![allow(non_upper_case_globals)]
 #![allow(warnings, unused)]
 
+#[macro_use]
+extern crate modular_bitfield;
+
+#[macro_use]
+extern crate lazy_static;
+
 pub static mut FIGHTER_MANAGER: usize = 0;
 
+use skyline::libc::c_char;
 extern "C" {
 	fn change_version_string(arg: u64, string: *const c_char);
 }
@@ -25,6 +32,7 @@ fn change_version_string_hook(arg: u64, string: *const c_char) {
 }
 
 mod util;
+mod controls;
 mod common;
 
 mod bayonetta;
@@ -114,6 +122,7 @@ pub fn main() {
 	skyline::install_hooks!(change_version_string_hook);
 	util::install();
 	common::install();
+	controls::install();
 	
 	//Fighters
 	bayonetta::install();
