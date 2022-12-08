@@ -15,6 +15,7 @@ extern crate lazy_static;
 
 pub static mut FIGHTER_MANAGER: usize = 0;
 
+use skyline::libc::c_char;
 extern "C" {
 	fn change_version_string(arg: u64, string: *const c_char);
 }
