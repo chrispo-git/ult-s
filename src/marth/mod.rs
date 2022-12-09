@@ -255,6 +255,7 @@ unsafe fn marth_dtilt(fighter: &mut L2CAgentBase) {
 		}
     });
 }		
+
 #[acmd_script(
     agent = "marth",
     script =  "game_throwlw",
