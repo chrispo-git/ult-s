@@ -10,9 +10,9 @@ jobs:
   pr_build:
     env:
       PLUGIN_NAME: plugin
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     container: 
-      image: jugeeya/cargo-skyline:3.0.0-dkp-beta
+      image: jugeeya/cargo-skyline:3.0.0-dkp
     steps:
     - name: setup python
       uses: actions/setup-python@v2
