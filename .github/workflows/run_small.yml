@@ -23,8 +23,7 @@ jobs:
       uses: actions/checkout@v2
     # build the project
     - run: |
-        export PATH=$PATH:/root/.cargo/bin:/opt/devkitpro/devkitA64/bin \
-        && cd scripts && python3 build_small.py
+        cd scripts && python3 build_small.py
       env:
         HOME: /root
     - name: Upload plugin
