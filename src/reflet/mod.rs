@@ -360,6 +360,34 @@ unsafe fn robin_grima_sideb_eff(fighter: &mut L2CAgentBase) {
 			};
 	};
 }	
+#[acmd_script(
+    agent = "reflet",
+    scripts =  ["sound_specials", "sound_specialairs"],
+    category = ACMD_SOUND,
+	low_priority)]
+unsafe fn robin_grima_sideb_snd(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+	let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+	if IS_GRIMA[ENTRY_ID] {
+		frame(fighter.lua_state_agent, 16.0);
+		if macros::is_excute(fighter) {
+			macros::PLAY_SE(fighter, Hash40::new("se_reflet_special_l01"));
+			macros::PLAY_SE(fighter, Hash40::new("vc_reflet_special_l01"));
+		};
+	} else if !WorkModule::is_flag(fighter.module_accessor, *FIGHTER_REFLET_STATUS_SPECIAL_S_FLAG_SHOOT_OK) {
+		frame(fighter.lua_state_agent, 4.0);
+		if macros::is_excute(fighter) {
+			macros::PLAY_SE(fighter, Hash40::new("se_reflet_mp_empty"));
+			macros::PLAY_SEQUENCE(fighter, Hash40::new("seq_reflet_rnd_special_empty"));
+		};
+	} else {
+		frame(fighter.lua_state_agent, 4.0);
+		if macros::is_excute(fighter) {
+			macros::PLAY_SE(fighter, Hash40::new("se_reflet_special_s01"));
+			macros::PLAY_SEQUENCE(fighter, Hash40::new("seq_reflet_rnd_special_s"));
+		};
+	};
+}	
 #[fighter_frame_callback]
 pub fn robin(fighter : &mut L2CFighterCommon) {
     unsafe {
@@ -667,7 +695,8 @@ pub fn install() {
 		robin_grima_neutralb_snd,
 		//
 		robin_grima_sideb,
-		robin_grima_sideb_eff
+		robin_grima_sideb_eff,
+		robin_grima_sideb_snd
     );
 	smashline::install_agent_frame_callbacks!(robin);
 }
