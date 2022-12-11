@@ -7,9 +7,33 @@
 #![allow(non_upper_case_globals)]
 #![allow(warnings, unused)]
 
+#[macro_use]
+extern crate modular_bitfield;
+
+#[macro_use]
+extern crate lazy_static;
+
 pub static mut FIGHTER_MANAGER: usize = 0;
 
+=======
+use skyline::libc::c_char;
+extern "C" {
+	fn change_version_string(arg: u64, string: *const c_char);
+}
+  
+#[skyline::hook(replace = change_version_string)]
+fn change_version_string_hook(arg: u64, string: *const c_char) {
+	let original_str = unsafe { skyline::from_c_str(string) };
+	if original_str.contains("Ver.") {
+		let version_str = format!("{} / Ultimate S v2.8.3\0", original_str);
+		call_original!(arg, skyline::c_str(&version_str))
+	} else {
+		call_original!(arg, string)
+	}
+}
+
 mod util;
+mod controls;
 mod common;
 
 mod bayonetta;
@@ -96,8 +120,10 @@ mod zelda;
 #[skyline::main(name = "ult_s")]
 pub fn main() {
 	//Common
+	skyline::install_hooks!(change_version_string_hook);
 	util::install();
 	common::install();
+	controls::install();
 	
 	//Fighters
 	bayonetta::install();
