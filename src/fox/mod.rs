@@ -4,6 +4,7 @@ use smash::lua2cpp::*;
 use smashline::*;
 use smash_script::*;
 use smash::app::lua_bind::*;
+use crate::util::*;
 
 #[acmd_script(
     agent = "fox",
@@ -19,10 +20,10 @@ unsafe fn fox_jab1(fighter: &mut L2CAgentBase) {
 			ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=1.8, Angle=361, KBG=100, FKB=15, BKB=0, Size=2.5, X=0.0, Y=9.3, Z=8.5, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.8, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=true, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_PUNCH)
 			ATTACK(ID=2, Part=0, Bone=hash40("top"), Damage=1.8, Angle=180, KBG=100, FKB=15, BKB=0, Size=2.5, X=0.0, Y=9.3, Z=12.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.8, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=true, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_FIGHTER, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_PUNCH)
 			ATTACK(ID=3, Part=0, Bone=hash40("top"), Damage=1.8, Angle=361, KBG=100, FKB=15, BKB=0, Size=2.5, X=0.0, Y=9.3, Z=12.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.8, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=true, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_PUNCH)
-			AttackModule::set_add_reaction_frame(ID=0, Frames=-2.0, Unk=false)
-			AttackModule::set_add_reaction_frame(ID=1, Frames=-2.0, Unk=false)
-			AttackModule::set_add_reaction_frame(ID=2, Frames=-2.0, Unk=false)
-			AttackModule::set_add_reaction_frame(ID=3, Frames=-2.0, Unk=false)
+			AttackModule::set_add_reaction_frame(ID=0, Frames=-1.0, Unk=false)
+			AttackModule::set_add_reaction_frame(ID=1, Frames=-1.0, Unk=false)
+			AttackModule::set_add_reaction_frame(ID=2, Frames=-1.0, Unk=false)
+			AttackModule::set_add_reaction_frame(ID=3, Frames=-1.0, Unk=false)
 		}
 		wait(Frames=1)
 		if(is_excute){
@@ -106,6 +107,8 @@ unsafe fn fox_dair(fighter: &mut L2CAgentBase) {
 			if(is_excute){
 				ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=1.4, Angle=367, KBG=100, FKB=20, BKB=0, Size=4.0, X=0.0, Y=8.2, Z=-0.5, X2=0.0, Y2=9.0, Z2=2.0, Hitlag=0.66, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_rush"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
 				ATTACK(ID=1, Part=0, Bone=hash40("toel"), Damage=1.4, Angle=367, KBG=30, FKB=0, BKB=15, Size=4.2, X=-0.5, Y=-0.5, Z=0.0, X2=-0.5, Y2=-0.5, Z2=0.0, Hitlag=0.66, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_rush"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
+				AttackModule::set_add_reaction_frame(ID=0, Frames=3.0, Unk=false)
+				AttackModule::set_add_reaction_frame(ID=1, Frames=3.0, Unk=false)
 			}
 			wait(Frames=2)
 			if(is_excute){
@@ -217,19 +220,21 @@ pub fn fox(fighter : &mut L2CFighterCommon) {
     unsafe {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
+		let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+		let motion_kind = MotionModule::motion_kind(boma);
+		let frame = MotionModule::frame(boma);
+		let stick_y = ControlModule::get_stick_y(boma);
 		let fighter_kind = smash::app::utility::get_kind(boma);
 		if fighter_kind == *FIGHTER_KIND_FOX {
-			if [
-				*FIGHTER_STATUS_KIND_SPECIAL_LW,  
-				*FIGHTER_FOX_STATUS_KIND_SPECIAL_LW_END,  
-				*FIGHTER_FOX_STATUS_KIND_SPECIAL_LW_HIT,  
-				*FIGHTER_FOX_STATUS_KIND_SPECIAL_LW_LOOP
-			].contains(&status_kind) && ControlModule::check_button_on_trriger(boma, *CONTROL_PAD_BUTTON_JUMP) && !AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_SHIELD){
-				if WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT) < WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT_MAX) && StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR {
-					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_JUMP_AERIAL, true);
+			if [*FIGHTER_STATUS_KIND_SPECIAL_N].contains(&status_kind) {
+				if StatusModule::is_situation_changed(boma) {
+					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_LANDING, true);
 				};
-				if StatusModule::situation_kind(boma) == *SITUATION_KIND_GROUND {
-					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_JUMP_SQUAT, true);
+				if StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR {
+					let cat2 = ControlModule::get_command_flag_cat(boma, 1);
+					if (cat2 & *FIGHTER_PAD_CMD_CAT2_FLAG_FALL_JUMP) != 0 && stick_y < -0.66 && SPEED_Y[ENTRY_ID] <= 0.0 {
+						WorkModule::set_flag(boma, true, *FIGHTER_STATUS_WORK_ID_FLAG_RESERVE_DIVE);
+					}
 				};
 			};
 		};
@@ -246,5 +251,5 @@ pub fn install() {
 		fox_jab1,
 		fox_jab2
     );
-	//smashline::install_agent_frame_callbacks!(fox);
+	smashline::install_agent_frame_callbacks!(fox);
 }
