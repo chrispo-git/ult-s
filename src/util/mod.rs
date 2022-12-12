@@ -150,16 +150,9 @@ pub unsafe fn on_flag_hook(boma: &mut smash::app::BattleObjectModuleAccessor, in
 		if status_kind != *FIGHTER_STATUS_KIND_ATTACK || [*FIGHTER_KIND_MURABITO].contains(&fighter_kind) {
 			original!()(boma, int)
 		};
-	} else if int == *FIGHTER_DEMON_STATUS_ATTACK_COMBO_FLAG_CHANGE_STATUS {
-		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
-		let fighter_kind = smash::app::utility::get_kind(boma);
-		if fighter_kind != *FIGHTER_KIND_DEMON {
-			original!()(boma, int)
-		} else if ![*FIGHTER_STATUS_KIND_ATTACK, *FIGHTER_DEMON_STATUS_KIND_ATTACK_COMBO].contains(&status_kind){
-			original!()(boma, int)
-		}
 	} else if int == *FIGHTER_STATUS_WORK_ID_FLAG_RESERVE_JUMP_MINI {
 		let ENTRY_ID =  WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+		//Removal of SH macro via hooking on_flag. FULL_HOP_ENABLE_DELAY allows fullhop button to not give shorthops. 
 		if (ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_JUMP) || ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP_MINI)) && !(FULL_HOP_ENABLE_DELAY[ENTRY_ID] > 0) {
 			original!()(boma, int)
 		} else {
