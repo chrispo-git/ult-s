@@ -73,13 +73,6 @@ pub fn hero(fighter : &mut L2CFighterCommon) {
 		let fighter_kind = smash::app::utility::get_kind(boma);
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
 		if fighter_kind == *FIGHTER_KIND_BRAVE{
-			if [*FIGHTER_BRAVE_STATUS_KIND_SPECIAL_LW_START, *FIGHTER_BRAVE_STATUS_KIND_SPECIAL_LW_SELECT, *FIGHTER_BRAVE_STATUS_KIND_SPECIAL_LW_CANCEL].contains(&status_kind) {
-				if (ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_DASH) != 0 {
-					if StatusModule::situation_kind(boma) != *SITUATION_KIND_AIR {
-						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_DASH, true);
-					};
-				};
-			};
 			if MotionModule::motion_kind(boma) == hash40("attack_s3_s2") && MotionModule::frame(boma) < 2.0 && ControlModule::get_stick_y(boma) > 0.5 {
 				/*if ray_check_pos(boma, 3.0, 0.0, false) == 0 {
 					let pos = smash::phx::Vector3f { x: PostureModule::pos_x(boma)+3.0, y:  PostureModule::pos_y(boma), z: 0.0 };
