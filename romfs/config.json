@@ -325,42 +325,50 @@
         "fighter/kirby/c00": [
 			"fighter/kirby/model/finalcutter/c00/def_ultrasword_001_col.nutexb",
 			"fighter/kirby/model/finalcutter/c00/def_ultrasword_001_nor.nutexb",
-			"fighter/kirby/model/finalcutter/c00/def_ultrasword_001_prm.nutexb"
+			"fighter/kirby/model/finalcutter/c00/def_ultrasword_001_prm.nutexb",
+			"fighter/kirby/motion/body/c00/d02specialinput.nuanmb"
 		],
         "fighter/kirby/c01": [
 			"fighter/kirby/model/finalcutter/c01/def_ultrasword_001_col.nutexb",
 			"fighter/kirby/model/finalcutter/c01/def_ultrasword_001_nor.nutexb",
-			"fighter/kirby/model/finalcutter/c01/def_ultrasword_001_prm.nutexb"
+			"fighter/kirby/model/finalcutter/c01/def_ultrasword_001_prm.nutexb",
+			"fighter/kirby/motion/body/c01/d02specialinput.nuanmb"
 		],
         "fighter/kirby/c02": [
 			"fighter/kirby/model/finalcutter/c02/def_ultrasword_001_col.nutexb",
 			"fighter/kirby/model/finalcutter/c02/def_ultrasword_001_nor.nutexb",
-			"fighter/kirby/model/finalcutter/c02/def_ultrasword_001_prm.nutexb"
+			"fighter/kirby/model/finalcutter/c02/def_ultrasword_001_prm.nutexb",
+			"fighter/kirby/motion/body/c02/d02specialinput.nuanmb"
 		],
         "fighter/kirby/c03": [
 			"fighter/kirby/model/finalcutter/c03/def_ultrasword_001_col.nutexb",
 			"fighter/kirby/model/finalcutter/c04/def_ultrasword_001_nor.nutexb",
-			"fighter/kirby/model/finalcutter/c05/def_ultrasword_001_prm.nutexb"
+			"fighter/kirby/model/finalcutter/c05/def_ultrasword_001_prm.nutexb",
+			"fighter/kirby/motion/body/c03/d02specialinput.nuanmb"
 		],
         "fighter/kirby/c04": [
 			"fighter/kirby/model/finalcutter/c04/def_ultrasword_001_col.nutexb",
 			"fighter/kirby/model/finalcutter/c04/def_ultrasword_001_nor.nutexb",
-			"fighter/kirby/model/finalcutter/c04/def_ultrasword_001_prm.nutexb"
+			"fighter/kirby/model/finalcutter/c04/def_ultrasword_001_prm.nutexb",
+			"fighter/kirby/motion/body/c04/d02specialinput.nuanmb"
 		],
         "fighter/kirby/c05": [
 			"fighter/kirby/model/finalcutter/c05/def_ultrasword_001_col.nutexb",
 			"fighter/kirby/model/finalcutter/c05/def_ultrasword_001_nor.nutexb",
-			"fighter/kirby/model/finalcutter/c05/def_ultrasword_001_prm.nutexb"
+			"fighter/kirby/model/finalcutter/c05/def_ultrasword_001_prm.nutexb",
+			"fighter/kirby/motion/body/c05/d02specialinput.nuanmb"
 		],
         "fighter/kirby/c06": [
 			"fighter/kirby/model/finalcutter/c06/def_ultrasword_001_col.nutexb",
 			"fighter/kirby/model/finalcutter/c06/def_ultrasword_001_nor.nutexb",
-			"fighter/kirby/model/finalcutter/c06/def_ultrasword_001_prm.nutexb"
+			"fighter/kirby/model/finalcutter/c06/def_ultrasword_001_prm.nutexb",
+			"fighter/kirby/motion/body/c06/d02specialinput.nuanmb"
 		],
         "fighter/kirby/c07": [
 			"fighter/kirby/model/finalcutter/c07/def_ultrasword_001_col.nutexb",
 			"fighter/kirby/model/finalcutter/c07/def_ultrasword_001_nor.nutexb",
-			"fighter/kirby/model/finalcutter/c07/def_ultrasword_001_prm.nutexb"
+			"fighter/kirby/model/finalcutter/c07/def_ultrasword_001_prm.nutexb",
+			"fighter/kirby/motion/body/c07/d02specialinput.nuanmb"
 		]
 	}
 }
