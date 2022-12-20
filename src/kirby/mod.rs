@@ -307,13 +307,13 @@ unsafe fn kirby_bair(fighter: &mut L2CAgentBase) {
 unsafe fn kirby_dair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {	
-		frame(Frame=7)
+		frame(Frame=13)
 		if(is_excute){
 			ArticleModule::generate_article(FIGHTER_KIRBY_GENERATE_ARTICLE_FINALCUTTER, false, 0)
 			ArticleModule::change_motion(FIGHTER_KIRBY_GENERATE_ARTICLE_FINALCUTTER,smash::phx::Hash40::new("special_hi4"),false,0.0)
 			WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
 		}
-		frame(Frame=8)
+		frame(Frame=15)
 		for(5 Iterations){
 			if(is_excute){
 				ATTACK(ID=1, Part=0, Bone=hash40("have"), Damage=1.2, Angle=367, KBG=85, FKB=0, BKB=20, Size=4.5, X=0.0, Y=-3.5, Z=-3.0, X2=0.0, Y2=-3.5, Z2=5.0, Hitlag=0.8, SDI=1.2, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_SWORD)
@@ -332,11 +332,11 @@ unsafe fn kirby_dair(fighter: &mut L2CAgentBase) {
 		if(is_excute){
 			AttackModule::clear_all()
 		}
-		frame(Frame=35)
+		frame(Frame=40)
 		if(is_excute){
 			ArticleModule::remove_exist(FIGHTER_KIRBY_GENERATE_ARTICLE_FINALCUTTER,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL))
 		}
-		frame(Frame=42)
+		frame(Frame=46)
 		if(is_excute){
 			WorkModule::off_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
 		}
@@ -350,22 +350,22 @@ unsafe fn kirby_dair(fighter: &mut L2CAgentBase) {
 unsafe fn kirby_dair_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {	
-		frame(Frame=7)
+		frame(Frame=14)
 		if(is_excute){
 			EFFECT_FOLLOW_FLIP_RND(hash40("sys_spin_wind"), hash40("sys_spin_wind"), hash40("rot"), 0, -8, 1.5, 0, 0, 0, 0.85, 1, 1, 1, 0, 90, 0, true, EF_FLIP_YZ)
 			EFFECT_FOLLOW_FLIP_RND(hash40("sys_spin_wind"), hash40("sys_spin_wind"), hash40("rot"), 0, -12, 1.5, 0, 0, 0, 0.6, 1, 1, 1, 0, 90, 0, true, EF_FLIP_YZ)
 		}
-		frame(Frame=8)
+		frame(Frame=15)
 		if(is_excute){
 			EFFECT(hash40("kirby_star"), hash40("top"), -5, -7, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false)
 			EFFECT(hash40("kirby_star"), hash40("top"), 3, -9, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false)
 			EFFECT(hash40("kirby_star"), hash40("top"), 7, -7, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false)
 		}
-		frame(Frame=11)
+		frame(Frame=17)
 		if(is_excute){
 			EFFECT_FOLLOW_FLIP_RND(hash40("sys_spin_wind"), hash40("sys_spin_wind"), hash40("rot"), 0, -8, 1.5, 0, 0, 0, 0.85, 1, 1, 1, 0, 90, 0, true, EF_FLIP_YZ)
 			EFFECT_FOLLOW_FLIP_RND(hash40("sys_spin_wind"), hash40("sys_spin_wind"), hash40("rot"), 0, -12, 1.5, 0, 0, 0, 0.6, 1, 1, 1, 0, 90, 0, true, EF_FLIP_YZ)
-		}frame(Frame=15)
+		}frame(Frame=21)
 		if(is_excute){
 			EFFECT_FOLLOW_FLIP_RND(hash40("sys_spin_wind"), hash40("sys_spin_wind"), hash40("rot"), 0, -8, 1.5, 0, 0, 0, 0.85, 1, 1, 1, 0, 90, 0, true, EF_FLIP_YZ)
 			EFFECT_FOLLOW_FLIP_RND(hash40("sys_spin_wind"), hash40("sys_spin_wind"), hash40("rot"), 0, -12, 1.5, 0, 0, 0, 0.6, 1, 1, 1, 0, 90, 0, true, EF_FLIP_YZ)
@@ -380,7 +380,7 @@ unsafe fn kirby_dair_eff(fighter: &mut L2CAgentBase) {
 unsafe fn kirby_dair_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {	
-		frame(Frames=7)
+		frame(Frames=15)
 		if(is_excute){
 			PLAY_SE(hash40("se_kirby_swing_l"))
 			PLAY_SEQUENCE(hash40("seq_kirby_rnd_attack"))
