@@ -1005,42 +1005,106 @@
         "fighter/kirby/c00": [
 			"fighter/kirby/model/finalcutter/c00/def_ultrasword_001_col.nutexb",
 			"fighter/kirby/model/finalcutter/c00/def_ultrasword_001_nor.nutexb",
-			"fighter/kirby/model/finalcutter/c00/def_ultrasword_001_prm.nutexb"
+			"fighter/kirby/model/finalcutter/c00/def_ultrasword_001_prm.nutexb",
+			"fighter/kirby/motion/body/c00/d02specialinput.nuanmb",
+			"fighter/kirby/model/finalcutter/c00/def_parasol_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c00/def_spear_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c00/def_speartip_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c00/def_wandball_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c00/def_wandhandle_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c00/def_wheel_001_col.nutexb",
+			"fighter/kirby/motion/finalcutter/c00/d02specialhi5.nuanmb"
 		],
         "fighter/kirby/c01": [
 			"fighter/kirby/model/finalcutter/c01/def_ultrasword_001_col.nutexb",
 			"fighter/kirby/model/finalcutter/c01/def_ultrasword_001_nor.nutexb",
-			"fighter/kirby/model/finalcutter/c01/def_ultrasword_001_prm.nutexb"
+			"fighter/kirby/model/finalcutter/c01/def_ultrasword_001_prm.nutexb",
+			"fighter/kirby/motion/body/c01/d02specialinput.nuanmb",
+			"fighter/kirby/model/finalcutter/c01/def_parasol_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c01/def_spear_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c01/def_speartip_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c01/def_wandball_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c01/def_wandhandle_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c01/def_wheel_001_col.nutexb",
+			"fighter/kirby/motion/finalcutter/c01/d02specialhi5.nuanmb"
 		],
         "fighter/kirby/c02": [
 			"fighter/kirby/model/finalcutter/c02/def_ultrasword_001_col.nutexb",
 			"fighter/kirby/model/finalcutter/c02/def_ultrasword_001_nor.nutexb",
-			"fighter/kirby/model/finalcutter/c02/def_ultrasword_001_prm.nutexb"
+			"fighter/kirby/model/finalcutter/c02/def_ultrasword_001_prm.nutexb",
+			"fighter/kirby/motion/body/c02/d02specialinput.nuanmb",
+			"fighter/kirby/model/finalcutter/c02/def_parasol_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c02/def_spear_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c02/def_speartip_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c02/def_wandball_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c02/def_wandhandle_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c02/def_wheel_001_col.nutexb",
+			"fighter/kirby/motion/finalcutter/c02/d02specialhi5.nuanmb"
 		],
         "fighter/kirby/c03": [
 			"fighter/kirby/model/finalcutter/c03/def_ultrasword_001_col.nutexb",
-			"fighter/kirby/model/finalcutter/c04/def_ultrasword_001_nor.nutexb",
-			"fighter/kirby/model/finalcutter/c05/def_ultrasword_001_prm.nutexb"
+			"fighter/kirby/model/finalcutter/c03/def_ultrasword_001_nor.nutexb",
+			"fighter/kirby/model/finalcutter/c03/def_ultrasword_001_prm.nutexb",
+			"fighter/kirby/motion/body/c03/d02specialinput.nuanmb",
+			"fighter/kirby/model/finalcutter/c03/def_parasol_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c03/def_spear_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c03/def_speartip_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c03/def_wandball_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c03/def_wandhandle_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c03/def_wheel_001_col.nutexb",
+			"fighter/kirby/motion/finalcutter/c03/d02specialhi5.nuanmb"
 		],
         "fighter/kirby/c04": [
 			"fighter/kirby/model/finalcutter/c04/def_ultrasword_001_col.nutexb",
 			"fighter/kirby/model/finalcutter/c04/def_ultrasword_001_nor.nutexb",
-			"fighter/kirby/model/finalcutter/c04/def_ultrasword_001_prm.nutexb"
+			"fighter/kirby/model/finalcutter/c04/def_ultrasword_001_prm.nutexb",
+			"fighter/kirby/motion/body/c04/d02specialinput.nuanmb",
+			"fighter/kirby/model/finalcutter/c04/def_parasol_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c04/def_spear_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c04/def_speartip_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c04/def_wandball_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c04/def_wandhandle_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c04/def_wheel_001_col.nutexb",
+			"fighter/kirby/motion/finalcutter/c04/d02specialhi5.nuanmb"
 		],
         "fighter/kirby/c05": [
 			"fighter/kirby/model/finalcutter/c05/def_ultrasword_001_col.nutexb",
 			"fighter/kirby/model/finalcutter/c05/def_ultrasword_001_nor.nutexb",
-			"fighter/kirby/model/finalcutter/c05/def_ultrasword_001_prm.nutexb"
+			"fighter/kirby/model/finalcutter/c05/def_ultrasword_001_prm.nutexb",
+			"fighter/kirby/motion/body/c05/d02specialinput.nuanmb",
+			"fighter/kirby/model/finalcutter/c05/def_parasol_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c05/def_spear_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c05/def_speartip_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c05/def_wandball_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c05/def_wandhandle_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c05/def_wheel_001_col.nutexb",
+			"fighter/kirby/motion/finalcutter/c05/d02specialhi5.nuanmb"
 		],
         "fighter/kirby/c06": [
 			"fighter/kirby/model/finalcutter/c06/def_ultrasword_001_col.nutexb",
 			"fighter/kirby/model/finalcutter/c06/def_ultrasword_001_nor.nutexb",
-			"fighter/kirby/model/finalcutter/c06/def_ultrasword_001_prm.nutexb"
+			"fighter/kirby/model/finalcutter/c06/def_ultrasword_001_prm.nutexb",
+			"fighter/kirby/motion/body/c06/d02specialinput.nuanmb",
+			"fighter/kirby/model/finalcutter/c06/def_parasol_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c06/def_spear_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c06/def_speartip_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c06/def_wandball_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c06/def_wandhandle_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c06/def_wheel_001_col.nutexb",
+			"fighter/kirby/motion/finalcutter/c06/d02specialhi5.nuanmb"
 		],
         "fighter/kirby/c07": [
 			"fighter/kirby/model/finalcutter/c07/def_ultrasword_001_col.nutexb",
 			"fighter/kirby/model/finalcutter/c07/def_ultrasword_001_nor.nutexb",
-			"fighter/kirby/model/finalcutter/c07/def_ultrasword_001_prm.nutexb"
+			"fighter/kirby/model/finalcutter/c07/def_ultrasword_001_prm.nutexb",
+			"fighter/kirby/motion/body/c07/d02specialinput.nuanmb",
+			"fighter/kirby/model/finalcutter/c07/def_parasol_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c07/def_spear_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c07/def_speartip_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c07/def_wandball_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c07/def_wandhandle_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c07/def_wheel_001_col.nutexb",
+			"fighter/kirby/motion/finalcutter/c07/d02specialhi5.nuanmb"
 		]
 	}
 }
