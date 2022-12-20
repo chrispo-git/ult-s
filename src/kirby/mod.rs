@@ -274,7 +274,7 @@ unsafe fn kirby_bair(fighter: &mut L2CAgentBase) {
 		frame(Frame=8)
 		if(is_excute){
 			ArticleModule::generate_article(FIGHTER_KIRBY_GENERATE_ARTICLE_FINALCUTTER, false, 0)
-			ArticleModule::change_motion(FIGHTER_MASTER_GENERATE_ARTICLE_SWORD,smash::phx::Hash40::new("special_hi2"),false,0.0)
+			ArticleModule::change_motion(FIGHTER_KIRBY_GENERATE_ARTICLE_FINALCUTTER,smash::phx::Hash40::new("special_hi2"),false,0.0)
 			WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
 		}
 		frame(Frame=10)
@@ -299,7 +299,7 @@ unsafe fn kirby_bair(fighter: &mut L2CAgentBase) {
     });
 }		
 
-/*#[acmd_script(
+#[acmd_script(
     agent = "kirby",
     script =  "game_attackairlw",
     category = ACMD_GAME,
@@ -310,14 +310,13 @@ unsafe fn kirby_dair(fighter: &mut L2CAgentBase) {
 		frame(Frame=7)
 		if(is_excute){
 			ArticleModule::generate_article(FIGHTER_KIRBY_GENERATE_ARTICLE_FINALCUTTER, false, 0)
-			ArticleModule::change_motion(FIGHTER_MASTER_GENERATE_ARTICLE_SWORD,smash::phx::Hash40::new("special_hi2"),false,0.0)
+			ArticleModule::change_motion(FIGHTER_KIRBY_GENERATE_ARTICLE_FINALCUTTER,smash::phx::Hash40::new("special_hi4"),false,0.0)
 			WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
 		}
 		frame(Frame=8)
 		for(5 Iterations){
 			if(is_excute){
-				ATTACK(ID=0, Part=0, Bone=hash40("have"), Damage=1.2, Angle=367, KBG=85, FKB=0, BKB=20, Size=2.0, X=0.0, Y=-7.0, Z=2.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.8, SDI=1.2, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_SWORD)
-				ATTACK(ID=1, Part=0, Bone=hash40("have"), Damage=1.2, Angle=367, KBG=85, FKB=0, BKB=20, Size=4.25, X=0.0, Y=-3.5, Z=-2.0, X2=0.0, Y2=-3.0, Z2=5.0, Hitlag=0.8, SDI=1.2, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_SWORD)
+				ATTACK(ID=1, Part=0, Bone=hash40("have"), Damage=1.2, Angle=367, KBG=85, FKB=0, BKB=20, Size=4.5, X=0.0, Y=-3.5, Z=-3.0, X2=0.0, Y2=-3.5, Z2=5.0, Hitlag=0.8, SDI=1.2, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_SWORD)
 			}
 			wait(Frames=2)
 			if(is_excute){
@@ -327,18 +326,17 @@ unsafe fn kirby_dair(fighter: &mut L2CAgentBase) {
 		}	
 		wait(Frames=1)
 		if(is_excute){
-			ATTACK(ID=0, Part=0, Bone=hash40("have"), Damage=1.9, Angle=270, KBG=90, FKB=0, BKB=20, Size=2.0, X=0.0, Y=-7.0, Z=2.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_SWORD)
-			ATTACK(ID=1, Part=0, Bone=hash40("have"), Damage=1.9, Angle=270, KBG=90, FKB=0, BKB=20, Size=4.25, X=0.0, Y=-3.5, Z=-2.0, X2=0.0, Y2=-3.0, Z2=5.0, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_SWORD)
+			ATTACK(ID=1, Part=0, Bone=hash40("have"), Damage=1.9, Angle=270, KBG=90, FKB=0, BKB=20, Size=4.5, X=0.0, Y=-3.5, Z=-3.0, X2=0.0, Y2=-3.5, Z2=5.0, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_SWORD)
 		}
 		wait(Frames=1)
 		if(is_excute){
 			AttackModule::clear_all()
 		}
-		frame(Frame=38)
+		frame(Frame=35)
 		if(is_excute){
 			ArticleModule::remove_exist(FIGHTER_KIRBY_GENERATE_ARTICLE_FINALCUTTER,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL))
 		}
-		frame(Frame=45)
+		frame(Frame=42)
 		if(is_excute){
 			WorkModule::off_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
 		}
@@ -352,11 +350,25 @@ unsafe fn kirby_dair(fighter: &mut L2CAgentBase) {
 unsafe fn kirby_dair_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {	
+		frame(Frame=7)
+		if(is_excute){
+			EFFECT_FOLLOW_FLIP_RND(hash40("sys_spin_wind"), hash40("sys_spin_wind"), hash40("rot"), 0, -8, 1.5, 0, 0, 0, 0.85, 1, 1, 1, 0, 90, 0, true, EF_FLIP_YZ)
+			EFFECT_FOLLOW_FLIP_RND(hash40("sys_spin_wind"), hash40("sys_spin_wind"), hash40("rot"), 0, -12, 1.5, 0, 0, 0, 0.6, 1, 1, 1, 0, 90, 0, true, EF_FLIP_YZ)
+		}
 		frame(Frame=8)
 		if(is_excute){
 			EFFECT(hash40("kirby_star"), hash40("top"), -5, -7, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false)
 			EFFECT(hash40("kirby_star"), hash40("top"), 3, -9, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false)
 			EFFECT(hash40("kirby_star"), hash40("top"), 7, -7, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false)
+		}
+		frame(Frame=11)
+		if(is_excute){
+			EFFECT_FOLLOW_FLIP_RND(hash40("sys_spin_wind"), hash40("sys_spin_wind"), hash40("rot"), 0, -8, 1.5, 0, 0, 0, 0.85, 1, 1, 1, 0, 90, 0, true, EF_FLIP_YZ)
+			EFFECT_FOLLOW_FLIP_RND(hash40("sys_spin_wind"), hash40("sys_spin_wind"), hash40("rot"), 0, -12, 1.5, 0, 0, 0, 0.6, 1, 1, 1, 0, 90, 0, true, EF_FLIP_YZ)
+		}frame(Frame=15)
+		if(is_excute){
+			EFFECT_FOLLOW_FLIP_RND(hash40("sys_spin_wind"), hash40("sys_spin_wind"), hash40("rot"), 0, -8, 1.5, 0, 0, 0, 0.85, 1, 1, 1, 0, 90, 0, true, EF_FLIP_YZ)
+			EFFECT_FOLLOW_FLIP_RND(hash40("sys_spin_wind"), hash40("sys_spin_wind"), hash40("rot"), 0, -12, 1.5, 0, 0, 0, 0.6, 1, 1, 1, 0, 90, 0, true, EF_FLIP_YZ)
 		}
 	});
 }	
@@ -396,7 +408,285 @@ unsafe fn kirby_landing_dair(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all()
 		}
     });
-}*/
+}
+
+#[acmd_script(
+    agent = "kirby",
+    script =  "game_attackhi4",
+    category = ACMD_GAME,
+	low_priority)]
+unsafe fn kirby_usmash(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {	
+		frame(Frame=6)
+		if(is_excute){
+			WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_FLAG_START_SMASH_HOLD)
+			ArticleModule::generate_article(FIGHTER_KIRBY_GENERATE_ARTICLE_FINALCUTTER, false, 0)
+			ArticleModule::change_motion(FIGHTER_KIRBY_GENERATE_ARTICLE_FINALCUTTER,smash::phx::Hash40::new("special_hi"),false,0.0)
+			WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
+		}
+		frame(Frame=15)
+		if(is_excute){
+			ATTACK(ID=1, Part=0, Bone=hash40("have"), Damage=10.0, Angle=89, KBG=90, FKB=0, BKB=45, Size=5.0, X=0.0, Y=25.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.7, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_sting"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_BODY)
+			ATTACK(ID=2, Part=0, Bone=hash40("have"), Damage=15.0, Angle=89, KBG=100, FKB=0, BKB=45, Size=4.0, X=0.0, Y=30.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.5, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_sting"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_BODY)
+			ATTACK(ID=3, Part=0, Bone=hash40("have"), Damage=10.0, Angle=90, KBG=90, FKB=0, BKB=45, Size=5.0, X=0.0, Y=20.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.7, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_sting"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_BODY)
+			ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=3.0, Angle=125, KBG=100, FKB=155, BKB=0, Size=5.5, X=0.0, Y=5.0, Z=5.5, X2=0.0, Y2=5.0, Z2=-5.5, Hitlag=0.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=true, ShieldDamage=0, Trip=0.0, Rehit=2, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_G, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_BODY)
+		}
+		wait(Frames=2)
+		if(is_excute){
+			AttackModule::clear(ID=0, false)
+		}
+		wait(Frames=3)
+		if(is_excute){
+			AttackModule::clear_all()
+		}
+		frame(Frame=42)
+		if(is_excute){
+			ArticleModule::remove_exist(FIGHTER_KIRBY_GENERATE_ARTICLE_FINALCUTTER,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL))
+		}
+    });
+}
+#[acmd_script(
+    agent = "kirby",
+    script =  "effect_attackhi4",
+    category = ACMD_EFFECT,
+	low_priority)]
+unsafe fn kirby_usmash_eff(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {	
+		frame(Frame=12)
+		if(is_excute){
+			LANDING_EFFECT(hash40("sys_v_smoke_a"), hash40("top"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false)
+		}
+		frame(Frame=13)
+		if(is_excute){
+			EFFECT(hash40("sys_attack_speedline"), hash40("top"), -0.0, 20, 0, -90, 0, 0, 0.8, 0, 0, 0, 0, 0, 0, true)
+			LAST_PARTICLE_SET_COLOR(0.4, 0.6, 1)
+			EFFECT(hash40("sys_smash_flash"), hash40("sword1"), -0.0, 31, 0, 0, 0, 0, 0.9, 0, 0, 0, 0, 0, 0, true)
+		}
+    });
+}
+#[acmd_script(
+    agent = "kirby",
+    script =  "sound_attackhi4",
+    category = ACMD_SOUND,
+	low_priority)]
+unsafe fn kirby_usmash_snd(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {	
+		frame(Frame=9)
+		if(is_excute){
+			STOP_SE(hash40("se_common_smash_start_04"))
+		}
+		frame(Frames=9)
+		if(is_excute){
+			PLAY_SE(hash40("vc_kirby_attack06"))
+		}
+		frame(Frames=12)
+		if(is_excute){
+			PLAY_SE(hash40("se_kirby_smash_h01"))
+		}
+    });
+}
+
+#[acmd_script(
+    agent = "kirby",
+    script =  "game_attacklw4",
+    category = ACMD_GAME,
+	low_priority)]
+unsafe fn kirby_dsmash(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {	
+		if(is_excute){
+			WorkModule::on_flag(Flag=FIGHTER_STATUS_SUPER_JUMP_PUNCH_FLAG_MOVE_TRANS)
+		}
+		frame(Frame=5)
+		if(is_excute){
+			WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_FLAG_START_SMASH_HOLD)
+		}
+		frame(Frame=12)
+		if(is_excute){
+			ArticleModule::generate_article(FIGHTER_KIRBY_GENERATE_ARTICLE_FINALCUTTER, false, 0)
+			ArticleModule::change_motion(FIGHTER_KIRBY_GENERATE_ARTICLE_FINALCUTTER,smash::phx::Hash40::new("special_hi5"),false,0.0)
+			WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
+		}
+		frame(Frame=12)
+		if(is_excute){
+			ATTACK(ID=0, Part=0, Bone=hash40("have"), Damage=6.0, Angle=361, KBG=95, FKB=0, BKB=45, Size=4.5, X=0.0, Y=3.0, Z=3.2, X2=0.0, Y2=8.0, Z2=3.2, Hitlag=0.8, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_BODY)
+		}
+		frame(Frame=16)
+		if(is_excute){
+			AttackModule::clear_all()
+		}
+		frame(Frame=24)
+		if(is_excute){
+			ATTACK(ID=0, Part=0, Bone=hash40("have"), Damage=10.0, Angle=361, KBG=90, FKB=0, BKB=55, Size=7.5, X=2.5, Y=5.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.8, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_BODY)
+		}
+		frame(Frame=27)
+		if(is_excute){
+			AttackModule::clear_all()
+		}
+		frame(Frame=54)
+		if(is_excute){
+			ATTACK(ID=0, Part=0, Bone=hash40("have"), Damage=10.0, Angle=361, KBG=90, FKB=0, BKB=55, Size=7.5, X=2.5, Y=5.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.8, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_B, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_BODY)
+		}
+		frame(Frame=57)
+		if(is_excute){
+			AttackModule::clear_all()
+		}
+		frame(Frame=76)
+		if(is_excute){
+			ArticleModule::remove_exist(FIGHTER_KIRBY_GENERATE_ARTICLE_FINALCUTTER,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL))
+		}
+    });
+}
+#[acmd_script(
+    agent = "kirby",
+    script =  "effect_attacklw4",
+    category = ACMD_EFFECT,
+	low_priority)]
+unsafe fn kirby_dsmash_eff(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {	
+		//Going into Wheel
+		frame(Frame=2)
+		if(is_excute){
+			EFFECT(hash40("kirby_stone_s"), hash40("top"), 0, 5, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, true)
+		}
+
+		//First roll right
+		wait(Frames=10)
+		if(is_excute){
+			FOOT_EFFECT(hash40("sys_dash_smoke"), hash40("top"), 7.5, 0, 0, 0, 0, 0, 0.6, 0, 0, 0, 0, 0, 0, false)
+		}
+		frame(Frame=13)
+		if(is_excute){
+			EFFECT_FOLLOW(hash40("sys_attack_speedline"), hash40("top"), 2, 6.5, 0, 0, 180, 0, 1.0, true)
+			LAST_EFFECT_SET_COLOR(0.6, 0.7, 1.0)
+			LAST_EFFECT_SET_RATE(0.2)
+		}
+		frame(Frame=26)
+		if(is_excute){
+			EFFECT_OFF_KIND(hash40("sys_attack_speedline"), false, true)
+		}
+
+		//Roll left
+		frame(Frame=26)
+		if(is_excute){
+			FOOT_EFFECT(hash40("sys_dash_smoke"), hash40("top"), 7.5, 0, 0, 0, 180, 0, 0.6, 0, 0, 0, 0, 0, 0, false)
+		}
+		frame(Frame=32)
+		if(is_excute){
+			EFFECT_FOLLOW(hash40("sys_attack_speedline"), hash40("top"), 0, 6.5, 0, 0, 0, 0, 1.0, true)
+			LAST_EFFECT_SET_COLOR(0.6, 0.7, 1.0)
+			LAST_EFFECT_SET_RATE(0.2)
+		}
+		frame(Frame=56)
+		if(is_excute){
+			EFFECT_OFF_KIND(hash40("sys_attack_speedline"), false, true)
+		}
+
+		//Last roll right
+		frame(Frame=58)
+		if(is_excute){
+			FOOT_EFFECT(hash40("sys_dash_smoke"), hash40("top"), -7.5, 0, 0, 0, 0, 0, 0.6, 0, 0, 0, 0, 0, 0, false)
+		}
+		frame(Frame=61)
+		if(is_excute){
+			EFFECT_FOLLOW(hash40("sys_attack_speedline"), hash40("top"), 0, 6.5, 0, 0, 180, 0, 1.0, true)
+			LAST_EFFECT_SET_COLOR(0.6, 0.7, 1.0)
+			LAST_EFFECT_SET_RATE(0.2)
+		}
+
+		//Exiting wheel
+		frame(Frame=74)
+		if(is_excute){
+			EFFECT_OFF_KIND(hash40("sys_attack_speedline"), false, true)
+			FOOT_EFFECT(hash40("sys_dash_smoke"), hash40("top"), 0, 0, 0, 0, 180, 0, 0.35, 0, 0, 0, 0, 0, 0, false)
+		}
+		frame(Frame=76)
+		if(is_excute){
+			EFFECT_FOLLOW(hash40("kirby_stone_e"), hash40("top"), 0, 10, 0, 0, 0, 0, 1, true)
+		}
+    });
+}
+#[acmd_script(
+    agent = "kirby",
+    script =  "sound_attacklw4",
+    category = ACMD_SOUND,
+	low_priority)]
+unsafe fn kirby_dsmash_snd(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {	
+		//Entering wheel
+		frame(Frame=2)
+		if(is_excute){
+			PLAY_SE_REMAIN(hash40("se_kirby_special_l01"))
+		}
+
+		//Wheel sounds
+		frame(Frame=14)
+		if(is_excute){
+			PLAY_SE(hash40("se_kirby_special_h02"))
+		}
+		frame(Frame=26)
+		if(is_excute){
+			PLAY_SE(hash40("vc_kirby_008"))
+		}
+		frame(Frame=58)
+		if(is_excute){
+			PLAY_SE(hash40("vc_kirby_008"))
+		}
+		frame(Frame=73)
+		if(is_excute){
+			STOP_SE(hash40("se_kirby_special_h02"))
+		}
+
+		//Exiting wheel
+		frame(Frame=76)
+		if(is_excute){
+			PLAY_SEQUENCE(hash40("seq_kirby_rnd_special_lw"))
+		}
+		frame(Frame=82)
+		if(is_excute){
+			PLAY_SE(hash40("se_kirby_special_l03"))
+		}
+    });
+}
+
+#[acmd_script(
+    agent = "kirby",
+    script =  "game_attacklw4b",
+    category = ACMD_GAME,
+	low_priority)]
+unsafe fn kirby_dsmash2(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {	
+		
+    });
+}
+#[acmd_script(
+    agent = "kirby",
+    script =  "effect_attacklw4b",
+    category = ACMD_EFFECT,
+	low_priority)]
+unsafe fn kirby_dsmash2_eff(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {	
+		
+    });
+}
+#[acmd_script(
+    agent = "kirby",
+    script =  "sound_attacklw4b",
+    category = ACMD_SOUND,
+	low_priority)]
+unsafe fn kirby_dsmash2_snd(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {	
+		
+    });
+}
 
 #[acmd_script(
     agent = "kirby",
@@ -445,7 +735,9 @@ unsafe fn kirby_ground_downb_eff(fighter: &mut L2CAgentBase) {
 unsafe fn kirby_ground_downb_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {	
-		
+		if(is_excute){
+			PLAY_SEQUENCE(hash40("seq_kirby_rnd_attack"))
+		}
 	});
 }	
 #[acmd_script(
@@ -756,10 +1048,19 @@ unsafe fn kirby_sideb_start(fighter: &mut L2CAgentBase) {
 unsafe fn kirby_sideb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {		
+		frame(Frame=3)
+		if(is_excute){
+			ArticleModule::generate_article(FIGHTER_KIRBY_GENERATE_ARTICLE_FINALCUTTER, false, 0)
+			ArticleModule::change_motion(FIGHTER_KIRBY_GENERATE_ARTICLE_FINALCUTTER,smash::phx::Hash40::new("special_hi3"),false,0.0)
+		}
 		frame(Frames=17)
 		if(is_excute){
 			SET_SPEED_EX(-1.0, 0.25, KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN)
 			ArticleModule::generate_article(FIGHTER_KIRBY_GENERATE_ARTICLE_FINALCUTTERSHOT, false, 0)
+		}
+		frame(Frame=46)
+		if(is_excute){
+			ArticleModule::remove_exist(FIGHTER_KIRBY_GENERATE_ARTICLE_FINALCUTTER,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL))
 		}
     });
 }	
@@ -773,7 +1074,7 @@ unsafe fn kirby_sideb_eff(fighter: &mut L2CAgentBase) {
     acmd!(lua_state, {	
 		frame(Frame=16)
 		if(is_excute){
-			EFFECT_FOLLOW(hash40("sys_hit_magic"), hash40("havel"), 0, 0, 0, 0, 0, 0, 0.3, true)
+			EFFECT_FOLLOW(hash40("sys_hit_magic"), hash40("havel"), 3.7, -3.2, 0, 0, 0, 0, 0.3, true)
 		}
     });
 }
@@ -882,20 +1183,6 @@ unsafe fn kirby_special_input_eff(fighter: &mut L2CAgentBase) {
 	}
 }
 
-/*#[acmd_script(
-    agent = "kirby_finalcutter",
-    scripts =  ["game_finalcutter2"],
-    category = ACMD_GAME, 
-	low_priority)]
-unsafe fn kirby_sword(fighter: &mut L2CAgentBase) {
-    let lua_state = fighter.lua_state_agent;
-    let otarget_id = WorkModule::get_int(fighter.module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LINK_OWNER) as u32;
-    let boma = smash::app::sv_battle_object::module_accessor(otarget_id);
-    let ENTRY_ID = WorkModule::get_int(&mut *boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-    ModelModule::set_mesh_visibility(fighter.module_accessor,Hash40::new("UltraswordMShape"),false);
-	ModelModule::set_mesh_visibility(fighter.module_accessor,Hash40::new("UltraswordMShape.001"),false);
-}*/
-
 #[fighter_frame( agent = FIGHTER_KIND_KIRBY )]
 fn kirby_frame(fighter: &mut L2CFighterCommon) {
     unsafe {
@@ -906,7 +1193,7 @@ fn kirby_frame(fighter: &mut L2CFighterCommon) {
 		let frame = MotionModule::frame(boma);
 		let situation_kind = StatusModule::situation_kind(boma);
 		let is_near_ground = GroundModule::ray_check(boma, &Vector2f{ x: PostureModule::pos_x(boma), y: PostureModule::pos_y(boma)}, &Vector2f{ x: 0.0, y: -1.0}, true);
-		
+
 		//CI shit
 		if [hash40("special_input")].contains(&MotionModule::motion_kind(boma)) {
 			if MotionModule::frame(boma) >= 0.0 {
@@ -1005,7 +1292,7 @@ fn kirby_frame(fighter: &mut L2CFighterCommon) {
 		} else {
 			IS_FINAL[ENTRY_ID] = false;
 		};
-		if [*FIGHTER_STATUS_KIND_ATTACK_AIR].contains(&status_kind) == false {
+		if [*FIGHTER_STATUS_KIND_ATTACK_AIR, *FIGHTER_STATUS_KIND_ATTACK_HI4, *FIGHTER_STATUS_KIND_ATTACK_HI4_HOLD, *FIGHTER_STATUS_KIND_ATTACK_HI4_START, *FIGHTER_STATUS_KIND_SPECIAL_S, *FIGHTER_KIRBY_STATUS_KIND_SPECIAL_S_ATTACK, *FIGHTER_STATUS_KIND_ATTACK_LW4, *FIGHTER_STATUS_KIND_ATTACK_LW4_HOLD, *FIGHTER_STATUS_KIND_ATTACK_LW4_START].contains(&status_kind) == false {
 			ArticleModule::remove_exist(boma, *FIGHTER_KIRBY_GENERATE_ARTICLE_FINALCUTTER,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
 		};
 		if [*FIGHTER_STATUS_KIND_ATTACK_S4, *FIGHTER_STATUS_KIND_ATTACK_S4_START, *FIGHTER_STATUS_KIND_ATTACK_S4_HOLD].contains(&status_kind) == false {
@@ -1142,16 +1429,25 @@ pub fn install() {
 		kirby_upb_sound,
 		kirby_upb4,
 		kirby_bair,
-		//kirby_dair,
-		//kirby_dair_eff,
-		//kirby_dair_snd,
+		kirby_dair,
+		kirby_dair_eff,
+		kirby_dair_snd,
+		kirby_usmash,
+		kirby_usmash_eff,
+		kirby_usmash_snd,
+		kirby_dsmash,
+		kirby_dsmash_eff,
+		kirby_dsmash_snd,
+		kirby_dsmash2,
+		kirby_dsmash2_eff,
+		kirby_dsmash2_snd,
 		kirby_ground_downb,
 		kirby_ground_downb_eff,
 		kirby_ground_downb_snd,
 		kirby_ground_downb2,
 		kirby_ground_downb2_eff,
 		kirby_ground_downb2_snd,
-		//kirby_landing_dair,
+		kirby_landing_dair,
 		kirby_landing_bair,
 		kirby_bair_eff,
 		kirby_bair_snd,
@@ -1173,7 +1469,6 @@ pub fn install() {
 		kirby_ftilt_eff,
 		kirby_ftilt_sound,
 		kirby_downb_end_air,
-		//kirby_sword,
 		kirby_special_input,
 		kirby_special_input_snd,
 		kirby_special_input_eff
