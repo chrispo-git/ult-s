@@ -949,11 +949,11 @@ pub fn char_input(fighter : &mut L2CFighterCommon) {
 						INPUT_NUM[ENTRY_ID] += 1;
 						//println!("Input 1!");
 					};
-					if INPUT_NUM[ENTRY_ID] == 1 && STICK_NUM[ENTRY_ID] == 3{
+					if INPUT_NUM[ENTRY_ID] == 1 && STICK_NUM[ENTRY_ID] == 1{
 						INPUT_NUM[ENTRY_ID] += 1;
 						//println!("Input 2!");
 					};
-					if INPUT_NUM[ENTRY_ID] == 2 && STICK_NUM[ENTRY_ID] == 6 {
+					if INPUT_NUM[ENTRY_ID] == 2 && STICK_NUM[ENTRY_ID] == 4 {
 						INPUT_NUM[ENTRY_ID] += 1;
 						//println!("Input 3!");
 					};
