@@ -196,6 +196,9 @@ unsafe fn joker_fsmash(fighter: &mut L2CAgentBase) {
 		if(is_excute){
 			WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_FLAG_START_SMASH_HOLD)
 		}
+		FT_MOTION_RATE(FSM=0.5)
+		wait(Frames=8)
+		FT_MOTION_RATE(FSM=1)
 		frame(Frame=16)
 		if(is_excute){
 			ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=14.0, Angle=361, KBG=5, FKB=0, BKB=60, Size=2.0, X=0.0, Y=10.0, Z=12.0, X2=0.0, Y2=6.0, Z2=12.0, Hitlag=0.8, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_SWORD)
@@ -234,7 +237,7 @@ unsafe fn joker_fsmash(fighter: &mut L2CAgentBase) {
 }		
 #[acmd_script(
     agent = "jack",
-    scripts =  ["game_specialn1_ex", "game_specialairn1_ex", "game_specialn1", "game_specialairn1", "game_specialn2", "game_specialairn2", "game_specialn3", "game_specialairn3"],
+    scripts =  ["game_specialn1_ex", "game_specialn1"],
     category = ACMD_GAME,
 	low_priority)]
 unsafe fn joker_gun(fighter: &mut L2CAgentBase) {
@@ -253,14 +256,6 @@ unsafe fn joker_gun(fighter: &mut L2CAgentBase) {
 					acmd!(lua_state, {ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=5.0, Angle=361, KBG=40, FKB=0, BKB=75, Size=4.5, X=0.0, Y=11.0, Z=9.0, X2=0.0, Y2=11.0, Z2=30.0, Hitlag=0.5, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=-2, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_jack_bullet"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_JACK_SHOT, Type=ATTACK_REGION_OBJECT)});
 				} else if GUN_C[ENTRY_ID] == ATTACK_S4 {
 					acmd!(lua_state, {ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=5.0, Angle=120, KBG=30, FKB=0, BKB=100, Size=4.5, X=0.0, Y=11.0, Z=9.0, X2=0.0, Y2=11.0, Z2=44.0, Hitlag=0.5, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=-2, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_jack_bullet"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_JACK_SHOT, Type=ATTACK_REGION_OBJECT)});
-				} else if GUN_C[ENTRY_ID] == ATTACK_LW4 {
-					acmd!(lua_state, {ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=5.0, Angle=361, KBG=30, FKB=0, BKB=55, Size=4.5, X=0.0, Y=11.0, Z=9.0, X2=0.0, Y2=11.0, Z2=50.0, Hitlag=0.5, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=-2, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_jack_bullet"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_JACK_SHOT, Type=ATTACK_REGION_OBJECT)});
-				}  else if GUN_C[ENTRY_ID] == ATTACK_AIR_HI {
-					acmd!(lua_state, {ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=5.0, Angle=90, KBG=60, FKB=0, BKB=60, Size=14.0, X=0.0, Y=11.0, Z=9.0, X2=0.0, Y2=11.0, Z2=9.0, Hitlag=0.5, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=-2, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_jack_bullet"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_JACK_SHOT, Type=ATTACK_REGION_OBJECT)});
-				} else if GUN_C[ENTRY_ID] == ATTACK_AIR_F {
-					acmd!(lua_state, {ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=5.0, Angle=50, KBG=30, FKB=0, BKB=5, Size=5.5, X=0.0, Y=11.0, Z=9.0, X2=0.0, Y2=11.0, Z2=30.0, Hitlag=0.5, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=-2, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=true, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_jack_bullet"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_JACK_SHOT, Type=ATTACK_REGION_OBJECT)});
-				} else if GUN_C[ENTRY_ID] == ATTACK_AIR_LW {
-					acmd!(lua_state, {ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=5.0, Angle=55, KBG=155, FKB=0, BKB=35, Size=4.5, X=0.0, Y=11.0, Z=9.0, X2=0.0, Y2=11.0, Z2=44.0, Hitlag=0.5, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=-2, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_jack_bullet"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_JACK_SHOT, Type=ATTACK_REGION_OBJECT)});
 				} else {
 					acmd!(lua_state, {ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=1.0, Angle=361, KBG=30, FKB=0, BKB=5, Size=2.5, X=0.0, Y=11.0, Z=9.0, X2=0.0, Y2=11.0, Z2=50.0, Hitlag=0.5, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=-2, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_jack_bullet"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_JACK_SHOT, Type=ATTACK_REGION_OBJECT)});
 				};
@@ -277,27 +272,87 @@ unsafe fn joker_gun(fighter: &mut L2CAgentBase) {
 		if(is_excute){
 			AttackModule::clear_all()
 		}
-		wait(Frames=1)
+		frame(Frame=26)
 		if(is_excute){
-			rust {
-				if StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR {
-					acmd!(lua_state, {
-						WorkModule::on_flag(Flag=FIGHTER_JACK_STATUS_SPECIAL_N_FLAG_CHECK_BARRAGE_TRIGGER)
-						WorkModule::on_flag(Flag=FIGHTER_JACK_STATUS_SPECIAL_N_FLAG_CHECK_BARRAGE_BUTTON_ON)
-					});
-				};
-			}
+			WorkModule::on_flag(Flag=FIGHTER_JACK_STATUS_SPECIAL_N_FLAG_CHECK_BUTTON_RAPID)
 		}
-		frame(Frame=22)
+		frame(Frame=27)
+		if(is_excute){
+			WorkModule::on_flag(Flag=FIGHTER_JACK_STATUS_SPECIAL_N_FLAG_UNABLE_JUMP)
+		}
+		frame(Frame=31)
 		if(is_excute){
 			WorkModule::on_flag(Flag=FIGHTER_JACK_STATUS_SPECIAL_N_FLAG_CHECK_NEXT_STATUS)
 		}
-		frame(Frame=24)
+		frame(Frame=34)
 		if(is_excute){
 			WorkModule::on_flag(Flag=FIGHTER_JACK_STATUS_SPECIAL_N_FLAG_UNABLE_SPECIAL_N)
 		}
     });
 }		
+#[acmd_script(
+    agent = "jack",
+    scripts =  ["game_specialairn1_ex", "game_specialairn1"],
+    category = ACMD_GAME,
+	low_priority)]
+unsafe fn joker_gun_air(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
+	let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
+	let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+    acmd!(lua_state, {
+		if(is_excute){
+			WorkModule::on_flag(Flag=FIGHTER_JACK_STATUS_SPECIAL_N_FLAG_UNABLE_SPECIAL_N)
+		}
+		frame(Frame=12)
+		if(is_excute){
+			rust {
+				if GUN_C[ENTRY_ID] == ATTACK_AIR_HI {
+					acmd!(lua_state, {ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=5.0, Angle=90, KBG=60, FKB=0, BKB=60, Size=14.0, X=0.0, Y=11.0, Z=9.0, X2=0.0, Y2=11.0, Z2=9.0, Hitlag=0.5, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=-2, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_jack_bullet"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_JACK_SHOT, Type=ATTACK_REGION_OBJECT)});
+				} else if GUN_C[ENTRY_ID] == ATTACK_AIR_F {
+					acmd!(lua_state, {ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=5.0, Angle=50, KBG=30, FKB=0, BKB=5, Size=5.5, X=0.0, Y=11.0, Z=9.0, X2=0.0, Y2=11.0, Z2=30.0, Hitlag=0.5, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=-2, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=true, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_jack_bullet"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_JACK_SHOT, Type=ATTACK_REGION_OBJECT)});
+				} else {
+					acmd!(lua_state, {ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=1.0, Angle=361, KBG=30, FKB=0, BKB=5, Size=2.5, X=0.0, Y=11.0, Z=9.0, X2=0.0, Y2=11.0, Z2=50.0, Hitlag=0.5, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=-2, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_jack_bullet"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_JACK_SHOT, Type=ATTACK_REGION_OBJECT)});
+				};
+				GUN_C[ENTRY_ID] = NONE;
+				if WorkModule::is_flag(boma, *FIGHTER_JACK_INSTANCE_WORK_ID_FLAG_DOYLE) {
+					acmd!(lua_state, {AttackModule::set_add_reaction_frame(ID=0, Frames=6.0, Unk=false)});
+				};
+			}
+			FT_SHOOTING_ATTACK_GROUND_CHECK_NEW(0, 4, 4)
+			FT_SHOOTING_ATTACK_GROUND_CHECK_NEW(1, 4, 4)
+			FT_SHOOTING_ATTACK_GROUND_CHECK_NEW_arg5(2, 4, 4, hash40("jack_gun_hit2"), hash40("se_jack_special_n02"))
+		}
+		wait(Frames=1)
+		if(is_excute){
+			AttackModule::clear_all()
+		}
+		frame(Frame=14)
+		if(is_excute){
+			WorkModule::on_flag(Flag=FIGHTER_JACK_STATUS_SPECIAL_N_FLAG_CHECK_BARRAGE_TRIGGER)
+		}
+		frame(Frame=17)
+		if(is_excute){
+			WorkModule::on_flag(Flag=FIGHTER_JACK_STATUS_SPECIAL_N_FLAG_CHECK_BARRAGE_BUTTON_ON)
+		}
+		frame(Frame=21)
+		if(is_excute){
+			WorkModule::on_flag(Flag=FIGHTER_JACK_STATUS_SPECIAL_N_FLAG_ENABLE_CONTROL_ENERGY)
+		}
+		frame(Frame=26)
+		if(is_excute){
+			WorkModule::on_flag(Flag=FIGHTER_JACK_STATUS_SPECIAL_N_FLAG_CHECK_BUTTON_RAPID)
+		}
+		frame(Frame=31)
+		if(is_excute){
+			WorkModule::on_flag(Flag=FIGHTER_JACK_STATUS_SPECIAL_N_FLAG_CHECK_NEXT_STATUS)
+		}
+		frame(Frame=34)
+		if(is_excute){
+			WorkModule::on_flag(Flag=FIGHTER_JACK_STATUS_SPECIAL_N_FLAG_UNABLE_SPECIAL_N)
+		}
+    });
+}	
 #[acmd_script(
     agent = "jack",
     scripts =  ["sound_specialn1_ex", "sound_specialairn1_ex"],
@@ -397,7 +452,57 @@ unsafe fn joker_gun_b(fighter: &mut L2CAgentBase) {
 			rust {
 				if GUN_C[ENTRY_ID] == ATTACK_S3 {
 					acmd!(lua_state, {ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=5.0, Angle=68, KBG=70, FKB=0, BKB=80, Size=4.5, X=0.0, Y=11.0, Z=9.0, X2=0.0, Y2=11.0, Z2=30.0, Hitlag=0.5, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=-2, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_jack_bullet"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_JACK_SHOT, Type=ATTACK_REGION_OBJECT)});
-				}else if GUN_C[ENTRY_ID] == ATTACK_AIR_B {
+				} else {
+					acmd!(lua_state, {ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=1.0, Angle=50, KBG=30, FKB=0, BKB=5, Size=2.5, X=0.0, Y=11.0, Z=9.0, X2=0.0, Y2=11.0, Z2=50.0, Hitlag=0.5, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=-2, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=true, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_jack_bullet"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_JACK_SHOT, Type=ATTACK_REGION_OBJECT)});
+				};
+				if WorkModule::is_flag(boma, *FIGHTER_JACK_INSTANCE_WORK_ID_FLAG_DOYLE) {
+					acmd!(lua_state, {AttackModule::set_add_reaction_frame(ID=0, Frames=6.0, Unk=false)});
+				};
+				GUN_C[ENTRY_ID] = NONE;
+			}
+			FT_SHOOTING_ATTACK_GROUND_CHECK_NEW(0, 4, 4)
+			FT_SHOOTING_ATTACK_GROUND_CHECK_NEW(1, 4, 4)
+			FT_SHOOTING_ATTACK_GROUND_CHECK_NEW_arg5(2, 4, 4, hash40("jack_gun_hit2"), hash40("se_jack_special_n02"))
+		}
+		wait(Frames=1)
+		if(is_excute){
+			AttackModule::clear_all()
+		}
+		frame(Frame=39)
+		if(is_excute){
+			WorkModule::on_flag(Flag=FIGHTER_JACK_STATUS_SPECIAL_N_FLAG_CHECK_NEXT_STATUS)
+			WorkModule::on_flag(Flag=FIGHTER_JACK_STATUS_SPECIAL_N_FLAG_CHECK_BARRAGE_BUTTON_ON)
+		}
+		frame(Frame=42)
+		if(is_excute){
+			WorkModule::on_flag(Flag=FIGHTER_JACK_STATUS_SPECIAL_N_FLAG_UNABLE_SPECIAL_N)
+		}
+    });
+}			
+#[acmd_script(
+    agent = "jack",
+    scripts =  ["game_specialairnescapeb_ex", "game_specialairnescapeb"],
+    category = ACMD_GAME,
+	low_priority)]
+unsafe fn joker_gun_b_air(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
+	let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
+	let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+    acmd!(lua_state, {
+		frame(Frame=4)
+		if(is_excute){
+			JostleModule::set_status(false)
+		}
+		frame(Frame=17)
+		if(is_excute){
+			JostleModule::set_status(true)
+			WorkModule::on_flag(Flag=FIGHTER_JACK_STATUS_SPECIAL_N_FLAG_UNABLE_SPECIAL_N)
+		}
+		frame(Frame=22)
+		if(is_excute){
+			rust {
+				if GUN_C[ENTRY_ID] == ATTACK_AIR_B {
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL, true);
 				} else {
 					acmd!(lua_state, {ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=1.0, Angle=50, KBG=30, FKB=0, BKB=5, Size=2.5, X=0.0, Y=11.0, Z=9.0, X2=0.0, Y2=11.0, Z2=50.0, Hitlag=0.5, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=-2, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=true, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_jack_bullet"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_JACK_SHOT, Type=ATTACK_REGION_OBJECT)});
@@ -415,8 +520,26 @@ unsafe fn joker_gun_b(fighter: &mut L2CAgentBase) {
 		if(is_excute){
 			AttackModule::clear_all()
 		}
+		frame(Frame=32)
+		if(is_excute){
+			WorkModule::on_flag(Flag=FIGHTER_JACK_STATUS_SPECIAL_N_FLAG_ENABLE_CONTROL_ENERGY)
+		}
+		frame(Frame=36)
+		if(is_excute){
+			WorkModule::on_flag(Flag=FIGHTER_JACK_STATUS_SPECIAL_N_FLAG_CHECK_BARRAGE_TRIGGER)
+		}
+		frame(Frame=37)
+		frame(Frame=39)
+		if(is_excute){
+			WorkModule::on_flag(Flag=FIGHTER_JACK_STATUS_SPECIAL_N_FLAG_CHECK_NEXT_STATUS)
+			WorkModule::on_flag(Flag=FIGHTER_JACK_STATUS_SPECIAL_N_FLAG_CHECK_BARRAGE_BUTTON_ON)
+		}
+		frame(Frame=42)
+		if(is_excute){
+			WorkModule::on_flag(Flag=FIGHTER_JACK_STATUS_SPECIAL_N_FLAG_UNABLE_SPECIAL_N)
+		}
     });
-}			
+}		
 #[acmd_script(
     agent = "jack",
     scripts =  ["game_specials2"],
@@ -609,7 +732,9 @@ pub fn install() {
 		joker_eiagon,
 		joker_eiagon_air,
 		joker_gun,
+		joker_gun_air,
 		joker_gun_b,
+		joker_gun_b_air,
 		s_joker_gun,
 		s_joker_gun_b,
 		e_joker_gun,
