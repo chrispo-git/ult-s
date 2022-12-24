@@ -10,6 +10,7 @@ mod melee;
 mod faf_change;
 mod command;
 mod cancel;
+mod training;
 
 pub fn install() {
     dacus::install();
@@ -24,4 +25,5 @@ pub fn install() {
 	faf_change::install();
 	command::install();
 	cancel::install();
+    training::install();
 }

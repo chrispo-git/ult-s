@@ -380,10 +380,13 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
     <!--LINK-->
     <struct index="2">
       <hash40 hash="clip_sphere_node">bust</hash40>
+      <float hash="ground_brake">0.08</float>
+      <float hash="dash_speed">2.01</float>
+      <float hash="run_speed_max">1.76</float>
       <float hash="jump_speed_x_mul">0.875</float>
       <float hash="mini_jump_y">12.7</float>
       <float hash="jump_aerial_y">26</float>
-      <float hash="air_speed_x_stable">0.95</float>
+      <float hash="air_speed_x_stable">1.08</float>
       <float hash="weight">102</float>
       <float hash="tread_jump_speed_y_mul">1.0</float>
       <float hash="tread_mini_jump_speed_y_mul">0.475</float>
@@ -426,7 +429,7 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
       <float hash="air_accel_y">0.175</float>
       <float hash="air_speed_y_stable">2.3</float>
       <float hash="dive_speed_y">4.025</float>
-      <float hash="weight">70</float>
+      <float hash="weight">80</float>
       <float hash="landing_attack_air_frame_n">8</float>
       <float hash="landing_attack_air_frame_lw">12</float>
       <float hash="landing_frame">4</float>
@@ -482,7 +485,7 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
       <float hash="dive_speed_y">3.072</float>
       <float hash="landing_attack_air_frame_f">14</float>
       <float hash="landing_attack_air_frame_b">8</float>
-      <float hash="landing_attack_air_frame_hi">8</float>
+      <float hash="landing_attack_air_frame_hi">6</float>
       <float hash="landing_frame">4</float>
       <float hash="tread_jump_speed_y_mul">1.0</float>
       <float hash="tread_mini_jump_speed_y_mul">0.475</float>
@@ -817,7 +820,7 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
       <float hash="air_speed_y_stable">1.875</float>
       <float hash="dive_speed_y">3</float>
       <float hash="weight">80</float>
-      <float hash="landing_attack_air_frame_f">12</float>
+      <float hash="landing_attack_air_frame_f">7</float>
       <float hash="landing_attack_air_frame_b">12</float>
       <float hash="landing_attack_air_frame_lw">14</float>
       <float hash="landing_frame">4</float>
@@ -1155,8 +1158,8 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
     </struct>
     <!--JOKER-->
     <struct index="68">
-      <float hash="ground_brake">0.1</float>
-      <float hash="dash_speed">2.06</float>
+      <float hash="ground_brake">0.09</float>
+      <float hash="dash_speed">2.11</float>
       <float hash="run_speed_max">1.97</float>
       <float hash="jump_speed_x_mul">1.15</float>
       <float hash="air_accel_x_mul">0.05</float>

@@ -182,6 +182,9 @@ fn samusd_frame(fighter: &mut L2CFighterCommon) {
 				};
 			};
 		};
+		if [*FIGHTER_STATUS_KIND_JUMP, *FIGHTER_STATUS_KIND_JUMP_AERIAL].contains(&status_kind) {
+			VisibilityModule::set_whole(boma, true);
+		};
     }
 }
 #[weapon_frame( agent = WEAPON_KIND_SAMUSD_MISSILE )]
