@@ -31,15 +31,15 @@ pub fn ridley(fighter : &mut L2CFighterCommon) {
 			if MotionModule::motion_kind(boma) == hash40("attack_air_lw") {
 				if (33..35).contains(&(MotionModule::frame(boma) as i32)) {
 					let mut is_bounce = false;
-					for i in 0..13 {
-						for f in 0..13 {
-							if ray_check_pos(boma, (f as f32)-8.0, (i as f32)*-1.0 - 8.0, true) == 1 {
+					for i in 0..12 {
+						for f in 0..16 {
+							if ray_check_pos(boma, (f as f32)-8.0, (i as f32)*-1.0 - 10.0, true) == 1 {
 								is_bounce = true;
 							};
 						};
 					};
 					if  is_bounce || AttackModule::is_infliction_status(boma, *COLLISION_CATEGORY_MASK_ALL) {
-						macros::SET_SPEED_EX(fighter, 0.9, 2.0, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+						macros::SET_SPEED_EX(fighter, 0.9, 2.2, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
 					};
 				};
 			};
