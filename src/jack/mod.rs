@@ -1,10 +1,17 @@
-use smash::hash40;
+use smash::app::sv_animcmd::*;
+use smash::phx::Hash40;
+use smash::app::lua_bind::*;
 use smash::lib::lua_const::*;
+use smash::app::utility::get_kind;
+use smash::hash40;
 use smash::lua2cpp::*;
 use smashline::*;
 use smash_script::*;
-use smash::app::lua_bind::*;
-use smash::phx::Hash40;
+use smash::lib::{L2CValue, L2CAgent};
+use std::mem;
+use smash::app::*;
+use smash::phx::Vector3f;
+use crate::util::*;
 
 //Joker Gun Cancel Constants 
 const NONE : i32 = 100;
@@ -26,6 +33,8 @@ static mut GUN_C: [i32; 8] = [100; 8];
 static mut IS_ARSENE: [bool; 8] = [false; 8];
 static mut X: [f32; 8] = [0.0; 8];
 static mut Y: [f32; 8] = [0.0; 8];
+static mut BATON_TYPE: [i32; 8] = [0; 8];
+static BATON_MAX : i32 = 2;
 
 #[acmd_script(
     agent = "jack",
@@ -576,6 +585,36 @@ unsafe fn joker_eiagon_air(fighter: &mut L2CAgentBase) {
 		}
     });
 }
+#[acmd_script(
+    agent = "jack",
+    scripts =  ["game_specials1", "game_specialairs1"],
+    category = ACMD_GAME,
+	low_priority)]
+unsafe fn joker_sideb(fighter: &mut L2CAgentBase) {
+        let lua_state = fighter.lua_state_agent;
+		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+		frame(fighter.lua_state_agent, 7.0);
+		if macros::is_excute(fighter) {
+			BATON_TYPE[ENTRY_ID] += 1;
+			if BATON_TYPE[ENTRY_ID] > BATON_MAX {
+				BATON_TYPE[ENTRY_ID] = 0;
+			}
+			if BATON_TYPE[ENTRY_ID] == 0 {
+				ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_JACK_GENERATE_ARTICLE_MONA, false, 0);
+				ArticleModule::change_motion(fighter.module_accessor, *FIGHTER_JACK_GENERATE_ARTICLE_MONA,smash::phx::Hash40::new("special_s1"),false,0.0);
+			} else if BATON_TYPE[ENTRY_ID] == 1 {
+				ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_JACK_GENERATE_ARTICLE_MONA, false, 0);
+				ArticleModule::change_motion(fighter.module_accessor, *FIGHTER_JACK_GENERATE_ARTICLE_MONA,smash::phx::Hash40::new("special_s2"),false,0.0);
+			} else {
+				ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_JACK_GENERATE_ARTICLE_MONA, false, 0);
+				ArticleModule::change_motion(fighter.module_accessor, *FIGHTER_JACK_GENERATE_ARTICLE_MONA,smash::phx::Hash40::new("special_s3"),false,0.0);
+			};
+		}
+		frame(fighter.lua_state_agent, 48.0);
+		if macros::is_excute(fighter) {
+			ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_JACK_GENERATE_ARTICLE_MONA,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
+		}
+}	
 #[fighter_frame( agent = FIGHTER_KIND_KIRBY )]
 fn kirby_joker_frame(fighter: &mut L2CFighterCommon) {
     unsafe {
@@ -742,7 +781,8 @@ pub fn install() {
 		joker_fsmash,
 		joker_bair,
 		joker_fair,
-		joker_uair
+		joker_uair,
+		joker_sideb
     );
 	smashline::install_agent_frames!(joker_frame, kirby_joker_frame);
 }

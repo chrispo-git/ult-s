@@ -1,5 +1,23 @@
 {
 	"new-dir-files": {
+        "fighter/jack/c00": [
+            "fighter/jack/model/mona/c00/jack_p5_subchara_cube_specular.nutexb",
+            "fighter/jack/model/mona/c00/jack_p_panther_body_col.nutexb",
+            "fighter/jack/model/mona/c00/jack_p_panther_body_nor.nutexb",
+            "fighter/jack/model/mona/c00/jack_p_panther_body_prm.nutexb",
+            "fighter/jack/model/mona/c00/jack_p_panther_head_all_col.nutexb",
+            "fighter/jack/model/mona/c00/jack_p_panther_head_all_nor.nutexb",
+            "fighter/jack/model/mona/c00/jack_p_panther_head_all_prm.nutexb",
+            "fighter/jack/model/mona/c00/jack_p_skull_body_col.nutexb",
+            "fighter/jack/model/mona/c00/jack_p_skull_body_nor.nutexb",
+            "fighter/jack/model/mona/c00/jack_p_skull_body_prm.nutexb",
+            "fighter/jack/model/mona/c00/jack_p_skull_head_all_col.nutexb",
+            "fighter/jack/model/mona/c00/jack_p_skull_head_all_nor.nutexb",
+            "fighter/jack/model/mona/c00/jack_p_skull_head_all_prm.nutexb",
+            "fighter/jack/motion/mona/c00/d01specials1.nuanmb",
+            "fighter/jack/motion/mona/c00/d01specials2.nuanmb",
+            "fighter/jack/motion/mona/c00/d01specials3.nuanmb"
+        ],
         "fighter/reflet/c00": [
 			"fighter/reflet/motion/body/c00/d02specialhi.nuanmb"
 		],
