@@ -20,7 +20,8 @@ pub fn non_tumble_di(fighter : &mut L2CFighterCommon) {
         let lua_state = fighter.lua_state_agent;
         let mut l2c_agent = L2CAgent::new(lua_state);
         if [*FIGHTER_STATUS_KIND_DAMAGE, *FIGHTER_STATUS_KIND_DAMAGE_AIR].contains(&status_kind) {
-            if FighterStopModuleImpl::is_damage_stop(boma){
+            println!("hitlag: {}", StopModule::get_hit_stop_real_frame(boma));
+            if StopModule::get_hit_stop_real_frame(boma) as i32 == 1{
                 smash::lua2cpp::L2CFighterCommon::FighterStatusDamage__correctDamageVector(fighter);
                 println!("opff for hitstun being triggered");
             }
