@@ -397,7 +397,7 @@ unsafe fn e_joker_gun_b(fighter: &mut L2CAgentBase) {
 }	
 #[acmd_script(
     agent = "jack",
-    scripts =  ["sound_specialnescapeb_ex", "sound_specialairnescapeb_ex"],
+    scripts =  ["sound_specialnescapeb", "sound_specialairnescapeb", "sound_specialnescapeb_ex", "sound_specialairnescapeb_ex"],
     category = ACMD_SOUND,
 	low_priority)]
 unsafe fn s_joker_gun_b(fighter: &mut L2CAgentBase) {
