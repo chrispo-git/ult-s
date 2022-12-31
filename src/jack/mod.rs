@@ -786,6 +786,75 @@ unsafe fn joker_sideb_eff(fighter: &mut L2CAgentBase) {
 			};
 		}
 }	
+#[acmd_script(
+    agent = "jack",
+    scripts =  ["sound_specials1", "sound_specialairs1"],
+    category = ACMD_SOUND,
+	low_priority)]
+unsafe fn joker_sideb_snd(fighter: &mut L2CAgentBase) {
+        let lua_state = fighter.lua_state_agent;
+		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+		frame(fighter.lua_state_agent, 3.0);
+		let rand_val = smash::app::sv_math::rand(hash40("fighter"), 3);
+		if BATON_TYPE[ENTRY_ID] == 0 { //Skull (Ryuji)
+			frame(fighter.lua_state_agent, 6.0);
+			if macros::is_excute(fighter) {
+				if rand_val == 0 {
+					macros::PLAY_SE(fighter, Hash40::new("vc_jack_special_s02")); // vc 2
+				} else {
+					macros::PLAY_SE(fighter, Hash40::new("vc_jack_special_n03")); // vc 1
+				};
+			};
+			frame(fighter.lua_state_agent, 14.0);
+			if macros::is_excute(fighter) {
+				macros::PLAY_SE(fighter, Hash40::new("se_common_smashswing_02"));
+				macros::PLAY_SE(fighter, Hash40::new("se_common_down_m_02"));
+				macros::PLAY_SE(fighter, Hash40::new("se_common_electric_hit_s"));
+			};
+			println!("");
+		} else if BATON_TYPE[ENTRY_ID] == 1 { // Panther (Ann)
+			frame(fighter.lua_state_agent, 8.0);
+			if macros::is_excute(fighter) {
+				if rand_val == 0 {
+					macros::PLAY_SE(fighter, Hash40::new("vc_jack_special_n02")); // vc 1
+				} else {
+					macros::PLAY_SE(fighter, Hash40::new("vc_jack_special_s01")); // vc 2
+				};
+			};
+			frame(fighter.lua_state_agent, 19.0);
+			if macros::is_excute(fighter) {
+				macros::PLAY_SE(fighter, Hash40::new("se_common_bomb_ll"));
+			};
+		} else { //Mona (Morgana)
+			frame(fighter.lua_state_agent, 6.0);
+			if macros::is_excute(fighter) {
+				if rand_val == 0 {
+					macros::PLAY_SE(fighter, Hash40::new("vc_jack_special_n01")); // vc 1
+				} else {
+					macros::PLAY_SE(fighter, Hash40::new("vc_jack_special_n04")); // vc 2
+				};
+			};
+			frame(fighter.lua_state_agent, 14.0);
+			for _ in 0..5 {
+				if macros::is_excute(fighter) {
+					macros::PLAY_SE(fighter, Hash40::new("se_common_swing_01"));
+				}
+				wait(fighter.lua_state_agent, 1.0);
+				if macros::is_excute(fighter) {
+					macros::PLAY_SE(fighter, Hash40::new("se_common_swing_03"));
+				}
+				wait(fighter.lua_state_agent, 1.0);
+				if macros::is_excute(fighter) {
+					macros::PLAY_SE(fighter, Hash40::new("se_common_swing_02"));
+				}
+				wait(fighter.lua_state_agent, 1.0);
+			};
+			frame(fighter.lua_state_agent, 30.0);
+			if macros::is_excute(fighter) {
+				macros::PLAY_SE(fighter, Hash40::new("se_common_swing_08"));
+			}
+		}
+}	
 
 //KIRBY - MAKE SURE ANY CHANGES TO NEUTRLAB ARE ON BOTH
 #[fighter_frame( agent = FIGHTER_KIND_KIRBY )]
@@ -964,7 +1033,8 @@ pub fn install() {
 		
 		//Baton Pass
 		joker_sideb,
-		joker_sideb_eff
+		joker_sideb_eff,
+		joker_sideb_snd
     );
 	smashline::install_agent_frames!(joker_frame, kirby_joker_frame);
 }
