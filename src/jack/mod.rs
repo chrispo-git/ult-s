@@ -409,7 +409,6 @@ unsafe fn s_joker_gun_b(fighter: &mut L2CAgentBase) {
 		frame(Frame=5)
 		if(is_excute){
 			PLAY_SE(hash40("se_jack_escape"))
-			PLAY_SEQUENCE(hash40("seq_jack_rnd_special_n01"))
 		}
 		frame(Frame=22)
 		if(is_excute){
