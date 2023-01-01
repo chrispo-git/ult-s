@@ -277,8 +277,8 @@ pub fn install() {
 		zelda_fair,
 		zelda_nair,
 		zelda_dtilt,
-		zelda_jab1,
-		zelda_usmash
+		zelda_jab1//,
+		//zelda_usmash
     );
 	smashline::install_status_scripts!(special_lw_pre, special_lw2_pre);
 }
