@@ -371,6 +371,10 @@ unsafe fn dpit_upb(fighter: &mut L2CAgentBase) {
 				KineticModule::add_speed(fighter.module_accessor, &speed);
 			}
 		}
+		frame(Frame=7)
+		if(is_excute){
+			ATTACK(ID=0, Part=0, Bone=hash40("havel"), Damage=11.0, Angle=80, KBG=90, FKB=0, BKB=50, Size=8.0, X=0.0, Y=0.0, Z=0.0, X2=0.0, Y2=0.0, Z2=0.0, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_THRU, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_elec"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_HEAVY, Type=ATTACK_REGION_PUNCH)
+		}
 		frame(Frame=10)
 		if(is_excute){
 			AttackModule::clear_all()
