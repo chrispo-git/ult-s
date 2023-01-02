@@ -4,6 +4,11 @@ use smash::app::lua_bind::*;
 use smash::lua2cpp::*;
 use smashline::*;
 use smash_script::*;
+use crate::util::*;
+
+static mut NO_WAVEDASH_TIMER : [i32; 8] = [0; 8];
+static NO_WAVEDASH_MAX : i32 = 8;
+
 #[acmd_script(
     agent = "samus",
     script =  "game_attack11",
@@ -302,9 +307,16 @@ fn samus_frame(fighter: &mut L2CFighterCommon) {
 		let motion_kind = MotionModule::motion_kind(boma);
 		let frame = MotionModule::frame(boma);
 		if [hash40("attack_lw3")].contains(&motion_kind) {
-			if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP) && frame > 6.0 && !AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_SHIELD){
+			if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP) && frame > 6.0 && !AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_SHIELD) && !ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_SPECIAL) && !ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_GUARD){
 				CancelModule::enable_cancel(boma);
+				NO_WAVEDASH_TIMER[ENTRY_ID] = NO_WAVEDASH_MAX;
 			};
+		};
+		if NO_WAVEDASH_TIMER[ENTRY_ID] > 0{
+			CAN_AIRDODGE[ENTRY_ID] = 1;
+			NO_WAVEDASH_TIMER[ENTRY_ID] -= 1;
+		} else {
+			CAN_AIRDODGE[ENTRY_ID] = 0;
 		};
     }
 }
