@@ -1,9 +1,17 @@
-use smash::hash40;
+use smash::app::sv_animcmd::*;
+use smash::phx::Hash40;
 use smash::app::lua_bind::*;
 use smash::lib::lua_const::*;
+use smash::app::utility::get_kind;
+use smash::hash40;
 use smash::lua2cpp::*;
 use smashline::*;
 use smash_script::*;
+use smash::lib::{L2CValue, L2CAgent};
+use std::mem;
+use smash::app::*;
+use smash::phx::Vector3f;
+use crate::util::*;
 
 static mut HAS_DOUBLE_UPB : [bool; 8] = [false; 8];
 static mut SPEED_DOUBLE_UPB : [bool; 8] = [false; 8];
@@ -15,10 +23,26 @@ pub fn ridley(fighter : &mut L2CFighterCommon) {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
 		let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-		let mut stick_x = ControlModule::get_stick_x(boma) ;
+		let mut stick_x = ControlModule::get_stick_x(boma);
+		let stick_y = ControlModule::get_stick_y(boma);
 		stick_x *= PostureModule::lr(boma);
 		let fighter_kind = smash::app::utility::get_kind(boma);
 		if fighter_kind == *FIGHTER_KIND_RIDLEY {
+			if MotionModule::motion_kind(boma) == hash40("attack_air_lw") {
+				if (33..35).contains(&(MotionModule::frame(boma) as i32)) {
+					let mut is_bounce = false;
+					for i in 0..12 {
+						for f in 0..16 {
+							if ray_check_pos(boma, (f as f32)-8.0, (i as f32)*-1.0 - 10.0, true) == 1 {
+								is_bounce = true;
+							};
+						};
+					};
+					if  is_bounce || AttackModule::is_infliction_status(boma, *COLLISION_CATEGORY_MASK_ALL) {
+						macros::SET_SPEED_EX(fighter, 0.9, 2.2, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+					};
+				};
+			};
 			if StatusModule::situation_kind(boma) != *SITUATION_KIND_AIR && ![*FIGHTER_RIDLEY_STATUS_KIND_SPECIAL_HI_CHARGE_B, *FIGHTER_RIDLEY_STATUS_KIND_SPECIAL_HI_CHARGE_F, *FIGHTER_RIDLEY_STATUS_KIND_SPECIAL_HI_CHARGE_HI].contains(&status_kind) {
 				HAS_DOUBLE_UPB[ENTRY_ID] = false;
 			};
@@ -29,23 +53,38 @@ pub fn ridley(fighter : &mut L2CFighterCommon) {
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_ATTACK_DASH, true);
 				};
 			};*/
+			if [*FIGHTER_RIDLEY_STATUS_KIND_SPECIAL_N_SHOOT, *FIGHTER_RIDLEY_STATUS_KIND_SPECIAL_N_CHARGE].contains(&status_kind) {
+				if status_kind == *FIGHTER_RIDLEY_STATUS_KIND_SPECIAL_N_SHOOT {
+					if StatusModule::is_situation_changed(boma) {
+						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_LANDING, true);
+					};
+				};
+				if StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR {
+					let cat2 = ControlModule::get_command_flag_cat(boma, 1);
+					if (cat2 & *FIGHTER_PAD_CMD_CAT2_FLAG_FALL_JUMP) != 0 && stick_y < -0.66 && SPEED_Y[ENTRY_ID] <= 0.0 {
+						WorkModule::set_flag(boma, true, *FIGHTER_STATUS_WORK_ID_FLAG_RESERVE_DIVE);
+					}
+				};
+			};
+			if [hash40("special_s_start"), hash40("special_air_s_start")].contains(&MotionModule::motion_kind(boma)) {
+				if MotionModule::frame(boma) < 24.0 {
+					MotionModule::set_rate(boma, 1.5);
+				} else {
+					MotionModule::set_rate(boma, 1.0);
+				};
+			};
 			if [hash40("special_air_s_start")].contains(&MotionModule::motion_kind(boma)) {
 				if GroundModule::is_wall_touch_line(boma, *GROUND_TOUCH_FLAG_SIDE as u32) && MotionModule::frame(boma) > 27.0 && MotionModule::frame(boma) < 35.0 && stick_x < -0.7 {
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_PASSIVE_WALL_JUMP, true);
 				};
 			};
 			if status_kind == *FIGHTER_RIDLEY_STATUS_KIND_SPECIAL_S_CATCH {
-				macros::SET_SPEED_EX(fighter, 3.0*0.8, 1.75*0.8, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+				macros::SET_SPEED_EX(fighter, 1.5, 0.75, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+				MotionModule::set_rate(boma, 2.0);
+				StatusModule::set_keep_situation_air(boma, true);
 			};
 			if status_kind == *FIGHTER_RIDLEY_STATUS_KIND_SPECIAL_S_FALL {
-				let speed = smash::phx::Vector3f { x: 0.05, y: -0.1, z: 0.0 };
-				if MotionModule::frame(boma) < 2.0 {
-					macros::SET_SPEED_EX(fighter, 2.75*0.8, 1.75*0.8, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
-				};
-				KineticModule::add_speed(boma, &speed);
-				if MotionModule::frame(boma) > 27.0 || ControlModule::check_button_on_trriger(boma, *CONTROL_PAD_BUTTON_SPECIAL) {
-					StatusModule::change_status_request_from_script(boma, *FIGHTER_RIDLEY_STATUS_KIND_SPECIAL_S_FALL_JUMP, true);
-				};
+				macros::SET_SPEED_EX(fighter, 1.25, 0.4, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
 				StatusModule::set_keep_situation_air(boma, true);
 			};
 			if [*FIGHTER_RIDLEY_STATUS_KIND_SPECIAL_HI_CHARGE_B, *FIGHTER_RIDLEY_STATUS_KIND_SPECIAL_HI_CHARGE_F, *FIGHTER_RIDLEY_STATUS_KIND_SPECIAL_HI_CHARGE_HI].contains(&status_kind) &&  WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_HIT_STOP_ATTACK_SUSPEND_FRAME) < 1 && AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_HIT) {
@@ -229,7 +268,73 @@ unsafe fn ridley_sideb_end(fighter: &mut L2CAgentBase) {
 	low_priority)]
 unsafe fn ridley_sideb_fall_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
+}	
+
+#[acmd_script(
+    agent = "ridley",
+    script =  "game_attackairlw",
+    category = ACMD_GAME,
+	low_priority)]
+unsafe fn ridley_dair(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=8)
+		FT_MOTION_RATE(FSM=0.4)
+		if(is_excute){
+			WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
+		}
+		wait(Frames=20)
+		FT_MOTION_RATE(FSM=1)
+		frame(Frame=33)
+		if(is_excute){
+			ATTACK(ID=0, Part=0, Bone=hash40("tail3"), Damage=12.0, Angle=50, KBG=95, FKB=0, BKB=45, Size=5.0, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_sting"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_TAIL)
+			ATTACK(ID=1, Part=0, Bone=hash40("tail5"), Damage=12.0, Angle=50, KBG=95, FKB=0, BKB=45, Size=5.0, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_sting"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_TAIL)
+			ATTACK(ID=2, Part=0, Bone=hash40("tail8"), Damage=18.0, Angle=280, KBG=100, FKB=0, BKB=20, Size=5.0, X=6.8, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.3, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_sting"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_TAIL)
+			ATTACK(ID=3, Part=0, Bone=hash40("tail7"), Damage=12.0, Angle=50, KBG=95, FKB=0, BKB=45, Size=5.0, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_sting"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_TAIL)
+		}
+		frame(Frame=35)
+		if(is_excute){
+			ATTACK(ID=0, Part=0, Bone=hash40("tail3"), Damage=8.0, Angle=50, KBG=95, FKB=0, BKB=45, Size=5.0, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_sting"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_TAIL)
+			ATTACK(ID=1, Part=0, Bone=hash40("tail5"), Damage=8.0, Angle=50, KBG=95, FKB=0, BKB=45, Size=5.0, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_sting"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_TAIL)
+			ATTACK(ID=2, Part=0, Bone=hash40("tail8"), Damage=15.0, Angle=361, KBG=100, FKB=0, BKB=20, Size=5.0, X=6.8, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.15, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_sting"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_TAIL)
+			ATTACK(ID=3, Part=0, Bone=hash40("tail7"), Damage=8.0, Angle=50, KBG=95, FKB=0, BKB=45, Size=5.0, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_sting"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_TAIL)
+		}
+		frame(Frame=39)
+		if(is_excute){
+			AttackModule::clear_all()
+		}
+		frame(Frame=58)
+		if(is_excute){
+			WorkModule::off_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
+		}
+    });
 }		
+
+#[acmd_script( 
+	agent = "ridley", 
+	script = "effect_attackairlw",
+	category = ACMD_EFFECT,
+	low_priority)]
+unsafe fn ridley_dair_eff(fighter : &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 7.0);
+    if macros::is_excute(fighter) {
+        macros::EFFECT(fighter, Hash40::new("sys_smash_flash"), Hash40::new("tail8"), 4, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, true);
+    }
+    frame(fighter.lua_state_agent, 29.0);
+    if macros::is_excute(fighter) {
+        macros::EFFECT_FOLLOW(fighter, Hash40::new("ridley_death_stab_flare"), Hash40::new("tail8"), 0, 0, 0, 0, 180, 0, 1, true);
+        macros::EFFECT_FOLLOW(fighter, Hash40::new("ridley_death_stab_line"), Hash40::new("top"), 0, -7, -8, 60, 0, 0, 0.9, true);
+    }
+    frame(fighter.lua_state_agent, 33.0);
+    if macros::is_excute(fighter) {
+        macros::EFFECT(fighter, Hash40::new("sys_sp_flash"), Hash40::new("tail8"), 10, -0.0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, true);
+        macros::LAST_EFFECT_SET_RATE(fighter, 1.5);
+    }
+    wait(fighter.lua_state_agent, 5.0);
+    if macros::is_excute(fighter) {
+        macros::EFFECT_OFF_KIND(fighter, Hash40::new("ridley_death_stab_flare"), false, true);
+    }
+}
 		
 pub fn install() {
     smashline::install_acmd_scripts!(
@@ -237,7 +342,9 @@ pub fn install() {
 		ridley_fair,
 		ridley_bair,
 		ridley_sideb_end,
-		ridley_sideb_fall_eff
+		ridley_sideb_fall_eff,
+		ridley_dair,
+		ridley_dair_eff
     );
 	smashline::install_agent_frame_callbacks!(ridley);
 }
