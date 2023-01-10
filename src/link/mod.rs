@@ -755,7 +755,7 @@ fn link_frame(fighter: &mut L2CFighterCommon) {
         let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
         let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
         //Make sure to put all statuses that use the weapon in here
-        if ![*FIGHTER_STATUS_KIND_ATTACK_S3, *FIGHTER_STATUS_KIND_ATTACK_LW4_START, *FIGHTER_STATUS_KIND_ATTACK_LW4, *FIGHTER_STATUS_KIND_ATTACK_LW4_HOLD, *FIGHTER_STATUS_KIND_SPECIAL_N, *FIGHTER_STATUS_KIND_ATTACK_AIR].contains(&status_kind) || [hash40("special_lw"), hash40("special_air_lw")].contains(&motion_kind) {
+        if ![*FIGHTER_STATUS_KIND_ATTACK_S3, *FIGHTER_STATUS_KIND_ATTACK_LW4_START, *FIGHTER_STATUS_KIND_ATTACK_LW4, *FIGHTER_STATUS_KIND_ATTACK_LW4_HOLD, *FIGHTER_STATUS_KIND_SPECIAL_N, *FIGHTER_STATUS_KIND_ATTACK_AIR].contains(&status_kind) || [hash40("special_lw"), hash40("special_air_lw")].contains(&MotionModule::motion_kind(boma)) {
             ArticleModule::change_status_exist(boma, *FIGHTER_LINK_GENERATE_ARTICLE_BOW, *WN_LINK_BOW_STATUS_KIND_BACK);
 			let motion_kind = MotionModule::motion_kind(boma);
         };
