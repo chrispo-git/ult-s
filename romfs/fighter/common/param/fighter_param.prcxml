@@ -902,7 +902,19 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
     </struct>
     <!--VILLAGER-->
     <struct index="45">
-      <float hash="air_speed_x_stable">1.095</float>
+      <float hash="walk_speed_max">1.26</float>
+      <float hash="ground_brake">0.111</float>
+      <float hash="dash_speed">2.211</float>
+      <float hash="run_speed_max">1.97</float>
+      <float hash="jump_y">29.8</float>
+      <float hash="mini_jump_y">12.5</float>
+      <float hash="jump_aerial_y">29.8</float>
+      <float hash="air_accel_x_mul">0.05</float>
+      <float hash="air_accel_x_add">0.01</float>
+      <float hash="air_speed_x_stable">1.01</float>
+      <float hash="air_accel_y">0.09</float>
+      <float hash="air_speed_y_stable">1.9</float>
+      <float hash="dive_speed_y">3.04</float>
       <float hash="weight">88</float>
       <float hash="landing_attack_air_frame_n">6</float>
       <float hash="landing_attack_air_frame_f">12</float>

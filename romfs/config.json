@@ -1,5 +1,29 @@
 {
 	"new-dir-files": {
+        "fighter/murabito/c00": [
+            "fighter/murabito/model/firework/c00/def_firework_001_rst.nutexb"
+        ],
+        "fighter/murabito/c01": [
+                "fighter/murabito/model/firework/c01/def_firework_001_rst.nutexb"
+        ],
+        "fighter/murabito/c02": [
+                "fighter/murabito/model/firework/c02/def_firework_001_rst.nutexb"
+        ],
+        "fighter/murabito/c03": [
+                "fighter/murabito/model/firework/c03/def_firework_001_rst.nutexb"
+        ],
+        "fighter/murabito/c04": [
+                "fighter/murabito/model/firework/c04/def_firework_001_rst.nutexb"
+        ],
+        "fighter/murabito/c05": [
+                "fighter/murabito/model/firework/c05/def_firework_001_rst.nutexb"
+        ],
+        "fighter/murabito/c06": [
+                "fighter/murabito/model/firework/c06/def_firework_001_rst.nutexb"
+        ],
+        "fighter/murabito/c07": [
+                "fighter/murabito/model/firework/c07/def_firework_001_rst.nutexb"
+        ],
         "fighter/link/c00": [
 			"fighter/link/model/bow/c00/def_blade_001_col.nutexb",
 			"fighter/link/model/bow/c00/def_smasher_001_col.nutexb",
