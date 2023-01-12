@@ -131,21 +131,21 @@ pub unsafe fn on_flag_hook(boma: &mut smash::app::BattleObjectModuleAccessor, in
 			HAS_ENABLE_100_ON[WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize] = true;
 			let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
 			let fighter_kind = smash::app::utility::get_kind(boma);
-			if ![*FIGHTER_STATUS_KIND_ATTACK, *FIGHTER_DEMON_STATUS_KIND_ATTACK_COMBO].contains(&status_kind) || [*FIGHTER_KIND_MURABITO].contains(&fighter_kind){
+			if ![*FIGHTER_STATUS_KIND_ATTACK, *FIGHTER_DEMON_STATUS_KIND_ATTACK_COMBO].contains(&status_kind) {
 				original!()(boma, int)
 			};
 		} else if int == *FIGHTER_STATUS_ATTACK_FLAG_ENABLE_COMBO {
 			HAS_ENABLE_COMBO_ON[WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize] = true;
 			let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
 			let fighter_kind = smash::app::utility::get_kind(boma);
-			if status_kind != *FIGHTER_STATUS_KIND_ATTACK || [*FIGHTER_KIND_MURABITO].contains(&fighter_kind) {
+			if status_kind != *FIGHTER_STATUS_KIND_ATTACK  {
 				original!()(boma, int)
 			};
 		} else if int == *FIGHTER_STATUS_ATTACK_FLAG_ENABLE_NO_HIT_COMBO {
 			HAS_ENABLE_NO_HIT_COMBO_ON[WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize] = true;
 			let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
 			let fighter_kind = smash::app::utility::get_kind(boma);
-			if status_kind != *FIGHTER_STATUS_KIND_ATTACK || [*FIGHTER_KIND_MURABITO].contains(&fighter_kind) {
+			if status_kind != *FIGHTER_STATUS_KIND_ATTACK  {
 				original!()(boma, int)
 			};
 		} else if int == *FIGHTER_STATUS_WORK_ID_FLAG_RESERVE_JUMP_MINI {
