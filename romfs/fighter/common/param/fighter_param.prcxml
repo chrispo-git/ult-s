@@ -902,6 +902,7 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
     </struct>
     <!--VILLAGER-->
     <struct index="45">
+      <hash40 hash="attack_combo_type">fighter_combo_type_succeed</hash40>
       <float hash="walk_speed_max">1.26</float>
       <float hash="ground_brake">0.111</float>
       <float hash="dash_speed">2.211</float>
@@ -922,6 +923,10 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
       <float hash="landing_frame">4</float>
       <float hash="tread_jump_speed_y_mul">1.0</float>
       <float hash="tread_mini_jump_speed_y_mul">0.475</float>
+      <float hash="combo_attack_12_end">28</float>
+      <float hash="combo_attack_13_end">28</float>
+      <int hash="attack_combo_max">3</int>
+      <bool hash="attack100_type">false</bool>
     </struct>
     <!--MEGAMAN-->
     <struct index="46">
