@@ -201,6 +201,50 @@ unsafe fn toad_nair(fighter: &mut L2CAgentBase) {
 }
 #[acmd_script(
     agent = "murabito",
+    script =  "game_attackairb",
+    category = ACMD_GAME,
+	low_priority)]
+unsafe fn toad_bair(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=4)
+		if(is_excute){
+			WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
+		}
+		frame(Frame=6)
+		if(is_excute){
+			ATTACK(ID=0, Part=0, Bone=hash40("legc"), Damage=9.0, Angle=62, KBG=85, FKB=0, BKB=35, Size=6.8, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_B, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
+		}
+		frame(Frame=9)
+		if(is_excute){
+			ATTACK(ID=0, Part=0, Bone=hash40("legc"), Damage=5.0, Angle=62, KBG=85, FKB=0, BKB=35, Size=4.0, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_B, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
+		}
+		frame(Frame=15)
+		if(is_excute){
+			AttackModule::clear_all()
+		}
+		frame(Frame=30)
+		if(is_excute){
+			WorkModule::off_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
+		}
+    });
+}
+#[acmd_script(
+    agent = "murabito",
+    script =  "sound_attackairb",
+    category = ACMD_SOUND,
+	low_priority)]
+unsafe fn toad_bair_snd(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=5)
+		if(is_excute){
+			PLAY_SE(hash40("se_murabito_swing_l"))
+		}
+    });
+}	
+#[acmd_script(
+    agent = "murabito",
     script =  "game_attackairhi",
     category = ACMD_GAME,
 	low_priority)]
@@ -371,6 +415,15 @@ unsafe fn toad_da_eff(fighter: &mut L2CAgentBase) {
 }
 #[acmd_script(
     agent = "murabito",
+    script =  "sound_attackdash",
+    category = ACMD_SOUND,
+	low_priority)]
+unsafe fn toad_da_snd(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+	//idk what to put here yet
+}
+#[acmd_script(
+    agent = "murabito",
     script =  "game_attackhi3",
     category = ACMD_GAME,
 	low_priority)]
@@ -387,6 +440,20 @@ unsafe fn toad_utilt(fighter: &mut L2CAgentBase) {
 		}
     });
 }	
+#[acmd_script(
+    agent = "murabito",
+    script =  "sound_attackhi3",
+    category = ACMD_SOUND,
+	low_priority)]
+unsafe fn toad_utilt_snd(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=5)
+		if(is_excute){
+			PLAY_SE(hash40("se_murabito_swing_s"))
+		}
+    });
+}
 #[acmd_script(
     agent = "murabito",
     script =  "effect_attackhi3",
@@ -453,11 +520,36 @@ unsafe fn toad_usmash_eff(fighter: &mut L2CAgentBase) {
     acmd!(lua_state, {
 		frame(Frame=13)
 		if(is_excute){
-			EFFECT(0x12de01e4e5u64, hash40("havel"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false)
+			EFFECT(0x12de01e4e5u64, hash40("havel"), 0, 0, 0, 0, 0, 0, 0.75, 0, 0, 0, 0, 0, 0, false)
+			EFFECT(0x12de01e4e5u64, hash40("havel"), 0, 0, 0, 270, 0, 0, 0.75, 0, 0, 0, 0, 0, 0, false)
 		}
-		frame(Frame=45)
+		frame(Frame=48)
 		if(is_excute){
 			LANDING_EFFECT(hash40("sys_down_smoke"), hash40("top"), 3, 0, 0, 0, 0, 0, 0.8, 0, 0, 0, 0, 0, 0, false)
+		}
+    });
+}	
+#[acmd_script(
+    agent = "murabito",
+    script =  "sound_attackhi4",
+    category = ACMD_SOUND,
+	low_priority)]
+unsafe fn toad_usmash_snd(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=6)
+		if(is_excute){
+			PLAY_SE(hash40("se_common_step_jump"))
+		}
+		frame(Frame=13)
+		if(is_excute){
+			PLAY_SE(hash40("se_common_smashswing_01"))
+			PLAY_SE(hash40("se_common_pitin_move_00"))
+			PLAY_SE(hash40("se_common_landing_brick"))
+		}
+		frame(Frame=47)
+		if(is_excute){
+			PLAY_SE(hash40("se_common_landing_soil"))
 		}
     });
 }	
@@ -469,7 +561,7 @@ unsafe fn toad_usmash_eff(fighter: &mut L2CAgentBase) {
 unsafe fn toad_usmash_coin(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
-		frame(Frame=7)
+		frame(Frame=2)
 		if(is_excute){
 			ArticleModule::generate_article(WEAPON_MURABITO_SLINGSHOT_GENERATE_ARTICLE_BULLET, true, 0)
 			ArticleModule::shoot(WEAPON_MURABITO_SLINGSHOT_GENERATE_ARTICLE_BULLET, smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_LAST), false)
@@ -500,17 +592,18 @@ unsafe fn toad_usmash_coin_eff(fighter: &mut L2CAgentBase) {
 unsafe fn toad_usmash_coin_bullet(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
+		frame(Frame=5)
 		if(is_excute){
-			ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=5.0, Angle=90, KBG=100, FKB=0, BKB=55, Size=5.0, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=-3.5, Trip=0.0, Rehit=0, Reflectable=true, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_COIN, Type=ATTACK_REGION_OBJECT)
+			ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=5.0, Angle=90, KBG=100, FKB=0, BKB=55, Size=5.0, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.4, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=-3.5, Trip=0.0, Rehit=0, Reflectable=true, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_COIN, Type=ATTACK_REGION_OBJECT)
 			AttackModule::enable_safe_pos()
 		}
-		frame(Frame=3)
+		wait(Frames=3)
 		if(is_excute){
-			ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=3.0, Angle=90, KBG=100, FKB=0, BKB=10, Size=1.2, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=-2, Trip=0.0, Rehit=0, Reflectable=true, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_COIN, Type=ATTACK_REGION_OBJECT)
+			ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=3.0, Angle=90, KBG=100, FKB=0, BKB=10, Size=1.2, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.4, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=-2, Trip=0.0, Rehit=0, Reflectable=true, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_COIN, Type=ATTACK_REGION_OBJECT)
 		}
-		frame(Frame=9)
+		wait(Frames=6)
 		if(is_excute){
-			ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=1.5, Angle=90, KBG=100, FKB=0, BKB=10, Size=1.2, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=-1, Trip=0.0, Rehit=0, Reflectable=true, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_COIN, Type=ATTACK_REGION_OBJECT)
+			ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=1.5, Angle=90, KBG=100, FKB=0, BKB=10, Size=1.2, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.4, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=-1, Trip=0.0, Rehit=0, Reflectable=true, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_COIN, Type=ATTACK_REGION_OBJECT)
 		}
     });
 }	
@@ -572,18 +665,21 @@ pub fn install() {
 		//Dash Attack
 		toad_da,
 		toad_da_eff,
+		toad_da_snd,
 		toad_shell_burst_eff,
 
 		//Tilts
 		toad_utilt,
 		toad_utilt_eff,
+		toad_utilt_snd,
 
 		//Smashes
 		toad_usmash,
 		toad_usmash_eff,
+		toad_usmash_snd,
 		toad_usmash_coin,
-		toad_usmash_coin_eff,
-		toad_usmash_coin_snd,
+		//toad_usmash_coin_eff,
+		//toad_usmash_coin_snd,
 		toad_usmash_coin_bullet,
 		toad_usmash_coin_bullet_eff,
 		toad_usmash_coin_bullet_snd,
@@ -595,7 +691,9 @@ pub fn install() {
 		toad_uair_snd,
 		toad_fair,
 		toad_fair_eff,
-		toad_fair_snd
+		toad_fair_snd,
+		toad_bair,
+		toad_bair_snd
     );
     smashline::install_agent_frame_callbacks!(toad);
 }
