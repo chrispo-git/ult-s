@@ -7,9 +7,13 @@ use smash_script::*;
 use smash::phx::Hash40;
 use smash::app::ArticleOperationTarget;
 use smash::lib::L2CValue;
-static mut FIREBALL : [i32; 8] = [0; 8];
-static NONE :  smash::phx::Vector3f =  smash::phx::Vector3f { x: 0.0, y: 0.0, z: 0.0 };
+use smash::phx::Vector3f;
 
+static mut FIREBALL : [i32; 8] = [0; 8];
+static mut UPB_ANGLE : [i32; 8] = [1; 8];
+static mut SPECIAL_ZOOM_GFX : [i32; 8] = [0; 8];
+static mut KOOPA_EXCELLENT_SMASH : [bool; 8] = [false; 8];
+static NONE :  smash::phx::Vector3f =  smash::phx::Vector3f { x: 0.0, y: 0.0, z: 0.0 };
 
 #[acmd_script(
     agent = "koopa",
@@ -128,6 +132,65 @@ unsafe fn bowser_snd_dair(fighter: &mut L2CAgentBase) {
     });
 }		
 
+#[acmd_script(
+    agent = "koopa",
+    script =  "game_attacks4",
+    category = ACMD_GAME,
+	low_priority)]
+unsafe fn bowser_fsmash(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=13)
+        if(is_excute){
+            WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_FLAG_START_SMASH_HOLD)
+        }
+		frame(Frame=22)
+		if(is_excute){
+			ATTACK(ID=0, Part=0, Bone=hash40("haver"), Damage=22.0, Angle=361, KBG=97, FKB=0, BKB=28, Size=8.5, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_PUNCH)
+			ATTACK(ID=1, Part=0, Bone=hash40("haver"), Damage=22.0, Angle=361, KBG=97, FKB=0, BKB=28, Size=8.5, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_PUNCH)
+			ATTACK(ID=2, Part=0, Bone=hash40("haver"), Damage=25.0, Angle=361, KBG=97, FKB=0, BKB=28, Size=8.5, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_PUNCH)
+		}
+		frame(Frames=26)
+		if(is_excute){
+			AttackModule::clear_all()
+		}
+    });
+}
+#[acmd_script(
+    agent = "koopa",
+    script =  "effect_attacks4",
+    category = ACMD_EFFECT,
+	low_priority)]
+unsafe fn bowser_fsmash_eff(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=21)
+		if(is_excute){
+			EFFECT_FOLLOW_ALPHA(hash40("sys_attack_impact"), hash40("haver"), 0, 0, 0, 0, 0, 0, 2.0, true, 2)
+			FOOT_EFFECT(hash40("sys_turn_smoke"), hash40("top"), -2.0, 0, 0, 0, 0, 0, 2.0, 0, 0, 0, 0, 0, 0, false)
+		}
+    });
+}	
+#[acmd_script(
+    agent = "koopa",
+    script =  "sound_attacks4",
+    category = ACMD_SOUND,
+	low_priority)]
+unsafe fn bowser_fsmash_snd(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=19)
+		if(is_excute){
+			PLAY_SE(hash40("se_koopa_nailswing02"))
+			PLAY_SE(hash40("vc_koopa_attack06"))
+		}
+		frame(Frame=21)
+		if(is_excute){
+			PLAY_SE(hash40("se_koopa_smash_h01"))
+		}
+    });
+}	
+
 #[fighter_frame( agent = FIGHTER_KIND_KIRBY )]
 fn kirby_bowser_frame(fighter: &mut L2CFighterCommon) {
     unsafe {
@@ -219,6 +282,40 @@ fn bowser_frame(fighter: &mut L2CFighterCommon) {
 			FIREBALL[ENTRY_ID] = 0;
 		};
 		macros::EFFECT_OFF_KIND(fighter, Hash40::new("koopa_breath_m_fire"), false, true);
+
+		//Fsmash shit
+		if status_kind == *FIGHTER_STATUS_KIND_ATTACK_S4_HOLD {
+            if frame >= 50.0 && frame < 60.0 {
+                KOOPA_EXCELLENT_SMASH[ENTRY_ID] = true;
+            }
+            else {
+                KOOPA_EXCELLENT_SMASH[ENTRY_ID] = false;
+            }
+        }
+		if [*FIGHTER_STATUS_KIND_ATTACK_S4_START, *FIGHTER_STATUS_KIND_ATTACK_S4].contains(&status_kind) {
+            if KOOPA_EXCELLENT_SMASH[ENTRY_ID] == true {
+                if AttackModule::is_infliction_status(fighter.module_accessor, *COLLISION_KIND_MASK_HIT) {
+                    SPECIAL_ZOOM_GFX[ENTRY_ID] += 1;
+                    if SPECIAL_ZOOM_GFX[ENTRY_ID] < 2 {
+                        SlowModule::set_whole(boma, 8, 80);
+                        macros::CAM_ZOOM_IN_arg5(fighter, /*frames*/ 2.0,/*no*/ 0.0,/*zoom*/ 1.8,/*yrot*/ 0.0,/*xrot*/ 0.0);
+                        EffectModule::req_follow(boma, Hash40::new("sys_bg_criticalhit"), Hash40::new("top"), &Vector3f{x: 0.0, y: 0.0, z: 0.0} as *const Vector3f, &Vector3f{x: 0.0, y: 0.0, z: 0.0} as *const Vector3f, 1.0, false, 0, 0, 0, 0, 0, false, false);
+                        macros::PLAY_SE(fighter, Hash40::new("se_common_criticalhit"));
+                        macros::QUAKE(fighter, *CAMERA_QUAKE_KIND_XL);
+                    }
+                    if SPECIAL_ZOOM_GFX[ENTRY_ID] >= 4 {
+                        SlowModule::clear_whole(boma);
+                        CameraModule::reset_all(boma);
+                        EffectModule::kill_kind(boma, Hash40::new("sys_bg_criticalhit"), false, false);
+                        macros::CAM_ZOOM_OUT(fighter);
+                    }
+                }
+            }
+        }
+		if ![*FIGHTER_STATUS_KIND_ATTACK_S4_HOLD, *FIGHTER_STATUS_KIND_ATTACK_S4_START, *FIGHTER_STATUS_KIND_ATTACK_S4].contains(&status_kind) {
+			KOOPA_EXCELLENT_SMASH[ENTRY_ID] = false;
+			SPECIAL_ZOOM_GFX[ENTRY_ID] = 0;
+		}
 	}
 }		
 #[weapon_frame( agent = WEAPON_KIND_KOOPA_BREATH )]
@@ -244,7 +341,10 @@ pub fn install() {
 		bowser_eff_land_dair,
 		bowser_land_dair,
 		bowser_snd_land_dair,
-		bowser_fireball
+		bowser_fireball,
+		bowser_fsmash,
+		bowser_fsmash_eff,
+		bowser_fsmash_snd
     );
     smashline::install_agent_frames!(
         bowser_frame,
