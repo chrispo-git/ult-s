@@ -1309,6 +1309,9 @@ fn kirby_frame(fighter: &mut L2CFighterCommon) {
 		if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_S {
 			StatusModule::change_status_request_from_script(boma,*FIGHTER_KIRBY_STATUS_KIND_SPECIAL_S_ATTACK, true);
 		};
+		if status_kind != *FIGHTER_STATUS_KIND_ATTACK_LW4 {
+			macros::STOP_SE(fighter, Hash40::new("se_kirby_special_h02"));
+		};
 	}
 }
 #[weapon_frame( agent = WEAPON_KIND_KIRBY_FINALCUTTERSHOT )]
