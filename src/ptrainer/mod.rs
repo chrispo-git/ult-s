@@ -101,6 +101,135 @@ unsafe fn squirtle_dtilt(fighter: &mut L2CAgentBase) {
 		}
     });
 }
+#[acmd_script(
+    agent = "plizardon",
+    scripts =  ["game_attacks3", "game_attacks3hi", "game_attacks3lw"],
+    category = ACMD_GAME,
+	low_priority)]
+unsafe fn zard_ftilt(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=1)
+		FT_MOTION_RATE(FSM=0.8)
+		frame(Frame=11)
+		FT_MOTION_RATE(FSM=1)
+		if(is_excute){
+			HIT_NODE(hash40("head"), HIT_STATUS_XLU)
+			HIT_NODE(hash40("neck"), HIT_STATUS_XLU)
+			ATTACK(ID=0, Part=0, Bone=hash40("head"), Damage=11.0, Angle=30, KBG=65, FKB=0, BKB=60, Size=8.0, X=0.0, Y=0.0, Z=7.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.2, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.3, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_HEAD)
+			ATTACK(ID=1, Part=0, Bone=hash40("bust"), Damage=11.0, Angle=30, KBG=65, FKB=0, BKB=60, Size=8.0, X=0.0, Y=0.0, Z=7.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.2, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.3, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_HEAD)
+		}
+		wait(Frames=2)
+		if(is_excute){
+			HIT_NODE(hash40("head"), HIT_STATUS_NORMAL)
+			HIT_NODE(hash40("neck"), HIT_STATUS_NORMAL)
+			AttackModule::clear_all()
+		}
+    });
+}
+#[acmd_script(
+    agent = "plizardon",
+    scripts =  ["effect_attacks3", "effect_attacks3hi", "effect_attacks3lw"],
+    category = ACMD_EFFECT,
+	low_priority)]
+unsafe fn zard_ftilt_eff(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=6)
+		if(is_excute){
+			LANDING_EFFECT(hash40("sys_dash_smoke"), hash40("top"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false)
+		}
+		frame(Frame=11)
+		if(is_excute){
+			EFFECT_FLIP_ALPHA(hash40("sys_attack_impact"), hash40("sys_attack_impact"), hash40("head"), 0, 0, 0, 0, 0, 0, 1.3, 0, 0, 0, 0, 0, 0, true, EF_FLIP_YZ, 0.65)
+		}
+    });
+}
+#[acmd_script(
+    agent = "plizardon",
+    scripts =  ["sound_attacks3", "sound_attacks3hi", "sound_attacks3lw"],
+    category = ACMD_SOUND,
+	low_priority)]
+unsafe fn zard_ftilt_snd(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=8)
+		if(is_excute){
+			PLAY_SE(hash40("se_plizardon_attackl_l01"))
+		}
+    });
+}
+#[acmd_script(
+    agent = "plizardon",
+    scripts =  ["game_attacklw3"],
+    category = ACMD_GAME,
+	low_priority)]
+unsafe fn zard_dtilt(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=1)
+		FT_MOTION_RATE(FSM=0.8)
+		wait(Frames=10)
+		FT_MOTION_RATE(FSM=1.0)
+		frame(Frame=12)
+		if(is_excute){
+			ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=9.0, Angle=92, KBG=80, FKB=0, BKB=65, Size=4.0, X=0.0, Y=3.0, Z=19.1, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_fire"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_FIRE, Type=ATTACK_REGION_TAIL)
+			ATTACK(ID=1, Part=0, Bone=hash40("fire"), Damage=9.0, Angle=92, KBG=80, FKB=0, BKB=65, Size=4.0, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_fire"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_FIRE, Type=ATTACK_REGION_TAIL)
+			ATTACK(ID=2, Part=0, Bone=hash40("tail3"), Damage=7.0, Angle=361, KBG=100, FKB=0, BKB=40, Size=4.0, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_TAIL)
+			ATTACK(ID=3, Part=0, Bone=hash40("top"), Damage=9.0, Angle=92, KBG=80, FKB=0, BKB=65, Size=4.0, X=0.0, Y=2.5, Z=16.7, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_fire"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_FIRE, Type=ATTACK_REGION_TAIL)
+			ATTACK(ID=4, Part=0, Bone=hash40("tail2"), Damage=7.0, Angle=361, KBG=100, FKB=0, BKB=40, Size=4.0, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_TAIL)
+		}
+		wait(Frames=1)
+		if(is_excute){
+			AttackModule::clear(ID=0, false)
+			ATTACK(ID=1, Part=0, Bone=hash40("fire"), Damage=9.0, Angle=92, KBG=80, FKB=0, BKB=65, Size=4.0, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_fire"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_FIRE, Type=ATTACK_REGION_TAIL)
+			ATTACK(ID=2, Part=0, Bone=hash40("tail3"), Damage=7.0, Angle=361, KBG=100, FKB=0, BKB=40, Size=4.0, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_TAIL)
+			ATTACK(ID=3, Part=0, Bone=hash40("tail4"), Damage=9.0, Angle=92, KBG=80, FKB=0, BKB=65, Size=4.0, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_fire"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_FIRE, Type=ATTACK_REGION_TAIL)
+			ATTACK(ID=4, Part=0, Bone=hash40("tail2"), Damage=7.0, Angle=361, KBG=100, FKB=0, BKB=40, Size=4.0, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_TAIL)
+		}
+		wait(Frames=1)
+		if(is_excute){
+			AttackModule::clear_all()
+		}
+    });
+}
+#[acmd_script(
+    agent = "plizardon",
+    scripts =  ["effect_attacklw3"],
+    category = ACMD_EFFECT,
+	low_priority)]
+unsafe fn zard_dtilt_eff(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=11)
+		if(is_excute){
+			EFFECT_FOLLOW_NO_STOP(0x1229ac4d89u64, hash40("fire"), 0, 0, 0, 0, 0, 0, 1, true)
+		}
+		frame(Frame=12)
+		if(is_excute){
+			LANDING_EFFECT(hash40("sys_dash_smoke"), hash40("top"), -5, 0, -3, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false)
+		}
+		frame(Frame=19)
+		if(is_excute){
+			EFFECT_OFF_KIND(0x1229ac4d89u64, false, false)
+		}
+    });
+}
+#[acmd_script(
+    agent = "plizardon",
+    scripts =  ["sound_attacklw3"],
+    category = ACMD_SOUND,
+	low_priority)]
+unsafe fn zard_dtilt_snd(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=11)
+		if(is_excute){
+			PLAY_SEQUENCE(hash40("seq_plizardon_rnd_attack"))
+			PLAY_SE(hash40("se_plizardon_attackl_s01"))
+		}
+    });
+}
 #[fighter_frame_callback]
 pub fn pt(fighter : &mut L2CFighterCommon) {
     unsafe {
@@ -140,7 +269,14 @@ pub fn install() {
 		squirtle_dtilt,
 		//Ivysaur
 		ivy_da,
-		ivy_sideb
+		ivy_sideb,
+		//Charizard
+		zard_dtilt,
+		zard_dtilt_eff,
+		zard_dtilt_snd,
+		zard_ftilt,
+		zard_ftilt_eff,
+		zard_ftilt_snd
     );
     smashline::install_agent_frame_callbacks!(pt);
 }

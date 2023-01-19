@@ -303,7 +303,7 @@ fn bowser_frame(fighter: &mut L2CFighterCommon) {
                         macros::PLAY_SE(fighter, Hash40::new("se_common_criticalhit"));
                         macros::QUAKE(fighter, *CAMERA_QUAKE_KIND_XL);
                     }
-                    if SPECIAL_ZOOM_GFX[ENTRY_ID] >= 4 {
+                    if SPECIAL_ZOOM_GFX[ENTRY_ID] >= 6 {
                         SlowModule::clear_whole(boma);
                         CameraModule::reset_all(boma);
                         EffectModule::kill_kind(boma, Hash40::new("sys_bg_criticalhit"), false, false);
