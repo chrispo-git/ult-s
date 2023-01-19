@@ -11,6 +11,7 @@ use smash::phx::Vector2f;
 use crate::util::*;
 
 static mut IS_WAVEDASH: [bool; 8] = [false; 8];
+static mut FORCE_WAVEDASH: [bool; 8] = [false; 8];
 static mut WAVEDASH_DONE: [bool; 8] = [false; 8];
 
 #[fighter_frame_callback]
@@ -61,11 +62,16 @@ pub fn wavedash(fighter : &mut L2CFighterCommon) {
 			};*/
 		} else {
 			if status_kind == *FIGHTER_STATUS_KIND_JUMP_SQUAT {
+				if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_GUARD) {
+					FORCE_WAVEDASH[ENTRY_ID] = true;
+				};
 				IS_WAVEDASH[ENTRY_ID] = true;
+
 			};
 			if [*FIGHTER_STATUS_KIND_JUMP_SQUAT, *FIGHTER_STATUS_KIND_ESCAPE_AIR, *FIGHTER_STATUS_KIND_ESCAPE_AIR_SLIDE].contains(&status_kind) == false {
 				IS_WAVEDASH[ENTRY_ID] = false;
 				WAVEDASH_DONE[ENTRY_ID] = false;
+				FORCE_WAVEDASH[ENTRY_ID] = false;
 			};
 			if [*FIGHTER_STATUS_KIND_ESCAPE_AIR, *FIGHTER_STATUS_KIND_ESCAPE_AIR_SLIDE].contains(&status_kind) && IS_WAVEDASH[ENTRY_ID] == true {
 				let y = ControlModule::get_stick_y(boma);
@@ -99,17 +105,30 @@ pub unsafe fn change_status_request_hook(boma: &mut smash::app::BattleObjectModu
 			} else {
 				original!()(boma, status_kind, arg3)
 			}
-		} else if [*FIGHTER_STATUS_KIND_ESCAPE_AIR, *FIGHTER_STATUS_KIND_ESCAPE_AIR_SLIDE].contains(&next_status) {
+		} else if [*FIGHTER_STATUS_KIND_ESCAPE_AIR, *FIGHTER_STATUS_KIND_ESCAPE_AIR_SLIDE, *FIGHTER_STATUS_KIND_JUMP].contains(&next_status)  {
 			let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 			if IS_WAVEDASH[ENTRY_ID] == true {
 				StatusModule::set_situation_kind(boma, smash::app::SituationKind(*SITUATION_KIND_GROUND), true);
+				if next_status == *FIGHTER_STATUS_KIND_JUMP && FORCE_WAVEDASH[ENTRY_ID] {
+					original!()(boma, *FIGHTER_STATUS_KIND_ESCAPE_AIR_SLIDE, arg3)
+				} else {
+					original!()(boma, status_kind, arg3)
+				}
+			} else {
+				original!()(boma, status_kind, arg3)
 			}
-			original!()(boma, status_kind, arg3)
 		} else if smash::app::utility::get_kind(boma) == *FIGHTER_KIND_WARIO && [*FIGHTER_STATUS_KIND_SPECIAL_S, *FIGHTER_WARIO_STATUS_KIND_SPECIAL_S_BUMP, *FIGHTER_WARIO_STATUS_KIND_SPECIAL_S_DOWN, *FIGHTER_WARIO_STATUS_KIND_SPECIAL_S_RIDE, *FIGHTER_WARIO_STATUS_KIND_SPECIAL_S_DRIVE, *FIGHTER_WARIO_STATUS_KIND_SPECIAL_S_SEARCH, *FIGHTER_WARIO_STATUS_KIND_SPECIAL_S_APPEAL, *FIGHTER_WARIO_STATUS_KIND_SPECIAL_S_ESCAPE, *FIGHTER_WARIO_STATUS_KIND_SPECIAL_S_WHEELIE, *FIGHTER_WARIO_STATUS_KIND_SPECIAL_S_TURN_END, *FIGHTER_WARIO_STATUS_KIND_SPECIAL_S_TURN_LOOP, *FIGHTER_WARIO_STATUS_KIND_SPECIAL_S_THROWN_OUT, *FIGHTER_WARIO_STATUS_KIND_SPECIAL_S_TURN_START, *FIGHTER_WARIO_STATUS_KIND_SPECIAL_S_ESCAPE_START].contains(&status_kind){
 			original!()(boma, *FIGHTER_WARIO_STATUS_KIND_SPECIAL_S_START, arg3)
 		} else if smash::app::utility::get_kind(boma) == *FIGHTER_KIND_TRAIL && [*FIGHTER_TRAIL_STATUS_KIND_ATTACK_AIR_F].contains(&status_kind){
 			return 0 as u64
-		}else {
+		}else if next_status == *FIGHTER_STATUS_KIND_JUMP_SQUAT{
+			let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+			IS_WAVEDASH[ENTRY_ID] = true;
+			if ControlModule::check_button_on_trriger(boma, *CONTROL_PAD_BUTTON_GUARD) {
+				FORCE_WAVEDASH[ENTRY_ID] = true;
+			};
+			original!()(boma, status_kind, arg3)
+		} else {
 			original!()(boma, status_kind, arg3)
 		}
 	} else {
