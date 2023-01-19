@@ -3,12 +3,6 @@
   <struct hash="param_private">
     <float hash="rebel_gauge_damage_add">0.9</float>
   </struct>
-  <list hash="param_special_hi">
-    <hash40 index="0">dummy</hash40>
-    <hash40 index="1">dummy</hash40>
-    <hash40 index="2">dummy</hash40>
-    <hash40 index="3">dummy</hash40>
-  </list>
   <list hash="param_special_lw">
     <struct index="0">
       <int hash="hold_frame">50</int>
