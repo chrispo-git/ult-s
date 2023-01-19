@@ -1,3 +1,4 @@
+mod hitstun;
 mod dacus;
 mod landing;
 mod wavedash;
@@ -13,6 +14,7 @@ mod cancel;
 mod training;
 
 pub fn install() {
+    hitstun::install();
     dacus::install();
     landing::install();
     wavedash::install();

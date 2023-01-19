@@ -1082,7 +1082,7 @@ unsafe fn kirby_sideb_eff(fighter: &mut L2CAgentBase) {
     acmd!(lua_state, {	
 		frame(Frame=16)
 		if(is_excute){
-			EFFECT_FOLLOW(hash40("sys_hit_magic"), hash40("havel"), 3.7, -3.2, 0, 0, 0, 0, 0.3, true)
+			EFFECT_FOLLOW(hash40("sys_hit_magic"), hash40("have"), 0.0, 5.2, 13.5, 0, 0, 0, 0.3, true)
 		}
     });
 }
@@ -1308,6 +1308,9 @@ fn kirby_frame(fighter: &mut L2CFighterCommon) {
 		};
 		if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_S {
 			StatusModule::change_status_request_from_script(boma,*FIGHTER_KIRBY_STATUS_KIND_SPECIAL_S_ATTACK, true);
+		};
+		if status_kind != *FIGHTER_STATUS_KIND_ATTACK_LW4 {
+			macros::STOP_SE(fighter, Hash40::new("se_kirby_special_h02"));
 		};
 	}
 }

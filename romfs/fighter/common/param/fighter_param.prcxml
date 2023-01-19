@@ -391,6 +391,7 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
       <float hash="tread_jump_speed_y_mul">1.0</float>
       <float hash="tread_mini_jump_speed_y_mul">0.475</float>
       <float hash="clip_sphere_offset_y">-2</float>
+      <float hash="landing_attack_air_frame_hi">8</float>
     </struct>
     <!--SAMUS-->
     <struct index="3">
