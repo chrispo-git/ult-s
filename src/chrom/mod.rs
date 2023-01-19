@@ -202,6 +202,9 @@ unsafe fn chrom_fair(fighter: &mut L2CAgentBase) {
 	low_priority)]
 unsafe fn chrom_ftilt_hi(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
+	if StatusModule::prev_status_kind(fighter.module_accessor, 0) == FIGHTER_STATUS_KIND_SPECIAL_S {
+		WorkModule::on_flag(fighter.module_accessor, *FIGHTER_STATUS_WORK_ID_FLAG_RESERVE_ATTACK_DISABLE_MINI_JUMP_ATTACK);
+	};
     acmd!(lua_state, {
 		FT_MOTION_RATE(FSM=1.6)
 		frame(Frame=6)
@@ -227,6 +230,9 @@ unsafe fn chrom_ftilt_hi(fighter: &mut L2CAgentBase) {
 	low_priority)]
 unsafe fn chrom_ftilt_lw(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
+	if StatusModule::prev_status_kind(fighter.module_accessor, 0) == FIGHTER_STATUS_KIND_SPECIAL_S {
+		WorkModule::on_flag(fighter.module_accessor, *FIGHTER_STATUS_WORK_ID_FLAG_RESERVE_ATTACK_DISABLE_MINI_JUMP_ATTACK);
+	};
     acmd!(lua_state, {
 		FT_MOTION_RATE(FSM=1.8)
 		frame(Frame=5)
@@ -250,6 +256,9 @@ unsafe fn chrom_ftilt_lw(fighter: &mut L2CAgentBase) {
 	low_priority)]
 unsafe fn chrom_ftilt_s(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
+	if StatusModule::prev_status_kind(fighter.module_accessor, 0) == FIGHTER_STATUS_KIND_SPECIAL_S {
+		WorkModule::on_flag(fighter.module_accessor, *FIGHTER_STATUS_WORK_ID_FLAG_RESERVE_ATTACK_DISABLE_MINI_JUMP_ATTACK);
+	};
     acmd!(lua_state, {
 		FT_MOTION_RATE(FSM=1.2857)
 		frame(Frame=7)
