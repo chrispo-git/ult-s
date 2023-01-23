@@ -109,6 +109,8 @@ pub unsafe fn change_status_request_hook(boma: &mut smash::app::BattleObjectModu
 			original!()(boma, *FIGHTER_WARIO_STATUS_KIND_SPECIAL_S_START, arg3)
 		} else if smash::app::utility::get_kind(boma) == *FIGHTER_KIND_TRAIL && [*FIGHTER_TRAIL_STATUS_KIND_ATTACK_AIR_F].contains(&status_kind){
 			return 0 as u64
+		} else if smash::app::utility::get_kind(boma) == *FIGHTER_KIND_MURABITO && [*FIGHTER_MURABITO_STATUS_KIND_SPECIAL_N_POCKET].contains(&status_kind){
+			original!()(boma, *FIGHTER_STATUS_KIND_ITEM_THROW, arg3)
 		}else {
 			original!()(boma, status_kind, arg3)
 		}
