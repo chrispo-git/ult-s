@@ -14,6 +14,7 @@ use crate::util::*;
 
 static mut LAND_SIDEB_BOUNCE: [i32; 8] = [0; 8];
 static mut BEFORE_SIDEB_BOUNCE: [i32; 8] = [0; 8];
+static mut HAS_DOWNB: [bool; 8] = [false; 8];
 
 #[acmd_script(
     agent = "murabito",
@@ -175,13 +176,12 @@ unsafe fn toad_jab3_eff(fighter: &mut L2CAgentBase) {
     category = ACMD_SOUND,
 	low_priority)]
 unsafe fn toad_jab3_snd(fighter: &mut L2CAgentBase) {
-    let lua_state = fighter.lua_state_agent;
-    acmd!(lua_state, {
-		frame(Frame=10)
-		if(is_excute){
-			PLAY_SE(hash40("se_murabito_swing_l"))
-		}
-    });
+	let lua_state = fighter.lua_state_agent;
+	frame(fighter.lua_state_agent, 10.0);
+	if macros::is_excute(fighter) {
+		attack_vc(fighter);
+		macros::PLAY_SE(fighter, Hash40::new("se_murabito_swing_l"));
+	};
 }	
 #[acmd_script(
     agent = "murabito",
@@ -211,6 +211,19 @@ unsafe fn toad_nair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
 		}
     });
+}
+#[acmd_script(
+    agent = "murabito",
+    script =  "sound_attackairn",
+    category = ACMD_SOUND,
+	low_priority)]
+unsafe fn toad_nair_snd(fighter: &mut L2CAgentBase) {
+	let lua_state = fighter.lua_state_agent;
+	frame(fighter.lua_state_agent, 3.0);
+	if macros::is_excute(fighter) {
+		attack_vc(fighter);
+		macros::PLAY_SE(fighter, Hash40::new("se_murabito_swing_m"));
+	};
 }
 #[acmd_script(
     agent = "murabito",
@@ -248,13 +261,12 @@ unsafe fn toad_bair(fighter: &mut L2CAgentBase) {
     category = ACMD_SOUND,
 	low_priority)]
 unsafe fn toad_bair_snd(fighter: &mut L2CAgentBase) {
-    let lua_state = fighter.lua_state_agent;
-    acmd!(lua_state, {
-		frame(Frame=5)
-		if(is_excute){
-			PLAY_SE(hash40("se_murabito_swing_l"))
-		}
-    });
+	let lua_state = fighter.lua_state_agent;
+	frame(fighter.lua_state_agent, 5.0);
+	if macros::is_excute(fighter) {
+		attack_vc(fighter);
+		macros::PLAY_SE(fighter, Hash40::new("se_murabito_swing_m"));
+	};
 }	
 #[acmd_script(
     agent = "murabito",
@@ -264,7 +276,7 @@ unsafe fn toad_bair_snd(fighter: &mut L2CAgentBase) {
 unsafe fn toad_bair_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
-		frame(Frame=12)
+		frame(Frame=5)
 		if(is_excute){
 			EFFECT(hash40("sys_attack_impact"), hash40("legc"), 0, 0.0, 0.0, 0, 0, 0, 1.5, 0, 1, 1, 0, 0, 0, false)
 		}
@@ -329,13 +341,12 @@ unsafe fn toad_uair_eff(fighter: &mut L2CAgentBase) {
     category = ACMD_SOUND,
 	low_priority)]
 unsafe fn toad_uair_snd(fighter: &mut L2CAgentBase) {
-    let lua_state = fighter.lua_state_agent;
-    acmd!(lua_state, {
-		frame(Frame=5)
-		if(is_excute){
-			PLAY_SE(hash40("se_murabito_swing_m"))
-		}
-    });
+	let lua_state = fighter.lua_state_agent;
+	frame(fighter.lua_state_agent, 5.0);
+	if macros::is_excute(fighter) {
+		attack_vc(fighter);
+		macros::PLAY_SE(fighter, Hash40::new("se_murabito_swing_m"));
+	};
 }
 #[acmd_script(
     agent = "murabito",
@@ -370,6 +381,13 @@ unsafe fn toad_fair(fighter: &mut L2CAgentBase) {
 	low_priority)]
 unsafe fn toad_fair_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=15)
+		if(is_excute){
+			EFFECT_FOLLOW_FLIP(hash40("sys_attack_arc_b"), hash40("sys_attack_arc_b"), hash40("top"), 0, 7, 4, -3, -11, -113, 1.1, true, EF_FLIP_YZ)
+			LAST_EFFECT_SET_RATE(0.8)
+		}
+    });
 }
 #[acmd_script(
     agent = "murabito",
@@ -377,13 +395,12 @@ unsafe fn toad_fair_eff(fighter: &mut L2CAgentBase) {
     category = ACMD_SOUND,
 	low_priority)]
 unsafe fn toad_fair_snd(fighter: &mut L2CAgentBase) {
-    let lua_state = fighter.lua_state_agent;
-    acmd!(lua_state, {
-		frame(Frame=15)
-		if(is_excute){
-			PLAY_SE(hash40("se_murabito_swing_l"))
-		}
-    });
+	let lua_state = fighter.lua_state_agent;
+	frame(fighter.lua_state_agent, 15.0);
+	if macros::is_excute(fighter) {
+		attack_vc(fighter);
+		macros::PLAY_SE(fighter, Hash40::new("se_murabito_swing_l"));
+	};
 }
 #[acmd_script(
     agent = "murabito",
@@ -507,8 +524,8 @@ unsafe fn toad_utilt(fighter: &mut L2CAgentBase) {
 		}
 		frame(Frame=6)
 		if(is_excute){
-			ATTACK(ID=0, Part=0, Bone=hash40("head"), Damage=10.0, Angle=90, KBG=100, FKB=0, BKB=50, Size=6.5, X=4.4, Y=-1.0, Z=0.0, X=LUA_VOID, Y=LUA_VOID, Z=LUA_VOID, Hitlag=1.0, SDI=0.8, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_sting"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_PUNCH)
-			ATTACK(ID=1, Part=0, Bone=hash40("legc"), Damage=6.5, Angle=90, KBG=100, FKB=0, BKB=50, Size=4.5, X=4.4, Y=-1.0, Z=0.0, X=LUA_VOID, Y=LUA_VOID, Z=LUA_VOID, Hitlag=1.0, SDI=0.8, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_PUNCH)
+			ATTACK(ID=0, Part=0, Bone=hash40("head"), Damage=10.0, Angle=90, KBG=100, FKB=0, BKB=50, Size=7.5, X=4.4, Y=-1.0, Z=0.0, X=LUA_VOID, Y=LUA_VOID, Z=LUA_VOID, Hitlag=1.0, SDI=0.8, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_sting"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_PUNCH)
+			ATTACK(ID=1, Part=0, Bone=hash40("legc"), Damage=6.5, Angle=90, KBG=100, FKB=0, BKB=50, Size=4.5, X=0.0, Y=0.0, Z=0.0, X=LUA_VOID, Y=LUA_VOID, Z=LUA_VOID, Hitlag=1.0, SDI=0.8, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_PUNCH)
 		}
 		frame(Frame=13)
 		if(is_excute){
@@ -526,13 +543,12 @@ unsafe fn toad_utilt(fighter: &mut L2CAgentBase) {
     category = ACMD_SOUND,
 	low_priority)]
 unsafe fn toad_utilt_snd(fighter: &mut L2CAgentBase) {
-    let lua_state = fighter.lua_state_agent;
-    acmd!(lua_state, {
-		frame(Frame=5)
-		if(is_excute){
-			PLAY_SE(hash40("se_murabito_swing_s"))
-		}
-    });
+	let lua_state = fighter.lua_state_agent;
+	frame(fighter.lua_state_agent, 5.0);
+	if macros::is_excute(fighter) {
+		attack_vc(fighter);
+		macros::PLAY_SE(fighter, Hash40::new("se_murabito_swing_s"));
+	};
 }
 #[acmd_script(
     agent = "murabito",
@@ -616,23 +632,25 @@ unsafe fn toad_usmash_eff(fighter: &mut L2CAgentBase) {
     category = ACMD_SOUND,
 	low_priority)]
 unsafe fn toad_usmash_snd(fighter: &mut L2CAgentBase) {
-    let lua_state = fighter.lua_state_agent;
-    acmd!(lua_state, {
-		frame(Frame=6)
-		if(is_excute){
-			PLAY_SE(hash40("se_common_step_jump"))
-		}
-		frame(Frame=13)
-		if(is_excute){
-			PLAY_SE(hash40("se_common_smashswing_01"))
-			PLAY_SE(hash40("se_common_pitin_move_00"))
-			PLAY_SE(hash40("se_common_landing_brick"))
-		}
-		frame(Frame=47)
-		if(is_excute){
-			PLAY_SE(hash40("se_common_landing_soil"))
-		}
-    });
+	let lua_state = fighter.lua_state_agent;
+	frame(fighter.lua_state_agent, 8.0);
+	if macros::is_excute(fighter) {
+		attack_vc(fighter);
+	}
+	frame(fighter.lua_state_agent, 13.0);
+	if macros::is_excute(fighter) {
+		macros::PLAY_SE(fighter, Hash40::new("se_common_smashswing_01"));
+		macros::PLAY_SE(fighter, Hash40::new("se_common_pitin_move_00"));
+		macros::PLAY_SE(fighter, Hash40::new("se_common_landing_brick"));
+	}
+	frame(fighter.lua_state_agent, 14.0);
+	if macros::is_excute(fighter) {
+		macros::PLAY_SE(fighter, Hash40::new("se_murabito_special_h01"));
+	}
+	frame(fighter.lua_state_agent, 47.0);
+	if macros::is_excute(fighter) {
+		macros::PLAY_SE(fighter, Hash40::new("se_common_landing_soil"));
+	}
 }	
 #[acmd_script(
     agent = "murabito_slingshot",
@@ -757,6 +775,19 @@ unsafe fn toad_ftilt_eff(fighter: &mut L2CAgentBase) {
 }	
 #[acmd_script(
     agent = "murabito",
+    script =  "sound_attacks3",
+    category = ACMD_SOUND,
+	low_priority)]
+unsafe fn toad_ftilt_snd(fighter: &mut L2CAgentBase) {
+	let lua_state = fighter.lua_state_agent;
+	frame(fighter.lua_state_agent, 15.0);
+	if macros::is_excute(fighter) {
+		attack_vc(fighter);
+		macros::PLAY_SE(fighter, Hash40::new("se_murabito_swing_l"));
+	};
+}	
+#[acmd_script(
+    agent = "murabito",
     scripts =  ["game_specials", "game_specialairs"],
     category = ACMD_GAME,
 	low_priority)]
@@ -810,13 +841,12 @@ unsafe fn toad_dtilt_eff(fighter: &mut L2CAgentBase) {
     category = ACMD_SOUND,
 	low_priority)]
 unsafe fn toad_dtilt_snd(fighter: &mut L2CAgentBase) {
-    let lua_state = fighter.lua_state_agent;
-    acmd!(lua_state, {
-		frame(Frame=6)
-		if(is_excute){
-			PLAY_SE(hash40("se_murabito_swing_s"))
-		}
-    });
+	let lua_state = fighter.lua_state_agent;
+	frame(fighter.lua_state_agent, 6.0);
+	if macros::is_excute(fighter) {
+		attack_vc(fighter);
+		macros::PLAY_SE(fighter, Hash40::new("se_murabito_smash_h01"));
+	};
 }	
 #[acmd_script(
     agent = "murabito",
@@ -871,13 +901,11 @@ unsafe fn toad_neutralb_eff(fighter: &mut L2CAgentBase) {
     category = ACMD_SOUND,
 	low_priority)]
 unsafe fn toad_neutralb_snd(fighter: &mut L2CAgentBase) {
-    let lua_state = fighter.lua_state_agent;
-    acmd!(lua_state, {
-		frame(Frame=9)
-		if(is_excute){
-			PLAY_SE(hash40("se_murabito_attackhard_l01"))
-		}
-    });
+	let lua_state = fighter.lua_state_agent;
+	frame(fighter.lua_state_agent, 9.0);
+	if macros::is_excute(fighter) {
+		macros::PLAY_SE(fighter, Hash40::new("se_murabito_special_h02"));
+	};
 }	
 #[acmd_script(
     agent = "murabito",
@@ -1054,12 +1082,18 @@ unsafe fn toad_dair_eff(fighter: &mut L2CAgentBase) {
 		if(is_excute){
 			EFFECT(hash40("sys_smash_flash"), hash40("haver"), -2, 5, 0, 0, 0, 0, 0.8, 0, 0, 0, 0, 0, 0, true)
 		}
-		frame(Frame=22)
-		for(5 Iterations) {
-			if(is_excute){
-				EFFECT_FOLLOW(hash40("sys_attack_speedline"), hash40("top"), 0, 0, 0, 180, 90, 0, 2, true)
-			}
-			wait(Frames=3)
+    });
+}
+#[acmd_script(
+    agent = "murabito",
+    scripts =  ["sound_attackairlw"],
+    category = ACMD_SOUND,
+	low_priority)]
+unsafe fn toad_dair_snd(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		if(is_excute){
+			PLAY_SE(hash40("se_murabito_attackdash03"))
 		}
     });
 }
@@ -1079,6 +1113,19 @@ unsafe fn toad_land_dair(fighter: &mut L2CAgentBase) {
 		frame(Frame=3)
 		if(is_excute){
 			AttackModule::clear_all()
+		}
+    });
+}
+#[acmd_script(
+    agent = "murabito",
+    scripts =  ["sound_landingairlw"],
+    category = ACMD_SOUND,
+	low_priority)]
+unsafe fn toad_land_dair_snd(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		if(is_excute){
+			PLAY_SE(hash40("se_murabito_attackhard_l01"))
 		}
     });
 }
@@ -1146,10 +1193,20 @@ unsafe fn toad_dsmash_eff(fighter: &mut L2CAgentBase) {
     category = ACMD_SOUND,
 	low_priority)]
 unsafe fn toad_dsmash_snd(fighter: &mut L2CAgentBase) {
-    let lua_state = fighter.lua_state_agent;
-    acmd!(lua_state, {
-		
-    });
+	let lua_state = fighter.lua_state_agent;
+	frame(fighter.lua_state_agent, 7.0);
+	if macros::is_excute(fighter) {
+		macros::PLAY_SE(fighter, Hash40::new("se_murabito_attackair_l02"));
+	};
+	frame(fighter.lua_state_agent, 29.0);
+	if macros::is_excute(fighter) {
+		macros::PLAY_SE(fighter, Hash40::new("se_murabito_smash_l02"));
+	};
+	frame(fighter.lua_state_agent, 31.0);
+	if macros::is_excute(fighter) {
+		dmg_vc(fighter);
+		macros::PLAY_SE(fighter, Hash40::new("se_murabito_smash_h02"));
+	};
 }	
 #[acmd_script(
     agent = "murabito",
@@ -1199,6 +1256,7 @@ unsafe fn toad_upb(fighter: &mut L2CAgentBase) {
     acmd!(lua_state, {
 		if(is_excute){
 			ArticleModule::generate_article(FIGHTER_MURABITO_GENERATE_ARTICLE_HELMET, false, 0)
+			KineticModule::clear_speed_all()
 		}
 		frame(Frame=5)
 		if(is_excute){
@@ -1219,6 +1277,21 @@ unsafe fn toad_upb(fighter: &mut L2CAgentBase) {
 		frame(Frame=34)
 		if(is_excute){
 			AttackModule::clear_all()
+		}
+	});
+}
+#[acmd_script(
+    agent = "murabito",
+    script =  "sound_specialairhidetach",
+    category = ACMD_SOUND,
+	low_priority)]
+unsafe fn toad_upb_snd(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=4)
+		if(is_excute){
+			PLAY_SE(hash40("se_murabito_smash_s01"))
+			PLAY_SE(hash40("se_murabito_smash_s02"))
 		}
 	});
 }
@@ -1301,7 +1374,7 @@ unsafe fn toad_fthrow(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
 		if(is_excute){
-			ATTACK_ABS(Kind=FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, ID=0,  Damage=8.0, Angle=25, KBG=65, FKB=0, BKB=60, Hitlag=0.0, Unk=1.0, FacingRestrict=ATTACK_LR_CHECK_F, Unk=0.0, Unk=true, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_NONE, Type=ATTACK_REGION_THROW)
+			ATTACK_ABS(Kind=FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, ID=0,  Damage=8.0, Angle=35, KBG=5, FKB=0, BKB=80, Hitlag=0.0, Unk=1.0, FacingRestrict=ATTACK_LR_CHECK_F, Unk=0.0, Unk=true, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_NONE, Type=ATTACK_REGION_THROW)
 			ATTACK_ABS(Kind=FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, ID=0, Damage=3.0, Angle=361, KBG=100, FKB=0, BKB=40, Hitlag=0.0, Unk=1.0, FacingRestrict=ATTACK_LR_CHECK_F, Unk=0.0, Unk=true, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_NONE, Type=ATTACK_REGION_THROW)
 		}
 		frame(Frame=28)
@@ -1315,6 +1388,167 @@ unsafe fn toad_fthrow(fighter: &mut L2CAgentBase) {
 		}
 	});
 }
+#[acmd_script(
+    agent = "murabito",
+    script =  "sound_throwf",
+    category = ACMD_SOUND,
+	low_priority)]
+unsafe fn toad_fthrow_snd(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=30)
+		if(is_excute){
+			PLAY_SE(hash40("se_murabito_jump01"))
+		}
+		frame(Frame=54)
+		if(is_excute){
+			PLAY_SE(hash40("se_common_throw_02"))
+			PLAY_SE(hash40("se_murabito_attackair_f02"))
+		}
+		frame(Frame=56)
+		if(is_excute){
+			PLAY_SE(hash40("se_murabito_attackdash02"))
+		}
+	});
+}
+#[acmd_script(
+    agent = "murabito",
+    scripts =  ["game_specialairlw2", "game_speciallw2"],
+    category = ACMD_GAME,
+	low_priority)]
+unsafe fn toad_downb(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=8)
+		if(is_excute){
+			ATTACK(ID=0, Part=0, Bone=hash40("hip"), Damage=8.0, Angle=70, KBG=100, FKB=0, BKB=20, Size=3.3, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
+			ATTACK(ID=1, Part=0, Bone=hash40("kneer"), Damage=8.0, Angle=70, KBG=100, FKB=0, BKB=20, Size=5.2, X=4.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
+		}
+		frame(Frame=55)
+		if(is_excute){
+			AttackModule::clear_all()
+		}
+	});
+}
+#[acmd_script(
+    agent = "murabito",
+    scripts =  ["sound_specialairlw2", "sound_speciallw2"],
+    category = ACMD_SOUND,
+	low_priority)]
+unsafe fn toad_downb_snd(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+}
+#[acmd_script(
+    agent = "murabito",
+    scripts =  ["effect_specialairlw2", "effect_speciallw2"],
+    category = ACMD_EFFECT,
+	low_priority)]
+unsafe fn toad_downb_eff(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=7)
+		if(is_excute){
+			EFFECT_FOLLOW_FLIP(hash40("sys_spin_wind"), hash40("sys_spin_wind"), hash40("top"), 0, 7, 0, 0, 0, 0, 0.5, true, EF_FLIP_YZ)
+			EFFECT_FOLLOW_FLIP(hash40("sys_spin_wind"), hash40("sys_spin_wind"), hash40("top"), 0, 2.5, 0, 0, 0, 0, 0.5, true, EF_FLIP_YZ)
+			EFFECT_FOLLOW_FLIP(hash40("sys_spin_wind"), hash40("sys_spin_wind"), hash40("top"), 0, 4, 0, 0, 0, 0, 0.5, true, EF_FLIP_YZ)
+		}
+		frame(Frame=20)
+		if(is_excute){
+			EFFECT_FOLLOW_FLIP(hash40("sys_spin_wind"), hash40("sys_spin_wind"), hash40("top"), 0, 7, 0, 0, 0, 0, 0.5, true, EF_FLIP_YZ)
+			EFFECT_FOLLOW_FLIP(hash40("sys_spin_wind"), hash40("sys_spin_wind"), hash40("top"), 0, 2.5, 0, 0, 0, 0, 0.5, true, EF_FLIP_YZ)
+			EFFECT_FOLLOW_FLIP(hash40("sys_spin_wind"), hash40("sys_spin_wind"), hash40("top"), 0, 4, 0, 0, 0, 0, 0.5, true, EF_FLIP_YZ)
+		}
+		frame(Frame=33)
+		if(is_excute){
+			EFFECT_FOLLOW_FLIP(hash40("sys_spin_wind"), hash40("sys_spin_wind"), hash40("top"), 0, 7, 0, 0, 0, 0, 0.5, true, EF_FLIP_YZ)
+			EFFECT_FOLLOW_FLIP(hash40("sys_spin_wind"), hash40("sys_spin_wind"), hash40("top"), 0, 2.5, 0, 0, 0, 0, 0.5, true, EF_FLIP_YZ)
+			EFFECT_FOLLOW_FLIP(hash40("sys_spin_wind"), hash40("sys_spin_wind"), hash40("top"), 0, 4, 0, 0, 0, 0, 0.5, true, EF_FLIP_YZ)
+		}
+		frame(Frame=46)
+		if(is_excute){
+			EFFECT_FOLLOW_FLIP(hash40("sys_spin_wind"), hash40("sys_spin_wind"), hash40("top"), 0, 7, 0, 0, 0, 0, 0.5, true, EF_FLIP_YZ)
+			EFFECT_FOLLOW_FLIP(hash40("sys_spin_wind"), hash40("sys_spin_wind"), hash40("top"), 0, 2.5, 0, 0, 0, 0, 0.5, true, EF_FLIP_YZ)
+			EFFECT_FOLLOW_FLIP(hash40("sys_spin_wind"), hash40("sys_spin_wind"), hash40("top"), 0, 4, 0, 0, 0, 0, 0.5, true, EF_FLIP_YZ)
+		}
+	});
+}
+#[acmd_script(
+    agent = "murabito",
+    scripts =  ["game_specialairlw1failure"],
+    category = ACMD_GAME,
+	low_priority)]
+unsafe fn toad_downb_air(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+	let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+    acmd!(lua_state, {
+		frame(Frame=5)
+		if(is_excute){
+			rust{
+				if !HAS_DOWNB[ENTRY_ID] {
+					macros::SET_SPEED_EX(fighter, SPEED_X[ENTRY_ID]*PostureModule::lr(fighter.module_accessor), 0.6, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+					HAS_DOWNB[ENTRY_ID] = true;
+				};
+			}
+			ATTACK(ID=0, Part=0, Bone=hash40("handr"), Damage=1.0, Angle=361, KBG=100, FKB=80, BKB=0, Size=3.0, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_turn"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_KAMEHIT, Type=ATTACK_REGION_PUNCH)
+			ATTACK(ID=1, Part=0, Bone=hash40("handl"), Damage=1.0, Angle=361, KBG=100, FKB=80, BKB=0, Size=3.0, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_turn"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_KAMEHIT, Type=ATTACK_REGION_PUNCH)
+		}
+		frame(Frame=10)
+		if(is_excute){
+			AttackModule::clear_all()
+		}
+	});
+}
+#[acmd_script(
+    agent = "murabito",
+    scripts =  ["sound_specialairlw1failure"],
+    category = ACMD_SOUND,
+	low_priority)]
+unsafe fn toad_downb_air_snd(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+	let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+    acmd!(lua_state, {
+		frame(Frame=5)
+		if(is_excute){
+			PLAY_SE(hash40("se_murabito_attackair_n01"))
+		}
+	});
+}
+#[acmd_script(
+    agent = "murabito",
+    scripts =  ["effect_specialairlw1failure"],
+    category = ACMD_EFFECT,
+	low_priority)]
+unsafe fn toad_downb_air_eff(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=4)
+		if(is_excute){
+			EFFECT_FOLLOW_FLIP(hash40("sys_spin_wind"), hash40("sys_spin_wind"), hash40("top"), 0, 5, 0, 0, 0, 0, 0.75, true, EF_FLIP_YZ)
+		}
+	});
+}
+#[acmd_script(
+    agent = "murabito",
+    scripts =  ["sound_damagehi1", "sound_damagehi2", "sound_damagehi3", "sound_damagen1", "sound_damagen2", "sound_damagen3", "sound_damagelw1", "sound_damagelw2", "sound_damagelw3", "sound_damageair1", "sound_damageair2", "sound_damageair3", "sound_damageelec"],
+    category = ACMD_SOUND,
+	low_priority)]
+unsafe fn toad_dmg_snd(fighter: &mut L2CAgentBase) {
+	let lua_state = fighter.lua_state_agent;
+	if macros::is_excute(fighter) {
+		dmg_vc(fighter);
+	};
+}	
+#[acmd_script(
+    agent = "murabito",
+    scripts =  ["sound_damageflyhi", "sound_damageflyn", "sound_damageflylw", "sound_damageflytop", "sound_damageflytop", "sound_damageflyroll", "sound_damageflymeteor"],
+    category = ACMD_SOUND,
+	low_priority)]
+unsafe fn toad_dmg_fly_snd(fighter: &mut L2CAgentBase) {
+	let lua_state = fighter.lua_state_agent;
+	if macros::is_excute(fighter) {
+		dmg_fly_vc(fighter);
+	};
+}	
 #[fighter_frame_callback]
 pub fn toad(fighter : &mut L2CFighterCommon) {
     unsafe {
@@ -1347,11 +1581,54 @@ pub fn toad(fighter : &mut L2CFighterCommon) {
 			if ![*FIGHTER_MURABITO_STATUS_KIND_SPECIAL_HI_DETACH].contains(&status_kind) {
 				ArticleModule::remove_exist(boma, *FIGHTER_MURABITO_GENERATE_ARTICLE_HELMET,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
 			};
+			if [*FIGHTER_MURABITO_STATUS_KIND_SPECIAL_LW_PLANT].contains(&status_kind) {
+				StatusModule::change_status_request_from_script(boma, *FIGHTER_MURABITO_STATUS_KIND_SPECIAL_LW_WATER_JUMP, true);
+			};
+			if [*FIGHTER_MURABITO_STATUS_KIND_SPECIAL_LW_PLANT_FAIL].contains(&status_kind) && situation_kind == *SITUATION_KIND_GROUND {
+				if frame < 2.0 {
+					StatusModule::change_status_request_from_script(boma, *FIGHTER_MURABITO_STATUS_KIND_SPECIAL_LW_WATER_JUMP, true);
+				} else {
+					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_LANDING, true);
+				};
+			};
+			if [*FIGHTER_MURABITO_STATUS_KIND_SPECIAL_LW_WATER_JUMP].contains(&status_kind) {
+				if frame >= 66.0 {
+					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL, true);
+				};
+				if frame > 30.0 && situation_kind == *SITUATION_KIND_GROUND {
+					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_LANDING, true);
+				}
+				if AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_HIT) && !AttackModule::is_infliction(boma, *COLLISION_KIND_MASK_HIT) && frame < 50.0{
+					macros::SET_SPEED_EX(fighter, SPEED_X[ENTRY_ID]*PostureModule::lr(boma), 1.0, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+					MotionModule::change_motion(boma, smash::phx::Hash40::new("special_air_lw_water"), 51.0, 1.0, false, 0.0, false, false);
+				};
+				if frame > 5.0 && frame < 7.0{
+					macros::PLAY_SE(fighter, Hash40::new("se_murabito_attackdash01"));
+				}
+			};
+			if [*FIGHTER_MURABITO_STATUS_KIND_SPECIAL_LW_WATER_LANDING, *FIGHTER_MURABITO_STATUS_KIND_SPECIAL_LW_WATER_WAIT].contains(&status_kind) {
+				if situation_kind == *SITUATION_KIND_GROUND {
+					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_LANDING, true);
+				};
+			};
+			if situation_kind == *SITUATION_KIND_GROUND {
+				HAS_DOWNB[ENTRY_ID] = false;
+			};
 			if [hash40("special_air_hi"), hash40("special_hi"), hash40("special_air_hi_wait1"), hash40("special_air_hi_wait2"), hash40("special_air_hi_flap1"), hash40("special_air_hi_flap2"), hash40("special_air_hi_flap1")].contains(&MotionModule::motion_kind(boma)) {
 				StatusModule::change_status_request_from_script(boma, *FIGHTER_MURABITO_STATUS_KIND_SPECIAL_HI_DETACH, true);
 			};
-			if [hash40("throw_f")].contains(&MotionModule::motion_kind(boma)) && status_kind != *FIGHTER_STATUS_KIND_THROW_KIRBY{
-				StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_THROW_KIRBY, true);
+			if [hash40("throw_f")].contains(&MotionModule::motion_kind(boma)) {
+				if status_kind != *FIGHTER_STATUS_KIND_THROW_KIRBY {
+					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_THROW_KIRBY, true);
+				};
+				if frame > 60.0 {
+					if KineticModule::get_kinetic_type(boma) != *FIGHTER_KINETIC_TYPE_FALL {
+						KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_FALL);
+					};
+					if situation_kind == *SITUATION_KIND_GROUND {
+						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_LANDING, true);
+					};
+				};
 			};
 			if status_kind == *FIGHTER_STATUS_KIND_ATTACK_LW3 {
 				if frame > 40.0 {
@@ -1496,6 +1773,34 @@ fn agent_reset(fighter: &mut L2CFighterCommon) {
     }
 }
 
+pub(crate) unsafe fn attack_vc(fighter: &mut L2CAgentBase) -> () {
+	let rand_val = smash::app::sv_math::rand(hash40("fighter"), 7);
+	match rand_val {
+		0 => macros::PLAY_SE(fighter, Hash40::new("se_murabito_attackair_b01")),
+		1 => macros::PLAY_SE(fighter, Hash40::new("se_murabito_attackair_b02")),
+		2 => macros::PLAY_SE(fighter, Hash40::new("se_murabito_attackair_f01")),
+		3 => macros::PLAY_SE(fighter, Hash40::new("se_murabito_attackair_f02")),
+		4 => macros::PLAY_SE(fighter, Hash40::new("se_murabito_attackair_h01")),
+		_ => println!("toad is silent"),
+	}
+}
+pub(crate) unsafe fn dmg_vc(fighter: &mut L2CAgentBase) -> () {
+	let rand_val = smash::app::sv_math::rand(hash40("fighter"), 3);
+	match rand_val {
+		0 => macros::PLAY_SE(fighter, Hash40::new("se_murabito_attackair_h02")),
+		1 => macros::PLAY_SE(fighter, Hash40::new("se_murabito_attackair_h03")),
+		_ => macros::PLAY_SE(fighter, Hash40::new("se_murabito_attackair_h01")),
+	}
+}
+pub(crate) unsafe fn dmg_fly_vc(fighter: &mut L2CAgentBase) -> () {
+	let rand_val = smash::app::sv_math::rand(hash40("fighter"), 3);
+	match rand_val {
+		0 => macros::PLAY_SE(fighter, Hash40::new("se_murabito_attackair_l02")),
+		1 => macros::PLAY_SE(fighter, Hash40::new("se_murabito_attackair_l03")),
+		_ => macros::PLAY_SE(fighter, Hash40::new("se_murabito_attackair_l01")),
+	}
+}
+
 pub fn install() {
     smashline::install_acmd_scripts!(
 		//Jab
@@ -1521,6 +1826,7 @@ pub fn install() {
 		toad_utilt_snd,
 		toad_ftilt,
 		toad_ftilt_eff,
+		toad_ftilt_snd,
 		toad_dtilt,
 		toad_dtilt_eff,
 		toad_dtilt_snd,
@@ -1545,6 +1851,7 @@ pub fn install() {
 
 		//Aerials
 		toad_nair,
+		toad_nair_snd,
 		toad_uair_land,
 		toad_uair,
 		toad_uair_eff,
@@ -1556,6 +1863,8 @@ pub fn install() {
 		toad_bair_snd,
 		toad_bair_eff,
 		toad_dair,
+		toad_dair_snd,
+		toad_land_dair_snd,
 		toad_land_dair,
 		toad_dair_eff,
 
@@ -1565,6 +1874,14 @@ pub fn install() {
 		toad_neutralb_snd,
 		toad_sideb,
 		toad_upb,
+		toad_upb_snd,
+		toad_upb_eff,
+		toad_downb,
+		toad_downb_eff,
+		toad_downb_snd,
+		toad_downb_air,
+		toad_downb_air_snd,
+		toad_downb_air_eff,
 
 		//Throws
 		toad_catch,
@@ -1573,7 +1890,12 @@ pub fn install() {
 		toad_catchturn,
 		toad_dthrow,
 		toad_bthrow,
-		toad_fthrow
+		toad_fthrow,
+		toad_fthrow_snd,
+
+		//Unique
+		toad_dmg_fly_snd,
+		toad_dmg_snd
     );
     install_agent_resets!(
         agent_reset
