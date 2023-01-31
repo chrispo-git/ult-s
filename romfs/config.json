@@ -12,6 +12,7 @@
                 "fighter/murabito/model/umbrella/c01/def_hammer_001_col.nutexb",
                 "fighter/murabito/model/umbrella/c01/def_spiny_001_col.nutexb",
                 "fighter/murabito/model/umbrella/c01/def_tail_001_col.nutexb",
+                "fighter/murabito/model/body/c01/def_murabito_001_col.nutexb",
                 "fighter/murabito/model/umbrella/c01/def_tail_001_prm.nutexb"
         ],
         "fighter/murabito/c02": [
@@ -26,6 +27,7 @@
                 "fighter/murabito/model/umbrella/c03/def_hammer_001_col.nutexb",
                 "fighter/murabito/model/umbrella/c03/def_spiny_001_col.nutexb",
                 "fighter/murabito/model/umbrella/c03/def_tail_001_col.nutexb",
+                "fighter/murabito/model/body/c03/def_murabito_001_col.nutexb",
                 "fighter/murabito/model/umbrella/c03/def_tail_001_prm.nutexb"
         ],
         "fighter/murabito/c04": [
@@ -40,6 +42,7 @@
                 "fighter/murabito/model/umbrella/c05/def_hammer_001_col.nutexb",
                 "fighter/murabito/model/umbrella/c05/def_spiny_001_col.nutexb",
                 "fighter/murabito/model/umbrella/c05/def_tail_001_col.nutexb",
+                "fighter/murabito/model/body/c05/def_murabito_001_col.nutexb",
                 "fighter/murabito/model/umbrella/c05/def_tail_001_prm.nutexb"
         ],
         "fighter/murabito/c06": [
@@ -54,6 +57,7 @@
                 "fighter/murabito/model/umbrella/c07/def_hammer_001_col.nutexb",
                 "fighter/murabito/model/umbrella/c07/def_spiny_001_col.nutexb",
                 "fighter/murabito/model/umbrella/c07/def_tail_001_col.nutexb",
+                "fighter/murabito/model/body/c07/def_murabito_001_col.nutexb",
                 "fighter/murabito/model/umbrella/c07/def_tail_001_prm.nutexb"
         ],
         "fighter/link/c00": [

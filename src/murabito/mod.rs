@@ -818,7 +818,7 @@ unsafe fn toad_dtilt(fighter: &mut L2CAgentBase) {
 		if(is_excute){
 			AttackModule::clear_all()
 		}
-		frame(Frame=23)
+		frame(Frame=16)
 		if(is_excute){
 			ArticleModule::remove_exist(FIGHTER_MURABITO_GENERATE_ARTICLE_UMBRELLA,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL))
 		}
@@ -1561,6 +1561,9 @@ pub fn toad(fighter : &mut L2CFighterCommon) {
 		let situation_kind = StatusModule::situation_kind(boma);
 		let end_frame = MotionModule::end_frame(boma);
 		if fighter_kind == *FIGHTER_KIND_MURABITO {
+			let scale = smash::phx::Vector3f { x: 0.8, y: 1.0, z: 1.0 };
+			ModelModule::set_joint_scale(boma, Hash40::new("shoulderl"), &scale);
+			ModelModule::set_joint_scale(boma, Hash40::new("shoulderr"), &scale);
 			ModelModule::set_mesh_visibility(fighter.module_accessor,Hash40::new("murabito_glove_l"),false);
 			ModelModule::set_mesh_visibility(fighter.module_accessor,Hash40::new("murabito_glove_r"),false);
 			ModelModule::set_mesh_visibility(fighter.module_accessor,Hash40::new("murabito_turnip_1"),false);
