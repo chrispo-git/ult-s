@@ -1300,7 +1300,7 @@ unsafe fn toad_upb(fighter: &mut L2CAgentBase) {
 		frame(Frame=5)
 		if(is_excute){
 			rust {
-				let x_speed = PostureModule::lr(boma) * ControlModule::get_stick_x(boma) * 0.75;
+				let x_speed = PostureModule::lr(fighter.module_accessor) * ControlModule::get_stick_x(fighter.module_accessor) * 0.75;
 				macros::SET_SPEED_EX(fighter, x_speed, 3.2, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
 			}
 			ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=12.0, Angle=89, KBG=71, FKB=0, BKB=74, Size=6.7, X=0.0, Y=16.0, Z=-3.0, X2=0.0, Y2=16.0, Z2=3.0, Hitlag=1.7, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_PUNCH)
