@@ -15,6 +15,7 @@ use crate::util::*;
 static mut LAND_SIDEB_BOUNCE: [i32; 8] = [0; 8];
 static mut BEFORE_SIDEB_BOUNCE: [i32; 8] = [0; 8];
 static mut HAS_DOWNB: [bool; 8] = [false; 8];
+static mut HAS_DEADED: [bool; 8] = [false; 8];
 
 #[acmd_script(
     agent = "murabito",
@@ -1435,6 +1436,28 @@ unsafe fn toad_uthrow(fighter: &mut L2CAgentBase) {
 }
 #[acmd_script(
     agent = "murabito",
+    script =  "effect_throwhi",
+    category = ACMD_EFFECT,
+	low_priority)]
+unsafe fn toad_uthrow_eff(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=3)
+		if(is_excute){
+			EFFECT(hash40("sys_erace_smoke"), hash40("top"), 8, 6, 0, 0, 0, 0, 1.4, 0, 0, 0, 0, 0, 0, false)
+		}
+		frame(Frame=34)
+		if(is_excute){
+			EFFECT(hash40("sys_down_smoke"), hash40("top"), 8, 12, 0, 0, 0, 0, 0.6, 0, 0, 0, 0, 0, 0, false)
+		}
+		frame(Frame=47)
+		if(is_excute){
+			EFFECT(hash40("sys_erace_smoke"), hash40("top"), 8, 6, 0, 0, 0, 0, 1.4, 0, 0, 0, 0, 0, 0, false)
+		}
+	});
+}
+#[acmd_script(
+    agent = "murabito",
     script =  "game_throwf",
     category = ACMD_GAME,
 	low_priority)]
@@ -1608,7 +1631,7 @@ unsafe fn toad_dmg_snd(fighter: &mut L2CAgentBase) {
 }	
 #[acmd_script(
     agent = "murabito",
-    scripts =  ["sound_damageflyhi", "sound_damageflyn", "sound_damageflylw", "sound_damageflytop", "sound_damageflytop", "sound_damageflyroll", "sound_damageflymeteor"],
+    scripts =  ["sound_damageflyhi", "sound_damageflyn", "sound_damageflylw", "sound_damageflytop", "sound_damageflyroll", "sound_damageflymeteor"],
     category = ACMD_SOUND,
 	low_priority)]
 unsafe fn toad_dmg_fly_snd(fighter: &mut L2CAgentBase) {
@@ -1617,6 +1640,19 @@ unsafe fn toad_dmg_fly_snd(fighter: &mut L2CAgentBase) {
 		dmg_fly_vc(fighter);
 	};
 }	
+#[acmd_script(
+    agent = "murabito",
+    scripts =  ["sound_damagefall"],
+    category = ACMD_SOUND,
+	low_priority)]
+unsafe fn toad_star_ko_snd(fighter: &mut L2CAgentBase) {
+	let lua_state = fighter.lua_state_agent;
+	if macros::is_excute(fighter) {
+		if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_DEAD_UP_FALL) {
+			macros::PLAY_SE(fighter, Hash40::new("se_murabito_catch_net"));
+		};
+	};
+}
 #[fighter_frame_callback]
 pub fn toad(fighter : &mut L2CFighterCommon) {
     unsafe {
@@ -1643,6 +1679,14 @@ pub fn toad(fighter : &mut L2CFighterCommon) {
 			ModelModule::set_mesh_visibility(fighter.module_accessor,Hash40::new("murabito_handpa_l"),true);
 			ModelModule::set_mesh_visibility(fighter.module_accessor,Hash40::new("murabito_handpa_r"),true);
 			WorkModule::set_int(boma, 1, *FIGHTER_MURABITO_INSTANCE_WORK_ID_INT_SPECIAL_N_TIME_LIMIT);
+			if status_kind == *FIGHTER_STATUS_KIND_DEAD {
+				if MotionModule::motion_kind(boma) == hash40("fall_damage") && !HAS_DEADED[ENTRY_ID] {
+					macros::PLAY_SE(fighter, Hash40::new("se_murabito_catch_net"));
+					HAS_DEADED[ENTRY_ID] = true;
+				};
+			} else {
+				HAS_DEADED[ENTRY_ID] = false;
+			};
 			if ![*FIGHTER_STATUS_KIND_ATTACK_HI3, *FIGHTER_STATUS_KIND_ATTACK_S3, *FIGHTER_STATUS_KIND_ATTACK_LW3].contains(&status_kind) {
 				ArticleModule::remove_exist(boma, *FIGHTER_MURABITO_GENERATE_ARTICLE_UMBRELLA,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
 			};
@@ -1973,10 +2017,12 @@ pub fn install() {
 		toad_fthrow,
 		toad_fthrow_snd,
 		toad_uthrow,
+		toad_uthrow_eff,
 
 		//Unique
 		toad_dmg_fly_snd,
-		toad_dmg_snd
+		toad_dmg_snd,
+		toad_star_ko_snd
     );
     install_agent_resets!(
         agent_reset
