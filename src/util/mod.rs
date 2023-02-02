@@ -19,6 +19,7 @@ pub static mut SPEED_Y : [f32; 8] = [0.0; 8];
 pub static mut ACCEL_X : [f32; 8] = [0.0; 8];
 pub static mut ACCEL_Y : [f32; 8] = [0.0; 8];
 static mut FULL_HOP_ENABLE_DELAY : [i32; 8] = [0; 8];
+pub static mut PREV_SCALE : [f32; 8] = [0.0; 8];
 
 //Cstick
 pub static mut SUB_STICK: [Vector2f;9] = [Vector2f{x:0.0, y: 0.0};9];
@@ -232,15 +233,30 @@ pub fn util_update(fighter : &mut L2CFighterCommon) {
 		if FULL_HOP_ENABLE_DELAY[ENTRY_ID] > 0 {
 			FULL_HOP_ENABLE_DELAY[ENTRY_ID] -= 1;
 		};
+		if  PostureModule::scale(boma) != 0.001345 {
+			PREV_SCALE[ENTRY_ID] = PostureModule::scale(boma);
+		};
 		if [*FIGHTER_STATUS_KIND_CAPTURE_PULLED, *FIGHTER_STATUS_KIND_CAPTURE_WAIT, *FIGHTER_STATUS_KIND_THROWN].contains(&status_kind) {
 			let opponent_id = LinkModule::get_parent_object_id(boma, *LINK_NO_CAPTURE) as u32;
 			let grabber_boma = smash::app::sv_battle_object::module_accessor(opponent_id);
 			let grabber_kind = smash::app::utility::get_kind(&mut *grabber_boma);
 			let graber_entry_id = WorkModule::get_int(&mut *grabber_boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+			//Toad Specific Code. Has the opponent be made real small while in the pipe, and removes the grab model changes present in villy
 			if grabber_kind == *FIGHTER_KIND_MURABITO {
 				println!("Turning off butterfly net flag");
+				let grabber_motion = MotionModule::motion_kind(grabber_boma);
+				let grabber_frame = MotionModule::frame(grabber_boma);
+				if grabber_motion == hash40("throw_hi") && (3..35).contains(&(grabber_frame as i32)) {
+					PostureModule::set_scale(boma, 0.001345, false);
+				} else {
+					PostureModule::set_scale(boma, PREV_SCALE[ENTRY_ID], false);
+				};
 				WorkModule::off_flag(boma, *FIGHTER_INSTANCE_WORK_ID_FLAG_CATCHED_BUTTERFLYNET);
+			} else {
+				PostureModule::set_scale(boma, PREV_SCALE[ENTRY_ID], false);
 			};
+		} else {
+			PostureModule::set_scale(boma, PREV_SCALE[ENTRY_ID], false);
 		};
 		//This checks if the Full Hop button is pressed
 		let triggered_buttons: Buttons = unsafe {
