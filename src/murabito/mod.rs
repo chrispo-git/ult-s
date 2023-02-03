@@ -1705,7 +1705,6 @@ unsafe fn toad_star_ko_snd(fighter: &mut L2CAgentBase) {
 unsafe fn toad_fsmash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
-		FT_MOTION_RATE(FSM=1.36)
 		frame(Frame=2)
 		if(is_excute){
 			ArticleModule::generate_article_enable(FIGHTER_MURABITO_GENERATE_ARTICLE_BOWLING_BALL, false, 0)
@@ -1714,9 +1713,40 @@ unsafe fn toad_fsmash(fighter: &mut L2CAgentBase) {
 		if(is_excute){
 			WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_FLAG_START_SMASH_HOLD)
 		}
-		frame(Frame=14)
+		frame(Frame=18)
 		if(is_excute){
-			ArticleModule::shoot(FIGHTER_MURABITO_GENERATE_ARTICLE_BOWLING_BALL, smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL), false)
+			ArticleModule::remove_exist(FIGHTER_MURABITO_GENERATE_ARTICLE_BOWLING_BALL,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL))
+			EFFECT(hash40("sys_bomb_a"), hash40("haver"), 0.0, 0.0, 0.0, 0, 0, 0, 1.4, 0, 0, 0, 0, 0, 0, true)
+		}
+		frame(Frame=19)
+		if(is_excute){
+			ATTACK(ID=0, Part=0, Bone=hash40("top"),  Damage=20.0, Angle=361, KBG=87, FKB=0, BKB=29, Size=14.0, X=0.0, Y=8.0, Z=12.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.35, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_fire"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_BOMB, Type=ATTACK_REGION_SWORD)
+		}
+		frame(Frame=20)
+		if(is_excute){
+			AttackModule::clear_all()
+		}
+	});
+}
+#[acmd_script(
+    agent = "murabito",
+    scripts =  ["sound_attacks4"],
+    category = ACMD_SOUND,
+	low_priority)]
+unsafe fn toad_fsmash_snd(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=18)
+		if(is_excute){
+			PLAY_SE(hash40("se_common_bomb_ll"))
+		}
+		frame(Frame=22)
+		if(is_excute){
+			PLAY_SE(hash40("se_murabito_attackair_l03"))
+		}
+		frame(Frame=30)
+		if(is_excute){
+			PLAY_SE(hash40("se_common_down_m_02"))
 		}
 	});
 }
@@ -1729,7 +1759,7 @@ unsafe fn toad_fsmash_bomb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
 		if(is_excute){
-			SET_SPEED_EX(1.5, 1.0, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN)
+			SET_SPEED_EX(1.5, 1.0, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_NONE)
 			ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=17.8, Angle=361, KBG=99, FKB=0, BKB=25, Size=6.0, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.3, SDI=0.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=true, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_fire"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_FIRE, Type=ATTACK_REGION_OBJECT)
 		}
 	});
@@ -1743,7 +1773,6 @@ fn bob_omb_frame(weapon: &mut L2CFighterBase) {
 		let status_kind = StatusModule::status_kind(weapon.module_accessor);
         if status_kind == *WEAPON_MURABITO_BOWLING_BALL_STATUS_KIND_FALL {
 			if AttackModule::is_infliction(weapon.module_accessor, *COLLISION_KIND_MASK_ALL) {
-				macros::EFFECT(weapon, Hash40::new("sys_bomb_a"), Hash40::new("top"), 0.0, 0.0, 0.0, 0, 0, 0, 0.7, 0, 0, 0, 0, 0, 0, true);
 			};
 		};
     }
@@ -2065,7 +2094,7 @@ pub fn install() {
 		toad_dsmash_charge_eff,
 		toad_dsmash_charge_expr,
 		toad_fsmash,
-		toad_fsmash_bomb,
+		toad_fsmash_snd,
 
 		//Aerials
 		toad_nair,
@@ -2113,6 +2142,7 @@ pub fn install() {
 		toad_dthrow_eff,
 		toad_bthrow,
 		toad_fthrow,
+		toad_fthrow_eff,
 		toad_fthrow_snd,
 		toad_uthrow,
 		toad_uthrow_eff,
@@ -2125,6 +2155,7 @@ pub fn install() {
     install_agent_resets!(
         agent_reset
     );
-    smashline::install_agent_frame_callbacks!(toad, bob_omb_frame);
+    smashline::install_agent_frame_callbacks!(toad);
+    //smashline::install_agent_frames!(bob_omb_frame);
 	install_status_scripts!(main_catch_pull, main_catch_wait, throw_pre, throw_exit, throw_end, throw_init, main_throw_kirby);
 }
