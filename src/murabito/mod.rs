@@ -424,10 +424,12 @@ unsafe fn toad_da(fighter: &mut L2CAgentBase) {
 			ArticleModule::generate_article(FIGHTER_MURABITO_GENERATE_ARTICLE_FLOWERPOT, false, 0)
 			sv_module_access::damage(MSC=MA_MSC_DAMAGE_DAMAGE_NO_REACTION, Type=DAMAGE_NO_REACTION_MODE_DAMAGE_POWER, DamageThreshold=7)
 			ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=8.5, Angle=50, KBG=59, FKB=0, BKB=79, Size=6.5, X=0.0, Y=5.5, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=1, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_HEAD)
+			AttackModule::set_attack_height_all(smash::app::AttackHeight(*ATTACK_HEIGHT_LOW), false)
 		}
 		frame(Frame=10)
 		if(is_excute){
 			ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=6.0, Angle=60, KBG=69, FKB=0, BKB=74, Size=5.0, X=0.0, Y=5.5, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=1, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_KAMEHIT, Type=ATTACK_REGION_HEAD)
+			AttackModule::set_attack_height_all(smash::app::AttackHeight(*ATTACK_HEIGHT_LOW), false)
 		}
 		frame(Frame=30)
 		if(is_excute){
@@ -589,6 +591,7 @@ unsafe fn toad_usmash(fighter: &mut L2CAgentBase) {
 		frame(Frame=6)
 		if(is_excute){
 			ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=1.0, Angle=100, KBG=100, FKB=125, BKB=0, Size=3.5, X=0.0, Y=6.5, Z=8.0, X=LUA_VOID, Y=LUA_VOID, Z=LUA_VOID, Hitlag=1.0, SDI=0.8, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_PUNCH)
+			AttackModule::set_attack_height_all(smash::app::AttackHeight(*ATTACK_HEIGHT_LOW), false)
 		}
 		frame(Frame=7)
 		if(is_excute){
@@ -814,6 +817,7 @@ unsafe fn toad_dtilt(fighter: &mut L2CAgentBase) {
 			ATTACK(ID=1, Part=0, Bone=hash40("haver"), Damage=8.0, Angle=80, KBG=50, FKB=0, BKB=50, Size=4.0, X=0.0, Y=6.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_TAIL)
 			ATK_SET_SHIELD_SETOFF_MUL(ID=0, ShieldstunMul=0.4)
 			ATK_SET_SHIELD_SETOFF_MUL(ID=1, ShieldstunMul=0.4)
+			AttackModule::set_attack_height_all(smash::app::AttackHeight(*ATTACK_HEIGHT_LOW), false)
 		}
 		wait(Frames=2)
 		if(is_excute){
@@ -1193,6 +1197,7 @@ unsafe fn toad_dsmash(fighter: &mut L2CAgentBase) {
 		if(is_excute){
 			ATTACK(ID=0, Part=0, Bone=hash40("throw"), Damage=6.0, Angle=270, KBG=100, FKB=0, BKB=40, Size=10.0, X=0.0, Y=8.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=5, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_A, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_HEAVY, Type=ATTACK_REGION_KICK)
 			ATTACK(ID=1, Part=0, Bone=hash40("throw"), Damage=6.0, Angle=270, KBG=100, FKB=0, BKB=40, Size=10.0, X=0.0, Y=8.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=5, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_G, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_bury"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_HEAVY, Type=ATTACK_REGION_KICK)
+			AttackModule::set_attack_height_all(smash::app::AttackHeight(*ATTACK_HEIGHT_HIGH), false)
 		}
 		frame(Frame=31)
 		if(is_excute){
@@ -1201,6 +1206,7 @@ unsafe fn toad_dsmash(fighter: &mut L2CAgentBase) {
 			ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=17.0, Angle=361, KBG=88, FKB=0, BKB=35, Size=7.0, X=0.0, Y=3.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.1, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_HEAVY, Type=ATTACK_REGION_KICK)
 			ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=17.0, Angle=361, KBG=88, FKB=0, BKB=35, Size=7.0, X=0.0, Y=3.0, Z=9.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.1, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_HEAVY, Type=ATTACK_REGION_KICK)
 			ATTACK(ID=2, Part=0, Bone=hash40("top"), Damage=17.0, Angle=361, KBG=88, FKB=0, BKB=35, Size=7.0, X=0.0, Y=3.0, Z=-9.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.1, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_HEAVY, Type=ATTACK_REGION_KICK)
+			AttackModule::set_attack_height_all(smash::app::AttackHeight(*ATTACK_HEIGHT_LOW), false)
 		}
 		frame(Frame=33)
 		if(is_excute){
@@ -1443,6 +1449,33 @@ unsafe fn toad_bthrow(fighter: &mut L2CAgentBase) {
 }
 #[acmd_script(
     agent = "murabito",
+    script =  "effect_throwb",
+    category = ACMD_EFFECT,
+	low_priority)]
+unsafe fn toad_bthrow_eff(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=7)
+		if(is_excute){
+			EFFECT(hash40("sys_crown"), hash40("top"), 8, 0, 0, 0, 0, 0, 0.9, 0, 0, 0, 0, 0, 0, false)
+		}
+		frame(Frame=16)
+		if(is_excute){
+			LANDING_EFFECT_FLIP(hash40("sys_whirlwind_l"), hash40("sys_whirlwind_r"), hash40("top"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false, EF_FLIP_NONE)
+		}
+		frame(Frame=22)
+		if(is_excute){
+			EFFECT_FOLLOW_FLIP_COLOR(hash40("sys_spin_wind"), hash40("sys_spin_wind"), hash40("rot"), 0, -2, 0, 0, -90, 0, 1.5, true, EF_FLIP_YZ, 1, 1, 1)
+		}
+		frame(Frame=34)
+		if(is_excute){
+			LANDING_EFFECT(hash40("sys_atk_smoke"), hash40("top"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false)
+			EFFECT(hash40("sys_smash_flash_s"), hash40("throw"), 0, 0, 0, 0, 0, 0, 1.5, 0, 0, 0, 0, 0, 0, true)
+		}
+	});
+}
+#[acmd_script(
+    agent = "murabito",
     script =  "game_throwhi",
     category = ACMD_GAME,
 	low_priority)]
@@ -1477,16 +1510,36 @@ unsafe fn toad_uthrow_eff(fighter: &mut L2CAgentBase) {
     acmd!(lua_state, {
 		frame(Frame=3)
 		if(is_excute){
-			EFFECT(hash40("sys_erace_smoke"), hash40("top"), 9, 6, 0, 0, 0, 0, 1.4, 0, 0, 0, 0, 0, 0, false)
-		}
-		frame(Frame=34)
+            EFFECT(hash40("sys_erace_smoke"), hash40("top"), 11, 6, 0, 0, 0, 0, 1.8, 0, 0, 0, 0, 0, 0, false)
+        }
+        frame(Frame=34)
+        if(is_excute){
+            EFFECT(hash40("sys_down_smoke"), hash40("top"), 9, 13.5, 0, 0, 0, 0, 0.75, 0, 0, 0, 0, 0, 0, false)
+        }
+        frame(Frame=47)
+        if(is_excute){
+            EFFECT(hash40("sys_erace_smoke"), hash40("top"), 11, 6, 0, 0, 0, 0, 1.8, 0, 0, 0, 0, 0, 0, false)
+        }
+	});
+}
+#[acmd_script(
+    agent = "murabito",
+    script =  "sound_throwhi",
+    category = ACMD_SOUND,
+	low_priority)]
+unsafe fn toad_uthrow_snd(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=3)
 		if(is_excute){
-			EFFECT(hash40("sys_down_smoke"), hash40("top"), 8, 12, 0, 0, 0, 0, 0.6, 0, 0, 0, 0, 0, 0, false)
-		}
-		frame(Frame=47)
-		if(is_excute){
-			EFFECT(hash40("sys_erace_smoke"), hash40("top"), 9, 6, 0, 0, 0, 0, 1.4, 0, 0, 0, 0, 0, 0, false)
-		}
+            PLAY_SE(hash40("se_murabito_attackair_b02"))
+        }
+        frame(Frame=36)
+        if(is_excute){
+            PLAY_SE(hash40("se_common_blowaway_m"))
+            PLAY_SE(hash40("se_common_fire_m_damage"))
+            PLAY_SE(hash40("se_common_throw_03"))
+        }
 	});
 }
 #[acmd_script(
@@ -2156,11 +2209,13 @@ pub fn install() {
 		toad_dthrow,
 		toad_dthrow_eff,
 		toad_bthrow,
+		toad_bthrow_eff,
 		toad_fthrow,
 		toad_fthrow_eff,
 		toad_fthrow_snd,
 		toad_uthrow,
 		toad_uthrow_eff,
+		toad_uthrow_snd,
 
 		//Unique
 		toad_dmg_fly_snd,
