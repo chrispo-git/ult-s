@@ -1122,6 +1122,13 @@ unsafe fn toad_dair_eff(fighter: &mut L2CAgentBase) {
 		if(is_excute){
 			EFFECT(hash40("sys_smash_flash"), hash40("haver"), -2, 5, 0, 0, 0, 0, 0.8, 0, 0, 0, 0, 0, 0, true)
 		}
+		frame(Frame=20)
+		for(8 Iterations) {
+			if(is_excute){
+				EFFECT_FOLLOW_FLIP_ALPHA(hash40("sys_attack_speedline"), hash40("sys_attack_speedline"), hash40("top"), 0, 22, 0, 90, 0, 0, 1.4, true, EF_FLIP_YZ, 0.3)
+			}
+			wait(Frames=2)
+		}
     });
 }
 #[acmd_script(
@@ -1720,6 +1727,7 @@ unsafe fn toad_fsmash(fighter: &mut L2CAgentBase) {
 		}
 		frame(Frame=19)
 		if(is_excute){
+			QUAKE(CAMERA_QUAKE_KIND_L)
 			ATTACK(ID=0, Part=0, Bone=hash40("top"),  Damage=20.0, Angle=361, KBG=87, FKB=0, BKB=29, Size=14.0, X=0.0, Y=8.0, Z=12.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.35, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_fire"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_BOMB, Type=ATTACK_REGION_SWORD)
 		}
 		frame(Frame=20)
@@ -1816,6 +1824,13 @@ pub fn toad(fighter : &mut L2CFighterCommon) {
 			};
 			if ![*FIGHTER_STATUS_KIND_ATTACK_LW4_HOLD, *FIGHTER_STATUS_KIND_ATTACK_LW4_START, *FIGHTER_STATUS_KIND_ATTACK_LW4].contains(&status_kind) {
 				ArticleModule::remove_exist(boma, *FIGHTER_MURABITO_GENERATE_ARTICLE_FIREWORK,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
+			};
+			if [*FIGHTER_STATUS_KIND_ATTACK_S4_HOLD, *FIGHTER_STATUS_KIND_ATTACK_S4_START, *FIGHTER_STATUS_KIND_ATTACK_S4].contains(&status_kind) {
+				if AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_ALL) {
+					if frame < 32.0 {
+						MotionModule::set_frame(boma, 32.0, false);
+					};
+				};
 			};
 			if ![*FIGHTER_MURABITO_STATUS_KIND_SPECIAL_HI_DETACH].contains(&status_kind) {
 				ArticleModule::remove_exist(boma, *FIGHTER_MURABITO_GENERATE_ARTICLE_HELMET,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
