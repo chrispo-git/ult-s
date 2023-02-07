@@ -404,7 +404,7 @@ unsafe fn toad_fair_snd(fighter: &mut L2CAgentBase) {
 	};
 }
 #[acmd_script(
-    agent = "murabito",
+    agent = "murabito_flowerpot",
     script =  "effect_burst",
     category = ACMD_EFFECT,
 	low_priority)]
@@ -1532,7 +1532,7 @@ unsafe fn toad_uthrow_snd(fighter: &mut L2CAgentBase) {
     acmd!(lua_state, {
 		frame(Frame=3)
 		if(is_excute){
-            PLAY_SE(hash40("se_murabito_attackair_b02"))
+            PLAY_SE(hash40("se_murabito_attackair_h02"))
         }
         frame(Frame=36)
         if(is_excute){

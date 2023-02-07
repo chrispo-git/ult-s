@@ -5,7 +5,10 @@
             "fighter/murabito/model/umbrella/c00/def_hammer_001_col.nutexb",
             "fighter/murabito/model/umbrella/c00/def_spiny_001_col.nutexb",
             "fighter/murabito/model/umbrella/c00/def_tail_001_col.nutexb",
-            "fighter/murabito/model/umbrella/c00/def_tail_001_prm.nutexb"
+            "fighter/murabito/model/umbrella/c00/def_tail_001_prm.nutexb",
+            "fighter/murabito/model/weeds/c00/block_col.nutexb",
+            "fighter/murabito/model/weeds/c00/block_nor.nutexb",
+            "fighter/murabito/model/weeds/c00/block_prm.nutexb"
         ],
         "fighter/murabito/c01": [
                 "fighter/murabito/model/firework/c01/def_firework_001_rst.nutexb",
@@ -13,14 +16,20 @@
                 "fighter/murabito/model/umbrella/c01/def_spiny_001_col.nutexb",
                 "fighter/murabito/model/umbrella/c01/def_tail_001_col.nutexb",
                 "fighter/murabito/model/body/c01/def_murabito_001_col.nutexb",
-                "fighter/murabito/model/umbrella/c01/def_tail_001_prm.nutexb"
+                "fighter/murabito/model/umbrella/c01/def_tail_001_prm.nutexb",
+                "fighter/murabito/model/weeds/c01/block_col.nutexb",
+                "fighter/murabito/model/weeds/c01/block_nor.nutexb",
+                "fighter/murabito/model/weeds/c01/block_prm.nutexb"
         ],
         "fighter/murabito/c02": [
                 "fighter/murabito/model/firework/c02/def_firework_001_rst.nutexb",
                 "fighter/murabito/model/umbrella/c02/def_hammer_001_col.nutexb",
                 "fighter/murabito/model/umbrella/c02/def_spiny_001_col.nutexb",
                 "fighter/murabito/model/umbrella/c02/def_tail_001_col.nutexb",
-                "fighter/murabito/model/umbrella/c02/def_tail_001_prm.nutexb"
+                "fighter/murabito/model/umbrella/c02/def_tail_001_prm.nutexb",
+                "fighter/murabito/model/weeds/c02/block_col.nutexb",
+                "fighter/murabito/model/weeds/c02/block_nor.nutexb",
+                "fighter/murabito/model/weeds/c02/block_prm.nutexb"
         ],
         "fighter/murabito/c03": [
                 "fighter/murabito/model/firework/c03/def_firework_001_rst.nutexb",
@@ -28,37 +37,57 @@
                 "fighter/murabito/model/umbrella/c03/def_spiny_001_col.nutexb",
                 "fighter/murabito/model/umbrella/c03/def_tail_001_col.nutexb",
                 "fighter/murabito/model/body/c03/def_murabito_001_col.nutexb",
-                "fighter/murabito/model/umbrella/c03/def_tail_001_prm.nutexb"
+                "fighter/murabito/model/umbrella/c03/def_tail_001_prm.nutexb",
+                "fighter/murabito/model/weeds/c03/block_col.nutexb",
+                "fighter/murabito/model/weeds/c03/block_nor.nutexb",
+                "fighter/murabito/model/weeds/c03/block_prm.nutexb"
         ],
         "fighter/murabito/c04": [
                 "fighter/murabito/model/firework/c04/def_firework_001_rst.nutexb",
                 "fighter/murabito/model/umbrella/c04/def_hammer_001_col.nutexb",
                 "fighter/murabito/model/umbrella/c04/def_spiny_001_col.nutexb",
                 "fighter/murabito/model/umbrella/c04/def_tail_001_col.nutexb",
-                "fighter/murabito/model/umbrella/c04/def_tail_001_prm.nutexb"
+                "fighter/murabito/model/umbrella/c04/def_tail_001_prm.nutexb",
+                "fighter/murabito/model/weeds/c04/block_col.nutexb",
+                "fighter/murabito/model/weeds/c04/block_nor.nutexb",
+                "fighter/murabito/model/weeds/c04/block_prm.nutexb"
         ],
         "fighter/murabito/c05": [
+                "fighter/murabito/model/body/c05/def_murabito_001_col.nutexb",
+                "fighter/murabito/model/body/c05/def_murabito_001_nor.nutexb",
+                "fighter/murabito/model/body/c05/def_murabito_001_prm.nutexb",
                 "fighter/murabito/model/firework/c05/def_firework_001_rst.nutexb",
                 "fighter/murabito/model/umbrella/c05/def_hammer_001_col.nutexb",
                 "fighter/murabito/model/umbrella/c05/def_spiny_001_col.nutexb",
                 "fighter/murabito/model/umbrella/c05/def_tail_001_col.nutexb",
                 "fighter/murabito/model/body/c05/def_murabito_001_col.nutexb",
-                "fighter/murabito/model/umbrella/c05/def_tail_001_prm.nutexb"
+                "fighter/murabito/model/umbrella/c05/def_tail_001_prm.nutexb",
+                "fighter/murabito/model/weeds/c05/block_col.nutexb",
+                "fighter/murabito/model/weeds/c05/block_nor.nutexb",
+                "fighter/murabito/model/weeds/c05/block_prm.nutexb"
         ],
         "fighter/murabito/c06": [
                 "fighter/murabito/model/firework/c06/def_firework_001_rst.nutexb",
                 "fighter/murabito/model/umbrella/c06/def_hammer_001_col.nutexb",
                 "fighter/murabito/model/umbrella/c06/def_spiny_001_col.nutexb",
                 "fighter/murabito/model/umbrella/c06/def_tail_001_col.nutexb",
-                "fighter/murabito/model/umbrella/c06/def_tail_001_prm.nutexb"
+                "fighter/murabito/model/umbrella/c06/def_tail_001_prm.nutexb",
+                "fighter/murabito/model/weeds/c06/block_col.nutexb",
+                "fighter/murabito/model/weeds/c06/block_nor.nutexb",
+                "fighter/murabito/model/weeds/c06/block_prm.nutexb"
         ],
         "fighter/murabito/c07": [
+                "fighter/murabito/model/body/c07/def_murabito_001_col.nutexb",
+                "fighter/murabito/model/body/c07/def_murabito_001_nor.nutexb",
+                "fighter/murabito/model/body/c07/def_murabito_001_prm.nutexb",
                 "fighter/murabito/model/firework/c07/def_firework_001_rst.nutexb",
                 "fighter/murabito/model/umbrella/c07/def_hammer_001_col.nutexb",
                 "fighter/murabito/model/umbrella/c07/def_spiny_001_col.nutexb",
                 "fighter/murabito/model/umbrella/c07/def_tail_001_col.nutexb",
-                "fighter/murabito/model/body/c07/def_murabito_001_col.nutexb",
-                "fighter/murabito/model/umbrella/c07/def_tail_001_prm.nutexb"
+                "fighter/murabito/model/umbrella/c07/def_tail_001_prm.nutexb",
+                "fighter/murabito/model/weeds/c07/block_col.nutexb",
+                "fighter/murabito/model/weeds/c07/block_nor.nutexb",
+                "fighter/murabito/model/weeds/c07/block_prm.nutexb"
         ],
         "fighter/link/c00": [
 			"fighter/link/model/bow/c00/def_blade_001_col.nutexb",
