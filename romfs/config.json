@@ -1,6 +1,12 @@
 {
 	"new-dir-files": {
         "fighter/murabito/c00": [
+            "fighter/murabito/model/house/c00/def_brick_001_col.nutexb",
+            "fighter/murabito/model/house/c00/def_circle_001_col.nutexb",
+            "fighter/murabito/model/house/c00/def_ground_001_col.nutexb",
+            "fighter/murabito/model/house/c00/def_roof_001_col.nutexb",
+            "fighter/murabito/model/house/c00/def_steps_001_col.nutexb",
+            "fighter/murabito/model/house/c00/def_leaf_001_col.nutexb",
             "fighter/murabito/model/firework/c00/def_firework_001_rst.nutexb",
             "fighter/murabito/model/umbrella/c00/def_hammer_001_col.nutexb",
             "fighter/murabito/model/umbrella/c00/def_spiny_001_col.nutexb",
@@ -11,6 +17,12 @@
             "fighter/murabito/model/weeds/c00/block_prm.nutexb"
         ],
         "fighter/murabito/c01": [
+                "fighter/murabito/model/house/c01/def_brick_001_col.nutexb",
+                "fighter/murabito/model/house/c01/def_circle_001_col.nutexb",
+                "fighter/murabito/model/house/c01/def_ground_001_col.nutexb",
+                "fighter/murabito/model/house/c01/def_roof_001_col.nutexb",
+                "fighter/murabito/model/house/c01/def_steps_001_col.nutexb",
+                "fighter/murabito/model/house/c01/def_leaf_001_col.nutexb",
                 "fighter/murabito/model/firework/c01/def_firework_001_rst.nutexb",
                 "fighter/murabito/model/umbrella/c01/def_hammer_001_col.nutexb",
                 "fighter/murabito/model/umbrella/c01/def_spiny_001_col.nutexb",
@@ -22,6 +34,12 @@
                 "fighter/murabito/model/weeds/c01/block_prm.nutexb"
         ],
         "fighter/murabito/c02": [
+                "fighter/murabito/model/house/c02/def_brick_001_col.nutexb",
+                "fighter/murabito/model/house/c02/def_circle_001_col.nutexb",
+                "fighter/murabito/model/house/c02/def_ground_001_col.nutexb",
+                "fighter/murabito/model/house/c02/def_roof_001_col.nutexb",
+                "fighter/murabito/model/house/c02/def_steps_001_col.nutexb",
+                "fighter/murabito/model/house/c02/def_leaf_001_col.nutexb",
                 "fighter/murabito/model/firework/c02/def_firework_001_rst.nutexb",
                 "fighter/murabito/model/umbrella/c02/def_hammer_001_col.nutexb",
                 "fighter/murabito/model/umbrella/c02/def_spiny_001_col.nutexb",
@@ -32,6 +50,12 @@
                 "fighter/murabito/model/weeds/c02/block_prm.nutexb"
         ],
         "fighter/murabito/c03": [
+                "fighter/murabito/model/house/c03/def_brick_001_col.nutexb",
+                "fighter/murabito/model/house/c03/def_circle_001_col.nutexb",
+                "fighter/murabito/model/house/c03/def_ground_001_col.nutexb",
+                "fighter/murabito/model/house/c03/def_roof_001_col.nutexb",
+                "fighter/murabito/model/house/c03/def_steps_001_col.nutexb",
+                "fighter/murabito/model/house/c03/def_leaf_001_col.nutexb",
                 "fighter/murabito/model/firework/c03/def_firework_001_rst.nutexb",
                 "fighter/murabito/model/umbrella/c03/def_hammer_001_col.nutexb",
                 "fighter/murabito/model/umbrella/c03/def_spiny_001_col.nutexb",
@@ -43,6 +67,12 @@
                 "fighter/murabito/model/weeds/c03/block_prm.nutexb"
         ],
         "fighter/murabito/c04": [
+                "fighter/murabito/model/house/c04/def_brick_001_col.nutexb",
+                "fighter/murabito/model/house/c04/def_circle_001_col.nutexb",
+                "fighter/murabito/model/house/c04/def_ground_001_col.nutexb",
+                "fighter/murabito/model/house/c04/def_roof_001_col.nutexb",
+                "fighter/murabito/model/house/c04/def_steps_001_col.nutexb",
+                "fighter/murabito/model/house/c04/def_leaf_001_col.nutexb",
                 "fighter/murabito/model/firework/c04/def_firework_001_rst.nutexb",
                 "fighter/murabito/model/umbrella/c04/def_hammer_001_col.nutexb",
                 "fighter/murabito/model/umbrella/c04/def_spiny_001_col.nutexb",
@@ -53,6 +83,12 @@
                 "fighter/murabito/model/weeds/c04/block_prm.nutexb"
         ],
         "fighter/murabito/c05": [
+                "fighter/murabito/model/house/c05/def_brick_001_col.nutexb",
+                "fighter/murabito/model/house/c05/def_circle_001_col.nutexb",
+                "fighter/murabito/model/house/c05/def_ground_001_col.nutexb",
+                "fighter/murabito/model/house/c05/def_roof_001_col.nutexb",
+                "fighter/murabito/model/house/c05/def_steps_001_col.nutexb",
+                "fighter/murabito/model/house/c05/def_leaf_001_col.nutexb",
                 "fighter/murabito/model/body/c05/def_murabito_001_col.nutexb",
                 "fighter/murabito/model/body/c05/def_murabito_001_nor.nutexb",
                 "fighter/murabito/model/body/c05/def_murabito_001_prm.nutexb",
@@ -67,6 +103,12 @@
                 "fighter/murabito/model/weeds/c05/block_prm.nutexb"
         ],
         "fighter/murabito/c06": [
+                "fighter/murabito/model/house/c06/def_brick_001_col.nutexb",
+                "fighter/murabito/model/house/c06/def_circle_001_col.nutexb",
+                "fighter/murabito/model/house/c06/def_ground_001_col.nutexb",
+                "fighter/murabito/model/house/c06/def_roof_001_col.nutexb",
+                "fighter/murabito/model/house/c06/def_steps_001_col.nutexb",
+                "fighter/murabito/model/house/c06/def_leaf_001_col.nutexb",
                 "fighter/murabito/model/firework/c06/def_firework_001_rst.nutexb",
                 "fighter/murabito/model/umbrella/c06/def_hammer_001_col.nutexb",
                 "fighter/murabito/model/umbrella/c06/def_spiny_001_col.nutexb",
@@ -77,6 +119,12 @@
                 "fighter/murabito/model/weeds/c06/block_prm.nutexb"
         ],
         "fighter/murabito/c07": [
+                "fighter/murabito/model/house/c07/def_brick_001_col.nutexb",
+                "fighter/murabito/model/house/c07/def_circle_001_col.nutexb",
+                "fighter/murabito/model/house/c07/def_ground_001_col.nutexb",
+                "fighter/murabito/model/house/c07/def_roof_001_col.nutexb",
+                "fighter/murabito/model/house/c07/def_steps_001_col.nutexb",
+                "fighter/murabito/model/house/c07/def_leaf_001_col.nutexb",
                 "fighter/murabito/model/body/c07/def_murabito_001_col.nutexb",
                 "fighter/murabito/model/body/c07/def_murabito_001_nor.nutexb",
                 "fighter/murabito/model/body/c07/def_murabito_001_prm.nutexb",
