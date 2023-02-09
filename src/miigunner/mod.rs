@@ -264,7 +264,8 @@ pub fn install() {
 		gunner_nade,
 		gunner_nade_end,
 		gunner_dair,
-		gunner_uair
+		gunner_uair,
+		gunner_nair
     );
 	smashline::install_agent_frame_callbacks!(gunner);
 }
