@@ -1903,7 +1903,7 @@ pub fn toad(fighter : &mut L2CFighterCommon) {
 			};
 			if [*FIGHTER_MURABITO_STATUS_KIND_SPECIAL_LW_WATER_JUMP].contains(&status_kind) {
 				if frame >= 66.0 {
-					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL, true);
+					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL, false);
 				};
 				if frame > 30.0 && situation_kind == *SITUATION_KIND_GROUND {
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_LANDING, true);
@@ -1951,9 +1951,9 @@ pub fn toad(fighter : &mut L2CFighterCommon) {
 			if status_kind == *FIGHTER_MURABITO_STATUS_KIND_SPECIAL_N_SEARCH {
 				if frame > 38.0 {
 					if situation_kind == *SITUATION_KIND_GROUND {
-						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_WAIT, true);
+						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_WAIT, false);
 					} else {
-						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL, true);
+						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL, false);
 					};
 				};
 			};
@@ -2013,7 +2013,7 @@ pub fn toad(fighter : &mut L2CFighterCommon) {
 					CancelModule::enable_cancel(boma);
 				};
 				if frame >= 14.0 {
-					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL, true);
+					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL, false);
 				};
 			};
 		};
