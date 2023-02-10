@@ -1853,16 +1853,6 @@ pub fn toad(fighter : &mut L2CFighterCommon) {
 			let scale = smash::phx::Vector3f { x: 0.8, y: 1.0, z: 1.0 };
 			ModelModule::set_joint_scale(boma, Hash40::new("shoulderl"), &scale);
 			ModelModule::set_joint_scale(boma, Hash40::new("shoulderr"), &scale);
-			ModelModule::set_mesh_visibility(fighter.module_accessor,Hash40::new("murabito_glove_l"),false);
-			ModelModule::set_mesh_visibility(fighter.module_accessor,Hash40::new("murabito_glove_r"),false);
-			ModelModule::set_mesh_visibility(fighter.module_accessor,Hash40::new("murabito_turnip_1"),false);
-			ModelModule::set_mesh_visibility(fighter.module_accessor,Hash40::new("murabito_turnip_2"),false);
-			ModelModule::set_mesh_visibility(fighter.module_accessor,Hash40::new("murabito_turnip_3"),false);
-			ModelModule::set_mesh_visibility(fighter.module_accessor,Hash40::new("murabito_turnip_1"),false);
-			ModelModule::set_mesh_visibility(fighter.module_accessor,Hash40::new("murabito_turnipFLIP_2"),false);
-			ModelModule::set_mesh_visibility(fighter.module_accessor,Hash40::new("murabito_turnipFLIP_3"),false);
-			ModelModule::set_mesh_visibility(fighter.module_accessor,Hash40::new("murabito_handpa_l"),true);
-			ModelModule::set_mesh_visibility(fighter.module_accessor,Hash40::new("murabito_handpa_r"),true);
 			WorkModule::set_int(boma, 1, *FIGHTER_MURABITO_INSTANCE_WORK_ID_INT_SPECIAL_N_TIME_LIMIT);
 			if status_kind == *FIGHTER_STATUS_KIND_DEAD {
 				if MotionModule::motion_kind(boma) == hash40("fall_damage") && !HAS_DEADED[ENTRY_ID] {
