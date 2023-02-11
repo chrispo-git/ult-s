@@ -193,6 +193,20 @@ pub unsafe fn article_hook(boma: &mut smash::app::BattleObjectModuleAccessor, in
 		} else {
 			return original!()(boma, int, arg3, arg4)
 		}
+	} else if smash::app::utility::get_kind(boma) == *FIGHTER_KIND_MURABITO {
+		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
+		if int == *FIGHTER_MURABITO_GENERATE_ARTICLE_CLAYROCKET {
+			if ![*FIGHTER_STATUS_KIND_FINAL, *FIGHTER_MURABITO_STATUS_KIND_FINAL_END, *FIGHTER_MURABITO_STATUS_KIND_FINAL_CHEER, *FIGHTER_MURABITO_STATUS_KIND_FINAL_HAPPY, *FIGHTER_MURABITO_STATUS_KIND_FINAL_MONEY, *FIGHTER_MURABITO_STATUS_KIND_FINAL_SURPRISE].contains(&status_kind) {
+				return 0
+			}
+		}
+		if [*FIGHTER_MURABITO_GENERATE_ARTICLE_TOMNOOK, *FIGHTER_MURABITO_GENERATE_ARTICLE_MONEYBAG, *FIGHTER_MURABITO_GENERATE_ARTICLE_FURNITURE].contains(&int){
+			return 0
+		}
+		if smash::app::sv_information::is_ready_go() && int == *FIGHTER_MURABITO_GENERATE_ARTICLE_HOUSE{
+			return 0
+		}
+		return original!()(boma, int, arg3, arg4)
 	} else {
 		return original!()(boma, int, arg3, arg4)
 	}
