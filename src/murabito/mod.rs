@@ -1900,7 +1900,7 @@ unsafe fn toad_final_toad_army(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
 		if(is_excute){
-			ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=15.0, Angle=361, KBG=100, FKB=0, BKB=30, Size=10.3, X=0.0, Y=5.0, Z=-10.0, X2=0.0, Y2=5.0, Z2=12.0, Hitlag=0.4, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_B, SetWeight=false, ShieldDamage=hash40("no"), Trip=-1.0, Rehit=5, Reflectable=true, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_OBJECT)
+			ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=15.0, Angle=361, KBG=100, FKB=0, BKB=30, Size=10.3, X=0.0, Y=5.0, Z=-10.0, X2=0.0, Y2=5.0, Z2=12.0, Hitlag=0.4, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_B, SetWeight=false, ShieldDamage=hash40("no"), Trip=-1.0, Rehit=5, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_OBJECT)
 		}
 	});
 }
@@ -1921,7 +1921,8 @@ unsafe fn toad_final_toad_army_eff(fighter: &mut L2CAgentBase) {
 			}
 			wait(Frames=1)
 			if(is_excute){
-				EFFECT(hash40("sys_erace_smoke"), hash40("top"), 15, 0, 0, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, false)
+				EFFECT(hash40("sys_erace_smoke"), hash40("top"), 20, 0, 5, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, false)
+				EFFECT(hash40("sys_erace_smoke"), hash40("top"), 20, 0, -5, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, false)
 				EFFECT(hash40("sys_erace_smoke"), hash40("top"), 9.5, 0, -5, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, false)
 				EFFECT(hash40("sys_erace_smoke"), hash40("top"), -3, 0, -5, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, false)
 			}
