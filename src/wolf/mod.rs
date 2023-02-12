@@ -28,7 +28,7 @@ unsafe fn wolf_dtilt(fighter: &mut L2CAgentBase) {
 		}
     });
 }	
-#[acmd_script(
+/*#[acmd_script(
     agent = "wolf",
     script =  "game_attackhi3",
     category = ACMD_GAME,
@@ -52,7 +52,7 @@ unsafe fn wolf_utilt(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all()
 		}
     });
-}	
+}*/
 #[acmd_script(
     agent = "wolf",
     script =  "game_attackairb",
@@ -181,7 +181,6 @@ pub fn wolf(fighter : &mut L2CFighterCommon) {
 pub fn install() {
     smashline::install_acmd_scripts!(
 		wolf_dtilt,
-		wolf_utilt,
 		wolf_bair,
 		wolf_fair,
 		wolf_nair
