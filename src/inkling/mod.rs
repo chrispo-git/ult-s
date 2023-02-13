@@ -21,26 +21,51 @@ unsafe fn ink_nair(fighter: &mut L2CAgentBase) {
 			WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
 		}
 		frame(Frame=6)
-		FT_MOTION_RATE(FSM=0.7)
 		if(is_excute){
-			ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=7.0, Angle=361, KBG=85, FKB=0, BKB=35, Size=3.5, X=0.0, Y=9.0, Z=4.0, X2=0.0, Y2=9.0, Z2=-4.0, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
-			ATTACK(ID=1, Part=0, Bone=hash40("legl"), Damage=7.0, Angle=361, KBG=85, FKB=0, BKB=35, Size=4.0, X=6.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
-			ATTACK(ID=2, Part=0, Bone=hash40("legr"), Damage=7.0, Angle=361, KBG=85, FKB=0, BKB=35, Size=4.0, X=6.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
-			AttackModule::set_add_reaction_frame(ID=0, Frames=3.0, Unk=false)
-			AttackModule::set_add_reaction_frame(ID=1, Frames=3.0, Unk=false)
-			AttackModule::set_add_reaction_frame(ID=2, Frames=3.0, Unk=false)
+			ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=1.0, Angle=365, KBG=100, FKB=30, BKB=0, Size=3.5, X=0.0, Y=9.0, Z=4.0, X2=0.0, Y2=9.0, Z2=-4.0, Hitlag=0.8, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=4, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
+			ATTACK(ID=1, Part=0, Bone=hash40("legl"), Damage=1.0, Angle=365, KBG=100, FKB=30, BKB=0, Size=4.0, X=6.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.8, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=4, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
+			ATTACK(ID=2, Part=0, Bone=hash40("legr"), Damage=1.0, Angle=365, KBG=100, FKB=30, BKB=0, Size=4.0, X=6.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.8, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=4, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
 		}
-		wait(Frames=5)
-		FT_MOTION_RATE(FSM=1)
+		frame(Frame=31)
 		if(is_excute){
 			AttackModule::clear_all()
 		}
-		frame(Frame=28)
+		frame(Frame=53)
 		if(is_excute){
 			WorkModule::off_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
 		}
     });
 }		
+#[acmd_script(
+    agent = "inkling",
+    script =  "effect_attackairn",
+    category = ACMD_EFFECT,
+	low_priority)]
+unsafe fn ink_nair_eff(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=5)
+		if(is_excute){
+			EFFECT_FOLLOW(hash40("sys_spin_wind"), hash40("top"), 0, 7.5, 0, 180, 0, 20, 1, true)
+			LAST_EFFECT_SET_RATE(1.4)
+		}
+		frame(Frame=9)
+		if(is_excute){
+			EFFECT_FOLLOW(hash40("sys_spin_wind"), hash40("top"), 0, 7.5, 0, 180, 90, 20, 0.95, true)
+			LAST_EFFECT_SET_RATE(1.4)
+		}
+		frame(Frame=19)
+		if(is_excute){
+			EFFECT_FOLLOW(hash40("sys_spin_wind"), hash40("top"), 0, 7.5, 0, 180, 0, 20, 1, true)
+			LAST_EFFECT_SET_RATE(1.4)
+		}
+		frame(Frame=23)
+		if(is_excute){
+			EFFECT_FOLLOW(hash40("sys_spin_wind"), hash40("top"), 0, 7.5, 0, 180, 90, 20, 0.95, true)
+			LAST_EFFECT_SET_RATE(1.4)
+		}
+    });
+}
 		
 #[acmd_script(
     agent = "inkling",
@@ -54,26 +79,56 @@ unsafe fn ink_fair(fighter: &mut L2CAgentBase) {
 		if(is_excute){
 			WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
 		}
-		frame(Frame=10)
+		frame(Frame=12)
 		if(is_excute){
-			ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=10.0, Angle=361, KBG=82, FKB=0, BKB=28, Size=3.6, X=0.0, Y=7.0, Z=4.0, X2=0.0, Y2=7.0, Z2=6.0, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
-			ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=12.0, Angle=361, KBG=82, FKB=0, BKB=28, Size=5.0, X=0.0, Y=6.5, Z=10.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
+			SET_SPEED_EX(-1.2, 0.25, KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN)
+			ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=12.0, Angle=361, KBG=82, FKB=0, BKB=28, Size=5.0, X=0.0, Y=6.5, Z=10.0, X2=0.0, Y2=10.0, Z2=13.0, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_WATER, Type=ATTACK_REGION_WATER)
+			AttackModule::set_ink_value(ID=0, Ink=80.0)
 		}
-		wait(Frames=5)
-		if(is_excute){
-			ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=7.0, Angle=361, KBG=78, FKB=0, BKB=28, Size=2.8, X=0.0, Y=7.0, Z=4.0, X2=0.0, Y2=7.0, Z2=6.0, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
-			ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=7.0, Angle=361, KBG=78, FKB=0, BKB=28, Size=4.0, X=0.0, Y=6.5, Z=10.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
-		}
-		frame(Frame=22)
+		frame(Frame=15)
 		if(is_excute){
 			AttackModule::clear_all()
 		}
-		frame(Frame=27)
+		frame(Frame=37)
 		if(is_excute){
 			WorkModule::off_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
 		}
     });
 }		
+#[acmd_script(
+    agent = "inkling",
+    script =  "effect_attackairf",
+    category = ACMD_EFFECT,
+	low_priority)]
+unsafe fn ink_fair_eff(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=2)
+		if(is_excute){
+			EFFECT_FOLLOW(0x14be74201eu64, hash40("muzzle"), -1, 0, 0, 0, 180, 0, 0.5, true)
+			LAST_EFFECT_SET_RATE(1.5)
+		}
+		frame(Frame=11)
+		if(is_excute){
+			EFFECT_FOLLOW(0x13705a7e67u64, hash40("muzzle"), -1, 0, 0, 0, 180, 0, 1.4, true)
+			LAST_EFFECT_SET_RATE(0.7)
+		}
+    });
+}
+#[acmd_script(
+    agent = "inkling",
+    script =  "sound_attackairf",
+    category = ACMD_SOUND,
+	low_priority)]
+unsafe fn ink_fair_snd(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=11)
+		if(is_excute){
+			PLAY_SE(hash40("se_inkling_attack100_02"))
+		}
+    });
+}
 #[acmd_script(
     agent = "inkling",
     script =  "game_attackairhi",
@@ -103,6 +158,34 @@ unsafe fn ink_uair(fighter: &mut L2CAgentBase) {
 		frame(Frame=22)
 		if(is_excute){
 			WorkModule::off_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
+		}
+    });
+}		
+#[acmd_script(
+    agent = "inkling",
+    script =  "game_attacklw3",
+    category = ACMD_GAME,
+	low_priority)]
+unsafe fn ink_dtilt(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=5)
+		if(is_excute){
+			ATTACK(ID=0, Part=0, Bone=hash40("kneel"), Damage=3.0, Angle=50, KBG=100, FKB=20, BKB=0, Size=3.0, X=0.0, Y=-1.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=true, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
+			ATTACK(ID=1, Part=0, Bone=hash40("kneel"), Damage=3.0, Angle=160, KBG=100, FKB=25, BKB=0, Size=4.0, X=5.5, Y=-1.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=true, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
+		}
+		wait(Frames=4)
+		if(is_excute){
+			AttackModule::clear_all()
+		}
+		frame(Frame=12)
+		if(is_excute){
+			ATTACK(ID=0, Part=0, Bone=hash40("kneer"), Damage=6.0, Angle=90, KBG=100, FKB=0, BKB=35, Size=3.8, X=0.0, Y=1.0, Z=1.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
+			ATTACK(ID=1, Part=0, Bone=hash40("kneer"), Damage=6.0, Angle=90, KBG=100, FKB=0, BKB=35, Size=4.0, X=4.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
+		}
+		wait(Frames=4)
+		if(is_excute){
+			AttackModule::clear_all()
 		}
     });
 }		
@@ -279,12 +362,15 @@ pub fn ink(fighter : &mut L2CFighterCommon) {
 pub fn install() {
     smashline::install_acmd_scripts!(
 		ink_fair,
+		ink_fair_eff,
+		ink_fair_snd,
 		ink_uair,
 		ink_utilt,
-		ink_uair_eff,
-		ink_nair,
 		ink_utilt_eff,
 		ink_utilt_sound,
+		ink_dtilt,
+		ink_uair_eff,
+		ink_nair,
 		ink_uair_sound
     );
     smashline::install_agent_frame_callbacks!(ink);
