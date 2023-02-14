@@ -1911,36 +1911,40 @@ unsafe fn toad_final_toad_army(fighter: &mut L2CAgentBase) {
 	low_priority)]
 unsafe fn toad_final_toad_army_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
-    acmd!(lua_state, {
-		for(100 Iterations){
-			if(is_excute){
-				EFFECT(hash40("sys_erace_smoke"), hash40("top"), 12, 0, 0, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, false)
-				EFFECT(hash40("sys_erace_smoke"), hash40("top"), 2, 0, 0, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, false)
-				EFFECT(hash40("sys_erace_smoke"), hash40("top"), -0.5, 0, 5, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, false)
-				EFFECT(hash40("sys_erace_smoke"), hash40("top"), 6, 0, 0, 5, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, false)
-			}
-			wait(Frames=1)
-			if(is_excute){
-				EFFECT(hash40("sys_erace_smoke"), hash40("top"), 20, 0, 5, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, false)
-				EFFECT(hash40("sys_erace_smoke"), hash40("top"), 20, 0, -5, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, false)
-				EFFECT(hash40("sys_erace_smoke"), hash40("top"), 9.5, 0, -5, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, false)
-				EFFECT(hash40("sys_erace_smoke"), hash40("top"), -3, 0, -5, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, false)
-			}
-			wait(Frames=1)
-			if(is_excute){
-				EFFECT(hash40("sys_erace_smoke"), hash40("top"), -8, 0, 0, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, false)
-				EFFECT(hash40("sys_erace_smoke"), hash40("top"), 4.5, 0, 5, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, false)
-				EFFECT(hash40("sys_erace_smoke"), hash40("top"), -5.5, 0, 5, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, false)
-			}
-			wait(Frames=1)
-			if(is_excute){
-				EFFECT(hash40("sys_erace_smoke"), hash40("top"), 15, 0, 0, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, false)
-				EFFECT(hash40("sys_erace_smoke"), hash40("top"), 9.5, 0, -5, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, false)
-				EFFECT(hash40("sys_erace_smoke"), hash40("top"), -3, 0, -5, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, false)
-			}
-			wait(Frames=1)
+	let otarget_id = WorkModule::get_int(fighter.module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LINK_OWNER) as u32;
+	let boma = smash::app::sv_battle_object::module_accessor(otarget_id);
+    for _ in 0..50 {
+		if macros::is_excute(fighter) {
+			macros::EFFECT(fighter, Hash40::new("sys_erace_smoke"), Hash40::new("top"), 12, 0, 0, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, false);
+			macros::EFFECT(fighter, Hash40::new("sys_erace_smoke"), Hash40::new("top"), 2, 0, 0, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, false);
+			macros::EFFECT(fighter, Hash40::new("sys_erace_smoke"), Hash40::new("top"), -0.5, 0, 5, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, false);
+			macros::EFFECT(fighter, Hash40::new("sys_erace_smoke"), Hash40::new("top"), 6, 0, 0, 5, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, false);
 		}
-	});
+		wait(fighter.lua_state_agent, 1.0);
+		if macros::is_excute(fighter) {
+			macros::EFFECT(fighter, Hash40::new("sys_erace_smoke"), Hash40::new("top"), 20, 0, 5, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, false);
+			macros::EFFECT(fighter, Hash40::new("sys_erace_smoke"), Hash40::new("top"), 20, 0, -5, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, false);
+			macros::EFFECT(fighter, Hash40::new("sys_erace_smoke"), Hash40::new("top"), 9.5, 0, -5, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, false);
+			macros::EFFECT(fighter, Hash40::new("sys_erace_smoke"), Hash40::new("top"), -3, 0, -5, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, false);
+		}
+		wait(fighter.lua_state_agent, 1.0);
+		if macros::is_excute(fighter) {
+			macros::EFFECT(fighter, Hash40::new("sys_erace_smoke"), Hash40::new("top"), -8, 0, 0, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, false);
+			macros::EFFECT(fighter, Hash40::new("sys_erace_smoke"), Hash40::new("top"), 4.5, 0, 5, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, false);
+			macros::EFFECT(fighter, Hash40::new("sys_erace_smoke"), Hash40::new("top"), -5.5, 0, 5, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, false);
+		}
+		wait(fighter.lua_state_agent, 1.0);
+		if macros::is_excute(fighter) {
+			macros::EFFECT(fighter, Hash40::new("sys_erace_smoke"), Hash40::new("top"), 15, 0, 0, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, false);
+			macros::EFFECT(fighter, Hash40::new("sys_erace_smoke"), Hash40::new("top"), 9.5, 0, -5, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, false);
+			macros::EFFECT(fighter, Hash40::new("sys_erace_smoke"), Hash40::new("top"), -3, 0, -5, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, false);
+		}
+		wait(fighter.lua_state_agent, 1.0);
+	}
+	wait(fighter.lua_state_agent, 1.0);
+	if macros::is_excute(fighter) {
+		ArticleModule::remove_exist(boma, *FIGHTER_MURABITO_GENERATE_ARTICLE_CLAYROCKET,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
+	}
 }
 #[weapon_frame( agent = WEAPON_KIND_MURABITO_BOWLING_BALL )]
 fn bob_omb_frame(weapon: &mut L2CFighterBase) {
@@ -1964,7 +1968,7 @@ fn final_frame(weapon: &mut L2CFighterBase) {
 		let status_kind = StatusModule::status_kind(weapon.module_accessor);
         if status_kind == *WEAPON_MURABITO_CLAYROCKET_STATUS_KIND_READY {
 			StatusModule::change_status_request_from_script(weapon.module_accessor, *WEAPON_MURABITO_CLAYROCKET_STATUS_KIND_FLY, false);
-		};	
+		};
 		if PostureModule::lr(weapon.module_accessor) < 0.0 {
 			let mut rotation = Vector3f{x: 0.0, y: -25.0 , z: 0.0 };
 			ModelModule::set_joint_rotate(boma, Hash40::new("trans"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});	
