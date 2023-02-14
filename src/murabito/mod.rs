@@ -1,5 +1,5 @@
 use smash::app::sv_animcmd::*;
-use smash::phx::{Hash40, Vector2f};
+use smash::phx::*;
 use smash::app::lua_bind::*;
 use smash::lib::lua_const::*;
 use smash::app::utility::get_kind;
@@ -1962,10 +1962,14 @@ fn final_frame(weapon: &mut L2CFighterBase) {
         let boma = smash::app::sv_battle_object::module_accessor(otarget_id);
 		let ENTRY_ID = WorkModule::get_int(&mut *boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 		let status_kind = StatusModule::status_kind(weapon.module_accessor);
-        if status_kind != *WEAPON_MURABITO_CLAYROCKET_STATUS_KIND_FLY {
+        if status_kind == *WEAPON_MURABITO_CLAYROCKET_STATUS_KIND_READY {
 			StatusModule::change_status_request_from_script(weapon.module_accessor, *WEAPON_MURABITO_CLAYROCKET_STATUS_KIND_FLY, false);
-		};
-    }
+		};	
+		if PostureModule::lr(weapon.module_accessor) < 0.0 {
+			let mut rotation = Vector3f{x: 0.0, y: -25.0 , z: 0.0 };
+			ModelModule::set_joint_rotate(boma, Hash40::new("trans"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});	
+	   	}
+	 }
 }
 #[fighter_frame_callback]
 pub fn toad(fighter : &mut L2CFighterCommon) {
