@@ -931,6 +931,20 @@ unsafe fn toad_neutralb_eff(fighter: &mut L2CAgentBase) {
     });
 }	
 #[acmd_script(
+    agent = "kirby",
+    scripts =  ["effect_murabitospecialn", "effect_murabitospecialairn"],
+    category = ACMD_EFFECT,
+	low_priority)]
+unsafe fn kirby_toad_neutralb_eff(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=9)
+		if(is_excute){
+			EFFECT(hash40("murabito_grass"), hash40("top"), 1, 0, 0.5, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false)
+		}
+    });
+}	
+#[acmd_script(
     agent = "murabito",
     scripts =  ["sound_specialn", "sound_specialairn"],
     category = ACMD_SOUND,
@@ -2054,6 +2068,27 @@ pub fn toad(fighter : &mut L2CFighterCommon) {
 		let fighter_kind = smash::app::utility::get_kind(boma);
 		let situation_kind = StatusModule::situation_kind(boma);
 		let end_frame = MotionModule::end_frame(boma);
+		//Kirby neutralb logic
+		if fighter_kind == *FIGHTER_KIND_KIRBY {
+			if WorkModule::get_int(boma, *FIGHTER_KIRBY_INSTANCE_WORK_ID_INT_COPY_CHARA) == *FIGHTER_KIND_MURABITO {
+				if status_kind == *FIGHTER_KIRBY_STATUS_KIND_MURABITO_SPECIAL_N_SEARCH {
+					if frame > 38.0 {
+						if situation_kind == *SITUATION_KIND_GROUND {
+							StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_WAIT, false);
+						} else {
+							StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL, false);
+						};
+					};
+				};
+				if ItemModule::is_have_item(boma, 0) {
+					CAN_NEUTRALB[ENTRY_ID] = 1;
+				} else {
+					CAN_NEUTRALB[ENTRY_ID] = 0;
+				};
+			} else {
+				CAN_NEUTRALB[ENTRY_ID] = 0;
+			};
+		};
 		if fighter_kind == *FIGHTER_KIND_MURABITO {
 			let scale = smash::phx::Vector3f { x: 0.8, y: 1.0, z: 1.0 };
 			ModelModule::set_joint_scale(boma, Hash40::new("shoulderl"), &scale);
@@ -2382,6 +2417,7 @@ pub fn install() {
 		toad_neutralb,
 		toad_neutralb_eff,
 		toad_neutralb_snd,
+		kirby_toad_neutralb_eff,
 		toad_sideb,
 		toad_sideb_snd,
 		toad_sideb_air_snd,
