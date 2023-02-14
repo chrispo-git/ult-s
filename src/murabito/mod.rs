@@ -16,6 +16,7 @@ static mut LAND_SIDEB_BOUNCE: [i32; 8] = [0; 8];
 static mut BEFORE_SIDEB_BOUNCE: [i32; 8] = [0; 8];
 static mut HAS_DOWNB: [bool; 8] = [false; 8];
 static mut HAS_DEADED: [bool; 8] = [false; 8];
+static mut BOUNCE_DA: [bool; 8] = [false; 8];
 
 #[acmd_script(
     agent = "murabito",
@@ -2101,6 +2102,21 @@ pub fn toad(fighter : &mut L2CFighterCommon) {
 				};
 			} else {
 				HAS_DEADED[ENTRY_ID] = false;
+			};
+			if [*FIGHTER_STATUS_KIND_ATTACK_DASH].contains(&status_kind) {
+				if BOUNCE_DA[ENTRY_ID] {
+					BOUNCE_DA[ENTRY_ID] = false;
+					MotionModule::change_motion(fighter.module_accessor, smash::phx::Hash40::new("attack_dash"), 8.0, 1.0, false, 0.0, false, false);
+				};
+				let dist = 4.0*PostureModule::lr(boma);
+				if GroundModule::is_wall_touch_line(boma, *GROUND_TOUCH_FLAG_SIDE as u32) && (6..30).contains(&(MotionModule::frame(boma) as i32)) && ray_check_pos(boma, dist, 0.0, false) == 1 {
+					PostureModule::reverse_lr(boma);
+					PostureModule::update_rot_y_lr(boma);
+					BOUNCE_DA[ENTRY_ID] = true;
+					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_ATTACK_DASH, true);
+				};
+			} else {
+				BOUNCE_DA[ENTRY_ID] = false;
 			};
 			if ![*FIGHTER_STATUS_KIND_ATTACK_HI3, *FIGHTER_STATUS_KIND_ATTACK_S3, *FIGHTER_STATUS_KIND_ATTACK_LW3, *FIGHTER_STATUS_KIND_DOWN_STAND_ATTACK].contains(&status_kind) {
 				ArticleModule::remove_exist(boma, *FIGHTER_MURABITO_GENERATE_ARTICLE_UMBRELLA,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
