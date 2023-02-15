@@ -44,6 +44,26 @@ unsafe fn corrin_jab(fighter: &mut L2CAgentBase) {
 }		
 #[acmd_script(
     agent = "kamui",
+    scripts =  ["game_attacklw3"],
+    category = ACMD_GAME,
+	low_priority)]
+unsafe fn corrin_dtilt(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=5)
+		if(is_excute){
+			ATTACK(ID=0, Part=0, Bone=hash40("haver"), Damage=7.5, Angle=80, KBG=80, FKB=0, BKB=50, Size=5.0, X=-1.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_SWORD)
+			ATTACK(ID=1, Part=0, Bone=hash40("haver"), Damage=7.5, Angle=80, KBG=80, FKB=0, BKB=50, Size=4.0, X=-1.0, Y=4.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_SWORD)
+			ATTACK(ID=2, Part=0, Bone=hash40("haver"), Damage=7.5, Angle=80, KBG=80, FKB=0, BKB=50, Size=4.0, X=-1.0, Y=8.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_SWORD)
+		}
+		wait(Frames=3)
+		if(is_excute){
+			AttackModule::clear_all()
+		}
+    });
+}	
+#[acmd_script(
+    agent = "kamui",
     scripts =  ["game_attackdash"],
     category = ACMD_GAME,
 	low_priority)]
@@ -375,7 +395,11 @@ fn kamui_frame(fighter: &mut L2CFighterCommon) {
 		};
 		if (StopModule::is_hit(boma) || StopModule::is_damage(boma) && AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_ALL) == false) || smash::app::sv_information::is_ready_go() == false {
 			ModelModule::set_mesh_visibility(fighter.module_accessor,Hash40::new("kamui_rspearhand"),false);
-			ModelModule::set_mesh_visibility(fighter.module_accessor,Hash40::new("kamui_weapon"),true);
+			if [*FIGHTER_STATUS_KIND_LOSE].contains(&status_kind) {
+				ModelModule::set_mesh_visibility(fighter.module_accessor,Hash40::new("kamui_weapon"),false);
+			} else {
+				ModelModule::set_mesh_visibility(fighter.module_accessor,Hash40::new("kamui_weapon"),true);
+			};
 		};
     }
 }
@@ -385,6 +409,7 @@ pub fn install() {
 		corrin_jab,
 		corrin_da,
 		corrin_usmash,
+		corrin_dtilt,
 		corrin_usmash_effect,
 		corrin_usmash_expr,
 		corrin_usmash_sound,
