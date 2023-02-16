@@ -406,6 +406,34 @@ unsafe fn corrin_neutralb_max(fighter: &mut L2CAgentBase) {
 		}
 	});
 }
+#[acmd_script(
+    agent = "kamui_waterdragon",
+    scripts =  ["game_speciallwhit", "game_specialairlwhit", "game_speciallwhitturn", "game_specialairlwhitturn"],
+    category = ACMD_GAME,
+	low_priority)]
+unsafe fn corrin_downb(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=26)
+		if(is_excute){
+			ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=12.0, Angle=80, KBG=68, FKB=0, BKB=87, Size=12.0, X=0.0, Y=6.0, Z=11.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.2, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_water"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_WATER, Type=ATTACK_REGION_OBJECT)
+			ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=12.0, Angle=80, KBG=68, FKB=0, BKB=87, Size=12.0, X=0.0, Y=6.0, Z=-11.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.2, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_water"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_WATER, Type=ATTACK_REGION_OBJECT)
+			AttackModule::set_force_reaction(0, true, false)
+			AttackModule::set_force_reaction(1, true, false)
+		}
+		wait(Frames=1)
+		if(is_excute){
+			ATTACK(ID=2, Part=0, Bone=hash40("top"), Damage=12.0, Angle=90, KBG=66, FKB=0, BKB=85, Size=8.0, X=0.0, Y=21.0, Z=11.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.2, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_water"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_WATER, Type=ATTACK_REGION_OBJECT)
+			ATTACK(ID=3, Part=0, Bone=hash40("top"), Damage=12.0, Angle=90, KBG=66, FKB=0, BKB=85, Size=8.0, X=0.0, Y=21.0, Z=-11.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.2, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_water"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_WATER, Type=ATTACK_REGION_OBJECT)
+			AttackModule::set_force_reaction(2, true, false)
+			AttackModule::set_force_reaction(3, true, false)
+		}
+		frame(Frame=31)
+		if(is_excute){
+			AttackModule::clear_all()
+		}
+	});
+}
 
 #[fighter_frame( agent = FIGHTER_KIND_KAMUI )]
 fn kamui_frame(fighter: &mut L2CFighterCommon) {
@@ -420,6 +448,9 @@ fn kamui_frame(fighter: &mut L2CFighterCommon) {
 				if StatusModule::situation_kind(boma) == *SITUATION_KIND_GROUND {
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_JUMP_SQUAT, true);
 				};
+		};
+		if [*FIGHTER_STATUS_KIND_SPECIAL_LW].contains(&status_kind) {
+			StatusModule::change_status_request_from_script(boma, *FIGHTER_KAMUI_STATUS_KIND_SPECIAL_LW_HIT, true);
 		};
 		if [*FIGHTER_STATUS_KIND_ATTACK_HI4_START, *FIGHTER_STATUS_KIND_ATTACK_HI4, *FIGHTER_STATUS_KIND_ATTACK_HI4].contains(&status_kind) {
 			EffectModule::kill_kind(boma, smash::phx::Hash40::new("sys_smash_flash"), false, false);
@@ -461,7 +492,8 @@ pub fn install() {
 		corrin_runbrake_eff,
 		corrin_throwb,
 		corrin_neutralb,
-		corrin_neutralb_max
+		corrin_neutralb_max,
+		corrin_downb
     );
     smashline::install_agent_frames!(
         kamui_frame
