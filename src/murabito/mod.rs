@@ -2056,6 +2056,7 @@ fn final_frame(weapon: &mut L2CFighterBase) {
 			let mut rotation = Vector3f{x: 0.0, y: -25.0 , z: 0.0 };
 			ModelModule::set_joint_rotate(boma, Hash40::new("trans"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});	
 	   	}
+		macros::SET_SPEED_EX(weapon, 2.0, 0.0, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_NONE);
 	 }
 }
 #[fighter_frame_callback]
