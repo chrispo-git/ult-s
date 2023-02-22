@@ -19,6 +19,19 @@ fn mario_frame(fighter: &mut L2CFighterCommon) {
 		let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
     }
 }
+#[acmd_script(
+    agent = "simon",
+    script =  "effect_landingheavy",
+    category = ACMD_EFFECT)]
+unsafe fn simon_landing(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=2)
+		if(is_excute){
+			LANDING_EFFECT(hash40("sys_landing_smoke"), hash40("top"), 0, 0, 0, 0, 0, 0, 0.9, 0, 0, 0, 0, 0, 0, true)
+		}
+    });
+}	
 
 //ItemModule::throw_item(fighter.module_accessor, angle, power, 1.0, 0, true, 0.0);
 // Uses the acmd! macro, if you're porting directly from Rubendal's data viewer.
@@ -74,5 +87,5 @@ unsafe fn simon_downb(fighter: &mut L2CAgentBase) {
 
 
 pub fn install() {
-	smashline::install_acmd_scripts!(simon_downb);
+	smashline::install_acmd_scripts!(simon_downb, simon_landing);
 }

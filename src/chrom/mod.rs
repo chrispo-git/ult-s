@@ -202,6 +202,9 @@ unsafe fn chrom_fair(fighter: &mut L2CAgentBase) {
 	low_priority)]
 unsafe fn chrom_ftilt_hi(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
+	if StatusModule::prev_status_kind(fighter.module_accessor, 0) == FIGHTER_STATUS_KIND_SPECIAL_S {
+		WorkModule::on_flag(fighter.module_accessor, *FIGHTER_STATUS_WORK_ID_FLAG_RESERVE_ATTACK_DISABLE_MINI_JUMP_ATTACK);
+	};
     acmd!(lua_state, {
 		FT_MOTION_RATE(FSM=1.6)
 		frame(Frame=6)
@@ -227,6 +230,9 @@ unsafe fn chrom_ftilt_hi(fighter: &mut L2CAgentBase) {
 	low_priority)]
 unsafe fn chrom_ftilt_lw(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
+	if StatusModule::prev_status_kind(fighter.module_accessor, 0) == FIGHTER_STATUS_KIND_SPECIAL_S {
+		WorkModule::on_flag(fighter.module_accessor, *FIGHTER_STATUS_WORK_ID_FLAG_RESERVE_ATTACK_DISABLE_MINI_JUMP_ATTACK);
+	};
     acmd!(lua_state, {
 		FT_MOTION_RATE(FSM=1.8)
 		frame(Frame=5)
@@ -250,6 +256,9 @@ unsafe fn chrom_ftilt_lw(fighter: &mut L2CAgentBase) {
 	low_priority)]
 unsafe fn chrom_ftilt_s(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
+	if StatusModule::prev_status_kind(fighter.module_accessor, 0) == FIGHTER_STATUS_KIND_SPECIAL_S {
+		WorkModule::on_flag(fighter.module_accessor, *FIGHTER_STATUS_WORK_ID_FLAG_RESERVE_ATTACK_DISABLE_MINI_JUMP_ATTACK);
+	};
     acmd!(lua_state, {
 		FT_MOTION_RATE(FSM=1.2857)
 		frame(Frame=7)
@@ -306,17 +315,14 @@ unsafe fn chrom_uair(fighter: &mut L2CAgentBase) {
 unsafe fn chrom_sideb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
-		frame(Frame=2)
-		FT_MOTION_RATE(FSM=1.666666666667)
-		frame(Frame=5)
-		FT_MOTION_RATE(FSM=1)
+		frame(Frame=10)
 		if(is_excute){
 			ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=0.5, Angle=10, KBG=100, FKB=50, BKB=0, Size=8.0, X=0.0, Y=6.0, Z=5.0, X2=0.0, Y2=6.0, Z2=5.5, Hitlag=1.4, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=true, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_CHROM_HIT, Type=ATTACK_REGION_SWORD)
 			ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=0.5, Angle=10, KBG=100, FKB=90, BKB=0, Size=8.0, X=0.0, Y=6.0, Z=2.5, X2=0.0, Y2=6.0, Z2=4.0, Hitlag=1.4, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=true, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_CHROM_HIT, Type=ATTACK_REGION_SWORD)
 			AttackModule::set_add_reaction_frame(ID=0, Frames=-1.0, Unk=false)
 			AttackModule::set_add_reaction_frame(ID=1, Frames=-1.0, Unk=false)
 		}
-		frame(Frame=15)
+		frame(Frame=20)
 		if(is_excute){
 			AttackModule::clear_all()
 		}
@@ -330,12 +336,12 @@ unsafe fn chrom_sideb(fighter: &mut L2CAgentBase) {
 unsafe fn chrom_sideb_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
-		frame(Frame=2)
+		frame(Frame=6)
 		if(is_excute){
 			EFFECT_FOLLOW(hash40("sys_attack_speedline"), hash40("top"), 0, 6.5, 0, 0, 180, 0, 2.0, true)
 			LAST_EFFECT_SET_COLOR(0.6, 0.7, 1.0)
 		}
-		frame(Frame=23)
+		frame(Frame=30)
 		if(is_excute){
 			EFFECT_OFF_KIND(hash40("sys_attack_speedline"), false, true)
 		}
@@ -454,14 +460,26 @@ fn chrom_frame(fighter: &mut L2CFighterCommon) {
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
 		let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 		if [hash40("special_s1"), hash40("special_air_s1")].contains(&MotionModule::motion_kind(boma)) {
-				if KineticModule::get_kinetic_type(boma) != *FIGHTER_KINETIC_TYPE_DASH{
-					KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_DASH);
+				if MotionModule::frame(boma) > 4.0 && MotionModule::frame(boma) < 31.0{
+					if KineticModule::get_kinetic_type(boma) != *FIGHTER_KINETIC_TYPE_DASH{
+						KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_DASH);
+					};
+				} else {
+					if StatusModule::situation_kind(boma) != *SITUATION_KIND_AIR {
+						if KineticModule::get_kinetic_type(boma) != *FIGHTER_KINETIC_TYPE_MOTION{
+							KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_MOTION);
+						};
+					} else {
+						if KineticModule::get_kinetic_type(boma) != *FIGHTER_KINETIC_TYPE_MOTION_FALL{
+							KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_MOTION_FALL);
+						};
+					}
 				};
-				if MotionModule::frame(boma) > 17.0 && StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR{
+				if MotionModule::frame(boma) > 50.0 && StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR{
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL_SPECIAL, true);
 				};
 				if MotionModule::frame(boma) > 6.0 && MotionModule::frame(boma) < 8.0 {
-					macros::SET_SPEED_EX(fighter, 2.0, 0.5, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_NONE);
+					macros::SET_SPEED_EX(fighter, 1.7, 0.5, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_NONE);
 				};
 				if AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_ALL) {
 					if StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR {

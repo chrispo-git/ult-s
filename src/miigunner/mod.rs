@@ -146,7 +146,26 @@ unsafe fn gunner_dair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
 		}
     });
-}		
+}	
+#[acmd_script(
+    agent = "miigunner",
+    script =  "game_attacklw3",
+    category = ACMD_GAME,
+	low_priority)]
+unsafe fn gunner_dtilt(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=8)
+		if(is_excute){
+			ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=14.0, Angle=80, KBG=88, FKB=0, BKB=40, Size=5.5, X=0.0, Y=1.6, Z=17.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.2, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_fire"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_FIRE, Type=ATTACK_REGION_BOMB)
+			ATTACK(ID=1, Part=0, Bone=hash40("armr"), Damage=14.0, Angle=80, KBG=88, FKB=0, BKB=40, Size=3.0, X=5.0, Y=0.0, Z=0.0, X2=2.0, Y2=0.0, Z2=0.0, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.2, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_fire"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_FIRE, Type=ATTACK_REGION_BOMB)
+		}
+		wait(Frames=3)
+		if(is_excute){
+			AttackModule::clear_all()
+		}
+    });
+}	
 #[acmd_script(
     agent = "miigunner",
     script =  "game_attackairn",
@@ -265,7 +284,8 @@ pub fn install() {
 		gunner_nade_end,
 		gunner_dair,
 		gunner_uair,
-		gunner_nair
+		gunner_nair,
+		gunner_dtilt
     );
 	smashline::install_agent_frame_callbacks!(gunner);
 }

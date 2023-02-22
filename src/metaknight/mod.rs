@@ -61,7 +61,7 @@ unsafe fn mk_ftilt2(fighter: &mut L2CAgentBase) {
 }
 #[acmd_script(
     agent = "metaknight",
-    script =  "game_attacks3s2",
+    script =  "game_attacks3s3",
     category = ACMD_GAME,
 	low_priority)]
 unsafe fn mk_ftilt3(fighter: &mut L2CAgentBase) {

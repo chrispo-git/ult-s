@@ -48,6 +48,9 @@ pub fn faf_change_master(fighter : &mut L2CFighterCommon) {
 				CancelModule::enable_cancel(boma);
 			};
 		}else if fighter_kind == *FIGHTER_KIND_DONKEY {
+			if motion_kind == hash40("attack_air_f") && frame >= 46.0 /*This is the new FaF*/ { // Enables cancel when the new FaF is over
+				CancelModule::enable_cancel(boma);
+			};
 			if motion_kind == hash40("attack_dash") && frame >= 29.0 {
 				CancelModule::enable_cancel(boma);
 			};
@@ -347,7 +350,7 @@ pub fn faf_change_master(fighter : &mut L2CFighterCommon) {
 			if motion_kind == hash40("throw_lw") && frame >= 39.0 {
 				CancelModule::enable_cancel(boma);
 			};
-			if motion_kind == hash40("attack_dash") && frame >= 30.0 {
+			if motion_kind == hash40("attack_dash") && frame >= 78.0 {
 				CancelModule::enable_cancel(boma);
 			};
 		}else if fighter_kind == *FIGHTER_KIND_MEWTWO {
@@ -475,6 +478,9 @@ pub fn faf_change_master(fighter : &mut L2CFighterCommon) {
 				CancelModule::enable_cancel(boma);
 			};
 			if motion_kind == hash40("attack_lw3") && frame >= 25.0 {
+				CancelModule::enable_cancel(boma);
+			};
+			if motion_kind == hash40("attack_hi3") && frame >= 34.0 {
 				CancelModule::enable_cancel(boma);
 			};
 			if [hash40("attack_hi4")].contains(&motion_kind) && frame < 2.0 {
@@ -854,6 +860,9 @@ pub fn faf_change_master(fighter : &mut L2CFighterCommon) {
 			if [hash40("attack_hi3")].contains(&motion_kind) && frame >= 24.0 {
 				CancelModule::enable_cancel(boma);
 			};
+			if [hash40("throw_hi")].contains(&motion_kind) && frame >= 44.0 {
+				CancelModule::enable_cancel(boma);
+			};
 			if [hash40("special_air_n_failure"), hash40("special_n_failure")].contains(&motion_kind) && frame >= 10.0 {
 				CancelModule::enable_cancel(boma);
 			};
@@ -1003,7 +1012,7 @@ pub fn faf_change_master(fighter : &mut L2CFighterCommon) {
 					MotionModule::set_rate(boma, 1.0);
 				};
 			};
-			if [hash40("attack_air_f")].contains(&motion_kind)&& frame >= 28.0 {
+			if [hash40("attack_air_f")].contains(&motion_kind)&& frame >= 33.0 {
 				CancelModule::enable_cancel(boma);
 			};
 		};

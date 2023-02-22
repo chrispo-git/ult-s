@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<struct>
+  <struct hash="param_private">
+    <float hash="super_special_damage">110</float>
+  </struct>
+  <list hash="param_special_s">
+    <struct index="0">
+      <int hash="turn_to_b_frame">99999999</int>
+    </struct>
+    <hash40 index="1">dummy</hash40>
+    <hash40 index="2">dummy</hash40>
+    <hash40 index="3">dummy</hash40>
+  </list>
+</struct>

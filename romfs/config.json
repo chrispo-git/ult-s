@@ -1,0 +1,1326 @@
+{
+	"new-dir-files": {
+		"fighter/jack/c00": [
+            "fighter/jack/model/mona/c00/jack_p5_subchara_cube_specular.nutexb",
+            "fighter/jack/model/mona/c00/jack_p_panther_body_col.nutexb",
+            "fighter/jack/model/mona/c00/jack_p_panther_body_nor.nutexb",
+            "fighter/jack/model/mona/c00/jack_p_panther_body_prm.nutexb",
+            "fighter/jack/model/mona/c00/jack_p_panther_head_all_col.nutexb",
+            "fighter/jack/model/mona/c00/jack_p_panther_head_all_nor.nutexb",
+            "fighter/jack/model/mona/c00/jack_p_panther_head_all_prm.nutexb",
+            "fighter/jack/model/mona/c00/jack_p_skull_body_col.nutexb",
+            "fighter/jack/model/mona/c00/jack_p_skull_body_nor.nutexb",
+            "fighter/jack/model/mona/c00/jack_p_skull_body_prm.nutexb",
+            "fighter/jack/model/mona/c00/jack_p_skull_head_all_col.nutexb",
+            "fighter/jack/model/mona/c00/jack_p_skull_head_all_nor.nutexb",
+            "fighter/jack/model/mona/c00/jack_p_skull_head_all_prm.nutexb",
+            "fighter/jack/motion/mona/c00/d01specials1.nuanmb",
+            "fighter/jack/motion/mona/c00/d01specials2.nuanmb",
+            "fighter/jack/motion/mona/c00/d01specials3.nuanmb"
+		],
+		"fighter/jack/c01": [
+            "fighter/jack/model/mona/c01/jack_p5_subchara_cube_specular.nutexb",
+            "fighter/jack/model/mona/c01/jack_p_panther_body_col.nutexb",
+            "fighter/jack/model/mona/c01/jack_p_panther_body_nor.nutexb",
+            "fighter/jack/model/mona/c01/jack_p_panther_body_prm.nutexb",
+            "fighter/jack/model/mona/c01/jack_p_panther_head_all_col.nutexb",
+            "fighter/jack/model/mona/c01/jack_p_panther_head_all_nor.nutexb",
+            "fighter/jack/model/mona/c01/jack_p_panther_head_all_prm.nutexb",
+            "fighter/jack/model/mona/c01/jack_p_skull_body_col.nutexb",
+            "fighter/jack/model/mona/c01/jack_p_skull_body_nor.nutexb",
+            "fighter/jack/model/mona/c01/jack_p_skull_body_prm.nutexb",
+            "fighter/jack/model/mona/c01/jack_p_skull_head_all_col.nutexb",
+            "fighter/jack/model/mona/c01/jack_p_skull_head_all_nor.nutexb",
+            "fighter/jack/model/mona/c01/jack_p_skull_head_all_prm.nutexb",
+            "fighter/jack/motion/mona/c01/d01specials1.nuanmb",
+            "fighter/jack/motion/mona/c01/d01specials2.nuanmb",
+            "fighter/jack/motion/mona/c01/d01specials3.nuanmb"
+		],
+		"fighter/jack/c02": [
+            "fighter/jack/model/mona/c02/jack_p5_subchara_cube_specular.nutexb",
+            "fighter/jack/model/mona/c02/jack_p_panther_body_col.nutexb",
+            "fighter/jack/model/mona/c02/jack_p_panther_body_nor.nutexb",
+            "fighter/jack/model/mona/c02/jack_p_panther_body_prm.nutexb",
+            "fighter/jack/model/mona/c02/jack_p_panther_head_all_col.nutexb",
+            "fighter/jack/model/mona/c02/jack_p_panther_head_all_nor.nutexb",
+            "fighter/jack/model/mona/c02/jack_p_panther_head_all_prm.nutexb",
+            "fighter/jack/model/mona/c02/jack_p_skull_body_col.nutexb",
+            "fighter/jack/model/mona/c02/jack_p_skull_body_nor.nutexb",
+            "fighter/jack/model/mona/c02/jack_p_skull_body_prm.nutexb",
+            "fighter/jack/model/mona/c02/jack_p_skull_head_all_col.nutexb",
+            "fighter/jack/model/mona/c02/jack_p_skull_head_all_nor.nutexb",
+            "fighter/jack/model/mona/c02/jack_p_skull_head_all_prm.nutexb",
+            "fighter/jack/motion/mona/c02/d01specials1.nuanmb",
+            "fighter/jack/motion/mona/c02/d01specials2.nuanmb",
+            "fighter/jack/motion/mona/c02/d01specials3.nuanmb"
+		],
+		"fighter/jack/c03": [
+            "fighter/jack/model/mona/c03/jack_p5_subchara_cube_specular.nutexb",
+            "fighter/jack/model/mona/c03/jack_p_panther_body_col.nutexb",
+            "fighter/jack/model/mona/c03/jack_p_panther_body_nor.nutexb",
+            "fighter/jack/model/mona/c03/jack_p_panther_body_prm.nutexb",
+            "fighter/jack/model/mona/c03/jack_p_panther_head_all_col.nutexb",
+            "fighter/jack/model/mona/c03/jack_p_panther_head_all_nor.nutexb",
+            "fighter/jack/model/mona/c03/jack_p_panther_head_all_prm.nutexb",
+            "fighter/jack/model/mona/c03/jack_p_skull_body_col.nutexb",
+            "fighter/jack/model/mona/c03/jack_p_skull_body_nor.nutexb",
+            "fighter/jack/model/mona/c03/jack_p_skull_body_prm.nutexb",
+            "fighter/jack/model/mona/c03/jack_p_skull_head_all_col.nutexb",
+            "fighter/jack/model/mona/c03/jack_p_skull_head_all_nor.nutexb",
+            "fighter/jack/model/mona/c03/jack_p_skull_head_all_prm.nutexb",
+            "fighter/jack/motion/mona/c03/d01specials1.nuanmb",
+            "fighter/jack/motion/mona/c03/d01specials2.nuanmb",
+            "fighter/jack/motion/mona/c03/d01specials3.nuanmb"
+		],
+		"fighter/jack/c04": [
+            "fighter/jack/model/mona/c04/jack_p5_subchara_cube_specular.nutexb",
+            "fighter/jack/model/mona/c04/jack_p_panther_body_col.nutexb",
+            "fighter/jack/model/mona/c04/jack_p_panther_body_nor.nutexb",
+            "fighter/jack/model/mona/c04/jack_p_panther_body_prm.nutexb",
+            "fighter/jack/model/mona/c04/jack_p_panther_head_all_col.nutexb",
+            "fighter/jack/model/mona/c04/jack_p_panther_head_all_nor.nutexb",
+            "fighter/jack/model/mona/c04/jack_p_panther_head_all_prm.nutexb",
+            "fighter/jack/model/mona/c04/jack_p_skull_body_col.nutexb",
+            "fighter/jack/model/mona/c04/jack_p_skull_body_nor.nutexb",
+            "fighter/jack/model/mona/c04/jack_p_skull_body_prm.nutexb",
+            "fighter/jack/model/mona/c04/jack_p_skull_head_all_col.nutexb",
+            "fighter/jack/model/mona/c04/jack_p_skull_head_all_nor.nutexb",
+            "fighter/jack/model/mona/c04/jack_p_skull_head_all_prm.nutexb",
+            "fighter/jack/motion/mona/c04/d01specials1.nuanmb",
+            "fighter/jack/motion/mona/c04/d01specials2.nuanmb",
+            "fighter/jack/motion/mona/c04/d01specials3.nuanmb"
+		],
+		"fighter/jack/c05": [
+            "fighter/jack/model/mona/c05/jack_p5_subchara_cube_specular.nutexb",
+            "fighter/jack/model/mona/c05/jack_p_panther_body_col.nutexb",
+            "fighter/jack/model/mona/c05/jack_p_panther_body_nor.nutexb",
+            "fighter/jack/model/mona/c05/jack_p_panther_body_prm.nutexb",
+            "fighter/jack/model/mona/c05/jack_p_panther_head_all_col.nutexb",
+            "fighter/jack/model/mona/c05/jack_p_panther_head_all_nor.nutexb",
+            "fighter/jack/model/mona/c05/jack_p_panther_head_all_prm.nutexb",
+            "fighter/jack/model/mona/c05/jack_p_skull_body_col.nutexb",
+            "fighter/jack/model/mona/c05/jack_p_skull_body_nor.nutexb",
+            "fighter/jack/model/mona/c05/jack_p_skull_body_prm.nutexb",
+            "fighter/jack/model/mona/c05/jack_p_skull_head_all_col.nutexb",
+            "fighter/jack/model/mona/c05/jack_p_skull_head_all_nor.nutexb",
+            "fighter/jack/model/mona/c05/jack_p_skull_head_all_prm.nutexb",
+            "fighter/jack/motion/mona/c05/d01specials1.nuanmb",
+            "fighter/jack/motion/mona/c05/d01specials2.nuanmb",
+            "fighter/jack/motion/mona/c05/d01specials3.nuanmb"
+		],
+		"fighter/jack/c06": [
+            "fighter/jack/model/mona/c06/jack_p5_subchara_cube_specular.nutexb",
+            "fighter/jack/model/mona/c06/jack_p_panther_body_col.nutexb",
+            "fighter/jack/model/mona/c06/jack_p_panther_body_nor.nutexb",
+            "fighter/jack/model/mona/c06/jack_p_panther_body_prm.nutexb",
+            "fighter/jack/model/mona/c06/jack_p_panther_head_all_col.nutexb",
+            "fighter/jack/model/mona/c06/jack_p_panther_head_all_nor.nutexb",
+            "fighter/jack/model/mona/c06/jack_p_panther_head_all_prm.nutexb",
+            "fighter/jack/model/mona/c06/jack_p_skull_body_col.nutexb",
+            "fighter/jack/model/mona/c06/jack_p_skull_body_nor.nutexb",
+            "fighter/jack/model/mona/c06/jack_p_skull_body_prm.nutexb",
+            "fighter/jack/model/mona/c06/jack_p_skull_head_all_col.nutexb",
+            "fighter/jack/model/mona/c06/jack_p_skull_head_all_nor.nutexb",
+            "fighter/jack/model/mona/c06/jack_p_skull_head_all_prm.nutexb",
+            "fighter/jack/motion/mona/c06/d01specials1.nuanmb",
+            "fighter/jack/motion/mona/c06/d01specials2.nuanmb",
+            "fighter/jack/motion/mona/c06/d01specials3.nuanmb"
+		],
+		"fighter/jack/c07": [
+            "fighter/jack/model/mona/c07/jack_p5_subchara_cube_specular.nutexb",
+            "fighter/jack/model/mona/c07/jack_p_panther_body_col.nutexb",
+            "fighter/jack/model/mona/c07/jack_p_panther_body_nor.nutexb",
+            "fighter/jack/model/mona/c07/jack_p_panther_body_prm.nutexb",
+            "fighter/jack/model/mona/c07/jack_p_panther_head_all_col.nutexb",
+            "fighter/jack/model/mona/c07/jack_p_panther_head_all_nor.nutexb",
+            "fighter/jack/model/mona/c07/jack_p_panther_head_all_prm.nutexb",
+            "fighter/jack/model/mona/c07/jack_p_skull_body_col.nutexb",
+            "fighter/jack/model/mona/c07/jack_p_skull_body_nor.nutexb",
+            "fighter/jack/model/mona/c07/jack_p_skull_body_prm.nutexb",
+            "fighter/jack/model/mona/c07/jack_p_skull_head_all_col.nutexb",
+            "fighter/jack/model/mona/c07/jack_p_skull_head_all_nor.nutexb",
+            "fighter/jack/model/mona/c07/jack_p_skull_head_all_prm.nutexb",
+            "fighter/jack/motion/mona/c07/d01specials1.nuanmb",
+            "fighter/jack/motion/mona/c07/d01specials2.nuanmb",
+            "fighter/jack/motion/mona/c07/d01specials3.nuanmb"
+		],
+		"fighter/link/c00": [
+			"fighter/link/model/bow/c00/def_blade_001_col.nutexb",
+			"fighter/link/model/bow/c00/def_smasher_001_col.nutexb",
+			"fighter/link/model/bow/c00/def_spear_001_col.nutexb",
+			"fighter/link/model/bow/c00/def_spoon_001_col.nutexb",
+			"fighter/link/motion/bow/c00/c04attacklw4b.nuanmb",
+			"fighter/link/motion/bow/c00/c05attackairfb.nuanmb",
+			"fighter/link/motion/bow/c00/c05attackairhib.nuanmb"
+		],
+        "fighter/link/c01": [
+			"fighter/link/model/bow/c01/def_blade_001_col.nutexb",
+			"fighter/link/model/bow/c01/def_smasher_001_col.nutexb",
+			"fighter/link/model/bow/c01/def_spear_001_col.nutexb",
+			"fighter/link/model/bow/c01/def_spoon_001_col.nutexb",
+			"fighter/link/motion/bow/c01/c04attacklw4b.nuanmb",
+			"fighter/link/motion/bow/c01/c05attackairfb.nuanmb",
+			"fighter/link/motion/bow/c01/c05attackairhib.nuanmb"
+		],
+        "fighter/link/c02": [
+			"fighter/link/model/bow/c02/def_blade_001_col.nutexb",
+			"fighter/link/model/bow/c02/def_smasher_001_col.nutexb",
+			"fighter/link/model/bow/c02/def_spear_001_col.nutexb",
+			"fighter/link/model/bow/c02/def_spoon_001_col.nutexb",
+			"fighter/link/motion/bow/c02/c04attacklw4b.nuanmb",
+			"fighter/link/motion/bow/c02/c05attackairfb.nuanmb",
+			"fighter/link/motion/bow/c02/c05attackairhib.nuanmb"
+		],
+        "fighter/link/c03": [
+			"fighter/link/model/bow/c03/def_blade_001_col.nutexb",
+			"fighter/link/model/bow/c03/def_smasher_001_col.nutexb",
+			"fighter/link/model/bow/c03/def_spear_001_col.nutexb",
+			"fighter/link/model/bow/c03/def_spoon_001_col.nutexb",
+			"fighter/link/motion/bow/c03/c04attacklw4b.nuanmb",
+			"fighter/link/motion/bow/c03/c05attackairfb.nuanmb",
+			"fighter/link/motion/bow/c03/c05attackairhib.nuanmb"
+		],
+        "fighter/link/c04": [
+			"fighter/link/model/bow/c04/def_blade_001_col.nutexb",
+			"fighter/link/model/bow/c04/def_smasher_001_col.nutexb",
+			"fighter/link/model/bow/c04/def_spear_001_col.nutexb",
+			"fighter/link/model/bow/c04/def_spoon_001_col.nutexb",
+			"fighter/link/motion/bow/c04/c04attacklw4b.nuanmb",
+			"fighter/link/motion/bow/c04/c05attackairfb.nuanmb",
+			"fighter/link/motion/bow/c04/c05attackairhib.nuanmb"
+		],
+        "fighter/link/c05": [
+			"fighter/link/model/bow/c05/def_blade_001_col.nutexb",
+			"fighter/link/model/bow/c05/def_smasher_001_col.nutexb",
+			"fighter/link/model/bow/c05/def_spear_001_col.nutexb",
+			"fighter/link/model/bow/c05/def_spoon_001_col.nutexb",
+			"fighter/link/motion/bow/c05/c04attacklw4b.nuanmb",
+			"fighter/link/motion/bow/c05/c05attackairfb.nuanmb",
+			"fighter/link/motion/bow/c05/c05attackairhib.nuanmb"
+		],
+        "fighter/link/c06": [
+			"fighter/link/model/bow/c06/def_blade_001_col.nutexb",
+			"fighter/link/model/bow/c06/def_smasher_001_col.nutexb",
+			"fighter/link/model/bow/c06/def_spear_001_col.nutexb",
+			"fighter/link/model/bow/c06/def_spoon_001_col.nutexb",
+			"fighter/link/motion/bow/c06/c04attacklw4b.nuanmb",
+			"fighter/link/motion/bow/c06/c05attackairfb.nuanmb",
+			"fighter/link/motion/bow/c06/c05attackairhib.nuanmb"
+		],
+        "fighter/link/c07": [
+			"fighter/link/model/bow/c07/def_blade_001_col.nutexb",
+			"fighter/link/model/bow/c07/def_smasher_001_col.nutexb",
+			"fighter/link/model/bow/c07/def_spear_001_col.nutexb",
+			"fighter/link/model/bow/c07/def_spoon_001_col.nutexb",
+			"fighter/link/motion/bow/c07/c04attacklw4b.nuanmb",
+			"fighter/link/motion/bow/c07/c05attackairfb.nuanmb",
+			"fighter/link/motion/bow/c07/c05attackairhib.nuanmb"
+		],
+        "fighter/reflet/c00": [
+			"fighter/reflet/motion/body/c00/d02specialhi.nuanmb"
+		],
+        "fighter/reflet/c01": [
+			"fighter/reflet/motion/body/c01/d02specialhi.nuanmb"
+		],
+        "fighter/reflet/c02": [
+			"fighter/reflet/motion/body/c02/d02specialhi.nuanmb"
+		],
+        "fighter/reflet/c03": [
+			"fighter/reflet/motion/body/c03/d02specialhi.nuanmb"
+		],
+        "fighter/reflet/c04": [
+			"fighter/reflet/motion/body/c04/d02specialhi.nuanmb"
+		],
+        "fighter/reflet/c05": [
+			"fighter/reflet/motion/body/c05/d02specialhi.nuanmb"
+		],
+        "fighter/reflet/c06": [
+			"fighter/reflet/motion/body/c06/d02specialhi.nuanmb"
+		],
+        "fighter/reflet/c07": [
+			"fighter/reflet/motion/body/c07/d02specialhi.nuanmb"
+		],
+        "fighter/shizue/c00": [
+            "fighter/shizue/model/pot/c00/def_furniture_001_col.nutexb",
+            "fighter/shizue/model/pot/c00/def_furniture_001_nor.nutexb",
+            "fighter/shizue/model/pot/c00/def_furniture_001_prm.nutexb",
+            "fighter/shizue/model/pot/c00/def_furniture_002_col.nutexb",
+            "fighter/shizue/model/pot/c00/def_furniture_002_nor.nutexb",
+            "fighter/shizue/model/pot/c00/def_furniture_002_prm.nutexb",
+            "fighter/shizue/model/pot/c00/def_furniture_003_col.nutexb",
+            "fighter/shizue/model/pot/c00/def_furniture_003_prm.nutexb",
+            "fighter/shizue/model/pot/c00/def_furniture_004_col.nutexb",
+            "fighter/shizue/model/pot/c00/def_furniture_004_prm.nutexb",
+            "fighter/shizue/model/pot/c00/def_furniture_005_col.nutexb",
+            "fighter/shizue/model/pot/c00/def_furniture_005_nor.nutexb",
+            "fighter/shizue/model/pot/c00/def_furniture_005_prm.nutexb",
+            "fighter/shizue/model/pot/c00/def_furniture_006_col.nutexb",
+            "fighter/shizue/model/pot/c00/def_furniture_006_emi.nutexb",
+            "fighter/shizue/model/pot/c00/def_furniture_006_nor.nutexb",
+            "fighter/shizue/model/pot/c00/def_furniture_006_prm.nutexb",
+            "fighter/shizue/model/pot/c00/def_furniture_007_col.nutexb",
+            "fighter/shizue/model/pot/c00/def_furniture_007_prm.nutexb",
+            "fighter/shizue/model/pot/c00/def_furniture_008_col.nutexb",
+            "fighter/shizue/model/pot/c00/def_furniture_008_nor.nutexb",
+            "fighter/shizue/model/pot/c00/def_furniture_008_prm.nutexb",
+            "fighter/shizue/model/pot/c00/def_furniture_009_col.nutexb",
+            "fighter/shizue/model/pot/c00/def_furniture_009_prm.nutexb",
+            "fighter/shizue/model/pot/c00/def_furniture_010_col.nutexb",
+            "fighter/shizue/model/pot/c00/def_furniture_010_prm.nutexb",
+            "fighter/shizue/model/pot/c00/def_furniture_011_col.nutexb",
+            "fighter/shizue/model/pot/c00/def_furniture_011_nor.nutexb",
+            "fighter/shizue/model/pot/c00/def_furniture_011_prm.nutexb",
+            "fighter/shizue/model/pot/c00/def_furniture_012_col.nutexb",
+            "fighter/shizue/model/pot/c00/def_furniture_012_nor.nutexb",
+            "fighter/shizue/model/pot/c00/def_furniture_012_prm.nutexb",
+            "fighter/shizue/model/pot/c00/def_furniture_013_col.nutexb",
+            "fighter/shizue/model/pot/c00/def_furniture_013_emi.nutexb",
+            "fighter/shizue/model/pot/c00/def_furniture_013_nor.nutexb",
+            "fighter/shizue/model/pot/c00/def_furniture_013_prm.nutexb",
+            "fighter/shizue/model/pot/c00/def_furniture_014_col.nutexb",
+            "fighter/shizue/model/pot/c00/def_furniture_014_nor.nutexb",
+            "fighter/shizue/model/pot/c00/def_furniture_014_prm.nutexb",
+            "fighter/shizue/model/pot/c00/def_furniture_015_col.nutexb",
+            "fighter/shizue/model/pot/c00/def_furniture_015_nor.nutexb",
+            "fighter/shizue/model/pot/c00/def_furniture_015_prm.nutexb",
+            "fighter/shizue/model/pot/c00/def_furniture_016_col.nutexb",
+            "fighter/shizue/model/pot/c00/def_furniture_016_prm.nutexb",
+            "fighter/shizue/model/pot/c00/def_furniture_017_col.nutexb",
+            "fighter/shizue/model/pot/c00/def_furniture_017_prm.nutexb",
+            "fighter/shizue/model/pot/c00/def_furniture_018_col.nutexb",
+            "fighter/shizue/model/pot/c00/def_furniture_018_nor.nutexb",
+            "fighter/shizue/model/pot/c00/def_furniture_018_prm.nutexb",
+            "fighter/shizue/model/pot/c00/def_furniture_019_col.nutexb",
+            "fighter/shizue/model/pot/c00/def_furniture_019_nor.nutexb",
+            "fighter/shizue/model/pot/c00/def_furniture_019_prm.nutexb",
+            "fighter/shizue/model/pot/c00/def_furniture_020_col.nutexb",
+            "fighter/shizue/model/pot/c00/def_furniture_020_nor.nutexb",
+            "fighter/shizue/model/pot/c00/def_furniture_020_prm.nutexb",
+            "fighter/shizue/model/pot/c00/def_furniture_021_col.nutexb",
+            "fighter/shizue/model/pot/c00/def_furniture_021_nor.nutexb",
+            "fighter/shizue/model/pot/c00/def_furniture_021_prm.nutexb",
+            "fighter/shizue/model/pot/c00/def_furniture_022_col.nutexb",
+            "fighter/shizue/model/pot/c00/def_furniture_022_prm.nutexb",
+            "fighter/shizue/model/pot/c00/metal_bucket_001_col.nutexb",
+            "fighter/shizue/model/pot/c00/metal_bucket_001_nor.nutexb",
+            "fighter/shizue/model/pot/c00/metal_bucket_001_prm.nutexb",
+            "fighter/shizue/model/pot/c00/metal_pompon_001_col.nutexb",
+            "fighter/shizue/model/pot/c00/metal_pompon_001_nor.nutexb",
+            "fighter/shizue/model/pot/c00/metal_pompon_001_prm.nutexb",
+            "fighter/shizue/model/pot/c00/metal_trafficsign_001_col.nutexb",
+            "fighter/shizue/model/pot/c00/metal_trafficsign_001_nor.nutexb",
+            "fighter/shizue/model/pot/c00/metal_trafficsign_001_prm.nutexb"
+        ],
+        "fighter/shizue/c01": [
+            "fighter/shizue/model/pot/c01/def_furniture_001_col.nutexb",
+            "fighter/shizue/model/pot/c01/def_furniture_001_nor.nutexb",
+            "fighter/shizue/model/pot/c01/def_furniture_001_prm.nutexb",
+            "fighter/shizue/model/pot/c01/def_furniture_002_col.nutexb",
+            "fighter/shizue/model/pot/c01/def_furniture_002_nor.nutexb",
+            "fighter/shizue/model/pot/c01/def_furniture_002_prm.nutexb",
+            "fighter/shizue/model/pot/c01/def_furniture_003_col.nutexb",
+            "fighter/shizue/model/pot/c01/def_furniture_003_prm.nutexb",
+            "fighter/shizue/model/pot/c01/def_furniture_004_col.nutexb",
+            "fighter/shizue/model/pot/c01/def_furniture_004_prm.nutexb",
+            "fighter/shizue/model/pot/c01/def_furniture_005_col.nutexb",
+            "fighter/shizue/model/pot/c01/def_furniture_005_nor.nutexb",
+            "fighter/shizue/model/pot/c01/def_furniture_005_prm.nutexb",
+            "fighter/shizue/model/pot/c01/def_furniture_006_col.nutexb",
+            "fighter/shizue/model/pot/c01/def_furniture_006_emi.nutexb",
+            "fighter/shizue/model/pot/c01/def_furniture_006_nor.nutexb",
+            "fighter/shizue/model/pot/c01/def_furniture_006_prm.nutexb",
+            "fighter/shizue/model/pot/c01/def_furniture_007_col.nutexb",
+            "fighter/shizue/model/pot/c01/def_furniture_007_prm.nutexb",
+            "fighter/shizue/model/pot/c01/def_furniture_008_col.nutexb",
+            "fighter/shizue/model/pot/c01/def_furniture_008_nor.nutexb",
+            "fighter/shizue/model/pot/c01/def_furniture_008_prm.nutexb",
+            "fighter/shizue/model/pot/c01/def_furniture_009_col.nutexb",
+            "fighter/shizue/model/pot/c01/def_furniture_009_prm.nutexb",
+            "fighter/shizue/model/pot/c01/def_furniture_010_col.nutexb",
+            "fighter/shizue/model/pot/c01/def_furniture_010_prm.nutexb",
+            "fighter/shizue/model/pot/c01/def_furniture_011_col.nutexb",
+            "fighter/shizue/model/pot/c01/def_furniture_011_nor.nutexb",
+            "fighter/shizue/model/pot/c01/def_furniture_011_prm.nutexb",
+            "fighter/shizue/model/pot/c01/def_furniture_012_col.nutexb",
+            "fighter/shizue/model/pot/c01/def_furniture_012_nor.nutexb",
+            "fighter/shizue/model/pot/c01/def_furniture_012_prm.nutexb",
+            "fighter/shizue/model/pot/c01/def_furniture_013_col.nutexb",
+            "fighter/shizue/model/pot/c01/def_furniture_013_emi.nutexb",
+            "fighter/shizue/model/pot/c01/def_furniture_013_nor.nutexb",
+            "fighter/shizue/model/pot/c01/def_furniture_013_prm.nutexb",
+            "fighter/shizue/model/pot/c01/def_furniture_014_col.nutexb",
+            "fighter/shizue/model/pot/c01/def_furniture_014_nor.nutexb",
+            "fighter/shizue/model/pot/c01/def_furniture_014_prm.nutexb",
+            "fighter/shizue/model/pot/c01/def_furniture_015_col.nutexb",
+            "fighter/shizue/model/pot/c01/def_furniture_015_nor.nutexb",
+            "fighter/shizue/model/pot/c01/def_furniture_015_prm.nutexb",
+            "fighter/shizue/model/pot/c01/def_furniture_016_col.nutexb",
+            "fighter/shizue/model/pot/c01/def_furniture_016_prm.nutexb",
+            "fighter/shizue/model/pot/c01/def_furniture_017_col.nutexb",
+            "fighter/shizue/model/pot/c01/def_furniture_017_prm.nutexb",
+            "fighter/shizue/model/pot/c01/def_furniture_018_col.nutexb",
+            "fighter/shizue/model/pot/c01/def_furniture_018_nor.nutexb",
+            "fighter/shizue/model/pot/c01/def_furniture_018_prm.nutexb",
+            "fighter/shizue/model/pot/c01/def_furniture_019_col.nutexb",
+            "fighter/shizue/model/pot/c01/def_furniture_019_nor.nutexb",
+            "fighter/shizue/model/pot/c01/def_furniture_019_prm.nutexb",
+            "fighter/shizue/model/pot/c01/def_furniture_020_col.nutexb",
+            "fighter/shizue/model/pot/c01/def_furniture_020_nor.nutexb",
+            "fighter/shizue/model/pot/c01/def_furniture_020_prm.nutexb",
+            "fighter/shizue/model/pot/c01/def_furniture_021_col.nutexb",
+            "fighter/shizue/model/pot/c01/def_furniture_021_nor.nutexb",
+            "fighter/shizue/model/pot/c01/def_furniture_021_prm.nutexb",
+            "fighter/shizue/model/pot/c01/def_furniture_022_col.nutexb",
+            "fighter/shizue/model/pot/c01/def_furniture_022_prm.nutexb",
+            "fighter/shizue/model/pot/c01/metal_bucket_001_col.nutexb",
+            "fighter/shizue/model/pot/c01/metal_bucket_001_nor.nutexb",
+            "fighter/shizue/model/pot/c01/metal_bucket_001_prm.nutexb",
+            "fighter/shizue/model/pot/c01/metal_pompon_001_col.nutexb",
+            "fighter/shizue/model/pot/c01/metal_pompon_001_nor.nutexb",
+            "fighter/shizue/model/pot/c01/metal_pompon_001_prm.nutexb",
+            "fighter/shizue/model/pot/c01/metal_trafficsign_001_col.nutexb",
+            "fighter/shizue/model/pot/c01/metal_trafficsign_001_nor.nutexb",
+            "fighter/shizue/model/pot/c01/metal_trafficsign_001_prm.nutexb"
+        ],
+        "fighter/shizue/c02": [
+            "fighter/shizue/model/pot/c02/def_furniture_001_col.nutexb",
+            "fighter/shizue/model/pot/c02/def_furniture_001_nor.nutexb",
+            "fighter/shizue/model/pot/c02/def_furniture_001_prm.nutexb",
+            "fighter/shizue/model/pot/c02/def_furniture_002_col.nutexb",
+            "fighter/shizue/model/pot/c02/def_furniture_002_nor.nutexb",
+            "fighter/shizue/model/pot/c02/def_furniture_002_prm.nutexb",
+            "fighter/shizue/model/pot/c02/def_furniture_003_col.nutexb",
+            "fighter/shizue/model/pot/c02/def_furniture_003_prm.nutexb",
+            "fighter/shizue/model/pot/c02/def_furniture_004_col.nutexb",
+            "fighter/shizue/model/pot/c02/def_furniture_004_prm.nutexb",
+            "fighter/shizue/model/pot/c02/def_furniture_005_col.nutexb",
+            "fighter/shizue/model/pot/c02/def_furniture_005_nor.nutexb",
+            "fighter/shizue/model/pot/c02/def_furniture_005_prm.nutexb",
+            "fighter/shizue/model/pot/c02/def_furniture_006_col.nutexb",
+            "fighter/shizue/model/pot/c02/def_furniture_006_emi.nutexb",
+            "fighter/shizue/model/pot/c02/def_furniture_006_nor.nutexb",
+            "fighter/shizue/model/pot/c02/def_furniture_006_prm.nutexb",
+            "fighter/shizue/model/pot/c02/def_furniture_007_col.nutexb",
+            "fighter/shizue/model/pot/c02/def_furniture_007_prm.nutexb",
+            "fighter/shizue/model/pot/c02/def_furniture_008_col.nutexb",
+            "fighter/shizue/model/pot/c02/def_furniture_008_nor.nutexb",
+            "fighter/shizue/model/pot/c02/def_furniture_008_prm.nutexb",
+            "fighter/shizue/model/pot/c02/def_furniture_009_col.nutexb",
+            "fighter/shizue/model/pot/c02/def_furniture_009_prm.nutexb",
+            "fighter/shizue/model/pot/c02/def_furniture_010_col.nutexb",
+            "fighter/shizue/model/pot/c02/def_furniture_010_prm.nutexb",
+            "fighter/shizue/model/pot/c02/def_furniture_011_col.nutexb",
+            "fighter/shizue/model/pot/c02/def_furniture_011_nor.nutexb",
+            "fighter/shizue/model/pot/c02/def_furniture_011_prm.nutexb",
+            "fighter/shizue/model/pot/c02/def_furniture_012_col.nutexb",
+            "fighter/shizue/model/pot/c02/def_furniture_012_nor.nutexb",
+            "fighter/shizue/model/pot/c02/def_furniture_012_prm.nutexb",
+            "fighter/shizue/model/pot/c02/def_furniture_013_col.nutexb",
+            "fighter/shizue/model/pot/c02/def_furniture_013_emi.nutexb",
+            "fighter/shizue/model/pot/c02/def_furniture_013_nor.nutexb",
+            "fighter/shizue/model/pot/c02/def_furniture_013_prm.nutexb",
+            "fighter/shizue/model/pot/c02/def_furniture_014_col.nutexb",
+            "fighter/shizue/model/pot/c02/def_furniture_014_nor.nutexb",
+            "fighter/shizue/model/pot/c02/def_furniture_014_prm.nutexb",
+            "fighter/shizue/model/pot/c02/def_furniture_015_col.nutexb",
+            "fighter/shizue/model/pot/c02/def_furniture_015_nor.nutexb",
+            "fighter/shizue/model/pot/c02/def_furniture_015_prm.nutexb",
+            "fighter/shizue/model/pot/c02/def_furniture_016_col.nutexb",
+            "fighter/shizue/model/pot/c02/def_furniture_016_prm.nutexb",
+            "fighter/shizue/model/pot/c02/def_furniture_017_col.nutexb",
+            "fighter/shizue/model/pot/c02/def_furniture_017_prm.nutexb",
+            "fighter/shizue/model/pot/c02/def_furniture_018_col.nutexb",
+            "fighter/shizue/model/pot/c02/def_furniture_018_nor.nutexb",
+            "fighter/shizue/model/pot/c02/def_furniture_018_prm.nutexb",
+            "fighter/shizue/model/pot/c02/def_furniture_019_col.nutexb",
+            "fighter/shizue/model/pot/c02/def_furniture_019_nor.nutexb",
+            "fighter/shizue/model/pot/c02/def_furniture_019_prm.nutexb",
+            "fighter/shizue/model/pot/c02/def_furniture_020_col.nutexb",
+            "fighter/shizue/model/pot/c02/def_furniture_020_nor.nutexb",
+            "fighter/shizue/model/pot/c02/def_furniture_020_prm.nutexb",
+            "fighter/shizue/model/pot/c02/def_furniture_021_col.nutexb",
+            "fighter/shizue/model/pot/c02/def_furniture_021_nor.nutexb",
+            "fighter/shizue/model/pot/c02/def_furniture_021_prm.nutexb",
+            "fighter/shizue/model/pot/c02/def_furniture_022_col.nutexb",
+            "fighter/shizue/model/pot/c02/def_furniture_022_prm.nutexb",
+            "fighter/shizue/model/pot/c02/metal_bucket_001_col.nutexb",
+            "fighter/shizue/model/pot/c02/metal_bucket_001_nor.nutexb",
+            "fighter/shizue/model/pot/c02/metal_bucket_001_prm.nutexb",
+            "fighter/shizue/model/pot/c02/metal_pompon_001_col.nutexb",
+            "fighter/shizue/model/pot/c02/metal_pompon_001_nor.nutexb",
+            "fighter/shizue/model/pot/c02/metal_pompon_001_prm.nutexb",
+            "fighter/shizue/model/pot/c02/metal_trafficsign_001_col.nutexb",
+            "fighter/shizue/model/pot/c02/metal_trafficsign_001_nor.nutexb",
+            "fighter/shizue/model/pot/c02/metal_trafficsign_001_prm.nutexb"
+        ],
+        "fighter/shizue/c03": [
+            "fighter/shizue/model/pot/c03/def_furniture_001_col.nutexb",
+            "fighter/shizue/model/pot/c03/def_furniture_001_nor.nutexb",
+            "fighter/shizue/model/pot/c03/def_furniture_001_prm.nutexb",
+            "fighter/shizue/model/pot/c03/def_furniture_002_col.nutexb",
+            "fighter/shizue/model/pot/c03/def_furniture_002_nor.nutexb",
+            "fighter/shizue/model/pot/c03/def_furniture_002_prm.nutexb",
+            "fighter/shizue/model/pot/c03/def_furniture_003_col.nutexb",
+            "fighter/shizue/model/pot/c03/def_furniture_003_prm.nutexb",
+            "fighter/shizue/model/pot/c03/def_furniture_004_col.nutexb",
+            "fighter/shizue/model/pot/c03/def_furniture_004_prm.nutexb",
+            "fighter/shizue/model/pot/c03/def_furniture_005_col.nutexb",
+            "fighter/shizue/model/pot/c03/def_furniture_005_nor.nutexb",
+            "fighter/shizue/model/pot/c03/def_furniture_005_prm.nutexb",
+            "fighter/shizue/model/pot/c03/def_furniture_006_col.nutexb",
+            "fighter/shizue/model/pot/c03/def_furniture_006_emi.nutexb",
+            "fighter/shizue/model/pot/c03/def_furniture_006_nor.nutexb",
+            "fighter/shizue/model/pot/c03/def_furniture_006_prm.nutexb",
+            "fighter/shizue/model/pot/c03/def_furniture_007_col.nutexb",
+            "fighter/shizue/model/pot/c03/def_furniture_007_prm.nutexb",
+            "fighter/shizue/model/pot/c03/def_furniture_008_col.nutexb",
+            "fighter/shizue/model/pot/c03/def_furniture_008_nor.nutexb",
+            "fighter/shizue/model/pot/c03/def_furniture_008_prm.nutexb",
+            "fighter/shizue/model/pot/c03/def_furniture_009_col.nutexb",
+            "fighter/shizue/model/pot/c03/def_furniture_009_prm.nutexb",
+            "fighter/shizue/model/pot/c03/def_furniture_010_col.nutexb",
+            "fighter/shizue/model/pot/c03/def_furniture_010_prm.nutexb",
+            "fighter/shizue/model/pot/c03/def_furniture_011_col.nutexb",
+            "fighter/shizue/model/pot/c03/def_furniture_011_nor.nutexb",
+            "fighter/shizue/model/pot/c03/def_furniture_011_prm.nutexb",
+            "fighter/shizue/model/pot/c03/def_furniture_012_col.nutexb",
+            "fighter/shizue/model/pot/c03/def_furniture_012_nor.nutexb",
+            "fighter/shizue/model/pot/c03/def_furniture_012_prm.nutexb",
+            "fighter/shizue/model/pot/c03/def_furniture_013_col.nutexb",
+            "fighter/shizue/model/pot/c03/def_furniture_013_emi.nutexb",
+            "fighter/shizue/model/pot/c03/def_furniture_013_nor.nutexb",
+            "fighter/shizue/model/pot/c03/def_furniture_013_prm.nutexb",
+            "fighter/shizue/model/pot/c03/def_furniture_014_col.nutexb",
+            "fighter/shizue/model/pot/c03/def_furniture_014_nor.nutexb",
+            "fighter/shizue/model/pot/c03/def_furniture_014_prm.nutexb",
+            "fighter/shizue/model/pot/c03/def_furniture_015_col.nutexb",
+            "fighter/shizue/model/pot/c03/def_furniture_015_nor.nutexb",
+            "fighter/shizue/model/pot/c03/def_furniture_015_prm.nutexb",
+            "fighter/shizue/model/pot/c03/def_furniture_016_col.nutexb",
+            "fighter/shizue/model/pot/c03/def_furniture_016_prm.nutexb",
+            "fighter/shizue/model/pot/c03/def_furniture_017_col.nutexb",
+            "fighter/shizue/model/pot/c03/def_furniture_017_prm.nutexb",
+            "fighter/shizue/model/pot/c03/def_furniture_018_col.nutexb",
+            "fighter/shizue/model/pot/c03/def_furniture_018_nor.nutexb",
+            "fighter/shizue/model/pot/c03/def_furniture_018_prm.nutexb",
+            "fighter/shizue/model/pot/c03/def_furniture_019_col.nutexb",
+            "fighter/shizue/model/pot/c03/def_furniture_019_nor.nutexb",
+            "fighter/shizue/model/pot/c03/def_furniture_019_prm.nutexb",
+            "fighter/shizue/model/pot/c03/def_furniture_020_col.nutexb",
+            "fighter/shizue/model/pot/c03/def_furniture_020_nor.nutexb",
+            "fighter/shizue/model/pot/c03/def_furniture_020_prm.nutexb",
+            "fighter/shizue/model/pot/c03/def_furniture_021_col.nutexb",
+            "fighter/shizue/model/pot/c03/def_furniture_021_nor.nutexb",
+            "fighter/shizue/model/pot/c03/def_furniture_021_prm.nutexb",
+            "fighter/shizue/model/pot/c03/def_furniture_022_col.nutexb",
+            "fighter/shizue/model/pot/c03/def_furniture_022_prm.nutexb",
+            "fighter/shizue/model/pot/c03/metal_bucket_001_col.nutexb",
+            "fighter/shizue/model/pot/c03/metal_bucket_001_nor.nutexb",
+            "fighter/shizue/model/pot/c03/metal_bucket_001_prm.nutexb",
+            "fighter/shizue/model/pot/c03/metal_pompon_001_col.nutexb",
+            "fighter/shizue/model/pot/c03/metal_pompon_001_nor.nutexb",
+            "fighter/shizue/model/pot/c03/metal_pompon_001_prm.nutexb",
+            "fighter/shizue/model/pot/c03/metal_trafficsign_001_col.nutexb",
+            "fighter/shizue/model/pot/c03/metal_trafficsign_001_nor.nutexb",
+            "fighter/shizue/model/pot/c03/metal_trafficsign_001_prm.nutexb"
+        ],
+        "fighter/shizue/c04": [
+            "fighter/shizue/model/pot/c04/def_furniture_001_col.nutexb",
+            "fighter/shizue/model/pot/c04/def_furniture_001_nor.nutexb",
+            "fighter/shizue/model/pot/c04/def_furniture_001_prm.nutexb",
+            "fighter/shizue/model/pot/c04/def_furniture_002_col.nutexb",
+            "fighter/shizue/model/pot/c04/def_furniture_002_nor.nutexb",
+            "fighter/shizue/model/pot/c04/def_furniture_002_prm.nutexb",
+            "fighter/shizue/model/pot/c04/def_furniture_003_col.nutexb",
+            "fighter/shizue/model/pot/c04/def_furniture_003_prm.nutexb",
+            "fighter/shizue/model/pot/c04/def_furniture_004_col.nutexb",
+            "fighter/shizue/model/pot/c04/def_furniture_004_prm.nutexb",
+            "fighter/shizue/model/pot/c04/def_furniture_005_col.nutexb",
+            "fighter/shizue/model/pot/c04/def_furniture_005_nor.nutexb",
+            "fighter/shizue/model/pot/c04/def_furniture_005_prm.nutexb",
+            "fighter/shizue/model/pot/c04/def_furniture_006_col.nutexb",
+            "fighter/shizue/model/pot/c04/def_furniture_006_emi.nutexb",
+            "fighter/shizue/model/pot/c04/def_furniture_006_nor.nutexb",
+            "fighter/shizue/model/pot/c04/def_furniture_006_prm.nutexb",
+            "fighter/shizue/model/pot/c04/def_furniture_007_col.nutexb",
+            "fighter/shizue/model/pot/c04/def_furniture_007_prm.nutexb",
+            "fighter/shizue/model/pot/c04/def_furniture_008_col.nutexb",
+            "fighter/shizue/model/pot/c04/def_furniture_008_nor.nutexb",
+            "fighter/shizue/model/pot/c04/def_furniture_008_prm.nutexb",
+            "fighter/shizue/model/pot/c04/def_furniture_009_col.nutexb",
+            "fighter/shizue/model/pot/c04/def_furniture_009_prm.nutexb",
+            "fighter/shizue/model/pot/c04/def_furniture_010_col.nutexb",
+            "fighter/shizue/model/pot/c04/def_furniture_010_prm.nutexb",
+            "fighter/shizue/model/pot/c04/def_furniture_011_col.nutexb",
+            "fighter/shizue/model/pot/c04/def_furniture_011_nor.nutexb",
+            "fighter/shizue/model/pot/c04/def_furniture_011_prm.nutexb",
+            "fighter/shizue/model/pot/c04/def_furniture_012_col.nutexb",
+            "fighter/shizue/model/pot/c04/def_furniture_012_nor.nutexb",
+            "fighter/shizue/model/pot/c04/def_furniture_012_prm.nutexb",
+            "fighter/shizue/model/pot/c04/def_furniture_013_col.nutexb",
+            "fighter/shizue/model/pot/c04/def_furniture_013_emi.nutexb",
+            "fighter/shizue/model/pot/c04/def_furniture_013_nor.nutexb",
+            "fighter/shizue/model/pot/c04/def_furniture_013_prm.nutexb",
+            "fighter/shizue/model/pot/c04/def_furniture_014_col.nutexb",
+            "fighter/shizue/model/pot/c04/def_furniture_014_nor.nutexb",
+            "fighter/shizue/model/pot/c04/def_furniture_014_prm.nutexb",
+            "fighter/shizue/model/pot/c04/def_furniture_015_col.nutexb",
+            "fighter/shizue/model/pot/c04/def_furniture_015_nor.nutexb",
+            "fighter/shizue/model/pot/c04/def_furniture_015_prm.nutexb",
+            "fighter/shizue/model/pot/c04/def_furniture_016_col.nutexb",
+            "fighter/shizue/model/pot/c04/def_furniture_016_prm.nutexb",
+            "fighter/shizue/model/pot/c04/def_furniture_017_col.nutexb",
+            "fighter/shizue/model/pot/c04/def_furniture_017_prm.nutexb",
+            "fighter/shizue/model/pot/c04/def_furniture_018_col.nutexb",
+            "fighter/shizue/model/pot/c04/def_furniture_018_nor.nutexb",
+            "fighter/shizue/model/pot/c04/def_furniture_018_prm.nutexb",
+            "fighter/shizue/model/pot/c04/def_furniture_019_col.nutexb",
+            "fighter/shizue/model/pot/c04/def_furniture_019_nor.nutexb",
+            "fighter/shizue/model/pot/c04/def_furniture_019_prm.nutexb",
+            "fighter/shizue/model/pot/c04/def_furniture_020_col.nutexb",
+            "fighter/shizue/model/pot/c04/def_furniture_020_nor.nutexb",
+            "fighter/shizue/model/pot/c04/def_furniture_020_prm.nutexb",
+            "fighter/shizue/model/pot/c04/def_furniture_021_col.nutexb",
+            "fighter/shizue/model/pot/c04/def_furniture_021_nor.nutexb",
+            "fighter/shizue/model/pot/c04/def_furniture_021_prm.nutexb",
+            "fighter/shizue/model/pot/c04/def_furniture_022_col.nutexb",
+            "fighter/shizue/model/pot/c04/def_furniture_022_prm.nutexb",
+            "fighter/shizue/model/pot/c04/metal_bucket_001_col.nutexb",
+            "fighter/shizue/model/pot/c04/metal_bucket_001_nor.nutexb",
+            "fighter/shizue/model/pot/c04/metal_bucket_001_prm.nutexb",
+            "fighter/shizue/model/pot/c04/metal_pompon_001_col.nutexb",
+            "fighter/shizue/model/pot/c04/metal_pompon_001_nor.nutexb",
+            "fighter/shizue/model/pot/c04/metal_pompon_001_prm.nutexb",
+            "fighter/shizue/model/pot/c04/metal_trafficsign_001_col.nutexb",
+            "fighter/shizue/model/pot/c04/metal_trafficsign_001_nor.nutexb",
+            "fighter/shizue/model/pot/c04/metal_trafficsign_001_prm.nutexb"
+        ],
+        "fighter/shizue/c05": [
+            "fighter/shizue/model/pot/c05/def_furniture_001_col.nutexb",
+            "fighter/shizue/model/pot/c05/def_furniture_001_nor.nutexb",
+            "fighter/shizue/model/pot/c05/def_furniture_001_prm.nutexb",
+            "fighter/shizue/model/pot/c05/def_furniture_002_col.nutexb",
+            "fighter/shizue/model/pot/c05/def_furniture_002_nor.nutexb",
+            "fighter/shizue/model/pot/c05/def_furniture_002_prm.nutexb",
+            "fighter/shizue/model/pot/c05/def_furniture_003_col.nutexb",
+            "fighter/shizue/model/pot/c05/def_furniture_003_prm.nutexb",
+            "fighter/shizue/model/pot/c05/def_furniture_004_col.nutexb",
+            "fighter/shizue/model/pot/c05/def_furniture_004_prm.nutexb",
+            "fighter/shizue/model/pot/c05/def_furniture_005_col.nutexb",
+            "fighter/shizue/model/pot/c05/def_furniture_005_nor.nutexb",
+            "fighter/shizue/model/pot/c05/def_furniture_005_prm.nutexb",
+            "fighter/shizue/model/pot/c05/def_furniture_006_col.nutexb",
+            "fighter/shizue/model/pot/c05/def_furniture_006_emi.nutexb",
+            "fighter/shizue/model/pot/c05/def_furniture_006_nor.nutexb",
+            "fighter/shizue/model/pot/c05/def_furniture_006_prm.nutexb",
+            "fighter/shizue/model/pot/c05/def_furniture_007_col.nutexb",
+            "fighter/shizue/model/pot/c05/def_furniture_007_prm.nutexb",
+            "fighter/shizue/model/pot/c05/def_furniture_008_col.nutexb",
+            "fighter/shizue/model/pot/c05/def_furniture_008_nor.nutexb",
+            "fighter/shizue/model/pot/c05/def_furniture_008_prm.nutexb",
+            "fighter/shizue/model/pot/c05/def_furniture_009_col.nutexb",
+            "fighter/shizue/model/pot/c05/def_furniture_009_prm.nutexb",
+            "fighter/shizue/model/pot/c05/def_furniture_010_col.nutexb",
+            "fighter/shizue/model/pot/c05/def_furniture_010_prm.nutexb",
+            "fighter/shizue/model/pot/c05/def_furniture_011_col.nutexb",
+            "fighter/shizue/model/pot/c05/def_furniture_011_nor.nutexb",
+            "fighter/shizue/model/pot/c05/def_furniture_011_prm.nutexb",
+            "fighter/shizue/model/pot/c05/def_furniture_012_col.nutexb",
+            "fighter/shizue/model/pot/c05/def_furniture_012_nor.nutexb",
+            "fighter/shizue/model/pot/c05/def_furniture_012_prm.nutexb",
+            "fighter/shizue/model/pot/c05/def_furniture_013_col.nutexb",
+            "fighter/shizue/model/pot/c05/def_furniture_013_emi.nutexb",
+            "fighter/shizue/model/pot/c05/def_furniture_013_nor.nutexb",
+            "fighter/shizue/model/pot/c05/def_furniture_013_prm.nutexb",
+            "fighter/shizue/model/pot/c05/def_furniture_014_col.nutexb",
+            "fighter/shizue/model/pot/c05/def_furniture_014_nor.nutexb",
+            "fighter/shizue/model/pot/c05/def_furniture_014_prm.nutexb",
+            "fighter/shizue/model/pot/c05/def_furniture_015_col.nutexb",
+            "fighter/shizue/model/pot/c05/def_furniture_015_nor.nutexb",
+            "fighter/shizue/model/pot/c05/def_furniture_015_prm.nutexb",
+            "fighter/shizue/model/pot/c05/def_furniture_016_col.nutexb",
+            "fighter/shizue/model/pot/c05/def_furniture_016_prm.nutexb",
+            "fighter/shizue/model/pot/c05/def_furniture_017_col.nutexb",
+            "fighter/shizue/model/pot/c05/def_furniture_017_prm.nutexb",
+            "fighter/shizue/model/pot/c05/def_furniture_018_col.nutexb",
+            "fighter/shizue/model/pot/c05/def_furniture_018_nor.nutexb",
+            "fighter/shizue/model/pot/c05/def_furniture_018_prm.nutexb",
+            "fighter/shizue/model/pot/c05/def_furniture_019_col.nutexb",
+            "fighter/shizue/model/pot/c05/def_furniture_019_nor.nutexb",
+            "fighter/shizue/model/pot/c05/def_furniture_019_prm.nutexb",
+            "fighter/shizue/model/pot/c05/def_furniture_020_col.nutexb",
+            "fighter/shizue/model/pot/c05/def_furniture_020_nor.nutexb",
+            "fighter/shizue/model/pot/c05/def_furniture_020_prm.nutexb",
+            "fighter/shizue/model/pot/c05/def_furniture_021_col.nutexb",
+            "fighter/shizue/model/pot/c05/def_furniture_021_nor.nutexb",
+            "fighter/shizue/model/pot/c05/def_furniture_021_prm.nutexb",
+            "fighter/shizue/model/pot/c05/def_furniture_022_col.nutexb",
+            "fighter/shizue/model/pot/c05/def_furniture_022_prm.nutexb",
+            "fighter/shizue/model/pot/c05/metal_bucket_001_col.nutexb",
+            "fighter/shizue/model/pot/c05/metal_bucket_001_nor.nutexb",
+            "fighter/shizue/model/pot/c05/metal_bucket_001_prm.nutexb",
+            "fighter/shizue/model/pot/c05/metal_pompon_001_col.nutexb",
+            "fighter/shizue/model/pot/c05/metal_pompon_001_nor.nutexb",
+            "fighter/shizue/model/pot/c05/metal_pompon_001_prm.nutexb",
+            "fighter/shizue/model/pot/c05/metal_trafficsign_001_col.nutexb",
+            "fighter/shizue/model/pot/c05/metal_trafficsign_001_nor.nutexb",
+            "fighter/shizue/model/pot/c05/metal_trafficsign_001_prm.nutexb"
+        ],
+        "fighter/shizue/c06": [
+            "fighter/shizue/model/pot/c06/def_furniture_001_col.nutexb",
+            "fighter/shizue/model/pot/c06/def_furniture_001_nor.nutexb",
+            "fighter/shizue/model/pot/c06/def_furniture_001_prm.nutexb",
+            "fighter/shizue/model/pot/c06/def_furniture_002_col.nutexb",
+            "fighter/shizue/model/pot/c06/def_furniture_002_nor.nutexb",
+            "fighter/shizue/model/pot/c06/def_furniture_002_prm.nutexb",
+            "fighter/shizue/model/pot/c06/def_furniture_003_col.nutexb",
+            "fighter/shizue/model/pot/c06/def_furniture_003_prm.nutexb",
+            "fighter/shizue/model/pot/c06/def_furniture_004_col.nutexb",
+            "fighter/shizue/model/pot/c06/def_furniture_004_prm.nutexb",
+            "fighter/shizue/model/pot/c06/def_furniture_005_col.nutexb",
+            "fighter/shizue/model/pot/c06/def_furniture_005_nor.nutexb",
+            "fighter/shizue/model/pot/c06/def_furniture_005_prm.nutexb",
+            "fighter/shizue/model/pot/c06/def_furniture_006_col.nutexb",
+            "fighter/shizue/model/pot/c06/def_furniture_006_emi.nutexb",
+            "fighter/shizue/model/pot/c06/def_furniture_006_nor.nutexb",
+            "fighter/shizue/model/pot/c06/def_furniture_006_prm.nutexb",
+            "fighter/shizue/model/pot/c06/def_furniture_007_col.nutexb",
+            "fighter/shizue/model/pot/c06/def_furniture_007_prm.nutexb",
+            "fighter/shizue/model/pot/c06/def_furniture_008_col.nutexb",
+            "fighter/shizue/model/pot/c06/def_furniture_008_nor.nutexb",
+            "fighter/shizue/model/pot/c06/def_furniture_008_prm.nutexb",
+            "fighter/shizue/model/pot/c06/def_furniture_009_col.nutexb",
+            "fighter/shizue/model/pot/c06/def_furniture_009_prm.nutexb",
+            "fighter/shizue/model/pot/c06/def_furniture_010_col.nutexb",
+            "fighter/shizue/model/pot/c06/def_furniture_010_prm.nutexb",
+            "fighter/shizue/model/pot/c06/def_furniture_011_col.nutexb",
+            "fighter/shizue/model/pot/c06/def_furniture_011_nor.nutexb",
+            "fighter/shizue/model/pot/c06/def_furniture_011_prm.nutexb",
+            "fighter/shizue/model/pot/c06/def_furniture_012_col.nutexb",
+            "fighter/shizue/model/pot/c06/def_furniture_012_nor.nutexb",
+            "fighter/shizue/model/pot/c06/def_furniture_012_prm.nutexb",
+            "fighter/shizue/model/pot/c06/def_furniture_013_col.nutexb",
+            "fighter/shizue/model/pot/c06/def_furniture_013_emi.nutexb",
+            "fighter/shizue/model/pot/c06/def_furniture_013_nor.nutexb",
+            "fighter/shizue/model/pot/c06/def_furniture_013_prm.nutexb",
+            "fighter/shizue/model/pot/c06/def_furniture_014_col.nutexb",
+            "fighter/shizue/model/pot/c06/def_furniture_014_nor.nutexb",
+            "fighter/shizue/model/pot/c06/def_furniture_014_prm.nutexb",
+            "fighter/shizue/model/pot/c06/def_furniture_015_col.nutexb",
+            "fighter/shizue/model/pot/c06/def_furniture_015_nor.nutexb",
+            "fighter/shizue/model/pot/c06/def_furniture_015_prm.nutexb",
+            "fighter/shizue/model/pot/c06/def_furniture_016_col.nutexb",
+            "fighter/shizue/model/pot/c06/def_furniture_016_prm.nutexb",
+            "fighter/shizue/model/pot/c06/def_furniture_017_col.nutexb",
+            "fighter/shizue/model/pot/c06/def_furniture_017_prm.nutexb",
+            "fighter/shizue/model/pot/c06/def_furniture_018_col.nutexb",
+            "fighter/shizue/model/pot/c06/def_furniture_018_nor.nutexb",
+            "fighter/shizue/model/pot/c06/def_furniture_018_prm.nutexb",
+            "fighter/shizue/model/pot/c06/def_furniture_019_col.nutexb",
+            "fighter/shizue/model/pot/c06/def_furniture_019_nor.nutexb",
+            "fighter/shizue/model/pot/c06/def_furniture_019_prm.nutexb",
+            "fighter/shizue/model/pot/c06/def_furniture_020_col.nutexb",
+            "fighter/shizue/model/pot/c06/def_furniture_020_nor.nutexb",
+            "fighter/shizue/model/pot/c06/def_furniture_020_prm.nutexb",
+            "fighter/shizue/model/pot/c06/def_furniture_021_col.nutexb",
+            "fighter/shizue/model/pot/c06/def_furniture_021_nor.nutexb",
+            "fighter/shizue/model/pot/c06/def_furniture_021_prm.nutexb",
+            "fighter/shizue/model/pot/c06/def_furniture_022_col.nutexb",
+            "fighter/shizue/model/pot/c06/def_furniture_022_prm.nutexb",
+            "fighter/shizue/model/pot/c06/metal_bucket_001_col.nutexb",
+            "fighter/shizue/model/pot/c06/metal_bucket_001_nor.nutexb",
+            "fighter/shizue/model/pot/c06/metal_bucket_001_prm.nutexb",
+            "fighter/shizue/model/pot/c06/metal_pompon_001_col.nutexb",
+            "fighter/shizue/model/pot/c06/metal_pompon_001_nor.nutexb",
+            "fighter/shizue/model/pot/c06/metal_pompon_001_prm.nutexb",
+            "fighter/shizue/model/pot/c06/metal_trafficsign_001_col.nutexb",
+            "fighter/shizue/model/pot/c06/metal_trafficsign_001_nor.nutexb",
+            "fighter/shizue/model/pot/c06/metal_trafficsign_001_prm.nutexb"
+        ],
+        "fighter/shizue/c07": [
+            "fighter/shizue/model/pot/c07/def_furniture_001_col.nutexb",
+            "fighter/shizue/model/pot/c07/def_furniture_001_nor.nutexb",
+            "fighter/shizue/model/pot/c07/def_furniture_001_prm.nutexb",
+            "fighter/shizue/model/pot/c07/def_furniture_002_col.nutexb",
+            "fighter/shizue/model/pot/c07/def_furniture_002_nor.nutexb",
+            "fighter/shizue/model/pot/c07/def_furniture_002_prm.nutexb",
+            "fighter/shizue/model/pot/c07/def_furniture_003_col.nutexb",
+            "fighter/shizue/model/pot/c07/def_furniture_003_prm.nutexb",
+            "fighter/shizue/model/pot/c07/def_furniture_004_col.nutexb",
+            "fighter/shizue/model/pot/c07/def_furniture_004_prm.nutexb",
+            "fighter/shizue/model/pot/c07/def_furniture_005_col.nutexb",
+            "fighter/shizue/model/pot/c07/def_furniture_005_nor.nutexb",
+            "fighter/shizue/model/pot/c07/def_furniture_005_prm.nutexb",
+            "fighter/shizue/model/pot/c07/def_furniture_006_col.nutexb",
+            "fighter/shizue/model/pot/c07/def_furniture_006_emi.nutexb",
+            "fighter/shizue/model/pot/c07/def_furniture_006_nor.nutexb",
+            "fighter/shizue/model/pot/c07/def_furniture_006_prm.nutexb",
+            "fighter/shizue/model/pot/c07/def_furniture_007_col.nutexb",
+            "fighter/shizue/model/pot/c07/def_furniture_007_prm.nutexb",
+            "fighter/shizue/model/pot/c07/def_furniture_008_col.nutexb",
+            "fighter/shizue/model/pot/c07/def_furniture_008_nor.nutexb",
+            "fighter/shizue/model/pot/c07/def_furniture_008_prm.nutexb",
+            "fighter/shizue/model/pot/c07/def_furniture_009_col.nutexb",
+            "fighter/shizue/model/pot/c07/def_furniture_009_prm.nutexb",
+            "fighter/shizue/model/pot/c07/def_furniture_010_col.nutexb",
+            "fighter/shizue/model/pot/c07/def_furniture_010_prm.nutexb",
+            "fighter/shizue/model/pot/c07/def_furniture_011_col.nutexb",
+            "fighter/shizue/model/pot/c07/def_furniture_011_nor.nutexb",
+            "fighter/shizue/model/pot/c07/def_furniture_011_prm.nutexb",
+            "fighter/shizue/model/pot/c07/def_furniture_012_col.nutexb",
+            "fighter/shizue/model/pot/c07/def_furniture_012_nor.nutexb",
+            "fighter/shizue/model/pot/c07/def_furniture_012_prm.nutexb",
+            "fighter/shizue/model/pot/c07/def_furniture_013_col.nutexb",
+            "fighter/shizue/model/pot/c07/def_furniture_013_emi.nutexb",
+            "fighter/shizue/model/pot/c07/def_furniture_013_nor.nutexb",
+            "fighter/shizue/model/pot/c07/def_furniture_013_prm.nutexb",
+            "fighter/shizue/model/pot/c07/def_furniture_014_col.nutexb",
+            "fighter/shizue/model/pot/c07/def_furniture_014_nor.nutexb",
+            "fighter/shizue/model/pot/c07/def_furniture_014_prm.nutexb",
+            "fighter/shizue/model/pot/c07/def_furniture_015_col.nutexb",
+            "fighter/shizue/model/pot/c07/def_furniture_015_nor.nutexb",
+            "fighter/shizue/model/pot/c07/def_furniture_015_prm.nutexb",
+            "fighter/shizue/model/pot/c07/def_furniture_016_col.nutexb",
+            "fighter/shizue/model/pot/c07/def_furniture_016_prm.nutexb",
+            "fighter/shizue/model/pot/c07/def_furniture_017_col.nutexb",
+            "fighter/shizue/model/pot/c07/def_furniture_017_prm.nutexb",
+            "fighter/shizue/model/pot/c07/def_furniture_018_col.nutexb",
+            "fighter/shizue/model/pot/c07/def_furniture_018_nor.nutexb",
+            "fighter/shizue/model/pot/c07/def_furniture_018_prm.nutexb",
+            "fighter/shizue/model/pot/c07/def_furniture_019_col.nutexb",
+            "fighter/shizue/model/pot/c07/def_furniture_019_nor.nutexb",
+            "fighter/shizue/model/pot/c07/def_furniture_019_prm.nutexb",
+            "fighter/shizue/model/pot/c07/def_furniture_020_col.nutexb",
+            "fighter/shizue/model/pot/c07/def_furniture_020_nor.nutexb",
+            "fighter/shizue/model/pot/c07/def_furniture_020_prm.nutexb",
+            "fighter/shizue/model/pot/c07/def_furniture_021_col.nutexb",
+            "fighter/shizue/model/pot/c07/def_furniture_021_nor.nutexb",
+            "fighter/shizue/model/pot/c07/def_furniture_021_prm.nutexb",
+            "fighter/shizue/model/pot/c07/def_furniture_022_col.nutexb",
+            "fighter/shizue/model/pot/c07/def_furniture_022_prm.nutexb",
+            "fighter/shizue/model/pot/c07/metal_bucket_001_col.nutexb",
+            "fighter/shizue/model/pot/c07/metal_bucket_001_nor.nutexb",
+            "fighter/shizue/model/pot/c07/metal_bucket_001_prm.nutexb",
+            "fighter/shizue/model/pot/c07/metal_pompon_001_col.nutexb",
+            "fighter/shizue/model/pot/c07/metal_pompon_001_nor.nutexb",
+            "fighter/shizue/model/pot/c07/metal_pompon_001_prm.nutexb",
+            "fighter/shizue/model/pot/c07/metal_trafficsign_001_col.nutexb",
+            "fighter/shizue/model/pot/c07/metal_trafficsign_001_nor.nutexb",
+            "fighter/shizue/model/pot/c07/metal_trafficsign_001_prm.nutexb"
+        ],
+    	"fighter/trail/c00": [
+			"fighter/trail/motion/body/c00/d00specialinput.nuanmb"
+		],
+        "fighter/trail/c01": [
+			"fighter/trail/motion/body/c01/d00specialinput.nuanmb"
+		],
+        "fighter/trail/c02": [
+			"fighter/trail/motion/body/c02/d00specialinput.nuanmb"
+		],
+        "fighter/trail/c03": [
+			"fighter/trail/motion/body/c03/d00specialinput.nuanmb"
+		],
+        "fighter/trail/c04": [
+			"fighter/trail/motion/body/c04/d00specialinput.nuanmb"
+		],
+        "fighter/trail/c05": [
+			"fighter/trail/motion/body/c05/d00specialinput.nuanmb"
+		],
+        "fighter/trail/c06": [
+			"fighter/trail/motion/body/c06/d00specialinput.nuanmb"
+		],
+        "fighter/trail/c07": [
+			"fighter/trail/motion/body/c07/d00specialinput.nuanmb"
+		],
+		"fighter/dedede/c00": [
+			"fighter/dedede/motion/body/c00/d00specialinput.nuanmb",
+			"fighter/dedede/motion/body/c00/d00specialairinput.nuanmb",
+			"fighter/dedede/motion/body/c00/d00specialairinput2.nuanmb",
+			"fighter/dedede/motion/body/c00/d00specialairinputlanding.nuanmb"
+		],
+		"fighter/dedede/c01": [
+			"fighter/dedede/motion/body/c01/d00specialinput.nuanmb",
+			"fighter/dedede/motion/body/c01/d00specialairinput.nuanmb",
+			"fighter/dedede/motion/body/c01/d00specialairinput2.nuanmb",
+			"fighter/dedede/motion/body/c01/d00specialairinputlanding.nuanmb"
+		],
+		"fighter/dedede/c02": [
+			"fighter/dedede/motion/body/c02/d00specialinput.nuanmb",
+			"fighter/dedede/motion/body/c02/d00specialairinput.nuanmb",
+			"fighter/dedede/motion/body/c02/d00specialairinput2.nuanmb",
+			"fighter/dedede/motion/body/c02/d00specialairinputlanding.nuanmb"
+		],
+		"fighter/dedede/c03": [
+			"fighter/dedede/motion/body/c03/d00specialinput.nuanmb",
+			"fighter/dedede/motion/body/c03/d00specialairinput.nuanmb",
+			"fighter/dedede/motion/body/c03/d00specialairinput2.nuanmb",
+			"fighter/dedede/motion/body/c03/d00specialairinputlanding.nuanmb"
+		],
+		"fighter/dedede/c04": [
+			"fighter/dedede/motion/body/c04/d00specialinput.nuanmb",
+			"fighter/dedede/motion/body/c04/d00specialairinput.nuanmb",
+			"fighter/dedede/motion/body/c04/d00specialairinput2.nuanmb",
+			"fighter/dedede/motion/body/c04/d00specialairinputlanding.nuanmb"
+		],
+		"fighter/dedede/c05": [
+			"fighter/dedede/motion/body/c05/d00specialinput.nuanmb",
+			"fighter/dedede/motion/body/c05/d00specialairinput.nuanmb",
+			"fighter/dedede/motion/body/c05/d00specialairinput2.nuanmb",
+			"fighter/dedede/motion/body/c05/d00specialairinputlanding.nuanmb"
+		],
+		"fighter/dedede/c06": [
+			"fighter/dedede/motion/body/c06/d00specialinput.nuanmb",
+			"fighter/dedede/motion/body/c06/d00specialairinput.nuanmb",
+			"fighter/dedede/motion/body/c06/d00specialairinput2.nuanmb",
+			"fighter/dedede/motion/body/c06/d00specialairinputlanding.nuanmb"
+		],
+		"fighter/dedede/c07": [
+			"fighter/dedede/motion/body/c07/d00specialinput.nuanmb",
+			"fighter/dedede/motion/body/c07/d00specialairinput.nuanmb",
+			"fighter/dedede/motion/body/c07/d00specialairinput2.nuanmb",
+			"fighter/dedede/motion/body/c07/d00specialairinputlanding.nuanmb"
+		],
+		"fighter/mariod/c00": [
+			"fighter/mariod/motion/body/c00/d02specialhi2.nuanmb",
+			"fighter/mariod/motion/body/c00/d02specialhilanding.nuanmb",
+			"fighter/mariod/motion/body/c00/d00specialinput.nuanmb"
+		],
+		"fighter/mariod/c01": [
+			"fighter/mariod/motion/body/c01/d02specialhi2.nuanmb",
+			"fighter/mariod/motion/body/c01/d02specialhilanding.nuanmb",
+			"fighter/mariod/motion/body/c01/d00specialinput.nuanmb"
+		],
+		"fighter/mariod/c02": [
+			"fighter/mariod/motion/body/c02/d02specialhi2.nuanmb",
+			"fighter/mariod/motion/body/c02/d02specialhilanding.nuanmb",
+			"fighter/mariod/motion/body/c02/d00specialinput.nuanmb"
+		],
+		"fighter/mariod/c03": [
+			"fighter/mariod/motion/body/c03/d02specialhi2.nuanmb",
+			"fighter/mariod/motion/body/c03/d02specialhilanding.nuanmb",
+			"fighter/mariod/motion/body/c03/d00specialinput.nuanmb"
+		],
+		"fighter/mariod/c04": [
+			"fighter/mariod/motion/body/c04/d02specialhi2.nuanmb",
+			"fighter/mariod/motion/body/c04/d02specialhilanding.nuanmb",
+			"fighter/mariod/motion/body/c04/d00specialinput.nuanmb"
+		],
+		"fighter/mariod/c05": [
+			"fighter/mariod/motion/body/c05/d02specialhi2.nuanmb",
+			"fighter/mariod/motion/body/c05/d02specialhilanding.nuanmb",
+			"fighter/mariod/motion/body/c05/d00specialinput.nuanmb"
+		],
+		"fighter/mariod/c06": [
+			"fighter/mariod/motion/body/c06/d02specialhi2.nuanmb",
+			"fighter/mariod/motion/body/c06/d02specialhilanding.nuanmb",
+			"fighter/mariod/motion/body/c06/d00specialinput.nuanmb"
+		],
+		"fighter/mariod/c07": [
+			"fighter/mariod/motion/body/c07/d02specialhi2.nuanmb",
+			"fighter/mariod/motion/body/c07/d02specialhilanding.nuanmb",
+			"fighter/mariod/motion/body/c07/d00specialinput.nuanmb"
+		],
+        "fighter/sheik/c00": [
+			"fighter/sheik/motion/body/c00/d00specialinput.nuanmb"
+		],
+        "fighter/sheik/c01": [
+			"fighter/sheik/motion/body/c01/d00specialinput.nuanmb"
+		],
+        "fighter/sheik/c02": [
+			"fighter/sheik/motion/body/c02/d00specialinput.nuanmb"
+		],
+        "fighter/sheik/c03": [
+			"fighter/sheik/motion/body/c03/d00specialinput.nuanmb"
+		],
+        "fighter/sheik/c04": [
+			"fighter/sheik/motion/body/c04/d00specialinput.nuanmb"
+		],
+        "fighter/sheik/c05": [
+			"fighter/sheik/motion/body/c05/d00specialinput.nuanmb"
+		],
+        "fighter/sheik/c06": [
+			"fighter/sheik/motion/body/c06/d00specialinput.nuanmb"
+		],
+        "fighter/sheik/c07": [
+			"fighter/sheik/motion/body/c07/d00specialinput.nuanmb"
+		],
+        "fighter/toonlink/c00": [
+			"fighter/toonlink/motion/bow/c00/c03attacks4s.nuanmb",
+			"fighter/toonlink/motion/bow/c00/d02specialairhi.nuanmb"
+		],
+        "fighter/toonlink/c01": [
+			"fighter/toonlink/motion/bow/c01/c03attacks4s.nuanmb",
+			"fighter/toonlink/motion/bow/c01/d02specialairhi.nuanmb"
+		],
+        "fighter/toonlink/c02": [
+			"fighter/toonlink/motion/bow/c02/c03attacks4s.nuanmb",
+			"fighter/toonlink/motion/bow/c02/d02specialairhi.nuanmb"
+		],
+        "fighter/toonlink/c03": [
+			"fighter/toonlink/motion/bow/c03/c03attacks4s.nuanmb",
+			"fighter/toonlink/motion/bow/c03/d02specialairhi.nuanmb"
+		],
+        "fighter/toonlink/c04": [
+			"fighter/toonlink/motion/bow/c04/c03attacks4s.nuanmb",
+			"fighter/toonlink/motion/bow/c04/d02specialairhi.nuanmb"
+		],
+        "fighter/toonlink/c05": [
+			"fighter/toonlink/motion/bow/c05/c03attacks4s.nuanmb",
+			"fighter/toonlink/motion/bow/c05/d02specialairhi.nuanmb"
+		],
+        "fighter/toonlink/c06": [
+			"fighter/toonlink/motion/bow/c06/c03attacks4s.nuanmb",
+			"fighter/toonlink/motion/bow/c06/d02specialairhi.nuanmb"
+		],
+        "fighter/toonlink/c07": [
+			"fighter/toonlink/motion/bow/c07/c03attacks4s.nuanmb",
+			"fighter/toonlink/motion/bow/c07/d02specialairhi.nuanmb"
+		],
+		"fighter/szerosuit/c06": [
+		  "fighter/szerosuit/model/body/c06/def_szerosuit_001_col.nutexb",
+		  "fighter/szerosuit/model/body/c06/def_szerosuit_001_nor.nutexb",
+		  "fighter/szerosuit/model/body/c06/def_szerosuit_001_prm.nutexb"
+		],
+		"fighter/szerosuit/c07": [
+		  "fighter/szerosuit/model/body/c07/def_szerosuit_001_col.nutexb",
+		  "fighter/szerosuit/model/body/c07/def_szerosuit_001_nor.nutexb",
+		  "fighter/szerosuit/model/body/c07/def_szerosuit_001_prm.nutexb"
+		],
+        "fighter/sonic/c00": [
+			"fighter/sonic/motion/body/c00/c00attack100.nuanmb",
+			"fighter/sonic/motion/body/c00/d01specialairsstart.nuanmb"
+		],
+        "fighter/sonic/c01": [
+			"fighter/sonic/motion/body/c01/c00attack100.nuanmb",
+			"fighter/sonic/motion/body/c01/d01specialairsstart.nuanmb"
+		],
+        "fighter/sonic/c02": [
+			"fighter/sonic/motion/body/c02/c00attack100.nuanmb",
+			"fighter/sonic/motion/body/c02/d01specialairsstart.nuanmb"
+		],
+        "fighter/sonic/c03": [
+			"fighter/sonic/motion/body/c03/c00attack100.nuanmb",
+			"fighter/sonic/motion/body/c03/d01specialairsstart.nuanmb"
+		],
+        "fighter/sonic/c04": [
+			"fighter/sonic/motion/body/c04/c00attack100.nuanmb",
+			"fighter/sonic/motion/body/c04/d01specialairsstart.nuanmb"
+		],
+        "fighter/sonic/c05": [
+			"fighter/sonic/motion/body/c05/c00attack100.nuanmb",
+			"fighter/sonic/motion/body/c05/d01specialairsstart.nuanmb"
+		],
+        "fighter/sonic/c06": [
+			"fighter/sonic/motion/body/c06/c00attack100.nuanmb",
+			"fighter/sonic/motion/body/c06/d01specialairsstart.nuanmb"
+		],
+        "fighter/sonic/c07": [
+			"fighter/sonic/motion/body/c07/c00attack100.nuanmb",
+			"fighter/sonic/motion/body/c07/d01specialairsstart.nuanmb"
+		],
+        "fighter/wario/c00": [
+			"fighter/wario/motion/body/c00/d01specialairssearch.nuanmb"
+		],
+        "fighter/wario/c01": [
+			"fighter/wario/motion/body/c01/d01specialairssearch.nuanmb"
+		],
+        "fighter/wario/c02": [
+			"fighter/wario/motion/body/c02/d01specialairssearch.nuanmb"
+		],
+        "fighter/wario/c03": [
+			"fighter/wario/motion/body/c03/d01specialairssearch.nuanmb"
+		],
+        "fighter/wario/c04": [
+			"fighter/wario/motion/body/c04/d01specialairssearch.nuanmb"
+		],
+        "fighter/wario/c05": [
+			"fighter/wario/motion/body/c05/d01specialairssearch.nuanmb"
+		],
+        "fighter/wario/c06": [
+			"fighter/wario/motion/body/c06/d01specialairssearch.nuanmb"
+		],
+        "fighter/wario/c07": [
+			"fighter/wario/motion/body/c07/d01specialairssearch.nuanmb"
+		],
+        "fighter/roy/c00": [
+			"fighter/roy/motion/body/c00/c00attackdash2.nuanmb"
+		],
+        "fighter/roy/c01": [
+			"fighter/roy/motion/body/c01/c00attackdash2.nuanmb"
+		],
+        "fighter/roy/c02": [
+			"fighter/roy/motion/body/c02/c00attackdash2.nuanmb"
+		],
+        "fighter/roy/c03": [
+			"fighter/roy/motion/body/c03/c00attackdash2.nuanmb"
+		],
+        "fighter/roy/c04": [
+			"fighter/roy/motion/body/c04/c00attackdash2.nuanmb"
+		],
+        "fighter/roy/c05": [
+			"fighter/roy/motion/body/c05/c00attackdash2.nuanmb"
+		],
+        "fighter/roy/c06": [
+			"fighter/roy/motion/body/c06/c00attackdash2.nuanmb"
+		],
+        "fighter/roy/c07": [
+			"fighter/roy/motion/body/c07/c00attackdash2.nuanmb"
+		],
+        "fighter/chrom/c00": [
+			"fighter/chrom/motion/body/c00/c00attack12.nuanmb",
+			"fighter/chrom/motion/body/c00/c01attacks3hi.nuanmb",
+			"fighter/chrom/motion/body/c00/c01attacks3lw.nuanmb"
+		],
+        "fighter/chrom/c01": [
+			"fighter/chrom/motion/body/c01/c00attack12.nuanmb",
+			"fighter/chrom/motion/body/c01/c01attacks3hi.nuanmb",
+			"fighter/chrom/motion/body/c01/c01attacks3lw.nuanmb"
+		],
+        "fighter/chrom/c02": [
+			"fighter/chrom/motion/body/c02/c00attack12.nuanmb",
+			"fighter/chrom/motion/body/c02/c01attacks3hi.nuanmb",
+			"fighter/chrom/motion/body/c02/c01attacks3lw.nuanmb"
+		],
+        "fighter/chrom/c03": [
+			"fighter/chrom/motion/body/c03/c00attack12.nuanmb",
+			"fighter/chrom/motion/body/c03/c01attacks3hi.nuanmb",
+			"fighter/chrom/motion/body/c03/c01attacks3lw.nuanmb"
+		],
+        "fighter/chrom/c04": [
+			"fighter/chrom/motion/body/c04/c00attack12.nuanmb",
+			"fighter/chrom/motion/body/c04/c01attacks3hi.nuanmb",
+			"fighter/chrom/motion/body/c04/c01attacks3lw.nuanmb"
+		],
+        "fighter/chrom/c05": [
+			"fighter/chrom/motion/body/c05/c00attack12.nuanmb",
+			"fighter/chrom/motion/body/c05/c01attacks3hi.nuanmb",
+			"fighter/chrom/motion/body/c05/c01attacks3lw.nuanmb"
+		],
+        "fighter/chrom/c06": [
+			"fighter/chrom/motion/body/c06/c00attack12.nuanmb",
+			"fighter/chrom/motion/body/c06/c01attacks3hi.nuanmb",
+			"fighter/chrom/motion/body/c06/c01attacks3lw.nuanmb"
+		],
+        "fighter/chrom/c07": [
+			"fighter/chrom/motion/body/c07/c00attack12.nuanmb",
+			"fighter/chrom/motion/body/c07/c01attacks3hi.nuanmb",
+			"fighter/chrom/motion/body/c07/c01attacks3lw.nuanmb"
+		],
+        "fighter/master/c00": [
+			"fighter/master/motion/body/c00/c05attackairn2.nuanmb"
+		],
+        "fighter/master/c01": [
+			"fighter/master/motion/body/c01/c05attackairn2.nuanmb"
+		],
+        "fighter/master/c02": [
+			"fighter/master/motion/body/c02/c05attackairn2.nuanmb"
+		],
+        "fighter/master/c03": [
+			"fighter/master/motion/body/c03/c05attackairn2.nuanmb"
+		],
+        "fighter/master/c04": [
+			"fighter/master/motion/body/c04/c05attackairn2.nuanmb"
+		],
+        "fighter/master/c05": [
+			"fighter/master/motion/body/c05/c05attackairn2.nuanmb"
+		],
+        "fighter/master/c06": [
+			"fighter/master/motion/body/c06/c05attackairn2.nuanmb"
+		],
+        "fighter/master/c07": [
+			"fighter/master/motion/body/c07/c05attackairn2.nuanmb"
+		],
+        "fighter/lucina/c00": [
+			"fighter/lucina/motion/body/c00/c05attackairhi2.nuanmb",
+			"fighter/lucina/motion/body/c00/c05attackairn2.nuanmb",
+			"fighter/lucina/motion/body/c00/c05attackairf2.nuanmb",
+			"fighter/lucina/motion/body/c00/c05attackairb2.nuanmb",
+			"fighter/lucina/motion/body/c00/d01specials.nuanmb",
+			"fighter/lucina/motion/body/c00/d01specialairs.nuanmb",
+			"fighter/lucina/motion/body/c00/d02specialhi1.nuanmb",
+			"fighter/lucina/motion/body/c00/d02specialhi2.nuanmb",
+			"fighter/lucina/motion/body/c00/d02specialhi3.nuanmb"
+		],
+        "fighter/lucina/c01": [
+			"fighter/lucina/motion/body/c01/c05attackairhi2.nuanmb",
+			"fighter/lucina/motion/body/c01/c05attackairf2.nuanmb",
+			"fighter/lucina/motion/body/c01/c05attackairn2.nuanmb",
+			"fighter/lucina/motion/body/c01/c05attackairb2.nuanmb",
+			"fighter/lucina/motion/body/c01/d01specials.nuanmb",
+			"fighter/lucina/motion/body/c01/d01specialairs.nuanmb",
+			"fighter/lucina/motion/body/c01/d02specialhi1.nuanmb",
+			"fighter/lucina/motion/body/c01/d02specialhi2.nuanmb",
+			"fighter/lucina/motion/body/c01/d02specialhi3.nuanmb"
+		],
+        "fighter/lucina/c02": [
+			"fighter/lucina/motion/body/c02/c05attackairhi2.nuanmb",
+			"fighter/lucina/motion/body/c02/c05attackairf2.nuanmb",
+			"fighter/lucina/motion/body/c02/c05attackairn2.nuanmb",
+			"fighter/lucina/motion/body/c02/c05attackairb2.nuanmb",
+			"fighter/lucina/motion/body/c02/d01specials.nuanmb",
+			"fighter/lucina/motion/body/c02/d01specialairs.nuanmb",
+			"fighter/lucina/motion/body/c02/d02specialhi1.nuanmb",
+			"fighter/lucina/motion/body/c02/d02specialhi2.nuanmb",
+			"fighter/lucina/motion/body/c02/d02specialhi3.nuanmb"
+		],
+        "fighter/lucina/c03": [
+			"fighter/lucina/motion/body/c03/c05attackairhi2.nuanmb",
+			"fighter/lucina/motion/body/c03/c05attackairf2.nuanmb",
+			"fighter/lucina/motion/body/c03/c05attackairn2.nuanmb",
+			"fighter/lucina/motion/body/c03/c05attackairb2.nuanmb",
+			"fighter/lucina/motion/body/c03/d01specials.nuanmb",
+			"fighter/lucina/motion/body/c03/d01specialairs.nuanmb",
+			"fighter/lucina/motion/body/c03/d02specialhi1.nuanmb",
+			"fighter/lucina/motion/body/c03/d02specialhi2.nuanmb",
+			"fighter/lucina/motion/body/c03/d02specialhi3.nuanmb"
+		],
+        "fighter/lucina/c04": [
+			"fighter/lucina/motion/body/c04/c05attackairhi2.nuanmb",
+			"fighter/lucina/motion/body/c04/c05attackairf2.nuanmb",
+			"fighter/lucina/motion/body/c04/c05attackairn2.nuanmb",
+			"fighter/lucina/motion/body/c04/c05attackairb2.nuanmb",
+			"fighter/lucina/motion/body/c04/d01specials.nuanmb",
+			"fighter/lucina/motion/body/c04/d01specialairs.nuanmb",
+			"fighter/lucina/motion/body/c04/d02specialhi1.nuanmb",
+			"fighter/lucina/motion/body/c04/d02specialhi2.nuanmb",
+			"fighter/lucina/motion/body/c04/d02specialhi3.nuanmb"
+		],
+        "fighter/lucina/c05": [
+			"fighter/lucina/motion/body/c05/c05attackairhi2.nuanmb",
+			"fighter/lucina/motion/body/c05/c05attackairf2.nuanmb",
+			"fighter/lucina/motion/body/c05/c05attackairn2.nuanmb",
+			"fighter/lucina/motion/body/c05/c05attackairb2.nuanmb",
+			"fighter/lucina/motion/body/c05/d01specials.nuanmb",
+			"fighter/lucina/motion/body/c05/d01specialairs.nuanmb",
+			"fighter/lucina/motion/body/c05/d02specialhi1.nuanmb",
+			"fighter/lucina/motion/body/c05/d02specialhi2.nuanmb",
+			"fighter/lucina/motion/body/c05/d02specialhi3.nuanmb"
+		],
+        "fighter/lucina/c06": [
+			"fighter/lucina/motion/body/c06/c05attackairhi2.nuanmb",
+			"fighter/lucina/motion/body/c06/c05attackairf2.nuanmb",
+			"fighter/lucina/motion/body/c06/c05attackairn2.nuanmb",
+			"fighter/lucina/motion/body/c06/c05attackairb2.nuanmb",
+			"fighter/lucina/motion/body/c06/d01specials.nuanmb",
+			"fighter/lucina/motion/body/c06/d01specialairs.nuanmb",
+			"fighter/lucina/motion/body/c06/d02specialhi1.nuanmb",
+			"fighter/lucina/motion/body/c06/d02specialhi2.nuanmb",
+			"fighter/lucina/motion/body/c06/d02specialhi3.nuanmb"
+		],
+        "fighter/lucina/c07": [
+			"fighter/lucina/motion/body/c07/c05attackairhi2.nuanmb",
+			"fighter/lucina/motion/body/c07/c05attackairf2.nuanmb",
+			"fighter/lucina/motion/body/c07/c05attackairn2.nuanmb",
+			"fighter/lucina/motion/body/c07/c05attackairb2.nuanmb",
+			"fighter/lucina/motion/body/c07/d01specials.nuanmb",
+			"fighter/lucina/motion/body/c07/d01specialairs.nuanmb",
+			"fighter/lucina/motion/body/c07/d02specialhi1.nuanmb",
+			"fighter/lucina/motion/body/c07/d02specialhi2.nuanmb",
+			"fighter/lucina/motion/body/c07/d02specialhi3.nuanmb"
+		],
+        "fighter/kirby/c00": [
+			"fighter/kirby/model/finalcutter/c00/def_ultrasword_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c00/def_ultrasword_001_nor.nutexb",
+			"fighter/kirby/model/finalcutter/c00/def_ultrasword_001_prm.nutexb",
+			"fighter/kirby/motion/body/c00/d02specialinput.nuanmb",
+			"fighter/kirby/model/finalcutter/c00/def_parasol_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c00/def_spear_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c00/def_speartip_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c00/def_wandball_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c00/def_wandhandle_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c00/def_wheel_001_col.nutexb",
+			"fighter/kirby/motion/finalcutter/c00/d02specialhi5.nuanmb"
+		],
+        "fighter/kirby/c01": [
+			"fighter/kirby/model/finalcutter/c01/def_ultrasword_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c01/def_ultrasword_001_nor.nutexb",
+			"fighter/kirby/model/finalcutter/c01/def_ultrasword_001_prm.nutexb",
+			"fighter/kirby/motion/body/c01/d02specialinput.nuanmb",
+			"fighter/kirby/model/finalcutter/c01/def_parasol_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c01/def_spear_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c01/def_speartip_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c01/def_wandball_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c01/def_wandhandle_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c01/def_wheel_001_col.nutexb",
+			"fighter/kirby/motion/finalcutter/c01/d02specialhi5.nuanmb"
+		],
+        "fighter/kirby/c02": [
+			"fighter/kirby/model/finalcutter/c02/def_ultrasword_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c02/def_ultrasword_001_nor.nutexb",
+			"fighter/kirby/model/finalcutter/c02/def_ultrasword_001_prm.nutexb",
+			"fighter/kirby/motion/body/c02/d02specialinput.nuanmb",
+			"fighter/kirby/model/finalcutter/c02/def_parasol_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c02/def_spear_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c02/def_speartip_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c02/def_wandball_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c02/def_wandhandle_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c02/def_wheel_001_col.nutexb",
+			"fighter/kirby/motion/finalcutter/c02/d02specialhi5.nuanmb"
+		],
+        "fighter/kirby/c03": [
+			"fighter/kirby/model/finalcutter/c03/def_ultrasword_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c03/def_ultrasword_001_nor.nutexb",
+			"fighter/kirby/model/finalcutter/c03/def_ultrasword_001_prm.nutexb",
+			"fighter/kirby/motion/body/c03/d02specialinput.nuanmb",
+			"fighter/kirby/model/finalcutter/c03/def_parasol_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c03/def_spear_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c03/def_speartip_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c03/def_wandball_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c03/def_wandhandle_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c03/def_wheel_001_col.nutexb",
+			"fighter/kirby/motion/finalcutter/c03/d02specialhi5.nuanmb"
+		],
+        "fighter/kirby/c04": [
+			"fighter/kirby/model/finalcutter/c04/def_ultrasword_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c04/def_ultrasword_001_nor.nutexb",
+			"fighter/kirby/model/finalcutter/c04/def_ultrasword_001_prm.nutexb",
+			"fighter/kirby/motion/body/c04/d02specialinput.nuanmb",
+			"fighter/kirby/model/finalcutter/c04/def_parasol_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c04/def_spear_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c04/def_speartip_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c04/def_wandball_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c04/def_wandhandle_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c04/def_wheel_001_col.nutexb",
+			"fighter/kirby/motion/finalcutter/c04/d02specialhi5.nuanmb"
+		],
+        "fighter/kirby/c05": [
+			"fighter/kirby/model/finalcutter/c05/def_ultrasword_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c05/def_ultrasword_001_nor.nutexb",
+			"fighter/kirby/model/finalcutter/c05/def_ultrasword_001_prm.nutexb",
+			"fighter/kirby/motion/body/c05/d02specialinput.nuanmb",
+			"fighter/kirby/model/finalcutter/c05/def_parasol_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c05/def_spear_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c05/def_speartip_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c05/def_wandball_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c05/def_wandhandle_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c05/def_wheel_001_col.nutexb",
+			"fighter/kirby/motion/finalcutter/c05/d02specialhi5.nuanmb"
+		],
+        "fighter/kirby/c06": [
+			"fighter/kirby/model/finalcutter/c06/def_ultrasword_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c06/def_ultrasword_001_nor.nutexb",
+			"fighter/kirby/model/finalcutter/c06/def_ultrasword_001_prm.nutexb",
+			"fighter/kirby/motion/body/c06/d02specialinput.nuanmb",
+			"fighter/kirby/model/finalcutter/c06/def_parasol_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c06/def_spear_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c06/def_speartip_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c06/def_wandball_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c06/def_wandhandle_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c06/def_wheel_001_col.nutexb",
+			"fighter/kirby/motion/finalcutter/c06/d02specialhi5.nuanmb"
+		],
+        "fighter/kirby/c07": [
+			"fighter/kirby/model/finalcutter/c07/def_ultrasword_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c07/def_ultrasword_001_nor.nutexb",
+			"fighter/kirby/model/finalcutter/c07/def_ultrasword_001_prm.nutexb",
+			"fighter/kirby/motion/body/c07/d02specialinput.nuanmb",
+			"fighter/kirby/model/finalcutter/c07/def_parasol_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c07/def_spear_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c07/def_speartip_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c07/def_wandball_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c07/def_wandhandle_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c07/def_wheel_001_col.nutexb",
+			"fighter/kirby/motion/finalcutter/c07/d02specialhi5.nuanmb"
+		]
+	}
+}

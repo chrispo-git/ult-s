@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<struct>
+  <list hash="param_special_n">
+    <struct index="0">
+      <int hash="wait_frame_max">80</int>
+    </struct>
+    <hash40 index="1">dummy</hash40>
+    <hash40 index="2">dummy</hash40>
+    <hash40 index="3">dummy</hash40>
+  </list>
+  <list hash="param_special_s">
+    <struct index="0">
+      <int hash="interval_time">1</int>
+    </struct>
+    <hash40 index="1">dummy</hash40>
+    <hash40 index="2">dummy</hash40>
+    <hash40 index="3">dummy</hash40>
+  </list>
+  <list hash="param_special_lw">
+    <struct index="0">
+      <float hash="gass_max_time">1000000000</float>
+      <float hash="gass_middle_time">0</float>
+      <float hash="gass_large_time">15</float>
+    </struct>
+    <hash40 index="1">dummy</hash40>
+    <hash40 index="2">dummy</hash40>
+    <hash40 index="3">dummy</hash40>
+  </list>
+</struct>

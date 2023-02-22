@@ -48,6 +48,17 @@ def ranker(chosen_check, is_print):
     for i in range(1,11):
       x = sort_rank[i*-1]
       print(x[0] + " " + str(x[1]))
+    print("AVERAGES")
+    total = 0
+    median = 0
+    for i in range(0, 89):
+      x = sort_rank[i]
+      total += x[1]
+      if i == 44:
+        median = x[1]
+    mean = total/89
+    print("Mean: " + str(mean) )
+    print("Median: " + str(median))
   chosen_check = chosen_check.replace("<", "")
   chosen_check = chosen_check.replace(">", "")
   chosen_check = chosen_check.replace("hash=", "")
@@ -131,7 +142,4 @@ if x == 'rank_all':
   ranker('<float hash="jump_speed_x_max">', False)
 else:
   ranker(x, True)
-
-
-
-
+  input("")

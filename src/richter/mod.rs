@@ -435,6 +435,19 @@ fn richter_kirby_frame(fighter: &mut L2CFighterCommon) {
 		};
     }
 }
+#[acmd_script(
+    agent = "richter",
+    script =  "effect_landingheavy",
+    category = ACMD_EFFECT)]
+unsafe fn richter_landing(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=2)
+		if(is_excute){
+			LANDING_EFFECT(hash40("sys_landing_smoke"), hash40("top"), 0, 0, 0, 0, 0, 0, 0.9, 0, 0, 0, 0, 0, 0, true)
+		}
+    });
+}	
 
 		
 pub fn install() {
@@ -453,7 +466,8 @@ pub fn install() {
 		richter_dashback,
 		richter_axe,
 		richter_axe_eff,
-		richter_neutralb
+		richter_neutralb,
+		richter_landing
     );
     smashline::install_agent_frames!(richter_frame, richter_kirby_frame);
 }

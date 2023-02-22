@@ -1,0 +1,35 @@
+name: rust_build_small
+on: 
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+jobs:
+  pr_build:
+    env:
+      PLUGIN_NAME: plugin
+    runs-on: ubuntu-20.04
+    container: 
+      image: jugeeya/cargo-skyline:3.2.0-no-dkp
+    steps:
+    - name: setup python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.9' 
+    
+    - name: checkout version
+      uses: actions/checkout@v2
+    # build the project
+    - run: |
+        cd scripts && python3 build_small.py
+      env:
+        HOME: /root
+    - name: Upload plugin
+      uses: actions/upload-artifact@v3
+      env:
+        HOME: /root
+      with:
+        name: Ultimate S Arcropolis (plugin and common files only)
+        path: releases
