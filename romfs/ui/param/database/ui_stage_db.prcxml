@@ -58,7 +58,7 @@
       <sbyte hash="disp_order">36</sbyte>
     </struct>
     <struct index="20">
-      <sbyte hash="disp_order">30</sbyte>
+      <sbyte hash="disp_order">61</sbyte>
     </struct>
     <struct index="21">
       <sbyte hash="disp_order">20</sbyte>
@@ -172,7 +172,7 @@
     </struct>
     <hash40 index="61">dummy</hash40>
     <struct index="62">
-      <sbyte hash="disp_order">61</sbyte>
+      <sbyte hash="disp_order">30</sbyte>
     </struct>
     <struct index="63">
       <sbyte hash="disp_order">63</sbyte>

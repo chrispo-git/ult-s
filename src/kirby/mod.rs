@@ -1082,7 +1082,7 @@ unsafe fn kirby_sideb_eff(fighter: &mut L2CAgentBase) {
     acmd!(lua_state, {	
 		frame(Frame=16)
 		if(is_excute){
-			EFFECT_FOLLOW(hash40("sys_hit_magic"), hash40("havel"), 3.7, -3.2, 0, 0, 0, 0, 0.3, true)
+			EFFECT_FOLLOW(hash40("sys_hit_magic"), hash40("have"), 0.0, 5.2, 13.5, 0, 0, 0, 0.3, true)
 		}
     });
 }
