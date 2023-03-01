@@ -2357,6 +2357,9 @@ pub(crate) unsafe fn dmg_vc(fighter: &mut L2CAgentBase) -> () {
 }
 pub(crate) unsafe fn dmg_fly_vc(fighter: &mut L2CAgentBase) -> () {
 	let rand_val = smash::app::sv_math::rand(hash40("fighter"), 3);
+	macros::STOP_SE(fighter, Hash40::new("se_murabito_attackair_l02"));
+	macros::STOP_SE(fighter, Hash40::new("se_murabito_attackair_l03"));
+	macros::STOP_SE(fighter, Hash40::new("se_murabito_attackair_l01"));
 	match rand_val {
 		0 => macros::PLAY_SE(fighter, Hash40::new("se_murabito_attackair_l02")),
 		1 => macros::PLAY_SE(fighter, Hash40::new("se_murabito_attackair_l03")),
