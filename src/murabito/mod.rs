@@ -2093,6 +2093,80 @@ unsafe fn toad_down_attack_u_eff(fighter: &mut L2CAgentBase) {
 		}
     });
 }	
+#[acmd_script(
+    agent = "murabito",
+    scripts =  ["effect_appealhir", "effect_appealhil"],
+    category = ACMD_EFFECT,
+	low_priority)]
+unsafe fn toad_utaunt_eff(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=50)
+		if(is_excute){
+			LANDING_EFFECT(hash40("sys_down_smoke"), hash40("top"), 0, 0, 0, 0, 0, 0, 0.8, 0, 0, 0, 0, 0, 0, false)
+			LANDING_EFFECT(hash40("sys_down_smoke"), hash40("top"), 0, 0, 0, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, false)
+			LANDING_EFFECT(hash40("sys_landing_smoke_s"), hash40("top"), 0, 0, 0, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, false)
+		}
+    });
+}	
+#[acmd_script(
+    agent = "murabito",
+    scripts =  ["sound_appealhir", "sound_appealhil"],
+    category = ACMD_SOUND,
+	low_priority)]
+unsafe fn toad_utaunt_snd(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=14)
+		if(is_excute){
+			PLAY_SE(hash40("se_murabito_attackair_b02"))
+		}
+		frame(Frame=50)
+		if(is_excute){
+			PLAY_SE(hash40("se_common_landing_soil"))
+		}
+		frame(Frame=53)
+		if(is_excute){
+			PLAY_SE(hash40("se_murabito_attackair_h02"))
+		}
+    });
+}	
+#[acmd_script(
+    agent = "murabito",
+    scripts =  ["effect_appealsr", "effect_appealsl"],
+    category = ACMD_EFFECT,
+	low_priority)]
+unsafe fn toad_staunt_eff(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=103)
+		if(is_excute){
+			LANDING_EFFECT(hash40("sys_down_smoke"), hash40("top"), 0, 0, 0, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, false)
+		}
+    });
+}	
+#[acmd_script(
+    agent = "murabito",
+    scripts =  ["sound_appealsr", "sound_appealsl"],
+    category = ACMD_SOUND,
+	low_priority)]
+unsafe fn toad_staunt_snd(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=48)
+		if(is_excute){
+			PLAY_SE(hash40("se_murabito_attackair_h03"))
+		}
+		frame(Frame=103)
+		if(is_excute){
+			PLAY_SE(hash40("se_murabito_attackhard_l01"))
+		}
+		frame(Frame=127)
+		if(is_excute){
+			PLAY_SE(hash40("se_murabito_attackhard_s01"))
+		}
+    });
+}	
 #[weapon_frame( agent = WEAPON_KIND_MURABITO_BOWLING_BALL )]
 fn bob_omb_frame(weapon: &mut L2CFighterBase) {
     unsafe {
@@ -2549,7 +2623,13 @@ pub fn install() {
 		//Final
 		toad_final,
 		toad_final_toad_army,
-		toad_final_toad_army_eff
+		toad_final_toad_army_eff,
+
+		//Taunts
+		toad_utaunt_eff,
+		toad_staunt_eff,
+		toad_utaunt_snd,
+		toad_staunt_snd
     );
     install_agent_resets!(
         agent_reset
