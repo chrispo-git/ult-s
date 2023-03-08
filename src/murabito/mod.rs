@@ -964,6 +964,7 @@ unsafe fn toad_neutralb_snd(fighter: &mut L2CAgentBase) {
 	low_priority)]
 unsafe fn toad_catch(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
+	ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_MURABITO_GENERATE_ARTICLE_BUTTERFLYNET,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
     acmd!(lua_state, {
 		frame(Frame=5)
 		if(is_excute){
@@ -1009,6 +1010,7 @@ unsafe fn toad_catch_snd(fighter: &mut L2CAgentBase) {
 	low_priority)]
 unsafe fn toad_catchdash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
+	ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_MURABITO_GENERATE_ARTICLE_BUTTERFLYNET,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
     acmd!(lua_state, {
 		frame(Frame=8)
 		if(is_excute){
@@ -1054,6 +1056,7 @@ unsafe fn toad_catchdash_snd(fighter: &mut L2CAgentBase) {
 	low_priority)]
 unsafe fn toad_catchturn(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
+	ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_MURABITO_GENERATE_ARTICLE_BUTTERFLYNET,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
     acmd!(lua_state, {
 		frame(Frame=9)
 		if(is_excute){
@@ -2167,6 +2170,47 @@ unsafe fn toad_staunt_snd(fighter: &mut L2CAgentBase) {
 		}
     });
 }	
+#[acmd_script(
+    agent = "murabito",
+    scripts =  ["game_appeallwl", "game_appeallwr"],
+    category = ACMD_GAME,
+	low_priority)]
+unsafe fn toad_dtaunt(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=16)
+		if(is_excute){
+			EFFECT(hash40("sys_erace_smoke"), hash40("haver"), 0, 0, 0, 0, 0, 0, 0.85, 0, 0, 0, 0, 0, 0, false)
+		}
+		frame(Frame=17)
+		if(is_excute){
+			ArticleModule::generate_article(FIGHTER_MURABITO_GENERATE_ARTICLE_BUTTERFLYNET, false, 0)
+		}
+		frame(Frame=46)
+		if(is_excute){
+			EFFECT(hash40("sys_erace_smoke"), hash40("haver"), 0, 0, 0, 0, 0, 0, 0.85, 0, 0, 0, 0, 0, 0, false)
+		}
+		frame(Frame=48)
+		if(is_excute){
+			ArticleModule::remove_exist(FIGHTER_MURABITO_GENERATE_ARTICLE_BUTTERFLYNET,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL))
+		}
+    });
+}	
+#[acmd_script(
+    agent = "murabito",
+    scripts =  ["game_entryl", "game_entryr"],
+    category = ACMD_SOUND,
+	low_priority)]
+unsafe fn toad_entry(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=46)
+		if(is_excute){
+			ArticleModule::remove_exist(FIGHTER_MURABITO_GENERATE_ARTICLE_HOUSE,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL))
+			EFFECT(hash40("sys_erace_smoke"), hash40("top"), 0, 6, -8, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, false)
+		}
+    });
+}	
 #[weapon_frame( agent = WEAPON_KIND_MURABITO_BOWLING_BALL )]
 fn bob_omb_frame(weapon: &mut L2CFighterBase) {
     unsafe {
@@ -2270,6 +2314,9 @@ pub fn toad(fighter : &mut L2CFighterCommon) {
 					};
 				};
 			};
+			if ![*FIGHTER_STATUS_KIND_APPEAL].contains(&status_kind) {
+				ArticleModule::remove_exist(boma, *FIGHTER_MURABITO_GENERATE_ARTICLE_BUTTERFLYNET,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
+			};
 			if ![*FIGHTER_MURABITO_STATUS_KIND_SPECIAL_HI_DETACH].contains(&status_kind) {
 				ArticleModule::remove_exist(boma, *FIGHTER_MURABITO_GENERATE_ARTICLE_HELMET,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
 			};
@@ -2348,7 +2395,6 @@ pub fn toad(fighter : &mut L2CFighterCommon) {
 				CAN_NEUTRALB[ENTRY_ID] = 0;
 			};
 			//ArticleModule::remove_exist(boma, *FIGHTER_MURABITO_GENERATE_ARTICLE_CLAYROCKET,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
-			ArticleModule::remove_exist(boma, *FIGHTER_MURABITO_GENERATE_ARTICLE_BUTTERFLYNET,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
 			ArticleModule::remove_exist(boma, *FIGHTER_MURABITO_GENERATE_ARTICLE_BALLOON,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
 			WorkModule::off_flag(boma, *FIGHTER_MURABITO_INSTANCE_WORK_ID_FLAG_CATCHING);
 			if [*FIGHTER_STATUS_KIND_SPECIAL_S].contains(&status_kind) {
@@ -2629,7 +2675,11 @@ pub fn install() {
 		toad_utaunt_eff,
 		toad_staunt_eff,
 		toad_utaunt_snd,
-		toad_staunt_snd
+		toad_staunt_snd,
+		toad_dtaunt,
+
+		//Victory and Entry
+		toad_entry
     );
     install_agent_resets!(
         agent_reset
