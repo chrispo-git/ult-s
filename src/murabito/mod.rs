@@ -2198,8 +2198,72 @@ unsafe fn toad_dtaunt(fighter: &mut L2CAgentBase) {
 }	
 #[acmd_script(
     agent = "murabito",
-    scripts =  ["game_entryl", "game_entryr"],
+    scripts =  ["sound_appeallwr", "sound_appeallwl"],
     category = ACMD_SOUND,
+	low_priority)]
+unsafe fn toad_dtaunt_snd(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=16)
+		if(is_excute){
+			PLAY_SE(hash40("se_murabito_special_h03"))
+		}
+		frame(Frame=46)
+		if(is_excute){
+			PLAY_SE(hash40("se_murabito_appear03"))
+		}
+    });
+}	
+#[acmd_script(
+    agent = "murabito",
+    scripts =  ["game_win1"],
+    category = ACMD_GAME,
+	low_priority)]
+unsafe fn toad_win1(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		if(is_excute){
+			ArticleModule::remove_exist(FIGHTER_MURABITO_GENERATE_ARTICLE_BEETLE,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL))
+		}
+    });
+}	
+#[acmd_script(
+    agent = "murabito",
+    scripts =  ["game_win3"],
+    category = ACMD_GAME,
+	low_priority)]
+unsafe fn toad_win3(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		if(is_excute){
+			ArticleModule::generate_article(FIGHTER_MURABITO_GENERATE_ARTICLE_BEETLE, false, 0)
+			ArticleModule::change_motion(FIGHTER_MURABITO_GENERATE_ARTICLE_BEETLE,smash::phx::Hash40::new("win_1"),false,0.0)
+		}
+    });
+}	
+#[acmd_script(
+    agent = "murabito",
+    scripts =  ["effect_win3", "effect_win3wait"],
+    category = ACMD_EFFECT,
+	low_priority)]
+unsafe fn toad_win3_eff(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		for(9999 Iterations){
+			if(is_excute){
+				EFFECT(hash40("sys_erace_smoke"), hash40("top"), 37, 7, 20, 0, 0, 0, 1.2, 0, 0, 0, 0, 0, 0, false)
+				EFFECT(hash40("sys_erace_smoke"), hash40("top"), 7, 7, 20, 0, 0, 0, 1.2, 0, 0, 0, 0, 0, 0, false)
+				EFFECT(hash40("sys_erace_smoke"), hash40("top"), 37, 7, -25, 0, 0, 0, 1.2, 0, 0, 0, 0, 0, 0, false)
+				EFFECT(hash40("sys_erace_smoke"), hash40("top"), 7, 7, -25, 0, 0, 0, 1.2, 0, 0, 0, 0, 0, 0, false)
+			}
+			wait(Frames=10)
+		}
+    });
+}	
+#[acmd_script(
+    agent = "murabito",
+    scripts =  ["game_entryl", "game_entryr"],
+    category = ACMD_GAME,
 	low_priority)]
 unsafe fn toad_entry(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
@@ -2677,9 +2741,12 @@ pub fn install() {
 		toad_utaunt_snd,
 		toad_staunt_snd,
 		toad_dtaunt,
+		toad_dtaunt_snd,
 
 		//Victory and Entry
-		toad_entry
+		toad_entry,
+		toad_win1,
+		toad_win3
     );
     install_agent_resets!(
         agent_reset

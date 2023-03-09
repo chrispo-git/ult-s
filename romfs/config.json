@@ -17,6 +17,8 @@
             "fighter/murabito/model/weeds/c00/block_prm.nutexb",
             "fighter/murabito/model/clayrocket/c00/skin_murabito_001_col.nutexb",
             "fighter/murabito/model/clayrocket/c00/skin_murabito_001_nor.nutexb",
+            "fighter/murabito/model/beetle/c00/skin_murabito_001_col.nutexb",
+            "fighter/murabito/model/beetle/c00/skin_murabito_001_nor.nutexb",
             "fighter/murabito/motion/body/c00/j01appeallwl.nuanmb"
         ],
         "fighter/murabito/c01": [
@@ -37,6 +39,8 @@
                 "fighter/murabito/model/weeds/c01/block_prm.nutexb",
                 "fighter/murabito/model/clayrocket/c01/skin_murabito_001_col.nutexb",
                 "fighter/murabito/model/clayrocket/c01/skin_murabito_001_nor.nutexb",
+                "fighter/murabito/model/beetle/c01/skin_murabito_001_col.nutexb",
+                "fighter/murabito/model/beetle/c01/skin_murabito_001_nor.nutexb",
                 "fighter/murabito/motion/body/c01/j01appeallwl.nuanmb"
         ],
         "fighter/murabito/c02": [
@@ -56,6 +60,8 @@
                 "fighter/murabito/model/weeds/c02/block_prm.nutexb",
                 "fighter/murabito/model/clayrocket/c02/skin_murabito_001_col.nutexb",
                 "fighter/murabito/model/clayrocket/c02/skin_murabito_001_nor.nutexb",
+                "fighter/murabito/model/beetle/c02/skin_murabito_001_col.nutexb",
+                "fighter/murabito/model/beetle/c02/skin_murabito_001_nor.nutexb",
                 "fighter/murabito/motion/body/c02/j01appeallwl.nuanmb"
         ],
         "fighter/murabito/c03": [
@@ -76,6 +82,8 @@
                 "fighter/murabito/model/weeds/c03/block_prm.nutexb",
                 "fighter/murabito/model/clayrocket/c03/skin_murabito_001_col.nutexb",
                 "fighter/murabito/model/clayrocket/c03/skin_murabito_001_nor.nutexb",
+                "fighter/murabito/model/beetle/c03/skin_murabito_001_col.nutexb",
+                "fighter/murabito/model/beetle/c03/skin_murabito_001_nor.nutexb",
                 "fighter/murabito/motion/body/c03/j01appeallwl.nuanmb"
         ],
         "fighter/murabito/c04": [
@@ -95,6 +103,8 @@
                 "fighter/murabito/model/weeds/c04/block_prm.nutexb",
                 "fighter/murabito/model/clayrocket/c04/skin_murabito_001_col.nutexb",
                 "fighter/murabito/model/clayrocket/c04/skin_murabito_001_nor.nutexb",
+                "fighter/murabito/model/beetle/c04/skin_murabito_001_col.nutexb",
+                "fighter/murabito/model/beetle/c04/skin_murabito_001_nor.nutexb",
                 "fighter/murabito/motion/body/c04/j01appeallwl.nuanmb"
         ],
         "fighter/murabito/c05": [
@@ -118,6 +128,8 @@
                 "fighter/murabito/model/weeds/c05/block_prm.nutexb",
                 "fighter/murabito/model/clayrocket/c05/skin_murabito_001_col.nutexb",
                 "fighter/murabito/model/clayrocket/c05/skin_murabito_001_nor.nutexb",
+                "fighter/murabito/model/beetle/c05/skin_murabito_001_col.nutexb",
+                "fighter/murabito/model/beetle/c05/skin_murabito_001_nor.nutexb",
                 "fighter/murabito/motion/body/c05/j01appeallwl.nuanmb"
         ],
         "fighter/murabito/c06": [
@@ -137,6 +149,8 @@
                 "fighter/murabito/model/weeds/c06/block_prm.nutexb",
                 "fighter/murabito/model/clayrocket/c06/skin_murabito_001_col.nutexb",
                 "fighter/murabito/model/clayrocket/c06/skin_murabito_001_nor.nutexb",
+                "fighter/murabito/model/beetle/c06/skin_murabito_001_col.nutexb",
+                "fighter/murabito/model/beetle/c06/skin_murabito_001_nor.nutexb",
                 "fighter/murabito/motion/body/c06/j01appeallwl.nuanmb"
         ],
         "fighter/murabito/c07": [
@@ -159,6 +173,8 @@
                 "fighter/murabito/model/weeds/c07/block_prm.nutexb",
                 "fighter/murabito/model/clayrocket/c07/skin_murabito_001_col.nutexb",
                 "fighter/murabito/model/clayrocket/c07/skin_murabito_001_nor.nutexb",
+                "fighter/murabito/model/beetle/c07/skin_murabito_001_col.nutexb",
+                "fighter/murabito/model/beetle/c07/skin_murabito_001_nor.nutexb",
                 "fighter/murabito/motion/body/c07/j01appeallwl.nuanmb"
         ],
 		"fighter/jack/c00": [
