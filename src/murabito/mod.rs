@@ -2243,6 +2243,53 @@ unsafe fn toad_win3(fighter: &mut L2CAgentBase) {
 }	
 #[acmd_script(
     agent = "murabito",
+    scripts =  ["effect_win2"],
+    category = ACMD_EFFECT,
+	low_priority)]
+unsafe fn toad_win2_eff(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		for(5 Iterations){
+			if(is_excute){
+				LANDING_EFFECT(hash40("sys_landing_smoke"), hash40("top"), 0, 0, 0, 0, 0, 0, 0.85, 0, 0, 0, 0, 0, 0, true)
+			}
+			wait(Frames=16)
+		}
+    });
+}	
+#[acmd_script(
+    agent = "murabito",
+    scripts =  ["effect_win1"],
+    category = ACMD_EFFECT,
+	low_priority)]
+unsafe fn toad_win1_eff(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=116)
+		if(is_excute){
+			LANDING_EFFECT(hash40("sys_landing_smoke"), hash40("top"), 0, 0, 0, 0, 0, 0, 0.85, 0, 0, 0, 0, 0, 0, true)
+		}
+    });
+}	
+#[acmd_script(
+    agent = "murabito",
+    scripts =  ["effect_win1wait"],
+    category = ACMD_EFFECT,
+	low_priority)]
+unsafe fn toad_win1wait_eff(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    /*acmd!(lua_state, {
+		for(77 Iterations){
+			if(is_excute){
+				FOOT_EFFECT(hash40("sys_run_smoke"), hash40("trans"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false)
+			}
+			wait(Frames=8)
+		}
+		wait(Frames=38)
+    });*/
+}	
+#[acmd_script(
+    agent = "murabito",
     scripts =  ["effect_win3", "effect_win3wait"],
     category = ACMD_EFFECT,
 	low_priority)]
@@ -2746,7 +2793,10 @@ pub fn install() {
 		//Victory and Entry
 		toad_entry,
 		toad_win1,
-		toad_win3
+		toad_win3,
+		toad_win1_eff,
+		toad_win1wait_eff,
+		toad_win2_eff
     );
     install_agent_resets!(
         agent_reset
