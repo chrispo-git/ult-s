@@ -203,6 +203,13 @@ pub unsafe fn article_hook(boma: &mut smash::app::BattleObjectModuleAccessor, in
 		if [*FIGHTER_MURABITO_GENERATE_ARTICLE_TOMNOOK, *FIGHTER_MURABITO_GENERATE_ARTICLE_MONEYBAG, *FIGHTER_MURABITO_GENERATE_ARTICLE_FURNITURE].contains(&int){
 			return 0
 		}
+		if [*FIGHTER_MURABITO_GENERATE_ARTICLE_BEETLE].contains(&int){
+			if [hash40("win_3"), hash40("win_3_wait")].contains(&MotionModule::motion_kind(boma)) {
+				return original!()(boma, int, arg3, arg4)
+			} else {
+				return 0
+			}
+		}
 		if smash::app::sv_information::is_ready_go() && int == *FIGHTER_MURABITO_GENERATE_ARTICLE_HOUSE{
 			return 0
 		}
