@@ -654,10 +654,8 @@ pub fn faf_change_master(fighter : &mut L2CFighterCommon) {
 			if [hash40("special_lw1_end"), hash40("special_air_lw1_end")].contains(&motion_kind) && frame >= 23.0 {
 				CancelModule::enable_cancel(boma);
 			};
-			if [hash40("special_s3_2"), hash40("special_air_s3_2")].contains(&motion_kind) && frame >= 49.0 {
+			if [hash40("special_s3_2"), hash40("special_air_s3_2")].contains(&motion_kind) && frame >= 46.0 {
 				CancelModule::enable_cancel(boma);
-			};
-			if [hash40("special_lw2_start")].contains(&motion_kind) {
 			};
 			if [hash40("special_s1_start")].contains(&motion_kind) && frame >= 60.0 {
 				CancelModule::enable_cancel(boma);
