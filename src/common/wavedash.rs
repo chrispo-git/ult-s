@@ -9,6 +9,8 @@ use smash::phx::*;
 use smash::lib::{L2CValue, L2CAgent};
 use smash::phx::Vector2f;
 use crate::util::*;
+use std::os::raw::c_int;
+use std::os::raw::c_ulong;
 
 static mut IS_WAVEDASH: [bool; 8] = [false; 8];
 static mut FORCE_WAVEDASH: [bool; 8] = [false; 8];
@@ -73,10 +75,20 @@ pub fn wavedash(fighter : &mut L2CFighterCommon) {
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
 		let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 		if status_kind == *FIGHTER_STATUS_KIND_LANDING {
-			let brake = get_wd_length(fighter_kind);
-			fighter.clear_lua_stack();
-			lua_args!(fighter, FIGHTER_KINETIC_ENERGY_ID_STOP, brake, 0.0);
-			smash::app::sv_kinetic_energy::set_brake(fighter.lua_state_agent);
+			//I fucking hate that i had to do this
+			//Gets new traction by subbing it from the old traction, getting the difference, and making sure it behaves properly. Gets the proper traction
+			let desired_brake = get_wd_length(fighter_kind);
+			let brake = WorkModule::get_param_float(fighter.module_accessor, hash40("ground_brake"), 0);
+			let speed = get_speed_x(boma) * PostureModule::lr(boma);
+			let mut added_speed = brake - desired_brake;
+			if speed < 0.0 {
+				added_speed *= -1.0;
+			};
+			if (speed <= 0.0 && (speed + added_speed) > 0.0) || (speed >= 0.0 && (speed + added_speed) < 0.0) {
+				added_speed = 0.0;
+			};
+			let speed = smash::phx::Vector3f { x: added_speed, y: 0.0, z: 0.0 };
+			KineticModule::add_speed(boma, &speed);
 		};
 		if ![*FIGHTER_KIND_POPO, *FIGHTER_KIND_NANA].contains(&fighter_kind) {
 			if status_kind == *FIGHTER_STATUS_KIND_JUMP_SQUAT {
