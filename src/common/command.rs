@@ -1312,8 +1312,8 @@ pub fn char_input(fighter : &mut L2CFighterCommon) {
 				if [*FIGHTER_STATUS_KIND_ESCAPE_AIR].contains(&status_kind) == false{
 					if INCIN_IS_AIRDASH[ENTRY_ID] == true {
 						if MotionModule::motion_kind(boma) != hash40("attack_dash") {
-							MotionModule::change_motion(boma, smash::phx::Hash40::new("attack_dash"), 2.0, 1.0, false, 0.0, false, false);
-							macros::SET_SPEED_EX(fighter, 0.75, 0.25, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_NONE);
+							MotionModule::change_motion(boma, smash::phx::Hash40::new("attack_dash"), 1.6, 1.0, false, 0.0, false, false);
+							macros::SET_SPEED_EX(fighter, 0.0, 0.25, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_NONE);
 							EffectModule::req_follow(boma, smash::phx::Hash40::new("gaogaen_chop_arm"), smash::phx::Hash40::new("legl"), &INC, &INC, 2.0, true, 0, 0, 0, 0, 0, true, true);
 						} else if MotionModule::frame(boma) >= 14.0 {
 							CancelModule::enable_cancel(boma);
