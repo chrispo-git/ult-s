@@ -970,6 +970,23 @@ unsafe fn doc_upb2(fighter: &mut L2CAgentBase) {
 		}
     });
 }
+#[acmd_script(
+    agent = "mariod",
+    script =  "effect_specialhi2",
+    category = ACMD_EFFECT,
+	low_priority)]
+unsafe fn doc_upb2_eff(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=1)
+			for(12 Iterations) {
+			if(is_excute){
+				EFFECT_FOLLOW_FLIP_ALPHA(hash40("sys_attack_speedline"), hash40("sys_attack_speedline"), hash40("top"), 0, 22, 2.5, 90, 0, 0, 1.4, true, EF_FLIP_YZ, 0.3)
+			}
+			wait(Frames=2)
+		}
+    });
+}
 
 #[acmd_script(
     agent = "mariod",
@@ -1137,6 +1154,7 @@ pub fn install() {
 		doc_nair_eff,
 		doc_upb,
 		doc_upb2,
+		doc_upb2_eff,
 		doc_upb_land,
 		doc_upb_land_snd,
 		doc_upb_land_eff,
