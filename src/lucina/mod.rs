@@ -2118,11 +2118,11 @@ pub fn lucina(fighter : &mut L2CFighterCommon) {
 						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_JUMP_SQUAT, true);
 					};
 				};*/
-				if [hash40("landing_heavy")].contains(&motion_kind) {
+				/*if [hash40("landing_heavy")].contains(&motion_kind) {
 					let decrease_drift  = smash::phx::Vector3f { x: 0.925, y: 1.0, z: 1.0 };
 					println!("icky wavedash!");
 					KineticModule::mul_speed(boma, &decrease_drift, *FIGHTER_KINETIC_ENERGY_ID_GRAVITY);
-				};
+				};*/
 				if [*FIGHTER_STATUS_KIND_JUMP_SQUAT, *FIGHTER_STATUS_KIND_GUARD_ON, *FIGHTER_STATUS_KIND_GUARD_OFF, *FIGHTER_STATUS_KIND_GUARD, *FIGHTER_STATUS_KIND_GUARD_DAMAGE].contains(&status_kind){
 					WorkModule::unable_transition_term(boma, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_ATTACK_HI4_START);
 				};
