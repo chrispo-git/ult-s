@@ -449,10 +449,6 @@ fn kamui_frame(fighter: &mut L2CFighterCommon) {
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_JUMP_SQUAT, true);
 				};
 		};
-		if [*FIGHTER_STATUS_KIND_SPECIAL_LW].contains(&status_kind) {
-			StatusModule::change_status_request_from_script(boma, *FIGHTER_KAMUI_STATUS_KIND_SPECIAL_LW_HIT, true);
-			PostureModule::reverse_lr(boma);
-		};
 		if [*FIGHTER_STATUS_KIND_ATTACK_HI4_START, *FIGHTER_STATUS_KIND_ATTACK_HI4, *FIGHTER_STATUS_KIND_ATTACK_HI4].contains(&status_kind) {
 			EffectModule::kill_kind(boma, smash::phx::Hash40::new("sys_smash_flash"), false, false);
 			EffectModule::kill_kind(boma, smash::phx::Hash40::new("sys_smash_flash_s"), false, false);
