@@ -8,5 +8,5 @@
   <int hash="shield_just_frame">4</int>
   <int hash="hit_stop_delay_flick_frame">1</int>
   <int hash="shield_setoff_catch_frame">1</int>
-  <float hash="damage_fly_correction_max">11</float>
+  <float hash="damage_fly_correction_max">10</float>
 </struct>
