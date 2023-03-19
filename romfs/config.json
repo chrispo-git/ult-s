@@ -1165,35 +1165,43 @@
 		],
         "fighter/sonic/c00": [
 			"fighter/sonic/motion/body/c00/c00attack100.nuanmb",
-			"fighter/sonic/motion/body/c00/d01specialairsstart.nuanmb"
+			"fighter/sonic/motion/body/c00/d01specialairsstart.nuanmb",
+			"fighter/sonic/motion/body/c00/c05attackairfhit.nuanmb"
 		],
         "fighter/sonic/c01": [
 			"fighter/sonic/motion/body/c01/c00attack100.nuanmb",
-			"fighter/sonic/motion/body/c01/d01specialairsstart.nuanmb"
+			"fighter/sonic/motion/body/c01/d01specialairsstart.nuanmb",
+			"fighter/sonic/motion/body/c01/c05attackairfhit.nuanmb"
 		],
         "fighter/sonic/c02": [
 			"fighter/sonic/motion/body/c02/c00attack100.nuanmb",
-			"fighter/sonic/motion/body/c02/d01specialairsstart.nuanmb"
+			"fighter/sonic/motion/body/c02/d01specialairsstart.nuanmb",
+			"fighter/sonic/motion/body/c02/c05attackairfhit.nuanmb"
 		],
         "fighter/sonic/c03": [
 			"fighter/sonic/motion/body/c03/c00attack100.nuanmb",
-			"fighter/sonic/motion/body/c03/d01specialairsstart.nuanmb"
+			"fighter/sonic/motion/body/c03/d01specialairsstart.nuanmb",
+			"fighter/sonic/motion/body/c03/c05attackairfhit.nuanmb"
 		],
         "fighter/sonic/c04": [
 			"fighter/sonic/motion/body/c04/c00attack100.nuanmb",
-			"fighter/sonic/motion/body/c04/d01specialairsstart.nuanmb"
+			"fighter/sonic/motion/body/c04/d01specialairsstart.nuanmb",
+			"fighter/sonic/motion/body/c04/c05attackairfhit.nuanmb"
 		],
         "fighter/sonic/c05": [
 			"fighter/sonic/motion/body/c05/c00attack100.nuanmb",
-			"fighter/sonic/motion/body/c05/d01specialairsstart.nuanmb"
+			"fighter/sonic/motion/body/c05/d01specialairsstart.nuanmb",
+			"fighter/sonic/motion/body/c05/c05attackairfhit.nuanmb"
 		],
         "fighter/sonic/c06": [
 			"fighter/sonic/motion/body/c06/c00attack100.nuanmb",
-			"fighter/sonic/motion/body/c06/d01specialairsstart.nuanmb"
+			"fighter/sonic/motion/body/c06/d01specialairsstart.nuanmb",
+			"fighter/sonic/motion/body/c06/c05attackairfhit.nuanmb"
 		],
         "fighter/sonic/c07": [
 			"fighter/sonic/motion/body/c07/c00attack100.nuanmb",
-			"fighter/sonic/motion/body/c07/d01specialairsstart.nuanmb"
+			"fighter/sonic/motion/body/c07/d01specialairsstart.nuanmb",
+			"fighter/sonic/motion/body/c07/c05attackairfhit.nuanmb"
 		],
         "fighter/wario/c00": [
 			"fighter/wario/motion/body/c00/d01specialairssearch.nuanmb"

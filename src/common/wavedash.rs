@@ -9,10 +9,63 @@ use smash::phx::*;
 use smash::lib::{L2CValue, L2CAgent};
 use smash::phx::Vector2f;
 use crate::util::*;
+use std::os::raw::c_int;
+use std::os::raw::c_ulong;
 
 static mut IS_WAVEDASH: [bool; 8] = [false; 8];
 static mut FORCE_WAVEDASH: [bool; 8] = [false; 8];
 static mut WAVEDASH_DONE: [bool; 8] = [false; 8];
+const TRACTION_MAX: f32 = 0.086;
+const TRACTION_HIGH: f32 = 0.075;
+const TRACTION_MID: f32 = 0.06;
+const TRACTION_LOW: f32 = 0.054;
+const TRACTION_MIN: f32 = 0.045;
+
+pub(crate) fn get_wd_length(fighter_kind : i32) -> f32 {
+	let max = [
+		*FIGHTER_KIND_LITTLEMAC, *FIGHTER_KIND_CHROM, *FIGHTER_KIND_DEMON,
+		*FIGHTER_KIND_PEACH, *FIGHTER_KIND_DAISY, *FIGHTER_KIND_SZEROSUIT,
+		*FIGHTER_KIND_ROCKMAN, *FIGHTER_KIND_CAPTAIN, *FIGHTER_KIND_ROBOT,
+		*FIGHTER_KIND_KEN, *FIGHTER_KIND_RYU, *FIGHTER_KIND_ELIGHT
+	];
+	let high = [
+		*FIGHTER_KIND_MURABITO, *FIGHTER_KIND_ZELDA, *FIGHTER_KIND_GANON,
+		*FIGHTER_KIND_ROY, *FIGHTER_KIND_MIIFIGHTER, *FIGHTER_KIND_LUCAS,
+		*FIGHTER_KIND_KROOL, *FIGHTER_KIND_MARIOD, *FIGHTER_KIND_WOLF,
+		*FIGHTER_KIND_PIKACHU, *FIGHTER_KIND_PICKEL, *FIGHTER_KIND_YOUNGLINK,
+		*FIGHTER_KIND_DONKEY, *FIGHTER_KIND_WIIFIT, *FIGHTER_KIND_PITB,
+		*FIGHTER_KIND_SHEIK, *FIGHTER_KIND_GAOGAEN, *FIGHTER_KIND_DOLLY,
+		*FIGHTER_KIND_DIDDY, *FIGHTER_KIND_PLIZARDON
+	];
+	let low = [
+		*FIGHTER_KIND_PURIN, *FIGHTER_KIND_TANTAN, *FIGHTER_KIND_SONIC,
+		*FIGHTER_KIND_GEKKOUGA, *FIGHTER_KIND_PALUTENA, *FIGHTER_KIND_MARTH,
+		*FIGHTER_KIND_IKE, *FIGHTER_KIND_TOONLINK, *FIGHTER_KIND_LUCARIO,
+		*FIGHTER_KIND_KAMUI, *FIGHTER_KIND_GAMEWATCH, *FIGHTER_KIND_JACK,
+		*FIGHTER_KIND_ROSETTA, *FIGHTER_KIND_RIDLEY, *FIGHTER_KIND_TRAIL,
+		*FIGHTER_KIND_MASTER, *FIGHTER_KIND_BRAVE, *FIGHTER_KIND_PACMAN,
+		*FIGHTER_KIND_SNAKE, *FIGHTER_KIND_METAKNIGHT
+	];
+	let min = [
+		*FIGHTER_KIND_INKLING, *FIGHTER_KIND_LUIGI, *FIGHTER_KIND_SHIZUE,
+		*FIGHTER_KIND_BUDDY, *FIGHTER_KIND_NANA, *FIGHTER_KIND_POPO,
+		*FIGHTER_KIND_PIKMIN, *FIGHTER_KIND_KOOPAJR, *FIGHTER_KIND_PACKUN, 
+		*FIGHTER_KIND_SAMUSD, *FIGHTER_KIND_PZENIGAME, *FIGHTER_KIND_EFLAME
+	];
+	if max.contains(&fighter_kind) {
+		return TRACTION_MAX;
+	};
+	if high.contains(&fighter_kind) {
+		return TRACTION_HIGH;
+	};
+	if low.contains(&fighter_kind) {
+		return TRACTION_LOW;
+	};
+	if min.contains(&fighter_kind) {
+		return TRACTION_MIN;
+	};
+	return TRACTION_MID;
+}
 
 #[fighter_frame_callback]
 pub fn wavedash(fighter : &mut L2CFighterCommon) {
@@ -21,6 +74,22 @@ pub fn wavedash(fighter : &mut L2CFighterCommon) {
 		let fighter_kind = smash::app::utility::get_kind(boma);
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
 		let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+		if status_kind == *FIGHTER_STATUS_KIND_LANDING {
+			//I fucking hate that i had to do this
+			//Gets new traction by subbing it from the old traction, getting the difference, and making sure it behaves properly. Gets the proper traction
+			let desired_brake = get_wd_length(fighter_kind);
+			let brake = WorkModule::get_param_float(fighter.module_accessor, hash40("ground_brake"), 0);
+			let speed = get_speed_x(boma) * PostureModule::lr(boma);
+			let mut added_speed = brake - desired_brake;
+			if speed < 0.0 {
+				added_speed *= -1.0;
+			};
+			if (speed <= 0.0 && (speed + added_speed) > 0.0) || (speed >= 0.0 && (speed + added_speed) < 0.0) {
+				added_speed = 0.0;
+			};
+			let speed = smash::phx::Vector3f { x: added_speed, y: 0.0, z: 0.0 };
+			KineticModule::add_speed(boma, &speed);
+		};
 		if ![*FIGHTER_KIND_POPO, *FIGHTER_KIND_NANA].contains(&fighter_kind) {
 			if status_kind == *FIGHTER_STATUS_KIND_JUMP_SQUAT {
 				IS_WAVEDASH[ENTRY_ID] = true;
