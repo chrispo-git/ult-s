@@ -2216,6 +2216,14 @@ unsafe fn toad_dtaunt_snd(fighter: &mut L2CAgentBase) {
 }	
 #[acmd_script(
     agent = "murabito",
+    scripts =  ["sound_win2", "sound_win2wait","sound_win3", "sound_win3wait", "sound_win1wait","sound_win1"],
+    category = ACMD_SOUND,
+	low_priority)]
+unsafe fn toad_win_snd(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+}	
+#[acmd_script(
+    agent = "murabito",
     scripts =  ["game_win1"],
     category = ACMD_GAME,
 	low_priority)]
@@ -2796,7 +2804,8 @@ pub fn install() {
 		toad_win3,
 		toad_win1_eff,
 		toad_win1wait_eff,
-		toad_win2_eff
+		toad_win2_eff,
+		toad_win_snd
     );
     install_agent_resets!(
         agent_reset
