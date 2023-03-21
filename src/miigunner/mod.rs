@@ -298,7 +298,22 @@ unsafe fn gunner_dair(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         WorkModule::off_flag(fighter.module_accessor, *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
     }
-}			
+}				
+#[acmd_script(
+    agent = "miigunner",
+    scripts =  ["speciallw1start", "specialairlw1start"],
+    category = ACMD_GAME,
+	low_priority)]
+unsafe fn gunner_shine(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=3)
+		if(is_excute){
+			ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=2.0, Angle=10, KBG=30, FKB=0, BKB=60, Size=14.0, X=0.0, Y=6.5, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.5, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_G, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_elec"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_ELEC, Type=ATTACK_REGION_ENERGY)
+			ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=2.0, Angle=24, KBG=30, FKB=0, BKB=60, Size=14.0, X=0.0, Y=6.5, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.5, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_A, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_elec"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_ELEC, Type=ATTACK_REGION_ENERGY)
+		}
+    });
+}		
 #[fighter_frame_callback]
 pub fn gunner(fighter : &mut L2CFighterCommon) {
     unsafe {
@@ -306,13 +321,9 @@ pub fn gunner(fighter : &mut L2CFighterCommon) {
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
 		let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 		let fighter_kind = smash::app::utility::get_kind(boma);
-        let stick_y = ControlModule::get_stick_y(boma);
+
+    let stick_y = ControlModule::get_stick_y(boma);
 		if fighter_kind == *FIGHTER_KIND_MIIGUNNER {
-			if [hash40("special_lw1_start"), hash40("special_lw1_start_l"), hash40("special_air_lw1_start"), hash40("special_air_lw1_start_l")].contains(&MotionModule::motion_kind(boma)) {
-				if MotionModule::frame(boma) == 3.0 {
-					AttackModule::set_size(boma, 0, 14.0);
-				};
-			};
 			if [hash40("special_n3_start"), hash40("special_air_n3_start")].contains(&MotionModule::motion_kind(boma)) {
 				if MotionModule::frame(boma) > 28.0 && MotionModule::frame(boma) < 30.0{
 					if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_SPECIAL) && CHARGE_FRAMES[ENTRY_ID] < MAX_FRAMES{
@@ -325,7 +336,9 @@ pub fn gunner(fighter : &mut L2CFighterCommon) {
 			} else {
 				CHARGE_FRAMES[ENTRY_ID] = 0;
 			};
-            if [*FIGHTER_STATUS_KIND_SPECIAL_N].contains(&status_kind) && ![*FIGHTER_MIIGUNNER_STATUS_KIND_SPECIAL_N3_END, *FIGHTER_MIIGUNNER_STATUS_KIND_SPECIAL_N1_FIRE, *FIGHTER_MIIGUNNER_STATUS_KIND_SPECIAL_N1_HOLD, *FIGHTER_MIIGUNNER_STATUS_KIND_SPECIAL_N3_LOOP, *FIGHTER_MIIGUNNER_STATUS_KIND_SPECIAL_N1_START, *FIGHTER_MIIGUNNER_STATUS_KIND_SPECIAL_N1_CANCEL].contains(&status_kind){
+
+     if [*FIGHTER_STATUS_KIND_SPECIAL_N].contains(&status_kind) && ![*FIGHTER_MIIGUNNER_STATUS_KIND_SPECIAL_N3_END, *FIGHTER_MIIGUNNER_STATUS_KIND_SPECIAL_N1_FIRE, *FIGHTER_MIIGUNNER_STATUS_KIND_SPECIAL_N1_HOLD, *FIGHTER_MIIGUNNER_STATUS_KIND_SPECIAL_N3_LOOP, *FIGHTER_MIIGUNNER_STATUS_KIND_SPECIAL_N1_START, *FIGHTER_MIIGUNNER_STATUS_KIND_SPECIAL_N1_CANCEL].contains(&status_kind){
+
 				if StatusModule::is_situation_changed(boma) {
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_LANDING, true);
 				};

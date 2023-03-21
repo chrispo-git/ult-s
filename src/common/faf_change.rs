@@ -555,6 +555,9 @@ pub fn faf_change_master(fighter : &mut L2CFighterCommon) {
 			if [hash40("attack_air_f")].contains(&motion_kind) && frame >= 33.0 {
 				CancelModule::enable_cancel(boma);
 			};
+			if [hash40("attack_hi3")].contains(&motion_kind) && frame >= 35.0 {
+				CancelModule::enable_cancel(boma);
+			};
 		}else if fighter_kind == *FIGHTER_KIND_MIIFIGHTER {
 			if [hash40("special_lw2_landing")].contains(&motion_kind) && frame >= 15.0 {
 				CancelModule::enable_cancel(boma);
@@ -624,7 +627,7 @@ pub fn faf_change_master(fighter : &mut L2CFighterCommon) {
 					HitModule::set_whole(boma, smash::app::HitStatus(*HIT_STATUS_NORMAL), 0);
 				};
 			};
-			if [hash40("special_s1"), hash40("special_air_s1")].contains(&motion_kind) && frame >= 53.0 {
+			if [hash40("special_s1"), hash40("special_air_s1")].contains(&motion_kind) && frame >= 58.0 {
 				CancelModule::enable_cancel(boma);
 			};
 			if [hash40("attack_lw3")].contains(&motion_kind) && frame >= 33.0 {
@@ -715,7 +718,7 @@ pub fn faf_change_master(fighter : &mut L2CFighterCommon) {
 			if [hash40("attack_air_n")].contains(&motion_kind) && frame >= 36.0 {
 				CancelModule::enable_cancel(boma);
 			};
-			if [hash40("attack_lw3")].contains(&motion_kind) && frame >= 26.0 {
+			if [hash40("attack_lw3")].contains(&motion_kind) && frame >= 23.0 {
 				CancelModule::enable_cancel(boma);
 			};
 			if [hash40("attack_11")].contains(&motion_kind) && frame >= 20.0 {
