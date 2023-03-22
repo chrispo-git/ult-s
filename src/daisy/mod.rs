@@ -22,6 +22,9 @@ fn daisy_frame(fighter: &mut L2CFighterCommon) {
 		let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 		let motion_kind = MotionModule::motion_kind(boma);
 		let frame = MotionModule::frame(boma);
+		if status_kind == *FIGHTER_PEACH_STATUS_KIND_SPECIAL_N_HIT && KineticModule::get_kinetic_type(boma) != *FIGHTER_KINETIC_TYPE_MOTION_AIR{
+			KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_MOTION_AIR);
+		};
     }
 }
 #[acmd_script(
@@ -559,7 +562,7 @@ unsafe fn daisy_neutralb(fighter: &mut L2CAgentBase) {
 			KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_PEACH_SPECIAL_AIR_N_RAISE);
 		};
 	};
-	frame(fighter.lua_state_agent, 35.0);
+	frame(fighter.lua_state_agent, 20.0);
 	if macros::is_excute(fighter) {
 		shield!(fighter, *MA_MSC_CMD_SHIELD_OFF, *COLLISION_KIND_SHIELD, *FIGHTER_PEACH_SHIELD_KIND_KINOPIO_GUARD, *FIGHTER_PEACH_SHIELD_GROUP_KIND_KINOPIO_GUARD);
 	};
@@ -572,19 +575,90 @@ unsafe fn daisy_neutralb(fighter: &mut L2CAgentBase) {
 unsafe fn daisy_neutralb_hit(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     frame(fighter.lua_state_agent, 5.0);
+	//macros::FT_MOTION_RATE(fighter, 0.75);
 	if macros::is_excute(fighter) {
-		let damage = (WorkModule::get_int(fighter.module_accessor, *FIGHTER_PEACH_INSTANCE_WORK_ID_INT_KINOPIOSPORE_SHOOT_NUM) as f32 * 15.0) + 3.0;
-		macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("armr"), /*Damage*/ damage, /*Angle*/ 361, /*KBG*/ 60, /*FKB*/ 0, /*BKB*/ 90, /*Size*/ 8.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.8, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_PUNCH);
-		macros::ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("haver"), /*Damage*/ damage, /*Angle*/ 361, /*KBG*/ 60, /*FKB*/ 0, /*BKB*/ 90, /*Size*/ 8.0, /*X*/ 0.2, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.8, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_PUNCH);
-		macros::ATTACK(fighter, /*ID*/ 2, /*Part*/ 0, /*Bone*/ Hash40::new("shoulderr"), /*Damage*/ damage, /*Angle*/ 361, /*KBG*/ 60, /*FKB*/ 0, /*BKB*/ 90, /*Size*/ 8.0, /*X*/ 0.2, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.8, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_PUNCH);
+		JostleModule::set_status(fighter.module_accessor, false);
+		/*macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("armr"), /*Damage*/ 15.0, /*Angle*/ 361, /*KBG*/ 60, /*FKB*/ 0, /*BKB*/ 80, /*Size*/ 8.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.8, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_PUNCH);
+		macros::ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("haver"), /*Damage*/ 15.0, /*Angle*/ 361, /*KBG*/ 60, /*FKB*/ 0, /*BKB*/ 80, /*Size*/ 8.0, /*X*/ 0.2, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.8, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_PUNCH);
+		macros::ATTACK(fighter, /*ID*/ 2, /*Part*/ 0, /*Bone*/ Hash40::new("shoulderr"), /*Damage*/ 15.0, /*Angle*/ 361, /*KBG*/ 60, /*FKB*/ 0, /*BKB*/ 80, /*Size*/ 8.0, /*X*/ 0.2, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.8, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_PUNCH);
 		AttackModule::set_force_reaction(fighter.module_accessor, 0, true, false);
 		AttackModule::set_force_reaction(fighter.module_accessor, 1, true, false);
-		AttackModule::set_force_reaction(fighter.module_accessor, 2, true, false);
+		AttackModule::set_force_reaction(fighter.module_accessor, 2, true, false);*/
 	};
-    frame(fighter.lua_state_agent, 13.0);
+    frame(fighter.lua_state_agent, 27.0);
 	if macros::is_excute(fighter) {
+		JostleModule::set_status(fighter.module_accessor, true);
 		AttackModule::clear_all(fighter.module_accessor);
 	};
+    frame(fighter.lua_state_agent, 45.0);
+	//macros::FT_MOTION_RATE(fighter, 0.4);
+}
+#[acmd_script(
+    agent = "daisy",
+    scripts =  ["effect_specialn", "effect_specialairn"],
+    category = ACMD_EFFECT, 
+	low_priority)]
+unsafe fn daisy_neutralb_eff(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		if(is_excute){
+			EFFECT_FOLLOW(hash40("sys_attack_impact"), hash40("top"), 0, 6, 7, 0, 0, 0, 1.6, true)
+		}
+		frame(Frame=2)
+		if(is_excute){
+			EFFECT(hash40("sys_smash_flash"), hash40("top"), 4, 13, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false)
+		}
+		frame(Frame=6)
+		if(is_excute){
+			FOOT_EFFECT(hash40("sys_down_smoke"), hash40("top"), 3, 0, 0, 0, 0, 0, 0.6, 0, 0, 0, 0, 0, 0, false)
+		}
+		frame(Frame=8)
+		if(is_excute){
+			FLASH(1, 1, 1, 0.75)
+		}
+		wait(Frames=1)
+		for(3 Iterations){
+			if(is_excute){
+				FLASH(0.7, 0.7, 0.7, 0.5)
+			}
+			wait(Frames=2)
+			if(is_excute){
+				FLASH(0.67, 0, 0.78, 0.31)
+			}
+			wait(Frames=2)
+			if(is_excute){
+				COL_NORMAL()
+			}
+			wait(Frames=2)
+		}
+		if(is_excute){
+			FLASH(0.7, 0.7, 0.7, 0.5)
+		}
+		wait(Frames=2)
+		if(is_excute){
+			COL_NORMAL()
+		}
+    });
+}
+
+#[acmd_script(
+    agent = "daisy",
+    scripts =  ["effect_specialnhit", "effect_specialairnhit", "effect_specialnturn", "effect_specialairnturn"],
+    category = ACMD_EFFECT, 
+	low_priority)]
+unsafe fn daisy_neutralb_hit_eff(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=5)
+		if(is_excute){
+			FOOT_EFFECT(hash40("sys_dash_smoke"), hash40("top"), 0, 0, 0, 0, 0, 0, 1.5, 0, 0, 0, 0, 0, 0, false)
+			LAST_EFFECT_SET_COLOR(255.0/255.0, 210.0/255.0, 46.0/255.0)
+		}
+		frame(Frame=27)
+		if(is_excute){
+			FOOT_EFFECT(hash40("sys_turn_smoke"), hash40("top"), 7, 0, 0, 0, 180, 0, 0.9, 0, 0, 0, 0, 0, 0, false)
+		}
+    });
 }
 
 
@@ -618,6 +692,9 @@ pub fn install() {
 		daisy_remove_toad,
 		daisy_catch_release_eff,
 		daisy_neutralb,
-		daisy_neutralb_hit
+		daisy_neutralb_eff,
+		daisy_neutralb_hit,
+		daisy_neutralb_hit_eff
 	);
+	smashline::install_agent_frames!(daisy_frame);
 }
