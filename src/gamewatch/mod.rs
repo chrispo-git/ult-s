@@ -201,18 +201,17 @@ unsafe fn gnw_dtilt(fighter: &mut L2CAgentBase) {
 			ArticleModule::generate_article(FIGHTER_GAMEWATCH_GENERATE_ARTICLE_NORMAL_WEAPON, false, 0)
 			ArticleModule::change_motion(FIGHTER_GAMEWATCH_GENERATE_ARTICLE_NORMAL_WEAPON,smash::phx::Hash40::new("attack_lw3"),false,0.0)
 		}
-		frame(Frame=6)
+		frame(Frame=7)
 		if(is_excute){
-			ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=12.0, Angle=30, KBG=92, FKB=0, BKB=45, Size=1.2, X=0.0, Y=2.1, Z=6.7, X2=0.0, Y2=2.1, Z2=16.8, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_OBJECT)
-			ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=12.0, Angle=30, KBG=92, FKB=0, BKB=45, Size=1.2, X=0.0, Y=9.3, Z=6.7, X2=0.0, Y2=2.1, Z2=16.8, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_OBJECT)
-			ATTACK(ID=2, Part=0, Bone=hash40("top"), Damage=2.0, Angle=90, KBG=100, FKB=110, BKB=0, Size=3.0, X=0.0, Y=2.1, Z=6.7, X2=0.0, Y2=37.64, Z2=56.7, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=true, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=true, DisableHitlag=true, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_NONE, Type=ATTACK_REGION_NONE)
+			ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=10.0, Angle=80, KBG=110, FKB=0, BKB=40, Size=2.5, X=0.0, Y=1.5, Z=12.0, X2=0.0, Y2=1.5, Z2=18.0, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_OBJECT)
+			ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=2.0, Angle=90, KBG=100, FKB=110, BKB=0, Size=10.5, X=0.0, Y=4.0, Z=15.0, X2=0.0, Y2=9.0, Z2=15.0, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=true, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=true, DisableHitlag=true, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_NONE, Type=ATTACK_REGION_NONE)
 			AttackModule::set_attack_height_all(smash::app::AttackHeight(*ATTACK_HEIGHT_LOW), false)
 		}
-		frame(Frame=9)
+		frame(Frame=13)
 		if(is_excute){
 			AttackModule::clear_all()
 		}
-		frame(Frame=25)
+		frame(Frame=15)
 		if(is_excute){
 			ArticleModule::remove(FIGHTER_GAMEWATCH_GENERATE_ARTICLE_NORMAL_WEAPON,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL))
 		}
