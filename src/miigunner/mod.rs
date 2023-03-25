@@ -340,21 +340,21 @@ pub fn gunner(fighter : &mut L2CFighterCommon) {
 	
 pub fn install() {
     smashline::install_acmd_scripts!(
-		gunner_chargeshot,
+		    gunner_chargeshot,
         	gunner_laser,
         	gunner_nade,
-		gunner_nade_end,
+		    gunner_nade_end,
         	gunner_fp,
         	gunner_shine,
         	gunner_bomb,
-		gunner_mag,
-		gunner_dair,
-		gunner_uair,
-		gunner_nair,
-		gunner_bair,
-		gunner_fair_bullet,
-		gunner_dtilt,
-		gunner_dsmash
+		    gunner_mag,
+		    gunner_dair,
+		    gunner_uair,
+		    gunner_nair,
+		    gunner_bair,
+		    gunner_fair_bullet,
+		    gunner_dtilt,
+		    gunner_dsmash
     );
 	smashline::install_agent_frame_callbacks!(gunner);
 }
