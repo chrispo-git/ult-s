@@ -57,6 +57,9 @@ pub fn bone_rot(fighter : &mut L2CFighterCommon) {
 		bone_const(boma, *FIGHTER_KIND_SAMUSD, hash40("landing_air_lw"), hash40("rot"), 15.0, 59.0, 0.0, 0.0, 180.0, 0.0, 0.0, 0.0);
 		*/
 		
+		//MiiGunner bair angle up
+		bone_const(boma, *FIGHTER_KIND_MIIGUNNER, hash40("attack_air_b"), hash40("rot"), 0.0, 24.0, 10.0, 10.0, 0.0, 0.0, 0.0, 0.0);
+		
 		//Falcon nair angle down
 		bone_const(boma, *FIGHTER_KIND_CAPTAIN, hash40("attack_air_n"), hash40("rot"), 0.0, 24.0, 10.0, 10.0, 0.0, 0.0, 0.0, 0.0);
 		bone_const(boma, *FIGHTER_KIND_CAPTAIN, hash40("attack_air_n"), hash40("rot"), 24.0, 38.0, 10.0, 0.0, 0.0, 0.0, 0.0, 0.0);

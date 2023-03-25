@@ -630,10 +630,10 @@ pub fn faf_change_master(fighter : &mut L2CFighterCommon) {
 			if [hash40("special_s1"), hash40("special_air_s1")].contains(&motion_kind) && frame >= 58.0 {
 				CancelModule::enable_cancel(boma);
 			};
-			if [hash40("attack_lw3")].contains(&motion_kind) && frame >= 28.0 {
+			if [hash40("attack_lw3")].contains(&motion_kind) && frame >= 33.0 {
 				CancelModule::enable_cancel(boma);
 			};
-			if [hash40("attack_hi3")].contains(&motion_kind) && frame >= 34.0 {
+			if [hash40("attack_hi3")].contains(&motion_kind) && frame >= 30.0 {
 				CancelModule::enable_cancel(boma);
 			};
 			if [hash40("throw_lw")].contains(&motion_kind) && frame >= 32.0 {
@@ -642,7 +642,7 @@ pub fn faf_change_master(fighter : &mut L2CFighterCommon) {
 			if [hash40("throw_hi")].contains(&motion_kind) && frame >= 39.0 {
 				CancelModule::enable_cancel(boma);
 			};
-			if [hash40("special_n2_end")].contains(&motion_kind) && frame >= 8.0 {
+			if [hash40("special_n2_end")].contains(&motion_kind) && frame >= 4.0 {
 				CancelModule::enable_cancel(boma);
 			};
 			if [hash40("attack_air_f")].contains(&motion_kind) && frame >= 38.0 {
@@ -651,16 +651,14 @@ pub fn faf_change_master(fighter : &mut L2CFighterCommon) {
 			if [hash40("special_s2_end"), hash40("special_air_s2_end")].contains(&motion_kind) && frame >= 34.0 {
 				CancelModule::enable_cancel(boma);
 			};
-			if [hash40("special_lw3_end"), hash40("special_air_lw3_end")].contains(&motion_kind) && frame >= 4.0 {
+			if [hash40("special_lw3_end"), hash40("special_air_lw3_end")].contains(&motion_kind) && frame >= 5.0 {
 				CancelModule::enable_cancel(boma);
 			};
 			if [hash40("special_lw1_end"), hash40("special_air_lw1_end")].contains(&motion_kind) && frame >= 23.0 {
 				CancelModule::enable_cancel(boma);
 			};
-			if [hash40("special_s3_2"), hash40("special_air_s3_2")].contains(&motion_kind) && frame >= 49.0 {
+			if [hash40("special_s3_2"), hash40("special_air_s3_2")].contains(&motion_kind) && frame >= 50.0 {
 				CancelModule::enable_cancel(boma);
-			};
-			if [hash40("special_lw2_start")].contains(&motion_kind) {
 			};
 			if [hash40("special_s1_start")].contains(&motion_kind) && frame >= 60.0 {
 				CancelModule::enable_cancel(boma);
