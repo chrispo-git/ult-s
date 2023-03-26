@@ -19,6 +19,7 @@ pub static mut SPEED_Y : [f32; 8] = [0.0; 8];
 pub static mut ACCEL_X : [f32; 8] = [0.0; 8];
 pub static mut ACCEL_Y : [f32; 8] = [0.0; 8];
 static mut FULL_HOP_ENABLE_DELAY : [i32; 8] = [0; 8];
+pub static mut PREV_SCALE : [f32; 8] = [0.0; 8];
 
 //Cstick
 pub static mut SUB_STICK: [Vector2f;9] = [Vector2f{x:0.0, y: 0.0};9];
@@ -131,21 +132,21 @@ pub unsafe fn on_flag_hook(boma: &mut smash::app::BattleObjectModuleAccessor, in
 			HAS_ENABLE_100_ON[WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize] = true;
 			let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
 			let fighter_kind = smash::app::utility::get_kind(boma);
-			if ![*FIGHTER_STATUS_KIND_ATTACK, *FIGHTER_DEMON_STATUS_KIND_ATTACK_COMBO].contains(&status_kind) || [*FIGHTER_KIND_MURABITO].contains(&fighter_kind){
+			if ![*FIGHTER_STATUS_KIND_ATTACK, *FIGHTER_DEMON_STATUS_KIND_ATTACK_COMBO].contains(&status_kind) {
 				original!()(boma, int)
 			};
 		} else if int == *FIGHTER_STATUS_ATTACK_FLAG_ENABLE_COMBO {
 			HAS_ENABLE_COMBO_ON[WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize] = true;
 			let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
 			let fighter_kind = smash::app::utility::get_kind(boma);
-			if status_kind != *FIGHTER_STATUS_KIND_ATTACK || [*FIGHTER_KIND_MURABITO].contains(&fighter_kind) {
+			if status_kind != *FIGHTER_STATUS_KIND_ATTACK  {
 				original!()(boma, int)
 			};
 		} else if int == *FIGHTER_STATUS_ATTACK_FLAG_ENABLE_NO_HIT_COMBO {
 			HAS_ENABLE_NO_HIT_COMBO_ON[WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize] = true;
 			let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
 			let fighter_kind = smash::app::utility::get_kind(boma);
-			if status_kind != *FIGHTER_STATUS_KIND_ATTACK || [*FIGHTER_KIND_MURABITO].contains(&fighter_kind) {
+			if status_kind != *FIGHTER_STATUS_KIND_ATTACK  {
 				original!()(boma, int)
 			};
 		} else if int == *FIGHTER_STATUS_WORK_ID_FLAG_RESERVE_JUMP_MINI {
@@ -156,6 +157,8 @@ pub unsafe fn on_flag_hook(boma: &mut smash::app::BattleObjectModuleAccessor, in
 			} else {
 				println!("SH height banned");
 			}
+		} else if int == *FIGHTER_INSTANCE_WORK_ID_FLAG_CATCHED_BUTTERFLYNET {
+				original!()(boma, int)
 		}	else {
 			original!()(boma, int)
 		}
@@ -190,6 +193,27 @@ pub unsafe fn article_hook(boma: &mut smash::app::BattleObjectModuleAccessor, in
 		} else {
 			return original!()(boma, int, arg3, arg4)
 		}
+	} else if smash::app::utility::get_kind(boma) == *FIGHTER_KIND_MURABITO {
+		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
+		if int == *FIGHTER_MURABITO_GENERATE_ARTICLE_CLAYROCKET {
+			if ![*FIGHTER_STATUS_KIND_FINAL, *FIGHTER_MURABITO_STATUS_KIND_FINAL_END, *FIGHTER_MURABITO_STATUS_KIND_FINAL_CHEER, *FIGHTER_MURABITO_STATUS_KIND_FINAL_HAPPY, *FIGHTER_MURABITO_STATUS_KIND_FINAL_MONEY, *FIGHTER_MURABITO_STATUS_KIND_FINAL_SURPRISE].contains(&status_kind) {
+				return 0
+			}
+		}
+		if [*FIGHTER_MURABITO_GENERATE_ARTICLE_TOMNOOK, *FIGHTER_MURABITO_GENERATE_ARTICLE_MONEYBAG, *FIGHTER_MURABITO_GENERATE_ARTICLE_FURNITURE].contains(&int){
+			return 0
+		}
+		if [*FIGHTER_MURABITO_GENERATE_ARTICLE_BEETLE].contains(&int){
+			if [hash40("win_3"), hash40("win_3_wait")].contains(&MotionModule::motion_kind(boma)) {
+				return original!()(boma, int, arg3, arg4)
+			} else {
+				return 0
+			}
+		}
+		if smash::app::sv_information::is_ready_go() && int == *FIGHTER_MURABITO_GENERATE_ARTICLE_HOUSE{
+			return 0
+		}
+		return original!()(boma, int, arg3, arg4)
 	} else {
 		return original!()(boma, int, arg3, arg4)
 	}
@@ -230,7 +254,31 @@ pub fn util_update(fighter : &mut L2CFighterCommon) {
 		if FULL_HOP_ENABLE_DELAY[ENTRY_ID] > 0 {
 			FULL_HOP_ENABLE_DELAY[ENTRY_ID] -= 1;
 		};
-
+		if  PostureModule::scale(boma) != 0.001345 {
+			PREV_SCALE[ENTRY_ID] = PostureModule::scale(boma);
+		};
+		if [*FIGHTER_STATUS_KIND_CAPTURE_PULLED, *FIGHTER_STATUS_KIND_CAPTURE_WAIT, *FIGHTER_STATUS_KIND_THROWN].contains(&status_kind) {
+			let opponent_id = LinkModule::get_parent_object_id(boma, *LINK_NO_CAPTURE) as u32;
+			let grabber_boma = smash::app::sv_battle_object::module_accessor(opponent_id);
+			let grabber_kind = smash::app::utility::get_kind(&mut *grabber_boma);
+			let graber_entry_id = WorkModule::get_int(&mut *grabber_boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+			//Toad Specific Code. Has the opponent be made real small while in the pipe, and removes the grab model changes present in villy
+			if grabber_kind == *FIGHTER_KIND_MURABITO {
+				println!("Turning off butterfly net flag");
+				let grabber_motion = MotionModule::motion_kind(grabber_boma);
+				let grabber_frame = MotionModule::frame(grabber_boma);
+				if grabber_motion == hash40("throw_hi") && (3..35).contains(&(grabber_frame as i32)) {
+					PostureModule::set_scale(boma, 0.001345, false);
+				} else {
+					PostureModule::set_scale(boma, PREV_SCALE[ENTRY_ID], false);
+				};
+				WorkModule::off_flag(boma, *FIGHTER_INSTANCE_WORK_ID_FLAG_CATCHED_BUTTERFLYNET);
+			} else {
+				PostureModule::set_scale(boma, PREV_SCALE[ENTRY_ID], false);
+			};
+		} else {
+			PostureModule::set_scale(boma, PREV_SCALE[ENTRY_ID], false);
+		};
 		//This checks if the Full Hop button is pressed
 		let triggered_buttons: Buttons = unsafe {
 			Buttons::from_bits_unchecked(ControlModule::get_button(boma) & !ControlModule::get_button_prev(boma))
@@ -274,7 +322,7 @@ pub fn util_update(fighter : &mut L2CFighterCommon) {
 		ACCEL_Y[ENTRY_ID] = SPEED_Y[ENTRY_ID] - KineticModule::get_sum_speed_y(boma, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
 		SPEED_X[ENTRY_ID] = KineticModule::get_sum_speed_x(boma, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
 		SPEED_Y[ENTRY_ID] = KineticModule::get_sum_speed_y(boma, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
-		println!("X Accel: {}, Y Accel: {}, X Speed: {}, Y Speed: {}, Kinetic Energy ID: {}", ACCEL_X[ENTRY_ID], ACCEL_Y[ENTRY_ID], SPEED_X[ENTRY_ID], SPEED_Y[ENTRY_ID], KineticModule::get_kinetic_type(boma));
+		//println!("X Accel: {}, Y Accel: {}, X Speed: {}, Y Speed: {}", ACCEL_X[ENTRY_ID], ACCEL_Y[ENTRY_ID], SPEED_X[ENTRY_ID], SPEED_Y[ENTRY_ID]);
 		/*if ENTRY_ID < 2 {
 			println!("MOTION_DURATION {}, STATUS_DURATION {}, SPEED_X {}, SPEED_Y {}, ACCEL_X {}, ACCEL_Y {}", motion_duration(boma), status_duration(boma), get_speed_x(boma), get_speed_y(boma), get_accel_x(boma), get_accel_y(boma));
 			println!("total fighters {}, ray_check_pos {}, is_angel_plat {}, stock_count{}", total_fighters(), ray_check_pos(boma, 0.0, -10.0, false), is_angel_plat(boma), stock_count(boma));

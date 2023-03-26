@@ -78,7 +78,7 @@ replace = [
     ['miifighter', 'brawler'],
     ['miigunner', 'gunner'],
     ['miiswordsman', 'sword'],
-    ['murabito', 'villager', 'villy'],
+    ['murabito', 'villager', 'villy', 'toad'],
     ['nana'],
     ['ness'],
     ['packun', 'plant', 'piranha'],
