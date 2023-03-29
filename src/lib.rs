@@ -52,6 +52,7 @@ fn change_version_string_hook(arg: u64, string: *const c_char) {
 mod util;
 mod controls;
 mod common;
+mod cpu;
 
 mod bayonetta;
 mod brave;
@@ -133,7 +134,6 @@ mod wiifit;
 mod wolf;
 mod younglink;
 mod zelda;
-
 
 
 
