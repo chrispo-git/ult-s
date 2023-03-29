@@ -29,10 +29,10 @@ pub fn nro_hook(info: &skyline::nro::NroInfo) {
 
     if info.name == "common" {
         skyline::install_hooks!(
-            custom::dmg_fly_main,
-            custom::dmg_fly_roll_main,
-            custom::dmg_main,
-            custom::dmg_air_main
+            cpu::dmg_fly_main,
+            cpu::dmg_fly_roll_main,
+            cpu::dmg_main,
+            cpu::dmg_air_main
         );
     }
 }
