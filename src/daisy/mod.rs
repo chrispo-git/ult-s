@@ -27,6 +27,19 @@ fn daisy_frame(fighter: &mut L2CFighterCommon) {
 		};
     }
 }
+#[fighter_frame( agent = FIGHTER_KIND_KIRBY )]
+fn kirby_daisy_frame(fighter: &mut L2CFighterCommon) {
+    unsafe {
+        let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
+		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
+		let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+		let motion_kind = MotionModule::motion_kind(boma);
+		let frame = MotionModule::frame(boma);
+		if status_kind == *FIGHTER_KIRBY_STATUS_KIND_DAISY_SPECIAL_N_HIT && KineticModule::get_kinetic_type(boma) != *FIGHTER_KINETIC_TYPE_MOTION_AIR{
+			KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_MOTION_AIR);
+		};
+    }
+}
 #[acmd_script(
     agent = "daisy",
     script =  "game_speciallw",
@@ -640,6 +653,53 @@ unsafe fn daisy_neutralb_eff(fighter: &mut L2CAgentBase) {
 		}
     });
 }
+#[acmd_script(
+    agent = "kirby",
+    scripts =  ["effect_daisyspecialn", "effect_daisyspecialairn"],
+    category = ACMD_EFFECT, 
+	low_priority)]
+unsafe fn kirby_daisy_neutralb_eff(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		if(is_excute){
+			EFFECT_FOLLOW(hash40("sys_attack_impact"), hash40("top"), 0, 6, 7, 0, 0, 0, 1.6, true)
+		}
+		frame(Frame=2)
+		if(is_excute){
+			EFFECT(hash40("sys_smash_flash"), hash40("top"), 4, 13, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false)
+		}
+		frame(Frame=6)
+		if(is_excute){
+			FOOT_EFFECT(hash40("sys_down_smoke"), hash40("top"), 3, 0, 0, 0, 0, 0, 0.6, 0, 0, 0, 0, 0, 0, false)
+		}
+		frame(Frame=8)
+		if(is_excute){
+			FLASH(1, 1, 1, 0.75)
+		}
+		wait(Frames=1)
+		for(3 Iterations){
+			if(is_excute){
+				FLASH(0.7, 0.7, 0.7, 0.5)
+			}
+			wait(Frames=2)
+			if(is_excute){
+				FLASH(0.67, 0, 0.78, 0.31)
+			}
+			wait(Frames=2)
+			if(is_excute){
+				COL_NORMAL()
+			}
+			wait(Frames=2)
+		}
+		if(is_excute){
+			FLASH(0.7, 0.7, 0.7, 0.5)
+		}
+		wait(Frames=2)
+		if(is_excute){
+			COL_NORMAL()
+		}
+    });
+}
 
 #[acmd_script(
     agent = "daisy",
@@ -647,6 +707,25 @@ unsafe fn daisy_neutralb_eff(fighter: &mut L2CAgentBase) {
     category = ACMD_EFFECT, 
 	low_priority)]
 unsafe fn daisy_neutralb_hit_eff(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=5)
+		if(is_excute){
+			FOOT_EFFECT(hash40("sys_dash_smoke"), hash40("top"), 0, 0, 0, 0, 0, 0, 1.5, 0, 0, 0, 0, 0, 0, false)
+			LAST_EFFECT_SET_COLOR(255.0/255.0, 210.0/255.0, 46.0/255.0)
+		}
+		frame(Frame=27)
+		if(is_excute){
+			FOOT_EFFECT(hash40("sys_turn_smoke"), hash40("top"), 7, 0, 0, 0, 180, 0, 0.9, 0, 0, 0, 0, 0, 0, false)
+		}
+    });
+}
+#[acmd_script(
+    agent = "kirby",
+    scripts =  ["effect_daisyspecialnhit", "effect_daisyspecialairnhit", "effect_daisyspecialnturn", "effect_daisyspecialairnturn"],
+    category = ACMD_EFFECT, 
+	low_priority)]
+unsafe fn kirby_daisy_neutralb_hit_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
 		frame(Frame=5)
@@ -694,7 +773,10 @@ pub fn install() {
 		daisy_neutralb,
 		daisy_neutralb_eff,
 		daisy_neutralb_hit,
-		daisy_neutralb_hit_eff
+		daisy_neutralb_hit_eff,
+		kirby_daisy_neutralb_eff,
+		kirby_daisy_neutralb_hit_eff
 	);
 	smashline::install_agent_frames!(daisy_frame);
+	smashline::install_agent_frames!(kirby_daisy_frame);
 }
