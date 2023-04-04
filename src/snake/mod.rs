@@ -1,19 +1,38 @@
-use smash::hash40;
-use smash::lib::lua_const::*;
-use smash::app::lua_bind::*;
-use smash::lua2cpp::*;
-use smashline::*;
-use smash_script::*;
-use smash::phx::Hash40;
-use smash::app::ArticleOperationTarget;
-use smash::lib::L2CValue;
-use crate::util::*;
+//Every time I make an edit to this mod I'm gonna leave a complaint about you still using ACMD-Skyline instead of Smashline until it's updated
+use {
+	crate::util::*,
+	smash::{
+		app::{
+			ArticleOperationTarget,
+			lua_bind::*,
+		},
+		hash40,
+		lib::{
+			L2CValue,
+			lua_const::*,
+		},
+		lua2cpp::*,
+		phx::Hash40
+	},
+	smash_script::*,
+	smashline::*,
+};
+
 static mut STATIC_MUT : [i32; 8] = [6; 8];
 
-#[acmd_script( agent = "snake", 
-script = "game_attacks4", 
-category = ACMD_GAME,
-low_priority)]
+#[acmd_script( agent = "snake", script = "game_attackdashlightthrow", category = ACMD_GAME, low_priority)]
+unsafe fn snake_dash_attack_throw(fighter: &mut L2CAgentBase) 
+{
+	let lua_state = fighter.lua_state_agent;
+	acmd!(lua_state, {
+		frame(Frame=12)
+		if(is_excute){
+			StatusModule::change_status_request_from_script(*FIGHTER_STATUS_KIND_ITEM_THROW_DASH, false);
+		}
+	});
+}
+
+#[acmd_script( agent = "snake", script = "game_attacks4", category = ACMD_GAME, low_priority)]
 unsafe fn snake_fsmash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -46,10 +65,8 @@ unsafe fn snake_fsmash(fighter: &mut L2CAgentBase) {
 		}
     });
 }
-#[acmd_script( agent = "snake", 
-script = "effect_attacks4", 
-category = ACMD_EFFECT,
-low_priority)]
+
+#[acmd_script( agent = "snake", script = "effect_attacks4", category = ACMD_EFFECT, low_priority)]
 unsafe fn snake_fsmash_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
@@ -66,22 +83,46 @@ unsafe fn snake_fsmash_eff(fighter: &mut L2CAgentBase) {
 		}
     });
 }
+
 #[fighter_frame( agent = FIGHTER_KIND_SNAKE )]
-fn gun_frame(fighter: &mut L2CFighterCommon) {
+fn snake_frame(fighter: &mut L2CFighterCommon) {
     unsafe {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
 		let motion_kind = MotionModule::motion_kind(boma);
 		let frame = MotionModule::frame(boma);
+		let stick_y = ControlModule::get_stick_y(boma);
 		let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+		if ItemModule::is_have_item(boma, 0) {
+            WorkModule::unable_transition_term(boma, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_ITEM_THROW_DASH);
+        }
+		if motion_kind == hash40("attack_dash")
+        && frame >= 12.0 {
+            if ItemModule::is_have_item(boma, 0) {
+				if !ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_ATTACK) {
+					MotionModule::change_motion(boma, Hash40::new("attack_dash_item_light_throw"), 0.0, 1.0, false, 0.0, false, false);
+					AttackModule::clear_all(boma);
+				}
+            }
+        }
+        if motion_kind == hash40("attack_dash_item_light_throw") {
+            if fighter.global_table[0x16].get_i32() != *SITUATION_KIND_AIR
+            && stick_y <= -0.6875 {
+                if GroundModule::is_passable_ground(boma) {
+                    StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_PASS, true);
+                }
+            }
+        }
 		if WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_HIT_STOP_ATTACK_SUSPEND_FRAME) >= 1 {
 			ArticleModule::set_visibility_whole(boma, *FIGHTER_SNAKE_GENERATE_ARTICLE_RPG7, false, smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
-		} else {
+		} 
+		else {
 			ArticleModule::set_visibility_whole(boma, *FIGHTER_SNAKE_GENERATE_ARTICLE_RPG7, true, smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
 		};
     }
 }
+
 pub fn install() {
-	smashline::install_acmd_scripts!(snake_fsmash, snake_fsmash_eff);
-	smashline::install_agent_frames!(gun_frame);
+	smashline::install_acmd_scripts!(snake_dash_attack_throw, snake_fsmash, snake_fsmash_eff);
+	smashline::install_agent_frames!(snake_frame);
 }
