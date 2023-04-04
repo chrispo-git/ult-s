@@ -1,6 +1,9 @@
-//Every time I make an edit to this mod I'm gonna leave a complaint about you still using ACMD-Skyline instead of Smashline until it's updated
+//Every time I make an edit to this mod I'm gonna leave a complaint about you still using ACMD-Skyline instead of Smashline until it's updated.
 use {
-	crate::util::*,
+	crate::{
+		controls::consts::*,
+		util::*,
+	},
 	smash::{
 		app::{
 			ArticleOperationTarget,
@@ -96,18 +99,14 @@ fn snake_frame(fighter: &mut L2CFighterCommon) {
 		if ItemModule::is_have_item(boma, 0) {
             WorkModule::unable_transition_term(boma, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_ITEM_THROW_DASH);
         }
-		if motion_kind == hash40("attack_dash")
-        && frame >= 12.0 {
-            if ItemModule::is_have_item(boma, 0) {
-				if !ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_ATTACK) {
-					MotionModule::change_motion(boma, Hash40::new("attack_dash_item_light_throw"), 0.0, 1.0, false, 0.0, false, false);
-					AttackModule::clear_all(boma);
-				}
-            }
+		if motion_kind == hash40("attack_dash") && frame >= 12.0 && ItemModule::is_have_item(boma, 0) {
+			if !ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_ATTACK) {
+				MotionModule::change_motion(boma, Hash40::new("attack_dash_item_light_throw"), 0.0, 1.0, false, 0.0, false, false);
+				AttackModule::clear_all(boma);
+			}
         }
         if motion_kind == hash40("attack_dash_item_light_throw") {
-            if fighter.global_table[0x16].get_i32() != *SITUATION_KIND_AIR
-            && stick_y <= -0.6875 {
+            if fighter.global_table[SITUATION_KIND].get_i32() != *SITUATION_KIND_AIR && stick_y <= -0.6875 {
                 if GroundModule::is_passable_ground(boma) {
                     StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_PASS, true);
                 }
