@@ -985,6 +985,30 @@
             "fighter/shizue/model/pot/c07/metal_trafficsign_001_nor.nutexb",
             "fighter/shizue/model/pot/c07/metal_trafficsign_001_prm.nutexb"
         ],
+        "fighter/snake/c00": [
+			"fighter/snake/motion/body/c00/c00attackdashlightthrow.nuanmb"
+		],
+		"fighter/snake/c01": [
+			"fighter/snake/motion/body/c01/c00attackdashlightthrow.nuanmb"
+		],
+		"fighter/snake/c02": [
+			"fighter/snake/motion/body/c02/c00attackdashlightthrow.nuanmb"
+		],
+		"fighter/snake/c03": [
+			"fighter/snake/motion/body/c03/c00attackdashlightthrow.nuanmb"
+		],
+		"fighter/snake/c04": [
+			"fighter/snake/motion/body/c04/c00attackdashlightthrow.nuanmb"
+		],
+		"fighter/snake/c05": [
+			"fighter/snake/motion/body/c05/c00attackdashlightthrow.nuanmb"
+		],
+		"fighter/snake/c06": [
+			"fighter/snake/motion/body/c06/c00attackdashlightthrow.nuanmb"
+		],
+		"fighter/snake/c07": [
+			"fighter/snake/motion/body/c07/c00attackdashlightthrow.nuanmb"
+		],
     	"fighter/trail/c00": [
 			"fighter/trail/motion/body/c00/d00specialinput.nuanmb"
 		],
