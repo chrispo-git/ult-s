@@ -1,7 +1,7 @@
 //Every time I make an edit to this mod I'm gonna leave a complaint about you still using ACMD-Skyline instead of Smashline until it's updated.
 use {
 	crate::{
-		controls::*,
+		controls::consts::*,
 		util::*,
 	},
 	smash::{
@@ -86,6 +86,7 @@ unsafe fn snake_fsmash_eff(fighter: &mut L2CAgentBase) {
 		}
     });
 }
+
 #[fighter_frame( agent = FIGHTER_KIND_SNAKE )]
 fn snake_frame(fighter: &mut L2CFighterCommon) {
     unsafe {
@@ -113,7 +114,7 @@ fn snake_frame(fighter: &mut L2CFighterCommon) {
         }
 		if WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_HIT_STOP_ATTACK_SUSPEND_FRAME) >= 1 {
 			ArticleModule::set_visibility_whole(boma, *FIGHTER_SNAKE_GENERATE_ARTICLE_RPG7, false, smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
-		}
+		} 
 		else {
 			ArticleModule::set_visibility_whole(boma, *FIGHTER_SNAKE_GENERATE_ARTICLE_RPG7, true, smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
 		};

@@ -1377,7 +1377,7 @@
             "fighter/shizue/model/pot/c07/metal_trafficsign_001_nor.nutexb",
             "fighter/shizue/model/pot/c07/metal_trafficsign_001_prm.nutexb"
         ],
-        "fighter/snake/c00": [
+    	"fighter/snake/c00": [
 			"fighter/snake/motion/body/c00/c00attackdashlightthrow.nuanmb"
 		],
 		"fighter/snake/c01": [
