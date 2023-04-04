@@ -964,7 +964,7 @@ pub fn char_input(fighter : &mut L2CFighterCommon) {
 						//println!("Input missed!");
 					}; 
 				};
-				if INPUT_START[ENTRY_ID] == true {
+				if INPUT_START[ENTRY_ID] ==  true {
 					INPUT_WINDOW[ENTRY_ID] += 1;
 				};
 				if INPUT_NUM[ENTRY_ID] == 3 && (FighterMotionModuleImpl::get_cancel_frame(boma,smash::phx::Hash40::new_raw(MotionModule::motion_kind(boma)),false) as f32 <= MotionModule::frame(boma) || MotionModule::frame(boma) < 2.0) && StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR{
