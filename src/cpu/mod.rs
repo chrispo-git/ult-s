@@ -23,6 +23,7 @@ pub unsafe fn fighter_info(fighter_boma: &mut BattleObjectModuleAccessor) -> *mu
 
 pub(crate) unsafe fn main_logic(fighter: &mut L2CFighterCommon) -> () {
     let cpu = FighterInformation::is_operation_cpu(fighter_info(&mut *fighter.module_accessor));
+    let training = smash::app::smashball::is_training_mode();
 
     let spd_x = KineticModule::get_sum_speed_x(fighter.module_accessor, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_DAMAGE);
     let spd_y = KineticModule::get_sum_speed_y(fighter.module_accessor, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_DAMAGE);
@@ -36,7 +37,7 @@ pub(crate) unsafe fn main_logic(fighter: &mut L2CFighterCommon) -> () {
     if MotionModule::frame(fighter.module_accessor) == 0.0 {
         ANGLE_DEGREES = (angle * 180.0 / PI + 360.0) % 360.0;
     }
-    if cpu {
+    if cpu && !training{
         let rand_num = smash::app::sv_math::rand(hash40("fighter"), 100);
         let rand_num2 = smash::app::sv_math::rand(hash40("fighter"), 100);
         let rand_1_val = if rand_num % 2 == 0 {1.0} else {-1.0};
