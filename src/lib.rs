@@ -16,9 +16,27 @@ extern crate lazy_static;
 pub static mut FIGHTER_MANAGER: usize = 0;
 
 use skyline::libc::c_char;
+use skyline::nro::{self, NroInfo};
+use smash::params::add_hook;
+
 extern "C" {
 	fn change_version_string(arg: u64, string: *const c_char);
 }
+pub fn nro_hook(info: &skyline::nro::NroInfo) {
+    if info.module.isLoaded {
+        return;
+    }
+
+    if info.name == "common" {
+        skyline::install_hooks!(
+            cpu::dmg_fly_main,
+            cpu::dmg_fly_roll_main,
+            cpu::dmg_main,
+            cpu::dmg_air_main
+        );
+    }
+}
+
   
 #[skyline::hook(replace = change_version_string)]
 fn change_version_string_hook(arg: u64, string: *const c_char) {
@@ -34,6 +52,7 @@ fn change_version_string_hook(arg: u64, string: *const c_char) {
 mod util;
 mod controls;
 mod common;
+mod cpu;
 
 mod bayonetta;
 mod brave;
@@ -117,6 +136,14 @@ mod wolf;
 mod younglink;
 mod zelda;
 
+
+
+
+
+
+
+
+
 std::arch::global_asm!(
     r#"
     .section .nro_header
@@ -154,9 +181,11 @@ std::arch::global_asm!(
 pub extern "C" fn main() {
 	//Common
 	skyline::install_hooks!(change_version_string_hook);
+	nro::add_hook(nro_hook).unwrap();
 	util::install();
 	common::install();
 	controls::install();
+	cpu::install();
 	
 	//Fighters
 	bayonetta::install();
