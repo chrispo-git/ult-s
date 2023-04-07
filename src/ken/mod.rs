@@ -203,7 +203,7 @@ pub fn supers(fighter : &mut L2CFighterCommon) {
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_ATTACK_DASH, true);
 				};
 			};
-			if [hash40("attack_s3_s_s"), hash40("attack_s3_s_w"), hash40("attack_lw3_s"), hash40("attack_hi3_s"), hash40("attack_dash")].contains(&motion_kind) && AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_ALL) && !is_hitlag(boma) && KEN_SUPER[ENTRY_ID] >= meter_half as i32 && cancel_frame-frame > 9.0{
+			if [hash40("attack_s3_s_s"), hash40("attack_s3_s_w"), hash40("attack_lw3_s"), hash40("attack_hi3_s")].contains(&motion_kind) && AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_ALL) && !is_hitlag(boma) && KEN_SUPER[ENTRY_ID] >= meter_half as i32 && cancel_frame-frame > 9.0{
 				let mut stick_x = ControlModule::get_stick_x(boma) ;
 				stick_x *= PostureModule::lr(boma);
 				if stick_x >= 0.665 && (ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_DASH) != 0 {
