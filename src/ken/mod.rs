@@ -238,8 +238,17 @@ pub fn supers(fighter : &mut L2CFighterCommon) {
 							MotionModule::change_motion(boma, Hash40::new("special_s_ex"), -1.0, 1.0, false, 0.0, false, false);
 						};
 					};
-					if [hash40("special_s_ex")].contains(&motion_kind) && MotionModule::frame(boma) > 65.0 {
-						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL, false);
+				};
+			};
+			if [hash40("special_s_ex")].contains(&motion_kind) {
+				if MotionModule::frame(boma) > 65.0 {
+					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL, false);
+				};
+				if MotionModule::frame(boma) >= 8.0 {
+					StatusModule::set_situation_kind(boma, smash::app::SituationKind(*SITUATION_KIND_AIR), true);
+					StatusModule::set_keep_situation_air(boma, true);
+					if KineticModule::get_kinetic_type(boma) != *FIGHTER_KINETIC_TYPE_MOTION_AIR {
+						KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_MOTION_AIR);
 					};
 				};
 			};
@@ -456,7 +465,6 @@ unsafe fn ken_ex_tatsu(fighter: &mut L2CAgentBase) {
 			WorkModule::on_flag(Flag=FIGHTER_RYU_INSTANCE_WORK_ID_FLAG_FINAL_HIT_CANCEL)
 			ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=3.0, Angle=0, KBG=50, FKB=100, BKB=0, Size=4.5, X=0.0, Y=9.0, Z=4.5, X2=0.0, Y2=9.0, Z2=4.5, Hitlag=1.5, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_THRU, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_KEN_KICK, Type=ATTACK_REGION_KICK)
 			FighterAreaModuleImpl::enable_fix_jostle_area_xy(3.0, 3.5, 8.5, 4.5)
-			WorkModule::on_flag(Flag=FIGHTER_RYU_STATUS_WORK_ID_SPECIAL_HI_FLAG_JUMP)
 		}
 		frame(Frame=9)
 		if(is_excute){
