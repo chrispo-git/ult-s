@@ -1,5 +1,29 @@
 {
 	"new-dir-files": {
+        "fighter/ken/c00": [
+            "fighter/ken/motion/body/c00/d02specialhiex.nuanmb"
+        ],
+        "fighter/ken/c01": [
+            "fighter/ken/motion/body/c01/d02specialhiex.nuanmb"
+        ],
+        "fighter/ken/c02": [
+            "fighter/ken/motion/body/c02/d02specialhiex.nuanmb"
+        ],
+        "fighter/ken/c03": [
+            "fighter/ken/motion/body/c03/d02specialhiex.nuanmb"
+        ],
+        "fighter/ken/c04": [
+            "fighter/ken/motion/body/c04/d02specialhiex.nuanmb"
+        ],
+        "fighter/ken/c05": [
+            "fighter/ken/motion/body/c05/d02specialhiex.nuanmb"
+        ],
+        "fighter/ken/c06": [
+            "fighter/ken/motion/body/c06/d02specialhiex.nuanmb"
+        ],
+        "fighter/ken/c07": [
+            "fighter/ken/motion/body/c07/d02specialhiex.nuanmb"
+        ],
         "fighter/murabito/c00": [
             "fighter/murabito/model/house/c00/def_brick_001_col.nutexb",
             "fighter/murabito/model/house/c00/def_circle_001_col.nutexb",

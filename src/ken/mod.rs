@@ -174,7 +174,7 @@ pub fn supers(fighter : &mut L2CFighterCommon) {
 			if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_LW {
 				let mut stick_x = ControlModule::get_stick_x(boma) ;
 				stick_x *= PostureModule::lr(boma);
-				let is_eligble_meter = (4..25).contains(MotionModule::frame(boma) as i32) && KEN_SUPER[ENTRY_ID] >= meter_half as i32;
+				let is_eligble_meter = (4..25).contains(&(MotionModule::frame(boma) as i32)) && KEN_SUPER[ENTRY_ID] >= meter_half as i32;
 				
 				if MotionModule::frame(boma) > 25.0 || is_eligble_meter {
 					if stick_x >= 0.665 {
@@ -182,7 +182,7 @@ pub fn supers(fighter : &mut L2CFighterCommon) {
 							KEN_SUPER[ENTRY_ID] -= meter_half as i32;
 							println!("meter spent! {} ", KEN_SUPER[ENTRY_ID]);
 							EX_DOWNB[ENTRY_ID] = true;
-						};
+						}; 
 						StatusModule::change_status_request_from_script(boma, *FIGHTER_RYU_STATUS_KIND_SPECIAL_LW_STEP_F, true);
 					} else if stick_x <= -0.665 {
 						if is_eligble_meter {
@@ -203,19 +203,36 @@ pub fn supers(fighter : &mut L2CFighterCommon) {
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_ATTACK_DASH, true);
 				};
 			};
-			if [hash40("attack_s3_s_s"), hash40("attack_s3_s_w"), hash40("attack_lw3_s"), hash40("attack_dash")].contains(&motion_kind) && AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_ALL) && !is_hitlag(boma) && KEN_SUPER[ENTRY_ID] >= meter_half as i32 && cancel_frame-frame > 9.0{
+			if [hash40("attack_s3_s_s"), hash40("attack_s3_s_w"), hash40("attack_lw3_s"), hash40("attack_hi3_s"), hash40("attack_dash")].contains(&motion_kind) && AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_ALL) && !is_hitlag(boma) && KEN_SUPER[ENTRY_ID] >= meter_half as i32 && cancel_frame-frame > 9.0{
 				let mut stick_x = ControlModule::get_stick_x(boma) ;
 				stick_x *= PostureModule::lr(boma);
 				if stick_x >= 0.665 && (ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_DASH) != 0 {
 					KEN_SUPER[ENTRY_ID] -= meter_half as i32;
 					println!("meter spent! {} ", KEN_SUPER[ENTRY_ID]);
+					EX_DOWNB[ENTRY_ID] = true;
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_RYU_STATUS_KIND_SPECIAL_LW_STEP_F, true);
 				} else if stick_x <= -0.665 {
 					println!("meter spent! {} ", KEN_SUPER[ENTRY_ID]);
 					KEN_SUPER[ENTRY_ID] -= meter_half as i32;
+					EX_DOWNB[ENTRY_ID] = true;
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_RYU_STATUS_KIND_SPECIAL_LW_STEP_B, true);
 				};
 			};
+
+			//EX
+			if KEN_SUPER[ENTRY_ID] >= meter_half as i32 && !AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_ALL) {
+				if [*FIGHTER_STATUS_KIND_SPECIAL_HI].contains(&status_kind) {
+					if [hash40("special_hi"), hash40("special_air_hi")].contains(&motion_kind) && MotionModule::frame(boma) < 5.0 {
+						if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_ATTACK) && ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_SPECIAL) {
+							KEN_SUPER[ENTRY_ID] -= meter_half as i32;
+							println!("meter spent! {} ", KEN_SUPER[ENTRY_ID]);
+							MotionModule::change_motion(boma, Hash40::new("special_hi_ex"), -1.0, 1.0, false, 0.0, false, false);
+						};
+					};
+				};
+			};
+
+			//Focus
 			if [*FIGHTER_STATUS_KIND_SPECIAL_HI, *FIGHTER_RYU_STATUS_KIND_SPECIAL_HI_COMMAND].contains(&status_kind)  && MotionModule::frame(boma) < 8.0 && (ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_LW) != 0 && KEN_SUPER[ENTRY_ID] >= meter_half as i32  {
 				StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_SPECIAL_LW, true);
 			};
@@ -289,73 +306,136 @@ unsafe fn ken_prox_ftilt(fighter: &mut L2CAgentBase) {
 }		
 #[acmd_script(
     agent = "ken",
-    scripts =  "game_specialhicommand",
+    script =  "game_specialhiex",
     category = ACMD_GAME,
 	low_priority)]
-unsafe fn ken_shoryu(fighter: &mut L2CAgentBase) {
-		let lua_state = fighter.lua_state_agent;
-		let mut ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) as usize;
-		if ENTRY_ID > 7 {
-			ENTRY_ID = 7;
-		};
-		if macros::is_excute(fighter) {
-			macros::HIT_NODE(fighter, Hash40::new("armr"), *HIT_STATUS_XLU);
-			macros::HIT_NODE(fighter, Hash40::new("shoulderr"), *HIT_STATUS_XLU);
-		};
-		frame(fighter.lua_state_agent, 5.0);
-		if macros::is_excute(fighter) {
-			WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_RYU_INSTANCE_WORK_ID_FLAG_FINAL_HIT_CANCEL);
-			WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_RYU_STATUS_WORK_ID_SPECIAL_HI_FLAG_REVERSE_LR);
-			WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_RYU_STATUS_WORK_ID_SPECIAL_HI_FLAG_DECIDE_STRENGTH);
-			if KEN_IS_EX[ENTRY_ID] == true {
-				macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 12.0, /*Angle*/ 367, /*KBG*/ 100, /*FKB*/ 150, /*BKB*/ 0, /*Size*/ 7.6, /*X*/ 0.0, /*Y*/ 10.0, /*Z*/ 7.6, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.5, /*SDI*/ 0.5, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_fire"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_KEN_SHORYU, /*Type*/ *ATTACK_REGION_PUNCH);
-			} else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_RYU_STATUS_WORK_ID_SPECIAL_COMMON_INT_STRENGTH) == *FIGHTER_RYU_STRENGTH_S {
-				macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 2.2, /*Angle*/ 100, /*KBG*/ 100, /*FKB*/ 100, /*BKB*/ 0, /*Size*/ 4.6, /*X*/ 0.0, /*Y*/ 10.0, /*Z*/ 7.6, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 2.1, /*SDI*/ 0.5, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 1, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_fire"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_KEN_SHORYU, /*Type*/ *ATTACK_REGION_PUNCH);
-			};
-		};
-		frame(fighter.lua_state_agent, 6.0);
-		if WorkModule::get_int(fighter.module_accessor, *FIGHTER_RYU_STATUS_WORK_ID_SPECIAL_COMMON_INT_STRENGTH) == *FIGHTER_RYU_STRENGTH_W {
-			if macros::is_excute(fighter) {
-				macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 13.0, /*Angle*/ 80, /*KBG*/ 58, /*FKB*/ 0, /*BKB*/ 80, /*Size*/ 4.6, /*X*/ 0.0, /*Y*/ 10.0, /*Z*/ 7.6, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.6, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_KEN_PUNCH, /*Type*/ *ATTACK_REGION_PUNCH);
-			};
-		} else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_RYU_STATUS_WORK_ID_SPECIAL_COMMON_INT_STRENGTH) == *FIGHTER_RYU_STRENGTH_M {
-			if macros::is_excute(fighter) {
-				macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 8.0, /*Angle*/ 80, /*KBG*/ 100, /*FKB*/ 100, /*BKB*/ 0, /*Size*/ 4.6, /*X*/ 0.0, /*Y*/ 10.0, /*Z*/ 7.6, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.4, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 3, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_KEN_PUNCH, /*Type*/ *ATTACK_REGION_PUNCH);
-			};
-		} else if KEN_IS_EX[ENTRY_ID] == false {
-			if macros::is_excute(fighter) {
-				macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 8.0, /*Angle*/ 95, /*KBG*/ 10, /*FKB*/ 0, /*BKB*/ 95, /*Size*/ 4.6, /*X*/ 0.0, /*Y*/ 14.5, /*Z*/ 7.1, /*X2*/ Some(0.0), /*Y2*/ Some(12.5), /*Z2*/ Some(9.1), /*Hitlag*/ 1.22, /*SDI*/ 0.5, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 4, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_fire"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_KEN_SHORYU, /*Type*/ *ATTACK_REGION_PUNCH);
-			};
-		};
-		frame(fighter.lua_state_agent, 9.0);
-		if macros::is_excute(fighter) {
-			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_RYU_INSTANCE_WORK_ID_FLAG_FINAL_HIT_CANCEL);
-			WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_RYU_STATUS_WORK_ID_SPECIAL_HI_FLAG_JUMP);
-		};
-		if WorkModule::get_int(fighter.module_accessor, *FIGHTER_RYU_STATUS_WORK_ID_SPECIAL_COMMON_INT_STRENGTH) == *FIGHTER_RYU_STRENGTH_W {
-			if macros::is_excute(fighter) {
-				macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("armr"), /*Damage*/ 7.0, /*Angle*/ 70, /*KBG*/ 90, /*FKB*/ 0, /*BKB*/ 60, /*Size*/ 5.0, /*X*/ 4.0, /*Y*/ -0.4, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.22, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KEN_SHORYU, /*Type*/ *ATTACK_REGION_PUNCH);
+unsafe fn ken_ex_shoryu(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=6)
+		if(is_excute){
+			HitModule::set_status_all(smash::app::HitStatus(*HIT_STATUS_XLU), 0)
+			WorkModule::on_flag(Flag=FIGHTER_RYU_INSTANCE_WORK_ID_FLAG_FINAL_HIT_CANCEL)
+			ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=12.0, Angle=48, KBG=100, FKB=77, BKB=0, Size=5.6, X=0.0, Y=14.5, Z=7.1, X2=0.0, Y2=12.5, Z2=8.1, Hitlag=1.0, SDI=0.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_fire"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_KEN_PUNCH, Type=ATTACK_REGION_PUNCH)
+			AttackModule::set_add_reaction_frame(ID=0, Frames=8.0, Unk=false)
+		}
+		frame(Frame=9)
+		if(is_excute){
+			ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=8.0, Angle=50, KBG=100, FKB=0, BKB=0, Size=3.6, X=0.0, Y=14.5, Z=7.1, X2=0.0, Y2=12.5, Z2=8.1, Hitlag=0.8, SDI=0.5, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_fire"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_KEN_PUNCH, Type=ATTACK_REGION_PUNCH)
+			WorkModule::off_flag(Flag=FIGHTER_RYU_INSTANCE_WORK_ID_FLAG_FINAL_HIT_CANCEL)
+			WorkModule::on_flag(Flag=FIGHTER_RYU_STATUS_WORK_ID_SPECIAL_HI_FLAG_JUMP)
+		}
+		frame(Frame=13)
+		if(is_excute){
+			HitModule::set_status_all(smash::app::HitStatus(*HIT_STATUS_NORMAL), 0)
+			AttackModule::clear_all()
+		}
+		frame(Frame=27)
+		if(is_excute){
+			ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=15.0, Angle=80, KBG=40, FKB=0, BKB=80, Size=6.6, X=0.0, Y=10.0, Z=7.6, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=2.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_fire"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_KEN_PUNCH, Type=ATTACK_REGION_PUNCH)
+		}
+		frame(Frame=36)
+		if(is_excute){
+			sv_battle_object::notify_event_msc_cmd(0x2127e37c07u64, GROUND_CLIFF_CHECK_KIND_ALWAYS_BOTH_SIDES)
+			AttackModule::clear_all()
+		}
+    });
+}
+#[acmd_script(
+    agent = "ken",
+    script =  "effect_specialhiex",
+    category = ACMD_EFFECT,
+	low_priority)]
+unsafe fn ken_ex_shoryu_eff(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=4)
+		if(is_excute){
+			FOOT_EFFECT(hash40("sys_v_smoke_a"), hash40("top"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false)
+			LAST_EFFECT_SET_RATE(0.7)
+		}
+		frame(Frame=5)
+		if(is_excute){
+			BURN_COLOR(2.47, 1.42, 0.05, 1.2)
+		}
+		frame(Frame=10)
+		if(is_excute){
+			BURN_COLOR(2.47, 1.42, 0.05, 1.2)
+		}
+		frame(Frame=15)
+		if(is_excute){
+			BURN_COLOR(2.47, 1.42, 0.05, 1.2)
+		}
+		frame(Frame=22)
+		if(is_excute){
+			LANDING_EFFECT(hash40("sys_down_smoke"), hash40("top"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false)
+			BURN_COLOR(2.47, 1.42, 0.05, 1.2)
+		}
+		frame(Frame=27)
+		if(is_excute){
+			EFFECT_FOLLOW_NO_STOP(hash40("ken_syoryuken_fire"), hash40("handr"), 0, 0, 0, 0, 0, 0, 1, false)
+			EffectModule::enable_sync_init_pos_last()
+			BURN_COLOR(2.47, 1.42, 0.05, 1.2)
+			rust {
+				if PostureModule::lr(fighter.module_accessor) < 0.0 {
+					macros::EFFECT_FOLLOW(fighter, Hash40::new("ken_syoryuken_firearc"), Hash40::new("trans"), 3, 2, 2, 5, 0, 5, 1, false);
+            		macros::EFFECT_FOLLOW(fighter, Hash40::new("ken_syoryuken_firearc2"), Hash40::new("trans"), 3, 2, 2, 5, 0, 5, 1, false);
+				} else {
+					macros::EFFECT_FOLLOW(fighter, Hash40::new("ken_syoryuken_firearc"), Hash40::new("trans"), -3, 2, 2, 5, 0, -5, 1, false);
+            		macros::EFFECT_FOLLOW(fighter, Hash40::new("ken_syoryuken_firearc2"), Hash40::new("trans"), -3, 2, 2, 5, 0, -5, 1, false);
+            		EffectModule::enable_sync_init_pos_last(fighter.module_accessor);
+				}
 			}
-		} else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_RYU_STATUS_WORK_ID_SPECIAL_COMMON_INT_STRENGTH) == *FIGHTER_RYU_STRENGTH_M {
-			macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("armr"), /*Damage*/ 6.0, /*Angle*/ 70, /*KBG*/ 121, /*FKB*/ 0, /*BKB*/ 78, /*Size*/ 5.5, /*X*/ 4.0, /*Y*/ -0.4, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.4, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_KEN_PUNCH, /*Type*/ *ATTACK_REGION_PUNCH);
-		} else if KEN_IS_EX[ENTRY_ID] == false {
-			macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("armr"), /*Damage*/ 6.5, /*Angle*/ 70, /*KBG*/ 126, /*FKB*/ 0, /*BKB*/ 80, /*Size*/ 5.5, /*X*/ 4.0, /*Y*/ -0.4, /*Z*/ 0.0, /*X2*/ Some(-3.0), /*Y2*/ Some(-0.4), /*Z2*/ Some(0.0), /*Hitlag*/ 1.4, /*SDI*/ 0.5, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_fire"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_KEN_SHORYU, /*Type*/ *ATTACK_REGION_PUNCH);
-		};
-		frame(fighter.lua_state_agent, 15.0);
-		if macros::is_excute(fighter) {
-			macros::HIT_NODE(fighter, Hash40::new("armr"), *HIT_STATUS_NORMAL);
-			macros::HIT_NODE(fighter, Hash40::new("shoulderr"), *HIT_STATUS_NORMAL);
-		};
-		frame(fighter.lua_state_agent, 20.0);
-		if macros::is_excute(fighter) {
-			AttackModule::clear_all(fighter.module_accessor);
-		};
+		}
+		frame(Frame=31)
+		if(is_excute){
+			EFFECT_DETACH_KIND(hash40("ken_syoryuken_firearc"), -1)
+			BURN_COLOR_FRAME(20, 1, 1, 1, 0)
+			BURN_COLOR_NORMAL()
+		}
+		frame(Frame=43)
+		if(is_excute){
+			EFFECT_OFF_KIND(hash40("ken_syoryuken_fire"), false, true)
+		}
+    });
+}
+#[acmd_script(
+    agent = "ken",
+    script =  "sound_specialhiex",
+    category = ACMD_SOUND,
+	low_priority)]
+unsafe fn ken_ex_shoryu_snd(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=2)
+		if(is_excute){
+			PLAY_SE(hash40("vc_ken_special_h01"))
+		}
+		frame(Frame=6)
+		if(is_excute){
+			PLAY_SE(hash40("se_ken_special_h03"))
+		}
+		frame(Frame=22)
+		if(is_excute){
+			PLAY_LANDING_SE(hash40("se_ken_landing03"))
+		}
+		frame(Frame=27)
+		if(is_excute){
+			PLAY_SE(hash40("se_ken_special_h01"))
+		}
+		frame(Frame=33)
+		if(is_excute){
+			PLAY_SE(hash40("se_ken_special_h02"))
+		}
+    });
 }
 pub fn install() {
     smashline::install_acmd_scripts!(
 		ken_dsmash,
-		ken_shoryu,
-		ken_jab3
+		ken_jab3,
+		ken_ex_shoryu,
+		ken_ex_shoryu_eff,
+		ken_ex_shoryu_snd
     );
     smashline::install_agent_frame_callbacks!(supers);
 }
