@@ -115,6 +115,7 @@ mod reflet;
 mod richter;
 mod ridley;
 mod robot;
+mod rockman;
 mod rosetta;
 mod roy;
 mod ryu;
@@ -260,6 +261,7 @@ pub extern "C" fn main() {
 	richter::install();
 	ridley::install();
 	robot::install();
+	rockman::install();
 	rosetta::install();
 	roy::install();
 	ryu::install();
