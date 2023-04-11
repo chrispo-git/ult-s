@@ -48,7 +48,7 @@ pub fn faf_change_master(fighter : &mut L2CFighterCommon) {
 				CancelModule::enable_cancel(boma);
 			};
 		}else if fighter_kind == *FIGHTER_KIND_DONKEY {
-			if motion_kind == hash40("attack_air_f") && frame >= 46.0 /*This is the new FaF*/ { // Enables cancel when the new FaF is over
+			if motion_kind == hash40("attack_air_f") && frame >= 40.0 /*This is the new FaF*/ { // Enables cancel when the new FaF is over
 				CancelModule::enable_cancel(boma);
 			};
 			if motion_kind == hash40("attack_dash") && frame >= 29.0 {
