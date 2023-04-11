@@ -123,7 +123,9 @@
   </list>
   <list hash="param_special_hi">
     <hash40 index="0">dummy</hash40>
-    <hash40 index="1">dummy</hash40>
+    <struct index="1">
+      <float hash="hi2_jump_air_speed_y_mul">1.0815</float>
+    </struct>
     <hash40 index="2">dummy</hash40>
     <hash40 index="3">dummy</hash40>
   </list>
