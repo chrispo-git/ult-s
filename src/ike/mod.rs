@@ -749,6 +749,22 @@ unsafe fn ike_sideb_eff(fighter: &mut L2CAgentBase) {
 		};
 }
 
+pub(crate) fn check_jump(boma: &mut smash::app::BattleObjectModuleAccessor) -> bool {
+	unsafe {
+		if ControlModule::check_button_on_trriger(boma, *CONTROL_PAD_BUTTON_JUMP) {
+			return true;
+		};
+		if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_FLICK_JUMP) {
+			if ControlModule::get_flick_y(boma) >= 3 && ControlModule::get_stick_y(boma) >= 0.7 {
+				return true;
+			};
+		};
+		if ControlModule::check_button_on_trriger(boma, *CONTROL_PAD_BUTTON_JUMP_MINI) {
+			return true;
+		};
+		return false;
+	}
+}
 
 //Ike
 #[fighter_frame_callback]
@@ -774,7 +790,7 @@ pub fn ike(fighter : &mut L2CFighterCommon) {
 					EffectModule::kill_kind(boma, smash::phx::Hash40::new_raw(0x10ae069777), false, false);
 				};
 			};
-			if IKE_INSTALL[ENTRY_ID] > 0 && [*FIGHTER_IKE_STATUS_KIND_SPECIAL_S_DASH, *FIGHTER_IKE_STATUS_KIND_SPECIAL_S_END, *FIGHTER_IKE_STATUS_KIND_SPECIAL_S_ATTACK].contains(&status_kind) && ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP) && !AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_SHIELD){
+			if IKE_INSTALL[ENTRY_ID] > 0 && [*FIGHTER_IKE_STATUS_KIND_SPECIAL_S_DASH, *FIGHTER_IKE_STATUS_KIND_SPECIAL_S_END, *FIGHTER_IKE_STATUS_KIND_SPECIAL_S_ATTACK].contains(&status_kind) && check_jump(boma) && !AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_SHIELD){
 				if StatusModule::situation_kind(boma) == *SITUATION_KIND_GROUND {
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_JUMP_SQUAT, true);
 				} else if WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT) < WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT_MAX) && StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR {
