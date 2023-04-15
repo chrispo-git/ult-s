@@ -1,198 +1,207 @@
 {
 	"new-dir-files": {
-        "fighter/chrom/c00": [
-			"fighter/chrom/motion/body/c00/c00attack12.nuanmb",
-			"fighter/chrom/motion/body/c00/c01attacks3hi.nuanmb",
-			"fighter/chrom/motion/body/c00/c01attacks3lw.nuanmb"
-		],
-        "fighter/chrom/c01": [
-			"fighter/chrom/motion/body/c01/c00attack12.nuanmb",
-			"fighter/chrom/motion/body/c01/c01attacks3hi.nuanmb",
-			"fighter/chrom/motion/body/c01/c01attacks3lw.nuanmb"
-		],
-        "fighter/chrom/c02": [
-			"fighter/chrom/motion/body/c02/c00attack12.nuanmb",
-			"fighter/chrom/motion/body/c02/c01attacks3hi.nuanmb",
-			"fighter/chrom/motion/body/c02/c01attacks3lw.nuanmb"
-		],
-        "fighter/chrom/c03": [
-			"fighter/chrom/motion/body/c03/c00attack12.nuanmb",
-			"fighter/chrom/motion/body/c03/c01attacks3hi.nuanmb",
-			"fighter/chrom/motion/body/c03/c01attacks3lw.nuanmb"
-		],
-        "fighter/chrom/c04": [
-			"fighter/chrom/motion/body/c04/c00attack12.nuanmb",
-			"fighter/chrom/motion/body/c04/c01attacks3hi.nuanmb",
-			"fighter/chrom/motion/body/c04/c01attacks3lw.nuanmb"
-		],
-        "fighter/chrom/c05": [
-			"fighter/chrom/motion/body/c05/c00attack12.nuanmb",
-			"fighter/chrom/motion/body/c05/c01attacks3hi.nuanmb",
-			"fighter/chrom/motion/body/c05/c01attacks3lw.nuanmb"
-		],
-        "fighter/chrom/c06": [
-			"fighter/chrom/motion/body/c06/c00attack12.nuanmb",
-			"fighter/chrom/motion/body/c06/c01attacks3hi.nuanmb",
-			"fighter/chrom/motion/body/c06/c01attacks3lw.nuanmb"
-		],
-        "fighter/chrom/c07": [
-			"fighter/chrom/motion/body/c07/c00attack12.nuanmb",
-			"fighter/chrom/motion/body/c07/c01attacks3hi.nuanmb",
-			"fighter/chrom/motion/body/c07/c01attacks3lw.nuanmb"
-		],
-        "fighter/dedede/c00": [
-			"fighter/dedede/motion/body/c00/d00specialinput.nuanmb",
-			"fighter/dedede/motion/body/c00/d00specialairinput.nuanmb",
-			"fighter/dedede/motion/body/c00/d00specialairinput2.nuanmb",
-			"fighter/dedede/motion/body/c00/d00specialairinputlanding.nuanmb"
-		],
-		"fighter/dedede/c01": [
-			"fighter/dedede/motion/body/c01/d00specialinput.nuanmb",
-			"fighter/dedede/motion/body/c01/d00specialairinput.nuanmb",
-			"fighter/dedede/motion/body/c01/d00specialairinput2.nuanmb",
-			"fighter/dedede/motion/body/c01/d00specialairinputlanding.nuanmb"
-		],
-		"fighter/dedede/c02": [
-			"fighter/dedede/motion/body/c02/d00specialinput.nuanmb",
-			"fighter/dedede/motion/body/c02/d00specialairinput.nuanmb",
-			"fighter/dedede/motion/body/c02/d00specialairinput2.nuanmb",
-			"fighter/dedede/motion/body/c02/d00specialairinputlanding.nuanmb"
-		],
-		"fighter/dedede/c03": [
-			"fighter/dedede/motion/body/c03/d00specialinput.nuanmb",
-			"fighter/dedede/motion/body/c03/d00specialairinput.nuanmb",
-			"fighter/dedede/motion/body/c03/d00specialairinput2.nuanmb",
-			"fighter/dedede/motion/body/c03/d00specialairinputlanding.nuanmb"
-		],
-		"fighter/dedede/c04": [
-			"fighter/dedede/motion/body/c04/d00specialinput.nuanmb",
-			"fighter/dedede/motion/body/c04/d00specialairinput.nuanmb",
-			"fighter/dedede/motion/body/c04/d00specialairinput2.nuanmb",
-			"fighter/dedede/motion/body/c04/d00specialairinputlanding.nuanmb"
-		],
-		"fighter/dedede/c05": [
-			"fighter/dedede/motion/body/c05/d00specialinput.nuanmb",
-			"fighter/dedede/motion/body/c05/d00specialairinput.nuanmb",
-			"fighter/dedede/motion/body/c05/d00specialairinput2.nuanmb",
-			"fighter/dedede/motion/body/c05/d00specialairinputlanding.nuanmb"
-		],
-		"fighter/dedede/c06": [
-			"fighter/dedede/motion/body/c06/d00specialinput.nuanmb",
-			"fighter/dedede/motion/body/c06/d00specialairinput.nuanmb",
-			"fighter/dedede/motion/body/c06/d00specialairinput2.nuanmb",
-			"fighter/dedede/motion/body/c06/d00specialairinputlanding.nuanmb"
-		],
-		"fighter/dedede/c07": [
-			"fighter/dedede/motion/body/c07/d00specialinput.nuanmb",
-			"fighter/dedede/motion/body/c07/d00specialairinput.nuanmb",
-			"fighter/dedede/motion/body/c07/d00specialairinput2.nuanmb",
-			"fighter/dedede/motion/body/c07/d00specialairinputlanding.nuanmb"
-		],
-        "fighter/kirby/c00": [
-			"fighter/kirby/model/finalcutter/c00/def_ultrasword_001_col.nutexb",
-			"fighter/kirby/model/finalcutter/c00/def_ultrasword_001_nor.nutexb",
-			"fighter/kirby/model/finalcutter/c00/def_ultrasword_001_prm.nutexb",
-			"fighter/kirby/motion/body/c00/d02specialinput.nuanmb",
-			"fighter/kirby/model/finalcutter/c00/def_parasol_001_col.nutexb",
-			"fighter/kirby/model/finalcutter/c00/def_spear_001_col.nutexb",
-			"fighter/kirby/model/finalcutter/c00/def_speartip_001_col.nutexb",
-			"fighter/kirby/model/finalcutter/c00/def_wandball_001_col.nutexb",
-			"fighter/kirby/model/finalcutter/c00/def_wandhandle_001_col.nutexb",
-			"fighter/kirby/model/finalcutter/c00/def_wheel_001_col.nutexb",
-			"fighter/kirby/motion/finalcutter/c00/d02specialhi5.nuanmb"
-		],
-        "fighter/kirby/c01": [
-			"fighter/kirby/model/finalcutter/c01/def_ultrasword_001_col.nutexb",
-			"fighter/kirby/model/finalcutter/c01/def_ultrasword_001_nor.nutexb",
-			"fighter/kirby/model/finalcutter/c01/def_ultrasword_001_prm.nutexb",
-			"fighter/kirby/motion/body/c01/d02specialinput.nuanmb",
-			"fighter/kirby/model/finalcutter/c01/def_parasol_001_col.nutexb",
-			"fighter/kirby/model/finalcutter/c01/def_spear_001_col.nutexb",
-			"fighter/kirby/model/finalcutter/c01/def_speartip_001_col.nutexb",
-			"fighter/kirby/model/finalcutter/c01/def_wandball_001_col.nutexb",
-			"fighter/kirby/model/finalcutter/c01/def_wandhandle_001_col.nutexb",
-			"fighter/kirby/model/finalcutter/c01/def_wheel_001_col.nutexb",
-			"fighter/kirby/motion/finalcutter/c01/d02specialhi5.nuanmb"
-		],
-        "fighter/kirby/c02": [
-			"fighter/kirby/model/finalcutter/c02/def_ultrasword_001_col.nutexb",
-			"fighter/kirby/model/finalcutter/c02/def_ultrasword_001_nor.nutexb",
-			"fighter/kirby/model/finalcutter/c02/def_ultrasword_001_prm.nutexb",
-			"fighter/kirby/motion/body/c02/d02specialinput.nuanmb",
-			"fighter/kirby/model/finalcutter/c02/def_parasol_001_col.nutexb",
-			"fighter/kirby/model/finalcutter/c02/def_spear_001_col.nutexb",
-			"fighter/kirby/model/finalcutter/c02/def_speartip_001_col.nutexb",
-			"fighter/kirby/model/finalcutter/c02/def_wandball_001_col.nutexb",
-			"fighter/kirby/model/finalcutter/c02/def_wandhandle_001_col.nutexb",
-			"fighter/kirby/model/finalcutter/c02/def_wheel_001_col.nutexb",
-			"fighter/kirby/motion/finalcutter/c02/d02specialhi5.nuanmb"
-		],
-        "fighter/kirby/c03": [
-			"fighter/kirby/model/finalcutter/c03/def_ultrasword_001_col.nutexb",
-			"fighter/kirby/model/finalcutter/c03/def_ultrasword_001_nor.nutexb",
-			"fighter/kirby/model/finalcutter/c03/def_ultrasword_001_prm.nutexb",
-			"fighter/kirby/motion/body/c03/d02specialinput.nuanmb",
-			"fighter/kirby/model/finalcutter/c03/def_parasol_001_col.nutexb",
-			"fighter/kirby/model/finalcutter/c03/def_spear_001_col.nutexb",
-			"fighter/kirby/model/finalcutter/c03/def_speartip_001_col.nutexb",
-			"fighter/kirby/model/finalcutter/c03/def_wandball_001_col.nutexb",
-			"fighter/kirby/model/finalcutter/c03/def_wandhandle_001_col.nutexb",
-			"fighter/kirby/model/finalcutter/c03/def_wheel_001_col.nutexb",
-			"fighter/kirby/motion/finalcutter/c03/d02specialhi5.nuanmb"
-		],
-        "fighter/kirby/c04": [
-			"fighter/kirby/model/finalcutter/c04/def_ultrasword_001_col.nutexb",
-			"fighter/kirby/model/finalcutter/c04/def_ultrasword_001_nor.nutexb",
-			"fighter/kirby/model/finalcutter/c04/def_ultrasword_001_prm.nutexb",
-			"fighter/kirby/motion/body/c04/d02specialinput.nuanmb",
-			"fighter/kirby/model/finalcutter/c04/def_parasol_001_col.nutexb",
-			"fighter/kirby/model/finalcutter/c04/def_spear_001_col.nutexb",
-			"fighter/kirby/model/finalcutter/c04/def_speartip_001_col.nutexb",
-			"fighter/kirby/model/finalcutter/c04/def_wandball_001_col.nutexb",
-			"fighter/kirby/model/finalcutter/c04/def_wandhandle_001_col.nutexb",
-			"fighter/kirby/model/finalcutter/c04/def_wheel_001_col.nutexb",
-			"fighter/kirby/motion/finalcutter/c04/d02specialhi5.nuanmb"
-		],
-        "fighter/kirby/c05": [
-			"fighter/kirby/model/finalcutter/c05/def_ultrasword_001_col.nutexb",
-			"fighter/kirby/model/finalcutter/c05/def_ultrasword_001_nor.nutexb",
-			"fighter/kirby/model/finalcutter/c05/def_ultrasword_001_prm.nutexb",
-			"fighter/kirby/motion/body/c05/d02specialinput.nuanmb",
-			"fighter/kirby/model/finalcutter/c05/def_parasol_001_col.nutexb",
-			"fighter/kirby/model/finalcutter/c05/def_spear_001_col.nutexb",
-			"fighter/kirby/model/finalcutter/c05/def_speartip_001_col.nutexb",
-			"fighter/kirby/model/finalcutter/c05/def_wandball_001_col.nutexb",
-			"fighter/kirby/model/finalcutter/c05/def_wandhandle_001_col.nutexb",
-			"fighter/kirby/model/finalcutter/c05/def_wheel_001_col.nutexb",
-			"fighter/kirby/motion/finalcutter/c05/d02specialhi5.nuanmb"
-		],
-        "fighter/kirby/c06": [
-			"fighter/kirby/model/finalcutter/c06/def_ultrasword_001_col.nutexb",
-			"fighter/kirby/model/finalcutter/c06/def_ultrasword_001_nor.nutexb",
-			"fighter/kirby/model/finalcutter/c06/def_ultrasword_001_prm.nutexb",
-			"fighter/kirby/motion/body/c06/d02specialinput.nuanmb",
-			"fighter/kirby/model/finalcutter/c06/def_parasol_001_col.nutexb",
-			"fighter/kirby/model/finalcutter/c06/def_spear_001_col.nutexb",
-			"fighter/kirby/model/finalcutter/c06/def_speartip_001_col.nutexb",
-			"fighter/kirby/model/finalcutter/c06/def_wandball_001_col.nutexb",
-			"fighter/kirby/model/finalcutter/c06/def_wandhandle_001_col.nutexb",
-			"fighter/kirby/model/finalcutter/c06/def_wheel_001_col.nutexb",
-			"fighter/kirby/motion/finalcutter/c06/d02specialhi5.nuanmb"
-		],
-        "fighter/kirby/c07": [
-			"fighter/kirby/model/finalcutter/c07/def_ultrasword_001_col.nutexb",
-			"fighter/kirby/model/finalcutter/c07/def_ultrasword_001_nor.nutexb",
-			"fighter/kirby/model/finalcutter/c07/def_ultrasword_001_prm.nutexb",
-			"fighter/kirby/motion/body/c07/d02specialinput.nuanmb",
-			"fighter/kirby/model/finalcutter/c07/def_parasol_001_col.nutexb",
-			"fighter/kirby/model/finalcutter/c07/def_spear_001_col.nutexb",
-			"fighter/kirby/model/finalcutter/c07/def_speartip_001_col.nutexb",
-			"fighter/kirby/model/finalcutter/c07/def_wandball_001_col.nutexb",
-			"fighter/kirby/model/finalcutter/c07/def_wandhandle_001_col.nutexb",
-			"fighter/kirby/model/finalcutter/c07/def_wheel_001_col.nutexb",
-			"fighter/kirby/motion/finalcutter/c07/d02specialhi5.nuanmb"
-		],
-        "fighter/jack/c00": [
+    	"fighter/snake/c00": [
+		"fighter/snake/motion/body/c00/c00attackdashlightthrow.nuanmb"
+	],
+	"fighter/snake/c01": [
+		"fighter/snake/motion/body/c01/c00attackdashlightthrow.nuanmb"
+	],
+	"fighter/snake/c02": [
+		"fighter/snake/motion/body/c02/c00attackdashlightthrow.nuanmb"
+	],
+	"fighter/snake/c03": [
+		"fighter/snake/motion/body/c03/c00attackdashlightthrow.nuanmb"
+	],
+	"fighter/snake/c04": [
+		"fighter/snake/motion/body/c04/c00attackdashlightthrow.nuanmb"
+	],
+	"fighter/snake/c05": [
+		"fighter/snake/motion/body/c05/c00attackdashlightthrow.nuanmb"
+	],
+	"fighter/snake/c06": [
+		"fighter/snake/motion/body/c06/c00attackdashlightthrow.nuanmb"
+	],
+	"fighter/snake/c07": [
+		"fighter/snake/motion/body/c07/c00attackdashlightthrow.nuanmb"
+	],
+        "fighter/murabito/c00": [
+            "fighter/murabito/model/house/c00/def_brick_001_col.nutexb",
+            "fighter/murabito/model/house/c00/def_circle_001_col.nutexb",
+            "fighter/murabito/model/house/c00/def_ground_001_col.nutexb",
+            "fighter/murabito/model/house/c00/def_roof_001_col.nutexb",
+            "fighter/murabito/model/house/c00/def_steps_001_col.nutexb",
+            "fighter/murabito/model/house/c00/def_leaf_001_col.nutexb",
+            "fighter/murabito/model/firework/c00/def_firework_001_rst.nutexb",
+            "fighter/murabito/model/umbrella/c00/def_hammer_001_col.nutexb",
+            "fighter/murabito/model/umbrella/c00/def_spiny_001_col.nutexb",
+            "fighter/murabito/model/umbrella/c00/def_tail_001_col.nutexb",
+            "fighter/murabito/model/umbrella/c00/def_tail_001_prm.nutexb",
+            "fighter/murabito/model/weeds/c00/block_col.nutexb",
+            "fighter/murabito/model/weeds/c00/block_nor.nutexb",
+            "fighter/murabito/model/weeds/c00/block_prm.nutexb",
+            "fighter/murabito/model/clayrocket/c00/skin_murabito_001_col.nutexb",
+            "fighter/murabito/model/clayrocket/c00/skin_murabito_001_nor.nutexb",
+            "fighter/murabito/model/beetle/c00/skin_murabito_001_col.nutexb",
+            "fighter/murabito/model/beetle/c00/skin_murabito_001_nor.nutexb",
+            "fighter/murabito/motion/body/c00/j01appeallwl.nuanmb"
+        ],
+        "fighter/murabito/c01": [
+                "fighter/murabito/model/house/c01/def_brick_001_col.nutexb",
+                "fighter/murabito/model/house/c01/def_circle_001_col.nutexb",
+                "fighter/murabito/model/house/c01/def_ground_001_col.nutexb",
+                "fighter/murabito/model/house/c01/def_roof_001_col.nutexb",
+                "fighter/murabito/model/house/c01/def_steps_001_col.nutexb",
+                "fighter/murabito/model/house/c01/def_leaf_001_col.nutexb",
+                "fighter/murabito/model/firework/c01/def_firework_001_rst.nutexb",
+                "fighter/murabito/model/umbrella/c01/def_hammer_001_col.nutexb",
+                "fighter/murabito/model/umbrella/c01/def_spiny_001_col.nutexb",
+                "fighter/murabito/model/umbrella/c01/def_tail_001_col.nutexb",
+                "fighter/murabito/model/body/c01/def_murabito_001_col.nutexb",
+                "fighter/murabito/model/umbrella/c01/def_tail_001_prm.nutexb",
+                "fighter/murabito/model/weeds/c01/block_col.nutexb",
+                "fighter/murabito/model/weeds/c01/block_nor.nutexb",
+                "fighter/murabito/model/weeds/c01/block_prm.nutexb",
+                "fighter/murabito/model/clayrocket/c01/skin_murabito_001_col.nutexb",
+                "fighter/murabito/model/clayrocket/c01/skin_murabito_001_nor.nutexb",
+                "fighter/murabito/model/beetle/c01/skin_murabito_001_col.nutexb",
+                "fighter/murabito/model/beetle/c01/skin_murabito_001_nor.nutexb",
+                "fighter/murabito/motion/body/c01/j01appeallwl.nuanmb"
+        ],
+        "fighter/murabito/c02": [
+                "fighter/murabito/model/house/c02/def_brick_001_col.nutexb",
+                "fighter/murabito/model/house/c02/def_circle_001_col.nutexb",
+                "fighter/murabito/model/house/c02/def_ground_001_col.nutexb",
+                "fighter/murabito/model/house/c02/def_roof_001_col.nutexb",
+                "fighter/murabito/model/house/c02/def_steps_001_col.nutexb",
+                "fighter/murabito/model/house/c02/def_leaf_001_col.nutexb",
+                "fighter/murabito/model/firework/c02/def_firework_001_rst.nutexb",
+                "fighter/murabito/model/umbrella/c02/def_hammer_001_col.nutexb",
+                "fighter/murabito/model/umbrella/c02/def_spiny_001_col.nutexb",
+                "fighter/murabito/model/umbrella/c02/def_tail_001_col.nutexb",
+                "fighter/murabito/model/umbrella/c02/def_tail_001_prm.nutexb",
+                "fighter/murabito/model/weeds/c02/block_col.nutexb",
+                "fighter/murabito/model/weeds/c02/block_nor.nutexb",
+                "fighter/murabito/model/weeds/c02/block_prm.nutexb",
+                "fighter/murabito/model/clayrocket/c02/skin_murabito_001_col.nutexb",
+                "fighter/murabito/model/clayrocket/c02/skin_murabito_001_nor.nutexb",
+                "fighter/murabito/model/beetle/c02/skin_murabito_001_col.nutexb",
+                "fighter/murabito/model/beetle/c02/skin_murabito_001_nor.nutexb",
+                "fighter/murabito/motion/body/c02/j01appeallwl.nuanmb"
+        ],
+        "fighter/murabito/c03": [
+                "fighter/murabito/model/house/c03/def_brick_001_col.nutexb",
+                "fighter/murabito/model/house/c03/def_circle_001_col.nutexb",
+                "fighter/murabito/model/house/c03/def_ground_001_col.nutexb",
+                "fighter/murabito/model/house/c03/def_roof_001_col.nutexb",
+                "fighter/murabito/model/house/c03/def_steps_001_col.nutexb",
+                "fighter/murabito/model/house/c03/def_leaf_001_col.nutexb",
+                "fighter/murabito/model/firework/c03/def_firework_001_rst.nutexb",
+                "fighter/murabito/model/umbrella/c03/def_hammer_001_col.nutexb",
+                "fighter/murabito/model/umbrella/c03/def_spiny_001_col.nutexb",
+                "fighter/murabito/model/umbrella/c03/def_tail_001_col.nutexb",
+                "fighter/murabito/model/body/c03/def_murabito_001_col.nutexb",
+                "fighter/murabito/model/umbrella/c03/def_tail_001_prm.nutexb",
+                "fighter/murabito/model/weeds/c03/block_col.nutexb",
+                "fighter/murabito/model/weeds/c03/block_nor.nutexb",
+                "fighter/murabito/model/weeds/c03/block_prm.nutexb",
+                "fighter/murabito/model/clayrocket/c03/skin_murabito_001_col.nutexb",
+                "fighter/murabito/model/clayrocket/c03/skin_murabito_001_nor.nutexb",
+                "fighter/murabito/model/beetle/c03/skin_murabito_001_col.nutexb",
+                "fighter/murabito/model/beetle/c03/skin_murabito_001_nor.nutexb",
+                "fighter/murabito/motion/body/c03/j01appeallwl.nuanmb"
+        ],
+        "fighter/murabito/c04": [
+                "fighter/murabito/model/house/c04/def_brick_001_col.nutexb",
+                "fighter/murabito/model/house/c04/def_circle_001_col.nutexb",
+                "fighter/murabito/model/house/c04/def_ground_001_col.nutexb",
+                "fighter/murabito/model/house/c04/def_roof_001_col.nutexb",
+                "fighter/murabito/model/house/c04/def_steps_001_col.nutexb",
+                "fighter/murabito/model/house/c04/def_leaf_001_col.nutexb",
+                "fighter/murabito/model/firework/c04/def_firework_001_rst.nutexb",
+                "fighter/murabito/model/umbrella/c04/def_hammer_001_col.nutexb",
+                "fighter/murabito/model/umbrella/c04/def_spiny_001_col.nutexb",
+                "fighter/murabito/model/umbrella/c04/def_tail_001_col.nutexb",
+                "fighter/murabito/model/umbrella/c04/def_tail_001_prm.nutexb",
+                "fighter/murabito/model/weeds/c04/block_col.nutexb",
+                "fighter/murabito/model/weeds/c04/block_nor.nutexb",
+                "fighter/murabito/model/weeds/c04/block_prm.nutexb",
+                "fighter/murabito/model/clayrocket/c04/skin_murabito_001_col.nutexb",
+                "fighter/murabito/model/clayrocket/c04/skin_murabito_001_nor.nutexb",
+                "fighter/murabito/model/beetle/c04/skin_murabito_001_col.nutexb",
+                "fighter/murabito/model/beetle/c04/skin_murabito_001_nor.nutexb",
+                "fighter/murabito/motion/body/c04/j01appeallwl.nuanmb"
+        ],
+        "fighter/murabito/c05": [
+                "fighter/murabito/model/house/c05/def_brick_001_col.nutexb",
+                "fighter/murabito/model/house/c05/def_circle_001_col.nutexb",
+                "fighter/murabito/model/house/c05/def_ground_001_col.nutexb",
+                "fighter/murabito/model/house/c05/def_roof_001_col.nutexb",
+                "fighter/murabito/model/house/c05/def_steps_001_col.nutexb",
+                "fighter/murabito/model/house/c05/def_leaf_001_col.nutexb",
+                "fighter/murabito/model/body/c05/def_murabito_001_col.nutexb",
+                "fighter/murabito/model/body/c05/def_murabito_001_nor.nutexb",
+                "fighter/murabito/model/body/c05/def_murabito_001_prm.nutexb",
+                "fighter/murabito/model/firework/c05/def_firework_001_rst.nutexb",
+                "fighter/murabito/model/umbrella/c05/def_hammer_001_col.nutexb",
+                "fighter/murabito/model/umbrella/c05/def_spiny_001_col.nutexb",
+                "fighter/murabito/model/umbrella/c05/def_tail_001_col.nutexb",
+                "fighter/murabito/model/body/c05/def_murabito_001_col.nutexb",
+                "fighter/murabito/model/umbrella/c05/def_tail_001_prm.nutexb",
+                "fighter/murabito/model/weeds/c05/block_col.nutexb",
+                "fighter/murabito/model/weeds/c05/block_nor.nutexb",
+                "fighter/murabito/model/weeds/c05/block_prm.nutexb",
+                "fighter/murabito/model/clayrocket/c05/skin_murabito_001_col.nutexb",
+                "fighter/murabito/model/clayrocket/c05/skin_murabito_001_nor.nutexb",
+                "fighter/murabito/model/beetle/c05/skin_murabito_001_col.nutexb",
+                "fighter/murabito/model/beetle/c05/skin_murabito_001_nor.nutexb",
+                "fighter/murabito/motion/body/c05/j01appeallwl.nuanmb"
+        ],
+        "fighter/murabito/c06": [
+                "fighter/murabito/model/house/c06/def_brick_001_col.nutexb",
+                "fighter/murabito/model/house/c06/def_circle_001_col.nutexb",
+                "fighter/murabito/model/house/c06/def_ground_001_col.nutexb",
+                "fighter/murabito/model/house/c06/def_roof_001_col.nutexb",
+                "fighter/murabito/model/house/c06/def_steps_001_col.nutexb",
+                "fighter/murabito/model/house/c06/def_leaf_001_col.nutexb",
+                "fighter/murabito/model/firework/c06/def_firework_001_rst.nutexb",
+                "fighter/murabito/model/umbrella/c06/def_hammer_001_col.nutexb",
+                "fighter/murabito/model/umbrella/c06/def_spiny_001_col.nutexb",
+                "fighter/murabito/model/umbrella/c06/def_tail_001_col.nutexb",
+                "fighter/murabito/model/umbrella/c06/def_tail_001_prm.nutexb",
+                "fighter/murabito/model/weeds/c06/block_col.nutexb",
+                "fighter/murabito/model/weeds/c06/block_nor.nutexb",
+                "fighter/murabito/model/weeds/c06/block_prm.nutexb",
+                "fighter/murabito/model/clayrocket/c06/skin_murabito_001_col.nutexb",
+                "fighter/murabito/model/clayrocket/c06/skin_murabito_001_nor.nutexb",
+                "fighter/murabito/model/beetle/c06/skin_murabito_001_col.nutexb",
+                "fighter/murabito/model/beetle/c06/skin_murabito_001_nor.nutexb",
+                "fighter/murabito/motion/body/c06/j01appeallwl.nuanmb"
+        ],
+        "fighter/murabito/c07": [
+                "fighter/murabito/model/house/c07/def_brick_001_col.nutexb",
+                "fighter/murabito/model/house/c07/def_circle_001_col.nutexb",
+                "fighter/murabito/model/house/c07/def_ground_001_col.nutexb",
+                "fighter/murabito/model/house/c07/def_roof_001_col.nutexb",
+                "fighter/murabito/model/house/c07/def_steps_001_col.nutexb",
+                "fighter/murabito/model/house/c07/def_leaf_001_col.nutexb",
+                "fighter/murabito/model/body/c07/def_murabito_001_col.nutexb",
+                "fighter/murabito/model/body/c07/def_murabito_001_nor.nutexb",
+                "fighter/murabito/model/body/c07/def_murabito_001_prm.nutexb",
+                "fighter/murabito/model/firework/c07/def_firework_001_rst.nutexb",
+                "fighter/murabito/model/umbrella/c07/def_hammer_001_col.nutexb",
+                "fighter/murabito/model/umbrella/c07/def_spiny_001_col.nutexb",
+                "fighter/murabito/model/umbrella/c07/def_tail_001_col.nutexb",
+                "fighter/murabito/model/umbrella/c07/def_tail_001_prm.nutexb",
+                "fighter/murabito/model/weeds/c07/block_col.nutexb",
+                "fighter/murabito/model/weeds/c07/block_nor.nutexb",
+                "fighter/murabito/model/weeds/c07/block_prm.nutexb",
+                "fighter/murabito/model/clayrocket/c07/skin_murabito_001_col.nutexb",
+                "fighter/murabito/model/clayrocket/c07/skin_murabito_001_nor.nutexb",
+                "fighter/murabito/model/beetle/c07/skin_murabito_001_col.nutexb",
+                "fighter/murabito/model/beetle/c07/skin_murabito_001_nor.nutexb",
+                "fighter/murabito/motion/body/c07/j01appeallwl.nuanmb"
+        ],
+		"fighter/jack/c00": [
             "fighter/jack/model/mona/c00/jack_p5_subchara_cube_specular.nutexb",
             "fighter/jack/model/mona/c00/jack_p_panther_body_col.nutexb",
             "fighter/jack/model/mona/c00/jack_p_panther_body_nor.nutexb",
@@ -336,7 +345,7 @@
             "fighter/jack/motion/mona/c07/d01specials2.nuanmb",
             "fighter/jack/motion/mona/c07/d01specials3.nuanmb"
 		],
-        "fighter/link/c00": [
+		"fighter/link/c00": [
 			"fighter/link/model/bow/c00/def_blade_001_col.nutexb",
 			"fighter/link/model/bow/c00/def_smasher_001_col.nutexb",
 			"fighter/link/model/bow/c00/def_spear_001_col.nutexb",
@@ -408,335 +417,6 @@
 			"fighter/link/motion/bow/c07/c05attackairfb.nuanmb",
 			"fighter/link/motion/bow/c07/c05attackairhib.nuanmb"
 		],
-        "fighter/lucina/c00": [
-			"fighter/lucina/motion/body/c00/c05attackairhi2.nuanmb",
-			"fighter/lucina/motion/body/c00/c05attackairn2.nuanmb",
-			"fighter/lucina/motion/body/c00/c05attackairf2.nuanmb",
-			"fighter/lucina/motion/body/c00/c05attackairb2.nuanmb",
-			"fighter/lucina/motion/body/c00/d01specials.nuanmb",
-			"fighter/lucina/motion/body/c00/d01specialairs.nuanmb",
-			"fighter/lucina/motion/body/c00/d02specialhi1.nuanmb",
-			"fighter/lucina/motion/body/c00/d02specialhi2.nuanmb",
-			"fighter/lucina/motion/body/c00/d02specialhi3.nuanmb"
-		],
-        "fighter/lucina/c01": [
-			"fighter/lucina/motion/body/c01/c05attackairhi2.nuanmb",
-			"fighter/lucina/motion/body/c01/c05attackairf2.nuanmb",
-			"fighter/lucina/motion/body/c01/c05attackairn2.nuanmb",
-			"fighter/lucina/motion/body/c01/c05attackairb2.nuanmb",
-			"fighter/lucina/motion/body/c01/d01specials.nuanmb",
-			"fighter/lucina/motion/body/c01/d01specialairs.nuanmb",
-			"fighter/lucina/motion/body/c01/d02specialhi1.nuanmb",
-			"fighter/lucina/motion/body/c01/d02specialhi2.nuanmb",
-			"fighter/lucina/motion/body/c01/d02specialhi3.nuanmb"
-		],
-        "fighter/lucina/c02": [
-			"fighter/lucina/motion/body/c02/c05attackairhi2.nuanmb",
-			"fighter/lucina/motion/body/c02/c05attackairf2.nuanmb",
-			"fighter/lucina/motion/body/c02/c05attackairn2.nuanmb",
-			"fighter/lucina/motion/body/c02/c05attackairb2.nuanmb",
-			"fighter/lucina/motion/body/c02/d01specials.nuanmb",
-			"fighter/lucina/motion/body/c02/d01specialairs.nuanmb",
-			"fighter/lucina/motion/body/c02/d02specialhi1.nuanmb",
-			"fighter/lucina/motion/body/c02/d02specialhi2.nuanmb",
-			"fighter/lucina/motion/body/c02/d02specialhi3.nuanmb"
-		],
-        "fighter/lucina/c03": [
-			"fighter/lucina/motion/body/c03/c05attackairhi2.nuanmb",
-			"fighter/lucina/motion/body/c03/c05attackairf2.nuanmb",
-			"fighter/lucina/motion/body/c03/c05attackairn2.nuanmb",
-			"fighter/lucina/motion/body/c03/c05attackairb2.nuanmb",
-			"fighter/lucina/motion/body/c03/d01specials.nuanmb",
-			"fighter/lucina/motion/body/c03/d01specialairs.nuanmb",
-			"fighter/lucina/motion/body/c03/d02specialhi1.nuanmb",
-			"fighter/lucina/motion/body/c03/d02specialhi2.nuanmb",
-			"fighter/lucina/motion/body/c03/d02specialhi3.nuanmb"
-		],
-        "fighter/lucina/c04": [
-			"fighter/lucina/motion/body/c04/c05attackairhi2.nuanmb",
-			"fighter/lucina/motion/body/c04/c05attackairf2.nuanmb",
-			"fighter/lucina/motion/body/c04/c05attackairn2.nuanmb",
-			"fighter/lucina/motion/body/c04/c05attackairb2.nuanmb",
-			"fighter/lucina/motion/body/c04/d01specials.nuanmb",
-			"fighter/lucina/motion/body/c04/d01specialairs.nuanmb",
-			"fighter/lucina/motion/body/c04/d02specialhi1.nuanmb",
-			"fighter/lucina/motion/body/c04/d02specialhi2.nuanmb",
-			"fighter/lucina/motion/body/c04/d02specialhi3.nuanmb"
-		],
-        "fighter/lucina/c05": [
-			"fighter/lucina/motion/body/c05/c05attackairhi2.nuanmb",
-			"fighter/lucina/motion/body/c05/c05attackairf2.nuanmb",
-			"fighter/lucina/motion/body/c05/c05attackairn2.nuanmb",
-			"fighter/lucina/motion/body/c05/c05attackairb2.nuanmb",
-			"fighter/lucina/motion/body/c05/d01specials.nuanmb",
-			"fighter/lucina/motion/body/c05/d01specialairs.nuanmb",
-			"fighter/lucina/motion/body/c05/d02specialhi1.nuanmb",
-			"fighter/lucina/motion/body/c05/d02specialhi2.nuanmb",
-			"fighter/lucina/motion/body/c05/d02specialhi3.nuanmb"
-		],
-        "fighter/lucina/c06": [
-			"fighter/lucina/motion/body/c06/c05attackairhi2.nuanmb",
-			"fighter/lucina/motion/body/c06/c05attackairf2.nuanmb",
-			"fighter/lucina/motion/body/c06/c05attackairn2.nuanmb",
-			"fighter/lucina/motion/body/c06/c05attackairb2.nuanmb",
-			"fighter/lucina/motion/body/c06/d01specials.nuanmb",
-			"fighter/lucina/motion/body/c06/d01specialairs.nuanmb",
-			"fighter/lucina/motion/body/c06/d02specialhi1.nuanmb",
-			"fighter/lucina/motion/body/c06/d02specialhi2.nuanmb",
-			"fighter/lucina/motion/body/c06/d02specialhi3.nuanmb"
-		],
-        "fighter/lucina/c07": [
-			"fighter/lucina/motion/body/c07/c05attackairhi2.nuanmb",
-			"fighter/lucina/motion/body/c07/c05attackairf2.nuanmb",
-			"fighter/lucina/motion/body/c07/c05attackairn2.nuanmb",
-			"fighter/lucina/motion/body/c07/c05attackairb2.nuanmb",
-			"fighter/lucina/motion/body/c07/d01specials.nuanmb",
-			"fighter/lucina/motion/body/c07/d01specialairs.nuanmb",
-			"fighter/lucina/motion/body/c07/d02specialhi1.nuanmb",
-			"fighter/lucina/motion/body/c07/d02specialhi2.nuanmb",
-			"fighter/lucina/motion/body/c07/d02specialhi3.nuanmb"
-		],
-        "fighter/mariod/c00": [
-			"fighter/mariod/motion/body/c00/d02specialhi2.nuanmb",
-			"fighter/mariod/motion/body/c00/d02specialhilanding.nuanmb",
-			"fighter/mariod/motion/body/c00/d00specialinput.nuanmb"
-		],
-		"fighter/mariod/c01": [
-			"fighter/mariod/motion/body/c01/d02specialhi2.nuanmb",
-			"fighter/mariod/motion/body/c01/d02specialhilanding.nuanmb",
-			"fighter/mariod/motion/body/c01/d00specialinput.nuanmb"
-		],
-		"fighter/mariod/c02": [
-			"fighter/mariod/motion/body/c02/d02specialhi2.nuanmb",
-			"fighter/mariod/motion/body/c02/d02specialhilanding.nuanmb",
-			"fighter/mariod/motion/body/c02/d00specialinput.nuanmb"
-		],
-		"fighter/mariod/c03": [
-			"fighter/mariod/motion/body/c03/d02specialhi2.nuanmb",
-			"fighter/mariod/motion/body/c03/d02specialhilanding.nuanmb",
-			"fighter/mariod/motion/body/c03/d00specialinput.nuanmb"
-		],
-		"fighter/mariod/c04": [
-			"fighter/mariod/motion/body/c04/d02specialhi2.nuanmb",
-			"fighter/mariod/motion/body/c04/d02specialhilanding.nuanmb",
-			"fighter/mariod/motion/body/c04/d00specialinput.nuanmb"
-		],
-		"fighter/mariod/c05": [
-			"fighter/mariod/motion/body/c05/d02specialhi2.nuanmb",
-			"fighter/mariod/motion/body/c05/d02specialhilanding.nuanmb",
-			"fighter/mariod/motion/body/c05/d00specialinput.nuanmb"
-		],
-		"fighter/mariod/c06": [
-			"fighter/mariod/motion/body/c06/d02specialhi2.nuanmb",
-			"fighter/mariod/motion/body/c06/d02specialhilanding.nuanmb",
-			"fighter/mariod/motion/body/c06/d00specialinput.nuanmb"
-		],
-		"fighter/mariod/c07": [
-			"fighter/mariod/motion/body/c07/d02specialhi2.nuanmb",
-			"fighter/mariod/motion/body/c07/d02specialhilanding.nuanmb",
-			"fighter/mariod/motion/body/c07/d00specialinput.nuanmb"
-		],
-        "fighter/master/c00": [
-			"fighter/master/motion/body/c00/c05attackairn2.nuanmb"
-		],
-        "fighter/master/c01": [
-			"fighter/master/motion/body/c01/c05attackairn2.nuanmb"
-		],
-        "fighter/master/c02": [
-			"fighter/master/motion/body/c02/c05attackairn2.nuanmb"
-		],
-        "fighter/master/c03": [
-			"fighter/master/motion/body/c03/c05attackairn2.nuanmb"
-		],
-        "fighter/master/c04": [
-			"fighter/master/motion/body/c04/c05attackairn2.nuanmb"
-		],
-        "fighter/master/c05": [
-			"fighter/master/motion/body/c05/c05attackairn2.nuanmb"
-		],
-        "fighter/master/c06": [
-			"fighter/master/motion/body/c06/c05attackairn2.nuanmb"
-		],
-        "fighter/master/c07": [
-			"fighter/master/motion/body/c07/c05attackairn2.nuanmb"
-		],
-        "fighter/murabito/c00": [
-            "fighter/murabito/model/house/c00/def_brick_001_col.nutexb",
-            "fighter/murabito/model/house/c00/def_circle_001_col.nutexb",
-            "fighter/murabito/model/house/c00/def_ground_001_col.nutexb",
-            "fighter/murabito/model/house/c00/def_roof_001_col.nutexb",
-            "fighter/murabito/model/house/c00/def_steps_001_col.nutexb",
-            "fighter/murabito/model/house/c00/def_leaf_001_col.nutexb",
-            "fighter/murabito/model/firework/c00/def_firework_001_rst.nutexb",
-            "fighter/murabito/model/umbrella/c00/def_hammer_001_col.nutexb",
-            "fighter/murabito/model/umbrella/c00/def_spiny_001_col.nutexb",
-            "fighter/murabito/model/umbrella/c00/def_tail_001_col.nutexb",
-            "fighter/murabito/model/umbrella/c00/def_tail_001_prm.nutexb",
-            "fighter/murabito/model/weeds/c00/block_col.nutexb",
-            "fighter/murabito/model/weeds/c00/block_nor.nutexb",
-            "fighter/murabito/model/weeds/c00/block_prm.nutexb",
-            "fighter/murabito/model/clayrocket/c00/skin_murabito_001_col.nutexb",
-            "fighter/murabito/model/clayrocket/c00/skin_murabito_001_nor.nutexb",
-            "fighter/murabito/model/beetle/c00/skin_murabito_001_col.nutexb",
-            "fighter/murabito/model/beetle/c00/skin_murabito_001_nor.nutexb",
-            "fighter/murabito/motion/body/c00/j01appeallwl.nuanmb"
-        ],
-        "fighter/murabito/c01": [
-            "fighter/murabito/model/house/c01/def_brick_001_col.nutexb",
-            "fighter/murabito/model/house/c01/def_circle_001_col.nutexb",
-            "fighter/murabito/model/house/c01/def_ground_001_col.nutexb",
-            "fighter/murabito/model/house/c01/def_roof_001_col.nutexb",
-            "fighter/murabito/model/house/c01/def_steps_001_col.nutexb",
-            "fighter/murabito/model/house/c01/def_leaf_001_col.nutexb",
-            "fighter/murabito/model/firework/c01/def_firework_001_rst.nutexb",
-            "fighter/murabito/model/umbrella/c01/def_hammer_001_col.nutexb",
-            "fighter/murabito/model/umbrella/c01/def_spiny_001_col.nutexb",
-            "fighter/murabito/model/umbrella/c01/def_tail_001_col.nutexb",
-            "fighter/murabito/model/body/c01/def_murabito_001_col.nutexb",
-            "fighter/murabito/model/umbrella/c01/def_tail_001_prm.nutexb",
-            "fighter/murabito/model/weeds/c01/block_col.nutexb",
-            "fighter/murabito/model/weeds/c01/block_nor.nutexb",
-            "fighter/murabito/model/weeds/c01/block_prm.nutexb",
-            "fighter/murabito/model/clayrocket/c01/skin_murabito_001_col.nutexb",
-            "fighter/murabito/model/clayrocket/c01/skin_murabito_001_nor.nutexb",
-            "fighter/murabito/model/beetle/c01/skin_murabito_001_col.nutexb",
-            "fighter/murabito/model/beetle/c01/skin_murabito_001_nor.nutexb",
-            "fighter/murabito/motion/body/c01/j01appeallwl.nuanmb"
-        ],
-        "fighter/murabito/c02": [
-                "fighter/murabito/model/house/c02/def_brick_001_col.nutexb",
-                "fighter/murabito/model/house/c02/def_circle_001_col.nutexb",
-                "fighter/murabito/model/house/c02/def_ground_001_col.nutexb",
-                "fighter/murabito/model/house/c02/def_roof_001_col.nutexb",
-                "fighter/murabito/model/house/c02/def_steps_001_col.nutexb",
-                "fighter/murabito/model/house/c02/def_leaf_001_col.nutexb",
-                "fighter/murabito/model/firework/c02/def_firework_001_rst.nutexb",
-                "fighter/murabito/model/umbrella/c02/def_hammer_001_col.nutexb",
-                "fighter/murabito/model/umbrella/c02/def_spiny_001_col.nutexb",
-                "fighter/murabito/model/umbrella/c02/def_tail_001_col.nutexb",
-                "fighter/murabito/model/umbrella/c02/def_tail_001_prm.nutexb",
-                "fighter/murabito/model/weeds/c02/block_col.nutexb",
-                "fighter/murabito/model/weeds/c02/block_nor.nutexb",
-                "fighter/murabito/model/weeds/c02/block_prm.nutexb",
-                "fighter/murabito/model/clayrocket/c02/skin_murabito_001_col.nutexb",
-                "fighter/murabito/model/clayrocket/c02/skin_murabito_001_nor.nutexb",
-                "fighter/murabito/model/beetle/c02/skin_murabito_001_col.nutexb",
-                "fighter/murabito/model/beetle/c02/skin_murabito_001_nor.nutexb",
-                "fighter/murabito/motion/body/c02/j01appeallwl.nuanmb"
-        ],
-        "fighter/murabito/c03": [
-                "fighter/murabito/model/house/c03/def_brick_001_col.nutexb",
-                "fighter/murabito/model/house/c03/def_circle_001_col.nutexb",
-                "fighter/murabito/model/house/c03/def_ground_001_col.nutexb",
-                "fighter/murabito/model/house/c03/def_roof_001_col.nutexb",
-                "fighter/murabito/model/house/c03/def_steps_001_col.nutexb",
-                "fighter/murabito/model/house/c03/def_leaf_001_col.nutexb",
-                "fighter/murabito/model/firework/c03/def_firework_001_rst.nutexb",
-                "fighter/murabito/model/umbrella/c03/def_hammer_001_col.nutexb",
-                "fighter/murabito/model/umbrella/c03/def_spiny_001_col.nutexb",
-                "fighter/murabito/model/umbrella/c03/def_tail_001_col.nutexb",
-                "fighter/murabito/model/body/c03/def_murabito_001_col.nutexb",
-                "fighter/murabito/model/umbrella/c03/def_tail_001_prm.nutexb",
-                "fighter/murabito/model/weeds/c03/block_col.nutexb",
-                "fighter/murabito/model/weeds/c03/block_nor.nutexb",
-                "fighter/murabito/model/weeds/c03/block_prm.nutexb",
-                "fighter/murabito/model/clayrocket/c03/skin_murabito_001_col.nutexb",
-                "fighter/murabito/model/clayrocket/c03/skin_murabito_001_nor.nutexb",
-                "fighter/murabito/model/beetle/c03/skin_murabito_001_col.nutexb",
-                "fighter/murabito/model/beetle/c03/skin_murabito_001_nor.nutexb",
-                "fighter/murabito/motion/body/c03/j01appeallwl.nuanmb"
-        ],
-        "fighter/murabito/c04": [
-                "fighter/murabito/model/house/c04/def_brick_001_col.nutexb",
-                "fighter/murabito/model/house/c04/def_circle_001_col.nutexb",
-                "fighter/murabito/model/house/c04/def_ground_001_col.nutexb",
-                "fighter/murabito/model/house/c04/def_roof_001_col.nutexb",
-                "fighter/murabito/model/house/c04/def_steps_001_col.nutexb",
-                "fighter/murabito/model/house/c04/def_leaf_001_col.nutexb",
-                "fighter/murabito/model/firework/c04/def_firework_001_rst.nutexb",
-                "fighter/murabito/model/umbrella/c04/def_hammer_001_col.nutexb",
-                "fighter/murabito/model/umbrella/c04/def_spiny_001_col.nutexb",
-                "fighter/murabito/model/umbrella/c04/def_tail_001_col.nutexb",
-                "fighter/murabito/model/umbrella/c04/def_tail_001_prm.nutexb",
-                "fighter/murabito/model/weeds/c04/block_col.nutexb",
-                "fighter/murabito/model/weeds/c04/block_nor.nutexb",
-                "fighter/murabito/model/weeds/c04/block_prm.nutexb",
-                "fighter/murabito/model/clayrocket/c04/skin_murabito_001_col.nutexb",
-                "fighter/murabito/model/clayrocket/c04/skin_murabito_001_nor.nutexb",
-                "fighter/murabito/model/beetle/c04/skin_murabito_001_col.nutexb",
-                "fighter/murabito/model/beetle/c04/skin_murabito_001_nor.nutexb",
-                "fighter/murabito/motion/body/c04/j01appeallwl.nuanmb"
-        ],
-        "fighter/murabito/c05": [
-                "fighter/murabito/model/house/c05/def_brick_001_col.nutexb",
-                "fighter/murabito/model/house/c05/def_circle_001_col.nutexb",
-                "fighter/murabito/model/house/c05/def_ground_001_col.nutexb",
-                "fighter/murabito/model/house/c05/def_roof_001_col.nutexb",
-                "fighter/murabito/model/house/c05/def_steps_001_col.nutexb",
-                "fighter/murabito/model/house/c05/def_leaf_001_col.nutexb",
-                "fighter/murabito/model/body/c05/def_murabito_001_col.nutexb",
-                "fighter/murabito/model/body/c05/def_murabito_001_nor.nutexb",
-                "fighter/murabito/model/body/c05/def_murabito_001_prm.nutexb",
-                "fighter/murabito/model/firework/c05/def_firework_001_rst.nutexb",
-                "fighter/murabito/model/umbrella/c05/def_hammer_001_col.nutexb",
-                "fighter/murabito/model/umbrella/c05/def_spiny_001_col.nutexb",
-                "fighter/murabito/model/umbrella/c05/def_tail_001_col.nutexb",
-                "fighter/murabito/model/body/c05/def_murabito_001_col.nutexb",
-                "fighter/murabito/model/umbrella/c05/def_tail_001_prm.nutexb",
-                "fighter/murabito/model/weeds/c05/block_col.nutexb",
-                "fighter/murabito/model/weeds/c05/block_nor.nutexb",
-                "fighter/murabito/model/weeds/c05/block_prm.nutexb",
-                "fighter/murabito/model/clayrocket/c05/skin_murabito_001_col.nutexb",
-                "fighter/murabito/model/clayrocket/c05/skin_murabito_001_nor.nutexb",
-                "fighter/murabito/model/beetle/c05/skin_murabito_001_col.nutexb",
-                "fighter/murabito/model/beetle/c05/skin_murabito_001_nor.nutexb",
-                "fighter/murabito/motion/body/c05/j01appeallwl.nuanmb"
-        ],
-        "fighter/murabito/c06": [
-                "fighter/murabito/model/house/c06/def_brick_001_col.nutexb",
-                "fighter/murabito/model/house/c06/def_circle_001_col.nutexb",
-                "fighter/murabito/model/house/c06/def_ground_001_col.nutexb",
-                "fighter/murabito/model/house/c06/def_roof_001_col.nutexb",
-                "fighter/murabito/model/house/c06/def_steps_001_col.nutexb",
-                "fighter/murabito/model/house/c06/def_leaf_001_col.nutexb",
-                "fighter/murabito/model/firework/c06/def_firework_001_rst.nutexb",
-                "fighter/murabito/model/umbrella/c06/def_hammer_001_col.nutexb",
-                "fighter/murabito/model/umbrella/c06/def_spiny_001_col.nutexb",
-                "fighter/murabito/model/umbrella/c06/def_tail_001_col.nutexb",
-                "fighter/murabito/model/umbrella/c06/def_tail_001_prm.nutexb",
-                "fighter/murabito/model/weeds/c06/block_col.nutexb",
-                "fighter/murabito/model/weeds/c06/block_nor.nutexb",
-                "fighter/murabito/model/weeds/c06/block_prm.nutexb",
-                "fighter/murabito/model/clayrocket/c06/skin_murabito_001_col.nutexb",
-                "fighter/murabito/model/clayrocket/c06/skin_murabito_001_nor.nutexb",
-                "fighter/murabito/model/beetle/c06/skin_murabito_001_col.nutexb",
-                "fighter/murabito/model/beetle/c06/skin_murabito_001_nor.nutexb",
-                "fighter/murabito/motion/body/c06/j01appeallwl.nuanmb"
-        ],
-        "fighter/murabito/c07": [
-                "fighter/murabito/model/house/c07/def_brick_001_col.nutexb",
-                "fighter/murabito/model/house/c07/def_circle_001_col.nutexb",
-                "fighter/murabito/model/house/c07/def_ground_001_col.nutexb",
-                "fighter/murabito/model/house/c07/def_roof_001_col.nutexb",
-                "fighter/murabito/model/house/c07/def_steps_001_col.nutexb",
-                "fighter/murabito/model/house/c07/def_leaf_001_col.nutexb",
-                "fighter/murabito/model/body/c07/def_murabito_001_col.nutexb",
-                "fighter/murabito/model/body/c07/def_murabito_001_nor.nutexb",
-                "fighter/murabito/model/body/c07/def_murabito_001_prm.nutexb",
-                "fighter/murabito/model/firework/c07/def_firework_001_rst.nutexb",
-                "fighter/murabito/model/umbrella/c07/def_hammer_001_col.nutexb",
-                "fighter/murabito/model/umbrella/c07/def_spiny_001_col.nutexb",
-                "fighter/murabito/model/umbrella/c07/def_tail_001_col.nutexb",
-                "fighter/murabito/model/umbrella/c07/def_tail_001_prm.nutexb",
-                "fighter/murabito/model/weeds/c07/block_col.nutexb",
-                "fighter/murabito/model/weeds/c07/block_nor.nutexb",
-                "fighter/murabito/model/weeds/c07/block_prm.nutexb",
-                "fighter/murabito/model/clayrocket/c07/skin_murabito_001_col.nutexb",
-                "fighter/murabito/model/clayrocket/c07/skin_murabito_001_nor.nutexb",
-                "fighter/murabito/model/beetle/c07/skin_murabito_001_col.nutexb",
-                "fighter/murabito/model/beetle/c07/skin_murabito_001_nor.nutexb",
-                "fighter/murabito/motion/body/c07/j01appeallwl.nuanmb"
-        ],
         "fighter/reflet/c00": [
 			"fighter/reflet/motion/body/c00/d02specialhi.nuanmb"
 		],
@@ -760,54 +440,6 @@
 		],
         "fighter/reflet/c07": [
 			"fighter/reflet/motion/body/c07/d02specialhi.nuanmb"
-		],
-        "fighter/roy/c00": [
-			"fighter/roy/motion/body/c00/c00attackdash2.nuanmb"
-		],
-        "fighter/roy/c01": [
-			"fighter/roy/motion/body/c01/c00attackdash2.nuanmb"
-		],
-        "fighter/roy/c02": [
-			"fighter/roy/motion/body/c02/c00attackdash2.nuanmb"
-		],
-        "fighter/roy/c03": [
-			"fighter/roy/motion/body/c03/c00attackdash2.nuanmb"
-		],
-        "fighter/roy/c04": [
-			"fighter/roy/motion/body/c04/c00attackdash2.nuanmb"
-		],
-        "fighter/roy/c05": [
-			"fighter/roy/motion/body/c05/c00attackdash2.nuanmb"
-		],
-        "fighter/roy/c06": [
-			"fighter/roy/motion/body/c06/c00attackdash2.nuanmb"
-		],
-        "fighter/roy/c07": [
-			"fighter/roy/motion/body/c07/c00attackdash2.nuanmb"
-		],
-        "fighter/sheik/c00": [
-			"fighter/sheik/motion/body/c00/d00specialinput.nuanmb"
-		],
-        "fighter/sheik/c01": [
-			"fighter/sheik/motion/body/c01/d00specialinput.nuanmb"
-		],
-        "fighter/sheik/c02": [
-			"fighter/sheik/motion/body/c02/d00specialinput.nuanmb"
-		],
-        "fighter/sheik/c03": [
-			"fighter/sheik/motion/body/c03/d00specialinput.nuanmb"
-		],
-        "fighter/sheik/c04": [
-			"fighter/sheik/motion/body/c04/d00specialinput.nuanmb"
-		],
-        "fighter/sheik/c05": [
-			"fighter/sheik/motion/body/c05/d00specialinput.nuanmb"
-		],
-        "fighter/sheik/c06": [
-			"fighter/sheik/motion/body/c06/d00specialinput.nuanmb"
-		],
-        "fighter/sheik/c07": [
-			"fighter/sheik/motion/body/c07/d00specialinput.nuanmb"
 		],
         "fighter/shizue/c00": [
             "fighter/shizue/model/pot/c00/def_furniture_001_col.nutexb",
@@ -1377,29 +1009,183 @@
             "fighter/shizue/model/pot/c07/metal_trafficsign_001_nor.nutexb",
             "fighter/shizue/model/pot/c07/metal_trafficsign_001_prm.nutexb"
         ],
-    	"fighter/snake/c00": [
-			"fighter/snake/motion/body/c00/c00attackdashlightthrow.nuanmb"
+    	"fighter/trail/c00": [
+			"fighter/trail/motion/body/c00/d00specialinput.nuanmb"
 		],
-		"fighter/snake/c01": [
-			"fighter/snake/motion/body/c01/c00attackdashlightthrow.nuanmb"
+        "fighter/trail/c01": [
+			"fighter/trail/motion/body/c01/d00specialinput.nuanmb"
 		],
-		"fighter/snake/c02": [
-			"fighter/snake/motion/body/c02/c00attackdashlightthrow.nuanmb"
+        "fighter/trail/c02": [
+			"fighter/trail/motion/body/c02/d00specialinput.nuanmb"
 		],
-		"fighter/snake/c03": [
-			"fighter/snake/motion/body/c03/c00attackdashlightthrow.nuanmb"
+        "fighter/trail/c03": [
+			"fighter/trail/motion/body/c03/d00specialinput.nuanmb"
 		],
-		"fighter/snake/c04": [
-			"fighter/snake/motion/body/c04/c00attackdashlightthrow.nuanmb"
+        "fighter/trail/c04": [
+			"fighter/trail/motion/body/c04/d00specialinput.nuanmb"
 		],
-		"fighter/snake/c05": [
-			"fighter/snake/motion/body/c05/c00attackdashlightthrow.nuanmb"
+        "fighter/trail/c05": [
+			"fighter/trail/motion/body/c05/d00specialinput.nuanmb"
 		],
-		"fighter/snake/c06": [
-			"fighter/snake/motion/body/c06/c00attackdashlightthrow.nuanmb"
+        "fighter/trail/c06": [
+			"fighter/trail/motion/body/c06/d00specialinput.nuanmb"
 		],
-		"fighter/snake/c07": [
-			"fighter/snake/motion/body/c07/c00attackdashlightthrow.nuanmb"
+        "fighter/trail/c07": [
+			"fighter/trail/motion/body/c07/d00specialinput.nuanmb"
+		],
+		"fighter/dedede/c00": [
+			"fighter/dedede/motion/body/c00/d00specialinput.nuanmb",
+			"fighter/dedede/motion/body/c00/d00specialairinput.nuanmb",
+			"fighter/dedede/motion/body/c00/d00specialairinput2.nuanmb",
+			"fighter/dedede/motion/body/c00/d00specialairinputlanding.nuanmb"
+		],
+		"fighter/dedede/c01": [
+			"fighter/dedede/motion/body/c01/d00specialinput.nuanmb",
+			"fighter/dedede/motion/body/c01/d00specialairinput.nuanmb",
+			"fighter/dedede/motion/body/c01/d00specialairinput2.nuanmb",
+			"fighter/dedede/motion/body/c01/d00specialairinputlanding.nuanmb"
+		],
+		"fighter/dedede/c02": [
+			"fighter/dedede/motion/body/c02/d00specialinput.nuanmb",
+			"fighter/dedede/motion/body/c02/d00specialairinput.nuanmb",
+			"fighter/dedede/motion/body/c02/d00specialairinput2.nuanmb",
+			"fighter/dedede/motion/body/c02/d00specialairinputlanding.nuanmb"
+		],
+		"fighter/dedede/c03": [
+			"fighter/dedede/motion/body/c03/d00specialinput.nuanmb",
+			"fighter/dedede/motion/body/c03/d00specialairinput.nuanmb",
+			"fighter/dedede/motion/body/c03/d00specialairinput2.nuanmb",
+			"fighter/dedede/motion/body/c03/d00specialairinputlanding.nuanmb"
+		],
+		"fighter/dedede/c04": [
+			"fighter/dedede/motion/body/c04/d00specialinput.nuanmb",
+			"fighter/dedede/motion/body/c04/d00specialairinput.nuanmb",
+			"fighter/dedede/motion/body/c04/d00specialairinput2.nuanmb",
+			"fighter/dedede/motion/body/c04/d00specialairinputlanding.nuanmb"
+		],
+		"fighter/dedede/c05": [
+			"fighter/dedede/motion/body/c05/d00specialinput.nuanmb",
+			"fighter/dedede/motion/body/c05/d00specialairinput.nuanmb",
+			"fighter/dedede/motion/body/c05/d00specialairinput2.nuanmb",
+			"fighter/dedede/motion/body/c05/d00specialairinputlanding.nuanmb"
+		],
+		"fighter/dedede/c06": [
+			"fighter/dedede/motion/body/c06/d00specialinput.nuanmb",
+			"fighter/dedede/motion/body/c06/d00specialairinput.nuanmb",
+			"fighter/dedede/motion/body/c06/d00specialairinput2.nuanmb",
+			"fighter/dedede/motion/body/c06/d00specialairinputlanding.nuanmb"
+		],
+		"fighter/dedede/c07": [
+			"fighter/dedede/motion/body/c07/d00specialinput.nuanmb",
+			"fighter/dedede/motion/body/c07/d00specialairinput.nuanmb",
+			"fighter/dedede/motion/body/c07/d00specialairinput2.nuanmb",
+			"fighter/dedede/motion/body/c07/d00specialairinputlanding.nuanmb"
+		],
+		"fighter/mariod/c00": [
+			"fighter/mariod/motion/body/c00/d02specialhi2.nuanmb",
+			"fighter/mariod/motion/body/c00/d02specialhilanding.nuanmb",
+			"fighter/mariod/motion/body/c00/d00specialinput.nuanmb"
+		],
+		"fighter/mariod/c01": [
+			"fighter/mariod/motion/body/c01/d02specialhi2.nuanmb",
+			"fighter/mariod/motion/body/c01/d02specialhilanding.nuanmb",
+			"fighter/mariod/motion/body/c01/d00specialinput.nuanmb"
+		],
+		"fighter/mariod/c02": [
+			"fighter/mariod/motion/body/c02/d02specialhi2.nuanmb",
+			"fighter/mariod/motion/body/c02/d02specialhilanding.nuanmb",
+			"fighter/mariod/motion/body/c02/d00specialinput.nuanmb"
+		],
+		"fighter/mariod/c03": [
+			"fighter/mariod/motion/body/c03/d02specialhi2.nuanmb",
+			"fighter/mariod/motion/body/c03/d02specialhilanding.nuanmb",
+			"fighter/mariod/motion/body/c03/d00specialinput.nuanmb"
+		],
+		"fighter/mariod/c04": [
+			"fighter/mariod/motion/body/c04/d02specialhi2.nuanmb",
+			"fighter/mariod/motion/body/c04/d02specialhilanding.nuanmb",
+			"fighter/mariod/motion/body/c04/d00specialinput.nuanmb"
+		],
+		"fighter/mariod/c05": [
+			"fighter/mariod/motion/body/c05/d02specialhi2.nuanmb",
+			"fighter/mariod/motion/body/c05/d02specialhilanding.nuanmb",
+			"fighter/mariod/motion/body/c05/d00specialinput.nuanmb"
+		],
+		"fighter/mariod/c06": [
+			"fighter/mariod/motion/body/c06/d02specialhi2.nuanmb",
+			"fighter/mariod/motion/body/c06/d02specialhilanding.nuanmb",
+			"fighter/mariod/motion/body/c06/d00specialinput.nuanmb"
+		],
+		"fighter/mariod/c07": [
+			"fighter/mariod/motion/body/c07/d02specialhi2.nuanmb",
+			"fighter/mariod/motion/body/c07/d02specialhilanding.nuanmb",
+			"fighter/mariod/motion/body/c07/d00specialinput.nuanmb"
+		],
+        "fighter/sheik/c00": [
+			"fighter/sheik/motion/body/c00/d00specialinput.nuanmb"
+		],
+        "fighter/sheik/c01": [
+			"fighter/sheik/motion/body/c01/d00specialinput.nuanmb"
+		],
+        "fighter/sheik/c02": [
+			"fighter/sheik/motion/body/c02/d00specialinput.nuanmb"
+		],
+        "fighter/sheik/c03": [
+			"fighter/sheik/motion/body/c03/d00specialinput.nuanmb"
+		],
+        "fighter/sheik/c04": [
+			"fighter/sheik/motion/body/c04/d00specialinput.nuanmb"
+		],
+        "fighter/sheik/c05": [
+			"fighter/sheik/motion/body/c05/d00specialinput.nuanmb"
+		],
+        "fighter/sheik/c06": [
+			"fighter/sheik/motion/body/c06/d00specialinput.nuanmb"
+		],
+        "fighter/sheik/c07": [
+			"fighter/sheik/motion/body/c07/d00specialinput.nuanmb"
+		],
+        "fighter/toonlink/c00": [
+			"fighter/toonlink/motion/bow/c00/c03attacks4s.nuanmb",
+			"fighter/toonlink/motion/bow/c00/d02specialairhi.nuanmb"
+		],
+        "fighter/toonlink/c01": [
+			"fighter/toonlink/motion/bow/c01/c03attacks4s.nuanmb",
+			"fighter/toonlink/motion/bow/c01/d02specialairhi.nuanmb"
+		],
+        "fighter/toonlink/c02": [
+			"fighter/toonlink/motion/bow/c02/c03attacks4s.nuanmb",
+			"fighter/toonlink/motion/bow/c02/d02specialairhi.nuanmb"
+		],
+        "fighter/toonlink/c03": [
+			"fighter/toonlink/motion/bow/c03/c03attacks4s.nuanmb",
+			"fighter/toonlink/motion/bow/c03/d02specialairhi.nuanmb"
+		],
+        "fighter/toonlink/c04": [
+			"fighter/toonlink/motion/bow/c04/c03attacks4s.nuanmb",
+			"fighter/toonlink/motion/bow/c04/d02specialairhi.nuanmb"
+		],
+        "fighter/toonlink/c05": [
+			"fighter/toonlink/motion/bow/c05/c03attacks4s.nuanmb",
+			"fighter/toonlink/motion/bow/c05/d02specialairhi.nuanmb"
+		],
+        "fighter/toonlink/c06": [
+			"fighter/toonlink/motion/bow/c06/c03attacks4s.nuanmb",
+			"fighter/toonlink/motion/bow/c06/d02specialairhi.nuanmb"
+		],
+        "fighter/toonlink/c07": [
+			"fighter/toonlink/motion/bow/c07/c03attacks4s.nuanmb",
+			"fighter/toonlink/motion/bow/c07/d02specialairhi.nuanmb"
+		],
+		"fighter/szerosuit/c06": [
+		  "fighter/szerosuit/model/body/c06/def_szerosuit_001_col.nutexb",
+		  "fighter/szerosuit/model/body/c06/def_szerosuit_001_nor.nutexb",
+		  "fighter/szerosuit/model/body/c06/def_szerosuit_001_prm.nutexb"
+		],
+		"fighter/szerosuit/c07": [
+		  "fighter/szerosuit/model/body/c07/def_szerosuit_001_col.nutexb",
+		  "fighter/szerosuit/model/body/c07/def_szerosuit_001_nor.nutexb",
+		  "fighter/szerosuit/model/body/c07/def_szerosuit_001_prm.nutexb"
 		],
         "fighter/sonic/c00": [
 			"fighter/sonic/motion/body/c00/c00attack100.nuanmb",
@@ -1441,72 +1227,6 @@
 			"fighter/sonic/motion/body/c07/d01specialairsstart.nuanmb",
 			"fighter/sonic/motion/body/c07/c05attackairfhit.nuanmb"
 		],
-        "fighter/szerosuit/c06": [
-            "fighter/szerosuit/model/body/c06/def_szerosuit_001_col.nutexb",
-            "fighter/szerosuit/model/body/c06/def_szerosuit_001_nor.nutexb",
-            "fighter/szerosuit/model/body/c06/def_szerosuit_001_prm.nutexb"
-        ],
-        "fighter/szerosuit/c07": [
-            "fighter/szerosuit/model/body/c07/def_szerosuit_001_col.nutexb",
-            "fighter/szerosuit/model/body/c07/def_szerosuit_001_nor.nutexb",
-            "fighter/szerosuit/model/body/c07/def_szerosuit_001_prm.nutexb"
-        ],
-        "fighter/toonlink/c00": [
-			"fighter/toonlink/motion/bow/c00/c03attacks4s.nuanmb",
-			"fighter/toonlink/motion/bow/c00/d02specialairhi.nuanmb"
-		],
-        "fighter/toonlink/c01": [
-			"fighter/toonlink/motion/bow/c01/c03attacks4s.nuanmb",
-			"fighter/toonlink/motion/bow/c01/d02specialairhi.nuanmb"
-		],
-        "fighter/toonlink/c02": [
-			"fighter/toonlink/motion/bow/c02/c03attacks4s.nuanmb",
-			"fighter/toonlink/motion/bow/c02/d02specialairhi.nuanmb"
-		],
-        "fighter/toonlink/c03": [
-			"fighter/toonlink/motion/bow/c03/c03attacks4s.nuanmb",
-			"fighter/toonlink/motion/bow/c03/d02specialairhi.nuanmb"
-		],
-        "fighter/toonlink/c04": [
-			"fighter/toonlink/motion/bow/c04/c03attacks4s.nuanmb",
-			"fighter/toonlink/motion/bow/c04/d02specialairhi.nuanmb"
-		],
-        "fighter/toonlink/c05": [
-			"fighter/toonlink/motion/bow/c05/c03attacks4s.nuanmb",
-			"fighter/toonlink/motion/bow/c05/d02specialairhi.nuanmb"
-		],
-        "fighter/toonlink/c06": [
-			"fighter/toonlink/motion/bow/c06/c03attacks4s.nuanmb",
-			"fighter/toonlink/motion/bow/c06/d02specialairhi.nuanmb"
-		],
-        "fighter/toonlink/c07": [
-			"fighter/toonlink/motion/bow/c07/c03attacks4s.nuanmb",
-			"fighter/toonlink/motion/bow/c07/d02specialairhi.nuanmb"
-		],
-    	"fighter/trail/c00": [
-			"fighter/trail/motion/body/c00/d00specialinput.nuanmb"
-		],
-        "fighter/trail/c01": [
-			"fighter/trail/motion/body/c01/d00specialinput.nuanmb"
-		],
-        "fighter/trail/c02": [
-			"fighter/trail/motion/body/c02/d00specialinput.nuanmb"
-		],
-        "fighter/trail/c03": [
-			"fighter/trail/motion/body/c03/d00specialinput.nuanmb"
-		],
-        "fighter/trail/c04": [
-			"fighter/trail/motion/body/c04/d00specialinput.nuanmb"
-		],
-        "fighter/trail/c05": [
-			"fighter/trail/motion/body/c05/d00specialinput.nuanmb"
-		],
-        "fighter/trail/c06": [
-			"fighter/trail/motion/body/c06/d00specialinput.nuanmb"
-		],
-        "fighter/trail/c07": [
-			"fighter/trail/motion/body/c07/d00specialinput.nuanmb"
-		],
         "fighter/wario/c00": [
 			"fighter/wario/motion/body/c00/d01specialairssearch.nuanmb"
 		],
@@ -1530,6 +1250,286 @@
 		],
         "fighter/wario/c07": [
 			"fighter/wario/motion/body/c07/d01specialairssearch.nuanmb"
+		],
+        "fighter/roy/c00": [
+			"fighter/roy/motion/body/c00/c00attackdash2.nuanmb"
+		],
+        "fighter/roy/c01": [
+			"fighter/roy/motion/body/c01/c00attackdash2.nuanmb"
+		],
+        "fighter/roy/c02": [
+			"fighter/roy/motion/body/c02/c00attackdash2.nuanmb"
+		],
+        "fighter/roy/c03": [
+			"fighter/roy/motion/body/c03/c00attackdash2.nuanmb"
+		],
+        "fighter/roy/c04": [
+			"fighter/roy/motion/body/c04/c00attackdash2.nuanmb"
+		],
+        "fighter/roy/c05": [
+			"fighter/roy/motion/body/c05/c00attackdash2.nuanmb"
+		],
+        "fighter/roy/c06": [
+			"fighter/roy/motion/body/c06/c00attackdash2.nuanmb"
+		],
+        "fighter/roy/c07": [
+			"fighter/roy/motion/body/c07/c00attackdash2.nuanmb"
+		],
+        "fighter/chrom/c00": [
+			"fighter/chrom/motion/body/c00/c00attack12.nuanmb",
+			"fighter/chrom/motion/body/c00/c01attacks3hi.nuanmb",
+			"fighter/chrom/motion/body/c00/c01attacks3lw.nuanmb"
+		],
+        "fighter/chrom/c01": [
+			"fighter/chrom/motion/body/c01/c00attack12.nuanmb",
+			"fighter/chrom/motion/body/c01/c01attacks3hi.nuanmb",
+			"fighter/chrom/motion/body/c01/c01attacks3lw.nuanmb"
+		],
+        "fighter/chrom/c02": [
+			"fighter/chrom/motion/body/c02/c00attack12.nuanmb",
+			"fighter/chrom/motion/body/c02/c01attacks3hi.nuanmb",
+			"fighter/chrom/motion/body/c02/c01attacks3lw.nuanmb"
+		],
+        "fighter/chrom/c03": [
+			"fighter/chrom/motion/body/c03/c00attack12.nuanmb",
+			"fighter/chrom/motion/body/c03/c01attacks3hi.nuanmb",
+			"fighter/chrom/motion/body/c03/c01attacks3lw.nuanmb"
+		],
+        "fighter/chrom/c04": [
+			"fighter/chrom/motion/body/c04/c00attack12.nuanmb",
+			"fighter/chrom/motion/body/c04/c01attacks3hi.nuanmb",
+			"fighter/chrom/motion/body/c04/c01attacks3lw.nuanmb"
+		],
+        "fighter/chrom/c05": [
+			"fighter/chrom/motion/body/c05/c00attack12.nuanmb",
+			"fighter/chrom/motion/body/c05/c01attacks3hi.nuanmb",
+			"fighter/chrom/motion/body/c05/c01attacks3lw.nuanmb"
+		],
+        "fighter/chrom/c06": [
+			"fighter/chrom/motion/body/c06/c00attack12.nuanmb",
+			"fighter/chrom/motion/body/c06/c01attacks3hi.nuanmb",
+			"fighter/chrom/motion/body/c06/c01attacks3lw.nuanmb"
+		],
+        "fighter/chrom/c07": [
+			"fighter/chrom/motion/body/c07/c00attack12.nuanmb",
+			"fighter/chrom/motion/body/c07/c01attacks3hi.nuanmb",
+			"fighter/chrom/motion/body/c07/c01attacks3lw.nuanmb"
+		],
+        "fighter/master/c00": [
+			"fighter/master/motion/body/c00/c05attackairn2.nuanmb"
+		],
+        "fighter/master/c01": [
+			"fighter/master/motion/body/c01/c05attackairn2.nuanmb"
+		],
+        "fighter/master/c02": [
+			"fighter/master/motion/body/c02/c05attackairn2.nuanmb"
+		],
+        "fighter/master/c03": [
+			"fighter/master/motion/body/c03/c05attackairn2.nuanmb"
+		],
+        "fighter/master/c04": [
+			"fighter/master/motion/body/c04/c05attackairn2.nuanmb"
+		],
+        "fighter/master/c05": [
+			"fighter/master/motion/body/c05/c05attackairn2.nuanmb"
+		],
+        "fighter/master/c06": [
+			"fighter/master/motion/body/c06/c05attackairn2.nuanmb"
+		],
+        "fighter/master/c07": [
+			"fighter/master/motion/body/c07/c05attackairn2.nuanmb"
+		],
+        "fighter/lucina/c00": [
+			"fighter/lucina/motion/body/c00/c05attackairhi2.nuanmb",
+			"fighter/lucina/motion/body/c00/c05attackairn2.nuanmb",
+			"fighter/lucina/motion/body/c00/c05attackairf2.nuanmb",
+			"fighter/lucina/motion/body/c00/c05attackairb2.nuanmb",
+			"fighter/lucina/motion/body/c00/d01specials.nuanmb",
+			"fighter/lucina/motion/body/c00/d01specialairs.nuanmb",
+			"fighter/lucina/motion/body/c00/d02specialhi1.nuanmb",
+			"fighter/lucina/motion/body/c00/d02specialhi2.nuanmb",
+			"fighter/lucina/motion/body/c00/d02specialhi3.nuanmb"
+		],
+        "fighter/lucina/c01": [
+			"fighter/lucina/motion/body/c01/c05attackairhi2.nuanmb",
+			"fighter/lucina/motion/body/c01/c05attackairf2.nuanmb",
+			"fighter/lucina/motion/body/c01/c05attackairn2.nuanmb",
+			"fighter/lucina/motion/body/c01/c05attackairb2.nuanmb",
+			"fighter/lucina/motion/body/c01/d01specials.nuanmb",
+			"fighter/lucina/motion/body/c01/d01specialairs.nuanmb",
+			"fighter/lucina/motion/body/c01/d02specialhi1.nuanmb",
+			"fighter/lucina/motion/body/c01/d02specialhi2.nuanmb",
+			"fighter/lucina/motion/body/c01/d02specialhi3.nuanmb"
+		],
+        "fighter/lucina/c02": [
+			"fighter/lucina/motion/body/c02/c05attackairhi2.nuanmb",
+			"fighter/lucina/motion/body/c02/c05attackairf2.nuanmb",
+			"fighter/lucina/motion/body/c02/c05attackairn2.nuanmb",
+			"fighter/lucina/motion/body/c02/c05attackairb2.nuanmb",
+			"fighter/lucina/motion/body/c02/d01specials.nuanmb",
+			"fighter/lucina/motion/body/c02/d01specialairs.nuanmb",
+			"fighter/lucina/motion/body/c02/d02specialhi1.nuanmb",
+			"fighter/lucina/motion/body/c02/d02specialhi2.nuanmb",
+			"fighter/lucina/motion/body/c02/d02specialhi3.nuanmb"
+		],
+        "fighter/lucina/c03": [
+			"fighter/lucina/motion/body/c03/c05attackairhi2.nuanmb",
+			"fighter/lucina/motion/body/c03/c05attackairf2.nuanmb",
+			"fighter/lucina/motion/body/c03/c05attackairn2.nuanmb",
+			"fighter/lucina/motion/body/c03/c05attackairb2.nuanmb",
+			"fighter/lucina/motion/body/c03/d01specials.nuanmb",
+			"fighter/lucina/motion/body/c03/d01specialairs.nuanmb",
+			"fighter/lucina/motion/body/c03/d02specialhi1.nuanmb",
+			"fighter/lucina/motion/body/c03/d02specialhi2.nuanmb",
+			"fighter/lucina/motion/body/c03/d02specialhi3.nuanmb"
+		],
+        "fighter/lucina/c04": [
+			"fighter/lucina/motion/body/c04/c05attackairhi2.nuanmb",
+			"fighter/lucina/motion/body/c04/c05attackairf2.nuanmb",
+			"fighter/lucina/motion/body/c04/c05attackairn2.nuanmb",
+			"fighter/lucina/motion/body/c04/c05attackairb2.nuanmb",
+			"fighter/lucina/motion/body/c04/d01specials.nuanmb",
+			"fighter/lucina/motion/body/c04/d01specialairs.nuanmb",
+			"fighter/lucina/motion/body/c04/d02specialhi1.nuanmb",
+			"fighter/lucina/motion/body/c04/d02specialhi2.nuanmb",
+			"fighter/lucina/motion/body/c04/d02specialhi3.nuanmb"
+		],
+        "fighter/lucina/c05": [
+			"fighter/lucina/motion/body/c05/c05attackairhi2.nuanmb",
+			"fighter/lucina/motion/body/c05/c05attackairf2.nuanmb",
+			"fighter/lucina/motion/body/c05/c05attackairn2.nuanmb",
+			"fighter/lucina/motion/body/c05/c05attackairb2.nuanmb",
+			"fighter/lucina/motion/body/c05/d01specials.nuanmb",
+			"fighter/lucina/motion/body/c05/d01specialairs.nuanmb",
+			"fighter/lucina/motion/body/c05/d02specialhi1.nuanmb",
+			"fighter/lucina/motion/body/c05/d02specialhi2.nuanmb",
+			"fighter/lucina/motion/body/c05/d02specialhi3.nuanmb"
+		],
+        "fighter/lucina/c06": [
+			"fighter/lucina/motion/body/c06/c05attackairhi2.nuanmb",
+			"fighter/lucina/motion/body/c06/c05attackairf2.nuanmb",
+			"fighter/lucina/motion/body/c06/c05attackairn2.nuanmb",
+			"fighter/lucina/motion/body/c06/c05attackairb2.nuanmb",
+			"fighter/lucina/motion/body/c06/d01specials.nuanmb",
+			"fighter/lucina/motion/body/c06/d01specialairs.nuanmb",
+			"fighter/lucina/motion/body/c06/d02specialhi1.nuanmb",
+			"fighter/lucina/motion/body/c06/d02specialhi2.nuanmb",
+			"fighter/lucina/motion/body/c06/d02specialhi3.nuanmb"
+		],
+        "fighter/lucina/c07": [
+			"fighter/lucina/motion/body/c07/c05attackairhi2.nuanmb",
+			"fighter/lucina/motion/body/c07/c05attackairf2.nuanmb",
+			"fighter/lucina/motion/body/c07/c05attackairn2.nuanmb",
+			"fighter/lucina/motion/body/c07/c05attackairb2.nuanmb",
+			"fighter/lucina/motion/body/c07/d01specials.nuanmb",
+			"fighter/lucina/motion/body/c07/d01specialairs.nuanmb",
+			"fighter/lucina/motion/body/c07/d02specialhi1.nuanmb",
+			"fighter/lucina/motion/body/c07/d02specialhi2.nuanmb",
+			"fighter/lucina/motion/body/c07/d02specialhi3.nuanmb"
+		],
+        "fighter/kirby/c00": [
+			"fighter/kirby/model/finalcutter/c00/def_ultrasword_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c00/def_ultrasword_001_nor.nutexb",
+			"fighter/kirby/model/finalcutter/c00/def_ultrasword_001_prm.nutexb",
+			"fighter/kirby/motion/body/c00/d02specialinput.nuanmb",
+			"fighter/kirby/model/finalcutter/c00/def_parasol_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c00/def_spear_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c00/def_speartip_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c00/def_wandball_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c00/def_wandhandle_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c00/def_wheel_001_col.nutexb",
+			"fighter/kirby/motion/finalcutter/c00/d02specialhi5.nuanmb"
+		],
+        "fighter/kirby/c01": [
+			"fighter/kirby/model/finalcutter/c01/def_ultrasword_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c01/def_ultrasword_001_nor.nutexb",
+			"fighter/kirby/model/finalcutter/c01/def_ultrasword_001_prm.nutexb",
+			"fighter/kirby/motion/body/c01/d02specialinput.nuanmb",
+			"fighter/kirby/model/finalcutter/c01/def_parasol_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c01/def_spear_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c01/def_speartip_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c01/def_wandball_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c01/def_wandhandle_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c01/def_wheel_001_col.nutexb",
+			"fighter/kirby/motion/finalcutter/c01/d02specialhi5.nuanmb"
+		],
+        "fighter/kirby/c02": [
+			"fighter/kirby/model/finalcutter/c02/def_ultrasword_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c02/def_ultrasword_001_nor.nutexb",
+			"fighter/kirby/model/finalcutter/c02/def_ultrasword_001_prm.nutexb",
+			"fighter/kirby/motion/body/c02/d02specialinput.nuanmb",
+			"fighter/kirby/model/finalcutter/c02/def_parasol_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c02/def_spear_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c02/def_speartip_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c02/def_wandball_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c02/def_wandhandle_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c02/def_wheel_001_col.nutexb",
+			"fighter/kirby/motion/finalcutter/c02/d02specialhi5.nuanmb"
+		],
+        "fighter/kirby/c03": [
+			"fighter/kirby/model/finalcutter/c03/def_ultrasword_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c03/def_ultrasword_001_nor.nutexb",
+			"fighter/kirby/model/finalcutter/c03/def_ultrasword_001_prm.nutexb",
+			"fighter/kirby/motion/body/c03/d02specialinput.nuanmb",
+			"fighter/kirby/model/finalcutter/c03/def_parasol_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c03/def_spear_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c03/def_speartip_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c03/def_wandball_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c03/def_wandhandle_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c03/def_wheel_001_col.nutexb",
+			"fighter/kirby/motion/finalcutter/c03/d02specialhi5.nuanmb"
+		],
+        "fighter/kirby/c04": [
+			"fighter/kirby/model/finalcutter/c04/def_ultrasword_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c04/def_ultrasword_001_nor.nutexb",
+			"fighter/kirby/model/finalcutter/c04/def_ultrasword_001_prm.nutexb",
+			"fighter/kirby/motion/body/c04/d02specialinput.nuanmb",
+			"fighter/kirby/model/finalcutter/c04/def_parasol_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c04/def_spear_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c04/def_speartip_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c04/def_wandball_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c04/def_wandhandle_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c04/def_wheel_001_col.nutexb",
+			"fighter/kirby/motion/finalcutter/c04/d02specialhi5.nuanmb"
+		],
+        "fighter/kirby/c05": [
+			"fighter/kirby/model/finalcutter/c05/def_ultrasword_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c05/def_ultrasword_001_nor.nutexb",
+			"fighter/kirby/model/finalcutter/c05/def_ultrasword_001_prm.nutexb",
+			"fighter/kirby/motion/body/c05/d02specialinput.nuanmb",
+			"fighter/kirby/model/finalcutter/c05/def_parasol_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c05/def_spear_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c05/def_speartip_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c05/def_wandball_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c05/def_wandhandle_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c05/def_wheel_001_col.nutexb",
+			"fighter/kirby/motion/finalcutter/c05/d02specialhi5.nuanmb"
+		],
+        "fighter/kirby/c06": [
+			"fighter/kirby/model/finalcutter/c06/def_ultrasword_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c06/def_ultrasword_001_nor.nutexb",
+			"fighter/kirby/model/finalcutter/c06/def_ultrasword_001_prm.nutexb",
+			"fighter/kirby/motion/body/c06/d02specialinput.nuanmb",
+			"fighter/kirby/model/finalcutter/c06/def_parasol_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c06/def_spear_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c06/def_speartip_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c06/def_wandball_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c06/def_wandhandle_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c06/def_wheel_001_col.nutexb",
+			"fighter/kirby/motion/finalcutter/c06/d02specialhi5.nuanmb"
+		],
+        "fighter/kirby/c07": [
+			"fighter/kirby/model/finalcutter/c07/def_ultrasword_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c07/def_ultrasword_001_nor.nutexb",
+			"fighter/kirby/model/finalcutter/c07/def_ultrasword_001_prm.nutexb",
+			"fighter/kirby/motion/body/c07/d02specialinput.nuanmb",
+			"fighter/kirby/model/finalcutter/c07/def_parasol_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c07/def_spear_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c07/def_speartip_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c07/def_wandball_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c07/def_wandhandle_001_col.nutexb",
+			"fighter/kirby/model/finalcutter/c07/def_wheel_001_col.nutexb",
+			"fighter/kirby/motion/finalcutter/c07/d02specialhi5.nuanmb"
 		]
 	}
 }
