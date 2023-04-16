@@ -51,6 +51,9 @@ pub fn faf_change_master(fighter : &mut L2CFighterCommon) {
 			if motion_kind == hash40("attack_air_f") && frame >= 40.0 /*This is the new FaF*/ { // Enables cancel when the new FaF is over
 				CancelModule::enable_cancel(boma);
 			};
+			if motion_kind == hash40("attack_air_n") && frame >= 34.0 { 
+				CancelModule::enable_cancel(boma);
+			};
 			if motion_kind == hash40("attack_dash") && frame >= 29.0 {
 				CancelModule::enable_cancel(boma);
 			};
