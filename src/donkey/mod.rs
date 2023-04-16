@@ -6,9 +6,12 @@ use smash::app::lua_bind::*;
 use smash::lua2cpp::{L2CFighterCommon, L2CAgentBase};
 use smashline::*;
 use smash_script::*;
-use crate::util::*;
 use smash::lib::L2CValue;
 use smash::app::sv_animcmd::*;
+use crate::util::*;
+use smash::phx::Vector3f;
+use smash::app::FighterCutInManager;
+
 static mut IS_DK_START_ITEM_CHUCK: [bool; 8] = [false; 8];
 
 #[acmd_script(
