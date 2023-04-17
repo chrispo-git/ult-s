@@ -645,6 +645,31 @@ unsafe fn byleth_neutralb_eff(fighter: &mut L2CAgentBase) {
 	});
 }	
 #[acmd_script(
+    agent = "kirby",
+    scripts =  ["effect_masterspecialn", "effect_masterspecialairn"],
+    category = ACMD_EFFECT,
+	low_priority)]
+unsafe fn kirby_byleth_neutralb_eff(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(frame=9)
+		if(is_excute){
+			rust {
+				let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);  
+				let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize; 
+				if IS_THUNDER[ENTRY_ID] == true {
+					if StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR {
+						macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_thunder"), Hash40::new("haver"), 0, 0, 0, 0, 0, 0, 0.75, true);
+					} else {
+						macros::EFFECT(fighter, Hash40::new("sys_thunder"), Hash40::new("haver"), 0, 0, 0, 0, 0, 0, 0.75, 0, 0, 0, 0, 0, 0, true);
+					};
+					macros::EFFECT(fighter, Hash40::new("sys_thunder_flash"), Hash40::new("top"), 0, 0, 25, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, true);
+				}
+			}
+		}
+	});
+}	
+#[acmd_script(
     agent = "master",
     scripts =  ["sound_specialn", "sound_specialairn"],
     category = ACMD_SOUND,
@@ -1049,6 +1074,7 @@ pub fn install() {
 		byleth_neutralb_start,
 		byleth_neutralb,
 		byleth_neutralb_eff,
+		kirby_byleth_neutralb_eff,
 		byleth_neutralb_snd,
 		byleth_neutralbmax,
 		byleth_neutralbmaxe,

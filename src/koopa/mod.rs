@@ -324,11 +324,19 @@ pub fn fireball_frame(weapon : &mut L2CFighterBase) {
         let otarget_id = WorkModule::get_int(weapon.module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LINK_OWNER) as u32;
         let boma = smash::app::sv_battle_object::module_accessor(otarget_id);
 		let ENTRY_ID = WorkModule::get_int(&mut *boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-		if FIREBALL[ENTRY_ID] % 14 == 0 {
-			EffectModule::kill_kind(weapon.module_accessor, Hash40::new("koopa_breath_m_fire"), false, true);
-			let f1: u32 = EffectModule::req_follow(weapon.module_accessor, smash::phx::Hash40::new("sys_fireflower_shot"), smash::phx::Hash40::new("top"), &NONE, &NONE, 0.8, true, 0, 0, 0, 0, 0, true, true) as u32;
-			EffectModule::set_rgb(boma, f1, 1.5, 0.5, 0.5);
-			EffectModule::req_follow(weapon.module_accessor, smash::phx::Hash40::new("koopa_breath_m_fire"), smash::phx::Hash40::new("top"), &NONE, &NONE, 0.4, true, 0, 0, 0, 0, 0, true, true) as u32;
+		if smash::app::utility::get_kind(&mut *boma) == *FIGHTER_KIND_KIRBY {
+			if FIREBALL[ENTRY_ID] % 4 == 0 {
+					EffectModule::kill_kind(weapon.module_accessor, Hash40::new("sys_fireflower_shot"), false, true);
+					let f1: u32 = EffectModule::req_follow(weapon.module_accessor, smash::phx::Hash40::new("sys_fireflower_shot"), smash::phx::Hash40::new("top"), &NONE, &NONE, 0.9, true, 0, 0, 0, 0, 0, true, true) as u32;
+					EffectModule::set_rgb(boma, f1, 1.5, 0.5, 0.5);
+			};
+		} else {
+			if FIREBALL[ENTRY_ID] % 14 == 0 {
+					EffectModule::kill_kind(weapon.module_accessor, Hash40::new("koopa_breath_m_fire"), false, true);
+					let f1: u32 = EffectModule::req_follow(weapon.module_accessor, smash::phx::Hash40::new("sys_fireflower_shot"), smash::phx::Hash40::new("top"), &NONE, &NONE, 0.8, true, 0, 0, 0, 0, 0, true, true) as u32;
+					EffectModule::set_rgb(boma, f1, 1.5, 0.5, 0.5);
+					EffectModule::req_follow(weapon.module_accessor, smash::phx::Hash40::new("koopa_breath_m_fire"), smash::phx::Hash40::new("top"), &NONE, &NONE, 0.4, true, 0, 0, 0, 0, 0, true, true) as u32;
+			};
 		};
     }
 }
