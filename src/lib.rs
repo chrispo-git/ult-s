@@ -79,6 +79,7 @@ mod ike;
 mod inkling;
 mod jack;
 mod kamui;
+mod ken;
 mod kirby;
 mod koopa;
 mod koopajr;
@@ -221,6 +222,7 @@ pub extern "C" fn main() {
 	jack::install();
 	
 	kamui::install();
+	ken::install();
 	kirby::install();
 	koopa::install();
 	koopajr::install();
