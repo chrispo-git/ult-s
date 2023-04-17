@@ -3,7 +3,7 @@ import sys
 import shutil
 from zipfile import ZipFile
 
-needed_folders = ["util", "common", "controls"]
+needed_folders = ["util", "common", "controls", "cpu"]
 all_folders = [""]
 in_ = []
 out_ = []
@@ -32,12 +32,12 @@ f.close()
 
 
 with open(r"src/lib.rs", 'w') as f:
-    for i in range(0,33):
+    for i in range(0,50):
         f.write(in_[i])
     for x in needed_folders:
         f.write(f"mod {x};\n")
-    f.write('\n#[skyline::main(name = "ult_s")]\n')
-    f.write('pub fn main() {\n')
+    for i in range(136,183):
+        f.write(in_[i])
     for x in needed_folders:
         f.write(f"	{x}::install();\n")
     f.write('}')

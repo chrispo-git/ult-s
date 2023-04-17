@@ -977,6 +977,22 @@ unsafe fn zss_dsmash(fighter: &mut L2CAgentBase) {
 		}
     });
 }		
+pub(crate) fn check_jump(boma: &mut smash::app::BattleObjectModuleAccessor) -> bool {
+	unsafe {
+		if ControlModule::check_button_on_trriger(boma, *CONTROL_PAD_BUTTON_JUMP) {
+			return true;
+		};
+		if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_FLICK_JUMP) {
+			if ControlModule::get_flick_y(boma) >= 3 && ControlModule::get_stick_y(boma) >= 0.7 {
+				return true;
+			};
+		};
+		if ControlModule::check_button_on_trriger(boma, *CONTROL_PAD_BUTTON_JUMP_MINI) {
+			return true;
+		};
+		return false;
+	}
+}
 
 #[fighter_frame_callback]
 pub fn zss(fighter : &mut L2CFighterCommon) {
@@ -1069,7 +1085,7 @@ pub fn zss(fighter : &mut L2CFighterCommon) {
 					};
 				};
 				if status_kind == *FIGHTER_STATUS_KIND_ATTACK_HI4 {
-					if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP) {
+					if check_jump(boma) {
 						CancelModule::enable_cancel(boma);
 						NO_WAVEDASH_TIMER[ENTRY_ID] = NO_WAVEDASH_MAX;
 					};

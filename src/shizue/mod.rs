@@ -8,6 +8,7 @@ use smash::app::lua_bind::*;
 use crate::util::*;
 use smash::lib::L2CValue;
 use crate::util::CAN_ATTACK_AIR;
+use smash::app::sv_animcmd::*;
 
 static mut ISA_RESHOOT_TIME: [i32; 8] = [0; 8];
 static mut ISA_SHOT_KIND: [i32; 8] = [1; 8];
@@ -280,26 +281,31 @@ unsafe fn isa_neutralb_hit(fighter: &mut L2CAgentBase) {
     category = ACMD_GAME, low_priority )]
 unsafe fn isa_neutralb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
-    acmd!(lua_state, {
-		if(is_excute){
-			rust {
-				let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-				let rand_val = smash::app::sv_math::rand(hash40("fighter"), 8);
-				ISA_SHOT_KIND[ENTRY_ID] = rand_val + 1;
-			}
+	if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_KIND) == *FIGHTER_KIND_KIRBY {
+		frame(fighter.lua_state_agent, 7.0);
+		if macros::is_excute(fighter) {
+			WorkModule::on_flag(fighter.module_accessor, *FIGHTER_MURABITO_STATUS_SPECIAL_N_FLAG_SEARCH);
 		}
-		FT_MOTION_RATE(FSM=2.5)
-		frame(Frame=8)
-		FT_MOTION_RATE(FSM=1.5)
-		if(is_excute){
-			rust {
-				if !ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_SHIZUE_GENERATE_ARTICLE_POT) {
-					ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_SHIZUE_GENERATE_ARTICLE_POT, false, 0);
-				}
-				ArticleModule::shoot_exist(fighter.module_accessor, *FIGHTER_SHIZUE_GENERATE_ARTICLE_POT, smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL), false);
-			}
+		frame(fighter.lua_state_agent, 18.0);
+		if macros::is_excute(fighter) {
+			WorkModule::inc_int(fighter.module_accessor, *FIGHTER_MURABITO_STATUS_SPECIAL_N_INT_TAKEOUT_REQUEST);
 		}
-    });
+	} else {
+		if macros::is_excute(fighter) {
+			let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+			let rand_val = smash::app::sv_math::rand(hash40("fighter"), 8);
+			ISA_SHOT_KIND[ENTRY_ID] = rand_val + 1;
+		}
+		macros::FT_MOTION_RATE(fighter, /*FSM*/ 2.5);
+		frame(fighter.lua_state_agent, 8.0);
+		macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.5);
+		if macros::is_excute(fighter) {
+			if !ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_SHIZUE_GENERATE_ARTICLE_POT) {
+				ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_SHIZUE_GENERATE_ARTICLE_POT, false, 0);
+			}
+			ArticleModule::shoot_exist(fighter.module_accessor, *FIGHTER_SHIZUE_GENERATE_ARTICLE_POT, smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL), false);
+		}
+	}
 }
 #[acmd_script(
     agent = "shizue",

@@ -331,9 +331,8 @@ fn buddy_frame(fighter: &mut L2CFighterCommon) {
 		let frame = MotionModule::frame(boma);
 		if motion_kind == hash40("attack_air_lw") {
 			if AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_HIT) && !AttackModule::is_infliction(boma, *COLLISION_KIND_MASK_HIT) && frame < 50.0{
-				MotionModule::change_motion(boma, smash::phx::Hash40::new("attack_air_lw"), 51.0, 1.0, false, 0.0, false, false);
-				let speed = smash::phx::Vector3f { x: 0.0, y: 0.75, z: 0.0 };
-				KineticModule::add_speed(boma, &speed);
+				KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_JUMP);
+				MotionModule::set_frame_sync_anim_cmd(boma, 51.0, true, true, false);
 			};
 		};
 		if status_kind == *FIGHTER_BUDDY_STATUS_KIND_SPECIAL_S_FAIL {

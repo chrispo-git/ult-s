@@ -188,7 +188,7 @@ unsafe fn brawler_fair(fighter: &mut L2CAgentBase) {
 		if(is_excute){
 			AttackModule::clear_all()
 		}
-		frame(Frame=30)
+		frame(Frame=26)
 		if(is_excute){
 			WorkModule::off_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
 		}
@@ -822,6 +822,22 @@ unsafe fn brawler_shotput_eff(fighter: &mut L2CAgentBase) {
     acmd!(lua_state, {
     });
 }	
+pub(crate) fn check_jump(boma: &mut smash::app::BattleObjectModuleAccessor) -> bool {
+	unsafe {
+		if ControlModule::check_button_on_trriger(boma, *CONTROL_PAD_BUTTON_JUMP) {
+			return true;
+		};
+		if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_FLICK_JUMP) {
+			if ControlModule::get_flick_y(boma) >= 3 && ControlModule::get_stick_y(boma) >= 0.7 {
+				return true;
+			};
+		};
+		if ControlModule::check_button_on_trriger(boma, *CONTROL_PAD_BUTTON_JUMP_MINI) {
+			return true;
+		};
+		return false;
+	}
+}
 #[fighter_frame( agent = FIGHTER_KIND_MIIFIGHTER )]
 fn brawler_frame(fighter: &mut L2CFighterCommon) {
     unsafe {
@@ -916,7 +932,7 @@ fn brawler_frame(fighter: &mut L2CFighterCommon) {
 			*/
 			//HOA Special Kick 
 			if status_kind == *FIGHTER_MIIFIGHTER_STATUS_KIND_SPECIAL_LW2_KICK_LANDING && WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_CUSTOMIZE_SPECIAL_LW_NO) == 0{
-				if MotionModule::frame(boma) > 12.0 {
+				if MotionModule::frame(boma) > 9.0 {
 					CancelModule::enable_cancel(boma);
 				};
 			};
@@ -1003,7 +1019,7 @@ fn brawler_frame(fighter: &mut L2CFighterCommon) {
 							StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_ESCAPE_AIR, true);
 						};
 					};
-					if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP) {
+					if check_jump(boma) {
 						if StatusModule::situation_kind(boma) == *SITUATION_KIND_GROUND {
 							macros::STOP_SE(fighter, smash::phx::Hash40::new("se_miifighter_special_c3_n01"));
 							EffectModule::kill_kind(boma, smash::phx::Hash40::new_raw(0x198abfaca9), false, false);
