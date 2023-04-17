@@ -939,6 +939,13 @@ pub fn faf_change_master(fighter : &mut L2CFighterCommon) {
 			if [hash40("attack_hi4")].contains(&motion_kind) && frame >= 28.0 {
 				CancelModule::enable_cancel(boma);
 			};
+		}else if fighter_kind == *FIGHTER_KIND_MASTER{
+			if [hash40("throw_lw")].contains(&motion_kind) && frame >= 29.0 {
+				CancelModule::enable_cancel(boma);
+			};
+			if [hash40("throw_hi")].contains(&motion_kind) && frame >= 33.0 {
+				CancelModule::enable_cancel(boma);
+			};
 		}else if fighter_kind == *FIGHTER_KIND_TANTAN {
 			if [hash40("attack_lw3")].contains(&motion_kind) && frame >= 29.0 {
 				CancelModule::enable_cancel(boma);
