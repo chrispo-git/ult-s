@@ -76,7 +76,7 @@ pub fn jabcancel(fighter : &mut L2CFighterCommon) {
 			CAN_RAPID_JAB[ENTRY_ID] = 0;
 		};
 		if [*FIGHTER_STATUS_KIND_ATTACK_100, *FIGHTER_STATUS_KIND_ATTACK, *FIGHTER_DEMON_STATUS_KIND_ATTACK_COMBO].contains(&status_kind) && !is_hitlag(boma) && (HAS_ENABLE_100_ON[ENTRY_ID] || HAS_ENABLE_COMBO_ON[ENTRY_ID]){
-				if  (AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_HIT) || (fighter_kind == *FIGHTER_KIND_SHEIK && AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_ALL))) {
+			if  (AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_HIT) || [*FIGHTER_KIND_SHEIK, *FIGHTER_KIND_CAPTAIN].contains(&fighter_kind) && AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_ALL)) {
 						if (ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_ATTACK_S4) != 0 {
 							StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_ATTACK_S4_START, true);
 						} else if (ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_ATTACK_HI4) != 0 {
