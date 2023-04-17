@@ -455,6 +455,22 @@ unsafe fn mario_fireball(fighter: &mut L2CAgentBase) {
 		}
     });
 }	
+pub(crate) fn check_jump(boma: &mut smash::app::BattleObjectModuleAccessor) -> bool {
+	unsafe {
+		if ControlModule::check_button_on_trriger(boma, *CONTROL_PAD_BUTTON_JUMP) {
+			return true;
+		};
+		if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_FLICK_JUMP) {
+			if ControlModule::get_flick_y(boma) >= 3 && ControlModule::get_stick_y(boma) >= 0.7 {
+				return true;
+			};
+		};
+		if ControlModule::check_button_on_trriger(boma, *CONTROL_PAD_BUTTON_JUMP_MINI) {
+			return true;
+		};
+		return false;
+	}
+}
 #[fighter_frame_callback]
 pub fn mario_frame(fighter : &mut L2CFighterCommon) {
     unsafe {
@@ -469,7 +485,7 @@ pub fn mario_frame(fighter : &mut L2CFighterCommon) {
 			if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_S {
 				if StatusModule::situation_kind(boma) == *SITUATION_KIND_GROUND {
 					if MotionModule::frame(boma) > 9.0 && MotionModule::frame(boma) < 73.0 && AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_SHIELD) == false {
-						if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP) {//|| ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_FLICK_JUMP) {
+						if check_jump(boma) {
 							StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_JUMP_SQUAT, true);
 						};
 					};

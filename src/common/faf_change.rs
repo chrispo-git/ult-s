@@ -585,6 +585,9 @@ pub fn faf_change_master(fighter : &mut L2CFighterCommon) {
 			if [hash40("special_s1_start")].contains(&motion_kind) && frame >= 60.0 {
 				CancelModule::enable_cancel(boma);
 			};
+			if [hash40("attack_air_hi")].contains(&motion_kind) && frame >= 32.0 {
+				CancelModule::enable_cancel(boma);
+			};
 		}else if fighter_kind == *FIGHTER_KIND_MIISWORDSMAN {
 			if [hash40("special_air_hi_start")].contains(&motion_kind){
 				HitModule::set_whole(boma, smash::app::HitStatus(*HIT_STATUS_XLU), 0);
