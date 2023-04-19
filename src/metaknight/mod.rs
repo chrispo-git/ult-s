@@ -388,7 +388,7 @@ pub fn mk(fighter : &mut L2CFighterCommon) {
 		let fighter_kind = smash::app::utility::get_kind(boma);
 		if fighter_kind == *FIGHTER_KIND_METAKNIGHT {
 			if [hash40("attack_air_lw")].contains(&MotionModule::motion_kind(boma)) {
-				if AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_ALL) && !AttackModule::is_infliction(boma, *COLLISION_KIND_MASK_ALL) && MotionModule::frame(boma) < 37.0{
+				if AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_HIT) && !AttackModule::is_infliction(boma, *COLLISION_KIND_MASK_HIT) && MotionModule::frame(boma) < 37.0{
 					KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_JUMP);
 					if AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_HIT) {
 						MotionModule::set_frame_sync_anim_cmd(boma, 38.0, true, true, false);
