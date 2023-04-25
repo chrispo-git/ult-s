@@ -1291,7 +1291,7 @@ pub fn char_input(fighter : &mut L2CFighterCommon) {
 						INPUT_NUM[ENTRY_ID] += 1;
 						//println!("Input 3!");
 					};
-					if INPUT_NUM[ENTRY_ID] == 3 && STICK_NUM[ENTRY_ID] == 5 {
+					if INPUT_NUM[ENTRY_ID] == 3 && STICK_NUM[ENTRY_ID] == 6 {
 						INPUT_WINDOW[ENTRY_ID] = 0;
 						INPUT_NUM[ENTRY_ID] += 1;
 						//println!("Input 3!");
