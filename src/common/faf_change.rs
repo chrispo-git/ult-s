@@ -1003,7 +1003,14 @@ pub fn faf_change_master(fighter : &mut L2CFighterCommon) {
 					MotionModule::set_rate(boma, 1.0);
 				};
 			};
-		}*/else if fighter_kind == *FIGHTER_KIND_ELIGHT {
+		}*/else if fighter_kind == *FIGHTER_KIND_EDGE {
+			if [hash40("attack_13")].contains(&motion_kind) && frame >= 31.0 {
+				CancelModule::enable_cancel(boma);
+			};
+			if [hash40("attack_lw3")].contains(&motion_kind) && frame >= 35.0 {
+				CancelModule::enable_cancel(boma);
+			};
+		}else if fighter_kind == *FIGHTER_KIND_ELIGHT {
 			if [hash40("attack_13")].contains(&motion_kind) && frame >= 20.0 {
 				CancelModule::enable_cancel(boma);
 			};
