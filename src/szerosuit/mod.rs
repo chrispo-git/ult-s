@@ -328,6 +328,10 @@ unsafe fn zss_usmash_eff(fighter: &mut L2CAgentBase) {
 			EFFECT_FOLLOW(hash40("sys_attack_arc_d"), hash40("top"), 2, 16, 0, -3, 23.6, 96.3, 1.1, true)
 			LAST_EFFECT_SET_RATE(1.3)
 		}
+		frame(Frame=33)
+		if(is_excute){
+			LANDING_EFFECT(hash40("sys_down_smoke"), hash40("top"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false)
+		}
     });
 }	
 #[acmd_script(
@@ -797,6 +801,7 @@ unsafe fn zss_sideb_eff(fighter: &mut L2CAgentBase) {
 		frame(Frame=5)
 		if(is_excute){
 			LANDING_EFFECT(hash40("sys_atk_smoke"), hash40("top"), 2, 0, -11, 0, 0, 0, 0.8, 0, 0, 0, 0, 0, 0, true)
+			EFFECT_FOLLOW(hash40("szero_flipjump_body"), hash40("hip"), -2, 0.4, 0, 0, 0, 105, 1, true)
 		}
 		frame(Frame=7)
 		if(is_excute){
@@ -804,6 +809,14 @@ unsafe fn zss_sideb_eff(fighter: &mut L2CAgentBase) {
 			LAST_EFFECT_SET_RATE(0.9)
 			EFFECT_FLW_POS(0x0fc6ce170du64, hash40("toel"), -1, 0, 0, 180, 0, 0, 0.6, true)
 			LAST_EFFECT_SET_RATE(0.9)
+			EFFECT_FOLLOW(hash40("szero_flipjump_body"), hash40("hip"), -2, 0.4, 0, 0, 0, 105, 1, true)
+		}
+		frame(Frame=9)
+		for(4 Iterations){
+			if(is_excute){
+				EFFECT_FOLLOW(hash40("szero_flipjump_body"), hash40("hip"), -2, 0.4, 0, 0, 0, 105, 1, true)
+			}
+			wait(Frames=2)
 		}
 		frame(Frame=30)
 		if(is_excute){
@@ -1086,7 +1099,7 @@ pub fn zss(fighter : &mut L2CFighterCommon) {
 				};
 				if status_kind == *FIGHTER_STATUS_KIND_ATTACK_HI4 {
 					if check_jump(boma) {
-						CancelModule::enable_cancel(boma);
+						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_JUMP_SQUAT, true);
 						NO_WAVEDASH_TIMER[ENTRY_ID] = NO_WAVEDASH_MAX;
 					};
 				};
