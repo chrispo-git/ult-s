@@ -1,16 +1,22 @@
-use smash::hash40;
-use smash::lib::lua_const::*;
-use smash::lua2cpp::*;
+use smash::app::sv_animcmd::*;
+use smash::phx::{Hash40, Vector2f};
 use smash::app::lua_bind::*;
+use smash::lib::lua_const::*;
+use smash::app::utility::get_kind;
+use smash::hash40;
+use smash::lua2cpp::*;
 use smashline::*;
-use smash::phx::*;
 use smash_script::*;
+use smash::lib::{L2CValue, L2CAgent};
+use std::mem;
+use smash::app::*;
 use crate::util::*;
 
 
 static mut CAN_CANCEL : [bool; 8] = [false; 8];
 static mut CAN_CANCEL_TIMER : [i32; 8] = [0; 8];
 static mut NO_WAVEDASH_TIMER : [i32; 8] = [0; 8];
+static mut IS_AIR_SIDEB : [bool; 8] = [false; 8];
 static NO_WAVEDASH_MAX : i32 = 8;
 static WINDOW : i32 = 20;
 
@@ -792,10 +798,92 @@ unsafe fn zss_sideb_air(fighter: &mut L2CAgentBase) {
 }	
 #[acmd_script(
     agent = "szerosuit",
-    scripts =  ["effect_specialairs"],
+    script =  "game_specials",
+    category = ACMD_GAME,
+	low_priority)]
+unsafe fn zss_sideb(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		if(is_excute){
+			ArticleModule::remove_exist(FIGHTER_SZEROSUIT_GENERATE_ARTICLE_WHIP,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL))
+		}
+		FT_MOTION_RATE(FSM=0.7)
+		wait(Frame=10)
+		FT_MOTION_RATE(FSM=1)
+		frame(Frame=15)
+		if(is_excute){
+			ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=18.0, Angle=80, KBG=72, FKB=0, BKB=40, Size=6.5, X=0.0, Y=3.5, Z=15.0, X2=0.0, Y2=11.0, Z2=15.0, Hitlag=1.2, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KNEE)
+		}
+		frame(Frame=17)
+		if(is_excute){
+			AttackModule::clear_all()
+		}
+    });
+}	
+#[acmd_script(
+    agent = "szerosuit",
+    scripts =  ["effect_specials"],
     category = ACMD_EFFECT,
 	low_priority)]
 unsafe fn zss_sideb_eff(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=15)
+		if(is_excute){
+			rust {
+				let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);  
+				let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+				if IS_AIR_SIDEB[ENTRY_ID] == false {
+					acmd!(lua_state, {
+						QUAKE(CAMERA_QUAKE_KIND_M)
+						EFFECT(hash40("sys_quake"), hash40("top"), 15, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false)
+						LAST_EFFECT_SET_COLOR(0.31, 2.25, 2.55)
+						EFFECT(hash40("sys_v_smoke_a"), hash40("top"), 15, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false)
+						LAST_EFFECT_SET_COLOR(0.31, 2.25, 2.55)
+					});
+				}
+			}
+		}
+		frame(Frame=18)
+		if(is_excute){
+			EFFECT_OFF_KIND(0x0fc6ce170du64, false, false)
+		}
+    });
+}	
+#[acmd_script(
+    agent = "szerosuit",
+    scripts =  ["sound_specials"],
+    category = ACMD_SOUND,
+	low_priority)]
+unsafe fn zss_sideb_snd(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    acmd!(lua_state, {
+		frame(Frame=13)
+		if(is_excute){
+			PLAY_SEQUENCE(hash40("seq_szerosuit_rnd_attack"))
+		}
+		frame(Frames=14)
+		if(is_excute){
+			rust {
+				let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);  
+				let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+				if IS_AIR_SIDEB[ENTRY_ID] == false {
+					acmd!(lua_state, {
+						PLAY_DOWN_SE(hash40("se_common_down_soil_s"))
+						PLAY_SE(hash40("se_common_bomb_s"))
+						PLAY_SE(hash40("se_common_offset_sword"))
+					});
+				}
+			}
+		}
+    });
+}	
+#[acmd_script(
+    agent = "szerosuit",
+    scripts =  ["effect_specialairs"],
+    category = ACMD_EFFECT,
+	low_priority)]
+unsafe fn zss_sideb_air_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
 		frame(Frame=5)
@@ -819,10 +907,6 @@ unsafe fn zss_sideb_eff(fighter: &mut L2CAgentBase) {
 			}
 			wait(Frames=2)
 		}
-		frame(Frame=30)
-		if(is_excute){
-			LANDING_EFFECT(hash40("sys_action_smoke_h"), hash40("top"), 6, 0, 0, 0, 0, 0, 0.6, 0, 0, 0, 0, 0, 0, false)
-		}
     });
 }	
 #[acmd_script(
@@ -830,7 +914,7 @@ unsafe fn zss_sideb_eff(fighter: &mut L2CAgentBase) {
     scripts =  ["sound_specialairs"],
     category = ACMD_SOUND,
 	low_priority)]
-unsafe fn zss_sideb_snd(fighter: &mut L2CAgentBase) {
+unsafe fn zss_sideb_air_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     acmd!(lua_state, {
 		frame(Frame=6)
@@ -1022,6 +1106,31 @@ pub fn zss(fighter : &mut L2CFighterCommon) {
 		let situation_kind = StatusModule::situation_kind(boma);
 		let frame = MotionModule::frame(boma);
 		if fighter_kind == *FIGHTER_KIND_SZEROSUIT {
+			if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_S {
+				if StatusModule::is_situation_changed(boma) {
+					if situation_kind == *SITUATION_KIND_GROUND {
+						if AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_HIT) {
+							StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_LANDING, true);
+						} else {
+							StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_LANDING_FALL_SPECIAL, true);
+						};
+					} else {
+							StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL, true);
+					};
+				};
+				if situation_kind == *SITUATION_KIND_AIR {
+					if frame >= 24.3 {
+						if AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_HIT) {
+							StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL, false);
+						} else {
+							StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL_SPECIAL, true);
+						}
+					};
+					IS_AIR_SIDEB[ENTRY_ID] = true;
+				};
+			} else {
+				IS_AIR_SIDEB[ENTRY_ID] = false;
+			};
 			if AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_HIT) == false {
 				CAN_CANCEL[ENTRY_ID] = false;
 			};
@@ -1037,24 +1146,6 @@ pub fn zss(fighter : &mut L2CFighterCommon) {
 				NO_WAVEDASH_TIMER[ENTRY_ID] -= 1;
 			} else {
 				CAN_AIRDODGE[ENTRY_ID] = 0;
-			};
-			if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_S {
-				if StatusModule::is_situation_changed(boma) {
-					if situation_kind == *SITUATION_KIND_GROUND {
-						if AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_HIT) {
-							StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_LANDING, true);
-						} else {
-							StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_LANDING_FALL_SPECIAL, true);
-						};
-					} else {
-							StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL, true);
-					};
-				};
-				if situation_kind == *SITUATION_KIND_AIR {
-					if frame >= 24.3 {
-						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL_SPECIAL, true);
-					};
-				};
 			};
 			if AttackModule::is_infliction(boma, *COLLISION_KIND_MASK_HIT){
 				CAN_CANCEL[ENTRY_ID] = true;
@@ -1150,7 +1241,6 @@ pub fn zss(fighter : &mut L2CFighterCommon) {
 		};
     };
 }		
-		
 pub fn install() {
     smashline::install_acmd_scripts!(
 		zss_bury,
@@ -1181,6 +1271,9 @@ pub fn install() {
 		zss_da_eff,
 		zss_da_snd,
 		zss_sideb_air,
+		zss_sideb_air_eff,
+		zss_sideb_air_snd,
+		zss_sideb,
 		zss_sideb_eff,
 		zss_sideb_snd,
 		zss_upb,
