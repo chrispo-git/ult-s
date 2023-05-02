@@ -337,7 +337,7 @@ fn gunner_frame(fighter: &mut L2CFighterCommon) {
         };
         if [hash40("special_hi1"), hash40("special_air_hi1")].contains(&MotionModule::motion_kind(boma)) {
             CAN_UPB[ENTRY_ID] = 1;
-            if MotionModule::frame(boma) >= 41.0 {
+            if MotionModule::frame(boma) >= 24.0 {
                 StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL, false);
             };
             WorkModule::set_int(boma, WorkModule::get_int(boma,*FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT_MAX), *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT);
@@ -363,4 +363,5 @@ pub fn install() {
 		    gunner_dtilt,
 		    gunner_dsmash
     );
+    smashline::install_agent_frames!(gunner_frame);
 }
