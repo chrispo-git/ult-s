@@ -6,6 +6,7 @@ use smash::app::lua_bind::*;
 use smash::lua2cpp::{L2CFighterCommon, L2CAgentBase};
 use smashline::*;
 use smash_script::*;
+use smash::app::sv_animcmd::*;
 use crate::util::*;
 static mut STATIC_MUT : [i32; 8] = [6; 8];
 // A Once-Per-Fighter-Frame that only applies to Mario. Neat!
@@ -15,13 +16,26 @@ fn captain_frame(fighter: &mut L2CFighterCommon) {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
 		let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+		let motion_kind = MotionModule::motion_kind(boma);
+		//Raptor Boost Cancel Pog
+		if [hash40("attack_s3_s"), hash40("attack_s3_lw"), hash40("attack_s3_hi")].contains(&motion_kind) && (AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_HIT) || AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_SHIELD)){
+            if (ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_S) != 0{ 
+                StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_SPECIAL_S, true);
+            };
+		};
+		//Falcon Kick Cancel Pog
+		if [hash40("attack_lw3"), hash40("attack_lw4")].contains(&motion_kind) && (AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_HIT) || AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_SHIELD)){
+            if (ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_LW) != 0{ 
+                StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_SPECIAL_LW, true);
+            };
+		};
 		if ![*FIGHTER_STATUS_KIND_THROW, *FIGHTER_STATUS_KIND_SPECIAL_N, *FIGHTER_CAPTAIN_STATUS_KIND_SPECIAL_N_TURN].contains(&status_kind) &&  AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_ALL) {
 			let cat1 = ControlModule::get_command_flag_cat(boma, 0);
 			if (cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_N) != 0 && !is_hitlag(boma){
 				StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_SPECIAL_N, true);
 			};
 		};
-    }
+    };
 }
 #[acmd_script(
     agent = "captain",
