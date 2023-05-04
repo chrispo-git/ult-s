@@ -6,8 +6,10 @@ use smash::app::lua_bind::*;
 use smash::lua2cpp::{L2CFighterCommon, L2CAgentBase};
 use smashline::*;
 use smash_script::*;
-
+use smash::app::sv_animcmd::*;
 use crate::util::*;
+use smash::app::lua_bind::ArticleModule::motion_kind;
+
 //Float Stuff
 static mut CHECK_FLOAT : [i32; 8] = [0; 8];
 static mut CHECK_FLOAT_MAX : i32 = 14; //Frames where jump needs to be held to start floating
@@ -362,7 +364,7 @@ unsafe fn dpit_upb(fighter: &mut L2CAgentBase) {
     acmd!(lua_state, {
 		frame(Frame=4)
 		if(is_excute){
-			ATTACK(ID=0, Part=0, Bone=hash40("havel"), Damage=14.0, Angle=80, KBG=90, FKB=0, BKB=50, Size=12.0, X=0.0, Y=0.0, Z=0.0, X2=0.0, Y2=0.0, Z2=0.0, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_THRU, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_elec"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_HEAVY, Type=ATTACK_REGION_PUNCH)
+			ATTACK(ID=0, Part=0, Bone=hash40("havel"), Damage=14.0, Angle=80, KBG=90, FKB=0, BKB=50, Size=8.0, X=0.0, Y=0.0, Z=6.0, X2=0.0, Y2=0.0, Z2=0.0, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_THRU, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_elec"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_HEAVY, Type=ATTACK_REGION_PUNCH)
 		}
 		frame(Frame=6)
 		if(is_excute){
@@ -450,8 +452,14 @@ pub fn pitoo(fighter : &mut L2CFighterCommon) {
 		let fighter_kind = smash::app::utility::get_kind(boma);
 		let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 		let situation_kind = StatusModule::situation_kind(boma);
+		let motion_kind = MotionModule::motion_kind(boma);
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
 		if fighter_kind == *FIGHTER_KIND_PITB {
+			if [hash40("attack_s3_s"), hash40("attack_dash")].contains(&motion_kind) && (AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_HIT)){
+				if (ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_S) != 0{ 
+					StatusModule::change_status_request_from_script(boma, *FIGHTER_PIT_STATUS_KIND_SPECIAL_HI_RUSH, true);
+				};
+			};
 			if  MotionModule::motion_kind(boma) == hash40("special_lw_break_l") || MotionModule::motion_kind(boma) == hash40("special_lw_break_r"){
 				StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_DOWN, true);
 			};
