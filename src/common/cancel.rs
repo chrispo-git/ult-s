@@ -13,6 +13,7 @@ use crate::util::*;
 
 //Jump Cancel List
 //0 for hit_condition means it can always be jump cancelled
+//Otherwise, set hit_condition to a value such as *COLLISION_KIND_MASK_HIT
 //-1 for jc_start/jc_end means it will always be jump cancellable at any point
 pub(crate) fn is_jc(boma: &mut smash::app::BattleObjectModuleAccessor, fighter_kind : i32, status_kind : i32, frame : f32) -> bool {
 	unsafe {
