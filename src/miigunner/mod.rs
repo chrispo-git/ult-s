@@ -394,43 +394,50 @@ unsafe fn gunner_dair(fighter: &mut L2CAgentBase) {
         WorkModule::off_flag(fighter.module_accessor, *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
     }
 }				
-#[fighter_frame_callback]
-pub fn gunner(fighter : &mut L2CFighterCommon) {
+#[fighter_frame( agent = FIGHTER_KIND_MIIGUNNER )]
+fn gunner_frame(fighter: &mut L2CFighterCommon) {
     unsafe {
+        println!("It'sa me, Mario, wahoooooooo!");
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
 		let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-		let fighter_kind = smash::app::utility::get_kind(boma);
-
-    let stick_y = ControlModule::get_stick_y(boma);
-		if fighter_kind == *FIGHTER_KIND_MIIGUNNER {
-			if [hash40("special_n3_start"), hash40("special_air_n3_start")].contains(&MotionModule::motion_kind(boma)) {
-				if MotionModule::frame(boma) > 28.0 && MotionModule::frame(boma) < 30.0{
-					if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_SPECIAL) && CHARGE_FRAMES[ENTRY_ID] < MAX_FRAMES{
-						CHARGE_FRAMES[ENTRY_ID] += 1;
-						MotionModule::set_rate(boma, 0.01);
-					} else {
-						MotionModule::set_rate(boma, 0.5);
-					};
-				};
-			} else {
-				CHARGE_FRAMES[ENTRY_ID] = 0;
-			};
-
-     if [*FIGHTER_STATUS_KIND_SPECIAL_N].contains(&status_kind) && ![*FIGHTER_MIIGUNNER_STATUS_KIND_SPECIAL_N3_END, *FIGHTER_MIIGUNNER_STATUS_KIND_SPECIAL_N1_FIRE, *FIGHTER_MIIGUNNER_STATUS_KIND_SPECIAL_N1_HOLD, *FIGHTER_MIIGUNNER_STATUS_KIND_SPECIAL_N3_LOOP, *FIGHTER_MIIGUNNER_STATUS_KIND_SPECIAL_N1_START, *FIGHTER_MIIGUNNER_STATUS_KIND_SPECIAL_N1_CANCEL].contains(&status_kind){
-
-				if StatusModule::is_situation_changed(boma) {
-					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_LANDING, true);
-				};
-				if StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR {
-					let cat2 = ControlModule::get_command_flag_cat(boma, 1);
-					if (cat2 & *FIGHTER_PAD_CMD_CAT2_FLAG_FALL_JUMP) != 0 && stick_y < -0.66 && SPEED_Y[ENTRY_ID] <= 0.0 {
-						WorkModule::set_flag(boma, true, *FIGHTER_STATUS_WORK_ID_FLAG_RESERVE_DIVE);
-					}
-				};
-			};
-		};
-	};
+		let motion_kind = MotionModule::motion_kind(boma);
+		let frame = MotionModule::frame(boma);
+        let stick_y = ControlModule::get_stick_y(boma);
+        if [hash40("special_n3_start"), hash40("special_air_n3_start")].contains(&MotionModule::motion_kind(boma)) {
+            if MotionModule::frame(boma) > 28.0 && MotionModule::frame(boma) < 30.0{
+                if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_SPECIAL) && CHARGE_FRAMES[ENTRY_ID] < MAX_FRAMES{
+                    CHARGE_FRAMES[ENTRY_ID] += 1;
+                    MotionModule::set_rate(boma, 0.01);
+                } else {
+                    MotionModule::set_rate(boma, 0.5);
+                };
+            };
+        } else {
+            CHARGE_FRAMES[ENTRY_ID] = 0;
+        };
+        if [*FIGHTER_STATUS_KIND_SPECIAL_N].contains(&status_kind) && ![*FIGHTER_MIIGUNNER_STATUS_KIND_SPECIAL_N3_END, *FIGHTER_MIIGUNNER_STATUS_KIND_SPECIAL_N1_FIRE, *FIGHTER_MIIGUNNER_STATUS_KIND_SPECIAL_N1_HOLD, *FIGHTER_MIIGUNNER_STATUS_KIND_SPECIAL_N3_LOOP, *FIGHTER_MIIGUNNER_STATUS_KIND_SPECIAL_N1_START, *FIGHTER_MIIGUNNER_STATUS_KIND_SPECIAL_N1_CANCEL].contains(&status_kind){
+            if StatusModule::is_situation_changed(boma) {
+                StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_LANDING, true);
+            };
+            if StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR {
+                let cat2 = ControlModule::get_command_flag_cat(boma, 1);
+                if (cat2 & *FIGHTER_PAD_CMD_CAT2_FLAG_FALL_JUMP) != 0 && stick_y < -0.66 && SPEED_Y[ENTRY_ID] <= 0.0 {
+                    WorkModule::set_flag(boma, true, *FIGHTER_STATUS_WORK_ID_FLAG_RESERVE_DIVE);
+                }
+            };
+        };
+        if StatusModule::situation_kind(boma) != *SITUATION_KIND_AIR {
+            CAN_UPB[ENTRY_ID] = 0;
+        };
+        if [hash40("special_hi1"), hash40("special_air_hi1")].contains(&MotionModule::motion_kind(boma)) {
+            CAN_UPB[ENTRY_ID] = 1;
+            if MotionModule::frame(boma) >= 24.0 {
+                StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL, false);
+            };
+            WorkModule::set_int(boma, WorkModule::get_int(boma,*FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT_MAX), *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT);
+        };
+    }
 }
 	
 pub fn install() {
@@ -453,5 +460,5 @@ pub fn install() {
             gunner_fsmash,
             gunner_usmash
     );
-	smashline::install_agent_frame_callbacks!(gunner);
+    smashline::install_agent_frames!(gunner_frame);
 }
