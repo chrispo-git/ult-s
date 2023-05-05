@@ -23,12 +23,6 @@ fn captain_frame(fighter: &mut L2CFighterCommon) {
                 StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_SPECIAL_S, true);
             };
 		};
-		//Falcon Kick Cancel Pog
-		if [hash40("attack_lw3"), hash40("attack_lw4")].contains(&motion_kind) && (AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_HIT) || AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_SHIELD)){
-            if (ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_LW) != 0{ 
-                StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_SPECIAL_LW, true);
-            };
-		};
 		if ![*FIGHTER_STATUS_KIND_THROW, *FIGHTER_STATUS_KIND_SPECIAL_N, *FIGHTER_CAPTAIN_STATUS_KIND_SPECIAL_N_TURN].contains(&status_kind) &&  AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_ALL) {
 			let cat1 = ControlModule::get_command_flag_cat(boma, 0);
 			if (cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_N) != 0 && !is_hitlag(boma){
