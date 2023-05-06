@@ -1276,17 +1276,22 @@ pub fn char_input(fighter : &mut L2CFighterCommon) {
 			//Incineroar
 			if fighter_kind == *FIGHTER_KIND_GAOGAEN {
 				if [*FIGHTER_STATUS_KIND_FALL, *FIGHTER_STATUS_KIND_FALL_AERIAL, *FIGHTER_STATUS_KIND_JUMP, *FIGHTER_STATUS_KIND_JUMP_AERIAL].contains(&status_kind) {
-					if INPUT_NUM[ENTRY_ID] == 0 && STICK_NUM[ENTRY_ID] == 6 && INCIN_BAN_AIRDASH[ENTRY_ID] == false {
+					if INPUT_NUM[ENTRY_ID] == 0 && STICK_NUM[ENTRY_ID] == 2 && INCIN_BAN_AIRDASH[ENTRY_ID] == false {
 						INPUT_WINDOW[ENTRY_ID] = 0;
 						INPUT_NUM[ENTRY_ID] += 1;
 						//println!("Input 1!");
 					};
-					if INPUT_NUM[ENTRY_ID] == 1 && STICK_NUM[ENTRY_ID] == 2{
+					if INPUT_NUM[ENTRY_ID] == 1 && STICK_NUM[ENTRY_ID] == 1{
 						INPUT_WINDOW[ENTRY_ID] = 0;
 						INPUT_NUM[ENTRY_ID] += 1;
 						//println!("Input 2!");
 					};
-					if INPUT_NUM[ENTRY_ID] == 2 && STICK_NUM[ENTRY_ID] == 3 {
+					if INPUT_NUM[ENTRY_ID] == 2 && STICK_NUM[ENTRY_ID] == 4 {
+						INPUT_WINDOW[ENTRY_ID] = 0;
+						INPUT_NUM[ENTRY_ID] += 1;
+						//println!("Input 3!");
+					};
+					if INPUT_NUM[ENTRY_ID] == 3 && STICK_NUM[ENTRY_ID] == 6 {
 						INPUT_WINDOW[ENTRY_ID] = 0;
 						INPUT_NUM[ENTRY_ID] += 1;
 						//println!("Input 3!");
@@ -1301,10 +1306,10 @@ pub fn char_input(fighter : &mut L2CFighterCommon) {
 				if INPUT_START[ENTRY_ID] == true {
 					INPUT_WINDOW[ENTRY_ID] += 1;
 				};
-				if INPUT_NUM[ENTRY_ID] == 3 {
+				if INPUT_NUM[ENTRY_ID] == 4 {
 					INPUT_NUM[ENTRY_ID] += 1;
 				};
-				if INPUT_NUM[ENTRY_ID] == 4 && [*FIGHTER_STATUS_KIND_SPECIAL_S].contains(&status_kind) == false && StatusModule::situation_kind(boma) != *SITUATION_KIND_GROUND {
+				if INPUT_NUM[ENTRY_ID] == 5 && [*FIGHTER_STATUS_KIND_SPECIAL_S].contains(&status_kind) == false && StatusModule::situation_kind(boma) != *SITUATION_KIND_GROUND {
 					println!("Lariat Airdash!");
 					INCIN_IS_AIRDASH[ENTRY_ID] = true;
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_SPECIAL_S, true);
