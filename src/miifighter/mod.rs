@@ -248,8 +248,7 @@ unsafe fn brawler_esk_e(fighter: &mut L2CAgentBase) {
 			macros::EFFECT_FOLLOW(fighter, Hash40::new("miifighter_sidekick_flash"), Hash40::new("toel"), 0, 0, 0, 0, 0, 0, 0.8, true);
 		}
 		frame(fighter.lua_state_agent, 33.0);
-		for _ in 0..4 
- {
+		for _ in 0..4 {
 			if macros::is_excute(fighter) {
 				macros::FLASH(fighter, 1, 1, 0.392, 0.392);
 			}
@@ -429,8 +428,7 @@ unsafe fn brawler_foot_eff(fighter: &mut L2CAgentBase) {
 			macros::LANDING_EFFECT(fighter, Hash40::new("sys_atk_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
 		}
 		frame(fighter.lua_state_agent, 9.0);
-		for _ in 0..7 
- {
+		for _ in 0..7 {
 			if macros::is_excute(fighter) {
 				macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new_raw(0x19e7eccbcb), Hash40::new_raw(0x19e7eccbcb), Hash40::new("top"), 0, 3, 9, 0, 0, 0, 0.45, true, *EF_FLIP_YZ);
 				macros::LAST_EFFECT_SET_RATE(fighter, 3);
@@ -478,8 +476,7 @@ unsafe fn brawler_foot_snd(fighter: &mut L2CAgentBase) {
 			macros::PLAY_SE(fighter, Hash40::new("se_miifighter_special_c2_n02"));
 		}
 		frame(fighter.lua_state_agent, 9.0);
-		for _ in 0..7 
- {
+		for _ in 0..7 {
 			if macros::is_excute(fighter) {
 				macros::PLAY_SE(fighter, Hash40::new("se_miifighter_attack100"));
 			}
