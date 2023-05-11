@@ -1,10 +1,17 @@
-use smash::hash40;
+use smash::app::sv_animcmd::*;
+use smash::phx::*;
 use smash::app::lua_bind::*;
 use smash::lib::lua_const::*;
+use smash::app::utility::get_kind;
+use smash::hash40;
 use smash::lua2cpp::*;
 use smashline::*;
 use smash_script::*;
+use smash::lib::{L2CValue, L2CAgent};
+use std::mem;
+use smash::app::*;
 use crate::util::*;
+
 static mut ATTACK_AIR_WINDOW : [i32; 8] = [0; 8];
 static mut MAX_ATTACK_AIR_WINDOW : i32 = 15;
 static mut HAS_ATTACK_AIR: [bool; 8] = [false; 8];
@@ -51,25 +58,23 @@ fn mew2_frame(fighter: &mut L2CFighterCommon) {
 	low_priority)]
 unsafe fn m2_dash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
-    acmd!(lua_state, {
-		frame(Frame=1)
-		if(is_excute){
-			HIT_NODE(hash40("s_tail2"), HIT_STATUS_XLU)
-			HIT_NODE(hash40("s_tail3"), HIT_STATUS_XLU)
-			HIT_NODE(hash40("s_tail5"), HIT_STATUS_XLU)
-			HIT_NODE(hash40("s_tail4"), HIT_STATUS_XLU)
-			HIT_NODE(hash40("s_tail7"), HIT_STATUS_XLU)
+		frame(fighter.lua_state_agent, 1.0);
+		if macros::is_excute(fighter) {
+			macros::HIT_NODE(fighter, Hash40::new("s_tail2"), *HIT_STATUS_XLU);
+			macros::HIT_NODE(fighter, Hash40::new("s_tail3"), *HIT_STATUS_XLU);
+			macros::HIT_NODE(fighter, Hash40::new("s_tail5"), *HIT_STATUS_XLU);
+			macros::HIT_NODE(fighter, Hash40::new("s_tail4"), *HIT_STATUS_XLU);
+			macros::HIT_NODE(fighter, Hash40::new("s_tail7"), *HIT_STATUS_XLU);
 		}
-		frame(Frame=11)
-		if(is_excute){
-			HIT_NODE(hash40("s_tail2"), HIT_STATUS_NORMAL)
-			HIT_NODE(hash40("s_tail5"), HIT_STATUS_NORMAL)
-			HIT_NODE(hash40("s_tail3"), HIT_STATUS_NORMAL)
-			HIT_NODE(hash40("s_tail4"), HIT_STATUS_NORMAL)
-			HIT_NODE(hash40("s_tail7"), HIT_STATUS_NORMAL)
-			WorkModule::enable_transition_term(FIGHTER_STATUS_TRANSITION_TERM_ID_DASH_TO_RUN)
+		frame(fighter.lua_state_agent, 11.0);
+		if macros::is_excute(fighter) {
+			macros::HIT_NODE(fighter, Hash40::new("s_tail2"), *HIT_STATUS_NORMAL);
+			macros::HIT_NODE(fighter, Hash40::new("s_tail5"), *HIT_STATUS_NORMAL);
+			macros::HIT_NODE(fighter, Hash40::new("s_tail3"), *HIT_STATUS_NORMAL);
+			macros::HIT_NODE(fighter, Hash40::new("s_tail4"), *HIT_STATUS_NORMAL);
+			macros::HIT_NODE(fighter, Hash40::new("s_tail7"), *HIT_STATUS_NORMAL);
+			WorkModule::enable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_DASH_TO_RUN);
 		}
-    });
 }	
 #[acmd_script(
     agent = "mewtwo",
@@ -78,29 +83,27 @@ unsafe fn m2_dash(fighter: &mut L2CAgentBase) {
 	low_priority)]
 unsafe fn m2_turn_dash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
-    acmd!(lua_state, {
-		frame(Frame=1)
-		if(is_excute){
-			HIT_NODE(hash40("s_tail2"), HIT_STATUS_XLU)
-			HIT_NODE(hash40("s_tail3"), HIT_STATUS_XLU)
-			HIT_NODE(hash40("s_tail5"), HIT_STATUS_XLU)
-			HIT_NODE(hash40("s_tail4"), HIT_STATUS_XLU)
-			HIT_NODE(hash40("s_tail7"), HIT_STATUS_XLU)
+		frame(fighter.lua_state_agent, 1.0);
+		if macros::is_excute(fighter) {
+			macros::HIT_NODE(fighter, Hash40::new("s_tail2"), *HIT_STATUS_XLU);
+			macros::HIT_NODE(fighter, Hash40::new("s_tail3"), *HIT_STATUS_XLU);
+			macros::HIT_NODE(fighter, Hash40::new("s_tail5"), *HIT_STATUS_XLU);
+			macros::HIT_NODE(fighter, Hash40::new("s_tail4"), *HIT_STATUS_XLU);
+			macros::HIT_NODE(fighter, Hash40::new("s_tail7"), *HIT_STATUS_XLU);
 		}
-		frame(Frame=3)
-		if(is_excute){
-			WorkModule::on_flag(Flag=FIGHTER_STATUS_DASH_FLAG_TURN_DASH)
+		frame(fighter.lua_state_agent, 3.0);
+		if macros::is_excute(fighter) {
+			WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_DASH_FLAG_TURN_DASH);
 		}
-		frame(Frame=13)
-		if(is_excute){
-			HIT_NODE(hash40("s_tail2"), HIT_STATUS_NORMAL)
-			HIT_NODE(hash40("s_tail3"), HIT_STATUS_NORMAL)
-			HIT_NODE(hash40("s_tail5"), HIT_STATUS_NORMAL)
-			HIT_NODE(hash40("s_tail4"), HIT_STATUS_NORMAL)
-			HIT_NODE(hash40("s_tail7"), HIT_STATUS_NORMAL)
-			WorkModule::enable_transition_term(FIGHTER_STATUS_TRANSITION_TERM_ID_DASH_TO_RUN)
+		frame(fighter.lua_state_agent, 13.0);
+		if macros::is_excute(fighter) {
+			macros::HIT_NODE(fighter, Hash40::new("s_tail2"), *HIT_STATUS_NORMAL);
+			macros::HIT_NODE(fighter, Hash40::new("s_tail3"), *HIT_STATUS_NORMAL);
+			macros::HIT_NODE(fighter, Hash40::new("s_tail5"), *HIT_STATUS_NORMAL);
+			macros::HIT_NODE(fighter, Hash40::new("s_tail4"), *HIT_STATUS_NORMAL);
+			macros::HIT_NODE(fighter, Hash40::new("s_tail7"), *HIT_STATUS_NORMAL);
+			WorkModule::enable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_DASH_TO_RUN);
 		}
-    });
 }	
 #[acmd_script(
     agent = "mewtwo",
@@ -109,36 +112,34 @@ unsafe fn m2_turn_dash(fighter: &mut L2CAgentBase) {
 	low_priority)]
 unsafe fn m2_bair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
-    acmd!(lua_state, {
-		frame(Frame=3)
-		if(is_excute){
-			HIT_NODE(hash40("s_tail2"), HIT_STATUS_XLU)
-			HIT_NODE(hash40("s_tail3"), HIT_STATUS_XLU)
-			HIT_NODE(hash40("s_tail5"), HIT_STATUS_XLU)
-			HIT_NODE(hash40("s_tail4"), HIT_STATUS_XLU)
-			HIT_NODE(hash40("s_tail7"), HIT_STATUS_XLU)
-			WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
+		frame(fighter.lua_state_agent, 3.0);
+		if macros::is_excute(fighter) {
+			macros::HIT_NODE(fighter, Hash40::new("s_tail2"), *HIT_STATUS_XLU);
+			macros::HIT_NODE(fighter, Hash40::new("s_tail3"), *HIT_STATUS_XLU);
+			macros::HIT_NODE(fighter, Hash40::new("s_tail5"), *HIT_STATUS_XLU);
+			macros::HIT_NODE(fighter, Hash40::new("s_tail4"), *HIT_STATUS_XLU);
+			macros::HIT_NODE(fighter, Hash40::new("s_tail7"), *HIT_STATUS_XLU);
+			WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
-		frame(Frame=13)
-		if(is_excute){
-			ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=13.0, Angle=361, KBG=101, FKB=0, BKB=20, Size=5.5, X=0.0, Y=12.0, Z=-7.7, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_B, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_TAIL)
-			ATTACK(ID=1, Part=0, Bone=hash40("s_tail5"), Damage=12.0, Angle=361, KBG=90, FKB=0, BKB=20, Size=4.5, X=1.0, Y=0.0, Z=-2.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_B, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_TAIL)
-			ATTACK(ID=2, Part=0, Bone=hash40("s_tail7"), Damage=11.0, Angle=361, KBG=90, FKB=0, BKB=20, Size=3.4, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_B, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_TAIL)
+		frame(fighter.lua_state_agent, 13.0);
+		if macros::is_excute(fighter) {
+			macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 13.0, /*Angle*/ 361, /*KBG*/ 101, /*FKB*/ 0, /*BKB*/ 20, /*Size*/ 5.5, /*X*/ 0.0, /*Y*/ 12.0, /*Z*/ -7.7, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_B, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_TAIL);
+			macros::ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("s_tail5"), /*Damage*/ 12.0, /*Angle*/ 361, /*KBG*/ 90, /*FKB*/ 0, /*BKB*/ 20, /*Size*/ 4.5, /*X*/ 1.0, /*Y*/ 0.0, /*Z*/ -2.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_B, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_TAIL);
+			macros::ATTACK(fighter, /*ID*/ 2, /*Part*/ 0, /*Bone*/ Hash40::new("s_tail7"), /*Damage*/ 11.0, /*Angle*/ 361, /*KBG*/ 90, /*FKB*/ 0, /*BKB*/ 20, /*Size*/ 3.4, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_B, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_TAIL);
 		}
-		frame(Frame=18)
-		if(is_excute){
-			AttackModule::clear_all()
+		frame(fighter.lua_state_agent, 18.0);
+		if macros::is_excute(fighter) {
+			AttackModule::clear_all(fighter.module_accessor);
 		}
-		frame(Frame=38)
-		if(is_excute){
-			HIT_NODE(hash40("s_tail2"), HIT_STATUS_NORMAL)
-			HIT_NODE(hash40("s_tail5"), HIT_STATUS_NORMAL)
-			HIT_NODE(hash40("s_tail4"), HIT_STATUS_NORMAL)
-			HIT_NODE(hash40("s_tail3"), HIT_STATUS_NORMAL)
-			HIT_NODE(hash40("s_tail7"), HIT_STATUS_NORMAL)
-			WorkModule::off_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
+		frame(fighter.lua_state_agent, 38.0);
+		if macros::is_excute(fighter) {
+			macros::HIT_NODE(fighter, Hash40::new("s_tail2"), *HIT_STATUS_NORMAL);
+			macros::HIT_NODE(fighter, Hash40::new("s_tail5"), *HIT_STATUS_NORMAL);
+			macros::HIT_NODE(fighter, Hash40::new("s_tail4"), *HIT_STATUS_NORMAL);
+			macros::HIT_NODE(fighter, Hash40::new("s_tail3"), *HIT_STATUS_NORMAL);
+			macros::HIT_NODE(fighter, Hash40::new("s_tail7"), *HIT_STATUS_NORMAL);
+			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
-    });
 }		
 #[acmd_script(
     agent = "mewtwo",
@@ -147,36 +148,34 @@ unsafe fn m2_bair(fighter: &mut L2CAgentBase) {
 	low_priority)]
 unsafe fn m2_uair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
-    acmd!(lua_state, {
-		frame(Frame=3)
-		if(is_excute){
-			HIT_NODE(hash40("s_tail2"), HIT_STATUS_XLU)
-			HIT_NODE(hash40("s_tail3"), HIT_STATUS_XLU)
-			HIT_NODE(hash40("s_tail5"), HIT_STATUS_XLU)
-			HIT_NODE(hash40("s_tail4"), HIT_STATUS_XLU)
-			HIT_NODE(hash40("s_tail7"), HIT_STATUS_XLU)
-			WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
+		frame(fighter.lua_state_agent, 3.0);
+		if macros::is_excute(fighter) {
+			macros::HIT_NODE(fighter, Hash40::new("s_tail2"), *HIT_STATUS_XLU);
+			macros::HIT_NODE(fighter, Hash40::new("s_tail3"), *HIT_STATUS_XLU);
+			macros::HIT_NODE(fighter, Hash40::new("s_tail5"), *HIT_STATUS_XLU);
+			macros::HIT_NODE(fighter, Hash40::new("s_tail4"), *HIT_STATUS_XLU);
+			macros::HIT_NODE(fighter, Hash40::new("s_tail7"), *HIT_STATUS_XLU);
+			WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
-		frame(Frame=10)
-		if(is_excute){
-			ATTACK(ID=0, Part=0, Bone=hash40("s_tail3"), Damage=12.0, Angle=72, KBG=98, FKB=0, BKB=40, Size=5.0, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_TAIL)
-			ATTACK(ID=1, Part=0, Bone=hash40("s_tail5"), Damage=11.0, Angle=65, KBG=92, FKB=0, BKB=40, Size=4.5, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_TAIL)
-			ATTACK(ID=2, Part=0, Bone=hash40("s_tail7"), Damage=10.0, Angle=55, KBG=92, FKB=0, BKB=40, Size=4.0, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_PUNCH, Type=ATTACK_REGION_TAIL)
+		frame(fighter.lua_state_agent, 10.0);
+		if macros::is_excute(fighter) {
+			macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("s_tail3"), /*Damage*/ 12.0, /*Angle*/ 72, /*KBG*/ 98, /*FKB*/ 0, /*BKB*/ 40, /*Size*/ 5.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_TAIL);
+			macros::ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("s_tail5"), /*Damage*/ 11.0, /*Angle*/ 65, /*KBG*/ 92, /*FKB*/ 0, /*BKB*/ 40, /*Size*/ 4.5, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_TAIL);
+			macros::ATTACK(fighter, /*ID*/ 2, /*Part*/ 0, /*Bone*/ Hash40::new("s_tail7"), /*Damage*/ 10.0, /*Angle*/ 55, /*KBG*/ 92, /*FKB*/ 0, /*BKB*/ 40, /*Size*/ 4.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_TAIL);
 		}
-		wait(Frames=5)
-		if(is_excute){
-			AttackModule::clear_all()
+		wait(fighter.lua_state_agent, 5.0);
+		if macros::is_excute(fighter) {
+			AttackModule::clear_all(fighter.module_accessor);
 		}
-		frame(Frame=36)
-		if(is_excute){
-			HIT_NODE(hash40("s_tail2"), HIT_STATUS_NORMAL)
-			HIT_NODE(hash40("s_tail5"), HIT_STATUS_NORMAL)
-			HIT_NODE(hash40("s_tail4"), HIT_STATUS_NORMAL)
-			HIT_NODE(hash40("s_tail3"), HIT_STATUS_NORMAL)
-			HIT_NODE(hash40("s_tail7"), HIT_STATUS_NORMAL)
-			WorkModule::off_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
+		frame(fighter.lua_state_agent, 36.0);
+		if macros::is_excute(fighter) {
+			macros::HIT_NODE(fighter, Hash40::new("s_tail2"), *HIT_STATUS_NORMAL);
+			macros::HIT_NODE(fighter, Hash40::new("s_tail5"), *HIT_STATUS_NORMAL);
+			macros::HIT_NODE(fighter, Hash40::new("s_tail4"), *HIT_STATUS_NORMAL);
+			macros::HIT_NODE(fighter, Hash40::new("s_tail3"), *HIT_STATUS_NORMAL);
+			macros::HIT_NODE(fighter, Hash40::new("s_tail7"), *HIT_STATUS_NORMAL);
+			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
-    });
 }		
 		
 		

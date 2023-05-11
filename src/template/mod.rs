@@ -22,40 +22,9 @@ fn mario_frame(fighter: &mut L2CFighterCommon) {
     }
 }
 
-// Uses the acmd! macro, if you're porting directly from Rubendal's data viewer.
-#[acmd_script( agent = "mario", scripts = ["game_appealhil", "game_appealhir"], category = ACMD_GAME, low_priority )]
-unsafe fn mario_utaunt(fighter: &mut L2CAgentBase) {
+#[acmd_script( agent = "mario", scripts = ["game_attacks3s", "game_attacks3hi"], category = ACMD_GAME, low_priority )]
+unsafe fn mario_ftilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
-    acmd!(lua_state, {
-		if(is_excute){
-			rust {
-				let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
-				let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-				if IS_HATLESS[ENTRY_ID] == true {
-					IS_HATLESS[ENTRY_ID] = false;
-					ArticleModule::generate_article(boma, *FIGHTER_MARIO_GENERATE_ARTICLE_CAPPY, false, 0);
-					ModelModule::set_mesh_visibility(fighter.module_accessor,Hash40::new("mario_nohat"),false);
-				} else {
-					IS_HATLESS[ENTRY_ID] = true;
-				};
-			}
-		}
-    });
-}
-#[acmd_script( agent = "mario", scripts = ["game_appealsl", "game_appealsr"], category = ACMD_GAME, low_priority )]
-unsafe fn mario_staunt(fighter: &mut L2CAgentBase) {
-    let lua_state = fighter.lua_state_agent;
-    acmd!(lua_state, {
-		if(is_excute){
-			rust {
-				let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
-				let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-				if IS_HATLESS[ENTRY_ID] == true {
-					ArticleModule::generate_article(boma, *FIGHTER_MARIO_GENERATE_ARTICLE_CAPPY, false, 0);
-				};
-			}
-		}
-    });
 }
 
 
@@ -63,5 +32,5 @@ pub fn install() {
     smashline::install_agent_frames!(
         mario_frame
     );
-	smashline::install_acmd_scripts!(mario_utaunt, mario_staunt);
+	smashline::install_acmd_scripts!(mario_ftilt);
 }

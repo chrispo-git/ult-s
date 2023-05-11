@@ -4,14 +4,6 @@ use smash::lua2cpp::*;
 use smash::app::lua_bind::*;
 use smashline::*;
 use smash_script::*;
-
-/*
-
-				acmd!(lua_state, {
-					sv_module_access::shield(MA_MSC_CMD_REFLECTOR, COLLISION_KIND_REFLECTOR, 0, hash40("neck")/*Bone*/, 7.0/*Size*/, 1.0/*X1*/, 0.0/*Y1*/, 0.0/*Z1*/, 0.0/*X2*/, 1.2/*Y2*/, 0.0/*Z2*/, dmg_mul/*Damage Mul*/, life_mul/*Life Mul*/, reflector_max/*Max DMG*/, true, speed_mul, FIGHTER_REFLECTOR_GROUP_HOMERUNBAT)
-				});
-*/
-
 #[fighter_frame_callback]
 pub fn projectile_invuln_master(fighter : &mut L2CFighterCommon) {
     unsafe {

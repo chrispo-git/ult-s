@@ -1,11 +1,15 @@
-use smash::hash40;
-use smash::phx::Hash40;
-use smash::lib::lua_const::*;
-use smash::app::*;
+use smash::app::sv_animcmd::*;
+use smash::phx::*;
 use smash::app::lua_bind::*;
-use smash::lua2cpp::{L2CFighterCommon, L2CAgentBase};
+use smash::lib::lua_const::*;
+use smash::app::utility::get_kind;
+use smash::hash40;
+use smash::lua2cpp::*;
 use smashline::*;
 use smash_script::*;
+use smash::lib::{L2CValue, L2CAgent};
+use std::mem;
+use smash::app::*;
 use crate::util::*;
 static mut STATIC_MUT : [i32; 8] = [6; 8];
 
@@ -25,16 +29,12 @@ fn mario_frame(fighter: &mut L2CFighterCommon) {
     category = ACMD_EFFECT)]
 unsafe fn simon_landing(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
-    acmd!(lua_state, {
-		frame(Frame=2)
-		if(is_excute){
-			LANDING_EFFECT(hash40("sys_landing_smoke"), hash40("top"), 0, 0, 0, 0, 0, 0, 0.9, 0, 0, 0, 0, 0, 0, true)
+		frame(fighter.lua_state_agent, 2.0);
+		if macros::is_excute(fighter) {
+			macros::LANDING_EFFECT(fighter, Hash40::new("sys_landing_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.9, 0, 0, 0, 0, 0, 0, true);
 		}
-    });
 }	
 
-//ItemModule::throw_item(fighter.module_accessor, angle, power, 1.0, 0, true, 0.0);
-// Uses the acmd! macro, if you're porting directly from Rubendal's data viewer.
 #[acmd_script( 
 	agent = "simon", 
 	scripts = ["game_speciallw", "game_specialairlw"], 
@@ -42,47 +42,35 @@ unsafe fn simon_landing(fighter: &mut L2CAgentBase) {
 	low_priority)]
 unsafe fn simon_downb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
-    acmd!(lua_state, {
-		/*if(is_excute){
-			WorkModule::on_flag(FIGHTER_SIMON_STATUS_SPECIAL_LW_FLAG_GENERATE_HOLYWATER)
-		}*/
-		if(is_excute){
-			rust {
-				if !ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_SIMON_GENERATE_ARTICLE_HOLYWATER) {
-					ItemModule::have_item(fighter.module_accessor, smash::app::ItemKind(*ITEM_KIND_SIMONHOLYWATER), 0, 0, false, false);
-				};
-			}
-		}
-		frame(Frame=18)
-		if(is_excute){
-			rust {
-				let mut stick_x = ControlModule::get_stick_x(fighter.module_accessor) * PostureModule::lr(fighter.module_accessor);
-				let mut stick_y = ControlModule::get_stick_y(fighter.module_accessor);
-				if stick_x < 0.0 {
-					stick_x = 0.2;
-				} else if stick_x <= 0.2 {
-					stick_x = 0.21
-				};
-				if stick_y < 0.2 && stick_y >= 0.0 {
-					stick_y = 0.2;
-				};
-				if stick_y > -0.2 && stick_y <= 0.0 {
-					stick_y = -0.2;
-				};
-				let mut angle = stick_y.atan()/stick_x.atan();
-				/*if stick_y < 0.0 {
-					angle = 180.0 - angle;
-				};*/
-				let hypotenuse = ((stick_x*stick_x)+(stick_y*stick_y)).sqrt();
-				if stick_x == 0.2 {
-					MotionModule::set_rate(fighter.module_accessor, 1.9);
-				};
-				let power = hypotenuse * 2.5;
-				ItemModule::throw_item(fighter.module_accessor, angle, power, 1.0, 0, true, 0.0);
-				println!("Power {}, Angle {}", power, angle);
-			}
-		}
-    });
+	if macros::is_excute(fighter) {
+		if !ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_SIMON_GENERATE_ARTICLE_HOLYWATER) {
+			ItemModule::have_item(fighter.module_accessor, smash::app::ItemKind(*ITEM_KIND_SIMONHOLYWATER), 0, 0, false, false);
+		};
+	}
+	frame(fighter.lua_state_agent, 18.0);
+	if macros::is_excute(fighter) {
+		let mut stick_x = ControlModule::get_stick_x(fighter.module_accessor) * PostureModule::lr(fighter.module_accessor);
+		let mut stick_y = ControlModule::get_stick_y(fighter.module_accessor);
+		if stick_x < 0.0 {
+			stick_x = 0.2;
+		} else if stick_x <= 0.2 {
+			stick_x = 0.21
+		};
+		if stick_y < 0.2 && stick_y >= 0.0 {
+			stick_y = 0.2;
+		};
+		if stick_y > -0.2 && stick_y <= 0.0 {
+			stick_y = -0.2;
+		};
+		let mut angle = stick_y.atan()/stick_x.atan();
+		let hypotenuse = ((stick_x*stick_x)+(stick_y*stick_y)).sqrt();
+		if stick_x == 0.2 {
+			MotionModule::set_rate(fighter.module_accessor, 1.9);
+		};
+		let power = hypotenuse * 2.5;
+		ItemModule::throw_item(fighter.module_accessor, angle, power, 1.0, 0, true, 0.0);
+		println!("Power {}, Angle {}", power, angle);
+	}
 }
 
 
