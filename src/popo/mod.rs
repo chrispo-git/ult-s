@@ -1,8 +1,16 @@
-use smash::hash40;
+use smash::app::sv_animcmd::*;
+use smash::phx::*;
+use smash::app::lua_bind::*;
 use smash::lib::lua_const::*;
+use smash::app::utility::get_kind;
+use smash::hash40;
 use smash::lua2cpp::*;
 use smashline::*;
-use smash_script::*;use smash::app::lua_bind::*;
+use smash_script::*;
+use smash::lib::{L2CValue, L2CAgent};
+use std::mem;
+use smash::app::*;
+use crate::util::*;
 
 #[acmd_script(
     agent = "popo",
@@ -11,18 +19,16 @@ use smash_script::*;use smash::app::lua_bind::*;
 	low_priority)]
 unsafe fn ics_shot(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
-    acmd!(lua_state, {
-		FT_MOTION_RATE(FSM=0.5)
-		frame(Frame=6)
-		if(is_excute){
-			WorkModule::on_flag(Flag=FIGHTER_POPO_STATUS_SPECIAL_N_FLAG_GENERATE_ARTICLE)
+		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
+		frame(fighter.lua_state_agent, 6.0);
+		if macros::is_excute(fighter) {
+			WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_POPO_STATUS_SPECIAL_N_FLAG_GENERATE_ARTICLE);
 		}
-		frame(Frame=18)
-		FT_MOTION_RATE(FSM=1)
-		if(is_excute){
-			ArticleModule::shoot_exist(FIGHTER_POPO_GENERATE_ARTICLE_ICESHOT, smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL), false)
+		frame(fighter.lua_state_agent, 18.0);
+		macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.0);
+		if macros::is_excute(fighter) {
+			ArticleModule::shoot_exist(fighter.module_accessor, *FIGHTER_POPO_GENERATE_ARTICLE_ICESHOT, smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL), false);
 		}
-    });
 }
 #[acmd_script(
     agent = "popo",
@@ -31,22 +37,20 @@ unsafe fn ics_shot(fighter: &mut L2CAgentBase) {
 	low_priority)]
 unsafe fn ics_shot2(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
-    acmd!(lua_state, {
-		FT_MOTION_RATE(FSM=0.5)
-		frame(Frame=6)
-		if(is_excute){
-			WorkModule::on_flag(Flag=FIGHTER_POPO_STATUS_SPECIAL_N_FLAG_GENERATE_ARTICLE)
+		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
+		frame(fighter.lua_state_agent, 6.0);
+		if macros::is_excute(fighter) {
+			WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_POPO_STATUS_SPECIAL_N_FLAG_GENERATE_ARTICLE);
 		}
-		frame(Frame=18)
-		FT_MOTION_RATE(FSM=1)
-		if(is_excute){
-			ArticleModule::shoot_exist(FIGHTER_POPO_GENERATE_ARTICLE_ICESHOT, smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL), false)
+		frame(fighter.lua_state_agent, 18.0);
+		macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.0);
+		if macros::is_excute(fighter) {
+			ArticleModule::shoot_exist(fighter.module_accessor, *FIGHTER_POPO_GENERATE_ARTICLE_ICESHOT, smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL), false);
 		}
-		frame(Frame=50)
-		if(is_excute){
-			WorkModule::on_flag(Flag=FIGHTER_POPO_STATUS_SPECIAL_N_FLAG_ENABLE_COUPLE)
+		frame(fighter.lua_state_agent, 50.0);
+		if macros::is_excute(fighter) {
+			WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_POPO_STATUS_SPECIAL_N_FLAG_ENABLE_COUPLE);
 		}
-    });
 }
 pub fn install() {
     smashline::install_acmd_scripts!(
