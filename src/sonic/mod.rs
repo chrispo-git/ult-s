@@ -1087,18 +1087,15 @@ pub fn sonic(fighter : &mut L2CFighterCommon) {
 					let lightspeed: u32 = EffectModule::req_follow(boma, smash::phx::Hash40::new("sys_attack_speedline"), smash::phx::Hash40::new("top"), &LIGHTSPEED, &LIGHTSPEED_ROT, 2.2, true, 0, 0, 0, 0, 0, true, true) as u32;
 					EffectModule::set_rgb(boma, lightspeed, 0.2, 0.4, 10.0);
 					EffectModule::set_rate(boma, lightspeed, 0.2);
-					acmd!(lua_state, {
-						STOP_SE(hash40("se_sonic_smash_h01"))
-						PLAY_SE(hash40("vc_sonic_attack05"))
-						PLAY_SE(hash40("se_sonic_swing_m"))
-						PLAY_SE(hash40("se_sonic_swing_l"))
-						PLAY_SE(hash40("se_sonic_attackair_l01"))
-					});
+					macros::STOP_SE(fighter, Hash40::new("se_sonic_smash_h01"));
+					macros::PLAY_SE(fighter, Hash40::new("vc_sonic_attack05"));
+					macros::PLAY_SE(fighter, Hash40::new("se_sonic_swing_m"));
+					macros::PLAY_SE(fighter, Hash40::new("se_sonic_swing_l"));
+					macros::PLAY_SE(fighter, Hash40::new("se_sonic_attackair_l01"));
+				
 				};
 				if MotionModule::frame(boma) == 1.0 {
-					acmd!(lua_state, {
-						PLAY_SE(hash40("se_sonic_smash_h01"))
-					});
+					macros::PLAY_SE(fighter, Hash40::new("se_sonic_smash_h01"));
 				};
 				notify_event_msc_cmd!(fighter, Hash40::new_raw(0x2127e37c07), *GROUND_CLIFF_CHECK_KIND_ALWAYS);
 				notify_event_msc_cmd!(fighter, Hash40::new_raw(0x2127e37c07 as u64), *GROUND_CLIFF_CHECK_KIND_ALWAYS);
@@ -1106,69 +1103,6 @@ pub fn sonic(fighter : &mut L2CFighterCommon) {
 				notify_event_msc_cmd!(fighter, 0x2127e37c07 as u64, *GROUND_CLIFF_CHECK_KIND_ALWAYS);
 				notify_event_msc_cmd!(fighter, 0x2127e37c07u64, *GROUND_CLIFF_CHECK_KIND_ALWAYS);
 				BAN_SIDEB[ENTRY_ID] = true;
-				/*if StatusModule::situation_kind(boma) == *SITUATION_KIND_GROUND {
-					MotionModule::set_rate(boma, 0.6075);
-				} else {
-					MotionModule::set_rate(boma, 0.43875);
-				};
-				if MotionModule::frame(boma) >= 4.65 && MotionModule::frame(boma) < 6.0{
-					VisibilityModule::set_whole(boma, false);
-					JostleModule::set_status(boma, false);
-					HitModule::set_whole(boma, smash::app::HitStatus(*HIT_STATUS_XLU), 0);
-					if StatusModule::situation_kind(boma) == *SITUATION_KIND_GROUND {
-						if GroundModule::ray_check(fighter.module_accessor, &Vector2f{ x: PostureModule::pos_x(boma), y: PostureModule::pos_y(boma)}, &Vector2f{ x: 20.0*PostureModule::lr(boma), y: 0.0}, false) == 0 {
-							let pos = smash::phx::Vector3f { x: PostureModule::pos_x(boma)+(20.0*PostureModule::lr(boma)), y: PostureModule::pos_y(boma), z: 0.0 };
-							PostureModule::set_pos(boma, &pos);
-							PostureModule::init_pos(boma, &pos, true, true);
-						};
-					} else {
-						if GroundModule::ray_check(fighter.module_accessor, &Vector2f{ x: PostureModule::pos_x(boma), y: PostureModule::pos_y(boma)}, &Vector2f{ x: 10.0*PostureModule::lr(boma), y: 0.0}, false) == 0 {
-							let pos = smash::phx::Vector3f { x: PostureModule::pos_x(boma)+(10.0*PostureModule::lr(boma)), y: PostureModule::pos_y(boma), z: 0.0 };
-							PostureModule::set_pos(boma, &pos);
-							PostureModule::init_pos(boma, &pos, true, true);
-						};
-					};
-				} else {
-					VisibilityModule::set_whole(boma, true);
-					JostleModule::set_status(boma, true);
-					HitModule::set_whole(boma, smash::app::HitStatus(*HIT_STATUS_NORMAL), 0);
-				};
-				if MotionModule::frame(boma) >= 4.909086446285048 && MotionModule::frame(boma) < 5.72726752066589 {
-					if StatusModule::situation_kind(boma) == *SITUATION_KIND_GROUND { 
-						let speed = smash::phx::Vector3f { x: 35.0, y: 0.0, z: 0.0 };
-						KineticModule::add_speed(boma, &speed);
-					} else {
-						let speed = smash::phx::Vector3f { x: 25.0, y: 1.0, z: 0.0 };
-						KineticModule::add_speed(boma, &speed);
-					};
-				};
-				if MotionModule::frame(boma) >= 6.0 {
-					if StatusModule::situation_kind(boma) == *SITUATION_KIND_GROUND {
-						if PostureModule::lr(boma) == 1.0 {
-							MotionModule::change_motion(boma, smash::phx::Hash40::new("run_brake_r"), 0.0, 1.0, false, 0.0, false, false);
-						} else {
-							MotionModule::change_motion(boma, smash::phx::Hash40::new("run_brake_l"), 0.0, 1.0, false, 0.0, false, false);
-						};
-					} else {
-						if PostureModule::lr(boma) == 1.0 {
-							MotionModule::change_motion(boma, smash::phx::Hash40::new("run_brake_r"), 0.0, 1.0, false, 0.0, false, false);
-						} else {
-							MotionModule::change_motion(boma, smash::phx::Hash40::new("run_brake_l"), 0.0, 1.0, false, 0.0, false, false);
-						};
-					};
-					let speed = smash::phx::Vector3f { x: 5.0, y: 0.0, z: 0.0 };
-					KineticModule::add_speed(boma, &speed);
-					let lightspeed: u32 = EffectModule::req_follow(boma, smash::phx::Hash40::new("sys_attack_speedline"), smash::phx::Hash40::new("top"), &LIGHTSPEED, &LIGHTSPEED_ROT, 2.5, true, 0, 0, 0, 0, 0, true, true) as u32;
-					EffectModule::set_rgb(boma, lightspeed, 0.2, 0.4, 10.0);
-					EffectModule::set_rate(boma, lightspeed, 0.25);
-					acmd!(lua_state, {
-						STOP_SE(hash40("se_sonic_smash_h01"))
-						PLAY_SE(hash40("vc_sonic_attack05"))
-						PLAY_SE(hash40("se_sonic_swing_m"))
-						PLAY_SE(hash40("se_sonic_swing_l"))
-						PLAY_SE(hash40("se_sonic_attackair_l01"))
-					});
-				};*/
 			};
 		};
 	};

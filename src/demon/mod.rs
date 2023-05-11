@@ -52,7 +52,6 @@ fn kaz_frame(fighter: &mut L2CFighterCommon) {
 }
 
 //AttackModule::set_add_reaction_frame_revised(ID=3, Frames=13.0, Unk=false)
-// Uses the acmd! macro, if you're porting directly from Rubendal's data viewer.
 #[acmd_script( 
 agent = "demon", 
 scripts = ["game_attackstand4"], 

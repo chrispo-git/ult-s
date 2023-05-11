@@ -227,11 +227,6 @@ pub fn pt(fighter : &mut L2CFighterCommon) {
 		let lua_state = fighter.lua_state_agent;
 		let fighter_kind = smash::app::utility::get_kind(boma);
 		if fighter_kind == *FIGHTER_KIND_PFUSHIGISOU {
-			if [hash40("attack_dash")].contains(&MotionModule::motion_kind(boma)) && MotionModule::frame(boma) >= 4.0 && MotionModule::frame(boma) < 12.0 {
-				acmd!(lua_state, {
-					sv_module_access::shield(MA_MSC_CMD_REFLECTOR, COLLISION_KIND_REFLECTOR, 0, hash40("top"), 7.0, 0.0, 4.0, 5.0, 0.0, 4.0, 5.0, 0.0, 0.0, 500, false, 0.0, FIGHTER_REFLECTOR_GROUP_HOMERUNBAT)
-				});
-			};
 			if [hash40("attack_air_hi")].contains(&MotionModule::motion_kind(boma)) {
 				if MotionModule::frame(boma) < 12.0 {
 					MotionModule::set_rate(boma, 0.7059);

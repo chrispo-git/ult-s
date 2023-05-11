@@ -12,7 +12,6 @@ use std::mem;
 use smash::app::*;
 use crate::util::*;
 
-// Uses the acmd! macro, if you're porting directly from Rubendal's data viewer.
 #[acmd_script( agent = "pacman", 
 script = "game_attackhi3", 
 category = ACMD_GAME,

@@ -35,8 +35,6 @@ unsafe fn simon_landing(fighter: &mut L2CAgentBase) {
 		}
 }	
 
-//ItemModule::throw_item(fighter.module_accessor, angle, power, 1.0, 0, true, 0.0);
-// Uses the acmd! macro, if you're porting directly from Rubendal's data viewer.
 #[acmd_script( 
 	agent = "simon", 
 	scripts = ["game_speciallw", "game_specialairlw"], 
