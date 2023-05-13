@@ -20,7 +20,7 @@ pub(crate) fn is_jc(boma: &mut smash::app::BattleObjectModuleAccessor, fighter_k
 		//[fighter_kind, status_kind, hit_condition, jc_start, jc_end]
 		let jump_cancel = [
 			[*FIGHTER_KIND_KAMUI, *FIGHTER_KAMUI_STATUS_KIND_SPECIAL_N_HOLD, 0, -1, -1],
-			[*FIGHTER_KIND_FALCO, *FIGHTER_STATUS_KIND_SPECIAL_LW, 0, 7, 32],
+			[*FIGHTER_KIND_FALCO, *FIGHTER_STATUS_KIND_SPECIAL_LW, 0, 4, 32],
 			[*FIGHTER_KIND_WOLF, *FIGHTER_STATUS_KIND_SPECIAL_LW, 0, -1, -1],
 			[*FIGHTER_KIND_WOLF, *FIGHTER_WOLF_STATUS_KIND_SPECIAL_LW_END, 0, -1, -1],
 			[*FIGHTER_KIND_WOLF, *FIGHTER_WOLF_STATUS_KIND_SPECIAL_LW_HIT, 0, -1, -1],
