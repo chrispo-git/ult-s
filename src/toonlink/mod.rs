@@ -680,10 +680,12 @@ unsafe fn tink_bomb(fighter: &mut L2CAgentBase) {
 	low_priority )]
 unsafe fn tink_dair(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 7.0);
+	macros::FT_MOTION_RATE(fighter, /*FSM*/ 2.3);
     if macros::is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
     }
     frame(fighter.lua_state_agent, 9.0);
+	macros::FT_MOTION_RATE(fighter, /*FSM*/ 2.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, 0, 0, Hash40::new("top"), 10.0, 270, 80, 0, 0, 4.0, 0.0, -4.0, 0.0, Some(0.0), Some(-6.0), Some(0.0), 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_G, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_cutup"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_CUTUP, *ATTACK_REGION_SWORD);
         macros::ATTACK(fighter, 1, 0, Hash40::new("top"), 10.0, 270, 80, 0, 10, 4.0, 0.0, -4.0, 0.0, Some(0.0), Some(-6.0), Some(0.0), 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_A, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_cutup"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_CUTUP, *ATTACK_REGION_SWORD);
@@ -695,6 +697,7 @@ unsafe fn tink_dair(fighter: &mut L2CAgentBase) {
         macros::ATTACK(fighter, 1, 0, Hash40::new("top"), 10.0, 70, 80, 0, 40, 6.0, 0.0, 0.0, 8.8, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_cutup"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_CUTUP, *ATTACK_REGION_SWORD);
     }
     wait(fighter.lua_state_agent, 2.0);
+	macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.0);
     if macros::is_excute(fighter) {
         AttackModule::clear_all(fighter.module_accessor);
     }
@@ -705,12 +708,12 @@ unsafe fn tink_dair(fighter: &mut L2CAgentBase) {
 }
 #[acmd_script( agent = "toonlink", script = "effect_attackairlw", category = ACMD_EFFECT, low_priority )]
 unsafe fn tink_dair_eff(fighter: &mut L2CAgentBase) {
-    frame(fighter.lua_state_agent, 6.0);
+    frame(fighter.lua_state_agent, 7.0);
     if macros::is_excute(fighter) {
         macros::AFTER_IMAGE4_ON_arg29(fighter, Hash40::new("toonlink_sword1"), Hash40::new("toonlink_sword2"), 6, Hash40::new("sword1"), 0.5, 0.0, -0.5, Hash40::new("sword1"), 10.57, -0.13, -0.12, true, Hash40::new("null"), Hash40::new("sword1"), 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0, *EFFECT_AXIS_X, 0, *TRAIL_BLEND_ALPHA, 101, *TRAIL_CULL_NONE, 1.5, 0.2);
         macros::EFFECT_FOLLOW(fighter, Hash40::new("toonlink_sword"), Hash40::new("sword1"), 0, 0, 0, 0, 0, 0, 1, true);
     }
-    frame(fighter.lua_state_agent, 13.0);
+    frame(fighter.lua_state_agent, 11.0);
     if macros::is_excute(fighter) {
         macros::AFTER_IMAGE_OFF(fighter, 4);
         macros::EFFECT_OFF_KIND(fighter, Hash40::new("toonlink_sword"), false, false);
