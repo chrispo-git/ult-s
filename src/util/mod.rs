@@ -289,6 +289,10 @@ pub fn util_update(fighter : &mut L2CFighterCommon) {
 		if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP_MINI) { //Removes possibility of FH coming out of a SH. Shorthop button has priority over Fullhop
 			FULL_HOP_ENABLE_DELAY[ENTRY_ID] = 0;
 		};
+		if status_kind == *FIGHTER_STATUS_KIND_JUMP_SQUAT && ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_GUARD) {
+			FULL_HOP_ENABLE_DELAY[ENTRY_ID] = 0;
+			WorkModule::set_flag(boma, true, *FIGHTER_STATUS_WORK_ID_FLAG_RESERVE_JUMP_MINI);
+		};
 		if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_CSTICK_ON) {
 			if ControlModule::get_stick_x(boma) != 0.0 {
 				SUB_STICK[ENTRY_ID].x = ControlModule::get_stick_x(boma);

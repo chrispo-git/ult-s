@@ -102,7 +102,7 @@ pub fn wavedash(fighter : &mut L2CFighterCommon) {
 				let y = ControlModule::get_stick_y(boma);
 				let x = ControlModule::get_stick_x(boma);
 				if fighter_kind == *FIGHTER_KIND_DEMON && GroundModule::ray_check(boma, &Vector2f{ x: PostureModule::pos_x(boma), y: PostureModule::pos_y(boma)}, &Vector2f{ x: 0.0, y: -3.0}, true) == 1{
-					if y < 0.3 && (ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_JUMP) || ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP_MINI)){
+					if y < 0.3 {//&& (ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_JUMP) || ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP_MINI)){
 						let stop_rise  = smash::phx::Vector3f { x: 1.0, y: 0.0, z: 1.0 };
 						KineticModule::mul_speed(boma, &stop_rise, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
 						let mut z = 0;
@@ -214,7 +214,7 @@ pub unsafe fn status_pre_EscapeAir(fighter: &mut L2CFighterCommon) -> L2CValue {
 	let y = ControlModule::get_stick_y(boma);
 	let fighter_kind = smash::app::utility::get_kind(boma);
     //Handles wavedash
-    if IS_WAVEDASH[ENTRY_ID] == true && y < 0.5 && (ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_JUMP) || ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP_MINI)) && GroundModule::ray_check(boma, &Vector2f{ x: PostureModule::pos_x(boma), y: PostureModule::pos_y(boma)}, &Vector2f{ x: 0.0, y: -3.0}, true) == 1 && fighter_kind != *FIGHTER_KIND_DEMON{
+    if IS_WAVEDASH[ENTRY_ID] == true && y < 0.5 /*&& (ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_JUMP) || ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP_MINI))*/ && GroundModule::ray_check(boma, &Vector2f{ x: PostureModule::pos_x(boma), y: PostureModule::pos_y(boma)}, &Vector2f{ x: 0.0, y: -3.0}, true) == 1 && fighter_kind != *FIGHTER_KIND_DEMON{
         GroundModule::attach_ground(fighter.module_accessor, true);
         GroundModule::set_attach_ground(fighter.module_accessor, true);
         fighter.change_status(FIGHTER_STATUS_KIND_LANDING.into(), false.into());
