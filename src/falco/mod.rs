@@ -8,6 +8,9 @@ use smash::lua2cpp::{L2CFighterCommon, L2CAgentBase};
 use smashline::*;
 use smash_script::*;
 use crate::util::*;
+
+static mut HAS_DOWNB : [bool; 8] = [false; 8];
+static mut DO_STALL : [bool; 8] = [false; 8];
 #[acmd_script(
     agent = "falco",
     script =  "game_attackairb",
@@ -153,10 +156,12 @@ unsafe fn falco_da_eff(fighter: &mut L2CAgentBase) {
 		frame(fighter.lua_state_agent, 6.0);
 		if macros::is_excute(fighter) {
 			macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_attack_line"), Hash40::new("top"), -0.5, 6, -11, 0, 0, 0, 1.3, true);
-			macros::LAST_EFFECT_SET_RATE(fighter, 2.5);
+			macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_attack_speedline"), Hash40::new("top"), 0, 6.5, 0, 0, 180, 0, 1.5, true);
+			macros::LAST_EFFECT_SET_COLOR(fighter, 0.6, 0.7, 1.0);
 		}
-		frame(fighter.lua_state_agent, 18.0);
+		frame(fighter.lua_state_agent, 24.0);
 		if macros::is_excute(fighter) {
+			macros::EFFECT_OFF_KIND(fighter, Hash40::new("sys_attack_speedline"), false, true);
 			macros::EFFECT_OFF_KIND(fighter, Hash40::new("sys_attack_line"), false, true);
 		}
 		frame(fighter.lua_state_agent, 35.0);
@@ -238,6 +243,7 @@ unsafe fn falco_shine(fighter: &mut L2CAgentBase) {
 		frame(fighter.lua_state_agent, 4.0);
 		if macros::is_excute(fighter) {
 			macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 8.0, /*Angle*/ 84, /*KBG*/ 50, /*FKB*/ 0, /*BKB*/ 80, /*Size*/ 7.5, /*X*/ 0.0, /*Y*/ 7.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.25, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ -5, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_elec"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_ELEC, /*Type*/ *ATTACK_REGION_ENERGY);
+			macros::ATK_SET_SHIELD_SETOFF_MUL(fighter, /*ID*/ 0, /*ShieldstunMul*/ 0.1);
 			AttackModule::enable_safe_pos(fighter.module_accessor);
 		}
 		frame(fighter.lua_state_agent, 6.0);
@@ -288,6 +294,7 @@ fn falco_frame(fighter: &mut L2CFighterCommon) {
 		let motion_kind = MotionModule::motion_kind(boma);
 		let frame = MotionModule::frame(boma);
 		let stick_y = ControlModule::get_stick_y(boma);
+		let fallspeed = WorkModule::get_param_float(fighter.module_accessor, hash40("air_speed_y_stable"), 0);
 
 		if [hash40("special_lw"), hash40("special_lw_r"), hash40("special_lw_l"), hash40("special_air_lw"), hash40("special_air_lw_r"), hash40("special_air_lw_l")].contains(&motion_kind) {
 			/*if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP) && frame > 7.0 {
@@ -302,9 +309,24 @@ fn falco_frame(fighter: &mut L2CFighterCommon) {
 					};
 				};
 			};*/
-			if frame > 32.0 {
-				CancelModule::enable_cancel(boma);
+			if !HAS_DOWNB[ENTRY_ID] && StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR {
+				HAS_DOWNB[ENTRY_ID] = true;
+				DO_STALL[ENTRY_ID] = true;
 			};
+			if frame > 32.0 {
+				DO_STALL[ENTRY_ID] = false; 
+				CancelModule::enable_cancel(boma);
+			} else {
+				if DO_STALL[ENTRY_ID] {
+					macros::SET_SPEED_EX(fighter, 0.0, fallspeed*-0.2, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+				};
+			};
+		} else {
+			DO_STALL[ENTRY_ID] = false;
+		};
+		if StatusModule::situation_kind(boma) != *SITUATION_KIND_AIR {
+			HAS_DOWNB[ENTRY_ID] = false;
+			DO_STALL[ENTRY_ID] = false;
 		};
 		if [*FIGHTER_STATUS_KIND_SPECIAL_N].contains(&status_kind) {
 			if StatusModule::is_situation_changed(boma) {
