@@ -20,7 +20,7 @@ pub fn llpc(fighter : &mut L2CFighterCommon) {
 		let cancel_frame = FighterMotionModuleImpl::get_cancel_frame(boma,smash::phx::Hash40::new_raw(MotionModule::motion_kind(boma)),false) as f32;
 		let frame = MotionModule::frame(boma);
 		let situation_kind = StatusModule::situation_kind(boma);
-        if ([hash40("landing_heavy"), hash40("landing_air_f"), hash40("landing_air_b"), hash40("landing_air_hi"), hash40("landing_air_n")].contains(&MotionModule::motion_kind(boma))) {
+        if ([hash40("landing_air_f"), hash40("landing_air_b"), hash40("landing_air_hi"), hash40("landing_air_n")].contains(&MotionModule::motion_kind(boma))) {
 			if GroundModule::is_passable_ground(fighter.module_accessor) && frame/cancel_frame >= (1.0/6.0){
                 if sticky <= -0.6875 && ((ControlModule::get_flick_y(boma) >= 3 && ControlModule::get_flick_y(boma) < 20) || sticky <= -1.0) {
 					if (
@@ -67,7 +67,6 @@ pub(crate) fn is_edge_cancel(fighter_kind : i32, status_kind : i32) -> bool {
 	};
 	return false;
 }
-
 //Edge Cancelling Part A
 #[skyline::hook(replace = smash::app::lua_bind::StatusModule::init_settings)]
 unsafe fn init_settings_replace(module_accessor: &mut smash::app::BattleObjectModuleAccessor, situation_kind: i32, arg3: i32, arg4: u64, ground_cliff_check_kind: u64, arg6: bool, arg7: i32, arg8: i32, arg9: i32, arg10: i32) -> u64 {
