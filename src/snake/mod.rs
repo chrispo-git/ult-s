@@ -1,16 +1,30 @@
-use smash::app::sv_animcmd::*;
-use smash::phx::*;
-use smash::app::lua_bind::*;
-use smash::lib::lua_const::*;
-use smash::app::utility::get_kind;
-use smash::hash40;
-use smash::lua2cpp::*;
-use smashline::*;
-use smash_script::*;
-use smash_script::macros::*;
-use smash::lib::{L2CValue, L2CAgent};
-use std::mem;
-use smash::app::*;
+use {
+    smash::{
+        lua2cpp::*,
+        hash40,
+        phx::{
+            Hash40,
+            Vector2f//,
+            // Vector3f
+        },
+        app::{
+            sv_animcmd::frame,
+            sv_animcmd::wait,
+            lua_bind::*,
+            *
+        },
+        lib::{
+            lua_const::*,
+            *
+        }
+    },
+    smashline::*,
+    smash_script::{
+        macros::*,
+        *
+    }
+};
+
 use crate::util::*;
 
 static mut STATIC_MUT : [i32; 8] = [6; 8];
@@ -21,6 +35,16 @@ static mut SNAKE_FLAG_APPEAL_LW_C4_EXLPODE : [bool; 8] = [false; 8];
 static mut SNAKE_FLAG_APPEAL_LW_GRENADE_WAIT_COUNT : [i32; 8] = [0; 8];
 static mut SNAKE_FLAG_CATCH_WAIT_IS_WALK : [bool; 8] = [false; 8];
 static SNAKE_APPEAL_LW_GRENADE_WAIT_MAX : i32 = 30;
+
+//implimented function for checking if an article is "constrained" to snake
+extern "C" {
+    #[link_name = "\u{1}_ZN3app24FighterSpecializer_Snake21is_constraint_articleERNS_7FighterEiNS_22ArticleOperationTargetE"]
+    pub fn is_constraint_article(
+        arg1: *mut smash::app::Fighter,
+        arg2: i32,
+        arg3: smash::app::ArticleOperationTarget,
+    ) -> bool;
+}
 
 #[acmd_script( agent = "snake", script = "game_attackdashlightthrow", category = ACMD_GAME, low_priority)]
 unsafe fn snake_dash_attack_throw(fighter: &mut L2CAgentBase) {
@@ -318,6 +342,29 @@ pub unsafe fn special_side_main_loop(fighter: &mut L2CFighterCommon) -> L2CValue
     }
     false.into()
 }
+
+pub unsafe fn fun_7100018800(fighter: &mut L2CFighterCommon, skip_check: bool) {
+    if skip_check == false {
+        if StatusModule::situation_kind(fighter.module_accessor) == StatusModule::prev_situation_kind(fighter.module_accessor) {
+            return
+        }
+    }
+    if StatusModule::situation_kind(fighter.module_accessor) == *SITUATION_KIND_GROUND {
+        GroundModule::set_rhombus_offset(fighter.module_accessor, &Vector2f{x:0.0, y:0.0});
+        KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_GROUND_STOP);
+        fighter.set_situation(SITUATION_KIND_GROUND.into());
+        GroundModule::correct(fighter.module_accessor, GroundCorrectKind(*GROUND_CORRECT_KIND_GROUND));
+        let motion = WorkModule::get_int64(fighter.module_accessor, *FIGHTER_SNAKE_STATUS_WORK_INT_MOT_KIND);
+        MotionModule::change_motion_inherit_frame(fighter.module_accessor, Hash40::new_raw(motion), -1.0, 1.0, 0.0, false, false);
+    }else {
+        KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_FALL);
+        fighter.set_situation(SITUATION_KIND_AIR.into());
+        GroundModule::correct(fighter.module_accessor, GroundCorrectKind(*GROUND_CORRECT_KIND_AIR));
+        let motion = WorkModule::get_int64(fighter.module_accessor, *FIGHTER_SNAKE_STATUS_WORK_INT_MOT_AIR_KIND);
+        MotionModule::change_motion_inherit_frame(fighter.module_accessor, Hash40::new_raw(motion), -1.0, 1.0, 0.0, false, false);
+    }
+}
+
 //snake
 #[acmd_script( agent = "snake", script = "game_specialsstart", category = ACMD_GAME )]
 unsafe fn snake_side_special_game(fighter : &mut L2CAgentBase) {
@@ -1148,13 +1195,6 @@ pub fn install() {
         snake_side_special_eff,
         snake_side_special_air_eff,
 
-        snake_down_smash_game,
-        snake_down_smash_snd,
-        snake_down_smash_eff,
-
-        snake_down_smash_charge_exp,
-        snake_down_smash_charge_eff,
-
         snake_tranq_gun_start_snd,
         snake_tranq_gun_shoot_snd,
 
@@ -1177,7 +1217,6 @@ pub fn install() {
         snake_down_taunt_explode_eff
 	);
     smashline::install_agent_frames!(
-        snake_frame,
-        snake_c4_frame
+        snake_frame
     );
 }
