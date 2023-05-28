@@ -1,28 +1,68 @@
 {
 	"new-dir-files": {
     	  "fighter/snake/c00": [
-          "fighter/snake/motion/body/c00/c00attackdashlightthrow.nuanmb"
+			"fighter/snake/motion/body/c00/c03attacks4s2.nuanmb",
+			"fighter/snake/motion/body/c00/c03attacks4s3.nuanmb",
+			"fighter/snake/motion/body/c00/e01catchwalkf.nuanmb",
+			"fighter/snake/motion/body/c00/e01catchwalkb.nuanmb",
+			"fighter/snake/motion/body/c00/j01appealendexplode.nuanmb",
+            "fighter/snake/motion/body/c00/c00attackdashlightthrow.nuanmb"
         ],
         "fighter/snake/c01": [
-          "fighter/snake/motion/body/c01/c00attackdashlightthrow.nuanmb"
+			"fighter/snake/motion/body/c01/c03attacks4s2.nuanmb",
+			"fighter/snake/motion/body/c01/c03attacks4s3.nuanmb",
+			"fighter/snake/motion/body/c01/e01catchwalkf.nuanmb",
+			"fighter/snake/motion/body/c01/e01catchwalkb.nuanmb",
+			"fighter/snake/motion/body/c01/j01appealendexplode.nuanmb",
+            "fighter/snake/motion/body/c01/c00attackdashlightthrow.nuanmb"
         ],
         "fighter/snake/c02": [
-          "fighter/snake/motion/body/c02/c00attackdashlightthrow.nuanmb"
+			"fighter/snake/motion/body/c02/c03attacks4s2.nuanmb",
+			"fighter/snake/motion/body/c02/c03attacks4s3.nuanmb",
+			"fighter/snake/motion/body/c02/e01catchwalkf.nuanmb",
+			"fighter/snake/motion/body/c02/e01catchwalkb.nuanmb",
+			"fighter/snake/motion/body/c02/j01appealendexplode.nuanmb",
+            "fighter/snake/motion/body/c02/c00attackdashlightthrow.nuanmb"
         ],
         "fighter/snake/c03": [
-          "fighter/snake/motion/body/c03/c00attackdashlightthrow.nuanmb"
+			"fighter/snake/motion/body/c03/c03attacks4s2.nuanmb",
+			"fighter/snake/motion/body/c03/c03attacks4s3.nuanmb",
+			"fighter/snake/motion/body/c03/e01catchwalkf.nuanmb",
+			"fighter/snake/motion/body/c03/e01catchwalkb.nuanmb",
+			"fighter/snake/motion/body/c03/j01appealendexplode.nuanmb",
+            "fighter/snake/motion/body/c03/c00attackdashlightthrow.nuanmb"
         ],
         "fighter/snake/c04": [
-          "fighter/snake/motion/body/c04/c00attackdashlightthrow.nuanmb"
+			"fighter/snake/motion/body/c04/c03attacks4s2.nuanmb",
+			"fighter/snake/motion/body/c04/c03attacks4s3.nuanmb",
+			"fighter/snake/motion/body/c04/e01catchwalkf.nuanmb",
+			"fighter/snake/motion/body/c04/e01catchwalkb.nuanmb",
+			"fighter/snake/motion/body/c04/j01appealendexplode.nuanmb",
+            "fighter/snake/motion/body/c04/c00attackdashlightthrow.nuanmb"
         ],
         "fighter/snake/c05": [
-          "fighter/snake/motion/body/c05/c00attackdashlightthrow.nuanmb"
+			"fighter/snake/motion/body/c05/c03attacks4s2.nuanmb",
+			"fighter/snake/motion/body/c05/c03attacks4s3.nuanmb",
+			"fighter/snake/motion/body/c05/e01catchwalkf.nuanmb",
+			"fighter/snake/motion/body/c05/e01catchwalkb.nuanmb",
+			"fighter/snake/motion/body/c05/j01appealendexplode.nuanmb",
+            "fighter/snake/motion/body/c05/c00attackdashlightthrow.nuanmb"
         ],
         "fighter/snake/c06": [
-          "fighter/snake/motion/body/c06/c00attackdashlightthrow.nuanmb"
+			"fighter/snake/motion/body/c06/c03attacks4s2.nuanmb",
+			"fighter/snake/motion/body/c06/c03attacks4s3.nuanmb",
+			"fighter/snake/motion/body/c06/e01catchwalkf.nuanmb",
+			"fighter/snake/motion/body/c06/e01catchwalkb.nuanmb",
+			"fighter/snake/motion/body/c06/j01appealendexplode.nuanmb",
+            "fighter/snake/motion/body/c06/c00attackdashlightthrow.nuanmb"
         ],
         "fighter/snake/c07": [
-          "fighter/snake/motion/body/c07/c00attackdashlightthrow.nuanmb"
+			"fighter/snake/motion/body/c07/c03attacks4s2.nuanmb",
+			"fighter/snake/motion/body/c07/c03attacks4s3.nuanmb",
+			"fighter/snake/motion/body/c07/e01catchwalkf.nuanmb",
+			"fighter/snake/motion/body/c07/e01catchwalkb.nuanmb",
+			"fighter/snake/motion/body/c07/j01appealendexplode.nuanmb",
+            "fighter/snake/motion/body/c07/c00attackdashlightthrow.nuanmb"
         ],
         "fighter/ken/c00": [
             "fighter/ken/motion/body/c00/d02specialhiex.nuanmb",
