@@ -277,7 +277,7 @@ pub fn util_update(fighter : &mut L2CFighterCommon) {
 				PostureModule::set_scale(boma, PREV_SCALE[ENTRY_ID], false);
 			};
 		} else {
-			PostureModule::set_scale(boma, PREV_SCALE[ENTRY_ID], false);
+			PREV_SCALE[ENTRY_ID] = PostureModule::scale(boma);
 		};
 		//This checks if the Full Hop button is pressed
 		let triggered_buttons: Buttons = unsafe {
