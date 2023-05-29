@@ -314,7 +314,6 @@ unsafe fn palu_dthrow(fighter: &mut L2CAgentBase) {
 		frame(fighter.lua_state_agent, 24.0);
 		if macros::is_excute(fighter) {
 			macros::CHECK_FINISH_CAMERA(fighter, 7, 0);
-			macros::FT_CATCH_STOP(fighter, 8, 1);
 		}
 		frame(fighter.lua_state_agent, 25.0);
 		if macros::is_excute(fighter) {
@@ -329,13 +328,17 @@ unsafe fn palu_dthrow(fighter: &mut L2CAgentBase) {
 	low_priority)]
 unsafe fn palu_reticle(fighter: &mut L2CAgentBase) {
     	let lua_state = fighter.lua_state_agent;
-		frame(fighter.lua_state_agent, 18.0);
-		for _ in 0..5 {
+		frame(fighter.lua_state_agent, 18.0); 
+		for _ in 0..3 {
 			if macros::is_excute(fighter) {
+				WorkModule::set_float(fighter.module_accessor, PostureModule::pos_x(fighter.module_accessor)+ (90.0 *PostureModule::lr(fighter.module_accessor)), *FIGHTER_PALUTENA_STATUS_SPECIAL_N_WORK_FLOAT_TARGET_POS_X);
+				WorkModule::set_float(fighter.module_accessor, PostureModule::pos_y(fighter.module_accessor)+10.0, *FIGHTER_PALUTENA_STATUS_SPECIAL_N_WORK_FLOAT_TARGET_POS_Y);
 				ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_PALUTENA_GENERATE_ARTICLE_AUTOAIMBULLET, true, 0);
 			}
-			wait(fighter.lua_state_agent, 2.0);
+			wait(fighter.lua_state_agent, 7.0);
 		}
+		wait(fighter.lua_state_agent, 1.0);
+		macros::FT_MOTION_RATE(fighter, 0.5);
 }		
 
 
