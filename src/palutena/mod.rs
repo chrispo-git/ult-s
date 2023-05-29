@@ -60,11 +60,11 @@ unsafe fn palu_dtilt(fighter: &mut L2CAgentBase) {
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
 		frame(fighter.lua_state_agent, 14.0);
 		if macros::is_excute(fighter) {
-			macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("stick"), /*Damage*/ 8.5, /*Angle*/ 75, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 55, /*Size*/ 2.7, /*X*/ -0.5, /*Y*/ 8.0, /*Z*/ 0.0, /*X2*/ Some(-0.5), /*Y2*/ Some(-7.0), /*Z2*/ Some(0.0), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_THRU, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 1, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_OBJECT);
+			macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("stick"), /*Damage*/ 8.5, /*Angle*/ 77, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 55, /*Size*/ 2.7, /*X*/ -0.5, /*Y*/ 8.0, /*Z*/ 0.0, /*X2*/ Some(-0.5), /*Y2*/ Some(-7.0), /*Z2*/ Some(0.0), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_THRU, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 1, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_OBJECT);
 		}
 		frame(fighter.lua_state_agent, 15.0);
 		if macros::is_excute(fighter) {
-			macros::ATTACK(fighter, /*ID*/ 2, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 8.5, /*Angle*/ 75, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 55, /*Size*/ 2.5, /*X*/ 0.0, /*Y*/ 1.0, /*Z*/ 19.5, /*X2*/ Some(0.0), /*Y2*/ Some(2.0), /*Z2*/ Some(9.8), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_THRU, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 1, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_OBJECT);
+			macros::ATTACK(fighter, /*ID*/ 2, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 8.5, /*Angle*/ 77, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 55, /*Size*/ 2.5, /*X*/ 0.0, /*Y*/ 1.0, /*Z*/ 19.5, /*X2*/ Some(0.0), /*Y2*/ Some(2.0), /*Z2*/ Some(9.8), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_THRU, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 1, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_OBJECT);
 		}
 		frame(fighter.lua_state_agent, 28.0);
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.75);
@@ -300,6 +300,43 @@ unsafe fn palu_ftilt(fighter: &mut L2CAgentBase) {
 			macros::HIT_NODE(fighter, Hash40::new("armr"), *HIT_STATUS_NORMAL);
 		}
 }		
+#[acmd_script(
+    agent = "palutena",
+    script =  "game_throwlw",
+    category = ACMD_GAME,
+	low_priority)]
+unsafe fn palu_dthrow(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+		if macros::is_excute(fighter) {
+			macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, /*ID*/ 0, /*Damage*/ 5.0, /*Angle*/ 75, /*KBG*/ 25, /*FKB*/ 0, /*BKB*/ 90, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
+			macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, /*ID*/ 0, /*Damage*/ 3.0, /*Angle*/ 361, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 40, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
+		}
+		frame(fighter.lua_state_agent, 24.0);
+		if macros::is_excute(fighter) {
+			macros::CHECK_FINISH_CAMERA(fighter, 7, 0);
+			macros::FT_CATCH_STOP(fighter, 8, 1);
+		}
+		frame(fighter.lua_state_agent, 25.0);
+		if macros::is_excute(fighter) {
+			macros::ATK_HIT_ABS(fighter, *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, Hash40::new("throw"), WorkModule::get_int64(fighter.module_accessor,*FIGHTER_STATUS_THROW_WORK_INT_TARGET_OBJECT), WorkModule::get_int64(fighter.module_accessor,*FIGHTER_STATUS_THROW_WORK_INT_TARGET_HIT_GROUP), WorkModule::get_int64(fighter.module_accessor,*FIGHTER_STATUS_THROW_WORK_INT_TARGET_HIT_NO));
+			AttackModule::clear_all(fighter.module_accessor);
+		}
+}
+#[acmd_script(
+    agent = "palutena",
+    scripts =  ["game_specialn", "game_specialairn"],
+    category = ACMD_GAME,
+	low_priority)]
+unsafe fn palu_reticle(fighter: &mut L2CAgentBase) {
+    	let lua_state = fighter.lua_state_agent;
+		frame(fighter.lua_state_agent, 18.0);
+		for _ in 0..5 {
+			if macros::is_excute(fighter) {
+				ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_PALUTENA_GENERATE_ARTICLE_AUTOAIMBULLET, true, 0);
+			}
+			wait(fighter.lua_state_agent, 2.0);
+		}
+}		
 
 
 		
@@ -313,6 +350,7 @@ pub fn install() {
 		palu_utilt,
 		palu_utilt_eff,
 		palu_nair,
-		palu_dtilt
+		palu_dtilt,
+		palu_reticle
     );
 }
