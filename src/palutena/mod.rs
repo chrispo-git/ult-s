@@ -338,7 +338,7 @@ unsafe fn palu_reticle(fighter: &mut L2CAgentBase) {
 			wait(fighter.lua_state_agent, 7.0);
 		}
 		wait(fighter.lua_state_agent, 1.0);
-		macros::FT_MOTION_RATE(fighter, 0.5);
+		macros::FT_MOTION_RATE(fighter, 0.714);
 }		
 
 
@@ -354,6 +354,7 @@ pub fn install() {
 		palu_utilt_eff,
 		palu_nair,
 		palu_dtilt,
-		palu_reticle
+		palu_reticle,
+		palu_dthrow
     );
 }
