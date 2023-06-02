@@ -46,20 +46,8 @@ pub fn shielddrop(fighter : &mut L2CFighterCommon) {
 		let cancel_frame = FighterMotionModuleImpl::get_cancel_frame(boma,smash::phx::Hash40::new_raw(MotionModule::motion_kind(boma)),false) as f32;
 		let frame = MotionModule::frame(boma);
 		let situation_kind = StatusModule::situation_kind(boma);
-        if [*FIGHTER_STATUS_KIND_GUARD_ON, *FIGHTER_STATUS_KIND_GUARD].contains(&status_kind) {
-			if GroundModule::is_passable_ground(fighter.module_accessor){
-                if sticky <= -0.6875 {
-					if (
-						(ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_ATTACK_LW4) == 0 &&
-						(ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_ATTACK_LW3) == 0 &&
-						(ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_LW) == 0 &&
-						(ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_ESCAPE) == 0 &&
-						(ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_JUMP))
-					) {
-						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_PASS, true);
-					};
-                };
-            }
+        if [*FIGHTER_STATUS_KIND_GUARD_ON, *FIGHTER_STATUS_KIND_GUARD].contains(&status_kind) &&  sticky <= -0.6875  && GroundModule::is_passable_ground(fighter.module_accessor){
+			StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_PASS, true);
 		};
     };
 }	
