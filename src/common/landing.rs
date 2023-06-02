@@ -47,7 +47,7 @@ pub fn shielddrop(fighter : &mut L2CFighterCommon) {
 		let frame = MotionModule::frame(boma);
 		let situation_kind = StatusModule::situation_kind(boma);
         if [*FIGHTER_STATUS_KIND_GUARD_ON, *FIGHTER_STATUS_KIND_GUARD].contains(&status_kind) {
-			if GroundModule::is_passable_ground(fighter.module_accessor) && frame/cancel_frame >= (1.0/6.0){
+			if GroundModule::is_passable_ground(fighter.module_accessor){
                 if sticky <= -0.6875 {
 					if (
 						(ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_ATTACK_LW4) == 0 &&
