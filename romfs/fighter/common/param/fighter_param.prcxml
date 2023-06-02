@@ -606,7 +606,7 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
       <float hash="air_accel_y">0.17</float>
       <float hash="air_speed_y_stable">1.825</float>
       <float hash="dive_speed_y">2.92</float>
-      <float hash="landing_attack_air_frame_f">8</float>
+      <float hash="landing_attack_air_frame_n">6</float>
       <float hash="landing_attack_air_frame_b">11</float>
       <float hash="landing_frame">4</float>
       <float hash="tread_jump_speed_y_mul">1.0</float>
