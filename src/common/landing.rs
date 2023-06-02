@@ -22,7 +22,33 @@ pub fn llpc(fighter : &mut L2CFighterCommon) {
 		let situation_kind = StatusModule::situation_kind(boma);
         if ([hash40("landing_heavy"), hash40("landing_air_f"), hash40("landing_air_b"), hash40("landing_air_hi"), hash40("landing_air_n")].contains(&MotionModule::motion_kind(boma))) {
 			if GroundModule::is_passable_ground(fighter.module_accessor) && frame/cancel_frame >= (1.0/6.0){
-                if sticky <= -0.6875 && ((ControlModule::get_flick_y(boma) >= 3 && ControlModule::get_flick_y(boma) < 20) || sticky <= -1.0) {
+                if sticky <= -0.6875 && ((ControlModule::get_flick_y(boma) >= 3 && ControlModule::get_flick_y(boma) < 20) || (sticky <= -1.0 && hash40("landing_heavy") != MotionModule::motion_kind(boma))) {
+					if (
+						(ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_ATTACK_LW4) == 0 &&
+						(ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_ATTACK_LW3) == 0 &&
+						(ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_LW) == 0 &&
+						(ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_ESCAPE) == 0 &&
+						(ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_JUMP))
+					) {
+						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_PASS, true);
+					};
+                };
+            }
+		};
+    };
+}	
+#[fighter_frame_callback]
+pub fn shielddrop(fighter : &mut L2CFighterCommon) {
+    unsafe {
+        let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);  
+		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
+		let sticky = ControlModule::get_stick_y(boma);	
+		let cancel_frame = FighterMotionModuleImpl::get_cancel_frame(boma,smash::phx::Hash40::new_raw(MotionModule::motion_kind(boma)),false) as f32;
+		let frame = MotionModule::frame(boma);
+		let situation_kind = StatusModule::situation_kind(boma);
+        if [*FIGHTER_STATUS_KIND_GUARD_ON, *FIGHTER_STATUS_KIND_GUARD].contains(&status_kind) {
+			if GroundModule::is_passable_ground(fighter.module_accessor) && frame/cancel_frame >= (1.0/6.0){
+                if sticky <= -0.6875 {
 					if (
 						(ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_ATTACK_LW4) == 0 &&
 						(ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_ATTACK_LW3) == 0 &&
@@ -107,7 +133,8 @@ unsafe fn correct_replace(module_accessor: &mut smash::app::BattleObjectModuleAc
 }
 pub fn install() {
     smashline::install_agent_frame_callbacks!(
-		llpc
+		llpc,
+		shielddrop
 	);
 	skyline::install_hooks!(
         init_settings_replace,
