@@ -1321,9 +1321,6 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
       <float hash="jump_speed_x_mul">1.2</float>
       <float hash="jump_speed_x_max">1.5</float>
       <float hash="jump_aerial_y">27.5</float>
-      <float hash="air_accel_y">0.16</float>
-      <float hash="air_speed_y_stable">1.92</float>
-      <float hash="dive_speed_y">3.072</float>
       <float hash="weight">85</float>
       <float hash="landing_attack_air_frame_lw">8</float>
       <float hash="landing_frame">4</float>
