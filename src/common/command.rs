@@ -21,7 +21,7 @@ static mut INPUT_NUM : [i32; 8] = [0; 8];
 static mut INPUT_WINDOW : [i32; 8] = [0; 8];
 static mut INPUT_START : [bool; 8] = [false; 8];
 static mut BAN_CHARGE : [bool; 8] = [false; 8];
-static mut INPUT_MAX : i32 = 30;
+static mut INPUT_MAX : i32 = 35;
 pub static mut ACTIVATE_MOTION_CHANGE : [bool; 8] = [false; 8];
 
 
@@ -188,7 +188,7 @@ pub fn charge_use(fighter : &mut L2CFighterCommon) {
 			if BAN_CHARGE[ENTRY_ID] == true {
 				CHARGE[ENTRY_ID] = 0;
 			};
-			if CHARGE[ENTRY_ID] >= MAX_CHARGE && ([*FIGHTER_STATUS_KIND_GUARD_ON, *FIGHTER_STATUS_KIND_GUARD, *FIGHTER_STATUS_KIND_GUARD_OFF, *FIGHTER_STATUS_KIND_SQUAT, *FIGHTER_STATUS_KIND_SQUAT_B, *FIGHTER_STATUS_KIND_SQUAT_F, *FIGHTER_STATUS_KIND_SQUAT_WAIT, *FIGHTER_STATUS_KIND_SQUAT_RV, *FIGHTER_STATUS_KIND_DASH, *FIGHTER_STATUS_KIND_WALK].contains(&status_kind) || (FighterMotionModuleImpl::get_cancel_frame(boma,smash::phx::Hash40::new_raw(MotionModule::motion_kind(boma)),false) as f32 != 0.0 && (FighterMotionModuleImpl::get_cancel_frame(boma,smash::phx::Hash40::new_raw(MotionModule::motion_kind(boma)),false) as f32 <= MotionModule::frame(boma) || MotionModule::frame(boma) < 2.0)) ){
+			if CHARGE[ENTRY_ID] >= MAX_CHARGE && ([*FIGHTER_STATUS_KIND_GUARD_ON, *FIGHTER_STATUS_KIND_GUARD, *FIGHTER_STATUS_KIND_GUARD_OFF, *FIGHTER_STATUS_KIND_SQUAT, *FIGHTER_STATUS_KIND_SQUAT_B, *FIGHTER_STATUS_KIND_SQUAT_F, *FIGHTER_STATUS_KIND_SQUAT_WAIT, *FIGHTER_STATUS_KIND_SQUAT_RV, *FIGHTER_STATUS_KIND_DASH, *FIGHTER_STATUS_KIND_WALK].contains(&status_kind) || (FighterMotionModuleImpl::get_cancel_frame(boma,smash::phx::Hash40::new_raw(MotionModule::motion_kind(boma)),false) as f32 != 0.0 && (FighterMotionModuleImpl::get_cancel_frame(boma,smash::phx::Hash40::new_raw(MotionModule::motion_kind(boma)),false) as f32 <= MotionModule::frame(boma) || MotionModule::frame(boma) < 4.0) && !AttackModule::is_attack(fighter.module_accessor, 0, false)) ){
 				if stick_y >= 0.625 && ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_ATTACK) && ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_CSTICK_ON) && ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_CATCH) && ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_SPECIAL){
 					USE_CHARGE[ENTRY_ID] = true;
 					CHARGE[ENTRY_ID] = 0;
@@ -546,8 +546,8 @@ pub fn char_input(fighter : &mut L2CFighterCommon) {
 					ACTIVATE_MOTION_CHANGE[ENTRY_ID] = false;
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL_SPECIAL, true);
 				};
-				if INPUT_NUM[ENTRY_ID] == 3 && (FighterMotionModuleImpl::get_cancel_frame(boma,smash::phx::Hash40::new_raw(MotionModule::motion_kind(boma)),false) as f32 <= MotionModule::frame(boma) || MotionModule::frame(boma) < 2.0) && StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR{
-					if (ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_SPECIAL)  || ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_ATTACK)) &&  ((ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_CATCH) && ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_GUARD)) || StatusModule::situation_kind(boma) == *SITUATION_KIND_GROUND ) {
+				if INPUT_NUM[ENTRY_ID] == 3 && (FighterMotionModuleImpl::get_cancel_frame(boma,smash::phx::Hash40::new_raw(MotionModule::motion_kind(boma)),false) as f32 <= MotionModule::frame(boma) || MotionModule::frame(boma) < 4.0) && !AttackModule::is_attack(fighter.module_accessor, 0, false) && StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR{
+					if (ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_SPECIAL)  && ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_ATTACK)) &&  ((ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_CATCH) && ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_GUARD)) || StatusModule::situation_kind(boma) == *SITUATION_KIND_GROUND ) {
 						INPUT_WINDOW[ENTRY_ID] = 0;
 						INPUT_NUM[ENTRY_ID] += 1;
 						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_SPECIAL_S, true);
@@ -599,8 +599,8 @@ pub fn char_input(fighter : &mut L2CFighterCommon) {
 					let stop  = smash::phx::Vector3f { x: 0.5, y: 0.0, z: 1.0 };
 					KineticModule::mul_speed(boma, &stop, *FIGHTER_KINETIC_ENERGY_ID_GRAVITY);
 				};
-				if INPUT_NUM[ENTRY_ID] == 3 && (FighterMotionModuleImpl::get_cancel_frame(boma,smash::phx::Hash40::new_raw(MotionModule::motion_kind(boma)),false) as f32 <= MotionModule::frame(boma) || MotionModule::frame(boma) < 2.0) && StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR{
-					if (ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_SPECIAL)  || ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_ATTACK)) &&  ((ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_CATCH) && ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_GUARD)) || StatusModule::situation_kind(boma) == *SITUATION_KIND_GROUND ) {
+				if INPUT_NUM[ENTRY_ID] == 3 && (FighterMotionModuleImpl::get_cancel_frame(boma,smash::phx::Hash40::new_raw(MotionModule::motion_kind(boma)),false) as f32 <= MotionModule::frame(boma) || MotionModule::frame(boma) < 4.0) && !AttackModule::is_attack(fighter.module_accessor, 0, false) && StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR{
+					if (ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_SPECIAL)  && ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_ATTACK)) &&  ((ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_CATCH) && ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_GUARD)) || StatusModule::situation_kind(boma) == *SITUATION_KIND_GROUND ) {
 						INPUT_WINDOW[ENTRY_ID] = 0;
 						INPUT_NUM[ENTRY_ID] += 1;
 						StatusModule::change_status_request_from_script(boma, *FIGHTER_MIIFIGHTER_STATUS_KIND_SPECIAL_LW2_KICK, true);
@@ -639,8 +639,8 @@ pub fn char_input(fighter : &mut L2CFighterCommon) {
 				if INPUT_START[ENTRY_ID] == true {
 					INPUT_WINDOW[ENTRY_ID] += 1;
 				};
-				if INPUT_NUM[ENTRY_ID] == 3 && (FighterMotionModuleImpl::get_cancel_frame(boma,smash::phx::Hash40::new_raw(MotionModule::motion_kind(boma)),false) as f32 <= MotionModule::frame(boma) || MotionModule::frame(boma) < 2.0){
-					if (ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_SPECIAL)  || ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_ATTACK)) &&  ((ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_CATCH) && ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_GUARD)) || StatusModule::situation_kind(boma) == *SITUATION_KIND_GROUND ) {
+				if INPUT_NUM[ENTRY_ID] == 3 && (FighterMotionModuleImpl::get_cancel_frame(boma,smash::phx::Hash40::new_raw(MotionModule::motion_kind(boma)),false) as f32 <= MotionModule::frame(boma) || MotionModule::frame(boma) < 4.0) && !AttackModule::is_attack(fighter.module_accessor, 0, false){
+					if (ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_SPECIAL)  && ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_ATTACK)) &&  ((ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_CATCH) && ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_GUARD)) || StatusModule::situation_kind(boma) == *SITUATION_KIND_GROUND ) {
 						INPUT_WINDOW[ENTRY_ID] = 0;
 						INPUT_NUM[ENTRY_ID] += 1;
 						StatusModule::change_status_request_from_script(boma, *FIGHTER_PALUTENA_STATUS_KIND_SPECIAL_LW_REFLECT, true);
@@ -692,8 +692,8 @@ pub fn char_input(fighter : &mut L2CFighterCommon) {
 				if INPUT_START[ENTRY_ID] == true {
 					INPUT_WINDOW[ENTRY_ID] += 1;
 				};
-				if INPUT_NUM[ENTRY_ID] == 5 && (FighterMotionModuleImpl::get_cancel_frame(boma,smash::phx::Hash40::new_raw(MotionModule::motion_kind(boma)),false) as f32 <= MotionModule::frame(boma) || MotionModule::frame(boma) < 2.0) && StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR{
-					if (ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_SPECIAL)  || ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_ATTACK)) &&  ((ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_CATCH) && ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_GUARD)) || StatusModule::situation_kind(boma) == *SITUATION_KIND_GROUND ) {
+				if INPUT_NUM[ENTRY_ID] == 5 && (FighterMotionModuleImpl::get_cancel_frame(boma,smash::phx::Hash40::new_raw(MotionModule::motion_kind(boma)),false) as f32 <= MotionModule::frame(boma) || MotionModule::frame(boma) < 4.0) && !AttackModule::is_attack(fighter.module_accessor, 0, false) && StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR{
+					if (ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_SPECIAL)  && ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_ATTACK)) &&  ((ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_CATCH) && ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_GUARD)) || StatusModule::situation_kind(boma) == *SITUATION_KIND_GROUND ) {
 						INPUT_WINDOW[ENTRY_ID] = 0;
 						INPUT_NUM[ENTRY_ID] += 1;
 						StatusModule::change_status_request_from_script(boma, *FIGHTER_WIIFIT_STATUS_KIND_SPECIAL_S_HEADING, true);
@@ -736,8 +736,8 @@ pub fn char_input(fighter : &mut L2CFighterCommon) {
 				if INPUT_START[ENTRY_ID] == true {
 					INPUT_WINDOW[ENTRY_ID] += 1;
 				};
-				if INPUT_NUM[ENTRY_ID] == 3 && (FighterMotionModuleImpl::get_cancel_frame(boma,smash::phx::Hash40::new_raw(MotionModule::motion_kind(boma)),false) as f32 <= MotionModule::frame(boma) || MotionModule::frame(boma) < 2.0) && StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR && WorkModule::is_flag(boma, *FIGHTER_EFLAME_INSTANCE_WORK_ID_FLAG_HAS_ESWORD){
-					if (ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_SPECIAL)  || ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_ATTACK)) &&  ((ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_CATCH) && ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_GUARD)) || StatusModule::situation_kind(boma) == *SITUATION_KIND_GROUND ) {
+				if INPUT_NUM[ENTRY_ID] == 3 && (FighterMotionModuleImpl::get_cancel_frame(boma,smash::phx::Hash40::new_raw(MotionModule::motion_kind(boma)),false) as f32 <= MotionModule::frame(boma) || MotionModule::frame(boma) < 4.0) && !AttackModule::is_attack(fighter.module_accessor, 0, false) && StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR && WorkModule::is_flag(boma, *FIGHTER_EFLAME_INSTANCE_WORK_ID_FLAG_HAS_ESWORD){
+					if (ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_SPECIAL)  && ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_ATTACK)) &&  ((ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_CATCH) && ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_GUARD)) || StatusModule::situation_kind(boma) == *SITUATION_KIND_GROUND ) {
 						INPUT_WINDOW[ENTRY_ID] = 0;
 						INPUT_NUM[ENTRY_ID] += 1;
 						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_SPECIAL_LW, true);
@@ -789,8 +789,8 @@ pub fn char_input(fighter : &mut L2CFighterCommon) {
 				if INPUT_START[ENTRY_ID] == true {
 					INPUT_WINDOW[ENTRY_ID] += 1;
 				};
-				if INPUT_NUM[ENTRY_ID] == 3 && (FighterMotionModuleImpl::get_cancel_frame(boma,smash::phx::Hash40::new_raw(MotionModule::motion_kind(boma)),false) as f32 <= MotionModule::frame(boma) || MotionModule::frame(boma) < 2.0) {
-					if (ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_SPECIAL)  || ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_ATTACK)) &&  ((ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_CATCH) && ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_GUARD)) || StatusModule::situation_kind(boma) == *SITUATION_KIND_GROUND ) {
+				if INPUT_NUM[ENTRY_ID] == 3 && (FighterMotionModuleImpl::get_cancel_frame(boma,smash::phx::Hash40::new_raw(MotionModule::motion_kind(boma)),false) as f32 <= MotionModule::frame(boma) || MotionModule::frame(boma) < 4.0) && !AttackModule::is_attack(fighter.module_accessor, 0, false) {
+					if (ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_SPECIAL)  && ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_ATTACK)) &&  ((ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_CATCH) && ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_GUARD)) || StatusModule::situation_kind(boma) == *SITUATION_KIND_GROUND ) {
 						INPUT_WINDOW[ENTRY_ID] = 0;
 						INPUT_NUM[ENTRY_ID] += 1;
 						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_SPECIAL_LW, true);
@@ -849,8 +849,8 @@ pub fn char_input(fighter : &mut L2CFighterCommon) {
 				if INPUT_NUM[ENTRY_ID] == 3 {
 					WorkModule::unable_transition_term_forbid(boma, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_SPECIAL_S);
 				};
-				if INPUT_NUM[ENTRY_ID] == 3 && (FighterMotionModuleImpl::get_cancel_frame(boma,smash::phx::Hash40::new_raw(MotionModule::motion_kind(boma)),false) as f32 <= MotionModule::frame(boma) || MotionModule::frame(boma) < 2.0) && StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR{
-					if (ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_SPECIAL)  || ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_ATTACK)) &&  ((ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_CATCH) && ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_GUARD)) || StatusModule::situation_kind(boma) == *SITUATION_KIND_GROUND ) {
+				if INPUT_NUM[ENTRY_ID] == 3 && (FighterMotionModuleImpl::get_cancel_frame(boma,smash::phx::Hash40::new_raw(MotionModule::motion_kind(boma)),false) as f32 <= MotionModule::frame(boma) || MotionModule::frame(boma) < 4.0) && !AttackModule::is_attack(fighter.module_accessor, 0, false) && StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR{
+					if (ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_SPECIAL)  && ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_ATTACK)) &&  ((ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_CATCH) && ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_GUARD)) || StatusModule::situation_kind(boma) == *SITUATION_KIND_GROUND ) {
 						INPUT_WINDOW[ENTRY_ID] = 0;
 						INPUT_NUM[ENTRY_ID] += 1;
 						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_ATTACK_AIR, true);
@@ -906,8 +906,8 @@ pub fn char_input(fighter : &mut L2CFighterCommon) {
 				if INPUT_START[ENTRY_ID] == true {
 					INPUT_WINDOW[ENTRY_ID] += 1;
 				};
-				if INPUT_NUM[ENTRY_ID] == 3 && (FighterMotionModuleImpl::get_cancel_frame(boma,smash::phx::Hash40::new_raw(MotionModule::motion_kind(boma)),false) as f32 <= MotionModule::frame(boma) || MotionModule::frame(boma) < 2.0) && (StatusModule::situation_kind(boma) == *SITUATION_KIND_GROUND || StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR){
-					if (ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_SPECIAL)  || ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_ATTACK)) &&  ((ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_CATCH) && ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_GUARD)) || (StatusModule::situation_kind(boma) == *SITUATION_KIND_GROUND || StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR)) {
+				if INPUT_NUM[ENTRY_ID] == 3 && (FighterMotionModuleImpl::get_cancel_frame(boma,smash::phx::Hash40::new_raw(MotionModule::motion_kind(boma)),false) as f32 <= MotionModule::frame(boma) || MotionModule::frame(boma) < 4.0) && !AttackModule::is_attack(fighter.module_accessor, 0, false) && (StatusModule::situation_kind(boma) == *SITUATION_KIND_GROUND || StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR){
+					if (ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_SPECIAL)  && ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_ATTACK)) &&  ((ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_CATCH) && ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_GUARD)) || (StatusModule::situation_kind(boma) == *SITUATION_KIND_GROUND || StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR)) {
 						INPUT_WINDOW[ENTRY_ID] = 0;
 						INPUT_NUM[ENTRY_ID] += 1;
 						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_SPECIAL_HI, true);
@@ -967,8 +967,8 @@ pub fn char_input(fighter : &mut L2CFighterCommon) {
 				if INPUT_START[ENTRY_ID] == true {
 					INPUT_WINDOW[ENTRY_ID] += 1;
 				};
-				if INPUT_NUM[ENTRY_ID] == 3 && (FighterMotionModuleImpl::get_cancel_frame(boma,smash::phx::Hash40::new_raw(MotionModule::motion_kind(boma)),false) as f32 <= MotionModule::frame(boma) || MotionModule::frame(boma) < 2.0) && StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR{
-					if (ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_SPECIAL)  || ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_ATTACK)) &&  ((ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_CATCH) && ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_GUARD)) || StatusModule::situation_kind(boma) == *SITUATION_KIND_GROUND ) {
+				if INPUT_NUM[ENTRY_ID] == 3 && (FighterMotionModuleImpl::get_cancel_frame(boma,smash::phx::Hash40::new_raw(MotionModule::motion_kind(boma)),false) as f32 <= MotionModule::frame(boma) || MotionModule::frame(boma) < 4.0) && !AttackModule::is_attack(fighter.module_accessor, 0, false) && StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR{
+					if (ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_SPECIAL)  && ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_ATTACK)) &&  ((ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_CATCH) && ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_GUARD)) || StatusModule::situation_kind(boma) == *SITUATION_KIND_GROUND ) {
 						INPUT_WINDOW[ENTRY_ID] = 0;
 						INPUT_NUM[ENTRY_ID] += 1;
 						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_SPECIAL_HI, true);
@@ -1024,8 +1024,8 @@ pub fn char_input(fighter : &mut L2CFighterCommon) {
 				if INPUT_START[ENTRY_ID] == true {
 					INPUT_WINDOW[ENTRY_ID] += 1;
 				};
-				if INPUT_NUM[ENTRY_ID] == 3 && (FighterMotionModuleImpl::get_cancel_frame(boma,smash::phx::Hash40::new_raw(MotionModule::motion_kind(boma)),false) as f32 <= MotionModule::frame(boma) || MotionModule::frame(boma) < 2.0) && StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR{
-					if (ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_SPECIAL)  || ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_ATTACK)) &&  ((ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_CATCH) && ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_GUARD)) || StatusModule::situation_kind(boma) == *SITUATION_KIND_GROUND ) {
+				if INPUT_NUM[ENTRY_ID] == 3 && (FighterMotionModuleImpl::get_cancel_frame(boma,smash::phx::Hash40::new_raw(MotionModule::motion_kind(boma)),false) as f32 <= MotionModule::frame(boma) || MotionModule::frame(boma) < 4.0) && !AttackModule::is_attack(fighter.module_accessor, 0, false) && StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR{
+					if (ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_SPECIAL)  && ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_ATTACK)) &&  ((ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_CATCH) && ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_GUARD)) || StatusModule::situation_kind(boma) == *SITUATION_KIND_GROUND ) {
 						INPUT_WINDOW[ENTRY_ID] = 0;
 						INPUT_NUM[ENTRY_ID] += 1;
 						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_SPECIAL_HI, true);
@@ -1084,8 +1084,8 @@ pub fn char_input(fighter : &mut L2CFighterCommon) {
 				if INPUT_START[ENTRY_ID] == true {
 					INPUT_WINDOW[ENTRY_ID] += 1;
 				};
-				if INPUT_NUM[ENTRY_ID] == 3 && (FighterMotionModuleImpl::get_cancel_frame(boma,smash::phx::Hash40::new_raw(MotionModule::motion_kind(boma)),false) as f32 <= MotionModule::frame(boma) || MotionModule::frame(boma) < 2.0) && StatusModule::situation_kind(boma) == *SITUATION_KIND_GROUND{
-					if (ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_SPECIAL)  || ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_ATTACK)) &&  ((ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_CATCH) && ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_GUARD)) || StatusModule::situation_kind(boma) == *SITUATION_KIND_GROUND ) {
+				if INPUT_NUM[ENTRY_ID] == 3 && (FighterMotionModuleImpl::get_cancel_frame(boma,smash::phx::Hash40::new_raw(MotionModule::motion_kind(boma)),false) as f32 <= MotionModule::frame(boma) || MotionModule::frame(boma) < 4.0) && !AttackModule::is_attack(fighter.module_accessor, 0, false) && StatusModule::situation_kind(boma) == *SITUATION_KIND_GROUND{
+					if (ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_SPECIAL)  && ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_ATTACK)) &&  ((ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_CATCH) && ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_GUARD)) || StatusModule::situation_kind(boma) == *SITUATION_KIND_GROUND ) {
 						INPUT_WINDOW[ENTRY_ID] = 0;
 						INPUT_NUM[ENTRY_ID] += 1;
 						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_ATTACK_HI3, true);
@@ -1134,8 +1134,8 @@ pub fn char_input(fighter : &mut L2CFighterCommon) {
 				if INPUT_START[ENTRY_ID] == true {
 					INPUT_WINDOW[ENTRY_ID] += 1;
 				};
-				if INPUT_NUM[ENTRY_ID] == 3 && (FighterMotionModuleImpl::get_cancel_frame(boma,smash::phx::Hash40::new_raw(MotionModule::motion_kind(boma)),false) as f32 <= MotionModule::frame(boma) || MotionModule::frame(boma) < 2.0) && StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR{
-					if (ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_SPECIAL)  || ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_ATTACK)) &&  ((ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_CATCH) && ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_GUARD)) || StatusModule::situation_kind(boma) == *SITUATION_KIND_GROUND ) {
+				if INPUT_NUM[ENTRY_ID] == 3 && (FighterMotionModuleImpl::get_cancel_frame(boma,smash::phx::Hash40::new_raw(MotionModule::motion_kind(boma)),false) as f32 <= MotionModule::frame(boma) || MotionModule::frame(boma) < 4.0) && !AttackModule::is_attack(fighter.module_accessor, 0, false) && StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR{
+					if (ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_SPECIAL)  && ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_ATTACK)) &&  ((ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_CATCH) && ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_GUARD)) || StatusModule::situation_kind(boma) == *SITUATION_KIND_GROUND ) {
 						INPUT_WINDOW[ENTRY_ID] = 0;
 						INPUT_NUM[ENTRY_ID] += 1;
 						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_SPECIAL_HI, true);
@@ -1191,8 +1191,8 @@ pub fn char_input(fighter : &mut L2CFighterCommon) {
 				if INPUT_START[ENTRY_ID] == true {
 					INPUT_WINDOW[ENTRY_ID] += 1;
 				};
-				if INPUT_NUM[ENTRY_ID] == 3 && (FighterMotionModuleImpl::get_cancel_frame(boma,smash::phx::Hash40::new_raw(MotionModule::motion_kind(boma)),false) as f32 <= MotionModule::frame(boma) || MotionModule::frame(boma) < 2.0) && StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR{
-					if (ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_SPECIAL)  || ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_ATTACK)) &&  ((ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_CATCH) && ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_GUARD)) || StatusModule::situation_kind(boma) == *SITUATION_KIND_GROUND ) {
+				if INPUT_NUM[ENTRY_ID] == 3 && (FighterMotionModuleImpl::get_cancel_frame(boma,smash::phx::Hash40::new_raw(MotionModule::motion_kind(boma)),false) as f32 <= MotionModule::frame(boma) || MotionModule::frame(boma) < 4.0) && !AttackModule::is_attack(fighter.module_accessor, 0, false) && StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR{
+					if (ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_SPECIAL)  && ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_ATTACK)) &&  ((ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_CATCH) && ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_GUARD)) || StatusModule::situation_kind(boma) == *SITUATION_KIND_GROUND ) {
 						INPUT_WINDOW[ENTRY_ID] = 0;
 						INPUT_NUM[ENTRY_ID] += 1;
 						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_ATTACK_AIR, true);
@@ -1254,8 +1254,8 @@ pub fn char_input(fighter : &mut L2CFighterCommon) {
 				if INPUT_START[ENTRY_ID] == true {
 					INPUT_WINDOW[ENTRY_ID] += 1;
 				};
-				if INPUT_NUM[ENTRY_ID] == 3 && (FighterMotionModuleImpl::get_cancel_frame(boma,smash::phx::Hash40::new_raw(MotionModule::motion_kind(boma)),false) as f32 <= MotionModule::frame(boma) || MotionModule::frame(boma) < 2.0) {
-					if (ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_SPECIAL)  || ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_ATTACK)) &&  ((ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_CATCH) && ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_GUARD)) || StatusModule::situation_kind(boma) == *SITUATION_KIND_GROUND ) {
+				if INPUT_NUM[ENTRY_ID] == 3 && (FighterMotionModuleImpl::get_cancel_frame(boma,smash::phx::Hash40::new_raw(MotionModule::motion_kind(boma)),false) as f32 <= MotionModule::frame(boma) || MotionModule::frame(boma) < 4.0) && !AttackModule::is_attack(fighter.module_accessor, 0, false) {
+					if (ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_SPECIAL)  && ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_ATTACK)) &&  ((ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_CATCH) && ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_GUARD)) || StatusModule::situation_kind(boma) == *SITUATION_KIND_GROUND ) {
 						INPUT_WINDOW[ENTRY_ID] = 0;
 						INPUT_NUM[ENTRY_ID] += 1;
 						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_ESCAPE, true);
