@@ -41,6 +41,17 @@ unsafe fn rayman_usmash(fighter: &mut L2CAgentBase) {
         AttackModule::clear_all(fighter.module_accessor);
     }
 }		
+#[fighter_frame( agent = FIGHTER_KIND_PIKMIN)]
+fn rayman(fighter: &mut L2CFighterCommon) {
+    unsafe {
+        let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
+		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
+		let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+		let motion_kind = MotionModule::motion_kind(boma);
+		EffectModule::kill_kind(boma, Hash40::new("pikmin_antenna"), false, false);
+		EffectModule::kill_kind(boma, Hash40::new("pikmin_antenna_damage"), false, false);
+    }
+}
 #[weapon_frame( agent = WEAPON_KIND_PIKMIN_PIKMIN)]
 fn kill_pikmin(weapon: &mut L2CFighterBase) {
     unsafe {
@@ -64,6 +75,7 @@ pub fn install() {
 		rayman_usmash
     );
     smashline::install_agent_frames!(
-		kill_pikmin  
+		kill_pikmin,
+		rayman
     );
 }

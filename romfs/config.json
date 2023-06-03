@@ -1,5 +1,8 @@
 {
 	"new-dir-files": {
+        "fighter/pikmin/c00": [
+          "fighter/pikmin/motion/body/c00/c00attack13.nuanmb"
+        ],
     	  "fighter/snake/c00": [
 			"fighter/snake/motion/body/c00/c03attacks4s2.nuanmb",
 			"fighter/snake/motion/body/c00/c03attacks4s3.nuanmb",
