@@ -1,7 +1,13 @@
 {
 	"new-dir-files": {
         "fighter/pikmin/c00": [
-          "fighter/pikmin/motion/body/c00/c00attack13.nuanmb"
+          "fighter/pikmin/motion/body/c00/c00attack13.nuanmb",
+          "fighter/pikmin/motion/body/c00/a07attackdashslide.nuanmb",
+          "fighter/pikmin/motion/body/c00/a07attacklw3slide.nuanmb",
+          "fighter/pikmin/motion/body/c00/a07attacks3slide.nuanmb",
+          "fighter/pikmin/motion/body/c00/a07slide.nuanmb",
+          "fighter/pikmin/motion/body/c00/a07slidejump.nuanmb",
+          "fighter/pikmin/motion/body/c00/a07slidejumpfall.nuanmb"
         ],
     	  "fighter/snake/c00": [
 			"fighter/snake/motion/body/c00/c03attacks4s2.nuanmb",
