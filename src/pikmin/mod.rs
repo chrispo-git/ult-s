@@ -12,6 +12,7 @@ use std::mem;
 use smash::app::*;
 use crate::util::*;
 static mut SET_UPB_FREEFALL: [bool; 8] = [false; 8];
+static mut IS_SLIDE_MOVE: [bool; 8] = [false; 8];
 
 
 #[acmd_script(
@@ -860,6 +861,53 @@ unsafe fn rayman_dthrow(fighter: &mut L2CAgentBase) {
         macros::ATK_HIT_ABS(fighter, *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, Hash40::new("throw"), target, target_group, target_no);
     }
 }
+#[acmd_script( 
+	agent = "pikmin", 
+	script = "game_slideattacklw", 
+	category = ACMD_GAME, 
+	low_priority )]
+unsafe fn rayman_slide_dtilt(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    macros::FT_MOTION_RATE(fighter, 1.5);
+    frame(fighter.lua_state_agent, 4.0);
+    macros::FT_MOTION_RATE(fighter, 1.0);
+    if macros::is_excute(fighter) {
+        macros::ATTACK(fighter, 0, 0, Hash40::new("haver"), 5.0, 361, 88, 0, 15, 7.0, 0.0, 0.0, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_PUNCH, *ATTACK_REGION_PUNCH);
+    } 
+    frame(fighter.lua_state_agent, 11.0);
+    if macros::is_excute(fighter) {
+		AttackModule::clear_all(fighter.module_accessor);
+    }
+}
+#[acmd_script( 
+	agent = "pikmin", 
+	script = "game_slideattack", 
+	category = ACMD_GAME, 
+	low_priority )]
+unsafe fn rayman_slide_attack(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    macros::FT_MOTION_RATE(fighter, 1.5);
+    frame(fighter.lua_state_agent, 8.0);
+    if macros::is_excute(fighter) {
+        macros::ATTACK(fighter, 0, 0, Hash40::new("waist"), 0.5, 367, 100, 20, 0, 4.0, 0.0, 0.0, 0.0, None, None, None, 0.4, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 4, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_PUNCH, *ATTACK_REGION_PUNCH);
+        macros::ATTACK(fighter, 1, 0, Hash40::new("haver"), 0.5, 367, 100, 20, 0, 4.0, 0.0, 0.0, 0.0, None, None, None, 0.4, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 4, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_PUNCH, *ATTACK_REGION_PUNCH);
+        macros::ATTACK(fighter, 1, 0, Hash40::new("footr"), 0.5, 367, 100, 20, 0, 4.0, 0.0, 0.0, 0.0, None, None, None, 0.4, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 4, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_PUNCH, *ATTACK_REGION_PUNCH);
+    } 
+    frame(fighter.lua_state_agent, 40.0);
+    if macros::is_excute(fighter) {
+		AttackModule::clear_all(fighter.module_accessor);
+    }
+    frame(fighter.lua_state_agent, 41.0);
+    if macros::is_excute(fighter) {
+        macros::ATTACK(fighter, 0, 0, Hash40::new("waist"), 4.0, 361, 125, 0, 60, 5.0, 0.0, 0.0, 0.0, None, None, None, 0.4, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_PUNCH, *ATTACK_REGION_PUNCH);
+        macros::ATTACK(fighter, 1, 0, Hash40::new("haver"), 4.0, 361, 100, 0, 60, 5.0, 0.0, 0.0, 0.0, None, None, None, 0.4, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_PUNCH, *ATTACK_REGION_PUNCH);
+        macros::ATTACK(fighter, 1, 0, Hash40::new("footr"), 4.0, 361, 125, 0, 60, 5.0, 0.0, 0.0, 0.0, None, None, None, 0.4, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_PUNCH, *ATTACK_REGION_PUNCH);
+    } 
+    frame(fighter.lua_state_agent, 51.0);
+    if macros::is_excute(fighter) {
+		AttackModule::clear_all(fighter.module_accessor);
+    }
+}
 #[fighter_frame( agent = FIGHTER_KIND_PIKMIN)]
 fn rayman(fighter: &mut L2CFighterCommon) {
     unsafe {
@@ -883,23 +931,49 @@ fn rayman(fighter: &mut L2CFighterCommon) {
                     MotionModule::change_motion(fighter.module_accessor, Hash40::new("slide"), 0.0, 1.0, false, 0.0, false, false);
                 }
             } else {
-                MotionModule::set_rate(boma, 0.4);
-                let desired_brake = 0.025;
-                let lr = PostureModule::lr(boma);
-                let brake = WorkModule::get_param_float(fighter.module_accessor, hash40("ground_brake"), 0);
                 let speed = get_speed_x(boma) * lr;
-                let mut added_speed = brake - desired_brake;
-                if speed < 0.0 {
-                    added_speed *= -1.0;
-                };
-                if (speed <= 0.0 && (speed + added_speed) > 0.0) || (speed >= 0.0 && (speed + added_speed) < 0.0) {
-                    added_speed = 0.0;
-                };
-                let the_speed = smash::phx::Vector3f { x: added_speed, y: 0.0, z: 0.0 };
-                KineticModule::add_speed(boma, &the_speed);
-                if speed < 0.1 || ray_check_pos(boma, 3.0*lr, -7.0, false) == 0 {
+                MotionModule::set_rate(boma, 0.4);
+                if speed < 0.1 {
                     StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_WAIT, true);
                 }
+                IS_SLIDE_MOVE[ENTRY_ID] = true;
+            }
+        }
+        if [hash40("slide"), hash40("slide_attack_lw"), hash40("slide_attack")].contains(&motion_kind) {
+            let desired_brake = 0.025;
+            let lr = PostureModule::lr(boma);
+            let brake = WorkModule::get_param_float(fighter.module_accessor, hash40("ground_brake"), 0);
+            let speed = get_speed_x(boma) * lr;
+            let mut added_speed = brake - desired_brake;
+            if speed < 0.0 {
+                added_speed *= -1.0;
+            };
+            if (speed <= 0.0 && (speed + added_speed) > 0.0) || (speed >= 0.0 && (speed + added_speed) < 0.0) {
+                added_speed = 0.0;
+            };
+            let the_speed = smash::phx::Vector3f { x: added_speed, y: 0.0, z: 0.0 };
+            KineticModule::add_speed(boma, &the_speed);
+        }
+        if ![*FIGHTER_STATUS_KIND_RUN_BRAKE, *FIGHTER_STATUS_KIND_JUMP_SQUAT, *FIGHTER_STATUS_KIND_JUMP, *FIGHTER_STATUS_KIND_ATTACK, *FIGHTER_STATUS_KIND_ATTACK_LW3, *FIGHTER_STATUS_KIND_ATTACK_S3, *FIGHTER_STATUS_KIND_CATCH].contains(&status_kind) {
+            IS_SLIDE_MOVE[ENTRY_ID] = false;
+        } else if IS_SLIDE_MOVE[ENTRY_ID]{
+            if status_kind == *FIGHTER_STATUS_KIND_ATTACK_LW3 {
+                if motion_kind != hash40("slide_attack_lw") {
+                    MotionModule::change_motion(fighter.module_accessor, Hash40::new("slide_attack_lw"), -1.0, 1.0, false, 0.0, false, false);
+                    IS_SLIDE_MOVE[ENTRY_ID] = false;
+                }
+            }
+            if status_kind == *FIGHTER_STATUS_KIND_ATTACK {
+                StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_ATTACK_S3, true);
+            }
+            if status_kind == *FIGHTER_STATUS_KIND_ATTACK_S3 {
+                if motion_kind != hash40("slide_attack") {
+                    MotionModule::change_motion(fighter.module_accessor, Hash40::new("slide_attack"), -1.0, 1.0, false, 0.0, false, false);
+                    IS_SLIDE_MOVE[ENTRY_ID] = false;
+                }
+            }
+            if status_kind == *FIGHTER_STATUS_KIND_CATCH {
+                StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_CATCH_DASH, true);
             }
         }
         if ![*FIGHTER_PIKMIN_STATUS_KIND_SPECIAL_HI_WAIT, *FIGHTER_PIKMIN_STATUS_KIND_SPECIAL_HI_END, *FIGHTER_STATUS_KIND_SPECIAL_HI, *FIGHTER_STATUS_KIND_ATTACK_AIR].contains(&status_kind) {
@@ -1119,7 +1193,11 @@ pub fn install() {
         rayman_uthrow,
         rayman_bthrow,
         rayman_fthrow,
-        rayman_dthrow
+        rayman_dthrow,
+
+        //Slide
+        rayman_slide_attack,
+        rayman_slide_dtilt
 
         //Misc
     );
