@@ -883,9 +883,11 @@ fn rayman(fighter: &mut L2CFighterCommon) {
                     MotionModule::change_motion(fighter.module_accessor, Hash40::new("slide"), 0.0, 1.0, false, 0.0, false, false);
                 }
             } else {
-                let desired_brake = 0.04;
+                MotionModule::set_rate(boma, 0.4);
+                let desired_brake = 0.025;
+                let lr = PostureModule::lr(boma);
                 let brake = WorkModule::get_param_float(fighter.module_accessor, hash40("ground_brake"), 0);
-                let speed = get_speed_x(boma) * PostureModule::lr(boma);
+                let speed = get_speed_x(boma) * lr;
                 let mut added_speed = brake - desired_brake;
                 if speed < 0.0 {
                     added_speed *= -1.0;
@@ -893,9 +895,9 @@ fn rayman(fighter: &mut L2CFighterCommon) {
                 if (speed <= 0.0 && (speed + added_speed) > 0.0) || (speed >= 0.0 && (speed + added_speed) < 0.0) {
                     added_speed = 0.0;
                 };
-                let speed = smash::phx::Vector3f { x: added_speed, y: 0.0, z: 0.0 };
-                KineticModule::add_speed(boma, &speed);
-                if speed < 0.04 {
+                let the_speed = smash::phx::Vector3f { x: added_speed, y: 0.0, z: 0.0 };
+                KineticModule::add_speed(boma, &the_speed);
+                if speed < 0.1 || ray_check_pos(boma, 3.0*lr, -7.0, false) == 0 {
                     StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_WAIT, true);
                 }
             }
