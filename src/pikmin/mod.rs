@@ -42,7 +42,6 @@ unsafe fn rayman_jab_1_eff(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 3.0);
     if macros::is_excute(fighter) {
         macros::FOOT_EFFECT(fighter, Hash40::new("null"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.8, 0, 0, 0, 0, 0, 0, false);
-        macros::EFFECT_FOLLOW_ALPHA(fighter, Hash40::new("sys_attack_speedline"), Hash40::new("top"), 0, 4, 4, 0, 0, 0, 0.3, false, 0.4);
     }
     frame(fighter.lua_state_agent, 4.0);
     if macros::is_excute(fighter) {
@@ -90,7 +89,6 @@ unsafe fn rayman_jab_2_eff(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 3.0);
     if macros::is_excute(fighter) {
         macros::FOOT_EFFECT(fighter, Hash40::new("null"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.8, 0, 0, 0, 0, 0, 0, false);
-        macros::EFFECT_FOLLOW_ALPHA(fighter, Hash40::new("sys_attack_speedline"), Hash40::new("top"), 0, 3.8, 4, 0, 18, 0, 0.3, false, 0.4);
         macros::EFFECT_FOLLOW_ALPHA(fighter, Hash40::new("sys_attack_line"), Hash40::new("top"), 0, 4, 0, 0, 0, 0, 0.8, true, 0.5);
         macros::LAST_EFFECT_SET_ALPHA(fighter, 0.7);
     }
@@ -165,7 +163,20 @@ unsafe fn rayman_fair(fighter: &mut L2CAgentBase) {
         WorkModule::off_flag(fighter.module_accessor, *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
     }
 }		
-
+#[acmd_script(
+    agent = "pikmin",
+    script =  "effect_attackairf",
+    category = ACMD_EFFECT,
+	low_priority)]
+unsafe fn rayman_fair_eff(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+	frame(fighter.lua_state_agent, 11.0);
+    if macros::is_excute(fighter) {
+        macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_attack_speedline"), Hash40::new("top"), 0, 2.25, 1, -10, 0, 0, 0.5, true);
+        macros::LAST_EFFECT_SET_COLOR(fighter, 0.95, 0.51, 0.0);
+        macros::LAST_EFFECT_SET_ALPHA(fighter, 0.5);
+    }
+}		
 #[acmd_script( 
 	agent = "pikmin", 
 	script = "game_attackairn", 
@@ -464,24 +475,64 @@ unsafe fn rayman_fsmash_charge(fighter: &mut L2CAgentBase) {
     }
 	for _ in 0..25 {
 		if macros::is_excute(fighter) {
+            macros::FOOT_EFFECT(fighter, Hash40::new("sys_run_smoke"), Hash40::new("top"), -3, 0, 0, 0, 0, 0, 0.8, 8, 0, 4, 0, 0, 0, false);
             macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("top"), 0, 4, -6.75, -16.857, 18.764, 94.68, 0.275, true, *EF_FLIP_YZ);
 			macros::LAST_EFFECT_SET_RATE(fighter, 1.05);
+            macros::LAST_EFFECT_SET_ALPHA(fighter, 0.5);
 			macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("top"), 0, 4, -6.75, -16.857, 18.764, 94.68, 0.25, true, *EF_FLIP_YZ);
 			macros::LAST_EFFECT_SET_RATE(fighter, 1.05);
+            macros::LAST_EFFECT_SET_ALPHA(fighter, 0.5);
             macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("top"), 0, 4, -6.75, -16.857, 18.764, 94.68, 0.225, true, *EF_FLIP_YZ);
 			macros::LAST_EFFECT_SET_RATE(fighter, 1.05);
+            macros::LAST_EFFECT_SET_ALPHA(fighter, 0.5);
             macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("top"), 0, 4, -6.75, -16.857, 18.764, 94.68, 0.2, true, *EF_FLIP_YZ);
 			macros::LAST_EFFECT_SET_RATE(fighter, 1.05);
+            macros::LAST_EFFECT_SET_ALPHA(fighter, 0.5);
             macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("top"), 0, 4, -6.75, -16.857, 18.764, 94.68, 0.175, true, *EF_FLIP_YZ);
 			macros::LAST_EFFECT_SET_RATE(fighter, 1.05);
+            macros::LAST_EFFECT_SET_ALPHA(fighter, 0.5);
             macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("top"), 0, 4, -6.75, -16.857, 18.764, 94.68, 0.15, true, *EF_FLIP_YZ);
 			macros::LAST_EFFECT_SET_RATE(fighter, 1.05);
+            macros::LAST_EFFECT_SET_ALPHA(fighter, 0.5);
             macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("top"), 0, 4, -6.75, -16.857, 18.764, 94.68, 0.125, true, *EF_FLIP_YZ);
 			macros::LAST_EFFECT_SET_RATE(fighter, 1.05);
+            macros::LAST_EFFECT_SET_ALPHA(fighter, 0.5);
             macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("top"), 0, 4, -6.75, -16.857, 18.764, 94.68, 0.1, true, *EF_FLIP_YZ);
 			macros::LAST_EFFECT_SET_RATE(fighter, 1.05);
+            macros::LAST_EFFECT_SET_ALPHA(fighter, 0.5);
 		}
 		wait(fighter.lua_state_agent, 5.0);
+        macros::EFFECT(fighter, Hash40::new("sys_smash_flash_s"), Hash40::new("top"), 0, 6, 4, 0, 0, 0, 1, 2, 2, 2, 0, 0, 0, true);
+	}
+}
+#[acmd_script(
+    agent = "pikmin",
+    script =  "effect_attackhi4charge",
+    category = ACMD_EFFECT,
+	low_priority)]
+unsafe fn rayman_usmash_charge(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    for _ in 0..25 {
+		if macros::is_excute(fighter) {
+            macros::FOOT_EFFECT(fighter, Hash40::new("sys_run_smoke"), Hash40::new("top"), -4, 0, 0, 0, 0, 0, 0.8, 8, 0, 4, 0, 0, 0, false);
+		}
+		wait(fighter.lua_state_agent, 5.0);
+        macros::EFFECT(fighter, Hash40::new("sys_smash_flash_s"), Hash40::new("top"), 0, 6, 4, 0, 0, 0, 1, 2, 2, 2, 0, 0, 0, true);
+	}
+}
+#[acmd_script(
+    agent = "pikmin",
+    script =  "effect_attacklw4charge",
+    category = ACMD_EFFECT,
+	low_priority)]
+unsafe fn rayman_dsmash_charge(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    for _ in 0..25 {
+		if macros::is_excute(fighter) {
+            macros::FOOT_EFFECT(fighter, Hash40::new("sys_run_smoke"), Hash40::new("top"), 2, 0, 0, 0, 0, 0, 0.8, 8, 0, 4, 0, 0, 0, false);
+		}
+		wait(fighter.lua_state_agent, 5.0);
+        macros::EFFECT(fighter, Hash40::new("sys_smash_flash_s"), Hash40::new("top"), 0, 9, 1.25, 0, 0, 0, 1, 2, 2, 2, 0, 0, 0, true);
 	}
 }
 #[acmd_script( 
@@ -566,7 +617,12 @@ unsafe fn rayman_uair(fighter: &mut L2CAgentBase) {
 	low_priority)]
 unsafe fn rayman_uair_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
-    
+    frame(fighter.lua_state_agent, 11.0);
+    if macros::is_excute(fighter) {
+        macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_attack_speedline"), Hash40::new("top"), 0, 8, -0.5, -85, 0, 0, 0.5, true);
+        macros::LAST_EFFECT_SET_COLOR(fighter, 0.95, 0.51, 0.0);
+        macros::LAST_EFFECT_SET_ALPHA(fighter, 0.5);
+    }
 }
 #[acmd_script( 
 	agent = "pikmin", 
@@ -590,6 +646,28 @@ unsafe fn rayman_da(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 23.0);
     if macros::is_excute(fighter) {
 		AttackModule::clear_all(fighter.module_accessor);
+    }
+}
+#[acmd_script( 
+	agent = "pikmin", 
+	script = "effect_attackdash", 
+	category = ACMD_EFFECT, 
+	low_priority )]
+unsafe fn rayman_da_eff(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    frame(fighter.lua_state_agent, 8.0);
+    if macros::is_excute(fighter) {
+        macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("top"), 0.0, 6.0, 0, 0, 0, -7, 0.75, true, *EF_FLIP_YZ);
+        macros::LAST_EFFECT_SET_ALPHA(fighter, 0.5);
+    }
+    frame(fighter.lua_state_agent, 19.0);
+    if macros::is_excute(fighter) {
+        macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("top"), 0.0, 6.0, 0, 0, 0, -7, 0.75, true, *EF_FLIP_YZ);
+        macros::LAST_EFFECT_SET_ALPHA(fighter, 0.5);
+    }
+    frame(fighter.lua_state_agent, 26.0);
+    if macros::is_excute(fighter) {
+        macros::EFFECT_OFF_KIND(fighter, Hash40::new("sys_spin_wind"), false, true);
     }
 }
 #[acmd_script( 
@@ -642,14 +720,6 @@ unsafe fn rayman_utilt_eff(fighter: &mut L2CAgentBase) {
 }
 #[acmd_script( 
 	agent = "pikmin", 
-	script = "effect_attackdash", 
-	category = ACMD_EFFECT, 
-	low_priority )]
-unsafe fn rayman_da_eff(fighter: &mut L2CAgentBase) {
-    let lua_state = fighter.lua_state_agent;
-}
-#[acmd_script( 
-	agent = "pikmin", 
 	script = "game_attacklw3", 
 	category = ACMD_GAME, 
 	low_priority )]
@@ -665,15 +735,20 @@ unsafe fn rayman_dtilt(fighter: &mut L2CAgentBase) {
     }
 }
 #[acmd_script( 
-	agent = "pikmin", 
-	script = "effect_attacklw3", 
-	category = ACMD_EFFECT, 
-	low_priority )]
+    agent = "pikmin", 
+    script = "effect_attacklw3", 
+    category = ACMD_EFFECT, 
+    low_priority )]
 unsafe fn rayman_dtilt_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     frame(fighter.lua_state_agent, 4.0);
     if macros::is_excute(fighter) {
-        macros::EFFECT_FOLLOW_ALPHA(fighter, Hash40::new("sys_attack_arc_d"), Hash40::new("top"), 0, 2, 4.3, 0, 22.5, 0, 0.5, true, 1.0);
+        if PostureModule::lr(fighter.module_accessor) == 1.0 {
+            macros::EFFECT_FOLLOW_ALPHA(fighter, Hash40::new("sys_attack_arc_d"), Hash40::new("top"), 0, 2, 4.3, 0, 22.5, 0, 0.5, true, 1.0);
+        }
+        else {
+            macros::EFFECT_FOLLOW_ALPHA(fighter, Hash40::new("sys_attack_arc_d"), Hash40::new("top"), 0, 2, 4.3, 180, 157.5, 0, 0.5, true, 1.0);
+        }
         macros::LAST_EFFECT_SET_RATE(fighter, 0.45);
         macros::LAST_EFFECT_SET_COLOR(fighter, 2.55, 2.22, 1.3);
     }
@@ -780,26 +855,41 @@ unsafe fn rayman_uthrow(fighter: &mut L2CAgentBase) {
     }
     frame(fighter.lua_state_agent, 10.0);
     if macros::is_excute(fighter) {
-        macros::CHECK_FINISH_CAMERA(fighter, 21, 80);
+        macros::CHECK_FINISH_CAMERA(fighter, 21, 85);
     }
     frame(fighter.lua_state_agent, 29.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, 2, 0, Hash40::new("handr"), 6.0, 75, 55, 0, 80, 5.0, 0.0, 0.0, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, 1, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_PUNCH, *ATTACK_REGION_PUNCH);
     }
-	frame(fighter.lua_state_agent, 32.0);
+    frame(fighter.lua_state_agent, 32.0);
     if macros::is_excute(fighter) {
         let target = WorkModule::get_int64(fighter.module_accessor, *FIGHTER_STATUS_THROW_WORK_INT_TARGET_OBJECT);
         let target_group = WorkModule::get_int64(fighter.module_accessor, *FIGHTER_STATUS_THROW_WORK_INT_TARGET_HIT_GROUP);
         let target_no = WorkModule::get_int64(fighter.module_accessor, *FIGHTER_STATUS_THROW_WORK_INT_TARGET_HIT_NO);
         macros::ATK_HIT_ABS(fighter, *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, Hash40::new("throw"), target, target_group, target_no);
     }
-	frame(fighter.lua_state_agent, 33.0);
+    frame(fighter.lua_state_agent, 33.0);
     if macros::is_excute(fighter) {
         AttackModule::clear_all(fighter.module_accessor);
     }
     frame(fighter.lua_state_agent, 47.0);
     if macros::is_excute(fighter) {
         StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_LANDING, false);
+    }
+}
+#[acmd_script( 
+    agent = "pikmin", 
+    script = "effect_throwhi", 
+    category = ACMD_EFFECT, 
+    low_priority )]
+unsafe fn rayman_uthrow_eff(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 28.0);
+    if macros::is_excute(fighter) {
+        macros::LANDING_EFFECT(fighter, Hash40::new("sys_v_smoke_a"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.7, 0, 0, 0, 0, 0, 0, false);
+    }
+    frame(fighter.lua_state_agent, 29.0);
+    if macros::is_excute(fighter) {
+        macros::EFFECT_ALPHA(fighter, Hash40::new("sys_attack_impact"), Hash40::new("haver"), 0, 0, 0, 0, 0, 0, 0.46, 0, 0, 0, 0, 0, 360, true, 0.4);
     }
 }
 
@@ -823,6 +913,14 @@ unsafe fn rayman_fthrow(fighter: &mut L2CAgentBase) {
 }
 #[acmd_script( 
     agent = "pikmin", 
+    script = "effect_throwf", 
+    category = ACMD_EFFECT, 
+    low_priority )]
+unsafe fn rayman_fthrow_eff(fighter: &mut L2CAgentBase) {
+    
+}
+#[acmd_script( 
+    agent = "pikmin", 
     script = "game_throwb", 
     category = ACMD_GAME, 
     low_priority )]
@@ -831,16 +929,27 @@ unsafe fn rayman_bthrow(fighter: &mut L2CAgentBase) {
         macros::ATTACK_ABS(fighter, *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, 0, 11.0, 40, 66, 0, 70, 0.0, 1.0, *ATTACK_LR_CHECK_F, 0.0, true, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_THROW);
         macros::ATTACK_ABS(fighter, *FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, 0, 3.0, 361, 100, 0, 40, 0.0, 1.0, *ATTACK_LR_CHECK_F, 0.0, true, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_THROW);
     }
-	frame(fighter.lua_state_agent, 8.0);
+    frame(fighter.lua_state_agent, 8.0);
     if macros::is_excute(fighter) {
         macros::REVERSE_LR(fighter);
     }
-	frame(fighter.lua_state_agent, 20.0);
+    frame(fighter.lua_state_agent, 20.0);
     if macros::is_excute(fighter) {
         let target = WorkModule::get_int64(fighter.module_accessor, *FIGHTER_STATUS_THROW_WORK_INT_TARGET_OBJECT);
         let target_group = WorkModule::get_int64(fighter.module_accessor, *FIGHTER_STATUS_THROW_WORK_INT_TARGET_HIT_GROUP);
         let target_no = WorkModule::get_int64(fighter.module_accessor, *FIGHTER_STATUS_THROW_WORK_INT_TARGET_HIT_NO);
         macros::ATK_HIT_ABS(fighter, *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, Hash40::new("throw"), target, target_group, target_no);
+    }
+}
+#[acmd_script( 
+    agent = "pikmin", 
+    script = "effect_throwb", 
+    category = ACMD_EFFECT, 
+    low_priority )]
+unsafe fn rayman_bthrow_eff(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 38.0);
+    if macros::is_excute(fighter) {
+        macros::LANDING_EFFECT(fighter, Hash40::new("sys_v_smoke_a"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.7, 0, 0, 0, 0, 0, 0, false);
     }
 }
 #[acmd_script( 
@@ -862,6 +971,14 @@ unsafe fn rayman_dthrow(fighter: &mut L2CAgentBase) {
     }
 }
 #[acmd_script( 
+    agent = "pikmin", 
+    script = "effect_throwlw", 
+    category = ACMD_EFFECT, 
+    low_priority )]
+unsafe fn rayman_dthrow_eff(fighter: &mut L2CAgentBase) {
+    
+}
+#[acmd_script( 
 	agent = "pikmin", 
 	script = "game_slideattacklw", 
 	category = ACMD_GAME, 
@@ -869,12 +986,12 @@ unsafe fn rayman_dthrow(fighter: &mut L2CAgentBase) {
 unsafe fn rayman_slide_dtilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     macros::FT_MOTION_RATE(fighter, 1.5);
-    frame(fighter.lua_state_agent, 4.0);
+    frame(fighter.lua_state_agent, 6.0);
     macros::FT_MOTION_RATE(fighter, 1.0);
     if macros::is_excute(fighter) {
-        macros::ATTACK(fighter, 0, 0, Hash40::new("haver"), 5.0, 361, 88, 0, 15, 7.0, 0.0, 0.0, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_PUNCH, *ATTACK_REGION_PUNCH);
+        macros::ATTACK(fighter, 0, 0, Hash40::new("head"), 6.0, 50, 50, 0, 70, 7.0, 0.0, 0.0, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_PUNCH, *ATTACK_REGION_PUNCH);
     } 
-    frame(fighter.lua_state_agent, 11.0);
+    frame(fighter.lua_state_agent, 10.0);
     if macros::is_excute(fighter) {
 		AttackModule::clear_all(fighter.module_accessor);
     }
@@ -886,12 +1003,12 @@ unsafe fn rayman_slide_dtilt(fighter: &mut L2CAgentBase) {
 	low_priority )]
 unsafe fn rayman_slide_attack(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
-    macros::FT_MOTION_RATE(fighter, 1.5);
+    macros::FT_MOTION_RATE(fighter, 0.7);
     frame(fighter.lua_state_agent, 8.0);
     if macros::is_excute(fighter) {
-        macros::ATTACK(fighter, 0, 0, Hash40::new("waist"), 0.5, 367, 100, 20, 0, 4.0, 0.0, 0.0, 0.0, None, None, None, 0.4, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 4, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_PUNCH, *ATTACK_REGION_PUNCH);
-        macros::ATTACK(fighter, 1, 0, Hash40::new("haver"), 0.5, 367, 100, 20, 0, 4.0, 0.0, 0.0, 0.0, None, None, None, 0.4, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 4, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_PUNCH, *ATTACK_REGION_PUNCH);
-        macros::ATTACK(fighter, 1, 0, Hash40::new("footr"), 0.5, 367, 100, 20, 0, 4.0, 0.0, 0.0, 0.0, None, None, None, 0.4, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 4, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_PUNCH, *ATTACK_REGION_PUNCH);
+        macros::ATTACK(fighter, 0, 0, Hash40::new("waist"), 0.5, 367, 100, 20, 0, 4.0, 0.0, 0.0, 0.0, None, None, None, 0.4, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 4, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_PUNCH, *ATTACK_REGION_PUNCH);
+        macros::ATTACK(fighter, 1, 0, Hash40::new("haver"), 0.5, 367, 100, 20, 0, 4.0, 0.0, 0.0, 0.0, None, None, None, 0.4, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 4, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_PUNCH, *ATTACK_REGION_PUNCH);
+        macros::ATTACK(fighter, 2, 0, Hash40::new("footr"), 0.5, 367, 100, 20, 0, 4.0, 0.0, 0.0, 0.0, None, None, None, 0.4, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 4, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_PUNCH, *ATTACK_REGION_PUNCH);
     } 
     frame(fighter.lua_state_agent, 40.0);
     if macros::is_excute(fighter) {
@@ -899,15 +1016,87 @@ unsafe fn rayman_slide_attack(fighter: &mut L2CAgentBase) {
     }
     frame(fighter.lua_state_agent, 41.0);
     if macros::is_excute(fighter) {
-        macros::ATTACK(fighter, 0, 0, Hash40::new("waist"), 4.0, 361, 125, 0, 60, 5.0, 0.0, 0.0, 0.0, None, None, None, 0.4, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_PUNCH, *ATTACK_REGION_PUNCH);
-        macros::ATTACK(fighter, 1, 0, Hash40::new("haver"), 4.0, 361, 100, 0, 60, 5.0, 0.0, 0.0, 0.0, None, None, None, 0.4, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_PUNCH, *ATTACK_REGION_PUNCH);
-        macros::ATTACK(fighter, 1, 0, Hash40::new("footr"), 4.0, 361, 125, 0, 60, 5.0, 0.0, 0.0, 0.0, None, None, None, 0.4, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_PUNCH, *ATTACK_REGION_PUNCH);
+        macros::ATTACK(fighter, 0, 0, Hash40::new("waist"), 4.0, 361, 125, 0, 60, 5.0, 0.0, 0.0, 0.0, None, None, None, 0.4, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_PUNCH, *ATTACK_REGION_PUNCH);
+        macros::ATTACK(fighter, 1, 0, Hash40::new("haver"), 4.0, 361, 100, 0, 60, 5.0, 0.0, 0.0, 0.0, None, None, None, 0.4, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_PUNCH, *ATTACK_REGION_PUNCH);
+        macros::ATTACK(fighter, 2, 0, Hash40::new("footr"), 4.0, 361, 125, 0, 60, 5.0, 0.0, 0.0, 0.0, None, None, None, 0.4, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_PUNCH, *ATTACK_REGION_PUNCH);
     } 
     frame(fighter.lua_state_agent, 51.0);
     if macros::is_excute(fighter) {
 		AttackModule::clear_all(fighter.module_accessor);
     }
 }
+#[acmd_script( 
+	agent = "pikmin", 
+	script = "effect_slideattack", 
+	category = ACMD_EFFECT, 
+	low_priority )]
+unsafe fn rayman_slide_attack_eff(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    frame(fighter.lua_state_agent, 4.0);
+    if macros::is_excute(fighter) {
+        macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("top"), 0.0, 4.0, 0, 0, 0, -7, 0.65, true, *EF_FLIP_YZ);
+        macros::LAST_EFFECT_SET_ALPHA(fighter, 0.5);
+    }
+    frame(fighter.lua_state_agent, 6.0);
+    if macros::is_excute(fighter) {
+        macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("top"), 0.0, 2.0, 0, 0, 180, 7, 0.65, true, *EF_FLIP_YZ);
+        macros::LAST_EFFECT_SET_ALPHA(fighter, 0.5);
+    }
+    frame(fighter.lua_state_agent, 15.0);
+    if macros::is_excute(fighter) {
+        macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("top"), 0.0, 4.0, 0, 0, 0, -7, 0.65, true, *EF_FLIP_YZ);
+        macros::LAST_EFFECT_SET_ALPHA(fighter, 0.5);
+    }
+    frame(fighter.lua_state_agent, 16.0);
+    if macros::is_excute(fighter) {
+        macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("top"), 0.0, 2.0, 0, 0, 180, 7, 0.65, true, *EF_FLIP_YZ);
+        macros::LAST_EFFECT_SET_ALPHA(fighter, 0.5);
+    }
+}
+#[acmd_script( 
+    agent = "pikmin", 
+    script = "game_cliffattack", 
+    category = ACMD_GAME, 
+    low_priority )]
+unsafe fn rayman_cliffattack(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 19.0);
+    if macros::is_excute(fighter) {
+        macros::ATTACK(fighter, 0, 0, Hash40::new("top"), 9.0, 45, 20, 0, 90, 5.0, 0.0, 5.0, 10.5, Some(0.0), Some(5.0), Some(2.0), 1.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, 1, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_KICK, *ATTACK_REGION_PUNCH);
+    }
+    wait(fighter.lua_state_agent, 3.0);
+    if macros::is_excute(fighter) {
+        AttackModule::clear_all(fighter.module_accessor);
+    }
+}
+#[acmd_script( 
+    agent = "pikmin", 
+    script = "effect_cliffattack", 
+    category = ACMD_EFFECT, 
+    low_priority )]
+unsafe fn rayman_cliffattack_eff(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 16.0);
+    if macros::is_excute(fighter) {
+        macros::EFFECT(fighter, Hash40::new("sys_smash_flash"), Hash40::new("top"), 0, 8, -2, 0, 0, 0, 0.7, 0, 0, 0, 0, 0, 0, true);
+    }
+    frame(fighter.lua_state_agent, 18.0);
+    if macros::is_excute(fighter) {
+        macros::LANDING_EFFECT(fighter, Hash40::new("sys_atk_smoke"), Hash40::new("top"), 4, 0, 0, 0, 0, 0, 0.5, 0, 0, 0, 0, 0, 0, false);
+        macros::EFFECT_FOLLOW_ALPHA(fighter, Hash40::new("sys_attack_speedline"), Hash40::new("top"), 0, 3.5, 4, 0, 0, 0, 0.4, false, 0.6);
+    }
+    frame(fighter.lua_state_agent, 19.0);
+    if macros::is_excute(fighter) {
+        macros::EFFECT_FOLLOW_ALPHA(fighter, Hash40::new("sys_attack_line"), Hash40::new("top"), 0, 3.5, -1, 0, 0, 0, 0.4, false, 0.4);
+    }
+    frame(fighter.lua_state_agent, 20.0);
+    if macros::is_excute(fighter) {
+        macros::EFFECT(fighter, Hash40::new("sys_attack_impact"), Hash40::new("top"), 0, 5, 10.5, 0, 0, 0, 0.6, 0, 0, 0, 0, 0, 360, true);
+    }
+    frame(fighter.lua_state_agent, 22.0);
+    if macros::is_excute(fighter) {
+        macros::EFFECT_OFF_KIND(fighter, Hash40::new("sys_attack_line"), true, true);
+    }
+}
+
 #[fighter_frame( agent = FIGHTER_KIND_PIKMIN)]
 fn rayman(fighter: &mut L2CFighterCommon) {
     unsafe {
@@ -931,11 +1120,17 @@ fn rayman(fighter: &mut L2CFighterCommon) {
                     MotionModule::change_motion(fighter.module_accessor, Hash40::new("slide"), 0.0, 1.0, false, 0.0, false, false);
                 }
             } else {
+                let lr = PostureModule::lr(boma);
                 let speed = get_speed_x(boma) * lr;
                 MotionModule::set_rate(boma, 0.4);
                 if speed < 0.1 {
                     StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_WAIT, true);
                 }
+                WorkModule::unable_transition_term(boma, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_ATTACK_HI4_START);
+                WorkModule::unable_transition_term(boma, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_ATTACK_LW4_START);
+                WorkModule::unable_transition_term(boma, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_ATTACK_S4_START);
+                WorkModule::unable_transition_term(boma, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_ATTACK_S3);
+                WorkModule::unable_transition_term(boma, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_CATCH);
                 IS_SLIDE_MOVE[ENTRY_ID] = true;
             }
         }
@@ -954,7 +1149,7 @@ fn rayman(fighter: &mut L2CFighterCommon) {
             let the_speed = smash::phx::Vector3f { x: added_speed, y: 0.0, z: 0.0 };
             KineticModule::add_speed(boma, &the_speed);
         }
-        if ![*FIGHTER_STATUS_KIND_RUN_BRAKE, *FIGHTER_STATUS_KIND_JUMP_SQUAT, *FIGHTER_STATUS_KIND_JUMP, *FIGHTER_STATUS_KIND_ATTACK, *FIGHTER_STATUS_KIND_ATTACK_LW3, *FIGHTER_STATUS_KIND_ATTACK_S3, *FIGHTER_STATUS_KIND_CATCH].contains(&status_kind) {
+        if ![*FIGHTER_STATUS_KIND_RUN_BRAKE, *FIGHTER_STATUS_KIND_JUMP_SQUAT, *FIGHTER_STATUS_KIND_JUMP, *FIGHTER_STATUS_KIND_ATTACK, *FIGHTER_STATUS_KIND_ATTACK_LW3, *FIGHTER_STATUS_KIND_ATTACK_S3].contains(&status_kind) {
             IS_SLIDE_MOVE[ENTRY_ID] = false;
         } else if IS_SLIDE_MOVE[ENTRY_ID]{
             if status_kind == *FIGHTER_STATUS_KIND_ATTACK_LW3 {
@@ -972,9 +1167,6 @@ fn rayman(fighter: &mut L2CFighterCommon) {
                     IS_SLIDE_MOVE[ENTRY_ID] = false;
                 }
             }
-            if status_kind == *FIGHTER_STATUS_KIND_CATCH {
-                StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_CATCH_DASH, true);
-            }
         }
         if ![*FIGHTER_PIKMIN_STATUS_KIND_SPECIAL_HI_WAIT, *FIGHTER_PIKMIN_STATUS_KIND_SPECIAL_HI_END, *FIGHTER_STATUS_KIND_SPECIAL_HI, *FIGHTER_STATUS_KIND_ATTACK_AIR].contains(&status_kind) {
             SET_UPB_FREEFALL[ENTRY_ID] = false;
@@ -989,25 +1181,25 @@ fn rayman(fighter: &mut L2CFighterCommon) {
             ModelModule::set_mesh_visibility(fighter.module_accessor,Hash40::new("pikmin_hair"),false);
             let lr = PostureModule::lr(fighter.module_accessor);
             macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("head"), 2.2*lr, 0, 0, 0, 0, 90, 0.25, true, *EF_FLIP_YZ);
-            macros::LAST_EFFECT_SET_COLOR(fighter, 0.75, 0.31, 0.0);
+            macros::LAST_EFFECT_SET_COLOR(fighter, 0.95, 0.51, 0.0);
             macros::LAST_EFFECT_SET_RATE(fighter, 2.0);
             macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("head"), 2.2*lr, 0, 0, 0, 0, 90, 0.23, true, *EF_FLIP_YZ);
-            macros::LAST_EFFECT_SET_COLOR(fighter, 0.75, 0.31, 0.0);
+            macros::LAST_EFFECT_SET_COLOR(fighter, 0.95, 0.51, 0.0);
             macros::LAST_EFFECT_SET_RATE(fighter, 2.0);
             macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("head"), 1.7*lr, 0, 0, 0, 0, 90, 0.21, true, *EF_FLIP_YZ);
-            macros::LAST_EFFECT_SET_COLOR(fighter, 0.75, 0.31, 0.0);
+            macros::LAST_EFFECT_SET_COLOR(fighter, 0.95, 0.51, 0.0);
             macros::LAST_EFFECT_SET_RATE(fighter, 2.0);
             macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("head"), 2.2*lr, 0, 0, 0, 0, 90, 0.17, true, *EF_FLIP_YZ);
-            macros::LAST_EFFECT_SET_COLOR(fighter, 0.75, 0.31, 0.0);
+            macros::LAST_EFFECT_SET_COLOR(fighter, 0.95, 0.51, 0.0);
             macros::LAST_EFFECT_SET_RATE(fighter, 2.0);
             macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("head"), 2.2*lr, 0, 0, 0, 0, 90, 0.13, true, *EF_FLIP_YZ);
-            macros::LAST_EFFECT_SET_COLOR(fighter, 0.75, 0.31, 0.0);
+            macros::LAST_EFFECT_SET_COLOR(fighter, 0.95, 0.51, 0.0);
             macros::LAST_EFFECT_SET_RATE(fighter, 2.0);
             macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("head"), 2.2*lr, 0, 0, 0, 0, 90, 0.09, true, *EF_FLIP_YZ);
-            macros::LAST_EFFECT_SET_COLOR(fighter, 0.75, 0.31, 0.0);
+            macros::LAST_EFFECT_SET_COLOR(fighter, 0.95, 0.51, 0.0);
             macros::LAST_EFFECT_SET_RATE(fighter, 2.0);
             macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("head"), 2.2*lr, 0, 0, 0, 0, 90, 0.05, true, *EF_FLIP_YZ);
-            macros::LAST_EFFECT_SET_COLOR(fighter, 0.75, 0.31, 0.0);
+            macros::LAST_EFFECT_SET_COLOR(fighter, 0.95, 0.51, 0.0);
             macros::LAST_EFFECT_SET_RATE(fighter, 2.0);
             WorkModule::off_flag(boma, *FIGHTER_PIKMIN_STATUS_SPECIAL_HI_COMMON_FLAG_TURN);
         } else {
@@ -1101,6 +1293,40 @@ unsafe fn throw_exit(fighter: &mut L2CFighterCommon) -> L2CValue {
     L2CFighterCommon::sub_throw_uniq_process_exit(fighter);
     0.into()
 }
+#[status_script(agent = "pikmin", status = FIGHTER_STATUS_KIND_ATTACK_LW3, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
+pub unsafe fn main_dtilt(fighter: &mut L2CFighterCommon) -> L2CValue {
+    let motion_kind = MotionModule::motion_kind(fighter.module_accessor);
+    let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+    if !IS_SLIDE_MOVE[ENTRY_ID] && motion_kind != hash40("slide_attack_lw"){
+        original!(fighter)
+    } else {
+        if motion_kind != hash40("slide_attack_lw") {
+            MotionModule::change_motion(fighter.module_accessor, Hash40::new("slide_attack_lw"), -1.0, 1.0, false, 0.0, false, false);
+            IS_SLIDE_MOVE[ENTRY_ID] = false;
+        }
+        if MotionModule::is_end(fighter.module_accessor) {
+            fighter.change_status(FIGHTER_STATUS_KIND_WAIT.into(), false.into());
+        }
+        0.into() 
+    }
+} 
+#[status_script(agent = "pikmin", status = FIGHTER_STATUS_KIND_ATTACK, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
+pub unsafe fn main_jab(fighter: &mut L2CFighterCommon) -> L2CValue {
+    let motion_kind = MotionModule::motion_kind(fighter.module_accessor);
+    let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+    if !IS_SLIDE_MOVE[ENTRY_ID] && motion_kind != hash40("slide_attack"){
+        original!(fighter)
+    } else {
+        if motion_kind != hash40("slide_attack") {
+            MotionModule::change_motion(fighter.module_accessor, Hash40::new("slide_attack"), -1.0, 1.0, false, 0.0, false, false);
+            IS_SLIDE_MOVE[ENTRY_ID] = false;
+        }
+        if MotionModule::is_end(fighter.module_accessor) {
+            fighter.change_status(FIGHTER_STATUS_KIND_WAIT.into(), false.into());
+        }
+        0.into() 
+    }
+} 
 #[status_script(agent = "pikmin", status = FIGHTER_STATUS_KIND_ATTACK_HI3, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
 pub unsafe fn main_utilt(fighter: &mut L2CFighterCommon) -> L2CValue {
     let motion_kind = MotionModule::motion_kind(fighter.module_accessor);
@@ -1155,7 +1381,10 @@ pub fn install() {
         main_catch_cut, catch_cut_init,
         main_catch_pull, catch_pull_exit, catch_pull_init,
         main_catch_wait, catch_wait_exit, catch_wait_init,
-        main_throw, exec_throw, throw_init, throw_exit
+        main_throw, exec_throw, throw_init, throw_exit,
+
+        //Slide Shit
+        main_jab, main_dtilt
     );
     smashline::install_acmd_scripts!(
         //Jab and Dash Attack
@@ -1170,13 +1399,13 @@ pub fn install() {
 		rayman_dtilt, rayman_dtilt_eff,
 
         //Smashes
-		rayman_usmash, rayman_usmash_eff,
+		rayman_usmash, rayman_usmash_charge, rayman_usmash_eff,
 		rayman_fsmash, rayman_fsmash_charge, rayman_fsmash_eff,
-		rayman_dsmash, rayman_dsmash_eff,
+		rayman_dsmash, rayman_dsmash_charge, rayman_dsmash_eff,
 
         //Aerials
 		rayman_nair, rayman_nair_eff,
-		rayman_fair,
+		rayman_fair, rayman_fair_eff,
         rayman_bair, rayman_bair_eff,
 		rayman_uair, rayman_uair_eff,
 		rayman_dair, rayman_dair_eff,
@@ -1190,16 +1419,17 @@ pub fn install() {
         rayman_pivotgrab,
 
         //Throws
-        rayman_uthrow,
-        rayman_bthrow,
-        rayman_fthrow,
-        rayman_dthrow,
+        rayman_uthrow, rayman_uthrow_eff,
+        rayman_bthrow, rayman_bthrow_eff,
+        rayman_fthrow, rayman_fthrow_eff,
+        rayman_dthrow, rayman_dthrow_eff,
 
         //Slide
-        rayman_slide_attack,
-        rayman_slide_dtilt
+        rayman_slide_attack, rayman_slide_attack_eff,
+        rayman_slide_dtilt,
 
         //Misc
+        rayman_cliffattack, rayman_cliffattack_eff
     );
     smashline::install_agent_frames!(
 		kill_pikmin,
