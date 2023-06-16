@@ -173,7 +173,7 @@ unsafe fn rayman_fair_eff(fighter: &mut L2CAgentBase) {
 	frame(fighter.lua_state_agent, 11.0);
     if macros::is_excute(fighter) {
         macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_attack_speedline"), Hash40::new("top"), 0, 2.25, 1, -10, 0, 0, 0.5, true);
-        macros::LAST_EFFECT_SET_COLOR(fighter, 0.95, 0.51, 0.0);
+        macros::LAST_EFFECT_SET_COLOR(fighter, 1.15, 0.61, 0.0);
         macros::LAST_EFFECT_SET_ALPHA(fighter, 0.5);
     }
 }		
@@ -620,7 +620,7 @@ unsafe fn rayman_uair_eff(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 11.0);
     if macros::is_excute(fighter) {
         macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_attack_speedline"), Hash40::new("top"), 0, 8, -0.5, -85, 0, 0, 0.5, true);
-        macros::LAST_EFFECT_SET_COLOR(fighter, 0.95, 0.51, 0.0);
+        macros::LAST_EFFECT_SET_COLOR(fighter, 1.15, 0.61, 0.0);
         macros::LAST_EFFECT_SET_ALPHA(fighter, 0.5);
     }
 }
@@ -1006,21 +1006,22 @@ unsafe fn rayman_slide_attack(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, 0.7);
     frame(fighter.lua_state_agent, 8.0);
     if macros::is_excute(fighter) {
-        macros::ATTACK(fighter, 0, 0, Hash40::new("waist"), 0.5, 367, 100, 20, 0, 4.0, 0.0, 0.0, 0.0, None, None, None, 0.4, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 4, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_PUNCH, *ATTACK_REGION_PUNCH);
-        macros::ATTACK(fighter, 1, 0, Hash40::new("haver"), 0.5, 367, 100, 20, 0, 4.0, 0.0, 0.0, 0.0, None, None, None, 0.4, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 4, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_PUNCH, *ATTACK_REGION_PUNCH);
-        macros::ATTACK(fighter, 2, 0, Hash40::new("footr"), 0.5, 367, 100, 20, 0, 4.0, 0.0, 0.0, 0.0, None, None, None, 0.4, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 4, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_PUNCH, *ATTACK_REGION_PUNCH);
+        macros::ATTACK(fighter, 0, 0, Hash40::new("waist"), 2.5, 367, 100, 80, 0, 4.0, 0.0, 0.0, 0.0, None, None, None, 0.7, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_PUNCH, *ATTACK_REGION_PUNCH);
+        macros::ATTACK(fighter, 1, 0, Hash40::new("haver"), 2.5, 367, 100, 80, 0, 4.0, 0.0, 0.0, 0.0, None, None, None, 0.7, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_PUNCH, *ATTACK_REGION_PUNCH);
+        macros::ATTACK(fighter, 2, 0, Hash40::new("footr"), 2.5, 367, 100, 80, 0, 4.0, 0.0, 0.0, 0.0, None, None, None, 0.7, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_PUNCH, *ATTACK_REGION_PUNCH);
     } 
-    frame(fighter.lua_state_agent, 40.0);
+    frame(fighter.lua_state_agent, 22.0);
     if macros::is_excute(fighter) {
 		AttackModule::clear_all(fighter.module_accessor);
     }
-    frame(fighter.lua_state_agent, 41.0);
+    frame(fighter.lua_state_agent, 23.0);
+    macros::FT_MOTION_RATE(fighter, 1);
     if macros::is_excute(fighter) {
-        macros::ATTACK(fighter, 0, 0, Hash40::new("waist"), 4.0, 361, 125, 0, 60, 5.0, 0.0, 0.0, 0.0, None, None, None, 0.4, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_PUNCH, *ATTACK_REGION_PUNCH);
-        macros::ATTACK(fighter, 1, 0, Hash40::new("haver"), 4.0, 361, 100, 0, 60, 5.0, 0.0, 0.0, 0.0, None, None, None, 0.4, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_PUNCH, *ATTACK_REGION_PUNCH);
-        macros::ATTACK(fighter, 2, 0, Hash40::new("footr"), 4.0, 361, 125, 0, 60, 5.0, 0.0, 0.0, 0.0, None, None, None, 0.4, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_PUNCH, *ATTACK_REGION_PUNCH);
+        macros::ATTACK(fighter, 0, 0, Hash40::new("waist"), 4.0, 361, 125, 0, 60, 5.0, 0.0, 0.0, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_PUNCH, *ATTACK_REGION_PUNCH);
+        macros::ATTACK(fighter, 1, 0, Hash40::new("haver"), 4.0, 361, 125, 0, 60, 5.0, 0.0, 0.0, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_PUNCH, *ATTACK_REGION_PUNCH);
+        macros::ATTACK(fighter, 2, 0, Hash40::new("footr"), 4.0, 361, 125, 0, 60, 5.0, 0.0, 0.0, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_PUNCH, *ATTACK_REGION_PUNCH);
     } 
-    frame(fighter.lua_state_agent, 51.0);
+    frame(fighter.lua_state_agent, 30.0);
     if macros::is_excute(fighter) {
 		AttackModule::clear_all(fighter.module_accessor);
     }
@@ -1149,6 +1150,9 @@ fn rayman(fighter: &mut L2CFighterCommon) {
             let the_speed = smash::phx::Vector3f { x: added_speed, y: 0.0, z: 0.0 };
             KineticModule::add_speed(boma, &the_speed);
         }
+        if motion_kind == hash40("slide_jump") && end_frame - frame < 3.0 {
+            MotionModule::change_motion(fighter.module_accessor, Hash40::new("slide_jump_fall"), 0.0, 1.0, false, 0.0, false, false);
+        }
         if ![*FIGHTER_STATUS_KIND_RUN_BRAKE, *FIGHTER_STATUS_KIND_JUMP_SQUAT, *FIGHTER_STATUS_KIND_JUMP, *FIGHTER_STATUS_KIND_ATTACK, *FIGHTER_STATUS_KIND_ATTACK_LW3, *FIGHTER_STATUS_KIND_ATTACK_S3].contains(&status_kind) {
             IS_SLIDE_MOVE[ENTRY_ID] = false;
         } else if IS_SLIDE_MOVE[ENTRY_ID]{
@@ -1181,25 +1185,25 @@ fn rayman(fighter: &mut L2CFighterCommon) {
             ModelModule::set_mesh_visibility(fighter.module_accessor,Hash40::new("pikmin_hair"),false);
             let lr = PostureModule::lr(fighter.module_accessor);
             macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("head"), 2.2*lr, 0, 0, 0, 0, 90, 0.25, true, *EF_FLIP_YZ);
-            macros::LAST_EFFECT_SET_COLOR(fighter, 0.95, 0.51, 0.0);
+            macros::LAST_EFFECT_SET_COLOR(fighter, 1.15, 0.61, 0.0);
             macros::LAST_EFFECT_SET_RATE(fighter, 2.0);
             macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("head"), 2.2*lr, 0, 0, 0, 0, 90, 0.23, true, *EF_FLIP_YZ);
-            macros::LAST_EFFECT_SET_COLOR(fighter, 0.95, 0.51, 0.0);
+            macros::LAST_EFFECT_SET_COLOR(fighter, 1.15, 0.61, 0.0);
             macros::LAST_EFFECT_SET_RATE(fighter, 2.0);
             macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("head"), 1.7*lr, 0, 0, 0, 0, 90, 0.21, true, *EF_FLIP_YZ);
-            macros::LAST_EFFECT_SET_COLOR(fighter, 0.95, 0.51, 0.0);
+            macros::LAST_EFFECT_SET_COLOR(fighter, 1.15, 0.61, 0.0);
             macros::LAST_EFFECT_SET_RATE(fighter, 2.0);
             macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("head"), 2.2*lr, 0, 0, 0, 0, 90, 0.17, true, *EF_FLIP_YZ);
-            macros::LAST_EFFECT_SET_COLOR(fighter, 0.95, 0.51, 0.0);
+            macros::LAST_EFFECT_SET_COLOR(fighter, 1.15, 0.61, 0.0);
             macros::LAST_EFFECT_SET_RATE(fighter, 2.0);
             macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("head"), 2.2*lr, 0, 0, 0, 0, 90, 0.13, true, *EF_FLIP_YZ);
-            macros::LAST_EFFECT_SET_COLOR(fighter, 0.95, 0.51, 0.0);
+            macros::LAST_EFFECT_SET_COLOR(fighter, 1.15, 0.61, 0.0);
             macros::LAST_EFFECT_SET_RATE(fighter, 2.0);
             macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("head"), 2.2*lr, 0, 0, 0, 0, 90, 0.09, true, *EF_FLIP_YZ);
-            macros::LAST_EFFECT_SET_COLOR(fighter, 0.95, 0.51, 0.0);
+            macros::LAST_EFFECT_SET_COLOR(fighter, 1.15, 0.61, 0.0);
             macros::LAST_EFFECT_SET_RATE(fighter, 2.0);
             macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("head"), 2.2*lr, 0, 0, 0, 0, 90, 0.05, true, *EF_FLIP_YZ);
-            macros::LAST_EFFECT_SET_COLOR(fighter, 0.95, 0.51, 0.0);
+            macros::LAST_EFFECT_SET_COLOR(fighter, 1.15, 0.61, 0.0);
             macros::LAST_EFFECT_SET_RATE(fighter, 2.0);
             WorkModule::off_flag(boma, *FIGHTER_PIKMIN_STATUS_SPECIAL_HI_COMMON_FLAG_TURN);
         } else {
@@ -1327,6 +1331,36 @@ pub unsafe fn main_jab(fighter: &mut L2CFighterCommon) -> L2CValue {
         0.into() 
     }
 } 
+#[status_script(agent = "pikmin", status = FIGHTER_STATUS_KIND_JUMP_SQUAT, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
+pub unsafe fn main_jumpsquat(fighter: &mut L2CFighterCommon) -> L2CValue {
+    let motion_kind = MotionModule::motion_kind(fighter.module_accessor);
+    let end_frame = MotionModule::end_frame(fighter.module_accessor);
+    let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+    if !IS_SLIDE_MOVE[ENTRY_ID] && motion_kind != hash40("slide_jump_squat"){
+        original!(fighter)
+    } else {
+        if motion_kind != hash40("slide_jump_squat") {
+            MotionModule::change_motion(fighter.module_accessor, Hash40::new("slide_jump_squat"), -1.0, end_frame/3.0, false, 0.0, false, false);
+            IS_SLIDE_MOVE[ENTRY_ID] = false;
+        }
+        original!(fighter)
+    }
+} 
+#[status_script(agent = "pikmin", status = FIGHTER_STATUS_KIND_JUMP, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
+pub unsafe fn main_jump(fighter: &mut L2CFighterCommon) -> L2CValue {
+    let motion_kind = MotionModule::motion_kind(fighter.module_accessor);
+    let end_frame = MotionModule::end_frame(fighter.module_accessor);
+    let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+    if !IS_SLIDE_MOVE[ENTRY_ID] && motion_kind != hash40("slide_jump"){
+        original!(fighter)
+    } else {
+        if motion_kind != hash40("slide_jump") {
+            MotionModule::change_motion(fighter.module_accessor, Hash40::new("slide_jump"), -1.0, 1.0, false, 0.0, false, false);
+            IS_SLIDE_MOVE[ENTRY_ID] = false;
+        }
+        original!(fighter)
+    }
+} 
 #[status_script(agent = "pikmin", status = FIGHTER_STATUS_KIND_ATTACK_HI3, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
 pub unsafe fn main_utilt(fighter: &mut L2CFighterCommon) -> L2CValue {
     let motion_kind = MotionModule::motion_kind(fighter.module_accessor);
@@ -1384,7 +1418,8 @@ pub fn install() {
         main_throw, exec_throw, throw_init, throw_exit,
 
         //Slide Shit
-        main_jab, main_dtilt
+        main_jab, main_dtilt,
+        main_jumpsquat, main_jump
     );
     smashline::install_acmd_scripts!(
         //Jab and Dash Attack
