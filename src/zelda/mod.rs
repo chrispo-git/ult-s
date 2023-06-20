@@ -307,5 +307,5 @@ pub fn install() {
 		zelda_usmash
     );
 	smashline::install_status_scripts!(special_lw_pre, special_lw2_pre);
-	smashline::install_agent_frames!(zelda);
+	smashline::install_agent_frames!(zelda_frame);
 }
