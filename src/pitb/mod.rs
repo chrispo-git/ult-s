@@ -335,6 +335,9 @@ unsafe fn dpit_arrow(fighter: &mut L2CAgentBase) {
 	low_priority)]
 unsafe fn dpit_upb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
+		macros::FT_MOTION_RATE(fighter, 2.5);
+		wait(fighter.lua_state_agent, 2.0);
+		macros::FT_MOTION_RATE(fighter, 1.0);
 		frame(fighter.lua_state_agent, 4.0);
 		if macros::is_excute(fighter) {
 			macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("havel"), /*Damage*/ 14.0, /*Angle*/ 80, /*KBG*/ 90, /*FKB*/ 0, /*BKB*/ 50, /*Size*/ 8.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 6.0, /*X2*/ Some(0.0), /*Y2*/ Some(0.0), /*Z2*/ Some(0.0), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_THRU, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_elec"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_HEAVY, /*Type*/ *ATTACK_REGION_PUNCH);
@@ -451,8 +454,10 @@ pub fn pitoo(fighter : &mut L2CFighterCommon) {
 			};
 			if status_kind == *FIGHTER_PIT_STATUS_KIND_SPECIAL_HI_RUSH {
 					CAN_SIDEB[ENTRY_ID] = 1;
-					if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_ATTACK) {
-						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_ATTACK_AIR, true);
+					if MotionModule::frame(boma) > 6.0 {
+						if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_ATTACK) {
+							StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_ATTACK_AIR, true);
+						};
 					};
 					if MotionModule::frame(boma) > 46.0 {
 						StatusModule::change_status_request_from_script(boma, *FIGHTER_PIT_STATUS_KIND_SPECIAL_HI_RUSH_END, true);
