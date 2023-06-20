@@ -304,7 +304,8 @@ pub fn install() {
 		zelda_nair,
 		zelda_dtilt,
 		zelda_jab1,
-		zelda_usmash
+		zelda_usmash,
+		zelda_dins_fire
     );
 	smashline::install_status_scripts!(special_lw_pre, special_lw2_pre);
 	smashline::install_agent_frames!(zelda_frame);
