@@ -203,6 +203,41 @@ unsafe fn zelda_usmash(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }	
+#[acmd_script(
+    agent = "zelda_dein_s",
+    script =  "game_move",
+    category = ACMD_GAME,
+	low_priority)]
+unsafe fn zelda_dins_fire(fighter: &mut L2CAgentBase) {
+        let lua_state = fighter.lua_state_agent;
+		if macros::is_excute(fighter) {
+			macros::ATTACK(fighter, 0, 0, Hash40::new("top"), 2.0, 128, 97, 0, 50, 3.5, 0.0, 0.0, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_THRU, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, true, true, false, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_fire"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_BOMB);
+			macros::ATTACK(fighter, 1, 0, Hash40::new("top"), 1.0, 115, 40, 0, 55, 4.8, 0.0, 0.0, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_THRU, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, true, true, false, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_fire"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_BOMB);
+			macros::AREA_WIND_2ND_RAD_arg9(fighter, 0, 2, 0.05, 200, 1, 0, 0, 12, 60);
+		}
+		frame(fighter.lua_state_agent, 6.0);
+		if macros::is_excute(fighter) {
+			AttackModule::clear_all(fighter.module_accessor);
+		}
+		frame(fighter.lua_state_agent, 20.0);
+		if macros::is_excute(fighter) {
+			AreaModule::erase_wind(fighter.module_accessor, 0);
+		}
+}	
+#[fighter_frame( agent = FIGHTER_KIND_ZELDA )]
+fn zelda_frame(fighter: &mut L2CFighterCommon) {
+    unsafe {
+		let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);   
+		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
+		let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize; 
+		let frame = MotionModule::frame(boma);
+		let end_frame = MotionModule::end_frame(boma);
+		if StatusModule::is_situation_changed(boma) && [*FIGHTER_ZELDA_STATUS_KIND_SPECIAL_S_LOOP, *FIGHTER_ZELDA_STATUS_KIND_SPECIAL_S_END, *FIGHTER_STATUS_KIND_SPECIAL_S].contains(&status_kind) {
+			WorkModule::set_float(boma, 13.0, *FIGHTER_INSTANCE_WORK_ID_FLOAT_LANDING_FRAME);
+			StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_LANDING_FALL_SPECIAL, true);
+		};
+	}
+}	
 #[status_script(agent = "zelda", status = FIGHTER_ZELDA_STATUS_KIND_SPECIAL_LW_CHARGE, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_PRE)]
 unsafe fn special_lw_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
     StatusModule::init_settings(
@@ -268,8 +303,9 @@ pub fn install() {
 		zelda_fair,
 		zelda_nair,
 		zelda_dtilt,
-		zelda_jab1//,
-		//zelda_usmash
+		zelda_jab1,
+		zelda_usmash
     );
 	smashline::install_status_scripts!(special_lw_pre, special_lw2_pre);
+	smashline::install_agent_frames!(zelda);
 }
