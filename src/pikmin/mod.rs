@@ -1203,6 +1203,35 @@ unsafe fn rayman_dtaunt_eff(fighter: &mut L2CAgentBase) {
         }
     }
 }
+#[acmd_script( 
+    agent = "pikmin", 
+    script = "game_specials", 
+    category = ACMD_GAME, 
+    low_priority )]
+unsafe fn rayman_sideb(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 10.0);
+    if macros::is_excute(fighter) {
+        macros::SET_SPEED_EX(fighter, -0.5, 0.5, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+    }
+    frame(fighter.lua_state_agent, 21.0);
+    macros::FT_MOTION_RATE(fighter, 0.5);
+    if macros::is_excute(fighter) {
+        macros::SET_SPEED_EX(fighter, 3.0, 0, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+        macros::ATTACK(fighter, 0, 0, Hash40::new("rot"), 20.0, 361, 100, 0, 20, 5.0, 0.0, 0.0, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, 1, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_PUNCH);
+    }
+    frame(fighter.lua_state_agent, 55.0);
+    for x in 0..45 {
+        if macros::is_excute(fighter) {
+            macros::SET_SPEED_EX(fighter, 3.0 - ((x/45)as f32 *1.75), 0, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+        }
+        wait(fighter.lua_state_agent, 1.0);
+    }
+    frame(fighter.lua_state_agent, 100.0);
+    macros::FT_MOTION_RATE(fighter, 1);
+    if macros::is_excute(fighter) {
+        AttackModule::clear_all(fighter.module_accessor);
+    }
+}
 
 #[fighter_frame( agent = FIGHTER_KIND_PIKMIN)]
 fn rayman(fighter: &mut L2CFighterCommon) {
@@ -1210,6 +1239,7 @@ fn rayman(fighter: &mut L2CFighterCommon) {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
 		let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+        let situation_kind = StatusModule::situation_kind(boma);
 		let motion_kind = MotionModule::motion_kind(boma);
         let frame = MotionModule::frame(boma);
         let end_frame = MotionModule::end_frame(boma);
@@ -1220,6 +1250,28 @@ fn rayman(fighter: &mut L2CFighterCommon) {
 		EffectModule::kill_kind(boma, Hash40::new("pikmin_wingpikmin_end"), false, false);
 		EffectModule::kill_kind(boma, Hash40::new("pikmin_wingpikmin_wing"), false, false);
 		EffectModule::kill_kind(boma, Hash40::new("pikmin_wingpikmin2_line"), false, false);
+        
+        if motion_kind == hash40("turn_dash") && end_frame-frame < 4.0 {
+                MotionModule::change_motion(fighter.module_accessor, Hash40::new("wait"), 0.0, 1.0, false, 0.0, false, false);
+        }
+        if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_S {
+            if motion_kind != hash40("slide_jump_fall") {
+                StatusModule::set_situation_kind(boma, smash::app::SituationKind(*SITUATION_KIND_AIR), true);
+                StatusModule::set_keep_situation_air(boma, true);
+                if KineticModule::get_kinetic_type(boma) != *FIGHTER_KINETIC_TYPE_MOTION_AIR {
+                    KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_MOTION_AIR);
+                }
+                if end_frame - frame < 3.0 {
+                    MotionModule::change_motion(fighter.module_accessor, Hash40::new("slide_jump_fall"), 0.0, 1.0, false, 0.0, false, false);
+                }
+            } else {
+                StatusModule::set_keep_situation_air(boma, false);
+                if situation_kind == *SITUATION_KIND_GROUND {
+                    StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_LANDING, true);
+                }
+            }
+        }
+        //Slide Stuff
         if status_kind == *FIGHTER_STATUS_KIND_RUN_BRAKE {
             if motion_kind != hash40("slide") {
                 if  stick_y <= -0.5 &&
@@ -1543,6 +1595,7 @@ pub fn install() {
 
         //Specials
         rayman_upb,
+        rayman_sideb,
 
         //Grabs
         rayman_grab, rayman_grab_eff,
