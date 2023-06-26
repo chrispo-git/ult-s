@@ -1526,7 +1526,7 @@ fn rayman(fighter: &mut L2CFighterCommon) {
                 check_dist = 25.0;
             }
             let dist_pos = &mut Vector3f{x: 0.0, y: 0.0, z: check_dist};
-            let joint = ModelModule::joint_global_position(fighter.module_accessor, Hash40::new("throw"), &dist_pos, false);
+            let joint = ModelModule::joint_global_position(fighter.module_accessor, Hash40::new("throw"), dist_pos, false);
             let is_wall = ((GroundModule::ray_check(boma, &Vector2f{ x: joint.x, y: joint.y}, &Vector2f{ x: 6.0, y: 0.0}, true) == 1) || (GroundModule::ray_check(boma, &Vector2f{ x: joint.x, y: joint.y}, &Vector2f{ x: -6.0, y: 0.0}, true) == 1)) && frame < 22.0 && frame > 13.0;
             if AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_ALL) || is_wall {
                 AttackModule::clear_all(fighter.module_accessor);
