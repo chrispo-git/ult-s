@@ -1835,7 +1835,8 @@ pub unsafe fn main_neutralb(fighter: &mut L2CFighterCommon) -> L2CValue {
 		    fighter.change_status(FIGHTER_STATUS_KIND_WAIT.into(), false.into());
         }
 	}
-    fighter.status_AttackS3()
+    fighter.status_AttackS3_Main();
+	0.into()
 } 
 
 #[status_script(agent = "pikmin", status = FIGHTER_STATUS_KIND_ATTACK_HI3, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_PRE)]
