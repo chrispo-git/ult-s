@@ -14,7 +14,8 @@ crate-type = ["cdylib"]
 skyline = "0.2.0"
 skyline_smash = { git = "https://github.com/blu-dev/skyline-smash.git", features = ["weak_l2cvalue"] }
 smash_script = { git = "https://github.com/blu-dev/smash-script.git", branch = "development" }
-smashline = { path = "C:/Users/lenovo/Downloads/smashline" }
+#smashline = { git = "https://github.com/blu-dev/smashline.git", branch = "development" }
+smashline = { path = "C:/Users/lenovo/Downloads/smashline/crates/smashline" }
 bitflags = "1.3.2"
 modular-bitfield = "0.11.2"
 lazy_static = "1.4.0"
