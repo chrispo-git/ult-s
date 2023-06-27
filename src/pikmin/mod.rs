@@ -14,6 +14,7 @@ use crate::util::*;
 static mut SET_UPB_FREEFALL: [bool; 8] = [false; 8];
 static mut IS_SLIDE_MOVE: [bool; 8] = [false; 8];
 static mut PULL_DISTANCE: [i32; 8] = [0; 8];
+static mut DO_WALLJUMP_FORCE: [bool; 8] = [false; 8];
 
 
 #[acmd_script(
@@ -1249,39 +1250,49 @@ unsafe fn rayman_neutralb(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         PULL_DISTANCE[ENTRY_ID] = 0;
         macros::ATTACK(fighter, 0, 0, Hash40::new("throw"), 5.0, 361, 100, 30, 0, 5.0, 0.0, 0.0, 5.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, -5, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_G, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_PUNCH, *ATTACK_REGION_PUNCH);
-        AttackModule::set_add_reaction_frame(fighter.module_accessor, /*ID*/ 0, /*Frames*/ 10.0, /*Unk*/ false);
+        AttackModule::set_add_reaction_frame(fighter.module_accessor, /*ID*/ 1, /*Frames*/ -3.0, /*Unk*/ false);
         macros::ATTACK(fighter, 1, 0, Hash40::new("throw"), 5.0, 90, 100, 30, 0, 5.0, 0.0, 0.0, 5.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, -5, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_A, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_PUNCH, *ATTACK_REGION_PUNCH);
-        AttackModule::set_add_reaction_frame(fighter.module_accessor, /*ID*/ 1, /*Frames*/ 10.0, /*Unk*/ false);
+        AttackModule::set_add_reaction_frame(fighter.module_accessor, /*ID*/ 1, /*Frames*/ -3.0, /*Unk*/ false);
+        macros::ATK_SET_SHIELD_SETOFF_MUL(fighter, /*ID*/ 0, /*ShieldstunMul*/ 0.2);
     }
     frame(fighter.lua_state_agent, 16.0);
     if macros::is_excute(fighter) {
         PULL_DISTANCE[ENTRY_ID] = 1;
         macros::ATTACK(fighter, 0, 0, Hash40::new("throw"), 5.0, 361, 100, 30, 0, 5.0, 0.0, 0.0, 16.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, -5, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_G, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_PUNCH, *ATTACK_REGION_PUNCH);
-        AttackModule::set_add_reaction_frame(fighter.module_accessor, /*ID*/ 0, /*Frames*/ 10.0, /*Unk*/ false);
         macros::ATTACK(fighter, 1, 0, Hash40::new("throw"), 5.0, 90, 100, 30, 0, 5.0, 0.0, 0.0, 16.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, -5, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_A, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_PUNCH, *ATTACK_REGION_PUNCH);
-        AttackModule::set_add_reaction_frame(fighter.module_accessor, /*ID*/ 1, /*Frames*/ 10.0, /*Unk*/ false);
+        macros::ATK_SET_SHIELD_SETOFF_MUL(fighter, /*ID*/ 0, /*ShieldstunMul*/ 0.2);
     }
     frame(fighter.lua_state_agent, 18.0);
     if macros::is_excute(fighter) {
         PULL_DISTANCE[ENTRY_ID] = 2;
         macros::ATTACK(fighter, 0, 0, Hash40::new("throw"), 5.0, 361, 100, 30, 0, 5.0, 0.0, 0.0, 20.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, -5, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_G, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_PUNCH, *ATTACK_REGION_PUNCH);
-        AttackModule::set_add_reaction_frame(fighter.module_accessor, /*ID*/ 0, /*Frames*/ 10.0, /*Unk*/ false);
+        AttackModule::set_add_reaction_frame(fighter.module_accessor, /*ID*/ 0, /*Frames*/ 1.0, /*Unk*/ false);
         macros::ATTACK(fighter, 1, 0, Hash40::new("throw"), 5.0, 90, 100, 30, 0, 5.0, 0.0, 0.0, 20.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, -5, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_A, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_PUNCH, *ATTACK_REGION_PUNCH);
-        AttackModule::set_add_reaction_frame(fighter.module_accessor, /*ID*/ 1, /*Frames*/ 10.0, /*Unk*/ false);
+        AttackModule::set_add_reaction_frame(fighter.module_accessor, /*ID*/ 1, /*Frames*/ 1.0, /*Unk*/ false);
+        macros::ATK_SET_SHIELD_SETOFF_MUL(fighter, /*ID*/ 0, /*ShieldstunMul*/ 0.2);
     }
     frame(fighter.lua_state_agent, 20.0);
     if macros::is_excute(fighter) { 
         PULL_DISTANCE[ENTRY_ID] = 3;
         macros::ATTACK(fighter, 0, 0, Hash40::new("throw"), 5.0, 361, 100, 30, 0, 5.0, 0.0, 0.0, 25.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, -5, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_G, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_paralyze_ghost"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_PUNCH, *ATTACK_REGION_PUNCH);
-        AttackModule::set_add_reaction_frame(fighter.module_accessor, /*ID*/ 0, /*Frames*/ 10.0, /*Unk*/ false);
+        AttackModule::set_add_reaction_frame(fighter.module_accessor, /*ID*/ 0, /*Frames*/ 3.0, /*Unk*/ false);
         macros::ATTACK(fighter, 1, 0, Hash40::new("throw"), 5.0, 90, 100, 30, 0, 5.0, 0.0, 0.0, 25.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, -5, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_A, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_paralyze_ghost"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_PUNCH, *ATTACK_REGION_PUNCH);
-        AttackModule::set_add_reaction_frame(fighter.module_accessor, /*ID*/ 1, /*Frames*/ 10.0, /*Unk*/ false);
+        AttackModule::set_add_reaction_frame(fighter.module_accessor, /*ID*/ 1, /*Frames*/ 3.0, /*Unk*/ false);
+        macros::ATK_SET_SHIELD_SETOFF_MUL(fighter, /*ID*/ 0, /*ShieldstunMul*/ 0.2);
     }
     frame(fighter.lua_state_agent, 22.0);
     if macros::is_excute(fighter) {
         PULL_DISTANCE[ENTRY_ID] = 0;
         AttackModule::clear_all(fighter.module_accessor);
     }
+}
+#[acmd_script( 
+    agent = "pikmin", 
+    scripts = ["effect_specialnstart", "effect_specialairnfailure"], 
+    category = ACMD_EFFECT, 
+    low_priority )]
+unsafe fn rayman_neutralb_eff(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
 }
 
 #[acmd_script( 
@@ -1493,6 +1504,7 @@ fn rayman(fighter: &mut L2CFighterCommon) {
 		let cancel_frame = FighterMotionModuleImpl::get_cancel_frame(boma,smash::phx::Hash40::new_raw(MotionModule::motion_kind(boma)),false) as f32;
 		let is_near_ground = GroundModule::ray_check(boma, &Vector2f{ x: PostureModule::pos_x(boma), y: PostureModule::pos_y(boma)}, &Vector2f{ x: 0.0, y: -1.0}, true);
         let stick_y = ControlModule::get_stick_y(boma);
+        let lr = PostureModule::lr(boma);
 		EffectModule::kill_kind(boma, Hash40::new("pikmin_antenna"), false, false);
 		EffectModule::kill_kind(boma, Hash40::new("pikmin_antenna_damage"), false, false);
 		EffectModule::kill_kind(boma, Hash40::new("pikmin_wingpikmin_end"), false, false);
@@ -1500,6 +1512,9 @@ fn rayman(fighter: &mut L2CFighterCommon) {
 		EffectModule::kill_kind(boma, Hash40::new("pikmin_wingpikmin2_line"), false, false);
 
         //Neutralb
+        if ![hash40("special_air_n_pull"), hash40("special_n_pull")].contains(&motion_kind){
+            DO_WALLJUMP_FORCE[ENTRY_ID] = false;
+        }
         if [hash40("special_air_n_failure"), hash40("special_n_failure"), hash40("special_n_start")].contains(&motion_kind){
             StatusModule::set_keep_situation_air(boma, true);
             if is_near_ground == 1 && situation_kind == *SITUATION_KIND_AIR {
@@ -1514,20 +1529,40 @@ fn rayman(fighter: &mut L2CFighterCommon) {
             //Later into the pull anim if you hit neutralb earlier in the shot... because rayman gotta go less distance
             if PULL_DISTANCE[ENTRY_ID] == 0 {
                 into_frame = 7.0;
-                check_dist = 5.0;
+                check_dist = 12.0;
             } else if PULL_DISTANCE[ENTRY_ID] == 1 {
                 into_frame = 5.0;
-                check_dist = 16.0;
+                check_dist = 23.0;
             } else if PULL_DISTANCE[ENTRY_ID] == 2 {
                 into_frame = 4.0;
-                check_dist = 20.0;
+                check_dist = 27.0;
             } else {
                 into_frame = 0.0;
-                check_dist = 25.0;
+                check_dist = 32.0;
             }
-            let dist_pos = &mut Vector3f{x: 0.0, y: 0.0, z: check_dist};
-            let joint = ModelModule::joint_global_position(fighter.module_accessor, Hash40::new("throw"), dist_pos, false);
-            let is_wall = ((GroundModule::ray_check(boma, &Vector2f{ x: joint.x, y: joint.y}, &Vector2f{ x: 6.0, y: 0.0}, true) == 1) || (GroundModule::ray_check(boma, &Vector2f{ x: joint.x, y: joint.y}, &Vector2f{ x: -6.0, y: 0.0}, true) == 1)) && frame < 22.0 && frame > 13.0;
+            //let dist_pos = &mut Vector3f{x: 0.0, y: 0.0, z: check_dist};
+            //let joint = ModelModule::joint_global_position(fighter.module_accessor, Hash40::new("throw"), dist_pos, false);
+            let is_wall = (
+                (
+                    (GroundModule::ray_check(boma, &Vector2f{ x: PostureModule::pos_x(boma)+((6.0+check_dist)*lr), y: PostureModule::pos_y(boma)+10.0}, &Vector2f{ x: 6.0*lr, y: 0.0}, true) == 1)
+                ) ||
+                (
+                    (GroundModule::ray_check(boma, &Vector2f{ x: PostureModule::pos_x(boma)+((6.0+(check_dist*0.75))*lr), y: PostureModule::pos_y(boma)+10.0}, &Vector2f{ x: 6.0*lr, y: 0.0}, true) == 1)
+                ) ||
+                (
+                    (GroundModule::ray_check(boma, &Vector2f{ x: PostureModule::pos_x(boma)+((6.0+(check_dist*0.5))*lr), y: PostureModule::pos_y(boma)+10.0}, &Vector2f{ x: 6.0*lr, y: 0.0}, true) == 1)
+                ) ||
+                (
+                    (GroundModule::ray_check(boma, &Vector2f{ x: PostureModule::pos_x(boma)+((6.0+(check_dist*0.25))*lr), y: PostureModule::pos_y(boma)+10.0}, &Vector2f{ x: 6.0*lr, y: 0.0}, true) == 1)
+                ) ||
+                (
+                    (GroundModule::ray_check(boma, &Vector2f{ x: PostureModule::pos_x(boma)+((6.0+(check_dist*0.0))*lr), y: PostureModule::pos_y(boma)+10.0}, &Vector2f{ x: 6.0*lr, y: 0.0}, true) == 1)
+                )
+            ) && frame < 22.0 && frame > 13.0;
+            //println!("X:{}, Y:{}, Z:{}, is_wall:{}", joint.x, joint.y, joint.z, is_wall);
+            if is_wall {
+                DO_WALLJUMP_FORCE[ENTRY_ID] = true;
+            }
             if AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_ALL) || is_wall {
                 AttackModule::clear_all(fighter.module_accessor);
                 if situation_kind == *SITUATION_KIND_AIR {
@@ -1544,6 +1579,11 @@ fn rayman(fighter: &mut L2CFighterCommon) {
             }
             if GroundModule::is_wall_touch_line(boma, *GROUND_TOUCH_FLAG_SIDE as u32) {
                 StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_PASSIVE_WALL_JUMP, true);
+                CAN_NEUTRALB[ENTRY_ID] = 1;
+            }
+            if DO_WALLJUMP_FORCE[ENTRY_ID] {
+                let the_speed = smash::phx::Vector3f { x: 0.5, y: 0.0, z: 0.0 };
+                KineticModule::add_speed(boma, &the_speed);
             }
         };
         //Sideb
@@ -1580,6 +1620,7 @@ fn rayman(fighter: &mut L2CFighterCommon) {
         }
         if situation_kind != *SITUATION_KIND_AIR {
             CAN_SIDEB[ENTRY_ID] = 0;
+            CAN_NEUTRALB[ENTRY_ID] = 0;
         }
         //Slide Stuff
         if status_kind == *FIGHTER_STATUS_KIND_RUN_BRAKE {
@@ -1904,7 +1945,7 @@ pub fn install() {
 		rayman_dair, rayman_dair_eff,
 
         //Specials
-        rayman_neutralb,
+        rayman_neutralb, rayman_neutralb_eff,
         rayman_upb,
         rayman_sideb, rayman_sideb_eff,
 
