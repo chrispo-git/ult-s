@@ -252,7 +252,40 @@ unsafe fn isa_neutralb_hit(fighter: &mut L2CAgentBase) {
 					AttackModule::enable_safe_pos(fighter.module_accessor);
 				}
 			};
-	};
+	} else {
+		ModelModule::set_mesh_visibility(fighter.module_accessor,Hash40::new("furniture02"),false);
+		ModelModule::set_mesh_visibility(fighter.module_accessor,Hash40::new("furniture03"),false);
+		ModelModule::set_mesh_visibility(fighter.module_accessor,Hash40::new("furniture06"),false);
+		ModelModule::set_mesh_visibility(fighter.module_accessor,Hash40::new("furniture08"),false);
+		ModelModule::set_mesh_visibility(fighter.module_accessor,Hash40::new("furniture10"),false);
+		ModelModule::set_mesh_visibility(fighter.module_accessor,Hash40::new("furniture12"),false);
+		ModelModule::set_mesh_visibility(fighter.module_accessor,Hash40::new("furniture13"),false);
+		ModelModule::set_mesh_visibility(fighter.module_accessor,Hash40::new("furniture15"),false);
+		ModelModule::set_mesh_visibility(fighter.module_accessor,Hash40::new("furniture16"),false);
+		ModelModule::set_mesh_visibility(fighter.module_accessor,Hash40::new("furniture17"),false);
+		ModelModule::set_mesh_visibility(fighter.module_accessor,Hash40::new("furniture18"),false);
+		ModelModule::set_mesh_visibility(fighter.module_accessor,Hash40::new("furniture19"),false);
+		ModelModule::set_mesh_visibility(fighter.module_accessor,Hash40::new("furniture21"),false);
+		ModelModule::set_mesh_visibility(fighter.module_accessor,Hash40::new("furniture22"),false);
+		ModelModule::set_mesh_visibility(fighter.module_accessor,Hash40::new("furniture23"),false);
+		ModelModule::set_mesh_visibility(fighter.module_accessor,Hash40::new("furniture24"),false);
+		ModelModule::set_mesh_visibility(fighter.module_accessor,Hash40::new("furniture25"),false);
+		MotionModule::change_motion(fighter.module_accessor, Hash40::new("item_1"), 0.0, 1.0, false, 0.0, false, false);
+		ModelModule::set_mesh_visibility(fighter.module_accessor,Hash40::new("furniture01"),true); //Photo
+
+		ModelModule::set_mesh_visibility(fighter.module_accessor,Hash40::new("furniture05"),false);
+		ModelModule::set_mesh_visibility(fighter.module_accessor,Hash40::new("furniture04"),false);
+		ModelModule::set_mesh_visibility(fighter.module_accessor,Hash40::new("furniture07"),false);
+		ModelModule::set_mesh_visibility(fighter.module_accessor,Hash40::new("furniture09"),false);
+		ModelModule::set_mesh_visibility(fighter.module_accessor,Hash40::new("furniture11"),false);
+		ModelModule::set_mesh_visibility(fighter.module_accessor,Hash40::new("furniture20"),false);
+		ModelModule::set_mesh_visibility(fighter.module_accessor,Hash40::new("furniture14"),false);
+		if macros::is_excute(fighter) {
+			macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("rot"), /*Damage*/ 6.0, /*Angle*/ 80, /*KBG*/ 50, /*FKB*/ 0, /*BKB*/ 40, /*Size*/ 3.0, /*X*/ 0.0, /*Y*/ 2.5, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ -2, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ true, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_OBJECT);
+			AttackModule::enable_safe_pos(fighter.module_accessor);
+		}
+		
+	}
 }
 #[acmd_script(
     agent = "shizue",
