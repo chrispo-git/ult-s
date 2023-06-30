@@ -11,6 +11,73 @@ use smash::lib::{L2CValue, L2CAgent};
 use std::mem;
 use smash::app::*;
 use crate::util::*;
+static mut HYDRANT_POS_X : [f32; 8] = [0.0; 8];
+static mut HYDRANT_POS_Y : [f32; 8] = [0.0; 8];
+static mut TRAMPOLINE_POS_X : [f32; 8] = [0.0; 8];
+static mut TRAMPOLINE_POS_Y : [f32; 8] = [0.0; 8];
+
+#[fighter_frame( agent = FIGHTER_KIND_PACMAN )]
+fn pacman_frame(fighter: &mut L2CFighterCommon) {
+    unsafe {
+        let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
+		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
+		let motion_kind = MotionModule::motion_kind(boma);
+		let frame = MotionModule::frame(boma);
+		let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+		let situation_kind = StatusModule::situation_kind(boma);
+		if smash::app::sv_information::is_ready_go() == false {
+			HYDRANT_POS_X[ENTRY_ID] = 0.0;
+			HYDRANT_POS_Y[ENTRY_ID] = 0.0;
+			TRAMPOLINE_POS_X[ENTRY_ID] = 0.0;
+			TRAMPOLINE_POS_Y[ENTRY_ID] = 0.0;
+		};
+		if !ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_PACMAN_GENERATE_ARTICLE_FIREHYDRANT) {
+			HYDRANT_POS_X[ENTRY_ID] = 0.0;
+			HYDRANT_POS_Y[ENTRY_ID] = 0.0;
+		}
+		if !ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_PACMAN_GENERATE_ARTICLE_TRAMPOLINE) {
+			TRAMPOLINE_POS_X[ENTRY_ID] = 0.0;
+			TRAMPOLINE_POS_Y[ENTRY_ID] = 0.0;
+		}
+	}
+}
+#[weapon_frame( agent = WEAPON_KIND_PACMAN_FIREHYDRANT )]
+fn hydrant_frame(weapon: &mut L2CFighterBase) {
+    unsafe {
+        let otarget_id = WorkModule::get_int(weapon.module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LINK_OWNER) as u32;
+        let boma = smash::app::sv_battle_object::module_accessor(otarget_id);
+		let status_kind = smash::app::lua_bind::StatusModule::status_kind(weapon.module_accessor);
+		let ENTRY_ID = WorkModule::get_int(&mut *boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+        if smash::app::utility::get_kind(&mut *boma) == *FIGHTER_KIND_PACMAN {
+			HYDRANT_POS_X[ENTRY_ID] = PostureModule::pos_x(weapon.module_accessor);
+			HYDRANT_POS_Y[ENTRY_ID] = PostureModule::pos_y(weapon.module_accessor);
+			if (HYDRANT_POS_X[ENTRY_ID]  - TRAMPOLINE_POS_X[ENTRY_ID] < 5.0) &&
+				(HYDRANT_POS_Y[ENTRY_ID]  - TRAMPOLINE_POS_Y[ENTRY_ID] < 3.0) &&
+				[*WEAPON_PACMAN_FIREHYDRANT_KIND_FALL, *WEAPON_PACMAN_FIREHYDRANT_KIND_WAIT, *WEAPON_PACMAN_FIREHYDRANT_KIND_APPEAR].contains(&status_kind) {
+					StatusModule::change_status_request_from_script(weapon.module_accessor, *WEAPON_PACMAN_FIREHYDRANT_STATUS_KIND_FLY, false);
+					macros::SET_SPEED_EX(weapon, 0.0, 1.5, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+			}
+		};
+    }
+}
+#[weapon_frame( agent = WEAPON_KIND_PACMAN_TRAMPOLINE )]
+fn trampoline_frame(weapon: &mut L2CFighterBase) {
+    unsafe {
+        let otarget_id = WorkModule::get_int(weapon.module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LINK_OWNER) as u32;
+        let boma = smash::app::sv_battle_object::module_accessor(otarget_id);
+		let ENTRY_ID = WorkModule::get_int(&mut *boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+        if smash::app::utility::get_kind(&mut *boma) == *FIGHTER_KIND_PACMAN {
+			TRAMPOLINE_POS_X[ENTRY_ID] = PostureModule::pos_x(weapon.module_accessor);
+			TRAMPOLINE_POS_Y[ENTRY_ID] = PostureModule::pos_y(weapon.module_accessor);
+			if (HYDRANT_POS_X[ENTRY_ID]  - TRAMPOLINE_POS_X[ENTRY_ID] < 5.0) &&
+				(HYDRANT_POS_Y[ENTRY_ID]  - TRAMPOLINE_POS_Y[ENTRY_ID] < 3.0) &&
+				[*WEAPON_PACMAN_TRAMPOLINE_STATUS_KIND_WAIT].contains(&status_kind) {
+					StatusModule::change_status_request_from_script(weapon.module_accessor, *WEAPON_PACMAN_TRAMPOLINE_STATUS_KIND_SHAKE, false);
+			}
+			
+		};
+    }
+}
 
 #[acmd_script( agent = "pacman", 
 script = "game_attackhi3", 
@@ -146,4 +213,9 @@ pub fn install() {
 		pac_jab3,
 		pac_uair
 	);
+    smashline::install_agent_frames!(
+        pacman_frame,
+		hydrant_frame,
+		trampoline_frame  
+    );
 }
