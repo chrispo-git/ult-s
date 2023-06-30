@@ -53,6 +53,7 @@ fn hydrant_frame(weapon: &mut L2CFighterBase) {
 			HYDRANT_POS_Y[ENTRY_ID] = PostureModule::pos_y(weapon.module_accessor);
 			if (HYDRANT_POS_X[ENTRY_ID]  - TRAMPOLINE_POS_X[ENTRY_ID] < 5.0) &&
 				(HYDRANT_POS_Y[ENTRY_ID]  - TRAMPOLINE_POS_Y[ENTRY_ID] < 3.0) &&
+				ArticleModule::is_exist(&mut *boma, *FIGHTER_PACMAN_GENERATE_ARTICLE_TRAMPOLINE) &&
 				[*WEAPON_PACMAN_FIREHYDRANT_STATUS_KIND_FALL, *WEAPON_PACMAN_FIREHYDRANT_STATUS_KIND_WAIT, *WEAPON_PACMAN_FIREHYDRANT_STATUS_KIND_APPEAR].contains(&status_kind) {
 					StatusModule::change_status_request_from_script(weapon.module_accessor, *WEAPON_PACMAN_FIREHYDRANT_STATUS_KIND_FLY, false);
 					macros::SET_SPEED_EX(weapon, 0.0, 1.5, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
@@ -72,6 +73,7 @@ fn trampoline_frame(weapon: &mut L2CFighterBase) {
 			TRAMPOLINE_POS_Y[ENTRY_ID] = PostureModule::pos_y(weapon.module_accessor);
 			if (HYDRANT_POS_X[ENTRY_ID]  - TRAMPOLINE_POS_X[ENTRY_ID] < 5.0) &&
 				(HYDRANT_POS_Y[ENTRY_ID]  - TRAMPOLINE_POS_Y[ENTRY_ID] < 3.0) &&
+				ArticleModule::is_exist(&mut *boma, *FIGHTER_PACMAN_GENERATE_ARTICLE_FIREHYDRANT) &&
 				[*WEAPON_PACMAN_TRAMPOLINE_STATUS_KIND_WAIT].contains(&status_kind) {
 					StatusModule::change_status_request_from_script(weapon.module_accessor, *WEAPON_PACMAN_TRAMPOLINE_STATUS_KIND_SHAKE, false);
 			}
