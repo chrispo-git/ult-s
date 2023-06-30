@@ -152,7 +152,7 @@ unsafe fn rayman_jab_3_eff(fighter: &mut L2CAgentBase) {
 unsafe fn rayman_jab_3_snd(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 4.0);
     if macros::is_excute(agent) {
-        macros::PLAY_SE(agent, Hash40::new("se_pikmin_smash_s06"));
+        macros::PLAY_SE(agent, Hash40::new("se_common_swing_04"));
         attack_vc(agent);
     }
 }
@@ -207,7 +207,7 @@ unsafe fn rayman_fair_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	frame(fighter.lua_state_agent, 11.0);
     if macros::is_excute(fighter) {
-        macros::PLAY_SE(fighter, Hash40::new("se_pikmin_smash_h02"));
+        macros::PLAY_SE(fighter, Hash40::new("se_common_sword_swing_m"));
         attack_vc(fighter);
     }
 }
@@ -328,7 +328,7 @@ unsafe fn rayman_bair_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	frame(fighter.lua_state_agent, 16.0);
     if macros::is_excute(fighter) {
-        macros::PLAY_SE(fighter, Hash40::new("se_pikmin_smash_h03"));
+        macros::PLAY_SE(fighter, Hash40::new("se_common_swing_08"));
         attack_vc(fighter);
     }
 }
@@ -647,7 +647,7 @@ unsafe fn rayman_dsmash_snd(agent: &mut L2CAgentBase) {
     if macros::is_excute(agent) {
         macros::STOP_SE(agent, Hash40::new("se_common_smash_start_04"));
     }
-    frame(agent.lua_state_agent, 17.0);
+    frame(agent.lua_state_agent, 15.0);
     if macros::is_excute(agent) {
         macros::PLAY_SE(agent, Hash40::new("se_pikmin_smash_h01"));
         attack_vc(agent);
@@ -664,7 +664,7 @@ unsafe fn rayman_fsmash_snd(agent: &mut L2CAgentBase) {
     if macros::is_excute(agent) {
         macros::STOP_SE(agent, Hash40::new("se_common_smash_start_04"));
         macros::PLAY_SE(agent, Hash40::new("se_pikmin_smash_s01"));
-    
+        macros::PLAY_SE(agent, Hash40::new("se_common_smashswing_04"));
     }
 }
 #[acmd_script( agent = "pikmin", script = "sound_attackhi4", category = ACMD_SOUND, low_priority )]
@@ -675,7 +675,7 @@ unsafe fn rayman_usmash_snd(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 9.0);
     if macros::is_excute(agent) {
         macros::STOP_SE(agent, Hash40::new("se_common_smash_start_04"));
-        macros::PLAY_SE(agent, Hash40::new("se_pikmin_smash_h02"));
+        macros::PLAY_SE(agent, Hash40::new("se_common_swing_07"));
         attack_vc(agent);
     }
 }
@@ -817,12 +817,13 @@ unsafe fn rayman_da_eff(fighter: &mut L2CAgentBase) {
 }
 #[acmd_script( agent = "pikmin", script = "sound_attackdash", category = ACMD_SOUND, low_priority )]
 unsafe fn rayman_da_snd(agent: &mut L2CAgentBase) {
-    frame(agent.lua_state_agent, 8.0);
+    frame(agent.lua_state_agent, 3.0);
     if macros::is_excute(agent) {
-        macros::PLAY_SE(agent, Hash40::new("se_pikmin_smash_s02"));
+        macros::PLAY_SE(agent, Hash40::new("se_common_swing_04"));
     }
-    wait(agent.lua_state_agent, 1.0);
+    frame(agent.lua_state_agent, 6.0);
     if macros::is_excute(agent) {
+        macros::PLAY_SE(agent, Hash40::new("se_common_swing_05"));
         attack_vc(agent);
     }
 }
@@ -1034,8 +1035,11 @@ unsafe fn rayman_upb_eff(fighter: &mut L2CAgentBase) {
 	low_priority)]
 unsafe fn rayman_upb_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
-    if macros::is_excute(fighter) {
-        macros::PLAY_SE(fighter, Hash40::new("se_pikmin_special_l03"));
+    for _ in 0..i32::MAX {
+        if macros::is_excute(fighter) {
+            macros::PLAY_SE(fighter, Hash40::new("se_pikmin_special_l03"));
+        }
+        wait(fighter.lua_state_agent, 13.0);
     }
 }	
 #[acmd_script( 
@@ -1440,7 +1444,7 @@ unsafe fn rayman_utaunt_eff(fighter: &mut L2CAgentBase) {
 }
 #[acmd_script( agent = "pikmin", scripts = ["sound_appealhil","sound_appealhir"], category = ACMD_SOUND, low_priority )]
 unsafe fn rayman_utaunt_snd(agent: &mut L2CAgentBase) {
-    frame(agent.lua_state_agent, 5.0);
+    frame(agent.lua_state_agent, 15.0);
     if macros::is_excute(agent) {
         macros::PLAY_SE(agent, Hash40::new("se_pikmin_appeal_h01"));
     }
@@ -2024,7 +2028,7 @@ fn rayman(fighter: &mut L2CFighterCommon) {
             if is_wall {
                 DO_WALLJUMP_FORCE[ENTRY_ID] = true;
             }
-            if AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_ALL) || is_wall {
+            if AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_HIT) || is_wall {
                 AttackModule::clear_all(fighter.module_accessor);
                 if situation_kind == *SITUATION_KIND_AIR {
                     MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_air_n_pull"), into_frame, 0.75, false, 0.0, false, false);
