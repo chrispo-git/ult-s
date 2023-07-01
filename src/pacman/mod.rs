@@ -43,9 +43,12 @@ fn pacman_frame(fighter: &mut L2CFighterCommon) {
 			TRAMPOLINE_DELETE_TIMER[ENTRY_ID] = 0;
 		}
 		if TRAMPOLINE_DELETE_TIMER[ENTRY_ID] > 0 {
-			TRAMPOLINE_DELETE_TIMER[ENTRY_ID] -= 1;
+			TRAMPOLINE_DELETE_TIMER[ENTRY_ID] -= 1; 
 		}
-		println!("Jump num: {}", WorkModule::get_int(boma, *FIGHTER_PACMAN_INSTANCE_WORK_ID_INT_SPECIAL_HI_JUMP_NUM));
+		if WorkModule::get_int(boma, *FIGHTER_PACMAN_INSTANCE_WORK_ID_INT_SPECIAL_HI_JUMP_NUM) == 0 && status_kind == *FIGHTER_PACMAN_STATUS_KIND_SPECIAL_HI_LOOP && frame > 25.0{
+			StatusModule::change_status_request_from_script(boma, *FIGHTER_PACMAN_STATUS_KIND_SPECIAL_S_RETURN, false);
+		}
+		//println!("Jump num: {}", WorkModule::get_int(boma, *FIGHTER_PACMAN_INSTANCE_WORK_ID_INT_SPECIAL_HI_JUMP_NUM));
 		//println!("Hydrant [{}, {}] Trampoline [{}, {}]", HYDRANT_POS_X[ENTRY_ID], HYDRANT_POS_Y[ENTRY_ID], TRAMPOLINE_POS_X[ENTRY_ID], TRAMPOLINE_POS_Y[ENTRY_ID]);
 	}
 }
