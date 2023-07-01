@@ -276,11 +276,19 @@ unsafe fn ryu_shinsue(fighter: &mut L2CAgentBase) {
 	low_priority)]
 unsafe fn ryu_shinsu_hadou(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
+	let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);  
+	let fighter_kind = smash::app::utility::get_kind(boma);
 		wait(fighter.lua_state_agent, 1.0);
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.916);
 		frame(fighter.lua_state_agent, 10.0);
 		if macros::is_excute(fighter) {
 			WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_RYU_STATUS_WORK_ID_SPECIAL_N_FLAG_SPECIAL_FALL);
+		}
+		frame(fighter.lua_state_agent, 13.0);
+		if macros::is_excute(fighter) {
+			if fighter_kind != *FIGHTER_KIND_RYU {
+				WorkModule::on_flag(boma, *FIGHTER_RYU_STATUS_WORK_ID_SPECIAL_N_FLAG_SHOOT);
+			}
 		}
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 1);
 		frame(fighter.lua_state_agent, 14.0);
@@ -303,11 +311,19 @@ unsafe fn ryu_shinsu_hadou(fighter: &mut L2CAgentBase) {
 	low_priority)]
 unsafe fn ryu_shinsu_hadou_air(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
+	let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);  
+	let fighter_kind = smash::app::utility::get_kind(boma);
 		wait(fighter.lua_state_agent, 1.0);
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.916);
 		frame(fighter.lua_state_agent, 10.0);
 		if macros::is_excute(fighter) {
 			WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_RYU_STATUS_WORK_ID_SPECIAL_N_FLAG_SPECIAL_FALL);
+		}
+		frame(fighter.lua_state_agent, 13.0);
+		if macros::is_excute(fighter) {
+			if fighter_kind != *FIGHTER_KIND_RYU {
+				WorkModule::on_flag(boma, *FIGHTER_RYU_STATUS_WORK_ID_SPECIAL_N_FLAG_SHOOT);
+			}
 		}
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 1);
 		frame(fighter.lua_state_agent, 14.0);

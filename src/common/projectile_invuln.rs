@@ -56,6 +56,13 @@ pub fn projectile_invuln_master(fighter : &mut L2CFighterCommon) {
 			if [hash40("special_s1"), hash40("special_air_s1")].contains(&MotionModule::motion_kind(boma)){
 					shield!(fighter, *MA_MSC_CMD_REFLECTOR, *COLLISION_KIND_REFLECTOR, 0, hash40("top"), /*Size*/ 8.0, /*X*/ 0.0, /*Y*/ 12.0, /*Z*/ 6.0, /*X2*/ 0.0, /*Y2*/ 3.5, /*Z2*/ 6.0, /*Power*/ dmg_mul, /*Speed*/ speed_mul, /*Max Damage*/ reflector_max, false, /*Lifetime*/ life_mul, *FIGHTER_REFLECTOR_GROUP_HOMERUNBAT);
 			};
+			if [hash40("special_lw3"), hash40("special_air_lw3")].contains(&MotionModule::motion_kind(boma)) {
+                if MotionModule::frame(boma) >= 8.0 && MotionModule::frame(boma) < 32.0 {
+                    shield!(fighter, *MA_MSC_CMD_REFLECTOR, *COLLISION_KIND_REFLECTOR, 0, hash40("haver"), /*Size*/ 9.0, /*X*/ 0.0, /*Y*/ 3.8, /*Z*/ 0.0, /*X2*/ 7.0, /*Y2*/ 0.0, /*Z2*/ 0.0, /*Power*/ dmg_mul, /*Speed*/ speed_mul, /*Max Damage*/ reflector_max, false, /*Lifetime*/ life_mul, *FIGHTER_REFLECTOR_GROUP_HOMERUNBAT);
+                } else {
+                    shield!(fighter, *MA_MSC_CMD_SHIELD_OFF, *COLLISION_KIND_REFLECTOR, 0, *FIGHTER_REFLECTOR_GROUP_HOMERUNBAT);
+                };
+            };
 		}else if fighter_kind == *FIGHTER_KIND_MIIGUNNER {
 			if [hash40("attack_dash")].contains(&MotionModule::motion_kind(boma)) {
 				if MotionModule::frame(boma) >= 8.0 && MotionModule::frame(boma) < 16.0 {

@@ -359,8 +359,9 @@ pub fn mk(fighter : &mut L2CFighterCommon) {
 			if [hash40("attack_air_lw")].contains(&MotionModule::motion_kind(boma)) {
 				if AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_ALL) && !AttackModule::is_infliction(boma, *COLLISION_KIND_MASK_ALL) && MotionModule::frame(boma) < 37.0{
 					KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_JUMP);
-					if AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_HIT) {
-						MotionModule::set_frame_sync_anim_cmd(boma, 38.0, true, true, false);
+					MotionModule::set_frame_sync_anim_cmd(boma, 38.0, true, true, false);
+					if !AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_HIT) {
+						MotionModule::set_rate(boma, 0.5);
 					};
 				};
 			};
