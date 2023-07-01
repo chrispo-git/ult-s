@@ -15,6 +15,7 @@ static mut HYDRANT_POS_X : [f32; 8] = [0.0; 8];
 static mut HYDRANT_POS_Y : [f32; 8] = [0.0; 8];
 static mut TRAMPOLINE_POS_X : [f32; 8] = [0.0; 8];
 static mut TRAMPOLINE_POS_Y : [f32; 8] = [0.0; 8];
+static mut TRAMPOLINE_DELETE_TIMER : [i32; 8] = [0; 8];
 
 #[fighter_frame( agent = FIGHTER_KIND_PACMAN )]
 fn pacman_frame(fighter: &mut L2CFighterCommon) {
@@ -30,6 +31,7 @@ fn pacman_frame(fighter: &mut L2CFighterCommon) {
 			HYDRANT_POS_Y[ENTRY_ID] = 0.0;
 			TRAMPOLINE_POS_X[ENTRY_ID] = 0.0;
 			TRAMPOLINE_POS_Y[ENTRY_ID] = 0.0;
+			TRAMPOLINE_DELETE_TIMER[ENTRY_ID] = 0;
 		};
 		if !ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_PACMAN_GENERATE_ARTICLE_FIREHYDRANT) {
 			HYDRANT_POS_X[ENTRY_ID] = 0.0;
@@ -38,7 +40,13 @@ fn pacman_frame(fighter: &mut L2CFighterCommon) {
 		if !ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_PACMAN_GENERATE_ARTICLE_TRAMPOLINE) {
 			TRAMPOLINE_POS_X[ENTRY_ID] = 0.0;
 			TRAMPOLINE_POS_Y[ENTRY_ID] = 0.0;
+			TRAMPOLINE_DELETE_TIMER[ENTRY_ID] = 0;
 		}
+		if TRAMPOLINE_DELETE_TIMER[ENTRY_ID] > 0 {
+			TRAMPOLINE_DELETE_TIMER[ENTRY_ID] -= 1;
+		}
+		println!("Jump num: {}", WorkModule::get_int(boma, *FIGHTER_PACMAN_INSTANCE_WORK_ID_INT_SPECIAL_HI_JUMP_NUM));
+		//println!("Hydrant [{}, {}] Trampoline [{}, {}]", HYDRANT_POS_X[ENTRY_ID], HYDRANT_POS_Y[ENTRY_ID], TRAMPOLINE_POS_X[ENTRY_ID], TRAMPOLINE_POS_Y[ENTRY_ID]);
 	}
 }
 #[weapon_frame( agent = WEAPON_KIND_PACMAN_FIREHYDRANT )]
@@ -49,14 +57,24 @@ fn hydrant_frame(weapon: &mut L2CFighterBase) {
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(weapon.module_accessor);
 		let ENTRY_ID = WorkModule::get_int(&mut *boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
         if smash::app::utility::get_kind(&mut *boma) == *FIGHTER_KIND_PACMAN {
+			let mut offset = 6.0; //Allows Trampoline to bounce standing hydrant while keeping the falling hydrant accurate
+			if KineticModule::get_sum_speed_y(weapon.module_accessor, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN) < 0.0 {
+				offset = 0.0;
+			}
 			HYDRANT_POS_X[ENTRY_ID] = PostureModule::pos_x(weapon.module_accessor);
-			HYDRANT_POS_Y[ENTRY_ID] = PostureModule::pos_y(weapon.module_accessor);
-			if (HYDRANT_POS_X[ENTRY_ID]  - TRAMPOLINE_POS_X[ENTRY_ID] < 5.0) &&
-				(HYDRANT_POS_Y[ENTRY_ID]  - TRAMPOLINE_POS_Y[ENTRY_ID] < 3.0) &&
-				ArticleModule::is_exist(&mut *boma, *FIGHTER_PACMAN_GENERATE_ARTICLE_TRAMPOLINE) &&
-				[*WEAPON_PACMAN_FIREHYDRANT_STATUS_KIND_FALL, *WEAPON_PACMAN_FIREHYDRANT_STATUS_KIND_WAIT, *WEAPON_PACMAN_FIREHYDRANT_STATUS_KIND_APPEAR].contains(&status_kind) {
-					StatusModule::change_status_request_from_script(weapon.module_accessor, *WEAPON_PACMAN_FIREHYDRANT_STATUS_KIND_FLY, false);
-					macros::SET_SPEED_EX(weapon, 0.0, 1.5, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+			HYDRANT_POS_Y[ENTRY_ID] = PostureModule::pos_y(weapon.module_accessor) + offset;
+			if ((HYDRANT_POS_X[ENTRY_ID]  - TRAMPOLINE_POS_X[ENTRY_ID]).abs() < 11.0) &&
+				((HYDRANT_POS_Y[ENTRY_ID]  - TRAMPOLINE_POS_Y[ENTRY_ID]).abs() < 3.0) &&
+				(ArticleModule::is_exist(&mut *boma, *FIGHTER_PACMAN_GENERATE_ARTICLE_TRAMPOLINE) && TRAMPOLINE_POS_Y[ENTRY_ID] != 0.0)  {
+					if status_kind != *WEAPON_PACMAN_FIREHYDRANT_STATUS_KIND_FLY {
+						StatusModule::change_status_request_from_script(weapon.module_accessor, *WEAPON_PACMAN_FIREHYDRANT_STATUS_KIND_FLY, false);
+						macros::SET_SPEED_EX(weapon, 0.0, 1.5, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+						WorkModule::on_flag(weapon.module_accessor, *WEAPON_PACMAN_FIREHYDRANT_INSTANCE_WORK_ID_FLAG_HIT);
+					} else if KineticModule::get_sum_speed_y(weapon.module_accessor, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN) < 0.0 {
+						StatusModule::change_status_request_from_script(weapon.module_accessor, *WEAPON_PACMAN_FIREHYDRANT_STATUS_KIND_FLY, false);
+						macros::SET_SPEED_EX(weapon, 0.0, 1.2, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+						WorkModule::on_flag(weapon.module_accessor, *WEAPON_PACMAN_FIREHYDRANT_INSTANCE_WORK_ID_FLAG_HIT);
+					}
 			}
 		};
     }
@@ -71,13 +89,16 @@ fn trampoline_frame(weapon: &mut L2CFighterBase) {
         if smash::app::utility::get_kind(&mut *boma) == *FIGHTER_KIND_PACMAN {
 			TRAMPOLINE_POS_X[ENTRY_ID] = PostureModule::pos_x(weapon.module_accessor);
 			TRAMPOLINE_POS_Y[ENTRY_ID] = PostureModule::pos_y(weapon.module_accessor);
-			if (HYDRANT_POS_X[ENTRY_ID]  - TRAMPOLINE_POS_X[ENTRY_ID] < 5.0) &&
-				(HYDRANT_POS_Y[ENTRY_ID]  - TRAMPOLINE_POS_Y[ENTRY_ID] < 3.0) &&
-				ArticleModule::is_exist(&mut *boma, *FIGHTER_PACMAN_GENERATE_ARTICLE_FIREHYDRANT) &&
-				[*WEAPON_PACMAN_TRAMPOLINE_STATUS_KIND_WAIT].contains(&status_kind) {
+			if ((HYDRANT_POS_X[ENTRY_ID]  - TRAMPOLINE_POS_X[ENTRY_ID]).abs() < 11.0) &&
+				((HYDRANT_POS_Y[ENTRY_ID]  - TRAMPOLINE_POS_Y[ENTRY_ID]).abs() < 3.0) &&
+				(ArticleModule::is_exist(&mut *boma, *FIGHTER_PACMAN_GENERATE_ARTICLE_FIREHYDRANT) && HYDRANT_POS_Y[ENTRY_ID] != 0.0) &&
+				(![*WEAPON_PACMAN_TRAMPOLINE_STATUS_KIND_SHAKE, *WEAPON_PACMAN_TRAMPOLINE_STATUS_KIND_REMOVE].contains(&status_kind) || TRAMPOLINE_DELETE_TIMER[ENTRY_ID] == 0) {
 					StatusModule::change_status_request_from_script(weapon.module_accessor, *WEAPON_PACMAN_TRAMPOLINE_STATUS_KIND_SHAKE, false);
+					TRAMPOLINE_DELETE_TIMER[ENTRY_ID] = 30;
 			}
-			
+			if TRAMPOLINE_DELETE_TIMER[ENTRY_ID] == 1 {
+				StatusModule::change_status_request_from_script(weapon.module_accessor, *WEAPON_PACMAN_TRAMPOLINE_STATUS_KIND_REMOVE, false);
+			}
 		};
     }
 }
