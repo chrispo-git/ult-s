@@ -11,6 +11,10 @@ use smash::lib::{L2CValue, L2CAgent};
 use std::mem;
 use smash::app::*;
 use crate::util::*;
+static mut IS_BAIR : [bool; 8] = [false; 8];
+
+static mut BREATH_POS_X : [f32; 8] = [0.0; 8];
+static mut BREATH_POS_Y : [f32; 8] = [0.0; 8];
 #[acmd_script(
     agent = "packun",
     script =  "game_attackairlw",
@@ -197,6 +201,43 @@ unsafe fn plant_uair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }
+
+#[acmd_script(
+    agent = "packun_poisonbreath",
+    script =  "game_explode",
+    category = ACMD_GAME,
+	low_priority)]
+unsafe fn poison_explosion(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+	frame(fighter.lua_state_agent, 2.0);
+	if macros::is_excute(agent) {
+        macros::ATTACK(agent, 0, 0, Hash40::new("top"), 14.0, 361, 105, 0, 23, 5.0, 0.0, 0.0, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0.1, 0.0, 0, false, false, false, true, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_fire"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_ENERGY);
+        macros::ATTACK(agent, 1, 0, Hash40::new("top"), 13.0, 361, 105, 0, 23, 10.0, 0.0, 0.0, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0.1, 0.0, 0, false, false, false, true, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_fire"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_ENERGY);
+    }
+	wait(fighter.lua_state_agent, 3.0);
+	if macros::is_excute(fighter) {
+		AttackModule::clear_all(fighter.module_accessor);
+	}
+}	
+
+#[acmd_script(
+    agent = "packun_poisonbreath",
+    script =  "effect_explode",
+    category = ACMD_EFFECT,
+	low_priority)]
+unsafe fn poison_explosion_eff(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+	if macros::is_excute(agent) {
+		EffectModule::kill_kind(boma, smash::phx::Hash40::new("packun_poison_breath"), false, false);
+		EffectModule::kill_kind(boma, smash::phx::Hash40::new("packun_poison_breath2"), false, false);
+		EffectModule::kill_kind(boma, smash::phx::Hash40::new("packun_poison_gas"), false, false);
+		EffectModule::kill_kind(boma, smash::phx::Hash40::new("packun_poison_max"), false, false);
+		EffectModule::kill_kind(boma, smash::phx::Hash40::new("packun_poison_max_smoke"), false, false);
+		EffectModule::kill_kind(boma, smash::phx::Hash40::new("packun_poison_mouth"), false, false);
+		EffectModule::kill_kind(boma, smash::phx::Hash40::new("packun_poison_mouth2"), false, false);
+		macros::EFFECT(agent, Hash40::new("sys_flame"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.75, 0, 0, 0, 0, 0, 0, true);
+    }
+}	
 	
 pub fn install() {
     smashline::install_acmd_scripts!(
