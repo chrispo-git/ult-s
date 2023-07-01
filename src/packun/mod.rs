@@ -214,8 +214,9 @@ unsafe fn poison_explosion(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	frame(fighter.lua_state_agent, 2.0);
 	if macros::is_excute(fighter) {
-        macros::ATTACK(fighter, 0, 0, Hash40::new("top"), 14.0, 361, 105, 0, 23, 5.0, 0.0, 0.0, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0.1, 0.0, 0, false, false, false, true, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_fire"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_ENERGY);
-        macros::ATTACK(fighter, 1, 0, Hash40::new("top"), 13.0, 361, 105, 0, 23, 10.0, 0.0, 0.0, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0.1, 0.0, 0, false, false, false, true, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_fire"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_ENERGY);
+		AttackModule::clear_all(fighter.module_accessor);
+        macros::ATTACK(fighter, 0, 0, Hash40::new("top"), 7.0, 45, 150, 0, 45, 5.0, 0.0, 0.0, 0.0, None, None, None, 1.5, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0.1, 0.0, 0, false, false, false, true, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_fire"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_ENERGY);
+        macros::ATTACK(fighter, 1, 0, Hash40::new("top"), 5.0, 45, 176, 0, 45, 10.0, 0.0, 0.0, 0.0, None, None, None, 1.5, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0.1, 0.0, 0, false, false, false, true, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_fire"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_ENERGY);
     }
 	wait(fighter.lua_state_agent, 3.0);
 	if macros::is_excute(fighter) {
@@ -243,6 +244,18 @@ unsafe fn poison_explosion_eff(fighter: &mut L2CAgentBase) {
 		EffectModule::kill_kind(fighter.module_accessor, smash::phx::Hash40::new("packun_poison_mouth"), false, false);
 		EffectModule::kill_kind(fighter.module_accessor, smash::phx::Hash40::new("packun_poison_mouth2"), false, false);
 		macros::EFFECT(fighter, Hash40::new("sys_flame"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.75, 0, 0, 0, 0, 0, 0, true);
+		macros::LAST_EFFECT_SET_RATE(fighter, 0.7);
+    }
+}
+#[acmd_script(
+    agent = "packun_poisonbreath",
+    script =  "sound_explode",
+    category = ACMD_SOUND,
+	low_priority)]
+unsafe fn poison_explosion_snd(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+	if macros::is_excute(fighter) {
+		macros::PLAY_SE(fighter, Hash40::new("se_common_bomb_l"));
     }
 }
 #[fighter_frame( agent = FIGHTER_KIND_PACKUN )]
@@ -282,16 +295,19 @@ fn poison_frame(weapon: &mut L2CFighterBase) {
         if smash::app::utility::get_kind(&mut *boma) == *FIGHTER_KIND_PACKUN {
 			BREATH_POS_X[ENTRY_ID] = PostureModule::pos_x(weapon.module_accessor);
 			BREATH_POS_Y[ENTRY_ID] = PostureModule::pos_y(weapon.module_accessor);
+			let scale = PostureModule::scale(weapon.module_accessor);
 			let lr = PostureModule::lr(&mut *boma);
 			let pos_x = PostureModule::pos_x(&mut *boma)+(-11.0*lr);
 			let pos_y = PostureModule::pos_y(&mut *boma)+4.0;
-			if ((BREATH_POS_X[ENTRY_ID]  - pos_x).abs() < 6.0) &&
-				((BREATH_POS_Y[ENTRY_ID]  - pos_y).abs() < 6.0) &&
+			//println!("Breath Pos [{},{}] Plant Pos [{}, {}]", BREATH_POS_X[ENTRY_ID], BREATH_POS_Y[ENTRY_ID], pos_x, pos_y);
+			if ((BREATH_POS_X[ENTRY_ID]  - pos_x).abs() < 9.0*scale) &&
+				((BREATH_POS_Y[ENTRY_ID]  - pos_y).abs() < 9.0*scale) &&
 				BREATH_POS_Y[ENTRY_ID] != 0.0 && 
 				IS_BAIR[ENTRY_ID] &&
 				motion_kind != hash40("explode")
 				{
-					MotionModule::change_motion(boma, Hash40::new("explode"), 0.0, 1.0, false, 0.0, false, false);
+					//println!("Woo!");
+					MotionModule::change_motion(weapon.module_accessor, Hash40::new("explode"), 0.0, 1.0, false, 0.0, false, false);
 			}
 		};
     }
@@ -306,7 +322,8 @@ pub fn install() {
 		plant_uair,
 		plant_dair,
 		poison_explosion,
-		poison_explosion_eff
+		poison_explosion_eff,
+		poison_explosion_snd
     );
     smashline::install_agent_frames!(
         plant_frame,
