@@ -84,6 +84,7 @@ unsafe fn plant_nair(fighter: &mut L2CAgentBase) {
 	low_priority)]
 unsafe fn plant_bair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
+	let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
 		frame(fighter.lua_state_agent, 5.0);
 		if macros::is_excute(fighter) {
@@ -93,10 +94,12 @@ unsafe fn plant_bair(fighter: &mut L2CAgentBase) {
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 1);
 		frame(fighter.lua_state_agent, 14.0);
 		if macros::is_excute(fighter) {
+			IS_BAIR[ENTRY_ID] = true;
 			macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 14.5, /*Angle*/ 361, /*KBG*/ 105, /*FKB*/ 0, /*BKB*/ 23, /*Size*/ 12.0, /*X*/ 0.0, /*Y*/ 4.0, /*Z*/ -10.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_B, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_fire"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_FIRE, /*Type*/ *ATTACK_REGION_BOMB);
 		}
 		wait(fighter.lua_state_agent, 2.0);
 		if macros::is_excute(fighter) {
+			IS_BAIR[ENTRY_ID] = false;
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 		frame(fighter.lua_state_agent, 43.0);
@@ -210,13 +213,17 @@ unsafe fn plant_uair(fighter: &mut L2CAgentBase) {
 unsafe fn poison_explosion(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	frame(fighter.lua_state_agent, 2.0);
-	if macros::is_excute(agent) {
-        macros::ATTACK(agent, 0, 0, Hash40::new("top"), 14.0, 361, 105, 0, 23, 5.0, 0.0, 0.0, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0.1, 0.0, 0, false, false, false, true, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_fire"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_ENERGY);
-        macros::ATTACK(agent, 1, 0, Hash40::new("top"), 13.0, 361, 105, 0, 23, 10.0, 0.0, 0.0, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0.1, 0.0, 0, false, false, false, true, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_fire"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_ENERGY);
+	if macros::is_excute(fighter) {
+        macros::ATTACK(fighter, 0, 0, Hash40::new("top"), 14.0, 361, 105, 0, 23, 5.0, 0.0, 0.0, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0.1, 0.0, 0, false, false, false, true, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_fire"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_ENERGY);
+        macros::ATTACK(fighter, 1, 0, Hash40::new("top"), 13.0, 361, 105, 0, 23, 10.0, 0.0, 0.0, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0.1, 0.0, 0, false, false, false, true, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_fire"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_ENERGY);
     }
 	wait(fighter.lua_state_agent, 3.0);
 	if macros::is_excute(fighter) {
 		AttackModule::clear_all(fighter.module_accessor);
+	}
+	frame(fighter.lua_state_agent, 15.0);
+	if macros::is_excute(fighter) {
+		WorkModule::set_int(fighter.module_accessor, 1, *WEAPON_INSTANCE_WORK_ID_INT_LIFE);
 	}
 }	
 
@@ -227,15 +234,66 @@ unsafe fn poison_explosion(fighter: &mut L2CAgentBase) {
 	low_priority)]
 unsafe fn poison_explosion_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
-	if macros::is_excute(agent) {
-		EffectModule::kill_kind(boma, smash::phx::Hash40::new("packun_poison_breath"), false, false);
-		EffectModule::kill_kind(boma, smash::phx::Hash40::new("packun_poison_breath2"), false, false);
-		EffectModule::kill_kind(boma, smash::phx::Hash40::new("packun_poison_gas"), false, false);
-		EffectModule::kill_kind(boma, smash::phx::Hash40::new("packun_poison_max"), false, false);
-		EffectModule::kill_kind(boma, smash::phx::Hash40::new("packun_poison_max_smoke"), false, false);
-		EffectModule::kill_kind(boma, smash::phx::Hash40::new("packun_poison_mouth"), false, false);
-		EffectModule::kill_kind(boma, smash::phx::Hash40::new("packun_poison_mouth2"), false, false);
-		macros::EFFECT(agent, Hash40::new("sys_flame"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.75, 0, 0, 0, 0, 0, 0, true);
+	if macros::is_excute(fighter) {
+		EffectModule::kill_kind(fighter.module_accessor, smash::phx::Hash40::new("packun_poison_breath"), false, false);
+		EffectModule::kill_kind(fighter.module_accessor, smash::phx::Hash40::new("packun_poison_breath2"), false, false);
+		EffectModule::kill_kind(fighter.module_accessor, smash::phx::Hash40::new("packun_poison_gas"), false, false);
+		EffectModule::kill_kind(fighter.module_accessor, smash::phx::Hash40::new("packun_poison_max"), false, false);
+		EffectModule::kill_kind(fighter.module_accessor, smash::phx::Hash40::new("packun_poison_max_smoke"), false, false);
+		EffectModule::kill_kind(fighter.module_accessor, smash::phx::Hash40::new("packun_poison_mouth"), false, false);
+		EffectModule::kill_kind(fighter.module_accessor, smash::phx::Hash40::new("packun_poison_mouth2"), false, false);
+		macros::EFFECT(fighter, Hash40::new("sys_flame"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.75, 0, 0, 0, 0, 0, 0, true);
+    }
+}
+#[fighter_frame( agent = FIGHTER_KIND_PACKUN )]
+fn plant_frame(fighter: &mut L2CFighterCommon) {
+    unsafe {
+        let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
+		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
+		let motion_kind = MotionModule::motion_kind(boma);
+		let frame = MotionModule::frame(boma);
+		let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+		let situation_kind = StatusModule::situation_kind(boma);
+		let end_frame = MotionModule::end_frame(boma);
+		let cancel_frame = FighterMotionModuleImpl::get_cancel_frame(boma,smash::phx::Hash40::new_raw(MotionModule::motion_kind(boma)),false) as f32;
+		if smash::app::sv_information::is_ready_go() == false {
+			BREATH_POS_X[ENTRY_ID] = 0.0;
+			BREATH_POS_Y[ENTRY_ID] = 0.0;
+			IS_BAIR[ENTRY_ID] = false;
+		};
+		if !ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_PACKUN_GENERATE_ARTICLE_POISONBREATH) {
+			BREATH_POS_X[ENTRY_ID] = 0.0;
+			BREATH_POS_Y[ENTRY_ID] = 0.0;
+		}
+		if motion_kind != hash40("attack_air_b") {
+			IS_BAIR[ENTRY_ID] = false;
+		}
+	}
+}
+#[weapon_frame( agent = WEAPON_KIND_PACKUN_POISONBREATH )]
+fn poison_frame(weapon: &mut L2CFighterBase) {
+    unsafe {
+        let otarget_id = WorkModule::get_int(weapon.module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LINK_OWNER) as u32;
+        let boma = smash::app::sv_battle_object::module_accessor(otarget_id);
+		let status_kind = smash::app::lua_bind::StatusModule::status_kind(weapon.module_accessor);
+		let motion_kind = MotionModule::motion_kind(weapon.module_accessor);
+		let parent_motion_kind = MotionModule::motion_kind(&mut *boma);
+		let ENTRY_ID = WorkModule::get_int(&mut *boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+        if smash::app::utility::get_kind(&mut *boma) == *FIGHTER_KIND_PACKUN {
+			BREATH_POS_X[ENTRY_ID] = PostureModule::pos_x(weapon.module_accessor);
+			BREATH_POS_Y[ENTRY_ID] = PostureModule::pos_y(weapon.module_accessor);
+			let lr = PostureModule::lr(&mut *boma);
+			let pos_x = PostureModule::pos_x(&mut *boma)+(-11.0*lr);
+			let pos_y = PostureModule::pos_y(&mut *boma)+4.0;
+			if ((BREATH_POS_X[ENTRY_ID]  - pos_x).abs() < 6.0) &&
+				((BREATH_POS_Y[ENTRY_ID]  - pos_y).abs() < 6.0) &&
+				BREATH_POS_Y[ENTRY_ID] != 0.0 && 
+				IS_BAIR[ENTRY_ID] &&
+				motion_kind != hash40("explode")
+				{
+					MotionModule::change_motion(boma, Hash40::new("explode"), 0.0, 1.0, false, 0.0, false, false);
+			}
+		};
     }
 }	
 	
@@ -246,6 +304,12 @@ pub fn install() {
 		plant_bair,
 		plant_fair,
 		plant_uair,
-		plant_dair
+		plant_dair,
+		poison_explosion,
+		poison_explosion_eff
+    );
+    smashline::install_agent_frames!(
+        plant_frame,
+		poison_frame
     );
 }
