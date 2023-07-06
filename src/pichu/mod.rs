@@ -103,137 +103,82 @@ unsafe fn pichu_da(fighter: &mut L2CAgentBase) {
 }	
 #[acmd_script(
     agent = "pichu",
-    script =  "game_attack11",
+    scripts =  ["game_speciallw", "game_specialairlw", "effect_speciallw", "sound_speciallw", "effect_specialairlw", "sound_specialairlw"],
     category = ACMD_GAME,
 	low_priority)]
-unsafe fn pichu_facade(fighter: &mut L2CAgentBase) {
-		let lua_state = fighter.lua_state_agent;
-		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-		let min_damage = 5.0;
-		let max_damage = 13.0;
-		let min_bonus = 2.0;
-		let max_bonus = 13.0;
-		let min_size = 5.0;
-		let max_size = 8.0;
-		let max_percent = 100.0;
-		let min_shielddamage = -10;
-		let max_shielddamage = 1;
-		let mut curr_percent = DamageModule::damage(fighter.module_accessor, 0); 
-		if curr_percent > max_percent {
-			curr_percent = max_percent;
-		};
-		if RECHARGE_TIMER[ENTRY_ID] != 0 {
-			curr_percent = 0.0;
-		};
-		let hitbox_dmg = ((curr_percent/max_percent)*(max_damage-min_damage))+min_damage;
-		let hitbox_bonus = ((curr_percent/max_percent)*(max_bonus-min_bonus))+min_bonus;
-		let new_hitlag = (curr_percent/max_percent)+0.5;
-		let hitbox_size = ((curr_percent/max_percent)*(max_size-min_size))+min_size;
-		let shielddamage = (((curr_percent/max_percent) as i32)*(max_shielddamage-min_shielddamage))+min_shielddamage;
-		let mut sfx = *ATTACK_SOUND_LEVEL_S;
-		if curr_percent > max_percent/3.0 {
-			sfx = *ATTACK_SOUND_LEVEL_M;
-		};
-		if curr_percent > (max_percent/3.0)*2.0 {
-			sfx = *ATTACK_SOUND_LEVEL_L;
-		};
-		macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.5);
-		frame(fighter.lua_state_agent, 3.0);
-		macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.0);
-		if macros::is_excute(fighter) {
-			macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ hitbox_dmg, /*Angle*/ 80, /*KBG*/ 40, /*FKB*/ 0, /*BKB*/ 60, /*Size*/ hitbox_size, /*X*/ 0.0, /*Y*/ 6.0, /*Z*/ -3.0, /*X2*/ Some(0.0), /*Y2*/ Some(6.0), /*Z2*/ Some(3.0), /*Hitlag*/ new_hitlag, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ shielddamage, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_elec"), /*SFXLevel*/ sfx, /*SFXType*/ *COLLISION_SOUND_ATTR_ELEC, /*Type*/ *ATTACK_REGION_KICK);
-			AttackModule::set_add_reaction_frame(fighter.module_accessor, /*ID*/ 0, /*Frames*/ hitbox_bonus, /*Unk*/ false);
-			RECHARGE_TIMER[ENTRY_ID] = RECHARGE_MAX;
-			DamageModule::add_damage(fighter.module_accessor, 1.0, 0);
-		};
-		frame(fighter.lua_state_agent, 6.0);
-		if macros::is_excute(fighter) {
-			AttackModule::clear_all(fighter.module_accessor);
-		};
-		frame(fighter.lua_state_agent, 24.0);
-		if macros::is_excute(fighter) {
-			CancelModule::enable_cancel(fighter.module_accessor);
-		};
+unsafe fn pichu_downb_default(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
 }	
 #[acmd_script(
     agent = "pichu",
-    script =  "effect_attack11",
-    category = ACMD_EFFECT,
+    scripts =  ["game_speciallwhit", "game_specialairlwhit"],
+    category = ACMD_GAME,
 	low_priority)]
-unsafe fn pichu_facade_eff(fighter: &mut L2CAgentBase) {
-		let lua_state = fighter.lua_state_agent;
-		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-		let min_size = 5.0*0.25;
-		let max_size = 8.0*0.25;
-		let max_percent = 130.0;
-		let mut curr_percent = DamageModule::damage(fighter.module_accessor, 0); 
-		if curr_percent > max_percent {
-			curr_percent = max_percent;
-		};
-		if RECHARGE_TIMER[ENTRY_ID] != 0 {
-			curr_percent = 0.0;
-		};
-		let eff_size = ((curr_percent/max_percent)*(max_size-min_size))+min_size;
-		let mut sfx = 0;
-		if curr_percent > (max_percent/3.0)*2.0 {
-			sfx = *CAMERA_QUAKE_KIND_S;
-		};
-		frame(fighter.lua_state_agent, 2.0);
-		if macros::is_excute(fighter) {
-			macros::EFFECT_FOLLOW(fighter, Hash40::new("pichu_elec2"), Hash40::new("top"), 0, 6, 0, 0, 0, 0, eff_size, true);
-			macros::EFFECT_FOLLOW(fighter, Hash40::new("pichu_elec2"), Hash40::new("top"), 0, 6, 0, 0, 0, 0, eff_size*1.2, true);
-			if curr_percent > (max_percent/3.0)*2.0 {
-				EffectModule::set_rgb_partial_last(fighter.module_accessor, 2.0, 2.0, 1.0);
-			};
-			macros::EFFECT_FOLLOW_NO_STOP(fighter, Hash40::new("pichu_cheek"), Hash40::new("head"), 0, 0, 0, 0, -90, -90, 1, true);
-			if sfx != 0 {
-				macros::QUAKE(fighter, sfx);
-			};
-		};
-		frame(fighter.lua_state_agent, 6.0);
-		if macros::is_excute(fighter) {
-			if curr_percent <= max_percent/3.0 {
-				macros::EFFECT_OFF_KIND(fighter, Hash40::new("pichu_elec2"), false, true);
-				macros::EFFECT_OFF_KIND(fighter, Hash40::new("pichu_cheek"), false, true);
-			};
-		};
-		frame(fighter.lua_state_agent, 8.0);
-		if macros::is_excute(fighter) {
-			macros::EFFECT_OFF_KIND(fighter, Hash40::new("pichu_elec2"), false, true);
-			macros::EFFECT_OFF_KIND(fighter, Hash40::new("pichu_cheek"), false, true);
-		};
-}
+unsafe fn pichu_downb(agent: &mut L2CAgentBase) {
+    frame(agent.lua_state_agent, 3.0);
+    if macros::is_excute(agent) {
+        macros::ATTACK(agent, 0, 0, Hash40::new("top"), 4.5, 65, 80, 0, 60, 7.0, 0.0, 6.0, 0.0, None, None, None, 0.6, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_elec"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_ELEC, *ATTACK_REGION_ENERGY);
+    }
+    wait(agent.lua_state_agent, 4.0);
+    if macros::is_excute(agent) {
+        AttackModule::clear_all(agent.module_accessor);
+    }
+}	
 #[acmd_script(
     agent = "pichu",
-    script =  "sound_attack11",
-    category = ACMD_SOUND,
+    scripts =  ["effect_speciallwhit", "effect_specialairlwhit"],
+    category = ACMD_EFFECT,
 	low_priority)]
-unsafe fn pichu_facade_snd(fighter: &mut L2CAgentBase) {
-		let lua_state = fighter.lua_state_agent;
-		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-		let min_size = 5.0*0.25;
-		let max_size = 9.5*0.25;
-		let max_percent = 130.0;
-		let mut curr_percent = DamageModule::damage(fighter.module_accessor, 0); 
-		if curr_percent > max_percent {
-			curr_percent = max_percent;
-		};
-		if RECHARGE_TIMER[ENTRY_ID] != 0 {
-			curr_percent = 0.0;
-		};
-		let mut sfx = Hash40::new("se_pichu_attackhard_s01");
-		if curr_percent > max_percent/3.0 {
-			sfx = Hash40::new("se_pichu_attackair_b01");
-		};
-		if curr_percent > (max_percent/3.0)*2.0 {
-			sfx = Hash40::new("se_pichu_special_l03");
-		};
-		frame(fighter.lua_state_agent, 3.0);
-		if macros::is_excute(fighter) {
-			macros::PLAY_SEQUENCE(fighter, Hash40::new("seq_pichu_rnd_attack"));
-			macros::PLAY_SE(fighter, sfx);
-		};
-}
+unsafe fn pichu_downb_eff(agent: &mut L2CAgentBase) {
+    frame(agent.lua_state_agent, 1.0);
+    if macros::is_excute(agent) {
+        macros::EFFECT_FOLLOW_NO_STOP(agent, Hash40::new("pichu_cheek"), Hash40::new("head"), 0, 0, 0, 0, -90, -90, 1, true);
+    }
+    frame(agent.lua_state_agent, 3.0);
+    if macros::is_excute(agent) {
+        macros::EFFECT_FOLLOW_NO_STOP(agent, Hash40::new("pichu_kaminari_hit2"), Hash40::new("top"), 0, -2, 0, 0, 90, 0, 0.73, true);
+        macros::EFFECT_FOLLOW_NO_STOP(agent, Hash40::new("pichu_kaminari_hit"), Hash40::new("top"), 0, -2, 0, 0, 90, 0, 0.54, true);
+        macros::FLASH(agent, 0, 0, 0, 0);
+        macros::BURN_COLOR(agent, 2, 2, 0.5, 0.9);
+    }
+    wait(agent.lua_state_agent, 2.0);
+    if macros::is_excute(agent) {
+        macros::FLASH_FRM(agent, 2, 0, 0, 0, 0);
+        macros::BURN_COLOR_FRAME(agent, 2, 2, 2, 0.5, 0.7);
+    }
+    wait(agent.lua_state_agent, 2.0);
+    if macros::is_excute(agent) {
+        macros::EFFECT_OFF_KIND(agent, Hash40::new("pichu_kaminari_hit2"), false, true);
+        macros::FLASH_FRM(agent, 2, 0, 0, 0, 0);
+        macros::BURN_COLOR_FRAME(agent, 2, 2, 2, 0.5, 0);
+    }
+    wait(agent.lua_state_agent, 2.0);
+    if macros::is_excute(agent) {
+        macros::BURN_COLOR_NORMAL(agent);
+        macros::COL_NORMAL(agent);
+    }
+    frame(agent.lua_state_agent, 10.0);
+    if macros::is_excute(agent) {
+        macros::EFFECT_OFF_KIND(agent, Hash40::new("pichu_kaminari_hit"), false, true);
+    }
+    frame(agent.lua_state_agent, 23.0);
+    if macros::is_excute(agent) {
+        macros::EFFECT_OFF_KIND(agent, Hash40::new("pichu_cheek"), false, true);
+    }
+}	
+#[acmd_script(
+    agent = "pichu",
+    scripts =  ["sound_speciallwhit", "sound_specialairlwhit"],
+    category = ACMD_EFFECT,
+	low_priority)]
+unsafe fn pichu_downb_snd(agent: &mut L2CAgentBase) {
+    frame(agent.lua_state_agent, 2.0);
+	if macros::is_excute(agent) {
+		macros::PLAY_SEQUENCE(agent, Hash40::new("seq_pichu_rnd_attack"));
+		macros::PLAY_SE(agent, Hash40::new("se_pichu_attackair_b01"));
+	};
+}	
+
 #[fighter_frame( agent = FIGHTER_KIND_PICHU )]
 fn pichu_frame(fighter: &mut L2CFighterCommon) {
     unsafe {
@@ -262,21 +207,11 @@ fn pichu_frame(fighter: &mut L2CFighterCommon) {
 				StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_LANDING_FALL_SPECIAL, true);
 				LAG_INCREASE[ENTRY_ID] = false;
 		};
-		if RECHARGE_TIMER[ENTRY_ID] == 10 {
-			smash::app::FighterUtil::flash_eye_info(boma);
-			macros::EFFECT_FOLLOW_NO_STOP(fighter, Hash40::new("pichu_cheek"), Hash40::new("head"), 0, 0, 0, 0, -90, -90, 1, true);
-		};
-		if RECHARGE_TIMER[ENTRY_ID] == 1 {
-			macros::EFFECT_OFF_KIND(fighter, Hash40::new("pichu_cheek"), false, true);
-		};
-		if RECHARGE_TIMER[ENTRY_ID] > 0 {
-			RECHARGE_TIMER[ENTRY_ID] -= 1;
+		if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_LW {
+				StatusModule::change_status_request_from_script(boma, *FIGHTER_PIKACHU_STATUS_KIND_SPECIAL_LW_HIT, true);
 		};
 		if ![*FIGHTER_STATUS_KIND_ATTACK_AIR, *FIGHTER_STATUS_KIND_LANDING_ATTACK_AIR, *FIGHTER_PIKACHU_STATUS_KIND_SPECIAL_HI_END].contains(&status_kind) {
 			LAG_INCREASE[ENTRY_ID] = false;
-		};
-		if !smash::app::sv_information::is_ready_go() {
-			RECHARGE_TIMER[ENTRY_ID] = 0;
 		};
     }
 }
@@ -286,9 +221,7 @@ pub fn install() {
 		pichu_ftilt,
 		pichu_dair,
 		pichu_da,
-		pichu_facade,
-		pichu_facade_eff,
-		pichu_facade_snd
+		pichu_downb_default, pichu_downb, pichu_downb_eff, pichu_downb_snd
     );
     smashline::install_agent_frames!(
         pichu_frame
