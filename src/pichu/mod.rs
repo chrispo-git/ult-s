@@ -14,6 +14,8 @@ use crate::util::*;
 use smash::phx::Vector2f;
 static mut LAG_INCREASE : [bool; 8] = [false; 8];
 static mut RECHARGE_TIMER : [i32; 8] = [0; 8];
+static mut HAS_DOWNB : [bool; 8] = [false; 8];
+static mut DO_STALL : [bool; 8] = [false; 8];
 static RECHARGE_MAX : i32 = 90;
 
 
@@ -117,7 +119,8 @@ unsafe fn pichu_downb_default(fighter: &mut L2CAgentBase) {
 unsafe fn pichu_downb(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 3.0);
     if macros::is_excute(agent) {
-        macros::ATTACK(agent, 0, 0, Hash40::new("top"), 4.5, 65, 80, 0, 60, 7.0, 0.0, 6.0, 0.0, None, None, None, 0.6, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_elec"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_ELEC, *ATTACK_REGION_ENERGY);
+		macros::FT_ADD_DAMAGE(agent, 0.4);
+        macros::ATTACK(agent, 0, 0, Hash40::new("top"), 4.5, 65, 80, 0, 60, 7.0, 0.0, 6.0, 0.0, None, None, None, 0.2, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_elec"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_ELEC, *ATTACK_REGION_ENERGY);
     }
     wait(agent.lua_state_agent, 4.0);
     if macros::is_excute(agent) {
@@ -137,7 +140,6 @@ unsafe fn pichu_downb_eff(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 3.0);
     if macros::is_excute(agent) {
         macros::EFFECT_FOLLOW_NO_STOP(agent, Hash40::new("pichu_kaminari_hit2"), Hash40::new("top"), 0, -2, 0, 0, 90, 0, 0.73, true);
-        macros::EFFECT_FOLLOW_NO_STOP(agent, Hash40::new("pichu_kaminari_hit"), Hash40::new("top"), 0, -2, 0, 0, 90, 0, 0.54, true);
         macros::FLASH(agent, 0, 0, 0, 0);
         macros::BURN_COLOR(agent, 2, 2, 0.5, 0.9);
     }
@@ -148,7 +150,6 @@ unsafe fn pichu_downb_eff(agent: &mut L2CAgentBase) {
     }
     wait(agent.lua_state_agent, 2.0);
     if macros::is_excute(agent) {
-        macros::EFFECT_OFF_KIND(agent, Hash40::new("pichu_kaminari_hit2"), false, true);
         macros::FLASH_FRM(agent, 2, 0, 0, 0, 0);
         macros::BURN_COLOR_FRAME(agent, 2, 2, 2, 0.5, 0);
     }
@@ -159,7 +160,7 @@ unsafe fn pichu_downb_eff(agent: &mut L2CAgentBase) {
     }
     frame(agent.lua_state_agent, 10.0);
     if macros::is_excute(agent) {
-        macros::EFFECT_OFF_KIND(agent, Hash40::new("pichu_kaminari_hit"), false, true);
+        macros::EFFECT_OFF_KIND(agent, Hash40::new("pichu_kaminari_hit2"), false, true);
     }
     frame(agent.lua_state_agent, 23.0);
     if macros::is_excute(agent) {
@@ -169,7 +170,7 @@ unsafe fn pichu_downb_eff(agent: &mut L2CAgentBase) {
 #[acmd_script(
     agent = "pichu",
     scripts =  ["sound_speciallwhit", "sound_specialairlwhit"],
-    category = ACMD_EFFECT,
+    category = ACMD_SOUND,
 	low_priority)]
 unsafe fn pichu_downb_snd(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 2.0);
@@ -178,7 +179,73 @@ unsafe fn pichu_downb_snd(agent: &mut L2CAgentBase) {
 		macros::PLAY_SE(agent, Hash40::new("se_pichu_attackair_b01"));
 	};
 }	
+#[acmd_script(
+    agent = "pichu",
+    scripts =  ["expression_speciallwhit", "expression_specialairlwhit"],
+    category = ACMD_EXPRESSION,
+	low_priority)]
+unsafe fn pichu_downb_expr(agent: &mut L2CAgentBase) {
+    let lua_state = agent.lua_state_agent;
+}	
 
+#[status_script(agent = "pichu", status = FIGHTER_PIKACHU_STATUS_KIND_SPECIAL_LW_HIT, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_PRE)]
+unsafe fn special_lw_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
+    StatusModule::init_settings(
+        fighter.module_accessor,
+        smash::app::SituationKind(*SITUATION_KIND_NONE),
+        *FIGHTER_KINETIC_TYPE_NONE,
+        *GROUND_CORRECT_KIND_KEEP as u32,
+		smash::app::GroundCliffCheckKind(*GROUND_CLIFF_CHECK_KIND_NONE),
+        true,
+        *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_FLAG,
+        *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_INT,
+        *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_FLOAT,
+        0
+    );
+
+    FighterStatusModuleImpl::set_fighter_status_data(
+        fighter.module_accessor,
+        false,
+        *FIGHTER_TREADED_KIND_NO_REAC,
+        false,
+        false,
+        false,
+        (*FIGHTER_LOG_MASK_FLAG_ATTACK_KIND_SPECIAL_LW | *FIGHTER_LOG_MASK_FLAG_ATTACK_KIND_AIR_LASSO | *FIGHTER_LOG_MASK_FLAG_ACTION_TRIGGER_ON) as u64,
+        *FIGHTER_STATUS_ATTR_START_TURN as u32,
+        *FIGHTER_POWER_UP_ATTACK_BIT_SPECIAL_LW as u32,
+        0
+    );
+    0.into()
+}
+#[status_script(agent = "pichu", status = FIGHTER_STATUS_KIND_SPECIAL_LW, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_PRE)]
+unsafe fn special_lw2_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
+    StatusModule::init_settings(
+        fighter.module_accessor,
+        smash::app::SituationKind(*SITUATION_KIND_NONE),
+        *FIGHTER_KINETIC_TYPE_NONE,
+        *GROUND_CORRECT_KIND_KEEP as u32,
+		smash::app::GroundCliffCheckKind(*GROUND_CLIFF_CHECK_KIND_NONE),
+        true,
+        *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_FLAG,
+        *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_INT,
+        *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_FLOAT,
+        0
+    );
+
+    FighterStatusModuleImpl::set_fighter_status_data(
+        fighter.module_accessor,
+        false,
+        *FIGHTER_TREADED_KIND_NO_REAC,
+        false,
+        false,
+        false,
+        (*FIGHTER_LOG_MASK_FLAG_ATTACK_KIND_SPECIAL_LW | *FIGHTER_LOG_MASK_FLAG_ATTACK_KIND_AIR_LASSO | *FIGHTER_LOG_MASK_FLAG_ACTION_TRIGGER_ON) as u64,
+        *FIGHTER_STATUS_ATTR_START_TURN as u32,
+        *FIGHTER_POWER_UP_ATTACK_BIT_SPECIAL_LW as u32,
+        0
+    );
+    0.into()
+}
 #[fighter_frame( agent = FIGHTER_KIND_PICHU )]
 fn pichu_frame(fighter: &mut L2CFighterCommon) {
     unsafe {
@@ -189,6 +256,7 @@ fn pichu_frame(fighter: &mut L2CFighterCommon) {
 		let total_hitstun = WorkModule::get_float(boma, *FIGHTER_INSTANCE_WORK_ID_FLOAT_DAMAGE_REACTION_FRAME_LAST);
 		let cancel_frame = FighterMotionModuleImpl::get_cancel_frame(boma,smash::phx::Hash40::new_raw(MotionModule::motion_kind(boma)),false) as f32;
 		let frame = MotionModule::frame(boma);
+		let fallspeed = WorkModule::get_param_float(fighter.module_accessor, hash40("air_speed_y_stable"), 0);
 		if [*FIGHTER_PIKACHU_STATUS_KIND_SPECIAL_HI_END].contains(&status_kind) {
 			if ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_SPECIAL) && ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_GUARD) && ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_ATTACK) && StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR {
 				if GroundModule::ray_check(boma, &Vector2f{ x: PostureModule::pos_x(boma), y: PostureModule::pos_y(boma)}, &Vector2f{ x: 0.0, y: -1.0}, true) == 0 {
@@ -210,6 +278,28 @@ fn pichu_frame(fighter: &mut L2CFighterCommon) {
 		if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_LW {
 				StatusModule::change_status_request_from_script(boma, *FIGHTER_PIKACHU_STATUS_KIND_SPECIAL_LW_HIT, true);
 		};
+		if status_kind == *FIGHTER_PIKACHU_STATUS_KIND_SPECIAL_LW_HIT {
+			if !HAS_DOWNB[ENTRY_ID] && StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR {
+				HAS_DOWNB[ENTRY_ID] = true;
+				DO_STALL[ENTRY_ID] = true;
+			};
+			if frame > 4.0 && StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR {
+				if frame > 32.0 {
+					DO_STALL[ENTRY_ID] = false; 
+				}
+				if DO_STALL[ENTRY_ID] {
+						macros::SET_SPEED_EX(fighter, 0.0, fallspeed*-0.2, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+				} else {
+						macros::SET_SPEED_EX(fighter, 0.0, fallspeed*-1.0, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+				}
+			}
+		} else {
+			DO_STALL[ENTRY_ID] = false;
+		};
+		if StatusModule::situation_kind(boma) != *SITUATION_KIND_AIR {
+			HAS_DOWNB[ENTRY_ID] = false;
+			DO_STALL[ENTRY_ID] = false;
+		};
 		if ![*FIGHTER_STATUS_KIND_ATTACK_AIR, *FIGHTER_STATUS_KIND_LANDING_ATTACK_AIR, *FIGHTER_PIKACHU_STATUS_KIND_SPECIAL_HI_END].contains(&status_kind) {
 			LAG_INCREASE[ENTRY_ID] = false;
 		};
@@ -221,9 +311,10 @@ pub fn install() {
 		pichu_ftilt,
 		pichu_dair,
 		pichu_da,
-		pichu_downb_default, pichu_downb, pichu_downb_eff, pichu_downb_snd
+		pichu_downb_default, pichu_downb, pichu_downb_eff, pichu_downb_snd, pichu_downb_expr
     );
     smashline::install_agent_frames!(
         pichu_frame
     );
+	install_status_scripts!(special_lw_pre, special_lw2_pre);
 }
