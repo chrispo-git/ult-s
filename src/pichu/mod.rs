@@ -120,7 +120,7 @@ unsafe fn pichu_downb(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 3.0);
     if macros::is_excute(agent) {
 		macros::FT_ADD_DAMAGE(agent, 0.4);
-        macros::ATTACK(agent, 0, 0, Hash40::new("top"), 4.5, 65, 80, 0, 60, 7.0, 0.0, 6.0, 0.0, None, None, None, 0.2, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_elec"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_ELEC, *ATTACK_REGION_ENERGY);
+        macros::ATTACK(agent, 0, 0, Hash40::new("top"), 4.5, 70, 80, 0, 60, 7.0, 0.0, 6.0, 0.0, None, None, None, 0.2, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_elec"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_ELEC, *ATTACK_REGION_ENERGY);
     }
     wait(agent.lua_state_agent, 4.0);
     if macros::is_excute(agent) {
@@ -257,6 +257,7 @@ fn pichu_frame(fighter: &mut L2CFighterCommon) {
 		let cancel_frame = FighterMotionModuleImpl::get_cancel_frame(boma,smash::phx::Hash40::new_raw(MotionModule::motion_kind(boma)),false) as f32;
 		let frame = MotionModule::frame(boma);
 		let fallspeed = WorkModule::get_param_float(fighter.module_accessor, hash40("air_speed_y_stable"), 0);
+		let is_near_ground = GroundModule::ray_check(boma, &Vector2f{ x: PostureModule::pos_x(boma), y: PostureModule::pos_y(boma)}, &Vector2f{ x: 0.0, y: -1.0}, true);
 		if [*FIGHTER_PIKACHU_STATUS_KIND_SPECIAL_HI_END].contains(&status_kind) {
 			if ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_SPECIAL) && ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_GUARD) && ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_ATTACK) && StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR {
 				if GroundModule::ray_check(boma, &Vector2f{ x: PostureModule::pos_x(boma), y: PostureModule::pos_y(boma)}, &Vector2f{ x: 0.0, y: -1.0}, true) == 0 {
@@ -288,10 +289,14 @@ fn pichu_frame(fighter: &mut L2CFighterCommon) {
 					DO_STALL[ENTRY_ID] = false; 
 				}
 				if DO_STALL[ENTRY_ID] {
-						macros::SET_SPEED_EX(fighter, 0.0, fallspeed*-0.2, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+						macros::SET_SPEED_EX(fighter, 0.0, fallspeed*-0.3, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
 				} else {
-						macros::SET_SPEED_EX(fighter, 0.0, fallspeed*-1.0, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+						macros::SET_SPEED_EX(fighter, 0.0, fallspeed*-1.5, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
 				}
+			}
+			if is_near_ground == 1 && StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR {
+				StatusModule::set_keep_situation_air(boma, false);
+				StatusModule::set_situation_kind(boma, smash::app::SituationKind(*SITUATION_KIND_GROUND), true);
 			}
 		} else {
 			DO_STALL[ENTRY_ID] = false;
