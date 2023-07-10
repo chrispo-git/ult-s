@@ -937,8 +937,12 @@ fn brawler_frame(fighter: &mut L2CFighterCommon) {
 				};
 			};
 			//HOA Special Kick 
-			if status_kind == *FIGHTER_MIIFIGHTER_STATUS_KIND_SPECIAL_LW2_KICK_LANDING && WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_CUSTOMIZE_SPECIAL_LW_NO) == 0{
-				if MotionModule::frame(boma) > 9.0 {
+			if status_kind == *FIGHTER_MIIFIGHTER_STATUS_KIND_SPECIAL_LW2_KICK_LANDING{
+				if MotionModule::frame(boma) < 2.0 {
+					let speed = smash::phx::Vector3f { x: 0.7, y: 0.0, z: 0.0 };
+					KineticModule::add_speed(boma, &speed);
+				}
+				if MotionModule::frame(boma) > 9.0 &&  WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_CUSTOMIZE_SPECIAL_LW_NO) == 0 {
 					CancelModule::enable_cancel(boma);
 				};
 			};
@@ -965,7 +969,15 @@ fn brawler_frame(fighter: &mut L2CFighterCommon) {
 				macros::COL_NORMAL(fighter);
 			};
 			if status_kind != *FIGHTER_STATUS_KIND_THROW && MotionModule::motion_kind(boma) == hash40("throw_f"){
-				StatusModule::set_keep_situation_air(boma, true);
+				if situation_kind == *SITUATION_KIND_AIR {
+					StatusModule::set_keep_situation_air(boma, true);
+					if is_near_ground {
+						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_LANDING, true);
+					}
+				}
+				if MotionModule::frame(boma) > 20.0 {
+					CancelModule::enable_cancel(boma);
+				}
 			};
 			if [hash40("special_lw3"), hash40("special_air_lw3"), hash40("throw_f")].contains(&MotionModule::motion_kind(boma)) == false {
 				COUNTER_IS[ENTRY_ID] = false;
