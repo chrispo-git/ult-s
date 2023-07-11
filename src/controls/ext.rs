@@ -294,8 +294,6 @@ bitflags! {
         // would get mapped to FullHop (issue #776)
         const FullHop  = 0x80000;
         const CStickOverride = 0x100000;
-        const SpecialParry = 0x200000;
-        const TauntParry = 0x400000;
 
         const SpecialAll  = 0x20802;
         const AttackAll   = 0x201;
