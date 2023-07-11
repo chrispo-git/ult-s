@@ -32,11 +32,11 @@ f.close()
 
 
 with open(r"src/lib.rs", 'w') as f:
-    for i in range(0,88):
+    for i in range(0,215):
         f.write(in_[i])
     for x in needed_folders:
         f.write(f"mod {x};\n")
-    for i in range(178,239):
+    for i in range(311,367):
         f.write(in_[i])
     for x in needed_folders:
         f.write(f"	{x}::install();\n")
