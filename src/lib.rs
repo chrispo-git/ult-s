@@ -359,6 +359,7 @@ pub extern "C" fn main() {
 	skyline::install_hooks!(non_hdr_set_room_id, non_hdr_update_room_hook, non_hdr_set_online_latency, online_melee_any_scene_create, bg_matchmaking_seq, arena_seq, main_menu);
 	skyline::install_hooks!(change_version_string_hook);
 	nro::add_hook(nro_hook).unwrap();
+	
 	util::install();
 	common::install();
 	controls::install();
