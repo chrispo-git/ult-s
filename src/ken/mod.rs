@@ -24,6 +24,12 @@ static mut EX_DOWNB : [bool; 8] = [false; 8];
 static mut HANDS :  smash::phx::Vector3f =  smash::phx::Vector3f { x: 0.0, y: 0.0, z: 0.0 };
 static mut FEET :  smash::phx::Vector3f =  smash::phx::Vector3f { x: 1.0, y: 0.0, z: 0.0 };
 
+pub(crate) unsafe fn is_attack_btn(boma: &mut smash::app::BattleObjectModuleAccessor) -> bool {
+	return (ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_SPECIAL_RAW)  && ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_ATTACK_RAW)) &&  
+	((ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_CATCH) && ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_GUARD)) || 
+	StatusModule::situation_kind(boma) == *SITUATION_KIND_GROUND )
+}
+
 #[acmd_script(
     agent = "ken",
     script =  "game_attacklw4",
@@ -219,7 +225,7 @@ pub fn supers(fighter : &mut L2CFighterCommon) {
 			if KEN_SUPER[ENTRY_ID] >= meter_half as i32 && !AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_ALL) {
 				if [*FIGHTER_STATUS_KIND_SPECIAL_HI].contains(&status_kind) {
 					if [hash40("special_hi"), hash40("special_air_hi")].contains(&motion_kind) && MotionModule::frame(boma) < 5.0 {
-						if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_ATTACK) && ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_SPECIAL) {
+						if is_attack_btn(boma) {
 							KEN_SUPER[ENTRY_ID] -= meter_half as i32;
 							println!("meter spent! {} ", KEN_SUPER[ENTRY_ID]);
 							MotionModule::change_motion(boma, Hash40::new("special_hi_ex"), -1.0, 1.0, false, 0.0, false, false);
@@ -228,7 +234,7 @@ pub fn supers(fighter : &mut L2CFighterCommon) {
 				};
 				if [*FIGHTER_STATUS_KIND_SPECIAL_S].contains(&status_kind) {
 					if [hash40("special_s_start"), hash40("special_air_s_start")].contains(&motion_kind) && MotionModule::frame(boma) < 5.0 {
-						if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_ATTACK) && ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_SPECIAL) {
+						if is_attack_btn(boma) {
 							KEN_SUPER[ENTRY_ID] -= meter_half as i32;
 							println!("meter spent! {} ", KEN_SUPER[ENTRY_ID]);
 							MotionModule::change_motion(boma, Hash40::new("special_s_ex"), -1.0, 1.0, false, 0.0, false, false);
