@@ -17,9 +17,9 @@ static mut UPB_TIMER: [i32; 8] = [0; 8];
 static mut UPB_ANGLE_X: [f32; 8] = [0.0; 8];
 static mut UPB_ANGLE_Y: [f32; 8] = [0.0; 8];
 
-const UPB_SPEED: f32 = 2.0;
-static UPB_30_X: f32 = 30.0.sin() * 2.0;
-static UPB_30_Y: f32 = 30.0.cos() * 2.0;
+const UPB_SPEED: f32 = 2.5;
+static mut UPB_30_X: f32 = 0.0;
+static mut UPB_30_Y: f32 = 0.0;
 
 #[acmd_script(
     agent = "donkey",
@@ -314,6 +314,47 @@ unsafe fn dk_upb(fighter: &mut L2CAgentBase) {
 }
 #[acmd_script(
     agent = "donkey",
+    scripts =  ["effect_specialairhi", "effect_specialhi"],
+    category = ACMD_EFFECT,
+	low_priority)]
+unsafe fn dk_upb_eff(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+	let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);   
+	let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+    if macros::is_excute(fighter) {
+        macros::EFFECT(fighter, Hash40::new("sys_erace_smoke"), Hash40::new("throw"), 0, 0, 0, 0, 0, 0, 3.7, 0, 0, 0, 0, 0, 0, false);
+    }
+}
+#[acmd_script(
+    agent = "donkey",
+    scripts =  ["game_specialhishoot"],
+    category = ACMD_GAME,
+	low_priority)]
+unsafe fn dk_upb_shoot(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+	let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);   
+	let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+    frame(fighter.lua_state_agent, 1.0);
+    if macros::is_excute(fighter) {
+        ItemModule::remove_item(boma, 0);
+        macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("hip"), /*Damage*/ 11.0, /*Angle*/ 74, /*KBG*/ 74, /*FKB*/ 0, /*BKB*/ 70, /*Size*/ 10.5, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_PUNCH);
+    }
+}
+#[acmd_script(
+    agent = "donkey",
+    scripts =  ["effect_specialhishoot"],
+    category = ACMD_EFFECT,
+	low_priority)]
+unsafe fn dk_upb_shoot_eff(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+	let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);   
+	let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+    if macros::is_excute(fighter) {
+        macros::EFFECT(fighter, Hash40::new("sys_box02_break"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.1, 0, 0, 0, 0, 0, 0, false);
+    }
+}
+#[acmd_script(
+    agent = "donkey",
     scripts =  ["effect_specialairs", "effect_specials"],
     category = ACMD_EFFECT,
 	low_priority)]
@@ -361,6 +402,8 @@ fn dk_frame(fighter: &mut L2CFighterCommon) {
 		let frame = MotionModule::frame(boma);
 		let end_frame = MotionModule::end_frame(boma);
         let motion_kind = MotionModule::motion_kind(boma);
+        UPB_30_X = 30.0_f32.sin() * UPB_SPEED;
+        UPB_30_Y = 0.89 * UPB_SPEED;
 		if IS_DK_START_ITEM_CHUCK[ENTRY_ID] == true {
 			if ![*FIGHTER_STATUS_KIND_SPECIAL_S].contains(&status_kind) {
 				ItemModule::throw_item(fighter.module_accessor, 0.0, 0.0, 1.0, 0, true, 0.0);
@@ -384,18 +427,22 @@ fn dk_frame(fighter: &mut L2CFighterCommon) {
             IS_DK_UPB_BARREL[ENTRY_ID] = true;
             UPB_TIMER[ENTRY_ID] += 1;
             //This sucks! Don't do it :)
+            if frame < 2.0 {
+                UPB_ANGLE_X[ENTRY_ID] = 0.0;
+                UPB_ANGLE_Y[ENTRY_ID] = UPB_SPEED;
+            }
             if frame < 30.0 {
-                UPB_ANGLE_Y[ENTRY_ID] = (frame/30.0 * (UPB_30_Y - UPB_SPEED)) + UPB_SPEED;
+                UPB_ANGLE_Y[ENTRY_ID] += (UPB_30_Y - UPB_SPEED)/30.0;
                 UPB_ANGLE_X[ENTRY_ID] += (1.0/30.0 * (UPB_30_X));
             } else if frame < 90.0 {
                 if frame < 60.0 {
-                    UPB_ANGLE_Y[ENTRY_ID] = ((frame-30.0)/30.0 * (UPB_30_Y - UPB_SPEED) * -1.0) + UPB_SPEED;
+                    UPB_ANGLE_Y[ENTRY_ID] += (UPB_SPEED - UPB_30_Y)/30.0;
                 } else {
-                    UPB_ANGLE_Y[ENTRY_ID] = ((frame-60.0)/30.0 * (UPB_30_Y - UPB_SPEED)) + UPB_SPEED;
+                    UPB_ANGLE_Y[ENTRY_ID] += (UPB_30_Y - UPB_SPEED)/30.0;
                 }
                 UPB_ANGLE_X[ENTRY_ID] -= (1.0/30.0 * (UPB_30_X));
             } else {
-                UPB_ANGLE_Y[ENTRY_ID] = ((frame-90.0)/30.0 * (UPB_30_Y - UPB_SPEED) * -1.0) + UPB_SPEED;
+                UPB_ANGLE_Y[ENTRY_ID] += (UPB_SPEED - UPB_30_Y)/30.0;
                 UPB_ANGLE_X[ENTRY_ID] += (1.0/30.0 * (UPB_30_X));
             }
             println!("X:{}, Y:{}", UPB_ANGLE_X[ENTRY_ID], UPB_ANGLE_Y[ENTRY_ID]);
@@ -410,7 +457,8 @@ fn dk_frame(fighter: &mut L2CFighterCommon) {
             }
         }
         if [hash40("special_hi_shoot")].contains(&motion_kind) {
-            macros::SET_SPEED_EX(fighter, UPB_ANGLE_X[ENTRY_ID], UPB_ANGLE_Y[ENTRY_ID], *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+            MotionModule::set_rate(boma, 2.0);
+            macros::SET_SPEED_EX(fighter, UPB_ANGLE_X[ENTRY_ID]*-0.45, UPB_ANGLE_Y[ENTRY_ID], *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
         };
 	}
 }	
@@ -432,7 +480,7 @@ pub fn install() {
 		dk_sideb_eff,
 		dk_sideb_snd, 
 		dk_sideb_expr,
-        dk_upb
+        dk_upb, dk_upb_eff, dk_upb_shoot, dk_upb_shoot_eff
 	);
 	smashline::install_agent_frames!(dk_frame);
 }
