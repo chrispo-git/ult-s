@@ -194,8 +194,19 @@ unsafe fn rayman_fair_eff(fighter: &mut L2CAgentBase) {
 	frame(fighter.lua_state_agent, 11.0);
     if macros::is_excute(fighter) {
         macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_attack_speedline"), Hash40::new("top"), 0, 2.25, 1, -10, 0, 0, 0.5, true);
-        macros::LAST_EFFECT_SET_COLOR(fighter, 1.15, 0.61, 0.0);
-        macros::LAST_EFFECT_SET_ALPHA(fighter, 0.5);
+        macros::LAST_EFFECT_SET_ALPHA(fighter, 0.8);
+        if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 1 { //raymesis
+            macros::LAST_EFFECT_SET_COLOR(fighter, 0.0, 0.69, 1.29);
+        }
+        else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 2 { //glowbox
+            macros::LAST_EFFECT_SET_COLOR(fighter, 0.0, 0.39, 0.99);
+        }
+        else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 5 { //spy
+            macros::LAST_EFFECT_SET_COLOR(fighter, 0.2, 0.2, 0.2);
+        }
+        else {
+            macros::LAST_EFFECT_SET_COLOR(fighter, 1.15, 0.61, 0.0);
+        }
     }
 }		
 #[acmd_script(
@@ -449,7 +460,18 @@ unsafe fn rayman_usmash_eff(fighter: &mut L2CAgentBase) {
 		if macros::is_excute(fighter) {
 			macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_attack_arc_d"), Hash40::new("trans"), 2, 9, 0, -3, 23.6, 96.3, 0.65, true);
 			macros::LAST_EFFECT_SET_RATE(fighter, 1.3);
-            macros::LAST_EFFECT_SET_COLOR(fighter, 2.15, 1.72, 0.9);
+            if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 1 { //raymesis
+                macros::LAST_EFFECT_SET_COLOR(fighter, 0.0, 0.69, 1.29);
+            }
+            else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 2 { //glowbox
+                macros::LAST_EFFECT_SET_COLOR(fighter, 0.0, 0.39, 0.99);
+            }
+            else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 5 { //spy
+                macros::LAST_EFFECT_SET_COLOR(fighter, 0.2, 0.2, 0.2);
+            }
+            else {
+                macros::LAST_EFFECT_SET_COLOR(fighter, 1.35, 0.92, 0.2);
+            }
 		}
 		frame(fighter.lua_state_agent, 33.0);
 		if macros::is_excute(fighter) {
@@ -557,27 +579,51 @@ unsafe fn rayman_fsmash_charge_eff(fighter: &mut L2CAgentBase) {
             macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("top"), 0, 4, -6.75, -16.857, 18.764, 94.68, 0.275, true, *EF_FLIP_YZ);
 			macros::LAST_EFFECT_SET_RATE(fighter, 1.05);
             macros::LAST_EFFECT_SET_ALPHA(fighter, 0.7);
+            if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 5 { //spy
+                macros::LAST_EFFECT_SET_COLOR(fighter, 0.0, 0.0, 0.0);
+            }
 			macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("top"), 0, 4, -6.75, -16.857, 18.764, 94.68, 0.25, true, *EF_FLIP_YZ);
 			macros::LAST_EFFECT_SET_RATE(fighter, 1.05);
             macros::LAST_EFFECT_SET_ALPHA(fighter, 0.7);
+            if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 5 { //spy
+                macros::LAST_EFFECT_SET_COLOR(fighter, 0.0, 0.0, 0.0);
+            }
             macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("top"), 0, 4, -6.75, -16.857, 18.764, 94.68, 0.225, true, *EF_FLIP_YZ);
 			macros::LAST_EFFECT_SET_RATE(fighter, 1.05);
             macros::LAST_EFFECT_SET_ALPHA(fighter, 0.7);
+            if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 5 { //spy
+                macros::LAST_EFFECT_SET_COLOR(fighter, 0.0, 0.0, 0.0);
+            }
             macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("top"), 0, 4, -6.75, -16.857, 18.764, 94.68, 0.2, true, *EF_FLIP_YZ);
 			macros::LAST_EFFECT_SET_RATE(fighter, 1.05);
             macros::LAST_EFFECT_SET_ALPHA(fighter, 0.7);
+            if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 5 { //spy
+                macros::LAST_EFFECT_SET_COLOR(fighter, 0.0, 0.0, 0.0);
+            }
             macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("top"), 0, 4, -6.75, -16.857, 18.764, 94.68, 0.175, true, *EF_FLIP_YZ);
 			macros::LAST_EFFECT_SET_RATE(fighter, 1.05);
             macros::LAST_EFFECT_SET_ALPHA(fighter, 0.7);
+            if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 5 { //spy
+                macros::LAST_EFFECT_SET_COLOR(fighter, 0.0, 0.0, 0.0);
+            }
             macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("top"), 0, 4, -6.75, -16.857, 18.764, 94.68, 0.15, true, *EF_FLIP_YZ);
 			macros::LAST_EFFECT_SET_RATE(fighter, 1.05);
             macros::LAST_EFFECT_SET_ALPHA(fighter, 0.7);
+            if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 5 { //spy
+                macros::LAST_EFFECT_SET_COLOR(fighter, 0.0, 0.0, 0.0);
+            }
             macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("top"), 0, 4, -6.75, -16.857, 18.764, 94.68, 0.125, true, *EF_FLIP_YZ);
 			macros::LAST_EFFECT_SET_RATE(fighter, 1.05);
             macros::LAST_EFFECT_SET_ALPHA(fighter, 0.7);
+            if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 5 { //spy
+                macros::LAST_EFFECT_SET_COLOR(fighter, 0.0, 0.0, 0.0);
+            }
             macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("top"), 0, 4, -6.75, -16.857, 18.764, 94.68, 0.1, true, *EF_FLIP_YZ);
 			macros::LAST_EFFECT_SET_RATE(fighter, 1.05);
             macros::LAST_EFFECT_SET_ALPHA(fighter, 0.7);
+            if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 5 { //spy
+                macros::LAST_EFFECT_SET_COLOR(fighter, 0.0, 0.0, 0.0);
+            }
 		}
 		wait(fighter.lua_state_agent, 5.0);
         macros::EFFECT(fighter, Hash40::new("sys_smash_flash_s"), Hash40::new("top"), 0, 6, 4, 0, 0, 0, 1, 2, 2, 2, 0, 0, 0, true);
@@ -752,8 +798,19 @@ unsafe fn rayman_uair_eff(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 11.0);
     if macros::is_excute(fighter) {
         macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_attack_speedline"), Hash40::new("top"), 0, 8, -0.5, -85, 0, 0, 0.5, true);
-        macros::LAST_EFFECT_SET_COLOR(fighter, 1.15, 0.61, 0.0);
-        macros::LAST_EFFECT_SET_ALPHA(fighter, 0.5);
+        macros::LAST_EFFECT_SET_ALPHA(fighter, 0.8);
+        if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 1 { //raymesis
+            macros::LAST_EFFECT_SET_COLOR(fighter, 0.0, 0.69, 1.29);
+        }
+        else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 2 { //glowbox
+            macros::LAST_EFFECT_SET_COLOR(fighter, 0.0, 0.39, 0.99);
+        }
+        else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 5 { //spy
+            macros::LAST_EFFECT_SET_COLOR(fighter, 0.0, 0.0, 0.0);
+        }
+        else {
+            macros::LAST_EFFECT_SET_COLOR(fighter, 1.15, 0.61, 0.0);
+        }
     }
 }
 #[acmd_script(
@@ -927,7 +984,18 @@ unsafe fn rayman_dtilt_eff(fighter: &mut L2CAgentBase) {
             macros::EFFECT_FOLLOW_ALPHA(fighter, Hash40::new("sys_attack_arc_d"), Hash40::new("top"), 0, 2, 4.3, 180, 157.5, 0, 0.5, true, 1.0);
         }
         macros::LAST_EFFECT_SET_RATE(fighter, 0.45);
-        macros::LAST_EFFECT_SET_COLOR(fighter, 2.15, 1.72, 0.9);
+        if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 1 { //raymesis
+            macros::LAST_EFFECT_SET_COLOR(fighter, 0.0, 0.69, 1.29);
+        }
+        else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 2 { //glowbox
+            macros::LAST_EFFECT_SET_COLOR(fighter, 0.0, 0.39, 0.99);
+        }
+        else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 5 { //spy
+            macros::LAST_EFFECT_SET_COLOR(fighter, 0.2, 0.2, 0.2);
+        }
+        else {
+            macros::LAST_EFFECT_SET_COLOR(fighter, 1.35, 0.92, 0.2);
+        }
     }
 }
 #[acmd_script( agent = "pikmin", script = "sound_attacklw3", category = ACMD_SOUND, low_priority )]
@@ -1223,10 +1291,16 @@ unsafe fn rayman_bthrow_eff(fighter: &mut L2CAgentBase) {
     low_priority )]
 unsafe fn rayman_dthrow(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
-        macros::ATTACK_ABS(fighter, *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, 0, 5.0, 70, 45, 0, 75, 0.0, 1.0, *ATTACK_LR_CHECK_F, 0.0, true, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_THROW);
+        macros::ATTACK_ABS(fighter, *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, 0, 6.0, 66, 60, 0, 60, 0.0, 1.0, *ATTACK_LR_CHECK_F, 0.0, true, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_THROW);
         macros::ATTACK_ABS(fighter, *FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, 0, 3.0, 361, 100, 0, 40, 0.0, 1.0, *ATTACK_LR_CHECK_F, 0.0, true, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_THROW);
     }
-	frame(fighter.lua_state_agent, 22.0);
+    frame(fighter.lua_state_agent, 25.0);
+    if macros::is_excute(fighter) {
+        macros::CHECK_FINISH_CAMERA(fighter, 7, 0);
+        //lua_bind::FighterCutInManager::set_throw_finish_zoom_rate(singletons::FighterCutInManager(), 1.7);
+        //lua_bind::FighterCutInManager::set_throw_finish_offset(singletons::FighterCutInManager(), Vector3f{x: 0.0, y: 0.0, z: 0.0});
+    }
+	frame(fighter.lua_state_agent, 26.0);
     if macros::is_excute(fighter) {
         let target = WorkModule::get_int64(fighter.module_accessor, *FIGHTER_STATUS_THROW_WORK_INT_TARGET_OBJECT);
         let target_group = WorkModule::get_int64(fighter.module_accessor, *FIGHTER_STATUS_THROW_WORK_INT_TARGET_HIT_GROUP);
@@ -1239,8 +1313,37 @@ unsafe fn rayman_dthrow(fighter: &mut L2CAgentBase) {
     script = "effect_throwlw", 
     category = ACMD_EFFECT, 
     low_priority )]
-unsafe fn rayman_dthrow_eff(fighter: &mut L2CAgentBase) {
-    
+unsafe fn rayman_dthrow_eff(agent: &mut L2CAgentBase) {
+    frame(agent.lua_state_agent, 16.0);
+    if macros::is_excute(agent) {
+        macros::LANDING_EFFECT(agent, Hash40::new("sys_down_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.7, 0, 0, 0, 0, 0, 0, false);
+        macros::LAST_EFFECT_SET_RATE(agent, 1);
+    }
+    frame(agent.lua_state_agent, 25.0);
+    if macros::is_excute(agent) {
+        macros::EFFECT(agent, Hash40::new("sys_crown"), Hash40::new("top"), 4, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
+    }
+    frame(agent.lua_state_agent, 56.0);
+    if macros::is_excute(agent) {
+        macros::LANDING_EFFECT(agent, Hash40::new("sys_down_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.7, 0, 0, 0, 0, 0, 0, false);
+        macros::LAST_EFFECT_SET_RATE(agent, 1);
+    }
+}
+#[acmd_script( agent = "pikmin", script = "sound_throwlw", category = ACMD_SOUND, low_priority )]
+unsafe fn rayman_dthrow_snd(agent: &mut L2CAgentBase) {
+    frame(agent.lua_state_agent, 2.0);
+    if macros::is_excute(agent) {
+        macros::PLAY_SE(agent, Hash40::new("se_common_throw_01"));
+    }
+    frame(agent.lua_state_agent, 25.0);
+    if macros::is_excute(agent) {
+        macros::PLAY_SE(agent, Hash40::new("se_common_throw_03"));
+        attack_vc(agent);
+    }
+    frame(agent.lua_state_agent, 56.0);
+    if macros::is_excute(agent) {
+        macros::PLAY_SE(agent, Hash40::new("se_common_down_l_01"));
+    }
 }
 #[acmd_script( 
 	agent = "pikmin", 
@@ -1270,8 +1373,16 @@ unsafe fn rayman_slide_dtilt_eff(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 3.0);
     if macros::is_excute(fighter) {
         macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_attack_speedline"), Hash40::new("top"), 0, 2, 3, 0, 0, 0, 0.35, true);
-        macros::LAST_EFFECT_SET_COLOR(fighter, 1.15, 0.61, 0.0);
         macros::LAST_EFFECT_SET_ALPHA(fighter, 0.5);
+        if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 1 { //raymesis
+            macros::LAST_EFFECT_SET_COLOR(fighter, 1.07, 0.38, 1.76);
+        }
+        else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 2 { //glowbox
+            macros::LAST_EFFECT_SET_COLOR(fighter, 0.0, 0.29, 0.89);
+        }
+        else {
+            macros::LAST_EFFECT_SET_COLOR(fighter, 1.15, 0.61, 0.0);
+        }
     }
 }
 #[acmd_script( agent = "pikmin", script = "sound_slideattacklw", category = ACMD_SOUND, low_priority )]
@@ -1280,6 +1391,74 @@ unsafe fn rayman_slide_dtilt_snd(agent: &mut L2CAgentBase) {
     if macros::is_excute(agent) {
         macros::PLAY_SE(agent, Hash40::new("se_pikmin_smash_l02"));
     }
+}
+#[acmd_script( 
+	agent = "pikmin", 
+	script = "game_slideattackhi", 
+	category = ACMD_GAME, 
+	low_priority )]
+unsafe fn rayman_slide_utilt(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    frame(fighter.lua_state_agent, 8.0);
+    if macros::is_excute(fighter) {
+        macros::ATTACK(fighter, 0, 0, Hash40::new("footr"), 9.0, 81, 40, 0, 85, 8.0, 0.0, 0.0, 0.0, None, None, None, 1.1, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_KICK, *ATTACK_REGION_PUNCH);
+        macros::ATTACK(fighter, 1, 0, Hash40::new("footl"), 9.0, 81, 40, 0, 85, 8.0, 0.0, 0.0, 0.0, None, None, None, 1.1, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_KICK, *ATTACK_REGION_PUNCH);
+    	macros::ATK_SET_SHIELD_SETOFF_MUL(fighter, /*ID*/ 0, /*ShieldstunMul*/ 0.1);
+		macros::ATK_SET_SHIELD_SETOFF_MUL(fighter, /*ID*/ 1, /*ShieldstunMul*/ 0.1);
+	}  
+    frame(fighter.lua_state_agent, 12.0);
+    if macros::is_excute(fighter) {
+		StatusModule::set_situation_kind(fighter.module_accessor, smash::app::SituationKind(*SITUATION_KIND_AIR), true);
+		StatusModule::set_keep_situation_air(fighter.module_accessor, true);
+        macros::ATTACK(fighter, 0, 0, Hash40::new("footr"), 8.0, 81, 40, 0, 85, 5.0, 0.0, 0.0, 0.0, None, None, None, 1.1, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_KICK, *ATTACK_REGION_PUNCH);
+        macros::ATTACK(fighter, 1, 0, Hash40::new("footl"), 8.0, 81, 40, 0, 85, 5.0, 0.0, 0.0, 0.0, None, None, None, 1.1, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_KICK, *ATTACK_REGION_PUNCH);
+    	macros::ATK_SET_SHIELD_SETOFF_MUL(fighter, /*ID*/ 0, /*ShieldstunMul*/ 0.1);
+		macros::ATK_SET_SHIELD_SETOFF_MUL(fighter, /*ID*/ 1, /*ShieldstunMul*/ 0.1);
+	}
+    frame(fighter.lua_state_agent, 20.0);
+    if macros::is_excute(fighter) {
+		AttackModule::clear_all(fighter.module_accessor);
+    }
+    frame(fighter.lua_state_agent, 33.0);
+    if macros::is_excute(fighter) {
+		StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_FALL, false);
+	}
+    frame(fighter.lua_state_agent, 40.0);
+    if macros::is_excute(fighter) {
+		KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_MOTION_FALL);
+    }
+}
+#[acmd_script( 
+	agent = "pikmin", 
+	script = "effect_slideattackhi", 
+	category = ACMD_EFFECT, 
+	low_priority )]
+unsafe fn rayman_slide_utilt_eff(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    frame(fighter.lua_state_agent, 11.0);
+    if macros::is_excute(fighter) {
+		macros::LANDING_EFFECT(fighter, Hash40::new("sys_v_smoke_a"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
+	}
+}
+#[acmd_script( 
+	agent = "pikmin", 
+	script = "sound_slideattackhi", 
+	category = ACMD_SOUND, 
+	low_priority )]
+unsafe fn rayman_slide_utilt_snd(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    frame(fighter.lua_state_agent, 11.0);
+    if macros::is_excute(fighter) {
+		macros::PLAY_SE(fighter, Hash40::new("se_pikmin_attackair_b01"));
+	}
+    frame(fighter.lua_state_agent, 12.0);
+    if macros::is_excute(fighter) {
+		let rand_val = smash::app::sv_math::rand(hash40("fighter"), 5);
+	    match rand_val {
+            0 => macros::PLAY_SE(fighter, Hash40::new("se_pikmin_attackair_n02")),
+            _ => println!("rayman is silent"),
+        }
+	}
 }
 #[acmd_script( 
 	agent = "pikmin", 
@@ -1701,7 +1880,7 @@ unsafe fn rayman_sideb_eff(fighter: &mut L2CAgentBase) {
     }
     frame(fighter.lua_state_agent, 110.0);
 	if macros::is_excute(fighter) {
-		macros::EFFECT(fighter, Hash40::new("sys_erace_smoke"), Hash40::new("top"), 1, 3.5, 8, 0, 0, 0, 2.0, 0, 0, 0, 0, 0, 0, false);
+		macros::EFFECT(fighter, Hash40::new("sys_erace_smoke"), Hash40::new("top"), 12.5, 3.5, 1, 0, 0, 0, 2.0, 0, 0, 0, 0, 0, 0, false);
 	}
 }
 #[acmd_script( 
@@ -2049,6 +2228,50 @@ unsafe fn rayman_slipattack_snd(agent: &mut L2CAgentBase) {
         macros::PLAY_STEP(agent, Hash40::new("se_pikmin_step_right_m"));
     }
 }
+#[acmd_script( agent = "pikmin", script = "game_entryl", category = ACMD_GAME, low_priority )]
+unsafe fn rayman_entryl(agent: &mut L2CAgentBase) {
+    
+}
+#[acmd_script( agent = "pikmin", script = "effect_entryl", category = ACMD_EFFECT, low_priority )]
+unsafe fn rayman_entryl_eff(agent: &mut L2CAgentBase) {
+    frame(agent.lua_state_agent, 3.0);
+    if macros::is_excute(agent) {
+        macros::EFFECT(agent, Hash40::new("sys_landing_smoke_s"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.8, 0, 0, 0, 0, 0, 0, false);
+    }
+}
+#[acmd_script( agent = "pikmin", script = "sound_entryl", category = ACMD_SOUND, low_priority )]
+unsafe fn rayman_entryl_snd(agent: &mut L2CAgentBase) {
+    frame(agent.lua_state_agent, 3.0);
+    if macros::is_excute(agent) {
+        macros::PLAY_STATUS(agent, Hash40::new("se_pikmin_landing01"));
+    }
+}
+#[acmd_script( agent = "pikmin", script = "game_entryr", category = ACMD_GAME, low_priority )]
+unsafe fn rayman_entryr(agent: &mut L2CAgentBase) {
+    
+}
+#[acmd_script( agent = "pikmin", script = "effect_entryr", category = ACMD_EFFECT, low_priority )]
+unsafe fn rayman_entryr_eff(agent: &mut L2CAgentBase) {
+    frame(agent.lua_state_agent, 3.0);
+    if macros::is_excute(agent) {
+        macros::EFFECT(agent, Hash40::new("sys_landing_smoke_s"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.8, 0, 0, 0, 0, 0, 0, false);
+    }
+}
+#[acmd_script( agent = "pikmin", script = "sound_entryr", category = ACMD_SOUND, low_priority )]
+unsafe fn rayman_entryr_snd(agent: &mut L2CAgentBase) {
+    frame(agent.lua_state_agent, 3.0);
+    if macros::is_excute(agent) {
+        macros::PLAY_STATUS(agent, Hash40::new("se_pikmin_landing01"));
+    }
+}
+#[acmd_script( agent = "pikmin_dolfin", script = "effect_entryl", category = ACMD_EFFECT, low_priority )]
+unsafe fn dolfin_entryl_eff(agent: &mut L2CAgentBase) {
+    
+}
+#[acmd_script( agent = "pikmin_dolfin", script = "effect_entryr", category = ACMD_EFFECT, low_priority )]
+unsafe fn dolfin_entryr_eff(agent: &mut L2CAgentBase) {
+    
+}
 
 pub(crate) unsafe fn attack_vc(fighter: &mut L2CAgentBase) -> () {
 	let rand_val = smash::app::sv_math::rand(hash40("fighter"), 6);
@@ -2267,7 +2490,7 @@ fn rayman(fighter: &mut L2CFighterCommon) {
                 IS_SLIDE_MOVE[ENTRY_ID] = true;
             }
         }
-        if [hash40("slide"), hash40("slide_attack_lw"), hash40("slide_attack")].contains(&motion_kind) {
+        if [hash40("slide"), hash40("slide_attack_lw"), hash40("slide_attack"), hash40("slide_attack_hi")].contains(&motion_kind) {
             let desired_brake = 0.025;
             let lr = PostureModule::lr(boma);
             let brake = WorkModule::get_param_float(fighter.module_accessor, hash40("ground_brake"), 0);
@@ -2285,7 +2508,7 @@ fn rayman(fighter: &mut L2CFighterCommon) {
         if motion_kind == hash40("slide_jump") && end_frame - frame < 3.0 {
             MotionModule::change_motion(fighter.module_accessor, Hash40::new("slide_jump_fall"), 0.0, 1.0, false, 0.0, false, false);
         }
-        if ![*FIGHTER_STATUS_KIND_RUN_BRAKE, *FIGHTER_STATUS_KIND_JUMP_SQUAT, *FIGHTER_STATUS_KIND_JUMP, *FIGHTER_STATUS_KIND_ATTACK, *FIGHTER_STATUS_KIND_ATTACK_LW3, *FIGHTER_STATUS_KIND_ATTACK_S3].contains(&status_kind) {
+        if ![*FIGHTER_STATUS_KIND_RUN_BRAKE, *FIGHTER_STATUS_KIND_JUMP_SQUAT, *FIGHTER_STATUS_KIND_JUMP, *FIGHTER_STATUS_KIND_ATTACK, *FIGHTER_STATUS_KIND_ATTACK_LW3, *FIGHTER_STATUS_KIND_ATTACK_S3, *FIGHTER_STATUS_KIND_ATTACK_HI3].contains(&status_kind) {
             IS_SLIDE_MOVE[ENTRY_ID] = false;
         } else if IS_SLIDE_MOVE[ENTRY_ID]{
             if status_kind == *FIGHTER_STATUS_KIND_ATTACK_LW3 {
@@ -2296,6 +2519,12 @@ fn rayman(fighter: &mut L2CFighterCommon) {
             }
             if status_kind == *FIGHTER_STATUS_KIND_ATTACK {
                 StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_ATTACK_S3, true);
+            }
+            if status_kind == *FIGHTER_STATUS_KIND_ATTACK_HI3 {
+                if motion_kind != hash40("slide_attack_hi") {
+                    MotionModule::change_motion(fighter.module_accessor, Hash40::new("slide_attack_hi"), -1.0, 1.0, false, 0.0, false, false);
+                    IS_SLIDE_MOVE[ENTRY_ID] = false;
+                }
             }
             if status_kind == *FIGHTER_STATUS_KIND_ATTACK_S3 {
                 if motion_kind != hash40("slide_attack") {
@@ -2317,12 +2546,18 @@ fn rayman(fighter: &mut L2CFighterCommon) {
         }
         if [hash40("slide_attack_lw")].contains(&motion_kind) {
             if MotionModule::frame(boma) >= 26.0 {
-                MotionModule::change_motion(fighter.module_accessor, Hash40::new("slide_stand"), 0.0, 1.0, false, 0.0, false, false);
+                //MotionModule::change_motion(fighter.module_accessor, Hash40::new("slide_stand"), 0.0, 1.0, false, 0.0, false, false);
             }
         }
         if [hash40("slide_attack")].contains(&motion_kind) {
             if MotionModule::frame(boma) >= 30.0 {
                 MotionModule::change_motion(fighter.module_accessor, Hash40::new("slide_stand"), 0.0, 1.0, false, 0.0, false, false);
+            }
+        }
+        if [hash40("slide_attack_hi")].contains(&motion_kind) {
+            if MotionModule::frame(boma) >= 46.0 {
+                StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL, true);
+                StatusModule::set_situation_kind(boma, smash::app::SituationKind(*SITUATION_KIND_AIR), true);
             }
         }
         if [hash40("slide_stand")].contains(&motion_kind) {
@@ -2349,6 +2584,12 @@ fn rayman(fighter: &mut L2CFighterCommon) {
                 };
             };
         }
+        if [*FIGHTER_STATUS_KIND_ENTRY].contains(&status_kind) {
+            if MotionModule::frame(boma) >= 78.0 {
+                StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_WAIT, true);
+                StatusModule::set_situation_kind(boma, smash::app::SituationKind(*SITUATION_KIND_GROUND), true);
+            }
+        }
         if ![*FIGHTER_PIKMIN_STATUS_KIND_SPECIAL_HI_WAIT, *FIGHTER_PIKMIN_STATUS_KIND_SPECIAL_HI_END, *FIGHTER_STATUS_KIND_SPECIAL_HI, *FIGHTER_STATUS_KIND_ATTACK_AIR].contains(&status_kind) {
             SET_UPB_FREEFALL[ENTRY_ID] = false;
         } else if (frame >= cancel_frame - 5.0 || frame >= end_frame - 5.0) && SET_UPB_FREEFALL[ENTRY_ID]{
@@ -2361,27 +2602,104 @@ fn rayman(fighter: &mut L2CFighterCommon) {
         if [*FIGHTER_PIKMIN_STATUS_KIND_SPECIAL_HI_WAIT, *FIGHTER_STATUS_KIND_SPECIAL_HI].contains(&status_kind) {
             ModelModule::set_mesh_visibility(fighter.module_accessor,Hash40::new("pikmin_hair"),false);
             let lr = PostureModule::lr(fighter.module_accessor);
-            macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("head"), 3.25*lr, 0, 0, 0, 0, 90, 0.25, true, *EF_FLIP_YZ);
-            macros::LAST_EFFECT_SET_COLOR(fighter, 1.15, 0.61, 0.0);
+            macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("head"), 3.3*lr, 0, 0, 0, 0, 90, 0.25, true, *EF_FLIP_YZ);
             macros::LAST_EFFECT_SET_RATE(fighter, 2.0);
-            macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("head"), 3.25*lr, 0, 0, 0, 0, 90, 0.23, true, *EF_FLIP_YZ);
-            macros::LAST_EFFECT_SET_COLOR(fighter, 1.15, 0.61, 0.0);
+            if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 1 { //raymesis
+                macros::LAST_EFFECT_SET_COLOR(fighter, 1.07, 0.38, 1.76);
+            }
+            else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 2 { //glowbox
+                macros::LAST_EFFECT_SET_COLOR(fighter, 0.0, 0.29, 0.89);
+            }
+            else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 6 { //afro
+                macros::LAST_EFFECT_SET_COLOR(fighter, 0.17, 0.0, 0.25);
+            }
+            else {
+                macros::LAST_EFFECT_SET_COLOR(fighter, 1.15, 0.61, 0.0);
+            }
+            macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("head"), 3.3*lr, 0, 0, 0, 0, 90, 0.23, true, *EF_FLIP_YZ);
             macros::LAST_EFFECT_SET_RATE(fighter, 2.0);
-            macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("head"), 2.75*lr, 0, 0, 0, 0, 90, 0.21, true, *EF_FLIP_YZ);
-            macros::LAST_EFFECT_SET_COLOR(fighter, 1.15, 0.61, 0.0);
+            if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 1 { //raymesis
+                macros::LAST_EFFECT_SET_COLOR(fighter, 1.07, 0.38, 1.76);
+            }
+            else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 2 { //glowbox
+                macros::LAST_EFFECT_SET_COLOR(fighter, 0.0, 0.29, 0.89);
+            }
+            else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 6 { //afro
+                macros::LAST_EFFECT_SET_COLOR(fighter, 0.17, 0.0, 0.25);
+            }
+            else {
+                macros::LAST_EFFECT_SET_COLOR(fighter, 1.15, 0.61, 0.0);
+            }
+            macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("head"), 2.8*lr, 0, 0, 0, 0, 90, 0.21, true, *EF_FLIP_YZ);
             macros::LAST_EFFECT_SET_RATE(fighter, 2.0);
-            macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("head"), 3.25*lr, 0, 0, 0, 0, 90, 0.17, true, *EF_FLIP_YZ);
-            macros::LAST_EFFECT_SET_COLOR(fighter, 1.15, 0.61, 0.0);
+            if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 1 { //raymesis
+                macros::LAST_EFFECT_SET_COLOR(fighter, 1.07, 0.38, 1.76);
+            }
+            else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 2 { //glowbox
+                macros::LAST_EFFECT_SET_COLOR(fighter, 0.0, 0.29, 0.89);
+            }
+            else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 6 { //afro
+                macros::LAST_EFFECT_SET_COLOR(fighter, 0.17, 0.0, 0.25);
+            }
+            else {
+                macros::LAST_EFFECT_SET_COLOR(fighter, 1.15, 0.61, 0.0);
+            }
+            macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("head"), 3.3*lr, 0, 0, 0, 0, 90, 0.17, true, *EF_FLIP_YZ);
             macros::LAST_EFFECT_SET_RATE(fighter, 2.0);
-            macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("head"), 3.25*lr, 0, 0, 0, 0, 90, 0.13, true, *EF_FLIP_YZ);
-            macros::LAST_EFFECT_SET_COLOR(fighter, 1.15, 0.61, 0.0);
+            if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 1 { //raymesis
+                macros::LAST_EFFECT_SET_COLOR(fighter, 1.07, 0.38, 1.76);
+            }
+            else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 2 { //glowbox
+                macros::LAST_EFFECT_SET_COLOR(fighter, 0.0, 0.29, 0.89);
+            }
+            else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 6 { //afro
+                macros::LAST_EFFECT_SET_COLOR(fighter, 0.17, 0.0, 0.25);
+            }
+            else {
+                macros::LAST_EFFECT_SET_COLOR(fighter, 1.15, 0.61, 0.0);
+            }
+            macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("head"), 3.3*lr, 0, 0, 0, 0, 90, 0.13, true, *EF_FLIP_YZ);
             macros::LAST_EFFECT_SET_RATE(fighter, 2.0);
-            macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("head"), 3.25*lr, 0, 0, 0, 0, 90, 0.09, true, *EF_FLIP_YZ);
-            macros::LAST_EFFECT_SET_COLOR(fighter, 1.15, 0.61, 0.0);
+            if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 1 { //raymesis
+                macros::LAST_EFFECT_SET_COLOR(fighter, 1.07, 0.38, 1.76);
+            }
+            else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 2 { //glowbox
+                macros::LAST_EFFECT_SET_COLOR(fighter, 0.0, 0.29, 0.89);
+            }
+            else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 6 { //afro
+                macros::LAST_EFFECT_SET_COLOR(fighter, 0.17, 0.0, 0.25);
+            }
+            else {
+                macros::LAST_EFFECT_SET_COLOR(fighter, 1.15, 0.61, 0.0);
+            }
+            macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("head"), 3.3*lr, 0, 0, 0, 0, 90, 0.09, true, *EF_FLIP_YZ);
             macros::LAST_EFFECT_SET_RATE(fighter, 2.0);
-            macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("head"), 3.25*lr, 0, 0, 0, 0, 90, 0.05, true, *EF_FLIP_YZ);
-            macros::LAST_EFFECT_SET_COLOR(fighter, 1.15, 0.61, 0.0);
+            if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 1 { //raymesis
+                macros::LAST_EFFECT_SET_COLOR(fighter, 1.07, 0.38, 1.76);
+            }
+            else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 2 { //glowbox
+                macros::LAST_EFFECT_SET_COLOR(fighter, 0.0, 0.29, 0.89);
+            }
+            else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 6 { //afro
+                macros::LAST_EFFECT_SET_COLOR(fighter, 0.17, 0.0, 0.25);
+            }
+            else {
+                macros::LAST_EFFECT_SET_COLOR(fighter, 1.15, 0.61, 0.0);
+            }
+            macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("head"), 3.3*lr, 0, 0, 0, 0, 90, 0.05, true, *EF_FLIP_YZ);
             macros::LAST_EFFECT_SET_RATE(fighter, 2.0);
+            if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 1 { //raymesis
+                macros::LAST_EFFECT_SET_COLOR(fighter, 1.07, 0.38, 1.76);
+            }
+            else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 2 { //glowbox
+                macros::LAST_EFFECT_SET_COLOR(fighter, 0.0, 0.29, 0.89);
+            }
+            else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 6 { //afro
+                macros::LAST_EFFECT_SET_COLOR(fighter, 0.17, 0.0, 0.25);
+            }
+            else {
+                macros::LAST_EFFECT_SET_COLOR(fighter, 1.15, 0.61, 0.0);
+            }
             WorkModule::off_flag(boma, *FIGHTER_PIKMIN_STATUS_SPECIAL_HI_COMMON_FLAG_TURN);
         } else {
             ModelModule::set_mesh_visibility(fighter.module_accessor,Hash40::new("pikmin_hair"),true);
@@ -2525,15 +2843,26 @@ pub unsafe fn main_jumpsquat(fighter: &mut L2CFighterCommon) -> L2CValue {
 #[status_script(agent = "pikmin", status = FIGHTER_STATUS_KIND_ATTACK_HI3, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
 pub unsafe fn main_utilt(fighter: &mut L2CFighterCommon) -> L2CValue {
     let motion_kind = MotionModule::motion_kind(fighter.module_accessor);
+    let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
     let frame = MotionModule::frame(fighter.module_accessor);
 	let cancel_frame = FighterMotionModuleImpl::get_cancel_frame(fighter.module_accessor,smash::phx::Hash40::new_raw(MotionModule::motion_kind(fighter.module_accessor)),false) as f32; //Cancel frame
-	if motion_kind != hash40("attack_hi3") {
-		MotionModule::change_motion(fighter.module_accessor, Hash40::new("attack_hi3"), -1.0, 1.0, false, 0.0, false, false);
-	}
-	if MotionModule::is_end(fighter.module_accessor) {
-		fighter.change_status(FIGHTER_STATUS_KIND_FALL.into(), false.into());
-	}
-	0.into() 
+	if !IS_SLIDE_MOVE[ENTRY_ID] && motion_kind != hash40("slide_attack_hi"){
+        if motion_kind != hash40("attack_hi3") {
+            MotionModule::change_motion(fighter.module_accessor, Hash40::new("attack_hi3"), -1.0, 1.0, false, 0.0, false, false);
+        }
+        if MotionModule::is_end(fighter.module_accessor) {
+            fighter.change_status(FIGHTER_STATUS_KIND_FALL.into(), false.into());
+        }
+    } else {
+        if motion_kind != hash40("slide_attack_hi") {
+            MotionModule::change_motion(fighter.module_accessor, Hash40::new("slide_attack_hi"), -1.0, 1.0, false, 0.0, false, false);
+            IS_SLIDE_MOVE[ENTRY_ID] = false;
+        }
+        if MotionModule::is_end(fighter.module_accessor) {
+            fighter.change_status(FIGHTER_STATUS_KIND_FALL.into(), false.into());
+        }
+    }
+    0.into() 
 } 
 
 #[status_script(agent = "pikmin", status = FIGHTER_STATUS_KIND_ATTACK_HI3, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_PRE)]
@@ -2621,11 +2950,12 @@ pub fn install() {
         rayman_uthrow, rayman_uthrow_eff, rayman_uthrow_snd,
         rayman_bthrow, rayman_bthrow_eff,
         rayman_fthrow, rayman_fthrow_eff,
-        rayman_dthrow, rayman_dthrow_eff,
+        rayman_dthrow, rayman_dthrow_eff, rayman_dthrow_snd,
 
         //Slide
         rayman_slide_attack, rayman_slide_attack_eff, rayman_slide_attack_snd,
         rayman_slide_dtilt, rayman_slide_dtilt_eff, rayman_slide_dtilt_snd,
+        rayman_slide_utilt, rayman_slide_utilt_eff, rayman_slide_utilt_snd,
 
         //Misc
         rayman_cliffattack, rayman_cliffattack_eff, rayman_cliffattack_snd,
@@ -2650,7 +2980,10 @@ pub fn install() {
         rayman_jumpaerialback_snd,
         rayman_jumpaerialfront_snd,
         rayman_squatrv_snd,
-        rayman_slipattack_eff, rayman_slipattack_snd
+        rayman_slipattack_eff, rayman_slipattack_snd,
+        rayman_entryl, rayman_entryl_eff, rayman_entryl_snd,
+        rayman_entryr, rayman_entryr_eff, rayman_entryr_snd,
+        dolfin_entryl_eff, dolfin_entryr_eff
     );
     smashline::install_agent_frames!(
 		kill_pikmin,
