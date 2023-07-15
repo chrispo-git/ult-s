@@ -1,5 +1,37 @@
 {
 	"new-dir-files": {
+        "fighter/gamewatch/c00": [
+          "fighter/gamewatch/motion/normal_weapon/c00/c05attackairf.nuanmb",
+          "fighter/gamewatch/motion/normal_weapon/c00/c05landingairf.nuanmb"
+        ],
+        "fighter/gamewatch/c01": [
+          "fighter/gamewatch/motion/normal_weapon/c01/c05attackairf.nuanmb",
+          "fighter/gamewatch/motion/normal_weapon/c01/c05landingairf.nuanmb"
+        ],
+        "fighter/gamewatch/c02": [
+          "fighter/gamewatch/motion/normal_weapon/c02/c05attackairf.nuanmb",
+          "fighter/gamewatch/motion/normal_weapon/c02/c05landingairf.nuanmb"
+        ],
+        "fighter/gamewatch/c03": [
+          "fighter/gamewatch/motion/normal_weapon/c03/c05attackairf.nuanmb",
+          "fighter/gamewatch/motion/normal_weapon/c03/c05landingairf.nuanmb"
+        ],
+        "fighter/gamewatch/c04": [
+          "fighter/gamewatch/motion/normal_weapon/c04/c05attackairf.nuanmb",
+          "fighter/gamewatch/motion/normal_weapon/c04/c05landingairf.nuanmb"
+        ],
+        "fighter/gamewatch/c05": [
+          "fighter/gamewatch/motion/normal_weapon/c05/c05attackairf.nuanmb",
+          "fighter/gamewatch/motion/normal_weapon/c05/c05landingairf.nuanmb"
+        ],
+        "fighter/gamewatch/c06": [
+          "fighter/gamewatch/motion/normal_weapon/c06/c05attackairf.nuanmb",
+          "fighter/gamewatch/motion/normal_weapon/c06/c05landingairf.nuanmb"
+        ],
+        "fighter/gamewatch/c07": [
+          "fighter/gamewatch/motion/normal_weapon/c07/c05attackairf.nuanmb",
+          "fighter/gamewatch/motion/normal_weapon/c07/c05landingairf.nuanmb"
+        ],
     	  "fighter/snake/c00": [
 			"fighter/snake/motion/body/c00/c03attacks4s2.nuanmb",
 			"fighter/snake/motion/body/c00/c03attacks4s3.nuanmb",
