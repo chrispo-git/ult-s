@@ -122,7 +122,7 @@ unsafe fn ink_fair_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 11.0);
 		if macros::is_excute(fighter) {
-			if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_INKLING_INSTANCE_WORK_ID_FLAG_INK_SUCCESS) {
+			if WorkModule::get_float(fighter.module_accessor, *FIGHTER_INKLING_INSTANCE_WORK_ID_FLOAT_INK) > 0.0 {
 				macros::PLAY_SE(fighter, Hash40::new("se_inkling_attack100_02"));
 			} else {
 				macros::PLAY_SE(fighter, Hash40::new("se_inkling_airshot"));
