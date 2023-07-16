@@ -2475,9 +2475,6 @@ fn rayman(fighter: &mut L2CFighterCommon) {
                 let lr = PostureModule::lr(boma);
                 let speed = get_speed_x(boma) * lr;
                 MotionModule::set_rate(boma, 0.4);
-                if speed < 0.1 {
-                    MotionModule::change_motion(fighter.module_accessor, Hash40::new("slide_stand"), 0.0, 1.0, false, 0.0, false, false);
-                }
                 WorkModule::unable_transition_term(boma, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_ATTACK_HI4_START);
                 //WorkModule::unable_transition_term(boma, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_ATTACK_LW4_START);
                 WorkModule::unable_transition_term(boma, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_ATTACK_S4_START);
@@ -2486,7 +2483,45 @@ fn rayman(fighter: &mut L2CFighterCommon) {
                 IS_SLIDE_MOVE[ENTRY_ID] = true;
             }
         }
-        if [hash40("slide"), hash40("slide_attack_lw"), hash40("slide_attack"), hash40("slide_attack_hi")].contains(&motion_kind) {
+        if [hash40("slide")].contains(&motion_kind) {
+            let speed = get_speed_x(boma) * lr;
+            if speed < 0.1 {
+                MotionModule::change_motion(fighter.module_accessor, Hash40::new("slide_stand"), 0.0, 1.0, false, 0.0, false, false);
+            }
+        }
+        if [hash40("slide_attack")].contains(&motion_kind) {
+            if end_frame-frame < 3.0 {
+                MotionModule::change_motion(fighter.module_accessor, Hash40::new("slide_stand"), 0.0, 1.0, false, 0.0, false, false);
+            }
+        }
+        if [hash40("slide_attack_lw")].contains(&motion_kind) {
+            if end_frame-frame < 3.0 {
+                StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_WAIT, false);
+            }
+            if frame >= (cancel_frame - 2.0) {
+                if (
+                    (ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_ATTACK_S4) != 0 ||
+                    (ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_ATTACK_LW4) != 0 ||
+                    (ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_ATTACK_HI4) != 0 ||
+                    (ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_ATTACK_N) != 0 ||
+                    (ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_ATTACK_S3) != 0 ||
+                    (ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_ATTACK_LW3) != 0 ||
+                    (ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_ATTACK_HI3) != 0 ||
+                    (ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_TURN_DASH) != 0 ||
+                    (ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_DASH) != 0 ||
+                    ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_GUARD) ||
+                    ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP) ||
+                    ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_CATCH) 
+                ) {
+                    StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_WAIT, false);
+                }
+            }
+            if frame > 30.0 {
+                MotionModule::set_rate(boma, 0.5);
+            }
+        }
+        if [hash40("slide"), hash40("slide_attack_lw"), hash40("slide_attack")].contains(&
+            motion_kind) {
             let desired_brake = 0.025;
             let lr = PostureModule::lr(boma);
             let brake = WorkModule::get_param_float(fighter.module_accessor, hash40("ground_brake"), 0);
@@ -2539,12 +2574,12 @@ fn rayman(fighter: &mut L2CFighterCommon) {
             if MotionModule::frame(boma) >= 28.0 {
                 StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_RUN_BRAKE, false);
             }
-        }*/
+        }
         if [hash40("slide_attack")].contains(&motion_kind) {
             if MotionModule::frame(boma) >= 30.0 {
                 MotionModule::change_motion(fighter.module_accessor, Hash40::new("slide_stand"), 0.0, 1.0, false, 0.0, false, false);
             }
-        }
+        }*/
         if [hash40("slide_attack_hi")].contains(&motion_kind) {
             if MotionModule::frame(boma) >= 46.0 {
                 StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL, true);
@@ -2793,10 +2828,6 @@ pub unsafe fn main_dtilt(fighter: &mut L2CFighterCommon) -> L2CValue {
         if motion_kind != hash40("slide_attack_lw") && motion_kind != hash40("slide_stand") {
             MotionModule::change_motion(fighter.module_accessor, Hash40::new("slide_attack_lw"), -1.0, 1.0, false, 0.0, false, false);
             IS_SLIDE_MOVE[ENTRY_ID] = false;
-        }
-        if MotionModule::is_end(fighter.module_accessor) {
-            MotionModule::change_motion(fighter.module_accessor, Hash40::new("slide_stand"), 0.0, 1.0, false, 0.0, false, false);
-            //fighter.change_status(FIGHTER_STATUS_KIND_WAIT.into(), false.into());
         }
         0.into() 
     }
