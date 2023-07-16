@@ -74,9 +74,11 @@ unsafe fn ink_fair(fighter: &mut L2CAgentBase) {
 	frame(fighter.lua_state_agent, 12.0);
 	if macros::is_excute(fighter) {
 		WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
-		macros::SET_SPEED_EX(fighter, -1.2, 0.25, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
-		macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 12.0, /*Angle*/ 361, /*KBG*/ 82, /*FKB*/ 0, /*BKB*/ 28, /*Size*/ 5.0, /*X*/ 0.0, /*Y*/ 6.5, /*Z*/ 10.0, /*X2*/ Some(0.0), /*Y2*/ Some(10.0), /*Z2*/ Some(13.0), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_WATER, /*Type*/ *ATTACK_REGION_WATER);
-		AttackModule::set_ink_value(fighter.module_accessor, /*ID*/ 0, 80.0);
+		if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_INKLING_INSTANCE_WORK_ID_FLAG_INK_SUCCESS) {
+			macros::SET_SPEED_EX(fighter, -1.2, 0.25, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+			macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 12.0, /*Angle*/ 361, /*KBG*/ 82, /*FKB*/ 0, /*BKB*/ 28, /*Size*/ 5.0, /*X*/ 0.0, /*Y*/ 6.5, /*Z*/ 10.0, /*X2*/ Some(0.0), /*Y2*/ Some(10.0), /*Z2*/ Some(13.0), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_WATER, /*Type*/ *ATTACK_REGION_WATER);
+			AttackModule::set_ink_value(fighter.module_accessor, /*ID*/ 0, 80.0);
+		}
 	}
 	frame(fighter.lua_state_agent, 15.0);
 	if macros::is_excute(fighter) {
@@ -96,16 +98,20 @@ unsafe fn ink_fair_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	frame(fighter.lua_state_agent, 2.0);
 	if macros::is_excute(fighter) {
-        macros::EFFECT_FOLLOW(fighter, Hash40::new("inkling_muzzle_shot3"), Hash40::new("muzzle"), -1, 0, 0, 0, 180, 0, 0.5, true);
-         macros::LAST_EFFECT_SET_RATE(fighter, 1.5);
-		macros::LAST_PARTICLE_SET_COLOR(fighter, WorkModule::get_float(fighter.module_accessor, *FIGHTER_INKLING_INSTANCE_WORK_ID_FLOAT_INK_R), WorkModule::get_float(fighter.module_accessor, *FIGHTER_INKLING_INSTANCE_WORK_ID_FLOAT_INK_G), WorkModule::get_float(fighter.module_accessor, *FIGHTER_INKLING_INSTANCE_WORK_ID_FLOAT_INK_B));
-    }
+		if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_INKLING_INSTANCE_WORK_ID_FLAG_INK_SUCCESS) {
+        	macros::EFFECT_FOLLOW(fighter, Hash40::new("inkling_muzzle_shot3"), Hash40::new("muzzle"), -1, 0, 0, 0, 180, 0, 0.5, true);
+        	macros::LAST_EFFECT_SET_RATE(fighter, 1.5);
+			macros::LAST_PARTICLE_SET_COLOR(fighter, WorkModule::get_float(fighter.module_accessor, *FIGHTER_INKLING_INSTANCE_WORK_ID_FLOAT_INK_R), WorkModule::get_float(fighter.module_accessor, *FIGHTER_INKLING_INSTANCE_WORK_ID_FLOAT_INK_G), WorkModule::get_float(fighter.module_accessor, *FIGHTER_INKLING_INSTANCE_WORK_ID_FLOAT_INK_B));
+		}
+	}
 	frame(fighter.lua_state_agent, 11.0);
 	if macros::is_excute(fighter) {
-        macros::EFFECT_FOLLOW_NO_STOP(fighter, Hash40::new("inkling_muzzle_shot"), Hash40::new("muzzle"), -1, 0, 0, 0, 180, 0, 1.2, true);
-        macros::LAST_EFFECT_SET_RATE(fighter, 0.7);
-		macros::LAST_PARTICLE_SET_COLOR(fighter, WorkModule::get_float(fighter.module_accessor, *FIGHTER_INKLING_INSTANCE_WORK_ID_FLOAT_INK_R), WorkModule::get_float(fighter.module_accessor, *FIGHTER_INKLING_INSTANCE_WORK_ID_FLOAT_INK_G), WorkModule::get_float(fighter.module_accessor, *FIGHTER_INKLING_INSTANCE_WORK_ID_FLOAT_INK_B));
-    }
+		if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_INKLING_INSTANCE_WORK_ID_FLAG_INK_SUCCESS) {
+        	macros::EFFECT_FOLLOW_NO_STOP(fighter, Hash40::new("inkling_muzzle_shot"), Hash40::new("muzzle"), -1, 0, 0, 0, 180, 0, 1.2, true);
+        	macros::LAST_EFFECT_SET_RATE(fighter, 0.7);
+			macros::LAST_PARTICLE_SET_COLOR(fighter, WorkModule::get_float(fighter.module_accessor, *FIGHTER_INKLING_INSTANCE_WORK_ID_FLOAT_INK_R), WorkModule::get_float(fighter.module_accessor, *FIGHTER_INKLING_INSTANCE_WORK_ID_FLOAT_INK_G), WorkModule::get_float(fighter.module_accessor, *FIGHTER_INKLING_INSTANCE_WORK_ID_FLOAT_INK_B));
+		}
+	}
 }
 #[acmd_script(
     agent = "inkling",
@@ -116,7 +122,11 @@ unsafe fn ink_fair_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 11.0);
 		if macros::is_excute(fighter) {
-			macros::PLAY_SE(fighter, Hash40::new("se_inkling_attack100_02"));
+			if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_INKLING_INSTANCE_WORK_ID_FLAG_INK_SUCCESS) {
+				macros::PLAY_SE(fighter, Hash40::new("se_inkling_attack100_02"));
+			} else {
+				macros::PLAY_SE(fighter, Hash40::new("se_inkling_airshot"));
+			}
 		}
 }
 #[acmd_script(
