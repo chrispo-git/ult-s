@@ -1229,7 +1229,7 @@ unsafe fn rayman_uthrow_snd(agent: &mut L2CAgentBase) {
     low_priority )]
 unsafe fn rayman_fthrow(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
-        macros::ATTACK_ABS(fighter, *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, 0, 4.0, 45, 50, 0, 100, 0.0, 1.0, *ATTACK_LR_CHECK_F, 0.0, true, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_THROW);
+        macros::ATTACK_ABS(fighter, *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, 0, 4.0, 45, 50, 0, 90, 0.0, 1.0, *ATTACK_LR_CHECK_F, 0.0, true, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_THROW);
         macros::ATTACK_ABS(fighter, *FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, 0, 3.0, 361, 100, 0, 40, 0.0, 1.0, *ATTACK_LR_CHECK_F, 0.0, true, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_THROW);
     }
 	frame(fighter.lua_state_agent, 13.0);
@@ -2535,11 +2535,11 @@ fn rayman(fighter: &mut L2CFighterCommon) {
                 }
             }
         }
-        if [hash40("slide_attack_lw")].contains(&motion_kind) {
+        /*if [hash40("slide_attack_lw")].contains(&motion_kind) {
             if MotionModule::frame(boma) >= 28.0 {
                 StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_RUN_BRAKE, false);
             }
-        }
+        }*/
         if [hash40("slide_attack")].contains(&motion_kind) {
             if MotionModule::frame(boma) >= 30.0 {
                 MotionModule::change_motion(fighter.module_accessor, Hash40::new("slide_stand"), 0.0, 1.0, false, 0.0, false, false);
@@ -2795,7 +2795,8 @@ pub unsafe fn main_dtilt(fighter: &mut L2CFighterCommon) -> L2CValue {
             IS_SLIDE_MOVE[ENTRY_ID] = false;
         }
         if MotionModule::is_end(fighter.module_accessor) {
-            fighter.change_status(FIGHTER_STATUS_KIND_WAIT.into(), false.into());
+            MotionModule::change_motion(fighter.module_accessor, Hash40::new("slide_stand"), 0.0, 1.0, false, 0.0, false, false);
+            //fighter.change_status(FIGHTER_STATUS_KIND_WAIT.into(), false.into());
         }
         0.into() 
     }
@@ -2856,16 +2857,6 @@ pub unsafe fn main_utilt(fighter: &mut L2CFighterCommon) -> L2CValue {
     0.into() 
 } 
 
-#[status_script(agent = "pikmin", status = FIGHTER_STATUS_KIND_RUN_BRAKE, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
-pub unsafe fn main_runbrake(fighter: &mut L2CFighterCommon) -> L2CValue {
-    let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
-    if StatusModule::prev_status_kind(boma, 0) == *FIGHTER_STATUS_KIND_ATTACK_LW3 {
-        MotionModule::change_motion(fighter.module_accessor, Hash40::new("slide_stand"), 0.0, 1.0, false, 0.0, false, false);
-        0.into() 
-    } else {
-        original!(fighter)
-    }
-} 
 
 #[status_script(agent = "pikmin", status = FIGHTER_STATUS_KIND_ATTACK_HI3, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_PRE)]
 unsafe fn utilt_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
@@ -2910,7 +2901,7 @@ pub fn install() {
         main_throw, exec_throw, throw_init, throw_exit,
 
         //Slide Shit
-        main_jab, main_dtilt, main_runbrake,
+        main_jab, main_dtilt, 
         main_jumpsquat
     );
     smashline::install_acmd_scripts!(
