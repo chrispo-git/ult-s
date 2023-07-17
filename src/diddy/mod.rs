@@ -51,6 +51,9 @@ fn diddy_frame(fighter: &mut L2CFighterCommon) {
 		} else {
 			macros::STOP_SE(fighter, Hash40::new("vc_diddy_001"));
 		}
+		if [hash40("appeal_hi_r"), hash40("appeal_hi_l"), hash40("appeal_lw_r"), hash40("appeal_lw_l")].contains(&motion_kind) {
+			ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_DIDDY_GENERATE_ARTICLE_GUN,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
+		}
 	}
 }	
 #[weapon_frame( agent = WEAPON_KIND_DIDDY_GUN )]
@@ -62,7 +65,7 @@ fn gun_frame(weapon: &mut L2CFighterBase) {
 		let owner_status_kind = StatusModule::status_kind(&mut *boma);
 		let own_motion_kind = MotionModule::motion_kind(&mut *boma);
         if smash::app::utility::get_kind(&mut *boma) == *FIGHTER_KIND_DIDDY {
-			if owner_status_kind == *FIGHTER_STATUS_KIND_APPEAL {
+			if [hash40("appeal_s_r"), hash40("appeal_s_l")].contains(&own_motion_kind) {
 				ModelModule::set_mesh_visibility(weapon.module_accessor,Hash40::new("brktutum"),false);
 				ModelModule::set_mesh_visibility(weapon.module_accessor,Hash40::new("tutu1m"),false);
 				ModelModule::set_mesh_visibility(weapon.module_accessor,Hash40::new("tutu2m"),false);
