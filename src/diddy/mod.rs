@@ -50,7 +50,29 @@ pub fn diddy(fighter : &mut L2CFighterCommon) {
 		};
 	};
 }
-
+#[weapon_frame( agent = WEAPON_KIND_DIDDY_GUN )]
+fn gun_frame(weapon: &mut L2CFighterBase) {
+    unsafe {
+        let otarget_id = WorkModule::get_int(weapon.module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LINK_OWNER) as u32;
+        let boma = smash::app::sv_battle_object::module_accessor(otarget_id);
+		let ENTRY_ID = WorkModule::get_int(&mut *boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+		let owner_status_kind = StatusModule::status_kind(&mut *boma);
+		let own_motion_kind = MotionModule::motion_kind(&mut *boma);
+        if smash::app::utility::get_kind(&mut *boma) == *FIGHTER_KIND_DIDDY {
+			if owner_status_kind == *FIGHTER_STATUS_KIND_APPEAL {
+				ModelModule::set_mesh_visibility(weapon.module_accessor,Hash40::new("brktutum"),false);
+				ModelModule::set_mesh_visibility(weapon.module_accessor,Hash40::new("tutu1m"),false);
+				ModelModule::set_mesh_visibility(weapon.module_accessor,Hash40::new("tutu2m"),false);
+				ModelModule::set_mesh_visibility(weapon.module_accessor,Hash40::new("tutu3m"),true);
+			} else {
+				ModelModule::set_mesh_visibility(weapon.module_accessor,Hash40::new("tutu3m"),false);
+				if [hash40("special_air_n_start"), hash40("special_n_start")].contains(&own_motion_kind) {
+					ModelModule::set_mesh_visibility(weapon.module_accessor,Hash40::new("tutu1m"),true);
+				};
+			}
+		};
+    }
+}
 #[acmd_script(
     agent = "diddy",
     script =  "game_attackhi3",
@@ -201,6 +223,22 @@ unsafe fn diddy_nair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }
+#[acmd_script(
+    agent = "diddy",
+    scripts =  ["game_appealsr", "game_appealsl"],
+    category = ACMD_GAME,
+	low_priority)]
+unsafe fn diddy_sidetaunt(fighter: &mut L2CAgentBase) {
+    	let lua_state = fighter.lua_state_agent;
+		frame(fighter.lua_state_agent, 1.0);
+		if macros::is_excute(fighter) {
+			ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_DIDDY_GENERATE_ARTICLE_GUN, false, 0);
+		}
+		frame(fighter.lua_state_agent, 80.0);
+		if macros::is_excute(fighter) {
+			ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_DIDDY_GENERATE_ARTICLE_GUN,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
+		}
+}
 	
 		
 		
@@ -210,7 +248,9 @@ pub fn install() {
 		diddy_ftiltlw,
 		diddy_ftilts,
 		diddy_utilt,
-		diddy_nair
+		diddy_nair,
+		diddy_sidetaunt
     );
 	smashline::install_agent_frame_callbacks!(diddy);
+	smashline::install_agent_frames!(gun_frame);
 }
