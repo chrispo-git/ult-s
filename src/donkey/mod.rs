@@ -335,6 +335,7 @@ unsafe fn dk_upb_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);   
 	let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+    frame(fighter.lua_state_agent, 4.0);
     if macros::is_excute(fighter) {
         macros::PLAY_SE(fighter, Hash40::new("se_common_assist_escapeair"));
         macros::PLAY_SE(fighter, Hash40::new("se_common_down_l_02"));
