@@ -397,7 +397,7 @@ unsafe fn dk_sideb_eff(fighter: &mut L2CAgentBase) {
 	let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize; 
 		frame(fighter.lua_state_agent, 34.0);
 		if macros::is_excute(fighter) {
-			macros::EFFECT_FOLLOW(fighter, Hash40::new_raw(0x1356a16dd8), Hash40::new("top"), 0, 12, -3, 0, -75, 105, 0.8, true);
+			macros::EFFECT_FOLLOW(fighter, Hash40::new_raw(0x1356a16dd8), Hash40::new("top"), 0, 12, -3, 0, -75, -85, 0.8, true);
 			macros::LAST_EFFECT_SET_RATE(fighter, 1.2);
 		}
 }
