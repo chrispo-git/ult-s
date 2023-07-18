@@ -9,48 +9,76 @@ use smash::phx::Hash40;
 
 static mut DIDDY_PEANUT_CANCEL : [i32; 8] = [0; 8];
 
-#[fighter_frame_callback]
-pub fn diddy(fighter : &mut L2CFighterCommon) {
+#[fighter_frame( agent = FIGHTER_KIND_DIDDY )]
+fn diddy_frame(fighter: &mut L2CFighterCommon) {
     unsafe {
-		let lua_state = fighter.lua_state_agent;
-        let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);
-		let fighter_kind = smash::app::utility::get_kind(boma);
+		let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);   
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
-		let fighter_instance = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID);
-		let mut fighter_num = 0;
-		if fighter_instance == 0 {
-			fighter_num = 0;
-		} else if fighter_instance == 1 {
-			fighter_num = 1;
-		} else if fighter_instance == 2 {
-			fighter_num = 2;
-		} else if fighter_instance == 3 {
-			fighter_num = 3;
-		} else if fighter_instance == 4 {
-			fighter_num = 4;
-		} else if fighter_instance == 5 {
-			fighter_num = 5;
-		} else if fighter_instance == 6 {
-			fighter_num = 6;
-		} else if fighter_instance == 7 {
-			fighter_num = 7;
+		let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize; 
+		let frame = MotionModule::frame(boma);
+		let end_frame = MotionModule::end_frame(boma);
+		let motion_kind = MotionModule::motion_kind(boma);
+		if [hash40("special_air_n_start"), hash40("special_air_n_shoot")].contains(&MotionModule::motion_kind(boma)) {
+			DIDDY_PEANUT_CANCEL[ENTRY_ID] = 1;
 		};
-		if fighter_kind == *FIGHTER_KIND_DIDDY {
-			if [hash40("special_air_n_start"), hash40("special_air_n_shoot")].contains(&MotionModule::motion_kind(boma)) {
-				DIDDY_PEANUT_CANCEL[fighter_num] = 1;
-			};
-			if [hash40("special_n_blow"), hash40("special_air_n_blow"), hash40("special_air_n_shoot"), hash40("special_n_shoot"), hash40("special_air_n_start"), hash40("special_n_start")].contains(&MotionModule::motion_kind(boma)) == false{
-				DIDDY_PEANUT_CANCEL[fighter_num] = 0;
-			};
-			if [hash40("special_n_shoot"), hash40("special_n_blow"), hash40("special_n_start")].contains(&MotionModule::motion_kind(boma)) && DIDDY_PEANUT_CANCEL[fighter_num] == 1 {
-				DIDDY_PEANUT_CANCEL[fighter_num] = 0;
-				println!("laser_land");
-				StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_LANDING, true);
-			};
+		if [hash40("special_n_blow"), hash40("special_air_n_blow"), hash40("special_air_n_shoot"), hash40("special_n_shoot"), hash40("special_air_n_start"), hash40("special_n_start")].contains(&MotionModule::motion_kind(boma)) == false{
+			DIDDY_PEANUT_CANCEL[ENTRY_ID] = 0;
 		};
-	};
+		if [hash40("special_n_shoot"), hash40("special_n_blow"), hash40("special_n_start")].contains(&MotionModule::motion_kind(boma)) && DIDDY_PEANUT_CANCEL[ENTRY_ID] == 1 {
+			DIDDY_PEANUT_CANCEL[ENTRY_ID] = 0;
+			StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_LANDING, true);
+		};
+		if [hash40("appeal_s_r"), hash40("appeal_s_l")].contains(&motion_kind) {
+			if ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_APPEAL_S_L) || ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_APPEAL_S_R) {
+				if frame >= 76.0 && frame < 80.0 {
+					//MotionModule::set_frame_sync_anim_cmd(boma, 10.0, true, true, false);
+					MotionModule::set_frame(boma, 10.0, false);
+				}
+			}
+			if frame as i32 == 82 {
+				macros::EFFECT(fighter, Hash40::new("sys_erace_smoke"), Hash40::new("havel"), 0, 3, 0, 0, 0, 0, 1.4, 0, 0, 0, 0, 0, 0, false);
+				macros::STOP_SE(fighter, Hash40::new("vc_diddy_001"));
+			}
+			if frame > 82.0 {
+				ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_DIDDY_GENERATE_ARTICLE_GUN,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
+			}
+			if frame < 70.0 {
+				MotionModule::set_rate(boma, 0.75);
+			}
+			if frame >= (50.0*MotionModule::rate(boma)) {
+				CancelModule::enable_cancel(boma);
+			}
+		} else {
+			macros::STOP_SE(fighter, Hash40::new("vc_diddy_001"));
+		}
+		if [hash40("appeal_hi_r"), hash40("appeal_hi_l"), hash40("appeal_lw_r"), hash40("appeal_lw_l")].contains(&motion_kind) {
+			ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_DIDDY_GENERATE_ARTICLE_GUN,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
+		}
+	}
+}	
+#[weapon_frame( agent = WEAPON_KIND_DIDDY_GUN )]
+fn gun_frame(weapon: &mut L2CFighterBase) {
+    unsafe {
+        let otarget_id = WorkModule::get_int(weapon.module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LINK_OWNER) as u32;
+        let boma = smash::app::sv_battle_object::module_accessor(otarget_id);
+		let ENTRY_ID = WorkModule::get_int(&mut *boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+		let owner_status_kind = StatusModule::status_kind(&mut *boma);
+		let own_motion_kind = MotionModule::motion_kind(&mut *boma);
+        if smash::app::utility::get_kind(&mut *boma) == *FIGHTER_KIND_DIDDY {
+			if [hash40("appeal_s_r"), hash40("appeal_s_l")].contains(&own_motion_kind) {
+				ModelModule::set_mesh_visibility(weapon.module_accessor,Hash40::new("brktutum"),false);
+				ModelModule::set_mesh_visibility(weapon.module_accessor,Hash40::new("tutu1m"),false);
+				ModelModule::set_mesh_visibility(weapon.module_accessor,Hash40::new("tutu2m"),false);
+				ModelModule::set_mesh_visibility(weapon.module_accessor,Hash40::new("tutu3m"),true);
+			} else {
+				ModelModule::set_mesh_visibility(weapon.module_accessor,Hash40::new("tutu3m"),false);
+				if [hash40("special_air_n_start"), hash40("special_n_start")].contains(&own_motion_kind) {
+					ModelModule::set_mesh_visibility(weapon.module_accessor,Hash40::new("tutu1m"),true);
+				};
+			}
+		};
+    }
 }
-
 #[acmd_script(
     agent = "diddy",
     script =  "game_attackhi3",
@@ -201,6 +229,42 @@ unsafe fn diddy_nair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }
+#[acmd_script(
+    agent = "diddy",
+    scripts =  ["game_appealsr", "game_appealsl"],
+    category = ACMD_GAME,
+	low_priority)]
+unsafe fn diddy_sidetaunt(fighter: &mut L2CAgentBase) {
+    	let lua_state = fighter.lua_state_agent;
+		frame(fighter.lua_state_agent, 7.0);
+		if macros::is_excute(fighter) {
+			ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_DIDDY_GENERATE_ARTICLE_GUN, false, 0);
+		}
+}
+#[acmd_script(
+    agent = "diddy",
+    scripts =  ["effect_appealsr", "effect_appealsl"],
+    category = ACMD_EFFECT,
+	low_priority)]
+unsafe fn diddy_sidetaunt_eff(fighter: &mut L2CAgentBase) {
+    	let lua_state = fighter.lua_state_agent;
+		frame(fighter.lua_state_agent, 6.0);
+		if macros::is_excute(fighter) {
+			macros::EFFECT(fighter, Hash40::new("sys_erace_smoke"), Hash40::new("havel"), 0, 3, 0, 0, 0, 0, 1.4, 0, 0, 0, 0, 0, 0, false);
+		}
+}
+#[acmd_script(
+    agent = "diddy",
+    scripts =  ["sound_appealsr", "sound_appealsl"],
+    category = ACMD_SOUND,
+	low_priority)]
+unsafe fn diddy_sidetaunt_snd(fighter: &mut L2CAgentBase) {
+    	let lua_state = fighter.lua_state_agent;
+		frame(fighter.lua_state_agent, 7.0);
+		if macros::is_excute(fighter) {
+			macros::PLAY_SE(fighter, Hash40::new("vc_diddy_001"));
+		}
+}
 	
 		
 		
@@ -210,7 +274,8 @@ pub fn install() {
 		diddy_ftiltlw,
 		diddy_ftilts,
 		diddy_utilt,
-		diddy_nair
+		diddy_nair,
+		diddy_sidetaunt, diddy_sidetaunt_eff, diddy_sidetaunt_snd
     );
-	smashline::install_agent_frame_callbacks!(diddy);
+	smashline::install_agent_frames!(gun_frame, diddy_frame);
 }

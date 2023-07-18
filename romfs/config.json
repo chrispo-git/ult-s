@@ -198,6 +198,38 @@
           "fighter/gamewatch/motion/normal_weapon/c07/c05attackairf.nuanmb",
           "fighter/gamewatch/motion/normal_weapon/c07/c05landingairf.nuanmb"
         ],
+        "fighter/diddy/c00": [
+            "fighter/diddy/model/gun/c00/def_radio_001_col.nutexb",
+            "fighter/diddy/model/gun/c00/def_radio_001_nor.nutexb"
+        ],
+        "fighter/diddy/c01": [
+            "fighter/diddy/model/gun/c01/def_radio_001_col.nutexb",
+            "fighter/diddy/model/gun/c01/def_radio_001_nor.nutexb"
+        ],
+        "fighter/diddy/c02": [
+            "fighter/diddy/model/gun/c02/def_radio_001_col.nutexb",
+            "fighter/diddy/model/gun/c02/def_radio_001_nor.nutexb"
+        ],
+        "fighter/diddy/c03": [
+            "fighter/diddy/model/gun/c03/def_radio_001_col.nutexb",
+            "fighter/diddy/model/gun/c03/def_radio_001_nor.nutexb"
+        ],
+        "fighter/diddy/c04": [
+            "fighter/diddy/model/gun/c04/def_radio_001_col.nutexb",
+            "fighter/diddy/model/gun/c04/def_radio_001_nor.nutexb"
+        ],
+        "fighter/diddy/c05": [
+            "fighter/diddy/model/gun/c05/def_radio_001_col.nutexb",
+            "fighter/diddy/model/gun/c05/def_radio_001_nor.nutexb"
+        ],
+        "fighter/diddy/c06": [
+            "fighter/diddy/model/gun/c06/def_radio_001_col.nutexb",
+            "fighter/diddy/model/gun/c06/def_radio_001_nor.nutexb"
+        ],
+        "fighter/diddy/c07": [
+            "fighter/diddy/model/gun/c07/def_radio_001_col.nutexb",
+            "fighter/diddy/model/gun/c07/def_radio_001_nor.nutexb"
+        ],
     	  "fighter/snake/c00": [
 			"fighter/snake/motion/body/c00/c03attacks4s2.nuanmb",
 			"fighter/snake/motion/body/c00/c03attacks4s3.nuanmb",
