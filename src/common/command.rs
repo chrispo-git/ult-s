@@ -64,7 +64,7 @@ pub fn once_per_fighter_frame(fighter : &mut L2CFighterCommon) {
 }
 //Edge Cancel List
 pub(crate) fn can_charge(fighter_kind : i32) -> bool {
-	let input_list = [ *FIGHTER_KIND_MARIO, *FIGHTER_KIND_JACK, *FIGHTER_KIND_CAPTAIN, *FIGHTER_KIND_PACKUN, *FIGHTER_KIND_LINK, *FIGHTER_KIND_KIRBY];
+	let input_list = [ *FIGHTER_KIND_MARIO, *FIGHTER_KIND_JACK, *FIGHTER_KIND_CAPTAIN, *FIGHTER_KIND_PACKUN, *FIGHTER_KIND_LINK, *FIGHTER_KIND_KIRBY, *FIGHTER_KIND_ROSETTA];
 	if input_list.contains(&fighter_kind){
 		return true
 	} else {
@@ -269,6 +269,24 @@ pub fn char_charge(fighter : &mut L2CFighterCommon) {
 						HitModule::set_whole(boma, smash::app::HitStatus(*HIT_STATUS_NORMAL), 0);
 						USE_CHARGE[ENTRY_ID] = false;
 					};
+				};
+			};
+			if fighter_kind == *FIGHTER_KIND_ROSETTA {
+				if USE_CHARGE[ENTRY_ID] == true && ![*FIGHTER_STATUS_KIND_ATTACK_AIR, *FIGHTER_STATUS_KIND_ATTACK_S3].contains(&status_kind) {
+					if situation_kind == *SITUATION_KIND_GROUND {
+						if status_kind != *FIGHTER_STATUS_KIND_ATTACK_S3 {
+							StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_ATTACK_S3, true);
+						};
+					} else {
+						if status_kind != *FIGHTER_STATUS_KIND_ATTACK_AIR {
+							WorkModule::on_flag(boma, *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
+							StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_ATTACK_AIR, true);
+						};
+					};
+				};
+				if [*FIGHTER_STATUS_KIND_ATTACK_AIR, *FIGHTER_STATUS_KIND_ATTACK_S3].contains(&status_kind) && USE_CHARGE[ENTRY_ID] == true {
+						MotionModule::change_motion(boma, smash::phx::Hash40::new("explode"), 1.0, 1.0, false, 0.0, false, false);
+						USE_CHARGE[ENTRY_ID] = false;
 				};
 			};
 			/*if fighter_kind == *FIGHTER_KIND_MARIOD {
@@ -1162,41 +1180,6 @@ pub fn char_input(fighter : &mut L2CFighterCommon) {
 				};
 				if StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR && MotionModule::motion_kind(boma) == hash40("attack_dash") && MotionModule::frame(boma) > 30.0 {
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL_SPECIAL, true);
-				};
-			};
-			//Rosalina
-			if fighter_kind == *FIGHTER_KIND_ROSETTA {
-				if true{
-					if INPUT_NUM[ENTRY_ID] == 0 && STICK_NUM[ENTRY_ID] == 2 {
-						INPUT_WINDOW[ENTRY_ID] = 0;
-						INPUT_START[ENTRY_ID] = true;
-						INPUT_NUM[ENTRY_ID] += 1;
-						//println!("Input 1!");
-					};
-					if INPUT_NUM[ENTRY_ID] == 1 && STICK_NUM[ENTRY_ID] == 3{
-						INPUT_NUM[ENTRY_ID] += 1;
-						//println!("Input 2!");
-					};
-					if INPUT_NUM[ENTRY_ID] == 2 && STICK_NUM[ENTRY_ID] == 6 {
-						INPUT_NUM[ENTRY_ID] += 1;
-						//println!("Input 3!");
-					};
-					if INPUT_WINDOW[ENTRY_ID] > INPUT_MAX {
-						INPUT_NUM[ENTRY_ID] = 0;
-						INPUT_START[ENTRY_ID] = false;
-						INPUT_WINDOW[ENTRY_ID] = 0;
-						//println!("Input missed!");
-					}; 
-				};
-				if INPUT_START[ENTRY_ID] == true {
-					INPUT_WINDOW[ENTRY_ID] += 1;
-				};
-				if INPUT_NUM[ENTRY_ID] == 3 && (FighterMotionModuleImpl::get_cancel_frame(boma,smash::phx::Hash40::new_raw(MotionModule::motion_kind(boma)),false) as f32 <= MotionModule::frame(boma) || MotionModule::frame(boma) < 4.0) && !AttackModule::is_attack(fighter.module_accessor, 0, false) && StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR{
-					if (ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_SPECIAL_RAW)  && ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_ATTACK_RAW)) &&  ((ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_CATCH) && ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_GUARD)) || StatusModule::situation_kind(boma) == *SITUATION_KIND_GROUND ) {
-						INPUT_WINDOW[ENTRY_ID] = 0;
-						INPUT_NUM[ENTRY_ID] = 0;
-						ArticleModule::change_motion(boma, *FIGHTER_ROSETTA_GENERATE_ARTICLE_TICO, smash::phx::Hash40::new("explode"),false,0.0);
-					};
 				};
 			};
 			//Kirby
