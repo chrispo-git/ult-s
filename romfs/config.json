@@ -230,6 +230,30 @@
             "fighter/diddy/model/gun/c07/def_radio_001_col.nutexb",
             "fighter/diddy/model/gun/c07/def_radio_001_nor.nutexb"
         ],
+        "fighter/rosetta/c00": [
+          "fighter/rosetta/motion/tico/c00/d00specialnexplode.nuanmb"
+        ],
+        "fighter/rosetta/c01": [
+          "fighter/rosetta/motion/tico/c01/d00specialnexplode.nuanmb"
+        ],
+        "fighter/rosetta/c02": [
+          "fighter/rosetta/motion/tico/c02/d00specialnexplode.nuanmb"
+        ],
+        "fighter/rosetta/c03": [
+          "fighter/rosetta/motion/tico/c03/d00specialnexplode.nuanmb"
+        ],
+        "fighter/rosetta/c04": [
+          "fighter/rosetta/motion/tico/c04/d00specialnexplode.nuanmb"
+        ],
+        "fighter/rosetta/c05": [
+          "fighter/rosetta/motion/tico/c05/d00specialnexplode.nuanmb"
+        ],
+        "fighter/rosetta/c06": [
+          "fighter/rosetta/motion/tico/c06/d00specialnexplode.nuanmb"
+        ],
+        "fighter/rosetta/c07": [
+          "fighter/rosetta/motion/tico/c07/d00specialnexplode.nuanmb"
+        ],
     	  "fighter/snake/c00": [
 			"fighter/snake/motion/body/c00/c03attacks4s2.nuanmb",
 			"fighter/snake/motion/body/c00/c03attacks4s3.nuanmb",
