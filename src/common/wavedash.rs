@@ -252,14 +252,22 @@ pub unsafe fn status_pre_EscapeAir(fighter: &mut L2CFighterCommon) -> L2CValue {
 pub unsafe fn change_status_request_script_hook(boma: &mut smash::app::BattleObjectModuleAccessor, status_kind: i32, arg3: bool) -> u64 {
 	let next_status = status_kind;
 	let is_clear_buffer = arg3;
+	let prev_status_1 = StatusModule::prev_status_kind(boma, 0);
+	let prev_status_2 = StatusModule::prev_status_kind(boma, 1);
 	let curr_status = StatusModule::status_kind(boma);
 	if smash::app::utility::get_category(boma) == *BATTLE_OBJECT_CATEGORY_FIGHTER {
 		if [*FIGHTER_STATUS_KIND_ESCAPE, *FIGHTER_STATUS_KIND_ESCAPE_F, *FIGHTER_STATUS_KIND_ESCAPE_B].contains(&next_status) {
 			if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP) || ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP_MINI) {
 				 original!()(boma, *FIGHTER_STATUS_KIND_JUMP_SQUAT, false)
-			} else {
+			} else if (prev_status_1 == *FIGHTER_STATUS_KIND_LANDING && prev_status_2 == *FIGHTER_STATUS_KIND_JUMP_SQUAT && curr_status == *FIGHTER_STATUS_KIND_WAIT) ||
+			(prev_status_1 == *FIGHTER_STATUS_KIND_JUMP_SQUAT && curr_status == *FIGHTER_STATUS_KIND_LANDING)
+			{
+				return 0 as u64
+			}else {
 				original!()(boma, status_kind, arg3)
 			}
+		} else if next_status == *FIGHTER_STATUS_KIND_TURN && curr_status == *FIGHTER_STATUS_KIND_LANDING{
+			return 0 as u64
 		} else if [*FIGHTER_STATUS_KIND_ESCAPE_AIR, *FIGHTER_STATUS_KIND_ESCAPE_AIR_SLIDE].contains(&next_status) {
 			let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize; 
 			if IS_WAVEDASH[ENTRY_ID] == true {
