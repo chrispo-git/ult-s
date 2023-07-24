@@ -95,6 +95,15 @@ pub fn dash(fighter : &mut L2CFighterCommon) {
                     StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_PASS, true);
                 };
             }
+            let mut is_taunt_pressed = false;
+            for i in [*CONTROL_PAD_BUTTON_APPEAL_S_L, *CONTROL_PAD_BUTTON_APPEAL_HI, *CONTROL_PAD_BUTTON_APPEAL_LW, *CONTROL_PAD_BUTTON_APPEAL_S_R] {
+                if ControlModule::check_button_on_trriger(boma, i) {
+                    is_taunt_pressed = true;
+                }
+            }
+            if is_taunt_pressed {
+                StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_APPEAL, false);
+            }
         }
     };
 }
@@ -116,6 +125,7 @@ pub fn parrycanceldash(fighter : &mut L2CFighterCommon) {
 		};
     };
 }
+
 
 #[skyline::hook(replace = smash::lua2cpp::L2CFighterCommon_sub_transition_group_check_air_tread_jump)]
 pub unsafe fn sub_transition_group_check_air_tread_jump(fighter: &mut L2CFighterCommon) -> L2CValue {
