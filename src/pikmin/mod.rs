@@ -1744,6 +1744,54 @@ unsafe fn rayman_sideb(fighter: &mut L2CAgentBase) {
         AttackModule::clear_all(fighter.module_accessor);
     }
 }
+#[acmd_script( 
+    agent = "pikmin", 
+    script = "game_speciallw", 
+    category = ACMD_GAME, 
+    low_priority )]
+unsafe fn rayman_downb(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 12.0);
+    if macros::is_excute(fighter) {
+        StatusModule::set_situation_kind(fighter.module_accessor, smash::app::SituationKind(*SITUATION_KIND_AIR), true);
+        StatusModule::set_keep_situation_air(fighter.module_accessor, true);
+        macros::ATTACK(fighter, 0, 0, Hash40::new("waist"), 15.0, 52, 60, 0, 80, 11.0, 0.0, 0.0, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_G, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_KICK, *ATTACK_REGION_PUNCH);
+    }
+    frame(fighter.lua_state_agent, 25.0);
+    if macros::is_excute(fighter) {
+        macros::ATTACK(fighter, 0, 0, Hash40::new("waist"), 11.0, 52, 60, 0, 80, 7.0, 0.0, 0.0, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_G, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_KICK, *ATTACK_REGION_PUNCH);
+    }
+    frame(fighter.lua_state_agent, 35.0);
+    if macros::is_excute(fighter) {
+        AttackModule::clear_all(fighter.module_accessor);
+    }
+    frame(fighter.lua_state_agent, 50.0);
+    if macros::is_excute(fighter) {
+        StatusModule::set_keep_situation_air(fighter.module_accessor, false);
+    }
+}
+#[acmd_script( 
+    agent = "pikmin", 
+    script = "game_specialairlw", 
+    category = ACMD_GAME, 
+    low_priority )]
+unsafe fn rayman_air_downb(fighter: &mut L2CAgentBase) {
+    if macros::is_excute(fighter) {
+        macros::SET_SPEED_EX(fighter, 0.0, 0.3, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+    }
+    frame(fighter.lua_state_agent, 11.0);
+    if macros::is_excute(fighter) {
+        macros::SET_SPEED_EX(fighter, 0.0, -5.0, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+        macros::ATTACK(fighter, 0, 0, Hash40::new("waist"), 15.0, 270, 100, 0, 50, 5.0, 0.0, 0.0, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_G, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_KICK, *ATTACK_REGION_PUNCH);
+    }
+    frame(fighter.lua_state_agent, 14.0);
+    if macros::is_excute(fighter) {
+        macros::ATTACK(fighter, 0, 0, Hash40::new("waist"), 11.0, 70, 55, 0, 80, 7.0, 0.0, 0.0, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_G, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_KICK, *ATTACK_REGION_PUNCH);
+    }
+    frame(fighter.lua_state_agent, 35.0);
+    if macros::is_excute(fighter) {
+        AttackModule::clear_all(fighter.module_accessor);
+    }
+}
 
 #[acmd_script( 
     agent = "pikmin", 
@@ -2507,6 +2555,7 @@ fn rayman(fighter: &mut L2CFighterCommon) {
                     (ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_ATTACK_S3) != 0 ||
                     (ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_ATTACK_LW3) != 0 ||
                     (ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_ATTACK_HI3) != 0 ||
+                    (ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_ANY) != 0 ||
                     (ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_TURN_DASH) != 0 ||
                     (ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_DASH) != 0 ||
                     ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_GUARD) ||
@@ -2863,6 +2912,74 @@ pub unsafe fn main_jumpsquat(fighter: &mut L2CFighterCommon) -> L2CValue {
         original!(fighter)
     }
 } 
+#[status_script(agent = "pikmin", status = FIGHTER_STATUS_KIND_SPECIAL_LW, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
+pub unsafe fn main_downb(fighter: &mut L2CFighterCommon) -> L2CValue {
+    let motion_kind = MotionModule::motion_kind(fighter.module_accessor);
+    let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+    let frame = MotionModule::frame(fighter.module_accessor);
+    let situation_kind = StatusModule::situation_kind(fighter.module_accessor);
+	let cancel_frame = FighterMotionModuleImpl::get_cancel_frame(fighter.module_accessor,smash::phx::Hash40::new_raw(MotionModule::motion_kind(fighter.module_accessor)),false) as f32; //Cancel frame
+	if ![hash40("special_lw"), hash40("special_air_lw"), hash40("special_air_lw_loop"), hash40("special_lw_land")].contains(&motion_kind) {
+        if situation_kind == *SITUATION_KIND_AIR {
+            MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_air_lw"), -1.0, 1.0, false, 0.0, false, false);
+        } else {
+            MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_lw"), -1.0, 1.0, false, 0.0, false, false);
+        }
+        KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_MOTION_AIR);
+    } else {
+        if motion_kind == hash40("special_air_lw_loop") {
+            if (
+                (ControlModule::get_command_flag_cat(fighter.module_accessor, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_ATTACK_S4) != 0 ||
+                (ControlModule::get_command_flag_cat(fighter.module_accessor, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_ATTACK_LW4) != 0 ||
+                (ControlModule::get_command_flag_cat(fighter.module_accessor, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_ATTACK_HI4) != 0 ||
+                (ControlModule::get_command_flag_cat(fighter.module_accessor, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_ATTACK_N) != 0 ||
+                (ControlModule::get_command_flag_cat(fighter.module_accessor, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_ATTACK_S3) != 0 ||
+                (ControlModule::get_command_flag_cat(fighter.module_accessor, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_ATTACK_LW3) != 0 ||
+                (ControlModule::get_command_flag_cat(fighter.module_accessor, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_ATTACK_HI3) != 0 ||
+                (ControlModule::get_command_flag_cat(fighter.module_accessor, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_ANY) != 0 ||
+                (ControlModule::get_command_flag_cat(fighter.module_accessor, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_TURN_DASH) != 0 ||
+                (ControlModule::get_command_flag_cat(fighter.module_accessor, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_DASH) != 0 ||
+                ControlModule::check_button_on_trriger(fighter.module_accessor, *CONTROL_PAD_BUTTON_GUARD) ||
+                (ControlModule::check_button_on_trriger(fighter.module_accessor, *CONTROL_PAD_BUTTON_JUMP) && WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT) < WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT_MAX))
+            ) {
+                StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_FALL, false);
+            }
+            if situation_kind == *SITUATION_KIND_GROUND {
+                MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_lw_land"), -1.0, 1.0, false, 0.0, false, false);
+            }
+        }
+        if motion_kind == hash40("special_air_lw") {
+            if situation_kind == *SITUATION_KIND_GROUND {
+                MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_lw_land"), -1.0, 1.0, false, 0.0, false, false);
+            }
+        }
+        if motion_kind == hash40("special_lw_land") && frame >= cancel_frame{
+            if (
+                (ControlModule::get_command_flag_cat(fighter.module_accessor, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_ATTACK_S4) != 0 ||
+                (ControlModule::get_command_flag_cat(fighter.module_accessor, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_ATTACK_LW4) != 0 ||
+                (ControlModule::get_command_flag_cat(fighter.module_accessor, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_ATTACK_HI4) != 0 ||
+                (ControlModule::get_command_flag_cat(fighter.module_accessor, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_ATTACK_N) != 0 ||
+                (ControlModule::get_command_flag_cat(fighter.module_accessor, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_ATTACK_S3) != 0 ||
+                (ControlModule::get_command_flag_cat(fighter.module_accessor, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_ATTACK_LW3) != 0 ||
+                (ControlModule::get_command_flag_cat(fighter.module_accessor, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_ATTACK_HI3) != 0 ||
+                (ControlModule::get_command_flag_cat(fighter.module_accessor, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_ANY) != 0 ||
+                (ControlModule::get_command_flag_cat(fighter.module_accessor, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_TURN_DASH) != 0 ||
+                (ControlModule::get_command_flag_cat(fighter.module_accessor, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_DASH) != 0 ||
+                ControlModule::check_button_on_trriger(fighter.module_accessor, *CONTROL_PAD_BUTTON_GUARD) ||
+                (ControlModule::check_button_on_trriger(fighter.module_accessor, *CONTROL_PAD_BUTTON_JUMP) && WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT) < WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT_MAX))
+            ) {
+                StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_WAIT, false);
+            }
+            if MotionModule::is_end(fighter.module_accessor) {
+                StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_WAIT, true);
+            }
+        }
+        if [hash40("special_lw"), hash40("special_air_lw")].contains(&motion_kind) && MotionModule::is_end(fighter.module_accessor) {
+            MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_air_lw_loop"), -1.0, 1.0, false, 0.0, false, false);
+        }
+    }
+    0.into() 
+} 
 #[status_script(agent = "pikmin", status = FIGHTER_STATUS_KIND_ATTACK_HI3, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
 pub unsafe fn main_utilt(fighter: &mut L2CFighterCommon) -> L2CValue {
     let motion_kind = MotionModule::motion_kind(fighter.module_accessor);
@@ -2933,7 +3050,10 @@ pub fn install() {
 
         //Slide Shit
         main_jab, main_dtilt, 
-        main_jumpsquat
+        main_jumpsquat,
+
+        //Downb
+        main_downb
     );
     smashline::install_acmd_scripts!(
         //Jab and Dash Attack
@@ -2964,6 +3084,7 @@ pub fn install() {
         rayman_neutralb_air_eff, rayman_neutralb_pull_snd,
         rayman_upb_eff, rayman_upb_snd,
         rayman_sideb, rayman_sideb_eff, rayman_sideb_snd,
+        rayman_downb, rayman_air_downb,
 
         //Grabs
         rayman_grab, rayman_grab_eff, rayman_grab_snd,

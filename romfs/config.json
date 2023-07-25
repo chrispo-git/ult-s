@@ -13,7 +13,9 @@
               "fighter/pikmin/motion/body/c00/a07slidestand.nuanmb",
               "fighter/pikmin/motion/body/c00/a07slidejumplanding.nuanmb",
                   "fighter/pikmin/motion/body/c00/d00specialnpull.nuanmb",
-                  "fighter/pikmin/motion/body/c00/d00specialairnpull.nuanmb"
+                  "fighter/pikmin/motion/body/c00/d00specialairnpull.nuanmb",
+                  "fighter/pikmin/motion/body/c00/d03speciallwfall.nuanmb",
+                  "fighter/pikmin/motion/body/c00/d03speciallwland.nuanmb"
             ],
         "fighter/pikmin/c01": [
                   "fighter/pikmin/motion/body/c01/c00attack13.nuanmb",
@@ -28,7 +30,9 @@
               "fighter/pikmin/motion/body/c01/a07slidestand.nuanmb",
               "fighter/pikmin/motion/body/c01/a07slidejumplanding.nuanmb",
                   "fighter/pikmin/motion/body/c01/d00specialnpull.nuanmb",
-                  "fighter/pikmin/motion/body/c01/d00specialairnpull.nuanmb"
+                  "fighter/pikmin/motion/body/c01/d00specialairnpull.nuanmb",
+                  "fighter/pikmin/motion/body/c01/d03speciallwfall.nuanmb",
+                  "fighter/pikmin/motion/body/c01/d03speciallwland.nuanmb"
             ],
         "fighter/pikmin/c02": [
                   "fighter/pikmin/motion/body/c02/c00attack13.nuanmb",
@@ -43,7 +47,9 @@
               "fighter/pikmin/motion/body/c02/a07slidestand.nuanmb",
               "fighter/pikmin/motion/body/c02/a07slidejumplanding.nuanmb",
                   "fighter/pikmin/motion/body/c02/d00specialnpull.nuanmb",
-                  "fighter/pikmin/motion/body/c02/d00specialairnpull.nuanmb"
+                  "fighter/pikmin/motion/body/c02/d00specialairnpull.nuanmb",
+                  "fighter/pikmin/motion/body/c02/d03speciallwfall.nuanmb",
+                  "fighter/pikmin/motion/body/c02/d03speciallwland.nuanmb"
             ],
         "fighter/pikmin/c03": [
                   "fighter/pikmin/motion/body/c03/c00attack13.nuanmb",
@@ -58,7 +64,9 @@
               "fighter/pikmin/motion/body/c03/a07slidestand.nuanmb",
               "fighter/pikmin/motion/body/c03/a07slidejumplanding.nuanmb",
                   "fighter/pikmin/motion/body/c03/d00specialnpull.nuanmb",
-                  "fighter/pikmin/motion/body/c03/d00specialairnpull.nuanmb"
+                  "fighter/pikmin/motion/body/c03/d00specialairnpull.nuanmb",
+                  "fighter/pikmin/motion/body/c03/d03speciallwfall.nuanmb",
+                  "fighter/pikmin/motion/body/c03/d03speciallwland.nuanmb"
             ],
         "fighter/pikmin/c04": [
                   "fighter/pikmin/motion/body/c04/c00attack13.nuanmb",
@@ -73,7 +81,9 @@
               "fighter/pikmin/motion/body/c04/a07slidestand.nuanmb",
               "fighter/pikmin/motion/body/c04/a07slidejumplanding.nuanmb",
                   "fighter/pikmin/motion/body/c04/d00specialnpull.nuanmb",
-                  "fighter/pikmin/motion/body/c04/d00specialairnpull.nuanmb"
+                  "fighter/pikmin/motion/body/c04/d00specialairnpull.nuanmb",
+                  "fighter/pikmin/motion/body/c04/d03speciallwfall.nuanmb",
+                  "fighter/pikmin/motion/body/c04/d03speciallwland.nuanmb"
             ],
         "fighter/pikmin/c05": [
             "fighter/pikmin/model/body/c05/def_pikmin_001_col.nutexb",
@@ -111,7 +121,9 @@
               "fighter/pikmin/motion/body/c05/a07slidestand.nuanmb",
               "fighter/pikmin/motion/body/c05/a07slidejumplanding.nuanmb",
                   "fighter/pikmin/motion/body/c05/d00specialnpull.nuanmb",
-                  "fighter/pikmin/motion/body/c05/d00specialairnpull.nuanmb"
+                  "fighter/pikmin/motion/body/c05/d00specialairnpull.nuanmb",
+                  "fighter/pikmin/motion/body/c05/d03speciallwfall.nuanmb",
+                  "fighter/pikmin/motion/body/c05/d03speciallwland.nuanmb"
             ],
         "fighter/pikmin/c06": [
             "fighter/pikmin/model/body/c06/def_pikmin_001_col.nutexb",
@@ -149,7 +161,9 @@
               "fighter/pikmin/motion/body/c06/a07slidestand.nuanmb",
               "fighter/pikmin/motion/body/c06/a07slidejumplanding.nuanmb",
                   "fighter/pikmin/motion/body/c06/d00specialnpull.nuanmb",
-                  "fighter/pikmin/motion/body/c06/d00specialairnpull.nuanmb"
+                  "fighter/pikmin/motion/body/c06/d00specialairnpull.nuanmb",
+                  "fighter/pikmin/motion/body/c06/d03speciallwfall.nuanmb",
+                  "fighter/pikmin/motion/body/c06/d03speciallwland.nuanmb"
             ],
         "fighter/pikmin/c07": [
                   "fighter/pikmin/motion/body/c07/c00attack13.nuanmb",
@@ -164,7 +178,9 @@
               "fighter/pikmin/motion/body/c07/a07slidestand.nuanmb",
               "fighter/pikmin/motion/body/c07/a07slidejumplanding.nuanmb",
                   "fighter/pikmin/motion/body/c07/d00specialnpull.nuanmb",
-                  "fighter/pikmin/motion/body/c07/d00specialairnpull.nuanmb"
+                  "fighter/pikmin/motion/body/c07/d00specialairnpull.nuanmb",
+                  "fighter/pikmin/motion/body/c07/d03speciallwfall.nuanmb",
+                  "fighter/pikmin/motion/body/c07/d03speciallwland.nuanmb"
             ],
         "fighter/gamewatch/c00": [
           "fighter/gamewatch/motion/normal_weapon/c00/c05attackairf.nuanmb",
