@@ -15,6 +15,7 @@ static mut SET_UPB_FREEFALL: [bool; 8] = [false; 8];
 static mut IS_SLIDE_MOVE: [bool; 8] = [false; 8];
 static mut PULL_DISTANCE: [i32; 8] = [0; 8];
 static mut DO_WALLJUMP_FORCE: [bool; 8] = [false; 8];
+static mut HAS_DEADED: [bool; 8] = [false; 8];
 
 
 #[acmd_script(
@@ -1729,7 +1730,7 @@ unsafe fn rayman_sideb(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, 0.3670886075949367);
     if macros::is_excute(fighter) {
         macros::SET_SPEED_EX(fighter, 4.0, 0, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
-        macros::ATTACK(fighter, 0, 0, Hash40::new("rot"), 20.0, 361, 95, 0, 20, 5.0, 0.0, 0.0, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, 1, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_PUNCH);
+        macros::ATTACK(fighter, 0, 0, Hash40::new("rot"), 20.0, 361, 95, 0, 20, 3.5, 0.0, 0.0, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, 1, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_PUNCH);
     }
     frame(fighter.lua_state_agent, 30.0);
     for x in 0..70 {
@@ -1799,16 +1800,17 @@ unsafe fn rayman_downb_snd(fighter: &mut L2CAgentBase) {
     low_priority )]
 unsafe fn rayman_air_downb(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
+        KineticModule::clear_speed_all(fighter.module_accessor);
         macros::SET_SPEED_EX(fighter, 0.0, 0.3, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
     }
     frame(fighter.lua_state_agent, 11.0);
     if macros::is_excute(fighter) {
         macros::SET_SPEED_EX(fighter, 0.0, -5.0, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
-        macros::ATTACK(fighter, 0, 0, Hash40::new("waist"), 15.0, 270, 100, 0, 50, 5.0, 0.0, 0.0, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_G, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_KICK, *ATTACK_REGION_PUNCH);
+        macros::ATTACK(fighter, 0, 0, Hash40::new("waist"), 15.0, 270, 100, 0, 50, 5.0, 0.0, 0.0, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_KICK, *ATTACK_REGION_PUNCH);
     }
     frame(fighter.lua_state_agent, 14.0);
     if macros::is_excute(fighter) {
-        macros::ATTACK(fighter, 0, 0, Hash40::new("waist"), 11.0, 70, 55, 0, 80, 7.0, 0.0, 0.0, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_G, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_KICK, *ATTACK_REGION_PUNCH);
+        macros::ATTACK(fighter, 0, 0, Hash40::new("waist"), 11.0, 70, 55, 0, 80, 7.0, 0.0, 0.0, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_KICK, *ATTACK_REGION_PUNCH);
     }
     frame(fighter.lua_state_agent, 35.0);
     if macros::is_excute(fighter) {
@@ -2243,15 +2245,6 @@ unsafe fn rayman_dmg_fly_snd(fighter: &mut L2CAgentBase) {
 }	
 #[acmd_script(
     agent = "pikmin",
-    scripts =  ["effect_damagehi1", "effect_damagehi2", "effect_damagehi3", "effect_damagen1", "effect_damagen2", "effect_damagen3", "effect_damagelw1", "effect_damagelw2", "effect_damagelw3", "effect_damageair1", "effect_damageair2", "effect_damageair3", "effect_damageelec"],
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn rayman_dmg_eff(fighter: &mut L2CAgentBase) {
-	let lua_state = fighter.lua_state_agent;
-	
-}	
-#[acmd_script(
-    agent = "pikmin",
     scripts =  ["effect_damageflyhi", "effect_damageflyn", "effect_damageflylw", "effect_damageflytop", "effect_damageflyroll", "effect_damageflymeteor"],
     category = ACMD_SOUND,
 	low_priority)]
@@ -2399,6 +2392,16 @@ unsafe fn dolfin_entryl_eff(agent: &mut L2CAgentBase) {
 unsafe fn dolfin_entryr_eff(agent: &mut L2CAgentBase) {
     
 }
+#[acmd_script( agent = "pikmin", 
+scripts = [
+    "effect_damagen1", "effect_damagen2", "effect_damagen3",
+    "effect_damagelw1", "effect_damagelw2", "effect_damagelw3",
+    "effect_damagehi1", "effect_damagehi2", "effect_damagehi3",
+    "effect_damageair1", "effect_damageair2", "effect_damageair3"
+], 
+category = ACMD_EFFECT)]
+unsafe fn rayman_dmg_eff(agent: &mut L2CAgentBase) {
+}
 
 pub(crate) unsafe fn attack_vc(fighter: &mut L2CAgentBase) -> () {
 	let rand_val = smash::app::sv_math::rand(hash40("fighter"), 6);
@@ -2468,10 +2471,30 @@ fn rayman(fighter: &mut L2CFighterCommon) {
         let stick_y = ControlModule::get_stick_y(boma);
         let lr = PostureModule::lr(boma);
 		EffectModule::kill_kind(boma, Hash40::new("pikmin_antenna"), false, false);
+
 		EffectModule::kill_kind(boma, Hash40::new("pikmin_antenna_damage"), false, false);
+		EffectModule::kill_kind(boma, Hash40::new("pikmin_antenna_damage"), true, true);
+		EffectModule::kill_kind(boma, Hash40::new("pikmin_antenna_damage"), false, true);
+		EffectModule::kill_kind(boma, Hash40::new("pikmin_antenna_damage"), true, false);
+
 		EffectModule::kill_kind(boma, Hash40::new("pikmin_wingpikmin_end"), false, false);
-		EffectModule::kill_kind(boma, Hash40::new("pikmin_wingpikmin_wing"), false, false);
+		EffectModule::kill_kind(boma, Hash40::new("pikmin_wingpikmin_wing"), false, false); 
 		EffectModule::kill_kind(boma, Hash40::new("pikmin_wingpikmin2_line"), false, false);
+
+        //Stops Charge sound from playing after rayman is hit
+        if ![*FIGHTER_STATUS_KIND_ATTACK_S4_HOLD, *FIGHTER_STATUS_KIND_ATTACK_S4, *FIGHTER_STATUS_KIND_ATTACK_S4_START].contains(&status_kind) {
+            macros::STOP_SE(fighter, Hash40::new("se_pikmin_smash_s03"));
+        }
+
+        //Star KO Shit
+        if status_kind == *FIGHTER_STATUS_KIND_DEAD {
+            if MotionModule::motion_kind(boma) == hash40("fall_damage") && !HAS_DEADED[ENTRY_ID] {
+                macros::PLAY_SE(fighter, Hash40::new("se_pikmin_final01"));
+                HAS_DEADED[ENTRY_ID] = true;
+            };
+        } else {
+            HAS_DEADED[ENTRY_ID] = false;
+        };
 
         //Neutralb
         if ![hash40("special_air_n_pull"), hash40("special_n_pull")].contains(&motion_kind){
@@ -3219,7 +3242,8 @@ pub fn install() {
         rayman_slipattack_eff, rayman_slipattack_snd,
         rayman_entryl, rayman_entryl_eff, rayman_entryl_snd,
         rayman_entryr, rayman_entryr_eff, rayman_entryr_snd,
-        dolfin_entryl_eff, dolfin_entryr_eff
+        dolfin_entryl_eff, dolfin_entryr_eff,
+        
     );
     smashline::install_agent_frames!(
 		kill_pikmin,
