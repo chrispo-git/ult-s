@@ -3094,6 +3094,9 @@ pub unsafe fn main_final(fighter: &mut L2CFighterCommon) -> L2CValue {
         macros::STOP_SE(fighter, Hash40::new("se_item_item_get"));
         HitModule::set_whole(fighter.module_accessor, smash::app::HitStatus(*HIT_STATUS_INVINCIBLE), 0);
     } else {
+        if MotionModule::is_end(fighter.module_accessor) {
+            MotionModule::change_motion(fighter.module_accessor, Hash40::new("final"), 0.0, 1.0, false, 0.0, false, false);
+        }
         if FINAL_DURATION[ENTRY_ID] < 990 {
             if ControlModule::check_button_on_trriger(fighter.module_accessor, *CONTROL_PAD_BUTTON_SPECIAL) || ControlModule::check_button_on_trriger(fighter.module_accessor, *CONTROL_PAD_BUTTON_ATTACK) {
                 MotionModule::change_motion(fighter.module_accessor, Hash40::new("final_shoot"), 0.0, 1.0, false, 0.0, false, false);
