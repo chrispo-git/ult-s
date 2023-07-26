@@ -16,6 +16,15 @@ static mut IS_SLIDE_MOVE: [bool; 8] = [false; 8];
 static mut PULL_DISTANCE: [i32; 8] = [0; 8];
 static mut DO_WALLJUMP_FORCE: [bool; 8] = [false; 8];
 static mut HAS_DEADED: [bool; 8] = [false; 8];
+static mut FINAL_DURATION : [i32; 8] = [0; 8];
+static mut X : [f32; 8] = [0.0; 8];
+static mut Y : [f32; 8] = [0.0; 8];
+static mut X_MAX : f32 = 1.155;
+static mut X_ACCEL_ADD : f32 = 0.06;
+static mut X_ACCEL_MUL : f32 = 0.12;
+static mut Y_MAX : f32 = 1.155;
+static mut Y_ACCEL_ADD : f32 = 0.06;
+static mut Y_ACCEL_MUL : f32 = 0.12;
 
 
 #[acmd_script(
@@ -2350,7 +2359,9 @@ unsafe fn rayman_slipattack_snd(agent: &mut L2CAgentBase) {
 }
 #[acmd_script( agent = "pikmin", script = "game_entryl", category = ACMD_GAME, low_priority )]
 unsafe fn rayman_entryl(agent: &mut L2CAgentBase) {
-    
+    if macros::is_excute(agent) {
+        ArticleModule::remove_exist(agent.module_accessor, *FIGHTER_PIKMIN_GENERATE_ARTICLE_DOLFIN,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
+    }
 }
 #[acmd_script( agent = "pikmin", script = "effect_entryl", category = ACMD_EFFECT, low_priority )]
 unsafe fn rayman_entryl_eff(agent: &mut L2CAgentBase) {
@@ -2368,7 +2379,9 @@ unsafe fn rayman_entryl_snd(agent: &mut L2CAgentBase) {
 }
 #[acmd_script( agent = "pikmin", script = "game_entryr", category = ACMD_GAME, low_priority )]
 unsafe fn rayman_entryr(agent: &mut L2CAgentBase) {
-    
+    if macros::is_excute(agent) {
+        ArticleModule::remove_exist(agent.module_accessor, *FIGHTER_PIKMIN_GENERATE_ARTICLE_DOLFIN,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
+    }
 }
 #[acmd_script( agent = "pikmin", script = "effect_entryr", category = ACMD_EFFECT, low_priority )]
 unsafe fn rayman_entryr_eff(agent: &mut L2CAgentBase) {
@@ -2391,6 +2404,39 @@ unsafe fn dolfin_entryl_eff(agent: &mut L2CAgentBase) {
 #[acmd_script( agent = "pikmin_dolfin", script = "effect_entryr", category = ACMD_EFFECT, low_priority )]
 unsafe fn dolfin_entryr_eff(agent: &mut L2CAgentBase) {
     
+}
+#[acmd_script( agent = "pikmin_dolfin", scripts = ["game_finalstart", "game_final", "game_finalattack"], category = ACMD_GAME, low_priority )]
+unsafe fn dolfin_blank(agent: &mut L2CAgentBase) {
+    
+}
+#[acmd_script( agent = "pikmin", script = "game_final", category = ACMD_GAME, low_priority )]
+unsafe fn rayman_final_wait(agent: &mut L2CAgentBase) {
+    
+}
+#[acmd_script( agent = "pikmin", script = "effect_final", category = ACMD_EFFECT, low_priority )]
+unsafe fn rayman_final_wait_eff(agent: &mut L2CAgentBase) {
+    
+}
+#[acmd_script( agent = "pikmin", script = "sound_final", category = ACMD_SOUND, low_priority )]
+unsafe fn rayman_final_wait_snd(agent: &mut L2CAgentBase) {
+    
+}
+#[acmd_script( agent = "pikmin", script = "expression_final", category = ACMD_EXPRESSION, low_priority )]
+unsafe fn rayman_final_wait_expr(agent: &mut L2CAgentBase) {
+    
+}
+#[acmd_script( agent = "pikmin", script = "game_finalshoot", category = ACMD_GAME, low_priority )]
+unsafe fn rayman_final_shoot(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 3.0);
+    if macros::is_excute(fighter) {
+        ItemModule::remove_item(fighter.module_accessor, 0);
+        ItemModule::have_item(fighter.module_accessor, smash::app::ItemKind(*ITEM_KIND_SUPERSCOPE), 0, 0, false, false);
+        macros::STOP_SE(fighter, Hash40::new("se_item_item_get"));
+		EffectModule::kill_kind(fighter.module_accessor, Hash40::new("sys_item_get"), false, false);
+        fighter.clear_lua_stack();
+		lua_args!(fighter, 12);
+        smash::app::sv_animcmd::SHOOT_ITEM_BULLET_CHARGE(fighter.lua_state_agent);
+    }
 }
 #[acmd_script( agent = "pikmin", 
 scripts = [
@@ -3018,6 +3064,110 @@ pub unsafe fn main_jumpsquat(fighter: &mut L2CFighterCommon) -> L2CValue {
         original!(fighter)
     }
 } 
+#[status_script(agent = "pikmin", status = FIGHTER_STATUS_KIND_FINAL, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
+pub unsafe fn main_final(fighter: &mut L2CFighterCommon) -> L2CValue {
+    let motion_kind = MotionModule::motion_kind(fighter.module_accessor);
+    let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+    let frame = MotionModule::frame(fighter.module_accessor);
+    let situation_kind = StatusModule::situation_kind(fighter.module_accessor);
+    let is_near_ground = GroundModule::ray_check(fighter.module_accessor, &Vector2f{ x: PostureModule::pos_x(fighter.module_accessor), y: PostureModule::pos_y(fighter.module_accessor)}, &Vector2f{ x: 0.0, y: -1.0}, true) == 1;
+	let cancel_frame = FighterMotionModuleImpl::get_cancel_frame(fighter.module_accessor,smash::phx::Hash40::new_raw(MotionModule::motion_kind(fighter.module_accessor)),false) as f32; //Cancel frame
+    let stick_x = ControlModule::get_stick_x(fighter.module_accessor) * PostureModule::lr(fighter.module_accessor);
+    let stick_y = ControlModule::get_stick_y(fighter.module_accessor);
+    let speed_x = KineticModule::get_sum_speed_x(fighter.module_accessor, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+    let speed_y = KineticModule::get_sum_speed_y(fighter.module_accessor, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+    ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_PIKMIN_GENERATE_ARTICLE_DOLFIN,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
+    StatusModule::set_keep_situation_air(fighter.module_accessor, true);
+	if ![hash40("final"), hash40("final_shoot")].contains(&motion_kind) {
+        MotionModule::change_motion(fighter.module_accessor, Hash40::new("final"), -1.0, 1.0, false, 0.0, false, false);
+		macros::EFFECT(fighter, Hash40::new("sys_erace_smoke"), Hash40::new("top"), 12.5, 3.5, 1, 0, 0, 0, 4.0, 0, 0, 0, 0, 0, 0, false);
+        macros::LAST_EFFECT_SET_RATE(fighter, 0.5);
+        KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_FALL);
+        KineticModule::suspend_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_CONTROL);
+        KineticModule::suspend_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_GRAVITY);
+        FINAL_DURATION[ENTRY_ID] = 900;
+        X[ENTRY_ID] = 0.0;
+        Y[ENTRY_ID] = 0.0;
+        ItemModule::remove_item(fighter.module_accessor, 0);
+        ItemModule::set_have_item_visibility(fighter.module_accessor, false, 0);
+        ItemModule::have_item(fighter.module_accessor, smash::app::ItemKind(*ITEM_KIND_SUPERSCOPE), 0, 0, false, false);
+        macros::STOP_SE(fighter, Hash40::new("se_item_item_get"));
+        HitModule::set_whole(fighter.module_accessor, smash::app::HitStatus(*HIT_STATUS_INVINCIBLE), 0);
+    } else {
+        if FINAL_DURATION[ENTRY_ID] < 990 {
+            if ControlModule::check_button_on_trriger(fighter.module_accessor, *CONTROL_PAD_BUTTON_SPECIAL) || ControlModule::check_button_on_trriger(fighter.module_accessor, *CONTROL_PAD_BUTTON_ATTACK) {
+                MotionModule::change_motion(fighter.module_accessor, Hash40::new("final_shoot"), 0.0, 1.0, false, 0.0, false, false);
+            }
+        }
+        let mut y_add = 0.0;
+        let mut x_add = 0.0;
+        if stick_x > 0.2 {
+            x_add = ((stick_x-0.2)*X_ACCEL_MUL) + X_ACCEL_ADD;
+            if speed_x > X_MAX || speed_x < -X_MAX{
+                x_add = 0.0;
+            };
+        };
+        if stick_x < -0.2 {
+            x_add = ((stick_x+0.2)*X_ACCEL_MUL) + X_ACCEL_ADD;
+            if speed_x > X_MAX || speed_x < -X_MAX{
+                x_add = 0.0;
+            };
+        };
+        if stick_y > 0.2 {
+            y_add = ((stick_y-0.2)*Y_ACCEL_MUL) + Y_ACCEL_ADD;
+            if speed_y > Y_MAX || speed_y < -Y_MAX{
+                y_add = 0.0;
+            };
+        };
+        if stick_y < -0.2 {
+            y_add = ((stick_y+0.2)*Y_ACCEL_MUL) + Y_ACCEL_ADD;
+            if speed_y > Y_MAX || speed_y < -Y_MAX{
+                y_add = 0.0;
+            };
+        };
+        if stick_x > -0.2 && stick_x < 0.2 && stick_y > -0.2 && stick_y < 0.2 {
+            if speed_y > 0.0 {
+                y_add = -Y_ACCEL_MUL - Y_ACCEL_ADD;
+            } else if speed_y < 0.0{
+                y_add = Y_ACCEL_MUL + Y_ACCEL_ADD;
+            };
+            let mut x_add = 0.0;
+            if speed_x > 0.0 {
+                x_add = -X_ACCEL_MUL - X_ACCEL_ADD;
+            } else if speed_x < 0.0{
+                x_add = X_ACCEL_MUL + X_ACCEL_ADD;
+            };
+        };
+        x_add = (stick_x)*X_ACCEL_MUL;
+        y_add = (stick_y)*X_ACCEL_MUL;
+        if x_add > 0.0 && X[ENTRY_ID] > X_MAX {
+            x_add = 0.0;
+        };
+        if x_add < 0.0 && X[ENTRY_ID] < X_MAX*-1.0 {
+            x_add = 0.0;
+        };
+        if y_add > 0.0 && Y[ENTRY_ID] > Y_MAX {
+            y_add = 0.0;
+        };
+        if y_add < 0.0 && Y[ENTRY_ID] < Y_MAX*-1.0 {
+            y_add = 0.0;
+        };
+        println!("x{}, y{}", X[ENTRY_ID], Y[ENTRY_ID]);
+        println!("x_add{}, y_add{}", x_add, y_add);
+        let speed = smash::phx::Vector3f { x: x_add, y: y_add, z: 0.0 };
+        KineticModule::add_speed(fighter.module_accessor, &speed);
+        X[ENTRY_ID] += x_add;
+        Y[ENTRY_ID] += y_add;
+        FINAL_DURATION[ENTRY_ID] -= 1;
+        if FINAL_DURATION[ENTRY_ID] <= 0 {
+            macros::EFFECT(fighter, Hash40::new("sys_erace_smoke"), Hash40::new("top"), 12.5, 3.5, 1, 0, 0, 0, 4.0, 0, 0, 0, 0, 0, 0, false);
+			ItemModule::set_have_item_visibility(fighter.module_accessor, true, 0);
+            ItemModule::remove_item(fighter.module_accessor, 0);
+            StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_CAPTURE_JUMP, false);
+        }
+    }
+    0.into() 
+} 
 #[status_script(agent = "pikmin", status = FIGHTER_STATUS_KIND_SPECIAL_LW, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
 pub unsafe fn main_downb(fighter: &mut L2CFighterCommon) -> L2CValue {
     let motion_kind = MotionModule::motion_kind(fighter.module_accessor);
@@ -3165,7 +3315,10 @@ pub fn install() {
         main_jumpsquat,
 
         //Downb
-        main_downb
+        main_downb,
+
+        //Final
+        main_final
     );
     smashline::install_acmd_scripts!(
         //Jab and Dash Attack
@@ -3215,6 +3368,10 @@ pub fn install() {
         rayman_slide_attack, rayman_slide_attack_eff, rayman_slide_attack_snd,
         rayman_slide_dtilt, rayman_slide_dtilt_eff, rayman_slide_dtilt_snd,
         rayman_slide_utilt, rayman_slide_utilt_eff, rayman_slide_utilt_snd,
+
+        //Final Smash
+        rayman_final_shoot, rayman_final_wait, rayman_final_wait_eff, rayman_final_wait_expr, rayman_final_wait_snd,
+        dolfin_blank,
 
         //Misc
         rayman_cliffattack, rayman_cliffattack_eff, rayman_cliffattack_snd,
