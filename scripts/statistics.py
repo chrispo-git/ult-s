@@ -114,6 +114,9 @@ os.chdir(f'src/{character}')
 f = open("mod.rs")
 rs = f.readlines()
 f.close()
+os.chdir('../')
+os.chdir('../')
+os.chdir('scripts')
 
 frame = 0.0
 last_frame_check = 0.0
