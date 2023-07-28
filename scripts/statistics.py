@@ -151,6 +151,7 @@ os.chdir('../')
 os.chdir('../')
 os.chdir('scripts')
 
+#Checks fighter_param.prcxml
 is_right_char = False
 for i in new_param:
     if is_right_char == True:
@@ -173,9 +174,10 @@ for i in new_param:
     elif "<!--" in i:
       is_right_char = False
 
+#Checks default.xml
 is_right_char = False
 for f in range(0, len(default_param)):
-    if f'<hash40 hash="fighter_kind">fighter_kind_{char.lower()}<' in default_param[f]:
+    if f'<hash40 hash="fighter_kind">fighter_kind_{character.lower()}<' in default_param[f]:
       print("OG Attribute check")
       for x in range(0,4):
         if attribute_list[x][2] == 0.0:
