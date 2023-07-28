@@ -225,7 +225,7 @@ unsafe fn link_dsmash(fighter: &mut L2CAgentBase) {
         if macros::is_excute(fighter) {
             AttackModule::clear_all(fighter.module_accessor);
         }
-        frame(fighter.lua_state_agent, 38.0);
+        frame(fighter.lua_state_agent, 36.0);
         if macros::is_excute(fighter) {
             //Before the FaF, do this
             ArticleModule::change_status_exist(fighter.module_accessor, *FIGHTER_LINK_GENERATE_ARTICLE_BOW, *WN_LINK_BOW_STATUS_KIND_BACK);
@@ -252,9 +252,9 @@ unsafe fn link_dsmash_eff(fighter: &mut L2CAgentBase) {
 			macros::QUAKE(fighter, *CAMERA_QUAKE_KIND_M);
 			macros::LAST_EFFECT_SET_ALPHA(fighter, 0.5);
 		}
-		frame(fighter.lua_state_agent, 56.0);
+		frame(fighter.lua_state_agent, 50.0);
 		if macros::is_excute(fighter) {
-			macros::LANDING_EFFECT(fighter, Hash40::new("sys_landing_smoke_s"), Hash40::new("top"), -0.9, 0, 0, 0, 0, 0, 0.8, 0, 0, 0, 0, 0, 0, false);
+			macros::LANDING_EFFECT(fighter, Hash40::new("sys_landing_smoke_s"), Hash40::new("top"), -0.9, 0, 0, 0, 0, 0, 1.1, 0, 0, 0, 0, 0, 0, false);
 		}
 }
 #[acmd_script( 
@@ -291,7 +291,7 @@ unsafe fn link_dsmash_expr(fighter: &mut L2CAgentBase) {
             VisibilityModule::set_int64(fighter.module_accessor, hash40("sword") as i64, hash40("sword_back") as i64);
             ItemModule::set_have_item_visibility(fighter.module_accessor, false, 0);
         }
-        frame(fighter.lua_state_agent, 40.0);
+        frame(fighter.lua_state_agent, 36.0);
         if macros::is_excute(fighter) {
             VisibilityModule::set_int64(fighter.module_accessor, hash40("shield") as i64, hash40("shield_normal") as i64);
             VisibilityModule::set_int64(fighter.module_accessor, hash40("sword") as i64, hash40("sword_normal") as i64);
@@ -311,6 +311,67 @@ unsafe fn link_dsmash_charge_expr(fighter: &mut L2CAgentBase) {
             ItemModule::set_have_item_visibility(fighter.module_accessor, false, 0);
         }
 }  
+#[acmd_script(
+    agent = "link",
+    script =  "game_throwf",
+    category = ACMD_GAME,
+	low_priority)]
+unsafe fn link_fthrow(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+	let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
+	let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+		if macros::is_excute(fighter) {
+			macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, /*ID*/ 0, /*Damage*/ 2.5, /*Angle*/ 40, /*KBG*/ 85, /*FKB*/ 0, /*BKB*/ 75, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
+			macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, /*ID*/ 0, /*Damage*/ 3.0, /*Angle*/ 361, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 40, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
+		}
+		frame(fighter.lua_state_agent, 8.0);
+		if macros::is_excute(fighter) {
+			macros::ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("throw"), /*Damage*/ 3.0, /*Angle*/ 361, /*KBG*/ 90, /*FKB*/ 0, /*BKB*/ 40, /*Size*/ 5.5, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_SWORD);
+		}
+		frame(fighter.lua_state_agent, 9.0);
+		if macros::is_excute(fighter) {
+			AttackModule::clear_all(fighter.module_accessor);
+			macros::ATK_HIT_ABS(fighter, *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, Hash40::new("throw"), WorkModule::get_int64(fighter.module_accessor,*FIGHTER_STATUS_THROW_WORK_INT_TARGET_OBJECT), WorkModule::get_int64(fighter.module_accessor,*FIGHTER_STATUS_THROW_WORK_INT_TARGET_HIT_GROUP), WorkModule::get_int64(fighter.module_accessor,*FIGHTER_STATUS_THROW_WORK_INT_TARGET_HIT_NO));
+		}
+}	
+#[acmd_script(
+    agent = "link",
+    script =  "effect_throwf",
+    category = ACMD_EFFECT,
+	low_priority)]
+unsafe fn link_fthrow_eff(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+	let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
+	let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+	frame(fighter.lua_state_agent, 6.0);
+    if macros::is_excute(fighter) {
+        macros::EFFECT_FOLLOW_NO_STOP_FLIP(fighter, Hash40::new("sys_attack_arc_d"), Hash40::new("sys_attack_arc_d"), Hash40::new("top"), 1, 8, 5.5, -14.5, -2.3, 29.5, 1.0, true, *EF_FLIP_YZ);
+        macros::LAST_EFFECT_SET_RATE(fighter, 1.3);
+	}
+}
+#[acmd_script(
+    agent = "link",
+    script =  "sound_throwf",
+    category = ACMD_SOUND,
+	low_priority)]
+unsafe fn link_fthrow_snd(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+	let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
+	let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+}	
+#[acmd_script(
+    agent = "link",
+    script =  "expression_throwf",
+    category = ACMD_EXPRESSION,
+    low_priority)]
+unsafe fn link_fthrow_expr(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+        if macros::is_excute(fighter) {
+            VisibilityModule::set_int64(fighter.module_accessor, hash40("shield") as i64, hash40("shield_normal") as i64);
+            VisibilityModule::set_int64(fighter.module_accessor, hash40("sword") as i64, hash40("sword_normal") as i64);
+            ItemModule::set_have_item_visibility(fighter.module_accessor, true, 0);
+        }
+}
 
 #[acmd_script( 
 	agent = "link", 
@@ -741,7 +802,8 @@ pub fn install() {
 		link_downb,
 		link_downb_eff,
 		link_downb_snd,
-		link_landing
+		link_landing,
+		link_fthrow, link_fthrow_eff, link_fthrow_snd, link_fthrow_expr
     );
 	smashline::install_agent_frames!(link_frame);
 }
