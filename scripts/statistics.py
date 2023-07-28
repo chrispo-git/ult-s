@@ -1,5 +1,6 @@
 import math
 import os
+from string import ascii_lowercase
 
 rs = []
 wavedash_rs = []
@@ -114,22 +115,22 @@ for i in replace:
 if has_replace != True:
   raise Exception("Character not found! Did you misspell their name?")
 
-#["param", "Label", "value", "type"]
+#["param", "Label", "value", "type", offset]
 attribute_list = [
-  ["dash_speed", "Initial Dash", 0.0, "float"],
-  ["run_speed_max", "Run Speed", 0.0, "float"],
-  ["walk_accel_max", "Walk Speed", 0.0, "float"],
-  ["ground_brake", "Traction", 0.0, "float"],
-  ["", "Wavedash Traction Category", "", ""],
-  ["jump_y", "Full Hop Height", 0.0, "float"],
-  ["mini_jump_y", "Short Hop Height", 0.0, "float"],
-  ["air_accel_x_stable", "Air Speed", 0.0, "float"],
-  ["air_accel_x_add", "Air Accel Add", 0.0, "float"],
-  ["air_accel_x_mul", "Air Accel Mul", 0.0, "float"],
-  ["air_accel_y_stable", "Fall Speed", 0.0, "float"],
-  ["air_accel_y", "Gravity", 0.0, "float"],
-  ["weight", "Weight", 0.0, "float"],
-  ["wall_jump_type", "Wall Jump?", "", "bool"]
+  ["dash_speed", "Initial Dash", 0.0, "float", 40],
+  ["run_speed_max", "Run Speed", 0.0, "float", 43],
+  ["walk_accel_max", "Walk Speed", 0.0, "float", 35],
+  ["ground_brake", "Traction", 0.0, "float", 39],
+  ["", "Wavedash Traction Category", "", "", 0],
+  ["jump_y", "Full Hop Height", 0.0, "float", 49],
+  ["mini_jump_y", "Short Hop Height", 0.0, "float", 50],
+  ["air_accel_x_stable", "Air Speed", 0.0, "float", 54],
+  ["air_accel_x_add", "Air Accel Add", 0.0, "float", 53],
+  ["air_accel_x_mul", "Air Accel Mul", 0.0, "float", 52],
+  ["air_accel_y_stable", "Fall Speed", 0.0, "float", 57],
+  ["air_accel_y", "Gravity", 0.0, "float", False],
+  ["weight", "Weight", 0.0, "float", False],
+  ["wall_jump_type", "Wall Jump?", "False", "bool", False]
 ]
 f = open("output.csv",'w')
 f.close()
@@ -173,29 +174,50 @@ for i in new_param:
       is_right_char = False
 
 is_right_char = False
-for i in default_param:
-    if is_right_char == True:
-      for a in range(0,4):
-        if f'"{attribute_list[a][0]}' in i and (attribute_list[a][2] == 0.0 or attribute_list[a][2] == ""):
-          print("YEAH")
-        if f'"{attribute_list[a][0]}' in i and (attribute_list[a][2] == 0.0 or attribute_list[a][2] == ""):
-          x = i.replace(f'<{attribute_list[a][3]} hash="{attribute_list[a][0]}">', "")
-          x = x.replace(f'</{attribute_list[a][3]}>', "")
-          x = x.replace(f' ', "")
-          x = x.replace(f'\n', "")
-          print("replace")
-          attribute_list[a][2] = x
-      for a in range(5,14):
-        if f'"{attribute_list[a][0]}' in i and (attribute_list[a][2] == 0.0 or attribute_list[a][2] == ""):
-          x = i.replace(f'<{attribute_list[a][3]} hash="{attribute_list[a][0]}">', "")
-          x = x.replace(f'</{attribute_list[a][3]}>', "")
-          x = x.replace(f' ', "")
-          x = x.replace(f'\n', "")
-          attribute_list[a][2] = x
-    if f'<hash40 hash="fighter_kind">fighter_kind_{char.lower()}<' in i:
-      is_right_char = True 
-      print("CHAR!")
-    elif f'<hash40 hash="fighter_kind">fighter_kind_' in i:
+for f in range(0, len(default_param)):
+    if f'<hash40 hash="fighter_kind">fighter_kind_{char.lower()}<' in default_param[f]:
+      print("OG Attribute check")
+      for x in range(0,4):
+        if attribute_list[x][2] == 0.0:
+          print(f"{attribute_list[x][1]} being replaced")
+          new_str = default_param[f+attribute_list[x][4]]
+          new_str = new_str.replace("float", "")
+          new_str = new_str.replace("bool", "")
+          new_str = new_str.replace("int", "")
+          new_str = new_str.replace("hash", "")
+          new_str = new_str.replace("/", "")
+          new_str = new_str.replace("<", "")
+          new_str = new_str.replace(">", "")
+          new_str = new_str.replace(" ", "")
+          new_str = new_str.replace("\n", "")
+          new_str = new_str.replace("=", "")
+          new_str = new_str.replace('"', "")
+          new_str = new_str.replace('_', "")
+          for w in ascii_lowercase:
+            new_str = new_str.replace(w, "")
+          attribute_list[x][2] = new_str
+      for x in range(5,13):
+        if attribute_list[x][2] == 0.0:
+          print(f"{attribute_list[x][1]} being replaced")
+          new_str = default_param[f+attribute_list[x][4]]
+          new_str = new_str.replace("float", "")
+          new_str = new_str.replace("bool", "")
+          new_str = new_str.replace("int", "")
+          new_str = new_str.replace("hash", "")
+          new_str = new_str.replace("/", "")
+          new_str = new_str.replace("<", "")
+          new_str = new_str.replace(">", "")
+          new_str = new_str.replace(" ", "")
+          new_str = new_str.replace("\n", "")
+          new_str = new_str.replace("=", "")
+          new_str = new_str.replace('"', "")
+          new_str = new_str.replace('_', "")
+          for w in ascii_lowercase:
+            new_str = new_str.replace(w, "")
+          attribute_list[x][2] = new_str
+        if "True" in default_param[f+attribute_list[13][4]]:
+          attribute_list[13][2] = "True"
+    elif f'<hash40 hash="fighter_kind">fighter_kind_' in default_param[f]:
       is_right_char = False
 
 
