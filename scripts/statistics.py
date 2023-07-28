@@ -2,6 +2,7 @@ import math
 import os
 
 rs = []
+wavedash_rs = []
 default_param = []
 new_param = []
 output = []
@@ -96,8 +97,8 @@ replace = [
     ['zelda']
 ]
 
-
-character = input("Character? ")
+char = input("Character?")
+character = char.lower()
 has_replace = False
 
 for i in replace:
@@ -113,23 +114,25 @@ for i in replace:
 if has_replace != True:
   raise Exception("Character not found! Did you misspell their name?")
 
-#["param", "Label", "value"]
+#["param", "Label", "value", "type"]
 attribute_list = [
-  ["dash_speed", "Initial Dash", 0.0],
-  ["run_speed_max", "Run Speed", 0.0],
-  ["walk_accel_max", "Walk Speed", 0.0],
-  ["ground_brake", "Traction", 0.0],
-  ["", "Wavedash Traction Category", ""],
-  ["jump_y", "Full Hop Height", 0.0],
-  ["mini_jump_y", "Short Hop Height", 0.0],
-  ["air_accel_x_stable", "Air Speed", 0.0],
-  ["air_accel_x_add", "Air Accel Add", 0.0],
-  ["air_accel_x_mul", "Air Accel Mul", 0.0],
-  ["air_accel_y_stable", "Fall Speed", 0.0],
-  ["air_accel_y", "Gravity", 0.0],
-  ["weight", "Weight", 0.0],
-  ["wall_jump_type", "Wall Jump?", False]
+  ["dash_speed", "Initial Dash", 0.0, "float"],
+  ["run_speed_max", "Run Speed", 0.0, "float"],
+  ["walk_accel_max", "Walk Speed", 0.0, "float"],
+  ["ground_brake", "Traction", 0.0, "float"],
+  ["", "Wavedash Traction Category", "", ""],
+  ["jump_y", "Full Hop Height", 0.0, "float"],
+  ["mini_jump_y", "Short Hop Height", 0.0, "float"],
+  ["air_accel_x_stable", "Air Speed", 0.0, "float"],
+  ["air_accel_x_add", "Air Accel Add", 0.0, "float"],
+  ["air_accel_x_mul", "Air Accel Mul", 0.0, "float"],
+  ["air_accel_y_stable", "Fall Speed", 0.0, "float"],
+  ["air_accel_y", "Gravity", 0.0, "float"],
+  ["weight", "Weight", 0.0, "float"],
+  ["wall_jump_type", "Wall Jump?", "", "bool"]
 ]
+f = open("output.csv",'w')
+f.close()
 f = open("data/default.xml")
 default_param = f.readlines()
 f.close()
@@ -138,6 +141,70 @@ f = open("romfs/fighter/common/param/fighter_param.prcxml")
 new_param = f.readlines()
 f.close()
 os.chdir('scripts')
+os.chdir('../')
+os.chdir(f'src/common')
+f = open("wavedash.rs")
+wavedash_rs = f.readlines()
+f.close()
+os.chdir('../')
+os.chdir('../')
+os.chdir('scripts')
+
+is_right_char = False
+for i in new_param:
+    if is_right_char == True:
+      for a in range(0,4):
+        if f'"{attribute_list[a][0]}' in i:
+          x = i.replace(f'<{attribute_list[a][3]} hash="{attribute_list[a][0]}">', "")
+          x = x.replace(f'</{attribute_list[a][3]}>', "")
+          x = x.replace(f' ', "")
+          x = x.replace(f'\n', "")
+          attribute_list[a][2] = x
+      for a in range(5,14):
+        if f'"{attribute_list[a][0]}' in i:
+          x = i.replace(f'<{attribute_list[a][3]} hash="{attribute_list[a][0]}">', "")
+          x = x.replace(f'</{attribute_list[a][3]}>', "")
+          x = x.replace(f' ', "")
+          x = x.replace(f'\n', "")
+          attribute_list[a][2] = x
+    if char.upper() in i:
+      is_right_char = True 
+    elif "<!--" in i:
+      is_right_char = False
+
+is_right_char = False
+for i in default_param:
+    if is_right_char == True:
+      for a in range(0,4):
+        if f'"{attribute_list[a][0]}' in i and (attribute_list[a][2] == 0.0 or attribute_list[a][2] == ""):
+          print("YEAH")
+        if f'"{attribute_list[a][0]}' in i and (attribute_list[a][2] == 0.0 or attribute_list[a][2] == ""):
+          x = i.replace(f'<{attribute_list[a][3]} hash="{attribute_list[a][0]}">', "")
+          x = x.replace(f'</{attribute_list[a][3]}>', "")
+          x = x.replace(f' ', "")
+          x = x.replace(f'\n', "")
+          print("replace")
+          attribute_list[a][2] = x
+      for a in range(5,14):
+        if f'"{attribute_list[a][0]}' in i and (attribute_list[a][2] == 0.0 or attribute_list[a][2] == ""):
+          x = i.replace(f'<{attribute_list[a][3]} hash="{attribute_list[a][0]}">', "")
+          x = x.replace(f'</{attribute_list[a][3]}>', "")
+          x = x.replace(f' ', "")
+          x = x.replace(f'\n', "")
+          attribute_list[a][2] = x
+    if f'<hash40 hash="fighter_kind">fighter_kind_{char.lower()}<' in i:
+      is_right_char = True 
+      print("CHAR!")
+    elif f'<hash40 hash="fighter_kind">fighter_kind_' in i:
+      is_right_char = False
+
+
+f = open("output.csv", "a")
+f.write("Attributes:\n")
+for i in attribute_list:
+  f.write(f"{i[1]} | {i[2]}\n")
+f.write("\nEdited Moves:\n")
+f.close()     
 
 os.chdir('../')
 if os.path.isdir(f'src/{character}'):
@@ -208,8 +275,8 @@ if os.path.isdir(f'src/{character}'):
         x = x.replace("\n", "")
         x = x.replace("\t", "")
         x = x.replace(",", "")
-        if script_name == "mario_nair":
-          print(f"new_frame:{frame + ((float(x) - last_frame_check) * motion_rate)}")
+        #if script_name == "mario_nair":
+          #print(f"new_frame:{frame + ((float(x) - last_frame_check) * motion_rate)}")
           
         frame += (float(x) - last_frame_check) * motion_rate
         last_frame_check = float(x)
@@ -223,10 +290,10 @@ if os.path.isdir(f'src/{character}'):
         frame += float(x) * motion_rate
       if "WorkModule::on_flag(fighter.module_accessor" in line and "//" not in line and "*FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING" in line:
         autocancel_start = frame
-        print("Autocancel Off!")
+        #print("Autocancel Off!")
       if "WorkModule::off_flag(fighter.module_accessor" in line and "//" not in line and "*FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING" in line:
         autocancel_end = frame
-        print("Autocancel On!")
+        #print("Autocancel On!")
       if "FT_MOTION_RATE" in line and "//" not in line:
         x = line.replace("macros::FT_MOTION_RATE(fighter,", "")
         x = x.replace("/*FSM*/", "")
@@ -268,8 +335,6 @@ if os.path.isdir(f'src/{character}'):
 
 
 
-f = open("output.csv",'w')
-f.close()
 
 f = open("output.csv", "a")
 for i in output:
