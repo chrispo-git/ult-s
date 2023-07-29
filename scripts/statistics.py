@@ -10,6 +10,7 @@ wavedash_rs = []
 default_param = []
 new_param = []
 output = []
+yaml_output = []
 
 replace = [
     ['bayonetta', 'bayo'],
@@ -292,6 +293,7 @@ if os.path.isdir(f'src/{character}'):
     autocancel_end = 0.0
     additional_info = []
     has_hitstun = False
+    throw_stats = []
 
     not_game = ["eff", "sound", "snd", "expr", "_s ", "_s(", "_e ", "_e("]
 
@@ -321,6 +323,7 @@ if os.path.isdir(f'src/{character}'):
         autocancel_end = 0.0
         has_hitstun = False
         additional_info = []
+        throw_stats = []
     
       game = True
       for i in not_game:
@@ -383,6 +386,28 @@ if os.path.isdir(f'src/{character}'):
         if atk_frame == 0:
           atk_frame = 1
         output.append(f"\nFrame {atk_frame}|Damage: {x[3]}%| Angle: {x[4]}| BKB: {z}| KBG: {x[5]}")
+      if "macros::ATTACK_ABS(fighter" in line:
+        x = line.replace("macros::ATTACK_ABS(fighter, ", "")
+        x = x.replace("/*Damage*/", "")
+        x = x.replace("/*Angle*/", "")
+        x = x.replace("/*BKB*/", "")
+        x = x.replace("/*KBG*/", "")
+        x = x.replace("/*FKB*/", "")
+        x = x.replace("/*Kind*/", "")
+        x = x.split(", ")
+        if "THROW" in x[0]:
+            throw_stats = x
+      if "macros::ATK_HIT_ABS(fighter" in line:
+        x = throw_stats
+        z = x[6]
+        if int(x[5]) > 0:
+          z = f"{x[5]} (Set)"
+    
+        atk_frame = int(math.ceil(frame))
+        if atk_frame == 0:
+          atk_frame = 1
+        output.append(f"\nThrows on Frame {atk_frame}|Damage: {x[2]}%| Angle: {x[3]}| BKB: {z}| KBG: {x[4]}")
+        throw_stats = []
       if "macros::CATCH(" in line:
         atk_frame = int(math.ceil(frame))
         if atk_frame == 0:
@@ -617,3 +642,20 @@ f = open("output.csv", "a")
 for i in output:
   f.write(i)
 f.close()
+os.chdir('../')
+os.chdir('../')
+os.chdir('../')
+try:
+    os.system(f'py yamlist.py "Ultimate S Smashline/ultimate-s/romfs/fighter/{character}/motion/body/c00/motion_list.bin"')
+    f = open(f"Ultimate S Smashline/ultimate-s/romfs/fighter/{character}/motion/body/c00/motion_list.yml")
+    yaml_output = f.readlines()
+    f.close()
+    os.remove(f"Ultimate S Smashline/ultimate-s/romfs/fighter/{character}/motion/body/c00/motion_list.yml")
+    os.chdir(f'Ultimate S Smashline/ultimate-s/scripts')
+    f = open("output.csv", "a")
+    f.write("\nMotion List:\n")
+    for i in yaml_output:
+        f.write(i)
+    f.close()
+except Exception:
+    print("No motion_list to extract")
