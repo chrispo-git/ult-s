@@ -92,10 +92,6 @@ pub fn hold_buffer_killer(fighter : &mut L2CFighterCommon) {
             *CONTROL_PAD_BUTTON_GUARD,
             *CONTROL_PAD_BUTTON_SMASH,
             *CONTROL_PAD_BUTTON_SPECIAL,
-            *CONTROL_PAD_BUTTON_APPEAL_HI,
-            *CONTROL_PAD_BUTTON_APPEAL_LW,
-            *CONTROL_PAD_BUTTON_APPEAL_S_L,
-            *CONTROL_PAD_BUTTON_APPEAL_S_R,
             *CONTROL_PAD_BUTTON_CSTICK_ON,
             *CONTROL_PAD_BUTTON_JUMP_MINI,
             *CONTROL_PAD_BUTTON_ATTACK_RAW,
@@ -111,6 +107,8 @@ pub fn hold_buffer_killer(fighter : &mut L2CFighterCommon) {
         //If time since you've pressed the button exceeds hold buffer limit, kills the input
         for i in buttons_list {
                 if ControlModule::get_trigger_count(fighter.module_accessor, i as u8) > hold_buffer_lim && ControlModule::check_button_on(boma, i) 
+                && ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_APPEAL_HI) && ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_APPEAL_LW) 
+                && ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_APPEAL_S_L) && ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_APPEAL_S_R) //So taunts dont tpose
                 && ![*FIGHTER_STATUS_KIND_GUARD, *FIGHTER_STATUS_KIND_GUARD_ON, *FIGHTER_STATUS_KIND_GUARD_DAMAGE, *FIGHTER_STATUS_KIND_GUARD_OFF, *FIGHTER_STATUS_KIND_JUMP_SQUAT].contains(&status_kind){ //Ignores shield and js
                     ControlModule::reset_trigger(fighter.module_accessor);
                     ControlModule::clear_command(fighter.module_accessor, true);
