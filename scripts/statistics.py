@@ -11,6 +11,8 @@ default_param = []
 new_param = []
 output = []
 yaml_output = []
+faf = []
+faf_output = []
 
 replace = [
     ['bayonetta', 'bayo'],
@@ -273,8 +275,8 @@ for i in attribute_list:
 f.write("\nEdited Moves:\n")
 f.close()     
 
-os.chdir('../')
 if os.path.isdir(f'src/{character}'):
+    os.chdir('../')
     os.chdir(f'src/{character}')
     f = open("mod.rs")
     rs = f.readlines()
@@ -642,6 +644,34 @@ f = open("output.csv", "a")
 for i in output:
   f.write(i)
 f.close()
+
+#Checks faf_change.rs
+os.chdir('../')
+f = open(f"src/common/faf_change.rs")
+faf = f.readlines()
+f.close()
+os.chdir(f'scripts')
+
+start_record = False
+for y in faf:
+    if f"*FIGHTER_KIND_{character.upper()}" in y:
+        start_record = True
+    elif "*FIGHTER_KIND" in y:
+        start_record = False
+    if start_record == True and "*FIGHTER_KIND" not in y:
+        faf_output.append(y)
+
+f = open("output.csv", "a")
+f.write("\nfaf_change.rs:\n")
+for i in faf_output:
+    f.write(i)
+f.close()
+
+
+
+#Checks Motion List in romfs. Requirements for this to work:
+#1. ultimate-s is inside a folder named "Ultimate S Smashline"
+#2. you have yamlist.exe and yamlist.py in the folder that contains the Ultimate S Smashline folder
 os.chdir('../')
 os.chdir('../')
 os.chdir('../')
