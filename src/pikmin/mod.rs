@@ -16,6 +16,7 @@ static mut IS_SLIDE_MOVE: [bool; 8] = [false; 8];
 static mut PULL_DISTANCE: [i32; 8] = [0; 8];
 static mut DO_WALLJUMP_FORCE: [bool; 8] = [false; 8];
 static mut HAS_DEADED: [bool; 8] = [false; 8];
+static mut WAS_SLIDE: [bool; 8] = [false; 8];
 static mut FINAL_DURATION : [i32; 8] = [0; 8];
 static mut X : [f32; 8] = [0.0; 8];
 static mut Y : [f32; 8] = [0.0; 8];
@@ -189,7 +190,7 @@ unsafe fn rayman_fair(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         AttackModule::clear_all(fighter.module_accessor);
     }
-    frame(fighter.lua_state_agent, 40.0);
+    frame(fighter.lua_state_agent, 35.0);
     if macros::is_excute(fighter) {
         WorkModule::off_flag(fighter.module_accessor, *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
     }
@@ -1737,7 +1738,7 @@ unsafe fn rayman_sideb(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, 0.3670886075949367);
     if macros::is_excute(fighter) {
         macros::SET_SPEED_EX(fighter, 4.0, 0, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
-        macros::ATTACK(fighter, 0, 0, Hash40::new("rot"), 20.0, 361, 95, 0, 20, 5.0, 0.0, 0.0, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, 1, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_PUNCH);
+        macros::ATTACK(fighter, 0, 0, Hash40::new("rot"), 20.0, 361, 95, 0, 20, 3.5, 0.0, 0.0, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, 1, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_PUNCH);
     }
     frame(fighter.lua_state_agent, 30.0);
     for x in 0..70 {
@@ -1895,6 +1896,9 @@ unsafe fn rayman_neutralb(fighter: &mut L2CAgentBase) {
     let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
     if macros::is_excute(fighter) {
         PULL_DISTANCE[ENTRY_ID] = 0;
+        ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_PIKMIN_GENERATE_ARTICLE_PIKMIN, false, -1);
+        ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_PIKMIN_GENERATE_ARTICLE_PIKMIN, false, -1);
+        ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_PIKMIN_GENERATE_ARTICLE_PIKMIN, false, -1);
     }
     frame(fighter.lua_state_agent, 15.0);
     if macros::is_excute(fighter) {
@@ -2777,8 +2781,19 @@ fn rayman(fighter: &mut L2CFighterCommon) {
             macros::STOP_SE(fighter, Hash40::new("se_pikmin_special_l03"));
         }
         //Slide Stuff
+        if WAS_SLIDE[ENTRY_ID] {
+            if motion_kind == hash40("fall") || motion_kind == hash40("fall_f") || motion_kind == hash40("fall_b"){
+                MotionModule::change_motion(fighter.module_accessor, Hash40::new("slide_fall"), 0.0, 1.0, false, 0.0, false, false);
+                WAS_SLIDE[ENTRY_ID] = false;
+            }
+        }
+        if motion_kind == hash40("slide_fall"){
+            if MotionModule::frame(boma) >= 18.0 {
+                MotionModule::change_motion(fighter.module_accessor, Hash40::new("slide_jump_fall"), 0.0, 1.0, false, 0.0, false, false);
+            }
+        }
         if status_kind == *FIGHTER_STATUS_KIND_RUN_BRAKE {
-            if motion_kind != hash40("slide") &&  motion_kind != hash40("slide_stand"){
+            if motion_kind != hash40("slide") && motion_kind != hash40("slide_stand"){
                 if  stick_y <= -0.5 &&
                 (ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_ATTACK) && ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_SPECIAL) && ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_GUARD)) {
                     MotionModule::change_motion(fighter.module_accessor, Hash40::new("slide"), 0.0, 1.0, false, 0.0, false, false);
@@ -2793,6 +2808,7 @@ fn rayman(fighter: &mut L2CFighterCommon) {
                 WorkModule::unable_transition_term(boma, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_ATTACK_S3);
                 WorkModule::unable_transition_term(boma, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_CATCH);
                 IS_SLIDE_MOVE[ENTRY_ID] = true;
+                WAS_SLIDE[ENTRY_ID] = true;
             }
         }
         if [hash40("slide")].contains(&motion_kind) {
@@ -2833,8 +2849,7 @@ fn rayman(fighter: &mut L2CFighterCommon) {
                 MotionModule::set_rate(boma, 0.5);
             }
         }
-        if [hash40("slide"), hash40("slide_attack_lw"), hash40("slide_attack")].contains(&
-            motion_kind) {
+        if [hash40("slide"), hash40("slide_attack_lw"), hash40("slide_attack")].contains(&motion_kind) {
             let desired_brake = 0.025;
             let lr = PostureModule::lr(boma);
             let brake = WorkModule::get_param_float(fighter.module_accessor, hash40("ground_brake"), 0);
@@ -2854,11 +2869,13 @@ fn rayman(fighter: &mut L2CFighterCommon) {
         }
         if ![*FIGHTER_STATUS_KIND_RUN_BRAKE, *FIGHTER_STATUS_KIND_JUMP_SQUAT, *FIGHTER_STATUS_KIND_JUMP, *FIGHTER_STATUS_KIND_ATTACK, *FIGHTER_STATUS_KIND_ATTACK_LW3, *FIGHTER_STATUS_KIND_ATTACK_S3, *FIGHTER_STATUS_KIND_ATTACK_HI3].contains(&status_kind) {
             IS_SLIDE_MOVE[ENTRY_ID] = false;
+            WAS_SLIDE[ENTRY_ID] = false;
         } else if IS_SLIDE_MOVE[ENTRY_ID]{
             if status_kind == *FIGHTER_STATUS_KIND_ATTACK_LW3 {
                 if motion_kind != hash40("slide_attack_lw") {
                     MotionModule::change_motion(fighter.module_accessor, Hash40::new("slide_attack_lw"), -1.0, 1.0, false, 0.0, false, false);
                     IS_SLIDE_MOVE[ENTRY_ID] = false;
+                    WAS_SLIDE[ENTRY_ID] = false;
                 }
             }
             if status_kind == *FIGHTER_STATUS_KIND_ATTACK {
@@ -2868,18 +2885,21 @@ fn rayman(fighter: &mut L2CFighterCommon) {
                 if motion_kind != hash40("slide_attack_hi") {
                     MotionModule::change_motion(fighter.module_accessor, Hash40::new("slide_attack_hi"), -1.0, 1.0, false, 0.0, false, false);
                     IS_SLIDE_MOVE[ENTRY_ID] = false;
+                    WAS_SLIDE[ENTRY_ID] = false;
                 }
             }
             if status_kind == *FIGHTER_STATUS_KIND_ATTACK_S3 {
                 if motion_kind != hash40("slide_attack") {
                     MotionModule::change_motion(fighter.module_accessor, Hash40::new("slide_attack"), -1.0, 1.0, false, 0.0, false, false);
                     IS_SLIDE_MOVE[ENTRY_ID] = false;
+                    WAS_SLIDE[ENTRY_ID] = false;
                 }
             }
             if status_kind == *FIGHTER_STATUS_KIND_JUMP {
                 if motion_kind != hash40("slide_jump") {
                     MotionModule::change_motion(fighter.module_accessor, Hash40::new("slide_jump"), -1.0, 1.0, false, 0.0, false, false);
                     IS_SLIDE_MOVE[ENTRY_ID] = false;
+                    WAS_SLIDE[ENTRY_ID] = false;
                 }
             }
         }
@@ -3053,14 +3073,27 @@ fn kill_pikmin(weapon: &mut L2CFighterBase) {
 		let ENTRY_ID = WorkModule::get_int(&mut *boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
         ModelModule::set_scale(weapon.module_accessor, 0.00001);
         PostureModule::set_scale(weapon.module_accessor, 0.00001, false);
-		let pos = smash::phx::Vector3f { x: 999.0, y: -300.0, z: 0.0 };
+		let pos = smash::phx::Vector3f { x: 0.0, y: 160.0, z: 0.0 };
 		PostureModule::set_pos(weapon.module_accessor, &pos);
 		PostureModule::init_pos(weapon.module_accessor, &pos, true, true);
-		WorkModule::set_int(weapon.module_accessor, 0, *WEAPON_PIKMIN_PIKMIN_INSTANCE_WORK_ID_INT_HP);
-		if StatusModule::status_kind(weapon.module_accessor) != *WEAPON_PIKMIN_PIKMIN_STATUS_KIND_DEATH {
-			StatusModule::change_status_request_from_script(weapon.module_accessor, *WEAPON_PIKMIN_PIKMIN_STATUS_KIND_DEATH, false);
-		};
+		//WorkModule::set_int(weapon.module_accessor, 0, *WEAPON_PIKMIN_PIKMIN_INSTANCE_WORK_ID_INT_HP);
+		//if StatusModule::status_kind(weapon.module_accessor) != *WEAPON_PIKMIN_PIKMIN_STATUS_KIND_DEATH {
+		StatusModule::change_status_request_from_script(weapon.module_accessor, *WEAPON_PIKMIN_PIKMIN_STATUS_KIND_LANDING, false);
+		//};
     }
+}
+
+#[acmd_script( agent = "pikmin_pikmin", 
+scripts = [
+    "game_attackairb_b", "game_attackairb_v", "game_attackairb_w", "game_attackairb_y", "game_attackairb",
+    "game_attackairf_b", "game_attackairf_v", "game_attackairf_w", "game_attackairf_y", "game_attackairf",
+    "game_attackairlw_b", "game_attackairlw_v", "game_attackairlw_w", "game_attackairlw_y", "game_attackairlw",
+    "game_attackairhi_b", "game_attackairhi_v", "game_attackairhi_w", "game_attackairhi_y", "game_attackairhi",
+    "game_catchstart_b", "game_catchstart_v", "game_catchstart_w", "game_catchstart_y", "game_catchstart",
+    "game_catchdash_b", "game_catchdash_v", "game_catchdash_w", "game_catchdash_y", "game_catchdash"
+], 
+category = ACMD_GAME)]
+unsafe fn remove_pikmin_scripts(agent: &mut L2CAgentBase) {
 }
 #[status_script(agent = "pikmin", status = FIGHTER_STATUS_KIND_CATCH_PULL, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
 pub unsafe fn main_catch_pull(fighter: &mut L2CFighterCommon) -> L2CValue {
@@ -3141,6 +3174,7 @@ pub unsafe fn main_dtilt(fighter: &mut L2CFighterCommon) -> L2CValue {
         if motion_kind != hash40("slide_attack_lw") && motion_kind != hash40("slide_stand") {
             MotionModule::change_motion(fighter.module_accessor, Hash40::new("slide_attack_lw"), -1.0, 1.0, false, 0.0, false, false);
             IS_SLIDE_MOVE[ENTRY_ID] = false;
+            WAS_SLIDE[ENTRY_ID] = false;
         }
         0.into() 
     }
@@ -3155,6 +3189,7 @@ pub unsafe fn main_jab(fighter: &mut L2CFighterCommon) -> L2CValue {
         if motion_kind != hash40("slide_attack") {
             MotionModule::change_motion(fighter.module_accessor, Hash40::new("slide_attack"), -1.0, 1.0, false, 0.0, false, false);
             IS_SLIDE_MOVE[ENTRY_ID] = false;
+            WAS_SLIDE[ENTRY_ID] = false;
         }
         if MotionModule::is_end(fighter.module_accessor) {
             fighter.change_status(FIGHTER_STATUS_KIND_WAIT.into(), false.into());
@@ -3384,6 +3419,7 @@ pub unsafe fn main_utilt(fighter: &mut L2CFighterCommon) -> L2CValue {
         if motion_kind != hash40("slide_attack_hi") {
             MotionModule::change_motion(fighter.module_accessor, Hash40::new("slide_attack_hi"), -1.0, 1.0, false, 0.0, false, false);
             IS_SLIDE_MOVE[ENTRY_ID] = false;
+            WAS_SLIDE[ENTRY_ID] = false;
         }
         if MotionModule::is_end(fighter.module_accessor) {
             fighter.change_status(FIGHTER_STATUS_KIND_FALL.into(), false.into());
@@ -3528,7 +3564,7 @@ pub fn install() {
         rayman_entryl, rayman_entryl_eff, rayman_entryl_snd,
         rayman_entryr, rayman_entryr_eff, rayman_entryr_snd,
         dolfin_entryl_eff, dolfin_entryr_eff,
-        
+        remove_pikmin_scripts
     );
     smashline::install_agent_frames!(
 		kill_pikmin,
