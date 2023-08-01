@@ -288,4 +288,12 @@ pub extern "C" fn main() {
 	younglink::install();
 	
 	zelda::install();
+
+	//Stage Patching
+
+	//Arena Ferox Screenshake
+	skyline::patching::Patch::in_text(0x28444cc).data(0x52800009u32);
+    skyline::patching::Patch::in_text(0x28440f4).data(0x52800009u32);
+    skyline::patching::Patch::in_text(0x2844500).nop();
+    skyline::patching::Patch::in_text(0x2844128).nop();
 }
