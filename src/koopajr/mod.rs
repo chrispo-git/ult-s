@@ -62,13 +62,18 @@ pub fn jr(fighter : &mut L2CFighterCommon) {
 						KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_FALL);
 					};
 				};
+				if ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_CSTICK_ON) && ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_ATTACK_RAW)  && ControlModule::get_stick_y(boma) < -0.5 {
+					CAN_DOUBLE_JUMP[ENTRY_ID] = 1;
+				} else {
+					CAN_DOUBLE_JUMP[ENTRY_ID] = 0;
+				}
 				if situation_kind == *SITUATION_KIND_AIR && (!(*FIGHTER_STATUS_KIND_DAMAGE..*FIGHTER_STATUS_KIND_DAMAGE_FALL).contains(&status_kind) && status_kind != *FIGHTER_STATUS_KIND_FALL_SPECIAL){
 					if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP) {
 						CHECK_FLOAT[ENTRY_ID] += 1;
 					} else {
 						CHECK_FLOAT[ENTRY_ID] = 0;
 					};
-					if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP)  && stick_y < -0.5 {
+					if ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_CSTICK_ON) && ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_ATTACK_RAW) && ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP)  && stick_y < -0.5 {
 						CHECK_FLOAT[ENTRY_ID] = CHECK_FLOAT_MAX;
 					};
 					if (CHECK_FLOAT[ENTRY_ID] >= CHECK_FLOAT_MAX || JUMPSQUAT_FLOAT[ENTRY_ID]) && FLOAT[ENTRY_ID] == 0 {
@@ -78,12 +83,16 @@ pub fn jr(fighter : &mut L2CFighterCommon) {
 				if status_kind == *FIGHTER_STATUS_KIND_JUMP && JUMPSQUAT_FLOAT[ENTRY_ID] {
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL, true);
 				};
+				if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_ATTACK_RAW) || ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_CSTICK_ON){
+					JUMPSQUAT_FLOAT[ENTRY_ID] = false;
+				}
 				if status_kind == *FIGHTER_STATUS_KIND_JUMP_SQUAT {
-					if ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_ATTACK) && ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP) && ControlModule::get_stick_y(boma) < -0.5 {
+					if ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_CSTICK_ON) && ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_ATTACK_RAW) && ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP) && ControlModule::get_stick_y(boma) < -0.5 {
 						JUMPSQUAT_FLOAT[ENTRY_ID] = true;
 						WorkModule::set_flag(boma, false, *FIGHTER_STATUS_WORK_ID_FLAG_RESERVE_JUMP_MINI);
 					} else {
 						JUMPSQUAT_FLOAT[ENTRY_ID] = false;
+						CHECK_FLOAT[ENTRY_ID] = 0;
 					};
 				} else {
 					JUMPSQUAT_FLOAT[ENTRY_ID] = false;
@@ -174,6 +183,8 @@ pub fn jr(fighter : &mut L2CFighterCommon) {
 				if START_FLOAT[ENTRY_ID] == true {
 					FLOAT[ENTRY_ID] = FLOAT_MAX;
 					START_FLOAT[ENTRY_ID] = false;
+					ControlModule::clear_command(boma, false);
+					WorkModule::set_flag(boma, false, *FIGHTER_STATUS_WORK_ID_FLAG_RESERVE_DIVE);
 					/*if status_kind == *FIGHTER_STATUS_KIND_JUMP {
 						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL, true);
 					};
@@ -210,7 +221,8 @@ unsafe fn jr_dthrow(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }
-		
+
+	
 pub fn install() {
     smashline::install_agent_frame_callbacks!(jr);
     smashline::install_acmd_scripts!(
