@@ -546,8 +546,9 @@ pub fn robin(fighter : &mut L2CFighterCommon) {
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL, true);
 				};
 				if status_kind == *FIGHTER_STATUS_KIND_JUMP_SQUAT {
-					if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP) && ControlModule::get_stick_y(boma) < -0.5 {
+					if ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_ATTACK) && ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP) && ControlModule::get_stick_y(boma) < -0.5 {
 						JUMPSQUAT_FLOAT[ENTRY_ID] = true;
+						WorkModule::set_flag(boma, false, *FIGHTER_STATUS_WORK_ID_FLAG_RESERVE_JUMP_MINI);
 					} else {
 						JUMPSQUAT_FLOAT[ENTRY_ID] = false;
 					};
