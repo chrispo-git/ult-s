@@ -212,8 +212,14 @@ unsafe fn rayman_fair_eff(fighter: &mut L2CAgentBase) {
         else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 2 { //glowbox
             macros::LAST_EFFECT_SET_COLOR(fighter, 0.0, 0.39, 0.99);
         }
+        else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 3 { //caveman
+            macros::LAST_EFFECT_SET_COLOR(fighter, 1.09, 0.79, 0.47);
+        }
         else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 5 { //spy
-            macros::LAST_EFFECT_SET_COLOR(fighter, 0.2, 0.2, 0.2);
+            macros::LAST_EFFECT_SET_COLOR(fighter, 0.0, 0.0, 0.0);
+        }
+        else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 7 { //mario
+            macros::LAST_EFFECT_SET_COLOR(fighter, 0.14, 0.07, 0.0);
         }
         else {
             macros::LAST_EFFECT_SET_COLOR(fighter, 1.15, 0.61, 0.0);
@@ -477,11 +483,17 @@ unsafe fn rayman_usmash_eff(fighter: &mut L2CAgentBase) {
             else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 2 { //glowbox
                 macros::LAST_EFFECT_SET_COLOR(fighter, 0.0, 0.39, 0.99);
             }
+            else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 3 { //caveman
+                macros::LAST_EFFECT_SET_COLOR(fighter, 1.09, 0.79, 0.47);
+            }
             else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 5 { //spy
-                macros::LAST_EFFECT_SET_COLOR(fighter, 0.2, 0.2, 0.2);
+                macros::LAST_EFFECT_SET_COLOR(fighter, 0.0, 0.0, 0.0);
+            }
+            else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 7 { //mario
+                macros::LAST_EFFECT_SET_COLOR(fighter, 0.14, 0.07, 0.0);
             }
             else {
-                macros::LAST_EFFECT_SET_COLOR(fighter, 1.35, 0.92, 0.2);
+                macros::LAST_EFFECT_SET_COLOR(fighter, 1.15, 0.61, 0.0);
             }
 		}
 		frame(fighter.lua_state_agent, 33.0);
@@ -758,10 +770,6 @@ unsafe fn rayman_ftilt(fighter: &mut L2CAgentBase) {
 	category = ACMD_EFFECT, 
 	low_priority )]
 unsafe fn rayman_ftilt_eff(fighter: &mut L2CAgentBase) {
-    frame(fighter.lua_state_agent, 10.0);
-    if macros::is_excute(fighter) {
-        macros::EFFECT_ALPHA(fighter, Hash40::new("sys_attack_impact"), Hash40::new("top"), 0, 5, 8, 0, 0, 0, 0.5, 0, 0, 0, 0, 0, 360, true, 0.4);
-    }
 }	
 #[acmd_script( agent = "pikmin", script = "sound_attacks3", category = ACMD_SOUND, low_priority )]
 unsafe fn rayman_ftilt_snd(agent: &mut L2CAgentBase) {
@@ -816,8 +824,14 @@ unsafe fn rayman_uair_eff(fighter: &mut L2CAgentBase) {
         else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 2 { //glowbox
             macros::LAST_EFFECT_SET_COLOR(fighter, 0.0, 0.39, 0.99);
         }
+        else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 3 { //caveman
+            macros::LAST_EFFECT_SET_COLOR(fighter, 1.09, 0.79, 0.47);
+        }
         else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 5 { //spy
             macros::LAST_EFFECT_SET_COLOR(fighter, 0.0, 0.0, 0.0);
+        }
+        else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 7 { //mario
+            macros::LAST_EFFECT_SET_COLOR(fighter, 0.14, 0.07, 0.0);
         }
         else {
             macros::LAST_EFFECT_SET_COLOR(fighter, 1.15, 0.61, 0.0);
@@ -1001,11 +1015,17 @@ unsafe fn rayman_dtilt_eff(fighter: &mut L2CAgentBase) {
         else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 2 { //glowbox
             macros::LAST_EFFECT_SET_COLOR(fighter, 0.0, 0.39, 0.99);
         }
+        else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 3 { //caveman
+            macros::LAST_EFFECT_SET_COLOR(fighter, 1.09, 0.79, 0.47);
+        }
         else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 5 { //spy
-            macros::LAST_EFFECT_SET_COLOR(fighter, 0.2, 0.2, 0.2);
+            macros::LAST_EFFECT_SET_COLOR(fighter, 0.0, 0.0, 0.0);
+        }
+        else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 7 { //mario
+            macros::LAST_EFFECT_SET_COLOR(fighter, 0.14, 0.07, 0.0);
         }
         else {
-            macros::LAST_EFFECT_SET_COLOR(fighter, 1.35, 0.92, 0.2);
+            macros::LAST_EFFECT_SET_COLOR(fighter, 1.15, 0.61, 0.0);
         }
     }
 }
@@ -2958,106 +2978,129 @@ fn rayman(fighter: &mut L2CFighterCommon) {
             StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_ATTACK_AIR, false);
             SET_UPB_FREEFALL[ENTRY_ID] = true;
         }
-        if [*FIGHTER_PIKMIN_STATUS_KIND_SPECIAL_HI_WAIT, *FIGHTER_STATUS_KIND_SPECIAL_HI].contains(&status_kind) {
-            ModelModule::set_mesh_visibility(fighter.module_accessor,Hash40::new("pikmin_hair"),false);
-            let lr = PostureModule::lr(fighter.module_accessor);
-            macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("head"), 3.3*lr, 0, 0, 0, 0, 90, 0.25, true, *EF_FLIP_YZ);
-            macros::LAST_EFFECT_SET_RATE(fighter, 2.0);
-            if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 1 { //raymesis
-                macros::LAST_EFFECT_SET_COLOR(fighter, 1.07, 0.38, 1.76);
-            }
-            else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 2 { //glowbox
-                macros::LAST_EFFECT_SET_COLOR(fighter, 0.0, 0.29, 0.89);
-            }
-            else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 6 { //afro
-                macros::LAST_EFFECT_SET_COLOR(fighter, 0.17, 0.0, 0.25);
-            }
-            else {
-                macros::LAST_EFFECT_SET_COLOR(fighter, 1.15, 0.61, 0.0);
-            }
-            macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("head"), 3.3*lr, 0, 0, 0, 0, 90, 0.23, true, *EF_FLIP_YZ);
-            macros::LAST_EFFECT_SET_RATE(fighter, 2.0);
-            if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 1 { //raymesis
-                macros::LAST_EFFECT_SET_COLOR(fighter, 1.07, 0.38, 1.76);
-            }
-            else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 2 { //glowbox
-                macros::LAST_EFFECT_SET_COLOR(fighter, 0.0, 0.29, 0.89);
-            }
-            else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 6 { //afro
-                macros::LAST_EFFECT_SET_COLOR(fighter, 0.17, 0.0, 0.25);
-            }
-            else {
-                macros::LAST_EFFECT_SET_COLOR(fighter, 1.15, 0.61, 0.0);
-            }
-            macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("head"), 2.8*lr, 0, 0, 0, 0, 90, 0.21, true, *EF_FLIP_YZ);
-            macros::LAST_EFFECT_SET_RATE(fighter, 2.0);
-            if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 1 { //raymesis
-                macros::LAST_EFFECT_SET_COLOR(fighter, 1.07, 0.38, 1.76);
-            }
-            else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 2 { //glowbox
-                macros::LAST_EFFECT_SET_COLOR(fighter, 0.0, 0.29, 0.89);
-            }
-            else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 6 { //afro
-                macros::LAST_EFFECT_SET_COLOR(fighter, 0.17, 0.0, 0.25);
-            }
-            else {
-                macros::LAST_EFFECT_SET_COLOR(fighter, 1.15, 0.61, 0.0);
-            }
-            macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("head"), 3.3*lr, 0, 0, 0, 0, 90, 0.17, true, *EF_FLIP_YZ);
-            macros::LAST_EFFECT_SET_RATE(fighter, 2.0);
-            if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 1 { //raymesis
-                macros::LAST_EFFECT_SET_COLOR(fighter, 1.07, 0.38, 1.76);
-            }
-            else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 2 { //glowbox
-                macros::LAST_EFFECT_SET_COLOR(fighter, 0.0, 0.29, 0.89);
-            }
-            else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 6 { //afro
-                macros::LAST_EFFECT_SET_COLOR(fighter, 0.17, 0.0, 0.25);
-            }
-            else {
-                macros::LAST_EFFECT_SET_COLOR(fighter, 1.15, 0.61, 0.0);
-            }
-            macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("head"), 3.3*lr, 0, 0, 0, 0, 90, 0.13, true, *EF_FLIP_YZ);
-            macros::LAST_EFFECT_SET_RATE(fighter, 2.0);
-            if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 1 { //raymesis
-                macros::LAST_EFFECT_SET_COLOR(fighter, 1.07, 0.38, 1.76);
-            }
-            else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 2 { //glowbox
-                macros::LAST_EFFECT_SET_COLOR(fighter, 0.0, 0.29, 0.89);
-            }
-            else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 6 { //afro
-                macros::LAST_EFFECT_SET_COLOR(fighter, 0.17, 0.0, 0.25);
-            }
-            else {
-                macros::LAST_EFFECT_SET_COLOR(fighter, 1.15, 0.61, 0.0);
-            }
-            macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("head"), 3.3*lr, 0, 0, 0, 0, 90, 0.09, true, *EF_FLIP_YZ);
-            macros::LAST_EFFECT_SET_RATE(fighter, 2.0);
-            if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 1 { //raymesis
-                macros::LAST_EFFECT_SET_COLOR(fighter, 1.07, 0.38, 1.76);
-            }
-            else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 2 { //glowbox
-                macros::LAST_EFFECT_SET_COLOR(fighter, 0.0, 0.29, 0.89);
-            }
-            else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 6 { //afro
-                macros::LAST_EFFECT_SET_COLOR(fighter, 0.17, 0.0, 0.25);
-            }
-            else {
-                macros::LAST_EFFECT_SET_COLOR(fighter, 1.15, 0.61, 0.0);
-            }
-            macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("head"), 3.3*lr, 0, 0, 0, 0, 90, 0.05, true, *EF_FLIP_YZ);
-            macros::LAST_EFFECT_SET_RATE(fighter, 2.0);
-            if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 1 { //raymesis
-                macros::LAST_EFFECT_SET_COLOR(fighter, 1.07, 0.38, 1.76);
-            }
-            else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 2 { //glowbox
-                macros::LAST_EFFECT_SET_COLOR(fighter, 0.0, 0.29, 0.89);
-            }
-            else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 6 { //afro
-                macros::LAST_EFFECT_SET_COLOR(fighter, 0.17, 0.0, 0.25);
-            }
-            else {
-                macros::LAST_EFFECT_SET_COLOR(fighter, 1.15, 0.61, 0.0);
+        if [*FIGHTER_PIKMIN_STATUS_KIND_SPECIAL_HI_WAIT, *FIGHTER_STATUS_KIND_SPECIAL_HI].contains(&status_kind)  {
+            if ![7].contains(&WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR)) {
+                ModelModule::set_mesh_visibility(fighter.module_accessor,Hash40::new("pikmin_hair"),false);
+                let lr = PostureModule::lr(fighter.module_accessor);
+                macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("head"), 3.3*lr, 0, 0, 0, 0, 90, 0.25, true, *EF_FLIP_YZ);
+                macros::LAST_EFFECT_SET_RATE(fighter, 2.0);
+                if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 1 { //raymesis
+                    macros::LAST_EFFECT_SET_COLOR(fighter, 1.07, 0.38, 1.76);
+                } 
+                else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 2 { //glowbox
+                    macros::LAST_EFFECT_SET_COLOR(fighter, 0.0, 0.29, 0.89);
+                }
+                else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 6 { //afro
+                    macros::LAST_EFFECT_SET_COLOR(fighter, 0.17, 0.0, 0.25);
+                }
+                else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 7 { //mario
+                    macros::LAST_EFFECT_SET_COLOR(fighter, 0.13, 0.05, 0.0);
+                }
+                else {
+                    macros::LAST_EFFECT_SET_COLOR(fighter, 1.15, 0.61, 0.0);
+                }
+                macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("head"), 3.3*lr, 0, 0, 0, 0, 90, 0.23, true, *EF_FLIP_YZ);
+                macros::LAST_EFFECT_SET_RATE(fighter, 2.0);
+                if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 1 { //raymesis
+                    macros::LAST_EFFECT_SET_COLOR(fighter, 1.07, 0.38, 1.76);
+                }
+                else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 2 { //glowbox
+                    macros::LAST_EFFECT_SET_COLOR(fighter, 0.0, 0.29, 0.89);
+                }
+                else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 6 { //afro
+                    macros::LAST_EFFECT_SET_COLOR(fighter, 0.17, 0.0, 0.25);
+                }
+                else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 7 { //mario
+                    macros::LAST_EFFECT_SET_COLOR(fighter, 0.13, 0.05, 0.0);
+                }
+                else {
+                    macros::LAST_EFFECT_SET_COLOR(fighter, 1.15, 0.61, 0.0);
+                }
+                macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("head"), 2.8*lr, 0, 0, 0, 0, 90, 0.21, true, *EF_FLIP_YZ);
+                macros::LAST_EFFECT_SET_RATE(fighter, 2.0);
+                if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 1 { //raymesis
+                    macros::LAST_EFFECT_SET_COLOR(fighter, 1.07, 0.38, 1.76);
+                }
+                else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 2 { //glowbox
+                    macros::LAST_EFFECT_SET_COLOR(fighter, 0.0, 0.29, 0.89);
+                }
+                else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 6 { //afro
+                    macros::LAST_EFFECT_SET_COLOR(fighter, 0.17, 0.0, 0.25);
+                }
+                else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 7 { //mario
+                    macros::LAST_EFFECT_SET_COLOR(fighter, 0.13, 0.05, 0.0);
+                }
+                else {
+                    macros::LAST_EFFECT_SET_COLOR(fighter, 1.15, 0.61, 0.0);
+                }
+                macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("head"), 3.3*lr, 0, 0, 0, 0, 90, 0.17, true, *EF_FLIP_YZ);
+                macros::LAST_EFFECT_SET_RATE(fighter, 2.0);
+                if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 1 { //raymesis
+                    macros::LAST_EFFECT_SET_COLOR(fighter, 1.07, 0.38, 1.76);
+                }
+                else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 2 { //glowbox
+                    macros::LAST_EFFECT_SET_COLOR(fighter, 0.0, 0.29, 0.89);
+                }
+                else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 6 { //afro
+                    macros::LAST_EFFECT_SET_COLOR(fighter, 0.17, 0.0, 0.25);
+                }
+                else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 7 { //mario
+                    macros::LAST_EFFECT_SET_COLOR(fighter, 0.13, 0.05, 0.0);
+                }
+                else {
+                    macros::LAST_EFFECT_SET_COLOR(fighter, 1.15, 0.61, 0.0);
+                }
+                macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("head"), 3.3*lr, 0, 0, 0, 0, 90, 0.13, true, *EF_FLIP_YZ);
+                macros::LAST_EFFECT_SET_RATE(fighter, 2.0);
+                if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 1 { //raymesis
+                    macros::LAST_EFFECT_SET_COLOR(fighter, 1.07, 0.38, 1.76);
+                }
+                else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 2 { //glowbox
+                    macros::LAST_EFFECT_SET_COLOR(fighter, 0.0, 0.29, 0.89);
+                }
+                else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 6 { //afro
+                    macros::LAST_EFFECT_SET_COLOR(fighter, 0.17, 0.0, 0.25);
+                }
+                else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 7 { //mario
+                    macros::LAST_EFFECT_SET_COLOR(fighter, 0.13, 0.05, 0.0);
+                }
+                else {
+                    macros::LAST_EFFECT_SET_COLOR(fighter, 1.15, 0.61, 0.0);
+                }
+                macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("head"), 3.3*lr, 0, 0, 0, 0, 90, 0.09, true, *EF_FLIP_YZ);
+                macros::LAST_EFFECT_SET_RATE(fighter, 2.0);
+                if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 1 { //raymesis
+                    macros::LAST_EFFECT_SET_COLOR(fighter, 1.07, 0.38, 1.76);
+                }
+                else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 2 { //glowbox
+                    macros::LAST_EFFECT_SET_COLOR(fighter, 0.0, 0.29, 0.89);
+                }
+                else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 6 { //afro
+                    macros::LAST_EFFECT_SET_COLOR(fighter, 0.17, 0.0, 0.25);
+                }
+                else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 7 { //mario
+                    macros::LAST_EFFECT_SET_COLOR(fighter, 0.13, 0.05, 0.0);
+                }
+                else {
+                    macros::LAST_EFFECT_SET_COLOR(fighter, 1.15, 0.61, 0.0);
+                }
+                macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("head"), 3.3*lr, 0, 0, 0, 0, 90, 0.05, true, *EF_FLIP_YZ);
+                macros::LAST_EFFECT_SET_RATE(fighter, 2.0);
+                if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 1 { //raymesis
+                    macros::LAST_EFFECT_SET_COLOR(fighter, 1.07, 0.38, 1.76);
+                }
+                else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 2 { //glowbox
+                    macros::LAST_EFFECT_SET_COLOR(fighter, 0.0, 0.29, 0.89);
+                }
+                else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 6 { //afro
+                    macros::LAST_EFFECT_SET_COLOR(fighter, 0.17, 0.0, 0.25);
+                }
+                else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 7 { //mario
+                    macros::LAST_EFFECT_SET_COLOR(fighter, 0.13, 0.05, 0.0);
+                }
+                else {
+                    macros::LAST_EFFECT_SET_COLOR(fighter, 1.15, 0.61, 0.0);
+                }
             }
             WorkModule::off_flag(boma, *FIGHTER_PIKMIN_STATUS_SPECIAL_HI_COMMON_FLAG_TURN);
         } else {
@@ -3356,7 +3399,8 @@ pub unsafe fn main_downb(fighter: &mut L2CFighterCommon) -> L2CValue {
                 (ControlModule::get_command_flag_cat(fighter.module_accessor, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_ATTACK_HI3) != 0 ||
                 (ControlModule::get_command_flag_cat(fighter.module_accessor, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_ANY) != 0 ||
                 ControlModule::check_button_on_trriger(fighter.module_accessor, *CONTROL_PAD_BUTTON_GUARD) ||
-                (ControlModule::check_button_on_trriger(fighter.module_accessor, *CONTROL_PAD_BUTTON_JUMP) && WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT) < WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT_MAX))
+                (ControlModule::check_button_on_trriger(fighter.module_accessor, *CONTROL_PAD_BUTTON_JUMP) && WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT) < WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT_MAX)) ||
+                (ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_FLICK_JUMP) && ControlModule::get_flick_y(fighter.module_accessor) >= 3 && ControlModule::get_stick_y(fighter.module_accessor) >= 0.7 && WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT) < WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT_MAX))
             ) {
                 StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_FALL, false);
             }
@@ -3386,7 +3430,8 @@ pub unsafe fn main_downb(fighter: &mut L2CFighterCommon) -> L2CValue {
                     (ControlModule::get_command_flag_cat(fighter.module_accessor, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_TURN_DASH) != 0 ||
                     (ControlModule::get_command_flag_cat(fighter.module_accessor, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_DASH) != 0 ||
                     ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_GUARD) ||
-                    (ControlModule::check_button_on_trriger(fighter.module_accessor, *CONTROL_PAD_BUTTON_JUMP) && WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT) < WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT_MAX))
+                    (ControlModule::check_button_on_trriger(fighter.module_accessor, *CONTROL_PAD_BUTTON_JUMP) && WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT) < WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT_MAX))||
+                    (ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_FLICK_JUMP) && ControlModule::get_flick_y(fighter.module_accessor) >= 3 && ControlModule::get_stick_y(fighter.module_accessor) >= 0.7 && WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT) < WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT_MAX))
                 ) {
                     StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_WAIT, false);
                 }
