@@ -216,7 +216,7 @@ unsafe fn rayman_fair_eff(fighter: &mut L2CAgentBase) {
             macros::LAST_EFFECT_SET_COLOR(fighter, 1.09, 0.79, 0.47);
         }
         else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 5 { //spy
-            macros::LAST_EFFECT_SET_COLOR(fighter, 0.0, 0.0, 0.0);
+            macros::LAST_EFFECT_SET_COLOR(fighter, 0.05, 0.05, 0.05);
         }
         else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 7 { //mario
             macros::LAST_EFFECT_SET_COLOR(fighter, 0.14, 0.07, 0.0);
@@ -487,7 +487,7 @@ unsafe fn rayman_usmash_eff(fighter: &mut L2CAgentBase) {
                 macros::LAST_EFFECT_SET_COLOR(fighter, 1.09, 0.79, 0.47);
             }
             else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 5 { //spy
-                macros::LAST_EFFECT_SET_COLOR(fighter, 0.0, 0.0, 0.0);
+                macros::LAST_EFFECT_SET_COLOR(fighter, 0.05, 0.05, 0.05);
             }
             else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 7 { //mario
                 macros::LAST_EFFECT_SET_COLOR(fighter, 0.14, 0.07, 0.0);
@@ -602,48 +602,72 @@ unsafe fn rayman_fsmash_charge_eff(fighter: &mut L2CAgentBase) {
             macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("top"), 0, 4, -6.75, -16.857, 18.764, 94.68, 0.275, true, *EF_FLIP_YZ);
 			macros::LAST_EFFECT_SET_RATE(fighter, 1.05);
             macros::LAST_EFFECT_SET_ALPHA(fighter, 0.7);
+            if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 3 { //caveman
+                macros::LAST_EFFECT_SET_COLOR(fighter, 1.09, 0.79, 0.47);
+            }
             if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 5 { //spy
                 macros::LAST_EFFECT_SET_COLOR(fighter, 0.0, 0.0, 0.0);
             }
 			macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("top"), 0, 4, -6.75, -16.857, 18.764, 94.68, 0.25, true, *EF_FLIP_YZ);
 			macros::LAST_EFFECT_SET_RATE(fighter, 1.05);
             macros::LAST_EFFECT_SET_ALPHA(fighter, 0.7);
+            if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 3 { //caveman
+                macros::LAST_EFFECT_SET_COLOR(fighter, 1.09, 0.79, 0.47);
+            }
             if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 5 { //spy
                 macros::LAST_EFFECT_SET_COLOR(fighter, 0.0, 0.0, 0.0);
             }
             macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("top"), 0, 4, -6.75, -16.857, 18.764, 94.68, 0.225, true, *EF_FLIP_YZ);
 			macros::LAST_EFFECT_SET_RATE(fighter, 1.05);
             macros::LAST_EFFECT_SET_ALPHA(fighter, 0.7);
+            if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 3 { //caveman
+                macros::LAST_EFFECT_SET_COLOR(fighter, 1.09, 0.79, 0.47);
+            }
             if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 5 { //spy
                 macros::LAST_EFFECT_SET_COLOR(fighter, 0.0, 0.0, 0.0);
             }
             macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("top"), 0, 4, -6.75, -16.857, 18.764, 94.68, 0.2, true, *EF_FLIP_YZ);
 			macros::LAST_EFFECT_SET_RATE(fighter, 1.05);
             macros::LAST_EFFECT_SET_ALPHA(fighter, 0.7);
+            if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 3 { //caveman
+                macros::LAST_EFFECT_SET_COLOR(fighter, 1.09, 0.79, 0.47);
+            }
             if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 5 { //spy
                 macros::LAST_EFFECT_SET_COLOR(fighter, 0.0, 0.0, 0.0);
             }
             macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("top"), 0, 4, -6.75, -16.857, 18.764, 94.68, 0.175, true, *EF_FLIP_YZ);
 			macros::LAST_EFFECT_SET_RATE(fighter, 1.05);
             macros::LAST_EFFECT_SET_ALPHA(fighter, 0.7);
+            if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 3 { //caveman
+                macros::LAST_EFFECT_SET_COLOR(fighter, 1.09, 0.79, 0.47);
+            }
             if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 5 { //spy
                 macros::LAST_EFFECT_SET_COLOR(fighter, 0.0, 0.0, 0.0);
             }
             macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("top"), 0, 4, -6.75, -16.857, 18.764, 94.68, 0.15, true, *EF_FLIP_YZ);
 			macros::LAST_EFFECT_SET_RATE(fighter, 1.05);
             macros::LAST_EFFECT_SET_ALPHA(fighter, 0.7);
+            if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 3 { //caveman
+                macros::LAST_EFFECT_SET_COLOR(fighter, 1.09, 0.79, 0.47);
+            }
             if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 5 { //spy
                 macros::LAST_EFFECT_SET_COLOR(fighter, 0.0, 0.0, 0.0);
             }
             macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("top"), 0, 4, -6.75, -16.857, 18.764, 94.68, 0.125, true, *EF_FLIP_YZ);
 			macros::LAST_EFFECT_SET_RATE(fighter, 1.05);
             macros::LAST_EFFECT_SET_ALPHA(fighter, 0.7);
+            if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 3 { //caveman
+                macros::LAST_EFFECT_SET_COLOR(fighter, 1.09, 0.79, 0.47);
+            }
             if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 5 { //spy
                 macros::LAST_EFFECT_SET_COLOR(fighter, 0.0, 0.0, 0.0);
             }
             macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("top"), 0, 4, -6.75, -16.857, 18.764, 94.68, 0.1, true, *EF_FLIP_YZ);
 			macros::LAST_EFFECT_SET_RATE(fighter, 1.05);
             macros::LAST_EFFECT_SET_ALPHA(fighter, 0.7);
+            if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 3 { //caveman
+                macros::LAST_EFFECT_SET_COLOR(fighter, 1.09, 0.79, 0.47);
+            }
             if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 5 { //spy
                 macros::LAST_EFFECT_SET_COLOR(fighter, 0.0, 0.0, 0.0);
             }
@@ -828,7 +852,7 @@ unsafe fn rayman_uair_eff(fighter: &mut L2CAgentBase) {
             macros::LAST_EFFECT_SET_COLOR(fighter, 1.09, 0.79, 0.47);
         }
         else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 5 { //spy
-            macros::LAST_EFFECT_SET_COLOR(fighter, 0.0, 0.0, 0.0);
+            macros::LAST_EFFECT_SET_COLOR(fighter, 0.05, 0.05, 0.05);
         }
         else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 7 { //mario
             macros::LAST_EFFECT_SET_COLOR(fighter, 0.14, 0.07, 0.0);
@@ -1019,7 +1043,7 @@ unsafe fn rayman_dtilt_eff(fighter: &mut L2CAgentBase) {
             macros::LAST_EFFECT_SET_COLOR(fighter, 1.09, 0.79, 0.47);
         }
         else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 5 { //spy
-            macros::LAST_EFFECT_SET_COLOR(fighter, 0.0, 0.0, 0.0);
+            macros::LAST_EFFECT_SET_COLOR(fighter, 0.05, 0.05, 0.05);
         }
         else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 7 { //mario
             macros::LAST_EFFECT_SET_COLOR(fighter, 0.14, 0.07, 0.0);
