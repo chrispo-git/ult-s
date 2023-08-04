@@ -145,7 +145,7 @@ attribute_list = [
   ["", "Wavedash Traction Category", "Average", "", 0],
   ["jump_y", "Full Hop Height", 0.0, "float", 49],
   ["mini_jump_y", "Short Hop Height", 0.0, "float", 50],
-  ["air_accel_x_stable", "Air Speed", 0.0, "float", 54],
+  ["air_speed_x_stable", "Air Speed", 0.0, "float", 54],
   ["air_accel_x_add", "Air Accel Add", 0.0, "float", 53],
   ["air_accel_x_mul", "Air Accel Mul", 0.0, "float", 52],
   ["air_speed_y_stable", "Fall Speed", 0.0, "float", 57],
