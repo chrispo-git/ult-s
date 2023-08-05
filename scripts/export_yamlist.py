@@ -152,6 +152,8 @@ os.system(f'py yamlist.py "Ultimate S Smashline/ultimate-s/scripts/motion_list.y
 shutil.copyfile(f'Ultimate S Smashline/ultimate-s/scripts/motion_list.bin', f'Ultimate S Smashline/ultimate-s/romfs/fighter/{character}/motion/body/c00/motion_list.bin')
 if os.path.isdir(f'Ultimate S Smashline/ultimate-s/romfs/fighter/{character}/motion/body/c01'):
     for i in range(1,8):
+        if os.path.isdir(f'Ultimate S Smashline/ultimate-s/romfs/fighter/{character}/motion/body/c0{i}') == False:
+            os.mkdir(f'Ultimate S Smashline/ultimate-s/romfs/fighter/{character}/motion/body/c0{i}')
         shutil.copyfile(f'Ultimate S Smashline/ultimate-s/scripts/motion_list.bin', f'Ultimate S Smashline/ultimate-s/romfs/fighter/{character}/motion/body/c0{i}/motion_list.bin')
 os.remove(f"Ultimate S Smashline/ultimate-s/scripts/motion_list.yml")
 os.chdir(f'Ultimate S Smashline/ultimate-s/scripts')
