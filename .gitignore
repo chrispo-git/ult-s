@@ -3,3 +3,4 @@
 **/*.smd
 **/*.pyc
 Cargo.lock
+scripts/motion_list.yml
