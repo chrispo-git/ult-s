@@ -3,3 +3,4 @@
 **/*.smd
 **/*.pyc
 Cargo.lock
+output.txt
