@@ -291,13 +291,6 @@ pub fn faf_change_master(fighter : &mut L2CFighterCommon) {
 			if [hash40("special_n"), hash40("special_air_n")].contains(&motion_kind) && frame >= 34.0 {
 				CancelModule::enable_cancel(boma);
 			};
-		}else if fighter_kind == *FIGHTER_KIND_NESS {
-			if [hash40("attack_s3_s"), hash40("attack_s3_lw"), hash40("attack_s3_hi")].contains(&motion_kind) && frame >= 26.0 {
-				CancelModule::enable_cancel(boma);
-			};
-			if [hash40("attack_hi3")].contains(&motion_kind) && frame >= 23.0 {
-				CancelModule::enable_cancel(boma);
-			};
 		}else if fighter_kind == *FIGHTER_KIND_PURIN {
 			if motion_kind == hash40("attack_lw3") && frame >= 27.0 {
 				CancelModule::enable_cancel(boma);

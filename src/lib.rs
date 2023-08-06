@@ -264,6 +264,7 @@ mod miifighter;
 mod miigunner;
 mod miiswordsman;
 mod murabito;
+mod ness;
 mod packun;
 mod pacman;
 mod palutena;
@@ -344,6 +345,13 @@ std::arch::global_asm!(
 
 #[no_mangle]
 pub extern "C" fn main() {
+
+
+
+
+
+
+	
 	//Common
     unsafe {
         OFFSET1 = calc_nnsdk_offset() + 0x429d60;
@@ -423,6 +431,8 @@ pub extern "C" fn main() {
 	miigunner::install();
 	miiswordsman::install();
 	murabito::install();
+
+	ness::install();
 	
 	packun::install();
 	pacman::install();
