@@ -4,10 +4,6 @@ import sys
 import shutil
 from string import ascii_lowercase
 
-#REQUIREMENTS TO USE THIS SCRIPT:
-#1. have yamlist.exe on the outside of your Ultimate S Smashline folder
-#2. have yamlist.py in the same spot
-
 replace = [
     ['bayonetta', 'bayo'],
     ['brave', 'hero'],
@@ -131,29 +127,24 @@ if has_replace != True:
   raise Exception("Character not found! Did you misspell their name?")
 
 os.chdir('../')
-os.chdir('../')
-os.chdir('../')
 try:
-    os.system(f'py yamlist.py "Ultimate S Smashline/ultimate-s/romfs/fighter/{character}/motion/body/c00/motion_list.bin"')
-    f = open(f"Ultimate S Smashline/ultimate-s/romfs/fighter/{character}/motion/body/c00/motion_list.yml")
-    yaml_output = f.readlines()
-    f.close()
-    shutil.copyfile(f'Ultimate S Smashline/ultimate-s/romfs/fighter/{character}/motion/body/c00/motion_list.yml', f'Ultimate S Smashline/ultimate-s/scripts/motion_list.yml')
-    os.remove(f"Ultimate S Smashline/ultimate-s/romfs/fighter/{character}/motion/body/c00/motion_list.yml")
-    os.chdir(f'Ultimate S Smashline/ultimate-s/scripts')
+    os.system(f'py yamlist.py "romfs/fighter/{character}/motion/body/c00/motion_list.bin"')
+    print(os.getcwd())
+    shutil.copyfile(f'romfs/fighter/{character}/motion/body/c00/motion_list.yml', f'scripts/motion_list.yml')
+    os.remove(f"romfs/fighter/{character}/motion/body/c00/motion_list.yml")
+    os.chdir(f'scripts')
 except Exception:
-    print("No motion_list to extract") 
+    raise Exception("No motion_list to extract")
 
 input("Press enter to convert it back")
 os.chdir('../')
-os.chdir('../')
-os.chdir('../')
-os.system(f'py yamlist.py "Ultimate S Smashline/ultimate-s/scripts/motion_list.yml"')
-shutil.copyfile(f'Ultimate S Smashline/ultimate-s/scripts/motion_list.bin', f'Ultimate S Smashline/ultimate-s/romfs/fighter/{character}/motion/body/c00/motion_list.bin')
-if os.path.isdir(f'Ultimate S Smashline/ultimate-s/romfs/fighter/{character}/motion/body/c01'):
+os.system(f'py yamlist.py "scripts/motion_list.yml"')
+shutil.copyfile(f'scripts/motion_list.bin', f'romfs/fighter/{character}/motion/body/c00/motion_list.bin')
+if os.path.isdir(f'romfs/fighter/{character}/motion/body/c01'):
     for i in range(1,8):
-        if os.path.isdir(f'Ultimate S Smashline/ultimate-s/romfs/fighter/{character}/motion/body/c0{i}') == False:
-            os.mkdir(f'Ultimate S Smashline/ultimate-s/romfs/fighter/{character}/motion/body/c0{i}')
-        shutil.copyfile(f'Ultimate S Smashline/ultimate-s/scripts/motion_list.bin', f'Ultimate S Smashline/ultimate-s/romfs/fighter/{character}/motion/body/c0{i}/motion_list.bin')
-os.remove(f"Ultimate S Smashline/ultimate-s/scripts/motion_list.yml")
-os.chdir(f'Ultimate S Smashline/ultimate-s/scripts')
+        if os.path.isdir(f'romfs/fighter/{character}/motion/body/c0{i}') == False:
+            os.mkdir(f'romfs/fighter/{character}/motion/body/c0{i}')
+        shutil.copyfile(f'scripts/motion_list.bin', f'romfs/fighter/{character}/motion/body/c0{i}/motion_list.bin')
+os.remove(f"scripts/motion_list.yml")
+os.remove(f"scripts/motion_list.bin")
+os.chdir(f'scripts')
