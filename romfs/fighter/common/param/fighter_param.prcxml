@@ -463,7 +463,8 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
     <struct index="8">
       <float hash="ground_brake">0.04</float>
       <float hash="jump_speed_x_mul">1</float>
-      <float hash="air_speed_x_stable">0.95</float>
+      <float hash="air_speed_x_stable">1.08</float>
+      <float hash="dive_speed_y">2.508</float>
       <float hash="landing_frame">4</float>
       <float hash="tread_jump_speed_y_mul">1.0</float>
       <float hash="tread_mini_jump_speed_y_mul">0.475</float>
