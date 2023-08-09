@@ -17,11 +17,6 @@ extern "C" {
     #[link_name = "offsets_force_linear_histun"]
     fn offsets_force_linear_histun() -> usize;
 
-    #[link_name = "offsets_get_param_int_impl"]
-    fn offsets_get_param_int_impl() -> usize;
-
-    #[link_name = "offsets_get_param_float_impl"]
-    fn offsets_get_param_float_impl() -> usize;
 
     #[link_name = "offsets_set_fighter_vtable"]
     fn offsets_set_fighter_vtable() -> usize;
@@ -106,17 +101,6 @@ pub fn force_linear_histun() -> usize {
     }
 }
 
-pub fn get_param_int_impl() -> usize {
-    unsafe {
-        offsets_get_param_int_impl()
-    }
-}
-
-pub fn get_param_float_impl() -> usize {
-    unsafe {
-        offsets_get_param_float_impl()
-    }
-}
 
 pub fn set_fighter_vtable() -> usize {
     unsafe {
@@ -223,8 +207,6 @@ mod offsets_impl {
         pub get_command_flag_cat: usize,
         pub demon_on_link_capture_event: usize,
         pub force_linear_histun: usize,
-        pub get_param_int_impl: usize,
-        pub get_param_float_impl: usize,
         pub set_fighter_vtable: usize,
         pub set_weapon_vtable: usize,
         pub set_item_vtable: usize,
@@ -276,30 +258,6 @@ mod offsets_impl {
 
     const FORCE_LINEAR_HISTUN_OFFSET_TO_START: usize = 0x28;
 
-    static GET_PARAM_INT_IMPL_SEARCH_CODE: &[u8] = &[
-        // WorkModule::GetParamIntImpl
-        0x00, 0x1c, 0x40, 0xf9, // ldr x0, [x0, #0x38]
-        0x08, 0x00, 0x40, 0xf9, // ldr x8, [x0]
-        0x03, 0x11, 0x40, 0xf9, // ldr x3, [x8, #0x20]
-        0x60, 0x00, 0x1f, 0xd6, // br  x3
-        // WorkModule::GetParamInt64
-        0x08, 0x00, 0x40, 0xf9, // ldr x8, [x0]
-        0x03, 0x31, 0x41, 0xf9, // ldr x3, [x8, #0x260]
-        0x60, 0x00, 0x1f, 0xd6, // br  x3
-    ];
-
-    static GET_PARAM_FLOAT_IMPL_SEARCH_CODE: &[u8] = &[
-        // WorkModule::GetParamFloatImpl
-        0x00, 0x1c, 0x40, 0xf9, // ldr x0, [x0, #0x38]
-        0x08, 0x00, 0x40, 0xf9, // ldr x8, [x0]
-        0x03, 0x19, 0x40, 0xf9, // ldr x3, [x8, #0x30]
-        0x60, 0x00, 0x1f, 0xd6, // br  x3
-        // WorkModule::SetCustomizeNo
-        0x00, 0x1c, 0x40, 0xf9, // ldr x0, [x0, #0x38]
-        0x08, 0x00, 0x40, 0xf9, // ldr x8, [x0]
-        0x03, 0x1d, 0x40, 0xf9, // ldr x3, [x8, #0x38]
-        0x60, 0x00, 0x1f, 0xd6, // br  x3
-    ];
 
     static SET_FIGHTER_VTABLE_SEARCH_CODE: &[u8] = &[
         0xe0, 0x03, 0x14, 0xaa, // mov  x0, x20
@@ -474,8 +432,6 @@ mod offsets_impl {
                 get_command_flag_cat: 0,
                 demon_on_link_capture_event: 0,
                 force_linear_histun: 0,
-                get_param_int_impl: 0,
-                get_param_float_impl: 0,
                 set_fighter_vtable: 0,
                 set_weapon_vtable: 0,
                 set_item_vtable: 0,
@@ -497,8 +453,6 @@ mod offsets_impl {
             offsets.get_command_flag_cat = byte_search(GET_COMMAND_FLAG_CAT_SEARCH_CODE).expect("Unable to find get command flag cat hook!");
             offsets.demon_on_link_capture_event = byte_search(DEMON_ON_LINK_CAPTURE_EVENT_SEARCH_CODE).expect("Unable to find Kazuya OnLinkCaptureEvent hook!") - DEMON_ON_LINK_CAPTURE_EVENT_OFFSET_FROM_START;
             offsets.force_linear_histun = byte_search(FORCE_LINEAR_HISTUN_SEARCH_CODE).expect("Unable to find force linear histun hook!") + FORCE_LINEAR_HISTUN_OFFSET_TO_START;
-            offsets.get_param_int_impl = byte_search(GET_PARAM_INT_IMPL_SEARCH_CODE).expect("Unable to find WorkModule::GetParamIntImpl hook!");
-            offsets.get_param_float_impl = byte_search(GET_PARAM_FLOAT_IMPL_SEARCH_CODE).expect("Unable to find WorkModule::GetParamFloatImpl hook!");
             offsets.set_fighter_vtable = byte_search(SET_FIGHTER_VTABLE_SEARCH_CODE).expect("Unable to find Fighter class constructor hook!") + SET_FIGHTER_VTABLE_OFFSET_TO_START;
             offsets.set_weapon_vtable = byte_search(SET_WEAPON_VTABLE_SEARCH_CODE).expect("Unable to find Weapon class constructor hook!") + SET_WEAPON_VTABLE_OFFSET_TO_START;
             offsets.set_item_vtable = byte_search(SET_ITEM_VTABLE_SEARCH_CODE).expect("Unable to find Item class constructor hook!") + SET_ITEM_VTABLE_OFFSET_TO_START;
@@ -547,15 +501,6 @@ mod offsets_impl {
         CORE_OFFSETS.force_linear_histun
     }
 
-    #[export_name = "offsets_get_param_int_impl"]
-    pub fn get_param_int_impl() -> usize {
-        CORE_OFFSETS.get_param_int_impl
-    }
-
-    #[export_name = "offsets_get_param_float_impl"]
-    pub fn get_param_float_impl() -> usize {
-        CORE_OFFSETS.get_param_float_impl
-    }
 
     #[export_name = "offsets_set_fighter_vtable"]
     pub fn set_fighter_vtable() -> usize {
