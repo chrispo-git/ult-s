@@ -2603,6 +2603,16 @@ scripts = [
 category = ACMD_EFFECT)]
 unsafe fn rayman_dmg_eff(agent: &mut L2CAgentBase) {
 }
+#[acmd_script( 
+    agent = "pikmin", 
+    scripts = ["game_win2", "game_win2wait"], 
+    category = ACMD_GAME, 
+    low_priority )]
+unsafe fn rayman_win2(fighter: &mut L2CAgentBase) {
+    if macros::is_excute(fighter) {
+        ModelModule::set_scale(fighter.module_accessor, 1.0);
+    }
+}
 
 pub(crate) unsafe fn attack_vc(fighter: &mut L2CAgentBase) -> () {
 	let rand_val = smash::app::sv_math::rand(hash40("fighter"), 6);
@@ -3602,6 +3612,9 @@ pub fn install() {
         //Final Smash
         rayman_final_shoot, rayman_final_wait, rayman_final_wait_eff, rayman_final_wait_expr, rayman_final_wait_snd,
         dolfin_blank,
+
+        //Win
+        rayman_win2,
 
         //Misc
         rayman_cliffescape_snd,
