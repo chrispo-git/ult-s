@@ -215,6 +215,9 @@ unsafe fn rayman_fair_eff(fighter: &mut L2CAgentBase) {
         else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 3 { //caveman
             macros::LAST_EFFECT_SET_COLOR(fighter, 1.09, 0.79, 0.47);
         }
+        else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 4 { //medieval
+            macros::LAST_EFFECT_SET_COLOR(fighter, 0.5, 0.5, 0.5);
+        }
         else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 5 { //spy
             macros::LAST_EFFECT_SET_COLOR(fighter, 0.05, 0.05, 0.05);
         }
@@ -486,6 +489,9 @@ unsafe fn rayman_usmash_eff(fighter: &mut L2CAgentBase) {
             else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 3 { //caveman
                 macros::LAST_EFFECT_SET_COLOR(fighter, 1.09, 0.79, 0.47);
             }
+            else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 4 { //medieval
+                macros::LAST_EFFECT_SET_COLOR(fighter, 0.5, 0.5, 0.5);
+            }
             else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 5 { //spy
                 macros::LAST_EFFECT_SET_COLOR(fighter, 0.05, 0.05, 0.05);
             }
@@ -605,6 +611,9 @@ unsafe fn rayman_fsmash_charge_eff(fighter: &mut L2CAgentBase) {
             if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 3 { //caveman
                 macros::LAST_EFFECT_SET_COLOR(fighter, 1.09, 0.79, 0.47);
             }
+            if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 4 { //medieval
+                macros::LAST_EFFECT_SET_COLOR(fighter, 0.5, 0.5, 0.5);
+            }
             if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 5 { //spy
                 macros::LAST_EFFECT_SET_COLOR(fighter, 0.0, 0.0, 0.0);
             }
@@ -613,6 +622,9 @@ unsafe fn rayman_fsmash_charge_eff(fighter: &mut L2CAgentBase) {
             macros::LAST_EFFECT_SET_ALPHA(fighter, 0.7);
             if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 3 { //caveman
                 macros::LAST_EFFECT_SET_COLOR(fighter, 1.09, 0.79, 0.47);
+            }
+            if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 4 { //medieval
+                macros::LAST_EFFECT_SET_COLOR(fighter, 0.5, 0.5, 0.5);
             }
             if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 5 { //spy
                 macros::LAST_EFFECT_SET_COLOR(fighter, 0.0, 0.0, 0.0);
@@ -623,6 +635,9 @@ unsafe fn rayman_fsmash_charge_eff(fighter: &mut L2CAgentBase) {
             if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 3 { //caveman
                 macros::LAST_EFFECT_SET_COLOR(fighter, 1.09, 0.79, 0.47);
             }
+            if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 4 { //medieval
+                macros::LAST_EFFECT_SET_COLOR(fighter, 0.5, 0.5, 0.5);
+            }
             if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 5 { //spy
                 macros::LAST_EFFECT_SET_COLOR(fighter, 0.0, 0.0, 0.0);
             }
@@ -631,6 +646,9 @@ unsafe fn rayman_fsmash_charge_eff(fighter: &mut L2CAgentBase) {
             macros::LAST_EFFECT_SET_ALPHA(fighter, 0.7);
             if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 3 { //caveman
                 macros::LAST_EFFECT_SET_COLOR(fighter, 1.09, 0.79, 0.47);
+            }
+            if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 4 { //medieval
+                macros::LAST_EFFECT_SET_COLOR(fighter, 0.5, 0.5, 0.5);
             }
             if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 5 { //spy
                 macros::LAST_EFFECT_SET_COLOR(fighter, 0.0, 0.0, 0.0);
@@ -641,6 +659,9 @@ unsafe fn rayman_fsmash_charge_eff(fighter: &mut L2CAgentBase) {
             if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 3 { //caveman
                 macros::LAST_EFFECT_SET_COLOR(fighter, 1.09, 0.79, 0.47);
             }
+            if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 4 { //medieval
+                macros::LAST_EFFECT_SET_COLOR(fighter, 0.5, 0.5, 0.5);
+            }
             if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 5 { //spy
                 macros::LAST_EFFECT_SET_COLOR(fighter, 0.0, 0.0, 0.0);
             }
@@ -649,6 +670,9 @@ unsafe fn rayman_fsmash_charge_eff(fighter: &mut L2CAgentBase) {
             macros::LAST_EFFECT_SET_ALPHA(fighter, 0.7);
             if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 3 { //caveman
                 macros::LAST_EFFECT_SET_COLOR(fighter, 1.09, 0.79, 0.47);
+            }
+            if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 4 { //medieval
+                macros::LAST_EFFECT_SET_COLOR(fighter, 0.5, 0.5, 0.5);
             }
             if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 5 { //spy
                 macros::LAST_EFFECT_SET_COLOR(fighter, 0.0, 0.0, 0.0);
@@ -659,6 +683,9 @@ unsafe fn rayman_fsmash_charge_eff(fighter: &mut L2CAgentBase) {
             if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 3 { //caveman
                 macros::LAST_EFFECT_SET_COLOR(fighter, 1.09, 0.79, 0.47);
             }
+            if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 4 { //medieval
+                macros::LAST_EFFECT_SET_COLOR(fighter, 0.5, 0.5, 0.5);
+            }
             if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 5 { //spy
                 macros::LAST_EFFECT_SET_COLOR(fighter, 0.0, 0.0, 0.0);
             }
@@ -667,6 +694,9 @@ unsafe fn rayman_fsmash_charge_eff(fighter: &mut L2CAgentBase) {
             macros::LAST_EFFECT_SET_ALPHA(fighter, 0.7);
             if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 3 { //caveman
                 macros::LAST_EFFECT_SET_COLOR(fighter, 1.09, 0.79, 0.47);
+            }
+            if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 4 { //medieval
+                macros::LAST_EFFECT_SET_COLOR(fighter, 0.5, 0.5, 0.5);
             }
             if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 5 { //spy
                 macros::LAST_EFFECT_SET_COLOR(fighter, 0.0, 0.0, 0.0);
@@ -850,6 +880,9 @@ unsafe fn rayman_uair_eff(fighter: &mut L2CAgentBase) {
         }
         else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 3 { //caveman
             macros::LAST_EFFECT_SET_COLOR(fighter, 1.09, 0.79, 0.47);
+        }
+        else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 4 { //medieval
+            macros::LAST_EFFECT_SET_COLOR(fighter, 0.5, 0.5, 0.5);
         }
         else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 5 { //spy
             macros::LAST_EFFECT_SET_COLOR(fighter, 0.05, 0.05, 0.05);
@@ -1041,6 +1074,9 @@ unsafe fn rayman_dtilt_eff(fighter: &mut L2CAgentBase) {
         }
         else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 3 { //caveman
             macros::LAST_EFFECT_SET_COLOR(fighter, 1.09, 0.79, 0.47);
+        }
+        else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 4 { //medieval
+            macros::LAST_EFFECT_SET_COLOR(fighter, 0.5, 0.5, 0.5);
         }
         else if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 5 { //spy
             macros::LAST_EFFECT_SET_COLOR(fighter, 0.05, 0.05, 0.05);
@@ -2609,9 +2645,6 @@ unsafe fn rayman_dmg_eff(agent: &mut L2CAgentBase) {
     category = ACMD_GAME, 
     low_priority )]
 unsafe fn rayman_win2(fighter: &mut L2CAgentBase) {
-    if macros::is_excute(fighter) {
-        ModelModule::set_scale(fighter.module_accessor, 1.0);
-    }
 }
 
 pub(crate) unsafe fn attack_vc(fighter: &mut L2CAgentBase) -> () {
