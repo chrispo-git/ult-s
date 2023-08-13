@@ -2641,7 +2641,7 @@ unsafe fn rayman_dmg_eff(agent: &mut L2CAgentBase) {
 }
 #[acmd_script( 
     agent = "pikmin", 
-    scripts = ["game_win2", "game_win2wait"], 
+    scripts = ["game_win1", "game_win1wait", "game_win2", "game_win2wait", "game_win3", "game_win3wait"], 
     category = ACMD_GAME, 
     low_priority )]
 unsafe fn rayman_win2(fighter: &mut L2CAgentBase) {
@@ -2893,7 +2893,11 @@ fn rayman(fighter: &mut L2CFighterCommon) {
                 //WorkModule::unable_transition_term(boma, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_ATTACK_LW4_START);
                 WorkModule::unable_transition_term(boma, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_ATTACK_S4_START);
                 WorkModule::unable_transition_term(boma, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_ATTACK_S3);
+                WorkModule::unable_transition_term(boma, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_SPECIAL_LW);
                 WorkModule::unable_transition_term(boma, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_CATCH);
+                if (ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_LW) != 0 {
+                    StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_WAIT, false);
+                }
                 IS_SLIDE_MOVE[ENTRY_ID] = true;
                 WAS_SLIDE[ENTRY_ID] = true;
             }
@@ -3473,6 +3477,11 @@ pub unsafe fn main_downb(fighter: &mut L2CFighterCommon) -> L2CValue {
             }
             if situation_kind == *SITUATION_KIND_GROUND || is_near_ground{
                 MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_lw_land"), -1.0, 1.0, false, 0.0, false, false);
+            }
+        }
+        if motion_kind == hash40("special_lw") {
+            if KineticModule::get_kinetic_type(fighter.module_accessor) != *FIGHTER_KINETIC_TYPE_MOTION_AIR {
+                KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_MOTION_AIR);
             }
         }
         if motion_kind == hash40("special_air_lw") {
