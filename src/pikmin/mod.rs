@@ -2879,6 +2879,14 @@ fn rayman(fighter: &mut L2CFighterCommon) {
                 MotionModule::change_motion(fighter.module_accessor, Hash40::new("slide_jump_fall"), 0.0, 1.0, false, 0.0, false, false);
             }
         }
+        if [*FIGHTER_STATUS_KIND_DASH, *FIGHTER_STATUS_KIND_LANDING] {
+            WorkModule::unable_transition_term(boma, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_SPECIAL_LW);
+            if WorkModule::is_enable_transition_term(boma, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_ATTACK_LW3) {
+                if (ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_LW) != 0 {
+                    StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_WAIT, false);
+                }
+            }
+        }
         if status_kind == *FIGHTER_STATUS_KIND_RUN_BRAKE {
             if motion_kind != hash40("slide") && motion_kind != hash40("slide_stand"){
                 if  stick_y <= -0.5 &&
