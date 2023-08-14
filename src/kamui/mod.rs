@@ -457,7 +457,7 @@ pub fn install() {
 		corrin_dash_eff,
 		corrin_turnrun_eff,
 		corrin_runbrake_eff,
-		corrin_throwb,
+		//corrin_throwb,
 		corrin_neutralb,
 		corrin_neutralb_max,
 		corrin_downb
