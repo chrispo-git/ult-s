@@ -236,7 +236,9 @@ unsafe fn sword_nado(fighter: &mut L2CAgentBase) {
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.7058823529411765);
 		frame(fighter.lua_state_agent, 17.0);
 		if macros::is_excute(fighter) {
-			ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_MIISWORDSMAN_GENERATE_ARTICLE_TORNADOSHOT, false, 0);
+			if !ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_MIISWORDSMAN_GENERATE_ARTICLE_TORNADOSHOT) {
+				ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_MIISWORDSMAN_GENERATE_ARTICLE_TORNADOSHOT, false, 0);
+			}
 		}
 		frame(fighter.lua_state_agent, 18.0);
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 1);
