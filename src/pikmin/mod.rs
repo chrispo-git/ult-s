@@ -1839,10 +1839,13 @@ unsafe fn rayman_sideb(fighter: &mut L2CAgentBase) {
     category = ACMD_GAME, 
     low_priority )]
 unsafe fn rayman_downb(fighter: &mut L2CAgentBase) {
-    frame(fighter.lua_state_agent, 12.0);
+    frame(fighter.lua_state_agent, 11.0);
     if macros::is_excute(fighter) {
         StatusModule::set_situation_kind(fighter.module_accessor, smash::app::SituationKind(*SITUATION_KIND_AIR), true);
         StatusModule::set_keep_situation_air(fighter.module_accessor, true);
+    }
+    frame(fighter.lua_state_agent, 12.0);
+    if macros::is_excute(fighter) {
         macros::ATTACK(fighter, 0, 0, Hash40::new("waist"), 15.0, 52, 60, 0, 80, 11.0, 0.0, 0.0, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_KICK, *ATTACK_REGION_PUNCH);
     }
     frame(fighter.lua_state_agent, 25.0);
@@ -2646,6 +2649,20 @@ unsafe fn rayman_dmg_eff(agent: &mut L2CAgentBase) {
     low_priority )]
 unsafe fn rayman_win2(fighter: &mut L2CAgentBase) {
 }
+#[acmd_script( 
+    agent = "pikmin", 
+    scripts = ["effect_win1", "effect_win1wait", "effect_win2", "effect_win2wait", "effect_win3", "effect_win3wait"], 
+    category = ACMD_EFFECT, 
+    low_priority )]
+unsafe fn rayman_win_eff(fighter: &mut L2CAgentBase) {
+}
+#[acmd_script( 
+    agent = "pikmin", 
+    scripts = ["sound_win1", "sound_win1wait", "sound_win2", "sound_win2wait", "sound_win3", "sound_win3wait"], 
+    category = ACMD_SOUND, 
+    low_priority )]
+unsafe fn rayman_win_snd(fighter: &mut L2CAgentBase) {
+}
 
 pub(crate) unsafe fn attack_vc(fighter: &mut L2CAgentBase) -> () {
 	let rand_val = smash::app::sv_math::rand(hash40("fighter"), 6);
@@ -2879,14 +2896,6 @@ fn rayman(fighter: &mut L2CFighterCommon) {
                 MotionModule::change_motion(fighter.module_accessor, Hash40::new("slide_jump_fall"), 0.0, 1.0, false, 0.0, false, false);
             }
         }
-        if [*FIGHTER_STATUS_KIND_TURN_DASH, *FIGHTER_STATUS_KIND_DASH, *FIGHTER_STATUS_KIND_LANDING, *FIGHTER_STATUS_KIND_LANDING_ATTACK_AIR, *FIGHTER_STATUS_KIND_LANDING_LIGHT, *FIGHTER_STATUS_KIND_RUN].contains(&status_kind) {
-            WorkModule::unable_transition_term(boma, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_SPECIAL_LW);
-            if WorkModule::is_enable_transition_term(boma, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_ATTACK_LW3) {
-                if (ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_LW) != 0 {
-                    StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_WAIT, false);
-                }
-            }
-        }
         if status_kind == *FIGHTER_STATUS_KIND_RUN_BRAKE {
             if motion_kind != hash40("slide") && motion_kind != hash40("slide_stand"){
                 if  stick_y <= -0.5 &&
@@ -2901,11 +2910,7 @@ fn rayman(fighter: &mut L2CFighterCommon) {
                 //WorkModule::unable_transition_term(boma, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_ATTACK_LW4_START);
                 WorkModule::unable_transition_term(boma, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_ATTACK_S4_START);
                 WorkModule::unable_transition_term(boma, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_ATTACK_S3);
-                WorkModule::unable_transition_term(boma, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_SPECIAL_LW);
                 WorkModule::unable_transition_term(boma, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_CATCH);
-                if (ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_LW) != 0 {
-                    StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_WAIT, false);
-                }
                 IS_SLIDE_MOVE[ENTRY_ID] = true;
                 WAS_SLIDE[ENTRY_ID] = true;
             }
@@ -3589,6 +3594,37 @@ unsafe fn utilt_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
 
     0.into()
 }
+#[status_script(agent = "pikmin", status = FIGHTER_STATUS_KIND_SPECIAL_LW, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_PRE)]
+unsafe fn downb_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
+    fighter.sub_status_pre_SpecialNCommon();
+    StatusModule::init_settings(
+        fighter.module_accessor,
+        smash::app::SituationKind(*SITUATION_KIND_NONE),
+        *FIGHTER_KINETIC_TYPE_MOTION_AIR,
+        *GROUND_CORRECT_KIND_AIR as u32,
+        smash::app::GroundCliffCheckKind(*GROUND_CLIFF_CHECK_KIND_NONE),
+        true,
+        *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_FLAG,
+        *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_INT,
+        *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_FLOAT,
+        0
+    );
+
+    FighterStatusModuleImpl::set_fighter_status_data(
+        fighter.module_accessor,
+        false,
+        *FIGHTER_TREADED_KIND_NO_REAC,
+        false,
+        false,
+        false,
+        (*FIGHTER_LOG_MASK_FLAG_ATTACK_KIND_SPECIAL_N | *FIGHTER_LOG_MASK_FLAG_ACTION_TRIGGER_ON) as u64,
+        *FIGHTER_STATUS_ATTR_START_TURN as u32,
+        *FIGHTER_POWER_UP_ATTACK_BIT_SPECIAL_LW as u32,
+        0
+    );
+
+    0.into()
+}
 pub fn install() {
 	install_status_scripts!(
         utilt_pre, main_utilt, //Puts Rayman in the air for utilt
@@ -3605,7 +3641,7 @@ pub fn install() {
         main_jumpsquat,
 
         //Downb
-        main_downb,
+        main_downb, downb_pre,
 
         //Final
         main_final
@@ -3665,6 +3701,8 @@ pub fn install() {
 
         //Win
         rayman_win2,
+        rayman_win_eff,
+        rayman_win_snd,
 
         //Misc
         rayman_cliffescape_snd,
