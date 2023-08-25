@@ -1707,7 +1707,12 @@ unsafe fn lucina_sword_upb3(fighter: &mut L2CAgentBase) {
 		frame(fighter.lua_state_agent, 5.0);
 		if macros::is_excute(fighter) {
 			AttackModule::clear_all(fighter.module_accessor);
+			if !AttackModule::is_infliction_status(fighter.module_accessor, *COLLISION_KIND_MASK_HIT) {
+				macros::FT_MOTION_RATE(fighter, 2.0);
+			}
 		}
+		frame(fighter.lua_state_agent, 21.0);
+		macros::FT_MOTION_RATE(fighter, 1.0);
 }	
 #[acmd_script(
     agent = "lucina",

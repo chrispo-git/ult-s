@@ -15,6 +15,8 @@ static mut FOOTSTOOL_STALE: [f32; 8] = [21.0; 8];
 static mut FOOTSTOOL_STALE_TIMER: [i32; 8] = [0; 8];
 static mut PERFECT_PIVOT: [bool; 8] = [false; 8];
 
+static HOLD_BUFFER_LIMIT : i32 = 20; //Max frames for hold buffer
+
 //Perfect Pivot
 #[fighter_frame_callback]
 pub fn perfectpivot(fighter : &mut L2CFighterCommon) {
@@ -78,6 +80,45 @@ pub fn djc(fighter : &mut L2CFighterCommon) {
     };
 }
 
+#[fighter_frame_callback]
+pub fn hold_buffer_killer(fighter : &mut L2CFighterCommon) {
+    unsafe {
+        let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);  
+		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
+        let buttons_list = [
+            *CONTROL_PAD_BUTTON_ATTACK,
+            *CONTROL_PAD_BUTTON_JUMP,
+            *CONTROL_PAD_BUTTON_CATCH,
+            *CONTROL_PAD_BUTTON_GUARD,
+            *CONTROL_PAD_BUTTON_SMASH,
+            *CONTROL_PAD_BUTTON_SPECIAL,
+            *CONTROL_PAD_BUTTON_CSTICK_ON,
+            *CONTROL_PAD_BUTTON_JUMP_MINI,
+            *CONTROL_PAD_BUTTON_ATTACK_RAW,
+            *CONTROL_PAD_BUTTON_SPECIAL_RAW,
+            *CONTROL_PAD_BUTTON_SPECIAL_RAW2
+        ];
+        let mut hold_buffer_lim = HOLD_BUFFER_LIMIT;
+
+        //Multiplies hold buffer duration by 2x during damage states to allow for pressing buttons out of hitstun as per usual
+        if (*FIGHTER_STATUS_KIND_DAMAGE..*FIGHTER_STATUS_KIND_DAMAGE_FALL).contains(&status_kind){
+            hold_buffer_lim *= 2;
+        }
+        //If time since you've pressed the button exceeds hold buffer limit, kills the input
+        for i in buttons_list {
+                if ControlModule::get_trigger_count(fighter.module_accessor, i as u8) > hold_buffer_lim && ControlModule::check_button_on(boma, i) 
+                && ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_APPEAL_HI) && ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_APPEAL_LW) 
+                && ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_APPEAL_S_L) && ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_APPEAL_S_R) //So taunts dont tpose
+                && ![*FIGHTER_STATUS_KIND_GUARD, *FIGHTER_STATUS_KIND_GUARD_ON, *FIGHTER_STATUS_KIND_GUARD_DAMAGE, *FIGHTER_STATUS_KIND_GUARD_OFF, *FIGHTER_STATUS_KIND_JUMP_SQUAT].contains(&status_kind){ //Ignores shield and js
+                    ControlModule::reset_trigger(fighter.module_accessor);
+                    ControlModule::clear_command(fighter.module_accessor, true);
+                    //ControlModule::clear_command_one(fighter.module_accessor, *FIGHTER_PAD_COMMAND_CATEGORY1, *FIGHTER_PAD_CMD_CAT1_ESCAPE_F);
+                }
+        }
+
+    };
+}
+
 //Dash changes
 #[fighter_frame_callback]
 pub fn dash(fighter : &mut L2CFighterCommon) {
@@ -94,6 +135,15 @@ pub fn dash(fighter : &mut L2CFighterCommon) {
                 if ControlModule::get_stick_y(boma) <= -0.6875 && ControlModule::get_flick_y(boma) >= 5 && ControlModule::get_flick_y(boma) < 20 {
                     StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_PASS, true);
                 };
+            }
+            let mut is_taunt_pressed = false;
+            for i in [*CONTROL_PAD_BUTTON_APPEAL_S_L, *CONTROL_PAD_BUTTON_APPEAL_HI, *CONTROL_PAD_BUTTON_APPEAL_LW, *CONTROL_PAD_BUTTON_APPEAL_S_R] {
+                if ControlModule::check_button_on_trriger(boma, i) {
+                    is_taunt_pressed = true;
+                }
+            }
+            if is_taunt_pressed {
+                StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_APPEAL, false);
             }
         }
     };
@@ -116,6 +166,7 @@ pub fn parrycanceldash(fighter : &mut L2CFighterCommon) {
 		};
     };
 }
+
 
 #[skyline::hook(replace = smash::lua2cpp::L2CFighterCommon_sub_transition_group_check_air_tread_jump)]
 pub unsafe fn sub_transition_group_check_air_tread_jump(fighter: &mut L2CFighterCommon) -> L2CValue {
@@ -247,7 +298,8 @@ pub fn install() {
 		perfectpivot,
 		parrycanceldash,
 		dash,
-		djc
+		djc,
+        hold_buffer_killer
 	);
     skyline::nro::add_hook(nro_hook);
 }
