@@ -100,6 +100,7 @@ mod miifighter;
 mod miigunner;
 mod miiswordsman;
 mod murabito;
+mod ness;
 mod packun;
 mod pacman;
 mod palutena;
@@ -180,6 +181,13 @@ std::arch::global_asm!(
 
 #[no_mangle]
 pub extern "C" fn main() {
+
+
+
+
+
+
+	
 	//Common
 	skyline::install_hooks!(change_version_string_hook);
 	nro::add_hook(nro_hook).unwrap();
@@ -245,6 +253,8 @@ pub extern "C" fn main() {
 	miigunner::install();
 	miiswordsman::install();
 	murabito::install();
+
+	ness::install();
 	
 	packun::install();
 	pacman::install();
