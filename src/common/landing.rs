@@ -69,6 +69,7 @@ pub fn shielddrop(fighter : &mut L2CFighterCommon) {
 pub(crate) fn is_edge_cancel(fighter_kind : i32, status_kind : i32) -> bool {
 	let edge_cancel = [
 		[*FIGHTER_KIND_LUCARIO, *FIGHTER_STATUS_KIND_ATTACK_DASH],
+		[*FIGHTER_KIND_LUCARIO, *FIGHTER_STATUS_KIND_SPECIAL_LW],
 		[*FIGHTER_KIND_DIDDY, *FIGHTER_STATUS_KIND_ATTACK_DASH],
 		[*FIGHTER_KIND_DONKEY, *FIGHTER_STATUS_KIND_ATTACK_DASH],
 		[*FIGHTER_KIND_BUDDY, *FIGHTER_STATUS_KIND_ATTACK_DASH],
