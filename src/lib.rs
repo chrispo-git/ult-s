@@ -345,6 +345,13 @@ std::arch::global_asm!(
 
 #[no_mangle]
 pub extern "C" fn main() {
+
+
+
+
+
+
+	
 	//Common
     unsafe {
         OFFSET1 = calc_nnsdk_offset() + 0x429d60;
