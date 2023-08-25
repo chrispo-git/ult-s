@@ -3,4 +3,6 @@
 **/*.smd
 **/*.pyc
 Cargo.lock
+scripts/motion_list.yml
+scripts/motion_list.bin
 output.txt

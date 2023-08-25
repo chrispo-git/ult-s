@@ -462,9 +462,6 @@ pub trait BomaExt {
     unsafe fn set_int64(&mut self, value: i64, what: i32);
     unsafe fn on_flag(&mut self, what: i32);
     unsafe fn off_flag(&mut self, what: i32);
-    unsafe fn get_param_int(&mut self, obj: &str, field: &str) -> i32;
-    unsafe fn get_param_float(&mut self, obj: &str, field: &str) -> f32;
-    unsafe fn get_param_int64(&mut self, obj: &str, field: &str) -> u64;
 
     // ENERGY
     unsafe fn get_motion_energy(&mut self) -> &mut FighterKineticEnergyMotion;
@@ -747,22 +744,6 @@ impl BomaExt for BattleObjectModuleAccessor {
 
     unsafe fn off_flag(&mut self, what: i32) {
         WorkModule::off_flag(self, what)
-    }
-
-    unsafe fn get_param_int(&mut self, obj: &str, field: &str) -> i32 {
-        WorkModule::get_param_int(self, Hash40::new(obj).hash, Hash40::new(field).hash)
-    }
-
-    unsafe fn get_param_float(&mut self, obj: &str, field: &str) -> f32 {
-        let obj = obj.into();
-        let field = field.into();
-        WorkModule::get_param_float(self, Hash40::new(obj).hash, Hash40::new(field).hash)
-    }
-
-    unsafe fn get_param_int64(&mut self, obj: &str, field: &str) -> u64 {
-        let obj = obj.into();
-        let field = field.into();
-        WorkModule::get_param_int64(self, Hash40::new(obj).hash, Hash40::new(field).hash)
     }
 
 
