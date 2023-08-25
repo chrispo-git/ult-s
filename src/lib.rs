@@ -264,6 +264,7 @@ mod miifighter;
 mod miigunner;
 mod miiswordsman;
 mod murabito;
+mod ness;
 mod packun;
 mod pacman;
 mod palutena;
@@ -344,6 +345,13 @@ std::arch::global_asm!(
 
 #[no_mangle]
 pub extern "C" fn main() {
+
+
+
+
+
+
+	
 	//Common
     unsafe {
         OFFSET1 = calc_nnsdk_offset() + 0x429d60;
@@ -423,6 +431,8 @@ pub extern "C" fn main() {
 	miigunner::install();
 	miiswordsman::install();
 	murabito::install();
+
+	ness::install();
 	
 	packun::install();
 	pacman::install();
@@ -466,4 +476,12 @@ pub extern "C" fn main() {
 	younglink::install();
 	
 	zelda::install();
+
+	//Stage Patching
+
+	//Arena Ferox Screenshake
+	skyline::patching::Patch::in_text(0x28444cc).data(0x52800009u32);
+    skyline::patching::Patch::in_text(0x28440f4).data(0x52800009u32);
+    skyline::patching::Patch::in_text(0x2844500).nop();
+    skyline::patching::Patch::in_text(0x2844128).nop();
 }

@@ -37,7 +37,7 @@ try:
             f.write(in_[i])
         for x in needed_folders:
             f.write(f"mod {x};\n")
-        for i in range(311,362):
+        for i in range(307,369):
             f.write(in_[i])
         for x in needed_folders:
             f.write(f"	{x}::install();\n")
