@@ -1267,6 +1267,11 @@ fn hat_frame(weapon: &mut L2CFighterBase) {
 		let frame = MotionModule::frame(&mut *boma);
 		if copy_kind == *FIGHTER_KIND_PIKMIN {
 			//println!("I HAVE RAYMAN");
+            EffectModule::kill_kind(weapon.module_accessor, Hash40::new("pikmin_antenna"), false, false);
+            EffectModule::kill_kind(weapon.module_accessor, Hash40::new("pikmin_antenna_damage"), false, false);
+            EffectModule::kill_kind(weapon.module_accessor, Hash40::new("pikmin_antenna_damage"), true, true);
+            EffectModule::kill_kind(weapon.module_accessor, Hash40::new("pikmin_antenna_damage"), false, true);
+            EffectModule::kill_kind(weapon.module_accessor, Hash40::new("pikmin_antenna_damage"), true, false);
 			if status_kind == *FIGHTER_KIRBY_STATUS_KIND_PIKMIN_SPECIAL_N && frame < 112.0 {
 				let scale = smash::phx::Vector3f { x: 1.0, y: 1.0, z: 1.0 };
 				ModelModule::set_joint_scale(weapon.module_accessor, Hash40::new("rot"), &scale);
