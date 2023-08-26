@@ -2725,6 +2725,8 @@ pub(crate) unsafe fn jump_aerial_vc(fighter: &mut L2CAgentBase) -> () {
     category = ACMD_EFFECT, 
     low_priority )]
 unsafe fn kirby_copy(fighter: &mut L2CAgentBase) {
+    let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
+    let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
     if macros::is_excute(fighter) {
         if StatusModule::situation_kind(fighter.module_accessor) == *SITUATION_KIND_GROUND {
             StatusModule::set_situation_kind(fighter.module_accessor, smash::app::SituationKind(*SITUATION_KIND_AIR), true);
@@ -2739,13 +2741,13 @@ unsafe fn kirby_copy(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 21.0);
     macros::FT_MOTION_RATE(fighter, 0.3670886075949367);
     if macros::is_excute(fighter) {
-        macros::SET_SPEED_EX(fighter, 4.0, 0, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+        macros::SET_SPEED_EX(fighter, 4.0*1.0, 0.0, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
         macros::ATTACK(fighter, 0, 0, Hash40::new("rot"), 20.0, 361, 95, 0, 20, 3.5, 0.0, 0.0, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, 1, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_PUNCH);
     }
     frame(fighter.lua_state_agent, 30.0);
     for x in 0..70 {
         if macros::is_excute(fighter) {
-            macros::SET_SPEED_EX(fighter, 4.0 - (((MotionModule::frame(fighter.module_accessor)-30.0)/70.0)as f32 *2.2), 0, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+            macros::SET_SPEED_EX(fighter, (4.0 - (((MotionModule::frame(fighter.module_accessor)-30.0)/70.0)as f32 *2.2))*1.0, 0.0, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
         }
         wait(fighter.lua_state_agent, 1.0);
     }
@@ -2819,11 +2821,7 @@ fn kirby_rayman_frame(fighter: &mut L2CFighterCommon) {
             EffectModule::kill_kind(boma, Hash40::new("pikmin_antenna_damage"), false, true);
             EffectModule::kill_kind(boma, Hash40::new("pikmin_antenna_damage"), true, false);
 
-            if situation_kind != *SITUATION_KIND_AIR {
-                CAN_NEUTRALB[ENTRY_ID] = 0;
-            }
             if status_kind == *FIGHTER_KIRBY_STATUS_KIND_PIKMIN_SPECIAL_N {
-
                     CAN_NEUTRALB[ENTRY_ID] = 1;
                     if KineticModule::get_kinetic_type(boma) != *FIGHTER_KINETIC_TYPE_MOTION_AIR {
                         KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_MOTION_AIR);
@@ -2843,8 +2841,12 @@ fn kirby_rayman_frame(fighter: &mut L2CFighterCommon) {
                             }
                         }
                     }
+            } else {
+                if situation_kind == *SITUATION_KIND_GROUND {
+                    CAN_NEUTRALB[ENTRY_ID] = 0;
+                }
             }
-        } else {
+        } else if copy_kind == *FIGHTER_KIND_NONE{
             CAN_NEUTRALB[ENTRY_ID] = 0;
         }
     }
@@ -3729,6 +3731,8 @@ unsafe fn utilt_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
 }
 #[status_script(agent = "kirby", status = FIGHTER_KIRBY_STATUS_KIND_PIKMIN_SPECIAL_N, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_PRE)]
 unsafe fn kirby_copy_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
+    let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+    CAN_NEUTRALB[ENTRY_ID] = 1;
     fighter.sub_status_pre_SpecialNCommon();
     StatusModule::init_settings(
         fighter.module_accessor,

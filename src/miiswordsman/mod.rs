@@ -243,7 +243,7 @@ unsafe fn sword_nado(fighter: &mut L2CAgentBase) {
 				ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_MIISWORDSMAN_GENERATE_ARTICLE_TORNADOSHOT, false, 0);
 				NADO_COOLDOWN[ENTRY_ID] = NADO_MAX;
 			} else {
-				macros::EFFECT(fighter, Hash40::new("sys_erace_smoke"), Hash40::new("top"), 14, 7, 0, 0, 0, 0, 0.7, 0, 0, 0, 0, 0, 0, true);
+				macros::EFFECT(fighter, Hash40::new("sys_erace_smoke"), Hash40::new("top"), 0, 7, 14, 0, 0, 0, 0.7, 0, 0, 0, 0, 0, 0, true);
 			}
 		}
 		frame(fighter.lua_state_agent, 18.0);

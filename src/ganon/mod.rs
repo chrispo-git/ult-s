@@ -728,7 +728,8 @@ pub fn ganon_float(fighter : &mut L2CFighterCommon) {
 			};
 			if FLOAT[ENTRY_ID] == 1 && WorkModule::get_int(boma, *FIGHTER_KIRBY_INSTANCE_WORK_ID_INT_COPY_CHARA) == *FIGHTER_KIND_GANON {
 				CAN_NEUTRALB[ENTRY_ID] = 1;
-			} else {
+			} else if WorkModule::get_int(boma, *FIGHTER_KIRBY_INSTANCE_WORK_ID_INT_COPY_CHARA) == *FIGHTER_KIND_NONE{
+				println!("Empty");
 				CAN_NEUTRALB[ENTRY_ID] = 0;
 			};
 			if FLOAT[ENTRY_ID] == 1{

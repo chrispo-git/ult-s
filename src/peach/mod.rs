@@ -16,7 +16,7 @@ use crate::util::*;
 #[fighter_frame( agent = FIGHTER_KIND_PEACH )]
 fn peach_frame(fighter: &mut L2CFighterCommon) {
     unsafe {
-        println!("It'sa me, Mario, wahoooooooo!");
+        //println!("It'sa me, Mario, wahoooooooo!");
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
 		let frame = MotionModule::frame(boma);
@@ -39,7 +39,7 @@ fn peach_frame(fighter: &mut L2CFighterCommon) {
 #[fighter_frame( agent = FIGHTER_KIND_KIRBY )]
 fn kirby_frame(fighter: &mut L2CFighterCommon) {
     unsafe {
-        println!("It'sa me, Mario, wahoooooooo!");
+        //println!("It'sa me, Mario, wahoooooooo!");
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
 		let frame = MotionModule::frame(boma);
