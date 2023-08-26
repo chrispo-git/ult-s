@@ -110,6 +110,7 @@ replace = [
     ['shizue', 'isa', 'isabelle'],
     ['shulk'],
     ['simon'],
+    ['snake'],
     ['sonic'],
     ['szerosuit', 'zero'],
     ['tantan', 'minmin', 'min'],
