@@ -2842,7 +2842,7 @@ fn kirby_rayman_frame(fighter: &mut L2CFighterCommon) {
                         }
                     }
             } else {
-                if situation_kind == *SITUATION_KIND_GROUND {
+                if situation_kind != *SITUATION_KIND_AIR {
                     CAN_NEUTRALB[ENTRY_ID] = 0;
                 }
             }
