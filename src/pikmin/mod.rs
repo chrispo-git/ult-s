@@ -2726,8 +2726,11 @@ pub(crate) unsafe fn jump_aerial_vc(fighter: &mut L2CAgentBase) -> () {
     low_priority )]
 unsafe fn kirby_copy(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
-        StatusModule::set_situation_kind(fighter.module_accessor, smash::app::SituationKind(*SITUATION_KIND_AIR), true);
-        StatusModule::set_keep_situation_air(fighter.module_accessor, true);
+        if StatusModule::situation_kind(fighter.module_accessor) == *SITUATION_KIND_GROUND {
+            StatusModule::set_situation_kind(fighter.module_accessor, smash::app::SituationKind(*SITUATION_KIND_AIR), true);
+            StatusModule::set_keep_situation_air(fighter.module_accessor, true);
+        }
+        ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_PIKMIN_GENERATE_ARTICLE_PIKMIN,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
     }
     frame(fighter.lua_state_agent, 10.0);
     if macros::is_excute(fighter) {
@@ -2766,6 +2769,7 @@ unsafe fn kirby_copy_fx(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::FOOT_EFFECT(fighter, Hash40::new("sys_dash_smoke"), Hash40::new("top"), -6, 0, 0, 0, 0, 0, 1.3, 0, 0, 0, 0, 0, 0, false);
         SoundModule::stop_all_sound(fighter.module_accessor);
+        macros::PLAY_SE(fighter, Hash40::new("vc_kirby_damagefly02"));
         macros::PLAY_SE(fighter, Hash40::new("se_common_blowaway_m"));
         macros::PLAY_SE(fighter, Hash40::new("se_common_blowaway_m"));
     }
@@ -2826,9 +2830,16 @@ fn kirby_rayman_frame(fighter: &mut L2CFighterCommon) {
                     }
                     if frame < 111.0 {
                         if GroundModule::is_wall_touch_line(boma, *GROUND_TOUCH_FLAG_SIDE as u32) || (AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_ALL) && WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_HIT_STOP_ATTACK_SUSPEND_FRAME) < 1){
-                            StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_CAPTURE_JUMP, true);
                             if !AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_ALL) {
+                                KineticModule::clear_speed_all(fighter.module_accessor);
+                                let lr = PostureModule::lr(fighter.module_accessor);
+                                StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_PASSIVE_WALL_JUMP, true);
+                                PostureModule::set_lr(fighter.module_accessor, lr*-1.0);
+                                PostureModule::update_rot_y_lr(boma);
+                                KineticModule::suspend_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_CONTROL);
                                 macros::QUAKE(fighter, *CAMERA_QUAKE_KIND_L);
+                            } else {
+                                StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_CAPTURE_JUMP, true);
                             }
                         }
                     }
@@ -3716,8 +3727,8 @@ unsafe fn utilt_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
 
     0.into()
 }
-#[status_script(agent = "pikmin", status = FIGHTER_STATUS_KIND_SPECIAL_LW, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_PRE)]
-unsafe fn downb_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
+#[status_script(agent = "kirby", status = FIGHTER_KIRBY_STATUS_KIND_PIKMIN_SPECIAL_N, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_PRE)]
+unsafe fn kirby_copy_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
     fighter.sub_status_pre_SpecialNCommon();
     StatusModule::init_settings(
         fighter.module_accessor,
@@ -3747,6 +3758,37 @@ unsafe fn downb_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
 
     0.into()
 }
+#[status_script(agent = "pikmin", status = FIGHTER_STATUS_KIND_SPECIAL_LW, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_PRE)]
+unsafe fn downb_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
+    fighter.sub_status_pre_SpecialNCommon();
+    StatusModule::init_settings(
+        fighter.module_accessor,
+        smash::app::SituationKind(*SITUATION_KIND_NONE),
+        *FIGHTER_KINETIC_TYPE_MOTION_AIR,
+        *GROUND_CORRECT_KIND_AIR as u32,
+        smash::app::GroundCliffCheckKind(*GROUND_CLIFF_CHECK_KIND_NONE),
+        true,
+        *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_FLAG,
+        *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_INT,
+        *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_FLOAT,
+        0
+    );
+
+    FighterStatusModuleImpl::set_fighter_status_data(
+        fighter.module_accessor,
+        false,
+        *FIGHTER_TREADED_KIND_NO_REAC,
+        false,
+        false,
+        false,
+        (*FIGHTER_LOG_MASK_FLAG_ATTACK_KIND_SPECIAL_N | *FIGHTER_LOG_MASK_FLAG_ACTION_TRIGGER_ON) as u64,
+        *FIGHTER_STATUS_ATTR_START_TURN as u32,
+        *FIGHTER_POWER_UP_ATTACK_BIT_SPECIAL_N as u32,
+        0
+    );
+
+    0.into()
+}
 pub fn install() {
 	install_status_scripts!(
         utilt_pre, main_utilt, //Puts Rayman in the air for utilt
@@ -3766,7 +3808,10 @@ pub fn install() {
         main_downb, downb_pre,
 
         //Final
-        main_final
+        main_final,
+
+        //Kirby
+        kirby_copy_pre
     );
     smashline::install_acmd_scripts!(
         //Jab and Dash Attack
