@@ -19,6 +19,8 @@ use smash::app::*;
 static mut COUNTER_STORE: [bool; 8] = [false; 8];
 static mut CUSTOM_BOMB: [bool; 8] = [false; 8];
 static mut BOMB_TIME: [i32; 8] = [0; 8];
+static mut NADO_COOLDOWN: [i32; 8] = [0; 8];
+static mut NADO_MAX: i32 = 70;
 
 #[acmd_script(
     agent = "miiswordsman",
@@ -232,12 +234,16 @@ unsafe fn sword_uthrow_eff(fighter: &mut L2CAgentBase) {
 	low_priority)]
 unsafe fn sword_nado(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
+	let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 		frame(fighter.lua_state_agent, 1.0);
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.7058823529411765);
 		frame(fighter.lua_state_agent, 17.0);
 		if macros::is_excute(fighter) {
-			if !ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_MIISWORDSMAN_GENERATE_ARTICLE_TORNADOSHOT) {
+			if NADO_COOLDOWN[ENTRY_ID] <= 0 {
 				ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_MIISWORDSMAN_GENERATE_ARTICLE_TORNADOSHOT, false, 0);
+				NADO_COOLDOWN[ENTRY_ID] = NADO_MAX;
+			} else {
+				macros::EFFECT(fighter, Hash40::new("sys_erace_smoke"), Hash40::new("top"), 14, 7, 0, 0, 0, 0, 0.7, 0, 0, 0, 0, 0, 0, true);
 			}
 		}
 		frame(fighter.lua_state_agent, 18.0);
@@ -345,10 +351,10 @@ unsafe fn sword_usmash_eff(fighter: &mut L2CAgentBase) {
 		}
 		frame(fighter.lua_state_agent, 8.0);
 		if macros::is_excute(fighter) {
-			let tex_sword = WorkModule::get_int64(fighter.module_accessor, *FIGHTER_MIISWORDSMAN_INSTANCE_WORK_ID_INT_EFT_TEX_SWORD) as i32;
-			let sword_add = WorkModule::get_int64(fighter.module_accessor, *FIGHTER_MIISWORDSMAN_INSTANCE_WORK_ID_INT_EFT_TEX_SWORD_ADD) as i32;
-			let sword_flare = WorkModule::get_int64(fighter.module_accessor, *FIGHTER_MIISWORDSMAN_INSTANCE_WORK_ID_INT_EFT_ID_SWORD_FLARE) as i32;
-			macros::AFTER_IMAGE4_ON_WORK_arg29(fighter, tex_sword, sword_add, 5, Hash40::new("haver"), 0.0, 0.2, 0.0, Hash40::new("haver"), -0.0, 10.8, 0.0, true, sword_flare, Hash40::new("haver"), 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0, *EFFECT_AXIS_X, 0, *TRAIL_BLEND_ALPHA, 101, *TRAIL_CULL_NONE, 1.4, 0.1);
+			let tex_sword = WorkModule::get_int64(fighter.module_accessor, *FIGHTER_MIISWORDSMAN_INSTANCE_WORK_ID_INT_EFT_TEX_SWORD) as u64;
+			let sword_add = WorkModule::get_int64(fighter.module_accessor, *FIGHTER_MIISWORDSMAN_INSTANCE_WORK_ID_INT_EFT_TEX_SWORD_ADD) as u64;
+			let sword_flare = WorkModule::get_int64(fighter.module_accessor, *FIGHTER_MIISWORDSMAN_INSTANCE_WORK_ID_INT_EFT_ID_SWORD_FLARE) as u64;
+			macros::AFTER_IMAGE4_ON_arg29(fighter, Hash40::new_raw(tex_sword), Hash40::new_raw(sword_add), 5, Hash40::new("haver"), 0.0, 0.2, 0.0, Hash40::new("haver"), -0.0, 10.8, 0.0, true, Hash40::new_raw(sword_flare), Hash40::new("haver"), 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0, *EFFECT_AXIS_X, 0, *TRAIL_BLEND_ALPHA, 101, *TRAIL_CULL_NONE, 1.4, 0.1);
 		}
 		frame(fighter.lua_state_agent, 13.0);
 		if macros::is_excute(fighter) {
@@ -435,10 +441,10 @@ unsafe fn sword_ftilt_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 4.0);
 		if macros::is_excute(fighter) {
-			let tex_sword = WorkModule::get_int64(fighter.module_accessor, *FIGHTER_MIISWORDSMAN_INSTANCE_WORK_ID_INT_EFT_TEX_SWORD) as i32;
-			let sword_add = WorkModule::get_int64(fighter.module_accessor, *FIGHTER_MIISWORDSMAN_INSTANCE_WORK_ID_INT_EFT_TEX_SWORD_ADD) as i32;
-			let sword_flare = WorkModule::get_int64(fighter.module_accessor, *FIGHTER_MIISWORDSMAN_INSTANCE_WORK_ID_INT_EFT_ID_SWORD_FLARE) as i32;
-			macros::AFTER_IMAGE4_ON_WORK_arg29(fighter, tex_sword, sword_add, 5, Hash40::new("haver"), 0.0, 0.2, 0.0, Hash40::new("haver"), -0.0, 10.8, 0.0, true, sword_flare, Hash40::new("haver"), 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0, *EFFECT_AXIS_X, 0, *TRAIL_BLEND_ALPHA, 101, *TRAIL_CULL_NONE, 1.4, 0.1);
+			let tex_sword = WorkModule::get_int64(fighter.module_accessor, *FIGHTER_MIISWORDSMAN_INSTANCE_WORK_ID_INT_EFT_TEX_SWORD) as u64;
+			let sword_add = WorkModule::get_int64(fighter.module_accessor, *FIGHTER_MIISWORDSMAN_INSTANCE_WORK_ID_INT_EFT_TEX_SWORD_ADD) as u64;
+			let sword_flare = WorkModule::get_int64(fighter.module_accessor, *FIGHTER_MIISWORDSMAN_INSTANCE_WORK_ID_INT_EFT_ID_SWORD_FLARE) as u64;
+			macros::AFTER_IMAGE4_ON_arg29(fighter, Hash40::new_raw(tex_sword), Hash40::new_raw(sword_add), 5, Hash40::new("haver"), 0.0, 0.2, 0.0, Hash40::new("haver"), -0.0, 10.8, 0.0, true, Hash40::new_raw(sword_flare), Hash40::new("haver"), 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0, *EFFECT_AXIS_X, 0, *TRAIL_BLEND_ALPHA, 101, *TRAIL_CULL_NONE, 1.4, 0.1);
 		}
 		frame(fighter.lua_state_agent, 6.0);
 		if macros::is_excute(fighter) {
@@ -802,9 +808,21 @@ unsafe fn sword_sideb_start(agent: &mut L2CAgentBase) {
         notify_event_msc_cmd!(agent, Hash40::new_raw(0x2127e37c07), *GROUND_CLIFF_CHECK_KIND_ALWAYS);
     }
 }
-#[acmd_script( agent = "miiswordsman", script = "effect_specials1", category = ACMD_EFFECT, low_priority )]
+#[acmd_script( agent = "miiswordsman", scripts = ["effect_specials1", "effect_specialairs1"], category = ACMD_EFFECT, low_priority )]
 unsafe fn sword_sideb_start_eff(agent: &mut L2CAgentBase) {
     if macros::is_excute(agent) {
+		macros::FOOT_EFFECT(agent, Hash40::new("sys_dash_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.9, 0, 0, 0, 0, 0, 0, false);
+		let tex_sword = WorkModule::get_int64(agent.module_accessor, *FIGHTER_MIISWORDSMAN_INSTANCE_WORK_ID_INT_EFT_TEX_SWORD) as u64;
+		let sword_add = WorkModule::get_int64(agent.module_accessor, *FIGHTER_MIISWORDSMAN_INSTANCE_WORK_ID_INT_EFT_TEX_SWORD_ADD) as u64;
+		let sword_flare = WorkModule::get_int64(agent.module_accessor, *FIGHTER_MIISWORDSMAN_INSTANCE_WORK_ID_INT_EFT_ID_SWORD_FLARE) as u64;
+		macros::AFTER_IMAGE4_ON_arg29(agent, Hash40::new_raw(tex_sword), Hash40::new_raw(sword_add), 5, Hash40::new("haver"), 0.0, 0.2, 0.0, Hash40::new("haver"), -0.0, 10.8, 0.0, true, Hash40::new_raw(sword_flare), Hash40::new("haver"), 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0, *EFFECT_AXIS_X, 0, *TRAIL_BLEND_ALPHA, 101, *TRAIL_CULL_NONE, 1.4, 0.1);
+	}
+	wait(agent.lua_state_agent, 3.0);
+	for _ in 0..i32::MAX {
+		if macros::is_excute(agent) {
+			macros::FOOT_EFFECT(agent, Hash40::new("sys_dash_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.4, 0, 0, 0, 0, 0, 0, false);
+		}
+		wait(agent.lua_state_agent, 3.0);
 	}
 }	
 #[acmd_script(
@@ -846,11 +864,6 @@ unsafe fn sword_sideb_air_start(agent: &mut L2CAgentBase) {
         notify_event_msc_cmd!(agent, Hash40::new_raw(0x2127e37c07), *GROUND_CLIFF_CHECK_KIND_ALWAYS);
     }
 }
-#[acmd_script( agent = "miiswordsman", script = "effect_specials1air", category = ACMD_EFFECT, low_priority )]
-unsafe fn sword_sideb_air_start_eff(agent: &mut L2CAgentBase) {
-    if macros::is_excute(agent) {
-	}
-}
 #[acmd_script(
     agent = "miiswordsman",
     script =  "game_specialairs1hit",
@@ -874,26 +887,16 @@ unsafe fn sword_sideb_air(fighter: &mut L2CAgentBase) {
 	low_priority)]
 unsafe fn sword_sideb_effect(agent: &mut L2CAgentBase) {
     if macros::is_excute(agent) {
-        macros::EFFECT_FOLLOW(agent, Hash40::new("miiswordsman_hensoku_arc"), Hash40::new("trans"), 0, 0, 0, 0, 0, 0, 1, true);
-        macros::LAST_EFFECT_SET_RATE(agent, 2);
-        macros::EFFECT_FOLLOW_WORK(agent, *FIGHTER_MIISWORDSMAN_INSTANCE_WORK_ID_INT_EFT_ID_SWORD_FLARE, Hash40::new("haver"), 0, 0, 0, 0, 0, 0, 1, true);
-        macros::LAST_EFFECT_SET_COLOR(agent, 0.9, 1.4, 0.72);
-        macros::EFFECT(agent, Hash40::new("miiswordsman_hensoku_hit"), Hash40::new("haver"), 0, -6.5, 0, 120, 0, 35, 0.8, 0, 0, 0, 0, 0, 0, true);
-        macros::LAST_EFFECT_SET_RATE(agent, 0.6);
-    }
-    frame(agent.lua_state_agent, 2.0);
-    if macros::is_excute(agent) {
-        macros::EFFECT(agent, Hash40::new("miiswordsman_hensoku_flash"), Hash40::new("haver"), 0, 8, 0, 0, 0, 0, 1.2, 0, 0, 0, 0, 0, 0, true);
-        macros::LAST_EFFECT_SET_RATE(agent, 0.6);
+		let tex_sword = WorkModule::get_int64(agent.module_accessor, *FIGHTER_MIISWORDSMAN_INSTANCE_WORK_ID_INT_EFT_TEX_SWORD) as u64;
+		let sword_add = WorkModule::get_int64(agent.module_accessor, *FIGHTER_MIISWORDSMAN_INSTANCE_WORK_ID_INT_EFT_TEX_SWORD_ADD) as u64;
+		let sword_flare = WorkModule::get_int64(agent.module_accessor, *FIGHTER_MIISWORDSMAN_INSTANCE_WORK_ID_INT_EFT_ID_SWORD_FLARE) as u64;
+		macros::AFTER_IMAGE4_ON_arg29(agent, Hash40::new_raw(tex_sword), Hash40::new_raw(sword_add), 5, Hash40::new("haver"), 0.0, 0.2, 0.0, Hash40::new("haver"), -0.0, 10.8, 0.0, true, Hash40::new_raw(sword_flare), Hash40::new("haver"), 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0, *EFFECT_AXIS_X, 0, *TRAIL_BLEND_ALPHA, 101, *TRAIL_CULL_NONE, 1.4, 0.1);
     }
     frame(agent.lua_state_agent, 8.0);
     if macros::is_excute(agent) {
         macros::AFTER_IMAGE_OFF(agent, 6);
     }
-    frame(agent.lua_state_agent, 18.0);
-    if macros::is_excute(agent) {
-        macros::EFFECT_OFF_KIND_WORK(agent, *FIGHTER_MIISWORDSMAN_INSTANCE_WORK_ID_INT_EFT_ID_SWORD_FLARE, false, false);
-    }
+	
 }	
 #[acmd_script(
     agent = "miiswordsman",
@@ -913,12 +916,10 @@ unsafe fn sword_sideb_snd(agent: &mut L2CAgentBase) {
 	low_priority)]
 unsafe fn sword_sideb_air_effect(agent: &mut L2CAgentBase) {
     if macros::is_excute(agent) {
-        macros::EFFECT_FOLLOW(agent, Hash40::new("miiswordsman_hensoku_arc"), Hash40::new("trans"), 0, 0, 0, 0, 0, 0, 1, true);
-        macros::LAST_EFFECT_SET_RATE(agent, 2);
-        macros::EFFECT_FOLLOW_WORK(agent, *FIGHTER_MIISWORDSMAN_INSTANCE_WORK_ID_INT_EFT_ID_SWORD_FLARE, Hash40::new("haver"), 0, 0, 0, 0, 0, 0, 1, true);
-        macros::LAST_EFFECT_SET_COLOR(agent, 0.9, 1.4, 0.72);
-        macros::EFFECT(agent, Hash40::new("miiswordsman_hensoku_hit"), Hash40::new("haver"), 0, -6.5, 3, 120, 0, 35, 0.8, 0, 0, 0, 0, 0, 0, true);
-        macros::LAST_EFFECT_SET_RATE(agent, 0.6);
+		let tex_sword = WorkModule::get_int64(agent.module_accessor, *FIGHTER_MIISWORDSMAN_INSTANCE_WORK_ID_INT_EFT_TEX_SWORD) as u64;
+		let sword_add = WorkModule::get_int64(agent.module_accessor, *FIGHTER_MIISWORDSMAN_INSTANCE_WORK_ID_INT_EFT_TEX_SWORD_ADD) as u64;
+		let sword_flare = WorkModule::get_int64(agent.module_accessor, *FIGHTER_MIISWORDSMAN_INSTANCE_WORK_ID_INT_EFT_ID_SWORD_FLARE) as u64;
+		macros::AFTER_IMAGE4_ON_arg29(agent, Hash40::new_raw(tex_sword), Hash40::new_raw(sword_add), 5, Hash40::new("haver"), 0.0, 0.2, 0.0, Hash40::new("haver"), -0.0, 10.8, 0.0, true, Hash40::new_raw(sword_flare), Hash40::new("haver"), 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0, *EFFECT_AXIS_X, 0, *TRAIL_BLEND_ALPHA, 101, *TRAIL_CULL_NONE, 1.4, 0.1);
     }
     frame(agent.lua_state_agent, 2.0);
     if macros::is_excute(agent) {
@@ -1015,7 +1016,12 @@ pub fn sword(fighter : &mut L2CFighterCommon) {
 				COUNTER_STORE[ENTRY_ID] = false;
 				BOMB_TIME[ENTRY_ID] = 0;
 				CUSTOM_BOMB[ENTRY_ID] = false;
+				NADO_COOLDOWN[ENTRY_ID] = 0;
 			};
+			if NADO_COOLDOWN[ENTRY_ID] > 0 {
+				NADO_COOLDOWN[ENTRY_ID] -= 1;
+			};
+
 			/*if [*FIGHTER_STATUS_KIND_ATTACK_AIR, *FIGHTER_STATUS_KIND_ATTACK_LW3].contains(&status_kind) && CUSTOM_BOMB[ENTRY_ID] == true {
 				MotionModule::change_motion(boma, smash::phx::Hash40::new("catch"), 9.0, 1.0, false, 0.0, false, false);
 				MotionModule::set_rate(boma, 0.8);
@@ -1150,7 +1156,7 @@ pub fn install() {
 		sword_jab1,
 		sword_sideb_air, sword_sideb,
 		sword_sideb_snd, sword_sideb_air_effect, sword_sideb_effect,
-		sword_sideb_start, sword_sideb_air_start, sword_sideb_start_eff, sword_sideb_air_start_eff
+		sword_sideb_start, sword_sideb_air_start, sword_sideb_start_eff
     );
 	smashline::install_status_scripts!(sword_gs_charge,sword_aa_pre, sword_aa_main);
 	smashline::install_agent_frame_callbacks!(sword);
