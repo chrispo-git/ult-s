@@ -623,6 +623,9 @@ pub fn faf_change_master(fighter : &mut L2CFighterCommon) {
 			if [hash40("attack_air_b")].contains(&motion_kind) && frame >= 35.0 {
 				CancelModule::enable_cancel(boma);
 			};
+			if [hash40("special_n1"), hash40("special_air_n1")].contains(&motion_kind) && frame >= 30.0 {
+				CancelModule::enable_cancel(boma);
+			};
 			if [hash40("special_n2"), hash40("special_air_n2")].contains(&motion_kind) && frame >= 40.0 {
 				CancelModule::enable_cancel(boma);
 			};
