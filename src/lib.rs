@@ -21,6 +21,21 @@ use smash::params::add_hook;
 use std::sync::atomic::{AtomicBool, Ordering};
 use skyline::hooks::InlineCtx;
 
+pub fn is_on_ryujinx() -> bool {
+    unsafe {
+        // Ryujinx skip based on text addr
+        let text_addr = skyline::hooks::getRegionAddress(skyline::hooks::Region::Text) as u64;
+        if text_addr == 0x8004000 {
+            println!("we are on Ryujinx");
+            return true;
+        } else {
+            println!("we are not on Ryujinx");
+            return false;
+        }
+    }
+}
+
+
 extern "C" {
 	fn change_version_string(arg: u64, string: *const c_char);
 }
@@ -353,19 +368,22 @@ pub extern "C" fn main() {
 
 	
 	//Common
-    unsafe {
-        OFFSET1 = calc_nnsdk_offset() + 0x429d60;
-        OFFSET2 = calc_nnsdk_offset() + 0x26e94;
+    if !is_on_ryujinx() {
+        println!("We're on switch! Yay!");
+        unsafe {
+            OFFSET1 = calc_nnsdk_offset() + 0x429d60;
+            OFFSET2 = calc_nnsdk_offset() + 0x26e94;
+        }
+    
+        skyline::install_hooks!(
+            set_interval_1,
+            set_interval_2,
+            run_scene_update,
+            vsync_count_thread,
+        );
+        skyline::install_hooks!(non_hdr_set_room_id, non_hdr_update_room_hook, non_hdr_set_online_latency, online_melee_any_scene_create, bg_matchmaking_seq, arena_seq, main_menu);
+        skyline::install_hooks!(change_version_string_hook);
     }
-
-    skyline::install_hooks!(
-        set_interval_1,
-        set_interval_2,
-        run_scene_update,
-        vsync_count_thread,
-    );
-	skyline::install_hooks!(non_hdr_set_room_id, non_hdr_update_room_hook, non_hdr_set_online_latency, online_melee_any_scene_create, bg_matchmaking_seq, arena_seq, main_menu);
-	skyline::install_hooks!(change_version_string_hook);
 	nro::add_hook(nro_hook).unwrap();
 
 
