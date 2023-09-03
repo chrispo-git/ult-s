@@ -21,7 +21,6 @@ replace = [
     ['eflame', 'pyra'],
     ['elight', 'mythra'],
     ['gaogaen', 'incin'],
-    ['ganon', 'ganondorf'],
     ['falco'],
     ['fox'],
     ['gamewatch', 'gnw', 'g&w'],
