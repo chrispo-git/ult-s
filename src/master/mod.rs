@@ -44,19 +44,7 @@ unsafe fn byleth_dtilt(fighter: &mut L2CAgentBase) {
 		if macros::is_excute(fighter) {
 			ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_MASTER_GENERATE_ARTICLE_SWORD,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
 		}
-}				
-#[acmd_script(
-    agent = "master",
-    script =  "game_landingairn",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn byleth_land_nair(fighter: &mut L2CAgentBase) {
-    let lua_state = fighter.lua_state_agent;
-		if macros::is_excute(fighter) {	
-			ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_MASTER_GENERATE_ARTICLE_SWORD,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
-			ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_MASTER_GENERATE_ARTICLE_BOW,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
-		}
-	}		
+}						
 #[acmd_script(
     agent = "master",
     script =  "game_attackairb",
@@ -243,7 +231,19 @@ unsafe fn byleth_nair(fighter: &mut L2CAgentBase) {
 		if macros::is_excute(fighter) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
-	}		
+	}
+#[acmd_script(
+	agent = "master",
+	script =  "game_landingairn",
+	category = ACMD_GAME,
+	low_priority)]
+unsafe fn byleth_land_nair(fighter: &mut L2CAgentBase) {
+	let lua_state = fighter.lua_state_agent;
+		if macros::is_excute(fighter) {	
+			ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_MASTER_GENERATE_ARTICLE_SWORD,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
+			ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_MASTER_GENERATE_ARTICLE_BOW,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
+			}
+		}		
 #[acmd_script(
     agent = "master",
     script =  "effect_attackairn",
@@ -844,6 +844,7 @@ pub fn install() {
 		byleth_dtilt_eff,
 		byleth_nair,
 		byleth_naire,
+		byleth_land_nair,
 		byleth_sideb,
 		byleth_sidebdash,
 		byleth_sidebe,
