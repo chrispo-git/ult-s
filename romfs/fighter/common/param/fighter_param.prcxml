@@ -565,7 +565,7 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
       <float hash="tread_jump_speed_y_mul">1.0</float>
       <float hash="tread_mini_jump_speed_y_mul">0.475</float>
     </struct>
-    <!--DR. MARIO-->
+    <!--DR. MARIO / MARIOD-->
     <struct index="18">
       <float hash="dash_speed">1.92</float>
       <float hash="run_speed_max">1.785</float>
@@ -1042,7 +1042,7 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
       <float hash="tread_jump_speed_y_mul">1.0</float>
       <float hash="tread_mini_jump_speed_y_mul">0.475</float>
     </struct>
-    <!--BOWSER JR.-->
+    <!--BOWSER JR. / KOOPAJR-->
     <struct index="55">
       <hash40 hash="clip_sphere_node">waist</hash40>
       <float hash="dash_speed">1.86</float>
@@ -1401,7 +1401,7 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
       <float hash="tread_jump_speed_y_mul">1.0</float>
       <float hash="tread_mini_jump_speed_y_mul">0.475</float>
     </struct>
-    <!--DARK SAMUS-->
+    <!--DARK SAMUS / SAMUSD-->
     <struct index="83">
       <hash40 hash="attack_combo_type">fighter_combo_type_none</hash40>
       <float hash="ground_brake">0.06</float>
@@ -1476,7 +1476,7 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
       <float hash="combo_attack_12_end">28</float>
       <int hash="attack_combo_max">2</int>
     </struct>
-    <!--DARK PIT-->
+    <!--DARK PIT / PITB-->
     <struct index="87">
       <float hash="ground_brake">0.17</float>
       <float hash="dash_speed">2.12</float>
