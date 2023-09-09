@@ -70,7 +70,7 @@ replace = [
     ['pichu'],
     ['pickel', 'steve'],
     ['pikachu', 'pika'],
-    ['pikmin', 'olimar', 'alph'],
+    ['pikmin', 'olimar', 'alph', 'rayman'],
     ['pitb', 'dpit'],
     ['pit'],
     ['plizardon', 'charizard', 'zard'],
