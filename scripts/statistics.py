@@ -435,7 +435,7 @@ if not os.path.isdir(f'src/{character}'):
         trip = x[21].replace("/*Trip*/","")
         trip = trip.replace(" ","")
         if trip != "0" and trip != "0.0":
-          notes.append(f"{rehit} bonus trip chance")
+          notes.append(f"{trip} bonus trip chance")
         id = x[0].replace(' ','')
         id = id.replace('/*ID*/','')
         id = id.replace('\t','')
