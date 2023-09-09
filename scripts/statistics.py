@@ -275,7 +275,7 @@ for i in attribute_list:
 f.write("\nEdited Moves:\n")
 f.close()     
 
-if os.path.isdir(f'src/{character}'):
+if not os.path.isdir(f'src/{character}'):
     os.chdir('../')
     os.chdir(f'src/{character}')
     f = open("mod.rs")
@@ -450,194 +450,194 @@ f.write("\nVanilla Moves:\n")
 f.close()
 
 include_list = [
-  "Attack1", "AttackDash", "AttackS3", "AttackHi3", "AttackLw3",
-  "AttackS4", "AttackHi4", "AttackLw4", 
-  "AttackAirN", "AttackAirF", "AttackAirB", "AttackAirHi", "AttackAirLw", "AirCatch",
+  "Attack1", "AttackDash.", "AttackS3", "AttackHi3", "AttackLw3",
+  "AttackS4", "AttackHi4.", "AttackLw4.", 
+  "AttackAirN", "AttackAirF", "AttackAirB", "AttackAirHi", "AttackAirLw", "AirCatch.",
   "SpecialN", "SpecialS", "SpecialHi", "SpecialLw",
   "Catch.", "CatchDash", "CatchTurn",
-  "ThrowF", "ThrowB", "ThrowHi", "ThrowLw"
+  "ThrowF", "ThrowB.", "ThrowHi.", "ThrowLw."
 ]
 
 output = []
 os.chdir('../')
 os.chdir('../')
 os.chdir('../')
-os.chdir(f'Dumped_Scripts/smashline/lua2cpp_{character}/{character}/game')
+try:
+  os.chdir(f'Dumped_Scripts/smashline/lua2cpp_{character}/{character}/game')
 
-char_directory = os.listdir()
-for i in char_directory:
-    is_included = False
-    current_script = i
-    for x in include_list:
-      if x in current_script:
-        is_included = True
-    if is_included == False:
-      pass
-    f = open(current_script)
-    rs = f.readlines()
-    f.close()
-    output.append(f"\n{current_script}\n")
-
-
-    #Game Scripts
-    frame = 0.0
-    last_frame_check = 0.0
-    script_name = ""
-    motion_rate = 1.0
-    autocancel_start = 0.0
-    autocancel_end = 0.0
-    additional_info = []
-    has_hitstun = False
-    throw_stats = []
-
-    not_game = ["eff", "sound", "snd", "expr", "_s ", "_s(", "_e ", "_e("]
-
-    for line_ in rs:
-      line = line_.replace("(agent", "(fighter")
-      #print(line)
-    
-      game = True
-      for i in not_game:
-        if i in line:
-          game = False
-      if "(fighter: &mut L2CAgentBase)" in line and game == True:
-        x = line
-        x = line.replace("(fighter: &mut L2CAgentBase) {", "")
-        x = x.replace("unsafe fn ", "")
-        x = x.replace(" ", "")
-        x = x.replace("\n", "")
-        script_name = x
-        #output.append(x)
-      if "frame(fighter.lua_state_agent" in line:
-        x = line.replace("frame(fighter.lua_state_agent", "")
-        x = x.replace("/*Frames*/", "")
-        x = x.replace(");", "")
-        x = x.replace(" ", "")
-        x = x.replace("\n", "")
-        x = x.replace("\t", "")
-        x = x.replace(",", "")
-        #if script_name == "mario_nair":
-          #print(f"new_frame:{frame + ((float(x) - last_frame_check) * motion_rate)}")
-          
-        frame += (float(x) - last_frame_check) * motion_rate
-        last_frame_check = float(x)
-      if "wait(fighter.lua_state_agent" in line:
-        x = line.replace("wait(fighter.lua_state_agent,", "")
-        x = x.replace(");", "")
-        x = x.replace(" ", "")
-        x = x.replace("\n", "")
-        x = x.replace("\t", "")
-        x = x.replace(",", "")
-        frame += float(x) * motion_rate
-      if "WorkModule::on_flag(fighter.module_accessor" in line and "//" not in line and "*FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING" in line:
-        autocancel_start = frame
-        #print("Autocancel Off!")
-      if "WorkModule::off_flag(fighter.module_accessor" in line and "//" not in line and "*FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING" in line:
-        autocancel_end = frame
-        #print("Autocancel On!")
-      if "FT_MOTION_RATE" in line and "//" not in line:
-        x = line.replace("macros::FT_MOTION_RATE(fighter,", "")
-        x = x.replace("/*FSM*/", "")
-        x = x.replace(");", "")
-        x = x.replace(" ", "")
-        motion_rate = float(x)
-      if "macros::ATTACK(fighter" in line:
-        x = line.replace("macros::ATTACK(fighter, ", "")
-        x = x.replace("/*Damage*/", "")
-        x = x.replace("/*Angle*/", "")
-        x = x.replace("/*BKB*/", "")
-        x = x.replace("/*KBG*/", "")
-        x = x.replace("/*FKB*/", "")
-        x = x.split(", ")
-        z = x[7]
-        if int(x[6]) > 0:
-          z = f"{x[6]} (Set)"
-    
-        atk_frame = int(math.ceil(frame))
-        if atk_frame == 0:
-          atk_frame = 1
-        output.append(f"\nFrame {atk_frame}|Damage: {x[3]}%| Angle: {x[4]}| BKB: {z}| KBG: {x[5]}")
-      if "macros::ATTACK_ABS(fighter" in line:
-        x = line.replace("macros::ATTACK_ABS(fighter, ", "")
-        x = x.replace("/*Damage*/", "")
-        x = x.replace("/*Angle*/", "")
-        x = x.replace("/*BKB*/", "")
-        x = x.replace("/*KBG*/", "")
-        x = x.replace("/*FKB*/", "")
-        x = x.replace("/*Kind*/", "")
-        x = x.split(", ")
-        if "THROW" in x[0]:
-            throw_stats = x
-      if "macros::ATK_HIT_ABS(fighter" in line:
-        x = throw_stats
-        z = x[6]
-        if int(x[5]) > 0:
-          z = f"{x[5]} (Set)"
-    
-        atk_frame = int(math.ceil(frame))
-        if atk_frame == 0:
-          atk_frame = 1
-        output.append(f"\nThrows on Frame {atk_frame}|Damage: {x[2]}%| Angle: {x[3]}| BKB: {z}| KBG: {x[4]}")
-        throw_stats = []
-      if "macros::CATCH(" in line:
-        atk_frame = int(math.ceil(frame))
-        if atk_frame == 0:
-          atk_frame = 1
-        output.append(f"\nGrabs on Frame {atk_frame}")
-      if "grab!(fighter, *MA_MSC_CMD_GRAB_CLEAR_ALL" in line:
-        atk_frame = int(math.ceil(frame))
-        if atk_frame == 0:
-          atk_frame = 1
-        output.append(f"\nGrabbox ceases on Frame {atk_frame}")
-      if "AttackModule::clear_all(fighter.module_accessor);" in line:
-        output.append(f"\nHitboxes terminated on frame {int(math.ceil(frame))}")
-      if "AttackModule::set_add_reaction_frame(fighter.module_accessor," in line and has_hitstun == False:
-        x = line.replace("AttackModule::set_add_reaction_frame(fighter.module_accessor,", "")
-        x = x.replace("/*ID*/", "")
-        x = x.replace("/*Unk*/", "")
-        x = x.replace("/*Frames*/", "")
-        x = x.replace("false);", "")
-        x = x.replace("\t", "")
-        x = x.replace("[", "")
-        x = x.replace("\n", "")
-        x = x.split(", ")
-        #x = str(x).split(" ")
-        has_hitstun = True
-        additional_info.append(f"\nNote: Deals {int(math.ceil(float(x[1])))}f bonus hitstun\n")
-    
-    if True == True:
-        if len(additional_info) == 0:
-          additional_info.append("\n")
-        if autocancel_start != autocancel_end:
-          a_start = int(math.ceil(autocancel_start))-1
-          if a_start > 1:
-            additional_info.append(f"Autocancel - 1-{int(math.ceil(autocancel_start))-1}/{int(math.ceil(autocancel_end))}+")
-          elif a_start > 0:
-            additional_info.append(f"Autocancel - 1/{int(math.ceil(autocancel_end))}+")
-          else:
-            additional_info.append(f"Autocancel - {autocancel_end}+")
-    
-        for i in additional_info:
-          output.append(i)
-        if script_name != "":
-          output.append("\n\n")
-        frame = 0.0
-        last_frame_check = 0.0
-        motion_rate = 1.0
-        autocancel_start = 0.0
-        autocancel_end = 0.0
-        has_hitstun = False
-        throw_stats = []
-        additional_info = []
+  char_directory = os.listdir()
+  for i in char_directory:
+      is_included = False
+      current_script = i
+      for x in include_list:
+        if x in current_script:
+          is_included = True
+      if is_included == False:
+        pass
+      f = open(current_script)
+      rs = f.readlines()
+      f.close()
+      output.append(f"\n{current_script}\n")
 
 
+      #Game Scripts
+      frame = 0.0
+      last_frame_check = 0.0
+      script_name = ""
+      motion_rate = 1.0
+      autocancel_start = 0.0
+      autocancel_end = 0.0
+      additional_info = []
+      has_hitstun = False
+      throw_stats = []
 
+      not_game = ["eff", "sound", "snd", "expr", "_s ", "_s(", "_e ", "_e("]
 
-os.chdir('../')
-os.chdir('../')
-os.chdir('../')
-os.chdir('../')
-os.chdir('../')
+      for line_ in rs:
+        line = line_.replace("(agent", "(fighter")
+        #print(line)
+      
+        game = True
+        for i in not_game:
+          if i in line:
+            game = False
+        if "(fighter: &mut L2CAgentBase)" in line and game == True:
+          x = line
+          x = line.replace("(fighter: &mut L2CAgentBase) {", "")
+          x = x.replace("unsafe fn ", "")
+          x = x.replace(" ", "")
+          x = x.replace("\n", "")
+          script_name = x
+          #output.append(x)
+        if "frame(fighter.lua_state_agent" in line:
+          x = line.replace("frame(fighter.lua_state_agent", "")
+          x = x.replace("/*Frames*/", "")
+          x = x.replace(");", "")
+          x = x.replace(" ", "")
+          x = x.replace("\n", "")
+          x = x.replace("\t", "")
+          x = x.replace(",", "")
+          #if script_name == "mario_nair":
+            #print(f"new_frame:{frame + ((float(x) - last_frame_check) * motion_rate)}")
+            
+          frame += (float(x) - last_frame_check) * motion_rate
+          last_frame_check = float(x)
+        if "wait(fighter.lua_state_agent" in line:
+          x = line.replace("wait(fighter.lua_state_agent,", "")
+          x = x.replace(");", "")
+          x = x.replace(" ", "")
+          x = x.replace("\n", "")
+          x = x.replace("\t", "")
+          x = x.replace(",", "")
+          frame += float(x) * motion_rate
+        if "WorkModule::on_flag(fighter.module_accessor" in line and "//" not in line and "*FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING" in line:
+          autocancel_start = frame
+          #print("Autocancel Off!")
+        if "WorkModule::off_flag(fighter.module_accessor" in line and "//" not in line and "*FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING" in line:
+          autocancel_end = frame
+          #print("Autocancel On!")
+        if "FT_MOTION_RATE" in line and "//" not in line:
+          x = line.replace("macros::FT_MOTION_RATE(fighter,", "")
+          x = x.replace("/*FSM*/", "")
+          x = x.replace(");", "")
+          x = x.replace(" ", "")
+          motion_rate = float(x)
+        if "macros::ATTACK(fighter" in line:
+          x = line.replace("macros::ATTACK(fighter, ", "")
+          x = x.replace("/*Damage*/", "")
+          x = x.replace("/*Angle*/", "")
+          x = x.replace("/*BKB*/", "")
+          x = x.replace("/*KBG*/", "")
+          x = x.replace("/*FKB*/", "")
+          x = x.split(", ")
+          z = x[7]
+          if int(x[6]) > 0:
+            z = f"{x[6]} (Set)"
+      
+          atk_frame = int(math.ceil(frame))
+          if atk_frame == 0:
+            atk_frame = 1
+          output.append(f"\nFrame {atk_frame}|Damage: {x[3]}%| Angle: {x[4]}| BKB: {z}| KBG: {x[5]}")
+        if "macros::ATTACK_ABS(fighter" in line:
+          x = line.replace("macros::ATTACK_ABS(fighter, ", "")
+          x = x.replace("/*Damage*/", "")
+          x = x.replace("/*Angle*/", "")
+          x = x.replace("/*BKB*/", "")
+          x = x.replace("/*KBG*/", "")
+          x = x.replace("/*FKB*/", "")
+          x = x.replace("/*Kind*/", "")
+          x = x.split(", ")
+          if "THROW" in x[0]:
+              throw_stats = x
+        if "macros::ATK_HIT_ABS(fighter" in line:
+          x = throw_stats
+          z = x[6]
+          if int(x[5]) > 0:
+            z = f"{x[5]} (Set)"
+      
+          atk_frame = int(math.ceil(frame))
+          if atk_frame == 0:
+            atk_frame = 1
+          output.append(f"\nThrows on Frame {atk_frame}|Damage: {x[2]}%| Angle: {x[3]}| BKB: {z}| KBG: {x[4]}")
+          throw_stats = []
+        if "macros::CATCH(" in line:
+          atk_frame = int(math.ceil(frame))
+          if atk_frame == 0:
+            atk_frame = 1
+          output.append(f"\nGrabs on Frame {atk_frame}")
+        if "grab!(fighter, *MA_MSC_CMD_GRAB_CLEAR_ALL" in line:
+          atk_frame = int(math.ceil(frame))
+          if atk_frame == 0:
+            atk_frame = 1
+          output.append(f"\nGrabbox ceases on Frame {atk_frame}")
+        if "AttackModule::clear_all(fighter.module_accessor);" in line:
+          output.append(f"\nHitboxes terminated on frame {int(math.ceil(frame))}")
+        if "AttackModule::set_add_reaction_frame(fighter.module_accessor," in line and has_hitstun == False:
+          x = line.replace("AttackModule::set_add_reaction_frame(fighter.module_accessor,", "")
+          x = x.replace("/*ID*/", "")
+          x = x.replace("/*Unk*/", "")
+          x = x.replace("/*Frames*/", "")
+          x = x.replace("false);", "")
+          x = x.replace("\t", "")
+          x = x.replace("[", "")
+          x = x.replace("\n", "")
+          x = x.split(", ")
+          #x = str(x).split(" ")
+          has_hitstun = True
+          additional_info.append(f"\nNote: Deals {int(math.ceil(float(x[1])))}f bonus hitstun\n")
+      
+      if True == True:
+          if len(additional_info) == 0:
+            additional_info.append("\n")
+          if autocancel_start != autocancel_end:
+            a_start = int(math.ceil(autocancel_start))-1
+            if a_start > 1:
+              additional_info.append(f"Autocancel - 1-{int(math.ceil(autocancel_start))-1}/{int(math.ceil(autocancel_end))}+")
+            elif a_start > 0:
+              additional_info.append(f"Autocancel - 1/{int(math.ceil(autocancel_end))}+")
+            else:
+              additional_info.append(f"Autocancel - {autocancel_end}+")
+      
+          for i in additional_info:
+            output.append(i)
+          if script_name != "":
+            output.append("\n\n")
+          frame = 0.0
+          last_frame_check = 0.0
+          motion_rate = 1.0
+          autocancel_start = 0.0
+          autocancel_end = 0.0
+          has_hitstun = False
+          throw_stats = []
+          additional_info = []
+
+  os.chdir('../')
+  os.chdir('../')
+  os.chdir('../')
+  os.chdir('../')
+  os.chdir('../')
+except Exception:
+  print("No Dumped_Scripts Folder! Continuing")
 os.chdir(f'Ultimate S Smashline/ultimate-s/scripts')
 
 f = open("output.csv", "a")
@@ -688,4 +688,4 @@ try:
         f.write(i)
     f.close()
 except Exception:
-    print("No motion_list to extract")
+    print("No motion_list to extract") 
