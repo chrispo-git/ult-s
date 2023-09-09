@@ -387,7 +387,59 @@ if not os.path.isdir(f'src/{character}'):
         atk_frame = int(math.ceil(frame))
         if atk_frame == 0:
           atk_frame = 1
-        output.append(f"\nFrame {atk_frame}|Damage: {x[3]}%| Angle: {x[4]}| BKB: {z}| KBG: {x[5]}")
+        notes = []
+
+        #Notes!
+        ground_air = x[28].replace("/*Ground_or_Air*/","")
+        ground_air = ground_air.replace(" ","")
+        if ground_air != "*COLLISION_SITUATION_MASK_GA":
+          if ground_air == "*COLLISION_SITUATION_MASK_G":
+            notes.append("Hits grounded only")
+          elif ground_air == "*COLLISION_SITUATION_MASK_A":
+            notes.append("Hits air only")
+          elif ground_air == "*COLLISION_SITUATION_MASK_G_d":
+            notes.append("Hits grounded only (not downed)")
+          elif ground_air == "*COLLISION_SITUATION_MASK_GA_d":
+            notes.append("Does not hit downed foes")
+            
+        effect = x[32].replace("/*Effect*/","")
+        effect = effect.replace(" ","")
+        effect = effect.replace("Hash40::new(","")
+        effect = effect.replace("Hash40::new_raw(","")
+        effect = effect.replace(")","")
+        effect = effect.replace('"',"")
+        effect = effect.replace('collision_attr_',"")
+        effect = effect.replace(" ","")
+        banned = ["normal","rush","magic","rush","cutup","sting","purple"]
+        if effect not in banned:
+          notes.append(f"hit effect is {effect}")
+
+        
+        if "true" in x[23]:
+            notes.append("Reflectable")
+        if "true" in x[24]:
+            notes.append("Absorbable")
+        if "true" in x[25]:
+            notes.append("Flinchless")
+
+        shield = x[20].replace("/*ShieldDamage*/","")
+        shield = shield.replace(" ","")
+        if shield != "0" and shield != "0.0":
+          notes.append(f"deals {shield} bonus shield damage")
+
+        rehit = x[22].replace("/*Rehit*/","")
+        rehit = rehit.replace(" ","")
+        if rehit != "0":
+          notes.append(f"rehits every {rehit} frames")
+
+        trip = x[21].replace("/*Trip*/","")
+        trip = trip.replace(" ","")
+        if trip != "0" and trip != "0.0":
+          notes.append(f"{rehit} bonus trip chance")
+        id = x[0].replace(' ','')
+        id = id.replace('/*ID*/','')
+        id = id.replace('\t','')
+        output.append(f"\nFrame {atk_frame}|ID: {id}|Damage: {x[3]}%| Angle: {x[4]}| BKB: {z}| KBG: {x[5]}|Notes: {', '.join(notes)}")
       if "macros::ATTACK_ABS(fighter" in line:
         x = line.replace("macros::ATTACK_ABS(fighter, ", "")
         x = x.replace("/*Damage*/", "")
