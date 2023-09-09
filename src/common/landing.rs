@@ -35,6 +35,19 @@ pub fn llpc(fighter : &mut L2CFighterCommon) {
                 };
             }
 		};
+		if situation_kind == *SITUATION_KIND_GROUND && ((cancel_frame != 0.0 && frame >= cancel_frame)|| CancelModule::is_enable_cancel(boma)) {
+			if GroundModule::is_passable_ground(fighter.module_accessor) && sticky <= -0.6875 && (ControlModule::get_flick_y(boma) >= 3 && ControlModule::get_flick_y(boma) < 20) {
+				if (
+					(ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_ATTACK_LW4) == 0 &&
+					(ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_ATTACK_LW3) == 0 &&
+					(ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_LW) == 0 &&
+					(ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_ESCAPE) == 0 &&
+					(ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_JUMP))
+				) {
+					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_PASS, true);
+				};
+			}
+		}
     };
 }	
 #[fighter_frame_callback]
@@ -56,6 +69,7 @@ pub fn shielddrop(fighter : &mut L2CFighterCommon) {
 pub(crate) fn is_edge_cancel(fighter_kind : i32, status_kind : i32) -> bool {
 	let edge_cancel = [
 		[*FIGHTER_KIND_LUCARIO, *FIGHTER_STATUS_KIND_ATTACK_DASH],
+		[*FIGHTER_KIND_LUCARIO, *FIGHTER_STATUS_KIND_SPECIAL_LW],
 		[*FIGHTER_KIND_DIDDY, *FIGHTER_STATUS_KIND_ATTACK_DASH],
 		[*FIGHTER_KIND_DONKEY, *FIGHTER_STATUS_KIND_ATTACK_DASH],
 		[*FIGHTER_KIND_BUDDY, *FIGHTER_STATUS_KIND_ATTACK_DASH],
@@ -73,7 +87,10 @@ pub(crate) fn is_edge_cancel(fighter_kind : i32, status_kind : i32) -> bool {
 		[*FIGHTER_KIND_CAPTAIN, *FIGHTER_STATUS_KIND_SPECIAL_LW],
 		[*FIGHTER_KIND_EDGE, *FIGHTER_STATUS_KIND_ATTACK_LW3],
 		[*FIGHTER_KIND_MIIGUNNER, *FIGHTER_STATUS_KIND_ATTACK_DASH],
-		[*FIGHTER_KIND_FALCO, *FIGHTER_STATUS_KIND_ATTACK_DASH]
+		[*FIGHTER_KIND_FALCO, *FIGHTER_STATUS_KIND_ATTACK_DASH],
+		[*FIGHTER_KIND_PIKMIN, *FIGHTER_STATUS_KIND_RUN_BRAKE],
+		[*FIGHTER_KIND_KIRBY, *FIGHTER_KIRBY_STATUS_KIND_PIKMIN_SPECIAL_N],
+		[*FIGHTER_KIND_MIIFIGHTER, *FIGHTER_MIIFIGHTER_STATUS_KIND_SPECIAL_LW2_KICK_LANDING]
 	];
 	for i in &edge_cancel {
 		if fighter_kind == i[0] && status_kind == i[1] {

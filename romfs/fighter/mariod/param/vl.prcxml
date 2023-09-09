@@ -32,4 +32,22 @@
     <hash40 index="2">dummy</hash40>
     <hash40 index="3">dummy</hash40>
   </list>
+  <list hash="param_special_hi">
+    <struct index="0">
+      <float hash="special_air_hi_start_x_mul">0.67</float>
+      <float hash="special_air_hi_accel_y">0.5</float>
+      <float hash="special_hi_dir_stick_x">0.5</float>
+      <float hash="special_hi_dir_mul">18.0</float>
+      <float hash="special_hi_pass_mul">0.85</float>
+      <float hash="special_air_hi_pass_mul">0.85</float>
+      <float hash="special_hi_fall_x_mul">0.6</float>
+      <int hash="special_hi_landing_frame">30</int>
+      <float hash="special_hi_lr_stick_x">0.3</float>
+      <float hash="special_hi_trans_move_end_speed_x_mul">1.0</float>
+      <float hash="special_hi_trans_move_end_speed_y_mul">1.0</float>
+    </struct>
+    <hash40 index="1">dummy</hash40>
+    <hash40 index="2">dummy</hash40>
+    <hash40 index="3">dummy</hash40>
+  </list>
 </struct>

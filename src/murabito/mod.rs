@@ -2205,7 +2205,7 @@ pub fn toad(fighter : &mut L2CFighterCommon) {
 				} else {
 					CAN_NEUTRALB[ENTRY_ID] = 0;
 				};
-			} else {
+			} else if WorkModule::get_int(boma, *FIGHTER_KIRBY_INSTANCE_WORK_ID_INT_COPY_CHARA) == *FIGHTER_KIND_NONE{
 				CAN_NEUTRALB[ENTRY_ID] = 0;
 			};
 		};

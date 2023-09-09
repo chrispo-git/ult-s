@@ -1256,6 +1256,33 @@ fn finalcutter_frame(weapon: &mut L2CFighterBase) {
 		};
     }
 }
+#[weapon_frame( agent = WEAPON_KIND_KIRBY_HAT )]
+fn hat_frame(weapon: &mut L2CFighterBase) {
+    unsafe {
+        let otarget_id = WorkModule::get_int(weapon.module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LINK_OWNER) as u32;
+        let boma = smash::app::sv_battle_object::module_accessor(otarget_id);
+		let copy_kind = WorkModule::get_int(&mut *boma, *FIGHTER_KIRBY_INSTANCE_WORK_ID_INT_COPY_CHARA);
+		let motion_kind = MotionModule::motion_kind(&mut *boma);
+		let status_kind = StatusModule::status_kind(&mut *boma);
+		let frame = MotionModule::frame(&mut *boma);
+		if copy_kind == *FIGHTER_KIND_PIKMIN {
+			//println!("I HAVE RAYMAN");
+            EffectModule::kill_kind(weapon.module_accessor, Hash40::new("pikmin_antenna"), false, false);
+            EffectModule::kill_kind(weapon.module_accessor, Hash40::new("pikmin_antenna_damage"), false, false);
+            EffectModule::kill_kind(weapon.module_accessor, Hash40::new("pikmin_antenna_damage"), true, true);
+            EffectModule::kill_kind(weapon.module_accessor, Hash40::new("pikmin_antenna_damage"), false, true);
+            EffectModule::kill_kind(weapon.module_accessor, Hash40::new("pikmin_antenna_damage"), true, false);
+			if status_kind == *FIGHTER_KIRBY_STATUS_KIND_PIKMIN_SPECIAL_N && frame < 112.0 {
+				let scale = smash::phx::Vector3f { x: 1.0, y: 1.0, z: 1.0 };
+				ModelModule::set_joint_scale(weapon.module_accessor, Hash40::new("rot"), &scale);
+				//println!("I should be running?");
+			} else {
+				let scale = smash::phx::Vector3f { x: 0.00001, y: 0.00001, z: 0.00001 };
+				ModelModule::set_joint_scale(weapon.module_accessor, Hash40::new("rot"), &scale);
+			}
+		}
+    }
+}
 #[status_script(agent = "kirby", status = FIGHTER_KIRBY_STATUS_KIND_SPECIAL_S_ATTACK, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_PRE)]
 unsafe fn special_s_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
     StatusModule::init_settings(
@@ -1338,6 +1365,6 @@ pub fn install() {
 		kirby_special_input_snd,
 		kirby_special_input_eff
     );
-    smashline::install_agent_frames!( kirby_frame, ball_frame, finalcutter_frame);
+    smashline::install_agent_frames!( kirby_frame, ball_frame, finalcutter_frame, hat_frame);
 	install_status_scripts!(special_s_pre, exec_downb);
 }
