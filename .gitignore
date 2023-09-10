@@ -6,4 +6,5 @@ Cargo.lock
 scripts/output.csv
 scripts/motion_list.yml
 scripts/motion_list.bin
+scripts/char_stats/
 output.txt

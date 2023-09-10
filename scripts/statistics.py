@@ -63,7 +63,6 @@ replace = [
     ['miigunner', 'gunner'],
     ['miiswordsman', 'sword'],
     ['murabito', 'villager', 'villy', 'toad'],
-    ['nana'],
     ['ness'],
     ['packun', 'plant', 'piranha'],
     ['pacman', 'pac'],
@@ -94,6 +93,7 @@ replace = [
     ['shizue', 'isa', 'isabelle'],
     ['shulk'],
     ['simon'],
+    ['snake'],
     ['sonic'],
     ['szerosuit', 'zero'],
     ['tantan', 'minmin', 'min'],
@@ -300,6 +300,7 @@ for y in the_faf:
 os.chdir('../')
 #print(os.getcwd())
 try:
+    
     os.system(f'py yamlist.py "romfs/fighter/{character}/motion/body/c00/motion_list.bin"')
     f = open(f"romfs/fighter/{character}/motion/body/c00/motion_list.yml")
     yaml_output = f.readlines()
@@ -440,11 +441,11 @@ if not os.path.isdir(f'src/{character}'):
         if autocancel_start != autocancel_end:
           a_start = int(math.ceil(autocancel_start))-1
           if a_start > 1:
-            additional_info.append(f"Autocancel - 1-{int(math.ceil(autocancel_start))-1}/{int(math.ceil(autocancel_end))}+")
+            additional_info.append(f"Autocancel - 1-{int(math.ceil(autocancel_start) - wait_frames)-1}/{int(math.ceil(autocancel_end) - wait_frames)}+")
           elif a_start > 0:
-            additional_info.append(f"Autocancel - 1/{int(math.ceil(autocancel_end))}+")
+            additional_info.append(f"Autocancel - 1/{int(math.ceil(autocancel_end - wait_frames))}+")
           else:
-            additional_info.append(f"Autocancel - {autocancel_end}+")
+            additional_info.append(f"Autocancel - {int(math.ceil(autocancel_end - wait_frames))}+")
 
         for i in additional_info:
           output.append(i)
@@ -496,6 +497,8 @@ if not os.path.isdir(f'src/{character}'):
       if "frame(fighter.lua_state_agent" in line:
         x = line.replace("frame(fighter.lua_state_agent", "")
         x = x.replace("/*Frames*/", "")
+        x = x.replace("/*", "")
+        x = x.replace("*/", "")
         x = x.replace(");", "")
         x = x.replace(")", "")
         x = x.replace(" ", "")
@@ -514,7 +517,7 @@ if not os.path.isdir(f'src/{character}'):
         x = x.replace("\t", "")
         x = x.replace(",", "")
         frame += float(x) * motion_rate
-        wait_frames += float(x) * motion_rate
+        wait_frames += float(x)
       if "WorkModule::on_flag(fighter.module_accessor" in line and "//" not in line and "*FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING" in line:
         autocancel_start = frame
         #print("Autocancel Off!")
@@ -542,7 +545,7 @@ if not os.path.isdir(f'src/{character}'):
         if int(x[6]) > 0:
           z = f"{x[6]} (Set)"
     
-        atk_frame = int(math.ceil(frame))
+        atk_frame = int(math.ceil(frame) - wait_frames)+1
         if atk_frame == 0:
           atk_frame = 1
         notes = [""]
@@ -615,23 +618,23 @@ if not os.path.isdir(f'src/{character}'):
         if int(x[5]) > 0:
           z = f"{x[5]} (Set)"
     
-        atk_frame = int(math.ceil(frame))
+        atk_frame = int(math.ceil(frame) - wait_frames)+1
         if atk_frame == 0:
           atk_frame = 1
         output.append(f"\nThrows on Frame {atk_frame},Damage: {x[2]}%, Angle: {x[3]}, BKB: {z}, KBG: {x[4]}")
         throw_stats = []
       if "macros::CATCH(" in line:
-        atk_frame = int(math.ceil(frame))
+        atk_frame = int(math.ceil(frame) - wait_frames)+1
         if atk_frame == 0:
           atk_frame = 1
         output.append(f"\nGrabs on Frame {atk_frame}")
       if "grab!(" in line:
-        atk_frame = int(math.ceil(frame))
+        atk_frame = int(math.ceil(frame) - wait_frames)+1
         if atk_frame == 0:
           atk_frame = 1
         output.append(f"\nGrabbox ceases on Frame {atk_frame}")
       if "AttackModule::clear_all(fighter.module_accessor);" in line:
-        output.append(f"\nHitboxes terminated on frame {int(math.ceil(frame))}")
+        output.append(f"\nHitboxes terminated on frame {int(math.ceil(frame) - wait_frames)}")
       if "WorkModule::on_flag(fighter.module_accessor" in line and "//" not in line and "*FIGHTER_STATUS_ATTACK_FLAG_START_SMASH_HOLD" in line:
         output.append(f"\nCharge hold Frame: {int(math.ceil(frame))}")
       if "AttackModule::set_add_reaction_frame(fighter.module_accessor," in line and has_hitstun == False:
