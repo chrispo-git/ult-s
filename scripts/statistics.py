@@ -355,6 +355,7 @@ if not os.path.isdir(f'src/{character}'):
       if "wait(fighter.lua_state_agent" in line:
         x = line.replace("wait(fighter.lua_state_agent,", "")
         x = x.replace(");", "")
+        x = x.replace(")", "")
         x = x.replace(" ", "")
         x = x.replace("\n", "")
         x = x.replace("\t", "")
