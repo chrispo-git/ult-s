@@ -11,7 +11,9 @@ default_param = []
 new_param = []
 output = []
 yaml_output = []
-faf = []
+yaml_faf = []
+the_faf = []
+faf_isolate = []
 faf_output = []
 
 replace = [
@@ -31,6 +33,7 @@ replace = [
     ['eflame', 'pyra'],
     ['elight', 'mythra'],
     ['gaogaen', 'incin'],
+    ['ganon'],
     ['falco'],
     ['fox'],
     ['gamewatch', 'gnw', 'g&w'],
@@ -188,7 +191,7 @@ for i in new_param:
           x = x.replace(f' ', "")
           x = x.replace(f'\n', "")
           attribute_list[a][2] = x
-          print("Running!")
+          #print("Running!")
       for a in range(5,19):
         if f'"{attribute_list[a][0]}' in i:
           x = i.replace(f'<{attribute_list[a][3]} hash="{attribute_list[a][0]}">', "")
@@ -198,7 +201,7 @@ for i in new_param:
           attribute_list[a][2] = x
     if char.upper() in i:
       is_right_char = True 
-      print("Starting with character")
+      #print("Starting with character")
     elif "<!--" in i:
       is_right_char = False
 
@@ -206,10 +209,10 @@ for i in new_param:
 is_right_char = False
 for f in range(0, len(default_param)):
     if f'<hash40 hash="fighter_kind">fighter_kind_{character.lower()}<' in default_param[f]:
-      print("OG Attribute check")
+      #print("OG Attribute check")
       for x in range(0,4):
         if attribute_list[x][2] == 0.0:
-          print(f"{attribute_list[x][1]} being replaced")
+          #print(f"{attribute_list[x][1]} being replaced")
           new_str = default_param[f+attribute_list[x][4]]
           new_str = new_str.replace("float", "")
           new_str = new_str.replace("bool", "")
@@ -271,9 +274,119 @@ for f in range(0, len(wavedash_rs)):
 f = open("output.csv", "a")
 f.write("Attributes:\n")
 for i in attribute_list:
-  f.write(f"{i[1]} | {i[2]}\n")
+  f.write(f"{i[1]} , {i[2]}\n")
 f.write("\nEdited Moves:\n")
 f.close()     
+
+os.chdir('../')
+f = open(f"src/common/faf_change.rs")
+the_faf = f.readlines()
+f.close()
+os.chdir(f'scripts')
+
+start_record = False
+for y in the_faf:
+    if f"*FIGHTER_KIND_{character.upper()}" in y:
+        start_record = True
+    elif "*FIGHTER_KIND" in y:
+        start_record = False
+    if start_record == True and "*FIGHTER_KIND" not in y:
+        faf_isolate.append(y)
+
+  
+        
+
+#Checks Motion List in romfs
+os.chdir('../')
+#print(os.getcwd())
+try:
+    os.system(f'py yamlist.py "romfs/fighter/{character}/motion/body/c00/motion_list.bin"')
+    f = open(f"romfs/fighter/{character}/motion/body/c00/motion_list.yml")
+    yaml_output = f.readlines()
+    f.close()
+    os.remove(f"romfs/fighter/{character}/motion/body/c00/motion_list.yml")
+    os.chdir(f'scripts')
+
+    faf_printer = []
+    for i in yaml_output:
+      if "game_script:" in i:
+        script = i.replace("game_script:","")
+        script = script.replace(" ","")
+        script = script.replace("\t","")
+        faf_printer = [script]
+      if "cancel_frame:" in i:
+        faf = i.replace("cancel_frame:","")
+        faf = faf.replace(" ","")
+        faf = faf.replace("\t","")
+        faf_printer.append(int(faf))
+        yaml_faf.append(faf_printer)
+
+except Exception:
+    print("No motion_list to extract") 
+    yaml_faf = []
+    os.chdir(f'scripts')
+
+
+name = []
+for i in faf_isolate:
+   if "hash40" in i:
+      new_list = i.replace("].contains(&motion_kind)", "")
+      new_list = new_list.replace("\t", "")
+      new_list = new_list.replace(" ", "")
+      new_list = new_list.replace("hash40(", "")
+      new_list = new_list.replace("if", "")
+      new_list = new_list.replace("==", "")
+      new_list = new_list.replace("motion_kind", "")
+      new_list = new_list.replace("{", "")
+      new_list = new_list.replace('"', "")
+      new_list = new_list.replace("\n", "")
+      new_list = new_list.replace("[", "")
+      new_list = new_list.replace(")", "")
+      new_list = new_list.split("&&")[0]
+      new_list = new_list.split(",")
+      for x in range(0,len(new_list)):
+         entry = new_list[x]
+         entry = entry.replace("_", "")
+         new_list[x] = f"game_{entry}"
+      name = new_list
+      #print(f"{new_list}")
+   if ("frame >=" in i or "new_cancel" in i) and not ("set_rate" in i or "else" in i):
+      if not ("new_cancel" in i):
+        new_list = i
+        if "&&" in new_list:
+          new_list = new_list.split("&&")[1]
+        new_list = new_list.split("/*")[0]
+        new_list = new_list.split("//")[0]
+        new_list = new_list.replace("frame >", "")
+        new_list = new_list.replace("=", "")
+        new_list = new_list.replace(" ", "")
+        new_list = new_list.replace("\t", "")
+        new_list = new_list.replace("if", "")
+        new_list = new_list.replace("motion_kind", "")
+        new_list = new_list.replace("\n", "")
+        new_list = new_list.replace("{", "")
+        new_list = new_list.replace(";", "")
+        new_list = float(new_list)
+      else:
+        new_list = i.replace(" ", "")
+        new_list = new_list.split("/*")[0]
+        new_list = new_list.split("//")[0]
+        new_list = new_list.replace("letnew_cancel=", "")
+        new_list = new_list.replace(";", "")
+        new_list = new_list.replace("\t", "")
+        new_list = float(new_list)
+      #print(new_list)
+      for x in name:
+         for y in yaml_faf:
+            #print(y)
+            if y[0].replace("\n","") == x:
+               y[1] = new_list
+               #print(y)
+      name = []
+
+
+print(os.getcwd())
+
 
 if not os.path.isdir(f'src/{character}'):
     os.chdir('../')
@@ -288,8 +401,10 @@ if not os.path.isdir(f'src/{character}'):
 
     #Game Scripts
     frame = 0.0
+    wait_frames = 0.0
     last_frame_check = 0.0
     script_name = ""
+    game_script_name = ""
     motion_rate = 1.0
     autocancel_start = 0.0
     autocancel_end = 0.0
@@ -305,6 +420,23 @@ if not os.path.isdir(f'src/{character}'):
       if "#[acmd_script(" in line or "pub fn install() {" in line:
         if len(additional_info) == 0:
           additional_info.append("\n")
+        if yaml_faf != []:
+          for x in yaml_faf:
+            checked_val = x[0].replace("\n","")
+            #print(f"{game_script_name} - {checked_val}")
+            if game_script_name == checked_val:
+                faf = int(x[1])
+                faf = int(math.ceil(frame + ((float(faf) - last_frame_check) * motion_rate) - wait_frames))
+                if enable_cancel_frame == 0.0:
+                  if faf != 0 and faf < 200:
+                    additional_info.append(f"FaF: {faf}\n")
+                    #print(f"{game_script_name}: {faf}")
+                  else:
+                    additional_info.append(f"FaF: --\n")
+                    #print(f"{game_script_name}: --")
+                else:
+                    additional_info.append(f"FaF: {enable_cancel_frame}\n")
+                    #print(f"{game_script_name}: {enable_cancel_frame}")
         if autocancel_start != autocancel_end:
           a_start = int(math.ceil(autocancel_start))-1
           if a_start > 1:
@@ -313,25 +445,47 @@ if not os.path.isdir(f'src/{character}'):
             additional_info.append(f"Autocancel - 1/{int(math.ceil(autocancel_end))}+")
           else:
             additional_info.append(f"Autocancel - {autocancel_end}+")
-    
+
         for i in additional_info:
           output.append(i)
         if script_name != "":
           output.append("\n\n")
         frame = 0.0
+        wait_frames = 0.0
+        enable_cancel_frame = 0.0
         last_frame_check = 0.0
+        game_script_name = ""
         motion_rate = 1.0
         autocancel_start = 0.0
         autocancel_end = 0.0
         has_hitstun = False
         additional_info = []
         throw_stats = []
-    
+
+      if "script" in line:
+         gamescript = line.replace(" ", "")
+         gamescript = gamescript.replace("\t", "")
+         gamescript = gamescript.replace("\n", "")
+         gamescript = gamescript.split(",")
+         scriptname = ""
+         for i in gamescript:
+            if "script" in i and not "#[acmd_script(" in i:
+               scriptname = i
+         scriptname = scriptname.replace(" ","")
+         scriptname = scriptname.replace("scripts","")
+         scriptname = scriptname.replace("script","")
+         scriptname = scriptname.replace("=","")
+         scriptname = scriptname.replace("[","")
+         scriptname = scriptname.replace("]","")
+         scriptname = scriptname.replace('"',"")
+         game_script_name = scriptname
+
+         
       game = True
       for i in not_game:
         if i in line:
           game = False
-      if "(fighter: &mut L2CAgentBase)" in line and game == True:
+      if "(fighter: &mut L2CAgentBase)" in line and game == True and not "crate" in line:
         x = line
         x = line.replace("(fighter: &mut L2CAgentBase) {", "")
         x = x.replace("unsafe fn ", "")
@@ -348,8 +502,6 @@ if not os.path.isdir(f'src/{character}'):
         x = x.replace("\n", "")
         x = x.replace("\t", "")
         x = x.replace(",", "")
-        #if script_name == "mario_nair":
-          #print(f"new_frame:{frame + ((float(x) - last_frame_check) * motion_rate)}")
           
         frame += (float(x) - last_frame_check) * motion_rate
         last_frame_check = float(x)
@@ -362,11 +514,15 @@ if not os.path.isdir(f'src/{character}'):
         x = x.replace("\t", "")
         x = x.replace(",", "")
         frame += float(x) * motion_rate
+        wait_frames += float(x) * motion_rate
       if "WorkModule::on_flag(fighter.module_accessor" in line and "//" not in line and "*FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING" in line:
         autocancel_start = frame
         #print("Autocancel Off!")
       if "WorkModule::off_flag(fighter.module_accessor" in line and "//" not in line and "*FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING" in line:
         autocancel_end = frame
+        #print("Autocancel On!")
+      if "CancelModule::enable_cancel(fighter.module_accessor);" in line and "//" not in line:
+        enable_cancel_frame = math.ceil(frame)
         #print("Autocancel On!")
       if "FT_MOTION_RATE" in line and "//" not in line:
         x = line.replace("macros::FT_MOTION_RATE(fighter,", "")
@@ -389,7 +545,7 @@ if not os.path.isdir(f'src/{character}'):
         atk_frame = int(math.ceil(frame))
         if atk_frame == 0:
           atk_frame = 1
-        notes = []
+        notes = [""]
 
         #Notes!
         ground_air = x[28].replace("/*Ground_or_Air*/","")
@@ -441,7 +597,7 @@ if not os.path.isdir(f'src/{character}'):
         id = x[0].replace(' ','')
         id = id.replace('/*ID*/','')
         id = id.replace('\t','')
-        output.append(f"\nFrame {atk_frame}|ID: {id}|Damage: {x[3]}%| Angle: {x[4]}| BKB: {z}| KBG: {x[5]}|Notes: {', '.join(notes)}")
+        output.append(f"\nFrame {atk_frame},ID: {id},Damage: {x[3]}%, Angle: {x[4]}, BKB: {z}, KBG: {x[5]},Notes: {', '.join(notes)}")
       if "macros::ATTACK_ABS(fighter" in line:
         x = line.replace("macros::ATTACK_ABS(fighter, ", "")
         x = x.replace("/*Damage*/", "")
@@ -462,7 +618,7 @@ if not os.path.isdir(f'src/{character}'):
         atk_frame = int(math.ceil(frame))
         if atk_frame == 0:
           atk_frame = 1
-        output.append(f"\nThrows on Frame {atk_frame}|Damage: {x[2]}%| Angle: {x[3]}| BKB: {z}| KBG: {x[4]}")
+        output.append(f"\nThrows on Frame {atk_frame},Damage: {x[2]}%, Angle: {x[3]}, BKB: {z}, KBG: {x[4]}")
         throw_stats = []
       if "macros::CATCH(" in line:
         atk_frame = int(math.ceil(frame))
@@ -476,6 +632,8 @@ if not os.path.isdir(f'src/{character}'):
         output.append(f"\nGrabbox ceases on Frame {atk_frame}")
       if "AttackModule::clear_all(fighter.module_accessor);" in line:
         output.append(f"\nHitboxes terminated on frame {int(math.ceil(frame))}")
+      if "WorkModule::on_flag(fighter.module_accessor" in line and "//" not in line and "*FIGHTER_STATUS_ATTACK_FLAG_START_SMASH_HOLD" in line:
+        output.append(f"\nCharge hold Frame: {int(math.ceil(frame))}")
       if "AttackModule::set_add_reaction_frame(fighter.module_accessor," in line and has_hitstun == False:
         x = line.replace("AttackModule::set_add_reaction_frame(fighter.module_accessor,", "")
         x = x.replace("/*ID*/", "")
@@ -493,252 +651,24 @@ if not os.path.isdir(f'src/{character}'):
         except ValueError:
             additional_info.append(f"\nNote: Deals _f bonus hitstun\n")
 
-
-
-
-
 f = open("output.csv", "a")
 for i in output:
-  f.write(i)  
-f.write("\nVanilla Moves:\n")
-f.close()
-
-include_list = [
-  "Attack1", "AttackDash.", "AttackS3", "AttackHi3", "AttackLw3",
-  "AttackS4", "AttackHi4.", "AttackLw4.", 
-  "AttackAirN", "AttackAirF", "AttackAirB", "AttackAirHi", "AttackAirLw", "AirCatch.",
-  "SpecialN", "SpecialS", "SpecialHi", "SpecialLw",
-  "Catch.", "CatchDash", "CatchTurn",
-  "ThrowF", "ThrowB.", "ThrowHi.", "ThrowLw."
-]
-
-output = []
-cur_dir = os.getcwd()
-print(cur_dir)
-os.chdir('../')
-os.chdir('../')
-os.chdir('../')
-try:
-  os.chdir(f'Dumped_Scripts/smashline/lua2cpp_{character}/{character}/game')
-
-  char_directory = os.listdir()
-  for i in char_directory:
-      is_included = False
-      current_script = i
-      for x in include_list:
-        if x in current_script:
-          is_included = True
-      if is_included == False:
-        pass
-      f = open(current_script)
-      rs = f.readlines()
-      f.close()
-      output.append(f"\n{current_script}\n")
-
-
-      #Game Scripts
-      frame = 0.0
-      last_frame_check = 0.0
-      script_name = ""
-      motion_rate = 1.0
-      autocancel_start = 0.0
-      autocancel_end = 0.0
-      additional_info = []
-      has_hitstun = False
-      throw_stats = []
-
-      not_game = ["eff", "sound", "snd", "expr", "_s ", "_s(", "_e ", "_e("]
-
-      for line_ in rs:
-        line = line_.replace("(agent", "(fighter")
-        #print(line)
-      
-        game = True
-        for i in not_game:
-          if i in line:
-            game = False
-        if "(fighter: &mut L2CAgentBase)" in line and game == True:
-          x = line
-          x = line.replace("(fighter: &mut L2CAgentBase) {", "")
-          x = x.replace("unsafe fn ", "")
-          x = x.replace(" ", "")
-          x = x.replace("\n", "")
-          script_name = x
-          #output.append(x)
-        if "frame(fighter.lua_state_agent" in line:
-          x = line.replace("frame(fighter.lua_state_agent", "")
-          x = x.replace("/*Frames*/", "")
-          x = x.replace(");", "")
-          x = x.replace(" ", "")
-          x = x.replace("\n", "")
-          x = x.replace("\t", "")
-          x = x.replace(",", "")
-          #if script_name == "mario_nair":
-            #print(f"new_frame:{frame + ((float(x) - last_frame_check) * motion_rate)}")
-            
-          frame += (float(x) - last_frame_check) * motion_rate
-          last_frame_check = float(x)
-        if "wait(fighter.lua_state_agent" in line:
-          x = line.replace("wait(fighter.lua_state_agent,", "")
-          x = x.replace(");", "")
-          x = x.replace(" ", "")
-          x = x.replace("\n", "")
-          x = x.replace("\t", "")
-          x = x.replace(",", "")
-          frame += float(x) * motion_rate
-        if "WorkModule::on_flag(fighter.module_accessor" in line and "//" not in line and "*FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING" in line:
-          autocancel_start = frame
-          #print("Autocancel Off!")
-        if "WorkModule::off_flag(fighter.module_accessor" in line and "//" not in line and "*FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING" in line:
-          autocancel_end = frame
-          #print("Autocancel On!")
-        if "FT_MOTION_RATE" in line and "//" not in line:
-          x = line.replace("macros::FT_MOTION_RATE(fighter,", "")
-          x = x.replace("/*FSM*/", "")
-          x = x.replace(");", "")
-          x = x.replace(" ", "")
-          motion_rate = float(x)
-        if "macros::ATTACK(fighter" in line:
-          x = line.replace("macros::ATTACK(fighter, ", "")
-          x = x.replace("/*Damage*/", "")
-          x = x.replace("/*Angle*/", "")
-          x = x.replace("/*BKB*/", "")
-          x = x.replace("/*KBG*/", "")
-          x = x.replace("/*FKB*/", "")
-          x = x.split(", ")
-          z = x[7]
-          if int(x[6]) > 0:
-            z = f"{x[6]} (Set)"
-      
-          atk_frame = int(math.ceil(frame))
-          if atk_frame == 0:
-            atk_frame = 1
-          output.append(f"\nFrame {atk_frame}|Damage: {x[3]}%| Angle: {x[4]}| BKB: {z}| KBG: {x[5]}")
-        if "macros::ATTACK_ABS(fighter" in line:
-          x = line.replace("macros::ATTACK_ABS(fighter, ", "")
-          x = x.replace("/*Damage*/", "")
-          x = x.replace("/*Angle*/", "")
-          x = x.replace("/*BKB*/", "")
-          x = x.replace("/*KBG*/", "")
-          x = x.replace("/*FKB*/", "")
-          x = x.replace("/*Kind*/", "")
-          x = x.split(", ")
-          if "THROW" in x[0]:
-              throw_stats = x
-        if "macros::ATK_HIT_ABS(fighter" in line:
-          x = throw_stats
-          z = x[6]
-          if int(x[5]) > 0:
-            z = f"{x[5]} (Set)"
-      
-          atk_frame = int(math.ceil(frame))
-          if atk_frame == 0:
-            atk_frame = 1
-          output.append(f"\nThrows on Frame {atk_frame}|Damage: {x[2]}%| Angle: {x[3]}| BKB: {z}| KBG: {x[4]}")
-          throw_stats = []
-        if "macros::CATCH(" in line:
-          atk_frame = int(math.ceil(frame))
-          if atk_frame == 0:
-            atk_frame = 1
-          output.append(f"\nGrabs on Frame {atk_frame}")
-        if "grab!(fighter, *MA_MSC_CMD_GRAB_CLEAR_ALL" in line:
-          atk_frame = int(math.ceil(frame))
-          if atk_frame == 0:
-            atk_frame = 1
-          output.append(f"\nGrabbox ceases on Frame {atk_frame}")
-        if "AttackModule::clear_all(fighter.module_accessor);" in line:
-          output.append(f"\nHitboxes terminated on frame {int(math.ceil(frame))}")
-        if "AttackModule::set_add_reaction_frame(fighter.module_accessor," in line and has_hitstun == False:
-          x = line.replace("AttackModule::set_add_reaction_frame(fighter.module_accessor,", "")
-          x = x.replace("/*ID*/", "")
-          x = x.replace("/*Unk*/", "")
-          x = x.replace("/*Frames*/", "")
-          x = x.replace("false);", "")
-          x = x.replace("\t", "")
-          x = x.replace("[", "")
-          x = x.replace("\n", "")
-          x = x.split(", ")
-          #x = str(x).split(" ")
-          has_hitstun = True
-          additional_info.append(f"\nNote: Deals {int(math.ceil(float(x[1])))}f bonus hitstun\n")
-      
-      if True == True:
-          if len(additional_info) == 0:
-            additional_info.append("\n")
-          if autocancel_start != autocancel_end:
-            a_start = int(math.ceil(autocancel_start))-1
-            if a_start > 1:
-              additional_info.append(f"Autocancel - 1-{int(math.ceil(autocancel_start))-1}/{int(math.ceil(autocancel_end))}+")
-            elif a_start > 0:
-              additional_info.append(f"Autocancel - 1/{int(math.ceil(autocancel_end))}+")
-            else:
-              additional_info.append(f"Autocancel - {autocancel_end}+")
-      
-          for i in additional_info:
-            output.append(i)
-          if script_name != "":
-            output.append("\n\n")
-          frame = 0.0
-          last_frame_check = 0.0
-          motion_rate = 1.0
-          autocancel_start = 0.0
-          autocancel_end = 0.0
-          has_hitstun = False
-          throw_stats = []
-          additional_info = []
-
-  os.chdir('../')
-  os.chdir('../')
-  os.chdir('../')
-  os.chdir('../')
-  os.chdir('../')
-except Exception:
-  print("No Dumped_Scripts Folder! Continuing")
-os.chdir(cur_dir)
-
-f = open("output.csv", "a")
-for i in output:
-  f.write(i)
-f.close()
-
-#Checks faf_change.rs
-os.chdir('../')
-f = open(f"src/common/faf_change.rs")
-faf = f.readlines()
-f.close()
-os.chdir(f'scripts')
-
-start_record = False
-for y in faf:
-    if f"*FIGHTER_KIND_{character.upper()}" in y:
-        start_record = True
-    elif "*FIGHTER_KIND" in y:
-        start_record = False
-    if start_record == True and "*FIGHTER_KIND" not in y:
-        faf_output.append(y)
-
-f = open("output.csv", "a")
-f.write("\nfaf_change.rs:\n")
-for i in faf_output:
     f.write(i)
 f.close()
 
+if yaml_faf != []:
+  f = open("output.csv", "a")
+  f.write("\n\nMOTION LIST CANCEL FRAMES:\n\n")
+  begin_motion_list = False
+  for i in yaml_faf:
+      yaml = i[0].replace('\n','')
+      if "game_thrownf" in yaml:
+        begin_motion_list = False
+      if begin_motion_list:
+        f.write(f"{yaml},{i[1]}\n")
+      if "game_rebound" in yaml:
+        begin_motion_list = True
+  f.close()
 
 
-#Checks Motion List in romfs
-os.chdir('../')
-print(os.getcwd())
-try:
-    os.system(f'py yamlist.py "romfs/fighter/{character}/motion/body/c00/motion_list.bin"')
-    f = open(f"romfs/fighter/{character}/motion/body/c00/motion_list.yml")
-    yaml_output = f.readlines()
-    f.close()
-    os.remove(f"romfs/fighter/{character}/motion/body/c00/motion_list.yml")
-    os.chdir(f'scripts')
-    f = open("output.csv", "a")
-    f.write("\nMotion List:\n")
-    for i in yaml_output:
-        f.write(i)
-    f.close()
-except Exception:
-    print("No motion_list to extract") 
+
