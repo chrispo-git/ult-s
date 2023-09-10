@@ -199,7 +199,7 @@ pub fn install() {
 		captain_landing,
 		captain_uair,
 		captain_uair_eff,
-		captain_nair.
+		captain_nair,
 		captain_jab3,
 		captain_jab3_eff
 	);
