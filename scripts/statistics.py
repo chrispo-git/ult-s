@@ -343,6 +343,7 @@ if not os.path.isdir(f'src/{character}'):
         x = line.replace("frame(fighter.lua_state_agent", "")
         x = x.replace("/*Frames*/", "")
         x = x.replace(");", "")
+        x = x.replace(")", "")
         x = x.replace(" ", "")
         x = x.replace("\n", "")
         x = x.replace("\t", "")
@@ -512,6 +513,8 @@ include_list = [
 ]
 
 output = []
+cur_dir = os.getcwd()
+print(cur_dir)
 os.chdir('../')
 os.chdir('../')
 os.chdir('../')
@@ -691,7 +694,7 @@ try:
   os.chdir('../')
 except Exception:
   print("No Dumped_Scripts Folder! Continuing")
-os.chdir(f'Ultimate S Smashline/ultimate-s/scripts')
+os.chdir(cur_dir)
 
 f = open("output.csv", "a")
 for i in output:
@@ -722,19 +725,16 @@ f.close()
 
 
 
-#Checks Motion List in romfs. Requirements for this to work:
-#1. ultimate-s is inside a folder named "Ultimate S Smashline"
-#2. you have yamlist.exe and yamlist.py in the folder that contains the Ultimate S Smashline folder
+#Checks Motion List in romfs
 os.chdir('../')
-os.chdir('../')
-os.chdir('../')
+print(os.getcwd())
 try:
-    os.system(f'py yamlist.py "Ultimate S Smashline/ultimate-s/romfs/fighter/{character}/motion/body/c00/motion_list.bin"')
-    f = open(f"Ultimate S Smashline/ultimate-s/romfs/fighter/{character}/motion/body/c00/motion_list.yml")
+    os.system(f'py yamlist.py "romfs/fighter/{character}/motion/body/c00/motion_list.bin"')
+    f = open(f"romfs/fighter/{character}/motion/body/c00/motion_list.yml")
     yaml_output = f.readlines()
     f.close()
-    os.remove(f"Ultimate S Smashline/ultimate-s/romfs/fighter/{character}/motion/body/c00/motion_list.yml")
-    os.chdir(f'Ultimate S Smashline/ultimate-s/scripts')
+    os.remove(f"romfs/fighter/{character}/motion/body/c00/motion_list.yml")
+    os.chdir(f'scripts')
     f = open("output.csv", "a")
     f.write("\nMotion List:\n")
     for i in yaml_output:
