@@ -194,8 +194,7 @@ unsafe fn terry_dair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_DOLLY_INSTANCE_WORK_ID_FLAG_FINAL_HIT_CANCEL);
 			//WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_DOLLY_STATUS_ATTACK_WORK_FLAG_HIT_CANCEL);
 		}
-		frame(fighter.lua_state_agent, 46.0);
-		macros::FT_MOTION_RATE(fighter, /*FSM*/ 1);
+		frame(fighter.lua_state_agent, 42.0);
 		if macros::is_excute(fighter) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
