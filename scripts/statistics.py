@@ -16,6 +16,8 @@ the_faf = []
 faf_isolate = []
 faf_output = []
 
+already_edited = []
+
 replace = [
     ['bayonetta', 'bayo'],
     ['brave', 'hero'],
@@ -106,6 +108,81 @@ replace = [
     ['younglink', 'yink', 'young'],
     ['zelda']
 ]
+
+def make_printable(string):
+    replace_list = [
+      ["attack11", "Jab 1"],
+      ["attack12", "Jab 2"],
+      ["attack13", "Jab 3"],
+      ["attack14", "Jab 4"],
+      ["attack15", "Jab 5"],
+      ["attack16", "Jab 6"],
+      ["attack17", "Jab 7"],
+      ["attack18", "Jab 8"],
+      ["attack19", "Jab 9"],
+      ["attack100", "Rapid Jab"],
+      ["attack100end", "Rapid Jab Finisher"],
+      ["attacks3", "FTilt"],
+      ["attacks3s", "FTilt"],
+      ["attacks3hi", "FTilt (Up)"],
+      ["attacks3lw", "FTilt (Down)"],
+      ["attacks3s2", "FTilt 2"],
+      ["attacks3s3", "FTilt 3"],
+      ["attacks32", "FTilt 2"],
+      ["attacks33", "FTilt 3"],
+      ["attackhi3", "UTilt"],
+      ["attacklw3", "DTilt"],
+      ["attackdash", "Dash Attack"],
+      ["attacks4", "Forward Smash"],
+      ["attacks4hold", "Forward Smash (Charge)"],
+      ["attacks4s", "Forward Smash"],
+      ["attacks4hi", "Forward Smash (Up)"],
+      ["attacks4lw", "Forward Smash (Down)"],
+      ["attacks4s2", "Forward Smash 2"],
+      ["attacks4s3", "Forward Smash 3"],
+      ["attacks42", "Forward Smash 2"],
+      ["attacks43", "Forward Smash 3"],
+      ["attackhi4", "Up Smash"],
+      ["attackhi4hold", "Up Smash (Charge)"],
+      ["attacklw4", "Down Smash"],
+      ["attacklw4hold", "Down Smash (Charge)"],
+      ["attackairn", "Nair"],
+      ["attackairn2", "Nair 2"],
+      ["attackairn3", "Nair 3"],
+      ["landingairn", "Nair (Landing)"],
+      ["attackairf", "Fair"],
+      ["attackairf2", "Fair 2"],
+      ["attackairf3", "Fair 3"],
+      ["landingairf", "Fair (Landing)"],
+      ["attackairb", "Bair"],
+      ["landingairb", "Bair (Landing)"],
+      ["attackairhi", "Uair"],
+      ["landingairhi", "Uair (Landing)"],
+      ["attackairlw", "Dair"],
+      ["landingairlw", "Dair (Landing)"],
+    ]
+    special_list = [
+      ["specialn", "Neutral Special "],
+      ["specialairn", "(Air) Neutral Special "],
+      ["specials", "Side Special "],
+      ["specialairs", "(Air) Side Special "],
+      ["specialhi", "Up Special "],
+      ["specialairhi", "(Air) Up Special "],
+      ["speciallw", "Down Special "],
+      ["specialairlw", "(Air) Down Special "]
+    ]
+    string = string.replace("game_", "")
+    string = string.replace("_", "")
+    string = string.replace("\n", "")
+    for i in replace_list:
+        if string == i[0]:
+          return i[1]
+    for i in special_list:
+        if string in i[0]:
+          string = string.replace(i[0], i[1])
+          string = string.title()
+          return string
+    return string
 
 try:
     char = (" ".join(sys.argv)).lower()
@@ -463,7 +540,7 @@ if not os.path.isdir(f'src/{character}'):
         additional_info = []
         throw_stats = []
 
-      if "script" in line:
+      if "script" in line and not "use" in line:
          gamescript = line.replace(" ", "")
          gamescript = gamescript.replace("\t", "")
          gamescript = gamescript.replace("\n", "")
@@ -493,7 +570,9 @@ if not os.path.isdir(f'src/{character}'):
         x = x.replace(" ", "")
         x = x.replace("\n", "")
         script_name = x
-        output.append(x)
+        output.append(make_printable(game_script_name))
+        output.append("\nFrame,ID,Damage,Angle,BKB,KBG")
+        already_edited.append(game_script_name)
       if "frame(fighter.lua_state_agent" in line:
         x = line.replace("frame(fighter.lua_state_agent", "")
         x = x.replace("/*Frames*/", "")
@@ -600,7 +679,7 @@ if not os.path.isdir(f'src/{character}'):
         id = x[0].replace(' ','')
         id = id.replace('/*ID*/','')
         id = id.replace('\t','')
-        output.append(f"\nFrame {atk_frame},ID: {id},Damage: {x[3]}%, Angle: {x[4]}, BKB: {z}, KBG: {x[5]},Notes: {', '.join(notes)}")
+        output.append(f"\nFrame {atk_frame},{id} ,{x[3]}%,{x[4]} ,{z} ,{x[5]} ,Notes: {', '.join(notes)}")
       if "macros::ATTACK_ABS(fighter" in line:
         x = line.replace("macros::ATTACK_ABS(fighter, ", "")
         x = x.replace("/*Damage*/", "")
