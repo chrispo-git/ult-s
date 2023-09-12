@@ -395,6 +395,9 @@ pub fn faf_change_master(fighter : &mut L2CFighterCommon) {
 			if [hash40("special_air_s1")].contains(&motion_kind) && frame >= 22.0 {
 				CancelModule::enable_cancel(boma);
 			};
+			if [hash40("throw_lw")].contains(&motion_kind) && frame >= 36.0 {
+				CancelModule::enable_cancel(boma);
+			};
 		}else if fighter_kind == *FIGHTER_KIND_CHROM {
 			if [hash40("attack_11")].contains(&motion_kind) {
 				let new_cancel = 24.0;
