@@ -149,6 +149,9 @@ def make_printable(string):
       ["attackhi4hold", "Up Smash (Charge)"],
       ["attacklw4", "Down Smash"],
       ["attacklw4hold", "Down Smash (Charge)"],
+      ["slideattackhi", "Slide Up Attack"],
+      ["slideattacklw", "Slide Down Attack"],
+      ["slideattack", "Slide Neutral Attack"],
       ["attackairn", "Nair"],
       ["attackairn2", "Nair 2"],
       ["attackairn3", "Nair 3"],
@@ -170,6 +173,10 @@ def make_printable(string):
       ["throwb", "BThrow"],
       ["throwhi", "Up Throw"],
       ["throwlw", "Down Throw"],
+      ["throwff", "Cargo FThrow"],
+      ["throwfb", "Cargo BThrow"],
+      ["throwfhi", "Cargo Up Throw"],
+      ["throwflw", "Cargo Down Throw"],
       ["catch", "Grab"],
       ["catchdash", "Dash Grab"],
       ["catchturn", "Pivot Grab"],
@@ -1115,6 +1122,9 @@ move_order = [
    "Up Smash (Charge)",
    "Down Smash",
    "Down Smash (Charge)",
+   "Slide Up Attack",
+   "Slide Down Attack",
+   "Slide Neutral Attack",
    "Nair",
    "Nair 2",
    "Nair 3",
@@ -1136,7 +1146,11 @@ move_order = [
    "FThrow",
    "BThrow",
    "Up Throw",
-   "Down Throw"
+   "Down Throw",
+   "Cargo FThrow",
+   "Cargo BThrow",
+   "Cargo Up Throw",
+   "Cargo Down Throw"
 ]
 specials = [
    "Neutral Special",
