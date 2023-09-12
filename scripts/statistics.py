@@ -500,19 +500,24 @@ print(os.getcwd())
 
 if not os.path.isdir(f'src/{character}'):
     os.chdir('../')
-    os.chdir(f'src/{character}')
-    f = open("mod.rs")
-    rs = f.readlines()
-    f.close()
+    if os.path.isdir(f'src/{character}'):
+      os.chdir(f'src/{character}')
+      f = open("mod.rs")
+      rs = f.readlines()
+      f.close()
+    else:
+       os.chdir(f'src/common')
+       rs = []
     os.chdir('../')
     os.chdir('../')
     os.chdir('scripts')
-
 
     #Game Scripts
     frame = 0.0
     wait_frames = 0.0
     last_frame_check = 0.0
+    enable_cancel_frame = 0.0
+    hit_times = 0
     script_name = ""
     game_script_name = ""
     motion_rate = 1.0
@@ -563,6 +568,7 @@ if not os.path.isdir(f'src/{character}'):
         frame = 0.0
         wait_frames = 0.0
         enable_cancel_frame = 0.0
+        hit_times = 0
         last_frame_check = 0.0
         game_script_name = ""
         motion_rate = 1.0
@@ -606,6 +612,16 @@ if not os.path.isdir(f'src/{character}'):
         output.append(make_printable(game_script_name))
         output.append("\nFrame,ID,Damage,Angle,BKB,KBG")
         already_edited.append(game_script_name)
+      if "for _ in 0.." in line:
+        x = line.replace("for _ in 0..", "")
+        x = x.replace(" ", "")
+        x = x.replace("{", "")
+        x = x.replace("\n", "")
+        x = x.replace("\t", "")
+        x = x.replace(",", "")
+        hit_times = int(x)
+
+
       if "frame(fighter.lua_state_agent" in line:
         x = line.replace("frame(fighter.lua_state_agent", "")
         x = x.replace("/*Frames*/", "")
@@ -662,6 +678,8 @@ if not os.path.isdir(f'src/{character}'):
         if atk_frame == 0:
           atk_frame = 1
         notes = [""]
+        if hit_times > 0:
+           notes.append(f"Hits {hit_times} times")
 
         #Notes!
         ground_air = x[28].replace("/*Ground_or_Air*/","")
@@ -760,6 +778,7 @@ if not os.path.isdir(f'src/{character}'):
         output.append(f"\nGrabbox ceases on Frame {atk_frame}")
       if "AttackModule::clear_all(fighter.module_accessor);" in line:
         output.append(f"\nHitboxes terminated on frame {int(math.ceil(frame) )}")
+        hit_times = 0
       if "WorkModule::on_flag(fighter.module_accessor" in line and "//" not in line and "*FIGHTER_STATUS_ATTACK_FLAG_START_SMASH_HOLD" in line:
         output.append(f"\nCharge hold Frame: {int(math.ceil(frame))}")
       if "AttackModule::set_add_reaction_frame(fighter.module_accessor," in line and has_hitstun == False:
@@ -836,6 +855,7 @@ if os.path.isdir(f'{vanilla_directory}/smashline/lua2cpp_{character}/{character}
       frame = 0.0
       wait_frames = 0.0
       last_frame_check = 0.0
+      hit_times = 0
       script_name = ""
       game_script_name = rs[1]
       game_script_name = game_script_name.replace("unsafe fn ","")
@@ -894,6 +914,7 @@ if os.path.isdir(f'{vanilla_directory}/smashline/lua2cpp_{character}/{character}
           motion_rate = 1.0
           autocancel_start = 0.0
           autocancel_end = 0.0
+          hit_times = 0
           has_hitstun = False
           additional_info = []
           throw_stats = []
@@ -914,6 +935,16 @@ if os.path.isdir(f'{vanilla_directory}/smashline/lua2cpp_{character}/{character}
           output.append(make_printable(game_script_name))
           output.append("\nFrame,ID,Damage,Angle,BKB,KBG")
           already_edited.append(game_script_name)
+        if "for _ in 0.." in line:
+          x = line.replace("for _ in 0..", "")
+          x = x.replace(" ", "")
+          x = x.replace("{", "")
+          x = x.replace("\n", "")
+          x = x.replace("\t", "")
+          x = x.replace(",", "")
+          hit_times = int(x)
+
+
         if "frame(fighter.lua_state_agent" in line:
           x = line.replace("frame(fighter.lua_state_agent", "")
           x = x.replace("/*Frames*/", "")
@@ -970,6 +1001,8 @@ if os.path.isdir(f'{vanilla_directory}/smashline/lua2cpp_{character}/{character}
           if atk_frame == 0:
             atk_frame = 1
           notes = [""]
+          if hit_times > 0:
+            notes.append(f"Hits {hit_times} times")
 
           #Notes!
           ground_air = x[28].replace("/*Ground_or_Air*/","")
@@ -1068,6 +1101,7 @@ if os.path.isdir(f'{vanilla_directory}/smashline/lua2cpp_{character}/{character}
           output.append(f"\nGrabbox ceases on Frame {atk_frame}")
         if "AttackModule::clear_all(fighter.module_accessor);" in line:
           output.append(f"\nHitboxes terminated on frame {int(math.ceil(frame) )}")
+          hit_times = 0
         if "WorkModule::on_flag(fighter.module_accessor" in line and "//" not in line and "*FIGHTER_STATUS_ATTACK_FLAG_START_SMASH_HOLD" in line:
           output.append(f"\nCharge hold Frame: {int(math.ceil(frame))}")
         if "AttackModule::set_add_reaction_frame(fighter.module_accessor," in line and has_hitstun == False:
