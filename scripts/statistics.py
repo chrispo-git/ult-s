@@ -734,7 +734,7 @@ if not os.path.isdir(f'src/{character}'):
         atk_frame = int(math.ceil(frame) )+1
         if atk_frame == 0:
           atk_frame = 1
-        output.append(f"\nThrows on Frame {atk_frame},Damage: {x[2]}%, Angle: {x[3]}, BKB: {z}, KBG: {x[4]}")
+        output.append(f"\nThrows on Frame {atk_frame}, , {x[2]}%, {x[3]}, {z}, {x[4]}")
         throw_stats = []
       if "macros::CATCH(" in line:
         atk_frame = int(math.ceil(frame) )+1
@@ -1042,7 +1042,7 @@ if os.path.isdir(f'{vanilla_directory}/smashline/lua2cpp_{character}/{character}
           atk_frame = int(math.ceil(frame) )+1
           if atk_frame == 0:
             atk_frame = 1
-          output.append(f"\nThrows on Frame {atk_frame}, , {x[3]}%, {x[4]}, {z}, {x[5]}")
+          output.append(f"\nThrows on Frame {atk_frame}, , {x[2]}%, {x[3]}, {z}, {x[4]}")
           throw_stats = []
         if "macros::CATCH(" in line:
           atk_frame = int(math.ceil(frame) )+1
