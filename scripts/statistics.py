@@ -180,7 +180,8 @@ def make_printable(string):
       ["catch", "Grab"],
       ["catchdash", "Dash Grab"],
       ["catchturn", "Pivot Grab"],
-      ["catchattack", "Pummel"]
+      ["catchattack", "Pummel"],
+      ["specialinput", "Command Input"]
     ]
     special_list = [
       ["specialn", "Neutral Special "],
@@ -733,7 +734,7 @@ if not os.path.isdir(f'src/{character}'):
         atk_frame = int(math.ceil(frame) )+1
         if atk_frame == 0:
           atk_frame = 1
-        output.append(f"\nThrows on Frame {atk_frame},Damage: {x[2]}%, Angle: {x[3]}, BKB: {z}, KBG: {x[4]}")
+        output.append(f"\nThrows on Frame {atk_frame}, , {x[2]}%, {x[3]}, {z}, {x[4]}")
         throw_stats = []
       if "macros::CATCH(" in line:
         atk_frame = int(math.ceil(frame) )+1
@@ -1041,7 +1042,7 @@ if os.path.isdir(f'{vanilla_directory}/smashline/lua2cpp_{character}/{character}
           atk_frame = int(math.ceil(frame) )+1
           if atk_frame == 0:
             atk_frame = 1
-          output.append(f"\nThrows on Frame {atk_frame},Damage: {x[2]}%, Angle: {x[3]}, BKB: {z}, KBG: {x[4]}")
+          output.append(f"\nThrows on Frame {atk_frame}, , {x[2]}%, {x[3]}, {z}, {x[4]}")
           throw_stats = []
         if "macros::CATCH(" in line:
           atk_frame = int(math.ceil(frame) )+1
@@ -1150,7 +1151,8 @@ move_order = [
    "Cargo FThrow",
    "Cargo BThrow",
    "Cargo Up Throw",
-   "Cargo Down Throw"
+   "Cargo Down Throw",
+   "Command Input"
 ]
 specials = [
    "Neutral Special",
@@ -1208,7 +1210,7 @@ for i in specials:
           next_ban = edit_csv[w]
           lists.append("\n\n")
         else:
-           name = edit_csv[w].replace("(Air) ","")
+           name = edit_csv[w]#.replace("(Air) ","")
            if not (name in banned):
               #print(name)
               add_to = True
