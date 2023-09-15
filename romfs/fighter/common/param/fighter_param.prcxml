@@ -365,6 +365,9 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
   <list hash="fighter_param_table">
     <!--MARIO-->
     <struct index="0">
+      <float hash="dash_speed">1.2</float>
+      <float hash="run_speed_max">1.0</float>
+      <float hash="landing_attack_air_frame_b">30</float>
       <float hash="jump_speed_x_mul">1.2</float>
       <float hash="landing_frame">4</float>
       <float hash="tread_jump_speed_y_mul">1.0</float>
