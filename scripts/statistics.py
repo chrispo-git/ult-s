@@ -30,6 +30,7 @@ replace = [
     ['cloud'],
     ['daisy'],
     ['dedede', 'd3'],
+    ['demon', 'kazuya'],
     ['diddy'],
     ['dolly', 'terry'],
     ['donkey', 'dk'],
@@ -622,7 +623,7 @@ if not os.path.isdir(f'src/{character}'):
         hit_times = int(x)
 
 
-      if "frame(fighter.lua_state_agent" in line:
+      if "frame(fighter.lua_state_agent" in line and not "//" in line:
         x = line.replace("frame(fighter.lua_state_agent", "")
         x = x.replace("/*Frames*/", "")
         x = x.replace("/*", "")
@@ -633,10 +634,14 @@ if not os.path.isdir(f'src/{character}'):
         x = x.replace("\n", "")
         x = x.replace("\t", "")
         x = x.replace(",", "")
-          
+        
+        if "/" in x:
+           x = x.split("/")
+           x = float(x[0])/float(x[1])
+
         frame += (float(x) - last_frame_check) * motion_rate
         last_frame_check = float(x)
-      if "wait(fighter.lua_state_agent" in line:
+      if "wait(fighter.lua_state_agent" in line and not "//" in line:
         x = line.replace("wait(fighter.lua_state_agent,", "")
         x = x.replace(");", "")
         x = x.replace(")", "")
@@ -661,6 +666,10 @@ if not os.path.isdir(f'src/{character}'):
         x = x.replace("/*FSM*/", "")
         x = x.replace(");", "")
         x = x.replace(" ", "")
+        x = x.replace("\n", "")
+        if "/" in x:
+           x = x.split("/")
+           x = float(x[0])/float(x[1])
         motion_rate = float(x)
       if "macros::ATTACK(fighter" in line:
         x = line.replace("macros::ATTACK(fighter, ", "")
@@ -759,7 +768,7 @@ if not os.path.isdir(f'src/{character}'):
         if atk_frame == 0:
           atk_frame = 1
         output.append(f"\nGrabs on Frame {atk_frame}")
-      if "ArticleModule::generate_article" in line:
+      if "ArticleModule::generate_article(" in line:
           atk_frame = int(math.ceil(frame) )+1
           article = line.replace("ArticleModule::generate_article(fighter.module_accessor,","")
           article = article.replace(" ","")
@@ -945,7 +954,7 @@ if os.path.isdir(f'{vanilla_directory}/smashline/lua2cpp_{character}/{character}
           hit_times = int(x)
 
 
-        if "frame(fighter.lua_state_agent" in line:
+        if "frame(fighter.lua_state_agent" in line and not "//" in line:
           x = line.replace("frame(fighter.lua_state_agent", "")
           x = x.replace("/*Frames*/", "")
           x = x.replace("/*", "")
@@ -956,10 +965,13 @@ if os.path.isdir(f'{vanilla_directory}/smashline/lua2cpp_{character}/{character}
           x = x.replace("\n", "")
           x = x.replace("\t", "")
           x = x.replace(",", "")
+          if "/" in x:
+            x = x.split("/")
+            x = float(x[0])/float(x[1])
             
           frame += (float(x) - last_frame_check) * motion_rate
           last_frame_check = float(x)
-        if "wait(fighter.lua_state_agent" in line:
+        if "wait(fighter.lua_state_agent" in line and not "//" in line:
           x = line.replace("wait(fighter.lua_state_agent,", "")
           x = x.replace(");", "")
           x = x.replace(")", "")
@@ -1082,7 +1094,7 @@ if os.path.isdir(f'{vanilla_directory}/smashline/lua2cpp_{character}/{character}
           if atk_frame == 0:
             atk_frame = 1
           output.append(f"\nGrabs on Frame {atk_frame}")
-        if "ArticleModule::generate_article" in line:
+        if "ArticleModule::generate_article(" in line:
           atk_frame = int(math.ceil(frame) )+1
           article = line.replace("ArticleModule::generate_article(fighter.module_accessor,","")
           article = article.replace(" ","")
