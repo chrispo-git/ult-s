@@ -16,60 +16,6 @@ use crate::util::*;
 static mut UPB_FALL : [bool; 8] = [false; 8];
 static mut HAS_BUFFER_B : [bool; 8] = [false; 8];
 
-#[acmd_script(
-    agent = "mariod",
-    scripts =  ["game_specialn", "game_specialairn"],
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn doc_fireball(fighter: &mut L2CAgentBase) {
-    let lua_state = fighter.lua_state_agent;
-		frame(fighter.lua_state_agent, 14.0);
-		if macros::is_excute(fighter) {
-			ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_MARIOD_GENERATE_ARTICLE_DRCAPSULE, false, 0);
-		}
-}	
-#[acmd_script(
-    agent = "mariod",
-    scripts =  ["effect_specialairn"],
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn doc_neutralbair_eff(fighter: &mut L2CAgentBase) {
-    let lua_state = fighter.lua_state_agent;
-		frame(fighter.lua_state_agent, 13.0);
-		if macros::is_excute(fighter) {
-			macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("mariod_capsule_shoot"), Hash40::new("mariod_capsule_shoot"), Hash40::new("top"), -1, 16, 0, 0, 0, 0, 0.46, true, *EF_FLIP_YZ);
-		}
-		frame(fighter.lua_state_agent, 17.0);
-		if macros::is_excute(fighter) {
-			macros::COL_NORMAL(fighter, );
-		}
-		frame(fighter.lua_state_agent, 22.0);
-		frame(fighter.lua_state_agent, 27.0);
-		if macros::is_excute(fighter) {
-			macros::COL_NORMAL(fighter, );
-		}
-}
-#[acmd_script(
-    agent = "mariod",
-    scripts =  ["effect_specialn"],
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn doc_neutralb_eff(fighter: &mut L2CAgentBase) {
-    let lua_state = fighter.lua_state_agent;
-		frame(fighter.lua_state_agent, 13.0);
-		if macros::is_excute(fighter) {
-			macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("mariod_capsule_shoot"), Hash40::new("mariod_capsule_shoot"), Hash40::new("top"), -1, 14, 2, 0, 0, 0, 0.46, true, *EF_FLIP_YZ);
-		}
-		frame(fighter.lua_state_agent, 17.0);
-		if macros::is_excute(fighter) {
-			macros::COL_NORMAL(fighter, );
-		}
-		frame(fighter.lua_state_agent, 22.0);
-		frame(fighter.lua_state_agent, 27.0);
-		if macros::is_excute(fighter) {
-			macros::COL_NORMAL(fighter, );
-		}
-}
 
 #[acmd_script(
     agent = "mariod",
@@ -497,7 +443,7 @@ unsafe fn doc_fair(fighter: &mut L2CAgentBase) {
 		if macros::is_excute(fighter) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
-		frame(fighter.lua_state_agent, 32.0);
+		frame(fighter.lua_state_agent, 40.0);
 		if macros::is_excute(fighter) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
@@ -1034,9 +980,6 @@ pub fn mariod_frame(fighter : &mut L2CFighterCommon) {
 
 pub fn install() {
 	smashline::install_acmd_scripts!(
-		doc_fireball,
-		doc_neutralb_eff,
-		doc_neutralbair_eff,
 		doc_fair,
 		doc_fair_eff,
 		doc_fair_snd,
