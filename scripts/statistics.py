@@ -155,7 +155,7 @@ projectile_list = [
    ["marth"],
    ["master","master_arrow1","master_axe"],
    ["metaknight"],
-   ["mewtwo", "mewtwo_shadowball"],
+   ["mewtwo", "mewtwo_shadowball", "mewtwo_bindball"],
    ["miifighter", "miifighter_ironball"],
    ["miigunner", "miigunner_attackairf_bullet","miigunner_bottomshoot","miigunner_flamepillar","miigunner_grenadelauncher","miigunner_rapidshot_bullet","miigunner_gunnercharge","miigunner_stealthbomb_s","miigunner_supermissile","miigunner_miimissile"],
    ["miiswordsman","miiswordsman_chakram","miiswordsman_lightshuriken","miiswordsman_tornadoshot"],
@@ -488,7 +488,8 @@ os.chdir(f'scripts')
 
 start_record = False
 for y in the_faf:
-    if f"*FIGHTER_KIND_{character.upper()}" in y:
+    curly = "{"
+    if f"*FIGHTER_KIND_{character.upper()} " in y or f"*FIGHTER_KIND_{character.upper()}{curly}" in y:
         start_record = True
     elif "*FIGHTER_KIND" in y:
         start_record = False
