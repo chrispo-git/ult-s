@@ -59,7 +59,35 @@ unsafe fn brawler_fjk(fighter: &mut L2CAgentBase) {
 		if macros::is_excute(fighter) {
 			PostureModule::reverse_lr(fighter.module_accessor);
 		}
-}						
+}			
+#[acmd_script(
+    agent = "miifighter",
+    script =  "game_specialairlw2",
+    category = ACMD_GAME,
+	low_priority)]
+unsafe fn brawler_fj(agent: &mut L2CAgentBase) {
+    frame(agent.lua_state_agent, 2.0);
+    if macros::is_excute(agent) {
+        WorkModule::on_flag(agent.module_accessor, *FIGHTER_MIIFIGHTER_STATUS_WORK_ID_REVERSAL_KICK_FLAG_KICK_ENABLE_LANDING);
+    }
+    frame(agent.lua_state_agent, 13.0);
+    if macros::is_excute(agent) {
+		notify_event_msc_cmd!(fighter, 0x2127e37c07u64, *GROUND_CLIFF_CHECK_KIND_ALWAYS);
+    }
+    frame(agent.lua_state_agent, 19.0);
+    if macros::is_excute(agent) {
+		notify_event_msc_cmd!(fighter, 0x2127e37c07u64, *GROUND_CLIFF_CHECK_KIND_ALWAYS_BOTH_SIDES);
+    }
+    frame(agent.lua_state_agent, 27.0);
+    if macros::is_excute(agent) {
+        WorkModule::on_flag(agent.module_accessor, *FIGHTER_MIIFIGHTER_STATUS_WORK_ID_REVERSAL_KICK_FLAG_WALL_JUMP_ENABLE);
+        macros::SEARCH(agent, 0, 0, Hash40::new("hip"), 4.0, 1.0, 0.0, 0.0, -3.0, 0.0, 0.0, *COLLISION_KIND_MASK_HIT, *HIT_STATUS_MASK_ALL, 0, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_FIEB, *COLLISION_PART_MASK_ALL, false);
+    }
+    frame(agent.lua_state_agent, 43.0);
+    if macros::is_excute(agent) {
+        search!(agent, *MA_MSC_CMD_SEARCH_SEARCH_SCH_CLR_ALL);
+    }
+}					
 
 #[acmd_script(
     agent = "miifighter",
@@ -1109,8 +1137,9 @@ pub fn install() {
 		brawler_esk,
 		brawler_esk_s,
 		brawler_esk_e,
-		brawler_fjk,
-		brawler_eff_fjk,
+		//brawler_fjk,
+		//brawler_eff_fjk,
+		brawler_fj,
 		brawler_dsmash,
 		brawler_jab1,
 		brawler_jab2,
