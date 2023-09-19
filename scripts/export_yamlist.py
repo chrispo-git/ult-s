@@ -138,6 +138,7 @@ try:
 except Exception:
     raise Exception("No motion_list to extract")
 
+os.startfile("motion_list.yml")
 input("Press enter to convert it back")
 os.chdir('../')
 os.system(f'py yamlist.py "scripts/motion_list.yml"')
