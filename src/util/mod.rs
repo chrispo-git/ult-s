@@ -193,7 +193,7 @@ pub unsafe fn article_hook(boma: &mut smash::app::BattleObjectModuleAccessor, in
 		} else {
 			return original!()(boma, int, arg3, arg4)
 		}
-	} else if smash::app::utility::get_kind(boma) == *FIGHTER_KIND_MURABITO {
+	} else if smash::app::utility::get_kind(boma) == *FIGHTER_KIND_MURABITO && (WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) >= 120 && WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) <= 127){
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
 		if int == *FIGHTER_MURABITO_GENERATE_ARTICLE_CLAYROCKET {
 			if ![*FIGHTER_STATUS_KIND_FINAL, *FIGHTER_MURABITO_STATUS_KIND_FINAL_END, *FIGHTER_MURABITO_STATUS_KIND_FINAL_CHEER, *FIGHTER_MURABITO_STATUS_KIND_FINAL_HAPPY, *FIGHTER_MURABITO_STATUS_KIND_FINAL_MONEY, *FIGHTER_MURABITO_STATUS_KIND_FINAL_SURPRISE].contains(&status_kind) {
@@ -262,8 +262,9 @@ pub fn util_update(fighter : &mut L2CFighterCommon) {
 			let grabber_boma = smash::app::sv_battle_object::module_accessor(opponent_id);
 			let grabber_kind = smash::app::utility::get_kind(&mut *grabber_boma);
 			let graber_entry_id = WorkModule::get_int(&mut *grabber_boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+			let is_toad = (WorkModule::get_int(grabber_boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) >= 120 && WorkModule::get_int(grabber_boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) <= 127);
 			//Toad Specific Code. Has the opponent be made real small while in the pipe, and removes the grab model changes present in villy
-			if grabber_kind == *FIGHTER_KIND_MURABITO {
+			if grabber_kind == *FIGHTER_KIND_MURABITO && is_toad{
 				println!("Turning off butterfly net flag");
 				let grabber_motion = MotionModule::motion_kind(grabber_boma);
 				let grabber_frame = MotionModule::frame(grabber_boma);
@@ -327,9 +328,6 @@ pub fn util_update(fighter : &mut L2CFighterCommon) {
 		SPEED_X[ENTRY_ID] = KineticModule::get_sum_speed_x(boma, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
 		SPEED_Y[ENTRY_ID] = KineticModule::get_sum_speed_y(boma, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
 		//println!("X Accel: {}, Y Accel: {}, X Speed: {}, Y Speed: {}", ACCEL_X[ENTRY_ID], ACCEL_Y[ENTRY_ID], SPEED_X[ENTRY_ID], SPEED_Y[ENTRY_ID]);
-		if ENTRY_ID == 0 {
-			println!("Can Neutralb: {}, Can Sideb: {}, Can Upb: {}, Can Downb: {}", CAN_NEUTRALB[ENTRY_ID], CAN_SIDEB[ENTRY_ID], CAN_UPB[ENTRY_ID], CAN_DOWNB[ENTRY_ID]);
-		}
 		/*if ENTRY_ID < 2 {
 			println!("MOTION_DURATION {}, STATUS_DURATION {}, SPEED_X {}, SPEED_Y {}, ACCEL_X {}, ACCEL_Y {}", motion_duration(boma), status_duration(boma), get_speed_x(boma), get_speed_y(boma), get_accel_x(boma), get_accel_y(boma));
 			println!("total fighters {}, ray_check_pos {}, is_angel_plat {}, stock_count{}", total_fighters(), ray_check_pos(boma, 0.0, -10.0, false), is_angel_plat(boma), stock_count(boma));
