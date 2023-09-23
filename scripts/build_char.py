@@ -214,6 +214,7 @@ if os.path.exists(r'target'):
                 print("Starting copy")
                 copytree(r'romfs/fighter/common', r'releases/ultimate/mods/Ultimate S Arcropolis (plugin, singular character)/fighter/common')
                 shutil.copy(r'romfs/config.json', r'releases/ultimate/mods/Ultimate S Arcropolis (plugin, singular character)/config.json')
+                shutil.copy(r'romfs/config_param.toml', r'releases/ultimate/mods/Ultimate S Arcropolis (plugin, singular character)/config_param.toml')
                 if os.path.exists(os.path.join(r'romfs/fighter', output_folder)):
                     copytree(os.path.join(r'romfs/fighter', output_folder), os.path.join(r'releases/ultimate/mods/Ultimate S Arcropolis (plugin, singular character)/fighter', output_folder) )
                 else:

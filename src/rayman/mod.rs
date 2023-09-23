@@ -2847,7 +2847,7 @@ fn kirby_rayman_frame(fighter: &mut L2CFighterCommon) {
                         }
                     }
             }
-        } else {
+        } else if copy_kind == *FIGHTER_KIND_NONE {
             CAN_NEUTRALB[ENTRY_ID] = 0;
         }
     }
@@ -3462,8 +3462,14 @@ pub unsafe fn pre_throw(fighter: &mut L2CFighterCommon) -> L2CValue {
 } 
 #[status_script(agent = "pikmin", status = FIGHTER_STATUS_KIND_THROW, condition = LUA_SCRIPT_STATUS_FUNC_INIT_STATUS)]
 unsafe fn throw_init(fighter: &mut L2CFighterCommon) -> L2CValue {
-    L2CFighterCommon::sub_throw_uniq_process_init(fighter);
-    0.into()
+    let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
+    let is_ray = (WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) >= 120 && WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) <= 127);
+    if is_ray {
+        L2CFighterCommon::sub_throw_uniq_process_init(fighter);
+        0.into()
+    } else {
+        original!(fighter)
+    }
 }
 #[status_script(agent = "pikmin", status = FIGHTER_STATUS_KIND_THROW, condition = LUA_SCRIPT_STATUS_FUNC_EXIT_STATUS)]
 unsafe fn throw_exit(fighter: &mut L2CFighterCommon) -> L2CValue {

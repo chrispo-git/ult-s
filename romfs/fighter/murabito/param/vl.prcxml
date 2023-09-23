@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<struct>
+  <list hash="param_wood">
+    <struct index="0">
+      <float hash="item_rate">0.0</float>
+    </struct>
+    <hash40 index="1">dummy</hash40>
+    <hash40 index="2">dummy</hash40>
+    <hash40 index="3">dummy</hash40>
+  </list>
+</struct>
