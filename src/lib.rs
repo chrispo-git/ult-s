@@ -292,6 +292,7 @@ mod pitb;
 mod popo;
 mod ptrainer;
 mod purin;
+mod rayman;
 mod reflet;
 mod richter;
 mod ridley;
@@ -311,6 +312,7 @@ mod sonic;
 mod szerosuit;
 mod tantan;
 mod toonlink;
+mod toad;
 mod trail;
 mod wario;
 mod wiifit;
@@ -473,7 +475,8 @@ pub extern "C" fn main() {
 	popo::install();
 	ptrainer::install();
 	purin::install();
-	
+    
+    rayman::install();
 	reflet::install();
 	richter::install();
 	ridley::install();
@@ -493,6 +496,7 @@ pub extern "C" fn main() {
 	sonic::install();
 	szerosuit::install();
 	
+    toad::install();
 	tantan::install();
 	toonlink::install();
 	trail::install();
