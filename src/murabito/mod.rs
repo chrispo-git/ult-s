@@ -25,6 +25,10 @@ unsafe fn villy_fthrow(fighter: &mut L2CAgentBase) {
 		if macros::is_excute(fighter) {
 			macros::ATK_HIT_ABS(fighter, *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, Hash40::new("throw"), WorkModule::get_int64(fighter.module_accessor,*FIGHTER_STATUS_THROW_WORK_INT_TARGET_OBJECT), WorkModule::get_int64(fighter.module_accessor,*FIGHTER_STATUS_THROW_WORK_INT_TARGET_HIT_GROUP), WorkModule::get_int64(fighter.module_accessor,*FIGHTER_STATUS_THROW_WORK_INT_TARGET_HIT_NO));
 		}
+		frame(fighter.lua_state_agent, 53.0);
+		if macros::is_excute(fighter) {
+			StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_WAIT, false);
+        }
 }
 pub fn install() {
 	smashline::install_acmd_scripts!(
