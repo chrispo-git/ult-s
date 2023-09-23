@@ -234,6 +234,7 @@ mod common;
 mod cpu;
 
 mod bayonetta;
+mod bomberman;
 mod brave;
 mod buddy;
 mod captain;
@@ -407,6 +408,7 @@ pub extern "C" fn main() {
 	bayonetta::install();
 	brave::install();
 	buddy::install();
+    bomberman::install();
 	
 	captain::install();
 	chrom::install();

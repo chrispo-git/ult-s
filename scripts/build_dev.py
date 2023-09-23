@@ -31,13 +31,13 @@ try:
         in_ = f.readlines()
     f.close()
 
-
+ 
     with open(r"src/lib.rs", 'w') as f:
-        for i in range(0,215):
+        for i in range(0,230):
             f.write(in_[i])
         for x in needed_folders:
             f.write(f"mod {x};\n")
-        for i in range(307,369):
+        for i in range(330,397):
             f.write(in_[i])
         for x in needed_folders:
             f.write(f"	{x}::install();\n")
