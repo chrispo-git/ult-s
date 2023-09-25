@@ -88,7 +88,7 @@ fn hydrant_frame(weapon: &mut L2CFighterBase) {
         let boma = smash::app::sv_battle_object::module_accessor(otarget_id);
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(weapon.module_accessor);
 		let ENTRY_ID = WorkModule::get_int(&mut *boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-        let is_bomb = (WorkModule::get_int(&mut boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) >= 120 && WorkModule::get_int(&mut boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) <= 127);
+        let is_bomb = (WorkModule::get_int(&mut *boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) >= 120 && WorkModule::get_int(&mut *boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) <= 127);
         if smash::app::utility::get_kind(&mut *boma) == *FIGHTER_KIND_PACMAN  && !is_bomb{
 			let mut offset = 6.0; //Allows Trampoline to bounce standing hydrant while keeping the falling hydrant accurate
 			if KineticModule::get_sum_speed_y(weapon.module_accessor, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN) < 0.0 {
@@ -119,7 +119,7 @@ fn trampoline_frame(weapon: &mut L2CFighterBase) {
         let boma = smash::app::sv_battle_object::module_accessor(otarget_id);
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(weapon.module_accessor);
 		let ENTRY_ID = WorkModule::get_int(&mut *boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-        let is_bomb = (WorkModule::get_int(&mut boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) >= 120 && WorkModule::get_int(&mut boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) <= 127);
+        let is_bomb = (WorkModule::get_int(&mut *boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) >= 120 && WorkModule::get_int(&mut *boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) <= 127);
         if smash::app::utility::get_kind(&mut *boma) == *FIGHTER_KIND_PACMAN  && !is_bomb{
 			TRAMPOLINE_POS_X[ENTRY_ID] = PostureModule::pos_x(weapon.module_accessor);
 			TRAMPOLINE_POS_Y[ENTRY_ID] = PostureModule::pos_y(weapon.module_accessor);
