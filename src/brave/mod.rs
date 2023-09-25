@@ -1,6 +1,8 @@
 use smash::hash40;
 use smash::lib::lua_const::*;
 use smash::lua2cpp::*;
+use smash::app::lua_bind::StatusModule::situation_kind;
+use smash::app::BattleObjectModuleAccessor;
 use smashline::*;
 use smash_script::*;
 use smash::app::lua_bind::*;
@@ -9,6 +11,83 @@ use crate::util::*;
 use smash::app::sv_animcmd::*;
 use smash::phx::Hash40;
 
+#[acmd_script( agent = "brave", script = "game_attacks3", category = ACMD_GAME, low_priority )]
+unsafe fn hero_ftilt1(figher: &mut L2CAgentBase) {
+    frame(figher.lua_state_agent, 1.0);
+    macros::FT_MOTION_RATE(figher, 1.5);
+    frame(figher.lua_state_agent, 5.0);
+    macros::FT_MOTION_RATE(figher, 1.0);
+    frame(figher.lua_state_agent, 7.0);
+    if macros::is_excute(figher) {
+        macros::ATTACK(figher, 0, 0, Hash40::new("shield"), 5.0, 60, 100, 35, 0, 4.5, 0.0, 0.0, 0.0, None, None, None, 1.3, 1.0, *ATTACK_SETOFF_KIND_THRU, *ATTACK_LR_CHECK_F, true, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_G, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_KICK, *ATTACK_REGION_PUNCH);
+        macros::ATTACK(figher, 1, 0, Hash40::new("shield"), 5.0, 55, 100, 30, 0, 4.5, 0.0, 0.0, 0.0, None, None, None, 1.3, 1.0, *ATTACK_SETOFF_KIND_THRU, *ATTACK_LR_CHECK_F, true, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_A, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_KICK, *ATTACK_REGION_PUNCH);
+        macros::ATTACK(figher, 2, 0, Hash40::new("top"), 5.0, 55, 100, 50, 0, 6.0, 0.0, 7.0, 7.0, None, None, None, 1.3, 1.0, *ATTACK_SETOFF_KIND_THRU, *ATTACK_LR_CHECK_F, true, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_G, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_KICK, *ATTACK_REGION_PUNCH);
+        macros::ATTACK(figher, 3, 0, Hash40::new("top"), 5.0, 35, 100, 40, 0, 6.0, 0.0, 7.0, 7.0, None, None, None, 1.3, 1.0, *ATTACK_SETOFF_KIND_THRU, *ATTACK_LR_CHECK_F, true, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_A, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_KICK, *ATTACK_REGION_PUNCH);
+        AttackModule::set_add_reaction_frame(figher.module_accessor, 0, 6.0, false);
+        AttackModule::set_add_reaction_frame(figher.module_accessor, 1, 6.0, false);
+        AttackModule::set_add_reaction_frame(figher.module_accessor, 2, 6.0, false);
+        AttackModule::set_add_reaction_frame(figher.module_accessor, 3, 6.0, false);
+        macros::HIT_NODE(figher, Hash40::new("arml"), *HIT_STATUS_INVINCIBLE);
+        macros::HIT_NODE(figher, Hash40::new("shoulderl"), *HIT_STATUS_INVINCIBLE);
+        macros::HIT_NODE(figher, Hash40::new("head"), *HIT_STATUS_INVINCIBLE);
+        macros::HIT_NODE(figher, Hash40::new("legl"), *HIT_STATUS_INVINCIBLE);
+        macros::HIT_NODE(figher, Hash40::new("kneel"), *HIT_STATUS_INVINCIBLE);
+    }
+    wait(figher.lua_state_agent, 1.0);
+    if macros::is_excute(figher) {
+        macros::HIT_NODE(figher, Hash40::new("head"), *HIT_STATUS_NORMAL);
+        macros::HIT_NODE(figher, Hash40::new("legl"), *HIT_STATUS_NORMAL);
+        macros::HIT_NODE(figher, Hash40::new("kneel"), *HIT_STATUS_NORMAL);
+    }
+    wait(figher.lua_state_agent, 2.0);
+    if macros::is_excute(figher) {
+        macros::HIT_NODE(figher, Hash40::new("arml"), *HIT_STATUS_NORMAL);
+        macros::HIT_NODE(figher, Hash40::new("shoulderl"), *HIT_STATUS_NORMAL);
+        AttackModule::clear_all(figher.module_accessor);
+    }
+    frame(figher.lua_state_agent, 16.0);
+    if macros::is_excute(figher) {
+        WorkModule::on_flag(figher.module_accessor, *FIGHTER_STATUS_ATTACK_FLAG_ENABLE_COMBO);
+    }
+}
+#[acmd_script( agent = "brave", script = "game_attacklw3", category = ACMD_GAME, low_priority )]
+unsafe fn hero_dtilt(figher: &mut L2CAgentBase) {
+    frame(figher.lua_state_agent, 5.0);
+    if macros::is_excute(figher) {
+        FighterAreaModuleImpl::enable_fix_jostle_area(figher.module_accessor, 4.0, 4.0);
+    }
+    frame(figher.lua_state_agent, 6.0);
+    if macros::is_excute(figher) {
+        macros::ATTACK(figher, 0, 0, Hash40::new("kneel"), 7.0, 80, 50, 0, 70, 2.6, -4.0, 0.0, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_KICK, *ATTACK_REGION_KICK);
+        macros::ATTACK(figher, 1, 0, Hash40::new("kneel"), 7.0, 80, 50, 0, 70, 3.0, 0.0, 0.0, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_KICK, *ATTACK_REGION_KICK);
+        macros::ATTACK(figher, 2, 0, Hash40::new("kneel"), 7.0, 80, 50, 0, 70, 3.3, 3.5, 0.0, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_KICK, *ATTACK_REGION_KICK);
+    }
+    wait(figher.lua_state_agent, 5.0);
+    if macros::is_excute(figher) {
+        AttackModule::clear_all(figher.module_accessor);
+    }
+}
+#[acmd_script( agent = "brave", script = "game_attackairn", category = ACMD_GAME, low_priority )]
+unsafe fn hero_nair(figher: &mut L2CAgentBase) {
+    frame(figher.lua_state_agent, 3.0);
+    if macros::is_excute(figher) {
+        WorkModule::on_flag(figher.module_accessor, *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
+    }
+    frame(figher.lua_state_agent, 8.0);
+    if macros::is_excute(figher) {
+        macros::ATTACK(figher, 0, 0, Hash40::new("sword1"), 9.0, 60, 55, 0, 66, 4.4, 9.0, 0.0, -3.0, None, None, None, 0.9, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_cutup"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_CUTUP, *ATTACK_REGION_SWORD);
+        macros::ATTACK(figher, 1, 0, Hash40::new("sword1"), 9.0, 60, 55, 0, 66, 4.4, 2.5, 0.0, -2.5, None, None, None, 0.9, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_cutup"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_CUTUP, *ATTACK_REGION_SWORD);
+        macros::ATTACK(figher, 2, 0, Hash40::new("armr"), 9.0, 60, 55, 0, 66, 3.0, -2.0, 2.0, 0.0, None, None, None, 0.9, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_cutup"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_CUTUP, *ATTACK_REGION_SWORD);
+    }
+    frame(figher.lua_state_agent, 17.0);
+    if macros::is_excute(figher) {
+        AttackModule::clear_all(figher.module_accessor);
+    }
+    frame(figher.lua_state_agent, 40.0);
+    if macros::is_excute(figher) {
+        WorkModule::off_flag(figher.module_accessor, *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
+    }
+}
 #[acmd_script(
     agent = "brave",
     script =  "game_attackairb",
@@ -126,7 +205,11 @@ pub fn hero(fighter : &mut L2CFighterCommon) {
     unsafe {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 		let fighter_kind = smash::app::utility::get_kind(boma);
+		let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+		let motion_kind = MotionModule::motion_kind(boma);
+		let situation_kind = smash::app::lua_bind::StatusModule::situation_kind;
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
+		let stick_y = ControlModule::get_stick_y(boma);
 		if fighter_kind == *FIGHTER_KIND_BRAVE{
 			if MotionModule::motion_kind(boma) == hash40("attack_s3_s2") && MotionModule::frame(boma) < 2.0 && ControlModule::get_stick_y(boma) > 0.5 {
 				let speed = smash::phx::Vector3f { x: 0.75, y: 0.0, z: 0.0 };
@@ -145,6 +228,9 @@ pub fn hero(fighter : &mut L2CFighterCommon) {
 		
 pub fn install() {
     smashline::install_acmd_scripts!(
+		hero_ftilt1,
+		hero_dtilt,
+		hero_nair,
 		hero_bair,
 		hero_uair,
 		hero_jab1,
