@@ -4413,26 +4413,6 @@
             "sound/bank/fighter/se_pikmin_c126.tonelabel",
             "sound/bank/fighter/se_pikmin_c127.tonelabel"
         ],
-        "sound/bank/fighter_voice/vc_pikmin_c00.nus3audio": [
-            "sound/bank/fighter_voice/vc_pikmin_c120.nus3audio",
-            "sound/bank/fighter_voice/vc_pikmin_c121.nus3audio",
-            "sound/bank/fighter_voice/vc_pikmin_c122.nus3audio",
-            "sound/bank/fighter_voice/vc_pikmin_c123.nus3audio",
-            "sound/bank/fighter_voice/vc_pikmin_c124.nus3audio",
-            "sound/bank/fighter_voice/vc_pikmin_c125.nus3audio",
-            "sound/bank/fighter_voice/vc_pikmin_c126.nus3audio",
-            "sound/bank/fighter_voice/vc_pikmin_c127.nus3audio"
-        ],
-        "sound/bank/fighter_voice/vc_pikmin_c00.nus3bank": [
-            "sound/bank/fighter_voice/vc_pikmin_c120.nus3bank",
-            "sound/bank/fighter_voice/vc_pikmin_c121.nus3bank",
-            "sound/bank/fighter_voice/vc_pikmin_c122.nus3bank",
-            "sound/bank/fighter_voice/vc_pikmin_c123.nus3bank",
-            "sound/bank/fighter_voice/vc_pikmin_c124.nus3bank",
-            "sound/bank/fighter_voice/vc_pikmin_c125.nus3bank",
-            "sound/bank/fighter_voice/vc_pikmin_c126.nus3bank",
-            "sound/bank/fighter_voice/vc_pikmin_c127.nus3bank"
-        ],
         "sound/bank/fighter_voice/vc_pikmin_c00.tonelabel": [
             "sound/bank/fighter_voice/vc_pikmin_c120.tonelabel",
             "sound/bank/fighter_voice/vc_pikmin_c121.tonelabel",
@@ -5742,20 +5722,8 @@
         "fighter/pacman/model/trampoline/c00/pacman_dummy_prm.nutexb": [
             "fighter/pacman/model/trampoline/c120/pacman_dummy_prm.nutexb"
         ],
-        "sound/bank/fighter/se_pacman_c00.nus3audio": [
-            "sound/bank/fighter/se_pacman_c120.nus3audio"
-        ],
-        "sound/bank/fighter/se_pacman_c00.nus3bank": [
-            "sound/bank/fighter/se_pacman_c120.nus3bank"
-        ],
         "sound/bank/fighter/se_pacman_c00.tonelabel": [
             "sound/bank/fighter/se_pacman_c120.tonelabel"
-        ],
-        "sound/bank/fighter_voice/vc_pacman_cheer_c00.nus3audio": [
-            "sound/bank/fighter_voice/vc_pacman_cheer_c120.nus3audio"
-        ],
-        "sound/bank/fighter_voice/vc_pacman_cheer_c00.nus3bank": [
-            "sound/bank/fighter_voice/vc_pacman_cheer_c120.nus3bank"
         ],
         "sound/bank/fighter_voice/vc_pacman_cheer_c00.tonelabel": [
             "sound/bank/fighter_voice/vc_pacman_cheer_c120.tonelabel"
@@ -11065,9 +11033,6 @@
         ],
         "fighter/pacman/motion/body/c00/a05squatf.nuanmb": [
             "fighter/pacman/motion/body/c120/a05squatf.nuanmb"
-        ],
-        "fighter/pacman/motion/body/c00/c00attack13.nuanmb": [
-            "fighter/pacman/motion/body/c120/c00attack13.nuanmb"
         ],
         "fighter/pacman/motion/body/c00/d00specialairn.nuanmb": [
             "fighter/pacman/motion/body/c120/d00specialairn.nuanmb"
@@ -33315,9 +33280,10 @@
             "fighter/pacman/motion/body/c120/b02escapef.nuanmb",
             "fighter/pacman/motion/body/c120/b02escapen.nuanmb",
             "fighter/pacman/motion/body/c120/b02rebound.nuanmb",
+            "fighter/pacman/motion/body/c120/c00attack100.nuanmb",
+            "fighter/pacman/motion/body/c120/c00attack100start.nuanmb",
             "fighter/pacman/motion/body/c120/c00attack11.nuanmb",
             "fighter/pacman/motion/body/c120/c00attack12.nuanmb",
-            "fighter/pacman/motion/body/c120/c00attack13.nuanmb",
             "fighter/pacman/motion/body/c120/c00attackdash.nuanmb",
             "fighter/pacman/motion/body/c120/c00attackend.nuanmb",
             "fighter/pacman/motion/body/c120/c01attacks3hi.nuanmb",

@@ -15,7 +15,7 @@ use smash::app::sv_animcmd::*;
     category = ACMD_GAME,
 	low_priority)]
 unsafe fn bomb_jab1(agent: &mut L2CAgentBase) {
-    frame(agent.lua_state_agent, 2.0);
+    frame(agent.lua_state_agent, 3.0);
     if macros::is_excute(agent) {
         macros::ATTACK(agent, 0, 0, Hash40::new("handl"), 2.0, 361, 25, 0, 20, 4.5, 0.0, 0.0, 0.0, None, None, None, 1.3, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_PUNCH, *ATTACK_REGION_KICK);
     }
@@ -31,7 +31,7 @@ unsafe fn bomb_jab1(agent: &mut L2CAgentBase) {
     category = ACMD_EFFECT,
 	low_priority)]
 unsafe fn bomb_jab1_eff(agent: &mut L2CAgentBase) {
-    frame(agent.lua_state_agent, 2.0);
+    frame(agent.lua_state_agent, 3.0);
     if macros::is_excute(agent) {
         macros::EFFECT_FLIP_ALPHA(agent, Hash40::new("sys_attack_impact"), Hash40::new("sys_attack_impact"), Hash40::new("handl"), 0, 0, 0, 0, 0, 0, 0.9, 0, 0, 0, 0, 0, 0, true, *EF_FLIP_YZ, 0.7);
     }
@@ -69,7 +69,7 @@ unsafe fn bomb_jab2_eff(agent: &mut L2CAgentBase) {
     category = ACMD_GAME,
 	low_priority)]
 unsafe fn bomb_jab3(agent: &mut L2CAgentBase) {
-    frame(agent.lua_state_agent, 8.0);
+    frame(agent.lua_state_agent, 5.0);
     if macros::is_excute(agent) {
         macros::ATTACK(agent, 0, 0, Hash40::new("head"), 3.0, 40, 115, 0, 70, 4.5, 0.0, 0.0, 0.0, None, None, None, 1.4, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_PUNCH, *ATTACK_REGION_KICK);
     }
@@ -84,7 +84,7 @@ unsafe fn bomb_jab3(agent: &mut L2CAgentBase) {
     category = ACMD_EFFECT,
 	low_priority)]
 unsafe fn bomb_jab3_eff(agent: &mut L2CAgentBase) {
-    frame(agent.lua_state_agent, 8.0);
+    frame(agent.lua_state_agent, 5.0);
     if macros::is_excute(agent) {
         macros::EFFECT_FLIP_ALPHA(agent, Hash40::new("sys_attack_impact"), Hash40::new("sys_attack_impact"), Hash40::new("head"), 0, 0, 0, 0, 0, 0, 0.9, 0, 0, 0, 0, 0, 0, true, *EF_FLIP_YZ, 0.7);
     }
