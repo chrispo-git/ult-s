@@ -324,9 +324,9 @@ unsafe fn sheik_needles(agent: &mut L2CAgentBase) {
     if macros::is_excute(agent) {
         macros::ATK_POWER(agent, 0, 0.8);
     }
-	frame(fighter.lua_state_agent, 8.0);
-    if macros::is_excute(fighter) {
-        WorkModule::off_flag(fighter.module_accessor, *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
+	frame(agent.lua_state_agent, 8.0);
+    if macros::is_excute(agent) {
+        WorkModule::off_flag(agent.module_accessor, *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
     }
 }
 #[acmd_script( agent = "sheik", script = "game_speciallwattack", category = ACMD_GAME, low_priority )]
