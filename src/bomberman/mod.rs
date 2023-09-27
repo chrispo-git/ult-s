@@ -342,7 +342,7 @@ fn bomb_frame(weapon: &mut L2CFighterBase) {
         let is_bomb = (WorkModule::get_int(&mut *boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) >= 120 && WorkModule::get_int(&mut *boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) <= 127);
         if smash::app::utility::get_kind(&mut *boma) == *FIGHTER_KIND_PACMAN  && is_bomb{
 			if [*WEAPON_PACMAN_FIREHYDRANT_STATUS_KIND_DOWN_FALL, *WEAPON_PACMAN_FIREHYDRANT_STATUS_KIND_DOWN].contains(&status_kind) {
-				StatusModule::change_status_request_from_script(boma, *WEAPON_PACMAN_FIREHYDRANT_STATUS_KIND_WAIT, false);
+				StatusModule::change_status_request_from_script(weapon.module_accessor, *WEAPON_PACMAN_FIREHYDRANT_STATUS_KIND_WAIT, false);
             }
 		};
     }
