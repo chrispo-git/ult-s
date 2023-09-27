@@ -5629,54 +5629,6 @@
         "fighter/pacman/model/body/c00/skin_pacman_eye_gold_col.nutexb": [
             "fighter/pacman/model/body/c120/skin_pacman_eye_gold_col.nutexb"
         ],
-        "fighter/pacman/model/firehydrant/c00/dark_model.numatb": [
-            "fighter/pacman/model/firehydrant/c120/dark_model.numatb"
-        ],
-        "fighter/pacman/model/firehydrant/c00/firehydrant.lvd": [
-            "fighter/pacman/model/firehydrant/c120/firehydrant.lvd"
-        ],
-        "fighter/pacman/model/firehydrant/c00/firehydrant_pacman_001_col.nutexb": [
-            "fighter/pacman/model/firehydrant/c120/firehydrant_pacman_001_col.nutexb"
-        ],
-        "fighter/pacman/model/firehydrant/c00/firehydrant_pacman_001_nor.nutexb": [
-            "fighter/pacman/model/firehydrant/c120/firehydrant_pacman_001_nor.nutexb"
-        ],
-        "fighter/pacman/model/firehydrant/c00/firehydrant_pacman_001_prm.nutexb": [
-            "fighter/pacman/model/firehydrant/c120/firehydrant_pacman_001_prm.nutexb"
-        ],
-        "fighter/pacman/model/firehydrant/c00/light_model.numatb": [
-            "fighter/pacman/model/firehydrant/c120/light_model.numatb"
-        ],
-        "fighter/pacman/model/firehydrant/c00/metamon_model.numatb": [
-            "fighter/pacman/model/firehydrant/c120/metamon_model.numatb"
-        ],
-        "fighter/pacman/model/firehydrant/c00/model.nuanmb": [
-            "fighter/pacman/model/firehydrant/c120/model.nuanmb"
-        ],
-        "fighter/pacman/model/firehydrant/c00/model.nuhlpb": [
-            "fighter/pacman/model/firehydrant/c120/model.nuhlpb"
-        ],
-        "fighter/pacman/model/firehydrant/c00/model.numatb": [
-            "fighter/pacman/model/firehydrant/c120/model.numatb"
-        ],
-        "fighter/pacman/model/firehydrant/c00/model.numdlb": [
-            "fighter/pacman/model/firehydrant/c120/model.numdlb"
-        ],
-        "fighter/pacman/model/firehydrant/c00/model.numshb": [
-            "fighter/pacman/model/firehydrant/c120/model.numshb"
-        ],
-        "fighter/pacman/model/firehydrant/c00/model.numshexb": [
-            "fighter/pacman/model/firehydrant/c120/model.numshexb"
-        ],
-        "fighter/pacman/model/firehydrant/c00/model.nusktb": [
-            "fighter/pacman/model/firehydrant/c120/model.nusktb"
-        ],
-        "fighter/pacman/model/firehydrant/c00/model.nusrcmdlb": [
-            "fighter/pacman/model/firehydrant/c120/model.nusrcmdlb"
-        ],
-        "fighter/pacman/model/firehydrant/c00/model.xmb": [
-            "fighter/pacman/model/firehydrant/c120/model.xmb"
-        ],
         "fighter/pacman/model/trampoline/c00/dark_model.numatb": [
             "fighter/pacman/model/trampoline/c120/dark_model.numatb"
         ],
@@ -32758,6 +32710,8 @@
             "fighter/pacman/model/body/c120/skin_pacman_001_nor.nutexb",
             "fighter/pacman/model/body/c120/skin_pacman_001_prm.nutexb",
             "fighter/pacman/model/body/c120/skin_pacman_eye_gold_col.nutexb",
+            "fighter/pacman/model/firehydrant/c120/asf_bombermanbom_col.nutexb",
+            "fighter/pacman/model/firehydrant/c120/asf_bombermanbom_prm.nutexb",
             "fighter/pacman/model/firehydrant/c120/dark_model.numatb",
             "fighter/pacman/model/firehydrant/c120/firehydrant.lvd",
             "fighter/pacman/model/firehydrant/c120/firehydrant_pacman_001_col.nutexb",
@@ -33170,6 +33124,8 @@
             "sound/bank/fighter_voice/vc_pacman_cheer_c120.nus3audio",
             "sound/bank/fighter_voice/vc_pacman_cheer_c120.nus3bank",
             "sound/bank/fighter_voice/vc_pacman_cheer_c120.tonelabel",
+            "fighter/pacman/model/body/c120/asf_bombermanbom_col.nutexb",
+            "fighter/pacman/model/body/c120/asf_bombermanbom_prm.nutexb",
             "fighter/pacman/model/body/c120/bomber_attack_col.nutexb",
             "fighter/pacman/model/body/c120/bomber_blink_col.nutexb",
             "fighter/pacman/model/body/c120/bomber_dizzy1_col.nutexb",

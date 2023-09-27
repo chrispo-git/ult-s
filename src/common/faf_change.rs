@@ -18,6 +18,7 @@ pub fn faf_change_master(fighter : &mut L2CFighterCommon) {
 		let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 		let cancel_frame = FighterMotionModuleImpl::get_cancel_frame(boma,smash::phx::Hash40::new_raw(MotionModule::motion_kind(boma)),false) as f32; //Cancel frame
 		let fighter_kind = smash::app::utility::get_kind(boma);
+        let is_added = (WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) >= 120 && WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) <= 127);
 		//Example Character - Super Fucking Mario
 		if fighter_kind == *FIGHTER_KIND_MARIO {
 			if motion_kind == hash40("attack_11") && frame >= 12.0 /*This is the new FaF*/ { // Enables cancel when the new FaF is over
@@ -718,7 +719,7 @@ pub fn faf_change_master(fighter : &mut L2CFighterCommon) {
 			if [hash40("throw_hi")].contains(&motion_kind) && frame >= 32.0 {
 				CancelModule::enable_cancel(boma);
 			};
-		}else if fighter_kind == *FIGHTER_KIND_PACMAN {
+		}else if fighter_kind == *FIGHTER_KIND_PACMAN && !is_added {
 			if [hash40("attack_dash")].contains(&motion_kind) {
 				let new_cancel = 53.0;
 				if frame > (cancel_frame - 2.0) &&  frame < (cancel_frame) {
