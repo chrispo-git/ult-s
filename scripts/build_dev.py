@@ -7,7 +7,12 @@ needed_folders = ["util", "common", "controls", "cpu"]
 all_folders = [""]
 in_ = []
 out_ = []
-
+os.chdir('../')
+print(f"{os.getcwd()}")
+if os.path.isdir(r"src/og_lib.rs"):
+    os.remove(r"src/lib.rs")
+    shutil.move(r"src/og_lib.rs", r"src/lib.rs")
+os.chdir('scripts')
 try:
     os.chdir('../')
     for root, dirs, files in os.walk(r"src", topdown=False):

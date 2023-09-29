@@ -5629,6 +5629,9 @@
         "fighter/pacman/model/body/c00/skin_pacman_eye_gold_col.nutexb": [
             "fighter/pacman/model/body/c120/skin_pacman_eye_gold_col.nutexb"
         ],
+	"fighter/pacman/model/firehydrant/c00/firehydrant.lvd": [
+            "fighter/pacman/model/firehydrant/c120/firehydrant.lvd"
+        ],
         "fighter/pacman/model/trampoline/c00/dark_model.numatb": [
             "fighter/pacman/model/trampoline/c120/dark_model.numatb"
         ],
@@ -32710,8 +32713,6 @@
             "fighter/pacman/model/body/c120/skin_pacman_001_nor.nutexb",
             "fighter/pacman/model/body/c120/skin_pacman_001_prm.nutexb",
             "fighter/pacman/model/body/c120/skin_pacman_eye_gold_col.nutexb",
-            "fighter/pacman/model/firehydrant/c120/asf_bombermanbom_col.nutexb",
-            "fighter/pacman/model/firehydrant/c120/asf_bombermanbom_prm.nutexb",
             "fighter/pacman/model/firehydrant/c120/dark_model.numatb",
             "fighter/pacman/model/firehydrant/c120/firehydrant.lvd",
             "fighter/pacman/model/firehydrant/c120/firehydrant_pacman_001_col.nutexb",
@@ -33126,6 +33127,8 @@
             "sound/bank/fighter_voice/vc_pacman_cheer_c120.tonelabel",
             "fighter/pacman/model/body/c120/asf_bombermanbom_col.nutexb",
             "fighter/pacman/model/body/c120/asf_bombermanbom_prm.nutexb",
+            "fighter/pacman/model/body/c120/asf_bombermanswitch_col.nutexb",
+            "fighter/pacman/model/body/c120/asf_bombermanswitch_prm.nutexb",
             "fighter/pacman/model/body/c120/bomber_attack_col.nutexb",
             "fighter/pacman/model/body/c120/bomber_blink_col.nutexb",
             "fighter/pacman/model/body/c120/bomber_dizzy1_col.nutexb",

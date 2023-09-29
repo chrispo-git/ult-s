@@ -2892,11 +2892,12 @@ fn rayman(fighter: &mut L2CFighterCommon) {
                     f += 1;
                 }
             }
-            if ModelModule::scale(boma) == WorkModule::get_param_float(fighter.module_accessor, hash40("scale"), 0) {
-                ModelModule::set_scale(boma, 1.75);
-                AttackModule::set_attack_scale(boma, 1.0, true);
-                GrabModule::set_size_mul(boma, 1.75);
-            }
+            //if ModelModule::scale(boma) == WorkModule::get_param_float(fighter.module_accessor, hash40("scale"), 0) {
+            ModelModule::set_scale(boma, 1.75);
+            PostureModule::set_scale(boma, 1.75, false);
+            AttackModule::set_attack_scale(boma, 1.0, true);
+            GrabModule::set_size_mul(boma, 1.75);
+            //}
             EffectModule::kill_kind(boma, Hash40::new("pikmin_antenna"), false, false);
 
             EffectModule::kill_kind(boma, Hash40::new("pikmin_antenna_damage"), false, false);
