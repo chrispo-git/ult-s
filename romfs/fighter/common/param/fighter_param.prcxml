@@ -2,7 +2,7 @@
 <!-- PLEASE READ BEFORE USING
 HOW TO USE PRCXML:
 PRCXML is a slightly different format than the XML version, as it only includes the CHANGES from vanilla
-To get past this long ass comment, just search for the character you're looking for e.g. MARIO
+To get past this long ass comment, just search for the character you're looking for e.g. MARIO 
 
 When adding a new change, make sure it is in ORDER! Here is an example of the order:
 <hash40 hash="fighter_kind">fighter_kind_mario</hash40>
@@ -546,11 +546,11 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
       <float hash="tread_jump_speed_y_mul">1.0</float>
       <float hash="tread_mini_jump_speed_y_mul">0.475</float>
     </struct>
-    <!--SHEIK-->
+    <!--SHEIK (The Cool Character For Cool People)-->
     <struct index="16">
       <float hash="jump_speed_x_mul">1.2</float>
-      <float hash="weight">76</float>
-      <float hash="landing_attack_air_frame_b">10</float>
+      <float hash="weight">78</float>
+      <float hash="landing_attack_air_frame_b">7</float>
       <float hash="landing_attack_air_frame_lw">8</float>
       <float hash="landing_frame">4</float>
       <float hash="tread_jump_speed_y_mul">1.0</float>
