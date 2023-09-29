@@ -2,7 +2,7 @@
 <!-- PLEASE READ BEFORE USING
 HOW TO USE PRCXML:
 PRCXML is a slightly different format than the XML version, as it only includes the CHANGES from vanilla
-To get past this long ass comment, just search for the character you're looking for e.g. MARIO
+To get past this long ass comment, just search for the character you're looking for e.g. MARIO 
 
 When adding a new change, make sure it is in ORDER! Here is an example of the order:
 <hash40 hash="fighter_kind">fighter_kind_mario</hash40>
