@@ -488,7 +488,7 @@ unsafe fn palu_bair(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 6.0);
     if macros::is_excute(agent) {
         macros::HIT_NODE(agent, Hash40::new("bust"), *HIT_STATUS_NORMAL);
-        macros::HIT_NODE(agent, Hash40::new("hip"), *HIT_STATUS_INVINCIBLE);
+        macros::HIT_NODE(agent, Hash40::new("hip"), *HIT_STATUS_NORMAL);
         macros::HIT_NODE(agent, Hash40::new("head"), *HIT_STATUS_NORMAL);
         macros::HIT_NODE(agent, Hash40::new("shoulderr"), *HIT_STATUS_NORMAL);
         macros::HIT_NODE(agent, Hash40::new("shoulderl"), *HIT_STATUS_INVINCIBLE);
@@ -501,12 +501,12 @@ unsafe fn palu_bair(agent: &mut L2CAgentBase) {
         macros::HIT_NODE(agent, Hash40::new("virtualshield"), *HIT_STATUS_INVINCIBLE);
     }
     if macros::is_excute(agent) {
-        macros::HIT_NODE(agent, Hash40::new("bust"), *HIT_STATUS_INVINCIBLE);
+        macros::HIT_NODE(agent, Hash40::new("bust"), *HIT_STATUS_NORMAL);
         macros::HIT_NODE(agent, Hash40::new("head"), *HIT_STATUS_INVINCIBLE);
     }
     frame(agent.lua_state_agent, 8.0);
     if macros::is_excute(agent) {
-        macros::ATTACK(agent, 0, 0, Hash40::new("top"), 12.0, 361, 95, 0, 30, 7.0, 0.0, 10.2, -14.0, None, None, None, 1.2, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_B, false, 1.5, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_KICK, *ATTACK_REGION_OBJECT);
+        macros::ATTACK(agent, 0, 0, Hash40::new("top"), 12.0, 361, 95, 0, 30, 7.0, 0.0, 10.2, -14.0, None, None, None, 1.2, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_B, false, 2.0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_KICK, *ATTACK_REGION_OBJECT);
     }
     frame(agent.lua_state_agent, 11.0);
     if macros::is_excute(agent) {
