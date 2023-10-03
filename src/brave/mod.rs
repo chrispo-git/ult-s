@@ -22,6 +22,17 @@ unsafe fn hero_frizz(fighter: &mut L2CAgentBase) {
         macros::ATK_POWER(fighter, 0, 6);
     }
 }
+#[acmd_script( agent = "brave_spark", script = "game_specials1", category = ACMD_GAME, low_priority )]
+unsafe fn hero_zap_spark(fighter: &mut L2CAgentBase) {
+    if macros::is_excute(fighter) {
+        macros::QUAKE(fighter, *CAMERA_QUAKE_KIND_S);
+        macros::ATTACK(fighter, 0, 0, Hash40::new("top"), 7.5, 80, 5, 0, 100, 8.0, 0.0, 10.0, 0.0, None, None, None, 0.4, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, true, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_elec"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_ELEC, *ATTACK_REGION_MAGIC);
+        macros::ATTACK(fighter, 1, 0, Hash40::new("top"), 5.0, 80, 5, 0, 100, 15.0, 0.0, 10.0, 0.0, None, None, None, 0.4, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, false, false, true, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_elec"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_ELEC, *ATTACK_REGION_MAGIC);
+        macros::ATTACK(fighter, 2, 0, Hash40::new("top"), 2.5, 58, 40, 0, 100, 6.0, 0.0, 22.0, 0.0, Some(0.0), Some(75.0), Some(0.0), 0.4, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, false, false, true, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_elec"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_ELEC, *ATTACK_REGION_MAGIC);
+		AttackModule::set_add_reaction_frame(fighter.module_accessor, 0, 15.0, false);
+		AttackModule::set_add_reaction_frame(fighter.module_accessor, 1, 15.0, false);  
+    }
+}
 #[acmd_script( agent = "brave", script = "game_attacks3", category = ACMD_GAME, low_priority )]
 unsafe fn hero_ftilt1(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
@@ -237,7 +248,25 @@ pub fn hero(fighter : &mut L2CFighterCommon) {
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_DASH, true);
 				};
 			};
-			if [*FIGHTER_BRAVE_STATUS_KIND_SPECIAL_N_HOLD, *FIGHTER_BRAVE_STATUS_KIND_SPECIAL_N_SHOOT].contains(&status_kind){
+			if [*FIGHTER_BRAVE_STATUS_KIND_SPECIAL_N_HOLD].contains(&status_kind){
+                if StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR {
+                    let cat2 = ControlModule::get_command_flag_cat(boma, 1);
+                    if (cat2 & *FIGHTER_PAD_CMD_CAT2_FLAG_FALL_JUMP) != 0 && stick_y < -0.66 && SPEED_Y[ENTRY_ID] <= 0.0 {
+                        WorkModule::set_flag(boma, true, *FIGHTER_STATUS_WORK_ID_FLAG_RESERVE_DIVE);
+                    }
+                };
+			};
+			if StatusModule::situation_kind(boma) != *SITUATION_KIND_AIR {
+				CAN_UPB[ENTRY_ID] = 0;
+			};
+			if [hash40("special_hi1"), hash40("special_air_hi1"), hash40("special_hi_empty"), hash40("special_air_hi_empty")].contains(&MotionModule::motion_kind(boma)) {
+				CAN_UPB[ENTRY_ID] = 1;
+				if MotionModule::frame(boma) >= 41.0 {
+					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL, false);
+				};
+				WorkModule::set_int(boma, WorkModule::get_int(boma,*FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT_MAX), *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT);
+			};
+			if [hash40("special_n1"), hash40("special_air_n1"), hash40("special_n2"),  hash40("special_air_n2")].contains(&motion_kind){
                 if StatusModule::is_situation_changed(boma) {
                     StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_LANDING, true);
                 };
@@ -255,6 +284,7 @@ pub fn hero(fighter : &mut L2CFighterCommon) {
 pub fn install() {
     smashline::install_acmd_scripts!(
 		hero_frizz,
+		hero_zap_spark,
 		hero_ftilt1,
 		hero_dtilt,
 		hero_nair,
