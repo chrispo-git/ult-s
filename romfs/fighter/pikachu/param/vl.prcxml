@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<struct>
+  <list hash="param_dengeki">
+    <struct index="0">
+      <float hash="move_rate_">0.8</float>
+    </struct>
+    <hash40 index="1">dummy</hash40>
+    <hash40 index="2">dummy</hash40>
+    <hash40 index="3">dummy</hash40>
+  </list>
+</struct>
