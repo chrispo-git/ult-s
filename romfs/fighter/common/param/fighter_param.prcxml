@@ -445,17 +445,16 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
     </struct>
     <!--PIKACHU-->
     <struct index="7">
-      <float hash="jump_speed_x_mul">0.95</float>
+      <float hash="jump_speed_x_mul">1.00</float>
       <float hash="mini_jump_y">16.85</float>
-      <float hash="air_speed_x_stable">1.1</float>
+      <float hash="air_speed_x_stable">1.2</float>
       <float hash="air_accel_y">0.13</float>
       <float hash="air_speed_y_stable">1.92</float>
       <float hash="dive_speed_y">3.456</float>
       <float hash="landing_attack_air_frame_n">7</float>
-      <float hash="landing_attack_air_frame_b">10</float>
-      <float hash="landing_attack_air_frame_hi">9</float>
+      <float hash="landing_attack_air_frame_b">6</float>
+      <float hash="landing_attack_air_frame_hi">8</float>
       <float hash="landing_frame">4</float>
-      <float hash="scale">1.05</float>
       <float hash="tread_jump_speed_y_mul">1.0</float>
       <float hash="tread_mini_jump_speed_y_mul">0.475</float>
     </struct>
