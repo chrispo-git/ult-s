@@ -57,7 +57,7 @@ unsafe fn palu_uair(fighter: &mut L2CAgentBase) {
 	low_priority)]
 unsafe fn palu_dtilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
-		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
+		macros::FT_MOTION_RATE(fighter, /*FSM*/ 1);
 		frame(fighter.lua_state_agent, 14.0);
 		if macros::is_excute(fighter) {
 			macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("stick"), /*Damage*/ 8.5, /*Angle*/ 75, /*KBG*/ 60, /*FKB*/ 0, /*BKB*/ 55, /*Size*/ 2.7, /*X*/ -0.5, /*Y*/ 8.0, /*Z*/ 0.0, /*X2*/ Some(-0.5), /*Y2*/ Some(-7.0), /*Z2*/ Some(0.0), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_THRU, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0.8, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_OBJECT);
@@ -270,7 +270,7 @@ unsafe fn palu_jab_1(fighter: &mut L2CAgentBase) {
 unsafe fn palu_ftilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 2.0);
-		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.4);
+		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.75);
 		frame(fighter.lua_state_agent, 17.0);
 		if macros::is_excute(fighter) {
 			macros::HIT_NODE(fighter, Hash40::new("armr"), *HIT_STATUS_XLU);
@@ -308,8 +308,8 @@ unsafe fn palu_ftilt(fighter: &mut L2CAgentBase) {
 unsafe fn palu_dthrow(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
-			macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, /*ID*/ 0, /*Damage*/ 5.0, /*Angle*/ 72, /*KBG*/ 25, /*FKB*/ 0, /*BKB*/ 90, /*Hitlag*/ 0.2, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
-			macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, /*ID*/ 0, /*Damage*/ 3.0, /*Angle*/ 361, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 40, /*Hitlag*/ 0.2, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
+			macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, /*ID*/ 0, /*Damage*/ 5.0, /*Angle*/ 75, /*KBG*/ 25, /*FKB*/ 0, /*BKB*/ 85, /*Hitlag*/ 0.3, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
+			macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, /*ID*/ 0, /*Damage*/ 3.0, /*Angle*/ 361, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 40, /*Hitlag*/ 0.3, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
 		}
 		frame(fighter.lua_state_agent, 24.0);
 		if macros::is_excute(fighter) {
@@ -338,7 +338,7 @@ unsafe fn palu_reticle(fighter: &mut L2CAgentBase) {
 			wait(fighter.lua_state_agent, 7.0);
 		}
 		wait(fighter.lua_state_agent, 1.0);
-		macros::FT_MOTION_RATE(fighter, 0.714);
+		macros::FT_MOTION_RATE(fighter, 1.25);
 }		
 #[acmd_script(
     agent = "palutena",
