@@ -372,7 +372,7 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
     </struct>
     <!--DONKEY KONG-->
     <struct index="1">
-      <float hash="landing_attack_air_frame_n">10</float>
+      <float hash="landing_attack_air_frame_n">9</float>
       <float hash="landing_attack_air_frame_f">13</float>
       <float hash="landing_attack_air_frame_hi">15</float>
       <float hash="landing_attack_air_frame_lw">14</float>
