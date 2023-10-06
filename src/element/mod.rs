@@ -24,12 +24,20 @@ fn mythra_frame(fighter: &mut L2CFighterCommon) {
 		};
 		if status_kind == *FIGHTER_STATUS_KIND_THROW {
 			let mut can_do = false;
-			if motion_kind == hash40("throw_lw") && frame > 26.0{
-				can_do = true;
-			};
-			if motion_kind == hash40("throw_f") && frame > 13.0{
-				can_do = true;
-			};
+			if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_SPECIAL) {
+				if motion_kind == hash40("throw_lw") && frame > 26.0{
+					can_do = true;
+				};
+				if motion_kind == hash40("throw_f") && frame > 13.0{
+					can_do = true;
+				};
+				if motion_kind == hash40("throw_hi") && frame > 10.0{
+					can_do = true;
+				};
+				if motion_kind == hash40("throw_b") && frame > 18.0{
+					can_do = true;
+				};
+			}
 			if can_do == true {
 				StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_SPECIAL_LW, true);
 				FAST_SWITCH[ENTRY_ID] = true;
@@ -67,12 +75,20 @@ fn pyra_frame(fighter: &mut L2CFighterCommon) {
 		};
 		if status_kind == *FIGHTER_STATUS_KIND_THROW {
 			let mut can_do = false;
-			if motion_kind == hash40("throw_lw") && frame > 26.0{
-				can_do = true;
-			};
-			if motion_kind == hash40("throw_f") && frame > 13.0{
-				can_do = true;
-			};
+			if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_SPECIAL) {
+				if motion_kind == hash40("throw_lw") && frame > 26.0{
+					can_do = true;
+				};
+				if motion_kind == hash40("throw_f") && frame > 13.0{
+					can_do = true;
+				};
+				if motion_kind == hash40("throw_hi") && frame > 10.0{
+					can_do = true;
+				};
+				if motion_kind == hash40("throw_b") && frame > 18.0{
+					can_do = true;
+				};
+			}
 			if can_do == true {
 				StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_SPECIAL_LW, true);
 				FAST_SWITCH[ENTRY_ID] = true;
