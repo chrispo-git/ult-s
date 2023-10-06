@@ -681,58 +681,6 @@ pub fn char_input(fighter : &mut L2CFighterCommon) {
 					INPUT_WINDOW[ENTRY_ID] = 0;
 				};
 			};
-			//Wii Fit
-			if fighter_kind == *FIGHTER_KIND_WIIFIT {
-				if true {
-					if INPUT_NUM[ENTRY_ID] == 0 && STICK_NUM[ENTRY_ID] == 4 {
-						INPUT_WINDOW[ENTRY_ID] = 0;
-						INPUT_START[ENTRY_ID] = true;
-						INPUT_NUM[ENTRY_ID] += 1;
-						//println!("Input 1!");
-					};
-					if INPUT_NUM[ENTRY_ID] == 1 && STICK_NUM[ENTRY_ID] == 1{
-						INPUT_NUM[ENTRY_ID] += 1;
-						//println!("Input 2!");
-					};
-					if INPUT_NUM[ENTRY_ID] == 2 && STICK_NUM[ENTRY_ID] == 2 {
-						INPUT_NUM[ENTRY_ID] += 1;
-						//println!("Input 3!");
-					};
-					if INPUT_NUM[ENTRY_ID] == 3 && STICK_NUM[ENTRY_ID] == 3{
-						INPUT_NUM[ENTRY_ID] += 1;
-						//println!("Input 4!");
-					};
-					if INPUT_NUM[ENTRY_ID] == 4 && STICK_NUM[ENTRY_ID] == 6 {
-						INPUT_NUM[ENTRY_ID] += 1;
-						//println!("Input 5!");
-					};
-					if INPUT_WINDOW[ENTRY_ID] > INPUT_MAX {
-						INPUT_NUM[ENTRY_ID] = 0;
-						INPUT_START[ENTRY_ID] = false;
-						INPUT_WINDOW[ENTRY_ID] = 0;
-						//println!("Input missed!");
-					}; 
-				};
-				if INPUT_START[ENTRY_ID] == true {
-					INPUT_WINDOW[ENTRY_ID] += 1;
-				};
-				if INPUT_NUM[ENTRY_ID] == 5 && (FighterMotionModuleImpl::get_cancel_frame(boma,smash::phx::Hash40::new_raw(MotionModule::motion_kind(boma)),false) as f32 <= MotionModule::frame(boma) || MotionModule::frame(boma) < 4.0) && !AttackModule::is_attack(fighter.module_accessor, 0, false) && StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR{
-					if is_attack_btn(boma) {
-						INPUT_WINDOW[ENTRY_ID] = 0;
-						INPUT_NUM[ENTRY_ID] += 1;
-						StatusModule::change_status_request_from_script(boma, *FIGHTER_WIIFIT_STATUS_KIND_SPECIAL_S_HEADING, true);
-						//println!("Input 6!");
-					};
-				};
-				if INPUT_NUM[ENTRY_ID] == 6 && [*FIGHTER_WIIFIT_STATUS_KIND_SPECIAL_S_HEADING, *FIGHTER_WIIFIT_STATUS_KIND_SPECIAL_S_JUMP, *FIGHTER_STATUS_KIND_SPECIAL_S, *FIGHTER_STATUS_KIND_LANDING].contains(&status_kind) == false {
-					StatusModule::change_status_request_from_script(boma, *FIGHTER_WIIFIT_STATUS_KIND_SPECIAL_S_HEADING, true);
-				};
-				if [*FIGHTER_WIIFIT_STATUS_KIND_SPECIAL_S_HEADING, *FIGHTER_WIIFIT_STATUS_KIND_SPECIAL_S_JUMP, *FIGHTER_STATUS_KIND_SPECIAL_S, *FIGHTER_STATUS_KIND_LANDING].contains(&status_kind) {
-					INPUT_NUM[ENTRY_ID] = 0;
-					INPUT_START[ENTRY_ID] = false;
-					INPUT_WINDOW[ENTRY_ID] = 0;
-				};
-			};
 			//Pyra
 			if fighter_kind == *FIGHTER_KIND_EFLAME {
 				if true {
