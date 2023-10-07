@@ -327,6 +327,9 @@
         "fighter/miiswordsman/c00": [
           "fighter/miiswordsman/motion/body/c00/d01specialairs1hit.nuanmb"
         ],
+        "fighter/miifighter/c00": [
+          "fighter/miifighter/motion/body/c00/c05attackairlwbounce.nuanmb"
+        ],
     	  "fighter/snake/c00": [
 			"fighter/snake/motion/body/c00/c03attacks4s2.nuanmb",
 			"fighter/snake/motion/body/c00/c03attacks4s3.nuanmb",
