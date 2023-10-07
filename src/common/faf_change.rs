@@ -63,31 +63,6 @@ pub fn faf_change_master(fighter : &mut L2CFighterCommon) {
 			if motion_kind == hash40("attack_lw3") && frame >= 20.0 {
 				CancelModule::enable_cancel(boma);
 			};
-		}else if fighter_kind == *FIGHTER_KIND_LINK {
-			if motion_kind == hash40("attack_lw3") && frame >= 22.0 {
-				CancelModule::enable_cancel(boma);
-			};
-			if motion_kind == hash40("attack_s3s") && frame >= 45.0 {
-				CancelModule::enable_cancel(boma);
-			};
-			if motion_kind == hash40("attack_air_f") && frame >= 50.0 {
-				CancelModule::enable_cancel(boma);
-			};
-			if motion_kind == hash40("attack_air_b") && frame >= 25.0 {
-				CancelModule::enable_cancel(boma);
-			};
-			if motion_kind == hash40("attack_air_hi") && frame >= 30.0 {
-				CancelModule::enable_cancel(boma);
-			};
-			if [hash40("special_lw"),hash40("special_air_lw")].contains(&motion_kind) && frame >= 30.0 {
-				CancelModule::enable_cancel(boma);
-			};
-			if [hash40("special_lw_blast"),hash40("special_air_lw_blast")].contains(&motion_kind) && frame >= 30.0 {
-				CancelModule::enable_cancel(boma);
-			};
-			if motion_kind == hash40("attack_air_hi") && frame >= 45.0 {
-				CancelModule::enable_cancel(boma);
-			};
 		}else if fighter_kind == *FIGHTER_KIND_SAMUSD {
 			if motion_kind == hash40("attack_11") && frame >= 18.0 {
 				CancelModule::enable_cancel(boma);
