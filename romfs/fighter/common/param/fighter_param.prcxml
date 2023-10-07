@@ -892,6 +892,7 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
     <!--LUCARIO-->
     <struct index="41">
       <float hash="air_speed_x_stable">1.155</float>
+      <float hash="mini_jump_y">16</float>
       <float hash="landing_frame">4</float>
       <float hash="tread_jump_speed_y_mul">1.0</float>
       <float hash="tread_mini_jump_speed_y_mul">0.475</float>
