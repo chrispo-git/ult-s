@@ -304,6 +304,7 @@ mod samus;
 mod samusd;
 mod sheik;
 mod shizue;
+mod shulk;
 mod simon;
 mod snake;
 mod sonic;
@@ -315,6 +316,7 @@ mod wario;
 mod wiifit;
 mod wolf;
 mod younglink;
+mod yoshi;
 mod zelda;
 
 
@@ -485,6 +487,7 @@ pub extern "C" fn main() {
 	samusd::install();
 	sheik::install();
 	shizue::install();
+    shulk::install();
 	simon::install();
 	snake::install();
 	sonic::install();
@@ -499,6 +502,7 @@ pub extern "C" fn main() {
 	wolf::install();
 	
 	younglink::install();
+    yoshi::install();
 	
 	zelda::install();
 

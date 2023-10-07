@@ -41,9 +41,6 @@ pub fn faf_change_master(fighter : &mut L2CFighterCommon) {
 			if [hash40("attack_s3_s"),hash40("attack_s3_hi"), hash40("attack_s3_lw")].contains(&motion_kind) && frame >= 22.0 {
 				CancelModule::enable_cancel(boma);
 			};
-			if [hash40("attack_s3_s"),hash40("attack_s3_hi"), hash40("attack_s3_lw")].contains(&motion_kind) && frame >= 24.0 {
-				CancelModule::enable_cancel(boma);
-			};
 			if [hash40("throw_f")].contains(&motion_kind) && frame >= 20.0 {
 				CancelModule::enable_cancel(boma);
 			};

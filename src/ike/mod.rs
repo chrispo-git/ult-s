@@ -100,6 +100,7 @@ unsafe fn ike_bthrow(fighter: &mut L2CAgentBase) {
 	low_priority)]
 unsafe fn ike_dair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
+	let entry_id = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 		frame(fighter.lua_state_agent, 5.0);
 		if macros::is_excute(fighter) {
 			WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
@@ -117,7 +118,13 @@ unsafe fn ike_dair(fighter: &mut L2CAgentBase) {
 		if macros::is_excute(fighter) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
-		frame(fighter.lua_state_agent, 21.0);
+		if IKE_INSTALL[entry_id] > 0 {
+		frame(fighter.lua_state_agent, 25.0);
+		if macros::is_excute(fighter) {
+		   WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
+			}
+		};
+		frame(fighter.lua_state_agent, 34.0);
 		if macros::is_excute(fighter) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
