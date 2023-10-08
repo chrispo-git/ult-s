@@ -939,7 +939,10 @@ pub fn faf_change_master(fighter : &mut L2CFighterCommon) {
 					MotionModule::set_rate(boma, 1.0);
 				};
 			};
-			if [hash40("attack_hi4")].contains(&motion_kind) && frame >= 28.0 {
+			if [hash40("attack_hi4")].contains(&motion_kind) && frame >= 35.0 {
+				CancelModule::enable_cancel(boma);
+			};
+			if [hash40("attack_lw4")].contains(&motion_kind) && frame >= 45.0 {
 				CancelModule::enable_cancel(boma);
 			};
 		}else if fighter_kind == *FIGHTER_KIND_MASTER{
