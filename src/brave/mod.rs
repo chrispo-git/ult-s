@@ -14,7 +14,7 @@ use smash::phx::Hash40;
 #[acmd_script( agent = "brave_fireball", script = "game_specialn1", category = ACMD_GAME, low_priority )]
 unsafe fn hero_frizz(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
-        macros::ATTACK(fighter, 0, 0, Hash40::new("top"), 5.0, 72, 55, 0, 40, 2.8, 0.0, 0.0, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, -4, 0.0, 0, true, true, false, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_fire"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_MAGIC);
+        macros::ATTACK(fighter, 0, 0, Hash40::new("top"), 5.0, 72, 55, 0, 40, 2.8, 0.0, 0.0, 0.0, None, None, None, 0.5, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, -4, 0.0, 0, true, true, false, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_fire"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_MAGIC);
         AttackModule::enable_safe_pos(fighter.module_accessor);
     }
     frame(fighter.lua_state_agent, 30.0);
@@ -192,7 +192,8 @@ unsafe fn hero_jab1(fighter: &mut L2CAgentBase) {
 		if macros::is_excute(fighter) {
 			WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_FLAG_ENABLE_NO_HIT_COMBO);
 		}
-}	
+}
+
 #[acmd_script(
     agent = "brave",
     script =  "game_attack12",
@@ -219,7 +220,8 @@ unsafe fn hero_jab2(fighter: &mut L2CAgentBase) {
 		if macros::is_excute(fighter) {
 			WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_FLAG_ENABLE_NO_HIT_COMBO);
 		}
-}	
+}
+
 #[fighter_frame_callback]
 pub fn hero(fighter : &mut L2CFighterCommon) {
     unsafe {
@@ -269,6 +271,7 @@ pub fn hero(fighter : &mut L2CFighterCommon) {
 			if [hash40("special_n1"), hash40("special_air_n1"), hash40("special_n2"),  hash40("special_air_n2")].contains(&motion_kind){
                 if StatusModule::is_situation_changed(boma) {
                     StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_LANDING, true);
+					WorkModule::set_float(boma, 10.0, *FIGHTER_INSTANCE_WORK_ID_FLOAT_LANDING_FRAME);
                 };
                 if StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR {
                     let cat2 = ControlModule::get_command_flag_cat(boma, 1);
