@@ -279,7 +279,6 @@ pub fn install() {
 		ink_utilt_sound,
 		ink_dtilt,
 		ink_uair_eff,
-		ink_nair,
 		ink_uair_sound
     );
     smashline::install_agent_frame_callbacks!(ink);
