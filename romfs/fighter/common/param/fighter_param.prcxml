@@ -2,7 +2,7 @@
 <!-- PLEASE READ BEFORE USING
 HOW TO USE PRCXML:
 PRCXML is a slightly different format than the XML version, as it only includes the CHANGES from vanilla
-To get past this long ass comment, just search for the character you're looking for e.g. MARIO
+To get past this long ass comment, just search for the character you're looking for e.g. MARIO 
 
 When adding a new change, make sure it is in ORDER! Here is an example of the order:
 <hash40 hash="fighter_kind">fighter_kind_mario</hash40>
@@ -436,7 +436,6 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
       <float hash="air_accel_y">0.175</float>
       <float hash="air_speed_y_stable">2.3</float>
       <float hash="dive_speed_y">4.025</float>
-      <float hash="weight">80</float>
       <float hash="landing_attack_air_frame_n">8</float>
       <float hash="landing_attack_air_frame_lw">12</float>
       <float hash="landing_frame">4</float>
@@ -523,6 +522,7 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
       <float hash="landing_frame">4</float>
       <float hash="tread_jump_speed_y_mul">1.0</float>
       <float hash="tread_mini_jump_speed_y_mul">0.475</float>
+      <float hash="landing_attack_air_frame_n">12</float>
     </struct>
     <!--POPO-->
     <struct index="14">
@@ -546,12 +546,13 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
       <float hash="tread_jump_speed_y_mul">1.0</float>
       <float hash="tread_mini_jump_speed_y_mul">0.475</float>
     </struct>
-    <!--SHEIK-->
+    <!--SHEIK (The Cool Character For Cool People)-->
     <struct index="16">
       <float hash="jump_speed_x_mul">1.2</float>
+      <float hash="air_speed_x_stable">1.2</float>
       <float hash="weight">76</float>
-      <float hash="landing_attack_air_frame_b">10</float>
-      <float hash="landing_attack_air_frame_lw">8</float>
+      <float hash="landing_attack_air_frame_b">7</float>
+      <float hash="landing_attack_air_frame_lw">6</float>
       <float hash="landing_frame">4</float>
       <float hash="tread_jump_speed_y_mul">1.0</float>
       <float hash="tread_mini_jump_speed_y_mul">0.475</float>
@@ -740,7 +741,7 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
     </struct>
     <!--WARIO-->
     <struct index="30">
-      <float hash="air_accel_x_mul">0.15</float>
+      <float hash="air_accel_x_mul">0.11</float>
       <float hash="weight">104</float>
       <float hash="landing_frame">4</float>
       <float hash="tread_jump_speed_y_mul">1.0</float>
@@ -823,15 +824,16 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
       <float hash="walk_speed_max">1.395</float>
       <float hash="ground_brake">0.095</float>
       <float hash="dash_speed">2.425</float>
-      <float hash="run_accel_mul">0.08</float>
       <float hash="run_speed_max">2.35</float>
       <float hash="air_accel_x_mul">0.025</float>
       <float hash="air_accel_y">0.135</float>
       <float hash="air_speed_y_stable">1.7625</float>
       <float hash="dive_speed_y">2.82</float>
       <float hash="weight">85</float>
+      <float hash="landing_attack_air_frame_n">7</float>
       <float hash="landing_attack_air_frame_f">7</float>
       <float hash="landing_attack_air_frame_b">9</float>
+      <float hash="landing_attack_air_frame_hi">8</float>
       <float hash="landing_attack_air_frame_lw">14</float>
       <float hash="landing_frame">4</float>
       <float hash="tread_jump_speed_y_mul">1.0</float>
@@ -890,6 +892,7 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
     <!--LUCARIO-->
     <struct index="41">
       <float hash="air_speed_x_stable">1.155</float>
+      <float hash="mini_jump_y">16</float>
       <float hash="landing_frame">4</float>
       <float hash="tread_jump_speed_y_mul">1.0</float>
       <float hash="tread_mini_jump_speed_y_mul">0.475</float>
