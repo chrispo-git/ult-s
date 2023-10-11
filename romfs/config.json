@@ -1440,54 +1440,6 @@
         "fighter/trail/c07": [
 			"fighter/trail/motion/body/c07/d00specialinput.nuanmb"
 		],
-		"fighter/dedede/c00": [
-			"fighter/dedede/motion/body/c00/d00specialinput.nuanmb",
-			"fighter/dedede/motion/body/c00/d00specialairinput.nuanmb",
-			"fighter/dedede/motion/body/c00/d00specialairinput2.nuanmb",
-			"fighter/dedede/motion/body/c00/d00specialairinputlanding.nuanmb"
-		],
-		"fighter/dedede/c01": [
-			"fighter/dedede/motion/body/c01/d00specialinput.nuanmb",
-			"fighter/dedede/motion/body/c01/d00specialairinput.nuanmb",
-			"fighter/dedede/motion/body/c01/d00specialairinput2.nuanmb",
-			"fighter/dedede/motion/body/c01/d00specialairinputlanding.nuanmb"
-		],
-		"fighter/dedede/c02": [
-			"fighter/dedede/motion/body/c02/d00specialinput.nuanmb",
-			"fighter/dedede/motion/body/c02/d00specialairinput.nuanmb",
-			"fighter/dedede/motion/body/c02/d00specialairinput2.nuanmb",
-			"fighter/dedede/motion/body/c02/d00specialairinputlanding.nuanmb"
-		],
-		"fighter/dedede/c03": [
-			"fighter/dedede/motion/body/c03/d00specialinput.nuanmb",
-			"fighter/dedede/motion/body/c03/d00specialairinput.nuanmb",
-			"fighter/dedede/motion/body/c03/d00specialairinput2.nuanmb",
-			"fighter/dedede/motion/body/c03/d00specialairinputlanding.nuanmb"
-		],
-		"fighter/dedede/c04": [
-			"fighter/dedede/motion/body/c04/d00specialinput.nuanmb",
-			"fighter/dedede/motion/body/c04/d00specialairinput.nuanmb",
-			"fighter/dedede/motion/body/c04/d00specialairinput2.nuanmb",
-			"fighter/dedede/motion/body/c04/d00specialairinputlanding.nuanmb"
-		],
-		"fighter/dedede/c05": [
-			"fighter/dedede/motion/body/c05/d00specialinput.nuanmb",
-			"fighter/dedede/motion/body/c05/d00specialairinput.nuanmb",
-			"fighter/dedede/motion/body/c05/d00specialairinput2.nuanmb",
-			"fighter/dedede/motion/body/c05/d00specialairinputlanding.nuanmb"
-		],
-		"fighter/dedede/c06": [
-			"fighter/dedede/motion/body/c06/d00specialinput.nuanmb",
-			"fighter/dedede/motion/body/c06/d00specialairinput.nuanmb",
-			"fighter/dedede/motion/body/c06/d00specialairinput2.nuanmb",
-			"fighter/dedede/motion/body/c06/d00specialairinputlanding.nuanmb"
-		],
-		"fighter/dedede/c07": [
-			"fighter/dedede/motion/body/c07/d00specialinput.nuanmb",
-			"fighter/dedede/motion/body/c07/d00specialairinput.nuanmb",
-			"fighter/dedede/motion/body/c07/d00specialairinput2.nuanmb",
-			"fighter/dedede/motion/body/c07/d00specialairinputlanding.nuanmb"
-		],
 		"fighter/mariod/c00": [
 			"fighter/mariod/motion/body/c00/d02specialhi2.nuanmb",
 			"fighter/mariod/motion/body/c00/d02specialhilanding.nuanmb",
