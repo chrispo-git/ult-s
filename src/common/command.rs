@@ -513,6 +513,7 @@ pub fn char_input(fighter : &mut L2CFighterCommon) {
 				};
 			};
 			//Brawler
+			/*
 			if fighter_kind == *FIGHTER_KIND_MIIFIGHTER {
 				if true {
 					if INPUT_NUM[ENTRY_ID] == 0 && STICK_NUM[ENTRY_ID] == 2 {
@@ -564,7 +565,7 @@ pub fn char_input(fighter : &mut L2CFighterCommon) {
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_MIIFIGHTER_STATUS_KIND_SPECIAL_LW2_KICK, true);
 					println!("Feint Dive Kick!!");
 				};
-			};
+			};*/
 			//Palu
 			/*if fighter_kind == *FIGHTER_KIND_PALUTENA {
 				if true {
