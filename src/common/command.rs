@@ -566,7 +566,7 @@ pub fn char_input(fighter : &mut L2CFighterCommon) {
 				};
 			};
 			//Palu
-			if fighter_kind == *FIGHTER_KIND_PALUTENA {
+			/*if fighter_kind == *FIGHTER_KIND_PALUTENA {
 				if true {
 					if INPUT_NUM[ENTRY_ID] == 2 && STICK_NUM[ENTRY_ID] == 6{
 						INPUT_WINDOW[ENTRY_ID] = 0;
