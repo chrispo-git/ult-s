@@ -315,29 +315,6 @@ pub fn char_charge(fighter : &mut L2CFighterCommon) {
 						};
 				};
 			};*/
-			if fighter_kind == *FIGHTER_KIND_PACKUN {
-				if USE_CHARGE[ENTRY_ID] == true {
-					if situation_kind == *SITUATION_KIND_GROUND {
-						if status_kind == *FIGHTER_PACKUN_STATUS_KIND_SQUAT_TREAD_DAMAGE && USE_CHARGE[ENTRY_ID] == true {
-							if frame > 2.0 {
-								USE_CHARGE[ENTRY_ID] = false;
-							};
-						} else {
-							StatusModule::change_status_request_from_script(boma, *FIGHTER_PACKUN_STATUS_KIND_SQUAT_TREAD_DAMAGE, true);
-						};
-					} else {
-						if status_kind == *FIGHTER_STATUS_KIND_ATTACK_AIR {
-							if [hash40("squat_step_pose_back")].contains(&motion_kind) == false {
-								MotionModule::change_motion(boma, smash::phx::Hash40::new("squat_step_pose_back"), 0.0, 1.0, false, 0.0, false, false);
-							};
-							USE_CHARGE[ENTRY_ID] = false;
-						} else {
-							WorkModule::on_flag(boma, *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
-							StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_ATTACK_AIR, true);
-						};
-					};
-				};
-			};
 			if fighter_kind == *FIGHTER_KIND_JACK {
 				if USE_CHARGE[ENTRY_ID] == true {
 						if status_kind == *FIGHTER_JACK_STATUS_KIND_SPECIAL_N_JUMP && USE_CHARGE[ENTRY_ID] == true {
