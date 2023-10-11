@@ -1191,52 +1191,6 @@ pub fn char_input(fighter : &mut L2CFighterCommon) {
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL_SPECIAL, true);
 				};
 			};*/
-			//Ics
-			if fighter_kind == *FIGHTER_KIND_POPO {
-				if true {
-					if INPUT_NUM[ENTRY_ID] == 0 && STICK_NUM[ENTRY_ID] == 2 {
-						INPUT_WINDOW[ENTRY_ID] = 0;
-						INPUT_START[ENTRY_ID] = true;
-						INPUT_NUM[ENTRY_ID] += 1;
-						//println!("Input 1!");
-					};
-					if INPUT_NUM[ENTRY_ID] == 1 && STICK_NUM[ENTRY_ID] == 3{
-						INPUT_NUM[ENTRY_ID] += 1;
-						//println!("Input 2!");
-					};
-					if INPUT_NUM[ENTRY_ID] == 2 && STICK_NUM[ENTRY_ID] == 6 {
-						INPUT_NUM[ENTRY_ID] += 1;
-						//println!("Input 3!");
-					};
-					if INPUT_WINDOW[ENTRY_ID] > INPUT_MAX {
-						INPUT_NUM[ENTRY_ID] = 0;
-						INPUT_START[ENTRY_ID] = false;
-						INPUT_WINDOW[ENTRY_ID] = 0;
-						//println!("Input missed!");
-					}; 
-				};
-				if INPUT_START[ENTRY_ID] == true {
-					INPUT_WINDOW[ENTRY_ID] += 1;
-				};
-				if INPUT_NUM[ENTRY_ID] == 3 && (FighterMotionModuleImpl::get_cancel_frame(boma,smash::phx::Hash40::new_raw(MotionModule::motion_kind(boma)),false) as f32 <= MotionModule::frame(boma) || MotionModule::frame(boma) < 4.0) && !AttackModule::is_attack(fighter.module_accessor, 0, false) {
-					if is_attack_btn(boma) {
-						INPUT_WINDOW[ENTRY_ID] = 0;
-						INPUT_NUM[ENTRY_ID] += 1;
-						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_ESCAPE, true);
-						//println!("Input 4!");
-					};
-				};
-				if INPUT_NUM[ENTRY_ID] == 4 && status_kind != *FIGHTER_STATUS_KIND_ESCAPE {
-					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_ESCAPE, true);
-					println!("Dancing Edge!");
-					MARTH_IS_COMMAND[ENTRY_ID] = true;
-				};
-				if status_kind == *FIGHTER_STATUS_KIND_ESCAPE {
-					INPUT_NUM[ENTRY_ID] = 0;
-					INPUT_START[ENTRY_ID] = false;
-					INPUT_WINDOW[ENTRY_ID] = 0;
-				};
-			};
 			//Incineroar
 			if fighter_kind == *FIGHTER_KIND_GAOGAEN {
 				if [*FIGHTER_STATUS_KIND_FALL, *FIGHTER_STATUS_KIND_FALL_AERIAL, *FIGHTER_STATUS_KIND_JUMP, *FIGHTER_STATUS_KIND_JUMP_AERIAL].contains(&status_kind) {
