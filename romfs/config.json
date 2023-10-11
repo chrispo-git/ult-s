@@ -1674,30 +1674,6 @@
 			"fighter/chrom/motion/body/c07/c01attacks3hi.nuanmb",
 			"fighter/chrom/motion/body/c07/c01attacks3lw.nuanmb"
 		],
-        "fighter/master/c00": [
-			"fighter/master/motion/body/c00/c05attackairn2.nuanmb"
-		],
-        "fighter/master/c01": [
-			"fighter/master/motion/body/c01/c05attackairn2.nuanmb"
-		],
-        "fighter/master/c02": [
-			"fighter/master/motion/body/c02/c05attackairn2.nuanmb"
-		],
-        "fighter/master/c03": [
-			"fighter/master/motion/body/c03/c05attackairn2.nuanmb"
-		],
-        "fighter/master/c04": [
-			"fighter/master/motion/body/c04/c05attackairn2.nuanmb"
-		],
-        "fighter/master/c05": [
-			"fighter/master/motion/body/c05/c05attackairn2.nuanmb"
-		],
-        "fighter/master/c06": [
-			"fighter/master/motion/body/c06/c05attackairn2.nuanmb"
-		],
-        "fighter/master/c07": [
-			"fighter/master/motion/body/c07/c05attackairn2.nuanmb"
-		],
         "fighter/lucina/c00": [
 			"fighter/lucina/motion/body/c00/c05attackairhi2.nuanmb",
 			"fighter/lucina/motion/body/c00/c05attackairn2.nuanmb",
