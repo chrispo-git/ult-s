@@ -610,10 +610,9 @@ pub fn char_input(fighter : &mut L2CFighterCommon) {
 					INPUT_START[ENTRY_ID] = false;
 					INPUT_WINDOW[ENTRY_ID] = 0;
 				};
-			};
-			/*
+			};*/
 			//Wario
-			if fighter_kind == *FIGHTER_KIND_WARIO {
+			/*if fighter_kind == *FIGHTER_KIND_WARIO {
 				if true{
 					if INPUT_NUM[ENTRY_ID] == 0 && STICK_NUM[ENTRY_ID] == 2 {
 						INPUT_WINDOW[ENTRY_ID] = 0;
@@ -671,7 +670,6 @@ pub fn char_input(fighter : &mut L2CFighterCommon) {
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL_SPECIAL, true);
 				};
 			};
-			*/
 			//Dr Mario
 			if fighter_kind == *FIGHTER_KIND_MARIOD {
 				if true{
@@ -835,7 +833,7 @@ pub fn char_input(fighter : &mut L2CFighterCommon) {
 				if StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR && MotionModule::motion_kind(boma) == hash40("attack_dash") && MotionModule::frame(boma) > 30.0 {
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL_SPECIAL, true);
 				};
-			};
+			};*/
 			//Kirby
 			/*if fighter_kind == *FIGHTER_KIND_KIRBY {
 				if true{
@@ -900,7 +898,7 @@ pub fn char_input(fighter : &mut L2CFighterCommon) {
 				};
 			};*/
 			//Incineroar
-			if fighter_kind == *FIGHTER_KIND_GAOGAEN {
+			/*if fighter_kind == *FIGHTER_KIND_GAOGAEN {
 				if [*FIGHTER_STATUS_KIND_FALL, *FIGHTER_STATUS_KIND_FALL_AERIAL, *FIGHTER_STATUS_KIND_JUMP, *FIGHTER_STATUS_KIND_JUMP_AERIAL].contains(&status_kind) {
 					if INPUT_NUM[ENTRY_ID] == 0 && STICK_NUM[ENTRY_ID] == 2 && INCIN_BAN_AIRDASH[ENTRY_ID] == false {
 						INPUT_WINDOW[ENTRY_ID] = 0;
@@ -969,7 +967,7 @@ pub fn char_input(fighter : &mut L2CFighterCommon) {
 				if StatusModule::situation_kind(boma) == *SITUATION_KIND_GROUND {
 					INCIN_BAN_AIRDASH[ENTRY_ID] = false;
 				};
-			};
+			};*/
 		};
     };
 }	
