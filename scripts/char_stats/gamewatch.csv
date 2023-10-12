@@ -1,0 +1,103 @@
+Attributes:
+Initial Dash , 1.98
+Run Speed , 1.679
+Walk Speed , 1.18
+Traction , 0.131
+Wavedash Traction Category , Low
+Full Hop Height , 27.51
+Short Hop Height , 13.26
+Air Speed , 1.176
+Air Accel Add , 0.07
+Air Accel Mul , 0.03
+Fall Speed , 1.24
+Gravity , 0.08
+Weight , 75
+Nair Landing Lag , 7
+Fair Landing Lag , 17
+Bair Landing Lag , 18
+Uair Landing Lag , 12
+Dair Landing Lag , 22
+Wall Jump? , False
+
+Edited Moves:
+
+gnw_upb
+Frame 5,ID: 0,Damage:  3.0%, Angle:  83, BKB:  132, KBG:  36,Notes: 
+Frame 5,ID: 1,Damage:  3.0%, Angle:  83, BKB:  132, KBG:  36,Notes: 
+Hitboxes terminated on frame 7
+Frame 9,ID: 0,Damage:  6.0%, Angle:  361, BKB:  60, KBG:  80,Notes: 
+Hitboxes terminated on frame 19
+Note: Deals 10f bonus hitstun
+
+
+gnw_dair
+Frame 6,ID: 0,Damage:  11.0%, Angle:  361, BKB:  20, KBG:  106,Notes: 
+Frame 8,ID: 0,Damage:  6.0%, Angle:  45, BKB:  22, KBG:  90,Notes: 
+Hitboxes terminated on frame 44
+Autocancel - 1-2/46+
+
+gnw_dair_land
+
+
+gnw_fair
+Frame 10,ID: 1,Damage:  11.5%, Angle:  361, BKB:  30, KBG:  90,Notes: 
+Frame 12,ID: 1,Damage:  7.0%, Angle:  361, BKB:  25, KBG:  90,Notes: 
+Hitboxes terminated on frame 27
+Autocancel - 1-9/40+
+
+gnw_ftilt
+Frame 6,ID: 0,Damage:  12.0%, Angle:  361, BKB:  35, KBG:  90,Notes: 
+Frame 6,ID: 1,Damage:  10.0%, Angle:  361, BKB:  35, KBG:  90,Notes: 
+Frame 8,ID: 0,Damage:  6.0%, Angle:  361, BKB:  35, KBG:  118,Notes: , Hits grounded only
+Frame 8,ID: 1,Damage:  6.0%, Angle:  361, BKB:  35, KBG:  118,Notes: , Hits grounded only
+Frame 8,ID: 2,Damage:  6.0%, Angle:  361, BKB:  30, KBG:  118,Notes: , Hits air only
+Frame 8,ID: 3,Damage:  6.0%, Angle:  361, BKB:  30, KBG:  118,Notes: , Hits air only
+Hitboxes terminated on frame 19
+
+
+gnw_dsmash
+Charge hold Frame: 7
+Frame 12,ID: 0,Damage:  13.0%, Angle:  20, BKB:  30, KBG:  80,Notes: 
+Frame 12,ID: 1,Damage:  15.0%, Angle:  20, BKB:  60, KBG:  75,Notes: 
+Frame 12,ID: 2,Damage:  15.0%, Angle:  20, BKB:  60, KBG:  75,Notes: 
+Hitboxes terminated on frame 17
+
+
+gnw_dtilt
+Frame 7,ID: 0,Damage:  10.0%, Angle:  80, BKB:  40, KBG:  110,Notes: 
+Frame 7,ID: 1,Damage:  2.0%, Angle:  90, BKB:  110 (Set), KBG:  100,Notes: , Flinchless
+Hitboxes terminated on frame 13
+
+
+gnw_utilt
+Frame 10,ID: 1,Damage:  7.0%, Angle:  170, BKB:  60 (Set), KBG:  100,Notes: , Hits air only
+Frame 10,ID: 0,Damage:  7.0%, Angle:  170, BKB:  60 (Set), KBG:  100,Notes: , Hits air only
+Frame 10,ID: 3,Damage:  7.0%, Angle:  145, BKB:  80 (Set), KBG:  100,Notes: , Hits grounded only
+Frame 10,ID: 2,Damage:  7.0%, Angle:  145, BKB:  80 (Set), KBG:  100,Notes: , Hits grounded only
+Frame 10,ID: 4,Damage:  0.0%, Angle:  90, BKB:  110 (Set), KBG:  100,Notes: , Flinchless
+Hitboxes terminated on frame 13
+Frame 19,ID: 1,Damage:  7.0%, Angle:  90, BKB:  50, KBG:  117,Notes: 
+Frame 19,ID: 0,Damage:  7.0%, Angle:  90, BKB:  50, KBG:  117,Notes: 
+Frame 19,ID: 2,Damage:  0.0%, Angle:  90, BKB:  110 (Set), KBG:  100,Notes: , Flinchless
+Hitboxes terminated on frame 27
+
+
+gnw_da
+Frame 6,ID: 0,Damage:  10.0%, Angle:  50, BKB:  75, KBG:  70,Notes: , deals 1 bonus shield damage
+Frame 10,ID: 0,Damage:  6.5%, Angle:  50, BKB:  75, KBG:  70,Notes: , deals 1 bonus shield damage
+Hitboxes terminated on frame 20
+
+
+gnw_uair
+Frame 1,ID: 0,Damage:  3.0%, Angle:  367, BKB:  100 (Set), KBG:  100,Notes: , Reflectable
+Hitboxes terminated on frame 6
+Frame 8,ID: 0,Damage:  9.0%, Angle:  97, BKB:  47, KBG:  98,Notes: , Reflectable
+Hitboxes terminated on frame 10
+
+
+
+
+
+
+
+
