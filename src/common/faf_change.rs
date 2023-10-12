@@ -530,10 +530,13 @@ pub fn faf_change_master(fighter : &mut L2CFighterCommon) {
 				MotionModule::change_motion(boma, Hash40::new("attack_11"), 3.0, 1.0, false, 0.0, false, false);
 			};
 		}else if fighter_kind == *FIGHTER_KIND_PALUTENA {
-			if [hash40("attack_air_f")].contains(&motion_kind) && frame >= 33.0 {
+			if [hash40("attack_air_f")].contains(&motion_kind) && frame >= 28.0 {
 				CancelModule::enable_cancel(boma);
 			};
-			if [hash40("attack_hi3")].contains(&motion_kind) && frame >= 35.0 {
+			if [hash40("attack_hi3")].contains(&motion_kind) && frame >= 34.0 {
+				CancelModule::enable_cancel(boma);
+			};
+			if [hash40("throw_lw")].contains(&motion_kind) && frame >= 38.0 {
 				CancelModule::enable_cancel(boma);
 			};
 		}else if fighter_kind == *FIGHTER_KIND_MIIFIGHTER {
