@@ -969,7 +969,7 @@ pub fn char_input(fighter : &mut L2CFighterCommon) {
 				if StatusModule::situation_kind(boma) == *SITUATION_KIND_GROUND {
 					INCIN_BAN_AIRDASH[ENTRY_ID] = false;
 				};
-			};
+			};*/
 		};
     };
 }	
