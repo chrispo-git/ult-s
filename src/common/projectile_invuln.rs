@@ -28,14 +28,6 @@ pub fn projectile_invuln_master(fighter : &mut L2CFighterCommon) {
 					shield!(fighter, *MA_MSC_CMD_SHIELD_OFF, *COLLISION_KIND_REFLECTOR, 0, *FIGHTER_REFLECTOR_GROUP_HOMERUNBAT);
 				};
 			};
-		}else if fighter_kind == *FIGHTER_KIND_GANON {
-			if [hash40("special_lw")].contains(&MotionModule::motion_kind(boma)) {
-				if MotionModule::frame(boma) >= 7.0 && MotionModule::frame(boma) < 36.0 {
-					shield!(fighter, *MA_MSC_CMD_REFLECTOR, *COLLISION_KIND_REFLECTOR, 0, hash40("kneer"), /*Size*/ 9.0, /*X*/ 7.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ 7.0, /*Y2*/ 0.0, /*Z2*/ 0.0, /*Power*/ dmg_mul, /*Speed*/ speed_mul, /*Max Damage*/ reflector_max, false, /*Lifetime*/ life_mul, *FIGHTER_REFLECTOR_GROUP_HOMERUNBAT);
-				} else {
-					shield!(fighter, *MA_MSC_CMD_SHIELD_OFF, *COLLISION_KIND_REFLECTOR, 0, *FIGHTER_REFLECTOR_GROUP_HOMERUNBAT);
-				};
-			};
 		}else if fighter_kind == *FIGHTER_KIND_METAKNIGHT {
 			if [*FIGHTER_METAKNIGHT_STATUS_KIND_SPECIAL_S_RUSH, *FIGHTER_STATUS_KIND_SPECIAL_S, *FIGHTER_METAKNIGHT_STATUS_KIND_SPECIAL_S_END].contains(&status_kind) {
 				shield!(fighter, *MA_MSC_CMD_REFLECTOR, *COLLISION_KIND_REFLECTOR, 0, hash40("top"), /*Size*/ 6.0, /*X*/ 0.0, /*Y*/ 6.0, /*Z*/ 2.0, /*X2*/ 0.0, /*Y2*/ 6.0, /*Z2*/ 18.5, /*Power*/ dmg_mul, /*Speed*/ speed_mul, /*Max Damage*/ reflector_max, false, /*Lifetime*/ life_mul, *FIGHTER_REFLECTOR_GROUP_HOMERUNBAT);
