@@ -229,54 +229,6 @@ pub fn char_charge(fighter : &mut L2CFighterCommon) {
 		let frame = MotionModule::frame(boma);
 		//Line Checks if you are eligible for charge
 		if can_charge(fighter_kind) {
-			if fighter_kind == *FIGHTER_KIND_PITB {
-				if USE_CHARGE[ENTRY_ID] == true && [*FIGHTER_STATUS_KIND_SPECIAL_HI, *FIGHTER_PIT_STATUS_KIND_SPECIAL_HI_RUSH, *FIGHTER_PIT_STATUS_KIND_SPECIAL_HI_RUSH_END].contains(&status_kind) == false {
-					DamageModule::add_damage(boma, 1.8, 0);
-					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_SPECIAL_HI, true);
-				};
-				if [*FIGHTER_STATUS_KIND_SPECIAL_HI, *FIGHTER_PIT_STATUS_KIND_SPECIAL_HI_RUSH, *FIGHTER_PIT_STATUS_KIND_SPECIAL_HI_RUSH_END].contains(&status_kind) && USE_CHARGE[ENTRY_ID] == true {
-					if status_kind == *FIGHTER_PIT_STATUS_KIND_SPECIAL_HI_RUSH {
-						if MotionModule::frame(boma) as i32 % 8 == 0 && MotionModule::frame(boma) < 30.0 {
-							macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_damage_fire"), Hash40::new("s_wingl1"), -3, 0, 1, 0, 0, 0, 1, true);
-							macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_damage_fire"), Hash40::new("s_wingr1"), -3, 0, -1, 0, 0, 0, 1, true);
-						};
-						if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_ATTACK) {
-							USE_CHARGE[ENTRY_ID] = false;
-							StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_ATTACK_AIR, true);
-						};
-						if MotionModule::frame(boma) > 46.0 {
-							USE_CHARGE[ENTRY_ID] = false;
-							StatusModule::change_status_request_from_script(boma, *FIGHTER_PIT_STATUS_KIND_SPECIAL_HI_RUSH_END, true);
-						};
-					};
-					if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_HI {
-						macros::EFFECT_OFF_KIND(fighter, Hash40::new_raw(0x16d6a31b9bu64), true, true);
-						macros::EFFECT_OFF_KIND(fighter, Hash40::new_raw(0x16eaefd363u64), true, true);
-					};
-				};
-				if status_kind == *FIGHTER_PIT_STATUS_KIND_SPECIAL_HI_RUSH_END {
-					USE_CHARGE[ENTRY_ID] = false;
-				};
-			};
-			if fighter_kind == *FIGHTER_KIND_MARIO {
-				if USE_CHARGE[ENTRY_ID] == true && status_kind != *FIGHTER_STATUS_KIND_SPECIAL_HI {
-					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_SPECIAL_HI, true);
-				};
-				if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_HI && USE_CHARGE[ENTRY_ID] == true {
-					if MotionModule::frame(boma) == 1.0 {
-						macros::FLASH(fighter, 1.05, 0.52, 0.0, 0.5);
-					};
-					if MotionModule::frame(boma) < 15.0 {
-						HitModule::set_whole(boma, smash::app::HitStatus(*HIT_STATUS_XLU), 0);
-					} else {
-						ColorBlendModule::off_flash(boma, false);
-					};
-					if MotionModule::frame(boma) >= 16.0 {
-						HitModule::set_whole(boma, smash::app::HitStatus(*HIT_STATUS_NORMAL), 0);
-						USE_CHARGE[ENTRY_ID] = false;
-					};
-				};
-			};
 			if fighter_kind == *FIGHTER_KIND_ROSETTA {
 				if USE_CHARGE[ENTRY_ID] == true && ![*FIGHTER_STATUS_KIND_ATTACK_AIR, *FIGHTER_STATUS_KIND_ATTACK_S3].contains(&status_kind) {
 					if situation_kind == *SITUATION_KIND_GROUND {
@@ -315,29 +267,6 @@ pub fn char_charge(fighter : &mut L2CFighterCommon) {
 						};
 				};
 			};*/
-			if fighter_kind == *FIGHTER_KIND_PACKUN {
-				if USE_CHARGE[ENTRY_ID] == true {
-					if situation_kind == *SITUATION_KIND_GROUND {
-						if status_kind == *FIGHTER_PACKUN_STATUS_KIND_SQUAT_TREAD_DAMAGE && USE_CHARGE[ENTRY_ID] == true {
-							if frame > 2.0 {
-								USE_CHARGE[ENTRY_ID] = false;
-							};
-						} else {
-							StatusModule::change_status_request_from_script(boma, *FIGHTER_PACKUN_STATUS_KIND_SQUAT_TREAD_DAMAGE, true);
-						};
-					} else {
-						if status_kind == *FIGHTER_STATUS_KIND_ATTACK_AIR {
-							if [hash40("squat_step_pose_back")].contains(&motion_kind) == false {
-								MotionModule::change_motion(boma, smash::phx::Hash40::new("squat_step_pose_back"), 0.0, 1.0, false, 0.0, false, false);
-							};
-							USE_CHARGE[ENTRY_ID] = false;
-						} else {
-							WorkModule::on_flag(boma, *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
-							StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_ATTACK_AIR, true);
-						};
-					};
-				};
-			};
 			if fighter_kind == *FIGHTER_KIND_JACK {
 				if USE_CHARGE[ENTRY_ID] == true {
 						if status_kind == *FIGHTER_JACK_STATUS_KIND_SPECIAL_N_JUMP && USE_CHARGE[ENTRY_ID] == true {
@@ -843,8 +772,8 @@ pub fn char_input(fighter : &mut L2CFighterCommon) {
 				};
 			};*/
 			//Wario
-			/* if fighter_kind == *FIGHTER_KIND_WARIO {
-				if true{
+			/*if fighter_kind == *FIGHTER_KIND_WARIO {
+      if true{
 					if INPUT_NUM[ENTRY_ID] == 0 && STICK_NUM[ENTRY_ID] == 2 {
 						INPUT_WINDOW[ENTRY_ID] = 0;
 						INPUT_START[ENTRY_ID] = true;
@@ -1185,7 +1114,7 @@ pub fn char_input(fighter : &mut L2CFighterCommon) {
 				if StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR && MotionModule::motion_kind(boma) == hash40("attack_dash") && MotionModule::frame(boma) > 30.0 {
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL_SPECIAL, true);
 				};
-			};
+			};*/
 			//Kirby
 			/*if fighter_kind == *FIGHTER_KIND_KIRBY {
 				if true{
