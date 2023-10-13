@@ -1494,8 +1494,10 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
       <float hash="ground_brake">0.17</float>
       <float hash="dash_speed">2.12</float>
       <float hash="run_speed_max">1.9</float>
-      <float hash="air_speed_x_stable">1.125</float>
-      <float hash="air_accel_y">0.112</float>
+      <float hash="jump_y">33</float>
+      <float hash="jump_aerial_y">40</float>
+      <float hash="air_speed_x_stable">1.1</float>
+      <float hash="air_accel_y">0.081</float>
       <float hash="air_speed_y_stable">1.8</float>
       <float hash="dive_speed_y">2.88</float>
       <float hash="weight">90</float>
