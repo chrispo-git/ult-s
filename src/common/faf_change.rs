@@ -901,34 +901,6 @@ pub fn faf_change_master(fighter : &mut L2CFighterCommon) {
 			if [hash40("special_n_fire"), hash40("special_air_n_fire")].contains(&motion_kind) && frame >= 48.0 {
 				CancelModule::enable_cancel(boma);
 			};
-		}else if fighter_kind == *FIGHTER_KIND_BRAVE {
-			if [hash40("attack_lw3")].contains(&motion_kind) && frame >= 23.0 {
-				CancelModule::enable_cancel(boma);
-			};
-			if [hash40("attack_s3_s")].contains(&motion_kind) && frame >= 31.0 {
-				CancelModule::enable_cancel(boma);
-			};
-			if [hash40("attack_s3_s2")].contains(&motion_kind) && frame >= 33.0 {
-				CancelModule::enable_cancel(boma);
-			};
-			if [hash40("attack_hi3")].contains(&motion_kind) && frame >= 34.0 {
-				CancelModule::enable_cancel(boma);
-			};
-			if [hash40("attack_air_hi")].contains(&motion_kind) && frame >= 23.0 {
-				CancelModule::enable_cancel(boma);
-			};
-			if [hash40("attack_air_f")].contains(&motion_kind) && frame >= 35.0 {
-				CancelModule::enable_cancel(boma);
-			};
-			if [hash40("special_n1"), hash40("special_air_n1")].contains(&motion_kind) && frame >= 33.0 {
-				CancelModule::enable_cancel(boma);
-			};
-			if [hash40("special_n2"), hash40("special_air_n2")].contains(&motion_kind) && frame >= 48.0 {
-				CancelModule::enable_cancel(boma);
-			};
-			if [hash40("special_n3"), hash40("special_air_n3")].contains(&motion_kind) && frame >= 67.0 {
-				CancelModule::enable_cancel(boma);
-			};
 		}else if fighter_kind == *FIGHTER_KIND_BUDDY {
 			if [hash40("throw_f")].contains(&motion_kind) && frame >= 29.0 {
 				CancelModule::enable_cancel(boma);
