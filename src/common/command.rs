@@ -1059,7 +1059,7 @@ pub fn char_input(fighter : &mut L2CFighterCommon) {
 				};
 			};
 			//Richter
-			if fighter_kind == *FIGHTER_KIND_RICHTER {
+			/*if fighter_kind == *FIGHTER_KIND_RICHTER {
 				if true{
 					if INPUT_NUM[ENTRY_ID] == 0 && STICK_NUM[ENTRY_ID] == 2 {
 						INPUT_WINDOW[ENTRY_ID] = 0;
@@ -1114,7 +1114,7 @@ pub fn char_input(fighter : &mut L2CFighterCommon) {
 				if StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR && MotionModule::motion_kind(boma) == hash40("attack_dash") && MotionModule::frame(boma) > 30.0 {
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL_SPECIAL, true);
 				};
-			};*/
+			}; */
 			//Kirby
 			/*if fighter_kind == *FIGHTER_KIND_KIRBY {
 				if true{
