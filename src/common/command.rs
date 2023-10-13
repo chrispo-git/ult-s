@@ -513,8 +513,7 @@ pub fn char_input(fighter : &mut L2CFighterCommon) {
 				};
 			};
 			//Brawler
-			/*
-			if fighter_kind == *FIGHTER_KIND_MIIFIGHTER {
+			/*if fighter_kind == *FIGHTER_KIND_MIIFIGHTER {
 				if true {
 					if INPUT_NUM[ENTRY_ID] == 0 && STICK_NUM[ENTRY_ID] == 2 {
 						INPUT_WINDOW[ENTRY_ID] = 0;
@@ -611,9 +610,170 @@ pub fn char_input(fighter : &mut L2CFighterCommon) {
 					INPUT_WINDOW[ENTRY_ID] = 0;
 				};
 			};*/
+			//Wii Fit
+			/*if fighter_kind == *FIGHTER_KIND_WIIFIT {
+				if true {
+					if INPUT_NUM[ENTRY_ID] == 0 && STICK_NUM[ENTRY_ID] == 4 {
+						INPUT_WINDOW[ENTRY_ID] = 0;
+						INPUT_START[ENTRY_ID] = true;
+						INPUT_NUM[ENTRY_ID] += 1;
+						//println!("Input 1!");
+					};
+					if INPUT_NUM[ENTRY_ID] == 1 && STICK_NUM[ENTRY_ID] == 1{
+						INPUT_NUM[ENTRY_ID] += 1;
+						//println!("Input 2!");
+					};
+					if INPUT_NUM[ENTRY_ID] == 2 && STICK_NUM[ENTRY_ID] == 2 {
+						INPUT_NUM[ENTRY_ID] += 1;
+						//println!("Input 3!");
+					};
+					if INPUT_NUM[ENTRY_ID] == 3 && STICK_NUM[ENTRY_ID] == 3{
+						INPUT_NUM[ENTRY_ID] += 1;
+						//println!("Input 4!");
+					};
+					if INPUT_NUM[ENTRY_ID] == 4 && STICK_NUM[ENTRY_ID] == 6 {
+						INPUT_NUM[ENTRY_ID] += 1;
+						//println!("Input 5!");
+					};
+					if INPUT_WINDOW[ENTRY_ID] > INPUT_MAX {
+						INPUT_NUM[ENTRY_ID] = 0;
+						INPUT_START[ENTRY_ID] = false;
+						INPUT_WINDOW[ENTRY_ID] = 0;
+						//println!("Input missed!");
+					}; 
+				};
+				if INPUT_START[ENTRY_ID] == true {
+					INPUT_WINDOW[ENTRY_ID] += 1;
+				};
+				if INPUT_NUM[ENTRY_ID] == 5 && (FighterMotionModuleImpl::get_cancel_frame(boma,smash::phx::Hash40::new_raw(MotionModule::motion_kind(boma)),false) as f32 <= MotionModule::frame(boma) || MotionModule::frame(boma) < 4.0) && !AttackModule::is_attack(fighter.module_accessor, 0, false) && StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR{
+					if is_attack_btn(boma) {
+						INPUT_WINDOW[ENTRY_ID] = 0;
+						INPUT_NUM[ENTRY_ID] += 1;
+						StatusModule::change_status_request_from_script(boma, *FIGHTER_WIIFIT_STATUS_KIND_SPECIAL_S_HEADING, true);
+						//println!("Input 6!");
+					};
+				};
+				if INPUT_NUM[ENTRY_ID] == 6 && [*FIGHTER_WIIFIT_STATUS_KIND_SPECIAL_S_HEADING, *FIGHTER_WIIFIT_STATUS_KIND_SPECIAL_S_JUMP, *FIGHTER_STATUS_KIND_SPECIAL_S, *FIGHTER_STATUS_KIND_LANDING].contains(&status_kind) == false {
+					StatusModule::change_status_request_from_script(boma, *FIGHTER_WIIFIT_STATUS_KIND_SPECIAL_S_HEADING, true);
+				};
+				if [*FIGHTER_WIIFIT_STATUS_KIND_SPECIAL_S_HEADING, *FIGHTER_WIIFIT_STATUS_KIND_SPECIAL_S_JUMP, *FIGHTER_STATUS_KIND_SPECIAL_S, *FIGHTER_STATUS_KIND_LANDING].contains(&status_kind) {
+					INPUT_NUM[ENTRY_ID] = 0;
+					INPUT_START[ENTRY_ID] = false;
+					INPUT_WINDOW[ENTRY_ID] = 0;
+				};
+			};*/
+			//Pyra
+			/*if fighter_kind == *FIGHTER_KIND_EFLAME {
+				if true {
+					if INPUT_NUM[ENTRY_ID] == 0 && STICK_NUM[ENTRY_ID] == 2 {
+						INPUT_WINDOW[ENTRY_ID] = 0;
+						INPUT_START[ENTRY_ID] = true;
+						INPUT_NUM[ENTRY_ID] += 1;
+						//println!("Input 1!");
+					};
+					if INPUT_NUM[ENTRY_ID] == 1 && STICK_NUM[ENTRY_ID] == 3{
+						INPUT_NUM[ENTRY_ID] += 1;
+						//println!("Input 2!");
+					};
+					if INPUT_NUM[ENTRY_ID] == 2 && STICK_NUM[ENTRY_ID] == 6 {
+						INPUT_NUM[ENTRY_ID] += 1;
+						//println!("Input 3!");
+					};
+					if INPUT_WINDOW[ENTRY_ID] > INPUT_MAX {
+						INPUT_NUM[ENTRY_ID] = 0;
+						INPUT_START[ENTRY_ID] = false;
+						INPUT_WINDOW[ENTRY_ID] = 0;
+						//println!("Input missed!");
+					}; 
+				};
+				if INPUT_START[ENTRY_ID] == true {
+					INPUT_WINDOW[ENTRY_ID] += 1;
+				};
+				if INPUT_NUM[ENTRY_ID] == 3 && (FighterMotionModuleImpl::get_cancel_frame(boma,smash::phx::Hash40::new_raw(MotionModule::motion_kind(boma)),false) as f32 <= MotionModule::frame(boma) || MotionModule::frame(boma) < 4.0) && !AttackModule::is_attack(fighter.module_accessor, 0, false) && StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR && WorkModule::is_flag(boma, *FIGHTER_EFLAME_INSTANCE_WORK_ID_FLAG_HAS_ESWORD){
+					if is_attack_btn(boma) {
+						INPUT_WINDOW[ENTRY_ID] = 0;
+						INPUT_NUM[ENTRY_ID] += 1;
+						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_SPECIAL_LW, true);
+						//println!("Input 4!");
+					};
+				};
+				if ACTIVATE_MOTION_CHANGE[ENTRY_ID] == true && status_kind == *FIGHTER_EFLAME_STATUS_KIND_SPECIAL_LW_OUT {
+					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_SPECIAL_HI, true);
+					ACTIVATE_MOTION_CHANGE[ENTRY_ID] = false;
+				};
+				if INPUT_NUM[ENTRY_ID] == 4 && status_kind != *FIGHTER_STATUS_KIND_SPECIAL_LW && WorkModule::is_flag(boma, *FIGHTER_EFLAME_INSTANCE_WORK_ID_FLAG_HAS_ESWORD){
+					ACTIVATE_MOTION_CHANGE[ENTRY_ID] = true;
+					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_SPECIAL_LW, true);
+					println!("Dancing Edge!");
+				};
+				if ACTIVATE_MOTION_CHANGE[ENTRY_ID] == true && status_kind == *FIGHTER_STATUS_KIND_SPECIAL_LW{
+					MotionModule::set_rate(boma, 1.75);
+				};
+				if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_LW {
+					INPUT_NUM[ENTRY_ID] = 0;
+					INPUT_START[ENTRY_ID] = false;
+					INPUT_WINDOW[ENTRY_ID] = 0;
+				};
+			};*/
+			//Mythra
+			/* if fighter_kind == *FIGHTER_KIND_ELIGHT {
+				if true {
+					if INPUT_NUM[ENTRY_ID] == 0 && STICK_NUM[ENTRY_ID] == 2 {
+						INPUT_WINDOW[ENTRY_ID] = 0;
+						INPUT_START[ENTRY_ID] = true;
+						INPUT_NUM[ENTRY_ID] += 1;
+						//println!("Input 1!");
+					};
+					if INPUT_NUM[ENTRY_ID] == 1 && STICK_NUM[ENTRY_ID] == 3{
+						INPUT_NUM[ENTRY_ID] += 1;
+						//println!("Input 2!");
+					};
+					if INPUT_NUM[ENTRY_ID] == 2 && STICK_NUM[ENTRY_ID] == 6 {
+						INPUT_NUM[ENTRY_ID] += 1;
+						//println!("Input 3!");
+					};
+					if INPUT_WINDOW[ENTRY_ID] > INPUT_MAX {
+						INPUT_NUM[ENTRY_ID] = 0;
+						INPUT_START[ENTRY_ID] = false;
+						INPUT_WINDOW[ENTRY_ID] = 0;
+						//println!("Input missed!");
+					}; 
+				};
+				if INPUT_START[ENTRY_ID] == true {
+					INPUT_WINDOW[ENTRY_ID] += 1;
+				};
+				if INPUT_NUM[ENTRY_ID] == 3 && (FighterMotionModuleImpl::get_cancel_frame(boma,smash::phx::Hash40::new_raw(MotionModule::motion_kind(boma)),false) as f32 <= MotionModule::frame(boma) || MotionModule::frame(boma) < 4.0) && !AttackModule::is_attack(fighter.module_accessor, 0, false) {
+					if is_attack_btn(boma) {
+						INPUT_WINDOW[ENTRY_ID] = 0;
+						INPUT_NUM[ENTRY_ID] += 1;
+						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_SPECIAL_LW, true);
+						//println!("Input 4!");
+					};
+				};
+				if ACTIVATE_MOTION_CHANGE[ENTRY_ID] == true && status_kind == *FIGHTER_ELIGHT_STATUS_KIND_SPECIAL_LW_OUT {
+					StatusModule::change_status_request_from_script(boma, *FIGHTER_ELIGHT_STATUS_KIND_SPECIAL_HI_ATTACK2, true);
+				};
+				if ACTIVATE_MOTION_CHANGE[ENTRY_ID] == true && (status_kind == *FIGHTER_STATUS_KIND_FALL_SPECIAL || status_kind ==  *FIGHTER_STATUS_KIND_LANDING_FALL_SPECIAL){
+					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_SPECIAL_LW, true);
+					ACTIVATE_MOTION_CHANGE[ENTRY_ID] = false;
+				};
+				if INPUT_NUM[ENTRY_ID] == 4 && status_kind != *FIGHTER_STATUS_KIND_SPECIAL_LW {
+					ACTIVATE_MOTION_CHANGE[ENTRY_ID] = true;
+					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_SPECIAL_LW, true);
+					println!("Dancing Edge!");
+				};
+				if ACTIVATE_MOTION_CHANGE[ENTRY_ID] == true && status_kind == *FIGHTER_STATUS_KIND_SPECIAL_LW{
+					MotionModule::set_rate(boma, 1.75);
+				};
+				if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_LW {
+					INPUT_NUM[ENTRY_ID] = 0;
+					INPUT_START[ENTRY_ID] = false;
+					INPUT_WINDOW[ENTRY_ID] = 0;
+				};
+			};*/
 			//Wario
 			/*if fighter_kind == *FIGHTER_KIND_WARIO {
-				if true{
+      if true{
 					if INPUT_NUM[ENTRY_ID] == 0 && STICK_NUM[ENTRY_ID] == 2 {
 						INPUT_WINDOW[ENTRY_ID] = 0;
 						INPUT_START[ENTRY_ID] = true;
@@ -669,7 +829,68 @@ pub fn char_input(fighter : &mut L2CFighterCommon) {
 				if StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR  && MotionModule::motion_kind(boma) == hash40("attack_dash") && MotionModule::frame(boma) > 27.0 {
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL_SPECIAL, true);
 				};
-			};
+			};*/
+			//Dedede
+			/*if fighter_kind == *FIGHTER_KIND_DEDEDE {
+				if true{
+					if INPUT_NUM[ENTRY_ID] == 0 && STICK_NUM[ENTRY_ID] == 2 {
+						INPUT_WINDOW[ENTRY_ID] = 0;
+						INPUT_START[ENTRY_ID] = true;
+						INPUT_NUM[ENTRY_ID] += 1;
+						//println!("Input 1!");
+					};
+					if INPUT_NUM[ENTRY_ID] == 1 && STICK_NUM[ENTRY_ID] == 3{
+						INPUT_NUM[ENTRY_ID] += 1;
+						//println!("Input 2!");
+					};
+					if INPUT_NUM[ENTRY_ID] == 2 && STICK_NUM[ENTRY_ID] == 6 {
+						INPUT_NUM[ENTRY_ID] += 1;
+						//println!("Input 3!");
+					};
+					if INPUT_WINDOW[ENTRY_ID] > INPUT_MAX {
+						INPUT_NUM[ENTRY_ID] = 0;
+						INPUT_START[ENTRY_ID] = false;
+						INPUT_WINDOW[ENTRY_ID] = 0;
+						//println!("Input missed!");
+					}; 
+				};
+				if INPUT_START[ENTRY_ID] == true {
+					INPUT_WINDOW[ENTRY_ID] += 1;
+				};
+				if INPUT_NUM[ENTRY_ID] == 3 && (FighterMotionModuleImpl::get_cancel_frame(boma,smash::phx::Hash40::new_raw(MotionModule::motion_kind(boma)),false) as f32 <= MotionModule::frame(boma) || MotionModule::frame(boma) < 4.0) && !AttackModule::is_attack(fighter.module_accessor, 0, false) && (StatusModule::situation_kind(boma) == *SITUATION_KIND_GROUND || StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR){
+					if (ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_SPECIAL)  && ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_ATTACK)) &&  ((ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_CATCH) && ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_GUARD)) || (StatusModule::situation_kind(boma) == *SITUATION_KIND_GROUND || StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR)) {
+						INPUT_WINDOW[ENTRY_ID] = 0;
+						INPUT_NUM[ENTRY_ID] += 1;
+						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_SPECIAL_HI, true);
+						//println!("Input 4!");
+					};
+				};
+				if ACTIVATE_MOTION_CHANGE[ENTRY_ID] == true && StatusModule::situation_kind(boma) == *SITUATION_KIND_GROUND{
+					MotionModule::change_motion_inherit_frame(boma, smash::phx::Hash40::new("special_input"), 0.0, 1.0, 0.0, false, false);
+					ACTIVATE_MOTION_CHANGE[ENTRY_ID] = false;
+				};
+				if ACTIVATE_MOTION_CHANGE[ENTRY_ID] == true && StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR{
+					MotionModule::change_motion_inherit_frame(boma, smash::phx::Hash40::new("special_air_input"), 0.0, 1.0, 0.0, false, false);
+					ACTIVATE_MOTION_CHANGE[ENTRY_ID] = false;
+				};
+				if INPUT_NUM[ENTRY_ID] == 4 && status_kind != *FIGHTER_STATUS_KIND_SPECIAL_HI {
+					ACTIVATE_MOTION_CHANGE[ENTRY_ID] = true;
+					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_SPECIAL_HI, true);
+					println!("Dancing Edge!");
+				};
+				if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_HI {
+					INPUT_NUM[ENTRY_ID] = 0;
+					INPUT_START[ENTRY_ID] = false;
+					INPUT_WINDOW[ENTRY_ID] = 0;
+				};
+				/*if  (StatusModule::situation_kind(boma) == *SITUATION_KIND_GROUND || StatusModule::is_situation_changed(boma)) && MotionModule::motion_kind(boma) == hash40("special_input"){
+					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_LANDING_FALL_SPECIAL, true);
+				};
+				if StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR && MotionModule::motion_kind(boma) == hash40("special_input") && MotionModule::frame(boma) >= 45.0 {
+					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL_SPECIAL, true);
+					macros::SET_SPEED_EX(fighter, 0.0, 0.0, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+				};*/
+			};*/
 			//Dr Mario
 			if fighter_kind == *FIGHTER_KIND_MARIOD {
 				if true{
@@ -727,6 +948,66 @@ pub fn char_input(fighter : &mut L2CFighterCommon) {
 					macros::SET_SPEED_EX(fighter, 0.0, 0.0, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
 				};*/
 			};
+			//Sheik
+			/*if fighter_kind == *FIGHTER_KIND_SHEIK {
+				if true{
+					if INPUT_NUM[ENTRY_ID] == 0 && (STICK_NUM[ENTRY_ID] == 6 || STICK_NUM[ENTRY_ID] == 9) {
+						INPUT_WINDOW[ENTRY_ID] = 0;
+						INPUT_START[ENTRY_ID] = true;
+						INPUT_NUM[ENTRY_ID] += 1;
+						//println!("Input 1!");
+					};
+					if INPUT_NUM[ENTRY_ID] == 1 && STICK_NUM[ENTRY_ID] <= 2{
+						INPUT_NUM[ENTRY_ID] += 1;
+						//println!("Input 2!");
+					};
+					if INPUT_NUM[ENTRY_ID] == 2 && (STICK_NUM[ENTRY_ID] == 6 || STICK_NUM[ENTRY_ID] == 3) {
+						INPUT_NUM[ENTRY_ID] += 1;
+						//println!("Input 3!");
+					};
+					if INPUT_WINDOW[ENTRY_ID] > INPUT_MAX {
+						INPUT_NUM[ENTRY_ID] = 0;
+						INPUT_START[ENTRY_ID] = false;
+						INPUT_WINDOW[ENTRY_ID] = 0;
+						//println!("Input missed!");
+					}; 
+				};
+				if INPUT_START[ENTRY_ID] == true {
+					INPUT_WINDOW[ENTRY_ID] += 1;
+				};
+				if INPUT_NUM[ENTRY_ID] == 3 && (FighterMotionModuleImpl::get_cancel_frame(boma,smash::phx::Hash40::new_raw(MotionModule::motion_kind(boma)),false) as f32 <= MotionModule::frame(boma) || MotionModule::frame(boma) < 4.0) && !AttackModule::is_attack(fighter.module_accessor, 0, false) && StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR{
+					if is_attack_btn(boma) {
+						INPUT_WINDOW[ENTRY_ID] = 0;
+						INPUT_NUM[ENTRY_ID] += 1;
+						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_SPECIAL_HI, true);
+						//println!("Input 4!");
+					};
+				};
+				if ACTIVATE_MOTION_CHANGE[ENTRY_ID] == true {
+					MotionModule::change_motion_inherit_frame(boma, smash::phx::Hash40::new("special_input"), 0.0, 1.0, 0.0, false, false);
+					ACTIVATE_MOTION_CHANGE[ENTRY_ID] = false;
+				};
+				if INPUT_NUM[ENTRY_ID] == 4 && status_kind != *FIGHTER_STATUS_KIND_SPECIAL_HI {
+					ACTIVATE_MOTION_CHANGE[ENTRY_ID] = true;
+					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_SPECIAL_HI, true);
+					println!("Dancing Edge!");
+				};
+				if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_HI {
+					INPUT_NUM[ENTRY_ID] = 0;
+					INPUT_START[ENTRY_ID] = false;
+					INPUT_WINDOW[ENTRY_ID] = 0;
+				};
+				if  (StatusModule::situation_kind(boma) == *SITUATION_KIND_GROUND || StatusModule::is_situation_changed(boma)) && MotionModule::motion_kind(boma) == hash40("special_input"){
+					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_LANDING_FALL_SPECIAL, true);
+				};
+				if StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR && MotionModule::motion_kind(boma) == hash40("special_input") && MotionModule::frame(boma) >= 45.0 {
+					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL_SPECIAL, true);
+					macros::SET_SPEED_EX(fighter, 0.0, 0.0, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+				};
+				if MotionModule::motion_kind(boma) == hash40("special_input") {
+					StatusModule::set_keep_situation_air(boma, true);
+				};
+			};*/
 			//Sora
 			if fighter_kind == *FIGHTER_KIND_TRAIL {
 				if true{
@@ -778,7 +1059,7 @@ pub fn char_input(fighter : &mut L2CFighterCommon) {
 				};
 			};
 			//Richter
-			if fighter_kind == *FIGHTER_KIND_RICHTER {
+			/*if fighter_kind == *FIGHTER_KIND_RICHTER {
 				if true{
 					if INPUT_NUM[ENTRY_ID] == 0 && STICK_NUM[ENTRY_ID] == 2 {
 						INPUT_WINDOW[ENTRY_ID] = 0;
@@ -833,7 +1114,7 @@ pub fn char_input(fighter : &mut L2CFighterCommon) {
 				if StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR && MotionModule::motion_kind(boma) == hash40("attack_dash") && MotionModule::frame(boma) > 30.0 {
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL_SPECIAL, true);
 				};
-			};*/
+			}; */
 			//Kirby
 			/*if fighter_kind == *FIGHTER_KIND_KIRBY {
 				if true{
@@ -895,6 +1176,52 @@ pub fn char_input(fighter : &mut L2CFighterCommon) {
 				};
 				if StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR && MotionModule::motion_kind(boma) == hash40("attack_dash") && MotionModule::frame(boma) > 37.0 {
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL_SPECIAL, true);
+				};
+			};*/
+			//Ics
+			/*if fighter_kind == *FIGHTER_KIND_POPO {
+				if true {
+					if INPUT_NUM[ENTRY_ID] == 0 && STICK_NUM[ENTRY_ID] == 2 {
+						INPUT_WINDOW[ENTRY_ID] = 0;
+						INPUT_START[ENTRY_ID] = true;
+						INPUT_NUM[ENTRY_ID] += 1;
+						//println!("Input 1!");
+					};
+					if INPUT_NUM[ENTRY_ID] == 1 && STICK_NUM[ENTRY_ID] == 3{
+						INPUT_NUM[ENTRY_ID] += 1;
+						//println!("Input 2!");
+					};
+					if INPUT_NUM[ENTRY_ID] == 2 && STICK_NUM[ENTRY_ID] == 6 {
+						INPUT_NUM[ENTRY_ID] += 1;
+						//println!("Input 3!");
+					};
+					if INPUT_WINDOW[ENTRY_ID] > INPUT_MAX {
+						INPUT_NUM[ENTRY_ID] = 0;
+						INPUT_START[ENTRY_ID] = false;
+						INPUT_WINDOW[ENTRY_ID] = 0;
+						//println!("Input missed!");
+					}; 
+				};
+				if INPUT_START[ENTRY_ID] == true {
+					INPUT_WINDOW[ENTRY_ID] += 1;
+				};
+				if INPUT_NUM[ENTRY_ID] == 3 && (FighterMotionModuleImpl::get_cancel_frame(boma,smash::phx::Hash40::new_raw(MotionModule::motion_kind(boma)),false) as f32 <= MotionModule::frame(boma) || MotionModule::frame(boma) < 4.0) && !AttackModule::is_attack(fighter.module_accessor, 0, false) {
+					if is_attack_btn(boma) {
+						INPUT_WINDOW[ENTRY_ID] = 0;
+						INPUT_NUM[ENTRY_ID] += 1;
+						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_ESCAPE, true);
+						//println!("Input 4!");
+					};
+				};
+				if INPUT_NUM[ENTRY_ID] == 4 && status_kind != *FIGHTER_STATUS_KIND_ESCAPE {
+					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_ESCAPE, true);
+					println!("Dancing Edge!");
+					MARTH_IS_COMMAND[ENTRY_ID] = true;
+				};
+				if status_kind == *FIGHTER_STATUS_KIND_ESCAPE {
+					INPUT_NUM[ENTRY_ID] = 0;
+					INPUT_START[ENTRY_ID] = false;
+					INPUT_WINDOW[ENTRY_ID] = 0;
 				};
 			};*/
 			//Incineroar
