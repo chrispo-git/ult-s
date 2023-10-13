@@ -25,7 +25,7 @@ pub fn is_on_ryujinx() -> bool {
     unsafe {
         // Ryujinx skip based on text addr
         let text_addr = skyline::hooks::getRegionAddress(skyline::hooks::Region::Text) as u64;
-        if text_addr == 0x8004000 {
+        if text_addr == 0x8504000 || text_addr == 0x80004000 {
             println!("we are on Ryujinx");
             return true;
         } else {
