@@ -55,7 +55,7 @@ unsafe fn snake_dash_attack_throw(fighter: &mut L2CAgentBase) {
 		}
 }
 //first hit
-#[acmd_script( agent = "snake", script = "game_attacks4", category = ACMD_GAME )]
+/* #[acmd_script( agent = "snake", script = "game_attacks4", category = ACMD_GAME )]
 unsafe fn snake_side_smash_game(fighter : &mut L2CAgentBase) {
     let entry_id = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
     frame(fighter.lua_state_agent, 4.0);
@@ -305,7 +305,7 @@ unsafe fn snake_side_smash_3_eff(fighter : &mut L2CAgentBase) {
         macros::EFFECT_OFF_KIND(fighter, Hash40::new("sys_killsword_light1"), false, true);
         macros::EFFECT_OFF_KIND(fighter, Hash40::new("sys_killsword_light2"), false, true);
     }
-}
+}*/
 
 #[status_script(agent = "snake", status = FIGHTER_STATUS_KIND_SPECIAL_S, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
 unsafe fn snake_side_special_status_main(fighter: &mut L2CFighterCommon) -> L2CValue {
@@ -640,7 +640,7 @@ fn snake_frame(fighter: &mut L2CFighterCommon) {
 }
 
 
-#[status_script(agent = "snake", status = FIGHTER_STATUS_KIND_ATTACK_S4, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
+/*#[status_script(agent = "snake", status = FIGHTER_STATUS_KIND_ATTACK_S4, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
 unsafe fn snake_side_smash_status_main(fighter: &mut L2CFighterCommon) -> L2CValue {
     ControlModule::reset_trigger(fighter.module_accessor);
     original!(fighter)
@@ -652,7 +652,7 @@ unsafe fn snake_side_smash_status_end(fighter: &mut L2CFighterCommon) -> L2CValu
     SNAKE_FLAG_ATTACK_S4_COMBO_IS_BUFFERED[entry_id] = false;
     SNAKE_INT_ATTACK_S4_COMBO_COUNT[entry_id] = 0;
     original!(fighter)
-}
+}*/
 
 ////fixed unwanted buffered throws and walking
 #[status_script(agent = "snake", status = FIGHTER_STATUS_KIND_CATCH_PULL, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
@@ -1122,7 +1122,7 @@ pub fn install() {
 	smashline::install_acmd_scripts!(
 		snake_dash_attack_throw,
 
-		snake_side_smash_game,
+		/*snake_side_smash_game,
         snake_side_smash_expr,
         snake_side_smash_snd,
         snake_side_smash_eff,
@@ -1137,7 +1137,7 @@ pub fn install() {
         snake_side_smash_3_game,
         snake_side_smash_3_expr,
         snake_side_smash_3_snd,
-        snake_side_smash_3_eff,
+        snake_side_smash_3_eff,*/
 
         snake_side_special_game,
         snake_side_special_air_game,
