@@ -1104,8 +1104,8 @@ unsafe fn snake_down_taunt_end_status_end(fighter: &mut L2CFighterCommon) -> L2C
 
 pub fn install() {
     smashline::install_status_scripts!(
-        snake_side_smash_status_main,
-        snake_side_smash_status_end,
+        /*snake_side_smash_status_main,
+        snake_side_smash_status_end,*/
         snake_side_special_status_main,
         snake_grab_pull_status_main,
         snake_grab_dash_pull_status_main,
