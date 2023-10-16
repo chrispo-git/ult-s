@@ -366,7 +366,7 @@ unsafe fn ganon_nair(fighter: &mut L2CAgentBase) {
 	low_priority)]
 unsafe fn ganon_fair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
-		frame(fighter.lua_state_agent, 10.0);
+		frame(fighter.lua_state_agent, 11.0);
 		if macros::is_excute(fighter) {
 			WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
