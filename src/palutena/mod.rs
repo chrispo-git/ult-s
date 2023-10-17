@@ -121,6 +121,8 @@ unsafe fn palu_nair(fighter: &mut L2CAgentBase) {
 			macros::ATTACK(fighter, /*ID*/ 3, /*Part*/ 0, /*Bone*/ Hash40::new("stick"), /*Damage*/ 1.2, /*Angle*/ 100, /*KBG*/ 100, /*FKB*/ 65, /*BKB*/ 0, /*Size*/ 4.6, /*X*/ 0.0, /*Y*/ -5.4, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.55, /*SDI*/ 0.3, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_THRU, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 1, /*Trip*/ 0.0, /*Rehit*/ 4, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_G, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_rush"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_MAGIC, /*Type*/ *ATTACK_REGION_MAGIC);
 			AttackModule::set_add_reaction_frame(fighter.module_accessor, 0, -3.0, false);
 			AttackModule::set_add_reaction_frame(fighter.module_accessor, 1, -3.0, false);
+			AttackModule::set_add_reaction_frame(fighter.module_accessor, 2, -3.0, false);
+			AttackModule::set_add_reaction_frame(fighter.module_accessor, 3, -3.0, false);
 		}
 		frame(fighter.lua_state_agent, 23.0);
 		if macros::is_excute(fighter) {
