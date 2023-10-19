@@ -93,7 +93,7 @@ if os.path.exists(r'target'):
                 print("Error! No romfs folder! Please check your install")
 
             #Version Text
-            f = open(r'releases/ultimate/mods/Ultimate S Arcropolis (plugin and common files only)/version.txt',"w")
+            f = open(r'releases/ultimate/mods/Ultimate S Arcropolis/version.txt',"w")
             f.write(f"v.{inputs}")
             f.close()
 
