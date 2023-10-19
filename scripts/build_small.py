@@ -1,6 +1,8 @@
 import os
 import shutil
 from zipfile import ZipFile
+import sys
+
 
 def copytree(src, dst, symlinks=False, ignore=None):
     for item in os.listdir(src):
@@ -80,6 +82,8 @@ if os.path.exists(r'target'):
                 print("Copying from romfs finished, now zipping")
             else:
                 print("Error! No romfs folder! Please check your install")
+            
+
             if os.path.exists(r'releases/Ultimate S Arcropolis (plugin and common files only).zip'):
                 os.remove(r'releases/Ultimate S Arcropolis (plugin and common files only).zip')
             file_paths = get_all_file_paths(new)

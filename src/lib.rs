@@ -94,7 +94,20 @@ unsafe fn run_scene_update(_: &skyline::hooks::InlineCtx) {
 fn change_version_string_hook(arg: u64, string: *const c_char) {
 	let original_str = unsafe { skyline::from_c_str(string) };
 	if original_str.contains("Ver.") {
-		let version_str = format!("{} / Ultimate S enabled\0", original_str);
+        let s_ver = match std::fs::read_to_string("sd:/ultimate/mods/Ultimate S Arcropolis/version.txt") {
+            Ok(version_value) => version_value.trim().to_string(),
+            Err(_) => {
+                #[cfg(feature = "main_nro")]
+                if !is_on_ryujinx() {
+                    skyline_web::dialog_ok::DialogOk::ok(
+                        "Ultimate S Version unknown!",
+                    );
+                }
+
+                String::from("UNKNOWN")
+            }
+        };
+		let version_str = format!("{} / Ultimate S {}\0", original_str, s_ver);
 		call_original!(arg, skyline::c_str(&version_str))
 	} else {
 		call_original!(arg, string)
