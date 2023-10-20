@@ -159,7 +159,7 @@ unsafe fn gunner_mag(fighter: &mut L2CAgentBase) {
 		}
 }		
 	
-#[acmd_script( agent = "miigunner", script = "game_attacklw3", category = ACMD_GAME, low_priority )]
+/*#[acmd_script( agent = "miigunner", script = "game_attacklw3", category = ACMD_GAME, low_priority )]
 unsafe fn gunner_dtilt(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 8.0);
     if macros::is_excute(fighter) {
@@ -171,7 +171,8 @@ unsafe fn gunner_dtilt(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         AttackModule::clear_all(fighter.module_accessor);
     }
-}
+}*/
+
 #[acmd_script( agent = "miigunner", script = "game_attacks4", category = ACMD_GAME, low_priority )]
 unsafe fn gunner_fsmash(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 6.0);
@@ -292,12 +293,51 @@ unsafe fn gunner_dsmash(fighter: &mut L2CAgentBase) {
     }
     frame(fighter.lua_state_agent, 24.0);
     if macros::is_excute(fighter) {
-        macros::ATTACK(fighter, 0, 0, Hash40::new("top"), 15.0, 40, 65, 0, 65, 4.5, 0.0, 5.5, -17.0, Some(0.0), Some(6.0), Some(-10.0), 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_B, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_fire"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_BOMB);
+        macros::ATTACK(fighter, 0, 0, Hash40::new("top"), 13.0, 40, 65, 0, 65, 4.5, 0.0, 5.5, -17.0, Some(0.0), Some(6.0), Some(-10.0), 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_B, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_fire"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_BOMB);
         AttackModule::set_attack_height_all(fighter.module_accessor, AttackHeight(*ATTACK_HEIGHT_LOW), false);
     }
     wait(fighter.lua_state_agent, 3.0);
     if macros::is_excute(fighter) {
         AttackModule::clear_all(fighter.module_accessor);
+    }
+}
+
+#[acmd_script( agent = "miigunner", script = "sound_attacklw4", category = ACMD_SOUND, low_priority )]
+unsafe fn gunner_dsmash_sound(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 7.0);
+    if macros::is_excute(fighter) {
+        macros::STOP_SE(fighter, Hash40::new("se_common_smash_start"));
+    }
+    wait(fighter.lua_state_agent, 2.0);
+    if macros::is_excute(fighter) {
+        macros::PLAY_SE(fighter, Hash40::new("se_miigunner_smash_l01"));
+        macros::PLAY_SEQUENCE(fighter, Hash40::new("seq_miigunner_rnd_attack03"));
+    }
+    wait(fighter.lua_state_agent, 13.0);
+    if macros::is_excute(fighter) {
+        macros::PLAY_SE(fighter, Hash40::new("se_miigunner_smash_l02"));
+    }
+}
+
+#[acmd_script( agent = "miigunner", script = "effect_attacklw4", category = ACMD_EFFECT, low_priority )]
+unsafe fn gunner_dsmash_effect(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 2.0);
+    if macros::is_excute(fighter) {
+        macros::EFFECT(fighter, Hash40::new("sys_smash_flash"), Hash40::new("haver"), 0, 5, 4, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, true);
+    }
+    frame(fighter.lua_state_agent, 9.0);
+    if macros::is_excute(fighter) {
+        macros::EFFECT(fighter, Hash40::new("miigunner_atk_shot5"), Hash40::new("armr"), 0, 0, 0, 0, 90, 0, 1, 0, 0, 0, 0, 0, 0, true);
+        macros::FOOT_EFFECT(fighter, Hash40::new("sys_run_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
+    }
+    frame(fighter.lua_state_agent, 22.0);
+    if macros::is_excute(fighter) {
+        macros::EFFECT(fighter, Hash40::new("miigunner_atk_shot5"), Hash40::new("armr"), 0, 0, 0, 0, 90, 0, 1.3, 0, 0, 0, 0, 0, 0, true);
+        macros::LAST_EFFECT_SET_RATE(fighter, 1.2);
+    }
+    frame(fighter.lua_state_agent, 23.0);
+    if macros::is_excute(fighter) {
+        macros::LANDING_EFFECT(fighter, Hash40::new("sys_dash_smoke"), Hash40::new("top"), 3, 0, 0, 0, 180, 0, 0.8, 0, 0, 0, 0, 0, 0, false);
     }
 }
 
@@ -373,7 +413,7 @@ unsafe fn gunner_fair(fighter: &mut L2CAgentBase) {
     }
     frame(fighter.lua_state_agent, 1.0);
     macros::FT_MOTION_RATE(fighter, 1.0);
-    frame(fighter.lua_state_agent, 9.0);
+    frame(fighter.lua_state_agent, 6.0);
     macros::FT_MOTION_RATE(fighter, 1.5);
     frame(fighter.lua_state_agent, 10.0);
     if macros::is_excute(fighter) {
@@ -436,6 +476,7 @@ unsafe fn gunner_dair(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
     }
+    frame(fighter.lua_state_agent, 1.0);
     macros::FT_MOTION_RATE(fighter, 0.8);
     frame(fighter.lua_state_agent, 20.0);
     macros::FT_MOTION_RATE(fighter, 1.0);
@@ -454,7 +495,7 @@ unsafe fn gunner_dair(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         AttackModule::clear_all(fighter.module_accessor);
     }
-    frame(fighter.lua_state_agent, 48.0);
+    frame(fighter.lua_state_agent, 36.0);
     if macros::is_excute(fighter) {
         WorkModule::off_flag(fighter.module_accessor, *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
     }
@@ -463,7 +504,7 @@ unsafe fn gunner_dair(fighter: &mut L2CAgentBase) {
 #[acmd_script( agent = "miigunner_rapidshot_bullet", script = "game_flythrowhi", category = ACMD_GAME, low_priority )]
 unsafe fn gunner_uthrow_laser1(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
-        macros::ATTACK(fighter, 0, 0, Hash40::new("top"), 5.0, 90, 150, 0, 40, 5.6, 0.0, 0.0, 0.8, Some(0.0), Some(0.0), Some(10.0), 5.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_SPEED, false, 0, 0.0, 0, true, true, false, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_MIIGUNNER_BLASTER, *ATTACK_REGION_ENERGY);
+        macros::ATTACK(fighter, 0, 0, Hash40::new("top"), 5.0, 90, 165, 0, 40, 5.6, 0.0, 0.0, 0.8, Some(0.0), Some(0.0), Some(10.0), 2.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_SPEED, false, 0, 0.0, 0, true, true, false, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_MIIGUNNER_BLASTER, *ATTACK_REGION_ENERGY);
     }
     wait(fighter.lua_state_agent, 2.0);
     if macros::is_excute(fighter) {
@@ -471,16 +512,6 @@ unsafe fn gunner_uthrow_laser1(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script( agent = "miigunner_rapidshot_bullet", script = "game_flythrowhi2", category = ACMD_GAME, low_priority )]
-unsafe fn gunner_uthrow_laser2(fighter: &mut L2CAgentBase) {
-    if macros::is_excute(fighter) {
-        macros::ATTACK(fighter, 0, 0, Hash40::new("top"), 5.0, 90, 0, 0, 0, 5.6, 0.0, 0.0, 0.8, Some(0.0), Some(0.0), Some(10.0), 0.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_SPEED, false, 0, 0.0, 0, true, true, false, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_MIIGUNNER_BLASTER, *ATTACK_REGION_ENERGY);
-    }
-    wait(fighter.lua_state_agent, 2.0);
-    if macros::is_excute(fighter) {
-        macros::ATK_POWER(fighter, 0, 3);
-    }
-}
 
 #[fighter_frame( agent = FIGHTER_KIND_MIIGUNNER )]
 fn gunner_frame(fighter: &mut L2CFighterCommon) {
@@ -526,6 +557,21 @@ fn gunner_frame(fighter: &mut L2CFighterCommon) {
             };
             WorkModule::set_int(boma, WorkModule::get_int(boma,*FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT_MAX), *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT);
         };
+        /*if [hash40("attack_s3_s")].contains(&motion_kind) && (AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_HIT) || AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_SHIELD)){
+            if (ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_N) != 0{ 
+                StatusModule::change_status_request_from_script(boma, *FIGHTER_MIIGUNNER_STATUS_KIND_SPECIAL_N1_FIRE, true);
+            };
+        };
+        if [hash40("attack_s3_s")].contains(&motion_kind) && (AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_HIT) || AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_SHIELD)){
+            if (ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_N) != 0{ 
+                StatusModule::change_status_request_from_script(boma, *FIGHTER_MIIGUNNER_STATUS_KIND_SPECIAL_N3_END, true);
+            };
+        };
+        if [hash40("attack_s3_s")].contains(&motion_kind) && (AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_HIT) || AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_SHIELD)){
+            if (ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_DASH) != 0{ 
+                StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_CATCH_DASH, true);
+            };
+        };*/
     }
 }
 	
@@ -552,14 +598,13 @@ pub fn install() {
             gunner_fair,
 		    gunner_fair_bullet,
 		    
-            gunner_dtilt,
+            /*gunner_dtilt,*/
 		    
-            gunner_dsmash,
+            gunner_dsmash, gunner_dsmash_sound, gunner_dsmash_effect,
             gunner_fsmash,
             gunner_usmash,
 
-            gunner_uthrow_laser1,
-            gunner_uthrow_laser2
+            gunner_uthrow_laser1
     );
     smashline::install_agent_frames!(gunner_frame);
 }
