@@ -18,4 +18,15 @@
     <hash40 index="2">dummy</hash40>
     <hash40 index="3">dummy</hash40>
   </list>
+  <list hash="param_tornado">
+    <struct index="0">
+      <int hash="life">50</int>
+      <float hash="speed_x">1.6</float>
+      <float hash="limit_speed_x">2</float>
+      <int hash="is_penetration">0</int>
+    </struct>
+    <hash40 index="1">dummy</hash40>
+    <hash40 index="2">dummy</hash40>
+    <hash40 index="3">dummy</hash40>
+  </list>
 </struct>
