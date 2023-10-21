@@ -49,30 +49,93 @@ unsafe fn sword_grab(fighter: &mut L2CAgentBase) {
 		}
 }		
 #[acmd_script(
-    agent = "miiswordsman_lightshuriken",
-    scripts =  ["game_specialn2", "game_specialairn2"],
+    agent = "miiswordsman",
+    scripts =  ["game_specialn2"],
     category = ACMD_GAME,
 	low_priority)]
-unsafe fn sword_neutralb(agent: &mut L2CAgentBase) {
-    frame(agent.lua_state_agent, 13.0);
+unsafe fn sword_neutralb_2(agent: &mut L2CAgentBase) {
+    frame(agent.lua_state_agent, 12.0);
     if macros::is_excute(agent) {
-        ArticleModule::generate_article(agent.module_accessor, *FIGHTER_MIISWORDSMAN_GENERATE_ARTICLE_LIGHTSHURIKEN, false, -1);
-        ArticleModule::shoot(agent.module_accessor, *FIGHTER_MIISWORDSMAN_GENERATE_ARTICLE_LIGHTSHURIKEN, smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL), false);
+    	macros::ATTACK(agent, 0, 0, Hash40::new("top"), 14.0, 361, 100, 0, 30, 8.5, 0.0, 6.5, 14.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, -6.5, 0.0, 0, true, false, false, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_elec"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_ELEC, *ATTACK_REGION_ENERGY);
     }
+	frame(agent.lua_state_agent, 17.0);
+	if macros::is_excute(agent) {
+		AttackModule::clear_all(agent.module_accessor);
+	}
 }	
 #[acmd_script(
-    agent = "miiswordsman_lightshuriken",
-    script =  "game_fly",
+    agent = "miiswordsman",
+    scripts =  ["game_specialairn2"],
     category = ACMD_GAME,
 	low_priority)]
-unsafe fn sword_stunedge(fighter: &mut L2CAgentBase) {
-    let lua_state = fighter.lua_state_agent;
-		wait(fighter.lua_state_agent, 1.0);
-		if macros::is_excute(fighter) {
-			macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 2.5, /*Angle*/ 361, /*KBG*/ 45, /*FKB*/ 0, /*BKB*/ 30, /*Size*/ 2.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ Some(0.0), /*Y2*/ Some(0.0), /*Z2*/ Some(-3.5), /*Hitlag*/ 1.1, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_SPEED, /*SetWeight*/ false, /*ShieldDamage*/ -1, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ true, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_elec"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_FIRE, /*Type*/ *ATTACK_REGION_OBJECT);
-			AttackModule::enable_safe_pos(fighter.module_accessor);
-		}
+unsafe fn sword_air_neutralb_2(agent: &mut L2CAgentBase) {
+    frame(agent.lua_state_agent, 12.0);
+    if macros::is_excute(agent) {
+    	macros::ATTACK(agent, 0, 0, Hash40::new("top"), 14.0, 361, 100, 0, 30, 8.5, 0.0, 6.5, 14.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, -6.5, 0.0, 0, true, false, false, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_elec"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_ELEC, *ATTACK_REGION_ENERGY);
+    }
+	frame(agent.lua_state_agent, 17.0);
+	if macros::is_excute(agent) {
+		AttackModule::clear_all(agent.module_accessor);
+	}
 }	
+#[acmd_script(
+    agent = "miiswordsman",
+    scripts =  ["effect_specialn2", "effect_specialairn2"],
+    category = ACMD_EFFECT,
+	low_priority)]
+unsafe fn sword_neutralb_2_eff(agent: &mut L2CAgentBase) {
+    frame(agent.lua_state_agent, 11.0);
+    if macros::is_excute(agent) {
+		macros::EFFECT(agent, Hash40::new("sys_bomb_a"), Hash40::new("top"), 0.0, 6.5, 14.0, 0, 0, 0, 0.7, 0, 0, 0, 0, 0, 0, true);
+		macros::LAST_EFFECT_SET_COLOR(agent, 0.15, 0.55, 10.0);
+		macros::EFFECT(agent, Hash40::new("sys_damage_elec"), Hash40::new("top"), 0.0, 6.5, 14.0, 0, 0, 0, 1.5, 0, 0, 0, 0, 0, 0, true);
+    }
+    frame(agent.lua_state_agent, 12.0);
+    if macros::is_excute(agent) {
+		macros::QUAKE(agent, *CAMERA_QUAKE_KIND_M);
+		macros::EFFECT(agent, Hash40::new("sys_damage_elec"), Hash40::new("top"), 0.0, 5.5, 15.0, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, true);
+		macros::EFFECT(agent, Hash40::new("sys_damage_elec"), Hash40::new("top"), 0.0, 9.5, 14.0, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, true);
+    }
+    frame(agent.lua_state_agent, 15.0);
+    if macros::is_excute(agent) && !AttackModule::is_infliction_status(agent.module_accessor, *COLLISION_KIND_MASK_ALL){
+		macros::EFFECT(agent, Hash40::new("sys_damage_elec"), Hash40::new("top"), 0.0, 5.5, 13.5, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, true);
+		macros::EFFECT(agent, Hash40::new("sys_damage_elec"), Hash40::new("top"), 0.0, 9.5, 14.0, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, true);
+    }
+    frame(agent.lua_state_agent, 16.0);
+    if macros::is_excute(agent) && !AttackModule::is_infliction_status(agent.module_accessor, *COLLISION_KIND_MASK_ALL){
+		macros::EFFECT(agent, Hash40::new("sys_damage_elec"), Hash40::new("top"), 0.0, 7.5, 15.0, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, true);
+		macros::EFFECT(agent, Hash40::new("sys_damage_elec"), Hash40::new("top"), 0.0, 3.5, 16.0, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, true);
+    }
+    frame(agent.lua_state_agent, 17.0);
+    if macros::is_excute(agent) && !AttackModule::is_infliction_status(agent.module_accessor, *COLLISION_KIND_MASK_ALL){
+		macros::EFFECT(agent, Hash40::new("sys_damage_elec"), Hash40::new("top"), 0.0, 5.5, 10.5, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, true);
+		macros::EFFECT(agent, Hash40::new("sys_damage_elec"), Hash40::new("top"), 0.0, 7.5, 12.0, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, true);
+    }
+    frame(agent.lua_state_agent, 19.0);
+    if macros::is_excute(agent) && !AttackModule::is_infliction_status(agent.module_accessor, *COLLISION_KIND_MASK_ALL){
+		macros::EFFECT(agent, Hash40::new("sys_damage_elec"), Hash40::new("top"), 0.0, 5.5, 9.5, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, true);
+		macros::EFFECT(agent, Hash40::new("sys_damage_elec"), Hash40::new("top"), 0.0, 7.5, 15.0, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, true);
+    }
+    frame(agent.lua_state_agent, 20.0);
+    if macros::is_excute(agent) {
+		macros::EFFECT(agent, Hash40::new("sys_damage_elec"), Hash40::new("top"), 0.0, 6.5, 14.0, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, true);
+		macros::EFFECT_OFF_KIND(agent, Hash40::new("sys_bomb_a"), false, true);
+    }
+}
+#[acmd_script(
+    agent = "miiswordsman",
+    scripts =  ["sound_specialn2", "sound_specialairn2"],
+    category = ACMD_SOUND,
+	low_priority)]
+unsafe fn sword_neutralb_2_snd(agent: &mut L2CAgentBase) {
+    frame(agent.lua_state_agent, 9.0);
+    if macros::is_excute(agent) {
+		macros::PLAY_SE(agent, Hash40::new("se_common_bomb_s"));
+		macros::PLAY_SE(agent, Hash40::new("se_common_electric_hit_ll"));
+		macros::PLAY_SE(agent, Hash40::new("se_common_electric_fire_s"));
+		macros::PLAY_SEQUENCE(agent, Hash40::new("seq_miiswordsman_rnd_attack03"));
+    }
+}
 #[acmd_script(
     agent = "miiswordsman_tornadoshot",
     script =  "game_fly",
@@ -1096,6 +1159,11 @@ pub fn sword(fighter : &mut L2CFighterCommon) {
 					MotionModule::set_rate(boma, 1.0);
 				};
 			};*/
+			if [hash40("special_air_n2")].contains(&MotionModule::motion_kind(boma)){
+				if frame < 20.0 {
+					KineticModule::clear_speed_all(boma);
+				};
+			};
 			if [hash40("special_air_n3_start")].contains(&MotionModule::motion_kind(boma)){
 				if frame >= 36.0 {
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL, false);
@@ -1182,7 +1250,8 @@ pub fn install() {
 
 		//Neutralb
 		sword_nado, sword_nadoshot,
-		sword_stunedge,
+		sword_neutralb_2, sword_air_neutralb_2,
+		sword_neutralb_2_eff, sword_neutralb_2_snd,
 		sword_airgrab,
 		sword_airgrab_start,
 		sword_airgrab_end,
