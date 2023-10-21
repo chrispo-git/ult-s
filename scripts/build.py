@@ -96,6 +96,7 @@ if os.path.exists(r'target'):
             f = open(r'releases/ultimate/mods/Ultimate S Arcropolis/version.txt',"w")
             f.write(f"v.{inputs}")
             f.close()
+            shutil.copy(r'readme.txt', r'releases/readme.txt')
 
             if os.path.exists(r'releases/Ultimate S Arcropolis.zip'):
                 os.remove(r'releases/Ultimate S Arcropolis.zip')
