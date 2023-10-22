@@ -55,7 +55,7 @@ pub fn projectile_invuln_master(fighter : &mut L2CFighterCommon) {
                     shield!(fighter, *MA_MSC_CMD_SHIELD_OFF, *COLLISION_KIND_REFLECTOR, 0, *FIGHTER_REFLECTOR_GROUP_HOMERUNBAT);
                 };
             };
-		}else if fighter_kind == *FIGHTER_KIND_MIIGUNNER {
+		}/*else if fighter_kind == *FIGHTER_KIND_MIIGUNNER {
 			if [hash40("attack_dash")].contains(&MotionModule::motion_kind(boma)) {
 				if MotionModule::frame(boma) >= 8.0 && MotionModule::frame(boma) < 16.0 {
 						shield!(fighter, *MA_MSC_CMD_REFLECTOR, *COLLISION_KIND_REFLECTOR, 0, hash40("handr"), /*Size*/ 7.5, /*X*/ 8.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ 8.0, /*Y2*/ 0.0, /*Z2*/ 0.0, /*Power*/ dmg_mul, /*Speed*/ speed_mul, /*Max Damage*/ reflector_max, false, /*Lifetime*/ life_mul, *FIGHTER_REFLECTOR_GROUP_HOMERUNBAT);
@@ -63,7 +63,7 @@ pub fn projectile_invuln_master(fighter : &mut L2CFighterCommon) {
 					shield!(fighter, *MA_MSC_CMD_SHIELD_OFF, *COLLISION_KIND_REFLECTOR, 0, *FIGHTER_REFLECTOR_GROUP_HOMERUNBAT);
 				};
 			};
-		} else if fighter_kind == *FIGHTER_KIND_KEN || fighter_kind == *FIGHTER_KIND_RYU {
+		}*/else if fighter_kind == *FIGHTER_KIND_KEN || fighter_kind == *FIGHTER_KIND_RYU {
 			if [hash40("special_s")].contains(&MotionModule::motion_kind(boma)){
 				shield!(fighter, *MA_MSC_CMD_REFLECTOR, *COLLISION_KIND_REFLECTOR, 0, hash40("top"), /*Size*/ 7.0, 0.0, 12.5, -11.0, 0.0, 12.5, 12.5, /*Power*/ dmg_mul, /*Speed*/ speed_mul, /*Max Damage*/ reflector_max, false, /*Lifetime*/ life_mul, *FIGHTER_REFLECTOR_GROUP_HOMERUNBAT);
 			};
