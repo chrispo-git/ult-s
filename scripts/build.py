@@ -1,6 +1,17 @@
 import os
 import shutil
+import sys
 from zipfile import ZipFile
+
+try:
+    inputs = ("".join(sys.argv)).lower()
+    inputs = inputs.replace('build.py', "")
+    inputs = inputs.replace('\n', "")
+    print(inputs)
+except IndexError:
+    raise Exception("No version inputted!")
+
+inputs = inputs.replace('build.py ', "")
 
 def copytree(src, dst, symlinks=False, ignore=None):
     for item in os.listdir(src):
@@ -80,6 +91,13 @@ if os.path.exists(r'target'):
                 print("Copying from romfs finished, now zipping")
             else:
                 print("Error! No romfs folder! Please check your install")
+
+            #Version Text
+            f = open(r'releases/ultimate/mods/Ultimate S Arcropolis/version.txt',"w")
+            f.write(f"v.{inputs}")
+            f.close()
+            shutil.copy(r'readme.txt', r'releases/readme.txt')
+
             if os.path.exists(r'releases/Ultimate S Arcropolis.zip'):
                 os.remove(r'releases/Ultimate S Arcropolis.zip')
             file_paths = get_all_file_paths(new)
