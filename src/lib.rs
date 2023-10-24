@@ -49,7 +49,7 @@ pub fn quick_validate_install() {
     let has_smashline = Path::new("sd:/atmosphere/contents/01006a800016e000/romfs/skyline/plugins/libsmashline_hook.nro").is_file();
     let has_skyline = Path::new("sd:/atmosphere/contents/01006a800016e000/exefs/").is_dir();
 
-    if has_param_config {
+    /*if has_param_config {
         println!("libparam_config.nro is present");
     } else {
         if is_on_ryujinx() {
@@ -66,7 +66,7 @@ pub fn quick_validate_install() {
         } else {
             DialogOk::ok("libcss_slot_redirection.nro not found! This installation is incomplete. Please download all dependencies listed in the README file.");
         }
-    }
+    }*/
     if has_arcropolis {
         println!("libarcropolis.nro is present");
     } else {
