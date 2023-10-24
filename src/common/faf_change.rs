@@ -106,71 +106,12 @@ pub fn faf_change_master(fighter : &mut L2CFighterCommon) {
 			if [hash40("attack_air_hi")].contains(&motion_kind) && frame >= 32.0 {
 				CancelModule::enable_cancel(boma);
 			};
-		}else if fighter_kind == *FIGHTER_KIND_MIIGUNNER {
-			if [hash40("special_hi1"), hash40("special_air_hi1")].contains(&motion_kind){
-				if frame > 3.0 && frame < 9.0 {
-					HitModule::set_whole(boma, smash::app::HitStatus(*HIT_STATUS_XLU), 0);
-				} else {
-					HitModule::set_whole(boma, smash::app::HitStatus(*HIT_STATUS_NORMAL), 0);
-				};
-			};
-			if [hash40("special_s1"), hash40("special_air_s1")].contains(&motion_kind) && frame >= 58.0 {
-				CancelModule::enable_cancel(boma);
-			};
-			if [hash40("attack_s3")].contains(&motion_kind) && frame >= 30.0 {
-				CancelModule::enable_cancel(boma);
-			};
-			if [hash40("attack_lw3")].contains(&motion_kind) && frame >= 33.0 {
-				CancelModule::enable_cancel(boma);
-			};
-			if [hash40("attack_hi3")].contains(&motion_kind) && frame >= 30.0 {
-				CancelModule::enable_cancel(boma);
-			};
-			if [hash40("attack_s4")].contains(&motion_kind) && frame >= 73.0 {
-				CancelModule::enable_cancel(boma);
-			};
-			if [hash40("attack_hi4")].contains(&motion_kind) && frame >= 60.0 {
-				CancelModule::enable_cancel(boma);
-			};
-			if [hash40("attack_lw4")].contains(&motion_kind) && frame >= 60.0 {
-				CancelModule::enable_cancel(boma);
-			};
-			if [hash40("throw_lw")].contains(&motion_kind) && frame >= 32.0 {
-				CancelModule::enable_cancel(boma);
-			};
-			if [hash40("throw_hi")].contains(&motion_kind) && frame >= 39.0 {
-				CancelModule::enable_cancel(boma);
-			};
-			if [hash40("throw_f")].contains(&motion_kind) && frame >= 28.0 {
-				CancelModule::enable_cancel(boma);
-			};
-			if [hash40("special_n2_end")].contains(&motion_kind) && frame >= 4.0 {
-				CancelModule::enable_cancel(boma);
-			};
-			if [hash40("special_s2_end"), hash40("special_air_s2_end")].contains(&motion_kind) && frame >= 30.0 {
-				CancelModule::enable_cancel(boma);
-			};
-			if [hash40("special_lw3_end"), hash40("special_air_lw3_end")].contains(&motion_kind) && frame >= 5.0 {
-				CancelModule::enable_cancel(boma);
-			};
-			if [hash40("special_lw1_end"), hash40("special_air_lw1_end")].contains(&motion_kind) && frame >= 23.0 {
-				CancelModule::enable_cancel(boma);
-			};
-			if [hash40("special_s3_1"), hash40("special_air_s3_1")].contains(&motion_kind) {
-				let new_cancel = 43.0;
-				if frame > (cancel_frame - 2.0) &&  frame < (cancel_frame) {
-					MotionModule::set_rate(boma, 1.0/((new_cancel - cancel_frame)+1.0)); // Sets the motion rate to add a set number of frames of endlag on the very end of the move
-				} else if frame >= cancel_frame {
-					MotionModule::set_rate(boma, 1.0);
-				};
-			};
-			if [hash40("special_s1_start")].contains(&motion_kind) && frame >= 60.0 {
-				CancelModule::enable_cancel(boma);
-			};
-			if [hash40("special_air_s1_start")].contains(&motion_kind) && frame >= 50.0 {
-				CancelModule::enable_cancel(boma);
-			};
-			
+
+		}else if fighter_kind == *FIGHTER_KIND_MIISWORDSMAN {
+			if [hash40("special_air_hi_start")].contains(&motion_kind){
+				HitModule::set_whole(boma, smash::app::HitStatus(*HIT_STATUS_XLU), 0);
+      };
+      
 		}else if fighter_kind == *FIGHTER_KIND_KOOPAJR {
 			if [hash40("special_lw"), hash40("special_air_lw")].contains(&motion_kind) && frame >= 40.0 {
 				CancelModule::enable_cancel(boma);

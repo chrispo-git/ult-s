@@ -26,6 +26,9 @@ pub fn dacus(fighter : &mut L2CFighterCommon) {
 			*FIGHTER_KIND_FOX, *FIGHTER_KIND_ELIGHT, *FIGHTER_KIND_PITB, *FIGHTER_KIND_MARIO,
 			*FIGHTER_KIND_MARIOD, *FIGHTER_KIND_MURABITO, *FIGHTER_KIND_METAKNIGHT, *FIGHTER_KIND_JACK, *FIGHTER_KIND_SHEIK
 		];
+		let f11 = [
+			*FIGHTER_KIND_MIIGUNNER
+		];
 		let f12 = [
 			*FIGHTER_KIND_KOOPAJR, *FIGHTER_KIND_CAPTAIN, *FIGHTER_KIND_KAMUI, *FIGHTER_KIND_DIDDY, 
 			*FIGHTER_KIND_GAOGAEN, *FIGHTER_KIND_DONKEY, *FIGHTER_KIND_DUCKHUNT, *FIGHTER_KIND_MASTER, *FIGHTER_KIND_YOSHI,
@@ -43,6 +46,7 @@ pub fn dacus(fighter : &mut L2CFighterCommon) {
 				if ((f16.contains(&fighter_kind) && motion_duration(boma) <= 16) || 
 				(f14.contains(&fighter_kind) && motion_duration(boma) <= 14) || 
 				(f12.contains(&fighter_kind) && motion_duration(boma) <= 12) ||
+				(f11.contains(&fighter_kind) && motion_duration(boma) <= 11) ||
 				(f10.contains(&fighter_kind) && motion_duration(boma) <= 10) ||
 				(f6.contains(&fighter_kind) && motion_duration(boma) <= 6) ||
 				(f6.contains(&fighter_kind) == false && motion_duration(boma) <= 8)){
