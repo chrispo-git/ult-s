@@ -7,6 +7,10 @@
 #![allow(non_upper_case_globals)]
 #![allow(warnings, unused)]
 
+#[cfg(feature = "main_nro")]
+use skyline_web::dialog_ok::DialogOk;
+use std::{fs, path::Path};
+
 #[macro_use]
 extern crate modular_bitfield;
 
@@ -35,6 +39,71 @@ pub fn is_on_ryujinx() -> bool {
     }
 }
 
+#[cfg(feature = "main_nro")]
+pub fn quick_validate_install() {
+    //plugin checks
+    let has_param_config = Path::new("sd:/atmosphere/contents/01006a800016e000/romfs/skyline/plugins/libparam_config.nro").is_file();
+    let has_css_redirector = Path::new("sd:/atmosphere/contents/01006a800016e000/romfs/skyline/plugins/libcss_slot_redirection.nro").is_file();
+    let has_arcropolis = Path::new("sd:/atmosphere/contents/01006a800016e000/romfs/skyline/plugins/libarcropolis.nro").is_file();
+    let has_nro_hook = Path::new("sd:/atmosphere/contents/01006a800016e000/romfs/skyline/plugins/libnro_hook.nro").is_file();
+    let has_smashline = Path::new("sd:/atmosphere/contents/01006a800016e000/romfs/skyline/plugins/libsmashline_hook.nro").is_file();
+    let has_skyline = Path::new("sd:/atmosphere/contents/01006a800016e000/exefs/").is_dir();
+
+    if has_param_config {
+        println!("libparam_config.nro is present");
+    } else {
+        if is_on_ryujinx() {
+            println!("libparam_config.nro not found! This installation is incomplete. Please download all dependencies listed in the README file.");
+        } else {
+            DialogOk::ok("libparam_config.nro not found! This installation is incomplete. Please download all dependencies listed in the README file.");
+        }
+    }
+    if has_css_redirector {
+        println!("libcss_slot_redirection.nro is present");
+    } else {
+        if is_on_ryujinx() {
+            println!("libcss_slot_redirection.nro not found! This installation is incomplete. Please download all dependencies listed in the README file.");
+        } else {
+            DialogOk::ok("libcss_slot_redirection.nro not found! This installation is incomplete. Please download all dependencies listed in the README file.");
+        }
+    }
+    if has_arcropolis {
+        println!("libarcropolis.nro is present");
+    } else {
+        if is_on_ryujinx() {
+            println!("libarcropolis.nro not found! This installation is incomplete. Please download all dependencies listed in the README file.");
+        } else {
+            DialogOk::ok("libarcropolis.nro not found! This installation is incomplete. Please download all dependencies listed in the README file.");
+        }
+    }
+    if has_nro_hook {
+        println!("libnro_hook.nro is present");
+    } else {
+        if is_on_ryujinx() {
+            println!("libnro_hook.nro not found! This installation is incomplete. Please download all dependencies listed in the README file.");
+        } else {
+            DialogOk::ok("libnro_hook.nro not found! This installation is incomplete. Please download all dependencies listed in the README file.");
+        }
+    }
+    if has_smashline {
+        println!("libsmashline_hook.nro is present");
+    } else {
+        if is_on_ryujinx() {
+            println!("libsmashline_hook.nro not found! This installation is incomplete. Please download all dependencies listed in the README file.");
+        } else {
+            DialogOk::ok("libsmashline_hook.nro not found! This installation is incomplete. Please download all dependencies listed in the README file.");
+        }
+    }
+    if has_skyline {
+        println!("Skyline is present");
+    } else {
+        if is_on_ryujinx() {
+            println!("Skyline not found! This installation is incomplete. Please download all dependencies listed in the README file.");
+        } else {
+            DialogOk::ok("Skyline not found! This installation is incomplete. Please download all dependencies listed in the README file.");
+        }
+    }
+}
 
 extern "C" {
 	fn change_version_string(arg: u64, string: *const c_char);
@@ -376,11 +445,18 @@ std::arch::global_asm!(
 #[no_mangle]
 pub extern "C" fn main() {
 
-
-
-
-
-
+    //runs the dependencies check function
+    #[cfg(feature = "main_nro")]
+    {
+        quick_validate_install();
+    }
+    
+    //allows online play with added chars
+    unsafe { 
+        extern "C" { fn allow_ui_chara_hash_online(ui_chara_hash: u64); }
+        allow_ui_chara_hash_online(0xf1062d2e5); //rayman
+        allow_ui_chara_hash_online(0xda4cbcb12); //toad
+    }
 	
 	//Common
     if !is_on_ryujinx() {
@@ -487,7 +563,7 @@ pub extern "C" fn main() {
 	ptrainer::install();
 	purin::install();
 	
-	reflet::install();
+    reflet::install();
 	richter::install();
 	ridley::install();
 	robot::install();
