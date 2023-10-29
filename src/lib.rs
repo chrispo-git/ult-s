@@ -42,14 +42,15 @@ pub fn is_on_ryujinx() -> bool {
 #[cfg(feature = "main_nro")]
 pub fn quick_validate_install() {
     //plugin checks
-    let has_param_config = Path::new("sd:/atmosphere/contents/01006a800016e000/romfs/skyline/plugins/libparam_config.nro").is_file();
-    let has_css_redirector = Path::new("sd:/atmosphere/contents/01006a800016e000/romfs/skyline/plugins/libcss_slot_redirection.nro").is_file();
+    //let has_param_config = Path::new("sd:/atmosphere/contents/01006a800016e000/romfs/skyline/plugins/libparam_config.nro").is_file();
+    //let has_css_redirector = Path::new("sd:/atmosphere/contents/01006a800016e000/romfs/skyline/plugins/libcss_slot_redirection.nro").is_file();
+    let has_stage_config = Path::new("sd:/atmosphere/contents/01006a800016e000/romfs/skyline/plugins/libstage_config.nro").is_file();
     let has_arcropolis = Path::new("sd:/atmosphere/contents/01006a800016e000/romfs/skyline/plugins/libarcropolis.nro").is_file();
     let has_nro_hook = Path::new("sd:/atmosphere/contents/01006a800016e000/romfs/skyline/plugins/libnro_hook.nro").is_file();
     let has_smashline = Path::new("sd:/atmosphere/contents/01006a800016e000/romfs/skyline/plugins/libsmashline_hook.nro").is_file();
     let has_skyline = Path::new("sd:/atmosphere/contents/01006a800016e000/exefs/").is_dir();
 
-    if has_param_config {
+    /*if has_param_config {
         println!("libparam_config.nro is present");
     } else {
         if is_on_ryujinx() {
@@ -65,6 +66,15 @@ pub fn quick_validate_install() {
             println!("libcss_slot_redirection.nro not found! This installation is incomplete. Please download all dependencies listed in the README file.");
         } else {
             DialogOk::ok("libcss_slot_redirection.nro not found! This installation is incomplete. Please download all dependencies listed in the README file.");
+        }
+    }*/
+    if has_stage_config {
+        println!("libstage_config.nro is present");
+    } else {
+        if is_on_ryujinx() {
+            println!("libstage_config.nro not found! This installation is incomplete. Please download all dependencies listed in the README file.");
+        } else {
+            DialogOk::ok("libstage_config.nro not found! This installation is incomplete. Please download all dependencies listed in the README file.");
         }
     }
     if has_arcropolis {
