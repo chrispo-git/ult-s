@@ -1183,7 +1183,7 @@ if os.path.isdir(f'{vanilla_directory}/smashline/lua2cpp_{character}/{character}
           x = x.split(", ")
           if "THROW" in x[0]:
               throw_stats = x
-        if "macros::ATK_HIT_ABS(fighter" in line:
+        if "macros::ATK_HIT_ABS(fighter" in line and len(throw_stats) >= 7:
           x = throw_stats
           z = x[6]
           if int(x[5]) > 0:
