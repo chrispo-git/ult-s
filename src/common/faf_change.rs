@@ -192,39 +192,6 @@ pub fn faf_change_master(fighter : &mut L2CFighterCommon) {
 					MotionModule::set_rate(boma, 1.0);
 				};
 			};
-		}else if fighter_kind == *FIGHTER_KIND_SIMON {
-			if [hash40("special_hi")].contains(&motion_kind) {
-				if frame > 3.0 && frame < 15.0 {
-					HitModule::set_whole(boma, smash::app::HitStatus(*HIT_STATUS_XLU), 0);
-				} else {
-					HitModule::set_whole(boma, smash::app::HitStatus(*HIT_STATUS_NORMAL), 0);
-				};
-			};
-			if [hash40("attack_lw3")].contains(&motion_kind) {
-				let new_cancel = 50.0;
-				if frame > (cancel_frame - 2.0) &&  frame < (cancel_frame) {
-					MotionModule::set_rate(boma, 1.0/((new_cancel - cancel_frame)+1.0)); // Sets the motion rate to add a set number of frames of endlag on the very end of the move
-				} else if frame >= cancel_frame {
-					MotionModule::set_rate(boma, 1.0);
-				};
-			};
-			if [hash40("attack_lw3_2")].contains(&motion_kind) {
-				let new_cancel = 55.0;
-				if frame > (cancel_frame - 2.0) &&  frame < (cancel_frame) {
-					MotionModule::set_rate(boma, 1.0/((new_cancel - cancel_frame)+1.0)); // Sets the motion rate to add a set number of frames of endlag on the very end of the move
-				} else if frame >= cancel_frame {
-					MotionModule::set_rate(boma, 1.0);
-				};
-			};
-			if [hash40("attack_hold_end")].contains(&motion_kind) && frame >= 1.0 {
-				CancelModule::enable_cancel(boma);
-			};
-			if [hash40("throw_lw")].contains(&motion_kind) && frame >= 32.0 {
-				CancelModule::enable_cancel(boma);
-			};
-			if [hash40("attack_air_f_hi"), hash40("attack_air_f_lw"), hash40("attack_air_f")].contains(&motion_kind) && frame >= 27.0 {
-				CancelModule::enable_cancel(boma);
-			};
 		}else if fighter_kind == *FIGHTER_KIND_RICHTER {
 			if [hash40("attack_air_hi")].contains(&motion_kind) && frame >= 30.0 {
 				CancelModule::enable_cancel(boma);
