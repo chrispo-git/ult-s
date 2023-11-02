@@ -184,6 +184,7 @@ unsafe fn byleth_nair_sound(fighter: &mut L2CAgentBase) {
 		frame(fighter.lua_state_agent, 8.0);
 		if macros::is_excute(fighter) {
 			macros::PLAY_SE(fighter, Hash40::new("se_master_attackhard_h01"));
+			macros::PLAY_SEQUENCE(fighter, Hash40::new("seq_master_rnd_attack01"));
 		}
 	}	
 #[acmd_script(
@@ -231,7 +232,7 @@ unsafe fn byleth_sidebdash_snd(fighter: &mut L2CAgentBase) {
 	low_priority)]
 unsafe fn byleth_nair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
-		macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.285);
+		macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.2);
 		if macros::is_excute(fighter) {
 			ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_MASTER_GENERATE_ARTICLE_SWORD,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
 			ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_MASTER_GENERATE_ARTICLE_BOW,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
