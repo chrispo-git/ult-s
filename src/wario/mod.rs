@@ -309,6 +309,15 @@ fn wario_frame(fighter: &mut L2CFighterCommon) {
 		let situation_kind = StatusModule::situation_kind(boma);
 		let is_near_ground = GroundModule::ray_check(boma, &Vector2f{ x: PostureModule::pos_x(boma), y: PostureModule::pos_y(boma)}, &Vector2f{ x: 0.0, y: -1.0}, true);
 		println!("is near ground {}", is_near_ground);
+
+		//Why are wario's proportions so wrong in ultimate?
+		let armscale = smash::phx::Vector3f { x: 1.2, y: 1.2, z: 1.2 };
+		ModelModule::set_joint_scale(boma, Hash40::new("shoulderl"), &armscale);
+		ModelModule::set_joint_scale(boma, Hash40::new("shoulderr"), &armscale);
+		let legscale = smash::phx::Vector3f { x: 1.2, y: 1.2, z: 1.2 };
+		ModelModule::set_joint_scale(boma, Hash40::new("footl"), &legscale);
+		ModelModule::set_joint_scale(boma, Hash40::new("footr"), &legscale);
+
 		if ![*FIGHTER_STATUS_KIND_ENTRY, *FIGHTER_STATUS_KIND_WIN].contains(&status_kind) && smash::app::sv_information::is_ready_go() {
 			ArticleModule::remove_exist(boma, *FIGHTER_WARIO_GENERATE_ARTICLE_WARIOBIKE,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
 		};
