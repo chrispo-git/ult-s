@@ -6,6 +6,7 @@ pub mod singletons;
 pub mod modules;
 pub mod controls_2;
 pub use modules::*;
+use crate::util::*;
 use smash::hash40;
 
 use ext::*;
@@ -140,19 +141,10 @@ unsafe fn map_controls_hook(
                 (x, gc_x,   FullHop, Buttons::FullHop | Buttons::Jump)
                 (y, gc_y,   FullHop, Buttons::FullHop | Buttons::Jump)
         );
-        /*
         if (*mappings.add(player_idx as usize)).gc_absmash {
-            if (*out).buttons.contains(Buttons::Attack | Buttons::Special) {
-                (*out).buttons &= !(Buttons::Special | Buttons::FullHop);
-                (*out).buttons |= Buttons::Smash;
-                (*mappings.add(player_idx as usize)).is_absmash = true;
-            } else if !(*out).buttons.intersects(Buttons::Attack | Buttons::Special) {
-                (*mappings.add(player_idx as usize)).is_absmash = false;
-            } else if (*mappings.add(player_idx as usize)).is_absmash {
-                (*out).buttons &= !(Buttons::Special | Buttons::FullHop);
-            }
+            IS_AB[((*mappings.add(player_idx as usize))._34[0]) as usize] = true;
         }
-        */
+        
     } else if controller.style == ControllerStyle::LeftJoycon || controller.style == ControllerStyle::RightJoycon {
         (*out).buttons |= apply_button_mappings!(
             controller,
@@ -270,18 +262,9 @@ unsafe fn map_controls_hook(
                     (x, joy_right,  FullHop, Buttons::FullHop | Buttons::Jump)
             );
         }
-        /*
         if (*mappings.add(player_idx as usize)).joy_absmash {
-            if (*out).buttons.contains(Buttons::Attack | Buttons::Special) {
-                (*out).buttons &= !(Buttons::Special | Buttons::FullHop);
-                (*out).buttons |= Buttons::Smash;
-                (*mappings.add(player_idx as usize)).is_absmash = true;
-            } else if !(*out).buttons.intersects(Buttons::Attack | Buttons::Special) {
-                (*mappings.add(player_idx as usize)).is_absmash = false;
-            } else if (*mappings.add(player_idx as usize)).is_absmash {
-                (*out).buttons &= !(Buttons::Special | Buttons::FullHop);
-            }
-        }*/
+            IS_AB[((*mappings.add(player_idx as usize))._34[0]) as usize] = true;
+        }
     } else {
         (*out).buttons |= apply_button_mappings!(
             controller,
@@ -331,18 +314,9 @@ unsafe fn map_controls_hook(
                 (x, pro_x,      FullHop, Buttons::FullHop | Buttons::Jump)
                 (y, pro_y,      FullHop, Buttons::FullHop | Buttons::Jump)
         );
-        /*
-        if (*mappings.add(player_idx as usize)).pro_absmash {
-            if (*out).buttons.contains(Buttons::Attack | Buttons::Special) {
-                (*out).buttons &= !(Buttons::Special | Buttons::FullHop);
-                (*out).buttons |= Buttons::Smash;
-                (*mappings.add(player_idx as usize)).is_absmash = true;
-            } else if !(*out).buttons.intersects(Buttons::Attack | Buttons::Special) {
-                (*mappings.add(player_idx as usize)).is_absmash = false;
-            } else if (*mappings.add(player_idx as usize)).is_absmash {
-                (*out).buttons &= !(Buttons::Special | Buttons::FullHop);
-            }
-        }*/
+        if (*mappings.add(player_idx as usize)).pro_absmash  {
+            IS_AB[((*mappings.add(player_idx as usize))._34[0]) as usize] = true;
+        }
     }
 
     // Check if the button combos are being pressed and then force Stock Share + AttackRaw/SpecialRaw depending on input
