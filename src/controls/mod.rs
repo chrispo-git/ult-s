@@ -143,6 +143,8 @@ unsafe fn map_controls_hook(
         );
         if (*mappings.add(player_idx as usize)).gc_absmash {
             IS_AB[((*mappings.add(player_idx as usize))._34[0]) as usize] = true;
+        } else {
+            IS_AB[((*mappings.add(player_idx as usize))._34[0]) as usize] = false;
         }
         
     } else if controller.style == ControllerStyle::LeftJoycon || controller.style == ControllerStyle::RightJoycon {
@@ -264,6 +266,8 @@ unsafe fn map_controls_hook(
         }
         if (*mappings.add(player_idx as usize)).joy_absmash {
             IS_AB[((*mappings.add(player_idx as usize))._34[0]) as usize] = true;
+        } else {
+            IS_AB[((*mappings.add(player_idx as usize))._34[0]) as usize] = false;
         }
     } else {
         (*out).buttons |= apply_button_mappings!(
@@ -316,6 +320,8 @@ unsafe fn map_controls_hook(
         );
         if (*mappings.add(player_idx as usize)).pro_absmash  {
             IS_AB[((*mappings.add(player_idx as usize))._34[0]) as usize] = true;
+        } else {
+            IS_AB[((*mappings.add(player_idx as usize))._34[0]) as usize] = false;
         }
     }
 
