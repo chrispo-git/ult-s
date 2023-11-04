@@ -314,7 +314,7 @@ fn wario_frame(fighter: &mut L2CFighterCommon) {
 		let armscale = smash::phx::Vector3f { x: 1.2, y: 1.2, z: 1.2 };
 		ModelModule::set_joint_scale(boma, Hash40::new("shoulderl"), &armscale);
 		ModelModule::set_joint_scale(boma, Hash40::new("shoulderr"), &armscale);
-		let legscale = smash::phx::Vector3f { x: 1.2, y: 1.2, z: 1.2 };
+		let legscale = smash::phx::Vector3f { x: 0.95, y: 0.95, z:0.95 };
 		ModelModule::set_joint_scale(boma, Hash40::new("footl"), &legscale);
 		ModelModule::set_joint_scale(boma, Hash40::new("footr"), &legscale);
 
