@@ -49,12 +49,13 @@ Devory - Colloseum, Gamecube Stages, Ready to Fight UI
 Ginn. - Original Paper Mario Stage
 iOZ_MintyFresh - Hexagon UI
 Joben - Stage Select Screen
-LN_310 - ZSS Model
+LN_310 - ZSS Model, Rauru's Blessing
 LKE Studios - DK Utaunt animation
 LuXejin - Sonic Dtaunt animation
 MaroonRed - Mario nair sound
 Mayamia - Pause Screen UI, Loading Screen Animation
 Nozzly - CPU adjustments
+Saminate - Dr. Mario animations
 SneakyKNG - Toad Rigging
 SquidEnthusiast - Toad Render
 willy_crescent - Ganon's Tower, General Stage Help
