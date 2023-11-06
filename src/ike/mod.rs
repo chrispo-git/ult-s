@@ -301,7 +301,7 @@ unsafe fn ike_fsmash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 1.0);
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.05);
-		wait(fighter.lua_state_agent, 20.0);
+		wait(fighter.lua_state_agent, 14.0);
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 1);
 		frame(fighter.lua_state_agent, 27.0);
 		if macros::is_excute(fighter) {
