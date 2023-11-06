@@ -80,7 +80,7 @@ pub fn djc(fighter : &mut L2CFighterCommon) {
     };
 }
 
-#[fighter_frame_callback]
+#[fighter_frame_callback(main)]
 pub fn hold_buffer_killer(fighter : &mut L2CFighterCommon) {
     unsafe {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);  
@@ -115,7 +115,6 @@ pub fn hold_buffer_killer(fighter : &mut L2CFighterCommon) {
                     //ControlModule::clear_command_one(fighter.module_accessor, *FIGHTER_PAD_COMMAND_CATEGORY1, *FIGHTER_PAD_CMD_CAT1_ESCAPE_F);
                 }
         }
-
     };
 }
 
