@@ -4,6 +4,7 @@
     <struct index="0">
       <int hash="fireframe">999</int>
       <int hash="gene_interval">70</int>
+      <float hash="ptc_wide">0</float>
       <float hash="gene_angle">0</float>
       <float hash="limit_up">0</float>
       <float hash="limit_down">0</float>
