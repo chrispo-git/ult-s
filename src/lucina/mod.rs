@@ -1686,6 +1686,9 @@ unsafe fn lucina_sword_upb3(fighter: &mut L2CAgentBase) {
 			macros::ATK_SET_SHIELD_SETOFF_MUL(fighter, /*ID*/ 0, /*ShieldstunMul*/ 0.1);
 		}
 		frame(fighter.lua_state_agent, 5.0);
+		if macros::is_excute(fighter) {
+			AttackModule::clear_all(fighter.module_accessor);
+		}
 		macros::FT_MOTION_RATE(fighter, 2.0);
 		frame(fighter.lua_state_agent, 21.0);
 		macros::FT_MOTION_RATE(fighter, 1.0);
