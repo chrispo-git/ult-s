@@ -1,21 +1,10 @@
 mod status;
 mod frame;
 
-mod aerials;
-mod ground;
-mod other;
-mod specials;
-mod throws;
-mod tilts;
+mod acmd;
 
 pub fn install() {
 	frame::install();
 	status::install();
-
-	aerials::install();
-	ground::install();
-	other::install();
-	specials::install();
-	throws::install();
-	tilts::install();
+	acmd::install();
 }
