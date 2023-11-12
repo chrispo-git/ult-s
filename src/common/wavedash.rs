@@ -193,18 +193,6 @@ pub unsafe fn change_status_request_hook(boma: &mut smash::app::BattleObjectModu
 			}
 		} else if next_status == *FIGHTER_STATUS_KIND_TURN && curr_status == *FIGHTER_STATUS_KIND_LANDING{
 			return 0 as u64
-		} else if [*FIGHTER_STATUS_KIND_ATTACK_S4_START, *FIGHTER_STATUS_KIND_ATTACK_HI4_START, *FIGHTER_STATUS_KIND_ATTACK_LW4_START].contains(&next_status){
-			
-			//Kills AB Smash
-			let specials_list = [*CONTROL_PAD_BUTTON_SPECIAL_RAW, *CONTROL_PAD_BUTTON_SPECIAL_RAW2, *CONTROL_PAD_BUTTON_SPECIAL];
-			for i in specials_list {
-					if ControlModule::check_button_on(boma, i) {
-						println!("Ban AB Smash");
-						return 0 as u64
-					}
-			}
-			println!("Keep Smash");
-			original!()(boma, status_kind, arg3)
 		}
 		 else if [*FIGHTER_STATUS_KIND_ESCAPE_AIR, *FIGHTER_STATUS_KIND_ESCAPE_AIR_SLIDE, *FIGHTER_STATUS_KIND_JUMP].contains(&next_status)  {
 			let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
@@ -275,18 +263,6 @@ pub unsafe fn change_status_request_script_hook(boma: &mut smash::app::BattleObj
 			}else {
 				original!()(boma, status_kind, arg3)
 			}
-		} else if [*FIGHTER_STATUS_KIND_ATTACK_S4_START, *FIGHTER_STATUS_KIND_ATTACK_HI4_START, *FIGHTER_STATUS_KIND_ATTACK_LW4_START].contains(&next_status){
-			
-			//Kills AB Smash
-			let specials_list = [*CONTROL_PAD_BUTTON_SPECIAL_RAW, *CONTROL_PAD_BUTTON_SPECIAL_RAW2, *CONTROL_PAD_BUTTON_SPECIAL];
-			for i in specials_list {
-					if ControlModule::check_button_on(boma, i) {
-						println!("Ban AB Smash");
-						return 0 as u64
-					}
-			}
-			println!("Keep Smash");
-			original!()(boma, status_kind, arg3)
 		} else if next_status == *FIGHTER_STATUS_KIND_TURN && curr_status == *FIGHTER_STATUS_KIND_LANDING{
 			return 0 as u64
 		} else if [*FIGHTER_STATUS_KIND_ESCAPE_AIR, *FIGHTER_STATUS_KIND_ESCAPE_AIR_SLIDE].contains(&next_status) {

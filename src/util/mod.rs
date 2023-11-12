@@ -20,8 +20,6 @@ pub static mut ACCEL_X : [f32; 8] = [0.0; 8];
 pub static mut ACCEL_Y : [f32; 8] = [0.0; 8];
 static mut FULL_HOP_ENABLE_DELAY : [i32; 8] = [0; 8];
 pub static mut PREV_SCALE : [f32; 8] = [0.0; 8];
-pub static mut IS_AB : [bool; 8] = [false; 8];
-
 
 //Cstick
 pub static mut SUB_STICK: [Vector2f;9] = [Vector2f{x:0.0, y: 0.0};9];
@@ -154,19 +152,10 @@ pub unsafe fn on_flag_hook(boma: &mut smash::app::BattleObjectModuleAccessor, in
 		} else if int == *FIGHTER_STATUS_WORK_ID_FLAG_RESERVE_JUMP_MINI {
 			let ENTRY_ID =  WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 			//Removal of SH macro via hooking on_flag. FULL_HOP_ENABLE_DELAY allows fullhop button to not give shorthops. 
-			if !IS_AB[ENTRY_ID] {
-				if (ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_JUMP) || ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP_MINI)) && !(FULL_HOP_ENABLE_DELAY[ENTRY_ID] > 0) {
-					original!()(boma, int)
-				} else {
-					println!("SH height banned");
-				}
+			if (ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_JUMP) || ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP_MINI)) && !(FULL_HOP_ENABLE_DELAY[ENTRY_ID] > 0) {
+				original!()(boma, int)
 			} else {
-				if !(FULL_HOP_ENABLE_DELAY[ENTRY_ID] > 0) {
-					println!("SH Macro makes its triumphant return");
-					original!()(boma, int)
-				} else {
-					println!("SH height banned");
-				}
+				println!("SH height banned");
 			}
 		} else if int == *FIGHTER_INSTANCE_WORK_ID_FLAG_CATCHED_BUTTERFLYNET {
 				original!()(boma, int)
@@ -261,7 +250,6 @@ pub fn util_update(fighter : &mut L2CFighterCommon) {
 			HAS_ENABLE_COMBO_ON[ENTRY_ID] = false;
 			HAS_ENABLE_100_ON[ENTRY_ID] = false;
 			FULL_HOP_ENABLE_DELAY[ENTRY_ID] = 0;
-			println!("Does Entry {} have AB Smash? {}",ENTRY_ID, IS_AB[ENTRY_ID]);
 		};
 		if FULL_HOP_ENABLE_DELAY[ENTRY_ID] > 0 {
 			FULL_HOP_ENABLE_DELAY[ENTRY_ID] -= 1;
@@ -339,9 +327,9 @@ pub fn util_update(fighter : &mut L2CFighterCommon) {
 		SPEED_X[ENTRY_ID] = KineticModule::get_sum_speed_x(boma, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
 		SPEED_Y[ENTRY_ID] = KineticModule::get_sum_speed_y(boma, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
 		//println!("X Accel: {}, Y Accel: {}, X Speed: {}, Y Speed: {}", ACCEL_X[ENTRY_ID], ACCEL_Y[ENTRY_ID], SPEED_X[ENTRY_ID], SPEED_Y[ENTRY_ID]);
-		/*if ENTRY_ID == 0 {
+		if ENTRY_ID == 0 {
 			println!("Can Neutralb: {}, Can Sideb: {}, Can Upb: {}, Can Downb: {}", CAN_NEUTRALB[ENTRY_ID], CAN_SIDEB[ENTRY_ID], CAN_UPB[ENTRY_ID], CAN_DOWNB[ENTRY_ID]);
-		}*/
+		}
 		/*if ENTRY_ID < 2 {
 			println!("MOTION_DURATION {}, STATUS_DURATION {}, SPEED_X {}, SPEED_Y {}, ACCEL_X {}, ACCEL_Y {}", motion_duration(boma), status_duration(boma), get_speed_x(boma), get_speed_y(boma), get_accel_x(boma), get_accel_y(boma));
 			println!("total fighters {}, ray_check_pos {}, is_angel_plat {}, stock_count{}", total_fighters(), ray_check_pos(boma, 0.0, -10.0, false), is_angel_plat(boma), stock_count(boma));
