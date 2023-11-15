@@ -13,3 +13,25 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+pub fn install() {
+    smashline::install_acmd_scripts!(
+		seph_flare
+    );
+}
+
+#[acmd_script(
+    agent = "edge",
+    scripts =  ["game_specialairn1", "game_specialn1"],
+    category = ACMD_GAME,
+	low_priority)]
+unsafe fn seph_flare(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+		frame(fighter.lua_state_agent, 13.0);
+		if macros::is_excute(fighter) {
+			ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_EDGE_GENERATE_ARTICLE_FIRE, false, 0);
+		}
+		frame(fighter.lua_state_agent, 35.0);
+		if macros::is_excute(fighter) {
+			WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_EDGE_STATUS_SPECIAL_N_FLAG_ENABLE_FALL_SPEED);
+		}
+}		
