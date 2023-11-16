@@ -11,5 +11,6 @@ use smash::lib::{L2CValue, L2CAgent};
 use std::mem;
 use smash::app::*;
 use smash::phx::Vector3f;
-use crate::util::*;
-use super::*;
+pub fn install() {
+    
+}
