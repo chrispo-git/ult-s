@@ -42,15 +42,15 @@ pub fn is_on_ryujinx() -> bool {
 #[cfg(feature = "main_nro")]
 pub fn quick_validate_install() {
     //plugin checks
-    //let has_param_config = Path::new("sd:/atmosphere/contents/01006a800016e000/romfs/skyline/plugins/libparam_config.nro").is_file();
-    //let has_css_redirector = Path::new("sd:/atmosphere/contents/01006a800016e000/romfs/skyline/plugins/libcss_slot_redirection.nro").is_file();
+    let has_param_config = Path::new("sd:/atmosphere/contents/01006a800016e000/romfs/skyline/plugins/libparam_config.nro").is_file();
+    let has_css_redirector = Path::new("sd:/atmosphere/contents/01006a800016e000/romfs/skyline/plugins/libcss_slot_redirection.nro").is_file();
     let has_stage_config = Path::new("sd:/atmosphere/contents/01006a800016e000/romfs/skyline/plugins/libstage_config.nro").is_file();
     let has_arcropolis = Path::new("sd:/atmosphere/contents/01006a800016e000/romfs/skyline/plugins/libarcropolis.nro").is_file();
     let has_nro_hook = Path::new("sd:/atmosphere/contents/01006a800016e000/romfs/skyline/plugins/libnro_hook.nro").is_file();
     let has_smashline = Path::new("sd:/atmosphere/contents/01006a800016e000/romfs/skyline/plugins/libsmashline_hook.nro").is_file();
     let has_skyline = Path::new("sd:/atmosphere/contents/01006a800016e000/exefs/").is_dir();
 
-    /*if has_param_config {
+    if has_param_config {
         println!("libparam_config.nro is present");
     } else {
         if is_on_ryujinx() {
@@ -67,7 +67,7 @@ pub fn quick_validate_install() {
         } else {
             DialogOk::ok("libcss_slot_redirection.nro not found! This installation is incomplete. Please download all dependencies listed in the README file.");
         }
-    }*/
+    }
     if has_stage_config {
         println!("libstage_config.nro is present");
     } else {
@@ -462,11 +462,11 @@ pub extern "C" fn main() {
     }
     
     //allows online play with added chars
-    /*unsafe { 
+    unsafe { 
         extern "C" { fn allow_ui_chara_hash_online(ui_chara_hash: u64); }
         allow_ui_chara_hash_online(0xf1062d2e5); //rayman
         allow_ui_chara_hash_online(0xda4cbcb12); //toad
-    }*/
+    }
 	
 	//Common
     if !is_on_ryujinx() {
