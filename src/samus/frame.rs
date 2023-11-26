@@ -13,3 +13,30 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
+#[fighter_frame( agent = FIGHTER_KIND_SAMUS )]
+fn samus_frame(fighter: &mut L2CFighterCommon) {
+    unsafe {
+        let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
+		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
+		let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+		let motion_kind = MotionModule::motion_kind(boma);
+		let frame = MotionModule::frame(boma);
+		if [hash40("attack_lw3")].contains(&motion_kind) {
+			if check_jump(boma) && frame > 6.0 && !AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_SHIELD) && !ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_SPECIAL) && !ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_GUARD){
+				CancelModule::enable_cancel(boma);
+				NO_WAVEDASH_TIMER[ENTRY_ID] = NO_WAVEDASH_MAX;
+			};
+		};
+		if NO_WAVEDASH_TIMER[ENTRY_ID] > 0{
+			CAN_AIRDODGE[ENTRY_ID] = 1;
+			NO_WAVEDASH_TIMER[ENTRY_ID] -= 1;
+		} else {
+			CAN_AIRDODGE[ENTRY_ID] = 0;
+		};
+    }
+}
+
+pub fn install() {
+    smashline::install_agent_frames!(samus_frame);
+}

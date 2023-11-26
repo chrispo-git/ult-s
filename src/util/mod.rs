@@ -204,7 +204,7 @@ pub unsafe fn article_hook(boma: &mut smash::app::BattleObjectModuleAccessor, in
 		} else {
 			return original!()(boma, int, arg3, arg4)
 		}
-	} else if smash::app::utility::get_kind(boma) == *FIGHTER_KIND_MURABITO {
+	} else if smash::app::utility::get_kind(boma) == *FIGHTER_KIND_MURABITO && (WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) >= 120 && WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) <= 127) {
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
 		if int == *FIGHTER_MURABITO_GENERATE_ARTICLE_CLAYROCKET {
 			if ![*FIGHTER_STATUS_KIND_FINAL, *FIGHTER_MURABITO_STATUS_KIND_FINAL_END, *FIGHTER_MURABITO_STATUS_KIND_FINAL_CHEER, *FIGHTER_MURABITO_STATUS_KIND_FINAL_HAPPY, *FIGHTER_MURABITO_STATUS_KIND_FINAL_MONEY, *FIGHTER_MURABITO_STATUS_KIND_FINAL_SURPRISE].contains(&status_kind) {
@@ -275,7 +275,7 @@ pub fn util_update(fighter : &mut L2CFighterCommon) {
 			let grabber_kind = smash::app::utility::get_kind(&mut *grabber_boma);
 			let graber_entry_id = WorkModule::get_int(&mut *grabber_boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 			//Toad Specific Code. Has the opponent be made real small while in the pipe, and removes the grab model changes present in villy
-			if grabber_kind == *FIGHTER_KIND_MURABITO {
+			if grabber_kind == *FIGHTER_KIND_MURABITO && (WorkModule::get_int(&mut *grabber_boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) >= 120 && WorkModule::get_int(&mut *grabber_boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) <= 127) {
 				println!("Turning off butterfly net flag");
 				let grabber_motion = MotionModule::motion_kind(grabber_boma);
 				let grabber_frame = MotionModule::frame(grabber_boma);
