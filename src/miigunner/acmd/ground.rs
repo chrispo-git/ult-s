@@ -11,6 +11,7 @@ use smash::lib::{L2CValue, L2CAgent};
 use std::mem;
 use smash::app::*;
 use smash::phx::Vector3f;
+use smash::phx::Vector2f;
 use crate::util::*;
 use super::*;
 
@@ -186,6 +187,6 @@ pub fn install() {
     smashline::install_acmd_scripts!(
 		gunner_fsmash,
         gunner_usmash,
-        gunner_dsmash, gunner_dsmash_sound
+        gunner_dsmash, gunner_dsmash_sound, //gunner_dsmash_effect
     );
 }

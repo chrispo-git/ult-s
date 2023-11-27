@@ -13,6 +13,7 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+use super::super::*;
 
 #[acmd_script(
     agent = "murabito",
@@ -607,7 +608,7 @@ pub fn install() {
         toad_shell_burst_eff,
         toad_da, toad_da_eff, toad_da_snd,
         toad_usmash, toad_usmash_eff, toad_usmash_snd,
-        toad_usmash_coin, toad_usmash_coin_eff, toad_usmash_coin_snd,
+        toad_usmash_coin, //toad_usmash_coin_eff, //toad_usmash_coin_snd,
         toad_usmash_coin_bullet, toad_usmash_coin_bullet_eff, toad_usmash_coin_bullet_snd,
         toad_dsmash, toad_dsmash_eff, toad_dsmash_snd,
         toad_dsmash_charge, toad_dsmash_charge_eff, toad_dsmash_charge_expr,

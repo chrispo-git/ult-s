@@ -112,7 +112,7 @@ unsafe fn dpit_sideb(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     smashline::install_acmd_scripts!(
-		dpit_arrow,
+		//dpit_arrow,
         dpit_upb, dpit_upb_eff, 
         dpit_upb_ground,
         dpit_upb_start,

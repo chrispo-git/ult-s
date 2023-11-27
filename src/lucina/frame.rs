@@ -13,6 +13,7 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+use super::super::*;
 
 #[fighter_frame_callback]
 pub fn lucina(fighter : &mut L2CFighterCommon) {

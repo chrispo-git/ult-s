@@ -30,6 +30,6 @@ unsafe fn gunner_dtilt(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     smashline::install_acmd_scripts!(
-		
+		//gunner_dtilt
     );
 }

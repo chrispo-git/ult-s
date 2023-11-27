@@ -173,6 +173,7 @@ pub fn install() {
 		gunner_chargeshot,
         gunner_laser,
         gunner_nade_explode,
+        //gunner_air_s1,
         gunner_fp,
         gunner_s3,
         gunner_air_s3,

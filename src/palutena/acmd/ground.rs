@@ -126,7 +126,7 @@ unsafe fn palu_da(agent: &mut L2CAgentBase) {
 
 pub fn install() {
     smashline::install_acmd_scripts!(
-		alu_jab_100_end,
+		palu_jab_100_end,
         palu_jab_1,
         palu_da
     );

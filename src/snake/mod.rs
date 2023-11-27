@@ -1,3 +1,20 @@
+use smash::app::sv_animcmd::*;
+use smash::phx::Hash40;
+use smash::app::lua_bind::*;
+use smash::lib::lua_const::*;
+use smash::app::utility::get_kind;
+use smash::hash40;
+use smash::lua2cpp::*;
+use smashline::*;
+use smash_script::*;
+use smash::lib::{L2CValue, L2CAgent};
+use std::mem;
+use smash::app::*;
+use smash::phx::Vector3f;
+use smash::phx::Vector2f;
+use crate::util::*;
+use super::*;
+
 mod status;
 mod frame;
 mod acmd;
@@ -259,7 +276,7 @@ pub unsafe fn snake_down_taunt_wait_main_loop(fighter: &mut L2CFighterCommon) ->
 
         ////adjusts first grenade position only
         ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_SNAKE_GENERATE_ARTICLE_GRENADE, false, 0);
-        PLAY_SE(fighter, Hash40::new("se_snake_special_n01"));
+        macros::PLAY_SE(fighter, Hash40::new("se_snake_special_n01"));
         ArticleModule::have(fighter.module_accessor, *FIGHTER_SNAKE_GENERATE_ARTICLE_GRENADE, Hash40::new("havel"), ArticleOperationTarget(*ARTICLE_OPE_TARGET_LAST), 0, false);
         ArticleModule::shoot_exist(fighter.module_accessor, *FIGHTER_SNAKE_GENERATE_ARTICLE_GRENADE, ArticleOperationTarget(*ARTICLE_OPE_TARGET_LAST), false);
         // let pos_x = PostureModule::pos_x(fighter.module_accessor);
@@ -281,7 +298,7 @@ pub unsafe fn snake_down_taunt_wait_main_loop(fighter: &mut L2CFighterCommon) ->
         // LinkModule::set_model_constraint_target_joint(article_boma, Hash40::new("kneer"));
     }else {
         let velocity_x :f32 = PostureModule::lr(fighter.module_accessor) * ControlModule::get_stick_x(fighter.module_accessor);
-        SET_SPEED_EX(fighter, velocity_x*0.6, 0, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+        macros::SET_SPEED_EX(fighter, velocity_x*0.6, 0, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
     }
     return false.into()
 }

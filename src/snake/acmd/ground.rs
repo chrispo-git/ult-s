@@ -279,5 +279,21 @@ unsafe fn snake_side_smash_3_eff(fighter : &mut L2CAgentBase) {
 pub fn install() {
     smashline::install_acmd_scripts!(
 		snake_dash_attack_throw
+        /*snake_side_smash_game,
+        snake_side_smash_expr,
+        snake_side_smash_snd,
+        snake_side_smash_eff,
+
+        snake_side_smash_charge_eff,
+
+        snake_side_smash_2_game,
+        snake_side_smash_2_expr,
+        snake_side_smash_2_snd,
+        snake_side_smash_2_eff,
+
+        snake_side_smash_3_game,
+        snake_side_smash_3_expr,
+        snake_side_smash_3_snd,
+        snake_side_smash_3_eff,*/
     );
 }
