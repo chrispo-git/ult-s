@@ -916,7 +916,7 @@ pub struct ControllerMapping {
     pub gc_y: InputKind,
     pub gc_x: InputKind,
     pub gc_rumble: bool,
-    pub gc_absmash: bool,
+    pub gc_absmash: u8,
     pub gc_tapjump: bool,
     pub gc_sensitivity: u8,
     // 0xF
@@ -933,7 +933,7 @@ pub struct ControllerMapping {
     pub pro_x: InputKind,
     pub pro_y: InputKind,
     pub pro_rumble: bool,
-    pub pro_absmash: bool,
+    pub pro_absmash: u8,
     pub pro_tapjump: bool,
     pub pro_sensitivity: u8,
     // 0x1F
@@ -946,7 +946,7 @@ pub struct ControllerMapping {
     pub joy_left: InputKind,
     pub joy_down: InputKind,
     pub joy_rumble: bool,
-    pub joy_absmash: bool,
+    pub joy_absmash: u8,
     pub joy_tapjump: bool,
     pub joy_sensitivity: u8,
     // 0x2B

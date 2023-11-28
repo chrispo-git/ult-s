@@ -383,22 +383,22 @@ pub extern "C" fn main() {
 
 	
 	//Common
-    if !is_on_ryujinx() {
-        println!("We're on switch! Yay!");
-        unsafe {
+    //if !is_on_ryujinx() || is_on_ryujinx() {
+        //println!("We're on switch! Yay!");
+    unsafe {
             OFFSET1 = calc_nnsdk_offset() + 0x429d60;
             OFFSET2 = calc_nnsdk_offset() + 0x26e94;
-        }
+    }
     
-        skyline::install_hooks!(
+    skyline::install_hooks!(
             set_interval_1,
             set_interval_2,
             run_scene_update,
             vsync_count_thread,
-        );
-        skyline::install_hooks!(non_hdr_set_room_id, non_hdr_update_room_hook, non_hdr_set_online_latency, online_melee_any_scene_create, bg_matchmaking_seq, arena_seq, main_menu);
-        skyline::install_hooks!(change_version_string_hook);
-    }
+    );
+    skyline::install_hooks!(non_hdr_set_room_id, non_hdr_update_room_hook, non_hdr_set_online_latency, online_melee_any_scene_create, bg_matchmaking_seq, arena_seq, main_menu);
+    skyline::install_hooks!(change_version_string_hook);
+    //}
 	nro::add_hook(nro_hook).unwrap();
 
 
