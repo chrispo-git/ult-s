@@ -15,7 +15,7 @@ Make sure Ultimate S is not conflicting with other mods (Arcropolis should let y
 
 Make sure you have the latest version of NRO Hook (https://github.com/ultimate-research/nro-hook-plugin/releases/latest)
 
-If you have training modpack, make sure it is updated to the latest version!
+If you have training modpack, make sure its version 5.1 (latest crashes)
 
 Make sure your smash version is the latest (13.0.1)
 
@@ -49,12 +49,14 @@ Devory - Colloseum, Gamecube Stages, Ready to Fight UI
 Ginn. - Original Paper Mario Stage
 iOZ_MintyFresh - Hexagon UI
 Joben - Stage Select Screen
-LN_310 - ZSS Model
+LN_310 - ZSS Model, Rauru's Blessing
 LKE Studios - DK Utaunt animation
 LuXejin - Sonic Dtaunt animation
 MaroonRed - Mario nair sound
 Mayamia - Pause Screen UI, Loading Screen Animation
+Naps - Sonic nair animation
 Nozzly - CPU adjustments
+Saminate - Dr. Mario animations
 SneakyKNG - Toad Rigging
 SquidEnthusiast - Toad Render
 willy_crescent - Ganon's Tower, General Stage Help
