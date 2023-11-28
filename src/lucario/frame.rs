@@ -26,7 +26,7 @@ pub fn lucario(fighter : &mut L2CFighterCommon) {
 		let cancel_frame = FighterMotionModuleImpl::get_cancel_frame(boma,smash::phx::Hash40::new_raw(MotionModule::motion_kind(boma)),false) as f32; 
 		let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 		let fighter_kinetic_energy_motion = mem::transmute::<u64, &mut smash::app::FighterKineticEnergyMotion>(KineticModule::get_energy(boma, *FIGHTER_KINETIC_ENERGY_ID_MOTION));  
-		if fighter_kind == *FIGHTER_KIND_LUCARIO {
+		if fighter_kind == *FIGHTER_KIND_LUCARIO && is_default(boma) {
 			if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_LW {
 				if StatusModule::situation_kind(boma) != *SITUATION_KIND_AIR {
 					if KineticModule::get_kinetic_type(boma) != *FIGHTER_KINETIC_TYPE_MOTION{

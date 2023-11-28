@@ -34,7 +34,7 @@ pub fn jr(fighter : &mut L2CFighterCommon) {
 		let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 		let motion_kind = MotionModule::motion_kind(boma);
-		if fighter_kind == *FIGHTER_KIND_KOOPAJR {
+		if fighter_kind == *FIGHTER_KIND_KOOPAJR && is_default(boma) {
 				if StatusModule::situation_kind(boma) != SITUATION_KIND_AIR {
 					FLOAT[ENTRY_ID] = 0;
 					START_FLOAT[ENTRY_ID] = false;

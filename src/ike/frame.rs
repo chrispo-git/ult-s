@@ -45,7 +45,7 @@ pub fn ike(fighter : &mut L2CFighterCommon) {
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
 		let motion_kind = MotionModule::motion_kind(boma);
 		let frame = MotionModule::frame(boma);
-		if fighter_kind == *FIGHTER_KIND_IKE {
+		if fighter_kind == *FIGHTER_KIND_IKE && is_default(boma) {
 			if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_N {
 				MotionModule::set_rate(boma, 10.0);
 			};

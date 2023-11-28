@@ -54,7 +54,7 @@ fn brawler_frame(fighter: &mut L2CFighterCommon) {
 		let last_frame_cancel = (end_frame-frame)-2.0;
 		let stick_x = ControlModule::get_stick_x(boma) * PostureModule::lr(boma);
 		let is_near_ground = GroundModule::ray_check(boma, &Vector2f{ x: PostureModule::pos_x(boma), y: PostureModule::pos_y(boma)}, &Vector2f{ x: 0.0, y: -1.0}, true) == 1;
-		if fighter_kind == *FIGHTER_KIND_MIIFIGHTER {
+		if fighter_kind == *FIGHTER_KIND_MIIFIGHTER && is_default(boma) {
 			
 			//HOA replacement
 			if [hash40("special_lw1_loop")].contains(&MotionModule::motion_kind(boma)) {
