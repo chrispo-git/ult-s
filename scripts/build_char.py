@@ -147,7 +147,7 @@ def copytree(src, dst, symlinks=False, ignore=None):
         else:
             shutil.copy2(s, d)
 
-stream = os.popen('cargo skyline build --release')
+stream = os.popen('cargo skyline build --release --features="main_nro"')
 output = stream.read()
 output
 os.chdir('../')

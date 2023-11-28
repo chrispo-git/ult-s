@@ -141,11 +141,16 @@ unsafe fn map_controls_hook(
                 (x, gc_x,   FullHop, Buttons::FullHop | Buttons::Jump)
                 (y, gc_y,   FullHop, Buttons::FullHop | Buttons::Jump)
         );
-        if (*mappings.add(player_idx as usize)).gc_absmash {
-            IS_AB[((*mappings.add(player_idx as usize))._34[0]) as usize] = true;
+        let mut set_num = 0;
+        let mut next_id = player_idx;
+        if (*mappings).gc_absmash & 1 != 0 {
+            IS_AB[player_idx as usize] = true;
+            //println!("{} to mode {}", next_id as usize, set_num);
         } else {
-            IS_AB[((*mappings.add(player_idx as usize))._34[0]) as usize] = false;
+            IS_AB[player_idx as usize] = false;
+            //println!("{} to mode {}", next_id as usize, set_num);
         }
+        
         
     } else if controller.style == ControllerStyle::LeftJoycon || controller.style == ControllerStyle::RightJoycon {
         (*out).buttons |= apply_button_mappings!(
@@ -264,11 +269,16 @@ unsafe fn map_controls_hook(
                     (x, joy_right,  FullHop, Buttons::FullHop | Buttons::Jump)
             );
         }
-        if (*mappings.add(player_idx as usize)).joy_absmash {
-            IS_AB[((*mappings.add(player_idx as usize))._34[0]) as usize] = true;
+        let mut set_num = 0;
+        let mut next_id = player_idx;
+        if (*mappings).joy_absmash & 1 != 0 {
+            IS_AB[player_idx as usize] = true;
+            //println!("{} to mode {}", next_id as usize, set_num);
         } else {
-            IS_AB[((*mappings.add(player_idx as usize))._34[0]) as usize] = false;
+            IS_AB[player_idx as usize] = false;
+            //println!("{} to mode {}", next_id as usize, set_num);
         }
+        
     } else {
         (*out).buttons |= apply_button_mappings!(
             controller,
@@ -318,10 +328,14 @@ unsafe fn map_controls_hook(
                 (x, pro_x,      FullHop, Buttons::FullHop | Buttons::Jump)
                 (y, pro_y,      FullHop, Buttons::FullHop | Buttons::Jump)
         );
-        if (*mappings.add(player_idx as usize)).pro_absmash  {
-            IS_AB[((*mappings.add(player_idx as usize))._34[0]) as usize] = true;
+        let mut set_num = 0;
+        let mut next_id = player_idx;
+        if (*mappings).pro_absmash & 1 != 0 {
+            IS_AB[player_idx as usize] = true;
+            //println!("{} to mode {}", next_id as usize, set_num);
         } else {
-            IS_AB[((*mappings.add(player_idx as usize))._34[0]) as usize] = false;
+            IS_AB[player_idx as usize] = false;
+            //println!("{} to mode {}", next_id as usize, set_num);
         }
     }
 

@@ -1,0 +1,508 @@
+[[param_int]]
+param = "attack_combo_max"
+subparam = ""
+value = 1
+kinds = ["marth"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_int]]
+param = "attack_combo_max"
+subparam = ""
+value = 2
+kinds = ["chrom"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "dash_speed"
+subparam = ""
+value = 1.92
+kinds = ["pikmin"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "run_speed_max"
+subparam = ""
+value = 2.1
+kinds = ["pikmin"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "walk_speed_max"
+subparam = ""
+value = 1.01
+kinds = ["pikmin"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "ground_brake"
+subparam = ""
+value = 0.07
+kinds = ["pikmin"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "jump_speed_x_mul"
+subparam = ""
+value = 1.075
+kinds = ["pikmin"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "air_accel_x_mul"
+subparam = ""
+value = 0.067
+kinds = ["pikmin"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "air_accel_x_add"
+subparam = ""
+value = 0.01
+kinds = ["pikmin"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "air_speed_x_stable"
+subparam = ""
+value = 1.075
+kinds = ["pikmin"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "air_speed_y_stable"
+subparam = ""
+value = 1.55
+kinds = ["pikmin"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "air_accel_y"
+subparam = ""
+value = 0.09
+kinds = ["pikmin"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "dive_speed_y"
+subparam = ""
+value = 2.48
+kinds = ["pikmin"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "jump_y"
+subparam = ""
+value = 34.0
+kinds = ["pikmin"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "mini_jump_y"
+subparam = ""
+value = 16.18
+kinds = ["pikmin"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "jump_aerial_y"
+subparam = ""
+value = 35.2
+kinds = ["pikmin"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "weight"
+subparam = ""
+value = 93.0
+kinds = ["pikmin"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "landing_attack_air_frame_n"
+subparam = ""
+value = 8.0
+kinds = ["pikmin"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "landing_attack_air_frame_f"
+subparam = ""
+value = 10.0
+kinds = ["pikmin"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "landing_attack_air_frame_b"
+subparam = ""
+value = 12.0
+kinds = ["pikmin"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "landing_attack_air_frame_hi"
+subparam = ""
+value = 13.0
+kinds = ["pikmin"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "landing_attack_air_frame_lw"
+subparam = ""
+value = 9.0
+kinds = ["pikmin"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "landing_frame"
+subparam = ""
+value = 4.0
+kinds = ["pikmin"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "shield_radius"
+subparam = ""
+value = 7.0
+kinds = ["pikmin"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "tread_jump_speed_y_mul"
+subparam = ""
+value = 1.0
+kinds = ["pikmin"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "tread_mini_jump_speed_y_mul"
+subparam = ""
+value = 0.475
+kinds = ["pikmin"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "combo_attack_12_end"
+subparam = ""
+value = 28.0
+kinds = ["pikmin"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "combo_attack_13_end"
+subparam = ""
+value = 28.0
+kinds = ["pikmin"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_int]]
+param = "attack_combo_max"
+subparam = ""
+value = 3
+kinds = ["pikmin"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_int]]
+param = "wall_jump_type"
+subparam = ""
+value = 1
+kinds = ["pikmin"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_int]]
+param = "param_special_hi"
+subparam = "disable_landing_frame"
+value = 1
+kinds = ["pikmin"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "limit_frame"
+subparam = "disable_landing_frame"
+value = 100.0
+kinds = ["pikmin"]
+slots = [120,121,122,123,124,125,126,127]
+
+
+
+
+
+
+[[param_float]]
+param = "walk_speed_max"
+subparam = ""
+value = 1.26
+kinds = ["murabito"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "ground_brake"
+subparam = ""
+value = 0.111
+kinds = ["murabito"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "dash_speed"
+subparam = ""
+value = 2.211
+kinds = ["murabito"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "run_speed_max"
+subparam = ""
+value = 1.97
+kinds = ["murabito"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "jump_y"
+subparam = ""
+value = 29.8
+kinds = ["murabito"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "mini_jump_y"
+subparam = ""
+value = 12.5
+kinds = ["murabito"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "jump_aerial_y"
+subparam = ""
+value = 29.8
+kinds = ["murabito"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "air_accel_x_mul"
+subparam = ""
+value = 0.05
+kinds = ["murabito"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "air_accel_x_add"
+subparam = ""
+value = 0.01
+kinds = ["murabito"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "air_speed_x_stable"
+subparam = ""
+value = 1.01
+kinds = ["murabito"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "air_accel_y"
+subparam = ""
+value = 0.09
+kinds = ["murabito"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "air_speed_y_stable"
+subparam = ""
+value = 1.9
+kinds = ["murabito"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "dive_speed_y"
+subparam = ""
+value = 3.04
+kinds = ["murabito"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "weight"
+subparam = ""
+value = 88.0
+kinds = ["murabito"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "landing_attack_air_frame_n"
+subparam = ""
+value = 6.0
+kinds = ["murabito"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "landing_attack_air_frame_f"
+subparam = ""
+value = 12.0
+kinds = ["murabito"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "landing_attack_air_frame_b"
+subparam = ""
+value = 7.0
+kinds = ["murabito"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "landing_attack_air_frame_hi"
+subparam = ""
+value = 8.0
+kinds = ["murabito"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "landing_attack_air_frame_lw"
+subparam = ""
+value = 18.0
+kinds = ["murabito"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "landing_frame"
+subparam = ""
+value = 4.0
+kinds = ["murabito"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "tread_jump_speed_y_mul"
+subparam = ""
+value = 1.0
+kinds = ["murabito"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "tread_mini_jump_speed_y_mul"
+subparam = ""
+value = 0.475
+kinds = ["murabito"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "combo_attack_12_end"
+subparam = ""
+value = 28.0
+kinds = ["murabito"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "combo_attack_13_end"
+subparam = ""
+value = 28.0
+kinds = ["murabito"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_int]]
+param = "attack_combo_max"
+subparam = ""
+value = 3
+kinds = ["murabito"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_int]]
+param = "attack100_type"
+subparam = ""
+value = 0
+kinds = ["murabito"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_int]]
+param = "param_bowlingball"
+subparam = "is_penetration"
+value = 0
+kinds = ["murabito","murabito_bowling_ball"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_int]]
+param = "param_bullet"
+subparam = "life"
+value = 21
+kinds = ["murabito","murabito_bullet"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "param_bullet"
+subparam = "gravity"
+value = -0.1
+kinds = ["murabito","murabito_bullet"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_int]]
+param = "param_bullet"
+subparam = "is_penetration"
+value = 1
+kinds = ["murabito","murabito_bullet"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "param_bullet"
+subparam = "speed"
+value = 0.01
+kinds = ["murabito","murabito_bullet"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "param_bullet"
+subparam = "limit_speed"
+value = 0.01
+kinds = ["murabito","murabito_bullet"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_int]]
+param = "param_clayrocket"
+subparam = "is_penetration"
+value = 1
+kinds = ["murabito","murabito_clayrocket"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "param_clayrocket"
+subparam = "fly_limit_speed_air"
+value = -1.8
+kinds = ["murabito","murabito_clayrocket"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "param_clayrocket"
+subparam = "fly_gravity"
+value = 0.0
+kinds = ["murabito","murabito_clayrocket"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "param_clayrocket"
+subparam = "fly_limit_gravity"
+value = 0.0
+kinds = ["murabito","murabito_clayrocket"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "param_clayrocket"
+subparam = "fall_start_frame"
+value = 9999999.0
+kinds = ["murabito","murabito_clayrocket"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "param_clayrocket"
+subparam = "rot_limit_speed_air"
+value = 0.0
+kinds = ["murabito","murabito_clayrocket"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "param_clayrocket"
+subparam = "rot_limit_speed_ground"
+value = 0.0
+kinds = ["murabito","murabito_clayrocket"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "param_clayrocket"
+subparam = "fly_limit_speed_ground"
+value = -1.6
+kinds = ["murabito","murabito_clayrocket"]
+slots = [120,121,122,123,124,125,126,127]
