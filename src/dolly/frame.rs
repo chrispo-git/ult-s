@@ -25,7 +25,8 @@ pub fn terry_frame(fighter : &mut L2CFighterCommon) {
 		let motion_kind = MotionModule::motion_kind(boma);
 		stick_x *= PostureModule::lr(boma);
 		let fighter_kind = smash::app::utility::get_kind(boma);
-		if fighter_kind == *FIGHTER_KIND_DOLLY {
+        
+		if fighter_kind == *FIGHTER_KIND_DOLLY && is_default(boma){
 			if [*FIGHTER_DOLLY_STATUS_KIND_SPECIAL_B].contains(&status_kind) && [*FIGHTER_DOLLY_STATUS_KIND_SPECIAL_B_COMMAND].contains(&status_kind) == false {
 				PostureModule::reverse_lr(boma);
 				PostureModule::update_rot_y_lr(boma);

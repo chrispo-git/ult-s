@@ -23,123 +23,125 @@ pub fn install() {
 fn kirby_frame(fighter: &mut L2CFighterCommon) {
     unsafe {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
-		let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
-		let motion_kind = MotionModule::motion_kind(boma);
-		let frame = MotionModule::frame(boma);
-		let situation_kind = StatusModule::situation_kind(boma);
-		let is_near_ground = GroundModule::ray_check(boma, &Vector2f{ x: PostureModule::pos_x(boma), y: PostureModule::pos_y(boma)}, &Vector2f{ x: 0.0, y: -1.0}, true);
+		if is_default(boma) {
+			let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+			let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
+			let motion_kind = MotionModule::motion_kind(boma);
+			let frame = MotionModule::frame(boma);
+			let situation_kind = StatusModule::situation_kind(boma);
+			let is_near_ground = GroundModule::ray_check(boma, &Vector2f{ x: PostureModule::pos_x(boma), y: PostureModule::pos_y(boma)}, &Vector2f{ x: 0.0, y: -1.0}, true);
 
-		//CI shit
-		if [hash40("special_input")].contains(&MotionModule::motion_kind(boma)) {
-			if MotionModule::frame(boma) >= 0.0 {
-				macros::SET_SPEED_EX(fighter,0.0, 0.0, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+			//CI shit
+			if [hash40("special_input")].contains(&MotionModule::motion_kind(boma)) {
+				if MotionModule::frame(boma) >= 0.0 {
+					macros::SET_SPEED_EX(fighter,0.0, 0.0, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+				};
 			};
-		};
 
-		//Downb shit
-		if DOWNB_JUMP[ENTRY_ID] && status_kind == *FIGHTER_STATUS_KIND_JUMP {
-			MotionModule::change_motion(boma, smash::phx::Hash40::new("special_lw2"), 0.0, 1.0, false, 0.0, false, false);
-			DOWNB_JUMP[ENTRY_ID] = false;
-		};
-		if DOWNB_JUMP[ENTRY_ID] && status_kind != *FIGHTER_STATUS_KIND_JUMP {
-			DOWNB_JUMP[ENTRY_ID] = false;
-		};
-		if [hash40("special_lw")].contains(&MotionModule::motion_kind(boma)) {
-			if MotionModule::frame(boma) >= 4.0 && MotionModule::frame(boma) <= 24.0 {
-				if AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_HIT){
-					DOWNB_JUMP[ENTRY_ID] = true;
-					macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_jump_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1, false);
-					macros::PLAY_SE(fighter, Hash40::new("se_kirby_jump01"));
-					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_JUMP, true);
-				};
+			//Downb shit
+			if DOWNB_JUMP[ENTRY_ID] && status_kind == *FIGHTER_STATUS_KIND_JUMP {
+				MotionModule::change_motion(boma, smash::phx::Hash40::new("special_lw2"), 0.0, 1.0, false, 0.0, false, false);
+				DOWNB_JUMP[ENTRY_ID] = false;
 			};
-		};
-		if [hash40("special_lw")].contains(&MotionModule::motion_kind(boma)) {
-			if KineticModule::get_kinetic_type(boma) != *FIGHTER_KINETIC_TYPE_MOTION {
-				KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_MOTION);
+			if DOWNB_JUMP[ENTRY_ID] && status_kind != *FIGHTER_STATUS_KIND_JUMP {
+				DOWNB_JUMP[ENTRY_ID] = false;
 			};
-			if MotionModule::frame(boma) >= 40.0 {
-				StatusModule::set_situation_kind(boma, smash::app::SituationKind(*SITUATION_KIND_GROUND), true);
-				StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_WAIT, true);
-			};
-		};
-		if [hash40("special_lw2")].contains(&MotionModule::motion_kind(boma)) {
-			if MotionModule::frame(boma) >= 29.0 {
-				StatusModule::set_situation_kind(boma, smash::app::SituationKind(*SITUATION_KIND_AIR), true);
-				StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL, true);
-			};
-		};
-
-		//Upb shit
-		if status_kind == *FIGHTER_KIRBY_STATUS_KIND_SPECIAL_HI2 && MotionModule::frame(boma) >= 37.0 {
-			StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL_SPECIAL, true);
-		};
-		if status_kind == *FIGHTER_KIRBY_STATUS_KIND_SPECIAL_HI2 {
-			if  MotionModule::frame(boma) < 2.0 {
-				let stick_x = ControlModule::get_stick_x(boma) * PostureModule::lr(boma);
-				if stick_x <= -0.3 {
-					UPB_ANGLE[ENTRY_ID] = 0;
-				} else if stick_x >= 0.45 {
-					UPB_ANGLE[ENTRY_ID] = 2;
-				} else {
-					UPB_ANGLE[ENTRY_ID] = 1;
-				};
-			};
-			if MotionModule::frame(boma) <= 6.0 && !is_hitlag(boma) {
-				if UPB_ANGLE[ENTRY_ID] == 1 {
-					//let speed = smash::phx::Vector3f { x: *(((6.0/MotionModule::frame(boma))*0.003)/6.0)*0.2)-0.03, y: 0.0, z: 0.0 };
-					//KineticModule::add_speed(boma, &speed);
-					macros::SET_SPEED_EX(fighter, 1.0, 0.12, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
-				};
-				if UPB_ANGLE[ENTRY_ID] == 2 {
-					//let speed = smash::phx::Vector3f { x: ((6.0/MotionModule::frame(boma))*0.05)/6.0, y: -0.03, z: 0.0 };
-					//KineticModule::add_speed(boma, &speed);
-					macros::SET_SPEED_EX(fighter, 1.75, 0.08, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
-				};
-				if UPB_ANGLE[ENTRY_ID] == 0 {
-					//let speed = smash::phx::Vector3f { x: *(((6.0/MotionModule::frame(boma))*0.003)/6.0)*0.2)-0.03, y: 0.0, z: 0.0 };
-					//KineticModule::add_speed(boma, &speed);
-					macros::SET_SPEED_EX(fighter, 0.0, 0.16, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
-				};
-			};
-			if MotionModule::frame(boma) <= 10.0 && MotionModule::frame(boma) > 6.0 && !is_hitlag(boma) {
-				if UPB_ANGLE[ENTRY_ID] != 0 {
-					KineticModule::clear_speed_all(boma);
-					if UPB_ANGLE[ENTRY_ID] == 1 {
-						let speed = smash::phx::Vector3f { x: -0.1, y: 0.0, z: 0.0 };
-						KineticModule::add_speed(boma, &speed);
+			if [hash40("special_lw")].contains(&MotionModule::motion_kind(boma)) {
+				if MotionModule::frame(boma) >= 4.0 && MotionModule::frame(boma) <= 24.0 {
+					if AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_HIT){
+						DOWNB_JUMP[ENTRY_ID] = true;
+						macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_jump_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1, false);
+						macros::PLAY_SE(fighter, Hash40::new("se_kirby_jump01"));
+						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_JUMP, true);
 					};
-					/*let speed = smash::phx::Vector3f { x: -2.0*(0.02-((MotionModule::frame(boma)-6.0/6.0)*0.02)), y: 0.0, z: 0.0 };
-					KineticModule::add_speed(boma, &speed);*/
 				};
 			};
-		} else {
-			UPB_ANGLE[ENTRY_ID] = 1;
-		};
-		if status_kind == *FIGHTER_KIRBY_STATUS_KIND_SPECIAL_HI3 {
-			StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL_SPECIAL, true);
-		};
-		if status_kind == *FIGHTER_KIRBY_STATUS_KIND_SPECIAL_HI4 {
-			StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_LANDING_FALL_SPECIAL, true);
-		};
-		if status_kind == *FIGHTER_STATUS_KIND_FINAL || status_kind == *FIGHTER_STATUS_KIND_FINAL_JUMP_END {
-			IS_FINAL[ENTRY_ID] = true;
-		} else {
-			IS_FINAL[ENTRY_ID] = false;
-		};
-		if [*FIGHTER_STATUS_KIND_ATTACK_AIR, *FIGHTER_STATUS_KIND_SPECIAL_S, *FIGHTER_KIRBY_STATUS_KIND_SPECIAL_S_ATTACK, *FIGHTER_STATUS_KIND_ATTACK_LW4, *FIGHTER_STATUS_KIND_ATTACK_LW4_HOLD, *FIGHTER_STATUS_KIND_ATTACK_LW4_START].contains(&status_kind) == false {
-			ArticleModule::remove_exist(boma, *FIGHTER_KIRBY_GENERATE_ARTICLE_FINALCUTTER,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
-		};
-		if [*FIGHTER_STATUS_KIND_ATTACK_S4, *FIGHTER_STATUS_KIND_ATTACK_S4_START, *FIGHTER_STATUS_KIND_ATTACK_S4_HOLD].contains(&status_kind) == false {
-			ArticleModule::remove_exist(boma, *FIGHTER_KIRBY_GENERATE_ARTICLE_HAMMER,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
-		};
-		if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_S {
-			StatusModule::change_status_request_from_script(boma,*FIGHTER_KIRBY_STATUS_KIND_SPECIAL_S_ATTACK, true);
-		};
-		if status_kind != *FIGHTER_STATUS_KIND_ATTACK_LW4 {
-			macros::STOP_SE(fighter, Hash40::new("se_kirby_special_h02"));
-		};
+			if [hash40("special_lw")].contains(&MotionModule::motion_kind(boma)) {
+				if KineticModule::get_kinetic_type(boma) != *FIGHTER_KINETIC_TYPE_MOTION {
+					KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_MOTION);
+				};
+				if MotionModule::frame(boma) >= 40.0 {
+					StatusModule::set_situation_kind(boma, smash::app::SituationKind(*SITUATION_KIND_GROUND), true);
+					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_WAIT, true);
+				};
+			};
+			if [hash40("special_lw2")].contains(&MotionModule::motion_kind(boma)) {
+				if MotionModule::frame(boma) >= 29.0 {
+					StatusModule::set_situation_kind(boma, smash::app::SituationKind(*SITUATION_KIND_AIR), true);
+					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL, true);
+				};
+			};
+
+			//Upb shit
+			if status_kind == *FIGHTER_KIRBY_STATUS_KIND_SPECIAL_HI2 && MotionModule::frame(boma) >= 37.0 {
+				StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL_SPECIAL, true);
+			};
+			if status_kind == *FIGHTER_KIRBY_STATUS_KIND_SPECIAL_HI2 {
+				if  MotionModule::frame(boma) < 2.0 {
+					let stick_x = ControlModule::get_stick_x(boma) * PostureModule::lr(boma);
+					if stick_x <= -0.3 {
+						UPB_ANGLE[ENTRY_ID] = 0;
+					} else if stick_x >= 0.45 {
+						UPB_ANGLE[ENTRY_ID] = 2;
+					} else {
+						UPB_ANGLE[ENTRY_ID] = 1;
+					};
+				};
+				if MotionModule::frame(boma) <= 6.0 && !is_hitlag(boma) {
+					if UPB_ANGLE[ENTRY_ID] == 1 {
+						//let speed = smash::phx::Vector3f { x: *(((6.0/MotionModule::frame(boma))*0.003)/6.0)*0.2)-0.03, y: 0.0, z: 0.0 };
+						//KineticModule::add_speed(boma, &speed);
+						macros::SET_SPEED_EX(fighter, 1.0, 0.12, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+					};
+					if UPB_ANGLE[ENTRY_ID] == 2 {
+						//let speed = smash::phx::Vector3f { x: ((6.0/MotionModule::frame(boma))*0.05)/6.0, y: -0.03, z: 0.0 };
+						//KineticModule::add_speed(boma, &speed);
+						macros::SET_SPEED_EX(fighter, 1.75, 0.08, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+					};
+					if UPB_ANGLE[ENTRY_ID] == 0 {
+						//let speed = smash::phx::Vector3f { x: *(((6.0/MotionModule::frame(boma))*0.003)/6.0)*0.2)-0.03, y: 0.0, z: 0.0 };
+						//KineticModule::add_speed(boma, &speed);
+						macros::SET_SPEED_EX(fighter, 0.0, 0.16, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+					};
+				};
+				if MotionModule::frame(boma) <= 10.0 && MotionModule::frame(boma) > 6.0 && !is_hitlag(boma) {
+					if UPB_ANGLE[ENTRY_ID] != 0 {
+						KineticModule::clear_speed_all(boma);
+						if UPB_ANGLE[ENTRY_ID] == 1 {
+							let speed = smash::phx::Vector3f { x: -0.1, y: 0.0, z: 0.0 };
+							KineticModule::add_speed(boma, &speed);
+						};
+						/*let speed = smash::phx::Vector3f { x: -2.0*(0.02-((MotionModule::frame(boma)-6.0/6.0)*0.02)), y: 0.0, z: 0.0 };
+						KineticModule::add_speed(boma, &speed);*/
+					};
+				};
+			} else {
+				UPB_ANGLE[ENTRY_ID] = 1;
+			};
+			if status_kind == *FIGHTER_KIRBY_STATUS_KIND_SPECIAL_HI3 {
+				StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL_SPECIAL, true);
+			};
+			if status_kind == *FIGHTER_KIRBY_STATUS_KIND_SPECIAL_HI4 {
+				StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_LANDING_FALL_SPECIAL, true);
+			};
+			if status_kind == *FIGHTER_STATUS_KIND_FINAL || status_kind == *FIGHTER_STATUS_KIND_FINAL_JUMP_END {
+				IS_FINAL[ENTRY_ID] = true;
+			} else {
+				IS_FINAL[ENTRY_ID] = false;
+			};
+			if [*FIGHTER_STATUS_KIND_ATTACK_AIR, *FIGHTER_STATUS_KIND_SPECIAL_S, *FIGHTER_KIRBY_STATUS_KIND_SPECIAL_S_ATTACK, *FIGHTER_STATUS_KIND_ATTACK_LW4, *FIGHTER_STATUS_KIND_ATTACK_LW4_HOLD, *FIGHTER_STATUS_KIND_ATTACK_LW4_START].contains(&status_kind) == false {
+				ArticleModule::remove_exist(boma, *FIGHTER_KIRBY_GENERATE_ARTICLE_FINALCUTTER,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
+			};
+			if [*FIGHTER_STATUS_KIND_ATTACK_S4, *FIGHTER_STATUS_KIND_ATTACK_S4_START, *FIGHTER_STATUS_KIND_ATTACK_S4_HOLD].contains(&status_kind) == false {
+				ArticleModule::remove_exist(boma, *FIGHTER_KIRBY_GENERATE_ARTICLE_HAMMER,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
+			};
+			if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_S {
+				StatusModule::change_status_request_from_script(boma,*FIGHTER_KIRBY_STATUS_KIND_SPECIAL_S_ATTACK, true);
+			};
+			if status_kind != *FIGHTER_STATUS_KIND_ATTACK_LW4 {
+				macros::STOP_SE(fighter, Hash40::new("se_kirby_special_h02"));
+			};
+		}
 	}
 }
 #[weapon_frame( agent = WEAPON_KIND_KIRBY_FINALCUTTERSHOT )]

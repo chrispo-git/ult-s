@@ -24,7 +24,7 @@ pub fn pitoo(fighter : &mut L2CFighterCommon) {
 		let situation_kind = StatusModule::situation_kind(boma);
 		let motion_kind = MotionModule::motion_kind(boma);
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
-		if fighter_kind == *FIGHTER_KIND_PITB {
+		if fighter_kind == *FIGHTER_KIND_PITB && is_default(boma) {
 			if [hash40("attack_s3_s"), hash40("attack_dash")].contains(&motion_kind) && (AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_HIT)){
 				if (ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_S) != 0{ 
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_PIT_STATUS_KIND_SPECIAL_HI_RUSH, true);

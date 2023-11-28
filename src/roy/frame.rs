@@ -22,7 +22,7 @@ pub fn roy(fighter : &mut L2CFighterCommon) {
 		let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 		let fighter_kind = smash::app::utility::get_kind(boma);
 		let speed = 5.8;
-		if fighter_kind == *FIGHTER_KIND_ROY {
+		if fighter_kind == *FIGHTER_KIND_ROY && is_default(boma) {
 			/*if [hash40("attack_s3_s")].contains(&MotionModule::motion_kind(boma)) {
 				if MotionModule::frame(boma) > 9.0 && MotionModule::frame(boma) < 20.0 {
 					if MotionModule::frame(boma) < 12.0 || AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_ALL) == false {

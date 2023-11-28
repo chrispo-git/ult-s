@@ -21,7 +21,7 @@ pub fn pit_arrow_land_cancel(fighter : &mut L2CFighterCommon) {
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
 		let fighter_kind = smash::app::utility::get_kind(boma);
 		let lua_state = fighter.lua_state_agent;
-		if fighter_kind == *FIGHTER_KIND_PIT {
+		if fighter_kind == *FIGHTER_KIND_PIT && is_default(boma) {
 			if  MotionModule::motion_kind(boma) == hash40("special_lw_break_l") || MotionModule::motion_kind(boma) == hash40("special_lw_break_r"){
 				StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_DOWN, true);
 			};

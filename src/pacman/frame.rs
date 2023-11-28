@@ -18,56 +18,58 @@ use super::*;
 fn pacman_frame(fighter: &mut L2CFighterCommon) {
     unsafe {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
-		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
-		let motion_kind = MotionModule::motion_kind(boma);
-		let frame = MotionModule::frame(boma);
-		let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-		let situation_kind = StatusModule::situation_kind(boma);
-		let end_frame = MotionModule::end_frame(boma);
-		let cancel_frame = FighterMotionModuleImpl::get_cancel_frame(boma,smash::phx::Hash40::new_raw(MotionModule::motion_kind(boma)),false) as f32;
-		if smash::app::sv_information::is_ready_go() == false {
-			HYDRANT_POS_X[ENTRY_ID] = 0.0;
-			HYDRANT_POS_Y[ENTRY_ID] = 0.0;
-			TRAMPOLINE_POS_X[ENTRY_ID] = 0.0;
-			TRAMPOLINE_POS_Y[ENTRY_ID] = 0.0;
-			TRAMPOLINE_DELETE_TIMER[ENTRY_ID] = 0;
-			HAS_UPB_ENDS[ENTRY_ID] = false;
-		};
-		if !ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_PACMAN_GENERATE_ARTICLE_FIREHYDRANT) {
-			HYDRANT_POS_X[ENTRY_ID] = 0.0;
-			HYDRANT_POS_Y[ENTRY_ID] = 0.0;
-		}
-		if !ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_PACMAN_GENERATE_ARTICLE_TRAMPOLINE) {
-			TRAMPOLINE_POS_X[ENTRY_ID] = 0.0;
-			TRAMPOLINE_POS_Y[ENTRY_ID] = 0.0;
-			TRAMPOLINE_DELETE_TIMER[ENTRY_ID] = 0;
-		}
-		if TRAMPOLINE_DELETE_TIMER[ENTRY_ID] > 0 {
-			TRAMPOLINE_DELETE_TIMER[ENTRY_ID] -= 1; 
-		}
-		if status_kind == *FIGHTER_PACMAN_STATUS_KIND_SPECIAL_HI_LOOP && frame > 5.0{
-			StatusModule::change_status_request_from_script(boma, *FIGHTER_PACMAN_STATUS_KIND_SPECIAL_S_RETURN, false);
-			HAS_UPB_ENDS[ENTRY_ID] = true;
-		}
-		if situation_kind != *SITUATION_KIND_AIR {
-			HAS_UPB_ENDS[ENTRY_ID] = false;
-			WorkModule::off_flag(boma, *FIGHTER_PACMAN_INSTANCE_WORK_ID_FLAG_SPECIAL_HI_FALL);
-		}
-		if status_kind != *FIGHTER_PACMAN_STATUS_KIND_SPECIAL_S_RETURN && situation_kind == *SITUATION_KIND_AIR && HAS_UPB_ENDS[ENTRY_ID]{
-			if cancel_frame != 0.0 && cancel_frame - frame < 4.0 {
-				StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL_SPECIAL, false);
+		if is_default(boma) {
+			let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
+			let motion_kind = MotionModule::motion_kind(boma);
+			let frame = MotionModule::frame(boma);
+			let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+			let situation_kind = StatusModule::situation_kind(boma);
+			let end_frame = MotionModule::end_frame(boma);
+			let cancel_frame = FighterMotionModuleImpl::get_cancel_frame(boma,smash::phx::Hash40::new_raw(MotionModule::motion_kind(boma)),false) as f32;
+			if smash::app::sv_information::is_ready_go() == false {
+				HYDRANT_POS_X[ENTRY_ID] = 0.0;
+				HYDRANT_POS_Y[ENTRY_ID] = 0.0;
+				TRAMPOLINE_POS_X[ENTRY_ID] = 0.0;
+				TRAMPOLINE_POS_Y[ENTRY_ID] = 0.0;
+				TRAMPOLINE_DELETE_TIMER[ENTRY_ID] = 0;
+				HAS_UPB_ENDS[ENTRY_ID] = false;
+			};
+			if !ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_PACMAN_GENERATE_ARTICLE_FIREHYDRANT) {
+				HYDRANT_POS_X[ENTRY_ID] = 0.0;
+				HYDRANT_POS_Y[ENTRY_ID] = 0.0;
 			}
-		}
-		if status_kind == *FIGHTER_PACMAN_STATUS_KIND_SPECIAL_S_RETURN && situation_kind == *SITUATION_KIND_AIR && HAS_UPB_ENDS[ENTRY_ID]{
-			let accel_y = WorkModule::get_param_float(fighter.module_accessor, hash40("air_accel_y"), 0);
-			let stable_accel_y = WorkModule::get_param_float(fighter.module_accessor, hash40("air_speed_y_stable"), 0);
-			KineticModule::resume_energy(boma, *FIGHTER_KINETIC_ENERGY_ID_CONTROL);
-			if KineticModule::get_sum_speed_y(boma, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN) > stable_accel_y*-1.0 {
-				let speed = smash::phx::Vector3f { x: 0.0, y: -0.18+accel_y, z: 0.0 };
-				KineticModule::add_speed(boma, &speed);
+			if !ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_PACMAN_GENERATE_ARTICLE_TRAMPOLINE) {
+				TRAMPOLINE_POS_X[ENTRY_ID] = 0.0;
+				TRAMPOLINE_POS_Y[ENTRY_ID] = 0.0;
+				TRAMPOLINE_DELETE_TIMER[ENTRY_ID] = 0;
 			}
-			if frame > 41.0{
-				StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL_SPECIAL, false);
+			if TRAMPOLINE_DELETE_TIMER[ENTRY_ID] > 0 {
+				TRAMPOLINE_DELETE_TIMER[ENTRY_ID] -= 1; 
+			}
+			if status_kind == *FIGHTER_PACMAN_STATUS_KIND_SPECIAL_HI_LOOP && frame > 5.0{
+				StatusModule::change_status_request_from_script(boma, *FIGHTER_PACMAN_STATUS_KIND_SPECIAL_S_RETURN, false);
+				HAS_UPB_ENDS[ENTRY_ID] = true;
+			}
+			if situation_kind != *SITUATION_KIND_AIR {
+				HAS_UPB_ENDS[ENTRY_ID] = false;
+				WorkModule::off_flag(boma, *FIGHTER_PACMAN_INSTANCE_WORK_ID_FLAG_SPECIAL_HI_FALL);
+			}
+			if status_kind != *FIGHTER_PACMAN_STATUS_KIND_SPECIAL_S_RETURN && situation_kind == *SITUATION_KIND_AIR && HAS_UPB_ENDS[ENTRY_ID]{
+				if cancel_frame != 0.0 && cancel_frame - frame < 4.0 {
+					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL_SPECIAL, false);
+				}
+			}
+			if status_kind == *FIGHTER_PACMAN_STATUS_KIND_SPECIAL_S_RETURN && situation_kind == *SITUATION_KIND_AIR && HAS_UPB_ENDS[ENTRY_ID]{
+				let accel_y = WorkModule::get_param_float(fighter.module_accessor, hash40("air_accel_y"), 0);
+				let stable_accel_y = WorkModule::get_param_float(fighter.module_accessor, hash40("air_speed_y_stable"), 0);
+				KineticModule::resume_energy(boma, *FIGHTER_KINETIC_ENERGY_ID_CONTROL);
+				if KineticModule::get_sum_speed_y(boma, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN) > stable_accel_y*-1.0 {
+					let speed = smash::phx::Vector3f { x: 0.0, y: -0.18+accel_y, z: 0.0 };
+					KineticModule::add_speed(boma, &speed);
+				}
+				if frame > 41.0{
+					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL_SPECIAL, false);
+				}
 			}
 		}
 		//println!("Jump num: {}", WorkModule::get_int(boma, *FIGHTER_PACMAN_INSTANCE_WORK_ID_INT_SPECIAL_HI_JUMP_NUM));

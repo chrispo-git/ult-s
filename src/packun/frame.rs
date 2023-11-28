@@ -18,24 +18,26 @@ use super::*;
 fn plant_frame(fighter: &mut L2CFighterCommon) {
     unsafe {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
-		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
-		let motion_kind = MotionModule::motion_kind(boma);
-		let frame = MotionModule::frame(boma);
-		let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-		let situation_kind = StatusModule::situation_kind(boma);
-		let end_frame = MotionModule::end_frame(boma);
-		let cancel_frame = FighterMotionModuleImpl::get_cancel_frame(boma,smash::phx::Hash40::new_raw(MotionModule::motion_kind(boma)),false) as f32;
-		if smash::app::sv_information::is_ready_go() == false {
-			BREATH_POS_X[ENTRY_ID] = 0.0;
-			BREATH_POS_Y[ENTRY_ID] = 0.0;
-			IS_BAIR[ENTRY_ID] = false;
-		};
-		if !ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_PACKUN_GENERATE_ARTICLE_POISONBREATH) {
-			BREATH_POS_X[ENTRY_ID] = 0.0;
-			BREATH_POS_Y[ENTRY_ID] = 0.0;
-		}
-		if motion_kind != hash40("attack_air_b") {
-			IS_BAIR[ENTRY_ID] = false;
+		if is_default(boma) {
+			let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
+			let motion_kind = MotionModule::motion_kind(boma);
+			let frame = MotionModule::frame(boma);
+			let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+			let situation_kind = StatusModule::situation_kind(boma);
+			let end_frame = MotionModule::end_frame(boma);
+			let cancel_frame = FighterMotionModuleImpl::get_cancel_frame(boma,smash::phx::Hash40::new_raw(MotionModule::motion_kind(boma)),false) as f32;
+			if smash::app::sv_information::is_ready_go() == false {
+				BREATH_POS_X[ENTRY_ID] = 0.0;
+				BREATH_POS_Y[ENTRY_ID] = 0.0;
+				IS_BAIR[ENTRY_ID] = false;
+			};
+			if !ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_PACKUN_GENERATE_ARTICLE_POISONBREATH) {
+				BREATH_POS_X[ENTRY_ID] = 0.0;
+				BREATH_POS_Y[ENTRY_ID] = 0.0;
+			}
+			if motion_kind != hash40("attack_air_b") {
+				IS_BAIR[ENTRY_ID] = false;
+			}
 		}
 	}
 }

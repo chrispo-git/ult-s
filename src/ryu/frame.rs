@@ -31,7 +31,7 @@ pub fn supers(fighter : &mut L2CFighterCommon) {
 			fighter_num = 7;
 		};
 		let aura_size = RYU_SUPER[fighter_num] as f32 * 0.1;
-		if fighter_kind == *FIGHTER_KIND_RYU || WorkModule::get_int(boma, *FIGHTER_KIRBY_INSTANCE_WORK_ID_INT_COPY_CHARA) == *FIGHTER_KIND_RYU {
+		if (fighter_kind == *FIGHTER_KIND_RYU && is_default(boma) ) || WorkModule::get_int(boma, *FIGHTER_KIRBY_INSTANCE_WORK_ID_INT_COPY_CHARA) == *FIGHTER_KIND_RYU {
 			RYU_FX_TIMER[fighter_num] += 1;
 			max_meter = 51; //51
 			if smash::app::smashball::is_training_mode() == true {

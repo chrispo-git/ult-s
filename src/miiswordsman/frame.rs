@@ -24,7 +24,7 @@ pub fn sword(fighter : &mut L2CFighterCommon) {
 		let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 		let frame = MotionModule::frame(boma);
 		let end_frame = MotionModule::end_frame(boma);
-		if fighter_kind == *FIGHTER_KIND_MIISWORDSMAN {
+		if fighter_kind == *FIGHTER_KIND_MIISWORDSMAN && is_default(boma) {
 			if [*FIGHTER_STATUS_KIND_DEAD, *FIGHTER_STATUS_KIND_LOSE, *FIGHTER_STATUS_KIND_WIN].contains(&status_kind) || smash::app::sv_information::is_ready_go() == false{
 				COUNTER_STORE[ENTRY_ID] = false;
 				BOMB_TIME[ENTRY_ID] = 0;

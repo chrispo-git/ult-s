@@ -44,7 +44,7 @@ pub fn mario_frame(fighter : &mut L2CFighterCommon) {
 		let fighter_kind = smash::app::utility::get_kind(boma);
 		let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
-		if fighter_kind == *FIGHTER_KIND_MARIO {
+		if fighter_kind == *FIGHTER_KIND_MARIO &&  is_default(boma) {
 			if [*FIGHTER_STATUS_KIND_SPECIAL_HI, *FIGHTER_STATUS_KIND_SPECIAL_S].contains(&status_kind) == false {
 				ArticleModule::remove_exist(boma, *FIGHTER_MARIO_GENERATE_ARTICLE_CAPPY,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
 			};
