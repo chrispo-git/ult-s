@@ -28,9 +28,11 @@ unsafe fn richter_da(agent: &mut L2CAgentBase) {
 		    macros::ATTACK(agent, 0, 0, Hash40::new("kneel"), 7.0, 82, 90, 0, 70, 4.0, 0.0, 0.0, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 1, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_KICK, *ATTACK_REGION_KICK);
     	    macros::ATTACK(agent, 1, 0, Hash40::new("legl"), 7.0, 82, 90, 0, 70, 4.0, 0.0, 0.0, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 1, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_KICK, *ATTACK_REGION_KICK);
     	    macros::ATTACK(agent, 2, 0, Hash40::new("footl"), 7.0, 82, 90, 0, 70, 4.0, 0.0, 0.0, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 1, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_KICK, *ATTACK_REGION_KICK);
+    	    macros::ATTACK(agent, 3, 0, Hash40::new("top"), 7.0, 82, 90, 0, 70, 4.0, 0.0, 10.0, 7.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 1, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_KICK, *ATTACK_REGION_KICK);
     	}
 		wait(agent.lua_state_agent, 2.0);
 		macros::FT_MOTION_RATE(agent, 0.565);
+		wait(agent.lua_state_agent, 3.0);
 		if macros::is_excute(agent) {
 			AttackModule::clear_all(agent.module_accessor);
 		}
@@ -47,9 +49,10 @@ unsafe fn richter_da_eff(agent: &mut L2CAgentBase) {
 		}
 		frame(agent.lua_state_agent, 9.0);
 		if macros::is_excute(agent) {
-			macros::EFFECT_FOLLOW(agent, Hash40::new("sys_attack_arc_b"), Hash40::new("top"), -2, 6.7, 3, -16, -43, 15, 1, true);
+			macros::EFFECT_FOLLOW_FLIP(agent, Hash40::new("sys_attack_arc"), Hash40::new("sys_attack_arc"), Hash40::new("top"), 1, 10, 2, 10, -39, 154, 1.2, true, *EF_FLIP_YZ);
+			macros::LAST_EFFECT_SET_COLOR(agent, 0.25, 1.3, 2.5);
 		}
-		frame(agent.lua_state_agent, 56.0);
+		frame(agent.lua_state_agent, 54.0);
 		if macros::is_excute(agent) {
 			macros::LANDING_EFFECT(agent, Hash40::new("sys_landing_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.9, 0, 0, 0, 0, 0, 0, true);
 		}
@@ -65,7 +68,7 @@ unsafe fn richter_da_snd(agent: &mut L2CAgentBase) {
         macros::PLAY_SE(agent, Hash40::new("vc_richter_attack04"));
         macros::PLAY_SE(agent, Hash40::new("se_richter_attackair_l01"));
     }
-	frame(agent.lua_state_agent, 56.0);
+	frame(agent.lua_state_agent, 54.0);
     if macros::is_excute(agent) {
         macros::PLAY_LANDING_SE(agent, Hash40::new("se_richter_landing02"));
     }
