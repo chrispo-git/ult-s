@@ -21,7 +21,7 @@ pub fn install() {
     smashline::install_acmd_scripts!(villy_fthrow);
 }
 #[acmd_script(
-    agent = "sheik",
+    agent = "murabito",
     script =  "game_throwf",
     category = ACMD_GAME,
 	low_priority)]
