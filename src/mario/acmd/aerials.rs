@@ -136,7 +136,7 @@ unsafe fn mario_nair(fighter: &mut L2CAgentBase) {
 				let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);
 				let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 				if SPIN[ENTRY_ID] == false{
-											macros::SET_SPEED_EX(fighter, 0.45, 1.75, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+											macros::SET_SPEED_EX(fighter, 0.45, 1.35, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
 									};
 				SPIN[ENTRY_ID] = true;
 			}
