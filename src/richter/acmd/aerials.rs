@@ -68,6 +68,15 @@ unsafe fn richter_uair_snd(fighter: &mut L2CAgentBase) {
 			macros::PLAY_SEQUENCE(fighter, Hash40::new("seq_richter_rnd_attack"));
 		}
 }	
+#[acmd_script(
+    agent = "richter_whip",
+    script =  "effect_attackairhi",
+    category = ACMD_EFFECT,
+	low_priority)]
+unsafe fn richter_uair_whip(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+}	
+
 
 #[acmd_script(
     agent = "richter",
@@ -102,7 +111,7 @@ unsafe fn richter_nair(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     smashline::install_acmd_scripts!(
-		richter_uair, richter_uair_eff, richter_uair_snd,
+		richter_uair, richter_uair_eff, richter_uair_snd, richter_uair_whip,
         richter_nair
     );
 }
