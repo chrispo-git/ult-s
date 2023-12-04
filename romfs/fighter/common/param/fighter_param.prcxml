@@ -1471,7 +1471,7 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
       <float hash="run_speed_max">1.87</float>
       <float hash="air_speed_x_stable">1.08</float>
       <float hash="landing_attack_air_frame_n">7</float>
-      <float hash="landing_attack_air_frame_f">13</float>
+      <float hash="landing_attack_air_frame_f">11</float>
       <float hash="landing_attack_air_frame_b">13</float>
       <float hash="landing_attack_air_frame_hi">6</float>
       <float hash="landing_frame">4</float>
