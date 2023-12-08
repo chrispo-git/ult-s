@@ -54,6 +54,7 @@ LKE Studios - DK Utaunt animation
 LuXejin - Sonic Dtaunt animation
 MaroonRed - Mario nair sound
 Mayamia - Pause Screen UI, Loading Screen Animation
+mokl - Wolf utilt animation
 Naps - Sonic nair animation
 Nozzly - CPU adjustments
 Saminate - Dr. Mario animations
