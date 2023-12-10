@@ -49,7 +49,7 @@ unsafe fn gunner_fair(fighter: &mut L2CAgentBase) {
     }   
     frame(fighter.lua_state_agent, 10.0);
     if macros::is_excute(fighter) {
-        KineticModule::add_speed(fighter.module_accessor, &Vector3f{x: -1.3, y: 0.0, z: 0.0});
+        KineticModule::add_speed(fighter.module_accessor, &Vector3f{x: -1.0, y: 0.0, z: 0.0});
         ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_MIIGUNNER_GENERATE_ARTICLE_ATTACKAIRF_BULLET, false, -1);
     }
     macros::FT_MOTION_RATE(fighter, 1.0);
@@ -80,8 +80,6 @@ unsafe fn gunner_bair(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
     }
-	frame(fighter.lua_state_agent, 1.0);
-	macros::FT_MOTION_RATE(fighter, 0.7777777777777778);
     frame(fighter.lua_state_agent, 9.0);
 	macros::FT_MOTION_RATE(fighter, 1.0);
     if macros::is_excute(fighter) {

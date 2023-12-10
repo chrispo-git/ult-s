@@ -115,35 +115,6 @@ unsafe fn gunner_usmash(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script( agent = "miigunner", script = "game_attacklw4", category = ACMD_GAME, low_priority )]
-unsafe fn gunner_dsmash(fighter: &mut L2CAgentBase) {
-    frame(fighter.lua_state_agent, 6.0);
-    if macros::is_excute(fighter) {
-        WorkModule::on_flag(fighter.module_accessor, *FIGHTER_STATUS_ATTACK_FLAG_START_SMASH_HOLD);
-    }
-	frame(fighter.lua_state_agent, 1.0);
-    macros::FT_MOTION_RATE(fighter, 1.111111111111111);
-    frame(fighter.lua_state_agent, 9.0);
-	macros::FT_MOTION_RATE(fighter, 1.0);
-    if macros::is_excute(fighter) {
-        macros::ATTACK(fighter, 0, 0, Hash40::new("top"), 9.0, 160, 100, 95, 0, 4.0, 0.0, 5.0, 14.0, Some(0.0), Some(5.0), Some(10.0), 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_POS, true, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_fire"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_BOMB);
-        AttackModule::set_attack_height_all(fighter.module_accessor, AttackHeight(*ATTACK_HEIGHT_LOW), false);
-    }
-    wait(fighter.lua_state_agent, 1.0);
-    if macros::is_excute(fighter) {
-        AttackModule::clear_all(fighter.module_accessor);
-    }
-    frame(fighter.lua_state_agent, 24.0);
-    if macros::is_excute(fighter) {
-        macros::ATTACK(fighter, 0, 0, Hash40::new("top"), 13.0, 40, 65, 0, 65, 4.5, 0.0, 5.5, -17.0, Some(0.0), Some(6.0), Some(-10.0), 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_B, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_fire"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_BOMB);
-        AttackModule::set_attack_height_all(fighter.module_accessor, AttackHeight(*ATTACK_HEIGHT_LOW), false);
-    }
-    wait(fighter.lua_state_agent, 3.0);
-    if macros::is_excute(fighter) {
-        AttackModule::clear_all(fighter.module_accessor);
-    }
-}
-
 #[acmd_script( agent = "miigunner", script = "sound_attacklw4", category = ACMD_SOUND, low_priority )]
 unsafe fn gunner_dsmash_sound(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 7.0);
