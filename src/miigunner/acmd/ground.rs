@@ -158,6 +158,6 @@ pub fn install() {
     smashline::install_acmd_scripts!(
 		gunner_fsmash,
         gunner_usmash,
-        gunner_dsmash, gunner_dsmash_sound, //gunner_dsmash_effect
+        gunner_dsmash_sound, //gunner_dsmash_effect
     );
 }
