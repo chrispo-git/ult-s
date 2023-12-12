@@ -72,7 +72,6 @@ unsafe fn tink_utilt(fighter: &mut L2CAgentBase) {
 		if macros::is_excute(fighter) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
-		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5384615384615385);
 }	
 
 pub fn install() {
