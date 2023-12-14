@@ -431,12 +431,12 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
     <!--FOX-->
     <struct index="6">
       <float hash="dash_speed">2.37</float>
-      <float hash="run_speed_max">2.2</float>
+      <float hash="run_speed_max">2.0</float>
       <float hash="jump_speed_x">0.85</float>
       <float hash="jump_speed_x_mul">1.15</float>
       <float hash="jump_speed_x_max">2.5</float>
-      <float hash="air_accel_y">0.2</float>
-      <float hash="air_speed_y_stable">2.2</float>
+      <float hash="air_accel_y">0.175</float>
+      <float hash="air_speed_y_stable">2.3</float>
       <float hash="dive_speed_y">4.025</float>
       <float hash="landing_attack_air_frame_n">8</float>
       <float hash="landing_attack_air_frame_lw">12</float>
@@ -501,7 +501,7 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
     </struct>
     <!--JIGGLYPUFF-->
     <struct index="11">
-      <float hash="walk_speed_max">1.0</float>
+      <float hash="walk_speed_max">1.2</float>
       <float hash="dash_speed">1.76</float>
       <float hash="run_speed_max">1.35</float>
       <float hash="weight">75</float>
