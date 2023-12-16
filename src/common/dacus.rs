@@ -19,12 +19,14 @@ pub fn dacus(fighter : &mut L2CFighterCommon) {
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
 		let f6 = [
 			*FIGHTER_KIND_SAMUSD, *FIGHTER_KIND_LUIGI, *FIGHTER_KIND_WARIO, *FIGHTER_KIND_EDGE,
-			*FIGHTER_KIND_LUCAS, *FIGHTER_KIND_SZEROSUIT, *FIGHTER_KIND_PACMAN, *FIGHTER_KIND_MIIFIGHTER
+			*FIGHTER_KIND_LUCAS, *FIGHTER_KIND_PACMAN, *FIGHTER_KIND_MIIFIGHTER
+		];
+		let f8 = [*FIGHTER_KIND_SZEROSUIT
 		];
 		let f10 = [
 			*FIGHTER_KIND_CHROM, *FIGHTER_KIND_CLOUD, *FIGHTER_KIND_LITTLEMAC, *FIGHTER_KIND_TRAIL, *FIGHTER_KIND_REFLET,
 			*FIGHTER_KIND_FOX, *FIGHTER_KIND_ELIGHT, *FIGHTER_KIND_PITB, *FIGHTER_KIND_MARIO,
-			*FIGHTER_KIND_MARIOD, *FIGHTER_KIND_MURABITO, *FIGHTER_KIND_METAKNIGHT, *FIGHTER_KIND_JACK, *FIGHTER_KIND_SHEIK
+			*FIGHTER_KIND_MARIOD, *FIGHTER_KIND_MURABITO, *FIGHTER_KIND_METAKNIGHT, *FIGHTER_KIND_JACK, *FIGHTER_KIND_SHEIK,
 		];
 		let f11 = [
 			*FIGHTER_KIND_MIIGUNNER
@@ -48,6 +50,7 @@ pub fn dacus(fighter : &mut L2CFighterCommon) {
 				(f12.contains(&fighter_kind) && motion_duration(boma) <= 12) ||
 				(f11.contains(&fighter_kind) && motion_duration(boma) <= 11) ||
 				(f10.contains(&fighter_kind) && motion_duration(boma) <= 10) ||
+				(f8.contains(&fighter_kind) && motion_duration(boma) <= 8) ||
 				(f6.contains(&fighter_kind) && motion_duration(boma) <= 6) ||
 				(f6.contains(&fighter_kind) == false && motion_duration(boma) <= 8)){
 					if (ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_ATTACK_HI4) != 0 {

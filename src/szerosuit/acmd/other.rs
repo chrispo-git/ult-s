@@ -101,9 +101,217 @@ unsafe fn zss_grab_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 }
 
+#[acmd_script( agent = "szerosuit", script = "game_catchdash", category = ACMD_GAME, low_priority )]
+unsafe fn game_catchdash(agent: &mut L2CAgentBase) {
+    if macros::is_excute(agent) {
+        ArticleModule::generate_article(agent.module_accessor, *FIGHTER_SZEROSUIT_GENERATE_ARTICLE_WHIP, false, -1);
+        ArticleModule::change_motion(agent.module_accessor, *FIGHTER_SZEROSUIT_GENERATE_ARTICLE_WHIP, Hash40::new("catch_dash"), false, -1.0);
+    }
+	frame(agent.lua_state_agent, 1.0);
+	macros::FT_MOTION_RATE(agent, 0.5);
+	frame(agent.lua_state_agent, 10.0);
+	macros::FT_MOTION_RATE(agent, 1.0);
+    frame(agent.lua_state_agent, 16.0);
+    if macros::is_excute(agent) {
+        GrabModule::set_rebound(agent.module_accessor, true);
+    }
+    frame(agent.lua_state_agent, 17.0);
+    if macros::is_excute(agent) {
+        macros::CATCH(agent, 0, Hash40::new("throw"), 3.0, 0.0, 0.0, 0.0, None, None, None, *FIGHTER_STATUS_KIND_CAPTURE_PULLED, *COLLISION_SITUATION_MASK_GA);
+        macros::CATCH(agent, 1, Hash40::new("handr"), 2.0, 0.0, 0.0, 0.0, None, None, None, *FIGHTER_STATUS_KIND_CAPTURE_PULLED, *COLLISION_SITUATION_MASK_GA);
+    }
+    macros::game_CaptureCutCommon(agent);
+    frame(agent.lua_state_agent, 20.0);
+    if macros::is_excute(agent) {
+        grab!(agent, *MA_MSC_CMD_GRAB_CLEAR, 1);
+    }
+    frame(agent.lua_state_agent, 27.0);
+    if macros::is_excute(agent) {
+        grab!(agent, *MA_MSC_CMD_GRAB_CLEAR_ALL);
+        GrabModule::set_rebound(agent.module_accessor, false);
+    }
+    frame(agent.lua_state_agent, 76.0);
+    if macros::is_excute(agent) {
+        ArticleModule::remove_exist(agent.module_accessor, *FIGHTER_SZEROSUIT_GENERATE_ARTICLE_WHIP, ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
+    }
+}
+
+#[acmd_script( agent = "szerosuit", script = "game_catchturn", category = ACMD_GAME, low_priority )]
+unsafe fn game_catchturn(agent: &mut L2CAgentBase) {
+    if macros::is_excute(agent) {
+        ArticleModule::generate_article(agent.module_accessor, *FIGHTER_SZEROSUIT_GENERATE_ARTICLE_WHIP, false, -1);
+        ArticleModule::change_motion(agent.module_accessor, *FIGHTER_SZEROSUIT_GENERATE_ARTICLE_WHIP, Hash40::new("catch_turn"), false, -1.0);
+    }
+	frame(agent.lua_state_agent, 1.0);
+	macros::FT_MOTION_RATE(agent, 0.5);
+	frame(agent.lua_state_agent, 10.0);
+	macros::FT_MOTION_RATE(agent, 1.0);
+    frame(agent.lua_state_agent, 17.0);
+    if macros::is_excute(agent) {
+        GrabModule::set_rebound(agent.module_accessor, true);
+    }
+    frame(agent.lua_state_agent, 18.0);
+    if macros::is_excute(agent) {
+        macros::CATCH(agent, 0, Hash40::new("throw"), 3.0, 0.0, 0.0, 0.0, None, None, None, *FIGHTER_STATUS_KIND_CAPTURE_PULLED, *COLLISION_SITUATION_MASK_GA);
+        macros::CATCH(agent, 1, Hash40::new("handr"), 2.0, 0.0, 0.0, 0.0, None, None, None, *FIGHTER_STATUS_KIND_CAPTURE_PULLED, *COLLISION_SITUATION_MASK_GA);
+    }
+    macros::game_CaptureCutCommon(agent);
+    frame(agent.lua_state_agent, 21.0);
+    if macros::is_excute(agent) {
+        grab!(agent, *MA_MSC_CMD_GRAB_CLEAR, 1);
+    }
+    frame(agent.lua_state_agent, 27.0);
+    if macros::is_excute(agent) {
+        grab!(agent, *MA_MSC_CMD_GRAB_CLEAR_ALL);
+        GrabModule::set_rebound(agent.module_accessor, false);
+    }
+    frame(agent.lua_state_agent, 57.0);
+    if macros::is_excute(agent) {
+        ArticleModule::remove_exist(agent.module_accessor, *FIGHTER_SZEROSUIT_GENERATE_ARTICLE_WHIP, ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
+    }
+}
+#[acmd_script( agent = "szerosuit_whip", script = "effect_catchdash", category = ACMD_EFFECT, low_priority )]
+unsafe fn effect_catchdash(agent: &mut L2CAgentBase) {
+	frame(agent.lua_state_agent, 1.0);
+	macros::FT_MOTION_RATE(agent, 0.5);
+	frame(agent.lua_state_agent, 10.0);
+	macros::FT_MOTION_RATE(agent, 1.0);
+    frame(agent.lua_state_agent, 11.0);
+    if macros::is_excute(agent) {
+        macros::EFFECT_FOLLOW(agent, Hash40::new("szero_whip_flash"), Hash40::new("plasmawhip1"), 1, 0, 0, 0, 0, 0, 1, true);
+    }
+    frame(agent.lua_state_agent, 14.0);
+    if macros::is_excute(agent) {
+        macros::EFFECT_FLW_POS(agent, Hash40::new("szero_whip"), Hash40::new("attach"), 0, 0, 0, 0, 0, 0, 0.5, true);
+        macros::EFFECT_FOLLOW(agent, Hash40::new("szero_whip_catch"), Hash40::new("attach"), 0, 0, 0, 0, 0, 0, 0.6, true);
+    }
+    frame(agent.lua_state_agent, 15.0);
+    if macros::is_excute(agent) {
+        macros::EFFECT_FLW_POS(agent, Hash40::new("szero_gbeam_lightning"), Hash40::new("plasmawhip2"), 0, 0, 0, 0, 0, 0, 1, true);
+        macros::EFFECT_FLW_POS(agent, Hash40::new("szero_gbeam_lightning"), Hash40::new("plasmawhip3"), 0, 0, 0, 0, 0, 0, 1, true);
+        macros::EFFECT_FLW_POS(agent, Hash40::new("szero_gbeam_lightning"), Hash40::new("plasmawhip4"), 0, 0, 0, 0, 0, 0, 1, true);
+        macros::EFFECT_FLW_POS(agent, Hash40::new("szero_gbeam_lightning"), Hash40::new("plasmawhip5"), 0, 0, 0, 0, 0, 0, 1, true);
+        macros::EFFECT_FLW_POS(agent, Hash40::new("szero_gbeam_lightning"), Hash40::new("plasmawhip6"), 0, 0, 0, 0, 0, 0, 1, true);
+        macros::EFFECT_FLW_POS(agent, Hash40::new("szero_gbeam_lightning"), Hash40::new("plasmawhip7"), 0, 0, 0, 0, 0, 0, 1, true);
+        macros::EFFECT_FLW_POS(agent, Hash40::new("szero_gbeam_lightning"), Hash40::new("plasmawhip8"), 0, 0, 0, 0, 0, 0, 1, true);
+    }
+    frame(agent.lua_state_agent, 26.0);
+    if macros::is_excute(agent) {
+        macros::EFFECT_OFF_KIND(agent, Hash40::new("szero_whip_catch"), false, true);
+    }
+    frame(agent.lua_state_agent, 45.0);
+    if macros::is_excute(agent) {
+        macros::EFFECT_OFF_KIND(agent, Hash40::new("szero_gbeam_lightning"), false, true);
+        macros::EFFECT_OFF_KIND(agent, Hash40::new("szero_whip_flash"), false, true);
+    }
+}
+#[acmd_script( agent = "szerosuit_whip", script = "effect_catchturn", category = ACMD_EFFECT, low_priority )]
+unsafe fn effect_catchturn(agent: &mut L2CAgentBase) {
+	frame(agent.lua_state_agent, 1.0);
+	macros::FT_MOTION_RATE(agent, 0.5);
+	frame(agent.lua_state_agent, 10.0);
+	macros::FT_MOTION_RATE(agent, 1.0);
+    frame(agent.lua_state_agent, 11.0);
+    if macros::is_excute(agent) {
+        macros::EFFECT_FOLLOW(agent, Hash40::new("szero_whip_flash"), Hash40::new("plasmawhip1"), 1, 0, 0, 0, 0, 0, 1, true);
+    }
+    frame(agent.lua_state_agent, 14.0);
+    if macros::is_excute(agent) {
+        macros::EFFECT_FLW_POS(agent, Hash40::new("szero_whip"), Hash40::new("attach"), 0, 0, 0, 0, 0, 0, 0.5, true);
+        macros::EFFECT_FOLLOW(agent, Hash40::new("szero_whip_catch"), Hash40::new("attach"), 0, 0, 0, 0, 0, 0, 0.6, true);
+    }
+    frame(agent.lua_state_agent, 15.0);
+    if macros::is_excute(agent) {
+        macros::EFFECT_FLW_POS(agent, Hash40::new("szero_gbeam_lightning"), Hash40::new("plasmawhip2"), 0, 0, 0, 0, 0, 0, 1, true);
+        macros::EFFECT_FLW_POS(agent, Hash40::new("szero_gbeam_lightning"), Hash40::new("plasmawhip3"), 0, 0, 0, 0, 0, 0, 1, true);
+        macros::EFFECT_FLW_POS(agent, Hash40::new("szero_gbeam_lightning"), Hash40::new("plasmawhip4"), 0, 0, 0, 0, 0, 0, 1, true);
+        macros::EFFECT_FLW_POS(agent, Hash40::new("szero_gbeam_lightning"), Hash40::new("plasmawhip5"), 0, 0, 0, 0, 0, 0, 1, true);
+        macros::EFFECT_FLW_POS(agent, Hash40::new("szero_gbeam_lightning"), Hash40::new("plasmawhip6"), 0, 0, 0, 0, 0, 0, 1, true);
+        macros::EFFECT_FLW_POS(agent, Hash40::new("szero_gbeam_lightning"), Hash40::new("plasmawhip7"), 0, 0, 0, 0, 0, 0, 1, true);
+        macros::EFFECT_FLW_POS(agent, Hash40::new("szero_gbeam_lightning"), Hash40::new("plasmawhip8"), 0, 0, 0, 0, 0, 0, 1, true);
+    }
+    frame(agent.lua_state_agent, 26.0);
+    if macros::is_excute(agent) {
+        macros::EFFECT_OFF_KIND(agent, Hash40::new("szero_whip_catch"), false, true);
+    }
+    frame(agent.lua_state_agent, 45.0);
+    if macros::is_excute(agent) {
+        macros::EFFECT_OFF_KIND(agent, Hash40::new("szero_gbeam_lightning"), false, true);
+        macros::EFFECT_OFF_KIND(agent, Hash40::new("szero_whip_flash"), false, true);
+    }
+}
+#[acmd_script( agent = "szerosuit_whip", script = "game_catchdash", category = ACMD_GAME, low_priority )]
+unsafe fn game_catchdash2(agent: &mut L2CAgentBase) {
+    if macros::is_excute(agent) {
+        VisibilityModule::set_whole(agent.module_accessor, false);
+    }
+	frame(agent.lua_state_agent, 1.0);
+	macros::FT_MOTION_RATE(agent, 0.5);
+	frame(agent.lua_state_agent, 10.0);
+	macros::FT_MOTION_RATE(agent, 1.0);
+    frame(agent.lua_state_agent, 15.0);
+    if macros::is_excute(agent) {
+        VisibilityModule::set_whole(agent.module_accessor, true);
+    }
+    frame(agent.lua_state_agent, 49.0);
+    if macros::is_excute(agent) {
+        VisibilityModule::set_whole(agent.module_accessor, false);
+    }
+}
+#[acmd_script( agent = "szerosuit_whip", script = "game_catchturn", category = ACMD_GAME, low_priority )]
+unsafe fn game_catchturn2(agent: &mut L2CAgentBase) {
+    if macros::is_excute(agent) {
+        VisibilityModule::set_whole(agent.module_accessor, false);
+    }
+	frame(agent.lua_state_agent, 1.0);
+	macros::FT_MOTION_RATE(agent, 0.5);
+	frame(agent.lua_state_agent, 10.0);
+	macros::FT_MOTION_RATE(agent, 1.0);
+    frame(agent.lua_state_agent, 16.0);
+    if macros::is_excute(agent) {
+        VisibilityModule::set_whole(agent.module_accessor, true);
+    }
+    frame(agent.lua_state_agent, 56.0);
+    if macros::is_excute(agent) {
+        VisibilityModule::set_whole(agent.module_accessor, false);
+    }
+}
+#[acmd_script( agent = "szerosuit", script = "effect_catchdash", category = ACMD_EFFECT, low_priority )]
+unsafe fn effect_catchdash2(agent: &mut L2CAgentBase) {
+	frame(agent.lua_state_agent, 1.0);
+	macros::FT_MOTION_RATE(agent, 0.5);
+	frame(agent.lua_state_agent, 10.0);
+	macros::FT_MOTION_RATE(agent, 1.0);
+    frame(agent.lua_state_agent, 12.0);
+    if macros::is_excute(agent) {
+        macros::EFFECT_FOLLOW(agent, Hash40::new("szero_whip_shot"), Hash40::new("haver"), 0, 0, 0, 0, 0, 90, 0.4, true);
+    }
+    frame(agent.lua_state_agent, 50.0);
+    if macros::is_excute(agent) {
+        macros::EFFECT_FOLLOW(agent, Hash40::new("szero_whip_vanish"), Hash40::new("haver"), 0, 0, 0, 0, 0, 90, 0.6, true);
+    }
+}
+
+#[acmd_script( agent = "szerosuit", script = "effect_catchturn", category = ACMD_EFFECT, low_priority )]
+unsafe fn effect_catchturn2(agent: &mut L2CAgentBase) {
+	frame(agent.lua_state_agent, 1.0);
+	macros::FT_MOTION_RATE(agent, 0.5);
+	frame(agent.lua_state_agent, 10.0);
+	macros::FT_MOTION_RATE(agent, 1.0);
+    frame(agent.lua_state_agent, 14.0);
+    if macros::is_excute(agent) {
+        macros::EFFECT_FOLLOW(agent, Hash40::new("szero_whip_shot"), Hash40::new("haver"), 0, 0, 0, 0, 0, 90, 0.4, true);
+    }
+    frame(agent.lua_state_agent, 58.0);
+    if macros::is_excute(agent) {
+        macros::EFFECT_FOLLOW(agent, Hash40::new("szero_whip_vanish"), Hash40::new("haver"), 0, 0, 0, 0, 0, 90, 0.6, true);
+    }
+}
 pub fn install() {
     smashline::install_acmd_scripts!(
 		//zss_pummel, //zss_pummel_eff,
-        zss_grab, zss_grab_eff, zss_grab_snd
+        zss_grab, zss_grab_eff, zss_grab_snd,
+		game_catchdash, effect_catchdash, game_catchdash2, effect_catchdash2,
+		game_catchturn, effect_catchturn, game_catchturn2, effect_catchturn2
     );
 }

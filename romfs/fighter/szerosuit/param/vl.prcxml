@@ -2,7 +2,8 @@
 <struct>
   <list hash="param_special_lw">
     <struct index="0">
-      <float hash="speed_mul">0.65</float>
+      <float hash="speed_mul">0.90</float>
+      <float hash="control_speed_x_mul">0.875</float>
     </struct>
     <hash40 index="1">dummy</hash40>
     <hash40 index="2">dummy</hash40>
