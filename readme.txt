@@ -2,6 +2,15 @@ Thank you for downloading Ultimate S!
 
 Place at the root of your SD Card
 
+-Dependecies-
+libparam_config.nro - https://github.com/CSharpM7/lib_paramconfig
+libcss_slot_redirection - Included in download (latest version is pinned in the Ultimate S Discord #help channel)
+libstage_config.nro - https://github.com/ThatNintendoNerd/stage_config
+libarcropolis.nro - https://github.com/Raytwo/ARCropolis
+libnro_hook.nro - https://github.com/ultimate-research/nro-hook-plugin
+libsmashline_hook - https://github.com/blu-dev/smashline_hook
+skyline - https://github.com/skyline-dev/skyline
+
 -Common Issues-
 Make sure when updating you DELETE the old version rather than replacing
 
