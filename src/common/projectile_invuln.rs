@@ -48,7 +48,7 @@ pub fn projectile_invuln_master(fighter : &mut L2CFighterCommon) {
 		}else if fighter_kind == *FIGHTER_KIND_MURABITO && is_default(boma) {
 			if [hash40("special_n")].contains(&MotionModule::motion_kind(boma)) {
 				if MotionModule::frame(boma) >= 3.0 && MotionModule::frame(boma) < 10.0 {
-					shield!(fighter, *MA_MSC_CMD_REFLECTOR, *COLLISION_KIND_REFLECTOR, 0, hash40("stickr"), /*Size*/ 8.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 3.0, /*X2*/ 0.0, /*Y2*/ 0.0, /*Z2*/ 11.0, /*Power*/ 1., /*Speed*/ speed_mul, /*Max Damage*/ reflector_max, false, /*Lifetime*/ life_mul, *FIGHTER_REFLECTOR_GROUP_HOMERUNBAT);
+					shield!(fighter, *MA_MSC_CMD_REFLECTOR, *COLLISION_KIND_REFLECTOR, 0, hash40("stickr"), /*Size*/ 8.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 3.0, /*X2*/ 0.0, /*Y2*/ 0.0, /*Z2*/ 11.0, /*Power*/ 1.2, /*Speed*/ 1.2, /*Max Damage*/ 80.0, false, /*Lifetime*/ 1.1, *FIGHTER_REFLECTOR_GROUP_HOMERUNBAT);
 				} else {
 					shield!(fighter, *MA_MSC_CMD_SHIELD_OFF, *COLLISION_KIND_REFLECTOR, 0, *FIGHTER_REFLECTOR_GROUP_HOMERUNBAT);
 				};
