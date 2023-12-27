@@ -11614,6 +11614,54 @@
 			"fighter/mariod/motion/body/c07/d02specialhilanding.nuanmb",
 			"fighter/mariod/motion/body/c07/d00specialinput.nuanmb"
 		],
+        "fighter/murabito/c00": [
+			"fighter/murabito/motion/body/c00/d00specialn1.nuanmb",
+			"fighter/murabito/motion/body/c00/d00specialn2.nuanmb",
+			"fighter/murabito/motion/body/c00/d00specialn2fail.nuanmb",
+			"fighter/murabito/motion/body/c00/d00specialn3.nuanmb"
+		],
+        "fighter/murabito/c01": [
+			"fighter/murabito/motion/body/c01/d00specialn1.nuanmb",
+			"fighter/murabito/motion/body/c01/d00specialn2.nuanmb",
+			"fighter/murabito/motion/body/c01/d00specialn2fail.nuanmb",
+			"fighter/murabito/motion/body/c01/d00specialn3.nuanmb"
+		],
+        "fighter/murabito/c02": [
+			"fighter/murabito/motion/body/c02/d00specialn1.nuanmb",
+			"fighter/murabito/motion/body/c02/d00specialn2.nuanmb",
+			"fighter/murabito/motion/body/c02/d00specialn2fail.nuanmb",
+			"fighter/murabito/motion/body/c02/d00specialn3.nuanmb"
+		],
+        "fighter/murabito/c03": [
+			"fighter/murabito/motion/body/c03/d00specialn1.nuanmb",
+			"fighter/murabito/motion/body/c03/d00specialn2.nuanmb",
+			"fighter/murabito/motion/body/c03/d00specialn2fail.nuanmb",
+			"fighter/murabito/motion/body/c03/d00specialn3.nuanmb"
+		],
+        "fighter/murabito/c04": [
+			"fighter/murabito/motion/body/c04/d00specialn1.nuanmb",
+			"fighter/murabito/motion/body/c04/d00specialn2.nuanmb",
+			"fighter/murabito/motion/body/c04/d00specialn2fail.nuanmb",
+			"fighter/murabito/motion/body/c04/d00specialn3.nuanmb"
+		],
+        "fighter/murabito/c05": [
+			"fighter/murabito/motion/body/c05/d00specialn1.nuanmb",
+			"fighter/murabito/motion/body/c05/d00specialn2.nuanmb",
+			"fighter/murabito/motion/body/c05/d00specialn2fail.nuanmb",
+			"fighter/murabito/motion/body/c05/d00specialn3.nuanmb"
+		],
+        "fighter/murabito/c06": [
+			"fighter/murabito/motion/body/c06/d00specialn1.nuanmb",
+			"fighter/murabito/motion/body/c06/d00specialn2.nuanmb",
+			"fighter/murabito/motion/body/c06/d00specialn2fail.nuanmb",
+			"fighter/murabito/motion/body/c06/d00specialn3.nuanmb"
+		],
+        "fighter/murabito/c07": [
+			"fighter/murabito/motion/body/c07/d00specialn1.nuanmb",
+			"fighter/murabito/motion/body/c07/d00specialn2.nuanmb",
+			"fighter/murabito/motion/body/c07/d00specialn2fail.nuanmb",
+			"fighter/murabito/motion/body/c07/d00specialn3.nuanmb"
+		],
         "fighter/sheik/c00": [
 			"fighter/sheik/motion/body/c00/d00specialinput.nuanmb"
 		],
