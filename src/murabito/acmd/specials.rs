@@ -20,7 +20,8 @@ use super::*;
 pub fn install() {
     smashline::install_acmd_scripts!(
 		villy_neutralb_1, villy_neutralb_2, villy_neutralb_2_fail, villy_neutralb_3, villy_neutralb_air,
-        villy_neutralb_1_eff, villy_neutralb_2_eff, villy_neutralb_2_fail_eff, villy_neutralb_air_eff, villy_neutralb_3_eff
+        villy_neutralb_1_eff, villy_neutralb_2_eff, villy_neutralb_2_fail_eff, villy_neutralb_air_eff, villy_neutralb_3_eff,
+        villy_neutralb_1_snd, villy_neutralb_2_snd, villy_neutralb_2_fail_snd, villy_neutralb_3_snd
     );
 }
 #[acmd_script(
@@ -132,6 +133,28 @@ unsafe fn villy_neutralb_1(agent: &mut L2CAgentBase) {
 }		
 #[acmd_script(
     agent = "murabito",
+    script =  "effect_specialn",
+    category = ACMD_EFFECT,
+	low_priority)]
+unsafe fn villy_neutralb_1_eff(agent: &mut L2CAgentBase) {
+    frame(agent.lua_state_agent, 6.0);
+    if macros::is_excute(agent) {
+        macros::EFFECT_FOLLOW(agent, Hash40::new("sys_attack_arc_b"), Hash40::new("top"), 1, 11, 0, 1.7, 10, 70, 1.5, true);
+    }
+}	
+#[acmd_script(
+    agent = "murabito",
+    script =  "sound_specialn",
+    category = ACMD_SOUND,
+	low_priority)]
+unsafe fn villy_neutralb_1_snd(agent: &mut L2CAgentBase) {
+    frame(agent.lua_state_agent, 4.0);
+    if macros::is_excute(agent) {
+        macros::PLAY_SE(agent, Hash40::new("se_murabito_swing_s_finish"));
+    }
+}		
+#[acmd_script(
+    agent = "murabito",
     script =  "game_specialn2",
     category = ACMD_GAME,
 	low_priority)]
@@ -164,29 +187,7 @@ unsafe fn villy_neutralb_2(agent: &mut L2CAgentBase) {
         ModelModule::set_mesh_visibility(agent.module_accessor,Hash40::new("murabito_shovel"),false);
         ModelModule::set_mesh_visibility(agent.module_accessor,Hash40::new("murabito_shovelflip"),false);
     }
-}	
-#[acmd_script(
-    agent = "murabito",
-    script =  "sound_specialn",
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn villy_neutralb_1_snd(agent: &mut L2CAgentBase) {
-    frame(agent.lua_state_agent, 6.0);
-    if macros::is_excute(agent) {
-        macros::EFFECT_FOLLOW(agent, Hash40::new("sys_attack_arc_b"), Hash40::new("top"), 1, 11, 0, 1.7, 10, 70, 1.5, true);
-    }
-}	
-#[acmd_script(
-    agent = "murabito",
-    script =  "effect_specialn",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn villy_neutralb_1_eff(agent: &mut L2CAgentBase) {
-    frame(agent.lua_state_agent, 6.0);
-    if macros::is_excute(agent) {
-        macros::EFFECT_FOLLOW(agent, Hash40::new("sys_attack_arc_b"), Hash40::new("top"), 1, 11, 0, 1.7, 10, 70, 1.5, true);
-    }
-}	
+}
 #[acmd_script(
     agent = "murabito",
     script =  "effect_specialn2",
@@ -202,7 +203,22 @@ unsafe fn villy_neutralb_2_eff(agent: &mut L2CAgentBase) {
         macros::LANDING_EFFECT(agent, Hash40::new("sys_down_smoke"), Hash40::new("top"), 12, 0, 0, 0, 0, 0, 0.55, 2, 2, 2, 0, 0, 0, false);
         macros::EFFECT(agent, Hash40::new("murabito_clay"), Hash40::new("top"), 12, 0, 0, 0, 0, 0, 1, 2, 2, 2, 0, 0, 0, false);
     }
-}			
+}		
+#[acmd_script(
+    agent = "murabito",
+    script =  "sound_specialn2",
+    category = ACMD_SOUND,
+	low_priority)]
+unsafe fn villy_neutralb_2_snd(agent: &mut L2CAgentBase) {
+    frame(agent.lua_state_agent, 5.0);
+    if macros::is_excute(agent) {
+        macros::PLAY_SE(agent, Hash40::new("se_murabito_smash_l02"));
+    }
+    frame(agent.lua_state_agent, 17.0);
+    if macros::is_excute(agent) {
+        macros::PLAY_SE(agent, Hash40::new("se_murabito_attackdash01"));
+    }
+}		
 #[acmd_script(
     agent = "murabito",
     script =  "game_specialn2fail",
@@ -247,35 +263,42 @@ unsafe fn villy_neutralb_2_fail_eff(agent: &mut L2CAgentBase) {
 }	
 #[acmd_script(
     agent = "murabito",
+    script =  "sound_specialn2fail",
+    category = ACMD_SOUND,
+	low_priority)]
+unsafe fn villy_neutralb_2_fail_snd(agent: &mut L2CAgentBase) {
+    frame(agent.lua_state_agent, 5.0);
+    if macros::is_excute(agent) {
+        macros::PLAY_SE(agent, Hash40::new("se_murabito_smash_l02"));
+    }
+}	
+#[acmd_script(
+    agent = "murabito",
     script =  "game_specialn3",
     category = ACMD_GAME,
 	low_priority)]
-unsafe fn villy_neutralb_3(fighter: &mut L2CAgentBase) {
-    macros::FT_MOTION_RATE(fighter, 1.1);
-    if macros::is_excute(fighter) {
-        ItemModule::remove_item(fighter.module_accessor, 0);
-        ItemModule::set_have_item_visibility(fighter.module_accessor, false, 0 );
+unsafe fn villy_neutralb_3(agent: &mut L2CAgentBase) {
+    macros::FT_MOTION_RATE(agent, 1.1);
+    if macros::is_excute(agent) {
+        ItemModule::remove_item(agent.module_accessor, 0);
+        ItemModule::set_have_item_visibility(agent.module_accessor, false, 0 );
     }
-    frame(fighter.lua_state_agent, 41.0);
-    if macros::is_excute(fighter) {
-        ItemModule::set_have_item_visibility(fighter.module_accessor, true, 0 );
+    frame(agent.lua_state_agent, 41.0);
+    if macros::is_excute(agent) {
+        ItemModule::set_have_item_visibility(agent.module_accessor, true, 0 );
         let rand_num = smash::app::sv_math::rand(hash40("fighter"), 100);
         if rand_num < 2 {
-            ItemModule::have_item(fighter.module_accessor, smash::app::ItemKind(*ITEM_KIND_DEKU), 0, 0, false, false);
+            ItemModule::have_item(agent.module_accessor, smash::app::ItemKind(*ITEM_KIND_DEKU), 0, 0, false, false);
         } else if rand_num < 4 {
-            ItemModule::have_item(fighter.module_accessor, smash::app::ItemKind(*ITEM_KIND_DOSEISAN), 0, 0, false, false);
+            ItemModule::have_item(agent.module_accessor, smash::app::ItemKind(*ITEM_KIND_DOSEISAN), 0, 0, false, false);
         } else if rand_num < 6 {
-            ItemModule::have_item(fighter.module_accessor, smash::app::ItemKind(*ITEM_KIND_MAGICBALL), 0, 0, false, false);
+            ItemModule::have_item(agent.module_accessor, smash::app::ItemKind(*ITEM_KIND_MAGICBALL), 0, 0, false, false);
         } else if rand_num < 50 {
-            ItemModule::have_item(fighter.module_accessor, smash::app::ItemKind(*ITEM_KIND_BANANA), 0, 0, false, false);
+            ItemModule::have_item(agent.module_accessor, smash::app::ItemKind(*ITEM_KIND_BANANA), 0, 0, false, false);
         } else {
-            ItemModule::have_item(fighter.module_accessor, smash::app::ItemKind(*ITEM_KIND_WOOD), 0, 0, false, false);
+            ItemModule::have_item(agent.module_accessor, smash::app::ItemKind(*ITEM_KIND_WOOD), 0, 0, false, false);
         }
-        macros::STOP_SE(fighter, Hash40::new("se_item_item_get"));
-    }
-    frame(fighter.lua_state_agent, 60.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_SE(fighter, Hash40::new("se_item_item_get"));
+        macros::STOP_SE(agent, Hash40::new("se_item_item_get"));
     }
 }		
 #[acmd_script(
@@ -283,16 +306,37 @@ unsafe fn villy_neutralb_3(fighter: &mut L2CAgentBase) {
     script =  "effect_specialn3",
     category = ACMD_EFFECT,
 	low_priority)]
-unsafe fn villy_neutralb_3_eff(fighter: &mut L2CAgentBase) {
+unsafe fn villy_neutralb_3_eff(agent: &mut L2CAgentBase) {
     for _ in 0..5 {
-        wait(fighter.lua_state_agent, 6.0);
-        if macros::is_excute(fighter) {
-            macros::EFFECT(fighter, Hash40::new("sys_erace_smoke"), Hash40::new("haver"), 0, 0, 0, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, false);
-            macros::LAST_EFFECT_SET_RATE(fighter, 0.5);
+        wait(agent.lua_state_agent, 6.0);
+        if macros::is_excute(agent) {
+            macros::EFFECT(agent, Hash40::new("sys_erace_smoke"), Hash40::new("haver"), 0, 0, 0, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, false);
+            macros::LAST_EFFECT_SET_RATE(agent, 0.5);
         }
     }
-    frame(fighter.lua_state_agent, 42.0);
-    if macros::is_excute(fighter) {
-        macros::LANDING_EFFECT(fighter, Hash40::new("sys_landing_smoke"), Hash40::new("haver"), 0, 0, 0, 0, 0, 0, 0.66, 2, 2, 2, 0, 0, 0, false);
+    frame(agent.lua_state_agent, 42.0);
+    if macros::is_excute(agent) {
+        macros::LANDING_EFFECT(agent, Hash40::new("sys_landing_smoke"), Hash40::new("haver"), 0, 0, 0, 0, 0, 0, 0.66, 2, 2, 2, 0, 0, 0, false);
+    }
+}	
+#[acmd_script(
+    agent = "murabito",
+    script =  "sound_specialn3",
+    category = ACMD_SOUND,
+	low_priority)]
+unsafe fn villy_neutralb_3_snd(agent: &mut L2CAgentBase) {
+    frame(agent.lua_state_agent, 18.0);
+    if macros::is_excute(agent) {
+        macros::PLAY_SE(agent, Hash40::new("se_murabito_attackair_h01"));
+        macros::PLAY_SE(agent, Hash40::new("se_murabito_swing_m"));
+    }
+    frame(agent.lua_state_agent, 36.0);
+    if macros::is_excute(agent) {
+        macros::PLAY_SE(agent, Hash40::new("se_murabito_attackair_h02"));
+        macros::PLAY_SE(agent, Hash40::new("se_murabito_swing_m"));
+    }
+    frame(agent.lua_state_agent, 60.0);
+    if macros::is_excute(agent) {
+        macros::PLAY_SE(agent, Hash40::new("se_murabito_special_n04"));
     }
 }	
