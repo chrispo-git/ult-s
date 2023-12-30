@@ -138,7 +138,7 @@ unsafe fn zss_dthrow(fighter: &mut L2CAgentBase) {
 			macros::CHECK_FINISH_CAMERA(fighter, 3, 0);
 		}
 		frame(fighter.lua_state_agent, 22.0);
-		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.75);
+		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.70);
 		if macros::is_excute(fighter) {
 			macros::ATK_HIT_ABS(fighter, *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, Hash40::new("throw"), WorkModule::get_int64(fighter.module_accessor,*FIGHTER_STATUS_THROW_WORK_INT_TARGET_OBJECT), WorkModule::get_int64(fighter.module_accessor,*FIGHTER_STATUS_THROW_WORK_INT_TARGET_HIT_GROUP), WorkModule::get_int64(fighter.module_accessor,*FIGHTER_STATUS_THROW_WORK_INT_TARGET_HIT_NO));
 			AttackModule::clear_all(fighter.module_accessor);
