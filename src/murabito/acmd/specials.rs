@@ -314,10 +314,6 @@ unsafe fn villy_neutralb_3_eff(agent: &mut L2CAgentBase) {
             macros::LAST_EFFECT_SET_RATE(agent, 0.5);
         }
     }
-    frame(agent.lua_state_agent, 42.0);
-    if macros::is_excute(agent) {
-        macros::LANDING_EFFECT(agent, Hash40::new("sys_landing_smoke"), Hash40::new("haver"), 0, 0, 0, 0, 0, 0, 0.66, 2, 2, 2, 0, 0, 0, false);
-    }
 }	
 #[acmd_script(
     agent = "murabito",
