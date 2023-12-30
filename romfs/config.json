@@ -12048,6 +12048,30 @@
 			"fighter/kirby/model/finalcutter/c07/def_wheel_001_col.nutexb",
 			"fighter/kirby/motion/finalcutter/c07/d02specialhi5.nuanmb"
 		],
+        "fighter/simon/c00": [
+			"fighter/simon/motion/whip/c00/c02attacklw3.nuanmb"
+		],
+        "fighter/simon/c01": [
+			"fighter/simon/motion/whip/c01/c02attacklw3.nuanmb"
+		],
+        "fighter/simon/c02": [
+			"fighter/simon/motion/whip/c02/c02attacklw3.nuanmb"
+		],
+        "fighter/simon/c03": [
+			"fighter/simon/motion/whip/c03/c02attacklw3.nuanmb"
+		],
+        "fighter/simon/c04": [
+			"fighter/simon/motion/whip/c04/c02attacklw3.nuanmb"
+		],
+        "fighter/simon/c05": [
+			"fighter/simon/motion/whip/c05/c02attacklw3.nuanmb"
+		],
+        "fighter/simon/c06": [
+			"fighter/simon/motion/whip/c06/c02attacklw3.nuanmb"
+		],
+        "fighter/simon/c07": [
+			"fighter/simon/motion/whip/c07/c02attacklw3.nuanmb"
+		],
         "fighter/murabito/c120": [
             "fighter/murabito/model/house/c120/dark_model.numatb",
             "fighter/murabito/model/house/c120/def_house_001_col.nutexb",
