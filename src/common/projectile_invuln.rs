@@ -85,7 +85,7 @@ pub fn projectile_invuln_master(fighter : &mut L2CFighterCommon) {
 				};
 			};
 		} else if fighter_kind == *FIGHTER_KIND_RICHTER {
-			if [hash40("attack_dash")].contains(&MotionModule::motion_kind(boma)) {
+			if [hash40("special_s1"), hash40("special_air_s1")].contains(&MotionModule::motion_kind(boma)) {
 				if MotionModule::frame(boma) > 10.0 && MotionModule::frame(boma) < 17.0 {
 					shield!(fighter, *MA_MSC_CMD_REFLECTOR, *COLLISION_KIND_REFLECTOR, 0, hash40("top"), 15.0, 0.0, 7.0, 0.0, 0.0, 7.0, 0.0, /*Power*/ dmg_mul, /*Speed*/ speed_mul, /*Max Damage*/ reflector_max, false, /*Lifetime*/ life_mul, *FIGHTER_REFLECTOR_GROUP_HOMERUNBAT);
 				} else {

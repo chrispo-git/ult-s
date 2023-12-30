@@ -69,5 +69,6 @@ Nozzly - CPU adjustments
 Saminate - Dr. Mario animations
 SneakyKNG - Toad Rigging
 SquidEnthusiast - Toad Render
+SushiiZ - Richter Dash Attack
 willy_crescent - Ganon's Tower, General Stage Help
 WuBoytH - General Major help
