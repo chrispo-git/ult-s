@@ -19,7 +19,7 @@ pub fn install() {
 		dk_nair,
 		dk_uair
 	);
-}
+} 
 
 #[acmd_script( agent = "donkey", script = "game_attackairn", category = ACMD_GAME, low_priority )]
 unsafe fn dk_nair(fighter: &mut L2CAgentBase) {

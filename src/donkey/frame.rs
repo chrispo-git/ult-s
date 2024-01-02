@@ -99,4 +99,4 @@ fn dk_frame(fighter: &mut L2CFighterCommon) {
             };
         }
 	}
-}	
+}	 
