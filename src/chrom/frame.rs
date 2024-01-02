@@ -59,6 +59,9 @@ fn chrom_frame(fighter: &mut L2CFighterCommon) {
 			if [hash40("special_s1"), hash40("special_air_s1")].contains(&MotionModule::motion_kind(boma)) {
 					CAN_SIDEB[ENTRY_ID] = 1;
 			};
+			if hash40("attack_s3_lw") == MotionModule::motion_kind(boma) && MotionModule::frame(boma) >= 24.0 {
+				CancelModule::enable_cancel(boma);
+			}
 		}
     }
 }
