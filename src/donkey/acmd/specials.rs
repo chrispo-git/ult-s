@@ -148,7 +148,7 @@ unsafe fn dk_upb_shoot(fighter: &mut L2CAgentBase) {
     agent = "donkey",
     scripts =  ["effect_specialhishoot"],
     category = ACMD_EFFECT,
-	low_priority)]
+	low_priority)] 
 unsafe fn dk_upb_shoot_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);   
