@@ -88,13 +88,10 @@ fn dk_frame(fighter: &mut L2CFighterCommon) {
                 }
             }
             if status_kind == *FIGHTER_STATUS_KIND_FALL_SPECIAL {
-                KineticModule::resume_energy(boma, *FIGHTER_KINETIC_ENERGY_ID_CONTROL);
-                let fighter_kinetic_energy_control = mem::transmute::<u64, &mut smash::app::FighterKineticEnergyController>(KineticModule::get_energy(boma, *FIGHTER_KINETIC_ENERGY_ID_CONTROL));  
-                smash::app::lua_bind::FighterKineticEnergyController::mul_x_accel_mul(fighter_kinetic_energy_control, 0.95);
+                KineticModule::suspend_energy(boma, *FIGHTER_KINETIC_ENERGY_ID_CONTROL);
             }
             if [hash40("special_hi_shoot")].contains(&motion_kind) {
                 MotionModule::set_rate(boma, 2.0);
-                KineticModule::suspend_energy(boma, *FIGHTER_KINETIC_ENERGY_ID_CONTROL);
                 macros::SET_SPEED_EX(fighter, UPB_ANGLE_X[ENTRY_ID]*-0.7, UPB_ANGLE_Y[ENTRY_ID], *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
             };
         }
