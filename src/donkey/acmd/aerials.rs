@@ -15,7 +15,7 @@ use crate::util::*;
 use super::*;
 pub fn install() {
 	smashline::install_acmd_scripts!(
-		dk_fair, dk_fair_eff,
+		dk_fair,
 		dk_nair,
 		dk_uair
 	);
