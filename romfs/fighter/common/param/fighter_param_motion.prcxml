@@ -425,9 +425,13 @@
       <float hash="landing_frame_escape_air_slide">12</float>
     </struct>
     <struct index="83">
+      <int hash="escape_air_stiff_frame">44</int>
       <int hash="escape_air_slide_back_end_frame">-1</int>
       <float hash="landing_frame_escape_air_slide_max">12</float>
       <float hash="landing_frame_escape_air_slide">12</float>
+      <int hash="escape_air_slide_stiff_frame">73</int>
+      <int hash="escape_air_slide_u_stiff_frame">93</int>
+      <int hash="escape_air_slide_d_stiff_frame">61</int>
     </struct>
     <struct index="84">
       <int hash="escape_air_slide_back_end_frame">-1</int>
