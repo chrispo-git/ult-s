@@ -131,7 +131,7 @@ unsafe fn gunner_air_s32(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script( agent = "miigunner", script = "game_speciallw1start", category = ACMD_GAME, low_priority )]
+#[acmd_script( agent = "miigunner", scripts = ["game_speciallw1start", "game_specialairlw1start"], category = ACMD_GAME, low_priority )]
 unsafe fn gunner_shine(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 3.0);
     if macros::is_excute(fighter) {
