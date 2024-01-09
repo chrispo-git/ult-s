@@ -49,7 +49,7 @@ unsafe fn gunner_fair(fighter: &mut L2CAgentBase) {
     }   
     frame(fighter.lua_state_agent, 10.0);
     if macros::is_excute(fighter) {
-        KineticModule::add_speed(fighter.module_accessor, &Vector3f{x: -1.3, y: 0.0, z: 0.0});
+        KineticModule::add_speed(fighter.module_accessor, &Vector3f{x: -1.0, y: 0.0, z: 0.0});
         ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_MIIGUNNER_GENERATE_ARTICLE_ATTACKAIRF_BULLET, false, -1);
     }
     macros::FT_MOTION_RATE(fighter, 1.0);

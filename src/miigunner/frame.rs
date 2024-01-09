@@ -37,6 +37,12 @@ fn gunner_frame(fighter: &mut L2CFighterCommon) {
             } else {
                 CHARGE_FRAMES[ENTRY_ID] = 0;
             };
+            if NO_FP[ENTRY_ID] > 0 {
+                NO_FP[ENTRY_ID] -= 1;
+            }
+            if is_reset() {
+                NO_FP[ENTRY_ID] = 0;
+            }
             if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_CUSTOMIZE_SPECIAL_N_NO) == 1 {
                 if [*FIGHTER_STATUS_KIND_SPECIAL_N].contains(&status_kind){
                     if StatusModule::is_situation_changed(boma) {
