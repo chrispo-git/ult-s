@@ -92,7 +92,7 @@ fn wario_frame(fighter: &mut L2CFighterCommon) {
 					};
 				};
 				if AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_ALL)  || GroundModule::is_wall_touch_line(boma, *GROUND_TOUCH_FLAG_SIDE as u32){
-					if !AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_HIT) && !HAS_BOUNCE[ENTRY_ID] && !IS_JUMP[ENTRY_ID]{
+					if !AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_HIT) && !HAS_BOUNCE[ENTRY_ID] && !IS_JUMP[ENTRY_ID] && MotionModule::frame(boma) < 30.0  {
 						macros::PLAY_SE(fighter, Hash40::new("se_wario_landing01"));
 						WorkModule::on_flag(boma, *FIGHTER_INSTANCE_WORK_ID_FLAG_NO_SPEED_OPERATION_CHK);
 						macros::SET_SPEED_EX(fighter, -0.5, 2.0, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
