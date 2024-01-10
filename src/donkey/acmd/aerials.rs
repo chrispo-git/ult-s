@@ -15,11 +15,11 @@ use crate::util::*;
 use super::*;
 pub fn install() {
 	smashline::install_acmd_scripts!(
-		dk_fair,
+		dk_fair, dk_fair_eff, 
 		dk_nair,
 		dk_uair
 	);
-}
+} 
 
 #[acmd_script( agent = "donkey", script = "game_attackairn", category = ACMD_GAME, low_priority )]
 unsafe fn dk_nair(fighter: &mut L2CAgentBase) {

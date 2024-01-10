@@ -31,6 +31,8 @@ fn dk_frame(fighter: &mut L2CFighterCommon) {
             let end_frame = MotionModule::end_frame(boma);
             let motion_kind = MotionModule::motion_kind(boma);
             let rate = MotionModule::rate(boma);
+			let stick_y = ControlModule::get_stick_y(boma);
+			let fallspeed = WorkModule::get_param_float(fighter.module_accessor, hash40("air_speed_y_stable"), 0);
             UPB_30_X = 30.0_f32.sin() * UPB_SPEED;
             UPB_30_Y = 0.89 * UPB_SPEED;
             if IS_DK_START_ITEM_CHUCK[ENTRY_ID] == true {
@@ -88,12 +90,23 @@ fn dk_frame(fighter: &mut L2CFighterCommon) {
                 }
             }
             if status_kind == *FIGHTER_STATUS_KIND_FALL_SPECIAL {
-                KineticModule::suspend_energy(boma, *FIGHTER_KINETIC_ENERGY_ID_CONTROL);
+                KineticModule::resume_energy(boma, *FIGHTER_KINETIC_ENERGY_ID_CONTROL);
+                let fighter_kinetic_energy_control = mem::transmute::<u64, &mut smash::app::FighterKineticEnergyController>(KineticModule::get_energy(boma, *FIGHTER_KINETIC_ENERGY_ID_CONTROL));  
+                smash::app::lua_bind::FighterKineticEnergyController::mul_x_accel_mul(fighter_kinetic_energy_control, 0.95);
+                let cat2 = ControlModule::get_command_flag_cat(boma, 1);
+                if (cat2 & *FIGHTER_PAD_CMD_CAT2_FLAG_FALL_JUMP) != 0 && stick_y < -0.66 && SPEED_Y[ENTRY_ID] <= 0.0 {
+                    WorkModule::set_flag(boma, true, *FIGHTER_STATUS_WORK_ID_FLAG_RESERVE_DIVE);
+                }
             }
             if [hash40("special_hi_shoot")].contains(&motion_kind) {
+                let cat2 = ControlModule::get_command_flag_cat(boma, 1);
+                if (cat2 & *FIGHTER_PAD_CMD_CAT2_FLAG_FALL_JUMP) != 0 && stick_y < -0.66 && SPEED_Y[ENTRY_ID] < 0.0 {
+                    WorkModule::set_flag(boma, true, *FIGHTER_STATUS_WORK_ID_FLAG_RESERVE_DIVE);
+                }
                 MotionModule::set_rate(boma, 2.0);
+                KineticModule::suspend_energy(boma, *FIGHTER_KINETIC_ENERGY_ID_CONTROL);
                 macros::SET_SPEED_EX(fighter, UPB_ANGLE_X[ENTRY_ID]*-0.7, UPB_ANGLE_Y[ENTRY_ID], *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
             };
         }
 	}
-}	
+}	 
