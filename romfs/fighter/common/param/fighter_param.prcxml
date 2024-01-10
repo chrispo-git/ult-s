@@ -503,7 +503,7 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
       <float hash="walk_speed_max">1.2</float>
       <float hash="dash_speed">1.76</float>
       <float hash="run_speed_max">1.35</float>
-      <float hash="weight">75</float>
+      <float hash="weight">72</float>
       <float hash="landing_attack_air_frame_lw">9</float>
       <float hash="tread_jump_speed_y_mul">1.0</float>
       <float hash="tread_mini_jump_speed_y_mul">0.475</float>
