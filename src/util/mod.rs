@@ -154,12 +154,11 @@ pub unsafe fn on_flag_hook(boma: &mut smash::app::BattleObjectModuleAccessor, in
 		} else if int == *FIGHTER_STATUS_WORK_ID_FLAG_RESERVE_JUMP_MINI {
 			let ENTRY_ID =  WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 			//Removal of SH macro via hooking on_flag. FULL_HOP_ENABLE_DELAY allows fullhop button to not give shorthops. 
-			if !(FULL_HOP_ENABLE_DELAY[ENTRY_ID] > 0) {
-				println!("SH Macro makes its triumphant return");
-				original!()(boma, int)
-			} else {
-				println!("SH height banned");
-			}
+				if (ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_JUMP) || ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP_MINI)) && !(FULL_HOP_ENABLE_DELAY[ENTRY_ID] > 0) {
+					original!()(boma, int)
+				} else {
+					println!("SH height banned");
+				}
 		} else if int == *FIGHTER_INSTANCE_WORK_ID_FLAG_CATCHED_BUTTERFLYNET {
 				original!()(boma, int)
 		}	else {
