@@ -56,6 +56,9 @@ fn wario_frame(fighter: &mut L2CFighterCommon) {
 						if MotionModule::frame(boma) >= 70.0 {
 							StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL, true);
 						};
+						if MotionModule::frame(boma) >= 50.0 {
+							reimpl_cancel_frame(fighter);
+						}
 					} else if MotionModule::frame(boma) > 31.0 {
 							if MotionModule::frame(boma) < 37.0 {
 								if !HAS_BOUNCE[ENTRY_ID] {
@@ -77,7 +80,7 @@ fn wario_frame(fighter: &mut L2CFighterCommon) {
 				} else {
 					macros::COL_NORMAL(fighter);
 				};
-				if is_near_ground == 1 && !HAS_BOUNCE[ENTRY_ID]  && !IS_JUMP[ENTRY_ID]  && MotionModule::frame(boma) < 20.0 {
+				if is_near_ground == 1 && !HAS_BOUNCE[ENTRY_ID]  && !IS_JUMP[ENTRY_ID]  && MotionModule::frame(boma) < 26.0 {
 					if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP) || ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP_MINI) { //|| ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_FLICK_JUMP) {
 						WorkModule::on_flag(boma, *FIGHTER_INSTANCE_WORK_ID_FLAG_NO_SPEED_OPERATION_CHK);
 						macros::SET_SPEED_EX(fighter, 3.0, 2.5, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
@@ -89,7 +92,7 @@ fn wario_frame(fighter: &mut L2CFighterCommon) {
 					};
 				};
 				if AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_ALL)  || GroundModule::is_wall_touch_line(boma, *GROUND_TOUCH_FLAG_SIDE as u32){
-					if !AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_HIT) && !HAS_BOUNCE[ENTRY_ID] && !IS_JUMP[ENTRY_ID]{
+					if !AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_HIT) && !HAS_BOUNCE[ENTRY_ID] && !IS_JUMP[ENTRY_ID] && MotionModule::frame(boma) < 30.0  {
 						macros::PLAY_SE(fighter, Hash40::new("se_wario_landing01"));
 						WorkModule::on_flag(boma, *FIGHTER_INSTANCE_WORK_ID_FLAG_NO_SPEED_OPERATION_CHK);
 						macros::SET_SPEED_EX(fighter, -0.5, 2.0, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
@@ -145,13 +148,14 @@ fn wario_frame(fighter: &mut L2CFighterCommon) {
 				/*if StatusModule::is_situation_changed(boma) {
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_LANDING, true);
 				};*/	
-				if [5.0, 20.0].contains(&MotionModule::frame(boma)){
+				let frame_int = MotionModule::frame(boma) as i32;
+				if [5, 20].contains(&frame_int){
 					macros::COL_NORMAL(fighter);
 					macros::FLASH(fighter, 1.0, 0.0, 0.0, 0.5);
-				} else if [10.0, 25.0].contains(&MotionModule::frame(boma)){
+				} else if [10, 25].contains(&frame_int){
 					macros::COL_NORMAL(fighter);
 					macros::FLASH(fighter, 0.0, 0.0, 1.0, 0.5);
-				} else if [15.0].contains(&MotionModule::frame(boma)){
+				} else if [15].contains(&frame_int){
 					macros::COL_NORMAL(fighter);
 					macros::FLASH(fighter, 1.0, 1.0, 0.0, 0.5);
 				} else if MotionModule::frame(boma) > 25.0{
