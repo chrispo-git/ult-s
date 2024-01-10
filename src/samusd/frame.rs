@@ -24,6 +24,9 @@ fn samusd_frame(fighter: &mut L2CFighterCommon) {
 			let frame = MotionModule::frame(boma);
 			let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 			let situation_kind = StatusModule::situation_kind(boma);
+			let y_vel = KineticModule::get_sum_speed_y(boma, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+			let upbfallspeed = smash::phx::Vector3f { x: 1.0, y: 0.9, z: 1.0 };
+			let fallspeed = smash::phx::Vector3f { x: 1.0, y: 1.0, z: 1.0 };
 			if smash::app::sv_information::is_ready_go() == false {
 				HOLD[ENTRY_ID] = 0;
 				IS_HOLD[ENTRY_ID] = false;
@@ -72,6 +75,12 @@ fn samusd_frame(fighter: &mut L2CFighterCommon) {
 				CAN_SIDEB[ENTRY_ID] = 1;
 			} else {
 				CAN_SIDEB[ENTRY_ID] = 0;
+			};
+			if status_kind == *FIGHTER_STATUS_KIND_FALL_SPECIAL || status_kind == *FIGHTER_STATUS_KIND_SPECIAL_HI && y_vel < 0.0 {
+				KineticModule::mul_speed(boma, &upbfallspeed, *FIGHTER_KINETIC_ENERGY_ID_GRAVITY);
+			}
+			else {
+				KineticModule::mul_speed(boma, &fallspeed, *FIGHTER_KINETIC_ENERGY_ID_GRAVITY);
 			};
 			if status_kind == *FIGHTER_SAMUS_STATUS_KIND_SPECIAL_S1A || status_kind == *FIGHTER_SAMUS_STATUS_KIND_SPECIAL_S1G {
 				CAN_SIDEB[ENTRY_ID] = 1;
