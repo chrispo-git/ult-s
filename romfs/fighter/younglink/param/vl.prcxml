@@ -11,8 +11,8 @@
   </list>
   <list hash="param_linkbomb">
     <struct index="0">
-      <float hash="linkbomb_limit_frame">120</float>
-      <float hash="linkbomb_flash_frame">84</float>
+      <float hash="linkbomb_limit_frame">220</float>
+      <float hash="linkbomb_flash_frame">154</float>
     </struct>
     <hash40 index="1">dummy</hash40>
     <hash40 index="2">dummy</hash40>
