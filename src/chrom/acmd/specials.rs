@@ -35,7 +35,7 @@ unsafe fn chrom_sideb(fighter: &mut L2CAgentBase) {
 			AttackModule::set_add_reaction_frame(fighter.module_accessor, /*ID*/ 0, /*Frames*/ -1.0, /*Unk*/ false);
 			AttackModule::set_add_reaction_frame(fighter.module_accessor, /*ID*/ 1, /*Frames*/ -1.0, /*Unk*/ false);
 		}
-		frame(fighter.lua_state_agent, 16.0);
+		frame(fighter.lua_state_agent, 18.0);
 		if macros::is_excute(fighter) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
