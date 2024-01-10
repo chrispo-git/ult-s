@@ -50,9 +50,12 @@ fn samusd_frame(fighter: &mut L2CFighterCommon) {
 			if COOLDOWN[ENTRY_ID] > 0 {
 				COOLDOWN[ENTRY_ID] -= 1;
 			};
-			if ArticleModule::is_exist(boma, *WEAPON_KIND_SAMUSD_MISSILE) == false && IS_ALLOWED[ENTRY_ID] == false && COOLDOWN[ENTRY_ID] == 0 && END[ENTRY_ID] == false {
+			if ArticleModule::is_exist(boma, *FIGHTER_SAMUSD_GENERATE_ARTICLE_MISSILE) == false && IS_ALLOWED[ENTRY_ID] == false && COOLDOWN[ENTRY_ID] == 0 && END[ENTRY_ID] == false {
 				END[ENTRY_ID] = true;
 			};
+			if ArticleModule::is_exist(boma, *FIGHTER_SAMUSD_GENERATE_ARTICLE_MISSILE) {
+				CAN_SIDEB[ENTRY_ID] = 1;
+			}
 			if COOLDOWN[ENTRY_ID] > 0 &&  COOLDOWN[ENTRY_ID] < 5{
 					let m1: u32 = EffectModule::req_follow(boma, smash::phx::Hash40::new("sys_smash_flash"), smash::phx::Hash40::new("haver"), &HANDS, &HANDS, 0.325, true, 0, 0, 0, 0, 0, true, true) as u32;
 					let m2: u32 = EffectModule::req_follow(boma, smash::phx::Hash40::new("sys_smash_flash"), smash::phx::Hash40::new("havel"), &HANDS, &HANDS, 0.325, true, 0, 0, 0, 0, 0, true, true) as u32;
@@ -71,6 +74,9 @@ fn samusd_frame(fighter: &mut L2CFighterCommon) {
 				CAN_SIDEB[ENTRY_ID] = 0;
 			};
 			if status_kind == *FIGHTER_SAMUS_STATUS_KIND_SPECIAL_S1A || status_kind == *FIGHTER_SAMUS_STATUS_KIND_SPECIAL_S1G {
+				CAN_SIDEB[ENTRY_ID] = 1;
+			}
+			if status_kind == *FIGHTER_SAMUS_STATUS_KIND_SPECIAL_S1A || status_kind == *FIGHTER_SAMUS_STATUS_KIND_SPECIAL_S1G {
 				if MotionModule::frame(boma) >= 18.0 && MotionModule::frame(boma) <= 20.0 {
 					IS_HOLD[ENTRY_ID] = true;
 				};
@@ -78,7 +84,7 @@ fn samusd_frame(fighter: &mut L2CFighterCommon) {
 					IS_ALLOWED[ENTRY_ID] = false;
 					CancelModule::enable_cancel(boma);
 				};
-				MotionModule::set_rate(fighter.module_accessor, 1.5);
+				MotionModule::set_rate(fighter.module_accessor, 1.5); 
 			};
 			/*
 			if IS_ALLOWED[ENTRY_ID] == false {

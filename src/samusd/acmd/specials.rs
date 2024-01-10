@@ -136,6 +136,21 @@ unsafe fn dsamus_downb(fighter: &mut L2CAgentBase) {
 	
 	
 }	
+#[acmd_script(
+    agent = "samusd",
+    scripts =  ["game_special", "game_specialair"],
+    category = ACMD_GAME,
+	low_priority)]
+unsafe fn dsamus_sideb(fighter: &mut L2CAgentBase) {
+	frame(fighter.lua_state_agent, 18.0);
+    if macros::is_excute(fighter) {
+		if  !ArticleModule::is_exist(fighter.module_accessor, *WEAPON_KIND_SAMUSD_MISSILE) {
+			WorkModule::on_flag(fighter.module_accessor, *FIGHTER_SAMUS_STATUS_SPECIAL_S_WORK_FLAG_WEAPON);
+		}
+    }
+	
+}	
+
 
 pub fn install() {
     smashline::install_acmd_scripts!(
@@ -144,6 +159,7 @@ pub fn install() {
         eff_dsamus_burst,
         eff_dsamus_homing,
         eff_dsamus_downb, expr_dsamus_downb,
-        dsamus_downb
+        dsamus_downb,
+		dsamus_sideb
     );
 }
