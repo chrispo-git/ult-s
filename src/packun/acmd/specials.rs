@@ -136,6 +136,7 @@ unsafe fn game_wait(agent: &mut L2CAgentBase) {
 
 pub fn install() {
     smashline::install_acmd_scripts!(
-		poison_explosion, poison_explosion_eff, poison_explosion_snd
+		poison_explosion, poison_explosion_eff, poison_explosion_snd,
+        game_wait, game_startair, game_start, game_shoot, game_loop, game_fall
     );
 }
