@@ -85,8 +85,8 @@ unsafe fn game_loop(agent: &mut L2CAgentBase) {
 
 #[acmd_script( agent = "packun_spikeball", script = "game_shoot", category = ACMD_GAME, low_priority )]
 unsafe fn game_shoot(agent: &mut L2CAgentBase) {
-    WorkModule::is_flag(agent.module_accessor, *WEAPON_PACKUN_SPIKEBALL_INSTANCE_WORK_ID_FLAG_REACTIVE);
-    if(methodlib::L2CValue::operator==(lib::L2CValueconst&)const(false, true)){
+    let mut spike=WorkModule::is_flag(agent.module_accessor, *WEAPON_PACKUN_SPIKEBALL_INSTANCE_WORK_ID_FLAG_REACTIVE);
+    if spike == false{
         if macros::is_excute(agent) {
             macros::ATTACK(agent, 0, 0, Hash40::new("top"), 12.0, 55, 80, 0, 45, 5.0, 0.0, 0.0, 0.0, None, None, None, 1.2, 0.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, true, false, false, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_KICK, *ATTACK_REGION_OBJECT);
         }
