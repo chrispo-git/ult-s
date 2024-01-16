@@ -52,6 +52,7 @@ replace = [
     ['gaogaen', 'incin'],
     ['falco'],
     ['fox'],
+    ['ganon', 'ganondorf', 'dorf'],
     ['gamewatch', 'gnw', 'g&w'],
     ['gekkouga', 'greninja', 'gren'],
     ['ike'],
