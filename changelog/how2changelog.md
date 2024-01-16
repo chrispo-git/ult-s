@@ -48,6 +48,7 @@ Mario explodes
 | Notes | Jump cancellable on frame 4 |
 | Notes | Airdodge cancellable on frame 80 |
 | Notes | Transitions into Jab 2 on frame 6 |
+| Notes | Starts charging on frame 6, frame 14 on release |
 | Notes | If mario crouches for 5 seconds beforehand, powered up version  |
 
 4. When listing hitboxes with different values either: 
