@@ -18,15 +18,15 @@
 [+] FaF reduced 26 > 22
 
 ## Dtilt
-[+] FaF reduced 28 > 25
-[+] Now deals bonus hitstun 0 > 5
-[+] BKB ioncreased 35 > 50
+[+] FaF reduced 28 > 25  
+[+] Now deals bonus hitstun 0 > 5  
+[+] BKB ioncreased 35 > 50  
 
 # Aerials
 
 ## Nair
-[!] Now a new move - Galaxy spin
-Mario twirls in the air using his galaxy spin
+[!] Now a new move - Galaxy spin  
+Mario twirls in the air using his galaxy spin  
 | Stat | Value |
 | ------------- |:-------------:|
 | Startup  | 8 |
@@ -41,22 +41,22 @@ Mario twirls in the air using his galaxy spin
 | Notes | Stalls once per Airtime |
 
 ## Fair
-[*] Fair now has a fire trail
+[*] Fair now has a fire trail  
 [/] Sweetspot now deals fire damge
 
 ## Bair
-[-] FaF reduced 34 > 36
+[-] FaF reduced 34 > 36  
 
 ## Uair
-[-] BKB increased 10 > 12
-[-] KBG increased 135 > 140
-[+] now deals bonus hitstun 0 > 1
+[-] BKB increased 10 > 12  
+[-] KBG increased 135 > 140  
+[+] now deals bonus hitstun 0 > 1  
 [-] FaF increased 31 > 32
 
 ## Dair
-[/] Dair angle altered 94/75 (Multi/Final) > 367/361
-[/] Dair final hit BKB reduced 80 > 20
-[+] Dair now always sends forwards
+[/] Dair angle altered 94/75 (Multi/Final) > 367/361  
+[/] Dair final hit BKB reduced 80 > 20  
+[+] Dair now always sends forwards  
 [/] Dair landing hit angle altered  361 > 361/55 (Grounded/Aerial)
 
 # Specials
@@ -65,8 +65,8 @@ Mario twirls in the air using his galaxy spin
 [+] Startup reduced 17 > 14
 
 ## Side Special
-[!] Now a new move - Roll/Cap Dive
-
+[!] Now a new move - Roll/Cap Dive  
+  
 On the ground mario rolls forwards
 | Stat | Value |
 | ------------- |:-------------:|
