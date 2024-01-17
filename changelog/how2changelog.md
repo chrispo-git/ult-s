@@ -59,7 +59,8 @@ If there is a combo of these split them up:
     - [-] Nair 1 damage reduced 10.0%/7.0% (early/late) > 9.0%/5.0%
     - [-] Nair 2 damage reduced 35.4%/7.0% (early/late) > 3.0%/5.0%
 
-5. when making a changelog, make it in this order (pretty please):
+5. In order to make sure there are line breaks between lines, add TWO (or more) spaces to the end of the line
+6. when making a changelog, make it in this order (pretty please):
 # Attributes
 log all the changed stuff here (ignore footstool stuff as that'll go in the engine changes)
 # Grounded Normals
