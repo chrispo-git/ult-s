@@ -1,6 +1,6 @@
 # Preface
 Catalog ALL of your changes, pull requests should CHANGE the changelog within the PR.
-I recommend you look at mario's (currently unfinished lmao) changelog file for reference.
+I recommend you look at mario's changelog file for reference.
 Theres a copy of the default fighter_param for reference at scripts/data/default.xml
 
 # Guidelines
