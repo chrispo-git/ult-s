@@ -60,7 +60,7 @@ pub fn ganon_float(fighter : &mut L2CFighterCommon) {
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_GANON_STATUS_KIND_SPECIAL_N_TURN, true);
 			};
 			if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_LW {
-				if MotionModule::frame(boma) > 24.0 && ControlModule::check_button_on_trriger(boma, *CONTROL_PAD_BUTTON_SPECIAL) {
+				if MotionModule::frame(boma) >= 24.0 && ControlModule::check_button_on_trriger(boma, *CONTROL_PAD_BUTTON_SPECIAL) {
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_GANON_STATUS_KIND_SPECIAL_LW_END, true);
 				};
 			};
