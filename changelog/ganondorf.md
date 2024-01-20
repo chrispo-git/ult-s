@@ -34,11 +34,11 @@
 
 ## Nair
 [-] Nair 2 damage reduced 12/9 > 10/8.5
-[-] Startup increased 7/17 > 10/17
+[-] Startup increased 7/17 (hit 1/2) > 10/17
 
 ## Fair
-[-] Damage reduced 17/18 -> 12/13
-[+] Hbox size 4.0/5.5 > 6.0/7.5
+[-] Damage reduced 17/18 (shoulder/arm) -> 12/13
+[+] Hbox size 4.0/5.5 (shoulder/arm) > 6.0/7.5
 [-] Shield stun multplier decreased 1.0 > 0.25
 [+] Auto-Cancel window decreased 45 > 41 
 [+] BKB increased 20 -> 40 
