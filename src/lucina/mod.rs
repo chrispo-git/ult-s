@@ -24,11 +24,11 @@ static mut DOWNB_TIMER : [i32; 8] = [1; 8];
 static mut BAN_SIDEB : [bool; 8] = [false; 8];
 static mut UPB_FALL : [bool; 8] = [false; 8];
 static mut TIMER : [i32; 8] = [0; 8];
-static HERO_DASH : f32 = 1.76;
-static HERO_RUN : f32 = 1.825;
+static SWORDMASTER_DASH : f32 = 2.38;
 static SWORDMASTER_AIR_SPEED : f32 = 2.0;
 static SWORDMASTER_MAX_GRAVITY: f32 = 0.1;
 static HERO_SWORD_MULT : f32 = 1.15;
+static SWORDMASTER_SWORD_MULT : f32 = 0.85;
 
 static HERO_NAIR_LANDING : f32 = 9.0;
 static HERO_FAIR_LANDING : f32 = 13.0;
