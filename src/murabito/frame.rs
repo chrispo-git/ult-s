@@ -42,14 +42,20 @@ fn murabito_frame2(fighter: &mut L2CFighterCommon) {
                     reimpl_cancel_frame(fighter);
                 }
             }
-            if [hash40("special_air_n")].contains(&MotionModule::motion_kind(boma)) && !DO_BOUNCE[ENTRY_ID] {
-                if AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_ALL) && !AttackModule::is_infliction(boma, *COLLISION_KIND_MASK_ALL){
-                    KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_JUMP);
-                    if !AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_HIT) {
-                        MotionModule::set_rate(boma, 0.5);
+            if [hash40("special_air_n")].contains(&MotionModule::motion_kind(boma)) {
+                if !DO_BOUNCE[ENTRY_ID] {
+                    if AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_ALL) && !AttackModule::is_infliction(boma, *COLLISION_KIND_MASK_ALL){
+                        KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_JUMP);
+                        if !AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_HIT) {
+                            MotionModule::set_rate(boma, 0.5);
+                        };
+                        DO_BOUNCE[ENTRY_ID] = true;
                     };
-                    DO_BOUNCE[ENTRY_ID] = true;
-                };
+                }
+                if SPEED_Y[ENTRY_ID] > 2.0 {
+                    let speed = smash::phx::Vector3f { x: 0.0, y: (SPEED_Y[ENTRY_ID]-2.0)*-1.0, z: 0.0 };
+                    KineticModule::add_speed(fighter.module_accessor, &speed);
+                }
             };
             if situation_kind != *SITUATION_KIND_AIR {
                 DO_BOUNCE[ENTRY_ID] = false;
@@ -81,6 +87,7 @@ fn murabito_frame(fighter: &mut L2CFighterCommon) {
                 WorkModule::set_int(boma, 1, *FIGHTER_MURABITO_INSTANCE_WORK_ID_INT_SPECIAL_N_TIME_LIMIT);
             }
             if  [*FIGHTER_MURABITO_STATUS_KIND_SPECIAL_N_SEARCH, *FIGHTER_STATUS_KIND_SPECIAL_N, *FIGHTER_MURABITO_STATUS_KIND_SPECIAL_N_POCKET].contains(&status_kind) {
+                
                 if frame < 2.0 && situation_kind == *SITUATION_KIND_GROUND && ![hash40("special_n3"), hash40("special_n2_fail"), hash40("special_n2")].contains(&motion_kind) && !CHANGE_FRAME[ENTRY_ID]{
                     if ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_MURABITO_GENERATE_ARTICLE_TREE) && ![hash40("special_n3"), hash40("special_n2_fail")].contains(&motion_kind) {
                         if (TREE_POS_X[ENTRY_ID]-pos_x).abs() < X_DIST && (TREE_POS_Y[ENTRY_ID]-pos_y).abs() < Y_DIST && is_facing_tree && !IS_FALLEN[ENTRY_ID] {
