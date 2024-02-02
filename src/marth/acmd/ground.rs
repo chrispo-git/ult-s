@@ -84,7 +84,7 @@ unsafe fn marth_jab1_snd(fighter: &mut L2CAgentBase) {
 	low_priority)]
 unsafe fn marth_da(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
-		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.6153846153846154);
+		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.75);
 		frame(fighter.lua_state_agent, 13.0);
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 1);
 		if macros::is_excute(fighter) {
