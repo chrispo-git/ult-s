@@ -14,33 +14,5 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 pub fn install() {
-    smashline::install_status_scripts!(special_n_pre);
-}
-#[status_script(agent = "metaknight", status = FIGHTER_METAKNIGHT_STATUS_KIND_SPECIAL_N_SPIN, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_PRE)]
-unsafe fn special_n_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
-    StatusModule::init_settings(
-        fighter.module_accessor,
-        smash::app::SituationKind(*SITUATION_KIND_AIR),
-        *FIGHTER_KINETIC_TYPE_METAKNIGHT_SPECIAL_AIR_N,
-        *GROUND_CORRECT_KIND_AIR as u32,
-		smash::app::GroundCliffCheckKind(*GROUND_CLIFF_CHECK_KIND_ALWAYS),
-        true,
-        *FIGHTER_STATUS_WORK_KEEP_FLAG_ALL_FLAG,
-        *FIGHTER_STATUS_WORK_KEEP_FLAG_ALL_INT,
-        *FIGHTER_STATUS_WORK_KEEP_FLAG_ALL_FLOAT,
-        0
-    );
-	FighterStatusModuleImpl::set_fighter_status_data(
-		fighter.module_accessor,
-		false,
-		*FIGHTER_TREADED_KIND_NO_REAC,
-		false,
-		false,
-		false,
-		(*FIGHTER_LOG_MASK_FLAG_ATTACK_KIND_SPECIAL_N | *FIGHTER_LOG_MASK_FLAG_ACTION_CATEGORY_ATTACK) as u64,
-		*FIGHTER_STATUS_ATTR_DISABLE_GROUND_FRICTION as u32,
-		*FIGHTER_POWER_UP_ATTACK_BIT_SPECIAL_N as u32,
-		0
-	);
-    0.into()
+    
 }
