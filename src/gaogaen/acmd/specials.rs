@@ -17,10 +17,9 @@ use super::*;
 pub fn install() {
     smashline::install_acmd_scripts!(
 		incin_lariat,
-        incin_bbd, incin_air_bbd,
-        
-        incin_rev_burst, incin_rev_burst_turn,
-        incin_air_rev_burst, incin_air_rev_burst_turn        
+        incin_bbd, incin_air_bbd
+
+        /*incin_super*/        
     );    
 }
 
@@ -153,94 +152,14 @@ unsafe fn incin_air_bbd(agent: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script( agent = "gaogaen", script = "game_speciallw", category = ACMD_GAME, low_priority )]
-unsafe fn incin_rev_burst(agent: &mut L2CAgentBase) {
-    frame(agent.lua_state_agent, 1.0);
+/*#[acmd_script( agent = "gaogaen", script = "game_finalend", category = ACMD_GAME, low_priority )]
+unsafe fn incin_super(agent: &mut L2CAgentBase) {
     if macros::is_excute(agent) {
-        macros::WHOLE_HIT(agent, *HIT_STATUS_XLU);
+        macros::ATTACK_ABS(agent, *FIGHTER_ATTACK_ABSOLUTE_KIND_GAOGAEN_FINAL, 0, 11.0, 65, 100, 40, 35, 0.0, 1.0, *ATTACK_LR_CHECK_POS, 0.0, true, Hash40::new("collision_attr_fire"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_NONE);
+        WorkModule::on_flag(agent.module_accessor, *FIGHTER_GAOGAEN_STATUS_WORK_ID_FLAG_FINAL_ABS_SET);
     }
-    frame(agent.lua_state_agent, 8.0);
+    frame(agent.lua_state_agent, 30.0);
     if macros::is_excute(agent) {
-        macros::ATTACK(agent, 0, 0, Hash40::new("top"), 2.4, 71, 100, 40, 40, 10.0, 0.0, 11.0, -1.0, None, None, None, 1.0, 0.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, true, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_fire"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_NONE);
-        macros::ATTACK(agent, 1, 0, Hash40::new("top"), 2.4, 74, 100, 38, 38, 20.0, 0.0, 11.0, -1.0, None, None, None, 1.0, 0.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, true, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_fire"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_NONE);
+        WorkModule::on_flag(agent.module_accessor, *FIGHTER_GAOGAEN_STATUS_WORK_ID_FLAG_FINAL_END_EXIT);
     }
-    wait(agent.lua_state_agent, 2.0);
-    if macros::is_excute(agent) {
-        AttackModule::clear_all(agent.module_accessor);
-    }
-    wait(agent.lua_state_agent, 5.0);
-    if macros::is_excute(agent) {
-        macros::WHOLE_HIT(agent, *HIT_STATUS_NORMAL);
-    }
-}
-
-#[acmd_script( agent = "gaogaen", script = "game_speciallwturn", category = ACMD_GAME, low_priority )]
-unsafe fn incin_rev_burst_turn(agent: &mut L2CAgentBase) {
-    frame(agent.lua_state_agent, 1.0);
-    if macros::is_excute(agent) {
-        macros::WHOLE_HIT(agent, *HIT_STATUS_XLU);
-    }
-    frame(agent.lua_state_agent, 4.0);
-    if macros::is_excute(agent) {
-        macros::REVERSE_LR(agent);
-    }
-    frame(agent.lua_state_agent, 8.0);
-    if macros::is_excute(agent) {
-        macros::ATTACK(agent, 0, 0, Hash40::new("top"), 2.4, 71, 100, 40, 40, 10.0, 0.0, 11.0, -1.0, None, None, None, 1.0, 0.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, true, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_fire"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_NONE);
-        macros::ATTACK(agent, 1, 0, Hash40::new("top"), 2.4, 74, 100, 38, 38, 20.0, 0.0, 11.0, -1.0, None, None, None, 1.0, 0.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, true, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_fire"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_NONE);
-    }
-    wait(agent.lua_state_agent, 2.0);
-    if macros::is_excute(agent) {
-        AttackModule::clear_all(agent.module_accessor);
-    }
-    wait(agent.lua_state_agent, 5.0);
-    if macros::is_excute(agent) {
-        macros::WHOLE_HIT(agent, *HIT_STATUS_NORMAL);
-    }
-}
-
-#[acmd_script( agent = "gaogaen", script = "game_specialairlw", category = ACMD_GAME, low_priority )]
-unsafe fn incin_air_rev_burst(agent: &mut L2CAgentBase) {
-    frame(agent.lua_state_agent, 1.0);
-    if macros::is_excute(agent) {
-        macros::WHOLE_HIT(agent, *HIT_STATUS_XLU);
-    }
-    frame(agent.lua_state_agent, 8.0);
-    if macros::is_excute(agent) {
-        macros::ATTACK(agent, 0, 0, Hash40::new("top"), 2.4, 71, 100, 40, 40, 10.0, 0.0, 11.0, -1.0, None, None, None, 1.0, 0.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, true, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_fire"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_NONE);
-        macros::ATTACK(agent, 1, 0, Hash40::new("top"), 2.4, 74, 100, 38, 38, 20.0, 0.0, 11.0, -1.0, None, None, None, 1.0, 0.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, true, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_fire"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_NONE);
-    }
-    wait(agent.lua_state_agent, 2.0);
-    if macros::is_excute(agent) {
-        AttackModule::clear_all(agent.module_accessor);
-    }
-    wait(agent.lua_state_agent, 5.0);
-    if macros::is_excute(agent) {
-        macros::WHOLE_HIT(agent, *HIT_STATUS_NORMAL);
-    }
-}
-
-#[acmd_script( agent = "gaogaen", script = "game_specialairlwturn", category = ACMD_GAME, low_priority )]
-unsafe fn incin_air_rev_burst_turn(agent: &mut L2CAgentBase) {
-    frame(agent.lua_state_agent, 1.0);
-    if macros::is_excute(agent) {
-        macros::WHOLE_HIT(agent, *HIT_STATUS_XLU);
-    }
-    frame(agent.lua_state_agent, 4.0);
-    if macros::is_excute(agent) {
-        macros::REVERSE_LR(agent);
-    }
-    frame(agent.lua_state_agent, 8.0);
-    if macros::is_excute(agent) {
-        macros::ATTACK(agent, 0, 0, Hash40::new("top"), 2.4, 71, 100, 40, 40, 10.0, 0.0, 11.0, -1.0, None, None, None, 1.0, 0.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, true, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_fire"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_NONE);
-        macros::ATTACK(agent, 1, 0, Hash40::new("top"), 2.4, 74, 100, 38, 38, 20.0, 0.0, 11.0, -1.0, None, None, None, 1.0, 0.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, true, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_fire"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_NONE);
-    }
-    wait(agent.lua_state_agent, 2.0);
-    if macros::is_excute(agent) {
-        AttackModule::clear_all(agent.module_accessor);
-    }
-    wait(agent.lua_state_agent, 5.0);
-    if macros::is_excute(agent) {
-        macros::WHOLE_HIT(agent, *HIT_STATUS_NORMAL);
-    }
-}
+} */
