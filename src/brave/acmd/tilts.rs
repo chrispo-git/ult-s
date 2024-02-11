@@ -37,9 +37,9 @@ unsafe fn hero_ftilt1(fighter: &mut L2CAgentBase) {
         AttackModule::set_add_reaction_frame(fighter.module_accessor, 1, 6.0, false);
         AttackModule::set_add_reaction_frame(fighter.module_accessor, 2, 6.0, false);
         AttackModule::set_add_reaction_frame(fighter.module_accessor, 3, 6.0, false);
-        macros::HIT_NODE(fighter, Hash40::new("arml"), *HIT_STATUS_XLU);
+        /*macros::HIT_NODE(fighter, Hash40::new("arml"), *HIT_STATUS_XLU);
         macros::HIT_NODE(fighter, Hash40::new("shoulderl"), *HIT_STATUS_XLU);
-        /*macros::HIT_NODE(fighter, Hash40::new("head"), *HIT_STATUS_INVINCIBLE);
+        macros::HIT_NODE(fighter, Hash40::new("head"), *HIT_STATUS_INVINCIBLE);
         macros::HIT_NODE(fighter, Hash40::new("legl"), *HIT_STATUS_INVINCIBLE);
         macros::HIT_NODE(fighter, Hash40::new("kneel"), *HIT_STATUS_INVINCIBLE);*/
     }
