@@ -9,6 +9,7 @@ use smash::lua2cpp::*;
 use smashline::*;
 use smash_script::*;
 use smash::lua2cpp::*;
+use crate::util::*;
 
 
 #[fighter_frame_callback]
@@ -56,9 +57,25 @@ pub unsafe fn ftStatusUniqProcessDamage_exec_hook(fighter: &mut L2CFighterCommon
 
     ret
 }
+#[skyline::hook(replace = smash::lua2cpp::L2CFighterCommon_status_pre_DamageAir)]
+pub unsafe fn status_pre_DamageAir(fighter: &mut L2CFighterCommon) -> L2CValue {
+    //println!("knockback units: {}", DamageModule::reaction(fighter.module_accessor, 0));
+    
+    let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);    
+    let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+    
+    if IS_KD_THROW[ENTRY_ID] {
+        //println!("forced tumble");
+        StatusModule::set_status_kind_interrupt(fighter.module_accessor, *FIGHTER_STATUS_KIND_DAMAGE_FLY_METEOR);
+        IS_KD_THROW[ENTRY_ID] = false;
+        return 1.into();
+    }
+
+    call_original!(fighter)
+}
 
 
 pub fn install() {
     smashline::install_agent_frame_callbacks!(non_tumble_di);
-    skyline::install_hooks!(ftStatusUniqProcessDamage_exec_common_hook, ftStatusUniqProcessDamage_exec_hook);
+    skyline::install_hooks!(ftStatusUniqProcessDamage_exec_common_hook, ftStatusUniqProcessDamage_exec_hook, status_pre_DamageAir);
 }

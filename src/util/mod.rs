@@ -21,6 +21,7 @@ pub static mut ACCEL_Y : [f32; 8] = [0.0; 8];
 static mut FULL_HOP_ENABLE_DELAY : [i32; 8] = [0; 8];
 pub static mut PREV_SCALE : [f32; 8] = [0.0; 8];
 pub static mut IS_AB : [bool; 8] = [false; 8];
+pub static mut IS_KD_THROW : [bool; 8] = [false; 8];
 
 
 //Cstick
@@ -498,6 +499,14 @@ pub(crate) unsafe fn is_added(boma: &mut smash::app::BattleObjectModuleAccessor)
 	} else {
 		return false
 	}
+}
+pub(crate) unsafe fn set_knockdown_throw(boma: &mut smash::app::BattleObjectModuleAccessor) -> () {
+	
+	let opponent_id = LinkModule::get_parent_object_id(boma, *LINK_NO_CAPTURE) as u32;
+	let grabber_boma = smash::app::sv_battle_object::module_accessor(opponent_id);
+	let grabber_kind = smash::app::utility::get_kind(&mut *grabber_boma);
+	let grabber_entry_id = WorkModule::get_int(&mut *grabber_boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+	IS_KD_THROW[grabber_entry_id] = true;
 }
 
 
