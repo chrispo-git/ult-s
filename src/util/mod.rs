@@ -500,8 +500,8 @@ pub(crate) unsafe fn is_added(boma: &mut smash::app::BattleObjectModuleAccessor)
 		return false
 	}
 }
-pub(crate) unsafe fn set_knockdown_throw(boma: &mut smash::app::BattleObjectModuleAccessor) -> () {
-	
+pub(crate) unsafe fn set_knockdown_throw(fighter: &mut L2CAgentBase) -> () {
+	let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);    
 	let opponent_id = LinkModule::get_parent_object_id(boma, *LINK_NO_CAPTURE) as u32;
 	let grabber_boma = smash::app::sv_battle_object::module_accessor(opponent_id);
 	let grabber_kind = smash::app::utility::get_kind(&mut *grabber_boma);
