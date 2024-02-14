@@ -193,19 +193,7 @@ pub unsafe fn change_status_request_hook(boma: &mut smash::app::BattleObjectModu
 			}
 		} else if next_status == *FIGHTER_STATUS_KIND_TURN && curr_status == *FIGHTER_STATUS_KIND_LANDING{
 			return 0 as u64
-		} else if [*FIGHTER_STATUS_KIND_ATTACK_S4_START, *FIGHTER_STATUS_KIND_ATTACK_HI4_START, *FIGHTER_STATUS_KIND_ATTACK_LW4_START].contains(&next_status){
-			
-			//Kills AB Smash
-			let specials_list = [*CONTROL_PAD_BUTTON_SPECIAL_RAW, *CONTROL_PAD_BUTTON_SPECIAL_RAW2, *CONTROL_PAD_BUTTON_SPECIAL];
-			for i in specials_list {
-					if ControlModule::check_button_on(boma, i) {
-						println!("Ban AB Smash");
-						return 0 as u64
-					}
-			}
-			println!("Keep Smash");
-			original!()(boma, status_kind, arg3)
-		}
+		} 
 		 else if [*FIGHTER_STATUS_KIND_ESCAPE_AIR, *FIGHTER_STATUS_KIND_ESCAPE_AIR_SLIDE, *FIGHTER_STATUS_KIND_JUMP].contains(&next_status)  {
 			let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 			if IS_WAVEDASH[ENTRY_ID] == true {
@@ -227,7 +215,8 @@ pub unsafe fn change_status_request_hook(boma: &mut smash::app::BattleObjectModu
 			return 0 as u64
 		} else if smash::app::utility::get_kind(boma) == *FIGHTER_KIND_MURABITO && [*FIGHTER_MURABITO_STATUS_KIND_SPECIAL_N_POCKET].contains(&status_kind){
 			original!()(boma, *FIGHTER_STATUS_KIND_ITEM_THROW, arg3)
-		}else if next_status == *FIGHTER_STATUS_KIND_JUMP_SQUAT{
+		}
+		else if next_status == *FIGHTER_STATUS_KIND_JUMP_SQUAT{
 			let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 			IS_WAVEDASH[ENTRY_ID] = true;
 			if ControlModule::check_button_on_trriger(boma, *CONTROL_PAD_BUTTON_GUARD) {
