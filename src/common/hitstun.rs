@@ -71,7 +71,7 @@ pub unsafe fn status_pre_DamageAir(fighter: &mut L2CFighterCommon) -> L2CValue {
         return 1.into();
     }
 
-    call_original!(fighter)
+    return original!()(fighter);
 }
 
 
