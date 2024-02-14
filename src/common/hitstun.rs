@@ -24,7 +24,7 @@ pub fn kd_throw(fighter : &mut L2CFighterCommon) {
             fighter.clear_lua_stack();
 			lua_args!(fighter, *FIGHTER_KINETIC_ENERGY_ID_DAMAGE);
 			smash::app::sv_kinetic_energy::clear_speed(fighter.lua_state_agent);
-			macros::SET_SPEED_EX(fighter, 0, -3.0, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+			macros::SET_SPEED_EX(fighter, 0, -WorkModule::get_param_float(boma, hash40("common"), hash40("air_speed_y_stable")), *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
         }
     }
 }
