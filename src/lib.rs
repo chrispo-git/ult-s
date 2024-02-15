@@ -155,14 +155,14 @@ unsafe fn set_interval_2(ctx: &mut InlineCtx) {
 
 static mut RUN: AtomicBool = AtomicBool::new(false);
 
-#[skyline::hook(offset = 0x380f9e4, inline)]
+#[skyline::hook(offset = 0x3810664, inline)]
 unsafe fn vsync_count_thread(_: &skyline::hooks::InlineCtx) {
     RUN.store(true, Ordering::SeqCst);
 }
 
 static mut DUMMY_BLOCK: [u8; 0x100] = [0; 0x100];
 
-#[skyline::hook(offset = 0x3746afc, inline)]
+#[skyline::hook(offset = 0x374777C, inline)]
 unsafe fn run_scene_update(_: &skyline::hooks::InlineCtx) {
     while !RUN.swap(false, Ordering::SeqCst) {
         skyline::nn::hid::GetNpadFullKeyState(DUMMY_BLOCK.as_mut_ptr() as _, &0);
@@ -196,13 +196,13 @@ fn change_version_string_hook(arg: u64, string: *const c_char) {
 unsafe fn set_text_string(pane: u64, string: *const u8);
 
 unsafe fn get_pane_by_name(arg: u64, arg2: *const u8) -> [u64; 4] {
-    let func_addr = (skyline::hooks::getRegionAddress(skyline::hooks::Region::Text) as *mut u8).add(0x37752e0);
+    let func_addr = (skyline::hooks::getRegionAddress(skyline::hooks::Region::Text) as *mut u8).add(0x3775F60);
     let callable: extern "C" fn(u64, *const u8, ...) -> [u64; 4] = std::mem::transmute(func_addr);
     callable(arg, arg2)
 }
 
 unsafe fn set_room_text(arg: u64, string: String) {
-    let func_addr = (skyline::hooks::getRegionAddress(skyline::hooks::Region::Text) as *mut u8).add(0x3778c50);
+    let func_addr = (skyline::hooks::getRegionAddress(skyline::hooks::Region::Text) as *mut u8).add(0x3776910);
     let callable: extern "C" fn(u64, *const u8, usize, *const u16, ...) = std::mem::transmute(func_addr);
     callable(arg, b"mnu_online_room_inside_room_id\0".as_ptr(), 1, string.encode_utf16().collect::<Vec<u16>>().as_ptr())
 }
@@ -250,7 +250,7 @@ unsafe fn non_hdr_update_room_hook(_: &skyline::hooks::InlineCtx) {
     }
 }
 
-#[skyline::hook(offset = 0x188702c, inline)]
+#[skyline::hook(offset = 0x1887afc, inline)]
 unsafe fn non_hdr_set_room_id(ctx: &skyline::hooks::InlineCtx) {
     let panel = *((*((*ctx.registers[0].x.as_ref() + 8) as *const u64) + 0x10) as *const u64);
     CURRENT_PANE_HANDLE = panel as usize;
@@ -259,7 +259,7 @@ unsafe fn non_hdr_set_room_id(ctx: &skyline::hooks::InlineCtx) {
 
 static mut PANE: u64 = 0;
 
-#[skyline::hook(offset = 0x1a12460)]
+#[skyline::hook(offset = 0x1a12f40)]
 unsafe fn non_hdr_update_css2(arg: u64) {
     static mut CURRENT_COUNTER: usize = 0;
     if ninput::any::is_press(ninput::Buttons::X) {
@@ -284,7 +284,7 @@ unsafe fn non_hdr_update_css2(arg: u64) {
 
 static mut IS_USABLE: bool = false;
 
-#[skyline::hook(offset = 0x16cdb08, inline)]
+#[skyline::hook(offset = 0x16ccc58, inline)]
 unsafe fn non_hdr_set_online_latency(ctx: &InlineCtx) {
     let auto = *(*ctx.registers[19].x.as_ref() as *mut u8);
     if IS_USABLE {
