@@ -43,7 +43,7 @@ impl<T: Copy> CppVector<T> {
     }
 }
 
-#[skyline::hook(offset = 0x1d39500)]
+#[skyline::hook(offset = 0x1D39FE0)]
 unsafe fn get_button_label_by_operation_kind(hashed_string: &mut HashedString, operation: u8, arg: bool) {
     if operation == ext::InputKind::JumpMini as u8 {
         for (index, byte) in "mnu_opt_btn_key_short_hop\0".as_bytes().iter().enumerate() {
@@ -60,7 +60,7 @@ unsafe fn get_button_label_by_operation_kind(hashed_string: &mut HashedString, o
     }
 }
 
-#[skyline::hook(offset = 0x1d329e8, inline)]
+#[skyline::hook(offset = 0x1D3AAC0, inline)]
 unsafe fn add_footstool_to_gc(ctx: &skyline::hooks::InlineCtx) {
     let button = *ctx.registers[25].w.as_ref();
     if ![0x3, 0x4, 0x5, 0x8].contains(&button) {
@@ -75,7 +75,7 @@ unsafe fn add_footstool_to_gc(ctx: &skyline::hooks::InlineCtx) {
     }
 }
 
-#[skyline::hook(offset = 0x1d326f8, inline)]
+#[skyline::hook(offset = 0x1D331D8, inline)]
 unsafe fn add_footstool_to_fk(ctx: &skyline::hooks::InlineCtx) {
     let button = *ctx.registers[25].w.as_ref();
     if [0x4, 0x5, 0x6, 0x9].contains(&button) {
@@ -91,7 +91,7 @@ unsafe fn add_footstool_to_fk(ctx: &skyline::hooks::InlineCtx) {
     }
 }
 
-#[skyline::hook(offset = 0x1d3395c, inline)]
+#[skyline::hook(offset = 0x1D33CB8, inline)]
 unsafe fn add_footstool_to_jc(ctx: &skyline::hooks::InlineCtx) {
     let input_list_vector = &mut *((*ctx.registers[24].x.as_ref() + 0x148) as *mut CppVector<u8>);
     
@@ -103,7 +103,7 @@ unsafe fn add_footstool_to_jc(ctx: &skyline::hooks::InlineCtx) {
     }
 }
 
-#[skyline::hook(offset = 0x1d34e4c, inline)]
+#[skyline::hook(offset = 0x1D3592C, inline)]
 unsafe fn add_more_buttons(ctx: &mut skyline::hooks::InlineCtx) {
     let input_list_vector = &mut *((*ctx.registers[24].x.as_ref() + 0x148) as *mut CppVector<u8>);
     // panic!("{}", input_list_vector.len());
@@ -112,7 +112,7 @@ unsafe fn add_more_buttons(ctx: &mut skyline::hooks::InlineCtx) {
 
 pub fn install() {
     unsafe {
-        skyline::patching::Patch::in_text(0x1d34e4c).nop();
+        skyline::patching::Patch::in_text(0x1D3592C).nop();
     }
     skyline::install_hooks!(
         get_button_label_by_operation_kind,
