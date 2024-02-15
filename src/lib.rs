@@ -465,9 +465,11 @@ pub extern "C" fn main() {
 
     //allows online play with added chars
     unsafe { 
-        extern "C" { fn allow_ui_chara_hash_online(ui_chara_hash: u64); }
-        allow_ui_chara_hash_online(0xf1062d2e5); //rayman
-        allow_ui_chara_hash_online(0xda4cbcb12); //toad
+        if Path::new("sd:/atmosphere/contents/01006a800016e000/romfs/skyline/plugins/libcss_slot_redirection.nro").is_file() {
+            extern "C" { fn allow_ui_chara_hash_online(ui_chara_hash: u64); }
+            allow_ui_chara_hash_online(0xf1062d2e5); //rayman
+            allow_ui_chara_hash_online(0xda4cbcb12); //toad
+        }
     }
 	
 	//Common
