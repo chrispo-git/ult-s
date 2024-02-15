@@ -122,9 +122,9 @@ unsafe fn chrom_eff_ftilt_s(fighter: &mut L2CAgentBase) {
     		macros::AFTER_IMAGE4_ON_arg29(fighter, Hash40::new("tex_chrom_sword1"), Hash40::new("tex_chrom_sword2"), 4, Hash40::new("sword1"), 0.0, 0.0, 1.65, Hash40::new("sword1"), -0.0, -0.0, 12.4, true, Hash40::new("chrom_sword"), Hash40::new("sword1"), 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0, *EFFECT_AXIS_X, 0, *TRAIL_BLEND_ALPHA, 101, *TRAIL_CULL_NONE, 1.2, 0.2);
 			macros::FOOT_EFFECT(fighter, Hash40::new("sys_dash_smoke"), Hash40::new("top"), -8, 0, 0, 0, 0, 0, 0.9, 0, 0, 0, 0, 0, 0, false);
 		}
-		frame(fighter.lua_state_agent, 9.0);
+		frame(fighter.lua_state_agent, 10.0);
 		if macros::is_excute(fighter) {
-			macros::AFTER_IMAGE_OFF(fighter, 2);
+			macros::AFTER_IMAGE_OFF(fighter, 4);
 		}
 }	
 #[acmd_script(
