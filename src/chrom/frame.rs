@@ -50,8 +50,10 @@ fn chrom_frame(fighter: &mut L2CFighterCommon) {
 						if StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR {
 							StatusModule::change_status_request_from_script(boma, *FIGHTER_ROY_STATUS_KIND_SPECIAL_S4, true);
 						} else {
-							KineticModule::clear_speed_all(boma);
 							KineticModule::suspend_energy(boma, *FIGHTER_KINETIC_ENERGY_ID_CONTROL);
+							KineticModule::resume_energy(boma, *FIGHTER_KINETIC_ENERGY_ID_STOP);
+							let stop_rise  = smash::phx::Vector3f { x: 0.75, y: 1.0, z: 1.0 };
+							KineticModule::mul_speed(boma, &stop_rise, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
 							if stick_y > 0.5 {
 								MotionModule::change_motion(boma, Hash40::new("special_s4_hi"), 0.0, 1.0, false, 0.0, false, false);
 							} else if stick_y < -0.5 {
