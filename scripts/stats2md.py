@@ -78,7 +78,7 @@ f.close()
 md = []
 
 stats.pop(0)
-md.append(f"# Attributes\n")
+md.append(f"## Attributes\n")
 md.append(f"| Stat | Value |\n")
 md.append(f"| ------------- |:-------------:|\n")
 
@@ -89,6 +89,7 @@ for i in range(0,19):
     x = x.replace("\n", "")
     md.append(f"{x}|\n")
 
+md.append(f"\n\n\n\n## Attacks\n")
 while len(stats) > 0:
     x = stats[0]
     stats.pop(0)
