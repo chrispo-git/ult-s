@@ -9,8 +9,25 @@ use smash::lua2cpp::*;
 use smashline::*;
 use smash_script::*;
 use smash::lua2cpp::*;
+use crate::util::*;
 
 
+#[fighter_frame_callback]
+pub fn kd_throw(fighter : &mut L2CFighterCommon) {
+    unsafe {
+        let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);  
+        let status_kind = StatusModule::status_kind(boma);
+		let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+        if [*FIGHTER_STATUS_KIND_DAMAGE_FLY, *FIGHTER_STATUS_KIND_DAMAGE_FLY_ROLL].contains(&status_kind) && IS_KD_THROW[ENTRY_ID] {
+            IS_KD_THROW[ENTRY_ID] = false;
+            KineticModule::clear_speed_all(boma);
+            fighter.clear_lua_stack();
+			lua_args!(fighter, *FIGHTER_KINETIC_ENERGY_ID_DAMAGE);
+			smash::app::sv_kinetic_energy::clear_speed(fighter.lua_state_agent);
+			macros::SET_SPEED_EX(fighter, 0, -WorkModule::get_param_float(boma, hash40("common"), hash40("air_speed_y_stable")), *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+        }
+    }
+}
 #[fighter_frame_callback]
 pub fn non_tumble_di(fighter : &mut L2CFighterCommon) {
     unsafe {
@@ -59,6 +76,6 @@ pub unsafe fn ftStatusUniqProcessDamage_exec_hook(fighter: &mut L2CFighterCommon
 
 
 pub fn install() {
-    smashline::install_agent_frame_callbacks!(non_tumble_di);
+    smashline::install_agent_frame_callbacks!(non_tumble_di, kd_throw);
     skyline::install_hooks!(ftStatusUniqProcessDamage_exec_common_hook, ftStatusUniqProcessDamage_exec_hook);
 }
