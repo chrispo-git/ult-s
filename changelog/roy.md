@@ -54,7 +54,7 @@ FaF: 23
 |Frame|ID|Damage|Angle|BKB|KBG|Notes| | | |
 |-|-|-|-|-|-|-|-|-|-|
 |Frame 9| 0|  11.0%|  361|  30|  105|
-|Frame 9| 1|  9.0%|  90|  40|  80| hit effect is fire|
+|Frame 9| 1|  9.0%|  90|  40|  70| hit effect is fire|
 |Hitboxes terminated on Frame 12|
 
 
@@ -93,7 +93,7 @@ FaF: 26
 |Hitboxes terminated on Frame 9|
 
 
-FaF: 22
+FaF: 25
 
 
 
@@ -293,8 +293,8 @@ Autocancel - 1-2/38+
 |Frame 9| 1|  15.0%|  270|  20|  90| Hits air only| hit effect is fire|
 |Frame 9| 2|  15.0%|  270|  20|  90| Hits grounded only| hit effect is fire|
 |Frame 9| 3|  15.0%|  270|  20|  90| Hits air only| hit effect is fire|
-|Frame 9| 4|  10.0%|  80|  30|  90| Hits grounded only| hit effect is fire|
-|Frame 9| 5|  10.0%|  80|  30|  90| Hits air only| hit effect is fire|
+|Frame 9| 4|  10.0%|  361|  30|  90| Hits grounded only| hit effect is fire|
+|Frame 9| 5|  10.0%|  361|  30|  90| Hits air only| hit effect is fire|
 |Frame 12| 0|  15.0%|  80|  20|  90| hit effect is fire|
 |Frame 12| 1|  15.0%|  80|  20|  90| hit effect is fire|
 |Frame 12| 2|  10.0%|  80|  30|  90| hit effect is fire|
