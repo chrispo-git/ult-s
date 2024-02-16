@@ -4,6 +4,7 @@ import sys
 from string import ascii_lowercase
 import tkinter as tk
 from tkinter import filedialog
+import stats2md
 
 
 char_directory = []
@@ -2028,3 +2029,4 @@ for i in output:
 f.write("\n\n\n\n")
 f.close()
 #os.remove("edited.csv")
+stats2md.run_stats2md()
