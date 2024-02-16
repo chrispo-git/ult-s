@@ -5,6 +5,7 @@
 4. save as {character}.md within the changelog
 
 Tip: Check the file [here](https://markdownlivepreview.com) in order to make sure it looks right
+MAKE SURE TO DOUBLE CHECK THE PROJECTILE VALUES LISTED ARE CORRECT IF THEYRE CHANGED FROM VANILLA
 
 # How to update a character data doc (for your PRs)
 1. do same as above except instead of replacing the entirety of the character's .md file, only the moves changed within your PR
