@@ -107,16 +107,16 @@ FaF: 28
 ### Dash Attack
 |Frame|ID|Damage|Angle|BKB|KBG|Notes| | | |
 |-|-|-|-|-|-|-|-|-|-|
-|Frame 8| 0|  10.0%|  45|  60|  70|
-|Frame 8| 1|  10.0%|  361|  60|  70|
-|Frame 8| 2|  10.0%|  361|  60|  70|
-|Frame 8| 3|  12.0%|  45|  60|  70|
 |Frame 11| 0|  10.0%|  45|  60|  70|
+|Frame 11| 1|  10.0%|  361|  60|  70|
+|Frame 11| 2|  10.0%|  361|  60|  70|
 |Frame 11| 3|  12.0%|  45|  60|  70|
-|Hitboxes terminated on Frame 12|
+|Frame 14| 0|  10.0%|  45|  60|  70|
+|Frame 14| 3|  12.0%|  45|  60|  70|
+|Hitboxes terminated on Frame 15|
 
 
-FaF: 45
+FaF: 48
 
 
 
@@ -759,12 +759,15 @@ FaF: 75
 ### Up Special 
 |Frame|ID|Damage|Angle|BKB|KBG|Notes| | | |
 |-|-|-|-|-|-|-|-|-|-|
-|Frame 5| 2|  11.0%|  35|  70|  74|
-|Frame 5| 3|  11.0%|  35|  70|  74|
-|Frame 5| 4|   11.0%|  35|  70|  74|
-|Frame 6| 0|  7.0%|  35|  20|  90|
-|Frame 6| 1|  7.0%|  35|  20|  90|
+|Frame 8| 2|  11.0%|  35|  70|  74|
+|Frame 8| 3|  11.0%|  35|  70|  74|
+|Frame 8| 4|   11.0%|  35|  70|  74|
+|Frame 9| 0|  7.0%|  35|  20|  90|
+|Frame 9| 1|  7.0%|  35|  20|  90|
 |Hitboxes terminated on Frame 12|
+
+
+I-frames 7-8
 
 
 FaF: --
