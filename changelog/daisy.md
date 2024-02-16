@@ -457,6 +457,8 @@ FaF: 65
 
 ### Neutral Special Hit
 I-frames 1-12
+
+
 FaF: 24
 
 
