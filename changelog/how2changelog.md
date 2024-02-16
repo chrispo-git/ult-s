@@ -5,6 +5,8 @@
 4. save as {character}.md within the changelog
 
 Tip: Check the file [here](https://markdownlivepreview.com) in order to make sure it looks right
+
+
 MAKE SURE TO DOUBLE CHECK THE PROJECTILE VALUES LISTED ARE CORRECT IF THEYRE CHANGED FROM VANILLA
 
 # How to update a character data doc (for your PRs)
