@@ -4,5 +4,7 @@
 3. open output.md, edit it to where its accurate and makes sense (some specials need more editing than others, all projectiles need their info put into the move, projectile stats are on the bottom)
 4. save as {character}.md within the changelog
 
+Tip: Check the file [here](https://markdownlivepreview.com) in order to make sure it looks right
+
 # How to update a character data doc (for your PRs)
 1. do same as above except instead of replacing the entirety of the character's .md file, only the moves changed within your PR
