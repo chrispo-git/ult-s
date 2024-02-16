@@ -775,24 +775,6 @@ FaF: --
 
 
 
-### (Air) Up Special 
-|Frame|ID|Damage|Angle|BKB|KBG|Notes| | | |
-|-|-|-|-|-|-|-|-|-|-|
-|Frame 5| 2| 11.0%| 361| 70| 74|
-|Frame 5| 3| 11.0%| 74| 70| 74|
-|Frame 6| 0| 7.0%| 361| 20| 90|
-|Frame 6| 1| 7.0%| 74| 20| 90|
-|Hitboxes terminated on Frame 12|
-
-
-FaF: --
-
-
-
-
-
-
-
 ### Down Special Hit
 |Frame|ID|Damage|Angle|BKB|KBG|Notes| | | |
 |-|-|-|-|-|-|-|-|-|-|
