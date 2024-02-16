@@ -257,6 +257,8 @@ FaF: 78
 |Hitboxes terminated on Frame 31|
 
 
+FaF: 39
+
 
 
 
@@ -478,25 +480,6 @@ FaF: 50
 
 
 FaF: 49
-
-
-
-
-
-
-
-### (Air) Neutral Special Start
-|Frame|ID|Damage|Angle|BKB|KBG|Notes| | | |
-|-|-|-|-|-|-|-|-|-|-|
-|Bowarrow created on Frame 1|
-
-
-FaF: -5
-
-
-
-
-
 
 
 ### Neutral Special Start
