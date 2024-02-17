@@ -733,6 +733,8 @@ if not os.path.isdir(f'src/{character}'):
           x = x.replace("\n", "")
           x = x.replace("\t", "")
           x = x.replace(",", "")
+          if x == "i32::MAX":
+            x = 999999
           hit_times = int(x)
 
 
@@ -1071,6 +1073,8 @@ if os.path.isdir(f'{vanilla_directory}/smashline/lua2cpp_{character}/{character}
           x = x.replace("\n", "")
           x = x.replace("\t", "")
           x = x.replace(",", "")
+          if x == "i32::MAX":
+            x = 999999
           hit_times = int(x)
 
 
@@ -1533,6 +1537,8 @@ if not os.path.isdir(f'src/{character}'):
           x = x.replace("\n", "")
           x = x.replace("\t", "")
           x = x.replace(",", "")
+          if x == "i32::MAX":
+            x = 999999
           hit_times = int(x)
 
 
@@ -1828,6 +1834,8 @@ for projectiles in my_projectiles:
             x = x.replace("\n", "")
             x = x.replace("\t", "")
             x = x.replace(",", "")
+            if x == "i32::MAX":
+              x = 999999
             hit_times = int(x)
 
 
