@@ -457,6 +457,20 @@ FaF: 85
 
 
 
+### Neutral Special
+|Frame|ID|Damage|Angle|BKB|KBG|Notes| | | |
+|-|-|-|-|-|-|-|-|-|-|
+|Frame 24| 0| 14.0%| 45| 40| 60| hit effect is fire| Reflectable| Absorbable|
+
+
+FaF: 45
+
+
+
+
+
+
+
 ### Side Special Catch
 |Frame|ID|Damage|Angle|BKB|KBG|Notes| | | |
 |-|-|-|-|-|-|-|-|-|-|
@@ -572,23 +586,3 @@ FaF: --
 
 
 FaF: 56
-
-
-
-|Projectiles:|
-
-
-
-|koopa_breath|
-
-|move|
-|Frame|ID|Damage|Angle|BKB|KBG|Notes| | | |
-|-|-|-|-|-|-|-|-|-|-|
-|Frame 1| 0| 1.8%| 55| 20| 30| hit effect is fire| Reflectable| Absorbable|
-|Frame 7| 0| 1.8%| 55| 20| 30| hit effect is fire| Reflectable| Absorbable| Flinchless|
-
-
-
-
-
-
