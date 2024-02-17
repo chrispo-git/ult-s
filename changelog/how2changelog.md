@@ -9,5 +9,8 @@ Tip: Check the file [here](https://markdownlivepreview.com) in order to make sur
 
 MAKE SURE TO DOUBLE CHECK THE PROJECTILE VALUES LISTED ARE CORRECT IF THEYRE CHANGED FROM VANILLA
 
+
+If theres no FaF written under it (not even FaF: --) then something has gone wrong, find out what its FaF is (either ingame or with export_yamlist + a little bit of maths) and add it.
+
 # How to update a character data doc (for your PRs)
 1. do same as above except instead of replacing the entirety of the character's .md file, only the moves changed within your PR
