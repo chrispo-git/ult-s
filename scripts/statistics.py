@@ -132,7 +132,7 @@ projectile_list = [
    ["elight","elight_exprosiveshot","elight_spreadbullet"],
    ["falco", "falco_blaster_bullet"],
    ["fox","fox_blaster_bullet"],
-   ["gamewatch","gaemwatch_food","gamewatch_oil"],
+   ["gamewatch","gamewatch_food","gamewatch_oil"],
    ["ganon"],
    ["gaogaen"],
    ["gekkouga","gekkouga_shuriken","gekkouga_water"],
