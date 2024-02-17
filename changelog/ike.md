@@ -561,16 +561,15 @@ FaF: 35
 ### Up Special 2
 |Frame|ID|Damage|Angle|BKB|KBG|Notes| | | |
 |-|-|-|-|-|-|-|-|-|-|
-|Sword created on Frame 2|
-|Frame 1| 0| 6.0%| 88| 150 (Set)| 100|
-|Frame 1| 1| 6.0%| 94| 150 (Set)| 100|
-|Frame 1| 2| 6.0%| 96| 150 (Set)| 100|
-|Frame 1| 3| 6.0%| 86| 145 (Set)| 100|
-|Frame 1| 4| 6.0%| 94| 145 (Set)| 100|
-|Frame 1| 5| 6.0%| 96| 140 (Set)| 100|
-|Hitboxes terminated on Frame 3|
-|Frame 30| 0| 1.0%| 367| 50 (Set)| 100| rehits every 7 frames|
-|Hitboxes terminated on Frame 41|
+|Frame 15| 0| 6.0%| 88| 150 (Set)| 100|
+|Frame 15| 1| 6.0%| 94| 150 (Set)| 100|
+|Frame 15| 2| 6.0%| 96| 150 (Set)| 100|
+|Frame 15| 3| 6.0%| 86| 145 (Set)| 100|
+|Frame 15| 4| 6.0%| 94| 145 (Set)| 100|
+|Frame 15| 5| 6.0%| 96| 140 (Set)| 100|
+|Hitboxes terminated on Frame 17|
+|Frame 44| 0| 1.0%| 367| 50 (Set)| 100| rehits every 7 frames|
+|Hitboxes terminated on Frame 55|
 
 
 FaF: --
