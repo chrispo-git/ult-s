@@ -1,3 +1,4 @@
+# Wii Fit Trainer
 ## Attributes
 | Stat | Value |
 | ------------- |:-------------:|
@@ -474,17 +475,38 @@ FaF: 50
 
 
 
-### Side Special Heading
+### Neutral Special
 |Frame|ID|Damage|Angle|BKB|KBG|Notes| | | |
 |-|-|-|-|-|-|-|-|-|-|
-|Frame 2| 0| 15.0%| 295| 30| 71|
-|Frame 2| 1| 15.0%| 295| 30| 71|
-|Frame 4| 0| 10.0%| 295| 30| 71|
-|Frame 4| 1| 10.0%| 295| 30| 71|
-|Hitboxes terminated on Frame 7|
+|Frame 21| 0| 5.0%| 50| 30| 63| Minimum| Reflectable| Absorbable| deals -2.5 bonus shield damage|
+|Frame 21| 1| 21.0%| 50| 38| 64| Maximum| Reflectable| Absorbable| deals -5.3 bonus shield damage|
 
 
-FaF: 28
+Note: Frame 4 on release
+
+
+FaF: 40
+
+
+
+
+
+
+
+### Side Special
+|Frame|ID|Damage|Angle|BKB|KBG|Notes| | | |
+|-|-|-|-|-|-|-|-|-|-|
+|Frame 15-31| 0| 15.0%| 295| 30| 71|
+|Frame 15-31| 1| 15.0%| 295| 30| 71|
+|Frame 17-33| 0| 10.0%| 295| 30| 71|
+|Frame 17-33| 1| 10.0%| 295| 30| 71|
+|Hitboxes terminated on Frame 21-37|
+
+
+Notes: Soccer ball spawns if none already exists. Pressing shield sends into special fall without doing the header part.
+
+
+FaF: 41-57
 
 
 
@@ -495,67 +517,12 @@ FaF: 28
 ### (Air) Up Special Start
 |Frame|ID|Damage|Angle|BKB|KBG|Notes| | | |
 |-|-|-|-|-|-|-|-|-|-|
-|Hulahoop created on Frame 6|
+|Frame 6| 0| 5.0%| 106| 70| 20| rehits every 17 frames|
+|Frame 6| 1| 5.0%| 106| 70| 20| rehits every 17 frames|
+|Frame 6| 2| 5.0%| 106| 70| 20| rehits every 17 frames|
 
 
 FaF: --
-
-
-
-
-
-
-
-### Up Special Start
-|Frame|ID|Damage|Angle|BKB|KBG|Notes| | | |
-|-|-|-|-|-|-|-|-|-|-|
-|Hulahoop created on Frame 6|
-
-
-FaF: --
-
-
-
-|Projectiles:|
-
-
-
-|wiifit_hulahoop|
-
-|wait|
-|Frame|ID|Damage|Angle|BKB|KBG|Notes| | | |
-|-|-|-|-|-|-|-|-|-|-|
-|Frame 1| 0| 5.0%| 106| 70| 20| rehits every 17 frames|
-|Frame 1| 1| 5.0%| 106| 70| 20| rehits every 17 frames|
-|Frame 1| 2| 5.0%| 106| 70| 20| rehits every 17 frames|
-
-
-
-
-|wiifit_sunbullet|
-
-|hold|
-|Frame|ID|Damage|Angle|BKB|KBG|Notes| | | |
-|-|-|-|-|-|-|-|-|-|-|
-|Frame 1| 0| 0.0%| 50| 10| 130| Absorbable| Flinchless| rehits every 7 frames|
-|Frame 1| 1| 0.0%| 50| 10| 130| Absorbable| rehits every 7 frames|
-
-
-
-|shoot|
-|Frame|ID|Damage|Angle|BKB|KBG|Notes| | | |
-|-|-|-|-|-|-|-|-|-|-|
-|Frame 1| 0| 5.0%| 50| 30| 63| hit effect is taiyo_hit| Reflectable| Absorbable| deals -2.5 bonus shield damage|
-|Frame 1| 1| 21.0%| 50| 38| 64| hit effect is taiyo_hit| Reflectable| Absorbable| deals -5.3 bonus shield damage|
-
-
-
-|vanish|
-|Frame|ID|Damage|Angle|BKB|KBG|Notes| | | |
-|-|-|-|-|-|-|-|-|-|-|
-|Hitboxes terminated on Frame 0|
-
-
 
 
 
