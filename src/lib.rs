@@ -453,6 +453,8 @@ std::arch::global_asm!(
     .space 0xD0
     "#
 );
+#[no_mangle]
+pub extern "C" fn is_ultimate_s() {}
 
 #[no_mangle]
 pub extern "C" fn main() {
