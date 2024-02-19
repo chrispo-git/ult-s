@@ -52,3 +52,48 @@ unsafe fn daisy_dtilt_eff(fighter: &mut L2CAgentBase) {
 			macros::LAST_EFFECT_SET_RATE(fighter, 1.4);
 		}
 }
+#[acmd_script(
+    agent = "daisy",
+    script =  "game_attacks3",
+    category = ACMD_GAME,
+	low_priority)]
+unsafe fn daisy_ftilt(agent: &mut L2CAgentBase) {
+    frame(agent.lua_state_agent, 9.0);
+    if macros::is_excute(agent) {
+        macros::ATTACK(agent, 0, 0, Hash40::new("havel"), 18.0, 80, 65, 0, 68, 3.0, 0.0, 3.0, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_DAISY_FRYINGPAN, *ATTACK_REGION_OBJECT);
+        macros::ATTACK(agent, 1, 0, Hash40::new("havel"), 18.0, 80, 65, 0, 68, 2.0, 0.0, -2.0, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_DAISY_FRYINGPAN, *ATTACK_REGION_OBJECT);
+    }
+    frame(agent.lua_state_agent, 18.0);
+    if macros::is_excute(agent) {
+        AttackModule::clear_all(agent.module_accessor);
+    }
+}
+#[acmd_script(
+    agent = "daisy",
+    script =  "effect_attacklw3",
+    category = ACMD_EFFECT,
+	low_priority)]
+unsafe fn daisy_ftilt_eff(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+		frame(fighter.lua_state_agent, 7.0);
+		if macros::is_excute(fighter) {
+			macros::EFFECT_FLIP_ALPHA(fighter, Hash40::new("daisy_smash_skillet"), Hash40::new("daisy_smash_skillet_l"), Hash40::new("top"), 0, 8.0, 4.5, 10, -35, 8, 0.8, 0, 0, 0, 0, 0, 0, true, *EF_FLIP_YZ, 0.3);
+			macros::LAST_EFFECT_SET_RATE(fighter, 1.4);
+		}
+}
+#[acmd_script(
+    agent = "daisy",
+    script =  "expression_attacks3",
+    category = ACMD_EXPRESSION,
+	low_priority)]
+unsafe fn daisy_ftilt_expr(agent: &mut L2CAgentBase) {
+	if macros::is_excute(agent) {
+		ItemModule::set_have_item_visibility(agent.module_accessor, false, 0);
+		VisibilityModule::set_int64(agent.module_accessor, hash40("smash_item") as i64, hash40("smash_item_pan") as i64);
+	}
+	frame(agent.lua_state_agent, 23.0);
+	if macros::is_excute(agent) {
+		ItemModule::set_have_item_visibility(agent.module_accessor, false, 0);
+		VisibilityModule::set_int64(agent.module_accessor, hash40("smash_item") as i64, hash40("smash_item_none") as i64);
+	}
+}

@@ -15,11 +15,8 @@ use crate::util::*;
 use super::*;
 pub fn install() {
 	smashline::install_acmd_scripts!(
-		daisy_uair,
-		daisy_uair_eff,
-		daisy_uair_snd,
-		daisy_uair_expr,
-		daisy_fair,
+		daisy_uair, daisy_uair_eff, daisy_uair_snd, daisy_uair_expr,
+		daisy_fair, daisy_fair_expr,
 		daisy_nair,
 		daisy_bair
 	);
@@ -120,6 +117,21 @@ unsafe fn daisy_fair(fighter: &mut L2CAgentBase) {
 		if macros::is_excute(fighter) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
+}
+#[acmd_script(
+    agent = "daisy",
+    script =  "expression_attackairf",
+    category = ACMD_EXPRESSION,
+	low_priority)]
+unsafe fn daisy_fair_expr(agent: &mut L2CAgentBase) {
+    frame(agent.lua_state_agent, 14.0);
+    if macros::is_excute(agent) {
+        ControlModule::set_rumble(agent.module_accessor, Hash40::new("rbkind_nohitm"), 0, false, *BATTLE_OBJECT_ID_INVALID as u32);
+    }
+    frame(agent.lua_state_agent, 16.0);
+    if macros::is_excute(agent) {
+        macros::RUMBLE_HIT(agent, Hash40::new("rbkind_attackm"), 0);
+    }
 }
 #[acmd_script(
     agent = "daisy",
