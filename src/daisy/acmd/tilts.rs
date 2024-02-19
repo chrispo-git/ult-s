@@ -15,8 +15,8 @@ use crate::util::*;
 use super::*;
 pub fn install() {
 	smashline::install_acmd_scripts!(
-		daisy_dtilt,
-		daisy_dtilt_eff
+		daisy_dtilt, daisy_dtilt_eff,
+		daisy_ftilt, daisy_ftilt_eff, daisy_ftilt_expr
 	);
 }
 #[acmd_script(
