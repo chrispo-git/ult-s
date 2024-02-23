@@ -26,6 +26,7 @@ fn chrom_frame(fighter: &mut L2CFighterCommon) {
 			let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
 			let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 			let frame = MotionModule::frame(boma);
+			let stick_y = ControlModule::get_stick_y(boma);
 			if [hash40("special_s1"), hash40("special_air_s1")].contains(&MotionModule::motion_kind(boma)) {
 					if MotionModule::frame(boma) > 4.0 && MotionModule::frame(boma) < 31.0{
 						if KineticModule::get_kinetic_type(boma) != *FIGHTER_KINETIC_TYPE_DASH{
@@ -49,7 +50,17 @@ fn chrom_frame(fighter: &mut L2CFighterCommon) {
 						if StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR {
 							StatusModule::change_status_request_from_script(boma, *FIGHTER_ROY_STATUS_KIND_SPECIAL_S4, true);
 						} else {
-							StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_ATTACK_S3, true);
+							KineticModule::suspend_energy(boma, *FIGHTER_KINETIC_ENERGY_ID_CONTROL);
+							KineticModule::resume_energy(boma, *FIGHTER_KINETIC_ENERGY_ID_STOP);
+							let stop_rise  = smash::phx::Vector3f { x: 0.75, y: 1.0, z: 1.0 };
+							KineticModule::mul_speed(boma, &stop_rise, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+							if stick_y > 0.5 {
+								MotionModule::change_motion(boma, Hash40::new("special_s4_hi"), 0.0, 1.0, false, 0.0, false, false);
+							} else if stick_y < -0.5 {
+								MotionModule::change_motion(boma, Hash40::new("special_s4_lw"), 0.0, 1.0, false, 0.0, false, false);
+							} else {
+								MotionModule::change_motion(boma, Hash40::new("special_s4_s"), 0.0, 1.0, false, 0.0, false, false);
+							}
 						};
 					};
 			};
