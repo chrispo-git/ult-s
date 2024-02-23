@@ -11,7 +11,7 @@
       <int hash="special_n_start_auto_attack_frame">30</int>
       <float hash="special_n_add_attack_power">5</float>
       <float hash="special_n_homing_speed">4</float>
-      <float hash="special_n_hit_accel_y_mul">1</float>
+      <float hash="special_n_hit_accel_y_mul">3</float>
     </struct>
     <hash40 index="1">dummy</hash40>
     <hash40 index="2">dummy</hash40>
