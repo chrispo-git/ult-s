@@ -84,7 +84,7 @@ unsafe fn robin_grima_upb(fighter: &mut L2CAgentBase) {
 		if macros::is_excute(fighter) {
 			if true{
 				if StatusModule::situation_kind(fighter.module_accessor) == *SITUATION_KIND_AIR {
-					let speed = smash::phx::Vector3f { x: 0.0, y: 0.8, z: 0.0 };
+					let speed = smash::phx::Vector3f { x: 0.0, y: 1.0, z: 0.0 };
 					KineticModule::add_speed(fighter.module_accessor, &speed);
 				} else {
 					let speed = smash::phx::Vector3f { x: 0.0, y: 0.5, z: 0.0 };
