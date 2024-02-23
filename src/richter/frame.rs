@@ -49,6 +49,16 @@ fn richter_frame(fighter: &mut L2CFighterCommon) {
 					};
 				}
 			}
+			if [hash40("special_n"), hash40("special_n_blank"), hash40("special_air_n"), hash40("special_air_n_blank")].contains(&motion_kind) {
+				if [hash40("special_air_n"), hash40("special_air_n_blank")].contains(&motion_kind) {
+					WAS_AIR[ENTRY_ID] = true;
+				} else if WAS_AIR[ENTRY_ID] {
+					WorkModule::set_float(boma, 12.0, *FIGHTER_INSTANCE_WORK_ID_FLOAT_LANDING_FRAME);
+					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_LANDING_FALL_SPECIAL, true);
+				}
+			} else {
+				WAS_AIR[ENTRY_ID] = false;
+			}
 		}
     }
 }
