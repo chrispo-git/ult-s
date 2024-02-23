@@ -10,6 +10,7 @@ libarcropolis.nro - https://github.com/Raytwo/ARCropolis
 libnro_hook.nro - https://github.com/ultimate-research/nro-hook-plugin
 libsmashline_hook - https://github.com/blu-dev/smashline_hook
 skyline - https://github.com/skyline-dev/skyline
+arena latency slider - https://gamebanana.com/mods/496679
 
 -Common Issues-
 Make sure when updating you DELETE the old version rather than replacing
