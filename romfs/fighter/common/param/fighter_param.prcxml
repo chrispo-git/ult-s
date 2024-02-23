@@ -1374,7 +1374,6 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
       <float hash="tread_mini_jump_speed_y_mul">0.475</float>
       <float hash="combo_attack_12_end">0</float>
       <int hash="attack_combo_max">1</int>
-      <bool hash="air_lasso_type">false</bool>
     </struct>
     <!--DAISY-->
     <struct index="84">
