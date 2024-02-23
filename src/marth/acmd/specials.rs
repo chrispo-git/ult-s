@@ -45,6 +45,10 @@ unsafe fn marth_db4(fighter: &mut L2CAgentBase) {
 	low_priority)]
 unsafe fn marth_upb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
+		frame(fighter.lua_state_agent, 2.0);
+		macros::FT_MOTION_RATE(fighter, /*FSM*/ 2.5);
+		wait(fighter.lua_state_agent, 2.0);
+		macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.0);
 		frame(fighter.lua_state_agent, 5.0);
 		if macros::is_excute(fighter) {
 			macros::ATTACK(fighter, /*ID*/ 2, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 11.0, /*Angle*/ 35, /*KBG*/ 74, /*FKB*/ 0, /*BKB*/ 70, /*Size*/ 4.0, /*X*/ 0.0, /*Y*/ 8.0, /*Z*/ 8.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_cutup"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_CUTUP, /*Type*/ *ATTACK_REGION_SWORD);
