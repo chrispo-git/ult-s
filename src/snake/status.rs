@@ -45,56 +45,6 @@ unsafe fn snake_side_smash_status_end(fighter: &mut L2CFighterCommon) -> L2CValu
     original!(fighter)
 }*/
 
-////fixed unwanted buffered throws and walking
-#[status_script(agent = "snake", status = FIGHTER_STATUS_KIND_CATCH_PULL, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
-unsafe fn snake_grab_pull_status_main(fighter: &mut L2CFighterCommon) -> L2CValue {
-    ControlModule::reset_trigger(fighter.module_accessor);
-    MotionModule::change_motion(fighter.module_accessor, Hash40::new("catch_pull"), 0.0, 1.0, false, 0.0, false, false);
-    fighter.sub_shift_status_main(L2CValue::Ptr(snake_grab_pull_main_loop as *const () as _))
-    // 0.into()
-}
-#[status_script(agent = "snake", status = FIGHTER_STATUS_KIND_CATCH_DASH_PULL, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
-unsafe fn snake_grab_dash_pull_status_main(fighter: &mut L2CFighterCommon) -> L2CValue {
-    ControlModule::reset_trigger(fighter.module_accessor);
-    MotionModule::change_motion(fighter.module_accessor, Hash40::new("catch_pull"), 0.0, 1.0, false, 0.0, false, false);
-    fighter.sub_shift_status_main(L2CValue::Ptr(snake_grab_pull_main_loop as *const () as _))
-    // 0.into()
-}
-
-#[status_script(agent = "snake", status = FIGHTER_STATUS_KIND_CATCH_ATTACK, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
-unsafe fn snake_grab_attack_status_main(fighter: &mut L2CFighterCommon) -> L2CValue {
-    MotionModule::change_motion(fighter.module_accessor, Hash40::new("catch_attack"), 0.0, 1.0, false, 0.0, false, false);
-    fighter.sub_shift_status_main(L2CValue::Ptr(snake_grab_attack_main_loop as *const () as _))
-    // 0.into()
-}
-
-////added grab walk
-#[status_script(agent = "snake", status = FIGHTER_STATUS_KIND_CATCH_WAIT, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
-unsafe fn snake_grab_wait_status_main(fighter: &mut L2CFighterCommon) -> L2CValue {
-    let entry_id = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-    ControlModule::reset_trigger(fighter.module_accessor);
-    if SNAKE_FLAG_CATCH_WAIT_IS_WALK[entry_id] {
-        if PostureModule::lr(fighter.module_accessor)*ControlModule::get_stick_x(fighter.module_accessor) > 0.1 {
-            MotionModule::change_motion(fighter.module_accessor, Hash40::new("catch_walk_f"), 0.0, 1.0, false, 0.0, false, false);
-        }else if PostureModule::lr(fighter.module_accessor)*ControlModule::get_stick_x(fighter.module_accessor) < -0.1 {
-            MotionModule::change_motion(fighter.module_accessor, Hash40::new("catch_walk_b"), 0.0, 1.0, false, 0.0, false, false);
-        }else {
-            SNAKE_FLAG_CATCH_WAIT_IS_WALK[entry_id] = false;
-            MotionModule::change_motion(fighter.module_accessor, Hash40::new("catch_wait"), 0.0, 1.0, false, 0.0, false, false);
-        }
-    }else {
-        MotionModule::change_motion(fighter.module_accessor, Hash40::new("catch_wait"), 0.0, 1.0, false, 0.0, false, false);
-    }
-    fighter.sub_shift_status_main(L2CValue::Ptr(snake_grab_wait_main_loop as *const () as _))
-    // 0.into()
-}
-
-#[status_script(agent = "snake", status = FIGHTER_STATUS_KIND_CATCH_WAIT, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_END)]
-unsafe fn snake_grab_wait_status_end(fighter: &mut L2CFighterCommon) -> L2CValue {
-    let entry_id = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-    SNAKE_FLAG_CATCH_WAIT_IS_WALK[entry_id] = false;
-    original!(fighter)
-}
 
 ////added new up-taunt and side-taunt
 #[status_script(agent = "snake", status = FIGHTER_STATUS_KIND_APPEAL, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
@@ -183,14 +133,7 @@ unsafe fn snake_down_taunt_end_status_end(fighter: &mut L2CFighterCommon) -> L2C
 
 pub fn install() {
     smashline::install_status_scripts!(
-        /*snake_side_smash_status_main,
-        snake_side_smash_status_end,*/
         snake_side_special_status_main,
-        snake_grab_pull_status_main,
-        snake_grab_dash_pull_status_main,
-        snake_grab_attack_status_main,
-        snake_grab_wait_status_main,
-        snake_grab_wait_status_end,
         snake_taunt_status_main,
         snake_taunt_status_end,
         snake_down_taunt_wait_status_main,
