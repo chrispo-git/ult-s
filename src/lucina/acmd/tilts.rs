@@ -131,6 +131,9 @@ unsafe fn lucina_utilt(fighter: &mut L2CAgentBase) {
 		wait(fighter.lua_state_agent, 4.0);
 		if macros::is_excute(fighter) {
 			AttackModule::clear_all(fighter.module_accessor);
+			if LUCINA_STANCE[ENTRY_ID] == 0 {
+				macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.238095);
+			}
 		};
 }	
 

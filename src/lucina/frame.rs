@@ -32,6 +32,7 @@ pub fn lucina(fighter : &mut L2CFighterCommon) {
 			let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 			let cancel_frame = FighterMotionModuleImpl::get_cancel_frame(boma,smash::phx::Hash40::new_raw(MotionModule::motion_kind(boma)), false)as f32;
 			let cat1 = ControlModule::get_command_flag_cat(boma, 0);
+			let mask_is_exist = ArticleModule::is_exist(boma, *FIGHTER_LUCINA_GENERATE_ARTICLE_MASK);
 			if fighter_kind == *FIGHTER_KIND_LUCINA {
 				if [*FIGHTER_STATUS_KIND_ENTRY, *FIGHTER_STATUS_KIND_WIN, *FIGHTER_STATUS_KIND_LOSE].contains(&status_kind) || (smash::app::sv_information::is_ready_go() == false && !smash::app::smashball::is_training_mode()) {
 					LUCINA_STANCE[ENTRY_ID] = 0;
@@ -202,13 +203,32 @@ pub fn lucina(fighter : &mut L2CFighterCommon) {
 					let joint_scale = smash::phx::Vector3f { x: HERO_SWORD_MULT, y: HERO_SWORD_MULT, z: HERO_SWORD_MULT };
 					ModelModule::set_joint_scale(boma, smash::phx::Hash40::new("havel"), &joint_scale);	
 					ModelModule::set_joint_scale(boma, smash::phx::Hash40::new("sword1"), &joint_scale);	
+					AttackModule::set_attack_scale(fighter.module_accessor, 1.0, true);
+					if mask_is_exist {
+						if ![hash40("entry_l"), hash40("entry_r")].contains(&motion_kind) { // ignore during entry animation
+							ArticleModule::remove_exist(boma, *FIGHTER_LUCINA_GENERATE_ARTICLE_MASK, smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
+						}
+					} 
 				} else {
 					if [*FIGHTER_STATUS_KIND_DASH].contains(&status_kind) {
 						if MotionModule::frame(boma) == 3.0 {
-								let speed = smash::phx::Vector3f { x: 0.62, y: 0.0, z: 0.0 };
+								let speed = smash::phx::Vector3f { x: SWORDMASTER_DASH - WorkModule::get_param_float(fighter.module_accessor, hash40("dash_speed"), 0), y: 0.0, z: 0.0 };
 								KineticModule::add_speed(boma, &speed);
 						};
 					};
+					let joint_scale = smash::phx::Vector3f { x: SWORDMASTER_SWORD_MULT, y: SWORDMASTER_SWORD_MULT, z: SWORDMASTER_SWORD_MULT };
+					ModelModule::set_joint_scale(boma, smash::phx::Hash40::new("havel"), &joint_scale);	
+					ModelModule::set_joint_scale(boma, smash::phx::Hash40::new("sword1"), &joint_scale);	
+					AttackModule::set_attack_scale(fighter.module_accessor, SWORDMASTER_SWORD_MULT, true);
+					if !mask_is_exist {
+						ArticleModule::generate_article(boma, *FIGHTER_LUCINA_GENERATE_ARTICLE_MASK, false, -1);
+						let article = ArticleModule::get_article(boma, *FIGHTER_LUCINA_GENERATE_ARTICLE_MASK);
+						let article_id = smash::app::lua_bind::Article::get_battle_object_id(article) as u32;
+						let article_boma = sv_battle_object::module_accessor(article_id);
+						MotionModule::change_motion(article_boma, Hash40::new("appeal_lw"), 0.0, 1.0, false, 0.0, false, false);
+						MotionModule::set_frame(article_boma, 50.0, true);
+						MotionModule::set_rate(article_boma, 0.0);
+					} 
 					//Landing Lag
 					if MotionModule::motion_kind(boma) == hash40("landing_air_n") {
 						let landing = ((1.0/(SWORD_NAIR_LANDING/ cancel_frame))as f32);

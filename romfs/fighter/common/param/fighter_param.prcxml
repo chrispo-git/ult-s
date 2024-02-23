@@ -1395,7 +1395,7 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
     <struct index="85">
       <float hash="walk_speed_max">1.48</float>
       <float hash="ground_brake">0.09</float>
-      <float hash="dash_speed">1.76</float>
+      <float hash="dash_speed">1.7</float>
       <float hash="run_accel_mul">0.037</float>
       <float hash="run_accel_add">0.025</float>
       <float hash="run_speed_max">1.825</float>
