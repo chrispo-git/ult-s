@@ -124,8 +124,16 @@ pub fn projectile_invuln_master(fighter : &mut L2CFighterCommon) {
 					shield!(fighter, *MA_MSC_CMD_SHIELD_OFF, *COLLISION_KIND_REFLECTOR, 0, *FIGHTER_REFLECTOR_GROUP_HOMERUNBAT);
 				};
 			};
+		} else if fighter_kind == *FIGHTER_KIND_BRAVE {
+            if [hash40("attack_s3")].contains(&MotionModule::motion_kind(boma)) {
+                if MotionModule::frame(boma) > 8.0 && MotionModule::frame(boma) < 11.0 && StatusModule::situation_kind(boma) == *SITUATION_KIND_GROUND {
+                    shield!(fighter, *MA_MSC_CMD_REFLECTOR, *COLLISION_KIND_REFLECTOR, 0, hash40("shield"), 6.5, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, /*Power*/ dmg_mul, /*Speed*/ speed_mul, /*Max Damage*/ reflector_max, false, /*Lifetime*/ life_mul, *FIGHTER_REFLECTOR_GROUP_HOMERUNBAT);
+                } else {
+                    shield!(fighter, *MA_MSC_CMD_SHIELD_OFF, *COLLISION_KIND_REFLECTOR, 0, *FIGHTER_REFLECTOR_GROUP_HOMERUNBAT);
+                };
+            };
 		};
-	};
+	}
 }
 pub fn install() {
     smashline::install_agent_frame_callbacks!(projectile_invuln_master);
