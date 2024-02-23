@@ -71,11 +71,9 @@ FaF: 30
 ### FTilt
 |Frame|ID|Damage|Angle|BKB|KBG|Notes| | | |
 |-|-|-|-|-|-|-|-|-|-|
-|Frame 7| 0| 7.0%| 88| 50| 102|
-|Frame 7| 1| 7.0%| 88| 50| 102|
-|Frame 8| 2| 8.0%| 75| 55| 102|
-|Frame 10| 2| 6.0%| 92| 40| 120|
-|Hitboxes terminated on Frame 16|
+|Frame 9| 0| 11.0%| 361| 55| 85|
+|Frame 9| 1| 11.0%| 361| 55| 85|
+|Hitboxes terminated on Frame 14|
 
 
 FaF: 37
