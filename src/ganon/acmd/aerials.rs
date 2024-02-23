@@ -17,7 +17,8 @@ pub fn install() {
     smashline::install_acmd_scripts!(
 		ganon_fair,
 		ganon_nair,
-		ganon_uair
+		ganon_uair,
+        ganon_dair
     );
 }
 #[acmd_script( agent = "ganon", script = "game_attackairn", category = ACMD_GAME, low_priority )]
