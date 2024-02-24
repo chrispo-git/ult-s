@@ -275,7 +275,7 @@ FaF: 39
 |Hitboxes terminated on Frame 19|
 
 
-FaF: 40
+FaF: 37
 
 
 
@@ -318,11 +318,10 @@ Autocancel - 35+
 ### Uair
 |Frame|ID|Damage|Angle|BKB|KBG|Notes| | | |
 |-|-|-|-|-|-|-|-|-|-|
-|Frame 4| 1|  7.6%|  80|  25|  90|
-|Frame 4| 2|  7.6%|  80|  25|  90|
-|Frame 4| 3|  7.6%|  80|  25|  90|
+|Frame 4| 1|  9.0%|  80|  55|  97|
+|Frame 4| 2|  9.0%|  80|  55|  97|
+|Frame 4| 3|  9.0%|  80|  55|  97|
 |Hitboxes terminated on Frame 13|
-|Note: Deals 2f bonus hitstun|
 
 
 FaF: 38
@@ -582,7 +581,7 @@ FaF: 30
 ### Command Input
 |Frame|ID|Damage|Angle|BKB|KBG|Notes| | | |
 |-|-|-|-|-|-|-|-|-|-|
-|Frame 11| 0|  12.0%|  80|  5|  97| hit effect is paralyze|
+|Frame 11| 0|  6.0%|  45|  30|  30| hit effect is paralyze|
 |Frame 11| 1|  8.0%|  80|  40|  90| hit effect is elec|
 |Hitboxes terminated on Frame 16|
 
