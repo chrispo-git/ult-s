@@ -28,12 +28,11 @@ unsafe fn pichu_downb_default(fighter: &mut L2CAgentBase) {
     category = ACMD_GAME,
 	low_priority)]
 unsafe fn pichu_downb(agent: &mut L2CAgentBase) {
-    frame(agent.lua_state_agent, 3.0);
+    frame(agent.lua_state_agent, 8.0);
     if macros::is_excute(agent) {
-		macros::FT_ADD_DAMAGE(agent, 0.4);
-        macros::ATTACK(agent, 0, 0, Hash40::new("top"), 4.5, 70, 80, 0, 60, 7.0, 0.0, 6.0, 0.0, None, None, None, 0.2, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_elec"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_ELEC, *ATTACK_REGION_ENERGY);
+        macros::ATTACK(agent, 0, 0, Hash40::new("top"), 15.0, 361, 70, 0, 70, 13.0, 0.0, 10.2, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_THRU, *ATTACK_LR_CHECK_POS, false, 2, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_elec"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_ELEC, *ATTACK_REGION_NONE);
     }
-    wait(agent.lua_state_agent, 4.0);
+    wait(agent.lua_state_agent, 3.0);
     if macros::is_excute(agent) {
         AttackModule::clear_all(agent.module_accessor);
     }
@@ -44,13 +43,11 @@ unsafe fn pichu_downb(agent: &mut L2CAgentBase) {
     category = ACMD_EFFECT,
 	low_priority)]
 unsafe fn pichu_downb_eff(agent: &mut L2CAgentBase) {
-    frame(agent.lua_state_agent, 1.0);
+    frame(agent.lua_state_agent, 8.0);
     if macros::is_excute(agent) {
         macros::EFFECT_FOLLOW_NO_STOP(agent, Hash40::new("pichu_cheek"), Hash40::new("head"), 0, 0, 0, 0, -90, -90, 1, true);
-    }
-    frame(agent.lua_state_agent, 3.0);
-    if macros::is_excute(agent) {
-        macros::EFFECT_FOLLOW_NO_STOP(agent, Hash40::new("pichu_kaminari_hit2"), Hash40::new("top"), 0, -2, 0, 0, 90, 0, 0.73, true);
+        macros::EFFECT_FOLLOW_NO_STOP(agent, Hash40::new("pichu_kaminari_hit2"), Hash40::new("top"), 0, -2, 0, 0, 90, 0, 1.3, true);
+        macros::EFFECT_FOLLOW_NO_STOP(agent, Hash40::new("pichu_kaminari_hit"), Hash40::new("top"), 0, -2, 0, 0, 90, 0, 1, true);
         macros::FLASH(agent, 0, 0, 0, 0);
         macros::BURN_COLOR(agent, 2, 2, 0.5, 0.9);
     }
@@ -69,14 +66,33 @@ unsafe fn pichu_downb_eff(agent: &mut L2CAgentBase) {
         macros::BURN_COLOR_NORMAL(agent);
         macros::COL_NORMAL(agent);
     }
-    frame(agent.lua_state_agent, 10.0);
+    wait(agent.lua_state_agent, 1.0);
     if macros::is_excute(agent) {
         macros::EFFECT_OFF_KIND(agent, Hash40::new("pichu_kaminari_hit2"), false, true);
     }
-    frame(agent.lua_state_agent, 23.0);
     if macros::is_excute(agent) {
-        macros::EFFECT_OFF_KIND(agent, Hash40::new("pichu_cheek"), false, true);
+        macros::FLASH(agent, 0, 0, 0, 0);
+        macros::BURN_COLOR(agent, 2, 2, 0.5, 0.9);
     }
+    wait(agent.lua_state_agent, 2.0);
+    if macros::is_excute(agent) {
+        macros::FLASH_FRM(agent, 2, 0, 0, 0, 0);
+        macros::BURN_COLOR_FRAME(agent, 2, 2, 2, 0.5, 0.7);
+    }
+    wait(agent.lua_state_agent, 2.0);
+    if macros::is_excute(agent) {
+        macros::FLASH_FRM(agent, 2, 0, 0, 0, 0);
+        macros::BURN_COLOR_FRAME(agent, 2, 2, 2, 0.5, 0);
+    }
+    wait(agent.lua_state_agent, 2.0);
+    if macros::is_excute(agent) {
+        macros::BURN_COLOR_NORMAL(agent);
+        macros::COL_NORMAL(agent);
+    }
+    wait(agent.lua_state_agent, 1.0);
+    if macros::is_excute(agent) {
+        macros::EFFECT_OFF_KIND(agent, Hash40::new("pichu_kaminari_hit"), false, true);
+    } 
 }	
 #[acmd_script(
     agent = "pichu",
@@ -84,11 +100,13 @@ unsafe fn pichu_downb_eff(agent: &mut L2CAgentBase) {
     category = ACMD_SOUND,
 	low_priority)]
 unsafe fn pichu_downb_snd(agent: &mut L2CAgentBase) {
-    frame(agent.lua_state_agent, 2.0);
-	if macros::is_excute(agent) {
-		macros::PLAY_SEQUENCE(agent, Hash40::new("seq_pichu_rnd_attack"));
-		macros::PLAY_SE(agent, Hash40::new("se_pichu_attackair_b01"));
-	};
+    if macros::is_excute(agent) {
+        macros::PLAY_SE(agent, Hash40::new("vc_pichu_special_l01"));
+    }
+    frame(agent.lua_state_agent, 8.0);
+    if macros::is_excute(agent) {
+        macros::PLAY_SE(agent, Hash40::new("se_pichu_special_l03"));
+    }
 }	
 #[acmd_script(
     agent = "pichu",
@@ -96,7 +114,10 @@ unsafe fn pichu_downb_snd(agent: &mut L2CAgentBase) {
     category = ACMD_EXPRESSION,
 	low_priority)]
 unsafe fn pichu_downb_expr(agent: &mut L2CAgentBase) {
-    let lua_state = agent.lua_state_agent;
+    frame(agent.lua_state_agent, 8.0);
+    if macros::is_excute(agent) {
+        macros::QUAKE(agent, *CAMERA_QUAKE_KIND_S);
+    }
 }	
 
 pub fn install() {
