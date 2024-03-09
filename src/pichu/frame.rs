@@ -29,7 +29,9 @@ fn pichu_frame(fighter: &mut L2CFighterCommon) {
 			let fallspeed = WorkModule::get_param_float(fighter.module_accessor, hash40("air_speed_y_stable"), 0);
 			let is_near_ground = GroundModule::ray_check(boma, &Vector2f{ x: PostureModule::pos_x(boma), y: PostureModule::pos_y(boma)}, &Vector2f{ x: 0.0, y: -1.0}, true);
 			if StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR && [*FIGHTER_PIKACHU_STATUS_KIND_SPECIAL_HI_END].contains(&status_kind) {
-				WorkModule::set_int(boma, 0, *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT);
+				if WorkModule::get_int(boma,  *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT) > 0 {
+					WorkModule::set_int(boma, 0, *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT);
+				}
 				StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL, false);
 				CAN_UPB[ENTRY_ID] = 1;
 			};
