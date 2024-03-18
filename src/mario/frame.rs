@@ -29,7 +29,7 @@ pub fn mario_frame(fighter : &mut L2CFighterCommon) {
 		let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
 		if fighter_kind == *FIGHTER_KIND_MARIO &&  is_default(boma) {
-			if StatusModule::situation_kind(boma) != *SITUATION_KIND_AIR {
+			if StatusModule::situation_kind(boma) != *SITUATION_KIND_AIR || (*FIGHTER_STATUS_KIND_DAMAGE..*FIGHTER_STATUS_KIND_DAMAGE_FALL).contains(&status_kind) {
 				CAN_SIDEB[ENTRY_ID] = 0;
 			};
 			if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_S  && MotionModule::frame(boma) > 9.0 && MotionModule::frame(boma) < 22.0 && StopModule::is_stop(boma) == false {
