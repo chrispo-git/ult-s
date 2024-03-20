@@ -545,7 +545,7 @@ FaF: 55
 
 
 
-### (Air) Neutral Special Loop
+### (Air) Neutral Special
 |Frame|ID|Damage|Angle|BKB|KBG|Notes| | | |
 |-|-|-|-|-|-|-|-|-|-|
 |Frame 9| 0| 3.0%| 361| 0| 0| Flinchless| Reflectable| Absorbable|
@@ -564,7 +564,7 @@ FaF: 34
 
 
 
-### Neutral Special Loop
+### Neutral Special
 |Frame|ID|Damage|Angle|BKB|KBG|Notes| | | |
 |-|-|-|-|-|-|-|-|-|-|
 |Frame 11| 0| 3.0%| 361| 0| 0| Flinchless| Reflectable| Absorbable|
