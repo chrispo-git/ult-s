@@ -241,42 +241,6 @@ FaF: 68
 
 
 
-### Forward Smash (Up)
-|Frame|ID|Damage|Angle|BKB|KBG|Notes| | | |
-|-|-|-|-|-|-|-|-|-|-|
-|Charge hold Frame: 6|
-|Frame 17| 0| 18.0%| 361| 35| 102|
-|Frame 17| 1| 18.0%| 361| 35| 102|
-|Frame 17| 2| 18.0%| 361| 35| 102|
-|Hitboxes terminated on Frame 19|
-
-
-FaF: 68
-
-
-
-
-
-
-
-### Forward Smash (Down)
-|Frame|ID|Damage|Angle|BKB|KBG|Notes| | | |
-|-|-|-|-|-|-|-|-|-|-|
-|Charge hold Frame: 6|
-|Frame 17| 0| 18.0%| 361| 35| 102|
-|Frame 17| 1| 18.0%| 361| 35| 102|
-|Frame 17| 2| 18.0%| 361| 35| 102|
-|Hitboxes terminated on Frame 19|
-
-
-FaF: 68
-
-
-
-
-
-
-
 ### Up Smash
 |Frame|ID|Damage|Angle|BKB|KBG|Notes| | | |
 |-|-|-|-|-|-|-|-|-|-|
