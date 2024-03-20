@@ -452,8 +452,17 @@ FaF: 97/87/27 (Ground/Air/On Hit)
 
 
 
+### Up Special 
 
-### Down Special Hit
+FaF: 20
+
+
+
+
+
+
+
+### Down Special
 |Frame|ID|Damage|Angle|BKB|KBG|Notes| | | |
 |-|-|-|-|-|-|-|-|-|-|
 |Frame 8| 0| 15.0%| 361| 70| 70| hit effect is elec| deals 2 bonus shield damage|
@@ -461,49 +470,6 @@ FaF: 97/87/27 (Ground/Air/On Hit)
 
 
 FaF: 42
-
-
-
-
-
-
-
-### (Air) Down Special Hit
-|Frame|ID|Damage|Angle|BKB|KBG|Notes| | | |
-|-|-|-|-|-|-|-|-|-|-|
-|Frame 1| 0| 14.0%| 361| 90| 65| hit effect is elec| deals 2 bonus shield damage|
-|Hitboxes terminated on Frame 3|
-
-
-FaF: 36
-
-
-
-|Projectiles:|
-
-
-
-|pichu_dengeki|
-
-|regular|
-|Frame|ID|Damage|Angle|BKB|KBG|Notes| | | |
-|-|-|-|-|-|-|-|-|-|-|
-|Frame 1| 0| 7.0%| 361| 25| 20| Hits grounded only| hit effect is elec| Reflectable| Absorbable| deals -3 bonus shield damage|
-|Frame 1| 1| 7.0%| 361| 13| 20| Hits air only| hit effect is elec| Reflectable| Absorbable| deals -3 bonus shield damage|
-|Frame 30| 0| 6.0%| 361| 25| 20| Hits grounded only| hit effect is elec| Reflectable| Absorbable| deals -2.5 bonus shield damage|
-|Frame 30| 1| 6.0%| 361| 13| 20| Hits air only| hit effect is elec| Reflectable| Absorbable| deals -2.5 bonus shield damage|
-|Frame 60| 0| 5.0%| 361| 25| 20| Hits grounded only| hit effect is elec| Reflectable| Absorbable| deals -2 bonus shield damage|
-|Frame 60| 1| 5.0%| 361| 13| 20| Hits air only| hit effect is elec| Reflectable| Absorbable| deals -2 bonus shield damage|
-
-
-
-
-|pichu_dengekidama|
-
-|regular|
-|Frame|ID|Damage|Angle|BKB|KBG|Notes| | | |
-|-|-|-|-|-|-|-|-|-|-|
-|Frame 1| 0| 10.0%| 361| 50| 30| hit effect is elec| Reflectable| Absorbable| deals -4.5 bonus shield damage|
 
 
 
