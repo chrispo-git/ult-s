@@ -496,7 +496,7 @@ FaF: 47
 |Frame 18-98| 0| 6.2%-21.4%| 361| 40| 78|
 
 
-FaF: 96/74 (Ground/Air)
+FaF: 96/74/23 (Ground/Air/On Hit)
 
 
 
