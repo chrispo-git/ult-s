@@ -123,9 +123,9 @@ FaF: 35
 |Frame 16| 1| 2.0%| 366| 10| 50| Hits 5 times| hit effect is elec|
 |Frame 16| 2| 2.0%| 20| 10| 50| Hits 5 times| hit effect is elec|
 |Hitboxes terminated on Frame 19|
-|Frame 19| 1| 8.0%| 361| 68| 123| hit effect is elec|
-|Frame 19| 2| 8.0%| 361| 68| 123| hit effect is elec|
-|Hitboxes terminated on Frame 22|
+|Frame 31| 1| 8.0%| 361| 68| 123| hit effect is elec|
+|Frame 31| 2| 8.0%| 361| 68| 123| hit effect is elec|
+|Hitboxes terminated on Frame 34|
 
 
 FaF: 54
