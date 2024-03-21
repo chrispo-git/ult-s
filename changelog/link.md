@@ -482,7 +482,7 @@ FaF: 50
 FaF: 49
 
 
-### Neutral Special Start
+### Neutral Special
 |Frame|ID|Damage|Angle|BKB|KBG|Notes| | | |
 |-|-|-|-|-|-|-|-|-|-|
 |Frame 16-61| 0| 4.0%-12.0%| 361| 10| 71| Reflectable|
