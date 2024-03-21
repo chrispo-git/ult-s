@@ -23,6 +23,21 @@ Dair Landing Lag | 21|
 Wall Jump? | True|
 
 
+## Limit Multipliers
+| Stat | Multiplier|
+| - | - |
+Initial Dash | 1.1 |
+Run Speed | 1.1|
+Walk Speed | 1.15|
+Traction | 1.15|
+Air Speed | 1.2|
+Fall Speed | 1.1|
+Gravity | 1.1|
+
+
+Lasts for 15 seconds max
+
+
 
 
 ## Attacks
