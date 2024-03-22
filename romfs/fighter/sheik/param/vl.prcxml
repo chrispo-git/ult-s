@@ -3,7 +3,7 @@
   <list hash="param_special_n">
     <struct index="0">
       <int hash="landing_frame">0</int>
-      <float hash="charge_speed_mul">1.5</float>
+      <float hash="charge_speed_mul">1.3</float>
     </struct>
   </list>
     <list hash="param_needle">
