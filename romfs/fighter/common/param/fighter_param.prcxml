@@ -958,10 +958,7 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
     <!--PALUTENA-->
     <struct index="51">
       <float hash="air_accel_x_mul">0.11</float>
-      <float hash="jump_speed_x_mul">0.9</float>
-      <float hash="landing_attack_air_frame_n">12</float>
-      <float hash="landing_attack_air_frame_b">10</float>
-      
+      <float hash="landing_attack_air_frame_lw">10</float>
       <float hash="tread_jump_speed_y_mul">1.0</float>
       <float hash="tread_mini_jump_speed_y_mul">0.475</float>
     </struct>
