@@ -31,7 +31,7 @@ unsafe fn palu_reticle(fighter: &mut L2CAgentBase) {
 			wait(fighter.lua_state_agent, 7.0);
 		}
 		wait(fighter.lua_state_agent, 1.0);
-		macros::FT_MOTION_RATE(fighter, 1.25);
+		macros::FT_MOTION_RATE(fighter, 1.1);
 }		
 #[acmd_script(
     agent = "palutena",
