@@ -510,7 +510,7 @@ FaF: 36
 |Frame 28| 0| 15.0%| 47| 50| 58| Reflectable| deals 5 bonus shield damage|
 
 
-FaF: 67
+FaF: 55
 
 
 
