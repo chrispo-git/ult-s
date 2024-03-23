@@ -66,7 +66,7 @@ pub fn training(fighter : &mut L2CFighterCommon) {
                         ![*FIGHTER_STATUS_KIND_GUARD, *FIGHTER_STATUS_KIND_GUARD_OFF, *FIGHTER_STATUS_KIND_GUARD_ON, *FIGHTER_STATUS_KIND_ESCAPE_AIR, *FIGHTER_STATUS_KIND_GUARD].contains(&status_kind)
                     ) 
                 {
-                   if !(WorkModule::get_float(boma, *FIGHTER_INSTANCE_WORK_ID_FLOAT_DAMAGE_REACTION_FRAME) > 0.0) {
+                   if !(WorkModule::get_float(boma, *FIGHTER_INSTANCE_WORK_ID_FLOAT_DAMAGE_REACTION_FRAME) > 0.0) && ENTRY_ID > 0{
                         if situation_kind == *SITUATION_KIND_GROUND {
                             StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_GUARD, true);
                         } else {
