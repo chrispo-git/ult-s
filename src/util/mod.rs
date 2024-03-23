@@ -14,6 +14,8 @@ use crate::controls::ext::*;
 
 static mut STATUS_DURATION : [i32; 8] = [0; 8];
 static mut MOTION_DURATION : [i32; 8] = [0; 8];
+pub static mut POS_X : [f32; 8] = [0.0; 8];
+pub static mut POS_Y : [f32; 8] = [0.0; 8];
 pub static mut SPEED_X : [f32; 8] = [0.0; 8];
 pub static mut SPEED_Y : [f32; 8] = [0.0; 8];
 pub static mut ACCEL_X : [f32; 8] = [0.0; 8];
@@ -330,6 +332,8 @@ pub fn util_update(fighter : &mut L2CFighterCommon) {
 		ACCEL_Y[ENTRY_ID] = SPEED_Y[ENTRY_ID] - KineticModule::get_sum_speed_y(boma, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
 		SPEED_X[ENTRY_ID] = KineticModule::get_sum_speed_x(boma, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
 		SPEED_Y[ENTRY_ID] = KineticModule::get_sum_speed_y(boma, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+		POS_X[ENTRY_ID] = PostureModule::pos_x(boma);
+		POS_Y[ENTRY_ID] = PostureModule::pos_y(boma);
 		//println!("X Accel: {}, Y Accel: {}, X Speed: {}, Y Speed: {}", ACCEL_X[ENTRY_ID], ACCEL_Y[ENTRY_ID], SPEED_X[ENTRY_ID], SPEED_Y[ENTRY_ID]);
 		/*if ENTRY_ID == 0 {
 			println!("Can Neutralb: {}, Can Sideb: {}, Can Upb: {}, Can Downb: {}", CAN_NEUTRALB[ENTRY_ID], CAN_SIDEB[ENTRY_ID], CAN_UPB[ENTRY_ID], CAN_DOWNB[ENTRY_ID]);
