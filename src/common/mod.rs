@@ -13,6 +13,8 @@ mod command;
 mod cancel;
 mod training;
 
+pub static mut IS_GLOW: bool = false;
+
 pub fn install() {
     hitstun::install();
     dacus::install();
