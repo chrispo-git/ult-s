@@ -139,7 +139,7 @@ projectile_list = [
    ["ike"],
    ["inkling","inkling_inkbullet","inkling_splash"],
    ["jack","jack_fire2"],
-   ["kamui","kamui_ryusensya","kamui_dragonhand"],
+   ["kamui","kamui_ryusensya","kamui_dragonhand", "kamui_spearhand"],
    ["ken","ken_hadoken"],
    ["kirby","kirby_finalcuttershot"],
    ["koopa","koopa_breath"],
