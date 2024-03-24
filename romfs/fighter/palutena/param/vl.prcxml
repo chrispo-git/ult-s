@@ -10,7 +10,7 @@
     <hash40 index="3">dummy</hash40>
   <list hash="param_autoaimbullet">
     <struct index="0">
-      <float hash="life">24</float>
+      <float hash="life">19</float>
     </struct>
     <hash40 index="1">dummy</hash40>
     <hash40 index="2">dummy</hash40>
