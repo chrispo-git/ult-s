@@ -250,16 +250,36 @@ pub fn lucina(fighter : &mut L2CFighterCommon) {
 						let landing = ((1.0/(SWORD_DAIR_LANDING/ cancel_frame))as f32);
 						MotionModule::set_rate(boma, landing);
 					};
-					//Uair Anim Shift
+					//Anim Shift
 					if [hash40("attack_air_hi")].contains(&motion_kind) {
 						MotionModule::change_motion(boma, smash::phx::Hash40::new("attack_air_hi_2"), 1.0, 1.0, false, 0.0, false, false);
 					};
-					//Bair Anim Shift
 					if [hash40("attack_air_b")].contains(&motion_kind) {
 						MotionModule::change_motion(boma, smash::phx::Hash40::new("attack_air_b2"), 1.0, 1.0, false, 0.0, false, false);
 					};
 					if [hash40("attack_air_b2")].contains(&motion_kind) && frame >= 46.0 {
 						MotionModule::change_motion(boma, smash::phx::Hash40::new("fall"), 0.0, 1.0, false, 0.0, false, false);
+					};
+					if [hash40("attack_air_lw")].contains(&motion_kind) {
+						MotionModule::change_motion(boma, smash::phx::Hash40::new("attack_air_lw2"), 1.0, 1.0, false, 0.0, false, false);
+					};
+					if [hash40("attack_11")].contains(&motion_kind) {
+						MotionModule::change_motion(boma, smash::phx::Hash40::new("attack_112"), 1.0, 1.0, false, 0.0, false, false);
+					};
+					if [hash40("attack_12")].contains(&motion_kind) {
+						MotionModule::change_motion(boma, smash::phx::Hash40::new("attack_122"), 1.0, 1.0, false, 0.0, false, false);
+					};
+					if [hash40("attack_dash2")].contains(&motion_kind) {
+						MotionModule::change_motion(boma, smash::phx::Hash40::new("attack_dash2"), 1.0, 1.0, false, 0.0, false, false);
+					};
+					if [hash40("attack_s3_s")].contains(&motion_kind) {
+						MotionModule::change_motion(boma, smash::phx::Hash40::new("attack_s3_s2"), 1.0, 1.0, false, 0.0, false, false);
+					};
+					if [hash40("attack_hi3")].contains(&motion_kind) {
+						MotionModule::change_motion(boma, smash::phx::Hash40::new("attack_hi32"), 1.0, 1.0, false, 0.0, false, false);
+					};
+					if [hash40("attack_lw3")].contains(&motion_kind) {
+						MotionModule::change_motion(boma, smash::phx::Hash40::new("attack_lw32"), 1.0, 1.0, false, 0.0, false, false);
 					};
 					//Grab Nerf
 					if [hash40("catch"), hash40("catch_dash"), hash40("catch_turn")].contains(&MotionModule::motion_kind(boma)) {
