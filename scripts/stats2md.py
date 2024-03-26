@@ -39,6 +39,7 @@ def run_stats2md():
     "Slide Up Attack",
     "Slide Down Attack",
     "Slide Neutral Attack",
+    "Zair",
     "Nair",
     "Nair 2",
     "Nair 3",
