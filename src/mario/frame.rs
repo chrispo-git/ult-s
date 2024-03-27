@@ -19,22 +19,6 @@ pub fn install() {
         mario_frame
     );
 }
-pub(crate) fn check_jump(boma: &mut smash::app::BattleObjectModuleAccessor) -> bool {
-	unsafe {
-		if ControlModule::check_button_on_trriger(boma, *CONTROL_PAD_BUTTON_JUMP) {
-			return true;
-		};
-		if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_FLICK_JUMP) {
-			if ControlModule::get_flick_y(boma) >= 3 && ControlModule::get_stick_y(boma) >= 0.7 {
-				return true;
-			};
-		};
-		if ControlModule::check_button_on_trriger(boma, *CONTROL_PAD_BUTTON_JUMP_MINI) {
-			return true;
-		};
-		return false;
-	}
-}
 
 
 #[fighter_frame_callback]
@@ -45,57 +29,11 @@ pub fn mario_frame(fighter : &mut L2CFighterCommon) {
 		let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
 		if fighter_kind == *FIGHTER_KIND_MARIO &&  is_default(boma) {
-			if [*FIGHTER_STATUS_KIND_SPECIAL_HI, *FIGHTER_STATUS_KIND_SPECIAL_S].contains(&status_kind) == false {
-				ArticleModule::remove_exist(boma, *FIGHTER_MARIO_GENERATE_ARTICLE_CAPPY,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
+			if StatusModule::situation_kind(boma) != *SITUATION_KIND_AIR || (*FIGHTER_STATUS_KIND_DAMAGE..*FIGHTER_STATUS_KIND_DAMAGE_FALL).contains(&status_kind) {
+				CAN_SIDEB[ENTRY_ID] = 0;
 			};
-			if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_S {
-				if StatusModule::situation_kind(boma) == *SITUATION_KIND_GROUND {
-					if MotionModule::frame(boma) > 9.0 && MotionModule::frame(boma) < 73.0 && AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_SHIELD) == false {
-						if check_jump(boma) {
-							StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_JUMP_SQUAT, true);
-						};
-					};
-					if KineticModule::get_kinetic_type(boma) != *FIGHTER_KINETIC_TYPE_MOTION {
-						KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_MOTION);
-					};
-				} else {
-					SIDEB[ENTRY_ID] = true;
-					if MotionModule::frame(boma) < 23.0 {
-						if MotionModule::frame(boma) < 2.0 {
-							KineticModule::clear_speed_all(boma);
-							let speed = smash::phx::Vector3f { x: 1.5, y: 1.5, z: 0.0 };
-							KineticModule::add_speed(boma, &speed);
-						} else {
-							KineticModule::clear_speed_all(boma);
-							let speed = smash::phx::Vector3f { x: 0.5, y: 0.5, z: 0.0 };
-							KineticModule::add_speed(boma, &speed);
-						};
-					};
-					if MotionModule::frame(boma) < 46.0 {
-						StatusModule::set_keep_situation_air(boma, true);
-					} else {
-						StatusModule::set_keep_situation_air(boma, false);
-					};
-					if MotionModule::frame(boma) > 74.0 {
-						if KineticModule::get_kinetic_type(boma) != *FIGHTER_KINETIC_TYPE_FALL {
-							KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_FALL);
-						};
-						CancelModule::enable_cancel(boma);
-					} else {
-						if KineticModule::get_kinetic_type(boma) != *FIGHTER_KINETIC_TYPE_MOTION_AIR {
-							KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_MOTION_AIR);
-						};
-					};
-					if MotionModule::frame(boma) > 56.0 && (ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_HI) != 0{
-						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_SPECIAL_HI, true);
-					};
-				};
-			};
-			if StatusModule::situation_kind(boma) != *SITUATION_KIND_AIR {
-				SPIN[ENTRY_ID] = false;
-				SIDEB[ENTRY_ID] = false;
-			};
-			if [hash40("attack_air_n")].contains(&MotionModule::motion_kind(boma)) && MotionModule::frame(boma) > 9.0 && MotionModule::frame(boma) < 22.0 && StopModule::is_stop(boma) == false {
+			if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_S  && MotionModule::frame(boma) > 9.0 && MotionModule::frame(boma) < 22.0 && StopModule::is_stop(boma) == false {
+				CAN_SIDEB[ENTRY_ID] = 1;
 				if SPIN_EFF[ENTRY_ID] == 0{
 					let handbg1: u32 = EffectModule::req_follow(boma, smash::phx::Hash40::new("sys_spin_wind"), smash::phx::Hash40::new("top"), &SPIN2, &NOSPIN, 1.1, true, 0, 0, 0, 0, 0, true, true) as u32;
 					let handbg2: u32 = EffectModule::req_follow(boma, smash::phx::Hash40::new("sys_spin_wind"), smash::phx::Hash40::new("top"), &SPIN3, &NOSPIN, 1.1, true, 0, 0, 0, 0, 0, true, true) as u32;
