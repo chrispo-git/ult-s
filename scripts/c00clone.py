@@ -4,6 +4,21 @@ import os
 import sys
 import time
 
+path = ""
+try:
+    inputs = ("".join(sys.argv)).lower()
+    inputs = inputs.replace('build.py', "")
+    inputs = inputs.replace('\n', "")
+    print(inputs)
+    path = inputs
+    if "c00" in path:
+        path = path.replace("/c00", "")
+        path = path.replace("\c00", "")
+    os.chdir(path)
+except IndexError:
+    print("no filepath added")
+
+
 #clones a c00 into c00-c007
 if os.path.exists(r'c00'):
     original = r'c00'
