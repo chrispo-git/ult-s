@@ -28,52 +28,43 @@ fn pichu_frame(fighter: &mut L2CFighterCommon) {
 			let frame = MotionModule::frame(boma);
 			let fallspeed = WorkModule::get_param_float(fighter.module_accessor, hash40("air_speed_y_stable"), 0);
 			let is_near_ground = GroundModule::ray_check(boma, &Vector2f{ x: PostureModule::pos_x(boma), y: PostureModule::pos_y(boma)}, &Vector2f{ x: 0.0, y: -1.0}, true);
-			if [*FIGHTER_PIKACHU_STATUS_KIND_SPECIAL_HI_END].contains(&status_kind) {
-				if ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_SPECIAL) && ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_GUARD) && ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_ATTACK) && StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR {
-					if GroundModule::ray_check(boma, &Vector2f{ x: PostureModule::pos_x(boma), y: PostureModule::pos_y(boma)}, &Vector2f{ x: 0.0, y: -1.0}, true) == 0 {
-						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_ATTACK_AIR, false);
-						LAG_INCREASE[ENTRY_ID] = true;
+			if StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR && [*FIGHTER_PIKACHU_STATUS_KIND_SPECIAL_HI_END].contains(&status_kind) {
+				StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL, false);
+				if WorkModule::get_int(boma,  *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT) >= WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT_MAX) {
+					WorkModule::set_int(boma, 0, *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT);
+				}
+				CAN_UPB[ENTRY_ID] = 1;
+			};
+			if  StatusModule::situation_kind(boma) != *SITUATION_KIND_AIR || (*FIGHTER_STATUS_KIND_DAMAGE..*FIGHTER_STATUS_KIND_DAMAGE_FALL).contains(&status_kind){
+				CAN_UPB[ENTRY_ID] = 0;
+			};
+			if [hash40("attack_air_lw")].contains(&MotionModule::motion_kind(boma)) && !ONE_DAIR[ENTRY_ID] {
+				if AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_ALL) && !AttackModule::is_infliction(boma, *COLLISION_KIND_MASK_ALL) && MotionModule::frame(boma) < 46.0{
+					KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_JUMP);
+					MotionModule::set_frame_sync_anim_cmd(boma, 47.0, true, true, false);
+					EffectModule::kill_kind(boma, smash::phx::Hash40::new("sys_attack_speedline"), false, false);
+					EffectModule::kill_kind(boma, smash::phx::Hash40::new("pichu_ear_elec"), false, false);
+					EffectModule::kill_kind(boma, smash::phx::Hash40::new("pichu_cheek2"), false, false);
+					if !AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_HIT) {
+						MotionModule::set_rate(boma, 0.5);
 					};
+					ONE_DAIR[ENTRY_ID] = true;
 				};
-			};
-			if status_kind == *FIGHTER_STATUS_KIND_ATTACK_AIR && LAG_INCREASE[ENTRY_ID] == true {
-				if cancel_frame-frame < 4.0 {
-					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL_SPECIAL, true);
-					LAG_INCREASE[ENTRY_ID] = false;
-				};
-			};
-			if status_kind == *FIGHTER_STATUS_KIND_LANDING_ATTACK_AIR && LAG_INCREASE[ENTRY_ID] == true {
-					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_LANDING_FALL_SPECIAL, true);
-					LAG_INCREASE[ENTRY_ID] = false;
-			};
+			}
 			if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_LW {
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_PIKACHU_STATUS_KIND_SPECIAL_LW_HIT, true);
+					KineticModule::clear_speed_all(boma);
 			};
 			if status_kind == *FIGHTER_PIKACHU_STATUS_KIND_SPECIAL_LW_HIT {
-				if !HAS_DOWNB[ENTRY_ID] && StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR {
-					HAS_DOWNB[ENTRY_ID] = true;
-					DO_STALL[ENTRY_ID] = true;
+				if StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR {
+					CAN_DOWNB[ENTRY_ID] = 1;
 				};
-				if frame > 4.0 && StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR {
-					if frame > 32.0 {
-						DO_STALL[ENTRY_ID] = false; 
-					}
-					if DO_STALL[ENTRY_ID] {
-							macros::SET_SPEED_EX(fighter, 0.0, fallspeed*-0.3, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
-					} else {
-							macros::SET_SPEED_EX(fighter, 0.0, fallspeed*-1.5, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
-					}
-				}
-				if is_near_ground == 1 && StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR {
-					StatusModule::set_keep_situation_air(boma, false);
-					StatusModule::set_situation_kind(boma, smash::app::SituationKind(*SITUATION_KIND_GROUND), true);
-				}
-			} else {
-				DO_STALL[ENTRY_ID] = false;
 			};
 			if StatusModule::situation_kind(boma) != *SITUATION_KIND_AIR {
 				HAS_DOWNB[ENTRY_ID] = false;
 				DO_STALL[ENTRY_ID] = false;
+				ONE_DAIR[ENTRY_ID] = false;
+				CAN_DOWNB[ENTRY_ID] = 0;
 			};
 			if ![*FIGHTER_STATUS_KIND_ATTACK_AIR, *FIGHTER_STATUS_KIND_LANDING_ATTACK_AIR, *FIGHTER_PIKACHU_STATUS_KIND_SPECIAL_HI_END].contains(&status_kind) {
 				LAG_INCREASE[ENTRY_ID] = false;
