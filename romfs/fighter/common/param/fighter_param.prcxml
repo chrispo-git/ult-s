@@ -1457,8 +1457,9 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
     </struct>
     <!--RICHTER-->
     <struct index="89">
-      <float hash="dash_speed">1.92</float>
+      <float hash="dash_speed">1.98</float>
       <float hash="run_speed_max">1.87</float>
+      <float hash="air_accel_x_mul">0.05</float>
       <float hash="air_speed_x_stable">1.08</float>
       <float hash="landing_attack_air_frame_n">7</float>
       <float hash="landing_attack_air_frame_f">11</float>
