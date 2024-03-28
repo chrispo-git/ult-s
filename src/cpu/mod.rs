@@ -8,6 +8,8 @@ use smash::app::FighterEntryID;
 use skyline::nn::ro::LookupSymbol;
 use core::f32::consts::PI;
 use smash::app;
+use crate::common::*;
+use crate::util::*;
 
 
 pub static mut FIGHTER_MANAGER: usize = 0;
@@ -37,7 +39,7 @@ pub(crate) unsafe fn main_logic(fighter: &mut L2CFighterCommon) -> () {
     if MotionModule::frame(fighter.module_accessor) == 0.0 {
         ANGLE_DEGREES = (angle * 180.0 / PI + 360.0) % 360.0;
     }
-    if cpu && !training{
+    if cpu && (!training || IS_GLOW){
         let rand_num = smash::app::sv_math::rand(hash40("fighter"), 100);
         let rand_num2 = smash::app::sv_math::rand(hash40("fighter"), 100);
         let rand_1_val = if rand_num % 2 == 0 {1.0} else {-1.0};
@@ -87,6 +89,14 @@ pub(crate) unsafe fn main_logic(fighter: &mut L2CFighterCommon) -> () {
                 x = rand_1_val;
                 // Random DI with 1/100 chance of doing specific DI, checking if the number is even
                 y = rand_2_val;
+            }
+        }
+        if DI_DIR != 0 {
+            let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+            if POS_X[ENTRY_ID] > POS_X[0] {
+                x = DI_DIR as f32;
+            } else {
+                x = -DI_DIR as f32;
             }
         }
         WorkModule::set_float(fighter.module_accessor, x, *FIGHTER_STATUS_DAMAGE_WORK_FLOAT_VECOR_CORRECT_STICK_X);

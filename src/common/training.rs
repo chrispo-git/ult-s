@@ -4,8 +4,7 @@ use smash::lua2cpp::*;
 use smash::app::lua_bind::*;
 use smashline::*;
 use smash_script::*;
-
-static mut IS_GLOW: bool = false;
+use crate::common::*;
 
 
 #[fighter_frame_callback]
@@ -15,10 +14,13 @@ pub fn training(fighter : &mut L2CFighterCommon) {
 		let cancel_frame = FighterMotionModuleImpl::get_cancel_frame(boma,smash::phx::Hash40::new_raw(MotionModule::motion_kind(boma)),false) as f32; //Cancel frame
 		let frame = MotionModule::frame(boma);
         let status_kind = StatusModule::status_kind(boma);
+        let prev_status = StatusModule::prev_status_kind(boma, 0);
+        let situation_kind = StatusModule::situation_kind(boma);
 		let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 
         if !smash::app::smashball::is_training_mode() {
             IS_GLOW = false;
+            DI_DIR = 0;
         } else {
             if ControlModule::check_button_on_trriger(boma, *CONTROL_PAD_BUTTON_APPEAL_LW) {
                 if IS_GLOW {
@@ -27,6 +29,19 @@ pub fn training(fighter : &mut L2CFighterCommon) {
                     IS_GLOW = true;
                 };
             };
+            if IS_GLOW { 
+                if ControlModule::check_button_on_trriger(boma, *CONTROL_PAD_BUTTON_APPEAL_S_L) {
+                    DI_DIR = -1;
+                }
+                if ControlModule::check_button_on_trriger(boma, *CONTROL_PAD_BUTTON_APPEAL_S_R) {
+                    DI_DIR = 1;
+                }
+                if ControlModule::check_button_on_trriger(boma, *CONTROL_PAD_BUTTON_APPEAL_HI) {
+                    DI_DIR = 0;
+                }
+            } else {
+                DI_DIR = 0;
+            }
         };
         if IS_GLOW {
                 macros::COL_NORMAL(fighter);
@@ -44,6 +59,24 @@ pub fn training(fighter : &mut L2CFighterCommon) {
                 } else if status_kind == *FIGHTER_STATUS_KIND_GUARD_OFF && frame <=  4.0 {
                     macros::FLASH(fighter, 0.31, 2.01, 2.07, 0.7);
                 };
+                if 
+                    ((*FIGHTER_STATUS_KIND_DAMAGE..*FIGHTER_STATUS_KIND_DAMAGE_FALL).contains(&status_kind) || 
+                    (
+                        (*FIGHTER_STATUS_KIND_DAMAGE..*FIGHTER_STATUS_KIND_DAMAGE_FALL).contains(&prev_status) && 
+                        ![*FIGHTER_STATUS_KIND_GUARD, *FIGHTER_STATUS_KIND_GUARD_OFF, *FIGHTER_STATUS_KIND_GUARD_ON, *FIGHTER_STATUS_KIND_ESCAPE_AIR, *FIGHTER_STATUS_KIND_GUARD].contains(&status_kind)
+                    )) && (
+                        WorkModule::is_enable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_ESCAPE_AIR) ||
+                        WorkModule::is_enable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_ESCAPE)
+                    )
+                {
+                   if !(WorkModule::get_float(boma, *FIGHTER_INSTANCE_WORK_ID_FLOAT_DAMAGE_REACTION_FRAME) > 0.0) && ENTRY_ID > 0{
+                        if situation_kind == *SITUATION_KIND_GROUND {
+                            StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_GUARD, true);
+                        } else {
+                            StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_ESCAPE_AIR, true);
+                        }
+                   }
+                }
         };
     };
 }
