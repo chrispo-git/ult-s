@@ -266,18 +266,18 @@ FaF: 44
 ### Nair
 |Frame|ID|Damage|Angle|BKB|KBG|Notes| | | |
 |-|-|-|-|-|-|-|-|-|-|
-|Frame 8| 0|  11.0%|  361|  30|  100|
-|Frame 8| 1|  11.0%|  361|  30|  100|
-|Frame 8| 2|  11.0%|  361|  30|  100|
-|Frame 8| 3|  11.0%|  361|  30|  100|
-|Hitboxes terminated on Frame 19|
+|Frame 3| 0| 8.0%| 361| 20| 100|
+|Frame 3| 1| 8.0%| 361| 20| 100|
+|Frame 6| 0| 5.0%| 361| 13| 90|
+|Frame 6| 1| 5.0%| 361| 13| 90|
+|Hitboxes terminated on Frame 28|
 
 
-FaF: 38
+FaF: 46
 
 
 
-Autocancel - 1-2/33+
+Autocancel - 1-2/39+
 
 
 
@@ -354,12 +354,12 @@ Autocancel - 1/25+
 ### Dair
 |Frame|ID|Damage|Angle|BKB|KBG|Notes| | | |
 |-|-|-|-|-|-|-|-|-|-|
-|Frame 5| 0|  1.0%|  367|  50|  15| Hits 5 times|
-|Frame 5| 1|  1.0%|  367|  25|  15| Hits 5 times|
-|Hitboxes terminated on Frame 6|
-|Frame 23| 0|  8.0%|  361|  20|  100|
-|Hitboxes terminated on Frame 24|
+|Frame 5| 0|  1.0%|  367|  50|  15| Hits 7 times|
+|Frame 5| 1|  1.0%|  367|  25|  15| Hits 7 times|
 |Note: Deals 5f bonus hitstun|
+|Hitboxes terminated on Frame 6|
+|Frame 20| 0|  8.0%|  361|  20|  100|
+|Hitboxes terminated on Frame 21|
 
 
 FaF: 38
@@ -531,12 +531,14 @@ FaF: 50
 ### Side Special 
 |Frame|ID|Damage|Angle|BKB|KBG|Notes| | | |
 |-|-|-|-|-|-|-|-|-|-|
-|Frame 9| 0|  2.0%|  53|  40|  25| deals -2 bonus shield damage|
-|Hitboxes terminated on Frame 53|
-|Note: can be jump cancelled at any point (Not after hitting shield)|
+|Frame 8| 0|  11.0%|  30|  70|  45|
+|Frame 8| 1|  11.0%|  30|  70|  45|
+|Frame 8| 2|  11.0%|  30|  70|  45|
+|Frame 8| 3|  11.0%|  30|  70|  45|
+|Hitboxes terminated on Frame 19|
 
 
-FaF: 67
+FaF: 38
 
 
 
@@ -547,15 +549,14 @@ FaF: 67
 ### (Air) Side Special 
 |Frame|ID|Damage|Angle|BKB|KBG|Notes| | | |
 |-|-|-|-|-|-|-|-|-|-|
-|Frame 14| 0|  8.0%|  65|  150 (Set)|  100| deals -7 bonus shield damage|
-|Frame 15| 0|  8.0%|  70|  150 (Set)|  100| deals -7 bonus shield damage|
-|Frame 22| 0|  8.0%|  75|  150 (Set)|  100| deals -7 bonus shield damage|
-|Frame 28| 0|  8.0%|  75|  150 (Set)|  100| deals -7 bonus shield damage|
-|Hitboxes terminated on Frame 37|
-|Note: Deals 9f bonus hitstun|
+|Frame 8| 0|  11.0%|  361|  30|  100|
+|Frame 8| 1|  11.0%|  361|  30|  100|
+|Frame 8| 2|  11.0%|  361|  30|  100|
+|Frame 8| 3|  11.0%|  361|  30|  100|
+|Hitboxes terminated on Frame 19|
 
 
-FaF: --
+FaF: 38
 
 
 
