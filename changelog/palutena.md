@@ -19,7 +19,7 @@ Nair Landing Lag | 12|
 Fair Landing Lag | 9|
 Bair Landing Lag | 10|
 Uair Landing Lag | 14|
-Dair Landing Lag | 11|
+Dair Landing Lag | 10|
 Wall Jump? | False|
 
 
@@ -41,7 +41,7 @@ Wall Jump? | False|
 |Frame 6| 2|  3.0%|  180|  20|  20|
 |Frame 6| 3|  3.0%|  361|  20|  20|
 |Hitboxes terminated on Frame 8|
-|Note: Deals 4f bonus hitstun|
+|Note: Deals 5f bonus hitstun|
 
 
 FaF: 23
@@ -87,18 +87,18 @@ FaF: 19
 ### FTilt
 |Frame|ID|Damage|Angle|BKB|KBG|Notes| | | |
 |-|-|-|-|-|-|-|-|-|-|
-|Frame 14| 1|  6.0%|  90|  25 (Set)|  100| deals 0.8 bonus shield damage|
-|Frame 14| 0|  6.0%|  45|  45 (Set)|  100| deals 0.8 bonus shield damage|
-|Frame 16| 1|  6.0%|  285|  25 (Set)|  100| deals 0.8 bonus shield damage|
-|Frame 16| 0|  6.0%|  100|  40 (Set)|  100| deals 0.8 bonus shield damage|
-|Frame 20| 1|  6.0%|  20|  35 (Set)|  100| deals 0.8 bonus shield damage|
-|Frame 20| 0|  6.0%|  85|  30 (Set)|  100| deals 0.8 bonus shield damage|
-|Frame 23| 1|  7.0%|  40|  78|  80| deals 0.8 bonus shield damage|
-|Frame 23| 0|  7.0%|  40|  78|  80| deals 0.8 bonus shield damage|
-|Hitboxes terminated on Frame 33|
+|Frame 16| 1|  6.0%|  90|  25 (Set)|  100| deals 0.8 bonus shield damage|
+|Frame 16| 0|  6.0%|  45|  45 (Set)|  100| deals 0.8 bonus shield damage|
+|Frame 18| 1|  6.0%|  285|  25 (Set)|  100| deals 0.8 bonus shield damage|
+|Frame 18| 0|  6.0%|  100|  40 (Set)|  100| deals 0.8 bonus shield damage|
+|Frame 22| 1|  6.0%|  20|  35 (Set)|  100| deals 0.8 bonus shield damage|
+|Frame 22| 0|  6.0%|  85|  30 (Set)|  100| deals 0.8 bonus shield damage|
+|Frame 25| 1|  7.0%|  40|  78|  65| deals 0.8 bonus shield damage|
+|Frame 25| 0|  7.0%|  40|  78|  65| deals 0.8 bonus shield damage|
+|Hitboxes terminated on Frame 35|
 
 
-FaF: 47
+FaF: 49
 
 
 
@@ -130,8 +130,8 @@ FaF: 34
 ### DTilt
 |Frame|ID|Damage|Angle|BKB|KBG|Notes| | | |
 |-|-|-|-|-|-|-|-|-|-|
-|Frame 14| 0|  8.5%|  75|  55|  60| deals 0.8 bonus shield damage|
-|Frame 15| 2|  8.5%|  75|  55|  60| deals 0.8 bonus shield damage|
+|Frame 14| 0|  8.5%|  78|  50|  72| deals 0.8 bonus shield damage|
+|Frame 15| 2|  8.5%|  78|  50|  72| deals 0.8 bonus shield damage|
 |Hitboxes terminated on Frame 28|
 
 
@@ -142,12 +142,11 @@ FaF: 33
 
 
 
-
 ### Dash Attack
 |Frame|ID|Damage|Angle|BKB|KBG|Notes| | | |
 |-|-|-|-|-|-|-|-|-|-|
-|Frame 6| 0| 11.0%| 75| 71| 83| deals 3 bonus shield damage|
-|Frame 6| 1| 11.0%| 75| 71| 83| deals 3 bonus shield damage|
+|Frame 6| 0| 11.0%| 72| 71| 80| deals 3 bonus shield damage|
+|Frame 6| 1| 11.0%| 72| 71| 80| deals 3 bonus shield damage|
 |Frame 10| 0| 7.0%| 60| 61| 56| deals 3 bonus shield damage|
 |Hitboxes terminated on Frame 18|
 
@@ -233,8 +232,8 @@ FaF: 69
 |Frame 23| 2|  1.2%|  100|  65 (Set)|  100| Hits grounded only| deals 1 bonus shield damage| rehits every 4 frames|
 |Frame 23| 3|  1.2%|  100|  65 (Set)|  100| Hits grounded only| deals 1 bonus shield damage| rehits every 4 frames|
 |Hitboxes terminated on Frame 27|
-|Frame 28| 0|  5.1%|  55|  30|  135| Hits air only| deals 3 bonus shield damage|
-|Frame 28| 1|  5.1%|  55|  30|  135| Hits grounded only| deals 3 bonus shield damage|
+|Frame 28| 0|  5.1%|  55|  35|  140| Hits air only| deals 3 bonus shield damage|
+|Frame 28| 1|  5.1%|  55|  35|  140| Hits grounded only| deals 3 bonus shield damage|
 |Hitboxes terminated on Frame 30|
 |Note: Deals -3f bonus hitstun|
 
@@ -254,16 +253,16 @@ Autocancel - 1-2/39+
 ### Fair
 |Frame|ID|Damage|Angle|BKB|KBG|Notes| | | |
 |-|-|-|-|-|-|-|-|-|-|
-|Frame 9| 0|  7.0%|  45|  58|  60| deals 3 bonus shield damage|
-|Hitboxes terminated on Frame 12|
+|Frame 7| 0|  8.0%|  50|  30|  85| deals 3 bonus shield damage|
+|Hitboxes terminated on Frame 10|
 |Note: Deals 3f bonus hitstun|
 
 
-FaF: 28
+FaF: 26
 
 
 
-Autocancel - 1-3/22+
+Autocancel - 1-3/17+
 
 
 
@@ -274,7 +273,7 @@ Autocancel - 1-3/22+
 ### Bair
 |Frame|ID|Damage|Angle|BKB|KBG|Notes| | | |
 |-|-|-|-|-|-|-|-|-|-|
-|Frame 8| 0| 12.0%| 361| 30| 95| deals 2.0 bonus shield damage|
+|Frame 8| 0| 12.0%| 361| 30| 90| deals 2.0 bonus shield damage|
 |Hitboxes terminated on Frame 11|
 
 
@@ -319,16 +318,16 @@ Autocancel - 1-2/38+
 ### Dair
 |Frame|ID|Damage|Angle|BKB|KBG|Notes| | | |
 |-|-|-|-|-|-|-|-|-|-|
-|Frame 10| 0| 11.0%| 270| 20| 100| Hits air only|
-|Frame 10| 1| 11.0%| 55| 30| 100| Hits grounded only|
+|Frame 10| 0| 11.0%| 270| 20| 115| Hits air only|
+|Frame 10| 1| 11.0%| 65| 30| 75| Hits grounded only|
 |Hitboxes terminated on Frame 12|
 
 
-FaF: 59
+FaF: 41
 
 
 
-Autocancel - 1-2/48+
+Autocancel - 1-2/38+
 
 
 
@@ -444,7 +443,7 @@ FaF: 55
 ### Down Throw
 |Frame|ID|Damage|Angle|BKB|KBG|Notes| | | |
 |-|-|-|-|-|-|-|-|-|-|
-|Throws on Frame 26| |  5.0%|  75|  85|  35|
+|Throws on Frame 26| |  5.0%|  73|  90|  27|
 |Hitboxes terminated on Frame 25|
 
 
@@ -464,7 +463,7 @@ FaF: 38
 |Frame 32| 0| 3.5%| 361| 40| 41| Reflectable| Absorbable| deals -1.7 bonus shield damage|
 
 
-FaF: 79
+FaF: 73
 
 
 
@@ -498,7 +497,7 @@ FaF: 72
 |Hitboxes terminated on Frame 32|
 
 
-FaF: 68
+FaF: 64
 
 
 
