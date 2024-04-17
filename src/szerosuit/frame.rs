@@ -87,12 +87,12 @@ pub fn zss(fighter : &mut L2CFighterCommon) {
 						} else if (ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_HI) != 0 {
 							StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_SPECIAL_HI, true);
 						} else if (ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_LW) != 0 {
-							if stick_x < 0{
+							if stick_x < 0.0{
 								PostureModule::reverse_lr(boma);
 								PostureModule::update_rot_y_lr(boma);
 								StatusModule::change_status_request_from_script(boma, *FIGHTER_SZEROSUIT_STATUS_KIND_SPECIAL_LW_START, true);
 							}
-							else if stick_x > 0{
+							else if stick_x > 0.0{
 								StatusModule::change_status_request_from_script(boma, *FIGHTER_SZEROSUIT_STATUS_KIND_SPECIAL_LW_START, true);
 							};
 						} else if (ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_S) != 0 {
@@ -107,12 +107,12 @@ pub fn zss(fighter : &mut L2CFighterCommon) {
 						} else if (ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_HI) != 0 {
 							StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_SPECIAL_HI, true);
 						} else if (ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_LW) != 0 {
-							if stick_x < 0{
+							if stick_x < 0.0{
 								PostureModule::reverse_lr(boma);
 								PostureModule::update_rot_y_lr(boma);
 								StatusModule::change_status_request_from_script(boma, *FIGHTER_SZEROSUIT_STATUS_KIND_SPECIAL_LW_START, true);
 							}
-							else if stick_x > 0{
+							else if stick_x > 0.0{
 								StatusModule::change_status_request_from_script(boma, *FIGHTER_SZEROSUIT_STATUS_KIND_SPECIAL_LW_START, true);
 							};
 						} else if (ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_S) != 0 {
@@ -169,12 +169,12 @@ pub fn zss(fighter : &mut L2CFighterCommon) {
 						} else if (ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_HI) != 0 {
 							StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_SPECIAL_HI, true);
 						} else if (ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_LW) != 0 {
-							if stick_x < 0{
+							if stick_x < 0.0{
 								PostureModule::reverse_lr(boma);
 								PostureModule::update_rot_y_lr(boma);
 								StatusModule::change_status_request_from_script(boma, *FIGHTER_SZEROSUIT_STATUS_KIND_SPECIAL_LW_START, true);
 							}
-							else if stick_x > 0{
+							else if stick_x > 0.0{
 								StatusModule::change_status_request_from_script(boma, *FIGHTER_SZEROSUIT_STATUS_KIND_SPECIAL_LW_START, true);
 							};
 						} else if (ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_S) != 0 {
