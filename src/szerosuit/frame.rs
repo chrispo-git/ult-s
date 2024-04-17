@@ -91,7 +91,7 @@ pub fn zss(fighter : &mut L2CFighterCommon) {
 								StatusModule::change_status_request_from_script(boma, *FIGHTER_SZEROSUIT_STATUS_KIND_SPECIAL_LW_START, true);
 								WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_SZEROSUIT_STATUS_SPECIAL_LW_FLAG_REVERSE);
 							}
-							else stick_x > 0.0{
+							else {
 								StatusModule::change_status_request_from_script(boma, *FIGHTER_SZEROSUIT_STATUS_KIND_SPECIAL_LW_START, true);
 							};
 						} else if (ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_S) != 0 {
@@ -110,7 +110,7 @@ pub fn zss(fighter : &mut L2CFighterCommon) {
 								StatusModule::change_status_request_from_script(boma, *FIGHTER_SZEROSUIT_STATUS_KIND_SPECIAL_LW_START, true);
 								WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_SZEROSUIT_STATUS_SPECIAL_LW_FLAG_REVERSE);
 							}
-							else stick_x > 0.0{
+							else {
 								StatusModule::change_status_request_from_script(boma, *FIGHTER_SZEROSUIT_STATUS_KIND_SPECIAL_LW_START, true);
 							};
 						} else if (ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_S) != 0 {
