@@ -258,7 +258,7 @@ def make_printable(string):
       ["slideattacklw", "Slide Down Attack"],
       ["slideattack", "Slide Neutral Attack"],
       ["aircatch", "Zair"],
-      ['"0x1034e9490a"', "Nair (Hero)"] #Lucina specific bullshit!
+      ['"0x1034e9490a"', "Nair (Hero)"], #Lucina specific bullshit!
       ["attackairn", "Nair"],
       ["attackairn2", "Nair 2"],
       ["attackairn3", "Nair 3"],
