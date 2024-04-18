@@ -2,22 +2,22 @@
 ## Attributes
 | Stat | Value |
 | ------------- |:-------------:|
-Initial Dash | 2.42|
-Run Speed | 2.31|
+Initial Dash | 2.35|
+Run Speed | 2.15|
 Walk Speed | 1.47|
 Traction | 0.116|
 Wavedash Traction Category | Highest|
 Full Hop Height | 44.5|
-Short Hop Height | 21.35|
+Short Hop Height | 14|
 Air Speed | 1.26|
 Air Accel Add | 0.01|
 Air Accel Mul | 0.085|
 Fall Speed | 1.7|
 Gravity | 0.12|
-Weight | 80|
-Nair Landing Lag | 8|
+Weight | 83|
+Nair Landing Lag | 10|
 Fair Landing Lag | 10|
-Bair Landing Lag | 10|
+Bair Landing Lag | 11|
 Uair Landing Lag | 5|
 Dair Landing Lag | 24|
 Wall Jump? | True|
@@ -119,8 +119,8 @@ FaF: 29
 |Frame 3| 0|  5.0%|  138|  40|  30| Hits air only|
 |Frame 3| 1|  5.0%|  130|  57|  40| Hits grounded only|
 |Hitboxes terminated on Frame 5|
-|Frame 9| 0|  7.0%|  60|  70|  90|
-|Frame 9| 1|  7.0%|  60|  70|  90|
+|Frame 9| 0|  7.0%|  60|  70|  110|
+|Frame 9| 1|  7.0%|  60|  70|  110|
 |Hitboxes terminated on Frame 11|
 
 
@@ -135,8 +135,8 @@ FaF: 46
 ### DTilt
 |Frame|ID|Damage|Angle|BKB|KBG|Notes| | | |
 |-|-|-|-|-|-|-|-|-|-|
-|Frame 8| 0|  8.0%|  80|  20|  72| -1.0 bonus trip chance|
-|Frame 8| 1|  8.0%|  80|  20|  72| -1.0 bonus trip chance|
+|Frame 8| 0|  8.0%|  80|  20|  85| -1.0 bonus trip chance|
+|Frame 8| 1|  8.0%|  80|  20|  85| -1.0 bonus trip chance|
 |Hitboxes terminated on Frame 10|
 
 
@@ -198,8 +198,8 @@ FaF: 65
 |Frame|ID|Damage|Angle|BKB|KBG|Notes| | | |
 |-|-|-|-|-|-|-|-|-|-|
 |Charge hold Frame: 4|
-|Frame 8| 0|  11.0%|  70|  74|  5|
-|Frame 8| 1|  11.0%|  70|  74|  5|
+|Frame 8| 0|  11.0%|  70|  74|  25|
+|Frame 8| 1|  11.0%|  70|  74|  25|
 |Hitboxes terminated on Frame 18|
 |Note: Deals 5f bonus hitstun|
 
@@ -448,9 +448,9 @@ FaF: 28
 |Frame 14| 1|  0.8%|  100|  45|  25| Hits 5 times| hit effect is elec|
 |Frame 14| 2|  0.8%|  255|  45|  25| Hits 5 times| hit effect is elec|
 |Hitboxes terminated on Frame 15|
-|Frame 28| 1|  3.0%|  80|  45|  180| hit effect is elec|
-|Frame 28| 2|  3.0%|  80|  45|  180| hit effect is elec|
-|Frame 28| 3|  3.0%|  80|  45|  180| hit effect is elec|
+|Frame 28| 1|  3.0%|  80|  45|  160| hit effect is elec|
+|Frame 28| 2|  3.0%|  80|  45|  160| hit effect is elec|
+|Frame 28| 3|  3.0%|  80|  45|  160| hit effect is elec|
 |Hitboxes terminated on Frame 30|
 |Note: Deals 4f bonus hitstun|
 

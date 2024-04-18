@@ -39,11 +39,11 @@ unsafe extern "C" fn palu_reticle(fighter: &mut L2CAgentBase) {
 			wait(fighter.lua_state_agent, 7.0);
 		}
 		wait(fighter.lua_state_agent, 1.0);
-		macros::FT_MOTION_RATE(fighter, 1.25);
+		macros::FT_MOTION_RATE(fighter, 1.1);
 }		
 unsafe extern "C" fn palu_black_hole(fighter: &mut L2CAgentBase) {
     	let lua_state = fighter.lua_state_agent;
-		macros::FT_MOTION_RATE(fighter, 4.0);
+		macros::FT_MOTION_RATE(fighter, 3.2);
 		frame(fighter.lua_state_agent, 5.0); 
 		macros::FT_MOTION_RATE(fighter, 1.0);
 		if macros::is_excute(fighter) {

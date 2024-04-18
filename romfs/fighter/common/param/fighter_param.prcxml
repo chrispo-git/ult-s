@@ -438,7 +438,6 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
       <float hash="air_accel_y">0.175</float>
       <float hash="air_speed_y_stable">2.3</float>
       <float hash="dive_speed_y">4.025</float>
-      <float hash="landing_attack_air_frame_n">8</float>
       <float hash="landing_attack_air_frame_lw">12</float>
       <float hash="tread_jump_speed_y_mul">1.0</float>
       <float hash="tread_mini_jump_speed_y_mul">0.475</float>
@@ -548,11 +547,10 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
     </struct>
     <!--SHEIK (The Cool Character For Cool People)-->
     <struct index="16">
-      <float hash="jump_speed_x_mul">1.2</float>
       <float hash="air_speed_x_stable">1.2</float>
-      <float hash="weight">76</float>
+      <float hash="weight">80</float>
       <float hash="landing_attack_air_frame_b">7</float>
-      <float hash="landing_attack_air_frame_lw">6</float>
+      <float hash="landing_attack_air_frame_lw">10</float>
       
       <float hash="tread_jump_speed_y_mul">1.0</float>
       <float hash="tread_mini_jump_speed_y_mul">0.475</float>
@@ -723,14 +721,14 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
     </struct>
     <!--ZERO SUIT SAMUS-->
     <struct index="29">
-      <float hash="dash_speed">2.35</float>
-      <float hash="run_speed_max">2.2</float>
+      <float hash="dash_speed">2.3</float>
+      <float hash="run_speed_max">2.15</float>
       <float hash="mini_jump_y">14</float>
       <float hash="air_accel_x_mul">0.07</float>
       <!--float hash="air_speed_x_stable">1.22</float-->
       <float hash="weight">83</float>
-      <float hash="landing_attack_air_frame_n">9</float>
-      <float hash="landing_attack_air_frame_f">9</float>
+      <float hash="landing_attack_air_frame_n">10</float>
+      <float hash="landing_attack_air_frame_b">11</float>
       <float hash="tread_jump_speed_y_mul">1.0</float>
       <float hash="tread_mini_jump_speed_y_mul">0.475</float>
       <float hash="combo_attack_12_end">0</float>
@@ -958,11 +956,10 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
     </struct>
     <!--PALUTENA-->
     <struct index="51">
+
       <float hash="air_accel_x_mul">0.11</float>
-      <float hash="jump_speed_x_mul">0.9</float>
-      <float hash="landing_attack_air_frame_n">12</float>
-      <float hash="landing_attack_air_frame_b">10</float>
-      
+      <float hash="air_speed_x_stable">1.05</float>
+      <float hash="landing_attack_air_frame_lw">10</float>
       <float hash="tread_jump_speed_y_mul">1.0</float>
       <float hash="tread_mini_jump_speed_y_mul">0.475</float>
     </struct>
@@ -1459,8 +1456,9 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
     </struct>
     <!--RICHTER-->
     <struct index="89">
-      <float hash="dash_speed">1.92</float>
+      <float hash="dash_speed">1.98</float>
       <float hash="run_speed_max">1.87</float>
+      <float hash="air_accel_x_mul">0.05</float>
       <float hash="air_speed_x_stable">1.08</float>
       <float hash="landing_attack_air_frame_n">7</float>
       <float hash="landing_attack_air_frame_f">11</float>
