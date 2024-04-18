@@ -14,17 +14,16 @@ use smash::phx::Vector3f;
 use crate::gaogaen::acmd::specials::CHECK_FINISH_CAMERA_IF_NOT_HP_MODE;
 use crate::util::*;
 use super::*;
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		incin_lariat,
-        incin_bbd, incin_air_bbd
 
-        /*incin_super*/        
-    );    
+pub fn install() {
+    Agent::new("gaogaen")
+    .acmd("game_specialslariat", incin_lariat)    
+    .acmd("game_specialsshoulder", incin_bbd)    
+    .acmd("game_specialairsshoulder", incin_air_bbd)    
+    .install();  
 }
 
-#[acmd_script( agent = "gaogaen", script = "game_specialslariat", category = ACMD_GAME, low_priority )]
-unsafe fn incin_lariat(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn incin_lariat(agent: &mut L2CAgentBase) {
     if macros::is_excute(agent) {
         damage!(agent, *MA_MSC_DAMAGE_DAMAGE_NO_REACTION, *DAMAGE_NO_REACTION_MODE_DAMAGE_POWER, 11.99);
         macros::ATTACK_ABS(agent, *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, 0, 0.0, 145, 440, 0, 20, 0.0, 1.0, *ATTACK_LR_CHECK_B, 0.0, true, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_THROW);
@@ -58,10 +57,7 @@ unsafe fn incin_lariat(agent: &mut L2CAgentBase) {
     }
 }
 
-
-
-#[acmd_script( agent = "gaogaen", script = "game_specialsshoulder", category = ACMD_GAME, low_priority )]
-unsafe fn incin_bbd(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn incin_bbd(agent: &mut L2CAgentBase) {
     if macros::is_excute(agent) {
         damage!(agent, *MA_MSC_DAMAGE_DAMAGE_NO_REACTION, *DAMAGE_NO_REACTION_MODE_DAMAGE_POWER, 11.99);
         macros::ATTACK_ABS(agent, *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, 0, 0.0, 105, 315, 0, 70, 0.0, 1.0, *ATTACK_LR_CHECK_B, 0.0, true, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_THROW);
@@ -106,8 +102,7 @@ unsafe fn incin_bbd(agent: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script( agent = "gaogaen", script = "game_specialairsshoulder", category = ACMD_GAME, low_priority )]
-unsafe fn incin_air_bbd(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn incin_air_bbd(agent: &mut L2CAgentBase) {
     if macros::is_excute(agent) {
         damage!(agent, *MA_MSC_DAMAGE_DAMAGE_NO_REACTION, *DAMAGE_NO_REACTION_MODE_DAMAGE_POWER, 11.99);
         macros::ATTACK_ABS(agent, *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, 0, 0.0, 105, 290, 0, 70, 0.0, 1.0, *ATTACK_LR_CHECK_B, 0.0, true, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_THROW);
@@ -152,8 +147,7 @@ unsafe fn incin_air_bbd(agent: &mut L2CAgentBase) {
     }
 }
 
-/*#[acmd_script( agent = "gaogaen", script = "game_finalend", category = ACMD_GAME, low_priority )]
-unsafe fn incin_super(agent: &mut L2CAgentBase) {
+/*unsafe extern "C" fn incin_super(agent: &mut L2CAgentBase) {
     if macros::is_excute(agent) {
         macros::ATTACK_ABS(agent, *FIGHTER_ATTACK_ABSOLUTE_KIND_GAOGAEN_FINAL, 0, 11.0, 65, 100, 40, 35, 0.0, 1.0, *ATTACK_LR_CHECK_POS, 0.0, true, Hash40::new("collision_attr_fire"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_NONE);
         WorkModule::on_flag(agent.module_accessor, *FIGHTER_GAOGAEN_STATUS_WORK_ID_FLAG_FINAL_ABS_SET);

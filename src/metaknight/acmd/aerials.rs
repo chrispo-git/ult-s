@@ -13,26 +13,23 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		mk_fair,
-		mk_fair_eff,
-		mk_fair_snd,
-		mk_bair,
-		mk_uair,
-		mk_dair,
-		mk_dair_eff,
-		mk_dair_snd,
-		mk_dair_land_eff,
-		mk_dair_land_snd
-    );
+    Agent::new("metaknight")
+    .acmd("game_attackairlw", mk_dair)    
+    .acmd("effect_attackairlw", mk_dair_eff)    
+    .acmd("sound_attackairlw", mk_dair_snd)    
+    .acmd("sound_landingairlw", mk_dair_land_snd)    
+    .acmd("effect_landingairlw", mk_dair_land_eff)    
+    .acmd("game_attackairf", mk_fair)    
+    .acmd("effect_attackairf", mk_fair_eff)    
+    .acmd("sound_attackairf", mk_fair_snd)    
+    .acmd("game_attackairb", mk_bair)    
+    .acmd("game_attackairhi", mk_uair)    
+    .install();
 }
-#[acmd_script(
-    agent = "metaknight",
-    script =  "game_attackairlw",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn mk_dair(fighter: &mut L2CAgentBase) {
+
+unsafe extern "C" fn mk_dair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 2.0);
 		if macros::is_excute(fighter) {
@@ -59,12 +56,7 @@ unsafe fn mk_dair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }	
-#[acmd_script(
-    agent = "metaknight",
-    script =  "effect_attackairlw",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn mk_dair_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn mk_dair_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 12.0);
 		if macros::is_excute(fighter) {
@@ -75,12 +67,7 @@ unsafe fn mk_dair_eff(fighter: &mut L2CAgentBase) {
 			macros::EFFECT_OFF_KIND(fighter, Hash40::new_raw(0x10790b338f), false, false);
 		}
 }		
-#[acmd_script(
-    agent = "metaknight",
-    script =  "sound_attackairlw",
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn mk_dair_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn mk_dair_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 14.0);
 		if macros::is_excute(fighter) {
@@ -89,36 +76,21 @@ unsafe fn mk_dair_snd(fighter: &mut L2CAgentBase) {
 			macros::PLAY_SE(fighter, Hash40::new("se_metaknight_special_l02"));
 		}
 }	
-#[acmd_script(
-    agent = "metaknight",
-    script =  "sound_landingairlw",
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn mk_dair_land_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn mk_dair_land_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			macros::PLAY_DOWN_SE(fighter, Hash40::new("se_common_down_soil_s"));
 			macros::PLAY_SE(fighter, Hash40::new("se_metaknight_smash_l01"));
 		}
 }	
-#[acmd_script(
-    agent = "metaknight",
-    script =  "effect_landingairlw",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn mk_dair_land_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn mk_dair_land_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			macros::LANDING_EFFECT(fighter, Hash40::new("sys_crown"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
 			macros::QUAKE(fighter, *CAMERA_QUAKE_KIND_M);
 		}
 }	
-#[acmd_script(
-    agent = "metaknight",
-    script =  "game_attackairf",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn mk_fair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn mk_fair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 2.0);
 		if macros::is_excute(fighter) {
@@ -139,12 +111,7 @@ unsafe fn mk_fair(fighter: &mut L2CAgentBase) {
 			CancelModule::enable_cancel(fighter.module_accessor);
 		}
 }		
-#[acmd_script(
-    agent = "metaknight",
-    script =  "effect_attackairf",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn mk_fair_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn mk_fair_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			macros::EFFECT_FOLLOW(fighter, Hash40::new_raw(0x100937dc21), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.2, true);
@@ -164,12 +131,7 @@ unsafe fn mk_fair_eff(fighter: &mut L2CAgentBase) {
 			macros::EFFECT_OFF_KIND(fighter, Hash40::new_raw(0x10790b338f), false, false);
 		}
 }		
-#[acmd_script(
-    agent = "metaknight",
-    script =  "sound_attackairf",
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn mk_fair_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn mk_fair_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 4.0);
 		if macros::is_excute(fighter) {
@@ -181,12 +143,7 @@ unsafe fn mk_fair_snd(fighter: &mut L2CAgentBase) {
 		}
 }		
 
-#[acmd_script(
-    agent = "metaknight",
-    script =  "game_attackairb",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn mk_bair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn mk_bair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.4285714285714285714285714285714);
 		frame(fighter.lua_state_agent, 7.0);
@@ -227,12 +184,7 @@ unsafe fn mk_bair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }
-#[acmd_script(
-    agent = "metaknight",
-    script =  "game_attackairhi",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn mk_uair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn mk_uair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 6.0);
 		if macros::is_excute(fighter) {

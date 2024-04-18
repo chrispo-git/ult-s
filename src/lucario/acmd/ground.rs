@@ -13,22 +13,19 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		lucario_dsmash,
-		lucario_dsmashs,
-		lucario_jab_1,
-		lucario_jab_2,
-		lucario_jab_3,
-		lucario_da
-    );
+    Agent::new("lucario")
+    .acmd("game_attack11", lucario_jab_1)    
+	.acmd("game_attack12", lucario_jab_2)    
+	.acmd("game_attack13", lucario_jab_3)    
+	.acmd("game_attackdash", lucario_da)    
+	.acmd("game_attacklw4", lucario_dsmash)    
+	.acmd("sound_attacklw4", lucario_dsmashs)    
+	.install();
 }
-#[acmd_script(
-    agent = "lucario",
-    script =  "game_attack11",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn lucario_jab_1(agent: &mut L2CAgentBase) {
+
+unsafe extern "C" fn lucario_jab_1(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 1.0);
     macros::FT_MOTION_RATE(agent, 0.5);
     frame(agent.lua_state_agent, 4.0);
@@ -56,12 +53,7 @@ unsafe fn lucario_jab_1(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 29.0);
     macros::FT_MOTION_RATE(agent, 1.0);
 }	
-#[acmd_script(
-    agent = "lucario",
-    script =  "game_attack12",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn lucario_jab_2(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn lucario_jab_2(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 1.0);
     macros::FT_MOTION_RATE(agent, 1.0);
     frame(agent.lua_state_agent, 5.0);
@@ -80,12 +72,7 @@ unsafe fn lucario_jab_2(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 35.0);
     macros::FT_MOTION_RATE(agent, 1.0);
 }		
-#[acmd_script(
-    agent = "lucario",
-    script =  "game_attack13",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn lucario_jab_3(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn lucario_jab_3(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 1.0);
     macros::FT_MOTION_RATE(agent, 1.0);
     frame(agent.lua_state_agent, 9.0);
@@ -99,12 +86,7 @@ unsafe fn lucario_jab_3(agent: &mut L2CAgentBase) {
         AttackModule::clear_all(agent.module_accessor);
     }
 }			
-#[acmd_script(
-    agent = "lucario",
-    script =  "game_attackdash",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn lucario_da(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn lucario_da(agent: &mut L2CAgentBase) {
     if macros::is_excute(agent) {
         WorkModule::on_flag(agent.module_accessor, *FIGHTER_LUCARIO_INSTANCE_WORK_ID_FLAG_FORCE_AURAPOWER_ATTACK_POWER_MUL);
         FighterAreaModuleImpl::enable_fix_jostle_area(agent.module_accessor, 4.0, 5.0);
@@ -124,12 +106,7 @@ unsafe fn lucario_da(agent: &mut L2CAgentBase) {
         AttackModule::clear_all(agent.module_accessor);
     }
 }	
-#[acmd_script(
-    agent = "lucario",
-    script =  "game_attacklw4",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn lucario_dsmash(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn lucario_dsmash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 1.0);
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.2);
@@ -149,12 +126,7 @@ unsafe fn lucario_dsmash(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }		
-#[acmd_script(
-    agent = "lucario",
-    script =  "sound_attacklw4",
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn lucario_dsmashs(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn lucario_dsmashs(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 6.0);
 		if macros::is_excute(fighter) {

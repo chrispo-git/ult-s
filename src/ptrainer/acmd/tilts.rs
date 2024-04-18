@@ -14,12 +14,28 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[acmd_script(
-    agent = "pzenigame",
-    scripts =  ["game_attacklw3"],
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn squirtle_dtilt(fighter: &mut L2CAgentBase) {
+pub fn install() {
+    Agent::new("pzenigame")
+    .acmd("game_attacklw3", squirtle_dtilt)    
+    .install();
+
+	Agent::new("plizardon")
+    .acmd("game_attacks3", zard_ftilt)    
+    .acmd("game_attacks3hi", zard_ftilt)    
+    .acmd("game_attacks3lw", zard_ftilt)    
+    .acmd("effect_attacks3", zard_ftilt_eff)    
+    .acmd("effect_attacks3hi", zard_ftilt_eff)    
+    .acmd("effect_attacks3lw", zard_ftilt_eff)    
+    .acmd("sound_attacks3", zard_ftilt_snd)    
+    .acmd("sound_attacks3hi", zard_ftilt_snd)    
+    .acmd("sound_attacks3lw", zard_ftilt_snd)    
+    .acmd("game_attacklw3", zard_dtilt)    
+    .acmd("effect_attacklw3", zard_dtilt_eff)    
+    .acmd("sound_attacklw3", zard_dtilt_snd)    
+    .install();
+}
+
+unsafe extern "C" fn squirtle_dtilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 8.0);
 		if macros::is_excute(fighter) {
@@ -36,12 +52,7 @@ unsafe fn squirtle_dtilt(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }
-#[acmd_script(
-    agent = "plizardon",
-    scripts =  ["game_attacks3", "game_attacks3hi", "game_attacks3lw"],
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn zard_ftilt(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn zard_ftilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 1.0);
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.8);
@@ -60,12 +71,7 @@ unsafe fn zard_ftilt(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }
-#[acmd_script(
-    agent = "plizardon",
-    scripts =  ["effect_attacks3", "effect_attacks3hi", "effect_attacks3lw"],
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn zard_ftilt_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn zard_ftilt_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 6.0);
 		if macros::is_excute(fighter) {
@@ -76,24 +82,14 @@ unsafe fn zard_ftilt_eff(fighter: &mut L2CAgentBase) {
 			macros::EFFECT_FLIP_ALPHA(fighter, Hash40::new("sys_attack_impact"), Hash40::new("sys_attack_impact"), Hash40::new("head"), 0, 0, 0, 0, 0, 0, 1.3, 0, 0, 0, 0, 0, 0, true, *EF_FLIP_YZ, 0.65);
 		}
 }
-#[acmd_script(
-    agent = "plizardon",
-    scripts =  ["sound_attacks3", "sound_attacks3hi", "sound_attacks3lw"],
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn zard_ftilt_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn zard_ftilt_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 8.0);
 		if macros::is_excute(fighter) {
 			macros::PLAY_SE(fighter, Hash40::new("se_plizardon_attackl_l01"));
 		}
 }
-#[acmd_script(
-    agent = "plizardon",
-    scripts =  ["game_attacklw3"],
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn zard_dtilt(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn zard_dtilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 1.0);
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.8);
@@ -120,12 +116,7 @@ unsafe fn zard_dtilt(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }
-#[acmd_script(
-    agent = "plizardon",
-    scripts =  ["effect_attacklw3"],
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn zard_dtilt_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn zard_dtilt_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 11.0);
 		if macros::is_excute(fighter) {
@@ -140,24 +131,11 @@ unsafe fn zard_dtilt_eff(fighter: &mut L2CAgentBase) {
 			macros::EFFECT_OFF_KIND(fighter, Hash40::new_raw(0x1229ac4d89), false, false);
 		}
 }
-#[acmd_script(
-    agent = "plizardon",
-    scripts =  ["sound_attacklw3"],
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn zard_dtilt_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn zard_dtilt_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 11.0);
 		if macros::is_excute(fighter) {
 			macros::PLAY_SEQUENCE(fighter, Hash40::new("seq_plizardon_rnd_attack"));
 			macros::PLAY_SE(fighter, Hash40::new("se_plizardon_attackl_s01"));
 		}
-}
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		squirtle_dtilt,
-        zard_ftilt, zard_ftilt_eff, zard_ftilt_snd,
-        zard_dtilt, zard_dtilt_eff, zard_dtilt_snd
-    );
 }

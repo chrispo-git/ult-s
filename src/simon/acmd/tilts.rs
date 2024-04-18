@@ -14,20 +14,19 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-
-
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		whip_dtilt, simon_dtilt, simon_dtilt_eff, simon_dtilt_snd
-    );
+    Agent::new("simon")
+    .acmd("game_attacklw3", simon_dtilt)    
+    .acmd("effect_attacklw3", simon_dtilt_eff)    
+    .acmd("sound_attacklw3", simon_dtilt_snd)    
+    .install();
+
+    Agent::new("simon_whip")
+    .acmd("game_attacklw3", whip_dtilt)    
+    .install();
 }
 
-
-#[acmd_script(
-    agent = "simon_whip",
-    script =  "game_attacklw3",
-    category = ACMD_GAME)]
-unsafe fn whip_dtilt(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn whip_dtilt(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 1.0);
     if macros::is_excute(agent) {
         PhysicsModule::set_2nd_status(agent.module_accessor, *PH2NDARY_CRAW_NONE);
@@ -43,11 +42,7 @@ unsafe fn whip_dtilt(agent: &mut L2CAgentBase) {
 		PhysicsModule::set_2nd_status(agent.module_accessor, *PH2NDARY_CRAW_MOVE);
 	}
 }	
-#[acmd_script(
-    agent = "simon",
-    script =  "game_attacklw3",
-    category = ACMD_GAME)]
-unsafe fn simon_dtilt(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn simon_dtilt(agent: &mut L2CAgentBase) {
     let lua_state = agent.lua_state_agent;
 	if macros::is_excute(agent) {
 		ArticleModule::change_motion(agent.module_accessor, *FIGHTER_SIMON_GENERATE_ARTICLE_WHIP,smash::phx::Hash40::new("attack_lw3"),false,0.0);
@@ -85,11 +80,7 @@ unsafe fn simon_dtilt(agent: &mut L2CAgentBase) {
 		AttackModule::clear_all(agent.module_accessor);
 	}
 }	
-#[acmd_script(
-    agent = "simon",
-    script =  "effect_attacklw3",
-    category = ACMD_EFFECT)]
-unsafe fn simon_dtilt_eff(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn simon_dtilt_eff(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 10.0);
     if macros::is_excute(agent) {
         macros::FOOT_EFFECT(agent, Hash40::new("sys_run_smoke"), Hash40::new("top"), -4, 0, 0, 0, 0, 0, 1.2, 0, 0, 0, 0, 0, 0, false);
@@ -99,11 +90,7 @@ unsafe fn simon_dtilt_eff(agent: &mut L2CAgentBase) {
         macros::EFFECT_FOLLOW(agent, Hash40::new("simon_whip_straight"), Hash40::new("haver"), 0, 0, 0, 4, 30, 4, 0.98, true);
     }
 }	
-#[acmd_script(
-    agent = "simon",
-    script =  "sound_attacklw3",
-    category = ACMD_SOUND)]
-unsafe fn simon_dtilt_snd(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn simon_dtilt_snd(agent: &mut L2CAgentBase) {
     if macros::is_excute(agent) {
         macros::PLAY_SE(agent, Hash40::new("se_simon_whip_holding"));
     }

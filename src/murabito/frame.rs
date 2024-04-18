@@ -15,18 +15,22 @@ use crate::util::*;
 use crate::murabito::*;
 use super::*;
 
-
-
 pub fn install() {
-    smashline::install_agent_frames!(
-        murabito_frame,
-        murabito_frame2,
-        tree_frame,
-        seed_frame
-    );
+    Agent::new("murabito")
+    .on_line(Main, murabito_frame2)
+    .on_line(Main, murabito_frame)
+    .install();
+
+    Agent::new("murabito_tree")
+    .on_line(Main, tree_frame)
+    .install();
+
+    Agent::new("murabito_sprout")
+    .on_line(Main, seed_frame)
+    .install();
 }
-#[fighter_frame( agent = FIGHTER_KIND_MURABITO)]
-fn murabito_frame2(fighter: &mut L2CFighterCommon) {
+
+unsafe extern "C" fn murabito_frame2(fighter: &mut L2CFighterCommon) {
     unsafe {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 		if is_default(boma) {
@@ -63,8 +67,7 @@ fn murabito_frame2(fighter: &mut L2CFighterCommon) {
         }
     }
 }
-#[fighter_frame( agent = FIGHTER_KIND_MURABITO, main )]
-fn murabito_frame(fighter: &mut L2CFighterCommon) {
+unsafe extern "C" fn murabito_frame(fighter: &mut L2CFighterCommon) {
     unsafe {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 		if is_default(boma) {
@@ -149,8 +152,7 @@ fn murabito_frame(fighter: &mut L2CFighterCommon) {
 		}
     }
 }
-#[weapon_frame( agent = WEAPON_KIND_MURABITO_TREE)]
-fn tree_frame(weapon: &mut L2CFighterBase) {
+unsafe extern "C" fn tree_frame(weapon: &mut L2CFighterBase) {
     unsafe {
         let otarget_id = WorkModule::get_int(weapon.module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LINK_OWNER) as u32;
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(weapon.module_accessor);
@@ -167,8 +169,7 @@ fn tree_frame(weapon: &mut L2CFighterBase) {
 		};
     }
 }
-#[weapon_frame( agent = WEAPON_KIND_MURABITO_SPROUT)]
-fn seed_frame(weapon: &mut L2CFighterBase) {
+unsafe extern "C" fn seed_frame(weapon: &mut L2CFighterBase) {
     unsafe {
         let otarget_id = WorkModule::get_int(weapon.module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LINK_OWNER) as u32;
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(weapon.module_accessor);

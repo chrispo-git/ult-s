@@ -13,18 +13,15 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		gnw_da,
-		gnw_dsmash
-    );
+    Agent::new("gamewatch")
+    .acmd("game_attackdash", gnw_da)    
+    .acmd("game_attacklw4", gnw_dsmash)    
+    .install();
 }	
-#[acmd_script(
-    agent = "gamewatch",
-    script =  "game_attackdash",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn gnw_da(fighter: &mut L2CAgentBase) {
+
+unsafe extern "C" fn gnw_da(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 6.0);
 		if macros::is_excute(fighter) {
@@ -46,12 +43,7 @@ unsafe fn gnw_da(fighter: &mut L2CAgentBase) {
 			JostleModule::set_status(fighter.module_accessor, true);
 		}
 }	
-#[acmd_script(
-    agent = "gamewatch",
-    script =  "game_attacklw4",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn gnw_dsmash(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn gnw_dsmash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 1.0);
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.785);

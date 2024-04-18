@@ -13,20 +13,17 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		ganon_utilt,
-		ganon_utilt_eff,
-		ganon_utilt_snd,
-		ganon_utilt_expr
-    );
+    Agent::new("ganon")
+    .acmd("game_attackhi3", ganon_utilt)    
+    .acmd("effect_attackhi3", ganon_utilt_eff)    
+    .acmd("expression_attackhi3", ganon_utilt_expr)    
+    .acmd("sound_attackhi3", ganon_utilt_snd)    
+    .install();
 }
-#[acmd_script(
-    agent = "ganon",
-    script =  "game_attackhi3",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn ganon_utilt(fighter: &mut L2CAgentBase) {
+
+unsafe extern "C" fn ganon_utilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 12.0);
 		if macros::is_excute(fighter) {
@@ -65,12 +62,7 @@ unsafe fn ganon_utilt(fighter: &mut L2CAgentBase) {
 			CancelModule::enable_cancel(fighter.module_accessor);
 		}
 }
-#[acmd_script(
-    agent = "ganon",
-    script =  "effect_attackhi3",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn ganon_utilt_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn ganon_utilt_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 13.0);
 		if macros::is_excute(fighter) {
@@ -88,24 +80,14 @@ unsafe fn ganon_utilt_eff(fighter: &mut L2CAgentBase) {
 			macros::LANDING_EFFECT(fighter, Hash40::new("sys_h_smoke_b"), Hash40::new("top"), -6, 0, 0, 0, 0, 0, 0.8, 0, 0, 0, 0, 0, 0, false);
 		}
 }		
-#[acmd_script(
-    agent = "ganon",
-    script =  "expression_attackhi3",
-    category = ACMD_EXPRESSION,
-	low_priority)]
-unsafe fn ganon_utilt_expr(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn ganon_utilt_expr(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 15.0);
 		if macros::is_excute(fighter) {
 			macros::QUAKE(fighter, *CAMERA_QUAKE_KIND_M);
 		}
 }	
-#[acmd_script(
-    agent = "ganon",
-    script =  "sound_attackhi3",
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn ganon_utilt_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn ganon_utilt_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 13.0);
 		if macros::is_excute(fighter) {

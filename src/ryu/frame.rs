@@ -14,9 +14,14 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
+pub fn install() {
+    Agent::new("ryu")
+    .on_line(Main, supers)
+    .install();
+}
+
 //RYU SUPER
-#[fighter_frame_callback]
-pub fn supers(fighter : &mut L2CFighterCommon) {
+unsafe extern "C" fn supers(fighter : &mut L2CFighterCommon) {
     unsafe {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);  
 		let fighter_kind = smash::app::utility::get_kind(boma);
@@ -117,8 +122,4 @@ pub fn supers(fighter : &mut L2CFighterCommon) {
 			};
 		};
 	};
-}
-
-pub fn install() {
-    smashline::install_agent_frame_callbacks!(supers);
 }

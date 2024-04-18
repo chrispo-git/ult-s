@@ -14,12 +14,14 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[acmd_script(
-    agent = "zelda",
-    script =  "game_attackairf",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn zelda_fair(fighter: &mut L2CAgentBase) {
+pub fn install() {
+    Agent::new("zelda")
+    .acmd("game_attackairf", zelda_fair)    
+    .acmd("game_attackairn", zelda_nair)    
+    .install();
+}
+
+unsafe extern "C" fn zelda_fair(fighter: &mut L2CAgentBase) {
         let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 1.0);
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.6);
@@ -48,12 +50,7 @@ unsafe fn zelda_fair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }	
-#[acmd_script(
-    agent = "zelda",
-    script =  "game_attackairn",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn zelda_nair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn zelda_nair(fighter: &mut L2CAgentBase) {
         let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 4.0);
 		if macros::is_excute(fighter) {
@@ -91,11 +88,4 @@ unsafe fn zelda_nair(fighter: &mut L2CAgentBase) {
 		if macros::is_excute(fighter) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
-}	
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		zelda_fair,
-        zelda_nair
-    );
 }

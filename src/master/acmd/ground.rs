@@ -13,17 +13,14 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		axe_dsmash_eff
-    );
+    Agent::new("master_axe")
+    .acmd("effect_attacklw4", axe_dsmash_eff)    
+    .install();
 }	
-#[acmd_script(
-    agent = "master_axe",
-    scripts =  ["effect_attacklw4"],
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn axe_dsmash_eff(fighter: &mut L2CAgentBase) {
+
+unsafe extern "C" fn axe_dsmash_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 1.0);
 		if macros::is_excute(fighter) {

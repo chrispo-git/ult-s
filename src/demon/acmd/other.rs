@@ -13,14 +13,14 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-	smashline::install_acmd_scripts!(kaz_landing);
+	Agent::new("demon")
+    .acmd("effect_landingheavy", kaz_landing)    
+    .install();
 }
-#[acmd_script(
-    agent = "demon",
-    script =  "effect_landingheavy",
-    category = ACMD_EFFECT)]
-unsafe fn kaz_landing(fighter: &mut L2CAgentBase) {
+
+unsafe extern "C" fn kaz_landing(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 2.0);
 		if macros::is_excute(fighter) {

@@ -14,12 +14,17 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[acmd_script(
-    agent = "roy",
-    script =  "game_attacklw3",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn roy_dtilt(fighter: &mut L2CAgentBase) {
+pub fn install() {
+    Agent::new("roy")
+    .acmd("game_attacklw3", roy_dtilt)    
+	.acmd("game_attackhi3", roy_utilt)    
+	.acmd("game_attacks3", roy_ftilt)    
+	.acmd("effect_attacks3", roy_ftilt_eff)    
+	.acmd("sound_attacks3", roy_ftilt_snd)    
+	.install();
+}
+
+unsafe extern "C" fn roy_dtilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 7.0);
 		if macros::is_excute(fighter) {
@@ -32,12 +37,7 @@ unsafe fn roy_dtilt(fighter: &mut L2CAgentBase) {
 		}
 }
 
-#[acmd_script(
-    agent = "roy",
-    script =  "game_attackhi3",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn roy_utilt(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn roy_utilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 6.0);
 		if macros::is_excute(fighter) {
@@ -60,12 +60,7 @@ unsafe fn roy_utilt(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }		
-#[acmd_script(
-    agent = "roy",
-    script =  "game_attacks3",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn roy_ftilt(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn roy_ftilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 9.0);
 		if macros::is_excute(fighter) {
@@ -80,12 +75,7 @@ unsafe fn roy_ftilt(fighter: &mut L2CAgentBase) {
 		frame(fighter.lua_state_agent, 27.0);
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.35);
 }		
-#[acmd_script(
-    agent = "roy",
-    script =  "effect_attacks3",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn roy_ftilt_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn roy_ftilt_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 7.0);
 		if macros::is_excute(fighter) {
@@ -102,12 +92,7 @@ unsafe fn roy_ftilt_eff(fighter: &mut L2CAgentBase) {
 			macros::AFTER_IMAGE_OFF(fighter, 2);
 		}
 }		
-#[acmd_script(
-    agent = "roy",
-    script =  "sound_attacks3",
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn roy_ftilt_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn roy_ftilt_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 7.0);
 		if macros::is_excute(fighter) {
@@ -118,12 +103,4 @@ unsafe fn roy_ftilt_snd(fighter: &mut L2CAgentBase) {
 		if macros::is_excute(fighter) {
 			macros::PLAY_SE(fighter, Hash40::new("se_roy_special_n02"));
 		}
-}		
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		roy_dtilt,
-        roy_utilt,
-        roy_ftilt, roy_ftilt_eff, roy_ftilt_snd
-    );
-}
+}	

@@ -14,12 +14,13 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[acmd_script(
-    agent = "robot",
-    script =  "game_specialairsend",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn rob_sideb(fighter: &mut L2CAgentBase) {
+pub fn install() {
+    Agent::new("robot")
+    .acmd("game_specialairsend", rob_sideb)    
+    .install();
+}
+
+unsafe extern "C" fn rob_sideb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 7.0);
 		if macros::is_excute(fighter) {
@@ -30,10 +31,4 @@ unsafe fn rob_sideb(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.1);
-}
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		rob_sideb
-    );
 }

@@ -13,17 +13,17 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		link_fthrow, link_fthrow_eff, link_fthrow_snd, link_fthrow_expr
-    );
+    Agent::new("link")
+    .acmd("game_throwf", link_fthrow)    
+    .acmd("effect_throwf", link_fthrow_eff)    
+    .acmd("sound_throwf", link_fthrow_snd)    
+    .acmd("expression_throwf", link_fthrow_expr)    
+    .install();
 }
-#[acmd_script(
-    agent = "link",
-    script =  "game_throwf",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn link_fthrow(fighter: &mut L2CAgentBase) {
+
+unsafe extern "C" fn link_fthrow(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 	let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
@@ -41,12 +41,7 @@ unsafe fn link_fthrow(fighter: &mut L2CAgentBase) {
 			macros::ATK_HIT_ABS(fighter, *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, Hash40::new("throw"), WorkModule::get_int64(fighter.module_accessor,*FIGHTER_STATUS_THROW_WORK_INT_TARGET_OBJECT), WorkModule::get_int64(fighter.module_accessor,*FIGHTER_STATUS_THROW_WORK_INT_TARGET_HIT_GROUP), WorkModule::get_int64(fighter.module_accessor,*FIGHTER_STATUS_THROW_WORK_INT_TARGET_HIT_NO));
 		}
 }	
-#[acmd_script(
-    agent = "link",
-    script =  "effect_throwf",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn link_fthrow_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn link_fthrow_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 	let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
@@ -56,22 +51,12 @@ unsafe fn link_fthrow_eff(fighter: &mut L2CAgentBase) {
         macros::LAST_EFFECT_SET_RATE(fighter, 1.3);
 	}
 }
-#[acmd_script(
-    agent = "link",
-    script =  "sound_throwf",
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn link_fthrow_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn link_fthrow_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 	let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 }	
-#[acmd_script(
-    agent = "link",
-    script =  "expression_throwf",
-    category = ACMD_EXPRESSION,
-    low_priority)]
-unsafe fn link_fthrow_expr(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn link_fthrow_expr(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
         if macros::is_excute(fighter) {
             VisibilityModule::set_int64(fighter.module_accessor, hash40("shield") as i64, hash40("shield_normal") as i64);

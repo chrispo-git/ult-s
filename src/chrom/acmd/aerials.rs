@@ -13,21 +13,17 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		chrom_uair,
-		chrom_bair,
-		chrom_fair,
-		chrom_nair
-    );
+    Agent::new("chrom")
+    .acmd("game_attackairf", chrom_fair)    
+    .acmd("game_attackairhi", chrom_uair)    
+    .acmd("game_attackairb", chrom_bair)    
+    .acmd("game_attackairn", chrom_nair)    
+    .install();
 }
 				
-#[acmd_script(
-    agent = "chrom",
-    script =  "game_attackairf",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn chrom_fair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn chrom_fair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
@@ -56,12 +52,7 @@ unsafe fn chrom_fair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }	
-#[acmd_script(
-    agent = "chrom",
-    script =  "game_attackairhi",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn chrom_uair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn chrom_uair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 3.0);
 		if macros::is_excute(fighter) {
@@ -84,12 +75,7 @@ unsafe fn chrom_uair(fighter: &mut L2CAgentBase) {
 			CancelModule::enable_cancel(fighter.module_accessor);
 		}
 }	
-#[acmd_script(
-    agent = "chrom",
-    script =  "game_attackairb",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn chrom_bair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn chrom_bair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 3.0);
 		if macros::is_excute(fighter) {
@@ -111,12 +97,7 @@ unsafe fn chrom_bair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }	
-#[acmd_script(
-    agent = "chrom",
-    script =  "game_attackairn",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn chrom_nair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn chrom_nair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 2.0);
 		if macros::is_excute(fighter) {

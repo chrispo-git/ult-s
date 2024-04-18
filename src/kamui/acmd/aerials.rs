@@ -13,17 +13,14 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		corrin_nair
-    );
+    Agent::new("kamui")
+    .acmd("game_attacairn", corrin_nair)    
+    .install();
 }
-#[acmd_script(
-    agent = "kamui",
-    scripts =  ["game_attacairn"],
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn corrin_nair(fighter: &mut L2CAgentBase) {
+
+unsafe extern "C" fn corrin_nair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_KAMUI_GENERATE_ARTICLE_SPEARHAND, false, 0);

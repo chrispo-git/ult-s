@@ -13,18 +13,14 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		gnw_upb
-    );
+    Agent::new("gamewatch")
+    .acmd("game_specialhi", gnw_upb)    
+    .install();
 }
 
-#[acmd_script(
-    agent = "gamewatch",
-    script =  "game_specialhi",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn gnw_upb(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn gnw_upb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 5.0);
 		if macros::is_excute(fighter) {

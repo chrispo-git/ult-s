@@ -13,22 +13,19 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		corrin_jab,
-		corrin_da,
-		corrin_usmash,
-		corrin_usmash_effect,
-		corrin_usmash_expr,
-		corrin_usmash_sound
-    );
+    Agent::new("kamui")
+    .acmd("game_attack11", corrin_jab)    
+    .acmd("game_attackdash", corrin_da)    
+    .acmd("effect_attackhi4", corrin_usmash_effect)    
+    .acmd("sound_attackhi4", corrin_usmash_sound)    
+    .acmd("expression_attackhi4", corrin_usmash_expr)    
+    .acmd("game_attackhi4", corrin_usmash)    
+    .install();
 }	
-#[acmd_script(
-    agent = "kamui",
-    scripts =  ["game_attack11"],
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn corrin_jab(fighter: &mut L2CAgentBase) {
+
+unsafe extern "C" fn corrin_jab(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_KAMUI_GENERATE_ARTICLE_SPEARHAND, false, 0);
@@ -51,12 +48,7 @@ unsafe fn corrin_jab(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }	
-#[acmd_script(
-    agent = "kamui",
-    scripts =  ["game_attackdash"],
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn corrin_da(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn corrin_da(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.75);
 		frame(fighter.lua_state_agent, 12.0);
@@ -95,12 +87,7 @@ unsafe fn corrin_da(fighter: &mut L2CAgentBase) {
 		}
 }		
 
-#[acmd_script(
-    agent = "kamui",
-    scripts =  ["effect_attackhi4"],
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn corrin_usmash_effect(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn corrin_usmash_effect(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 4.0);
 		if macros::is_excute(fighter) {
@@ -118,12 +105,7 @@ unsafe fn corrin_usmash_effect(fighter: &mut L2CAgentBase) {
 			macros::EFFECT_OFF_KIND(fighter, Hash40::new("kamui_attack_line_hi4"), false, false);
 		}
 }
-#[acmd_script(
-    agent = "kamui",
-    scripts =  ["sound_attackhi4"],
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn corrin_usmash_sound(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn corrin_usmash_sound(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 2.0);
 		if macros::is_excute(fighter) {
@@ -144,12 +126,7 @@ unsafe fn corrin_usmash_sound(fighter: &mut L2CAgentBase) {
 			macros::PLAY_SE(fighter, Hash40::new("se_kamui_horn_end"));
 		}
 }	
-#[acmd_script(
-    agent = "kamui",
-    scripts =  ["expression_attackhi4"],
-    category = ACMD_EXPRESSION,
-	low_priority)]
-unsafe fn corrin_usmash_expr(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn corrin_usmash_expr(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			ItemModule::set_have_item_visibility(fighter.module_accessor, false, 0);
@@ -164,12 +141,7 @@ unsafe fn corrin_usmash_expr(fighter: &mut L2CAgentBase) {
 			WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_KAMUI_INSTANCE_WORK_ID_FLAG_REQ_EFFECT_SWORD_AURA);
 		}
 }		
-#[acmd_script(
-    agent = "kamui",
-    scripts =  ["game_attackhi4"],
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn corrin_usmash(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn corrin_usmash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 2);
 		frame(fighter.lua_state_agent, 3.0);

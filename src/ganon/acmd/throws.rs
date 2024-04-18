@@ -13,18 +13,22 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-    ganon_fthrow, ganon_fthrow_eff, ganon_fthrow_sound,
-    
-    ganon_bthrow, ganon_bthrow_eff, ganon_bthrow_sound,
-    
-    ganon_dthrow, ganon_dthrow_eff, ganon_dthrow_sound
-);    
+    Agent::new("ganon")
+    .acmd("game_throwf", ganon_fthrow)    
+    .acmd("effect_throwf", ganon_fthrow_eff)    
+    .acmd("sound_throwf", ganon_fthrow_sound)    
+    .acmd("game_throwb", ganon_bthrow)    
+    .acmd("effect_throwb", ganon_bthrow_eff)    
+    .acmd("sound_throwb", ganon_bthrow_sound)    
+    .acmd("game_throwlw", ganon_dthrow)    
+    .acmd("effect_throwlw", ganon_dthrow_eff)    
+    .acmd("sound_throwlw", ganon_dthrow_sound)    
+    .install(); 
 }
 
-#[acmd_script( agent = "ganon", script = "game_throwf", category = ACMD_GAME, low_priority )]
-unsafe fn ganon_fthrow(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn ganon_fthrow(agent: &mut L2CAgentBase) {
 if macros::is_excute(agent) {
     macros::ATTACK_ABS(agent, *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, 0, 10.0, 35, 70, 0, 35, 0.0, 1.0, *ATTACK_LR_CHECK_F, 0.0, true, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_THROW);
     macros::ATTACK_ABS(agent, *FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, 0, 3.0, 361, 100, 0, 60, 0.0, 1.0, *ATTACK_LR_CHECK_F, 0.0, true, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_THROW);
@@ -35,8 +39,7 @@ if macros::is_excute(agent) {
 }
 }
 
-#[acmd_script( agent = "ganon", script = "effect_throwf", category = ACMD_EFFECT, low_priority )]
-unsafe fn ganon_fthrow_eff(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn ganon_fthrow_eff(agent: &mut L2CAgentBase) {
 /*frame(agent.lua_state_agent, 9.0);
 if macros::is_excute(agent) {
     macros::EFFECT_FOLLOW(agent, Hash40::new("sys_attack_arc"), Hash40::new("top"), -3, 17, 2.5, 0, -45, 50, 0.85, true);
@@ -52,8 +55,7 @@ if macros::is_excute(agent) {
 }
 }
 
-#[acmd_script( agent = "ganon", script = "sound_throwf", category = ACMD_SOUND, low_priority )]
-unsafe fn ganon_fthrow_sound(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn ganon_fthrow_sound(agent: &mut L2CAgentBase) {
 frame(agent.lua_state_agent, 3.0);
 if macros::is_excute(agent) {
     macros::PLAY_SE(agent, Hash40::new("vc_ganon_appeal_s01"));
@@ -65,8 +67,7 @@ if macros::is_excute(agent) {
 }
 }
 
-#[acmd_script( agent = "ganon", script = "game_throwb", category = ACMD_GAME, low_priority )]
-unsafe fn ganon_bthrow(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn ganon_bthrow(agent: &mut L2CAgentBase) {
 if macros::is_excute(agent) {
     macros::ATTACK_ABS(agent, *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, 0, 5.0, 43, 120, 0, 25, 0.0, 1.0, *ATTACK_LR_CHECK_F, 0.0, true, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_THROW);
     macros::ATTACK_ABS(agent, *FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, 0, 3.0, 361, 100, 0, 60, 0.0, 1.0, *ATTACK_LR_CHECK_F, 0.0, true, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_THROW);
@@ -81,8 +82,7 @@ if macros::is_excute(agent) {
 }
 }
 
-#[acmd_script( agent = "ganon", script = "effect_throwb", category = ACMD_EFFECT, low_priority )]
-unsafe fn ganon_bthrow_eff(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn ganon_bthrow_eff(agent: &mut L2CAgentBase) {
 frame(agent.lua_state_agent, 16.0);
 if macros::is_excute(agent) {
     macros::EFFECT(agent, Hash40::new("sys_smash_flash_s"), Hash40::new("throw"), 0, 0, 0, 0, 0, 0, 1.5, 0, 0, 0, 0, 0, 0, true);
@@ -102,8 +102,7 @@ if macros::is_excute(agent) {
 }
 }
 
-#[acmd_script( agent = "ganon", script = "sound_throwb", category = ACMD_SOUND, low_priority )]
-unsafe fn ganon_bthrow_sound(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn ganon_bthrow_sound(agent: &mut L2CAgentBase) {
 frame(agent.lua_state_agent, 7.0);
 if macros::is_excute(agent) {
     macros::PLAY_SE(agent, Hash40::new("vc_ganon_appeal_s01"));
@@ -120,8 +119,7 @@ if macros::is_excute(agent) {
 }
 }
 
-#[acmd_script( agent = "ganon", script = "game_throwlw", category = ACMD_GAME, low_priority )]
-unsafe fn ganon_dthrow(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn ganon_dthrow(agent: &mut L2CAgentBase) {
 if macros::is_excute(agent) {
     macros::ATTACK_ABS(agent, *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, 0, 9.0, 70, 50, 0, 70, 0.0, 1.0, *ATTACK_LR_CHECK_F, 0.0, true, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_THROW);
     macros::ATTACK_ABS(agent, *FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, 0, 3.0, 361, 100, 0, 60, 0.0, 1.0, *ATTACK_LR_CHECK_F, 0.0, true, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_THROW);
@@ -136,8 +134,7 @@ if macros::is_excute(agent) {
 }
 }
 
-#[acmd_script( agent = "ganon", script = "effect_throwlw", category = ACMD_EFFECT, low_priority )]
-unsafe fn ganon_dthrow_eff(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn ganon_dthrow_eff(agent: &mut L2CAgentBase) {
 frame(agent.lua_state_agent, 3.0);
 if macros::is_excute(agent) {
     macros::EFFECT_FOLLOW_NO_STOP(agent, Hash40::new("ganon_engokua_flash"), Hash40::new("throw"), 0, 0, 0, 65, 0, 12, 1.6, true);
@@ -156,8 +153,7 @@ if macros::is_excute(agent) {
 }
 }
 
-#[acmd_script( agent = "ganon", script = "sound_throwlw", category = ACMD_SOUND, low_priority )]
-unsafe fn ganon_dthrow_sound(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn ganon_dthrow_sound(agent: &mut L2CAgentBase) {
 frame(agent.lua_state_agent, 14.0);
 if macros::is_excute(agent) {
     macros::PLAY_SE(agent, Hash40::new("se_common_throw_03"));

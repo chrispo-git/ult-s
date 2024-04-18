@@ -13,17 +13,14 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		mk_usmash
-    );
+    Agent::new("metaknight")
+    .acmd("game_attackhi4", mk_usmash)    
+    .install();
 }
-#[acmd_script(
-    agent = "metaknight",
-    script =  "game_attackhi4",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn mk_usmash(fighter: &mut L2CAgentBase) {
+
+unsafe extern "C" fn mk_usmash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 4.0);
 		if macros::is_excute(fighter) {

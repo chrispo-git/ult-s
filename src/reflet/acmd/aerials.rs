@@ -15,15 +15,14 @@ use smash::phx::Vector2f;
 use crate::util::*;
 use super::*;
 use super::super::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-        robin_nair
-		
-    );
+    Agent::new("reflet")
+    .acmd("game_attackairn", robin_nair)    
+    .install();
 }
 
-#[acmd_script( agent = "reflet", script = "game_attackairn", category = ACMD_GAME, low_priority )]
-unsafe fn robin_nair(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn robin_nair(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 1.0);
     macros::FT_MOTION_RATE(agent, 0.75);
     frame(agent.lua_state_agent, 4.0);

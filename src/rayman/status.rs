@@ -14,83 +14,68 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[status_script(agent = "pikmin", status = FIGHTER_STATUS_KIND_CATCH_PULL, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
-pub unsafe fn main_catch_pull(fighter: &mut L2CFighterCommon) -> L2CValue {
+unsafe extern "C" fn main_catch_pull(fighter: &mut L2CFighterCommon) -> L2CValue {
     fighter.status_CatchPull();
 	0.into() 
 } 
-#[status_script(agent = "pikmin", status = FIGHTER_STATUS_KIND_CATCH_PULL, condition = LUA_SCRIPT_STATUS_FUNC_INIT_STATUS)]
-unsafe fn catch_pull_init(fighter: &mut L2CFighterCommon) -> L2CValue {
+unsafe extern "C" fn catch_pull_init(fighter: &mut L2CFighterCommon) -> L2CValue {
     L2CFighterCommon::sub_catch_pull_uniq_process_init(fighter);
     0.into()
 }
-#[status_script(agent = "pikmin", status = FIGHTER_STATUS_KIND_CATCH_PULL, condition = LUA_SCRIPT_STATUS_FUNC_EXIT_STATUS)]
-unsafe fn catch_pull_exit(fighter: &mut L2CFighterCommon) -> L2CValue {
+unsafe extern "C" fn catch_pull_exit(fighter: &mut L2CFighterCommon) -> L2CValue {
     L2CFighterCommon::sub_catch_pull_uniq_process_exit(fighter);
     0.into()
 }
-#[status_script(agent = "pikmin", status = FIGHTER_STATUS_KIND_CATCH_CUT, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
-pub unsafe fn main_catch_cut(fighter: &mut L2CFighterCommon) -> L2CValue {
+unsafe extern "C" fn main_catch_cut(fighter: &mut L2CFighterCommon) -> L2CValue {
     fighter.status_CatchCut();
 	0.into() 
 } 
-#[status_script(agent = "pikmin", status = FIGHTER_STATUS_KIND_CATCH_CUT, condition = LUA_SCRIPT_STATUS_FUNC_INIT_STATUS)]
-unsafe fn catch_cut_init(fighter: &mut L2CFighterCommon) -> L2CValue {
+unsafe extern "C" fn catch_cut_init(fighter: &mut L2CFighterCommon) -> L2CValue {
     L2CFighterCommon::sub_catch_cut_uniq_process_init(fighter);
     0.into()
 }
-#[status_script(agent = "pikmin", status = FIGHTER_STATUS_KIND_CATCH_WAIT, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
-pub unsafe fn main_catch_wait(fighter: &mut L2CFighterCommon) -> L2CValue {
+unsafe extern "C" fn main_catch_wait(fighter: &mut L2CFighterCommon) -> L2CValue {
     fighter.status_CatchWait();
 	0.into() 
 } 
-#[status_script(agent = "pikmin", status = FIGHTER_STATUS_KIND_CATCH_WAIT, condition = LUA_SCRIPT_STATUS_FUNC_INIT_STATUS)]
-unsafe fn catch_wait_init(fighter: &mut L2CFighterCommon) -> L2CValue {
+unsafe extern "C" fn catch_wait_init(fighter: &mut L2CFighterCommon) -> L2CValue {
     L2CFighterCommon::sub_catch_wait_uniq_process_init(fighter);
     0.into()
 }
-#[status_script(agent = "pikmin", status = FIGHTER_STATUS_KIND_CATCH_WAIT, condition = LUA_SCRIPT_STATUS_FUNC_EXIT_STATUS)]
-unsafe fn catch_wait_exit(fighter: &mut L2CFighterCommon) -> L2CValue {
+unsafe extern "C" fn catch_wait_exit(fighter: &mut L2CFighterCommon) -> L2CValue {
     L2CFighterCommon::sub_catch_wait_uniq_process_exit(fighter);
     0.into()
 }
-#[status_script(agent = "pikmin", status = FIGHTER_STATUS_KIND_CATCH_ATTACK, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
-pub unsafe fn main_catch_attack(fighter: &mut L2CFighterCommon) -> L2CValue {
+unsafe extern "C" fn main_catch_attack(fighter: &mut L2CFighterCommon) -> L2CValue {
     fighter.status_CatchAttack();
 	0.into() 
 } 
-#[status_script(agent = "pikmin", status = FIGHTER_STATUS_KIND_THROW, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
-pub unsafe fn main_throw(fighter: &mut L2CFighterCommon) -> L2CValue {
+unsafe extern "C" fn main_throw(fighter: &mut L2CFighterCommon) -> L2CValue {
     fighter.status_Throw();
 	0.into() 
 } 
-#[status_script(agent = "pikmin", status = FIGHTER_STATUS_KIND_THROW, condition = LUA_SCRIPT_STATUS_FUNC_EXEC_STATUS)]
-pub unsafe fn exec_throw(fighter: &mut L2CFighterCommon) -> L2CValue {
+unsafe extern "C" fn exec_throw(fighter: &mut L2CFighterCommon) -> L2CValue {
 	0.into() 
 } 
-#[status_script(agent = "pikmin", status = FIGHTER_STATUS_KIND_THROW, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_PRE)]
-pub unsafe fn pre_throw(fighter: &mut L2CFighterCommon) -> L2CValue {
+unsafe extern "C" fn pre_throw(fighter: &mut L2CFighterCommon) -> L2CValue {
     fighter.status_pre_Throw();
 	0.into() 
 } 
-#[status_script(agent = "pikmin", status = FIGHTER_STATUS_KIND_THROW, condition = LUA_SCRIPT_STATUS_FUNC_INIT_STATUS)]
-unsafe fn throw_init(fighter: &mut L2CFighterCommon) -> L2CValue {
+unsafe extern "C" fn throw_init(fighter: &mut L2CFighterCommon) -> L2CValue {
     let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
     let is_ray = (WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) >= 120 && WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) <= 127);
     if is_ray {
         L2CFighterCommon::sub_throw_uniq_process_init(fighter);
         0.into()
     } else {
-        original!(fighter)
+        return smashline::original_status(Init, fighter, *FIGHTER_STATUS_KIND_THROW)(fighter);
     }
 }
-#[status_script(agent = "pikmin", status = FIGHTER_STATUS_KIND_THROW, condition = LUA_SCRIPT_STATUS_FUNC_EXIT_STATUS)]
-unsafe fn throw_exit(fighter: &mut L2CFighterCommon) -> L2CValue {
+unsafe extern "C" fn throw_exit(fighter: &mut L2CFighterCommon) -> L2CValue {
     L2CFighterCommon::sub_throw_uniq_process_exit(fighter);
     0.into()
 }
-#[status_script(agent = "pikmin", status = FIGHTER_STATUS_KIND_ATTACK_LW3, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
-pub unsafe fn main_dtilt(fighter: &mut L2CFighterCommon) -> L2CValue {
+unsafe extern "C" fn main_dtilt(fighter: &mut L2CFighterCommon) -> L2CValue {
     let motion_kind = MotionModule::motion_kind(fighter.module_accessor);
     let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
     let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
@@ -98,7 +83,7 @@ pub unsafe fn main_dtilt(fighter: &mut L2CFighterCommon) -> L2CValue {
     let is_ray = (WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) >= 120 && WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) <= 127);
     if is_ray && fighter_kind == *FIGHTER_KIND_PIKMIN { //rayman slots
         if !IS_SLIDE_MOVE[ENTRY_ID] && motion_kind != hash40("slide_attack_lw"){
-            original!(fighter)
+            return smashline::original_status(Main, fighter, *FIGHTER_STATUS_KIND_ATTACK_LW3)(fighter);
         } else {
             if motion_kind != hash40("slide_attack_lw") && motion_kind != hash40("slide_stand") {
                 MotionModule::change_motion(fighter.module_accessor, Hash40::new("slide_attack_lw"), -1.0, 1.0, false, 0.0, false, false);
@@ -109,11 +94,10 @@ pub unsafe fn main_dtilt(fighter: &mut L2CFighterCommon) -> L2CValue {
         }
     }
     else{
-        original!(fighter)
+        return smashline::original_status(Main, fighter, *FIGHTER_STATUS_KIND_ATTACK_LW3)(fighter);
     }
 } 
-#[status_script(agent = "pikmin", status = FIGHTER_STATUS_KIND_ATTACK, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
-pub unsafe fn main_jab(fighter: &mut L2CFighterCommon) -> L2CValue {
+unsafe extern "C" fn main_jab(fighter: &mut L2CFighterCommon) -> L2CValue {
     let motion_kind = MotionModule::motion_kind(fighter.module_accessor);
     let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
     let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
@@ -121,7 +105,7 @@ pub unsafe fn main_jab(fighter: &mut L2CFighterCommon) -> L2CValue {
     let is_ray = (WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) >= 120 && WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) <= 127);
     if is_ray && fighter_kind == *FIGHTER_KIND_PIKMIN { //rayman slots
         if !IS_SLIDE_MOVE[ENTRY_ID] && motion_kind != hash40("slide_attack"){
-            original!(fighter)
+            return smashline::original_status(Main, fighter, *FIGHTER_STATUS_KIND_ATTACK)(fighter);
         } else {
             if motion_kind != hash40("slide_attack") {
                 MotionModule::change_motion(fighter.module_accessor, Hash40::new("slide_attack"), -1.0, 1.0, false, 0.0, false, false);
@@ -135,11 +119,10 @@ pub unsafe fn main_jab(fighter: &mut L2CFighterCommon) -> L2CValue {
         }
     }
     else{
-        original!(fighter)
+        return smashline::original_status(Main, fighter, *FIGHTER_STATUS_KIND_ATTACK)(fighter);
     }
 } 
-#[status_script(agent = "pikmin", status = FIGHTER_STATUS_KIND_JUMP_SQUAT, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
-pub unsafe fn main_jumpsquat(fighter: &mut L2CFighterCommon) -> L2CValue {
+unsafe extern "C" fn main_jumpsquat(fighter: &mut L2CFighterCommon) -> L2CValue {
     let motion_kind = MotionModule::motion_kind(fighter.module_accessor);
     let end_frame = MotionModule::end_frame(fighter.module_accessor);
     let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
@@ -148,20 +131,19 @@ pub unsafe fn main_jumpsquat(fighter: &mut L2CFighterCommon) -> L2CValue {
     let is_ray = (WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) >= 120 && WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) <= 127);
     if is_ray && fighter_kind == *FIGHTER_KIND_PIKMIN { //rayman slots
         if !IS_SLIDE_MOVE[ENTRY_ID] && motion_kind != hash40("slide_jump_squat"){
-            original!(fighter)
+            return smashline::original_status(Main, fighter, *FIGHTER_STATUS_KIND_JUMP_SQUAT)(fighter);
         } else {
             if motion_kind != hash40("slide_jump_squat") {
                 MotionModule::change_motion(fighter.module_accessor, Hash40::new("slide_jump_squat"), -1.0, (end_frame/3.0)*2.0, false, 0.0, false, false);
             }
-            original!(fighter)
+            return smashline::original_status(Main, fighter, *FIGHTER_STATUS_KIND_JUMP_SQUAT)(fighter);
         }
     }
     else{
-        original!(fighter)
+        return smashline::original_status(Main, fighter, *FIGHTER_STATUS_KIND_JUMP_SQUAT)(fighter);
     }
 } 
-#[status_script(agent = "pikmin", status = FIGHTER_STATUS_KIND_FINAL, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
-pub unsafe fn main_final(fighter: &mut L2CFighterCommon) -> L2CValue {
+unsafe extern "C" fn main_final(fighter: &mut L2CFighterCommon) -> L2CValue {
     let motion_kind = MotionModule::motion_kind(fighter.module_accessor);
     let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
     let frame = MotionModule::frame(fighter.module_accessor);
@@ -282,11 +264,10 @@ pub unsafe fn main_final(fighter: &mut L2CFighterCommon) -> L2CValue {
         0.into() 
     }
     else{
-        original!(fighter)
+        return smashline::original_status(Main, fighter, *FIGHTER_STATUS_KIND_FINAL)(fighter);
     }
 } 
-#[status_script(agent = "pikmin", status = FIGHTER_STATUS_KIND_SPECIAL_LW, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
-pub unsafe fn main_downb(fighter: &mut L2CFighterCommon) -> L2CValue {
+unsafe extern "C" fn main_downb(fighter: &mut L2CFighterCommon) -> L2CValue {
     let motion_kind = MotionModule::motion_kind(fighter.module_accessor);
     let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
     let frame = MotionModule::frame(fighter.module_accessor);
@@ -371,11 +352,10 @@ pub unsafe fn main_downb(fighter: &mut L2CFighterCommon) -> L2CValue {
         0.into() 
     }
     else{
-        original!(fighter)
+        return smashline::original_status(Main, fighter, *FIGHTER_STATUS_KIND_SPECIAL_LW)(fighter);
     }
 } 
-#[status_script(agent = "pikmin", status = FIGHTER_STATUS_KIND_ATTACK_HI3, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
-pub unsafe fn main_utilt(fighter: &mut L2CFighterCommon) -> L2CValue {
+unsafe extern "C" fn main_utilt(fighter: &mut L2CFighterCommon) -> L2CValue {
     let motion_kind = MotionModule::motion_kind(fighter.module_accessor);
     let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
     let frame = MotionModule::frame(fighter.module_accessor);
@@ -404,13 +384,12 @@ pub unsafe fn main_utilt(fighter: &mut L2CFighterCommon) -> L2CValue {
         0.into() 
     }
     else{
-        original!(fighter)
+        return smashline::original_status(Main, fighter, *FIGHTER_STATUS_KIND_ATTACK_HI3)(fighter);
     }
 } 
 
 
-#[status_script(agent = "pikmin", status = FIGHTER_STATUS_KIND_ATTACK_HI3, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_PRE)]
-unsafe fn utilt_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
+unsafe extern "C" fn utilt_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
     let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 	let fighter_kind = smash::app::utility::get_kind(boma);
     let is_ray = (WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) >= 120 && WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) <= 127);
@@ -445,11 +424,10 @@ unsafe fn utilt_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
         0.into()
     }
     else{
-        original!(fighter)
+        return smashline::original_status(Pre, fighter, *FIGHTER_STATUS_KIND_ATTACK_HI3)(fighter);
     }
 }
-#[status_script(agent = "kirby", status = FIGHTER_KIRBY_STATUS_KIND_PIKMIN_SPECIAL_N, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_PRE)]
-unsafe fn kirby_copy_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
+unsafe extern "C" fn kirby_copy_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
     let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 	let fighter_kind = smash::app::utility::get_kind(boma);
     let is_ray = (WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) >= 120 && WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) <= 127);
@@ -484,11 +462,10 @@ unsafe fn kirby_copy_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
         0.into()
     }
     else{
-        original!(fighter)
+        return smashline::original_status(Pre, fighter, *FIGHTER_KIRBY_STATUS_KIND_PIKMIN_SPECIAL_N)(fighter);
     }
 }
-#[status_script(agent = "pikmin", status = FIGHTER_STATUS_KIND_SPECIAL_LW, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_PRE)]
-unsafe fn downb_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
+unsafe extern "C" fn downb_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
     let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 	let fighter_kind = smash::app::utility::get_kind(boma);
     let is_ray = (WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) >= 120 && WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) <= 127);
@@ -523,32 +500,37 @@ unsafe fn downb_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
         0.into()
     }
     else{
-        original!(fighter)
+        return smashline::original_status(Pre, fighter, *FIGHTER_STATUS_KIND_SPECIAL_LW)(fighter);
     }
 }
 
 pub fn install() {
-    install_status_scripts!(
-        utilt_pre, main_utilt, //Puts Rayman in the air for utilt
+    Agent::new("pikmin")
+        .status(Main, *FIGHTER_STATUS_KIND_CATCH_PULL, main_catch_pull)
+        .status(Init, *FIGHTER_STATUS_KIND_CATCH_PULL, catch_pull_init)
+        .status(Exit, *FIGHTER_STATUS_KIND_CATCH_PULL, catch_pull_exit)
+        .status(Main, *FIGHTER_STATUS_KIND_CATCH_CUT, main_catch_cut)
+        .status(Init, *FIGHTER_STATUS_KIND_CATCH_CUT, catch_cut_init)
+        .status(Main, *FIGHTER_STATUS_KIND_CATCH_WAIT, main_catch_wait)
+        .status(Init, *FIGHTER_STATUS_KIND_CATCH_WAIT, catch_wait_init)
+        .status(Exit, *FIGHTER_STATUS_KIND_CATCH_WAIT, catch_wait_exit)
+        .status(Main, *FIGHTER_STATUS_KIND_CATCH_ATTACK, main_catch_attack)
+        .status(Main, *FIGHTER_STATUS_KIND_THROW, main_throw)
+        .status(Exec, *FIGHTER_STATUS_KIND_THROW, exec_throw)
+        .status(Pre, *FIGHTER_STATUS_KIND_THROW, pre_throw)
+        .status(Init, *FIGHTER_STATUS_KIND_THROW, throw_init)
+        .status(Exit, *FIGHTER_STATUS_KIND_THROW, throw_exit)
+        .status(Main, *FIGHTER_STATUS_KIND_ATTACK_LW3, main_dtilt)
+        .status(Main, *FIGHTER_STATUS_KIND_ATTACK, main_jab)
+        .status(Main, *FIGHTER_STATUS_KIND_JUMP_SQUAT, main_jumpsquat)
+        .status(Main, *FIGHTER_STATUS_KIND_FINAL, main_final)
+        .status(Main, *FIGHTER_STATUS_KIND_SPECIAL_LW, main_downb)
+        .status(Main, *FIGHTER_STATUS_KIND_ATTACK_HI3, main_utilt)
+        .status(Pre, *FIGHTER_STATUS_KIND_ATTACK_HI3, utilt_pre)
+        .status(Pre, *FIGHTER_STATUS_KIND_SPECIAL_LW, downb_pre)
+        .install();
 
-        //Should fix olimar related rayman grab and throw bugs
-        main_catch_attack, 
-        main_catch_cut, catch_cut_init,
-        main_catch_pull, catch_pull_exit, catch_pull_init,
-        main_catch_wait, catch_wait_exit, catch_wait_init,
-        main_throw, exec_throw, throw_init, throw_exit,
-
-        //Slide Shit
-        main_jab, main_dtilt, 
-        main_jumpsquat,
-
-        //Downb
-        main_downb, downb_pre,
-
-        //Final
-        main_final,
-
-        //Kirby
-        kirby_copy_pre
-    );
+    Agent::new("kirby")
+        .status(Pre, *FIGHTER_KIRBY_STATUS_KIND_PIKMIN_SPECIAL_N, kirby_copy_pre)
+        .install();
 }

@@ -15,12 +15,14 @@ use crate::util::*;
 use super::*;
 use super::super::*;
 
-#[acmd_script(
-    agent = "reflet",
-    script =  "game_attacklw3",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn robin_dtilt(fighter: &mut L2CAgentBase) {
+pub fn install() {
+    Agent::new("reflet")
+    .acmd("game_attacklw3", robin_dtilt)    
+    .acmd("game_attacks3", robin_ftilt)    
+    .install();
+}
+
+unsafe extern "C" fn robin_dtilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 7.0);
 		if macros::is_excute(fighter) {
@@ -31,12 +33,7 @@ unsafe fn robin_dtilt(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }		
-#[acmd_script(
-    agent = "reflet",
-    script =  "game_attacks3",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn robin_ftilt(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn robin_ftilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 9.0);
 		if macros::is_excute(fighter) {
@@ -46,11 +43,4 @@ unsafe fn robin_ftilt(fighter: &mut L2CAgentBase) {
 		if macros::is_excute(fighter) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
-}		
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		robin_dtilt,
-        robin_ftilt
-    );
-}
+}	

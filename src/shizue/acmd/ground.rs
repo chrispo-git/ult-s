@@ -15,11 +15,14 @@ use crate::util::*;
 use super::*;
 use super::super::*;
 
-#[acmd_script(
-    agent = "shizue",
-    script =  "game_attack11",
-    category = ACMD_GAME, low_priority )]
-unsafe fn isa_jab(fighter: &mut L2CAgentBase) {
+pub fn install() {
+    Agent::new("shizue")
+    .acmd("game_attack11", isa_jab)    
+    .acmd("game_attackdash", isa_da)    
+    .install();
+}
+
+unsafe extern "C" fn isa_jab(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_SHIZUE_GENERATE_ARTICLE_PICOPICOHAMMER, false, 0);
@@ -40,11 +43,7 @@ unsafe fn isa_jab(fighter: &mut L2CAgentBase) {
 		}
 }		
 
-#[acmd_script(
-    agent = "shizue",
-    script =  "game_attackdash",
-    category = ACMD_GAME, low_priority )]
-unsafe fn isa_da(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn isa_da(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 1.0);
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.75);
@@ -73,11 +72,4 @@ unsafe fn isa_da(fighter: &mut L2CAgentBase) {
 		if macros::is_excute(fighter) {
 			ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_SHIZUE_GENERATE_ARTICLE_POMPON,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
 		}
-}
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		isa_jab,
-        isa_da
-    );
 }

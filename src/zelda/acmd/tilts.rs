@@ -14,12 +14,13 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[acmd_script(
-    agent = "zelda",
-    script =  "game_attacklw3",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn zelda_dtilt(fighter: &mut L2CAgentBase) {
+pub fn install() {
+    Agent::new("zelda")
+    .acmd("game_attacklw3", zelda_dtilt)    
+    .install();
+}
+
+unsafe extern "C" fn zelda_dtilt(fighter: &mut L2CAgentBase) {
         let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 5.0);
 		if macros::is_excute(fighter) {
@@ -31,10 +32,4 @@ unsafe fn zelda_dtilt(fighter: &mut L2CAgentBase) {
 		if macros::is_excute(fighter) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
-}		
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		zelda_dtilt
-    );
-}
+}	

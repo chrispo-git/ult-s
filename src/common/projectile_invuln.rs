@@ -5,8 +5,8 @@ use smash::app::lua_bind::*;
 use smashline::*;
 use smash_script::*;
 use crate::util::*;
-#[fighter_frame_callback]
-pub fn projectile_invuln_master(fighter : &mut L2CFighterCommon) {
+
+unsafe extern "C" fn projectile_invuln_master(fighter : &mut L2CFighterCommon) {
     unsafe {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
@@ -136,5 +136,7 @@ pub fn projectile_invuln_master(fighter : &mut L2CFighterCommon) {
 	}
 }
 pub fn install() {
-    smashline::install_agent_frame_callbacks!(projectile_invuln_master);
+    Agent::new("fighter")
+	.on_line(Main, projectile_invuln_master)
+	.install();
 }

@@ -13,11 +13,14 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-	smashline::install_agent_frame_callbacks!(terry_frame);
+	Agent::new("dolly")
+    .on_line(Main, terry_frame)
+    .install();
 }
-#[fighter_frame_callback]
-pub fn terry_frame(fighter : &mut L2CFighterCommon) {
+
+unsafe extern "C" fn terry_frame(fighter : &mut L2CFighterCommon) {
     unsafe {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
@@ -26,7 +29,7 @@ pub fn terry_frame(fighter : &mut L2CFighterCommon) {
 		stick_x *= PostureModule::lr(boma);
 		let fighter_kind = smash::app::utility::get_kind(boma);
         
-		if fighter_kind == *FIGHTER_KIND_DOLLY && is_default(boma){
+		if is_default(boma){
 			if [*FIGHTER_DOLLY_STATUS_KIND_SPECIAL_B].contains(&status_kind) && [*FIGHTER_DOLLY_STATUS_KIND_SPECIAL_B_COMMAND].contains(&status_kind) == false {
 				PostureModule::reverse_lr(boma);
 				PostureModule::update_rot_y_lr(boma);

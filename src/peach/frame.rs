@@ -14,8 +14,17 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[fighter_frame( agent = FIGHTER_KIND_PEACH )]
-fn peach_frame(fighter: &mut L2CFighterCommon) {
+pub fn install() {
+    Agent::new("peach")
+    .on_line(Main, peach_frame)
+    .install();
+
+	Agent::new("kirby")
+	.on_line(Main, kirby_frame)
+    .install();
+}
+
+unsafe extern "C" fn peach_frame(fighter: &mut L2CFighterCommon) {
     unsafe {
         //println!("It'sa me, Mario, wahoooooooo!");
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
@@ -39,8 +48,7 @@ fn peach_frame(fighter: &mut L2CFighterCommon) {
 		
     }
 }
-#[fighter_frame( agent = FIGHTER_KIND_KIRBY )]
-fn kirby_frame(fighter: &mut L2CFighterCommon) {
+unsafe extern "C" fn kirby_frame(fighter: &mut L2CFighterCommon) {
     unsafe {
         //println!("It'sa me, Mario, wahoooooooo!");
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
@@ -61,11 +69,4 @@ fn kirby_frame(fighter: &mut L2CFighterCommon) {
 		};
 		
     }
-}
-
-pub fn install() {
-    smashline::install_agent_frames!(
-        peach_frame,
-		kirby_frame
-    );
 }

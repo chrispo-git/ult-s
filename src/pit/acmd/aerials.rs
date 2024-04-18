@@ -14,13 +14,15 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
+pub fn install() {
+    Agent::new("pit")
+    .acmd("game_attackairf", pit_fair)    
+    .acmd("game_attackairhi", pit_uair)    
+    .acmd("game_attackairlw", pit_dair)    
+    .install();
+}
 
-#[acmd_script(
-    agent = "pit",
-    script =  "game_attackairf",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn pit_fair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn pit_fair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
@@ -50,12 +52,7 @@ unsafe fn pit_fair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }		
-#[acmd_script(
-    agent = "pit",
-    script =  "game_attackairhi",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn pit_uair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn pit_uair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 1.0);
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.818);
@@ -94,12 +91,7 @@ unsafe fn pit_uair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }		
-#[acmd_script(
-    agent = "pit",
-    script =  "game_attackairlw",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn pit_dair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn pit_dair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 7.0);
 		if macros::is_excute(fighter) {
@@ -127,11 +119,3 @@ unsafe fn pit_dair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }		
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-        pit_fair,
-        pit_uair,
-        pit_dair
-    );
-}

@@ -14,12 +14,20 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[acmd_script(
-    agent = "sheik",
-    script =  "game_attackairb",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn sheik_bair(fighter: &mut L2CAgentBase) {
+pub fn install() {
+    Agent::new("sheik")
+    .acmd("game_attackairb", sheik_bair)    
+    .acmd("game_attackairf", sheik_fair)    
+    .acmd("game_attackairhi", sheik_uair)    
+    .acmd("game_attackairlw", sheik_dair)    
+    .acmd("effect_attackairlw", sheik_dair_eff)    
+    .acmd("sound_attackairlw", sheik_dair_snd)    
+    .acmd("game_landingairlw", sheik_dair_land)    
+    .acmd("sound_landingairlw", sheik_dair_land_snd)    
+    .install();
+}
+
+unsafe extern "C" fn sheik_bair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 4.0);
 		if macros::is_excute(fighter) {
@@ -43,12 +51,7 @@ unsafe fn sheik_bair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }		
-#[acmd_script(
-    agent = "sheik",
-    script =  "game_attackairf",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn sheik_fair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sheik_fair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 5.0);
 		if macros::is_excute(fighter) {
@@ -70,12 +73,7 @@ unsafe fn sheik_fair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }		
-#[acmd_script(
-    agent = "sheik",
-    script =  "game_attackairhi",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn sheik_uair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sheik_uair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 4.0);
 		if macros::is_excute(fighter) {
@@ -101,8 +99,7 @@ unsafe fn sheik_uair(fighter: &mut L2CAgentBase) {
 		}
 }		
 
-#[acmd_script( agent = "sheik", script = "game_attackairlw", category = ACMD_GAME, low_priority )]
-unsafe fn sheik_dair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sheik_dair(fighter: &mut L2CAgentBase) {
 	frame(fighter.lua_state_agent, 1.0);
 	macros::FT_MOTION_RATE(fighter, 0.5);
     frame(fighter.lua_state_agent, 3.0);
@@ -132,15 +129,13 @@ unsafe fn sheik_dair(fighter: &mut L2CAgentBase) {
         WorkModule::off_flag(fighter.module_accessor, *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
     }
 }
-#[acmd_script( agent = "sheik", script = "effect_attackairlw", category = ACMD_EFFECT, low_priority )]
-unsafe fn sheik_dair_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sheik_dair_eff(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 13.0);
     if macros::is_excute(fighter) {
         macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_attack_line_b"), Hash40::new("top"), 0, 13, -2.5, 78, 0, 0, 1.1, true);
     }
 }
-#[acmd_script( agent = "sheik", script = "sound_attackairlw", category = ACMD_SOUND, low_priority )]
-unsafe fn sheik_dair_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sheik_dair_snd(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 14.0);
     if macros::is_excute(fighter) {
         macros::PLAY_SEQUENCE(fighter, Hash40::new("seq_sheik_rnd_attack"));
@@ -148,24 +143,12 @@ unsafe fn sheik_dair_snd(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script( agent = "sheik", script = "game_landingairlw", category = ACMD_GAME, low_priority )]
-unsafe fn sheik_dair_land(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sheik_dair_land(fighter: &mut L2CAgentBase) {
     
 }
-#[acmd_script( agent = "sheik", script = "sound_landingairlw", category = ACMD_SOUND, low_priority )]
-unsafe fn sheik_dair_land_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sheik_dair_land_snd(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 2.0);
     if macros::is_excute(fighter) {
 		macros::PLAY_LANDING_SE(fighter, Hash40::new("se_sheik_landing02"));
     }
-}
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		sheik_bair,
-        sheik_fair,
-        sheik_uair,
-        sheik_dair, sheik_dair_eff, sheik_dair_snd,
-        sheik_dair_land, sheik_dair_land_snd
-    );
 }

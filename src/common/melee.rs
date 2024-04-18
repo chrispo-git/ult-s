@@ -22,8 +22,7 @@ static mut DIR_MULT : f32 = 57.295776842880464966688235343549; //Very fun number
 
 
 
-#[fighter_frame_callback]
-pub fn melee_hat(fighter : &mut L2CFighterCommon) {
+unsafe extern "C" fn melee_hat(fighter : &mut L2CFighterCommon) {
     unsafe {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
@@ -152,7 +151,7 @@ pub fn melee_hat(fighter : &mut L2CFighterCommon) {
 
 
 pub fn install() {
-    smashline::install_agent_frame_callbacks!(
-		melee_hat
-	);
+    Agent::new("fighter")
+	.on_line(Main, melee_hat)
+	.install();
 }

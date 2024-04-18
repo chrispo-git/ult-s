@@ -13,19 +13,16 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		fox_usmash,
-		fox_jab1,
-		fox_jab2
-    );
+    Agent::new("fox")
+    .acmd("game_attack11", fox_jab1)    
+    .acmd("game_attack12", fox_jab2)    
+    .acmd("game_attackhi4", fox_usmash)    
+    .install();
 }
-#[acmd_script(
-    agent = "fox",
-    script =  "game_attack11",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn fox_jab1(fighter: &mut L2CAgentBase) {
+
+unsafe extern "C" fn fox_jab1(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 2.0);
 		if macros::is_excute(fighter) {
@@ -51,12 +48,7 @@ unsafe fn fox_jab1(fighter: &mut L2CAgentBase) {
 			WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_FLAG_ENABLE_RESTART);
 		}
 }
-#[acmd_script(
-    agent = "fox",
-    script =  "game_attack12",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn fox_jab2(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn fox_jab2(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 2.0);
 		if macros::is_excute(fighter) {
@@ -78,12 +70,7 @@ unsafe fn fox_jab2(fighter: &mut L2CAgentBase) {
 		}
 }
 
-#[acmd_script(
-    agent = "fox",
-    script =  "game_attackhi4",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn fox_usmash(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn fox_usmash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	if StatusModule::situation_kind(fighter.module_accessor) != *SITUATION_KIND_AIR {
 				frame(fighter.lua_state_agent, 3.0);

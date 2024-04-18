@@ -15,12 +15,7 @@ use crate::util::*;
 use super::*;
 use super::super::*;
 
-#[acmd_script(
-    agent = "murabito",
-    script =  "game_throwlwtoad",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn toad_dthrow(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn toad_dthrow(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			macros::FT_LEAVE_NEAR_OTTOTTO(fighter, -1, 1);
@@ -42,12 +37,7 @@ unsafe fn toad_dthrow(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 	}
-#[acmd_script(
-    agent = "murabito",
-    script =  "effect_throwlwtoad",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn toad_dthrow_eff(fighter: &mut L2CAgentBase) {
+	unsafe extern "C" fn toad_dthrow_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 17.0);
 		if macros::is_excute(fighter) {
@@ -66,12 +56,7 @@ unsafe fn toad_dthrow_eff(fighter: &mut L2CAgentBase) {
 			macros::LANDING_EFFECT(fighter, Hash40::new("sys_landing_smoke_s"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
 		}
 	}
-#[acmd_script(
-    agent = "murabito",
-    script =  "game_throwbtoad",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn toad_bthrow(fighter: &mut L2CAgentBase) {
+	unsafe extern "C" fn toad_bthrow(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, /*ID*/ 0, /*Damage*/ 11.0, /*Angle*/ 45, /*KBG*/ 66, /*FKB*/ 0, /*BKB*/ 70, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
@@ -91,12 +76,7 @@ unsafe fn toad_bthrow(fighter: &mut L2CAgentBase) {
 			macros::ATK_HIT_ABS(fighter, *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, Hash40::new("throw"), WorkModule::get_int64(fighter.module_accessor,*FIGHTER_STATUS_THROW_WORK_INT_TARGET_OBJECT), WorkModule::get_int64(fighter.module_accessor,*FIGHTER_STATUS_THROW_WORK_INT_TARGET_HIT_GROUP), WorkModule::get_int64(fighter.module_accessor,*FIGHTER_STATUS_THROW_WORK_INT_TARGET_HIT_NO));
 		}
 	}
-#[acmd_script(
-    agent = "murabito",
-    script =  "effect_throwbtoad",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn toad_bthrow_eff(fighter: &mut L2CAgentBase) {
+	unsafe extern "C" fn toad_bthrow_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 7.0);
 		if macros::is_excute(fighter) {
@@ -116,12 +96,7 @@ unsafe fn toad_bthrow_eff(fighter: &mut L2CAgentBase) {
 			macros::EFFECT(fighter, Hash40::new("sys_smash_flash_s"), Hash40::new("throw"), 0, 0, 0, 0, 0, 0, 1.5, 0, 0, 0, 0, 0, 0, true);
 		}
 	}
-#[acmd_script(
-    agent = "murabito",
-    script =  "game_throwhitoad",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn toad_uthrow(fighter: &mut L2CAgentBase) {
+	unsafe extern "C" fn toad_uthrow(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, /*ID*/ 0, /*Damage*/ 10.0, /*Angle*/ 90, /*KBG*/ 34, /*FKB*/ 0, /*BKB*/ 114, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
@@ -140,12 +115,7 @@ unsafe fn toad_uthrow(fighter: &mut L2CAgentBase) {
 			ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_MURABITO_GENERATE_ARTICLE_WEEDS,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
 		}
 	}
-#[acmd_script(
-    agent = "murabito",
-    script =  "effect_throwhitoad",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn toad_uthrow_eff(fighter: &mut L2CAgentBase) {
+	unsafe extern "C" fn toad_uthrow_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 3.0);
 		if macros::is_excute(fighter) {
@@ -160,12 +130,7 @@ unsafe fn toad_uthrow_eff(fighter: &mut L2CAgentBase) {
             macros::EFFECT(fighter, Hash40::new("sys_erace_smoke"), Hash40::new("top"), 11, 1, 0, 0, 0, 0, 2.0, 0, 0, 0, 0, 0, 0, false);
         }
 	}
-#[acmd_script(
-    agent = "murabito",
-    script =  "sound_throwhitoad",
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn toad_uthrow_snd(fighter: &mut L2CAgentBase) {
+	unsafe extern "C" fn toad_uthrow_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 3.0);
 		if macros::is_excute(fighter) {
@@ -178,12 +143,7 @@ unsafe fn toad_uthrow_snd(fighter: &mut L2CAgentBase) {
             macros::PLAY_SE(fighter, Hash40::new("se_common_throw_03"));
         }
 	}
-#[acmd_script(
-    agent = "murabito",
-    script =  "game_throwftoad",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn toad_fthrow(fighter: &mut L2CAgentBase) {
+	unsafe extern "C" fn toad_fthrow(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, /*ID*/ 0,  /*Damage*/ 8.0, /*Angle*/ 35, /*KBG*/ 5, /*FKB*/ 0, /*BKB*/ 80, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
@@ -199,12 +159,7 @@ unsafe fn toad_fthrow(fighter: &mut L2CAgentBase) {
 			macros::ATK_HIT_ABS(fighter, *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, Hash40::new("throw"), WorkModule::get_int64(fighter.module_accessor,*FIGHTER_STATUS_THROW_WORK_INT_TARGET_OBJECT), WorkModule::get_int64(fighter.module_accessor,*FIGHTER_STATUS_THROW_WORK_INT_TARGET_HIT_GROUP), WorkModule::get_int64(fighter.module_accessor,*FIGHTER_STATUS_THROW_WORK_INT_TARGET_HIT_NO));
 		}
 	}
-#[acmd_script(
-    agent = "murabito",
-    script =  "effect_throwftoad",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn toad_fthrow_eff(fighter: &mut L2CAgentBase) {
+	unsafe extern "C" fn toad_fthrow_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 28.0);
 		if macros::is_excute(fighter) {
@@ -215,12 +170,7 @@ unsafe fn toad_fthrow_eff(fighter: &mut L2CAgentBase) {
 			macros::EFFECT(fighter, Hash40::new("sys_smash_flash"), Hash40::new("haver"), -2, 5, 0, 0, 0, 0, 0.8, 0, 0, 0, 0, 0, 0, true);
 		}
 	}
-#[acmd_script(
-    agent = "murabito",
-    script =  "sound_throwftoad",
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn toad_fthrow_snd(fighter: &mut L2CAgentBase) {
+	unsafe extern "C" fn toad_fthrow_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 30.0);
 		if macros::is_excute(fighter) {
@@ -238,10 +188,16 @@ unsafe fn toad_fthrow_snd(fighter: &mut L2CAgentBase) {
 	}
 
 pub fn install() {
-    smashline::install_acmd_scripts!(
-        toad_dthrow, toad_dthrow_eff, 
-        toad_bthrow, toad_bthrow_eff, 
-        toad_uthrow, toad_uthrow_eff, toad_uthrow_snd,
-        toad_fthrow, toad_fthrow_eff, toad_fthrow_snd
-    );
+	Agent::new("murabito")
+		.game_acmd("game_throwlwtoad", toad_dthrow)
+		.effect_acmd("effect_throwlwtoad", toad_dthrow_eff)
+		.game_acmd("game_throwbtoad", toad_bthrow)
+		.effect_acmd("effect_throwbtoad", toad_bthrow_eff)
+		.game_acmd("game_throwhitoad", toad_uthrow)
+		.effect_acmd("effect_throwhitoad", toad_uthrow_eff)
+		.sound_acmd("sound_throwhitoad", toad_uthrow_snd)
+		.game_acmd("game_throwftoad", toad_fthrow)
+		.effect_acmd("effect_throwftoad", toad_fthrow_eff)
+		.sound_acmd("sound_throwftoad", toad_fthrow_snd)
+		.install();
 }

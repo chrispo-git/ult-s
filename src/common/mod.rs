@@ -13,6 +13,9 @@ mod command;
 mod cancel;
 mod training;
 
+pub static mut IS_GLOW: bool = false;
+pub static mut DI_DIR: i32 = 0;
+
 pub fn install() {
     hitstun::install();
     dacus::install();

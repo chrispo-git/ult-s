@@ -15,14 +15,13 @@ use crate::util::*;
 use super::*;
 
 pub fn install() {
-    smashline::install_agent_frames!(
-        bayo_frame
-    );
+    Agent::new("bayonetta")
+	.on_line(Main, bayo_frame)
+	.install();
 }
 
 
-#[fighter_frame( agent = FIGHTER_KIND_BAYONETTA )]
-fn bayo_frame(fighter: &mut L2CFighterCommon) {
+unsafe extern "C" fn bayo_frame(fighter: &mut L2CFighterCommon) {
     unsafe {
 		let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 		if is_default(boma) {

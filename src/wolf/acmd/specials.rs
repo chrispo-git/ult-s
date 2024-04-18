@@ -14,8 +14,7 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-/*#[acmd_script( agent = "wolf", script = "game_specialsend", category = ACMD_GAME, low_priority )]
-unsafe fn wolf_flash(fighter: &mut L2CAgentBase) {
+/*unsafe extern "C" fn wolf_flash(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 2.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, 0, 0, Hash40::new("top"), 20.0, 270, 100, 0, 20, 4.0, 0.0, 5.5, 5.5, None, None, None, 1.5, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_A, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_elec"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_MAGIC, *ATTACK_REGION_PUNCH);
@@ -35,8 +34,7 @@ unsafe fn wolf_flash(fighter: &mut L2CAgentBase) {
     }
 }*/
 
-/*#[acmd_script( agent = "wolf", script = "game_specialairsend", category = ACMD_GAME, low_priority )]
-unsafe fn wolf_air_flash(fighter: &mut L2CAgentBase) {
+/*unsafe extern "C" fn wolf_air_flash(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 2.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, 0, 0, Hash40::new("top"), 20.0, 270, 100, 0, 20, 4.0, 0.0, 5.5, 5.5, None, None, None, 1.5, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_A, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_elec"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_MAGIC, *ATTACK_REGION_PUNCH);
@@ -57,7 +55,5 @@ unsafe fn wolf_air_flash(fighter: &mut L2CAgentBase) {
 }*/
 
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		/*wolf_flash, wolf_air_flash*/
-    );
+    
 }

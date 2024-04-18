@@ -13,17 +13,14 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-	smashline::install_acmd_scripts!(
-		mythra_dashgrab
-	);
+	Agent::new("elight")
+    .acmd("game_catchdash", mythra_dashgrab)    
+    .install();
 }
-#[acmd_script(
-    agent = "elight",
-    script =  "game_catchdash",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn mythra_dashgrab(fighter: &mut L2CAgentBase) {
+
+unsafe extern "C" fn mythra_dashgrab(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 11.0);
 		if macros::is_excute(fighter) {

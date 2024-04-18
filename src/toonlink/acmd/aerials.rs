@@ -14,12 +14,18 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[acmd_script(
-    agent = "toonlink",
-    script =  "game_attackairb",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn tink_bair(fighter: &mut L2CAgentBase) {
+pub fn install() {
+    Agent::new("toonlink")
+    .acmd("game_attackairb", tink_bair)    
+    .acmd("game_attackairf", tink_fair)    
+    .acmd("game_attackairn", tink_nair)    
+    .acmd("game_attackairhi", tink_uair)    
+    .acmd("effect_attackairhi", tink_uair_eff)    
+    .acmd("sound_attackairhi", tink_uair_snd)    
+    .install();
+}
+
+unsafe extern "C" fn tink_bair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
@@ -40,12 +46,7 @@ unsafe fn tink_bair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }		
-#[acmd_script(
-    agent = "toonlink",
-    script =  "game_attackairf",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn tink_fair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn tink_fair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 4.0);
 		if macros::is_excute(fighter) {
@@ -66,12 +67,7 @@ unsafe fn tink_fair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }		
-#[acmd_script(
-    agent = "toonlink",
-    script =  "game_attackairn",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn tink_nair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn tink_nair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 3.0);
 		if macros::is_excute(fighter) {
@@ -105,12 +101,7 @@ unsafe fn tink_nair(fighter: &mut L2CAgentBase) {
 		}
 }
 
-#[acmd_script(
-    agent = "toonlink",
-    script =  "game_attackairhi",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn tink_uair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn tink_uair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 6.0);
 		if macros::is_excute(fighter) {
@@ -147,12 +138,7 @@ unsafe fn tink_uair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }
-#[acmd_script(
-    agent = "toonlink",
-    script =  "effect_attackairhi",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn tink_uair_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn tink_uair_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 			frame(fighter.lua_state_agent, 10.0);
 			if macros::is_excute(fighter) {
@@ -210,12 +196,7 @@ unsafe fn tink_uair_eff(fighter: &mut L2CAgentBase) {
 				macros::EFFECT_OFF_KIND(fighter, Hash40::new("toonlink_sword"), false, false);
 			}
 }		
-#[acmd_script(
-    agent = "toonlink",
-    script =  "sound_attackairhi",
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn tink_uair_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn tink_uair_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 10.0);
 		if macros::is_excute(fighter) {
@@ -238,13 +219,4 @@ unsafe fn tink_uair_snd(fighter: &mut L2CAgentBase) {
 		if macros::is_excute(fighter) {
 			macros::PLAY_SE(fighter, Hash40::new("se_toonlink_appeal_swing_m"));
 		}
-}		
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		tink_bair,
-        tink_fair,
-        tink_nair,
-        tink_uair, tink_uair_eff, tink_uair_snd
-    );
-}
+}	

@@ -15,12 +15,26 @@ use crate::util::*;
 use super::*;
 use super::super::*;
 
-#[acmd_script(
-    agent = "szerosuit",
-    script =  "game_catchattack",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn zss_pummel(fighter: &mut L2CAgentBase) {
+pub fn install() {
+    Agent::new("szerosuit")
+    .acmd("game_catch", zss_grab)    
+    .acmd("sound_catch", zss_grab_snd)    
+    .acmd("effect_catch", zss_grab_eff)    
+    .acmd("game_catchdash", game_catchdash)    
+    .acmd("game_catchturn", game_catchturn)    
+    .acmd("effect_catchdash", effect_catchdash2)    
+    .acmd("effect_catchturn", effect_catchturn2)    
+    .install();
+
+    Agent::new("szerosuit_whip")
+    .acmd("effect_catchdash", effect_catchdash)    
+    .acmd("effect_catchturn", effect_catchturn)    
+    .acmd("game_catchdash", game_catchdash2)    
+    .acmd("game_catchturn", game_catchturn2)    
+    .install();
+}
+
+unsafe extern "C" fn zss_pummel(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 2.0);
 		if macros::is_excute(fighter) {
@@ -34,12 +48,7 @@ unsafe fn zss_pummel(fighter: &mut L2CAgentBase) {
 		frame(fighter.lua_state_agent, 7.0);
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.4);
 }	
-#[acmd_script(
-    agent = "szerosuit",
-    script =  "effect_catchattack",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn zss_pummel_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn zss_pummel_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			macros::EFFECT_FOLLOW_ALPHA(fighter, Hash40::new("sys_attack_arc_d"), Hash40::new("top"), 0, 11, 3, -3.907, 12.664, 9.16, 0.6, true, 0.4);
@@ -48,12 +57,7 @@ unsafe fn zss_pummel_eff(fighter: &mut L2CAgentBase) {
 		}
 }
 
-#[acmd_script(
-    agent = "szerosuit",
-    script =  "game_catch",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn zss_grab(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn zss_grab(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 2.0);
 		frame(fighter.lua_state_agent, 3.0);
@@ -80,29 +84,18 @@ unsafe fn zss_grab(fighter: &mut L2CAgentBase) {
 			CancelModule::enable_cancel(fighter.module_accessor);
 		}
 }	
-#[acmd_script(
-    agent = "szerosuit",
-    script =  "sound_catch",
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn zss_grab_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn zss_grab_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 4.0);
 		if macros::is_excute(fighter) {
 			macros::PLAY_SE(fighter, Hash40::new("se_szerosuit_swing_s"));
 		}
 }
-#[acmd_script(
-    agent = "szerosuit",
-    script =  "effect_catch",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn zss_grab_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn zss_grab_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 }
 
-#[acmd_script( agent = "szerosuit", script = "game_catchdash", category = ACMD_GAME, low_priority )]
-unsafe fn game_catchdash(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn game_catchdash(agent: &mut L2CAgentBase) {
     if macros::is_excute(agent) {
         ArticleModule::generate_article(agent.module_accessor, *FIGHTER_SZEROSUIT_GENERATE_ARTICLE_WHIP, false, -1);
         ArticleModule::change_motion(agent.module_accessor, *FIGHTER_SZEROSUIT_GENERATE_ARTICLE_WHIP, Hash40::new("catch_dash"), false, -1.0);
@@ -136,8 +129,7 @@ unsafe fn game_catchdash(agent: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script( agent = "szerosuit", script = "game_catchturn", category = ACMD_GAME, low_priority )]
-unsafe fn game_catchturn(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn game_catchturn(agent: &mut L2CAgentBase) {
     if macros::is_excute(agent) {
         ArticleModule::generate_article(agent.module_accessor, *FIGHTER_SZEROSUIT_GENERATE_ARTICLE_WHIP, false, -1);
         ArticleModule::change_motion(agent.module_accessor, *FIGHTER_SZEROSUIT_GENERATE_ARTICLE_WHIP, Hash40::new("catch_turn"), false, -1.0);
@@ -170,8 +162,7 @@ unsafe fn game_catchturn(agent: &mut L2CAgentBase) {
         ArticleModule::remove_exist(agent.module_accessor, *FIGHTER_SZEROSUIT_GENERATE_ARTICLE_WHIP, ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
     }
 }
-#[acmd_script( agent = "szerosuit_whip", script = "effect_catchdash", category = ACMD_EFFECT, low_priority )]
-unsafe fn effect_catchdash(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn effect_catchdash(agent: &mut L2CAgentBase) {
 	frame(agent.lua_state_agent, 1.0);
 	macros::FT_MOTION_RATE(agent, 0.5);
 	frame(agent.lua_state_agent, 10.0);
@@ -205,8 +196,7 @@ unsafe fn effect_catchdash(agent: &mut L2CAgentBase) {
         macros::EFFECT_OFF_KIND(agent, Hash40::new("szero_whip_flash"), false, true);
     }
 }
-#[acmd_script( agent = "szerosuit_whip", script = "effect_catchturn", category = ACMD_EFFECT, low_priority )]
-unsafe fn effect_catchturn(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn effect_catchturn(agent: &mut L2CAgentBase) {
 	frame(agent.lua_state_agent, 1.0);
 	macros::FT_MOTION_RATE(agent, 0.5);
 	frame(agent.lua_state_agent, 10.0);
@@ -240,8 +230,7 @@ unsafe fn effect_catchturn(agent: &mut L2CAgentBase) {
         macros::EFFECT_OFF_KIND(agent, Hash40::new("szero_whip_flash"), false, true);
     }
 }
-#[acmd_script( agent = "szerosuit_whip", script = "game_catchdash", category = ACMD_GAME, low_priority )]
-unsafe fn game_catchdash2(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn game_catchdash2(agent: &mut L2CAgentBase) {
     if macros::is_excute(agent) {
         VisibilityModule::set_whole(agent.module_accessor, false);
     }
@@ -258,8 +247,7 @@ unsafe fn game_catchdash2(agent: &mut L2CAgentBase) {
         VisibilityModule::set_whole(agent.module_accessor, false);
     }
 }
-#[acmd_script( agent = "szerosuit_whip", script = "game_catchturn", category = ACMD_GAME, low_priority )]
-unsafe fn game_catchturn2(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn game_catchturn2(agent: &mut L2CAgentBase) {
     if macros::is_excute(agent) {
         VisibilityModule::set_whole(agent.module_accessor, false);
     }
@@ -276,8 +264,7 @@ unsafe fn game_catchturn2(agent: &mut L2CAgentBase) {
         VisibilityModule::set_whole(agent.module_accessor, false);
     }
 }
-#[acmd_script( agent = "szerosuit", script = "effect_catchdash", category = ACMD_EFFECT, low_priority )]
-unsafe fn effect_catchdash2(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn effect_catchdash2(agent: &mut L2CAgentBase) {
 	frame(agent.lua_state_agent, 1.0);
 	macros::FT_MOTION_RATE(agent, 0.5);
 	frame(agent.lua_state_agent, 10.0);
@@ -292,8 +279,7 @@ unsafe fn effect_catchdash2(agent: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script( agent = "szerosuit", script = "effect_catchturn", category = ACMD_EFFECT, low_priority )]
-unsafe fn effect_catchturn2(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn effect_catchturn2(agent: &mut L2CAgentBase) {
 	frame(agent.lua_state_agent, 1.0);
 	macros::FT_MOTION_RATE(agent, 0.5);
 	frame(agent.lua_state_agent, 10.0);
@@ -306,12 +292,4 @@ unsafe fn effect_catchturn2(agent: &mut L2CAgentBase) {
     if macros::is_excute(agent) {
         macros::EFFECT_FOLLOW(agent, Hash40::new("szero_whip_vanish"), Hash40::new("haver"), 0, 0, 0, 0, 0, 90, 0.6, true);
     }
-}
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		//zss_pummel, //zss_pummel_eff,
-        zss_grab, zss_grab_eff, zss_grab_snd,
-		game_catchdash, effect_catchdash, game_catchdash2, effect_catchdash2,
-		game_catchturn, effect_catchturn, game_catchturn2, effect_catchturn2
-    );
 }

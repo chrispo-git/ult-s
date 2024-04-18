@@ -13,11 +13,18 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_agent_frames!(mac_frame, kirby_mac_frame);
+    Agent::new("littlemac")
+    .on_line(Main, mac_frame)
+    .install();
+
+	Agent::new("kirby")
+    .on_line(Main, kirby_mac_frame)
+    .install();
 }
-#[fighter_frame( agent = FIGHTER_KIND_LITTLEMAC )]
-fn mac_frame(fighter: &mut L2CFighterCommon) {
+
+unsafe extern "C" fn mac_frame(fighter: &mut L2CFighterCommon) {
     unsafe {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 		if is_default(boma) {
@@ -49,8 +56,7 @@ fn mac_frame(fighter: &mut L2CFighterCommon) {
 		}
     }
 }
-#[fighter_frame( agent = FIGHTER_KIND_KIRBY )]
-fn kirby_mac_frame(fighter: &mut L2CFighterCommon) {
+unsafe extern "C" fn kirby_mac_frame(fighter: &mut L2CFighterCommon) {
     unsafe {
 		let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 		if WorkModule::get_int(boma, *FIGHTER_KIRBY_INSTANCE_WORK_ID_INT_COPY_CHARA) == *FIGHTER_KIND_LITTLEMAC {

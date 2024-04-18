@@ -13,18 +13,19 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-	smashline::install_acmd_scripts!(
-		daisy_dtilt, daisy_dtilt_eff,
-		daisy_ftilt, daisy_ftilt_eff, daisy_ftilt_expr, daisy_ftilt_snd
-	);
+	Agent::new("daisy")
+    .acmd("game_attacklw3", daisy_dtilt)    
+    .acmd("effect_attacklw3", daisy_dtilt_eff)    
+    .acmd("game_attacks3", daisy_ftilt)    
+    .acmd("effect_attacks3", daisy_ftilt_eff)    
+    .acmd("sound_attacks3", daisy_ftilt_snd)    
+    .acmd("expression_attacks3", daisy_ftilt_expr)    
+    .install();
 }
-#[acmd_script(
-    agent = "daisy",
-    script =  "game_attacklw3",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn daisy_dtilt(fighter: &mut L2CAgentBase) {
+
+unsafe extern "C" fn daisy_dtilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 8.0);
 		if macros::is_excute(fighter) {
@@ -39,12 +40,7 @@ unsafe fn daisy_dtilt(fighter: &mut L2CAgentBase) {
 		wait(fighter.lua_state_agent, 6.0);
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 1);
 }
-#[acmd_script(
-    agent = "daisy",
-    script =  "effect_attacklw3",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn daisy_dtilt_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn daisy_dtilt_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 7.0);
 		if macros::is_excute(fighter) {
@@ -52,12 +48,7 @@ unsafe fn daisy_dtilt_eff(fighter: &mut L2CAgentBase) {
 			macros::LAST_EFFECT_SET_RATE(fighter, 1.4);
 		}
 }
-#[acmd_script(
-    agent = "daisy",
-    script =  "game_attacks3",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn daisy_ftilt(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn daisy_ftilt(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 9.0);
     if macros::is_excute(agent) {
         macros::ATTACK(agent, 0, 0, Hash40::new("havel"), 11.0, 361, 85, 0, 55, 6.0, 0.0, 3.0, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_DAISY_FRYINGPAN, *ATTACK_REGION_OBJECT);
@@ -68,12 +59,7 @@ unsafe fn daisy_ftilt(agent: &mut L2CAgentBase) {
         AttackModule::clear_all(agent.module_accessor);
     }
 }
-#[acmd_script(
-    agent = "daisy",
-    script =  "effect_attacks3",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn daisy_ftilt_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn daisy_ftilt_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 8.0);
 		if macros::is_excute(fighter) {
@@ -81,12 +67,7 @@ unsafe fn daisy_ftilt_eff(fighter: &mut L2CAgentBase) {
         	macros::LAST_EFFECT_SET_RATE(fighter, 1.4);
 		}
 }
-#[acmd_script(
-    agent = "daisy",
-    script =  "sound_attacks3",
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn daisy_ftilt_snd(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn daisy_ftilt_snd(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 7.0);
     if macros::is_excute(agent) {
         macros::PLAY_SE(agent, Hash40::new("vc_daisy_attack05"));
@@ -96,12 +77,7 @@ unsafe fn daisy_ftilt_snd(agent: &mut L2CAgentBase) {
         macros::PLAY_SE(agent, Hash40::new("se_daisy_smash_s02"));
     }
 }
-#[acmd_script(
-    agent = "daisy",
-    script =  "expression_attacks3",
-    category = ACMD_EXPRESSION,
-	low_priority)]
-unsafe fn daisy_ftilt_expr(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn daisy_ftilt_expr(agent: &mut L2CAgentBase) {
 	if macros::is_excute(agent) {
 		ItemModule::set_have_item_visibility(agent.module_accessor, false, 0);
 		VisibilityModule::set_int64(agent.module_accessor, hash40("smash_item") as i64, hash40("smash_item_pan") as i64);

@@ -15,12 +15,7 @@ use crate::util::*;
 use super::*;
 use super::super::*;
 
-#[acmd_script( 
-    agent = "pikmin", 
-    script = "game_throwhirayman", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn rayman_uthrow(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn rayman_uthrow(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::ATTACK_ABS(fighter, *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, 0, 8.0, 85, 30, 0, 85, 0.0, 1.0, *ATTACK_LR_CHECK_F, 0.0, true, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_THROW);
         macros::ATTACK_ABS(fighter, *FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, 0, 8.0, 361, 100, 0, 40, 0.0, 1.0, *ATTACK_LR_CHECK_F, 0.0, true, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_THROW);
@@ -49,12 +44,7 @@ unsafe fn rayman_uthrow(fighter: &mut L2CAgentBase) {
         StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_LANDING, false);
     }
 }
-#[acmd_script( 
-    agent = "pikmin", 
-    script = "effect_throwhirayman", 
-    category = ACMD_EFFECT, 
-    low_priority )]
-unsafe fn rayman_uthrow_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn rayman_uthrow_eff(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 28.0);
     if macros::is_excute(fighter) {
         macros::LANDING_EFFECT(fighter, Hash40::new("sys_v_smoke_a"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.7, 0, 0, 0, 0, 0, 0, false);
@@ -64,8 +54,7 @@ unsafe fn rayman_uthrow_eff(fighter: &mut L2CAgentBase) {
         macros::EFFECT_ALPHA(fighter, Hash40::new("sys_attack_impact"), Hash40::new("haver"), 0, 0, 0, 0, 0, 0, 0.46, 0, 0, 0, 0, 0, 360, true, 0.4);
     }
 }
-#[acmd_script( agent = "pikmin", script = "sound_throwhirayman", category = ACMD_SOUND, low_priority )]
-unsafe fn rayman_uthrow_snd(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn rayman_uthrow_snd(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 9.0);
     if macros::is_excute(agent) {
         macros::PLAY_SE(agent, Hash40::new("se_common_throw_01"));
@@ -75,12 +64,7 @@ unsafe fn rayman_uthrow_snd(agent: &mut L2CAgentBase) {
         macros::PLAY_SE(agent, Hash40::new("se_pikmin_appeal_h01"));
     }
 }
-#[acmd_script( 
-    agent = "pikmin", 
-    script = "game_throwfrayman", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn rayman_fthrow(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn rayman_fthrow(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::ATTACK_ABS(fighter, *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, 0, 4.0, 45, 50, 0, 90, 0.0, 1.0, *ATTACK_LR_CHECK_F, 0.0, true, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_THROW);
         macros::ATTACK_ABS(fighter, *FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, 0, 3.0, 361, 100, 0, 40, 0.0, 1.0, *ATTACK_LR_CHECK_F, 0.0, true, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_THROW);
@@ -93,23 +77,13 @@ unsafe fn rayman_fthrow(fighter: &mut L2CAgentBase) {
         macros::ATK_HIT_ABS(fighter, *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, Hash40::new("throw"), target, target_group, target_no);
     }
 }
-#[acmd_script( 
-    agent = "pikmin", 
-    script = "effect_throwfrayman", 
-    category = ACMD_EFFECT, 
-    low_priority )]
-unsafe fn rayman_fthrow_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn rayman_fthrow_eff(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 13.0);
     if macros::is_excute(fighter) {
         macros::FOOT_EFFECT(fighter, Hash40::new("sys_dash_smoke"), Hash40::new("top"), -6, 0, 0, 0, 0, 0, 0.8, 0, 0, 0, 0, 0, 0, false);
     }
 }
-#[acmd_script( 
-    agent = "pikmin", 
-    script = "game_throwbrayman", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn rayman_bthrow(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn rayman_bthrow(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::ATTACK_ABS(fighter, *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, 0, 11.0, 40, 66, 0, 70, 0.0, 1.0, *ATTACK_LR_CHECK_F, 0.0, true, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_THROW);
         macros::ATTACK_ABS(fighter, *FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, 0, 3.0, 361, 100, 0, 40, 0.0, 1.0, *ATTACK_LR_CHECK_F, 0.0, true, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_THROW);
@@ -126,23 +100,13 @@ unsafe fn rayman_bthrow(fighter: &mut L2CAgentBase) {
         macros::ATK_HIT_ABS(fighter, *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, Hash40::new("throw"), target, target_group, target_no);
     }
 }
-#[acmd_script( 
-    agent = "pikmin", 
-    script = "effect_throwbrayman", 
-    category = ACMD_EFFECT, 
-    low_priority )]
-unsafe fn rayman_bthrow_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn rayman_bthrow_eff(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 38.0);
     if macros::is_excute(fighter) {
         macros::LANDING_EFFECT(fighter, Hash40::new("sys_v_smoke_a"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.7, 0, 0, 0, 0, 0, 0, false);
     }
 }
-#[acmd_script( 
-    agent = "pikmin", 
-    script = "game_throwlwrayman", 
-    category = ACMD_GAME, 
-    low_priority )]
-unsafe fn rayman_dthrow(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn rayman_dthrow(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::ATTACK_ABS(fighter, *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, 0, 4.0, 93, 100, 0, 65, 0.0, 1.0, *ATTACK_LR_CHECK_F, 0.0, true, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_THROW);
         macros::ATTACK_ABS(fighter, *FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, 0, 3.0, 361, 100, 0, 40, 0.0, 1.0, *ATTACK_LR_CHECK_F, 0.0, true, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_THROW);
@@ -161,12 +125,7 @@ unsafe fn rayman_dthrow(fighter: &mut L2CAgentBase) {
         macros::ATK_HIT_ABS(fighter, *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, Hash40::new("throw"), target, target_group, target_no);
     }
 }
-#[acmd_script( 
-    agent = "pikmin", 
-    script = "effect_throwlwrayman", 
-    category = ACMD_EFFECT, 
-    low_priority )]
-unsafe fn rayman_dthrow_eff(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn rayman_dthrow_eff(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 8.0);
     if macros::is_excute(agent) {
 		macros::LANDING_EFFECT(agent, Hash40::new("sys_v_smoke_a"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
@@ -181,8 +140,7 @@ unsafe fn rayman_dthrow_eff(agent: &mut L2CAgentBase) {
         macros::LAST_EFFECT_SET_RATE(agent, 1);
     }
 }
-#[acmd_script( agent = "pikmin", script = "sound_throwlwrayman", category = ACMD_SOUND, low_priority )]
-unsafe fn rayman_dthrow_snd(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn rayman_dthrow_snd(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 2.0);
     if macros::is_excute(agent) {
         macros::PLAY_SE(agent, Hash40::new("se_common_throw_01"));
@@ -196,10 +154,16 @@ unsafe fn rayman_dthrow_snd(agent: &mut L2CAgentBase) {
 }
 
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		rayman_uthrow, rayman_uthrow_eff, rayman_uthrow_snd,
-        rayman_fthrow, rayman_fthrow_eff, 
-        rayman_bthrow, rayman_bthrow_eff,
-        rayman_dthrow, rayman_dthrow_eff, rayman_dthrow_snd
-    );
+    Agent::new("pikmin")
+        .game_acmd("game_throwhirayman", rayman_uthrow)
+        .effect_acmd("effect_throwhirayman", rayman_uthrow_eff)
+        .sound_acmd("sound_throwhirayman", rayman_uthrow_snd)
+        .game_acmd("game_throwfrayman", rayman_fthrow)
+        .effect_acmd("effect_throwfrayman", rayman_fthrow_eff)
+        .game_acmd("game_throwbrayman", rayman_bthrow)
+        .effect_acmd("effect_throwbrayman", rayman_bthrow_eff)
+        .game_acmd("game_throwlwrayman", rayman_dthrow)
+        .effect_acmd("effect_throwlwrayman", rayman_dthrow_eff)
+        .sound_acmd("sound_throwlwrayman", rayman_dthrow_snd)
+        .install();
 }

@@ -15,8 +15,16 @@ use smash::phx::Vector2f;
 use crate::util::*;
 use super::*;
 
-#[acmd_script( agent = "miigunner", script = "game_attacks4", category = ACMD_GAME, low_priority )]
-unsafe fn gunner_fsmash(fighter: &mut L2CAgentBase) {
+pub fn install() {
+    Agent::new("miigunner")
+    .acmd("game_attacks4", gunner_fsmash)    
+    .acmd("game_attackhi4", gunner_usmash)    
+    .acmd("game_attacklw4", gunner_dsmash)    
+    .acmd("sound_attacklw4", gunner_dsmash_sound)      
+    .install();
+}
+
+unsafe extern "C" fn gunner_fsmash(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 6.0);
     if macros::is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, *FIGHTER_STATUS_ATTACK_FLAG_START_SMASH_HOLD);
@@ -39,8 +47,7 @@ unsafe fn gunner_fsmash(fighter: &mut L2CAgentBase) {
         AttackModule::clear_all(fighter.module_accessor);
     }
 }
-#[acmd_script( agent = "miigunner", script = "game_attackhi4", category = ACMD_GAME, low_priority )]
-unsafe fn gunner_usmash(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn gunner_usmash(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 8.0);
     if macros::is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, *FIGHTER_STATUS_ATTACK_FLAG_START_SMASH_HOLD);
@@ -115,8 +122,7 @@ unsafe fn gunner_usmash(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script( agent = "miigunner", script = "game_attacklw4", category = ACMD_GAME, low_priority )]
-unsafe fn gunner_dsmash(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn gunner_dsmash(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 6.0);
     if macros::is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, *FIGHTER_STATUS_ATTACK_FLAG_START_SMASH_HOLD);
@@ -144,8 +150,7 @@ unsafe fn gunner_dsmash(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script( agent = "miigunner", script = "sound_attacklw4", category = ACMD_SOUND, low_priority )]
-unsafe fn gunner_dsmash_sound(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn gunner_dsmash_sound(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 7.0);
     if macros::is_excute(fighter) {
         macros::STOP_SE(fighter, Hash40::new("se_common_smash_start"));
@@ -161,8 +166,7 @@ unsafe fn gunner_dsmash_sound(fighter: &mut L2CAgentBase) {
     }
 }
 
-/*#[acmd_script( agent = "miigunner", script = "effect_attacklw4", category = ACMD_EFFECT, low_priority )]
-unsafe fn gunner_dsmash_effect(fighter: &mut L2CAgentBase) {
+/*unsafe extern "C" fn gunner_dsmash_effect(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 2.0);
     if macros::is_excute(fighter) {
         macros::EFFECT(fighter, Hash40::new("sys_smash_flash"), Hash40::new("haver"), 0, 5, 4, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, true);
@@ -182,11 +186,3 @@ unsafe fn gunner_dsmash_effect(fighter: &mut L2CAgentBase) {
         macros::LANDING_EFFECT(fighter, Hash40::new("sys_dash_smoke"), Hash40::new("top"), 3, 0, 0, 0, 180, 0, 0.8, 0, 0, 0, 0, 0, 0, false);
     }
 }*/
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		gunner_fsmash,
-        gunner_usmash,
-        gunner_dsmash, gunner_dsmash_sound, //gunner_dsmash_effect
-    );
-}

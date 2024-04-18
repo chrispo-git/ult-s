@@ -14,12 +14,16 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[acmd_script(
-    agent = "sheik",
-    script =  "game_attacks4",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn sheik_fsmash(fighter: &mut L2CAgentBase) {
+pub fn install() {
+    Agent::new("sheik")
+    .acmd("game_attacks4", sheik_fsmash)    
+    .acmd("game_attackdash", sheik_da)    
+    .acmd("game_attack11", sheik_jab1)    
+    .acmd("game_attack12", sheik_jab2)    
+    .install();
+}
+
+unsafe extern "C" fn sheik_fsmash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 7.0);
 		if macros::is_excute(fighter) {
@@ -46,8 +50,7 @@ unsafe fn sheik_fsmash(fighter: &mut L2CAgentBase) {
 		}
 }
 
-#[acmd_script( agent = "sheik", script = "game_attackdash", category = ACMD_GAME, low_priority )]
-unsafe fn sheik_da(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sheik_da(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 5.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, 0, 0, Hash40::new("top"), 7.0, 86, 90, 0, 70, 4.0, 0.0, 6.0, 12.0, None, None, None, 1.3, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 1, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_cutup"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_CUTUP, *ATTACK_REGION_PUNCH);
@@ -68,8 +71,7 @@ unsafe fn sheik_da(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script( agent = "sheik", script = "game_attack11", category = ACMD_GAME, low_priority )]
-unsafe fn sheik_jab1(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn sheik_jab1(agent: &mut L2CAgentBase) {
 	frame(agent.lua_state_agent, 1.0);
 	if macros::is_excute(agent) {
 		macros::HIT_NODE(agent, Hash40::new("armr"), *HIT_STATUS_XLU);
@@ -92,8 +94,7 @@ unsafe fn sheik_jab1(agent: &mut L2CAgentBase) {
 		macros::HIT_NODE(agent, Hash40::new("arml"), *HIT_STATUS_NORMAL);
 	}	
 }
-#[acmd_script( agent = "sheik", script = "game_attack12", category = ACMD_GAME, low_priority )]
-unsafe fn sheik_jab2(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn sheik_jab2(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 3.0);
     if macros::is_excute(agent) {
         macros::ATTACK(agent, 0, 0, Hash40::new("top"), 1.6, 361, 20, 0, 25, 1.8, 0.0, 7.5, 4.0, None, None, None, 1.2, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_cutup"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_CUTUP, *ATTACK_REGION_PUNCH);
@@ -109,13 +110,4 @@ unsafe fn sheik_jab2(agent: &mut L2CAgentBase) {
     if macros::is_excute(agent) {
         WorkModule::on_flag(agent.module_accessor, *FIGHTER_STATUS_ATTACK_FLAG_ENABLE_COMBO);
     }
-}
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		sheik_fsmash,
-        sheik_da,
-        sheik_jab1,
-        sheik_jab2
-    );
 }

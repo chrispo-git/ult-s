@@ -13,35 +13,27 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-	smashline::install_acmd_scripts!(
-		daisy_da,
-		daisy_da_eff,
-		daisy_jab1,
-		daisy_jab1_eff,
-		daisy_jab2,
-		daisy_jab2_eff,
-		daisy_dsmash
-	);
+	Agent::new("daisy")
+    .acmd("effect_attack11", daisy_jab1_eff)    
+    .acmd("game_attack11", daisy_jab1)    
+    .acmd("game_attack12", daisy_jab2)    
+    .acmd("effect_attack12", daisy_jab2_eff)    
+    .acmd("game_attacklw4", daisy_dsmash)    
+    .acmd("game_attackdash", daisy_da)    
+    .acmd("effect_attackdash", daisy_da_eff)    
+    .install();
 }
-#[acmd_script(
-    agent = "daisy",
-    script =  "effect_attack11",
-    category = ACMD_EFFECT, 
-	low_priority)]
-unsafe fn daisy_jab1_eff(fighter: &mut L2CAgentBase) {
+
+unsafe extern "C" fn daisy_jab1_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 			frame(fighter.lua_state_agent, 2.0);
 			if macros::is_excute(fighter) {
 				macros::EFFECT_ALPHA(fighter, Hash40::new("sys_attack_impact"), Hash40::new("top"), 0, 9.0, 12, 0, 0, 0, 0.6, 0, 0, 0, 0, 0, 360, true, 0.4);
 			}	
 }
-#[acmd_script(
-    agent = "daisy",
-    script =  "game_attack11",
-    category = ACMD_GAME, 
-	low_priority)]
-unsafe fn daisy_jab1(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn daisy_jab1(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 2.0);
 		if macros::is_excute(fighter) {
@@ -68,12 +60,7 @@ unsafe fn daisy_jab1(fighter: &mut L2CAgentBase) {
 			WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_FLAG_ENABLE_RESTART);
 		}
 }
-#[acmd_script(
-    agent = "daisy",
-    script =  "game_attack12",
-    category = ACMD_GAME, 
-	low_priority)]
-unsafe fn daisy_jab2(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn daisy_jab2(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 5.0);
 		if macros::is_excute(fighter) {
@@ -85,12 +72,7 @@ unsafe fn daisy_jab2(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }
-#[acmd_script(
-    agent = "daisy",
-    script =  "effect_attack12",
-    category = ACMD_EFFECT, 
-	low_priority)]
-unsafe fn daisy_jab2_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn daisy_jab2_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 4.0);
 		if macros::is_excute(fighter) {
@@ -98,12 +80,7 @@ unsafe fn daisy_jab2_eff(fighter: &mut L2CAgentBase) {
 			macros::LAST_EFFECT_SET_RATE(fighter, 1.5);
 		}
 }
-#[acmd_script(
-    agent = "daisy",
-    script =  "game_attacklw4",
-    category = ACMD_GAME, 
-	low_priority)]
-unsafe fn daisy_dsmash(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn daisy_dsmash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	frame(fighter.lua_state_agent, 3.0);
     if macros::is_excute(fighter) {
@@ -132,12 +109,7 @@ unsafe fn daisy_dsmash(fighter: &mut L2CAgentBase) {
 		AttackModule::clear_all(fighter.module_accessor);
 	}
 }
-#[acmd_script(
-    agent = "daisy",
-    script =  "game_attackdash",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn daisy_da(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn daisy_da(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 9.0);
 		if macros::is_excute(fighter) {
@@ -149,12 +121,7 @@ unsafe fn daisy_da(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }
-#[acmd_script(
-    agent = "daisy",
-    script =  "effect_attackdash",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn daisy_da_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn daisy_da_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 5.0);
 		if macros::is_excute(fighter) {

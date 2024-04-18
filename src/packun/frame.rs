@@ -14,8 +14,17 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[fighter_frame( agent = FIGHTER_KIND_PACKUN )]
-fn plant_frame(fighter: &mut L2CFighterCommon) {
+pub fn install() {
+    Agent::new("packun")
+    .on_line(Main, plant_frame)
+    .install();
+
+	Agent::new("packun_poisonbreath")
+    .on_line(Main, poison_frame)
+    .install();
+}
+
+unsafe extern "C" fn plant_frame(fighter: &mut L2CFighterCommon) {
     unsafe {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 		if is_default(boma) {
@@ -41,8 +50,7 @@ fn plant_frame(fighter: &mut L2CFighterCommon) {
 		}
 	}
 }
-#[weapon_frame( agent = WEAPON_KIND_PACKUN_POISONBREATH )]
-fn poison_frame(weapon: &mut L2CFighterBase) {
+unsafe extern "C" fn poison_frame(weapon: &mut L2CFighterBase) {
     unsafe {
         let otarget_id = WorkModule::get_int(weapon.module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LINK_OWNER) as u32;
         let boma = smash::app::sv_battle_object::module_accessor(otarget_id);
@@ -69,11 +77,4 @@ fn poison_frame(weapon: &mut L2CFighterBase) {
 			}
 		};
     }
-}	
-
-pub fn install() {
-    smashline::install_agent_frames!(
-        plant_frame,
-		poison_frame
-    );
 }

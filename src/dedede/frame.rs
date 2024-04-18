@@ -13,11 +13,14 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-	smashline::install_agent_frames!(dedede_frame);
+	Agent::new("dedede")
+	.on_line(Main, dedede_frame)
+	.install();
 }
-#[fighter_frame(agent = FIGHTER_KIND_DEDEDE)]
-pub fn dedede_frame(fighter : &mut L2CFighterCommon) {
+
+unsafe extern "C" fn dedede_frame(fighter : &mut L2CFighterCommon) {
     unsafe {
 		let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 		if is_default(boma) {

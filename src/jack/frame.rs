@@ -14,12 +14,19 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 use crate::jack::*;
+
 pub fn install() {
-	smashline::install_agent_frames!(joker_frame, kirby_joker_frame);
+	Agent::new("jack")
+	.on_line(Main, joker_frame)
+	.install();
+
+	Agent::new("kirby")
+	.on_line(Main, kirby_joker_frame)
+	.install();
 }
+
 //KIRBY - MAKE SURE ANY CHANGES TO NEUTRLAB ARE ON BOTH
-#[fighter_frame( agent = FIGHTER_KIND_KIRBY )]
-fn kirby_joker_frame(fighter: &mut L2CFighterCommon) {
+unsafe extern "C" fn kirby_joker_frame(fighter: &mut L2CFighterCommon) {
     unsafe {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
@@ -92,8 +99,7 @@ fn kirby_joker_frame(fighter: &mut L2CFighterCommon) {
 		};
     }
 }
-#[fighter_frame( agent = FIGHTER_KIND_JACK )]
-fn joker_frame(fighter: &mut L2CFighterCommon) {
+unsafe extern "C" fn joker_frame(fighter: &mut L2CFighterCommon) {
     unsafe {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);

@@ -16,12 +16,16 @@ use crate::util::*;
 use super::*;
 use super::super::*;
 
-#[acmd_script(
-    agent = "miiswordsman",
-    script =  "game_attacklw3",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn sword_dtilt(fighter: &mut L2CAgentBase) {
+pub fn install() {
+    Agent::new("miiswordsman")
+    .acmd("game_attacklw3", sword_dtilt)    
+    .acmd("game_attacks3", sword_ftilt)    
+    .acmd("effect_attacks3", sword_ftilt_eff)    
+    .acmd("sound_attacks3", sword_ftilt_snd)    
+    .install();
+}
+
+unsafe extern "C" fn sword_dtilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 			frame(fighter.lua_state_agent, 5.0);
 			if macros::is_excute(fighter) {
@@ -34,12 +38,7 @@ unsafe fn sword_dtilt(fighter: &mut L2CAgentBase) {
 				AttackModule::clear_all(fighter.module_accessor);
 			}
 }	
-#[acmd_script(
-    agent = "miiswordsman",
-    script =  "game_attacks3",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn sword_ftilt(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sword_ftilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 			frame(fighter.lua_state_agent, 9.0);
 			if macros::is_excute(fighter) {
@@ -52,12 +51,7 @@ unsafe fn sword_ftilt(fighter: &mut L2CAgentBase) {
 				AttackModule::clear_all(fighter.module_accessor);
 			}
 }	
-#[acmd_script(
-    agent = "miiswordsman",
-    script =  "effect_attacks3",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn sword_ftilt_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sword_ftilt_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 5.0);
 		if macros::is_excute(fighter) {
@@ -77,23 +71,11 @@ unsafe fn sword_ftilt_eff(fighter: &mut L2CAgentBase) {
 			macros::AFTER_IMAGE_OFF(fighter, 7);
 		}
 }	
-#[acmd_script(
-    agent = "miiswordsman",
-    script =  "sound_attacks3",
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn sword_ftilt_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sword_ftilt_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 7.0);
 		if macros::is_excute(fighter) {
 			macros::PLAY_SEQUENCE(fighter, Hash40::new("seq_miiswordsman_rnd_attack02"));
 			macros::PLAY_SE(fighter, Hash40::new("se_miiswordsman_swing_m"));
 		}
-}
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		sword_dtilt,
-        sword_ftilt, sword_ftilt_eff, sword_ftilt_snd
-    );
 }

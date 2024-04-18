@@ -15,12 +15,7 @@ use crate::util::*;
 use super::*;
 use super::super::*;
 
-#[acmd_script( 
-	agent = "pikmin", 
-	script = "game_attacks3rayman", 
-	category = ACMD_GAME, 
-	low_priority )]
-unsafe fn rayman_ftilt(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn rayman_ftilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     frame(fighter.lua_state_agent, 7.0);
     if macros::is_excute(fighter) {
@@ -31,15 +26,9 @@ unsafe fn rayman_ftilt(fighter: &mut L2CAgentBase) {
 		AttackModule::clear_all(fighter.module_accessor);
     }
 }
-#[acmd_script( 
-	agent = "pikmin", 
-	script = "effect_attacks3rayman", 
-	category = ACMD_EFFECT, 
-	low_priority )]
-unsafe fn rayman_ftilt_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn rayman_ftilt_eff(fighter: &mut L2CAgentBase) {
 }	
-#[acmd_script( agent = "pikmin", script = "sound_attacks3", category = ACMD_SOUND, low_priority )]
-unsafe fn rayman_ftilt_snd(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn rayman_ftilt_snd(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 9.0);
     if macros::is_excute(agent) {
         macros::PLAY_SE(agent, Hash40::new("se_pikmin_smash_s01"));
@@ -47,12 +36,7 @@ unsafe fn rayman_ftilt_snd(agent: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script( 
-	agent = "pikmin", 
-	script = "game_attackhi3rayman", 
-	category = ACMD_GAME, 
-	low_priority )]
-unsafe fn rayman_utilt(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn rayman_utilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     frame(fighter.lua_state_agent, 8.0);
     if macros::is_excute(fighter) {
@@ -83,24 +67,14 @@ unsafe fn rayman_utilt(fighter: &mut L2CAgentBase) {
 		KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_MOTION_FALL);
     }
 }
-#[acmd_script( 
-	agent = "pikmin", 
-	script = "effect_attackhi3rayman", 
-	category = ACMD_EFFECT, 
-	low_priority )]
-unsafe fn rayman_utilt_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn rayman_utilt_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     frame(fighter.lua_state_agent, 11.0);
     if macros::is_excute(fighter) {
 		macros::LANDING_EFFECT(fighter, Hash40::new("sys_v_smoke_a"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
 	}
 }
-#[acmd_script( 
-	agent = "pikmin", 
-	script = "sound_attackhi3rayman", 
-	category = ACMD_SOUND, 
-	low_priority )]
-unsafe fn rayman_utilt_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn rayman_utilt_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     frame(fighter.lua_state_agent, 11.0);
     if macros::is_excute(fighter) {
@@ -115,12 +89,7 @@ unsafe fn rayman_utilt_snd(fighter: &mut L2CAgentBase) {
         }
 	}
 }
-#[acmd_script( 
-	agent = "pikmin", 
-	script = "game_attacklw3rayman", 
-	category = ACMD_GAME, 
-	low_priority )]
-unsafe fn rayman_dtilt(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn rayman_dtilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     frame(fighter.lua_state_agent, 6.0);
     if macros::is_excute(fighter) {
@@ -131,12 +100,7 @@ unsafe fn rayman_dtilt(fighter: &mut L2CAgentBase) {
 		AttackModule::clear_all(fighter.module_accessor);
     }
 }
-#[acmd_script( 
-    agent = "pikmin", 
-    script = "effect_attacklw3rayman", 
-    category = ACMD_EFFECT, 
-    low_priority )]
-unsafe fn rayman_dtilt_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn rayman_dtilt_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     frame(fighter.lua_state_agent, 4.0);
     if macros::is_excute(fighter) {
@@ -170,8 +134,7 @@ unsafe fn rayman_dtilt_eff(fighter: &mut L2CAgentBase) {
         }
     }
 }
-#[acmd_script( agent = "pikmin", script = "sound_attacklw3rayman", category = ACMD_SOUND, low_priority )]
-unsafe fn rayman_dtilt_snd(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn rayman_dtilt_snd(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 5.0);
     if macros::is_excute(agent) {
         macros::PLAY_SE(agent, Hash40::new("se_pikmin_smash_h04"));
@@ -179,12 +142,7 @@ unsafe fn rayman_dtilt_snd(agent: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script( 
-	agent = "pikmin", 
-	script = "game_slideattacklw", 
-	category = ACMD_GAME, 
-	low_priority )]
-unsafe fn rayman_slide_dtilt(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn rayman_slide_dtilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     macros::FT_MOTION_RATE(fighter, 1.5);
     frame(fighter.lua_state_agent, 6.0);
@@ -197,12 +155,7 @@ unsafe fn rayman_slide_dtilt(fighter: &mut L2CAgentBase) {
 		AttackModule::clear_all(fighter.module_accessor);
     }
 }
-#[acmd_script( 
-	agent = "pikmin", 
-	script = "effect_slideattacklw", 
-	category = ACMD_EFFECT, 
-	low_priority )]
-unsafe fn rayman_slide_dtilt_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn rayman_slide_dtilt_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     frame(fighter.lua_state_agent, 3.0);
     if macros::is_excute(fighter) {
@@ -219,19 +172,13 @@ unsafe fn rayman_slide_dtilt_eff(fighter: &mut L2CAgentBase) {
         }
     }
 }
-#[acmd_script( agent = "pikmin", script = "sound_slideattacklw", category = ACMD_SOUND, low_priority )]
-unsafe fn rayman_slide_dtilt_snd(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn rayman_slide_dtilt_snd(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 4.0);
     if macros::is_excute(agent) {
         macros::PLAY_SE(agent, Hash40::new("se_pikmin_smash_l02"));
     }
 }
-#[acmd_script( 
-	agent = "pikmin", 
-	script = "game_slideattackhi", 
-	category = ACMD_GAME, 
-	low_priority )]
-unsafe fn rayman_slide_utilt(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn rayman_slide_utilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     frame(fighter.lua_state_agent, 8.0);
     if macros::is_excute(fighter) {
@@ -262,24 +209,14 @@ unsafe fn rayman_slide_utilt(fighter: &mut L2CAgentBase) {
 		KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_MOTION_FALL);
     }
 }
-#[acmd_script( 
-	agent = "pikmin", 
-	script = "effect_slideattackhi", 
-	category = ACMD_EFFECT, 
-	low_priority )]
-unsafe fn rayman_slide_utilt_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn rayman_slide_utilt_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     frame(fighter.lua_state_agent, 11.0);
     if macros::is_excute(fighter) {
 		macros::LANDING_EFFECT(fighter, Hash40::new("sys_v_smoke_a"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
 	}
 }
-#[acmd_script( 
-	agent = "pikmin", 
-	script = "sound_slideattackhi", 
-	category = ACMD_SOUND, 
-	low_priority )]
-unsafe fn rayman_slide_utilt_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn rayman_slide_utilt_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     frame(fighter.lua_state_agent, 11.0);
     if macros::is_excute(fighter) {
@@ -296,11 +233,21 @@ unsafe fn rayman_slide_utilt_snd(fighter: &mut L2CAgentBase) {
 }
 
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		rayman_ftilt, rayman_ftilt_eff, rayman_ftilt_snd,
-        rayman_utilt, rayman_utilt_eff, rayman_utilt_snd,
-        rayman_dtilt, rayman_dtilt_eff, rayman_dtilt_snd,
-        rayman_slide_dtilt, rayman_slide_dtilt_eff, rayman_slide_dtilt_snd,
-        rayman_slide_utilt, rayman_slide_utilt_eff, rayman_slide_utilt_snd
-    );
+    Agent::new("pikmin")
+        .game_acmd("game_attacks3rayman", rayman_ftilt)
+        .effect_acmd("effect_attacks3rayman", rayman_ftilt_eff)
+        .sound_acmd("sound_attacks3", rayman_ftilt_snd)
+        .game_acmd("game_attackhi3rayman", rayman_utilt)
+        .effect_acmd("effect_attackhi3rayman", rayman_utilt_eff)
+        .sound_acmd("sound_attackhi3rayman", rayman_utilt_snd)
+        .game_acmd("game_attacklw3rayman", rayman_dtilt)
+        .effect_acmd("effect_attacklw3rayman", rayman_dtilt_eff)
+        .sound_acmd("sound_attacklw3rayman", rayman_dtilt_snd)
+        .game_acmd("game_slideattacklw", rayman_slide_dtilt)
+        .effect_acmd("effect_slideattacklw", rayman_slide_dtilt_eff)
+        .sound_acmd("sound_slideattacklw", rayman_slide_dtilt_snd)
+        .game_acmd("game_slideattackhi", rayman_slide_utilt)
+        .effect_acmd("effect_slideattackhi", rayman_slide_utilt_eff)
+        .sound_acmd("sound_slideattackhi", rayman_slide_utilt_snd)
+        .install();
 }

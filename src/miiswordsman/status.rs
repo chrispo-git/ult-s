@@ -14,13 +14,19 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[status_script(agent = "miiswordsman", status = FIGHTER_MIISWORDSMAN_STATUS_KIND_SPECIAL_S2_HOLD, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_PRE)]
-unsafe fn sword_specials2_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
+pub fn install() {
+    Agent::new("miiswordsman")
+    .status(Pre, *FIGHTER_MIISWORDSMAN_STATUS_KIND_SPECIAL_S2_HOLD, sword_specials2_pre)
+	.status(Pre, *FIGHTER_MIISWORDSMAN_STATUS_KIND_SPECIAL_S1_HIT, sword_aa_pre)
+	.status(Main, *FIGHTER_MIISWORDSMAN_STATUS_KIND_SPECIAL_S1_HIT, sword_aa_main)
+    .install();
+}
+
+unsafe extern "C" fn sword_specials2_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
     StatusModule::set_status_kind_interrupt(fighter.module_accessor, *FIGHTER_MIISWORDSMAN_STATUS_KIND_SPECIAL_S2_DASH);
     1.into()
 }
-#[status_script(agent = "miiswordsman", status = FIGHTER_MIISWORDSMAN_STATUS_KIND_SPECIAL_S1_HIT, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_PRE)]
-unsafe fn sword_aa_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
+unsafe extern "C" fn sword_aa_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
 	let situation_kind = StatusModule::situation_kind(fighter.module_accessor);
 	if situation_kind == *SITUATION_KIND_GROUND {
 		StatusModule::init_settings(
@@ -50,11 +56,10 @@ unsafe fn sword_aa_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
 		);
 		0.into()
 	} else {
-		original!(fighter)
-	}
+		return smashline::original_status(Pre, fighter, *FIGHTER_MIISWORDSMAN_STATUS_KIND_SPECIAL_S1_HIT)(fighter);
+    }
 }
-#[status_script(agent = "miiswordsman", status = FIGHTER_MIISWORDSMAN_STATUS_KIND_SPECIAL_S1_HIT, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
-unsafe fn sword_aa_main(fighter: &mut L2CFighterCommon) -> L2CValue {
+unsafe extern "C" fn sword_aa_main(fighter: &mut L2CFighterCommon) -> L2CValue {
 	let situation_kind = StatusModule::situation_kind(fighter.module_accessor);
 	let cancel_frame = FighterMotionModuleImpl::get_cancel_frame(fighter.module_accessor,smash::phx::Hash40::new_raw(MotionModule::motion_kind(fighter.module_accessor)),false) as f32; //Cancel frame
 	let frame = MotionModule::frame(fighter.module_accessor);
@@ -88,10 +93,6 @@ unsafe fn sword_aa_main(fighter: &mut L2CFighterCommon) -> L2CValue {
 		}
 		0.into()
 	} else {
-		original!(fighter)
-	}
-}
-
-pub fn install() {
-    smashline::install_status_scripts!(sword_specials2_pre,sword_aa_pre, sword_aa_main);
+		return smashline::original_status(Main, fighter, *FIGHTER_MIISWORDSMAN_STATUS_KIND_SPECIAL_S1_HIT)(fighter);
+    }
 }

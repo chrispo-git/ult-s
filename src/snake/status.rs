@@ -14,8 +14,19 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[status_script(agent = "snake", status = FIGHTER_STATUS_KIND_SPECIAL_S, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
-unsafe fn snake_side_special_status_main(fighter: &mut L2CFighterCommon) -> L2CValue {
+pub fn install() {
+    Agent::new("snake")
+    .status(Main, *FIGHTER_STATUS_KIND_SPECIAL_S, snake_side_special_status_main)
+    .status(Main, *FIGHTER_STATUS_KIND_APPEAL, snake_taunt_status_main)
+    .status(End, *FIGHTER_STATUS_KIND_APPEAL, snake_taunt_status_end)
+    .status(Main, *FIGHTER_SNAKE_STATUS_KIND_APPEAL_WAIT, snake_down_taunt_wait_status_main)
+    .status(End, *FIGHTER_SNAKE_STATUS_KIND_APPEAL_WAIT, snake_down_taunt_wait_status_end)
+    .status(Main, *FIGHTER_SNAKE_STATUS_KIND_APPEAL_END, snake_down_taunt_end_status_main)
+    .status(End, *FIGHTER_SNAKE_STATUS_KIND_APPEAL_END, snake_down_taunt_end_status_end)
+    .install();
+}
+
+unsafe extern "C" fn snake_side_special_status_main(fighter: &mut L2CFighterCommon) -> L2CValue {
     PostureModule::set_stick_lr(fighter.module_accessor, 0.0);
     PostureModule::update_rot_y_lr(fighter.module_accessor);
     WorkModule::set_int64(fighter.module_accessor, hash40("special_s_start") as i64, *FIGHTER_SNAKE_STATUS_WORK_INT_MOT_KIND);
@@ -31,8 +42,7 @@ unsafe fn snake_side_special_status_main(fighter: &mut L2CFighterCommon) -> L2CV
     // 0.into()
 }
 
-/*#[status_script(agent = "snake", status = FIGHTER_STATUS_KIND_ATTACK_S4, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
-unsafe fn snake_side_smash_status_main(fighter: &mut L2CFighterCommon) -> L2CValue {
+/*unsafe extern "C" fn snake_side_smash_status_main(fighter: &mut L2CFighterCommon) -> L2CValue {
     ControlModule::reset_trigger(fighter.module_accessor);
     original!(fighter)
 }
@@ -47,8 +57,7 @@ unsafe fn snake_side_smash_status_end(fighter: &mut L2CFighterCommon) -> L2CValu
 
 
 ////added new up-taunt and side-taunt
-#[status_script(agent = "snake", status = FIGHTER_STATUS_KIND_APPEAL, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
-unsafe fn snake_taunt_status_main(fighter: &mut L2CFighterCommon) -> L2CValue {
+unsafe extern "C" fn snake_taunt_status_main(fighter: &mut L2CFighterCommon) -> L2CValue {
     ControlModule::reset_trigger(fighter.module_accessor);
     if ControlModule::get_command_flag_cat(fighter.module_accessor, 1) == *FIGHTER_PAD_CMD_CAT2_FLAG_APPEAL_HI {
         MotionModule::change_motion(fighter.module_accessor, Hash40::new("appeal_hi_r"), 0.0, 1.0, false, 0.0, false, false);
@@ -62,8 +71,7 @@ unsafe fn snake_taunt_status_main(fighter: &mut L2CFighterCommon) -> L2CValue {
     // 0.into()
 }
 
-#[status_script(agent = "snake", status = FIGHTER_STATUS_KIND_APPEAL, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_END)]
-unsafe fn snake_taunt_status_end(fighter: &mut L2CFighterCommon) -> L2CValue {
+unsafe extern "C" fn snake_taunt_status_end(fighter: &mut L2CFighterCommon) -> L2CValue {
     if fighter.global_table[0xb].get_i32() != *FIGHTER_SNAKE_STATUS_KIND_APPEAL_WAIT {
         fighter.clear_lua_stack();
         let object = sv_system::battle_object(fighter.lua_state_agent);
@@ -77,8 +85,7 @@ unsafe fn snake_taunt_status_end(fighter: &mut L2CFighterCommon) -> L2CValue {
 }
 
 //added down-taunt box walk and c4 place/explode
-#[status_script(agent = "snake", status = FIGHTER_SNAKE_STATUS_KIND_APPEAL_WAIT, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
-unsafe fn snake_down_taunt_wait_status_main(fighter: &mut L2CFighterCommon) -> L2CValue {
+unsafe extern "C" fn snake_down_taunt_wait_status_main(fighter: &mut L2CFighterCommon) -> L2CValue {
     ControlModule::reset_trigger(fighter.module_accessor);
     MotionModule::change_motion(fighter.module_accessor, Hash40::new("appeal_wait"), 0.0, 1.0, false, 0.0, false, false);
     WorkModule::off_flag(fighter.module_accessor, *FIGHTER_SNAKE_STATUS_APPEAL_FLAG_EXIT);
@@ -91,8 +98,7 @@ unsafe fn snake_down_taunt_wait_status_main(fighter: &mut L2CFighterCommon) -> L
     // 0.into()
 }
 
-#[status_script(agent = "snake", status = FIGHTER_SNAKE_STATUS_KIND_APPEAL_WAIT, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_END)]
-unsafe fn snake_down_taunt_wait_status_end(fighter: &mut L2CFighterCommon) -> L2CValue {
+unsafe extern "C" fn snake_down_taunt_wait_status_end(fighter: &mut L2CFighterCommon) -> L2CValue {
     if fighter.global_table[0xb].get_i32() != *FIGHTER_SNAKE_STATUS_KIND_APPEAL_END {
         fighter.clear_lua_stack();
         let object = sv_system::battle_object(fighter.lua_state_agent);
@@ -104,8 +110,7 @@ unsafe fn snake_down_taunt_wait_status_end(fighter: &mut L2CFighterCommon) -> L2
     }
     return 0.into()
 }
-#[status_script(agent = "snake", status = FIGHTER_SNAKE_STATUS_KIND_APPEAL_END, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
-unsafe fn snake_down_taunt_end_status_main(fighter: &mut L2CFighterCommon) -> L2CValue {
+unsafe extern "C" fn snake_down_taunt_end_status_main(fighter: &mut L2CFighterCommon) -> L2CValue {
     let entry_id = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
     if SNAKE_FLAG_APPEAL_LW_C4_EXLPODE[entry_id] {
         SNAKE_FLAG_APPEAL_LW_C4_EXLPODE[entry_id] = false;
@@ -118,8 +123,7 @@ unsafe fn snake_down_taunt_end_status_main(fighter: &mut L2CFighterCommon) -> L2
     // 0.into()
 }
 
-#[status_script(agent = "snake", status = FIGHTER_SNAKE_STATUS_KIND_APPEAL_END, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_END)]
-unsafe fn snake_down_taunt_end_status_end(fighter: &mut L2CFighterCommon) -> L2CValue {
+unsafe extern "C" fn snake_down_taunt_end_status_end(fighter: &mut L2CFighterCommon) -> L2CValue {
     fighter.clear_lua_stack();
     let object = sv_system::battle_object(fighter.lua_state_agent);
     let fighta : *mut Fighter = std::mem::transmute(object);
@@ -129,16 +133,4 @@ unsafe fn snake_down_taunt_end_status_end(fighter: &mut L2CFighterCommon) -> L2C
     }
     ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_SNAKE_GENERATE_ARTICLE_C4_SWITCH, ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
     return 0.into()
-}
-
-pub fn install() {
-    smashline::install_status_scripts!(
-        snake_side_special_status_main,
-        snake_taunt_status_main,
-        snake_taunt_status_end,
-        snake_down_taunt_wait_status_main,
-        snake_down_taunt_wait_status_end,
-        snake_down_taunt_end_status_main,
-        snake_down_taunt_end_status_end
-    );
 }

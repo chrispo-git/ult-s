@@ -13,21 +13,18 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		lucario_dtilt,
-		lucario_ftilt,
-		lucario_ftilt_lw,
-		lucario_ftilt_hi,
-		lucario_utilt
-    );
+    Agent::new("lucario")
+    .acmd("game_attacklw3", lucario_dtilt)    
+	.acmd("game_attackhi3", lucario_utilt)    
+	.acmd("game_attacks3", lucario_ftilt)    
+	.acmd("game_attacks3lw", lucario_ftilt_lw)    
+	.acmd("game_attacks3hi", lucario_ftilt_hi)    
+	.install();
 }
-#[acmd_script(
-    agent = "lucario",
-    script =  "game_attacklw3",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn lucario_dtilt(fighter: &mut L2CAgentBase) {
+
+unsafe extern "C" fn lucario_dtilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.66);
 		frame(fighter.lua_state_agent, 9.0);
@@ -42,12 +39,7 @@ unsafe fn lucario_dtilt(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }		
-#[acmd_script(
-    agent = "lucario",
-    script =  "game_attackhi3",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn lucario_utilt(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn lucario_utilt(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 6.0);
     if macros::is_excute(agent) {
         macros::ATTACK(agent, 0, 0, Hash40::new("legr"), 5.0, 96, 110, 0, 45, 3.0, 0.0, 0.0, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_PUNCH, *ATTACK_REGION_KICK);
@@ -59,12 +51,7 @@ unsafe fn lucario_utilt(agent: &mut L2CAgentBase) {
         AttackModule::clear_all(agent.module_accessor);
     }
 }	
-#[acmd_script(
-    agent = "lucario",
-    scripts =  ["game_attacks3"],
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn lucario_ftilt(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn lucario_ftilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 12.0);
 		if macros::is_excute(fighter) {
@@ -84,12 +71,7 @@ unsafe fn lucario_ftilt(fighter: &mut L2CAgentBase) {
 		AttackModule::clear_all(fighter.module_accessor);
 		}
 }
-#[acmd_script(
-    agent = "lucario",
-    scripts =  ["game_attacks3lw"],
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn lucario_ftilt_lw(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn lucario_ftilt_lw(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 12.0);
 		if macros::is_excute(fighter) {
@@ -111,12 +93,7 @@ unsafe fn lucario_ftilt_lw(fighter: &mut L2CAgentBase) {
 		AttackModule::clear_all(fighter.module_accessor);
 		}
 }
-#[acmd_script(
-    agent = "lucario",
-    scripts =  ["game_attacks3hi"],
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn lucario_ftilt_hi(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn lucario_ftilt_hi(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 12.0);
 		if macros::is_excute(fighter) {

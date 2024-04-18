@@ -13,19 +13,16 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		seph_nair,
-		seph_bair,
-		seph_uair
-    );
+    Agent::new("edge")
+    .acmd("game_attackairn", seph_nair)    
+    .acmd("game_attackairhi", seph_uair)    
+    .acmd("game_attackairb", seph_bair)    
+    .install();
 }
-#[acmd_script(
-    agent = "edge",
-    script =  "game_attackairn",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn seph_nair(fighter: &mut L2CAgentBase) {
+
+unsafe extern "C" fn seph_nair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 1.0);
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.1);
@@ -49,12 +46,7 @@ unsafe fn seph_nair(fighter: &mut L2CAgentBase) {
 		}
 }		
 
-#[acmd_script(
-    agent = "edge",
-    script =  "game_attackairhi",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn seph_uair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn seph_uair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 1.0);
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.8);
@@ -93,8 +85,7 @@ unsafe fn seph_uair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }
-#[acmd_script( agent = "edge", script = "game_attackairb", category = ACMD_GAME, low_priority )]
-unsafe fn seph_bair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn seph_bair(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     macros::FT_MOTION_RATE(fighter, 0.8);
     frame(fighter.lua_state_agent, 6.0);

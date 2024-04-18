@@ -14,12 +14,15 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[acmd_script(
-    agent = "roy",
-    scripts =  ["game_specialairs4s", "game_specials4s"],
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn roy_ded(fighter: &mut L2CAgentBase) {
+pub fn install() {
+    Agent::new("roy")
+    .acmd("game_specialairs4s", roy_ded)    
+	.acmd("game_specials4s", roy_ded)    
+	.acmd("game_specialairs1", roy_ded1)    
+	.install();
+}
+
+unsafe extern "C" fn roy_ded(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 7.0);
 		if macros::is_excute(fighter) {
@@ -32,12 +35,7 @@ unsafe fn roy_ded(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }	
-#[acmd_script(
-    agent = "roy",
-    script =  "game_specialairs1",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn roy_ded1(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn roy_ded1(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_MARTH_STATUS_SPECIAL_S_FLAG_INPUT_CHECK);
@@ -61,10 +59,3 @@ unsafe fn roy_ded1(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_MARTH_STATUS_SPECIAL_S_FLAG_INPUT_CHECK);
 		}
 }	
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		roy_ded,
-        roy_ded1
-    );
-}

@@ -13,42 +13,33 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		diddy_sidetaunt, diddy_sidetaunt_eff, diddy_sidetaunt_snd
-    );
+    Agent::new("diddy")
+    .acmd("game_appealsr", diddy_sidetaunt)    
+    .acmd("game_appealsl", diddy_sidetaunt)    
+    .acmd("effect_appealsr", diddy_sidetaunt_eff)    
+    .acmd("effect_appealsl", diddy_sidetaunt_eff)    
+    .acmd("sound_appealsr", diddy_sidetaunt_snd)    
+    .acmd("sound_appealsl", diddy_sidetaunt_snd)    
+    .install();
 }
 
-#[acmd_script(
-    agent = "diddy",
-    scripts =  ["game_appealsr", "game_appealsl"],
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn diddy_sidetaunt(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn diddy_sidetaunt(fighter: &mut L2CAgentBase) {
     	let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 7.0);
 		if macros::is_excute(fighter) {
 			ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_DIDDY_GENERATE_ARTICLE_GUN, false, 0);
 		}
 }
-#[acmd_script(
-    agent = "diddy",
-    scripts =  ["effect_appealsr", "effect_appealsl"],
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn diddy_sidetaunt_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn diddy_sidetaunt_eff(fighter: &mut L2CAgentBase) {
     	let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 6.0);
 		if macros::is_excute(fighter) {
 			macros::EFFECT(fighter, Hash40::new("sys_erace_smoke"), Hash40::new("havel"), 0, 3, 0, 0, 0, 0, 1.4, 0, 0, 0, 0, 0, 0, false);
 		}
 }
-#[acmd_script(
-    agent = "diddy",
-    scripts =  ["sound_appealsr", "sound_appealsl"],
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn diddy_sidetaunt_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn diddy_sidetaunt_snd(fighter: &mut L2CAgentBase) {
     	let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 7.0);
 		if macros::is_excute(fighter) {

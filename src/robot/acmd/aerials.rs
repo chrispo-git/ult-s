@@ -14,12 +14,13 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[acmd_script(
-    agent = "robot",
-    script =  "game_attackairhi",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn rob_uair(fighter: &mut L2CAgentBase) {
+pub fn install() {
+    Agent::new("robot")
+    .acmd("game_attackairhi", rob_uair)    
+    .install();
+}
+
+unsafe extern "C" fn rob_uair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
@@ -74,9 +75,3 @@ unsafe fn rob_uair(fighter: &mut L2CAgentBase) {
 		WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }	
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		rob_uair
-    );
-}

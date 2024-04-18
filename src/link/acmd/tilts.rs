@@ -13,22 +13,19 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		link_dtilt,
-		link_ftilt,
-		link_ftilt_snd,
-		link_ftilt_eff,
-		link_ftilt_expr,
-		link_utilt
-    );
+    Agent::new("link")
+    .acmd("game_attacklw3", link_dtilt)    
+    .acmd("game_attackhi3", link_utilt)    
+    .acmd("game_attacks3", link_ftilt)    
+    .acmd("effect_attacks3", link_ftilt_eff)    
+    .acmd("sound_attacks3", link_ftilt_snd)    
+    .acmd("expression_attacks3", link_ftilt_expr)    
+    .install();
 }
-#[acmd_script(
-    agent = "link",
-    script =  "game_attacklw3",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn link_dtilt(fighter: &mut L2CAgentBase) {
+
+unsafe extern "C" fn link_dtilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 13.0);
 		if macros::is_excute(fighter) {
@@ -41,12 +38,7 @@ unsafe fn link_dtilt(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }
-#[acmd_script(
-    agent = "link",
-    script =  "game_attackhi3",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn link_utilt(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn link_utilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 8.0);
 		if macros::is_excute(fighter) {
@@ -60,12 +52,7 @@ unsafe fn link_utilt(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }
-#[acmd_script( 
-	agent = "link", 
-	scripts = ["game_attacks3"], 
-	category = ACMD_GAME, 
-	low_priority )]
-unsafe fn link_ftilt(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn link_ftilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 3.0);
         if macros::is_excute(fighter) {
@@ -93,12 +80,7 @@ unsafe fn link_ftilt(fighter: &mut L2CAgentBase) {
             ArticleModule::change_status_exist(fighter.module_accessor, *FIGHTER_LINK_GENERATE_ARTICLE_BOW, *WN_LINK_BOW_STATUS_KIND_BACK);
         }
 }
-#[acmd_script( 
-	agent = "link", 
-	scripts = ["effect_attacks3"], 
-	category = ACMD_EFFECT, 
-	low_priority )]
-unsafe fn link_ftilt_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn link_ftilt_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 13.0);
 		if macros::is_excute(fighter) {
@@ -109,12 +91,7 @@ unsafe fn link_ftilt_eff(fighter: &mut L2CAgentBase) {
 			macros::FOOT_EFFECT(fighter, Hash40::new("sys_run_smoke"), Hash40::new("top"), -6.5, 0.0, -1.0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
 		}
 }
-#[acmd_script( 
-	agent = "link", 
-	scripts = ["sound_attacks3"], 
-	category = ACMD_SOUND, 
-	low_priority )]
-unsafe fn link_ftilt_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn link_ftilt_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 13.0);
 		if macros::is_excute(fighter) {
@@ -122,12 +99,7 @@ unsafe fn link_ftilt_snd(fighter: &mut L2CAgentBase) {
 			macros::PLAY_SEQUENCE(fighter, Hash40::new("seq_link_rnd_attack"));
 		}
 }
-#[acmd_script(
-    agent = "link",
-    script =  "expression_attacks3",
-    category = ACMD_EXPRESSION,
-    low_priority)]
-unsafe fn link_ftilt_expr(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn link_ftilt_expr(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 3.0);
         if macros::is_excute(fighter) {

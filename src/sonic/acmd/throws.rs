@@ -14,12 +14,14 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[acmd_script(
-    agent = "sonic",
-    script =  "effect_throwf",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn sonic_fthrow_eff(fighter: &mut L2CAgentBase) {
+pub fn install() {
+    Agent::new("sonic")
+    .acmd("effect_throwf", sonic_fthrow_eff)    
+    .acmd("effect_throwb", sonic_bthrow_eff)    
+    .install();
+}
+
+unsafe extern "C" fn sonic_fthrow_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 8.0);
 		if macros::is_excute(fighter) {
@@ -32,12 +34,7 @@ unsafe fn sonic_fthrow_eff(fighter: &mut L2CAgentBase) {
 			macros::EFFECT_FLIP(fighter, Hash40::new("sys_smash_flash_s"), Hash40::new("sys_smash_flash_s"), Hash40::new("throw"), 3, 2, 3, 0, 0, 0, 1.5, 0, 0, 0, 0, 0, 0, true, *EF_FLIP_YZ);
 		}
 }	
-#[acmd_script(
-    agent = "sonic",
-    script =  "effect_throwb",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn sonic_bthrow_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sonic_bthrow_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 11.0);
 		if macros::is_excute(fighter) {
@@ -67,10 +64,3 @@ unsafe fn sonic_bthrow_eff(fighter: &mut L2CAgentBase) {
 			macros::EFFECT_OFF_KIND(fighter, Hash40::new("sys_attack_arc"), false, true);
 		}
 }	
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		sonic_fthrow_eff,
-        sonic_bthrow_eff
-    );
-}

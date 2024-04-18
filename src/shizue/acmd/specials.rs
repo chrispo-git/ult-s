@@ -15,28 +15,36 @@ use crate::util::*;
 use super::*;
 use super::super::*;
 
-#[acmd_script(
-    agent = "shizue_pot",
-    script =  "effect_burst",
-    category = ACMD_EFFECT, low_priority )]
-unsafe fn isa_item_burst_eff(fighter: &mut L2CAgentBase) {
+pub fn install() {
+    Agent::new("shizue")
+    .acmd("game_specialn", isa_neutralb)    
+    .acmd("game_specialairn", isa_neutralb)    
+    .acmd("effect_specialn", isa_neutralb_eff)    
+    .acmd("effect_specialairn", isa_neutralb_eff)    
+    .acmd("sound_specialn", isa_neutralb_snd)    
+    .acmd("sound_specialairn", isa_neutralb_snd)    
+    .acmd("game_speciallwfire", isa_lloid_end)    
+    .acmd("game_specialairlwfire", isa_lloid_end)    
+    .acmd("game_speciallwset", isa_lloid_set)    
+    .install();
+
+	Agent::new("shizue_pot")
+    .acmd("effect_burst", isa_item_burst_eff)    
+    .acmd("sound_burst", isa_item_burst_snd)    
+    .acmd("game_throwed", isa_neutralb_hit)    
+    .install();
+}
+
+unsafe extern "C" fn isa_item_burst_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			macros::EFFECT(fighter, Hash40::new("sys_erace_smoke"), Hash40::new("top"), 0, 2, 0, 0, 0, 0, 1.6, 0, 0, 0, 0, 0, 0, false);
 		}
 }
-#[acmd_script(
-    agent = "shizue_pot",
-    script =  "sound_burst",
-    category = ACMD_SOUND, low_priority )]
-unsafe fn isa_item_burst_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn isa_item_burst_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 }
-#[acmd_script(
-    agent = "shizue_pot",
-    scripts =  ["game_throwed"],
-    category = ACMD_GAME, low_priority )]
-unsafe fn isa_neutralb_hit(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn isa_neutralb_hit(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	let otarget_id = WorkModule::get_int(fighter.module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LINK_OWNER) as u32;
 	let boma = smash::app::sv_battle_object::module_accessor(otarget_id);
@@ -230,11 +238,7 @@ unsafe fn isa_neutralb_hit(fighter: &mut L2CAgentBase) {
 		
 	}
 }
-#[acmd_script(
-    agent = "shizue",
-    scripts =  ["game_specialn", "game_specialairn"],
-    category = ACMD_GAME, low_priority )]
-unsafe fn isa_neutralb(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn isa_neutralb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_KIND) == *FIGHTER_KIND_KIRBY {
 		frame(fighter.lua_state_agent, 7.0);
@@ -262,22 +266,14 @@ unsafe fn isa_neutralb(fighter: &mut L2CAgentBase) {
 		}
 	}
 }
-#[acmd_script(
-    agent = "shizue",
-    scripts =  ["effect_specialn", "effect_specialairn"],
-    category = ACMD_EFFECT, low_priority )]
-unsafe fn isa_neutralb_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn isa_neutralb_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 9.0);
 		if macros::is_excute(fighter) {
 			macros::EFFECT(fighter, Hash40::new_raw(0x1408ec2771), Hash40::new("top"), 0, 9, 7.3, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, true);
 		}
 }
-#[acmd_script(
-    agent = "shizue",
-    scripts =  ["sound_specialn", "sound_specialairn"],
-    category = ACMD_SOUND, low_priority )]
-unsafe fn isa_neutralb_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn isa_neutralb_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 5.0);
 		if macros::is_excute(fighter) {
@@ -289,11 +285,7 @@ unsafe fn isa_neutralb_snd(fighter: &mut L2CAgentBase) {
 		}
 }
 
-#[acmd_script(
-    agent = "shizue",
-    scripts =  ["game_speciallwfire", "game_specialairlwfire"],
-    category = ACMD_GAME, low_priority )]
-unsafe fn isa_lloid_end(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn isa_lloid_end(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 	if ISA_RESHOOT_TIME[ENTRY_ID] < 1 {
@@ -301,11 +293,7 @@ unsafe fn isa_lloid_end(fighter: &mut L2CAgentBase) {
 		ISA_RESHOOT_TIME[ENTRY_ID] = 130;
 	};
 }
-#[acmd_script(
-    agent = "shizue",
-    scripts =  ["game_speciallwset"],
-    category = ACMD_GAME, low_priority )]
-unsafe fn isa_lloid_set(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn isa_lloid_set(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 1.0);
 		if macros::is_excute(fighter) {
@@ -317,14 +305,4 @@ unsafe fn isa_lloid_set(fighter: &mut L2CAgentBase) {
 			WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_SHIZUE_STATUS_WORK_ID_SPECIAL_LW_FLAG_SET);
 		}
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.0);
-}
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		isa_item_burst_eff, isa_item_burst_snd,
-        isa_neutralb_hit,
-        isa_neutralb, isa_neutralb_eff, isa_neutralb_snd,
-        isa_lloid_end,
-        isa_lloid_set
-    );
 }

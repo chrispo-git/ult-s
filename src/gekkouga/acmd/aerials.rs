@@ -13,22 +13,19 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		gren_nair,
-		gren_fair,
-		gren_bair,
-		gren_bair_eff,
-		gren_bair_snd,
-		gren_uair
-    );
+    Agent::new("gekkouga")
+    .acmd("game_attackairn", gren_nair)    
+    .acmd("game_attackairb", gren_bair)    
+    .acmd("game_attackairhi", gren_uair)    
+    .acmd("game_attackairf", gren_fair)    
+    .acmd("effect_attackairb", gren_bair_eff)    
+    .acmd("sound_attackairb", gren_bair_snd)    
+    .install();
 }
-#[acmd_script(
-    agent = "gekkouga",
-    script =  "game_attackairn",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn gren_nair(fighter: &mut L2CAgentBase) {
+
+unsafe extern "C" fn gren_nair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.6666666667);
 		frame(fighter.lua_state_agent, 10.0);
@@ -56,12 +53,7 @@ unsafe fn gren_nair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }	
-#[acmd_script(
-    agent = "gekkouga",
-    script =  "game_attackairb",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn gren_bair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn gren_bair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 2.0);
 		if macros::is_excute(fighter) {
@@ -88,12 +80,7 @@ unsafe fn gren_bair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }	
-#[acmd_script(
-    agent = "gekkouga",
-    script =  "game_attackairhi",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn gren_uair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn gren_uair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 3.0);
 		if macros::is_excute(fighter) {
@@ -131,12 +118,7 @@ unsafe fn gren_uair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }		
-#[acmd_script(
-    agent = "gekkouga",
-    script =  "game_attackairf",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn gren_fair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn gren_fair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
 		frame(fighter.lua_state_agent, 10.0);
@@ -167,12 +149,7 @@ unsafe fn gren_fair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }		
-#[acmd_script(
-    agent = "gekkouga",
-    script =  "effect_attackairb",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn gren_bair_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn gren_bair_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 10.0);
 		if macros::is_excute(fighter) {
@@ -186,12 +163,7 @@ unsafe fn gren_bair_eff(fighter: &mut L2CAgentBase) {
 			macros::LAST_EFFECT_SET_RATE(fighter, 1.2);
 		}
 }
-#[acmd_script(
-    agent = "gekkouga",
-    script =  "sound_attackairb",
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn gren_bair_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn gren_bair_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 10.0);
 		if macros::is_excute(fighter) {

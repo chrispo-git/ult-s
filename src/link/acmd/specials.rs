@@ -14,22 +14,25 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use crate::link::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		link_arrow_air,
-		link_arrow,
-		linkerang,
-		link_downb,
-		link_downb_eff,
-		link_downb_snd
-    );
+    Agent::new("link")
+    .acmd("game_specialairnstart", link_arrow_air)    
+    .acmd("game_specialnstart", link_arrow)    
+    .acmd("game_speciallwblast", link_downb)    
+    .acmd("game_specialairlwblast", link_downb)    
+    .acmd("effect_speciallwblast", link_downb_eff)    
+    .acmd("effect_specialairlwblast", link_downb_eff)    
+    .acmd("sound_speciallwblast", link_downb_snd)    
+    .acmd("sound_specialairlwblast", link_downb_snd)    
+    .install();
+
+	Agent::new("link_boomerang")
+    .acmd("game_fly", linkerang)    
+    .install();
 }
-#[acmd_script(
-    agent = "link",
-    scripts =  ["game_specialairnstart"],
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn link_arrow_air(fighter: &mut L2CAgentBase) {
+
+unsafe extern "C" fn link_arrow_air(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_LINK_GENERATE_ARTICLE_BOWARROW, false, 0);
@@ -42,12 +45,7 @@ unsafe fn link_arrow_air(fighter: &mut L2CAgentBase) {
 			WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_LINK_STATUS_BOW_FLAG_CHARGE);
 		}
 } 
-#[acmd_script(
-    agent = "link",
-    scripts =  ["game_specialnstart"],
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn link_arrow(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn link_arrow(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_LINK_GENERATE_ARTICLE_BOWARROW, false, 0);
@@ -61,12 +59,7 @@ unsafe fn link_arrow(fighter: &mut L2CAgentBase) {
 		}
 } 
 
-#[acmd_script(
-    agent = "link",
-    scripts =  ["game_speciallwblast", "game_specialairlwblast"],
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn link_downb(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn link_downb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	if StatusModule::status_kind(fighter.module_accessor) == *FIGHTER_LINK_STATUS_KIND_SPECIAL_LW_BLAST {
 			if macros::is_excute(fighter) {
@@ -89,12 +82,7 @@ unsafe fn link_downb(fighter: &mut L2CAgentBase) {
 			}
 	};
 }		
-#[acmd_script(
-    agent = "link",
-    scripts =  ["effect_speciallwblast", "effect_specialairlwblast"],
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn link_downb_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn link_downb_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	if StatusModule::status_kind(fighter.module_accessor) != *FIGHTER_LINK_STATUS_KIND_SPECIAL_LW_BLAST {
 			if macros::is_excute(fighter) {
@@ -108,12 +96,7 @@ unsafe fn link_downb_eff(fighter: &mut L2CAgentBase) {
 			};
 	};
 }	
-#[acmd_script(
-    agent = "link",
-    scripts =  ["sound_speciallwblast", "sound_specialairlwblast"],
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn link_downb_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn link_downb_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	if StatusModule::status_kind(fighter.module_accessor) != *FIGHTER_LINK_STATUS_KIND_SPECIAL_LW_BLAST {
 					frame(fighter.lua_state_agent, 10.0);
@@ -125,12 +108,7 @@ unsafe fn link_downb_snd(fighter: &mut L2CAgentBase) {
 			}
 			};
 }	
-#[acmd_script(
-    agent = "link_boomerang",
-    script =  "game_fly",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn linkerang(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn linkerang(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 4.0, /*Angle*/ 70, /*KBG*/ 40, /*FKB*/ 0, /*BKB*/ 80, /*Size*/ 4.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_SPEED, /*SetWeight*/ false, /*ShieldDamage*/ -4, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ true, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_OBJECT);

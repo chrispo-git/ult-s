@@ -16,19 +16,14 @@ use super::*;
 
 
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		bayo_dtilt,
-		bayo_utilt
-    );
+    Agent::new("bayonetta")
+    .acmd("game_attacklw3", bayo_dtilt)
+	.acmd("game_attackhi3", bayo_utilt)
+	.install();
 }
 
 	
-#[acmd_script(
-    agent = "bayonetta",
-    script =  "game_attacklw3",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn bayo_dtilt(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn bayo_dtilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 1.0);
 		if macros::is_excute(fighter) {
@@ -46,12 +41,7 @@ unsafe fn bayo_dtilt(fighter: &mut L2CAgentBase) {
 		AttackModule::clear_all(fighter.module_accessor);
 		}
 }
-#[acmd_script(
-    agent = "bayonetta",
-    script =  "game_attackhi3",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn bayo_utilt(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn bayo_utilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 1.0);
 		if macros::is_excute(fighter) {

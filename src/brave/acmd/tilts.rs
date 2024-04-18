@@ -15,14 +15,13 @@ use crate::util::*;
 use super::*;
 
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		hero_ftilt1,
-		hero_dtilt
-    );
+    Agent::new("brave")
+	.acmd("game_attacks3", hero_ftilt1)
+	.acmd("game_attacklw3", hero_dtilt)
+	.install();
 }
 
-#[acmd_script( agent = "brave", script = "game_attacks3", category = ACMD_GAME, low_priority )]
-unsafe fn hero_ftilt1(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn hero_ftilt1(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     macros::FT_MOTION_RATE(fighter, 1.5);
     frame(fighter.lua_state_agent, 5.0);
@@ -60,8 +59,7 @@ unsafe fn hero_ftilt1(fighter: &mut L2CAgentBase) {
         WorkModule::on_flag(fighter.module_accessor, *FIGHTER_STATUS_ATTACK_FLAG_ENABLE_COMBO);
     }
 }
-#[acmd_script( agent = "brave", script = "game_attacklw3", category = ACMD_GAME, low_priority )]
-unsafe fn hero_dtilt(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn hero_dtilt(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 5.0);
     if macros::is_excute(fighter) {
         FighterAreaModuleImpl::enable_fix_jostle_area(fighter.module_accessor, 4.0, 4.0);

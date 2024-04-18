@@ -14,8 +14,11 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 use crate::ike::*;
+
 pub fn install() {
-	smashline::install_agent_frame_callbacks!(ike);
+	Agent::new("ike")
+	.on_line(Main, ike)
+	.install();
 }
 
 pub(crate) fn check_jump(boma: &mut smash::app::BattleObjectModuleAccessor) -> bool {
@@ -36,8 +39,7 @@ pub(crate) fn check_jump(boma: &mut smash::app::BattleObjectModuleAccessor) -> b
 }
 
 //Ike
-#[fighter_frame_callback]
-pub fn ike(fighter : &mut L2CFighterCommon) {
+unsafe extern "C" fn ike(fighter : &mut L2CFighterCommon) {
     unsafe {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);  
 		let fighter_kind = smash::app::utility::get_kind(boma);
@@ -45,7 +47,7 @@ pub fn ike(fighter : &mut L2CFighterCommon) {
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
 		let motion_kind = MotionModule::motion_kind(boma);
 		let frame = MotionModule::frame(boma);
-		if fighter_kind == *FIGHTER_KIND_IKE && is_default(boma) {
+		if is_default(boma) {
 			if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_N {
 				MotionModule::set_rate(boma, 10.0);
 			};

@@ -13,23 +13,22 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		bowser_dair,
-		bowser_eff_dair,
-		bowser_snd_dair,
-		bowser_eff_land_dair,
-		bowser_land_dair,
-		bowser_snd_land_dair,
-		bowser_nair, bowser_nair_eff, bowser_nair_snd
-    );
+    Agent::new("koopa")
+    .acmd("game_attackairn", bowser_nair)    
+    .acmd("effect_attackairn", bowser_nair_eff)    
+    .acmd("sound_attackairn", bowser_nair_snd)    
+    .acmd("game_attackairlw", bowser_dair)    
+    .acmd("effect_attackairlw", bowser_eff_dair)    
+    .acmd("effect_landingairlw", bowser_eff_land_dair)    
+    .acmd("game_landingairlw", bowser_land_dair)    
+    .acmd("sound_landingairlw", bowser_snd_land_dair)    
+    .acmd("sound_attackairlw", bowser_snd_dair)    
+    .install();
 }
-#[acmd_script(
-    agent = "koopa",
-    script =  "game_attackairn",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn bowser_nair(fighter: &mut L2CAgentBase) {
+
+unsafe extern "C" fn bowser_nair(fighter: &mut L2CAgentBase) {
     	let lua_state = fighter.lua_state_agent;
         if macros::is_excute(fighter) {
             WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
@@ -51,12 +50,7 @@ unsafe fn bowser_nair(fighter: &mut L2CAgentBase) {
             WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
         }
 }
-#[acmd_script(
-    agent = "koopa",
-    script =  "effect_attackairn",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn bowser_nair_eff(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn bowser_nair_eff(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 8.0);
     for _ in 0..2 {
         if macros::is_excute(agent) {
@@ -73,23 +67,13 @@ unsafe fn bowser_nair_eff(agent: &mut L2CAgentBase) {
         macros::EFFECT_OFF_KIND(agent, Hash40::new("koopa_shell_a"), false, true);
     }
 }
-#[acmd_script(
-    agent = "koopa",
-    script =  "sound_attackairn",
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn bowser_nair_snd(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn bowser_nair_snd(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 8.0);
     if macros::is_excute(agent) {
         macros::PLAY_STATUS(agent, Hash40::new("se_koopa_special_h01"));
     }
 }
-#[acmd_script(
-    agent = "koopa",
-    script =  "game_attackairlw",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn bowser_dair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn bowser_dair(fighter: &mut L2CAgentBase) {
     	let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 14.0);
 		if macros::is_excute(fighter) {
@@ -116,12 +100,7 @@ unsafe fn bowser_dair(fighter: &mut L2CAgentBase) {
 			CancelModule::enable_cancel(fighter.module_accessor);
 		}
 }
-#[acmd_script(
-    agent = "koopa",
-    script =  "effect_attackairlw",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn bowser_eff_dair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn bowser_eff_dair(fighter: &mut L2CAgentBase) {
     	let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 16.0);
 		if macros::is_excute(fighter) {
@@ -129,43 +108,23 @@ unsafe fn bowser_eff_dair(fighter: &mut L2CAgentBase) {
 		}
 }	
 	
-#[acmd_script(
-    agent = "koopa",
-    script =  "effect_landingairlw",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn bowser_eff_land_dair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn bowser_eff_land_dair(fighter: &mut L2CAgentBase) {
     	let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			macros::LANDING_EFFECT(fighter, Hash40::new("sys_landing_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.3, 0, 0, 0, 0, 0, 0, false);
 		}
 }	
-#[acmd_script(
-    agent = "koopa",
-    script =  "game_landingairlw",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn bowser_land_dair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn bowser_land_dair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 }	
-#[acmd_script(
-    agent = "koopa",
-    script =  "sound_landingairlw",
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn bowser_snd_land_dair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn bowser_snd_land_dair(fighter: &mut L2CAgentBase) {
     	let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 1.0);
 		if macros::is_excute(fighter) {
 			macros::PLAY_LANDING_SE(fighter, Hash40::new("se_koopa_landing02"));
 		}
 	}	
-#[acmd_script(
-    agent = "koopa",
-    script =  "sound_attackairlw",
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn bowser_snd_dair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn bowser_snd_dair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 14.0);
 		if macros::is_excute(fighter) {

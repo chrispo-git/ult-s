@@ -14,12 +14,14 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[acmd_script(
-    agent = "pit",
-    script =  "game_specialairsend",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn pit_sideb(fighter: &mut L2CAgentBase) {
+pub fn install() {
+    Agent::new("pit")
+    .acmd("game_specialairsend", pit_sideb)    
+    .acmd("game_specialsend", pit_sideb_ground)    
+    .install();
+}
+
+unsafe extern "C" fn pit_sideb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 2.0);
 		if macros::is_excute(fighter) {
@@ -47,12 +49,7 @@ unsafe fn pit_sideb(fighter: &mut L2CAgentBase) {
 		frame(fighter.lua_state_agent, 22.0);
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.83);
 }			
-#[acmd_script(
-    agent = "pit",
-    script =  "game_specialsend",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn pit_sideb_ground(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn pit_sideb_ground(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 2.0);
 		if macros::is_excute(fighter) {
@@ -62,11 +59,4 @@ unsafe fn pit_sideb_ground(fighter: &mut L2CAgentBase) {
 		if macros::is_excute(fighter) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
-}		
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		pit_sideb,
-        pit_sideb_ground
-    );
-}
+}	

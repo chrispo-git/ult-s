@@ -15,20 +15,14 @@ use crate::util::*;
 use super::*;
 
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		hero_jab1,
-		hero_jab2,
-        hero_dsmash
-    );
+    Agent::new("brave")
+	.acmd("game_attack11", hero_jab1)
+	.acmd("game_attack12", hero_jab2)
+	.acmd("game_attacklw4", hero_dsmash)
+	.install();
 }
 
-
-#[acmd_script(
-    agent = "brave",
-    script =  "game_attack11",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn hero_jab1(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn hero_jab1(fighter: &mut L2CAgentBase) {
     	let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 6.0);
 		if macros::is_excute(fighter) {
@@ -53,12 +47,7 @@ unsafe fn hero_jab1(fighter: &mut L2CAgentBase) {
 		}
 }
 
-#[acmd_script(
-    agent = "brave",
-    script =  "game_attack12",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn hero_jab2(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn hero_jab2(fighter: &mut L2CAgentBase) {
    	 	let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 6.0);
 		if macros::is_excute(fighter) {
@@ -81,8 +70,7 @@ unsafe fn hero_jab2(fighter: &mut L2CAgentBase) {
 		}
 }
 
-#[acmd_script( agent = "brave", script = "game_attacklw4", category = ACMD_GAME, low_priority )]
-unsafe fn hero_dsmash(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn hero_dsmash(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 3.0);
     if macros::is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, *FIGHTER_STATUS_ATTACK_FLAG_START_SMASH_HOLD);

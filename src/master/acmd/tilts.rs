@@ -14,15 +14,16 @@ use smash::phx::Vector3f;
 use smash::phx::Vector2f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		byleth_dtilt,
-		byleth_ftilt,
-		byleth_dtilt_eff
-    );
+    Agent::new("master")
+    .acmd("game_attacks3", byleth_ftilt)    
+    .acmd("game_attacklw3", byleth_dtilt)    
+    .acmd("effect_attacklw3", byleth_dtilt_eff)    
+    .install();
 }
-#[acmd_script( agent = "master", script = "game_attacks3", category = ACMD_GAME, low_priority )]
-unsafe fn byleth_ftilt(fighter: &mut L2CAgentBase) {
+
+unsafe extern "C" fn byleth_ftilt(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 10.0);
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, 1, 0, Hash40::new("armr"), 10.0, 35, 90, 0, 30, 2.5, 0.0, 0.0, -1.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_cutup"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_CUTUP, *ATTACK_REGION_SWORD);
@@ -36,12 +37,7 @@ unsafe fn byleth_ftilt(fighter: &mut L2CAgentBase) {
         FighterAreaModuleImpl::enable_fix_jostle_area(fighter.module_accessor, 3.0, 4.0);
     }
 }		
-#[acmd_script(
-    agent = "master",
-    script =  "game_attacklw3",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn byleth_dtilt(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn byleth_dtilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_MASTER_GENERATE_ARTICLE_SWORD, false, 0);
@@ -62,12 +58,7 @@ unsafe fn byleth_dtilt(fighter: &mut L2CAgentBase) {
 			ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_MASTER_GENERATE_ARTICLE_SWORD,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
 		}
 }	
-#[acmd_script(
-    agent = "master",
-    scripts =  ["effect_attacklw3"],
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn byleth_dtilt_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn byleth_dtilt_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 11.0);
 		if macros::is_excute(fighter) {

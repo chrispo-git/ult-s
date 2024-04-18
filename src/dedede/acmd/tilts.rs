@@ -13,21 +13,18 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		d3_ftilt,
-		d3_utilt,
-		d3_dtilt,
-		d3_dtilt_eff,
-		d3_dtilt_exp
-    );
+    Agent::new("dedede")
+    .acmd("game_attackhi3", d3_utilt)    
+    .acmd("game_attacks3", d3_ftilt)    
+    .acmd("game_attacklw3", d3_dtilt)    
+    .acmd("effect_attacklw3", d3_dtilt_eff)    
+    .acmd("expression_attacklw3", d3_dtilt_exp)    
+    .install();
 }	
-#[acmd_script(
-    agent = "dedede",
-    script =  "game_attackhi3",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn d3_utilt(fighter: &mut L2CAgentBase) {
+
+unsafe extern "C" fn d3_utilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 7.0);
 		if macros::is_excute(fighter) {
@@ -47,12 +44,7 @@ unsafe fn d3_utilt(fighter: &mut L2CAgentBase) {
 		}
 }		
 		
-#[acmd_script(
-    agent = "dedede",
-    script =  "game_attacks3",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn d3_ftilt(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn d3_ftilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
 		frame(fighter.lua_state_agent, 12.0);
@@ -87,12 +79,7 @@ unsafe fn d3_ftilt(fighter: &mut L2CAgentBase) {
 		}
 }
 
-#[acmd_script(
-    agent = "dedede",
-    script =  "game_attacklw3",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn d3_dtilt(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn d3_dtilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 15.0);
 		if macros::is_excute(fighter) {
@@ -105,22 +92,12 @@ unsafe fn d3_dtilt(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }
-#[acmd_script(
-    agent = "dedede",
-    script =  "effect_attacklw3",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn d3_dtilt_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn d3_dtilt_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	
 	
 }	
-#[acmd_script(
-    agent = "dedede",
-    script =  "expression_attacklw3",
-    category = ACMD_EXPRESSION,
-	low_priority)]
-unsafe fn d3_dtilt_exp(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn d3_dtilt_exp(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	
 	

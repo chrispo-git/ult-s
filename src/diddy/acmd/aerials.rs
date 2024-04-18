@@ -13,17 +13,14 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		diddy_nair
-    );
+    Agent::new("diddy")
+    .acmd("game_attackairn", diddy_nair)    
+    .install();
 }
-#[acmd_script(
-    agent = "diddy",
-    script =  "game_attackairn",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn diddy_nair(fighter: &mut L2CAgentBase) {
+
+unsafe extern "C" fn diddy_nair(fighter: &mut L2CAgentBase) {
     	let lua_state = fighter.lua_state_agent;
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
 		frame(fighter.lua_state_agent, 4.0);

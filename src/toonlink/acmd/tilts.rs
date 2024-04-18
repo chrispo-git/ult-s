@@ -14,12 +14,15 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[acmd_script(
-    agent = "toonlink",
-    script =  "game_attacklw3",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn tink_dtilt(fighter: &mut L2CAgentBase) {
+pub fn install() {
+    Agent::new("toonlink")
+    .acmd("game_attacklw3", tink_dtilt)    
+    .acmd("game_attacks3", tink_ftilt)    
+    .acmd("game_attackhi3", tink_utilt)    
+    .install();
+}
+
+unsafe extern "C" fn tink_dtilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 9.0);
 		if macros::is_excute(fighter) {
@@ -32,12 +35,7 @@ unsafe fn tink_dtilt(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }	
-#[acmd_script(
-    agent = "toonlink",
-    script =  "game_attacks3",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn tink_ftilt(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn tink_ftilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 9.0);
 		if macros::is_excute(fighter) {
@@ -55,12 +53,7 @@ unsafe fn tink_ftilt(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }	
-#[acmd_script(
-    agent = "toonlink",
-    script =  "game_attackhi3",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn tink_utilt(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn tink_utilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 8.0);
 		if macros::is_excute(fighter) {
@@ -73,11 +66,3 @@ unsafe fn tink_utilt(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }	
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		tink_dtilt,
-        tink_ftilt,
-        tink_utilt
-    );
-}

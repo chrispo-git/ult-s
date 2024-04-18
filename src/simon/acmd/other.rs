@@ -14,20 +14,16 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[acmd_script(
-    agent = "simon",
-    script =  "effect_landingheavy",
-    category = ACMD_EFFECT)]
-unsafe fn simon_landing(fighter: &mut L2CAgentBase) {
+pub fn install() {
+  Agent::new("simon")
+  .acmd("effect_landingheavy", simon_landing)    
+  .install();
+}
+
+unsafe extern "C" fn simon_landing(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 2.0);
 		if macros::is_excute(fighter) {
 			macros::LANDING_EFFECT(fighter, Hash40::new("sys_landing_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.9, 0, 0, 0, 0, 0, 0, true);
 		}
 }	
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		simon_landing
-    );
-}

@@ -15,5 +15,5 @@ use crate::util::*;
 use super::*;
 
 pub fn install() {
-    smashline::install_status_scripts!();
+    
 }

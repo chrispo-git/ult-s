@@ -15,8 +15,10 @@ skyline = "0.2.0"
 ninput = { git = "https://github.com/blu-dev/ninput", version = "0.1.0" }
 skyline_smash = { git = "https://github.com/blu-dev/skyline-smash.git", features = ["weak_l2cvalue"] }
 smash_script = { git = "https://github.com/blu-dev/smash-script.git", branch = "development" }
-smashline = { git = "https://github.com/blu-dev/smashline.git", branch = "development" }
+smashline = { git = "https://github.com/blu-dev/smashline-2" }
 skyline-web = { git = "https://github.com/skyline-rs/skyline-web", optional = true }
+param_config = { git = "https://github.com/csharpm7/lib_paramconfig.git"}
+the_csk_collection_api = { git = "https://github.com/Coolsonickirby/the_csk_collection_api.git", branch = "nightly" }
 bitflags = "1.3.2"
 modular-bitfield = "0.11.2"
 lazy_static = "1.4.0"

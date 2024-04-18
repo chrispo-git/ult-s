@@ -14,22 +14,19 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use crate::mario::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		mario_uair,
-		mario_dair,
-		mario_dair_eff,
-		mario_dair_land,
-		mario_fair,
-		mario_fair_eff
-    );
+    Agent::new("mario")
+    .acmd("game_attackairlw", mario_dair)    
+    .acmd("effect_attackairlw", mario_dair_eff)    
+    .acmd("game_landingairlw", mario_dair_land)    
+    .acmd("game_attackairhi", mario_uair)    
+    .acmd("game_attackairf", mario_fair)    
+    .acmd("effect_attackairf", mario_fair_eff)    
+    .install();
 }
-#[acmd_script(
-    agent = "mario",
-    script =  "game_attackairlw",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn mario_dair(fighter: &mut L2CAgentBase) {
+
+unsafe extern "C" fn mario_dair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 4.0);
 		if macros::is_excute(fighter) {
@@ -63,12 +60,7 @@ unsafe fn mario_dair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }
-#[acmd_script(
-    agent = "mario",
-    script =  "effect_attackairlw",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn mario_dair_eff(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn mario_dair_eff(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 3.0);
     if macros::is_excute(agent) {
         macros::EFFECT_FOLLOW(agent, Hash40::new("sys_spin_wind"), Hash40::new("top"), 0, 2, 4, 49.602, -59.68, 150.37, 0.35, true);
@@ -108,12 +100,7 @@ unsafe fn mario_dair_eff(agent: &mut L2CAgentBase) {
         macros::LAST_EFFECT_SET_RATE(agent, 1.3);
     }
 }
-#[acmd_script(
-    agent = "mario",
-    script =  "game_landingairlw",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn mario_dair_land(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn mario_dair_land(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 2.0, /*Angle*/ 361, /*KBG*/ 100, /*FKB*/ 60, /*BKB*/ 0, /*Size*/ 4.3, /*X*/ 0.0, /*Y*/ 3.2, /*Z*/ 4.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_G, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_KICK);
@@ -126,12 +113,7 @@ unsafe fn mario_dair_land(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }
-#[acmd_script(
-    agent = "mario",
-    script =  "game_attackairhi",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn mario_uair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn mario_uair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 2.0);
 		if macros::is_excute(fighter) {
@@ -153,8 +135,7 @@ unsafe fn mario_uair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }
-#[acmd_script( agent = "mario", script = "game_attackairf", category = ACMD_GAME, low_priority )]
-unsafe fn mario_fair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn mario_fair(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 3.0);
     if macros::is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
@@ -182,8 +163,7 @@ unsafe fn mario_fair(fighter: &mut L2CAgentBase) {
         WorkModule::off_flag(fighter.module_accessor, *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
     }
 }
-#[acmd_script( agent = "mario", script = "effect_attackairf", category = ACMD_EFFECT, low_priority )]
-unsafe fn mario_fair_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn mario_fair_eff(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 4.0);
     if macros::is_excute(fighter) {
         macros::EFFECT(fighter, Hash40::new("sys_smash_flash"), Hash40::new("handl"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, true);

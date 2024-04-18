@@ -13,19 +13,16 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		ganon_jab,
-		ganon_usmash,
-		ganon_fsmash
-    );
+    Agent::new("ganon")
+    .acmd("game_attackhi4", ganon_usmash)    
+    .acmd("game_attack11", ganon_jab)    
+    .acmd("game_attacks4", ganon_fsmash)    
+    .install();
 }
-#[acmd_script(
-    agent = "ganon",
-    script =  "game_attackhi4",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn ganon_usmash(fighter: &mut L2CAgentBase) {
+
+unsafe extern "C" fn ganon_usmash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	if macros::is_excute(fighter) {
 		ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_GANON_GENERATE_ARTICLE_SWORD, false, 0);
@@ -48,12 +45,7 @@ unsafe fn ganon_usmash(fighter: &mut L2CAgentBase) {
 		}
 }	
 		
-#[acmd_script(
-    agent = "ganon",
-    script =  "game_attack11",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn ganon_jab(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn ganon_jab(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 3.0);
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.8);
@@ -70,12 +62,7 @@ unsafe fn ganon_jab(fighter: &mut L2CAgentBase) {
 		}
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.9);
 }	
-#[acmd_script(
-    agent = "ganon",
-    script =  "game_attacks4",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn ganon_fsmash(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn ganon_fsmash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_GANON_GENERATE_ARTICLE_SWORD, false, 0);

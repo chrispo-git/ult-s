@@ -15,12 +15,13 @@ use crate::util::*;
 use super::*;
 use super::super::*;
 
-#[acmd_script(
-    agent = "rosetta",
-    script =  "game_attack11",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn rosa_jab(fighter: &mut L2CAgentBase) {
+pub fn install() {
+    Agent::new("rosetta")
+    .acmd("game_attack11", rosa_jab)    
+    .install();
+}
+
+unsafe extern "C" fn rosa_jab(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 7.0);
 		if macros::is_excute(fighter) {
@@ -39,10 +40,4 @@ unsafe fn rosa_jab(fighter: &mut L2CAgentBase) {
 		if macros::is_excute(fighter) {
 			WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_FLAG_ENABLE_COMBO);
 		}
-}
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		rosa_jab
-    );
 }

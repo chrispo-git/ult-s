@@ -16,12 +16,7 @@ use super::*;
 pub fn install() {
     
 }
-#[acmd_script(
-    agent = "edge",
-    script =  "game_throwb",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn seph_bthrow(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn seph_bthrow(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, /*ID*/ 0, /*Damage*/ 3.5, /*Angle*/ 58, /*KBG*/ 115, /*FKB*/ 0, /*BKB*/ 60, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_B, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
@@ -41,12 +36,7 @@ unsafe fn seph_bthrow(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }			
-#[acmd_script(
-    agent = "edge",
-    script =  "game_throwhi",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn seph_uthrow(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn seph_uthrow(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, /*ID*/ 0, /*Damage*/ 3.0, /*Angle*/ 98, /*KBG*/ 125, /*FKB*/ 0, /*BKB*/ 70, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
@@ -70,12 +60,7 @@ unsafe fn seph_uthrow(fighter: &mut L2CAgentBase) {
 		frame(fighter.lua_state_agent, 40.0);
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 1);
 }		
-#[acmd_script(
-    agent = "edge",
-    script =  "game_throwlw",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn seph_dthrow(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn seph_dthrow(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.75);
 		if macros::is_excute(fighter) {
@@ -88,8 +73,7 @@ unsafe fn seph_dthrow(fighter: &mut L2CAgentBase) {
 			macros::ATK_HIT_ABS(fighter, *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, Hash40::new("throw"), WorkModule::get_int64(fighter.module_accessor,*FIGHTER_STATUS_THROW_WORK_INT_TARGET_OBJECT), WorkModule::get_int64(fighter.module_accessor,*FIGHTER_STATUS_THROW_WORK_INT_TARGET_HIT_GROUP), WorkModule::get_int64(fighter.module_accessor,*FIGHTER_STATUS_THROW_WORK_INT_TARGET_HIT_NO));
 		}
 }
-#[acmd_script( agent = "edge", script = "game_catch", category = ACMD_GAME, low_priority )]
-unsafe fn seph_stand_grab(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn seph_stand_grab(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 6.0);
     if macros::is_excute(fighter) {
         GrabModule::set_rebound(fighter.module_accessor, true);

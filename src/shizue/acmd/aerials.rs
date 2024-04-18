@@ -15,11 +15,22 @@ use crate::util::*;
 use super::*;
 use super::super::*;
 
-#[acmd_script(
-    agent = "shizue",
-    script =  "game_attackairb",
-    category = ACMD_GAME, low_priority )]
-unsafe fn isa_bair(fighter: &mut L2CAgentBase) {
+pub fn install() {
+    Agent::new("shizue")
+    .acmd("game_attackairb", isa_bair)    
+    .acmd("game_attackairlw", isa_dair)    
+    .acmd("game_landingairlw", isa_dair_land)    
+    .acmd("effect_attackairb", isa_bair_eff)    
+    .acmd("sound_attackairb", isa_bair_snd)    
+    .acmd("game_landingairb", isa_bairland)    
+    .acmd("game_attackairf", isa_fair)    
+    .acmd("sound_attackairf", isa_fair_snd)    
+    .acmd("effect_attackairf", isa_fair_eff)    
+    .acmd("game_landingairf", isa_fairland)    
+    .install();
+}
+
+unsafe extern "C" fn isa_bair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_SHIZUE_GENERATE_ARTICLE_BROOM, false, 0);
@@ -45,11 +56,7 @@ unsafe fn isa_bair(fighter: &mut L2CAgentBase) {
 			ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_SHIZUE_GENERATE_ARTICLE_BROOM,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
 		}
 }
-#[acmd_script(
-    agent = "shizue",
-    script =  "game_attackairlw",
-    category = ACMD_GAME, low_priority )]
-unsafe fn isa_dair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn isa_dair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 1.0);
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.769);
@@ -79,54 +86,34 @@ unsafe fn isa_dair(fighter: &mut L2CAgentBase) {
 			ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_SHIZUE_GENERATE_ARTICLE_PICOPICOHAMMER,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
 		}
 }
-#[acmd_script(
-    agent = "shizue",
-    script =  "game_landingairlw",
-    category = ACMD_GAME, low_priority )]
-unsafe fn isa_dair_land(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn isa_dair_land(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 10.0);
 		if macros::is_excute(fighter) {
 			ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_SHIZUE_GENERATE_ARTICLE_PICOPICOHAMMER,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
 		}
 }
-#[acmd_script(
-    agent = "shizue",
-    script =  "effect_attackairb",
-    category = ACMD_EFFECT, low_priority )]
-unsafe fn isa_bair_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn isa_bair_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 8.0);
 		if macros::is_excute(fighter) {
 			macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new_raw(0x1288a621ad), Hash40::new_raw(0x1288a621ad), Hash40::new("top"), -3, 0, 0, 13, 180, 180, 1.6, false, *EF_FLIP_YZ);
 		}
 }
-#[acmd_script(
-    agent = "shizue",
-    script =  "sound_attackairb",
-    category = ACMD_SOUND, low_priority )]
-unsafe fn isa_bair_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn isa_bair_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 10.0);
 		if macros::is_excute(fighter) {
 			macros::PLAY_SE(fighter, Hash40::new("se_shizue_attackhard_h01"));
 		}
 }
-#[acmd_script(
-    agent = "shizue",
-    script =  "game_landingairb",
-    category = ACMD_GAME, low_priority )]
-unsafe fn isa_bairland(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn isa_bairland(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_SHIZUE_GENERATE_ARTICLE_BROOM,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
 		}
 }
-#[acmd_script(
-    agent = "shizue",
-    script =  "game_attackairf",
-    category = ACMD_GAME, low_priority )]
-unsafe fn isa_fair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn isa_fair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_SHIZUE_GENERATE_ARTICLE_CRACKER, false, 0);
@@ -154,11 +141,7 @@ unsafe fn isa_fair(fighter: &mut L2CAgentBase) {
 			ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_SHIZUE_GENERATE_ARTICLE_CRACKER,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
 		}
 }
-#[acmd_script(
-    agent = "shizue",
-    script =  "sound_attackairf",
-    category = ACMD_SOUND, low_priority )]
-unsafe fn isa_fair_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn isa_fair_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 7.0);
 		if macros::is_excute(fighter) {
@@ -170,11 +153,7 @@ unsafe fn isa_fair_snd(fighter: &mut L2CAgentBase) {
 			macros::PLAY_SE(fighter, Hash40::new("se_shizue_smash_s01"));
 		}
 }
-#[acmd_script(
-    agent = "shizue",
-    script =  "effect_attackairf",
-    category = ACMD_EFFECT, low_priority )]
-unsafe fn isa_fair_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn isa_fair_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 7.0);
 		if macros::is_excute(fighter) {
@@ -186,24 +165,9 @@ unsafe fn isa_fair_eff(fighter: &mut L2CAgentBase) {
 			macros::PLAY_SE(fighter, Hash40::new("se_shizue_smash_s01"));
 		}
 }
-#[acmd_script(
-    agent = "shizue",
-    script =  "game_landingairf",
-    category = ACMD_GAME, low_priority )]
-unsafe fn isa_fairland(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn isa_fairland(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_SHIZUE_GENERATE_ARTICLE_CRACKER,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
 		}
-}
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		isa_bair, isa_bair_eff, isa_bair_snd,
-        isa_dair,
-        isa_dair_land,
-        isa_bairland,
-        isa_fair, isa_fair_eff, isa_fair_snd,
-        isa_fairland
-    );
 }

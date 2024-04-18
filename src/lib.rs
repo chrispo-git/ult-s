@@ -10,6 +10,7 @@
 #[cfg(feature = "main_nro")]
 use skyline_web::dialog_ok::DialogOk;
 use std::{fs, path::Path};
+use skyline_web::dialog_ok::DialogOk;
 
 #[macro_use]
 extern crate modular_bitfield;
@@ -39,16 +40,29 @@ pub fn is_on_ryujinx() -> bool {
     }
 }
 
-#[cfg(feature = "main_nro")]
-pub fn quick_validate_install() {
+pub fn quick_validate_install() -> bool {
+    let mut passed = true;
     //plugin checks
-    let has_param_config = Path::new("sd:/atmosphere/contents/01006a800016e000/romfs/skyline/plugins/libparam_config.nro").is_file();
-    let has_css_redirector = Path::new("sd:/atmosphere/contents/01006a800016e000/romfs/skyline/plugins/libcss_slot_redirection.nro").is_file();
-    let has_stage_config = Path::new("sd:/atmosphere/contents/01006a800016e000/romfs/skyline/plugins/libstage_config.nro").is_file();
-    let has_arcropolis = Path::new("sd:/atmosphere/contents/01006a800016e000/romfs/skyline/plugins/libarcropolis.nro").is_file();
-    let has_nro_hook = Path::new("sd:/atmosphere/contents/01006a800016e000/romfs/skyline/plugins/libnro_hook.nro").is_file();
-    let has_smashline = Path::new("sd:/atmosphere/contents/01006a800016e000/romfs/skyline/plugins/libsmashline_hook.nro").is_file();
-    let has_skyline = Path::new("sd:/atmosphere/contents/01006a800016e000/exefs/").is_dir();
+    let has_param_config = Path::new(
+        "rom:/skyline/plugins/libparam_config.nro",
+    )
+    .is_file();
+    let has_css_redirector = Path::new(
+        "rom:/skyline/plugins/libthe_csk_collection.nro",
+    )
+    .is_file();
+    let has_arcropolis = Path::new(
+        "rom:/skyline/plugins/libarcropolis.nro",
+    )
+    .is_file();
+    let has_nro_hook = Path::new(
+        "rom:/skyline/plugins/libnro_hook.nro"
+    )
+    .is_file();
+    let has_smashline = Path::new(
+        "rom:/skyline/plugins/libsmashline_plugin.nro",
+    )
+    .is_file();
 
     if has_param_config {
         println!("libparam_config.nro is present");
@@ -58,24 +72,17 @@ pub fn quick_validate_install() {
         } else {
             DialogOk::ok("libparam_config.nro not found! This installation is incomplete. Please download all dependencies listed in the README file.");
         }
+        passed = false;
     }
     if has_css_redirector {
-        println!("libcss_slot_redirection.nro is present");
+        println!("libthe_csk_collection.nro is present");
     } else {
         if is_on_ryujinx() {
-            println!("libcss_slot_redirection.nro not found! This installation is incomplete. Please download all dependencies listed in the README file.");
+            println!("libthe_csk_collection.nro not found! This installation is incomplete. Please download all dependencies listed in the README file.");
         } else {
-            DialogOk::ok("libcss_slot_redirection.nro not found! This installation is incomplete. Please download all dependencies listed in the README file.");
+            DialogOk::ok("libthe_csk_collection.nro not found! This installation is incomplete. Please download all dependencies listed in the README file.");
         }
-    }
-    if has_stage_config {
-        println!("libstage_config.nro is present");
-    } else {
-        if is_on_ryujinx() {
-            println!("libstage_config.nro not found! This installation is incomplete. Please download all dependencies listed in the README file.");
-        } else {
-            DialogOk::ok("libstage_config.nro not found! This installation is incomplete. Please download all dependencies listed in the README file.");
-        }
+        passed = false;
     }
     if has_arcropolis {
         println!("libarcropolis.nro is present");
@@ -85,6 +92,7 @@ pub fn quick_validate_install() {
         } else {
             DialogOk::ok("libarcropolis.nro not found! This installation is incomplete. Please download all dependencies listed in the README file.");
         }
+        passed = false;
     }
     if has_nro_hook {
         println!("libnro_hook.nro is present");
@@ -94,25 +102,20 @@ pub fn quick_validate_install() {
         } else {
             DialogOk::ok("libnro_hook.nro not found! This installation is incomplete. Please download all dependencies listed in the README file.");
         }
+        passed = false;
     }
     if has_smashline {
-        println!("libsmashline_hook.nro is present");
+        println!("libsmashline_plugin.nro is present");
     } else {
         if is_on_ryujinx() {
-            println!("libsmashline_hook.nro not found! This installation is incomplete. Please download all dependencies listed in the README file.");
+            println!("libsmashline_plugin.nro not found! This installation is incomplete. Please download all dependencies listed in the README file.");
         } else {
-            DialogOk::ok("libsmashline_hook.nro not found! This installation is incomplete. Please download all dependencies listed in the README file.");
+            DialogOk::ok("libsmashline_plugin.nro not found! This installation is incomplete. Please download all dependencies listed in the README file.");
         }
+        passed = false;
     }
-    if has_skyline {
-        println!("Skyline is present");
-    } else {
-        if is_on_ryujinx() {
-            println!("Skyline not found! This installation is incomplete. Please download all dependencies listed in the README file.");
-        } else {
-            DialogOk::ok("Skyline not found! This installation is incomplete. Please download all dependencies listed in the README file.");
-        }
-    }
+
+    passed
 }
 
 extern "C" {
@@ -335,10 +338,8 @@ pub extern "C" fn is_ultimate_s() {}
 #[no_mangle]
 pub extern "C" fn main() {
 
-    //runs the dependencies check function
-    #[cfg(feature = "main_nro")]
-    {
-        quick_validate_install();
+    if !quick_validate_install() {
+        return; // don't do anything else since they don't have all dependencies
     }
 
     //allows online play with added chars

@@ -15,8 +15,13 @@ use smash::phx::Vector2f;
 use crate::util::*;
 use super::*;
 
-#[fighter_frame_callback]
-pub fn sora(fighter : &mut L2CFighterCommon) {
+pub fn install() {
+    Agent::new("trail")
+    .on_line(Main, sora)
+    .install();
+}
+
+unsafe extern "C" fn sora(fighter : &mut L2CFighterCommon) {
     unsafe {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 		if is_default(boma) {
@@ -147,8 +152,4 @@ pub fn sora(fighter : &mut L2CFighterCommon) {
 			};
 		}
     }
-}
-
-pub fn install() {
-    smashline::install_agent_frame_callbacks!(sora);
 }

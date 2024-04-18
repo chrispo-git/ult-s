@@ -17,7 +17,9 @@ use super::*;
 use crate::ganon::*;
 
 pub fn install() {
-    smashline::install_agent_frame_callbacks!(ganon_float);
+    Agent::new("ganon")
+        .on_line(Main, ganon_float)
+        .install();
 }
 		
 pub(crate) fn check_jump(boma: &mut smash::app::BattleObjectModuleAccessor) -> bool {
@@ -34,8 +36,7 @@ pub(crate) fn check_jump(boma: &mut smash::app::BattleObjectModuleAccessor) -> b
 		return false;
 	}
 }
-#[fighter_frame_callback]
-pub fn ganon_float(fighter : &mut L2CFighterCommon) {
+unsafe extern "C" fn ganon_float(fighter : &mut L2CFighterCommon) {
     unsafe {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);

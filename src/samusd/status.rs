@@ -14,12 +14,10 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[status_script(agent = "samusd_missile", status = WEAPON_SAMUS_MISSILE_STATUS_KIND_HOMING, condition = LUA_SCRIPT_STATUS_FUNC_EXEC_STATUS)]
-unsafe fn missile_exec(fighter: &mut L2CFighterBase) -> L2CValue {
+unsafe extern "C" fn missile_exec(fighter: &mut L2CFighterBase) -> L2CValue {
 	0.into()
 }	
-#[status_script(agent = "samusd", status = FIGHTER_SAMUS_STATUS_KIND_SPECIAL_AIR_LW, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_PRE)]
-unsafe fn special_air_lw_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
+unsafe extern "C" fn special_air_lw_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
     StatusModule::init_settings(
         fighter.module_accessor,
         smash::app::SituationKind(*SITUATION_KIND_NONE),
@@ -47,8 +45,7 @@ unsafe fn special_air_lw_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
     );
     0.into()
 }	
-#[status_script(agent = "samusd", status = FIGHTER_SAMUS_STATUS_KIND_SPECIAL_GROUND_LW, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_PRE)]
-unsafe fn special_lw_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
+unsafe extern "C" fn special_lw_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
     StatusModule::init_settings(
         fighter.module_accessor,
         smash::app::SituationKind(*SITUATION_KIND_NONE),
@@ -78,5 +75,12 @@ unsafe fn special_lw_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
 }	
 
 pub fn install() {
-    smashline::install_status_scripts!(missile_exec, special_lw_pre, special_air_lw_pre);
+    Agent::new("samusd")
+        .status(Pre, *FIGHTER_SAMUS_STATUS_KIND_SPECIAL_AIR_LW, special_air_lw_pre)
+        .status(Pre, *FIGHTER_SAMUS_STATUS_KIND_SPECIAL_GROUND_LW, special_lw_pre)
+        .install();
+
+    Agent::new("samusd_missile")
+        .status(Exec, *WEAPON_SAMUS_MISSILE_STATUS_KIND_HOMING, missile_exec)
+        .install();
 }

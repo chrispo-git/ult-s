@@ -14,19 +14,20 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 use crate::ike::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		ike_upb4,
-		ike_sideb_eff,
-		ike_upb4_eff, ike_upb4_snd
-    );
+    Agent::new("ike")
+    .acmd("game_specialnend", ike_neutralb)    
+    .acmd("game_specialairnend", ike_neutralb)    
+    .acmd("game_specialhi4", ike_upb4)    
+    .acmd("effect_specialhi4", ike_upb4_eff)    
+    .acmd("sound_specialhi4", ike_upb4_snd)    
+    .acmd("effect_specialsattack", ike_sideb_eff)    
+    .acmd("effect_specialairsattack", ike_sideb_eff)    
+    .install();
 }
-#[acmd_script(
-    agent = "ike",
-    scripts =  ["game_specialnend", "game_specialairnend"],
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn ike_neutralb(fighter: &mut L2CAgentBase) {
+
+unsafe extern "C" fn ike_neutralb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 11.0);
 		if macros::is_excute(fighter) {
@@ -45,12 +46,7 @@ unsafe fn ike_neutralb(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }	
-#[acmd_script(
-    agent = "ike",
-    script =  "game_specialhi4",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn ike_upb4(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn ike_upb4(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 		if macros::is_excute(fighter) {
@@ -72,12 +68,7 @@ unsafe fn ike_upb4(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		};
 }
-#[acmd_script(
-    agent = "ike",
-    script =  "effect_specialhi4",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn ike_upb4_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn ike_upb4_eff(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 		if macros::is_excute(fighter) {
@@ -93,12 +84,7 @@ unsafe fn ike_upb4_eff(fighter: &mut L2CAgentBase) {
 			macros::EFFECT_OFF_KIND(fighter, Hash40::new("ike_sword"), true, true);
 		};
 }
-#[acmd_script(
-    agent = "ike",
-    script =  "sound_specialhi4",
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn ike_upb4_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn ike_upb4_snd(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 		if macros::is_excute(fighter) {
@@ -110,12 +96,7 @@ unsafe fn ike_upb4_snd(fighter: &mut L2CAgentBase) {
 			};
 		};
 }
-#[acmd_script(
-    agent = "ike",
-    scripts =  ["effect_specialsattack", "effect_specialairsattack"],
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn ike_sideb_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn ike_sideb_eff(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 		frame(fighter.lua_state_agent, 1.0);

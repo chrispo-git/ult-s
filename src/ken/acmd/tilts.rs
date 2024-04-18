@@ -16,12 +16,7 @@ use super::*;
 pub fn install() {
     
 }
-#[acmd_script(
-    agent = "ken",
-    script =  "game_attacknearw",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn ken_prox_ftilt(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn ken_prox_ftilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_RYU_INSTANCE_WORK_ID_FLAG_FINAL_HIT_CANCEL);

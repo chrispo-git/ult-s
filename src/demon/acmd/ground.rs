@@ -13,20 +13,17 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-	smashline::install_acmd_scripts!(
-        kaz_flashtornado, 
-        kaz_staturesmash, 
-        kaz_ewgf, 
-        kaz_wgf
-    );
+	Agent::new("demon")
+    .acmd("game_attackstand4", kaz_staturesmash)    
+    .acmd("game_attackstand5", kaz_flashtornado)    
+    .acmd("game_attackstep2f", kaz_ewgf)    
+    .acmd("game_attackstep2", kaz_wgf)    
+    .install();
 }
-#[acmd_script( 
-agent = "demon", 
-scripts = ["game_attackstand4"], 
-category = ACMD_GAME,
-low_priority)]
-unsafe fn kaz_staturesmash(fighter: &mut L2CAgentBase) {
+
+unsafe extern "C" fn kaz_staturesmash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 12.0);
 		if macros::is_excute(fighter) {
@@ -51,12 +48,7 @@ unsafe fn kaz_staturesmash(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }	
-#[acmd_script( 
-agent = "demon", 
-scripts = ["game_attackstand5"], 
-category = ACMD_GAME,
-low_priority)]
-unsafe fn kaz_flashtornado(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn kaz_flashtornado(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	
 		frame(fighter.lua_state_agent, 10.0);
@@ -69,12 +61,7 @@ unsafe fn kaz_flashtornado(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }	
-#[acmd_script( 
-agent = "demon", 
-scripts = ["game_attackstep2f"], 
-category = ACMD_GAME,
-low_priority)]
-unsafe fn kaz_ewgf(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn kaz_ewgf(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			macros::HIT_NODE(fighter, Hash40::new("head"), *HIT_STATUS_XLU);
@@ -178,12 +165,7 @@ unsafe fn kaz_ewgf(fighter: &mut L2CAgentBase) {
 		}
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.9);
 }
-#[acmd_script( 
-agent = "demon", 
-scripts = ["game_attackstep2"], 
-category = ACMD_GAME,
-low_priority)]
-unsafe fn kaz_wgf(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn kaz_wgf(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 10.0);
 		if macros::is_excute(fighter) {

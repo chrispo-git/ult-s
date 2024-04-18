@@ -14,12 +14,19 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[acmd_script(
-    agent = "roy",
-    script =  "game_attackairb",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn roy_bair(fighter: &mut L2CAgentBase) {
+pub fn install() {
+    Agent::new("roy")
+    .acmd("game_attackairb", roy_bair)    
+	.acmd("game_attackairhi", roy_uair)    
+	.acmd("game_attackairn", roy_nair)    
+	.acmd("game_attackairlw", roy_dair)    
+	.acmd("effect_attackairlw", roy_dair_eff)    
+	.acmd("sound_attackairlw", roy_dair_snd)    
+	.acmd("game_attackairf", roy_fair)    
+	.install();
+}
+
+unsafe extern "C" fn roy_bair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 3.0);
 		if macros::is_excute(fighter) {
@@ -41,12 +48,7 @@ unsafe fn roy_bair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }	
-#[acmd_script(
-    agent = "roy",
-    script =  "game_attackairhi",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn roy_uair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn roy_uair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 3.0);
 		if macros::is_excute(fighter) {
@@ -68,12 +70,7 @@ unsafe fn roy_uair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }
-#[acmd_script(
-    agent = "roy",
-    script =  "game_attackairn",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn roy_nair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn roy_nair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 2.0);
 		if macros::is_excute(fighter) {
@@ -104,13 +101,7 @@ unsafe fn roy_nair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }
-
-#[acmd_script(
-    agent = "roy",
-    script =  "game_attackairlw",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn roy_dair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn roy_dair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 3.0);
 		if macros::is_excute(fighter) {
@@ -143,12 +134,7 @@ unsafe fn roy_dair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }		
-#[acmd_script(
-    agent = "roy",
-    script =  "effect_attackairlw",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn roy_dair_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn roy_dair_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 7.0);
 		if macros::is_excute(fighter) {
@@ -162,12 +148,7 @@ unsafe fn roy_dair_eff(fighter: &mut L2CAgentBase) {
 			macros::EFFECT_OFF_KIND(fighter, Hash40::new_raw(0x08195da748), false, false);
 		}
 }	
-#[acmd_script(
-    agent = "roy",
-    script =  "sound_attackairlw",
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn roy_dair_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn roy_dair_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 6.0);
 		if macros::is_excute(fighter) {
@@ -175,12 +156,7 @@ unsafe fn roy_dair_snd(fighter: &mut L2CAgentBase) {
 			macros::PLAY_SE(fighter, Hash40::new("se_roy_attackair_l01"));
 		}
 }	
-#[acmd_script(
-    agent = "roy",
-    script =  "game_attackairf",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn roy_fair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn roy_fair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
@@ -206,13 +182,3 @@ unsafe fn roy_fair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }	
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		roy_bair,
-        roy_uair,
-        roy_nair,
-        roy_dair, roy_dair_eff, roy_dair_snd,
-        roy_fair
-    );
-}

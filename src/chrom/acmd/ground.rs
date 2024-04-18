@@ -13,21 +13,17 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		chrom_jab_2,
-		chrom_eff_jab_2,
-		chrom_snd_jab_2,
-		chrom_jab
-    );
+    Agent::new("chrom")
+    .acmd("game_attack11", chrom_jab)    
+    .acmd("game_attack12", chrom_jab_2)    
+    .acmd("effect_attack12", chrom_eff_jab_2)    
+    .acmd("sound_attack12", chrom_snd_jab_2)    
+    .install();
 }
 
-#[acmd_script(
-    agent = "chrom",
-    script =  "game_attack11",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn chrom_jab(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn chrom_jab(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 5.0);
 		if macros::is_excute(fighter) {
@@ -41,12 +37,7 @@ unsafe fn chrom_jab(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }				
-#[acmd_script(
-    agent = "chrom",
-    script =  "game_attack12",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn chrom_jab_2(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn chrom_jab_2(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 8.0);
 		if macros::is_excute(fighter) {
@@ -59,12 +50,7 @@ unsafe fn chrom_jab_2(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }		
-#[acmd_script(
-    agent = "chrom",
-    script =  "effect_attack12",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn chrom_eff_jab_2(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn chrom_eff_jab_2(fighter: &mut L2CAgentBase) {
     	let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 7.0);
 		if macros::is_excute(fighter) {
@@ -76,12 +62,7 @@ unsafe fn chrom_eff_jab_2(fighter: &mut L2CAgentBase) {
 			macros::AFTER_IMAGE_OFF(fighter, 4);
 		}
 }	
-#[acmd_script(
-    agent = "chrom",
-    script =  "sound_attack12",
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn chrom_snd_jab_2(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn chrom_snd_jab_2(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 5.0);
 		if macros::is_excute(fighter) {

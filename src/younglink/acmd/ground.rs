@@ -14,11 +14,14 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[acmd_script( agent = "younglink", 
-script = "game_attackdash",
-category = ACMD_GAME,
-low_priority)]
-unsafe fn yink_da(fighter: &mut L2CAgentBase) {
+pub fn install() {
+    Agent::new("younglink")
+    .acmd("game_attackdash", yink_da)    
+    .acmd("effect_attackdash", yink_da_eff)    
+    .install();
+}
+
+unsafe extern "C" fn yink_da(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 1.0);
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.7);
@@ -36,11 +39,7 @@ unsafe fn yink_da(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }
-#[acmd_script( agent = "younglink", 
-script = "effect_attackdash",
-category = ACMD_EFFECT,
-low_priority)]
-unsafe fn yink_da_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn yink_da_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 7.0);
 		if macros::is_excute(fighter) {
@@ -71,10 +70,4 @@ unsafe fn yink_da_eff(fighter: &mut L2CAgentBase) {
 		if macros::is_excute(fighter) {
 			macros::LANDING_EFFECT(fighter, Hash40::new("sys_turn_smoke"), Hash40::new("top"), 0, 0, 2, 0, 0, 0, 0.85, 0, 0, 0, 0, 0, 0, false);
 		}
-}
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		yink_da, yink_da_eff
-    );
 }

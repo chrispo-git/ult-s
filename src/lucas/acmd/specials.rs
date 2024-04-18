@@ -13,20 +13,21 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		lucas_downb,
-		lucas_pk_freeze,
-		lucas_pk_freeze_eff, 
-		lucas_pk_freeze_snd
-    );
+    Agent::new("lucas")
+    .acmd("game_speciallwend", lucas_downb)    
+    .acmd("game_specialairlwend", lucas_downb)    
+    .acmd("game_specialnstart", lucas_pk_freeze)    
+    .acmd("game_specialairnstart", lucas_pk_freeze)    
+    .acmd("effect_specialnstart", lucas_pk_freeze_eff)    
+    .acmd("effect_specialairnstart", lucas_pk_freeze_eff)    
+    .acmd("sound_specialnstart", lucas_pk_freeze_snd)    
+    .acmd("sound_specialairnstart", lucas_pk_freeze_snd)    
+    .install();
 }
-#[acmd_script(
-    agent = "lucas",
-    scripts =  ["game_speciallwend", "game_specialairlwend"],
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn lucas_downb(fighter: &mut L2CAgentBase) {
+
+unsafe extern "C" fn lucas_downb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 1.0);
 		if macros::is_excute(fighter) {
@@ -37,12 +38,7 @@ unsafe fn lucas_downb(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }
-#[acmd_script(
-    agent = "lucas",
-    scripts =  ["game_specialnstart", "game_specialairnstart"],
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn lucas_pk_freeze(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn lucas_pk_freeze(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 12.0);
 		if macros::is_excute(fighter) {
@@ -54,12 +50,7 @@ unsafe fn lucas_pk_freeze(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }		
-#[acmd_script(
-    agent = "lucas",
-    scripts =  ["effect_specialnstart", "effect_specialairnstart"],
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn lucas_pk_freeze_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn lucas_pk_freeze_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 2.0);
 		if macros::is_excute(fighter) {
@@ -73,12 +64,7 @@ unsafe fn lucas_pk_freeze_eff(fighter: &mut L2CAgentBase) {
 			macros::EFFECT(fighter, Hash40::new("lucas_pkfr_bomb_max"), Hash40::new("hip"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
 		}
 }
-#[acmd_script(
-    agent = "lucas",
-    scripts =  ["sound_specialnstart", "sound_specialairnstart"],
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn lucas_pk_freeze_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn lucas_pk_freeze_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 11.0);
 		if macros::is_excute(fighter) {

@@ -14,12 +14,23 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[acmd_script(
-    agent = "trail",
-    script =  "game_attackairlw",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn sora_dair(fighter: &mut L2CAgentBase) {
+pub fn install() {
+    Agent::new("trail")
+    .acmd("game_attackairlw", sora_dair)    
+    .acmd("sound_attackairlw", sora_dair_snd)    
+	.acmd("sound_landingairlw", sora_dair_land_snd)    
+	.acmd("effect_landingairlw", sora_dair_land_eff)    
+	.acmd("game_landingairlw", sora_dair_land)    
+	.acmd("expression_landingairlw", sora_dair_land_expr)    
+	.acmd("game_attackairn", sora_nair_1)    
+	.acmd("game_attackairn3", sora_nair_3)    
+	.acmd("effect_attackairn3", sora_nair_3_eff)    
+	.acmd("game_attackairf", sora_fair)    
+	.acmd("effect_attackairlw", sora_dair_eff)    
+	.install();
+}
+
+unsafe extern "C" fn sora_dair(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_WORK_ID_FLAG_RESERVE_GRAVITY_STABLE_UNABLE);
@@ -57,12 +68,7 @@ unsafe fn sora_dair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		};
 }
-#[acmd_script(
-    agent = "trail",
-    script =  "sound_attackairlw",
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn sora_dair_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sora_dair_snd(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		frame(lua_state, 11.0);
 		if macros::is_excute(fighter) {
@@ -70,57 +76,32 @@ unsafe fn sora_dair_snd(fighter: &mut L2CAgentBase) {
 			macros::PLAY_SEQUENCE(fighter, Hash40::new("seq_trail_rnd_attack03"));
 		}
 }	
-#[acmd_script(
-    agent = "trail",
-    scripts =  ["sound_landingairlw"],
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn sora_dair_land_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sora_dair_land_snd(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		frame(lua_state, 2.0);
 		if macros::is_excute(fighter) {
 			macros::PLAY_LANDING_SE(fighter, Hash40::new("se_trail_landing02"));
 		};
 }
-#[acmd_script(
-    agent = "trail",
-    scripts =  ["effect_landingairlw"],
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn sora_dair_land_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sora_dair_land_eff(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			macros::LANDING_EFFECT(fighter, Hash40::new("sys_landing_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.05, 0, 0, 0, 0, 0, 0, false);
 		}
 }
-#[acmd_script(
-    agent = "trail",
-    scripts =  ["game_landingairlw"],
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn sora_dair_land(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sora_dair_land(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			macros::LANDING_EFFECT(fighter, Hash40::new("sys_landing_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.05, 0, 0, 0, 0, 0, 0, false);
 		}
 }
-#[acmd_script(
-    agent = "trail",
-    scripts =  ["expression_landingairlw"],
-    category = ACMD_EXPRESSION,
-	low_priority)]
-unsafe fn sora_dair_land_expr(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sora_dair_land_expr(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			macros::LANDING_EFFECT(fighter, Hash40::new("sys_landing_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.05, 0, 0, 0, 0, 0, 0, false);
 		}
 }
-#[acmd_script(
-    agent = "trail",
-    script =  "game_attackairn",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn sora_nair_1(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sora_nair_1(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 2.0);
 		if macros::is_excute(fighter) {
@@ -185,12 +166,7 @@ unsafe fn sora_nair_1(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		};
 }
-#[acmd_script(
-    agent = "trail",
-    script =  "game_attackairn3",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn sora_nair_3(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sora_nair_3(fighter: &mut L2CAgentBase) {
 	let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
@@ -211,12 +187,7 @@ unsafe fn sora_nair_3(fighter: &mut L2CAgentBase) {
 		}
 			
 	}
-#[acmd_script(
-    agent = "trail",
-    script =  "effect_attackairn3",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn sora_nair_3_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sora_nair_3_eff(fighter: &mut L2CAgentBase) {
 	let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 5.0);
 		if macros::is_excute(fighter) {
@@ -227,12 +198,7 @@ unsafe fn sora_nair_3_eff(fighter: &mut L2CAgentBase) {
 			macros::AFTER_IMAGE_OFF(fighter, 3);
 		}
 	}
-#[acmd_script(
-    agent = "trail",
-    script =  "game_attackairf",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn sora_fair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sora_fair(fighter: &mut L2CAgentBase) {
 	let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 3.0);
 		if macros::is_excute(fighter) {
@@ -257,12 +223,7 @@ unsafe fn sora_fair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 	}
-#[acmd_script(
-    agent = "trail",
-    script =  "effect_attackairlw",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn sora_dair_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sora_dair_eff(fighter: &mut L2CAgentBase) {
 	let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 10.0);
 		if macros::is_excute(fighter) {
@@ -276,14 +237,4 @@ unsafe fn sora_dair_eff(fighter: &mut L2CAgentBase) {
 			macros::EFFECT_OFF_KIND(fighter, Hash40::new("trail_keyblade_light"), false, true);
 			macros::AFTER_IMAGE_OFF(fighter, 3);
 		}
-}
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		sora_dair, sora_dair_snd, sora_dair_eff,
-        sora_dair_land, sora_dair_land_eff, sora_dair_land_snd, sora_dair_land_expr,
-        sora_nair_1,
-        sora_nair_3, sora_nair_3_eff, 
-        sora_fair
-    );
 }

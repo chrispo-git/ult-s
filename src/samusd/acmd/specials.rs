@@ -14,12 +14,7 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[acmd_script(
-    agent = "samusd_missile",
-    script =  "game_homing",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn dsamus_homing(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn dsamus_homing(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	
 		frame(fighter.lua_state_agent, 9.0);
@@ -35,12 +30,7 @@ unsafe fn dsamus_homing(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }	
-#[acmd_script(
-    agent = "samusd_missile",
-    script =  "sound_homing",
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn sound_dsamus_homing(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sound_dsamus_homing(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	
 		frame(fighter.lua_state_agent, 7.0);
@@ -49,33 +39,18 @@ unsafe fn sound_dsamus_homing(fighter: &mut L2CAgentBase) {
 		}
 }		
 
-#[acmd_script(
-    agent = "samusd",
-    scripts =  ["effect_special", "effect_specialair"],
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn dsamus_special_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn dsamus_special_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	
 	
 }		
 	
-#[acmd_script(
-    agent = "samusd_missile",
-    script =  "effect_hburst",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn eff_dsamus_burst(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn eff_dsamus_burst(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	
 	
 }		
-#[acmd_script(
-    agent = "samusd_missile",
-    script =  "effect_homing",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn eff_dsamus_homing(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn eff_dsamus_homing(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	
 		if macros::is_excute(fighter) {
@@ -106,60 +81,35 @@ unsafe fn eff_dsamus_homing(fighter: &mut L2CAgentBase) {
 			ModelModule::set_alpha(fighter.module_accessor, 0.0);
 		}
 }		
-#[acmd_script(
-    agent = "samusd",
-    script =  "effect_speciallw",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn eff_dsamus_downb(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn eff_dsamus_downb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	
 	
 }	
-#[acmd_script(
-    agent = "samusd",
-    script =  "expression_speciallw",
-    category = ACMD_EXPRESSION,
-	low_priority)]
-unsafe fn expr_dsamus_downb(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn expr_dsamus_downb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	
 	
 }		
-#[acmd_script(
-    agent = "samusd",
-    script =  "game_speciallw",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn dsamus_downb(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn dsamus_downb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	
 	
 }	
-#[acmd_script(
-    agent = "samusd",
-    scripts =  ["game_special", "game_specialair"],
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn dsamus_sideb(fighter: &mut L2CAgentBase) {
-	frame(fighter.lua_state_agent, 18.0);
-    if macros::is_excute(fighter) {
-		if  !ArticleModule::is_exist(fighter.module_accessor, *WEAPON_KIND_SAMUSD_MISSILE) {
-			WorkModule::on_flag(fighter.module_accessor, *FIGHTER_SAMUS_STATUS_SPECIAL_S_WORK_FLAG_WEAPON);
-		}
-    }
-	
-}	
-
 
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		dsamus_homing, sound_dsamus_homing,
-        dsamus_special_eff,
-        eff_dsamus_burst,
-        eff_dsamus_homing,
-        eff_dsamus_downb, expr_dsamus_downb,
-        dsamus_downb,
-		dsamus_sideb
-    );
+    Agent::new("samusd")
+        .effect_acmd("effect_speciallw", eff_dsamus_downb)
+        .expression_acmd("expression_speciallw", expr_dsamus_downb)
+        .game_acmd("game_speciallw", dsamus_downb)
+        .install();
+
+	Agent::new("samusd_missile")
+		.game_acmd("game_homing", dsamus_homing)
+		.sound_acmd("sound_homing", sound_dsamus_homing)
+		.effect_acmd("effect_special", dsamus_special_eff)
+		.effect_acmd("effect_specialair", dsamus_special_eff)
+		.effect_acmd("effect_hburst", eff_dsamus_burst)
+		.effect_acmd("effect_homing", eff_dsamus_homing)
+		.install();
 }

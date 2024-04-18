@@ -14,8 +14,13 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[fighter_frame( agent = FIGHTER_KIND_SHIZUE )]
-fn shizue_frame(fighter: &mut L2CFighterCommon) {
+pub fn install() {
+    Agent::new("shizue")
+    .on_line(Main, shizue_frame)
+    .install();
+}
+
+unsafe extern "C" fn shizue_frame(fighter: &mut L2CFighterCommon) {
     unsafe {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 		if is_default(boma) {
@@ -93,9 +98,3 @@ fn shizue_frame(fighter: &mut L2CFighterCommon) {
 		}
 	};
 }		
-
-pub fn install() {
-    smashline::install_agent_frames!(
-        shizue_frame
-    );
-}

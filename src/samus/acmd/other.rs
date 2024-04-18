@@ -14,20 +14,16 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[acmd_script(
-    agent = "samus",
-    scripts =  ["effect_jumpfrontmini", "effect_jumpbackmini"],
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn samus_shorthop_eff(fighter: &mut L2CAgentBase) {
-    let lua_state = fighter.lua_state_agent;
-		if macros::is_excute(fighter) {
-			macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_jump_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1, false);
-		}
+pub fn install() {
+  Agent::new("samus")
+  .acmd("effect_jumpfrontmini", samus_shorthop_eff)    
+  .acmd("effect_jumpbackmini", samus_shorthop_eff)    
+  .install();
 }
 
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		samus_shorthop_eff
-    );
+unsafe extern "C" fn samus_shorthop_eff(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    if macros::is_excute(fighter) {
+      macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_jump_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1, false);
+    }
 }

@@ -14,12 +14,14 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[acmd_script(
-    agent = "pit",
-    script =  "game_attacklw3",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn pit_dtilt(fighter: &mut L2CAgentBase) {
+pub fn install() {
+    Agent::new("pit")
+    .acmd("game_attacklw3", pit_dtilt)    
+    .acmd("game_attacks3", pit_ftilt)    
+    .install();
+}
+
+unsafe extern "C" fn pit_dtilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 6.0);
 		if macros::is_excute(fighter) {
@@ -31,12 +33,7 @@ unsafe fn pit_dtilt(fighter: &mut L2CAgentBase) {
 		}
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.72);
 }	
-#[acmd_script(
-    agent = "pit",
-    script =  "game_attacks3",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn pit_ftilt(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn pit_ftilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 10.0);
 		if macros::is_excute(fighter) {
@@ -49,10 +46,3 @@ unsafe fn pit_ftilt(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }		
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		pit_dtilt,
-        pit_ftilt
-    );
-}

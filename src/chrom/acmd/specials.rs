@@ -13,23 +13,25 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		chrom_sideb,
-		chrom_sideb_eff,
-		chrom_sideb_snd,
-		chrom_sideb_hi,
-		chrom_sideb_lw,
-		chrom_sideb_s,
-		chrom_sideb_s_snd
-    );
+    Agent::new("chrom")
+    .acmd("game_specials1", chrom_sideb)    
+    .acmd("game_specialairs1", chrom_sideb)    
+    .acmd("effect_specials1", chrom_sideb_eff)    
+    .acmd("effect_specialairs1", chrom_sideb_eff)    
+    .acmd("sound_specials1", chrom_sideb_snd)    
+    .acmd("sound_specialairs1", chrom_sideb_snd)    
+    .acmd("game_specials4hi", chrom_sideb_hi)    
+    .acmd("game_specials4lw", chrom_sideb_lw)    
+    .acmd("game_specials4s", chrom_sideb_s)    
+    .acmd("sound_specials4lw", chrom_sideb_s_snd)    
+    .acmd("sound_specials4s", chrom_sideb_s_snd)    
+    .acmd("sound_specials4hi", chrom_sideb_s_snd)    
+    .install();
 }	
-#[acmd_script(
-    agent = "chrom",
-    scripts =  ["game_specials1", "game_specialairs1"],
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn chrom_sideb(fighter: &mut L2CAgentBase) {
+
+unsafe extern "C" fn chrom_sideb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 10.0);
 		if macros::is_excute(fighter) {
@@ -48,12 +50,7 @@ unsafe fn chrom_sideb(fighter: &mut L2CAgentBase) {
 			CancelModule::enable_cancel(fighter.module_accessor);			
 		}
 }		
-#[acmd_script(
-    agent = "chrom",
-    scripts =  ["effect_specials1", "effect_specialairs1"],
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn chrom_sideb_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn chrom_sideb_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 6.0);
 		if macros::is_excute(fighter) {
@@ -65,12 +62,7 @@ unsafe fn chrom_sideb_eff(fighter: &mut L2CAgentBase) {
 			macros::EFFECT_OFF_KIND(fighter, Hash40::new("sys_attack_speedline"), false, true);
 		}
 }		
-#[acmd_script(
-    agent = "chrom",
-    scripts =  ["sound_specials1", "sound_specialairs1"],
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn chrom_sideb_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn chrom_sideb_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 8.0);
 		if macros::is_excute(fighter) {
@@ -84,12 +76,7 @@ unsafe fn chrom_sideb_snd(fighter: &mut L2CAgentBase) {
 		}
 }	
 
-#[acmd_script(
-    agent = "chrom",
-    script =  "game_specials4hi",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn chrom_sideb_hi(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn chrom_sideb_hi(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.6);
 		frame(fighter.lua_state_agent, 6.0);
@@ -109,12 +96,7 @@ unsafe fn chrom_sideb_hi(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }
-#[acmd_script(
-    agent = "chrom",
-    script =  "game_specials4lw",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn chrom_sideb_lw(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn chrom_sideb_lw(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.8);
 		frame(fighter.lua_state_agent, 5.0);
@@ -132,12 +114,7 @@ unsafe fn chrom_sideb_lw(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }		
-#[acmd_script(
-    agent = "chrom",
-    script =  "game_specials4s",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn chrom_sideb_s(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn chrom_sideb_s(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.2857);
 		frame(fighter.lua_state_agent, 7.0);
@@ -157,12 +134,7 @@ unsafe fn chrom_sideb_s(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }		
-#[acmd_script(
-    agent = "chrom",
-    scripts =  ["sound_specials4lw", "sound_specials4s", "sound_specials4hi"],
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn chrom_sideb_s_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn chrom_sideb_s_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 3.0);
 		if macros::is_excute(fighter) {

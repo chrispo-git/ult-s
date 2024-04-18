@@ -14,29 +14,22 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[acmd_script(
-    agent = "sonic",
-    script =  "effect_specialsstart",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn sonic_sideb_eff(fighter: &mut L2CAgentBase) {
+pub fn install() {
+    Agent::new("sonic")
+    .acmd("effect_specialsstart", sonic_sideb_eff)    
+    .acmd("sound_specialsstart", sonic_sideb_snd)    
+    .acmd("game_specialsstart", sonic_sideb)    
+    .install();
+}
+
+unsafe extern "C" fn sonic_sideb_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 }	
-#[acmd_script(
-    agent = "sonic",
-    script =  "sound_specialsstart",
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn sonic_sideb_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sonic_sideb_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 }	
-#[acmd_script(
-    agent = "sonic",
-    script =  "game_specialsstart",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn sonic_sideb(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sonic_sideb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			WorkModule::enable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_CLIFF_CATCH);
@@ -68,9 +61,3 @@ unsafe fn sonic_sideb(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }	
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		sonic_sideb, sonic_sideb_eff, sonic_sideb_snd
-    );
-}

@@ -12,8 +12,7 @@ use smash::lua2cpp::*;
 use crate::util::*;
 
 
-#[fighter_frame_callback]
-pub fn kd_throw(fighter : &mut L2CFighterCommon) {
+unsafe extern "C" fn kd_throw(fighter : &mut L2CFighterCommon) {
     unsafe {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);  
         let status_kind = StatusModule::status_kind(boma);
@@ -28,8 +27,7 @@ pub fn kd_throw(fighter : &mut L2CFighterCommon) {
         }
     }
 }
-#[fighter_frame_callback]
-pub fn non_tumble_di(fighter : &mut L2CFighterCommon) {
+unsafe extern "C" fn non_tumble_di(fighter : &mut L2CFighterCommon) {
     unsafe {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);  
         let status_kind = StatusModule::status_kind(boma);
@@ -76,6 +74,9 @@ pub unsafe fn ftStatusUniqProcessDamage_exec_hook(fighter: &mut L2CFighterCommon
 
 
 pub fn install() {
-    smashline::install_agent_frame_callbacks!(non_tumble_di, kd_throw);
+    Agent::new("fighter")
+	.on_line(Main, kd_throw)
+	.on_line(Main, non_tumble_di)
+	.install();
     skyline::install_hooks!(ftStatusUniqProcessDamage_exec_common_hook, ftStatusUniqProcessDamage_exec_hook);
 }

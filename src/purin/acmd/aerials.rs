@@ -14,12 +14,16 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[acmd_script(
-    agent = "purin",
-    script =  "game_attackairhi",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn puff_uair(fighter: &mut L2CAgentBase) {
+pub fn install() {
+    Agent::new("purin")
+    .acmd("game_attackairhi", puff_uair)    
+    .acmd("game_attackairf", puff_fair)    
+    .acmd("game_attackairlw", puff_dair)    
+    .acmd("game_attackairn", puff_nair)    
+    .install();
+}
+
+unsafe extern "C" fn puff_uair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 2.0);
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.333);
@@ -41,12 +45,7 @@ unsafe fn puff_uair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }			
-#[acmd_script(
-    agent = "purin",
-    script =  "game_attackairf",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn puff_fair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn puff_fair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 4.0);
 		if macros::is_excute(fighter) {
@@ -72,12 +71,7 @@ unsafe fn puff_fair(fighter: &mut L2CAgentBase) {
 		}
 }		
 
-#[acmd_script(
-    agent = "purin",
-    script =  "game_attackairlw",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn puff_dair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn puff_dair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 7.0);
 		for _ in 0..8 
@@ -107,12 +101,7 @@ unsafe fn puff_dair(fighter: &mut L2CAgentBase) {
 		}
 }		
 
-#[acmd_script(
-    agent = "purin",
-    script =  "game_attackairn",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn puff_nair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn puff_nair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 4.0);
 		if macros::is_excute(fighter) {
@@ -138,12 +127,3 @@ unsafe fn puff_nair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }		
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		puff_uair,
-        puff_fair,
-        puff_dair,
-        puff_nair
-    );
-}

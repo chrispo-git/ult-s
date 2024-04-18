@@ -13,20 +13,22 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		chrom_ftilt_hi, chrom_eff_ftilt_hi,
-		chrom_ftilt_lw, chrom_eff_ftilt_lw,
-		chrom_ftilt_s, chrom_eff_ftilt_s,
-		chrom_ftilt_snd
-    );
+    Agent::new("chrom")
+    .acmd("game_attacks3hi", chrom_ftilt_hi)    
+    .acmd("game_attacks3lw", chrom_ftilt_lw)    
+    .acmd("game_attacks3", chrom_ftilt_s)    
+    .acmd("sound_attacks3lw", chrom_ftilt_snd)    
+    .acmd("sound_attacks3", chrom_ftilt_snd)    
+    .acmd("sound_attacks3hi", chrom_ftilt_snd)    
+    .acmd("effect_attacks3", chrom_eff_ftilt_s)    
+    .acmd("effect_attacks3hi", chrom_eff_ftilt_hi)    
+    .acmd("effect_attacks3lw", chrom_eff_ftilt_lw)    
+    .install();
 }
-#[acmd_script(
-    agent = "chrom",
-    script =  "game_attacks3hi",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn chrom_ftilt_hi(fighter: &mut L2CAgentBase) {
+
+unsafe extern "C" fn chrom_ftilt_hi(fighter: &mut L2CAgentBase) {
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.6);
 		frame(fighter.lua_state_agent, 6.0);
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.0);
@@ -43,12 +45,7 @@ unsafe fn chrom_ftilt_hi(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }
-#[acmd_script(
-    agent = "chrom",
-    script =  "game_attacks3lw",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn chrom_ftilt_lw(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn chrom_ftilt_lw(fighter: &mut L2CAgentBase) {
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.8);
 		frame(fighter.lua_state_agent, 4.0);
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.0);
@@ -72,12 +69,7 @@ unsafe fn chrom_ftilt_lw(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }		
-#[acmd_script(
-    agent = "chrom",
-    script =  "game_attacks3",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn chrom_ftilt_s(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn chrom_ftilt_s(fighter: &mut L2CAgentBase) {
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.2857);
 		frame(fighter.lua_state_agent, 7.0);
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.0);
@@ -94,12 +86,7 @@ unsafe fn chrom_ftilt_s(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }		
-#[acmd_script(
-    agent = "chrom",
-    scripts =  ["sound_attacks3lw", "sound_attacks3", "sound_attacks3hi"],
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn chrom_ftilt_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn chrom_ftilt_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 3.0);
 		if macros::is_excute(fighter) {
@@ -110,12 +97,7 @@ unsafe fn chrom_ftilt_snd(fighter: &mut L2CAgentBase) {
 			macros::PLAY_SE(fighter, Hash40::new("se_chrom_attackl_s01"));
 		}
 }	
-#[acmd_script(
-    agent = "chrom",
-    script =  "effect_attacks3",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn chrom_eff_ftilt_s(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn chrom_eff_ftilt_s(fighter: &mut L2CAgentBase) {
     	let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 6.0);
 		if macros::is_excute(fighter) {
@@ -127,12 +109,7 @@ unsafe fn chrom_eff_ftilt_s(fighter: &mut L2CAgentBase) {
 			macros::AFTER_IMAGE_OFF(fighter, 4);
 		}
 }	
-#[acmd_script(
-    agent = "chrom",
-    script =  "effect_attacks3hi",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn chrom_eff_ftilt_hi(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn chrom_eff_ftilt_hi(fighter: &mut L2CAgentBase) {
     	let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 5.0);
 		if macros::is_excute(fighter) {
@@ -144,12 +121,7 @@ unsafe fn chrom_eff_ftilt_hi(fighter: &mut L2CAgentBase) {
 			macros::AFTER_IMAGE_OFF(fighter, 4);
 		}
 }	
-#[acmd_script(
-    agent = "chrom",
-    script =  "effect_attacks3lw",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn chrom_eff_ftilt_lw(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn chrom_eff_ftilt_lw(fighter: &mut L2CAgentBase) {
     	let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 3.0);
 		if macros::is_excute(fighter) {

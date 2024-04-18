@@ -14,11 +14,15 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[acmd_script( agent = "pacman", 
-script = "game_attack11", 
-category = ACMD_GAME,
-low_priority)]
-unsafe fn pac_jab1(fighter: &mut L2CAgentBase) {
+pub fn install() {
+    Agent::new("pacman")
+    .acmd("game_attack11", pac_jab1)    
+    .acmd("game_attack12", pac_jab2)    
+    .acmd("game_attack13", pac_jab3)    
+    .install();
+}
+
+unsafe extern "C" fn pac_jab1(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 1.0);
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
@@ -48,11 +52,7 @@ unsafe fn pac_jab1(fighter: &mut L2CAgentBase) {
 			WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_FLAG_ENABLE_RESTART);
 		}
 }
-#[acmd_script( agent = "pacman", 
-script = "game_attack12", 
-category = ACMD_GAME,
-low_priority)]
-unsafe fn pac_jab2(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn pac_jab2(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 3.0);
 		if macros::is_excute(fighter) {
@@ -66,11 +66,7 @@ unsafe fn pac_jab2(fighter: &mut L2CAgentBase) {
 			WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_FLAG_ENABLE_COMBO);
 		}
 }
-#[acmd_script( agent = "pacman", 
-script = "game_attack13", 
-category = ACMD_GAME,
-low_priority)]
-unsafe fn pac_jab3(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn pac_jab3(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 4.0);
 		if macros::is_excute(fighter) {
@@ -81,12 +77,4 @@ unsafe fn pac_jab3(fighter: &mut L2CAgentBase) {
 		if macros::is_excute(fighter) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
-}
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		pac_jab1,
-        pac_jab2,
-        pac_jab3
-    );
 }

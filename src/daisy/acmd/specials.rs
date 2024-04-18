@@ -13,25 +13,38 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-	smashline::install_acmd_scripts!(
-		daisy_downb,
-		daisy_downb_eff,
-		daisy_upb,
-		daisy_neutralb,
-		daisy_neutralb_eff,
-		daisy_neutralb_hit,
-		daisy_neutralb_hit_eff,
-		kirby_daisy_neutralb_eff,
-		kirby_daisy_neutralb_hit_eff
-	);
+	Agent::new("daisy")
+    .acmd("game_speciallw", daisy_downb)    
+    .acmd("effect_speciallw", daisy_downb_eff)    
+    .acmd("game_specialhistart", daisy_upb)    
+    .acmd("game_specialairhistart", daisy_upb)    
+    .acmd("game_specialn", daisy_neutralb)    
+    .acmd("game_specialairn", daisy_neutralb)    
+    .acmd("game_specialnhit", daisy_neutralb_hit)    
+    .acmd("game_specialairnhit", daisy_neutralb_hit)    
+    .acmd("game_specialnturn", daisy_neutralb_hit)    
+    .acmd("game_specialairnturn", daisy_neutralb_hit)    
+    .acmd("effect_specialn", daisy_neutralb_eff)    
+    .acmd("effect_specialairn", daisy_neutralb_eff)    
+    .acmd("effect_specialnhit", daisy_neutralb_hit_eff)    
+    .acmd("effect_specialairnhit", daisy_neutralb_hit_eff)    
+    .acmd("effect_specialnturn", daisy_neutralb_hit_eff)    
+    .acmd("effect_specialairnturn", daisy_neutralb_hit_eff)    
+    .install();
+
+	Agent::new("kirby")
+	.acmd("effect_daisyspecialn", kirby_daisy_neutralb_eff)    
+    .acmd("effect_daisyspecialairn", kirby_daisy_neutralb_eff)    
+    .acmd("effect_daisyspecialnhit", kirby_daisy_neutralb_hit_eff)    
+    .acmd("effect_daisyspecialairnhit", kirby_daisy_neutralb_hit_eff)    
+    .acmd("effect_daisyspecialnturn", kirby_daisy_neutralb_hit_eff)    
+    .acmd("effect_daisyspecialairnturn", kirby_daisy_neutralb_hit_eff)    
+    .install();
 }
-#[acmd_script(
-    agent = "daisy",
-    script =  "game_speciallw",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn daisy_downb(fighter: &mut L2CAgentBase) {
+
+unsafe extern "C" fn daisy_downb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
 		frame(fighter.lua_state_agent, 14.0);
@@ -40,24 +53,14 @@ unsafe fn daisy_downb(fighter: &mut L2CAgentBase) {
 			ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_DAISY_GENERATE_ARTICLE_DAIKON, false, -1);
 		}
 }
-#[acmd_script(
-    agent = "daisy",
-    script =  "effect_speciallw",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn daisy_downb_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn daisy_downb_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 12.0);
 		if macros::is_excute(fighter) {
 			macros::EFFECT(fighter, Hash40::new("sys_erace_smoke"), Hash40::new("top"), 0, 8, 10, 0, 0, 0, 1.2, 0, 0, 0, 0, 0, 0, false);
 		}
 }
-#[acmd_script(
-    agent = "daisy",
-    scripts =  ["game_specialhistart", "game_specialairhistart"],
-    category = ACMD_GAME, 
-	low_priority)]
-unsafe fn daisy_upb(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn daisy_upb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 			if macros::is_excute(fighter) {
 				ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_DAISY_GENERATE_ARTICLE_KASSAR, false, 0);
@@ -86,12 +89,7 @@ unsafe fn daisy_upb(fighter: &mut L2CAgentBase) {
 				AttackModule::clear_all(fighter.module_accessor);
 			}			
 }
-#[acmd_script(
-    agent = "daisy",
-    scripts =  ["game_specialn", "game_specialairn"],
-    category = ACMD_GAME, 
-	low_priority)]
-unsafe fn daisy_neutralb(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn daisy_neutralb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	frame(fighter.lua_state_agent, 9.0);
 	if macros::is_excute(fighter) {
@@ -105,12 +103,7 @@ unsafe fn daisy_neutralb(fighter: &mut L2CAgentBase) {
 		shield!(fighter, *MA_MSC_CMD_SHIELD_OFF, *COLLISION_KIND_SHIELD, *FIGHTER_PEACH_SHIELD_KIND_KINOPIO_GUARD, *FIGHTER_PEACH_SHIELD_GROUP_KIND_KINOPIO_GUARD);
 	};
 }
-#[acmd_script(
-    agent = "daisy",
-    scripts =  ["game_specialnhit", "game_specialairnhit", "game_specialnturn", "game_specialairnturn"],
-    category = ACMD_GAME, 
-	low_priority)]
-unsafe fn daisy_neutralb_hit(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn daisy_neutralb_hit(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     frame(fighter.lua_state_agent, 5.0);
 	if macros::is_excute(fighter) {
@@ -123,12 +116,7 @@ unsafe fn daisy_neutralb_hit(fighter: &mut L2CAgentBase) {
 	};
     frame(fighter.lua_state_agent, 45.0);
 }
-#[acmd_script(
-    agent = "daisy",
-    scripts =  ["effect_specialn", "effect_specialairn"],
-    category = ACMD_EFFECT, 
-	low_priority)]
-unsafe fn daisy_neutralb_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn daisy_neutralb_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_attack_impact"), Hash40::new("top"), 0, 6, 7, 0, 0, 0, 1.6, true);
@@ -168,12 +156,7 @@ unsafe fn daisy_neutralb_eff(fighter: &mut L2CAgentBase) {
 			macros::COL_NORMAL(fighter, );
 		}
 }
-#[acmd_script(
-    agent = "kirby",
-    scripts =  ["effect_daisyspecialn", "effect_daisyspecialairn"],
-    category = ACMD_EFFECT, 
-	low_priority)]
-unsafe fn kirby_daisy_neutralb_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn kirby_daisy_neutralb_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_attack_impact"), Hash40::new("top"), 0, 6, 7, 0, 0, 0, 1.6, true);
@@ -214,12 +197,7 @@ unsafe fn kirby_daisy_neutralb_eff(fighter: &mut L2CAgentBase) {
 		}
 }
 
-#[acmd_script(
-    agent = "daisy",
-    scripts =  ["effect_specialnhit", "effect_specialairnhit", "effect_specialnturn", "effect_specialairnturn"],
-    category = ACMD_EFFECT, 
-	low_priority)]
-unsafe fn daisy_neutralb_hit_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn daisy_neutralb_hit_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 5.0);
 		if macros::is_excute(fighter) {
@@ -231,12 +209,7 @@ unsafe fn daisy_neutralb_hit_eff(fighter: &mut L2CAgentBase) {
 			macros::FOOT_EFFECT(fighter, Hash40::new("sys_turn_smoke"), Hash40::new("top"), 7, 0, 0, 0, 180, 0, 0.9, 0, 0, 0, 0, 0, 0, false);
 		}
 }
-#[acmd_script(
-    agent = "kirby",
-    scripts =  ["effect_daisyspecialnhit", "effect_daisyspecialairnhit", "effect_daisyspecialnturn", "effect_daisyspecialairnturn"],
-    category = ACMD_EFFECT, 
-	low_priority)]
-unsafe fn kirby_daisy_neutralb_hit_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn kirby_daisy_neutralb_hit_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 5.0);
 		if macros::is_excute(fighter) {

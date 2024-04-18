@@ -13,22 +13,17 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		banjo_uair,
-		banjo_nair,
-        banjo_bair,
-		banjo_dair
-    );
+    Agent::new("buddy")
+	.acmd("game_attackairn", banjo_nair)    
+	.acmd("game_attackairhi", banjo_uair)    
+	.acmd("game_attackairb", banjo_bair)    
+	.acmd("game_attackairlw", banjo_dair)    
+	.install();
 }
 
-
-#[acmd_script(
-    agent = "buddy",
-    script =  "game_attackairn",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn banjo_nair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn banjo_nair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.25);
 		wait(fighter.lua_state_agent, 8.0);
@@ -63,12 +58,7 @@ unsafe fn banjo_nair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }	
-#[acmd_script(
-    agent = "buddy",
-    script =  "game_attackairhi",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn banjo_uair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn banjo_uair(fighter: &mut L2CAgentBase) {
     	let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 2.0);
 		if macros::is_excute(fighter) {
@@ -106,12 +96,7 @@ unsafe fn banjo_uair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }	
-#[acmd_script(
-    agent = "buddy",
-    script =  "game_attackairb",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn banjo_bair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn banjo_bair(fighter: &mut L2CAgentBase) {
     	let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 8.0);
 		if macros::is_excute(fighter) {
@@ -151,12 +136,7 @@ unsafe fn banjo_bair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }		
-#[acmd_script(
-    agent = "buddy",
-    script =  "game_attackairlw",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn banjo_dair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn banjo_dair(fighter: &mut L2CAgentBase) {
     	let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_LANDING_CLEAR_SPEED);

@@ -14,22 +14,19 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use crate::ken::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		ken_ex_shoryu,
-		ken_ex_shoryu_eff,
-		ken_ex_shoryu_snd,
-		ken_ex_tatsu,
-		ken_ex_tatsu_eff,
-		ken_ex_tatsu_snd
-    );
+    Agent::new("ken")
+    .acmd("game_specialhiex", ken_ex_shoryu)    
+    .acmd("effect_specialhiex", ken_ex_shoryu_eff)    
+    .acmd("sound_specialhiex", ken_ex_shoryu_snd)    
+    .acmd("game_specialsex", ken_ex_tatsu)    
+    .acmd("effect_specialsex", ken_ex_tatsu_eff)    
+    .acmd("sound_specialsex", ken_ex_tatsu_snd)    
+    .install();
 }	
-#[acmd_script(
-    agent = "ken",
-    script =  "game_specialhiex",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn ken_ex_shoryu(fighter: &mut L2CAgentBase) {
+
+unsafe extern "C" fn ken_ex_shoryu(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 6.0);
 		if macros::is_excute(fighter) {
@@ -59,12 +56,7 @@ unsafe fn ken_ex_shoryu(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }
-#[acmd_script(
-    agent = "ken",
-    script =  "effect_specialhiex",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn ken_ex_shoryu_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn ken_ex_shoryu_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 4.0);
 		if macros::is_excute(fighter) {
@@ -113,12 +105,7 @@ unsafe fn ken_ex_shoryu_eff(fighter: &mut L2CAgentBase) {
 			macros::EFFECT_OFF_KIND(fighter, Hash40::new("ken_syoryuken_fire"), false, true);
 		}
 }
-#[acmd_script(
-    agent = "ken",
-    script =  "sound_specialhiex",
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn ken_ex_shoryu_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn ken_ex_shoryu_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 2.0);
 		if macros::is_excute(fighter) {
@@ -141,12 +128,7 @@ unsafe fn ken_ex_shoryu_snd(fighter: &mut L2CAgentBase) {
 			macros::PLAY_SE(fighter, Hash40::new("se_ken_special_h02"));
 		}
 }
-#[acmd_script(
-    agent = "ken",
-    script =  "game_specialsex",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn ken_ex_tatsu(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn ken_ex_tatsu(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 8.0);
 		if macros::is_excute(fighter) {
@@ -196,12 +178,7 @@ unsafe fn ken_ex_tatsu(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }
-#[acmd_script(
-    agent = "ken",
-    script =  "effect_specialsex",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn ken_ex_tatsu_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn ken_ex_tatsu_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 5.0);
 		if macros::is_excute(fighter) {
@@ -245,12 +222,7 @@ unsafe fn ken_ex_tatsu_eff(fighter: &mut L2CAgentBase) {
 			macros::EFFECT_OFF_KIND(fighter, Hash40::new("ken_tatsumaki_wind_r"), false, true);
 		}
 }
-#[acmd_script(
-    agent = "ken",
-    script =  "sound_specialsex",
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn ken_ex_tatsu_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn ken_ex_tatsu_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 7.0);
 		if macros::is_excute(fighter) {

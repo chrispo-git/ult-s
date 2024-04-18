@@ -15,8 +15,14 @@ use crate::util::*;
 use super::*;
 use super::super::*;
 
-#[status_script(agent = "lucina", status = FIGHTER_STATUS_KIND_SPECIAL_HI, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_PRE)]
-unsafe fn special_hi_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
+pub fn install() {
+    Agent::new("lucina")
+    .status(Pre, *FIGHTER_STATUS_KIND_SPECIAL_HI, special_hi_pre)
+	.status(Pre, *FIGHTER_STATUS_KIND_SPECIAL_LW, special_lw_pre)
+	.install();
+}
+
+unsafe extern "C" fn special_hi_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
 	let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 	if LUCINA_STANCE[ENTRY_ID] == 0 {
 		StatusModule::init_settings(
@@ -59,8 +65,7 @@ unsafe fn special_hi_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
 	);
     0.into()
 }
-#[status_script(agent = "lucina", status = FIGHTER_STATUS_KIND_SPECIAL_LW, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_PRE)]
-unsafe fn special_lw_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
+unsafe extern "C" fn special_lw_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
     StatusModule::init_settings(
         fighter.module_accessor,
         smash::app::SituationKind(*SITUATION_KIND_NONE),
@@ -86,8 +91,4 @@ unsafe fn special_lw_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
 		0
 	);
     0.into()
-}
-
-pub fn install() {
-    smashline::install_status_scripts!(special_hi_pre, special_lw_pre);
 }

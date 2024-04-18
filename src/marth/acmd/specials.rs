@@ -13,19 +13,17 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		marth_db4,
-		marth_upb,
-		marth_sideb1
-    );
+    Agent::new("marth")
+    .acmd("game_specials4s", marth_db4)    
+	.acmd("game_specialhi", marth_upb)    
+	.acmd("game_specialairhi", marth_upb)    
+	.acmd("game_specialairs1", marth_sideb1)    
+	.install();
 }
-#[acmd_script(
-    agent = "marth",
-    script =  "game_specials4s",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn marth_db4(fighter: &mut L2CAgentBase) {
+
+unsafe extern "C" fn marth_db4(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 7.0);
 		if macros::is_excute(fighter) {
@@ -38,12 +36,7 @@ unsafe fn marth_db4(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }	
-#[acmd_script(
-    agent = "marth",
-    scripts =  ["game_specialhi", "game_specialairhi"],
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn marth_upb(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn marth_upb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 2.0);
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 2.5);
@@ -74,12 +67,7 @@ unsafe fn marth_upb(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }	
-#[acmd_script(
-    agent = "marth",
-    script =  "game_specialairs1",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn marth_sideb1(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn marth_sideb1(fighter: &mut L2CAgentBase) {
     	let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 1.0);
 		if macros::is_excute(fighter) {

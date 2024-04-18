@@ -13,15 +13,14 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-        incin_dtilt
-    );
-    
+    Agent::new("gaogaen")
+    .acmd("game_attacklw3", incin_dtilt)    
+    .install();
 }
 
-#[acmd_script( agent = "gaogaen", script = "game_attacklw3", category = ACMD_GAME, low_priority )]
-unsafe fn incin_dtilt(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn incin_dtilt(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 7.0);
     if macros::is_excute(agent) {
         JostleModule::set_status(agent.module_accessor, false);

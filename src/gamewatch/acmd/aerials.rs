@@ -13,20 +13,20 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		gnw_dair,
-		gnw_dair_land,
-		gnw_uair_breath,
-		gnw_fair
-    );
+	Agent::new("gamewatch")
+    .acmd("game_attackairlw", gnw_dair)    
+    .acmd("game_landingairlw", gnw_dair_land)    
+    .acmd("game_attackairf", gnw_fair)     
+    .install();
+
+	Agent::new("gamewatch_breath")
+    .acmd("game_attackairhi", gnw_uair_breath)    
+    .install();
 }
-#[acmd_script(
-    agent = "gamewatch",
-    script =  "game_attackairlw",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn gnw_dair(fighter: &mut L2CAgentBase) {
+
+unsafe extern "C" fn gnw_dair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
 		frame(fighter.lua_state_agent, 6.0);
@@ -51,21 +51,11 @@ unsafe fn gnw_dair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }	
-#[acmd_script(
-    agent = "gamewatch",
-    script =  "game_landingairlw",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn gnw_dair_land(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn gnw_dair_land(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		
 }	
-#[acmd_script(
-    agent = "gamewatch",
-    script =  "game_attackairf",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn gnw_fair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn gnw_fair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			WorkModule::set_int(fighter.module_accessor, 0, *FIGHTER_GAMEWATCH_INSTANCE_WORK_ID_INT_NORMAL_WEAPON_KIND);
@@ -94,12 +84,7 @@ unsafe fn gnw_fair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }	
-#[acmd_script(
-    agent = "gamewatch_breath",
-    script =  "game_attackairhi",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn gnw_uair_breath(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn gnw_uair_breath(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			ModelModule::set_scale(fighter.module_accessor, 0.85);

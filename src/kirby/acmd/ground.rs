@@ -13,24 +13,28 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		kirby_dsmash,
-		kirby_dsmash_eff,
-		kirby_dsmash_snd,
-		kirby_fsmash,
-		kirby_fsmash_eff,
-		kirby_fsmash_snd,
-		kirby_fsmash_expr
-    );
+    Agent::new("kirby")
+    .acmd("game_attacklw4", kirby_dsmash)    
+    .acmd("effect_attacklw4", kirby_dsmash_eff)    
+    .acmd("sound_attacklw4", kirby_dsmash_snd)    
+    .acmd("game_attacks4", kirby_fsmash)    
+    .acmd("game_attacks4hi", kirby_fsmash)    
+    .acmd("game_attacks4lw", kirby_fsmash)    
+    .acmd("effect_attacks4", kirby_fsmash_eff)    
+    .acmd("effect_attacks4hi", kirby_fsmash_eff)    
+    .acmd("effect_attacks4lw", kirby_fsmash_eff)    
+    .acmd("sound_attacks4", kirby_fsmash_snd)    
+    .acmd("sound_attacks4hi", kirby_fsmash_snd)    
+    .acmd("sound_attacks4lw", kirby_fsmash_snd)    
+    .acmd("expression_attacks4", kirby_fsmash_expr)    
+    .acmd("expression_attacks4hi", kirby_fsmash_expr)    
+    .acmd("expression_attacks4lw", kirby_fsmash_expr)    
+    .install();
 }
 
-#[acmd_script(
-    agent = "kirby",
-    script =  "game_attacklw4",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn kirby_dsmash(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn kirby_dsmash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
@@ -82,12 +86,7 @@ unsafe fn kirby_dsmash(fighter: &mut L2CAgentBase) {
 			ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_KIRBY_GENERATE_ARTICLE_FINALCUTTER,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
 		}
 }
-#[acmd_script(
-    agent = "kirby",
-    script =  "effect_attacklw4",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn kirby_dsmash_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn kirby_dsmash_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	
 		//Going into Wheel
@@ -151,12 +150,7 @@ unsafe fn kirby_dsmash_eff(fighter: &mut L2CAgentBase) {
 			macros::EFFECT_FOLLOW(fighter, Hash40::new("kirby_stone_e"), Hash40::new("top"), 0, 10, 0, 0, 0, 0, 1, true);
 		}
 }
-#[acmd_script(
-    agent = "kirby",
-    script =  "sound_attacklw4",
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn kirby_dsmash_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn kirby_dsmash_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	
 		//Entering wheel
@@ -194,12 +188,7 @@ unsafe fn kirby_dsmash_snd(fighter: &mut L2CAgentBase) {
 		}
 }
 
-#[acmd_script(
-    agent = "kirby",
-    scripts =  ["game_attacks4", "game_attacks4hi", "game_attacks4lw"],
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn kirby_fsmash(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn kirby_fsmash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	
 		if macros::is_excute(fighter) {
@@ -220,12 +209,7 @@ unsafe fn kirby_fsmash(fighter: &mut L2CAgentBase) {
 			ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_KIRBY_GENERATE_ARTICLE_HAMMER,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
 		}
 }	
-#[acmd_script(
-    agent = "kirby",
-    scripts =  ["effect_attacks4", "effect_attacks4hi", "effect_attacks4lw"],
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn kirby_fsmash_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn kirby_fsmash_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	
 		frame(fighter.lua_state_agent, 8.0);
@@ -241,12 +225,7 @@ unsafe fn kirby_fsmash_eff(fighter: &mut L2CAgentBase) {
 			macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("kirby_onigoroshi_wind"), Hash40::new("kirby_onigoroshi_wind"), Hash40::new("top"), 1, 6, 3, 13, -20, 0, 1, false, *EF_FLIP_YZ);
 		}
 }	
-#[acmd_script(
-    agent = "kirby",
-    scripts =  ["sound_attacks4", "sound_attacks4hi", "sound_attacks4lw"],
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn kirby_fsmash_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn kirby_fsmash_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	
 		frame(fighter.lua_state_agent, 2.0);
@@ -262,12 +241,7 @@ unsafe fn kirby_fsmash_snd(fighter: &mut L2CAgentBase) {
 			macros::PLAY_SE(fighter, Hash40::new("se_kirby_special_s07"));
 		}
 }	
-#[acmd_script(
-    agent = "kirby",
-    scripts =  ["expression_attacks4", "expression_attacks4hi", "expression_attacks4s"],
-    category = ACMD_EXPRESSION,
-	low_priority)]
-unsafe fn kirby_fsmash_expr(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn kirby_fsmash_expr(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	
 		frame(fighter.lua_state_agent, 1.0);

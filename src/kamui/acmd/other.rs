@@ -13,20 +13,19 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		corrin_run_eff,
-		corrin_dash_eff,
-		corrin_turnrun_eff,
-		corrin_runbrake_eff
-    );
+    Agent::new("kamui")
+    .acmd("effect_dash", corrin_dash_eff)    
+    .acmd("effect_turndash", corrin_dash_eff)    
+    .acmd("effect_run", corrin_run_eff)    
+    .acmd("effect_turnrun", corrin_turnrun_eff)    
+    .acmd("effect_runbrakel", corrin_runbrake_eff)    
+    .acmd("effect_runbraker", corrin_runbrake_eff)    
+    .install();
 }
-#[acmd_script(
-    agent = "kamui",
-    scripts =  ["effect_dash", "effect_turndash"],
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn corrin_dash_eff(fighter: &mut L2CAgentBase) {
+
+unsafe extern "C" fn corrin_dash_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 3.0);
 		if macros::is_excute(fighter) {
@@ -37,12 +36,7 @@ unsafe fn corrin_dash_eff(fighter: &mut L2CAgentBase) {
 			macros::FOOT_EFFECT(fighter, Hash40::new("null"), Hash40::new("top"), 2, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
 		}
 }
-#[acmd_script( 
-	agent = "kamui", 
-	script = "effect_run", 
-	category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn corrin_run_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn corrin_run_eff(fighter: &mut L2CAgentBase) {
     for _ in 0..i32::MAX {
         frame(fighter.lua_state_agent, 4.0);
         if macros::is_excute(fighter) {
@@ -53,12 +47,7 @@ unsafe fn corrin_run_eff(fighter: &mut L2CAgentBase) {
         fighter.pop_lua_stack(1);
     }
 }
-#[acmd_script(
-    agent = "kamui",
-    scripts =  ["effect_turnrun"],
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn corrin_turnrun_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn corrin_turnrun_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 10.0);
 		if macros::is_excute(fighter) {
@@ -69,12 +58,7 @@ unsafe fn corrin_turnrun_eff(fighter: &mut L2CAgentBase) {
 			macros::FOOT_EFFECT(fighter, Hash40::new("kamui_water_splash"), Hash40::new("top"), -5, 0, 0, 0, 0, 0, 0.5, 0, 0, 0, 0, 0, 0, false);
 		}
 }
-#[acmd_script(
-    agent = "kamui",
-    scripts =  ["effect_runbrakel", "effect_runbraker"],
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn corrin_runbrake_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn corrin_runbrake_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 4.0);
 		if macros::is_excute(fighter) {

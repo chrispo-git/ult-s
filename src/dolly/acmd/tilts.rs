@@ -13,19 +13,16 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		terry_dtilt,
-		terry_ftilt,
-		terry_utilt
-    );
+    Agent::new("dolly")
+    .acmd("game_attacklw3", terry_dtilt)    
+    .acmd("game_attackhi3", terry_utilt)    
+    .acmd("game_attacks3", terry_ftilt)    
+    .install();
 }
-#[acmd_script(
-    agent = "dolly",
-    script =  "game_attacklw3",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn terry_dtilt(fighter: &mut L2CAgentBase) {
+
+unsafe extern "C" fn terry_dtilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 1.0);
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 2);
@@ -45,12 +42,7 @@ unsafe fn terry_dtilt(fighter: &mut L2CAgentBase) {
 		frame(fighter.lua_state_agent, 10.0);
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.7);
 }	
-#[acmd_script(
-    agent = "dolly",
-    script =  "game_attackhi3",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn terry_utilt(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn terry_utilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_DOLLY_INSTANCE_WORK_ID_FLAG_FINAL_HIT_CANCEL);
@@ -85,12 +77,7 @@ unsafe fn terry_utilt(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_DOLLY_STATUS_ATTACK_WORK_FLAG_HIT_CANCEL);
 		}
 }
-#[acmd_script(
-    agent = "dolly",
-    script =  "game_attacks3",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn terry_ftilt(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn terry_ftilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 0.0);
 		if macros::is_excute(fighter) {

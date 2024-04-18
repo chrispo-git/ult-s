@@ -13,26 +13,23 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		link_nair,
-		link_bair,
-		link_fair,
-		link_fair_expr,
-		link_fair_snd,
-		link_fair_eff,
-		link_uair,
-		link_uair_snd,
-		link_uair_eff,
-		link_uair_expr
-    );
+	Agent::new("link")
+    .acmd("game_attackairb", link_bair)    
+    .acmd("game_attackairf", link_fair)    
+    .acmd("effect_attackairf", link_fair_eff)    
+    .acmd("sound_attackairf", link_fair_snd)    
+    .acmd("expression_attackairf", link_fair_expr)    
+    .acmd("game_attackairhi", link_uair)    
+    .acmd("effect_attackairhi", link_uair_eff)    
+    .acmd("sound_attackairhi", link_uair_snd)    
+    .acmd("expression_attackairhi", link_uair_expr)    
+    .acmd("game_attackairn", link_nair)    
+    .install();
 }
-#[acmd_script(
-    agent = "link",
-    script =  "game_attackairb",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn link_bair(fighter: &mut L2CAgentBase) {
+
+unsafe extern "C" fn link_bair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 2);
 		if macros::is_excute(fighter) {
@@ -67,12 +64,7 @@ unsafe fn link_bair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }
-#[acmd_script( 
-	agent = "link", 
-	scripts = ["game_attackairf"], 
-	category = ACMD_GAME, 
-	low_priority )]
-unsafe fn link_fair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn link_fair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
         if macros::is_excute(fighter) {
             ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_LINK_GENERATE_ARTICLE_BOW, false, -1);
@@ -113,12 +105,7 @@ unsafe fn link_fair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }
-#[acmd_script( 
-	agent = "link", 
-	scripts = ["effect_attackairf"], 
-	category = ACMD_EFFECT, 
-	low_priority )]
-unsafe fn link_fair_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn link_fair_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 13.0);
 		if macros::is_excute(fighter) {
@@ -128,24 +115,14 @@ unsafe fn link_fair_eff(fighter: &mut L2CAgentBase) {
 			macros::EFFECT(fighter, Hash40::new("sys_smash_flash"), Hash40::new("top"), 0.0, 12.5, 30.0, 0, 0, 0, 0.35, 0, 0, 0, 0, 0, 0, true);
 		}
 }
-#[acmd_script( 
-	agent = "link", 
-	scripts = ["sound_attackairf"], 
-	category = ACMD_SOUND, 
-	low_priority )]
-unsafe fn link_fair_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn link_fair_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 13.0);
 		if macros::is_excute(fighter) {
 			macros::PLAY_SE(fighter, Hash40::new("se_link_swing_l"));
 		}
 }
-#[acmd_script(
-    agent = "link",
-    script =  "expression_attackairf",
-    category = ACMD_EXPRESSION,
-    low_priority)]
-unsafe fn link_fair_expr(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn link_fair_expr(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
         if macros::is_excute(fighter) {
             VisibilityModule::set_int64(fighter.module_accessor, hash40("shield") as i64, hash40("shield_back") as i64);
@@ -166,13 +143,7 @@ unsafe fn link_fair_expr(fighter: &mut L2CAgentBase) {
         }
 }
 
-
-#[acmd_script( 
-	agent = "link", 
-	scripts = ["game_attackairhi"], 
-	category = ACMD_GAME, 
-	low_priority )]
-unsafe fn link_uair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn link_uair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
         if macros::is_excute(fighter) {
             ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_LINK_GENERATE_ARTICLE_BOW, false, -1);
@@ -204,12 +175,7 @@ unsafe fn link_uair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }
-#[acmd_script( 
-	agent = "link", 
-	scripts = ["effect_attackairhi"], 
-	category = ACMD_EFFECT, 
-	low_priority )]
-unsafe fn link_uair_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn link_uair_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 4.0);
 		if macros::is_excute(fighter) {
@@ -218,12 +184,7 @@ unsafe fn link_uair_eff(fighter: &mut L2CAgentBase) {
 			macros::LAST_EFFECT_SET_RATE(fighter, 1.1);
 		}
 }
-#[acmd_script( 
-	agent = "link", 
-	scripts = ["sound_attackairhi"], 
-	category = ACMD_SOUND, 
-	low_priority )]
-unsafe fn link_uair_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn link_uair_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 7.0);
 		if macros::is_excute(fighter) {
@@ -231,12 +192,7 @@ unsafe fn link_uair_snd(fighter: &mut L2CAgentBase) {
 			macros::PLAY_SE(fighter, Hash40::new("se_link_swing_l"));
 		}
 }
-#[acmd_script(
-    agent = "link",
-    script =  "expression_attackairhi",
-    category = ACMD_EXPRESSION,
-    low_priority)]
-unsafe fn link_uair_expr(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn link_uair_expr(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
         if macros::is_excute(fighter) {
             VisibilityModule::set_int64(fighter.module_accessor, hash40("shield") as i64, hash40("shield_back") as i64);
@@ -257,12 +213,7 @@ unsafe fn link_uair_expr(fighter: &mut L2CAgentBase) {
         }
 }
 
-#[acmd_script(
-    agent = "link",
-    script =  "game_attackairn",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn link_nair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn link_nair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 4.0);
 		if macros::is_excute(fighter) {

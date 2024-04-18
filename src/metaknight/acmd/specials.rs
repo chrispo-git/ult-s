@@ -13,18 +13,16 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		mk_neutralb,
-        mk_neutralb_end
-    );
+    Agent::new("metaknight")
+    .acmd("game_specialnspin", mk_neutralb)    
+    .acmd("game_specialairnend", mk_neutralb_end)    
+    .acmd("game_specialnend", mk_neutralb_end)    
+    .install();
 }
-#[acmd_script(
-    agent = "metaknight",
-    script =  "game_specialnspin",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn mk_neutralb(agent: &mut L2CAgentBase) {
+
+unsafe extern "C" fn mk_neutralb(agent: &mut L2CAgentBase) {
     let ENTRY_ID = WorkModule::get_int(agent.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize; 
     let speed = SPEED_X[ENTRY_ID].abs() as i32;
     if macros::is_excute(agent) {
@@ -38,12 +36,7 @@ unsafe fn mk_neutralb(agent: &mut L2CAgentBase) {
         AttackModule::set_add_reaction_frame_revised(agent.module_accessor, /*ID*/ 3, /*Frames*/ 6.0, /*Unk*/ false);
     }
 }	
-#[acmd_script(
-    agent = "metaknight",
-    scripts =  ["game_specialairnend", "game_specialnend"],
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn mk_neutralb_end(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn mk_neutralb_end(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 1.0);
     if macros::is_excute(agent) {
         AttackModule::clear_all(agent.module_accessor);

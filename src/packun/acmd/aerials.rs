@@ -15,12 +15,17 @@ use crate::util::*;
 use super::*;
 use super::super::*;
 
-#[acmd_script(
-    agent = "packun",
-    script =  "game_attackairlw",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn plant_dair(fighter: &mut L2CAgentBase) {
+pub fn install() {
+    Agent::new("packun")
+    .acmd("game_attackairlw", plant_dair)    
+    .acmd("game_attackairn", plant_nair)    
+    .acmd("game_attackairb", plant_bair)    
+    .acmd("game_attackairf", plant_fair)    
+    .acmd("game_attackairhi", plant_uair)    
+    .install();
+}
+
+unsafe extern "C" fn plant_dair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 3.0);
 		if macros::is_excute(fighter) {
@@ -39,13 +44,8 @@ unsafe fn plant_dair(fighter: &mut L2CAgentBase) {
 		if macros::is_excute(fighter) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
-}		
-#[acmd_script(
-    agent = "packun",
-    script =  "game_attackairn",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn plant_nair(fighter: &mut L2CAgentBase) {
+}
+unsafe extern "C" fn plant_nair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.75);
 		frame(fighter.lua_state_agent, 5.0);
@@ -77,12 +77,7 @@ unsafe fn plant_nair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }
-#[acmd_script(
-    agent = "packun",
-    script =  "game_attackairb",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn plant_bair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn plant_bair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
@@ -108,12 +103,7 @@ unsafe fn plant_bair(fighter: &mut L2CAgentBase) {
 		}
 }
 
-#[acmd_script(
-    agent = "packun",
-    script =  "game_attackairf",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn plant_fair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn plant_fair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 3.0);
 		if macros::is_excute(fighter) {
@@ -141,12 +131,7 @@ unsafe fn plant_fair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }		
-#[acmd_script(
-    agent = "packun",
-    script =  "game_attackairhi",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn plant_uair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn plant_uair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 2.0);
 		if macros::is_excute(fighter) {
@@ -177,14 +162,4 @@ unsafe fn plant_uair(fighter: &mut L2CAgentBase) {
 		if macros::is_excute(fighter) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
-}
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		plant_dair,
-        plant_nair,
-        plant_bair,
-        plant_fair,
-        plant_uair
-    );
 }

@@ -14,11 +14,15 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[acmd_script( agent = "younglink", 
-script = "game_attackairf",
-category = ACMD_GAME,
-low_priority)]
-unsafe fn yink_fair(fighter: &mut L2CAgentBase) {
+pub fn install() {
+    Agent::new("younglink")
+    .acmd("game_attackairf", yink_fair)    
+    .acmd("game_attackairb", yink_bair)    
+    .acmd("game_attackairhi", yink_uair)    
+    .install();
+}
+
+unsafe extern "C" fn yink_fair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
@@ -54,11 +58,7 @@ unsafe fn yink_fair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }
-#[acmd_script( agent = "younglink", 
-script = "game_attackairb",
-category = ACMD_GAME,
-low_priority)]
-unsafe fn yink_bair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn yink_bair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
@@ -100,11 +100,7 @@ unsafe fn yink_bair(fighter: &mut L2CAgentBase) {
 		}
 }	
 
-#[acmd_script( agent = "younglink", 
-script = "game_attackairhi",
-category = ACMD_GAME,
-low_priority)]
-unsafe fn yink_uair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn yink_uair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 5.0);
 		if macros::is_excute(fighter) {
@@ -130,12 +126,4 @@ unsafe fn yink_uair(fighter: &mut L2CAgentBase) {
 		if macros::is_excute(fighter) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
-}		
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		yink_fair,
-        yink_bair,
-        yink_uair
-    );
-}
+}	

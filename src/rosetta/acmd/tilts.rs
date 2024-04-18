@@ -15,12 +15,13 @@ use crate::util::*;
 use super::*;
 use super::super::*;
 
-#[acmd_script(
-    agent = "rosetta",
-    script =  "game_attackhi3",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn rosa_utilt(fighter: &mut L2CAgentBase) {
+pub fn install() {
+    Agent::new("rosetta")
+    .acmd("game_attackhi3", rosa_utilt)    
+    .install();
+}
+
+unsafe extern "C" fn rosa_utilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 2.0);
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 3);
@@ -43,10 +44,4 @@ unsafe fn rosa_utilt(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 			ArticleModule::remove(fighter.module_accessor, *FIGHTER_ROSETTA_GENERATE_ARTICLE_RING,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
 		}
-}
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		rosa_utilt
-    );
 }

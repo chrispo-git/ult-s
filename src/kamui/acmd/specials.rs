@@ -13,19 +13,22 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		corrin_neutralb,
-		corrin_neutralb_max,
-		corrin_downb
-    );
+    Agent::new("kamui_ryusensya")
+    .acmd("game_regular", corrin_neutralb)    
+    .acmd("game_shotmax", corrin_neutralb_max)    
+    .install();
+
+	Agent::new("kamui_waterdragon")
+    .acmd("game_speciallwhit", corrin_downb)    
+    .acmd("game_specialairlwhit", corrin_downb)    
+    .acmd("game_speciallwhitturn", corrin_downb)    
+    .acmd("game_specialairlwhitturn", corrin_downb)    
+    .install();
 }
-#[acmd_script(
-    agent = "kamui_ryusensya",
-    script =  "game_regular",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn corrin_neutralb(fighter: &mut L2CAgentBase) {
+
+unsafe extern "C" fn corrin_neutralb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 3.0, /*Angle*/ 135, /*KBG*/ 90, /*FKB*/ 0, /*BKB*/ 30, /*Size*/ 5.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.3, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ true, /*Absorbable*/ true, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_paralyze"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_ELEC, /*Type*/ *ATTACK_REGION_NONE);
@@ -36,24 +39,14 @@ unsafe fn corrin_neutralb(fighter: &mut L2CAgentBase) {
 			AttackModule::enable_safe_pos(fighter.module_accessor);
 		}
 }
-#[acmd_script(
-    agent = "kamui_ryusensya",
-    script =  "game_shotmax",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn corrin_neutralb_max(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn corrin_neutralb_max(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 9.0, /*Angle*/ 125, /*KBG*/ 90, /*FKB*/ 0, /*BKB*/ 40, /*Size*/ 5.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.5, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ true, /*Absorbable*/ true, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_paralyze"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_ELEC, /*Type*/ *ATTACK_REGION_NONE);
 		}
 }
 
-#[acmd_script(
-    agent = "kamui_waterdragon",
-    scripts =  ["game_speciallwhit", "game_specialairlwhit", "game_speciallwhitturn", "game_specialairlwhitturn"],
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn corrin_downb(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn corrin_downb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 26.0);
 		if macros::is_excute(fighter) {

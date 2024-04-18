@@ -14,12 +14,7 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[acmd_script(
-    agent = "samusd",
-    script =  "game_attackairn",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn dsamus_nair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn dsamus_nair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 3.0);
 		if macros::is_excute(fighter) {
@@ -38,12 +33,7 @@ unsafe fn dsamus_nair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }	
-#[acmd_script(
-    agent = "samusd",
-    script =  "effect_attackairn",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn dsamus_nair_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn dsamus_nair_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 3.0);
 		if macros::is_excute(fighter) {
@@ -74,12 +64,7 @@ unsafe fn dsamus_nair_eff(fighter: &mut L2CAgentBase) {
 		}
 }	
 
-#[acmd_script(
-    agent = "samusd",
-    script =  "game_attackairlw",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn dsamus_dair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn dsamus_dair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 5.0);
 		if macros::is_excute(fighter) {
@@ -101,12 +86,7 @@ unsafe fn dsamus_dair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }		
-#[acmd_script(
-    agent = "samusd",
-    script =  "effect_attackairlw",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn dsamus_dair_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn dsamus_dair_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			macros::EFFECT_FOLLOW(fighter, Hash40::new("samusd_win3_aura"), Hash40::new("arml"), 0, 0, 0, 0, 0, 0, 1.9, true);
@@ -128,12 +108,7 @@ unsafe fn dsamus_dair_eff(fighter: &mut L2CAgentBase) {
 			macros::EFFECT_OFF_KIND(fighter, Hash40::new("samusd_win3_aura"), false, true);
 		}
 }
-#[acmd_script(
-    agent = "samusd",
-    script =  "game_attackairf",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn dsamus_fair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn dsamus_fair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 9.0);
 		if macros::is_excute(fighter) {
@@ -155,24 +130,14 @@ unsafe fn dsamus_fair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }	
-#[acmd_script(
-    agent = "samusd",
-    script =  "effect_attackairf",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn dsamus_fair_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn dsamus_fair_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 11.0);
 		if macros::is_excute(fighter) {
 			macros::EFFECT(fighter, Hash40::new("samusd_atk_bomb"), Hash40::new("armr"), 14.387, -0.341, -0.169, 0, 0, 0, 1.3, 0, 0, 0, 0, 0, 0, true);
 		}
 }		
-#[acmd_script(
-    agent = "samusd",
-    script =  "sound_attackairf",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn dsamus_fair_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn dsamus_fair_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 10.0);
 		if macros::is_excute(fighter) {
@@ -181,9 +146,13 @@ unsafe fn dsamus_fair_snd(fighter: &mut L2CAgentBase) {
 }	
 
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		dsamus_nair, dsamus_nair_eff,
-        dsamus_dair, dsamus_dair_eff,
-        dsamus_fair, dsamus_fair_eff, dsamus_fair_snd
-    );
+    Agent::new("samusd")
+        .game_acmd("game_attackairn", dsamus_nair)
+        .effect_acmd("effect_attackairn", dsamus_nair_eff)
+        .game_acmd("game_attackairlw", dsamus_dair)
+        .effect_acmd("effect_attackairlw", dsamus_dair_eff)
+        .game_acmd("game_attackairf", dsamus_fair)
+        .effect_acmd("effect_attackairf", dsamus_fair_eff)
+        .sound_acmd("sound_attackairf", dsamus_fair_snd)
+        .install();
 }

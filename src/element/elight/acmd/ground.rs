@@ -13,17 +13,16 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-	smashline::install_acmd_scripts!(
-		mythra_jab1, mythra_jab3, mythra_da
-	);
+	Agent::new("elight")
+    .acmd("game_attack11", mythra_jab1)    
+    .acmd("game_attack13", mythra_jab3)    
+    .acmd("game_attackdash", mythra_da)    
+    .install();
 }
-#[acmd_script(
-    agent = "elight",
-    script =  "game_attack11",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn mythra_jab1(fighter: &mut L2CAgentBase) {
+
+unsafe extern "C" fn mythra_jab1(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 3.0);
 		if macros::is_excute(fighter) {
@@ -48,11 +47,7 @@ unsafe fn mythra_jab1(fighter: &mut L2CAgentBase) {
 			WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_FLAG_ENABLE_RESTART);
 		}
 }		
-#[acmd_script( agent = "elight", 
-scripts = ["game_attack13"], 
-category = ACMD_GAME,
-low_priority)]
-unsafe fn mythra_jab3(fighter: &mut L2CAgentBase) {	
+unsafe extern "C" fn mythra_jab3(fighter: &mut L2CAgentBase) {	
 		let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 1.0);
 		if ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_ELIGHT_GENERATE_ARTICLE_ESWORD) {
@@ -105,11 +100,7 @@ unsafe fn mythra_jab3(fighter: &mut L2CAgentBase) {
 			}
 		};
 }
-#[acmd_script( agent = "elight", 
-scripts = ["game_attackdash"], 
-category = ACMD_GAME,
-low_priority)]
-unsafe fn mythra_da(fighter: &mut L2CAgentBase) {	
+unsafe extern "C" fn mythra_da(fighter: &mut L2CAgentBase) {	
 		let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 1.0);
 		macros::FT_MOTION_RATE(fighter, 0.8);

@@ -14,10 +14,6 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-
-
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		
-    );
+    
 }

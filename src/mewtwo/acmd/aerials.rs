@@ -13,19 +13,19 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		m2_bair, m2_bair_eff, m2_bair_snd, m2_bair_land_eff,
-		m2_uair,
-		m2_fair
-    );
+    Agent::new("mewtwo")
+    .acmd("game_attackairf", m2_fair)    
+    .acmd("game_attackairb", m2_bair)    
+    .acmd("effect_attackairb", m2_bair_eff)    
+    .acmd("effect_landingairb", m2_bair_land_eff)    
+    .acmd("sound_attackairb", m2_bair_snd)    
+    .acmd("game_attackairhi", m2_uair)    
+    .install();
 }
-#[acmd_script(
-    agent = "mewtwo",
-    script =  "game_attackairf",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn m2_fair(agent: &mut L2CAgentBase) {
+
+unsafe extern "C" fn m2_fair(agent: &mut L2CAgentBase) {
     if macros::is_excute(agent) {
         WorkModule::on_flag(agent.module_accessor, *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
     }
@@ -47,12 +47,7 @@ unsafe fn m2_fair(agent: &mut L2CAgentBase) {
         WorkModule::off_flag(agent.module_accessor, *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
     }
 }	
-#[acmd_script(
-    agent = "mewtwo",
-    script =  "game_attackairb",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn m2_bair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn m2_bair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 3.0);
 		macros::FT_MOTION_RATE(fighter, 0.5);
@@ -75,12 +70,7 @@ unsafe fn m2_bair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }		
-#[acmd_script(
-    agent = "mewtwo",
-    script =  "effect_attackairb",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn m2_bair_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn m2_bair_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 8.0);
 		if macros::is_excute(fighter) {
@@ -91,24 +81,14 @@ unsafe fn m2_bair_eff(fighter: &mut L2CAgentBase) {
 			macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("mewtwo_pk_attack_b"), Hash40::new("mewtwo_pk_attack_b"), Hash40::new("handr"), 0, 0, 0, 0, 90.0*PostureModule::lr(fighter.module_accessor), 0, 1, true, *EF_FLIP_YZ);
 		}
 }			
-#[acmd_script(
-    agent = "mewtwo",
-    script =  "effect_landingairb",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn m2_bair_land_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn m2_bair_land_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			macros::EFFECT_OFF_KIND(fighter, Hash40::new("mewtwo_pk_attack_b"), false, false);
 			macros::LANDING_EFFECT(fighter, Hash40::new("sys_down_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
 		}
 }	
-#[acmd_script(
-    agent = "mewtwo",
-    script =  "sound_attackairb",
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn m2_bair_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn m2_bair_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 10.0);
 		if macros::is_excute(fighter) {
@@ -116,12 +96,7 @@ unsafe fn m2_bair_snd(fighter: &mut L2CAgentBase) {
 			macros::PLAY_SEQUENCE(fighter, Hash40::new("seq_mewtwo_rnd_attack"));
 		}
 }		
-#[acmd_script(
-    agent = "mewtwo",
-    script =  "game_attackairhi",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn m2_uair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn m2_uair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 3.0);
 		if macros::is_excute(fighter) {

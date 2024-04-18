@@ -13,14 +13,14 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-        captain_ftiltlw
-	);
+    Agent::new("captain")
+    .acmd("game_attacks3lw", captain_ftiltlw)    
+    .install();
 }
 
-#[acmd_script( agent = "captain", script = "game_attacks3lw", category = ACMD_GAME, low_priority )]
-unsafe fn captain_ftiltlw(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn captain_ftiltlw(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     macros::FT_MOTION_RATE(fighter, 0.75);
     frame(fighter.lua_state_agent, 9.0);

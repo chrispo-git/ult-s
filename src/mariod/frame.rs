@@ -14,11 +14,14 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use crate::mariod::*;
 use super::*;
+
 pub fn install() {
-	smashline::install_agent_frames!(mariod_frame);
+	Agent::new("mariod")
+    .on_line(Main, mariod_frame)
+    .install();
 }
-#[fighter_frame(agent = FIGHTER_KIND_MARIOD)]
-pub fn mariod_frame(fighter : &mut L2CFighterCommon) {
+
+unsafe extern "C" fn mariod_frame(fighter : &mut L2CFighterCommon) {
     unsafe {
 			let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 			if is_default(boma) {

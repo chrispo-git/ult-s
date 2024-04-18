@@ -13,17 +13,14 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		mario_dtilt
-    );
+    Agent::new("mario")
+    .acmd("game_attacklw3", mario_dtilt)    
+    .install();
 }
-#[acmd_script(
-    agent = "mario",
-    script =  "game_attacklw3",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn mario_dtilt(fighter: &mut L2CAgentBase) {
+
+unsafe extern "C" fn mario_dtilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 5.0);
 		if macros::is_excute(fighter) {

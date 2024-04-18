@@ -13,26 +13,27 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-	smashline::install_acmd_scripts!(
-		doc_utilt,
-		doc_utilt_eff,
-		doc_dtilt,
-		doc_dtilt_eff,
-		doc_dtilt_snd,
-		doc_ftilt,
-		doc_ftilt_hi,
-		doc_ftilt_s,
-		doc_ftilt_lw,
-		doc_ftilt_snd
-	);
+	Agent::new("mariod")
+    .acmd("game_attackhi3", doc_utilt)    
+    .acmd("effect_attackhi3", doc_utilt_eff)    
+    .acmd("game_attacks3", doc_ftilt)    
+    .acmd("game_attacks3hi", doc_ftilt)    
+    .acmd("game_attacks3lw", doc_ftilt)    
+    .acmd("game_attacklw3", doc_dtilt)    
+    .acmd("effect_attacklw3", doc_dtilt_eff)    
+    .acmd("effect_attacks3", doc_ftilt_s)    
+    .acmd("effect_attacks3hi", doc_ftilt_hi)    
+    .acmd("sound_attacks3", doc_ftilt_snd)    
+    .acmd("sound_attacks3hi", doc_ftilt_snd)    
+    .acmd("sound_attacks3lw", doc_ftilt_snd)    
+    .acmd("sound_attacklw3", doc_dtilt_snd)    
+    .acmd("effect_attacks3lw", doc_ftilt_lw)    
+    .install();
 }
-#[acmd_script(
-    agent = "mariod",
-    script =  "game_attackhi3",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn doc_utilt(fighter: &mut L2CAgentBase) {
+
+unsafe extern "C" fn doc_utilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 5.0);
 		if macros::is_excute(fighter) {
@@ -53,12 +54,7 @@ unsafe fn doc_utilt(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }	
-#[acmd_script(
-    agent = "mariod",
-    script =  "effect_attackhi3",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn doc_utilt_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn doc_utilt_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 4.0);
 		if macros::is_excute(fighter) {
@@ -77,12 +73,7 @@ unsafe fn doc_utilt_eff(fighter: &mut L2CAgentBase) {
 			macros::LANDING_EFFECT(fighter, Hash40::new("sys_landing_smoke_s"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
 		}
 }
-#[acmd_script(
-    agent = "mariod",
-    scripts =  ["game_attacks3", "game_attacks3hi", "game_attacks3lw"],
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn doc_ftilt(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn doc_ftilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 5.0);
 		if macros::is_excute(fighter) {
@@ -95,12 +86,7 @@ unsafe fn doc_ftilt(fighter: &mut L2CAgentBase) {
 		AttackModule::clear_all(fighter.module_accessor);
 		}
 }
-#[acmd_script(
-    agent = "mariod",
-    script =  "game_attacklw3",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn doc_dtilt(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn doc_dtilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 5.0);
 		if macros::is_excute(fighter) {
@@ -116,12 +102,7 @@ unsafe fn doc_dtilt(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }	
-#[acmd_script(
-    agent = "mariod",
-    scripts =  ["effect_attacklw3"],
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn doc_dtilt_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn doc_dtilt_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 4.0);
 		if macros::is_excute(fighter) {
@@ -138,12 +119,7 @@ unsafe fn doc_dtilt_eff(fighter: &mut L2CAgentBase) {
 			macros::EFFECT_OFF_KIND(fighter, Hash40::new("mariod_smash_impact"), true, true);
 		}
 }
-#[acmd_script(
-    agent = "mariod",
-    scripts =  ["effect_attacks3"],
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn doc_ftilt_s(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn doc_ftilt_s(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 3.0);
 		if macros::is_excute(fighter) {
@@ -159,12 +135,7 @@ unsafe fn doc_ftilt_s(fighter: &mut L2CAgentBase) {
 			macros::EFFECT_OFF_KIND(fighter, Hash40::new("mariod_smash_impact"), true, true);
 		}
 }
-#[acmd_script(
-    agent = "mariod",
-    scripts =  ["effect_attacks3hi"],
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn doc_ftilt_hi(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn doc_ftilt_hi(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 3.0);
 		if macros::is_excute(fighter) {
@@ -180,12 +151,7 @@ unsafe fn doc_ftilt_hi(fighter: &mut L2CAgentBase) {
 			macros::EFFECT_OFF_KIND(fighter, Hash40::new("mariod_smash_impact"), true, true);
 		}
 }
-#[acmd_script(
-    agent = "mariod",
-    scripts =  ["sound_attacks3", "sound_attacks3hi", "sound_attacks3lw"],
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn doc_ftilt_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn doc_ftilt_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 5.0);
 		if macros::is_excute(fighter) {
@@ -194,12 +160,7 @@ unsafe fn doc_ftilt_snd(fighter: &mut L2CAgentBase) {
 			macros::PLAY_SE(fighter, Hash40::new("se_mariod_smash_s01"));
 		}
 }
-#[acmd_script(
-    agent = "mariod",
-    scripts =  ["sound_attacklw3"],
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn doc_dtilt_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn doc_dtilt_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 5.0);
 		if macros::is_excute(fighter) {
@@ -208,12 +169,7 @@ unsafe fn doc_dtilt_snd(fighter: &mut L2CAgentBase) {
 			macros::PLAY_SE(fighter, Hash40::new("se_mariod_smash_s01"));
 		}
 }
-#[acmd_script(
-    agent = "mariod",
-    scripts =  ["effect_attacks3lw"],
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn doc_ftilt_lw(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn doc_ftilt_lw(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 3.0);
 		if macros::is_excute(fighter) {

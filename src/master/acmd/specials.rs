@@ -14,39 +14,61 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use crate::master::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		byleth_sideb,
-		byleth_sidebdash,
-		byleth_sidebe,
-		byleth_sidebedash,
-		byleth_sideb_start,
-		byleth_sideb_starte,
-		byleth_neutralb_start,
-		byleth_neutralb,
-		byleth_neutralb_eff,
-		kirby_byleth_neutralb_eff,
-		byleth_neutralb_snd,
-		byleth_neutralbmax,
-		byleth_neutralbmaxe,
-		byleth_neutralbmaxs,
-		byleth_neutralbmaxair,
-		byleth_neutralbmaxaire,
-		byleth_neutralbmaxairs,
-		byleth_arrow_effect,
-		byleth_arrow,
-		byleth_downb,
-		axe_downb,
-		byleth_air_neutralb_exp,
-		byleth_sideb_snd
-    );
+    Agent::new("master")
+    .acmd("sound_specialairsf", byleth_sideb_snd)    
+    .acmd("sound_specialsf", byleth_sideb_snd)    
+    .acmd("sound_specialairsfdash", byleth_sidebdash_snd)    
+    .acmd("sound_specialsfdash", byleth_sidebdash_snd)    
+    .acmd("game_specialsf", byleth_sideb)    
+    .acmd("game_specialairsf", byleth_sideb)    
+    .acmd("game_specialsfdash", byleth_sidebdash)    
+    .acmd("game_specialairsfdash", byleth_sidebdash)    
+    .acmd("effect_specialsf", byleth_sidebe)    
+    .acmd("effect_specialairsf", byleth_sidebe)    
+    .acmd("effect_specialsfdash", byleth_sidebedash)    
+    .acmd("effect_specialairsfdash", byleth_sidebedash)    
+    .acmd("game_specialsstart", byleth_sideb_start)    
+    .acmd("game_specialairsstart", byleth_sideb_start)    
+    .acmd("effect_specialsstart", byleth_sideb_starte)    
+    .acmd("effect_specialairsstart", byleth_sideb_starte)    
+    .acmd("game_specialn", byleth_neutralb)    
+    .acmd("game_specialairn", byleth_neutralb)    
+    .acmd("effect_specialn", byleth_neutralb_eff)    
+    .acmd("effect_specialairn", byleth_neutralb_eff)    
+    .acmd("sound_specialn", byleth_neutralb_snd)    
+    .acmd("sound_specialairn", byleth_neutralb_snd)    
+    .acmd("expression_specialairn", byleth_air_neutralb_exp)    
+    .acmd("game_specialnstart", byleth_neutralb_start)    
+    .acmd("game_specialairnstart", byleth_neutralb_start)    
+    .acmd("game_specialnmax", byleth_neutralbmax)    
+    .acmd("effect_specialnmax", byleth_neutralbmaxe)    
+    .acmd("sound_specialnmax", byleth_neutralbmaxs)    
+    .acmd("game_specialairnmax", byleth_neutralbmaxair)    
+    .acmd("effect_specialairnmax", byleth_neutralbmaxaire)    
+    .acmd("sound_specialairnmax", byleth_neutralbmaxairs)    
+    .acmd("game_speciallw", byleth_downb)    
+    .acmd("game_specialairlw", byleth_downb)    
+    .install();
+
+	Agent::new("master_arrow1")
+    .acmd("effect_fly", byleth_arrow_effect)    
+    .acmd("game_fly", byleth_arrow)    
+    .install();
+
+	Agent::new("master_axe")
+    .acmd("game_speciallw", axe_downb)    
+    .acmd("game_specialairlw", axe_downb)    
+    .install();
+
+	Agent::new("kirby")
+    .acmd("effect_masterspecialn", kirby_byleth_neutralb_eff)    
+    .acmd("effect_masterspecialairn", kirby_byleth_neutralb_eff)    
+    .install();
 }
-#[acmd_script(
-    agent = "master",
-    scripts =  ["sound_specialairsf", "sound_specialsf"],
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn byleth_sideb_snd(fighter: &mut L2CAgentBase) {
+
+unsafe extern "C" fn byleth_sideb_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			macros::PLAY_SEQUENCE(fighter, Hash40::new("seq_master_rnd_attack02"));
@@ -60,12 +82,7 @@ unsafe fn byleth_sideb_snd(fighter: &mut L2CAgentBase) {
 			macros::PLAY_SE(fighter, Hash40::new("se_master_cloth_ll03"));
 		}
 	}	
-#[acmd_script(
-    agent = "master",
-    scripts =  ["sound_specialairsfdash", "sound_specialsfdash"],
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn byleth_sidebdash_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn byleth_sidebdash_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			macros::PLAY_SEQUENCE(fighter, Hash40::new("seq_master_rnd_attack02"));
@@ -79,12 +96,7 @@ unsafe fn byleth_sidebdash_snd(fighter: &mut L2CAgentBase) {
 			macros::PLAY_SE(fighter, Hash40::new("se_master_cloth_ll03"));
 		}
 	}				
-#[acmd_script(
-    agent = "master",
-    scripts =  ["game_specialsf", "game_specialairsf"],
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn byleth_sideb(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn byleth_sideb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
 		frame(fighter.lua_state_agent, 10.0);
@@ -100,12 +112,7 @@ unsafe fn byleth_sideb(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 	}		
-#[acmd_script(
-    agent = "master",
-    scripts =  ["game_specialsfdash", "game_specialairsfdash"],
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn byleth_sidebdash(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn byleth_sidebdash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
 		frame(fighter.lua_state_agent, 2.0);
@@ -127,12 +134,7 @@ unsafe fn byleth_sidebdash(fighter: &mut L2CAgentBase) {
 			KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_FALL);
 		}
 	}			
-#[acmd_script(
-    agent = "master",
-    scripts =  ["effect_specialsf", "effect_specialairsf"],
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn byleth_sidebe(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn byleth_sidebe(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 10.0);
 		if macros::is_excute(fighter) {
@@ -148,12 +150,7 @@ unsafe fn byleth_sidebe(fighter: &mut L2CAgentBase) {
 			macros::EFFECT_OFF_KIND(fighter, Hash40::new_raw(0x118d3781c4), false, true);
 		}
 	}	
-#[acmd_script(
-    agent = "master",
-    scripts =  ["effect_specialsfdash", "effect_specialairsfdash"],
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn byleth_sidebedash(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn byleth_sidebedash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 2.0);
 		if macros::is_excute(fighter) {
@@ -173,29 +170,14 @@ unsafe fn byleth_sidebedash(fighter: &mut L2CAgentBase) {
 			macros::EFFECT_OFF_KIND(fighter, Hash40::new_raw(0x118d3781c4), false, true);
 		}
 	}		
-#[acmd_script(
-    agent = "master",
-    scripts =  ["game_specialsstart", "game_specialairsstart"],
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn byleth_sideb_start(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn byleth_sideb_start(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.4);
 	}						
-#[acmd_script(
-    agent = "master",
-    scripts =  ["effect_specialsstart", "effect_specialairsstart"],
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn byleth_sideb_starte(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn byleth_sideb_starte(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	}				
-#[acmd_script(
-    agent = "master_arrow1",
-    script =  "effect_fly",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn byleth_arrow_effect(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn byleth_arrow_effect(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		for _ in 0..10 {
 			if macros::is_excute(fighter) {
@@ -212,24 +194,14 @@ unsafe fn byleth_arrow_effect(fighter: &mut L2CAgentBase) {
 			EffectModule::set_scale_last(fighter.module_accessor, &scale);
 		}
 	}
-#[acmd_script(
-    agent = "master_arrow1",
-    script =  "game_fly",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn byleth_arrow(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn byleth_arrow(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 9.0, /*Angle*/ 361, /*KBG*/ 70, /*FKB*/ 0, /*BKB*/ 20, /*Size*/ 4.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ -1.5, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.8, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 5, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ true, /*Absorbable*/ true, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_fire"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L,  /*SFXType*/ *COLLISION_SOUND_ATTR_FIRE, /*Type*/ *ATTACK_REGION_OBJECT);
 			AttackModule::enable_safe_pos(fighter.module_accessor);
 		}
 	}							
-#[acmd_script(
-    agent = "master",
-    scripts =  ["game_specialn", "game_specialairn"],
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn byleth_neutralb(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn byleth_neutralb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.7);
 		if macros::is_excute(fighter) {
@@ -274,12 +246,7 @@ unsafe fn byleth_neutralb(fighter: &mut L2CAgentBase) {
             CancelModule::enable_cancel(fighter.module_accessor);
         }
 	}		
-#[acmd_script(
-    agent = "master",
-    scripts =  ["effect_specialn", "effect_specialairn"],
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn byleth_neutralb_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn byleth_neutralb_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 9.0);
 		if macros::is_excute(fighter) {
@@ -295,12 +262,7 @@ unsafe fn byleth_neutralb_eff(fighter: &mut L2CAgentBase) {
 				}
 		}
 	}	
-#[acmd_script(
-    agent = "kirby",
-    scripts =  ["effect_masterspecialn", "effect_masterspecialairn"],
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn kirby_byleth_neutralb_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn kirby_byleth_neutralb_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 9.0);
 		if macros::is_excute(fighter) {
@@ -316,12 +278,7 @@ unsafe fn kirby_byleth_neutralb_eff(fighter: &mut L2CAgentBase) {
 				}
 		}
 	}	
-#[acmd_script(
-    agent = "master",
-    scripts =  ["sound_specialn", "sound_specialairn"],
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn byleth_neutralb_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn byleth_neutralb_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 10.0);
 		if macros::is_excute(fighter) {
@@ -335,21 +292,11 @@ unsafe fn byleth_neutralb_snd(fighter: &mut L2CAgentBase) {
 				macros::PLAY_SEQUENCE(fighter, Hash40::new("seq_master_rnd_attack02"));
 		}
 	}				
-#[acmd_script(
-    agent = "master",
-    script =  "expression_specialairn",
-    category = ACMD_EXPRESSION,
-	low_priority)]
-unsafe fn byleth_air_neutralb_exp(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn byleth_air_neutralb_exp(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	}			
 	
-#[acmd_script(
-    agent = "master",
-    scripts =  ["game_specialnstart", "game_specialairnstart"],
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn byleth_neutralb_start(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn byleth_neutralb_start(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 				let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
@@ -360,66 +307,31 @@ unsafe fn byleth_neutralb_start(fighter: &mut L2CAgentBase) {
 				};
 		}
 	}									
-#[acmd_script(
-    agent = "master",
-    script =  "game_specialnmax",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn byleth_neutralbmax(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn byleth_neutralbmax(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			CancelModule::enable_cancel(fighter.module_accessor);
 		}
 	}										
-#[acmd_script(
-    agent = "master",
-    script =  "effect_specialnmax",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn byleth_neutralbmaxe(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn byleth_neutralbmaxe(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	}											
-#[acmd_script(
-    agent = "master",
-    script =  "sound_specialnmax",
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn byleth_neutralbmaxs(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn byleth_neutralbmaxs(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	}										
-#[acmd_script(
-    agent = "master",
-    script =  "game_specialairnmax",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn byleth_neutralbmaxair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn byleth_neutralbmaxair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			CancelModule::enable_cancel(fighter.module_accessor);
 		}
 	}											
-#[acmd_script(
-    agent = "master",
-    script =  "effect_specialairnmax",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn byleth_neutralbmaxaire(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn byleth_neutralbmaxaire(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	}											
-#[acmd_script(
-    agent = "master",
-    script =  "sound_specialairnmax",
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn byleth_neutralbmaxairs(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn byleth_neutralbmaxairs(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	}			
-#[acmd_script(
-    agent = "master_axe",
-    scripts =  ["game_speciallw", "game_specialairlw"],
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn axe_downb(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn axe_downb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.04761904);
 		if macros::is_excute(fighter) {
@@ -436,12 +348,7 @@ unsafe fn axe_downb(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 	}			
-    #[acmd_script(
-        agent = "master",
-        scripts =  ["game_speciallw", "game_specialairlw"],
-        category = ACMD_GAME,
-        low_priority)]
-    unsafe fn byleth_downb(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn byleth_downb(fighter: &mut L2CAgentBase) {
         let lua_state = fighter.lua_state_agent;
             macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.04761904);
             if macros::is_excute(fighter) {

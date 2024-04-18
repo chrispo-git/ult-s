@@ -13,17 +13,14 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		incin_da
-    );
+    Agent::new("gaogaen")
+    .acmd("game_attackdash", incin_da)    
+    .install();
 }
-#[acmd_script(
-    agent = "gaogaen",
-    script =  "game_attackdash",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn incin_da(fighter: &mut L2CAgentBase) {
+
+unsafe extern "C" fn incin_da(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 8.0);
 		if macros::is_excute(fighter) {

@@ -14,12 +14,14 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[acmd_script(
-    agent = "samus",
-    script =  "game_attack11",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn samus_jab(fighter: &mut L2CAgentBase) {
+pub fn install() {
+    Agent::new("samus")
+    .acmd("game_attack11", samus_jab)    
+    .acmd("game_attacklw4", samus_dsmash)    
+    .install();
+}
+
+unsafe extern "C" fn samus_jab(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
@@ -44,12 +46,7 @@ unsafe fn samus_jab(fighter: &mut L2CAgentBase) {
 		}
 }
 
-#[acmd_script(
-    agent = "samus",
-    script =  "game_attacklw4",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn samus_dsmash(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn samus_dsmash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 1.0);
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
@@ -74,11 +71,4 @@ unsafe fn samus_dsmash(fighter: &mut L2CAgentBase) {
 		if macros::is_excute(fighter) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
-}
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		samus_jab,
-        samus_dsmash
-    );
 }

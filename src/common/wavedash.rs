@@ -67,8 +67,7 @@ pub(crate) fn get_wd_length(fighter_kind : i32) -> f32 {
 	return TRACTION_MID;
 }
 
-#[fighter_frame_callback]
-pub fn wavedash(fighter : &mut L2CFighterCommon) {
+unsafe extern "C" fn wavedash(fighter : &mut L2CFighterCommon) {
     unsafe {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);    
 		let fighter_kind = smash::app::utility::get_kind(boma);
@@ -230,9 +229,7 @@ pub unsafe fn change_status_request_hook(boma: &mut smash::app::BattleObjectModu
 		original!()(boma, status_kind, arg3)
 	}
 }
-#[common_status_script(status = FIGHTER_STATUS_KIND_ESCAPE_AIR, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_PRE,
-    symbol = "_ZN7lua2cpp16L2CFighterCommon20status_pre_EscapeAirEv")]
-pub unsafe fn status_pre_EscapeAir(fighter: &mut L2CFighterCommon) -> L2CValue {
+unsafe extern "C" fn status_pre_EscapeAir(fighter: &mut L2CFighterCommon) -> L2CValue {
     let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);    
 	let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 	let y = ControlModule::get_stick_y(boma);
@@ -244,7 +241,7 @@ pub unsafe fn status_pre_EscapeAir(fighter: &mut L2CFighterCommon) -> L2CValue {
         fighter.change_status(FIGHTER_STATUS_KIND_LANDING.into(), false.into());
         return 0.into();
     }
-    call_original!(fighter)
+    return smashline::original_status(Pre, fighter, *FIGHTER_STATUS_KIND_ESCAPE_AIR)(fighter);
 }
 #[skyline::hook(replace = smash::app::lua_bind::StatusModule::change_status_request_from_script)]
 pub unsafe fn change_status_request_script_hook(boma: &mut smash::app::BattleObjectModuleAccessor, status_kind: i32, arg3: bool) -> u64 {
@@ -298,12 +295,12 @@ pub unsafe fn change_status_request_script_hook(boma: &mut smash::app::BattleObj
 
 
 pub fn install() {
-    smashline::install_agent_frame_callbacks!(
-		wavedash
-	);
+    Agent::new("fighter")
+	.on_line(Exec, wavedash)
+	.status(Pre, *FIGHTER_STATUS_KIND_ESCAPE_AIR, status_pre_EscapeAir)
+    .install();
 	skyline::install_hooks!(
 		change_status_request_hook,
 		change_status_request_script_hook
     );
-	smashline::install_status_scripts!(status_pre_EscapeAir);
 }

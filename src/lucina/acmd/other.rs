@@ -15,12 +15,15 @@ use crate::util::*;
 use super::*;
 use super::super::*;
 
-#[acmd_script(
-    agent = "lucina",
-    script =  "effect_cliffattack",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn lucina_cliff_eff(fighter: &mut L2CAgentBase) {
+pub fn install() {
+    Agent::new("lucina")
+    .acmd("effect_cliffattack", lucina_cliff_eff)    
+    .acmd("effect_downattackd", lucina_downd_eff)    
+	.acmd("effect_downattacku", lucina_downu_eff)    
+	.install();
+}
+
+unsafe extern "C" fn lucina_cliff_eff(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 		frame(fighter.lua_state_agent, 20.0);
@@ -44,12 +47,7 @@ unsafe fn lucina_cliff_eff(fighter: &mut L2CAgentBase) {
 			macros::AFTER_IMAGE_OFF(fighter, 3);
 		};
 }
-#[acmd_script(
-    agent = "lucina",
-    script =  "effect_downattackd",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn lucina_downd_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn lucina_downd_eff(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 		frame(fighter.lua_state_agent, 12.0);
@@ -73,12 +71,7 @@ unsafe fn lucina_downd_eff(fighter: &mut L2CAgentBase) {
 			macros::AFTER_IMAGE_OFF(fighter, 2);
 		};
 }
-#[acmd_script(
-    agent = "lucina",
-    script =  "effect_downattacku",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn lucina_downu_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn lucina_downu_eff(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 		frame(fighter.lua_state_agent, 14.0);
@@ -117,13 +110,4 @@ unsafe fn lucina_downu_eff(fighter: &mut L2CAgentBase) {
 		if macros::is_excute(fighter) {
 			macros::AFTER_IMAGE_OFF(fighter, 4);
 		};
-}
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		lucina_cliff_eff,
-        lucina_downd_eff, 
-        lucina_downu_eff,
-        
-    );
 }

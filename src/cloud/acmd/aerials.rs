@@ -13,18 +13,15 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		cloud_uair,
-		cloud_dair
-    );
+    Agent::new("cloud")
+    .acmd("game_attackairhi", cloud_uair)    
+    .acmd("game_attackairlw", cloud_dair)    
+    .install();
 }
-#[acmd_script(
-    agent = "cloud",
-    script =  "game_attackairhi",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn cloud_uair(fighter: &mut L2CAgentBase) {
+
+unsafe extern "C" fn cloud_uair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 2.0);
 		if macros::is_excute(fighter) {
@@ -54,13 +51,7 @@ unsafe fn cloud_uair(fighter: &mut L2CAgentBase) {
 		}
 }
 
-
-#[acmd_script(
-    agent = "cloud",
-    script =  "game_attackairlw",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn cloud_dair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn cloud_dair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 5.0);
 		if macros::is_excute(fighter) {

@@ -13,20 +13,22 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-	smashline::install_acmd_scripts!(
-		daisy_uair, daisy_uair_eff, daisy_uair_snd, daisy_uair_expr,
-		daisy_fair, daisy_fair_expr, daisy_fair_eff,
-		daisy_nair,
-		daisy_bair
-	);
+	Agent::new("daisy")
+    .acmd("game_attackairhi", daisy_uair)    
+    .acmd("effect_attackairhi", daisy_uair_eff)    
+    .acmd("sound_attackairhi", daisy_uair_snd)    
+    .acmd("expression_attackairhi", daisy_uair_expr)    
+    .acmd("game_attackairf", daisy_fair)    
+    .acmd("effect_attackairf", daisy_fair_eff)    
+    .acmd("expression_attackairf", daisy_fair_expr)    
+    .acmd("game_attackairn", daisy_nair)    
+    .acmd("game_attackairb", daisy_bair)    
+    .install();
 }
-#[acmd_script(
-    agent = "daisy",
-    script =  "game_attackairhi",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn daisy_uair(fighter: &mut L2CAgentBase) {
+
+unsafe extern "C" fn daisy_uair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 5.0);
 		if macros::is_excute(fighter) {
@@ -47,12 +49,7 @@ unsafe fn daisy_uair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }
-#[acmd_script(
-    agent = "daisy",
-    script =  "effect_attackairhi",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn daisy_uair_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn daisy_uair_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 8.0);
 		if macros::is_excute(fighter) {
@@ -60,12 +57,7 @@ unsafe fn daisy_uair_eff(fighter: &mut L2CAgentBase) {
 			macros::LAST_EFFECT_SET_RATE(fighter, 0.5);
 		}
 }
-#[acmd_script(
-    agent = "daisy",
-    script =  "sound_attackairhi",
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn daisy_uair_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn daisy_uair_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 6.0);
 		if macros::is_excute(fighter) {
@@ -73,12 +65,7 @@ unsafe fn daisy_uair_snd(fighter: &mut L2CAgentBase) {
 			macros::PLAY_SE(fighter, Hash40::new("se_daisy_attackhard_s01"));
 		}
 }
-#[acmd_script(
-    agent = "daisy",
-    script =  "expression_attackairhi",
-    category = ACMD_EXPRESSION,
-	low_priority)]
-unsafe fn daisy_uair_expr(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn daisy_uair_expr(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 3.0);
 		if macros::is_excute(fighter) {
@@ -91,12 +78,7 @@ unsafe fn daisy_uair_expr(fighter: &mut L2CAgentBase) {
 			ItemModule::set_have_item_visibility(fighter.module_accessor, true, 0);
 		}
 }
-#[acmd_script(
-    agent = "daisy",
-    script =  "game_attackairf",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn daisy_fair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn daisy_fair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
 		frame(fighter.lua_state_agent, 10.0);
@@ -118,12 +100,7 @@ unsafe fn daisy_fair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }
-#[acmd_script(
-    agent = "daisy",
-    script =  "effect_attackairf",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn daisy_fair_eff(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn daisy_fair_eff(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 14.0);
     if macros::is_excute(agent) {
         macros::EFFECT(agent, Hash40::new("sys_flash"), Hash40::new("havel"), 3, 0, 0, 0, 0, 0, 0.8, 0, 0, 0, 0, 0, 0, true);
@@ -134,12 +111,7 @@ unsafe fn daisy_fair_eff(agent: &mut L2CAgentBase) {
 		macros::LAST_EFFECT_SET_RATE(agent, 0.65);
 	}
 }
-#[acmd_script(
-    agent = "daisy",
-    script =  "expression_attackairf",
-    category = ACMD_EXPRESSION,
-	low_priority)]
-unsafe fn daisy_fair_expr(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn daisy_fair_expr(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 14.0);
     if macros::is_excute(agent) {
         ControlModule::set_rumble(agent.module_accessor, Hash40::new("rbkind_nohitm"), 0, false, *BATTLE_OBJECT_ID_INVALID as u32);
@@ -149,12 +121,7 @@ unsafe fn daisy_fair_expr(agent: &mut L2CAgentBase) {
         macros::RUMBLE_HIT(agent, Hash40::new("rbkind_attackm"), 0);
     }
 }
-#[acmd_script(
-    agent = "daisy",
-    script =  "game_attackairn",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn daisy_nair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn daisy_nair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 5.0);
 		if macros::is_excute(fighter) {
@@ -185,12 +152,7 @@ unsafe fn daisy_nair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }
-#[acmd_script(
-    agent = "daisy",
-    script =  "game_attackairb",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn daisy_bair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn daisy_bair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	frame(fighter.lua_state_agent, 5.0);
     if macros::is_excute(fighter) {

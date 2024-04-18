@@ -14,21 +14,21 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use crate::mario::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		mario_sideb,
-		mario_air_sideb,
-		mario_sideb_sound,
-		mario_sideb_effect,
-		mario_fireball
-    );
+    Agent::new("mario")
+    .acmd("game_specials", mario_sideb)    
+    .acmd("game_specialairs", mario_air_sideb)    
+    .acmd("effect_specials", mario_sideb_effect)    
+    .acmd("effect_specialairs", mario_sideb_effect)    
+    .acmd("sound_specials", mario_sideb_sound)    
+    .acmd("sound_specialairs", mario_sideb_sound)    
+    .acmd("game_specialn", mario_fireball)    
+    .acmd("game_specialairn", mario_fireball)    
+    .install();
 }
-#[acmd_script(
-    agent = "mario",
-    scripts =  ["game_specials"],
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn mario_sideb(fighter: &mut L2CAgentBase) {
+
+unsafe extern "C" fn mario_sideb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
 		frame(fighter.lua_state_agent, 11.0);
@@ -53,12 +53,7 @@ unsafe fn mario_sideb(fighter: &mut L2CAgentBase) {
 		frame(fighter.lua_state_agent, 41.0);
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 1);
 }
-#[acmd_script(
-    agent = "mario",
-    scripts =  ["game_specialairs"],
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn mario_air_sideb(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn mario_air_sideb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
 		frame(fighter.lua_state_agent, 11.0);
@@ -84,20 +79,10 @@ unsafe fn mario_air_sideb(fighter: &mut L2CAgentBase) {
 		frame(fighter.lua_state_agent, 41.0);
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 1);
 }
-#[acmd_script(
-    agent = "mario",
-    scripts =  ["effect_specials", "effect_specialairs"],
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn mario_sideb_effect(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn mario_sideb_effect(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 }	
-#[acmd_script(
-    agent = "mario",
-    scripts =  ["sound_specials", "sound_specialairs"],
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn mario_sideb_sound(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn mario_sideb_sound(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 11.0);
 		if macros::is_excute(fighter) {
@@ -107,12 +92,7 @@ unsafe fn mario_sideb_sound(fighter: &mut L2CAgentBase) {
 			macros::PLAY_SE(fighter, Hash40::new("se_mario_attackair_l01"));
 		}
 }	
-#[acmd_script(
-    agent = "mario",
-    scripts =  ["game_specialn", "game_specialairn"],
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn mario_fireball(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn mario_fireball(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 14.0);
 		if macros::is_excute(fighter) {

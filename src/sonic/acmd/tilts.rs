@@ -14,12 +14,22 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[acmd_script(
-    agent = "sonic",
-    script =  "effect_attackhi3",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn sonic_utilt_eff(fighter: &mut L2CAgentBase) {
+pub fn install() {
+    Agent::new("sonic")
+    .acmd("effect_attackhi3", sonic_utilt_eff)    
+    .acmd("effect_attacks3", sonic_ftilt_eff)    
+    .acmd("effect_attacks3lw", sonic_ftiltlw_eff)    
+    .acmd("effect_attacks3hi", sonic_ftilthi_eff)    
+    .acmd("effect_attacklw3", sonic_dtilt_eff)    
+    .acmd("game_attacklw3", sonic_dtilt)    
+    .acmd("game_attackhi3", sonic_utilt)    
+    .acmd("game_attacks3", sonic_ftilt)    
+    .acmd("game_attacks3hi", sonic_ftilt)    
+    .acmd("game_attacks3lw", sonic_ftilt)    
+    .install();
+}
+
+unsafe extern "C" fn sonic_utilt_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 5.0);
 		if macros::is_excute(fighter) {
@@ -38,12 +48,7 @@ unsafe fn sonic_utilt_eff(fighter: &mut L2CAgentBase) {
 			macros::LANDING_EFFECT(fighter, Hash40::new("sys_landing_smoke_s"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.7, 0, 0, 0, 0, 0, 0, false);
 		}
 }	
-#[acmd_script(
-    agent = "sonic",
-    script =  "effect_attacks3",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn sonic_ftilt_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sonic_ftilt_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 4.0);
 		if macros::is_excute(fighter) {
@@ -59,13 +64,7 @@ unsafe fn sonic_ftilt_eff(fighter: &mut L2CAgentBase) {
 			macros::EFFECT(fighter, Hash40::new("sys_attack_impact"), Hash40::new("top"), 0, 9, 15.5, 0, 0, 0, 1.1, 0, 0, 0, 0, 0, 360, true);
 		}
 }	
-
-#[acmd_script(
-    agent = "sonic",
-    script =  "effect_attacks3lw",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn sonic_ftiltlw_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sonic_ftiltlw_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 4.0);
 		if macros::is_excute(fighter) {
@@ -81,12 +80,7 @@ unsafe fn sonic_ftiltlw_eff(fighter: &mut L2CAgentBase) {
 			macros::EFFECT(fighter, Hash40::new("sys_attack_impact"), Hash40::new("top"), 0, 6, 15.5, 0, 0, 0, 1.1, 0, 0, 0, 0, 0, 360, true);
 		}
 }	
-#[acmd_script(
-    agent = "sonic",
-    script =  "effect_attacks3hi",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn sonic_ftilthi_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sonic_ftilthi_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 4.0);
 		if macros::is_excute(fighter) {
@@ -102,12 +96,7 @@ unsafe fn sonic_ftilthi_eff(fighter: &mut L2CAgentBase) {
 			macros::EFFECT(fighter, Hash40::new("sys_attack_impact"), Hash40::new("top"), 0, 13.2, 12.2, 0, 0, 0, 1.1, 0, 0, 0, 0, 0, 360, true);
 		}
 }	
-#[acmd_script(
-    agent = "sonic",
-    script =  "effect_attacklw3",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn sonic_dtilt_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sonic_dtilt_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 5.0);
 		if macros::is_excute(fighter) {
@@ -121,12 +110,7 @@ unsafe fn sonic_dtilt_eff(fighter: &mut L2CAgentBase) {
 		}
 }		
 
-#[acmd_script(
-    agent = "sonic",
-    script =  "game_attacklw3",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn sonic_dtilt(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sonic_dtilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 3.0);
 		if macros::is_excute(fighter) {
@@ -144,12 +128,7 @@ unsafe fn sonic_dtilt(fighter: &mut L2CAgentBase) {
 			JostleModule::set_status(fighter.module_accessor, true);
 		}
 }		
-#[acmd_script(
-    agent = "sonic",
-    script =  "game_attackhi3",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn sonic_utilt(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sonic_utilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 6.0);
 		if macros::is_excute(fighter) {
@@ -184,12 +163,7 @@ unsafe fn sonic_utilt(fighter: &mut L2CAgentBase) {
 		frame(fighter.lua_state_agent, 38.0);
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 1);
 }		
-#[acmd_script(
-    agent = "sonic",
-    scripts =  ["game_attacks3", "game_attacks3hi", "game_attacks3lw"],
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn sonic_ftilt(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sonic_ftilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			JostleModule::set_status(fighter.module_accessor, false);
@@ -210,11 +184,3 @@ unsafe fn sonic_ftilt(fighter: &mut L2CAgentBase) {
 			JostleModule::set_status(fighter.module_accessor, true);
 		}
 }	
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		sonic_utilt, sonic_utilt_eff,
-        sonic_ftilt, sonic_ftilt_eff, sonic_ftiltlw_eff, sonic_ftilthi_eff,
-        sonic_dtilt, sonic_dtilt_eff
-    );
-}

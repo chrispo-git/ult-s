@@ -15,12 +15,25 @@ use crate::util::*;
 use super::*;
 use super::super::*;
 
-#[acmd_script(
-    agent = "lucina",
-    script =  "game_attack11",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn lucina_jab1_hero(fighter: &mut L2CAgentBase) {
+pub fn install() {
+    Agent::new("lucina")
+    .acmd("game_attack11", lucina_jab1_hero)    
+    .acmd("effect_attack11", lucina_jab1_hero_eff)    
+    .acmd("game_attack12", lucina_jab2_hero)    
+    .acmd("effect_attack12", lucina_jab2_hero_eff)    
+    .acmd("game_attack112", lucina_jab1_sword)    
+    .acmd("effect_attack112", lucina_jab1_sword_eff)    
+    .acmd("game_attack122", lucina_jab2_sword)    
+    .acmd("effect_attack122", lucina_jab2_sword_eff)    
+    .acmd("game_attacks4", lucina_fsmash)    
+    .acmd("game_attackdash", lucina_da_hero)    
+    .acmd("effect_attackdash", lucina_da_hero_eff)    
+    .acmd("game_attackdash2", lucina_da_sword)    
+    .acmd("effect_attackdash2", lucina_da_sword_eff)    
+    .install();
+}
+
+unsafe extern "C" fn lucina_jab1_hero(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 		frame(fighter.lua_state_agent, 5.0);
@@ -43,12 +56,7 @@ unsafe fn lucina_jab1_hero(fighter: &mut L2CAgentBase) {
 			WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_FLAG_ENABLE_COMBO);
 		};
 }			
-#[acmd_script(
-    agent = "lucina",
-    script =  "effect_attack11",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn lucina_jab1_hero_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn lucina_jab1_hero_eff(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 		frame(fighter.lua_state_agent, 3.0);
@@ -60,12 +68,7 @@ unsafe fn lucina_jab1_hero_eff(fighter: &mut L2CAgentBase) {
 			macros::AFTER_IMAGE_OFF(fighter, 3);
 		};
 }	
-#[acmd_script(
-    agent = "lucina",
-    script =  "game_attack12",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn lucina_jab2_hero(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn lucina_jab2_hero(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 		frame(fighter.lua_state_agent, 4.0);
@@ -80,12 +83,7 @@ unsafe fn lucina_jab2_hero(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		};
 }
-#[acmd_script(
-    agent = "lucina",
-    script =  "effect_attack12",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn lucina_jab2_hero_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn lucina_jab2_hero_eff(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 		frame(fighter.lua_state_agent, 2.0);
@@ -97,12 +95,7 @@ unsafe fn lucina_jab2_hero_eff(fighter: &mut L2CAgentBase) {
 			macros::AFTER_IMAGE_OFF(fighter, 3);
 		};
 }
-#[acmd_script(
-    agent = "lucina",
-    script =  "game_attack112",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn lucina_jab1_sword(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn lucina_jab1_sword(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 		frame(fighter.lua_state_agent, 5.0);
@@ -125,12 +118,7 @@ unsafe fn lucina_jab1_sword(fighter: &mut L2CAgentBase) {
 			WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_FLAG_ENABLE_COMBO);
 		};
 }			
-#[acmd_script(
-    agent = "lucina",
-    script =  "effect_attack112",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn lucina_jab1_sword_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn lucina_jab1_sword_eff(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 		frame(fighter.lua_state_agent, 3.0);
@@ -142,12 +130,7 @@ unsafe fn lucina_jab1_sword_eff(fighter: &mut L2CAgentBase) {
 			macros::AFTER_IMAGE_OFF(fighter, 3);
 		};
 }	
-#[acmd_script(
-    agent = "lucina",
-    script =  "game_attack122",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn lucina_jab2_sword(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn lucina_jab2_sword(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 		frame(fighter.lua_state_agent, 4.0);
@@ -161,12 +144,7 @@ unsafe fn lucina_jab2_sword(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		};
 }
-#[acmd_script(
-    agent = "lucina",
-    script =  "effect_attack122",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn lucina_jab2_sword_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn lucina_jab2_sword_eff(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 		frame(fighter.lua_state_agent, 2.0);
@@ -178,12 +156,7 @@ unsafe fn lucina_jab2_sword_eff(fighter: &mut L2CAgentBase) {
 			macros::AFTER_IMAGE_OFF(fighter, 3);
 		};
 }
-#[acmd_script(
-    agent = "lucina",
-    script =  "game_attacks4",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn lucina_fsmash(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn lucina_fsmash(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 		frame(fighter.lua_state_agent, 3.0);
@@ -203,12 +176,7 @@ unsafe fn lucina_fsmash(fighter: &mut L2CAgentBase) {
 		};
 }	
 		
-#[acmd_script(
-    agent = "lucina",
-    script =  "game_attackdash",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn lucina_da_hero(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn lucina_da_hero(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.1538461538461538461538461538462);
@@ -227,12 +195,7 @@ unsafe fn lucina_da_hero(fighter: &mut L2CAgentBase) {
 		};
 }	
 
-#[acmd_script(
-    agent = "lucina",
-    script =  "effect_attackdash",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn lucina_da_hero_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn lucina_da_hero_eff(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 		frame(fighter.lua_state_agent, 11.0);
@@ -248,12 +211,7 @@ unsafe fn lucina_da_hero_eff(fighter: &mut L2CAgentBase) {
 			macros::AFTER_IMAGE_OFF(fighter, 3);
 		};
 }		
-#[acmd_script(
-    agent = "lucina",
-    script =  "game_attackdash2",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn lucina_da_sword(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn lucina_da_sword(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.46);
@@ -272,12 +230,7 @@ unsafe fn lucina_da_sword(fighter: &mut L2CAgentBase) {
 		};
 }	
 
-#[acmd_script(
-    agent = "lucina",
-    script =  "effect_attackdash2",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn lucina_da_sword_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn lucina_da_sword_eff(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 		frame(fighter.lua_state_agent, 11.0);
@@ -292,18 +245,4 @@ unsafe fn lucina_da_sword_eff(fighter: &mut L2CAgentBase) {
 		if macros::is_excute(fighter) {
 			macros::AFTER_IMAGE_OFF(fighter, 3);
 		};
-}
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-        lucina_fsmash,
-
-		lucina_da_hero, lucina_da_hero_eff,
-		lucina_jab1_hero, lucina_jab1_hero_eff,
-		lucina_jab2_hero, lucina_jab2_hero_eff,
-
-		lucina_da_sword, lucina_da_sword_eff,
-		lucina_jab1_sword, lucina_jab1_sword_eff,
-		lucina_jab2_sword, lucina_jab2_sword_eff
-    );
 }

@@ -14,8 +14,7 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[status_script(agent = "murabito", status = FIGHTER_STATUS_KIND_CATCH_PULL, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
-pub unsafe fn main_catch_pull(fighter: &mut L2CFighterCommon) -> L2CValue {
+unsafe extern "C" fn main_catch_pull(fighter: &mut L2CFighterCommon) -> L2CValue {
     let motion_kind = MotionModule::motion_kind(fighter.module_accessor);
     let frame = MotionModule::frame(fighter.module_accessor);
     let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
@@ -26,11 +25,10 @@ pub unsafe fn main_catch_pull(fighter: &mut L2CFighterCommon) -> L2CValue {
 		0.into()
 	}
 	else{
-		original!(fighter)
+		return smashline::original_status(Main, fighter, *FIGHTER_STATUS_KIND_CATCH_PULL)(fighter);
 	}
 }
-#[status_script(agent = "murabito", status = FIGHTER_STATUS_KIND_CATCH_WAIT, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
-pub unsafe fn main_catch_wait(fighter: &mut L2CFighterCommon) -> L2CValue {
+unsafe extern "C" fn main_catch_wait(fighter: &mut L2CFighterCommon) -> L2CValue {
     let motion_kind = MotionModule::motion_kind(fighter.module_accessor);
     let frame = MotionModule::frame(fighter.module_accessor);
     let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
@@ -41,11 +39,10 @@ pub unsafe fn main_catch_wait(fighter: &mut L2CFighterCommon) -> L2CValue {
 		0.into()
 	}
 	else{
-		original!(fighter)
+		return smashline::original_status(Main, fighter, *FIGHTER_STATUS_KIND_CATCH_WAIT)(fighter);
 	}
 }
-#[status_script(agent = "murabito", status = FIGHTER_STATUS_KIND_THROW, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
-pub unsafe fn main_throw(fighter: &mut L2CFighterCommon) -> L2CValue {
+unsafe extern "C" fn main_throw(fighter: &mut L2CFighterCommon) -> L2CValue {
     let motion_kind = MotionModule::motion_kind(fighter.module_accessor);
     let frame = MotionModule::frame(fighter.module_accessor);
 	let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
@@ -59,10 +56,9 @@ pub unsafe fn main_throw(fighter: &mut L2CFighterCommon) -> L2CValue {
 			);
 	}
 	//}
-	original!(fighter)
+	return smashline::original_status(Main, fighter, *FIGHTER_STATUS_KIND_THROW)(fighter);
 }
-#[status_script(agent = "murabito", status = FIGHTER_STATUS_KIND_THROW_KIRBY, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
-pub unsafe fn main_throw_kirby(fighter: &mut L2CFighterCommon) -> L2CValue {
+unsafe extern "C" fn main_throw_kirby(fighter: &mut L2CFighterCommon) -> L2CValue {
     let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 	let fighter_kind = smash::app::utility::get_kind(boma);
 
@@ -74,8 +70,7 @@ pub unsafe fn main_throw_kirby(fighter: &mut L2CFighterCommon) -> L2CValue {
 		//original!(fighter)
 	//}
 }
-#[status_script(agent = "murabito", status = FIGHTER_STATUS_KIND_THROW_KIRBY, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_PRE)]
-unsafe fn throw_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
+unsafe extern "C" fn throw_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
     let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 	let fighter_kind = smash::app::utility::get_kind(boma);
 
@@ -87,8 +82,7 @@ unsafe fn throw_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
 		//original!(fighter)
 	//}
 }
-#[status_script(agent = "murabito", status = FIGHTER_STATUS_KIND_THROW_KIRBY, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_END)]
-unsafe fn throw_end(fighter: &mut L2CFighterCommon) -> L2CValue {
+unsafe extern "C" fn throw_end(fighter: &mut L2CFighterCommon) -> L2CValue {
     let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 	let fighter_kind = smash::app::utility::get_kind(boma);
 
@@ -100,8 +94,7 @@ unsafe fn throw_end(fighter: &mut L2CFighterCommon) -> L2CValue {
 		//original!(fighter)
 	//}
 }
-#[status_script(agent = "murabito", status = FIGHTER_STATUS_KIND_THROW_KIRBY, condition = LUA_SCRIPT_STATUS_FUNC_INIT_STATUS)]
-unsafe fn throw_init(fighter: &mut L2CFighterCommon) -> L2CValue {
+unsafe extern "C" fn throw_init(fighter: &mut L2CFighterCommon) -> L2CValue {
     let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 	let fighter_kind = smash::app::utility::get_kind(boma);
 
@@ -113,8 +106,7 @@ unsafe fn throw_init(fighter: &mut L2CFighterCommon) -> L2CValue {
 		//original!(fighter)
 	//}
 }
-#[status_script(agent = "murabito", status = FIGHTER_STATUS_KIND_THROW_KIRBY, condition = LUA_SCRIPT_STATUS_FUNC_EXIT_STATUS)]
-unsafe fn throw_exit(fighter: &mut L2CFighterCommon) -> L2CValue {
+unsafe extern "C" fn throw_exit(fighter: &mut L2CFighterCommon) -> L2CValue {
     let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 	let fighter_kind = smash::app::utility::get_kind(boma);
 
@@ -127,8 +119,7 @@ unsafe fn throw_exit(fighter: &mut L2CFighterCommon) -> L2CValue {
 	//}
 }
 
-#[status_script(agent = "murabito", status = FIGHTER_MURABITO_STATUS_KIND_SPECIAL_HI_DETACH, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_PRE)]
-unsafe fn special_hi_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
+unsafe extern "C" fn special_hi_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
     StatusModule::init_settings(
         fighter.module_accessor,
         smash::app::SituationKind(*SITUATION_KIND_AIR),
@@ -158,5 +149,15 @@ unsafe fn special_hi_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
 }
 
 pub fn install() {
-    install_status_scripts!(main_catch_pull, main_catch_wait, throw_pre, throw_exit, throw_end, throw_init, main_throw_kirby, special_hi_pre);
+    Agent::new("murabito")
+        .status(Main, *FIGHTER_STATUS_KIND_CATCH_PULL, main_catch_pull)
+        .status(Main, *FIGHTER_STATUS_KIND_CATCH_WAIT, main_catch_wait)
+        //.status(Main, *FIGHTER_STATUS_KIND_THROW, main_throw)
+        .status(Main, *FIGHTER_STATUS_KIND_THROW_KIRBY, main_throw_kirby)
+        .status(Pre, *FIGHTER_STATUS_KIND_THROW_KIRBY, throw_pre)
+        .status(End, *FIGHTER_STATUS_KIND_THROW_KIRBY, throw_end)
+        .status(Init, *FIGHTER_STATUS_KIND_THROW_KIRBY, throw_init)
+        .status(Exit, *FIGHTER_STATUS_KIND_THROW_KIRBY, throw_exit)
+        .status(Pre, *FIGHTER_MURABITO_STATUS_KIND_SPECIAL_HI_DETACH, special_hi_pre)
+        .install();
 }

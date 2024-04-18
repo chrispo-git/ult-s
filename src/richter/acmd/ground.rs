@@ -14,12 +14,16 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[acmd_script(
-    agent = "richter",
-    script =  "game_attackdash",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn richter_da(agent: &mut L2CAgentBase) {
+pub fn install() {
+    Agent::new("richter")
+    .acmd("game_attackdash", richter_da)    
+    .acmd("effect_attackdash", richter_da_eff)    
+    .acmd("sound_attackdash", richter_da_snd)    
+    .acmd("game_attack11", richter_jab1)    
+    .install();
+}
+
+unsafe extern "C" fn richter_da(agent: &mut L2CAgentBase) {
 		macros::FT_MOTION_RATE(agent, 0.5);
 		wait(agent.lua_state_agent, 6.0);
 		macros::FT_MOTION_RATE(agent, 1.0);
@@ -47,12 +51,7 @@ unsafe fn richter_da(agent: &mut L2CAgentBase) {
 			AttackModule::clear_all(agent.module_accessor);
 		}
 }	
-#[acmd_script(
-    agent = "richter",
-    script =  "effect_attackdash",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn richter_da_eff(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn richter_da_eff(agent: &mut L2CAgentBase) {
 		frame(agent.lua_state_agent, 8.0);
 		if macros::is_excute(agent) {
 			macros::LANDING_EFFECT(agent, Hash40::new("sys_atk_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.2, 0, 0, 0, 0, 0, 0, false);
@@ -67,12 +66,7 @@ unsafe fn richter_da_eff(agent: &mut L2CAgentBase) {
 			macros::LANDING_EFFECT(agent, Hash40::new("sys_landing_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.9, 0, 0, 0, 0, 0, 0, true);
 		}
 }	
-#[acmd_script(
-    agent = "richter",
-    script =  "sound_attackdash",
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn richter_da_snd(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn richter_da_snd(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 9.0);
     if macros::is_excute(agent) {
         macros::PLAY_SE(agent, Hash40::new("vc_richter_attack04"));
@@ -84,12 +78,7 @@ unsafe fn richter_da_snd(agent: &mut L2CAgentBase) {
     }
 }	
 
-#[acmd_script(
-    agent = "richter",
-    script =  "game_attack11",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn richter_jab1(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn richter_jab1(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 1.0);
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.33);
@@ -114,10 +103,3 @@ unsafe fn richter_jab1(fighter: &mut L2CAgentBase) {
 			WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_FLAG_ENABLE_COMBO);
 		}
 }	
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		richter_da,richter_da_snd, richter_da_eff,
-        richter_jab1
-    );
-}

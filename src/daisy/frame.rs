@@ -13,12 +13,18 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-	smashline::install_agent_frames!(daisy_frame);
-	smashline::install_agent_frames!(kirby_daisy_frame);
+	Agent::new("daisy")
+	.on_line(Main, daisy_frame)
+	.install();
+
+	Agent::new("kirby")
+	.on_line(Main, kirby_daisy_frame)
+	.install();
 }
-#[fighter_frame( agent = FIGHTER_KIND_DAISY )]
-fn daisy_frame(fighter: &mut L2CFighterCommon) {
+
+unsafe extern "C" fn daisy_frame(fighter: &mut L2CFighterCommon) {
     unsafe {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 		if is_default(boma) {
@@ -32,8 +38,7 @@ fn daisy_frame(fighter: &mut L2CFighterCommon) {
 		}
     }
 }
-#[fighter_frame( agent = FIGHTER_KIND_KIRBY )]
-fn kirby_daisy_frame(fighter: &mut L2CFighterCommon) {
+unsafe extern "C" fn kirby_daisy_frame(fighter: &mut L2CFighterCommon) {
     unsafe {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);

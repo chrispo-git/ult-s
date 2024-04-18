@@ -14,12 +14,13 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[acmd_script(
-    agent = "pichu",
-    script =  "game_attackdash",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn pichu_da(fighter: &mut L2CAgentBase) {
+pub fn install() {
+    Agent::new("pichu")
+    .acmd("game_attackdash", pichu_da)    
+    .install();
+}
+
+unsafe extern "C" fn pichu_da(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 6.0);
 		if macros::is_excute(fighter) {
@@ -36,9 +37,3 @@ unsafe fn pichu_da(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }	
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		pichu_da
-    );
-}

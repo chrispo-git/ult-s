@@ -14,16 +14,22 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use crate::koopa::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_agent_frames!(
-        bowser_frame,
-		fireball_frame,
-		kirby_bowser_frame
-    );
+    Agent::new("kirby")
+	.on_line(Main, kirby_bowser_frame)
+	.install();
+
+	Agent::new("koopa")
+	.on_line(Main, bowser_frame)
+	.install();
+
+	Agent::new("koopa_breath")
+	.on_line(Main, fireball_frame)
+	.install();
 }
 
-#[fighter_frame( agent = FIGHTER_KIND_KIRBY )]
-fn kirby_bowser_frame(fighter: &mut L2CFighterCommon) {
+unsafe extern "C" fn kirby_bowser_frame(fighter: &mut L2CFighterCommon) {
     unsafe {
 		let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);   
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
@@ -62,8 +68,7 @@ fn kirby_bowser_frame(fighter: &mut L2CFighterCommon) {
 		macros::EFFECT_OFF_KIND(fighter, Hash40::new("koopa_breath_m_fire"), false, true);
 	}
 }		
-#[fighter_frame( agent = FIGHTER_KIND_KOOPA )]
-fn bowser_frame(fighter: &mut L2CFighterCommon) {
+unsafe extern "C" fn bowser_frame(fighter: &mut L2CFighterCommon) {
     unsafe {
 		let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);  
 		if is_default(boma) { 
@@ -151,8 +156,7 @@ fn bowser_frame(fighter: &mut L2CFighterCommon) {
 		}
 	}
 }		
-#[weapon_frame( agent = WEAPON_KIND_KOOPA_BREATH )]
-pub fn fireball_frame(weapon : &mut L2CFighterBase) {
+unsafe extern "C" fn fireball_frame(weapon : &mut L2CFighterBase) {
     unsafe {
         let otarget_id = WorkModule::get_int(weapon.module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LINK_OWNER) as u32;
         let boma = smash::app::sv_battle_object::module_accessor(otarget_id);

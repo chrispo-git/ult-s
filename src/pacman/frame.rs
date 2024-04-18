@@ -14,8 +14,21 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[fighter_frame( agent = FIGHTER_KIND_PACMAN )]
-fn pacman_frame(fighter: &mut L2CFighterCommon) {
+pub fn install() {
+    Agent::new("pacman")
+    .on_line(Main, pacman_frame)
+    .install();
+
+	Agent::new("pacman_firehydrant")
+    .on_line(Main, hydrant_frame)
+    .install();
+
+	Agent::new("pacman_trampoline")
+    .on_line(Main, trampoline_frame)
+    .install();
+}
+
+unsafe extern "C" fn pacman_frame(fighter: &mut L2CFighterCommon) {
     unsafe {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 		if is_default(boma) {
@@ -76,8 +89,7 @@ fn pacman_frame(fighter: &mut L2CFighterCommon) {
 		//println!("Hydrant [{}, {}] Trampoline [{}, {}]", HYDRANT_POS_X[ENTRY_ID], HYDRANT_POS_Y[ENTRY_ID], TRAMPOLINE_POS_X[ENTRY_ID], TRAMPOLINE_POS_Y[ENTRY_ID]);
 	}
 }
-#[weapon_frame( agent = WEAPON_KIND_PACMAN_FIREHYDRANT )]
-fn hydrant_frame(weapon: &mut L2CFighterBase) {
+unsafe extern "C" fn hydrant_frame(weapon: &mut L2CFighterBase) {
     unsafe {
         let otarget_id = WorkModule::get_int(weapon.module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LINK_OWNER) as u32;
         let boma = smash::app::sv_battle_object::module_accessor(otarget_id);
@@ -106,8 +118,7 @@ fn hydrant_frame(weapon: &mut L2CFighterBase) {
 		};
     }
 }
-#[weapon_frame( agent = WEAPON_KIND_PACMAN_TRAMPOLINE )]
-fn trampoline_frame(weapon: &mut L2CFighterBase) {
+unsafe extern "C" fn trampoline_frame(weapon: &mut L2CFighterBase) {
     unsafe {
         let otarget_id = WorkModule::get_int(weapon.module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LINK_OWNER) as u32;
         let boma = smash::app::sv_battle_object::module_accessor(otarget_id);
@@ -128,12 +139,4 @@ fn trampoline_frame(weapon: &mut L2CFighterBase) {
 			}
 		};
     }
-}
-
-pub fn install() {
-    smashline::install_agent_frames!(
-        pacman_frame,
-		hydrant_frame,
-		trampoline_frame  
-    );
 }

@@ -14,12 +14,25 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[acmd_script(
-    agent = "wario",
-    scripts =  ["game_specialssearch", "game_specialairssearch"],
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn wario_sideb(fighter: &mut L2CAgentBase) {
+pub fn install() {
+    Agent::new("wario")
+    .acmd("game_specialssearch", wario_sideb)    
+    .acmd("game_specialairssearch", wario_sideb)    
+    .acmd("effect_specialssearch", wario_sideb_eff)    
+    .acmd("effect_specialairssearch", wario_sideb_eff)    
+    .acmd("sound_specialssearch", wario_sideb_snd)    
+    .acmd("sound_specialairssearch", wario_sideb_snd)    
+    .acmd("sound_specialsdrive", wario_sideb_start_snd)    
+    .acmd("sound_specialsride", wario_sideb_start_snd)    
+    .acmd("sound_specialairs", wario_sideb_start_snd)    
+    .acmd("sound_specialairs", wario_sideb_start_snd)    
+    .acmd("sound_specials", wario_sideb_start_snd)    
+    .acmd("sound_specialsstart", wario_sideb_start_snd)    
+    .acmd("sound_specialairsstart", wario_sideb_start_snd)    
+    .install();
+}
+
+unsafe extern "C" fn wario_sideb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 	let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
@@ -42,12 +55,7 @@ unsafe fn wario_sideb(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }	
-#[acmd_script(
-    agent = "wario",
-    scripts =  ["effect_specialssearch", "effect_specialairssearch"],
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn wario_sideb_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn wario_sideb_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 	let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
@@ -66,22 +74,12 @@ unsafe fn wario_sideb_eff(fighter: &mut L2CAgentBase) {
 			macros::FOOT_EFFECT(fighter, Hash40::new("sys_turn_smoke"), Hash40::new("top"), 9, 0, 0, 0, 0, 0, 1.3, 0, 0, 0, 0, 0, 0, false);
 		}
 }	
-#[acmd_script(
-    agent = "wario",
-    scripts =  ["sound_specialssearch", "sound_specialairssearch"],
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn wario_sideb_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn wario_sideb_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 	let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 }	
-#[acmd_script(
-    agent = "wario",
-    scripts =  ["sound_specialsdrive", "sound_specialsride", "sound_specialairs", "sound_specialairs", "sound_specials", "sound_specialsstart", "sound_specialairsstart"],
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn wario_sideb_start_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn wario_sideb_start_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 	let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
@@ -90,10 +88,3 @@ unsafe fn wario_sideb_start_snd(fighter: &mut L2CAgentBase) {
 			macros::PLAY_SE(fighter, Hash40::new("se_wario_attackdash"));
 		}
 	}	
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		wario_sideb, wario_sideb_eff, wario_sideb_snd,
-        wario_sideb_start_snd
-    );
-}
