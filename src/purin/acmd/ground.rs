@@ -14,12 +14,15 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[acmd_script(
-    agent = "purin",
-    script =  "game_attackdash",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn puff_da(fighter: &mut L2CAgentBase) {
+pub fn install() {
+    Agent::new("purin")
+    .acmd("game_attackdash", puff_da)    
+    .acmd("game_attack12", puff_jab2)    
+    .acmd("game_attackhi4", puff_usmash)    
+    .install();
+}
+
+unsafe extern "C" fn puff_da(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 5.0);
 		if macros::is_excute(fighter) {
@@ -35,12 +38,7 @@ unsafe fn puff_da(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }		
-#[acmd_script(
-    agent = "purin",
-    script =  "game_attack12",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn puff_jab2(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn puff_jab2(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 5.0);
 		if macros::is_excute(fighter) {
@@ -59,12 +57,7 @@ unsafe fn puff_jab2(fighter: &mut L2CAgentBase) {
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 1);
 }	
 
-#[acmd_script(
-    agent = "purin",
-    script =  "game_attackhi4",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn puff_usmash(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn puff_usmash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.2);
 		frame(fighter.lua_state_agent, 10.0);
@@ -82,11 +75,3 @@ unsafe fn puff_usmash(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }	
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		puff_da,
-        puff_jab2,
-        puff_usmash
-    );
-}

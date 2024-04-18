@@ -41,8 +41,7 @@ static mut TAUNT :  smash::phx::Vector3f =  smash::phx::Vector3f { x: 5.5, y: 0.
 
 
 // Use this for general per-frame fighter-level hooks
-#[fighter_frame_callback]
-pub fn once_per_fighter_frame(fighter : &mut L2CFighterCommon) {
+unsafe extern "C" fn once_per_fighter_frame(fighter : &mut L2CFighterCommon) {
     unsafe {
         let module_accessor = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);
         
@@ -78,8 +77,7 @@ pub(crate) unsafe fn is_attack_btn(boma: &mut smash::app::BattleObjectModuleAcce
 }
 
 //input_check
-#[fighter_frame_callback]
-pub fn input_check(fighter : &mut L2CFighterCommon) {
+unsafe extern "C" fn input_check(fighter : &mut L2CFighterCommon) {
     unsafe {
 			let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);  
 			let fighter_kind = smash::app::utility::get_kind(boma);  
@@ -124,8 +122,7 @@ pub fn input_check(fighter : &mut L2CFighterCommon) {
 }
 
 //Charge_Check
-#[fighter_frame_callback]
-pub fn charge_check(fighter : &mut L2CFighterCommon) {
+unsafe extern "C" fn charge_check(fighter : &mut L2CFighterCommon) {
     unsafe {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);    
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
@@ -159,8 +156,7 @@ pub fn charge_check(fighter : &mut L2CFighterCommon) {
 
 
 //Charge_Use
-#[fighter_frame_callback]
-pub fn charge_use(fighter : &mut L2CFighterCommon) {
+unsafe extern "C" fn charge_use(fighter : &mut L2CFighterCommon) {
     unsafe {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);    
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
@@ -216,8 +212,7 @@ pub fn charge_use(fighter : &mut L2CFighterCommon) {
     };
 }
 //Char_Charge
-#[fighter_frame_callback]
-pub fn char_charge(fighter : &mut L2CFighterCommon) {
+unsafe extern "C" fn char_charge(fighter : &mut L2CFighterCommon) {
     unsafe {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);    
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
@@ -367,8 +362,7 @@ pub fn char_charge(fighter : &mut L2CFighterCommon) {
     };
 }	
 //Char_Input
-#[fighter_frame_callback]
-pub fn char_input(fighter : &mut L2CFighterCommon) {
+unsafe extern "C" fn char_input(fighter : &mut L2CFighterCommon) {
     unsafe {	
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);    
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
@@ -1301,11 +1295,11 @@ pub fn char_input(fighter : &mut L2CFighterCommon) {
 	
 
 pub fn install() {
-    smashline::install_agent_frame_callbacks!(
-	charge_check,
-	charge_use,
-	char_charge,
-	input_check,
-	char_input
-	);
+    Agent::new("fighter")
+	.on_line(Main, charge_check)
+	.on_line(Main, charge_use)
+	.on_line(Main, char_charge)
+	.on_line(Main, input_check)
+	.on_line(Main, char_input)
+	.install();
 }

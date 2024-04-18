@@ -14,12 +14,19 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[acmd_script(
-    agent = "pikachu",
-    script =  "game_attackairn",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn pika_nair(fighter: &mut L2CAgentBase) {
+pub fn install() {
+    Agent::new("pikachu")
+    .acmd("game_attackairn", pika_nair)    
+    .acmd("game_attackairf", pika_fair)    
+    .acmd("game_attackairb", pika_bair)    
+    .acmd("game_landingairb", pika_bair_land)    
+    .acmd("effect_attackairb", pika_bair_eff)    
+    .acmd("sound_attackairb", pika_bair_snd)    
+    .acmd("game_attackairhi", pika_uair)    
+    .install();
+}
+
+unsafe extern "C" fn pika_nair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
@@ -49,12 +56,7 @@ unsafe fn pika_nair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }	
-#[acmd_script(
-    agent = "pikachu",
-    script =  "game_attackairf",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn pika_fair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn pika_fair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 5.0);
 		if macros::is_excute(fighter) {
@@ -84,12 +86,7 @@ unsafe fn pika_fair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }		
-#[acmd_script(
-    agent = "pikachu",
-    script =  "game_attackairb",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn pika_bair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn pika_bair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 1.0);
 		macros::FT_MOTION_RATE(fighter, 0.8);
@@ -114,32 +111,17 @@ unsafe fn pika_bair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }		
-#[acmd_script(
-    agent = "pikachu",
-    script =  "game_landingairb",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn pika_bair_land(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn pika_bair_land(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 }			
-#[acmd_script(
-    agent = "pikachu",
-    script =  "effect_attackairb",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn pika_bair_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn pika_bair_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 10.0);
 		if macros::is_excute(fighter) {
 			macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_attack_impact"), Hash40::new("footr"), 0, 0, 0, 0, 0, 0, 1.5, true);
 		}
 }	
-#[acmd_script(
-    agent = "pikachu",
-    script =  "sound_attackairb",
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn pika_bair_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn pika_bair_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 6.0);
 		if macros::is_excute(fighter) {
@@ -151,8 +133,7 @@ unsafe fn pika_bair_snd(fighter: &mut L2CAgentBase) {
 		}
 }		
 
-#[acmd_script( agent = "pikachu", script = "game_attackairhi", category = ACMD_GAME, low_priority )]
-unsafe fn pika_uair(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn pika_uair(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 4.0);
     if macros::is_excute(agent) {
         WorkModule::on_flag(agent.module_accessor, *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
@@ -174,14 +155,4 @@ unsafe fn pika_uair(agent: &mut L2CAgentBase) {
     if macros::is_excute(agent) {
         WorkModule::off_flag(agent.module_accessor, *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
     }
-}
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		pika_nair,
-        pika_fair,
-        pika_bair, pika_bair_eff, pika_bair_snd,
-        pika_bair_land,
-        pika_uair
-    );
 }

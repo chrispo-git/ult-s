@@ -14,9 +14,13 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use crate::ken::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_agent_frame_callbacks!(supers);
+    Agent::new("ken")
+	.on_line(Main, supers)
+	.install();
 }
+
 pub(crate) unsafe fn is_attack_btn(boma: &mut smash::app::BattleObjectModuleAccessor) -> bool {
 	return (ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_SPECIAL_RAW)  && ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_ATTACK_RAW)) &&  
 	((ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_CATCH) && ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_GUARD)) || 
@@ -24,9 +28,8 @@ pub(crate) unsafe fn is_attack_btn(boma: &mut smash::app::BattleObjectModuleAcce
 }
 
 
-//RYU SUPER
-#[fighter_frame_callback]
-pub fn supers(fighter : &mut L2CFighterCommon) {
+//KEN SUPER
+unsafe extern "C" fn supers(fighter : &mut L2CFighterCommon) {
     unsafe {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);  
 		let fighter_kind = smash::app::utility::get_kind(boma);
@@ -37,7 +40,7 @@ pub fn supers(fighter : &mut L2CFighterCommon) {
 		let frame = MotionModule::frame(boma);
 		let cancel_frame = FighterMotionModuleImpl::get_cancel_frame(boma,smash::phx::Hash40::new_raw(MotionModule::motion_kind(boma)),false) as f32;
 		let mut ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-		if fighter_kind == *FIGHTER_KIND_KEN && is_default(boma) {
+		if is_default(boma) {
 			let meter_half = KEN_MAX_METER as f32 * 0.5;
 			KEN_FX_TIMER[ENTRY_ID] += 1;
 			if smash::app::smashball::is_training_mode() == true {

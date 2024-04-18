@@ -14,12 +14,14 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[acmd_script(
-    agent = "zelda",
-    script =  "game_attack11",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn zelda_jab1(fighter: &mut L2CAgentBase) {
+pub fn install() {
+    Agent::new("zelda")
+    .acmd("game_attack11", zelda_jab1)    
+    .acmd("game_attackhi4", zelda_usmash)    
+    .install();
+}
+
+unsafe extern "C" fn zelda_jab1(fighter: &mut L2CAgentBase) {
         let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 4.0);
 		if macros::is_excute(fighter) {
@@ -59,12 +61,7 @@ unsafe fn zelda_jab1(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_FLAG_ENABLE_100);
 		}
 }			
-#[acmd_script(
-    agent = "zelda",
-    script =  "game_attackhi4",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn zelda_usmash(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn zelda_usmash(fighter: &mut L2CAgentBase) {
         let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 4.0);
 		if macros::is_excute(fighter) {
@@ -112,10 +109,3 @@ unsafe fn zelda_usmash(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }	
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		zelda_jab1,
-        zelda_usmash
-    );
-}

@@ -14,12 +14,16 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[acmd_script(
-    agent = "wolf",
-    script =  "game_attacklw3",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn wolf_dtilt(fighter: &mut L2CAgentBase) {
+pub fn install() {
+    Agent::new("wolf")
+    .acmd("game_attacklw3", wolf_dtilt)    
+    .acmd("game_attackhi3", wolf_utilt)    
+    .acmd("effect_attackhi3", wolf_utilt_eff)    
+    .acmd("sound_attackhi3", wolf_utilt_snd)    
+    .install();
+}
+
+unsafe extern "C" fn wolf_dtilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 5.0);
 		if macros::is_excute(fighter) {
@@ -36,12 +40,7 @@ unsafe fn wolf_dtilt(fighter: &mut L2CAgentBase) {
 			CancelModule::enable_cancel(fighter.module_accessor);
 		}
 }	
-#[acmd_script(
-    agent = "wolf",
-    script =  "game_attackhi3",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn wolf_utilt(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn wolf_utilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	frame(lua_state, 9.0);
     if macros::is_excute(fighter) {
@@ -54,12 +53,7 @@ unsafe fn wolf_utilt(fighter: &mut L2CAgentBase) {
         AttackModule::clear_all(fighter.module_accessor); 
     }
 }	
-#[acmd_script(
-    agent = "wolf",
-    script =  "effect_attackhi3",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn wolf_utilt_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn wolf_utilt_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	frame(lua_state, 9.0);
     if macros::is_excute(fighter) {
@@ -71,12 +65,7 @@ unsafe fn wolf_utilt_eff(fighter: &mut L2CAgentBase) {
         macros::LAST_EFFECT_SET_RATE(fighter, 1.5);
     }
 }	
-#[acmd_script(
-    agent = "wolf",
-    script =  "sound_attackhi3",
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn wolf_utilt_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn wolf_utilt_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	frame(lua_state, 10.0);
     if macros::is_excute(fighter) {
@@ -84,12 +73,3 @@ unsafe fn wolf_utilt_snd(fighter: &mut L2CAgentBase) {
         macros::PLAY_SE(fighter, Hash40::new("se_wolf_attackhard_s01"));
     }
 }	
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		wolf_dtilt,
-		wolf_utilt,
-		wolf_utilt_eff,
-		wolf_utilt_snd
-    );
-}

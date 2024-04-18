@@ -13,13 +13,14 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_agent_frames!(
-        lucas_frame
-    );
+    Agent::new("lucas")
+    .on_line(Main, lucas_frame)
+    .install();
 }
-#[fighter_frame( agent = FIGHTER_KIND_LUCAS )]
-fn lucas_frame(fighter: &mut L2CFighterCommon) {
+
+unsafe extern "C" fn lucas_frame(fighter: &mut L2CFighterCommon) {
     unsafe {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 		if is_default(boma) {

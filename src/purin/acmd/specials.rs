@@ -14,12 +14,16 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[acmd_script(
-    agent = "purin",
-    scripts =  ["game_speciallwl", "game_speciallwr", "game_specialairlwl", "game_specialairlwr"],
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn puff_rest(fighter: &mut L2CAgentBase) {
+pub fn install() {
+    Agent::new("purin")
+    .acmd("game_speciallwl", puff_rest)    
+    .acmd("game_speciallwr", puff_rest)    
+    .acmd("game_specialairlwl", puff_rest)    
+    .acmd("game_specialairlwr", puff_rest)    
+    .install();
+}
+
+unsafe extern "C" fn puff_rest(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			JostleModule::set_status(fighter.module_accessor, false);
@@ -34,9 +38,3 @@ unsafe fn puff_rest(fighter: &mut L2CAgentBase) {
 			JostleModule::set_status(fighter.module_accessor, true);
 		}
 }	
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		puff_rest
-    );
-}

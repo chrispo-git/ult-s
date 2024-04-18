@@ -14,19 +14,16 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 use crate::ike::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		ike_bthrow,
-		ike_uthrow,
-		ike_dthrow
-    );
+    Agent::new("ike")
+    .acmd("game_throwlw", ike_dthrow)    
+    .acmd("game_throwhi", ike_uthrow)    
+    .acmd("game_throwb", ike_bthrow)    
+    .install();
 }
-#[acmd_script(
-    agent = "ike",
-    script =  "game_throwlw",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn ike_dthrow(fighter: &mut L2CAgentBase) {
+
+unsafe extern "C" fn ike_dthrow(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, /*ID*/ 0, /*Damage*/ 4.0, /*Angle*/ 70, /*KBG*/ 80, /*FKB*/ 0, /*BKB*/ 60, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
@@ -48,12 +45,7 @@ unsafe fn ike_dthrow(fighter: &mut L2CAgentBase) {
 			CancelModule::enable_cancel(fighter.module_accessor);
 		}
 }
-#[acmd_script(
-    agent = "ike",
-    script =  "game_throwhi",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn ike_uthrow(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn ike_uthrow(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, /*ID*/ 0, /*Damage*/ 4.0, /*Angle*/ 110, /*KBG*/ 80, /*FKB*/ 0, /*BKB*/ 60, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
@@ -73,12 +65,7 @@ unsafe fn ike_uthrow(fighter: &mut L2CAgentBase) {
 			CancelModule::enable_cancel(fighter.module_accessor);
 		}
 }
-#[acmd_script(
-    agent = "ike",
-    script =  "game_throwb",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn ike_bthrow(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn ike_bthrow(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, /*ID*/ 0, /*Damage*/ 4.0, /*Angle*/ 28, /*KBG*/ 75, /*FKB*/ 0, /*BKB*/ 55, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_B, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);

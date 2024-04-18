@@ -14,8 +14,13 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[fighter_frame_callback]
-pub fn ridley(fighter : &mut L2CFighterCommon) {
+pub fn install() {
+    Agent::new("ridley")
+    .on_line(Main, ridley)
+    .install();
+}
+
+unsafe extern "C" fn ridley(fighter : &mut L2CFighterCommon) {
     unsafe {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 		if is_default(boma) {
@@ -108,8 +113,4 @@ pub fn ridley(fighter : &mut L2CFighterCommon) {
 			};
 		}
 	};
-}
-
-pub fn install() {
-    smashline::install_agent_frame_callbacks!(ridley);
 }

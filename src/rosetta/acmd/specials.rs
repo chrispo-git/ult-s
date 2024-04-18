@@ -15,24 +15,30 @@ use crate::util::*;
 use super::*;
 use super::super::*;
 
-#[acmd_script(
-    agent = "rosetta",
-    scripts =  ["game_specialhistart", "game_specialairhistart"],
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn rosa_upb_start(fighter: &mut L2CAgentBase) {
+pub fn install() {
+    Agent::new("rosetta")
+    .acmd("game_specialhistart", rosa_upb_start)    
+    .acmd("game_specialairhistart", rosa_upb_start)    
+    .acmd("game_specialhi", rosa_upb)    
+    .acmd("game_specialairhi", rosa_upb)    
+    .acmd("game_explode", rosa_boom)    
+    .install();
+
+	Agent::new("rosetta_tico")
+    .acmd("game_explode", luma_boom)    
+    .acmd("effect_explode", luma_boom_eff)    
+    .acmd("sound_explode", luma_boom_snd)    
+    .install();
+}
+
+unsafe extern "C" fn rosa_upb_start(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 6.0);
 		if macros::is_excute(fighter) {
 			macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("hip"), /*Damage*/ 5.0, /*Angle*/ 367, /*KBG*/ 100, /*FKB*/ 90, /*BKB*/ 0, /*Size*/ 13.5, /*X*/ 0.0, /*Y*/ 11.0, /*Z*/ 10.0, /*X2*/ Some(0.0), /*Y2*/ Some(11.0), /*Z2*/ Some(15.0), /*Hitlag*/ 0.75, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_magic"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_MAGIC, /*Type*/ *ATTACK_REGION_MAGIC);
 		}
 }	
-#[acmd_script(
-    agent = "rosetta",
-    scripts =  ["game_specialhi", "game_specialairhi"],
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn rosa_upb(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn rosa_upb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			JostleModule::set_status(fighter.module_accessor, false);
@@ -53,24 +59,14 @@ unsafe fn rosa_upb(fighter: &mut L2CAgentBase) {
 		}
 }		
 
-#[acmd_script(
-    agent = "rosetta",
-    script =  "game_explode",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn rosa_boom(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn rosa_boom(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 	if macros::is_excute(fighter) && !IS_TICO_DEAD[ENTRY_ID]{
 		ArticleModule::change_motion(fighter.module_accessor, *FIGHTER_ROSETTA_GENERATE_ARTICLE_TICO,smash::phx::Hash40::new("explode"),false,0.0);
 	}
 }
-#[acmd_script(
-    agent = "rosetta_tico",
-    script =  "game_explode",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn luma_boom(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn luma_boom(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	let status_kind = smash::app::lua_bind::StatusModule::status_kind(fighter.module_accessor);
 	let otarget_id = WorkModule::get_int(fighter.module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LINK_OWNER) as u32;
@@ -89,12 +85,7 @@ unsafe fn luma_boom(fighter: &mut L2CAgentBase) {
 		}
 	}
 }
-#[acmd_script(
-    agent = "rosetta_tico",
-    script =  "effect_explode",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn luma_boom_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn luma_boom_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	let status_kind = smash::app::lua_bind::StatusModule::status_kind(fighter.module_accessor);
 	let otarget_id = WorkModule::get_int(fighter.module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LINK_OWNER) as u32;
@@ -112,12 +103,7 @@ unsafe fn luma_boom_eff(fighter: &mut L2CAgentBase) {
 		}
 	}
 }
-#[acmd_script(
-    agent = "rosetta_tico",
-    script =  "sound_explode",
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn luma_boom_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn luma_boom_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	let status_kind = smash::app::lua_bind::StatusModule::status_kind(fighter.module_accessor);
 	let otarget_id = WorkModule::get_int(fighter.module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LINK_OWNER) as u32;
@@ -129,13 +115,4 @@ unsafe fn luma_boom_snd(fighter: &mut L2CAgentBase) {
 			macros::PLAY_SE(fighter, Hash40::new("se_common_bomb_ll"));
 		}
 	}
-}
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		rosa_upb_start,
-        rosa_upb,
-        rosa_boom,
-        luma_boom, luma_boom_eff, luma_boom_snd
-    );
 }

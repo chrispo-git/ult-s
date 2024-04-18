@@ -14,16 +14,15 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use crate::kirby::*;
 use super::*;
+
 pub fn install() {
-	install_status_scripts!(special_s_pre, exec_downb);
+	Agent::new("kirby")
+    .status(Exec, *FIGHTER_STATUS_KIND_SPECIAL_LW, exec_downb)
+    .status(Pre, *FIGHTER_KIRBY_STATUS_KIND_SPECIAL_S_ATTACK, special_s_pre)
+    .install();
 }
 
-#[status_script(
-	agent = "kirby", 
-	status = FIGHTER_STATUS_KIND_SPECIAL_LW, 
-	condition = LUA_SCRIPT_STATUS_FUNC_EXEC_STATUS,
-	low_priority)]
-pub unsafe fn exec_downb(fighter: &mut L2CFighterCommon) -> L2CValue {
+unsafe extern "C" fn exec_downb(fighter: &mut L2CFighterCommon) -> L2CValue {
     let motion_kind = MotionModule::motion_kind(fighter.module_accessor);
     let frame = MotionModule::frame(fighter.module_accessor);
     let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
@@ -31,12 +30,11 @@ pub unsafe fn exec_downb(fighter: &mut L2CFighterCommon) -> L2CValue {
         fighter.status_AttackS3Common();
         0.into()
     } else {
-        original!(fighter)
+        return smashline::original_status(Exec, fighter, *FIGHTER_STATUS_KIND_SPECIAL_LW)(fighter);
     }
 }
 
-#[status_script(agent = "kirby", status = FIGHTER_KIRBY_STATUS_KIND_SPECIAL_S_ATTACK, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_PRE)]
-unsafe fn special_s_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
+unsafe extern "C" fn special_s_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
     StatusModule::init_settings(
         fighter.module_accessor,
         smash::app::SituationKind(*SITUATION_KIND_NONE),

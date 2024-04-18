@@ -13,22 +13,21 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		mac_jab1, mac_jab1_eff, mac_jab1_snd,
-		mac_fsmash,
-		mac_fsmashhi,
-		mac_fsmashlw,
-		mac_usmash,
-		mac_dsmash
-    );
+    Agent::new("littlemac")
+    .acmd("game_attack11", mac_jab1)    
+    .acmd("sound_attack11", mac_jab1_snd)    
+    .acmd("effect_attack11", mac_jab1_eff)    
+    .acmd("game_attackhi4", mac_usmash)    
+    .acmd("game_attacks4", mac_fsmash)    
+    .acmd("game_attacks4hi", mac_fsmashhi)    
+    .acmd("game_attacks4lw", mac_fsmashlw)    
+    .acmd("game_attacklw4", mac_dsmash)    
+    .install();
 }
-#[acmd_script(
-    agent = "littlemac",
-    script =  "game_attack11",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn mac_jab1(agent: &mut L2CAgentBase) {
+
+unsafe extern "C" fn mac_jab1(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 2.0);
     if macros::is_excute(agent) {
         WorkModule::on_flag(agent.module_accessor, *FIGHTER_STATUS_WORK_ID_FLAG_RESERVE_ATTACK_DISABLE_MINI_JUMP_ATTACK);
@@ -50,24 +49,14 @@ unsafe fn mac_jab1(agent: &mut L2CAgentBase) {
         WorkModule::on_flag(agent.module_accessor, *FIGHTER_STATUS_ATTACK_FLAG_ENABLE_RESTART);
     }
 }
-#[acmd_script(
-    agent = "littlemac",
-    script =  "sound_attack11",
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn mac_jab1_snd(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn mac_jab1_snd(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 2.0);
     if macros::is_excute(agent) {
         macros::PLAY_SEQUENCE(agent, Hash40::new("seq_littlemac_rnd_combo01"));
         macros::PLAY_SE(agent, Hash40::new("se_littlemac_swing_s"));
     }
 }
-#[acmd_script(
-    agent = "littlemac",
-    script =  "effect_attack11",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn mac_jab1_eff(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn mac_jab1_eff(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 2.0);
     if macros::is_excute(agent) {
         macros::EFFECT(agent, Hash40::new("littlemac_attack_line_glove"), Hash40::new("top"), -1, 10.5, -1.5, 0, 0, 0, 0.75, 0, 0, 0, 0, 0, 0, true);
@@ -121,12 +110,7 @@ unsafe fn mac_jab1_eff(agent: &mut L2CAgentBase) {
         macros::EFFECT_OFF_KIND(agent, Hash40::new("littlemac_attack_line_glove"), true, true);
     }
 }
-#[acmd_script(
-    agent = "littlemac",
-    script =  "game_attackhi4",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn mac_usmash(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn mac_usmash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 7.0);
 		if macros::is_excute(fighter) {
@@ -147,12 +131,7 @@ unsafe fn mac_usmash(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }	
-#[acmd_script(
-    agent = "littlemac",
-    script =  "game_attacks4",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn mac_fsmash(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn mac_fsmash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 5.0);
 		if macros::is_excute(fighter) {
@@ -173,12 +152,7 @@ unsafe fn mac_fsmash(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }	
-#[acmd_script(
-    agent = "littlemac",
-    script =  "game_attacks4hi",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn mac_fsmashhi(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn mac_fsmashhi(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 5.0);
 		if macros::is_excute(fighter) {
@@ -194,12 +168,7 @@ unsafe fn mac_fsmashhi(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }		
-#[acmd_script(
-    agent = "littlemac",
-    script =  "game_attacks4lw",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn mac_fsmashlw(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn mac_fsmashlw(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 5.0);
 		if macros::is_excute(fighter) {
@@ -216,12 +185,7 @@ unsafe fn mac_fsmashlw(fighter: &mut L2CAgentBase) {
 		}			
 		
 }			
-#[acmd_script(
-    agent = "littlemac",
-    script =  "game_attacklw4",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn mac_dsmash(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn mac_dsmash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 6.0);
 		if macros::is_excute(fighter) {

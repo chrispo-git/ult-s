@@ -13,19 +13,16 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		mk_ftilt1,
-		mk_ftilt2,
-		mk_ftilt3
-    );
+    Agent::new("metaknight")
+    .acmd("game_attacks3", mk_ftilt1)    
+    .acmd("game_attacks3s2", mk_ftilt2)    
+    .acmd("game_attacks3s3", mk_ftilt3)    
+    .install();
 }
-#[acmd_script(
-    agent = "metaknight",
-    script =  "game_attacks3",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn mk_ftilt1(fighter: &mut L2CAgentBase) {
+
+unsafe extern "C" fn mk_ftilt1(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
 		frame(fighter.lua_state_agent, 4.0);
@@ -48,12 +45,7 @@ unsafe fn mk_ftilt1(fighter: &mut L2CAgentBase) {
 			CancelModule::enable_cancel(fighter.module_accessor);
 		}
 }
-#[acmd_script(
-    agent = "metaknight",
-    script =  "game_attacks3s2",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn mk_ftilt2(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn mk_ftilt2(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 2.0);
 		if macros::is_excute(fighter) {
@@ -69,12 +61,7 @@ unsafe fn mk_ftilt2(fighter: &mut L2CAgentBase) {
 		WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_FLAG_ENABLE_COMBO);
 		}
 }
-#[acmd_script(
-    agent = "metaknight",
-    script =  "game_attacks3s3",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn mk_ftilt3(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn mk_ftilt3(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 2.0);
 		if macros::is_excute(fighter) {

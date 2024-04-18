@@ -13,13 +13,14 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		seph_dtilt
-    );
+    Agent::new("edge")
+    .acmd("game_attacklw3", seph_dtilt)    
+    .install();
 }
-#[acmd_script( agent = "edge", script = "game_attacklw3", category = ACMD_GAME, low_priority )]
-unsafe fn seph_dtilt(fighter: &mut L2CAgentBase) {
+
+unsafe extern "C" fn seph_dtilt(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 7.0);
     if macros::is_excute(fighter) {
         FighterAreaModuleImpl::enable_fix_jostle_area(fighter.module_accessor, 4.0, 4.0);

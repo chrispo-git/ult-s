@@ -13,15 +13,16 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-	smashline::install_acmd_scripts!(kaz_ftilt);
+	Agent::new("demon")
+    .acmd("game_attacks3", kaz_ftilt)    
+	.acmd("game_attacks3lw", kaz_ftilt)    
+	.acmd("game_attacks3hi", kaz_ftilt)    
+    .install();
 }
-#[acmd_script( 
-agent = "demon", 
-scripts = ["game_attacks3","game_attacks3lw","game_attacks3hi"], 
-category = ACMD_GAME,
-low_priority)]
-unsafe fn kaz_ftilt(fighter: &mut L2CAgentBase) {
+
+unsafe extern "C" fn kaz_ftilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.667);
 		frame(fighter.lua_state_agent, 12.0);

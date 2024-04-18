@@ -13,19 +13,15 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-	smashline::install_acmd_scripts!(
-		dk_jab1, 
-		dk_jab2
-	);
+	Agent::new("donkey")
+    .acmd("game_attack11", dk_jab1)    
+    .acmd("game_attack12", dk_jab2)    
+    .install();
 }
 
-#[acmd_script(
-    agent = "donkey",
-    scripts =  ["game_attack11"],
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn dk_jab1(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn dk_jab1(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			macros::HIT_NODE(fighter, Hash40::new("arml"), *HIT_STATUS_XLU);
@@ -44,12 +40,7 @@ unsafe fn dk_jab1(fighter: &mut L2CAgentBase) {
 			WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_FLAG_ENABLE_COMBO);
 		}
 }
-#[acmd_script(
-    agent = "donkey",
-    scripts =  ["game_attack12"],
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn dk_jab2(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn dk_jab2(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			macros::HIT_NODE(fighter, Hash40::new("armr"), *HIT_STATUS_XLU);

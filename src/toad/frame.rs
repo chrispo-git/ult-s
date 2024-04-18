@@ -14,8 +14,8 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[weapon_frame( agent = WEAPON_KIND_MURABITO_BOWLING_BALL )]
-fn bob_omb_frame(weapon: &mut L2CFighterBase) {
+//bowling ball
+unsafe extern "C" fn bob_omb_frame(weapon: &mut L2CFighterBase) {
     unsafe {
         let otarget_id = WorkModule::get_int(weapon.module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LINK_OWNER) as u32;
         let boma = smash::app::sv_system::battle_object_module_accessor(weapon.lua_state_agent); 
@@ -33,8 +33,7 @@ fn bob_omb_frame(weapon: &mut L2CFighterBase) {
 		}
     }
 }
-#[weapon_frame( agent = WEAPON_KIND_MURABITO_CLAYROCKET)]
-fn final_frame(weapon: &mut L2CFighterBase) {
+unsafe extern "C" fn final_frame(weapon: &mut L2CFighterBase) {
     unsafe {
         let otarget_id = WorkModule::get_int(weapon.module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LINK_OWNER) as u32;
         let boma = smash::app::sv_system::battle_object_module_accessor(weapon.lua_state_agent); 
@@ -56,8 +55,7 @@ fn final_frame(weapon: &mut L2CFighterBase) {
 		}
 	}
 }
-#[fighter_frame_callback]
-pub fn toad(fighter : &mut L2CFighterCommon) {
+unsafe extern "C" fn toad(fighter : &mut L2CFighterCommon) {
     unsafe {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
@@ -282,8 +280,7 @@ pub fn toad(fighter : &mut L2CFighterCommon) {
 	};
 }
 
-#[fighter_reset]
-fn agent_reset(fighter: &mut L2CFighterCommon) {
+unsafe extern "C" fn agent_reset(fighter: &mut L2CFighterCommon) {
     unsafe {
         let fighter_kind = utility::get_kind(&mut *fighter.module_accessor);
         if fighter_kind != *FIGHTER_KIND_MURABITO {
@@ -297,9 +294,12 @@ fn agent_reset(fighter: &mut L2CFighterCommon) {
 }
 
 pub fn install() {
-    install_agent_resets!(
-        agent_reset
-    );
-    smashline::install_agent_frame_callbacks!(toad);
-    smashline::install_agent_frames!(final_frame);
+    Agent::new("murabito")
+		.on_start(agent_reset)
+        .on_line(Main, toad)
+        .install();
+
+    Agent::new("murabito_clayrocket")
+        .on_line(Main, final_frame)
+        .install();
 }

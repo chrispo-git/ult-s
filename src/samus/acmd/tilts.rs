@@ -14,12 +14,18 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[acmd_script(
-    agent = "samus",
-    script =  "game_attacklw3",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn samus_dtilt(fighter: &mut L2CAgentBase) {
+pub fn install() {
+    Agent::new("samus")
+    .acmd("game_attacklw3", samus_dtilt)    
+    .acmd("effect_attacklw3", samus_dtilt_eff)    
+    .acmd("expression_attacklw3", samus_dtilt_expr)    
+    .acmd("sound_attacklw3", samus_dtilt_snd)    
+    .acmd("game_attackhi3", samus_utilt)    
+    .acmd("effect_attackhi3", samus_utilt_eff)    
+    .install();
+}
+
+unsafe extern "C" fn samus_dtilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 7.0);
 		if macros::is_excute(fighter) {
@@ -34,32 +40,17 @@ unsafe fn samus_dtilt(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }
-#[acmd_script(
-    agent = "samus",
-    script =  "effect_attacklw3",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn samus_dtilt_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn samus_dtilt_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 5.0);
 		if macros::is_excute(fighter) {
 			macros::FOOT_EFFECT(fighter, Hash40::new("sys_dash_smoke"), Hash40::new("top"), -5, 0, 0, 0, 0, 0, 0.8, 0, 0, 0, 0, 0, 0, false);
 		}
 }
-#[acmd_script(
-    agent = "samus",
-    script =  "expression_attacklw3",
-    category = ACMD_EXPRESSION,
-	low_priority)]
-unsafe fn samus_dtilt_expr(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn samus_dtilt_expr(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 }
-#[acmd_script(
-    agent = "samus",
-    script =  "sound_attacklw3",
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn samus_dtilt_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn samus_dtilt_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 6.0);
 		if macros::is_excute(fighter) {
@@ -67,12 +58,7 @@ unsafe fn samus_dtilt_snd(fighter: &mut L2CAgentBase) {
 		}
 }
 
-#[acmd_script(
-    agent = "samus",
-    script =  "game_attackhi3",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn samus_utilt(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn samus_utilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 8.0);
 		if macros::is_excute(fighter) {
@@ -90,22 +76,10 @@ unsafe fn samus_utilt(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }
-#[acmd_script(
-    agent = "samus",
-    script =  "effect_attackhi3",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn samus_utilt_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn samus_utilt_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 8.0);
 		if macros::is_excute(fighter) {
 			macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_attack_arc_b"), Hash40::new("top"), 1, 11, -2, 1.7, 10, 70, 1.4, true);
 		}
-}
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		samus_dtilt, samus_dtilt_eff, samus_dtilt_snd, samus_dtilt_expr,
-        samus_utilt, samus_utilt_eff
-    );
 }

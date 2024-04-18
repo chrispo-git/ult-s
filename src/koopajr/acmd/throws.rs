@@ -13,18 +13,14 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		jr_dthrow
-	);
-    
+    Agent::new("koopajr")
+    .acmd("game_throwlw", jr_dthrow)    
+    .install();
 }
-#[acmd_script(
-    agent = "koopajr",
-    script =  "game_throwlw",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn jr_dthrow(fighter: &mut L2CAgentBase) {
+
+unsafe extern "C" fn jr_dthrow(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, /*ID*/ 0, /*Damage*/ 4.0, /*Angle*/ 90, /*KBG*/ 100, /*FKB*/ 104, /*BKB*/ 0, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_B, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_CUTUP, /*Type*/ *ATTACK_REGION_THROW);

@@ -14,12 +14,20 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[acmd_script(
-    agent = "pitb",
-    script =  "game_attackairhi",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn dpit_uair(fighter: &mut L2CAgentBase) {
+pub fn install() {
+    Agent::new("pitb")
+    .acmd("game_attackairhi", dpit_uair)    
+	.acmd("effect_attackairhi", dpit_uair_eff)    
+	.acmd("sound_attackairhi", dpit_uair_snd)    
+	.acmd("game_attackairf", dpit_fair)    
+	.acmd("game_attackairlw", dpit_dair)    
+	.acmd("game_attackairn", dpit_nair)    
+	.acmd("effect_attackairn", dpit_nair_eff)    
+	.acmd("sound_attackairn", dpit_nair_snd)    
+	.install();
+}
+
+unsafe extern "C" fn dpit_uair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 1.0);
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.67);
@@ -43,12 +51,7 @@ unsafe fn dpit_uair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 	}
-#[acmd_script(
-    agent = "pitb",
-    script =  "effect_attackairhi",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn dpit_uair_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn dpit_uair_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 9.0);
 		if macros::is_excute(fighter) {
@@ -61,24 +64,14 @@ unsafe fn dpit_uair_eff(fighter: &mut L2CAgentBase) {
 			macros::LAST_EFFECT_SET_RATE(fighter, 2);
 		}
 	}
-#[acmd_script(
-    agent = "pitb",
-    script =  "sound_attackairhi",
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn dpit_uair_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn dpit_uair_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 8.0);
 		if macros::is_excute(fighter) {
 			macros::PLAY_SE(fighter, Hash40::new("se_common_punch_kick_swing_s"));
 		}
 	}
-#[acmd_script(
-    agent = "pitb",
-    script =  "game_attackairf",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn dpit_fair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn dpit_fair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
 		if macros::is_excute(fighter) {
@@ -107,12 +100,7 @@ unsafe fn dpit_fair(fighter: &mut L2CAgentBase) {
 		}
 }
 
-#[acmd_script(
-    agent = "pitb",
-    script =  "game_attackairlw",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn dpit_dair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn dpit_dair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 7.0);
 		if macros::is_excute(fighter) {
@@ -140,12 +128,7 @@ unsafe fn dpit_dair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }	
-#[acmd_script(
-    agent = "pitb",
-    script =  "game_attackairn",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn dpit_nair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn dpit_nair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 4.0);
 		if macros::is_excute(fighter) {
@@ -183,12 +166,7 @@ unsafe fn dpit_nair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }		
-#[acmd_script(
-    agent = "pitb",
-    script =  "effect_attackairn",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn dpit_nair_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn dpit_nair_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 6.0);
 		if macros::is_excute(fighter) {
@@ -205,12 +183,7 @@ unsafe fn dpit_nair_eff(fighter: &mut L2CAgentBase) {
 			macros::EFFECT_ALPHA(fighter, Hash40::new("sys_attack_impact"), Hash40::new("top"), 0, 11, 14, 0, 0, 0, 1, 0, 0, 0, 0, 0, 360, true, 0.5);
 		}
 }		
-#[acmd_script(
-    agent = "pitb",
-    script =  "sound_attackairn",
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn dpit_nair_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn dpit_nair_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 6.0);
 		if macros::is_excute(fighter) {
@@ -221,13 +194,4 @@ unsafe fn dpit_nair_snd(fighter: &mut L2CAgentBase) {
 		if macros::is_excute(fighter) {
 			macros::PLAY_SE(fighter, Hash40::new("se_common_punch_kick_swing_l"));
 		}
-}		
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		dpit_uair, dpit_uair_eff, dpit_uair_snd,
-        dpit_fair,
-        dpit_dair,
-        dpit_nair, dpit_nair_eff, dpit_nair_snd
-    );
-}
+}	

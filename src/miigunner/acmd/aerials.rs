@@ -14,8 +14,21 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[acmd_script( agent = "miigunner", script = "game_attackairn", category = ACMD_GAME, low_priority )]
-unsafe fn gunner_nair(fighter: &mut L2CAgentBase) {
+pub fn install() {
+    Agent::new("miigunner")
+    .acmd("game_attackairn", gunner_nair)    
+    .acmd("game_attackairf", gunner_fair)    
+    .acmd("game_attackairb", gunner_bair)    
+    .acmd("game_attackairhi", gunner_uair)    
+    .acmd("game_attackairlw", gunner_dair)    
+    .install();
+
+    Agent::new("miigunner_attackairf_bullet")
+    .acmd("game_fly", gunner_fair_bullet)    
+    .install();
+}
+
+unsafe extern "C" fn gunner_nair(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 4.0);
     if macros::is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
@@ -40,8 +53,7 @@ unsafe fn gunner_nair(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script( agent = "miigunner", script = "game_attackairf", category = ACMD_GAME, low_priority )]
-unsafe fn gunner_fair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn gunner_fair(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if macros::is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
@@ -61,8 +73,7 @@ unsafe fn gunner_fair(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script( agent = "miigunner_attackairf_bullet", script = "game_fly", category = ACMD_GAME, low_priority )]
-unsafe fn gunner_fair_bullet(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn gunner_fair_bullet(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, 0, 0, Hash40::new("top"), 8.0, 50, 83, 0, 47, 2.0, 0.0, 0.0, 0.0, Some(0.0), Some(0.0), Some(-9.0), 1.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_SPEED, false, 0, 0.0, 0, true, true, false, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_MIIGUNNER_BLASTER, *ATTACK_REGION_ENERGY);
     }
@@ -76,8 +87,7 @@ unsafe fn gunner_fair_bullet(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script( agent = "miigunner", script = "game_attackairb", category = ACMD_GAME, low_priority )]
-unsafe fn gunner_bair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn gunner_bair(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 4.0);
     if macros::is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
@@ -105,8 +115,7 @@ unsafe fn gunner_bair(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script( agent = "miigunner", script = "game_attackairhi", category = ACMD_GAME, low_priority )]
-unsafe fn gunner_uair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn gunner_uair(fighter: &mut L2CAgentBase) {
 	frame(fighter.lua_state_agent, 11.0);
 	if macros::is_excute(fighter) {
 	   WorkModule::on_flag(fighter.module_accessor, *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
@@ -143,8 +152,7 @@ unsafe fn gunner_uair(fighter: &mut L2CAgentBase) {
 	}
 }
 
-#[acmd_script( agent = "miigunner", script = "game_attackairlw", category = ACMD_GAME, low_priority )]
-unsafe fn gunner_dair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn gunner_dair(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 4.0);
     if macros::is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
@@ -172,15 +180,4 @@ unsafe fn gunner_dair(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         WorkModule::off_flag(fighter.module_accessor, *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
     }
-}
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		gunner_nair,
-        gunner_fair,
-        gunner_fair_bullet,
-        gunner_bair,
-        gunner_uair,
-        gunner_dair
-    );
 }

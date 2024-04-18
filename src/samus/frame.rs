@@ -14,8 +14,13 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[fighter_frame( agent = FIGHTER_KIND_SAMUS )]
-fn samus_frame(fighter: &mut L2CFighterCommon) {
+pub fn install() {
+    Agent::new("samus")
+    .on_line(Main, samus_frame)
+    .install();
+}
+
+unsafe extern "C" fn samus_frame(fighter: &mut L2CFighterCommon) {
     unsafe {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 		if is_default(boma) {
@@ -37,8 +42,4 @@ fn samus_frame(fighter: &mut L2CFighterCommon) {
 			};
 		}
     }
-}
-
-pub fn install() {
-    smashline::install_agent_frames!(samus_frame);
 }

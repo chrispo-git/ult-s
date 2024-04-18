@@ -14,32 +14,41 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use crate::jack::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		joker_eiagon,
-		joker_eiagon_air,
-		joker_gun,
-		joker_gun_air,
-		joker_gun_b,
-		joker_gun_b_air,
-		s_joker_gun,
-		s_joker_gun_b,
-		e_joker_gun,
-		e_joker_gun_b,
-		
-		//Baton Pass
-		joker_sideb,
-		joker_sideb_eff,
-		joker_sideb_snd
-    );
+    Agent::new("jack")
+    .acmd("game_specialn1_ex", joker_gun)    
+    .acmd("game_specialn1", joker_gun)    
+    .acmd("game_specialairn1_ex", joker_gun_air)    
+    .acmd("game_specialairn1", joker_gun_air)    
+    .acmd("sound_specialn1_ex", s_joker_gun)    
+    .acmd("sound_specialairn1_ex", s_joker_gun)    
+    .acmd("effect_specialn1_ex", e_joker_gun)    
+    .acmd("effect_specialairn1_ex", e_joker_gun)    
+    .acmd("effect_specialnescapeb_ex", e_joker_gun_b)    
+    .acmd("effect_specialairnescapeb_ex", e_joker_gun_b)    
+    .acmd("sound_specialnescapeb", s_joker_gun_b)    
+    .acmd("sound_specialairnescapeb", s_joker_gun_b)    
+    .acmd("sound_specialnescapeb_ex", s_joker_gun_b)    
+    .acmd("sound_specialairnescapeb_ex", s_joker_gun_b)    
+    .acmd("game_specialnescapeb_ex", joker_gun_b)    
+    .acmd("game_specialairnescapeb_ex", joker_gun_b)    
+    .acmd("game_specialnescapeb", joker_gun_b)    
+    .acmd("game_specialairnescapeb", joker_gun_b)    
+    .acmd("game_specialairnescapeb_ex", joker_gun_b_air)    
+    .acmd("game_specialairnescapeb", joker_gun_b_air)    
+    .acmd("game_specials2", joker_eiagon)    
+    .acmd("game_specialairs2", joker_eiagon_air)    
+    .acmd("game_specials1", joker_sideb)    
+    .acmd("game_specialairs1", joker_sideb)    
+    .acmd("effect_specials1", joker_sideb_eff)    
+    .acmd("effect_specialairs1", joker_sideb_eff)    
+    .acmd("sound_specials1", joker_sideb_snd)    
+    .acmd("sound_specialairs1", joker_sideb_snd)    
+    .install();
 }
 	
-#[acmd_script(
-    agent = "jack",
-    scripts =  ["game_specialn1_ex", "game_specialn1"],
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn joker_gun(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn joker_gun(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 	let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
@@ -85,12 +94,7 @@ unsafe fn joker_gun(fighter: &mut L2CAgentBase) {
 			WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_JACK_STATUS_SPECIAL_N_FLAG_UNABLE_SPECIAL_N);
 		}
 }		
-#[acmd_script(
-    agent = "jack",
-    scripts =  ["game_specialairn1_ex", "game_specialairn1"],
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn joker_gun_air(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn joker_gun_air(fighter: &mut L2CAgentBase) {
     	let lua_state = fighter.lua_state_agent;
     	let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
@@ -144,12 +148,7 @@ unsafe fn joker_gun_air(fighter: &mut L2CAgentBase) {
 			WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_JACK_STATUS_SPECIAL_N_FLAG_UNABLE_SPECIAL_N);
 		}
 }	
-#[acmd_script(
-    agent = "jack",
-    scripts =  ["sound_specialn1_ex", "sound_specialairn1_ex"],
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn s_joker_gun(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn s_joker_gun(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
@@ -159,12 +158,7 @@ unsafe fn s_joker_gun(fighter: &mut L2CAgentBase) {
 			macros::PLAY_SE(fighter, Hash40::new("se_jack_special_n01"));
 		}
 }		
-#[acmd_script(
-    agent = "jack",
-    scripts =  ["effect_specialn1_ex", "effect_specialairn1_ex"],
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn e_joker_gun(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn e_joker_gun(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
@@ -174,12 +168,7 @@ unsafe fn e_joker_gun(fighter: &mut L2CAgentBase) {
 			macros::EFFECT(fighter, Hash40::new_raw(0x16b6b8d02d), Hash40::new("gunl"), 0, 0.8, 1.9, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, true);
 		}
 }		
-#[acmd_script(
-    agent = "jack",
-    scripts =  ["effect_specialnescapeb_ex", "effect_specialairnescapeb_ex"],
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn e_joker_gun_b(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn e_joker_gun_b(fighter: &mut L2CAgentBase) {
     	let lua_state = fighter.lua_state_agent;
     	let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
@@ -189,12 +178,7 @@ unsafe fn e_joker_gun_b(fighter: &mut L2CAgentBase) {
 			macros::EFFECT(fighter, Hash40::new_raw(0x16b6b8d02d), Hash40::new("gunl"), 0, 0.8, 1.9, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, true);
 		}
 }	
-#[acmd_script(
-    agent = "jack",
-    scripts =  ["sound_specialnescapeb", "sound_specialairnescapeb", "sound_specialnescapeb_ex", "sound_specialairnescapeb_ex"],
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn s_joker_gun_b(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn s_joker_gun_b(fighter: &mut L2CAgentBase) {
     	let lua_state = fighter.lua_state_agent;
    		let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
@@ -209,12 +193,7 @@ unsafe fn s_joker_gun_b(fighter: &mut L2CAgentBase) {
 		}
 }	
 		
-#[acmd_script(
-    agent = "jack",
-    scripts =  ["game_specialnescapeb_ex", "game_specialairnescapeb_ex","game_specialnescapeb", "game_specialairnescapeb"],
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn joker_gun_b(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn joker_gun_b(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
@@ -257,12 +236,7 @@ unsafe fn joker_gun_b(fighter: &mut L2CAgentBase) {
 			WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_JACK_STATUS_SPECIAL_N_FLAG_UNABLE_SPECIAL_N);
 		}
 }			
-#[acmd_script(
-    agent = "jack",
-    scripts =  ["game_specialairnescapeb_ex", "game_specialairnescapeb"],
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn joker_gun_b_air(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn joker_gun_b_air(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 	let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
@@ -314,12 +288,7 @@ unsafe fn joker_gun_b_air(fighter: &mut L2CAgentBase) {
 			WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_JACK_STATUS_SPECIAL_N_FLAG_UNABLE_SPECIAL_N);
 		}
 }		
-#[acmd_script(
-    agent = "jack",
-    scripts =  ["game_specials2"],
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn joker_eiagon(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn joker_eiagon(fighter: &mut L2CAgentBase) {
     	let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 1.0);
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.4375);
@@ -327,12 +296,7 @@ unsafe fn joker_eiagon(fighter: &mut L2CAgentBase) {
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 1);
 }	
 			
-#[acmd_script(
-    agent = "jack",
-    scripts =  ["game_specialairs2"],
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn joker_eiagon_air(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn joker_eiagon_air(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 1.0);
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.4375);
@@ -347,12 +311,7 @@ unsafe fn joker_eiagon_air(fighter: &mut L2CAgentBase) {
 		}
 }
 	
-#[acmd_script(
-    agent = "jack",
-    scripts =  ["game_specials1", "game_specialairs1"],
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn joker_sideb(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn joker_sideb(fighter: &mut L2CAgentBase) {
         let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 		if macros::is_excute(fighter) {
@@ -415,12 +374,7 @@ unsafe fn joker_sideb(fighter: &mut L2CAgentBase) {
 			ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_JACK_GENERATE_ARTICLE_MONA,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
 		}
 }	
-#[acmd_script(
-    agent = "jack",
-    scripts =  ["effect_specials1", "effect_specialairs1"],
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn joker_sideb_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn joker_sideb_eff(fighter: &mut L2CAgentBase) {
         let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 		frame(fighter.lua_state_agent, 2.0);
@@ -485,12 +439,7 @@ unsafe fn joker_sideb_eff(fighter: &mut L2CAgentBase) {
 			};
 		}
 }	
-#[acmd_script(
-    agent = "jack",
-    scripts =  ["sound_specials1", "sound_specialairs1"],
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn joker_sideb_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn joker_sideb_snd(fighter: &mut L2CAgentBase) {
         let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 		frame(fighter.lua_state_agent, 3.0);

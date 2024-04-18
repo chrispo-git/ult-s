@@ -15,8 +15,17 @@ use smash::phx::Vector2f;
 use crate::util::*;
 use super::*;
 
-#[fighter_frame( agent = FIGHTER_KIND_WARIO )]
-fn wario_frame(fighter: &mut L2CFighterCommon) {
+pub fn install() {
+    Agent::new("wario")
+    .on_line(Main, wario_frame)
+    .install();
+
+	Agent::new("wario_wariobike")
+    .on_line(Main, bike_frame)
+    .install();
+}
+
+unsafe extern "C" fn wario_frame(fighter: &mut L2CFighterCommon) {
     unsafe {
         //println!("It'sa me, Mario, wahoooooooo!");
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
@@ -185,8 +194,7 @@ fn wario_frame(fighter: &mut L2CFighterCommon) {
 		}
     }
 }
-#[weapon_frame( agent = WEAPON_KIND_WARIO_WARIOBIKE )]
-fn bike_frame(weapon: &mut L2CFighterBase) {
+unsafe extern "C" fn bike_frame(weapon: &mut L2CFighterBase) {
     unsafe {
         let otarget_id = WorkModule::get_int(weapon.module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LINK_OWNER) as u32;
         let boma = smash::app::sv_battle_object::module_accessor(otarget_id);
@@ -200,11 +208,4 @@ fn bike_frame(weapon: &mut L2CFighterBase) {
 			};
 		};
     }
-}
-
-pub fn install() {
-    smashline::install_agent_frames!(
-        wario_frame,
-		bike_frame
-    );
 }

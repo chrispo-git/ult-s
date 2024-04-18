@@ -32,8 +32,7 @@ pub(crate) unsafe fn bone_inst(boma: &mut smash::app::BattleObjectModuleAccessor
 	let mut rotation = Vector3f{x: x_rotate, y: y_rotate , z: z_rotate };
 	ModelModule::set_joint_rotate(boma, Hash40::new_raw(bone), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
 }
-#[fighter_frame_callback]
-pub fn bone_rot(fighter : &mut L2CFighterCommon) {
+unsafe extern "C" fn bone_rot(fighter : &mut L2CFighterCommon) {
     unsafe {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
@@ -44,6 +43,7 @@ pub fn bone_rot(fighter : &mut L2CFighterCommon) {
 		let stick_y = ControlModule::get_stick_y(boma);
 		//Example: Diddy Kong Fair Rotation being angled
 		//bone_const(boma, *FIGHTER_KIND_DIDDY, hash40("attack_air_f"), hash40("rot"), 0.0, 999.0, -45.0, 0.0, 0.0, 0.0, 0.0, 0.0);
+
 		
 		//Dark Samus Fair angle down
 		bone_const(boma, *FIGHTER_KIND_SAMUSD, hash40("attack_air_f"), hash40("rot"), 0.0, 47.0, 22.5, 22.5, 0.0, 0.0, 0.0, 0.0);
@@ -56,7 +56,7 @@ pub fn bone_rot(fighter : &mut L2CFighterCommon) {
 		bone_const(boma, *FIGHTER_KIND_SAMUSD, hash40("landing_air_lw"), hash40("rot"), 0.0, 15.0, 0.0, 0.0, 180.0, 180.0, 0.0, 0.0);
 		bone_const(boma, *FIGHTER_KIND_SAMUSD, hash40("landing_air_lw"), hash40("rot"), 15.0, 59.0, 0.0, 0.0, 180.0, 0.0, 0.0, 0.0);
 		*/
-		
+		 
 		//MiiGunner bair angle up
 		bone_const(boma, *FIGHTER_KIND_MIIGUNNER, hash40("attack_air_b"), hash40("rot"), 0.0, 24.0, 10.0, 10.0, 0.0, 0.0, 0.0, 0.0);
 		
@@ -93,8 +93,7 @@ pub fn bone_rot(fighter : &mut L2CFighterCommon) {
 	
 	};
 }
-#[fighter_frame_callback]
-pub fn sword_size(fighter : &mut L2CFighterCommon) {
+unsafe extern "C" fn sword_size(fighter : &mut L2CFighterCommon) {
     unsafe {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
@@ -153,8 +152,8 @@ pub fn sword_size(fighter : &mut L2CFighterCommon) {
 	};
 }
 pub fn install() {
-    smashline::install_agent_frame_callbacks!(
-		bone_rot,
-		sword_size
-	);
+    Agent::new("fighter")
+	.on_line(Main, bone_rot)
+	.on_line(Main, sword_size)
+	.install();
 }

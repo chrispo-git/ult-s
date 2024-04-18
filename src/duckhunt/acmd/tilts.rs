@@ -15,21 +15,16 @@ use crate::util::*;
 use super::*;
 
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		dh_ftilthi,
-		dh_ftilts,
-		dh_ftiltlw,
-		dh_dtilt,
-		dh_utilt
-    );
+    Agent::new("duckhunt")
+    .acmd("game_attacks3", dh_ftilts)    
+    .acmd("game_attacks3hi", dh_ftilthi)    
+    .acmd("game_attacks3lw", dh_ftiltlw)    
+    .acmd("game_attackhi3", dh_utilt)    
+    .acmd("game_attacklw3", dh_dtilt)    
+    .install();
 }
 
-#[acmd_script(
-    agent = "duckhunt",
-    script =  "game_attacks3",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn dh_ftilts(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn dh_ftilts(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 8.0);
 		if macros::is_excute(fighter) {
@@ -40,12 +35,7 @@ unsafe fn dh_ftilts(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }	
-#[acmd_script(
-    agent = "duckhunt",
-    script =  "game_attacks3hi",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn dh_ftilthi(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn dh_ftilthi(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 8.0);
 		if macros::is_excute(fighter) {
@@ -56,12 +46,7 @@ unsafe fn dh_ftilthi(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }	
-#[acmd_script(
-    agent = "duckhunt",
-    script =  "game_attacks3lw",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn dh_ftiltlw(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn dh_ftiltlw(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 8.0);
 		if macros::is_excute(fighter) {
@@ -72,12 +57,7 @@ unsafe fn dh_ftiltlw(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }	
-#[acmd_script(
-    agent = "duckhunt",
-    script =  "game_attackhi3",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn dh_utilt(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn dh_utilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 1.0);
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.8);
@@ -96,12 +76,7 @@ unsafe fn dh_utilt(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }	
-#[acmd_script(
-    agent = "duckhunt",
-    script =  "game_attacklw3",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn dh_dtilt(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn dh_dtilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 6.0);
 		if macros::is_excute(fighter) {

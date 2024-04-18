@@ -14,12 +14,19 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[acmd_script(
-    agent = "ryu_shinkuhadoken",
-    script =  "game_move",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn ryu_shinsu(fighter: &mut L2CAgentBase) {
+pub fn install() {
+    Agent::new("ryu")
+    .acmd("game_specialn", ryu_shinsu_hadou)    
+    .acmd("game_specialairn", ryu_shinsu_hadou_air)    
+    .install();
+
+	Agent::new("ryu_shinkuhadoken")
+    .acmd("game_move", ryu_shinsu)    
+    .acmd("effect_move", ryu_shinsue)    
+    .install();
+}
+
+unsafe extern "C" fn ryu_shinsu(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 1.0);
 		if macros::is_excute(fighter) {
@@ -39,12 +46,7 @@ unsafe fn ryu_shinsu(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }
-#[acmd_script(
-    agent = "ryu_shinkuhadoken",
-    script =  "effect_move",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn ryu_shinsue(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn ryu_shinsue(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			macros::EFFECT_FOLLOW(fighter, Hash40::new("ryu_final_shinkuhado_bullet"), Hash40::new("top"), 0, 0, 1, 0, 0, 0, 1.2, true);
@@ -54,12 +56,7 @@ unsafe fn ryu_shinsue(fighter: &mut L2CAgentBase) {
 			macros::EFFECT(fighter, Hash40::new("ryu_final_shinkuhado_finish"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, true);
 		}
 }			
-#[acmd_script(
-    agent = "ryu",
-    script =  "game_specialn",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn ryu_shinsu_hadou(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn ryu_shinsu_hadou(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);  
 	let fighter_kind = smash::app::utility::get_kind(boma);
@@ -89,12 +86,7 @@ unsafe fn ryu_shinsu_hadou(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_RYU_STATUS_WORK_ID_SPECIAL_N_FLAG_SPECIAL_FALL);
 		}
 }			
-#[acmd_script(
-    agent = "ryu",
-    script =  "game_specialairn",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn ryu_shinsu_hadou_air(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn ryu_shinsu_hadou_air(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);  
 	let fighter_kind = smash::app::utility::get_kind(boma);
@@ -124,10 +116,3 @@ unsafe fn ryu_shinsu_hadou_air(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_RYU_STATUS_WORK_ID_SPECIAL_N_FLAG_SPECIAL_FALL);
 		}
 }	
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		ryu_shinsu, ryu_shinsue,
-        ryu_shinsu_hadou, ryu_shinsu_hadou_air
-    );
-}

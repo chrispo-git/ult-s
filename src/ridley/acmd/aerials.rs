@@ -14,12 +14,17 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[acmd_script(
-    agent = "ridley",
-    script =  "game_attackairhi",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn ridley_uair(fighter: &mut L2CAgentBase) {
+pub fn install() {
+    Agent::new("ridley")
+    .acmd("game_attackairhi", ridley_uair)    
+    .acmd("game_attackairb", ridley_bair)    
+    .acmd("game_attackairf", ridley_fair)    
+    .acmd("game_attackairlw", ridley_dair)    
+    .acmd("effect_attackairlw", ridley_dair_eff)    
+    .install();
+}
+
+unsafe extern "C" fn ridley_uair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 4.0);
 		if macros::is_excute(fighter) {
@@ -51,12 +56,7 @@ unsafe fn ridley_uair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }		
-#[acmd_script(
-    agent = "ridley",
-    script =  "game_attackairb",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn ridley_bair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn ridley_bair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
@@ -80,12 +80,7 @@ unsafe fn ridley_bair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }			
-#[acmd_script(
-    agent = "ridley",
-    script =  "game_attackairf",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn ridley_fair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn ridley_fair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
 		frame(fighter.lua_state_agent, 3.0);
@@ -132,12 +127,7 @@ unsafe fn ridley_fair(fighter: &mut L2CAgentBase) {
 		}
 }		
 
-#[acmd_script(
-    agent = "ridley",
-    script =  "game_attackairlw",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn ridley_dair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn ridley_dair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 8.0);
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.4);
@@ -170,12 +160,7 @@ unsafe fn ridley_dair(fighter: &mut L2CAgentBase) {
 		}
 }		
 
-#[acmd_script( 
-	agent = "ridley", 
-	script = "effect_attackairlw",
-	category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn ridley_dair_eff(fighter : &mut L2CAgentBase) {
+unsafe extern "C" fn ridley_dair_eff(fighter : &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 7.0);
     if macros::is_excute(fighter) {
         macros::EFFECT(fighter, Hash40::new("sys_smash_flash"), Hash40::new("tail8"), 4, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, true);
@@ -194,13 +179,4 @@ unsafe fn ridley_dair_eff(fighter : &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::EFFECT_OFF_KIND(fighter, Hash40::new("ridley_death_stab_flare"), false, true);
     }
-}
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		ridley_uair,
-        ridley_bair,
-        ridley_fair,
-        ridley_dair, ridley_dair_eff
-    );
 }

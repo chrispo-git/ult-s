@@ -14,12 +14,20 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[acmd_script(
-    agent = "palutena",
-    scripts =  ["game_specialn", "game_specialairn"],
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn palu_reticle(fighter: &mut L2CAgentBase) {
+pub fn install() {
+    Agent::new("palutena")
+    .acmd("game_specialn", palu_reticle)    
+	.acmd("game_specialairn", palu_reticle)    
+	.acmd("game_speciallw", palu_black_hole)    
+	.acmd("game_specialairlw", palu_black_hole)    
+	.acmd("effect_speciallw", palu_black_hole_eff)    
+	.acmd("effect_specialairlw", palu_black_hole_eff)    
+	.acmd("sound_speciallw", palu_black_hole_snd)    
+	.acmd("sound_specialairlw", palu_black_hole_snd)    
+	.install();
+}
+
+unsafe extern "C" fn palu_reticle(fighter: &mut L2CAgentBase) {
     	let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 18.0); 
 		for _ in 0..3 {
@@ -33,12 +41,7 @@ unsafe fn palu_reticle(fighter: &mut L2CAgentBase) {
 		wait(fighter.lua_state_agent, 1.0);
 		macros::FT_MOTION_RATE(fighter, 1.1);
 }		
-#[acmd_script(
-    agent = "palutena",
-    scripts =  ["game_speciallw", "game_specialairlw"],
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn palu_black_hole(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn palu_black_hole(fighter: &mut L2CAgentBase) {
     	let lua_state = fighter.lua_state_agent;
 		macros::FT_MOTION_RATE(fighter, 3.2);
 		frame(fighter.lua_state_agent, 5.0); 
@@ -60,12 +63,7 @@ unsafe fn palu_black_hole(fighter: &mut L2CAgentBase) {
 		frame(fighter.lua_state_agent, 30.0);
 		macros::FT_MOTION_RATE(fighter, 0.5);
 }	
-#[acmd_script(
-    agent = "palutena",
-    scripts =  ["effect_speciallw", "effect_specialairlw"],
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn palu_black_hole_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn palu_black_hole_eff(fighter: &mut L2CAgentBase) {
     	let lua_state = fighter.lua_state_agent;
 		let mut eff = 0 as u32;
 		let mut scale = 0.2;
@@ -99,12 +97,7 @@ unsafe fn palu_black_hole_eff(fighter: &mut L2CAgentBase) {
 			wait(fighter.lua_state_agent, 1.0);
 		}*/
 }		
-#[acmd_script(
-    agent = "palutena",
-    scripts =  ["sound_speciallw", "sound_specialairlw"],
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn palu_black_hole_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn palu_black_hole_snd(fighter: &mut L2CAgentBase) {
     	let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 4.0); 
 		if macros::is_excute(fighter) {
@@ -116,10 +109,3 @@ unsafe fn palu_black_hole_snd(fighter: &mut L2CAgentBase) {
 			macros::STOP_SE(fighter, Hash40::new("se_palutena_final02"));
 		}
 }	
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		palu_reticle,
-        palu_black_hole, palu_black_hole_eff, palu_black_hole_snd
-    );
-}

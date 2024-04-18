@@ -13,17 +13,14 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		fox_dtilt
-    );
+    Agent::new("fox")
+    .acmd("game_attacklw3", fox_dtilt)    
+    .install();
 }
-#[acmd_script(
-    agent = "fox",
-    script =  "game_attacklw3",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn fox_dtilt(fighter: &mut L2CAgentBase) {
+
+unsafe extern "C" fn fox_dtilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 7.0);
 		if macros::is_excute(fighter) {

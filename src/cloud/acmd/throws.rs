@@ -13,18 +13,15 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		cloud_grab,
-		cloud_dthrow
-    );
+    Agent::new("cloud")
+    .acmd("game_catch", cloud_grab)    
+    .acmd("game_throwlw", cloud_dthrow)    
+    .install();
 }
-#[acmd_script(
-    agent = "cloud",
-    script =  "game_catch",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn cloud_grab(fighter: &mut L2CAgentBase) {
+
+unsafe extern "C" fn cloud_grab(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
 		frame(fighter.lua_state_agent, 6.0);
@@ -48,12 +45,7 @@ unsafe fn cloud_grab(fighter: &mut L2CAgentBase) {
 			GrabModule::set_rebound(fighter.module_accessor, /*CanCatchRebound*/ false);
 		}
 }
-#[acmd_script(
-    agent = "cloud",
-    script =  "game_throwlw",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn cloud_dthrow(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn cloud_dthrow(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, /*ID*/ 0, /*Damage*/ 7.0, /*Angle*/ 100, /*KBG*/ 60, /*FKB*/ 0, /*BKB*/ 60, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);

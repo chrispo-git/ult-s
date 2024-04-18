@@ -13,19 +13,15 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		ken_dsmash,
-		ken_jab3
-    );
+    Agent::new("ken")
+    .acmd("game_attacklw4", ken_dsmash)    
+    .acmd("game_attack13", ken_jab3)    
+    .install();
 }
 
-#[acmd_script(
-    agent = "ken",
-    script =  "game_attacklw4",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn ken_dsmash(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn ken_dsmash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 3.0);
 		if macros::is_excute(fighter) {
@@ -42,12 +38,7 @@ unsafe fn ken_dsmash(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }		
-#[acmd_script(
-    agent = "ken",
-    script =  "game_attack13",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn ken_jab3(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn ken_jab3(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_RYU_INSTANCE_WORK_ID_FLAG_FINAL_HIT_CANCEL);

@@ -15,21 +15,26 @@ use crate::util::*;
 use crate::murabito::*;
 use super::*;
 
-
-
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		villy_neutralb_1, villy_neutralb_2, villy_neutralb_2_fail, villy_neutralb_3, villy_neutralb_air,
-        villy_neutralb_1_eff, villy_neutralb_2_eff, villy_neutralb_2_fail_eff, villy_neutralb_air_eff, villy_neutralb_3_eff,
-        villy_neutralb_1_snd, villy_neutralb_2_snd, villy_neutralb_2_fail_snd, villy_neutralb_3_snd
-    );
+    Agent::new("murabito")
+    .acmd("game_specialairn", villy_neutralb_air)    
+    .acmd("effect_specialairn", villy_neutralb_air_eff)    
+    .acmd("game_specialn", villy_neutralb_1)    
+    .acmd("effect_specialn", villy_neutralb_1_eff)    
+    .acmd("sound_specialn", villy_neutralb_1_snd)    
+    .acmd("game_specialn2", villy_neutralb_2)    
+    .acmd("effect_specialn2", villy_neutralb_2_eff)    
+    .acmd("sound_specialn2", villy_neutralb_2_snd)    
+    .acmd("game_specialn2fail", villy_neutralb_2_fail)    
+    .acmd("effect_specialn2fail", villy_neutralb_2_fail_eff)    
+    .acmd("sound_specialn2fail", villy_neutralb_2_fail_snd)    
+    .acmd("game_specialn3", villy_neutralb_3)    
+    .acmd("effect_specialn3", villy_neutralb_3_eff)    
+    .acmd("sound_specialn3", villy_neutralb_3_snd)    
+    .install();
 }
-#[acmd_script(
-    agent = "murabito",
-    script =  "game_specialairn",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn villy_neutralb_air(agent: &mut L2CAgentBase) {
+
+unsafe extern "C" fn villy_neutralb_air(agent: &mut L2CAgentBase) {
     if macros::is_excute(agent) {
         ItemModule::set_have_item_visibility(agent.module_accessor, false, 0 );
         if PostureModule::lr(agent.module_accessor) > 0.0 {
@@ -53,12 +58,7 @@ unsafe fn villy_neutralb_air(agent: &mut L2CAgentBase) {
         ModelModule::set_mesh_visibility(agent.module_accessor,Hash40::new("murabito_shovelflip"),false);
     }
 }	
-#[acmd_script(
-    agent = "murabito",
-    script =  "effect_specialairn",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn villy_neutralb_air_eff(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn villy_neutralb_air_eff(agent: &mut L2CAgentBase) {
     if macros::is_excute(agent) {
         macros::EFFECT(agent, Hash40::new("sys_smash_flash"), Hash40::new("haver"), -2, 5, 0, 0, 0, 0, 0.8, 0, 0, 0, 0, 0, 0, true);
     }
@@ -68,12 +68,7 @@ unsafe fn villy_neutralb_air_eff(agent: &mut L2CAgentBase) {
         macros::LAST_EFFECT_SET_RATE(agent, 1.5);
     }
 }	
-#[acmd_script(
-    agent = "murabito",
-    script =  "game_specialn",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn villy_neutralb_1(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn villy_neutralb_1(agent: &mut L2CAgentBase) {
     let boma = smash::app::sv_system::battle_object_module_accessor(agent.lua_state_agent); 
     let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
     let motion_kind = MotionModule::motion_kind(boma);
@@ -131,34 +126,19 @@ unsafe fn villy_neutralb_1(agent: &mut L2CAgentBase) {
         ModelModule::set_mesh_visibility(agent.module_accessor,Hash40::new("murabito_shovelflip"),false);
     }
 }		
-#[acmd_script(
-    agent = "murabito",
-    script =  "effect_specialn",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn villy_neutralb_1_eff(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn villy_neutralb_1_eff(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 6.0);
     if macros::is_excute(agent) {
         macros::EFFECT_FOLLOW(agent, Hash40::new("sys_attack_arc_b"), Hash40::new("top"), 1, 11, 0, 1.7, 10, 70, 1.5, true);
     }
 }	
-#[acmd_script(
-    agent = "murabito",
-    script =  "sound_specialn",
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn villy_neutralb_1_snd(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn villy_neutralb_1_snd(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 4.0);
     if macros::is_excute(agent) {
         macros::PLAY_SE(agent, Hash40::new("se_murabito_swing_s_finish"));
     }
 }		
-#[acmd_script(
-    agent = "murabito",
-    script =  "game_specialn2",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn villy_neutralb_2(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn villy_neutralb_2(agent: &mut L2CAgentBase) {
     if macros::is_excute(agent) {
         ItemModule::set_have_item_visibility(agent.module_accessor, false, 0 );
         if PostureModule::lr(agent.module_accessor) > 0.0 {
@@ -188,12 +168,7 @@ unsafe fn villy_neutralb_2(agent: &mut L2CAgentBase) {
         ModelModule::set_mesh_visibility(agent.module_accessor,Hash40::new("murabito_shovelflip"),false);
     }
 }
-#[acmd_script(
-    agent = "murabito",
-    script =  "effect_specialn2",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn villy_neutralb_2_eff(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn villy_neutralb_2_eff(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 5.0);
     if macros::is_excute(agent) {
         macros::EFFECT(agent, Hash40::new("murabito_soil2"), Hash40::new("top"), 12, 0, 0.5, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
@@ -204,12 +179,7 @@ unsafe fn villy_neutralb_2_eff(agent: &mut L2CAgentBase) {
         macros::EFFECT(agent, Hash40::new("murabito_clay"), Hash40::new("top"), 12, 0, 0, 0, 0, 0, 1, 2, 2, 2, 0, 0, 0, false);
     }
 }		
-#[acmd_script(
-    agent = "murabito",
-    script =  "sound_specialn2",
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn villy_neutralb_2_snd(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn villy_neutralb_2_snd(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 5.0);
     if macros::is_excute(agent) {
         macros::PLAY_SE(agent, Hash40::new("se_murabito_smash_l02"));
@@ -219,12 +189,7 @@ unsafe fn villy_neutralb_2_snd(agent: &mut L2CAgentBase) {
         macros::PLAY_SE(agent, Hash40::new("se_murabito_attackdash01"));
     }
 }		
-#[acmd_script(
-    agent = "murabito",
-    script =  "game_specialn2fail",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn villy_neutralb_2_fail(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn villy_neutralb_2_fail(agent: &mut L2CAgentBase) {
     if macros::is_excute(agent) {
         ItemModule::set_have_item_visibility(agent.module_accessor, false, 0 );
         if PostureModule::lr(agent.module_accessor) > 0.0 {
@@ -250,34 +215,19 @@ unsafe fn villy_neutralb_2_fail(agent: &mut L2CAgentBase) {
         ModelModule::set_mesh_visibility(agent.module_accessor,Hash40::new("murabito_shovelflip"),false);
     }
 }	
-#[acmd_script(
-    agent = "murabito",
-    script =  "effect_specialn2fail",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn villy_neutralb_2_fail_eff(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn villy_neutralb_2_fail_eff(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 5.0);
     if macros::is_excute(agent) {
         macros::EFFECT(agent, Hash40::new("murabito_soil2"), Hash40::new("top"), 12, 0, 0.5, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
     }
 }	
-#[acmd_script(
-    agent = "murabito",
-    script =  "sound_specialn2fail",
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn villy_neutralb_2_fail_snd(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn villy_neutralb_2_fail_snd(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 5.0);
     if macros::is_excute(agent) {
         macros::PLAY_SE(agent, Hash40::new("se_murabito_smash_l02"));
     }
 }	
-#[acmd_script(
-    agent = "murabito",
-    script =  "game_specialn3",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn villy_neutralb_3(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn villy_neutralb_3(agent: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(agent, 1.1);
     if macros::is_excute(agent) {
         ItemModule::remove_item(agent.module_accessor, 0);
@@ -301,12 +251,7 @@ unsafe fn villy_neutralb_3(agent: &mut L2CAgentBase) {
         macros::STOP_SE(agent, Hash40::new("se_item_item_get"));
     }
 }		
-#[acmd_script(
-    agent = "murabito",
-    script =  "effect_specialn3",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn villy_neutralb_3_eff(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn villy_neutralb_3_eff(agent: &mut L2CAgentBase) {
     for _ in 0..5 {
         wait(agent.lua_state_agent, 6.0);
         if macros::is_excute(agent) {
@@ -315,12 +260,7 @@ unsafe fn villy_neutralb_3_eff(agent: &mut L2CAgentBase) {
         }
     }
 }	
-#[acmd_script(
-    agent = "murabito",
-    script =  "sound_specialn3",
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn villy_neutralb_3_snd(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn villy_neutralb_3_snd(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 18.0);
     if macros::is_excute(agent) {
         macros::PLAY_SE(agent, Hash40::new("se_murabito_attackair_h01"));

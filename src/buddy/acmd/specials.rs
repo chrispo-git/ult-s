@@ -15,17 +15,13 @@ use crate::util::*;
 use super::*;
 
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		banjo_egg
-    );
+    Agent::new("buddy")
+	.acmd("game_specialnfire", banjo_egg)    
+	.acmd("game_specialairnfire", banjo_egg)    
+	.install();
 }
 
-#[acmd_script(
-    agent = "buddy",
-    scripts =  ["game_specialnfire", "game_specialairnfire"],
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn banjo_egg(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn banjo_egg(fighter: &mut L2CAgentBase) {
     	let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 2.0);
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);

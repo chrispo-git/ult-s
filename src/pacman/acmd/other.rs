@@ -14,16 +14,12 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[acmd_script( agent = "pacman", 
-script = "expression_fallspecial", 
-category = ACMD_EXPRESSION,
-low_priority)]
-unsafe fn pac_freefall(fighter: &mut L2CAgentBase) {
-    let lua_state = fighter.lua_state_agent;
+pub fn install() {
+  Agent::new("pacman")
+  .acmd("expression_fallspecial", pac_freefall)   
+  .install();
 }
 
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		pac_freefall
-    );
+unsafe extern "C" fn pac_freefall(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
 }

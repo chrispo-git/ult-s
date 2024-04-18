@@ -13,23 +13,20 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-        brawler_fair,
-		brawler_uair,
-		brawler_bair,
-		brawler_dair,
-		brawler_dair_bounce,
-		brawler_dair_eff,
-		brawler_dair_snd
-    );
+    Agent::new("miifighter")
+    .acmd("game_attackairlw", brawler_dair)    
+    .acmd("effect_attackairlw", brawler_dair_eff)    
+    .acmd("sound_attackairlw", brawler_dair_snd)    
+    .acmd("game_attackairlwbounce", brawler_dair_bounce)    
+    .acmd("game_attackairf", brawler_fair)    
+    .acmd("game_attackairhi", brawler_uair)    
+    .acmd("game_attackairb", brawler_bair)    
+    .install();
 }
-#[acmd_script(
-    agent = "miifighter",
-    script =  "game_attackairlw",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn brawler_dair(fighter: &mut L2CAgentBase) {
+
+unsafe extern "C" fn brawler_dair(fighter: &mut L2CAgentBase) {
 		if macros::is_excute(fighter) {
 			macros::SET_SPEED_EX(fighter, 0, 1.1, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
 			WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
@@ -64,12 +61,7 @@ unsafe fn brawler_dair(fighter: &mut L2CAgentBase) {
 			KineticModule::resume_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_CONTROL);
 		}
 }		
-#[acmd_script(
-    agent = "miifighter",
-    script =  "effect_attackairlw",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn brawler_dair_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn brawler_dair_eff(fighter: &mut L2CAgentBase) {
 		frame(fighter.lua_state_agent, 4.0);
 		if macros::is_excute(fighter) {	
 			macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_smash_flash"), Hash40::new("toer"), 0, 0, 0, 0, 0, 0, 0.8, true);
@@ -82,12 +74,7 @@ unsafe fn brawler_dair_eff(fighter: &mut L2CAgentBase) {
 			wait(fighter.lua_state_agent, 2.0);
 		}
 }		
-#[acmd_script(
-    agent = "miifighter",
-    script =  "sound_attackairlw",
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn brawler_dair_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn brawler_dair_snd(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 6.0);
     if macros::is_excute(fighter) {
         macros::PLAY_SEQUENCE(fighter, Hash40::new("seq_miifighter_rnd_special_c2_l01"));
@@ -97,12 +84,8 @@ unsafe fn brawler_dair_snd(fighter: &mut L2CAgentBase) {
         macros::PLAY_SE(fighter, Hash40::new("se_miifighter_special_c2_l02"));
     }
 }		
-#[acmd_script(
-    agent = "miifighter",
-    script =  "game_attackairlwbounce",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn brawler_dair_bounce(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn brawler_dair_bounce(fighter: &mut L2CAgentBase) {
+		frame(fighter.lua_state_agent, 2.0);
 		if macros::is_excute(fighter) {
 			KineticModule::resume_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_CONTROL);
 			AttackModule::clear_all(fighter.module_accessor);
@@ -110,12 +93,7 @@ unsafe fn brawler_dair_bounce(fighter: &mut L2CAgentBase) {
 			KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_JUMP);
 		}
 }		
-#[acmd_script(
-    agent = "miifighter",
-    script =  "game_attackairf",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn brawler_fair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn brawler_fair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 3.0);
 		if macros::is_excute(fighter) {
@@ -152,12 +130,7 @@ unsafe fn brawler_fair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }
-#[acmd_script(
-    agent = "miifighter",
-    script =  "game_attackairhi",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn brawler_uair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn brawler_uair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 2.0);
 		if macros::is_excute(fighter) {
@@ -179,12 +152,7 @@ unsafe fn brawler_uair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }
-#[acmd_script(
-    agent = "miifighter",
-    script =  "game_attackairb",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn brawler_bair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn brawler_bair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 2.0);
 		if macros::is_excute(fighter) {

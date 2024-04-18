@@ -14,12 +14,17 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[acmd_script(
-    agent = "richter",
-    script =  "game_turndash",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn richter_dashback(fighter: &mut L2CAgentBase) {
+pub fn install() {
+    Agent::new("richter")
+    .acmd("game_turndash", richter_dashback)    
+    .acmd("game_catch", richter_grab)    
+    .acmd("game_catchdash", richter_dashgrab)    
+    .acmd("game_catchturn", richter_pivotgrab)    
+    .acmd("effect_landingheavy", richter_landing)    
+    .install();
+}
+
+unsafe extern "C" fn richter_dashback(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 3.0);
 		if macros::is_excute(fighter) {
@@ -31,12 +36,7 @@ unsafe fn richter_dashback(fighter: &mut L2CAgentBase) {
 		}
 }	
 
-#[acmd_script(
-    agent = "richter",
-    script =  "game_catch",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn richter_grab(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn richter_grab(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 1.0);
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
@@ -64,12 +64,7 @@ unsafe fn richter_grab(fighter: &mut L2CAgentBase) {
 			GrabModule::set_rebound(fighter.module_accessor, /*CanCatchRebound*/ false);
 		}
 }	
-#[acmd_script(
-    agent = "richter",
-    script =  "game_catchdash",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn richter_dashgrab(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn richter_dashgrab(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 1.0);
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
@@ -97,12 +92,7 @@ unsafe fn richter_dashgrab(fighter: &mut L2CAgentBase) {
 			GrabModule::set_rebound(fighter.module_accessor, /*CanCatchRebound*/ false);
 		}
 }
-#[acmd_script(
-    agent = "richter",
-    script =  "game_catchturn",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn richter_pivotgrab(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn richter_pivotgrab(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 1.0);
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
@@ -131,24 +121,10 @@ unsafe fn richter_pivotgrab(fighter: &mut L2CAgentBase) {
 		}
 }
 
-#[acmd_script(
-    agent = "richter",
-    script =  "effect_landingheavy",
-    category = ACMD_EFFECT)]
-unsafe fn richter_landing(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn richter_landing(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 2.0);
 		if macros::is_excute(fighter) {
 			macros::LANDING_EFFECT(fighter, Hash40::new("sys_landing_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.9, 0, 0, 0, 0, 0, 0, true);
 		}
 }	
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		richter_dashback,
-        richter_grab,
-        richter_dashgrab,
-        richter_pivotgrab,
-        richter_landing
-    );
-}

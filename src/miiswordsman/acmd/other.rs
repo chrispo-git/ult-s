@@ -15,12 +15,13 @@ use crate::util::*;
 use super::*;
 use super::super::*;
 
-#[acmd_script(
-    agent = "miiswordsman",
-    script =  "game_catch",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn sword_grab(fighter: &mut L2CAgentBase) {
+pub fn install() {
+    Agent::new("miiswordsman")
+    .acmd("game_catch", sword_grab)    
+    .install();
+}
+
+unsafe extern "C" fn sword_grab(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 5.0);
 		if macros::is_excute(fighter) {
@@ -40,10 +41,4 @@ unsafe fn sword_grab(fighter: &mut L2CAgentBase) {
 			WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_CATCH_FLAG_CATCH_WAIT);
 			GrabModule::set_rebound(fighter.module_accessor, /*CanCatchRebound*/ false);
 		}
-}		
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		sword_grab
-    );
-}
+}	

@@ -14,12 +14,16 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[acmd_script(
-    agent = "palutena",
-    script =  "game_attacklw3",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn palu_dtilt(fighter: &mut L2CAgentBase) {
+pub fn install() {
+    Agent::new("palutena")
+    .acmd("game_attacklw3", palu_dtilt)    
+	.acmd("game_attackhi3", palu_utilt)    
+	.acmd("effect_attackhi3", palu_utilt_eff)    
+	.acmd("game_attacks3", palu_ftilt)    
+	.install();
+}
+
+unsafe extern "C" fn palu_dtilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 1);
 		frame(fighter.lua_state_agent, 14.0);
@@ -37,12 +41,7 @@ unsafe fn palu_dtilt(fighter: &mut L2CAgentBase) {
 		}
 }	
 
-#[acmd_script(
-    agent = "palutena",
-    script =  "game_attackhi3",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn palu_utilt(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn palu_utilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 8.0);
 		if macros::is_excute(fighter) {
@@ -62,12 +61,7 @@ unsafe fn palu_utilt(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }		
-#[acmd_script(
-    agent = "palutena",
-    script =  "effect_attackhi3",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn palu_utilt_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn palu_utilt_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	frame(fighter.lua_state_agent, 7.0);
     if macros::is_excute(fighter) {
@@ -103,12 +97,7 @@ unsafe fn palu_utilt_eff(fighter: &mut L2CAgentBase) {
     }
 }		
 
-#[acmd_script(
-    agent = "palutena",
-    script =  "game_attacks3",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn palu_ftilt(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn palu_ftilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 2.0);
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.875);
@@ -142,11 +131,3 @@ unsafe fn palu_ftilt(fighter: &mut L2CAgentBase) {
 			macros::HIT_NODE(fighter, Hash40::new("armr"), *HIT_STATUS_NORMAL);
 		}
 }		
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		palu_dtilt,
-        palu_utilt, palu_utilt_eff,
-        palu_ftilt
-    );
-}

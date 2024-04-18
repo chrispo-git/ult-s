@@ -15,12 +15,15 @@ use crate::util::*;
 use super::*;
 use super::super::*;
 
-#[acmd_script(
-    agent = "packun_poisonbreath",
-    script =  "game_explode",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn poison_explosion(fighter: &mut L2CAgentBase) {
+pub fn install() {
+    Agent::new("packun_poisonbreath")
+    .acmd("game_explode", poison_explosion)    
+    .acmd("effect_explode", poison_explosion_eff)    
+    .acmd("sound_explode", poison_explosion_snd)    
+    .install();
+}
+
+unsafe extern "C" fn poison_explosion(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	frame(fighter.lua_state_agent, 2.0);
 	if macros::is_excute(fighter) {
@@ -38,12 +41,7 @@ unsafe fn poison_explosion(fighter: &mut L2CAgentBase) {
 	}
 }	
 
-#[acmd_script(
-    agent = "packun_poisonbreath",
-    script =  "effect_explode",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn poison_explosion_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn poison_explosion_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	if macros::is_excute(fighter) {
 		EffectModule::kill_kind(fighter.module_accessor, smash::phx::Hash40::new("packun_poison_breath"), false, false);
@@ -57,20 +55,9 @@ unsafe fn poison_explosion_eff(fighter: &mut L2CAgentBase) {
 		macros::LAST_EFFECT_SET_RATE(fighter, 0.7);
     }
 }
-#[acmd_script(
-    agent = "packun_poisonbreath",
-    script =  "sound_explode",
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn poison_explosion_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn poison_explosion_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	if macros::is_excute(fighter) {
 		macros::PLAY_SE(fighter, Hash40::new("se_common_bomb_l"));
     }
-}
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		poison_explosion, poison_explosion_eff, poison_explosion_snd
-    );
 }

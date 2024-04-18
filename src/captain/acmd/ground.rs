@@ -14,19 +14,16 @@ use smash::phx::Vector3f;
 use smash::phx::Vector2f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		captain_jab3,
-		captain_jab3_eff,
-		captain_usmash
-	);
+    Agent::new("captain")
+    .acmd("game_attack13", captain_jab3)    
+    .acmd("effect_attack13", captain_jab3_eff)    
+    .acmd("game_attackhi4", captain_usmash)    
+    .install();
 }
 
-#[acmd_script(
-    agent = "captain",
-    script =  "game_attack13",
-    category = ACMD_GAME)]
-unsafe fn captain_jab3(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn captain_jab3(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 6.0);
 		if macros::is_excute(fighter) {
@@ -38,11 +35,7 @@ unsafe fn captain_jab3(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }	
-#[acmd_script(
-    agent = "captain",
-    script =  "effect_attack13",
-    category = ACMD_EFFECT)]
-unsafe fn captain_jab3_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn captain_jab3_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 5.0);
 		if macros::is_excute(fighter) {
@@ -55,8 +48,7 @@ unsafe fn captain_jab3_eff(fighter: &mut L2CAgentBase) {
 		}
 }
 
-#[acmd_script( agent = "captain", script = "game_attackhi4", category = ACMD_GAME, low_priority )]
-unsafe fn captain_usmash(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn captain_usmash(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.4545454545454545);
 	frame(fighter.lua_state_agent, 9.0);
     if macros::is_excute(fighter) {

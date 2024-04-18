@@ -15,19 +15,14 @@ use crate::util::*;
 use super::*;
 
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		bayo_fair1,
-		bayo_fair2
-    );
+	Agent::new("bayonetta")
+    .acmd("game_attackairf", bayo_fair1)
+	.acmd("game_attackairf2", bayo_fair2)
+	.install();
 }
 
 
-#[acmd_script(
-    agent = "bayonetta",
-    script =  "game_attackairf",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn bayo_fair1(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn bayo_fair1(fighter: &mut L2CAgentBase) {
     	let lua_state = fighter.lua_state_agent;
     	frame(fighter.lua_state_agent, 1.0);
 		if macros::is_excute(fighter) {
@@ -67,12 +62,7 @@ unsafe fn bayo_fair1(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }
-#[acmd_script(
-    agent = "bayonetta",
-    script =  "game_attackairf2",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn bayo_fair2(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn bayo_fair2(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 1.0);
 		if macros::is_excute(fighter) {

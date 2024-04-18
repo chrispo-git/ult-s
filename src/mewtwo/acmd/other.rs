@@ -13,18 +13,15 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		m2_dash,
-		m2_turn_dash
-    );
+	Agent::new("mewtwo")
+    .acmd("game_dash", m2_dash)    
+    .acmd("game_turndash", m2_turn_dash)    
+    .install();
 }
-#[acmd_script(
-    agent = "mewtwo",
-    script =  "game_dash",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn m2_dash(fighter: &mut L2CAgentBase) {
+
+unsafe extern "C" fn m2_dash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 1.0);
 		if macros::is_excute(fighter) {
@@ -44,12 +41,7 @@ unsafe fn m2_dash(fighter: &mut L2CAgentBase) {
 			WorkModule::enable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_DASH_TO_RUN);
 		}
 }	
-#[acmd_script(
-    agent = "mewtwo",
-    script =  "game_turndash",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn m2_turn_dash(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn m2_turn_dash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 1.0);
 		if macros::is_excute(fighter) {

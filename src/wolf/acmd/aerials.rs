@@ -14,12 +14,15 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[acmd_script(
-    agent = "wolf",
-    script =  "game_attackairb",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn wolf_bair(fighter: &mut L2CAgentBase) {
+pub fn install() {
+    Agent::new("wolf")
+    .acmd("game_attackairb", wolf_bair)    
+    .acmd("game_attackairf", wolf_fair)    
+    .acmd("game_attackairn", wolf_nair)    
+    .install();
+}
+
+unsafe extern "C" fn wolf_bair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 8.0);
 		if macros::is_excute(fighter) {
@@ -40,12 +43,7 @@ unsafe fn wolf_bair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }		
-#[acmd_script(
-    agent = "wolf",
-    script =  "game_attackairf",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn wolf_fair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn wolf_fair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
@@ -65,12 +63,7 @@ unsafe fn wolf_fair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }	
-#[acmd_script(
-    agent = "wolf",
-    script =  "game_attackairn",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn wolf_nair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn wolf_nair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 1.0);
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.55);
@@ -100,11 +93,3 @@ unsafe fn wolf_nair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }	
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		wolf_bair,
-        wolf_fair,
-        wolf_nair
-    );
-}

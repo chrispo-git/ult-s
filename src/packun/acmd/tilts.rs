@@ -15,12 +15,13 @@ use crate::util::*;
 use super::*;
 use super::super::*;
 
-#[acmd_script(
-    agent = "packun",
-    script =  "game_attacklw3",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn plant_dtilt(fighter: &mut L2CAgentBase) {
+pub fn install() {
+    Agent::new("packun")
+    .acmd("game_attacklw3", plant_dtilt)    
+    .install();
+}
+
+unsafe extern "C" fn plant_dtilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
 		frame(fighter.lua_state_agent, 8.0);
@@ -41,9 +42,3 @@ unsafe fn plant_dtilt(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }	
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		plant_dtilt
-    );
-}

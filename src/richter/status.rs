@@ -14,13 +14,13 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-
-
 pub fn install() {
-    smashline::install_status_scripts!(special_s_pre);
+    Agent::new("richter")
+    .status(Pre, *FIGHTER_STATUS_KIND_SPECIAL_S, special_s_pre)
+    .install();
 }
-#[status_script(agent = "richter", status = FIGHTER_STATUS_KIND_SPECIAL_S, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_PRE)]
-unsafe fn special_s_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
+
+unsafe extern "C" fn special_s_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
     StatusModule::init_settings(
         fighter.module_accessor,
         smash::app::SituationKind(*SITUATION_KIND_NONE),

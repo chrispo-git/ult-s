@@ -14,20 +14,15 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-
-
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		simon_da,
-        simon_da_eff,
-        simon_da_snd
-    );
+    Agent::new("simon")
+    .acmd("game_attackdash", simon_da)    
+    .acmd("effect_attackdash", simon_da_eff)    
+    .acmd("sound_attackdash", simon_da_snd)    
+    .install();
 }
-#[acmd_script(
-    agent = "simon",
-    script =  "game_attackdash",
-    category = ACMD_GAME)]
-unsafe fn simon_da(agent: &mut L2CAgentBase) {
+
+unsafe extern "C" fn simon_da(agent: &mut L2CAgentBase) {
     let lua_state = agent.lua_state_agent;
 	frame(agent.lua_state_agent, 12.0);
     if macros::is_excute(agent) {
@@ -46,11 +41,7 @@ unsafe fn simon_da(agent: &mut L2CAgentBase) {
         AttackModule::clear_all(agent.module_accessor);
     }
 }	
-#[acmd_script(
-    agent = "simon",
-    script =  "effect_attackdash",
-    category = ACMD_EFFECT)]
-unsafe fn simon_da_eff(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn simon_da_eff(agent: &mut L2CAgentBase) {
     let lua_state = agent.lua_state_agent;
     frame(agent.lua_state_agent, 7.0);
     if macros::is_excute(agent) {
@@ -69,11 +60,7 @@ unsafe fn simon_da_eff(agent: &mut L2CAgentBase) {
         macros::LANDING_EFFECT(agent, Hash40::new("sys_landing_smoke"), Hash40::new("top"), 0, 0, 8, 0, 0, 0, 0.4, 0, 0, 0, 0, 0, 0, true);
     }
 }	
-#[acmd_script(
-    agent = "simon",
-    script =  "sound_attackdash",
-    category = ACMD_SOUND)]
-unsafe fn simon_da_snd(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn simon_da_snd(agent: &mut L2CAgentBase) {
     let lua_state = agent.lua_state_agent;
     frame(agent.lua_state_agent, 11.0);
     if macros::is_excute(agent) {

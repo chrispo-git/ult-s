@@ -13,12 +13,14 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-	smashline::install_agent_frame_callbacks!(gnw);
+	Agent::new("gamewatch")
+	.on_line(Main, gnw)
+	.install();
 }		
 		
-#[fighter_frame_callback]
-pub fn gnw(fighter : &mut L2CFighterCommon) {
+unsafe extern "C" fn gnw(fighter : &mut L2CFighterCommon) {
     unsafe {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 		if is_default(boma) {

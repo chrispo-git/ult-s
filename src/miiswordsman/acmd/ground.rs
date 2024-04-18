@@ -15,12 +15,17 @@ use crate::util::*;
 use super::*;
 use super::super::*;
 
-#[acmd_script(
-    agent = "miiswordsman",
-    scripts =  ["game_attacks4"],
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn sword_fsmash(agent: &mut L2CAgentBase) {
+pub fn install() {
+    Agent::new("miiswordsman")
+    .acmd("game_attacks4", sword_fsmash)    
+    .acmd("game_attackhi4", sword_usmash)    
+    .acmd("sound_attackhi4", sword_usmash_snd)    
+    .acmd("effect_attackhi4", sword_usmash_eff)    
+    .acmd("game_attack11", sword_jab1)    
+    .install();
+}
+
+unsafe extern "C" fn sword_fsmash(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 10.0);
     if macros::is_excute(agent) {
         WorkModule::on_flag(agent.module_accessor, *FIGHTER_STATUS_ATTACK_FLAG_START_SMASH_HOLD);
@@ -40,12 +45,7 @@ unsafe fn sword_fsmash(agent: &mut L2CAgentBase) {
         AttackModule::clear_all(agent.module_accessor);
     }
 }	
-#[acmd_script(
-    agent = "miiswordsman",
-    scripts =  ["game_attackhi4"],
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn sword_usmash(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sword_usmash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 5.0);
 		if macros::is_excute(fighter) {
@@ -67,12 +67,7 @@ unsafe fn sword_usmash(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }	
-#[acmd_script(
-    agent = "miiswordsman",
-    scripts =  ["sound_attackhi4"],
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn sword_usmash_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sword_usmash_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 6.0);
 		if macros::is_excute(fighter) {
@@ -89,12 +84,7 @@ unsafe fn sword_usmash_snd(fighter: &mut L2CAgentBase) {
 			macros::PLAY_LANDING_SE(fighter, Hash40::new("se_miiswordsman_landing03"));
 		}
 }		
-#[acmd_script(
-    agent = "miiswordsman",
-    scripts =  ["effect_attackhi4"],
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn sword_usmash_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sword_usmash_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 2.0);
 		if macros::is_excute(fighter) {
@@ -117,12 +107,7 @@ unsafe fn sword_usmash_eff(fighter: &mut L2CAgentBase) {
 		}
 }	
 
-#[acmd_script(
-    agent = "miiswordsman",
-    script =  "game_attack11",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn sword_jab1(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sword_jab1(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 6.0);
 		if macros::is_excute(fighter) {
@@ -139,12 +124,4 @@ unsafe fn sword_jab1(fighter: &mut L2CAgentBase) {
 		if macros::is_excute(fighter) {
 			WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_FLAG_ENABLE_NO_HIT_COMBO);
 		}
-}
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		sword_fsmash,
-        sword_usmash, sword_usmash_eff, sword_usmash_snd,
-        sword_jab1
-    );
 }

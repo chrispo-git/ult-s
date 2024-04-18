@@ -13,19 +13,15 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		banjo_jab3,
-		banjo_da
-    );
+    Agent::new("buddy")
+	.acmd("game_attack13", banjo_jab3)    
+	.acmd("game_attackdash", banjo_da)    
+	.install();
 }
 
-#[acmd_script(
-    agent = "buddy",
-    script =  "game_attack13",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn banjo_jab3(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn banjo_jab3(fighter: &mut L2CAgentBase) {
     	let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 5.0);
 		if macros::is_excute(fighter) {
@@ -45,12 +41,7 @@ unsafe fn banjo_jab3(fighter: &mut L2CAgentBase) {
 		}
 }
 
-#[acmd_script(
-    agent = "buddy",
-    script =  "game_attackdash",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn banjo_da(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn banjo_da(fighter: &mut L2CAgentBase) {
     	let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 9.0);
 		if macros::is_excute(fighter) {

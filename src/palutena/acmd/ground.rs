@@ -14,12 +14,15 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[acmd_script(
-    agent = "palutena",
-    script =  "game_attack100end",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn palu_jab_100_end(fighter: &mut L2CAgentBase) {
+pub fn install() {
+    Agent::new("palutena")
+    .acmd("game_attack100end", palu_jab_100_end)    
+	.acmd("game_attack11", palu_jab_1)    
+	.acmd("game_attackdash", palu_da)    
+	.install();
+}
+
+unsafe extern "C" fn palu_jab_100_end(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 3.0);
 		if macros::is_excute(fighter) {
@@ -33,12 +36,7 @@ unsafe fn palu_jab_100_end(fighter: &mut L2CAgentBase) {
 		}
 }	
 
-#[acmd_script(
-    agent = "palutena",
-    script =  "game_attack11",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn palu_jab_1(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn palu_jab_1(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 1.0);
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
@@ -67,8 +65,7 @@ unsafe fn palu_jab_1(fighter: &mut L2CAgentBase) {
 		}
 }	
 
-#[acmd_script( agent = "palutena", script = "game_attackdash", category = ACMD_GAME, low_priority )]
-unsafe fn palu_da(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn palu_da(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 5.0);
     if macros::is_excute(agent) {
         macros::HIT_NODE(agent, Hash40::new("bust"), *HIT_STATUS_NORMAL);
@@ -122,12 +119,4 @@ unsafe fn palu_da(agent: &mut L2CAgentBase) {
     if macros::is_excute(agent) {
         AttackModule::clear_all(agent.module_accessor);
     }
-}
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		palu_jab_100_end,
-        palu_jab_1,
-        palu_da
-    );
 }

@@ -15,12 +15,7 @@ use crate::util::*;
 use super::*;
 use super::super::*;
 
-#[acmd_script(
-    agent = "murabito",
-    script =  "game_attackhi3toad",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn toad_utilt(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn toad_utilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 2.0);
 		if macros::is_excute(fighter) {
@@ -41,12 +36,7 @@ unsafe fn toad_utilt(fighter: &mut L2CAgentBase) {
 			ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_MURABITO_GENERATE_ARTICLE_UMBRELLA,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
 		}
 }	
-#[acmd_script(
-    agent = "murabito",
-    script =  "sound_attackhi3toad",
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn toad_utilt_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn toad_utilt_snd(fighter: &mut L2CAgentBase) {
 	let lua_state = fighter.lua_state_agent;
 	frame(fighter.lua_state_agent, 5.0);
 	if macros::is_excute(fighter) {
@@ -54,12 +44,7 @@ unsafe fn toad_utilt_snd(fighter: &mut L2CAgentBase) {
 		macros::PLAY_SE(fighter, Hash40::new("se_murabito_swing_s"));
 	};
 }
-#[acmd_script(
-    agent = "murabito",
-    script =  "effect_attackhi3toad",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn toad_utilt_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn toad_utilt_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 6.0);
 		if macros::is_excute(fighter) {
@@ -72,12 +57,7 @@ unsafe fn toad_utilt_eff(fighter: &mut L2CAgentBase) {
 		}
 }	
 
-#[acmd_script(
-    agent = "murabito",
-    script =  "game_attacks3toad",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn toad_ftilt(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn toad_ftilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 2.0);
 		macros::FT_MOTION_RATE(fighter, 0.5);
@@ -102,12 +82,7 @@ unsafe fn toad_ftilt(fighter: &mut L2CAgentBase) {
 			ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_MURABITO_GENERATE_ARTICLE_UMBRELLA,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
 		}
 }	
-#[acmd_script(
-    agent = "murabito",
-    script =  "effect_attacks3toad",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn toad_ftilt_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn toad_ftilt_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 12.0);
 		if macros::is_excute(fighter) {
@@ -123,12 +98,7 @@ unsafe fn toad_ftilt_eff(fighter: &mut L2CAgentBase) {
 			macros::EFFECT(fighter, Hash40::new("sys_erace_smoke"), Hash40::new("top"), 10, 2, 0, 0, 0, 0, 0.8, 0, 0, 0, 0, 0, 0, false);
 		}
 }	
-#[acmd_script(
-    agent = "murabito",
-    script =  "sound_attacks3toad",
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn toad_ftilt_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn toad_ftilt_snd(fighter: &mut L2CAgentBase) {
 	let lua_state = fighter.lua_state_agent;
 	frame(fighter.lua_state_agent, 14.0);
 	if macros::is_excute(fighter) {
@@ -137,12 +107,7 @@ unsafe fn toad_ftilt_snd(fighter: &mut L2CAgentBase) {
 	};
 }	
 
-#[acmd_script(
-    agent = "murabito",
-    script =  "game_attacklw3toad",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn toad_dtilt(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn toad_dtilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_MURABITO_GENERATE_ARTICLE_UMBRELLA, false, 0);
@@ -165,21 +130,11 @@ unsafe fn toad_dtilt(fighter: &mut L2CAgentBase) {
 			ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_MURABITO_GENERATE_ARTICLE_UMBRELLA,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
 		}
 }	
-#[acmd_script(
-    agent = "murabito",
-    script =  "effect_attacklw3toad",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn toad_dtilt_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn toad_dtilt_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		
 }	
-#[acmd_script(
-    agent = "murabito",
-    script =  "sound_attacklw3toad",
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn toad_dtilt_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn toad_dtilt_snd(fighter: &mut L2CAgentBase) {
 	let lua_state = fighter.lua_state_agent;
 	frame(fighter.lua_state_agent, 6.0);
 	if macros::is_excute(fighter) {
@@ -187,12 +142,7 @@ unsafe fn toad_dtilt_snd(fighter: &mut L2CAgentBase) {
 		macros::PLAY_SE(fighter, Hash40::new("se_murabito_smash_h01"));
 	};
 }	
-#[acmd_script(
-    agent = "murabito",
-    script =  "expression_attacklw3toad",
-    category = ACMD_EXPRESSION,
-	low_priority)]
-unsafe fn toad_dtilt_expr(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn toad_dtilt_expr(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			ItemModule::set_have_item_visibility(fighter.module_accessor, false, 0);
@@ -204,9 +154,16 @@ unsafe fn toad_dtilt_expr(fighter: &mut L2CAgentBase) {
 }	
 
 pub fn install() {
-    smashline::install_acmd_scripts!(
-        toad_utilt, toad_utilt_eff, toad_utilt_snd,
-        toad_ftilt, toad_ftilt_eff, toad_ftilt_snd,
-        toad_dtilt, toad_dtilt_eff, toad_dtilt_snd, toad_dtilt_expr
-    );
+    Agent::new("murabito")
+        .game_acmd("game_attackhi3toad", toad_utilt)
+        .sound_acmd("sound_attackhi3toad", toad_utilt_snd)
+        .effect_acmd("effect_attackhi3toad", toad_utilt_eff)
+        .game_acmd("game_attacks3toad", toad_ftilt)
+        .effect_acmd("effect_attacks3toad", toad_ftilt_eff)
+        .sound_acmd("sound_attacks3toad", toad_ftilt_snd)
+        .game_acmd("game_attacklw3toad", toad_dtilt)
+        .effect_acmd("effect_attacklw3toad", toad_dtilt_eff)
+        .sound_acmd("sound_attacklw3toad", toad_dtilt_snd)
+        .expression_acmd("expression_attacklw3toad", toad_dtilt_expr)
+        .install();
 }

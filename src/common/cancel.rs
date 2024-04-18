@@ -76,8 +76,7 @@ pub(crate) fn check_jump(boma: &mut smash::app::BattleObjectModuleAccessor) -> b
 
 //
 
-#[fighter_frame_callback]
-pub fn jump_cancel(fighter : &mut L2CFighterCommon) {
+unsafe extern "C" fn jump_cancel(fighter : &mut L2CFighterCommon) {
     unsafe {	
 		let lua_state = fighter.lua_state_agent;
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);    
@@ -96,7 +95,7 @@ pub fn jump_cancel(fighter : &mut L2CFighterCommon) {
     }
 }
 pub fn install() {
-    smashline::install_agent_frame_callbacks!(
-		jump_cancel
-	);
+	Agent::new("fighter")
+	.on_line(Main, jump_cancel)
+	.install();
 }

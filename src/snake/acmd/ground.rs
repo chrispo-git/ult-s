@@ -14,8 +14,13 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[acmd_script( agent = "snake", script = "game_attackdashlightthrow", category = ACMD_GAME, low_priority)]
-unsafe fn snake_dash_attack_throw(fighter: &mut L2CAgentBase) {
+pub fn install() {
+    Agent::new("snake")
+    .acmd("game_attackdashlightthrow", snake_dash_attack_throw)    
+    .install();
+}
+
+unsafe extern "C" fn snake_dash_attack_throw(fighter: &mut L2CAgentBase) {
 	let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 12.0);
 		if macros::is_excute(fighter) {
@@ -24,8 +29,7 @@ unsafe fn snake_dash_attack_throw(fighter: &mut L2CAgentBase) {
 }
 
 //first hit
-/* #[acmd_script( agent = "snake", script = "game_attacks4", category = ACMD_GAME )]
-unsafe fn snake_side_smash_game(fighter : &mut L2CAgentBase) {
+/* unsafe extern "C" fn snake_side_smash_game(fighter : &mut L2CAgentBase) {
     let entry_id = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
     frame(fighter.lua_state_agent, 4.0);
     if is_excute(fighter) {
@@ -68,8 +72,7 @@ unsafe fn snake_side_smash_game(fighter : &mut L2CAgentBase) {
         ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_SNAKE_GENERATE_ARTICLE_RPG7, ArticleOperationTarget(0));
     }
 }
-#[acmd_script( agent = "snake", script = "expression_attacks4", category = ACMD_EXPRESSION )]
-unsafe fn snake_side_smash_expr(fighter : &mut L2CAgentBase) {
+unsafe extern "C" fn snake_side_smash_expr(fighter : &mut L2CAgentBase) {
     if is_excute(fighter) {
         slope!(fighter, *MA_MSC_CMD_SLOPE_SLOPE, *SLOPE_STATUS_LR);
     }
@@ -82,8 +85,7 @@ unsafe fn snake_side_smash_expr(fighter : &mut L2CAgentBase) {
         RUMBLE_HIT(fighter, Hash40::new("rbkind_attackm"), 0);
     }
 }
-#[acmd_script( agent = "snake", script = "sound_attacks4", category = ACMD_SOUND )]
-unsafe fn snake_side_smash_snd(fighter : &mut L2CAgentBase) {
+unsafe extern "C" fn snake_side_smash_snd(fighter : &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 15.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_common_sword_swing_s"));
@@ -94,8 +96,7 @@ unsafe fn snake_side_smash_snd(fighter : &mut L2CAgentBase) {
         PLAY_SE(fighter, Hash40::new("se_snake_squat_gear"));
     }
 }
-#[acmd_script( agent = "snake", script = "effect_attacks4", category = ACMD_EFFECT )]
-unsafe fn snake_side_smash_eff(fighter : &mut L2CAgentBase) {
+unsafe extern "C" fn snake_side_smash_eff(fighter : &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 13.0);
     if is_excute(fighter) {
         EFFECT(fighter, Hash40::new("sys_smash_flash"), Hash40::new("haver"), 0, 0, 0, 0, 0, 0, 0.8, 0, 0, 0, 0, 0, 0, true);
@@ -119,8 +120,7 @@ unsafe fn snake_side_smash_eff(fighter : &mut L2CAgentBase) {
     }
 }
 //charge
-#[acmd_script( agent = "snake", script = "effect_attacks4charge", category = ACMD_EFFECT )]
-unsafe fn snake_side_smash_charge_eff(fighter : &mut L2CAgentBase) {
+unsafe extern "C" fn snake_side_smash_charge_eff(fighter : &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 5.0);
     for _ in 0..34 {
         if is_excute(fighter) {
@@ -133,8 +133,7 @@ unsafe fn snake_side_smash_charge_eff(fighter : &mut L2CAgentBase) {
     }
 }
 //second hit
-#[acmd_script( agent = "snake", script = "game_attacks4s2", category = ACMD_GAME )]
-unsafe fn snake_side_smash_2_game(fighter : &mut L2CAgentBase) {
+unsafe extern "C" fn snake_side_smash_2_game(fighter : &mut L2CAgentBase) {
     let entry_id = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
     frame(fighter.lua_state_agent, 9.0);
     if is_excute(fighter) {
@@ -166,8 +165,7 @@ unsafe fn snake_side_smash_2_game(fighter : &mut L2CAgentBase) {
         ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_SNAKE_GENERATE_ARTICLE_RPG7, ArticleOperationTarget(0));
     }
 }
-#[acmd_script( agent = "snake", script = "expression_attacks4s2", category = ACMD_EXPRESSION )]
-unsafe fn snake_side_smash_2_expr(fighter : &mut L2CAgentBase) {
+unsafe extern "C" fn snake_side_smash_2_expr(fighter : &mut L2CAgentBase) {
     if is_excute(fighter) {
         slope!(fighter, *MA_MSC_CMD_SLOPE_SLOPE, *SLOPE_STATUS_LR);
     }
@@ -180,8 +178,7 @@ unsafe fn snake_side_smash_2_expr(fighter : &mut L2CAgentBase) {
         RUMBLE_HIT(fighter, Hash40::new("rbkind_attackm"), 0);
     }
 }
-#[acmd_script( agent = "snake", script = "sound_attacks4s2", category = ACMD_SOUND )]
-unsafe fn snake_side_smash_2_snd(fighter : &mut L2CAgentBase) {
+unsafe extern "C" fn snake_side_smash_2_snd(fighter : &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 7.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_common_sword_swing_s"));
@@ -192,8 +189,7 @@ unsafe fn snake_side_smash_2_snd(fighter : &mut L2CAgentBase) {
         PLAY_SE(fighter, Hash40::new("se_snake_squat_gear"));
     }
 }
-#[acmd_script( agent = "snake", script = "effect_attacks4s2", category = ACMD_EFFECT )]
-unsafe fn snake_side_smash_2_eff(fighter : &mut L2CAgentBase) {
+unsafe extern "C" fn snake_side_smash_2_eff(fighter : &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 8.0);
     if is_excute(fighter) {
         AFTER_IMAGE4_ON_arg29(fighter, Hash40::new("tex_item_killsword1"), Hash40::new("tex_item_killsword2"), 4, Hash40::new("haver"), 0.0, 0.0, 0.0, Hash40::new("haver"), 0.0, 5.5, 0.0, true, Hash40::new("null"), Hash40::new("haver"), 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0, *EFFECT_AXIS_X, 0, *TRAIL_BLEND_ALPHA, 101, *TRAIL_CULL_NONE, 1.2, 0.2);
@@ -213,8 +209,7 @@ unsafe fn snake_side_smash_2_eff(fighter : &mut L2CAgentBase) {
     }
 }
 //third hit
-#[acmd_script( agent = "snake", script = "game_attacks4s3", category = ACMD_GAME )]
-unsafe fn snake_side_smash_3_game(fighter : &mut L2CAgentBase) {
+unsafe extern "C" fn snake_side_smash_3_game(fighter : &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 9.0);
     if is_excute(fighter) {
         ATTACK(fighter, 0, 0, Hash40::new("haver"), 7.5, 361, 75, 0, 85, 3.0, 0.0, 0.0, 0.0, None, None, None, 1.5, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_cutup"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_CUTUP, *ATTACK_REGION_SWORD);
@@ -229,8 +224,7 @@ unsafe fn snake_side_smash_3_game(fighter : &mut L2CAgentBase) {
         ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_SNAKE_GENERATE_ARTICLE_RPG7, ArticleOperationTarget(0));
     }
 }
-#[acmd_script( agent = "snake", script = "expression_attacks4s3", category = ACMD_EXPRESSION )]
-unsafe fn snake_side_smash_3_expr(fighter : &mut L2CAgentBase) {
+unsafe extern "C" fn snake_side_smash_3_expr(fighter : &mut L2CAgentBase) {
     if is_excute(fighter) {
         slope!(fighter, *MA_MSC_CMD_SLOPE_SLOPE, *SLOPE_STATUS_LR);
     }
@@ -243,8 +237,7 @@ unsafe fn snake_side_smash_3_expr(fighter : &mut L2CAgentBase) {
         RUMBLE_HIT(fighter, Hash40::new("rbkind_attackm"), 0);
     }
 }
-#[acmd_script( agent = "snake", script = "sound_attacks4s3", category = ACMD_SOUND )]
-unsafe fn snake_side_smash_3_snd(fighter : &mut L2CAgentBase) {
+unsafe extern "C" fn snake_side_smash_3_snd(fighter : &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 9.0);
     if is_excute(fighter) {
         PLAY_SE(fighter, Hash40::new("se_common_sword_swing_s"));
@@ -255,8 +248,7 @@ unsafe fn snake_side_smash_3_snd(fighter : &mut L2CAgentBase) {
         PLAY_SE(fighter, Hash40::new("se_snake_squat_gear"));
     }
 }
-#[acmd_script( agent = "snake", script = "effect_attacks4s3", category = ACMD_EFFECT )]
-unsafe fn snake_side_smash_3_eff(fighter : &mut L2CAgentBase) {
+unsafe extern "C" fn snake_side_smash_3_eff(fighter : &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 8.0);
     if is_excute(fighter) {
         macros::AFTER_IMAGE4_ON_arg29(fighter, Hash40::new("tex_item_killsword1"), Hash40::new("tex_item_killsword2"), 4, Hash40::new("haver"), 0.0, 0.0, 0.0, Hash40::new("haver"), 0.0, 5.5, 0.0, true, Hash40::new("null"), Hash40::new("haver"), 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0, *EFFECT_AXIS_X, 0, *TRAIL_BLEND_ALPHA, 101, *TRAIL_CULL_NONE, 1.2, 0.2);
@@ -275,25 +267,3 @@ unsafe fn snake_side_smash_3_eff(fighter : &mut L2CAgentBase) {
         macros::EFFECT_OFF_KIND(fighter, Hash40::new("sys_killsword_light2"), false, true);
     }
 }*/
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		snake_dash_attack_throw
-        /*snake_side_smash_game,
-        snake_side_smash_expr,
-        snake_side_smash_snd,
-        snake_side_smash_eff,
-
-        snake_side_smash_charge_eff,
-
-        snake_side_smash_2_game,
-        snake_side_smash_2_expr,
-        snake_side_smash_2_snd,
-        snake_side_smash_2_eff,
-
-        snake_side_smash_3_game,
-        snake_side_smash_3_expr,
-        snake_side_smash_3_snd,
-        snake_side_smash_3_eff,*/
-    );
-}

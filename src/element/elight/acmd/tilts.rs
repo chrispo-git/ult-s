@@ -13,18 +13,16 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-	smashline::install_acmd_scripts!(
-		mythra_ftilt, mythra_dtilt, mythra_utilt
-	);
+	Agent::new("elight")
+    .acmd("game_attackairn", mythra_ftilt)    
+    .acmd("game_attacklw3", mythra_dtilt)    
+    .acmd("game_attackhi3", mythra_utilt)    
+    .install();
 }
 
-
-#[acmd_script( agent = "elight", 
-scripts = ["game_attacks3"], 
-category = ACMD_GAME,
-low_priority)]
-unsafe fn mythra_ftilt(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn mythra_ftilt(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 5.0);
 		if ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_ELIGHT_GENERATE_ARTICLE_ESWORD) {
@@ -68,11 +66,7 @@ unsafe fn mythra_ftilt(fighter: &mut L2CAgentBase) {
 		frame(fighter.lua_state_agent, 30.0);
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 1);
 }
-#[acmd_script( agent = "elight", 
-scripts = ["game_attacklw3"], 
-category = ACMD_GAME,
-low_priority)]
-unsafe fn mythra_dtilt(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn mythra_dtilt(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 1.0);
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
@@ -115,11 +109,7 @@ unsafe fn mythra_dtilt(fighter: &mut L2CAgentBase) {
 		frame(fighter.lua_state_agent, 24.0);
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.0);
 }
-#[acmd_script( agent = "elight", 
-scripts = ["game_attackhi3"], 
-category = ACMD_GAME,
-low_priority)]
-unsafe fn mythra_utilt(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn mythra_utilt(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 1.0);
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);

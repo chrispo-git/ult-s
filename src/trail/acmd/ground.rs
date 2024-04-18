@@ -14,12 +14,14 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[acmd_script(
-    agent = "trail",
-    script =  "game_attack11",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn sora_jab1(fighter: &mut L2CAgentBase) {
+pub fn install() {
+    Agent::new("trail")
+    .acmd("game_attack11", sora_jab1)    
+    .acmd("game_attack12", sora_jab2)    
+	.install();
+}
+
+unsafe extern "C" fn sora_jab1(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 1.0);
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
@@ -68,12 +70,7 @@ unsafe fn sora_jab1(fighter: &mut L2CAgentBase) {
 			WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_FLAG_ENABLE_NO_HIT_COMBO);
 		};
 }
-#[acmd_script(
-    agent = "trail",
-    script =  "game_attack12",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn sora_jab2(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sora_jab2(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 7.0);
 		if macros::is_excute(fighter) {
@@ -102,11 +99,4 @@ unsafe fn sora_jab2(fighter: &mut L2CAgentBase) {
 		if macros::is_excute(fighter) {
 			WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_FLAG_ENABLE_NO_HIT_COMBO);
 		};
-}
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		sora_jab1,
-        sora_jab2
-    );
 }

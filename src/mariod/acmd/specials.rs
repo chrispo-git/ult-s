@@ -13,25 +13,23 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-	smashline::install_acmd_scripts!(
-		doc_sideb,
-		doc_air_downb,
-		doc_upb,
-		doc_upb2,
-		doc_upb2_eff,
-		doc_upb_land,
-		doc_upb_land_snd,
-		doc_upb_land_eff,
-		doc_upb_land_snd
-	);
+	Agent::new("mariod")
+    .acmd("game_specials", doc_sideb)    
+    .acmd("game_specialairs", doc_sideb)    
+    .acmd("game_specialairlw", doc_air_downb)    
+    .acmd("game_specialhi", doc_upb)    
+    .acmd("game_specialairhi", doc_upb)    
+    .acmd("game_specialhi2", doc_upb2)    
+    .acmd("effect_specialhi2", doc_upb2_eff)    
+    .acmd("game_specialhilanding", doc_upb_land)    
+    .acmd("effect_specialhilanding", doc_upb_land_eff)    
+    .acmd("sound_specialhilanding", doc_upb_land_snd)    
+    .install();
 }	
-#[acmd_script(
-    agent = "mariod",
-    scripts =  ["game_specials", "game_specialairs"],
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn doc_sideb(fighter: &mut L2CAgentBase) {
+
+unsafe extern "C" fn doc_sideb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     let boma = fighter.module_accessor;
     if macros::is_excute(fighter) {
@@ -70,12 +68,7 @@ unsafe fn doc_sideb(fighter: &mut L2CAgentBase) {
         ArticleModule::remove_exist(boma, *FIGHTER_MARIOD_GENERATE_ARTICLE_DRMANTLE, smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
     }
 }
-#[acmd_script(
-    agent = "mariod",
-    script =  "game_specialairlw",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn doc_air_downb(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn doc_air_downb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	frame(fighter.lua_state_agent, 2.0);
 	if macros::is_excute(fighter) {
@@ -122,12 +115,7 @@ unsafe fn doc_air_downb(fighter: &mut L2CAgentBase) {
 		AttackModule::clear_all(fighter.module_accessor);
 	};
 }
-#[acmd_script(
-    agent = "mariod",
-    scripts =  ["game_specialhi", "game_specialairhi"],
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn doc_upb(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn doc_upb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 3.0);
 		if macros::is_excute(fighter) {
@@ -151,13 +139,7 @@ unsafe fn doc_upb(fighter: &mut L2CAgentBase) {
 		}
 	}
 
-
-#[acmd_script(
-    agent = "mariod",
-    script =  "game_specialhi2",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn doc_upb2(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn doc_upb2(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 1.0);
 		if macros::is_excute(fighter) {
@@ -166,16 +148,11 @@ unsafe fn doc_upb2(fighter: &mut L2CAgentBase) {
 			macros::ATTACK(fighter, /*ID*/ 2, /*Part*/ 0, /*Bone*/ Hash40::new("kneel"), /*Damage*/ 12.0, /*Angle*/ 60, /*KBG*/ 85, /*FKB*/ 0, /*BKB*/ 75, /*Size*/ 5.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_BODY);
 		}
 }
-#[acmd_script(
-    agent = "mariod",
-    script =  "effect_specialhi2",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn doc_upb2_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn doc_upb2_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 1.0);
-			for _ in 0..12  
- {
+		for _ in 0..12  
+ 		{
 			if macros::is_excute(fighter) {
 				macros::EFFECT_FOLLOW_FLIP_ALPHA(fighter, Hash40::new("sys_attack_speedline"), Hash40::new("sys_attack_speedline"), Hash40::new("top"), 0, 22, 2.5, 90, 0, 0, 1.4, true, *EF_FLIP_YZ, 0.3);
 			}
@@ -183,12 +160,7 @@ unsafe fn doc_upb2_eff(fighter: &mut L2CAgentBase) {
 		}
 }
 
-#[acmd_script(
-    agent = "mariod",
-    script =  "game_specialhilanding",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn doc_upb_land(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn doc_upb_land(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 1.0);
 		if macros::is_excute(fighter) {
@@ -203,12 +175,7 @@ unsafe fn doc_upb_land(fighter: &mut L2CAgentBase) {
 		}
 }
 
-#[acmd_script(
-    agent = "mariod",
-    script =  "effect_specialhilanding",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn doc_upb_land_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn doc_upb_land_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 1.0);
 		if macros::is_excute(fighter) {
@@ -217,12 +184,7 @@ unsafe fn doc_upb_land_eff(fighter: &mut L2CAgentBase) {
 		}
 }
 
-#[acmd_script(
-    agent = "mariod",
-    script =  "sound_specialhilanding",
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn doc_upb_land_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn doc_upb_land_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 1.0);
 		if macros::is_excute(fighter) {

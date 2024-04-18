@@ -14,12 +14,11 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[acmd_script(
-    agent = "pitb",
-    script =  "game_attacklw3",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn dpit_dtilt(fighter: &mut L2CAgentBase) {
+pub fn install() {
+    
+}
+
+unsafe extern "C" fn dpit_dtilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 6.0);
 		if macros::is_excute(fighter) {
@@ -31,9 +30,3 @@ unsafe fn dpit_dtilt(fighter: &mut L2CAgentBase) {
 		}
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.8);
 }	
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		//dpit_dtilt
-    );
-}

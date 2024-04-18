@@ -14,12 +14,13 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[acmd_script(
-    agent = "sheik",
-    script =  "game_throwhi",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn sheik_uthrow(fighter: &mut L2CAgentBase) {
+pub fn install() {
+    Agent::new("sheik")
+    .acmd("game_throwhi", sheik_uthrow)    
+    .install();
+}
+
+unsafe extern "C" fn sheik_uthrow(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, /*ID*/ 0, /*Damage*/ 6.0, /*Angle*/ 90, /*KBG*/ 115, /*FKB*/ 0, /*BKB*/ 50, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
@@ -34,10 +35,4 @@ unsafe fn sheik_uthrow(fighter: &mut L2CAgentBase) {
 			macros::ATK_HIT_ABS(fighter, *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, Hash40::new("throw"), WorkModule::get_int64(fighter.module_accessor,*FIGHTER_STATUS_THROW_WORK_INT_TARGET_OBJECT), WorkModule::get_int64(fighter.module_accessor,*FIGHTER_STATUS_THROW_WORK_INT_TARGET_HIT_GROUP), WorkModule::get_int64(fighter.module_accessor,*FIGHTER_STATUS_THROW_WORK_INT_TARGET_HIT_NO));
 			AttackModule::clear_all(fighter.module_accessor);
 		}
-}
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		sheik_uthrow
-    );
 }

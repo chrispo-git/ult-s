@@ -15,12 +15,13 @@ use crate::util::*;
 use super::*;
 use super::super::*;
 
-#[acmd_script(
-    agent = "lucina",
-    script =  "game_throwhi",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn lucina_uthrow(fighter: &mut L2CAgentBase) {
+pub fn install() {
+    Agent::new("lucina")
+    .acmd("game_throwhi", lucina_uthrow)    
+    .install();
+}
+
+unsafe extern "C" fn lucina_uthrow(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 		if macros::is_excute(fighter) {
@@ -40,10 +41,4 @@ unsafe fn lucina_uthrow(fighter: &mut L2CAgentBase) {
 		if macros::is_excute(fighter) {
 			macros::ATK_HIT_ABS(fighter, *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, Hash40::new("throw"), WorkModule::get_int64(fighter.module_accessor, *FIGHTER_STATUS_THROW_WORK_INT_TARGET_OBJECT), WorkModule::get_int64(fighter.module_accessor, *FIGHTER_STATUS_THROW_WORK_INT_TARGET_HIT_GROUP),  WorkModule::get_int64(fighter.module_accessor, *FIGHTER_STATUS_THROW_WORK_INT_TARGET_HIT_NO));
 		};
-}
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		lucina_uthrow
-    );
 }

@@ -13,20 +13,17 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		falco_bair,
-		falco_nair,
-		falco_nair_eff,
-		falco_nair_snd
-    );
+    Agent::new("falco")
+    .acmd("game_attackairb", falco_bair)    
+    .acmd("game_attackairn", falco_nair)    
+    .acmd("effect_attackairn", falco_nair_eff)    
+    .acmd("sound_attackairn", falco_nair_snd)   
+    .install();
 }
-#[acmd_script(
-    agent = "falco",
-    script =  "game_attackairb",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn falco_bair(fighter: &mut L2CAgentBase) {
+
+unsafe extern "C" fn falco_bair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.75);
 		frame(fighter.lua_state_agent, 4.0);
@@ -54,12 +51,7 @@ unsafe fn falco_bair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }		
-#[acmd_script(
-    agent = "falco",
-    script =  "game_attackairn",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn falco_nair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn falco_nair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 1.0);
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.42);
@@ -83,12 +75,7 @@ unsafe fn falco_nair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }	
-#[acmd_script(
-    agent = "falco",
-    script =  "effect_attackairn",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn falco_nair_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn falco_nair_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 6.0);
 		if macros::is_excute(fighter) {
@@ -106,12 +93,7 @@ unsafe fn falco_nair_eff(fighter: &mut L2CAgentBase) {
 			macros::EFFECT_OFF_KIND(fighter, Hash40::new("sys_attack_speedline"), true, true);
 		}
 }	
-#[acmd_script(
-    agent = "falco",
-    script =  "sound_attackairn",
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn falco_nair_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn falco_nair_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 7.0);
 		if macros::is_excute(fighter) {
@@ -119,8 +101,7 @@ unsafe fn falco_nair_snd(fighter: &mut L2CAgentBase) {
 			macros::PLAY_SE(fighter, Hash40::new("se_falco_swing_m"));
 		}
 }	
-#[acmd_script( agent = "falco", script = "game_attackairf", category = ACMD_GAME, low_priority )]
-unsafe fn game_attackairf(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn falco_fair(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     macros::FT_MOTION_RATE(fighter, 0.75);
     frame(fighter.lua_state_agent, 6.0);

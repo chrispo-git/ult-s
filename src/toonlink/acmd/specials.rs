@@ -14,12 +14,18 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[acmd_script(
-    agent = "toonlink",
-    script =  "game_specialairhi",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn tink_upb_air(fighter: &mut L2CAgentBase) {
+pub fn install() {
+    Agent::new("toonlink")
+    .acmd("game_specialairhi", tink_upb_air)    
+    .acmd("expression_specialairhi", tink_upb_air_expr)    
+    .acmd("effect_specialairhi", tink_upb_air_eff)    
+    .acmd("sound_specialairhi", tink_upb_air_snd)    
+    .acmd("game_speciallw", tink_bomb)    
+    .acmd("game_specialairlw", tink_bomb)    
+    .install();
+}
+
+unsafe extern "C" fn tink_upb_air(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_TOONLINK_GENERATE_ARTICLE_BOW, false, 0);
@@ -35,51 +41,24 @@ unsafe fn tink_upb_air(fighter: &mut L2CAgentBase) {
 			notify_event_msc_cmd!(fighter, 0x2127e37c07u64, *GROUND_CLIFF_CHECK_KIND_ALWAYS_BOTH_SIDES);
 		}
 }	
-#[acmd_script(
-    agent = "toonlink",
-    script =  "expression_specialairhi",
-    category = ACMD_EXPRESSION,
-	low_priority)]
-unsafe fn tink_upb_air_expr(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn tink_upb_air_expr(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			VisibilityModule::set_int64(fighter.module_accessor, hash40("shield") as i64, hash40("shield_back") as i64);
 			ItemModule::set_have_item_visibility(fighter.module_accessor, false, 0);
 		}
 }	
-#[acmd_script(
-    agent = "toonlink",
-    script =  "effect_specialairhi",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn tink_upb_air_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn tink_upb_air_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 }	
-#[acmd_script(
-    agent = "toonlink",
-    script =  "sound_specialairhi",
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn tink_upb_air_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn tink_upb_air_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 }	
 
-#[acmd_script(
-    agent = "toonlink",
-    scripts =  ["game_speciallw","game_specialairlw"],
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn tink_bomb(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn tink_bomb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 17.0);
 		if macros::is_excute(fighter) {
 			WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_LINK_STATUS_WORK_ID_FLAG_BOMB_GENERATE_LINKBOMB);
 		}
 }	
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		tink_upb_air, tink_upb_air_eff, tink_upb_air_snd, tink_upb_air_expr,
-        tink_bomb
-    );
-}

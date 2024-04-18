@@ -14,12 +14,17 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[acmd_script(
-    agent = "palutena",
-    script =  "game_attackairhi",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn palu_uair(fighter: &mut L2CAgentBase) {
+pub fn install() {
+    Agent::new("palutena")
+    .acmd("game_attackairhi", palu_uair)    
+    .acmd("game_attackairlw", palu_dair)    
+	.acmd("game_attackairf", palu_fair)    
+	.acmd("game_attackairn", palu_nair)    
+	.acmd("game_attackairb", palu_bair)    
+	.install();
+}
+
+unsafe extern "C" fn palu_uair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 3.0);
 		if macros::is_excute(fighter) {
@@ -52,12 +57,7 @@ unsafe fn palu_uair(fighter: &mut L2CAgentBase) {
 		}
 }	
 
-#[acmd_script(
-    agent = "palutena",
-    script =  "game_attackairf",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn palu_fair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn palu_fair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 4.0);
 		macros::FT_MOTION_RATE(fighter, 0.5);
@@ -80,12 +80,7 @@ unsafe fn palu_fair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }		
-#[acmd_script(
-    agent = "palutena",
-    script =  "game_attackairn",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn palu_nair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn palu_nair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 3.0);
 		if macros::is_excute(fighter) {
@@ -138,8 +133,7 @@ unsafe fn palu_nair(fighter: &mut L2CAgentBase) {
 		}
 }	
 
-#[acmd_script( agent = "palutena", script = "game_attackairb", category = ACMD_GAME, low_priority )]
-unsafe fn palu_bair(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn palu_bair(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 3.0);
     if macros::is_excute(agent) {
         WorkModule::on_flag(agent.module_accessor, *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
@@ -193,8 +187,7 @@ unsafe fn palu_bair(agent: &mut L2CAgentBase) {
 
 
 
-#[acmd_script( agent = "palutena", script = "game_attackairlw", category = ACMD_GAME, low_priority )]
-unsafe fn palu_dair(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn palu_dair(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 3.0);
     if macros::is_excute(agent) {
         WorkModule::on_flag(agent.module_accessor, *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
@@ -217,16 +210,4 @@ unsafe fn palu_dair(agent: &mut L2CAgentBase) {
     if macros::is_excute(agent) {
         WorkModule::off_flag(agent.module_accessor, *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
     }
-}
-
-
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		palu_dair,
-		palu_uair,
-        palu_fair,
-        palu_nair,
-        palu_bair
-    );
 }

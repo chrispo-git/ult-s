@@ -14,12 +14,15 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[acmd_script(
-    agent = "sonic",
-    script =  "effect_downattacku",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn sonic_getup_attack_eff(fighter: &mut L2CAgentBase) {
+pub fn install() {
+    Agent::new("sonic")
+    .acmd("effect_downattacku", sonic_getup_attack_eff)    
+    .acmd("effect_appeallwl", sonic_dtaunt_eff)    
+    .acmd("effect_appeallwr", sonic_dtaunt_eff)    
+    .install();
+}
+
+unsafe extern "C" fn sonic_getup_attack_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 14.0);
 		if macros::is_excute(fighter) {
@@ -42,12 +45,7 @@ unsafe fn sonic_getup_attack_eff(fighter: &mut L2CAgentBase) {
 		}
 }		
 
-#[acmd_script(
-    agent = "sonic",
-    scripts =  ["effect_appeallwl", "effect_appeallwr"],
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn sonic_dtaunt_eff(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn sonic_dtaunt_eff(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 14.0);
     if macros::is_excute(agent) {
         macros::LANDING_EFFECT_FLIP(agent, Hash40::new("sys_whirlwind_l"), Hash40::new("sys_whirlwind_r"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.65, 0, 0, 0, 0, 0, 0, false, *EF_FLIP_YZ);
@@ -74,11 +72,4 @@ unsafe fn sonic_dtaunt_eff(agent: &mut L2CAgentBase) {
     if macros::is_excute(agent) {
         macros::LANDING_EFFECT(agent, Hash40::new("sys_landing_smoke_s"), Hash40::new("top"), 0, 0, -1, 0, 0, 0, 0.5, 0, 0, 0, 0, 0, 0, true);
     }
-}
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		sonic_getup_attack_eff,
-        sonic_dtaunt_eff
-    );
 }

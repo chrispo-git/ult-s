@@ -14,12 +14,13 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[acmd_script(
-    agent = "wario",
-    script =  "game_catchattack",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn wario_pummel(fighter: &mut L2CAgentBase) {
+pub fn install() {
+    Agent::new("wario")
+    .acmd("game_catchattack", wario_pummel)    
+    .install();
+}
+
+unsafe extern "C" fn wario_pummel(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 2.0);
 		if macros::is_excute(fighter) {
@@ -32,9 +33,3 @@ unsafe fn wario_pummel(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }	
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		wario_pummel
-    );
-}

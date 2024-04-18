@@ -15,17 +15,12 @@ use crate::util::*;
 use super::*;
 
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		bayo_jab1
-    );
+    Agent::new("bayonetta")
+    .acmd("game_attack11", bayo_jab1)
+	.install();
 }
 
-#[acmd_script(
-    agent = "bayonetta",
-    script =  "game_attack11",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn bayo_jab1(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn bayo_jab1(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 1.0);
 		if macros::is_excute(fighter) {

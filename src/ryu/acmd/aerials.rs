@@ -14,12 +14,13 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[acmd_script(
-    agent = "ryu",
-    script =  "game_attackairf",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn ryu_fair(fighter: &mut L2CAgentBase) {
+pub fn install() {
+    Agent::new("ryu")
+    .acmd("game_attackairf", ryu_fair)    
+    .install();
+}
+
+unsafe extern "C" fn ryu_fair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_RYU_INSTANCE_WORK_ID_FLAG_FINAL_HIT_CANCEL);
@@ -52,10 +53,4 @@ unsafe fn ryu_fair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_RYU_STATUS_ATTACK_FLAG_HIT_CANCEL);
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_RYU_INSTANCE_WORK_ID_FLAG_FINAL_HIT_CANCEL);
 		}
-}
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-        ryu_fair
-    );
 }

@@ -13,17 +13,14 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		ganon_warlock
-    );
+    Agent::new("ganon")
+    .acmd("game_specialnturn", ganon_warlock)    
+    .install();
 }
-#[acmd_script(
-    agent = "ganon",
-    script =  "game_specialnturn",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn ganon_warlock(fighter: &mut L2CAgentBase) {
+
+unsafe extern "C" fn ganon_warlock(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 11.0);
 		if macros::is_excute(fighter) {

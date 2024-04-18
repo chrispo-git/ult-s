@@ -14,20 +14,16 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use crate::jack::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		joker_bair,
-		joker_fair,
-        joker_uair
-    );
+    Agent::new("jack")
+    .acmd("game_attackairhi", joker_uair)    
+    .acmd("game_attackairf", joker_fair)    
+    .acmd("game_attackairb", joker_bair)    
+    .install();
 }
 
-#[acmd_script(
-    agent = "jack",
-    scripts =  ["game_attackairhi"],
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn joker_uair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn joker_uair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 	let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
@@ -55,12 +51,7 @@ unsafe fn joker_uair(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }		
-#[acmd_script(
-    agent = "jack",
-    scripts =  ["game_attackairf"],
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn joker_fair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn joker_fair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 	let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
@@ -103,12 +94,7 @@ unsafe fn joker_fair(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 	}		
-#[acmd_script(
-    agent = "jack",
-    scripts =  ["game_attackairb"],
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn joker_bair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn joker_bair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 	let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);

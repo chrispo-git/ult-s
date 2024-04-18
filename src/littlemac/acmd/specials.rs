@@ -13,21 +13,19 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		mac_neutralbdash,
-		mac_neutralbairdash_eff,
-		mac_neutralbdashturn,
-		mac_neutralbairdashturn_eff,
-		mac_neutralbairdash
-    );
+    Agent::new("littlemac")
+    .acmd("game_specialndash", mac_neutralbdash)    
+    .acmd("game_specialairndash", mac_neutralbairdash)    
+    .acmd("game_specialairndashturn", mac_neutralbairdashturn)    
+    .acmd("effect_specialairndash", mac_neutralbairdash_eff)    
+    .acmd("effect_specialairndashturn", mac_neutralbairdashturn_eff)    
+    .acmd("game_specialndashturn", mac_neutralbdashturn)    
+    .install();
 }
-#[acmd_script(
-    agent = "littlemac",
-    script =  "game_specialndash",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn mac_neutralbdash(fighter: &mut L2CAgentBase) {
+
+unsafe extern "C" fn mac_neutralbdash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	
 		frame(fighter.lua_state_agent, 4.0);
@@ -44,12 +42,7 @@ unsafe fn mac_neutralbdash(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }	
-#[acmd_script(
-    agent = "littlemac",
-    script =  "game_specialairndash",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn mac_neutralbairdash(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn mac_neutralbairdash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	
 		frame(fighter.lua_state_agent, 4.0);
@@ -70,12 +63,7 @@ unsafe fn mac_neutralbairdash(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }		
-#[acmd_script(
-    agent = "littlemac",
-    script =  "game_specialairndashturn",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn mac_neutralbairdashturn(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn mac_neutralbairdashturn(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	
 		if macros::is_excute(fighter) {
@@ -99,12 +87,7 @@ unsafe fn mac_neutralbairdashturn(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }	
-#[acmd_script(
-    agent = "littlemac",
-    script =  "effect_specialairndash",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn mac_neutralbairdash_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn mac_neutralbairdash_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     if macros::is_excute(fighter) {
         macros::EFFECT_FOLLOW(fighter, Hash40::new("littlemac_straight_line"), Hash40::new("top"), 0, 6, 0, 0, 0, 0, 1, true);
@@ -133,12 +116,7 @@ unsafe fn mac_neutralbairdash_eff(fighter: &mut L2CAgentBase) {
 		EffectModule::enable_sync_init_pos_last(fighter.module_accessor);
 	}
 }	
-#[acmd_script(
-    agent = "littlemac",
-    script =  "effect_specialairndashturn",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn mac_neutralbairdashturn_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn mac_neutralbairdashturn_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     if macros::is_excute(fighter) {
         macros::EFFECT_FOLLOW(fighter, Hash40::new("littlemac_straight_line"), Hash40::new("top"), 0, 6, 0, 0, 180, 45, 1, true);
@@ -167,12 +145,7 @@ unsafe fn mac_neutralbairdashturn_eff(fighter: &mut L2CAgentBase) {
 		EffectModule::enable_sync_init_pos_last(fighter.module_accessor);
 	}
 }	
-#[acmd_script(
-    agent = "littlemac",
-    script =  "game_specialndashturn",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn mac_neutralbdashturn(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn mac_neutralbdashturn(fighter: &mut L2CAgentBase) {
     	let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 4.0);
 		if macros::is_excute(fighter) {

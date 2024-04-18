@@ -13,19 +13,16 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		captain_uair,
-		captain_uair_eff,
-		captain_knee
-	);
+    Agent::new("captain")
+    .acmd("game_attackairhi", captain_uair)    
+    .acmd("effect_attackairhi", captain_uair_eff)    
+    .acmd("game_attackairf", captain_knee)    
+    .install();
 }
 
-#[acmd_script(
-    agent = "captain",
-    script =  "game_attackairhi",
-    category = ACMD_GAME)]
-unsafe fn captain_uair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn captain_uair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
@@ -49,11 +46,7 @@ unsafe fn captain_uair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }	
-#[acmd_script(
-    agent = "captain",
-    script =  "effect_attackairhi",
-    category = ACMD_EFFECT)]
-unsafe fn captain_uair_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn captain_uair_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 7.0);
 		if macros::is_excute(fighter) {
@@ -64,8 +57,7 @@ unsafe fn captain_uair_eff(fighter: &mut L2CAgentBase) {
 			macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_attack_arc_d"), Hash40::new("top"), 0, 16, -0.5, 0, 110, 90, 1.2, true);
 		}
 }	
-#[acmd_script( agent = "captain", script = "game_attackairf", category = ACMD_GAME, low_priority )]
-unsafe fn captain_knee(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn captain_knee(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 7.0);
     if macros::is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);

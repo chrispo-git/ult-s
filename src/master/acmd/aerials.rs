@@ -13,23 +13,20 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		byleth_nair,
-		byleth_naire,
-		byleth_dair,
-		byleth_land_nair,
-		byleth_fair,
-		byleth_nair_sound,
-		byleth_bair
-    );
-}				
-#[acmd_script(
-    agent = "master",
-    script =  "game_attackairb",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn byleth_bair(fighter: &mut L2CAgentBase) {
+    Agent::new("master")
+    .acmd("game_attackairb", byleth_bair)    
+    .acmd("game_attackairf", byleth_fair)    
+    .acmd("game_attackairlw", byleth_dair)    
+    .acmd("sound_attackairn", byleth_nair_sound)    
+    .acmd("game_attackairn", byleth_nair)    
+    .acmd("game_landingairn", byleth_land_nair)    
+    .acmd("effect_attackairn", byleth_naire)    
+    .install();
+}		
+
+unsafe extern "C" fn byleth_bair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_MASTER_GENERATE_ARTICLE_SPEAR, false, 0);
@@ -66,12 +63,7 @@ unsafe fn byleth_bair(fighter: &mut L2CAgentBase) {
 			ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_MASTER_GENERATE_ARTICLE_SPEAR,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
 		}
 	}			
-#[acmd_script(
-    agent = "master",
-    script =  "game_attackairf",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn byleth_fair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn byleth_fair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_MASTER_GENERATE_ARTICLE_SPEAR, false, 0);
@@ -106,8 +98,7 @@ unsafe fn byleth_fair(fighter: &mut L2CAgentBase) {
 			ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_MASTER_GENERATE_ARTICLE_SPEAR,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
 		}
 	}
-#[acmd_script( agent = "master", script = "game_attackairlw", category = ACMD_GAME, low_priority )]
-unsafe fn byleth_dair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn byleth_dair(fighter: &mut L2CAgentBase) {
 		if macros::is_excute(fighter) {
 			ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_MASTER_GENERATE_ARTICLE_AXE, false, -1);
 			ArticleModule::change_motion(fighter.module_accessor, *FIGHTER_MASTER_GENERATE_ARTICLE_AXE, Hash40::new("attack_air_lw"), false, -1.0);
@@ -139,12 +130,7 @@ unsafe fn byleth_dair(fighter: &mut L2CAgentBase) {
 			ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_MASTER_GENERATE_ARTICLE_AXE, ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
 		}
 }				
-#[acmd_script(
-    agent = "master",
-    script =  "sound_attackairn",
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn byleth_nair_sound(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn byleth_nair_sound(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 8.0);
 		if macros::is_excute(fighter) {
@@ -152,12 +138,7 @@ unsafe fn byleth_nair_sound(fighter: &mut L2CAgentBase) {
 			macros::PLAY_SEQUENCE(fighter, Hash40::new("seq_master_rnd_attack01"));
 		}
 	}	
-    #[acmd_script(
-        agent = "master",
-        script =  "game_attackairn",
-        category = ACMD_GAME,
-        low_priority)]
-    unsafe fn byleth_nair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn byleth_nair(fighter: &mut L2CAgentBase) {
         let lua_state = fighter.lua_state_agent;
             macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.2);
             if macros::is_excute(fighter) {
@@ -182,24 +163,14 @@ unsafe fn byleth_nair_sound(fighter: &mut L2CAgentBase) {
                 WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
             }
         }
-    #[acmd_script(
-        agent = "master",
-        script =  "game_landingairn",
-        category = ACMD_GAME,
-        low_priority)]
-    unsafe fn byleth_land_nair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn byleth_land_nair(fighter: &mut L2CAgentBase) {
         let lua_state = fighter.lua_state_agent;
             if macros::is_excute(fighter) {	
                 ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_MASTER_GENERATE_ARTICLE_SWORD,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
                 ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_MASTER_GENERATE_ARTICLE_BOW,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
                 }
             }		
-    #[acmd_script(
-        agent = "master",
-        script =  "effect_attackairn",
-        category = ACMD_EFFECT,
-        low_priority)]
-    unsafe fn byleth_naire(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn byleth_naire(fighter: &mut L2CAgentBase) {
         let lua_state = fighter.lua_state_agent;
             frame(fighter.lua_state_agent, 7.0);
             if macros::is_excute(fighter) {

@@ -14,21 +14,11 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[acmd_script(
-    agent = "samusd",
-    scripts =  ["sound_squat", "sound_squatrv"],
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn dsamus_crouch_sound(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn dsamus_crouch_sound(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		
 }
-#[acmd_script(
-    agent = "samusd",
-    script =  "expression_catchpull",
-    category = ACMD_EXPRESSION,
-	low_priority)]
-unsafe fn dsamus_catchpull_expr(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn dsamus_catchpull_expr(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			VisibilityModule::set_int64(fighter.module_accessor, hash40("body") as i64, hash40("body_hide_gun") as i64);
@@ -42,24 +32,14 @@ unsafe fn dsamus_catchpull_expr(fighter: &mut L2CAgentBase) {
 			ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_SAMUSD_GENERATE_ARTICLE_GUN,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
 		}
 }	
-#[acmd_script(
-    agent = "samusd",
-    script =  "expression_catchwait",
-    category = ACMD_EXPRESSION,
-	low_priority)]
-unsafe fn dsamus_catchwait_expr(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn dsamus_catchwait_expr(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			VisibilityModule::set_int64(fighter.module_accessor, hash40("body") as i64, hash40("body_normal") as i64);
 			ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_SAMUSD_GENERATE_ARTICLE_GUN,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
 		}
 }	
-#[acmd_script(
-    agent = "samusd",
-    script =  "game_catchattack",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn dsamus_catchattack(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn dsamus_catchattack(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 3.0);
 		if macros::is_excute(fighter) {
@@ -71,36 +51,21 @@ unsafe fn dsamus_catchattack(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }
-#[acmd_script(
-    agent = "samusd",
-    script =  "effect_catchattack",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn dsamus_catchattack_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn dsamus_catchattack_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, /*Frames*/ 3.0);
 		if macros::is_excute(fighter) {
 			macros::EFFECT(fighter, Hash40::new("samusd_atk_bomb"), Hash40::new("throw"), 0, 0, 0, 0, 0, 0, 0.9, 0, 0, 0, 0, 0, 0, true);
 		}
 }	
-#[acmd_script(
-    agent = "samusd",
-    script =  "expression_catchattack",
-    category = ACMD_EXPRESSION,
-	low_priority)]
-unsafe fn dsamus_catchattack_expr(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn dsamus_catchattack_expr(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			VisibilityModule::set_int64(fighter.module_accessor, hash40("body") as i64, hash40("body_normal") as i64);
 			ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_SAMUSD_GENERATE_ARTICLE_GUN,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
 		}
 }	
-#[acmd_script(
-    agent = "samusd",
-    script =  "expression_catchcut",
-    category = ACMD_EXPRESSION,
-	low_priority)]
-unsafe fn dsamus_catchcut_expr(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn dsamus_catchcut_expr(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			VisibilityModule::set_int64(fighter.module_accessor, hash40("body") as i64, hash40("body_normal") as i64);
@@ -109,11 +74,14 @@ unsafe fn dsamus_catchcut_expr(fighter: &mut L2CAgentBase) {
 }	
 
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		dsamus_crouch_sound,
-        dsamus_catchpull_expr,
-        dsamus_catchwait_expr,
-        dsamus_catchattack, dsamus_catchattack_eff, dsamus_catchattack_expr,
-        dsamus_catchcut_expr
-    );
+    Agent::new("samusd")
+        .sound_acmd("sound_squat", dsamus_crouch_sound)
+        .sound_acmd("sound_squatrv", dsamus_crouch_sound)
+        .expression_acmd("expression_catchpull", dsamus_catchpull_expr)
+        .expression_acmd("expression_catchwait", dsamus_catchwait_expr)
+        .game_acmd("game_catchattack", dsamus_catchattack)
+        .effect_acmd("effect_catchattack", dsamus_catchattack_eff)
+        .expression_acmd("expression_catchattack", dsamus_catchattack_expr)
+        .expression_acmd("expression_catchcut", dsamus_catchcut_expr)
+        .install();
 }

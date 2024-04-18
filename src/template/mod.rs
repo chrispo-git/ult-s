@@ -9,7 +9,5 @@ use smash_script::*;
 use crate::util::*;
 
 pub fn install() {
-	smashline::install_acmd_scripts!(
-        
-    );
+	
 }

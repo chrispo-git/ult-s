@@ -15,8 +15,13 @@ use crate::util::*;
 use super::*;
 use super::super::*;
 
-#[fighter_frame_callback]
-pub fn lucina(fighter : &mut L2CFighterCommon) {
+pub fn install() {
+    Agent::new("lucina")
+    .on_line(Main, lucina)
+    .install();
+}
+
+unsafe extern "C" fn lucina(fighter : &mut L2CFighterCommon) {
     unsafe {
 		let lua_state = fighter.lua_state_agent;
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);
@@ -435,8 +440,4 @@ pub fn lucina(fighter : &mut L2CFighterCommon) {
 			};
 		}
 	};
-}
-
-pub fn install() {
-    smashline::install_agent_frame_callbacks!(lucina);
 }

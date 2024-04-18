@@ -13,20 +13,17 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		diddy_ftilthi,
-		diddy_ftiltlw,
-		diddy_ftilts,
-		diddy_utilt
-    );
+    Agent::new("diddy")
+    .acmd("game_attackhi3", diddy_utilt)    
+    .acmd("game_attacks3", diddy_ftilts)    
+    .acmd("game_attacks3hi", diddy_ftilthi)    
+    .acmd("game_attacks3lw", diddy_ftiltlw)    
+    .install();
 }
-#[acmd_script(
-    agent = "diddy",
-    script =  "game_attackhi3",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn diddy_utilt(fighter: &mut L2CAgentBase) {
+
+unsafe extern "C" fn diddy_utilt(fighter: &mut L2CAgentBase) {
     	let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 6.0);
 		if macros::is_excute(fighter) {
@@ -43,12 +40,7 @@ unsafe fn diddy_utilt(fighter: &mut L2CAgentBase) {
 			CancelModule::enable_cancel(fighter.module_accessor);
 		}
 }
-#[acmd_script(
-    agent = "diddy",
-    script =  "game_attacks3",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn diddy_ftilts(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn diddy_ftilts(fighter: &mut L2CAgentBase) {
     	let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 10.0);
 		if macros::is_excute(fighter) {
@@ -76,12 +68,7 @@ unsafe fn diddy_ftilts(fighter: &mut L2CAgentBase) {
 			CancelModule::enable_cancel(fighter.module_accessor);
 		}
 }	
-#[acmd_script(
-    agent = "diddy",
-    script =  "game_attacks3hi",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn diddy_ftilthi(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn diddy_ftilthi(fighter: &mut L2CAgentBase) {
    	 	let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 10.0);
 		if macros::is_excute(fighter) {
@@ -109,12 +96,7 @@ unsafe fn diddy_ftilthi(fighter: &mut L2CAgentBase) {
 			CancelModule::enable_cancel(fighter.module_accessor);
 		}
 }		
-#[acmd_script(
-    agent = "diddy",
-    script =  "game_attacks3lw",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn diddy_ftiltlw(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn diddy_ftiltlw(fighter: &mut L2CAgentBase) {
     	let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 10.0);
 		if macros::is_excute(fighter) {

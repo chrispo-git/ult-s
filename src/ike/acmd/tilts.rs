@@ -14,19 +14,20 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 use crate::ike::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		ike_dtilt,
-		ike_utilt,
-		ike_dtilt_eff,ike_ftilt_eff,ike_utilt_eff
-    );
+    Agent::new("ike")
+    .acmd("game_attacklw3", ike_dtilt)    
+    .acmd("game_attackhi3", ike_utilt)    
+    .acmd("effect_attackhi3", ike_utilt_eff)    
+    .acmd("effect_attacklw3", ike_dtilt_eff)    
+    .acmd("effect_attacks3", ike_ftilt_eff)    
+    .acmd("effect_attacks3hi", ike_ftilt_eff)    
+    .acmd("effect_attacks3lw", ike_ftilt_eff)    
+    .install();
 }		
-#[acmd_script(
-    agent = "ike",
-    script =  "game_attacklw3",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn ike_dtilt(fighter: &mut L2CAgentBase) {
+
+unsafe extern "C" fn ike_dtilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 7.0);
 		if macros::is_excute(fighter) {
@@ -40,12 +41,7 @@ unsafe fn ike_dtilt(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }		
-#[acmd_script(
-    agent = "ike",
-    script =  "game_attackhi3",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn ike_utilt(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn ike_utilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
 		frame(fighter.lua_state_agent, 8.0);
@@ -63,12 +59,7 @@ unsafe fn ike_utilt(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }
-#[acmd_script(
-    agent = "ike",
-    script =  "effect_attackhi3",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn ike_utilt_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn ike_utilt_eff(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 		frame(fighter.lua_state_agent, 10.0);
@@ -88,12 +79,7 @@ unsafe fn ike_utilt_eff(fighter: &mut L2CAgentBase) {
 			macros::LANDING_EFFECT(fighter, Hash40::new("sys_landing_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.6, 0, 0, 0, 0, 0, 0, false);
 		};
 }
-#[acmd_script(
-    agent = "ike",
-    script =  "effect_attacklw3",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn ike_dtilt_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn ike_dtilt_eff(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 		frame(fighter.lua_state_agent, 4.0);
@@ -113,12 +99,7 @@ unsafe fn ike_dtilt_eff(fighter: &mut L2CAgentBase) {
 			macros::AFTER_IMAGE_OFF(fighter, 2);
 		};
 }
-#[acmd_script(
-    agent = "ike",
-    scripts =  ["effect_attacks3", "effect_attacks3hi", "effect_attacks3lw"],
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn ike_ftilt_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn ike_ftilt_eff(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 		frame(fighter.lua_state_agent, 12.0);

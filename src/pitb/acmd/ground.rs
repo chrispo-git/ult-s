@@ -14,12 +14,15 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[acmd_script(
-    agent = "pitb",
-    script =  "game_attack12",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn dpit_jab2(fighter: &mut L2CAgentBase) {
+pub fn install() {
+    Agent::new("pitb")
+    .acmd("game_attack12", dpit_jab2)    
+	.acmd("game_attackdash", dpit_da)    
+	.acmd("game_attacks4", dpit_fsmash)    
+	.install();
+}
+
+unsafe extern "C" fn dpit_jab2(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 5.0);
 		if macros::is_excute(fighter) {
@@ -43,12 +46,7 @@ unsafe fn dpit_jab2(fighter: &mut L2CAgentBase) {
 		}
 }	
 
-#[acmd_script(
-    agent = "pitb",
-    script =  "game_attackdash",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn dpit_da(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn dpit_da(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.2857);
 		frame(fighter.lua_state_agent, 7.0);
@@ -63,12 +61,7 @@ unsafe fn dpit_da(fighter: &mut L2CAgentBase) {
 		}
 }	
 
-#[acmd_script(
-    agent = "pitb",
-    script =  "game_attacks4",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn dpit_fsmash(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn dpit_fsmash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.5);
 		frame(fighter.lua_state_agent, 4.0);
@@ -95,12 +88,4 @@ unsafe fn dpit_fsmash(fighter: &mut L2CAgentBase) {
 		if macros::is_excute(fighter) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
-}
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		dpit_jab2,
-        dpit_da,
-        dpit_fsmash
-    );
 }

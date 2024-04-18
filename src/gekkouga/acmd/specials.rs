@@ -13,20 +13,19 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		gren_downb, 
-		gren_downb_air,
-		gren_downb_eff,
-		gren_downb_snd
-    );
+    Agent::new("gekkouga")
+    .acmd("game_speciallw", gren_downb)    
+    .acmd("game_specialairlw", gren_downb_air)    
+    .acmd("effect_specialairlw", gren_downb_eff)    
+    .acmd("effect_speciallw", gren_downb_eff)    
+    .acmd("sound_specialairlw", gren_downb_snd)    
+    .acmd("sound_speciallw", gren_downb_snd)    
+    .install();
 }
-#[acmd_script(
-    agent = "gekkouga",
-    scripts =  ["game_speciallw"],
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn gren_downb(fighter: &mut L2CAgentBase) {
+
+unsafe extern "C" fn gren_downb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 5.0);
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.6);
@@ -48,12 +47,7 @@ unsafe fn gren_downb(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }	
-#[acmd_script(
-    agent = "gekkouga",
-    scripts =  ["game_specialairlw"],
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn gren_downb_air(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn gren_downb_air(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 5.0);
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.3);
@@ -83,24 +77,14 @@ unsafe fn gren_downb_air(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }	
-#[acmd_script(
-    agent = "gekkouga",
-    scripts =  ["effect_specialairlw", "effect_speciallw"],
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn gren_downb_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn gren_downb_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 18.0);
 		if macros::is_excute(fighter) {
 			macros::EFFECT_FLIP(fighter, Hash40::new("gekkouga_water_impact"), Hash40::new("gekkouga_water_impact"), Hash40::new("top"), 0, 7, 25, 0, 0, 0, 1.5, 0, 0, 0, 0, 0, 0, true, *EF_FLIP_NONE);
 		}
 }	
-#[acmd_script(
-    agent = "gekkouga",
-    scripts =  ["sound_specialairlw", "sound_speciallw"],
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn gren_downb_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn gren_downb_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 14.0);
 		if macros::is_excute(fighter) {

@@ -13,15 +13,15 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-	smashline::install_acmd_scripts!(
-		dk_uthrow,
-        dk_uthrow_eff
-	);
+	Agent::new("donkey")
+    .acmd("game_throwhi", dk_uthrow)    
+    .acmd("effect_throwhi", dk_uthrow_eff)    
+    .install();
 }
 
-#[acmd_script( agent = "donkey", script = "game_throwhi", category = ACMD_GAME, low_priority )]
-unsafe fn dk_uthrow(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn dk_uthrow(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::ATTACK_ABS(fighter, *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, 0, 8.0, 71, 52, 0, 85, 0.0, 1.0, *ATTACK_LR_CHECK_F, 0.0, true, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_THROW);
         macros::ATTACK_ABS(fighter, *FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, 0, 8.0, 361, 100, 0, 40, 0.0, 1.0, *ATTACK_LR_CHECK_F, 0.0, true, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_THROW);
@@ -57,8 +57,7 @@ unsafe fn dk_uthrow(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script( agent = "donkey", script = "effect_throwhi", category = ACMD_EFFECT, low_priority )]
-unsafe fn dk_uthrow_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn dk_uthrow_eff(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 32.0);
     if macros::is_excute(fighter) {
         macros::EFFECT(fighter, Hash40::new("sys_down_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.7, 0, 0, 0, 0, 0, 0, false);

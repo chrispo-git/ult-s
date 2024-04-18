@@ -11,18 +11,15 @@ use smash::lib::{L2CValue, L2CAgent};
 use std::mem;
 use smash::app::*;
 use smash::phx::Vector3f;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		krool_jab1,
-		krool_jab2
-    );
+    Agent::new("krool")
+    .acmd("game_attack11", krool_jab1)    
+    .acmd("game_attack12", krool_jab2)    
+    .install();
 }
-#[acmd_script(
-    agent = "krool",
-    script =  "game_attack11",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn krool_jab1(fighter: &mut L2CAgentBase) {
+
+unsafe extern "C" fn krool_jab1(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 4.0);
 		if macros::is_excute(fighter) {
@@ -46,12 +43,7 @@ unsafe fn krool_jab1(fighter: &mut L2CAgentBase) {
 		WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_FLAG_ENABLE_RESTART);
 		}
 }		
-#[acmd_script(
-    agent = "krool",
-    script =  "game_attack12",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn krool_jab2(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn krool_jab2(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 3.0);
 		if macros::is_excute(fighter) {

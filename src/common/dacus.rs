@@ -11,8 +11,7 @@ use smash::phx::Vector2f;
 use crate::util::*;
 
 //Dash Attack Cancel Smashes
-#[fighter_frame_callback]
-pub fn dacus(fighter : &mut L2CFighterCommon) {
+unsafe extern "C" fn dacus(fighter : &mut L2CFighterCommon) {
     unsafe {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);    
 		let fighter_kind = smash::app::utility::get_kind(boma);
@@ -63,7 +62,7 @@ pub fn dacus(fighter : &mut L2CFighterCommon) {
     };
 }
 pub fn install() {
-    smashline::install_agent_frame_callbacks!(
-		dacus
-	);
+    Agent::new("fighter")
+	.on_line(Main, dacus)
+	.install();
 }

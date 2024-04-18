@@ -14,8 +14,17 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[fighter_frame( agent = FIGHTER_KIND_ROSETTA )]
-fn rosa_frame(fighter: &mut L2CFighterCommon) {
+pub fn install() {
+    Agent::new("rosetta")
+    .on_line(Main, rosa_frame)
+    .install();
+
+	Agent::new("rosetta_tico")
+    .on_line(Main, tico_frame)
+    .install();
+}
+
+unsafe extern "C" fn rosa_frame(fighter: &mut L2CFighterCommon) {
     unsafe {
 			let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 			if is_default(boma) {
@@ -78,8 +87,7 @@ fn rosa_frame(fighter: &mut L2CFighterCommon) {
 			}
 	}
 }
-#[weapon_frame( agent = WEAPON_KIND_ROSETTA_TICO )]
-fn tico_frame(weapon: &mut L2CFighterBase) {
+unsafe extern "C" fn tico_frame(weapon: &mut L2CFighterBase) {
     unsafe {
         let otarget_id = WorkModule::get_int(weapon.module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LINK_OWNER) as u32;
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(weapon.module_accessor);
@@ -128,11 +136,4 @@ fn tico_frame(weapon: &mut L2CFighterBase) {
 			};
 		};
     }
-}
-
-pub fn install() {
-    smashline::install_agent_frames!(
-        tico_frame,
-		rosa_frame
-    );
 }

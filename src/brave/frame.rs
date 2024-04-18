@@ -15,11 +15,12 @@ use crate::util::*;
 use super::*;
 	
 pub fn install() {
-	smashline::install_agent_frame_callbacks!(hero);
+	Agent::new("brave")
+	.on_line(Main, hero)
+	.install();
 }
 
-#[fighter_frame_callback]
-pub fn hero(fighter : &mut L2CFighterCommon) {
+unsafe extern "C" fn hero(fighter : &mut L2CFighterCommon) {
     unsafe {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 		if is_default(boma) {

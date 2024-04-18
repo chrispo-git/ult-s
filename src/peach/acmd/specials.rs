@@ -14,12 +14,21 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[acmd_script(
-    agent = "peach",
-    scripts =  ["game_specialn", "game_specialairn"],
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn peach_neutralb(fighter: &mut L2CAgentBase) {
+pub fn install() {
+    Agent::new("peach")
+    .acmd("game_specialn", peach_neutralb)    
+    .acmd("game_specialairn", peach_neutralb)    
+    .acmd("effect_specialn", peach_neutralb_eff)    
+    .acmd("effect_specialairn", peach_neutralb_eff)    
+    .install();
+
+	Agent::new("kirby")
+	.acmd("effect_peachspecialn", kirby_peach_neutralb_eff)    
+    .acmd("effect_peachspecialairn", kirby_peach_neutralb_eff)    
+    .install();
+}
+
+unsafe extern "C" fn peach_neutralb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_PEACH_GENERATE_ARTICLE_KINOPIO, false, 0);
@@ -52,12 +61,7 @@ unsafe fn peach_neutralb(fighter: &mut L2CAgentBase) {
 			ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_PEACH_GENERATE_ARTICLE_KINOPIO,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
 		}
 }	
-#[acmd_script(
-    agent = "peach",
-    scripts =  ["effect_specialn", "effect_specialairn"],
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn peach_neutralb_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn peach_neutralb_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 11.0);
 		if macros::is_excute(fighter) {
@@ -72,12 +76,7 @@ unsafe fn peach_neutralb_eff(fighter: &mut L2CAgentBase) {
 			macros::EFFECT(fighter, Hash40::new("sys_erace_smoke"), Hash40::new("top"), 6, 5, 0, 0, 0, 0, 0.9, 0, 0, 0, 0, 0, 0, false);
 		}
 }
-#[acmd_script(
-    agent = "kirby",
-    scripts =  ["effect_peachspecialn", "effect_peachspecialairn"],
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn kirby_peach_neutralb_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn kirby_peach_neutralb_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 11.0);
 		if macros::is_excute(fighter) {
@@ -91,11 +90,4 @@ unsafe fn kirby_peach_neutralb_eff(fighter: &mut L2CAgentBase) {
 		if macros::is_excute(fighter) {
 			macros::EFFECT(fighter, Hash40::new("sys_erace_smoke"), Hash40::new("top"), 6, 5, 0, 0, 0, 0, 0.9, 0, 0, 0, 0, 0, 0, false);
 		}
-}
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		peach_neutralb, peach_neutralb_eff,
-        kirby_peach_neutralb_eff
-    );
 }

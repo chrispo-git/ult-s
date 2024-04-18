@@ -13,11 +13,14 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use crate::lucario::*;
+
 pub fn install() {
-	smashline::install_agent_frame_callbacks!(lucario);
+	Agent::new("lucario")
+    .on_line(Main, lucario)
+    .install();
 }
-#[fighter_frame_callback]
-pub fn lucario(fighter : &mut L2CFighterCommon) {
+
+unsafe extern "C" fn lucario(fighter : &mut L2CFighterCommon) {
     unsafe {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);  
 		let fighter_kind = smash::app::utility::get_kind(boma);

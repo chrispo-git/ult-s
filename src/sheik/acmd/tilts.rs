@@ -14,12 +14,14 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[acmd_script(
-    agent = "sheik",
-    script =  "game_attacks3",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn sheik_ftilt(fighter: &mut L2CAgentBase) {
+pub fn install() {
+    Agent::new("sheik")
+    .acmd("game_attacks3", sheik_ftilt)    
+    .acmd("game_attacklw3", sheik_dtilt)    
+    .install();
+}
+
+unsafe extern "C" fn sheik_ftilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 5.0);
 		if macros::is_excute(fighter) {
@@ -32,12 +34,7 @@ unsafe fn sheik_ftilt(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }	
-#[acmd_script(
-    agent = "sheik",
-    script =  "game_attacklw3",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn sheik_dtilt(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sheik_dtilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 1.0);
 		if macros::is_excute(fighter) {
@@ -63,11 +60,4 @@ unsafe fn sheik_dtilt(fighter: &mut L2CAgentBase) {
 			macros::HIT_NODE(fighter, Hash40::new("kneel"), *HIT_STATUS_NORMAL);
 			macros::HIT_NODE(fighter, Hash40::new("legl"), *HIT_STATUS_NORMAL);
 		}	
-}			
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		sheik_ftilt,
-        sheik_dtilt
-    );
-}
+}	

@@ -13,19 +13,16 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		gnw_ftilt,
-		gnw_utilt,
-		gnw_dtilt
-    );
+    Agent::new("gamewatch")
+    .acmd("game_attacks3", gnw_ftilt)    
+    .acmd("game_attacklw3", gnw_dtilt)    
+    .acmd("game_attackhi3", gnw_utilt)     
+    .install();
 }
-#[acmd_script(
-    agent = "gamewatch",
-    script =  "game_attacks3",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn gnw_ftilt(fighter: &mut L2CAgentBase) {
+
+unsafe extern "C" fn gnw_ftilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.75);
 		frame(fighter.lua_state_agent, 8.0);
@@ -53,12 +50,7 @@ unsafe fn gnw_ftilt(fighter: &mut L2CAgentBase) {
 			ArticleModule::remove(fighter.module_accessor, *FIGHTER_GAMEWATCH_GENERATE_ARTICLE_NORMAL_WEAPON,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
 		}
 }		
-#[acmd_script(
-    agent = "gamewatch",
-    script =  "game_attacklw3",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn gnw_dtilt(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn gnw_dtilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			WorkModule::set_int(fighter.module_accessor, *WEAPON_GAMEWATCH_NORMAL_WEAPON_KIND_MANHOLE, *FIGHTER_GAMEWATCH_INSTANCE_WORK_ID_INT_NORMAL_WEAPON_KIND);
@@ -80,12 +72,7 @@ unsafe fn gnw_dtilt(fighter: &mut L2CAgentBase) {
 			ArticleModule::remove(fighter.module_accessor, *FIGHTER_GAMEWATCH_GENERATE_ARTICLE_NORMAL_WEAPON,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
 		}
 }			
-#[acmd_script(
-    agent = "gamewatch",
-    scripts =  ["game_attackhi3"],
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn gnw_utilt(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn gnw_utilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 		}

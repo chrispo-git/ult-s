@@ -13,25 +13,22 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		ink_fair,
-		ink_fair_eff,
-		ink_fair_snd,
-		ink_uair,
-		ink_uair_eff,
-		ink_uair_sound,
-		ink_nair,
-		ink_bair
-    );
+    Agent::new("inkling")
+    .acmd("game_attackairf", ink_fair)    
+    .acmd("effect_attackairf", ink_fair_eff)    
+    .acmd("sound_attackairf", ink_fair_snd)    
+    .acmd("game_attackairhi", ink_uair)    
+    .acmd("effect_attackairhi", ink_uair_eff)    
+    .acmd("sound_attackairhi", ink_uair_sound)    
+    .acmd("game_attackairb", ink_bair)    
+    .acmd("game_attackairn", ink_nair)    
+    .acmd("game_attackairlw", ink_dair)    
+    .install();
 }
 
-#[acmd_script(
-    agent = "inkling",
-    script =  "game_attackairf",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn ink_fair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn ink_fair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	frame (fighter.lua_state_agent, 1.0);
 	if macros::is_excute(fighter) {
@@ -56,12 +53,7 @@ unsafe fn ink_fair(fighter: &mut L2CAgentBase) {
 		WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 	}
 }		
-#[acmd_script(
-    agent = "inkling",
-    script =  "effect_attackairf",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn ink_fair_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn ink_fair_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	frame(fighter.lua_state_agent, 2.0);
 	if macros::is_excute(fighter) {
@@ -80,12 +72,7 @@ unsafe fn ink_fair_eff(fighter: &mut L2CAgentBase) {
 		}
 	}
 }
-#[acmd_script(
-    agent = "inkling",
-    script =  "sound_attackairf",
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn ink_fair_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn ink_fair_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 11.0);
 		if macros::is_excute(fighter) {
@@ -96,12 +83,7 @@ unsafe fn ink_fair_snd(fighter: &mut L2CAgentBase) {
 			}
 		}
 }
-#[acmd_script(
-    agent = "inkling",
-    script =  "game_attackairhi",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn ink_uair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn ink_uair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 3.0);
 		if macros::is_excute(fighter) {
@@ -128,24 +110,14 @@ unsafe fn ink_uair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }	
-#[acmd_script(
-    agent = "inkling",
-    script =  "effect_attackairhi",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn ink_uair_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn ink_uair_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 8.0);
 		if macros::is_excute(fighter) {
 			macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_attack_arc_d"), Hash40::new("top"), 0, 13.5, 0, -57, 80, 20, 0.95, true);
 		}
 }	
-#[acmd_script(
-    agent = "inkling",
-    script =  "sound_attackairhi",
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn ink_uair_sound(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn ink_uair_sound(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 7.0);
 		if macros::is_excute(fighter) {
@@ -153,8 +125,7 @@ unsafe fn ink_uair_sound(fighter: &mut L2CAgentBase) {
 			macros::PLAY_SEQUENCE(fighter, Hash40::new("seq_inkling_rnd_attack"));
 		}
 }
-#[acmd_script( agent = "inkling", script = "game_attackairb", category = ACMD_GAME, low_priority )]
-unsafe fn ink_bair(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn ink_bair(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 7.0);
     if macros::is_excute(agent) {
         WorkModule::on_flag(agent.module_accessor, *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
@@ -170,8 +141,7 @@ unsafe fn ink_bair(agent: &mut L2CAgentBase) {
         WorkModule::off_flag(agent.module_accessor, *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
     }
 }
-#[acmd_script( agent = "inkling", script = "game_attackairn", category = ACMD_GAME, low_priority )]
-unsafe fn ink_nair(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn ink_nair(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 2.0);
     if macros::is_excute(agent) {
         WorkModule::on_flag(agent.module_accessor, *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
@@ -203,8 +173,7 @@ unsafe fn ink_nair(agent: &mut L2CAgentBase) {
         notify_event_msc_cmd!(agent, Hash40::new_raw(0x2127e37c07), *GROUND_CLIFF_CHECK_KIND_ALWAYS_BOTH_SIDES);
     }
 }
-#[acmd_script( agent = "inkling", script = "game_attackairlw", category = ACMD_GAME, low_priority )]
-unsafe fn ink_dair(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn ink_dair(agent: &mut L2CAgentBase) {
 	frame(agent.lua_state_agent, 1.0);
 	macros::FT_MOTION_RATE(agent, 0.5);
     frame(agent.lua_state_agent, 5.0);

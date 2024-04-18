@@ -11,8 +11,7 @@ use smash::phx::Vector2f;
 use crate::util::*;
 
 //Jab Cancel
-#[fighter_frame_callback]
-pub fn jabcancel(fighter : &mut L2CFighterCommon) {
+unsafe extern "C" fn jabcancel(fighter : &mut L2CFighterCommon) {
     unsafe {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);    
 		let fighter_kind = smash::app::utility::get_kind(boma);
@@ -97,7 +96,7 @@ pub fn jabcancel(fighter : &mut L2CFighterCommon) {
 
 
 pub fn install() {
-    smashline::install_agent_frame_callbacks!(
-		jabcancel
-	);
+    Agent::new("fighter")
+	.on_line(Main, jabcancel)
+	.install();
 }

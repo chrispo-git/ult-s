@@ -15,12 +15,7 @@ use crate::util::*;
 use super::*;
 use super::super::*;
 
-#[acmd_script(
-    agent = "pikmin",
-    script =  "game_attackairfrayman",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn rayman_fair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn rayman_fair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	macros::FT_MOTION_RATE(fighter, 0.5);
 	wait(fighter.lua_state_agent, 10.0);
@@ -43,12 +38,7 @@ unsafe fn rayman_fair(fighter: &mut L2CAgentBase) {
         WorkModule::off_flag(fighter.module_accessor, *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
     }
 }		
-#[acmd_script(
-    agent = "pikmin",
-    script =  "effect_attackairfrayman",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn rayman_fair_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn rayman_fair_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	frame(fighter.lua_state_agent, 11.0);
     if macros::is_excute(fighter) {
@@ -77,12 +67,7 @@ unsafe fn rayman_fair_eff(fighter: &mut L2CAgentBase) {
         }
     }
 }		
-#[acmd_script(
-    agent = "pikmin",
-    script =  "sound_attackairfrayman",
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn rayman_fair_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn rayman_fair_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	frame(fighter.lua_state_agent, 11.0);
     if macros::is_excute(fighter) {
@@ -90,12 +75,7 @@ unsafe fn rayman_fair_snd(fighter: &mut L2CAgentBase) {
         attack_vc(fighter);
     }
 }
-#[acmd_script( 
-	agent = "pikmin", 
-	script = "game_attackairnrayman", 
-	category = ACMD_GAME, 
-	low_priority )]
-unsafe fn rayman_nair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn rayman_nair(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 6.0);
     if macros::is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
@@ -118,12 +98,7 @@ unsafe fn rayman_nair(fighter: &mut L2CAgentBase) {
         WorkModule::off_flag(fighter.module_accessor, *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
     }
 }	
-#[acmd_script( 
-	agent = "pikmin", 
-	script = "effect_attackairnrayman", 
-	category = ACMD_EFFECT, 
-	low_priority )]
-unsafe fn rayman_nair_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn rayman_nair_eff(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 5.0);
     if macros::is_excute(fighter) {
         macros::EFFECT_FOLLOW_ALPHA(fighter, Hash40::new("sys_spin_wind"), Hash40::new("trans"), 0, 7, 0, 210, 0, 0, 0.6, true, 0.5);
@@ -141,24 +116,14 @@ unsafe fn rayman_nair_eff(fighter: &mut L2CAgentBase) {
         macros::EFFECT_FOLLOW_ALPHA(fighter, Hash40::new("sys_spin_wind"), Hash40::new("trans"), 0, 6.5, 0, 210, 0, 0, 0.6, true, 0.3);
     }
 }
-#[acmd_script( 
-	agent = "pikmin", 
-	script = "sound_attackairnrayman", 
-	category = ACMD_SOUND, 
-	low_priority )]
-unsafe fn rayman_nair_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn rayman_nair_snd(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 7.0);
     if macros::is_excute(fighter) {
         macros::PLAY_SE(fighter, Hash40::new("se_pikmin_smash_s02"));
         attack_vc(fighter);
     }
 }
-#[acmd_script(
-    agent = "pikmin",
-    script =  "game_attackairbrayman",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn rayman_bair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn rayman_bair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	macros::FT_MOTION_RATE(fighter, 0.6);
 	wait(fighter.lua_state_agent, 10.0);
@@ -177,12 +142,7 @@ unsafe fn rayman_bair(fighter: &mut L2CAgentBase) {
         WorkModule::off_flag(fighter.module_accessor, *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
     }
 }			
-#[acmd_script(
-    agent = "pikmin",
-    script =  "effect_attackairbrayman",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn rayman_bair_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn rayman_bair_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	frame(fighter.lua_state_agent, 17.0);
     if macros::is_excute(fighter) {
@@ -198,12 +158,7 @@ unsafe fn rayman_bair_eff(fighter: &mut L2CAgentBase) {
 			macros::EFFECT_OFF_KIND(fighter, Hash40::new("sys_attack_arc"), false, true);
 	}
 }	
-#[acmd_script(
-    agent = "pikmin",
-    script =  "sound_attackairbrayman",
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn rayman_bair_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn rayman_bair_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	frame(fighter.lua_state_agent, 16.0);
     if macros::is_excute(fighter) {
@@ -211,12 +166,7 @@ unsafe fn rayman_bair_snd(fighter: &mut L2CAgentBase) {
         attack_vc(fighter);
     }
 }
-#[acmd_script( 
-	agent = "pikmin", 
-	script = "game_attackairlwrayman", 
-	category = ACMD_GAME, 
-	low_priority )]
-unsafe fn rayman_dair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn rayman_dair(fighter: &mut L2CAgentBase) {
 	frame(fighter.lua_state_agent, 1.0);
 	macros::FT_MOTION_RATE(fighter, 0.4);
     frame(fighter.lua_state_agent, 16.0);
@@ -253,12 +203,7 @@ unsafe fn rayman_dair(fighter: &mut L2CAgentBase) {
         WorkModule::off_flag(fighter.module_accessor, *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
     }
 }	
-#[acmd_script(
-    agent = "pikmin",
-    script =  "effect_attackairlwrayman",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn rayman_dair_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn rayman_dair_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     frame(fighter.lua_state_agent, 16.0);
     if macros::is_excute(fighter) {
@@ -273,12 +218,7 @@ unsafe fn rayman_dair_eff(fighter: &mut L2CAgentBase) {
         macros::EFFECT_ALPHA(fighter, Hash40::new("sys_attack_impact"), Hash40::new("havel"), 0, 0, 0, 0, 0, 0, 0.25, 0, 0, 0, 0, 0, 360, true, 0.4);
     }
 }
-#[acmd_script(
-    agent = "pikmin",
-    script =  "sound_attackairlwrayman",
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn rayman_dair_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn rayman_dair_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	frame(fighter.lua_state_agent, 16.0);
     if macros::is_excute(fighter) {
@@ -294,12 +234,7 @@ unsafe fn rayman_dair_snd(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(
-    agent = "pikmin",
-    script =  "game_attackairhirayman",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn rayman_uair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn rayman_uair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	macros::FT_MOTION_RATE(fighter, 0.7);
 	wait(fighter.lua_state_agent, 10.0);
@@ -322,12 +257,7 @@ unsafe fn rayman_uair(fighter: &mut L2CAgentBase) {
         WorkModule::off_flag(fighter.module_accessor, *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
     }
 }	
-#[acmd_script(
-    agent = "pikmin",
-    script =  "effect_attackairhirayman",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn rayman_uair_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn rayman_uair_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     frame(fighter.lua_state_agent, 11.0);
     if macros::is_excute(fighter) {
@@ -356,12 +286,7 @@ unsafe fn rayman_uair_eff(fighter: &mut L2CAgentBase) {
         }
     }
 }
-#[acmd_script(
-    agent = "pikmin",
-    script =  "sound_attackairhirayman",
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn rayman_uair_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn rayman_uair_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	frame(fighter.lua_state_agent, 11.0);
     if macros::is_excute(fighter) {
@@ -371,11 +296,21 @@ unsafe fn rayman_uair_snd(fighter: &mut L2CAgentBase) {
 }
 
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		rayman_fair, rayman_fair_eff, rayman_fair_snd,
-        rayman_nair, rayman_nair_eff, rayman_nair_snd,
-        rayman_bair, rayman_bair_eff, rayman_bair_snd,
-        rayman_dair, rayman_dair_eff, rayman_dair_snd,
-        rayman_uair, rayman_uair_eff, rayman_uair_snd
-    );
+    Agent::new("pikmin")
+        .game_acmd("game_attackairfrayman", rayman_fair)
+        .effect_acmd("effect_attackairfrayman", rayman_fair_eff)
+        .sound_acmd("sound_attackairfrayman", rayman_fair_snd)
+        .game_acmd("game_attackairnrayman", rayman_nair)
+        .effect_acmd("effect_attackairnrayman", rayman_nair_eff)
+        .sound_acmd("sound_attackairnrayman", rayman_nair_snd)
+        .game_acmd("game_attackairbrayman", rayman_bair)
+        .effect_acmd("effect_attackairbrayman", rayman_bair_eff)
+        .sound_acmd("sound_attackairbrayman", rayman_bair_snd)
+        .game_acmd("game_attackairlwrayman", rayman_dair)
+        .effect_acmd("effect_attackairlwrayman", rayman_dair_eff)
+        .sound_acmd("sound_attackairlwrayman", rayman_dair_snd)
+        .game_acmd("game_attackairhirayman", rayman_uair)
+        .effect_acmd("effect_attackairhirayman", rayman_uair_eff)
+        .sound_acmd("sound_attackairhirayman", rayman_uair_snd)
+        .install();
 }

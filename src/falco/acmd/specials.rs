@@ -13,19 +13,20 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		falco_shine,
-		falco_shine_eff,
-		falco_laser
-    );
+    Agent::new("falco")
+    .acmd("game_speciallw", falco_shine)    
+    .acmd("game_specialairlw", falco_shine)     
+    .acmd("effect_specialairlw", falco_shine_eff)   
+    .install();
+
+	Agent::new("falco_blaster_bullet")
+    .acmd("game_fly", falco_laser)    
+    .install();
 }	
-#[acmd_script(
-    agent = "falco_blaster_bullet",
-    script =  "game_fly",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn falco_laser(fighter: &mut L2CAgentBase) {
+
+unsafe extern "C" fn falco_laser(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 3.0, /*Angle*/ 361, /*KBG*/ 100, /*FKB*/ 30, /*BKB*/ 0, /*Size*/ 1.44, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.8, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.1, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_SPEED, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ true, /*Absorbable*/ true, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_elec"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_ELEC, /*Type*/ *ATTACK_REGION_ENERGY);
@@ -40,12 +41,7 @@ unsafe fn falco_laser(fighter: &mut L2CAgentBase) {
 			macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 0.8, /*Angle*/ 361, /*KBG*/ 100, /*FKB*/ 1, /*BKB*/ 0, /*Size*/ 1.44, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.8, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.1, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_SPEED, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ true, /*Absorbable*/ true, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_elec"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_ELEC, /*Type*/ *ATTACK_REGION_ENERGY);
 		}
 }	
-#[acmd_script(
-    agent = "falco",
-    scripts =  ["game_speciallw", "game_specialairlw"],
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn falco_shine(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn falco_shine(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 4.0);
 		if macros::is_excute(fighter) {
@@ -61,12 +57,7 @@ unsafe fn falco_shine(fighter: &mut L2CAgentBase) {
 		frame(fighter.lua_state_agent, 15.0);
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.75);
 }		
-#[acmd_script(
-    agent = "falco",
-    scripts =  ["effect_speciallw", "effect_specialairlw"],
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn falco_shine_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn falco_shine_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 2.0);
 		if macros::is_excute(fighter) {

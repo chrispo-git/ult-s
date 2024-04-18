@@ -15,12 +15,53 @@ use crate::util::*;
 use super::*;
 use super::super::*;
 
-#[acmd_script(
-    agent = "miiswordsman",
-    scripts =  ["game_specialn2"],
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn sword_neutralb_2(agent: &mut L2CAgentBase) {
+pub fn install() {
+    Agent::new("miiswordsman")
+    .acmd("game_specialn2", sword_neutralb_2)    
+    .acmd("game_specialairn2", sword_air_neutralb_2)    
+    .acmd("effect_specialn2", sword_neutralb_2_eff)    
+    .acmd("effect_specialairn2", sword_neutralb_2_eff)    
+    .acmd("sound_specialn2", sword_neutralb_2_snd)    
+    .acmd("sound_specialairn2", sword_neutralb_2_snd)    
+    .acmd("game_specialhi3start", sword_hs_start)    
+    .acmd("game_specialn1", sword_nado)    
+    .acmd("game_specialairn1", sword_nado)    
+    .acmd("game_specials2attack", sword_gale_stab)    
+    .acmd("game_specialairs2attack", sword_air_gale_stab)    
+    .acmd("game_speciallw1hit", sword_counter)    
+    .acmd("game_specialairlw1hit", sword_counter)    
+    .acmd("game_specialhi1", sword_ss_rise)    
+    .acmd("game_specialairhi1", sword_ss_rise)    
+    .acmd("game_specialairn3start", sword_airgrab_start)    
+    .acmd("game_specialn3start", sword_airgrab_start)    
+    .acmd("effect_specialairn3start", sword_airgrab_start_eff)    
+    .acmd("effect_specialn3start", sword_airgrab_start_eff)    
+    .acmd("effect_specialairn3loop", sword_airgrab_eff)    
+    .acmd("effect_specialn3loop", sword_airgrab_eff)    
+    .acmd("effect_specialairn3end", sword_airgrab_end_eff)    
+    .acmd("effect_specialn3end", sword_airgrab_end_eff)    
+    .acmd("game_specialairn3loop", sword_airgrab)    
+    .acmd("game_specialairn3end", sword_airgrab_end)    
+    .acmd("sound_specialairn3end", sword_airgrab_end_snd)    
+    .acmd("expression_specialairn3end", sword_airgrab_end_expr)    
+    .acmd("game_specials1", sword_sideb1_start)    
+    .acmd("effect_specials1", sword_sideb1_start_eff)    
+    .acmd("effect_specialairs1", sword_sideb1_start_eff)    
+    .acmd("game_specials1hit", sword_sideb1)    
+    .acmd("game_specials1air", sword_sideb1_air_start)    
+    .acmd("game_specialairs1hit", sword_sideb1_air)    
+    .acmd("effect_specials1hit", sword_sideb1_effect)    
+	.acmd("sound_specials1hit", sword_sideb1_snd)    
+    .acmd("sound_specialairs1hit", sword_sideb1_snd)    
+	.acmd("effect_specialairs1hit", sword_sideb1_air_effect)    
+    .install();
+
+	Agent::new("miiswordsman_tornadoshot")
+    .acmd("game_fly", sword_nadoshot)    
+    .install();
+}
+
+unsafe extern "C" fn sword_neutralb_2(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 12.0);
     if macros::is_excute(agent) {
     	macros::ATTACK(agent, 0, 0, Hash40::new("top"), 14.0, 361, 100, 0, 30, 8.5, 0.0, 6.5, 14.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, -6.5, 0.0, 0, true, false, false, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_elec"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_ELEC, *ATTACK_REGION_ENERGY);
@@ -30,12 +71,7 @@ unsafe fn sword_neutralb_2(agent: &mut L2CAgentBase) {
 		AttackModule::clear_all(agent.module_accessor);
 	}
 }	
-#[acmd_script(
-    agent = "miiswordsman",
-    scripts =  ["game_specialairn2"],
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn sword_air_neutralb_2(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn sword_air_neutralb_2(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 12.0);
     if macros::is_excute(agent) {
     	macros::ATTACK(agent, 0, 0, Hash40::new("top"), 14.0, 361, 100, 0, 30, 8.5, 0.0, 6.5, 14.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, -6.5, 0.0, 0, true, false, false, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_elec"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_ELEC, *ATTACK_REGION_ENERGY);
@@ -45,12 +81,7 @@ unsafe fn sword_air_neutralb_2(agent: &mut L2CAgentBase) {
 		AttackModule::clear_all(agent.module_accessor);
 	}
 }	
-#[acmd_script(
-    agent = "miiswordsman",
-    scripts =  ["effect_specialn2", "effect_specialairn2"],
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn sword_neutralb_2_eff(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn sword_neutralb_2_eff(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 11.0);
     if macros::is_excute(agent) {
 		macros::EFFECT(agent, Hash40::new("sys_bomb_a"), Hash40::new("top"), 0.0, 6.5, 14.0, 0, 0, 0, 0.7, 0, 0, 0, 0, 0, 0, true);
@@ -89,12 +120,7 @@ unsafe fn sword_neutralb_2_eff(agent: &mut L2CAgentBase) {
 		macros::EFFECT_OFF_KIND(agent, Hash40::new("sys_bomb_a"), false, true);
     }
 }
-#[acmd_script(
-    agent = "miiswordsman",
-    scripts =  ["sound_specialn2", "sound_specialairn2"],
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn sword_neutralb_2_snd(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn sword_neutralb_2_snd(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 9.0);
     if macros::is_excute(agent) {
 		macros::PLAY_SE(agent, Hash40::new("se_common_bomb_s"));
@@ -103,35 +129,20 @@ unsafe fn sword_neutralb_2_snd(agent: &mut L2CAgentBase) {
 		macros::PLAY_SEQUENCE(agent, Hash40::new("seq_miiswordsman_rnd_attack03"));
     }
 }
-#[acmd_script(
-    agent = "miiswordsman_tornadoshot",
-    script =  "game_fly",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn sword_nadoshot(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sword_nadoshot(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	if macros::is_excute(fighter) {
 		macros::AREA_WIND_2ND_RAD_arg9(fighter, 0, 2, 0.05, 200, 1, 3, 3, 25, 30);
 		macros::ATTACK(fighter, 0, 0, Hash40::new("top"), 9.0, 45, 100, 40, 0, 5.0, 0.0, 11.0, 1.2, Some(0.0), Some(0.0), Some(0.0), 1.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_SPEED, false, -3, 0.0, 0, true, false, false, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_cutup"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_CUTUP, *ATTACK_REGION_ENERGY);
     }
 }
-#[acmd_script(
-    agent = "miiswordsman",
-    script =  "game_specialhi3start",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn sword_hs_start(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sword_hs_start(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 1.0);
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.25);
 }
 
-#[acmd_script(
-    agent = "miiswordsman",
-    scripts =  ["game_specialn1", "game_specialairn1"],
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn sword_nado(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sword_nado(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 		frame(fighter.lua_state_agent, 1.0);
@@ -148,8 +159,7 @@ unsafe fn sword_nado(fighter: &mut L2CAgentBase) {
 		frame(fighter.lua_state_agent, 18.0);
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 1);
 }
-#[acmd_script( agent = "miiswordsman", script = "game_specials2attack", category = ACMD_GAME, low_priority )]
-unsafe fn sword_gale_stab(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn sword_gale_stab(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 1.0);
     if macros::is_excute(agent) {
         macros::ATTACK(agent, 0, 0, Hash40::new("top"), 8.0, 55, 88, 0, 55, 5.0, 0.0, 5.5, 16.0, Some(0.0), Some(5.5), Some(14.0), 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_cutup"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_CUTUP, *ATTACK_REGION_SWORD);
@@ -170,8 +180,7 @@ unsafe fn sword_gale_stab(agent: &mut L2CAgentBase) {
         notify_event_msc_cmd!(agent, Hash40::new_raw(0x2127e37c07), *GROUND_CLIFF_CHECK_KIND_ALWAYS_BOTH_SIDES);
     }
 }
-#[acmd_script( agent = "miiswordsman", script = "game_specialairs2attack", category = ACMD_GAME, low_priority )]
-unsafe fn sword_air_gale_stab(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn sword_air_gale_stab(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 1.0);
     if macros::is_excute(agent) {
         macros::ATTACK(agent, 0, 0, Hash40::new("top"), 8.0, 55, 88, 0, 55, 5.0, 0.0, 5.5, 16.0, Some(0.0), Some(5.5), Some(14.0), 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_cutup"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_CUTUP, *ATTACK_REGION_SWORD);
@@ -193,12 +202,7 @@ unsafe fn sword_air_gale_stab(agent: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(
-    agent = "miiswordsman",
-    scripts =  ["game_speciallw1hit", "game_specialairlw1hit"],
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn sword_counter(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sword_counter(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 			macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.4);
 			if macros::is_excute(fighter) {
@@ -223,12 +227,7 @@ unsafe fn sword_counter(fighter: &mut L2CAgentBase) {
 			macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.65);
 }		
 
-#[acmd_script(
-    agent = "miiswordsman",
-    scripts =  ["game_specialhi1", "game_specialairhi1"],
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn sword_ss_rise(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sword_ss_rise(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let module_accessor = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);
 		frame(fighter.lua_state_agent, 1.0);
@@ -270,12 +269,7 @@ unsafe fn sword_ss_rise(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }	
-#[acmd_script(
-    agent = "miiswordsman",
-    scripts =  ["game_specialairn3start", "game_specialn3start"],
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn sword_airgrab_start(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sword_airgrab_start(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 			macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.5);
 			frame(fighter.lua_state_agent, 6.0);
@@ -295,12 +289,7 @@ unsafe fn sword_airgrab_start(fighter: &mut L2CAgentBase) {
 			frame(fighter.lua_state_agent, 10.0);
 			macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.2333);
 }	
-#[acmd_script(
-    agent = "miiswordsman",
-    scripts =  ["effect_specialairn3start", "effect_specialn3start"],
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn sword_airgrab_start_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sword_airgrab_start_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			macros::EFFECT(fighter, Hash40::new("sys_smash_flash"), Hash40::new("havel"), -0.0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, true);
@@ -313,12 +302,7 @@ unsafe fn sword_airgrab_start_eff(fighter: &mut L2CAgentBase) {
 			wait(fighter.lua_state_agent, 1.0);
 		}
 }	
-#[acmd_script(
-    agent = "miiswordsman",
-    scripts =  ["effect_specialairn3loop", "effect_specialn3loop"],
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn sword_airgrab_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sword_airgrab_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		for _ in 0..50 
  {
@@ -328,24 +312,14 @@ unsafe fn sword_airgrab_eff(fighter: &mut L2CAgentBase) {
 			wait(fighter.lua_state_agent, 3.0)	
 		}
 }	
-#[acmd_script(
-    agent = "miiswordsman",
-    scripts =  ["effect_specialairn3end", "effect_specialn3end"],
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn sword_airgrab_end_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sword_airgrab_end_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			macros::EFFECT(fighter, Hash40::new("sys_damage_fire"), Hash40::new("top"), 0, -1, 10, 0, 0, 0, 2.75, 0, 0, 0, 0, 0, 0, true);
 			macros::EFFECT_OFF_KIND(fighter, Hash40::new("sys_fireflower_shot"), false, true);
 		}
 }
-#[acmd_script(
-    agent = "miiswordsman",
-    script =  "game_specialairn3loop",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn sword_airgrab(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sword_airgrab(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 			if macros::is_excute(fighter) {
 				AttackModule::clear_all(fighter.module_accessor);
@@ -363,12 +337,7 @@ unsafe fn sword_airgrab(fighter: &mut L2CAgentBase) {
 				macros::SET_SPEED_EX(fighter, 2, -2.625, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
 			}
 }	
-#[acmd_script(
-    agent = "miiswordsman",
-    script =  "game_specialairn3end",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn sword_airgrab_end(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sword_airgrab_end(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 			if macros::is_excute(fighter) {
 				macros::SET_SPEED_EX(fighter, -0.8, 0.7, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
@@ -380,32 +349,21 @@ unsafe fn sword_airgrab_end(fighter: &mut L2CAgentBase) {
 				AttackModule::clear_all(fighter.module_accessor);
 			}
 }	
-#[acmd_script(
-    agent = "miiswordsman",
-    script =  "sound_specialairn3end",
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn sword_airgrab_end_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sword_airgrab_end_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 			if macros::is_excute(fighter) {
 				macros::PLAY_SEQUENCE(fighter, Hash40::new("seq_miiswordsman_rnd_attack03"));
 				macros::PLAY_SE(fighter, Hash40::new("se_miiswordsman_special_c3_n02"));
 			}
 }
-#[acmd_script(
-    agent = "miiswordsman",
-    script =  "expression_specialairn3end",
-    category = ACMD_EXPRESSION,
-	low_priority)]
-unsafe fn sword_airgrab_end_expr(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sword_airgrab_end_expr(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			macros::QUAKE(fighter, *CAMERA_QUAKE_KIND_M);
 		}
 }
 
-#[acmd_script( agent = "miiswordsman", script = "game_specials1", category = ACMD_GAME, low_priority )]
-unsafe fn sword_sideb1_start(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn sword_sideb1_start(agent: &mut L2CAgentBase) {
     if macros::is_excute(agent) {
         notify_event_msc_cmd!(agent, Hash40::new_raw(0x2127e37c07), *GROUND_CLIFF_CHECK_KIND_NONE);
 		macros::FT_MOTION_RATE(agent, 0.6);
@@ -419,8 +377,7 @@ unsafe fn sword_sideb1_start(agent: &mut L2CAgentBase) {
         notify_event_msc_cmd!(agent, Hash40::new_raw(0x2127e37c07), *GROUND_CLIFF_CHECK_KIND_ALWAYS);
     }
 }
-#[acmd_script( agent = "miiswordsman", scripts = ["effect_specials1", "effect_specialairs1"], category = ACMD_EFFECT, low_priority )]
-unsafe fn sword_sideb1_start_eff(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn sword_sideb1_start_eff(agent: &mut L2CAgentBase) {
     if macros::is_excute(agent) {
 		macros::FOOT_EFFECT(agent, Hash40::new("sys_dash_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.9, 0, 0, 0, 0, 0, 0, false);
 		let tex_sword = WorkModule::get_int64(agent.module_accessor, *FIGHTER_MIISWORDSMAN_INSTANCE_WORK_ID_INT_EFT_TEX_SWORD) as u64;
@@ -436,12 +393,7 @@ unsafe fn sword_sideb1_start_eff(agent: &mut L2CAgentBase) {
 		wait(agent.lua_state_agent, 3.0);
 	}
 }	
-#[acmd_script(
-    agent = "miiswordsman",
-    script =  "game_specials1hit",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn sword_sideb1(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sword_sideb1(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
         frame(fighter.lua_state_agent, 1.0);	
 		if macros::is_excute(fighter) {
@@ -461,8 +413,7 @@ unsafe fn sword_sideb1(fighter: &mut L2CAgentBase) {
 			JostleModule::set_status(fighter.module_accessor, false);
 		}
 }	
-#[acmd_script( agent = "miiswordsman", script = "game_specials1air", category = ACMD_GAME, low_priority )]
-unsafe fn sword_sideb1_air_start(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn sword_sideb1_air_start(agent: &mut L2CAgentBase) {
     if macros::is_excute(agent) {
         notify_event_msc_cmd!(agent, Hash40::new_raw(0x2127e37c07), *GROUND_CLIFF_CHECK_KIND_NONE);
 		macros::FT_MOTION_RATE(agent, 0.5);
@@ -476,12 +427,7 @@ unsafe fn sword_sideb1_air_start(agent: &mut L2CAgentBase) {
         notify_event_msc_cmd!(agent, Hash40::new_raw(0x2127e37c07), *GROUND_CLIFF_CHECK_KIND_ALWAYS);
     }
 }
-#[acmd_script(
-    agent = "miiswordsman",
-    script =  "game_specialairs1hit",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn sword_sideb1_air(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sword_sideb1_air(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 2.0);
 		if macros::is_excute(fighter) {
@@ -492,12 +438,7 @@ unsafe fn sword_sideb1_air(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }	
-#[acmd_script(
-    agent = "miiswordsman",
-    script =  "effect_specials1hit",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn sword_sideb1_effect(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn sword_sideb1_effect(agent: &mut L2CAgentBase) {
     if macros::is_excute(agent) {
 		let tex_sword = WorkModule::get_int64(agent.module_accessor, *FIGHTER_MIISWORDSMAN_INSTANCE_WORK_ID_INT_EFT_TEX_SWORD) as u64;
 		let sword_add = WorkModule::get_int64(agent.module_accessor, *FIGHTER_MIISWORDSMAN_INSTANCE_WORK_ID_INT_EFT_TEX_SWORD_ADD) as u64;
@@ -510,23 +451,13 @@ unsafe fn sword_sideb1_effect(agent: &mut L2CAgentBase) {
     }
 	
 }	
-#[acmd_script(
-    agent = "miiswordsman",
-    scripts =  ["sound_specials1hit", "sound_specialairs1hit"],
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn sword_sideb1_snd(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn sword_sideb1_snd(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 1.0);
     if macros::is_excute(agent) {
         macros::PLAY_SE(agent, Hash40::new("se_miiswordsman_special_s05"));
     }
 }	
-#[acmd_script(
-    agent = "miiswordsman",
-    script =  "effect_specialairs1hit",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn sword_sideb1_air_effect(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn sword_sideb1_air_effect(agent: &mut L2CAgentBase) {
     if macros::is_excute(agent) {
 		let tex_sword = WorkModule::get_int64(agent.module_accessor, *FIGHTER_MIISWORDSMAN_INSTANCE_WORK_ID_INT_EFT_TEX_SWORD) as u64;
 		let sword_add = WorkModule::get_int64(agent.module_accessor, *FIGHTER_MIISWORDSMAN_INSTANCE_WORK_ID_INT_EFT_TEX_SWORD_ADD) as u64;
@@ -547,23 +478,3 @@ unsafe fn sword_sideb1_air_effect(agent: &mut L2CAgentBase) {
         macros::EFFECT_OFF_KIND_WORK(agent, *FIGHTER_MIISWORDSMAN_INSTANCE_WORK_ID_INT_EFT_ID_SWORD_FLARE, false, false);
     }
 }	
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		sword_neutralb_2, sword_neutralb_2_eff, sword_neutralb_2_snd,
-        sword_air_neutralb_2,
-        sword_nadoshot,
-        sword_hs_start,
-        sword_nado,
-        sword_gale_stab, sword_air_gale_stab,
-        sword_counter,
-        sword_ss_rise,
-        sword_airgrab_start, sword_airgrab_start_eff,
-        sword_airgrab, sword_airgrab_eff,
-        sword_airgrab_end, sword_airgrab_end_eff, sword_airgrab_end_snd, sword_airgrab_end_expr,
-        sword_sideb1_start, sword_sideb1_start_eff,
-        sword_sideb1, sword_sideb1_effect, sword_sideb1_snd,
-        sword_sideb1_air_start,
-        sword_sideb1_air, sword_sideb1_air_effect
-    );
-}

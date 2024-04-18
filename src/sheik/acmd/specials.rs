@@ -14,8 +14,18 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[acmd_script( agent = "sheik_needle", script = "game_move", category = ACMD_GAME, low_priority )]
-unsafe fn sheik_needles(agent: &mut L2CAgentBase) {
+pub fn install() {
+    Agent::new("sheik")
+    .acmd("game_speciallwattack", sheik_bf)    
+    .acmd("game_speciallwattackreturn", sheik_bfback)    
+    .install();
+
+    Agent::new("sheik_needle")
+    .acmd("game_move", sheik_needles)    
+    .install();
+}
+
+unsafe extern "C" fn sheik_needles(agent: &mut L2CAgentBase) {
     if macros::is_excute(agent) {
         macros::ATTACK(agent, 0, 0, Hash40::new("top"), 1.5, 60, 175, 0, 0, 2.0, 0.0, 0.0, 0.0, None, None, None, 0.8, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, true, false, false, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_sting"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_CUTUP, *ATTACK_REGION_OBJECT);
     }
@@ -24,8 +34,7 @@ unsafe fn sheik_needles(agent: &mut L2CAgentBase) {
         macros::ATK_POWER(agent, 0, 0.9);
     }
 }
-#[acmd_script( agent = "sheik", script = "game_speciallwattack", category = ACMD_GAME, low_priority )]
-unsafe fn sheik_bf(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn sheik_bf(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 2.0);
     if macros::is_excute(agent) {
         macros::ATTACK(agent, 0, 0, Hash40::new("kneer"), 12.0, 361, 97, 0, 26, 4.5, 5.5, 0.0, 0.0, None, None, None, 1.7, 1.0, *ATTACK_SETOFF_KIND_THRU, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_KICK, *ATTACK_REGION_KICK);
@@ -40,8 +49,7 @@ unsafe fn sheik_bf(agent: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script( agent = "sheik", script = "game_speciallwattackreturn", category = ACMD_GAME, low_priority )]
-unsafe fn sheik_bfback(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn sheik_bfback(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 2.0);
     if macros::is_excute(agent) {
         macros::ATTACK(agent, 0, 0, Hash40::new("kneer"), 14.0, 361, 97, 0, 28, 4.5, 5.5, 0.0, 0.0, None, None, None, 1.7, 1.0, *ATTACK_SETOFF_KIND_THRU, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_KICK, *ATTACK_REGION_KICK);
@@ -54,12 +62,4 @@ unsafe fn sheik_bfback(agent: &mut L2CAgentBase) {
         AttackModule::clear_all(agent.module_accessor);
         KineticModule::change_kinetic(agent.module_accessor, *FIGHTER_KINETIC_TYPE_FALL);
     }
-}
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		sheik_needles,
-        sheik_bf,
-        sheik_bfback
-    );
 }

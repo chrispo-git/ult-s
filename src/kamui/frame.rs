@@ -13,13 +13,14 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_agent_frames!(
-        kamui_frame
-    );
+    Agent::new("kamui")
+	.on_line(Main, kamui_frame)
+	.install();
 }
-#[fighter_frame( agent = FIGHTER_KIND_KAMUI )]
-fn kamui_frame(fighter: &mut L2CFighterCommon) {
+
+unsafe extern "C" fn kamui_frame(fighter: &mut L2CFighterCommon) {
     unsafe {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);

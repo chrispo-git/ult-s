@@ -14,12 +14,15 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[acmd_script(
-    agent = "trail",
-    script =  "game_specialinput",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn sora_special_input(fighter: &mut L2CAgentBase) {
+pub fn install() {
+    Agent::new("trail")
+    .acmd("game_specialinput", sora_special_input)    
+    .acmd("effect_specialinput", sora_special_input_eff)    
+	.acmd("sound_specialinput", sora_special_input_snd)    
+	.install();
+}
+
+unsafe extern "C" fn sora_special_input(fighter: &mut L2CAgentBase) {
 	let lua_state = fighter.lua_state_agent;
 	frame(fighter.lua_state_agent, 19.0);
 	macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.5);
@@ -71,12 +74,7 @@ unsafe fn sora_special_input(fighter: &mut L2CAgentBase) {
 		AttackModule::clear_all(fighter.module_accessor);
 	}
 }
-#[acmd_script(
-    agent = "trail",
-    script =  "effect_specialinput",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn sora_special_input_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sora_special_input_eff(fighter: &mut L2CAgentBase) {
 	let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 19.0);
 		if macros::is_excute(fighter) {
@@ -90,23 +88,12 @@ unsafe fn sora_special_input_eff(fighter: &mut L2CAgentBase) {
 			macros::EFFECT_OFF_KIND(fighter, Hash40::new("trail_keyblade_light"), false, true);
 			macros::AFTER_IMAGE_OFF(fighter, 5);
 		}
-	}
-	#[acmd_script(
-		agent = "trail",
-		script =  "sound_specialinput",
-		category = ACMD_SOUND,
-		low_priority)]
-	unsafe fn sora_special_input_snd(fighter: &mut L2CAgentBase) {
-		let lua_state = fighter.lua_state_agent;
-			frame(fighter.lua_state_agent, 17.0);
-			if macros::is_excute(fighter) {
-				macros::PLAY_STATUS(fighter, Hash40::new("se_trail_attackair_b01"));
-				macros::PLAY_SEQUENCE(fighter, Hash40::new("seq_trail_rnd_attack03"));
-			}
+}
+unsafe extern "C" fn sora_special_input_snd(fighter: &mut L2CAgentBase) {
+	let lua_state = fighter.lua_state_agent;
+		frame(fighter.lua_state_agent, 17.0);
+		if macros::is_excute(fighter) {
+			macros::PLAY_STATUS(fighter, Hash40::new("se_trail_attackair_b01"));
+			macros::PLAY_SEQUENCE(fighter, Hash40::new("seq_trail_rnd_attack03"));
 		}
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		sora_special_input, sora_special_input_eff, sora_special_input_snd
-    );
 }

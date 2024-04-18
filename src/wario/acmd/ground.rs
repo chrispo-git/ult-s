@@ -14,12 +14,18 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[acmd_script(
-    agent = "wario",
-    script =  "game_attackdash",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn wario_da(fighter: &mut L2CAgentBase) {
+pub fn install() {
+    Agent::new("wario")
+    .acmd("game_attackdash", wario_da)    
+    .acmd("effect_attackdash", wario_da_eff)    
+    .acmd("sound_attackdash", wario_da_snd)    
+    .acmd("game_attacklw4", wario_dsmash)    
+    .acmd("effect_attacklw4", wario_dsmash_eff)    
+    .acmd("sound_attacklw4", wario_dsmash_snd)    
+    .install();
+}
+
+unsafe extern "C" fn wario_da(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 6.0);
 		if macros::is_excute(fighter) {
@@ -34,12 +40,7 @@ unsafe fn wario_da(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }	
-#[acmd_script(
-    agent = "wario",
-    script =  "effect_attackdash",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn wario_da_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn wario_da_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 1.0);
 		if macros::is_excute(fighter) {
@@ -54,12 +55,7 @@ unsafe fn wario_da_eff(fighter: &mut L2CAgentBase) {
 			macros::LANDING_EFFECT(fighter, Hash40::new("sys_down_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
 		}
 }	
-#[acmd_script(
-    agent = "wario",
-    script =  "sound_attackdash",
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn wario_da_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn wario_da_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 3.0);
 		if macros::is_excute(fighter) {
@@ -79,12 +75,7 @@ unsafe fn wario_da_snd(fighter: &mut L2CAgentBase) {
 			macros::PLAY_DOWN_SE(fighter, Hash40::new("se_common_down_soil_s"));
 		}
 }	
-#[acmd_script(
-    agent = "wario",
-    script =  "game_attacklw4",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn wario_dsmash(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn wario_dsmash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 3.0);
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 2.5);
@@ -113,12 +104,7 @@ unsafe fn wario_dsmash(fighter: &mut L2CAgentBase) {
 			CancelModule::enable_cancel(fighter.module_accessor);
 		}
 }	
-#[acmd_script(
-    agent = "wario",
-    script =  "effect_attacklw4",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn wario_dsmash_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn wario_dsmash_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 2.0);
 		if macros::is_excute(fighter) {
@@ -133,12 +119,7 @@ unsafe fn wario_dsmash_eff(fighter: &mut L2CAgentBase) {
 			macros::QUAKE(fighter, *CAMERA_QUAKE_KIND_M);
 		}		
 }	
-#[acmd_script(
-    agent = "wario",
-    script =  "sound_attacklw4",
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn wario_dsmash_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn wario_dsmash_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 5.0);
 		if macros::is_excute(fighter) {
@@ -154,10 +135,3 @@ unsafe fn wario_dsmash_snd(fighter: &mut L2CAgentBase) {
 			macros::PLAY_SE(fighter, Hash40::new("se_common_throw_02"));
 		}
 }	
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		wario_da, wario_da_eff, wario_da_snd,
-        wario_dsmash, wario_dsmash_eff, wario_dsmash_snd
-    );
-}

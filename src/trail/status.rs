@@ -14,8 +14,17 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[status_script(agent = "trail", status = FIGHTER_TRAIL_STATUS_KIND_ATTACK_AIR_F, condition = LUA_SCRIPT_STATUS_FUNC_INIT_STATUS)]
-unsafe fn fair_init(fighter: &mut L2CFighterCommon) -> L2CValue {
+pub fn install() {
+    Agent::new("trail")
+    .status(Init, *FIGHTER_TRAIL_STATUS_KIND_ATTACK_AIR_F, fair_init)
+    .status(Init, *FIGHTER_STATUS_KIND_ATTACK_AIR, init_attack_air)
+    .status(Pre, *FIGHTER_STATUS_KIND_ATTACK_AIR, pre_attack_air)
+    .status(Exec, *FIGHTER_STATUS_KIND_ATTACK_AIR, exec_attack_air)
+    //.status(Main, *FIGHTER_STATUS_KIND_ATTACK_AIR, main_attack_air)
+    .install();
+}
+
+unsafe extern "C" fn fair_init(fighter: &mut L2CFighterCommon) -> L2CValue {
     let motion_kind = MotionModule::motion_kind(fighter.module_accessor);
     let frame = MotionModule::frame(fighter.module_accessor);
 
@@ -42,8 +51,7 @@ unsafe fn fair_init(fighter: &mut L2CFighterCommon) -> L2CValue {
     0.into()
 }
 //fighter.status_AttackAir()
-#[status_script(agent = "trail", status = FIGHTER_STATUS_KIND_ATTACK_AIR, condition = LUA_SCRIPT_STATUS_FUNC_INIT_STATUS)]
-pub unsafe fn init_attack_air(fighter: &mut L2CFighterCommon) -> L2CValue {
+unsafe extern "C" fn init_attack_air(fighter: &mut L2CFighterCommon) -> L2CValue {
     let motion_kind = MotionModule::motion_kind(fighter.module_accessor);
     let frame = MotionModule::frame(fighter.module_accessor);
 	let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
@@ -95,8 +103,7 @@ pub unsafe fn init_attack_air(fighter: &mut L2CFighterCommon) -> L2CValue {
     fighter.sub_attack_air_uniq_process_init();
     0.into()
 }
-#[status_script(agent = "trail", status = FIGHTER_STATUS_KIND_ATTACK_AIR, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_PRE)]
-pub unsafe fn pre_attack_air(fighter: &mut L2CFighterCommon) -> L2CValue {
+unsafe extern "C" fn pre_attack_air(fighter: &mut L2CFighterCommon) -> L2CValue {
     let motion_kind = MotionModule::motion_kind(fighter.module_accessor);
     let frame = MotionModule::frame(fighter.module_accessor);
 	let stick_x = ControlModule::get_stick_x(fighter.module_accessor);
@@ -113,15 +120,13 @@ pub unsafe fn pre_attack_air(fighter: &mut L2CFighterCommon) -> L2CValue {
 		//original!(fighter)
 	}
 }
-#[status_script(agent = "trail", status = FIGHTER_STATUS_KIND_ATTACK_AIR, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
-pub unsafe fn main_attack_air(fighter: &mut L2CFighterCommon) -> L2CValue {
+unsafe extern "C" fn main_attack_air(fighter: &mut L2CFighterCommon) -> L2CValue {
     let motion_kind = MotionModule::motion_kind(fighter.module_accessor);
     let frame = MotionModule::frame(fighter.module_accessor);
     fighter.status_AttackAir_Main();
 	0.into()
 }
-#[status_script(agent = "trail", status = FIGHTER_STATUS_KIND_ATTACK_AIR, condition = LUA_SCRIPT_STATUS_FUNC_EXEC_STATUS)]
-pub unsafe fn exec_attack_air(fighter: &mut L2CFighterCommon) -> L2CValue {
+unsafe extern "C" fn exec_attack_air(fighter: &mut L2CFighterCommon) -> L2CValue {
     let motion_kind = MotionModule::motion_kind(fighter.module_accessor);
     let frame = MotionModule::frame(fighter.module_accessor);
 	let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
@@ -144,9 +149,5 @@ pub unsafe fn exec_attack_air(fighter: &mut L2CFighterCommon) -> L2CValue {
 			};
 		};
 	};
-	original!(fighter)
-}
-
-pub fn install() {
-    smashline::install_status_scripts!(fair_init, init_attack_air, pre_attack_air, exec_attack_air);
+	return smashline::original_status(Exec, fighter, *FIGHTER_STATUS_KIND_ATTACK_AIR)(fighter);
 }

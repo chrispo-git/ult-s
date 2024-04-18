@@ -13,15 +13,16 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		terry_nair,
-		terry_dair,
-		terry_fair
-    );
+    Agent::new("dolly")
+    .acmd("game_attackairn", terry_nair)    
+    .acmd("game_attackairf", terry_fair)    
+    .acmd("game_attackairlw", terry_dair)    
+    .install();
 }
-#[acmd_script( agent = "dolly", script = "game_attackairn", category = ACMD_GAME, low_priority )]
-unsafe fn terry_nair(fighter: &mut L2CAgentBase) {
+
+unsafe extern "C" fn terry_nair(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, *FIGHTER_DOLLY_INSTANCE_WORK_ID_FLAG_FINAL_HIT_CANCEL);
         WorkModule::on_flag(fighter.module_accessor, *FIGHTER_DOLLY_STATUS_ATTACK_WORK_FLAG_HIT_CANCEL);
@@ -47,12 +48,7 @@ unsafe fn terry_nair(fighter: &mut L2CAgentBase) {
     }
 }
 
-#[acmd_script(
-    agent = "dolly",
-    script =  "game_attackairf",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn terry_fair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn terry_fair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_DOLLY_INSTANCE_WORK_ID_FLAG_FINAL_HIT_CANCEL);
@@ -93,12 +89,7 @@ unsafe fn terry_fair(fighter: &mut L2CAgentBase) {
 		}
 }
 
-#[acmd_script(
-    agent = "dolly",
-    script =  "game_attackairlw",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn terry_dair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn terry_dair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_DOLLY_INSTANCE_WORK_ID_FLAG_FINAL_HIT_CANCEL);

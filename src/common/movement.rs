@@ -18,8 +18,7 @@ static mut PERFECT_PIVOT: [bool; 8] = [false; 8];
 static HOLD_BUFFER_LIMIT : i32 = 20; //Max frames for hold buffer
 
 //Perfect Pivot
-#[fighter_frame_callback]
-pub fn perfectpivot(fighter : &mut L2CFighterCommon) {
+unsafe extern "C" fn perfectpivot(fighter : &mut L2CFighterCommon) {
     unsafe {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);  
 		let mut stickx = ControlModule::get_stick_x(boma);		
@@ -49,8 +48,7 @@ pub fn perfectpivot(fighter : &mut L2CFighterCommon) {
 }
 
 //DJC
-#[fighter_frame_callback]
-pub fn djc(fighter : &mut L2CFighterCommon) {
+unsafe extern "C" fn djc(fighter : &mut L2CFighterCommon) {
     unsafe {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);    
 		let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
@@ -80,8 +78,7 @@ pub fn djc(fighter : &mut L2CFighterCommon) {
     };
 }
 
-#[fighter_frame_callback(main)]
-pub fn hold_buffer_killer(fighter : &mut L2CFighterCommon) {
+unsafe extern "C" fn hold_buffer_killer(fighter : &mut L2CFighterCommon) {
     unsafe {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);  
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
@@ -119,8 +116,7 @@ pub fn hold_buffer_killer(fighter : &mut L2CFighterCommon) {
 }
 
 //Dash changes
-#[fighter_frame_callback]
-pub fn dash(fighter : &mut L2CFighterCommon) {
+unsafe extern "C" fn dash(fighter : &mut L2CFighterCommon) {
     unsafe {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);  
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
@@ -148,8 +144,7 @@ pub fn dash(fighter : &mut L2CFighterCommon) {
     };
 }
 //Parry Cancellable into a dash
-#[fighter_frame_callback]
-pub fn parrycanceldash(fighter : &mut L2CFighterCommon) {
+unsafe extern "C" fn parrycanceldash(fighter : &mut L2CFighterCommon) {
     unsafe {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);  
 		let mut stickx = ControlModule::get_stick_x(boma);		
@@ -293,12 +288,12 @@ fn nro_hook(info: &skyline::nro::NroInfo) {
 }
 
 pub fn install() {
-    smashline::install_agent_frame_callbacks!(
-		perfectpivot,
-		parrycanceldash,
-		dash,
-		djc,
-        hold_buffer_killer
-	);
+    Agent::new("fighter")
+	.on_line(Main, perfectpivot)
+	.on_line(Main, parrycanceldash)
+	.on_line(Main, dash)
+	.on_line(Main, djc)
+	.on_line(Main, hold_buffer_killer)
+	.install();
     skyline::nro::add_hook(nro_hook);
 }

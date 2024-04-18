@@ -14,12 +14,13 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[acmd_script(
-    agent = "purin",
-    script =  "game_throwlw",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn puff_dthrow(fighter: &mut L2CAgentBase) {
+pub fn install() {
+    Agent::new("purin")
+    .acmd("game_throwlw", puff_dthrow)    
+    .install();
+}
+
+unsafe extern "C" fn puff_dthrow(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.22);
 		if macros::is_excute(fighter) {
@@ -37,10 +38,4 @@ unsafe fn puff_dthrow(fighter: &mut L2CAgentBase) {
 			macros::ATK_HIT_ABS(fighter, *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, Hash40::new("throw"), WorkModule::get_int64(fighter.module_accessor,*FIGHTER_STATUS_THROW_WORK_INT_TARGET_OBJECT), WorkModule::get_int64(fighter.module_accessor,*FIGHTER_STATUS_THROW_WORK_INT_TARGET_HIT_GROUP), WorkModule::get_int64(fighter.module_accessor,*FIGHTER_STATUS_THROW_WORK_INT_TARGET_HIT_NO));
 			AttackModule::clear_all(fighter.module_accessor);
 		}
-}
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		puff_dthrow
-    );
 }

@@ -14,12 +14,14 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[acmd_script(
-    agent = "pichu",
-    script =  "game_attackairlw",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn pichu_dair(fighter: &mut L2CAgentBase) {
+pub fn install() {
+    Agent::new("pichu")
+    .acmd("game_attackairlw", pichu_dair)    
+    .acmd("effect_attackairlw", pichu_dair_eff)    
+    .install();
+}
+
+unsafe extern "C" fn pichu_dair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.3);
 		if macros::is_excute(fighter) {
@@ -50,12 +52,7 @@ unsafe fn pichu_dair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }	
-#[acmd_script(
-    agent = "pichu",
-    script =  "effect_attackairlw",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn pichu_dair_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn pichu_dair_eff(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 2.0);
     if macros::is_excute(fighter) {
         macros::EFFECT(fighter, Hash40::new("sys_smash_flash"), Hash40::new("top"), 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, true);
@@ -94,10 +91,3 @@ unsafe fn pichu_dair_eff(fighter: &mut L2CAgentBase) {
         macros::EFFECT_OFF_KIND(fighter, Hash40::new("sys_attack_speedline"), false, false);
     }
 }	
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		pichu_dair,
-		pichu_dair_eff
-    );
-}

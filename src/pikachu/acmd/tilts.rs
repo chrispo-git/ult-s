@@ -14,8 +14,13 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[acmd_script( agent = "pikachu", script = "game_attackhi3", category = ACMD_GAME, low_priority )]
-unsafe fn pika_utilt(agent: &mut L2CAgentBase) {
+pub fn install() {
+    Agent::new("pikachu")
+    .acmd("game_attackhi3", pika_utilt)    
+    .install();
+}
+
+unsafe extern "C" fn pika_utilt(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 7.0);
     if macros::is_excute(agent) {
         macros::ATTACK(agent, 0, 0, Hash40::new("tail1"), 5.0, 100, 95, 0, 50, 2.0, 0.0, 0.0, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_SLAP, *ATTACK_REGION_TAIL);
@@ -44,10 +49,4 @@ unsafe fn pika_utilt(agent: &mut L2CAgentBase) {
     if macros::is_excute(agent) {
         AttackModule::clear_all(agent.module_accessor);
     }
-}
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		pika_utilt
-    );
 }

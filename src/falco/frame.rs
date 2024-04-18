@@ -15,11 +15,12 @@ use crate::util::*;
 use crate::falco::*;
 
 pub fn install() {
-	smashline::install_agent_frames!(falco_frame);
+	Agent::new("falco")
+	.on_line(Main, falco_frame)
+	.install();
 }
 	
-#[fighter_frame( agent = FIGHTER_KIND_FALCO )]
-fn falco_frame(fighter: &mut L2CFighterCommon) {
+unsafe extern "C" fn falco_frame(fighter: &mut L2CFighterCommon) {
     unsafe {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 		if is_default(boma) {

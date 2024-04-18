@@ -15,18 +15,13 @@ use crate::util::*;
 use super::*;
 
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		bayo_sideb,
-		bayo_sideb_start
-    );
+    Agent::new("bayonetta")
+    .acmd("game_specials", bayo_sideb_start)
+	.acmd("game_specialsholdend", bayo_sideb)
+	.install();
 }
 
-#[acmd_script(
-    agent = "bayonetta",
-    script =  "game_specials",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn bayo_sideb_start(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn bayo_sideb_start(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 1.0);
 		if macros::is_excute(fighter) {
@@ -67,12 +62,7 @@ unsafe fn bayo_sideb_start(fighter: &mut L2CAgentBase) {
 		frame(fighter.lua_state_agent, 40.0);
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.843);
 }
-#[acmd_script(
-    agent = "bayonetta",
-    script =  "game_specialsholdend",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn bayo_sideb(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn bayo_sideb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 1.0);
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);

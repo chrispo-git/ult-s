@@ -46,6 +46,7 @@ pub static mut CAN_AIRDODGE: [i32; 8] = [0; 8];
 pub static mut CAN_RAPID_JAB: [i32; 8] = [0; 8];
 pub static mut CAN_JAB: [i32; 8] = [0; 8];
 pub static mut CAN_DASH: [i32; 8] = [0; 8];
+pub static mut CAN_GRAB: [i32; 8] = [0; 8];
 pub static mut CAN_TURNDASH: [i32; 8] = [0; 8];
 
 //Jab Flags
@@ -116,6 +117,12 @@ pub unsafe fn is_enable_transition_term_hook(boma: &mut smash::app::BattleObject
 			}
 		}  else if CAN_DASH[ENTRY_ID] != 0  && flag == *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_DASH {
 			if CAN_DASH[ENTRY_ID] == 1 {
+				return false
+			} else {
+				return true 
+			}
+		}  else if CAN_GRAB[ENTRY_ID] != 0  && flag == *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_CATCH {
+			if CAN_GRAB[ENTRY_ID] == 1 {
 				return false
 			} else {
 				return true 
@@ -225,8 +232,7 @@ pub unsafe fn article_hook(boma: &mut smash::app::BattleObjectModuleAccessor, in
 }
 
 
-#[fighter_frame_callback]
-pub fn util_update(fighter : &mut L2CFighterCommon) {
+unsafe extern "C" fn util_update(fighter : &mut L2CFighterCommon) {
     unsafe {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);    
 		let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
@@ -355,6 +361,22 @@ pub(crate) unsafe fn motion_duration(boma: &mut smash::app::BattleObjectModuleAc
 	return MOTION_DURATION[ENTRY_ID]
 }
 
+pub(crate) fn is_jump(boma: &mut smash::app::BattleObjectModuleAccessor) -> bool {
+	unsafe {
+		if ControlModule::check_button_on_trriger(boma, *CONTROL_PAD_BUTTON_JUMP) {
+			return true;
+		};
+		if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_FLICK_JUMP) {
+			if ControlModule::get_flick_y(boma) >= 3 && ControlModule::get_stick_y(boma) >= 0.7 {
+				return true;
+			};
+		};
+		if ControlModule::check_button_on_trriger(boma, *CONTROL_PAD_BUTTON_JUMP_MINI) {
+			return true;
+		};
+		return false;
+	}
+}
 //Cancel Frames
 pub(crate) unsafe fn reimpl_cancel_frame(fighter: &mut L2CAgentBase) -> () {
 	let frame = MotionModule::frame(fighter.module_accessor);
@@ -515,7 +537,9 @@ pub(crate) unsafe fn set_knockdown_throw(fighter: &mut L2CAgentBase) -> () {
 
 
 pub fn install() {
-    smashline::install_agent_frame_callbacks!(util_update);
+    Agent::new("fighter")
+	.on_line(Main, util_update)
+	.install();
 	skyline::install_hook!(is_enable_transition_term_hook);
 	skyline::install_hook!(on_flag_hook);
 	skyline::install_hook!(off_flag_hook);

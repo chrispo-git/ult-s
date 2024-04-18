@@ -14,12 +14,28 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[acmd_script(
-    agent = "sonic",
-    script =  "effect_attackdash",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn sonic_da_eff(fighter: &mut L2CAgentBase) {
+pub fn install() {
+    Agent::new("sonic")
+    .acmd("effect_attackdash", sonic_da_eff)    
+    .acmd("effect_attack13", sonic_jab_eff)    
+    .acmd("game_attacklw4", sonic_dsmash)    
+    .acmd("effect_attacklw4", sonic_dsmash_eff)    
+    .acmd("sound_attacklw4", sonic_dsmash_snd)    
+    .acmd("game_attackhi4", sonic_usmash)    
+    .acmd("sound_attackhi4", sonic_usmash_snd)    
+    .acmd("expression_attackhi4", sonic_usmash_expr)    
+    .acmd("effect_attackhi4", sonic_usmash_eff)    
+    .acmd("game_attackdash", sonic_da)    
+    .acmd("game_attack11", sonic_jab1)    
+    .acmd("game_attack12", sonic_jab2)    
+    .acmd("game_attack100", sonic_rapidjab)    
+    .acmd("effect_attack100", sonic_rapidjab_eff)    
+    .acmd("sound_attack100", sonic_rapidjab_snd)    
+    .acmd("game_attack100end", sonic_rapidjabend)    
+    .install();
+}
+
+unsafe extern "C" fn sonic_da_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 4.0);
 		if macros::is_excute(fighter) {
@@ -40,12 +56,7 @@ unsafe fn sonic_da_eff(fighter: &mut L2CAgentBase) {
 			wait(fighter.lua_state_agent, 5.0);
 		}*/
 }		
-#[acmd_script(
-    agent = "sonic",
-    script =  "effect_attack13",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn sonic_jab_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sonic_jab_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 3.0);
 		if macros::is_excute(fighter) {
@@ -59,12 +70,7 @@ unsafe fn sonic_jab_eff(fighter: &mut L2CAgentBase) {
 			macros::LAST_EFFECT_SET_ALPHA(fighter, 0.7);
 		}
 }		
-#[acmd_script(
-    agent = "sonic",
-    script =  "game_attacklw4",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn sonic_dsmash(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sonic_dsmash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 6.0);
 		if macros::is_excute(fighter) {
@@ -89,12 +95,7 @@ unsafe fn sonic_dsmash(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }	
-#[acmd_script(
-    agent = "sonic",
-    script =  "effect_attacklw4",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn sonic_dsmash_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sonic_dsmash_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     if macros::is_excute(fighter) {
         macros::EFFECT(fighter, Hash40::new("sys_smash_flash"), Hash40::new("top"), 0, 15, 4, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, true);
@@ -116,12 +117,7 @@ unsafe fn sonic_dsmash_eff(fighter: &mut L2CAgentBase) {
         macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("top"), 0.0, 4.0, 0, 0, 180, 7, 1.6, true, *EF_FLIP_YZ);
     }
 }	
-#[acmd_script(
-    agent = "sonic",
-    script =  "effect_downattacku",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn sonic_dsmash_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sonic_dsmash_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     
     if macros::is_excute(fighter) {
@@ -144,12 +140,7 @@ unsafe fn sonic_dsmash_snd(fighter: &mut L2CAgentBase) {
     }
 }		
 
-#[acmd_script(
-    agent = "sonic",
-    script =  "game_attackhi4",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn sonic_usmash(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sonic_usmash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 3.0);
 		if macros::is_excute(fighter) {
@@ -178,12 +169,7 @@ unsafe fn sonic_usmash(fighter: &mut L2CAgentBase) {
 		frame(fighter.lua_state_agent, 31.0);
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 1);
 }		
-#[acmd_script(
-    agent = "sonic",
-    script =  "sound_attackhi4",
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn sonic_usmash_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sonic_usmash_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 7.0);
 		if macros::is_excute(fighter) {
@@ -195,12 +181,7 @@ unsafe fn sonic_usmash_snd(fighter: &mut L2CAgentBase) {
 			macros::PLAY_SE(fighter, Hash40::new("se_sonic_landing02"));
 		}
 }	
-#[acmd_script(
-    agent = "sonic",
-    script =  "expression_attackhi4",
-    category = ACMD_EXPRESSION,
-	low_priority)]
-unsafe fn sonic_usmash_expr(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sonic_usmash_expr(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 /*		frame(fighter.lua_state_agent, 7.0);
 		if macros::is_excute(fighter) {
@@ -213,12 +194,7 @@ unsafe fn sonic_usmash_expr(fighter: &mut L2CAgentBase) {
 		}
 */
 }		
-#[acmd_script(
-    agent = "sonic",
-    script =  "effect_attackhi4",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn sonic_usmash_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sonic_usmash_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 1.0);
 		if macros::is_excute(fighter) {
@@ -240,12 +216,7 @@ unsafe fn sonic_usmash_eff(fighter: &mut L2CAgentBase) {
 		}
 }	
 
-#[acmd_script(
-    agent = "sonic",
-    script =  "game_attackdash",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn sonic_da(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sonic_da(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 5.0);
 		if macros::is_excute(fighter) {
@@ -265,12 +236,7 @@ unsafe fn sonic_da(fighter: &mut L2CAgentBase) {
 		}
 }		
 
-#[acmd_script(
-    agent = "sonic",
-    script =  "game_attack11",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn sonic_jab1(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sonic_jab1(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 3.0);
 		if macros::is_excute(fighter) {
@@ -296,12 +262,7 @@ unsafe fn sonic_jab1(fighter: &mut L2CAgentBase) {
 		WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_FLAG_ENABLE_RESTART);
 		}
 }	
-#[acmd_script(
-    agent = "sonic",
-    script =  "game_attack12",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn sonic_jab2(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sonic_jab2(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 2.0);
 		if macros::is_excute(fighter) {
@@ -319,12 +280,7 @@ unsafe fn sonic_jab2(fighter: &mut L2CAgentBase) {
 			WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_FLAG_ENABLE_COMBO);
 		}
 }	
-#[acmd_script(
-    agent = "sonic",
-    script =  "game_attack100",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn sonic_rapidjab(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sonic_rapidjab(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		for _ in 0..8 
  {
@@ -339,12 +295,7 @@ unsafe fn sonic_rapidjab(fighter: &mut L2CAgentBase) {
 			wait(fighter.lua_state_agent, 1.0);
 		}
 }	
-#[acmd_script(
-    agent = "sonic",
-    script =  "effect_attack100",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn sonic_rapidjab_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sonic_rapidjab_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		for _ in 0..2 
  {
@@ -374,12 +325,7 @@ unsafe fn sonic_rapidjab_eff(fighter: &mut L2CAgentBase) {
 			wait(fighter.lua_state_agent, 4.0);
 		}
 }
-#[acmd_script(
-    agent = "sonic",
-    script =  "sound_attack100",
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn sonic_rapidjab_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sonic_rapidjab_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		for _ in 0..8 
  {
@@ -389,12 +335,7 @@ unsafe fn sonic_rapidjab_snd(fighter: &mut L2CAgentBase) {
 			wait(fighter.lua_state_agent, 1.0);
 		}
 }	
-#[acmd_script(
-    agent = "sonic",
-    script =  "game_attack100end",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn sonic_rapidjabend(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sonic_rapidjabend(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 4.0);
 		if macros::is_excute(fighter) {
@@ -407,16 +348,3 @@ unsafe fn sonic_rapidjabend(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }	
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		sonic_da, sonic_da_eff,
-        sonic_jab_eff,
-        sonic_dsmash, sonic_dsmash_eff, sonic_dsmash_snd,
-        sonic_usmash, sonic_usmash_eff, sonic_usmash_snd, sonic_usmash_expr,
-        sonic_jab1,
-        sonic_jab2,
-        sonic_rapidjab, sonic_rapidjab_eff, sonic_rapidjab_snd,
-        sonic_rapidjabend
-    );
-}

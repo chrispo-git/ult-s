@@ -14,34 +14,48 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use crate::miifighter::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-        brawler_counter,
-		brawler_esk,
-		brawler_esk_s,
-		brawler_esk_e,
-		brawler_fj,
-		brawler_sak_start,
-		brawler_sak_land,
-		brawler_shotput,
-		brawler_grounded_onslaught, brawler_air_onslaught,
-		brawler_grounded_onslaught_eff, brawler_air_onslaught_eff,
-		brawler_grounded_onslaught_start, brawler_air_onslaught_start,
-		brawler_onslaught_expr, brawler_onslaught_snd,
-		brawler_foot,
-		brawler_foot_eff,
-		brawler_foot_air,
-		brawler_foot_air_eff,
-		brawler_foot_snd,
-		brawler_foot_air_snd
-    );
+	Agent::new("miifighter")
+    .acmd("game_specialairlw2start", brawler_fj)    
+    .acmd("game_speciallw2start", brawler_fj)    
+    .acmd("game_specialn3", brawler_esk)    
+    .acmd("game_specialairn3", brawler_esk)    
+    .acmd("sound_specialn3", brawler_esk_s)    
+    .acmd("sound_specialairn3", brawler_esk_s)    
+    .acmd("effect_specialn3", brawler_esk_e)    
+    .acmd("effect_specialairn3", brawler_esk_e)    
+    .acmd("game_speciallw1", brawler_foot)    
+    .acmd("game_specialairlw1", brawler_foot_air)    
+    .acmd("effect_speciallw1", brawler_foot_eff)    
+    .acmd("sound_speciallw1", brawler_foot_snd)    
+    .acmd("sound_specialairlw1", brawler_foot_air_snd)    
+    .acmd("effect_specialairlw1", brawler_foot_air_eff)    
+    .acmd("game_specialairlw3", brawler_counter)    
+    .acmd("game_speciallw3", brawler_counter)    
+    .acmd("game_specialairhi11", brawler_sak_start)    
+    .acmd("game_specialhi11", brawler_sak_start)    
+    .acmd("game_specialhi14", brawler_sak_land)    
+    .acmd("game_specials1start", brawler_grounded_onslaught_start)    
+    .acmd("game_specialairs1start", brawler_air_onslaught_start)    
+    .acmd("game_specials1end", brawler_grounded_onslaught)    
+    .acmd("sound_specialairs1end", brawler_onslaught_snd)    
+    .acmd("sound_specials1end", brawler_onslaught_snd)    
+    .acmd("effect_specials1end", brawler_grounded_onslaught_eff)    
+    .acmd("game_specialairs1end", brawler_air_onslaught)    
+    .acmd("expression_specialairs1end", brawler_onslaught_expr)    
+    .acmd("expression_specials1end", brawler_onslaught_expr)    
+    .acmd("effect_specialairs1end", brawler_air_onslaught_eff)    
+    .install();
+
+	Agent::new("miifighter_ironball")
+    .acmd("game_fly", brawler_shotput)    
+    .acmd("effect_fly", brawler_shotput_eff)    
+    .install();
+    
 }
-#[acmd_script(
-    agent = "miifighter",
-    scripts =  ["game_specialairlw2start", "game_speciallw2start"],
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn brawler_fj(agent: &mut L2CAgentBase) {
+
+unsafe extern "C" fn brawler_fj(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 2.0);
     if macros::is_excute(agent) {
         WorkModule::on_flag(agent.module_accessor, *FIGHTER_MIIFIGHTER_STATUS_WORK_ID_REVERSAL_KICK_FLAG_KICK_ENABLE_LANDING);
@@ -65,12 +79,7 @@ unsafe fn brawler_fj(agent: &mut L2CAgentBase) {
         search!(agent, *MA_MSC_CMD_SEARCH_SEARCH_SCH_CLR_ALL);
     }
 }	
-#[acmd_script(
-    agent = "miifighter",
-    scripts =  ["game_specialn3","game_specialairn3"],
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn brawler_esk(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn brawler_esk(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 1.0);
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.1);
@@ -112,12 +121,7 @@ unsafe fn brawler_esk(fighter: &mut L2CAgentBase) {
 		frame(fighter.lua_state_agent, 90.0);
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 1);
 }
-#[acmd_script(
-    agent = "miifighter",
-    scripts =  ["sound_specialn3","sound_specialairn3"],
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn brawler_esk_s(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn brawler_esk_s(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		wait(fighter.lua_state_agent, 44.0);
 		if macros::is_excute(fighter) {
@@ -125,12 +129,7 @@ unsafe fn brawler_esk_s(fighter: &mut L2CAgentBase) {
 			macros::PLAY_SEQUENCE(fighter, Hash40::new("seq_miifighter_rnd_special_c3_n01"));
 		}
 }
-#[acmd_script(
-    agent = "miifighter",
-    scripts =  ["effect_specialn3","effect_specialairn3"],
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn brawler_esk_e(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn brawler_esk_e(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 30.0);
 		if macros::is_excute(fighter) {
@@ -157,12 +156,7 @@ unsafe fn brawler_esk_e(fighter: &mut L2CAgentBase) {
 			EffectModule::enable_sync_init_pos_last(fighter.module_accessor);
 		}
 }
-#[acmd_script(
-    agent = "miifighter",
-    script =  "game_speciallw1",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn brawler_foot(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn brawler_foot(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 10.0);
 		if macros::is_excute(fighter) {
@@ -184,12 +178,7 @@ unsafe fn brawler_foot(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }
-#[acmd_script(
-    agent = "miifighter",
-    script =  "game_specialairlw1",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn brawler_foot_air(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn brawler_foot_air(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 8.0);
 		if macros::is_excute(fighter) {
@@ -227,12 +216,7 @@ unsafe fn brawler_foot_air(fighter: &mut L2CAgentBase) {
 		frame(fighter.lua_state_agent, 52.0);
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
 }
-#[acmd_script(
-    agent = "miifighter",
-    script =  "effect_speciallw1",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn brawler_foot_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn brawler_foot_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 		frame(fighter.lua_state_agent, 8.0);
@@ -276,12 +260,7 @@ unsafe fn brawler_foot_eff(fighter: &mut L2CAgentBase) {
 			}
 		}
 }
-#[acmd_script(
-    agent = "miifighter",
-    script =  "sound_speciallw1",
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn brawler_foot_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn brawler_foot_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 8.0);
 		if macros::is_excute(fighter) {
@@ -312,12 +291,7 @@ unsafe fn brawler_foot_snd(fighter: &mut L2CAgentBase) {
 			macros::PLAY_SEQUENCE(fighter, Hash40::new("seq_miifighter_rnd_attack03"));
 		}
 }
-#[acmd_script(
-    agent = "miifighter",
-    script =  "sound_specialairlw1",
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn brawler_foot_air_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn brawler_foot_air_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 1.0);
 		if macros::is_excute(fighter) {
@@ -334,12 +308,7 @@ unsafe fn brawler_foot_air_snd(fighter: &mut L2CAgentBase) {
 			macros::PLAY_SE(fighter, Hash40::new("vc_mii_attack08"));
 		}
 }
-#[acmd_script(
-    agent = "miifighter",
-    script =  "effect_specialairlw1",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn brawler_foot_air_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn brawler_foot_air_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 6.0);
 		if macros::is_excute(fighter) {
@@ -353,12 +322,7 @@ unsafe fn brawler_foot_air_eff(fighter: &mut L2CAgentBase) {
 		}
 }
 	
-#[acmd_script(
-    agent = "miifighter",
-    scripts =  ["game_specialairlw3", "game_speciallw3"],
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn brawler_counter(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn brawler_counter(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 6.0);
 		if macros::is_excute(fighter) {
@@ -381,21 +345,11 @@ unsafe fn brawler_counter(fighter: &mut L2CAgentBase) {
 		frame(fighter.lua_state_agent, 60.0);
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 1);
 }
-#[acmd_script(
-    agent = "miifighter",
-    scripts =  ["game_specialairhi11", "game_specialhi11"],
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn brawler_sak_start(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn brawler_sak_start(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.8);
 	}
-#[acmd_script(
-    agent = "miifighter",
-    script =  "game_specialhi14",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn brawler_sak_land(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn brawler_sak_land(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		wait(fighter.lua_state_agent, 1.0);
 		if macros::is_excute(fighter) {
@@ -411,12 +365,7 @@ unsafe fn brawler_sak_land(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }		
-#[acmd_script(
-    agent = "miifighter",
-    script =  "game_specials1start",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn brawler_grounded_onslaught_start(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn brawler_grounded_onslaught_start(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.75);
 		if macros::is_excute(fighter) {
@@ -446,12 +395,7 @@ unsafe fn brawler_grounded_onslaught_start(fighter: &mut L2CAgentBase) {
 			FighterAreaModuleImpl::enable_fix_jostle_area(fighter.module_accessor, 4.0, 3.0);
 		}
 }		
-#[acmd_script(
-    agent = "miifighter",
-    script =  "game_specialairs1start",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn brawler_air_onslaught_start(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn brawler_air_onslaught_start(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.75);
 		if macros::is_excute(fighter) {
@@ -485,12 +429,7 @@ unsafe fn brawler_air_onslaught_start(fighter: &mut L2CAgentBase) {
 		}
 }	
 		
-#[acmd_script(
-    agent = "miifighter",
-    script =  "game_specials1end",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn brawler_grounded_onslaught(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn brawler_grounded_onslaught(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 2.0);
 		if macros::is_excute(fighter) {
@@ -511,12 +450,7 @@ unsafe fn brawler_grounded_onslaught(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }
-#[acmd_script(
-    agent = "miifighter",
-    scripts =  ["sound_specialairs1end", "sound_specials1end"],
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn brawler_onslaught_snd(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn brawler_onslaught_snd(agent: &mut L2CAgentBase) {
 	frame(agent.lua_state_agent, 2.0);
     if macros::is_excute(agent) {
         macros::PLAY_SE(agent, Hash40::new("se_miifighter_special_s02"));
@@ -527,12 +461,7 @@ unsafe fn brawler_onslaught_snd(agent: &mut L2CAgentBase) {
         macros::PLAY_SE(agent, Hash40::new("vc_mii_special10"));
     }
 }
-#[acmd_script(
-    agent = "miifighter",
-    script =  "effect_specials1end",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn brawler_grounded_onslaught_eff(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn brawler_grounded_onslaught_eff(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 1.0);
     if macros::is_excute(agent) {
         macros::EFFECT_FOLLOW_NO_STOP(agent, Hash40::new("miifighter_hyakuretsukick_line"), Hash40::new("top"), -2, 8, -8, 0, 0, 0, 0.8, true);
@@ -547,12 +476,7 @@ unsafe fn brawler_grounded_onslaught_eff(agent: &mut L2CAgentBase) {
         macros::EFFECT_FOLLOW_FLIP(agent, Hash40::new("miifighter_hyakuretsukick_arc"), Hash40::new("miifighter_hyakuretsukick_arc"), Hash40::new("top"), -1, 13, 4, 0, 0, 90, 0.7, true, *EF_FLIP_YZ);
     }
 }
-#[acmd_script(
-    agent = "miifighter",
-    script =  "game_specialairs1end",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn brawler_air_onslaught(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn brawler_air_onslaught(agent: &mut L2CAgentBase) {
     if macros::is_excute(agent) {
 		macros::SET_SPEED_EX(agent, 1.0, 1.2, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
         WorkModule::on_flag(agent.module_accessor, *FIGHTER_MIIFIGHTER_STATUS_WORK_ID_FLAG_100KICK_ENABLE_LANDING_MUL_SPEED_X);
@@ -578,20 +502,10 @@ unsafe fn brawler_air_onslaught(agent: &mut L2CAgentBase) {
 		AttackModule::clear_all(agent.module_accessor);
 	}
 }
-#[acmd_script(
-    agent = "miifighter",
-    scripts =  ["expression_specialairs1end", "expression_specials1end"],
-    category = ACMD_EXPRESSION,
-	low_priority)]
-unsafe fn brawler_onslaught_expr(agent: &mut L2CAgentBase) {
-	frame(agent.lua_state_agent, 2.0);
+unsafe extern "C" fn brawler_onslaught_expr(agent: &mut L2CAgentBase) {
+	
 }
-#[acmd_script(
-    agent = "miifighter",
-    script =  "effect_specialairs1end",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn brawler_air_onslaught_eff(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn brawler_air_onslaught_eff(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 1.0);
     if macros::is_excute(agent) {
         macros::EFFECT_FOLLOW_NO_STOP(agent, Hash40::new("miifighter_hyakuretsukick_line"), Hash40::new("top"), -2, 8, -8, 0, 0, 0, 0.8, true);
@@ -602,23 +516,13 @@ unsafe fn brawler_air_onslaught_eff(agent: &mut L2CAgentBase) {
         macros::EFFECT_FOLLOW(agent, Hash40::new("miifighter_hyakuretsukick"), Hash40::new("toel"), 0, 0, 0, 0, 0, 0, 1.0, true);
     }
 }
-#[acmd_script(
-    agent = "miifighter_ironball",
-    script =  "game_fly",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn brawler_shotput(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn brawler_shotput(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 15.0, /*Angle*/ 47, /*KBG*/ 58, /*FKB*/ 0, /*BKB*/ 50, /*Size*/ 2.2, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.5, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_THRU, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ -3, /*Trip*/ -1.0, /*Rehit*/ 0, /*Reflectable*/ true, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_OBJECT);
 			AttackModule::enable_safe_pos(fighter.module_accessor);
 		}
 }	
-#[acmd_script(
-    agent = "miifighter_ironball",
-    script =  "effect_fly",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn brawler_shotput_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn brawler_shotput_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 }	

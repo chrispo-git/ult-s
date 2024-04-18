@@ -13,18 +13,14 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		banjo_utilt
-    );
+    Agent::new("buddy")
+	.acmd("game_attackhi3", banjo_utilt)    
+	.install();
 }
 	
-#[acmd_script(
-    agent = "buddy",
-    script =  "game_attackhi3",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn banjo_utilt(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn banjo_utilt(fighter: &mut L2CAgentBase) {
     	let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			macros::HIT_NO(fighter, 12, *HIT_STATUS_NORMAL);

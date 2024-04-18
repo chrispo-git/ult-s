@@ -13,21 +13,17 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		d3_fair,
-		d3_bair,
-		d3_bair_eff,
-		d3_bair_expr
-    );
+    Agent::new("dedede")
+    .acmd("game_attackairf", d3_fair)    
+    .acmd("game_attackairb", d3_bair)    
+    .acmd("effect_attackairb", d3_bair_eff)    
+    .acmd("expression_landingairb", d3_bair_expr)    
+    .install();
 }
 
-#[acmd_script(
-    agent = "dedede",
-    script =  "game_attackairf",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn d3_fair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn d3_fair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
 		frame(fighter.lua_state_agent, 5.0);
@@ -50,12 +46,7 @@ unsafe fn d3_fair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }
-#[acmd_script(
-    agent = "dedede",
-    script =  "game_attackairb",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn d3_bair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn d3_bair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 2.0);
 		if macros::is_excute(fighter) {
@@ -84,23 +75,9 @@ unsafe fn d3_bair(fighter: &mut L2CAgentBase) {
 			CancelModule::enable_cancel(fighter.module_accessor);
 		}
 }	
-#[acmd_script(
-    agent = "dedede",
-    script =  "effect_attackairb",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn d3_bair_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn d3_bair_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
-	
-	
 }	
-#[acmd_script(
-    agent = "dedede",
-    script =  "expression_landingairb",
-    category = ACMD_EXPRESSION,
-	low_priority)]
-unsafe fn d3_bair_expr(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn d3_bair_expr(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
-	
-	
 }	

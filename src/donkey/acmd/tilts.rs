@@ -13,15 +13,17 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-    
+    Agent::new("donkey")
+    .acmd("game_attacks3", dk_ftilt)    
+    .acmd("game_attacks3hi", dk_ftilt)    
+    .acmd("game_attacks3lw", dk_ftilt)    
+    .acmd("game_attacklw3", dk_dtilt)    
+    .install();
 }
-#[acmd_script(
-    agent = "donkey",
-    scripts =  ["game_attacks3", "game_attacks3hi", "game_attacks3lw"],
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn dk_ftilt(fighter: &mut L2CAgentBase) {
+
+unsafe extern "C" fn dk_ftilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 1.0);
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.0);
@@ -41,8 +43,7 @@ unsafe fn dk_ftilt(fighter: &mut L2CAgentBase) {
 			macros::HIT_NODE(fighter, Hash40::new("arml"), *HIT_STATUS_NORMAL);
 		}
 }
-#[acmd_script( agent = "donkey", script = "game_attacklw3", category = ACMD_GAME, low_priority )]
-unsafe fn dk_dtilt(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn dk_dtilt(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 5.0);
     if macros::is_excute(fighter) {
         macros::HIT_NODE(fighter, Hash40::new("arml"), *HIT_STATUS_XLU);

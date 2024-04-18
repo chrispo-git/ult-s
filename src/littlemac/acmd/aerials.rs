@@ -13,27 +13,24 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		mac_fair,
-		mac_fair_eff,
-		mac_fair_snd,
-		mac_bair,
-		mac_bair_eff,
-		mac_bair_snd,
-		mac_uair,
-		mac_nair,
-		mac_dair,
-		mac_dair_eff,
-		mac_dair_snd
-    );
-}		
-#[acmd_script(
-    agent = "littlemac",
-    script =  "game_attackairf",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn mac_fair(fighter: &mut L2CAgentBase) {
+    Agent::new("littlemac")
+    .acmd("game_attackairf", mac_fair)    
+    .acmd("effect_attackairf", mac_fair_eff)    
+    .acmd("sound_attackairf", mac_fair_snd)    
+    .acmd("game_attackairn", mac_nair)    
+    .acmd("game_attackairb", mac_bair)    
+    .acmd("effect_attackairb", mac_bair_eff)    
+    .acmd("sound_attackairb", mac_bair_snd)    
+    .acmd("game_attackairhi", mac_uair)    
+    .acmd("game_attackairlw", mac_dair)    
+    .acmd("effect_attackairlw", mac_dair_eff)    
+    .acmd("sound_attackairlw", mac_dair_snd)    
+    .install();
+}	
+
+unsafe extern "C" fn mac_fair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 3.0);
 		if macros::is_excute(fighter) {
@@ -54,24 +51,14 @@ unsafe fn mac_fair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }		
-#[acmd_script(
-    agent = "littlemac",
-    script =  "effect_attackairf",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn mac_fair_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn mac_fair_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 6.0);
 		if macros::is_excute(fighter) {
 			macros::EFFECT_FOLLOW_NO_STOP_FLIP(fighter, Hash40::new("sys_attack_impact"), Hash40::new("sys_attack_impact"), Hash40::new("handr"), 0, 0, 0, 0, 0, 0, 1.3, true, *EF_FLIP_YZ);
 		}
 }		
-#[acmd_script(
-    agent = "littlemac",
-    script =  "sound_attackairf",
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn mac_fair_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn mac_fair_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 5.0);
 		if macros::is_excute(fighter) {
@@ -79,12 +66,7 @@ unsafe fn mac_fair_snd(fighter: &mut L2CAgentBase) {
 			macros::PLAY_SE(fighter, Hash40::new("se_littlemac_swing_m"));
 		}
 }	
-#[acmd_script(
-    agent = "littlemac",
-    script =  "game_attackairn",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn mac_nair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn mac_nair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 1.0);
 		if macros::is_excute(fighter) {
@@ -112,12 +94,7 @@ unsafe fn mac_nair(fighter: &mut L2CAgentBase) {
 		}
 }
 		
-#[acmd_script(
-    agent = "littlemac",
-    script =  "game_attackairb",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn mac_bair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn mac_bair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 3.0);
 		if macros::is_excute(fighter) {
@@ -139,24 +116,14 @@ unsafe fn mac_bair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }		
-#[acmd_script(
-    agent = "littlemac",
-    script =  "effect_attackairb",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn mac_bair_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn mac_bair_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 6.0);
 		if macros::is_excute(fighter) {
 			macros::EFFECT_FOLLOW_ALPHA(fighter, Hash40::new("sys_attack_arc"), Hash40::new("top"), 2, 11.5, -2.5, 0, -220, -100, 0.9, true, 0.2);
 		}
 }	
-#[acmd_script(
-    agent = "littlemac",
-    script =  "sound_attackairb",
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn mac_bair_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn mac_bair_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 7.0);
 		if macros::is_excute(fighter) {
@@ -164,12 +131,7 @@ unsafe fn mac_bair_snd(fighter: &mut L2CAgentBase) {
 			macros::PLAY_SE(fighter, Hash40::new("se_littlemac_swing_m"));
 		}
 }	
-#[acmd_script(
-    agent = "littlemac",
-    script =  "game_attackairhi",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn mac_uair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn mac_uair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 1.0);
 		if macros::is_excute(fighter) {
@@ -190,12 +152,7 @@ unsafe fn mac_uair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }	
-#[acmd_script(
-    agent = "littlemac",
-    script =  "game_attackairlw",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn mac_dair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn mac_dair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
@@ -213,12 +170,7 @@ unsafe fn mac_dair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }	
-#[acmd_script(
-    agent = "littlemac",
-    script =  "effect_attackairlw",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn mac_dair_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn mac_dair_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 5.0);
 		if macros::is_excute(fighter) {
@@ -234,12 +186,7 @@ unsafe fn mac_dair_eff(fighter: &mut L2CAgentBase) {
 			macros::EFFECT_OFF_KIND(fighter, Hash40::new("sys_attack_arc_c"), true, true);
 		}
 }	
-#[acmd_script(
-    agent = "littlemac",
-    script =  "sound_attackairlw",
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn mac_dair_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn mac_dair_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 16.0);
 		if macros::is_excute(fighter) {

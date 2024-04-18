@@ -15,12 +15,26 @@ use crate::util::*;
 use super::*;
 use super::super::*;
 
-#[acmd_script(
-    agent = "szerosuit",
-    script =  "game_specialairlwflip",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn zss_bury(fighter: &mut L2CAgentBase) {
+pub fn install() {
+    Agent::new("szerosuit")
+    .acmd("game_specialairlwflip", zss_bury)    
+    .acmd("game_specialairlwkick", zss_kick)    
+    .acmd("game_specialairs", zss_sideb_air)    
+    .acmd("game_specials", zss_sideb)    
+    .acmd("effect_specials", zss_sideb_eff)    
+    .acmd("sound_specials", zss_sideb_snd)    
+    .acmd("effect_specialairs", zss_sideb_air_eff)    
+    .acmd("sound_specialairs", zss_sideb_air_snd)    
+    .acmd("game_specialairhi", zss_air_upb)    
+    .acmd("game_specialhi", zss_upb)    
+    .install();
+
+	Agent::new("szerosuit_paralyzer_bullet")
+	.acmd("game_shoot", zss_neutralb)    
+    .install();
+}
+
+unsafe extern "C" fn zss_bury(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 8.0, /*Angle*/ 67, /*KBG*/ 70, /*FKB*/ 0, /*BKB*/ 65, /*Size*/ 3.0, /*X*/ 0.0, /*Y*/ -3.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.8, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_A, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_KICK);
@@ -35,12 +49,7 @@ unsafe fn zss_bury(fighter: &mut L2CAgentBase) {
 		}
 }
 
-#[acmd_script(
-    agent = "szerosuit",
-    script =  "game_specialairlwkick",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn zss_kick(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn zss_kick(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 5.0);
 		if macros::is_excute(fighter) {
@@ -62,12 +71,7 @@ unsafe fn zss_kick(fighter: &mut L2CAgentBase) {
 		}
 }	
 
-#[acmd_script(
-    agent = "szerosuit",
-    script =  "game_specialairs",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn zss_sideb_air(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn zss_sideb_air(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_SZEROSUIT_GENERATE_ARTICLE_WHIP,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
@@ -88,12 +92,7 @@ unsafe fn zss_sideb_air(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }	
-#[acmd_script(
-    agent = "szerosuit",
-    script =  "game_specials",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn zss_sideb(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn zss_sideb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_SZEROSUIT_GENERATE_ARTICLE_WHIP,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
@@ -110,12 +109,7 @@ unsafe fn zss_sideb(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }	
-#[acmd_script(
-    agent = "szerosuit",
-    scripts =  ["effect_specials"],
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn zss_sideb_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn zss_sideb_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 15.0);
 		if macros::is_excute(fighter) {
@@ -136,12 +130,7 @@ unsafe fn zss_sideb_eff(fighter: &mut L2CAgentBase) {
 			macros::EFFECT_OFF_KIND(fighter, Hash40::new_raw(0x0fc6ce170d), false, false);
 		}
 }	
-#[acmd_script(
-    agent = "szerosuit",
-    scripts =  ["sound_specials"],
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn zss_sideb_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn zss_sideb_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 13.0);
 		if macros::is_excute(fighter) {
@@ -160,12 +149,7 @@ unsafe fn zss_sideb_snd(fighter: &mut L2CAgentBase) {
 			}
 		}
 }	
-#[acmd_script(
-    agent = "szerosuit",
-    scripts =  ["effect_specialairs"],
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn zss_sideb_air_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn zss_sideb_air_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 5.0);
 		if macros::is_excute(fighter) {
@@ -190,12 +174,7 @@ unsafe fn zss_sideb_air_eff(fighter: &mut L2CAgentBase) {
 			wait(fighter.lua_state_agent, 2.0);
 		}
 }	
-#[acmd_script(
-    agent = "szerosuit",
-    scripts =  ["sound_specialairs"],
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn zss_sideb_air_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn zss_sideb_air_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 6.0);
 		if macros::is_excute(fighter) {
@@ -207,12 +186,7 @@ unsafe fn zss_sideb_air_snd(fighter: &mut L2CAgentBase) {
 			macros::PLAY_SE(fighter, Hash40::new("se_szerosuit_landing02"));
 		}
 }	
-#[acmd_script(
-    agent = "szerosuit",
-    script =  "game_specialairhi",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn zss_air_upb(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn zss_air_upb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 2.0);
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 2);
@@ -266,12 +240,7 @@ unsafe fn zss_air_upb(fighter: &mut L2CAgentBase) {
 			notify_event_msc_cmd!(fighter,  0x2127e37c07u64, *GROUND_CLIFF_CHECK_KIND_ALWAYS_BOTH_SIDES);
 		}
 }
-#[acmd_script(
-    agent = "szerosuit",
-    script =  "game_specialhi",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn zss_upb(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn zss_upb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 2.0);
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 2);
@@ -325,8 +294,7 @@ unsafe fn zss_upb(fighter: &mut L2CAgentBase) {
 			notify_event_msc_cmd!(fighter, 0x2127e37c07u64, *GROUND_CLIFF_CHECK_KIND_ALWAYS_BOTH_SIDES);
 		}
 }
-#[acmd_script( agent = "szerosuit_paralyzer_bullet", script = "game_shoot", category = ACMD_GAME, low_priority )]
-unsafe fn zss_neutralb(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn zss_neutralb(agent: &mut L2CAgentBase) {
     if macros::is_excute(agent) {
         macros::ATTACK(agent, 0, 0, Hash40::new("top"), 4.0, 361, 100, 24, 0, 1.3, 0.0, 0.0, 1.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, true, true, false, false, false, *COLLISION_SITUATION_MASK_A, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_paralyze"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_ELEC, *ATTACK_REGION_ENERGY);
         macros::ATTACK(agent, 1, 0, Hash40::new("top"), 4.0, 361, 100, 24, 0, 1.3, 0.0, 0.0, 1.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, true, true, false, false, false, *COLLISION_SITUATION_MASK_G, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_paralyze"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_ELEC, *ATTACK_REGION_ENERGY);
@@ -345,15 +313,4 @@ unsafe fn zss_neutralb(agent: &mut L2CAgentBase) {
         AttackModule::set_lerp(agent.module_accessor, 0, 2, 0);
         AttackModule::set_lerp(agent.module_accessor, 1, 3, 1);
     }
-}
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		zss_bury,
-        zss_kick,
-        zss_sideb_air, zss_sideb_air_eff, zss_sideb_air_snd,
-        zss_sideb,  zss_sideb_eff,  zss_sideb_snd,
-        zss_air_upb,
-        zss_upb,
-		zss_neutralb
-    );
 }

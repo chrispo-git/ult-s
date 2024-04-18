@@ -15,12 +15,22 @@ use crate::util::*;
 use super::*;
 use super::super::*;
 
-#[acmd_script(
-    agent = "szerosuit",
-    script =  "game_attack11",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn zss_jab1(fighter: &mut L2CAgentBase) {
+pub fn install() {
+    Agent::new("szerosuit")
+    .acmd("game_attack11", zss_jab1)    
+    .acmd("effect_attack11", zss_jab_eff)    
+    .acmd("game_attackhi4", zss_usmash)    
+    .acmd("effect_attackhi4", zss_usmash_eff)    
+    .acmd("sound_attackhi4", zss_usmash_snd)    
+    .acmd("game_attacks4s", zss_fsmash_s)    
+    .acmd("game_attackdash", zss_da)    
+    .acmd("effect_attackdash", zss_da_eff)    
+    .acmd("sound_attackdash", zss_da_snd)    
+    .acmd("game_attacklw4", zss_dsmash)    
+    .install();
+}
+
+unsafe extern "C" fn zss_jab1(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 4.0);
 		if macros::is_excute(fighter) {
@@ -42,12 +52,7 @@ unsafe fn zss_jab1(fighter: &mut L2CAgentBase) {
 			WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_FLAG_ENABLE_RESTART);
 		}
 }	
-#[acmd_script(
-    agent = "szerosuit",
-    script =  "effect_attack11",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn zss_jab_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn zss_jab_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		/*frame(fighter.lua_state_agent, 2.0);
 		if macros::is_excute(fighter) {
@@ -64,12 +69,7 @@ unsafe fn zss_jab_eff(fighter: &mut L2CAgentBase) {
 		}
 }	
 
-#[acmd_script(
-    agent = "szerosuit",
-    script =  "game_attackhi4",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn zss_usmash(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn zss_usmash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 4.0);
 		if macros::is_excute(fighter) {
@@ -87,12 +87,7 @@ unsafe fn zss_usmash(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }		
-#[acmd_script(
-    agent = "szerosuit",
-    script =  "effect_attackhi4",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn zss_usmash_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn zss_usmash_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 9.0);
 		if macros::is_excute(fighter) {
@@ -104,12 +99,7 @@ unsafe fn zss_usmash_eff(fighter: &mut L2CAgentBase) {
 			macros::LANDING_EFFECT(fighter, Hash40::new("sys_down_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
 		}
 }	
-#[acmd_script(
-    agent = "szerosuit",
-    script =  "sound_attackhi4",
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn zss_usmash_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn zss_usmash_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 7.0);
 		if macros::is_excute(fighter) {
@@ -117,12 +107,7 @@ unsafe fn zss_usmash_snd(fighter: &mut L2CAgentBase) {
 			macros::PLAY_SEQUENCE(fighter, Hash40::new("seq_szerosuit_rnd_attack"));
 		}
 }	
-#[acmd_script(
-    agent = "szerosuit",
-    script =  "game_attacks4s",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn zss_fsmash_s(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn zss_fsmash_s(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.7);
 		frame(fighter.lua_state_agent, 10.0);
@@ -160,12 +145,7 @@ unsafe fn zss_fsmash_s(fighter: &mut L2CAgentBase) {
 		}
 }	
 
-#[acmd_script(
-    agent = "szerosuit",
-    script =  "game_attackdash",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn zss_da(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn zss_da(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 7.0);
 		if macros::is_excute(fighter) {
@@ -188,12 +168,7 @@ unsafe fn zss_da(fighter: &mut L2CAgentBase) {
 			CancelModule::enable_cancel(fighter.module_accessor);
 		}
 }	
-#[acmd_script(
-    agent = "szerosuit",
-    script =  "effect_attackdash",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn zss_da_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn zss_da_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 7.0);
 		if macros::is_excute(fighter) {
@@ -204,12 +179,7 @@ unsafe fn zss_da_eff(fighter: &mut L2CAgentBase) {
 			macros::FOOT_EFFECT(fighter, Hash40::new("sys_down_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.8, 0, 0, 0, 0, 0, 0, false);
 		}
 }	
-#[acmd_script(
-    agent = "szerosuit",
-    script =  "sound_attackdash",
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn zss_da_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn zss_da_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 8.0);
 		if macros::is_excute(fighter) {
@@ -221,13 +191,7 @@ unsafe fn zss_da_snd(fighter: &mut L2CAgentBase) {
 			macros::PLAY_SE(fighter, Hash40::new("se_szerosuit_landing02"));
 		}
 }
-
-#[acmd_script(
-    agent = "szerosuit",
-    script =  "game_attacklw4",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn zss_dsmash(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn zss_dsmash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.8);
 		frame(fighter.lua_state_agent, 16.0);
@@ -244,14 +208,4 @@ unsafe fn zss_dsmash(fighter: &mut L2CAgentBase) {
 		if macros::is_excute(fighter) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
-}		
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		zss_jab1, zss_jab_eff,
-        zss_usmash, zss_usmash_eff, zss_usmash_snd,
-        zss_fsmash_s,
-        zss_da, zss_da_eff, zss_da_snd,
-        zss_dsmash
-    );
 }

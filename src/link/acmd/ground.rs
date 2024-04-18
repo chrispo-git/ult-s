@@ -13,19 +13,16 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		link_dsmash,
-		link_jab,
-		link_jab2
-    );
+	Agent::new("link")
+    .acmd("game_attack11", link_jab)    
+    .acmd("game_attack12", link_jab2)    
+    .acmd("game_attacklw4", link_dsmash)    
+    .install();
 }
-#[acmd_script(
-    agent = "link",
-    script =  "game_attack11",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn link_jab(fighter: &mut L2CAgentBase) {
+
+unsafe extern "C" fn link_jab(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 1.0);
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
@@ -45,12 +42,7 @@ unsafe fn link_jab(fighter: &mut L2CAgentBase) {
 			WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_FLAG_ENABLE_NO_HIT_COMBO);
 		}
 }
-#[acmd_script(
-    agent = "link",
-    script =  "game_attack12",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn link_jab2(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn link_jab2(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 5.0);
 		if macros::is_excute(fighter) {
@@ -73,8 +65,7 @@ unsafe fn link_jab2(fighter: &mut L2CAgentBase) {
 			WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_FLAG_ENABLE_NO_HIT_COMBO);
 		}
 }
-#[acmd_script( agent = "link", script = "game_attacklw4", category = ACMD_GAME, low_priority )]
-unsafe fn link_dsmash(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn link_dsmash(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 5.0);
     if macros::is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, *FIGHTER_STATUS_ATTACK_FLAG_START_SMASH_HOLD);

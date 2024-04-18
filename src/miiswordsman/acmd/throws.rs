@@ -15,12 +15,18 @@ use crate::util::*;
 use super::*;
 use super::super::*;
 
-#[acmd_script(
-    agent = "miiswordsman",
-    script =  "game_throwlw",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn sword_dthrow(fighter: &mut L2CAgentBase) {
+pub fn install() {
+    Agent::new("miiswordsman")
+    .acmd("game_throwlw", sword_dthrow)    
+    .acmd("game_throwf", sword_fthrow)    
+    .acmd("game_throwhi", sword_uthrow)    
+    .acmd("sound_throwhi", sword_uthrow_snd)    
+    .acmd("effect_throwhi", sword_uthrow_eff)    
+    .acmd("expression_throwhi", sword_uthrow_expr)    
+    .install();
+}
+
+unsafe extern "C" fn sword_dthrow(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, /*ID*/ 0, /*Damage*/ 2.0, /*Angle*/ 80, /*KBG*/ 110, /*FKB*/ 0, /*BKB*/ 75, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
@@ -38,8 +44,7 @@ unsafe fn sword_dthrow(fighter: &mut L2CAgentBase) {
 			macros::ATK_HIT_ABS(fighter, *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, Hash40::new("throw"), WorkModule::get_int64(fighter.module_accessor,*FIGHTER_STATUS_THROW_WORK_INT_TARGET_OBJECT), WorkModule::get_int64(fighter.module_accessor,*FIGHTER_STATUS_THROW_WORK_INT_TARGET_HIT_GROUP), WorkModule::get_int64(fighter.module_accessor,*FIGHTER_STATUS_THROW_WORK_INT_TARGET_HIT_NO));
 		}
 }
-#[acmd_script( agent = "miiswordsman", script = "game_throwf", category = ACMD_GAME, low_priority )]
-unsafe fn sword_fthrow(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn sword_fthrow(agent: &mut L2CAgentBase) {
     if macros::is_excute(agent) {
         macros::ATTACK_ABS(agent, *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, 0, 3.0, 361, 50, 0, 70, 0.0, 1.0, *ATTACK_LR_CHECK_F, 0.0, true, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_THROW);
         macros::ATTACK_ABS(agent, *FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, 0, 3.0, 361, 100, 0, 60, 0.0, 1.0, *ATTACK_LR_CHECK_F, 0.0, true, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_THROW);
@@ -64,12 +69,7 @@ unsafe fn sword_fthrow(agent: &mut L2CAgentBase) {
         AttackModule::clear_all(agent.module_accessor);
     }
 }
-#[acmd_script(
-    agent = "miiswordsman",
-    script =  "game_throwhi",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn sword_uthrow(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sword_uthrow(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, /*ID*/ 0, /*Damage*/ 3.0, /*Angle*/ 80, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 100, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
@@ -87,12 +87,7 @@ unsafe fn sword_uthrow(fighter: &mut L2CAgentBase) {
 			macros::ATK_HIT_ABS(fighter, *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, Hash40::new("throw"), WorkModule::get_int64(fighter.module_accessor,*FIGHTER_STATUS_THROW_WORK_INT_TARGET_OBJECT), WorkModule::get_int64(fighter.module_accessor,*FIGHTER_STATUS_THROW_WORK_INT_TARGET_HIT_GROUP), WorkModule::get_int64(fighter.module_accessor,*FIGHTER_STATUS_THROW_WORK_INT_TARGET_HIT_NO));
 		}
 }
-#[acmd_script(
-    agent = "miiswordsman",
-    script =  "sound_throwhi",
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn sword_uthrow_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sword_uthrow_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 2.0);
 		if macros::is_excute(fighter) {
@@ -100,24 +95,14 @@ unsafe fn sword_uthrow_snd(fighter: &mut L2CAgentBase) {
 			macros::PLAY_SEQUENCE(fighter, Hash40::new("seq_miiswordsman_rnd_attack02"));
 		}
 }
-#[acmd_script(
-    agent = "miiswordsman",
-    script =  "expression_throwhi",
-    category = ACMD_EXPRESSION,
-	low_priority)]
-unsafe fn sword_uthrow_expr(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sword_uthrow_expr(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 13.0);
 		if macros::is_excute(fighter) {
 			macros::QUAKE(fighter, *CAMERA_QUAKE_KIND_M);
 		}
 }
-#[acmd_script(
-    agent = "miiswordsman",
-    script =  "effect_throwhi",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn sword_uthrow_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn sword_uthrow_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 13.0);
 		if macros::is_excute(fighter) {
@@ -131,12 +116,4 @@ unsafe fn sword_uthrow_eff(fighter: &mut L2CAgentBase) {
 		if macros::is_excute(fighter) {
 			macros::LANDING_EFFECT(fighter, Hash40::new("sys_landing_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.7, 0, 0, 0, 0, 0, 0, false);
 		}
-}
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		sword_dthrow,
-        sword_fthrow,
-        sword_uthrow, sword_uthrow_eff, sword_uthrow_snd, sword_uthrow_expr
-    );
 }

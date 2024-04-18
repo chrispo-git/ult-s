@@ -15,11 +15,13 @@ use smash::phx::Vector2f;
 use crate::util::*;
 use crate::miifighter::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_agent_frames!(
-        brawler_frame
-    );
+    Agent::new("miifighter")
+    .on_line(Main, brawler_frame)
+    .install();
 }
+
 pub(crate) fn check_jump(boma: &mut smash::app::BattleObjectModuleAccessor) -> bool {
 	unsafe {
 		if ControlModule::check_button_on_trriger(boma, *CONTROL_PAD_BUTTON_JUMP) {
@@ -36,8 +38,7 @@ pub(crate) fn check_jump(boma: &mut smash::app::BattleObjectModuleAccessor) -> b
 		return false;
 	}
 }
-#[fighter_frame( agent = FIGHTER_KIND_MIIFIGHTER )]
-fn brawler_frame(fighter: &mut L2CFighterCommon) {
+unsafe extern "C" fn brawler_frame(fighter: &mut L2CFighterCommon) {
     unsafe {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);

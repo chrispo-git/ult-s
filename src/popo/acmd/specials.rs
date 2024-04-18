@@ -14,12 +14,16 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[acmd_script(
-    agent = "popo",
-    scripts =  ["game_specialn", "game_specialairn"],
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn ics_shot(fighter: &mut L2CAgentBase) {
+pub fn install() {
+    Agent::new("popo")
+    .acmd("game_specialn", ics_shot)    
+    .acmd("game_specialairn", ics_shot)    
+    .acmd("game_specialn_nana", ics_shot2)    
+    .acmd("game_specialairn_nana", ics_shot2)    
+    .install();
+}
+
+unsafe extern "C" fn ics_shot(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
 		frame(fighter.lua_state_agent, 6.0);
@@ -32,12 +36,7 @@ unsafe fn ics_shot(fighter: &mut L2CAgentBase) {
 			ArticleModule::shoot_exist(fighter.module_accessor, *FIGHTER_POPO_GENERATE_ARTICLE_ICESHOT, smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL), false);
 		}
 }
-#[acmd_script(
-    agent = "popo",
-    scripts =  ["game_specialn_nana", "game_specialairn_nana"],
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn ics_shot2(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn ics_shot2(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
 		frame(fighter.lua_state_agent, 6.0);
@@ -53,11 +52,4 @@ unsafe fn ics_shot2(fighter: &mut L2CAgentBase) {
 		if macros::is_excute(fighter) {
 			WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_POPO_STATUS_SPECIAL_N_FLAG_ENABLE_COUPLE);
 		}
-}
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		ics_shot,
-        ics_shot2
-    );
 }

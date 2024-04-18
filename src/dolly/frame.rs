@@ -13,11 +13,14 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-	smashline::install_agent_frame_callbacks!(terry_frame);
+	Agent::new("dolly")
+    .on_line(Main, terry_frame)
+    .install();
 }
-#[fighter_frame_callback]
-pub fn terry_frame(fighter : &mut L2CFighterCommon) {
+
+unsafe extern "C" fn terry_frame(fighter : &mut L2CFighterCommon) {
     unsafe {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
@@ -26,16 +29,7 @@ pub fn terry_frame(fighter : &mut L2CFighterCommon) {
 		stick_x *= PostureModule::lr(boma);
 		let fighter_kind = smash::app::utility::get_kind(boma);
         
-		if fighter_kind == *FIGHTER_KIND_DOLLY && is_default(boma){
-			if [*FIGHTER_DOLLY_STATUS_KIND_SPECIAL_B].contains(&status_kind) && [*FIGHTER_DOLLY_STATUS_KIND_SPECIAL_B_COMMAND].contains(&status_kind) == false {
-				PostureModule::reverse_lr(boma);
-				PostureModule::update_rot_y_lr(boma);
-				StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_SPECIAL_S, true);
-			};
-			if [hash40("special_f_start"), hash40("special_air_f_start")].contains(&MotionModule::motion_kind(boma)) && MotionModule::frame(boma) == 1.0 && stick_x < -0.1 {
-				PostureModule::reverse_lr(boma);
-				PostureModule::update_rot_y_lr(boma);
-			};
+		if is_default(boma){
 			if [hash40("attack_hi4"), hash40("attack_lw4")].contains(&motion_kind) && (AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_HIT) || AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_SHIELD)){
                 //Rising Tackle CI
                 if (ControlModule::get_command_flag_cat(boma, 3) & *FIGHTER_PAD_CMD_CAT4_FLAG_SPECIAL_HI2_COMMAND) != 0{ 

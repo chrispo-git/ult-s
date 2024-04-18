@@ -13,18 +13,15 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		marth_ftilt,
-		marth_dtilt
-    );
+    Agent::new("marth")
+    .acmd("game_attacks3", marth_ftilt)    
+	.acmd("game_attacklw3", marth_dtilt)    
+	.install();
 }
-#[acmd_script(
-    agent = "marth",
-    script =  "game_attacks3",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn marth_ftilt(fighter: &mut L2CAgentBase) {
+
+unsafe extern "C" fn marth_ftilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 8.0);
 		if macros::is_excute(fighter) {
@@ -37,12 +34,7 @@ unsafe fn marth_ftilt(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }	
-#[acmd_script(
-    agent = "marth",
-    script =  "game_attacklw3",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn marth_dtilt(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn marth_dtilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 7.0);
 		if macros::is_excute(fighter) {

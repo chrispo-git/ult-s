@@ -14,8 +14,7 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[fighter_frame( agent = FIGHTER_KIND_KIRBY)]
-fn kirby_rayman_frame(fighter: &mut L2CFighterCommon) {
+unsafe extern "C" fn kirby_rayman_frame(fighter: &mut L2CFighterCommon) {
     unsafe {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
@@ -65,8 +64,7 @@ fn kirby_rayman_frame(fighter: &mut L2CFighterCommon) {
         }
     }
 }
-#[fighter_frame( agent = FIGHTER_KIND_PIKMIN)]
-fn rayman(fighter: &mut L2CFighterCommon) {
+unsafe extern "C" fn rayman(fighter: &mut L2CFighterCommon) {
     unsafe {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
@@ -593,8 +591,7 @@ fn rayman(fighter: &mut L2CFighterCommon) {
         }
     }
 }
-#[weapon_frame( agent = WEAPON_KIND_PIKMIN_PIKMIN)]
-fn kill_pikmin(weapon: &mut L2CFighterBase) {
+unsafe extern "C" fn kill_pikmin(weapon: &mut L2CFighterBase) {
     unsafe {
         let otarget_id = WorkModule::get_int(weapon.module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LINK_OWNER) as u32;
         let boma = smash::app::sv_system::battle_object_module_accessor(weapon.lua_state_agent); 
@@ -613,7 +610,7 @@ fn kill_pikmin(weapon: &mut L2CFighterBase) {
             SoundModule::stop_all_sound(weapon.module_accessor);
             //WorkModule::set_int(weapon.module_accessor, 0, *WEAPON_PIKMIN_PIKMIN_INSTANCE_WORK_ID_INT_HP);
             //if StatusModule::status_kind(weapon.module_accessor) != *WEAPON_PIKMIN_PIKMIN_STATUS_KIND_DEATH {
-            StatusModule::change_status_request_from_script(weapon.module_accessor, *WEAPON_PIKMIN_PIKMIN_STATUS_KIND_LANDING, false);
+            //StatusModule::change_status_request_from_script(weapon.module_accessor, *WEAPON_PIKMIN_PIKMIN_STATUS_KIND_LANDING, false);
             //};
         } else {
             if smash::app::sv_battle_object::is_active(weapon.battle_object_id) {
@@ -624,9 +621,11 @@ fn kill_pikmin(weapon: &mut L2CFighterBase) {
 }
 
 pub fn install() {
-    smashline::install_agent_frames!(
-		kill_pikmin,
-		rayman,
-        kirby_rayman_frame
-    );
+    Agent::new("pikmin")
+        .on_line(Main, rayman)
+        .install();
+
+    Agent::new("pikmin_pikmin")
+        .on_line(Main, kill_pikmin)
+        .install();
 }

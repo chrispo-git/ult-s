@@ -14,11 +14,13 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[acmd_script( agent = "pacman", 
-script = "game_attackairhi", 
-category = ACMD_GAME,
-low_priority)]
-unsafe fn pac_uair(fighter: &mut L2CAgentBase) {
+pub fn install() {
+    Agent::new("pacman")
+    .acmd("game_attackairhi", pac_uair)    
+    .install();
+}
+
+unsafe extern "C" fn pac_uair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 2.0);
 		if macros::is_excute(fighter) {
@@ -37,10 +39,4 @@ unsafe fn pac_uair(fighter: &mut L2CAgentBase) {
 		if macros::is_excute(fighter) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
-}
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		pac_uair
-    );
 }

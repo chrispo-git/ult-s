@@ -15,12 +15,7 @@ use crate::util::*;
 use super::*;
 use super::super::*;
 
-#[acmd_script(
-    agent = "murabito",
-    script =  "game_attackairntoad",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn toad_nair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn toad_nair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 4.0);
 		if macros::is_excute(fighter) {
@@ -42,12 +37,7 @@ unsafe fn toad_nair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }
-#[acmd_script(
-    agent = "murabito",
-    script =  "sound_attackairntoad",
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn toad_nair_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn toad_nair_snd(fighter: &mut L2CAgentBase) {
 	let lua_state = fighter.lua_state_agent;
 	frame(fighter.lua_state_agent, 3.0);
 	if macros::is_excute(fighter) {
@@ -55,12 +45,7 @@ unsafe fn toad_nair_snd(fighter: &mut L2CAgentBase) {
 		macros::PLAY_SE(fighter, Hash40::new("se_murabito_swing_m"));
 	};
 }
-#[acmd_script(
-    agent = "murabito",
-    script =  "game_attackairbtoad",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn toad_bair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn toad_bair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 4.0);
 		if macros::is_excute(fighter) {
@@ -83,12 +68,7 @@ unsafe fn toad_bair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }
-#[acmd_script(
-    agent = "murabito",
-    script =  "sound_attackairbtoad",
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn toad_bair_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn toad_bair_snd(fighter: &mut L2CAgentBase) {
 	let lua_state = fighter.lua_state_agent;
 	frame(fighter.lua_state_agent, 6.0);
 	if macros::is_excute(fighter) {
@@ -96,35 +76,20 @@ unsafe fn toad_bair_snd(fighter: &mut L2CAgentBase) {
 		macros::PLAY_SE(fighter, Hash40::new("se_murabito_swing_m"));
 	};
 }	
-#[acmd_script(
-    agent = "murabito",
-    script =  "effect_attackairbtoad",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn toad_bair_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn toad_bair_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 7.0);
 		if macros::is_excute(fighter) {
 			macros::EFFECT(fighter, Hash40::new("sys_attack_impact"), Hash40::new("legc"), 0, 0.0, 0.0, 0, 0, 0, 1.5, 0, 1, 1, 0, 0, 0, false);
 		}
 }	
-#[acmd_script(
-    agent = "murabito",
-    script =  "game_landingairhitoad",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn toad_uair_land(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn toad_uair_land(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_MURABITO_GENERATE_ARTICLE_UMBRELLA,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
 		}
 }
-#[acmd_script(
-    agent = "murabito",
-    script =  "game_attackairhitoad",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn toad_uair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn toad_uair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 2.0);
 		if macros::is_excute(fighter) {
@@ -143,24 +108,14 @@ unsafe fn toad_uair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }
-#[acmd_script(
-    agent = "murabito",
-    script =  "effect_attackairhitoad",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn toad_uair_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn toad_uair_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 6.0);
 		if macros::is_excute(fighter) {
 			macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_attack_arc_d"), Hash40::new("sys_attack_arc_d"), Hash40::new("top"), 1.5, 7.5, 0, 0, -80, -105, 0.7, true, *EF_FLIP_YZ);
 		}
 }
-#[acmd_script(
-    agent = "murabito",
-    script =  "sound_attackairhitoad",
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn toad_uair_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn toad_uair_snd(fighter: &mut L2CAgentBase) {
 	let lua_state = fighter.lua_state_agent;
 	frame(fighter.lua_state_agent, 5.0);
 	if macros::is_excute(fighter) {
@@ -168,12 +123,7 @@ unsafe fn toad_uair_snd(fighter: &mut L2CAgentBase) {
 		macros::PLAY_SE(fighter, Hash40::new("se_murabito_swing_m"));
 	};
 }
-#[acmd_script(
-    agent = "murabito",
-    script =  "game_attackairftoad",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn toad_fair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn toad_fair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 4.0);
 		if macros::is_excute(fighter) {
@@ -192,12 +142,7 @@ unsafe fn toad_fair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }
-#[acmd_script(
-    agent = "murabito",
-    script =  "effect_attackairftoad",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn toad_fair_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn toad_fair_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 15.0);
 		if macros::is_excute(fighter) {
@@ -205,12 +150,7 @@ unsafe fn toad_fair_eff(fighter: &mut L2CAgentBase) {
 			macros::LAST_EFFECT_SET_RATE(fighter, 0.8);
 		}
 }
-#[acmd_script(
-    agent = "murabito",
-    script =  "sound_attackairftoad",
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn toad_fair_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn toad_fair_snd(fighter: &mut L2CAgentBase) {
 	let lua_state = fighter.lua_state_agent;
 	frame(fighter.lua_state_agent, 15.0);
 	if macros::is_excute(fighter) {
@@ -219,12 +159,7 @@ unsafe fn toad_fair_snd(fighter: &mut L2CAgentBase) {
 	};
 }
 
-#[acmd_script(
-    agent = "murabito",
-    scripts =  ["game_attackairlwtoad"],
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn toad_dair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn toad_dair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_LANDING_CLEAR_SPEED);
@@ -266,12 +201,7 @@ unsafe fn toad_dair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }
-#[acmd_script(
-    agent = "murabito",
-    scripts =  ["effect_attackairlwtoad"],
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn toad_dair_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn toad_dair_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			macros::EFFECT(fighter, Hash40::new("sys_smash_flash"), Hash40::new("haver"), -2, 5, 0, 0, 0, 0, 0.8, 0, 0, 0, 0, 0, 0, true);
@@ -285,23 +215,13 @@ unsafe fn toad_dair_eff(fighter: &mut L2CAgentBase) {
 			wait(fighter.lua_state_agent, 2.0);
 		}
 }
-#[acmd_script(
-    agent = "murabito",
-    scripts =  ["sound_attackairlwtoad"],
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn toad_dair_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn toad_dair_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			macros::PLAY_SE(fighter, Hash40::new("se_murabito_attackdash03"));
 		}
 }
-#[acmd_script(
-    agent = "murabito",
-    scripts =  ["game_landingairlwtoad"],
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn toad_land_dair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn toad_land_dair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 1.0);
 		if macros::is_excute(fighter) {
@@ -313,12 +233,7 @@ unsafe fn toad_land_dair(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }
-#[acmd_script(
-    agent = "murabito",
-    scripts =  ["sound_landingairlwtoad"],
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn toad_land_dair_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn toad_land_dair_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			macros::PLAY_SE(fighter, Hash40::new("se_murabito_attackhard_l01"));
@@ -326,14 +241,23 @@ unsafe fn toad_land_dair_snd(fighter: &mut L2CAgentBase) {
 }
 
 pub fn install() {
-    smashline::install_acmd_scripts!(
-        toad_nair, toad_nair_snd,
-        toad_bair, toad_bair_eff, toad_bair_snd,
-        toad_uair_land,
-        toad_uair, toad_uair_eff, toad_uair_snd,
-        toad_fair, toad_fair_eff, toad_fair_snd,
-        toad_dair, toad_dair_eff, toad_dair_snd,
-        toad_land_dair, toad_land_dair_snd,
-        
-    );
+    Agent::new("murabito")
+        .game_acmd("game_attackairntoad", toad_nair)
+        .sound_acmd("sound_attackairntoad", toad_nair_snd)
+        .game_acmd("game_attackairbtoad", toad_bair)
+        .sound_acmd("sound_attackairbtoad", toad_bair_snd)
+        .effect_acmd("effect_attackairbtoad", toad_bair_eff)
+        .game_acmd("game_landingairhitoad", toad_uair_land)
+        .game_acmd("game_attackairhitoad", toad_uair)
+        .effect_acmd("effect_attackairhitoad", toad_uair_eff)
+        .sound_acmd("sound_attackairhitoad", toad_uair_snd)
+        .game_acmd("game_attackairftoad", toad_fair)
+        .effect_acmd("effect_attackairftoad", toad_fair_eff)
+        .sound_acmd("sound_attackairftoad", toad_fair_snd)
+        .game_acmd("game_attackairlwtoad", toad_dair)
+        .effect_acmd("effect_attackairlwtoad", toad_dair_eff)
+        .sound_acmd("sound_attackairlwtoad", toad_dair_snd)
+        .game_acmd("game_landingairlwtoad", toad_land_dair)
+        .sound_acmd("sound_landingairlwtoad", toad_land_dair_snd)
+        .install();
 }

@@ -13,20 +13,17 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		ink_utilt,
-		ink_utilt_eff,
-		ink_utilt_sound,
-		ink_dtilt
-    );
+    Agent::new("inkling")
+    .acmd("game_attacklw3", ink_dtilt)    
+    .acmd("game_attackhi3", ink_utilt)    
+    .acmd("effect_attackhi3", ink_utilt_eff)    
+    .acmd("sound_attackhi3", ink_utilt_sound)    
+    .install();
 }
-#[acmd_script(
-    agent = "inkling",
-    script =  "game_attacklw3",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn ink_dtilt(fighter: &mut L2CAgentBase) {
+
+unsafe extern "C" fn ink_dtilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 5.0);
 		if macros::is_excute(fighter) {
@@ -47,12 +44,7 @@ unsafe fn ink_dtilt(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }		
-#[acmd_script(
-    agent = "inkling",
-    script =  "game_attackhi3",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn ink_utilt(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn ink_utilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 1.0);
 		if macros::is_excute(fighter) {
@@ -87,12 +79,7 @@ unsafe fn ink_utilt(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }		
-#[acmd_script(
-    agent = "inkling",
-    script =  "effect_attackhi3",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn ink_utilt_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn ink_utilt_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 6.0);
 		if macros::is_excute(fighter) {
@@ -118,12 +105,7 @@ unsafe fn ink_utilt_eff(fighter: &mut L2CAgentBase) {
 			macros::LANDING_EFFECT(fighter, Hash40::new("sys_landing_smoke_s"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.9, 0, 0, 0, 0, 0, 0, false);
 		}
 }	
-#[acmd_script(
-    agent = "inkling",
-    script =  "sound_attackhi3",
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn ink_utilt_sound(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn ink_utilt_sound(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 12.0);
 		if macros::is_excute(fighter) {

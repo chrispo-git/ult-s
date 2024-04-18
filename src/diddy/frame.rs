@@ -13,14 +13,20 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-	smashline::install_agent_frames!(gun_frame, diddy_frame);
+	Agent::new("diddy")
+	.on_line(Main, diddy_frame)
+	.install();
+
+	Agent::new("diddy_gun")
+	.on_line(Main, gun_frame)
+	.install();
 }
 
 static mut DIDDY_PEANUT_CANCEL : [i32; 8] = [0; 8];
 
-#[fighter_frame( agent = FIGHTER_KIND_DIDDY )]
-fn diddy_frame(fighter: &mut L2CFighterCommon) {
+unsafe extern "C" fn diddy_frame(fighter: &mut L2CFighterCommon) {
     unsafe {
 		let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);   
 		if is_default(boma) {
@@ -69,8 +75,7 @@ fn diddy_frame(fighter: &mut L2CFighterCommon) {
 	}
 }	
 
-#[weapon_frame( agent = WEAPON_KIND_DIDDY_GUN )]
-fn gun_frame(weapon: &mut L2CFighterBase) {
+unsafe extern "C" fn gun_frame(weapon: &mut L2CFighterBase) {
     unsafe {
         let otarget_id = WorkModule::get_int(weapon.module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LINK_OWNER) as u32;
         let boma = smash::app::sv_battle_object::module_accessor(otarget_id);

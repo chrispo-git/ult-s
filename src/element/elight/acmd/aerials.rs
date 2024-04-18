@@ -13,16 +13,18 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-	smashline::install_acmd_scripts!(
-		mythra_bair, mythra_dair, mythra_uair, mythra_fair, mythra_nair
-	);
+	Agent::new("elight")
+    .acmd("game_attackairn", mythra_nair)    
+    .acmd("game_attackairhi", mythra_uair)    
+    .acmd("game_attackairb", mythra_bair)    
+    .acmd("game_attackairf", mythra_fair)    
+    .acmd("game_attackairlw", mythra_dair)    
+    .install();
 }	
-#[acmd_script( agent = "elight", 
-scripts = ["game_attackairn"], 
-category = ACMD_GAME,
-low_priority)]
-unsafe fn mythra_nair(fighter: &mut L2CAgentBase) {	
+
+unsafe extern "C" fn mythra_nair(fighter: &mut L2CAgentBase) {	
 		let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 3.0);
 		macros::FT_MOTION_RATE(fighter, 1);
@@ -72,11 +74,7 @@ unsafe fn mythra_nair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}		
 }
-#[acmd_script( agent = "elight", 
-scripts = ["game_attackairhi"], 
-category = ACMD_GAME,
-low_priority)]
-unsafe fn mythra_uair(fighter: &mut L2CAgentBase) {	
+unsafe extern "C" fn mythra_uair(fighter: &mut L2CAgentBase) {	
 		let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 2.0);
 		if macros::is_excute(fighter) {
@@ -134,11 +132,7 @@ unsafe fn mythra_uair(fighter: &mut L2CAgentBase) {
 		frame(fighter.lua_state_agent, 43.0);
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.8);
 }		
-#[acmd_script( agent = "elight", 
-scripts = ["game_attackairb"], 
-category = ACMD_GAME,
-low_priority)]
-unsafe fn mythra_bair(fighter: &mut L2CAgentBase) {	
+unsafe extern "C" fn mythra_bair(fighter: &mut L2CAgentBase) {	
 		let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 2.0);
 		macros::FT_MOTION_RATE(fighter, 0.5);
@@ -196,11 +190,7 @@ unsafe fn mythra_bair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		};
 }
-#[acmd_script( agent = "elight", 
-scripts = ["game_attackairf"], 
-category = ACMD_GAME,
-low_priority)]
-unsafe fn mythra_fair(fighter: &mut L2CAgentBase) {	
+unsafe extern "C" fn mythra_fair(fighter: &mut L2CAgentBase) {	
 		let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 3.0);
 		if macros::is_excute(fighter) {
@@ -261,11 +251,7 @@ unsafe fn mythra_fair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		};
 }
-#[acmd_script( agent = "elight", 
-scripts = ["game_attackairlw"], 
-category = ACMD_GAME,
-low_priority)]
-unsafe fn mythra_dair(fighter: &mut L2CAgentBase) {	
+unsafe extern "C" fn mythra_dair(fighter: &mut L2CAgentBase) {	
 		let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 5.0);
 		if macros::is_excute(fighter) {

@@ -13,20 +13,20 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		bowser_fsmash,
-		bowser_fsmash_eff,
-		bowser_fsmash_snd,
-		bowser_da, bowser_da_eff, bowser_da_snd, bowser_da_expr
-    );
+    Agent::new("koopa")
+    .acmd("game_attackdash", bowser_da)    
+    .acmd("effect_attackdash", bowser_da_eff)    
+    .acmd("sound_attackdash", bowser_da_snd)    
+    .acmd("expression_attackdash", bowser_da_expr)    
+    .acmd("game_attacks4", bowser_fsmash)    
+    .acmd("effect_attacks4", bowser_fsmash_eff)    
+    .acmd("sound_attacks4", bowser_fsmash_snd)    
+    .install();
 }
-#[acmd_script(
-    agent = "koopa",
-    script =  "game_attackdash",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn bowser_da(fighter: &mut L2CAgentBase) {
+
+unsafe extern "C" fn bowser_da(fighter: &mut L2CAgentBase) {
     	let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 15.0);
 		if macros::is_excute(fighter) {
@@ -38,12 +38,7 @@ unsafe fn bowser_da(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }
-#[acmd_script(
-    agent = "koopa",
-    script =  "effect_attackdash",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn bowser_da_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn bowser_da_eff(fighter: &mut L2CAgentBase) {
     	let lua_state = fighter.lua_state_agent;
 		frame(lua_state, 13.0);
 		if macros::is_excute(fighter) {
@@ -74,12 +69,7 @@ unsafe fn bowser_da_eff(fighter: &mut L2CAgentBase) {
 			macros::LAST_EFFECT_SET_RATE(fighter,1.5);
 		}
 }
-#[acmd_script(
-    agent = "koopa",
-    script =  "sound_attackdash",
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn bowser_da_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn bowser_da_snd(fighter: &mut L2CAgentBase) {
     	let lua_state = fighter.lua_state_agent;
 		frame(lua_state, 15.0);
 		if macros::is_excute(fighter) {
@@ -93,12 +83,7 @@ unsafe fn bowser_da_snd(fighter: &mut L2CAgentBase) {
 			macros::PLAY_SE(fighter, Hash40::new("se_koopa_smash_l02"));
 		}
 }
-#[acmd_script(
-    agent = "koopa",
-    script =  "expression_attackdash",
-    category = ACMD_EXPRESSION,
-	low_priority)]
-unsafe fn bowser_da_expr(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn bowser_da_expr(fighter: &mut L2CAgentBase) {
     	let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			slope!(fighter, *MA_MSC_CMD_SLOPE_SLOPE, *SLOPE_STATUS_LR);
@@ -109,12 +94,7 @@ unsafe fn bowser_da_expr(fighter: &mut L2CAgentBase) {
 		}
 }
 
-#[acmd_script(
-    agent = "koopa",
-    script =  "game_attacks4",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn bowser_fsmash(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn bowser_fsmash(fighter: &mut L2CAgentBase) {
     	let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 13.0);
         if macros::is_excute(fighter) {
@@ -131,12 +111,7 @@ unsafe fn bowser_fsmash(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }
-#[acmd_script(
-    agent = "koopa",
-    script =  "effect_attacks4",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn bowser_fsmash_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn bowser_fsmash_eff(fighter: &mut L2CAgentBase) {
     	let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 21.0);
 		if macros::is_excute(fighter) {
@@ -144,12 +119,7 @@ unsafe fn bowser_fsmash_eff(fighter: &mut L2CAgentBase) {
 			macros::FOOT_EFFECT(fighter, Hash40::new("sys_turn_smoke"), Hash40::new("top"), -2.0, 0, 0, 0, 0, 0, 2.0, 0, 0, 0, 0, 0, 0, false);
 		}
 }	
-#[acmd_script(
-    agent = "koopa",
-    script =  "sound_attacks4",
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn bowser_fsmash_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn bowser_fsmash_snd(fighter: &mut L2CAgentBase) {
     	let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 19.0);
 		if macros::is_excute(fighter) {

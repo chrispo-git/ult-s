@@ -14,12 +14,7 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[acmd_script(
-    agent = "samusd",
-    script =  "game_attackdash",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn dsamus_da(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn dsamus_da(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 8.0);
 		if macros::is_excute(fighter) {
@@ -40,12 +35,7 @@ unsafe fn dsamus_da(fighter: &mut L2CAgentBase) {
 		}
 }
 
-#[acmd_script(
-    agent = "samusd",
-    script =  "effect_attackdash",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn dsamus_da_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn dsamus_da_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 3.0);
 		if macros::is_excute(fighter) {
@@ -69,12 +59,7 @@ unsafe fn dsamus_da_eff(fighter: &mut L2CAgentBase) {
 			macros::BURN_COLOR_NORMAL(fighter, );
 		}
 }
-#[acmd_script(
-    agent = "samusd",
-    script =  "sound_attackdash",
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn dsamus_da_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn dsamus_da_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 9.0);
 		if macros::is_excute(fighter) {
@@ -83,12 +68,7 @@ unsafe fn dsamus_da_snd(fighter: &mut L2CAgentBase) {
 		}
 }
 
-#[acmd_script(
-    agent = "samusd",
-    script =  "game_attack11",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn dsamus_jab(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn dsamus_jab(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 4.0);
 		if macros::is_excute(fighter) {
@@ -99,12 +79,7 @@ unsafe fn dsamus_jab(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }	
-#[acmd_script(
-    agent = "samusd",
-    script =  "effect_attack11",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn dsamus_jab_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn dsamus_jab_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			macros::EFFECT_FOLLOW(fighter, Hash40::new("samusd_win3_aura"), Hash40::new("arml"), 0, 0, 0, 0, 0, 0, 1.9, true);
@@ -121,12 +96,7 @@ unsafe fn dsamus_jab_eff(fighter: &mut L2CAgentBase) {
 		}
 }	
 
-#[acmd_script(
-    agent = "samusd",
-    script =  "game_attackhi4",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn dsamus_usmash(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn dsamus_usmash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 6.0);
 		if macros::is_excute(fighter) {
@@ -149,12 +119,7 @@ unsafe fn dsamus_usmash(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }	
-#[acmd_script(
-    agent = "samusd",
-    script =  "effect_attackhi4",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn dsamus_usmash_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn dsamus_usmash_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 8.0);
 		if macros::is_excute(fighter) {
@@ -168,12 +133,7 @@ unsafe fn dsamus_usmash_eff(fighter: &mut L2CAgentBase) {
 			macros::LANDING_EFFECT(fighter, Hash40::new("sys_down_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, true);
 		}
 }	
-#[acmd_script(
-    agent = "samusd",
-    script =  "sound_attackhi4",
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn dsamus_usmash_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn dsamus_usmash_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 7.0);
 		if macros::is_excute(fighter) {
@@ -188,12 +148,7 @@ unsafe fn dsamus_usmash_snd(fighter: &mut L2CAgentBase) {
 			macros::PLAY_SE(fighter, Hash40::new("se_samusd_landing02"));
 		}
 }	
-#[acmd_script(
-    agent = "samusd",
-    script =  "game_attacklw4",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn dsamus_dsmash(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn dsamus_dsmash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.4);
 		frame(fighter.lua_state_agent, 4.0);
@@ -214,12 +169,7 @@ unsafe fn dsamus_dsmash(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }	
-#[acmd_script(
-    agent = "samusd",
-    script =  "effect_attacklw4",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn dsamus_dsmash_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn dsamus_dsmash_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			macros::EFFECT_FOLLOW(fighter, Hash40::new("samusd_win3_aura"), Hash40::new("arml"), 0, 0, 0, 0, 0, 0, 1.9, true);
@@ -239,12 +189,7 @@ unsafe fn dsamus_dsmash_eff(fighter: &mut L2CAgentBase) {
 			macros::EFFECT_OFF_KIND(fighter, Hash40::new("samusd_win3_aura"), false, true);
 		}
 }
-#[acmd_script(
-    agent = "samusd",
-    script =  "sound_attacklw4",
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn dsamus_dsmash_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn dsamus_dsmash_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 5.0);
 		if macros::is_excute(fighter) {
@@ -255,12 +200,7 @@ unsafe fn dsamus_dsmash_snd(fighter: &mut L2CAgentBase) {
 			macros::PLAY_SE(fighter, Hash40::new("se_common_bomb_l"));
 		}
 }
-#[acmd_script(
-    agent = "samusd",
-    script =  "expression_attacklw4",
-    category = ACMD_EXPRESSION,
-	low_priority)]
-unsafe fn dsamus_dsmash_expr(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn dsamus_dsmash_expr(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 10.0);
 		if macros::is_excute(fighter) {
@@ -269,10 +209,18 @@ unsafe fn dsamus_dsmash_expr(fighter: &mut L2CAgentBase) {
 }
 
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		dsamus_da, dsamus_da_eff, dsamus_da_snd,
-        dsamus_jab, dsamus_jab_eff,
-        dsamus_usmash, dsamus_usmash_eff, dsamus_usmash_snd,
-        dsamus_dsmash, dsamus_dsmash_eff, dsamus_dsmash_snd, dsamus_dsmash_expr
-    );
+    Agent::new("samusd")
+        .game_acmd("game_attackdash", dsamus_da)
+		.effect_acmd("effect_attackdash", dsamus_da_eff)
+		.sound_acmd("sound_attackdash", dsamus_da_snd)
+		.game_acmd("game_attack11", dsamus_jab)
+		.effect_acmd("effect_attack11", dsamus_jab_eff)
+		.game_acmd("game_attackhi4", dsamus_usmash)
+		.effect_acmd("effect_attackhi4", dsamus_usmash_eff)
+		.sound_acmd("sound_attackhi4", dsamus_usmash_snd)
+		.game_acmd("game_attacklw4", dsamus_dsmash)
+		.effect_acmd("effect_attacklw4", dsamus_dsmash_eff)
+		.sound_acmd("sound_attacklw4", dsamus_dsmash_snd)
+		.expression_acmd("expression_attacklw4", dsamus_dsmash_expr)
+		.install();
 }

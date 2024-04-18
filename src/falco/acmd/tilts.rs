@@ -13,17 +13,14 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		falco_dtilt
-    );
+    Agent::new("falco")
+    .acmd("game_attacklw3", falco_dtilt)    
+    .install();
 }
-#[acmd_script(
-    agent = "falco",
-    script =  "game_attacklw3",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn falco_dtilt(fighter: &mut L2CAgentBase) {
+
+unsafe extern "C" fn falco_dtilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 1.0);
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.75);

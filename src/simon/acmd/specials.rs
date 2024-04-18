@@ -14,12 +14,14 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[acmd_script( 
-	agent = "simon", 
-	scripts = ["game_speciallw", "game_specialairlw"], 
-	category = ACMD_GAME,
-	low_priority)]
-unsafe fn simon_downb(fighter: &mut L2CAgentBase) {
+pub fn install() {
+    Agent::new("simon")
+    .acmd("game_speciallw", simon_downb)    
+    .acmd("game_specialairlw", simon_downb)    
+    .install();
+}
+
+unsafe extern "C" fn simon_downb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	if macros::is_excute(fighter) {
 		if !ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_SIMON_GENERATE_ARTICLE_HOLYWATER) {
@@ -50,10 +52,4 @@ unsafe fn simon_downb(fighter: &mut L2CAgentBase) {
 		ItemModule::throw_item(fighter.module_accessor, angle, power, 1.0, 0, true, 0.0);
 		println!("Power {}, Angle {}", power, angle);
 	}
-}
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		simon_downb
-    );
 }

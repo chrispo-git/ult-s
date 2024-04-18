@@ -14,16 +14,25 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[acmd_script( agent = "snake", script = "sound_appealsr", category = ACMD_SOUND )]
-unsafe fn snake_side_taunt_snd(fighter : &mut L2CAgentBase) {
+pub fn install() {
+    Agent::new("snake")
+    .acmd("sound_appealsr", snake_side_taunt_snd)    
+    .acmd("sound_appealhir", snake_up_taunt_snd)    
+    .acmd("game_appealendexplode", snake_down_taunt_explode_game)    
+    .acmd("expression_appealendexplode", snake_down_taunt_explode_exp)    
+    .acmd("sound_appealendexplode", snake_down_taunt_explode_snd)    
+    .acmd("effect_appealendexplode", snake_down_taunt_explode_eff)    
+    .install();
+}
+
+unsafe extern "C" fn snake_side_taunt_snd(fighter : &mut L2CAgentBase) {
         frame(fighter.lua_state_agent, 20.0);
         if macros::is_excute(fighter) {
             macros::PLAY_SE(fighter, Hash40::new("vc_snake_win03"));
         }
 }
 
-#[acmd_script( agent = "snake", script = "sound_appealhir", category = ACMD_SOUND )]
-unsafe fn snake_up_taunt_snd(fighter : &mut L2CAgentBase) {
+unsafe extern "C" fn snake_up_taunt_snd(fighter : &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if macros::is_excute(fighter) {
         macros::AREA_WIND_2ND_arg10(fighter, 0, 2, 360/*angle*/, 10/*size*/, 1, 0, 12, 30, 30, 80);
@@ -36,8 +45,7 @@ unsafe fn snake_up_taunt_snd(fighter : &mut L2CAgentBase) {
 }
 
 
-#[acmd_script( agent = "snake", script = "game_appealendexplode", category = ACMD_GAME )]
-unsafe fn snake_down_taunt_explode_game(fighter : &mut L2CAgentBase) {
+unsafe extern "C" fn snake_down_taunt_explode_game(fighter : &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 30.0);
     if macros::is_excute(fighter) {
         ItemModule::set_have_item_visibility(fighter.module_accessor, false, 0 );
@@ -58,8 +66,7 @@ unsafe fn snake_down_taunt_explode_game(fighter : &mut L2CAgentBase) {
         ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_SNAKE_GENERATE_ARTICLE_C4_SWITCH, ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
     }
 }
-#[acmd_script( agent = "snake", script = "expression_appealendexplode", category = ACMD_EXPRESSION )]
-unsafe fn snake_down_taunt_explode_exp(fighter : &mut L2CAgentBase) {
+unsafe extern "C" fn snake_down_taunt_explode_exp(fighter : &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         ItemModule::set_have_item_visibility(fighter.module_accessor, false, 0 );
     }
@@ -70,8 +77,7 @@ unsafe fn snake_down_taunt_explode_exp(fighter : &mut L2CAgentBase) {
         ControlModule::set_rumble(fighter.module_accessor, Hash40::new("rbkind_nohits"), 5, false, 0);
     }
 }
-#[acmd_script( agent = "snake", script = "sound_appealendexplode", category = ACMD_SOUND )]
-unsafe fn snake_down_taunt_explode_snd(fighter : &mut L2CAgentBase) {
+unsafe extern "C" fn snake_down_taunt_explode_snd(fighter : &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 15.0);
     if macros::is_excute(fighter) {
         macros::PLAY_SE(fighter, Hash40::new("vc_snake_appealend"));
@@ -89,18 +95,9 @@ unsafe fn snake_down_taunt_explode_snd(fighter : &mut L2CAgentBase) {
         macros::PLAY_SE(fighter, Hash40::new("se_snake_special_l05"));
     }
 }
-#[acmd_script( agent = "snake", script = "effect_appealendexplode", category = ACMD_EFFECT )]
-unsafe fn snake_down_taunt_explode_eff(fighter : &mut L2CAgentBase) {
+unsafe extern "C" fn snake_down_taunt_explode_eff(fighter : &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 75.0);
     if macros::is_excute(fighter) {
         macros::EFFECT(fighter, Hash40::new("sys_smash_flash"), Hash40::new("haver"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
     }
-}
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		snake_side_taunt_snd,
-        snake_up_taunt_snd,
-        snake_down_taunt_explode_game, snake_down_taunt_explode_eff, snake_down_taunt_explode_exp, snake_down_taunt_explode_snd
-    );
 }

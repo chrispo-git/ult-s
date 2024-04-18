@@ -13,18 +13,17 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		gren_dtaunt,
-		gren_dtaunt_eff
-    );
+	Agent::new("gekkouga")
+    .acmd("game_appeallwl", gren_dtaunt)    
+    .acmd("game_appeallwr", gren_dtaunt)    
+    .acmd("effect_appeallwl", gren_dtaunt_eff)    
+    .acmd("effect_appeallwr", gren_dtaunt_eff)    
+    .install();
 }
-#[acmd_script(
-    agent = "gekkouga",
-    scripts =  ["game_appeallwl", "game_appeallwr"],
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn gren_dtaunt(fighter: &mut L2CAgentBase) {
+
+unsafe extern "C" fn gren_dtaunt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.33333);
 		frame(fighter.lua_state_agent, 30.0);
@@ -45,12 +44,7 @@ unsafe fn gren_dtaunt(fighter: &mut L2CAgentBase) {
 			CancelModule::enable_cancel(fighter.module_accessor);
 		}
 }	
-#[acmd_script(
-    agent = "gekkouga",
-    scripts =  ["effect_appeallwl", "effect_appeallwr"],
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn gren_dtaunt_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn gren_dtaunt_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 30.0);
 		if macros::is_excute(fighter) {

@@ -13,18 +13,15 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		seph_flare
-    );
+    Agent::new("edge")
+    .acmd("game_specialairn1", seph_flare)    
+    .acmd("game_specialn1", seph_flare)    
+    .install();
 }
 
-#[acmd_script(
-    agent = "edge",
-    scripts =  ["game_specialairn1", "game_specialn1"],
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn seph_flare(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn seph_flare(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 13.0);
 		if macros::is_excute(fighter) {

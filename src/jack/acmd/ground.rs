@@ -14,19 +14,15 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use crate::jack::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		joker_fsmash,
-		joker_usmash
-    );
+    Agent::new("jack")
+    .acmd("game_attacks4", joker_fsmash)    
+    .acmd("game_attackhi4", joker_usmash)    
+    .install();
 }
 		
-#[acmd_script(
-    agent = "jack",
-    scripts =  ["game_attacks4"],
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn joker_fsmash(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn joker_fsmash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 	let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
@@ -65,12 +61,7 @@ unsafe fn joker_fsmash(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }
-#[acmd_script(
-    agent = "jack",
-    scripts =  ["game_attackhi4"],
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn joker_usmash(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn joker_usmash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 1.0);
 		if macros::is_excute(fighter) {

@@ -14,18 +14,13 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-
-
 pub fn install() {
-    
-    smashline::install_acmd_scripts!(villy_fthrow);
+    Agent::new("murabito")
+    .acmd("game_throwf", villy_fthrow)    
+    .install();
 }
-#[acmd_script(
-    agent = "murabito",
-    script =  "game_throwf",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn villy_fthrow(fighter: &mut L2CAgentBase) {
+
+unsafe extern "C" fn villy_fthrow(fighter: &mut L2CAgentBase) {
 		if macros::is_excute(fighter) {
             ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_MURABITO_GENERATE_ARTICLE_BUTTERFLYNET, false, 0);
 			macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, /*ID*/ 0, 9.0, 45, 10, 0, 108, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);

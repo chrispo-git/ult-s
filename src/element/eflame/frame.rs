@@ -17,10 +17,12 @@ use super::*;
 use crate::element::*;
 
 pub fn install() {
-    smashline::install_agent_frames!(pyra_frame);
+    Agent::new("eflame")
+	.on_line(Main, pyra_frame)
+	.install();
 }
-#[fighter_frame( agent = FIGHTER_KIND_EFLAME )]
-fn pyra_frame(fighter: &mut L2CFighterCommon) {
+
+unsafe extern "C" fn pyra_frame(fighter: &mut L2CFighterCommon) {
     unsafe {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 		if is_default(boma) {

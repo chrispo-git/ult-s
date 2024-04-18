@@ -16,15 +16,14 @@ use super::*;
 
 
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		hero_nair,
-		hero_bair,
-		hero_uair
-    );
+    Agent::new("brave")
+	.acmd("game_attackairn", hero_nair)
+	.acmd("game_attackairb", hero_bair)
+	.acmd("game_attackairhi", hero_uair)
+	.install();
 }
 
-#[acmd_script( agent = "brave", script = "game_attackairn", category = ACMD_GAME, low_priority )]
-unsafe fn hero_nair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn hero_nair(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 3.0);
     if macros::is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
@@ -44,12 +43,7 @@ unsafe fn hero_nair(fighter: &mut L2CAgentBase) {
         WorkModule::off_flag(fighter.module_accessor, *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
     }
 }
-#[acmd_script(
-    agent = "brave",
-    script =  "game_attackairb",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn hero_bair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn hero_bair(fighter: &mut L2CAgentBase) {
     	let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 3.0);
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
@@ -73,12 +67,7 @@ unsafe fn hero_bair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }	
-#[acmd_script(
-    agent = "brave",
-    script =  "game_attackairhi",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn hero_uair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn hero_uair(fighter: &mut L2CAgentBase) {
     	let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 3.0);
 		if macros::is_excute(fighter) {

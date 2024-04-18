@@ -14,12 +14,23 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[acmd_script(
-    agent = "richter",
-    script =  "game_attackairhi",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn richter_uair(fighter: &mut L2CAgentBase) {
+pub fn install() {
+    Agent::new("richter")
+    .acmd("game_attackairhi", richter_uair)    
+    .acmd("effect_attackairhi", richter_uair_eff)    
+    .acmd("sound_attackairhi", richter_uair_snd)    
+    .acmd("game_attackairn", richter_nair)    
+    .acmd("game_attackairf", richter_fair)    
+    .acmd("game_attackairfhi", richter_fair_hi)    
+    .acmd("game_attackairflw", richter_fair_lw)    
+    .install();
+
+	Agent::new("richter_whip")
+    .acmd("effect_attackairhi", richter_uair_whip)    
+    .install();
+}
+
+unsafe extern "C" fn richter_uair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 2.0);
 		if macros::is_excute(fighter) {
@@ -41,12 +52,7 @@ unsafe fn richter_uair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }	
-#[acmd_script(
-    agent = "richter",
-    script =  "effect_attackairhi",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn richter_uair_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn richter_uair_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 6.0);
 		if macros::is_excute(fighter) {
@@ -56,34 +62,18 @@ unsafe fn richter_uair_eff(fighter: &mut L2CAgentBase) {
 		}
 }	
 
-#[acmd_script(
-    agent = "richter",
-    script =  "sound_attackairhi",
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn richter_uair_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn richter_uair_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 5.0);
 		if macros::is_excute(fighter) {
 			macros::PLAY_SEQUENCE(fighter, Hash40::new("seq_richter_rnd_attack"));
 		}
 }	
-#[acmd_script(
-    agent = "richter_whip",
-    script =  "effect_attackairhi",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn richter_uair_whip(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn richter_uair_whip(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 }	
 
-
-#[acmd_script(
-    agent = "richter",
-    script =  "game_attackairn",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn richter_nair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn richter_nair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
 		frame(fighter.lua_state_agent, 7.0);
@@ -108,12 +98,7 @@ unsafe fn richter_nair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }
-#[acmd_script(
-    agent = "richter",
-    script =  "game_attackairf",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn richter_fair(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn richter_fair(agent: &mut L2CAgentBase) {
 		frame(agent.lua_state_agent, 1.0);
 		macros::FT_MOTION_RATE(agent, 0.8);
 		if macros::is_excute(agent) {
@@ -162,12 +147,7 @@ unsafe fn richter_fair(agent: &mut L2CAgentBase) {
 			WorkModule::off_flag(agent.module_accessor, *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }
-#[acmd_script(
-    agent = "richter",
-    script =  "game_attackairfhi",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn richter_fair_hi(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn richter_fair_hi(agent: &mut L2CAgentBase) {
 		frame(agent.lua_state_agent, 1.0);
 		macros::FT_MOTION_RATE(agent, 0.8);
 		if macros::is_excute(agent) {
@@ -216,12 +196,7 @@ unsafe fn richter_fair_hi(agent: &mut L2CAgentBase) {
 			WorkModule::off_flag(agent.module_accessor, *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }
-#[acmd_script(
-    agent = "richter",
-    script =  "game_attackairflw",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn richter_fair_lw(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn richter_fair_lw(agent: &mut L2CAgentBase) {
 		frame(agent.lua_state_agent, 1.0);
 		macros::FT_MOTION_RATE(agent, 0.8);
 		if macros::is_excute(agent) {
@@ -269,10 +244,4 @@ unsafe fn richter_fair_lw(agent: &mut L2CAgentBase) {
 		if macros::is_excute(agent) {
 			WorkModule::off_flag(agent.module_accessor, *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
-}
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		richter_uair, richter_uair_eff, richter_uair_snd, richter_uair_whip,
-        richter_nair, richter_fair, richter_fair_lw, richter_fair_hi
-    );
 }

@@ -14,12 +14,20 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[acmd_script(
-    agent = "roy",
-    script =  "game_attack11",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn roy_jab(fighter: &mut L2CAgentBase) {
+pub fn install() {
+    Agent::new("roy")
+    .acmd("game_attack11", roy_jab)    
+	.acmd("game_attackhi4", roy_usmash)    
+	.acmd("game_attackdash", roy_da)    
+	.acmd("game_attackdash2", roy_da2)    
+	.acmd("effect_attackdash2", roy_da2_eff)    
+	.acmd("effect_attackdash", roy_da_eff)    
+	.acmd("sound_attackdash2", roy_da2_snd)    
+	.acmd("sound_attackdash", roy_da_snd)    
+	.install();
+}
+
+unsafe extern "C" fn roy_jab(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 5.0);
 		if macros::is_excute(fighter) {
@@ -33,12 +41,7 @@ unsafe fn roy_jab(fighter: &mut L2CAgentBase) {
 		}
 }		
 
-#[acmd_script(
-    agent = "roy",
-    script =  "game_attackhi4",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn roy_usmash(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn roy_usmash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 5.0);
 		if macros::is_excute(fighter) {
@@ -80,12 +83,7 @@ unsafe fn roy_usmash(fighter: &mut L2CAgentBase) {
 		}
 }		
 
-#[acmd_script(
-    agent = "roy",
-    script =  "game_attackdash",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn roy_da(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn roy_da(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 2.0);
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.3333);
@@ -103,12 +101,7 @@ unsafe fn roy_da(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }	
-#[acmd_script(
-    agent = "roy",
-    script =  "game_attackdash2",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn roy_da2(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn roy_da2(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 8.0);
 		if macros::is_excute(fighter) {
@@ -119,12 +112,7 @@ unsafe fn roy_da2(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }	
-#[acmd_script(
-    agent = "roy",
-    script =  "effect_attackdash2",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn roy_da2_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn roy_da2_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 7.0);
 		if macros::is_excute(fighter) {
@@ -138,24 +126,14 @@ unsafe fn roy_da2_eff(fighter: &mut L2CAgentBase) {
 			macros::EFFECT_OFF_KIND(fighter, Hash40::new_raw(0x08195da748), false, false);
 		}
 }	
-#[acmd_script(
-    agent = "roy",
-    script =  "effect_attackdash",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn roy_da_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn roy_da_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 6.0);
 		if macros::is_excute(fighter) {
 			macros::LANDING_EFFECT(fighter, Hash40::new("sys_h_smoke_b"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, true);
 		}
 }	
-#[acmd_script(
-    agent = "roy",
-    script =  "sound_attackdash2",
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn roy_da2_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn roy_da2_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 4.0);
 		if macros::is_excute(fighter) {
@@ -167,12 +145,7 @@ unsafe fn roy_da2_snd(fighter: &mut L2CAgentBase) {
 			macros::PLAY_SE(fighter, Hash40::new("se_roy_attackair_b01"));
 		}
 }	
-#[acmd_script(
-    agent = "roy",
-    script =  "sound_attackdash",
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn roy_da_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn roy_da_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 6.0);
 		if macros::is_excute(fighter) {
@@ -180,12 +153,3 @@ unsafe fn roy_da_snd(fighter: &mut L2CAgentBase) {
 			macros::PLAY_SE(fighter, Hash40::new("se_roy_attackdash"));
 		}
 }	
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		roy_jab,
-        roy_usmash,
-        roy_da, roy_da_eff, roy_da_snd,
-        roy_da2, roy_da2_eff, roy_da2_snd
-    );
-}

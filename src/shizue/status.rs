@@ -14,8 +14,11 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[status_script(agent = "shizue", status = FIGHTER_MURABITO_STATUS_KIND_SPECIAL_N_SEARCH, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_PRE)]
-unsafe fn special_n_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
+pub fn install() {
+    
+}
+
+unsafe extern "C" fn special_n_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
     StatusModule::init_settings(
         fighter.module_accessor,
         smash::app::SituationKind(*SITUATION_KIND_NONE),
@@ -42,8 +45,4 @@ unsafe fn special_n_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
         0
     );
     0.into()
-}
-
-pub fn install() {
-    //smashline::install_status_scripts!(special_n_pre);
 }

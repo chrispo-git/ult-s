@@ -13,25 +13,22 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		kirby_fair,
-		kirby_bair,
-		kirby_dair,
-		kirby_dair_eff,
-		kirby_dair_snd,
-		kirby_landing_dair,
-		kirby_landing_bair,
-		kirby_bair_eff,
-		kirby_bair_snd
-    );
+    Agent::new("kirby")
+    .acmd("game_attackairf", kirby_fair)    
+    .acmd("game_attackairb", kirby_bair)    
+    .acmd("game_attackairlw", kirby_dair)    
+    .acmd("effect_attackairlw", kirby_dair_eff)    
+    .acmd("sound_attackairlw", kirby_dair_snd)    
+    .acmd("game_landingairlw", kirby_landing_dair)    
+    .acmd("effect_attackairb", kirby_bair_eff)    
+    .acmd("sound_attackairb", kirby_bair_snd)    
+    .acmd("game_landingairb", kirby_landing_bair)    
+    .install();
 }
-#[acmd_script(
-    agent = "kirby",
-    script =  "game_attackairf",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn kirby_fair(fighter: &mut L2CAgentBase) {
+
+unsafe extern "C" fn kirby_fair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 10.0);
 		if macros::is_excute(fighter) {
@@ -67,12 +64,7 @@ unsafe fn kirby_fair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}		
 }	
-#[acmd_script(
-    agent = "kirby",
-    script =  "game_attackairb",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn kirby_bair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn kirby_bair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	
 		frame(fighter.lua_state_agent, 8.0);
@@ -101,12 +93,7 @@ unsafe fn kirby_bair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }	
-#[acmd_script(
-    agent = "kirby",
-    script =  "game_attackairlw",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn kirby_dair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn kirby_dair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	
 		frame(fighter.lua_state_agent, 13.0);
@@ -144,12 +131,7 @@ unsafe fn kirby_dair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }
-#[acmd_script(
-    agent = "kirby",
-    script =  "effect_attackairlw",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn kirby_dair_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn kirby_dair_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	
 		frame(fighter.lua_state_agent, 14.0);
@@ -174,12 +156,7 @@ unsafe fn kirby_dair_eff(fighter: &mut L2CAgentBase) {
 			macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("top"), 0, -6, 0, 0, 0, 0, 0.6, true, *EF_FLIP_YZ);
 		}
 	}	
-#[acmd_script(
-    agent = "kirby",
-    script =  "sound_attackairlw",
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn kirby_dair_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn kirby_dair_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	
 		frame(fighter.lua_state_agent, /*Frames*/ 15.0);
@@ -188,12 +165,7 @@ unsafe fn kirby_dair_snd(fighter: &mut L2CAgentBase) {
 			macros::PLAY_SEQUENCE(fighter, Hash40::new("seq_kirby_rnd_attack"));
 		}
 	}	
-#[acmd_script(
-    agent = "kirby",
-    script =  "game_landingairlw",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn kirby_landing_dair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn kirby_landing_dair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	
 		if macros::is_excute(fighter) {
@@ -211,12 +183,7 @@ unsafe fn kirby_landing_dair(fighter: &mut L2CAgentBase) {
 }
 
 	
-#[acmd_script(
-    agent = "kirby",
-    script =  "effect_attackairb",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn kirby_bair_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn kirby_bair_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	
 		frame(fighter.lua_state_agent, /*Frames*/ 10.0);
@@ -225,12 +192,7 @@ unsafe fn kirby_bair_eff(fighter: &mut L2CAgentBase) {
 			macros::LAST_EFFECT_SET_COLOR(fighter, 0.64, 1.0, 1.0);
 		}
 	}	
-#[acmd_script(
-    agent = "kirby",
-    script =  "sound_attackairb",
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn kirby_bair_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn kirby_bair_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	
 		frame(fighter.lua_state_agent, /*Frames*/ 7.0);
@@ -239,12 +201,7 @@ unsafe fn kirby_bair_snd(fighter: &mut L2CAgentBase) {
 			macros::PLAY_SEQUENCE(fighter, Hash40::new("seq_kirby_rnd_attack"));
 		}
 	}	
-#[acmd_script(
-    agent = "kirby",
-    script =  "game_landingairb",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn kirby_landing_bair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn kirby_landing_bair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	
 		if macros::is_excute(fighter) {

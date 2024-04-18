@@ -11,8 +11,7 @@ use smash::phx::Vector2f;
 use crate::util::*;
 
 //Landing Lag Platform Cancel
-#[fighter_frame_callback]
-pub fn llpc(fighter : &mut L2CFighterCommon) {
+unsafe extern "C" fn llpc(fighter : &mut L2CFighterCommon) {
     unsafe {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);  
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
@@ -50,8 +49,7 @@ pub fn llpc(fighter : &mut L2CFighterCommon) {
 		}
     };
 }	
-#[fighter_frame_callback]
-pub fn shielddrop(fighter : &mut L2CFighterCommon) {
+unsafe extern "C" fn shielddrop(fighter : &mut L2CFighterCommon) {
     unsafe {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);  
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
@@ -138,10 +136,10 @@ unsafe fn correct_replace(module_accessor: &mut smash::app::BattleObjectModuleAc
     }
 }
 pub fn install() {
-    smashline::install_agent_frame_callbacks!(
-		llpc,
-		shielddrop
-	);
+    Agent::new("fighter")
+	.on_line(Main, llpc)
+	.on_line(Main, shielddrop)
+	.install();
 	skyline::install_hooks!(
         init_settings_replace,
         correct_replace

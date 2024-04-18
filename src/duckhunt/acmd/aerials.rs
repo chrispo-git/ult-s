@@ -13,20 +13,17 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		dh_nair,
-		dh_uair,
-		dh_bair,
-		dh_dair
-    );
+    Agent::new("duckhunt")
+    .acmd("game_attackairn", dh_nair)    
+    .acmd("game_attackairb", dh_bair)    
+    .acmd("game_attackairlw", dh_dair)    
+    .acmd("game_attackairhi", dh_uair)    
+    .install();
 }
-#[acmd_script(
-    agent = "duckhunt",
-    script =  "game_attackairn",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn dh_nair(fighter: &mut L2CAgentBase) {
+
+unsafe extern "C" fn dh_nair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 4.0);
 		if macros::is_excute(fighter) {
@@ -49,12 +46,7 @@ unsafe fn dh_nair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }		
-#[acmd_script(
-    agent = "duckhunt",
-    script =  "game_attackairb",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn dh_bair(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn dh_bair(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 4.0);
     if macros::is_excute(agent) {
         WorkModule::on_flag(agent.module_accessor, *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
@@ -78,12 +70,7 @@ unsafe fn dh_bair(agent: &mut L2CAgentBase) {
         WorkModule::off_flag(agent.module_accessor, *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
     }
 }	
-#[acmd_script(
-    agent = "duckhunt",
-    script =  "game_attackairlw",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn dh_dair(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn dh_dair(agent: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(agent, 0.5);
     wait(agent.lua_state_agent, 8.0);
     macros::FT_MOTION_RATE(agent, 1.0);
@@ -111,12 +98,7 @@ unsafe fn dh_dair(agent: &mut L2CAgentBase) {
         WorkModule::off_flag(agent.module_accessor, *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
     }
 }	
-#[acmd_script(
-    agent = "duckhunt",
-    script =  "game_attackairhi",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn dh_uair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn dh_uair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 2.0);
 		if macros::is_excute(fighter) {

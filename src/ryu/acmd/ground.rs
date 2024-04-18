@@ -14,12 +14,14 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[acmd_script(
-    agent = "ryu",
-    script =  "game_attacklw4",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn ryu_dsmash(fighter: &mut L2CAgentBase) {
+pub fn install() {
+    Agent::new("ryu")
+    .acmd("game_attacklw4", ryu_dsmash)    
+	.acmd("game_attackdash", ryu_da)    
+	.install();
+}
+
+unsafe extern "C" fn ryu_dsmash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 1.0);
 		if macros::is_excute(fighter) {
@@ -50,12 +52,7 @@ unsafe fn ryu_dsmash(fighter: &mut L2CAgentBase) {
 		}
 }
 
-#[acmd_script(
-    agent = "ryu",
-    script =  "game_attackdash",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn ryu_da(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn ryu_da(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_RYU_INSTANCE_WORK_ID_FLAG_FINAL_HIT_CANCEL);
@@ -78,11 +75,4 @@ unsafe fn ryu_da(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_RYU_INSTANCE_WORK_ID_FLAG_FINAL_HIT_CANCEL);
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_RYU_STATUS_ATTACK_FLAG_HIT_CANCEL);
 		}
-}
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		ryu_dsmash,
-        ryu_da
-    );
 }

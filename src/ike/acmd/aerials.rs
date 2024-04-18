@@ -14,19 +14,19 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 use crate::ike::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		ike_dair,
-		ike_bair_eff, ike_dair_eff, ike_fair_eff, ike_nair_eff,
-		ike_uair_eff
-    );
+    Agent::new("ike")
+    .acmd("game_attackairlw", ike_dair)    
+    .acmd("effect_attackairb", ike_bair_eff)    
+    .acmd("effect_attackairf", ike_fair_eff)    
+    .acmd("effect_attackairhi", ike_uair_eff)    
+    .acmd("effect_attackairlw", ike_dair_eff)    
+    .acmd("effect_attackairn", ike_nair_eff)    
+    .install();
 }
-#[acmd_script(
-    agent = "ike",
-    script =  "game_attackairlw",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn ike_dair(fighter: &mut L2CAgentBase) {
+
+unsafe extern "C" fn ike_dair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	let entry_id = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 		frame(fighter.lua_state_agent, 5.0);
@@ -57,12 +57,7 @@ unsafe fn ike_dair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }	
-#[acmd_script(
-    agent = "ike",
-    script =  "effect_attackairb",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn ike_bair_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn ike_bair_eff(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 		frame(fighter.lua_state_agent, 6.0);
@@ -78,12 +73,7 @@ unsafe fn ike_bair_eff(fighter: &mut L2CAgentBase) {
 			macros::AFTER_IMAGE_OFF(fighter, 3);
 		};
 }
-#[acmd_script(
-    agent = "ike",
-    script =  "effect_attackairf",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn ike_fair_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn ike_fair_eff(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 		frame(fighter.lua_state_agent, 10.0);
@@ -99,12 +89,7 @@ unsafe fn ike_fair_eff(fighter: &mut L2CAgentBase) {
 			macros::AFTER_IMAGE_OFF(fighter, 4);
 		};
 }
-#[acmd_script(
-    agent = "ike",
-    script =  "effect_attackairhi",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn ike_uair_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn ike_uair_eff(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 		frame(fighter.lua_state_agent, 12.0);
@@ -120,12 +105,7 @@ unsafe fn ike_uair_eff(fighter: &mut L2CAgentBase) {
 			macros::AFTER_IMAGE_OFF(fighter, 2);
 		};
 }
-#[acmd_script(
-    agent = "ike",
-    script =  "effect_attackairlw",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn ike_dair_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn ike_dair_eff(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 		frame(fighter.lua_state_agent, 9.0);
@@ -149,12 +129,7 @@ unsafe fn ike_dair_eff(fighter: &mut L2CAgentBase) {
 			macros::AFTER_IMAGE_OFF(fighter, 2);
 		};
 }
-#[acmd_script(
-    agent = "ike",
-    script =  "effect_attackairn",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn ike_nair_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn ike_nair_eff(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 		frame(fighter.lua_state_agent, 9.0);

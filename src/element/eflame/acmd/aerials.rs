@@ -13,15 +13,14 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-        pyra_nair
-    );
-    
+    Agent::new("eflame")
+    .acmd("game_attackairn", pyra_nair)    
+    .install();
 }
 
-#[acmd_script( agent = "eflame", script = "game_attackairn", category = ACMD_GAME, low_priority )]
-unsafe fn pyra_nair(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn pyra_nair(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 1.0);
     macros::FT_MOTION_RATE(agent, 4.0);
     frame(agent.lua_state_agent, 2.0);

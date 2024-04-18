@@ -15,12 +15,26 @@ use crate::util::*;
 use super::*;
 use super::super::*;
 
-#[acmd_script(
-    agent = "szerosuit",
-    script =  "game_attackairn",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn zss_nair(fighter: &mut L2CAgentBase) {
+pub fn install() {
+    Agent::new("szerosuit")
+    .acmd("game_attackairn", zss_nair)    
+    .acmd("game_attackairhi", zss_uair)    
+    .acmd("game_attackairf", zss_fair)    
+    .acmd("game_aircatchlanding", zss_zair_land)    
+    .acmd("game_attackairlw", zss_dair)    
+    .acmd("effect_attackairlw", zss_dair_eff)    
+    .acmd("game_landingairlw", zss_dair_land)    
+    .acmd("sound_attackairlw", zss_dair_snd)    
+    .acmd("effect_attackairn", zss_effect_attackairn)    
+    .install();
+
+	Agent::new("szerosuit_whip")
+    .acmd("game_attackairn", zss_whipn)    
+    .acmd("effect_attackairn", zss_effect_attackairn2)    
+    .install();
+}
+
+unsafe extern "C" fn zss_nair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_SZEROSUIT_GENERATE_ARTICLE_WHIP, false, 0);
@@ -59,12 +73,7 @@ unsafe fn zss_nair(fighter: &mut L2CAgentBase) {
 			ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_SZEROSUIT_GENERATE_ARTICLE_WHIP,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
 		}
 }		
-#[acmd_script(
-    agent = "szerosuit",
-    script =  "game_attackairhi",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn zss_uair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn zss_uair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
@@ -85,13 +94,7 @@ unsafe fn zss_uair(fighter: &mut L2CAgentBase) {
 		}
 }			
 		
-		
-#[acmd_script(
-    agent = "szerosuit",
-    script =  "game_attackairf",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn zss_fair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn zss_fair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 4.0);
 		if macros::is_excute(fighter) {
@@ -123,12 +126,7 @@ unsafe fn zss_fair(fighter: &mut L2CAgentBase) {
 		}
 }			
 		
-#[acmd_script(
-    agent = "szerosuit",
-    script =  "game_aircatchlanding",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn zss_zair_land(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn zss_zair_land(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 1.0);
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.8);
@@ -142,12 +140,7 @@ unsafe fn zss_zair_land(fighter: &mut L2CAgentBase) {
 		}
 }	
 
-#[acmd_script(
-    agent = "szerosuit",
-    script =  "game_attackairlw",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn zss_dair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn zss_dair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 4.0);
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.6);
@@ -174,15 +167,9 @@ unsafe fn zss_dair(fighter: &mut L2CAgentBase) {
 		frame(fighter.lua_state_agent, 68.0);
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 2.0);
 }			
-#[acmd_script( agent = "szerosuit", script = "game_landingairlw", category = ACMD_GAME, low_priority )]
-unsafe fn zss_dair_land(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn zss_dair_land(fighter: &mut L2CAgentBase) {
 }
-#[acmd_script(
-    agent = "szerosuit",
-    script =  "effect_attackairlw",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn zss_dair_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn zss_dair_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 14.0);
 		if macros::is_excute(fighter) {
@@ -191,12 +178,7 @@ unsafe fn zss_dair_eff(fighter: &mut L2CAgentBase) {
 			macros::EFFECT_FOLLOW(fighter, Hash40::new_raw(0x10c7379528), Hash40::new("footl"), 0, 0, 0, 0, 90, 0, 0.8, true);
 		}
 }		
-#[acmd_script(
-    agent = "szerosuit",
-    script =  "sound_attackairlw",
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn zss_dair_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn zss_dair_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 14.0);
 		if macros::is_excute(fighter) {
@@ -204,8 +186,7 @@ unsafe fn zss_dair_snd(fighter: &mut L2CAgentBase) {
 			macros::PLAY_SE(fighter, Hash40::new("se_szerosuit_smash_s02"));
 		}
 }	
-#[acmd_script( agent = "szerosuit", script = "effect_attackairn", category = ACMD_EFFECT, low_priority )]
-unsafe fn zss_effect_attackairn(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn zss_effect_attackairn(agent: &mut L2CAgentBase) {
 	frame(agent.lua_state_agent, 1.0);
 	macros::FT_MOTION_RATE(agent, /*FSM*/ 0.6);
     frame(agent.lua_state_agent, 8.0);
@@ -219,8 +200,7 @@ unsafe fn zss_effect_attackairn(agent: &mut L2CAgentBase) {
         macros::EFFECT_FOLLOW(agent, Hash40::new("szero_whip_vanish"), Hash40::new("haver"), 0, 0, 0, 0, 0, 90, 0.6, true);
     }
 }
-#[acmd_script( agent = "szerosuit_whip", script = "game_attackairn", category = ACMD_GAME, low_priority )]
-unsafe fn zss_whipn(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn zss_whipn(agent: &mut L2CAgentBase) {
 	frame(agent.lua_state_agent, 1.0);
 	macros::FT_MOTION_RATE(agent, /*FSM*/ 0.6);
     if macros::is_excute(agent) {
@@ -237,8 +217,7 @@ unsafe fn zss_whipn(agent: &mut L2CAgentBase) {
         VisibilityModule::set_whole(agent.module_accessor, false);
     }
 }
-#[acmd_script( agent = "szerosuit_whip", script = "effect_attackairn", category = ACMD_EFFECT, low_priority )]
-unsafe fn zss_effect_attackairn2(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn zss_effect_attackairn2(agent: &mut L2CAgentBase) {
 	frame(agent.lua_state_agent, 1.0);
 	macros::FT_MOTION_RATE(agent, /*FSM*/ 0.6);
     if macros::is_excute(agent) {
@@ -261,13 +240,4 @@ unsafe fn zss_effect_attackairn2(agent: &mut L2CAgentBase) {
         macros::EFFECT_OFF_KIND(agent, Hash40::new("szero_whip"), true, true);
         macros::EFFECT_OFF_KIND(agent, Hash40::new("szero_gbeam_lightning"), false, true);
     }
-}
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		zss_nair, zss_effect_attackairn, zss_whipn, zss_effect_attackairn2,
-        zss_uair,
-        zss_fair,
-        zss_zair_land,
-        zss_dair, zss_dair_eff, zss_dair_snd, zss_dair_land
-    );
 }

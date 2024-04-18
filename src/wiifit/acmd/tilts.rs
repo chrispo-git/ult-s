@@ -14,12 +14,13 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[acmd_script( 
-    agent = "wiifit", 
-    scripts = ["game_attacklw3"], 
-    category = ACMD_GAME,
-    low_priority)]
-    unsafe fn wft_dtilt(fighter: &mut L2CAgentBase) {
+pub fn install() {
+    Agent::new("wiifit")
+    .acmd("game_attacklw3", wft_dtilt)    
+    .install();
+}
+
+unsafe extern "C" fn wft_dtilt(fighter: &mut L2CAgentBase) {
         let lua_state = fighter.lua_state_agent;
             frame(fighter.lua_state_agent, 1.0);
             if macros::is_excute(fighter) {
@@ -45,9 +46,3 @@ use super::*;
                 CancelModule::enable_cancel(fighter.module_accessor);
             }
     }	
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-        wft_dtilt
-    );
-}

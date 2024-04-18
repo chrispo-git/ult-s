@@ -14,12 +14,14 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[acmd_script(
-    agent = "richter",
-    script =  "game_attacks3",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn richter_ftilt(fighter: &mut L2CAgentBase) {
+pub fn install() {
+    Agent::new("richter")
+    .acmd("game_attacks3", richter_ftilt)    
+    .acmd("game_attackhi3", richter_utilt)    
+    .install();
+}
+
+unsafe extern "C" fn richter_ftilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 14.0);
 		if macros::is_excute(fighter) {
@@ -38,12 +40,7 @@ unsafe fn richter_ftilt(fighter: &mut L2CAgentBase) {
 		}
 }	
 
-#[acmd_script(
-    agent = "richter",
-    script =  "game_attackhi3",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn richter_utilt(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn richter_utilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 9.0);
 		if macros::is_excute(fighter) {
@@ -81,10 +78,3 @@ unsafe fn richter_utilt(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }	
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-        richter_ftilt,
-        richter_utilt
-    );
-}

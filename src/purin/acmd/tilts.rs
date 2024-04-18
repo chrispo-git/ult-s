@@ -14,12 +14,15 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[acmd_script(
-    agent = "purin",
-    scripts =  ["game_attacks3", "game_attacks3hi", "game_attacks3lw"],
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn puff_ftilt(fighter: &mut L2CAgentBase) {
+pub fn install() {
+    Agent::new("purin")
+    .acmd("game_attacks3", puff_ftilt)    
+    .acmd("game_attacks3hi", puff_ftilt)    
+    .acmd("game_attacks3lw", puff_ftilt)    
+    .install();
+}
+
+unsafe extern "C" fn puff_ftilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 7.0);
 		if macros::is_excute(fighter) {
@@ -34,9 +37,3 @@ unsafe fn puff_ftilt(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }	
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		puff_ftilt
-    );
-}

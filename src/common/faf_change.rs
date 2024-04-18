@@ -8,8 +8,7 @@ use smashline::*;
 use smash_script::*;
 
 // FaF Changes Master
-#[fighter_frame_callback]
-pub fn faf_change_master(fighter : &mut L2CFighterCommon) {
+unsafe extern "C" fn faf_change_master(fighter : &mut L2CFighterCommon) {
     unsafe {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
@@ -399,5 +398,7 @@ pub fn faf_change_master(fighter : &mut L2CFighterCommon) {
 }
 
 pub fn install() {
-    smashline::install_agent_frame_callbacks!(faf_change_master);
+    Agent::new("fighter")
+	.on_line(Main, faf_change_master)
+	.install();
 }

@@ -13,16 +13,17 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		ganon_fair,
-		ganon_nair,
-		ganon_uair,
-        ganon_dair
-    );
+    Agent::new("ganon")
+    .acmd("game_attackairn", ganon_nair)    
+    .acmd("game_attackairf", ganon_fair)    
+    .acmd("game_attackairhi", ganon_uair)    
+    .acmd("game_attackairlw", ganon_dair)    
+    .install();
 }
-#[acmd_script( agent = "ganon", script = "game_attackairn", category = ACMD_GAME, low_priority )]
-unsafe fn ganon_nair(fighter: &mut L2CAgentBase) {
+
+unsafe extern "C" fn ganon_nair(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 4.0);
     if macros::is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
@@ -70,12 +71,7 @@ unsafe fn ganon_nair(fighter: &mut L2CAgentBase) {
         WorkModule::off_flag(fighter.module_accessor, *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
     }
 }
-#[acmd_script(
-    agent = "ganon",
-    script =  "game_attackairf",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn ganon_fair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn ganon_fair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 11.0);
 		if macros::is_excute(fighter) {
@@ -96,12 +92,7 @@ unsafe fn ganon_fair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }
-#[acmd_script(
-    agent = "ganon",
-    script =  "effect_attackairf",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn ganon_fair_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn ganon_fair_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 15.0);
 		if macros::is_excute(fighter) {
@@ -109,12 +100,7 @@ unsafe fn ganon_fair_eff(fighter: &mut L2CAgentBase) {
 			macros::LAST_EFFECT_SET_RATE(fighter, 1.5);
 		}
 }	
-#[acmd_script(
-    agent = "ganon",
-    script =  "game_attackairhi",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn ganon_uair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn ganon_uair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
@@ -143,8 +129,7 @@ unsafe fn ganon_uair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }
-#[acmd_script( agent = "ganon", script = "game_attackairlw", category = ACMD_GAME, low_priority )]
-unsafe fn ganon_dair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn ganon_dair(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);
     if macros::is_excute(fighter) {
         FighterAreaModuleImpl::enable_fix_jostle_area_xy(fighter.module_accessor, 4.5, 4.5, 12.5, 0.0);

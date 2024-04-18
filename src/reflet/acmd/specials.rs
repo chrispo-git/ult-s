@@ -15,12 +15,39 @@ use crate::util::*;
 use super::*;
 use super::super::*;
 
-#[acmd_script(
-    agent = "reflet_elwind",
-    script =  "game_shoot0",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn robin_elwind(fighter: &mut L2CAgentBase) {
+pub fn install() {
+    Agent::new("reflet")
+    .acmd("effect_speciallwstart", robin_downb_eff)    
+    .acmd("effect_specialairlwstart", robin_downb_eff)    
+    .acmd("effect_speciallwend", robin_downb_end_eff)    
+    .acmd("effect_specialairlwend", robin_downb_end_eff)    
+    .acmd("sound_speciallwstart", robin_downb_snd)    
+    .acmd("sound_specialairlwstart", robin_downb_snd)    
+    .acmd("game_speciallwstart", robin_downb)    
+    .acmd("game_specialairlwstart", robin_downb)    
+    .acmd("game_specialhi3", robin_grima_upb)    
+    .acmd("effect_specialhi3", robin_grima_upb_eff)    
+    .acmd("sound_specialhi3", robin_grima_upb_snd)    
+    .acmd("game_specialnshoot", robin_grima_neutralb)    
+    .acmd("game_specialairnshoot", robin_grima_neutralb)    
+    .acmd("effect_specialnshoot", robin_grima_neutralb_eff)    
+    .acmd("effect_specialairnshoot", robin_grima_neutralb_eff)    
+    .acmd("sound_specialnshoot", robin_grima_neutralb_snd)    
+    .acmd("sound_specialairnshoot", robin_grima_neutralb_snd)    
+    .acmd("game_specials", robin_grima_sideb)    
+    .acmd("game_specialairs", robin_grima_sideb)    
+    .acmd("effect_specials", robin_grima_sideb_eff)    
+    .acmd("effect_specialairs", robin_grima_sideb_eff)    
+    .acmd("sound_specials", robin_grima_sideb_snd)    
+    .acmd("sound_specialairs", robin_grima_sideb_snd)    
+    .install();
+
+	Agent::new("reflet_elwind")
+    .acmd("game_shoot0", robin_elwind)    
+    .install();
+}
+
+unsafe extern "C" fn robin_elwind(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 7.0, /*Angle*/ 255, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 10, /*Size*/ 4.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.5, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ true, /*Absorbable*/ true, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_A, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_cutup"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_CUTUP, /*Type*/ *ATTACK_REGION_MAGIC);
@@ -31,37 +58,16 @@ unsafe fn robin_elwind(fighter: &mut L2CAgentBase) {
 			macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 5.0, /*Angle*/ 80, /*KBG*/ 30, /*FKB*/ 0, /*BKB*/ 100, /*Size*/ 7.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ true, /*Absorbable*/ true, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_cutup"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_CUTUP, /*Type*/ *ATTACK_REGION_MAGIC);
 		}			
 }	
-
-#[acmd_script(
-    agent = "reflet",
-    scripts =  ["effect_speciallwstart", "effect_specialairlwstart"],
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn robin_downb_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn robin_downb_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 }		
-#[acmd_script(
-    agent = "reflet",
-    scripts =  ["effect_speciallwend", "effect_specialairlwend"],
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn robin_downb_end_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn robin_downb_end_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 }	
-#[acmd_script(
-    agent = "reflet",
-    scripts =  ["sound_speciallwstart", "sound_specialairlwstart"],
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn robin_downb_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn robin_downb_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 }		
-#[acmd_script(
-    agent = "reflet",
-    scripts =  ["game_speciallwstart", "game_specialairlwstart"],
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn robin_downb(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn robin_downb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 2);
 		frame(fighter.lua_state_agent, 7.0);
@@ -69,12 +75,7 @@ unsafe fn robin_downb(fighter: &mut L2CAgentBase) {
 		frame(fighter.lua_state_agent, 14.0);
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.5);
 }	
-#[acmd_script(
-    agent = "reflet",
-    script =  "game_specialhi3",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn robin_grima_upb(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn robin_grima_upb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 4.0);
 		if macros::is_excute(fighter) {
@@ -118,20 +119,10 @@ unsafe fn robin_grima_upb(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }	
-#[acmd_script(
-    agent = "reflet",
-    script =  "effect_specialhi3",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn robin_grima_upb_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn robin_grima_upb_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 }	
-#[acmd_script(
-    agent = "reflet",
-    script =  "sound_specialhi3",
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn robin_grima_upb_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn robin_grima_upb_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			macros::PLAY_SE(fighter, Hash40::new("se_common_stage_suddendeath_out"));
@@ -142,12 +133,7 @@ unsafe fn robin_grima_upb_snd(fighter: &mut L2CAgentBase) {
 			macros::PLAY_SEQUENCE(fighter, Hash40::new("seq_reflet_rnd_special_h"));
 		}
 }
-#[acmd_script(
-    agent = "reflet",
-    scripts =  ["game_specialnshoot", "game_specialairnshoot"],
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn robin_grima_neutralb(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn robin_grima_neutralb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 	if IS_GRIMA[ENTRY_ID] {
@@ -177,12 +163,7 @@ unsafe fn robin_grima_neutralb(fighter: &mut L2CAgentBase) {
 			macros::FT_MOTION_RATE(fighter, /*FSM*/ 1);
 	};
 }	
-#[acmd_script(
-    agent = "reflet",
-    scripts =  ["effect_specialnshoot", "effect_specialairnshoot"],
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn robin_grima_neutralb_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn robin_grima_neutralb_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 	if IS_GRIMA[ENTRY_ID] {
@@ -203,12 +184,7 @@ unsafe fn robin_grima_neutralb_eff(fighter: &mut L2CAgentBase) {
 			};
 	};
 }	
-#[acmd_script(
-    agent = "reflet",
-    scripts =  ["sound_specialnshoot", "sound_specialairnshoot"],
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn robin_grima_neutralb_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn robin_grima_neutralb_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 	if IS_GRIMA[ENTRY_ID] {
@@ -225,12 +201,7 @@ unsafe fn robin_grima_neutralb_snd(fighter: &mut L2CAgentBase) {
 		};
 	};
 }	
-#[acmd_script(
-    agent = "reflet",
-    scripts =  ["game_specials", "game_specialairs"],
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn robin_grima_sideb(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn robin_grima_sideb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 	if IS_GRIMA[ENTRY_ID] {
@@ -256,12 +227,7 @@ unsafe fn robin_grima_sideb(fighter: &mut L2CAgentBase) {
 		};
 	};
 }	
-#[acmd_script(
-    agent = "reflet",
-    scripts =  ["effect_specials", "effect_specialairs"],
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn robin_grima_sideb_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn robin_grima_sideb_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 	if IS_GRIMA[ENTRY_ID] {
@@ -286,12 +252,7 @@ unsafe fn robin_grima_sideb_eff(fighter: &mut L2CAgentBase) {
 			};
 	};
 }	
-#[acmd_script(
-    agent = "reflet",
-    scripts =  ["sound_specials", "sound_specialairs"],
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn robin_grima_sideb_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn robin_grima_sideb_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 	if IS_GRIMA[ENTRY_ID] {
@@ -314,14 +275,3 @@ unsafe fn robin_grima_sideb_snd(fighter: &mut L2CAgentBase) {
 		};
 	};
 }	
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		robin_elwind,
-        robin_downb, robin_downb_eff, robin_downb_snd,
-        robin_downb_end_eff,
-        robin_grima_upb, robin_grima_upb_eff, robin_grima_upb_snd,
-        robin_grima_neutralb, robin_grima_neutralb_eff, robin_grima_neutralb_snd,
-        robin_grima_sideb, robin_grima_sideb_eff, robin_grima_sideb_snd
-    );
-}

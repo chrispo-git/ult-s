@@ -14,12 +14,7 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[acmd_script(
-    agent = "samusd",
-    script =  "game_throwb",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn dsamus_bthrow(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn dsamus_bthrow(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, /*ID*/ 0, /*Damage*/ 10.0, /*Angle*/ 40, /*KBG*/ 55, /*FKB*/ 0, /*BKB*/ 60, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_elec_whip"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
@@ -31,48 +26,28 @@ unsafe fn dsamus_bthrow(fighter: &mut L2CAgentBase) {
 			macros::ATK_HIT_ABS(fighter, *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, Hash40::new("throw"), WorkModule::get_int64(fighter.module_accessor,*FIGHTER_STATUS_THROW_WORK_INT_TARGET_OBJECT), WorkModule::get_int64(fighter.module_accessor,*FIGHTER_STATUS_THROW_WORK_INT_TARGET_HIT_GROUP), WorkModule::get_int64(fighter.module_accessor,*FIGHTER_STATUS_THROW_WORK_INT_TARGET_HIT_NO));
 		}
 }
-#[acmd_script(
-    agent = "samusd",
-    script =  "sound_throwb",
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn dsamus_bthrow_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn dsamus_bthrow_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 9.0);
 		if macros::is_excute(fighter) {
 			macros::PLAY_SE(fighter, Hash40::new("se_common_throw_02"));
 		}
 }
-#[acmd_script(
-    agent = "samusd",
-    script =  "effect_throwb",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn dsamus_bthrow_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn dsamus_bthrow_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 9.0);
 		if macros::is_excute(fighter) {
 			macros::LANDING_EFFECT(fighter, Hash40::new("sys_h_smoke_a"), Hash40::new("top"), -3, 0, 0, 0, 180, 0, 1, 0, 0, 0, 0, 0, 0, false);
 		}
 }
-#[acmd_script(
-    agent = "samusd",
-    script =  "expression_throwb",
-    category = ACMD_EXPRESSION,
-	low_priority)]
-unsafe fn dsamus_bthrow_expr(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn dsamus_bthrow_expr(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			VisibilityModule::set_int64(fighter.module_accessor, hash40("body") as i64, hash40("body_normal") as i64);
 			ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_SAMUSD_GENERATE_ARTICLE_GUN,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
 		}
 }	
-#[acmd_script(
-    agent = "samusd",
-    script =  "game_throwf",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn dsamus_fthrow(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn dsamus_fthrow(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, /*ID*/ 0, /*Damage*/ 2.0, /*Angle*/ 361, /*KBG*/ 100, /*FKB*/ 10, /*BKB*/ 0, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
@@ -92,12 +67,7 @@ unsafe fn dsamus_fthrow(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }
-#[acmd_script(
-    agent = "samusd",
-    script =  "sound_throwf",
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn dsamus_fthrow_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn dsamus_fthrow_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 3.0);
 		if macros::is_excute(fighter) {
@@ -108,12 +78,7 @@ unsafe fn dsamus_fthrow_snd(fighter: &mut L2CAgentBase) {
 			macros::PLAY_SE(fighter, Hash40::new("se_common_throw_02"));
 		}
 }
-#[acmd_script(
-    agent = "samusd",
-    script =  "effect_throwf",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn dsamus_fthrow_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn dsamus_fthrow_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			macros::EFFECT_FOLLOW(fighter, Hash40::new("samusd_win3_aura"), Hash40::new("arml"), 0, 0, 0, 0, 0, 0, 1.9, true);
@@ -140,24 +105,14 @@ unsafe fn dsamus_fthrow_eff(fighter: &mut L2CAgentBase) {
 			macros::EFFECT_OFF_KIND(fighter, Hash40::new("samusd_win3_aura"), false, true);
 		}
 }
-#[acmd_script(
-    agent = "samusd",
-    script =  "expression_throwf",
-    category = ACMD_EXPRESSION,
-	low_priority)]
-unsafe fn dsamus_fthrow_expr(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn dsamus_fthrow_expr(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			VisibilityModule::set_int64(fighter.module_accessor, hash40("body") as i64, hash40("body_normal") as i64);
 			ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_SAMUSD_GENERATE_ARTICLE_GUN,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
 		}
 }	
-#[acmd_script(
-    agent = "samusd",
-    script =  "game_throwlw",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn dsamus_dthrow(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn dsamus_dthrow(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, /*ID*/ 0, /*Damage*/ 7.0, /*Angle*/ 78, /*KBG*/ 72, /*FKB*/ 0, /*BKB*/ 70, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
@@ -176,12 +131,7 @@ unsafe fn dsamus_dthrow(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }
-#[acmd_script(
-    agent = "samusd",
-    script =  "sound_throwlw",
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn dsamus_dthrow_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn dsamus_dthrow_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 3.0);
 		if macros::is_excute(fighter) {
@@ -192,12 +142,7 @@ unsafe fn dsamus_dthrow_snd(fighter: &mut L2CAgentBase) {
 			macros::PLAY_SE(fighter, Hash40::new("se_common_bomb_l"));
 		}
 }
-#[acmd_script(
-    agent = "samusd",
-    script =  "effect_throwlw",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn dsamus_dthrow_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn dsamus_dthrow_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			macros::EFFECT_FOLLOW(fighter, Hash40::new("samusd_win3_aura"), Hash40::new("arml"), 0, 0, 0, 0, 0, 0, 1.9, true);
@@ -216,12 +161,7 @@ unsafe fn dsamus_dthrow_eff(fighter: &mut L2CAgentBase) {
 			macros::EFFECT_OFF_KIND(fighter, Hash40::new("samusd_win3_aura"), false, true);
 		}
 }
-#[acmd_script(
-    agent = "samusd",
-    script =  "expression_throwlw",
-    category = ACMD_EXPRESSION,
-	low_priority)]
-unsafe fn dsamus_dthrow_expr(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn dsamus_dthrow_expr(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			VisibilityModule::set_int64(fighter.module_accessor, hash40("body") as i64, hash40("body_normal") as i64);
@@ -230,9 +170,18 @@ unsafe fn dsamus_dthrow_expr(fighter: &mut L2CAgentBase) {
 }	
 
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		dsamus_bthrow, dsamus_bthrow_eff, dsamus_bthrow_snd, dsamus_bthrow_expr,
-        dsamus_fthrow, dsamus_fthrow_eff, dsamus_fthrow_snd, dsamus_fthrow_expr,
-        dsamus_dthrow, dsamus_dthrow_eff, dsamus_dthrow_snd, dsamus_dthrow_expr
-    );
+    Agent::new("samusd")
+        .game_acmd("game_throwb", dsamus_bthrow)
+        .sound_acmd("sound_throwb", dsamus_bthrow_snd)
+        .effect_acmd("effect_throwb", dsamus_bthrow_eff)
+        .expression_acmd("expression_throwb", dsamus_bthrow_expr)
+        .game_acmd("game_throwf", dsamus_fthrow)
+        .sound_acmd("sound_throwf", dsamus_fthrow_snd)
+        .effect_acmd("effect_throwf", dsamus_fthrow_eff)
+        .expression_acmd("expression_throwf", dsamus_fthrow_expr)
+        .game_acmd("game_throwlw", dsamus_dthrow)
+        .sound_acmd("sound_throwlw", dsamus_dthrow_snd)
+        .effect_acmd("effect_throwlw", dsamus_dthrow_eff)
+        .expression_acmd("expression_throwlw", dsamus_dthrow_expr)
+        .install();
 }

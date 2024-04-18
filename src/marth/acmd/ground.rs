@@ -13,21 +13,18 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		marth_da,
-		marth_fsmash,
-		marth_jab1,
-		marth_jab1_eff,
-		marth_jab1_snd
-    );
+    Agent::new("marth")
+    .acmd("game_attack11", marth_jab1)    
+	.acmd("effect_attack11", marth_jab1_eff)    
+	.acmd("sound_attack11", marth_jab1_snd)    
+	.acmd("game_attackdash", marth_da)    
+    .acmd("game_attacks4", marth_fsmash)    
+    .install();
 }
-#[acmd_script(
-    agent = "marth",
-    script =  "game_attack11",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn marth_jab1(fighter: &mut L2CAgentBase) {
+
+unsafe extern "C" fn marth_jab1(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 2.0);
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.666666666666667);
@@ -48,12 +45,7 @@ unsafe fn marth_jab1(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }	
-#[acmd_script(
-    agent = "marth",
-    script =  "effect_attack11",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn marth_jab1_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn marth_jab1_eff(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 5.0);
 		if macros::is_excute(fighter) {
@@ -64,12 +56,7 @@ unsafe fn marth_jab1_eff(fighter: &mut L2CAgentBase) {
 			macros::AFTER_IMAGE_OFF(fighter, 5);
 		};
 }	
-#[acmd_script(
-    agent = "marth",
-    script =  "sound_attack11",
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn marth_jab1_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn marth_jab1_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 4.0);
 		if macros::is_excute(fighter) {
@@ -77,12 +64,7 @@ unsafe fn marth_jab1_snd(fighter: &mut L2CAgentBase) {
 			macros::PLAY_SE(fighter, Hash40::new("se_marth_swing_s"));
 		}
 }	
-#[acmd_script(
-    agent = "marth",
-    script =  "game_attackdash",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn marth_da(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn marth_da(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.75);
 		frame(fighter.lua_state_agent, 13.0);
@@ -104,12 +86,7 @@ unsafe fn marth_da(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }		
-#[acmd_script(
-    agent = "marth",
-    script =  "game_attacks4",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn marth_fsmash(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn marth_fsmash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 3.0);
 		if macros::is_excute(fighter) {

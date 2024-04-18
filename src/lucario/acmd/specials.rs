@@ -13,21 +13,20 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		lucario_auraball,
-		lucario_downb,
-		lucario_downb_eff,
-		lucario_sound_downb,
-		lucario_sideb
-    );
+    Agent::new("lucario")
+    .acmd("game_specialsthrow", lucario_sideb)    
+	.acmd("game_speciallw", lucario_downb)    
+	.acmd("game_specialairlw", lucario_downb)    
+	.acmd("sound_speciallw", lucario_sound_downb)    
+	.acmd("sound_specialairlw", lucario_sound_downb)    
+	.acmd("effect_speciallw", lucario_downb_eff)    
+	.acmd("effect_specialairlw", lucario_downb_eff)    
+	.install();
 }
-#[acmd_script(
-    agent = "lucario",
-    scripts =  ["game_specialsthrow"],
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn lucario_sideb(agent: &mut L2CAgentBase) {
+
+unsafe extern "C" fn lucario_sideb(agent: &mut L2CAgentBase) {
     if macros::is_excute(agent) {
         macros::ATTACK_ABS(agent, *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, 0, 18.0, 90, 100, 104, 0, 0.0, 1.0, *ATTACK_LR_CHECK_F, 0.0, true, Hash40::new("collision_attr_aura"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_LUCARIO, *ATTACK_REGION_THROW);
         macros::ATTACK_ABS(agent, *FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, 0, 6.0, 361, 100, 0, 60, 0.0, 1.0, *ATTACK_LR_CHECK_F, 0.0, true, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_THROW);
@@ -48,8 +47,7 @@ unsafe fn lucario_sideb(agent: &mut L2CAgentBase) {
         macros::ATK_HIT_ABS(agent, *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, Hash40::new("throw"), target, target_group, target_no);
     }
 }
-#[acmd_script( agent = "lucario_auraball", script = "game_shoot", category = ACMD_GAME, low_priority )]
-unsafe fn lucario_auraball(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn lucario_auraball(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::ATTACK(fighter, 0, 0, Hash40::new("top"), 10.0, 361, 42, 0, 14, 2.2, 0.0, 0.0, 0.0, None, None, None, 1.5, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, -2.3, 0.0, 0, true, true, false, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_aura"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_NONE);
         macros::ATTACK(fighter, 1, 0, Hash40::new("top"), 25.0, 40, 65, 0, 45, 2.2, 0.0, 0.0, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, -4, 0.0, 0, true, true, false, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_aura"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_NONE);
@@ -57,12 +55,7 @@ unsafe fn lucario_auraball(fighter: &mut L2CAgentBase) {
         AttackModule::enable_safe_pos(fighter.module_accessor);
     }
 }
-#[acmd_script(
-    agent = "lucario",
-    scripts =  ["game_speciallw", "game_specialairlw"],
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn lucario_downb(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn lucario_downb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	if macros::is_excute(fighter) {
 		JostleModule::set_status(fighter.module_accessor, false);
@@ -72,12 +65,7 @@ unsafe fn lucario_downb(fighter: &mut L2CAgentBase) {
 		JostleModule::set_status(fighter.module_accessor, true);
 	}
 }	
-#[acmd_script(
-    agent = "lucario",
-    scripts =  ["sound_speciallw", "sound_specialairlw"],
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn lucario_sound_downb(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn lucario_sound_downb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 3.0);
 		if macros::is_excute(fighter) {
@@ -88,12 +76,7 @@ unsafe fn lucario_sound_downb(fighter: &mut L2CAgentBase) {
 			macros::PLAY_SE_REMAIN(fighter, Hash40::new("se_lucario_special_l02"));
 		}
 }		
-#[acmd_script(
-    agent = "lucario",
-    scripts =  ["effect_speciallw", "effect_specialairlw"],
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn lucario_downb_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn lucario_downb_eff(fighter: &mut L2CAgentBase) {
     	let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			macros::EFFECT_FOLLOW(fighter, Hash40::new("lucario_kagebunshin"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1, true);

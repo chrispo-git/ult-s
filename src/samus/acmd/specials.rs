@@ -14,12 +14,22 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[acmd_script(
-    agent = "samus",
-    script =  "game_specialhi",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn samus_upb(fighter: &mut L2CAgentBase) {
+pub fn install() {
+    Agent::new("samus")
+    .acmd("game_specialhi", samus_upb)    
+    .install();
+
+	Agent::new("samus_missile")
+    .acmd("game_homing", samus_homing)    
+    .install();
+
+	Agent::new("samus_supermissile")
+    .acmd("game_ready", samus_super)    
+    .acmd("game_straight", samus_super)    
+    .install();
+}
+
+unsafe extern "C" fn samus_upb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.5);
 		if macros::is_excute(fighter) {
@@ -71,35 +81,17 @@ unsafe fn samus_upb(fighter: &mut L2CAgentBase) {
 		}
 }
 
-#[acmd_script(
-    agent = "samus_missile",
-    script =  "game_homing",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn samus_homing(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn samus_homing(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 11.0, /*Angle*/ 0, /*KBG*/ 25, /*FKB*/ 0, /*BKB*/ 26, /*Size*/ 2.4, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.3, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_SPEED, /*SetWeight*/ false, /*ShieldDamage*/ 1, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ true, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_fire"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_FIRE, /*Type*/ *ATTACK_REGION_OBJECT);
 			AttackModule::enable_safe_pos(fighter.module_accessor);
 		}
 }
-#[acmd_script(
-    agent = "samus_supermissile",
-    scripts =  ["game_ready", "game_straight"],
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn samus_super(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn samus_super(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 15.0, /*Angle*/ 65, /*KBG*/ 65, /*FKB*/ 0, /*BKB*/ 50, /*Size*/ 2.5, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.3, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_SPEED, /*SetWeight*/ false, /*ShieldDamage*/ 5, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ true, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_fire"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_BOMB, /*Type*/ *ATTACK_REGION_OBJECT);
 			AttackModule::enable_safe_pos(fighter.module_accessor);
 		}
-}
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		samus_upb,
-        samus_homing,
-        samus_super
-    );
 }

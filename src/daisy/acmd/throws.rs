@@ -13,25 +13,23 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-	smashline::install_acmd_scripts!(
-		daisy_pummel_eff,
-		daisy_fthrow,
-		daisy_fthrow_eff,
-		daisy_dthrow,
-		daisy_dthrow_eff,
-		daisy_uthrow_eff,
-		daisy_bthrow_eff,
-		daisy_remove_toad,
-		daisy_catch_release_eff
-	);
+	Agent::new("daisy")
+    .acmd("game_throwf", daisy_fthrow)    
+    .acmd("effect_throwf", daisy_fthrow_eff)    
+    .acmd("game_throwlw", daisy_dthrow)    
+    .acmd("effect_throwlw", daisy_dthrow_eff)    
+    .acmd("effect_throwhi", daisy_uthrow_eff)    
+    .acmd("effect_throwb", daisy_bthrow_eff)    
+    .acmd("effect_catchattack", daisy_pummel_eff)    
+    .acmd("game_catchpull", daisy_remove_toad)    
+    .acmd("game_catchwait", daisy_remove_toad)    
+    .acmd("effect_catchcut", daisy_catch_release_eff)    
+    .install();
 }
-#[acmd_script(
-    agent = "daisy",
-    script =  "game_throwf",
-    category = ACMD_GAME, 
-	low_priority)]
-unsafe fn daisy_fthrow(fighter: &mut L2CAgentBase) {
+
+unsafe extern "C" fn daisy_fthrow(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, /*ID*/ 0, /*Damage*/ 9.0, /*Angle*/ 45, /*KBG*/ 83, /*FKB*/ 0, /*BKB*/ 48, /*Hitlag*/ 1.2, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_THROW);
@@ -42,12 +40,7 @@ unsafe fn daisy_fthrow(fighter: &mut L2CAgentBase) {
 			macros::ATK_HIT_ABS(fighter, *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, Hash40::new("throw"), WorkModule::get_int64(fighter.module_accessor,*FIGHTER_STATUS_THROW_WORK_INT_TARGET_OBJECT), WorkModule::get_int64(fighter.module_accessor,*FIGHTER_STATUS_THROW_WORK_INT_TARGET_HIT_GROUP), WorkModule::get_int64(fighter.module_accessor,*FIGHTER_STATUS_THROW_WORK_INT_TARGET_HIT_NO));
 		}
 }
-#[acmd_script(
-    agent = "daisy",
-    script =  "effect_throwf",
-    category = ACMD_EFFECT, 
-	low_priority)]
-unsafe fn daisy_fthrow_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn daisy_fthrow_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 9.0);
 		if macros::is_excute(fighter) {
@@ -56,12 +49,7 @@ unsafe fn daisy_fthrow_eff(fighter: &mut L2CAgentBase) {
 			macros::LAST_EFFECT_SET_RATE(fighter, 1.4);
 		}
 }
-#[acmd_script(
-    agent = "daisy",
-    script =  "game_throwlw",
-    category = ACMD_GAME, 
-	low_priority)]
-unsafe fn daisy_dthrow(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn daisy_dthrow(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, /*ID*/ 0, /*Damage*/ 7.0, /*Angle*/ 70, /*KBG*/ 60, /*FKB*/ 0, /*BKB*/ 60, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_S, /*SFXType*/ *COLLISION_SOUND_ATTR_NONE, /*Type*/ *ATTACK_REGION_THROW);
@@ -82,24 +70,14 @@ unsafe fn daisy_dthrow(fighter: &mut L2CAgentBase) {
 			macros::ATK_HIT_ABS(fighter, *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, Hash40::new("throw"), WorkModule::get_int64(fighter.module_accessor,*FIGHTER_STATUS_THROW_WORK_INT_TARGET_OBJECT), WorkModule::get_int64(fighter.module_accessor,*FIGHTER_STATUS_THROW_WORK_INT_TARGET_HIT_GROUP), WorkModule::get_int64(fighter.module_accessor,*FIGHTER_STATUS_THROW_WORK_INT_TARGET_HIT_NO));
 		}
 }
-#[acmd_script(
-    agent = "daisy",
-    script =  "effect_throwlw",
-    category = ACMD_EFFECT, 
-	low_priority)]
-unsafe fn daisy_dthrow_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn daisy_dthrow_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 34.0);
 		if macros::is_excute(fighter) {
 			macros::LANDING_EFFECT(fighter, Hash40::new("sys_landing_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.6, 0, 0, 0, 0, 0, 0, false);
 		}
 }
-#[acmd_script(
-    agent = "daisy",
-    script =  "effect_throwhi",
-    category = ACMD_EFFECT, 
-	low_priority)]
-unsafe fn daisy_uthrow_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn daisy_uthrow_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 18.0);
 		if macros::is_excute(fighter) {
@@ -114,12 +92,7 @@ unsafe fn daisy_uthrow_eff(fighter: &mut L2CAgentBase) {
 			macros::LANDING_EFFECT_FLIP(fighter, Hash40::new("sys_landing_smoke_s"), Hash40::new("sys_landing_smoke_s"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false, *EF_FLIP_NONE);
 		}
 }
-#[acmd_script(
-    agent = "daisy",
-    script =  "effect_throwb",
-    category = ACMD_EFFECT, 
-	low_priority)]
-unsafe fn daisy_bthrow_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn daisy_bthrow_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 18.0);
 		if macros::is_excute(fighter) {
@@ -134,12 +107,7 @@ unsafe fn daisy_bthrow_eff(fighter: &mut L2CAgentBase) {
 			macros::EFFECT(fighter, Hash40::new("sys_smash_flash_s"), Hash40::new("throw"), 0, 0, 0, 0, 0, 0, 1.5, 0, 0, 0, 0, 0, 0, true);
 		}
 }
-#[acmd_script(
-    agent = "daisy",
-    script =  "effect_catchattack",
-    category = ACMD_EFFECT, 
-	low_priority)]
-unsafe fn daisy_pummel_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn daisy_pummel_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
 			macros::EFFECT_FLIP(fighter, Hash40::new("sys_run_smoke"), Hash40::new("sys_run_smoke"), Hash40::new("top"), 8, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false, *EF_FLIP_NONE);
@@ -149,19 +117,9 @@ unsafe fn daisy_pummel_eff(fighter: &mut L2CAgentBase) {
 			macros::LANDING_EFFECT(fighter, Hash40::new("sys_down_smoke"), Hash40::new("top"), 0, 0, 11, 0, 0, 0, 0.4, 0, 0, 0, 0, 0, 0, false);
 		}
 }
-#[acmd_script(
-    agent = "daisy",
-    scripts =  ["game_catchpull", "game_catchwait"],
-    category = ACMD_GAME, 
-	low_priority)]
-unsafe fn daisy_remove_toad(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn daisy_remove_toad(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 }
-#[acmd_script(
-    agent = "daisy",
-    scripts =  ["effect_catchcut"],
-    category = ACMD_EFFECT, 
-	low_priority)]
-unsafe fn daisy_catch_release_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn daisy_catch_release_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 }

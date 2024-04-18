@@ -15,8 +15,13 @@ use smash::phx::Vector2f;
 use crate::util::*;
 use super::*;
 
-#[fighter_frame( agent = FIGHTER_KIND_PICHU )]
-fn pichu_frame(fighter: &mut L2CFighterCommon) {
+pub fn install() {
+    Agent::new("pichu")
+    .on_line(Main, pichu_frame)
+    .install();
+}
+
+unsafe extern "C" fn pichu_frame(fighter: &mut L2CFighterCommon) {
     unsafe {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 		if is_default(boma) {
@@ -71,10 +76,4 @@ fn pichu_frame(fighter: &mut L2CFighterCommon) {
 			};
 		}
     }
-}
-
-pub fn install() {
-    smashline::install_agent_frames!(
-        pichu_frame
-    );
 }

@@ -15,12 +15,26 @@ use smash::phx::Vector2f;
 use crate::util::*;
 use crate::kirby::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_agent_frames!( kirby_frame, ball_frame, finalcutter_frame, hat_frame);
+	Agent::new("kirby")
+	.on_line(Main, kirby_frame)
+	.install();
+
+	Agent::new("kirby_finalcuttershot")
+	.on_line(Main, ball_frame)
+	.install();
+
+	Agent::new("kirby_hammer")
+	.on_line(Main, finalcutter_frame)
+	.install();
+
+	Agent::new("kirby_hat")
+	.on_line(Main, hat_frame)
+	.install();
 }
 
-#[fighter_frame( agent = FIGHTER_KIND_KIRBY )]
-fn kirby_frame(fighter: &mut L2CFighterCommon) {
+unsafe extern "C" fn kirby_frame(fighter: &mut L2CFighterCommon) {
     unsafe {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 		if is_default(boma) {
@@ -144,8 +158,7 @@ fn kirby_frame(fighter: &mut L2CFighterCommon) {
 		}
 	}
 }
-#[weapon_frame( agent = WEAPON_KIND_KIRBY_FINALCUTTERSHOT )]
-pub fn ball_frame(weapon : &mut L2CFighterBase) {
+unsafe extern "C" fn ball_frame(weapon : &mut L2CFighterBase) {
     unsafe {
         let otarget_id = WorkModule::get_int(weapon.module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LINK_OWNER) as u32;
         let boma = smash::app::sv_battle_object::module_accessor(otarget_id);
@@ -212,8 +225,7 @@ pub fn ball_frame(weapon : &mut L2CFighterBase) {
 		};
     }
 }
-#[weapon_frame( agent = WEAPON_KIND_KIRBY_HAMMER )]
-fn finalcutter_frame(weapon: &mut L2CFighterBase) {
+unsafe extern "C" fn finalcutter_frame(weapon: &mut L2CFighterBase) {
     unsafe {
         let otarget_id = WorkModule::get_int(weapon.module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LINK_OWNER) as u32;
         let boma = smash::app::sv_battle_object::module_accessor(otarget_id);
@@ -229,8 +241,7 @@ fn finalcutter_frame(weapon: &mut L2CFighterBase) {
 		};
     }
 }
-#[weapon_frame( agent = WEAPON_KIND_KIRBY_HAT )]
-fn hat_frame(weapon: &mut L2CFighterBase) {
+unsafe extern "C" fn hat_frame(weapon: &mut L2CFighterBase) {
     unsafe {
         let otarget_id = WorkModule::get_int(weapon.module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LINK_OWNER) as u32;
         let boma = smash::app::sv_battle_object::module_accessor(otarget_id);

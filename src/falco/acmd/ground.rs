@@ -13,19 +13,16 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		falco_da,
-		falco_da_eff,
-		falco_da_snd
-    );
+    Agent::new("falco")
+    .acmd("game_attackdash", falco_da)    
+    .acmd("effect_attackdash", falco_da_eff)    
+    .acmd("sound_attackdash", falco_da_snd)    
+    .install();
 }
-#[acmd_script(
-    agent = "falco",
-    script =  "game_attackdash",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn falco_da(fighter: &mut L2CAgentBase) {
+
+unsafe extern "C" fn falco_da(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 6.0);
 		macros::FT_MOTION_RATE(fighter, 0.5);
@@ -44,12 +41,7 @@ unsafe fn falco_da(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }
-#[acmd_script(
-    agent = "falco",
-    scripts =  ["effect_attackdash"],
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn falco_da_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn falco_da_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	
 		frame(fighter.lua_state_agent, 5.0);
@@ -72,12 +64,7 @@ unsafe fn falco_da_eff(fighter: &mut L2CAgentBase) {
 			macros::LANDING_EFFECT(fighter, Hash40::new("sys_down_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.11, 0, 0, 0, 0, 0, 0, false);
 		}
 }
-#[acmd_script(
-    agent = "falco",
-    scripts =  ["sound_attackdash"],
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn falco_da_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn falco_da_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 5.0);
 		if macros::is_excute(fighter) {

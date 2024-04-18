@@ -13,26 +13,23 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-	smashline::install_acmd_scripts!(
-		doc_fair,
-		doc_fair_eff,
-		doc_fair_snd,
-		doc_uair,
-		doc_dair,
-		doc_bair,
-		doc_bair_eff,
-		doc_bair_snd,
-		doc_nair,
-		doc_nair_eff
-	);
+	Agent::new("mariod")
+    .acmd("game_attackairlw", doc_dair)    
+    .acmd("game_attackairf", doc_fair)    
+    .acmd("effect_attackairf", doc_fair_eff)    
+    .acmd("sound_attackairf", doc_fair_snd)    
+    .acmd("game_attackairb", doc_bair)    
+    .acmd("effect_attackairb", doc_bair_eff)    
+    .acmd("sound_attackairb", doc_bair_snd)    
+    .acmd("game_attackairhi", doc_uair)    
+    .acmd("game_attackairn", doc_nair)    
+    .acmd("effect_attackairn", doc_nair_eff)    
+    .install();
 }
-#[acmd_script(
-    agent = "mariod",
-    script =  "game_attackairlw",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn doc_dair(fighter: &mut L2CAgentBase) {
+
+unsafe extern "C" fn doc_dair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
 		frame(fighter.lua_state_agent, 3.0);
@@ -59,12 +56,7 @@ unsafe fn doc_dair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }		
-#[acmd_script(
-    agent = "mariod",
-    script =  "game_attackairf",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn doc_fair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn doc_fair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 3.0);
 		if macros::is_excute(fighter) {
@@ -93,12 +85,7 @@ unsafe fn doc_fair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }	
-#[acmd_script(
-    agent = "mariod",
-    script =  "effect_attackairf",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn doc_fair_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn doc_fair_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 8.0);
 		if macros::is_excute(fighter) {
@@ -110,12 +97,7 @@ unsafe fn doc_fair_eff(fighter: &mut L2CAgentBase) {
 			macros::EFFECT_OFF_KIND(fighter, Hash40::new("mariod_smash_aura"), false, true);
 		}
 }
-#[acmd_script(
-    agent = "mariod",
-    scripts =  ["sound_attackairf"],
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn doc_fair_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn doc_fair_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 6.0);
 		if macros::is_excute(fighter) {
@@ -128,12 +110,7 @@ unsafe fn doc_fair_snd(fighter: &mut L2CAgentBase) {
 		}
 }
 
-#[acmd_script(
-    agent = "mariod",
-    script =  "game_attackairb",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn doc_bair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn doc_bair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 3.0);
 		if macros::is_excute(fighter) {
@@ -160,12 +137,7 @@ unsafe fn doc_bair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }	
-#[acmd_script(
-    agent = "mariod",
-    script =  "effect_attackairb",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn doc_bair_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn doc_bair_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 4.0);
 		if macros::is_excute(fighter) {
@@ -189,12 +161,7 @@ unsafe fn doc_bair_eff(fighter: &mut L2CAgentBase) {
 			macros::EFFECT_OFF_KIND(fighter, Hash40::new("mariod_smash_aura"), false, true);
 		}
 }
-#[acmd_script(
-	agent = "mariod",
-	scripts =  ["sound_attackairb"],
-	category = ACMD_SOUND,
-	low_priority)]
-unsafe fn doc_bair_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn doc_bair_snd(fighter: &mut L2CAgentBase) {
 	let lua_state = fighter.lua_state_agent;
 			wait(fighter.lua_state_agent, 19.0);
 		if macros::is_excute(fighter) {
@@ -203,12 +170,7 @@ unsafe fn doc_bair_snd(fighter: &mut L2CAgentBase) {
 		}
 	}
 
-#[acmd_script(
-    agent = "mariod",
-    script =  "game_attackairhi",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn doc_uair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn doc_uair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 1.0);
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.75);
@@ -233,12 +195,7 @@ unsafe fn doc_uair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }	
-#[acmd_script(
-    agent = "mariod",
-    script =  "game_attackairn",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn doc_nair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn doc_nair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 5.0);
 		if macros::is_excute(fighter) {
@@ -258,12 +215,7 @@ unsafe fn doc_nair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }
-#[acmd_script(
-    agent = "mariod",
-    script =  "effect_attackairn",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn doc_nair_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn doc_nair_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 5.0);
 		if macros::is_excute(fighter) {

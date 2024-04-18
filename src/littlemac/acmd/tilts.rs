@@ -13,18 +13,15 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		mac_ftilt,
-		mac_dtilt
-    );
+    Agent::new("littlemac")
+    .acmd("game_attacklw3", mac_dtilt)    
+    .acmd("game_attacks3", mac_ftilt)    
+    .install();
 }
-#[acmd_script(
-    agent = "littlemac",
-    script =  "game_attacklw3",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn mac_dtilt(fighter: &mut L2CAgentBase) {
+
+unsafe extern "C" fn mac_dtilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		macros::FT_MOTION_RATE(fighter, 2.0);
 		if macros::is_excute(fighter) {
@@ -46,12 +43,7 @@ unsafe fn mac_dtilt(fighter: &mut L2CAgentBase) {
 			JostleModule::set_status(fighter.module_accessor, true);
 		}
 }
-#[acmd_script(
-    agent = "littlemac",
-    script =  "game_attacks3",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn mac_ftilt(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn mac_ftilt(agent: &mut L2CAgentBase) {
 	macros::FT_MOTION_RATE(agent, 2.0);
     frame(agent.lua_state_agent, 4.0);
 	macros::FT_MOTION_RATE(agent, 1.0);

@@ -14,8 +14,17 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[fighter_frame( agent = FIGHTER_KIND_RICHTER )]
-fn richter_frame(fighter: &mut L2CFighterCommon) {
+pub fn install() {
+    Agent::new("richter")
+    .on_line(Main, richter_frame)
+    .install();
+
+	Agent::new("kirby")
+    .on_line(Main, richter_kirby_frame)
+    .install();
+}
+
+unsafe extern "C" fn richter_frame(fighter: &mut L2CFighterCommon) {
     unsafe {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 		if is_default(boma) {
@@ -62,8 +71,8 @@ fn richter_frame(fighter: &mut L2CFighterCommon) {
 		}
     }
 }
-#[fighter_frame( agent = FIGHTER_KIND_KIRBY )]
-fn richter_kirby_frame(fighter: &mut L2CFighterCommon) {
+
+unsafe extern "C" fn richter_kirby_frame(fighter: &mut L2CFighterCommon) {
     unsafe {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
@@ -74,8 +83,4 @@ fn richter_kirby_frame(fighter: &mut L2CFighterCommon) {
 			ArticleModule::remove_exist(boma, *FIGHTER_SIMON_GENERATE_ARTICLE_AXE, smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
 		};
     }
-}
-
-pub fn install() {
-    smashline::install_agent_frames!(richter_frame, richter_kirby_frame);
 }

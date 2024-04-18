@@ -14,12 +14,23 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 
-#[acmd_script(
-    agent = "toonlink",
-    script =  "game_attack11",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn tink_jab1(fighter: &mut L2CAgentBase) {
+pub fn install() {
+    Agent::new("toonlink")
+    .acmd("game_attack11", tink_jab1)    
+    .acmd("game_attack12", tink_jab2)    
+    .acmd("game_attack13", tink_jab3)    
+    .acmd("game_attackdash", tink_da)    
+    .acmd("game_attacks4", tink_fsmash)    
+    .acmd("effect_attacks4", tink_fsmash_eff)    
+    .acmd("expression_attacks4", tink_fsmash_expr)    
+    .acmd("sound_attacks4", tink_fsmash_snd)    
+    .acmd("expression_attacks4charge", tink_fsmash_charge_expr)    
+    .acmd("game_attackhi4", tink_usmash)    
+    .acmd("game_attacklw4", tink_dsmash)    
+    .install();
+}
+
+unsafe extern "C" fn tink_jab1(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 1.0);
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
@@ -41,12 +52,7 @@ unsafe fn tink_jab1(fighter: &mut L2CAgentBase) {
 			WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_FLAG_ENABLE_NO_HIT_COMBO);
 		}
 }	
-#[acmd_script(
-    agent = "toonlink",
-    script =  "game_attack12",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn tink_jab2(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn tink_jab2(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 6.0);
 		if macros::is_excute(fighter) {
@@ -65,12 +71,7 @@ unsafe fn tink_jab2(fighter: &mut L2CAgentBase) {
 			WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_FLAG_ENABLE_NO_HIT_COMBO);
 		}
 }	
-#[acmd_script(
-    agent = "toonlink",
-    script =  "game_attack13",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn tink_jab3(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn tink_jab3(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 6.0);
 		if macros::is_excute(fighter) {
@@ -82,12 +83,7 @@ unsafe fn tink_jab3(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }	
-#[acmd_script(
-    agent = "toonlink",
-    script =  "game_attackdash",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn tink_da(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn tink_da(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.7);
 		frame(fighter.lua_state_agent, 8.0);
@@ -106,12 +102,7 @@ unsafe fn tink_da(fighter: &mut L2CAgentBase) {
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 1);
 }	
 
-#[acmd_script(
-    agent = "toonlink",
-    script =  "game_attacks4",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn tink_fsmash(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn tink_fsmash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 8.0);
 		if macros::is_excute(fighter) {
@@ -145,12 +136,7 @@ unsafe fn tink_fsmash(fighter: &mut L2CAgentBase) {
 			ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_TOONLINK_GENERATE_ARTICLE_BOW,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
 		}
 }	
-#[acmd_script(
-    agent = "toonlink",
-    script =  "effect_attacks4",
-    category = ACMD_EFFECT,
-	low_priority)]
-unsafe fn tink_fsmash_eff(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn tink_fsmash_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 2.0);
 		if macros::is_excute(fighter) {
@@ -170,12 +156,7 @@ unsafe fn tink_fsmash_eff(fighter: &mut L2CAgentBase) {
 			macros::EFFECT(fighter, Hash40::new("sys_erace_smoke"), Hash40::new("top"), 18.0, 0.0, 0, 0, 0, 0, 1.2, 0, 0, 0, 0, 0, 0, false);
 		}
 }	
-#[acmd_script(
-    agent = "toonlink",
-    script =  "expression_attacks4",
-    category = ACMD_EXPRESSION,
-	low_priority)]
-unsafe fn tink_fsmash_expr(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn tink_fsmash_expr(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	if macros::is_excute(fighter) {
 		VisibilityModule::set_int64(fighter.module_accessor, hash40("shield") as i64, hash40("shield_back") as i64);
@@ -195,12 +176,7 @@ unsafe fn tink_fsmash_expr(fighter: &mut L2CAgentBase) {
 		ItemModule::set_have_item_visibility(fighter.module_accessor, true, 0);
 	}
 }	
-#[acmd_script(
-    agent = "toonlink",
-    script =  "sound_attacks4",
-    category = ACMD_SOUND,
-	low_priority)]
-unsafe fn tink_fsmash_snd(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn tink_fsmash_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 10.0);
 		if macros::is_excute(fighter) {
@@ -218,12 +194,7 @@ unsafe fn tink_fsmash_snd(fighter: &mut L2CAgentBase) {
 			macros::PLAY_LANDING_SE(fighter, Hash40::new("se_toonlink_attackair_l01"));
 		}
 }	
-#[acmd_script(
-    agent = "toonlink",
-    script =  "expression_attacks4charge",
-    category = ACMD_EXPRESSION,
-	low_priority)]
-unsafe fn tink_fsmash_charge_expr(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn tink_fsmash_charge_expr(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	if macros::is_excute(fighter) {
 		VisibilityModule::set_int64(fighter.module_accessor, hash40("shield") as i64, hash40("shield_back") as i64);
@@ -231,12 +202,7 @@ unsafe fn tink_fsmash_charge_expr(fighter: &mut L2CAgentBase) {
 		ItemModule::set_have_item_visibility(fighter.module_accessor, false, 0);
 	}
 }	
-#[acmd_script(
-    agent = "toonlink",
-    script =  "game_attackhi4",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn tink_usmash(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn tink_usmash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 5.0);
 		if macros::is_excute(fighter) {
@@ -263,12 +229,7 @@ unsafe fn tink_usmash(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }	
-#[acmd_script(
-    agent = "toonlink",
-    script =  "game_attacklw4",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn tink_dsmash(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn tink_dsmash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 4.0);
 		if macros::is_excute(fighter) {
@@ -295,16 +256,3 @@ unsafe fn tink_dsmash(fighter: &mut L2CAgentBase) {
 		frame(fighter.lua_state_agent, 50.0);
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 1);
 }		
-
-pub fn install() {
-    smashline::install_acmd_scripts!(
-		tink_jab1,
-        tink_jab2,
-        tink_jab3,
-        tink_da,
-        tink_fsmash, tink_fsmash_eff, tink_fsmash_snd, tink_fsmash_expr,
-        tink_fsmash_charge_expr,
-        tink_usmash,
-        tink_dsmash
-    );
-}

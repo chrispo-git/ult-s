@@ -13,20 +13,17 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		lucario_fair,
-		lucario_nair,
-		lucario_dair,
-		lucario_uair
-    );
+    Agent::new("lucario")
+    .acmd("game_attackairlw", lucario_dair)    
+	.acmd("game_attackairf", lucario_fair)    
+	.acmd("game_attackairn", lucario_nair)    
+	.acmd("game_attackairhi", lucario_uair)    
+    .install();
 }
-#[acmd_script(
-    agent = "lucario",
-    script =  "game_attackairlw",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn lucario_dair(fighter: &mut L2CAgentBase) {
+
+unsafe extern "C" fn lucario_dair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.5);
 		frame(fighter.lua_state_agent, 4.0);
@@ -55,12 +52,7 @@ unsafe fn lucario_dair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }	
-#[acmd_script(
-    agent = "lucario",
-    script =  "game_attackairf",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn lucario_fair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn lucario_fair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 2.0);
 		if macros::is_excute(fighter) {
@@ -81,12 +73,7 @@ unsafe fn lucario_fair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }	
-#[acmd_script(
-    agent = "lucario",
-    script =  "game_attackairn",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn lucario_nair(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn lucario_nair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 5.0);
 		if macros::is_excute(fighter) {
@@ -123,12 +110,7 @@ unsafe fn lucario_nair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }		
-#[acmd_script(
-    agent = "lucario",
-    script =  "game_attackairhi",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn lucario_uair(agent: &mut L2CAgentBase) {
+unsafe extern "C" fn lucario_uair(agent: &mut L2CAgentBase) {
     if macros::is_excute(agent) {
         FighterAreaModuleImpl::enable_fix_jostle_area_xy(agent.module_accessor, 1.0, 4.0, 4.0, 4.0);
     }

@@ -13,17 +13,14 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+
 pub fn install() {
-    smashline::install_acmd_scripts!(
-		luigi_uair
-    );
+    Agent::new("luigi")
+    .acmd("game_attackairhi", luigi_uair)    
+    .install();
 }
-#[acmd_script(
-    agent = "luigi",
-    script =  "game_attackairhi",
-    category = ACMD_GAME,
-	low_priority)]
-unsafe fn luigi_uair(fighter: &mut L2CAgentBase) {
+
+unsafe extern "C" fn luigi_uair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 2.0);
 		if macros::is_excute(fighter) {
