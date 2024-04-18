@@ -20,11 +20,11 @@ pub fn install() {
     .install();
 
 	Agent::new("pacman_firehydrant")
-    .on_line(Main, hydrant_frame)
+    .on_line(Exec, hydrant_frame)
     .install();
 
 	Agent::new("pacman_trampoline")
-    .on_line(Main, trampoline_frame)
+    .on_line(Exec, trampoline_frame)
     .install();
 }
 

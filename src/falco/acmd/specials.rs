@@ -17,8 +17,7 @@ use super::*;
 pub fn install() {
     Agent::new("falco")
     .acmd("game_speciallw", falco_shine)    
-    .acmd("game_specialairlw", falco_shine)    
-    .acmd("effect_attackairn", falco_shine_eff)    
+    .acmd("game_specialairlw", falco_shine)     
     .acmd("effect_specialairlw", falco_shine_eff)   
     .install();
 

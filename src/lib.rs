@@ -8,7 +8,6 @@
 #![allow(warnings, unused)]
 
 #[cfg(feature = "main_nro")]
-use skyline_web::dialog_ok::DialogOk;
 use std::{fs, path::Path};
 use skyline_web::dialog_ok::DialogOk;
 

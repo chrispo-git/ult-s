@@ -85,6 +85,7 @@ unsafe extern "C" fn brawler_dair_snd(fighter: &mut L2CAgentBase) {
     }
 }		
 unsafe extern "C" fn brawler_dair_bounce(fighter: &mut L2CAgentBase) {
+		frame(fighter.lua_state_agent, 2.0);
 		if macros::is_excute(fighter) {
 			KineticModule::resume_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_CONTROL);
 			AttackModule::clear_all(fighter.module_accessor);

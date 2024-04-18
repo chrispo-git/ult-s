@@ -40,6 +40,24 @@ unsafe extern "C" fn murabito_frame2(fighter: &mut L2CFighterCommon) {
 			let cancel_frame = FighterMotionModuleImpl::get_cancel_frame(boma,smash::phx::Hash40::new_raw(MotionModule::motion_kind(boma)),false) as f32;
 			let motion_kind = MotionModule::motion_kind(boma);
 			let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
+        }
+    }
+}
+unsafe extern "C" fn murabito_frame(fighter: &mut L2CFighterCommon) {
+    unsafe {
+        let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
+		if is_default(boma) {
+			let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
+			let frame = MotionModule::frame(boma);
+			let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+			let cancel_frame = FighterMotionModuleImpl::get_cancel_frame(boma,smash::phx::Hash40::new_raw(MotionModule::motion_kind(boma)),false) as f32;
+			let motion_kind = MotionModule::motion_kind(boma);
+            let situation_kind = StatusModule::situation_kind(boma);
+            let pos_x = PostureModule::pos_x(boma);
+            let pos_y = PostureModule::pos_y(boma);
+            let end_frame = MotionModule::end_frame(boma);
+            let lr = PostureModule::lr(boma);
+            let is_facing_tree = lr*(TREE_POS_X[ENTRY_ID]-pos_x) > 0.0;
             if  [*FIGHTER_MURABITO_STATUS_KIND_SPECIAL_N_SEARCH, *FIGHTER_STATUS_KIND_SPECIAL_N, *FIGHTER_MURABITO_STATUS_KIND_SPECIAL_N_POCKET].contains(&status_kind) {
                 if frame >= cancel_frame {
                     CHANGE_FRAME[ENTRY_ID] = false;
@@ -64,24 +82,6 @@ unsafe extern "C" fn murabito_frame2(fighter: &mut L2CFighterCommon) {
             if situation_kind != *SITUATION_KIND_AIR {
                 DO_BOUNCE[ENTRY_ID] = false;
             }
-        }
-    }
-}
-unsafe extern "C" fn murabito_frame(fighter: &mut L2CFighterCommon) {
-    unsafe {
-        let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
-		if is_default(boma) {
-			let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
-			let frame = MotionModule::frame(boma);
-			let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-			let cancel_frame = FighterMotionModuleImpl::get_cancel_frame(boma,smash::phx::Hash40::new_raw(MotionModule::motion_kind(boma)),false) as f32;
-			let motion_kind = MotionModule::motion_kind(boma);
-            let situation_kind = StatusModule::situation_kind(boma);
-            let pos_x = PostureModule::pos_x(boma);
-            let pos_y = PostureModule::pos_y(boma);
-            let end_frame = MotionModule::end_frame(boma);
-            let lr = PostureModule::lr(boma);
-            let is_facing_tree = lr*(TREE_POS_X[ENTRY_ID]-pos_x) > 0.0;
             if  ![*FIGHTER_MURABITO_STATUS_KIND_SPECIAL_N_SEARCH, *FIGHTER_STATUS_KIND_SPECIAL_N, *FIGHTER_MURABITO_STATUS_KIND_SPECIAL_N_POCKET, *FIGHTER_STATUS_KIND_ATTACK_LW4, *FIGHTER_STATUS_KIND_ATTACK_LW4_START, *FIGHTER_STATUS_KIND_ATTACK_LW4_HOLD].contains(&status_kind) {
                 ModelModule::set_mesh_visibility(boma,Hash40::new("murabito_shovel"),false);
                 ModelModule::set_mesh_visibility(boma,Hash40::new("murabito_shovelflip"),false);
