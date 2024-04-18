@@ -90,64 +90,71 @@ unsafe extern "C" fn murabito_frame(fighter: &mut L2CFighterCommon) {
                 WorkModule::set_int(boma, 1, *FIGHTER_MURABITO_INSTANCE_WORK_ID_INT_SPECIAL_N_TIME_LIMIT);
             }
             if  [*FIGHTER_MURABITO_STATUS_KIND_SPECIAL_N_SEARCH, *FIGHTER_STATUS_KIND_SPECIAL_N, *FIGHTER_MURABITO_STATUS_KIND_SPECIAL_N_POCKET].contains(&status_kind) {
-                
-                if frame < 2.0 && situation_kind == *SITUATION_KIND_GROUND && ![hash40("special_n3"), hash40("special_n2_fail"), hash40("special_n2")].contains(&motion_kind) && !CHANGE_FRAME[ENTRY_ID]{
-                    if ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_MURABITO_GENERATE_ARTICLE_TREE) && ![hash40("special_n3"), hash40("special_n2_fail")].contains(&motion_kind) {
-                        if (TREE_POS_X[ENTRY_ID]-pos_x).abs() < X_DIST && (TREE_POS_Y[ENTRY_ID]-pos_y).abs() < Y_DIST && is_facing_tree && !IS_FALLEN[ENTRY_ID] {
-                            MotionModule::change_motion(boma, Hash40::new("special_n3"), 0.0, 1.0, false, 0.0, false, false);
-                            println!("special_n3");
-                            CHANGE_FRAME[ENTRY_ID] = true;
-                        } else {
-                            MotionModule::change_motion(boma, Hash40::new("special_n2_fail"), 0.0, 1.0, false, 0.0, false, false);
-                            println!("special_n2_fail");
-                            CHANGE_FRAME[ENTRY_ID] = true;
-                        }
-                    } else if ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_MURABITO_GENERATE_ARTICLE_SPROUT) && ![hash40("special_n2"), hash40("special_n2_fail")].contains(&motion_kind) {
-                        if (TREE_POS_X[ENTRY_ID]-pos_x).abs() < X_DIST && (TREE_POS_Y[ENTRY_ID]-pos_y).abs() < Y_DIST && is_facing_tree  {
-                            MotionModule::change_motion(boma, Hash40::new("special_n2"), 0.0, 1.0, false, 0.0, false, false);
-                            println!("special_n2");
-                            CHANGE_FRAME[ENTRY_ID] = true;
-                        } else {
-                            MotionModule::change_motion(boma, Hash40::new("special_n2_fail"), 0.0, 1.0, false, 0.0, false, false);
-                            println!("special_n2_fail");
-                            CHANGE_FRAME[ENTRY_ID] = true;
-                        }
-                    } else if motion_kind != hash40("special_n") {
-                        MotionModule::change_motion(boma, Hash40::new("special_n"), 0.0, 1.0, false, 0.0, false, false);
-                    } else {
-                        CHANGE_FRAME[ENTRY_ID] = true;
-                    }
-                }
-                if situation_kind != SITUATION_KIND_GROUND && motion_kind != hash40("special_air_n") {
-                    MotionModule::change_motion(boma, Hash40::new("special_air_n"), 0.0, 1.0, false, 0.0, false, false);
-                }
-                if [hash40("special_n3")].contains(&motion_kind) {
-                    if (!ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_MURABITO_GENERATE_ARTICLE_TREE) || IS_FALLEN[ENTRY_ID] ) {
-                        StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_SLIP, false);
-                    }
-                    ModelModule::set_mesh_visibility(boma,Hash40::new("murabito_shovel"),false);
-                    ModelModule::set_mesh_visibility(boma,Hash40::new("murabito_shovelflip"),false);
-                }
+
                 if StatusModule::is_situation_changed(boma) {
                     CHANGE_FRAME[ENTRY_ID] = false;
                     StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_LANDING, false);
-                }
-                if frame >= end_frame {
-                    if StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR {
-                        StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL, false);
-                    } else {
-                        StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_WAIT, false);
-                    };
-                }
-                if frame > 4.0 {
-                    CHANGE_FRAME[ENTRY_ID] = false;
-                }
-                if frame >= cancel_frame {
-                    CHANGE_FRAME[ENTRY_ID] = false;
-                    reimpl_cancel_frame(fighter);
+                } else {
+                    if HAS_BEEN_AIR[ENTRY_ID] && situation_kind == SITUATION_KIND_GROUND {
+                        StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_LANDING, false);
+                        HAS_BEEN_AIR[ENTRY_ID] = false;
+                    }
+                    if frame < 2.0 && situation_kind == *SITUATION_KIND_GROUND && ![hash40("special_n3"), hash40("special_n2_fail"), hash40("special_n2")].contains(&motion_kind) && !CHANGE_FRAME[ENTRY_ID]{
+                        if ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_MURABITO_GENERATE_ARTICLE_TREE) && ![hash40("special_n3"), hash40("special_n2_fail")].contains(&motion_kind) {
+                            if (TREE_POS_X[ENTRY_ID]-pos_x).abs() < X_DIST && (TREE_POS_Y[ENTRY_ID]-pos_y).abs() < Y_DIST && is_facing_tree && !IS_FALLEN[ENTRY_ID] {
+                                MotionModule::change_motion(boma, Hash40::new("special_n3"), 0.0, 1.0, false, 0.0, false, false);
+                                println!("special_n3");
+                                CHANGE_FRAME[ENTRY_ID] = true;
+                            } else {
+                                MotionModule::change_motion(boma, Hash40::new("special_n2_fail"), 0.0, 1.0, false, 0.0, false, false);
+                                println!("special_n2_fail");
+                                CHANGE_FRAME[ENTRY_ID] = true;
+                            }
+                        } else if ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_MURABITO_GENERATE_ARTICLE_SPROUT) && ![hash40("special_n2"), hash40("special_n2_fail")].contains(&motion_kind) {
+                            if (TREE_POS_X[ENTRY_ID]-pos_x).abs() < X_DIST && (TREE_POS_Y[ENTRY_ID]-pos_y).abs() < Y_DIST && is_facing_tree  {
+                                MotionModule::change_motion(boma, Hash40::new("special_n2"), 0.0, 1.0, false, 0.0, false, false);
+                                println!("special_n2");
+                                CHANGE_FRAME[ENTRY_ID] = true;
+                            } else {
+                                MotionModule::change_motion(boma, Hash40::new("special_n2_fail"), 0.0, 1.0, false, 0.0, false, false);
+                                println!("special_n2_fail");
+                                CHANGE_FRAME[ENTRY_ID] = true;
+                            }
+                        } else if motion_kind != hash40("special_n") {
+                            MotionModule::change_motion(boma, Hash40::new("special_n"), 0.0, 1.0, false, 0.0, false, false);
+                        } else {
+                            CHANGE_FRAME[ENTRY_ID] = true;
+                        }
+                    }
+                    if situation_kind != SITUATION_KIND_GROUND && motion_kind != hash40("special_air_n") {
+                        MotionModule::change_motion(boma, Hash40::new("special_air_n"), 0.0, 1.0, false, 0.0, false, false);
+                        HAS_BEEN_AIR[ENTRY_ID] = true;
+                    }
+                    if [hash40("special_n3")].contains(&motion_kind) {
+                        if (!ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_MURABITO_GENERATE_ARTICLE_TREE) || IS_FALLEN[ENTRY_ID] ) {
+                            StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_SLIP, false);
+                        }
+                        ModelModule::set_mesh_visibility(boma,Hash40::new("murabito_shovel"),false);
+                        ModelModule::set_mesh_visibility(boma,Hash40::new("murabito_shovelflip"),false);
+                    }
+                    if frame >= end_frame {
+                        if StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR {
+                            StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL, false);
+                        } else {
+                            StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_WAIT, false);
+                        };
+                    }
+                    if frame > 4.0 {
+                        CHANGE_FRAME[ENTRY_ID] = false;
+                    }
+                    if frame >= cancel_frame {
+                        CHANGE_FRAME[ENTRY_ID] = false;
+                        reimpl_cancel_frame(fighter);
+                    }
                 }
             } else {
                 CHANGE_FRAME[ENTRY_ID] = false;
+                HAS_BEEN_AIR[ENTRY_ID] = false;
             }
 		}
     }

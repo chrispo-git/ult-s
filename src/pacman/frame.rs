@@ -20,11 +20,11 @@ pub fn install() {
     .install();
 
 	Agent::new("pacman_firehydrant")
-    .on_line(Exec, hydrant_frame)
+    .on_line(Main, hydrant_frame)
     .install();
 
 	Agent::new("pacman_trampoline")
-    .on_line(Exec, trampoline_frame)
+    .on_line(Main, trampoline_frame)
     .install();
 }
 
@@ -50,11 +50,13 @@ unsafe extern "C" fn pacman_frame(fighter: &mut L2CFighterCommon) {
 			if !ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_PACMAN_GENERATE_ARTICLE_FIREHYDRANT) {
 				HYDRANT_POS_X[ENTRY_ID] = 0.0;
 				HYDRANT_POS_Y[ENTRY_ID] = 0.0;
+				WE_BOUNCE_NOW[ENTRY_ID] = false;
 			}
 			if !ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_PACMAN_GENERATE_ARTICLE_TRAMPOLINE) {
 				TRAMPOLINE_POS_X[ENTRY_ID] = 0.0;
 				TRAMPOLINE_POS_Y[ENTRY_ID] = 0.0;
 				TRAMPOLINE_DELETE_TIMER[ENTRY_ID] = 0;
+				WE_BOUNCE_NOW[ENTRY_ID] = false;
 			}
 			if TRAMPOLINE_DELETE_TIMER[ENTRY_ID] > 0 {
 				TRAMPOLINE_DELETE_TIMER[ENTRY_ID] -= 1; 
@@ -105,6 +107,7 @@ unsafe extern "C" fn hydrant_frame(weapon: &mut L2CFighterBase) {
 			if ((HYDRANT_POS_X[ENTRY_ID]  - TRAMPOLINE_POS_X[ENTRY_ID]).abs() < 11.0) &&
 				((HYDRANT_POS_Y[ENTRY_ID]  - TRAMPOLINE_POS_Y[ENTRY_ID]).abs() < 3.0) &&
 				(ArticleModule::is_exist(&mut *boma, *FIGHTER_PACMAN_GENERATE_ARTICLE_TRAMPOLINE) && TRAMPOLINE_POS_Y[ENTRY_ID] != 0.0)  {
+					WE_BOUNCE_NOW[ENTRY_ID] = true;
 					if status_kind != *WEAPON_PACMAN_FIREHYDRANT_STATUS_KIND_FLY {
 						StatusModule::change_status_request_from_script(weapon.module_accessor, *WEAPON_PACMAN_FIREHYDRANT_STATUS_KIND_FLY, false);
 						macros::SET_SPEED_EX(weapon, 0.0, 1.5, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
@@ -127,8 +130,8 @@ unsafe extern "C" fn trampoline_frame(weapon: &mut L2CFighterBase) {
         if smash::app::utility::get_kind(&mut *boma) == *FIGHTER_KIND_PACMAN {
 			TRAMPOLINE_POS_X[ENTRY_ID] = PostureModule::pos_x(weapon.module_accessor);
 			TRAMPOLINE_POS_Y[ENTRY_ID] = PostureModule::pos_y(weapon.module_accessor);
-			if ((HYDRANT_POS_X[ENTRY_ID]  - TRAMPOLINE_POS_X[ENTRY_ID]).abs() < 11.0) &&
-				((HYDRANT_POS_Y[ENTRY_ID]  - TRAMPOLINE_POS_Y[ENTRY_ID]).abs() < 3.0) &&
+			if ((((HYDRANT_POS_X[ENTRY_ID]  - TRAMPOLINE_POS_X[ENTRY_ID]).abs() < 11.0) && ((HYDRANT_POS_Y[ENTRY_ID]  - TRAMPOLINE_POS_Y[ENTRY_ID]).abs() < 3.0)) ||
+				WE_BOUNCE_NOW[ENTRY_ID]) &&
 				(ArticleModule::is_exist(&mut *boma, *FIGHTER_PACMAN_GENERATE_ARTICLE_FIREHYDRANT) && HYDRANT_POS_Y[ENTRY_ID] != 0.0) &&
 				(![*WEAPON_PACMAN_TRAMPOLINE_STATUS_KIND_SHAKE, *WEAPON_PACMAN_TRAMPOLINE_STATUS_KIND_REMOVE].contains(&status_kind) || TRAMPOLINE_DELETE_TIMER[ENTRY_ID] == 0) {
 					StatusModule::change_status_request_from_script(weapon.module_accessor, *WEAPON_PACMAN_TRAMPOLINE_STATUS_KIND_SHAKE, false);
