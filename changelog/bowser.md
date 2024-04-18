@@ -159,9 +159,8 @@ FaF: 46
 ### Dash Attack
 |Frame|ID|Damage|Angle|BKB|KBG|Notes| | | |
 |-|-|-|-|-|-|-|-|-|-|
-|Frame 15| 0|  15.0%|  50|  80|  70|
-|Frame 15| 1|  15.0%|  50|  80|  70|
-|Frame 15| 2|  15.0%|  50|  80|  70|
+|Frame 15| 0|  15.0%|  50|  70|  70|
+|Frame 15| 2|  15.0%|  50|  70|  70|
 |Hitboxes terminated on Frame 18|
 
 
