@@ -204,6 +204,7 @@ mod common;
 mod cpu;
 
 mod bayonetta;
+mod bomberman;
 mod brave;
 mod buddy;
 mod captain;
@@ -383,6 +384,7 @@ pub extern "C" fn main() {
 
 	//Fighters
 	bayonetta::install();
+	bomberman::install();
 	brave::install();
 	buddy::install();
 	
