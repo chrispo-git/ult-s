@@ -73,7 +73,7 @@ unsafe extern "C" fn sandbag_frame(fighter: &mut L2CFighterCommon) {
                 };
                 KineticModule::suspend_energy(boma, *FIGHTER_KINETIC_ENERGY_ID_CONTROL);
                 SIDEB_CHARGE[ENTRY_ID] += 1.0;
-                if SIDEB_CHARGE[ENTRY_ID] >= 90.0 || (SIDEB_CHARGE[ENTRY_ID] >= 10.0 && ControlModule::check_button_on_trriger(fighter.module_accessor, *CONTROL_PAD_BUTTON_SPECIAL)) {
+                if SIDEB_CHARGE[ENTRY_ID] >= 90.0 || (SIDEB_CHARGE[ENTRY_ID] >= 3.0 && ControlModule::check_button_off(fighter.module_accessor, *CONTROL_PAD_BUTTON_SPECIAL)) {
                     MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_air_s_fire"), 0.0, 1.0, false, 0.0, false, false);
                     //StatusModule::set_situation_kind(boma, smash::app::SituationKind(*SITUATION_KIND_AIR), true);
                     //StatusModule::set_keep_situation_air(boma, true);
