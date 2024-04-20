@@ -272,6 +272,7 @@ mod rockman;
 mod rosetta;
 mod roy;
 mod ryu;
+mod sandbag;
 mod samus;
 mod samusd;
 mod sheik;
@@ -466,6 +467,7 @@ pub extern "C" fn main() {
 	roy::install();
 	ryu::install();
 	
+    sandbag::install();
 	samus::install();
 	samusd::install();
 	sheik::install();
