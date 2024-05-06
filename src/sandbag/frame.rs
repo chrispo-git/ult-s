@@ -115,6 +115,7 @@ unsafe extern "C" fn sandbag_frame(fighter: &mut L2CFighterCommon) {
                 };
                 if AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_HIT) || AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_SHIELD){
                     SIDEB_HIT[ENTRY_ID] = true;
+                    StopModule::end_stop(boma);
                     MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_air_s_fire_hit"), 0.0, 1.0, false, 0.0, false, false);
                     StatusModule::set_situation_kind(boma, smash::app::SituationKind(*SITUATION_KIND_AIR), true);
                 };
