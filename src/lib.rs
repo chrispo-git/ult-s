@@ -226,7 +226,7 @@ mod ganon;
 mod gaogaen;
 mod gekkouga;
 mod ike;
-mod inkling;
+mod inkling; 
 mod jack;
 mod kamui;
 mod ken;

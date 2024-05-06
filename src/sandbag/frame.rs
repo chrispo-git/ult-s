@@ -300,7 +300,7 @@ unsafe extern "C" fn sandbag_frame(fighter: &mut L2CFighterCommon) {
         };
         if [hash40("throw_hi")].contains(&MotionModule::motion_kind(boma)) {
             if PostureModule::lr(boma) == 1.0 {
-                if MotionModule::frame(boma) >= 5.0 && MotionModule::frame(boma) <= 36.0 {
+                if MotionModule::frame(boma) >= 5.0 && MotionModule::frame(boma) <= 25.0 {
                     ModelModule::set_mesh_visibility(boma, Hash40::new("rockman_ex_bumper"), true);
                     ModelModule::set_mesh_visibility(boma, Hash40::new("rockman_ex_bumperb"), false);
                 }
@@ -310,7 +310,7 @@ unsafe extern "C" fn sandbag_frame(fighter: &mut L2CFighterCommon) {
                 };
             };
             if PostureModule::lr(boma) == -1.0 {
-                if MotionModule::frame(boma) >= 5.0 && MotionModule::frame(boma) <= 36.0 {
+                if MotionModule::frame(boma) >= 5.0 && MotionModule::frame(boma) <= 25.0 {
                     ModelModule::set_mesh_visibility(boma, Hash40::new("rockman_ex_bumper"), false);
                     ModelModule::set_mesh_visibility(boma, Hash40::new("rockman_ex_bumperb"), true);
                 }
