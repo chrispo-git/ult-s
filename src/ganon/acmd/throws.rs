@@ -16,15 +16,15 @@ use super::*;
 
 pub fn install() {
     Agent::new("ganon")
-    .acmd("game_throwf", ganon_fthrow)    
-    .acmd("effect_throwf", ganon_fthrow_eff)    
-    .acmd("sound_throwf", ganon_fthrow_sound)    
-    .acmd("game_throwb", ganon_bthrow)    
-    .acmd("effect_throwb", ganon_bthrow_eff)    
-    .acmd("sound_throwb", ganon_bthrow_sound)    
-    .acmd("game_throwlw", ganon_dthrow)    
-    .acmd("effect_throwlw", ganon_dthrow_eff)    
-    .acmd("sound_throwlw", ganon_dthrow_sound)    
+    .acmd("game_throwf", ganon_fthrow, Priority::Low)    
+    .acmd("effect_throwf", ganon_fthrow_eff, Priority::Low)    
+    .acmd("sound_throwf", ganon_fthrow_sound, Priority::Low)    
+    .acmd("game_throwb", ganon_bthrow, Priority::Low)    
+    .acmd("effect_throwb", ganon_bthrow_eff, Priority::Low)    
+    .acmd("sound_throwb", ganon_bthrow_sound, Priority::Low)    
+    .acmd("game_throwlw", ganon_dthrow, Priority::Low)    
+    .acmd("effect_throwlw", ganon_dthrow_eff, Priority::Low)    
+    .acmd("sound_throwlw", ganon_dthrow_sound, Priority::Low)    
     .install(); 
 }
 

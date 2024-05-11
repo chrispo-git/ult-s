@@ -16,7 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("murabito")
-    .acmd("game_throwf", villy_fthrow)    
+    .acmd("game_throwf", villy_fthrow, Priority::Low)    
     .install();
 }
 

@@ -16,8 +16,8 @@ use super::*;
 
 pub fn install() {
     Agent::new("ken")
-    .acmd("game_attacklw4", ken_dsmash)    
-    .acmd("game_attack13", ken_jab3)    
+    .acmd("game_attacklw4", ken_dsmash, Priority::Low)    
+    .acmd("game_attack13", ken_jab3, Priority::Low)    
     .install();
 }
 

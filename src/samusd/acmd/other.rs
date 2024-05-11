@@ -75,13 +75,13 @@ unsafe extern "C" fn dsamus_catchcut_expr(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("samusd")
-        .sound_acmd("sound_squat", dsamus_crouch_sound)
-        .sound_acmd("sound_squatrv", dsamus_crouch_sound)
-        .expression_acmd("expression_catchpull", dsamus_catchpull_expr)
-        .expression_acmd("expression_catchwait", dsamus_catchwait_expr)
-        .game_acmd("game_catchattack", dsamus_catchattack)
-        .effect_acmd("effect_catchattack", dsamus_catchattack_eff)
-        .expression_acmd("expression_catchattack", dsamus_catchattack_expr)
-        .expression_acmd("expression_catchcut", dsamus_catchcut_expr)
+        .sound_acmd("sound_squat", dsamus_crouch_sound, Priority::Low)
+        .sound_acmd("sound_squatrv", dsamus_crouch_sound, Priority::Low)
+        .expression_acmd("expression_catchpull", dsamus_catchpull_expr, Priority::Low)
+        .expression_acmd("expression_catchwait", dsamus_catchwait_expr, Priority::Low)
+        .game_acmd("game_catchattack", dsamus_catchattack, Priority::Low)
+        .effect_acmd("effect_catchattack", dsamus_catchattack_eff, Priority::Low)
+        .expression_acmd("expression_catchattack", dsamus_catchattack_expr, Priority::Low)
+        .expression_acmd("expression_catchcut", dsamus_catchcut_expr, Priority::Low)
         .install();
 }

@@ -16,8 +16,8 @@ use super::*;
 
 pub fn install() {
   Agent::new("samus")
-  .acmd("effect_jumpfrontmini", samus_shorthop_eff)    
-  .acmd("effect_jumpbackmini", samus_shorthop_eff)    
+  .acmd("effect_jumpfrontmini", samus_shorthop_eff, Priority::Low)    
+  .acmd("effect_jumpbackmini", samus_shorthop_eff, Priority::Low)    
   .install();
 }
 

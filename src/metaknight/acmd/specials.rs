@@ -16,9 +16,9 @@ use super::*;
 
 pub fn install() {
     Agent::new("metaknight")
-    .acmd("game_specialnspin", mk_neutralb)    
-    .acmd("game_specialairnend", mk_neutralb_end)    
-    .acmd("game_specialnend", mk_neutralb_end)    
+    .acmd("game_specialnspin", mk_neutralb, Priority::Low)    
+    .acmd("game_specialairnend", mk_neutralb_end, Priority::Low)    
+    .acmd("game_specialnend", mk_neutralb_end, Priority::Low)    
     .install();
 }
 

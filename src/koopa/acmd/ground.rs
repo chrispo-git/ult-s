@@ -16,13 +16,13 @@ use super::*;
 
 pub fn install() {
     Agent::new("koopa")
-    .acmd("game_attackdash", bowser_da)    
-    .acmd("effect_attackdash", bowser_da_eff)    
-    .acmd("sound_attackdash", bowser_da_snd)    
-    .acmd("expression_attackdash", bowser_da_expr)    
-    .acmd("game_attacks4", bowser_fsmash)    
-    .acmd("effect_attacks4", bowser_fsmash_eff)    
-    .acmd("sound_attacks4", bowser_fsmash_snd)    
+    .acmd("game_attackdash", bowser_da, Priority::Low)    
+    .acmd("effect_attackdash", bowser_da_eff, Priority::Low)    
+    .acmd("sound_attackdash", bowser_da_snd, Priority::Low)    
+    .acmd("expression_attackdash", bowser_da_expr, Priority::Low)    
+    .acmd("game_attacks4", bowser_fsmash, Priority::Low)    
+    .acmd("effect_attacks4", bowser_fsmash_eff, Priority::Low)    
+    .acmd("sound_attacks4", bowser_fsmash_snd, Priority::Low)    
     .install();
 }
 

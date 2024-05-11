@@ -16,10 +16,10 @@ use super::*;
 
 pub fn install() {
     Agent::new("link")
-    .acmd("game_throwf", link_fthrow)    
-    .acmd("effect_throwf", link_fthrow_eff)    
-    .acmd("sound_throwf", link_fthrow_snd)    
-    .acmd("expression_throwf", link_fthrow_expr)    
+    .acmd("game_throwf", link_fthrow, Priority::Low)    
+    .acmd("effect_throwf", link_fthrow_eff, Priority::Low)    
+    .acmd("sound_throwf", link_fthrow_snd, Priority::Low)    
+    .acmd("expression_throwf", link_fthrow_expr, Priority::Low)    
     .install();
 }
 

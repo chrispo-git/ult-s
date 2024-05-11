@@ -16,7 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("purin")
-    .acmd("game_throwlw", puff_dthrow)    
+    .acmd("game_throwlw", puff_dthrow, Priority::Low)    
     .install();
 }
 

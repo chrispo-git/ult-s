@@ -16,13 +16,13 @@ use super::*;
 
 pub fn install() {
     Agent::new("master")
-    .acmd("game_attackairb", byleth_bair)    
-    .acmd("game_attackairf", byleth_fair)    
-    .acmd("game_attackairlw", byleth_dair)    
-    .acmd("sound_attackairn", byleth_nair_sound)    
-    .acmd("game_attackairn", byleth_nair)    
-    .acmd("game_landingairn", byleth_land_nair)    
-    .acmd("effect_attackairn", byleth_naire)    
+    .acmd("game_attackairb", byleth_bair, Priority::Low)    
+    .acmd("game_attackairf", byleth_fair, Priority::Low)    
+    .acmd("game_attackairlw", byleth_dair, Priority::Low)    
+    .acmd("sound_attackairn", byleth_nair_sound, Priority::Low)    
+    .acmd("game_attackairn", byleth_nair, Priority::Low)    
+    .acmd("game_landingairn", byleth_land_nair, Priority::Low)    
+    .acmd("effect_attackairn", byleth_naire, Priority::Low)    
     .install();
 }		
 

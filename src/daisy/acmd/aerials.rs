@@ -16,15 +16,15 @@ use super::*;
 
 pub fn install() {
 	Agent::new("daisy")
-    .acmd("game_attackairhi", daisy_uair)    
-    .acmd("effect_attackairhi", daisy_uair_eff)    
-    .acmd("sound_attackairhi", daisy_uair_snd)    
-    .acmd("expression_attackairhi", daisy_uair_expr)    
-    .acmd("game_attackairf", daisy_fair)    
-    .acmd("effect_attackairf", daisy_fair_eff)    
-    .acmd("expression_attackairf", daisy_fair_expr)    
-    .acmd("game_attackairn", daisy_nair)    
-    .acmd("game_attackairb", daisy_bair)    
+    .acmd("game_attackairhi", daisy_uair, Priority::Low)    
+    .acmd("effect_attackairhi", daisy_uair_eff, Priority::Low)    
+    .acmd("sound_attackairhi", daisy_uair_snd, Priority::Low)    
+    .acmd("expression_attackairhi", daisy_uair_expr, Priority::Low)    
+    .acmd("game_attackairf", daisy_fair, Priority::Low)    
+    .acmd("effect_attackairf", daisy_fair_eff, Priority::Low)    
+    .acmd("expression_attackairf", daisy_fair_expr, Priority::Low)    
+    .acmd("game_attackairn", daisy_nair, Priority::Low)    
+    .acmd("game_attackairb", daisy_bair, Priority::Low)    
     .install();
 }
 

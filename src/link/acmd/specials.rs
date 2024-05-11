@@ -17,18 +17,18 @@ use super::*;
 
 pub fn install() {
     Agent::new("link")
-    .acmd("game_specialairnstart", link_arrow_air)    
-    .acmd("game_specialnstart", link_arrow)    
-    .acmd("game_speciallwblast", link_downb)    
-    .acmd("game_specialairlwblast", link_downb)    
-    .acmd("effect_speciallwblast", link_downb_eff)    
-    .acmd("effect_specialairlwblast", link_downb_eff)    
-    .acmd("sound_speciallwblast", link_downb_snd)    
-    .acmd("sound_specialairlwblast", link_downb_snd)    
+    .acmd("game_specialairnstart", link_arrow_air, Priority::Low)    
+    .acmd("game_specialnstart", link_arrow, Priority::Low)    
+    .acmd("game_speciallwblast", link_downb, Priority::Low)    
+    .acmd("game_specialairlwblast", link_downb, Priority::Low)    
+    .acmd("effect_speciallwblast", link_downb_eff, Priority::Low)    
+    .acmd("effect_specialairlwblast", link_downb_eff, Priority::Low)    
+    .acmd("sound_speciallwblast", link_downb_snd, Priority::Low)    
+    .acmd("sound_specialairlwblast", link_downb_snd, Priority::Low)    
     .install();
 
 	Agent::new("link_boomerang")
-    .acmd("game_fly", linkerang)    
+    .acmd("game_fly", linkerang, Priority::Low)    
     .install();
 }
 

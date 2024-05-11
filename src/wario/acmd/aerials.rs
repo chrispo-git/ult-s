@@ -16,7 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("wario")
-    .acmd("game_attackairf", wario_fair)    
+    .acmd("game_attackairf", wario_fair, Priority::Low)    
     .install();
 }
 

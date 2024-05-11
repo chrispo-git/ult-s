@@ -16,8 +16,8 @@ use super::*;
 
 pub fn install() {
     Agent::new("zelda")
-    .acmd("game_attack11", zelda_jab1)    
-    .acmd("game_attackhi4", zelda_usmash)    
+    .acmd("game_attack11", zelda_jab1, Priority::Low)    
+    .acmd("game_attackhi4", zelda_usmash, Priority::Low)    
     .install();
 }
 

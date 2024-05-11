@@ -155,15 +155,15 @@ unsafe extern "C" fn rayman_dthrow_snd(agent: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("pikmin")
-        .game_acmd("game_throwhirayman", rayman_uthrow)
-        .effect_acmd("effect_throwhirayman", rayman_uthrow_eff)
-        .sound_acmd("sound_throwhirayman", rayman_uthrow_snd)
-        .game_acmd("game_throwfrayman", rayman_fthrow)
-        .effect_acmd("effect_throwfrayman", rayman_fthrow_eff)
-        .game_acmd("game_throwbrayman", rayman_bthrow)
-        .effect_acmd("effect_throwbrayman", rayman_bthrow_eff)
-        .game_acmd("game_throwlwrayman", rayman_dthrow)
-        .effect_acmd("effect_throwlwrayman", rayman_dthrow_eff)
-        .sound_acmd("sound_throwlwrayman", rayman_dthrow_snd)
+        .game_acmd("game_throwhirayman", rayman_uthrow, Priority::Low)
+        .effect_acmd("effect_throwhirayman", rayman_uthrow_eff, Priority::Low)
+        .sound_acmd("sound_throwhirayman", rayman_uthrow_snd, Priority::Low)
+        .game_acmd("game_throwfrayman", rayman_fthrow, Priority::Low)
+        .effect_acmd("effect_throwfrayman", rayman_fthrow_eff, Priority::Low)
+        .game_acmd("game_throwbrayman", rayman_bthrow, Priority::Low)
+        .effect_acmd("effect_throwbrayman", rayman_bthrow_eff, Priority::Low)
+        .game_acmd("game_throwlwrayman", rayman_dthrow, Priority::Low)
+        .effect_acmd("effect_throwlwrayman", rayman_dthrow_eff, Priority::Low)
+        .sound_acmd("sound_throwlwrayman", rayman_dthrow_snd, Priority::Low)
         .install();
 }

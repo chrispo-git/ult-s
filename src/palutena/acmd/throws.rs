@@ -16,7 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("palutena")
-    .acmd("game_throwlw", palu_dthrow)    
+    .acmd("game_throwlw", palu_dthrow, Priority::Low)    
 	.install();
 }
 

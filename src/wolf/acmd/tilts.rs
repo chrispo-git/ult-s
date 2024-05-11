@@ -16,10 +16,10 @@ use super::*;
 
 pub fn install() {
     Agent::new("wolf")
-    .acmd("game_attacklw3", wolf_dtilt)    
-    .acmd("game_attackhi3", wolf_utilt)    
-    .acmd("effect_attackhi3", wolf_utilt_eff)    
-    .acmd("sound_attackhi3", wolf_utilt_snd)    
+    .acmd("game_attacklw3", wolf_dtilt, Priority::Low)    
+    .acmd("game_attackhi3", wolf_utilt, Priority::Low)    
+    .acmd("effect_attackhi3", wolf_utilt_eff, Priority::Low)    
+    .acmd("sound_attackhi3", wolf_utilt_snd, Priority::Low)    
     .install();
 }
 

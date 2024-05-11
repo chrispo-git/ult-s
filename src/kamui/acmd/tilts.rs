@@ -16,7 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("kamui")
-    .acmd("game_attacklw3", corrin_dtilt)    
+    .acmd("game_attacklw3", corrin_dtilt, Priority::Low)    
     .install();
 }
 

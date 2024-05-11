@@ -17,8 +17,8 @@ use super::super::*;
 
 pub fn install() {
     Agent::new("szerosuit")
-    .acmd("game_attacklw3", zss_dtilt)    
-    .acmd("game_attackhi3", zss_utilt)    
+    .acmd("game_attacklw3", zss_dtilt, Priority::Low)    
+    .acmd("game_attackhi3", zss_utilt, Priority::Low)    
     .install();
 }
 

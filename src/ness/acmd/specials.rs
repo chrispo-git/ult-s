@@ -16,8 +16,8 @@ use super::*;
 
 pub fn install() {
     Agent::new("ness_pkfire")
-    .acmd("game_pillar", ness_pk_fire)    
-    .acmd("game_pillarair", ness_pk_fire)    
+    .acmd("game_pillar", ness_pk_fire, Priority::Low)    
+    .acmd("game_pillarair", ness_pk_fire, Priority::Low)    
     .install();
 }
 

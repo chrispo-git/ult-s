@@ -16,7 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("kirby")
-    .acmd("game_throwlw", kirby_dthrow)    
+    .acmd("game_throwlw", kirby_dthrow, Priority::Low)    
     .install();
 }
 

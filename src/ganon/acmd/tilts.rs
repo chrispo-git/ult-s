@@ -16,10 +16,10 @@ use super::*;
 
 pub fn install() {
     Agent::new("ganon")
-    .acmd("game_attackhi3", ganon_utilt)    
-    .acmd("effect_attackhi3", ganon_utilt_eff)    
-    .acmd("expression_attackhi3", ganon_utilt_expr)    
-    .acmd("sound_attackhi3", ganon_utilt_snd)    
+    .acmd("game_attackhi3", ganon_utilt, Priority::Low)    
+    .acmd("effect_attackhi3", ganon_utilt_eff, Priority::Low)    
+    .acmd("expression_attackhi3", ganon_utilt_expr, Priority::Low)    
+    .acmd("sound_attackhi3", ganon_utilt_snd, Priority::Low)    
     .install();
 }
 

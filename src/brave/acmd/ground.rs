@@ -16,9 +16,9 @@ use super::*;
 
 pub fn install() {
     Agent::new("brave")
-	.acmd("game_attack11", hero_jab1)
-	.acmd("game_attack12", hero_jab2)
-	.acmd("game_attacklw4", hero_dsmash)
+	.acmd("game_attack11", hero_jab1, Priority::Low)
+	.acmd("game_attack12", hero_jab2, Priority::Low)
+	.acmd("game_attacklw4", hero_dsmash, Priority::Low)
 	.install();
 }
 

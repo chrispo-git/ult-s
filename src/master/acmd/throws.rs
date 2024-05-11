@@ -16,9 +16,9 @@ use super::*;
 
 pub fn install() {
     Agent::new("master")
-    .acmd("game_throwhi", byleth_uthrow)    
-    .acmd("effect_throwhi", byleth_uthrow_eff)    
-    .acmd("sound_throwhi", byleth_uthrow_snd)    
+    .acmd("game_throwhi", byleth_uthrow, Priority::Low)    
+    .acmd("effect_throwhi", byleth_uthrow_eff, Priority::Low)    
+    .acmd("sound_throwhi", byleth_uthrow_snd, Priority::Low)    
     .install();
 }		
 

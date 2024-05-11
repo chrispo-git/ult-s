@@ -16,14 +16,14 @@ use super::*;
 
 pub fn install() {
     Agent::new("pitb")
-    .acmd("game_attackairhi", dpit_uair)    
-	.acmd("effect_attackairhi", dpit_uair_eff)    
-	.acmd("sound_attackairhi", dpit_uair_snd)    
-	.acmd("game_attackairf", dpit_fair)    
-	.acmd("game_attackairlw", dpit_dair)    
-	.acmd("game_attackairn", dpit_nair)    
-	.acmd("effect_attackairn", dpit_nair_eff)    
-	.acmd("sound_attackairn", dpit_nair_snd)    
+    .acmd("game_attackairhi", dpit_uair, Priority::Low)    
+	.acmd("effect_attackairhi", dpit_uair_eff, Priority::Low)    
+	.acmd("sound_attackairhi", dpit_uair_snd, Priority::Low)    
+	.acmd("game_attackairf", dpit_fair, Priority::Low)    
+	.acmd("game_attackairlw", dpit_dair, Priority::Low)    
+	.acmd("game_attackairn", dpit_nair, Priority::Low)    
+	.acmd("effect_attackairn", dpit_nair_eff, Priority::Low)    
+	.acmd("sound_attackairn", dpit_nair_snd, Priority::Low)    
 	.install();
 }
 

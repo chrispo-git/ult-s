@@ -16,11 +16,11 @@ use super::*;
 
 pub fn install() {
     Agent::new("palutena")
-    .acmd("game_attackairhi", palu_uair)    
-    .acmd("game_attackairlw", palu_dair)    
-	.acmd("game_attackairf", palu_fair)    
-	.acmd("game_attackairn", palu_nair)    
-	.acmd("game_attackairb", palu_bair)    
+    .acmd("game_attackairhi", palu_uair, Priority::Low)    
+    .acmd("game_attackairlw", palu_dair, Priority::Low)    
+	.acmd("game_attackairf", palu_fair, Priority::Low)    
+	.acmd("game_attackairn", palu_nair, Priority::Low)    
+	.acmd("game_attackairb", palu_bair, Priority::Low)    
 	.install();
 }
 

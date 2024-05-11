@@ -16,10 +16,10 @@ use super::*;
 
 pub fn install() {
 	Agent::new("gekkouga")
-    .acmd("game_appeallwl", gren_dtaunt)    
-    .acmd("game_appeallwr", gren_dtaunt)    
-    .acmd("effect_appeallwl", gren_dtaunt_eff)    
-    .acmd("effect_appeallwr", gren_dtaunt_eff)    
+    .acmd("game_appeallwl", gren_dtaunt, Priority::Low)    
+    .acmd("game_appeallwr", gren_dtaunt, Priority::Low)    
+    .acmd("effect_appeallwl", gren_dtaunt_eff, Priority::Low)    
+    .acmd("effect_appeallwr", gren_dtaunt_eff, Priority::Low)    
     .install();
 }
 

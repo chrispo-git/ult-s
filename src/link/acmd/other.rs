@@ -16,7 +16,7 @@ use super::*;
 
 pub fn install() {
   Agent::new("link")
-  .acmd("effect_landingheavy", link_landing)    
+  .acmd("effect_landingheavy", link_landing, Priority::Low)    
   .install();
 }
 

@@ -16,10 +16,10 @@ use super::*;
 
 pub fn install() {
     Agent::new("buddy")
-	.acmd("game_attackairn", banjo_nair)    
-	.acmd("game_attackairhi", banjo_uair)    
-	.acmd("game_attackairb", banjo_bair)    
-	.acmd("game_attackairlw", banjo_dair)    
+	.acmd("game_attackairn", banjo_nair, Priority::Low)    
+	.acmd("game_attackairhi", banjo_uair, Priority::Low)    
+	.acmd("game_attackairb", banjo_bair, Priority::Low)    
+	.acmd("game_attackairlw", banjo_dair, Priority::Low)    
 	.install();
 }
 

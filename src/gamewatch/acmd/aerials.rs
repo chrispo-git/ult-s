@@ -16,13 +16,13 @@ use super::*;
 
 pub fn install() {
 	Agent::new("gamewatch")
-    .acmd("game_attackairlw", gnw_dair)    
-    .acmd("game_landingairlw", gnw_dair_land)    
-    .acmd("game_attackairf", gnw_fair)     
+    .acmd("game_attackairlw", gnw_dair, Priority::Low)    
+    .acmd("game_landingairlw", gnw_dair_land, Priority::Low)    
+    .acmd("game_attackairf", gnw_fair, Priority::Low)     
     .install();
 
 	Agent::new("gamewatch_breath")
-    .acmd("game_attackairhi", gnw_uair_breath)    
+    .acmd("game_attackairhi", gnw_uair_breath, Priority::Low)    
     .install();
 }
 

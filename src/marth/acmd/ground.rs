@@ -16,11 +16,11 @@ use super::*;
 
 pub fn install() {
     Agent::new("marth")
-    .acmd("game_attack11", marth_jab1)    
-	.acmd("effect_attack11", marth_jab1_eff)    
-	.acmd("sound_attack11", marth_jab1_snd)    
-	.acmd("game_attackdash", marth_da)    
-    .acmd("game_attacks4", marth_fsmash)    
+    .acmd("game_attack11", marth_jab1, Priority::Low)    
+	.acmd("effect_attack11", marth_jab1_eff, Priority::Low)    
+	.acmd("sound_attack11", marth_jab1_snd, Priority::Low)    
+	.acmd("game_attackdash", marth_da, Priority::Low)    
+    .acmd("game_attacks4", marth_fsmash, Priority::Low)    
     .install();
 }
 

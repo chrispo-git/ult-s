@@ -16,7 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("robot")
-    .acmd("game_attacklw3", rob_dtilt)    
+    .acmd("game_attacklw3", rob_dtilt, Priority::Low)    
     .install();
 }
 

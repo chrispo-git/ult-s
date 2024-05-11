@@ -17,9 +17,9 @@ use super::super::*;
 
 pub fn install() {
     Agent::new("packun_poisonbreath")
-    .acmd("game_explode", poison_explosion)    
-    .acmd("effect_explode", poison_explosion_eff)    
-    .acmd("sound_explode", poison_explosion_snd)    
+    .acmd("game_explode", poison_explosion, Priority::Low)    
+    .acmd("effect_explode", poison_explosion_eff, Priority::Low)    
+    .acmd("sound_explode", poison_explosion_snd, Priority::Low)    
     .install();
 }
 

@@ -16,17 +16,17 @@ use super::*;
 
 pub fn install() {
     Agent::new("pitb")
-    .acmd("game_specialairsend", dpit_upb)    
-	.acmd("effect_specialairsend", dpit_upb_eff)    
-	.acmd("game_specialsend", dpit_upb_ground)    
-	.acmd("game_specialairhistart", dpit_upb_start)    
-	.acmd("game_specialhistart", dpit_upb_start)    
-	.acmd("game_specialairsstart", dpit_sideb)    
-	.acmd("game_specialsstart", dpit_sideb)    
+    .acmd("game_specialairsend", dpit_upb, Priority::Low)    
+	.acmd("effect_specialairsend", dpit_upb_eff, Priority::Low)    
+	.acmd("game_specialsend", dpit_upb_ground, Priority::Low)    
+	.acmd("game_specialairhistart", dpit_upb_start, Priority::Low)    
+	.acmd("game_specialhistart", dpit_upb_start, Priority::Low)    
+	.acmd("game_specialairsstart", dpit_sideb, Priority::Low)    
+	.acmd("game_specialsstart", dpit_sideb, Priority::Low)    
 	.install();
 
 	Agent::new("pitb_bowarrow")
-    .acmd("game_fly", dpit_arrow)    
+    .acmd("game_fly", dpit_arrow, Priority::Low)    
 	.install();
 }
 

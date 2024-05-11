@@ -16,8 +16,8 @@ use super::*;
 
 pub fn install() {
     Agent::new("simon")
-    .acmd("game_speciallw", simon_downb)    
-    .acmd("game_specialairlw", simon_downb)    
+    .acmd("game_speciallw", simon_downb, Priority::Low)    
+    .acmd("game_specialairlw", simon_downb, Priority::Low)    
     .install();
 }
 

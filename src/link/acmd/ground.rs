@@ -16,9 +16,9 @@ use super::*;
 
 pub fn install() {
 	Agent::new("link")
-    .acmd("game_attack11", link_jab)    
-    .acmd("game_attack12", link_jab2)    
-    .acmd("game_attacklw4", link_dsmash)    
+    .acmd("game_attack11", link_jab, Priority::Low)    
+    .acmd("game_attack12", link_jab2, Priority::Low)    
+    .acmd("game_attacklw4", link_dsmash, Priority::Low)    
     .install();
 }
 

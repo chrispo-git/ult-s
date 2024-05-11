@@ -17,16 +17,16 @@ use super::super::*;
 
 pub fn install() {
     Agent::new("shizue")
-    .acmd("game_attackairb", isa_bair)    
-    .acmd("game_attackairlw", isa_dair)    
-    .acmd("game_landingairlw", isa_dair_land)    
-    .acmd("effect_attackairb", isa_bair_eff)    
-    .acmd("sound_attackairb", isa_bair_snd)    
-    .acmd("game_landingairb", isa_bairland)    
-    .acmd("game_attackairf", isa_fair)    
-    .acmd("sound_attackairf", isa_fair_snd)    
-    .acmd("effect_attackairf", isa_fair_eff)    
-    .acmd("game_landingairf", isa_fairland)    
+    .acmd("game_attackairb", isa_bair, Priority::Low)    
+    .acmd("game_attackairlw", isa_dair, Priority::Low)    
+    .acmd("game_landingairlw", isa_dair_land, Priority::Low)    
+    .acmd("effect_attackairb", isa_bair_eff, Priority::Low)    
+    .acmd("sound_attackairb", isa_bair_snd, Priority::Low)    
+    .acmd("game_landingairb", isa_bairland, Priority::Low)    
+    .acmd("game_attackairf", isa_fair, Priority::Low)    
+    .acmd("sound_attackairf", isa_fair_snd, Priority::Low)    
+    .acmd("effect_attackairf", isa_fair_eff, Priority::Low)    
+    .acmd("game_landingairf", isa_fairland, Priority::Low)    
     .install();
 }
 

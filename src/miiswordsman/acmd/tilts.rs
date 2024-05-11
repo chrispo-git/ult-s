@@ -18,10 +18,10 @@ use super::super::*;
 
 pub fn install() {
     Agent::new("miiswordsman")
-    .acmd("game_attacklw3", sword_dtilt)    
-    .acmd("game_attacks3", sword_ftilt)    
-    .acmd("effect_attacks3", sword_ftilt_eff)    
-    .acmd("sound_attacks3", sword_ftilt_snd)    
+    .acmd("game_attacklw3", sword_dtilt, Priority::Low)    
+    .acmd("game_attacks3", sword_ftilt, Priority::Low)    
+    .acmd("effect_attacks3", sword_ftilt_eff, Priority::Low)    
+    .acmd("sound_attacks3", sword_ftilt_snd, Priority::Low)    
     .install();
 }
 

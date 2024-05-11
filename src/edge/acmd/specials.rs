@@ -16,8 +16,8 @@ use super::*;
 
 pub fn install() {
     Agent::new("edge")
-    .acmd("game_specialairn1", seph_flare)    
-    .acmd("game_specialn1", seph_flare)    
+    .acmd("game_specialairn1", seph_flare, Priority::Low)    
+    .acmd("game_specialn1", seph_flare, Priority::Low)    
     .install();
 }
 

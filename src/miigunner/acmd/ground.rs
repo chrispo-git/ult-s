@@ -17,10 +17,10 @@ use super::*;
 
 pub fn install() {
     Agent::new("miigunner")
-    .acmd("game_attacks4", gunner_fsmash)    
-    .acmd("game_attackhi4", gunner_usmash)    
-    .acmd("game_attacklw4", gunner_dsmash)    
-    .acmd("sound_attacklw4", gunner_dsmash_sound)      
+    .acmd("game_attacks4", gunner_fsmash, Priority::Low)    
+    .acmd("game_attackhi4", gunner_usmash, Priority::Low)    
+    .acmd("game_attacklw4", gunner_dsmash, Priority::Low)    
+    .acmd("sound_attacklw4", gunner_dsmash_sound, Priority::Low)      
     .install();
 }
 

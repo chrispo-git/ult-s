@@ -16,7 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("gaogaen")
-    .acmd("game_attacklw3", incin_dtilt)    
+    .acmd("game_attacklw3", incin_dtilt, Priority::Low)    
     .install();
 }
 

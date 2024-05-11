@@ -17,10 +17,10 @@ use super::super::*;
 
 pub fn install() {
     Agent::new("miiswordsman")
-    .acmd("game_attackairf", sword_fair)    
-    .acmd("game_attackairn", sword_nair)    
-    .acmd("game_attackairb", sword_bair)    
-    .acmd("game_attackairhi", sword_uair)    
+    .acmd("game_attackairf", sword_fair, Priority::Low)    
+    .acmd("game_attackairn", sword_nair, Priority::Low)    
+    .acmd("game_attackairb", sword_bair, Priority::Low)    
+    .acmd("game_attackairhi", sword_uair, Priority::Low)    
     .install();
 }
 
