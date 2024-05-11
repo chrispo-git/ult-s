@@ -16,8 +16,8 @@ use super::*;
 
 pub fn install() {
     Agent::new("ridley")
-    .acmd("game_specialairsfalljump", ridley_sideb_end)    
-    .acmd("effect_specialairsfall", ridley_sideb_fall_eff)    
+    .acmd("game_specialairsfalljump", ridley_sideb_end, Priority::Low)    
+    .acmd("effect_specialairsfall", ridley_sideb_fall_eff, Priority::Low)    
     .install();
 }
 

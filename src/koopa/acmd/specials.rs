@@ -16,7 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("koopa_breath")
-    .acmd("game_move", bowser_fireball)    
+    .acmd("game_move", bowser_fireball, Priority::Low)    
     .install();
 }
 

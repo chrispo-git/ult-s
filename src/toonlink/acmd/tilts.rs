@@ -16,9 +16,9 @@ use super::*;
 
 pub fn install() {
     Agent::new("toonlink")
-    .acmd("game_attacklw3", tink_dtilt)    
-    .acmd("game_attacks3", tink_ftilt)    
-    .acmd("game_attackhi3", tink_utilt)    
+    .acmd("game_attacklw3", tink_dtilt, Priority::Low)    
+    .acmd("game_attacks3", tink_ftilt, Priority::Low)    
+    .acmd("game_attackhi3", tink_utilt, Priority::Low)    
     .install();
 }
 

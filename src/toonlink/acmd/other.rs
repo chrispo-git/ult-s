@@ -16,14 +16,14 @@ use super::*;
 
 pub fn install() {
     Agent::new("toonlink")
-    .acmd("game_dash", tink_dash)    
-    .acmd("game_turndash", tink_dashback)    
-    .acmd("game_nstart", tink_hammer)    
-    .acmd("game_n", tink_hammer)    
-    .acmd("game_nend", tink_hammer)    
-    .acmd("game_nairstart", tink_hammer)    
-    .acmd("game_nair", tink_hammer)    
-    .acmd("game_nairend", tink_hammer)    
+    .acmd("game_dash", tink_dash, Priority::Low)    
+    .acmd("game_turndash", tink_dashback, Priority::Low)    
+    .acmd("game_nstart", tink_hammer, Priority::Low)    
+    .acmd("game_n", tink_hammer, Priority::Low)    
+    .acmd("game_nend", tink_hammer, Priority::Low)    
+    .acmd("game_nairstart", tink_hammer, Priority::Low)    
+    .acmd("game_nair", tink_hammer, Priority::Low)    
+    .acmd("game_nairend", tink_hammer, Priority::Low)    
     .install();
 }
 

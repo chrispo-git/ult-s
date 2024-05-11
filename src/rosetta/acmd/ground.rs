@@ -17,7 +17,7 @@ use super::super::*;
 
 pub fn install() {
     Agent::new("rosetta")
-    .acmd("game_attack11", rosa_jab)    
+    .acmd("game_attack11", rosa_jab, Priority::Low)    
     .install();
 }
 

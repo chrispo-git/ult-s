@@ -16,9 +16,9 @@ use super::*;
 
 pub fn install() {
     Agent::new("wolf")
-    .acmd("game_attackairb", wolf_bair)    
-    .acmd("game_attackairf", wolf_fair)    
-    .acmd("game_attackairn", wolf_nair)    
+    .acmd("game_attackairb", wolf_bair, Priority::Low)    
+    .acmd("game_attackairf", wolf_fair, Priority::Low)    
+    .acmd("game_attackairn", wolf_nair, Priority::Low)    
     .install();
 }
 

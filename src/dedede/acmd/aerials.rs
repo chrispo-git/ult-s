@@ -16,10 +16,10 @@ use super::*;
 
 pub fn install() {
     Agent::new("dedede")
-    .acmd("game_attackairf", d3_fair)    
-    .acmd("game_attackairb", d3_bair)    
-    .acmd("effect_attackairb", d3_bair_eff)    
-    .acmd("expression_landingairb", d3_bair_expr)    
+    .acmd("game_attackairf", d3_fair, Priority::Low)    
+    .acmd("game_attackairb", d3_bair, Priority::Low)    
+    .acmd("effect_attackairb", d3_bair_eff, Priority::Low)    
+    .acmd("expression_landingairb", d3_bair_expr, Priority::Low)    
     .install();
 }
 

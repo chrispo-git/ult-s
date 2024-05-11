@@ -16,9 +16,9 @@ use super::*;
 
 pub fn install() {
     Agent::new("pit")
-    .acmd("game_attackairf", pit_fair)    
-    .acmd("game_attackairhi", pit_uair)    
-    .acmd("game_attackairlw", pit_dair)    
+    .acmd("game_attackairf", pit_fair, Priority::Low)    
+    .acmd("game_attackairhi", pit_uair, Priority::Low)    
+    .acmd("game_attackairlw", pit_dair, Priority::Low)    
     .install();
 }
 

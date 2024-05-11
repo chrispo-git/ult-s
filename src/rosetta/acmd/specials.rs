@@ -17,17 +17,17 @@ use super::super::*;
 
 pub fn install() {
     Agent::new("rosetta")
-    .acmd("game_specialhistart", rosa_upb_start)    
-    .acmd("game_specialairhistart", rosa_upb_start)    
-    .acmd("game_specialhi", rosa_upb)    
-    .acmd("game_specialairhi", rosa_upb)    
-    .acmd("game_explode", rosa_boom)    
+    .acmd("game_specialhistart", rosa_upb_start, Priority::Low)    
+    .acmd("game_specialairhistart", rosa_upb_start, Priority::Low)    
+    .acmd("game_specialhi", rosa_upb, Priority::Low)    
+    .acmd("game_specialairhi", rosa_upb, Priority::Low)    
+    .acmd("game_explode", rosa_boom, Priority::Low)    
     .install();
 
 	Agent::new("rosetta_tico")
-    .acmd("game_explode", luma_boom)    
-    .acmd("effect_explode", luma_boom_eff)    
-    .acmd("sound_explode", luma_boom_snd)    
+    .acmd("game_explode", luma_boom, Priority::Low)    
+    .acmd("effect_explode", luma_boom_eff, Priority::Low)    
+    .acmd("sound_explode", luma_boom_snd, Priority::Low)    
     .install();
 }
 

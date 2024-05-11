@@ -16,9 +16,9 @@ use super::*;
 
 pub fn install() {
     Agent::new("metaknight")
-    .acmd("game_attacks3", mk_ftilt1)    
-    .acmd("game_attacks3s2", mk_ftilt2)    
-    .acmd("game_attacks3s3", mk_ftilt3)    
+    .acmd("game_attacks3", mk_ftilt1, Priority::Low)    
+    .acmd("game_attacks3s2", mk_ftilt2, Priority::Low)    
+    .acmd("game_attacks3s3", mk_ftilt3, Priority::Low)    
     .install();
 }
 

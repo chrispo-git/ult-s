@@ -17,16 +17,16 @@ use super::super::*;
 
 pub fn install() {
     Agent::new("szerosuit")
-    .acmd("game_attack11", zss_jab1)    
-    .acmd("effect_attack11", zss_jab_eff)    
-    .acmd("game_attackhi4", zss_usmash)    
-    .acmd("effect_attackhi4", zss_usmash_eff)    
-    .acmd("sound_attackhi4", zss_usmash_snd)    
-    .acmd("game_attacks4s", zss_fsmash_s)    
-    .acmd("game_attackdash", zss_da)    
-    .acmd("effect_attackdash", zss_da_eff)    
-    .acmd("sound_attackdash", zss_da_snd)    
-    .acmd("game_attacklw4", zss_dsmash)    
+    .acmd("game_attack11", zss_jab1, Priority::Low)    
+    .acmd("effect_attack11", zss_jab_eff, Priority::Low)    
+    .acmd("game_attackhi4", zss_usmash, Priority::Low)    
+    .acmd("effect_attackhi4", zss_usmash_eff, Priority::Low)    
+    .acmd("sound_attackhi4", zss_usmash_snd, Priority::Low)    
+    .acmd("game_attacks4s", zss_fsmash_s, Priority::Low)    
+    .acmd("game_attackdash", zss_da, Priority::Low)    
+    .acmd("effect_attackdash", zss_da_eff, Priority::Low)    
+    .acmd("sound_attackdash", zss_da_snd, Priority::Low)    
+    .acmd("game_attacklw4", zss_dsmash, Priority::Low)    
     .install();
 }
 

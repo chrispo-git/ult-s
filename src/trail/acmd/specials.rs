@@ -16,25 +16,25 @@ use super::*;
 
 pub fn install() {
     Agent::new("trail")
-    .acmd("game_speciallw", sora_downb)    
-    .acmd("game_specialairlw", sora_downb)    
-	.acmd("effect_speciallw", sora_downb_eff)    
-    .acmd("effect_specialairlw", sora_downb_eff)    
-	.acmd("sound_speciallw", sora_downb_snd)    
-    .acmd("sound_specialairlw", sora_downb_snd)    
-	.acmd("sound_speciallwstart", sora_downb_start_snd)    
-    .acmd("sound_specialairlwstart", sora_downb_start_snd)    
-	.acmd("game_speciallwstart", sora_downb_start)    
-    .acmd("game_specialairlwstart", sora_downb_start)    
-	.acmd("effect_speciallwstart", sora_downb_start_eff)    
-    .acmd("effect_specialairlwstart", sora_downb_start_eff)    
+    .acmd("game_speciallw", sora_downb, Priority::Low)    
+    .acmd("game_specialairlw", sora_downb, Priority::Low)    
+	.acmd("effect_speciallw", sora_downb_eff, Priority::Low)    
+    .acmd("effect_specialairlw", sora_downb_eff, Priority::Low)    
+	.acmd("sound_speciallw", sora_downb_snd, Priority::Low)    
+    .acmd("sound_specialairlw", sora_downb_snd, Priority::Low)    
+	.acmd("sound_speciallwstart", sora_downb_start_snd, Priority::Low)    
+    .acmd("sound_specialairlwstart", sora_downb_start_snd, Priority::Low)    
+	.acmd("game_speciallwstart", sora_downb_start, Priority::Low)    
+    .acmd("game_specialairlwstart", sora_downb_start, Priority::Low)    
+	.acmd("effect_speciallwstart", sora_downb_start_eff, Priority::Low)    
+    .acmd("effect_specialairlwstart", sora_downb_start_eff, Priority::Low)    
 	.install();
 
     Agent::new("trail_thunder")
-    .acmd("game_fall", thundaga_1)    
-	.acmd("game_fallair", thundaga_2)    
-	.acmd("game_falllast", thundaga_3)    
-	.acmd("0x10983531cc", thundaga_4)    
+    .acmd("game_fall", thundaga_1, Priority::Low)    
+	.acmd("game_fallair", thundaga_2, Priority::Low)    
+	.acmd("game_falllast", thundaga_3, Priority::Low)    
+	.acmd("0x10983531cc", thundaga_4, Priority::Low)    
 	.install();
 }
 

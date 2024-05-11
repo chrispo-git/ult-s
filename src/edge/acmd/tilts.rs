@@ -16,7 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("edge")
-    .acmd("game_attacklw3", seph_dtilt)    
+    .acmd("game_attacklw3", seph_dtilt, Priority::Low)    
     .install();
 }
 

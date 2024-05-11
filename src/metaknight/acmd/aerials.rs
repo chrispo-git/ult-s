@@ -16,16 +16,16 @@ use super::*;
 
 pub fn install() {
     Agent::new("metaknight")
-    .acmd("game_attackairlw", mk_dair)    
-    .acmd("effect_attackairlw", mk_dair_eff)    
-    .acmd("sound_attackairlw", mk_dair_snd)    
-    .acmd("sound_landingairlw", mk_dair_land_snd)    
-    .acmd("effect_landingairlw", mk_dair_land_eff)    
-    .acmd("game_attackairf", mk_fair)    
-    .acmd("effect_attackairf", mk_fair_eff)    
-    .acmd("sound_attackairf", mk_fair_snd)    
-    .acmd("game_attackairb", mk_bair)    
-    .acmd("game_attackairhi", mk_uair)    
+    .acmd("game_attackairlw", mk_dair, Priority::Low)    
+    .acmd("effect_attackairlw", mk_dair_eff, Priority::Low)    
+    .acmd("sound_attackairlw", mk_dair_snd, Priority::Low)    
+    .acmd("sound_landingairlw", mk_dair_land_snd, Priority::Low)    
+    .acmd("effect_landingairlw", mk_dair_land_eff, Priority::Low)    
+    .acmd("game_attackairf", mk_fair, Priority::Low)    
+    .acmd("effect_attackairf", mk_fair_eff, Priority::Low)    
+    .acmd("sound_attackairf", mk_fair_snd, Priority::Low)    
+    .acmd("game_attackairb", mk_bair, Priority::Low)    
+    .acmd("game_attackairhi", mk_uair, Priority::Low)    
     .install();
 }
 

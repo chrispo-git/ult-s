@@ -17,13 +17,13 @@ use crate::ike::*;
 
 pub fn install() {
     Agent::new("ike")
-    .acmd("game_specialnend", ike_neutralb)    
-    .acmd("game_specialairnend", ike_neutralb)    
-    .acmd("game_specialhi4", ike_upb4)    
-    .acmd("effect_specialhi4", ike_upb4_eff)    
-    .acmd("sound_specialhi4", ike_upb4_snd)    
-    .acmd("effect_specialsattack", ike_sideb_eff)    
-    .acmd("effect_specialairsattack", ike_sideb_eff)    
+    .acmd("game_specialnend", ike_neutralb, Priority::Low)    
+    .acmd("game_specialairnend", ike_neutralb, Priority::Low)    
+    .acmd("game_specialhi4", ike_upb4, Priority::Low)    
+    .acmd("effect_specialhi4", ike_upb4_eff, Priority::Low)    
+    .acmd("sound_specialhi4", ike_upb4_snd, Priority::Low)    
+    .acmd("effect_specialsattack", ike_sideb_eff, Priority::Low)    
+    .acmd("effect_specialairsattack", ike_sideb_eff, Priority::Low)    
     .install();
 }
 

@@ -16,14 +16,14 @@ use super::*;
 
 pub fn install() {
     Agent::new("littlemac")
-    .acmd("game_attack11", mac_jab1)    
-    .acmd("sound_attack11", mac_jab1_snd)    
-    .acmd("effect_attack11", mac_jab1_eff)    
-    .acmd("game_attackhi4", mac_usmash)    
-    .acmd("game_attacks4", mac_fsmash)    
-    .acmd("game_attacks4hi", mac_fsmashhi)    
-    .acmd("game_attacks4lw", mac_fsmashlw)    
-    .acmd("game_attacklw4", mac_dsmash)    
+    .acmd("game_attack11", mac_jab1, Priority::Low)    
+    .acmd("sound_attack11", mac_jab1_snd, Priority::Low)    
+    .acmd("effect_attack11", mac_jab1_eff, Priority::Low)    
+    .acmd("game_attackhi4", mac_usmash, Priority::Low)    
+    .acmd("game_attacks4", mac_fsmash, Priority::Low)    
+    .acmd("game_attacks4hi", mac_fsmashhi, Priority::Low)    
+    .acmd("game_attacks4lw", mac_fsmashlw, Priority::Low)    
+    .acmd("game_attacklw4", mac_dsmash, Priority::Low)    
     .install();
 }
 

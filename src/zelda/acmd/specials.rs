@@ -16,7 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("zelda_dein_s")
-    .acmd("game_move", zelda_dins_fire)    
+    .acmd("game_move", zelda_dins_fire, Priority::Low)    
     .install();
 }
 

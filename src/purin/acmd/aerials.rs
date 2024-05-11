@@ -16,10 +16,10 @@ use super::*;
 
 pub fn install() {
     Agent::new("purin")
-    .acmd("game_attackairhi", puff_uair)    
-    .acmd("game_attackairf", puff_fair)    
-    .acmd("game_attackairlw", puff_dair)    
-    .acmd("game_attackairn", puff_nair)    
+    .acmd("game_attackairhi", puff_uair, Priority::Low)    
+    .acmd("game_attackairf", puff_fair, Priority::Low)    
+    .acmd("game_attackairlw", puff_dair, Priority::Low)    
+    .acmd("game_attackairn", puff_nair, Priority::Low)    
     .install();
 }
 

@@ -16,10 +16,10 @@ use super::*;
 
 pub fn install() {
     Agent::new("lucario")
-    .acmd("game_attackairlw", lucario_dair)    
-	.acmd("game_attackairf", lucario_fair)    
-	.acmd("game_attackairn", lucario_nair)    
-	.acmd("game_attackairhi", lucario_uair)    
+    .acmd("game_attackairlw", lucario_dair, Priority::Low)    
+	.acmd("game_attackairf", lucario_fair, Priority::Low)    
+	.acmd("game_attackairn", lucario_nair, Priority::Low)    
+	.acmd("game_attackairhi", lucario_uair, Priority::Low)    
     .install();
 }
 

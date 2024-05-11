@@ -16,19 +16,19 @@ use super::*;
 
 pub fn install() {
     Agent::new("richter")
-    .acmd("game_specialn", richter_neutralb)    
-    .acmd("game_specialairn", richter_neutralb)    
-    .acmd("game_specials1", richter_sideb)    
-    .acmd("game_specialairs1", richter_sideb)    
-    .acmd("effect_specials1", richter_sideb_eff)    
-    .acmd("effect_specialairs1", richter_sideb_eff)    
-    .acmd("sound_specials1", richter_sideb_snd)    
-    .acmd("sound_specialairs1", richter_sideb_snd)    
+    .acmd("game_specialn", richter_neutralb, Priority::Low)    
+    .acmd("game_specialairn", richter_neutralb, Priority::Low)    
+    .acmd("game_specials1", richter_sideb, Priority::Low)    
+    .acmd("game_specialairs1", richter_sideb, Priority::Low)    
+    .acmd("effect_specials1", richter_sideb_eff, Priority::Low)    
+    .acmd("effect_specialairs1", richter_sideb_eff, Priority::Low)    
+    .acmd("sound_specials1", richter_sideb_snd, Priority::Low)    
+    .acmd("sound_specialairs1", richter_sideb_snd, Priority::Low)    
     .install();
 
     Agent::new("richter_axe")
-    .acmd("game_fly", richter_axe)    
-    .acmd("effect_fly", richter_axe_eff)    
+    .acmd("game_fly", richter_axe, Priority::Low)    
+    .acmd("effect_fly", richter_axe_eff, Priority::Low)    
     .install();
 }
 

@@ -16,7 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("bayonetta")
-    .acmd("game_attack11", bayo_jab1)
+    .acmd("game_attack11", bayo_jab1, Priority::Low)
 	.install();
 }
 

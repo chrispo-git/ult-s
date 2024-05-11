@@ -16,8 +16,8 @@ use super::*;
 
 pub fn install() {
     Agent::new("trail")
-    .acmd("game_attack11", sora_jab1)    
-    .acmd("game_attack12", sora_jab2)    
+    .acmd("game_attack11", sora_jab1, Priority::Low)    
+    .acmd("game_attack12", sora_jab2, Priority::Low)    
 	.install();
 }
 

@@ -17,9 +17,9 @@ use crate::ike::*;
 
 pub fn install() {
     Agent::new("ike")
-    .acmd("game_throwlw", ike_dthrow)    
-    .acmd("game_throwhi", ike_uthrow)    
-    .acmd("game_throwb", ike_bthrow)    
+    .acmd("game_throwlw", ike_dthrow, Priority::Low)    
+    .acmd("game_throwhi", ike_uthrow, Priority::Low)    
+    .acmd("game_throwb", ike_bthrow, Priority::Low)    
     .install();
 }
 

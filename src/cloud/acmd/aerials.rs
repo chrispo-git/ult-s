@@ -16,8 +16,8 @@ use super::*;
 
 pub fn install() {
     Agent::new("cloud")
-    .acmd("game_attackairhi", cloud_uair)    
-    .acmd("game_attackairlw", cloud_dair)    
+    .acmd("game_attackairhi", cloud_uair, Priority::Low)    
+    .acmd("game_attackairlw", cloud_dair, Priority::Low)    
     .install();
 }
 

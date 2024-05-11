@@ -16,11 +16,11 @@ use super::*;
 
 pub fn install() {
     Agent::new("duckhunt")
-    .acmd("game_attacks3", dh_ftilts)    
-    .acmd("game_attacks3hi", dh_ftilthi)    
-    .acmd("game_attacks3lw", dh_ftiltlw)    
-    .acmd("game_attackhi3", dh_utilt)    
-    .acmd("game_attacklw3", dh_dtilt)    
+    .acmd("game_attacks3", dh_ftilts, Priority::Low)    
+    .acmd("game_attacks3hi", dh_ftilthi, Priority::Low)    
+    .acmd("game_attacks3lw", dh_ftiltlw, Priority::Low)    
+    .acmd("game_attackhi3", dh_utilt, Priority::Low)    
+    .acmd("game_attacklw3", dh_dtilt, Priority::Low)    
     .install();
 }
 

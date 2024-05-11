@@ -17,20 +17,20 @@ use super::super::*;
 
 pub fn install() {
     Agent::new("szerosuit")
-    .acmd("game_attackairn", zss_nair)    
-    .acmd("game_attackairhi", zss_uair)    
-    .acmd("game_attackairf", zss_fair)    
-    .acmd("game_aircatchlanding", zss_zair_land)    
-    .acmd("game_attackairlw", zss_dair)    
-    .acmd("effect_attackairlw", zss_dair_eff)    
-    .acmd("game_landingairlw", zss_dair_land)    
-    .acmd("sound_attackairlw", zss_dair_snd)    
-    .acmd("effect_attackairn", zss_effect_attackairn)    
+    .acmd("game_attackairn", zss_nair, Priority::Low)    
+    .acmd("game_attackairhi", zss_uair, Priority::Low)    
+    .acmd("game_attackairf", zss_fair, Priority::Low)    
+    .acmd("game_aircatchlanding", zss_zair_land, Priority::Low)    
+    .acmd("game_attackairlw", zss_dair, Priority::Low)    
+    .acmd("effect_attackairlw", zss_dair_eff, Priority::Low)    
+    .acmd("game_landingairlw", zss_dair_land, Priority::Low)    
+    .acmd("sound_attackairlw", zss_dair_snd, Priority::Low)    
+    .acmd("effect_attackairn", zss_effect_attackairn, Priority::Low)    
     .install();
 
 	Agent::new("szerosuit_whip")
-    .acmd("game_attackairn", zss_whipn)    
-    .acmd("effect_attackairn", zss_effect_attackairn2)    
+    .acmd("game_attackairn", zss_whipn, Priority::Low)    
+    .acmd("effect_attackairn", zss_effect_attackairn2, Priority::Low)    
     .install();
 }
 

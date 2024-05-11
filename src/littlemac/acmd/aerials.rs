@@ -16,17 +16,17 @@ use super::*;
 
 pub fn install() {
     Agent::new("littlemac")
-    .acmd("game_attackairf", mac_fair)    
-    .acmd("effect_attackairf", mac_fair_eff)    
-    .acmd("sound_attackairf", mac_fair_snd)    
-    .acmd("game_attackairn", mac_nair)    
-    .acmd("game_attackairb", mac_bair)    
-    .acmd("effect_attackairb", mac_bair_eff)    
-    .acmd("sound_attackairb", mac_bair_snd)    
-    .acmd("game_attackairhi", mac_uair)    
-    .acmd("game_attackairlw", mac_dair)    
-    .acmd("effect_attackairlw", mac_dair_eff)    
-    .acmd("sound_attackairlw", mac_dair_snd)    
+    .acmd("game_attackairf", mac_fair, Priority::Low)    
+    .acmd("effect_attackairf", mac_fair_eff, Priority::Low)    
+    .acmd("sound_attackairf", mac_fair_snd, Priority::Low)    
+    .acmd("game_attackairn", mac_nair, Priority::Low)    
+    .acmd("game_attackairb", mac_bair, Priority::Low)    
+    .acmd("effect_attackairb", mac_bair_eff, Priority::Low)    
+    .acmd("sound_attackairb", mac_bair_snd, Priority::Low)    
+    .acmd("game_attackairhi", mac_uair, Priority::Low)    
+    .acmd("game_attackairlw", mac_dair, Priority::Low)    
+    .acmd("effect_attackairlw", mac_dair_eff, Priority::Low)    
+    .acmd("sound_attackairlw", mac_dair_snd, Priority::Low)    
     .install();
 }	
 

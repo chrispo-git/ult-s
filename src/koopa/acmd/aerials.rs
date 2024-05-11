@@ -16,15 +16,15 @@ use super::*;
 
 pub fn install() {
     Agent::new("koopa")
-    .acmd("game_attackairn", bowser_nair)    
-    .acmd("effect_attackairn", bowser_nair_eff)    
-    .acmd("sound_attackairn", bowser_nair_snd)    
-    .acmd("game_attackairlw", bowser_dair)    
-    .acmd("effect_attackairlw", bowser_eff_dair)    
-    .acmd("effect_landingairlw", bowser_eff_land_dair)    
-    .acmd("game_landingairlw", bowser_land_dair)    
-    .acmd("sound_landingairlw", bowser_snd_land_dair)    
-    .acmd("sound_attackairlw", bowser_snd_dair)    
+    .acmd("game_attackairn", bowser_nair, Priority::Low)    
+    .acmd("effect_attackairn", bowser_nair_eff, Priority::Low)    
+    .acmd("sound_attackairn", bowser_nair_snd, Priority::Low)    
+    .acmd("game_attackairlw", bowser_dair, Priority::Low)    
+    .acmd("effect_attackairlw", bowser_eff_dair, Priority::Low)    
+    .acmd("effect_landingairlw", bowser_eff_land_dair, Priority::Low)    
+    .acmd("game_landingairlw", bowser_land_dair, Priority::Low)    
+    .acmd("sound_landingairlw", bowser_snd_land_dair, Priority::Low)    
+    .acmd("sound_attackairlw", bowser_snd_dair, Priority::Low)    
     .install();
 }
 

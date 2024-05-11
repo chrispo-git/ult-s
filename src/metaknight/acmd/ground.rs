@@ -16,7 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("metaknight")
-    .acmd("game_attackhi4", mk_usmash)    
+    .acmd("game_attackhi4", mk_usmash, Priority::Low)    
     .install();
 }
 

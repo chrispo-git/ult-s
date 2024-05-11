@@ -16,10 +16,10 @@ use super::*;
 
 pub fn install() {
     Agent::new("inkling")
-    .acmd("game_attacklw3", ink_dtilt)    
-    .acmd("game_attackhi3", ink_utilt)    
-    .acmd("effect_attackhi3", ink_utilt_eff)    
-    .acmd("sound_attackhi3", ink_utilt_sound)    
+    .acmd("game_attacklw3", ink_dtilt, Priority::Low)    
+    .acmd("game_attackhi3", ink_utilt, Priority::Low)    
+    .acmd("effect_attackhi3", ink_utilt_eff, Priority::Low)    
+    .acmd("sound_attackhi3", ink_utilt_sound, Priority::Low)    
     .install();
 }
 

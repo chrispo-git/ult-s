@@ -16,13 +16,13 @@ use super::*;
 
 pub fn install() {
     Agent::new("miifighter")
-    .acmd("game_attackairlw", brawler_dair)    
-    .acmd("effect_attackairlw", brawler_dair_eff)    
-    .acmd("sound_attackairlw", brawler_dair_snd)    
-    .acmd("game_attackairlwbounce", brawler_dair_bounce)    
-    .acmd("game_attackairf", brawler_fair)    
-    .acmd("game_attackairhi", brawler_uair)    
-    .acmd("game_attackairb", brawler_bair)    
+    .acmd("game_attackairlw", brawler_dair, Priority::Low)    
+    .acmd("effect_attackairlw", brawler_dair_eff, Priority::Low)    
+    .acmd("sound_attackairlw", brawler_dair_snd, Priority::Low)    
+    .acmd("game_attackairlwbounce", brawler_dair_bounce, Priority::Low)    
+    .acmd("game_attackairf", brawler_fair, Priority::Low)    
+    .acmd("game_attackairhi", brawler_uair, Priority::Low)    
+    .acmd("game_attackairb", brawler_bair, Priority::Low)    
     .install();
 }
 

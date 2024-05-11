@@ -16,7 +16,7 @@ use super::*;
 
 pub fn install() {
   Agent::new("pacman")
-  .acmd("expression_fallspecial", pac_freefall)   
+  .acmd("expression_fallspecial", pac_freefall, Priority::Low)   
   .install();
 }
 
