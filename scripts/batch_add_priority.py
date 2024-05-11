@@ -14,7 +14,7 @@ for i in all_files:
     file = f.readlines()
     f.close()
     for r in range(0, len(file)):
-        if ".acmd" not in file[r]:
+        if (".acmd" not in file[r] and "_acmd(" not in file[r]) or "Priority::" in file[r]:
             continue
         new = file[r]
         new = new.replace(")",", Priority::Low)")
