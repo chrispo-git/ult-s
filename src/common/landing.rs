@@ -34,6 +34,7 @@ unsafe extern "C" fn llpc(fighter : &mut L2CFighterCommon) {
                 };
             }
 		};
+	}
 }	
 unsafe extern "C" fn shielddrop(fighter : &mut L2CFighterCommon) {
     unsafe {
