@@ -16,15 +16,15 @@ use super::*;
 
 pub fn install() {
     Agent::new("miigunner")
-    .acmd("game_attackairn", gunner_nair)    
-    .acmd("game_attackairf", gunner_fair)    
-    .acmd("game_attackairb", gunner_bair)    
-    .acmd("game_attackairhi", gunner_uair)    
-    .acmd("game_attackairlw", gunner_dair)    
+    .acmd("game_attackairn", gunner_nair, Priority::Low)    
+    .acmd("game_attackairf", gunner_fair, Priority::Low)    
+    .acmd("game_attackairb", gunner_bair, Priority::Low)    
+    .acmd("game_attackairhi", gunner_uair, Priority::Low)    
+    .acmd("game_attackairlw", gunner_dair, Priority::Low)    
     .install();
 
     Agent::new("miigunner_attackairf_bullet")
-    .acmd("game_fly", gunner_fair_bullet)    
+    .acmd("game_fly", gunner_fair_bullet, Priority::Low)    
     .install();
 }
 

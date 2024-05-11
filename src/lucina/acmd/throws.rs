@@ -17,7 +17,7 @@ use super::super::*;
 
 pub fn install() {
     Agent::new("lucina")
-    .acmd("game_throwhi", lucina_uthrow)    
+    .acmd("game_throwhi", lucina_uthrow, Priority::Low)    
     .install();
 }
 

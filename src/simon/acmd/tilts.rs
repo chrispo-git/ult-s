@@ -16,13 +16,13 @@ use super::*;
 
 pub fn install() {
     Agent::new("simon")
-    .acmd("game_attacklw3", simon_dtilt)    
-    .acmd("effect_attacklw3", simon_dtilt_eff)    
-    .acmd("sound_attacklw3", simon_dtilt_snd)    
+    .acmd("game_attacklw3", simon_dtilt, Priority::Low)    
+    .acmd("effect_attacklw3", simon_dtilt_eff, Priority::Low)    
+    .acmd("sound_attacklw3", simon_dtilt_snd, Priority::Low)    
     .install();
 
     Agent::new("simon_whip")
-    .acmd("game_attacklw3", whip_dtilt)    
+    .acmd("game_attacklw3", whip_dtilt, Priority::Low)    
     .install();
 }
 

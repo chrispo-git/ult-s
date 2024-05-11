@@ -16,7 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("ganon")
-    .acmd("game_specialnturn", ganon_warlock)    
+    .acmd("game_specialnturn", ganon_warlock, Priority::Low)    
     .install();
 }
 

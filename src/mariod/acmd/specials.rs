@@ -16,16 +16,16 @@ use super::*;
 
 pub fn install() {
 	Agent::new("mariod")
-    .acmd("game_specials", doc_sideb)    
-    .acmd("game_specialairs", doc_sideb)    
-    .acmd("game_specialairlw", doc_air_downb)    
-    .acmd("game_specialhi", doc_upb)    
-    .acmd("game_specialairhi", doc_upb)    
-    .acmd("game_specialhi2", doc_upb2)    
-    .acmd("effect_specialhi2", doc_upb2_eff)    
-    .acmd("game_specialhilanding", doc_upb_land)    
-    .acmd("effect_specialhilanding", doc_upb_land_eff)    
-    .acmd("sound_specialhilanding", doc_upb_land_snd)    
+    .acmd("game_specials", doc_sideb, Priority::Low)    
+    .acmd("game_specialairs", doc_sideb, Priority::Low)    
+    .acmd("game_specialairlw", doc_air_downb, Priority::Low)    
+    .acmd("game_specialhi", doc_upb, Priority::Low)    
+    .acmd("game_specialairhi", doc_upb, Priority::Low)    
+    .acmd("game_specialhi2", doc_upb2, Priority::Low)    
+    .acmd("effect_specialhi2", doc_upb2_eff, Priority::Low)    
+    .acmd("game_specialhilanding", doc_upb_land, Priority::Low)    
+    .acmd("effect_specialhilanding", doc_upb_land_eff, Priority::Low)    
+    .acmd("sound_specialhilanding", doc_upb_land_snd, Priority::Low)    
     .install();
 }	
 

@@ -16,8 +16,8 @@ use super::*;
 
 pub fn install() {
     Agent::new("pit")
-    .acmd("game_attacklw3", pit_dtilt)    
-    .acmd("game_attacks3", pit_ftilt)    
+    .acmd("game_attacklw3", pit_dtilt, Priority::Low)    
+    .acmd("game_attacks3", pit_ftilt, Priority::Low)    
     .install();
 }
 

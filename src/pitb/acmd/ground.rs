@@ -16,9 +16,9 @@ use super::*;
 
 pub fn install() {
     Agent::new("pitb")
-    .acmd("game_attack12", dpit_jab2)    
-	.acmd("game_attackdash", dpit_da)    
-	.acmd("game_attacks4", dpit_fsmash)    
+    .acmd("game_attack12", dpit_jab2, Priority::Low)    
+	.acmd("game_attackdash", dpit_da, Priority::Low)    
+	.acmd("game_attacks4", dpit_fsmash, Priority::Low)    
 	.install();
 }
 

@@ -16,13 +16,13 @@ use super::*;
 
 pub fn install() {
     Agent::new("pikachu")
-    .acmd("game_attackairn", pika_nair)    
-    .acmd("game_attackairf", pika_fair)    
-    .acmd("game_attackairb", pika_bair)    
-    .acmd("game_landingairb", pika_bair_land)    
-    .acmd("effect_attackairb", pika_bair_eff)    
-    .acmd("sound_attackairb", pika_bair_snd)    
-    .acmd("game_attackairhi", pika_uair)    
+    .acmd("game_attackairn", pika_nair, Priority::Low)    
+    .acmd("game_attackairf", pika_fair, Priority::Low)    
+    .acmd("game_attackairb", pika_bair, Priority::Low)    
+    .acmd("game_landingairb", pika_bair_land, Priority::Low)    
+    .acmd("effect_attackairb", pika_bair_eff, Priority::Low)    
+    .acmd("sound_attackairb", pika_bair_snd, Priority::Low)    
+    .acmd("game_attackairhi", pika_uair, Priority::Low)    
     .install();
 }
 

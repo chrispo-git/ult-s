@@ -16,12 +16,12 @@ use super::*;
 
 pub fn install() {
     Agent::new("mewtwo")
-    .acmd("game_attackairf", m2_fair)    
-    .acmd("game_attackairb", m2_bair)    
-    .acmd("effect_attackairb", m2_bair_eff)    
-    .acmd("effect_landingairb", m2_bair_land_eff)    
-    .acmd("sound_attackairb", m2_bair_snd)    
-    .acmd("game_attackairhi", m2_uair)    
+    .acmd("game_attackairf", m2_fair, Priority::Low)    
+    .acmd("game_attackairb", m2_bair, Priority::Low)    
+    .acmd("effect_attackairb", m2_bair_eff, Priority::Low)    
+    .acmd("effect_landingairb", m2_bair_land_eff, Priority::Low)    
+    .acmd("sound_attackairb", m2_bair_snd, Priority::Low)    
+    .acmd("game_attackairhi", m2_uair, Priority::Low)    
     .install();
 }
 

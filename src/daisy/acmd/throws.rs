@@ -16,16 +16,16 @@ use super::*;
 
 pub fn install() {
 	Agent::new("daisy")
-    .acmd("game_throwf", daisy_fthrow)    
-    .acmd("effect_throwf", daisy_fthrow_eff)    
-    .acmd("game_throwlw", daisy_dthrow)    
-    .acmd("effect_throwlw", daisy_dthrow_eff)    
-    .acmd("effect_throwhi", daisy_uthrow_eff)    
-    .acmd("effect_throwb", daisy_bthrow_eff)    
-    .acmd("effect_catchattack", daisy_pummel_eff)    
-    .acmd("game_catchpull", daisy_remove_toad)    
-    .acmd("game_catchwait", daisy_remove_toad)    
-    .acmd("effect_catchcut", daisy_catch_release_eff)    
+    .acmd("game_throwf", daisy_fthrow, Priority::Low)    
+    .acmd("effect_throwf", daisy_fthrow_eff, Priority::Low)    
+    .acmd("game_throwlw", daisy_dthrow, Priority::Low)    
+    .acmd("effect_throwlw", daisy_dthrow_eff, Priority::Low)    
+    .acmd("effect_throwhi", daisy_uthrow_eff, Priority::Low)    
+    .acmd("effect_throwb", daisy_bthrow_eff, Priority::Low)    
+    .acmd("effect_catchattack", daisy_pummel_eff, Priority::Low)    
+    .acmd("game_catchpull", daisy_remove_toad, Priority::Low)    
+    .acmd("game_catchwait", daisy_remove_toad, Priority::Low)    
+    .acmd("effect_catchcut", daisy_catch_release_eff, Priority::Low)    
     .install();
 }
 

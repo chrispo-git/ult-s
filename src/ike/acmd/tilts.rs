@@ -17,13 +17,13 @@ use crate::ike::*;
 
 pub fn install() {
     Agent::new("ike")
-    .acmd("game_attacklw3", ike_dtilt)    
-    .acmd("game_attackhi3", ike_utilt)    
-    .acmd("effect_attackhi3", ike_utilt_eff)    
-    .acmd("effect_attacklw3", ike_dtilt_eff)    
-    .acmd("effect_attacks3", ike_ftilt_eff)    
-    .acmd("effect_attacks3hi", ike_ftilt_eff)    
-    .acmd("effect_attacks3lw", ike_ftilt_eff)    
+    .acmd("game_attacklw3", ike_dtilt, Priority::Low)    
+    .acmd("game_attackhi3", ike_utilt, Priority::Low)    
+    .acmd("effect_attackhi3", ike_utilt_eff, Priority::Low)    
+    .acmd("effect_attacklw3", ike_dtilt_eff, Priority::Low)    
+    .acmd("effect_attacks3", ike_ftilt_eff, Priority::Low)    
+    .acmd("effect_attacks3hi", ike_ftilt_eff, Priority::Low)    
+    .acmd("effect_attacks3lw", ike_ftilt_eff, Priority::Low)    
     .install();
 }		
 

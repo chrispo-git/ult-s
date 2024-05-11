@@ -16,17 +16,17 @@ use super::*;
 
 pub fn install() {
     Agent::new("richter")
-    .acmd("game_attackairhi", richter_uair)    
-    .acmd("effect_attackairhi", richter_uair_eff)    
-    .acmd("sound_attackairhi", richter_uair_snd)    
-    .acmd("game_attackairn", richter_nair)    
-    .acmd("game_attackairf", richter_fair)    
-    .acmd("game_attackairfhi", richter_fair_hi)    
-    .acmd("game_attackairflw", richter_fair_lw)    
+    .acmd("game_attackairhi", richter_uair, Priority::Low)    
+    .acmd("effect_attackairhi", richter_uair_eff, Priority::Low)    
+    .acmd("sound_attackairhi", richter_uair_snd, Priority::Low)    
+    .acmd("game_attackairn", richter_nair, Priority::Low)    
+    .acmd("game_attackairf", richter_fair, Priority::Low)    
+    .acmd("game_attackairfhi", richter_fair_hi, Priority::Low)    
+    .acmd("game_attackairflw", richter_fair_lw, Priority::Low)    
     .install();
 
 	Agent::new("richter_whip")
-    .acmd("effect_attackairhi", richter_uair_whip)    
+    .acmd("effect_attackairhi", richter_uair_whip, Priority::Low)    
     .install();
 }
 

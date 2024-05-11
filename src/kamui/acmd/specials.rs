@@ -16,15 +16,15 @@ use super::*;
 
 pub fn install() {
     Agent::new("kamui_ryusensya")
-    .acmd("game_regular", corrin_neutralb)    
-    .acmd("game_shotmax", corrin_neutralb_max)    
+    .acmd("game_regular", corrin_neutralb, Priority::Low)    
+    .acmd("game_shotmax", corrin_neutralb_max, Priority::Low)    
     .install();
 
 	Agent::new("kamui_waterdragon")
-    .acmd("game_speciallwhit", corrin_downb)    
-    .acmd("game_specialairlwhit", corrin_downb)    
-    .acmd("game_speciallwhitturn", corrin_downb)    
-    .acmd("game_specialairlwhitturn", corrin_downb)    
+    .acmd("game_speciallwhit", corrin_downb, Priority::Low)    
+    .acmd("game_specialairlwhit", corrin_downb, Priority::Low)    
+    .acmd("game_speciallwhitturn", corrin_downb, Priority::Low)    
+    .acmd("game_specialairlwhitturn", corrin_downb, Priority::Low)    
     .install();
 }
 

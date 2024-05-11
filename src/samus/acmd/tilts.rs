@@ -16,12 +16,12 @@ use super::*;
 
 pub fn install() {
     Agent::new("samus")
-    .acmd("game_attacklw3", samus_dtilt)    
-    .acmd("effect_attacklw3", samus_dtilt_eff)    
-    .acmd("expression_attacklw3", samus_dtilt_expr)    
-    .acmd("sound_attacklw3", samus_dtilt_snd)    
-    .acmd("game_attackhi3", samus_utilt)    
-    .acmd("effect_attackhi3", samus_utilt_eff)    
+    .acmd("game_attacklw3", samus_dtilt, Priority::Low)    
+    .acmd("effect_attacklw3", samus_dtilt_eff, Priority::Low)    
+    .acmd("expression_attacklw3", samus_dtilt_expr, Priority::Low)    
+    .acmd("sound_attacklw3", samus_dtilt_snd, Priority::Low)    
+    .acmd("game_attackhi3", samus_utilt, Priority::Low)    
+    .acmd("effect_attackhi3", samus_utilt_eff, Priority::Low)    
     .install();
 }
 

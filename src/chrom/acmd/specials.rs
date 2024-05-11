@@ -16,18 +16,18 @@ use super::*;
 
 pub fn install() {
     Agent::new("chrom")
-    .acmd("game_specials1", chrom_sideb)    
-    .acmd("game_specialairs1", chrom_sideb)    
-    .acmd("effect_specials1", chrom_sideb_eff)    
-    .acmd("effect_specialairs1", chrom_sideb_eff)    
-    .acmd("sound_specials1", chrom_sideb_snd)    
-    .acmd("sound_specialairs1", chrom_sideb_snd)    
-    .acmd("game_specials4hi", chrom_sideb_hi)    
-    .acmd("game_specials4lw", chrom_sideb_lw)    
-    .acmd("game_specials4s", chrom_sideb_s)    
-    .acmd("sound_specials4lw", chrom_sideb_s_snd)    
-    .acmd("sound_specials4s", chrom_sideb_s_snd)    
-    .acmd("sound_specials4hi", chrom_sideb_s_snd)    
+    .acmd("game_specials1", chrom_sideb, Priority::Low)    
+    .acmd("game_specialairs1", chrom_sideb, Priority::Low)    
+    .acmd("effect_specials1", chrom_sideb_eff, Priority::Low)    
+    .acmd("effect_specialairs1", chrom_sideb_eff, Priority::Low)    
+    .acmd("sound_specials1", chrom_sideb_snd, Priority::Low)    
+    .acmd("sound_specialairs1", chrom_sideb_snd, Priority::Low)    
+    .acmd("game_specials4hi", chrom_sideb_hi, Priority::Low)    
+    .acmd("game_specials4lw", chrom_sideb_lw, Priority::Low)    
+    .acmd("game_specials4s", chrom_sideb_s, Priority::Low)    
+    .acmd("sound_specials4lw", chrom_sideb_s_snd, Priority::Low)    
+    .acmd("sound_specials4s", chrom_sideb_s_snd, Priority::Low)    
+    .acmd("sound_specials4hi", chrom_sideb_s_snd, Priority::Low)    
     .install();
 }	
 

@@ -16,9 +16,9 @@ use super::*;
 
 pub fn install() {
     Agent::new("chrom")
-    .acmd("game_throwlw", chrom_dthrow)    
-    .acmd("game_throwb", chrom_bthrow)    
-    .acmd("game_throwhi", chrom_uthrow)    
+    .acmd("game_throwlw", chrom_dthrow, Priority::Low)    
+    .acmd("game_throwb", chrom_bthrow, Priority::Low)    
+    .acmd("game_throwhi", chrom_uthrow, Priority::Low)    
     .install();
 }
 

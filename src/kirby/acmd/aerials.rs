@@ -16,15 +16,15 @@ use super::*;
 
 pub fn install() {
     Agent::new("kirby")
-    .acmd("game_attackairf", kirby_fair)    
-    .acmd("game_attackairb", kirby_bair)    
-    .acmd("game_attackairlw", kirby_dair)    
-    .acmd("effect_attackairlw", kirby_dair_eff)    
-    .acmd("sound_attackairlw", kirby_dair_snd)    
-    .acmd("game_landingairlw", kirby_landing_dair)    
-    .acmd("effect_attackairb", kirby_bair_eff)    
-    .acmd("sound_attackairb", kirby_bair_snd)    
-    .acmd("game_landingairb", kirby_landing_bair)    
+    .acmd("game_attackairf", kirby_fair, Priority::Low)    
+    .acmd("game_attackairb", kirby_bair, Priority::Low)    
+    .acmd("game_attackairlw", kirby_dair, Priority::Low)    
+    .acmd("effect_attackairlw", kirby_dair_eff, Priority::Low)    
+    .acmd("sound_attackairlw", kirby_dair_snd, Priority::Low)    
+    .acmd("game_landingairlw", kirby_landing_dair, Priority::Low)    
+    .acmd("effect_attackairb", kirby_bair_eff, Priority::Low)    
+    .acmd("sound_attackairb", kirby_bair_snd, Priority::Low)    
+    .acmd("game_landingairb", kirby_landing_bair, Priority::Low)    
     .install();
 }
 

@@ -16,8 +16,8 @@ use super::*;
 
 pub fn install() {
     Agent::new("roy")
-    .acmd("game_dash", roy_dash)    
-	.acmd("game_turndash", roy_tdash)    
+    .acmd("game_dash", roy_dash, Priority::Low)    
+	.acmd("game_turndash", roy_tdash, Priority::Low)    
 	.install();
 }
 

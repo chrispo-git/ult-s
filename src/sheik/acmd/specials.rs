@@ -16,12 +16,12 @@ use super::*;
 
 pub fn install() {
     Agent::new("sheik")
-    .acmd("game_speciallwattack", sheik_bf)    
-    .acmd("game_speciallwattackreturn", sheik_bfback)    
+    .acmd("game_speciallwattack", sheik_bf, Priority::Low)    
+    .acmd("game_speciallwattackreturn", sheik_bfback, Priority::Low)    
     .install();
 
     Agent::new("sheik_needle")
-    .acmd("game_move", sheik_needles)    
+    .acmd("game_move", sheik_needles, Priority::Low)    
     .install();
 }
 

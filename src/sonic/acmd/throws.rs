@@ -16,8 +16,8 @@ use super::*;
 
 pub fn install() {
     Agent::new("sonic")
-    .acmd("effect_throwf", sonic_fthrow_eff)    
-    .acmd("effect_throwb", sonic_bthrow_eff)    
+    .acmd("effect_throwf", sonic_fthrow_eff, Priority::Low)    
+    .acmd("effect_throwb", sonic_bthrow_eff, Priority::Low)    
     .install();
 }
 

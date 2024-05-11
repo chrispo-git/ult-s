@@ -14,8 +14,8 @@ use smash::phx::Vector3f;
 
 pub fn install() {
     Agent::new("krool")
-    .acmd("game_attack11", krool_jab1)    
-    .acmd("game_attack12", krool_jab2)    
+    .acmd("game_attack11", krool_jab1, Priority::Low)    
+    .acmd("game_attack12", krool_jab2, Priority::Low)    
     .install();
 }
 

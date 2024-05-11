@@ -16,16 +16,16 @@ use super::*;
 
 pub fn install() {
     Agent::new("samus")
-    .acmd("game_specialhi", samus_upb)    
+    .acmd("game_specialhi", samus_upb, Priority::Low)    
     .install();
 
 	Agent::new("samus_missile")
-    .acmd("game_homing", samus_homing)    
+    .acmd("game_homing", samus_homing, Priority::Low)    
     .install();
 
 	Agent::new("samus_supermissile")
-    .acmd("game_ready", samus_super)    
-    .acmd("game_straight", samus_super)    
+    .acmd("game_ready", samus_super, Priority::Low)    
+    .acmd("game_straight", samus_super, Priority::Low)    
     .install();
 }
 

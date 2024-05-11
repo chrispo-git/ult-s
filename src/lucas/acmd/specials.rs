@@ -16,14 +16,14 @@ use super::*;
 
 pub fn install() {
     Agent::new("lucas")
-    .acmd("game_speciallwend", lucas_downb)    
-    .acmd("game_specialairlwend", lucas_downb)    
-    .acmd("game_specialnstart", lucas_pk_freeze)    
-    .acmd("game_specialairnstart", lucas_pk_freeze)    
-    .acmd("effect_specialnstart", lucas_pk_freeze_eff)    
-    .acmd("effect_specialairnstart", lucas_pk_freeze_eff)    
-    .acmd("sound_specialnstart", lucas_pk_freeze_snd)    
-    .acmd("sound_specialairnstart", lucas_pk_freeze_snd)    
+    .acmd("game_speciallwend", lucas_downb, Priority::Low)    
+    .acmd("game_specialairlwend", lucas_downb, Priority::Low)    
+    .acmd("game_specialnstart", lucas_pk_freeze, Priority::Low)    
+    .acmd("game_specialairnstart", lucas_pk_freeze, Priority::Low)    
+    .acmd("effect_specialnstart", lucas_pk_freeze_eff, Priority::Low)    
+    .acmd("effect_specialairnstart", lucas_pk_freeze_eff, Priority::Low)    
+    .acmd("sound_specialnstart", lucas_pk_freeze_snd, Priority::Low)    
+    .acmd("sound_specialairnstart", lucas_pk_freeze_snd, Priority::Low)    
     .install();
 }
 

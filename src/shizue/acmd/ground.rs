@@ -17,8 +17,8 @@ use super::super::*;
 
 pub fn install() {
     Agent::new("shizue")
-    .acmd("game_attack11", isa_jab)    
-    .acmd("game_attackdash", isa_da)    
+    .acmd("game_attack11", isa_jab, Priority::Low)    
+    .acmd("game_attackdash", isa_da, Priority::Low)    
     .install();
 }
 

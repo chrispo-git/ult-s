@@ -2,6 +2,7 @@ import os
 import shutil
 import sys
 from zipfile import ZipFile
+import subprocess
 
 try:
     inputs = ("".join(sys.argv)).lower()
@@ -22,10 +23,7 @@ def copytree(src, dst, symlinks=False, ignore=None):
         else:
             shutil.copy2(s, d)
 
-stream = os.popen('cargo skyline build --release --features="main_nro"')
-output = stream.read()
-output
-os.chdir('../')
+subprocess.run('cargo skyline build --release --features="main_nro"', shell=True)
 print(os.getcwd())
 old = r"target\aarch64-skyline-switch\release\libplugin.nro"
 new = r"releases/ultimate/mods/Ultimate S Arcropolis"

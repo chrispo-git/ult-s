@@ -16,16 +16,16 @@ use super::*;
 
 pub fn install() {
 	Agent::new("link")
-    .acmd("game_attackairb", link_bair)    
-    .acmd("game_attackairf", link_fair)    
-    .acmd("effect_attackairf", link_fair_eff)    
-    .acmd("sound_attackairf", link_fair_snd)    
-    .acmd("expression_attackairf", link_fair_expr)    
-    .acmd("game_attackairhi", link_uair)    
-    .acmd("effect_attackairhi", link_uair_eff)    
-    .acmd("sound_attackairhi", link_uair_snd)    
-    .acmd("expression_attackairhi", link_uair_expr)    
-    .acmd("game_attackairn", link_nair)    
+    .acmd("game_attackairb", link_bair, Priority::Low)    
+    .acmd("game_attackairf", link_fair, Priority::Low)    
+    .acmd("effect_attackairf", link_fair_eff, Priority::Low)    
+    .acmd("sound_attackairf", link_fair_snd, Priority::Low)    
+    .acmd("expression_attackairf", link_fair_expr, Priority::Low)    
+    .acmd("game_attackairhi", link_uair, Priority::Low)    
+    .acmd("effect_attackairhi", link_uair_eff, Priority::Low)    
+    .acmd("sound_attackairhi", link_uair_snd, Priority::Low)    
+    .acmd("expression_attackairhi", link_uair_expr, Priority::Low)    
+    .acmd("game_attackairn", link_nair, Priority::Low)    
     .install();
 }
 

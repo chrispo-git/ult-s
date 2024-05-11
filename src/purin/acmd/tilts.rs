@@ -16,9 +16,9 @@ use super::*;
 
 pub fn install() {
     Agent::new("purin")
-    .acmd("game_attacks3", puff_ftilt)    
-    .acmd("game_attacks3hi", puff_ftilt)    
-    .acmd("game_attacks3lw", puff_ftilt)    
+    .acmd("game_attacks3", puff_ftilt, Priority::Low)    
+    .acmd("game_attacks3hi", puff_ftilt, Priority::Low)    
+    .acmd("game_attacks3lw", puff_ftilt, Priority::Low)    
     .install();
 }
 

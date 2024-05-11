@@ -16,7 +16,7 @@ use super::*;
 
 pub fn install() {
 	Agent::new("elight")
-    .acmd("game_catchdash", mythra_dashgrab)    
+    .acmd("game_catchdash", mythra_dashgrab, Priority::Low)    
     .install();
 }
 

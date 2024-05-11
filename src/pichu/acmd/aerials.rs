@@ -16,8 +16,8 @@ use super::*;
 
 pub fn install() {
     Agent::new("pichu")
-    .acmd("game_attackairlw", pichu_dair)    
-    .acmd("effect_attackairlw", pichu_dair_eff)    
+    .acmd("game_attackairlw", pichu_dair, Priority::Low)    
+    .acmd("effect_attackairlw", pichu_dair_eff, Priority::Low)    
     .install();
 }
 

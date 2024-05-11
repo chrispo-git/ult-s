@@ -16,14 +16,14 @@ use super::*;
 
 pub fn install() {
     Agent::new("pikachu")
-    .acmd("game_speciallwhit", pika_shock)    
-    .acmd("game_specialairlwhit", pika_shock)    
-    .acmd("game_speciallw", pika_thunder)    
-    .acmd("game_specialairlw", pika_thunder)    
+    .acmd("game_speciallwhit", pika_shock, Priority::Low)    
+    .acmd("game_specialairlwhit", pika_shock, Priority::Low)    
+    .acmd("game_speciallw", pika_thunder, Priority::Low)    
+    .acmd("game_specialairlw", pika_thunder, Priority::Low)    
     .install();
 
     Agent::new("pikachu_kaminari")
-    .acmd("game_regular", pika_lightning)    
+    .acmd("game_regular", pika_lightning, Priority::Low)    
     .install();
 }
 

@@ -16,7 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("fox")
-    .acmd("game_attacklw3", fox_dtilt)    
+    .acmd("game_attacklw3", fox_dtilt, Priority::Low)    
     .install();
 }
 

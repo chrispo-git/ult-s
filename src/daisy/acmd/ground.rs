@@ -16,13 +16,13 @@ use super::*;
 
 pub fn install() {
 	Agent::new("daisy")
-    .acmd("effect_attack11", daisy_jab1_eff)    
-    .acmd("game_attack11", daisy_jab1)    
-    .acmd("game_attack12", daisy_jab2)    
-    .acmd("effect_attack12", daisy_jab2_eff)    
-    .acmd("game_attacklw4", daisy_dsmash)    
-    .acmd("game_attackdash", daisy_da)    
-    .acmd("effect_attackdash", daisy_da_eff)    
+    .acmd("effect_attack11", daisy_jab1_eff, Priority::Low)    
+    .acmd("game_attack11", daisy_jab1, Priority::Low)    
+    .acmd("game_attack12", daisy_jab2, Priority::Low)    
+    .acmd("effect_attack12", daisy_jab2_eff, Priority::Low)    
+    .acmd("game_attacklw4", daisy_dsmash, Priority::Low)    
+    .acmd("game_attackdash", daisy_da, Priority::Low)    
+    .acmd("effect_attackdash", daisy_da_eff, Priority::Low)    
     .install();
 }
 

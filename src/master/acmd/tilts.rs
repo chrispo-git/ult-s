@@ -17,9 +17,9 @@ use super::*;
 
 pub fn install() {
     Agent::new("master")
-    .acmd("game_attacks3", byleth_ftilt)    
-    .acmd("game_attacklw3", byleth_dtilt)    
-    .acmd("effect_attacklw3", byleth_dtilt_eff)    
+    .acmd("game_attacks3", byleth_ftilt, Priority::Low)    
+    .acmd("game_attacklw3", byleth_dtilt, Priority::Low)    
+    .acmd("effect_attacklw3", byleth_dtilt_eff, Priority::Low)    
     .install();
 }
 

@@ -16,13 +16,13 @@ use super::*;
 
 pub fn install() {
     Agent::new("lucario")
-    .acmd("game_specialsthrow", lucario_sideb)    
-	.acmd("game_speciallw", lucario_downb)    
-	.acmd("game_specialairlw", lucario_downb)    
-	.acmd("sound_speciallw", lucario_sound_downb)    
-	.acmd("sound_specialairlw", lucario_sound_downb)    
-	.acmd("effect_speciallw", lucario_downb_eff)    
-	.acmd("effect_specialairlw", lucario_downb_eff)    
+    .acmd("game_specialsthrow", lucario_sideb, Priority::Low)    
+	.acmd("game_speciallw", lucario_downb, Priority::Low)    
+	.acmd("game_specialairlw", lucario_downb, Priority::Low)    
+	.acmd("sound_speciallw", lucario_sound_downb, Priority::Low)    
+	.acmd("sound_specialairlw", lucario_sound_downb, Priority::Low)    
+	.acmd("effect_speciallw", lucario_downb_eff, Priority::Low)    
+	.acmd("effect_specialairlw", lucario_downb_eff, Priority::Low)    
 	.install();
 }
 

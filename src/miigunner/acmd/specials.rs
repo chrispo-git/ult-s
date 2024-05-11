@@ -17,32 +17,32 @@ use super::*;
 
 pub fn install() {
     Agent::new("miigunner")
-    .acmd("game_specialairs1", gunner_s1)    
-    .acmd("game_specials1", gunner_s1)    
-    .acmd("game_specials31", gunner_s3)    
-    .acmd("game_specialairs31", gunner_air_s3)    
-    .acmd("game_specials32", gunner_s32)    
-    .acmd("game_specialairs32", gunner_air_s32)    
-    .acmd("game_speciallw1start", gunner_shine)    
-    .acmd("game_specialairlw1start", gunner_shine)    
-    .acmd("game_speciallw3hold", gunner_mag)    
-    .acmd("game_specialairlw3hold", gunner_mag)   
+    .acmd("game_specialairs1", gunner_s1, Priority::Low)    
+    .acmd("game_specials1", gunner_s1, Priority::Low)    
+    .acmd("game_specials31", gunner_s3, Priority::Low)    
+    .acmd("game_specialairs31", gunner_air_s3, Priority::Low)    
+    .acmd("game_specials32", gunner_s32, Priority::Low)    
+    .acmd("game_specialairs32", gunner_air_s32, Priority::Low)    
+    .acmd("game_speciallw1start", gunner_shine, Priority::Low)    
+    .acmd("game_specialairlw1start", gunner_shine, Priority::Low)    
+    .acmd("game_speciallw3hold", gunner_mag, Priority::Low)    
+    .acmd("game_specialairlw3hold", gunner_mag, Priority::Low)   
     .install();
 
     Agent::new("miigunner_gunnercharge")
-    .acmd("game_shoot", gunner_chargeshot)    
+    .acmd("game_shoot", gunner_chargeshot, Priority::Low)    
     .install();
 
     Agent::new("miigunner_grenadelauncher")
-    .acmd("game_explode", gunner_nade_explode)    
+    .acmd("game_explode", gunner_nade_explode, Priority::Low)    
     .install();
 
     Agent::new("miigunner_flamepillar")
-    .acmd("game_pillar", gunner_fp)    
+    .acmd("game_pillar", gunner_fp, Priority::Low)    
     .install();
 
     Agent::new("miigunner_groundbomb")
-    .acmd("game_burstattack", gunner_bomb)    
+    .acmd("game_burstattack", gunner_bomb, Priority::Low)    
     .install();
 }
 

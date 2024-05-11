@@ -17,9 +17,9 @@ use super::super::*;
 
 pub fn install() {
     Agent::new("lucina")
-    .acmd("effect_cliffattack", lucina_cliff_eff)    
-    .acmd("effect_downattackd", lucina_downd_eff)    
-	.acmd("effect_downattacku", lucina_downu_eff)    
+    .acmd("effect_cliffattack", lucina_cliff_eff, Priority::Low)    
+    .acmd("effect_downattackd", lucina_downd_eff, Priority::Low)    
+	.acmd("effect_downattacku", lucina_downu_eff, Priority::Low)    
 	.install();
 }
 

@@ -17,12 +17,12 @@ use super::*;
 
 pub fn install() {
     Agent::new("ken")
-    .acmd("game_specialhiex", ken_ex_shoryu)    
-    .acmd("effect_specialhiex", ken_ex_shoryu_eff)    
-    .acmd("sound_specialhiex", ken_ex_shoryu_snd)    
-    .acmd("game_specialsex", ken_ex_tatsu)    
-    .acmd("effect_specialsex", ken_ex_tatsu_eff)    
-    .acmd("sound_specialsex", ken_ex_tatsu_snd)    
+    .acmd("game_specialhiex", ken_ex_shoryu, Priority::Low)    
+    .acmd("effect_specialhiex", ken_ex_shoryu_eff, Priority::Low)    
+    .acmd("sound_specialhiex", ken_ex_shoryu_snd, Priority::Low)    
+    .acmd("game_specialsex", ken_ex_tatsu, Priority::Low)    
+    .acmd("effect_specialsex", ken_ex_tatsu_eff, Priority::Low)    
+    .acmd("sound_specialsex", ken_ex_tatsu_snd, Priority::Low)    
     .install();
 }	
 

@@ -16,13 +16,13 @@ use super::*;
 
 pub fn install() {
     Agent::new("falco")
-    .acmd("game_speciallw", falco_shine)    
-    .acmd("game_specialairlw", falco_shine)     
-    .acmd("effect_specialairlw", falco_shine_eff)   
+    .acmd("game_speciallw", falco_shine, Priority::Low)    
+    .acmd("game_specialairlw", falco_shine, Priority::Low)     
+    .acmd("effect_specialairlw", falco_shine_eff, Priority::Low)   
     .install();
 
 	Agent::new("falco_blaster_bullet")
-    .acmd("game_fly", falco_laser)    
+    .acmd("game_fly", falco_laser, Priority::Low)    
     .install();
 }	
 

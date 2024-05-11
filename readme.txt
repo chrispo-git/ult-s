@@ -4,11 +4,11 @@ Place at the root of your SD Card
 
 -Dependecies-
 libparam_config.nro - https://github.com/CSharpM7/lib_paramconfig
-libcss_slot_redirection - Included in download (latest version is pinned in the Ultimate S Discord #help channel)
+libcsk_collection.nro - https://gamebanana.com/mods/499008 (just grab the nro file from this)
 libstage_config.nro - https://github.com/ThatNintendoNerd/stage_config
 libarcropolis.nro - https://github.com/Raytwo/ARCropolis
 libnro_hook.nro - https://github.com/ultimate-research/nro-hook-plugin
-libsmashline_hook - https://github.com/blu-dev/smashline_hook
+libsmashline_plugin - https://github.com/HDR-Development/smashline/releases/latest
 skyline - https://github.com/skyline-dev/skyline
 arena latency slider - https://gamebanana.com/mods/496679
 
@@ -27,7 +27,7 @@ Make sure you have the latest version of NRO Hook (https://github.com/ultimate-r
 
 If you have training modpack, make sure its version 5.1 (latest crashes)
 
-Make sure your smash version is the latest (13.0.1)
+Make sure your smash version is the latest (13.0.2)
 
 Any other issues or queries should be directed to the discord server (https://discord.gg/YXaPzC5WGd)
 

@@ -16,12 +16,12 @@ use super::*;
 
 pub fn install() {
     Agent::new("kamui")
-    .acmd("game_attack11", corrin_jab)    
-    .acmd("game_attackdash", corrin_da)    
-    .acmd("effect_attackhi4", corrin_usmash_effect)    
-    .acmd("sound_attackhi4", corrin_usmash_sound)    
-    .acmd("expression_attackhi4", corrin_usmash_expr)    
-    .acmd("game_attackhi4", corrin_usmash)    
+    .acmd("game_attack11", corrin_jab, Priority::Low)    
+    .acmd("game_attackdash", corrin_da, Priority::Low)    
+    .acmd("effect_attackhi4", corrin_usmash_effect, Priority::Low)    
+    .acmd("sound_attackhi4", corrin_usmash_sound, Priority::Low)    
+    .acmd("expression_attackhi4", corrin_usmash_expr, Priority::Low)    
+    .acmd("game_attackhi4", corrin_usmash, Priority::Low)    
     .install();
 }	
 

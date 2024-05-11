@@ -16,9 +16,9 @@ use super::*;
 
 pub fn install() {
     Agent::new("ness")
-    .acmd("game_attacklw3", ness_dtilt)    
-    .acmd("effect_attacklw3", ness_dtilt_eff)    
-    .acmd("sound_attacklw3", ness_dtilt_snd)    
+    .acmd("game_attacklw3", ness_dtilt, Priority::Low)    
+    .acmd("effect_attacklw3", ness_dtilt_eff, Priority::Low)    
+    .acmd("sound_attacklw3", ness_dtilt_snd, Priority::Low)    
     .install();
 }
 

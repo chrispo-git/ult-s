@@ -16,7 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("murabito")
-    .acmd("game_throwf", villy_fthrow)    
+    .acmd("game_throwf", villy_fthrow, Priority::Low)    
     .install();
 }
 
@@ -30,5 +30,9 @@ unsafe extern "C" fn villy_fthrow(fighter: &mut L2CAgentBase) {
 		if macros::is_excute(fighter) {
 			macros::ATK_HIT_ABS(fighter, *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, Hash40::new("throw"), WorkModule::get_int64(fighter.module_accessor,*FIGHTER_STATUS_THROW_WORK_INT_TARGET_OBJECT), WorkModule::get_int64(fighter.module_accessor,*FIGHTER_STATUS_THROW_WORK_INT_TARGET_HIT_GROUP), WorkModule::get_int64(fighter.module_accessor,*FIGHTER_STATUS_THROW_WORK_INT_TARGET_HIT_NO));
 			AttackModule::clear_all(fighter.module_accessor);
+        frame(fighter.lua_state_agent, 45.0);
+        if macros::is_excute(fighter) {
+            ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_MURABITO_GENERATE_ARTICLE_BUTTERFLYNET, ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
+        }
 		}
 }
