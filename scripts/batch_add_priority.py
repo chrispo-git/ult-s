@@ -17,7 +17,7 @@ for i in all_files:
         if ".acmd" not in file[r]:
             continue
         new = file[r]
-        new = new.replace(")","Priority::Low)")
+        new = new.replace(")",", Priority::Low)")
         file[r] = new
     
     f = open(i, "w")
