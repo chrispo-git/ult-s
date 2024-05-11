@@ -16,7 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("eflame")
-    .acmd("game_attackairn", pyra_nair)    
+    .acmd("game_attackairn", pyra_nair, Priority::Low)    
     .install();
 }
 

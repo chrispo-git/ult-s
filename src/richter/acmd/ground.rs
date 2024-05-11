@@ -16,10 +16,10 @@ use super::*;
 
 pub fn install() {
     Agent::new("richter")
-    .acmd("game_attackdash", richter_da)    
-    .acmd("effect_attackdash", richter_da_eff)    
-    .acmd("sound_attackdash", richter_da_snd)    
-    .acmd("game_attack11", richter_jab1)    
+    .acmd("game_attackdash", richter_da, Priority::Low)    
+    .acmd("effect_attackdash", richter_da_eff, Priority::Low)    
+    .acmd("sound_attackdash", richter_da_snd, Priority::Low)    
+    .acmd("game_attack11", richter_jab1, Priority::Low)    
     .install();
 }
 

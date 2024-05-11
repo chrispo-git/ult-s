@@ -16,10 +16,10 @@ use super::*;
 
 pub fn install() {
 	Agent::new("demon")
-    .acmd("game_attackstand4", kaz_staturesmash)    
-    .acmd("game_attackstand5", kaz_flashtornado)    
-    .acmd("game_attackstep2f", kaz_ewgf)    
-    .acmd("game_attackstep2", kaz_wgf)    
+    .acmd("game_attackstand4", kaz_staturesmash, Priority::Low)    
+    .acmd("game_attackstand5", kaz_flashtornado, Priority::Low)    
+    .acmd("game_attackstep2f", kaz_ewgf, Priority::Low)    
+    .acmd("game_attackstep2", kaz_wgf, Priority::Low)    
     .install();
 }
 

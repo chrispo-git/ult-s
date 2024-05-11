@@ -16,8 +16,8 @@ use super::*;
 
 pub fn install() {
     Agent::new("younglink")
-    .acmd("game_attackdash", yink_da)    
-    .acmd("effect_attackdash", yink_da_eff)    
+    .acmd("game_attackdash", yink_da, Priority::Low)    
+    .acmd("effect_attackdash", yink_da_eff, Priority::Low)    
     .install();
 }
 

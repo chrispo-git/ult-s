@@ -17,9 +17,9 @@ use super::*;
 
 pub fn install() {
     Agent::new("gaogaen")
-    .acmd("game_specialslariat", incin_lariat)    
-    .acmd("game_specialsshoulder", incin_bbd)    
-    .acmd("game_specialairsshoulder", incin_air_bbd)    
+    .acmd("game_specialslariat", incin_lariat, Priority::Low)    
+    .acmd("game_specialsshoulder", incin_bbd, Priority::Low)    
+    .acmd("game_specialairsshoulder", incin_air_bbd, Priority::Low)    
     .install();  
 }
 

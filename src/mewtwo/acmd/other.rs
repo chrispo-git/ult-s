@@ -16,8 +16,8 @@ use super::*;
 
 pub fn install() {
 	Agent::new("mewtwo")
-    .acmd("game_dash", m2_dash)    
-    .acmd("game_turndash", m2_turn_dash)    
+    .acmd("game_dash", m2_dash, Priority::Low)    
+    .acmd("game_turndash", m2_turn_dash, Priority::Low)    
     .install();
 }
 

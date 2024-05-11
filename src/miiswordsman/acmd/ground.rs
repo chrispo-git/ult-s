@@ -17,11 +17,11 @@ use super::super::*;
 
 pub fn install() {
     Agent::new("miiswordsman")
-    .acmd("game_attacks4", sword_fsmash)    
-    .acmd("game_attackhi4", sword_usmash)    
-    .acmd("sound_attackhi4", sword_usmash_snd)    
-    .acmd("effect_attackhi4", sword_usmash_eff)    
-    .acmd("game_attack11", sword_jab1)    
+    .acmd("game_attacks4", sword_fsmash, Priority::Low)    
+    .acmd("game_attackhi4", sword_usmash, Priority::Low)    
+    .acmd("sound_attackhi4", sword_usmash_snd, Priority::Low)    
+    .acmd("effect_attackhi4", sword_usmash_eff, Priority::Low)    
+    .acmd("game_attack11", sword_jab1, Priority::Low)    
     .install();
 }
 

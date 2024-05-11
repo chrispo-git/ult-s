@@ -16,11 +16,11 @@ use super::*;
 
 pub fn install() {
     Agent::new("ridley")
-    .acmd("game_attackairhi", ridley_uair)    
-    .acmd("game_attackairb", ridley_bair)    
-    .acmd("game_attackairf", ridley_fair)    
-    .acmd("game_attackairlw", ridley_dair)    
-    .acmd("effect_attackairlw", ridley_dair_eff)    
+    .acmd("game_attackairhi", ridley_uair, Priority::Low)    
+    .acmd("game_attackairb", ridley_bair, Priority::Low)    
+    .acmd("game_attackairf", ridley_fair, Priority::Low)    
+    .acmd("game_attackairlw", ridley_dair, Priority::Low)    
+    .acmd("effect_attackairlw", ridley_dair_eff, Priority::Low)    
     .install();
 }
 

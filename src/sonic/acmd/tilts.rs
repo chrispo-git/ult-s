@@ -16,16 +16,16 @@ use super::*;
 
 pub fn install() {
     Agent::new("sonic")
-    .acmd("effect_attackhi3", sonic_utilt_eff)    
-    .acmd("effect_attacks3", sonic_ftilt_eff)    
-    .acmd("effect_attacks3lw", sonic_ftiltlw_eff)    
-    .acmd("effect_attacks3hi", sonic_ftilthi_eff)    
-    .acmd("effect_attacklw3", sonic_dtilt_eff)    
-    .acmd("game_attacklw3", sonic_dtilt)    
-    .acmd("game_attackhi3", sonic_utilt)    
-    .acmd("game_attacks3", sonic_ftilt)    
-    .acmd("game_attacks3hi", sonic_ftilt)    
-    .acmd("game_attacks3lw", sonic_ftilt)    
+    .acmd("effect_attackhi3", sonic_utilt_eff, Priority::Low)    
+    .acmd("effect_attacks3", sonic_ftilt_eff, Priority::Low)    
+    .acmd("effect_attacks3lw", sonic_ftiltlw_eff, Priority::Low)    
+    .acmd("effect_attacks3hi", sonic_ftilthi_eff, Priority::Low)    
+    .acmd("effect_attacklw3", sonic_dtilt_eff, Priority::Low)    
+    .acmd("game_attacklw3", sonic_dtilt, Priority::Low)    
+    .acmd("game_attackhi3", sonic_utilt, Priority::Low)    
+    .acmd("game_attacks3", sonic_ftilt, Priority::Low)    
+    .acmd("game_attacks3hi", sonic_ftilt, Priority::Low)    
+    .acmd("game_attacks3lw", sonic_ftilt, Priority::Low)    
     .install();
 }
 

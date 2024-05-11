@@ -16,8 +16,8 @@ use super::*;
 
 pub fn install() {
     Agent::new("zelda")
-    .acmd("game_attackairf", zelda_fair)    
-    .acmd("game_attackairn", zelda_nair)    
+    .acmd("game_attackairf", zelda_fair, Priority::Low)    
+    .acmd("game_attackairn", zelda_nair, Priority::Low)    
     .install();
 }
 

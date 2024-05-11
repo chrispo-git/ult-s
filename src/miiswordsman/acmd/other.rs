@@ -17,7 +17,7 @@ use super::super::*;
 
 pub fn install() {
     Agent::new("miiswordsman")
-    .acmd("game_catch", sword_grab)    
+    .acmd("game_catch", sword_grab, Priority::Low)    
     .install();
 }
 

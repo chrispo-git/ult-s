@@ -16,11 +16,11 @@ use super::*;
 
 pub fn install() {
     Agent::new("brave_fireball")
-	.acmd("game_specialn1", hero_frizz)
+	.acmd("game_specialn1", hero_frizz, Priority::Low)
 	.install();
 
     Agent::new("brave_spark")
-	.acmd("game_specials1", hero_zap_spark)
+	.acmd("game_specials1", hero_zap_spark, Priority::Low)
 	.install();
 }
 

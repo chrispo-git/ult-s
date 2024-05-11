@@ -16,7 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("pfushigisou_leafcutter")
-    .acmd("game_move", ivy_sideb)    
+    .acmd("game_move", ivy_sideb, Priority::Low)    
     .install();
 }
 

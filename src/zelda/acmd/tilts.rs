@@ -16,7 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("zelda")
-    .acmd("game_attacklw3", zelda_dtilt)    
+    .acmd("game_attacklw3", zelda_dtilt, Priority::Low)    
     .install();
 }
 

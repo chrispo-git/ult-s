@@ -16,7 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("master_axe")
-    .acmd("effect_attacklw4", axe_dsmash_eff)    
+    .acmd("effect_attacklw4", axe_dsmash_eff, Priority::Low)    
     .install();
 }	
 

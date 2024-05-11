@@ -16,19 +16,19 @@ use super::*;
 
 pub fn install() {
     Agent::new("wario")
-    .acmd("game_specialssearch", wario_sideb)    
-    .acmd("game_specialairssearch", wario_sideb)    
-    .acmd("effect_specialssearch", wario_sideb_eff)    
-    .acmd("effect_specialairssearch", wario_sideb_eff)    
-    .acmd("sound_specialssearch", wario_sideb_snd)    
-    .acmd("sound_specialairssearch", wario_sideb_snd)    
-    .acmd("sound_specialsdrive", wario_sideb_start_snd)    
-    .acmd("sound_specialsride", wario_sideb_start_snd)    
-    .acmd("sound_specialairs", wario_sideb_start_snd)    
-    .acmd("sound_specialairs", wario_sideb_start_snd)    
-    .acmd("sound_specials", wario_sideb_start_snd)    
-    .acmd("sound_specialsstart", wario_sideb_start_snd)    
-    .acmd("sound_specialairsstart", wario_sideb_start_snd)    
+    .acmd("game_specialssearch", wario_sideb, Priority::Low)    
+    .acmd("game_specialairssearch", wario_sideb, Priority::Low)    
+    .acmd("effect_specialssearch", wario_sideb_eff, Priority::Low)    
+    .acmd("effect_specialairssearch", wario_sideb_eff, Priority::Low)    
+    .acmd("sound_specialssearch", wario_sideb_snd, Priority::Low)    
+    .acmd("sound_specialairssearch", wario_sideb_snd, Priority::Low)    
+    .acmd("sound_specialsdrive", wario_sideb_start_snd, Priority::Low)    
+    .acmd("sound_specialsride", wario_sideb_start_snd, Priority::Low)    
+    .acmd("sound_specialairs", wario_sideb_start_snd, Priority::Low)    
+    .acmd("sound_specialairs", wario_sideb_start_snd, Priority::Low)    
+    .acmd("sound_specials", wario_sideb_start_snd, Priority::Low)    
+    .acmd("sound_specialsstart", wario_sideb_start_snd, Priority::Low)    
+    .acmd("sound_specialairsstart", wario_sideb_start_snd, Priority::Low)    
     .install();
 }
 

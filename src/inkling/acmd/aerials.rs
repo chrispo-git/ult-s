@@ -16,15 +16,15 @@ use super::*;
 
 pub fn install() {
     Agent::new("inkling")
-    .acmd("game_attackairf", ink_fair)    
-    .acmd("effect_attackairf", ink_fair_eff)    
-    .acmd("sound_attackairf", ink_fair_snd)    
-    .acmd("game_attackairhi", ink_uair)    
-    .acmd("effect_attackairhi", ink_uair_eff)    
-    .acmd("sound_attackairhi", ink_uair_sound)    
-    .acmd("game_attackairb", ink_bair)    
-    .acmd("game_attackairn", ink_nair)    
-    .acmd("game_attackairlw", ink_dair)    
+    .acmd("game_attackairf", ink_fair, Priority::Low)    
+    .acmd("effect_attackairf", ink_fair_eff, Priority::Low)    
+    .acmd("sound_attackairf", ink_fair_snd, Priority::Low)    
+    .acmd("game_attackairhi", ink_uair, Priority::Low)    
+    .acmd("effect_attackairhi", ink_uair_eff, Priority::Low)    
+    .acmd("sound_attackairhi", ink_uair_sound, Priority::Low)    
+    .acmd("game_attackairb", ink_bair, Priority::Low)    
+    .acmd("game_attackairn", ink_nair, Priority::Low)    
+    .acmd("game_attackairlw", ink_dair, Priority::Low)    
     .install();
 }
 

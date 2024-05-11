@@ -16,12 +16,12 @@ use super::*;
 
 pub fn install() {
     Agent::new("kamui")
-    .acmd("effect_dash", corrin_dash_eff)    
-    .acmd("effect_turndash", corrin_dash_eff)    
-    .acmd("effect_run", corrin_run_eff)    
-    .acmd("effect_turnrun", corrin_turnrun_eff)    
-    .acmd("effect_runbrakel", corrin_runbrake_eff)    
-    .acmd("effect_runbraker", corrin_runbrake_eff)    
+    .acmd("effect_dash", corrin_dash_eff, Priority::Low)    
+    .acmd("effect_turndash", corrin_dash_eff, Priority::Low)    
+    .acmd("effect_run", corrin_run_eff, Priority::Low)    
+    .acmd("effect_turnrun", corrin_turnrun_eff, Priority::Low)    
+    .acmd("effect_runbrakel", corrin_runbrake_eff, Priority::Low)    
+    .acmd("effect_runbraker", corrin_runbrake_eff, Priority::Low)    
     .install();
 }
 

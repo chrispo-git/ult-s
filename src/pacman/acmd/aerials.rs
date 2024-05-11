@@ -16,7 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("pacman")
-    .acmd("game_attackairhi", pac_uair)    
+    .acmd("game_attackairhi", pac_uair, Priority::Low)    
     .install();
 }
 

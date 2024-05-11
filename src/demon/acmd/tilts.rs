@@ -16,9 +16,9 @@ use super::*;
 
 pub fn install() {
 	Agent::new("demon")
-    .acmd("game_attacks3", kaz_ftilt)    
-	.acmd("game_attacks3lw", kaz_ftilt)    
-	.acmd("game_attacks3hi", kaz_ftilt)    
+    .acmd("game_attacks3", kaz_ftilt, Priority::Low)    
+	.acmd("game_attacks3lw", kaz_ftilt, Priority::Low)    
+	.acmd("game_attacks3hi", kaz_ftilt, Priority::Low)    
     .install();
 }
 

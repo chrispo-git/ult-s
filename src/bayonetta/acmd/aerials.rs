@@ -16,8 +16,8 @@ use super::*;
 
 pub fn install() {
 	Agent::new("bayonetta")
-    .acmd("game_attackairf", bayo_fair1)
-	.acmd("game_attackairf2", bayo_fair2)
+    .acmd("game_attackairf", bayo_fair1, Priority::Low)
+	.acmd("game_attackairf2", bayo_fair2, Priority::Low)
 	.install();
 }
 

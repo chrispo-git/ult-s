@@ -17,21 +17,21 @@ use super::super::*;
 
 pub fn install() {
     Agent::new("shizue")
-    .acmd("game_specialn", isa_neutralb)    
-    .acmd("game_specialairn", isa_neutralb)    
-    .acmd("effect_specialn", isa_neutralb_eff)    
-    .acmd("effect_specialairn", isa_neutralb_eff)    
-    .acmd("sound_specialn", isa_neutralb_snd)    
-    .acmd("sound_specialairn", isa_neutralb_snd)    
-    .acmd("game_speciallwfire", isa_lloid_end)    
-    .acmd("game_specialairlwfire", isa_lloid_end)    
-    .acmd("game_speciallwset", isa_lloid_set)    
+    .acmd("game_specialn", isa_neutralb, Priority::Low)    
+    .acmd("game_specialairn", isa_neutralb, Priority::Low)    
+    .acmd("effect_specialn", isa_neutralb_eff, Priority::Low)    
+    .acmd("effect_specialairn", isa_neutralb_eff, Priority::Low)    
+    .acmd("sound_specialn", isa_neutralb_snd, Priority::Low)    
+    .acmd("sound_specialairn", isa_neutralb_snd, Priority::Low)    
+    .acmd("game_speciallwfire", isa_lloid_end, Priority::Low)    
+    .acmd("game_specialairlwfire", isa_lloid_end, Priority::Low)    
+    .acmd("game_speciallwset", isa_lloid_set, Priority::Low)    
     .install();
 
 	Agent::new("shizue_pot")
-    .acmd("effect_burst", isa_item_burst_eff)    
-    .acmd("sound_burst", isa_item_burst_snd)    
-    .acmd("game_throwed", isa_neutralb_hit)    
+    .acmd("effect_burst", isa_item_burst_eff, Priority::Low)    
+    .acmd("sound_burst", isa_item_burst_snd, Priority::Low)    
+    .acmd("game_throwed", isa_neutralb_hit, Priority::Low)    
     .install();
 }
 

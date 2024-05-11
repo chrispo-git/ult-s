@@ -16,7 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("pit")
-    .acmd("game_catch", pit_grab)    
+    .acmd("game_catch", pit_grab, Priority::Low)    
     .install();
 }
 

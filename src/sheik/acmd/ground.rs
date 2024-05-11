@@ -16,10 +16,10 @@ use super::*;
 
 pub fn install() {
     Agent::new("sheik")
-    .acmd("game_attacks4", sheik_fsmash)    
-    .acmd("game_attackdash", sheik_da)    
-    .acmd("game_attack11", sheik_jab1)    
-    .acmd("game_attack12", sheik_jab2)    
+    .acmd("game_attacks4", sheik_fsmash, Priority::Low)    
+    .acmd("game_attackdash", sheik_da, Priority::Low)    
+    .acmd("game_attack11", sheik_jab1, Priority::Low)    
+    .acmd("game_attack12", sheik_jab2, Priority::Low)    
     .install();
 }
 

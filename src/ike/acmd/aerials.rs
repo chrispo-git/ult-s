@@ -17,12 +17,12 @@ use crate::ike::*;
 
 pub fn install() {
     Agent::new("ike")
-    .acmd("game_attackairlw", ike_dair)    
-    .acmd("effect_attackairb", ike_bair_eff)    
-    .acmd("effect_attackairf", ike_fair_eff)    
-    .acmd("effect_attackairhi", ike_uair_eff)    
-    .acmd("effect_attackairlw", ike_dair_eff)    
-    .acmd("effect_attackairn", ike_nair_eff)    
+    .acmd("game_attackairlw", ike_dair, Priority::Low)    
+    .acmd("effect_attackairb", ike_bair_eff, Priority::Low)    
+    .acmd("effect_attackairf", ike_fair_eff, Priority::Low)    
+    .acmd("effect_attackairhi", ike_uair_eff, Priority::Low)    
+    .acmd("effect_attackairlw", ike_dair_eff, Priority::Low)    
+    .acmd("effect_attackairn", ike_nair_eff, Priority::Low)    
     .install();
 }
 

@@ -16,10 +16,10 @@ use super::*;
 
 pub fn install() {
     Agent::new("gamewatch")
-    .acmd("sound_appealsr", gnw_sidetaunt_snd)    
-    .acmd("sound_appealsl", gnw_sidetaunt_snd)    
-    .acmd("expression_appealsr", gnw_sidetaunt_expr)     
-    .acmd("expression_appealsl", gnw_sidetaunt_expr)     
+    .acmd("sound_appealsr", gnw_sidetaunt_snd, Priority::Low)    
+    .acmd("sound_appealsl", gnw_sidetaunt_snd, Priority::Low)    
+    .acmd("expression_appealsr", gnw_sidetaunt_expr, Priority::Low)     
+    .acmd("expression_appealsl", gnw_sidetaunt_expr, Priority::Low)     
     .install();
 }
 

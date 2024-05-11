@@ -16,13 +16,13 @@ use super::*;
 
 pub fn install() {
     Agent::new("lucas")
-    .acmd("game_attackairn", lucas_nair)    
-    .acmd("game_attackairf", lucas_fair)    
-    .acmd("game_attackairhi", lucas_uair)    
-    .acmd("game_attackairlw", lucas_dair)    
-    .acmd("effect_attackairlw", lucas_dair_eff)    
-    .acmd("sound_attackairlw", lucas_dair_snd)    
-    .acmd("game_attackairb", lucas_bair)    
+    .acmd("game_attackairn", lucas_nair, Priority::Low)    
+    .acmd("game_attackairf", lucas_fair, Priority::Low)    
+    .acmd("game_attackairhi", lucas_uair, Priority::Low)    
+    .acmd("game_attackairlw", lucas_dair, Priority::Low)    
+    .acmd("effect_attackairlw", lucas_dair_eff, Priority::Low)    
+    .acmd("sound_attackairlw", lucas_dair_snd, Priority::Low)    
+    .acmd("game_attackairb", lucas_bair, Priority::Low)    
     .install();
 }
 

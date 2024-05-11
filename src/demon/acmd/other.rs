@@ -16,7 +16,7 @@ use super::*;
 
 pub fn install() {
 	Agent::new("demon")
-    .acmd("effect_landingheavy", kaz_landing)    
+    .acmd("effect_landingheavy", kaz_landing, Priority::Low)    
     .install();
 }
 

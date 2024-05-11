@@ -16,9 +16,9 @@ use super::*;
 
 pub fn install() {
     Agent::new("sonic")
-    .acmd("effect_specialsstart", sonic_sideb_eff)    
-    .acmd("sound_specialsstart", sonic_sideb_snd)    
-    .acmd("game_specialsstart", sonic_sideb)    
+    .acmd("effect_specialsstart", sonic_sideb_eff, Priority::Low)    
+    .acmd("sound_specialsstart", sonic_sideb_snd, Priority::Low)    
+    .acmd("game_specialsstart", sonic_sideb, Priority::Low)    
     .install();
 }
 
