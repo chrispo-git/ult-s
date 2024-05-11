@@ -58,6 +58,15 @@ unsafe extern "C" fn sandbag_frame(fighter: &mut L2CFighterCommon) {
             StatusModule::set_situation_kind(boma, smash::app::SituationKind(*SITUATION_KIND_GROUND), true);
         };
 
+        if [hash40("catch"),hash40("catch_turn"),hash40("catch_dash")].contains(&MotionModule::motion_kind(boma)) {
+            let int_frame = MotionModule::frame(boma) as i32;
+            if int_frame == 14 {
+                macros::EFFECT(fighter, Hash40::new("sys_erace_smoke"), Hash40::new("throw"), 0, 0, 0, 0, 0, 0, 1.3, 0, 0, 0, 0, 0, 0, false);
+            }
+            if int_frame >= 16 {
+                ModelModule::set_mesh_visibility(boma, Hash40::new("hand"), false);
+            }
+        }
         //side b shit
         if WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_HIT_STOP_ATTACK_SUSPEND_FRAME) < 1 && status_kind == *FIGHTER_STATUS_KIND_SPECIAL_S {
             if [hash40("special_air_s"),hash40("special_s")].contains(&MotionModule::motion_kind(boma)) {
