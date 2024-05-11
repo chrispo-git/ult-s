@@ -17,12 +17,12 @@ use super::*;
 
 pub fn install() {
     Agent::new("mario")
-    .acmd("game_attackairlw", mario_dair)    
-    .acmd("effect_attackairlw", mario_dair_eff)    
-    .acmd("game_landingairlw", mario_dair_land)    
-    .acmd("game_attackairhi", mario_uair)    
-    .acmd("game_attackairf", mario_fair)    
-    .acmd("effect_attackairf", mario_fair_eff)    
+    .acmd("game_attackairlw", mario_dair, Priority::Low)    
+    .acmd("effect_attackairlw", mario_dair_eff, Priority::Low)    
+    .acmd("game_landingairlw", mario_dair_land, Priority::Low)    
+    .acmd("game_attackairhi", mario_uair, Priority::Low)    
+    .acmd("game_attackairf", mario_fair, Priority::Low)    
+    .acmd("effect_attackairf", mario_fair_eff, Priority::Low)    
     .install();
 }
 

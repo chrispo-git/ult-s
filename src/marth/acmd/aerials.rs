@@ -16,10 +16,10 @@ use super::*;
 
 pub fn install() {
     Agent::new("marth")
-    .acmd("game_attackairhi", marth_uair)    
-	.acmd("game_attackairlw", marth_dair)    
-	.acmd("game_attackairf", marth_fair)    
-	.acmd("game_attackairb", marth_bair)    
+    .acmd("game_attackairhi", marth_uair, Priority::Low)    
+	.acmd("game_attackairlw", marth_dair, Priority::Low)    
+	.acmd("game_attackairf", marth_fair, Priority::Low)    
+	.acmd("game_attackairb", marth_bair, Priority::Low)    
     .install();
 }
 

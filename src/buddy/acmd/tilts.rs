@@ -16,7 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("buddy")
-	.acmd("game_attackhi3", banjo_utilt)    
+	.acmd("game_attackhi3", banjo_utilt, Priority::Low)    
 	.install();
 }
 	

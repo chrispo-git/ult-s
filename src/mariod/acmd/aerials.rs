@@ -16,16 +16,16 @@ use super::*;
 
 pub fn install() {
 	Agent::new("mariod")
-    .acmd("game_attackairlw", doc_dair)    
-    .acmd("game_attackairf", doc_fair)    
-    .acmd("effect_attackairf", doc_fair_eff)    
-    .acmd("sound_attackairf", doc_fair_snd)    
-    .acmd("game_attackairb", doc_bair)    
-    .acmd("effect_attackairb", doc_bair_eff)    
-    .acmd("sound_attackairb", doc_bair_snd)    
-    .acmd("game_attackairhi", doc_uair)    
-    .acmd("game_attackairn", doc_nair)    
-    .acmd("effect_attackairn", doc_nair_eff)    
+    .acmd("game_attackairlw", doc_dair, Priority::Low)    
+    .acmd("game_attackairf", doc_fair, Priority::Low)    
+    .acmd("effect_attackairf", doc_fair_eff, Priority::Low)    
+    .acmd("sound_attackairf", doc_fair_snd, Priority::Low)    
+    .acmd("game_attackairb", doc_bair, Priority::Low)    
+    .acmd("effect_attackairb", doc_bair_eff, Priority::Low)    
+    .acmd("sound_attackairb", doc_bair_snd, Priority::Low)    
+    .acmd("game_attackairhi", doc_uair, Priority::Low)    
+    .acmd("game_attackairn", doc_nair, Priority::Low)    
+    .acmd("effect_attackairn", doc_nair_eff, Priority::Low)    
     .install();
 }
 

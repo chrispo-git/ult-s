@@ -17,8 +17,8 @@ use super::super::*;
 
 pub fn install() {
     Agent::new("shizue")
-    .acmd("game_throwhi", isa_uthrow)    
-    .acmd("game_throwf", isa_fthrow)    
+    .acmd("game_throwhi", isa_uthrow, Priority::Low)    
+    .acmd("game_throwf", isa_fthrow, Priority::Low)    
     .install();
 }
 

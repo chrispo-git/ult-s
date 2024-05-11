@@ -147,12 +147,12 @@ unsafe extern "C" fn dsamus_fair_snd(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("samusd")
-        .game_acmd("game_attackairn", dsamus_nair)
-        .effect_acmd("effect_attackairn", dsamus_nair_eff)
-        .game_acmd("game_attackairlw", dsamus_dair)
-        .effect_acmd("effect_attackairlw", dsamus_dair_eff)
-        .game_acmd("game_attackairf", dsamus_fair)
-        .effect_acmd("effect_attackairf", dsamus_fair_eff)
-        .sound_acmd("sound_attackairf", dsamus_fair_snd)
+        .game_acmd("game_attackairn", dsamus_nair, Priority::Low)
+        .effect_acmd("effect_attackairn", dsamus_nair_eff, Priority::Low)
+        .game_acmd("game_attackairlw", dsamus_dair, Priority::Low)
+        .effect_acmd("effect_attackairlw", dsamus_dair_eff, Priority::Low)
+        .game_acmd("game_attackairf", dsamus_fair, Priority::Low)
+        .effect_acmd("effect_attackairf", dsamus_fair_eff, Priority::Low)
+        .sound_acmd("sound_attackairf", dsamus_fair_snd, Priority::Low)
         .install();
 }

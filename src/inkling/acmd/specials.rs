@@ -16,7 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("inkling_splashbomb")
-    .acmd("game_explode", ink_bomb)    
+    .acmd("game_explode", ink_bomb, Priority::Low)    
     .install();
 }
 

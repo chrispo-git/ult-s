@@ -16,10 +16,10 @@ use super::*;
 
 pub fn install() {
     Agent::new("palutena")
-    .acmd("game_attacklw3", palu_dtilt)    
-	.acmd("game_attackhi3", palu_utilt)    
-	.acmd("effect_attackhi3", palu_utilt_eff)    
-	.acmd("game_attacks3", palu_ftilt)    
+    .acmd("game_attacklw3", palu_dtilt, Priority::Low)    
+	.acmd("game_attackhi3", palu_utilt, Priority::Low)    
+	.acmd("effect_attackhi3", palu_utilt_eff, Priority::Low)    
+	.acmd("game_attacks3", palu_ftilt, Priority::Low)    
 	.install();
 }
 

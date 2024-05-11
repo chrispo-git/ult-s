@@ -17,8 +17,8 @@ use super::super::*;
 
 pub fn install() {
     Agent::new("reflet")
-    .acmd("game_attacklw3", robin_dtilt)    
-    .acmd("game_attacks3", robin_ftilt)    
+    .acmd("game_attacklw3", robin_dtilt, Priority::Low)    
+    .acmd("game_attacks3", robin_ftilt, Priority::Low)    
     .install();
 }
 

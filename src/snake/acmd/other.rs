@@ -16,12 +16,12 @@ use super::*;
 
 pub fn install() {
     Agent::new("snake")
-    .acmd("sound_appealsr", snake_side_taunt_snd)    
-    .acmd("sound_appealhir", snake_up_taunt_snd)    
-    .acmd("game_appealendexplode", snake_down_taunt_explode_game)    
-    .acmd("expression_appealendexplode", snake_down_taunt_explode_exp)    
-    .acmd("sound_appealendexplode", snake_down_taunt_explode_snd)    
-    .acmd("effect_appealendexplode", snake_down_taunt_explode_eff)    
+    .acmd("sound_appealsr", snake_side_taunt_snd, Priority::Low)    
+    .acmd("sound_appealhir", snake_up_taunt_snd, Priority::Low)    
+    .acmd("game_appealendexplode", snake_down_taunt_explode_game, Priority::Low)    
+    .acmd("expression_appealendexplode", snake_down_taunt_explode_exp, Priority::Low)    
+    .acmd("sound_appealendexplode", snake_down_taunt_explode_snd, Priority::Low)    
+    .acmd("effect_appealendexplode", snake_down_taunt_explode_eff, Priority::Low)    
     .install();
 }
 

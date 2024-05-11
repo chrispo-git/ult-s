@@ -16,8 +16,8 @@ use super::*;
 
 pub fn install() {
     Agent::new("bayonetta")
-    .acmd("game_specials", bayo_sideb_start)
-	.acmd("game_specialsholdend", bayo_sideb)
+    .acmd("game_specials", bayo_sideb_start, Priority::Low)
+	.acmd("game_specialsholdend", bayo_sideb, Priority::Low)
 	.install();
 }
 

@@ -17,10 +17,10 @@ use super::super::*;
 
 pub fn install() {
     Agent::new("szerosuit")
-    .acmd("game_throwhi", zss_uthrow)    
-    .acmd("effect_throwhi", zss_uthrow_eff)    
-    .acmd("sound_throwhi", zss_uthrow_snd)    
-    .acmd("game_throwlw", zss_dthrow)    
+    .acmd("game_throwhi", zss_uthrow, Priority::Low)    
+    .acmd("effect_throwhi", zss_uthrow_eff, Priority::Low)    
+    .acmd("sound_throwhi", zss_uthrow_snd, Priority::Low)    
+    .acmd("game_throwlw", zss_dthrow, Priority::Low)    
     .install();
 }
 

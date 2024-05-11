@@ -16,14 +16,14 @@ use super::*;
 
 pub fn install() {
     Agent::new("sheik")
-    .acmd("game_attackairb", sheik_bair)    
-    .acmd("game_attackairf", sheik_fair)    
-    .acmd("game_attackairhi", sheik_uair)    
-    .acmd("game_attackairlw", sheik_dair)    
-    .acmd("effect_attackairlw", sheik_dair_eff)    
-    .acmd("sound_attackairlw", sheik_dair_snd)    
-    .acmd("game_landingairlw", sheik_dair_land)    
-    .acmd("sound_landingairlw", sheik_dair_land_snd)    
+    .acmd("game_attackairb", sheik_bair, Priority::Low)    
+    .acmd("game_attackairf", sheik_fair, Priority::Low)    
+    .acmd("game_attackairhi", sheik_uair, Priority::Low)    
+    .acmd("game_attackairlw", sheik_dair, Priority::Low)    
+    .acmd("effect_attackairlw", sheik_dair_eff, Priority::Low)    
+    .acmd("sound_attackairlw", sheik_dair_snd, Priority::Low)    
+    .acmd("game_landingairlw", sheik_dair_land, Priority::Low)    
+    .acmd("sound_landingairlw", sheik_dair_land_snd, Priority::Low)    
     .install();
 }
 

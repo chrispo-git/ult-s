@@ -16,7 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("mario")
-    .acmd("game_attacklw3", mario_dtilt)    
+    .acmd("game_attacklw3", mario_dtilt, Priority::Low)    
     .install();
 }
 

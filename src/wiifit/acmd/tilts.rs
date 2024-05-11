@@ -16,7 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("wiifit")
-    .acmd("game_attacklw3", wft_dtilt)    
+    .acmd("game_attacklw3", wft_dtilt, Priority::Low)    
     .install();
 }
 

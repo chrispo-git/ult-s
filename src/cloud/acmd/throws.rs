@@ -16,8 +16,8 @@ use super::*;
 
 pub fn install() {
     Agent::new("cloud")
-    .acmd("game_catch", cloud_grab)    
-    .acmd("game_throwlw", cloud_dthrow)    
+    .acmd("game_catch", cloud_grab, Priority::Low)    
+    .acmd("game_throwlw", cloud_dthrow, Priority::Low)    
     .install();
 }
 

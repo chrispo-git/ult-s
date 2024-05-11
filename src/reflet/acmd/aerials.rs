@@ -18,7 +18,7 @@ use super::super::*;
 
 pub fn install() {
     Agent::new("reflet")
-    .acmd("game_attackairn", robin_nair)    
+    .acmd("game_attackairn", robin_nair, Priority::Low)    
     .install();
 }
 

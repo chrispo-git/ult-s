@@ -16,12 +16,12 @@ use super::*;
 
 pub fn install() {
     Agent::new("gekkouga")
-    .acmd("game_attackairn", gren_nair)    
-    .acmd("game_attackairb", gren_bair)    
-    .acmd("game_attackairhi", gren_uair)    
-    .acmd("game_attackairf", gren_fair)    
-    .acmd("effect_attackairb", gren_bair_eff)    
-    .acmd("sound_attackairb", gren_bair_snd)    
+    .acmd("game_attackairn", gren_nair, Priority::Low)    
+    .acmd("game_attackairb", gren_bair, Priority::Low)    
+    .acmd("game_attackairhi", gren_uair, Priority::Low)    
+    .acmd("game_attackairf", gren_fair, Priority::Low)    
+    .acmd("effect_attackairb", gren_bair_eff, Priority::Low)    
+    .acmd("sound_attackairb", gren_bair_snd, Priority::Low)    
     .install();
 }
 

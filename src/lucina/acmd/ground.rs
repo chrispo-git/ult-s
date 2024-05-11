@@ -17,19 +17,19 @@ use super::super::*;
 
 pub fn install() {
     Agent::new("lucina")
-    .acmd("game_attack11", lucina_jab1_hero)    
-    .acmd("effect_attack11", lucina_jab1_hero_eff)    
-    .acmd("game_attack12", lucina_jab2_hero)    
-    .acmd("effect_attack12", lucina_jab2_hero_eff)    
-    .acmd("game_attack112", lucina_jab1_sword)    
-    .acmd("effect_attack112", lucina_jab1_sword_eff)    
-    .acmd("game_attack122", lucina_jab2_sword)    
-    .acmd("effect_attack122", lucina_jab2_sword_eff)    
-    .acmd("game_attacks4", lucina_fsmash)    
-    .acmd("game_attackdash", lucina_da_hero)    
-    .acmd("effect_attackdash", lucina_da_hero_eff)    
-    .acmd("game_attackdash2", lucina_da_sword)    
-    .acmd("effect_attackdash2", lucina_da_sword_eff)    
+    .acmd("game_attack11", lucina_jab1_hero, Priority::Low)    
+    .acmd("effect_attack11", lucina_jab1_hero_eff, Priority::Low)    
+    .acmd("game_attack12", lucina_jab2_hero, Priority::Low)    
+    .acmd("effect_attack12", lucina_jab2_hero_eff, Priority::Low)    
+    .acmd("game_attack112", lucina_jab1_sword, Priority::Low)    
+    .acmd("effect_attack112", lucina_jab1_sword_eff, Priority::Low)    
+    .acmd("game_attack122", lucina_jab2_sword, Priority::Low)    
+    .acmd("effect_attack122", lucina_jab2_sword_eff, Priority::Low)    
+    .acmd("game_attacks4", lucina_fsmash, Priority::Low)    
+    .acmd("game_attackdash", lucina_da_hero, Priority::Low)    
+    .acmd("effect_attackdash", lucina_da_hero_eff, Priority::Low)    
+    .acmd("game_attackdash2", lucina_da_sword, Priority::Low)    
+    .acmd("effect_attackdash2", lucina_da_sword_eff, Priority::Low)    
     .install();
 }
 

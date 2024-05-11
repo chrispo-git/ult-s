@@ -17,14 +17,14 @@ use super::*;
 
 pub fn install() {
     Agent::new("mario")
-    .acmd("game_specials", mario_sideb)    
-    .acmd("game_specialairs", mario_air_sideb)    
-    .acmd("effect_specials", mario_sideb_effect)    
-    .acmd("effect_specialairs", mario_sideb_effect)    
-    .acmd("sound_specials", mario_sideb_sound)    
-    .acmd("sound_specialairs", mario_sideb_sound)    
-    .acmd("game_specialn", mario_fireball)    
-    .acmd("game_specialairn", mario_fireball)    
+    .acmd("game_specials", mario_sideb, Priority::Low)    
+    .acmd("game_specialairs", mario_air_sideb, Priority::Low)    
+    .acmd("effect_specials", mario_sideb_effect, Priority::Low)    
+    .acmd("effect_specialairs", mario_sideb_effect, Priority::Low)    
+    .acmd("sound_specials", mario_sideb_sound, Priority::Low)    
+    .acmd("sound_specialairs", mario_sideb_sound, Priority::Low)    
+    .acmd("game_specialn", mario_fireball, Priority::Low)    
+    .acmd("game_specialairn", mario_fireball, Priority::Low)    
     .install();
 }
 

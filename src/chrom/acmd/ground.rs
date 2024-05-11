@@ -16,10 +16,10 @@ use super::*;
 
 pub fn install() {
     Agent::new("chrom")
-    .acmd("game_attack11", chrom_jab)    
-    .acmd("game_attack12", chrom_jab_2)    
-    .acmd("effect_attack12", chrom_eff_jab_2)    
-    .acmd("sound_attack12", chrom_snd_jab_2)    
+    .acmd("game_attack11", chrom_jab, Priority::Low)    
+    .acmd("game_attack12", chrom_jab_2, Priority::Low)    
+    .acmd("effect_attack12", chrom_eff_jab_2, Priority::Low)    
+    .acmd("sound_attack12", chrom_snd_jab_2, Priority::Low)    
     .install();
 }
 

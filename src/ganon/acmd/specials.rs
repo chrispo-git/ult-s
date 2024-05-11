@@ -16,22 +16,22 @@ use super::*;
 
 pub fn install() {
     Agent::new("ganon")
-    .acmd("game_specialn", ganon_teleport)    
-    .acmd("effect_specialn", ganon_teleport_eff)    
-    .acmd("sound_specialn", ganon_teleport_snd)    
-    .acmd("expression_specialn", ganon_teleport_expr)    
-    .acmd("game_speciallw", ganon_downb)    
-    .acmd("game_specialairn", ganon_float)    
-    .acmd("sound_specialairn", ganon_floats)    
-    .acmd("effect_specialairn", ganon_floate)    
-    .acmd("expression_specialairn", ganon_float_expr)    
+    .acmd("game_specialn", ganon_teleport, Priority::Low)    
+    .acmd("effect_specialn", ganon_teleport_eff, Priority::Low)    
+    .acmd("sound_specialn", ganon_teleport_snd, Priority::Low)    
+    .acmd("expression_specialn", ganon_teleport_expr, Priority::Low)    
+    .acmd("game_speciallw", ganon_downb, Priority::Low)    
+    .acmd("game_specialairn", ganon_float, Priority::Low)    
+    .acmd("sound_specialairn", ganon_floats, Priority::Low)    
+    .acmd("effect_specialairn", ganon_floate, Priority::Low)    
+    .acmd("expression_specialairn", ganon_float_expr, Priority::Low)    
     .install();
 
 	Agent::new("kirby")
-    .acmd("effect_ganonspecialn", kirby_teleport_eff)    
-    .acmd("sound_ganonspecialn", kirby_teleport_snd)    
-    .acmd("expression_ganonspecialn", kirby_teleport_expr)    
-    .acmd("sound_ganonspecialairn", kirb_ganon_floats)    
+    .acmd("effect_ganonspecialn", kirby_teleport_eff, Priority::Low)    
+    .acmd("sound_ganonspecialn", kirby_teleport_snd, Priority::Low)    
+    .acmd("expression_ganonspecialn", kirby_teleport_expr, Priority::Low)    
+    .acmd("sound_ganonspecialairn", kirb_ganon_floats, Priority::Low)    
     .install();
 }
 

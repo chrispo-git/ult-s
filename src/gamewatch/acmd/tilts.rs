@@ -16,9 +16,9 @@ use super::*;
 
 pub fn install() {
     Agent::new("gamewatch")
-    .acmd("game_attacks3", gnw_ftilt)    
-    .acmd("game_attacklw3", gnw_dtilt)    
-    .acmd("game_attackhi3", gnw_utilt)     
+    .acmd("game_attacks3", gnw_ftilt, Priority::Low)    
+    .acmd("game_attacklw3", gnw_dtilt, Priority::Low)    
+    .acmd("game_attackhi3", gnw_utilt, Priority::Low)     
     .install();
 }
 

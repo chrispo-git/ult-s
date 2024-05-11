@@ -16,8 +16,8 @@ use super::*;
 
 pub fn install() {
     Agent::new("littlemac")
-    .acmd("game_attacklw3", mac_dtilt)    
-    .acmd("game_attacks3", mac_ftilt)    
+    .acmd("game_attacklw3", mac_dtilt, Priority::Low)    
+    .acmd("game_attacks3", mac_ftilt, Priority::Low)    
     .install();
 }
 

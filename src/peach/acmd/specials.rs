@@ -16,15 +16,15 @@ use super::*;
 
 pub fn install() {
     Agent::new("peach")
-    .acmd("game_specialn", peach_neutralb)    
-    .acmd("game_specialairn", peach_neutralb)    
-    .acmd("effect_specialn", peach_neutralb_eff)    
-    .acmd("effect_specialairn", peach_neutralb_eff)    
+    .acmd("game_specialn", peach_neutralb, Priority::Low)    
+    .acmd("game_specialairn", peach_neutralb, Priority::Low)    
+    .acmd("effect_specialn", peach_neutralb_eff, Priority::Low)    
+    .acmd("effect_specialairn", peach_neutralb_eff, Priority::Low)    
     .install();
 
 	Agent::new("kirby")
-	.acmd("effect_peachspecialn", kirby_peach_neutralb_eff)    
-    .acmd("effect_peachspecialairn", kirby_peach_neutralb_eff)    
+	.acmd("effect_peachspecialn", kirby_peach_neutralb_eff, Priority::Low)    
+    .acmd("effect_peachspecialairn", kirby_peach_neutralb_eff, Priority::Low)    
     .install();
 }
 

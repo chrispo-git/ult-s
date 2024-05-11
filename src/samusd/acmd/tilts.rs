@@ -29,6 +29,6 @@ unsafe extern "C" fn dsamus_dtilt(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("samusd")
-        .game_acmd("game_attacklw3", dsamus_dtilt)
+        .game_acmd("game_attacklw3", dsamus_dtilt, Priority::Low)
         .install();
 }

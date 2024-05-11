@@ -16,10 +16,10 @@ use super::*;
 
 pub fn install() {
     Agent::new("falco")
-    .acmd("game_attackairb", falco_bair)    
-    .acmd("game_attackairn", falco_nair)    
-    .acmd("effect_attackairn", falco_nair_eff)    
-    .acmd("sound_attackairn", falco_nair_snd)   
+    .acmd("game_attackairb", falco_bair, Priority::Low)    
+    .acmd("game_attackairn", falco_nair, Priority::Low)    
+    .acmd("effect_attackairn", falco_nair_eff, Priority::Low)    
+    .acmd("sound_attackairn", falco_nair_snd, Priority::Low)   
     .install();
 }
 

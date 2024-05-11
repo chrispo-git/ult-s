@@ -16,19 +16,19 @@ use super::*;
 
 pub fn install() {
 	Agent::new("mariod")
-    .acmd("game_attackdash", doc_da)    
-    .acmd("effect_attackdash", doc_da_eff)    
-    .acmd("game_attackhi4", doc_usmash)    
-    .acmd("game_attacklw4", doc_dsmash)    
-    .acmd("effect_attacklw4", doc_dsmash_eff)    
-    .acmd("sound_attacklw4", doc_dsmash_snd)    
-    .acmd("game_attacks4", doc_fsmash)    
-    .acmd("game_attacks4hi", doc_fsmash)    
-    .acmd("game_attacks4lw", doc_fsmash)    
-    .acmd("game_attack11", doc_jab1)    
-    .acmd("game_attack12", doc_jab2)    
-    .acmd("effect_attack12", doc_jab2_eff)    
-    .acmd("sound_attack12", doc_jab2_snd)    
+    .acmd("game_attackdash", doc_da, Priority::Low)    
+    .acmd("effect_attackdash", doc_da_eff, Priority::Low)    
+    .acmd("game_attackhi4", doc_usmash, Priority::Low)    
+    .acmd("game_attacklw4", doc_dsmash, Priority::Low)    
+    .acmd("effect_attacklw4", doc_dsmash_eff, Priority::Low)    
+    .acmd("sound_attacklw4", doc_dsmash_snd, Priority::Low)    
+    .acmd("game_attacks4", doc_fsmash, Priority::Low)    
+    .acmd("game_attacks4hi", doc_fsmash, Priority::Low)    
+    .acmd("game_attacks4lw", doc_fsmash, Priority::Low)    
+    .acmd("game_attack11", doc_jab1, Priority::Low)    
+    .acmd("game_attack12", doc_jab2, Priority::Low)    
+    .acmd("effect_attack12", doc_jab2_eff, Priority::Low)    
+    .acmd("sound_attack12", doc_jab2_snd, Priority::Low)    
     .install();
 }
 

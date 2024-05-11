@@ -17,20 +17,20 @@ use super::super::*;
 
 pub fn install() {
     Agent::new("szerosuit")
-    .acmd("game_catch", zss_grab)    
-    .acmd("sound_catch", zss_grab_snd)    
-    .acmd("effect_catch", zss_grab_eff)    
-    .acmd("game_catchdash", game_catchdash)    
-    .acmd("game_catchturn", game_catchturn)    
-    .acmd("effect_catchdash", effect_catchdash2)    
-    .acmd("effect_catchturn", effect_catchturn2)    
+    .acmd("game_catch", zss_grab, Priority::Low)    
+    .acmd("sound_catch", zss_grab_snd, Priority::Low)    
+    .acmd("effect_catch", zss_grab_eff, Priority::Low)    
+    .acmd("game_catchdash", game_catchdash, Priority::Low)    
+    .acmd("game_catchturn", game_catchturn, Priority::Low)    
+    .acmd("effect_catchdash", effect_catchdash2, Priority::Low)    
+    .acmd("effect_catchturn", effect_catchturn2, Priority::Low)    
     .install();
 
     Agent::new("szerosuit_whip")
-    .acmd("effect_catchdash", effect_catchdash)    
-    .acmd("effect_catchturn", effect_catchturn)    
-    .acmd("game_catchdash", game_catchdash2)    
-    .acmd("game_catchturn", game_catchturn2)    
+    .acmd("effect_catchdash", effect_catchdash, Priority::Low)    
+    .acmd("effect_catchturn", effect_catchturn, Priority::Low)    
+    .acmd("game_catchdash", game_catchdash2, Priority::Low)    
+    .acmd("game_catchturn", game_catchturn2, Priority::Low)    
     .install();
 }
 
