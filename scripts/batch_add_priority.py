@@ -1,12 +1,11 @@
+import os
+all_files = []
 
-all_files = [""]
-
-try:
-    os.chdir('../')
-    for root, dirs, files in os.walk(r"src", topdown=False):
+os.chdir('../')
+for dirpath, subdirs, files in os.walk(r"src", topdown=False):
         for name in files:
-            if name != "modules" and name not in all_files:
-                all_files.append(name)
+            if name != "modules" and name not in all_files and name.endswith(".rs"):
+                all_files.append(os.path.join(dirpath, name))
 
 for i in all_files:
     print(i)
