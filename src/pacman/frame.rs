@@ -65,7 +65,7 @@ unsafe extern "C" fn pacman_frame(fighter: &mut L2CFighterCommon) {
 				StatusModule::change_status_request_from_script(boma, *FIGHTER_PACMAN_STATUS_KIND_SPECIAL_S_RETURN, false);
 				HAS_UPB_ENDS[ENTRY_ID] = true;
 			}
-			if situation_kind != *SITUATION_KIND_AIR {
+			if situation_kind != *SITUATION_KIND_AIR || (*FIGHTER_STATUS_KIND_DAMAGE..*FIGHTER_STATUS_KIND_DAMAGE_FALL).contains(&status_kind) {
 				HAS_UPB_ENDS[ENTRY_ID] = false;
 				WorkModule::off_flag(boma, *FIGHTER_PACMAN_INSTANCE_WORK_ID_FLAG_SPECIAL_HI_FALL);
 			}
