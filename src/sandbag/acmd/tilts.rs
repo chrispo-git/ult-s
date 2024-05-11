@@ -20,15 +20,15 @@ use crate::sandbag::*;
 
 pub fn install() {
     Agent::new("mariod")
-        .game_acmd("game_attacks3sandbag", sandbag_ftilt)
-        .effect_acmd("effect_attacks3sandbag", sandbag_ftilt_eff)
-        .sound_acmd("sound_attacks3sandbag", sandbag_ftilt_snd)
-        .game_acmd("game_attacklw3sandbag", sandbag_dtilt)
-        .effect_acmd("effect_attacklw3sandbag", sandbag_dtilt_eff)
-        .sound_acmd("sound_attacklw3sandbag", sandbag_dtilt_snd)
-        .game_acmd("game_attackhi3sandbag", sandbag_utilt)
-        .effect_acmd("effect_attackhi3sandbag", sandbag_utilt_eff)
-        .sound_acmd("sound_attackhi3sandbag", sandbag_utilt_snd)
+        .game_acmd("game_attacks3sandbag", sandbag_ftilt, Priority::Low)
+        .effect_acmd("effect_attacks3sandbag", sandbag_ftilt_eff, Priority::Low)
+        .sound_acmd("sound_attacks3sandbag", sandbag_ftilt_snd, Priority::Low)
+        .game_acmd("game_attacklw3sandbag", sandbag_dtilt, Priority::Low)
+        .effect_acmd("effect_attacklw3sandbag", sandbag_dtilt_eff, Priority::Low)
+        .sound_acmd("sound_attacklw3sandbag", sandbag_dtilt_snd, Priority::Low)
+        .game_acmd("game_attackhi3sandbag", sandbag_utilt, Priority::Low)
+        .effect_acmd("effect_attackhi3sandbag", sandbag_utilt_eff, Priority::Low)
+        .sound_acmd("sound_attackhi3sandbag", sandbag_utilt_snd, Priority::Low)
         .install();
 }
 

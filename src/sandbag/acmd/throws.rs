@@ -20,18 +20,18 @@ use crate::sandbag::*;
 
 pub fn install() {
     Agent::new("mariod")
-        .game_acmd("game_throwhisandbag", sandbag_uthrow)
-        .effect_acmd("effect_throwhisandbag", sandbag_uthrow_eff)
-        .sound_acmd("sound_throwhisandbag", sandbag_uthrow_snd)
-        .game_acmd("game_throwlwsandbag", sandbag_dthrow)
-        .effect_acmd("effect_throwlwsandbag", sandbag_dthrow_eff)
-        .sound_acmd("sound_throwlwsandbag", sandbag_dthrow_snd)
-        .game_acmd("game_throwbsandbag", sandbag_bthrow)
-        .effect_acmd("effect_throwbsandbag", sandbag_bthrow_eff)
-        .sound_acmd("sound_throwbsandbag", sandbag_bthrow_snd)
-        .game_acmd("game_throwfsandbag", sandbag_fthrow)
-        .effect_acmd("effect_throwfsandbag", sandbag_fthrow_eff)
-        .sound_acmd("sound_throwfsandbag", sandbag_fthrow_snd)
+        .game_acmd("game_throwhisandbag", sandbag_uthrow, Priority::Low)
+        .effect_acmd("effect_throwhisandbag", sandbag_uthrow_eff, Priority::Low)
+        .sound_acmd("sound_throwhisandbag", sandbag_uthrow_snd, Priority::Low)
+        .game_acmd("game_throwlwsandbag", sandbag_dthrow, Priority::Low)
+        .effect_acmd("effect_throwlwsandbag", sandbag_dthrow_eff, Priority::Low)
+        .sound_acmd("sound_throwlwsandbag", sandbag_dthrow_snd, Priority::Low)
+        .game_acmd("game_throwbsandbag", sandbag_bthrow, Priority::Low)
+        .effect_acmd("effect_throwbsandbag", sandbag_bthrow_eff, Priority::Low)
+        .sound_acmd("sound_throwbsandbag", sandbag_bthrow_snd, Priority::Low)
+        .game_acmd("game_throwfsandbag", sandbag_fthrow, Priority::Low)
+        .effect_acmd("effect_throwfsandbag", sandbag_fthrow_eff, Priority::Low)
+        .sound_acmd("sound_throwfsandbag", sandbag_fthrow_snd, Priority::Low)
         .install();
 }
 

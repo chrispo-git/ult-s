@@ -17,8 +17,8 @@ use crate::bomberman::*;
 
 pub fn install() {
 	Agent::new("pacman")
-	.acmd("game_cliffattackbomb", bomb_cliffattack)
-	.acmd("effect_cliffattackbomb", bomb_cliffattack_eff)
+	.acmd("game_cliffattackbomb", bomb_cliffattack, Priority::Low)
+	.acmd("effect_cliffattackbomb", bomb_cliffattack_eff, Priority::Low)
 	.install();
 }
 
