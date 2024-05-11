@@ -155,15 +155,15 @@ unsafe extern "C" fn toad_dtilt_expr(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("murabito")
-        .game_acmd("game_attackhi3toad", toad_utilt)
-        .sound_acmd("sound_attackhi3toad", toad_utilt_snd)
-        .effect_acmd("effect_attackhi3toad", toad_utilt_eff)
-        .game_acmd("game_attacks3toad", toad_ftilt)
-        .effect_acmd("effect_attacks3toad", toad_ftilt_eff)
-        .sound_acmd("sound_attacks3toad", toad_ftilt_snd)
-        .game_acmd("game_attacklw3toad", toad_dtilt)
-        .effect_acmd("effect_attacklw3toad", toad_dtilt_eff)
-        .sound_acmd("sound_attacklw3toad", toad_dtilt_snd)
-        .expression_acmd("expression_attacklw3toad", toad_dtilt_expr)
+        .game_acmd("game_attackhi3toad", toad_utilt, Priority::Low)
+        .sound_acmd("sound_attackhi3toad", toad_utilt_snd, Priority::Low)
+        .effect_acmd("effect_attackhi3toad", toad_utilt_eff, Priority::Low)
+        .game_acmd("game_attacks3toad", toad_ftilt, Priority::Low)
+        .effect_acmd("effect_attacks3toad", toad_ftilt_eff, Priority::Low)
+        .sound_acmd("sound_attacks3toad", toad_ftilt_snd, Priority::Low)
+        .game_acmd("game_attacklw3toad", toad_dtilt, Priority::Low)
+        .effect_acmd("effect_attacklw3toad", toad_dtilt_eff, Priority::Low)
+        .sound_acmd("sound_attacklw3toad", toad_dtilt_snd, Priority::Low)
+        .expression_acmd("expression_attacklw3toad", toad_dtilt_expr, Priority::Low)
         .install();
 }

@@ -99,17 +99,17 @@ unsafe extern "C" fn dsamus_downb(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("samusd")
-        .effect_acmd("effect_speciallw", eff_dsamus_downb)
-        .expression_acmd("expression_speciallw", expr_dsamus_downb)
-        .game_acmd("game_speciallw", dsamus_downb)
+        .effect_acmd("effect_speciallw", eff_dsamus_downb, Priority::Low)
+        .expression_acmd("expression_speciallw", expr_dsamus_downb, Priority::Low)
+        .game_acmd("game_speciallw", dsamus_downb, Priority::Low)
         .install();
 
 	Agent::new("samusd_missile")
-		.game_acmd("game_homing", dsamus_homing)
-		.sound_acmd("sound_homing", sound_dsamus_homing)
-		.effect_acmd("effect_special", dsamus_special_eff)
-		.effect_acmd("effect_specialair", dsamus_special_eff)
-		.effect_acmd("effect_hburst", eff_dsamus_burst)
-		.effect_acmd("effect_homing", eff_dsamus_homing)
+		.game_acmd("game_homing", dsamus_homing, Priority::Low)
+		.sound_acmd("sound_homing", sound_dsamus_homing, Priority::Low)
+		.effect_acmd("effect_special", dsamus_special_eff, Priority::Low)
+		.effect_acmd("effect_specialair", dsamus_special_eff, Priority::Low)
+		.effect_acmd("effect_hburst", eff_dsamus_burst, Priority::Low)
+		.effect_acmd("effect_homing", eff_dsamus_homing, Priority::Low)
 		.install();
 }
