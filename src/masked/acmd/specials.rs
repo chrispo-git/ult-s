@@ -145,7 +145,8 @@ unsafe extern "C" fn expression_specialhihold(agent: &mut L2CAgentBase) {
 }
 
 unsafe extern "C" fn effect_specialhiend(agent: &mut L2CAgentBase) {
-    if is_maskedman(agent.module_accessor) {
+	let boma = smash::app::sv_system::battle_object_module_accessor(agent.lua_state_agent);    
+    if is_added(boma) {
         for i in 1..i32::MAX {
             if macros::is_excute(agent) {
                 //sys_steam
@@ -157,7 +158,8 @@ unsafe extern "C" fn effect_specialhiend(agent: &mut L2CAgentBase) {
 }
 
 unsafe extern "C" fn game_speciallwhold(agent: &mut L2CAgentBase) {
-    if is_maskedman(agent.module_accessor) {
+	let boma = smash::app::sv_system::battle_object_module_accessor(agent.lua_state_agent);  
+    if is_added(boma) {
         if macros::is_excute(agent) {
             macros::ATTACK(agent, 0, 0, Hash40::new("top"), 1.3, 367, 80, 0, 25, 9.0, 0.0, 6.5, 11.5, None, None, None, 1.0, 1.3, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 6, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_ELEC, *ATTACK_REGION_NONE);
             macros::ATTACK(agent, 1, 0, Hash40::new("top"), 0.0, 180, 100, 23, 0, 13.0, 0.0, 6.5, 11.5, None, None, None, 0.0, 0.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 6, false, false, true, true, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_NONE);

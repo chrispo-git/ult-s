@@ -35,7 +35,7 @@ pub fn install() {
 unsafe extern "C" fn zair_main(agent: &mut L2CFighterCommon) -> L2CValue {
     let boma = smash::app::sv_system::battle_object_module_accessor(agent.lua_state_agent);    
     let fighter_kind = smash::app::utility::get_kind(boma);
-    if fighter_kind == *FIGHTER_KIND_LUCAS && is_maskedman(boma) {	
+    if fighter_kind == *FIGHTER_KIND_LUCAS && is_added(boma) {	
         agent.change_status(FIGHTER_STATUS_KIND_ESCAPE_AIR.into(), false.into());
         return 0.into();
     }
@@ -80,7 +80,8 @@ unsafe extern "C" fn specials_situation_helper(fighter: &mut L2CFighterCommon, i
 }
 
 unsafe extern "C" fn specialhi_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
-    if !is_maskedman(fighter.module_accessor) {
+	let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);    
+    if !is_added(boma) {
         return smashline::original_status(Pre, fighter, *FIGHTER_STATUS_KIND_SPECIAL_HI)(fighter);
     }
     StatusModule::init_settings(
@@ -112,7 +113,8 @@ unsafe extern "C" fn specialhi_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
 }
 
 unsafe extern "C" fn specialhi_main(fighter: &mut L2CFighterCommon) -> L2CValue {
-    if !is_maskedman(fighter.module_accessor) {
+	let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);    
+    if !is_added(boma) {
         return smashline::original_status(Main, fighter, *FIGHTER_STATUS_KIND_SPECIAL_HI)(fighter);
     }
     specials_situation_helper(fighter,true,*FIGHTER_STATUS_KIND_SPECIAL_HI);
@@ -144,7 +146,8 @@ unsafe extern "C" fn specialhi_main_loop(fighter: &mut L2CFighterCommon) -> L2CV
 
 
 unsafe extern "C" fn specialhi_hold_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
-    if !is_maskedman(fighter.module_accessor) {
+	let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);    
+    if !is_added(boma) {
         return smashline::original_status(Pre, fighter, *FIGHTER_LUCAS_STATUS_KIND_SPECIAL_HI_HOLD)(fighter);
     }
     StatusModule::init_settings(
@@ -225,7 +228,8 @@ unsafe extern "C" fn specialhi_hold_init_kinetic(fighter: &mut L2CFighterCommon)
 }
 
 unsafe extern "C" fn specialhi_hold_init(fighter: &mut L2CFighterCommon) -> L2CValue {
-    if !is_maskedman(fighter.module_accessor) {
+	let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);    
+    if !is_added(boma) {
         return smashline::original_status(Init, fighter, *FIGHTER_LUCAS_STATUS_KIND_SPECIAL_HI_HOLD)(fighter);
     }
     specialhi_hold_init_kinetic(fighter);
@@ -233,7 +237,8 @@ unsafe extern "C" fn specialhi_hold_init(fighter: &mut L2CFighterCommon) -> L2CV
 }
 
 unsafe extern "C" fn specialhi_hold_main(fighter: &mut L2CFighterCommon) -> L2CValue {
-    if !is_maskedman(fighter.module_accessor) {
+	let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);    
+    if !is_added(boma) {
         return smashline::original_status(Main, fighter, *FIGHTER_LUCAS_STATUS_KIND_SPECIAL_HI_HOLD)(fighter);
     }
     let landing_frame = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_hi"), hash40("landing_frame"));
@@ -277,7 +282,8 @@ unsafe extern "C" fn specialhi_hold_main_loop(fighter: &mut L2CFighterCommon) ->
 }
 
 unsafe extern "C" fn specialhi_hold_exec(fighter: &mut L2CFighterCommon) -> L2CValue {
-    if !is_maskedman(fighter.module_accessor) {
+	let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);    
+    if !is_added(boma) {
         return 0.into();
     }
     WorkModule::dec_int(fighter.module_accessor, *FIGHTER_LUCAS_STATUS_SPECIAL_HI_WORK_INT_TIME);
@@ -331,14 +337,16 @@ unsafe extern "C" fn specialhi_end_init_kinetic(fighter: &mut L2CFighterCommon){
     );
 }
 unsafe extern "C" fn specialhi_end_init(fighter: &mut L2CFighterCommon) -> L2CValue {
-    if !is_maskedman(fighter.module_accessor) {
+	let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);    
+    if !is_added(boma) {
         return 0.into();
     }
     specialhi_end_init_kinetic(fighter);
     0.into()
 }
 unsafe extern "C" fn special_fall_init(fighter: &mut L2CFighterCommon) -> L2CValue {
-    if !is_maskedman(fighter.module_accessor) {
+	let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);    
+    if !is_added(boma) {
         return 0.into();
     }
     specialhi_end_init_kinetic(fighter);
@@ -346,7 +354,8 @@ unsafe extern "C" fn special_fall_init(fighter: &mut L2CFighterCommon) -> L2CVal
 }
 
 unsafe extern "C" fn specialhi_end_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
-    if !is_maskedman(fighter.module_accessor) {
+	let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);    
+    if !is_added(boma) {
         return smashline::original_status(Pre, fighter, *FIGHTER_LUCAS_STATUS_KIND_SPECIAL_HI_END)(fighter);
     }
     StatusModule::init_settings(
@@ -378,7 +387,8 @@ unsafe extern "C" fn specialhi_end_pre(fighter: &mut L2CFighterCommon) -> L2CVal
 }
 
 unsafe extern "C" fn specialhi_end_main(fighter: &mut L2CFighterCommon) -> L2CValue {
-    if !is_maskedman(fighter.module_accessor) {
+	let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);    
+    if !is_added(boma) {
         return smashline::original_status(Main, fighter, *FIGHTER_LUCAS_STATUS_KIND_SPECIAL_HI_END)(fighter);
     }
     specials_situation_helper(fighter,true,*FIGHTER_LUCAS_STATUS_KIND_SPECIAL_HI_END);
@@ -415,7 +425,8 @@ unsafe extern "C" fn specialhi_end_main_loop(fighter: &mut L2CFighterCommon) -> 
 }
 
 unsafe extern "C" fn speciallw_hold_exec(fighter: &mut L2CFighterCommon) -> L2CValue {
-    if !is_maskedman(fighter.module_accessor) {
+	let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);    
+    if !is_added(boma) {
         return 0.into();
     }
 

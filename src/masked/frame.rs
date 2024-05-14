@@ -34,7 +34,7 @@ unsafe extern "C" fn maskedman_frame(agent: &mut L2CFighterCommon) {
         let stick_y = ControlModule::get_stick_y(boma);
         let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
         
-        if is_maskedman(boma) && fighter_kind == *FIGHTER_KIND_LUCAS {
+        if is_added(boma) && fighter_kind == *FIGHTER_KIND_LUCAS {
             ModelModule::set_mesh_visibility(agent.module_accessor,Hash40::new("normalbatm"),false);
             ModelModule::set_mesh_visibility(agent.module_accessor,Hash40::new("normalbatmflip"),true);
             //ModelModule::set_mesh_visibility(agent.module_accessor,Hash40::new("wings"),false);
