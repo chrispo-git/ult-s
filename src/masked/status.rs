@@ -290,7 +290,7 @@ unsafe extern "C" fn specialhi_hold_exec(fighter: &mut L2CFighterCommon) -> L2CV
 
     fighter.clear_lua_stack();
     lua_args!(fighter, FIGHTER_KINETIC_ENERGY_ID_CONTROL);
-    let speed_x = app::sv_kinetic_energy::get_speed_x(fighter.lua_state_agent);
+    let speed_x = smash::app::sv_kinetic_energy::get_speed_x(fighter.lua_state_agent);
 
     let stick_x =  ControlModule::get_stick_x(fighter.module_accessor)*PostureModule::lr(fighter.module_accessor);
     let lr = PostureModule::lr(fighter.module_accessor);
