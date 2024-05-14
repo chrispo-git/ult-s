@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-16 b e"?>
+<xmsbt>
+  <entry label="nam_chr0_00_maskedman">
+    <text>Masked Man</text>
+  </entry>
+  <entry label="nam_chr1_00_maskedman">
+    <text>Masked Man</text>
+  </entry>
+  <entry label="nam_chr2_00_maskedman">
+    <text>MASKED MAN</text>
+  </entry>
+  <entry label="nam_chr3_00_maskedman">
+    <text>MASKED MAN</text>
+  </entry>
+  <entry label="nam_stage_name_00_maskedman">
+    <text>The Man in
+the Mask</text>
+  </entry>
+</xmsbt>

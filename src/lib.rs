@@ -349,6 +349,9 @@ pub extern "C" fn main() {
             extern "C" { fn allow_ui_chara_hash_online(ui_chara_hash: u64); }
             allow_ui_chara_hash_online(0xf1062d2e5); //rayman
             allow_ui_chara_hash_online(0xda4cbcb12); //toad
+            allow_ui_chara_hash_online(0x12e2fb36c6); //bomberman
+            allow_ui_chara_hash_online(0x189bd7b932); //sandbag
+            allow_ui_chara_hash_online(0x124d54553d); //masked man
         }
     }
 	
