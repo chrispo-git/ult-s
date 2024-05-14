@@ -47480,9 +47480,7 @@
             "fighter/lucas/motion/needle/c127/j02win1.nuanmb",
             "fighter/lucas/motion/needle/c127/motion_list.bin",
             "fighter/lucas/motion/needle/c127/update.prc"
-        ]
-    },
-    "share-to-added": {
+        ],
         "fighter/lucas/model/lightningsword/c120/dark_model.numatb" : [
             "fighter/lucas/model/lightningsword/c121/dark_model.numatb",
             "fighter/lucas/model/lightningsword/c122/dark_model.numatb",
