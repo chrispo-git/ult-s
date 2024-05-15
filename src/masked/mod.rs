@@ -2,7 +2,6 @@ mod status;
 mod frame;
 mod acmd;
 
-pub const FIGHTER_LUCAS_GENERATE_ARTICLE_LIGHTNINGSWORD: i32 = 0xA;
 pub const MAX_HITS : i32 = 6;
 pub const DISABLE_SPECIAL_N: i32 = 0x0100;
 pub const USE_SPECIAL_N_CALLBACK: i32 = 0x38;

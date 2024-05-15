@@ -43,10 +43,10 @@ pub fn install() {
         .sound_acmd("sound_specialndash", maskedman_neutralb_dash_snd, Priority::Low)    
         .install();
 
-    Agent::new("lucas_lightningsword")
-        .game_acmd("game_regular", lightningsword_regular, Priority::Low)    
-        .effect_acmd("effect_regular", lightningsword_regular_eff, Priority::Low)    
-        .sound_acmd("sound_regular", lightningsword_regular_snd, Priority::Low)    
+    Agent::new("lucas_pk_fire")
+        .game_acmd("game_regularlight", lightningsword_regular, Priority::Low)    
+        .effect_acmd("effect_regularlight", lightningsword_regular_eff, Priority::Low)    
+        .sound_acmd("sound_regularlight", lightningsword_regular_snd, Priority::Low)    
         .install();
 }
 
@@ -172,7 +172,7 @@ unsafe extern "C" fn maskedman_sideb(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 14.0);
     if macros::is_excute(agent) {
         //KineticModule::add_speed(agent.module_accessor, &Vector3f{x: -0.9, y: 0.1, z: 0.0});
-        ArticleModule::generate_article(agent.module_accessor, FIGHTER_LUCAS_GENERATE_ARTICLE_LIGHTNINGSWORD, false, -1);
+        ArticleModule::generate_article(agent.module_accessor, *FIGHTER_LUCAS_GENERATE_ARTICLE_PK_FIRE, false, -1);
     }
 }
 unsafe extern "C" fn maskedman_sideb_eff(agent: &mut L2CAgentBase) {
@@ -186,21 +186,22 @@ unsafe extern "C" fn maskedman_sideb_snd(agent: &mut L2CAgentBase) {
 }
 
 unsafe extern "C" fn lightningsword_regular(agent: &mut L2CAgentBase) {
-    //let rand_val = smash::app::sv_math::rand(hash40("agent"), 20);
-    let mut collision_attr = Hash40::new("collision_attr_elec");
-    /*match rand_val {
-        0 => collision_attr = Hash40::new("collision_attr_paralyze"),
-		_ => collision_attr = Hash40::new("collision_attr_elec"),
-    }*/
     if macros::is_excute(agent) {
-        macros::ATTACK(agent, 0, 0, Hash40::new("top"), 5.0, 361, 35, 0, 55, 3.0, 0.0, 0.0, 0.0, None, None, None, 0.3, 1.0, *ATTACK_SETOFF_KIND_THRU, *ATTACK_LR_CHECK_F, false, -1.9, 0.0, 0, true, true, false, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_NO_FLOOR, *COLLISION_PART_MASK_ALL, false, collision_attr, *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_ELEC, *ATTACK_REGION_NONE);
+        macros::ATTACK(agent, 0, 0, Hash40::new("top"), 5.0, 361, 35, 0, 55, 3.0, 0.0, 0.0, 0.0, None, None, None, 0.3, 1.0, *ATTACK_SETOFF_KIND_THRU, *ATTACK_LR_CHECK_F, false, -1.9, 0.0, 0, true, true, false, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_NO_FLOOR, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_elec"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_ELEC, *ATTACK_REGION_NONE);
     }
 }
 unsafe extern "C" fn lightningsword_regular_eff(agent: &mut L2CAgentBase) {
     if macros::is_excute(agent) {
-        macros::EFFECT_FOLLOW(agent, Hash40::new("pikachu_dengeki"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1, true);
-        //macros::EFFECT_FOLLOW(agent, Hash40::new("sys_damage_paralysis"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.36, true);
+        macros::EFFECT_FOLLOW(agent, Hash40::new("sys_vector"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1, true);
         macros::LAST_EFFECT_SET_RATE(agent, 0.5);
+        macros::EFFECT_FOLLOW(agent, Hash40::new("sys_damage_elec"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.25, true);
+    }
+    wait(agent.lua_state_agent, 1.0);
+    for _ in 0..i32::MAX {
+        if macros::is_excute(agent) {
+            macros::EFFECT_FOLLOW(agent, Hash40::new("sys_damage_elec"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.25, true);
+        }
+        wait(agent.lua_state_agent, 2.0);
     }
 }
 unsafe extern "C" fn lightningsword_regular_snd(agent: &mut L2CAgentBase) {
