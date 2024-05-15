@@ -39,6 +39,7 @@ pub fn is_on_ryujinx() -> bool {
     }
 }
 
+
 pub fn quick_validate_install() -> bool {
     let mut passed = true;
     //plugin checks
@@ -243,6 +244,7 @@ mod luigi;
 mod mario;
 mod mariod;
 mod marth;
+mod masked;
 mod master;
 mod metaknight;
 mod mewtwo;
@@ -437,6 +439,7 @@ pub extern "C" fn main() {
 	mario::install();
 	mariod::install();
 	marth::install();
+    masked::install();
 	master::install();
 	metaknight::install();
 	mewtwo::install();
