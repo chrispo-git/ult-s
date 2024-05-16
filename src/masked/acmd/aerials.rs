@@ -208,13 +208,13 @@ unsafe extern "C" fn maskedman_dair(agent: &mut L2CAgentBase) {
     }
 }
 unsafe extern "C" fn maskedman_dair_eff(agent: &mut L2CAgentBase) {
-    frame(agent.lua_state_agent, 13.0);
+    frame(agent.lua_state_agent, 14.0);
     if macros::is_excute(agent) {
-        macros::EFFECT(agent, Hash40::new("sys_bomb_a"), Hash40::new("throw"), 0.0, 0, 0.0, 0, 0, 0, 0.8, 0, 0, 0, 0, 0, 0, true);
+        macros::EFFECT(agent, Hash40::new("sys_bomb_a"), Hash40::new("throw"), 0.0, 0, 0.0, 0, 0, 0, 0.6, 0, 0, 0, 0, 0, 0, true);
     }
 }
 unsafe extern "C" fn maskedman_dair_snd(agent: &mut L2CAgentBase) {
-    frame(agent.lua_state_agent, 9.0);
+    frame(agent.lua_state_agent, 13.0);
     if macros::is_excute(agent) {
         macros::PLAY_SE(agent, Hash40::new("se_common_bomb_ll"));
     }

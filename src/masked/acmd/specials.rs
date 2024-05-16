@@ -195,12 +195,22 @@ unsafe extern "C" fn lightningsword_regular_eff(agent: &mut L2CAgentBase) {
     if macros::is_excute(agent) {
         macros::EFFECT_FOLLOW(agent, Hash40::new("sys_vector"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1, true);
         macros::LAST_EFFECT_SET_RATE(agent, 0.5);
+        macros::EFFECT_FOLLOW(agent, Hash40::new("sys_vector"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.9, true);
+        macros::LAST_EFFECT_SET_RATE(agent, 0.5);
+        macros::EFFECT_FOLLOW(agent, Hash40::new("sys_vector"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.8, true);
+        macros::LAST_EFFECT_SET_RATE(agent, 0.5);
+        macros::EFFECT_FOLLOW(agent, Hash40::new("sys_vector"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.7, true);
+        macros::LAST_EFFECT_SET_RATE(agent, 0.5);
         macros::EFFECT_FOLLOW(agent, Hash40::new("sys_damage_elec"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.25, true);
+        macros::EFFECT_FOLLOW(agent, Hash40::new("sys_damage_elec"), Hash40::new("top"), 0, 0.5, 0, 0, 0, 0, 0.3, true);
+        macros::EFFECT_FOLLOW(agent, Hash40::new("sys_damage_elec"), Hash40::new("top"), 0, -0.5, 0, 0, 0, 0, 0.4, true);
     }
     wait(agent.lua_state_agent, 1.0);
     for _ in 0..i32::MAX {
         if macros::is_excute(agent) {
             macros::EFFECT_FOLLOW(agent, Hash40::new("sys_damage_elec"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.25, true);
+            macros::EFFECT_FOLLOW(agent, Hash40::new("sys_damage_elec"), Hash40::new("top"), 0, 0.5, 0, 0, 0, 0, 0.3, true);
+            macros::EFFECT_FOLLOW(agent, Hash40::new("sys_damage_elec"), Hash40::new("top"), 0, -0.5, 0, 0, 0, 0, 0.4, true);
         }
         wait(agent.lua_state_agent, 2.0);
     }
