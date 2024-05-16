@@ -43,7 +43,7 @@ pub fn install() {
         .sound_acmd("sound_specialndash", maskedman_neutralb_dash_snd, Priority::Low)    
         .install();
 
-    Agent::new("lucas_pk_fire")
+    Agent::new("lucas_pkfire")
         .game_acmd("game_regularlight", lightningsword_regular, Priority::Low)    
         .effect_acmd("effect_regularlight", lightningsword_regular_eff, Priority::Low)    
         .sound_acmd("sound_regularlight", lightningsword_regular_snd, Priority::Low)    
@@ -188,6 +188,7 @@ unsafe extern "C" fn maskedman_sideb_snd(agent: &mut L2CAgentBase) {
 unsafe extern "C" fn lightningsword_regular(agent: &mut L2CAgentBase) {
     if macros::is_excute(agent) {
         macros::ATTACK(agent, 0, 0, Hash40::new("top"), 5.0, 361, 35, 0, 55, 3.0, 0.0, 0.0, 0.0, None, None, None, 0.3, 1.0, *ATTACK_SETOFF_KIND_THRU, *ATTACK_LR_CHECK_F, false, -1.9, 0.0, 0, true, true, false, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_NO_FLOOR, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_elec"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_ELEC, *ATTACK_REGION_NONE);
+        AttackModule::enable_safe_pos(agent.module_accessor);
     }
 }
 unsafe extern "C" fn lightningsword_regular_eff(agent: &mut L2CAgentBase) {
