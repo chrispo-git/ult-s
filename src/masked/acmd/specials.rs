@@ -230,8 +230,8 @@ unsafe extern "C" fn maskedman_neutralb_dash(agent: &mut L2CAgentBase) {
     }
     frame(agent.lua_state_agent, 8.0);
     if macros::is_excute(agent) {
-        macros::ATTACK(agent, 0, 0, Hash40::new("top"), 5.5 + (7.0/60.0)*(NEUTRALB_CHARGE[ENTRY_ID] as f32), 361, 66, 0, 60, 4.5, 0.0, 6.0, 15.0, None, None, None, 0.8, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, true, true, false, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_NO_FLOOR, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_paralyze"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_ELEC, *ATTACK_REGION_BODY);
-        macros::ATTACK(agent, 1, 0, Hash40::new("top"), 4.0 + (7.0/60.0)*(NEUTRALB_CHARGE[ENTRY_ID] as f32), 361, 60, 0, 55, 8.0, 0.0, 6.0, 4.0, None, None, None, 0.8, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, true, true, false, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_NO_FLOOR, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_paralyze"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_ELEC, *ATTACK_REGION_BODY);
+        macros::ATTACK(agent, 0, 0, Hash40::new("top"), 5.5 + (10.0/60.0)*(NEUTRALB_CHARGE[ENTRY_ID] as f32), 361, 20+(NEUTRALB_CHARGE[ENTRY_ID]), 0, 20+((NEUTRALB_CHARGE[ENTRY_ID]/2) as i32), 4.5, 0.0, 6.0, 15.0, None, None, None, 0.8, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, true, true, false, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_NO_FLOOR, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_paralyze"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_ELEC, *ATTACK_REGION_BODY);
+        macros::ATTACK(agent, 1, 0, Hash40::new("top"), 4.0 + (10.0/60.0)*(NEUTRALB_CHARGE[ENTRY_ID] as f32), 361, 20+(NEUTRALB_CHARGE[ENTRY_ID]), 0, 20+((NEUTRALB_CHARGE[ENTRY_ID]/2) as i32), 8.0, 0.0, 6.0, 4.0, None, None, None, 0.8, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, true, true, false, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_NO_FLOOR, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_paralyze"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_ELEC, *ATTACK_REGION_BODY);
     }
     frame(agent.lua_state_agent, 23.0);
     if macros::is_excute(agent) {
@@ -246,6 +246,7 @@ unsafe extern "C" fn maskedman_neutralb_dash_eff(agent: &mut L2CAgentBase) {
     }
     frame(agent.lua_state_agent, 4.0);
     if macros::is_excute(agent) {
+        macros::FOOT_EFFECT(fighter, Hash40::new("sys_dash_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.5, 0, 0, 0, 0, 0, 0, false);
         macros::COL_NORMAL(agent);
         macros::FLASH(agent, 2.5, 2.5, 0.0, 0.25);
     }
