@@ -43,10 +43,10 @@ unsafe extern "C" fn maskedman_frame(agent: &mut L2CFighterCommon) {
             ArticleModule::remove_exist(boma, *FIGHTER_LUCAS_GENERATE_ARTICLE_HIMOHEBI,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
 
             if [*FIGHTER_STATUS_KIND_DEAD, *FIGHTER_STATUS_KIND_LOSE, *FIGHTER_STATUS_KIND_WIN].contains(&status_kind) || smash::app::sv_information::is_ready_go() == false {
-                HAS_NEUTRALB[ENTRY_ID] = true;
+                CAN_NEUTRALB[ENTRY_ID] = 0;
             };
             if StatusModule::situation_kind(boma) != SITUATION_KIND_AIR || (*FIGHTER_STATUS_KIND_DAMAGE..*FIGHTER_STATUS_KIND_DAMAGE_FALL).contains(&status_kind) {
-                HAS_NEUTRALB[ENTRY_ID] = true;
+                CAN_NEUTRALB[ENTRY_ID] = 0;
             };
             if ![hash40("special_n_start"), hash40("special_air_n_start"), hash40("special_n_dash"), hash40("special_air_n_dash")].contains(&motion_kind) {
                 NEUTRALB_CHARGE[ENTRY_ID] = 0;
@@ -54,6 +54,10 @@ unsafe extern "C" fn maskedman_frame(agent: &mut L2CFighterCommon) {
 
             //neutral b shit
             if [hash40("special_n_start")].contains(&MotionModule::motion_kind(boma)) {
+                if MotionModule::frame(boma) > 8.0 && MotionModule::frame(boma) < 10.0 {
+                    macros::FLASH(agent, 2.5, 2.5, 0.0, 0.25);
+                    macros::EFFECT_FOLLOW(agent, Hash40::new("sys_assist_steam_max"), Hash40::new("top"), 0, 3, 0, 0, 0, 0, 2.0, true);
+                }
                 if MotionModule::frame(boma) >= 15.0 {
                     MotionModule::change_motion(boma, Hash40::new("special_n_dash"), 0.0, 1.0, false, 0.0, false, false);
                 } else if MotionModule::frame(boma) > 13.0 {
@@ -66,8 +70,12 @@ unsafe extern "C" fn maskedman_frame(agent: &mut L2CFighterCommon) {
                 }
             };
             if [hash40("special_air_n_start")].contains(&MotionModule::motion_kind(boma)) {
+                if MotionModule::frame(boma) > 8.0 && MotionModule::frame(boma) < 10.0 {
+                    macros::FLASH(agent, 2.5, 2.5, 0.0, 0.25);
+                    macros::EFFECT_FOLLOW(agent, Hash40::new("sys_assist_steam_max"), Hash40::new("top"), 0, 3, 0, 0, 0, 0, 2.0, true);
+                }
                 //VarModule::on_flag(agent.battle_object, DISABLE_SPECIAL_N);
-                WorkModule::set_flag(boma, true, DISABLE_SPECIAL_N);
+                CAN_NEUTRALB[ENTRY_ID] = 1;
                 if MotionModule::frame(boma) >= 15.0 {
                     MotionModule::change_motion(boma, Hash40::new("special_air_n_dash"), 0.0, 1.0, false, 0.0, false, false);
                 } else if MotionModule::frame(boma) > 13.0 {

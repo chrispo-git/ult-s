@@ -241,10 +241,12 @@ unsafe extern "C" fn maskedman_neutralb_dash(agent: &mut L2CAgentBase) {
 unsafe extern "C" fn maskedman_neutralb_dash_eff(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 2.0);
     if macros::is_excute(agent) {
+        macros::EFFECT_OFF_KIND(agent, Hash40::new("sys_assist_steam_max"), false, false);
         macros::EFFECT_FOLLOW(agent, Hash40::new("sys_assist_steam_max"), Hash40::new("top"), 0, 3, 0, 0, 0, 0, 2.0, true);
     }
     frame(agent.lua_state_agent, 4.0);
     if macros::is_excute(agent) {
+        macros::COL_NORMAL(agent);
         macros::FLASH(agent, 2.5, 2.5, 0.0, 0.25);
     }
     frame(agent.lua_state_agent, 20.0);
