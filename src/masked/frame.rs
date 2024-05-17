@@ -48,19 +48,36 @@ unsafe extern "C" fn maskedman_frame(agent: &mut L2CFighterCommon) {
             if StatusModule::situation_kind(boma) != SITUATION_KIND_AIR || (*FIGHTER_STATUS_KIND_DAMAGE..*FIGHTER_STATUS_KIND_DAMAGE_FALL).contains(&status_kind) {
                 HAS_NEUTRALB[ENTRY_ID] = true;
             };
+            if ![hash40("special_n_start"), hash40("special_air_n_start"), hash40("special_n_dash"), hash40("special_air_n_dash")].contains(&motion_kind) {
+                NEUTRALB_CHARGE[ENTRY_ID] = 0;
+            }
 
             //neutral b shit
             if [hash40("special_n_start")].contains(&MotionModule::motion_kind(boma)) {
                 if MotionModule::frame(boma) >= 15.0 {
                     MotionModule::change_motion(boma, Hash40::new("special_n_dash"), 0.0, 1.0, false, 0.0, false, false);
-                };
+                } else if MotionModule::frame(boma) > 13.0 {
+                    if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_SPECIAL) && NEUTRALB_CHARGE[ENTRY_ID] < 60 {
+                        MotionModule::set_rate(boma, 0.0);
+                        NEUTRALB_CHARGE[ENTRY_ID] += 1;
+                    } else {
+                        MotionModule::set_rate(boma, 1.0);
+                    }
+                }
             };
             if [hash40("special_air_n_start")].contains(&MotionModule::motion_kind(boma)) {
                 //VarModule::on_flag(agent.battle_object, DISABLE_SPECIAL_N);
                 WorkModule::set_flag(boma, true, DISABLE_SPECIAL_N);
                 if MotionModule::frame(boma) >= 15.0 {
                     MotionModule::change_motion(boma, Hash40::new("special_air_n_dash"), 0.0, 1.0, false, 0.0, false, false);
-                };
+                } else if MotionModule::frame(boma) > 13.0 {
+                    if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_SPECIAL) {
+                        MotionModule::set_rate(boma, 0.0);
+                        NEUTRALB_CHARGE[ENTRY_ID] += 1;
+                    } else {
+                        MotionModule::set_rate(boma, 1.0);
+                    }
+                }
             };
             if [hash40("special_n_dash")].contains(&MotionModule::motion_kind(boma)) {
                 if MotionModule::frame(boma) >= 5.0 && MotionModule::frame(boma) <= 11.0 {

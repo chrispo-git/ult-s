@@ -14,6 +14,7 @@ pub const STATUS_CHANGE_CALLBACK: i32 = 0x3E;
 pub const DAMAGE_MOTION_KIND_CALLBACK: i32 = 0x42;
 pub const DASH_POST_TRANSITION_CALLBACK: i32 = 0x57;
 pub static mut HAS_NEUTRALB : [bool; 8] = [true; 8];
+pub static mut NEUTRALB_CHARGE : [i32; 8] = [0; 8];
 
 
 pub fn install() {
