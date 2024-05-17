@@ -246,7 +246,7 @@ unsafe extern "C" fn maskedman_neutralb_dash_eff(agent: &mut L2CAgentBase) {
     }
     frame(agent.lua_state_agent, 4.0);
     if macros::is_excute(agent) {
-        macros::FOOT_EFFECT(fighter, Hash40::new("sys_dash_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.5, 0, 0, 0, 0, 0, 0, false);
+        macros::FOOT_EFFECT(agent, Hash40::new("sys_dash_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.5, 0, 0, 0, 0, 0, 0, false);
         macros::COL_NORMAL(agent);
         macros::FLASH(agent, 2.5, 2.5, 0.0, 0.25);
     }
