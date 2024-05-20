@@ -17,6 +17,8 @@ use super::*;
 pub fn install() {
     Agent::new("lucas")
         .game_acmd("game_appealsrmaskedman", maskedman_ftaunt, Priority::Low) 
+        .effect_acmd("effect_appealhirmaskedman", maskedman_utaunt_eff, Priority::Low)    
+        .sound_acmd("sound_appealhirmaskedman", maskedman_utaunt_snd, Priority::Low)    
         .sound_acmd("sound_appealsrmaskedman", maskedman_ftaunt_snd, Priority::Low)    
         .sound_acmd("sound_appeallwrmaskedman", maskedman_dtaunt_snd, Priority::Low)    
         .expression_acmd("expression_turnmaskedman", maskedman_turn_expr, Priority::Low)    
@@ -28,6 +30,27 @@ unsafe extern "C" fn maskedman_ftaunt(agent: &mut L2CAgentBase) {
 }
 unsafe extern "C" fn maskedman_ftaunt_snd(agent: &mut L2CAgentBase) {
     
+}
+unsafe extern "C" fn maskedman_utaunt_eff(agent: &mut L2CAgentBase) {
+    frame(agent.lua_state_agent, 55.0);
+    if macros::is_excute(agent) {
+        macros::EFFECT(agent, Hash40::new("sys_bomb_a"), Hash40::new("throw"), 0.0, 0, 0.0, 0, 0, 0, 0.4, 0, 0, 0, 0, 0, 0, true);
+        macros::QUAKE(agent, *CAMERA_QUAKE_KIND_M);
+    }
+    frame(agent.lua_state_agent, 88.0);
+    if macros::is_excute(agent) {
+        macros::LANDING_EFFECT(agent, Hash40::new("sys_down_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.6, 0, 0, 0, 0, 0, 0, true);
+    }
+}
+unsafe extern "C" fn maskedman_utaunt_snd(agent: &mut L2CAgentBase) {
+    frame(agent.lua_state_agent, 55.0);
+    if macros::is_excute(agent) {
+        macros::PLAY_SE(agent, Hash40::new("se_common_bomb_ll"));
+    }
+    frame(agent.lua_state_agent, 87.0);
+    if macros::is_excute(agent) {
+        macros::PLAY_SE(agent, Hash40::new("se_lucas_appeal01_02"));
+    }
 }
 
 unsafe extern "C" fn maskedman_dtaunt_snd(agent: &mut L2CAgentBase) {

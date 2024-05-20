@@ -25,4 +25,3 @@ pub fn install() {
 	status::install();
 	acmd::install();
 }
-`
