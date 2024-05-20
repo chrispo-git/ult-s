@@ -493,6 +493,6 @@ pub extern "C" fn main() {
 	//Arena Ferox Screenshake
 	skyline::patching::Patch::in_text(0x28444cc + 0xc80).data(0x52800009u32);
     skyline::patching::Patch::in_text(0x28440f4 + 0xc80).data(0x52800009u32);
-    skyline::patching::Patch::in_text(0x2844500).nop();
-    skyline::patching::Patch::in_text(0x2844128).nop();
+    skyline::patching::Patch::in_text(0x2844500+ 0xc80).nop();
+    skyline::patching::Patch::in_text(0x2844128+ 0xc80).nop();
 }
