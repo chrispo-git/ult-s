@@ -15,6 +15,9 @@ pub const DAMAGE_MOTION_KIND_CALLBACK: i32 = 0x42;
 pub const DASH_POST_TRANSITION_CALLBACK: i32 = 0x57;
 pub static mut HAS_NEUTRALB : [bool; 8] = [true; 8];
 pub static mut NEUTRALB_CHARGE : [i32; 8] = [0; 8];
+pub static mut TIMER_TO_DOWNB : [i32; 8] = [0; 8];
+pub static mut DOWNB_COOLDOWN : [i32; 8] = [0; 8];
+
 
 
 pub fn install() {
@@ -22,3 +25,4 @@ pub fn install() {
 	status::install();
 	acmd::install();
 }
+`

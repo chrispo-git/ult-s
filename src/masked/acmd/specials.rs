@@ -30,8 +30,7 @@ pub fn install() {
         .expression_acmd("expression_specialhiholdmaskedman", expression_specialhihold, Priority::Low)    
         .effect_acmd("effect_specialhiendmaskedman", effect_specialhiend, Priority::Low)    
         .effect_acmd("effect_fallspecialmaskedman", effect_specialhiend, Priority::Low)    
-        .game_acmd("game_speciallwholdmaskedman", game_speciallwhold, Priority::Low)    
-        .game_acmd("game_specialairlwholdmaskedman", game_speciallwhold, Priority::Low)    
+        .effect_acmd("effect_speciallwstartmaskedman", effect_downb, Priority::Low)    
         .game_acmd("game_specialairsmaskedman", maskedman_sideb, Priority::Low)    
         .effect_acmd("effect_specialairsmaskedman", maskedman_sideb_eff, Priority::Low)    
         .sound_acmd("sound_specialairsmaskedman", maskedman_sideb_snd, Priority::Low)    
@@ -157,14 +156,23 @@ unsafe extern "C" fn effect_specialhiend(agent: &mut L2CAgentBase) {
     }
 }
 
-unsafe extern "C" fn game_speciallwhold(agent: &mut L2CAgentBase) {
-	let boma = smash::app::sv_system::battle_object_module_accessor(agent.lua_state_agent);  
-    if is_added(boma) {
-        if macros::is_excute(agent) {
-            macros::ATTACK(agent, 0, 0, Hash40::new("top"), 1.3, 367, 80, 0, 25, 9.0, 0.0, 6.5, 11.5, None, None, None, 1.0, 1.3, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 6, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_ELEC, *ATTACK_REGION_NONE);
-            macros::ATTACK(agent, 1, 0, Hash40::new("top"), 0.0, 180, 100, 23, 0, 13.0, 0.0, 6.5, 11.5, None, None, None, 0.0, 0.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 6, false, false, true, true, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_NONE);
-            //AREA_WIND_2ND_RAD(agent,0, 0.5, 0.01, 1000, 1, 0, 0, 40);
-        }
+unsafe extern "C" fn effect_downb(agent: &mut L2CAgentBase) {
+    let team_color = smash::app::FighterUtil::get_team_color(agent.module_accessor);
+    let color = smash::app::FighterUtil::get_effect_team_color(
+        smash::app::EColorKind(team_color as i32),
+        Hash40::new("direction_effect_color")
+    );
+    macros::FT_MOTION_RATE(agent, 0.6);
+    frame(agent.lua_state_agent, 23.0);
+    if macros::is_excute(agent) {
+        macros::EFFECT_FOLLOW(agent, Hash40::new("sys_direction"), Hash40::new("throw"), 0, -5, 0, 0, 90, 0, 1, true);
+        EffectModule::set_rgb_partial_last(agent.module_accessor, color.x, color.y, color.z);
+        macros::EFFECT_FOLLOW(agent, Hash40::new("sys_direction"), Hash40::new("throw"), 0, 5, 0, 180, 90, 0, 1, true);
+        EffectModule::set_rgb_partial_last(agent.module_accessor, color.x, color.y, color.z);
+        macros::EFFECT_FOLLOW(agent, Hash40::new("sys_direction"), Hash40::new("throw"), 0, 0, -5, 90, 0, 90, 1, true);
+        EffectModule::set_rgb_partial_last(agent.module_accessor, color.x, color.y, color.z);
+        macros::EFFECT_FOLLOW(agent, Hash40::new("sys_direction"), Hash40::new("throw"), 0, 0, 5, -90, 0, 90, 1, true);
+        EffectModule::set_rgb_partial_last(agent.module_accessor, color.x, color.y, color.z);
     }
 }
 

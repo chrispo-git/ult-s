@@ -69,6 +69,49 @@ unsafe extern "C" fn maskedman_frame(agent: &mut L2CFighterCommon) {
                     }
                 }
             };
+            if [hash40("special_air_lw_start"), hash40("special_lw_start")].contains(&MotionModule::motion_kind(boma)) {
+                KineticModule::clear_speed_all(boma);
+                if (MotionModule::frame(boma) > 25.0 && ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_SPECIAL)) || MotionModule::frame(boma) > 96.0 || TIMER_TO_DOWNB[ENTRY_ID] > 0{
+                    MotionModule::set_rate(boma, 0.0);
+                    StopModule::end_stop(boma);
+                    TIMER_TO_DOWNB[ENTRY_ID] += 1;
+                    if TIMER_TO_DOWNB[ENTRY_ID] == 4 {
+                        macros::EFFECT_OFF_KIND(agent, Hash40::new("sys_direction"), false, false);
+                        macros::EFFECT(agent, Hash40::new("sys_bomb_a"), Hash40::new("throw"), 0.0, 0, 0.0, 0, 0, 0, 0.7, 0, 0, 0, 0, 0, 0, true);
+                        macros::ATTACK(agent, 0, 0, Hash40::new("throw"), 12.0, 45, 80, 0, 45, 8.0, 0.0, 0.0, 0.0, None, None, None, 1.1, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_fire"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_PSI);
+                        macros::QUAKE(agent, *CAMERA_QUAKE_KIND_S);
+                        macros::PLAY_SE(agent, Hash40::new("se_common_bomb_ll"));
+
+                    }
+                    if TIMER_TO_DOWNB[ENTRY_ID] > 6 {
+                        AttackModule::clear_all(boma);
+                        macros::EFFECT_OFF_KIND(agent, Hash40::new("sys_direction"), false, false);
+                    }
+                    if TIMER_TO_DOWNB[ENTRY_ID] > 10 {
+                        macros::EFFECT_OFF_KIND(agent, Hash40::new("sys_direction"), false, false);
+                        if situation_kind != *SITUATION_KIND_AIR {
+                            WorkModule::set_float(boma, 16.0, *FIGHTER_INSTANCE_WORK_ID_FLOAT_LANDING_FRAME);
+                            StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_LANDING_FALL_SPECIAL, true);
+                        } else {
+                            StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL_SPECIAL, true);
+                        }
+                    }
+                } else if MotionModule::frame(boma) > 20.0 && (MotionModule::frame(boma) as i32) % 4 == 0 {
+                    macros::EFFECT(agent, Hash40::new("sys_damage_fire"), Hash40::new("haver"), 0.0, 0, 0.0, 0, 0, 0, 0.6, 0, 0, 0, 0, 0, 0, true);
+                }
+                CAN_DOWNB[ENTRY_ID] = 1;
+                DOWNB_COOLDOWN[ENTRY_ID] = 60;
+            } else {
+                TIMER_TO_DOWNB[ENTRY_ID] = 0;
+                if CAN_DOWNB[ENTRY_ID] == 1 {
+                    DOWNB_COOLDOWN[ENTRY_ID] -= 1;
+                    if DOWNB_COOLDOWN[ENTRY_ID] <= 0 {
+                        CAN_DOWNB[ENTRY_ID] = 0;
+                    }
+                } else {
+                    DOWNB_COOLDOWN[ENTRY_ID] = 0;
+                }
+            }
             if [hash40("special_air_n_start")].contains(&MotionModule::motion_kind(boma)) {
                 if MotionModule::frame(boma) > 8.0 && MotionModule::frame(boma) < 10.0 {
                     macros::FLASH(agent, 2.5, 2.5, 0.0, 0.25);
