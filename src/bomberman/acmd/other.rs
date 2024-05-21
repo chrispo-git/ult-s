@@ -19,6 +19,13 @@ pub fn install() {
 	Agent::new("pacman")
 	.acmd("game_cliffattackbomb", bomb_cliffattack, Priority::Low)
 	.acmd("effect_cliffattackbomb", bomb_cliffattack_eff, Priority::Low)
+	.acmd("sound_jumpfrontboom", bomb_jump_snd, Priority::Low)
+	.acmd("effect_win1boom", bomb_win1, Priority::Low)
+	.acmd("effect_win2boom", bomb_win2, Priority::Low)
+	.acmd("effect_win3boom", bomb_win3, Priority::Low)
+	.acmd("effect_entryrboom", bomb_entry_eff, Priority::Low)
+	.acmd("sound_entryrboom", bomb_entry_snd, Priority::Low)
+    
 	.install();
 }
 
@@ -45,5 +52,68 @@ unsafe extern "C" fn bomb_cliffattack_eff(agent: &mut L2CAgentBase) {
     if macros::is_excute(agent) {
         macros::EFFECT_FOLLOW_FLIP(agent, Hash40::new("sys_attack_arc_d"), Hash40::new("sys_attack_arc_b"), Hash40::new("top"), 0, 3, 3, 0, 0, 10, 1.1, true, *EF_FLIP_YZ);
         macros::LAST_EFFECT_SET_RATE(agent, 0.8);
+    }
+}
+unsafe extern "C" fn bomb_jump_snd(fighter: &mut L2CAgentBase) {
+    if macros::is_excute(fighter) {
+        macros::PLAY_SE(fighter, Hash40::new("se_common_throw_01"));
+    }   
+}
+unsafe extern "C" fn bomb_win1(fighter: &mut L2CAgentBase) {
+    for _ in 0..30 {
+        if macros::is_excute(fighter) {
+            macros::EFFECT(fighter, Hash40::new("sys_damage_fire"), Hash40::new("bust"), 0, -6, 6, 0, 0, 0, 1.2, 0, 0, 0, 0, 0, 0, true);
+            macros::EFFECT(fighter, Hash40::new("sys_damage_fire"), Hash40::new("bust"), 0, -6, -6, 0, 0, 0, 1.2, 0, 0, 0, 0, 0, 0, true);
+        }
+        wait(fighter.lua_state_agent, 2.0);
+    }
+    frame(fighter.lua_state_agent, 68.0);
+    if macros::is_excute(fighter) {
+        macros::LANDING_EFFECT(fighter, Hash40::new("sys_down_smoke"), Hash40::new("trans"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
+    }
+    frame(fighter.lua_state_agent, 94.0);
+    if macros::is_excute(fighter) {
+        macros::LANDING_EFFECT(fighter, Hash40::new("sys_down_smoke"), Hash40::new("trans"), 0, 0, 0, 0, 0, 0, 1.1, 0, 0, 0, 0, 0, 0, false);
+    }
+}
+
+unsafe extern "C" fn bomb_win2(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 48.0);
+    if macros::is_excute(fighter) {
+        macros::LANDING_EFFECT(fighter, Hash40::new("sys_atk_smoke"), Hash40::new("trans"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
+    }
+    frame(fighter.lua_state_agent, 74.0);
+    if macros::is_excute(fighter) {
+        macros::LANDING_EFFECT(fighter, Hash40::new("sys_down_smoke"), Hash40::new("trans"), 0, 0, 0, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, false);
+    }
+}
+
+
+unsafe extern "C" fn bomb_win3(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 44.0);
+    if macros::is_excute(fighter) {
+        macros::LANDING_EFFECT(fighter, Hash40::new("sys_atk_smoke"), Hash40::new("trans"), 0, 0, 0, 0, 0, 0, 0.7, 0, 0, 0, 0, 0, 0, false);
+    }
+    frame(fighter.lua_state_agent, 92.0);
+    if macros::is_excute(fighter) {
+        macros::LANDING_EFFECT(fighter, Hash40::new("sys_atk_smoke"), Hash40::new("trans"), 0, 0, 0, 0, 0, 0, 0.7, 0, 0, 0, 0, 0, 0, false);
+    }
+}
+
+
+
+unsafe extern "C" fn bomb_entry_eff(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 2.0);
+    if macros::is_excute(fighter) {
+        macros::EFFECT(fighter, Hash40::new("sys_bomb_a"), Hash40::new("hip"), 0, 0, 0, 0, 0, 0, 1.5, 0, 0, 0, 0, 0, 0, true);
+    }
+}
+
+
+
+unsafe extern "C" fn bomb_entry_snd(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 2.0);
+    if macros::is_excute(fighter) {
+        macros::PLAY_SE(fighter, Hash40::new("se_common_bomb_ll"));
     }
 }

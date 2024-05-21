@@ -17,6 +17,7 @@ use crate::bomberman::*;
 
 pub fn install() {
 	Agent::new("pacman")
+	.acmd("sound_speciallwbomb", bomb_downb_snd, Priority::Low)
 	.acmd("game_specialairhiboom", bomb_upb, Priority::Low)
 	.acmd("sound_specialairhiboom", bomb_upb_snd, Priority::Low)
 	.acmd("sound_specialhiboom", bomb_upb_snd, Priority::Low)
@@ -27,6 +28,8 @@ pub fn install() {
 	.acmd("game_specialnshootboom", bomb_neutralb, Priority::Low)
 	.acmd("effect_specialairnshootboom", bomb_neutralb_eff, Priority::Low)
 	.acmd("effect_specialnshootboom", bomb_neutralb_eff, Priority::Low)
+	.acmd("sound_specialairnshootboom", bomb_neutralb_snd, Priority::Low)
+	.acmd("sound_specialnshootboom", bomb_neutralb_snd, Priority::Low)
 	.acmd("game_speciallwfailurebomb", bomb_detonate, Priority::Low)
 	.acmd("game_specialairlwfailurebomb", bomb_detonate, Priority::Low)
 	.acmd("effect_speciallwfailurebomb", bomb_detonate_eff, Priority::Low)
@@ -51,12 +54,20 @@ pub fn install() {
 	.install();
 }
 
+unsafe extern "C" fn bomb_downb_snd(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 10.0);
+    if macros::is_excute(fighter) {
+        macros::PLAY_SE(fighter, Hash40::new("se_common_landing_famicom"));
+        macros::PLAY_SE(fighter, Hash40::new("se_common_punch_kick_swing_m"));
+    }   
+}
+
 unsafe extern "C" fn bomb_upb_snd(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 10.0);
     if macros::is_excute(fighter) {
         macros::PLAY_SE(fighter, Hash40::new("se_common_bomb_ll"));
         macros::PLAY_SE(fighter, Hash40::new("se_common_blowaway_m"));
-    }
+    }   
 }
 unsafe extern "C" fn bomb_upb(fighter: &mut L2CAgentBase) {
     for _ in 0..10 {
@@ -98,13 +109,20 @@ unsafe extern "C" fn bomb_neutralb(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 6.0);
     if macros::is_excute(fighter) {
         AttackModule::clear_all(fighter.module_accessor);
-        macros::ATTACK(fighter, 0, 0, Hash40::new("haver"), 6.0 + (10.0*((NEUTRALB_CHARGE[ENTRY_ID] as f32)/(NEUTRALB_MAX as f32))), 361, 70, 0, 45, 6.0, 0.0, 0.0, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_PUNCH, *ATTACK_REGION_KICK);
+        macros::ATTACK(fighter, 0, 0, Hash40::new("haver"), 6.0 + (10.0*((NEUTRALB_CHARGE[ENTRY_ID] as f32)/(NEUTRALB_MAX as f32))), 361, 80, 0, 45, 6.0, 0.0, 0.0, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_PUNCH, *ATTACK_REGION_KICK);
     }
     frame(fighter.lua_state_agent, 13.0);
     if macros::is_excute(fighter) {
         NEUTRALB_CHARGE[ENTRY_ID] = 0;
         AttackModule::clear_all(fighter.module_accessor);
     }
+}
+unsafe extern "C" fn bomb_neutralb_snd(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 5.0);
+    if macros::is_excute(fighter) {
+        macros::PLAY_SE(fighter, Hash40::new("se_common_smashswing_01"));
+        macros::PLAY_SE(fighter, Hash40::new("se_common_swing_07"));
+    }   
 }
 unsafe extern "C" fn bomb_neutralb_eff(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 4.0);
