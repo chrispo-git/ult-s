@@ -18,6 +18,8 @@ use crate::bomberman::*;
 pub fn install() {
 	Agent::new("pacman")
 	.acmd("game_specialairhiboom", bomb_upb, Priority::Low)
+	.acmd("sound_specialairhiboom", bomb_upb_snd, Priority::Low)
+	.acmd("sound_specialhiboom", bomb_upb_snd, Priority::Low)
 	.acmd("game_specialhiboom", bomb_upb, Priority::Low)
 	.acmd("effect_specialairhiboom", bomb_upb_eff, Priority::Low)
 	.acmd("effect_specialhiboom", bomb_upb_eff, Priority::Low)
@@ -32,7 +34,7 @@ pub fn install() {
 	.acmd("sound_speciallwfailurebomb", bomb_detonate_snd, Priority::Low)
 	.acmd("sound_specialairlwfailurebomb", bomb_detonate_snd, Priority::Low)
 	.acmd("game_specialsdashboom", bomb_sideb_catch, Priority::Low)
-	.acmd("game_specialsdashboom", bomb_sideb_catch, Priority::Low)
+	.acmd("sound_specialsdashboom", bomb_sideb_catch_snd, Priority::Low) 
 	.acmd("game_specialsstartboom", bomb_sideb_start, Priority::Low)
 	.acmd("game_specialairsstartboom", bomb_sideb_start, Priority::Low)
 	.acmd("game_specialsbomb", bomb_sideb_throw, Priority::Low)
@@ -48,6 +50,13 @@ pub fn install() {
 	.install();
 }
 
+unsafe extern "C" fn bomb_upb_snd(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 10.0);
+    if macros::is_excute(fighter) {
+        macros::PLAY_SE(fighter, Hash40::new("se_common_bomb_ll"));
+        macros::PLAY_SE(fighter, Hash40::new("se_common_blowaway_m"));
+    }
+}
 unsafe extern "C" fn bomb_upb(fighter: &mut L2CAgentBase) {
     for _ in 0..10 {
         if macros::is_excute(fighter) {
@@ -204,6 +213,21 @@ unsafe extern "C" fn bomb_bomb_wait(agent: &mut L2CAgentBase) {
         if macros::is_excute(agent) {
             macros::ATTACK(agent, 0, 0, Hash40::new("top"), 0.0, 361, 0, 0, 0, 5.0, 0.0, 6.0, 0.0, Some(0.0), Some(4.5), Some(0.0), 1.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 10, true, false, false, true, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_search"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_OBJECT);
         }
+    }
+}
+unsafe extern "C" fn bomb_sideb_catch_snd(agent: &mut L2CAgentBase) {
+    macros::FT_MOTION_RATE(agent, /*FSM*/ 0.5);
+    frame(agent.lua_state_agent, 2.0);
+    for _ in 0..6 {
+        if macros::is_excute(agent) {
+            macros::PLAY_SE(agent, Hash40::new("se_common_wallhit"));
+        }
+        wait(agent.lua_state_agent, 3.0);
+    }
+    frame(agent.lua_state_agent, 24.0);
+    if macros::is_excute(agent) {
+        macros::PLAY_SE(agent, Hash40::new("se_common_step_soft"));
+        macros::PLAY_SE(agent, Hash40::new("se_common_swing_05"));
     }
 }
 unsafe extern "C" fn bomb_sideb_catch(agent: &mut L2CAgentBase) {
