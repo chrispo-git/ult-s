@@ -34,6 +34,7 @@ pub fn install() {
 	.acmd("sound_speciallwfailurebomb", bomb_detonate_snd, Priority::Low)
 	.acmd("sound_specialairlwfailurebomb", bomb_detonate_snd, Priority::Low)
 	.acmd("game_specialsdashboom", bomb_sideb_catch, Priority::Low)
+	.acmd("game_specialsdashboom", bomb_sideb_catch, Priority::Low)
 	.acmd("sound_specialsdashboom", bomb_sideb_catch_snd, Priority::Low) 
 	.acmd("game_specialsstartboom", bomb_sideb_start, Priority::Low)
 	.acmd("game_specialairsstartboom", bomb_sideb_start, Priority::Low)
