@@ -108,7 +108,7 @@ unsafe extern "C" fn sandbag_sideb_fire(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 1.0);
     macros::FT_MOTION_RATE(agent, /*FSM*/ 0.8);
     if macros::is_excute(agent) {
-        macros::ATTACK(agent, 0, 0, Hash40::new("bust"), if SIDEB_CHARGE[ENTRY_ID] >= 10.0 && SIDEB_CHARGE[ENTRY_ID] <= 30.0 {8.5} else if SIDEB_CHARGE[ENTRY_ID] > 30.0 && SIDEB_CHARGE[ENTRY_ID] <= 60.0 {13.0} else {16.5}, 361, 80, 0, 30, 9.0, 0.0, 0.0, 0.0, None, None, None, 1.2, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 4, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_NO_FLOOR, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_fire"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_BODY);
+        macros::ATTACK(agent, 0, 0, Hash40::new("bust"), 10.0 + 8.0*(SIDEB_CHARGE[ENTRY_ID] as f32/SIDEB_MAX), 361, 60, 0, 70, 9.0, 0.0, 0.0, 0.0, None, None, None, 1.2, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 4, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_NO_FLOOR, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_fire"), if(SIDEB_CHARGE[ENTRY_ID]<40.0){*ATTACK_SOUND_LEVEL_M}else{*ATTACK_SOUND_LEVEL_L}, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_BODY);
     }
 }
 unsafe extern "C" fn sandbag_sideb_fire_eff(agent: &mut L2CAgentBase) {

@@ -75,14 +75,14 @@ pub fn install() {
 unsafe extern "C" fn sandbag_jumpaerialback_snd(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 2.0);
     if macros::is_excute(agent) {
-        macros::STOP_SE(agent, Hash40::new("se_mariod_jump01"));
+        macros::STOP_SE(agent, Hash40::new("se_common_throw_01"));
     }
 }
 
 unsafe extern "C" fn sandbag_jumpaerialfront_snd(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 2.0);
     if macros::is_excute(agent) {
-        macros::STOP_SE(agent, Hash40::new("se_mariod_jump01"));
+        macros::STOP_SE(agent, Hash40::new("se_common_throw_01"));
     }
 }
 

@@ -1145,7 +1145,7 @@ slots = [120,121,122,123,124,125,126,127]
 [[param_float]]
 param = "weight"
 subparam = ""
-value = 94.0
+value = 87.0
 kinds = ["lucas"]
 slots = [120,121,122,123,124,125,126,127]
 

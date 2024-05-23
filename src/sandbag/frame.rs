@@ -41,6 +41,9 @@ unsafe extern "C" fn sandbag_frame(fighter: &mut L2CFighterCommon) {
     STICK_DIRECTION[ENTRY_ID] = ControlModule::get_stick_dir(boma) * DIR_MULT;
     
     if is_added(boma) && fighter_kind == *FIGHTER_KIND_MARIOD { //silver
+        if situation_kind != *SITUATION_KIND_AIR || (*FIGHTER_STATUS_KIND_DAMAGE..*FIGHTER_STATUS_KIND_DAMAGE_FALL).contains(&status_kind) {
+            CAN_UPB[ENTRY_ID] = 0;
+        }
         if MotionModule::motion_kind(fighter.module_accessor) == hash40("special_lw3") {
             if MotionModule::frame(boma) >= 26.0 {
                 StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_WAIT, true);
@@ -82,7 +85,7 @@ unsafe extern "C" fn sandbag_frame(fighter: &mut L2CFighterCommon) {
                 };
                 KineticModule::suspend_energy(boma, *FIGHTER_KINETIC_ENERGY_ID_CONTROL);
                 SIDEB_CHARGE[ENTRY_ID] += 1.0;
-                if SIDEB_CHARGE[ENTRY_ID] >= 90.0 || (SIDEB_CHARGE[ENTRY_ID] >= 3.0 && ControlModule::check_button_off(fighter.module_accessor, *CONTROL_PAD_BUTTON_SPECIAL)) {
+                if SIDEB_CHARGE[ENTRY_ID] >= SIDEB_MAX || (SIDEB_CHARGE[ENTRY_ID] >= 10.0 && ControlModule::check_button_off(fighter.module_accessor, *CONTROL_PAD_BUTTON_SPECIAL)) {
                     MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_air_s_fire"), 0.0, 1.0, false, 0.0, false, false);
                     //StatusModule::set_situation_kind(boma, smash::app::SituationKind(*SITUATION_KIND_AIR), true);
                     //StatusModule::set_keep_situation_air(boma, true);
@@ -128,21 +131,11 @@ unsafe extern "C" fn sandbag_frame(fighter: &mut L2CFighterCommon) {
                     MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_air_s_fire_hit"), 0.0, 1.0, false, 0.0, false, false);
                     StatusModule::set_situation_kind(boma, smash::app::SituationKind(*SITUATION_KIND_AIR), true);
                 };
-                if stick_y <= -0.5 {
-                    GroundModule::pass_floor(boma);
-                    if ray_check_pos(boma, 0.0, -0.6, false) == 1 && SIDEB_FIRE_COUNT[ENTRY_ID] > 24 {
+                GroundModule::clear_pass_floor(boma);
+                if ray_check_pos(boma, 0.0, -0.6, true) == 1 && SIDEB_FIRE_COUNT[ENTRY_ID] > 24 {
                         StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_LANDING, true);
                         StatusModule::set_situation_kind(boma, smash::app::SituationKind(*SITUATION_KIND_GROUND), true);
                         macros::SET_SPEED_EX(fighter, 0.0, 0.0, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
-                    };
-                } 
-                else {
-                    GroundModule::clear_pass_floor(boma);
-                    if ray_check_pos(boma, 0.0, -0.6, true) == 1 && SIDEB_FIRE_COUNT[ENTRY_ID] > 24 {
-                        StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_LANDING, true);
-                        StatusModule::set_situation_kind(boma, smash::app::SituationKind(*SITUATION_KIND_GROUND), true);
-                        macros::SET_SPEED_EX(fighter, 0.0, 0.0, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
-                    };
                 };
             };
             if [hash40("special_air_s_fire_hit")].contains(&MotionModule::motion_kind(boma)) {
@@ -175,20 +168,12 @@ unsafe extern "C" fn sandbag_frame(fighter: &mut L2CFighterCommon) {
         if [hash40("special_hi"),hash40("special_air_hi")].contains(&MotionModule::motion_kind(boma)) {
             //New method 
             if DamageModule::damage(boma, 0) < 50.0 {
-                SPEED_MUL[ENTRY_ID] = 1.0;
+                SPEED_MUL[ENTRY_ID] = 0.7;
+            } else if DamageModule::damage(boma, 0) < 300.0 {
+                SPEED_MUL[ENTRY_ID] = 0.7 + 0.6*(DamageModule::damage(boma, 0)/250.0);
+            } else {
+                SPEED_MUL[ENTRY_ID] = 1.3;
             }
-            else if DamageModule::damage(boma, 0) >= 50.0 && DamageModule::damage(boma, 0) < 100.0 {
-                SPEED_MUL[ENTRY_ID] = 1.33;
-            }
-            else if DamageModule::damage(boma, 0) >= 100.0 && DamageModule::damage(boma, 0) < 150.0 {
-                SPEED_MUL[ENTRY_ID] = 1.66;
-            }
-            else if DamageModule::damage(boma, 0) >= 150.0 && DamageModule::damage(boma, 0) < 300.0 {
-                SPEED_MUL[ENTRY_ID] = 2.0;
-            }
-            else if DamageModule::damage(boma, 0) >= 300.0 {
-                SPEED_MUL[ENTRY_ID] = 7.5;
-            };
             if MotionModule::frame(boma) < 18.0 {
                 macros::SET_SPEED_EX(fighter, 0.0, 0.0, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
             }
@@ -197,6 +182,7 @@ unsafe extern "C" fn sandbag_frame(fighter: &mut L2CFighterCommon) {
                 smash::app::lua_bind::FighterKineticEnergyMotion::set_speed_mul(fighter_kinetic_energy_motion, SPEED_MUL[ENTRY_ID]);
             };
             if GroundModule::is_wall_touch_line(boma, *GROUND_TOUCH_FLAG_ALL as u32) && MotionModule::frame(boma) > 24.0 {//&& !BAN_UPB_TECH[ENTRY_ID] {
+                CAN_UPB[ENTRY_ID] = 1;
                 if /*DamageModule::damage(boma, 0) >= 50.0 &&*/ DamageModule::damage(boma, 0) < 300.0 {
                     if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_GUARD) {
                         StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_PASSIVE_WALL, true);

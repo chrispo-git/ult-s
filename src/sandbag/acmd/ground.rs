@@ -70,17 +70,15 @@ unsafe extern "C" fn sandbag_da(agent: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(agent, 0.8);
     frame(agent.lua_state_agent, 8.0);
     macros::FT_MOTION_RATE(agent, 1.0);
-    for _ in 0..7 {
-        if macros::is_excute(agent) {
-            macros::ATTACK(agent, 0, 0, Hash40::new("trans"), 1.2, 20, 100, 36, 0, 3.0, 0.0, 6.0, 4.6, None, None, None, 0.5, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_POS, false, 1, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_PUNCH, *ATTACK_REGION_BODY);
-            macros::ATTACK(agent, 1, 0, Hash40::new("trans"), 1.2, 0, 100, 36, 0, 4.5, 0.0, 12.0, 4.6, None, None, None, 0.5, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_POS, false, 1, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_PUNCH, *ATTACK_REGION_BODY);
-            macros::ATTACK(agent, 2, 0, Hash40::new("trans"), 1.2, 20, 100, 42, 0, 2.0, 0.0, 4.0, 1.5, None, None, None, 0.5, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_POS, false, 1, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_PUNCH, *ATTACK_REGION_BODY);
-        }
-        wait(agent.lua_state_agent, 1.0);
-        if macros::is_excute(agent) {
-            AttackModule::clear_all(agent.module_accessor);
-        }
-        wait(agent.lua_state_agent, 2.0);
+    if macros::is_excute(agent) {
+            macros::ATTACK(agent, 0, 0, Hash40::new("trans"), 1.2, 20, 100, 36, 0, 3.0, 0.0, 6.0, 4.6, None, None, None, 0.5, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_POS, false, 1, 0.0, 3, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_PUNCH, *ATTACK_REGION_BODY);
+            macros::ATTACK(agent, 1, 0, Hash40::new("trans"), 1.2, 0, 100, 36, 0, 4.5, 0.0, 12.0, 4.6, None, None, None, 0.5, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_POS, false, 1, 0.0, 3, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_PUNCH, *ATTACK_REGION_BODY);
+            macros::ATTACK(agent, 2, 0, Hash40::new("trans"), 1.2, 20, 100, 42, 0, 2.0, 0.0, 4.0, 1.5, None, None, None, 0.5, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_POS, false, 1, 0.0, 3, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_PUNCH, *ATTACK_REGION_BODY);
+            macros::ATTACK(agent, 3, 0, Hash40::new("trans"), 4.0, 45, 100, 0, 70, 4.5, 0.0, 12.0, 4.6, None, None, None, 0.5, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_POS, false, 1, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_A, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_PUNCH, *ATTACK_REGION_BODY);
+    }
+    frame(agent.lua_state_agent, 21.0);
+    if macros::is_excute(agent) {
+        AttackModule::clear_all(agent.module_accessor);
     }
     frame(agent.lua_state_agent, 33.0);
     if macros::is_excute(agent) {
