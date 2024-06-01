@@ -167,12 +167,12 @@ unsafe extern "C" fn sandbag_frame(fighter: &mut L2CFighterCommon) {
         //up b shit
         if [hash40("special_hi"),hash40("special_air_hi")].contains(&MotionModule::motion_kind(boma)) {
             //New method 
-            if DamageModule::damage(boma, 0) < 50.0 {
-                SPEED_MUL[ENTRY_ID] = 0.7;
+            if DamageModule::damage(boma, 0) < 25.0 {
+                SPEED_MUL[ENTRY_ID] = 0.9;
             } else if DamageModule::damage(boma, 0) < 300.0 {
-                SPEED_MUL[ENTRY_ID] = 0.7 + 0.6*(DamageModule::damage(boma, 0)/250.0);
+                SPEED_MUL[ENTRY_ID] = 0.9 + 0.6*(DamageModule::damage(boma, 0)/275.0);
             } else {
-                SPEED_MUL[ENTRY_ID] = 1.3;
+                SPEED_MUL[ENTRY_ID] = 1.5;
             }
             if MotionModule::frame(boma) < 18.0 {
                 macros::SET_SPEED_EX(fighter, 0.0, 0.0, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
@@ -193,46 +193,10 @@ unsafe extern "C" fn sandbag_frame(fighter: &mut L2CFighterCommon) {
                     };
                 };
             };
-            
-            //Attempt at manual damage increase up b distance (FAIL)
-            /*if MotionModule::frame(boma) < 18.0 {
-                macros::SET_SPEED_EX(fighter, 0.0, 0.0, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+            if MotionModule::frame(boma) > 14.0 {
+                ModelModule::set_mesh_visibility(boma, Hash40::new("rockman_ex_batm"), false);
+                ModelModule::set_mesh_visibility(boma, Hash40::new("rockman_ex_bat"), false);
             }
-            else if MotionModule::frame(boma) >= 18.0 && MotionModule::frame(boma) < 26.0 {
-                if DamageModule::damage(boma, 0) <= 50.0 {
-                    macros::SET_SPEED_EX(fighter, 1.25, 1.4, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
-                }
-                else {
-                    macros::SET_SPEED_EX(fighter, (DamageModule::damage(boma, 0) * 0.025), (DamageModule::damage(boma, 0) * 0.03), *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
-                }
-            }
-            else if MotionModule::frame(boma) >= 26.0 && MotionModule::frame(boma) < 51.0 {
-                if DamageModule::damage(boma, 0) <= 50.0 {
-                    macros::SET_SPEED_EX(fighter, 1.2, 0.9, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
-                }
-                else {
-                    macros::SET_SPEED_EX(fighter, (DamageModule::damage(boma, 0) * 0.03), (DamageModule::damage(boma, 0) * 0.005), *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
-                }
-            }
-            else if MotionModule::frame(boma) >= 51.0 {
-                if DamageModule::damage(boma, 0) <= 50.0 {
-                    macros::SET_SPEED_EX(fighter, 1.1, 0.0, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
-                }
-                else {
-                    macros::SET_SPEED_EX(fighter, (DamageModule::damage(boma, 0) * 0.015), 0.0, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
-                }
-            }
-            if AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_HIT) && MotionModule::frame(boma) >= 38.0 && UPB_CAN_CANCEL[ENTRY_ID] {
-                if (ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_ATTACK_S4) != 0 || (ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_ATTACK_S3) != 0 {
-                    StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_ATTACK_AIR, true);
-                } else if (ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_ATTACK_HI4) != 0 || (ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_ATTACK_HI3) != 0 {
-                    StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_ATTACK_AIR, true);
-                } else if (ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_ATTACK_LW4) != 0 || (ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_ATTACK_LW3) != 0 {
-                    StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_ATTACK_AIR, true);
-                } else if (ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_ATTACK_N) != 0 {
-                    StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_ATTACK_AIR, true);
-                };
-            };*/
         }
         else {
             macros::EFFECT_OFF_KIND(fighter, Hash40::new("mariod_superjump_power"), false, true);
