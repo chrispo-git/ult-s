@@ -27,6 +27,7 @@ unsafe extern "C" fn pichu_frame(fighter: &mut L2CFighterCommon) {
 		if is_default(boma) {
 			let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
 			let motion_kind = MotionModule::motion_kind(boma);
+			let kinetic_kind = KineticModule::get_kinetic_type(boma);
 			let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 			let total_hitstun = WorkModule::get_float(boma, *FIGHTER_INSTANCE_WORK_ID_FLOAT_DAMAGE_REACTION_FRAME_LAST);
 			let cancel_frame = FighterMotionModuleImpl::get_cancel_frame(boma,smash::phx::Hash40::new_raw(MotionModule::motion_kind(boma)),false) as f32;
@@ -36,7 +37,12 @@ unsafe extern "C" fn pichu_frame(fighter: &mut L2CFighterCommon) {
 			if StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR && [*FIGHTER_PIKACHU_STATUS_KIND_SPECIAL_HI_END].contains(&status_kind) {
 				StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL, false);
 				if WorkModule::get_int(boma,  *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT) >= WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT_MAX) {
-					WorkModule::set_int(boma, 0, *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT);
+					if StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR {
+						WorkModule::set_int(boma, 1, *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT);
+					}
+					else if StatusModule::situation_kind(boma) == *SITUATION_KIND_GROUND {
+						WorkModule::set_int(boma, 0, *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT);
+					}
 				}
 				CAN_UPB[ENTRY_ID] = 1;
 			};
@@ -55,7 +61,7 @@ unsafe extern "C" fn pichu_frame(fighter: &mut L2CFighterCommon) {
 					};
 					ONE_DAIR[ENTRY_ID] = true;
 				};
-			}
+			};
 			if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_LW {
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_PIKACHU_STATUS_KIND_SPECIAL_LW_HIT, true);
 					KineticModule::clear_speed_all(boma);
@@ -67,7 +73,7 @@ unsafe extern "C" fn pichu_frame(fighter: &mut L2CFighterCommon) {
 			};
 			if StatusModule::situation_kind(boma) != *SITUATION_KIND_AIR {
 				HAS_DOWNB[ENTRY_ID] = false;
-				DO_STALL[ENTRY_ID] = false;
+				DO_STALL[ENTRY_ID] = true;
 				ONE_DAIR[ENTRY_ID] = false;
 				CAN_DOWNB[ENTRY_ID] = 0;
 			};
