@@ -187,6 +187,7 @@ unsafe extern "C" fn sandbag_frame(fighter: &mut L2CFighterCommon) {
                         //BAN_UPB_TECH[ENTRY_ID] = true;
                     }
                     else {
+                        DamageModule::add_damage(boma, 8.0, 0);
                         StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_DAMAGE_FLY_REFLECT_LR, true);
                     };
                 };
