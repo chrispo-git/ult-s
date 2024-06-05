@@ -168,9 +168,9 @@ unsafe extern "C" fn sandbag_frame(fighter: &mut L2CFighterCommon) {
         if [hash40("special_hi"),hash40("special_air_hi")].contains(&MotionModule::motion_kind(boma)) {
             //New method 
             if DamageModule::damage(boma, 0) < 300.0 {
-                SPEED_MUL[ENTRY_ID] = 1.2 + 0.8*(DamageModule::damage(boma, 0)/300.0);
+                SPEED_MUL[ENTRY_ID] = 0.95 + 0.5*(DamageModule::damage(boma, 0)/300.0);
             } else {
-                SPEED_MUL[ENTRY_ID] = 2.0;
+                SPEED_MUL[ENTRY_ID] = 1.45;
             }
             if MotionModule::frame(boma) < 18.0 {
                 macros::SET_SPEED_EX(fighter, 0.0, 0.0, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
