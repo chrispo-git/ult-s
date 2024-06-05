@@ -79,6 +79,8 @@ unsafe extern "C" fn rayman(fighter: &mut L2CFighterCommon) {
         let stick_y = ControlModule::get_stick_y(boma);
         let lr = PostureModule::lr(boma);
         let is_ray = (WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) >= 120 && WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) <= 127);
+        let is_near_ground = GroundModule::ray_check(fighter.module_accessor, &Vector2f{ x: PostureModule::pos_x(fighter.module_accessor), y: PostureModule::pos_y(fighter.module_accessor)}, &Vector2f{ x: 0.0, y: -1.0}, true);
+        
 
         if is_ray && fighter_kind == *FIGHTER_KIND_PIKMIN { //rayman slots
             if status_kind == *FIGHTER_STATUS_KIND_ENTRY || is_reset() {
@@ -138,6 +140,26 @@ unsafe extern "C" fn rayman(fighter: &mut L2CFighterCommon) {
             } else {
                 HAS_DEADED[ENTRY_ID] = false;
             };
+            if status_kind == *FIGHTER_STATUS_KIND_CAPTURE_PULLED && MotionModule::frame(boma) > 20.0 {
+                CAPTURE_TIME[ENTRY_ID] -= 1;
+                if ((ControlModule::get_flick_y(boma) >= 3 && ControlModule::get_flick_y(boma) < 20)) || ((ControlModule::get_flick_x(boma) >= 3 && ControlModule::get_flick_x(boma) < 20)) ||
+                ControlModule::check_button_on_trriger(boma, *CONTROL_PAD_BUTTON_JUMP) ||
+                ControlModule::check_button_on_trriger(boma, *CONTROL_PAD_BUTTON_ATTACK) ||
+                ControlModule::check_button_on_trriger(boma, *CONTROL_PAD_BUTTON_CATCH) ||
+                ControlModule::check_button_on_trriger(boma, *CONTROL_PAD_BUTTON_SPECIAL) {
+                    CAPTURE_TIME[ENTRY_ID] -= 8;
+                }
+                if CAPTURE_TIME[ENTRY_ID] <= 0 {
+                    if ControlModule::get_stick_y(boma) >= 0.5 || is_near_ground == 0 {
+                        StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_CAPTURE_JUMP, true);
+                    } else {
+                        StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_CAPTURE_CUT, true);
+                    }
+                }
+
+            } else {
+                CAPTURE_TIME[ENTRY_ID] = 90 + (DamageModule::damage(boma,0)*1.7) as i32;
+            }
 
             //Neutralb
             if ![hash40("special_air_n_pull"), hash40("special_n_pull")].contains(&motion_kind){
