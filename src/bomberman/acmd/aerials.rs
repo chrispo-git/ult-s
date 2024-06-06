@@ -88,7 +88,7 @@ unsafe extern "C" fn bomb_uair(fighter: &mut L2CAgentBase) {
 unsafe extern "C" fn bomb_uair_eff(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 9.0);
     if macros::is_excute(fighter) {
-        macros::EFFECT_FLIP_ALPHA(fighter, Hash40::new("sys_attack_impact"), Hash40::new("sys_attack_impact"), Hash40::new("footr"), 0, 0, 0, 0, 0, 0, 1.1, 0, 0, 0, 0, 0, 0, true, *EF_FLIP_YZ, 1.0);
+        macros::EFFECT_FLIP_ALPHA(fighter, Hash40::new("sys_attack_impact"), Hash40::new("sys_attack_impact"), Hash40::new("footr"), 0, 0, 0, 0, 0, 0, 1.02, 0, 0, 0, 0, 0, 0, true, *EF_FLIP_YZ, 1.0);
     }
 }
 unsafe extern "C" fn bomb_uair_snd(agent: &mut L2CAgentBase) {
@@ -140,7 +140,7 @@ unsafe extern "C" fn bomb_bair_snd(agent: &mut L2CAgentBase) {
 unsafe extern "C" fn bomb_bair_eff(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 9.0);
     if macros::is_excute(agent) {
-        macros::EFFECT_FLIP_ALPHA(agent, Hash40::new("sys_attack_impact"), Hash40::new("sys_attack_impact"), Hash40::new("toer"), 0, 0, 0, 0, 0, 0, 0.75, 0, 0, 0, 0, 0, 0, true, *EF_FLIP_YZ, 1.0);
+        macros::EFFECT_FLIP_ALPHA(agent, Hash40::new("sys_attack_impact"), Hash40::new("sys_attack_impact"), Hash40::new("toer"), 0, 0, 0, 0, 0, 0, 0.84, 0, 0, 0, 0, 0, 0, true, *EF_FLIP_YZ, 1.0);
         macros::LAST_EFFECT_SET_RATE(agent, 1.2);
     }
 }
@@ -208,43 +208,22 @@ unsafe extern "C" fn bomb_dair(agent: &mut L2CAgentBase) {
     }
 }
 unsafe extern "C" fn bomb_dair_eff(agent: &mut L2CAgentBase) {
-    frame(agent.lua_state_agent, 5.0);
-    if macros::is_excute(agent) {
-        macros::EFFECT_FOLLOW(agent, Hash40::new("sys_spin_wind"), Hash40::new("top"), 0, 2, 4, 49.602, -59.68, 150.37, 0.35, true);
-    }
-    frame(agent.lua_state_agent, 6.0);
-    if macros::is_excute(agent) {
-        macros::EFFECT_FOLLOW(agent, Hash40::new("sys_spin_wind"), Hash40::new("top"), 0, 4, 2, 39.6, -59.68, 150.37, 0.43, true);
-        macros::LAST_EFFECT_SET_RATE(agent, 1.3);
-    }
-    frame(agent.lua_state_agent, 7.0);
-    if macros::is_excute(agent) {
-        macros::EFFECT_FOLLOW(agent, Hash40::new("sys_spin_wind"), Hash40::new("top"), 0, 8, -1, 59.23, -52.05, 138.77, 0.8, true);
-        macros::LAST_EFFECT_SET_RATE(agent, 1.3);
-    }
-    frame(agent.lua_state_agent, 8.0);
-    if macros::is_excute(agent) {
-        macros::EFFECT_FOLLOW(agent, Hash40::new("sys_spin_wind"), Hash40::new("top"), 0, 5, 1, 49.23, -52.05, 138.77, 0.56, true);
-        macros::LAST_EFFECT_SET_RATE(agent, 1.3);
-    }
     frame(agent.lua_state_agent, 10.0);
     if macros::is_excute(agent) {
-        macros::EFFECT_FOLLOW(agent, Hash40::new("sys_spin_wind"), Hash40::new("top"), 0, 2, 4, 49.602, -59.68, 150.37, 0.35, true);
+        macros::EFFECT_FOLLOW(agent, Hash40::new("sys_spin_wind"), Hash40::new("top"), -0.5, 2, 2.5, 27, 0, 160, 0.4, true);
     }
     frame(agent.lua_state_agent, 11.0);
-    if macros::is_excute(agent) {
-        macros::EFFECT_FOLLOW(agent, Hash40::new("sys_spin_wind"), Hash40::new("top"), 0, 4, 2, 39.6, -59.68, 150.37, 0.43, true);
-        macros::LAST_EFFECT_SET_RATE(agent, 1.3);
-    }
-    frame(agent.lua_state_agent, 12.0);
-    if macros::is_excute(agent) {
-        macros::EFFECT_FOLLOW(agent, Hash40::new("sys_spin_wind"), Hash40::new("top"), 0, 8, -1, 59.23, -52.05, 138.77, 0.8, true);
-        macros::LAST_EFFECT_SET_RATE(agent, 1.3);
-    }
-    frame(agent.lua_state_agent, 13.0);
-    if macros::is_excute(agent) {
-        macros::EFFECT_FOLLOW(agent, Hash40::new("sys_spin_wind"), Hash40::new("top"), 0, 5, 1, 49.23, -52.05, 138.77, 0.56, true);
-        macros::LAST_EFFECT_SET_RATE(agent, 1.3);
+    for _ in 0..3 {
+        if macros::is_excute(agent) {
+            macros::EFFECT_FOLLOW(agent, Hash40::new("sys_spin_wind_s"), Hash40::new("top"), -0.5, 4.8, 2.3, 27, 0, 160, 0.8, true);
+            macros::LAST_EFFECT_SET_RATE(agent, 2);
+        }
+        wait(agent.lua_state_agent, 3.0);
+        if macros::is_excute(agent) {
+            macros::EFFECT_FOLLOW(agent, Hash40::new("sys_spin_wind_s"), Hash40::new("top"), -0.5, 9, 1.8, 27, 0, 160, 1.1, true);
+            macros::LAST_EFFECT_SET_RATE(agent, 2);
+        }
+        wait(agent.lua_state_agent, 3.0);
     }
 }
 unsafe extern "C" fn bomb_dair_snd(agent: &mut L2CAgentBase) {

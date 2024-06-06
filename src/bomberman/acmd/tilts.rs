@@ -107,11 +107,11 @@ unsafe extern "C" fn bomb_dtilt(agent: &mut L2CAgentBase) {
 unsafe extern "C" fn bomb_dtilt_eff(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 2.0);
     if macros::is_excute(agent) {
-        macros::LANDING_EFFECT(agent, Hash40::new("sys_atk_smoke"), Hash40::new("top"), 5, 0, 0, 0, 0, 0, 0.7, 0, 0, 0, 0, 0, 0, false);
+        macros::LANDING_EFFECT(agent, Hash40::new("sys_atk_smoke"), Hash40::new("top"), 5, 0, 0, 0, 0, 0, 0.68, 0, 0, 0, 0, 0, 0, false);
     }
     frame(agent.lua_state_agent, 4.0);
     if macros::is_excute(agent) {
-        macros::LANDING_EFFECT(agent, Hash40::new("sys_sliding_smoke"), Hash40::new("top"), 6, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
+        macros::LANDING_EFFECT(agent, Hash40::new("sys_sliding_smoke"), Hash40::new("top"), 6, 0, 0, 0, 0, 0, 0.9, 0, 0, 0, 0, 0, 0, false);
     }
 }
 unsafe extern "C" fn bomb_dtilt_snd(agent: &mut L2CAgentBase) {
@@ -140,6 +140,7 @@ unsafe extern "C" fn bomb_utilt_snd(agent: &mut L2CAgentBase) {
 unsafe extern "C" fn bomb_utilt_eff(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 4.0);
     if macros::is_excute(agent) {
-			macros::EFFECT_FOLLOW_FLIP(agent, Hash40::new("sys_attack_arc_d"), Hash40::new("sys_attack_arc_d"), Hash40::new("top"), 1.5, 7.5, 0, 0, -80, -105, 1.0, true, *EF_FLIP_YZ);
+        macros::FOOT_EFFECT(agent, Hash40::new("sys_run_smoke"), Hash40::new("top"), 0, 0, 2, 0, 0, 0, 1.13, 0, 0, 0, 0, 0, 0, false);
+        macros::EFFECT_FOLLOW_FLIP(agent, Hash40::new("sys_attack_arc_d"), Hash40::new("sys_attack_arc_d"), Hash40::new("top"), 1.5, 7.5, 0, 0, -80, -105, 1.0, true, *EF_FLIP_YZ);
 	}
 }

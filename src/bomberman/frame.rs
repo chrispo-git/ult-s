@@ -45,10 +45,10 @@ unsafe extern "C" fn bomber_main_frame(fighter: &mut L2CFighterCommon) {
         if is_added(boma) {
             if motion_kind == hash40("special_s") {
                 //println!("in special S, {}", frame);
-                if frame >= 51.0 {
+                if frame >= 47.0 {
                     //println!("special s endless fall");
                     MotionModule::set_rate(boma, 0.0);
-                    macros::SET_SPEED_EX(fighter, 0.0, -1.7, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+                    macros::SET_SPEED_EX(fighter, 0.0, -2.6, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
                 }
                 damage!(fighter, *MA_MSC_DAMAGE_DAMAGE_NO_REACTION, /*Type*/ *DAMAGE_NO_REACTION_MODE_ALWAYS, /*DamageThreshold*/ 0);
                 if ((frame > 26.0 && SPEED_Y[ENTRY_ID] < 0.0 && is_near_ground == 1 ) || (is_kinda_near == 1 && frame > 39.0)) {

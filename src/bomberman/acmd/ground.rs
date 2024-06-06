@@ -98,9 +98,13 @@ unsafe extern "C" fn bomb_jab3(agent: &mut L2CAgentBase) {
     }
 }
 unsafe extern "C" fn bomb_jab3_eff(agent: &mut L2CAgentBase) {
+    frame(agent.lua_state_agent, 3.0);
+    if macros::is_excute(agent) {
+        macros::FOOT_EFFECT(agent, Hash40::new("sys_run_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
+    }
     frame(agent.lua_state_agent, 5.0);
     if macros::is_excute(agent) {
-        macros::EFFECT_FLIP_ALPHA(agent, Hash40::new("sys_attack_impact"), Hash40::new("sys_attack_impact"), Hash40::new("head"), 0, 0, 0, 0, 0, 0, 0.9, 0, 0, 0, 0, 0, 0, true, *EF_FLIP_YZ, 0.7);
+        macros::EFFECT_FLIP_ALPHA(agent, Hash40::new("sys_attack_impact"), Hash40::new("sys_attack_impact"), Hash40::new("top"), 0, 5, 10, 0, 0, 0, 1.5, 0, 0, 0, 0, 0, 0, true, *EF_FLIP_YZ, 0.8);
     }
 }
 unsafe extern "C" fn bomb_jab3_snd(agent: &mut L2CAgentBase) {
@@ -138,7 +142,7 @@ unsafe extern "C" fn bomb_da_snd(agent: &mut L2CAgentBase) {
 unsafe extern "C" fn bomb_da_eff(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 4.0);
     if macros::is_excute(agent) {
-        macros::LANDING_EFFECT(agent, Hash40::new("sys_atk_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
+        macros::LANDING_EFFECT(agent, Hash40::new("sys_atk_smoke"), Hash40::new("top"), 0, 0, 5, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
     }
     frame(agent.lua_state_agent, 24.0);
     if macros::is_excute(agent) {
@@ -165,11 +169,16 @@ unsafe extern "C" fn bomb_usmash(agent: &mut L2CAgentBase) {
     }
 }
 unsafe extern "C" fn bomb_usmash_eff(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 2.0);
+    if macros::is_excute(fighter) {
+        macros::EFFECT(fighter, Hash40::new("sys_smash_flash"), Hash40::new("top"), 11, 13, 3, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
+    }
     frame(fighter.lua_state_agent, 7.0);
     if macros::is_excute(fighter) {
 		macros::LANDING_EFFECT(fighter, Hash40::new("sys_v_smoke_a"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
         macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_attack_arc_b"), Hash40::new("top"), 1, 17, -2, 1.7, 10, 70, 1.4, true);
         macros::LAST_EFFECT_SET_RATE(fighter, 0.5);
+        macros::LAST_EFFECT_SET_COLOR(fighter, 1.0, 20.0/255.0, 20.0/255.0);
     }
     frame(fighter.lua_state_agent, 28.0);
     if macros::is_excute(fighter) {
@@ -201,9 +210,14 @@ unsafe extern "C" fn bomb_fsmash(agent: &mut L2CAgentBase) {
     }
 }
 unsafe extern "C" fn bomb_fsmash_eff(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 2.0);
+    if macros::is_excute(fighter) {
+        macros::EFFECT(fighter, Hash40::new("sys_smash_flash"), Hash40::new("top"), 15, 8, 3, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
+    }
     frame(fighter.lua_state_agent, 17.0);
     if macros::is_excute(fighter) {
         macros::QUAKE(fighter, *CAMERA_QUAKE_KIND_M);
+        macros::FOOT_EFFECT(fighter, Hash40::new("sys_run_smoke"), Hash40::new("top"), 0, 0, 3, 0, 0, 0, 1.3, 0, 0, 0, 0, 0, 0, false);
         macros::EFFECT(fighter, Hash40::new("sys_bomb_a"), Hash40::new("throw"), 0, 0, 0, 0, 0, 0, 0.9, 0, 0, 0, 0, 0, 0, true);
     }
 }              
@@ -229,6 +243,10 @@ unsafe extern "C" fn bomb_dsmash(agent: &mut L2CAgentBase) {
     }
 }
 unsafe extern "C" fn bomb_dsmash_eff(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 2.0);
+    if macros::is_excute(fighter) {
+        macros::EFFECT(fighter, Hash40::new("sys_smash_flash"), Hash40::new("top"), 0, 5, 3, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
+    }
     frame(fighter.lua_state_agent, 13.0);
     if macros::is_excute(fighter) {
         macros::QUAKE(fighter, *CAMERA_QUAKE_KIND_M);

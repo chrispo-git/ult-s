@@ -167,10 +167,14 @@ unsafe extern "C" fn bomb_fthrow(fighter: &mut L2CAgentBase) {
 		}
 }
 unsafe extern "C" fn bomb_fthrow_eff(fighter: &mut L2CAgentBase) {
-		frame(fighter.lua_state_agent, 27.0);
-		if macros::is_excute(fighter) {
-            macros::EFFECT(fighter, Hash40::new("sys_bomb_a"), Hash40::new("throw"), 0, 0, 0, 0, 0, 0, 1.1, 0, 0, 0, 0, 0, 0, true);
-		}
+    frame(fighter.lua_state_agent, 9.0);
+    if macros::is_excute(fighter) {
+        macros::LANDING_EFFECT(fighter, Hash40::new("sys_v_smoke_a"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.7, 0, 0, 0, 0, 0, 0, false);
+    }
+    frame(fighter.lua_state_agent, 27.0);
+    if macros::is_excute(fighter) {
+        macros::EFFECT(fighter, Hash40::new("sys_bomb_a"), Hash40::new("throw"), 0, 0, 0, 0, 0, 0, 1.1, 0, 0, 0, 0, 0, 0, true);
+    }
 }
 unsafe extern "C" fn bomb_fthrow_snd(fighter: &mut L2CAgentBase) {
         frame(fighter.lua_state_agent, 4.0);
@@ -202,7 +206,7 @@ unsafe extern "C" fn bomb_bthrow_snd(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::PLAY_SE(fighter, Hash40::new("se_common_throw_01"));
     }
-    wait(fighter.lua_state_agent, 18.0);
+    wait(fighter.lua_state_agent, 15.0);
     if macros::is_excute(fighter) {
         macros::PLAY_SE(fighter, Hash40::new("se_common_throw_02"));
     }
@@ -219,7 +223,10 @@ unsafe extern "C" fn bomb_uthrow(fighter: &mut L2CAgentBase) {
 		}
 }
 unsafe extern "C" fn bomb_uthrow_eff(fighter: &mut L2CAgentBase) {
-		frame(fighter.lua_state_agent, 1.0);
+    frame(fighter.lua_state_agent, 16.0);
+    if macros::is_excute(fighter) {
+        macros::LANDING_EFFECT(fighter, Hash40::new("sys_v_smoke_a"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.925, 0, 0, 0, 0, 0, 0, false);
+    }
 }
 unsafe extern "C" fn bomb_uthrow_snd(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 8.0);

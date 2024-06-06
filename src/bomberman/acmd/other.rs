@@ -25,8 +25,57 @@ pub fn install() {
 	.acmd("effect_win3boom", bomb_win3, Priority::Low)
 	.acmd("effect_entryrboom", bomb_entry_eff, Priority::Low)
 	.acmd("sound_entryrboom", bomb_entry_snd, Priority::Low)
-    
-	.install();
+    .acmd("effect_appealhibomb", bomb_utaunt_eff, Priority::Low)
+	.acmd("sound_appealhibomb", bomb_utaunt_snd, Priority::Low)
+    .acmd("sound_appeallwbomb", bomb_dtaunt_snd, Priority::Low)
+    .acmd("effect_appealsbomb", bomb_ftaunt_eff, Priority::Low)
+	.acmd("sound_appealsbomb", bomb_ftaunt_snd, Priority::Low)
+    .install();
+}
+
+unsafe extern "C" fn bomb_utaunt_eff(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 18.0);
+    if macros::is_excute(fighter) {
+        macros::LANDING_EFFECT(fighter, Hash40::new("sys_v_smoke_a"), Hash40::new("top"), 0, 0, 3, 0, 0, 0, 0.6, 0, 0, 0, 0, 0, 0, false);
+    }
+    frame(fighter.lua_state_agent, 53.0);
+    if macros::is_excute(fighter) {
+        macros::LANDING_EFFECT(fighter, Hash40::new("sys_landing_smoke_s"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.8, 0, 0, 0, 0, 0, 0, true);
+    }
+}
+unsafe extern "C" fn bomb_utaunt_snd(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 18.0);
+    if macros::is_excute(fighter) {
+        macros::PLAY_SE(fighter, Hash40::new("se_pacman_attackdash"));
+    }
+    frame(fighter.lua_state_agent, 53.0);
+    if macros::is_excute(fighter) {
+        macros::PLAY_SE(fighter, Hash40::new("se_pacman_landing01"));
+    }
+}
+
+unsafe extern "C" fn bomb_dtaunt_snd(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 42.0);
+    if macros::is_excute(fighter) {
+        macros::PLAY_SE(fighter, Hash40::new("se_pacman_jump01"));
+    }
+}
+
+unsafe extern "C" fn bomb_ftaunt_eff(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 64.0);
+    if macros::is_excute(fighter) {
+        macros::LANDING_EFFECT(fighter, Hash40::new("sys_landing_smoke_s"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.92, 0, 0, 0, 0, 0, 0, true);
+    }
+}
+unsafe extern "C" fn bomb_ftaunt_snd(fighter: &mut L2CAgentBase) {
+    frame(fighter.lua_state_agent, 44.0);
+    if macros::is_excute(fighter) {
+        macros::PLAY_SE(fighter, Hash40::new("se_pacman_swing_m"));
+    }
+    frame(fighter.lua_state_agent, 64.0);
+    if macros::is_excute(fighter) {
+        macros::PLAY_SE(fighter, Hash40::new("se_pacman_landing01"));
+    }
 }
 
 unsafe extern "C" fn bomb_cliffattack(agent: &mut L2CAgentBase) {

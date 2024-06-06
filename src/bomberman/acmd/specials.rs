@@ -39,11 +39,18 @@ pub fn install() {
 	.acmd("game_specialsdashboom", bomb_sideb_catch, Priority::Low)
 	.acmd("game_specialsdashboom", bomb_sideb_catch, Priority::Low)
 	.acmd("sound_specialsdashboom", bomb_sideb_catch_snd, Priority::Low) 
+	.acmd("effect_specialsdashboom", bomb_sideb_catch_eff, Priority::Low) 
+	.acmd("effect_specialairsdashboom", bomb_sidebair_catch_eff, Priority::Low) 
 	.acmd("game_specialsstartboom", bomb_sideb_start, Priority::Low)
 	.acmd("game_specialairsstartboom", bomb_sideb_start, Priority::Low)
 	.acmd("game_specialsbomb", bomb_sideb_throw, Priority::Low)
 	.acmd("game_specialsendboom", bomb_sideb_end, Priority::Low)
 	.acmd("effect_specialsendboom", bomb_sideb_end_eff, Priority::Low)
+	.acmd("sound_specialsendboom", bomb_sideb_end_snd, Priority::Low)
+	.acmd("effect_specialnholdbomb", bomb_neutralbcharge_eff, Priority::Low)
+	.acmd("sound_specialnholdbomb", bomb_neutralbcharge_snd, Priority::Low)
+	.acmd("effect_specialairnholdbomb", bomb_neutralbaircharge_eff, Priority::Low)
+	.acmd("effect_specialsmissboom", bomb_sideb_miss_eff, Priority::Low)
 	.install();
 
     Agent::new("pacman_firehydrant")
@@ -52,6 +59,58 @@ pub fn install() {
 	.acmd("game_down", bomb_bomb_down, Priority::Low)
 	.acmd("game_wait", bomb_bomb_wait, Priority::Low)
 	.install();
+}
+
+unsafe extern "C" fn bomb_neutralbcharge_eff(agent: &mut L2CAgentBase) {
+    for _ in 0..100 {
+        if macros::is_excute(agent) {
+            macros::LANDING_EFFECT(agent, Hash40::new("sys_dash_smoke"), Hash40::new("top"), -4, 0, 0, 0, 0, 0, 1, 20, 0, 12, 0, 0, 0, false);
+            macros::FLASH(agent, 1, 125.0/255.0, 125.0/255.0, 0.259);
+        }
+        wait(agent.lua_state_agent, 3.0);
+        if macros::is_excute(agent) {
+            macros::FLASH(agent, 1, 60.0/255.0, 79.0/255.0, 0.133);
+        }
+        wait(agent.lua_state_agent, 3.0);
+        if macros::is_excute(agent) {
+            macros::FLASH(agent, 100.0/255.0, 3.0/255.0, 0, 0.384);
+        }
+        wait(agent.lua_state_agent, 3.0);
+        if macros::is_excute(agent) {
+            macros::COL_NORMAL(agent);
+        }
+        wait(agent.lua_state_agent, 4.0);
+    }
+}
+unsafe extern "C" fn bomb_neutralbaircharge_eff(agent: &mut L2CAgentBase) {
+    for _ in 0..100 {
+        if macros::is_excute(agent) {
+            macros::LANDING_EFFECT(agent, Hash40::new("sys_down_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.9, 0, 0, 0, 0, 0, 0, false);
+            macros::FLASH(agent, 1, 125.0/255.0, 125.0/255.0, 0.259);
+        }
+        wait(agent.lua_state_agent, 3.0);
+        if macros::is_excute(agent) {
+            macros::FLASH(agent, 1, 60.0/255.0, 79.0/255.0, 0.133);
+        }
+        wait(agent.lua_state_agent, 3.0);
+        if macros::is_excute(agent) {
+            macros::FLASH(agent, 100.0/255.0, 3.0/255.0, 0, 0.384);
+        }
+        wait(agent.lua_state_agent, 3.0);
+        if macros::is_excute(agent) {
+            macros::COL_NORMAL(agent);
+        }
+        wait(agent.lua_state_agent, 4.0);
+    }
+}
+unsafe extern "C" fn bomb_neutralbcharge_snd(agent: &mut L2CAgentBase) {
+    for _ in 0..100 {
+        frame(agent.lua_state_agent, 1.0);
+        if macros::is_excute(agent) {
+            macros::PLAY_SE(agent, Hash40::new("se_common_swing_05"));
+        }
+        wait(agent.lua_state_agent, 5.0);
+    }
 }
 
 unsafe extern "C" fn bomb_downb_snd(fighter: &mut L2CAgentBase) {
@@ -125,17 +184,21 @@ unsafe extern "C" fn bomb_neutralb_snd(fighter: &mut L2CAgentBase) {
     }   
 }
 unsafe extern "C" fn bomb_neutralb_eff(agent: &mut L2CAgentBase) {
+    frame(agent.lua_state_agent, 1.0);
+    if macros::is_excute(agent) {
+        macros::COL_NORMAL(agent);
+    }
     frame(agent.lua_state_agent, 4.0);
     if macros::is_excute(agent) {
-        macros::LANDING_EFFECT(agent, Hash40::new("sys_dash_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.2, 0, 0, 0, 0, 0, 0, false);
+        macros::EFFECT(agent, Hash40::new("sys_dash_smoke"), Hash40::new("top"), -10, 0, 0, 0, 0, 0, 1.2, 0, 0, 0, 0, 0, 0, false);
     }
     frame(agent.lua_state_agent, 5.0);
     if macros::is_excute(agent) {
-        macros::EFFECT(agent, Hash40::new("sys_attack_speedline"), Hash40::new("top"), 1, 6.5, -4, 0, -5, 0, 1.0, 0, 0, 0, 0, 0, 0, true);
+        macros::EFFECT(agent, Hash40::new("sys_attack_speedline"), Hash40::new("top"), 1, 6.5, -5, 0, -5, 0, 1.0, 0, 0, 0, 0, 0, 0, true);
     }
     frame(agent.lua_state_agent, 6.0);
     if macros::is_excute(agent) {
-        macros::EFFECT_FLIP_ALPHA(agent, Hash40::new("sys_attack_impact"), Hash40::new("sys_attack_impact"), Hash40::new("handr"), 0, 0, 0, 0, 0, 0, 1.3, 0, 0, 0, 0, 0, 0, true, *EF_FLIP_YZ, 0.9);
+        macros::EFFECT_FLIP_ALPHA(agent, Hash40::new("sys_attack_impact"), Hash40::new("sys_attack_impact"), Hash40::new("handr"), 3, 0, 0, 0, 0, 0, 1.5, 0, 0, 0, 0, 0, 0, true, *EF_FLIP_YZ, 0.9);
     }
 }
 unsafe extern "C" fn bomb_detonate(fighter: &mut L2CAgentBase) {
@@ -249,6 +312,32 @@ unsafe extern "C" fn bomb_sideb_catch_snd(agent: &mut L2CAgentBase) {
         macros::PLAY_SE(agent, Hash40::new("se_common_swing_05"));
     }
 }
+unsafe extern "C" fn bomb_sideb_catch_eff(agent: &mut L2CAgentBase) {
+    frame(agent.lua_state_agent, 1.0);
+    if macros::is_excute(agent) {
+        macros::LANDING_EFFECT(agent, Hash40::new("sys_dash_smoke"), Hash40::new("top"), 5, 0, 0, 0, 0, 0, 1.2, 0, 0, 0, 0, 0, 0, true);
+    }
+    for _ in 0..5 {
+        if macros::is_excute(agent) {
+            macros::FOOT_EFFECT(agent, Hash40::new("sys_turn_smoke"), Hash40::new("top"), 2, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
+        }
+        wait(agent.lua_state_agent, 5.0);
+    }
+}
+unsafe extern "C" fn bomb_sidebair_catch_eff(agent: &mut L2CAgentBase) {
+    frame(agent.lua_state_agent, 1.0);
+    if macros::is_excute(agent) {
+        macros::LANDING_EFFECT(agent, Hash40::new("sys_dash_smoke"), Hash40::new("top"), 5, 0, 0, 0, 0, 0, 1.2, 0, 0, 0, 0, 0, 0, true);
+    }
+}
+unsafe extern "C" fn bomb_sideb_miss_eff(agent: &mut L2CAgentBase) {
+    for _ in 0..2 {
+        if macros::is_excute(agent) {
+            macros::FOOT_EFFECT(agent, Hash40::new("sys_turn_smoke"), Hash40::new("top"), 2, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
+        }
+        wait(agent.lua_state_agent, 5.0);
+    }
+}
 unsafe extern "C" fn bomb_sideb_catch(agent: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(agent, /*FSM*/ 0.5);
     frame(agent.lua_state_agent, 2.0);
@@ -269,6 +358,7 @@ unsafe extern "C" fn bomb_sideb_catch(agent: &mut L2CAgentBase) {
 unsafe extern "C" fn bomb_sideb_start(fighter: &mut L2CAgentBase) {
     macros::FT_MOTION_RATE(fighter, /*FSM*/ 2.0);
 }
+
 unsafe extern "C" fn bomb_sideb_throw(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_THROW_FLAG_START_AIR);
@@ -299,5 +389,10 @@ unsafe extern "C" fn bomb_sideb_end_eff(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::EFFECT(fighter, Hash40::new("sys_bomb_b"), Hash40::new("top"), 16, -2, 0, 0, 0, 0, 1.25, 0, 0, 0, 0, 0, 0, true);
         macros::QUAKE(fighter, *CAMERA_QUAKE_KIND_L);
+    }
+}
+unsafe extern "C" fn bomb_sideb_end_snd(fighter: &mut L2CAgentBase) {
+    if macros::is_excute(fighter) {
+        macros::PLAY_SE(fighter, Hash40::new("se_common_bomb_l"));
     }
 }

@@ -890,6 +890,19 @@ value = 1
 kinds = ["pacman", "pacman_firehydrant"]
 slots = [120,121,122,123,124,125,126,127]
 
+[[param_int]]
+param = "param_firehydrantwater"
+subparam = "life"
+value = 0
+kinds = ["pacman", "pacman_firehydrantwater"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "param_firehydrantwater"
+subparam = "speed"
+value = 0.0
+kinds = ["pacman", "pacman_firehydrantwater"]
+slots = [120,121,122,123,124,125,126,127]
 
 
 
