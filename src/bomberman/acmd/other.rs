@@ -30,7 +30,76 @@ pub fn install() {
     .acmd("sound_appeallwbomb", bomb_dtaunt_snd, Priority::Low)
     .acmd("effect_appealsbomb", bomb_ftaunt_eff, Priority::Low)
 	.acmd("sound_appealsbomb", bomb_ftaunt_snd, Priority::Low)
+	.acmd("game_finalstartbomb", bomb_final_smash, Priority::Low)
+	.acmd("game_finalairstartbomb", bomb_final_smash, Priority::Low)
+	.acmd("effect_finalstartbomb", bomb_final_smash_eff, Priority::Low)
+	.acmd("effect_finalairstartbomb", bomb_final_smash_eff, Priority::Low)
+	.acmd("sound_finalstartbomb", bomb_final_smash_snd, Priority::Low)
+	.acmd("sound_finalairstartbomb", bomb_final_smash_snd, Priority::Low)
     .install();
+}
+unsafe extern "C" fn bomb_final_smash_eff(fighter: &mut L2CAgentBase) {
+    let situation_kind = StatusModule::situation_kind(fighter.module_accessor);
+    let is_ground = situation_kind == *SITUATION_KIND_GROUND;
+    if macros::is_excute(fighter) {
+        EffectModule::req_screen(fighter.module_accessor, Hash40::new("bg_pacman_final"), false, false, false);
+    }
+    frame(fighter.lua_state_agent, 145.0);
+    if macros::is_excute(fighter) {
+        macros::EFFECT(fighter, Hash40::new("sys_bomb_a"), Hash40::new("top"), 0, 30, 0, 0, 0, 0, 7.5, 0, 0, 0, 0, 0, 0, true);
+        macros::QUAKE(fighter, *CAMERA_QUAKE_KIND_XL);
+    }
+    frame(fighter.lua_state_agent, 175.0);
+    if macros::is_excute(fighter) {
+        if is_ground {
+            macros::FOOT_EFFECT(fighter, Hash40::new("sys_down_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
+        }
+    }
+    frame(fighter.lua_state_agent, 177.0);
+    if macros::is_excute(fighter) {
+        EffectModule::req_screen(fighter.module_accessor, Hash40::new("bg_pacman_final_end"), false, false, false);
+    }
+}
+unsafe extern "C" fn bomb_final_smash(fighter: &mut L2CAgentBase) {
+    let situation_kind = StatusModule::situation_kind(fighter.module_accessor);
+    let is_ground = situation_kind == *SITUATION_KIND_GROUND;
+    if macros::is_excute(fighter) {
+        macros::CHECK_VALID_FINAL_START_CAMERA(fighter, 0, 7, 20, 0, 0, 0);
+        macros::SLOW_OPPONENT(fighter, 5.0, 146.0);
+        if !WorkModule::is_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_DISABLE_FINAL_START_CAMERA) {
+            macros::FT_SET_FINAL_FEAR_FACE(fighter, 200);
+            fighter.clear_lua_stack();
+            lua_args!(fighter, hash40("d04finalstart.nuanmb"), true, false);
+            sv_animcmd::REQ_FINAL_START_CAMERA_arg3(fighter.lua_state_agent);
+            macros::FT_START_CUTIN(fighter);
+        }
+    }
+    frame(fighter.lua_state_agent, 50.0);
+    if macros::is_excute(fighter) {
+        macros::CAM_ZOOM_OUT(fighter);
+    }
+    frame(fighter.lua_state_agent, 146.0);
+    if macros::is_excute(fighter) {
+        macros::ATTACK(fighter, 0, 0, Hash40::new("top"), 40.0, 361, 40, 0, 120, 60, 0.0, 30.0, 0.0, None, None, None, 1.2, 1.2, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_fire"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_KICK);
+    }
+    frame(fighter.lua_state_agent, 149.0);
+    if macros::is_excute(fighter) {
+        AttackModule::clear_all(fighter.module_accessor);
+    }
+}
+unsafe extern "C" fn bomb_final_smash_snd(fighter: &mut L2CAgentBase) {
+    let situation_kind = StatusModule::situation_kind(fighter.module_accessor);
+    let is_ground = situation_kind == *SITUATION_KIND_GROUND;
+    if macros::is_excute(fighter) {
+        macros::PLAY_SE(fighter, Hash40::new("se_common_spirits_wind_loop"));
+    }
+    frame(fighter.lua_state_agent, 146.0);
+    if macros::is_excute(fighter) {
+        macros::STOP_SE(fighter, Hash40::new("se_common_spirits_wind_loop"));
+        macros::PLAY_SE(fighter, Hash40::new("se_common_bomb_ll"));
+        macros::PLAY_SE(fighter, Hash40::new("se_common_bomb_ll"));
+        macros::PLAY_SE(fighter, Hash40::new("se_common_bomb_l"));
+    }
 }
 
 unsafe extern "C" fn bomb_utaunt_eff(fighter: &mut L2CAgentBase) {

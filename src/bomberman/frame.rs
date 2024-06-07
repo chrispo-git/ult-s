@@ -141,6 +141,7 @@ unsafe extern "C" fn bomberman_frame(fighter: &mut L2CFighterCommon) {
 		let frame = MotionModule::frame(boma);
 		let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 		let situation_kind = StatusModule::situation_kind(boma);
+        let is_ground = situation_kind == *SITUATION_KIND_GROUND;
 		let end_frame = MotionModule::end_frame(boma);
 		let cancel_frame = FighterMotionModuleImpl::get_cancel_frame(boma,smash::phx::Hash40::new_raw(MotionModule::motion_kind(boma)),false) as f32;
         let lr = PostureModule::lr(boma);
@@ -169,6 +170,21 @@ unsafe extern "C" fn bomberman_frame(fighter: &mut L2CFighterCommon) {
 						WorkModule::set_flag(boma, true, *FIGHTER_STATUS_WORK_ID_FLAG_RESERVE_DIVE);
 					}
 				};
+            }
+            if [hash40("final_start"), hash40("final_air_start")].contains(&motion_kind) {
+                fighter.clear_lua_stack();
+                lua_args!(fighter, *FIGHTER_KINETIC_ENERGY_ID_DAMAGE);
+                smash::app::sv_kinetic_energy::clear_speed(fighter.lua_state_agent);
+                KineticModule::clear_speed_all(fighter.module_accessor);
+
+
+                if frame >= end_frame-3.0 {
+                    if is_ground {
+                        StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_WAIT, true);
+                    } else {
+                        StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL, true);
+                    }
+                }
             }
             if ![*FIGHTER_STATUS_KIND_SPECIAL_N, *FIGHTER_STATUS_KIND_ATTACK_HI4, *FIGHTER_STATUS_KIND_ATTACK_HI4_START, *FIGHTER_STATUS_KIND_ATTACK_HI4_HOLD].contains(&status_kind) && 
             ![hash40("cliff_attack_quick"), hash40("appeal_s_r"), hash40("appeal_s_l")].contains(&motion_kind) {
