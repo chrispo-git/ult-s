@@ -109,9 +109,10 @@ unsafe extern "C" fn maskedman_da_eff(agent: &mut L2CAgentBase) {
     }
 }
 unsafe extern "C" fn maskedman_da_snd(agent: &mut L2CAgentBase) {
-    frame(agent.lua_state_agent, 10.0);
+    frame(agent.lua_state_agent, 7.0);
     if macros::is_excute(agent) {
         macros::PLAY_SE(agent, Hash40::new("se_common_fire_m_damage"));
+        macros::PLAY_SE(agent, Hash40::new("se_common_throw_02"));
     }
 }
 

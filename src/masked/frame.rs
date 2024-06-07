@@ -122,7 +122,7 @@ unsafe extern "C" fn maskedman_frame(agent: &mut L2CFighterCommon) {
                 if MotionModule::frame(boma) >= 15.0 {
                     MotionModule::change_motion(boma, Hash40::new("special_air_n_dash"), 0.0, 1.0, false, 0.0, false, false);
                 } else if MotionModule::frame(boma) > 13.0 {
-                    if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_SPECIAL) {
+                    if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_SPECIAL) && NEUTRALB_CHARGE[ENTRY_ID] < 60 {
                         MotionModule::set_rate(boma, 0.0);
                         NEUTRALB_CHARGE[ENTRY_ID] += 1;
                     } else {
