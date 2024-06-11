@@ -65,13 +65,16 @@ unsafe extern "C" fn bomb_final_smash(fighter: &mut L2CAgentBase) {
     let is_ground = situation_kind == *SITUATION_KIND_GROUND;
     if macros::is_excute(fighter) {
         macros::CHECK_VALID_FINAL_START_CAMERA(fighter, 0, 7, 20, 0, 0, 0);
-        macros::SLOW_OPPONENT(fighter, 5.0, 146.0);
+        macros::SLOW_OPPONENT(fighter, 5.0, 20.0);
         if !WorkModule::is_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_DISABLE_FINAL_START_CAMERA) {
             macros::FT_SET_FINAL_FEAR_FACE(fighter, 200);
             fighter.clear_lua_stack();
             lua_args!(fighter, hash40("d04finalstart.nuanmb"), true, false);
             sv_animcmd::REQ_FINAL_START_CAMERA_arg3(fighter.lua_state_agent);
             macros::FT_START_CUTIN(fighter);
+            fighter.clear_lua_stack();
+            lua_args!(fighter, true);
+            sv_animcmd::FT_REMOVE_FINAL_AURA(fighter.lua_state_agent);
         }
     }
     frame(fighter.lua_state_agent, 50.0);
@@ -92,6 +95,7 @@ unsafe extern "C" fn bomb_final_smash_snd(fighter: &mut L2CAgentBase) {
     let is_ground = situation_kind == *SITUATION_KIND_GROUND;
     if macros::is_excute(fighter) {
         macros::PLAY_SE(fighter, Hash40::new("se_common_spirits_wind_loop"));
+        macros::PLAY_SE(fighter, Hash40::new("se_pacman_final01"));
     }
     frame(fighter.lua_state_agent, 146.0);
     if macros::is_excute(fighter) {

@@ -171,6 +171,14 @@ unsafe extern "C" fn bomberman_frame(fighter: &mut L2CFighterCommon) {
 					}
 				};
             }
+            if status_kind == *FIGHTER_PACMAN_STATUS_KIND_FINAL_END {
+                if is_ground {
+                    StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_WAIT, true);
+                } else {
+                    StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL, true);
+                }
+                CameraModule::reset_all(boma);
+            }
             if [hash40("final_start"), hash40("final_air_start")].contains(&motion_kind) {
                 fighter.clear_lua_stack();
                 lua_args!(fighter, *FIGHTER_KINETIC_ENERGY_ID_DAMAGE);
@@ -179,11 +187,7 @@ unsafe extern "C" fn bomberman_frame(fighter: &mut L2CFighterCommon) {
 
 
                 if frame >= end_frame-3.0 {
-                    if is_ground {
-                        StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_WAIT, true);
-                    } else {
-                        StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL, true);
-                    }
+                    StatusModule::change_status_request_from_script(boma, *FIGHTER_PACMAN_STATUS_KIND_FINAL_END, true);
                 }
             }
             if ![*FIGHTER_STATUS_KIND_SPECIAL_N, *FIGHTER_STATUS_KIND_ATTACK_HI4, *FIGHTER_STATUS_KIND_ATTACK_HI4_START, *FIGHTER_STATUS_KIND_ATTACK_HI4_HOLD].contains(&status_kind) && 
