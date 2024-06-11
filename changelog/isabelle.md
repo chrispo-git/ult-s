@@ -197,14 +197,14 @@ Autocancel - 1-2/34+
 ### Fair
 |Frame|ID|Damage|Angle|BKB|KBG|Notes| | | |
 |-|-|-|-|-|-|-|-|-|-|
-|Frame 14| 0|  14.0%|  361|  25|  99|
-|Frame 14| 1|  14.0%|  361|  25|  99|
-|Frame 17| 0|  9.0%|  361|  40|  110|
-|Frame 17| 1|  9.0%|  361|  40|  110|
-|Hitboxes terminated on Frame 20|
+|Frame 8| 0|  14.0%|  361|  25|  92|
+|Frame 8| 1|  14.0%|  361|  25|  92|
+|Frame 11| 0|  9.0%|  361|  40|  100|
+|Frame 11| 1|  9.0%|  361|  40|  100|
+|Hitboxes terminated on Frame 14|
 
 
-FaF: 50
+FaF: 44
 
 
 
