@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <struct>
   <struct hash="param_private">
-    <float hash="rebel_gauge_damage_add">0.9</float>
+    <float hash="rebel_gauge_damage_add">1.1</float>
   </struct>
   <list hash="param_special_lw">
-    <struct index="0">
-      <int hash="hold_frame">50</int>
-      <float hash="hit_damage_mul">0.6</float>
-    </struct>
+    <hash40 index="0">dummy</hash40>
     <struct index="1">
       <float hash="counter_attack_power_mul">1.4</float>
       <float hash="reflector_attack_power_mul">1.4</float>
