@@ -27,7 +27,7 @@ unsafe extern "C" fn perfectpivot(fighter : &mut L2CFighterCommon) {
 		stickx = stickx * lr;
 		let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
         if [*FIGHTER_STATUS_KIND_DASH, *FIGHTER_STATUS_KIND_TURN_DASH].contains(&status_kind) {
-			if MotionModule::frame(boma) <= 4.0 {
+			if MotionModule::frame(boma) <= 4.0 && MotionModule::frame(boma) > 2.0 {
 				CAN_DASH[ENTRY_ID] = 1;
 				CAN_TURNDASH[ENTRY_ID] = 1;
 				if stickx <= -0.5 {
