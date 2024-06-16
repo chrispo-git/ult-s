@@ -259,6 +259,10 @@ unsafe extern "C" fn lucina(fighter : &mut L2CFighterCommon) {
 					if [hash40("attack_air_hi")].contains(&motion_kind) {
 						MotionModule::change_motion(boma, smash::phx::Hash40::new("attack_air_hi_2"), 1.0, 1.0, false, 0.0, false, false);
 					};
+					if [hash40("attack_air_hi_2"), hash40("attack_air_hi2")].contains(&motion_kind) && frame >= 32.0 {
+						CancelModule::enable_cancel(boma);
+						reimpl_cancel_frame(fighter);
+					};
 					if [hash40("attack_air_b")].contains(&motion_kind) {
 						MotionModule::change_motion(boma, smash::phx::Hash40::new("attack_air_b2"), 1.0, 1.0, false, 0.0, false, false);
 					};
@@ -274,7 +278,7 @@ unsafe extern "C" fn lucina(fighter : &mut L2CFighterCommon) {
 					if [hash40("attack_12")].contains(&motion_kind) {
 						MotionModule::change_motion(boma, smash::phx::Hash40::new("attack_122"), 1.0, 1.0, false, 0.0, false, false);
 					};
-					if [hash40("attack_dash2")].contains(&motion_kind) {
+					if [hash40("attack_dash")].contains(&motion_kind) {
 						MotionModule::change_motion(boma, smash::phx::Hash40::new("attack_dash2"), 1.0, 1.0, false, 0.0, false, false);
 					};
 					if [hash40("attack_s3_s")].contains(&motion_kind) {
