@@ -2,7 +2,11 @@ Thank you for downloading Ultimate S!
 
 
 -Instructions-
-Unzip and place at the root of your SD Card.
+1. Run "Ultimate S Setup Tool.exe" (included with your download)
+2. Choose between Full (all characters have their Ultimate S Movesets) and lite (You choose which characters have their movesets)
+3. Follow the instructions from the program
+4. Take the atmosphere and ultimate folder and place at the root of your SD card 
+(Note: You don't need to specify which added characters to include, they're automatically there already!)
 
 This mod assumes you have the latest version of arcropolis and therefore does not include it in the download. If you haven't set up smash ultimate modding as a whole, here's some wonderful guides!
 Setting up CFW on switch - https://switch.homebrew.guide/
@@ -47,10 +51,10 @@ A: Try going through these steps:
 1. Check your title screen, does it say Arcropolis in the top right? If not, arcropolis isn't running, make sure you have skyline AND arcropolis installed correctly.
 2. Check your title screen, what version is it? Make sure it is 13.0.2, and no other version.
 3. Make sure that Ultimate S is enabled (either by mod manager on the switch, or inside of the mods folder on Yuzu).
+4. Make sure you ran "Ultimate S Setup Tool.exe" and chose your preferred options (you can check in ultimate/ult-s to see which characters you have enabled)
 
 Q: "I want to remove X character's changes"/"I want to just have Y character"
-A: Unfortunately not possible. A lot of hard work over many years has gone into this mod, and we'd appreciate it a lot if you tried experiencing the mod as a whole.
-
+A: Run "Ultimate S Setup Tool.exe", it allows you to pick and choose which ultimate S movesets you have.
 
 Any other issues or queries should be directed to the discord server (https://discord.gg/YXaPzC5WGd)
 

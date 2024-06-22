@@ -95,6 +95,8 @@ if os.path.exists(r'target'):
             f.write(f"v.{inputs}")
             f.close()
             shutil.copy(r'readme.txt', r'releases/readme.txt')
+            shutil.copy(r'Ultimate S Setup Tool.exe', r'releases/Ultimate S Setup Tool.exe')
+            shutil.copytree(r'resources', r'releases/resources')
 
             if os.path.exists(r'releases/Ultimate S Arcropolis.zip'):
                 os.remove(r'releases/Ultimate S Arcropolis.zip')

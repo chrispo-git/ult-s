@@ -12,6 +12,7 @@ use std::mem;
 use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
+use crate::szerosuit::*;
 use super::*;
 
 pub fn install() {
@@ -34,6 +35,14 @@ unsafe extern "C" fn zss(fighter : &mut L2CFighterCommon) {
 			let situation_kind = StatusModule::situation_kind(boma);
 			let frame = MotionModule::frame(boma);
 			if fighter_kind == *FIGHTER_KIND_SZEROSUIT {
+				if status_kind == *FIGHTER_SZEROSUIT_STATUS_KIND_SPECIAL_LW_FLIP && check_jump(boma){
+					if WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT) < WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT_MAX) && StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR {
+						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_JUMP_AERIAL, true);
+					};
+					if StatusModule::situation_kind(boma) == *SITUATION_KIND_GROUND {
+						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_JUMP_SQUAT, true);
+					};
+				};
 				if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_S {
 					if StatusModule::is_situation_changed(boma) {
 						if situation_kind == *SITUATION_KIND_GROUND {
@@ -158,11 +167,6 @@ unsafe extern "C" fn zss(fighter : &mut L2CFighterCommon) {
 							if (ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_ATTACK_LW4) != 0 || (ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_ATTACK_LW3) != 0 {
 								StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_ATTACK_AIR, false);
 							};
-							/*if check_jump(boma) || ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP){
-								ControlModule::clear_command_one(boma, *FIGHTER_PAD_COMMAND_CATEGORY1, *FIGHTER_PAD_CMD_CAT1_JUMP);
-								ControlModule::clear_command_one(boma, *FIGHTER_PAD_COMMAND_CATEGORY1, *FIGHTER_PAD_CMD_CAT1_JUMP_BUTTON);
-								StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_JUMP_AERIAL, false);
-							};*/
 						};
 						if [hash40("attack_air_f"), hash40("attack_air_b")].contains(&motion_kind) {
 							if (ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_ATTACK_LW4) != 0 || (ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_ATTACK_LW3) != 0 {
