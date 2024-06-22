@@ -725,7 +725,6 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
       <float hash="run_speed_max">2.15</float>
       <float hash="mini_jump_y">14</float>
       <float hash="air_accel_x_mul">0.07</float>
-      <!--float hash="air_speed_x_stable">1.22</float-->
       <float hash="weight">83</float>
       <float hash="landing_attack_air_frame_n">10</float>
       <float hash="landing_attack_air_frame_b">11</float>
@@ -840,7 +839,7 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
       <int hash="attack_100_rebound_count">10</int>
       <bool hash="attack100_type">true</bool>
     </struct>
-    <!--KING DEDEDE / DEDEDE-->
+    <!--KING DEDEDE-->
     <struct index="39">
       <float hash="run_speed_max">1.675</float>
       <float hash="jump_aerial_y">35</float>
@@ -975,7 +974,7 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
       <float hash="tread_jump_speed_y_mul">1.0</float>
       <float hash="tread_mini_jump_speed_y_mul">0.475</float>
     </struct>
-    <!--ROBIN-->
+    <!--ROBIN / REFLET-->
     <struct index="53">
       <float hash="run_speed_max">1.4</float>
       
