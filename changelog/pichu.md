@@ -465,7 +465,7 @@ FaF: 20
 ### Down Special
 |Frame|ID|Damage|Angle|BKB|KBG|Notes| | | |
 |-|-|-|-|-|-|-|-|-|-|
-|Frame 8| 0| 15.0%| 361| 70| 70| hit effect is elec| deals 2 bonus shield damage|
+|Frame 8| 0| 15.0%| 361| 50| 70| hit effect is elec| deals 2 bonus shield damage|
 |Hitboxes terminated on Frame 11|
 
 
