@@ -117,10 +117,30 @@ unsafe extern "C" fn joker_frame(fighter: &mut L2CFighterCommon) {
 			if ![*FIGHTER_STATUS_KIND_APPEAL, *FIGHTER_STATUS_KIND_SPECIAL_S, *FIGHTER_STATUS_KIND_WIN].contains(&status_kind) && smash::app::sv_information::is_ready_go(){
 				ArticleModule::remove_exist(boma, *FIGHTER_JACK_GENERATE_ARTICLE_MONA,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
 			};
+			if GUN_C[ENTRY_ID] != NONE && [*FIGHTER_JACK_STATUS_KIND_SPECIAL_N_JUMP, *FIGHTER_STATUS_KIND_SPECIAL_N].contains(&status_kind){
+				if MotionModule::frame(boma) > 14.0 {
+					if StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR {
+						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL_AERIAL, true);
+					} else {
+						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_WAIT, true);
+					};
+				};
+			};
+			if status_kind == *FIGHTER_STATUS_KIND_ATTACK_LW3 {
+				if MotionModule::frame(boma) > 32.0 {
+					CancelModule::enable_cancel(boma);
+				};
+			};
 			if GUN_C[ENTRY_ID] != NONE && status_kind == *FIGHTER_JACK_STATUS_KIND_SPECIAL_N_ESCAPE {
-				if MotionModule::frame(boma) < 20.0 {
+				if MotionModule::frame(boma) < 22.0 {
 					MotionModule::set_rate(boma, 2.0);
 				} else {
+					GUN_C[ENTRY_ID] = NONE;
+					if StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR {
+						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL_AERIAL, true);
+					} else {
+						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_WAIT, true);
+					};
 					MotionModule::set_rate(boma, 1.0);
 				};
 			};
@@ -131,10 +151,19 @@ unsafe extern "C" fn joker_frame(fighter: &mut L2CFighterCommon) {
 					} else {
 						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_DASH, true);
 					};
+				}
+				else if (cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_TURN_DASH) != 0 {
+					if StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR {
+						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL_AERIAL, true);
+					} else {
+						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_TURN_DASH, true);
+					};
 				};
-				if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP) {
+				if check_jump(boma) || ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP) {
 					if StatusModule::situation_kind(boma) != *SITUATION_KIND_AIR {
-						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_JUMP, true);
+						ControlModule::clear_command_one(boma, *FIGHTER_PAD_COMMAND_CATEGORY1, *FIGHTER_PAD_CMD_CAT1_JUMP);
+						ControlModule::clear_command_one(boma, *FIGHTER_PAD_COMMAND_CATEGORY1, *FIGHTER_PAD_CMD_CAT1_JUMP_BUTTON);
+						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_JUMP_SQUAT, false);
 					} else {
 						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL_AERIAL, true);
 					};
@@ -169,7 +198,7 @@ unsafe extern "C" fn joker_frame(fighter: &mut L2CFighterCommon) {
 						GUN_C[ENTRY_ID] = ATTACK_AIR_F;
 						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_SPECIAL_N, true);
 					};
-					if motion_kind == hash40("attack_air_b") {
+					if motion_kind == hash40("attack_air_b") && MotionModule::frame(boma) < 13.0 {
 						GUN_C[ENTRY_ID] = ATTACK_AIR_B;
 						StatusModule::change_status_request_from_script(boma, *FIGHTER_JACK_STATUS_KIND_SPECIAL_N_ESCAPE, true);
 					};
