@@ -379,9 +379,9 @@ Autocancel - 25+
 ### Uair
 |Frame|ID|Damage|Angle|BKB|KBG|Notes| | | |
 |-|-|-|-|-|-|-|-|-|-|
-|Frame 5| 0|  12.0%|  75|  25|  82|
-|Frame 5| 1|  12.0%|  75|  25|  82|
-|Frame 5| 2|  12.0%|  75|  25|  82|
+|Frame 5| 0|  14.0%|  75|  25|  82|
+|Frame 5| 1|  14.0%|  75|  25|  82|
+|Frame 5| 2|  14.0%|  75|  25|  82|
 |Hitboxes terminated on Frame 50|
 |Note: Deals 3f bonus hitstun|
 
