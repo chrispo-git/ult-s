@@ -58,7 +58,7 @@ def get_all_file_paths(directory):
     return file_paths       
 
 print("Finished Building... now compiling Romfs")
-
+print(os.chdir(".."))
 if os.path.exists(r'target'):
     os.chdir(r'target')
     print(os.listdir())
