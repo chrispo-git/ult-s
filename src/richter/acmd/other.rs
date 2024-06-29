@@ -16,11 +16,11 @@ use super::*;
 
 pub fn install() {
     Agent::new("richter")
-    .acmd("game_turndash", richter_dashback)    
-    .acmd("game_catch", richter_grab)    
-    .acmd("game_catchdash", richter_dashgrab)    
-    .acmd("game_catchturn", richter_pivotgrab)    
-    .acmd("effect_landingheavy", richter_landing)    
+    .acmd("game_turndash", richter_dashback, Priority::Low)    
+    .acmd("game_catch", richter_grab, Priority::Low)    
+    .acmd("game_catchdash", richter_dashgrab, Priority::Low)    
+    .acmd("game_catchturn", richter_pivotgrab, Priority::Low)    
+    .acmd("effect_landingheavy", richter_landing, Priority::Low)    
     .install();
 }
 

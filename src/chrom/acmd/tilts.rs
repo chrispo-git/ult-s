@@ -16,15 +16,15 @@ use super::*;
 
 pub fn install() {
     Agent::new("chrom")
-    .acmd("game_attacks3hi", chrom_ftilt_hi)    
-    .acmd("game_attacks3lw", chrom_ftilt_lw)    
-    .acmd("game_attacks3", chrom_ftilt_s)    
-    .acmd("sound_attacks3lw", chrom_ftilt_snd)    
-    .acmd("sound_attacks3", chrom_ftilt_snd)    
-    .acmd("sound_attacks3hi", chrom_ftilt_snd)    
-    .acmd("effect_attacks3", chrom_eff_ftilt_s)    
-    .acmd("effect_attacks3hi", chrom_eff_ftilt_hi)    
-    .acmd("effect_attacks3lw", chrom_eff_ftilt_lw)    
+    .acmd("game_attacks3hi", chrom_ftilt_hi, Priority::Low)    
+    .acmd("game_attacks3lw", chrom_ftilt_lw, Priority::Low)    
+    .acmd("game_attacks3", chrom_ftilt_s, Priority::Low)    
+    .acmd("sound_attacks3lw", chrom_ftilt_snd, Priority::Low)    
+    .acmd("sound_attacks3", chrom_ftilt_snd, Priority::Low)    
+    .acmd("sound_attacks3hi", chrom_ftilt_snd, Priority::Low)    
+    .acmd("effect_attacks3", chrom_eff_ftilt_s, Priority::Low)    
+    .acmd("effect_attacks3hi", chrom_eff_ftilt_hi, Priority::Low)    
+    .acmd("effect_attacks3lw", chrom_eff_ftilt_lw, Priority::Low)    
     .install();
 }
 

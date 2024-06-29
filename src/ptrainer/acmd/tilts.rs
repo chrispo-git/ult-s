@@ -16,22 +16,22 @@ use super::*;
 
 pub fn install() {
     Agent::new("pzenigame")
-    .acmd("game_attacklw3", squirtle_dtilt)    
+    .acmd("game_attacklw3", squirtle_dtilt, Priority::Low)    
     .install();
 
 	Agent::new("plizardon")
-    .acmd("game_attacks3", zard_ftilt)    
-    .acmd("game_attacks3hi", zard_ftilt)    
-    .acmd("game_attacks3lw", zard_ftilt)    
-    .acmd("effect_attacks3", zard_ftilt_eff)    
-    .acmd("effect_attacks3hi", zard_ftilt_eff)    
-    .acmd("effect_attacks3lw", zard_ftilt_eff)    
-    .acmd("sound_attacks3", zard_ftilt_snd)    
-    .acmd("sound_attacks3hi", zard_ftilt_snd)    
-    .acmd("sound_attacks3lw", zard_ftilt_snd)    
-    .acmd("game_attacklw3", zard_dtilt)    
-    .acmd("effect_attacklw3", zard_dtilt_eff)    
-    .acmd("sound_attacklw3", zard_dtilt_snd)    
+    .acmd("game_attacks3", zard_ftilt, Priority::Low)    
+    .acmd("game_attacks3hi", zard_ftilt, Priority::Low)    
+    .acmd("game_attacks3lw", zard_ftilt, Priority::Low)    
+    .acmd("effect_attacks3", zard_ftilt_eff, Priority::Low)    
+    .acmd("effect_attacks3hi", zard_ftilt_eff, Priority::Low)    
+    .acmd("effect_attacks3lw", zard_ftilt_eff, Priority::Low)    
+    .acmd("sound_attacks3", zard_ftilt_snd, Priority::Low)    
+    .acmd("sound_attacks3hi", zard_ftilt_snd, Priority::Low)    
+    .acmd("sound_attacks3lw", zard_ftilt_snd, Priority::Low)    
+    .acmd("game_attacklw3", zard_dtilt, Priority::Low)    
+    .acmd("effect_attacklw3", zard_dtilt_eff, Priority::Low)    
+    .acmd("sound_attacklw3", zard_dtilt_snd, Priority::Low)    
     .install();
 }
 

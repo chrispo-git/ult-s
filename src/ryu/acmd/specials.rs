@@ -16,13 +16,13 @@ use super::*;
 
 pub fn install() {
     Agent::new("ryu")
-    .acmd("game_specialn", ryu_shinsu_hadou)    
-    .acmd("game_specialairn", ryu_shinsu_hadou_air)    
+    .acmd("game_specialn", ryu_shinsu_hadou, Priority::Low)    
+    .acmd("game_specialairn", ryu_shinsu_hadou_air, Priority::Low)    
     .install();
 
 	Agent::new("ryu_shinkuhadoken")
-    .acmd("game_move", ryu_shinsu)    
-    .acmd("effect_move", ryu_shinsue)    
+    .acmd("game_move", ryu_shinsu, Priority::Low)    
+    .acmd("effect_move", ryu_shinsue, Priority::Low)    
     .install();
 }
 

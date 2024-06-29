@@ -16,7 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("pikachu")
-    .acmd("game_attackhi3", pika_utilt)    
+    .acmd("game_attackhi3", pika_utilt, Priority::Low)    
     .install();
 }
 

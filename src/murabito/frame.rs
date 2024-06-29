@@ -64,6 +64,13 @@ unsafe extern "C" fn murabito_frame(fighter: &mut L2CFighterCommon) {
                     reimpl_cancel_frame(fighter);
                 }
             }
+            if [hash40("throw_f")].contains(&MotionModule::motion_kind(boma)) {
+				if frame > 44.0 {
+					if situation_kind == *SITUATION_KIND_GROUND {
+						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_WAIT, true);
+					};
+				};
+			};
             if [hash40("special_air_n")].contains(&MotionModule::motion_kind(boma)) {
                 if !DO_BOUNCE[ENTRY_ID] {
                     if AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_ALL) && !AttackModule::is_infliction(boma, *COLLISION_KIND_MASK_ALL){

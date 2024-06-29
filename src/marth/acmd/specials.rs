@@ -16,10 +16,10 @@ use super::*;
 
 pub fn install() {
     Agent::new("marth")
-    .acmd("game_specials4s", marth_db4)    
-	.acmd("game_specialhi", marth_upb)    
-	.acmd("game_specialairhi", marth_upb)    
-	.acmd("game_specialairs1", marth_sideb1)    
+    .acmd("game_specials4s", marth_db4, Priority::Low)    
+	.acmd("game_specialhi", marth_upb, Priority::Low)    
+	.acmd("game_specialairhi", marth_upb, Priority::Low)    
+	.acmd("game_specialairs1", marth_sideb1, Priority::Low)    
 	.install();
 }
 

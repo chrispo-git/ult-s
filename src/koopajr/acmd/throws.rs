@@ -16,7 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("koopajr")
-    .acmd("game_throwlw", jr_dthrow)    
+    .acmd("game_throwlw", jr_dthrow, Priority::Low)    
     .install();
 }
 

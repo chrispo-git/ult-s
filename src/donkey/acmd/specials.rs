@@ -18,24 +18,24 @@ use crate::donkey::*;
 
 pub fn install() {
 	Agent::new("donkey")
-    .acmd("game_specialairlw", dk_air_downb)    
-    .acmd("game_specialairs", dk_sideb)    
-    .acmd("game_specials", dk_sideb)    
-    .acmd("game_specialairhi", dk_upb)    
-    .acmd("game_specialhi", dk_upb)    
-    .acmd("effect_specialairhi", dk_upb_eff)    
-    .acmd("effect_specialhi", dk_upb_eff)    
-    .acmd("sound_specialairhi", dk_upb_snd)    
-    .acmd("sound_specialhi", dk_upb_snd)    
-    .acmd("game_specialhishoot", dk_upb_shoot)    
-    .acmd("effect_specialhishoot", dk_upb_shoot_eff)    
-    .acmd("sound_specialhishoot", dk_upb_shoot_snd)    
-    .acmd("effect_specialairs", dk_sideb_eff)    
-    .acmd("effect_specials", dk_sideb_eff)    
-    .acmd("sound_specialairs", dk_sideb_snd)    
-    .acmd("sound_specials", dk_sideb_snd)    
-    .acmd("expression_specialairs", dk_sideb_expr)    
-    .acmd("expression_specials", dk_sideb_expr)    
+    .acmd("game_specialairlw", dk_air_downb, Priority::Low)    
+    .acmd("game_specialairs", dk_sideb, Priority::Low)    
+    .acmd("game_specials", dk_sideb, Priority::Low)    
+    .acmd("game_specialairhi", dk_upb, Priority::Low)    
+    .acmd("game_specialhi", dk_upb, Priority::Low)    
+    .acmd("effect_specialairhi", dk_upb_eff, Priority::Low)    
+    .acmd("effect_specialhi", dk_upb_eff, Priority::Low)    
+    .acmd("sound_specialairhi", dk_upb_snd, Priority::Low)    
+    .acmd("sound_specialhi", dk_upb_snd, Priority::Low)    
+    .acmd("game_specialhishoot", dk_upb_shoot, Priority::Low)    
+    .acmd("effect_specialhishoot", dk_upb_shoot_eff, Priority::Low)    
+    .acmd("sound_specialhishoot", dk_upb_shoot_snd, Priority::Low)    
+    .acmd("effect_specialairs", dk_sideb_eff, Priority::Low)    
+    .acmd("effect_specials", dk_sideb_eff, Priority::Low)    
+    .acmd("sound_specialairs", dk_sideb_snd, Priority::Low)    
+    .acmd("sound_specials", dk_sideb_snd, Priority::Low)    
+    .acmd("expression_specialairs", dk_sideb_expr, Priority::Low)    
+    .acmd("expression_specials", dk_sideb_expr, Priority::Low)    
     .install();
 }
 
@@ -123,7 +123,7 @@ unsafe extern "C" fn dk_upb_shoot(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         ItemModule::remove_item(boma, 0);
         notify_event_msc_cmd!(fighter, 0x2127e37c07u64, *GROUND_CLIFF_CHECK_KIND_ALWAYS_BOTH_SIDES);
-        macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("hip"), /*Damage*/ 11.0, /*Angle*/ 45, /*KBG*/ 74, /*FKB*/ 0, /*BKB*/ 70, /*Size*/ 10.5, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_PUNCH);
+        macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("hip"), /*Damage*/ 11.0, /*Angle*/ 45, /*KBG*/ 74, /*FKB*/ 0, /*BKB*/ 70, /*Size*/ 7.5, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_PUNCH);
     }
 } 
 unsafe extern "C" fn dk_upb_shoot_eff(fighter: &mut L2CAgentBase) {

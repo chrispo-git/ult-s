@@ -16,11 +16,11 @@ use super::*;
 
 pub fn install() {
 	Agent::new("elight")
-    .acmd("game_attackairn", mythra_nair)    
-    .acmd("game_attackairhi", mythra_uair)    
-    .acmd("game_attackairb", mythra_bair)    
-    .acmd("game_attackairf", mythra_fair)    
-    .acmd("game_attackairlw", mythra_dair)    
+    .acmd("game_attackairn", mythra_nair, Priority::Low)    
+    .acmd("game_attackairhi", mythra_uair, Priority::Low)    
+    .acmd("game_attackairb", mythra_bair, Priority::Low)    
+    .acmd("game_attackairf", mythra_fair, Priority::Low)    
+    .acmd("game_attackairlw", mythra_dair, Priority::Low)    
     .install();
 }	
 

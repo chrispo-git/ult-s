@@ -2,6 +2,7 @@ import os
 import sys
 import shutil
 from zipfile import ZipFile
+import subprocess
 
 needed_folders = ["util", "common", "controls", "cpu"]
 all_folders = [""]
@@ -60,9 +61,7 @@ try:
             else:
                 shutil.copy2(s, d)
 
-    stream = os.popen('cargo skyline build --release')
-    output = stream.read()
-    output
+    subprocess.run('cargo skyline build --release --features="main_nro"', shell=True)
     os.chdir('../')
     print(os.getcwd())
     old = r"target\aarch64-skyline-switch\release\libplugin.nro"

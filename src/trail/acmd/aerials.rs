@@ -16,17 +16,17 @@ use super::*;
 
 pub fn install() {
     Agent::new("trail")
-    .acmd("game_attackairlw", sora_dair)    
-    .acmd("sound_attackairlw", sora_dair_snd)    
-	.acmd("sound_landingairlw", sora_dair_land_snd)    
-	.acmd("effect_landingairlw", sora_dair_land_eff)    
-	.acmd("game_landingairlw", sora_dair_land)    
-	.acmd("expression_landingairlw", sora_dair_land_expr)    
-	.acmd("game_attackairn", sora_nair_1)    
-	.acmd("game_attackairn3", sora_nair_3)    
-	.acmd("effect_attackairn3", sora_nair_3_eff)    
-	.acmd("game_attackairf", sora_fair)    
-	.acmd("effect_attackairlw", sora_dair_eff)    
+    .acmd("game_attackairlw", sora_dair, Priority::Low)    
+    .acmd("sound_attackairlw", sora_dair_snd, Priority::Low)    
+	.acmd("sound_landingairlw", sora_dair_land_snd, Priority::Low)    
+	.acmd("effect_landingairlw", sora_dair_land_eff, Priority::Low)    
+	.acmd("game_landingairlw", sora_dair_land, Priority::Low)    
+	.acmd("expression_landingairlw", sora_dair_land_expr, Priority::Low)    
+	.acmd("game_attackairn", sora_nair_1, Priority::Low)    
+	.acmd("game_attackairn3", sora_nair_3, Priority::Low)    
+	.acmd("effect_attackairn3", sora_nair_3_eff, Priority::Low)    
+	.acmd("game_attackairf", sora_fair, Priority::Low)    
+	.acmd("effect_attackairlw", sora_dair_eff, Priority::Low)    
 	.install();
 }
 

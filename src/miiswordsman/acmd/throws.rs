@@ -17,12 +17,12 @@ use super::super::*;
 
 pub fn install() {
     Agent::new("miiswordsman")
-    .acmd("game_throwlw", sword_dthrow)    
-    .acmd("game_throwf", sword_fthrow)    
-    .acmd("game_throwhi", sword_uthrow)    
-    .acmd("sound_throwhi", sword_uthrow_snd)    
-    .acmd("effect_throwhi", sword_uthrow_eff)    
-    .acmd("expression_throwhi", sword_uthrow_expr)    
+    .acmd("game_throwlw", sword_dthrow, Priority::Low)    
+    .acmd("game_throwf", sword_fthrow, Priority::Low)    
+    .acmd("game_throwhi", sword_uthrow, Priority::Low)    
+    .acmd("sound_throwhi", sword_uthrow_snd, Priority::Low)    
+    .acmd("effect_throwhi", sword_uthrow_eff, Priority::Low)    
+    .acmd("expression_throwhi", sword_uthrow_expr, Priority::Low)    
     .install();
 }
 

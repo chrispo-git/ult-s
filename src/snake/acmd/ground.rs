@@ -16,7 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("snake")
-    .acmd("game_attackdashlightthrow", snake_dash_attack_throw)    
+    .acmd("game_attackdashlightthrow", snake_dash_attack_throw, Priority::Low)    
     .install();
 }
 

@@ -16,12 +16,12 @@ use super::*;
 
 pub fn install() {
     Agent::new("littlemac")
-    .acmd("game_specialndash", mac_neutralbdash)    
-    .acmd("game_specialairndash", mac_neutralbairdash)    
-    .acmd("game_specialairndashturn", mac_neutralbairdashturn)    
-    .acmd("effect_specialairndash", mac_neutralbairdash_eff)    
-    .acmd("effect_specialairndashturn", mac_neutralbairdashturn_eff)    
-    .acmd("game_specialndashturn", mac_neutralbdashturn)    
+    .acmd("game_specialndash", mac_neutralbdash, Priority::Low)    
+    .acmd("game_specialairndash", mac_neutralbairdash, Priority::Low)    
+    .acmd("game_specialairndashturn", mac_neutralbairdashturn, Priority::Low)    
+    .acmd("effect_specialairndash", mac_neutralbairdash_eff, Priority::Low)    
+    .acmd("effect_specialairndashturn", mac_neutralbairdashturn_eff, Priority::Low)    
+    .acmd("game_specialndashturn", mac_neutralbdashturn, Priority::Low)    
     .install();
 }
 

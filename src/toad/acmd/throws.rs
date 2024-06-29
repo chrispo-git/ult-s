@@ -189,15 +189,15 @@ unsafe extern "C" fn toad_dthrow(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
 	Agent::new("murabito")
-		.game_acmd("game_throwlwtoad", toad_dthrow)
-		.effect_acmd("effect_throwlwtoad", toad_dthrow_eff)
-		.game_acmd("game_throwbtoad", toad_bthrow)
-		.effect_acmd("effect_throwbtoad", toad_bthrow_eff)
-		.game_acmd("game_throwhitoad", toad_uthrow)
-		.effect_acmd("effect_throwhitoad", toad_uthrow_eff)
-		.sound_acmd("sound_throwhitoad", toad_uthrow_snd)
-		.game_acmd("game_throwftoad", toad_fthrow)
-		.effect_acmd("effect_throwftoad", toad_fthrow_eff)
-		.sound_acmd("sound_throwftoad", toad_fthrow_snd)
+		.game_acmd("game_throwlwtoad", toad_dthrow, Priority::Low)
+		.effect_acmd("effect_throwlwtoad", toad_dthrow_eff, Priority::Low)
+		.game_acmd("game_throwbtoad", toad_bthrow, Priority::Low)
+		.effect_acmd("effect_throwbtoad", toad_bthrow_eff, Priority::Low)
+		.game_acmd("game_throwhitoad", toad_uthrow, Priority::Low)
+		.effect_acmd("effect_throwhitoad", toad_uthrow_eff, Priority::Low)
+		.sound_acmd("sound_throwhitoad", toad_uthrow_snd, Priority::Low)
+		.game_acmd("game_throwftoad", toad_fthrow, Priority::Low)
+		.effect_acmd("effect_throwftoad", toad_fthrow_eff, Priority::Low)
+		.sound_acmd("sound_throwftoad", toad_fthrow_snd, Priority::Low)
 		.install();
 }

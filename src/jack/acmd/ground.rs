@@ -17,7 +17,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("jack")
-    .acmd("game_attacks4", joker_fsmash)      
+    .acmd("game_attacks4", joker_fsmash, Priority::Low)      
     .install();
 }
 		

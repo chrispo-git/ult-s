@@ -16,9 +16,9 @@ use super::*;
 
 pub fn install() {
     Agent::new("simon")
-    .acmd("game_attackdash", simon_da)    
-    .acmd("effect_attackdash", simon_da_eff)    
-    .acmd("sound_attackdash", simon_da_snd)    
+    .acmd("game_attackdash", simon_da, Priority::Low)    
+    .acmd("effect_attackdash", simon_da_eff, Priority::Low)    
+    .acmd("sound_attackdash", simon_da_snd, Priority::Low)    
     .install();
 }
 

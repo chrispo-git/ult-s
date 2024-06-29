@@ -16,7 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("gamewatch")
-    .acmd("game_specialhi", gnw_upb)    
+    .acmd("game_specialhi", gnw_upb, Priority::Low)    
     .install();
 }
 

@@ -16,12 +16,12 @@ use super::*;
 
 pub fn install() {
     Agent::new("toonlink")
-    .acmd("game_attackairb", tink_bair)    
-    .acmd("game_attackairf", tink_fair)    
-    .acmd("game_attackairn", tink_nair)    
-    .acmd("game_attackairhi", tink_uair)    
-    .acmd("effect_attackairhi", tink_uair_eff)    
-    .acmd("sound_attackairhi", tink_uair_snd)    
+    .acmd("game_attackairb", tink_bair, Priority::Low)    
+    .acmd("game_attackairf", tink_fair, Priority::Low)    
+    .acmd("game_attackairn", tink_nair, Priority::Low)    
+    .acmd("game_attackairhi", tink_uair, Priority::Low)    
+    .acmd("effect_attackairhi", tink_uair_eff, Priority::Low)    
+    .acmd("sound_attackairhi", tink_uair_snd, Priority::Low)    
     .install();
 }
 

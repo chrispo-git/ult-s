@@ -16,9 +16,9 @@ use super::*;
 
 pub fn install() {
     Agent::new("sonic")
-    .acmd("effect_downattacku", sonic_getup_attack_eff)    
-    .acmd("effect_appeallwl", sonic_dtaunt_eff)    
-    .acmd("effect_appeallwr", sonic_dtaunt_eff)    
+    .acmd("effect_downattacku", sonic_getup_attack_eff, Priority::Low)    
+    .acmd("effect_appeallwl", sonic_dtaunt_eff, Priority::Low)    
+    .acmd("effect_appeallwr", sonic_dtaunt_eff, Priority::Low)    
     .install();
 }
 

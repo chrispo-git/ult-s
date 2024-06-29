@@ -17,20 +17,20 @@ use super::super::*;
 
 pub fn install() {
     Agent::new("szerosuit")
-    .acmd("game_specialairlwflip", zss_bury)    
-    .acmd("game_specialairlwkick", zss_kick)    
-    .acmd("game_specialairs", zss_sideb_air)    
-    .acmd("game_specials", zss_sideb)    
-    .acmd("effect_specials", zss_sideb_eff)    
-    .acmd("sound_specials", zss_sideb_snd)    
-    .acmd("effect_specialairs", zss_sideb_air_eff)    
-    .acmd("sound_specialairs", zss_sideb_air_snd)    
-    .acmd("game_specialairhi", zss_air_upb)    
-    .acmd("game_specialhi", zss_upb)    
+    .acmd("game_specialairlwflip", zss_bury, Priority::Low)    
+    .acmd("game_specialairlwkick", zss_kick, Priority::Low)    
+    .acmd("game_specialairs", zss_sideb_air, Priority::Low)    
+    .acmd("game_specials", zss_sideb, Priority::Low)    
+    .acmd("effect_specials", zss_sideb_eff, Priority::Low)    
+    .acmd("sound_specials", zss_sideb_snd, Priority::Low)    
+    .acmd("effect_specialairs", zss_sideb_air_eff, Priority::Low)    
+    .acmd("sound_specialairs", zss_sideb_air_snd, Priority::Low)    
+    .acmd("game_specialairhi", zss_air_upb, Priority::Low)    
+    .acmd("game_specialhi", zss_upb, Priority::Low)    
     .install();
 
 	Agent::new("szerosuit_paralyzer_bullet")
-	.acmd("game_shoot", zss_neutralb)    
+	.acmd("game_shoot", zss_neutralb, Priority::Low)    
     .install();
 }
 

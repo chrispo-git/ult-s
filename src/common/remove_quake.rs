@@ -25,26 +25,26 @@ unsafe extern "C" fn plizardon(fighter: &mut L2CAgentBase) {
 		
 pub fn install() {
     Agent::new("donkey")
-    .acmd("expression_landingheavy", donkey)    
+    .acmd("expression_landingheavy", donkey, Priority::Low)    
     .install();
 
     Agent::new("koopa")
-    .acmd("expression_landingheavy", koopa)    
+    .acmd("expression_landingheavy", koopa, Priority::Low)    
     .install();
 
     Agent::new("dedede")
-    .acmd("expression_landingheavy", dedede)    
+    .acmd("expression_landingheavy", dedede, Priority::Low)    
     .install();
 
     Agent::new("krool")
-    .acmd("expression_landingheavy", krool)    
+    .acmd("expression_landingheavy", krool, Priority::Low)    
     .install();
 
     Agent::new("ridley")
-    .acmd("expression_landingheavy", ridley)    
+    .acmd("expression_landingheavy", ridley, Priority::Low)    
     .install();
 
     Agent::new("plizardon")
-    .acmd("expression_landingheavy", plizardon)    
+    .acmd("expression_landingheavy", plizardon, Priority::Low)    
     .install();
 }

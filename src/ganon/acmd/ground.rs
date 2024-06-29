@@ -16,9 +16,9 @@ use super::*;
 
 pub fn install() {
     Agent::new("ganon")
-    .acmd("game_attackhi4", ganon_usmash)    
-    .acmd("game_attack11", ganon_jab)    
-    .acmd("game_attacks4", ganon_fsmash)    
+    .acmd("game_attackhi4", ganon_usmash, Priority::Low)    
+    .acmd("game_attack11", ganon_jab, Priority::Low)    
+    .acmd("game_attacks4", ganon_fsmash, Priority::Low)    
     .install();
 }
 

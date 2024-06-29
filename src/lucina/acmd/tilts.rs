@@ -17,18 +17,18 @@ use super::super::*;
 
 pub fn install() {
     Agent::new("lucina")
-    .acmd("game_attacks3", lucina_ftilt_hero)    
-    .acmd("effect_attacks3", lucina_ftilt_hero_eff)    
-    .acmd("game_attacks32", lucina_ftilt_sword)    
-    .acmd("effect_attacks32", lucina_ftilt_sword_eff)    
-    .acmd("game_attacklw3", lucina_dtilt_hero)    
-    .acmd("effect_attacklw3", lucina_dtilt_hero_eff)    
-    .acmd("game_attacklw32", lucina_dtilt_sword)    
-    .acmd("effect_attacklw32", lucina_dtilt_sword_eff)    
-    .acmd("game_attackhi3", lucina_utilt_hero)    
-    .acmd("effect_attackhi3", lucina_utilt_hero_eff)    
-    .acmd("game_attackhi32", lucina_utilt_sword)    
-    .acmd("effect_attackhi32", lucina_utilt_sword_eff)    
+    .acmd("game_attacks3", lucina_ftilt_hero, Priority::Low)    
+    .acmd("effect_attacks3", lucina_ftilt_hero_eff, Priority::Low)    
+    .acmd("game_attacks32", lucina_ftilt_sword, Priority::Low)    
+    .acmd("effect_attacks32", lucina_ftilt_sword_eff, Priority::Low)    
+    .acmd("game_attacklw3", lucina_dtilt_hero, Priority::Low)    
+    .acmd("effect_attacklw3", lucina_dtilt_hero_eff, Priority::Low)    
+    .acmd("game_attacklw32", lucina_dtilt_sword, Priority::Low)    
+    .acmd("effect_attacklw32", lucina_dtilt_sword_eff, Priority::Low)    
+    .acmd("game_attackhi3", lucina_utilt_hero, Priority::Low)    
+    .acmd("effect_attackhi3", lucina_utilt_hero_eff, Priority::Low)    
+    .acmd("game_attackhi32", lucina_utilt_sword, Priority::Low)    
+    .acmd("effect_attackhi32", lucina_utilt_sword_eff, Priority::Low)    
     .install();
 }
 

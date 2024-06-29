@@ -16,12 +16,12 @@ use super::*;
 
 pub fn install() {
     Agent::new("diddy")
-    .acmd("game_appealsr", diddy_sidetaunt)    
-    .acmd("game_appealsl", diddy_sidetaunt)    
-    .acmd("effect_appealsr", diddy_sidetaunt_eff)    
-    .acmd("effect_appealsl", diddy_sidetaunt_eff)    
-    .acmd("sound_appealsr", diddy_sidetaunt_snd)    
-    .acmd("sound_appealsl", diddy_sidetaunt_snd)    
+    .acmd("game_appealsr", diddy_sidetaunt, Priority::Low)    
+    .acmd("game_appealsl", diddy_sidetaunt, Priority::Low)    
+    .acmd("effect_appealsr", diddy_sidetaunt_eff, Priority::Low)    
+    .acmd("effect_appealsl", diddy_sidetaunt_eff, Priority::Low)    
+    .acmd("sound_appealsr", diddy_sidetaunt_snd, Priority::Low)    
+    .acmd("sound_appealsl", diddy_sidetaunt_snd, Priority::Low)    
     .install();
 }
 

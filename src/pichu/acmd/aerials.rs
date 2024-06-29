@@ -16,8 +16,8 @@ use super::*;
 
 pub fn install() {
     Agent::new("pichu")
-    .acmd("game_attackairlw", pichu_dair)    
-    .acmd("effect_attackairlw", pichu_dair_eff)    
+    .acmd("game_attackairlw", pichu_dair, Priority::Low)    
+    .acmd("effect_attackairlw", pichu_dair_eff, Priority::Low)    
     .install();
 }
 
@@ -27,6 +27,10 @@ unsafe extern "C" fn pichu_dair(fighter: &mut L2CAgentBase) {
 		if macros::is_excute(fighter) {
 			WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
+        frame(fighter.lua_state_agent, 9.0);
+        if macros::is_excute(fighter) {
+            KineticModule::clear_speed_energy_id(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_DAMAGE);
+        }
 		frame(fighter.lua_state_agent, 10.0);
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 1);
 		if macros::is_excute(fighter) {

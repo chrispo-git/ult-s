@@ -17,11 +17,11 @@ use super::super::*;
 
 pub fn install() {
     Agent::new("packun")
-    .acmd("game_attackairlw", plant_dair)    
-    .acmd("game_attackairn", plant_nair)    
-    .acmd("game_attackairb", plant_bair)    
-    .acmd("game_attackairf", plant_fair)    
-    .acmd("game_attackairhi", plant_uair)    
+    .acmd("game_attackairlw", plant_dair, Priority::Low)    
+    .acmd("game_attackairn", plant_nair, Priority::Low)    
+    .acmd("game_attackairb", plant_bair, Priority::Low)    
+    .acmd("game_attackairf", plant_fair, Priority::Low)    
+    .acmd("game_attackairhi", plant_uair, Priority::Low)    
     .install();
 }
 

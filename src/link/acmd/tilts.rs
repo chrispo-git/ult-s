@@ -16,12 +16,12 @@ use super::*;
 
 pub fn install() {
     Agent::new("link")
-    .acmd("game_attacklw3", link_dtilt)    
-    .acmd("game_attackhi3", link_utilt)    
-    .acmd("game_attacks3", link_ftilt)    
-    .acmd("effect_attacks3", link_ftilt_eff)    
-    .acmd("sound_attacks3", link_ftilt_snd)    
-    .acmd("expression_attacks3", link_ftilt_expr)    
+    .acmd("game_attacklw3", link_dtilt, Priority::Low)    
+    .acmd("game_attackhi3", link_utilt, Priority::Low)    
+    .acmd("game_attacks3", link_ftilt, Priority::Low)    
+    .acmd("effect_attacks3", link_ftilt_eff, Priority::Low)    
+    .acmd("sound_attacks3", link_ftilt_snd, Priority::Low)    
+    .acmd("expression_attacks3", link_ftilt_expr, Priority::Low)    
     .install();
 }
 

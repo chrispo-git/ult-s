@@ -16,12 +16,12 @@ use super::*;
 
 pub fn install() {
     Agent::new("wario")
-    .acmd("game_attackdash", wario_da)    
-    .acmd("effect_attackdash", wario_da_eff)    
-    .acmd("sound_attackdash", wario_da_snd)    
-    .acmd("game_attacklw4", wario_dsmash)    
-    .acmd("effect_attacklw4", wario_dsmash_eff)    
-    .acmd("sound_attacklw4", wario_dsmash_snd)    
+    .acmd("game_attackdash", wario_da, Priority::Low)    
+    .acmd("effect_attackdash", wario_da_eff, Priority::Low)    
+    .acmd("sound_attackdash", wario_da_snd, Priority::Low)    
+    .acmd("game_attacklw4", wario_dsmash, Priority::Low)    
+    .acmd("effect_attacklw4", wario_dsmash_eff, Priority::Low)    
+    .acmd("sound_attacklw4", wario_dsmash_snd, Priority::Low)    
     .install();
 }
 

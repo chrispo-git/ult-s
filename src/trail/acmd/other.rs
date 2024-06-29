@@ -16,9 +16,9 @@ use super::*;
 
 pub fn install() {
     Agent::new("trail")
-    .acmd("game_specialinput", sora_special_input)    
-    .acmd("effect_specialinput", sora_special_input_eff)    
-	.acmd("sound_specialinput", sora_special_input_snd)    
+    .acmd("game_specialinput", sora_special_input, Priority::Low)    
+    .acmd("effect_specialinput", sora_special_input_eff, Priority::Low)    
+	.acmd("sound_specialinput", sora_special_input_snd, Priority::Low)    
 	.install();
 }
 

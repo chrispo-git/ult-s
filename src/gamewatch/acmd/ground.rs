@@ -16,8 +16,8 @@ use super::*;
 
 pub fn install() {
     Agent::new("gamewatch")
-    .acmd("game_attackdash", gnw_da)    
-    .acmd("game_attacklw4", gnw_dsmash)    
+    .acmd("game_attackdash", gnw_da, Priority::Low)    
+    .acmd("game_attacklw4", gnw_dsmash, Priority::Low)    
     .install();
 }	
 

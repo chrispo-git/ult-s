@@ -16,14 +16,14 @@ use super::*;
 
 pub fn install() {
     Agent::new("palutena")
-    .acmd("game_specialn", palu_reticle)    
-	.acmd("game_specialairn", palu_reticle)    
-	.acmd("game_speciallw", palu_black_hole)    
-	.acmd("game_specialairlw", palu_black_hole)    
-	.acmd("effect_speciallw", palu_black_hole_eff)    
-	.acmd("effect_specialairlw", palu_black_hole_eff)    
-	.acmd("sound_speciallw", palu_black_hole_snd)    
-	.acmd("sound_specialairlw", palu_black_hole_snd)    
+    .acmd("game_specialn", palu_reticle, Priority::Low)    
+	.acmd("game_specialairn", palu_reticle, Priority::Low)    
+	.acmd("game_speciallw", palu_black_hole, Priority::Low)    
+	.acmd("game_specialairlw", palu_black_hole, Priority::Low)    
+	.acmd("effect_speciallw", palu_black_hole_eff, Priority::Low)    
+	.acmd("effect_specialairlw", palu_black_hole_eff, Priority::Low)    
+	.acmd("sound_speciallw", palu_black_hole_snd, Priority::Low)    
+	.acmd("sound_specialairlw", palu_black_hole_snd, Priority::Low)    
 	.install();
 }
 

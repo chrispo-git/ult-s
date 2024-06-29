@@ -16,10 +16,10 @@ use super::*;
 
 pub fn install() {
     Agent::new("donkey")
-    .acmd("game_attacks3", dk_ftilt)    
-    .acmd("game_attacks3hi", dk_ftilt)    
-    .acmd("game_attacks3lw", dk_ftilt)    
-    .acmd("game_attacklw3", dk_dtilt)    
+    .acmd("game_attacks3", dk_ftilt, Priority::Low)    
+    .acmd("game_attacks3hi", dk_ftilt, Priority::Low)    
+    .acmd("game_attacks3lw", dk_ftilt, Priority::Low)    
+    .acmd("game_attacklw3", dk_dtilt, Priority::Low)    
     .install();
 }
 

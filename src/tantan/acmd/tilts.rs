@@ -16,7 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("tantan")
-    .acmd("game_attacklw3", minmin_dtilt)    
+    .acmd("game_attacklw3", minmin_dtilt, Priority::Low)    
     .install();
 }
 

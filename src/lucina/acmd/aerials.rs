@@ -17,30 +17,30 @@ use super::super::*;
 
 pub fn install() {
     Agent::new("lucina")
-    .acmd("game_attackairn", lucina_nair_sword)    
-    .acmd("game_attackairn2", lucina_nair_hero)    
-	.acmd("sound_attackairn2", lucina_nair_hero_snd)    
-	.acmd("effect_attackairn2", lucina_nair_hero_eff)    
-	.acmd("game_attackairlw", lucina_dair_hero)    
-	.acmd("effect_attackairlw", lucina_dair_hero_eff)    
-	.acmd("game_attackairlw2", lucina_dair_sword)    
-	.acmd("effect_attackairlw2", lucina_dair_sword_eff)    
-	.acmd("game_attackairb", lucina_bair_hero)    
-	.acmd("effect_attackairb", lucina_bair_hero_eff)    
-	.acmd("game_attackairb2", lucina_bair_sword)    
-	.acmd("sound_attackairb2", lucina_bair_sword_snd)    
-	.acmd("effect_attackairb2", lucina_bair_sword_eff)    
-	.acmd("game_attackairf", lucina_fair_sword)    
-	.acmd("game_attackairf2", lucina_fair_hero)    
-	.acmd("sound_attackairf2", lucina_fair_hero_snd)    
-	.acmd("effect_attackairf2", lucina_fair_hero_eff)    
-	.acmd("game_attackairhi", lucina_uair_hero)    
-	.acmd("effect_attackairhi", lucina_uair_hero_eff)    
-	.acmd("game_attackairhi2", lucina_uair_sword)    
-	.acmd("effect_attackairhi2", lucina_uair_sword_eff)    
-	.acmd("sound_attackairhi2", lucina_uair_sword_snd)    
-	.acmd("effect_attackairf", lucina_fair_sword_eff)    
-	.acmd("effect_attackairn", lucina_nair_sword_eff)    
+    .acmd("game_attackairn", lucina_nair_sword, Priority::Low)    
+    .acmd("game_attackairn2", lucina_nair_hero, Priority::Low)    
+	.acmd("sound_attackairn2", lucina_nair_hero_snd, Priority::Low)    
+	.acmd("effect_attackairn2", lucina_nair_hero_eff, Priority::Low)    
+	.acmd("game_attackairlw", lucina_dair_hero, Priority::Low)    
+	.acmd("effect_attackairlw", lucina_dair_hero_eff, Priority::Low)    
+	.acmd("game_attackairlw2", lucina_dair_sword, Priority::Low)    
+	.acmd("effect_attackairlw2", lucina_dair_sword_eff, Priority::Low)    
+	.acmd("game_attackairb", lucina_bair_hero, Priority::Low)    
+	.acmd("effect_attackairb", lucina_bair_hero_eff, Priority::Low)    
+	.acmd("game_attackairb2", lucina_bair_sword, Priority::Low)    
+	.acmd("sound_attackairb2", lucina_bair_sword_snd, Priority::Low)    
+	.acmd("effect_attackairb2", lucina_bair_sword_eff, Priority::Low)    
+	.acmd("game_attackairf", lucina_fair_sword, Priority::Low)    
+	.acmd("game_attackairf2", lucina_fair_hero, Priority::Low)    
+	.acmd("sound_attackairf2", lucina_fair_hero_snd, Priority::Low)    
+	.acmd("effect_attackairf2", lucina_fair_hero_eff, Priority::Low)    
+	.acmd("game_attackairhi", lucina_uair_hero, Priority::Low)    
+	.acmd("effect_attackairhi", lucina_uair_hero_eff, Priority::Low)    
+	.acmd("game_attackairhi2", lucina_uair_sword, Priority::Low)    
+	.acmd("effect_attackairhi2", lucina_uair_sword_eff, Priority::Low)    
+	.acmd("sound_attackairhi2", lucina_uair_sword_snd, Priority::Low)    
+	.acmd("effect_attackairf", lucina_fair_sword_eff, Priority::Low)    
+	.acmd("effect_attackairn", lucina_nair_sword_eff, Priority::Low)    
 	.install();
 }
 
@@ -361,6 +361,7 @@ unsafe extern "C" fn lucina_fair_hero_eff(fighter: &mut L2CAgentBase) {
 unsafe extern "C" fn lucina_uair_hero(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+		frame(fighter.lua_state_agent, 2.0);
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 2.0);
 		frame(fighter.lua_state_agent, 3.0);
 		if macros::is_excute(fighter) {
@@ -406,22 +407,20 @@ unsafe extern "C" fn lucina_uair_sword(fighter: &mut L2CAgentBase) {
 			WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		};
 		frame(fighter.lua_state_agent, 4.0);
+		macros::FT_MOTION_RATE(fighter, /*FSM*/ 1);
 		if macros::is_excute(fighter) {
 			macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("legr"), /*Damage*/ 7.6, /*Angle*/ 75, /*KBG*/ 110, /*FKB*/ 0, /*BKB*/ 40, /*Size*/ 4.5, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_SWORD);
 			macros::ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("kneer"), /*Damage*/ 7.6, /*Angle*/ 75, /*KBG*/ 110, /*FKB*/ 0, /*BKB*/ 40, /*Size*/ 5.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_SWORD);
 			macros::ATTACK(fighter, /*ID*/ 2, /*Part*/ 0, /*Bone*/ Hash40::new("footr"), /*Damage*/ 7.6, /*Angle*/ 75, /*KBG*/ 110, /*FKB*/ 0, /*BKB*/ 40, /*Size*/ 5.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_SWORD);
 		};
 		frame(fighter.lua_state_agent, 10.0);
+		macros::FT_MOTION_RATE(fighter, /*FSM*/ 1);
 		if macros::is_excute(fighter) {
 			AttackModule::clear_all(fighter.module_accessor);
 		};
-		frame(fighter.lua_state_agent, 20.0);
+		frame(fighter.lua_state_agent, 26.0);
 		if macros::is_excute(fighter) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
-		};
-		frame(fighter.lua_state_agent, 32.0);
-		if macros::is_excute(fighter) {
-			CancelModule::enable_cancel(fighter.module_accessor);
 		};
 }	
 unsafe extern "C" fn lucina_uair_sword_eff(fighter: &mut L2CAgentBase) {

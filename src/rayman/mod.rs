@@ -24,6 +24,7 @@ static mut DO_WALLJUMP_FORCE: [bool; 8] = [false; 8];
 static mut HAS_DEADED: [bool; 8] = [false; 8];
 static mut WAS_SLIDE: [bool; 8] = [false; 8];
 static mut FINAL_DURATION : [i32; 8] = [0; 8];
+static mut CAPTURE_TIME : [i32; 8] = [0; 8];
 static mut X : [f32; 8] = [0.0; 8];
 static mut Y : [f32; 8] = [0.0; 8];
 static mut X_MAX : f32 = 1.155;

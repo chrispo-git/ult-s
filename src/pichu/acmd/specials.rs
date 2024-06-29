@@ -16,20 +16,20 @@ use super::*;
 
 pub fn install() {
     Agent::new("pichu")
-    .acmd("game_speciallw", pichu_downb_default)    
-    .acmd("game_specialairlw", pichu_downb_default)    
-    .acmd("effect_speciallw", pichu_downb_default)    
-    .acmd("sound_speciallw", pichu_downb_default)    
-    .acmd("effect_specialairlw", pichu_downb_default)    
-    .acmd("sound_specialairlw", pichu_downb_default)    
-    .acmd("game_speciallwhit", pichu_downb)    
-    .acmd("game_specialairlwhit", pichu_downb)    
-    .acmd("effect_speciallwhit", pichu_downb_eff)    
-    .acmd("effect_specialairlwhit", pichu_downb_eff)    
-    .acmd("sound_speciallwhit", pichu_downb_snd)    
-    .acmd("sound_specialairlwhit", pichu_downb_snd)    
-    .acmd("expression_speciallwhit", pichu_downb_expr)    
-    .acmd("expression_specialairlwhit", pichu_downb_expr)    
+    .acmd("game_speciallw", pichu_downb_default, Priority::Low)    
+    .acmd("game_specialairlw", pichu_downb_default, Priority::Low)    
+    .acmd("effect_speciallw", pichu_downb_default, Priority::Low)    
+    .acmd("sound_speciallw", pichu_downb_default, Priority::Low)    
+    .acmd("effect_specialairlw", pichu_downb_default, Priority::Low)    
+    .acmd("sound_specialairlw", pichu_downb_default, Priority::Low)    
+    .acmd("game_speciallwhit", pichu_downb, Priority::Low)    
+    .acmd("game_specialairlwhit", pichu_downb, Priority::Low)    
+    .acmd("effect_speciallwhit", pichu_downb_eff, Priority::Low)    
+    .acmd("effect_specialairlwhit", pichu_downb_eff, Priority::Low)    
+    .acmd("sound_speciallwhit", pichu_downb_snd, Priority::Low)    
+    .acmd("sound_specialairlwhit", pichu_downb_snd, Priority::Low)    
+    .acmd("expression_speciallwhit", pichu_downb_expr, Priority::Low)    
+    .acmd("expression_specialairlwhit", pichu_downb_expr, Priority::Low)    
     .install();
 }
 
@@ -39,7 +39,7 @@ unsafe extern "C" fn pichu_downb_default(fighter: &mut L2CAgentBase) {
 unsafe extern "C" fn pichu_downb(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 8.0);
     if macros::is_excute(agent) {
-        macros::ATTACK(agent, 0, 0, Hash40::new("top"), 15.0, 361, 70, 0, 70, 13.0, 0.0, 10.2, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_THRU, *ATTACK_LR_CHECK_POS, false, 2, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_elec"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_ELEC, *ATTACK_REGION_NONE);
+        macros::ATTACK(agent, 0, 0, Hash40::new("top"), 15.0, 361, 50, 0, 70, 13.0, 0.0, 10.2, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_THRU, *ATTACK_LR_CHECK_POS, false, 2, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_elec"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_ELEC, *ATTACK_REGION_NONE);
     }
     wait(agent.lua_state_agent, 3.0);
     if macros::is_excute(agent) {

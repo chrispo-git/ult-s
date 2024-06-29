@@ -17,7 +17,7 @@ use super::super::*;
 
 pub fn install() {
     Agent::new("packun")
-    .acmd("game_attacklw3", plant_dtilt)    
+    .acmd("game_attacklw3", plant_dtilt, Priority::Low)    
     .install();
 }
 

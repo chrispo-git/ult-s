@@ -16,10 +16,10 @@ use super::*;
 
 pub fn install() {
     Agent::new("mario")
-    .acmd("sound_appealhir", mario_utaunt_snd)    
-    .acmd("sound_appealhil", mario_utaunt_snd)    
-    .acmd("effect_appealhir", mario_utaunt_eff)    
-    .acmd("effect_appealhil", mario_utaunt_eff)    
+    .acmd("sound_appealhir", mario_utaunt_snd, Priority::Low)    
+    .acmd("sound_appealhil", mario_utaunt_snd, Priority::Low)    
+    .acmd("effect_appealhir", mario_utaunt_eff, Priority::Low)    
+    .acmd("effect_appealhil", mario_utaunt_eff, Priority::Low)    
     .install();
 }
 

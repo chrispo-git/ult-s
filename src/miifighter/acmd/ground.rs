@@ -16,9 +16,9 @@ use super::*;
 
 pub fn install() {
 	Agent::new("miifighter")
-    .acmd("game_attack11", brawler_jab1)    
-    .acmd("game_attack12", brawler_jab2)    
-    .acmd("game_attacklw4", brawler_dsmash)    
+    .acmd("game_attack11", brawler_jab1, Priority::Low)    
+    .acmd("game_attack12", brawler_jab2, Priority::Low)    
+    .acmd("game_attacklw4", brawler_dsmash, Priority::Low)    
     .install();
 }
 

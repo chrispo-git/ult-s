@@ -16,17 +16,17 @@ use super::*;
 
 pub fn install() {
     Agent::new("toonlink")
-    .acmd("game_attack11", tink_jab1)    
-    .acmd("game_attack12", tink_jab2)    
-    .acmd("game_attack13", tink_jab3)    
-    .acmd("game_attackdash", tink_da)    
-    .acmd("game_attacks4", tink_fsmash)    
-    .acmd("effect_attacks4", tink_fsmash_eff)    
-    .acmd("expression_attacks4", tink_fsmash_expr)    
-    .acmd("sound_attacks4", tink_fsmash_snd)    
-    .acmd("expression_attacks4charge", tink_fsmash_charge_expr)    
-    .acmd("game_attackhi4", tink_usmash)    
-    .acmd("game_attacklw4", tink_dsmash)    
+    .acmd("game_attack11", tink_jab1, Priority::Low)    
+    .acmd("game_attack12", tink_jab2, Priority::Low)    
+    .acmd("game_attack13", tink_jab3, Priority::Low)    
+    .acmd("game_attackdash", tink_da, Priority::Low)    
+    .acmd("game_attacks4", tink_fsmash, Priority::Low)    
+    .acmd("effect_attacks4", tink_fsmash_eff, Priority::Low)    
+    .acmd("expression_attacks4", tink_fsmash_expr, Priority::Low)    
+    .acmd("sound_attacks4", tink_fsmash_snd, Priority::Low)    
+    .acmd("expression_attacks4charge", tink_fsmash_charge_expr, Priority::Low)    
+    .acmd("game_attackhi4", tink_usmash, Priority::Low)    
+    .acmd("game_attacklw4", tink_dsmash, Priority::Low)    
     .install();
 }
 

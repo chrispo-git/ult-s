@@ -16,7 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("younglink_bowarrow")
-    .acmd("game_fly", yink_arrow)    
+    .acmd("game_fly", yink_arrow, Priority::Low)    
     .install();
 }
 

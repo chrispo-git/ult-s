@@ -16,7 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("miigunner_rapidshot_bullet")
-    .acmd("game_flythrowhi", gunner_uthrow_laser1)    
+    .acmd("game_flythrowhi", gunner_uthrow_laser1, Priority::Low)    
     .install();
 }
 
