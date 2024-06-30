@@ -749,6 +749,11 @@ pub extern "C" fn main() {
         println!("snake installed");
     }
 
+    if Path::new("sd:/ultimate/ult-s/sonic.flag").is_file() {
+        sonic::install();
+        println!("sonic installed");
+    }
+
     if Path::new("sd:/ultimate/ult-s/szerosuit.flag").is_file() {
         szerosuit::install();
         println!("szerosuit installed");
