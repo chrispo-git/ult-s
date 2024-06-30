@@ -25,6 +25,7 @@ use smash::params::add_hook;
 use std::sync::atomic::{AtomicBool, Ordering};
 use skyline::hooks::InlineCtx;
 
+
 pub fn is_on_ryujinx() -> bool {
     unsafe {
         // Ryujinx skip based on text addr
@@ -38,6 +39,7 @@ pub fn is_on_ryujinx() -> bool {
         }
     }
 }
+
 
 pub fn quick_validate_install() -> bool {
     let mut passed = true;
@@ -204,6 +206,7 @@ mod common;
 mod cpu;
 
 mod bayonetta;
+mod bomberman;
 mod brave;
 mod buddy;
 mod captain;
@@ -225,7 +228,7 @@ mod ganon;
 mod gaogaen;
 mod gekkouga;
 mod ike;
-mod inkling;
+mod inkling; 
 mod jack;
 mod kamui;
 mod ken;
@@ -242,6 +245,7 @@ mod luigi;
 mod mario;
 mod mariod;
 mod marth;
+mod masked;
 mod master;
 mod metaknight;
 mod mewtwo;
@@ -271,6 +275,7 @@ mod rockman;
 mod rosetta;
 mod roy;
 mod ryu;
+mod sandbag;
 mod samus;
 mod samusd;
 mod sheik;
@@ -347,6 +352,9 @@ pub extern "C" fn main() {
             extern "C" { fn allow_ui_chara_hash_online(ui_chara_hash: u64); }
             allow_ui_chara_hash_online(0xf1062d2e5); //rayman
             allow_ui_chara_hash_online(0xda4cbcb12); //toad
+            allow_ui_chara_hash_online(0x12e2fb36c6); //bomberman
+            allow_ui_chara_hash_online(0x189bd7b932); //sandbag
+            allow_ui_chara_hash_online(0x124d54553d); //masked man
         }
     }
 	
@@ -381,112 +389,428 @@ pub extern "C" fn main() {
 	cpu::install();
 	
 
-	//Fighters
-	bayonetta::install();
-	brave::install();
-	buddy::install();
-	
-	captain::install();
-	chrom::install();
-	cloud::install();
-	
-	daisy::install();
-	dedede::install();
-	demon::install();
-	diddy::install();
-	dolly::install();
-	donkey::install();
-	duckhunt::install();
-	
-	edge::install();
-	element::install();
-	
-	falco::install();
-	fox::install();
-	
-	gamewatch::install();
-	ganon::install();
-	gaogaen::install();
-	gekkouga::install();
-	
-	ike::install();
-	inkling::install();
-	
-	jack::install();
-	
-	kamui::install();
-	ken::install();
-	kirby::install();
-	koopa::install();
-	koopajr::install();
-	krool::install();
-	
-	link::install();
-	littlemac::install();
-	lucario::install();
-	lucas::install();
-	lucina::install();
-	luigi::install();
-	
-	mario::install();
-	mariod::install();
-	marth::install();
-	master::install();
-	metaknight::install();
-	mewtwo::install();
-	miifighter::install();
-	miigunner::install();
-	miiswordsman::install();
-	murabito::install();
+	if Path::new("sd:/ultimate/ult-s/bayonetta.flag").is_file() {
+        bayonetta::install();
+        println!("bayonetta installed");
+    }
 
-	ness::install();
-	
-	packun::install();
-	pacman::install();
-	palutena::install();
-	peach::install();
-	pichu::install();
-	pikachu::install();
-	pikmin::install();
-	pit::install();
-	pitb::install();
-	popo::install();
-	ptrainer::install();
-	purin::install();
+    if Path::new("sd:/ultimate/ult-s/brave.flag").is_file() {
+        brave::install();
+        println!("brave installed");
+    }
+
+    if Path::new("sd:/ultimate/ult-s/buddy.flag").is_file() {
+        buddy::install();
+        println!("buddy installed");
+    }
+
+    if Path::new("sd:/ultimate/ult-s/captain.flag").is_file() {
+        captain::install();
+        println!("captain installed");
+    }
+
+    if Path::new("sd:/ultimate/ult-s/chrom.flag").is_file() {
+        chrom::install();
+        println!("chrom installed");
+    }
+
+    if Path::new("sd:/ultimate/ult-s/cloud.flag").is_file() {
+        cloud::install();
+        println!("cloud installed");
+    }
+
+    if Path::new("sd:/ultimate/ult-s/daisy.flag").is_file() {
+        daisy::install();
+        println!("daisy installed");
+    }
+
+    if Path::new("sd:/ultimate/ult-s/dedede.flag").is_file() {
+        dedede::install();
+        println!("dedede installed");
+    }
+
+    if Path::new("sd:/ultimate/ult-s/demon.flag").is_file() {
+        demon::install();
+        println!("demon installed");
+    }
+
+    if Path::new("sd:/ultimate/ult-s/diddy.flag").is_file() {
+        diddy::install();
+        println!("diddy installed");
+    }
+
+    if Path::new("sd:/ultimate/ult-s/dolly.flag").is_file() {
+        dolly::install();
+        println!("dolly installed");
+    }
+
+    if Path::new("sd:/ultimate/ult-s/donkey.flag").is_file() {
+        donkey::install();
+        println!("donkey installed");
+    }
+
+    if Path::new("sd:/ultimate/ult-s/duckhunt.flag").is_file() {
+        duckhunt::install();
+        println!("duckhunt installed");
+    }
+
+    if Path::new("sd:/ultimate/ult-s/edge.flag").is_file() {
+        edge::install();
+        println!("edge installed");
+    }
+
+    if Path::new("sd:/ultimate/ult-s/element.flag").is_file() {
+        element::install();
+        println!("element installed");
+    }
+
+    if Path::new("sd:/ultimate/ult-s/falco.flag").is_file() {
+        falco::install();
+        println!("falco installed");
+    }
+
+    if Path::new("sd:/ultimate/ult-s/fox.flag").is_file() {
+        fox::install();
+        println!("fox installed");
+    }
+
+    if Path::new("sd:/ultimate/ult-s/gamewatch.flag").is_file() {
+        gamewatch::install();
+        println!("gamewatch installed");
+    }
+
+    if Path::new("sd:/ultimate/ult-s/ganon.flag").is_file() {
+        ganon::install();
+        println!("ganon installed");
+    }
+
+    if Path::new("sd:/ultimate/ult-s/gaogaen.flag").is_file() {
+        gaogaen::install();
+        println!("gaogaen installed");
+    }
+
+    if Path::new("sd:/ultimate/ult-s/gekkouga.flag").is_file() {
+        gekkouga::install();
+        println!("gekkouga installed");
+    }
+
+    if Path::new("sd:/ultimate/ult-s/ike.flag").is_file() {
+        ike::install();
+        println!("ike installed");
+    }
+
+    if Path::new("sd:/ultimate/ult-s/inkling.flag").is_file() {
+        inkling::install();
+        println!("inkling installed");
+    }
+
+    if Path::new("sd:/ultimate/ult-s/jack.flag").is_file() {
+        jack::install();
+        println!("jack installed");
+    }
+
+    if Path::new("sd:/ultimate/ult-s/kamui.flag").is_file() {
+        kamui::install();
+        println!("kamui installed");
+    }
+
+    if Path::new("sd:/ultimate/ult-s/ken.flag").is_file() {
+        ken::install();
+        println!("ken installed");
+    }
+
+    if Path::new("sd:/ultimate/ult-s/kirby.flag").is_file() {
+        kirby::install();
+        println!("kirby installed");
+    }
+
+    if Path::new("sd:/ultimate/ult-s/koopa.flag").is_file() {
+        koopa::install();
+        println!("koopa installed");
+    }
+
+    if Path::new("sd:/ultimate/ult-s/koopajr.flag").is_file() {
+        koopajr::install();
+        println!("koopajr installed");
+    }
+
+    if Path::new("sd:/ultimate/ult-s/krool.flag").is_file() {
+        krool::install();
+        println!("krool installed");
+    }
+
+    if Path::new("sd:/ultimate/ult-s/link.flag").is_file() {
+        link::install();
+        println!("link installed");
+    }
+
+    if Path::new("sd:/ultimate/ult-s/littlemac.flag").is_file() {
+        littlemac::install();
+        println!("littlemac installed");
+    }
+
+    if Path::new("sd:/ultimate/ult-s/lucario.flag").is_file() {
+        lucario::install();
+        println!("lucario installed");
+    }
+
+    if Path::new("sd:/ultimate/ult-s/lucas.flag").is_file() {
+        lucas::install();
+        println!("lucas installed");
+    }
+
+    if Path::new("sd:/ultimate/ult-s/lucina.flag").is_file() {
+        lucina::install();
+        println!("lucina installed");
+    }
+
+    if Path::new("sd:/ultimate/ult-s/luigi.flag").is_file() {
+        luigi::install();
+        println!("luigi installed");
+    }
+
+    if Path::new("sd:/ultimate/ult-s/mario.flag").is_file() {
+        mario::install();
+        println!("mario installed");
+    }
+
+    if Path::new("sd:/ultimate/ult-s/mariod.flag").is_file() {
+        mariod::install();
+        println!("mariod installed");
+    }
+
+    if Path::new("sd:/ultimate/ult-s/marth.flag").is_file() {
+        marth::install();
+        println!("marth installed");
+    }
+
+    if Path::new("sd:/ultimate/ult-s/master.flag").is_file() {
+        master::install();
+        println!("master installed");
+    }
+
+    if Path::new("sd:/ultimate/ult-s/metaknight.flag").is_file() {
+        metaknight::install();
+        println!("metaknight installed");
+    }
+
+    if Path::new("sd:/ultimate/ult-s/mewtwo.flag").is_file() {
+        mewtwo::install();
+        println!("mewtwo installed");
+    }
+
+    if Path::new("sd:/ultimate/ult-s/miifighter.flag").is_file() {
+        miifighter::install();
+        println!("miifighter installed");
+    }
+
+    if Path::new("sd:/ultimate/ult-s/miigunner.flag").is_file() {
+        miigunner::install();
+        println!("miigunner installed");
+    }
+
+    if Path::new("sd:/ultimate/ult-s/miiswordsman.flag").is_file() {
+        miiswordsman::install();
+        println!("miiswordsman installed");
+    }
+
+    if Path::new("sd:/ultimate/ult-s/murabito.flag").is_file() {
+        murabito::install();
+        println!("murabito installed");
+    }
+
+    if Path::new("sd:/ultimate/ult-s/ness.flag").is_file() {
+        ness::install();
+        println!("ness installed");
+    }
+
+    if Path::new("sd:/ultimate/ult-s/packun.flag").is_file() {
+        packun::install();
+        println!("packun installed");
+    }
+
+    if Path::new("sd:/ultimate/ult-s/pacman.flag").is_file() {
+        pacman::install();
+        println!("pacman installed");
+    }
+
+    if Path::new("sd:/ultimate/ult-s/palutena.flag").is_file() {
+        palutena::install();
+        println!("palutena installed");
+    }
+
+    if Path::new("sd:/ultimate/ult-s/peach.flag").is_file() {
+        peach::install();
+        println!("peach installed");
+    }
+
+    if Path::new("sd:/ultimate/ult-s/pichu.flag").is_file() {
+        pichu::install();
+        println!("pichu installed");
+    }
+
+    if Path::new("sd:/ultimate/ult-s/pit.flag").is_file() {
+        pit::install();
+        println!("pit installed");
+    }
+
+    if Path::new("sd:/ultimate/ult-s/pitb.flag").is_file() {
+        pitb::install();
+        println!("pitb installed");
+    }
+
+    if Path::new("sd:/ultimate/ult-s/popo.flag").is_file() {
+        popo::install();
+        println!("popo installed");
+    }
+
+    if Path::new("sd:/ultimate/ult-s/ptrainer.flag").is_file() {
+        ptrainer::install();
+        println!("ptrainer installed");
+    }
+
+    if Path::new("sd:/ultimate/ult-s/purin.flag").is_file() {
+        purin::install();
+        println!("purin installed");
+    }
+
+    if Path::new("sd:/ultimate/ult-s/reflet.flag").is_file() {
+        reflet::install();
+        println!("reflet installed");
+    }
+
+    if Path::new("sd:/ultimate/ult-s/richter.flag").is_file() {
+        richter::install();
+        println!("richter installed");
+    }
+
+    if Path::new("sd:/ultimate/ult-s/ridley.flag").is_file() {
+        ridley::install();
+        println!("ridley installed");
+    }
+
+    if Path::new("sd:/ultimate/ult-s/robot.flag").is_file() {
+        robot::install();
+        println!("robot installed");
+    }
+
+    if Path::new("sd:/ultimate/ult-s/rockman.flag").is_file() {
+        rockman::install();
+        println!("rockman installed");
+    }
+
+    if Path::new("sd:/ultimate/ult-s/rosetta.flag").is_file() {
+        rosetta::install();
+        println!("rosetta installed");
+    }
+
+    if Path::new("sd:/ultimate/ult-s/roy.flag").is_file() {
+        roy::install();
+        println!("roy installed");
+    }
+
+    if Path::new("sd:/ultimate/ult-s/ryu.flag").is_file() {
+        ryu::install();
+        println!("ryu installed");
+    }
+
+    if Path::new("sd:/ultimate/ult-s/samus.flag").is_file() {
+        samus::install();
+        println!("samus installed");
+    }
+
+    if Path::new("sd:/ultimate/ult-s/samusd.flag").is_file() {
+        samusd::install();
+        println!("samusd installed");
+    }
+
+    if Path::new("sd:/ultimate/ult-s/sheik.flag").is_file() {
+        sheik::install();
+        println!("sheik installed");
+    }
+
+    if Path::new("sd:/ultimate/ult-s/shizue.flag").is_file() {
+        shizue::install();
+        println!("shizue installed");
+    }
+
+    if Path::new("sd:/ultimate/ult-s/shulk.flag").is_file() {
+        shulk::install();
+        println!("shulk installed");
+    }
+
+    if Path::new("sd:/ultimate/ult-s/simon.flag").is_file() {
+        simon::install();
+        println!("simon installed");
+    }
+
+    if Path::new("sd:/ultimate/ult-s/snake.flag").is_file() {
+        snake::install();
+        println!("snake installed");
+    }
+
+    if Path::new("sd:/ultimate/ult-s/sonic.flag").is_file() {
+        sonic::install();
+        println!("sonic installed");
+    }
+
+    if Path::new("sd:/ultimate/ult-s/szerosuit.flag").is_file() {
+        szerosuit::install();
+        println!("szerosuit installed");
+    }
+
+    if Path::new("sd:/ultimate/ult-s/tantan.flag").is_file() {
+        tantan::install();
+        println!("tantan installed");
+    }
+
+    if Path::new("sd:/ultimate/ult-s/toonlink.flag").is_file() {
+        toonlink::install();
+        println!("toonlink installed");
+    }
+
+    if Path::new("sd:/ultimate/ult-s/trail.flag").is_file() {
+        trail::install();
+        println!("trail installed");
+    }
+
+    if Path::new("sd:/ultimate/ult-s/wario.flag").is_file() {
+        wario::install();
+        println!("wario installed");
+    }
+
+    if Path::new("sd:/ultimate/ult-s/wiifit.flag").is_file() {
+        wiifit::install();
+        println!("wiifit installed");
+    }
+
+    if Path::new("sd:/ultimate/ult-s/wolf.flag").is_file() {
+        wolf::install();
+        println!("wolf installed");
+    }
+
+    if Path::new("sd:/ultimate/ult-s/younglink.flag").is_file() {
+        younglink::install();
+        println!("younglink installed");
+    }
+
+    if Path::new("sd:/ultimate/ult-s/yoshi.flag").is_file() {
+        yoshi::install();
+        println!("yoshi installed");
+    }
+
+    if Path::new("sd:/ultimate/ult-s/zelda.flag").is_file() {
+        zelda::install();
+        println!("zelda installed");
+    }
 	
     rayman::install();
-	reflet::install();
-	richter::install();
-	ridley::install();
-	robot::install();
-	rockman::install();
-	rosetta::install();
-	roy::install();
-	ryu::install();
-	
-	samus::install();
-	samusd::install();
-	sheik::install();
-	shizue::install();
-    shulk::install();
-	simon::install();
-	snake::install();
-	sonic::install();
-	szerosuit::install();
-	
-	tantan::install();
+    bomberman::install();
     toad::install();
-	toonlink::install();
-	trail::install();
-	
-	wario::install();
-	wiifit::install();
-	wolf::install();
-	
-	younglink::install();
-    yoshi::install();
-	
-	zelda::install();
+    sandbag::install();
+    masked::install();
+    
+    println!("added chars installed");
 
 	//Stage Patching
 

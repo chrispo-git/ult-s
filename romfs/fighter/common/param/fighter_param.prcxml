@@ -497,7 +497,7 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
       <float hash="tread_jump_speed_y_mul">1.0</float>
       <float hash="tread_mini_jump_speed_y_mul">0.475</float>
     </struct>
-    <!--JIGGLYPUFF-->
+    <!--JIGGLYPUFF / PURIN-->
     <struct index="11">
       <float hash="walk_speed_max">1.2</float>
       <float hash="dash_speed">1.76</float>
@@ -515,7 +515,7 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
       <float hash="tread_jump_speed_y_mul">1.0</float>
       <float hash="tread_mini_jump_speed_y_mul">0.475</float>
     </struct>
-    <!--BOWSER-->
+    <!--BOWSER / KOOPA-->
     <struct index="13">
       <float hash="landing_attack_air_frame_n">12</float>
       <float hash="landing_attack_air_frame_lw">18</float>
@@ -534,7 +534,7 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
       <float hash="tread_jump_speed_y_mul">1.0</float>
       <float hash="tread_mini_jump_speed_y_mul">0.475</float>
     </struct>
-    <!--NANA-->
+    <!--NANA / POPO-->
     <struct index="15">
       <float hash="ground_brake">0.0602</float>
       <float hash="air_speed_x_stable">0.9</float>
@@ -545,7 +545,7 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
       <float hash="tread_jump_speed_y_mul">1.0</float>
       <float hash="tread_mini_jump_speed_y_mul">0.475</float>
     </struct>
-    <!--SHEIK (The Cool Character For Cool People)-->
+    <!--SHEIK-->
     <struct index="16">
       <float hash="air_speed_x_stable">1.2</float>
       <float hash="weight">80</float>
@@ -629,7 +629,7 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
       <float hash="combo_attack_12_end">0</float>
       <int hash="attack_combo_max">1</int>
     </struct>
-    <!--YOUNG LINK-->
+    <!--YOUNG LINK / YOUNGLINK-->
     <struct index="22">
       <float hash="jump_speed_x_mul">0.85</float>
       <float hash="air_speed_x_stable">1.1</float>
@@ -643,7 +643,7 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
       <float hash="tread_jump_speed_y_mul">1.0</float>
       <float hash="tread_mini_jump_speed_y_mul">0.475</float>
     </struct>
-    <!--GANONDORF-->
+    <!--GANONDORF / GANON-->
     <struct index="23">
       <float hash="walk_speed_max">0.875</float>
       <float hash="run_speed_max">1.45</float>
@@ -682,7 +682,7 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
       <float hash="tread_jump_speed_y_mul">1.0</float>
       <float hash="tread_mini_jump_speed_y_mul">0.475</float>
     </struct>
-    <!--Mr. GAME & WATCH-->
+    <!--Mr. GAME & WATCH / GAMEWATCH-->
     <struct index="26">
       <float hash="dash_speed">2.1</float>
       <float hash="jump_speed_x_mul">0.975</float>
@@ -695,7 +695,7 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
       <float hash="tread_jump_speed_y_mul">1.0</float>
       <float hash="tread_mini_jump_speed_y_mul">0.475</float>
     </struct>
-    <!--META KNIGHT-->
+    <!--META KNIGHT / METAKNIGHT-->
     <struct index="27">
       <float hash="jump_speed_x_mul">1.15</float>
       <float hash="jump_speed_x_max">1.8</float>
@@ -719,13 +719,12 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
       <float hash="tread_jump_speed_y_mul">1.0</float>
       <float hash="tread_mini_jump_speed_y_mul">0.475</float>
     </struct>
-    <!--ZERO SUIT SAMUS-->
+    <!--ZERO SUIT SAMUS / SZEROSUIT-->
     <struct index="29">
       <float hash="dash_speed">2.3</float>
       <float hash="run_speed_max">2.15</float>
       <float hash="mini_jump_y">14</float>
       <float hash="air_accel_x_mul">0.07</float>
-      <!--float hash="air_speed_x_stable">1.22</float-->
       <float hash="weight">83</float>
       <float hash="landing_attack_air_frame_n">10</float>
       <float hash="landing_attack_air_frame_b">11</float>
@@ -761,7 +760,7 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
       <float hash="tread_jump_speed_y_mul">1.0</float>
       <float hash="tread_mini_jump_speed_y_mul">0.475</float>
     </struct>
-    <!--SQUIRTLE-->
+    <!--SQUIRTLE / PZENIGAME-->
     <struct index="33">
       <float hash="run_speed_max">1.82</float>
       <float hash="jump_speed_x_mul">1.1</float>
@@ -772,7 +771,7 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
       <float hash="tread_jump_speed_y_mul">1.0</float>
       <float hash="tread_mini_jump_speed_y_mul">0.475</float>
     </struct>
-    <!--IVYSAUR-->
+    <!--IVYSAUR / PFUSHIGISOU-->
     <struct index="34">
       <float hash="landing_attack_air_frame_f">11</float>
       <float hash="landing_attack_air_frame_hi">16</float>
@@ -781,7 +780,7 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
       <float hash="tread_jump_speed_y_mul">1.0</float>
       <float hash="tread_mini_jump_speed_y_mul">0.475</float>
     </struct>
-    <!--CHARIZARD-->
+    <!--CHARIZARD / PLIZARDON-->
     <struct index="35">
       <float hash="jump_speed_x_mul">1.05</float>
       <float hash="landing_attack_air_frame_f">12</float>
@@ -789,7 +788,7 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
       <float hash="tread_jump_speed_y_mul">1.0</float>
       <float hash="tread_mini_jump_speed_y_mul">0.475</float>
     </struct>
-    <!--DIDDY KONG-->
+    <!--DIDDY KONG / DIDDY-->
     <struct index="36">
       <float hash="jump_speed_x_mul">1.075</float>
       
@@ -854,7 +853,7 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
       <float hash="tread_jump_speed_y_mul">1.0</float>
       <float hash="tread_mini_jump_speed_y_mul">0.475</float>
     </struct>
-    <!--OLIMAR-->
+    <!--OLIMAR / PIKMIN-->
     <struct index="40">
       
       <float hash="tread_jump_speed_y_mul">1.0</float>
@@ -868,7 +867,7 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
       <float hash="tread_jump_speed_y_mul">1.0</float>
       <float hash="tread_mini_jump_speed_y_mul">0.475</float>
     </struct>
-    <!--ROB-->
+    <!--ROB / ROBOT-->
     <struct index="42">
       <float hash="air_speed_x_stable">1.02</float>
       <float hash="weight">110</float>
@@ -878,7 +877,7 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
       <float hash="tread_jump_speed_y_mul">1.0</float>
       <float hash="tread_mini_jump_speed_y_mul">0.475</float>
     </struct>
-    <!--TOON LINK-->
+    <!--TOON LINK / TOONLINK-->
     <struct index="43">
       <float hash="ground_brake">0.07</float>
       <float hash="dash_speed">2.09</float>
@@ -899,12 +898,12 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
       <float hash="tread_jump_speed_y_mul">1.0</float>
       <float hash="tread_mini_jump_speed_y_mul">0.475</float>
     </struct>
-    <!--VILLAGER-->
+    <!--VILLAGER / MURABITO-->
     <struct index="45">
       <float hash="tread_jump_speed_y_mul">1.0</float>
       <float hash="tread_mini_jump_speed_y_mul">0.475</float>
     </struct>
-    <!--MEGAMAN-->
+    <!--MEGAMAN / ROCKMAN-->
     <struct index="46">
       <float hash="landing_attack_air_frame_n">11</float>
       <float hash="landing_attack_air_frame_b">10</float>
@@ -912,7 +911,7 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
       <float hash="tread_jump_speed_y_mul">1.0</float>
       <float hash="tread_mini_jump_speed_y_mul">0.475</float>
     </struct>
-    <!--WII FIT TRAINER-->
+    <!--WII FIT TRAINER / WIIFIT-->
     <struct index="47">
       <float hash="jump_speed_x_mul">1.2</float>
       <float hash="air_speed_y_stable">1.75</float>
@@ -921,7 +920,7 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
       <float hash="tread_jump_speed_y_mul">1.0</float>
       <float hash="tread_mini_jump_speed_y_mul">0.475</float>
     </struct>
-    <!--ROSALINA & LUMA-->
+    <!--ROSALINA & LUMA / ROSETTA-->
     <struct index="48">
       <float hash="dash_speed">1.8</float>
       <float hash="run_speed_max">1.7</float>
@@ -930,7 +929,7 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
       <float hash="tread_jump_speed_y_mul">1.0</float>
       <float hash="tread_mini_jump_speed_y_mul">0.475</float>
     </struct>
-    <!--LITTLE MAC-->
+    <!--LITTLE MAC / LITTLEMAC-->
     <struct index="49">
       <float hash="jump_speed_x_mul">1</float>
       <float hash="jump_y">30</float>
@@ -943,7 +942,7 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
       <float hash="tread_jump_speed_y_mul">1.0</float>
       <float hash="tread_mini_jump_speed_y_mul">0.475</float>
     </struct>
-    <!--GRENINJA-->
+    <!--GRENINJA / GEKKOUGA-->
     <struct index="50">
       <float hash="ground_brake">0.0725</float>
       <float hash="run_speed_max">2.225</float>
@@ -963,7 +962,7 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
       <float hash="tread_jump_speed_y_mul">1.0</float>
       <float hash="tread_mini_jump_speed_y_mul">0.475</float>
     </struct>
-    <!--PAC-MAN-->
+    <!--PAC-MAN / PACMAN-->
     <struct index="52">
       <float hash="ground_brake">0.085</float>
       <float hash="dash_speed">1.9</float>
@@ -975,7 +974,7 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
       <float hash="tread_jump_speed_y_mul">1.0</float>
       <float hash="tread_mini_jump_speed_y_mul">0.475</float>
     </struct>
-    <!--ROBIN-->
+    <!--ROBIN / REFLET-->
     <struct index="53">
       <float hash="run_speed_max">1.4</float>
       
@@ -1002,7 +1001,7 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
       <float hash="tread_mini_jump_speed_y_mul">0.475</float>
       <float hash="clip_sphere_offset_x">0.5</float>
     </struct>
-    <!--DUCK HUNT-->
+    <!--DUCK HUNT / DUCKHUNT-->
     <struct index="56">
       <float hash="ground_brake">0.06</float>
       <float hash="dash_speed">1.87</float>
@@ -1041,7 +1040,7 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
       <float hash="tread_jump_speed_y_mul">1.0</float>
       <float hash="tread_mini_jump_speed_y_mul">0.475</float>
     </struct>
-    <!--CORRIN-->
+    <!--CORRIN / KAMUI-->
     <struct index="59">
       <float hash="walk_speed_max">1.4075</float>
       <float hash="dash_speed">1.95</float>
@@ -1103,13 +1102,13 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
       <float hash="tread_jump_speed_y_mul">1.0</float>
       <float hash="tread_mini_jump_speed_y_mul">0.475</float>
     </struct>
-    <!--KING K. ROOL-->
+    <!--KING K. ROOL - KROOL-->
     <struct index="64">
       <float hash="landing_frame">4</float>
       <float hash="tread_jump_speed_y_mul">1.0</float>
       <float hash="tread_mini_jump_speed_y_mul">0.475</float>
     </struct>
-    <!--ISABELLE-->
+    <!--ISABELLE / SHIZUE-->
     <struct index="65">
       <float hash="ground_brake">0.075</float>
       <float hash="dash_speed">2.1583</float>
@@ -1129,7 +1128,7 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
       <float hash="tread_jump_speed_y_mul">1.0</float>
       <float hash="tread_mini_jump_speed_y_mul">0.475</float>
     </struct>
-    <!--INCINEROAR-->
+    <!--INCINEROAR / GAOGAEN-->
     <struct index="66">
       <float hash="dash_speed">1.8</float>
       <float hash="run_speed_max">1.3</float>
@@ -1140,7 +1139,7 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
       <float hash="tread_jump_speed_y_mul">1.0</float>
       <float hash="tread_mini_jump_speed_y_mul">0.475</float>
     </struct>
-    <!--PIRANHA PLANT-->
+    <!--PIRANHA PLANT / PACKUN-->
     <struct index="67">
       <float hash="dash_speed">1.92</float>
       <float hash="run_speed_max">1.82</float>
@@ -1153,7 +1152,7 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
       <float hash="tread_jump_speed_y_mul">1.0</float>
       <float hash="tread_mini_jump_speed_y_mul">0.475</float>
     </struct>
-    <!--JOKER-->
+    <!--JOKER / JACK-->
     <struct index="68">
       <float hash="ground_brake">0.09</float>
       <float hash="dash_speed">2.11</float>
@@ -1165,7 +1164,7 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
       <float hash="tread_jump_speed_y_mul">1.0</float>
       <float hash="tread_mini_jump_speed_y_mul">0.475</float>
     </struct>
-    <!--HERO-->
+    <!--HERO / BRAVE-->
     <struct index="69">
       <hash40 hash="clip_sphere_node">bust</hash40>
       <float hash="jump_speed_x_mul">1</float>
@@ -1176,7 +1175,7 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
       <float hash="landing_attack_air_frame_b">11</float>
       <float hash="landing_attack_air_frame_hi">6</float>
     </struct>
-    <!--BANJO & KAZOOIE-->
+    <!--BANJO & KAZOOIE / BUDDY-->
     <struct index="70">
       <float hash="jump_speed_x_mul">1</float>
       <float hash="landing_attack_air_frame_n">12</float>
@@ -1186,7 +1185,7 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
       <float hash="tread_jump_speed_y_mul">1.0</float>
       <float hash="tread_mini_jump_speed_y_mul">0.475</float>
     </struct>
-    <!--TERRY-->
+    <!--TERRY / DOLLY-->
     <struct index="71">
       <hash40 hash="clip_sphere_node">bust</hash40>
       
@@ -1196,7 +1195,7 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
       <float hash="clip_sphere_offset_y">2</float>
       <float hash="landing_attack_air_frame_f">10</float>
     </struct>
-    <!--BYLETH-->
+    <!--BYLETH / MASTER-->
     <struct index="72">
       <float hash="walk_speed_max">1.05</float>
       <float hash="dash_speed">2.2</float>
@@ -1212,7 +1211,7 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
       <float hash="tread_jump_speed_y_mul">1.0</float>
       <float hash="tread_mini_jump_speed_y_mul">0.475</float>
     </struct>
-    <!--MIN MIN-->
+    <!--MIN MIN / TANTAN-->
     <struct index="73">
       <float hash="walk_speed_max">1.3</float>
       <float hash="ground_brake">0.07</float>
@@ -1225,7 +1224,7 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
       <float hash="tread_jump_speed_y_mul">1.0</float>
       <float hash="tread_mini_jump_speed_y_mul">0.475</float>
     </struct>
-    <!--STEVE-->
+    <!--STEVE / PICKEL-->
     <struct index="74">
       <float hash="dash_speed">1.5</float>
       <float hash="jump_speed_x_mul">1.05</float>
@@ -1234,7 +1233,7 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
       <float hash="tread_jump_speed_y_mul">1.0</float>
       <float hash="tread_mini_jump_speed_y_mul">0.475</float>
     </struct>
-    <!--KAZUYA-->
+    <!--KAZUYA / DEMON-->
     <struct index="75">
       <float hash="ground_brake">0.1</float>
       <float hash="dash_speed">1.825</float>
@@ -1252,7 +1251,7 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
       <float hash="tread_jump_speed_y_mul">1.0</float>
       <float hash="tread_mini_jump_speed_y_mul">0.475</float>
     </struct>
-    <!--SORA-->
+    <!--SORA / TRAIL-->
     <struct index="76">
       <float hash="dash_speed">1.825</float>
       <float hash="run_speed_max">1.78</float>
@@ -1266,7 +1265,7 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
       <float hash="tread_jump_speed_y_mul">1.0</float>
       <float hash="tread_mini_jump_speed_y_mul">0.475</float>
     </struct>
-    <!--PYRA-->
+    <!--PYRA / EFLAME-->
     <struct index="77">
       <float hash="walk_accel_add">0.5</float>
       <float hash="walk_speed_max">1.25</float>
@@ -1282,7 +1281,7 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
       <float hash="tread_jump_speed_y_mul">1.0</float>
       <float hash="tread_mini_jump_speed_y_mul">0.475</float>
     </struct>
-    <!--MYTHRA-->
+    <!--MYTHRA / ELIGHT-->
     <struct index="78">
       <float hash="ground_brake">0.14</float>
       <float hash="dash_speed">2.3</float>
@@ -1296,7 +1295,7 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
       <float hash="tread_jump_speed_y_mul">1.0</float>
       <float hash="tread_mini_jump_speed_y_mul">0.475</float>
     </struct>
-    <!--SEPHIROTH-->
+    <!--SEPHIROTH / EDGE-->
     <struct index="79">
       <hash40 hash="clip_sphere_node">waist</hash40>
       <float hash="air_speed_x_stable">1.1</float>
@@ -1308,7 +1307,7 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
       <float hash="clip_sphere_offset_x">0</float>
       <float hash="clip_sphere_offset_y">-0.7</float>
     </struct>
-    <!--MII BRAWLER-->
+    <!--MII BRAWLER / MIIFIGHTER-->
     <struct index="80">
       <float hash="ground_brake">0.125</float>
       <float hash="dash_speed">2.12</float>
@@ -1323,7 +1322,7 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
       <float hash="tread_jump_speed_y_mul">1.0</float>
       <float hash="tread_mini_jump_speed_y_mul">0.475</float>
     </struct>
-    <!--MII SWORDFIGHTER-->
+    <!--MII SWORDFIGHTER / MIISWORDSMAN-->
     <struct index="81">
       <float hash="dash_speed">1.82</float>
       <float hash="run_speed_max">1.7</float>
@@ -1334,7 +1333,7 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
       <float hash="landing_attack_air_frame_n">7</float>
       <float hash="landing_attack_air_frame_hi">8</float>
     </struct>
-    <!--MII GUNNER-->
+    <!--MII GUNNER / MIIGUNNER-->
     <struct index="82">
       <float hash="ground_brake">0.07</float>
       <float hash="dash_speed">1.7</float>

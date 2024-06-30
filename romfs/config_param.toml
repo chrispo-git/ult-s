@@ -506,3 +506,736 @@ subparam = "fly_limit_speed_ground"
 value = -1.6
 kinds = ["murabito","murabito_clayrocket"]
 slots = [120,121,122,123,124,125,126,127]
+
+
+
+
+[[param_int]]
+param = "attack_combo_max"
+subparam = ""
+value = 1
+kinds = ["mariod"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_int]]
+param = "wall_jump_type"
+subparam = ""
+value = 0
+kinds = ["mariod"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "weight"
+subparam = ""
+value = 98.0
+kinds = ["mariod"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "dive_speed_y"
+subparam = ""
+value = 2.5
+kinds = ["mariod"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "air_speed_x_stable"
+subparam = ""
+value = 1.05
+kinds = ["mariod"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "walk_accel_mul"
+subparam = ""
+value = 0.1
+kinds = ["mariod"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "walk_accel_add"
+subparam = ""
+value = 0.15
+kinds = ["mariod"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "walk_speed_max"
+subparam = ""
+value = 0.7
+kinds = ["mariod"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "ground_brake"
+subparam = ""
+value = 0.07
+kinds = ["mariod"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "dash_speed"
+subparam = ""
+value = 1.75
+kinds = ["mariod"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "run_accel_mul"
+subparam = ""
+value = 0.07
+kinds = ["mariod"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "run_accel_add"
+subparam = ""
+value = 0.04
+kinds = ["mariod"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "run_speed_max"
+subparam = ""
+value = 1.4472
+kinds = ["mariod"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "shield_radius"
+subparam = ""
+value = 12.3
+kinds = ["mariod"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "landing_attack_air_frame_f"
+subparam = ""
+value = 8.0
+kinds = ["mariod"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "landing_attack_air_frame_b"
+subparam = ""
+value = 10.0
+kinds = ["mariod"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "landing_attack_air_frame_n"
+subparam = ""
+value = 8.0
+kinds = ["mariod"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "landing_attack_air_frame_hi"
+subparam = ""
+value = 8.0
+kinds = ["mariod"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "landing_attack_air_frame_lw"
+subparam = ""
+value = 12.0
+kinds = ["mariod"]
+slots = [120,121,122,123,124,125,126,127]
+
+
+[[param_int]]
+param = "param_drcapsule"
+subparam = "bound_count_max"
+value = 1
+kinds = ["mariod", "mariod_drcapsule"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_int]]
+param = "param_drcapsule"
+subparam = "is_penetration"
+value = 0
+kinds = ["mariod", "mariod_drcapsule"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "param_drcapsule"
+subparam = "speed"
+value = 1.25
+kinds = ["mariod", "mariod_drcapsule"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "param_drcapsule"
+subparam = "gravity_accel"
+value = 0.0
+kinds = ["mariod", "mariod_drcapsule"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "param_drcapsule"
+subparam = "angle"
+value = 0.0
+kinds = ["mariod", "mariod_drcapsule"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "param_drcapsule"
+subparam = "bounded_speed_y_min"
+value = 0.0
+kinds = ["mariod", "mariod_drcapsule"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "param_drcapsule"
+subparam = "bounded_speed_y_max"
+value = 0.0
+kinds = ["mariod", "mariod_drcapsule"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "param_drcapsule"
+subparam = "wall_check_angle"
+value = 0.0
+kinds = ["mariod", "mariod_drcapsule"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "param_drcapsule"
+subparam = "gravity_acl_max"
+value = 0.0
+kinds = ["mariod", "mariod_drcapsule"]
+slots = [120,121,122,123,124,125,126,127]
+
+
+[[param_float]]
+param = "dash_speed"
+subparam = ""
+value = 1.92
+kinds = ["pacman"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "run_speed_max"
+subparam = ""
+value = 1.75
+kinds = ["pacman"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "walk_speed_max"
+subparam = ""
+value = 1.2
+kinds = ["pacman"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "ground_brake"
+subparam = ""
+value = 0.09
+kinds = ["pacman"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "jump_speed_x_mul"
+subparam = ""
+value = 1.1
+kinds = ["pacman"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "air_accel_x_mul"
+subparam = ""
+value = 0.06
+kinds = ["pacman"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "air_accel_x_add"
+subparam = ""
+value = 0.01
+kinds = ["pacman"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "air_speed_x_stable"
+subparam = ""
+value = 1.071
+kinds = ["pacman"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "air_speed_y_stable"
+subparam = ""
+value = 1.62
+kinds = ["pacman"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "air_accel_y"
+subparam = ""
+value = 0.09
+kinds = ["pacman"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "dive_speed_y"
+subparam = ""
+value = 2.592
+kinds = ["pacman"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "jump_y"
+subparam = ""
+value = 32.0
+kinds = ["pacman"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "mini_jump_y"
+subparam = ""
+value = 18.0
+kinds = ["pacman"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "jump_aerial_y"
+subparam = ""
+value = 32.0
+kinds = ["pacman"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "weight"
+subparam = ""
+value = 87.0
+kinds = ["pacman"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "landing_attack_air_frame_n"
+subparam = ""
+value = 8.0
+kinds = ["pacman"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "landing_attack_air_frame_f"
+subparam = ""
+value = 8.0
+kinds = ["pacman"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "landing_attack_air_frame_b"
+subparam = ""
+value = 9.0
+kinds = ["pacman"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "landing_attack_air_frame_hi"
+subparam = ""
+value = 10.0
+kinds = ["pacman"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "landing_attack_air_frame_lw"
+subparam = ""
+value = 9.0
+kinds = ["pacman"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_int]]
+param = "height"
+subparam = ""
+value = 20
+kinds = ["pacman"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_int]]
+param = "squat_walk_type"
+subparam = ""
+value = 0
+kinds = ["pacman"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_int]]
+param = "param_firehydrant"
+subparam = "life"
+value = 240
+kinds = ["pacman", "pacman_firehydrant"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_int]]
+param = "param_firehydrant"
+subparam = "max_shoot_num"
+value = 0
+kinds = ["pacman", "pacman_firehydrant"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_int]]
+param = "param_firehydrant"
+subparam = "shoot_frame"
+value = 999
+kinds = ["pacman", "pacman_firehydrant"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_int]]
+param = "param_firehydrant"
+subparam = "hp"
+value = 1
+kinds = ["pacman", "pacman_firehydrant"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_int]]
+param = "param_firehydrantwater"
+subparam = "life"
+value = 0
+kinds = ["pacman", "pacman_firehydrantwater"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "param_firehydrantwater"
+subparam = "speed"
+value = 0.0
+kinds = ["pacman", "pacman_firehydrantwater"]
+slots = [120,121,122,123,124,125,126,127]
+
+
+
+[[param_int]]
+param = "attack_combo_max"
+subparam = ""
+value = 1
+kinds = ["mariod"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_int]]
+param = "wall_jump_type"
+subparam = ""
+value = 0
+kinds = ["mariod"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "weight"
+subparam = ""
+value = 98.0
+kinds = ["mariod"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "dive_speed_y"
+subparam = ""
+value = 2.5
+kinds = ["mariod"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "air_speed_x_stable"
+subparam = ""
+value = 1.05
+kinds = ["mariod"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "walk_accel_mul"
+subparam = ""
+value = 0.1
+kinds = ["mariod"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "walk_accel_add"
+subparam = ""
+value = 0.15
+kinds = ["mariod"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "walk_speed_max"
+subparam = ""
+value = 0.7
+kinds = ["mariod"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "ground_brake"
+subparam = ""
+value = 0.07
+kinds = ["mariod"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "dash_speed"
+subparam = ""
+value = 1.75
+kinds = ["mariod"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "run_accel_mul"
+subparam = ""
+value = 0.07
+kinds = ["mariod"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "run_accel_add"
+subparam = ""
+value = 0.04
+kinds = ["mariod"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "run_speed_max"
+subparam = ""
+value = 1.4472
+kinds = ["mariod"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "shield_radius"
+subparam = ""
+value = 12.3
+kinds = ["mariod"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "landing_attack_air_frame_f"
+subparam = ""
+value = 8.0
+kinds = ["mariod"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "landing_attack_air_frame_b"
+subparam = ""
+value = 10.0
+kinds = ["mariod"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "landing_attack_air_frame_n"
+subparam = ""
+value = 8.0
+kinds = ["mariod"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "landing_attack_air_frame_hi"
+subparam = ""
+value = 8.0
+kinds = ["mariod"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "landing_attack_air_frame_lw"
+subparam = ""
+value = 12.0
+kinds = ["mariod"]
+slots = [120,121,122,123,124,125,126,127]
+
+
+[[param_int]]
+param = "param_drcapsule"
+subparam = "bound_count_max"
+value = 1
+kinds = ["mariod", "mariod_drcapsule"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_int]]
+param = "param_drcapsule"
+subparam = "is_penetration"
+value = 0
+kinds = ["mariod", "mariod_drcapsule"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "param_drcapsule"
+subparam = "speed"
+value = 1.25
+kinds = ["mariod", "mariod_drcapsule"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "param_drcapsule"
+subparam = "gravity_accel"
+value = 0.0
+kinds = ["mariod", "mariod_drcapsule"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "param_drcapsule"
+subparam = "angle"
+value = 0.0
+kinds = ["mariod", "mariod_drcapsule"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "param_drcapsule"
+subparam = "bounded_speed_y_min"
+value = 0.0
+kinds = ["mariod", "mariod_drcapsule"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "param_drcapsule"
+subparam = "bounded_speed_y_max"
+value = 0.0
+kinds = ["mariod", "mariod_drcapsule"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "param_drcapsule"
+subparam = "wall_check_angle"
+value = 0.0
+kinds = ["mariod", "mariod_drcapsule"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "param_drcapsule"
+subparam = "gravity_acl_max"
+value = 0.0
+kinds = ["mariod", "mariod_drcapsule"]
+slots = [120,121,122,123,124,125,126,127]
+
+
+
+
+[[param_int]]
+param = "attack_combo_max"
+subparam = ""
+value = 1
+kinds = ["lucas"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_int]]
+param = "param_motion"
+subparam = "flip"
+value = 0
+kinds = ["lucas"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "landing_attack_air_frame_f"
+subparam = ""
+value = 10.0
+kinds = ["lucas"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "landing_attack_air_frame_n"
+subparam = ""
+value = 9.0
+kinds = ["lucas"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "landing_attack_air_frame_b"
+subparam = ""
+value = 9.0
+kinds = ["lucas"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "landing_attack_air_frame_hi"
+subparam = ""
+value = 7.0
+kinds = ["lucas"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "landing_attack_air_frame_lw"
+subparam = ""
+value = 12.0
+kinds = ["lucas"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "weight"
+subparam = ""
+value = 87.0
+kinds = ["lucas"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "shield_radius"
+subparam = ""
+value = 8.8
+kinds = ["lucas"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "dash_speed"
+subparam = ""
+value = 1.82
+kinds = ["lucas"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]] 
+param = "run_accel_mul"
+subparam = ""
+value = 0.08
+kinds = ["lucas"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "air_speed_y_stable"
+subparam = ""
+value = 1.6
+kinds = ["lucas"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "dive_speed_y"
+subparam = ""
+value = 2.88
+kinds = ["lucas"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "air_accel_x_mul"
+subparam = ""
+value = 0.072
+kinds = ["lucas"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "ground_brake"
+subparam = ""
+value = 0.116
+kinds = ["lucas"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "run_speed_max"
+subparam = ""
+value = 1.65
+kinds = ["lucas"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "jump_aerial_y"
+subparam = ""
+value = 44.13
+kinds = ["lucas"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "air_speed_x_stable"
+subparam = ""
+value = 1.155
+kinds = ["lucas"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_float]]
+param = "air_accel_y"
+subparam = ""
+value = 0.09
+kinds = ["lucas"]
+slots = [120,121,122,123,124,125,126,127]
+

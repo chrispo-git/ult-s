@@ -58,7 +58,7 @@ def get_all_file_paths(directory):
     return file_paths       
 
 print("Finished Building... now compiling Romfs")
-
+print(os.chdir(".."))
 if os.path.exists(r'target'):
     os.chdir(r'target')
     print(os.listdir())
@@ -95,6 +95,9 @@ if os.path.exists(r'target'):
             f.write(f"v.{inputs}")
             f.close()
             shutil.copy(r'readme.txt', r'releases/readme.txt')
+            shutil.copy(r'Ultimate S Setup Tool.exe', r'releases/Ultimate S Setup Tool.exe')
+            shutil.copy(r'Ultimate S Setup Tool.py', r'releases/Ultimate S Setup Tool.py')
+            shutil.copytree(r'resources', r'releases/resources')
 
             if os.path.exists(r'releases/Ultimate S Arcropolis.zip'):
                 os.remove(r'releases/Ultimate S Arcropolis.zip')
