@@ -55385,6 +55385,26 @@
             "camera/fighter/pikmin/c126/j02win1.nuanmb",
             "camera/fighter/pikmin/c127/j02win1.nuanmb"
         ],
+        "camera/fighter/pikmin/c00/j02win2.nuanmb": [
+            "camera/fighter/pikmin/c120/j02win2.nuanmb",
+            "camera/fighter/pikmin/c121/j02win2.nuanmb",
+            "camera/fighter/pikmin/c122/j02win2.nuanmb",
+            "camera/fighter/pikmin/c123/j02win2.nuanmb",
+            "camera/fighter/pikmin/c124/j02win2.nuanmb",
+            "camera/fighter/pikmin/c125/j02win2.nuanmb",
+            "camera/fighter/pikmin/c126/j02win2.nuanmb",
+            "camera/fighter/pikmin/c127/j02win2.nuanmb"
+        ],
+        "camera/fighter/pikmin/c00/j02win3.nuanmb": [
+            "camera/fighter/pikmin/c120/j02win3.nuanmb",
+            "camera/fighter/pikmin/c121/j02win3.nuanmb",
+            "camera/fighter/pikmin/c122/j02win3.nuanmb",
+            "camera/fighter/pikmin/c123/j02win3.nuanmb",
+            "camera/fighter/pikmin/c124/j02win3.nuanmb",
+            "camera/fighter/pikmin/c125/j02win3.nuanmb",
+            "camera/fighter/pikmin/c126/j02win3.nuanmb",
+            "camera/fighter/pikmin/c127/j02win3.nuanmb"
+        ],
         "fighter/kirby/motion/copy_pikmin_fitkirby/c00/flip.prc": [
             "fighter/kirby/motion/copy_pikmin_fitkirby/c120/flip.prc",
             "fighter/kirby/motion/copy_pikmin_fitkirby/c121/flip.prc",
