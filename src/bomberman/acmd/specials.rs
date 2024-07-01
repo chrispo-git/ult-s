@@ -171,7 +171,7 @@ unsafe extern "C" fn bomb_neutralb(fighter: &mut L2CAgentBase) {
     }
     frame(fighter.lua_state_agent, 6.0);
     if macros::is_excute(fighter) {
-        if smash::app::utility::get_kind(fighter.module_accessor) != *FIGHTER_KIND_PACMAN {
+        if smash::app::utility::get_kind(smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent)) != *FIGHTER_KIND_PACMAN {
             WorkModule::on_flag(fighter.module_accessor, *FIGHTER_PACMAN_STATUS_SPECIAL_N_WORK_FLAG_THROW);
         }
         AttackModule::clear_all(fighter.module_accessor);
