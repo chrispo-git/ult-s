@@ -649,6 +649,11 @@ pub extern "C" fn main() {
         println!("pichu installed");
     }
 
+    if Path::new("sd:/ultimate/ult-s/pikachu.flag").is_file() {
+        pikachu::install();
+        println!("pikachu installed");
+    }
+
     if Path::new("sd:/ultimate/ult-s/pit.flag").is_file() {
         pit::install();
         println!("pit installed");
