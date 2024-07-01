@@ -84,7 +84,7 @@ unsafe extern "C" fn bomber_main_frame(fighter: &mut L2CFighterCommon) {
                 }
                 if motion_kind == hash40("special_s_end") && frame > 25.0 {
                     StatusModule::set_keep_situation_air(boma, false);
-                    if situation_kind == *SITUATION_KIND_GROUND {
+                    if situation_kind == *SITUATION_KIND_GROUND || is_near_ground && SPEED_Y[ENTRY_ID] <= 0.0 {
                         StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_LANDING, false);
                     }
                 }
@@ -171,7 +171,7 @@ unsafe extern "C" fn bomberman_frame(fighter: &mut L2CFighterCommon) {
 					}
 				};
             }
-            if status_kind == *FIGHTER_PACMAN_STATUS_KIND_FINAL_END {
+            if status_kind == *FIGHTER_PACMAN_STATUS_KIND_FINAL_END && frame > 3.0{
                 if is_ground {
                     StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_WAIT, true);
                 } else {
