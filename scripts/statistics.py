@@ -953,6 +953,51 @@ if not os.path.isdir(f'src/{character}'):
           except ValueError:
               additional_info.append(f"\nNote: Deals _f bonus hitstun\n")
       #print(output)
+      if True:
+          if len(additional_info) == 0:
+            additional_info.append("\n")
+          if yaml_faf != []:
+            for x in yaml_faf:
+              checked_val = x[0].replace("\n","")
+              #print(f"{game_script_name} - {checked_val}")
+              if game_script_name == checked_val:
+                  faf = int(x[1])
+                  faf = int(math.ceil(frame + ((float(faf) - last_frame_check) * motion_rate) ))
+                  if enable_cancel_frame == 0.0:
+                    if faf != 0 and faf < 200:
+                      additional_info.append(f"FaF: {faf}\n")
+                      #print(f"{game_script_name}: {faf}")
+                    else:
+                      additional_info.append(f"FaF: --\n")
+                      #print(f"{game_script_name}: --")
+                  else:
+                      additional_info.append(f"FaF: {enable_cancel_frame}\n")
+                      #print(f"{game_script_name}: {enable_cancel_frame}")
+          if autocancel_start != autocancel_end:
+            a_start = int(math.ceil(autocancel_start))-1
+            if a_start > 1:
+              additional_info.append(f"Autocancel - 1-{int(math.ceil(autocancel_start) )-1}/{int(math.ceil(autocancel_end) )}+")
+            elif a_start > 0:
+              additional_info.append(f"Autocancel - 1/{int(math.ceil(autocancel_end ))}+")
+            else:
+              additional_info.append(f"Autocancel - {int(math.ceil(autocancel_end ))}+")
+
+          for i in additional_info:
+            output.append(i)
+          if script_name != "":
+            output.append("\n\n")
+          frame = 0.0
+          wait_frames = 0.0
+          enable_cancel_frame = 0.0
+          hit_times = 0
+          last_frame_check = 0.0
+          game_script_name = ""
+          motion_rate = 1.0
+          autocancel_start = 0.0
+          autocancel_end = 0.0
+          has_hitstun = False
+          additional_info = []
+          throw_stats = []
       f = open("edited.csv", "a")
       for i in output:
         f.write(i)
