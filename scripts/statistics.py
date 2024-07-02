@@ -655,10 +655,28 @@ if not os.path.isdir(f'src/{character}'):
 
       not_game = ["eff", "sound", "snd", "expr", "_s ", "_s(", "_e ", "_e("]
 
+      install_list = []
+      for check_line in rs:
+        if ".acmd(" in check_line or ".effect_acmd(" in check_line or ".sound_acmd(" in check_line or ".game_acmd(" in check_line or ".expression_acmd(" in check_line:
+          x = check_line
+          x = x.replace(" ", "")
+          x = x.replace(",Priority::Low)", "")
+          x = x.replace(",", "")
+          x = x.replace('.acmd("',"")
+          x = x.replace('.effect_acmd("',"")
+          x = x.replace('.sound_acmd("',"")
+          x = x.replace('.game_acmd("',"")
+          x = x.replace('.expression_acmd("',"")
+          x = x.replace('\n',"")
+          x = x.replace('\t',"")
+          install_list.append(x.split('"'))
+      print(install_list)
+
       for line_ in rs:
+        #print(line_)
         line = line_.replace("(agent", "(fighter")
         #print(line)
-        if "#[acmd_script(" in line or "pub fn install() {" in line:
+        if 'unsafe extern "C" ' in line or "pub fn install() {" in line:
           if len(additional_info) == 0:
             additional_info.append("\n")
           if yaml_faf != []:
@@ -704,23 +722,21 @@ if not os.path.isdir(f'src/{character}'):
           additional_info = []
           throw_stats = []
 
-        if "script" in line and not "use" in line:
-          gamescript = line.replace(" ", "")
+        if 'unsafe extern "C" fn' in line:
+          gamescript = line.replace('unsafe extern "C" fn', "")
+          gamescript = gamescript.replace("(fighter: &mut L2CAgentBase)", "")
+          gamescript = gamescript.replace("(agent: &mut L2CAgentBase)", "")
+          gamescript = gamescript.replace("(weapon: &mut L2CAgentBase)", "")
+          gamescript = gamescript.replace(" ", "")
+          gamescript = gamescript.replace("{", "")
           gamescript = gamescript.replace("\t", "")
           gamescript = gamescript.replace("\n", "")
-          gamescript = gamescript.split(",")
           scriptname = ""
-          for i in gamescript:
-              if "script" in i and not "#[acmd_script(" in i:
-                scriptname = i
-          scriptname = scriptname.replace(" ","")
+          for installs in install_list:
+            if installs[1] == gamescript:
+              scriptname = installs[0]
+              print(installs[0])
 
-          scriptname = scriptname.replace("scripts","")
-          scriptname = scriptname.replace("script","")
-          scriptname = scriptname.replace("=","")
-          scriptname = scriptname.replace("[","")
-          scriptname = scriptname.replace("]","")
-          scriptname = scriptname.replace('"',"")
           game_script_name = scriptname
 
           
