@@ -585,8 +585,10 @@ try:
             script = script.replace("\t","")
             script = script.replace('toad',"",1)
             script = script.replace('rayman',"",1)
-            script = script.replace('bomb',"",1)
-            script = script.replace('boom',"",1)
+            if 'boom' in i:
+              script = script.replace('boom',"",1)
+            else:
+              script = script.replace('bomb',"",1)
             script = script.replace('sandbag',"",1)
             script = script.replace('masked',"",1)
             if "game_attacks3s" in script:
@@ -751,8 +753,10 @@ if not os.path.isdir(f'src'):
           x = x.replace('\t',"")
           x = x.replace('toad',"",1)
           x = x.replace('rayman',"",1)
-          x = x.replace('bomb',"",1)
-          x = x.replace('boom',"",1)
+          if 'boom' in x:
+            x = x.replace('boom',"",1)
+          else:
+            x = x.replace('bomb',"",1)
           x = x.replace('sandbag',"",1)
           x = x.replace('masked',"",1)
           install_list.append(x.split('"'))
@@ -828,6 +832,10 @@ if not os.path.isdir(f'src'):
           game_script_name = game_script_name.replace('rayman',"",1)
           game_script_name = game_script_name.replace('bomb',"",1)
           game_script_name = game_script_name.replace('boom',"",1)
+          if 'boom' in game_script_name:
+            game_script_name = game_script_name.replace('boom',"",1)
+          else:
+            game_script_name = game_script_name.replace('bomb',"",1)
           game_script_name = game_script_name.replace('sandbag',"",1)
           game_script_name = game_script_name.replace('masked',"",1)
 
@@ -987,7 +995,7 @@ if not os.path.isdir(f'src'):
           x = x.split(", ")
           if "THROW" in x[0]:
               throw_stats = x
-        if "macros::ATK_HIT_ABS(fighter" in line:
+        if "macros::ATK_HIT_ABS(fighter" in line and len(throw_stats) > 0:
           x = throw_stats
           z = x[6]
           if int(x[5]) > 0:
