@@ -69,7 +69,7 @@ replace = [
     ['miifighter', 'brawler'],
     ['miigunner', 'gunner'],
     ['miiswordsman', 'sword'],
-    ['murabito', 'villager', 'villy', 'toad'],
+    ['murabito', 'villager', 'villy'],
     ['ness'],
     ['packun', 'plant', 'piranha'],
     ['pacman', 'pac'],
@@ -79,7 +79,7 @@ replace = [
     ['pichu'],
     ['pickel', 'steve'],
     ['pikachu', 'pika'],
-    ['pikmin', 'olimar', 'alph', 'rayman'],
+    ['pikmin', 'olimar', 'alph'],
     ['pitb', 'dpit'],
     ['pit'],
     ['plizardon', 'charizard', 'zard'],
@@ -343,6 +343,26 @@ for i in replace:
     if has_replace == True:
         break
 
+replace_add = [
+  ["bomberman","pacman"],
+  ["sandbag","mariod"],
+  ["toad","murabito"],
+  ["rayman","pikmin"],
+  ["masked","lucas"]
+]
+is_add = False
+new_char = ""
+for i in replace_add:
+    if i[0] in character:
+            character = i[1]
+            has_replace = True
+            is_add = True
+            new_char = i[0]
+            print(new_char)
+            break
+    if has_replace == True:
+        break
+
 if has_replace != True:
   raise Exception("Character not found! Did you misspell their name?")
 
@@ -360,7 +380,7 @@ attribute_list = [
   ["run_speed_max", "Run Speed", 0.0, "float", 43],
   ["walk_accel_max", "Walk Speed", 0.0, "float", 35],
   ["ground_brake", "Traction", 0.0, "float", 39],
-  ["", "Wavedash Traction Category", "Average", "", 0],
+  ["dummy_yap", "Wavedash Traction Category", "Average", "", 0],
   ["jump_y", "Full Hop Height", 0.0, "float", 49],
   ["mini_jump_y", "Short Hop Height", 0.0, "float", 50],
   ["air_speed_x_stable", "Air Speed", 0.0, "float", 54],
@@ -484,7 +504,27 @@ for f in range(0, len(wavedash_rs)):
       if name in wavedash_rs[f] or name2 in wavedash_rs[f]:
         attribute_list[4][2] = values[begin]
         break
-      
+
+if is_add:
+  os.chdir('../')
+  f = open("romfs/config_param.toml")
+  config = f.readlines()
+  f.close()
+  os.chdir('scripts')
+  for i in range(0,len(config)-3):
+    for x in range(0,len(attribute_list)):
+      if attribute_list[x][0] in config[i] and character in config[i+3]:
+        new_val = config[i+2]
+        new_val = new_val.replace("\t","")
+        new_val = new_val.replace("\n","")
+        new_val = new_val.replace(" ","")
+        new_val = new_val.replace("value=","")
+        if attribute_list[x][3] == "int" or "landing" in attribute_list[x][0]:
+          attribute_list[x][2] = int(float(new_val))
+        elif attribute_list[x][3] == "float":
+          attribute_list[x][2] = float(new_val)
+        elif attribute_list[x][3] == "bool":
+          attribute_list[x][2] = bool(new_val)
 
 f = open("edited.csv", "a")
 f.write("Attributes:\n")
@@ -522,31 +562,61 @@ block4s = True
 os.chdir('../')
 #print(os.getcwd())
 try:
-    
-    os.system(f'py yamlist.py "romfs/fighter/{character}/motion/body/c00/motion_list.bin"')
-    f = open(f"romfs/fighter/{character}/motion/body/c00/motion_list.yml")
-    yaml_output = f.readlines()
-    f.close()
-    os.remove(f"romfs/fighter/{character}/motion/body/c00/motion_list.yml")
-    os.chdir(f'scripts')
-
+    if is_add:
+      os.system(f'py yamlist.py "romfs/fighter/{character}/motion/body/c120/motion_list.bin"')
+      f = open(f"romfs/fighter/{character}/motion/body/c120/motion_list.yml")
+      yaml_output = f.readlines()
+      f.close()
+      os.remove(f"romfs/fighter/{character}/motion/body/c120/motion_list.yml")
+      os.chdir(f'scripts')
+    else:
+      os.system(f'py yamlist.py "romfs/fighter/{character}/motion/body/c00/motion_list.bin"')
+      f = open(f"romfs/fighter/{character}/motion/body/c00/motion_list.yml")
+      yaml_output = f.readlines()
+      f.close()
+      os.remove(f"romfs/fighter/{character}/motion/body/c00/motion_list.yml")
+      os.chdir(f'scripts')
     faf_printer = []
-    for i in yaml_output:
-      if "game_script:" in i:
-        script = i.replace("game_script:","")
-        script = script.replace(" ","")
-        script = script.replace("\t","")
-        if "game_attacks3s" in script:
-           block3s = False
-        if "game_attacks4s" in script:
-           block4s = False
-        faf_printer = [script]
-      if "cancel_frame:" in i:
-        faf = i.replace("cancel_frame:","")
-        faf = faf.replace(" ","")
-        faf = faf.replace("\t","")
-        faf_printer.append(int(faf))
-        yaml_faf.append(faf_printer)
+    if not is_add:
+      for i in yaml_output:
+          if "game_script:" in i:
+            script = i.replace("game_script:","")
+            script = script.replace(" ","")
+            script = script.replace("\t","")
+            script = script.replace('toad',"",1)
+            script = script.replace('rayman',"",1)
+            script = script.replace('bomb',"",1)
+            script = script.replace('boom',"",1)
+            script = script.replace('sandbag',"",1)
+            script = script.replace('masked',"",1)
+            if "game_attacks3s" in script:
+              block3s = False
+            if "game_attacks4s" in script:
+              block4s = False
+            faf_printer = [script]
+          if "cancel_frame:" in i:
+            faf = i.replace("cancel_frame:","")
+            faf = faf.replace(" ","")
+            faf = faf.replace("\t","")
+            faf_printer.append(int(faf))
+            yaml_faf.append(faf_printer)
+    else:
+      for i in range(0,len(yaml_output)-1):
+          if "game_script:" in yaml_output[i+1]:
+            script = yaml_output[i].replace(":","")
+            script = script.replace(" ","")
+            script = script.replace("\t","")
+            script = script.replace("\n","")
+            script = script.replace("_","")
+            script = "game_" + script
+            faf_printer = [script]
+          if "cancel_frame:" in yaml_output[i]:
+            faf = yaml_output[i].replace("cancel_frame:","")
+            faf = faf.replace(" ","")
+            faf = faf.replace("\t","")
+            faf_printer.append(int(faf))
+            yaml_faf.append(faf_printer)
+      
 
 except Exception:
     print("No motion_list to extract") 
@@ -619,21 +689,31 @@ for i in faf_isolate:
 print(os.getcwd())
 
 
-if not os.path.isdir(f'src/{character}'):
+if not os.path.isdir(f'src'):
     os.chdir('../')
     reset_dir = os.getcwd()
     to_open_list = ["acmd/aerials.rs", "acmd/ground.rs", "acmd/other.rs", "acmd/specials.rs", "acmd/throws.rs", "acmd/tilts.rs"]
     for i in to_open_list:
       os.chdir(reset_dir)
       print(i)
-      if os.path.isdir(f'src/{character}'):
-        os.chdir(f'src/{character}')
-        f = open(i)
-        rs = f.readlines()
-        f.close()
+      if is_add:
+        if os.path.isdir(f'src/{new_char}'):
+          os.chdir(f'src/{new_char}')
+          f = open(i)
+          rs = f.readlines()
+          f.close()
+        else:
+          os.chdir(f'src/common')
+          rs = []
       else:
-        os.chdir(f'src/common')
-        rs = []
+        if os.path.isdir(f'src/{character}'):
+          os.chdir(f'src/{character}')
+          f = open(i)
+          rs = f.readlines()
+          f.close()
+        else:
+          os.chdir(f'src/common')
+          rs = []
       os.chdir('../')
       os.chdir('../')
       os.chdir('scripts')
@@ -669,6 +749,12 @@ if not os.path.isdir(f'src/{character}'):
           x = x.replace('.expression_acmd("',"")
           x = x.replace('\n',"")
           x = x.replace('\t',"")
+          x = x.replace('toad',"",1)
+          x = x.replace('rayman',"",1)
+          x = x.replace('bomb',"",1)
+          x = x.replace('boom',"",1)
+          x = x.replace('sandbag',"",1)
+          x = x.replace('masked',"",1)
           install_list.append(x.split('"'))
       print(install_list)
 
@@ -738,6 +824,12 @@ if not os.path.isdir(f'src/{character}'):
               print(installs[0])
 
           game_script_name = scriptname
+          game_script_name = game_script_name.replace('toad',"",1)
+          game_script_name = game_script_name.replace('rayman',"",1)
+          game_script_name = game_script_name.replace('bomb',"",1)
+          game_script_name = game_script_name.replace('boom',"",1)
+          game_script_name = game_script_name.replace('sandbag',"",1)
+          game_script_name = game_script_name.replace('masked',"",1)
 
           
         game = True
@@ -1023,7 +1115,7 @@ if vanilla_directory == "":
     f.write(vanilla_directory)
     f.close()
 
-if os.path.isdir(f'{vanilla_directory}/smashline/lua2cpp_{character}/{character}/game'):
+if os.path.isdir(f'{vanilla_directory}/smashline/lua2cpp_{character}/{character}/game') and not is_add:
     os.chdir(f'{vanilla_directory}/smashline/lua2cpp_{character}/{character}/game')
     #print(os.listdir())
     include_list = [

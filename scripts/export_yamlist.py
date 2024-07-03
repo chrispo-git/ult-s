@@ -50,7 +50,7 @@ replace = [
     ['miifighter', 'brawler'],
     ['miigunner', 'gunner'],
     ['miiswordsman', 'sword'],
-    ['murabito', 'villager', 'villy', 'toad'],
+    ['murabito', 'villager', 'villy'],
     ['nana'],
     ['ness'],
     ['packun', 'plant', 'piranha'],
@@ -115,6 +115,14 @@ character = character.replace("dark samus", "samusd")
 
 has_replace = False
 
+replace_add = [
+  ["bomberman","pacman"],
+  ["sandbag","mariod"],
+  ["toad","murabito"],
+  ["rayman","pikmin"],
+  ["masked","lucas"]
+]
+
 for i in replace:
     for f in i:
         if f in character:
@@ -124,16 +132,23 @@ for i in replace:
             break
     if has_replace == True:
         break
-
+number = 0
+for i in replace_add:
+    if i[0] in character:
+        character = i[1]
+        has_replace = True
+        number = 12 
+        print(i[0])
+        break
 if has_replace != True:
   raise Exception("Character not found! Did you misspell their name?")
 
 os.chdir('../')
 try:
-    os.system(f'py yamlist.py "romfs/fighter/{character}/motion/body/c00/motion_list.bin"')
+    os.system(f'py yamlist.py "romfs/fighter/{character}/motion/body/c{number}0/motion_list.bin"')
     print(os.getcwd())
-    shutil.copyfile(f'romfs/fighter/{character}/motion/body/c00/motion_list.yml', f'scripts/motion_list.yml')
-    os.remove(f"romfs/fighter/{character}/motion/body/c00/motion_list.yml")
+    shutil.copyfile(f'romfs/fighter/{character}/motion/body/c{number}0/motion_list.yml', f'scripts/motion_list.yml')
+    os.remove(f"romfs/fighter/{character}/motion/body/c{number}0/motion_list.yml")
     os.chdir(f'scripts')
 except Exception:
     raise Exception("No motion_list to extract")
@@ -142,12 +157,12 @@ os.startfile("motion_list.yml")
 input("Press enter to convert it back")
 os.chdir('../')
 os.system(f'py yamlist.py "scripts/motion_list.yml"')
-shutil.copyfile(f'scripts/motion_list.bin', f'romfs/fighter/{character}/motion/body/c00/motion_list.bin')
-if os.path.isdir(f'romfs/fighter/{character}/motion/body/c01'):
+shutil.copyfile(f'scripts/motion_list.bin', f'romfs/fighter/{character}/motion/body/c{number}0/motion_list.bin')
+if os.path.isdir(f'romfs/fighter/{character}/motion/body/c{number}1'):
     for i in range(1,8):
-        if os.path.isdir(f'romfs/fighter/{character}/motion/body/c0{i}') == False:
-            os.mkdir(f'romfs/fighter/{character}/motion/body/c0{i}')
-        shutil.copyfile(f'scripts/motion_list.bin', f'romfs/fighter/{character}/motion/body/c0{i}/motion_list.bin')
+        if os.path.isdir(f'romfs/fighter/{character}/motion/body/c{number}{i}') == False:
+            os.mkdir(f'romfs/fighter/{character}/motion/body/c{number}{i}')
+        shutil.copyfile(f'scripts/motion_list.bin', f'romfs/fighter/{character}/motion/body/c{number}{i}/motion_list.bin')
 os.remove(f"scripts/motion_list.yml")
 os.remove(f"scripts/motion_list.bin")
 os.chdir(f'scripts')
