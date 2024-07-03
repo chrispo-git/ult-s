@@ -590,7 +590,7 @@ try:
             else:
               script = script.replace('bomb',"",1)
             script = script.replace('sandbag',"",1)
-            script = script.replace('masked',"",1)
+            script = script.replace('maskedman',"",1)
             if "game_attacks3s" in script:
               block3s = False
             if "game_attacks4s" in script:
@@ -758,7 +758,7 @@ if not os.path.isdir(f'src'):
           else:
             x = x.replace('bomb',"",1)
           x = x.replace('sandbag',"",1)
-          x = x.replace('masked',"",1)
+          x = x.replace('maskedman',"",1)
           install_list.append(x.split('"'))
       print(install_list)
 
@@ -837,7 +837,7 @@ if not os.path.isdir(f'src'):
           else:
             game_script_name = game_script_name.replace('bomb',"",1)
           game_script_name = game_script_name.replace('sandbag',"",1)
-          game_script_name = game_script_name.replace('masked',"",1)
+          game_script_name = game_script_name.replace('maskedman',"",1)
 
           
         game = True
