@@ -123,15 +123,6 @@ replace_add = [
   ["masked","lucas"]
 ]
 
-for i in replace:
-    for f in i:
-        if f in character:
-            character = i[0]
-            has_replace = True
-            print(character)
-            break
-    if has_replace == True:
-        break
 number = 0
 for i in replace_add:
     if i[0] in character:
@@ -140,6 +131,16 @@ for i in replace_add:
         number = 12 
         print(i[0])
         break
+if has_replace != True:
+    for i in replace:
+        for f in i:
+            if f in character:
+                character = i[0]
+                has_replace = True
+                print(character)
+                break
+        if has_replace == True:
+            break
 if has_replace != True:
   raise Exception("Character not found! Did you misspell their name?")
 
