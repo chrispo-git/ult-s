@@ -79,7 +79,7 @@ pub(crate) unsafe fn jump_vc(fighter: &mut L2CAgentBase) -> () {
 	}
 }
 pub(crate) unsafe fn jump_aerial_vc(fighter: &mut L2CAgentBase) -> () {
-	let rand_val = smash::app::sv_math::rand(hash40("fighter"), 6);
+	let rand_val = smash::app::sv_math::rand(hash40("fighter"), 4);
 	macros::STOP_SE(fighter, Hash40::new("se_pikmin_attackhard_s02"));
 	match rand_val {
 		0 => macros::PLAY_SE(fighter, Hash40::new("se_pikmin_attackhard_s02")),
