@@ -83,6 +83,11 @@ unsafe extern "C" fn rayman(fighter: &mut L2CFighterCommon) {
         
 
         if is_ray && fighter_kind == *FIGHTER_KIND_PIKMIN { //rayman slots
+            if WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 124 {
+                if ![*FIGHTER_PIKMIN_STATUS_KIND_SPECIAL_HI_WAIT, *FIGHTER_PIKMIN_STATUS_KIND_SPECIAL_HI_END, *FIGHTER_STATUS_KIND_SPECIAL_HI, *FIGHTER_STATUS_KIND_ATTACK_AIR].contains(&status_kind) {
+                    ModelModule::set_mesh_visibility(boma,Hash40::new("pikmin_wing_a"),true);
+                };
+            };
             if status_kind == *FIGHTER_STATUS_KIND_ENTRY || is_reset() {
                 let custom_hurtboxes = [
                     //["bone", x1, y1, z1, x2, y2, z2, scale, collision_part, hit height]
