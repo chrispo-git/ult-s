@@ -49,7 +49,8 @@ unsafe extern "C" fn kirby_drink_exec(fighter: &mut L2CFighterCommon) -> L2CValu
                     || (opp_kind == *FIGHTER_KIND_MARIOD && (WorkModule::get_int(opp, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) >= 120 && WorkModule::get_int(opp, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) <= 127)) //sandbag
                     || (opp_kind == *FIGHTER_KIND_LUCAS && (WorkModule::get_int(opp, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) >= 120 && WorkModule::get_int(opp, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) <= 127)) //masked man
                 {
-                    WorkModule::on_flag(fighter.module_accessor, FIGHTER_KIRBY_STATUS_SPECIAL_N_FLAG_CUSTOM_CHARACTER);
+                    fighter.change_status(FIGHTER_KIRBY_STATUS_KIND_SPECIAL_N_SPIT.into(), false.into());
+                    return 0.into();
                 }
             }
         }
