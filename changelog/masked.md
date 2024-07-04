@@ -14,7 +14,7 @@ Air Accel Add | 0.01|
 Air Accel Mul | 0.072|
 Fall Speed | 1.6|
 Gravity | 0.09|
-Weight | 87.0|
+Weight | 87|
 Nair Landing Lag | 9|
 Fair Landing Lag | 10|
 Bair Landing Lag | 9|
