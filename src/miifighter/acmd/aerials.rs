@@ -147,7 +147,7 @@ unsafe extern "C" fn brawler_uair(fighter: &mut L2CAgentBase) {
 		if macros::is_excute(fighter) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
-		frame(fighter.lua_state_agent, 21.0);
+		frame(fighter.lua_state_agent, 23.0);
 		if macros::is_excute(fighter) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
