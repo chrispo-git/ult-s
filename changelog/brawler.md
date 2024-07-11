@@ -348,7 +348,7 @@ FaF: 32
 
 
 
-Autocancel - 1/21+
+Autocancel - 1/23+
 
 
 
@@ -592,8 +592,8 @@ FaF: 56
 |Frame 2| 0|  2.5%|  367|  70 (Set)|  100| Hits grounded only|
 |Frame 2| 1|  2.5%|  367|  70 (Set)|  100| Hits air only|
 |Hitboxes terminated on Frame 3|
-|Frame 11| 0|  13.0%|  40|  60|  60|
-|Frame 11| 1|  13.0%|  40|  60|  60|
+|Frame 11| 0|  13.0%|  361|  75|  60|
+|Frame 11| 1|  13.0%|  361|  75|  60|
 |Hitboxes terminated on Frame 15|
 
 
