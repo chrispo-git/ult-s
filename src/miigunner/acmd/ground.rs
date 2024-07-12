@@ -141,7 +141,7 @@ unsafe extern "C" fn gunner_dsmash(fighter: &mut L2CAgentBase) {
     }
     frame(fighter.lua_state_agent, 24.0);
     if macros::is_excute(fighter) {
-        macros::ATTACK(fighter, 0, 0, Hash40::new("top"), 13.0, 40, 65, 0, 65, 4.5, 0.0, 5.5, -17.0, Some(0.0), Some(6.0), Some(-10.0), 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_B, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_fire"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_BOMB);
+        macros::ATTACK(fighter, 0, 0, Hash40::new("top"), 12.5, 40, 65, 0, 65, 4.5, 0.0, 5.5, -17.0, Some(0.0), Some(6.0), Some(-10.0), 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_B, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_fire"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_BOMB);
         AttackModule::set_attack_height_all(fighter.module_accessor, AttackHeight(*ATTACK_HEIGHT_LOW), false);
     }
     wait(fighter.lua_state_agent, 3.0);
@@ -165,24 +165,3 @@ unsafe extern "C" fn gunner_dsmash_sound(fighter: &mut L2CAgentBase) {
         macros::PLAY_SE(fighter, Hash40::new("se_miigunner_smash_l02"));
     }
 }
-
-/*unsafe extern "C" fn gunner_dsmash_effect(fighter: &mut L2CAgentBase) {
-    frame(fighter.lua_state_agent, 2.0);
-    if macros::is_excute(fighter) {
-        macros::EFFECT(fighter, Hash40::new("sys_smash_flash"), Hash40::new("haver"), 0, 5, 4, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, true);
-    }
-    frame(fighter.lua_state_agent, 10.0);
-    if macros::is_excute(fighter) {
-        macros::EFFECT(fighter, Hash40::new("miigunner_atk_shot5"), Hash40::new("armr"), 0, 0, 0, 0, 90, 0, 1, 0, 0, 0, 0, 0, 0, true);
-        macros::FOOT_EFFECT(fighter, Hash40::new("sys_run_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
-    }
-    frame(fighter.lua_state_agent, 23.0);
-    if macros::is_excute(fighter) {
-        macros::EFFECT(fighter, Hash40::new("miigunner_atk_shot5"), Hash40::new("armr"), 0, 0, 0, 0, 90, 0, 1.3, 0, 0, 0, 0, 0, 0, true);
-        macros::LAST_EFFECT_SET_RATE(fighter, 1.2);
-    }
-    frame(fighter.lua_state_agent, 23.0);
-    if macros::is_excute(fighter) {
-        macros::LANDING_EFFECT(fighter, Hash40::new("sys_dash_smoke"), Hash40::new("top"), 3, 0, 0, 0, 180, 0, 0.8, 0, 0, 0, 0, 0, 0, false);
-    }
-}*/

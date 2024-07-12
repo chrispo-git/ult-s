@@ -33,10 +33,6 @@ pub fn install() {
     .acmd("game_shoot", gunner_chargeshot, Priority::Low)    
     .install();
 
-    Agent::new("miigunner_grenadelauncher")
-    .acmd("game_explode", gunner_nade_explode, Priority::Low)    
-    .install();
-
     Agent::new("miigunner_flamepillar")
     .acmd("game_pillar", gunner_fp, Priority::Low)    
     .install();
@@ -66,29 +62,6 @@ unsafe extern "C" fn gunner_laser(fighter: &mut L2CAgentBase) {
     }
     wait(fighter.lua_state_agent, 4.0);
 }	
-
-unsafe extern "C" fn gunner_nade_explode(fighter: &mut L2CAgentBase) {
-    if macros::is_excute(fighter) {
-        VisibilityModule::set_whole(fighter.module_accessor, false);
-        macros::ATTACK(fighter, 0, 0, Hash40::new("top"), 1.5, 160, 9, 0, 29, 7.0, 0.0, 0.0, 0.0, None, None, None, 0.3, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, -0.7, 0.0, 5, true, true, false, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_fire"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_BOMB);
-    }
-    frame(fighter.lua_state_agent, 3.0);
-    if macros::is_excute(fighter) {
-        macros::AREA_WIND_2ND_RAD(fighter, 0, 1, 0.02, 1000, 1, 0, 0, 18);
-    }
-    frame(fighter.lua_state_agent, 11.0);
-    if macros::is_excute(fighter) {
-        AreaModule::erase_wind(fighter.module_accessor, 0);
-    }
-    frame(fighter.lua_state_agent, 18.0);
-    if macros::is_excute(fighter) {
-        macros::ATTACK(fighter, 0, 1, Hash40::new("top"), 6.0, 70, 151, 0, 20, 10.0, 0.0, 0.0, 0.0, None, None, None, 0.6, 0.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, -3.3, 0.0, 0, true, true, false, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_fire"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_BOMB);
-    }
-    frame(fighter.lua_state_agent, 19.0);
-    if macros::is_excute(fighter) {
-        notify_event_msc_cmd!(fighter, Hash40::new_raw(0x199c462b5d));
-    }
-}
 
 
 unsafe extern "C" fn gunner_s1(agent: &mut L2CAgentBase) {
