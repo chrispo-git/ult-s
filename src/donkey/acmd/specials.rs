@@ -68,14 +68,14 @@ unsafe extern "C" fn dk_sideb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);   
 	let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-    macros::FT_MOTION_RATE(agent, 1.06);
+    macros::FT_MOTION_RATE(fighter, 1.06);
     frame(fighter.lua_state_agent, 4.0);
     if macros::is_excute(fighter) {
         ItemModule::have_item(fighter.module_accessor, smash::app::ItemKind(*ITEM_KIND_BARREL), 0, 0, false, false);
         IS_DK_START_ITEM_CHUCK[ENTRY_ID] = true;
     }
     frame(fighter.lua_state_agent, 33.0);
-    macros::FT_MOTION_RATE(agent, 1.0);
+    macros::FT_MOTION_RATE(fighter, 1.0);
     if macros::is_excute(fighter) {
         ItemModule::throw_item(fighter.module_accessor, 22.5, 4.0, 1.0, 0, true, 0.0);
     } 
