@@ -39,13 +39,22 @@ unsafe extern "C" fn plant_frame(fighter: &mut L2CFighterCommon) {
 				BREATH_POS_X[ENTRY_ID] = 0.0;
 				BREATH_POS_Y[ENTRY_ID] = 0.0;
 				IS_BAIR[ENTRY_ID] = false;
+				IS_SIDEB_EAT[ENTRY_ID] = false;
 			};
 			if !ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_PACKUN_GENERATE_ARTICLE_POISONBREATH) {
 				BREATH_POS_X[ENTRY_ID] = 0.0;
 				BREATH_POS_Y[ENTRY_ID] = 0.0;
+			} else {
+				if [hash40("special_s_shoot"), hash40("special_air_s_shoot")].contains(&motion_kind) {
+					ModelModule::set_mesh_visibility(boma, Hash40::new("heada"), true);
+        			ModelModule::set_mesh_visibility(boma, Hash40::new("headb"), false);
+				}
 			}
-			if motion_kind != hash40("attack_air_b") {
+
+
+			if ![hash40("attack_air_b"), hash40("special_s_shoot"), hash40("special_air_s_shoot")].contains(&motion_kind) {
 				IS_BAIR[ENTRY_ID] = false;
+				IS_SIDEB_EAT[ENTRY_ID] = false;
 			}
 		}
 	}
@@ -64,12 +73,21 @@ unsafe extern "C" fn poison_frame(weapon: &mut L2CFighterBase) {
 			let scale = PostureModule::scale(weapon.module_accessor);
 			let lr = PostureModule::lr(&mut *boma);
 			let pos_x = PostureModule::pos_x(&mut *boma)+(-11.0*lr);
+			let pos_x2 = PostureModule::pos_x(&mut *boma)+(28.0*lr);
 			let pos_y = PostureModule::pos_y(&mut *boma)+4.0;
 			//println!("Breath Pos [{},{}] Plant Pos [{}, {}]", BREATH_POS_X[ENTRY_ID], BREATH_POS_Y[ENTRY_ID], pos_x, pos_y);
 			if ((BREATH_POS_X[ENTRY_ID]  - pos_x).abs() < 9.0*scale) &&
 				((BREATH_POS_Y[ENTRY_ID]  - pos_y).abs() < 9.0*scale) &&
 				BREATH_POS_Y[ENTRY_ID] != 0.0 && 
 				IS_BAIR[ENTRY_ID] &&
+				motion_kind != hash40("explode")
+				{
+					//println!("Woo!");
+					MotionModule::change_motion(weapon.module_accessor, Hash40::new("explode"), 0.0, 1.0, false, 0.0, false, false);
+			}else if ((BREATH_POS_X[ENTRY_ID]  - pos_x2).abs() < 9.0*scale) &&
+				((BREATH_POS_Y[ENTRY_ID]  - pos_y).abs() < 9.0*scale) &&
+				BREATH_POS_Y[ENTRY_ID] != 0.0 && 
+				IS_SIDEB_EAT[ENTRY_ID] &&
 				motion_kind != hash40("explode")
 				{
 					//println!("Woo!");
