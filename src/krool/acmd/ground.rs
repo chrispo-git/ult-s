@@ -17,6 +17,7 @@ pub fn install() {
     .acmd("game_attack11", krool_jab1, Priority::Low)    
     .acmd("game_attack12", krool_jab2, Priority::Low)    
     .acmd("game_attacklw4", krool_dsmash, Priority::Low)    
+    .acmd("game_attackhi4", krool_usmash, Priority::Low)    
     .install();
 }
 
