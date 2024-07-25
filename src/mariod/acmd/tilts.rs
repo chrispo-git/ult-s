@@ -49,7 +49,13 @@ unsafe extern "C" fn doc_utilt(fighter: &mut L2CAgentBase) {
 			AttackModule::set_add_reaction_frame(fighter.module_accessor, /*ID*/ 3, /*Frames*/ 3.0, /*Unk*/ false);
 			AttackModule::set_add_reaction_frame(fighter.module_accessor, /*ID*/ 4, /*Frames*/ 3.0, /*Unk*/ false);
 		}
-		frame(fighter.lua_state_agent, /*Frames*/ 13.0);
+		frame(fighter.lua_state_agent, 8.0);
+		if macros::is_excute(fighter) {
+			AttackModule::clear(fighter.module_accessor, 0, false);
+			AttackModule::clear(fighter.module_accessor, 2, false);
+			AttackModule::clear(fighter.module_accessor, 4, false);
+		}
+		frame(fighter.lua_state_agent, 13.0);
 		if macros::is_excute(fighter) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
