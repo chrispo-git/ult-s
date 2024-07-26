@@ -56,8 +56,8 @@ unsafe extern "C" fn pitoo(fighter : &mut L2CFighterCommon) {
 			};
 			if status_kind == *FIGHTER_PIT_STATUS_KIND_SPECIAL_HI_RUSH {
 					CAN_SIDEB[ENTRY_ID] = 1;
-					if MotionModule::frame(boma) > 20.0 {
-						StatusModule::change_status_request_from_script(boma, *FIGHTER_PIT_STATUS_KIND_SPECIAL_HI_RUSH_END, true);
+					if MotionModule::frame(boma) > 10.0 {
+						StatusModule::change_status_request_from_script(boma, *FIGHTER_PIT_STATUS_KIND_SPECIAL_HI_RUSH_END, false);
 					};
 			};
 			if status_kind == *FIGHTER_PIT_STATUS_KIND_SPECIAL_HI_RUSH_END {
