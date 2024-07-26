@@ -67,13 +67,6 @@ unsafe extern "C" fn robin_nair(agent: &mut L2CAgentBase) {
                 }
             }
         }
-        frame(agent.lua_state_agent, 42.0);
-        if macros::is_excute(agent) {
-            let object = sv_system::battle_object(agent.lua_state_agent) as *mut BattleObject;
-            if !object.is_null() {
-                FighterSpecializer_Reflet::throwaway_sword(object as *mut Fighter, Vector2f{x: -3.0, y: 17.0}, true);
-            }
-        }
     }
     else {
         if macros::is_excute(agent) {
