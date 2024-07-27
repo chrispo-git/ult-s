@@ -18,9 +18,19 @@ unsafe extern "C" fn training(fighter : &mut L2CFighterCommon) {
         let prev_status = StatusModule::prev_status_kind(boma, 0);
         let situation_kind = StatusModule::situation_kind(boma);
 		let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+        let lr = PostureModule::lr(boma);
+        let fallspeed = WorkModule::get_param_float(boma, hash40("common"), hash40("air_speed_y_stable"));
+        let airspeed = WorkModule::get_param_float(boma, hash40("common"), hash40("air_speed_x_stable"));
+        let gravity = WorkModule::get_param_float(boma, hash40("common"), hash40("air_accel_y"));
+        let mut speed_after_20_frames = gravity*20.0;
+        if speed_after_20_frames > fallspeed {
+            speed_after_20_frames = fallspeed;
+        }
         if is_reset() {
             LEDGE_OPTION = 0;
             LEDGE_OPTION_AFTER = 0;
+            DJ_DELAY[ENTRY_ID] = 0;
+            LEDGE_DELAY[ENTRY_ID] = 0;
         }
         if !smash::app::smashball::is_training_mode() {
             IS_GLOW = false;
@@ -52,6 +62,9 @@ unsafe extern "C" fn training(fighter : &mut L2CFighterCommon) {
         if LEDGE_DELAY[ENTRY_ID] > 0 {
             LEDGE_DELAY[ENTRY_ID] -= 1;
         }
+        if DJ_DELAY[ENTRY_ID] > 0 {
+            DJ_DELAY[ENTRY_ID] -= 1;
+        }
         if IS_GLOW {
                 //Ledge Stuff 
                 let ftilt_list = [
@@ -72,7 +85,19 @@ unsafe extern "C" fn training(fighter : &mut L2CFighterCommon) {
                     *FIGHTER_KIND_TRAIL
                 ];
                 if ENTRY_ID > 0 && ![*FIGHTER_KIND_POPO, *FIGHTER_KIND_NANA].contains(&fighter_kind) {
-                    if WorkModule::is_enable_transition_term(boma, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_CLIFF_ATTACK) && LEDGE_DELAY[ENTRY_ID] == 0 { //If can do ledge option
+
+                    
+                    if (*FIGHTER_STATUS_KIND_DAMAGE..*FIGHTER_STATUS_KIND_DAMAGE_FALL).contains(&status_kind) || status_kind == *FIGHTER_STATUS_KIND_CLIFF_CATCH {
+                        DJ_DELAY[ENTRY_ID] = 0;
+                        LEDGE_DELAY[ENTRY_ID] = 0;
+                        LEDGE_OPTION = 0;
+                        LEDGE_OPTION_AFTER = 0;
+                    }
+                    println!("dj delay {}", DJ_DELAY[ENTRY_ID]);
+                    println!("ledge delay {}", LEDGE_DELAY[ENTRY_ID]);
+                    println!("ledge option {}", LEDGE_OPTION);
+
+                    if WorkModule::is_enable_transition_term(boma, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_CLIFF_ATTACK) && LEDGE_DELAY[ENTRY_ID] == 0  && DJ_DELAY[ENTRY_ID] == 0{ //If can do ledge option
                         LEDGE_OPTION = smash::app::sv_math::rand(hash40("fighter"), 6); //Sets Ledge Option
                         LEDGE_OPTION_AFTER = smash::app::sv_math::rand(hash40("fighter"), 3); //Sets Afterwards Option
                         if LEDGE_OPTION == 1 && LEDGE_OPTION_AFTER == 2 {
@@ -93,15 +118,28 @@ unsafe extern "C" fn training(fighter : &mut L2CFighterCommon) {
                         } else if LEDGE_OPTION == 3 {
                             StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_CLIFF_JUMP1, true);
                         } else if LEDGE_OPTION == 4 {
-                            StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_JUMP_AERIAL, true);
-                            let airspeed = WorkModule::get_param_float(boma, hash40("common"), hash40("air_speed_x_stable"));
-                            let speed = smash::phx::Vector3f { x: airspeed, y: 0.0, z: 0.0 };
-                            KineticModule::add_speed(boma, &speed);
+                            DJ_DELAY[ENTRY_ID] = 20;
+                            StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL, true);
+                            macros::SET_SPEED_EX(fighter, -airspeed, 0.0, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
                         } else if LEDGE_OPTION == 5 {
                             LEDGE_DELAY[ENTRY_ID] = DELAY_FRAMES;
                         }
                     }
-                    if LEDGE_OPTION_AFTER != 0 {
+                    if LEDGE_OPTION == 4 {
+                        if DJ_DELAY[ENTRY_ID] <= 6 {
+                            ControlModule::set_main_stick_x(boma, lr);
+                        } else {
+                            ControlModule::set_main_stick_x(boma, -lr);
+                        }
+                        if DJ_DELAY[ENTRY_ID] == 5 {
+                            if WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT) < WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT_MAX) {
+                               StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_JUMP_AERIAL, true);
+                            } else {
+                                LEDGE_OPTION = 0;
+                            }
+                        }
+                    }
+                    if LEDGE_OPTION_AFTER != 0 && DJ_DELAY[ENTRY_ID] == 0 {
                         if LEDGE_OPTION_AFTER == 1 {
                             if WorkModule::is_enable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_ESCAPE_AIR) ||
                             WorkModule::is_enable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_GUARD_ON) {
@@ -164,7 +202,9 @@ unsafe extern "C" fn training(fighter : &mut L2CFighterCommon) {
                        if WorkModule::is_enable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_ESCAPE_AIR) ||
                         WorkModule::is_enable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_GUARD_ON) {
                             if situation_kind == *SITUATION_KIND_GROUND {
-                                StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_GUARD, true);
+                                if ![*FIGHTER_STATUS_KIND_DOWN, *FIGHTER_STATUS_KIND_DOWN_WAIT].contains(&status_kind) {
+                                    StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_GUARD, true);
+                                }
                             } else {
                                 StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_ESCAPE_AIR, true);
                             }
