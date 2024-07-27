@@ -93,9 +93,6 @@ unsafe extern "C" fn training(fighter : &mut L2CFighterCommon) {
                         LEDGE_OPTION = 0;
                         LEDGE_OPTION_AFTER = 0;
                     }
-                    println!("dj delay {}", DJ_DELAY[ENTRY_ID]);
-                    println!("ledge delay {}", LEDGE_DELAY[ENTRY_ID]);
-                    println!("ledge option {}", LEDGE_OPTION);
 
                     if WorkModule::is_enable_transition_term(boma, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_CLIFF_ATTACK) && LEDGE_DELAY[ENTRY_ID] == 0  && DJ_DELAY[ENTRY_ID] == 0{ //If can do ledge option
                         LEDGE_OPTION = smash::app::sv_math::rand(hash40("fighter"), 6); //Sets Ledge Option
