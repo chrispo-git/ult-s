@@ -11,6 +11,7 @@ use crate::FIGHTER_MANAGER;
 use std::os::raw::c_int;
 use std::os::raw::c_ulong;
 use crate::controls::ext::*;
+use crate::common::*;
 
 static mut STATUS_DURATION : [i32; 8] = [0; 8];
 static mut MOTION_DURATION : [i32; 8] = [0; 8];
@@ -133,6 +134,8 @@ pub unsafe fn is_enable_transition_term_hook(boma: &mut smash::app::BattleObject
 			} else {
 				return true 
 			}
+		} else if flag == *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_CLIFF_CLIMB && IS_GLOW && ENTRY_ID > 0 {
+			return false
 		}   else {
 			original!()(boma, flag)
 		}
