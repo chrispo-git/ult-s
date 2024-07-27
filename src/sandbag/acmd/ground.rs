@@ -185,7 +185,7 @@ unsafe extern "C" fn sandbag_usmash(agent: &mut L2CAgentBase) {
     }
     frame(agent.lua_state_agent, 8.0);
     if macros::is_excute(agent) {
-        macros::ATTACK(agent, 1, 0, Hash40::new("top"), 3.0, 110, 100, 80, 0, 5.5, 0.0, 6.0, 8.0, Some(0.0), Some(6.0), Some(-8.0), 0.5, 0.5, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_PUNCH, *ATTACK_REGION_HEAD);
+        macros::ATTACK(agent, 1, 0, Hash40::new("top"), 3.0, 110, 100, 100, 0, 5.5, 0.0, 6.0, 8.0, Some(0.0), Some(6.0), Some(-8.0), 0.5, 0.5, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_PUNCH, *ATTACK_REGION_HEAD);
     }
     frame(agent.lua_state_agent, 11.0);
     if macros::is_excute(agent) {
