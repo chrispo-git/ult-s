@@ -19,7 +19,11 @@ pub fn install() {
     .acmd("game_attack11", tink_jab1, Priority::Low)    
     .acmd("game_attack12", tink_jab2, Priority::Low)    
     .acmd("game_attack13", tink_jab3, Priority::Low)    
-    .acmd("game_attackdash", tink_da, Priority::Low)    
+    .acmd("game_attackdash", tink_da, Priority::Low)   
+    .acmd("game_attackhi4", tink_usmash, Priority::Low)     
+    .acmd("effect_attackhi4", tink_usmash_eff, Priority::Low)     
+    .acmd("sound_attackhi4", tink_usmash_snd, Priority::Low)     
+    .acmd("expression_attackhi4", tink_usmash_expr, Priority::Low)     
     .acmd("game_attacks4", tink_fsmash, Priority::Low)    
     .acmd("effect_attacks4", tink_fsmash_eff, Priority::Low)    
     .acmd("expression_attacks4", tink_fsmash_expr, Priority::Low)    
@@ -102,6 +106,146 @@ unsafe extern "C" fn tink_da(fighter: &mut L2CAgentBase) {
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 1);
 }	
 
+unsafe extern "C" fn tink_usmash(agent: &mut L2CAgentBase) {
+	frame(agent.lua_state_agent, 8.0);
+	if macros::is_excute(agent) {
+		WorkModule::on_flag(agent.module_accessor, *FIGHTER_STATUS_ATTACK_FLAG_START_SMASH_HOLD);
+	}
+	frame(agent.lua_state_agent, 9.0);
+    macros::FT_MOTION_RATE(agent, 0.5);
+    frame(agent.lua_state_agent, 10.0);
+    macros::FT_MOTION_RATE(agent, 1.0);
+    frame(agent.lua_state_agent, 12.0);
+    if macros::is_excute(agent) {
+        macros::ATTACK(agent, 4, 0, Hash40::new("sword2"), 1.0, 180, 100, 50, 0, 3.0, -1.5, 0.0, -1.0, None, None, None, 0.3, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 4, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_cutup"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_TOONLINK_HIT, *ATTACK_REGION_SWORD);
+        macros::ATTACK(agent, 3, 0, Hash40::new("sword2"), 1.0, 180, 100, 50, 0, 3.0, 2.0, 0.0, -1.0, None, None, None, 0.3, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 4, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_cutup"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_TOONLINK_HIT, *ATTACK_REGION_SWORD);
+        macros::ATTACK(agent, 0, 0, Hash40::new("sword2"), 1.0, 180, 100, 50, 0, 2.7, 5.5, 0.0, -1.0, None, None, None, 0.3, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 4, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_cutup"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_TOONLINK_HIT, *ATTACK_REGION_SWORD);
+        macros::ATTACK(agent, 1, 0, Hash40::new("top"), 1.0, 80, 100, 10, 0, 2.5, 0.0, 3.5, 0.0, None, None, None, 0.3, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 4, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_cutup"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_TOONLINK_HIT, *ATTACK_REGION_SWORD);
+        macros::ATTACK(agent, 2, 0, Hash40::new("top"), 1.0, 355, 100, 10, 0, 1.5, 0.0, 9.5, 1.6, Some(0.0), Some(5.0), Some(1.6), 0.3, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 4, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_cutup"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_TOONLINK_HIT, *ATTACK_REGION_SWORD);
+    }
+    frame(agent.lua_state_agent, 21.0);
+    if macros::is_excute(agent) {
+        macros::ATTACK(agent, 4, 0, Hash40::new("sword2"), 1.0, 180, 100, 40, 0, 3.0, -1.5, 0.0, -1.0, None, None, None, 0.3, 0.8, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 5, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_cutup"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_TOONLINK_HIT, *ATTACK_REGION_SWORD);
+        macros::ATTACK(agent, 3, 0, Hash40::new("sword2"), 1.0, 180, 100, 40, 0, 3.0, 2.0, 0.0, -1.0, None, None, None, 0.3, 0.8, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 5, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_cutup"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_TOONLINK_HIT, *ATTACK_REGION_SWORD);
+        macros::ATTACK(agent, 0, 0, Hash40::new("sword2"), 1.0, 180, 100, 30, 0, 2.7, 5.5, 0.0, -1.0, None, None, None, 0.3, 0.8, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 5, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_cutup"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_TOONLINK_HIT, *ATTACK_REGION_SWORD);
+        macros::ATTACK(agent, 1, 0, Hash40::new("top"), 1.0, 80, 100, 10, 0, 2.5, 0.0, 3.5, 0.0, None, None, None, 0.3, 0.8, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 5, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_cutup"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_TOONLINK_HIT, *ATTACK_REGION_SWORD);
+    }
+    frame(agent.lua_state_agent, 53.0);
+    if macros::is_excute(agent) {
+        AttackModule::clear_all(agent.module_accessor);
+    }
+    frame(agent.lua_state_agent, 54.0);
+    if macros::is_excute(agent) {
+        macros::ATTACK(agent, 0, 0, Hash40::new("top"), 3.0, 48, 180, 0, 70, 4.0, 0.0, 7.0, -11.0, Some(0.0), Some(4.5), Some(8.0), 2.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_cutup"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_TOONLINK_HIT, *ATTACK_REGION_SWORD);
+    }
+    frame(agent.lua_state_agent, 55.0);
+    if macros::is_excute(agent) {
+        AttackModule::clear_all(agent.module_accessor);
+    }
+}	
+unsafe extern "C" fn tink_usmash_eff(agent: &mut L2CAgentBase) {
+	frame(agent.lua_state_agent, 6.0);
+    if macros::is_excute(agent) {
+        macros::EFFECT(agent, Hash40::new("sys_smash_flash"), Hash40::new("sword1"), 13, 0, 0.0, 0, 0, 0, 0.75, 0, 0, 0, 0, 0, 0, true);
+        macros::LAST_EFFECT_SET_RATE(agent, 1.5);
+    }
+	frame(agent.lua_state_agent, 11.0);
+    if macros::is_excute(agent) {
+        macros::LANDING_EFFECT(agent, Hash40::new("sys_whirlwind_l"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.2, 0, 0, 0, 0, 0, 0, false);
+        macros::LAST_EFFECT_SET_RATE(agent, 1.2);
+        macros::EFFECT_FOLLOW(agent, Hash40::new("toonlink_kaiten_s"), Hash40::new("top"), 0, 6, 0, 0, 0, -12, 1, true);
+        macros::AFTER_IMAGE4_ON_arg29(agent, Hash40::new("toonlink_kaitengiri1"), Hash40::new("toonlink_kaitengiri2"), 7, Hash40::new("sword1"), 1.7, 0, -0.5, Hash40::new("sword1"), 15, -0.15, 0.1, true, Hash40::new("toonlink_kaiten_flare"), Hash40::new("sword1"), 0, 0, 0, 0, 0, 0, 1, 0, *EFFECT_AXIS_X, 0, *TRAIL_BLEND_ALPHA, 101, *TRAIL_CULL_NONE, 1.7, 0.2);
+        macros::FLASH(agent, 1, 0.667, 0, 0.235);
+    }
+    frame(agent.lua_state_agent, 14.0);
+    for _ in 0..5 {
+		if macros::is_excute(agent) {
+			macros::FOOT_EFFECT(agent, Hash40::new("sys_whirlwind_l"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.5, 2, 0, 2, 0, 45, 0, false);
+			macros::LAST_EFFECT_SET_RATE(agent, 1.5);
+		}
+		wait(agent.lua_state_agent, 7.0);
+	}
+	frame(agent.lua_state_agent, 51.0);
+	if macros::is_excute(agent) {
+		macros::LANDING_EFFECT(agent, Hash40::new("sys_whirlwind_l"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
+		macros::LAST_EFFECT_SET_RATE(agent, 1.3);
+		macros::FLASH_FRM(agent, 20, 0, 0, 0, 0);
+	}
+	frame(agent.lua_state_agent, 54.0);
+	if macros::is_excute(agent) {
+		macros::FOOT_EFFECT(agent, Hash40::new("sys_dash_smoke"), Hash40::new("top"), -4, 0, -4, 0, 20, 0, 0.9, 0, 0, 0, 0, 0, 0, false);
+		macros::COL_NORMAL(agent);
+	}
+	frame(agent.lua_state_agent, 56.0);
+	if macros::is_excute(agent) {
+		macros::AFTER_IMAGE_OFF(agent, 4);
+		macros::EFFECT_OFF_KIND(agent, Hash40::new("toonlink_kaiten_s"), false, false);
+		macros::EFFECT(agent, Hash40::new("sys_smash_flash"), Hash40::new("sword1"), 10.0, 0, 0.0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, true);
+	}
+}	
+unsafe extern "C" fn tink_usmash_snd(agent: &mut L2CAgentBase) {
+	frame(agent.lua_state_agent, 9.0);
+	if macros::is_excute(agent) {
+		macros::STOP_SE(agent, Hash40::new("se_common_smash_start"));
+	}
+	frame(agent.lua_state_agent, 11.0);
+    if macros::is_excute(agent) {
+        macros::PLAY_SE(agent, Hash40::new("vc_toonlink_003"));
+        macros::PLAY_STATUS(agent, Hash40::new("se_toonlink_special_h02"));
+    }
+    wait(agent.lua_state_agent, 44.0);
+    if macros::is_excute(agent) {
+        sound!(agent, *MA_MSC_CMD_SOUND_STOP_SE_STATUS);
+        macros::PLAY_SE(agent, Hash40::new("se_toonlink_special_h03"));
+        macros::PLAY_SE(agent, Hash40::new("se_toonlink_special_h04"));
+    }
+}	
+unsafe extern "C" fn tink_usmash_expr(agent: &mut L2CAgentBase) {
+	if macros::is_excute(agent) {
+        slope!(agent, *MA_MSC_CMD_SLOPE_SLOPE, *SLOPE_STATUS_LR);
+    }
+    frame(agent.lua_state_agent, 8.0);
+	if macros::is_excute(agent) {
+        slope!(agent, *MA_MSC_CMD_SLOPE_SLOPE, *SLOPE_STATUS_LR);
+    }
+    frame(agent.lua_state_agent, 9.0);
+    if macros::is_excute(agent) {
+        ControlModule::set_rumble(agent.module_accessor, Hash40::new("rbkind_erase"), 0, false, *BATTLE_OBJECT_ID_INVALID as u32);
+    }
+    frame(agent.lua_state_agent, 11.0);
+    if macros::is_excute(agent) {
+        ControlModule::set_rumble(agent.module_accessor, Hash40::new("rbkind_nohitl"), 4, false, *BATTLE_OBJECT_ID_INVALID as u32);
+    }
+    frame(agent.lua_state_agent, 12.0);
+    if macros::is_excute(agent) {
+        macros::RUMBLE_HIT(agent, Hash40::new("rbkind_slashs"), 9);
+    }
+    frame(agent.lua_state_agent, 16.0);
+    if macros::is_excute(agent) {
+        ControlModule::set_rumble(agent.module_accessor, Hash40::new("rbkind_nohitl"), 7, false, *BATTLE_OBJECT_ID_INVALID as u32);
+    }
+    frame(agent.lua_state_agent, 24.0);
+    if macros::is_excute(agent) {
+        ControlModule::set_rumble(agent.module_accessor, Hash40::new("rbkind_nohitl"), 7, false, *BATTLE_OBJECT_ID_INVALID as u32);
+    }
+    frame(agent.lua_state_agent, 32.0);
+    if macros::is_excute(agent) {
+        ControlModule::set_rumble(agent.module_accessor, Hash40::new("rbkind_nohitl"), 7, false, *BATTLE_OBJECT_ID_INVALID as u32);
+    }
+    frame(agent.lua_state_agent, 40.0);
+    if macros::is_excute(agent) {
+        ControlModule::set_rumble(agent.module_accessor, Hash40::new("rbkind_nohitl"), 7, false, *BATTLE_OBJECT_ID_INVALID as u32);
+    }
+    frame(agent.lua_state_agent, 51.0);
+    if macros::is_excute(agent) {
+        ControlModule::set_rumble(agent.module_accessor, Hash40::new("rbkind_erase"), 0, false, *BATTLE_OBJECT_ID_INVALID as u32);
+    }
+    frame(agent.lua_state_agent, 52.0);
+    if macros::is_excute(agent) {
+        macros::RUMBLE_HIT(agent, Hash40::new("rbkind_slashm"), 0);
+        ControlModule::set_rumble(agent.module_accessor, Hash40::new("rbkind_nohitll"), 0, false, *BATTLE_OBJECT_ID_INVALID as u32);
+    }
+}	
 unsafe extern "C" fn tink_fsmash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 8.0);

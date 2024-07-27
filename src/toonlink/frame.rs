@@ -50,6 +50,9 @@ unsafe extern "C" fn tink_frame(fighter: &mut L2CFighterCommon) {
 					AttackModule::clear_all(boma);
 				};
 			};
+			if [hash40("special_hi_start")].contains(&motion_kind) {
+				StatusModule::set_situation_kind(boma, smash::app::SituationKind(*SITUATION_KIND_AIR), true);
+			}
 		}
 	}
 }
