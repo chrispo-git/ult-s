@@ -153,7 +153,7 @@ unsafe extern "C" fn tink_usmash_eff(agent: &mut L2CAgentBase) {
         macros::LANDING_EFFECT(agent, Hash40::new("sys_whirlwind_l"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.2, 0, 0, 0, 0, 0, 0, false);
         macros::LAST_EFFECT_SET_RATE(agent, 1.2);
         macros::EFFECT_FOLLOW(agent, Hash40::new("toonlink_kaiten_s"), Hash40::new("top"), 0, 6, 0, 0, 0, -12, 1, true);
-        macros::AFTER_IMAGE4_ON_arg29(agent, Hash40::new("toonlink_kaitengiri1"), Hash40::new("toonlink_kaitengiri2"), 7, Hash40::new("sword1"), 1.7, 0, -0.5, Hash40::new("sword1"), 15, -0.15, 0.1, true, Hash40::new("toonlink_kaiten_flare"), Hash40::new("sword1"), 0, 0, 0, 0, 0, 0, 1, 0, *EFFECT_AXIS_X, 0, *TRAIL_BLEND_ALPHA, 101, *TRAIL_CULL_NONE, 1.7, 0.2);
+        macros::AFTER_IMAGE4_ON_arg29(agent, Hash40::new("toonlink_kaitengiri1"), Hash40::new("toonlink_kaitengiri2"), 7, Hash40::new("sword1"), 1.7, 0, -0.5, Hash40::new("sword1"), 15.0, -0.15, 0.1, true, Hash40::new("toonlink_kaiten_flare"), Hash40::new("sword1"), 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, *EFFECT_AXIS_X, 0, *TRAIL_BLEND_ALPHA, 101, *TRAIL_CULL_NONE, 1.7, 0.2);
         macros::FLASH(agent, 1, 0.667, 0, 0.235);
     }
     frame(agent.lua_state_agent, 14.0);

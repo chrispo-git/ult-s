@@ -12,6 +12,15 @@ mod faf_change;
 mod command;
 mod cancel;
 mod training;
+use smash::app::lua_bind::*;
+use smash::lib::lua_const::*;
+use smash::app::utility::get_kind;
+use smash::hash40;
+use smash::lua2cpp::*;
+use smashline::*;
+use smash_script::*;
+use smash::phx::Hash40;
+use crate::util::*;
 
 pub static mut IS_GLOW: bool = false;
 pub static mut DI_DIR: i32 = 0;
@@ -37,11 +46,11 @@ unsafe fn process_knockback(ctx: &skyline::hooks::InlineCtx) {
     }
 }
 pub unsafe extern "C" fn process_toonlinkbomb_knockback(defender: u32, attacker: u32) {
-    let defender_boma = &mut *(*util::get_battle_object_from_id(defender)).module_accessor;
-    let attacker_boma = &mut *(*util::get_battle_object_from_id(attacker)).module_accessor;
-    if defender_boma.is_item() {
+    let defender_boma = smash::app::sv_battle_object::module_accessor(defender);
+    let attacker_boma = smash::app::sv_battle_object::module_accessor(attacker);
+    if smash::app::utility::get_category(defender_boma) == *BATTLE_OBJECT_CATEGORY_ITEM {
         if (defender_boma.kind() == *ITEM_KIND_TOONLINKBOMB) {
-            if attacker_boma.is_fighter() {
+            if smash::app::utility::get_category(defender_boma) == *BATTLE_OBJECT_CATEGORY_FIGHTER {
                 let attacker_team_no = (TeamModule::hit_team_no(attacker_boma) as i32);
                 TeamModule::set_team(defender_boma, attacker_team_no, false);
             } else {
