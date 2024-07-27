@@ -107,14 +107,12 @@ unsafe extern "C" fn tink_da(fighter: &mut L2CAgentBase) {
 
 unsafe extern "C" fn tink_usmash(agent: &mut L2CAgentBase) {
 	frame(agent.lua_state_agent, 8.0);
+    macros::FT_MOTION_RATE(agent, 0.25);
 	if macros::is_excute(agent) {
 		WorkModule::on_flag(agent.module_accessor, *FIGHTER_STATUS_ATTACK_FLAG_START_SMASH_HOLD);
 	}
-	frame(agent.lua_state_agent, 9.0);
-    macros::FT_MOTION_RATE(agent, 0.5);
-    frame(agent.lua_state_agent, 10.0);
-    macros::FT_MOTION_RATE(agent, 1.0);
     frame(agent.lua_state_agent, 12.0);
+    macros::FT_MOTION_RATE(agent, 1.0);
     if macros::is_excute(agent) {
         macros::ATTACK(agent, 4, 0, Hash40::new("sword2"), 1.0, 180, 100, 50, 0, 3.0, -1.5, 0.0, -1.0, None, None, None, 0.3, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 4, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_cutup"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_TOONLINK_HIT, *ATTACK_REGION_SWORD);
         macros::ATTACK(agent, 3, 0, Hash40::new("sword2"), 1.0, 180, 100, 50, 0, 3.0, 2.0, 0.0, -1.0, None, None, None, 0.3, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 4, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_cutup"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_TOONLINK_HIT, *ATTACK_REGION_SWORD);
@@ -153,8 +151,9 @@ unsafe extern "C" fn tink_usmash_eff(agent: &mut L2CAgentBase) {
         macros::LANDING_EFFECT(agent, Hash40::new("sys_whirlwind_l"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.2, 0, 0, 0, 0, 0, 0, false);
         macros::LAST_EFFECT_SET_RATE(agent, 1.2);
         macros::EFFECT_FOLLOW(agent, Hash40::new("toonlink_kaiten_s"), Hash40::new("top"), 0, 6, 0, 0, 0, -12, 1, true);
-        macros::AFTER_IMAGE4_ON_arg29(agent, Hash40::new("toonlink_kaitengiri1"), Hash40::new("toonlink_kaitengiri2"), 7, Hash40::new("sword1"), 1.7, 0, -0.5, Hash40::new("sword1"), 15.0, -0.15, 0.1, true, Hash40::new("toonlink_kaiten_flare"), Hash40::new("sword1"), 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, *EFFECT_AXIS_X, 0, *TRAIL_BLEND_ALPHA, 101, *TRAIL_CULL_NONE, 1.7, 0.2);
-        macros::FLASH(agent, 1, 0.667, 0, 0.235);
+        macros::AFTER_IMAGE4_ON_arg29(agent, Hash40::new("toonlink_kaitengiri1"), Hash40::new("toonlink_kaitengiri2"), 7, Hash40::new("sword1"), 1.7, 0.0, -0.5, Hash40::new("sword1"), 15.0, -0.15, 0.1, true, Hash40::new("toonlink_kaiten_flare"), Hash40::new("sword1"), 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0, *EFFECT_AXIS_X, 0, *TRAIL_BLEND_ALPHA, 101, *TRAIL_CULL_NONE, 1.7, 0.2);
+		
+		macros::FLASH(agent, 1, 0.667, 0, 0.235);
     }
     frame(agent.lua_state_agent, 14.0);
     for _ in 0..5 {

@@ -48,9 +48,9 @@ unsafe fn process_knockback(ctx: &skyline::hooks::InlineCtx) {
 pub unsafe extern "C" fn process_toonlinkbomb_knockback(defender: u32, attacker: u32) {
     let defender_boma = smash::app::sv_battle_object::module_accessor(defender);
     let attacker_boma = smash::app::sv_battle_object::module_accessor(attacker);
-    if smash::app::utility::get_category(defender_boma) == *BATTLE_OBJECT_CATEGORY_ITEM {
-        if (defender_boma.kind() == *ITEM_KIND_TOONLINKBOMB) {
-            if smash::app::utility::get_category(defender_boma) == *BATTLE_OBJECT_CATEGORY_FIGHTER {
+    if smash::app::utility::get_category(std::mem::transmute(defender_boma)) == *BATTLE_OBJECT_CATEGORY_ITEM {
+        if (smash::app::utility::get_kind(std::mem::transmute(defender_boma)) == *ITEM_KIND_TOONLINKBOMB) {
+            if smash::app::utility::get_category(std::mem::transmute(defender_boma)) == *BATTLE_OBJECT_CATEGORY_FIGHTER {
                 let attacker_team_no = (TeamModule::hit_team_no(attacker_boma) as i32);
                 TeamModule::set_team(defender_boma, attacker_team_no, false);
             } else {
@@ -75,8 +75,8 @@ pub fn install() {
 	command::install();
 	cancel::install();
     training::install();
-    skyline::install_hooks!(
+    /*skyline::install_hooks!(
         process_knockback,
         calculate_knockback
-    );
+    );*/
 }
