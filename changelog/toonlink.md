@@ -177,18 +177,21 @@ FaF: 59
 ### Up Smash
 |Frame|ID|Damage|Angle|BKB|KBG|Notes| | | |
 |-|-|-|-|-|-|-|-|-|-|
-|Charge hold Frame: 5|
-|Frame 11| 0|  13.0%|  100|  43|  94| Hits grounded only|
-|Frame 11| 1|  13.0%|  96|  43|  94|
-|Frame 11| 2|  13.0%|  96|  43|  94|
-|Frame 12| 0|  13.0%|  96|  30|  93|
-|Frame 14| 0|  10.0%|  96|  30|  93|
-|Frame 14| 1|  10.0%|  96|  43|  94|
-|Frame 14| 2|  10.0%|  96|  43|  94|
-|Hitboxes terminated on Frame 16|
+|Frame 9| 4| 1.0%| 180| 50 (Set)| 100| rehits every 4 frames|
+|Frame 9| 3| 1.0%| 180| 50 (Set)| 100| rehits every 4 frames|
+|Frame 9| 0| 1.0%| 180| 50 (Set)| 100| rehits every 4 frames|
+|Frame 9| 1| 1.0%| 80| 10 (Set)| 100| rehits every 4 frames|
+|Frame 9| 2| 1.0%| 355| 10 (Set)| 100| rehits every 4 frames|
+|Frame 18| 4| 1.0%| 180| 40 (Set)| 100| rehits every 5 frames|
+|Frame 18| 3| 1.0%| 180| 40 (Set)| 100| rehits every 5 frames|
+|Frame 18| 0| 1.0%| 180| 30 (Set)| 100| rehits every 5 frames|
+|Frame 18| 1| 1.0%| 80| 10 (Set)| 100| rehits every 5 frames|
+|Hitboxes terminated on Frame 50|
+|Frame 51| 0| 3.0%| 48| 70| 180|
+|Hitboxes terminated on Frame 52|
 
 
-FaF: 43
+FaF: 81
 
 
 
@@ -495,7 +498,7 @@ FaF: 46
 
 
 
-### (Air) Up Special 
+### Up Special 
 |Frame|ID|Damage|Angle|BKB|KBG|Notes| | | |
 |-|-|-|-|-|-|-|-|-|-|
 |Frame 4| 0|  11.0%|  90|  70|  74| rehits every 20 frames|
@@ -503,31 +506,6 @@ FaF: 46
 
 
 FaF: --
-
-
-
-
-
-
-
-### Up Special 
-|Frame|ID|Damage|Angle|BKB|KBG|Notes| | | |
-|-|-|-|-|-|-|-|-|-|-|
-|Frame 4| 4| 1.0%| 180| 50 (Set)| 100| rehits every 4 frames|
-|Frame 4| 3| 1.0%| 180| 50 (Set)| 100| rehits every 4 frames|
-|Frame 4| 0| 1.0%| 180| 50 (Set)| 100| rehits every 4 frames|
-|Frame 4| 1| 1.0%| 80| 10 (Set)| 100| rehits every 4 frames|
-|Frame 4| 2| 1.0%| 355| 10 (Set)| 100| rehits every 4 frames|
-|Frame 13| 4| 1.0%| 180| 40 (Set)| 100| rehits every 5 frames|
-|Frame 13| 3| 1.0%| 180| 40 (Set)| 100| rehits every 5 frames|
-|Frame 13| 0| 1.0%| 180| 30 (Set)| 100| rehits every 5 frames|
-|Frame 13| 1| 1.0%| 80| 10 (Set)| 100| rehits every 5 frames|
-|Hitboxes terminated on Frame 45|
-|Frame 46| 0| 3.0%| 48| 70| 180|
-|Hitboxes terminated on Frame 47|
-
-
-FaF: 76
 
 
 
