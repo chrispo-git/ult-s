@@ -590,8 +590,10 @@ FaF: 55
 |-|-|-|-|-|-|-|-|-|-|
 |Frame 5| 0|  0.8%|  90|  80 (Set)|  100| rehits every 2 frames|
 |Frame 5| 1|  0.8%|  90|  80 (Set)|  100| rehits every 2 frames|
-|Frame 7| 0|  0.8%|  367|  50 (Set)|  100| rehits every 2 frames|
-|Frame 7| 1|  0.8%|  367|  50 (Set)|  100| rehits every 2 frames|
+|Frame 7| 0|  0.4%|  90|  150 (Set)|  100| rehits every 1 frames|
+|Frame 7| 1|  0.4%|  90|  150 (Set)|  100| rehits every 1 frames|
+|Frame 9| 0|  0.4%|  367|  100 (Set)|  100| rehits every 1 frames|
+|Frame 9| 1|  0.4%|  367|  100 (Set)|  100| rehits every 1 frames|
 |Hitboxes terminated on Frame 13|
 |Frame 17| 0|  9.0%|  83|  74|  82| hit effect is fire|
 |Hitboxes terminated on Frame 19|
