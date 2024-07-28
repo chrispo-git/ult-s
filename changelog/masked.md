@@ -375,7 +375,7 @@ FaF: 56
 ### Down Throw
 |Frame|ID|Damage|Angle|BKB|KBG|Notes| | | |
 |-|-|-|-|-|-|-|-|-|-|
-|Throws on Frame 20| | 18.0%| 90| 104 (Set)| 100|
+|Throws on Frame 20| | 4.0%| 90| 104 (Set)| 100|
 |Note: Knockdown Throw|
 
 
