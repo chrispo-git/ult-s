@@ -259,9 +259,12 @@ unsafe extern "C" fn rayman_sideb_eff(fighter: &mut L2CAgentBase) {
 	}
 }
 unsafe extern "C" fn rayman_sideb_snd(fighter: &mut L2CAgentBase) {
+    let rand_val = smash::app::sv_math::rand(hash40("fighter"), 10);
     frame(fighter.lua_state_agent, 7.0);
 	if macros::is_excute(fighter) {
-        macros::PLAY_SE(fighter, Hash40::new("se_pikmin_attackair_n01"));
+        if rand_val <= 7 {
+            macros::PLAY_SE(fighter, Hash40::new("se_pikmin_attackair_n01"));
+        }
     }
     frame(fighter.lua_state_agent, 16.0);
 	if macros::is_excute(fighter) {
