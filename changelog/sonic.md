@@ -407,7 +407,7 @@ Autocancel - 1-2/13+
 |Frame 13| 1|  11.0%|  270|  25|  100| Hits grounded only|
 |Frame 13| 2|  11.0%|  300|  25|  100|
 |Frame 13| 3|  11.0%|  300|  25|  100|
-|Hitboxes terminated on Frame 19|
+|Hitboxes terminated on Frame 17|
 
 
 FaF: 46
