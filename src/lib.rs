@@ -157,6 +157,7 @@ unsafe fn set_interval_2(ctx: &mut InlineCtx) {
     *ctx.registers[8].x.as_mut() = 0;
 }
 
+
 static mut RUN: AtomicBool = AtomicBool::new(false);
 
 #[skyline::hook(offset = 0x3810664, inline)]
