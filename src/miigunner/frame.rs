@@ -30,18 +30,6 @@ unsafe extern "C" fn gunner_frame(fighter: &mut L2CFighterCommon) {
             let motion_kind = MotionModule::motion_kind(boma);
             let frame = MotionModule::frame(boma);
             let stick_y = ControlModule::get_stick_y(boma);
-            if [hash40("special_n3_start"), hash40("special_air_n3_start")].contains(&MotionModule::motion_kind(boma)) {
-                if MotionModule::frame(boma) > 28.0 && MotionModule::frame(boma) < 30.0{
-                    if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_SPECIAL) && CHARGE_FRAMES[ENTRY_ID] < MAX_FRAMES{
-                        CHARGE_FRAMES[ENTRY_ID] += 1;
-                        MotionModule::set_rate(boma, 0.01);
-                    } else {
-                        MotionModule::set_rate(boma, 0.5);
-                    };
-                };
-            } else {
-                CHARGE_FRAMES[ENTRY_ID] = 0;
-            };
             if NO_FP[ENTRY_ID] > 0 {
                 NO_FP[ENTRY_ID] -= 1;
             }
@@ -52,7 +40,7 @@ unsafe extern "C" fn gunner_frame(fighter: &mut L2CFighterCommon) {
                 if [*FIGHTER_STATUS_KIND_SPECIAL_N].contains(&status_kind){
                     if StatusModule::is_situation_changed(boma) {
                         StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_LANDING_FALL_SPECIAL, true);
-                        WorkModule::set_float(boma, 10.0, *FIGHTER_INSTANCE_WORK_ID_FLOAT_LANDING_FRAME);
+                        WorkModule::set_float(boma, 14.0, *FIGHTER_INSTANCE_WORK_ID_FLOAT_LANDING_FRAME);
                     };
                     if StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR {
                         let cat2 = ControlModule::get_command_flag_cat(boma, 1);
