@@ -168,6 +168,9 @@ unsafe extern "C" fn lucina_utilt_hero(fighter: &mut L2CAgentBase) {
 			macros::ATTACK(fighter, /*ID*/ 3, /*Part*/ 0, /*Bone*/ Hash40::new("sword1"), /*Damage*/ 8.075, /*Angle*/ 30, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 52, /*Size*/ 3.5*HERO_SWORD_MULT, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ ((7.7-2.0)*HERO_SWORD_MULT)+2.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ true, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_cutup"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_CUTUP, /*Type*/ *ATTACK_REGION_SWORD);
 		};
 		wait(fighter.lua_state_agent, 4.0);
+		if macros::is_excute(fighter) {
+			AttackModule::clear_all(fighter.module_accessor);
+		};
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.238095);
 }	
 unsafe extern "C" fn lucina_utilt_hero_eff(fighter: &mut L2CAgentBase) {

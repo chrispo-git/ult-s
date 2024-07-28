@@ -34,7 +34,7 @@ pub fn install() {
     .acmd("game_fall", thundaga_1, Priority::Low)    
 	.acmd("game_fallair", thundaga_2, Priority::Low)    
 	.acmd("game_falllast", thundaga_3, Priority::Low)    
-	.acmd("0x10983531cc", thundaga_4, Priority::Low)    
+	.game_acmd("0x10983531cc", thundaga_4, Priority::Low)    
 	.install();
 }
 
