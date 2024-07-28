@@ -160,7 +160,7 @@ FaF: 25
 ### Dash Attack
 |Frame|ID|Damage|Angle|BKB|KBG|Notes| | | |
 |-|-|-|-|-|-|-|-|-|-|
-|Frame 10| 0|  13.0%|  45|  65|  73| deals 1 bonus shield damage|
+|Frame 7| 0|  13.0%|  45|  65|  73| deals 1 bonus shield damage|
 |Frame 15| 0|  10.0%|  35|  60|  78| deals 1 bonus shield damage|
 |Hitboxes terminated on Frame 20|
 
