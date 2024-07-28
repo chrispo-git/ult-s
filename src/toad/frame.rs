@@ -66,7 +66,7 @@ unsafe extern "C" fn toad(fighter : &mut L2CFighterCommon) {
 		let situation_kind = StatusModule::situation_kind(boma);
 		let end_frame = MotionModule::end_frame(boma);
 		//Kirby neutralb logic
-		if fighter_kind == *FIGHTER_KIND_KIRBY {
+		/*if fighter_kind == *FIGHTER_KIND_KIRBY {
 			if WorkModule::get_int(boma, *FIGHTER_KIRBY_INSTANCE_WORK_ID_INT_COPY_CHARA) == *FIGHTER_KIND_MURABITO {
 				if status_kind == *FIGHTER_KIRBY_STATUS_KIND_MURABITO_SPECIAL_N_SEARCH {
 					if frame > 38.0 {
@@ -85,7 +85,7 @@ unsafe extern "C" fn toad(fighter : &mut L2CFighterCommon) {
 			} else {
 				CAN_NEUTRALB[ENTRY_ID] = 0;
 			};
-		};
+		};*/
 		if (WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) >= 120 && WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) <= 127) && fighter_kind == *FIGHTER_KIND_MURABITO {
 			if ModelModule::scale(boma) == WorkModule::get_param_float(fighter.module_accessor, hash40("scale"), 0) {
                 ModelModule::set_scale(boma, 0.9);
