@@ -306,9 +306,9 @@ FaF: 60
 |Frame 10| 3| 5.0%| 80| 10 (Set)| 90|
 |Frame 10| 2| 5.0%| 80| 0| 90|
 |Hitboxes terminated on Frame 12|
-|Frame 16| 0| 5.0%| 85| 80| 35|
-|Frame 16| 1| 5.0%| 85| 80| 35|
-|Frame 16| 2| 5.0%| 85| 80| 35|
+|Frame 16| 0| 5.0%| 85| 50| 120|
+|Frame 16| 1| 5.0%| 85| 50| 120|
+|Frame 16| 2| 5.0%| 85| 50| 120|
 |Hitboxes terminated on Frame 18|
 
 

@@ -61,9 +61,9 @@ unsafe extern "C" fn once_per_fighter_frame(fighter : &mut L2CFighterCommon) {
         }
     }
 }
-//Edge Cancel List
+
 pub(crate) fn can_charge(fighter_kind : i32) -> bool {
-	let input_list = [*FIGHTER_KIND_JACK, *FIGHTER_KIND_CAPTAIN, *FIGHTER_KIND_PACKUN, *FIGHTER_KIND_LINK, *FIGHTER_KIND_KIRBY, *FIGHTER_KIND_ROSETTA];
+	let input_list = [*FIGHTER_KIND_JACK, *FIGHTER_KIND_PACKUN, *FIGHTER_KIND_LINK, *FIGHTER_KIND_KIRBY, *FIGHTER_KIND_ROSETTA];
 	if input_list.contains(&fighter_kind){
 		return true
 	} else {
@@ -270,23 +270,6 @@ unsafe extern "C" fn char_charge(fighter : &mut L2CFighterCommon) {
 							};
 						} else {
 							StatusModule::change_status_request_from_script(boma, *FIGHTER_JACK_STATUS_KIND_SPECIAL_N_JUMP, true);
-						};
-				};
-			};
-			if fighter_kind == *FIGHTER_KIND_CAPTAIN {
-				if USE_CHARGE[ENTRY_ID] == true  {
-						if status_kind == *FIGHTER_CAPTAIN_STATUS_KIND_SPECIAL_S_END && USE_CHARGE[ENTRY_ID] == true {
-							if frame >= 2.0 {
-								USE_CHARGE[ENTRY_ID] = false;
-							} else {
-								let stop  = smash::phx::Vector3f { x: 0.2, y: 0.2, z: 1.0 };
-								KineticModule::mul_speed(boma, &stop, *FIGHTER_KINETIC_ENERGY_ID_MOTION);
-								KineticModule::mul_speed(boma, &stop, *FIGHTER_KINETIC_ENERGY_ID_CONTROL);
-								macros::PLAY_SEQUENCE(fighter, Hash40::new("seq_captain_rnd_attack"));
-								macros::PLAY_SE(fighter, Hash40::new("se_captain_swing_ll"));
-							};
-						} else {
-							StatusModule::change_status_request_from_script(boma, *FIGHTER_CAPTAIN_STATUS_KIND_SPECIAL_S_END, true);
 						};
 				};
 			};
