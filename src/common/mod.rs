@@ -9,7 +9,6 @@ mod projectile_invuln;
 mod remove_quake;
 mod melee;
 mod faf_change;
-mod command;
 mod cancel;
 mod training;
 use smash::app::lua_bind::*;
@@ -88,7 +87,6 @@ pub fn install() {
 	projectile_invuln::install();
 	remove_quake::install();
 	faf_change::install();
-	command::install();
 	cancel::install();
     training::install();
     /*skyline::install_hooks!(
