@@ -19,7 +19,7 @@ Nair Landing Lag | 10|
 Fair Landing Lag | 10|
 Bair Landing Lag | 11|
 Uair Landing Lag | 5|
-Dair Landing Lag | 24|
+Dair Landing Lag | 10|
 Wall Jump? | True|
 
 
