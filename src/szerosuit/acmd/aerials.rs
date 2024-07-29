@@ -22,6 +22,7 @@ pub fn install() {
     .acmd("game_attackairf", zss_fair, Priority::Low)    
     .acmd("game_attackairlw", zss_dair, Priority::Low)    
     .acmd("effect_attackairlw", zss_dair_eff, Priority::Low)    
+    .acmd("effect_landingairlw", zss_dair_land_eff, Priority::Low)    
     .acmd("game_landingairlw", zss_dair_land, Priority::Low)    
     .acmd("sound_attackairlw", zss_dair_snd, Priority::Low)    
     .install();
@@ -142,6 +143,12 @@ unsafe extern "C" fn zss_dair(fighter: &mut L2CAgentBase) {
 }			
 unsafe extern "C" fn zss_dair_land(fighter: &mut L2CAgentBase) {
 }
+unsafe extern "C" fn zss_dair_land_eff(fighter: &mut L2CAgentBase) {
+    	let lua_state = fighter.lua_state_agent;
+		if macros::is_excute(fighter) {
+			macros::LANDING_EFFECT(fighter, Hash40::new("sys_crown"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
+		}
+}	
 unsafe extern "C" fn zss_dair_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 14.0);
