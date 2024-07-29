@@ -114,7 +114,7 @@ replace = [
     ['simon'],
     ['snake'],
     ['sonic'],
-    ['szerosuit', 'zero'],
+    ['szerosuit', 'zero', 'zss'],
     ['tantan', 'minmin', 'min'],
     ['toonlink', 'tink', 'toon'],
     ['trail', 'sora'],
