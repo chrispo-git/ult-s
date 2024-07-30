@@ -86,6 +86,19 @@ unsafe extern "C" fn pacman_frame(fighter: &mut L2CFighterCommon) {
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL_SPECIAL, false);
 				}
 			}
+			if [hash40("special_lw_failure"), hash40("special_air_lw_failure")].contains(&motion_kind) {
+				if StatusModule::is_situation_changed(boma) && situation_kind == *SITUATION_KIND_GROUND{
+					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_LANDING_FALL_SPECIAL, true);
+					WorkModule::set_float(boma, 25.0, *FIGHTER_INSTANCE_WORK_ID_FLOAT_LANDING_FRAME);
+				};
+				if situation_kind == *SITUATION_KIND_AIR && AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_ALL) && !AttackModule::is_infliction(boma, *COLLISION_KIND_MASK_ALL) && MotionModule::frame(boma) < 49.0{
+					KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_JUMP);
+					MotionModule::set_frame_sync_anim_cmd(boma, 50.0, true, true, false);
+					if !AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_HIT) {
+						MotionModule::set_rate(boma, 0.5);
+					};
+				};
+			}
 		}
 		//println!("Jump num: {}", WorkModule::get_int(boma, *FIGHTER_PACMAN_INSTANCE_WORK_ID_INT_SPECIAL_HI_JUMP_NUM));
 		//println!("Hydrant [{}, {}] Trampoline [{}, {}]", HYDRANT_POS_X[ENTRY_ID], HYDRANT_POS_Y[ENTRY_ID], TRAMPOLINE_POS_X[ENTRY_ID], TRAMPOLINE_POS_Y[ENTRY_ID]);
