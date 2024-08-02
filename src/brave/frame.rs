@@ -32,20 +32,6 @@ unsafe extern "C" fn hero(fighter : &mut L2CFighterCommon) {
 			let motion_kind = MotionModule::motion_kind(boma);
 			let stick_y = ControlModule::get_stick_y(boma);
 			if fighter_kind == *FIGHTER_KIND_BRAVE{
-				if MotionModule::motion_kind(boma) == hash40("attack_s3_s2") && MotionModule::frame(boma) < 2.0 && ControlModule::get_stick_y(boma) > 0.5 {
-					let speed = smash::phx::Vector3f { x: 0.75, y: 0.0, z: 0.0 };
-					KineticModule::add_speed(boma, &speed);
-					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_ATTACK_HI3, true);
-				};
-				if MotionModule::motion_kind(boma) == hash40("attack_s3_s2") && MotionModule::frame(boma) < 2.0 && ControlModule::get_stick_y(boma) < -0.5 {
-					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_ATTACK_LW3, true);
-				};
-				if MotionModule::motion_kind(boma) == hash40("attack_s3_s2") && MotionModule::frame(boma) < 2.0 && ControlModule::get_stick_x(boma)*PostureModule::lr(boma) < -0.5 {
-					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_ATTACK_DASH, true);
-				};
-				if MotionModule::motion_kind(boma) == hash40("attack_s3_s2") && MotionModule::frame(boma) < 2.0 && ControlModule::get_stick_x(boma)*PostureModule::lr(boma) > 0.5 {
-					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_CATCH_DASH, true);
-				};
 				if [*FIGHTER_BRAVE_STATUS_KIND_SPECIAL_N_HOLD].contains(&status_kind){
 					if StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR {
 						let cat2 = ControlModule::get_command_flag_cat(boma, 1);
