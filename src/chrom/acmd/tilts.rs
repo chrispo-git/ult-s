@@ -40,7 +40,7 @@ unsafe extern "C" fn chrom_ftilt_hi_expr(agent: &mut L2CAgentBase) {
     }
     frame(agent.lua_state_agent, 6.0);
     if macros::is_excute(agent) {
-        macros::RUMBLE_HIT(agent, Hash40::new("rbkind_attackm"), 0);
+        macros::RUMBLE_HIT(agent, Hash40::new("rbkind_slashm"), 0);
     }
     frame(agent.lua_state_agent, 25.0);
     if macros::is_excute(agent) {
@@ -75,7 +75,7 @@ unsafe extern "C" fn chrom_ftilt_lw_expr(agent: &mut L2CAgentBase) {
     }
     frame(agent.lua_state_agent, 4.0);
     if macros::is_excute(agent) {
-        macros::RUMBLE_HIT(agent, Hash40::new("rbkind_attackm"), 0);
+        macros::RUMBLE_HIT(agent, Hash40::new("rbkind_slashm"), 0);
     }
     frame(agent.lua_state_agent, 25.0);
     if macros::is_excute(agent) {
@@ -116,7 +116,7 @@ unsafe extern "C" fn chrom_ftilt_s_expr(agent: &mut L2CAgentBase) {
     }
     frame(agent.lua_state_agent, 7.0);
     if macros::is_excute(agent) {
-        macros::RUMBLE_HIT(agent, Hash40::new("rbkind_attackm"), 0);
+        macros::RUMBLE_HIT(agent, Hash40::new("rbkind_slashm"), 0);
     }
     frame(agent.lua_state_agent, 25.0);
     if macros::is_excute(agent) {
