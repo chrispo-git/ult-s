@@ -733,7 +733,7 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
       <float hash="combo_attack_12_end">0</float>
       <float hash="combo_attack_13_end">0</float>
       <int hash="attack_combo_max">1</int>
-      <bool hash="air_lasso_type">false</bool>
+      <bool hash="air_lasso_type">true</bool>
     </struct>
     <!--WARIO-->
     <struct index="30">
