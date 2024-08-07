@@ -24,6 +24,7 @@ pub fn install() {
     .acmd("effect_attackairf", daisy_fair_eff, Priority::Low)    
     .acmd("expression_attackairf", daisy_fair_expr, Priority::Low)    
     .acmd("game_attackairn", daisy_nair, Priority::Low)    
+    .acmd("expression_attackairn", daisy_nair_expr, Priority::Low)    
     .acmd("game_attackairb", daisy_bair, Priority::Low)    
     .install();
 }
@@ -71,6 +72,14 @@ unsafe extern "C" fn daisy_uair_expr(fighter: &mut L2CAgentBase) {
 		if macros::is_excute(fighter) {
 			VisibilityModule::set_int64(fighter.module_accessor, hash40("smash_item") as i64, hash40("smash_item_racket") as i64);
 			ItemModule::set_have_item_visibility(fighter.module_accessor, false, 0);
+		}
+		frame(fighter.lua_state_agent, 8.0);
+		if macros::is_excute(fighter) {
+			ControlModule::set_rumble(fighter.module_accessor, Hash40::new("rbkind_nohitm"), 4, false, *BATTLE_OBJECT_ID_INVALID as u32);
+		}
+		frame(fighter.lua_state_agent, 9.0);
+		if macros::is_excute(fighter) {
+			macros::RUMBLE_HIT(fighter, Hash40::new("rbkind_slashm"), 0);
 		}
 		frame(fighter.lua_state_agent, 27.0);
 		if macros::is_excute(fighter) {
@@ -120,6 +129,16 @@ unsafe extern "C" fn daisy_fair_expr(agent: &mut L2CAgentBase) {
     if macros::is_excute(agent) {
         macros::RUMBLE_HIT(agent, Hash40::new("rbkind_attackm"), 0);
     }
+}
+unsafe extern "C" fn daisy_nair_expr(fighter: &mut L2CAgentBase) {
+	frame(fighter.lua_state_agent, 4.0);
+	if macros::is_excute(fighter) {
+		ControlModule::set_rumble(fighter.module_accessor, Hash40::new("rbkind_nohitm"), 4, false, *BATTLE_OBJECT_ID_INVALID as u32);
+	}
+	frame(fighter.lua_state_agent, 5.0);
+	if macros::is_excute(fighter) {
+		macros::RUMBLE_HIT(fighter, Hash40::new("rbkind_attackm"), 0);
+	}
 }
 unsafe extern "C" fn daisy_nair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
