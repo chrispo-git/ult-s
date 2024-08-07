@@ -17,9 +17,7 @@ use super::*;
 pub fn install() {
 	Agent::new("daisy")
     .acmd("effect_attack11", daisy_jab1_eff, Priority::Low)    
-    .acmd("game_attack11", daisy_jab1, Priority::Low)    
-    .acmd("game_attack12", daisy_jab2, Priority::Low)    
-    .acmd("effect_attack12", daisy_jab2_eff, Priority::Low)    
+    .acmd("game_attack11", daisy_jab1, Priority::Low)      
     .acmd("game_attacklw4", daisy_dsmash, Priority::Low)    
     .acmd("game_attackdash", daisy_da, Priority::Low)    
     .acmd("effect_attackdash", daisy_da_eff, Priority::Low)    
@@ -58,25 +56,6 @@ unsafe extern "C" fn daisy_jab1(fighter: &mut L2CAgentBase) {
 		frame(fighter.lua_state_agent, 14.0);
 		if macros::is_excute(fighter) {
 			WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_FLAG_ENABLE_RESTART);
-		}
-}
-unsafe extern "C" fn daisy_jab2(fighter: &mut L2CAgentBase) {
-    let lua_state = fighter.lua_state_agent;
-		frame(fighter.lua_state_agent, 5.0);
-		if macros::is_excute(fighter) {
-			macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 6.0, /*Angle*/ 50, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 40, /*Size*/ 8.0, /*X*/ 0.0, /*Y*/ 9.0, /*Z*/ 8.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.8, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_PUNCH);
-		}
-		frame(fighter.lua_state_agent, 8.0);
-		if macros::is_excute(fighter) {
-			AttackModule::clear_all(fighter.module_accessor);
-		}
-}
-unsafe extern "C" fn daisy_jab2_eff(fighter: &mut L2CAgentBase) {
-    let lua_state = fighter.lua_state_agent;
-		frame(fighter.lua_state_agent, 4.0);
-		if macros::is_excute(fighter) {
-			macros::EFFECT_FOLLOW_FLIP_ALPHA(fighter, Hash40::new("sys_attack_arc_c"), Hash40::new("sys_attack_arc_c"), Hash40::new("top"), 0, 11.5, 3, 0, 9, 90, 0.8, true, *EF_FLIP_YZ, 0.3);
-			macros::LAST_EFFECT_SET_RATE(fighter, 1.5);
 		}
 }
 unsafe extern "C" fn daisy_dsmash(fighter: &mut L2CAgentBase) {
