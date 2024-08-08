@@ -19,7 +19,12 @@ pub fn install() {
     .acmd("effect_attack11", daisy_jab1_eff, Priority::Low)    
     .acmd("game_attack11", daisy_jab1, Priority::Low)      
     .acmd("game_attacklw4", daisy_dsmash, Priority::Low)    
+    .acmd("game_attackhi4", daisy_usmash, Priority::Low)  
+    .acmd("effect_attackhi4", daisy_usmash_eff, Priority::Low)  
+    .acmd("sound_attackhi4", daisy_usmash_snd, Priority::Low)  
+    .acmd("expression_attackhi4", daisy_usmash_expr, Priority::Low)  
     .acmd("game_attackdash", daisy_da, Priority::Low)    
+    .acmd("sound_attackdash", daisy_da_snd, Priority::Low)    
     .acmd("effect_attackdash", daisy_da_eff, Priority::Low)    
     .install();
 }
@@ -58,6 +63,67 @@ unsafe extern "C" fn daisy_jab1(fighter: &mut L2CAgentBase) {
 			WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_FLAG_ENABLE_RESTART);
 		}
 }
+unsafe extern "C" fn daisy_usmash(agent: &mut L2CAgentBase) {
+	frame(agent.lua_state_agent, 3.0);
+    if macros::is_excute(agent) {
+        WorkModule::on_flag(agent.module_accessor, *FIGHTER_STATUS_ATTACK_FLAG_START_SMASH_HOLD);
+    }
+    frame(agent.lua_state_agent, 6.0);
+    if macros::is_excute(agent) {
+		StatusModule::set_situation_kind(agent.module_accessor, smash::app::SituationKind(*SITUATION_KIND_AIR), true);
+    }
+    frame(agent.lua_state_agent, 7.0);
+    if macros::is_excute(agent) {
+        macros::ATTACK(agent, 0, 0, Hash40::new("armr"), 15.0, 85, 88, 0, 38, 4.5, 0.0, 0.0, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_PUNCH, *ATTACK_REGION_PUNCH);
+    }
+    frame(agent.lua_state_agent, 10.0);
+    if macros::is_excute(agent) {
+        macros::ATTACK(agent, 0, 0, Hash40::new("armr"), 8.0, 85, 88, 0, 38, 5.0, 0.0, 0.0, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_PUNCH, *ATTACK_REGION_PUNCH);
+        macros::ATTACK(agent, 1, 0, Hash40::new("armr"), 8.0, 85, 88, 0, 38, 5.0, 0.0, 0.0, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_PUNCH, *ATTACK_REGION_PUNCH);
+    }
+    frame(agent.lua_state_agent, 17.0);
+    if macros::is_excute(agent) {
+        AttackModule::clear_all(agent.module_accessor);
+    }
+}
+unsafe extern "C" fn daisy_usmash_eff(agent: &mut L2CAgentBase) {
+    frame(agent.lua_state_agent, 1.0);
+    if macros::is_excute(agent) {
+        macros::LANDING_EFFECT(agent, Hash40::new("sys_v_smoke_a"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.8, 0, 0, 0, 0, 0, 0, false);
+    }
+    frame(agent.lua_state_agent, 5.0);
+    if macros::is_excute(agent) {
+        macros::EFFECT_FOLLOW_FLIP_ALPHA(agent, Hash40::new("sys_attack_arc_c"), Hash40::new("sys_attack_arc_c"), Hash40::new("top"), 0, 7.5, 3, 0, 9, 90, 1.5, true, *EF_FLIP_YZ, 0.3);
+    }
+	frame(agent.lua_state_agent, 12.0);
+	if macros::is_excute(agent) {
+		macros::EFFECT_OFF_KIND(agent, Hash40::new("sys_attack_arc_c"), true, true);
+	}
+}
+unsafe extern "C" fn daisy_usmash_snd(agent: &mut L2CAgentBase) {
+    frame(agent.lua_state_agent, 4.0);
+    if macros::is_excute(agent) {
+        macros::STOP_SE(agent, Hash40::new("se_common_smash_start_03"));
+    }
+
+	frame(agent.lua_state_agent, 6.0);
+	if macros::is_excute(agent) {        
+		macros::PLAY_SE(agent, Hash40::new("vc_daisy_attack06"));
+		macros::PLAY_SE(agent, Hash40::new("se_daisy_attackair_f01"));
+	}
+}
+unsafe extern "C" fn daisy_usmash_expr(agent: &mut L2CAgentBase) {
+    frame(agent.lua_state_agent, 7.0);
+    if macros::is_excute(agent) {
+        ControlModule::set_rumble(agent.module_accessor, Hash40::new("rbkind_nohitl"), 0, false, *BATTLE_OBJECT_ID_INVALID as u32);
+    }
+    frame(agent.lua_state_agent, 8.0);
+    if macros::is_excute(agent) {
+        macros::RUMBLE_HIT(agent, Hash40::new("rbkind_attackl"), 0);
+    }
+}
+
+
 unsafe extern "C" fn daisy_dsmash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	frame(fighter.lua_state_agent, 3.0);
@@ -98,6 +164,13 @@ unsafe extern "C" fn daisy_da(fighter: &mut L2CAgentBase) {
 		if macros::is_excute(fighter) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
+}
+unsafe extern "C" fn daisy_da_snd(fighter: &mut L2CAgentBase) {
+	frame(fighter.lua_state_agent, 8.0);
+	if macros::is_excute(fighter) {                
+		macros::PLAY_SEQUENCE(fighter, Hash40::new("seq_daisy_rnd_attack"));
+		macros::PLAY_SE(fighter, Hash40::new("se_daisy_attackdash02"));
+	}
 }
 unsafe extern "C" fn daisy_da_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;

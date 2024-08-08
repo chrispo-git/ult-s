@@ -24,10 +24,10 @@ pub fn install() {
 pub unsafe extern "C" fn usmash_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
     StatusModule::init_settings(
         fighter.module_accessor,
-        app::SituationKind(*SITUATION_KIND_GROUND),
+        smash::app::SituationKind(*SITUATION_KIND_GROUND),
         *FIGHTER_KINETIC_TYPE_MOTION_AIR,
         *GROUND_CORRECT_KIND_GROUND as u32,
-        app::GroundCliffCheckKind(*GROUND_CLIFF_CHECK_KIND_ON_DROP_BOTH_SIDES),
+        smash::app::GroundCliffCheckKind(*GROUND_CLIFF_CHECK_KIND_ON_DROP_BOTH_SIDES),
         true,
         *FIGHTER_STATUS_WORK_KEEP_FLAG_ATTACK_4_FLAG,
         *FIGHTER_STATUS_WORK_KEEP_FLAG_ATTACK_4_INT,
@@ -55,7 +55,7 @@ pub unsafe extern "C" fn usmash_main(fighter: &mut L2CFighterCommon) -> L2CValue
     WorkModule::enable_transition_term_group(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_GROUP_CHK_AIR_LANDING);
     WorkModule::unable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_LANDING_LIGHT);
     attack_hi_set_kinetic(fighter);
-    fighter.sub_shift_status_main(L2CValue::Ptr(attack_hi4_main_loop as *const () as _))
+    fighter.sub_shift_status_main(L2CValue::Ptr(usmash_main_loop as *const () as _))
 }
 unsafe extern "C" fn usmash_main_loop(fighter: &mut L2CFighterCommon) -> L2CValue {
     let situation_kind = StatusModule::situation_kind(fighter.module_accessor);
