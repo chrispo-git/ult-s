@@ -1,6 +1,12 @@
 import os
 import shutil
 import sys
+from pathlib import Path
+import re
+import zipfile
+import requests
+from github import Github
+
 
 included = [
     "bayonetta", "brave", "buddy",
@@ -226,6 +232,12 @@ def run_lite():
                         path = os.path.join(root, name)
                         new_path = path.replace("c0", ".c0")
                         os.rename(path, new_path)
+        if not os.path.exists(f"ultimate/mods/Ultimate S Arcropolis/effect/fighter/{i}/"):
+            continue
+        else:
+            path = f"ultimate/mods/Ultimate S Arcropolis/effect/fighter/{i}/"
+            new_path = path.replace("fighter/", "fighter/.")
+            os.rename(path, new_path)
                         
     #Un-underscoring included param files and other romfs stuff
     if "ptrainer" in included:
@@ -249,6 +261,122 @@ def run_lite():
                         path = os.path.join(root, name)
                         new_path = path.replace(".", "")
                         os.rename(path, new_path)
+        if not os.path.exists(f"ultimate/mods/Ultimate S Arcropolis/effect/fighter/.{i}/"):
+            continue
+        else:
+            path = f"ultimate/mods/Ultimate S Arcropolis/effect/fighter/.{i}/"
+            new_path = path.replace("fighter/.", "fighter/")
+            os.rename(path, new_path)
+
+def grab_dependencies():
+
+    #Setup Downloads folder
+    if os.path.exists("downloads"):
+        shutil.rmtree("downloads")
+    os.mkdir(f"downloads")
+    os.mkdir(f"downloads/romfs")
+    os.mkdir(f"downloads/romfs/plugins")
+
+    #Skyline
+    download_dependency = "https://github.com/skyline-dev/skyline/releases/download/beta/skyline.zip"
+    r = requests.get(download_dependency)
+    f = open("downloads/skyline.zip","wb")
+    f.write(r.content)
+    f.close()
+    with zipfile.ZipFile("downloads/skyline.zip", 'r') as zip_ref:
+        zip_ref.extractall("downloads")
+    os.remove("downloads/skyline.zip")
+    print("       Skyline downloaded")
+
+    #NRO Hook
+    g = Github(None)
+    repo = g.get_repo("ultimate-research/nro-hook-plugin")
+    latest = repo.get_latest_release()
+    latest_ver = latest.title
+    download_dependency = f"https://github.com/ultimate-research/nro-hook-plugin/releases/download/{latest_ver}/libnro_hook.nro"
+    r = requests.get(download_dependency)
+    f = open("downloads/romfs/plugins/libnro_hook.nro","wb")
+    f.write(r.content)
+    f.close()
+    print("       NRO Hook downloaded")
+
+    #Smashline Hook
+    g = Github(None)
+    repo = g.get_repo("HDR-Development/smashline")
+    latest = repo.get_latest_release()
+    latest_ver = latest.title
+    download_dependency = f"https://github.com/HDR-Development/smashline/releases/download/{latest_ver}/libsmashline_plugin.nro"
+    r = requests.get(download_dependency)
+    f = open("downloads/romfs/plugins/libsmashline_plugin.nro","wb")
+    f.write(r.content)
+    f.close()
+    print("       Smashline Hook downloaded")
+
+    #Arcropolis
+    g = Github(None)
+    repo = g.get_repo("Raytwo/ARCropolis")
+    latest = repo.get_latest_release()
+    latest_ver = latest.html_url.replace("https://github.com/Raytwo/ARCropolis/releases/tag/","")
+    download_dependency = f"https://github.com/Raytwo/ARCropolis/releases/download/{latest_ver}/release.zip"
+    r = requests.get(download_dependency)
+    f = open("downloads/release.zip","wb")
+    f.write(r.content)
+    f.close()
+    with zipfile.ZipFile("downloads/release.zip", 'r') as zip_ref:
+        zip_ref.extractall("downloads")
+    os.remove("downloads/release.zip")
+    shutil.copy("downloads/atmosphere/contents/01006A800016E000/romfs/skyline/plugins/libarcropolis.nro","downloads/romfs/plugins/libarcropolis.nro")
+    shutil.rmtree("downloads/atmosphere")
+    print("       ARCropolis downloaded")
+
+    #Stage Config
+    g = Github(None)
+    repo = g.get_repo("ThatNintendoNerd/stage_config")
+    latest = repo.get_latest_release()
+    latest_ver = latest.html_url.replace("https://github.com/ThatNintendoNerd/stage_config/releases/tag/","")
+    download_dependency = f"https://github.com/ThatNintendoNerd/stage_config/releases/download/{latest_ver}/release.zip"
+    r = requests.get(download_dependency)
+    f = open("downloads/release.zip","wb")
+    f.write(r.content)
+    f.close()
+    with zipfile.ZipFile("downloads/release.zip", 'r') as zip_ref:
+        zip_ref.extractall("downloads")
+    os.remove("downloads/release.zip")
+    shutil.copy("downloads/atmosphere/contents/01006A800016E000/romfs/skyline/plugins/libstage_config.nro","downloads/romfs/plugins/libstage_config.nro")
+    shutil.rmtree("downloads/atmosphere")
+    print("       Stage Config downloaded")
+
+    #CSK Collection
+    download_dependency = f"https://gamebanana.com/dl/1158250"
+    r = requests.get(download_dependency)
+    f = open("downloads/csk_collection.zip","wb")
+    f.write(r.content)
+    f.close()
+    with zipfile.ZipFile("downloads/csk_collection.zip", 'r') as zip_ref:
+        zip_ref.extractall("downloads")
+    os.remove("downloads/csk_collection.zip")
+    shutil.copy("downloads/atmosphere/contents/01006A800016E000/romfs/skyline/plugins/libthe_csk_collection.nro","downloads/romfs/plugins/libthe_csk_collection.nro")
+    shutil.rmtree("downloads/atmosphere")
+    shutil.rmtree("downloads/ultimate")
+    print("       CSK Collection downloaded")
+
+    #Arena Latency
+    download_dependency = f"https://gamebanana.com/dl/1142218"
+    r = requests.get(download_dependency)
+    f = open("downloads/latency.zip","wb")
+    f.write(r.content)
+    f.close()
+    with zipfile.ZipFile("downloads/latency.zip", 'r') as zip_ref:
+        zip_ref.extractall("downloads/romfs/plugins/")
+    os.remove("downloads/latency.zip")
+    print("       Arena Latency downloaded")
+    print("       Moving dependencies")
+    if os.path.exists("atmosphere/contents/01006A800016E000/romfs/skyline/plugins"):
+        shutil.rmtree("atmosphere/contents/01006A800016E000/romfs/skyline/plugins")
+    shutil.copytree("downloads/romfs/plugins","atmosphere/contents/01006A800016E000/romfs/skyline/plugins")
+    if os.path.exists("atmosphere/contents/01006A800016E000/exefs"):
+        shutil.rmtree("atmosphere/contents/01006A800016E000/exefs")
+    shutil.copytree("downloads/exefs","atmosphere/contents/01006A800016E000/exefs")
 
 if not os.path.exists("resources/fighter_param.prcxml"):
         shutil.copy("ultimate/mods/Ultimate S Arcropolis/fighter/common/param/fighter_param.prcxml","resources/fighter_param.prcxml")
@@ -302,9 +430,6 @@ if is_lite.lower() != "lite":
     f = open("ultimate/mods/Ultimate S Arcropolis/version.txt", "w")
     f.write(new_word.replace(".LITE",""))
     f.close()
-    
-    print("       Done! Copy the atmosphere and ultimate folders to the root of your SD card, have fun!")
-    input("       (Press Enter to quit)")
 else:
     print("       Lite chosen!")
     print('''
@@ -351,8 +476,6 @@ else:
         else:
             excluded = []
         run_lite()
-        print("       Done! Copy the atmosphere and ultimate folders to the root of your SD card, have fun!")
-        input("       (Press Enter to quit)")
     else:
         print("       Type the characters to include in install (in lowercase, with a space separating each)")
         characters = input("       ")
@@ -392,6 +515,10 @@ else:
         else:
             excluded = included
             included = []
+        print("       Please Wait! The program is making the changes.")
         run_lite()
-        print("       Done! Copy the atmosphere and ultimate folders to the root of your SD card, have fun!")
-        input("       (Press Enter to quit)")
+download = input("       Would you like to download the latest dependencies? This requires an internet connection. (y/n)").lower()
+if download == "y":
+    grab_dependencies()
+print("       Done! Copy the atmosphere and ultimate folders to the root of your SD card, have fun!")
+input("       (Press Enter to quit)")
