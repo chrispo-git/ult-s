@@ -187,17 +187,14 @@ FaF: 46
 ### Up Smash
 |Frame|ID|Damage|Angle|BKB|KBG|Notes| | | |
 |-|-|-|-|-|-|-|-|-|-|
-|Charge hold Frame: 10|
-|Frame 14| 0| 17.0%| 90| 24| 97| deals 4 bonus shield damage|
-|Frame 14| 1| 15.0%| 90| 50| 97| deals 4 bonus shield damage|
-|Frame 14| 2| 12.0%| 75| 40| 97| deals 4 bonus shield damage|
-|Frame 14| 3| 12.0%| 75| 40| 97| deals 4 bonus shield damage|
-|Frame 17| 0| 10.0%| 85| 60| 100| deals 4 bonus shield damage|
-|Frame 17| 1| 12.0%| 85| 60| 100| deals 4 bonus shield damage|
-|Hitboxes terminated on Frame 21|
+|Charge hold Frame: 3|
+|Frame 7| 0| 15.0%| 85| 38| 88|
+|Frame 10| 0| 8.0%| 85| 38| 88|
+|Frame 10| 1| 8.0%| 85| 38| 88|
+|Hitboxes terminated on Frame 17|
 
 
-FaF: 45
+FaF: 50
 
 
 
@@ -443,10 +440,11 @@ FaF: 50
 |-|-|-|-|-|-|-|-|-|-|
 |Frame 34| 0|  1.0%|  270|  20 (Set)|  100|
 |Hitboxes terminated on Frame 36|
-|Throws on Frame 38| |  7.0%|  70|  60|  60|
+|Throws on Frame 38| | 7.0%| 90| 104 (Set)| 100|
+|Note: Knockdown Throw|
 
 
-FaF: 65
+FaF: 42
 
 
 
@@ -497,11 +495,11 @@ FaF: 27
 ### Up Special Start
 |Frame|ID|Damage|Angle|BKB|KBG|Notes| | | |
 |-|-|-|-|-|-|-|-|-|-|
-|Frame 7| 0|  11.0%|  361|  70|  72|
-|Frame 7| 1|  11.0%|  361|  70|  72|
-|Frame 11| 0|  7.0%|  80|  10|  100|
-|Frame 11| 1|  7.0%|  80|  10|  100|
-|Frame 11| 2|  7.0%|  80|  10|  100|
+|Frame 7| 0|  11.0%|  361|  65|  72|
+|Frame 7| 1|  11.0%|  361|  65|  72|
+|Frame 11| 0|  7.0%|  80|  50|  100|
+|Frame 11| 1|  7.0%|  80|  50|  100|
+|Frame 11| 2|  7.0%|  80|  50|  100|
 |Hitboxes terminated on Frame 33|
 
 
