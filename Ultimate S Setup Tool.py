@@ -504,6 +504,9 @@ if not os.path.exists("resources/fighter_param.prcxml"):
 if not os.path.exists("resources/og_layout.arc"):
         shutil.copy("ultimate/mods/Ultimate S Arcropolis/ui/layout/menu/title/title/layout.arc","resources/og_layout.arc")
 
+f = open("ultimate/mods/Ultimate S Arcropolis/version.txt")
+new_word = f.readline()
+f.close()
 f = open("ultimate/mods/Ultimate S Arcropolis/version.txt", "w")
 f.write(new_word.replace(".LITE",""))
 f.close()
@@ -513,13 +516,17 @@ romfs_ver = romfs_ver.replace("\n","")
 romfs_ver = romfs_ver.replace("v.","")
 romfs_ver = romfs_ver.replace("v","")
 file.close()
-g = Github(None)
-repo = g.get_repo("chrispo-git/ult-s")
-latest = repo.get_latest_release()
-latest_ver = latest.html_url.replace("https://github.com/chrispo-git/ult-s/releases/tag/","")
-latest_ver = latest_ver.replace("v.","")
-latest_ver = latest_ver.replace("v","")
-latest_ver = latest_ver.replace("\n","")
+latest_ver = "1.0.0"
+try:
+    g = Github(None)
+    repo = g.get_repo("chrispo-git/ult-s")
+    latest = repo.get_latest_release()
+    latest_ver = latest.html_url.replace("https://github.com/chrispo-git/ult-s/releases/tag/","")
+    latest_ver = latest_ver.replace("v.","")
+    latest_ver = latest_ver.replace("v","")
+    latest_ver = latest_ver.replace("\n","")
+except Exception:
+    print("no internet connection")
 print(f'''
                                                                                                                                                           
         ###    ###   ###    ##########  ####  ##########  ###########  ##########-  #########        ##########       
