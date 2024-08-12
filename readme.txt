@@ -59,6 +59,9 @@ A: Try going through these steps:
 2. Check your title screen, what version is it? Make sure it is 13.0.2, and no other version.
 3. Make sure that Ultimate S is enabled (either by mod manager on the switch, or inside of the mods folder on Yuzu).
 4. Make sure you ran "Ultimate S Setup Tool.exe" and chose your preferred options (you can check in ultimate/ult-s to see which characters you have enabled)
+5. If you are on emulator, make sure that there is a file called "legacy_discovery" at ultimate\arcropolis\config\2470593114292646594\15904440331188662786
+If there isn't, you can make one by creating a file (no extension on the end) with "True" written in it
+
 
 Q: "I want to remove X character's changes"/"I want to just have Y character"
 A: Run "Ultimate S Setup Tool.exe", it allows you to pick and choose which ultimate S movesets you have.
