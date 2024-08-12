@@ -718,18 +718,18 @@ if setup == "y":
         for i in disallowed_plugins:
             if os.path.isfile(f"{folder}/atmosphere/contents/01006A800016E000/romfs/skyline/plugins/{i}"):
                 shutil.move(f"{folder}/atmosphere/contents/01006A800016E000/romfs/skyline/plugins/{i}", f"{folder}/atmosphere/contents/01006A800016E000/romfs/skyline/disabled_plugins/{i}")
-        print("       Would you like to copy the ultimate folder? This will take ~ 5 minutes")
-        print("       You will be able to copy it manually, selecting yes just transfers it automatically")
-        copy_ult_s = input("       (y/n)").lower()
-        if copy_ult_s == "y":
+        print("       Atmosphere folder copied.")
+        if True:
             if os.path.exists(f"{folder}/ultimate/mods/Ultimate S Arcropolis"):
                 shutil.rmtree(f"{folder}/ultimate/mods/Ultimate S Arcropolis")
             if os.path.exists(f"{folder}/ultimate/mods/Ultimate S Stages"):
                 shutil.rmtree(f"{folder}/ultimate/mods/Ultimate S Stages")
             if os.path.exists(f"{folder}/ultimate/ult-s"):
                 shutil.rmtree(f"{folder}/ultimate/ult-s")
-            print("Copying to folder.... Please Wait! This will take a little bit.")
-            shutil.copytree(f"ultimate", f"{folder}/ultimate")
+            print("Copying ultimate folders.... Please Wait! This will take a little bit.")
+            shutil.copytree(f"ultimate/mods/Ultimate S Arcropolis", f"{folder}/ultimate/mods/Ultimate S Arcropolis")
+            shutil.copytree(f"ultimate/mods/Ultimate S Stages", f"{folder}/ultimate/mods/Ultimate S Stages")
+            shutil.copytree(f"ultimate/ult-s", f"{folder}/ultimate/ult-s")
     elif setup == "2": # FTP
         ip = input("       Please enter the switch IP address:")
         usr = input("       Please enter the FTP username (leave empty if its an open FTP server):")
