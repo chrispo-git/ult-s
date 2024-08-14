@@ -710,9 +710,11 @@ if setup == "y":
     if setup == "1": # ON PC
         folder = filedialog.askdirectory(title="Select the root folder of your SD card/sdmc folder")
         
-        if os.path.exists(f"{folder}/atmosphere"):
-            shutil.rmtree(f"{folder}/atmosphere")
-        shutil.copytree(f"atmosphere", f"{folder}/atmosphere")
+        if os.path.exists(f"{folder}/atmosphere/contents/01006A800016E000"):
+            os.mkdir(f"original_folder")
+            shutil.copytree(f"{folder}/atmosphere/contents/01006A800016E000", f"original_folder/atmosphere/contents/01006A800016E000")
+            shutil.rmtree(f"{folder}/atmosphere/contents/01006A800016E000")
+        shutil.copytree(f"atmosphere/contents/01006A800016E000", f"{folder}/atmosphere/contents/01006A800016E000")
         # Removes all the icky plugins that shouldn't be there
         disallowed_plugins = ["libacmd_hook.nro", "libparam_hook", "libsmashline_hook", "libtraining_modpack"]
         for i in disallowed_plugins:
