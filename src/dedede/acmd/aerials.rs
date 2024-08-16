@@ -17,9 +17,11 @@ use super::*;
 pub fn install() {
     Agent::new("dedede")
     .acmd("game_attackairf", d3_fair, Priority::Low)    
+    .acmd("game_attackairf", d3_fair_expr, Priority::Low) 
     .acmd("game_attackairb", d3_bair, Priority::Low)    
     .acmd("effect_attackairb", d3_bair_eff, Priority::Low)    
-    .acmd("expression_landingairb", d3_bair_expr, Priority::Low)    
+    .acmd("expression_attackairb", d3_bair_expr, Priority::Low)    
+    .acmd("expression_landingairb", d3_bair_land_expr, Priority::Low)    
     .install();
 }
 
@@ -45,6 +47,16 @@ unsafe extern "C" fn d3_fair(fighter: &mut L2CAgentBase) {
 		if macros::is_excute(fighter) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
+}
+unsafe extern "C" fn d3_fair_expr(agent: &mut L2CAgentBase) {
+    frame(agent.lua_state_agent, 11.0);
+    if macros::is_excute(agent) {
+        ControlModule::set_rumble(agent.module_accessor, Hash40::new("rbkind_nohitm"), 0, false, *BATTLE_OBJECT_ID_INVALID as u32);
+    }
+    frame(agent.lua_state_agent, 13.0);
+    if macros::is_excute(agent) {
+        macros::RUMBLE_HIT(agent, Hash40::new("rbkind_attackm"), 0);
+    }
 }
 unsafe extern "C" fn d3_bair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
@@ -78,6 +90,16 @@ unsafe extern "C" fn d3_bair(fighter: &mut L2CAgentBase) {
 unsafe extern "C" fn d3_bair_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 }	
-unsafe extern "C" fn d3_bair_expr(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn d3_bair_expr(agent: &mut L2CAgentBase) {
+    frame(agent.lua_state_agent, 5.0);
+    if macros::is_excute(agent) {
+        ControlModule::set_rumble(agent.module_accessor, Hash40::new("rbkind_nohitm"), 0, false, *BATTLE_OBJECT_ID_INVALID as u32);
+    }
+    frame(agent.lua_state_agent, 6.0);
+    if macros::is_excute(agent) {
+        macros::RUMBLE_HIT(agent, Hash40::new("rbkind_attackm"), 0);
+    }
+}
+unsafe extern "C" fn d3_bair_land_expr(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 }	
