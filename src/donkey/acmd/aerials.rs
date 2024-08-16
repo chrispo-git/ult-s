@@ -19,7 +19,8 @@ pub fn install() {
     .acmd("game_attackairn", dk_nair, Priority::Low)    
     .acmd("game_attackairhi", dk_uair, Priority::Low)    
     .acmd("game_attackairf", dk_fair, Priority::Low)    
-    .acmd("effect_attackairf", dk_fair_eff, Priority::Low)    
+    .acmd("effect_attackairf", dk_fair_eff, Priority::Low) 
+    .acmd("expression_attackairf", dk_fair_expr, Priority::Low)   
     .install();
 } 
 
@@ -82,6 +83,16 @@ unsafe extern "C" fn dk_fair(fighter: &mut L2CAgentBase) {
         if macros::is_excute(fighter) {
             WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
         }
+}
+unsafe extern "C" fn dk_fair_expr(agent: &mut L2CAgentBase) {
+    frame(agent.lua_state_agent, 13.0);
+    if macros::is_excute(agent) {
+        ControlModule::set_rumble(agent.module_accessor, Hash40::new("rbkind_nohitm"), 0, false, *BATTLE_OBJECT_ID_INVALID as u32);
+    }
+    frame(agent.lua_state_agent, 14.0);
+    if macros::is_excute(agent) {
+        macros::RUMBLE_HIT(agent, Hash40::new("rbkind_attackm"), 0);
+    }
 }
 
 unsafe extern "C" fn dk_fair_eff(fighter: &mut L2CAgentBase) {

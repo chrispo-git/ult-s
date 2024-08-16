@@ -18,6 +18,7 @@ pub fn install() {
 	Agent::new("donkey")
     .acmd("game_throwhi", dk_uthrow, Priority::Low)    
     .acmd("effect_throwhi", dk_uthrow_eff, Priority::Low)    
+    .acmd("expression_throwhi", dk_uthrow_expr, Priority::Low)    
     .install();
 }
 
@@ -65,5 +66,12 @@ unsafe extern "C" fn dk_uthrow_eff(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 61.0);
     if macros::is_excute(fighter) {
         macros::EFFECT(fighter, Hash40::new("sys_down_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.7, 0, 0, 0, 0, 0, 0, false);
+    }
+}
+unsafe extern "C" fn dk_uthrow_expr(agent: &mut L2CAgentBase) {
+    frame(agent.lua_state_agent, 31.0);
+    if macros::is_excute(agent) {
+        macros::QUAKE(agent, *CAMERA_QUAKE_KIND_M);
+        macros::RUMBLE_HIT(agent, Hash40::new("rbkind_attackm"), 0);
     }
 }
