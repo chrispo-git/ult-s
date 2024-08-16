@@ -541,3 +541,22 @@ FaF: 24
 |Note: Takes 7% damage before being launched|
 
 FaF: 35
+
+
+
+
+
+
+
+### Down Special (Butt Bounce)
+|Frame|ID|Damage|Angle|BKB|KBG|Notes| | | |
+|-|-|-|-|-|-|-|-|-|-|
+|Frame 15| 0|  10.0%|  270|  30|  100|
+|Frame 18| 0|  7.0%|  45|  70|  70|
+|Hitboxes terminated on Frame 45|
+
+
+Note: FaF of 15 on hit, FaF of 30 on block
+
+
+FaF: 65

@@ -6,9 +6,9 @@ Initial Dash | 2.35|
 Run Speed | 2.15|
 Walk Speed | 1.47|
 Traction | 0.116|
-Wavedash Traction Category | Highest|
+Wavedash Traction Category | Low|
 Full Hop Height | 44.5|
-Short Hop Height | 14|
+Short Hop Height | 14| 
 Air Speed | 1.26|
 Air Accel Add | 0.01|
 Air Accel Mul | 0.085|
@@ -19,19 +19,8 @@ Nair Landing Lag | 10|
 Fair Landing Lag | 10|
 Bair Landing Lag | 11|
 Uair Landing Lag | 5|
-Dair Landing Lag | 24|
+Dair Landing Lag | 10|
 Wall Jump? | True|
-
-
-## Cancels
-
-ZSS has on hit cancels in this order:
-
-Jab -> Tilt -> Smash -> Special 
-
-Nair -> Uair -> Fair/Bair -> Dair
-
-ZSS can go forwards down this chain but cannot go back in the chain.
 
 
 
@@ -48,12 +37,45 @@ ZSS can go forwards down this chain but cannot go back in the chain.
 ### Jab 1
 |Frame|ID|Damage|Angle|BKB|KBG|Notes| | | |
 |-|-|-|-|-|-|-|-|-|-|
-|Frame 4| 0|  4.5%|  361|  20|  40|
+|Frame 4| 0|  2.0%|  361|  20|  40|
 |Hitboxes terminated on Frame 5|
 |Note: Deals 2f bonus hitstun|
 
 
-FaF: 24
+FaF: 16
+
+
+
+
+
+
+
+### Jab 2
+|Frame|ID|Damage|Angle|BKB|KBG|Notes| | | |
+|-|-|-|-|-|-|-|-|-|-|
+|Frame 2| 0| 1.5%| 361| 30| 40|
+|Frame 2| 1| 1.5%| 361| 25| 40|
+|Frame 2| 2| 1.5%| 361| 20| 30|
+|Hitboxes terminated on Frame 3|
+
+
+FaF: 26
+
+
+
+
+
+
+
+### Jab 3
+|Frame|ID|Damage|Angle|BKB|KBG|Notes| | | |
+|-|-|-|-|-|-|-|-|-|-|
+|Frame 3| 0| 3.0%| 45| 60| 100|
+|Frame 3| 1| 3.0%| 45| 60| 100|
+|Hitboxes terminated on Frame 5|
+
+
+FaF: 35
 
 
 
@@ -70,8 +92,7 @@ FaF: 24
 |Hitboxes terminated on Frame 9|
 
 
-
-FaF: 29
+FaF: 25
 
 
 
@@ -88,7 +109,7 @@ FaF: 29
 |Hitboxes terminated on Frame 9|
 
 
-FaF: 29
+FaF: 25
 
 
 
@@ -105,7 +126,7 @@ FaF: 29
 |Hitboxes terminated on Frame 9|
 
 
-FaF: 29
+FaF: 25
 
 
 
@@ -119,12 +140,12 @@ FaF: 29
 |Frame 3| 0|  5.0%|  138|  40|  30| Hits air only|
 |Frame 3| 1|  5.0%|  130|  57|  40| Hits grounded only|
 |Hitboxes terminated on Frame 5|
-|Frame 9| 0|  7.0%|  60|  70|  110|
-|Frame 9| 1|  7.0%|  60|  70|  110|
+|Frame 9| 0|  7.0%|  90|  70|  110|
+|Frame 9| 1|  7.0%|  90|  70|  110|
 |Hitboxes terminated on Frame 11|
 
 
-FaF: 46
+FaF: 30
 
 
 
@@ -135,12 +156,12 @@ FaF: 46
 ### DTilt
 |Frame|ID|Damage|Angle|BKB|KBG|Notes| | | |
 |-|-|-|-|-|-|-|-|-|-|
-|Frame 8| 0|  8.0%|  80|  20|  85| -1.0 bonus trip chance|
-|Frame 8| 1|  8.0%|  80|  20|  85| -1.0 bonus trip chance|
+|Frame 8| 0|  8.0%|  80|  45|  85| -1.0 bonus trip chance|
+|Frame 8| 1|  8.0%|  80|  45|  85| -1.0 bonus trip chance|
 |Hitboxes terminated on Frame 10|
 
 
-FaF: 26
+FaF: 22
 
 
 
@@ -151,16 +172,14 @@ FaF: 26
 ### Dash Attack
 |Frame|ID|Damage|Angle|BKB|KBG|Notes| | | |
 |-|-|-|-|-|-|-|-|-|-|
-|Frame 7| 0|  11.0%|  60|  50|  80|
-|Frame 7| 1|  11.0%|  60|  50|  80|
-|Frame 7| 2|  11.0%|  60|  50|  80|
-|Frame 12| 0|  6.0%|  90|  50|  80|
-|Frame 12| 1|  6.0%|  90|  50|  80|
-|Frame 12| 2|  6.0%|  90|  50|  80|
-|Hitboxes terminated on Frame 16|
+|Frame 7| 0| 8.0%| 70| 100| 40|
+|Frame 7| 1| 8.0%| 70| 100| 40|
+|Frame 10| 0| 5.0%| 60| 80| 40|
+|Frame 10| 1| 5.0%| 60| 80| 40|
+|Hitboxes terminated on Frame 20|
 
 
-FaF: 35
+FaF: 52
 
 
 
@@ -198,13 +217,9 @@ FaF: 65
 |Frame|ID|Damage|Angle|BKB|KBG|Notes| | | |
 |-|-|-|-|-|-|-|-|-|-|
 |Charge hold Frame: 4|
-|Frame 8| 0|  11.0%|  70|  74|  25|
-|Frame 8| 1|  11.0%|  70|  74|  25|
+|Frame 8| 0|  13.0%|  82|  25|  110|
+|Frame 8| 1|  13.0%|  82|  25|  110|
 |Hitboxes terminated on Frame 18|
-|Note: Deals 5f bonus hitstun|
-
-
-Jump Cancellable on hit
 
 
 FaF: 49
@@ -235,19 +250,19 @@ FaF: 38
 ### Nair
 |Frame|ID|Damage|Angle|BKB|KBG|Notes| | | |
 |-|-|-|-|-|-|-|-|-|-|
-|Frame 7| 0|  4.0%|  60|  70|  82| hit effect is elec|
-|Frame 7| 1|  4.0%|  60|  70|  82| hit effect is elec|
-|Hitboxes terminated on Frame 9|
-|Frame 12| 0|  4.0%|  60|  70|  82| hit effect is elec|
-|Frame 12| 1|  4.0%|  60|  70|  82| hit effect is elec|
-|Hitboxes terminated on Frame 14|
+|Frame 10| 0|  4.0%|  361|  70|  82| hit effect is elec|
+|Frame 10| 1|  4.0%|  361|  70|  82| hit effect is elec|
+|Hitboxes terminated on Frame 12|
+|Frame 15| 0|  4.0%|  361|  70|  82| hit effect is elec|
+|Frame 15| 1|  4.0%|  361|  70|  82| hit effect is elec|
+|Hitboxes terminated on Frame 17|
 
 
-FaF: 49
+FaF: 52
 
 
 
-Autocancel - 1-2/39+
+Autocancel - 1-2/42+
 
 
 
@@ -268,7 +283,7 @@ Autocancel - 1-2/39+
 |Hitboxes terminated on Frame 15|
 
 
-FaF: 47
+FaF: 40
 
 
 
@@ -448,9 +463,9 @@ FaF: 28
 |Frame 14| 1|  0.8%|  100|  45|  25| Hits 5 times| hit effect is elec|
 |Frame 14| 2|  0.8%|  255|  45|  25| Hits 5 times| hit effect is elec|
 |Hitboxes terminated on Frame 15|
-|Frame 28| 1|  3.0%|  80|  45|  160| hit effect is elec|
-|Frame 28| 2|  3.0%|  80|  45|  160| hit effect is elec|
-|Frame 28| 3|  3.0%|  80|  45|  160| hit effect is elec|
+|Frame 28| 1|  3.0%|  80|  45|  150| hit effect is elec|
+|Frame 28| 2|  3.0%|  80|  45|  150| hit effect is elec|
+|Frame 28| 3|  3.0%|  80|  45|  150| hit effect is elec|
 |Hitboxes terminated on Frame 30|
 |Note: Deals 4f bonus hitstun|
 
@@ -516,11 +531,39 @@ FaF: --
 ### Side Special 
 |Frame|ID|Damage|Angle|BKB|KBG|Notes| | | |
 |-|-|-|-|-|-|-|-|-|-|
-|Frame 15| 0|  18.0%|  80|  40|  72| deals 5 bonus shield damage|
-|Hitboxes terminated on Frame 17|
+|Frame 22| 0| 1.2%| 367| 85 (Set)| 100| hit effect is elec| rehits every 2 frames|
+|Frame 22| 1| 2.0%| 0| 95 (Set)| 100| hit effect is elec| rehits every 2 frames|
+|Frame 24| 0| 2.0%| 0| 100 (Set)| 100| hit effect is elec| rehits every 2 frames|
+|Frame 24| 1| 1.2%| 345| 85 (Set)| 100| hit effect is elec|
+|Frame 26| 1| 1.2%| 10| 85 (Set)| 100| hit effect is elec|
+|Frame 28| 1| 1.2%| 345| 85 (Set)| 100| hit effect is elec|
+|Hitboxes terminated on Frame 30|
+|Frame 31| 0| 8.0%| 60| 45| 105| hit effect is fire|
+|Hitboxes terminated on Frame 36|
 
 
-FaF: 56
+FaF: 90
+
+
+
+
+
+
+
+### Side Special (Add)
+|Frame|ID|Damage|Angle|BKB|KBG|Notes| | | |
+|-|-|-|-|-|-|-|-|-|-|
+|Frame 31| 0| 4.0%| 108| 60| 105| hit effect is elec|
+|Hitboxes terminated on Frame 33|
+|Frame 37| 0| 4.0%| 100| 60| 105| hit effect is elec|
+|Hitboxes terminated on Frame 39|
+|Frame 42| 0| 4.0%| 80| 60| 105| hit effect is elec|
+|Hitboxes terminated on Frame 44|
+|Frame 46| 0| 4.0%| 75| 60| 105| hit effect is elec|
+|Hitboxes terminated on Frame 48|
+
+
+FaF: 63
 
 
 
@@ -565,16 +608,13 @@ FaF: 50
 |Frame|ID|Damage|Angle|BKB|KBG|Notes| | | |
 |-|-|-|-|-|-|-|-|-|-|
 |Frame 1| 0|  8.0%|  67|  65|  70| Hits air only|
-|Frame 1| 1|  8.0%|  361|  10|  90| Hits grounded only| hit effect is bury|
+|Frame 1| 1|  8.0%|  270|  100|  10| Hits grounded only|
 |Frame 1| 2|  8.0%|  67|  65|  70| Hits grounded only|
 |Hitboxes terminated on Frame 2|
 |Note: Deals 1f bonus hitstun|
 
 
-Jump Cancellable on hit
-
-
-FaF: 45
+FaF: 27
 
 
 
