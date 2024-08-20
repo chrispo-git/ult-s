@@ -18,7 +18,8 @@ pub fn install() {
     Agent::new("falco")
     .acmd("game_attackdash", falco_da, Priority::Low)    
     .acmd("effect_attackdash", falco_da_eff, Priority::Low)    
-    .acmd("sound_attackdash", falco_da_snd, Priority::Low)    
+    .acmd("sound_attackdash", falco_da_snd, Priority::Low)   
+    .acmd("expression_attackdash", falco_da_expr, Priority::Low)     
     .install();
 }
 
@@ -76,4 +77,14 @@ unsafe extern "C" fn falco_da_snd(fighter: &mut L2CAgentBase) {
 		if macros::is_excute(fighter) {
 			macros::PLAY_LANDING_SE(fighter, Hash40::new("se_falco_landing02"));
 		}
+}
+unsafe extern "C" fn falco_da_expr(agent: &mut L2CAgentBase) {
+    frame(agent.lua_state_agent, 5.0);
+    if macros::is_excute(agent) {
+        ControlModule::set_rumble(agent.module_accessor, Hash40::new("rbkind_nohitm"), 0, false, *BATTLE_OBJECT_ID_INVALID as u32);
+    }
+    frame(agent.lua_state_agent, 6.0);
+    if macros::is_excute(agent) {
+        macros::RUMBLE_HIT(agent, Hash40::new("rbkind_attackm"), 0);
+    }
 }

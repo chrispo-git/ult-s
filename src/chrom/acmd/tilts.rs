@@ -19,6 +19,9 @@ pub fn install() {
     .acmd("game_attacks3hi", chrom_ftilt_hi, Priority::Low)    
     .acmd("game_attacks3lw", chrom_ftilt_lw, Priority::Low)    
     .acmd("game_attacks3", chrom_ftilt_s, Priority::Low)    
+    .acmd("expression_attacks3hi", chrom_ftilt_hi_expr, Priority::Low)    
+    .acmd("expression_attacks3lw", chrom_ftilt_lw_expr, Priority::Low)    
+    .acmd("expression_attacks3", chrom_ftilt_s_expr, Priority::Low)    
     .acmd("sound_attacks3lw", chrom_ftilt_snd, Priority::Low)    
     .acmd("sound_attacks3", chrom_ftilt_snd, Priority::Low)    
     .acmd("sound_attacks3hi", chrom_ftilt_snd, Priority::Low)    
@@ -26,6 +29,23 @@ pub fn install() {
     .acmd("effect_attacks3hi", chrom_eff_ftilt_hi, Priority::Low)    
     .acmd("effect_attacks3lw", chrom_eff_ftilt_lw, Priority::Low)    
     .install();
+}
+unsafe extern "C" fn chrom_ftilt_hi_expr(agent: &mut L2CAgentBase) {
+	if macros::is_excute(agent) {
+        slope!(agent, *MA_MSC_CMD_SLOPE_SLOPE, *SLOPE_STATUS_L);
+    }
+    frame(agent.lua_state_agent, 4.0);
+    if macros::is_excute(agent) {
+        ControlModule::set_rumble(agent.module_accessor, Hash40::new("rbkind_nohitm"), 0, false, *BATTLE_OBJECT_ID_INVALID as u32);
+    }
+    frame(agent.lua_state_agent, 6.0);
+    if macros::is_excute(agent) {
+        macros::RUMBLE_HIT(agent, Hash40::new("rbkind_slashm"), 0);
+    }
+    frame(agent.lua_state_agent, 25.0);
+    if macros::is_excute(agent) {
+        slope!(agent, *MA_MSC_CMD_SLOPE_SLOPE_INTP, *SLOPE_STATUS_LR, 3);
+    }
 }
 
 unsafe extern "C" fn chrom_ftilt_hi(fighter: &mut L2CAgentBase) {
@@ -44,6 +64,23 @@ unsafe extern "C" fn chrom_ftilt_hi(fighter: &mut L2CAgentBase) {
 		if macros::is_excute(fighter) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
+}
+unsafe extern "C" fn chrom_ftilt_lw_expr(agent: &mut L2CAgentBase) {
+	if macros::is_excute(agent) {
+        slope!(agent, *MA_MSC_CMD_SLOPE_SLOPE, *SLOPE_STATUS_L);
+    }
+    frame(agent.lua_state_agent, 3.0);
+    if macros::is_excute(agent) {
+        ControlModule::set_rumble(agent.module_accessor, Hash40::new("rbkind_nohitm"), 0, false, *BATTLE_OBJECT_ID_INVALID as u32);
+    }
+    frame(agent.lua_state_agent, 4.0);
+    if macros::is_excute(agent) {
+        macros::RUMBLE_HIT(agent, Hash40::new("rbkind_slashm"), 0);
+    }
+    frame(agent.lua_state_agent, 25.0);
+    if macros::is_excute(agent) {
+        slope!(agent, *MA_MSC_CMD_SLOPE_SLOPE_INTP, *SLOPE_STATUS_LR, 3);
+    }
 }
 unsafe extern "C" fn chrom_ftilt_lw(fighter: &mut L2CAgentBase) {
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.8);
@@ -69,6 +106,23 @@ unsafe extern "C" fn chrom_ftilt_lw(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }		
+unsafe extern "C" fn chrom_ftilt_s_expr(agent: &mut L2CAgentBase) {
+	if macros::is_excute(agent) {
+        slope!(agent, *MA_MSC_CMD_SLOPE_SLOPE, *SLOPE_STATUS_L);
+    }
+    frame(agent.lua_state_agent, 5.0);
+    if macros::is_excute(agent) {
+        ControlModule::set_rumble(agent.module_accessor, Hash40::new("rbkind_nohitm"), 0, false, *BATTLE_OBJECT_ID_INVALID as u32);
+    }
+    frame(agent.lua_state_agent, 7.0);
+    if macros::is_excute(agent) {
+        macros::RUMBLE_HIT(agent, Hash40::new("rbkind_slashm"), 0);
+    }
+    frame(agent.lua_state_agent, 25.0);
+    if macros::is_excute(agent) {
+        slope!(agent, *MA_MSC_CMD_SLOPE_SLOPE_INTP, *SLOPE_STATUS_LR, 3);
+    }
+}
 unsafe extern "C" fn chrom_ftilt_s(fighter: &mut L2CAgentBase) {
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.2857);
 		frame(fighter.lua_state_agent, 7.0);

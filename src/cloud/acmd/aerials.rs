@@ -17,10 +17,24 @@ use super::*;
 pub fn install() {
     Agent::new("cloud")
     .acmd("game_attackairhi", cloud_uair, Priority::Low)    
+    .acmd("expression_attackairhi", cloud_uair_expr, Priority::Low)    
     .acmd("game_attackairlw", cloud_dair, Priority::Low)    
     .install();
 }
 
+unsafe extern "C" fn cloud_uair_expr(agent: &mut L2CAgentBase) {
+	if macros::is_excute(agent) {
+        ItemModule::set_have_item_visibility(agent.module_accessor, false, 0);
+    }
+    frame(agent.lua_state_agent, 6.0);
+    if macros::is_excute(agent) {
+        ControlModule::set_rumble(agent.module_accessor, Hash40::new("rbkind_nohitm"), 0, false, *BATTLE_OBJECT_ID_INVALID as u32);
+    }
+    frame(agent.lua_state_agent, 7.0);
+    if macros::is_excute(agent) {
+        macros::RUMBLE_HIT(agent, Hash40::new("rbkind_slashm"), 0);
+    }
+}
 unsafe extern "C" fn cloud_uair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 2.0);

@@ -45,6 +45,8 @@ pub fn install() {
     .acmd("effect_specialairs1", joker_sideb_eff, Priority::Low)    
     .acmd("sound_specials1", joker_sideb_snd, Priority::Low)    
     .acmd("sound_specialairs1", joker_sideb_snd, Priority::Low)    
+    .acmd("sound_specials1", joker_sideb_expr, Priority::Low)    
+    .acmd("sound_specialairs1", joker_sideb_expr, Priority::Low)    
     .install();
 }
 	
@@ -503,4 +505,29 @@ unsafe extern "C" fn joker_sideb_snd(fighter: &mut L2CAgentBase) {
 				macros::PLAY_SE(fighter, Hash40::new("se_common_swing_08"));
 			}
 		}
+}	
+
+
+unsafe extern "C" fn joker_sideb_expr(agent: &mut L2CAgentBase) {
+	let lua_state = agent.lua_state_agent;
+	let ENTRY_ID = WorkModule::get_int(agent.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+	if BATON_TYPE[ENTRY_ID] == 0 { //Skull (Ryuji)
+		frame(agent.lua_state_agent, 15.0);
+		if macros::is_excute(agent) {
+			macros::RUMBLE_HIT(agent, Hash40::new("rbkind_attackl"), 0);
+			ControlModule::set_rumble(agent.module_accessor, Hash40::new("rbkind_elecattack"), 0, true, *BATTLE_OBJECT_ID_INVALID as u32);
+		}
+	} else if BATON_TYPE[ENTRY_ID] == 1 { // Panther (Ann)
+		frame(agent.lua_state_agent, 20.0);
+		if macros::is_excute(agent) {
+			macros::RUMBLE_HIT(agent, Hash40::new("rbkind_explosion"), 0);
+			ControlModule::set_rumble(agent.module_accessor, Hash40::new("rbkind_nohit_explosion"), 0, false, *BATTLE_OBJECT_ID_INVALID as u32);
+		}
+	} else { //Mona (Morgana)
+		frame(agent.lua_state_agent, 15.0);
+		if macros::is_excute(agent) {
+			macros::RUMBLE_HIT(agent, Hash40::new("rbkind_attackm"), 0);
+			ControlModule::set_rumble(agent.module_accessor, Hash40::new("rbkind_nohitm"), 0, false, *BATTLE_OBJECT_ID_INVALID as u32);
+		}
+	}
 }	

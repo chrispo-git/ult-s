@@ -20,6 +20,7 @@ pub fn install() {
     .acmd("game_attackhi3", ink_utilt, Priority::Low)    
     .acmd("effect_attackhi3", ink_utilt_eff, Priority::Low)    
     .acmd("sound_attackhi3", ink_utilt_sound, Priority::Low)    
+    .acmd("expression_attackhi3", ink_utilt_expr, Priority::Low)    
     .install();
 }
 
@@ -111,4 +112,26 @@ unsafe extern "C" fn ink_utilt_sound(fighter: &mut L2CAgentBase) {
 		if macros::is_excute(fighter) {
 			macros::PLAY_STATUS(fighter, Hash40::new("se_inkling_attackair_h01"));
 		}
+}	
+unsafe extern "C" fn ink_utilt_expr(agent: &mut L2CAgentBase) {
+    if macros::is_excute(agent) {
+        slope!(agent, *MA_MSC_CMD_SLOPE_SLOPE, *SLOPE_STATUS_LR);
+    }
+    frame(agent.lua_state_agent, 6.0);
+    if macros::is_excute(agent) {        
+		slope!(agent, *MA_MSC_CMD_SLOPE_SLOPE_INTP, *SLOPE_STATUS_NONE, 3);
+        macros::RUMBLE_HIT(agent, Hash40::new("rbkind_attacks"), 0);
+    }
+    frame(agent.lua_state_agent, 10.0);
+    if macros::is_excute(agent) {
+        ControlModule::set_rumble(agent.module_accessor, Hash40::new("rbkind_nohits"), 3, false, *BATTLE_OBJECT_ID_INVALID as u32);
+    }
+    frame(agent.lua_state_agent, 16.0);
+    if macros::is_excute(agent) {
+        ControlModule::set_rumble(agent.module_accessor, Hash40::new("rbkind_nohits"), 0, false, *BATTLE_OBJECT_ID_INVALID as u32);
+    }
+	frame(agent.lua_state_agent, 26.0);
+    if macros::is_excute(agent) {
+        slope!(agent, *MA_MSC_CMD_SLOPE_SLOPE_INTP, *SLOPE_STATUS_LR, 3);
+    }
 }	
