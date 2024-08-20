@@ -18,7 +18,8 @@ pub fn install() {
 	Agent::new("gamewatch")
     .acmd("game_attackairlw", gnw_dair, Priority::Low)    
     .acmd("game_landingairlw", gnw_dair_land, Priority::Low)    
-    .acmd("game_attackairf", gnw_fair, Priority::Low)     
+    .acmd("game_attackairf", gnw_fair, Priority::Low)      
+    .acmd("expression_attackairf", gnw_fair_expr, Priority::Low)     
     .install();
 
 	Agent::new("gamewatch_breath")
@@ -83,6 +84,16 @@ unsafe extern "C" fn gnw_fair(fighter: &mut L2CAgentBase) {
 		if macros::is_excute(fighter) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
+}	
+unsafe extern "C" fn gnw_fair_expr(agent: &mut L2CAgentBase) {
+    frame(agent.lua_state_agent, 9.0);
+    if macros::is_excute(agent) {
+        ControlModule::set_rumble(agent.module_accessor, Hash40::new("rbkind_nohitm"), 0, false, *BATTLE_OBJECT_ID_INVALID as u32);
+    }
+    frame(agent.lua_state_agent, 10.0);
+    if macros::is_excute(agent) {
+        macros::RUMBLE_HIT(agent, Hash40::new("rbkind_attackm"), 0);
+    }
 }	
 unsafe extern "C" fn gnw_uair_breath(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
