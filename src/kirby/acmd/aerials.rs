@@ -21,9 +21,11 @@ pub fn install() {
     .acmd("game_attackairlw", kirby_dair, Priority::Low)    
     .acmd("effect_attackairlw", kirby_dair_eff, Priority::Low)    
     .acmd("sound_attackairlw", kirby_dair_snd, Priority::Low)    
+    .acmd("expression_attackairlw", kirby_dair_expr, Priority::Low)    
     .acmd("game_landingairlw", kirby_landing_dair, Priority::Low)    
     .acmd("effect_attackairb", kirby_bair_eff, Priority::Low)    
     .acmd("sound_attackairb", kirby_bair_snd, Priority::Low)    
+    .acmd("expression_attackairb", kirby_bair_expr, Priority::Low)    
     .acmd("game_landingairb", kirby_landing_bair, Priority::Low)    
     .install();
 }
@@ -163,7 +165,26 @@ unsafe extern "C" fn kirby_dair_snd(fighter: &mut L2CAgentBase) {
 			macros::PLAY_SE(fighter, Hash40::new("se_kirby_swing_l"));
 			macros::PLAY_SEQUENCE(fighter, Hash40::new("seq_kirby_rnd_attack"));
 		}
-	}	
+}	
+unsafe extern "C" fn kirby_dair_expr(agent: &mut L2CAgentBase) {
+	frame(agent.lua_state_agent, 13.0);
+    if macros::is_excute(agent) {
+        ControlModule::set_rumble(agent.module_accessor, Hash40::new("rbkind_nohits"), 8, false, *BATTLE_OBJECT_ID_INVALID as u32);
+    }
+    frame(agent.lua_state_agent, 15.0);
+    if macros::is_excute(agent) {
+        macros::RUMBLE_HIT(agent, Hash40::new("rbkind_attackss"), 9);
+    }
+    frame(agent.lua_state_agent, 22.0);
+    if macros::is_excute(agent) {
+        ControlModule::set_rumble(agent.module_accessor, Hash40::new("rbkind_nohits"), 8, false, *BATTLE_OBJECT_ID_INVALID as u32);
+    }
+    frame(agent.lua_state_agent, 31.0);
+    if macros::is_excute(agent) {
+        macros::RUMBLE_HIT(agent, Hash40::new("rbkind_attackm"), 0);
+        ControlModule::set_rumble(agent.module_accessor, Hash40::new("rbkind_nohits"), 0, false, *BATTLE_OBJECT_ID_INVALID as u32);
+    }
+}	
 unsafe extern "C" fn kirby_landing_dair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	
@@ -199,7 +220,18 @@ unsafe extern "C" fn kirby_bair_snd(fighter: &mut L2CAgentBase) {
 			macros::PLAY_SE(fighter, Hash40::new("se_kirby_swing_l"));
 			macros::PLAY_SEQUENCE(fighter, Hash40::new("seq_kirby_rnd_attack"));
 		}
-	}	
+}	
+unsafe extern "C" fn kirby_bair_expr(agent: &mut L2CAgentBase) {
+    
+	frame(agent.lua_state_agent, 8.0);
+    if macros::is_excute(agent) {
+        ControlModule::set_rumble(agent.module_accessor, Hash40::new("rbkind_nohitm"), 8, false, *BATTLE_OBJECT_ID_INVALID as u32);
+    }
+    frame(agent.lua_state_agent, 10.0);
+    if macros::is_excute(agent) {
+        macros::RUMBLE_HIT(agent, Hash40::new("rbkind_slashs"), 9);
+    }
+}	
 unsafe extern "C" fn kirby_landing_bair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	
