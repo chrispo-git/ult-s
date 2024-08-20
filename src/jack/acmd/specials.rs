@@ -510,7 +510,7 @@ unsafe extern "C" fn joker_sideb_snd(fighter: &mut L2CAgentBase) {
 
 unsafe extern "C" fn joker_sideb_expr(agent: &mut L2CAgentBase) {
 	let lua_state = agent.lua_state_agent;
-	let ENTRY_ID = WorkModule::get_int(agent.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;#
+	let ENTRY_ID = WorkModule::get_int(agent.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 	if BATON_TYPE[ENTRY_ID] == 0 { //Skull (Ryuji)
 		frame(agent.lua_state_agent, 15.0);
 		if macros::is_excute(agent) {
