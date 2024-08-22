@@ -69,9 +69,9 @@ pub fn quick_validate_install() -> bool {
         println!("libparam_config.nro is present");
     } else {
         if is_on_ryujinx() {
-            println!("libparam_config.nro not found! This installation is incomplete. Please download all dependencies listed in the README file.");
+            println!("libparam_config.nro not found! This installation is incomplete. Please run Ultimate S Setup Tool.");
         } else {
-            DialogOk::ok("libparam_config.nro not found! This installation is incomplete. Please download all dependencies listed in the README file.");
+            DialogOk::ok("libparam_config.nro not found! This installation is incomplete. Please run Ultimate S Setup Tool.");
         }
         passed = false;
     }
@@ -79,9 +79,9 @@ pub fn quick_validate_install() -> bool {
         println!("libthe_csk_collection.nro is present");
     } else {
         if is_on_ryujinx() {
-            println!("libthe_csk_collection.nro not found! This installation is incomplete. Please download all dependencies listed in the README file.");
+            println!("libthe_csk_collection.nro not found! This installation is incomplete. Please run Ultimate S Setup Tool.");
         } else {
-            DialogOk::ok("libthe_csk_collection.nro not found! This installation is incomplete. Please download all dependencies listed in the README file.");
+            DialogOk::ok("libthe_csk_collection.nro not found! This installation is incomplete. Please run Ultimate S Setup Tool.");
         }
         passed = false;
     }
@@ -89,9 +89,9 @@ pub fn quick_validate_install() -> bool {
         println!("libarcropolis.nro is present");
     } else {
         if is_on_ryujinx() {
-            println!("libarcropolis.nro not found! This installation is incomplete. Please download all dependencies listed in the README file.");
+            println!("libarcropolis.nro not found! This installation is incomplete. Please run Ultimate S Setup Tool.");
         } else {
-            DialogOk::ok("libarcropolis.nro not found! This installation is incomplete. Please download all dependencies listed in the README file.");
+            DialogOk::ok("libarcropolis.nro not found! This installation is incomplete. Please run Ultimate S Setup Tool.");
         }
         passed = false;
     }
@@ -99,9 +99,9 @@ pub fn quick_validate_install() -> bool {
         println!("libnro_hook.nro is present");
     } else {
         if is_on_ryujinx() {
-            println!("libnro_hook.nro not found! This installation is incomplete. Please download all dependencies listed in the README file.");
+            println!("libnro_hook.nro not found! This installation is incomplete. Please run Ultimate S Setup Tool.");
         } else {
-            DialogOk::ok("libnro_hook.nro not found! This installation is incomplete. Please download all dependencies listed in the README file.");
+            DialogOk::ok("libnro_hook.nro not found! This installation is incomplete. Please run Ultimate S Setup Tool.");
         }
         passed = false;
     }
@@ -109,9 +109,9 @@ pub fn quick_validate_install() -> bool {
         println!("libsmashline_plugin.nro is present");
     } else {
         if is_on_ryujinx() {
-            println!("libsmashline_plugin.nro not found! This installation is incomplete. Please download all dependencies listed in the README file.");
+            println!("libsmashline_plugin.nro not found! This installation is incomplete. Please run Ultimate S Setup Tool.");
         } else {
-            DialogOk::ok("libsmashline_plugin.nro not found! This installation is incomplete. Please download all dependencies listed in the README file.");
+            DialogOk::ok("libsmashline_plugin.nro not found! This installation is incomplete. Please run Ultimate S Setup Tool.");
         }
         passed = false;
     }
@@ -460,7 +460,7 @@ pub extern "C" fn main() {
         println!("edge installed");
     }
 
-    if Path::new("sd:/ultimate/ult-s/element.flag").is_file() {
+    if Path::new("sd:/ultimate/ult-s/elight.flag").is_file() || Path::new("sd:/ultimate/ult-s/eflame.flag").is_file(){
         element::install();
         println!("element installed");
     }
@@ -670,7 +670,7 @@ pub extern "C" fn main() {
         println!("popo installed");
     }
 
-    if Path::new("sd:/ultimate/ult-s/ptrainer.flag").is_file() {
+    if Path::new("sd:/ultimate/ult-s/pfushigisou.flag").is_file() || Path::new("sd:/ultimate/ult-s/pzenigame.flag").is_file()  || Path::new("sd:/ultimate/ult-s/plizardon.flag").is_file() {
         ptrainer::install();
         println!("ptrainer installed");
     }

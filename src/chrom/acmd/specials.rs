@@ -18,6 +18,8 @@ pub fn install() {
     Agent::new("chrom")
     .acmd("game_specials1", chrom_sideb, Priority::Low)    
     .acmd("game_specialairs1", chrom_sideb, Priority::Low)    
+    .acmd("game_specials1", chrom_sideb_expr, Priority::Low)    
+    .acmd("game_specialairs1", chrom_sideb_expr, Priority::Low)    
     .acmd("effect_specials1", chrom_sideb_eff, Priority::Low)    
     .acmd("effect_specialairs1", chrom_sideb_eff, Priority::Low)    
     .acmd("sound_specials1", chrom_sideb_snd, Priority::Low)    
@@ -31,6 +33,23 @@ pub fn install() {
     .install();
 }	
 
+unsafe extern "C" fn chrom_sideb_expr(agent: &mut L2CAgentBase) {
+	if macros::is_excute(agent) {
+        slope!(agent, *MA_MSC_CMD_SLOPE_SLOPE, *SLOPE_STATUS_L);
+    }
+    frame(agent.lua_state_agent, 4.0);
+    if macros::is_excute(agent) {
+        ControlModule::set_rumble(agent.module_accessor, Hash40::new("rbkind_nohits"), 0, false, *BATTLE_OBJECT_ID_INVALID as u32);
+    }
+    frame(agent.lua_state_agent, 10.0);
+    if macros::is_excute(agent) {
+        macros::RUMBLE_HIT(agent, Hash40::new("rbkind_attacks"), 0);
+    }
+    frame(agent.lua_state_agent, 25.0);
+    if macros::is_excute(agent) {
+        slope!(agent, *MA_MSC_CMD_SLOPE_SLOPE_INTP, *SLOPE_STATUS_LR, 3);
+    }
+}
 unsafe extern "C" fn chrom_sideb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 10.0);

@@ -132,6 +132,11 @@ unsafe extern "C" fn corrin_usmash_expr(fighter: &mut L2CAgentBase) {
 			ItemModule::set_have_item_visibility(fighter.module_accessor, false, 0);
 			WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_KAMUI_INSTANCE_WORK_ID_FLAG_OFF_EFFECT_SWORD_AURA);
 		}
+		frame(fighter.lua_state_agent, 12.0);
+		if macros::is_excute(fighter) {
+			macros::RUMBLE_HIT(fighter, Hash40::new("rbkind_attackl"), 0);
+        	ControlModule::set_rumble(fighter.module_accessor, Hash40::new("rbkind_nohitl"), 0, false, *BATTLE_OBJECT_ID_INVALID as u32);
+		}
 		frame(fighter.lua_state_agent, 16.0);
 		if macros::is_excute(fighter) {
 			macros::QUAKE(fighter, *CAMERA_QUAKE_KIND_S);

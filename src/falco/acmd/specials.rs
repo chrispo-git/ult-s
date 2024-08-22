@@ -18,7 +18,10 @@ pub fn install() {
     Agent::new("falco")
     .acmd("game_speciallw", falco_shine, Priority::Low)    
     .acmd("game_specialairlw", falco_shine, Priority::Low)     
+    .acmd("effect_speciallw", falco_shine_eff, Priority::Low)   
     .acmd("effect_specialairlw", falco_shine_eff, Priority::Low)   
+    .acmd("expression_speciallw", falco_shine_expr, Priority::Low)   
+    .acmd("expression_speciallw", falco_shine_expr, Priority::Low)   
     .install();
 
 	Agent::new("falco_blaster_bullet")
@@ -83,3 +86,13 @@ unsafe extern "C" fn falco_shine_eff(fighter: &mut L2CAgentBase) {
 			macros::EFFECT_OFF_KIND(fighter, Hash40::new_raw(0x0fdc7fb0a0), true, false);
 		}
 }			
+unsafe extern "C" fn falco_shine_expr(agent: &mut L2CAgentBase) {
+    if macros::is_excute(agent) {
+        slope!(agent, *MA_MSC_CMD_SLOPE_SLOPE, *SLOPE_STATUS_LR);
+        ControlModule::set_rumble(agent.module_accessor, Hash40::new("rbkind_shield_on"), 0, false, *BATTLE_OBJECT_ID_INVALID as u32);
+    }
+    frame(agent.lua_state_agent, 4.0);
+    if macros::is_excute(agent) {
+        macros::RUMBLE_HIT(agent, Hash40::new("rbkind_attacks"), 0);
+    }
+}		

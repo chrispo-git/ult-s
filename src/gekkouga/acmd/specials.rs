@@ -22,6 +22,8 @@ pub fn install() {
     .acmd("effect_speciallw", gren_downb_eff, Priority::Low)    
     .acmd("sound_specialairlw", gren_downb_snd, Priority::Low)    
     .acmd("sound_speciallw", gren_downb_snd, Priority::Low)    
+    .acmd("expression_specialairlw", gren_downb_expr, Priority::Low)    
+    .acmd("expression_speciallw", gren_downb_expr, Priority::Low)    
     .install();
 }
 
@@ -96,3 +98,13 @@ unsafe extern "C" fn gren_downb_snd(fighter: &mut L2CAgentBase) {
 			macros::PLAY_SE(fighter, Hash40::new("se_gekkouga_attackair_n01"));
 		}
 }	
+unsafe extern "C" fn gren_downb_expr(agent: &mut L2CAgentBase) {
+    frame(agent.lua_state_agent, 13.0);
+    if macros::is_excute(agent) {
+        ControlModule::set_rumble(agent.module_accessor, Hash40::new("rbkind_nohitm"), 2, false, *BATTLE_OBJECT_ID_INVALID as u32);
+    }
+    frame(agent.lua_state_agent, 15.0);
+    if macros::is_excute(agent) {
+        macros::RUMBLE_HIT(agent, Hash40::new("rbkind_attackm"), 0);
+    }
+}		

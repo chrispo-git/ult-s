@@ -16,7 +16,8 @@ use super::*;
 
 pub fn install() {
     Agent::new("ganon")
-    .acmd("game_attackhi4", ganon_usmash, Priority::Low)    
+    .acmd("game_attackhi4", ganon_usmash, Priority::Low)   
+    .acmd("expression_attackhi4", ganon_usmash_expr, Priority::Low)    
     .acmd("game_attack11", ganon_jab, Priority::Low)    
     .acmd("game_attacks4", ganon_fsmash, Priority::Low)    
     .install();
@@ -43,6 +44,33 @@ unsafe extern "C" fn ganon_usmash(fighter: &mut L2CAgentBase) {
 		if macros::is_excute(fighter) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
+}	
+unsafe extern "C" fn ganon_usmash_expr(agent: &mut L2CAgentBase) {
+    if macros::is_excute(agent) {
+        slope!(agent, *MA_MSC_CMD_SLOPE_SLOPE, *SLOPE_STATUS_LR);
+        ItemModule::set_have_item_visibility(agent.module_accessor, false, 0);
+    }
+    frame(agent.lua_state_agent, 10.0);
+    if macros::is_excute(agent) {
+        ItemModule::set_have_item_visibility(agent.module_accessor, false, 0);
+        slope!(agent, *MA_MSC_CMD_SLOPE_SLOPE, *SLOPE_STATUS_LR);
+    }
+    frame(agent.lua_state_agent, 16.0);
+    if macros::is_excute(agent) {
+        ControlModule::set_rumble(agent.module_accessor, Hash40::new("rbkind_nohitl"), 0, false, *BATTLE_OBJECT_ID_INVALID as u32);
+    }
+    frame(agent.lua_state_agent, 20.0);
+    if macros::is_excute(agent) {
+        macros::RUMBLE_HIT(agent, Hash40::new("rbkind_slashl"), 0);
+    }
+    frame(agent.lua_state_agent, 27.0);
+    if macros::is_excute(agent) {
+        ControlModule::set_rumble(agent.module_accessor, Hash40::new("rbkind_impact"), 0, false, *BATTLE_OBJECT_ID_INVALID as u32);
+    }
+    frame(agent.lua_state_agent, 60.0);
+    if macros::is_excute(agent) {
+        ItemModule::set_have_item_visibility(agent.module_accessor, true, 0);
+    }
 }	
 		
 unsafe extern "C" fn ganon_jab(fighter: &mut L2CAgentBase) {

@@ -18,10 +18,11 @@ pub fn install() {
     Agent::new("gekkouga")
     .acmd("game_attackairn", gren_nair, Priority::Low)    
     .acmd("game_attackairb", gren_bair, Priority::Low)    
-    .acmd("game_attackairhi", gren_uair, Priority::Low)    
-    .acmd("game_attackairf", gren_fair, Priority::Low)    
     .acmd("effect_attackairb", gren_bair_eff, Priority::Low)    
     .acmd("sound_attackairb", gren_bair_snd, Priority::Low)    
+    .acmd("expression_attackairb", gren_bair_expr, Priority::Low)    
+    .acmd("game_attackairhi", gren_uair, Priority::Low)    
+    .acmd("game_attackairf", gren_fair, Priority::Low)    
     .install();
 }
 
@@ -169,4 +170,14 @@ unsafe extern "C" fn gren_bair_snd(fighter: &mut L2CAgentBase) {
 		if macros::is_excute(fighter) {
 			macros::PLAY_SE(fighter, Hash40::new("se_gekkouga_attackair_b01"));
 		}
+}		
+unsafe extern "C" fn gren_bair_expr(agent: &mut L2CAgentBase) {
+    frame(agent.lua_state_agent, 13.0);
+    if macros::is_excute(agent) {
+        ControlModule::set_rumble(agent.module_accessor, Hash40::new("rbkind_nohitm"), 2, false, *BATTLE_OBJECT_ID_INVALID as u32);
+    }
+    frame(agent.lua_state_agent, 15.0);
+    if macros::is_excute(agent) {
+        macros::RUMBLE_HIT(agent, Hash40::new("rbkind_attackm"), 0);
+    }
 }		

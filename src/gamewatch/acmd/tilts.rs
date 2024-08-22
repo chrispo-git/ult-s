@@ -18,6 +18,7 @@ pub fn install() {
     Agent::new("gamewatch")
     .acmd("game_attacks3", gnw_ftilt, Priority::Low)    
     .acmd("game_attacklw3", gnw_dtilt, Priority::Low)    
+    .acmd("expression_attacklw3", gnw_dtilt_expr, Priority::Low)    
     .acmd("game_attackhi3", gnw_utilt, Priority::Low)     
     .install();
 }
@@ -72,6 +73,16 @@ unsafe extern "C" fn gnw_dtilt(fighter: &mut L2CAgentBase) {
 			ArticleModule::remove(fighter.module_accessor, *FIGHTER_GAMEWATCH_GENERATE_ARTICLE_NORMAL_WEAPON,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
 		}
 }			
+unsafe extern "C" fn gnw_dtilt_expr(agent: &mut L2CAgentBase) {
+    frame(agent.lua_state_agent, 5.0);
+    if macros::is_excute(agent) {
+        ControlModule::set_rumble(agent.module_accessor, Hash40::new("rbkind_nohitm"), 0, false, *BATTLE_OBJECT_ID_INVALID as u32);
+    }
+    frame(agent.lua_state_agent, 7.0);
+    if macros::is_excute(agent) {
+        macros::RUMBLE_HIT(agent, Hash40::new("rbkind_attackm"), 0);
+    }
+}		
 unsafe extern "C" fn gnw_utilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {

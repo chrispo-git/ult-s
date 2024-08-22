@@ -20,6 +20,7 @@ pub fn install() {
     .acmd("game_attackairn", falco_nair, Priority::Low)    
     .acmd("effect_attackairn", falco_nair_eff, Priority::Low)    
     .acmd("sound_attackairn", falco_nair_snd, Priority::Low)   
+    .acmd("expression_attackairn", falco_nair_expr, Priority::Low)   
     .install();
 }
 
@@ -105,6 +106,16 @@ unsafe extern "C" fn falco_nair_snd(fighter: &mut L2CAgentBase) {
 			macros::PLAY_SEQUENCE(fighter, Hash40::new("seq_falco_rnd_attack"));
 			macros::PLAY_SE(fighter, Hash40::new("se_falco_swing_m"));
 		}
+}	
+unsafe extern "C" fn falco_nair_expr(agent: &mut L2CAgentBase) {
+    frame(agent.lua_state_agent, 6.0);
+    if macros::is_excute(agent) {
+        ControlModule::set_rumble(agent.module_accessor, Hash40::new("rbkind_nohitm"), 0, false, *BATTLE_OBJECT_ID_INVALID as u32);
+    }
+    frame(agent.lua_state_agent, 8.0);
+    if macros::is_excute(agent) {
+        macros::RUMBLE_HIT(agent, Hash40::new("rbkind_attackm"), 0);
+    }
 }	
 unsafe extern "C" fn falco_fair(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 1.0);

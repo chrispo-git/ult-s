@@ -19,9 +19,11 @@ pub fn install() {
     .acmd("game_attackairf", ink_fair, Priority::Low)    
     .acmd("effect_attackairf", ink_fair_eff, Priority::Low)    
     .acmd("sound_attackairf", ink_fair_snd, Priority::Low)    
+    .acmd("expression_attackairf", ink_fair_expr, Priority::Low)    
     .acmd("game_attackairhi", ink_uair, Priority::Low)    
     .acmd("effect_attackairhi", ink_uair_eff, Priority::Low)    
     .acmd("sound_attackairhi", ink_uair_sound, Priority::Low)    
+    .acmd("expression_attackairhi", ink_uair_expr, Priority::Low)    
     .acmd("game_attackairb", ink_bair, Priority::Low)    
     .acmd("game_attackairn", ink_nair, Priority::Low)    
     .acmd("game_attackairlw", ink_dair, Priority::Low)    
@@ -52,6 +54,13 @@ unsafe extern "C" fn ink_fair(fighter: &mut L2CAgentBase) {
 	if macros::is_excute(fighter) {
 		WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 	}
+}		
+unsafe extern "C" fn ink_fair_expr(agent: &mut L2CAgentBase) {
+	frame(agent.lua_state_agent, 12.0);
+    if macros::is_excute(agent) {
+        macros::RUMBLE_HIT(agent, Hash40::new("rbkind_explosion"), 0);
+        ControlModule::set_rumble(agent.module_accessor, Hash40::new("rbkind_nohit_explosion"), 0, false, *BATTLE_OBJECT_ID_INVALID as u32);
+    }
 }		
 unsafe extern "C" fn ink_fair_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
@@ -105,6 +114,16 @@ unsafe extern "C" fn ink_uair(fighter: &mut L2CAgentBase) {
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
 		}
 }	
+unsafe extern "C" fn ink_uair_expr(agent: &mut L2CAgentBase) {
+	frame(agent.lua_state_agent, 4.0);
+    if macros::is_excute(agent) {
+        ControlModule::set_rumble(agent.module_accessor, Hash40::new("rbkind_nohitm"), 0, false, *BATTLE_OBJECT_ID_INVALID as u32);
+    }
+    frame(agent.lua_state_agent, 5.0);
+    if macros::is_excute(agent) {
+        macros::RUMBLE_HIT(agent, Hash40::new("rbkind_attackm"), 0);
+    }
+}		
 unsafe extern "C" fn ink_uair_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 8.0);
