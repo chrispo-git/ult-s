@@ -24,6 +24,8 @@ pub fn install() {
     .acmd("effect_attackairlw", zss_dair_eff, Priority::Low)    
     .acmd("effect_landingairlw", zss_dair_land_eff, Priority::Low)    
     .acmd("game_landingairlw", zss_dair_land, Priority::Low)    
+    .acmd("sound_landingairlw", zss_dair_land_snd, Priority::Low)    
+    .acmd("expression_landingairlw", zss_dair_land_expr, Priority::Low)    
     .acmd("sound_attackairlw", zss_dair_snd, Priority::Low)    
     .install();
 }
@@ -143,12 +145,32 @@ unsafe extern "C" fn zss_dair(fighter: &mut L2CAgentBase) {
 }			
 unsafe extern "C" fn zss_dair_land(fighter: &mut L2CAgentBase) {
 }
-unsafe extern "C" fn zss_dair_land_eff(fighter: &mut L2CAgentBase) {
-    	let lua_state = fighter.lua_state_agent;
-		if macros::is_excute(fighter) {
-			macros::LANDING_EFFECT(fighter, Hash40::new("sys_crown"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
-		}
-}	
+unsafe extern "C" fn zss_dair_land_eff(agent: &mut L2CAgentBase) {
+    if macros::is_excute(agent) {
+        macros::LANDING_EFFECT(agent, Hash40::new("sys_down_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
+    }
+}
+
+unsafe extern "C" fn zss_dair_land_snd(agent: &mut L2CAgentBase) {
+    frame(agent.lua_state_agent, 3.0);
+    if macros::is_excute(agent) {
+        macros::PLAY_LANDING_SE(agent, Hash40::new("se_szerosuit_landing02"));
+    }
+}
+
+unsafe extern "C" fn zss_dair_land_expr(agent: &mut L2CAgentBase) {
+    if macros::is_excute(agent) {
+        ControlModule::set_rumble(agent.module_accessor, Hash40::new("rbkind_landl"), 0, false, *BATTLE_OBJECT_ID_INVALID as u32);
+    }
+    frame(agent.lua_state_agent, 27.0);
+    if macros::is_excute(agent) {
+        slope!(agent, *MA_MSC_CMD_SLOPE_SLOPE_INTP, *SLOPE_STATUS_LR, 2);
+    }
+    frame(agent.lua_state_agent, 88.0);
+    if macros::is_excute(agent) {
+        ControlModule::set_rumble(agent.module_accessor, Hash40::new("rbkind_lands"), 0, false, *BATTLE_OBJECT_ID_INVALID as u32);
+    }
+}
 unsafe extern "C" fn zss_dair_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 14.0);
