@@ -10,7 +10,7 @@ static mut IS_JUMP : [bool; 8] = [false; 8];
 
 
 pub fn install() {
-	smashline::clone_weapon("koopajr", "cannonball", "wario", "coin", true);
+	smashline::clone_weapon("koopajr", "cannonball", "wario", "coin", false);
 	
 	frame::install();
 	status::install();

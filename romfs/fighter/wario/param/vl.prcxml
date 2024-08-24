@@ -28,8 +28,8 @@
   </list>
   <list hash="param_coin">
     <struct index="0">
-      <float hash="speed_min">1</float>
-      <float hash="speed_max">2.4</float>
+      <float hash="speed_min">3.5</float>
+      <float hash="speed_max">3.5</float>
       <float hash="attack_mul_min">10</float>
       <float hash="attack_mul_max">20</float>
       <float hash="gravity_start_frame_min">60</float>
@@ -41,7 +41,7 @@
       <float hash="floor_bound_x_mul">0.5</float>
       <float hash="hop_speed_x">0.3</float>
       <float hash="hop_speed_y">1</float>
-      <int hash="life">180</int>
+      <int hash="life">60</int>
     </struct>
     <struct index="1">
       <float hash="speed_min">0</float>
