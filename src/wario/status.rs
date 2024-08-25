@@ -51,7 +51,7 @@ unsafe extern "C" fn shoot_init(weapon: &mut L2CWeaponCommon) -> L2CValue {
     sv_kinetic_energy!(set_stable_speed, weapon, WEAPON_KINETIC_ENERGY_RESERVE_ID_NORMAL, speed_max*lr, speed_y);
     sv_kinetic_energy!(set_accel, weapon, WEAPON_KINETIC_ENERGY_RESERVE_ID_NORMAL, 0.0, 0.0);
     KineticModule::enable_energy(weapon.module_accessor, *WEAPON_KINETIC_ENERGY_RESERVE_ID_NORMAL);
-    PostureModule::set_pos(weapon.module_accessor, &Vector3f{x: owner_pos_x, y: owner_pos_y+7.0, z: owner_pos_z+4.0});
+    PostureModule::set_pos(weapon.module_accessor, &Vector3f{x: owner_pos_x+(17.0*lr), y: owner_pos_y+7.0, z: owner_pos_z});
     0.into()
 }
 

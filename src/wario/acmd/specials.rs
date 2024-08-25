@@ -12,6 +12,7 @@ use std::mem;
 use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
+use crate::wario::*;
 use super::*;
 
 pub fn install() {
@@ -41,9 +42,12 @@ unsafe extern "C" fn wario_sideb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 	let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-		frame(fighter.lua_state_agent, 7.0);
+		frame(fighter.lua_state_agent, 15.0);
 		if macros::is_excute(fighter) {
-			ArticleModule::generate_article(fighter.module_accessor, FIGHTER_WARIO_GENERATE_ARTICLE_COIN, false, -1);
+			if COIN_COUNT[ENTRY_ID] > 0 {
+				COIN_COUNT[ENTRY_ID] -= 1;
+				ArticleModule::generate_article(fighter.module_accessor, FIGHTER_WARIO_GENERATE_ARTICLE_COIN, false, -1);
+			}
 		}
 }	
 unsafe extern "C" fn wario_sideb_eff(fighter: &mut L2CAgentBase) {
@@ -65,7 +69,7 @@ unsafe extern "C" fn wario_sideb_start_snd(fighter: &mut L2CAgentBase) {
 unsafe extern "C" fn game_shoot(agent: &mut L2CAgentBase) {
     let lua_state = agent.lua_state_agent;
     if macros::is_excute(agent) {
-		macros::ATTACK(agent, 0, 0, Hash40::new("top"), 4.0, 48, 52, 0, 90, 3.8, 0.0, 0.0, 0.0, Some(0.0), Some(0.0), Some(0.0), 1.0, 0.0, *ATTACK_SETOFF_KIND_THRU, *ATTACK_LR_CHECK_F, false, 8, 0.0, 0, true, false, false, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_PUNCH, *ATTACK_REGION_OBJECT);
+		macros::ATTACK(agent, 0, 0, Hash40::new("top"), 4.0, 48, 52, 0, 90, 3.8, 0.0, 0.0, 0.0, Some(0.0), Some(0.0), Some(0.0), 1.0, 0.0, *ATTACK_SETOFF_KIND_THRU, *ATTACK_LR_CHECK_F, false, 8, 0.0, 0, true, false, false, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_cutup"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_CUTUP, *ATTACK_REGION_OBJECT);
         AttackModule::enable_safe_pos(agent.module_accessor);
 	}
 }
