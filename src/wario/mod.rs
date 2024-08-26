@@ -5,7 +5,9 @@ mod acmd;
 static mut BAN_SIDEB : [bool; 8] = [false; 8];
 static mut HAS_BOUNCE : [bool; 8] = [false; 8];
 static mut IS_JUMP : [bool; 8] = [false; 8];
+static mut SHOW_COUNT : [bool; 8] = [false; 8];
 static mut COIN_COUNT : [i32; 8] = [0; 8];
+static mut ALPHA_COUNTER : [f32; 8] = [0.0; 8];
 			
 
 

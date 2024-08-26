@@ -24,6 +24,9 @@ pub fn install() {
         .status(Exec, WEAPON_WARIO_COIN_STATUS_KIND_SHOOT, shoot_exec)
         .status(End, WEAPON_WARIO_COIN_STATUS_KIND_SHOOT, shoot_end)
         .install();
+    Agent::new("wario_counter")
+        .status(Exec, WEAPON_WARIO_COUNTER_STATUS_KIND_APPEAR, counter_exec)
+        .install();
 }
 
 
@@ -121,5 +124,76 @@ unsafe extern "C" fn shoot_exec(weapon: &mut L2CWeaponCommon) -> L2CValue {
 
 unsafe extern "C" fn shoot_end(weapon: &mut L2CWeaponCommon) -> L2CValue {
     EffectModule::kill_kind(weapon.module_accessor, Hash40::new("poke_meloetta_bullet"), false, false);
+    0.into()
+}
+
+
+unsafe extern "C" fn counter_exec(weapon: &mut L2CWeaponCommon) -> L2CValue {
+    let otarget_id = WorkModule::get_int(weapon.module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LINK_OWNER) as u32;
+    let boma = smash::app::sv_battle_object::module_accessor(otarget_id);
+    let ENTRY_ID = WorkModule::get_int(&mut *boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+    let status_kind = StatusModule::status_kind(weapon.module_accessor);
+    let coin_count = COIN_COUNT[ENTRY_ID];
+    if true {
+        if PostureModule::lr(&mut *boma) < 0.0 {
+            let mut rotation = Vector3f{x: 0.0, y: 180.0 , z: 0.0};
+            ModelModule::set_joint_rotate(weapon.module_accessor, Hash40::new("pacmanapple"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});    
+        }
+
+        println!("Coin Count: {}", coin_count);
+        let tens = (coin_count / 10) as i32;
+        let ones = (coin_count % 10) as i32;
+        
+
+        ModelModule::set_mesh_visibility(weapon.module_accessor,Hash40::new("0_0"),false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor,Hash40::new("0_1"),false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor,Hash40::new("0_2"),false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor,Hash40::new("0_3"),false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor,Hash40::new("0_4"),false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor,Hash40::new("0_5"),false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor,Hash40::new("0_6"),false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor,Hash40::new("0_7"),false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor,Hash40::new("0_8"),false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor,Hash40::new("0_9"),false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor,Hash40::new("1_0"),false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor,Hash40::new("1_1"),false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor,Hash40::new("1_2"),false);
+        ModelModule::set_mesh_visibility(weapon.module_accessor,Hash40::new("1_3"),false);
+        
+        ModelModule::set_mesh_visibility(weapon.module_accessor,Hash40::new("coin"),true);
+        match tens {
+            1 => ModelModule::set_mesh_visibility(weapon.module_accessor,Hash40::new("1_1"),true),
+            2 => ModelModule::set_mesh_visibility(weapon.module_accessor,Hash40::new("1_2"),true),
+            3 => ModelModule::set_mesh_visibility(weapon.module_accessor,Hash40::new("1_3"),true),
+            _ => ModelModule::set_mesh_visibility(weapon.module_accessor,Hash40::new("1_0"),true),
+        };
+
+        match ones {
+            1 => ModelModule::set_mesh_visibility(weapon.module_accessor,Hash40::new("0_1"),true),
+            2 => ModelModule::set_mesh_visibility(weapon.module_accessor,Hash40::new("0_2"),true),
+            3 => ModelModule::set_mesh_visibility(weapon.module_accessor,Hash40::new("0_3"),true),
+            4 => ModelModule::set_mesh_visibility(weapon.module_accessor,Hash40::new("0_4"),true),
+            5 => ModelModule::set_mesh_visibility(weapon.module_accessor,Hash40::new("0_5"),true),
+            6 => ModelModule::set_mesh_visibility(weapon.module_accessor,Hash40::new("0_6"),true),
+            7 => ModelModule::set_mesh_visibility(weapon.module_accessor,Hash40::new("0_7"),true),
+            8 => ModelModule::set_mesh_visibility(weapon.module_accessor,Hash40::new("0_8"),true),
+            9 => ModelModule::set_mesh_visibility(weapon.module_accessor,Hash40::new("0_9"),true),
+            _ => ModelModule::set_mesh_visibility(weapon.module_accessor,Hash40::new("0_0"),true),
+        };
+        if SHOW_COUNT[ENTRY_ID] {
+            if ALPHA_COUNTER[ENTRY_ID] < 1.0 {
+                ALPHA_COUNTER[ENTRY_ID] += 0.075;
+            } else {
+                ALPHA_COUNTER[ENTRY_ID] = 1.0;
+            }
+        } else {
+            if ALPHA_COUNTER[ENTRY_ID] > 0.0 {
+                ALPHA_COUNTER[ENTRY_ID] -= 0.1;
+            } else {
+                ALPHA_COUNTER[ENTRY_ID] = 0.0;
+            }
+        }
+        ModelModule::set_alpha(weapon.module_accessor, ALPHA_COUNTER[ENTRY_ID]);
+    };
     0.into()
 }
