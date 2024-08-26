@@ -61,6 +61,9 @@ pub static mut HAS_ENABLE_100_ON: [bool; 8] = [false; 8];
 pub const FIGHTER_WARIO_GENERATE_ARTICLE_COIN: i32 = 0x3;
 pub const WEAPON_WARIO_COIN_STATUS_KIND_SHOOT: i32 = 0x0;
 
+pub const FIGHTER_WARIO_GENERATE_ARTICLE_COUNTER: i32 = 0x4;
+pub const WEAPON_WARIO_COUNTER_STATUS_KIND_APPEAR: i32 = 0x0;
+
 // Use this for general per-frame fighter-level hooks
 #[skyline::hook(replace = smash::app::lua_bind::WorkModule::is_enable_transition_term)]
 pub unsafe fn is_enable_transition_term_hook(boma: &mut smash::app::BattleObjectModuleAccessor, flag: i32) -> bool {

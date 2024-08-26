@@ -23,6 +23,10 @@ pub fn install() {
 	Agent::new("wario_wariobike")
     .on_line(Main, bike_frame)
     .install();
+
+	Agent::new("wario_counter")
+    .on_line(Main, counter_frame)
+    .install();
 }
 
 unsafe extern "C" fn wario_frame(fighter: &mut L2CFighterCommon) {
@@ -50,6 +54,7 @@ unsafe extern "C" fn wario_frame(fighter: &mut L2CFighterCommon) {
 				ArticleModule::remove_exist(boma, *FIGHTER_WARIO_GENERATE_ARTICLE_WARIOBIKE,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
 			};
 			
+			
 			if [*FIGHTER_WARIO_STATUS_KIND_SPECIAL_S_START].contains(&status_kind) {
 				if StatusModule::is_situation_changed(boma) && situation_kind == *SITUATION_KIND_GROUND {
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_LANDING, true);
@@ -72,8 +77,21 @@ unsafe extern "C" fn wario_frame(fighter: &mut L2CFighterCommon) {
 			if [*FIGHTER_STATUS_KIND_CATCH_ATTACK].contains(&status_kind) && ((end_frame-frame) as i32) == 1 {
 				COIN_COUNT[ENTRY_ID] += 1;
 			};
+			if COIN_COUNT[ENTRY_ID] > 30 {
+				COIN_COUNT[ENTRY_ID] = 30;
+			}
+			if smash::app::smashball::is_training_mode() {
+                if ControlModule::check_button_on_trriger(boma, *CONTROL_PAD_BUTTON_APPEAL_HI) {
+					COIN_COUNT[ENTRY_ID] = 30;
+				}
+			}
 			if is_reset() {
 				COIN_COUNT[ENTRY_ID] = 0;
+				ArticleModule::remove_exist(boma, FIGHTER_WARIO_GENERATE_ARTICLE_COUNTER,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
+			} else {
+				if !ArticleModule::is_exist(fighter.module_accessor, FIGHTER_WARIO_GENERATE_ARTICLE_COUNTER) {
+					ArticleModule::generate_article(fighter.module_accessor, FIGHTER_WARIO_GENERATE_ARTICLE_COUNTER, false, -1);
+				}
 			}
 		}
     }
@@ -89,6 +107,57 @@ unsafe extern "C" fn bike_frame(weapon: &mut L2CFighterBase) {
 				ModelModule::set_scale(weapon.module_accessor, 1.0);
 			} else{
 				ModelModule::set_scale(weapon.module_accessor, 0.0000001);
+			};
+		};
+    }
+}
+unsafe extern "C" fn counter_frame(weapon: &mut L2CFighterBase) {
+    unsafe {
+        let otarget_id = WorkModule::get_int(weapon.module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LINK_OWNER) as u32;
+        let boma = smash::app::sv_battle_object::module_accessor(otarget_id);
+		let ENTRY_ID = WorkModule::get_int(&mut *boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+		let status_kind = StatusModule::status_kind(weapon.module_accessor);
+		let coin_count = COIN_COUNT[ENTRY_ID];
+        if smash::app::utility::get_kind(&mut *boma) == *FIGHTER_KIND_WARIO {
+			println!("Coin Count: {}", coin_count);
+			let tens = (coin_count / 10) as i32;
+			let ones = (coin_count % 10) as i32;
+			
+			ModelModule::set_mesh_visibility(weapon.module_accessor,Hash40::new("coin"),true);
+
+			ModelModule::set_mesh_visibility(weapon.module_accessor,Hash40::new("0_0"),false);
+			ModelModule::set_mesh_visibility(weapon.module_accessor,Hash40::new("0_1"),false);
+			ModelModule::set_mesh_visibility(weapon.module_accessor,Hash40::new("0_2"),false);
+			ModelModule::set_mesh_visibility(weapon.module_accessor,Hash40::new("0_3"),false);
+			ModelModule::set_mesh_visibility(weapon.module_accessor,Hash40::new("0_4"),false);
+			ModelModule::set_mesh_visibility(weapon.module_accessor,Hash40::new("0_5"),false);
+			ModelModule::set_mesh_visibility(weapon.module_accessor,Hash40::new("0_6"),false);
+			ModelModule::set_mesh_visibility(weapon.module_accessor,Hash40::new("0_7"),false);
+			ModelModule::set_mesh_visibility(weapon.module_accessor,Hash40::new("0_8"),false);
+			ModelModule::set_mesh_visibility(weapon.module_accessor,Hash40::new("0_9"),false);
+			ModelModule::set_mesh_visibility(weapon.module_accessor,Hash40::new("1_0"),false);
+			ModelModule::set_mesh_visibility(weapon.module_accessor,Hash40::new("1_1"),false);
+			ModelModule::set_mesh_visibility(weapon.module_accessor,Hash40::new("1_2"),false);
+			ModelModule::set_mesh_visibility(weapon.module_accessor,Hash40::new("1_3"),false);
+
+			match tens {
+				1 => ModelModule::set_mesh_visibility(weapon.module_accessor,Hash40::new("1_1"),true),
+				2 => ModelModule::set_mesh_visibility(weapon.module_accessor,Hash40::new("1_2"),true),
+				3 => ModelModule::set_mesh_visibility(weapon.module_accessor,Hash40::new("1_3"),true),
+				_ => ModelModule::set_mesh_visibility(weapon.module_accessor,Hash40::new("1_0"),true),
+			};
+
+			match ones {
+				1 => ModelModule::set_mesh_visibility(weapon.module_accessor,Hash40::new("0_1"),true),
+				2 => ModelModule::set_mesh_visibility(weapon.module_accessor,Hash40::new("0_2"),true),
+				3 => ModelModule::set_mesh_visibility(weapon.module_accessor,Hash40::new("0_3"),true),
+				4 => ModelModule::set_mesh_visibility(weapon.module_accessor,Hash40::new("0_4"),true),
+				5 => ModelModule::set_mesh_visibility(weapon.module_accessor,Hash40::new("0_5"),true),
+				6 => ModelModule::set_mesh_visibility(weapon.module_accessor,Hash40::new("0_6"),true),
+				7 => ModelModule::set_mesh_visibility(weapon.module_accessor,Hash40::new("0_7"),true),
+				8 => ModelModule::set_mesh_visibility(weapon.module_accessor,Hash40::new("0_8"),true),
+				9 => ModelModule::set_mesh_visibility(weapon.module_accessor,Hash40::new("0_9"),true),
+				_ => ModelModule::set_mesh_visibility(weapon.module_accessor,Hash40::new("0_0"),true),
 			};
 		};
     }
