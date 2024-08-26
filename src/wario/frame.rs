@@ -69,17 +69,6 @@ unsafe extern "C" fn wario_frame(fighter: &mut L2CFighterCommon) {
 					}
 				}
 			};
-			if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_LW {
-				COIN_COUNT[ENTRY_ID] = 0;
-			} else {
-				let tens = (COIN_COUNT[ENTRY_ID] / 10) as i32;
-				match tens {
-					1 => WorkModule::set_int(fighter.module_accessor, 2, *FIGHTER_WARIO_INSTANCE_WORK_ID_INT_GASS_LEVEL),
-					2 => WorkModule::set_int(fighter.module_accessor, 3, *FIGHTER_WARIO_INSTANCE_WORK_ID_INT_GASS_LEVEL),
-					3 => WorkModule::set_int(fighter.module_accessor, 4, *FIGHTER_WARIO_INSTANCE_WORK_ID_INT_GASS_LEVEL),
-					_ => WorkModule::set_int(fighter.module_accessor, 1, *FIGHTER_WARIO_INSTANCE_WORK_ID_INT_GASS_LEVEL),
-				};
-			}
 			if [*FIGHTER_STATUS_KIND_CATCH_ATTACK].contains(&status_kind) && (frame as i32) == 5 {
 				COIN_COUNT[ENTRY_ID] += 1;
 			};
@@ -91,7 +80,35 @@ unsafe extern "C" fn wario_frame(fighter: &mut L2CFighterCommon) {
 					COIN_COUNT[ENTRY_ID] = 30;
 				}
 			}
-			if [*FIGHTER_WARIO_STATUS_KIND_SPECIAL_S_START, *FIGHTER_STATUS_KIND_GUARD_ON, *FIGHTER_STATUS_KIND_GUARD].contains(&status_kind) || WorkModule::is_flag(boma, *FIGHTER_INSTANCE_WORK_ID_FLAG_CURSOR) {
+			let tens = (COIN_COUNT[ENTRY_ID] / 10) as i32;
+			if [*FIGHTER_STATUS_KIND_SPECIAL_LW].contains(&status_kind) {
+				if tens == 3 {
+					if (frame as i32) == 9 {
+						StatusModule::set_situation_kind(boma, smash::app::SituationKind(*SITUATION_KIND_AIR), true);
+						let y = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_lw"), hash40("speed_y_fly"));
+						macros::SET_SPEED_EX(fighter, 0.0, y, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+					}
+				} else if tens == 2 {
+					if (frame as i32) == 5 {
+						StatusModule::set_situation_kind(boma, smash::app::SituationKind(*SITUATION_KIND_AIR), true);
+						let y = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_lw"), hash40("speed_y_large_max"));
+						macros::SET_SPEED_EX(fighter, 0.0, y, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+					}
+				} else if tens == 1 {
+					if (frame as i32) == 10 {
+						StatusModule::set_situation_kind(boma, smash::app::SituationKind(*SITUATION_KIND_AIR), true);
+						let y = WorkModule::get_param_float(fighter.module_accessor, hash40("param_special_lw"), hash40("speed_y_large_min"));
+						macros::SET_SPEED_EX(fighter, 0.0, y, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+					}
+				} else {
+					if (frame as i32) == 10 {
+						StatusModule::set_situation_kind(boma, smash::app::SituationKind(*SITUATION_KIND_AIR), true);
+						macros::SET_SPEED_EX(fighter, 0.0, 1.65, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+					}
+				}
+			}
+
+			if [*FIGHTER_WARIO_STATUS_KIND_SPECIAL_S_START, *FIGHTER_STATUS_KIND_SPECIAL_LW, *FIGHTER_STATUS_KIND_GUARD_ON, *FIGHTER_STATUS_KIND_GUARD, *FIGHTER_STATUS_KIND_CATCH_ATTACK, *FIGHTER_STATUS_KIND_CATCH_WAIT, *FIGHTER_STATUS_KIND_TURN, *FIGHTER_STATUS_KIND_WALK, *FIGHTER_STATUS_KIND_WALK_BRAKE, *FIGHTER_STATUS_KIND_WAIT].contains(&status_kind) {
 				SHOW_COUNT[ENTRY_ID] = true;
 			} else {
 				SHOW_COUNT[ENTRY_ID] = false;

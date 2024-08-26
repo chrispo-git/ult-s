@@ -13,7 +13,7 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
-
+use smash::phx::Vector2f;
 
 
 pub fn install() {
@@ -25,7 +25,12 @@ pub fn install() {
         .status(End, WEAPON_WARIO_COIN_STATUS_KIND_SHOOT, shoot_end)
         .install();
     Agent::new("wario_counter")
-        .status(Exec, WEAPON_WARIO_COUNTER_STATUS_KIND_APPEAR, counter_exec)
+        .status(Main, WEAPON_WARIO_COUNTER_STATUS_KIND_APPEAR, counter_main)
+        .install();
+    Agent::new("wario")
+        .status(Pre, *FIGHTER_STATUS_KIND_SPECIAL_LW, downb_pre)
+        .status(Main, *FIGHTER_STATUS_KIND_SPECIAL_LW, downb_main)
+        .status(End, *FIGHTER_STATUS_KIND_SPECIAL_LW, downb_end)
         .install();
 }
 
@@ -128,14 +133,14 @@ unsafe extern "C" fn shoot_end(weapon: &mut L2CWeaponCommon) -> L2CValue {
 }
 
 
-unsafe extern "C" fn counter_exec(weapon: &mut L2CWeaponCommon) -> L2CValue {
+unsafe extern "C" fn counter_main(weapon: &mut L2CWeaponCommon) -> L2CValue {
     let otarget_id = WorkModule::get_int(weapon.module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LINK_OWNER) as u32;
     let boma = smash::app::sv_battle_object::module_accessor(otarget_id);
     let ENTRY_ID = WorkModule::get_int(&mut *boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
     let status_kind = StatusModule::status_kind(weapon.module_accessor);
     let coin_count = COIN_COUNT[ENTRY_ID];
     if true {
-        if PostureModule::lr(&mut *boma) < 0.0 {
+        if PostureModule::rot_y_lr(&mut *boma) < 0.0 {
             let mut rotation = Vector3f{x: 0.0, y: 180.0 , z: 0.0};
             ModelModule::set_joint_rotate(weapon.module_accessor, Hash40::new("pacmanapple"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});    
         }
@@ -195,5 +200,125 @@ unsafe extern "C" fn counter_exec(weapon: &mut L2CWeaponCommon) -> L2CValue {
         }
         ModelModule::set_alpha(weapon.module_accessor, ALPHA_COUNTER[ENTRY_ID]);
     };
+    0.into()
+}
+
+unsafe extern "C" fn downb_pre(fighter: &mut L2CWeaponCommon) -> L2CValue {
+    let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
+    let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+    let tens = (COIN_COUNT[ENTRY_ID] / 10) as i32;
+    let fly = WorkModule::get_int(fighter.module_accessor, *FIGHTER_WARIO_GASS_LEVEL_FLY);
+    let l = WorkModule::get_int(fighter.module_accessor, *FIGHTER_WARIO_GASS_LEVEL_L);
+    let m = WorkModule::get_int(fighter.module_accessor, *FIGHTER_WARIO_GASS_LEVEL_M);
+    match tens {
+        1 => WorkModule::set_int(fighter.module_accessor, m, *FIGHTER_WARIO_INSTANCE_WORK_ID_INT_GASS_LEVEL),
+        2 => WorkModule::set_int(fighter.module_accessor, l, *FIGHTER_WARIO_INSTANCE_WORK_ID_INT_GASS_LEVEL),
+        3 => WorkModule::set_int(fighter.module_accessor, fly, *FIGHTER_WARIO_INSTANCE_WORK_ID_INT_GASS_LEVEL),
+        _ => WorkModule::set_int(fighter.module_accessor, 1, *FIGHTER_WARIO_INSTANCE_WORK_ID_INT_GASS_LEVEL),
+    };
+    StatusModule::init_settings(
+		fighter.module_accessor,
+		smash::app::SituationKind(*SITUATION_KIND_NONE),
+		*FIGHTER_KINETIC_TYPE_FALL,
+		*GROUND_CORRECT_KIND_AIR_TRANS as u32,
+		smash::app::GroundCliffCheckKind(*GROUND_CLIFF_CHECK_KIND_NONE),
+		true,
+		*FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_FLAG,
+		*FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_INT,
+		*FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_FLOAT,
+		0
+	);
+
+	FighterStatusModuleImpl::set_fighter_status_data(
+		fighter.module_accessor,
+		false,
+		*FIGHTER_TREADED_KIND_NO_REAC,
+		false,
+		false,
+		false,
+		0,
+		0,
+		*FIGHTER_POWER_UP_ATTACK_BIT_SPECIAL_LW as u32,
+		0
+	);
+	0.into()
+}
+unsafe extern "C" fn downb_main(fighter: &mut L2CFighterCommon) -> L2CValue {
+	let motion_kind = MotionModule::motion_kind(fighter.module_accessor);
+	let situation_kind = StatusModule::situation_kind(fighter.module_accessor);
+    let fly = WorkModule::get_int(fighter.module_accessor, *FIGHTER_WARIO_GASS_LEVEL_FLY);
+    let l = WorkModule::get_int(fighter.module_accessor, *FIGHTER_WARIO_GASS_LEVEL_L);
+    let m = WorkModule::get_int(fighter.module_accessor, *FIGHTER_WARIO_GASS_LEVEL_M);
+    let gas = WorkModule::get_int(fighter.module_accessor, *FIGHTER_WARIO_INSTANCE_WORK_ID_INT_GASS_LEVEL);
+    StatusModule::set_situation_kind(fighter.module_accessor, smash::app::SituationKind(*SITUATION_KIND_AIR), true);
+	if gas == fly {
+		MotionModule::change_motion(fighter.module_accessor, smash::phx::Hash40::new("special_air_lw_fly_r"), 0.0, 1.0, false, 0.0, false, false);
+	} else if gas == l {
+    	MotionModule::change_motion(fighter.module_accessor, smash::phx::Hash40::new("special_air_lw_lr"), 0.0, 1.0, false, 0.0, false, false);
+	} else {
+    	MotionModule::change_motion(fighter.module_accessor, smash::phx::Hash40::new("special_air_lw_mr"), 0.0, 1.0, false, 0.0, false, false);
+	}
+    fighter.sub_shift_status_main(L2CValue::Ptr(downb_main_loop as *const () as _))
+}
+unsafe extern "C" fn downb_main_loop(fighter: &mut L2CFighterCommon) -> L2CValue {
+	let motion_kind = MotionModule::motion_kind(fighter.module_accessor);
+	let situation_kind = StatusModule::situation_kind(fighter.module_accessor);
+    let is_near_ground = GroundModule::ray_check(fighter.module_accessor, &Vector2f{ x: PostureModule::pos_x(fighter.module_accessor), y: PostureModule::pos_y(fighter.module_accessor)}, &Vector2f{ x: 0.0, y: -1.0}, true) == 1;
+    if fighter.sub_transition_group_check_air_cliff().get_bool() {
+        return 1.into();
+    }
+    if MotionModule::is_end(fighter.module_accessor) {
+		fighter.change_status(FIGHTER_STATUS_KIND_FALL.into(), false.into());
+        return 0.into();
+    }
+	if is_near_ground && KineticModule::get_sum_speed_y(fighter.module_accessor, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN) < 0.0  && MotionModule::frame(fighter.module_accessor) > 15.0 {
+		StatusModule::set_situation_kind(fighter.module_accessor, smash::app::SituationKind(*SITUATION_KIND_GROUND), true);
+        GroundModule::correct(fighter.module_accessor, smash::app::GroundCorrectKind(*GROUND_CORRECT_KIND_GROUND));
+		WorkModule::set_float(fighter.module_accessor, 15.0, *FIGHTER_INSTANCE_WORK_ID_FLOAT_LANDING_FRAME);
+		macros::SET_SPEED_EX(fighter, 0.0, 0.0, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+		fighter.change_status(FIGHTER_STATUS_KIND_LANDING_FALL_SPECIAL.into(), false.into());
+		return 0.into();
+	}
+    if CancelModule::is_enable_cancel(fighter.module_accessor) {
+        if fighter.sub_wait_ground_check_common(false.into()).get_bool()
+        || fighter.sub_air_check_fall_common().get_bool() {
+            return 1.into();
+        }
+    }
+    let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+    let tens = (COIN_COUNT[ENTRY_ID] / 10) as i32;
+    let fly = WorkModule::get_int(fighter.module_accessor, *FIGHTER_WARIO_GASS_LEVEL_FLY);
+    let l = WorkModule::get_int(fighter.module_accessor, *FIGHTER_WARIO_GASS_LEVEL_L);
+    let m = WorkModule::get_int(fighter.module_accessor, *FIGHTER_WARIO_GASS_LEVEL_M);
+    if  AttackModule::is_attack(fighter.module_accessor, 0, false) {
+        match tens {
+            1 => AttackModule::set_power(fighter.module_accessor, 0, 12.0, false),
+            2 => AttackModule::set_power(fighter.module_accessor, 0, 20.0, false),
+            3 => AttackModule::set_power(fighter.module_accessor, 0, 27.0, false),
+            _ => AttackModule::set_power(fighter.module_accessor, 0, 5.0, false),
+        };
+    }
+    if  AttackModule::is_attack(fighter.module_accessor, 1, false) {
+        match tens {
+            1 => AttackModule::set_power(fighter.module_accessor, 1, 12.0, false),
+            2 => AttackModule::set_power(fighter.module_accessor, 1, 20.0, false),
+            3 => AttackModule::set_power(fighter.module_accessor, 1, 27.0, false),
+            _ => AttackModule::set_power(fighter.module_accessor, 1, 5.0, false),
+        };
+    }
+    if  AttackModule::is_attack(fighter.module_accessor, 2, false) {
+        match tens {
+            1 => AttackModule::set_power(fighter.module_accessor, 2, 12.0, false),
+            2 => AttackModule::set_power(fighter.module_accessor, 2, 20.0, false),
+            3 => AttackModule::set_power(fighter.module_accessor, 2, 27.0, false),
+            _ => AttackModule::set_power(fighter.module_accessor, 2, 5.0, false),
+        };
+    }
+    0.into()
+}
+unsafe extern "C" fn downb_end(fighter: &mut L2CWeaponCommon) -> L2CValue {
+    let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
+    let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+    COIN_COUNT[ENTRY_ID] = 0;
     0.into()
 }
