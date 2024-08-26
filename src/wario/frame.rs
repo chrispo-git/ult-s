@@ -69,8 +69,18 @@ unsafe extern "C" fn wario_frame(fighter: &mut L2CFighterCommon) {
 					}
 				}
 			};
-			
-			if [*FIGHTER_STATUS_KIND_CATCH_ATTACK].contains(&status_kind) && (frame as i32) == 1 {
+			if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_LW {
+				COIN_COUNT[ENTRY_ID] = 0;
+			} else {
+				let tens = (COIN_COUNT[ENTRY_ID] / 10) as i32;
+				match tens {
+					1 => WorkModule::set_int(fighter.module_accessor, 2, *FIGHTER_WARIO_INSTANCE_WORK_ID_INT_GASS_LEVEL),
+					2 => WorkModule::set_int(fighter.module_accessor, 3, *FIGHTER_WARIO_INSTANCE_WORK_ID_INT_GASS_LEVEL),
+					3 => WorkModule::set_int(fighter.module_accessor, 4, *FIGHTER_WARIO_INSTANCE_WORK_ID_INT_GASS_LEVEL),
+					_ => WorkModule::set_int(fighter.module_accessor, 1, *FIGHTER_WARIO_INSTANCE_WORK_ID_INT_GASS_LEVEL),
+				};
+			}
+			if [*FIGHTER_STATUS_KIND_CATCH_ATTACK].contains(&status_kind) && (frame as i32) == 5 {
 				COIN_COUNT[ENTRY_ID] += 1;
 			};
 			if COIN_COUNT[ENTRY_ID] > 30 {

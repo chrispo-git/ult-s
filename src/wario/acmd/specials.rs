@@ -46,6 +46,7 @@ unsafe extern "C" fn wario_sideb(fighter: &mut L2CAgentBase) {
 		if macros::is_excute(fighter) {
 			if COIN_COUNT[ENTRY_ID] > 0 {
 				COIN_COUNT[ENTRY_ID] -= 1;
+                macros::PLAY_SE(fighter, Hash40::new("se_common_coin"));
 				ArticleModule::generate_article(fighter.module_accessor, FIGHTER_WARIO_GENERATE_ARTICLE_COIN, false, -1);
 			}
 		}
@@ -59,6 +60,11 @@ unsafe extern "C" fn wario_sideb_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 	let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+    frame(fighter.lua_state_agent, 15.0);
+    if macros::is_excute(fighter) {
+        macros::PLAY_SE(fighter, Hash40::new("se_common_punch_kick_swing_s"));
+        macros::PLAY_SE(fighter, Hash40::new("vc_wario_attack04"));
+    }
 }	
 unsafe extern "C" fn wario_sideb_start_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
