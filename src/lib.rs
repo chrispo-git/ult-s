@@ -31,10 +31,10 @@ pub fn is_on_ryujinx() -> bool {
         // Ryujinx skip based on text addr
         let text_addr = skyline::hooks::getRegionAddress(skyline::hooks::Region::Text) as u64;
         if text_addr == 0x8504000 || text_addr == 0x80004000 {
-            println!("we are on Ryujinx");
+            println!("we are on Emulator");
             return true;
         } else {
-            println!("we are not on Ryujinx");
+            println!("we are not on Emulator");
             return false;
         }
     }
@@ -360,21 +360,21 @@ pub extern "C" fn main() {
     }
 	
 	//Common
-    //if !is_on_ryujinx() || is_on_ryujinx() {
-        //println!("We're on switch! Yay!");
-    unsafe {
-            OFFSET1 = calc_nnsdk_offset() + 0x429d60;
-            OFFSET2 = calc_nnsdk_offset() + 0x26e94;
+    if !is_on_ryujinx(){
+        println!("We're on switch! Yay!");
+        unsafe {
+                OFFSET1 = calc_nnsdk_offset() + 0x429d60;
+                OFFSET2 = calc_nnsdk_offset() + 0x26e94;
+        }
+        
+        skyline::install_hooks!(
+                set_interval_1,
+                set_interval_2,
+                run_scene_update,
+                vsync_count_thread,
+        );
     }
-    
-    skyline::install_hooks!(
-            set_interval_1,
-            set_interval_2,
-            run_scene_update,
-            vsync_count_thread,
-    );
     skyline::install_hooks!(change_version_string_hook);
-    //}
 	nro::add_hook(nro_hook).unwrap();
 
 
