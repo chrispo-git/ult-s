@@ -47,7 +47,7 @@ unsafe extern "C" fn pitoo(fighter : &mut L2CFighterCommon) {
 						StatusModule::set_keep_situation_air(boma, true);
 					} else {
 						StatusModule::set_keep_situation_air(boma, false);
-						if situation_kind == *SITUATION_KIND_GROUND &&  {
+						if situation_kind == *SITUATION_KIND_GROUND {
 							StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_LANDING_FALL_SPECIAL, true);
 						}
 					}
