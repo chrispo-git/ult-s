@@ -250,11 +250,11 @@ FaF: 38
 ### Nair
 |Frame|ID|Damage|Angle|BKB|KBG|Notes| | | |
 |-|-|-|-|-|-|-|-|-|-|
-|Frame 10| 0|  4.0%|  361|  70|  82| hit effect is elec|
-|Frame 10| 1|  4.0%|  361|  70|  82| hit effect is elec|
+|Frame 10| 0|  4.0%|  55|  38|  96|
+|Frame 10| 1|  4.0%|  55|  38|  96|
 |Hitboxes terminated on Frame 12|
-|Frame 15| 0|  4.0%|  361|  70|  82| hit effect is elec|
-|Frame 15| 1|  4.0%|  361|  70|  82| hit effect is elec|
+|Frame 15| 0|  4.0%|  361|  38|  96|
+|Frame 15| 1|  4.0%|  361|  38|  96|
 |Hitboxes terminated on Frame 17|
 
 
