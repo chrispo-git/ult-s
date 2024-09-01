@@ -39,10 +39,9 @@ Wall Jump? | True|
 |-|-|-|-|-|-|-|-|-|-|
 |Frame 2| 0|  2.0%|  361|  20|  40|
 |Hitboxes terminated on Frame 3|
-|Note: Deals 2f bonus hitstun|
 
 
-FaF: 14
+FaF: 16
 
 
 
