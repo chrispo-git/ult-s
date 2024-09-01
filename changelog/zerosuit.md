@@ -37,12 +37,12 @@ Wall Jump? | True|
 ### Jab 1
 |Frame|ID|Damage|Angle|BKB|KBG|Notes| | | |
 |-|-|-|-|-|-|-|-|-|-|
-|Frame 4| 0|  2.0%|  361|  20|  40|
-|Hitboxes terminated on Frame 5|
+|Frame 2| 0|  2.0%|  361|  20|  40|
+|Hitboxes terminated on Frame 3|
 |Note: Deals 2f bonus hitstun|
 
 
-FaF: 16
+FaF: 14
 
 
 
