@@ -2,6 +2,8 @@ mod status;
 mod frame;
 mod acmd;
 
+use smash::lib::lua_const::*;
+
 static mut BAN_SIDEB : [bool; 8] = [false; 8];
 static mut HAS_BOUNCE : [bool; 8] = [false; 8];
 static mut IS_JUMP : [bool; 8] = [false; 8];
