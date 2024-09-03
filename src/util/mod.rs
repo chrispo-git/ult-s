@@ -10,6 +10,7 @@ use smash::phx::Vector2f;
 use crate::FIGHTER_MANAGER;
 use std::os::raw::c_int;
 use std::os::raw::c_ulong;
+use std::{fs, path::Path};
 use crate::controls::ext::*;
 use crate::common::*;
 
@@ -210,7 +211,7 @@ pub unsafe fn article_hook(boma: &mut smash::app::BattleObjectModuleAccessor, in
 	if smash::app::utility::get_category(boma) != *BATTLE_OBJECT_CATEGORY_FIGHTER {
 		return original!()(boma, int, arg3, arg4)
 	}
-	if int == *FIGHTER_WARIO_GENERATE_ARTICLE_WARIOBIKE && smash::app::utility::get_kind(boma) == *FIGHTER_KIND_WARIO {
+	if int == *FIGHTER_WARIO_GENERATE_ARTICLE_WARIOBIKE && smash::app::utility::get_kind(boma) == *FIGHTER_KIND_WARIO && Path::new("sd:/ultimate/ult-s/wario.flag").is_file() {
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
 		if ![*FIGHTER_STATUS_KIND_ENTRY, *FIGHTER_STATUS_KIND_WIN].contains(&status_kind) && smash::app::sv_information::is_ready_go() {
 			return 0
