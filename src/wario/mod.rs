@@ -13,8 +13,8 @@ static mut ALPHA_COUNTER : [f32; 8] = [0.0; 8];
 
 
 pub fn install() {
-	smashline::clone_weapon("koopajr", "cannonball", "wario", "coin", false);
-	smashline::clone_weapon("peach", "kinopio", "wario", "counter", false);
+	smashline::clone_weapon("koopajr", *WEAPON_KIND_KOOPAJR_CANNONBALL, "wario", "coin", false);
+	smashline::clone_weapon("peach", *WEAPON_KIND_PEACH_KINOPIO, "wario", "counter", false);
 	
 	frame::install();
 	status::install();
