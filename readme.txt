@@ -11,6 +11,10 @@ b. Send via FTP (used for switch). Requires FTP set up on your switch. Automatic
 c. Manual. Does not set your SD card up automatically, copy your atmosphere and ultimate folders to the root of the SD card.
 (Note: You don't need to specify which added characters to include, they're automatically there already!)
 
+WARNING: Any character problems caused by disabling characters, 
+and any compatibility with other smash ultimate character mods is up to YOU (the end user) and the respective character mod creators to fix.
+Ultimate S is built to work as a whole package, and the setup tool is simply a workaround.
+
 
 This mod assumes you have the latest version of arcropolis and therefore does not include it in the download. If you haven't set up smash ultimate modding as a whole, here's some wonderful guides!
 Setting up CFW on switch - https://switch.homebrew.guide/
