@@ -16,4 +16,88 @@
     <hash40 index="2">dummy</hash40>
     <hash40 index="3">dummy</hash40>
   </list>
+  <list hash="param_special_hi">
+    <struct index="0">
+      <float hash="jump_y_spd_mul">1.1</float>
+    </struct>
+    <hash40 index="1">dummy</hash40>
+    <hash40 index="2">dummy</hash40>
+    <hash40 index="3">dummy</hash40>
+  </list>
+  <list hash="param_special_lw">
+    <struct index="0">
+      <float hash="gass_max_time">9999</float>
+      <float hash="gass_middle_time">9999</float>
+      <float hash="gass_large_time">0.01</float>
+    </struct>
+    <hash40 index="1">dummy</hash40>
+    <hash40 index="2">dummy</hash40>
+    <hash40 index="3">dummy</hash40>
+  </list>
+  <list hash="param_coin">
+    <struct index="0">
+      <float hash="speed_min">3.5</float>
+      <float hash="speed_max">3.5</float>
+      <float hash="attack_mul_min">10</float>
+      <float hash="attack_mul_max">20</float>
+      <float hash="gravity_start_frame_min">60</float>
+      <float hash="gravity_start_frame_max">45</float>
+      <float hash="attack_mul_gravity">0.7</float>
+      <float hash="gravity">0.06</float>
+      <float hash="limit_gravity">2</float>
+      <float hash="brake_x">0.018</float>
+      <float hash="floor_bound_x_mul">0.5</float>
+      <float hash="hop_speed_x">0.3</float>
+      <float hash="hop_speed_y">1</float>
+      <int hash="life">60</int>
+    </struct>
+    <struct index="1">
+      <float hash="speed_min">0</float>
+      <float hash="speed_max">0</float>
+      <float hash="attack_mul_min">0</float>
+      <float hash="attack_mul_max">0</float>
+      <float hash="gravity_start_frame_min">0</float>
+      <float hash="gravity_start_frame_max">0</float>
+      <float hash="attack_mul_gravity">0</float>
+      <float hash="gravity">0</float>
+      <float hash="limit_gravity">0</float>
+      <float hash="brake_x">0</float>
+      <float hash="floor_bound_x_mul">0</float>
+      <float hash="hop_speed_x">0</float>
+      <float hash="hop_speed_y">0</float>
+      <int hash="life">0</int>
+    </struct>
+    <struct index="2">
+      <float hash="speed_min">0</float>
+      <float hash="speed_max">0</float>
+      <float hash="attack_mul_min">0</float>
+      <float hash="attack_mul_max">0</float>
+      <float hash="gravity_start_frame_min">0</float>
+      <float hash="gravity_start_frame_max">0</float>
+      <float hash="attack_mul_gravity">0</float>
+      <float hash="gravity">0</float>
+      <float hash="limit_gravity">0</float>
+      <float hash="brake_x">0</float>
+      <float hash="floor_bound_x_mul">0</float>
+      <float hash="hop_speed_x">0</float>
+      <float hash="hop_speed_y">0</float>
+      <int hash="life">0</int>
+    </struct>
+    <struct index="3">
+      <float hash="speed_min">0</float>
+      <float hash="speed_max">0</float>
+      <float hash="attack_mul_min">0</float>
+      <float hash="attack_mul_max">0</float>
+      <float hash="gravity_start_frame_min">0</float>
+      <float hash="gravity_start_frame_max">0</float>
+      <float hash="attack_mul_gravity">0</float>
+      <float hash="gravity">0</float>
+      <float hash="limit_gravity">0</float>
+      <float hash="brake_x">0</float>
+      <float hash="floor_bound_x_mul">0</float>
+      <float hash="hop_speed_x">0</float>
+      <float hash="hop_speed_y">0</float>
+      <int hash="life">0</int>
+    </struct>
+  </list>
 </struct>

@@ -10,6 +10,7 @@ use smash::phx::Vector2f;
 use crate::FIGHTER_MANAGER;
 use std::os::raw::c_int;
 use std::os::raw::c_ulong;
+use std::{fs, path::Path};
 use crate::controls::ext::*;
 use crate::common::*;
 
@@ -54,6 +55,15 @@ pub static mut CAN_TURNDASH: [i32; 8] = [0; 8];
 pub static mut HAS_ENABLE_COMBO_ON: [bool; 8] = [false; 8];
 pub static mut HAS_ENABLE_NO_HIT_COMBO_ON: [bool; 8] = [false; 8];
 pub static mut HAS_ENABLE_100_ON: [bool; 8] = [false; 8];
+
+
+//Article cloning consts
+//Wario
+pub const FIGHTER_WARIO_GENERATE_ARTICLE_COIN: i32 = 0x3;
+pub const WEAPON_WARIO_COIN_STATUS_KIND_SHOOT: i32 = 0x0;
+
+pub const FIGHTER_WARIO_GENERATE_ARTICLE_COUNTER: i32 = 0x4;
+pub const WEAPON_WARIO_COUNTER_STATUS_KIND_APPEAR: i32 = 0x0;
 
 // Use this for general per-frame fighter-level hooks
 #[skyline::hook(replace = smash::app::lua_bind::WorkModule::is_enable_transition_term)]
@@ -201,7 +211,7 @@ pub unsafe fn article_hook(boma: &mut smash::app::BattleObjectModuleAccessor, in
 	if smash::app::utility::get_category(boma) != *BATTLE_OBJECT_CATEGORY_FIGHTER {
 		return original!()(boma, int, arg3, arg4)
 	}
-	if int == *FIGHTER_WARIO_GENERATE_ARTICLE_WARIOBIKE && smash::app::utility::get_kind(boma) == *FIGHTER_KIND_WARIO {
+	if int == *FIGHTER_WARIO_GENERATE_ARTICLE_WARIOBIKE && smash::app::utility::get_kind(boma) == *FIGHTER_KIND_WARIO && Path::new("sd:/ultimate/ult-s/wario.flag").is_file() {
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
 		if ![*FIGHTER_STATUS_KIND_ENTRY, *FIGHTER_STATUS_KIND_WIN].contains(&status_kind) && smash::app::sv_information::is_ready_go() {
 			return 0
