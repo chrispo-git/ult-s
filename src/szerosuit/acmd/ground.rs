@@ -29,10 +29,9 @@ pub fn install() {
 
 unsafe extern "C" fn zss_jab1(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
-		frame(fighter.lua_state_agent, 4.0);
+		frame(fighter.lua_state_agent, 2.0);
 		if macros::is_excute(fighter) {
 			macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 2.0, /*Angle*/ 361, /*KBG*/ 40, /*FKB*/ 0, /*BKB*/ 20, /*Size*/ 2.0, /*X*/ 0.0, /*Y*/ 10.0, /*Z*/ 5.5, /*X2*/ Some(0.0), /*Y2*/ Some(10.0), /*Z2*/ Some(12.5), /*Hitlag*/ 1.3, /*SDI*/ 2.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_PUNCH);
-			AttackModule::set_add_reaction_frame(fighter.module_accessor, /*ID*/ 0, /*Frames*/ 2.0, /*Unk*/ false);
 			AttackModule::set_attack_height_all(fighter.module_accessor, smash::app::AttackHeight(*ATTACK_HEIGHT_HIGH), false);
 		}
 		wait(fighter.lua_state_agent, 1.0);
@@ -50,16 +49,7 @@ unsafe extern "C" fn zss_jab1(fighter: &mut L2CAgentBase) {
 }	
 unsafe extern "C" fn zss_jab_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
-		/*frame(fighter.lua_state_agent, 2.0);
-		if macros::is_excute(fighter) {
-			macros::EFFECT(fighter, Hash40::new("sys_attack_speedline"), Hash40::new("top"), -0.5, 5, -3, -38, 0, 0, 0.8, 0, 0, 0, 0, 0, 0, true);
-			macros::LAST_EFFECT_SET_RATE(fighter, 1.3);
-		}
-		frame(fighter.lua_state_agent, 3.0);
-		if macros::is_excute(fighter) {
-			macros::EFFECT(fighter, Hash40::new("sys_turn_smoke"), Hash40::new("top"), -1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
-		}*/
-		frame(fighter.lua_state_agent, 4.0);
+		frame(fighter.lua_state_agent, 2.0);
 		if macros::is_excute(fighter) {
 			macros::EFFECT(fighter, Hash40::new("sys_attack_impact"), Hash40::new("havel"), 0, 0.0, 0.0, 0, 0, 0, 1.2, 0, 0, 0, 0, 0, 360, true);
 		}
