@@ -158,10 +158,10 @@ unsafe extern "C" fn corrin_usmash(fighter: &mut L2CAgentBase) {
 		frame(fighter.lua_state_agent, 4.0);
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
 		if macros::is_excute(fighter) {
-			macros::SET_SPEED_EX(fighter, 2.0, 0.0, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+			macros::SET_SPEED_EX(fighter, 1.7, 0.0, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
 		}
 		frame(fighter.lua_state_agent, 8.0);
-		macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.7);
+		macros::FT_MOTION_RATE(fighter, /*FSM*/ 2.0);
 		if macros::is_excute(fighter) {
 			macros::SET_SPEED_EX(fighter, 0.3, 0.0, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
 			AttackModule::clear_all(fighter.module_accessor);
