@@ -52,6 +52,9 @@ unsafe extern "C" fn pitoo(fighter : &mut L2CFighterCommon) {
 						}
 					}
 				}
+				if end_frame - frame < 3.0 {
+					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL_SPECIAL, true);
+				};
 			};
 			if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_S {
 				StatusModule::set_situation_kind(boma, smash::app::SituationKind(*SITUATION_KIND_AIR), true);
