@@ -29,7 +29,7 @@ unsafe extern "C" fn samus_frame(fighter: &mut L2CFighterCommon) {
 			let motion_kind = MotionModule::motion_kind(boma);
 			let frame = MotionModule::frame(boma);
 			if [hash40("attack_lw3")].contains(&motion_kind) {
-				if check_jump(boma) && frame > 6.0 && !AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_SHIELD) && !ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_SPECIAL) && !ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_GUARD){
+				if check_jump(boma) && frame > 6.0 && AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_HIT) && !ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_SPECIAL) && !ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_GUARD){
 					CancelModule::enable_cancel(boma);
 					NO_WAVEDASH_TIMER[ENTRY_ID] = NO_WAVEDASH_MAX;
 				};
