@@ -79,7 +79,7 @@ unsafe extern "C" fn usmash_main_loop(fighter: &mut L2CFighterCommon) -> L2CValu
         }
     }
 
-    if MotionModule::trans_move_speed(fighter.module_accessor).y < 0.0 
+    if MotionModule::trans_move_speed(fighter.module_accessor).value[1] < 0.0 
     && fighter.sub_transition_group_check_air_landing().get_bool() {
         WorkModule::enable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_LANDING_LIGHT);
         return 0.into();
