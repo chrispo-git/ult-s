@@ -160,14 +160,14 @@ unsafe fn set_interval_2(ctx: &mut InlineCtx) {
 
 static mut RUN: AtomicBool = AtomicBool::new(false);
 
-#[skyline::hook(offset = 0x3810664, inline)]
+#[skyline::hook(offset = 0x3810684, inline)]
 unsafe fn vsync_count_thread(_: &skyline::hooks::InlineCtx) {
     RUN.store(true, Ordering::SeqCst);
 }
 
 static mut DUMMY_BLOCK: [u8; 0x100] = [0; 0x100];
 
-#[skyline::hook(offset = 0x374777C, inline)]
+#[skyline::hook(offset = 0x374779C, inline)]
 unsafe fn run_scene_update(_: &skyline::hooks::InlineCtx) {
     while !RUN.swap(false, Ordering::SeqCst) {
         skyline::nn::hid::GetNpadFullKeyState(DUMMY_BLOCK.as_mut_ptr() as _, &0);
@@ -821,8 +821,8 @@ pub extern "C" fn main() {
 	//Stage Patching
 
 	//Arena Ferox Screenshake
-	skyline::patching::Patch::in_text(0x28444cc + 0xc80).data(0x52800009u32);
-    skyline::patching::Patch::in_text(0x28440f4 + 0xc80).data(0x52800009u32);
-    skyline::patching::Patch::in_text(0x2844500+ 0xc80).nop();
-    skyline::patching::Patch::in_text(0x2844128+ 0xc80).nop();
+	skyline::patching::Patch::in_text(0x28444cc + 0xc80 + 0x20).data(0x52800009u32);
+    skyline::patching::Patch::in_text(0x28440f4 + 0xc80 + 0x20).data(0x52800009u32);
+    skyline::patching::Patch::in_text(0x2844500+ 0xc80 + 0x20).nop();
+    skyline::patching::Patch::in_text(0x2844128+ 0xc80 + 0x20).nop();
 }
