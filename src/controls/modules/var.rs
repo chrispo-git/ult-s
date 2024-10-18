@@ -64,17 +64,11 @@ extern "Rust" {
     #[link_name = "VarModule__set_vec3"]
     fn VarModule__set_vec3(object: *mut BattleObject, what: i32, val: Vector3f);
 
-    #[link_name = "VarModule__set_vec4"]
-    fn VarModule__set_vec4(object: *mut BattleObject, what: i32, val: Vector4f);
-
     #[link_name = "VarModule__get_vec2"]
     fn VarModule__get_vec2(object: *mut BattleObject, what: i32) -> Vector2f;
 
     #[link_name = "VarModule__get_vec3"]
     fn VarModule__get_vec3(object: *mut BattleObject, what: i32) -> Vector3f;
-
-    #[link_name = "VarModule__get_vec4"]
-    fn VarModule__get_vec4(object: *mut BattleObject, what: i32) -> Vector4f;
 }
 
 #[allow(non_snake_case)]
@@ -359,19 +353,6 @@ pub mod VarModule {
         }
     }
 
-    /// Sets a 4-dimensional vector
-    /// # Arguments
-    /// * `object` - The owning `BattleObject` instance
-    /// * `what` - Where to start setting the vector
-    /// * `val` - The vector to set
-    /// # Panics
-    /// This function requires that the last 3 bytes of `what` are less than `0xFFD`
-    pub fn set_vec4(object: *mut BattleObject, what: i32, val: Vector4f) {
-        unsafe {
-            VarModule__set_vec4(object, what, val)
-        }
-    }
-
     /// Gets a 2-dimensional vector
     /// # Arguments
     /// * `object` - The owning `BattleObject` instance
@@ -397,20 +378,6 @@ pub mod VarModule {
     pub fn get_vec3(object: *mut BattleObject, what: i32) -> Vector3f {
         unsafe {
             VarModule__get_vec3(object, what)
-        }
-    }
-
-    /// Gets a 4-dimensional vector
-    /// # Arguments
-    /// * `object` - The owning `BattleObject` instance
-    /// * `what` - Where to start setting the vector
-    /// # Returns
-    /// The 4-dimensional vector starting at the value specified
-    /// # Panics
-    /// This function requires that the last 3 bytes of `what` are less than `0xFFD`
-    pub fn get_vec4(object: *mut BattleObject, what: i32) -> Vector4f {
-        unsafe {
-            VarModule__get_vec4(object, what)
         }
     }
 }

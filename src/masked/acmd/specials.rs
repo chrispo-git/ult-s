@@ -166,13 +166,13 @@ unsafe extern "C" fn effect_downb(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 23.0);
     if macros::is_excute(agent) {
         macros::EFFECT_FOLLOW(agent, Hash40::new("sys_direction"), Hash40::new("throw"), 0, -5, 0, 0, 90, 0, 1, true);
-        EffectModule::set_rgb_partial_last(agent.module_accessor, color.x, color.y, color.z);
+        EffectModule::set_rgb_partial_last(agent.module_accessor, color.value[0], color.value[1], color.value[2]);
         macros::EFFECT_FOLLOW(agent, Hash40::new("sys_direction"), Hash40::new("throw"), 0, 5, 0, 180, 90, 0, 1, true);
-        EffectModule::set_rgb_partial_last(agent.module_accessor, color.x, color.y, color.z);
+        EffectModule::set_rgb_partial_last(agent.module_accessor, color.value[0], color.value[1], color.value[2]);
         macros::EFFECT_FOLLOW(agent, Hash40::new("sys_direction"), Hash40::new("throw"), 0, 0, -5, 90, 0, 90, 1, true);
-        EffectModule::set_rgb_partial_last(agent.module_accessor, color.x, color.y, color.z);
+        EffectModule::set_rgb_partial_last(agent.module_accessor, color.value[0], color.value[1], color.value[2]);
         macros::EFFECT_FOLLOW(agent, Hash40::new("sys_direction"), Hash40::new("throw"), 0, 0, 5, -90, 0, 90, 1, true);
-        EffectModule::set_rgb_partial_last(agent.module_accessor, color.x, color.y, color.z);
+        EffectModule::set_rgb_partial_last(agent.module_accessor, color.value[0], color.value[1], color.value[2]);
     }
 }
 

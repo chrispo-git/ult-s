@@ -43,7 +43,7 @@ impl<T: Copy> CppVector<T> {
     }
 }
 
-#[skyline::hook(offset = 0x1D39FE0)]
+#[skyline::hook(offset = 0x1D3A000)]
 unsafe fn get_button_label_by_operation_kind(hashed_string: &mut HashedString, operation: u8, arg: bool) {
     if operation == ext::InputKind::JumpMini as u8 {
         for (index, byte) in "mnu_opt_btn_key_short_hop\0".as_bytes().iter().enumerate() {
@@ -60,7 +60,7 @@ unsafe fn get_button_label_by_operation_kind(hashed_string: &mut HashedString, o
     }
 }
 
-#[skyline::hook(offset = 0x1d334c8, inline)]
+#[skyline::hook(offset = 0x1d334e8, inline)]
 unsafe fn add_footstool_to_gc(ctx: &skyline::hooks::InlineCtx) {
     let button = *ctx.registers[25].w.as_ref();
     if ![0x3, 0x4, 0x5, 0x8].contains(&button) {
@@ -75,7 +75,7 @@ unsafe fn add_footstool_to_gc(ctx: &skyline::hooks::InlineCtx) {
     }
 }
 
-#[skyline::hook(offset = 0x1D331D8, inline)]
+#[skyline::hook(offset = 0x1D331F8, inline)]
 unsafe fn add_footstool_to_fk(ctx: &skyline::hooks::InlineCtx) {
     let button = *ctx.registers[25].w.as_ref();
     if [0x4, 0x5, 0x6, 0x9].contains(&button) {
@@ -91,7 +91,7 @@ unsafe fn add_footstool_to_fk(ctx: &skyline::hooks::InlineCtx) {
     }
 }
 
-#[skyline::hook(offset = 0x1D33CB8, inline)]
+#[skyline::hook(offset = 0x1D33CD8, inline)]
 unsafe fn add_footstool_to_jc(ctx: &skyline::hooks::InlineCtx) {
     let input_list_vector = &mut *((*ctx.registers[24].x.as_ref() + 0x148) as *mut CppVector<u8>);
     
@@ -103,7 +103,7 @@ unsafe fn add_footstool_to_jc(ctx: &skyline::hooks::InlineCtx) {
     }
 }
 
-#[skyline::hook(offset = 0x1D3592C, inline)]
+#[skyline::hook(offset = 0x1D3594C, inline)]
 unsafe fn add_more_buttons(ctx: &mut skyline::hooks::InlineCtx) {
     let input_list_vector = &mut *((*ctx.registers[24].x.as_ref() + 0x148) as *mut CppVector<u8>);
     // panic!("{}", input_list_vector.len());
