@@ -102,6 +102,7 @@ Devory - Colloseum, Gamecube Stages, Ready to Fight UI
 Ginn. - Original Paper Mario Stage
 iOZ_MintyFresh - Hexagon UI
 Joben - Stage Select Screen
+Kybbler - Bomberman Victory Screen Camera
 LN_310 - ZSS Model, Rauru's Blessing
 LKE Studios - DK Utaunt animation
 LuXejin - Sonic Dtaunt animation
