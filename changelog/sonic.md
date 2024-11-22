@@ -105,47 +105,9 @@ FaF: 45
 ### FTilt
 |Frame|ID|Damage|Angle|BKB|KBG|Notes| | | |
 |-|-|-|-|-|-|-|-|-|-|
-|Frame 8| 0|  7.0%|  361|  30|  115|
-|Frame 8| 1|  5.0%|  361|  30|  115|
-|Frame 8| 2|  5.0%|  361|  30|  115|
-|Hitboxes terminated on Frame 12|
-
-
-FaF: 36
-
-
-
-
-
-
-
-### FTilt (Up)
-|Frame|ID|Damage|Angle|BKB|KBG|Notes| | | |
-|-|-|-|-|-|-|-|-|-|-|
-|Frame 6| 2| 4.0%| 28| 80| 3|
-|Hitboxes terminated on Frame 7|
-|Frame 8| 0| 7.0%| 361| 30| 115|
-|Frame 8| 1| 5.0%| 361| 30| 115|
-|Frame 8| 2| 5.0%| 361| 30| 115|
-|Hitboxes terminated on Frame 12|
-
-
-FaF: 36
-
-
-
-
-
-
-
-### FTilt (Down)
-|Frame|ID|Damage|Angle|BKB|KBG|Notes| | | |
-|-|-|-|-|-|-|-|-|-|-|
-|Frame 6| 2| 4.0%| 28| 80| 3|
-|Hitboxes terminated on Frame 7|
-|Frame 8| 0| 7.0%| 361| 30| 115|
-|Frame 8| 1| 5.0%| 361| 30| 115|
-|Frame 8| 2| 5.0%| 361| 30| 115|
+|Frame 8| 0|  9.0%|  361|  30|  115|
+|Frame 8| 1|  7.0%|  70|  35|  80|
+|Frame 8| 2|  7.0%|  70|  35|  80|
 |Hitboxes terminated on Frame 12|
 
 
