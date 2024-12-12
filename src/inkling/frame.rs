@@ -41,26 +41,30 @@ unsafe extern "C" fn ink(fighter : &mut L2CFighterCommon) {
 					KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_DASH_BACK);
 				};
 			};
-			if [*FIGHTER_INKLING_STATUS_KIND_SPECIAL_HI_JUMP].contains(&status_kind) {
-					if ControlModule::check_button_on_trriger(boma, *CONTROL_PAD_BUTTON_SPECIAL) && motion_kind == hash40("special_hi_down") {
-						StatusModule::change_status_request_from_script(boma, *FIGHTER_INKLING_STATUS_KIND_SPECIAL_HI_FALL, false);
+			if [*FIGHTER_INKLING_STATUS_KIND_SPECIAL_HI_ROT, *FIGHTER_INKLING_STATUS_KIND_SPECIAL_HI_FALL].contains(&status_kind) || (status_kind == *FIGHTER_INKLING_STATUS_KIND_SPECIAL_HI_JUMP && frame > 8.0) {
+					if ControlModule::check_button_on_trriger(boma, *CONTROL_PAD_BUTTON_SPECIAL) && motion_kind != hash40("special_hi_down") {
 						MotionModule::change_motion(boma, Hash40::new("special_hi_down"), -1.0, 1.0, false, 0.0, false, false);
 						macros::PLAY_SE(fighter, Hash40::new("se_inkling_special_h01"));
 						KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_MOTION_AIR);
 					}
-					println!("inkling upb jump");
-			};
-			if [*FIGHTER_INKLING_STATUS_KIND_SPECIAL_HI_FALL].contains(&status_kind) {
-					println!("inkling upb fall");
-			};
-			if [*FIGHTER_INKLING_STATUS_KIND_SPECIAL_HI_ROT].contains(&status_kind) {
-					println!("inkling upb rotato");
 			};
 
-
-			if ![*FIGHTER_INKLING_STATUS_KIND_SPECIAL_HI_JUMP, *FIGHTER_INKLING_STATUS_KIND_SPECIAL_HI_FALL].contains(&status_kind) {
+			if ![*FIGHTER_INKLING_STATUS_KIND_SPECIAL_HI_JUMP, *FIGHTER_INKLING_STATUS_KIND_SPECIAL_HI_ROT].contains(&status_kind) {
 				IS_UPB_DOWN[ENTRY_ID] = false;
 			}
+			if motion_kind == hash40("special_hi_down") {
+				//let mut rotation = Vector3f{x: 0.0, y: -30.0 , z: 0.0};
+				//ModelModule::set_joint_rotate(boma, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
+				WorkModule::set_float(boma, -30.0, *FIGHTER_INKLING_STATUS_SPECIAL_HI_WORK_FLOAT_MODEL_DEGREE);
+				WorkModule::set_float(boma, -30.0, *FIGHTER_INKLING_STATUS_SPECIAL_HI_WORK_FLOAT_DEGREE);
+				ArticleModule::set_float(boma,*FIGHTER_INKLING_GENERATE_ARTICLE_SQUID, -30.0, *WEAPON_INKLING_SQUID_INSTANCE_WORK_ID_FLOAT_SPECIAL_HI_ROT_X);
+				if GroundModule::get_touch_flag(boma) == *GROUND_TOUCH_FLAG_DOWN as u64 {
+					StatusModule::change_status_request_from_script(boma, 25, true);
+					ArticleModule::generate_article(boma, *FIGHTER_INKLING_GENERATE_ARTICLE_SPLASH, false, -1);
+				}
+				ArticleModule::change_motion(fighter.module_accessor, *FIGHTER_INKLING_GENERATE_ARTICLE_SQUID,smash::phx::Hash40::new("special_hi_2"),false,0.0);
+				println!("down!.");
+			};
 			if motion_kind == hash40("special_hi_landing_r") || motion_kind == hash40("special_hi_landing_l"){
 				let slideoff = 1.5 - (frame*WorkModule::get_param_float(fighter.module_accessor, hash40("ground_brake"), 0));
 				if slideoff > 0.0 {
