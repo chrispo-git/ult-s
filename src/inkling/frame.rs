@@ -34,12 +34,20 @@ unsafe extern "C" fn ink(fighter : &mut L2CFighterCommon) {
 			if status_kind == *FIGHTER_INKLING_STATUS_KIND_CHARGE_INK {
 				if KineticModule::get_kinetic_type(boma) != *FIGHTER_KINETIC_TYPE_DASH && (cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_DASH) != 0{
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_INKLING_STATUS_KIND_CHARGE_INK_END, true);
-					KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_DASH);
+					KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_DASH);;
 				};
 				if KineticModule::get_kinetic_type(boma) != *FIGHTER_KINETIC_TYPE_DASH && (cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_TURN_DASH) != 0{
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_INKLING_STATUS_KIND_CHARGE_INK_END, true);
 					KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_DASH_BACK);
 				};
+			};
+			if [*FIGHTER_INKLING_STATUS_KIND_SPECIAL_HI_JUMP, *FIGHTER_INKLING_STATUS_KIND_SPECIAL_HI_FALL].contains(&status_kind) && get_speed_y(boma) < 0.5 {
+				if motion_kind != hash40("special_hi_down") {
+					if ControlModule::check_button_on_trriger(boma, *CONTROL_PAD_BUTTON_SPECIAL) {
+						MotionModule::change_motion(boma, Hash40::new("special_hi_down"), -1.0, 1.0, false, 0.0, false, false);
+						macros::PLAY_SE(fighter, Hash40::new("se_inkling_special_h01"));
+					}
+				}
 			};
 		};
 	};
