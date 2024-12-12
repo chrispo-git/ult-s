@@ -41,12 +41,30 @@ unsafe extern "C" fn ink(fighter : &mut L2CFighterCommon) {
 					KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_DASH_BACK);
 				};
 			};
-			if [*FIGHTER_INKLING_STATUS_KIND_SPECIAL_HI_JUMP, *FIGHTER_INKLING_STATUS_KIND_SPECIAL_HI_FALL].contains(&status_kind) && get_speed_y(boma) < 0.5 {
-				if motion_kind != hash40("special_hi_down") {
-					if ControlModule::check_button_on_trriger(boma, *CONTROL_PAD_BUTTON_SPECIAL) {
+			if [*FIGHTER_INKLING_STATUS_KIND_SPECIAL_HI_JUMP].contains(&status_kind) {
+					if ControlModule::check_button_on_trriger(boma, *CONTROL_PAD_BUTTON_SPECIAL) && motion_kind == hash40("special_hi_down") {
+						StatusModule::change_status_request_from_script(boma, *FIGHTER_INKLING_STATUS_KIND_SPECIAL_HI_FALL, false);
 						MotionModule::change_motion(boma, Hash40::new("special_hi_down"), -1.0, 1.0, false, 0.0, false, false);
 						macros::PLAY_SE(fighter, Hash40::new("se_inkling_special_h01"));
+						KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_MOTION_AIR);
 					}
+					println!("inkling upb jump");
+			};
+			if [*FIGHTER_INKLING_STATUS_KIND_SPECIAL_HI_FALL].contains(&status_kind) {
+					println!("inkling upb fall");
+			};
+			if [*FIGHTER_INKLING_STATUS_KIND_SPECIAL_HI_ROT].contains(&status_kind) {
+					println!("inkling upb rotato");
+			};
+
+
+			if ![*FIGHTER_INKLING_STATUS_KIND_SPECIAL_HI_JUMP, *FIGHTER_INKLING_STATUS_KIND_SPECIAL_HI_FALL].contains(&status_kind) {
+				IS_UPB_DOWN[ENTRY_ID] = false;
+			}
+			if motion_kind == hash40("special_hi_landing_r") || motion_kind == hash40("special_hi_landing_l"){
+				let slideoff = 1.5 - (frame*WorkModule::get_param_float(fighter.module_accessor, hash40("ground_brake"), 0));
+				if slideoff > 0.0 {
+					macros::SET_SPEED_EX(fighter, slideoff, 0.0, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
 				}
 			};
 		};
