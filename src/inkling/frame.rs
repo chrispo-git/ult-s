@@ -45,25 +45,18 @@ unsafe extern "C" fn ink(fighter : &mut L2CFighterCommon) {
 					if ControlModule::check_button_on_trriger(boma, *CONTROL_PAD_BUTTON_SPECIAL) && motion_kind != hash40("special_hi_down") {
 						MotionModule::change_motion(boma, Hash40::new("special_hi_down"), -1.0, 1.0, false, 0.0, false, false);
 						macros::PLAY_SE(fighter, Hash40::new("se_inkling_special_h01"));
+						ArticleModule::change_motion(fighter.module_accessor, *FIGHTER_INKLING_GENERATE_ARTICLE_SQUID,smash::phx::Hash40::new("special_hi_2"),false,0.0);
 						KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_MOTION_AIR);
 					}
 			};
-
-			if ![*FIGHTER_INKLING_STATUS_KIND_SPECIAL_HI_JUMP, *FIGHTER_INKLING_STATUS_KIND_SPECIAL_HI_ROT].contains(&status_kind) {
-				IS_UPB_DOWN[ENTRY_ID] = false;
-			}
 			if motion_kind == hash40("special_hi_down") {
-				//let mut rotation = Vector3f{x: 0.0, y: -30.0 , z: 0.0};
-				//ModelModule::set_joint_rotate(boma, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
-				WorkModule::set_float(boma, -30.0, *FIGHTER_INKLING_STATUS_SPECIAL_HI_WORK_FLOAT_MODEL_DEGREE);
-				WorkModule::set_float(boma, -30.0, *FIGHTER_INKLING_STATUS_SPECIAL_HI_WORK_FLOAT_DEGREE);
-				ArticleModule::set_float(boma,*FIGHTER_INKLING_GENERATE_ARTICLE_SQUID, -30.0, *WEAPON_INKLING_SQUID_INSTANCE_WORK_ID_FLOAT_SPECIAL_HI_ROT_X);
 				if GroundModule::get_touch_flag(boma) == *GROUND_TOUCH_FLAG_DOWN as u64 {
+					macros::EFFECT_FOLLOW(fighter, Hash40::new("inkling_superjump_jet"), Hash40::new("hip"), -2, 0, 0, 0, 0, -90, 1, true);
+					EffectModule::enable_sync_init_pos_last(fighter.module_accessor);
+					macros::LAST_PARTICLE_SET_COLOR(fighter, WorkModule::get_float(boma, *FIGHTER_INKLING_INSTANCE_WORK_ID_FLOAT_INK_R), WorkModule::get_float(boma, *FIGHTER_INKLING_INSTANCE_WORK_ID_FLOAT_INK_G), WorkModule::get_float(boma, *FIGHTER_INKLING_INSTANCE_WORK_ID_FLOAT_INK_B));
+				
 					StatusModule::change_status_request_from_script(boma, 25, true);
-					ArticleModule::generate_article(boma, *FIGHTER_INKLING_GENERATE_ARTICLE_SPLASH, false, -1);
 				}
-				ArticleModule::change_motion(fighter.module_accessor, *FIGHTER_INKLING_GENERATE_ARTICLE_SQUID,smash::phx::Hash40::new("special_hi_2"),false,0.0);
-				println!("down!.");
 			};
 			if motion_kind == hash40("special_hi_landing_r") || motion_kind == hash40("special_hi_landing_l"){
 				let slideoff = 1.5 - (frame*WorkModule::get_param_float(fighter.module_accessor, hash40("ground_brake"), 0));
