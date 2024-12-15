@@ -38,7 +38,7 @@ unsafe extern "C" fn brawler_dair(fighter: &mut L2CAgentBase) {
 		macros::FT_MOTION_RATE(fighter, 1.0);
 		if macros::is_excute(fighter) {
 			WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_INSTANCE_WORK_ID_FLAG_NO_SPEED_OPERATION_CHK);
-			macros::SET_SPEED_EX(fighter, 2.5, -2.5, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+			macros::SET_SPEED_EX(fighter, 1.75, -3.03, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
 			WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_INSTANCE_WORK_ID_FLAG_NO_SPEED_OPERATION_CHK);
 		}
 		frame(fighter.lua_state_agent, 8.0);
@@ -69,7 +69,7 @@ unsafe extern "C" fn brawler_dair_eff(fighter: &mut L2CAgentBase) {
 		frame(fighter.lua_state_agent, 7.0);
 		for _ in 0..12  {
 			if macros::is_excute(fighter) {
-				macros::EFFECT_FOLLOW_FLIP_ALPHA(fighter, Hash40::new("sys_attack_speedline"), Hash40::new("sys_attack_speedline"), Hash40::new("top"), 0, 13, -10, 40, 0, 0, 1.0, true, *EF_FLIP_YZ, 0.3);
+				macros::EFFECT_FOLLOW_FLIP_ALPHA(fighter, Hash40::new("sys_attack_speedline"), Hash40::new("sys_attack_speedline"), Hash40::new("top"), 0, 13, -10, 60, 0, 0, 1.0, true, *EF_FLIP_YZ, 0.3);
 			}
 			wait(fighter.lua_state_agent, 2.0);
 		}
