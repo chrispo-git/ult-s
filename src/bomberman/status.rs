@@ -185,6 +185,7 @@ unsafe extern "C" fn main_neutralb(fighter: &mut L2CFighterCommon) -> L2CValue {
                 let sc = ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_GUARD) && (!WorkModule::is_flag(boma, *FIGHTER_INSTANCE_WORK_ID_FLAG_DISABLE_ESCAPE_AIR) || is_ground);
                 if NEUTRALB_CHARGE[ENTRY_ID] >= NEUTRALB_MAX {
 					smash::app::FighterUtil::flash_eye_info(boma);
+                    EffectModule::req_common(boma, Hash40::new("charge_max"), 0.0);
                 }
                 if NEUTRALB_CHARGE[ENTRY_ID] >= NEUTRALB_MAX || jc || sc  {
                     if is_ground {
@@ -212,6 +213,7 @@ unsafe extern "C" fn main_neutralb(fighter: &mut L2CFighterCommon) -> L2CValue {
                 }
             }
             if [hash40("special_n_shoot"), hash40("special_air_n_shoot")].contains(&motion_kind) {
+                EffectModule::remove_common(boma, Hash40::new("charge_max"));
                 if is_end {
                     if is_ground {
                         fighter.change_status(FIGHTER_STATUS_KIND_WAIT.into(), false.into());
