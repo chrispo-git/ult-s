@@ -1,3 +1,14 @@
+
+import pkg_resources, subprocess, sys
+
+required  = {'packaging','requests'}
+installed = {pkg.key for pkg in pkg_resources.working_set}
+missing   = required - installed
+
+if missing:
+    subprocess.check_call([sys.executable, '-m', 'pip', 'install', *missing])
+
+
 import os
 import shutil
 import sys
@@ -5,15 +16,11 @@ from pathlib import Path
 import re
 import zipfile
 import requests
-from github import Github
+# from github import Github
 from ftplib import FTP
 import tkinter as tk
 from tkinter import filedialog
 from packaging.version import Version
-# If you're running this just as a python file, you're gonna need to ensure you have the dependencies imported above:
-# pip install github
-# pip install packaging
-# pip install requests
 
 included = [
     "bayonetta", "brave", "buddy",
@@ -296,10 +303,8 @@ def grab_dependencies():
     print("       Skyline downloaded")
 
     #NRO Hook
-    g = Github(None)
-    repo = g.get_repo("ultimate-research/nro-hook-plugin")
-    latest = repo.get_latest_release()
-    latest_ver = latest.html_url.replace("https://github.com/ultimate-research/nro-hook-plugin/releases/tag/","")
+    response = requests.get("https://api.github.com/repos/ultimate-research/nro-hook-plugin/releases/latest")
+    latest_ver = response.json()["tag_name"]
     download_dependency = f"https://github.com/ultimate-research/nro-hook-plugin/releases/download/{latest_ver}/libnro_hook.nro"
     r = requests.get(download_dependency)
     f = open("downloads/romfs/plugins/libnro_hook.nro","wb")
@@ -308,10 +313,8 @@ def grab_dependencies():
     print("       NRO Hook downloaded")
 
     #Smashline Hook
-    g = Github(None)
-    repo = g.get_repo("HDR-Development/smashline")
-    latest = repo.get_latest_release()
-    latest_ver = latest.title
+    response = requests.get("https://api.github.com/repos/HDR-Development/smashline/releases/latest")
+    latest_ver = response.json()["tag_name"]
     download_dependency = f"https://github.com/HDR-Development/smashline/releases/download/{latest_ver}/libsmashline_plugin.nro"
     r = requests.get(download_dependency)
     f = open("downloads/romfs/plugins/libsmashline_plugin.nro","wb")
@@ -320,10 +323,8 @@ def grab_dependencies():
     print("       Smashline Hook downloaded")
 
     #Arcropolis
-    g = Github(None)
-    repo = g.get_repo("Raytwo/ARCropolis")
-    latest = repo.get_latest_release()
-    latest_ver = latest.html_url.replace("https://github.com/Raytwo/ARCropolis/releases/tag/","")
+    response = requests.get("https://api.github.com/repos/Raytwo/ARCropolis/releases/latest")
+    latest_ver = response.json()["tag_name"]
     download_dependency = f"https://github.com/Raytwo/ARCropolis/releases/download/{latest_ver}/release.zip"
     r = requests.get(download_dependency)
     f = open("downloads/release.zip","wb")
@@ -337,10 +338,8 @@ def grab_dependencies():
     print("       ARCropolis downloaded")
 
     #Param Config
-    g = Github(None)
-    repo = g.get_repo("CSharpM7/lib_paramconfig")
-    latest = repo.get_latest_release()
-    latest_ver = latest.html_url.replace("https://github.com/CSharpM7/lib_paramconfig/releases/tag/","")
+    response = requests.get("https://api.github.com/repos/CSharpM7/lib_paramconfig/releases/latest")
+    latest_ver = response.json()["tag_name"]
     download_dependency = f"https://github.com/CSharpM7/lib_paramconfig/releases/download/{latest_ver}/libparam_config.nro"
     r = requests.get(download_dependency)
     f = open("downloads/romfs/plugins/libparam_config.nro","wb")
@@ -349,10 +348,8 @@ def grab_dependencies():
     print("       Param Config downloaded")
 
     #Stage Config
-    g = Github(None)
-    repo = g.get_repo("ThatNintendoNerd/stage_config")
-    latest = repo.get_latest_release()
-    latest_ver = latest.html_url.replace("https://github.com/ThatNintendoNerd/stage_config/releases/tag/","")
+    response = requests.get("https://api.github.com/repos/ThatNintendoNerd/stage_config/releases/latest")
+    latest_ver = response.json()["tag_name"]
     download_dependency = f"https://github.com/ThatNintendoNerd/stage_config/releases/download/{latest_ver}/release.zip"
     r = requests.get(download_dependency)
     f = open("downloads/release.zip","wb")
@@ -366,7 +363,7 @@ def grab_dependencies():
     print("       Stage Config downloaded")
 
     #CSK Collection
-    download_dependency = f"https://gamebanana.com/dl/1158250"
+    download_dependency = f"https://gamebanana.com/dl/1302885"
     r = requests.get(download_dependency)
     f = open("downloads/csk_collection.zip","wb")
     f.write(r.content)
@@ -379,7 +376,8 @@ def grab_dependencies():
     shutil.rmtree("downloads/ultimate")
     print("       CSK Collection downloaded")
 
-    #Arena Latency
+    #Arena Latency (Removed)
+    '''
     download_dependency = f"https://gamebanana.com/dl/1142218"
     r = requests.get(download_dependency)
     f = open("downloads/latency.zip","wb")
@@ -396,6 +394,7 @@ def grab_dependencies():
     if os.path.exists("atmosphere/contents/01006A800016E000/exefs"):
         shutil.rmtree("atmosphere/contents/01006A800016E000/exefs")
     shutil.copytree("downloads/exefs","atmosphere/contents/01006A800016E000/exefs")
+    '''
 
 def remove_ftp_dir(ftp, path):
     for (name, properties) in ftp.mlsd(path=path):
@@ -518,10 +517,8 @@ romfs_ver = romfs_ver.replace("v","")
 file.close()
 latest_ver = "1.0.0"
 try:
-    g = Github(None)
-    repo = g.get_repo("chrispo-git/ult-s")
-    latest = repo.get_latest_release()
-    latest_ver = latest.html_url.replace("https://github.com/chrispo-git/ult-s/releases/tag/","")
+    response = requests.get("https://api.github.com/repos/chrispo-git/ult-s/releases/latest")
+    latest_ver = response.json()["tag_name"]
     latest_ver = latest_ver.replace("v.","")
     latest_ver = latest_ver.replace("v","")
     latest_ver = latest_ver.replace("\n","")
