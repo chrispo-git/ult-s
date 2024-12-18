@@ -182,7 +182,7 @@ FaF: 26
 ### DTilt
 |Frame|ID|Damage|Angle|BKB|KBG|Notes| | | |
 |-|-|-|-|-|-|-|-|-|-|
-|Frame 6| 0|  8.0%|  80|  50|  100| 0.2 bonus trip chance|
+|Frame 6| 0|  8.0%|  80|  30|  100| 0.2 bonus trip chance|
 |Hitboxes terminated on Frame 8|
 |Note: Deals 2f bonus hitstun|
 
