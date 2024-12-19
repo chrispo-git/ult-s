@@ -12,6 +12,7 @@ use std::mem;
 use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
+use crate::mario::*;
 use super::*;
 
 pub fn install() {
@@ -20,9 +21,21 @@ pub fn install() {
     .acmd("sound_appealhil", mario_utaunt_snd, Priority::Low)    
     .acmd("effect_appealhir", mario_utaunt_eff, Priority::Low)    
     .acmd("effect_appealhil", mario_utaunt_eff, Priority::Low)    
+    .acmd("game_run", mario_run_game, Priority::Low)    
     .install();
 }
 
+unsafe extern "C" fn mario_run_game(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+	let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+	frame(fighter.lua_state_agent, 1.0);
+		for _ in 0..i32::MAX {
+			if macros::is_excute(fighter) {
+				RUNLOOPCOUNT[ENTRY_ID] += 1;
+			}
+			wait(fighter.lua_state_agent, 1.0);
+		}
+}	
 unsafe extern "C" fn mario_utaunt_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 13.0);

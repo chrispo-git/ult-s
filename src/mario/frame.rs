@@ -30,10 +30,14 @@ unsafe extern "C" fn mario_frame(fighter : &mut L2CFighterCommon) {
 		let motion_kind = smash::app::lua_bind::MotionModule::motion_kind(boma);
 		if fighter_kind == *FIGHTER_KIND_MARIO &&  is_default(boma) {
 			if status_kind == *FIGHTER_STATUS_KIND_RUN {
-				if motion_kind == hash40("run") && MotionModule::frame(boma)-MotionModule::end_frame(boma)<2.0 {
-					MotionModule::change_motion(boma, smash::phx::Hash40::new("run_max"), 0.0, 1.0, false, 0.0, false, false);
+				if motion_kind == hash40("run"){
+					if RUNLOOPCOUNT[ENTRY_ID] >= 30 {
+						MotionModule::change_motion(boma, smash::phx::Hash40::new("run_max"), 0.0, 1.0, false, 0.0, false, false);
+					}
 				}
-			}	
+			}	else {
+				RUNLOOPCOUNT[ENTRY_ID] = 0;
+			}
 
 			//Side Special
 			if StatusModule::situation_kind(boma) != *SITUATION_KIND_AIR || (*FIGHTER_STATUS_KIND_DAMAGE..*FIGHTER_STATUS_KIND_DAMAGE_FALL).contains(&status_kind) {
