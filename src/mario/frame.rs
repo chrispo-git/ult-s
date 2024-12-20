@@ -29,7 +29,7 @@ unsafe extern "C" fn mario_frame(fighter : &mut L2CFighterCommon) {
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
 		let motion_kind = smash::app::lua_bind::MotionModule::motion_kind(boma);
 		if fighter_kind == *FIGHTER_KIND_MARIO &&  is_default(boma) {
-			if status_kind == *FIGHTER_STATUS_KIND_RUN {
+			if [hash40("run"),hash40("run_max"),hash40("run_brake_r"),hash40("run_brake_l"),hash40("turn_run"),hash40("turn_run_brake")].contains(&motion_kind) {
 				if motion_kind == hash40("run"){
 					if RUNLOOPCOUNT[ENTRY_ID] >= 30 {
 						MotionModule::change_motion(boma, smash::phx::Hash40::new("run_max"), 0.0, 1.0, false, 0.0, false, false);

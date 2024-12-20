@@ -165,10 +165,10 @@ FaF: 25
 |-|-|-|-|-|-|-|-|-|-|
 |Frame 6| 0| 8.0%| 50| 100| 43| deals 1 bonus shield damage|
 |Frame 10| 0| 6.0%| 48| 100| 30| deals 1 bonus shield damage|
-|Hitboxes terminated on Frame 26|
+|Hitboxes terminated on Frame 19|
 
 
-FaF: 38
+FaF: 33
 
 
 
