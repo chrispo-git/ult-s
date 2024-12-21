@@ -38,6 +38,19 @@ unsafe extern "C" fn mario_frame(fighter : &mut L2CFighterCommon) {
 			}	else {
 				RUNLOOPCOUNT[ENTRY_ID] = 0;
 			}
+			//Down Special
+			if [hash40("special_air_lw_start"),hash40("special_lw_start")].contains(&motion_kind) {
+				if MotionModule::end_frame(boma) - MotionModule::frame(boma) < 2.0 {
+					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL, false);
+				}
+				if AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_ALL) && !AttackModule::is_infliction(boma, *COLLISION_KIND_MASK_ALL) && MotionModule::frame(boma) < 60.0{
+					KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_JUMP);
+					MotionModule::set_frame_sync_anim_cmd(boma, 60.0, true, true, false);
+					if !AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_HIT) {
+						MotionModule::set_rate(boma, 0.5);
+					};
+				};
+			}
 
 			//Side Special
 			if StatusModule::situation_kind(boma) != *SITUATION_KIND_AIR || (*FIGHTER_STATUS_KIND_DAMAGE..*FIGHTER_STATUS_KIND_DAMAGE_FALL).contains(&status_kind) {
