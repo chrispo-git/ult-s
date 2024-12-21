@@ -594,3 +594,33 @@ FaF: 38
 
 FaF: --
 
+
+
+
+
+
+
+### (Air) Down Special
+|Frame|ID|Damage|Angle|BKB|KBG|Notes| | | |
+|-|-|-|-|-|-|-|-|-|-|
+|Frame 14| 0|  10.0%|  270|  30|  90|
+|Frame 14| 1|  10.0%|  270|  30|  90|
+|Frame 14| 2|  10.0%|  270|  30|  90|
+|Frame 19| 0|  10.0%|  70|  30|  90|
+|Frame 19| 1|  10.0%|  70|  30|  90|
+|Frame 19| 2|  10.0%|  70|  30|  90|
+|Hitboxes terminated on Frame 58|
+
+
+FaF: 66 (6 On Hit, 12 On Block)
+
+
+
+
+
+
+
+### Down Special
+
+FaF: 10
+

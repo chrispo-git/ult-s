@@ -53,7 +53,23 @@ unsafe extern "C" fn mario_frame(fighter : &mut L2CFighterCommon) {
 				if [hash40("special_lw_start")].contains(&motion_kind) {
 					if MotionModule::frame(boma) > 35.0 {
 						KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_FALL);
+						if ray_check_pos(boma, 0.0, -3.0, true) == 1 {
+							StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL, false);
+						};
 					}
+				} else {
+					
+					let stick_y = ControlModule::get_stick_y(boma);
+					if stick_y <= -0.5 {
+						GroundModule::pass_floor(boma);
+					}else {
+						GroundModule::clear_pass_floor(boma);
+					};
+					if ray_check_pos(boma, 0.0, -3.0, true) == 1 {
+						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL_SPECIAL, false);
+						macros::QUAKE(fighter, *CAMERA_QUAKE_KIND_M);
+						macros::EFFECT(fighter, Hash40::new("sys_crown"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.7, 0, 0, 0, 0, 0, 0, false);
+					};
 				}
 			}
 

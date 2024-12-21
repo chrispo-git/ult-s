@@ -26,8 +26,11 @@ pub fn install() {
     .acmd("game_specialn", mario_fireball, Priority::Low)    
     .acmd("game_specialairn", mario_fireball, Priority::Low)    
     .acmd("game_speciallwstart", mario_downb, Priority::Low)    
+    .acmd("effect_speciallwstart", mario_downb_eff, Priority::Low)    
+    .acmd("sound_speciallwstart", mario_downb_snd, Priority::Low)    
     .acmd("game_specialairlwstart", mario_air_downb, Priority::Low)    
     .acmd("effect_specialairlwstart", mario_air_downb_eff, Priority::Low)    
+    .acmd("sound_specialairlwstart", mario_air_downb_snd, Priority::Low)    
     .install();
 }
 
@@ -108,6 +111,18 @@ unsafe extern "C" fn mario_downb(agent: &mut L2CAgentBase) {
 			StatusModule::set_situation_kind(agent.module_accessor, smash::app::SituationKind(*SITUATION_KIND_AIR), true);
 		}
 }
+unsafe extern "C" fn mario_downb_eff(agent: &mut L2CAgentBase) {
+	frame(agent.lua_state_agent, 3.0);
+    if macros::is_excute(agent) {
+        macros::LANDING_EFFECT(agent, Hash40::new("sys_action_smoke_v"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
+    }
+}
+unsafe extern "C" fn mario_downb_snd(agent: &mut L2CAgentBase) {
+		frame(agent.lua_state_agent, 3.0);
+		if macros::is_excute(agent) {
+			macros::PLAY_SE(agent, Hash40::new("se_mario_jump01"));
+		}
+}
 unsafe extern "C" fn mario_air_downb(fighter: &mut L2CAgentBase) {
 		frame(fighter.lua_state_agent, 14.0);
 		if macros::is_excute(fighter) {
@@ -128,6 +143,10 @@ unsafe extern "C" fn mario_air_downb(fighter: &mut L2CAgentBase) {
 }
 unsafe extern "C" fn mario_air_downb_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
+		frame(fighter.lua_state_agent, 7.0);
+		if macros::is_excute(fighter) {
+			macros::EFFECT(fighter, Hash40::new("sys_smash_flash"), Hash40::new("handr"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
+		}
 		frame(fighter.lua_state_agent, 14.0);
 		for _ in 0..23
  		{
@@ -136,4 +155,18 @@ unsafe extern "C" fn mario_air_downb_eff(fighter: &mut L2CAgentBase) {
 			}
 			wait(fighter.lua_state_agent, 2.0);
 		}
+}
+unsafe extern "C" fn mario_air_downb_snd(agent: &mut L2CAgentBase) {
+    frame(agent.lua_state_agent, 7.0);
+    if macros::is_excute(agent) {
+        macros::PLAY_SEQUENCE(agent, Hash40::new("seq_mario_rnd_attack"));
+    }
+    frame(agent.lua_state_agent, 14.0);
+	for _ in 0..5
+	 {
+		if macros::is_excute(agent) {
+			macros::PLAY_SE(agent, Hash40::new("se_mario_attackdash"));
+		}
+		wait(agent.lua_state_agent, 10.0);
+	}
 }

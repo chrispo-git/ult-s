@@ -22,7 +22,7 @@ pub fn install() {
 unsafe extern "C" fn downb_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
         StatusModule::init_settings(
             fighter.module_accessor,
-            smash::app::SituationKind(*SITUATION_KIND_GROUND),
+            smash::app::SituationKind(*SITUATION_KIND_NONE),
             *FIGHTER_KINETIC_TYPE_MOTION_AIR,
             *GROUND_CORRECT_KIND_GROUND as u32,
             smash::app::GroundCliffCheckKind(*GROUND_CLIFF_CHECK_KIND_ON_DROP_BOTH_SIDES),
