@@ -50,6 +50,11 @@ unsafe extern "C" fn mario_frame(fighter : &mut L2CFighterCommon) {
 						MotionModule::set_rate(boma, 0.5);
 					};
 				};
+				if [hash40("special_lw_start")].contains(&motion_kind) {
+					if MotionModule::frame(boma) > 35.0 {
+						KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_FALL);
+					}
+				}
 			}
 
 			//Side Special
