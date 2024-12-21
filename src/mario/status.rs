@@ -52,9 +52,9 @@ pub unsafe extern "C" fn downb_main(fighter: &mut L2CFighterCommon) -> L2CValue 
     WorkModule::enable_transition_term_group(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_GROUP_CHK_AIR_LANDING);
     WorkModule::unable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_LANDING_LIGHT);
     if fighter.global_table[0x16].get_i32() != *SITUATION_KIND_GROUND {
-        MotionModule::change_motion(boma, smash::phx::Hash40::new("special_air_lw_start"), 0.0, 1.0, false, 0.0, false, false);
+        MotionModule::change_motion(fighter.module_accessor, smash::phx::Hash40::new("special_air_lw_start"), 0.0, 1.0, false, 0.0, false, false);
     } else {
-        MotionModule::change_motion(boma, smash::phx::Hash40::new("special_lw_start"), 0.0, 1.0, false, 0.0, false, false);
+        MotionModule::change_motion(fighter.module_accessor, smash::phx::Hash40::new("special_lw_start"), 0.0, 1.0, false, 0.0, false, false);
     }
     set_kinetic(fighter);
     fighter.sub_shift_status_main(L2CValue::Ptr(downb_main_loop as *const () as _))
