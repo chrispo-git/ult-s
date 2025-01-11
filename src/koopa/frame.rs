@@ -83,12 +83,6 @@ unsafe extern "C" fn bowser_frame(fighter: &mut L2CFighterCommon) {
 					MotionModule::set_rate(boma, 1.0);
 				};
 			};
-			if [hash40("attack_air_lw")].contains(&MotionModule::motion_kind(boma)){
-				if PostureModule::lr(boma) == -1.0 {
-					PostureModule::reverse_lr(boma);
-					PostureModule::update_rot_y_lr(boma);
-				};
-			};
 			if [hash40("special_n")].contains(&MotionModule::motion_kind(boma)){
 				if end_frame-frame < 5.0 {
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_WAIT, true);
