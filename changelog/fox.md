@@ -41,7 +41,6 @@ Wall Jump? | True|
 |Frame 2| 2|  1.8%|  180|  15 (Set)|  100|
 |Frame 2| 3|  1.8%|  361|  15 (Set)|  100|
 |Hitboxes terminated on Frame 3|
-|Note: Deals -1f bonus hitstun|
 
 
 FaF: 18
@@ -59,7 +58,6 @@ FaF: 18
 |Frame 2| 1|  1.0%|  361|  15 (Set)|  100|
 |Frame 2| 2|  1.0%|  180|  15 (Set)|  100|
 |Hitboxes terminated on Frame 3|
-|Note: Deals -1f bonus hitstun|
 
 
 FaF: 21
