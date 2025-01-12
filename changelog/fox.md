@@ -534,10 +534,11 @@ FaF: 38
 |Frame 27| 0| 2.0%| 361| 0| 0| Flinchless| Reflectable| Absorbable|
 |Frame 30| 0| 2.0%| 361| 0| 0| Flinchless| Reflectable| Absorbable|
 |Frame 33| 0| 2.0%| 361| 0| 0| Flinchless| Reflectable| Absorbable|
-|Throws on Frame 35| | 1.0%| 60| 85| 100|
+|Throws on Frame 34| | 1.0%|
+|Note: Knockdown Throw|
 
 
-FaF: 55
+FaF: 44
 
 
 
