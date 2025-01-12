@@ -64,7 +64,7 @@ unsafe extern "C" fn moonwalk(fighter : &mut L2CFighterCommon) {
         if [*FIGHTER_STATUS_KIND_DASH, *FIGHTER_STATUS_KIND_TURN_DASH].contains(&status_kind){
 			if stickx < -0.2 {
                 let moonwalk_speed = (stickx*walk_accel_mul - walk_accel_add)*mw_modifier;
-                println!("Moonwalk stuff! {} speed, {} mw change, {} mw max",  (get_speed_x(boma)*lr), moonwalk_speed, max_moonwalk);
+                //println!("Moonwalk stuff! {} speed, {} mw change, {} mw max",  (get_speed_x(boma)*lr), moonwalk_speed, max_moonwalk);
                 if (get_speed_x(boma)*lr)+moonwalk_speed > -max_moonwalk {
                     let speed = smash::phx::Vector3f { x: moonwalk_speed, y: 0.0, z: 0.0 };
                     KineticModule::add_speed(boma, &speed);
