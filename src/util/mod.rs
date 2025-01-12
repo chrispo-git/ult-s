@@ -468,6 +468,14 @@ pub(crate) unsafe fn reimpl_cancel_frame(fighter: &mut L2CAgentBase) -> () {
 pub(crate) unsafe fn ray_check_pos(boma: &mut smash::app::BattleObjectModuleAccessor, x_distance : f32, y_distance: f32, ignore_plat: bool) -> u64 {
 	GroundModule::ray_check(boma, &Vector2f{ x: PostureModule::pos_x(boma), y: PostureModule::pos_y(boma)}, &Vector2f{ x: x_distance, y: y_distance}, ignore_plat)
 }
+pub(crate) unsafe fn get_prev_speed_x(boma: &mut smash::app::BattleObjectModuleAccessor) -> f32 {
+	let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+	return PREV_SPEED_X[ENTRY_ID]
+}
+pub(crate) unsafe fn get_prev_speed_y(boma: &mut smash::app::BattleObjectModuleAccessor) -> f32 {
+	let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+	return PREV_SPEED_Y[ENTRY_ID]
+}
 pub(crate) unsafe fn get_speed_x(boma: &mut smash::app::BattleObjectModuleAccessor) -> f32 {
 	let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 	return SPEED_X[ENTRY_ID]
