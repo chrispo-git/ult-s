@@ -18,6 +18,8 @@ static mut STATUS_DURATION : [i32; 8] = [0; 8];
 static mut MOTION_DURATION : [i32; 8] = [0; 8];
 pub static mut POS_X : [f32; 8] = [0.0; 8];
 pub static mut POS_Y : [f32; 8] = [0.0; 8];
+pub static mut PREV_SPEED_X : [f32; 8] = [0.0; 8];
+pub static mut PREV_SPEED_Y : [f32; 8] = [0.0; 8];
 pub static mut SPEED_X : [f32; 8] = [0.0; 8];
 pub static mut SPEED_Y : [f32; 8] = [0.0; 8];
 pub static mut ACCEL_X : [f32; 8] = [0.0; 8];
@@ -342,6 +344,8 @@ unsafe extern "C" fn util_update(fighter : &mut L2CFighterCommon) {
 		};
 		//Speed and acceleration checks
 		if is_reset() {
+			PREV_SPEED_X[ENTRY_ID] = 0.0;
+			PREV_SPEED_Y[ENTRY_ID] = 0.0;
 			SPEED_X[ENTRY_ID] = 0.0;
 			SPEED_Y[ENTRY_ID] = 0.0;
 			ACCEL_X[ENTRY_ID] = 0.0;
@@ -349,6 +353,8 @@ unsafe extern "C" fn util_update(fighter : &mut L2CFighterCommon) {
 		};
 		ACCEL_X[ENTRY_ID] = SPEED_X[ENTRY_ID] - KineticModule::get_sum_speed_x(boma, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
 		ACCEL_Y[ENTRY_ID] = SPEED_Y[ENTRY_ID] - KineticModule::get_sum_speed_y(boma, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+		PREV_SPEED_X[ENTRY_ID] = SPEED_X[ENTRY_ID];
+		PREV_SPEED_Y[ENTRY_ID] = SPEED_Y[ENTRY_ID];
 		SPEED_X[ENTRY_ID] = KineticModule::get_sum_speed_x(boma, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
 		SPEED_Y[ENTRY_ID] = KineticModule::get_sum_speed_y(boma, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
 		POS_X[ENTRY_ID] = PostureModule::pos_x(boma);
