@@ -165,10 +165,10 @@ FaF: 25
 |-|-|-|-|-|-|-|-|-|-|
 |Frame 6| 0| 8.0%| 50| 100| 43| deals 1 bonus shield damage|
 |Frame 10| 0| 6.0%| 48| 100| 30| deals 1 bonus shield damage|
-|Hitboxes terminated on Frame 26|
+|Hitboxes terminated on Frame 19|
 
 
-FaF: 38
+FaF: 33
 
 
 
@@ -593,4 +593,34 @@ FaF: 38
 
 
 FaF: --
+
+
+
+
+
+
+
+### (Air) Down Special
+|Frame|ID|Damage|Angle|BKB|KBG|Notes| | | |
+|-|-|-|-|-|-|-|-|-|-|
+|Frame 14| 0|  10.0%|  270|  30|  90|
+|Frame 14| 1|  10.0%|  270|  30|  90|
+|Frame 14| 2|  10.0%|  270|  30|  90|
+|Frame 19| 0|  10.0%|  70|  30|  90|
+|Frame 19| 1|  10.0%|  70|  30|  90|
+|Frame 19| 2|  10.0%|  70|  30|  90|
+|Hitboxes terminated on Frame 58|
+
+
+FaF: 66 (6 On Hit, 12 On Block)
+
+
+
+
+
+
+
+### Down Special
+
+FaF: 10
 

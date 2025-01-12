@@ -5,6 +5,7 @@ mod acmd;
 static mut SIDEB : [bool; 8] = [false; 8];
 static mut SPIN : [bool; 8] = [false; 8];
 static mut SPIN_EFF : [i32; 8] = [0; 8];
+static mut RUNLOOPCOUNT : [i32; 8] = [0; 8];
 static mut SPIN1 :  smash::phx::Vector3f =  smash::phx::Vector3f { x: 0.0, y: 8.25, z: 0.0 };
 static mut SPIN2 :  smash::phx::Vector3f =  smash::phx::Vector3f { x: 0.0, y: 8.2, z: 0.0 };
 static mut SPIN3 :  smash::phx::Vector3f =  smash::phx::Vector3f { x: 0.0, y: 8.15, z: 0.0 };
