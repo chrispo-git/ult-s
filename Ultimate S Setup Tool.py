@@ -388,13 +388,13 @@ def grab_dependencies():
     os.remove("downloads/latency.zip")
     print("       Arena Latency downloaded")
     print("       Moving dependencies")
+    '''
     if os.path.exists("atmosphere/contents/01006A800016E000/romfs/skyline/plugins"):
         shutil.rmtree("atmosphere/contents/01006A800016E000/romfs/skyline/plugins")
-    shutil.copytree("downloads/romfs/plugins","atmosphere/contents/01006A800016E000/romfs/skyline/plugins")
     if os.path.exists("atmosphere/contents/01006A800016E000/exefs"):
         shutil.rmtree("atmosphere/contents/01006A800016E000/exefs")
     shutil.copytree("downloads/exefs","atmosphere/contents/01006A800016E000/exefs")
-    '''
+    shutil.copytree("downloads/romfs/plugins","atmosphere/contents/01006A800016E000/romfs/skyline/plugins")
 
 def remove_ftp_dir(ftp, path):
     for (name, properties) in ftp.mlsd(path=path):
