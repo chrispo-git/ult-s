@@ -182,7 +182,7 @@ FaF: 26
 ### DTilt
 |Frame|ID|Damage|Angle|BKB|KBG|Notes| | | |
 |-|-|-|-|-|-|-|-|-|-|
-|Frame 6| 0|  8.0%|  80|  50|  100| 0.2 bonus trip chance|
+|Frame 6| 0|  8.0%|  80|  30|  100| 0.2 bonus trip chance|
 |Hitboxes terminated on Frame 8|
 |Note: Deals 2f bonus hitstun|
 
@@ -337,18 +337,20 @@ Autocancel - 35+
 ### Fair
 |Frame|ID|Damage|Angle|BKB|KBG|Notes| | | |
 |-|-|-|-|-|-|-|-|-|-|
-|Frame 14| 0|  12.5%|  42|  40|  90|
-|Frame 14| 1|  12.5%|  42|  40|  90|
-|Frame 17| 0|  14.5%|  42|  40|  90|
-|Frame 17| 1|  14.5%|  280|  40|  70|
-|Hitboxes terminated on Frame 18|
+|Frame 9| 0|  8.5%|  70|  40|  90|
+|Frame 9| 1|  8.5%|  70|  40|  90|
+|Frame 10| 0|  12.5%|  42|  40|  90|
+|Frame 10| 1|  12.5%|  42|  40|  90|
+|Frame 12| 0|  14.5%|  42|  40|  90|
+|Frame 12| 1|  14.5%|  280|  40|  70|
+|Hitboxes terminated on Frame 13|
 
 
-FaF: 46
+FaF: 41
 
 
 
-Autocancel - 1/41+
+Autocancel - 1/36+
 
 
 
