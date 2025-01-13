@@ -53,6 +53,8 @@ pub static mut CAN_DASH: [i32; 8] = [0; 8];
 pub static mut CAN_GRAB: [i32; 8] = [0; 8];
 pub static mut CAN_TURNDASH: [i32; 8] = [0; 8];
 
+pub static mut TO_RUN_FLAG: [bool; 8] = [false; 8];
+
 //Jab Flags
 pub static mut HAS_ENABLE_COMBO_ON: [bool; 8] = [false; 8];
 pub static mut HAS_ENABLE_NO_HIT_COMBO_ON: [bool; 8] = [false; 8];
@@ -67,7 +69,14 @@ pub const WEAPON_WARIO_COIN_STATUS_KIND_SHOOT: i32 = 0x0;
 pub const FIGHTER_WARIO_GENERATE_ARTICLE_COUNTER: i32 = 0x4;
 pub const WEAPON_WARIO_COUNTER_STATUS_KIND_APPEAR: i32 = 0x0;
 
-// Use this for general per-frame fighter-level hooks
+#[skyline::hook(replace = smash::app::lua_bind::WorkModule::enable_transition_term)]
+pub unsafe fn enable_transition_term_hook(boma: &mut smash::app::BattleObjectModuleAccessor, term: i32) -> () {
+		let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+		if smash::app::utility::get_category(boma) == *BATTLE_OBJECT_CATEGORY_FIGHTER && term == *FIGHTER_STATUS_TRANSITION_TERM_ID_DASH_TO_RUN {
+			TO_RUN_FLAG[ENTRY_ID] = true;
+		}
+		original!()(boma, term)
+}
 #[skyline::hook(replace = smash::app::lua_bind::WorkModule::is_enable_transition_term)]
 pub unsafe fn is_enable_transition_term_hook(boma: &mut smash::app::BattleObjectModuleAccessor, flag: i32) -> bool {
 		let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
@@ -331,6 +340,11 @@ unsafe extern "C" fn util_update(fighter : &mut L2CFighterCommon) {
 			SUB_STICK[ENTRY_ID].x = 0.0;
 			SUB_STICK[ENTRY_ID].y = 0.0;
 		};
+		//Reset run flag check
+		if ![*FIGHTER_STATUS_KIND_DASH, *FIGHTER_STATUS_KIND_TURN_DASH].contains(&status_kind) {
+			TO_RUN_FLAG[ENTRY_ID] = false;
+		}
+
 		//Checks Frames since entering a motion
 		if MotionModule::frame(boma) < 2.0 || is_reset() {
 			MOTION_DURATION[ENTRY_ID] = 0;
@@ -492,6 +506,10 @@ pub(crate) unsafe fn get_accel_y(boma: &mut smash::app::BattleObjectModuleAccess
 	let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 	return ACCEL_X[ENTRY_ID]
 }
+pub(crate) unsafe fn get_to_run_flag(boma: &mut smash::app::BattleObjectModuleAccessor) -> bool {
+	let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+	return TO_RUN_FLAG[ENTRY_ID]
+}
 
 //Hitlag and Hitstun
 pub(crate) unsafe fn is_hitlag(boma: &mut smash::app::BattleObjectModuleAccessor) -> bool {
@@ -568,6 +586,7 @@ pub fn install() {
 	.on_line(Main, util_update)
 	.install();
 	skyline::install_hook!(is_enable_transition_term_hook);
+	skyline::install_hook!(enable_transition_term_hook);
 	skyline::install_hook!(on_flag_hook);
 	skyline::install_hook!(off_flag_hook);
 	skyline::install_hook!(article_hook);
