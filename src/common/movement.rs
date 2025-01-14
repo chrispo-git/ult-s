@@ -57,7 +57,7 @@ unsafe extern "C" fn moonwalk(fighter : &mut L2CFighterCommon) {
         let walk_accel_add = WorkModule::get_param_float(fighter.module_accessor, hash40("walk_accel_add"), 0);
         let walk_accel_mul = WorkModule::get_param_float(fighter.module_accessor, hash40("walk_accel_mul"), 0);
         let walk_speed_max = WorkModule::get_param_float(fighter.module_accessor, hash40("walk_speed_max"), 0);
-        let max_moonwalk = walk_speed_max * 1.5;
+        let max_moonwalk = walk_speed_max * 1.8;
 		stickx = stickx * lr;
         let mw_modifier = 2.0;
 		let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
