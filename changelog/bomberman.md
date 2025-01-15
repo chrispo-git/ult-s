@@ -514,14 +514,27 @@ FaF: 48
 
 
 
+### (Air) Down Special 
+|Frame|ID|Damage|Angle|BKB|KBG|Notes| | | |
+|-|-|-|-|-|-|-|-|-|-|
+|Bomb created on Frame 16|
+|Bomb Stats|
+|Explosion| 0| 13.0%| 45| 30| 90| Reflectable| deals -3.3 bonus shield damage| hit effect is fire|
+|Note: Takes 1% damage before being launched|
+
+
+FaF: 31
+
+
+
+
+
+
 
 ### Down Special 
 |Frame|ID|Damage|Angle|BKB|KBG|Notes| | | |
 |-|-|-|-|-|-|-|-|-|-|
 |Bomb created on Frame 10|
-|Bomb Stats|
-|Explosion| 0| 13.0%| 45| 30| 90| Reflectable| deals -3.3 bonus shield damage| hit effect is fire|
-|Note: Takes 1% damage before being launched|
 
 FaF: 35
             
