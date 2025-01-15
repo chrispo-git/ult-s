@@ -17,6 +17,8 @@ use crate::bomberman::*;
 
 pub fn install() {
 	Agent::new("pacman")
+	.acmd("game_specialairlwbomb", bomb_air_downb, Priority::Low)
+	.acmd("game_speciallwbomb", bomb_downb, Priority::Low)
 	.acmd("sound_speciallwbomb", bomb_downb_snd, Priority::Low)
 	.acmd("game_specialairhiboom", bomb_upb, Priority::Low)
 	.acmd("sound_specialairhiboom", bomb_upb_snd, Priority::Low)
@@ -113,6 +115,21 @@ unsafe extern "C" fn bomb_neutralbcharge_snd(agent: &mut L2CAgentBase) {
     }
 }
 
+unsafe extern "C" fn bomb_air_downb(agent: &mut L2CAgentBase) {
+    macros::FT_MOTION_RATE(agent, /*FSM*/ 3.0);
+    wait(agent.lua_state_agent, 3.0);
+    macros::FT_MOTION_RATE(agent, /*FSM*/ 1.0);
+    frame(agent.lua_state_agent, 9.0);
+    if macros::is_excute(agent) {
+        ArticleModule::generate_article(agent.module_accessor, *FIGHTER_PACMAN_GENERATE_ARTICLE_FIREHYDRANT, false, -1);
+    }
+}
+unsafe extern "C" fn bomb_downb(agent: &mut L2CAgentBase) {
+    frame(agent.lua_state_agent, 9.0);
+    if macros::is_excute(agent) {
+        ArticleModule::generate_article(agent.module_accessor, *FIGHTER_PACMAN_GENERATE_ARTICLE_FIREHYDRANT, false, -1);
+    }
+}
 unsafe extern "C" fn bomb_downb_snd(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 10.0);
     if macros::is_excute(fighter) {
