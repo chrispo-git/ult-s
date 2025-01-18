@@ -146,6 +146,19 @@ unsafe extern "C" fn bomberman_frame(fighter: &mut L2CFighterCommon) {
 		let cancel_frame = FighterMotionModuleImpl::get_cancel_frame(boma,smash::phx::Hash40::new_raw(MotionModule::motion_kind(boma)),false) as f32;
         let lr = PostureModule::lr(boma);
         if is_added(boma) {
+            if status_kind == *FIGHTER_STATUS_KIND_ENTRY || is_reset() {
+                let custom_hurtboxes = [
+                    //["bone", x1, y1, z1, x2, y2, z2, scale, collision_part, hit height]
+                    [hash40("head") as f64, 3.0, 0.0, 0.0, 0.0, 0.0, 0.0,   4.5, *COLLISION_PART_BODY as f64, *HIT_HEIGHT_CENTER as f64]
+                ];
+                let mut f = 0;
+                for i in custom_hurtboxes {
+                    let mut vec1 = Vector3f{x: i[1] as f32, y: i[2] as f32, z: i[3] as f32};
+                    let mut vec2 = Vector3f{x: i[4] as f32, y: i[5] as f32, z: i[6] as f32};
+                    FighterUtil::set_hit_data(boma,f,0,&vec1,&vec2,i[7] as f32,Hash40::new_raw(i[0] as u64),smash::app::CollisionPart(i[8] as i32),smash::app::HitHeight(i[9] as i32),smash::app::HitStatus(*HIT_STATUS_NORMAL),smash::app::CollisionShapeType(*COLLISION_SHAPE_TYPE_CAPSULE));    
+                    f += 1;
+                }
+            }
             if ModelModule::scale(boma) == WorkModule::get_param_float(fighter.module_accessor, hash40("scale"), 0) {
                 ModelModule::set_scale(boma, 0.94);
                 GrabModule::set_size_mul(boma, 0.94);
