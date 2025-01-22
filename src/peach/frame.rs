@@ -43,6 +43,9 @@ unsafe extern "C" fn peach_frame(fighter: &mut L2CFighterCommon) {
 				} else {
 					StatusModule::set_keep_situation_air(boma, true);
 				};
+				if GroundModule::is_wall_touch_line(boma, *GROUND_TOUCH_FLAG_DOWN as u32) {
+                    KineticModule::clear_speed_all(boma);
+				}
 			};
 		}
 		
