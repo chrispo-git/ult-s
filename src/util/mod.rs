@@ -18,6 +18,8 @@ static mut STATUS_DURATION : [i32; 8] = [0; 8];
 static mut MOTION_DURATION : [i32; 8] = [0; 8];
 pub static mut POS_X : [f32; 8] = [0.0; 8];
 pub static mut POS_Y : [f32; 8] = [0.0; 8];
+pub static mut PREV_SPEED_X : [f32; 8] = [0.0; 8];
+pub static mut PREV_SPEED_Y : [f32; 8] = [0.0; 8];
 pub static mut SPEED_X : [f32; 8] = [0.0; 8];
 pub static mut SPEED_Y : [f32; 8] = [0.0; 8];
 pub static mut ACCEL_X : [f32; 8] = [0.0; 8];
@@ -51,6 +53,8 @@ pub static mut CAN_DASH: [i32; 8] = [0; 8];
 pub static mut CAN_GRAB: [i32; 8] = [0; 8];
 pub static mut CAN_TURNDASH: [i32; 8] = [0; 8];
 
+pub static mut TO_RUN_FLAG: [bool; 8] = [false; 8];
+
 //Jab Flags
 pub static mut HAS_ENABLE_COMBO_ON: [bool; 8] = [false; 8];
 pub static mut HAS_ENABLE_NO_HIT_COMBO_ON: [bool; 8] = [false; 8];
@@ -65,7 +69,14 @@ pub const WEAPON_WARIO_COIN_STATUS_KIND_SHOOT: i32 = 0x0;
 pub const FIGHTER_WARIO_GENERATE_ARTICLE_COUNTER: i32 = 0x4;
 pub const WEAPON_WARIO_COUNTER_STATUS_KIND_APPEAR: i32 = 0x0;
 
-// Use this for general per-frame fighter-level hooks
+#[skyline::hook(replace = smash::app::lua_bind::WorkModule::enable_transition_term)]
+pub unsafe fn enable_transition_term_hook(boma: &mut smash::app::BattleObjectModuleAccessor, term: i32) -> () {
+		let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+		if smash::app::utility::get_category(boma) == *BATTLE_OBJECT_CATEGORY_FIGHTER && term == *FIGHTER_STATUS_TRANSITION_TERM_ID_DASH_TO_RUN {
+			TO_RUN_FLAG[ENTRY_ID] = true;
+		}
+		original!()(boma, term)
+}
 #[skyline::hook(replace = smash::app::lua_bind::WorkModule::is_enable_transition_term)]
 pub unsafe fn is_enable_transition_term_hook(boma: &mut smash::app::BattleObjectModuleAccessor, flag: i32) -> bool {
 		let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
@@ -329,6 +340,11 @@ unsafe extern "C" fn util_update(fighter : &mut L2CFighterCommon) {
 			SUB_STICK[ENTRY_ID].x = 0.0;
 			SUB_STICK[ENTRY_ID].y = 0.0;
 		};
+		//Reset run flag check
+		if ![*FIGHTER_STATUS_KIND_DASH, *FIGHTER_STATUS_KIND_TURN_DASH].contains(&status_kind) {
+			TO_RUN_FLAG[ENTRY_ID] = false;
+		}
+
 		//Checks Frames since entering a motion
 		if MotionModule::frame(boma) < 2.0 || is_reset() {
 			MOTION_DURATION[ENTRY_ID] = 0;
@@ -342,6 +358,8 @@ unsafe extern "C" fn util_update(fighter : &mut L2CFighterCommon) {
 		};
 		//Speed and acceleration checks
 		if is_reset() {
+			PREV_SPEED_X[ENTRY_ID] = 0.0;
+			PREV_SPEED_Y[ENTRY_ID] = 0.0;
 			SPEED_X[ENTRY_ID] = 0.0;
 			SPEED_Y[ENTRY_ID] = 0.0;
 			ACCEL_X[ENTRY_ID] = 0.0;
@@ -349,6 +367,8 @@ unsafe extern "C" fn util_update(fighter : &mut L2CFighterCommon) {
 		};
 		ACCEL_X[ENTRY_ID] = SPEED_X[ENTRY_ID] - KineticModule::get_sum_speed_x(boma, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
 		ACCEL_Y[ENTRY_ID] = SPEED_Y[ENTRY_ID] - KineticModule::get_sum_speed_y(boma, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+		PREV_SPEED_X[ENTRY_ID] = SPEED_X[ENTRY_ID];
+		PREV_SPEED_Y[ENTRY_ID] = SPEED_Y[ENTRY_ID];
 		SPEED_X[ENTRY_ID] = KineticModule::get_sum_speed_x(boma, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
 		SPEED_Y[ENTRY_ID] = KineticModule::get_sum_speed_y(boma, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
 		POS_X[ENTRY_ID] = PostureModule::pos_x(boma);
@@ -462,6 +482,14 @@ pub(crate) unsafe fn reimpl_cancel_frame(fighter: &mut L2CAgentBase) -> () {
 pub(crate) unsafe fn ray_check_pos(boma: &mut smash::app::BattleObjectModuleAccessor, x_distance : f32, y_distance: f32, ignore_plat: bool) -> u64 {
 	GroundModule::ray_check(boma, &Vector2f{ x: PostureModule::pos_x(boma), y: PostureModule::pos_y(boma)}, &Vector2f{ x: x_distance, y: y_distance}, ignore_plat)
 }
+pub(crate) unsafe fn get_prev_speed_x(boma: &mut smash::app::BattleObjectModuleAccessor) -> f32 {
+	let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+	return PREV_SPEED_X[ENTRY_ID]
+}
+pub(crate) unsafe fn get_prev_speed_y(boma: &mut smash::app::BattleObjectModuleAccessor) -> f32 {
+	let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+	return PREV_SPEED_Y[ENTRY_ID]
+}
 pub(crate) unsafe fn get_speed_x(boma: &mut smash::app::BattleObjectModuleAccessor) -> f32 {
 	let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 	return SPEED_X[ENTRY_ID]
@@ -477,6 +505,10 @@ pub(crate) unsafe fn get_accel_x(boma: &mut smash::app::BattleObjectModuleAccess
 pub(crate) unsafe fn get_accel_y(boma: &mut smash::app::BattleObjectModuleAccessor) -> f32 {
 	let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 	return ACCEL_X[ENTRY_ID]
+}
+pub(crate) unsafe fn get_to_run_flag(boma: &mut smash::app::BattleObjectModuleAccessor) -> bool {
+	let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+	return TO_RUN_FLAG[ENTRY_ID]
 }
 
 //Hitlag and Hitstun
@@ -554,6 +586,7 @@ pub fn install() {
 	.on_line(Main, util_update)
 	.install();
 	skyline::install_hook!(is_enable_transition_term_hook);
+	skyline::install_hook!(enable_transition_term_hook);
 	skyline::install_hook!(on_flag_hook);
 	skyline::install_hook!(off_flag_hook);
 	skyline::install_hook!(article_hook);

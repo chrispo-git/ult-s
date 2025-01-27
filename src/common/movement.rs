@@ -47,6 +47,36 @@ unsafe extern "C" fn perfectpivot(fighter : &mut L2CFighterCommon) {
     };
 }
 
+//Moonwalk
+unsafe extern "C" fn moonwalk(fighter : &mut L2CFighterCommon) {
+    unsafe {
+        let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);  
+		let mut stickx = ControlModule::get_stick_x(boma);		
+		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
+		let lr = PostureModule::lr(boma);
+        let walk_accel_add = WorkModule::get_param_float(fighter.module_accessor, hash40("walk_accel_add"), 0);
+        let walk_accel_mul = WorkModule::get_param_float(fighter.module_accessor, hash40("walk_accel_mul"), 0);
+        let walk_speed_max = WorkModule::get_param_float(fighter.module_accessor, hash40("walk_speed_max"), 0);
+        let max_moonwalk = walk_speed_max * 1.8;
+		stickx = stickx * lr;
+        let mw_modifier = 2.0;
+		let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+        if [*FIGHTER_STATUS_KIND_DASH, *FIGHTER_STATUS_KIND_TURN_DASH].contains(&status_kind){
+			if stickx < -0.2 {
+                let moonwalk_speed = (stickx*walk_accel_mul - walk_accel_add)*mw_modifier;
+                //println!("Moonwalk stuff! {} speed, {} mw change, {} mw max",  (get_speed_x(boma)*lr), moonwalk_speed, max_moonwalk);
+                if (get_speed_x(boma)*lr)+moonwalk_speed > -max_moonwalk {
+                    let speed = smash::phx::Vector3f { x: moonwalk_speed, y: 0.0, z: 0.0 };
+                    KineticModule::add_speed(boma, &speed);
+                } else {
+                    let current_back = (get_speed_x(boma)*lr);
+                    let speed = smash::phx::Vector3f { x:-(current_back+max_moonwalk), y: 0.0, z: 0.0 };
+                    KineticModule::add_speed(boma, &speed);
+                }
+            }
+		};
+    };
+}
 //DJC
 unsafe extern "C" fn djc(fighter : &mut L2CFighterCommon) {
     unsafe {
@@ -120,7 +150,7 @@ unsafe extern "C" fn dash(fighter : &mut L2CFighterCommon) {
     unsafe {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);  
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
-		if [*FIGHTER_STATUS_KIND_DASH, *FIGHTER_STATUS_KIND_TURN_DASH].contains(&status_kind) && status_duration(boma) >= 7 {
+		if [*FIGHTER_STATUS_KIND_DASH, *FIGHTER_STATUS_KIND_TURN_DASH].contains(&status_kind) && get_to_run_flag(boma) {
 			if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_GUARD) && ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_ATTACK) {
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_GUARD_ON, true);
 			};
@@ -294,6 +324,7 @@ pub fn install() {
 	.on_line(Main, dash)
 	.on_line(Main, djc)
 	.on_line(Main, hold_buffer_killer)
+    .on_line(Main, moonwalk)
 	.install();
     skyline::nro::add_hook(nro_hook);
 }
