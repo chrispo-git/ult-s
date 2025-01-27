@@ -1,17 +1,3 @@
-[[param_int]]
-param = "attack_combo_max"
-subparam = ""
-value = 1
-kinds = ["marth"]
-slots = [0,1,2,3,4,5,6,7]
-
-[[param_int]]
-param = "attack_combo_max"
-subparam = ""
-value = 2
-kinds = ["chrom"]
-slots = [0,1,2,3,4,5,6,7]
-
 [[param_float]]
 param = "dash_speed"
 subparam = ""

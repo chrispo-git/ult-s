@@ -7,6 +7,7 @@ use smashline::*;
 use smash_script::*;
 use smash::phx::*;
 use smash::lib::{L2CValue, L2CAgent};
+use std::{fs, path::Path};
 use smash::phx::Vector2f;
 use crate::util::*;
 static mut STALE_MAX : f32 = 1.0;
@@ -94,7 +95,7 @@ unsafe extern "C" fn djc(fighter : &mut L2CFighterCommon) {
 				};
 			};
 		};
-		if [*FIGHTER_KIND_TRAIL].contains(&fighter_kind) {
+		if [*FIGHTER_KIND_TRAIL].contains(&fighter_kind) && Path::new("sd:/ultimate/ult-s/trail.flag").is_file() {
 			if [*FIGHTER_KINETIC_TYPE_JUMP_AERIAL_MOTION_2ND, *FIGHTER_KINETIC_TYPE_JUMP_AERIAL_MOTION, *FIGHTER_KINETIC_TYPE_JUMP_AERIAL].contains(&KineticModule::get_kinetic_type(boma)) {
 				if ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_JUMP) && [*FIGHTER_TRAIL_STATUS_KIND_ATTACK_AIR_N, *FIGHTER_STATUS_KIND_ATTACK_AIR, *FIGHTER_STATUS_KIND_AIR_LASSO].contains(&status_kind) {
 					KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_MOTION_FALL);
