@@ -76,7 +76,7 @@ FaF: 37
 |Hitboxes terminated on Frame 14|
 
 
-FaF: 22
+FaF: 28
 
 
 
@@ -164,7 +164,7 @@ FaF: 46
 |Hitboxes terminated on Frame 14|
 
 
-FaF: 35
+FaF: 44
 
 
 
@@ -182,7 +182,7 @@ FaF: 35
 |Hitboxes terminated on Frame 26|
 
 
-FaF: 25
+FaF: 30
 
 
 
