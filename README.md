@@ -3,8 +3,6 @@
 A free to play large overhaul of Super Smash Bros. Ultimate that aims to improve and overhaul movesets, as well as the general feel of the game.
 If you want to contribute to Ultimate S, pull requests are welcome!
 
-For more in-depth changes, check our [Master Changelog](https://docs.google.com/document/d/1gys8XOEnWDPZlxPB0yOVv1fCWIXJwanWTrETpU23jp4/edit?usp=sharing)
-
 
 Go to our discord [here](https://discord.gg/YXaPzC5WGd)
 
