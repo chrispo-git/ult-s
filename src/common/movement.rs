@@ -136,6 +136,8 @@ unsafe extern "C" fn hold_buffer_killer(fighter : &mut L2CFighterCommon) {
         for i in buttons_list {
                 if ControlModule::get_trigger_count(fighter.module_accessor, i as u8) > hold_buffer_lim && ControlModule::check_button_on(boma, i) 
                 && ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_APPEAL_HI) && ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_APPEAL_LW) 
+                && !(ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_ATTACK) && ItemModule::is_have_item(boma, 0))
+                && !(ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_CATCH) && ItemModule::is_have_item(boma, 0))
                 && ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_APPEAL_S_L) && ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_APPEAL_S_R) //So taunts dont tpose
                 && ![*FIGHTER_STATUS_KIND_GUARD, *FIGHTER_STATUS_KIND_GUARD_ON, *FIGHTER_STATUS_KIND_GUARD_DAMAGE, *FIGHTER_STATUS_KIND_GUARD_OFF, *FIGHTER_STATUS_KIND_JUMP_SQUAT].contains(&status_kind){ //Ignores shield and js
                     ControlModule::reset_trigger(fighter.module_accessor);
