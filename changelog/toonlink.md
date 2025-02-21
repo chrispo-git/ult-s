@@ -130,7 +130,7 @@ FaF: 26
 |Hitboxes terminated on Frame 11|
 
 
-FaF: 23
+FaF: 25
 
 
 
