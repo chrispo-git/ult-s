@@ -405,10 +405,10 @@ Autocancel - 1-2/13+
 ### Dair
 |Frame|ID|Damage|Angle|BKB|KBG|Notes| | | |
 |-|-|-|-|-|-|-|-|-|-|
-|Frame 13| 0|  11.0%|  270|  25|  100| Hits grounded only|
-|Frame 13| 1|  11.0%|  270|  25|  100| Hits grounded only|
-|Frame 13| 2|  11.0%|  300|  25|  100|
-|Frame 13| 3|  11.0%|  300|  25|  100|
+|Frame 13| 0|  11.0%|  270|  25|  95| Hits grounded only|
+|Frame 13| 1|  11.0%|  270|  25|  95| Hits grounded only|
+|Frame 13| 2|  11.0%|  285|  25|  95|
+|Frame 13| 3|  11.0%|  285|  25|  95|
 |Hitboxes terminated on Frame 17|
 
 
