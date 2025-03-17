@@ -445,8 +445,8 @@ FaF: 36
 |Frame 7| 0|  1.0%|  367|  60 (Set)|  100| rehits every 3 frames|
 |Frame 7| 0|  1.0%|  367|  60 (Set)|  100| rehits every 3 frames|
 |Hitboxes terminated on Frame 27|
-|Frame 27| 0|  6.0%|  89|  86|  85|
-|Frame 27| 0|  6.0%|  89|  86|  85|
+|Frame 27| 0|  6.0%|  89|  74|  85|
+|Frame 27| 0|  6.0%|  89|  74|  85|
 |Hitboxes terminated on Frame 34|
 
 
