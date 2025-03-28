@@ -670,7 +670,7 @@ pub extern "C" fn main() {
         println!("popo installed");
     }
 
-    if Path::new("sd:/ultimate/ult-s/pfushigisou.flag").is_file() || Path::new("sd:/ultimate/ult-s/pzenigame.flag").is_file()  || Path::new("sd:/ultimate/ult-s/plizardon.flag").is_file() {
+    if Path::new("sd:/ultimate/ult-s/pfushigisou.flag").is_file() || Path::new("sd:/ultimate/ult-s/pzenigame.flag").is_file() || Path::new("sd:/ultimate/ult-s/ptrainer.flag").is_file()  || Path::new("sd:/ultimate/ult-s/plizardon.flag").is_file() {
         ptrainer::install();
         println!("ptrainer installed");
     }

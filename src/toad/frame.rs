@@ -243,7 +243,7 @@ unsafe extern "C" fn toad(fighter : &mut L2CFighterCommon) {
 					if KineticModule::get_kinetic_type(boma) != *FIGHTER_KINETIC_TYPE_MOTION_FALL {
 						KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_MOTION_FALL);
 					};
-					if frame >= 15.0 && ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_ATTACK_RAW) {
+					if frame >= 15.0 && ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_ATTACK) {
 						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_ATTACK_AIR, false);
 					}
 					if frame > 30.0 {
