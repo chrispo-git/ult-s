@@ -2,21 +2,15 @@ Thank you for downloading Ultimate S!
 
 
 -Instructions-
-1. Run "Ultimate S Setup Tool.exe" (included with your download)
-2. Choose between Full (all characters have their Ultimate S Movesets) and lite (You choose which characters have their movesets, EXPERIMENTAL)
-3. Follow the instructions from the program
-4. The program should give you options on how to put it onto your nintendo switch/emulator:
-a. Send to a specific folder (used for emulators and people with SD card readers). Automatically sets up your SD card/folder too!
-b. Send via FTP (used for switch). Requires FTP set up on your switch. Automatically sets up your SD card too!
-c. Manual. Does not set your SD card up automatically, copy your atmosphere and ultimate folders to the root of the SD card.
-(Note: You don't need to specify which added characters to include, they're automatically there already!)
-
-WARNING: Any character problems caused by disabling characters, 
-and any compatibility with other smash ultimate character mods is up to YOU (the end user) and the respective character mod creators to fix.
-Ultimate S is built to work as a whole package, and the setup tool is simply a workaround.
+1. Run the "Ultimate S Setup.exe" that comes with your download (versions for linux and mac also included)
+2. Enable and Disable whichever characters you would like to, then click "Update" 
+3. If you have an internet connection, press "Update Dependencies" to get the latest dependencies automatically
+4. You're done! Now you can either
+a. move Ultimate S manually - copy your "atmosphere" and "ultimate" mod folders to the root of your SD card
+b. move Ultimate S automatically - press "Install Ultimate S To Folder" and select the root of your SD card (or sdmc folder on emulator)
 
 
-This mod assumes you have the latest version of arcropolis and therefore does not include it in the download. If you haven't set up smash ultimate modding as a whole, here's some wonderful guides!
+If you haven't set up smash ultimate modding as a whole, here's some wonderful guides!
 Setting up CFW on switch - https://switch.homebrew.guide/
 Modding Smash Ultimate on switch - https://gamebanana.com/tuts/12827
 Modding Smash Ultimate on yuzu - https://youtu.be/uKKQl7QFBMA
@@ -33,7 +27,7 @@ libarcropolis.nro - https://github.com/Raytwo/ARCropolis
 libnro_hook.nro - https://github.com/ultimate-research/nro-hook-plugin
 libsmashline_plugin.nro - https://github.com/HDR-Development/smashline/releases/latest
 skyline - https://github.com/skyline-dev/skyline
-arena latency slider - https://gamebanana.com/mods/496679
+libone_slot_eff.nro - https://github.com/blu-dev/one-slot-effects/releases
 
 Place the plugins in "/atmosphere/contents/01006A800016E000/romfs/skyline/plugins"
 Place skyline in "/atmosphere/contents/01006A800016E000"
@@ -46,11 +40,14 @@ A: There could be many things that could be causing this! Try going down this li
 2. Make sure training modpack is not enabled (this means no training modpack plugin, and no param hook plugin)
 3. Make sure your plugin folder is CLEAN (this means the only plugins in the folder are libparam_config, libcsk_collection, libstage_config, libarcropolis, libnro_hook, libsmashline_plugin and libarena_latency_slider).
 
-Q: "The character's attacks are messed up! They're doing their vanilla animations!"
+Q: "The character's attacks are messed up! They're doing their vanilla animations but the custom attack effects!"
 A: This sounds like you have a mod conflict. If you're on switch, this is easy because arcropolis will tell you this, and create a conflicts.json for you (which you can use to disable the conflicting mods).
 If you're on Yuzu, this is a more involved process. If you really just want Ultimate S to work, empty out your ultimate/mods folder and ensure its just "Ultimate S Arcropolis" and "Ultimate S Stages" there.
 Check that this boots up and works just fine. If it does, it's definitely a mod conflict. Slowly add in your skin mods until you find where the conflict is, its usually a conflict where the skin mod edits a character's 
 motion folder (example: https://gamebanana.com/wips/75639) , or a projectile's model (example: https://gamebanana.com/mods/350254). You'll have to delete the folders which conflict with Ultimate S or disable those mods.
+
+Q: "The character's attacks are messed up! They're doing their custom animations but the vanilla attack effects!"
+A: This also sounds like a mod conflict! Refer to above.
 
 Q: "The game is going too fast!"
 A: You're likely on Yuzu. Make sure game speed is set to 50%, by going to emulation -> config -> system -> limit speed percent (on yuzu) and setting it to 50%, and this should make your game run at regular speeds.
@@ -60,7 +57,7 @@ and follow these instructions: https://www.guru3d.com/page/how-to-use-rivatuner-
 Q: "The game is just vanilla!"
 A: Try going through these steps:
 1. Check your title screen, does it say Arcropolis in the top right? If not, arcropolis isn't running, make sure you have skyline AND arcropolis installed correctly.
-2. Check your title screen, what version is it? Make sure it is 13.0.2, and no other version.
+2. Check your title screen, what version is it? Make sure it is 13.0.3, and no other version.
 3. Make sure that Ultimate S is enabled (either by mod manager on the switch, or inside of the mods folder on Yuzu).
 4. Make sure you ran "Ultimate S Setup Tool.exe" and chose your preferred options (you can check in ultimate/ult-s to see which characters you have enabled)
 5. If you are on emulator, make sure that there is a file called "legacy_discovery" at ultimate\arcropolis\config\2470593114292646594\15904440331188662786
@@ -68,7 +65,7 @@ If there isn't, you can make one by creating a file (no extension on the end) wi
 
 
 Q: "I want to remove X character's changes"/"I want to just have Y character"
-A: Run "Ultimate S Setup Tool.exe", it allows you to pick and choose which ultimate S movesets you have.
+A: Run "Ultimate S Setup.exe", it allows you to pick and choose which Ultimate S movesets you have.
 
 
 
