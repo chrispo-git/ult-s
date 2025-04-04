@@ -76,8 +76,8 @@ unsafe extern "C" fn pitoo(fighter : &mut L2CFighterCommon) {
 					if end_frame - frame < 3.0 {
 						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL, true);
 					};
-					if SPEED_X[ENTRY_ID] * PostureModule::lr(boma) > 0.0 {
-                    	let speed = smash::phx::Vector3f { x: -0.3, y: 0.0, z: 0.0 };
+					if SPEED_X[ENTRY_ID] * PostureModule::lr(boma) > 0.4 {
+                    	let speed = smash::phx::Vector3f { x: -0.2, y: 0.0, z: 0.0 };
                     	KineticModule::add_speed(boma, &speed);
 					};
 			};
