@@ -28,6 +28,7 @@ static mut FULL_HOP_ENABLE_DELAY : [i32; 8] = [0; 8];
 pub static mut PREV_SCALE : [f32; 8] = [0.0; 8];
 pub static mut IS_AB : [bool; 8] = [false; 8];
 pub static mut IS_KD_THROW : [bool; 8] = [false; 8];
+pub static mut IS_TAP_JUMP : [i32; 8] = [0; 8];
 
 
 pub static mut JC_GRAB_LOCKOUT : [i32; 8] = [0; 8];
@@ -586,6 +587,22 @@ pub(crate) unsafe fn set_knockdown_throw(fighter: &mut L2CAgentBase) -> () {
 	let grabber_kind = smash::app::utility::get_kind(&mut *grabber_boma);
 	let grabber_entry_id = WorkModule::get_int(&mut *grabber_boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 	IS_KD_THROW[grabber_entry_id] = true;
+}
+
+pub(crate) unsafe fn is_tap_jump(boma: &mut smash::app::BattleObjectModuleAccessor) -> bool {
+	let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+	if IS_TAP_JUMP[ENTRY_ID] == 0 {
+		println!("update!");
+		IS_TAP_JUMP[ENTRY_ID] = match ControlModule::is_enable_flick_jump(boma) {
+			true => 1,
+			false => -1,
+			_ => 0,
+		};
+	}
+	return match IS_TAP_JUMP[ENTRY_ID] {
+		1 => true,
+		_ => false,
+	};
 }
 
 

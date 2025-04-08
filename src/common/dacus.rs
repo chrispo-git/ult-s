@@ -13,7 +13,8 @@ use crate::util::*;
 //Dash Attack Cancel Smashes
 unsafe extern "C" fn dacus(fighter : &mut L2CFighterCommon) {
     unsafe {
-        let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);    
+        let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
+		let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;   
 		let fighter_kind = smash::app::utility::get_kind(boma);
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
 		let f6 = [
