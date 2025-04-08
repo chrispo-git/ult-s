@@ -104,7 +104,7 @@ unsafe extern "C" fn djc(fighter : &mut L2CFighterCommon) {
 		if [*FIGHTER_KIND_NESS, *FIGHTER_KIND_LUCAS, /**FIGHTER_KIND_YOSHI,*/ *FIGHTER_KIND_MEWTWO].contains(&fighter_kind) {
 			if [*FIGHTER_KINETIC_TYPE_JUMP_AERIAL_MOTION_2ND, *FIGHTER_KINETIC_TYPE_JUMP_AERIAL_MOTION, *FIGHTER_KINETIC_TYPE_JUMP_AERIAL].contains(&KineticModule::get_kinetic_type(boma)) {
                 if ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_JUMP) && [*FIGHTER_TRAIL_STATUS_KIND_ATTACK_AIR_N, *FIGHTER_STATUS_KIND_ATTACK_AIR, *FIGHTER_STATUS_KIND_AIR_LASSO].contains(&status_kind) {
-					if !(ControlModule::get_stick_y(boma) >= 0.6875 && ControlModule::is_enable_flick_jump(boma)) {
+					if is_tap_djc(boma) {
                         KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_MOTION_FALL);
                     }
 				};
@@ -114,10 +114,9 @@ unsafe extern "C" fn djc(fighter : &mut L2CFighterCommon) {
 			};
 		};
 		if [*FIGHTER_KIND_TRAIL].contains(&fighter_kind) && Path::new("sd:/ultimate/ult-s/trail.flag").is_file() {
-            println!("Is Tap Jump? {}", ControlModule::is_enable_flick_jump(boma));
 			if [*FIGHTER_KINETIC_TYPE_JUMP_AERIAL_MOTION_2ND, *FIGHTER_KINETIC_TYPE_JUMP_AERIAL_MOTION, *FIGHTER_KINETIC_TYPE_JUMP_AERIAL].contains(&KineticModule::get_kinetic_type(boma)) {
 				if ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_JUMP) && [*FIGHTER_TRAIL_STATUS_KIND_ATTACK_AIR_N, *FIGHTER_STATUS_KIND_ATTACK_AIR, *FIGHTER_STATUS_KIND_AIR_LASSO].contains(&status_kind) {
-					if !(ControlModule::get_stick_y(boma) >= 0.6875 && ControlModule::is_enable_flick_jump(boma)) {
+					if is_tap_djc(boma) {
                         KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_MOTION_FALL);
                         if SPEED_Y[ENTRY_ID] > 2.5 {
                             let new_speed = SPEED_X[ENTRY_ID]*PostureModule::lr(fighter.module_accessor);

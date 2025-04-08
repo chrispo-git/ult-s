@@ -28,7 +28,9 @@ static mut FULL_HOP_ENABLE_DELAY : [i32; 8] = [0; 8];
 pub static mut PREV_SCALE : [f32; 8] = [0.0; 8];
 pub static mut IS_AB : [bool; 8] = [false; 8];
 pub static mut IS_KD_THROW : [bool; 8] = [false; 8];
-pub static mut IS_TAP_JUMP : [i32; 8] = [0; 8];
+
+pub static mut TAP_JUMP_BUFFER : [i32; 8] = [0; 8];
+pub const TAP_JUMP_BUFFER_MAX : i32 = 6;
 
 
 pub static mut JC_GRAB_LOCKOUT : [i32; 8] = [0; 8];
@@ -291,13 +293,19 @@ unsafe extern "C" fn util_update(fighter : &mut L2CFighterCommon) {
 			HAS_ENABLE_COMBO_ON[ENTRY_ID] = false;
 			HAS_ENABLE_100_ON[ENTRY_ID] = false;
 			FULL_HOP_ENABLE_DELAY[ENTRY_ID] = 0;
-			println!("Does Entry {} have AB Smash? {}",ENTRY_ID, IS_AB[ENTRY_ID]);
 		};
 		if FULL_HOP_ENABLE_DELAY[ENTRY_ID] > 0 {
 			FULL_HOP_ENABLE_DELAY[ENTRY_ID] -= 1;
 		};
 		if JC_GRAB_LOCKOUT[ENTRY_ID] > 0 {
 			JC_GRAB_LOCKOUT[ENTRY_ID] -= 1;
+		};
+		if (ControlModule::get_stick_y(boma) >= 0.6875 && ControlModule::is_enable_flick_jump(boma)) {
+			TAP_JUMP_BUFFER[ENTRY_ID] = TAP_JUMP_BUFFER_MAX;
+		}
+		if TAP_JUMP_BUFFER[ENTRY_ID] > 0 {
+			TAP_JUMP_BUFFER[ENTRY_ID] -= 1;
+			println!("Tap Jump Buffer: {}", TAP_JUMP_BUFFER[ENTRY_ID]);
 		};
 		if  PostureModule::scale(boma) != 0.001345 {
 			PREV_SCALE[ENTRY_ID] = PostureModule::scale(boma);
@@ -589,20 +597,9 @@ pub(crate) unsafe fn set_knockdown_throw(fighter: &mut L2CAgentBase) -> () {
 	IS_KD_THROW[grabber_entry_id] = true;
 }
 
-pub(crate) unsafe fn is_tap_jump(boma: &mut smash::app::BattleObjectModuleAccessor) -> bool {
+pub(crate) unsafe fn is_tap_djc(boma: &mut smash::app::BattleObjectModuleAccessor) -> bool {
 	let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-	if IS_TAP_JUMP[ENTRY_ID] == 0 {
-		println!("update!");
-		IS_TAP_JUMP[ENTRY_ID] = match ControlModule::is_enable_flick_jump(boma) {
-			true => 1,
-			false => -1,
-			_ => 0,
-		};
-	}
-	return match IS_TAP_JUMP[ENTRY_ID] {
-		1 => true,
-		_ => false,
-	};
+	return TAP_JUMP_BUFFER[ENTRY_ID] <= 0;
 }
 
 
