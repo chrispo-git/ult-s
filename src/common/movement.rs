@@ -78,6 +78,19 @@ unsafe extern "C" fn moonwalk(fighter : &mut L2CFighterCommon) {
 		};
     };
 }
+//JC Grab
+unsafe extern "C" fn jc_grab(fighter : &mut L2CFighterCommon) {
+    unsafe {
+        let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);  
+        if [*FIGHTER_STATUS_KIND_JUMP_SQUAT].contains(&status_kind){
+            if JC_GRAB_LOCKOUT[ENTRY_ID] == 0 && ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_CATCH) {
+                JC_GRAB_LOCKOUT[ENTRY_ID] = MAX_LOCKOUT;
+                StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_CATCH, true);
+            };
+		};
+    };
+}
+
 //DJC
 unsafe extern "C" fn djc(fighter : &mut L2CFighterCommon) {
     unsafe {
@@ -328,6 +341,7 @@ pub fn install() {
 	.on_line(Main, djc)
 	.on_line(Main, hold_buffer_killer)
     .on_line(Main, moonwalk)
+    .on_line(Main, jc_grab)
 	.install();
     skyline::nro::add_hook(nro_hook);
 }

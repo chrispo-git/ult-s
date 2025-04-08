@@ -30,6 +30,10 @@ pub static mut IS_AB : [bool; 8] = [false; 8];
 pub static mut IS_KD_THROW : [bool; 8] = [false; 8];
 
 
+pub static mut JC_GRAB_LOCKOUT : [i32; 8] = [0; 8];
+pub const MAX_LOCKOUT : i32 = 10;
+
+
 //Cstick
 pub static mut SUB_STICK: [Vector2f;9] = [Vector2f{x:0.0, y: 0.0};9];
 
@@ -271,6 +275,7 @@ unsafe extern "C" fn util_update(fighter : &mut L2CFighterCommon) {
 		};
 		//Resets inability to special
 		if is_reset() {
+			JC_GRAB_LOCKOUT[ENTRY_ID] = 0;
 			CAN_ATTACK_AIR[ENTRY_ID] = 0;
 			CAN_JUMP_SQUAT[ENTRY_ID] = 0;
 			CAN_DOUBLE_JUMP[ENTRY_ID] = 0;
@@ -289,6 +294,9 @@ unsafe extern "C" fn util_update(fighter : &mut L2CFighterCommon) {
 		};
 		if FULL_HOP_ENABLE_DELAY[ENTRY_ID] > 0 {
 			FULL_HOP_ENABLE_DELAY[ENTRY_ID] -= 1;
+		};
+		if JC_GRAB_LOCKOUT[ENTRY_ID] > 0 {
+			JC_GRAB_LOCKOUT[ENTRY_ID] -= 1;
 		};
 		if  PostureModule::scale(boma) != 0.001345 {
 			PREV_SCALE[ENTRY_ID] = PostureModule::scale(boma);
