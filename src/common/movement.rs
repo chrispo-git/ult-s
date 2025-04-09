@@ -87,6 +87,9 @@ unsafe extern "C" fn jc_grab(fighter : &mut L2CFighterCommon) {
         if [*FIGHTER_STATUS_KIND_JUMP_SQUAT].contains(&status_kind){
             if JC_GRAB_LOCKOUT[ENTRY_ID] == 0 && ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_CATCH) {
                 JC_GRAB_LOCKOUT[ENTRY_ID] = MAX_LOCKOUT;
+                GroundModule::attach_ground(fighter.module_accessor, true);
+                GroundModule::set_attach_ground(fighter.module_accessor, true);
+                StatusModule::set_situation_kind(boma, smash::app::SituationKind(*SITUATION_KIND_GROUND), true);
                 StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_CATCH, true);
             };
 		};
