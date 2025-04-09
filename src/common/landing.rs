@@ -53,6 +53,30 @@ unsafe extern "C" fn shielddrop(fighter : &mut L2CFighterCommon) {
 		};
     };
 }	
+unsafe extern "C" fn endlag_drop(fighter : &mut L2CFighterCommon) {
+    unsafe {
+        let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);  
+		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
+		let sticky = ControlModule::get_stick_y(boma);	
+		let cancel_frame = FighterMotionModuleImpl::get_cancel_frame(boma,smash::phx::Hash40::new_raw(MotionModule::motion_kind(boma)),false) as f32;
+		let frame = MotionModule::frame(boma);
+		let situation_kind = StatusModule::situation_kind(boma);
+        if [
+			*FIGHTER_STATUS_KIND_SQUAT, *FIGHTER_STATUS_KIND_SQUAT_WAIT
+		].contains(&status_kind) &&
+		sticky <= -0.95  &&
+		GroundModule::is_passable_ground(fighter.module_accessor) &&
+		(ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_ATTACK_LW4) == 0 &&
+		(ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_ATTACK_LW3) == 0 &&
+		(ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_LW) == 0 &&
+		(ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_ESCAPE) == 0 &&
+		(ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_JUMP)) &&
+		(ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_GUARD))
+		{
+			StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_PASS, true);
+		};
+    };
+}	
 
 //Edge Cancel List
 pub(crate) fn is_edge_cancel(fighter_kind : i32, status_kind : i32) -> bool {
@@ -131,6 +155,7 @@ pub fn install() {
     Agent::new("fighter")
 	.on_line(Main, llpc)
 	.on_line(Main, shielddrop)
+	.on_line(Main, endlag_drop)
 	.install();
 	skyline::install_hooks!(
         init_settings_replace,
