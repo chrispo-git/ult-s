@@ -9,4 +9,9 @@
   <int hash="hit_stop_delay_flick_frame">1</int>
   <int hash="shield_setoff_catch_frame">1</int>
   <float hash="damage_fly_correction_max">10</float>
+  <int hash="escape_penalty_max_count">1</int>
+  <int hash="escape_penalty_recovry_frame">1</int>
+  <float hash="escape_penalty_motion_rate">0</float>
+  <float hash="escape_f_penalty_motion_rate">0</float>
+  <float hash="escape_b_penalty_motion_rate">0</float>
 </struct>
