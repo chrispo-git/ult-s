@@ -36,12 +36,17 @@ unsafe extern "C" fn falco_frame(fighter: &mut L2CFighterCommon) {
 					HAS_DOWNB[ENTRY_ID] = true;
 					DO_STALL[ENTRY_ID] = true;
 				};
+				
 				if frame > 32.0 {
 					DO_STALL[ENTRY_ID] = false; 
+					KineticModule::resume_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_GRAVITY);
+					KineticModule::resume_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_CONTROL);
 					CancelModule::enable_cancel(boma);
 				} else {
 					if DO_STALL[ENTRY_ID] {
-						macros::SET_SPEED_EX(fighter, 0.0, fallspeed*-0.2, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+						KineticModule::suspend_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_GRAVITY);
+						KineticModule::suspend_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_CONTROL);
+                        macros::SET_SPEED_EX(fighter, 0.0, -0.227, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
 					};
 				};
 			} else {
