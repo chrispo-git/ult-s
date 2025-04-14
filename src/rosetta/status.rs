@@ -15,7 +15,16 @@ use crate::util::*;
 use super::*;
 
 
+unsafe extern "C" fn special_lw_end(fighter: &mut L2CFighterCommon) -> L2CValue {
+    VisibilityModule::set_whole(fighter.module_accessor, true);
+    JostleModule::set_status(fighter.module_accessor, true);	
+    HitModule::set_whole(fighter.module_accessor, smash::app::HitStatus(*HIT_STATUS_NORMAL), 0);
+    ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_ROSETTA_GENERATE_ARTICLE_POINTER,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
+    0.into() 
+}	
 
 pub fn install() {
-    
+    Agent::new("rosetta")
+        .status(End, *FIGHTER_STATUS_KIND_SPECIAL_LW, special_lw_end)
+        .install();
 }
