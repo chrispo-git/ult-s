@@ -1,0 +1,5 @@
+IMAGE_TYPE=JRE
+JAVA_VERSION="24"
+MODULES="java.base java.datatransfer java.xml java.prefs java.desktop java.logging java.scripting jdk.unsupported"
+OS_ARCH=x86_64
+OS_NAME=Windows
