@@ -61,7 +61,7 @@ unsafe extern "C" fn pitoo(fighter : &mut L2CFighterCommon) {
 				StatusModule::set_keep_situation_air(boma, true);
 				StatusModule::change_status_request_from_script(boma, *FIGHTER_PIT_STATUS_KIND_SPECIAL_HI_RUSH, false);
 			};
-			if situation_kind != *SITUATION_KIND_AIR {
+			if situation_kind != *SITUATION_KIND_AIR  || (*FIGHTER_STATUS_KIND_DAMAGE..*FIGHTER_STATUS_KIND_DAMAGE_FALL).contains(&status_kind) {
 				CAN_SIDEB[ENTRY_ID] = 0;
 			};
 			if status_kind == *FIGHTER_PIT_STATUS_KIND_SPECIAL_HI_RUSH {
@@ -75,6 +75,10 @@ unsafe extern "C" fn pitoo(fighter : &mut L2CFighterCommon) {
 					reimpl_cancel_frame(fighter);
 					if end_frame - frame < 3.0 {
 						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL, true);
+					};
+					if SPEED_X[ENTRY_ID] * PostureModule::lr(boma) > 0.4 {
+                    	let speed = smash::phx::Vector3f { x: -0.2, y: 0.0, z: 0.0 };
+                    	KineticModule::add_speed(boma, &speed);
 					};
 			};
 		};
