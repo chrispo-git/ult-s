@@ -102,10 +102,10 @@ unsafe extern "C" fn main_upb(fighter: &mut L2CFighterCommon) -> L2CValue {
     let is_ground = situation_kind == *SITUATION_KIND_GROUND;
     let is_end = MotionModule::is_end(fighter.module_accessor);
     let fighter_kinetic_energy_motion = mem::transmute::<u64, &mut smash::app::FighterKineticEnergyMotion>(KineticModule::get_energy(boma, *FIGHTER_KINETIC_ENERGY_ID_MOTION));  
-    let is_near_ground = GroundModule::ray_check(fighter.module_accessor, &Vector2f{ x: PostureModule::pos_x(fighter.module_accessor), y: PostureModule::pos_y(fighter.module_accessor)}, &Vector2f{ x: 0.0, y: -1.0}, true);
+    let is_near_ground = GroundModule::ray_check(fighter.module_accessor, &Vector2f{ x: PostureModule::pos_x(fighter.module_accessor), y: PostureModule::pos_y(fighter.module_accessor)}, &Vector2f{ x: 0.0, y: -1.0}, true) == 1;
     if is_added(boma) && fighter_kind == *FIGHTER_KIND_PACMAN { 
         if ![hash40("special_hi_loop"), hash40("special_air_hi_loop")].contains(&motion_kind){
-            if is_ground || is_near_ground == 1{
+            if is_ground || is_near_ground{
                 MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_hi_loop"), -1.0, 1.0, false, 0.0, false, false);
             } else {
                 MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_air_hi_loop"), -1.0, 1.0, false, 0.0, false, false);
@@ -131,9 +131,9 @@ unsafe extern "C" fn main_neutralb(fighter: &mut L2CFighterCommon) -> L2CValue {
 	let fighter_kind = smash::app::utility::get_kind(boma);
     let situation_kind = StatusModule::situation_kind(boma);
     let is_ground = situation_kind == *SITUATION_KIND_GROUND;
+    let is_near_ground = GroundModule::ray_check(fighter.module_accessor, &Vector2f{ x: PostureModule::pos_x(fighter.module_accessor), y: PostureModule::pos_y(fighter.module_accessor)}, &Vector2f{ x: 0.0, y: -1.0}, true) == 1;
     let is_end = MotionModule::is_end(fighter.module_accessor);
     let fighter_kinetic_energy_motion = mem::transmute::<u64, &mut smash::app::FighterKineticEnergyMotion>(KineticModule::get_energy(boma, *FIGHTER_KINETIC_ENERGY_ID_MOTION));  
-    let is_near_ground = GroundModule::ray_check(fighter.module_accessor, &Vector2f{ x: PostureModule::pos_x(fighter.module_accessor), y: PostureModule::pos_y(fighter.module_accessor)}, &Vector2f{ x: 0.0, y: -1.0}, true);
     if is_added(boma) && fighter_kind == *FIGHTER_KIND_PACMAN { 
         if ![hash40("special_n"), hash40("special_n_hold"), hash40("special_n_shoot"), hash40("special_air_n"), hash40("special_air_n_hold"), hash40("special_air_n_shoot")].contains(&motion_kind){
             if is_ground {
@@ -170,8 +170,16 @@ unsafe extern "C" fn main_neutralb(fighter: &mut L2CFighterCommon) -> L2CValue {
             }
             if [hash40("special_n_hold"), hash40("special_air_n_hold")].contains(&motion_kind) {
                 KineticModule::suspend_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_CONTROL);
-                if is_ground {
+                if is_near_ground {
                     KineticModule::clear_speed_all(fighter.module_accessor);
+                } else {
+                    if StatusModule::situation_kind(boma) != *SITUATION_KIND_AIR {
+                        StatusModule::set_situation_kind(boma, smash::app::SituationKind(*SITUATION_KIND_AIR), true);
+                    };
+                    if KineticModule::get_kinetic_type(boma) != *FIGHTER_KINETIC_TYPE_MOTION_FALL {
+                        KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_MOTION_FALL);
+                    };
+                    println!("Falling!");
                 }
                 if is_end {
                     if is_ground {
@@ -196,7 +204,7 @@ unsafe extern "C" fn main_neutralb(fighter: &mut L2CFighterCommon) -> L2CValue {
                 }
                 if ControlModule::check_button_on_trriger(boma, *CONTROL_PAD_BUTTON_SPECIAL) {
                     NEUTRALB_DIST[ENTRY_ID] = MIN_DISTANCE + ((MAX_DISTANCE-MIN_DISTANCE))*((NEUTRALB_CHARGE[ENTRY_ID] as f32)/(NEUTRALB_MAX as f32));
-                    if is_ground || is_near_ground == 1 {
+                    if is_ground || is_near_ground{
                         MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_n_shoot"), -1.0, 1.0, false, 0.0, false, false);
                     } else {
                         MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_air_n_shoot"), -1.0, 1.0, false, 0.0, false, false);
