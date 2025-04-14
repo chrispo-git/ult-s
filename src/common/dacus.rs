@@ -13,7 +13,8 @@ use crate::util::*;
 //Dash Attack Cancel Smashes
 unsafe extern "C" fn dacus(fighter : &mut L2CFighterCommon) {
     unsafe {
-        let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);    
+        let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
+		let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;   
 		let fighter_kind = smash::app::utility::get_kind(boma);
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
 		let f6 = [
@@ -53,8 +54,10 @@ unsafe extern "C" fn dacus(fighter : &mut L2CFighterCommon) {
 				(f6.contains(&fighter_kind) && motion_duration(boma) <= 6) ||
 				(f6.contains(&fighter_kind) == false && motion_duration(boma) <= 8)){
 					if (ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_ATTACK_HI4) != 0 {
+						JC_GRAB_LOCKOUT[ENTRY_ID] = MAX_LOCKOUT;
 						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_ATTACK_HI4_START, true);
 					} else if (ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_ATTACK_LW4) != 0 {
+						JC_GRAB_LOCKOUT[ENTRY_ID] = MAX_LOCKOUT;
 						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_ATTACK_LW4_START, true);
 					};
 				};

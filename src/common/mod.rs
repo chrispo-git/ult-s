@@ -39,6 +39,11 @@ pub static mut DJ_DELAY : [i32; 8] = [0; 8];
 pub static mut DELAY_FRAMES: i32 = 30;
 pub static mut DJ_DELAY_FRAMES: i32 = 21;
 
+pub const MAX_WEIGHT : i32 = 150;
+pub const MIN_WEIGHT : i32 = 60;
+pub const MAX_GRAVITY : f32 = 0.1;
+pub const MIN_GRAVITY : f32 = 0.065;
+
 
 static mut IS_CALCULATING: Option<(u32, u32)> = None;
 
@@ -75,6 +80,7 @@ pub unsafe extern "C" fn process_toonlinkbomb_knockback(defender: u32, attacker:
         }
     }
 }
+
 pub fn install() {
     hitstun::install();
     dacus::install();
@@ -93,4 +99,9 @@ pub fn install() {
         process_knockback,
         calculate_knockback
     );*/
+
+    //Setting values for everybody!
+    let all: Vec<i32> = vec![-1];
+    param_config::update_attribute_mul_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("damage_fly_top_air_accel_y"), 0, 1.05));
+    param_config::update_float_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("damage_fly_top_speed_y_stable"), 0, 1.84));
 }

@@ -78,6 +78,24 @@ unsafe extern "C" fn moonwalk(fighter : &mut L2CFighterCommon) {
 		};
     };
 }
+//JC Grab
+unsafe extern "C" fn jc_grab(fighter : &mut L2CFighterCommon) {
+    unsafe {
+        let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);  
+		let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
+        if [*FIGHTER_STATUS_KIND_JUMP_SQUAT].contains(&status_kind) && StatusModule::situation_kind(boma) == *SITUATION_KIND_GROUND{
+            if JC_GRAB_LOCKOUT[ENTRY_ID] == 0 && ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_CATCH) {
+                JC_GRAB_LOCKOUT[ENTRY_ID] = MAX_LOCKOUT;
+                GroundModule::attach_ground(fighter.module_accessor, true);
+                GroundModule::set_attach_ground(fighter.module_accessor, true);
+                StatusModule::set_situation_kind(boma, smash::app::SituationKind(*SITUATION_KIND_GROUND), true);
+                StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_CATCH, true);
+            };
+		};
+    };
+}
+
 //DJC
 unsafe extern "C" fn djc(fighter : &mut L2CFighterCommon) {
     unsafe {
@@ -85,10 +103,13 @@ unsafe extern "C" fn djc(fighter : &mut L2CFighterCommon) {
 		let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 		let fighter_kind = smash::app::utility::get_kind(boma);
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
+        //println!("Is Tap Jump? {}", is_tap_jump);
 		if [*FIGHTER_KIND_NESS, *FIGHTER_KIND_LUCAS, /**FIGHTER_KIND_YOSHI,*/ *FIGHTER_KIND_MEWTWO].contains(&fighter_kind) {
 			if [*FIGHTER_KINETIC_TYPE_JUMP_AERIAL_MOTION_2ND, *FIGHTER_KINETIC_TYPE_JUMP_AERIAL_MOTION, *FIGHTER_KINETIC_TYPE_JUMP_AERIAL].contains(&KineticModule::get_kinetic_type(boma)) {
-				if ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_JUMP) && [*FIGHTER_TRAIL_STATUS_KIND_ATTACK_AIR_N, *FIGHTER_STATUS_KIND_ATTACK_AIR, *FIGHTER_STATUS_KIND_AIR_LASSO].contains(&status_kind) {
-					KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_MOTION_FALL);
+                if ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_JUMP) && [*FIGHTER_TRAIL_STATUS_KIND_ATTACK_AIR_N, *FIGHTER_STATUS_KIND_ATTACK_AIR, *FIGHTER_STATUS_KIND_AIR_LASSO].contains(&status_kind) {
+					if is_tap_djc(boma) {
+                        KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_MOTION_FALL);
+                    }
 				};
 				if KineticModule::get_kinetic_type(boma) == *FIGHTER_KINETIC_TYPE_JUMP_AERIAL {
 					KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_JUMP_AERIAL_MOTION);
@@ -98,11 +119,13 @@ unsafe extern "C" fn djc(fighter : &mut L2CFighterCommon) {
 		if [*FIGHTER_KIND_TRAIL].contains(&fighter_kind) && Path::new("sd:/ultimate/ult-s/trail.flag").is_file() {
 			if [*FIGHTER_KINETIC_TYPE_JUMP_AERIAL_MOTION_2ND, *FIGHTER_KINETIC_TYPE_JUMP_AERIAL_MOTION, *FIGHTER_KINETIC_TYPE_JUMP_AERIAL].contains(&KineticModule::get_kinetic_type(boma)) {
 				if ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_JUMP) && [*FIGHTER_TRAIL_STATUS_KIND_ATTACK_AIR_N, *FIGHTER_STATUS_KIND_ATTACK_AIR, *FIGHTER_STATUS_KIND_AIR_LASSO].contains(&status_kind) {
-					KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_MOTION_FALL);
-					if SPEED_Y[ENTRY_ID] > 2.5 {
-						let new_speed = SPEED_X[ENTRY_ID]*PostureModule::lr(fighter.module_accessor);
-						macros::SET_SPEED_EX(fighter, new_speed, 3.0, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
-					};
+					if is_tap_djc(boma) {
+                        KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_MOTION_FALL);
+                        if SPEED_Y[ENTRY_ID] > 2.5 {
+                            let new_speed = SPEED_X[ENTRY_ID]*PostureModule::lr(fighter.module_accessor);
+                            macros::SET_SPEED_EX(fighter, new_speed, 3.0, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+                        };
+                    }
 				};
 			};
 		};
@@ -328,6 +351,7 @@ pub fn install() {
 	.on_line(Main, djc)
 	.on_line(Main, hold_buffer_killer)
     .on_line(Main, moonwalk)
+    .on_line(Main, jc_grab)
 	.install();
     skyline::nro::add_hook(nro_hook);
 }
