@@ -292,6 +292,7 @@ pub unsafe fn change_status_request_script_hook(boma: &mut smash::app::BattleObj
 
 pub fn install() {
     Agent::new("fighter")
+    .set_costume((0..255).to_vec())
 	.on_line(Exec, wavedash)
 	.status(Pre, *FIGHTER_STATUS_KIND_ESCAPE_AIR, status_pre_EscapeAir)
     .install();
