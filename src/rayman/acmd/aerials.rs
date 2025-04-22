@@ -297,6 +297,7 @@ unsafe extern "C" fn rayman_uair_snd(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("pikmin")
+    .set_costume([120, 121, 122, 123, 124, 125, 126, 127].to_vec())
         .game_acmd("game_attackairfrayman", rayman_fair, Priority::Low)
         .effect_acmd("effect_attackairfrayman", rayman_fair_eff, Priority::Low)
         .sound_acmd("sound_attackairfrayman", rayman_fair_snd, Priority::Low)

@@ -644,10 +644,12 @@ unsafe extern "C" fn kill_pikmin(weapon: &mut L2CFighterBase) {
 
 pub fn install() {
     Agent::new("pikmin")
+    .set_costume([120, 121, 122, 123, 124, 125, 126, 127].to_vec())
         .on_line(Main, rayman)
         .install();
 
     Agent::new("pikmin_pikmin")
+    .set_costume([120, 121, 122, 123, 124, 125, 126, 127].to_vec())
         .on_line(Main, kill_pikmin)
         .install();
 }

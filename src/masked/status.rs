@@ -16,6 +16,7 @@ use super::*;
 use crate::masked::*;
 pub fn install() {
     Agent::new("lucas")
+    .set_costume([120, 121, 122, 123, 124, 125, 126, 127].to_vec())
         .status(Main, *FIGHTER_STATUS_KIND_AIR_LASSO, zair_main)
         .status(Pre, *FIGHTER_STATUS_KIND_SPECIAL_HI, specialhi_pre)
         .status(Main, *FIGHTER_STATUS_KIND_SPECIAL_HI, specialhi_main)

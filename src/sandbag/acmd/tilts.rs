@@ -20,6 +20,7 @@ use crate::sandbag::*;
 
 pub fn install() {
     Agent::new("mariod")
+    .set_costume([120, 121, 122, 123, 124, 125, 126, 127].to_vec())
         .game_acmd("game_attacks3sandbag", sandbag_ftilt, Priority::Low)
         .effect_acmd("effect_attacks3sandbag", sandbag_ftilt_eff, Priority::Low)
         .sound_acmd("sound_attacks3sandbag", sandbag_ftilt_snd, Priority::Low)

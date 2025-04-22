@@ -20,6 +20,7 @@ use crate::sandbag::*;
 
 pub fn install() {
     Agent::new("mariod")
+    .set_costume([120, 121, 122, 123, 124, 125, 126, 127].to_vec())
         .sound_acmd("sound_jumpaerialbacksandbag", sandbag_jumpaerialback_snd, Priority::Low)
         .sound_acmd("sound_jumpaerialfrontsandbag", sandbag_jumpaerialfront_snd, Priority::Low)
         .effect_acmd("effect_walkfastsandbag", sandbag_walkfast_eff, Priority::Low)

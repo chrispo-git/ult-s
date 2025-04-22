@@ -16,6 +16,7 @@ use crate::masked::*;
 use super::*;
 pub fn install() {
     Agent::new("lucas")
+    .set_costume([120, 121, 122, 123, 124, 125, 126, 127].to_vec())
         .on_line(Main, maskedman_frame)
         .install();
 }

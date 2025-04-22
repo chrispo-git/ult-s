@@ -17,6 +17,7 @@ use super::*;
 
 pub fn install() {
 	Agent::new("pacman")
+    .set_costume([120, 121, 122, 123, 124, 125, 126, 127].to_vec())
 	.acmd("game_attacks3bomb", bomb_ftilts, Priority::Low)
 	.acmd("game_attacks3hibomb", bomb_ftilthi, Priority::Low)
 	.acmd("game_attacks3lwbomb", bomb_ftiltlw, Priority::Low)

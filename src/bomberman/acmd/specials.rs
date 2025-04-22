@@ -17,6 +17,7 @@ use crate::bomberman::*;
 
 pub fn install() {
 	Agent::new("pacman")
+    .set_costume([120, 121, 122, 123, 124, 125, 126, 127].to_vec())
 	.acmd("game_specialairlwbomb", bomb_air_downb, Priority::Low)
 	.acmd("game_speciallwbomb", bomb_downb, Priority::Low)
 	.acmd("sound_speciallwbomb", bomb_downb_snd, Priority::Low)
@@ -56,6 +57,7 @@ pub fn install() {
 	.install();
 
     Agent::new("pacman_firehydrant")
+    .set_costume([120, 121, 122, 123, 124, 125, 126, 127].to_vec())
     .acmd("game_fly", bomb_bomb_fly, Priority::Low)
 	.acmd("game_fall", bomb_bomb_fall, Priority::Low)
 	.acmd("game_down", bomb_bomb_down, Priority::Low)

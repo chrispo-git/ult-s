@@ -274,6 +274,7 @@ unsafe extern "C" fn rayman_sideb_snd(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("pikmin")
+    .set_costume([120, 121, 122, 123, 124, 125, 126, 127].to_vec())
         .sound_acmd("sound_specialhirayman", rayman_upb_snd, Priority::Low)
         .sound_acmd("sound_specialairhiwait1rayman", rayman_upb_snd, Priority::Low)
         .sound_acmd("sound_specialairhirayman", rayman_upb_snd, Priority::Low)

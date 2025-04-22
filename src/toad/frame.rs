@@ -295,11 +295,13 @@ unsafe extern "C" fn agent_reset(fighter: &mut L2CFighterCommon) {
 
 pub fn install() {
     Agent::new("murabito")
+    .set_costume([120, 121, 122, 123, 124, 125, 126, 127].to_vec())
 		.on_start(agent_reset)
         .on_line(Main, toad)
         .install();
 
     Agent::new("murabito_clayrocket")
+    .set_costume([120, 121, 122, 123, 124, 125, 126, 127].to_vec())
         .on_line(Main, final_frame)
         .install();
 }

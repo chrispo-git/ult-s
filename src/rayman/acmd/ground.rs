@@ -540,6 +540,7 @@ unsafe extern "C" fn rayman_slide_attack_snd(agent: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("pikmin")
+    .set_costume([120, 121, 122, 123, 124, 125, 126, 127].to_vec())
         .game_acmd("game_attack11rayman", rayman_jab_1, Priority::Low)
         .effect_acmd("effect_attack11rayman", rayman_jab_1_eff, Priority::Low)
         .sound_acmd("sound_attack11rayman", rayman_jab_1_snd, Priority::Low)

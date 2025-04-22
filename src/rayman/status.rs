@@ -506,6 +506,7 @@ unsafe extern "C" fn downb_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
 
 pub fn install() {
     Agent::new("pikmin")
+    .set_costume([120, 121, 122, 123, 124, 125, 126, 127].to_vec())
         .status(Main, *FIGHTER_STATUS_KIND_CATCH_PULL, main_catch_pull)
         .status(Init, *FIGHTER_STATUS_KIND_CATCH_PULL, catch_pull_init)
         .status(Exit, *FIGHTER_STATUS_KIND_CATCH_PULL, catch_pull_exit)
