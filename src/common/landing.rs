@@ -108,7 +108,7 @@ unsafe extern "C" fn respawn_wakeup(fighter : &mut L2CFighterCommon) {
 }	
 
 //Edge Cancel List
-pub(crate) fn is_edge_cancel(fighter_kind : i32, status_kind : i32) -> bool {
+pub(crate) fn is_edge_cancel(fighter_kind : i32, status_kind : i32, is_added : bool) -> bool {
 	let edge_cancel = [
 		[*FIGHTER_KIND_LUCARIO, *FIGHTER_STATUS_KIND_ATTACK_DASH],
 		[*FIGHTER_KIND_LUCARIO, *FIGHTER_STATUS_KIND_SPECIAL_LW],
@@ -135,8 +135,12 @@ pub(crate) fn is_edge_cancel(fighter_kind : i32, status_kind : i32) -> bool {
 		[*FIGHTER_KIND_INKLING, 25],
 		[*FIGHTER_KIND_MIIFIGHTER, *FIGHTER_MIIFIGHTER_STATUS_KIND_SPECIAL_LW2_KICK_LANDING]
 	];
+	let mut fighter = fighter_kind;
+	if is_added {
+		fighter *= -1;
+	}
 	for i in &edge_cancel {
-		if fighter_kind == i[0] && status_kind == i[1] {
+		if fighter == i[0] && status_kind == i[1] {
 			return true;
 		};
 	};
@@ -148,10 +152,11 @@ pub(crate) fn is_edge_cancel(fighter_kind : i32, status_kind : i32) -> bool {
 unsafe fn init_settings_replace(module_accessor: &mut smash::app::BattleObjectModuleAccessor, situation_kind: i32, arg3: i32, arg4: u64, ground_cliff_check_kind: u64, arg6: bool, arg7: i32, arg8: i32, arg9: i32, arg10: i32) -> u64 {
     let status_kind = StatusModule::status_kind(module_accessor);
     let fighter_kind = smash::app::utility::get_kind(module_accessor);
+	let is_added = is_added(module_accessor);
     if smash::app::utility::get_category(module_accessor) != *BATTLE_OBJECT_CATEGORY_FIGHTER {
         return original!()(module_accessor, situation_kind, arg3, arg4, ground_cliff_check_kind, arg6, arg7, arg8, arg9, arg10);
     }
-    if is_edge_cancel(fighter_kind, status_kind) && situation_kind == SITUATION_KIND_GROUND {
+    if is_edge_cancel(fighter_kind, status_kind, is_added) && situation_kind == SITUATION_KIND_GROUND {
         original!()(module_accessor, situation_kind, arg3, 1 as u64, ground_cliff_check_kind, arg6, arg7, arg8, arg9, arg10)
     } 
     else if [*FIGHTER_STATUS_KIND_LANDING_ATTACK_AIR, *FIGHTER_STATUS_KIND_LANDING, *FIGHTER_STATUS_KIND_DASH, *FIGHTER_STATUS_KIND_TURN_DASH].contains(&status_kind) {
