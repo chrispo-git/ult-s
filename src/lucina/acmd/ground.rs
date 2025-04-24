@@ -17,6 +17,7 @@ use super::super::*;
 
 pub fn install() {
     Agent::new("lucina")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("game_attack11", lucina_jab1_hero, Priority::Low)    
     .acmd("effect_attack11", lucina_jab1_hero_eff, Priority::Low)    
     .acmd("game_attack12", lucina_jab2_hero, Priority::Low)    

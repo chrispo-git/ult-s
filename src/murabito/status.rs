@@ -16,6 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("murabito")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .status(Pre, *FIGHTER_STATUS_KIND_SPECIAL_N, special_n_pre)
     .status(Pre, *FIGHTER_MURABITO_STATUS_KIND_SPECIAL_N_POCKET, special_n_p_pre)
     .status(Pre, *FIGHTER_MURABITO_STATUS_KIND_SPECIAL_N_TAKE_OUT, special_n_t_pre)

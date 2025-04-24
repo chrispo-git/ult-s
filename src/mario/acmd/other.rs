@@ -17,6 +17,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("mario")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("sound_appealhir", mario_utaunt_snd, Priority::Low)    
     .acmd("sound_appealhil", mario_utaunt_snd, Priority::Low)    
     .acmd("effect_appealhir", mario_utaunt_eff, Priority::Low)    

@@ -16,6 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("koopa")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("game_attackdash", bowser_da, Priority::Low)    
     .acmd("effect_attackdash", bowser_da_eff, Priority::Low)    
     .acmd("sound_attackdash", bowser_da_snd, Priority::Low)    

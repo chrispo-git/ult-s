@@ -16,6 +16,7 @@ use super::*;
 
 pub fn install() {
 	Agent::new("donkey")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("game_throwhi", dk_uthrow, Priority::Low)    
     .acmd("effect_throwhi", dk_uthrow_eff, Priority::Low)    
     .acmd("expression_throwhi", dk_uthrow_expr, Priority::Low)    

@@ -17,6 +17,7 @@ use super::*;
 
 pub fn install() {
 	Agent::new("miifighter")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("game_specialairlw2start", brawler_fj, Priority::Low)    
     .acmd("game_speciallw2start", brawler_fj, Priority::Low)    
     .acmd("game_specialn3", brawler_esk, Priority::Low)    
@@ -49,6 +50,7 @@ pub fn install() {
     .install();
 
 	Agent::new("miifighter_ironball")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("game_fly", brawler_shotput, Priority::Low)    
     .acmd("effect_fly", brawler_shotput_eff, Priority::Low)    
     .install();

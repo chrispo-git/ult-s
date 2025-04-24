@@ -16,6 +16,7 @@ use super::*;
 
 pub fn install() {
 	Agent::new("elight")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("game_attack11", mythra_jab1, Priority::Low)    
     .acmd("game_attack13", mythra_jab3, Priority::Low)    
     .acmd("game_attackdash", mythra_da, Priority::Low)    

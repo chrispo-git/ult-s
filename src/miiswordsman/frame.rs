@@ -17,6 +17,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("miiswordsman")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .on_line(Main, sword)
     .install();
 }

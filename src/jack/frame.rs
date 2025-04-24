@@ -17,10 +17,12 @@ use crate::jack::*;
 
 pub fn install() {
 	Agent::new("jack")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
 	.on_line(Main, joker_frame)
 	.install();
 
 	Agent::new("kirby")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
 	.on_line(Main, kirby_joker_frame)
 	.install();
 }

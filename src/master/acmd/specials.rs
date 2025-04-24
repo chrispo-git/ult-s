@@ -17,6 +17,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("master")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("game_specialn", byleth_neutralb, Priority::Low)    
     .acmd("game_specialairn", byleth_neutralb, Priority::Low)    
     .acmd("effect_specialn", byleth_neutralb_eff, Priority::Low)    
@@ -37,16 +38,19 @@ pub fn install() {
     .install();
 
 	Agent::new("master_arrow1")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("effect_fly", byleth_arrow_effect, Priority::Low)    
     .acmd("game_fly", byleth_arrow, Priority::Low)    
     .install();
 
 	Agent::new("master_axe")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("game_speciallw", axe_downb, Priority::Low)    
     .acmd("game_specialairlw", axe_downb, Priority::Low)    
     .install();
 
 	Agent::new("kirby")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("effect_masterspecialn", kirby_byleth_neutralb_eff, Priority::Low)    
     .acmd("effect_masterspecialairn", kirby_byleth_neutralb_eff, Priority::Low)    
     .install();

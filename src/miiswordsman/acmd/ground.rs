@@ -17,6 +17,7 @@ use super::super::*;
 
 pub fn install() {
     Agent::new("miiswordsman")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("game_attacks4", sword_fsmash, Priority::Low)    
     .acmd("game_attackhi4", sword_usmash, Priority::Low)    
     .acmd("sound_attackhi4", sword_usmash_snd, Priority::Low)    

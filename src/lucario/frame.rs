@@ -16,6 +16,7 @@ use crate::lucario::*;
 
 pub fn install() {
 	Agent::new("lucario")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .on_line(Main, lucario)
     .install();
 }

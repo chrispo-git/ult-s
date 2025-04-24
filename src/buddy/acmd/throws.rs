@@ -16,6 +16,7 @@ use super::*;
 
 pub fn install() {
 	Agent::new("buddy")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
 	.acmd("game_throwf", banjo_fthrow, Priority::Low)    
 	.install();
 }

@@ -15,7 +15,11 @@ use crate::util::*;
 use super::*;
 
 pub fn install() {
-    
+    Agent::new("dedede")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .acmd("game_throwf", d3_fthrow, Priority::Low)    
+    .acmd("game_throwlw", d3_dthrow, Priority::Low)    
+    .install();
 }
 
 unsafe extern "C" fn d3_dthrow(fighter: &mut L2CAgentBase) {

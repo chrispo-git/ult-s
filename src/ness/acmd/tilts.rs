@@ -16,6 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("ness")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("game_attacklw3", ness_dtilt, Priority::Low)    
     .acmd("effect_attacklw3", ness_dtilt_eff, Priority::Low)    
     .acmd("sound_attacklw3", ness_dtilt_snd, Priority::Low)    

@@ -15,6 +15,7 @@ use crate::util::*;
 use super::*;
 pub fn install() {
     Agent::new("dedede")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("game_specialsstart", d3_sideb_start, Priority::Low)    
     .acmd("game_specialairsstart", d3_sideb_start, Priority::Low)    
     .install();

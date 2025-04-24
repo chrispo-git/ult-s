@@ -14,6 +14,7 @@ use smash::phx::Vector3f;
 
 pub fn install() {
     Agent::new("krool")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("game_attack11", krool_jab1, Priority::Low)    
     .acmd("game_attack12", krool_jab2, Priority::Low)    
     .acmd("game_attacklw4", krool_dsmash, Priority::Low)    

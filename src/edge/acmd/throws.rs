@@ -14,7 +14,13 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 pub fn install() {
-    
+    Agent::new("edge")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .acmd("game_throwb", seph_bthrow, Priority::Low)    
+    .acmd("game_throwhi", seph_uthrow, Priority::Low)    
+    .acmd("game_throwlw", seph_dthrow, Priority::Low)    
+    .acmd("game_catch", seph_stand_grab, Priority::Low)    
+    .install();
 }
 unsafe extern "C" fn seph_bthrow(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;

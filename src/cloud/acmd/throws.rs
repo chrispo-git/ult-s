@@ -16,6 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("cloud")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("game_catch", cloud_grab, Priority::Low)    
     .acmd("game_throwlw", cloud_dthrow, Priority::Low)    
     .install();

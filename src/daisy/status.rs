@@ -15,6 +15,7 @@ use crate::util::*;
 use super::*;
 pub fn install() {
 	Agent::new("daisy")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .status(Pre, *FIGHTER_STATUS_KIND_ATTACK_HI4, usmash_pre)
     .status(Main, *FIGHTER_STATUS_KIND_ATTACK_HI4, usmash_main)
     .install();

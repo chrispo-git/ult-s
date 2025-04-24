@@ -17,6 +17,7 @@ use super::*;
 
 pub fn install() {
 	Agent::new("kirby")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .status(Exec, *FIGHTER_KIRBY_STATUS_KIND_SPECIAL_N_DRINK, kirby_drink_exec)
     .status(Exec, *FIGHTER_STATUS_KIND_SPECIAL_LW, exec_downb)
     .status(Pre, *FIGHTER_STATUS_KIND_SPECIAL_LW, special_lw_pre)

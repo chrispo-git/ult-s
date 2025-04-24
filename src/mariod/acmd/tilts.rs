@@ -16,6 +16,7 @@ use super::*;
 
 pub fn install() {
 	Agent::new("mariod")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("game_attackhi3", doc_utilt, Priority::Low)    
     .acmd("effect_attackhi3", doc_utilt_eff, Priority::Low)    
     .acmd("game_attacks3", doc_ftilt, Priority::Low)    

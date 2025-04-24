@@ -16,6 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("lucario")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("game_attacklw3", lucario_dtilt, Priority::Low)    
 	.acmd("game_attackhi3", lucario_utilt, Priority::Low)    
 	.acmd("game_attacks3", lucario_ftilt, Priority::Low)    

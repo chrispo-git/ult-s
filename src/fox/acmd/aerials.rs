@@ -16,6 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("fox")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("game_attackairlw", fox_dair, Priority::Low)    
     .acmd("game_landingairlw", fox_landing_dair, Priority::Low)    
     .acmd("game_attackairf", fox_fair, Priority::Low)    

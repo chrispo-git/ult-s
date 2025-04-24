@@ -16,6 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("kamui")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("effect_dash", corrin_dash_eff, Priority::Low)    
     .acmd("effect_turndash", corrin_dash_eff, Priority::Low)    
     .acmd("effect_run", corrin_run_eff, Priority::Low)    

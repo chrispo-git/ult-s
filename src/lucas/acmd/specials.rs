@@ -16,6 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("lucas")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("game_speciallwend", lucas_downb, Priority::Low)    
     .acmd("game_specialairlwend", lucas_downb, Priority::Low)    
     .acmd("game_specialnstart", lucas_pk_freeze, Priority::Low)    

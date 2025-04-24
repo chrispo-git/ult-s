@@ -16,6 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("kamui")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("game_attack11", corrin_jab, Priority::Low)    
     .acmd("game_attackdash", corrin_da, Priority::Low)    
     .acmd("effect_attackhi4", corrin_usmash_effect, Priority::Low)    

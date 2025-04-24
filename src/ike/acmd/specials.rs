@@ -17,6 +17,7 @@ use crate::ike::*;
 
 pub fn install() {
     Agent::new("ike")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("game_specialnend", ike_neutralb, Priority::Low)    
     .acmd("game_specialairnend", ike_neutralb, Priority::Low)    
     .acmd("game_specialhi4", ike_upb4, Priority::Low)    

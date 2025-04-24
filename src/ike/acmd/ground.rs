@@ -17,6 +17,7 @@ use crate::ike::*;
 
 pub fn install() {
     Agent::new("ike")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("game_attack11", ike_jab1, Priority::Low)    
     .acmd("game_attack12", ike_jab2, Priority::Low)    
     .acmd("game_attack13", ike_jab3, Priority::Low)    
