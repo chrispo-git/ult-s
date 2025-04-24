@@ -178,7 +178,7 @@ unsafe fn correct_replace(module_accessor: &mut smash::app::BattleObjectModuleAc
     if [*FIGHTER_STATUS_KIND_LANDING_ATTACK_AIR, *FIGHTER_STATUS_KIND_LANDING, *FIGHTER_STATUS_KIND_DASH, *FIGHTER_STATUS_KIND_TURN_DASH].contains(&status_kind) {
         original!()(module_accessor, 1 as u32)
     }
-    else if is_edge_cancel(fighter_kind, status_kind) {
+    else if is_edge_cancel(fighter_kind, status_kind, is_added) {
         original!()(module_accessor, *GROUND_CORRECT_KIND_GROUND as u32)
     }
     else {
