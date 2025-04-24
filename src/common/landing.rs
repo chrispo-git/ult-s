@@ -172,6 +172,7 @@ unsafe fn init_settings_replace(module_accessor: &mut smash::app::BattleObjectMo
 unsafe fn correct_replace(module_accessor: &mut smash::app::BattleObjectModuleAccessor, ground_correct_kind: u32) -> u64 {
     let status_kind = StatusModule::status_kind(module_accessor);
     let fighter_kind = smash::app::utility::get_kind(module_accessor);
+	let is_added = is_added(module_accessor);
     if smash::app::utility::get_category(module_accessor) != *BATTLE_OBJECT_CATEGORY_FIGHTER {
         original!()(module_accessor, ground_correct_kind);
     }
