@@ -17,6 +17,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("brave")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
 	.acmd("game_attackairn", hero_nair, Priority::Low)
 	.acmd("game_attackairb", hero_bair, Priority::Low)
 	.acmd("game_attackairhi", hero_uair, Priority::Low)

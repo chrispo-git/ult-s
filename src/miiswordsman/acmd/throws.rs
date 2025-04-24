@@ -17,6 +17,7 @@ use super::super::*;
 
 pub fn install() {
     Agent::new("miiswordsman")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("game_throwlw", sword_dthrow, Priority::Low)    
     .acmd("game_throwf", sword_fthrow, Priority::Low)    
     .acmd("game_throwhi", sword_uthrow, Priority::Low)    

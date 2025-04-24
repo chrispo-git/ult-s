@@ -16,6 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("wolf")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("game_attackairb", wolf_bair, Priority::Low)    
     .acmd("game_attackairf", wolf_fair, Priority::Low)    
     .acmd("game_attackairn", wolf_nair, Priority::Low)    

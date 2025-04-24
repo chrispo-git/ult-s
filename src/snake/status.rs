@@ -16,6 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("snake")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .status(Main, *FIGHTER_STATUS_KIND_SPECIAL_S, snake_side_special_status_main)
     .status(Main, *FIGHTER_STATUS_KIND_APPEAL, snake_taunt_status_main)
     .status(End, *FIGHTER_STATUS_KIND_APPEAL, snake_taunt_status_end)

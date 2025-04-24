@@ -16,9 +16,11 @@ use super::*;
 
 pub fn install() {
 	Agent::new("dedede")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
 	.on_line(Main, dedede_frame)
 	.install();
 	Agent::new("dedede_gordo")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
 	.on_line(Main, gordo_frame)
 	.install();
 }

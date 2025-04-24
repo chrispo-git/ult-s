@@ -17,6 +17,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("gaogaen")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("game_specialslariat", incin_lariat, Priority::Low)    
     .acmd("game_specialsshoulder", incin_bbd, Priority::Low)    
     .acmd("game_specialairsshoulder", incin_air_bbd, Priority::Low)    

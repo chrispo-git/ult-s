@@ -16,6 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("ganon")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("game_specialn", ganon_teleport, Priority::Low)    
     .acmd("effect_specialn", ganon_teleport_eff, Priority::Low)    
     .acmd("sound_specialn", ganon_teleport_snd, Priority::Low)    
@@ -28,6 +29,7 @@ pub fn install() {
     .install();
 
 	Agent::new("kirby")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("effect_ganonspecialn", kirby_teleport_eff, Priority::Low)    
     .acmd("sound_ganonspecialn", kirby_teleport_snd, Priority::Low)    
     .acmd("expression_ganonspecialn", kirby_teleport_expr, Priority::Low)    

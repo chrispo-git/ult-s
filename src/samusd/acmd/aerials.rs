@@ -186,6 +186,7 @@ unsafe extern "C" fn dsamus_uair(agent: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("samusd")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
         .game_acmd("game_attackairn", dsamus_nair, Priority::Low)
         .effect_acmd("effect_attackairn", dsamus_nair_eff, Priority::Low)
         .game_acmd("game_attackairlw", dsamus_dair, Priority::Low)

@@ -225,10 +225,12 @@ unsafe extern "C" fn missile_frame(weapon: &mut L2CFighterBase) {
 
 pub fn install() {
     Agent::new("samusd")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
 		.on_line(Main, samusd_frame)
 		.install();
 
 	Agent::new("samusd_missile")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
 		.on_line(Main, missile_frame)
 		.install();
 }

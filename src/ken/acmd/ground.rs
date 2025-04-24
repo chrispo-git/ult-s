@@ -16,6 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("ken")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("game_attacklw4", ken_dsmash, Priority::Low)    
     .acmd("game_attack13", ken_jab3, Priority::Low)    
     .install();

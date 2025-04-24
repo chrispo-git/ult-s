@@ -17,6 +17,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("miigunner")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("game_specialairs1", gunner_s1, Priority::Low)    
     .acmd("game_specials1", gunner_s1, Priority::Low)    
     .acmd("game_specials31", gunner_s3, Priority::Low)    
@@ -30,14 +31,17 @@ pub fn install() {
     .install();
 
     Agent::new("miigunner_gunnercharge")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("game_shoot", gunner_chargeshot, Priority::Low)    
     .install();
 
     Agent::new("miigunner_flamepillar")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("game_pillar", gunner_fp, Priority::Low)    
     .install();
 
     Agent::new("miigunner_groundbomb")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("game_burstattack", gunner_bomb, Priority::Low)    
     .install();
 }

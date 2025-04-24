@@ -16,6 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("metaknight")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("game_attacks3", mk_ftilt1, Priority::Low)    
     .acmd("game_attacks3s2", mk_ftilt2, Priority::Low)    
     .acmd("game_attacks3s3", mk_ftilt3, Priority::Low)    

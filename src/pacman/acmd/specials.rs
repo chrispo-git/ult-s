@@ -18,6 +18,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("pacman")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("game_specialairlwfailure", pac_empty_downb, Priority::Low)    
     .acmd("effect_specialairlwfailure", pac_empty_downb_eff, Priority::Low)    
     .acmd("sound_specialairlwfailure", pac_empty_downb_snd, Priority::Low)    

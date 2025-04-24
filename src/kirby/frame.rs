@@ -18,18 +18,22 @@ use super::*;
 
 pub fn install() {
 	Agent::new("kirby")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
 	.on_line(Main, kirby_frame)
 	.install();
 
 	Agent::new("kirby_finalcuttershot")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
 	.on_line(Main, ball_frame)
 	.install();
 
 	Agent::new("kirby_hammer")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
 	.on_line(Main, finalcutter_frame)
 	.install();
 
 	Agent::new("kirby_hat")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
 	.on_line(Main, hat_frame)
 	.install();
 }

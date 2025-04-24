@@ -203,6 +203,7 @@ unsafe extern "C" fn toad_downb_eff(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
 	Agent::new("murabito")
+    .set_costume([120, 121, 122, 123, 124, 125, 126, 127].to_vec())
 		.game_acmd("game_specialstoad", toad_sideb, Priority::Low)
 		.game_acmd("game_specialairstoad", toad_sideb, Priority::Low)
 		.sound_acmd("sound_specialstoad", toad_sideb_snd, Priority::Low)

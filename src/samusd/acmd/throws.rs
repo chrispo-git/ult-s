@@ -171,6 +171,7 @@ unsafe extern "C" fn dsamus_dthrow_expr(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("samusd")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
         .game_acmd("game_throwb", dsamus_bthrow, Priority::Low)
         .sound_acmd("sound_throwb", dsamus_bthrow_snd, Priority::Low)
         .effect_acmd("effect_throwb", dsamus_bthrow_eff, Priority::Low)

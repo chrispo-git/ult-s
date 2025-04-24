@@ -16,6 +16,7 @@ use crate::util::*;
 use super::*;
 pub fn install() {
     Agent::new("lucas")
+    .set_costume([120, 121, 122, 123, 124, 125, 126, 127].to_vec())
         .game_acmd("game_specialhistartmaskedman", game_specialhistart, Priority::Low)    
         .game_acmd("game_specialairhistartmaskedman", game_specialhistart, Priority::Low)    
         .effect_acmd("effect_specialhistartmaskedman", effect_specialhistart, Priority::Low)    
@@ -43,6 +44,7 @@ pub fn install() {
         .install();
 
     Agent::new("lucas_pkfire")
+    .set_costume([120, 121, 122, 123, 124, 125, 126, 127].to_vec())
         .game_acmd("game_regularlight", lightningsword_regular, Priority::Low)    
         .effect_acmd("effect_regularlight", lightningsword_regular_eff, Priority::Low)    
         .sound_acmd("sound_regularlight", lightningsword_regular_snd, Priority::Low)    

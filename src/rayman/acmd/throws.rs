@@ -155,6 +155,7 @@ unsafe extern "C" fn rayman_dthrow_snd(agent: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("pikmin")
+    .set_costume([120, 121, 122, 123, 124, 125, 126, 127].to_vec())
         .game_acmd("game_throwhirayman", rayman_uthrow, Priority::Low)
         .effect_acmd("effect_throwhirayman", rayman_uthrow_eff, Priority::Low)
         .sound_acmd("sound_throwhirayman", rayman_uthrow_snd, Priority::Low)

@@ -150,6 +150,7 @@ unsafe extern "C" fn special_hi_pre(fighter: &mut L2CFighterCommon) -> L2CValue 
 
 pub fn install() {
     Agent::new("murabito")
+    .set_costume([120, 121, 122, 123, 124, 125, 126, 127].to_vec())
         .status(Main, *FIGHTER_STATUS_KIND_CATCH_PULL, main_catch_pull)
         .status(Main, *FIGHTER_STATUS_KIND_CATCH_WAIT, main_catch_wait)
         //.status(Main, *FIGHTER_STATUS_KIND_THROW, main_throw)

@@ -81,6 +81,7 @@ unsafe extern "C" fn special_lw_end(fighter: &mut L2CFighterCommon) -> L2CValue 
 
 pub fn install() {
     Agent::new("samusd")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
         .status(Pre, *FIGHTER_SAMUS_STATUS_KIND_SPECIAL_AIR_LW, special_air_lw_pre)
         .status(Pre, *FIGHTER_SAMUS_STATUS_KIND_SPECIAL_GROUND_LW, special_lw_pre)
         .status(End, *FIGHTER_SAMUS_STATUS_KIND_SPECIAL_AIR_LW, special_lw_end)
@@ -88,6 +89,7 @@ pub fn install() {
         .install();
 
     Agent::new("samusd_missile")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
         .status(Exec, *WEAPON_SAMUS_MISSILE_STATUS_KIND_HOMING, missile_exec)
         .install();
 }

@@ -16,6 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("wolf")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("game_attacklw3", wolf_dtilt, Priority::Low)    
     .acmd("game_attackhi3", wolf_utilt, Priority::Low)    
     .acmd("effect_attackhi3", wolf_utilt_eff, Priority::Low)    

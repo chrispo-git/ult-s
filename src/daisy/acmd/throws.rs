@@ -16,6 +16,7 @@ use super::*;
 
 pub fn install() {
 	Agent::new("daisy")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("game_throwf", daisy_fthrow, Priority::Low)    
     .acmd("effect_throwf", daisy_fthrow_eff, Priority::Low)    
     .acmd("game_throwlw", daisy_dthrow, Priority::Low)    

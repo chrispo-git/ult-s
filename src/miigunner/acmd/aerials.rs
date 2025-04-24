@@ -16,6 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("miigunner")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("game_attackairn", gunner_nair, Priority::Low)    
     .acmd("game_attackairf", gunner_fair, Priority::Low)    
     .acmd("game_attackairb", gunner_bair, Priority::Low)    
@@ -24,6 +25,7 @@ pub fn install() {
     .install();
 
     Agent::new("miigunner_attackairf_bullet")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("game_fly", gunner_fair_bullet, Priority::Low)    
     .install();
 }

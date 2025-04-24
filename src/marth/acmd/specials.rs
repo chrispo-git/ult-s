@@ -16,6 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("marth")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("game_specials4s", marth_db4, Priority::Low)    
 	.acmd("game_specialhi", marth_upb, Priority::Low)    
 	.acmd("game_specialairhi", marth_upb, Priority::Low)    

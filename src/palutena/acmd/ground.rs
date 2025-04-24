@@ -16,6 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("palutena")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("game_attack100end", palu_jab_100_end, Priority::Low)    
 	.acmd("game_attack11", palu_jab_1, Priority::Low)    
 	.acmd("game_attackdash", palu_da, Priority::Low)    

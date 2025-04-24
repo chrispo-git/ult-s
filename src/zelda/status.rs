@@ -16,6 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("zelda")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .status(Pre, *FIGHTER_ZELDA_STATUS_KIND_SPECIAL_LW_CHARGE, special_lw_pre)
     .status(Pre, *FIGHTER_STATUS_KIND_SPECIAL_LW, special_lw2_pre)
     .install();

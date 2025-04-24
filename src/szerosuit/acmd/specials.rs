@@ -17,6 +17,7 @@ use super::super::*;
 
 pub fn install() {
     Agent::new("szerosuit")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("game_specialairlwflip", zss_bury, Priority::Low)    
     .acmd("game_specialairlwkick", zss_kick, Priority::Low)    
     .acmd("game_specialairhi", zss_air_upb, Priority::Low)    
@@ -24,6 +25,7 @@ pub fn install() {
     .install();
 
 	Agent::new("szerosuit_paralyzer_bullet")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
 	.acmd("game_shoot", zss_neutralb, Priority::Low)    
     .install();
 }

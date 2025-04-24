@@ -17,6 +17,7 @@ use crate::bomberman::*;
 
 pub fn install() {
 	Agent::new("pacman")
+    .set_costume([120, 121, 122, 123, 124, 125, 126, 127].to_vec())
 	.acmd("game_attack11bomb", bomb_jab1, Priority::Low)
 	.acmd("effect_attack11bomb", bomb_jab1_eff, Priority::Low)
 	.acmd("sound_attack11bomb", bomb_jab1_snd, Priority::Low)

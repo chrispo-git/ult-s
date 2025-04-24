@@ -234,6 +234,7 @@ unsafe extern "C" fn rayman_slide_utilt_snd(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("pikmin")
+    .set_costume([120, 121, 122, 123, 124, 125, 126, 127].to_vec())
         .game_acmd("game_attacks3rayman", rayman_ftilt, Priority::Low)
         .effect_acmd("effect_attacks3rayman", rayman_ftilt_eff, Priority::Low)
         .sound_acmd("sound_attacks3", rayman_ftilt_snd, Priority::Low)

@@ -16,6 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("demon")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
 	.on_line(Main, kaz_frame)
 	.install();
 }

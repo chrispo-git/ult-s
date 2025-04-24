@@ -15,6 +15,7 @@ use crate::util::*;
 use super::*;
 pub fn install() {
 	Agent::new("mario")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .status(Pre, *FIGHTER_STATUS_KIND_SPECIAL_LW, downb_pre)
     .status(Main, *FIGHTER_STATUS_KIND_SPECIAL_LW, downb_main)
     .install();

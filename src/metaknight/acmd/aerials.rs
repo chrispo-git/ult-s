@@ -16,6 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("metaknight")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("game_attackairlw", mk_dair, Priority::Low)    
     .acmd("effect_attackairlw", mk_dair_eff, Priority::Low)    
     .acmd("sound_attackairlw", mk_dair_snd, Priority::Low)    

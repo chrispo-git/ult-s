@@ -18,6 +18,7 @@ use smash::phx::Vector2f;
 
 pub fn install() {
     Agent::new("wario_coin")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
         .status(Pre, WEAPON_WARIO_COIN_STATUS_KIND_SHOOT, shoot_pre)
         .status(Init, WEAPON_WARIO_COIN_STATUS_KIND_SHOOT, shoot_init)
         .status(Main, WEAPON_WARIO_COIN_STATUS_KIND_SHOOT, shoot_main)
@@ -25,9 +26,11 @@ pub fn install() {
         .status(End, WEAPON_WARIO_COIN_STATUS_KIND_SHOOT, shoot_end)
         .install();
     Agent::new("wario_counter")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
         .status(Main, WEAPON_WARIO_COUNTER_STATUS_KIND_APPEAR, counter_main)
         .install();
     Agent::new("wario")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
         .status(Pre, *FIGHTER_STATUS_KIND_SPECIAL_LW, downb_pre)
         .status(Main, *FIGHTER_STATUS_KIND_SPECIAL_LW, downb_main)
         .status(End, *FIGHTER_STATUS_KIND_SPECIAL_LW, downb_end)

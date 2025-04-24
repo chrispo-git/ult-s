@@ -16,6 +16,7 @@ use super::*;
 
 pub fn install() {
 	Agent::new("mewtwo")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("game_dash", m2_dash, Priority::Low)    
     .acmd("game_turndash", m2_turn_dash, Priority::Low)    
     .install();

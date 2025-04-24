@@ -16,6 +16,7 @@ use super::*;
 
 pub fn install() {
 	Agent::new("daisy")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("game_attackairhi", daisy_uair, Priority::Low)    
     .acmd("effect_attackairhi", daisy_uair_eff, Priority::Low)    
     .acmd("sound_attackairhi", daisy_uair_snd, Priority::Low)    

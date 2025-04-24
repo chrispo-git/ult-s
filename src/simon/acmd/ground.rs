@@ -16,6 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("simon")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("game_attackdash", simon_da, Priority::Low)    
     .acmd("effect_attackdash", simon_da_eff, Priority::Low)    
     .acmd("sound_attackdash", simon_da_snd, Priority::Low)    

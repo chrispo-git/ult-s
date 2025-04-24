@@ -18,6 +18,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("toonlink")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .status(Pre, *FIGHTER_STATUS_KIND_SPECIAL_HI, upb_pre)
     .install();
 }

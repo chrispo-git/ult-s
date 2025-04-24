@@ -17,6 +17,7 @@ use super::super::*;
 
 pub fn install() {
     Agent::new("miiswordsman")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("game_specialn2", sword_neutralb_2, Priority::Low)    
     .acmd("game_specialairn2", sword_air_neutralb_2, Priority::Low)    
     .acmd("effect_specialn2", sword_neutralb_2_eff, Priority::Low)    
@@ -57,6 +58,7 @@ pub fn install() {
     .install();
 
 	Agent::new("miiswordsman_tornadoshot")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("game_fly", sword_nadoshot, Priority::Low)    
     .install();
 }

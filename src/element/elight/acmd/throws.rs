@@ -16,6 +16,7 @@ use super::*;
 
 pub fn install() {
 	Agent::new("elight")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("game_catchdash", mythra_dashgrab, Priority::Low)    
     .install();
 }

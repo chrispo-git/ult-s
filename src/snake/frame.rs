@@ -16,6 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("snake")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .on_line(Main, snake_frame)
     .install();
 }

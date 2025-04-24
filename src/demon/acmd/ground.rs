@@ -16,6 +16,7 @@ use super::*;
 
 pub fn install() {
 	Agent::new("demon")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("game_attackstand4", kaz_staturesmash, Priority::Low)    
     .acmd("game_attackstand5", kaz_flashtornado, Priority::Low)    
     .acmd("game_attackstep2f", kaz_ewgf, Priority::Low)    

@@ -759,6 +759,7 @@ unsafe extern "C" fn remove_pikmin_scripts(agent: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("pikmin")
+    .set_costume([120, 121, 122, 123, 124, 125, 126, 127].to_vec())
         .game_acmd("game_catchrayman", rayman_grab, Priority::Low)
         .sound_acmd("sound_catchrayman", rayman_grab_snd, Priority::Low)
         .game_acmd("game_catchdashrayman", rayman_dashgrab, Priority::Low)

@@ -155,6 +155,7 @@ unsafe extern "C" fn toad_dtilt_expr(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("murabito")
+    .set_costume([120, 121, 122, 123, 124, 125, 126, 127].to_vec())
         .game_acmd("game_attackhi3toad", toad_utilt, Priority::Low)
         .sound_acmd("sound_attackhi3toad", toad_utilt_snd, Priority::Low)
         .effect_acmd("effect_attackhi3toad", toad_utilt_eff, Priority::Low)

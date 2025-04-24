@@ -17,6 +17,7 @@ use super::super::*;
 
 pub fn install() {
     Agent::new("shizue")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("game_specialn", isa_neutralb, Priority::Low)    
     .acmd("game_specialairn", isa_neutralb, Priority::Low)    
     .acmd("effect_specialn", isa_neutralb_eff, Priority::Low)    
@@ -29,6 +30,7 @@ pub fn install() {
     .install();
 
 	Agent::new("shizue_pot")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("effect_burst", isa_item_burst_eff, Priority::Low)    
     .acmd("sound_burst", isa_item_burst_snd, Priority::Low)    
     .acmd("game_throwed", isa_neutralb_hit, Priority::Low)    

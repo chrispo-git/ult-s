@@ -16,6 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("falco")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("game_speciallw", falco_shine, Priority::Low)    
     .acmd("game_specialairlw", falco_shine, Priority::Low)     
     .acmd("effect_speciallw", falco_shine_eff, Priority::Low)   
@@ -25,6 +26,7 @@ pub fn install() {
     .install();
 
 	Agent::new("falco_blaster_bullet")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("game_fly", falco_laser, Priority::Low)    
     .install();
 }	

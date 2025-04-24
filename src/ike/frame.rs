@@ -17,6 +17,7 @@ use crate::ike::*;
 
 pub fn install() {
 	Agent::new("ike")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
 	.on_line(Main, ike)
 	.install();
 }

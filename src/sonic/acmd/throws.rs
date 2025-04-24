@@ -16,6 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("sonic")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("effect_throwf", sonic_fthrow_eff, Priority::Low)    
     .acmd("effect_throwb", sonic_bthrow_eff, Priority::Low)    
     .install();

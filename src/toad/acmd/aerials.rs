@@ -246,6 +246,7 @@ unsafe extern "C" fn toad_land_dair_snd(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("murabito")
+    .set_costume([120, 121, 122, 123, 124, 125, 126, 127].to_vec())
         .game_acmd("game_attackairntoad", toad_nair, Priority::Low)
         .sound_acmd("sound_attackairntoad", toad_nair_snd, Priority::Low)
         .game_acmd("game_attackairbtoad", toad_bair, Priority::Low)

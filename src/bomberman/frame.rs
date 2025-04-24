@@ -18,11 +18,13 @@ use crate::bomberman::*;
 
 pub fn install() {
     Agent::new("pacman")
+    .set_costume([120, 121, 122, 123, 124, 125, 126, 127].to_vec())
     .on_line(Exec, bomber_main_frame)
     .on_line(Main, bomberman_frame)
     .install();
 
     Agent::new("pacman_firehydrant")
+    .set_costume([120, 121, 122, 123, 124, 125, 126, 127].to_vec())
     .on_line(Main, bomb_frame)
     .install();
 }

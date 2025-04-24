@@ -16,6 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("pitb")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("game_specialairsend", dpit_upb, Priority::Low)    
 	.acmd("effect_specialairsend", dpit_upb_eff, Priority::Low)    
 	.acmd("game_specialsend", dpit_upb_ground, Priority::Low)    
@@ -26,6 +27,7 @@ pub fn install() {
 	.install();
 
 	Agent::new("pitb_bowarrow")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("game_fly", dpit_arrow, Priority::Low)    
 	.install();
 }

@@ -15,6 +15,7 @@ use crate::util::*;
 use super::*;
 pub fn install() {
     Agent::new("mario")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("game_attackdash", mario_da, Priority::Low)    
     .acmd("effect_attackdash", mario_da_eff, Priority::Low)    
     .acmd("sound_attackdash", mario_da_snd, Priority::Low)    

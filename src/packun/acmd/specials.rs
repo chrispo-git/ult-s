@@ -17,6 +17,7 @@ use super::super::*;
 
 pub fn install() {
     Agent::new("packun")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("game_specialsshoot", plant_sideb, Priority::Low)    
     .acmd("effect_specialsshoot", plant_sideb_eff, Priority::Low)    
     .acmd("sound_specialsshoot", plant_sideb_snd, Priority::Low)    
@@ -26,6 +27,7 @@ pub fn install() {
     .install();
 
     Agent::new("packun_poisonbreath")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("game_explode", poison_explosion, Priority::Low)    
     .acmd("effect_explode", poison_explosion_eff, Priority::Low)    
     .acmd("sound_explode", poison_explosion_snd, Priority::Low)    

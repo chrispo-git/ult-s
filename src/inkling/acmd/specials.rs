@@ -16,12 +16,15 @@ use super::*;
 
 pub fn install() {
     Agent::new("inkling_splashbomb")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("game_explode", ink_bomb, Priority::Low)    
     .install();
     Agent::new("inkling")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("game_specialhidown", ink_upb_down, Priority::Low)    
     .install();
     Agent::new("inkling_squid")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("effect_specialhi2", ink_upb_down_eff, Priority::Low)    
     .install();
 }

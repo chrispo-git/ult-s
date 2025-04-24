@@ -19,6 +19,7 @@ use crate::sandbag::*;
 
 pub fn install() {
     Agent::new("mariod")
+    .set_costume([120, 121, 122, 123, 124, 125, 126, 127].to_vec())
         .on_line(Main, sandbag_frame)
         .install();
 }

@@ -16,6 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("purin")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("game_speciallwl", puff_rest, Priority::Low)    
     .acmd("game_speciallwr", puff_rest, Priority::Low)    
     .acmd("game_specialairlwl", puff_rest, Priority::Low)    

@@ -16,6 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("gamewatch")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("sound_appealsr", gnw_sidetaunt_snd, Priority::Low)    
     .acmd("sound_appealsl", gnw_sidetaunt_snd, Priority::Low)    
     .acmd("expression_appealsr", gnw_sidetaunt_expr, Priority::Low)     

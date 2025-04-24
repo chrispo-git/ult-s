@@ -16,6 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("ganon")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("game_attackhi3", ganon_utilt, Priority::Low)    
     .acmd("effect_attackhi3", ganon_utilt_eff, Priority::Low)    
     .acmd("expression_attackhi3", ganon_utilt_expr, Priority::Low)    

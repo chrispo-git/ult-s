@@ -17,6 +17,7 @@ use super::super::*;
 
 pub fn install() {
     Agent::new("packun")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("game_attackairlw", plant_dair, Priority::Low)    
     .acmd("game_attackairn", plant_nair, Priority::Low)    
     .acmd("game_attackairb", plant_bair, Priority::Low)    

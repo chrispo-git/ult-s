@@ -17,6 +17,7 @@ use super::super::*;
 
 pub fn install() {
     Agent::new("lucina")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .status(Pre, *FIGHTER_STATUS_KIND_SPECIAL_HI, special_hi_pre)
 	.status(Pre, *FIGHTER_STATUS_KIND_SPECIAL_LW, special_lw_pre)
 	.install();

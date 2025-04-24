@@ -16,6 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("miigunner")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("game_catch", gunner_grab, Priority::Low)    
     .install();
 

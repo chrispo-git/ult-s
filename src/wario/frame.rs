@@ -17,10 +17,12 @@ use super::*;
 
 pub fn install() {
     Agent::new("wario")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .on_line(Main, wario_frame)
     .install();
 
 	Agent::new("wario_wariobike")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .on_line(Main, bike_frame)
     .install();
 }

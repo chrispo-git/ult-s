@@ -16,10 +16,12 @@ use super::*;
 
 pub fn install() {
     Agent::new("rosetta")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .on_line(Main, rosa_frame)
     .install();
 
 	Agent::new("rosetta_tico")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .on_line(Main, tico_frame)
     .install();
 }

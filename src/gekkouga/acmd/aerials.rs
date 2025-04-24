@@ -16,6 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("gekkouga")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("game_attackairn", gren_nair, Priority::Low)    
     .acmd("game_attackairb", gren_bair, Priority::Low)    
     .acmd("effect_attackairb", gren_bair_eff, Priority::Low)    

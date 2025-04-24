@@ -16,10 +16,12 @@ use super::*;
 
 pub fn install() {
 	Agent::new("diddy")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
 	.on_line(Main, diddy_frame)
 	.install();
 
 	Agent::new("diddy_gun")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
 	.on_line(Main, gun_frame)
 	.install();
 }

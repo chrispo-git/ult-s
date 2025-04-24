@@ -16,6 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("chrom")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("game_attack11", chrom_jab, Priority::Low)    
     .acmd("game_attack12", chrom_jab_2, Priority::Low)    
     .acmd("effect_attack12", chrom_eff_jab_2, Priority::Low)    

@@ -17,10 +17,12 @@ use super::*;
 
 pub fn install() {
     Agent::new("peach")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .on_line(Main, peach_frame)
     .install();
 
 	Agent::new("kirby")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
 	.on_line(Main, kirby_frame)
     .install();
 }

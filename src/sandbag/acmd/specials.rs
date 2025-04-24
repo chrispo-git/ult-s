@@ -20,6 +20,7 @@ use crate::sandbag::*;
 
 pub fn install() {
     Agent::new("mariod")
+    .set_costume([120, 121, 122, 123, 124, 125, 126, 127].to_vec())
         .game_acmd("game_specialnsandbag", sandbag_neutralb, Priority::Low)
         .game_acmd("game_specialairnsandbag", sandbag_neutralb, Priority::Low)
         .game_acmd("effect_specialnsandbag", sandbag_neutralb_eff, Priority::Low)
@@ -47,6 +48,7 @@ pub fn install() {
         .install();
 
     Agent::new("mariod_drcapsule")
+    .set_costume([120, 121, 122, 123, 124, 125, 126, 127].to_vec())
         .game_acmd("game_regularsandbag", disc_regular, Priority::Low)
         .install();
 }

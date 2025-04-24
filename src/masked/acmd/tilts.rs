@@ -16,6 +16,7 @@ use crate::masked::*;
 use super::*;
 pub fn install() {
     Agent::new("lucas")
+    .set_costume([120, 121, 122, 123, 124, 125, 126, 127].to_vec())
         .game_acmd("game_attacklw3maskedman", maskedman_dtilt, Priority::Low)    
         .effect_acmd("effect_attacklw3maskedman", maskedman_dtilt_eff, Priority::Low)    
         .sound_acmd("sound_attacklw3maskedman", maskedman_dtilt_snd, Priority::Low)    

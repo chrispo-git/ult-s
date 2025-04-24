@@ -17,6 +17,7 @@ use super::super::*;
 
 pub fn install() {
     Agent::new("shizue")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("game_throwhi", isa_uthrow, Priority::Low)    
     .acmd("game_throwf", isa_fthrow, Priority::Low)    
     .install();
