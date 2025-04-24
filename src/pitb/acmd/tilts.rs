@@ -15,7 +15,10 @@ use crate::util::*;
 use super::*;
 
 pub fn install() {
-    
+    Agent::new("pitb")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .acmd("game_attacklw3", dpit_dtilt, Priority::Low)    
+	.install();
 }
 
 unsafe extern "C" fn dpit_dtilt(fighter: &mut L2CAgentBase) {

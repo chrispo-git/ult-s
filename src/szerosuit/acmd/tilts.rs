@@ -17,6 +17,7 @@ use super::super::*;
 
 pub fn install() {
     Agent::new("szerosuit")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("game_attacklw3", zss_dtilt, Priority::Low)    
     .acmd("game_attackhi3", zss_utilt, Priority::Low)    
     .install();

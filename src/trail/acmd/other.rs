@@ -16,6 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("trail")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("game_specialinput", sora_special_input, Priority::Low)    
     .acmd("effect_specialinput", sora_special_input_eff, Priority::Low)    
 	.acmd("sound_specialinput", sora_special_input_snd, Priority::Low)    

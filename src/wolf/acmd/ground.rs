@@ -18,6 +18,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("wolf")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("game_attackdash", wolf_da, Priority::Low)
     .install();
 }

@@ -16,6 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("ryu")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("game_attackairf", ryu_fair, Priority::Low)    
     .install();
 }

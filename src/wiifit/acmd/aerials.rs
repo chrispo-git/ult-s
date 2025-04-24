@@ -16,6 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("wiifit")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("game_attackairf", wft_fair, Priority::Low)    
     .acmd("game_attackairhi", wft_uair, Priority::Low)    
     .acmd("game_attackairb", wft_bair, Priority::Low)    

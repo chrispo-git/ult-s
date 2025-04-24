@@ -16,6 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("snake")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("sound_appealsr", snake_side_taunt_snd, Priority::Low)    
     .acmd("sound_appealhir", snake_up_taunt_snd, Priority::Low)    
     .acmd("game_appealendexplode", snake_down_taunt_explode_game, Priority::Low)    

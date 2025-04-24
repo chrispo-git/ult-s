@@ -16,6 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("pitb")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("game_attack12", dpit_jab2, Priority::Low)    
 	.acmd("game_attackdash", dpit_da, Priority::Low)    
 	.acmd("game_attacks4", dpit_fsmash, Priority::Low)    

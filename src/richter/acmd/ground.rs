@@ -16,6 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("richter")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("game_attackdash", richter_da, Priority::Low)    
     .acmd("effect_attackdash", richter_da_eff, Priority::Low)    
     .acmd("sound_attackdash", richter_da_snd, Priority::Low)    

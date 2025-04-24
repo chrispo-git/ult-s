@@ -16,6 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("samus")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("game_attacklw3", samus_dtilt, Priority::Low)    
     .acmd("effect_attacklw3", samus_dtilt_eff, Priority::Low)    
     .acmd("expression_attacklw3", samus_dtilt_expr, Priority::Low)    

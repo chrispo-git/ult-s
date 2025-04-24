@@ -16,6 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("toonlink")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("game_specialairhi", tink_upb_air, Priority::Low)    
     .acmd("expression_specialairhi", tink_upb_air_expr, Priority::Low)    
     .acmd("effect_specialairhi", tink_upb_air_eff, Priority::Low)    

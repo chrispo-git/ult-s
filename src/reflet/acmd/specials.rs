@@ -17,6 +17,7 @@ use super::super::*;
 
 pub fn install() {
     Agent::new("reflet")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("effect_speciallwstart", robin_downb_eff, Priority::Low)    
     .acmd("effect_specialairlwstart", robin_downb_eff, Priority::Low)    
     .acmd("effect_speciallwend", robin_downb_end_eff, Priority::Low)    
@@ -43,6 +44,7 @@ pub fn install() {
     .install();
 
 	Agent::new("reflet_elwind")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("game_shoot0", robin_elwind, Priority::Low)    
     .install();
 }

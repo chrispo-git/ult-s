@@ -16,6 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("trail")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("game_speciallw", sora_downb, Priority::Low)    
     .acmd("game_specialairlw", sora_downb, Priority::Low)    
 	.acmd("effect_speciallw", sora_downb_eff, Priority::Low)    
@@ -31,6 +32,7 @@ pub fn install() {
 	.install();
 
     Agent::new("trail_thunder")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("game_fall", thundaga_1, Priority::Low)    
 	.acmd("game_fallair", thundaga_2, Priority::Low)    
 	.acmd("game_falllast", thundaga_3, Priority::Low)    

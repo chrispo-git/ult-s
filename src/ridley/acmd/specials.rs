@@ -16,6 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("ridley")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("game_specialairsfalljump", ridley_sideb_end, Priority::Low)    
     .acmd("effect_specialairsfall", ridley_sideb_fall_eff, Priority::Low)    
     .install();

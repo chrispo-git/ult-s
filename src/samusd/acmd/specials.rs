@@ -99,12 +99,14 @@ unsafe extern "C" fn dsamus_downb(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("samusd")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
         .effect_acmd("effect_speciallw", eff_dsamus_downb, Priority::Low)
         .expression_acmd("expression_speciallw", expr_dsamus_downb, Priority::Low)
         .game_acmd("game_speciallw", dsamus_downb, Priority::Low)
         .install();
 
 	Agent::new("samusd_missile")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
 		.game_acmd("game_homing", dsamus_homing, Priority::Low)
 		.sound_acmd("sound_homing", sound_dsamus_homing, Priority::Low)
 		.effect_acmd("effect_special", dsamus_special_eff, Priority::Low)

@@ -16,6 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("trail")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("game_attackairlw", sora_dair, Priority::Low)    
     .acmd("sound_attackairlw", sora_dair_snd, Priority::Low)    
 	.acmd("sound_landingairlw", sora_dair_land_snd, Priority::Low)    

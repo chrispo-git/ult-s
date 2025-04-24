@@ -16,18 +16,22 @@ use super::*;
 
 pub fn install() {
     Agent::new("pzenigame")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .on_line(Main, pt)
     .install();
 
 	Agent::new("ptrainer")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .on_line(Main, pt)
     .install();
 
 	Agent::new("plizardon")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .on_line(Main, pt)
     .install();
 
 	Agent::new("pfushigisou")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .on_line(Main, pt)
     .install();
 }

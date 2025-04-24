@@ -15,7 +15,8 @@ use crate::util::*;
 use super::*;
 
 pub fn install() {
-    Agent::new("wario")   
+    Agent::new("wario")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())   
     .acmd("game_attacklw4", wario_dsmash, Priority::Low)    
     .acmd("effect_attacklw4", wario_dsmash_eff, Priority::Low)    
     .acmd("sound_attacklw4", wario_dsmash_snd, Priority::Low)    

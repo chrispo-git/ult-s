@@ -16,14 +16,17 @@ use super::*;
 
 pub fn install() {
     Agent::new("samus")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("game_specialhi", samus_upb, Priority::Low)    
     .install();
 
 	Agent::new("samus_missile")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("game_homing", samus_homing, Priority::Low)    
     .install();
 
 	Agent::new("samus_supermissile")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("game_ready", samus_super, Priority::Low)    
     .acmd("game_straight", samus_super, Priority::Low)    
     .install();

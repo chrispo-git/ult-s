@@ -16,6 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("trail")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .status(Init, *FIGHTER_TRAIL_STATUS_KIND_ATTACK_AIR_F, fair_init)
     .status(Init, *FIGHTER_STATUS_KIND_ATTACK_AIR, init_attack_air)
     .status(Pre, *FIGHTER_STATUS_KIND_ATTACK_AIR, pre_attack_air)

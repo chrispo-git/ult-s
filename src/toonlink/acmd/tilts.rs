@@ -16,6 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("toonlink")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("game_attacklw3", tink_dtilt, Priority::Low)    
     .acmd("game_attacks3", tink_ftilt, Priority::Low)    
     .acmd("game_attackhi3", tink_utilt, Priority::Low)    

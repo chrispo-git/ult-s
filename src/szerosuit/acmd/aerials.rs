@@ -17,6 +17,7 @@ use super::super::*;
 
 pub fn install() {
     Agent::new("szerosuit")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("game_attackairn", zss_nair, Priority::Low)    
     .acmd("effect_attackairn", zss_nair_eff, Priority::Low)  
     .acmd("sound_attackairn", zss_nair_snd, Priority::Low)  
