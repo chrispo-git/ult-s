@@ -19,7 +19,7 @@ Nair Landing Lag | 7|
 Fair Landing Lag | 7|
 Bair Landing Lag | 9|
 Uair Landing Lag | 8|
-Dair Landing Lag | 14|
+Dair Landing Lag | 21|
 Wall Jump? | True|
 
 
@@ -405,18 +405,18 @@ Autocancel - 1-2/13+
 ### Dair
 |Frame|ID|Damage|Angle|BKB|KBG|Notes| | | |
 |-|-|-|-|-|-|-|-|-|-|
-|Frame 13| 0|  9.0%|  270|  25|  95| Hits grounded only|
-|Frame 13| 1|  9.0%|  270|  25|  95| Hits grounded only|
-|Frame 13| 2|  9.0%|  285|  25|  95|
-|Frame 13| 3|  9.0%|  285|  25|  95|
-|Hitboxes terminated on Frame 17|
+|Frame 17| 0| 8.0%| 285| 30| 90| Hits air only|
+|Frame 17| 1| 8.0%| 70| 80| 70| Hits grounded only|
+|Frame 20| 0| 7.0%| 70| 75| 80|
+|Frame 20| 1| 5.0%| 70| 80| 70|
+|Hitboxes terminated on Frame 33|
 
 
 FaF: 46
 
 
 
-Autocancel - 1-2/31+
+Autocancel - 1-3/41+
 
 
 
