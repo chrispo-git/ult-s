@@ -2,12 +2,26 @@
 <struct>
   <struct hash="param_private">
     <float hash="rebel_gauge_damage_add">1.1</float>
+    <float hash="rebel_gauge_add">0.0</float>
   </struct>
+  <list hash="param_special_n">
+    <struct index="0">
+      <int hash="escape_num_max">10</int>
+    </struct>
+    <hash40 index="1">dummy</hash40>
+    <hash40 index="2">dummy</hash40>
+    <hash40 index="3">dummy</hash40>
+  </list>
   <list hash="param_special_lw">
-    <hash40 index="0">dummy</hash40>
+    <struct index="0">
+      <float hash="guard_rebel_gauge">11.943</float>
+      <float hash="rebel_gauge_add">0.00925</float>
+    </struct>
     <struct index="1">
       <float hash="counter_attack_power_mul">1.4</float>
       <float hash="reflector_attack_power_mul">1.4</float>
+      <float hash="shield_radius_size">8.0</float>
+      <float hash="reflector_radius_size">9.0</float>
     </struct>
     <hash40 index="2">dummy</hash40>
     <hash40 index="3">dummy</hash40>
