@@ -25,13 +25,12 @@ unsafe extern "C" fn ridley(fighter : &mut L2CFighterCommon) {
     unsafe {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 		if is_default(boma) {
-			let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
-			let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-			let mut stick_x = ControlModule::get_stick_x(boma);
-			let stick_y = ControlModule::get_stick_y(boma);
-			stick_x *= PostureModule::lr(boma);
-			let fighter_kind = smash::app::utility::get_kind(boma);
-			if fighter_kind == *FIGHTER_KIND_RIDLEY {
+				let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
+				let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+				let mut stick_x = ControlModule::get_stick_x(boma);
+				let mut stick_y = ControlModule::get_stick_y(boma);
+				let frame = MotionModule::frame(boma);
+				stick_x *= PostureModule::lr(boma);
 				if MotionModule::motion_kind(boma) == hash40("attack_air_lw") {
 					if (33..35).contains(&(MotionModule::frame(boma) as i32)) {
 						let mut is_bounce = false;
@@ -60,7 +59,36 @@ unsafe extern "C" fn ridley(fighter : &mut L2CFighterCommon) {
 						}
 					};
 				};
-			};
+				if [
+					*FIGHTER_RIDLEY_STATUS_KIND_SPECIAL_HI_CHARGE_B, *FIGHTER_RIDLEY_STATUS_KIND_SPECIAL_HI_CHARGE_F, *FIGHTER_RIDLEY_STATUS_KIND_SPECIAL_HI_CHARGE_LW,
+					*FIGHTER_RIDLEY_STATUS_KIND_SPECIAL_HI_HOVER, *FIGHTER_RIDLEY_STATUS_KIND_SPECIAL_HI_CHARGE_HI
+				].contains(&status_kind) {
+				
+					if [*FIGHTER_RIDLEY_STATUS_KIND_SPECIAL_HI_CHARGE_B, *FIGHTER_RIDLEY_STATUS_KIND_SPECIAL_HI_CHARGE_F, *FIGHTER_RIDLEY_STATUS_KIND_SPECIAL_HI_CHARGE_LW].contains(&status_kind) {
+						StatusModule::change_status_request_from_script(boma, *FIGHTER_RIDLEY_STATUS_KIND_SPECIAL_HI_CHARGE_HI, true);
+					}
+					if [*FIGHTER_RIDLEY_STATUS_KIND_SPECIAL_HI_HOVER].contains(&status_kind) {
+						let stick_angle = get_stick_angle(boma);
+						if stick_angle != -1.0 {
+							UPB_ANGLE[ENTRY_ID] = stick_angle;
+						} else {
+							UPB_ANGLE[ENTRY_ID] = 0.0;
+						}
+					}
+					if status_kind == *FIGHTER_RIDLEY_STATUS_KIND_SPECIAL_HI_CHARGE_HI {
+						let stick_angle = UPB_ANGLE[ENTRY_ID];
+						let init_speed = 5.0;
+						let deccel = 0.139;
+						let speed = init_speed - (deccel * (frame-1.0));
+						let x_speed = stick_angle.cosd()*speed;
+						let y_speed = stick_angle.sind()*speed;
+						macros::SET_SPEED_EX(fighter, x_speed, y_speed, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+						let mut rotation = Vector3f{x: stick_angle, y: 0.0 , z: 0.0};
+						ModelModule::set_joint_rotate(weapon.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
+					}
+				} else {
+					UPB_ANGLE[ENTRY_ID] = 0.0;
+				}
 		}
 	};
 }
