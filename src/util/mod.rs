@@ -18,6 +18,7 @@ static mut STATUS_DURATION : [i32; 8] = [0; 8];
 static mut MOTION_DURATION : [i32; 8] = [0; 8];
 pub static mut POS_X : [f32; 8] = [0.0; 8];
 pub static mut POS_Y : [f32; 8] = [0.0; 8];
+pub static mut STICK_DIR: [f32; 8] = [0.0; 8];
 pub static mut PREV_SPEED_X : [f32; 8] = [0.0; 8];
 pub static mut PREV_SPEED_Y : [f32; 8] = [0.0; 8];
 pub static mut SPEED_X : [f32; 8] = [0.0; 8];
@@ -293,6 +294,7 @@ unsafe extern "C" fn util_update(fighter : &mut L2CFighterCommon) {
 			HAS_ENABLE_COMBO_ON[ENTRY_ID] = false;
 			HAS_ENABLE_100_ON[ENTRY_ID] = false;
 			FULL_HOP_ENABLE_DELAY[ENTRY_ID] = 0;
+			STICK_DIR[ENTRY_ID] = 0.0;
 		};
 		if FULL_HOP_ENABLE_DELAY[ENTRY_ID] > 0 {
 			FULL_HOP_ENABLE_DELAY[ENTRY_ID] -= 1;
@@ -382,6 +384,19 @@ unsafe extern "C" fn util_update(fighter : &mut L2CFighterCommon) {
 			ACCEL_X[ENTRY_ID] = 0.0;
 			ACCEL_Y[ENTRY_ID] = 0.0;
 		};
+
+		let lr = PostureModule::lr(boma);
+		let stick_x = ControlModule::stick_x(boma) * lr;
+		let stick_y = ControlModule::stick_y(boma);
+		if !(stick_x.abs() < 0.05 && stick_y.abs() < 0.05) {
+			let mut angle = stick_y.atan2(stick_x).to_degrees();
+			if angle < 0.0 {
+				angle += 360.0;
+			}
+			angle -= 90.0;
+		} else {
+			STICK_DIR[ENTRY_ID] = -1.0;
+		}
 		ACCEL_X[ENTRY_ID] = SPEED_X[ENTRY_ID] - KineticModule::get_sum_speed_x(boma, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
 		ACCEL_Y[ENTRY_ID] = SPEED_Y[ENTRY_ID] - KineticModule::get_sum_speed_y(boma, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
 		PREV_SPEED_X[ENTRY_ID] = SPEED_X[ENTRY_ID];
@@ -538,6 +553,10 @@ pub(crate) unsafe fn is_hitlag(boma: &mut smash::app::BattleObjectModuleAccessor
 }
 pub(crate) unsafe fn get_hitlag(boma: &mut smash::app::BattleObjectModuleAccessor) -> i32 {
 	return WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_HIT_STOP_ATTACK_SUSPEND_FRAME)
+}
+pub(crate) unsafe fn get_stick_angle(boma: &mut smash::app::BattleObjectModuleAccessor) -> f32 {
+	let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+	return STICK_DIR[ENTRY_ID]
 }
 
 //Misc.
