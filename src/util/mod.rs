@@ -386,8 +386,8 @@ unsafe extern "C" fn util_update(fighter : &mut L2CFighterCommon) {
 		};
 
 		let lr = PostureModule::lr(boma);
-		let stick_x = ControlModule::stick_x(boma) * lr;
-		let stick_y = ControlModule::stick_y(boma);
+		let stick_x = ControlModule::get_stick_x(boma) * lr;
+		let stick_y = ControlModule::get_stick_y(boma);
 		if !(stick_x.abs() < 0.05 && stick_y.abs() < 0.05) {
 			let mut angle = stick_y.atan2(stick_x).to_degrees();
 			if angle < 0.0 {

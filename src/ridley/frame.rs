@@ -84,7 +84,7 @@ unsafe extern "C" fn ridley(fighter : &mut L2CFighterCommon) {
 						let y_speed = stick_angle.to_radians().sin()*speed;
 						macros::SET_SPEED_EX(fighter, x_speed, y_speed, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
 						let mut rotation = Vector3f{x: stick_angle, y: 0.0 , z: 0.0};
-						ModelModule::set_joint_rotate(weapon.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
+						ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
 					}
 				} else {
 					UPB_ANGLE[ENTRY_ID] = 0.0;
