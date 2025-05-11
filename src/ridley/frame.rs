@@ -13,6 +13,7 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+use std::f32::consts::PI;
 
 pub fn install() {
     Agent::new("ridley")
@@ -29,6 +30,7 @@ unsafe extern "C" fn ridley(fighter : &mut L2CFighterCommon) {
 				let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 				let mut stick_x = ControlModule::get_stick_x(boma);
 				let mut stick_y = ControlModule::get_stick_y(boma);
+				let lr = PostureModule::lr(boma);
 				let frame = MotionModule::frame(boma);
 				stick_x *= PostureModule::lr(boma);
 				if MotionModule::motion_kind(boma) == hash40("attack_air_lw") {
@@ -61,33 +63,69 @@ unsafe extern "C" fn ridley(fighter : &mut L2CFighterCommon) {
 				};
 				if [
 					*FIGHTER_RIDLEY_STATUS_KIND_SPECIAL_HI_CHARGE_B, *FIGHTER_RIDLEY_STATUS_KIND_SPECIAL_HI_CHARGE_F, *FIGHTER_RIDLEY_STATUS_KIND_SPECIAL_HI_CHARGE_LW,
-					*FIGHTER_RIDLEY_STATUS_KIND_SPECIAL_HI_HOVER, *FIGHTER_RIDLEY_STATUS_KIND_SPECIAL_HI_CHARGE_HI
+					*FIGHTER_RIDLEY_STATUS_KIND_SPECIAL_HI_HOVER, *FIGHTER_RIDLEY_STATUS_KIND_SPECIAL_HI_CHARGE_HI, *FIGHTER_RIDLEY_STATUS_KIND_SPECIAL_HI_CHARGE_START,
+					*FIGHTER_STATUS_KIND_SPECIAL_HI, *FIGHTER_RIDLEY_STATUS_KIND_SPECIAL_HI_END, *FIGHTER_RIDLEY_STATUS_KIND_SPECIAL_HI_STOP_WALL, *FIGHTER_RIDLEY_STATUS_KIND_SPECIAL_HI_STOP_CEIL,
+					*FIGHTER_RIDLEY_STATUS_KIND_SPECIAL_HI_LANDING
 				].contains(&status_kind) {
 				
-					if [*FIGHTER_RIDLEY_STATUS_KIND_SPECIAL_HI_CHARGE_B, *FIGHTER_RIDLEY_STATUS_KIND_SPECIAL_HI_CHARGE_F, *FIGHTER_RIDLEY_STATUS_KIND_SPECIAL_HI_CHARGE_LW].contains(&status_kind) {
+					if [*FIGHTER_RIDLEY_STATUS_KIND_SPECIAL_HI_CHARGE_START, *FIGHTER_RIDLEY_STATUS_KIND_SPECIAL_HI_CHARGE_B, *FIGHTER_RIDLEY_STATUS_KIND_SPECIAL_HI_CHARGE_F, *FIGHTER_RIDLEY_STATUS_KIND_SPECIAL_HI_CHARGE_LW].contains(&status_kind) {
 						StatusModule::change_status_request_from_script(boma, *FIGHTER_RIDLEY_STATUS_KIND_SPECIAL_HI_CHARGE_HI, true);
 					}
 					if [*FIGHTER_RIDLEY_STATUS_KIND_SPECIAL_HI_HOVER].contains(&status_kind) {
 						let stick_angle = get_stick_angle(boma);
 						if stick_angle != -1.0 {
 							UPB_ANGLE[ENTRY_ID] = stick_angle;
+							if (lr > 0.0) {
+								UPB_ANGLE[ENTRY_ID] = 360.0 - stick_angle;
+							}
 						} else {
 							UPB_ANGLE[ENTRY_ID] = 0.0;
 						}
 					}
-					if status_kind == *FIGHTER_RIDLEY_STATUS_KIND_SPECIAL_HI_CHARGE_HI {
+					if KineticModule::get_kinetic_type(boma) != *FIGHTER_KINETIC_TYPE_MOTION_AIR {
+						KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_MOTION_AIR);
+					};
+					if [*FIGHTER_RIDLEY_STATUS_KIND_SPECIAL_HI_CHARGE_HI, *FIGHTER_RIDLEY_STATUS_KIND_SPECIAL_HI_CHARGE_B, *FIGHTER_RIDLEY_STATUS_KIND_SPECIAL_HI_CHARGE_F, *FIGHTER_RIDLEY_STATUS_KIND_SPECIAL_HI_CHARGE_LW].contains(&status_kind) {
 						let stick_angle = UPB_ANGLE[ENTRY_ID];
+						let angle_radians = (stick_angle - 90.0) * (PI / 180.0);
 						let init_speed = 5.0;
 						let deccel = 0.139;
 						let speed = init_speed - (deccel * (frame-1.0));
-						let x_speed = stick_angle.to_radians().cos()*speed;
-						let y_speed = stick_angle.to_radians().sin()*speed;
+						let x_speed = angle_radians.cos() * speed;
+						let y_speed = angle_radians.sin() * speed * -1.0;
+
 						macros::SET_SPEED_EX(fighter, x_speed, y_speed, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+						println!("Speed : ({},{}), Dir : {}", x_speed, y_speed, UPB_ANGLE[ENTRY_ID]);
 						let mut rotation = Vector3f{x: stick_angle, y: 0.0 , z: 0.0};
 						ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
+					
+						if stick_angle > 115.0 && stick_angle < 245.0 {
+							if ray_check_pos(boma, 0.0, -6.0, false) == 1 {
+								StatusModule::set_situation_kind(boma, smash::app::SituationKind(*SITUATION_KIND_GROUND), true);
+								macros::SET_SPEED_EX(fighter, 0.0, 0.0, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+								StatusModule::change_status_request_from_script(boma, *FIGHTER_RIDLEY_STATUS_KIND_SPECIAL_HI_LANDING, true);
+								let mut teleport_distance = -6.0;
+								for x in 0..6 {
+									if ray_check_pos(boma, 0.0, -(x as f32), false) == 1 {
+										teleport_distance = -(x as f32);
+										break;
+									}
+								}
+								let pos = smash::phx::Vector3f { x: PostureModule::pos_x(boma), y: PostureModule::pos_y(boma)+teleport_distance, z: 0.0 };
+								PostureModule::set_pos(boma, &pos);
+							}
+						}
 					}
-				} else {
-					UPB_ANGLE[ENTRY_ID] = 0.0;
+				}
+				if [*FIGHTER_RIDLEY_STATUS_KIND_SPECIAL_HI_END, *FIGHTER_RIDLEY_STATUS_KIND_SPECIAL_HI_STOP_WALL, *FIGHTER_RIDLEY_STATUS_KIND_SPECIAL_HI_STOP_CEIL, *FIGHTER_RIDLEY_STATUS_KIND_SPECIAL_HI_LANDING].contains(&status_kind) {
+					if (frame as i32) < 2 {
+						if UPB_ANGLE[ENTRY_ID] > 180.0 {
+							PostureModule::set_lr(fighter.module_accessor, -1.0);
+						} else {
+							PostureModule::set_lr(fighter.module_accessor, 1.0);
+						}
+    					PostureModule::update_rot_y_lr(fighter.module_accessor);
+					}
 				}
 		}
 	};

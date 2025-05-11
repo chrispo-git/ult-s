@@ -389,11 +389,14 @@ unsafe extern "C" fn util_update(fighter : &mut L2CFighterCommon) {
 		let stick_x = ControlModule::get_stick_x(boma) * lr;
 		let stick_y = ControlModule::get_stick_y(boma);
 		if !(stick_x.abs() < 0.05 && stick_y.abs() < 0.05) {
-			let mut angle = stick_y.atan2(stick_x).to_degrees();
+			let mut angle = stick_x.atan2(stick_y).to_degrees();
 			if angle < 0.0 {
 				angle += 360.0;
 			}
-			angle -= 90.0;
+			if angle > 360.0 {
+				angle -= 360.0;
+			}
+			STICK_DIR[ENTRY_ID] = angle;
 		} else {
 			STICK_DIR[ENTRY_ID] = -1.0;
 		}
@@ -556,6 +559,7 @@ pub(crate) unsafe fn get_hitlag(boma: &mut smash::app::BattleObjectModuleAccesso
 }
 pub(crate) unsafe fn get_stick_angle(boma: &mut smash::app::BattleObjectModuleAccessor) -> f32 {
 	let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+	println!("stick dir: {}", STICK_DIR[ENTRY_ID]);
 	return STICK_DIR[ENTRY_ID]
 }
 
