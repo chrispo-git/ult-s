@@ -89,7 +89,7 @@ unsafe extern "C" fn ridley(fighter : &mut L2CFighterCommon) {
 						let stick_angle = UPB_ANGLE[ENTRY_ID];
 						let angle_radians = (stick_angle - 90.0) * (PI / 180.0);
 						let init_speed = 5.0;
-						let deccel = 0.139;
+						let deccel = 0.15;
 						let speed = init_speed - (deccel * (frame-1.0));
 						let x_speed = angle_radians.cos() * speed;
 						let y_speed = angle_radians.sin() * speed * -1.0;
@@ -100,12 +100,12 @@ unsafe extern "C" fn ridley(fighter : &mut L2CFighterCommon) {
 						ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
 					
 						if stick_angle > 115.0 && stick_angle < 245.0 {
-							if ray_check_pos(boma, 0.0, -6.0, false) == 1 {
+							if ray_check_pos(boma, 0.0, -4.0, false) == 1 {
 								StatusModule::set_situation_kind(boma, smash::app::SituationKind(*SITUATION_KIND_GROUND), true);
 								macros::SET_SPEED_EX(fighter, 0.0, 0.0, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
 								StatusModule::change_status_request_from_script(boma, *FIGHTER_RIDLEY_STATUS_KIND_SPECIAL_HI_LANDING, true);
-								let mut teleport_distance = -6.0;
-								for x in 0..6 {
+								let mut teleport_distance = -4.0;
+								for x in 0..4 {
 									if ray_check_pos(boma, 0.0, -(x as f32), false) == 1 {
 										teleport_distance = -(x as f32);
 										break;
@@ -113,12 +113,18 @@ unsafe extern "C" fn ridley(fighter : &mut L2CFighterCommon) {
 								}
 								let pos = smash::phx::Vector3f { x: PostureModule::pos_x(boma), y: PostureModule::pos_y(boma)+teleport_distance, z: 0.0 };
 								PostureModule::set_pos(boma, &pos);
+								if UPB_ANGLE[ENTRY_ID] > 180.0 {
+									PostureModule::set_lr(fighter.module_accessor, 1.0);
+								} else {
+									PostureModule::set_lr(fighter.module_accessor, -1.0);
+								}
+								PostureModule::update_rot_y_lr(fighter.module_accessor);
 							}
 						}
 					}
 				}
-				if [*FIGHTER_RIDLEY_STATUS_KIND_SPECIAL_HI_END, *FIGHTER_RIDLEY_STATUS_KIND_SPECIAL_HI_STOP_WALL, *FIGHTER_RIDLEY_STATUS_KIND_SPECIAL_HI_STOP_CEIL, *FIGHTER_RIDLEY_STATUS_KIND_SPECIAL_HI_LANDING].contains(&status_kind) {
-					if (frame as i32) < 2 {
+				if [*FIGHTER_RIDLEY_STATUS_KIND_SPECIAL_HI_END, *FIGHTER_RIDLEY_STATUS_KIND_SPECIAL_HI_STOP_WALL, *FIGHTER_RIDLEY_STATUS_KIND_SPECIAL_HI_STOP_CEIL].contains(&status_kind) {
+					if (frame as i32) == 1 {
 						if UPB_ANGLE[ENTRY_ID] > 180.0 {
 							PostureModule::set_lr(fighter.module_accessor, -1.0);
 						} else {
