@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <struct>
   <list hash="param_special_s">
-    <struct index="0">
-      <float hash="speed_x_mul_on_air">1</float>
-      <float hash="catch_speed_x_mul">0.9</float>
-      <float hash="catch_accel_y">0</float>
-      <float hash="catch_max_speed_y">-0.2</float>
-      <float hash="brake_x_on_drag">0.005</float>
-      <float hash="accel_x_on_grab">0.005</float>
-    </struct>
+    <hash40 index="0">dummy</hash40>
     <hash40 index="1">dummy</hash40>
     <hash40 index="2">dummy</hash40>
     <hash40 index="3">dummy</hash40>
