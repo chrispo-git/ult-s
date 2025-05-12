@@ -21,6 +21,14 @@ try:
 
     if len(params) > 1:
         for i in params:
+            if i == "all":
+                needed_folders = all_folders
+                needed_folders.append("util")
+                needed_folders.append("common")
+                needed_folders.append("controls")
+                needed_folders.append("cpu")
+                print(f"all included")
+                break
             if i in all_folders:
                 needed_folders.append(i)
                 print(f"{i} included")
