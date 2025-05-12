@@ -55,58 +55,6 @@ unsafe extern "C" fn sora(fighter : &mut L2CFighterCommon) {
 				} else {
 					TO_FAIR[ENTRY_ID] = false;
 				};
-				if status_kind == *FIGHTER_TRAIL_STATUS_KIND_SPECIAL_LW_ATTACK {
-					HitModule::set_whole(boma, smash::app::HitStatus(*HIT_STATUS_NORMAL), 0);
-					if end_frame-frame < 4.0 || (ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_GUARD) && !AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_HIT) && frame > 12.0) {
-						if GroundModule::ray_check(boma, &Vector2f{ x: PostureModule::pos_x(boma), y: PostureModule::pos_y(boma)}, &Vector2f{ x: 0.0, y: -2.0}, false) == 1{
-							StatusModule::set_keep_situation_air(boma, false);
-							StatusModule::set_situation_kind(boma, smash::app::SituationKind(*SITUATION_KIND_GROUND), true);
-							StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_LANDING_FALL_SPECIAL, true);
-						} else {
-							StatusModule::change_status_request_from_script(boma, *FIGHTER_TRAIL_STATUS_KIND_SPECIAL_S_END, true);
-						};
-					} else {
-						StatusModule::set_keep_situation_air(boma, true);
-						if StatusModule::situation_kind(boma) != *SITUATION_KIND_AIR {
-							StatusModule::set_situation_kind(boma, smash::app::SituationKind(*SITUATION_KIND_AIR), true);
-						};
-					};
-					if KineticModule::get_kinetic_type(boma) != *FIGHTER_KINETIC_TYPE_MOTION {
-						KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_MOTION);
-					};
-					if frame < 9.0 {
-						macros::SET_SPEED_EX(fighter, frame * 0.125, 0.25, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
-					} else if frame > 20.0 {
-						macros::SET_SPEED_EX(fighter, (26.0 - frame) * 0.125, 0.25, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
-					} else {
-						macros::SET_SPEED_EX(fighter, 1.25, 0.25, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
-					};
-					MotionModule::set_rate(boma, 0.66667);
-					if frame as i32 % 5 == 0 {
-						let a1: u32 = EffectModule::req_follow(boma, smash::phx::Hash40::new("sys_magicball_aura"), smash::phx::Hash40::new("haver"), &HANDS, &HANDS, 1.0, true, 0, 0, 0, 0, 0, true, true) as u32;
-						let a2: u32 = EffectModule::req_follow(boma, smash::phx::Hash40::new("sys_magicball_aura"), smash::phx::Hash40::new("havel"), &HANDS, &HANDS, 1.0, true, 0, 0, 0, 0, 0, true, true) as u32;
-						let a3: u32 = EffectModule::req_follow(boma, smash::phx::Hash40::new("sys_magicball_aura"), smash::phx::Hash40::new("footr"), &HANDS, &HANDS, 1.0, true, 0, 0, 0, 0, 0, true, true) as u32;
-						let a4: u32 = EffectModule::req_follow(boma, smash::phx::Hash40::new("sys_magicball_aura"), smash::phx::Hash40::new("footl"), &HANDS, &HANDS, 1.0, true, 0, 0, 0, 0, 0, true, true) as u32;
-						let a5: u32 = EffectModule::req_follow(boma, smash::phx::Hash40::new("sys_magicball_aura"), smash::phx::Hash40::new("hip"), &HANDS, &HANDS, 1.0, true, 0, 0, 0, 0, 0, true, true) as u32;
-						EffectModule::set_rgb(boma, a1, 2.2, 0.4, 1.0);
-						EffectModule::set_rgb(boma, a2, 2.2, 0.4, 1.0);
-						EffectModule::set_rgb(boma, a3, 2.2, 0.4, 1.0);
-						EffectModule::set_rgb(boma, a4, 2.2, 0.4, 1.0);
-						EffectModule::set_rgb(boma, a5, 2.2, 0.4, 1.0);
-					};
-					if GroundModule::is_wall_touch_line(boma, *GROUND_TOUCH_FLAG_SIDE as u32) && (ControlModule::get_stick_x(boma)*PostureModule::lr(boma))< -0.7 && !AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_HIT)  && !HAS_WALLJUMP[ENTRY_ID]{
-						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_PASSIVE_WALL_JUMP, true);
-						HAS_WALLJUMP[ENTRY_ID] = true;
-					};
-					if !is_hitlag(boma) && AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_HIT) {
-						if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_SPECIAL) {
-							StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_SPECIAL_HI, true);
-						} else {
-							KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_JUMP);
-							StatusModule::change_status_request_from_script(boma, *FIGHTER_TRAIL_STATUS_KIND_ATTACK_AIR_N, true);
-						};
-					};
-				};
 			};
 		}
     }
