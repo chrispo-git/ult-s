@@ -40,50 +40,7 @@ unsafe extern "C" fn sora(fighter : &mut L2CFighterCommon) {
 				if [*FIGHTER_STATUS_KIND_DEAD, *FIGHTER_STATUS_KIND_LOSE, *FIGHTER_STATUS_KIND_WIN].contains(&status_kind) || smash::app::sv_information::is_ready_go() == false || StatusModule::situation_kind(boma) != *SITUATION_KIND_AIR {
 					HAS_WALLJUMP[ENTRY_ID] = false;
 				};
-				/*if motion_kind == hash40("attack_air_lw") {
-					if frame > 14.0 && frame < 20.0 {
-						MotionModule::change_motion(boma, Hash40::new("attack_air_lw"), 41.0, 1.0, false, 0.0, false, false);
-					};
-				};*/
-				if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_LW {
-					HitModule::set_whole(boma, smash::app::HitStatus(*HIT_STATUS_NORMAL), 0);
-					if frame > 9.0 {
-						StatusModule::change_status_request_from_script(boma, *FIGHTER_TRAIL_STATUS_KIND_SPECIAL_LW_ATTACK, true);
-					};
-					if frame as i32 % 3 == 0 {
-						let a1: u32 = EffectModule::req_follow(boma, smash::phx::Hash40::new("sys_magicball_aura"), smash::phx::Hash40::new("haver"), &HANDS, &HANDS, 1.0, true, 0, 0, 0, 0, 0, true, true) as u32;
-						let a2: u32 = EffectModule::req_follow(boma, smash::phx::Hash40::new("sys_magicball_aura"), smash::phx::Hash40::new("havel"), &HANDS, &HANDS, 1.0, true, 0, 0, 0, 0, 0, true, true) as u32;
-						let a3: u32 = EffectModule::req_follow(boma, smash::phx::Hash40::new("sys_magicball_aura"), smash::phx::Hash40::new("footr"), &HANDS, &HANDS, 1.0, true, 0, 0, 0, 0, 0, true, true) as u32;
-						let a4: u32 = EffectModule::req_follow(boma, smash::phx::Hash40::new("sys_magicball_aura"), smash::phx::Hash40::new("footl"), &HANDS, &HANDS, 1.0, true, 0, 0, 0, 0, 0, true, true) as u32;
-						let a5: u32 = EffectModule::req_follow(boma, smash::phx::Hash40::new("sys_magicball_aura"), smash::phx::Hash40::new("hip"), &HANDS, &HANDS, 1.0, true, 0, 0, 0, 0, 0, true, true) as u32;
-						EffectModule::set_rgb(boma, a1, 2.2, 0.4, 1.0);
-						EffectModule::set_rgb(boma, a2, 2.2, 0.4, 1.0);
-						EffectModule::set_rgb(boma, a3, 2.2, 0.4, 1.0);
-						EffectModule::set_rgb(boma, a4, 2.2, 0.4, 1.0);
-						EffectModule::set_rgb(boma, a5, 2.2, 0.4, 1.0);
-					};
-					if motion_duration(boma) == 1 {
-						if (ControlModule::get_stick_x(boma)*PostureModule::lr(boma)) < -0.2 {
-							PostureModule::reverse_lr(boma);
-							PostureModule::update_rot_y_lr(boma);
-						};
-					};
-					if motion_duration(boma) == 5 {
-						if (ControlModule::get_stick_x(boma)*PostureModule::lr(boma)) < -0.2 {
-							PostureModule::reverse_lr(boma);
-							PostureModule::update_rot_y_lr(boma);
-							let stop_rise  = smash::phx::Vector3f { x: -1.0, y: 1.0, z: 1.0 };
-							KineticModule::mul_speed(boma, &stop_rise, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
-						};
-					};
-				};
-				if status_kind == *FIGHTER_TRAIL_STATUS_KIND_ATTACK_AIR_F {
-					let dummy = 0;
-					//if MotionModule::frame(boma) > 2.0 && MotionModule::frame(boma) < 4.0 {
-						//TO_FAIR[ENTRY_ID] = true;
-						//StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_ATTACK_AIR, false);
-					//};
-				} else if status_kind == *FIGHTER_STATUS_KIND_ATTACK_AIR {
+				if status_kind == *FIGHTER_STATUS_KIND_ATTACK_AIR {
 					if TO_FAIR[ENTRY_ID] == true && MotionModule::motion_kind(boma) != hash40("attack_air_f"){
 						MotionModule::change_motion(boma, Hash40::new("attack_air_f"), 2.0, 1.0, false, 0.0, false, false);
 					};
