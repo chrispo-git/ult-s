@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<struct>
-  <struct hash="param_private">
-    <float hash="attack_air_f2_hit_speed_y">0</float>
-    <int hash="attack_air_f_combo_max">0</int>
-    <float hash="combo_attack_ari_f2_end">0</float>
-    <float hash="combo_attack_ari_f3_end">0</float>
-  </struct>
-</struct>
