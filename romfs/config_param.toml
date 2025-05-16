@@ -126,6 +126,13 @@ value = 3
 kinds = ["daisy", "daisy_daisydaikon"]
 slots = [0,1,2,3,4,5,6,7]
 
+[[param_int]]
+param = "param_private"
+subparam = "uniq_float_float_frame"
+value = 80
+kinds = ["daisy"]
+slots = [0,1,2,3,4,5,6,7]
+
 
 # DIDDY KONG
 [[param_float]]
