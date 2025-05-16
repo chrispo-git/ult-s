@@ -704,9 +704,178 @@ kinds = ["miifighter"]
 slots = [0,1,2,3,4,5,6,7]
 
 
+# MIISWORDSMAN / MII SWORDFIGHTER
+[[param_int]]
+param = "param_chakram"
+subparam = "flick_life"
+value = 15
+kinds = ["miiswordsman", "miiswordsman_chakram"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_chakram"
+subparam = "flick_speed"
+value = 3
+kinds = ["miiswordsman", "miiswordsman_chakram"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_int]]
+param = "param_chakram"
+subparam = "stick_frame"
+value = 50
+kinds = ["miiswordsman", "miiswordsman_chakram"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_int]]
+param = "param_shuriken"
+subparam = "life"
+value = 20
+kinds = ["miiswordsman", "miiswordsman_shuriken"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_int]]
+param = "param_tornado"
+subparam = "life"
+value = 50
+kinds = ["miiswordsman", "miiswordsman_tornado"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_tornado"
+subparam = "speed_x"
+value = 1.6
+kinds = ["miiswordsman", "miiswordsman_tornado"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_tornado"
+subparam = "limit_speed_x"
+value = 2
+kinds = ["miiswordsman", "miiswordsman_tornado"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_int]]
+param = "param_tornado"
+subparam = "is_penetration"
+value = 0
+kinds = ["miiswordsman", "miiswordsman_tornado"]
+slots = [0,1,2,3,4,5,6,7]
 
 
+# NESS
+[[param_int]]
+param = "param_pkfire"
+subparam = "pillar_life"
+value = 30
+kinds = ["ness", "ness_pkfire"]
+slots = [0,1,2,3,4,5,6,7]
 
+
+# PACMAN
+[[param_float]]
+param = "param_key"
+subparam = "speed"
+value = 3.45
+kinds = ["pacman", "pacman_key"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_special_hi"
+subparam = "air_accel_x_mul"
+value = 1.5
+kinds = ["pacman"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_int]]
+param = "param_firehydrant"
+subparam = "life"
+value = 275
+kinds = ["pacman", "pacman_firehydrant"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_int]]
+param = "param_firehydrant"
+subparam = "hp"
+value = 7
+kinds = ["pacman", "pacman_firehydrant"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# PALUTENA
+[[param_float]]
+param = "param_special_n"
+subparam = "special_n_auto_target_deg_angle"
+value = 0
+kinds = ["palutena"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_special_n"
+subparam = "special_n_auto_target_distance"
+value = 0
+kinds = ["palutena"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_autoaimbullet"
+subparam = "life"
+value = 19
+kinds = ["palutena", "palutena_autoaimbullet"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# PEACH
+[[param_float]]
+param = "param_peachdaikon"
+subparam = "daikon_life_frame"
+value = 120
+kinds = ["peach", "peach_peachdaikon"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_peachdaikon"
+subparam = "daikon_1_power"
+value = 6
+kinds = ["peach", "peach_peachdaikon"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_peachdaikon"
+subparam = "daikon_2_power"
+value = 6
+kinds = ["peach", "peach_peachdaikon"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_peachdaikon"
+subparam = "daikon_3_power"
+value = 6
+kinds = ["peach", "peach_peachdaikon"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_peachdaikon"
+subparam = "daikon_4_power"
+value = 6
+kinds = ["peach", "peach_peachdaikon"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_peachdaikon"
+subparam = "daikon_5_power"
+value = 6
+kinds = ["peach", "peach_peachdaikon"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_int]]
+param = "param_private"
+subparam = "uniq_float_float_frame"
+value = 120
+kinds = ["peach"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# 
 
 
 
