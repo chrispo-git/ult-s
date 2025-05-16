@@ -142,6 +142,22 @@ slots = [0,1,2,3,4,5,6,7]
 
 
 
+# TERRY
+[[param_int]]
+param = "param_special_s"
+subparam = "turn_to_b_frame"
+value = 99999999
+kinds = ["dolly"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_private"
+subparam = "super_special_damage"
+value = 110
+kinds = ["dolly"]
+slots = [0,1,2,3,4,5,6,7]
+
+
 
 
 
