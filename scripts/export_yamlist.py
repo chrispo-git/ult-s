@@ -98,7 +98,7 @@ replace = [
 
 try:
     char = (" ".join(sys.argv)).lower()
-    char = char.replace('statistics.py', "")
+    char = char.replace('export_yamlist.py', "")
     char = char.replace(' ', "")
 except IndexError:
     char = input("Character?")
