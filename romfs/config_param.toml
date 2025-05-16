@@ -142,7 +142,7 @@ slots = [0,1,2,3,4,5,6,7]
 
 
 
-# TERRY
+# TERRY / DOLLY
 [[param_int]]
 param = "param_special_s"
 subparam = "turn_to_b_frame"
@@ -158,14 +158,346 @@ kinds = ["dolly"]
 slots = [0,1,2,3,4,5,6,7]
 
 
+# EDGE / SEPHIROTH
+[[param_float]]
+param = "param_one_winged"
+subparam = "dash_speed_mul"
+value = 1.13
+kinds = ["edge", "edge_one_winged"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_one_winged"
+subparam = "air_accel_x_mul"
+value = 1.2
+kinds = ["edge", "edge_one_winged"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_one_winged"
+subparam = "air_speed_x_stable_mul"
+value = 1.0857
+kinds = ["edge", "edge_one_winged"]
+slots = [0,1,2,3,4,5,6,7]
 
 
 
+# ELIGHT / MYTHRA
+[[param_float]]
+param = "param_private"
+subparam = "foresight_target_slow_distance"
+value = 30
+kinds = ["elight"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# FOX
+[[param_float]]
+param = "param_special_hi"
+subparam = "fire_rush_speed"
+value = 3.2
+kinds = ["fox"]
+slots = [0,1,2,3,4,5,6,7]
 
 
 
+# GAOGAEN / INCINEROAR
+[[param_float]]
+param = "param_special_lw"
+subparam = "special_lw_hit_damage_mul"
+value = 0.2
+kinds = ["gaogaen"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_special_lw"
+subparam = "special_lw_revenge_rate_max"
+value = 1.5
+kinds = ["gaogaen"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_special_lw"
+subparam = "special_lw_revenge_time"
+value = 120
+kinds = ["gaogaen"]
+slots = [0,1,2,3,4,5,6,7]
 
 
+# GEKKOUGA / GRENINJA
+[[param_float]]
+param = "param_special_s"
+subparam = "warp_distance_max"
+value = 90
+kinds = ["gekkouga"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_special_s"
+subparam = "life"
+value = 130
+kinds = ["gekkouga"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_special_hi"
+subparam = "landing_frame"
+value = 13
+kinds = ["gekkouga"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# INKLING
+[[param_float]]
+param = "param_special_hi"
+subparam = "height_mul_on_air"
+value = 1.0
+kinds = ["inkling"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_special_hi"
+subparam = "height_mul_on_ground"
+value = 1.0
+kinds = ["inkling"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# JACK / JOKER
+[[param_float]]
+param = "param_special_lw"
+subparam = "counter_attack_power_mul"
+value = 1.4
+kinds = ["jack"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_special_lw"
+subparam = "reflector_attack_power_mul"
+value = 1.4
+kinds = ["jack"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_private"
+subparam = "rebel_gauge_damage_add"
+value = 1.1
+kinds = ["jack"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+
+# KEN
+[[param_float]]
+param = "param_special_lw"
+subparam = "step_cancel_invalid_frame"
+value = 999
+kinds = ["ken"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# KIRBY
+[[param_int]]
+param = "param_finalcuttershot"
+subparam = "is_penetration"
+value = 1
+kinds = ["kirby", "kirby_finalcuttershot"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_finalcuttershot"
+subparam = "life"
+value = 40
+kinds = ["kirby", "kirby_finalcuttershot"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_finalcuttershot"
+subparam = "speed"
+value = 3.4
+kinds = ["kirby", "kirby_finalcuttershot"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_finalcuttershot"
+subparam = "brake"
+value = 0
+kinds = ["kirby", "kirby_finalcuttershot"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# KOOPA / BOWSER
+[[param_int]]
+param = "param_special_n"
+subparam = "fireframe"
+value = 999
+kinds = ["koopa"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_int]]
+param = "param_special_n"
+subparam = "gene_interval"
+value = 70
+kinds = ["koopa"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_special_n"
+subparam = "ptc_wide"
+value = 0
+kinds = ["koopa"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_special_n"
+subparam = "gene_angle"
+value = 0
+kinds = ["koopa"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_special_n"
+subparam = "limit_up"
+value = 0
+kinds = ["koopa"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_special_n"
+subparam = "limit_down"
+value = 0
+kinds = ["koopa"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_special_n"
+subparam = "f_ang"
+value = 0
+kinds = ["koopa"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_special_n"
+subparam = "neck_rate"
+value = 0
+kinds = ["koopa"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_special_n"
+subparam = "fire_speed_mul_max"
+value = 1.5
+kinds = ["koopa"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_special_n"
+subparam = "fire_speed_mul_min"
+value = 1.5
+kinds = ["koopa"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_special_n"
+subparam = "fire_scale_min"
+value = 0.57
+kinds = ["koopa"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_int]]
+param = "param_special_n"
+subparam = "quake_interval"
+value = 100
+kinds = ["koopa"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_special_n"
+subparam = "fire_scale_min_frame"
+value = 96
+kinds = ["koopa"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_special_n"
+subparam = "fire_scale_max_frame"
+value = 1080
+kinds = ["koopa"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_breath"
+subparam = "life"
+value = 70
+kinds = ["koopa", "koopa_breath"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_breath"
+subparam = "hit_frames"
+value = 70
+kinds = ["koopa", "koopa_breath"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_breath"
+subparam = "min_speed"
+value = 0.8
+kinds = ["koopa", "koopa_breath"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_breath"
+subparam = "max_speed"
+value = 0.8
+kinds = ["koopa", "koopa_breath"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# LITTLEMAC / LITTLE MAC
+[[param_int]]
+param = "param_special_n"
+subparam = "special_n_active_start_frame"
+value = 13
+kinds = ["littlemac"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_int]]
+param = "param_special_n"
+subparam = "special_n_cancel_frame"
+value = 20
+kinds = ["littlemac"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_special_hi"
+subparam = "special_air_hi_pass_mul"
+value = 1.2
+kinds = ["littlemac"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# LUCARIO
+[[param_float]]
+param = "param_aurapower"
+subparam = "min_aurapower"
+value = 1
+kinds = ["lucario"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_aurapower"
+subparam = "max_aurapower"
+value = 1
+kinds = ["lucario"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_int]]
+param = "param_special_hi"
+subparam = "landing_frame"
+value = 27
+kinds = ["lucario"]
+slots = [0,1,2,3,4,5,6,7]
 
 
 
