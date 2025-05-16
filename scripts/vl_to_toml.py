@@ -38,7 +38,7 @@ slots = [0,1,2,3,4,5,6,7]
         for struct_elem in list_elem.findall('struct'):
             add_block(struct_elem)
     for elem in root:
-        if elem.tag == 'struct' and elem.get('hash') == 'param_private':
+        if elem.tag == 'struct' and elem.get('hash') is not None:
             param_name = elem.get('hash')
             add_block(elem)
 
