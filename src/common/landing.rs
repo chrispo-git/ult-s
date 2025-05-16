@@ -88,8 +88,9 @@ unsafe extern "C" fn respawn_wakeup(fighter : &mut L2CFighterCommon) {
 		let end_frame = MotionModule::end_frame(boma);
 		let is_end = end_frame-frame < 3.0;
 		let situation_kind = StatusModule::situation_kind(boma);
+    	let fighter_kind = smash::app::utility::get_kind(module_accessor);
 		let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-        if [*FIGHTER_STATUS_KIND_REBIRTH].contains(&status_kind) {
+        if [*FIGHTER_STATUS_KIND_REBIRTH].contains(&status_kind) && ![*FIGHTER_KIND_PFUSHIGISOU, *FIGHTER_KIND_PZENIGAME, *FIGHTER_KIND_PLIZARDON].contains(&fighter_kind) {
 			if !PREVENT_LOOP[ENTRY_ID] {
 				if hash40("wait") == MotionModule::motion_kind(boma) {
 					MotionModule::change_motion(fighter.module_accessor, Hash40::new("down_wait_u"), -1.0, 1.0, false, 0.0, false, false);
