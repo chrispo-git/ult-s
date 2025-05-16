@@ -500,6 +500,210 @@ kinds = ["lucario"]
 slots = [0,1,2,3,4,5,6,7]
 
 
+# LUCINA
+[[param_float]]
+param = "param_special_lw"
+subparam = "start_mul_spd_x"
+value = 1
+kinds = ["lucina"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_special_lw"
+subparam = "start_air_acl_x"
+value = 0.00375
+kinds = ["lucina"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# MARIOD / DR. MARIO
+[[param_float]]
+param = "param_special_s"
+subparam = "special_s_start_mul_spd_x"
+value = 1.3
+kinds = ["mariod"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_reflector"
+subparam = "limit"
+value = 100
+kinds = ["mariod"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_reflector"
+subparam = "attack_mul"
+value = 0.65
+kinds = ["mariod"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_reflector"
+subparam = "speed_mul"
+value = 1.8
+kinds = ["mariod"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_reflector"
+subparam = "life_mul"
+value = 1
+kinds = ["mariod"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_special_hi"
+subparam = "special_air_hi_start_x_mul"
+value = 0.67
+kinds = ["mariod"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_special_hi"
+subparam = "special_air_hi_accel_y"
+value = 0.5
+kinds = ["mariod"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_special_hi"
+subparam = "special_hi_dir_stick_x"
+value = 0.5
+kinds = ["mariod"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_special_hi"
+subparam = "special_hi_dir_mul"
+value = 18.0
+kinds = ["mariod"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_special_hi"
+subparam = "special_hi_pass_mul"
+value = 0.85
+kinds = ["mariod"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_special_hi"
+subparam = "special_air_hi_pass_mul"
+value = 0.85
+kinds = ["mariod"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_special_hi"
+subparam = "special_hi_fall_x_mul"
+value = 0.6
+kinds = ["mariod"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_int]]
+param = "param_special_hi"
+subparam = "special_hi_landing_frame"
+value = 30
+kinds = ["mariod"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_special_hi"
+subparam = "special_hi_lr_stick_x"
+value = 0.3
+kinds = ["mariod"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_special_hi"
+subparam = "special_hi_trans_move_end_speed_x_mul"
+value = 1.0
+kinds = ["mariod"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_special_hi"
+subparam = "special_hi_trans_move_end_speed_y_mul"
+value = 1.0
+kinds = ["mariod"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_adjust"
+subparam = "attack_point"
+value = 0
+kinds = ["mariod", "mariod_adjust"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_adjust"
+subparam = "move_point"
+value = 0
+kinds = ["mariod"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# MASTER / BYLETH
+[[param_int]]
+param = "param_special_n"
+subparam = "cancel_start_frame"
+value = 300
+kinds = ["master"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_int]]
+param = "param_special_n"
+subparam = "cancel_end_frame"
+value = 350
+kinds = ["master"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_special_n"
+subparam = "arrow_offset_x"
+value = 4
+kinds = ["master"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_int]]
+param = "param_arrow1"
+subparam = "life"
+value = 10
+kinds = ["master", "master_arrow1"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_int]]
+param = "param_arrow1"
+subparam = "vanish_frame"
+value = 8
+kinds = ["master", "master_arrow1"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_special_hi"
+subparam = "overtake_attack_hp_rate"
+value = 75
+kinds = ["master"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_special_hi"
+subparam = "overtake_attack_damage"
+value = 75
+kinds = ["master"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# MIIFIGHTER / MII BRAWLER
+[[param_float]]
+param = "param_special_lw"
+subparam = "lw2_landing_brake_x"
+value = 0.2
+kinds = ["miifighter"]
+slots = [0,1,2,3,4,5,6,7]
+
+
 
 
 
