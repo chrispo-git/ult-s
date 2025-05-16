@@ -27,20 +27,4 @@
       <hash40 hash="check_type">collision_shape_type_capsule</hash40>
     </struct>
   </list>
-  <list hash="param_peachdaikon">
-    <struct index="0">
-      <float hash="daikon_life_frame">120</float>
-      <float hash="daikon_1_power">6</float>
-      <float hash="daikon_2_power">6</float>
-      <float hash="daikon_3_power">6</float>
-      <float hash="daikon_4_power">6</float>
-      <float hash="daikon_5_power">6</float>
-    </struct>
-    <hash40 index="1">dummy</hash40>
-    <hash40 index="2">dummy</hash40>
-    <hash40 index="3">dummy</hash40>
-  </list>
-  <struct hash="param_private">
-    <int hash="uniq_float_float_frame">120</int>
-  </struct>
 </struct>
