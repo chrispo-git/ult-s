@@ -1,3 +1,170 @@
+# BAYONETTA
+
+[[param_int]]
+param = "param_special_hi"
+subparam = "landing_frame"
+value = 15
+kinds = ["bayonetta"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_int]]
+param = "param_special_hi"
+subparam = "act_landing_frame"
+value = 19
+kinds = ["bayonetta"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_int]]
+param = "param_special_hi"
+subparam = "landing_frame_2nd"
+value = 23
+kinds = ["bayonetta"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_int]]
+param = "param_special_hi"
+subparam = "act_landing_frame_2nd"
+value = 26
+kinds = ["bayonetta"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_special_lw"
+subparam = "base_slow_frame_max"
+value = 120
+kinds = ["bayonetta"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# CHROM
+
+[[param_float]]
+param = "param_special_hi"
+subparam = "turn_after_flip_y_mul"
+value = 0.75
+kinds = ["chrom"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# DAISY
+[[param_int]]
+param = "param_special_n"
+subparam = "special_n_hit_stop_frame"
+value = 2
+kinds = ["daisy"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_daisydaikon"
+subparam = "daikon_throw_speed_mul"
+value = 1
+kinds = ["daisy", "daisy_daisydaikon"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_daisydaikon"
+subparam = "daikon_life_frame"
+value = 200
+kinds = ["daisy", "daisy_daisydaikon"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_daisydaikon"
+subparam = "daikon_1_power"
+value = 3
+kinds = ["daisy", "daisy_daisydaikon"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_daisydaikon"
+subparam = "daikon_2_power"
+value = 3
+kinds = ["daisy", "daisy_daisydaikon"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_daisydaikon"
+subparam = "daikon_3_power"
+value = 3
+kinds = ["daisy", "daisy_daisydaikon"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_daisydaikon"
+subparam = "daikon_4_power"
+value = 3
+kinds = ["daisy", "daisy_daisydaikon"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_daisydaikon"
+subparam = "daikon_5_power"
+value = 3
+kinds = ["daisy", "daisy_daisydaikon"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_daisydaikon"
+subparam = "daikon_6_power"
+value = 3
+kinds = ["daisy", "daisy_daisydaikon"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_daisydaikon"
+subparam = "daikon_7_power"
+value = 3
+kinds = ["daisy", "daisy_daisydaikon"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_daisydaikon"
+subparam = "daikon_8_power"
+value = 3
+kinds = ["daisy", "daisy_daisydaikon"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# DIDDY KONG
+[[param_float]]
+param = "param_special_n"
+subparam = "special_n_charge_start_spd_x"
+value = 2.75
+kinds = ["diddy"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_special_n"
+subparam = "special_n_charge_end_spd_x"
+value = 3.5
+kinds = ["diddy"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # CUSTOM CHARACTERS
 
