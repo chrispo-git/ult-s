@@ -9,10 +9,7 @@ import subprocess
 def convert_xml_to_custom_format(xml_string, fighter_kind):
     root = ET.fromstring(xml_string)
     output = []
-
-    for list_elem in root.findall('list'):
-        param_name = list_elem.get('hash')
-        for struct_elem in list_elem.findall('struct'):
+    def add_block(struct_elem):
             for child in struct_elem:
                 tag = child.tag
                 subparam = child.get('hash')
@@ -36,6 +33,17 @@ kinds = [{kinds}]
 slots = [0,1,2,3,4,5,6,7]
 """
                 output.append(block)
+    for list_elem in root.findall('list'):
+        param_name = list_elem.get('hash')
+        for struct_elem in list_elem.findall('struct'):
+            add_block(struct_elem)
+    for elem in root:
+        if elem.tag == 'struct' and elem.get('hash') == 'param_private':
+            param_name = elem.get('hash')
+            add_block(elem)
+
+
+
     return '\n'.join(output)
 
 
