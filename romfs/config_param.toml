@@ -875,7 +875,404 @@ kinds = ["peach"]
 slots = [0,1,2,3,4,5,6,7]
 
 
-# 
+# IVYSAUR / PFUSHIGISOU
+[[param_float]]
+param = "param_special_s"
+subparam = "shoot_speed"
+value = 1.25
+kinds = ["pfushigisou"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_int]]
+param = "param_leafcutter"
+subparam = "life"
+value = 75
+kinds = ["pfushigisou", "pfushigisou_leafcutter"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# STEVE / PICKEL
+[[param_float]]
+param = "param_special_n"
+subparam = "0x1a89765685"
+value = 2.5
+kinds = ["pickel"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_special_n"
+subparam = "0x1a0a95e89a"
+value = 0.93
+kinds = ["pickel"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_special_n"
+subparam = "0x1a1bb90606"
+value = 1.25
+kinds = ["pickel"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_special_n"
+subparam = "0x1b78f1e855"
+value = 1.1875
+kinds = ["pickel"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_special_n"
+subparam = "0x1aa714f1ca"
+value = 1.125
+kinds = ["pickel"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_special_n"
+subparam = "0x1da2122271"
+value = 1.0625
+kinds = ["pickel"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_int]]
+param = "param_trolley"
+subparam = "lifetime"
+value = 50
+kinds = ["pickel", "pickel_trolley"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_trolley"
+subparam = "catch_time"
+value = 21
+kinds = ["pickel", "pickel_trolley"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_trolley"
+subparam = "catch_time_add_by_damage"
+value = 0
+kinds = ["pickel", "pickel_trolley"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_trolley"
+subparam = "catch_time_dec_by_clatter"
+value = 0
+kinds = ["pickel", "pickel_trolley"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_int]]
+param = "param_trolley"
+subparam = "lifetime"
+value = 50
+kinds = ["pickel", "pickel_trolley"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_trolley"
+subparam = "catch_time"
+value = 21
+kinds = ["pickel", "pickel_trolley"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_trolley"
+subparam = "catch_time_add_by_damage"
+value = 0
+kinds = ["pickel", "pickel_trolley"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_trolley"
+subparam = "catch_time_dec_by_clatter"
+value = 0
+kinds = ["pickel", "pickel_trolley"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_special_hi"
+subparam = "start_speed_x_mul_ground"
+value = 0.8
+kinds = ["pickel"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_special_hi"
+subparam = "start_speed_x_mul_air"
+value = 0.8
+kinds = ["pickel"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_special_hi"
+subparam = "start_control_accel_x_mul_air"
+value = 0.8
+kinds = ["pickel"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_special_hi"
+subparam = "start_control_max_speed_x_mul_air"
+value = 0.8
+kinds = ["pickel"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_int]]
+param = "param_private"
+subparam = "material_gold_max"
+value = 6
+kinds = ["pickel"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_int]]
+param = "param_private"
+subparam = "material_red_stone_max"
+value = 7
+kinds = ["pickel"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_int]]
+param = "param_private"
+subparam = "material_diamond_max"
+value = 4
+kinds = ["pickel"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_int]]
+param = "param_private"
+subparam = "start_material_grade_1_num"
+value = 25
+kinds = ["pickel"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_int]]
+param = "param_private"
+subparam = "start_material_iron_num"
+value = 2
+kinds = ["pickel"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_int]]
+param = "param_private"
+subparam = "start_material_red_stone_num"
+value = 0
+kinds = ["pickel"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_int]]
+param = "param_private"
+subparam = "start_material_grade_1_num_kirby"
+value = 25
+kinds = ["pickel"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_pickelobject"
+subparam = "auto_damage"
+value = 0.05
+kinds = ["pickel", "pickel_pickelobject"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# PIKACHU
+[[param_float]]
+param = "param_dengeki"
+subparam = "move_rate_"
+value = 0.8
+kinds = ["pikachu", "pikachu_dengeki"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_special_lw"
+subparam = "special_lw_offset_y_"
+value = 7.0
+kinds = ["pikachu"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_kaminari"
+subparam = "width_"
+value = 2.4
+kinds = ["pikachu", "pikachu_kaminari"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# PIT
+[[param_int]]
+param = "param_special_hi"
+subparam = "landing_frame"
+value = 20
+kinds = ["pit"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_special_hi"
+subparam = "rush_angle"
+value = 340
+kinds = ["pit"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# DARK PIT / PITB
+[[param_float]]
+param = "param_bowarrow"
+subparam = "control_angle"
+value = 1.2
+kinds = ["pitb", "pitb_bowarrow"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_special_hi"
+subparam = "rush_speed"
+value = 1.2
+kinds = ["pitb"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# RICHTER
+[[param_float]]
+param = "param_axe"
+subparam = "gravity"
+value = 0
+kinds = ["richter", "richter_axe"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_axe"
+subparam = "throw_angle"
+value = 0
+kinds = ["richter", "richter_axe"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_axe"
+subparam = "throw_speed"
+value = 4
+kinds = ["richter", "richter_axe"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_axe"
+subparam = "brake_x"
+value = 0
+kinds = ["richter", "richter_axe"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_axe"
+subparam = "rot_speed"
+value = 0
+kinds = ["richter", "richter_axe"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_int]]
+param = "param_axe"
+subparam = "life"
+value = 45
+kinds = ["richter", "richter_axe"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_axe"
+subparam = "throw_angle_stick_back"
+value = 0
+kinds = ["richter", "richter_axe"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_axe"
+subparam = "throw_angle_stick_front"
+value = 0
+kinds = ["richter", "richter_axe"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_axe"
+subparam = "throw_speed_stick_back"
+value = 4
+kinds = ["richter", "richter_axe"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_special_hi"
+subparam = "start_y_mul_air"
+value = 1.1
+kinds = ["richter"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_special_hi"
+subparam = "limit_speed_y_air"
+value = 2.1
+kinds = ["richter"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_special_lw"
+subparam = "throw_speed_ground"
+value = 1.25
+kinds = ["richter"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_special_lw"
+subparam = "throw_speed_air"
+value = 1.25
+kinds = ["richter"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_int]]
+param = "param_holywater"
+subparam = "fire_pillar_life_frame"
+value = 45
+kinds = ["richter", "richter_holywater"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# RIDLEY
+[[param_float]]
+param = "param_special_s"
+subparam = "speed_x_mul_on_air"
+value = 1
+kinds = ["ridley"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_special_s"
+subparam = "catch_speed_x_mul"
+value = 0.9
+kinds = ["ridley"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_special_s"
+subparam = "catch_accel_y"
+value = 0
+kinds = ["ridley"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_special_s"
+subparam = "catch_max_speed_y"
+value = -0.2
+kinds = ["ridley"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_special_s"
+subparam = "brake_x_on_drag"
+value = 0.005
+kinds = ["ridley"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_special_s"
+subparam = "accel_x_on_grab"
+value = 0.005
+kinds = ["ridley"]
+slots = [0,1,2,3,4,5,6,7]
+
 
 
 
