@@ -1239,50 +1239,6 @@ kinds = ["richter", "richter_holywater"]
 slots = [0,1,2,3,4,5,6,7]
 
 
-# RIDLEY
-[[param_float]]
-param = "param_special_s"
-subparam = "speed_x_mul_on_air"
-value = 1
-kinds = ["ridley"]
-slots = [0,1,2,3,4,5,6,7]
-
-[[param_float]]
-param = "param_special_s"
-subparam = "catch_speed_x_mul"
-value = 0.9
-kinds = ["ridley"]
-slots = [0,1,2,3,4,5,6,7]
-
-[[param_float]]
-param = "param_special_s"
-subparam = "catch_accel_y"
-value = 0
-kinds = ["ridley"]
-slots = [0,1,2,3,4,5,6,7]
-
-[[param_float]]
-param = "param_special_s"
-subparam = "catch_max_speed_y"
-value = -0.2
-kinds = ["ridley"]
-slots = [0,1,2,3,4,5,6,7]
-
-[[param_float]]
-param = "param_special_s"
-subparam = "brake_x_on_drag"
-value = 0.005
-kinds = ["ridley"]
-slots = [0,1,2,3,4,5,6,7]
-
-[[param_float]]
-param = "param_special_s"
-subparam = "accel_x_on_grab"
-value = 0.005
-kinds = ["ridley"]
-slots = [0,1,2,3,4,5,6,7]
-
-
 # ROBOT / ROB
 [[param_float]]
 param = "param_special_n"
