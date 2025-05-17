@@ -17,32 +17,10 @@ use super::*;
 pub fn install() {
     Agent::new("ridley")
     .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
-    .acmd("game_specialairsfalljump", ridley_sideb_end, Priority::Low)    
-    .acmd("effect_specialairsfall", ridley_sideb_fall_eff, Priority::Low)    
+    .acmd("game_specialnstart", ridley_neutralb_start, Priority::Low)    
+    .acmd("game_specialairnstart", ridley_neutralb_start, Priority::Low)    
     .install();
 }
-
-unsafe extern "C" fn ridley_sideb_end(fighter: &mut L2CAgentBase) {
-    let lua_state = fighter.lua_state_agent;
-		if macros::is_excute(fighter) {
-			macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, /*ID*/ 0, /*Damage*/ 7.0, /*Angle*/ 88, /*KBG*/ 75, /*FKB*/ 0, /*BKB*/ 70, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_sting"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_CUTUP, /*Type*/ *ATTACK_REGION_THROW);
-			macros::ATTACK_ABS(fighter, /*Kind*/ *FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, /*ID*/ 0, /*Damage*/ 3.0, /*Angle*/ 88, /*KBG*/ 75, /*FKB*/ 0, /*BKB*/ 70, /*Hitlag*/ 0.0, /*Unk*/ 1.0, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*Unk*/ 0.0, /*Unk*/ true, /*Effect*/ Hash40::new("collision_attr_sting"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_CUTUP, /*Type*/ *ATTACK_REGION_THROW);
-		}
-		frame(fighter.lua_state_agent, 2.0);
-		if macros::is_excute(fighter) {
-			WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_RIDLEY_STATUS_SPECIAL_S_FLAG_THROW);
-			WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_RIDLEY_STATUS_SPECIAL_S_FLAG_ENABLE_GRAVITY);
-		}
-		frame(fighter.lua_state_agent, 25.0);
-		if macros::is_excute(fighter) {
-			CancelModule::enable_cancel(fighter.module_accessor);
-		}
-		frame(fighter.lua_state_agent, 38.0);
-		if macros::is_excute(fighter) {
-			WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_RIDLEY_STATUS_SPECIAL_S_FLAG_ENABLE_CONTROL_JUMP);
-			notify_event_msc_cmd!(fighter, 0x2127e37c07u64, *GROUND_CLIFF_CHECK_KIND_ALWAYS_BOTH_SIDES);
-		}
-}		
-unsafe extern "C" fn ridley_sideb_fall_eff(fighter: &mut L2CAgentBase) {
-    let lua_state = fighter.lua_state_agent;
+unsafe extern "C" fn ridley_neutralb_start(fighter: &mut L2CAgentBase) {
+	macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.333);
 }	
