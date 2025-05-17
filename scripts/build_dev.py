@@ -5,22 +5,27 @@ from zipfile import ZipFile
 import subprocess
 
 needed_folders = ["util", "common", "controls", "cpu"]
-all_folders = [""]
+all_folders = []
 in_ = []
 out_ = []
 
 try:
     os.chdir('../')
-    for root, dirs, files in os.walk(r"src", topdown=False):
-        for name in dirs:
-            if name != "modules" and name not in needed_folders:
-                all_folders.append(name)
+    basepath  = r"src"
+    for i in os.listdir(basepath):
+        path = os.path.join(basepath, i)
+        if os.path.isdir(path) and i not in ["template"]:
+            all_folders.append(i)
     os.chdir("scripts")
 
     params = sys.argv
 
     if len(params) > 1:
         for i in params:
+            if i == "all":
+                needed_folders= all_folders
+                print(f"all included")
+                break
             if i in all_folders:
                 needed_folders.append(i)
                 print(f"{i} included")
@@ -31,7 +36,6 @@ try:
     with open(r"src/lib.rs") as f:
         in_ = f.readlines()
     f.close()
-
 
     with open(r"src/lib.rs", 'w') as f:
         for i in range(0,202):
