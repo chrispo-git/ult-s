@@ -13,3 +13,4 @@ scripts/filepath.txt
 output.txt
 scripts/.~lock.output.csv\#
 scripts/output.md
+scripts/output.toml

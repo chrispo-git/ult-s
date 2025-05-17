@@ -2,12 +2,18 @@ Thank you for downloading Ultimate S!
 
 
 -Instructions-
-1. Run the "Ultimate S Setup.exe" that comes with your download (versions for linux and mac also included)
+1. Run the "Ultimate S Setup.exe" that comes with your download
 2. Enable and Disable whichever characters you would like to, then click "Update" 
 3. If you have an internet connection, press "Update Dependencies" to get the latest dependencies automatically
 4. You're done! Now you can either
 a. move Ultimate S manually - copy your "atmosphere" and "ultimate" mod folders to the root of your SD card
 b. move Ultimate S automatically - press "Install Ultimate S To Folder" and select the root of your SD card (or sdmc folder on emulator)
+
+If you are on mac or linux - the older python based setup tool has been included for compatibility:
+1. Run "old_setup_tool.py" that comes with your download
+2. Pick either lite or full, and then specify which characters you would like to keep or remove
+3. download dependencies from the internet
+4. set up on your SD card/folder
 
 
 If you haven't set up smash ultimate modding as a whole, here's some wonderful guides!
