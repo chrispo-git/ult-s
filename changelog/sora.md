@@ -829,18 +829,16 @@ FaF: --
 
 
 
-### Down Special 
+### Down Special (Hit)
 |Frame|ID|Damage|Angle|BKB|KBG|Notes| | | |
 |-|-|-|-|-|-|-|-|-|-|
-|Frame 12| 0|  3.0%|  60|  80 (Set)|  100| Hits grounded only|
-|Frame 12| 1|  3.0%|  35|  80 (Set)|  100| Hits air only|
-|Hitboxes terminated on Frame 28|
+|Frame 7| 0| 9.0%| 361| 74| 67|
+|Frame 7| 1| 9.0%| 361| 74| 67|
+|Frame 7| 2| 9.0%| 361| 74| 67|
+|Frame 7| 3| 9.0%| 361| 74| 67|
+|Frame 10| 3| 9.0%| 361| 74| 67|
+|Frame 11| 3| 9.0%| 361| 74| 67|
+|Hitboxes terminated on Frame 12|
 
 
-Note: On hit, goes in nair, or upb (if B is held)
-
-
-Can be ended early by holding the shield button, can be walljumped out of.
-
-
-FaF: 67
+FaF: 32
