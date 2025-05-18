@@ -273,6 +273,13 @@ slots = [0,1,2,3,4,5,6,7]
 
 
 # JACK / JOKER
+[[param_int]]
+param = "escape_num_max"
+subparam = "reflector_radius_size"
+value = 10
+kinds = ["jack"]
+slots = [0,1,2,3,4,5,6,7]
+
 [[param_float]]
 param = "param_special_lw"
 subparam = "counter_attack_power_mul"
@@ -288,9 +295,44 @@ kinds = ["jack"]
 slots = [0,1,2,3,4,5,6,7]
 
 [[param_float]]
+param = "param_special_lw"
+subparam = "guard_rebel_gauge"
+value = 11.943
+kinds = ["jack"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_special_lw"
+subparam = "rebel_gauge_add"
+value = 0.00925
+kinds = ["jack"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_special_lw"
+subparam = "shield_radius_size"
+value = 8.0
+kinds = ["jack"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_special_lw"
+subparam = "reflector_radius_size"
+value = 9.0
+kinds = ["jack"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
 param = "param_private"
 subparam = "rebel_gauge_damage_add"
 value = 1.1
+kinds = ["jack"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_private"
+subparam = "rebel_gauge_add"
+value = 0.0
 kinds = ["jack"]
 slots = [0,1,2,3,4,5,6,7]
 
