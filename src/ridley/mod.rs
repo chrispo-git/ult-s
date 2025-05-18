@@ -2,8 +2,7 @@ mod status;
 mod frame;
 mod acmd;
 
-static mut HAS_DOUBLE_UPB : [bool; 8] = [false; 8];
-static mut SPEED_DOUBLE_UPB : [bool; 8] = [false; 8];
+static mut UPB_ANGLE : [f32; 8] = [0.0; 8];
 			
 
 
