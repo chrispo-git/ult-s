@@ -53,12 +53,12 @@ FaF: 23
 ### FTilt
 |Frame|ID|Damage|Angle|BKB|KBG|Notes| | | |
 |-|-|-|-|-|-|-|-|-|-|
-|Frame 9| 0|  11.0%|  361|  30|  105|
-|Frame 9| 1|  9.0%|  90|  40|  70| hit effect is fire|
-|Hitboxes terminated on Frame 12|
+|Frame 10| 0|  11.0%|  361|  30|  105|
+|Frame 10| 1|  9.0%|  90|  40|  70| hit effect is fire|
+|Hitboxes terminated on Frame 13|
 
 
-FaF: 35
+FaF: 36
 
 
 
@@ -289,10 +289,10 @@ Autocancel - 1-2/38+
 ### Dair
 |Frame|ID|Damage|Angle|BKB|KBG|Notes| | | |
 |-|-|-|-|-|-|-|-|-|-|
-|Frame 9| 0|  15.0%|  270|  20|  90| Hits grounded only| hit effect is fire|
-|Frame 9| 1|  15.0%|  270|  20|  90| Hits air only| hit effect is fire|
-|Frame 9| 2|  15.0%|  270|  20|  90| Hits grounded only| hit effect is fire|
-|Frame 9| 3|  15.0%|  270|  20|  90| Hits air only| hit effect is fire|
+|Frame 9| 0|  15.0%|  270|  20|  80| Hits grounded only| hit effect is fire|
+|Frame 9| 1|  15.0%|  270|  20|  80| Hits air only| hit effect is fire|
+|Frame 9| 2|  15.0%|  270|  20|  80| Hits grounded only| hit effect is fire|
+|Frame 9| 3|  15.0%|  270|  20|  80| Hits air only| hit effect is fire|
 |Frame 9| 4|  10.0%|  361|  30|  90| Hits grounded only| hit effect is fire|
 |Frame 9| 5|  10.0%|  361|  30|  90| Hits air only| hit effect is fire|
 |Frame 12| 0|  15.0%|  80|  20|  90| hit effect is fire|
@@ -421,7 +421,7 @@ FaF: 45
 ### Down Throw
 |Frame|ID|Damage|Angle|BKB|KBG|Notes| | | |
 |-|-|-|-|-|-|-|-|-|-|
-|Throws on Frame 17| | 5.0%| 75| 65| 85|
+|Throws on Frame 17| | 5.0%| 75| 65| 90|
 
 
 FaF: 37
