@@ -155,8 +155,15 @@ unsafe extern "C" fn wavedash(fighter : &mut L2CFighterCommon) {
 			if [*FIGHTER_STATUS_KIND_ESCAPE_AIR, *FIGHTER_STATUS_KIND_ESCAPE_AIR_SLIDE].contains(&status_kind) && IS_WAVEDASH[ENTRY_ID] == true {
 				let y = ControlModule::get_stick_y(boma);
 				if y < 0.3 && y > -0.3 {
-					let speed = smash::phx::Vector3f { x: 0.0, y: -3.0, z: 0.0 };
-					KineticModule::add_speed(boma, &speed);
+					let mut teleport_distance = 0.0;
+					for x in 0..8 {
+						if ray_check_pos(boma, 0.0, -(x as f32), false) == 1 {
+							teleport_distance = -(x as f32);
+							break;
+						}
+					}
+					let pos = smash::phx::Vector3f { x: PostureModule::pos_x(boma), y: PostureModule::pos_y(boma)+teleport_distance, z: 0.0 };
+					PostureModule::set_pos(boma, &pos);
 					WAVEDASH_DONE[ENTRY_ID] = true;
 				};
 				IS_WAVEDASH[ENTRY_ID] = false;
