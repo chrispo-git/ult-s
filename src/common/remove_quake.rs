@@ -4,47 +4,38 @@ use smash::lua2cpp::*;
 use smash::app::lua_bind::*;
 use smashline::*;
 use smash_script::*;
-unsafe extern "C" fn donkey(fighter: &mut L2CAgentBase) {
+unsafe extern "C" fn no_quake(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
-}		
-unsafe extern "C" fn koopa(fighter: &mut L2CAgentBase) {
-    let lua_state = fighter.lua_state_agent;
-}		
-unsafe extern "C" fn dedede(fighter: &mut L2CAgentBase) {
-    let lua_state = fighter.lua_state_agent;
-}		
-unsafe extern "C" fn krool(fighter: &mut L2CAgentBase) {
-    let lua_state = fighter.lua_state_agent;
-}		
-unsafe extern "C" fn ridley(fighter: &mut L2CAgentBase) {
-    let lua_state = fighter.lua_state_agent;
-}		
-unsafe extern "C" fn plizardon(fighter: &mut L2CAgentBase) {
-    let lua_state = fighter.lua_state_agent;
-}		
+}			
 		
 pub fn install() {
     Agent::new("donkey")
-    .acmd("expression_landingheavy", donkey, Priority::Low)    
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .acmd("expression_landingheavy", no_quake, Priority::Low)    
     .install();
 
     Agent::new("koopa")
-    .acmd("expression_landingheavy", koopa, Priority::Low)    
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .acmd("expression_landingheavy", no_quake, Priority::Low)    
     .install();
 
     Agent::new("dedede")
-    .acmd("expression_landingheavy", dedede, Priority::Low)    
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .acmd("expression_landingheavy", no_quake, Priority::Low)    
     .install();
 
     Agent::new("krool")
-    .acmd("expression_landingheavy", krool, Priority::Low)    
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .acmd("expression_landingheavy", no_quake, Priority::Low)    
     .install();
 
     Agent::new("ridley")
-    .acmd("expression_landingheavy", ridley, Priority::Low)    
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .acmd("expression_landingheavy", no_quake, Priority::Low)    
     .install();
 
     Agent::new("plizardon")
-    .acmd("expression_landingheavy", plizardon, Priority::Low)    
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .acmd("expression_landingheavy", no_quake, Priority::Low)    
     .install();
 }
