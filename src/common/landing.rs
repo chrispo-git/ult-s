@@ -92,12 +92,18 @@ unsafe extern "C" fn respawn_wakeup(fighter : &mut L2CFighterCommon) {
         if [*FIGHTER_STATUS_KIND_REBIRTH].contains(&status_kind) {
 			if !PREVENT_LOOP[ENTRY_ID] {
 				if hash40("wait") == MotionModule::motion_kind(boma) {
-					MotionModule::change_motion(fighter.module_accessor, Hash40::new("down_wait_u"), -1.0, 1.0, false, 0.0, false, false);
-				} else if hash40("down_wait_u") == MotionModule::motion_kind(boma) && is_end {
 					MotionModule::change_motion(fighter.module_accessor, Hash40::new("down_stand_u"), -1.0, 1.0, false, 0.0, false, false);
-				} else if hash40("down_stand_u") == MotionModule::motion_kind(boma) && is_end {
-					MotionModule::change_motion(fighter.module_accessor, Hash40::new("wait"), -1.0, 1.0, false, 0.0, false, false);
-					PREVENT_LOOP[ENTRY_ID] = true;
+				} else if hash40("down_stand_u") == MotionModule::motion_kind(boma) {
+					if is_end {
+						MotionModule::change_motion(fighter.module_accessor, Hash40::new("wait"), -1.0, 1.0, false, 0.0, false, false);
+						PREVENT_LOOP[ENTRY_ID] = true;
+					} else {
+						if frame < 3.0 {
+							MotionModule::set_rate(fighter.module_accessor, 0.05);
+						} else {
+							MotionModule::set_rate(fighter.module_accessor, 1.0);
+						}
+					}
 				}
 			}
 			
