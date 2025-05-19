@@ -1131,13 +1131,6 @@ value = 1.2
 kinds = ["pitb", "pitb_bowarrow"]
 slots = [0,1,2,3,4,5,6,7]
 
-[[param_float]]
-param = "param_special_hi"
-subparam = "rush_speed"
-value = 1.2
-kinds = ["pitb"]
-slots = [0,1,2,3,4,5,6,7]
-
 
 # RICHTER
 [[param_float]]
