@@ -259,6 +259,7 @@ mod packun;
 mod pacman;
 mod palutena;
 mod peach;
+mod peppy;
 mod pichu;
 mod pikachu;
 mod pikmin;
@@ -815,6 +816,7 @@ pub extern "C" fn main() {
     toad::install();
     sandbag::install();
     masked::install();
+    peppy::install();
     
     println!("added chars installed");
 
