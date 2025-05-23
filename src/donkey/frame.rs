@@ -61,7 +61,7 @@ unsafe extern "C" fn dk_frame(fighter: &mut L2CFighterCommon) {
                 IS_DK_UPB_BARREL[ENTRY_ID] = true;
                 UPB_TIMER[ENTRY_ID] += 1;
                 //This sucks! Don't do it :)
-                MotionModule::set_rate(boma, 1.3);
+                MotionModule::set_rate(boma, 1.0);
                 if frame < 2.0 {
                     UPB_ANGLE_X[ENTRY_ID] = 0.0;
                     UPB_ANGLE_Y[ENTRY_ID] = UPB_SPEED;
@@ -81,7 +81,7 @@ unsafe extern "C" fn dk_frame(fighter: &mut L2CFighterCommon) {
                     UPB_ANGLE_X[ENTRY_ID] += (1.0/30.0 * (UPB_30_X))*rate;
                 }
                 println!("X:{}, Y:{}", UPB_ANGLE_X[ENTRY_ID], UPB_ANGLE_Y[ENTRY_ID]);
-                if UPB_TIMER[ENTRY_ID] > 240 || (UPB_TIMER[ENTRY_ID] > 5 && ControlModule::check_button_on_trriger(fighter.module_accessor, *CONTROL_PAD_BUTTON_SPECIAL)){
+                if UPB_TIMER[ENTRY_ID] > 35 || (UPB_TIMER[ENTRY_ID] > 5 && ControlModule::check_button_on_trriger(fighter.module_accessor, *CONTROL_PAD_BUTTON_SPECIAL)){
                     MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_hi_shoot"), 0.0, 1.0, false, 0.0, false, false);
                 }
             } else {
