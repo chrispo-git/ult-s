@@ -219,7 +219,7 @@ unsafe extern "C" fn peppy_usmash_eff(agent: &mut L2CAgentBase) {
     }
     frame(agent.lua_state_agent, 7.0);
     if macros::is_excute(agent) {
-        macros::EFFECT_FOLLOW(agent, Hash40::new("sys_attack_arc"), Hash40::new("top"), 0, 18, 0, 0, 81, 90, 1.25, true);
+        macros::EFFECT_FOLLOW_FLIP(agent, Hash40::new("sys_attack_arc"), Hash40::new("sys_attack_arc"), Hash40::new("top"), 0, 10, 0, -4, 80, 96, 0.95, true, *EF_FLIP_YZ);
         macros::LAST_EFFECT_SET_RATE(agent, 1.3);
     }
     frame(agent.lua_state_agent, 9.0);
@@ -245,6 +245,14 @@ unsafe extern "C" fn peppy_fsmash(agent: &mut L2CAgentBase) {
     if macros::is_excute(agent) {
         AttackModule::clear_all(agent.module_accessor);
     }
+    frame(agent.lua_state_agent, 18.0);
+    if macros::is_excute(agent) {
+        macros::ATTACK(agent, 0, 0, Hash40::new("top"), 10.0, 40, 100, 0, 35, 3.0, 0.0, 0.0, 2.0, Some(0.0), Some(0.0), Some(6.0), 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_PUNCH, *ATTACK_REGION_PUNCH);
+    }
+    frame(agent.lua_state_agent, 19.0);
+    if macros::is_excute(agent) {
+        AttackModule::clear_all(agent.module_accessor);
+    }
 }	
 unsafe extern "C" fn peppy_fsmash_eff(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 4.0);
@@ -258,7 +266,8 @@ unsafe extern "C" fn peppy_fsmash_eff(agent: &mut L2CAgentBase) {
     }
     frame(agent.lua_state_agent, 18.0);
     if macros::is_excute(agent) {
-        macros::LANDING_EFFECT(agent, Hash40::new("sys_down_smoke"), Hash40::new("top"), 4, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
+        macros::QUAKE(agent, *CAMERA_QUAKE_KIND_S);
+        macros::EFFECT(agent, Hash40::new("sys_crown"), Hash40::new("top"), 4, 0, 0, 0, 0, 0, 0.4, 0, 0, 0, 0, 0, 0, false);
     }
 }	
 unsafe extern "C" fn peppy_dsmash(agent: &mut L2CAgentBase) {
@@ -298,8 +307,8 @@ unsafe extern "C" fn peppy_dsmash_eff(agent: &mut L2CAgentBase) {
     if macros::is_excute(agent) {
         macros::EFFECT_FOLLOW(agent, Hash40::new("sys_attack_line"), Hash40::new("top"), 0, 1.8, -3.5, 0, 0, 0, 0.9, true);
         macros::EFFECT_FOLLOW(agent, Hash40::new("sys_attack_line"), Hash40::new("top"), 0, 1.8, 3.5, 180, 0, 0, 0.9, true);
-        macros::EFFECT_FOLLOW_RND(agent, Hash40::new("sys_attack_impact"), Hash40::new("top"), 0, 2.5, 11, 0, 0, 0, 1.3, 0, 0, 0, 0, 0, 360, true);
-        macros::EFFECT_FOLLOW_RND(agent, Hash40::new("sys_attack_impact"), Hash40::new("top"), 0, 2.5, -12, 0, 0, 0, 1.3, 0, 0, 0, 0, 0, 360, true);
+        macros::EFFECT(agent, Hash40::new("sys_attack_impact"), Hash40::new("top"), 0, 2.5, 11, 0, 0, 0, 1.3, 0, 0, 0, 0, 0, 360, true);
+        macros::EFFECT(agent, Hash40::new("sys_attack_impact"), Hash40::new("top"), 0, 2.5, -12, 0, 0, 0, 1.3, 0, 0, 0, 0, 0, 360, true);
     }
     frame(agent.lua_state_agent, 6.0);
     if macros::is_excute(agent) {
