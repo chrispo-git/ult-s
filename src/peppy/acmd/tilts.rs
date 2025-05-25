@@ -20,6 +20,7 @@ pub fn install() {
 	Agent::new("falco")
     .set_costume([120, 121, 122, 123, 124, 125, 126, 127].to_vec())
     .acmd("game_attacklw3peppy", peppy_dtilt, Priority::Low)    
+    .acmd("effect_attacklw3peppy", peppy_dtilt_eff, Priority::Low)    
     .acmd("game_attackhi3peppy", peppy_utilt, Priority::Low)    
     .acmd("effect_attackhi3peppy", peppy_utilt_eff, Priority::Low)    
     .acmd("game_attacks3", peppy_ftilt, Priority::Low)    
@@ -40,6 +41,12 @@ unsafe extern "C" fn peppy_dtilt(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 10.0);
     if macros::is_excute(agent) {
         AttackModule::clear_all(agent.module_accessor);
+    }
+}	
+unsafe extern "C" fn peppy_dtilt_eff(agent: &mut L2CAgentBase) {
+    frame(agent.lua_state_agent, 4.0);
+    if macros::is_excute(agent) {
+        macros::EFFECT_FOLLOW_FLIP(agent, Hash40::new("sys_attack_line"), Hash40::new("sys_attack_line"), Hash40::new("top"), 6, 1, -2.5, 0, -25, 0, 0.8, true, *EF_FLIP_YZ);
     }
 }	
 unsafe extern "C" fn peppy_utilt(agent: &mut L2CAgentBase) {
