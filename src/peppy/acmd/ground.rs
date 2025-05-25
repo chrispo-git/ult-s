@@ -137,7 +137,7 @@ unsafe extern "C" fn peppy_rapid_end(agent: &mut L2CAgentBase) {
 unsafe extern "C" fn peppy_rapid_end_eff(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 3.0);
     if macros::is_excute(agent) {
-        macros::EFFECT_FOLLOW_FLIP(agent, Hash40::new("sys_attack_line"), Hash40::new("sys_attack_line"), Hash40::new("top"), 0, 7, -11, 0, 0, 0, 1.1, true, *EF_FLIP_YZ);
+        macros::EFFECT_FOLLOW_FLIP(agent, Hash40::new("sys_attack_line"), Hash40::new("sys_attack_line"), Hash40::new("top"), 0, 7, -6, 0, 0, 0, 1.1, true, *EF_FLIP_YZ);
     }
     frame(agent.lua_state_agent, 5.0);
     if macros::is_excute(agent) {
