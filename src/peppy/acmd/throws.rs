@@ -49,6 +49,7 @@ unsafe extern "C" fn peppy_fthrow(fighter: &mut L2CAgentBase) {
 unsafe extern "C" fn peppy_fthrow_eff(fighter: &mut L2CAgentBase) {
 		frame(fighter.lua_state_agent, 18.0);
 		if macros::is_excute(fighter) {
+            macros::QUAKE(fighter, *CAMERA_QUAKE_KIND_M);
 		    macros::EFFECT(fighter, Hash40::new("sys_bomb_a"), Hash40::new("throw"), 0.0, 0.0, 0.0, 0, 0, 0, 0.58, 0, 0, 0, 0, 0, 0, true);
 		}
 }
@@ -60,8 +61,8 @@ unsafe extern "C" fn peppy_bthrow(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 12.0);
     if macros::is_excute(agent) {
         macros::REVERSE_LR(agent);
-		macros::ATK_HIT_ABS(fighter, *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, Hash40::new("throw"), WorkModule::get_int64(fighter.module_accessor,*FIGHTER_STATUS_THROW_WORK_INT_TARGET_OBJECT), WorkModule::get_int64(fighter.module_accessor,*FIGHTER_STATUS_THROW_WORK_INT_TARGET_HIT_GROUP), WorkModule::get_int64(fighter.module_accessor,*FIGHTER_STATUS_THROW_WORK_INT_TARGET_HIT_NO));
-		AttackModule::clear_all(fighter.module_accessor);
+		macros::ATK_HIT_ABS(agent, *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, Hash40::new("throw"), WorkModule::get_int64(agent.module_accessor,*FIGHTER_STATUS_THROW_WORK_INT_TARGET_OBJECT), WorkModule::get_int64(agent.module_accessor,*FIGHTER_STATUS_THROW_WORK_INT_TARGET_HIT_GROUP), WorkModule::get_int64(agent.module_accessor,*FIGHTER_STATUS_THROW_WORK_INT_TARGET_HIT_NO));
+		AttackModule::clear_all(agent.module_accessor);
     }
 }
 unsafe extern "C" fn peppy_bthrow_eff(fighter: &mut L2CAgentBase) {
@@ -72,13 +73,16 @@ unsafe extern "C" fn peppy_bthrow_eff(fighter: &mut L2CAgentBase) {
 }
 unsafe extern "C" fn peppy_dthrow(agent: &mut L2CAgentBase) {
     if macros::is_excute(agent) {
-        macros::ATTACK_ABS(agent, *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, 0, 5.0, 80, 45, 0, 75, 0.0, 1.0, *ATTACK_LR_CHECK_F, 0.0, true, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_THROW);
+        macros::ATTACK_ABS(agent, *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, 0, 5.0, 70, 45, 0, 75, 0.0, 1.0, *ATTACK_LR_CHECK_F, 0.0, true, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_THROW);
         macros::ATTACK_ABS(agent, *FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, 0, 3.0, 361, 100, 0, 60, 0.0, 1.0, *ATTACK_LR_CHECK_F, 0.0, true, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_THROW);
     }
+    macros::FT_MOTION_RATE(agent, 0.5);
+    frame(agent.lua_state_agent, 15.0);
+    macros::FT_MOTION_RATE(agent, 1.0);
     frame(agent.lua_state_agent, 21.0);
     if macros::is_excute(agent) {
-		macros::ATK_HIT_ABS(fighter, *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, Hash40::new("throw"), WorkModule::get_int64(fighter.module_accessor,*FIGHTER_STATUS_THROW_WORK_INT_TARGET_OBJECT), WorkModule::get_int64(fighter.module_accessor,*FIGHTER_STATUS_THROW_WORK_INT_TARGET_HIT_GROUP), WorkModule::get_int64(fighter.module_accessor,*FIGHTER_STATUS_THROW_WORK_INT_TARGET_HIT_NO));
-		AttackModule::clear_all(fighter.module_accessor);
+		macros::ATK_HIT_ABS(agent, *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, Hash40::new("throw"), WorkModule::get_int64(agent.module_accessor,*FIGHTER_STATUS_THROW_WORK_INT_TARGET_OBJECT), WorkModule::get_int64(agent.module_accessor,*FIGHTER_STATUS_THROW_WORK_INT_TARGET_HIT_GROUP), WorkModule::get_int64(agent.module_accessor,*FIGHTER_STATUS_THROW_WORK_INT_TARGET_HIT_NO));
+		AttackModule::clear_all(agent.module_accessor);
     }
 }
 unsafe extern "C" fn peppy_dthrow_eff(agent: &mut L2CAgentBase) {
