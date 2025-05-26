@@ -22,11 +22,17 @@ pub fn install() {
     .acmd("game_specialairlwpeppy", peppy_shine, Priority::Low)     
     .acmd("effect_speciallwpeppy", peppy_shine_eff, Priority::Low)   
     .acmd("effect_specialairlwpeppy", peppy_shine_eff, Priority::Low)   
+    .acmd("sound_speciallwpeppy", peppy_shine_snd, Priority::Low)   
+    .acmd("sound_specialairlwpeppy", peppy_shine_snd, Priority::Low)   
     .acmd("effect_specialairsstartpeppy", peppy_tether_eff, Priority::Low)   
     .acmd("game_specialairsstartpeppy", peppy_tether, Priority::Low)   
     .acmd("game_specialairspeppy", peppy_tether_end, Priority::Low)   
     .acmd("game_specialairnlooppeppy", peppy_neutralb_shoot, Priority::Low)  
     .acmd("game_specialnlooppeppy", peppy_neutralb_shoot, Priority::Low)  
+    .acmd("effect_specialairnlooppeppy", peppy_neutralb_shoot_eff, Priority::Low)  
+    .acmd("effect_specialnlooppeppy", peppy_neutralb_shoot_eff, Priority::Low)  
+    .acmd("sound_specialairnlooppeppy", peppy_neutralb_shoot_snd, Priority::Low)  
+    .acmd("sound_specialnlooppeppy", peppy_neutralb_shoot_snd, Priority::Low)  
     .install();
 
 	Agent::new("falco_missile")
@@ -38,6 +44,20 @@ pub fn install() {
     .install();
 }	
 
+unsafe extern "C" fn peppy_shine_snd(agent: &mut L2CAgentBase) {
+    frame(agent.lua_state_agent, 1.0);
+    if macros::is_excute(agent) {
+        macros::PLAY_SE(agent, Hash40::new("se_falco_special_l01"));
+    }
+    frame(agent.lua_state_agent, 3.0);
+    if macros::is_excute(agent) {
+        macros::PLAY_SE(agent, Hash40::new("vc_falco_special_l01"));
+    }
+    frame(agent.lua_state_agent, 18.0);
+    if macros::is_excute(agent) {
+        macros::PLAY_SE(agent, Hash40::new("se_falco_special_l03"));
+    }
+}	
 unsafe extern "C" fn peppy_shine(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 4.0);
@@ -101,6 +121,12 @@ unsafe extern "C" fn peppy_tether(agent: &mut L2CAgentBase) {
         AttackModule::clear_all(agent.module_accessor);
     }
 }	
+unsafe extern "C" fn peppy_neutralb_start_eff(agent: &mut L2CAgentBase) {
+	frame(agent.lua_state_agent, 10.0);
+    if macros::is_excute(agent) {
+        macros::EFFECT(agent, Hash40::new("sys_smash_flash"), Hash40::new("haver"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
+    }
+}	
 unsafe extern "C" fn peppy_neutralb_shoot(agent: &mut L2CAgentBase) {
 	macros::FT_MOTION_RATE(agent, 0.5);
 	if macros::is_excute(agent) {
@@ -113,6 +139,11 @@ unsafe extern "C" fn peppy_neutralb_shoot(agent: &mut L2CAgentBase) {
 unsafe extern "C" fn peppy_neutralb_shoot_snd(agent: &mut L2CAgentBase) {
     if macros::is_excute(agent) {
         macros::PLAY_SE(agent, Hash40::new("se_common_bomb_m"));
+    }
+}	
+unsafe extern "C" fn peppy_neutralb_shoot_eff(agent: &mut L2CAgentBase) {
+    if macros::is_excute(agent) {
+        macros::LANDING_EFFECT(agent, Hash40::new("sys_dash_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
     }
 }	
 unsafe extern "C" fn peppy_tether_end(agent: &mut L2CAgentBase) {
@@ -140,7 +171,7 @@ unsafe extern "C" fn peppy_missile_boom(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	if macros::is_excute(fighter) {
         AttackModule::clear_all(fighter.module_accessor);
-		macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 7.0, /*Angle*/ 45, /*KBG*/ 65, /*FKB*/ 0, /*BKB*/ 50, /*Size*/ 5.4, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ -4, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ true, /*Absorbable*/ true, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_fire"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_FIRE, /*Type*/ *ATTACK_REGION_BOMB);
+		macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 7.0, /*Angle*/ 45, /*KBG*/ 65, /*FKB*/ 0, /*BKB*/ 50, /*Size*/ 6.2, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ -4, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ true, /*Absorbable*/ true, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_fire"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_FIRE, /*Type*/ *ATTACK_REGION_BOMB);
 		macros::ATK_SET_SHIELD_SETOFF_MUL(fighter, /*ID*/ 0, /*ShieldstunMul*/ 0.01);
 	}
     frame(fighter.lua_state_agent, 4.0);

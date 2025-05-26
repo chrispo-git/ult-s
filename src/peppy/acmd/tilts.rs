@@ -21,8 +21,10 @@ pub fn install() {
     .set_costume([120, 121, 122, 123, 124, 125, 126, 127].to_vec())
     .acmd("game_attacklw3peppy", peppy_dtilt, Priority::Low)    
     .acmd("effect_attacklw3peppy", peppy_dtilt_eff, Priority::Low)    
+    .acmd("sound_attacklw3peppy", peppy_dtilt_snd, Priority::Low)    
     .acmd("game_attackhi3peppy", peppy_utilt, Priority::Low)    
     .acmd("effect_attackhi3peppy", peppy_utilt_eff, Priority::Low)    
+    .acmd("sound_attackhi3peppy", peppy_utilt_snd, Priority::Low)    
     .acmd("game_attacks3", peppy_ftilt, Priority::Low)    
     .acmd("game_attacks3lw", peppy_ftilt, Priority::Low)    
     .acmd("game_attacks3hi", peppy_ftilt, Priority::Low)    
@@ -41,6 +43,13 @@ unsafe extern "C" fn peppy_dtilt(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 10.0);
     if macros::is_excute(agent) {
         AttackModule::clear_all(agent.module_accessor);
+    }
+}	
+unsafe extern "C" fn peppy_dtilt_snd(agent: &mut L2CAgentBase) {
+    frame(agent.lua_state_agent, 5.0);
+    if macros::is_excute(agent) {
+        macros::PLAY_SEQUENCE(agent, Hash40::new("seq_falco_rnd_attack"));
+        macros::PLAY_SE(agent, Hash40::new("se_common_swing_02"));
     }
 }	
 unsafe extern "C" fn peppy_dtilt_eff(agent: &mut L2CAgentBase) {
@@ -74,6 +83,17 @@ unsafe extern "C" fn peppy_utilt_eff(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 7.0);
     if macros::is_excute(agent) {
         macros::EFFECT_ALPHA(agent, Hash40::new("sys_attack_impact"), Hash40::new("handr"), 0, 0, 0, 0, 0, 0, 0.6, 0, 0, 0, 0, 0, 360, true, 0.4);
+    }
+}	
+unsafe extern "C" fn peppy_utilt_snd(agent: &mut L2CAgentBase) {
+    frame(agent.lua_state_agent, 4.0);
+    if macros::is_excute(agent) {
+        macros::PLAY_SEQUENCE(agent, Hash40::new("seq_falco_rnd_attack"));
+        macros::PLAY_SE(agent, Hash40::new("se_common_punch_kick_swing_s"));
+    }
+    frame(agent.lua_state_agent, 6.0);
+    if macros::is_excute(agent) {
+        macros::PLAY_SE(agent, Hash40::new("se_common_punch_kick_swing_m"));
     }
 }	
 unsafe extern "C" fn peppy_ftilt(agent: &mut L2CAgentBase) {

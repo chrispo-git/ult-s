@@ -67,12 +67,12 @@ unsafe extern "C" fn peppy_frame(fighter: &mut L2CFighterCommon) {
 						}
 					}
 				}
-				if frame > 15.0 && frame < 40.0 {
+				if frame > 15.0 && frame < 41.0 {
 					KineticModule::clear_speed_all(fighter.module_accessor);
 					let tether_pos = &mut Vector3f{ x: 0.0, y: 0.0, z: 0.0 };
 					ModelModule::joint_global_position(boma, Hash40::new("throw"), tether_pos, false);
 					if 
-						GroundModule::ray_check(boma, &Vector2f{ x: tether_pos.x, y: tether_pos.y}, &Vector2f{ x: 0.0, y: -8.0}, true) == 1 ||
+						GroundModule::ray_check(boma, &Vector2f{ x: tether_pos.x, y: tether_pos.y}, &Vector2f{ x: 0.0, y: -4.0}, true) == 1 ||
 						GroundModule::ray_check(boma, &Vector2f{ x: tether_pos.x, y: tether_pos.y}, &Vector2f{ x: 7.0*PostureModule::lr(boma), y: 0.0}, true) == 1 ||
 						AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_ALL)
 					{

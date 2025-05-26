@@ -21,6 +21,7 @@ pub fn install() {
     .set_costume([120, 121, 122, 123, 124, 125, 126, 127].to_vec())
     .acmd("game_attackairfpeppy", peppy_fair, Priority::Low)    
     .acmd("effect_attackairfpeppy", peppy_fair_eff, Priority::Low)    
+    .acmd("sound_attackairfpeppy", peppy_fair_snd, Priority::Low)    
     .acmd("game_attackairnpeppy", peppy_nair, Priority::Low)    
     .acmd("effect_attackairnpeppy", peppy_nair_eff, Priority::Low)    
     .acmd("sound_attackairnpeppy", peppy_nair_snd, Priority::Low)    

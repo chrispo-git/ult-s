@@ -21,10 +21,13 @@ pub fn install() {
     .set_costume([120, 121, 122, 123, 124, 125, 126, 127].to_vec())
     .acmd("game_throwf", peppy_fthrow, Priority::Low)    
     .acmd("effect_throwf", peppy_fthrow_eff, Priority::Low)    
+    .acmd("sound_throwf", peppy_fthrow_snd, Priority::Low)    
     .acmd("game_throwb", peppy_bthrow, Priority::Low)    
     .acmd("effect_throwb", peppy_bthrow_eff, Priority::Low)    
+    .acmd("sound_throwb", peppy_bthrow_snd, Priority::Low)    
     .acmd("game_throwlw", peppy_dthrow, Priority::Low)    
     .acmd("effect_throwlw", peppy_dthrow_eff, Priority::Low)    
+    .acmd("sound_throwlw", peppy_dthrow_snd, Priority::Low)  
     .acmd("game_catch", peppy_catch, Priority::Low)    
     .acmd("game_catchdash", peppy_catchdash, Priority::Low)    
     .acmd("game_catchturn", peppy_catchturn, Priority::Low)    
@@ -46,6 +49,12 @@ unsafe extern "C" fn peppy_fthrow(fighter: &mut L2CAgentBase) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
 }
+unsafe extern "C" fn peppy_fthrow_snd(fighter: &mut L2CAgentBase) {
+		frame(fighter.lua_state_agent, 18.0);
+		if macros::is_excute(fighter) {
+            macros::PLAY_SE(fighter, Hash40::new("se_common_bomb_l"));
+		}
+}
 unsafe extern "C" fn peppy_fthrow_eff(fighter: &mut L2CAgentBase) {
 		frame(fighter.lua_state_agent, 18.0);
 		if macros::is_excute(fighter) {
@@ -64,6 +73,12 @@ unsafe extern "C" fn peppy_bthrow(agent: &mut L2CAgentBase) {
 		macros::ATK_HIT_ABS(agent, *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, Hash40::new("throw"), WorkModule::get_int64(agent.module_accessor,*FIGHTER_STATUS_THROW_WORK_INT_TARGET_OBJECT), WorkModule::get_int64(agent.module_accessor,*FIGHTER_STATUS_THROW_WORK_INT_TARGET_HIT_GROUP), WorkModule::get_int64(agent.module_accessor,*FIGHTER_STATUS_THROW_WORK_INT_TARGET_HIT_NO));
 		AttackModule::clear_all(agent.module_accessor);
     }
+}
+unsafe extern "C" fn peppy_bthrow_snd(fighter: &mut L2CAgentBase) {
+		frame(fighter.lua_state_agent, 10.0);
+		if macros::is_excute(fighter) {
+            macros::PLAY_SE(fighter, Hash40::new("se_common_throw_02"));
+		}
 }
 unsafe extern "C" fn peppy_bthrow_eff(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 12.0);
@@ -101,6 +116,16 @@ unsafe extern "C" fn peppy_dthrow_eff(agent: &mut L2CAgentBase) {
         macros::LANDING_EFFECT(agent, Hash40::new("sys_down_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.7, 0, 0, 0, 0, 0, 0, false);
         macros::LAST_EFFECT_SET_RATE(agent, 1);
     }
+}
+unsafe extern "C" fn peppy_dthrow_snd(fighter: &mut L2CAgentBase) {
+		frame(fighter.lua_state_agent, 16.0);
+		if macros::is_excute(fighter) {
+            macros::PLAY_SE(fighter, Hash40::new("se_common_throw_02"));
+		}
+		frame(fighter.lua_state_agent, 21.0);
+		if macros::is_excute(fighter) {
+            macros::PLAY_SE(fighter, Hash40::new("se_common_down_soil_s"));
+		}
 }
 unsafe extern "C" fn peppy_catch(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 6.0);
