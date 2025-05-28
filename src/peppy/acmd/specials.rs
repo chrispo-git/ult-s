@@ -49,10 +49,6 @@ unsafe extern "C" fn peppy_shine_snd(agent: &mut L2CAgentBase) {
     if macros::is_excute(agent) {
         macros::PLAY_SE(agent, Hash40::new("se_falco_special_l01"));
     }
-    frame(agent.lua_state_agent, 3.0);
-    if macros::is_excute(agent) {
-        macros::PLAY_SE(agent, Hash40::new("vc_falco_special_l01"));
-    }
     frame(agent.lua_state_agent, 18.0);
     if macros::is_excute(agent) {
         macros::PLAY_SE(agent, Hash40::new("se_falco_special_l03"));
