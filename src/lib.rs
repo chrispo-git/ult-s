@@ -246,7 +246,6 @@ mod luigi;
 mod mario;
 mod mariod;
 mod marth;
-mod masked;
 mod master;
 mod metaknight;
 mod mewtwo;
@@ -355,7 +354,6 @@ pub extern "C" fn main() {
             allow_ui_chara_hash_online(0xda4cbcb12); //toad
             allow_ui_chara_hash_online(0x12e2fb36c6); //bomberman
             allow_ui_chara_hash_online(0x189bd7b932); //sandbag
-            allow_ui_chara_hash_online(0x124d54553d); //masked man
         }
     }
 	
@@ -814,7 +812,6 @@ pub extern "C" fn main() {
     bomberman::install();
     toad::install();
     sandbag::install();
-    masked::install();
     
     println!("added chars installed");
 
