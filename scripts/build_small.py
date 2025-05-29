@@ -78,6 +78,8 @@ if os.path.exists(r'target'):
             if os.path.exists(r'romfs'):
                 print("Starting copy")
                 copytree(r'romfs/fighter/common', r'releases/ultimate/mods/Ultimate S Arcropolis (plugin and common files only)/fighter/common')
+                copytree(r'romfs/prebuilt', r'releases/ultimate/mods/Ultimate S Arcropolis (plugin and common files only)/prebuilt')
+                shutil.copy(r'romfs/config_param.toml', r'releases/ultimate/mods/Ultimate S Arcropolis (plugin and common files only)/config_param.toml')
                 print("Copying from romfs finished, now zipping")
             else:
                 print("Error! No romfs folder! Please check your install")
