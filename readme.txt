@@ -88,7 +88,7 @@ The people that make this mod what it is!
 chrispo - Coding, Animation, Weapon Modelling, Character Balance, Stages, UI
 Challat - Animations, Weapon and Character Modelling, Rigging
 Eriizer - UI, renders
-MonkeyMike - Character Balance
+MasherMike - Character Balance
 mRama - Coding, Animation, Weapon Modelling, UI, original Sandbag mod, original Masked Man Mod
 
 -Major Contributors-
@@ -96,17 +96,98 @@ Angst - Stages
 C# - Stages 
 Ella - Character Balance
 
+-Added Character Credits-
+
+Toad:
+chrispo - Coding, Animation, Modelling
+mRama - Animation
+SneakyKNG - Modelling
+SquidEnthusiast - Render
+
+Rayman:
+chrispo - Coding, Animation
+Challat - Animation, Modelling
+mRama - Animation
+
+Bomberman:
+chrispo - Coding, Animation, Modelling
+Challat - Modelling, Animation
+mRama - Animation
+Eriizer - Alternate Costumes, Render
+Kybbler - Victory Camera Animations
+
+Sandbag:
+mRama - Coding, Animation, Modelling
+chrispo - Coding
+Challat - Modelling
+Eriizer - Render, Alternate Costumes
+MasherMike - Balance
+Doctor Dark - Animation
+
+Masked Man:
+mRama - Coding, Animation, Modelling
+HappyMillia - Original PMEX Moveset
+Moe - Original PMEX Moveset
+Placebo - Original PMEX Moveset
+Nintends - Original PMEX Moveset
+Porko - Original PMEX Moveset
+LKE Studios - Porting Animations 
+Nano - Modelling
+chrispo - Coding
+C# - Coding
+Cattail - Effects
+
+Peppy:
+chrispo - Coding, Animation, Modelling
+Hero-Zero - Modelling
+
+Bandana Dee:
+mRama - Coding, Animation, Modelling
+NickirixXT - Original Animations
+KingBobStudios - Original Animations 
+HappyMillia - Original Animations
+Kybbler - Porting/Creating Animations
+BioToxtrix - Porting/Creating Animations
+SpiritNyx - Animation
+milktoastmonika - Animation
+Challat - Animation
+chrispo - Animation
+PhazoGanon - Coding 
+WuBoytH - Coding 
+C# - Coding
+Eriizer - Render, Alternate Costumes
+Cattail - Modelling
+
+Funky Kong:
+mRama - Coding, Animation, Modelling
+BezBZ - Modelling
+Silent - Alternate Costumes
+LN_310 - Alternate Costumes
+Nano - Modelling
+BeyondSmash - Modelling
+SushiiZ - Animation
+Doctor Dark - Animation
+Challat - Animation
+PhazoGanon - Animation
+SpiritNyx - Animation
+Eriizer - Alternate Costumes, Render
+C# - Coding
+chrispo - Coding
+WuBoytH - Coding
+LKE Studios - Coding
+Kybbler - Classic Mode Route
+
+
 -Special Thanks to-
 AParticularUser - Ridley Dair Animation
-blujay - Stage Select Screen, Additional Control Buttons, 1 Frame Delay Removal, Arena Latency Slider
+blujay - Stage Select Screen, Additional Control Buttons, 1 Frame Delay Removal
 Chaos.A - Mario Nair animation
 CoolSonicKirby - Porting of Additional Control Buttons
 Devory - Colloseum, Gamecube Stages, Ready to Fight UI
 Ginn. - Original Paper Mario Stage
 iOZ_MintyFresh - Hexagon UI
 Joben - Stage Select Screen
-Kybbler - Bomberman Victory Screen Camera
-LN_310 - ZSS Model, Rauru's Blessing
+LN_310 - Rauru's Blessing
 LKE Studios - DK Utaunt animation
 LuXejin - Sonic Dtaunt animation
 MaroonRed - Mario nair sound
@@ -117,9 +198,8 @@ Naps - Sonic nair animation
 Nozzly - CPU adjustments
 PhazoGanon - Animations
 Saminate - Dr. Mario animations
-SneakyKNG - Toad Rigging
-SquidEnthusiast - Toad Render
 Star Warrior - Stages 
-SushiiZ - Richter Dash Attack
+SushiiZ - Richter Dash Attack Animation
+Stephen J Plant - Announcer Calls
 willy_crescent - Ganon's Tower, General Stage Help
 WuBoytH - General Major help
