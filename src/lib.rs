@@ -246,7 +246,6 @@ mod luigi;
 mod mario;
 mod mariod;
 mod marth;
-mod masked;
 mod master;
 mod metaknight;
 mod mewtwo;
@@ -277,7 +276,6 @@ mod rockman;
 mod rosetta;
 mod roy;
 mod ryu;
-mod sandbag;
 mod samus;
 mod samusd;
 mod sheik;
@@ -355,8 +353,6 @@ pub extern "C" fn main() {
             allow_ui_chara_hash_online(0xf1062d2e5); //rayman
             allow_ui_chara_hash_online(0xda4cbcb12); //toad
             allow_ui_chara_hash_online(0x12e2fb36c6); //bomberman
-            allow_ui_chara_hash_online(0x189bd7b932); //sandbag
-            allow_ui_chara_hash_online(0x124d54553d); //masked man
         }
     }
 	
@@ -814,8 +810,6 @@ pub extern "C" fn main() {
     rayman::install();
     bomberman::install();
     toad::install();
-    sandbag::install();
-    masked::install();
     peppy::install();
     
     println!("added chars installed");
