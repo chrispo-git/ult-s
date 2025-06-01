@@ -6,7 +6,7 @@ A free to play large overhaul of Super Smash Bros. Ultimate that aims to improve
 Go to our discord [here](https://discord.gg/YXaPzC5WGd)
 
 
-Check out the credits [here](readme.txt)
+Check out the credits [here](credits.txt)
 
 ## Legal Disclaimer
 Ultimate S and its creators do not condone any forms of piracy or other illegal actions that may damage Nintendo or other relevant copyright holders.
