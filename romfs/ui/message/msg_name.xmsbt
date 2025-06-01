@@ -16,4 +16,58 @@
     <text>The Man in
 the Mask</text>
   </entry>
+  <entry label="nam_chr0_00_bandana">
+    <text>Bandana Dee</text>
+  </entry>
+  <entry label="nam_chr1_00_bandana">
+    <text>Bandana Dee</text>
+  </entry>
+  <entry label="nam_chr2_00_bandana">
+    <text>BANDANA DEE</text>
+  </entry>
+  <entry label="nam_chr3_00_bandana">
+    <text>BANDANA DEE</text>
+  </entry>
+  <entry label="nam_stage_name_00_bandana">
+    <text>Dreamland's Warrior</text>
+  </entry>
+  <entry label="nam_special_lower_00_bandana">
+    <text>Parasol Twirl</text>
+  </entry>
+  <entry label="nam_special_lower_help_00_bandana">
+    <text>Bandana Dee dashes with his umbrella while
+dealing damage to anyone in his path.</text>
+  </entry>
+  <entry label="nam_special_normal_00_bandana">
+    <text>Waddle Triple Throw</text>
+  </entry>
+  <entry label="nam_special_normal_help_00_bandana">
+    <text>Bandana Dee throws up to three spears in
+the direction he's facing. The longer it is charged,
+the more spears he throws.</text>
+  </entry>
+  <entry label="nam_special_side_00_bandana">
+    <text>Wave beam</text>
+  </entry>
+  <entry label="nam_special_side_help_00_bandana">
+    <text>Bandana Dee shoots out an electric wave beam
+which damages opponents. If this move is fully charged,
+the beam will explode on impact or before vanishing.</text>
+  </entry>
+  <entry label="nam_special_upper_00_bandana">
+    <text>Waddle Copter</text>
+  </entry>
+  <entry label="nam_special_upper_help_00_bandana">
+    <text>Spins his spear over his head and flies
+upwards.</text>
+  </entry>
+  <entry label="nam_final_arts_bandana">
+    <text>Megaton Punch</text>
+  </entry>
+  <entry label="nam_final_arts_help_bandana">
+    <text>Bandana Dee jumps up into the air. He then charges
+dowards towards the stage and slams into the ground
+with a Megaton Punch. This punch shakes the ground 
+and damages any opponents around him.</text>
+  </entry>
 </xmsbt>
