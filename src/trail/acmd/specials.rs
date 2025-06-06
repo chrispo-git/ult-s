@@ -15,21 +15,6 @@ use crate::util::*;
 use super::*;
 
 pub fn install() {
-    Agent::new("trail")
-    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
-    .acmd("game_speciallw", sora_downb, Priority::Low)    
-    .acmd("game_specialairlw", sora_downb, Priority::Low)    
-	.acmd("effect_speciallw", sora_downb_eff, Priority::Low)    
-    .acmd("effect_specialairlw", sora_downb_eff, Priority::Low)    
-	.acmd("sound_speciallw", sora_downb_snd, Priority::Low)    
-    .acmd("sound_specialairlw", sora_downb_snd, Priority::Low)    
-	.acmd("sound_speciallwstart", sora_downb_start_snd, Priority::Low)    
-    .acmd("sound_specialairlwstart", sora_downb_start_snd, Priority::Low)    
-	.acmd("game_speciallwstart", sora_downb_start, Priority::Low)    
-    .acmd("game_specialairlwstart", sora_downb_start, Priority::Low)    
-	.acmd("effect_speciallwstart", sora_downb_start_eff, Priority::Low)    
-    .acmd("effect_specialairlwstart", sora_downb_start_eff, Priority::Low)    
-	.install();
 
     Agent::new("trail_thunder")
     .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
@@ -40,70 +25,6 @@ pub fn install() {
 	.install();
 }
 
-unsafe extern "C" fn sora_downb(fighter: &mut L2CAgentBase) {
-    let lua_state = fighter.lua_state_agent;
-        frame(fighter.lua_state_agent, 6.0);
-        if macros::is_excute(fighter) {
-            macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("hip"), /*Damage*/ 3.0, /*Angle*/ 60, /*KBG*/ 100, /*FKB*/ 80, /*BKB*/ 0, /*Size*/ 6.2, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.75, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_G, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_cutup"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_SWORD);
-            macros::ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("hip"), /*Damage*/ 3.0, /*Angle*/ 35, /*KBG*/ 100, /*FKB*/ 80, /*BKB*/ 0, /*Size*/ 6.2, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.75, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_A, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_cutup"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_SWORD);
-        }
-        frame(fighter.lua_state_agent, 22.0);
-        if macros::is_excute(fighter) {
-            AttackModule::clear_all(fighter.module_accessor);
-        }
-    }
-unsafe extern "C" fn sora_downb_eff(fighter: &mut L2CAgentBase) {
-    let lua_state = fighter.lua_state_agent;
-        
-}
-unsafe extern "C" fn sora_downb_snd(fighter: &mut L2CAgentBase) {
-    let lua_state = fighter.lua_state_agent;
-        frame(fighter.lua_state_agent, 1.0);
-        if macros::is_excute(fighter) {
-            macros::PLAY_SEQUENCE(fighter, Hash40::new("seq_trail_rnd_smash_s"));
-        }
-        frame(fighter.lua_state_agent, 3.0);
-        if macros::is_excute(fighter) {
-            macros::PLAY_SE(fighter, Hash40::new("se_trail_special_h01"));
-            macros::PLAY_SE(fighter, Hash40::new("se_trail_special_h02"));
-        }
-        frame(fighter.lua_state_agent, 6.0);
-        if macros::is_excute(fighter) {
-            macros::PLAY_SE(fighter, Hash40::new("se_trail_special_h03"));
-        }
-        frame(fighter.lua_state_agent, 9.0);
-        if macros::is_excute(fighter) {
-            macros::PLAY_SE(fighter, Hash40::new("se_trail_special_h02"));
-        }
-        frame(fighter.lua_state_agent, 12.0);
-        if macros::is_excute(fighter) {
-            macros::PLAY_SE(fighter, Hash40::new("se_trail_special_h01"));
-        }
-        frame(fighter.lua_state_agent, 15.0);
-        if macros::is_excute(fighter) {
-            macros::PLAY_SE(fighter, Hash40::new("se_trail_special_h02"));
-        }
-        frame(fighter.lua_state_agent, 18.0);
-        if macros::is_excute(fighter) {
-            macros::PLAY_SE(fighter, Hash40::new("se_trail_special_h03"));
-        }
-        frame(fighter.lua_state_agent, 21.0);
-        if macros::is_excute(fighter) {
-            macros::PLAY_SE(fighter, Hash40::new("se_trail_special_h02"));
-        }
-}
-unsafe extern "C" fn sora_downb_start_snd(fighter: &mut L2CAgentBase) {
-    let lua_state = fighter.lua_state_agent;
-}
-
-unsafe extern "C" fn sora_downb_start(fighter: &mut L2CAgentBase) {
-    let lua_state = fighter.lua_state_agent;
-        macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.8);
-    }
-unsafe extern "C" fn sora_downb_start_eff(fighter: &mut L2CAgentBase) {
-    let lua_state = fighter.lua_state_agent;
-        
-}
 unsafe extern "C" fn thundaga_1(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
         frame(fighter.lua_state_agent, 1.0);
