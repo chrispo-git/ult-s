@@ -126,7 +126,7 @@ if os.path.exists(r'target'):
             f = open(r'releases/ultimate/mods/Ultimate S Lite/version.txt',"w")
             f.write(f"v.{inputs}-LITE")
             f.close()
-            shutil.copy(r'readme.txt', r'releases/readme.txt')
+            shutil.copy(r'readme-lite.txt', r'releases/readme.txt')
             shutil.copy(r'credits.txt', r'releases/credits.txt')
             if os.path.exists(r'releases/Ultimate S Lite.zip'):
                 os.remove(r'releases/Ultimate S Lite.zip')

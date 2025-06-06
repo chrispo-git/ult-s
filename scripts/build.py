@@ -95,6 +95,7 @@ if os.path.exists(r'target'):
             f.write(f"v.{inputs}")
             f.close()
             shutil.copy(r'readme.txt', r'releases/readme.txt')
+            shutil.copy(r'credits.txt', r'releases/credits.txt')
             copytree(r'ultimate-s-setup', r'releases')
 
             if os.path.exists(r'releases/Ultimate S Arcropolis.zip'):
