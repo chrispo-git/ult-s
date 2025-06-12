@@ -1,19 +1,8 @@
-Thank you for downloading Ultimate S!
+Thank you for downloading Ultimate S Lite!
 
 
 -Instructions-
-1. Run the "Ultimate S Setup.exe" that comes with your download
-2. Enable and Disable whichever characters you would like to, then click "Update" 
-3. If you have an internet connection, press "Update Dependencies" to get the latest dependencies automatically
-4. You're done! Now you can either
-a. move Ultimate S manually - copy your "atmosphere" and "ultimate" mod folders to the root of your SD card
-b. move Ultimate S automatically - press "Install Ultimate S To Folder" and select the root of your SD card (or sdmc folder on emulator)
-
-If you are on mac or linux - the older python based setup tool has been included for compatibility:
-1. Run "old_setup_tool.py" that comes with your download
-2. Pick either lite or full, and then specify which characters you would like to keep or remove
-3. download dependencies from the internet
-4. set up on your SD card/folder
+Copy the atmosphere and ultimate folders to the root of your SD card
 
 
 If you haven't set up smash ultimate modding as a whole, here's some wonderful guides!
@@ -23,8 +12,7 @@ Modding Smash Ultimate on yuzu - https://youtu.be/uKKQl7QFBMA
 
 
 -Dependecies-
-Dependencies should come with the download, and the setup tool should update them for you also, 
-but if for some reason they aren't there, or your game is crashing, try updating these.
+Dependencies should come with the download, but if for some reason they aren't there, or your game is crashing, try updating these.
 
 libparam_config.nro - https://github.com/CSharpM7/lib_paramconfig
 libcsk_collection.nro - https://gamebanana.com/mods/499008 (just grab the nro file from this. Do NOT grab the files in ultimate/mods from this download)
@@ -65,13 +53,8 @@ A: Try going through these steps:
 1. Check your title screen, does it say Arcropolis in the top right? If not, arcropolis isn't running, make sure you have skyline AND arcropolis installed correctly.
 2. Check your title screen, what version is it? Make sure it is 13.0.3, and no other version.
 3. Make sure that Ultimate S is enabled (either by mod manager on the switch, or inside of the mods folder on Yuzu).
-4. Make sure you ran "Ultimate S Setup Tool.exe" and chose your preferred options (you can check in ultimate/ult-s to see which characters you have enabled)
-5. If you are on emulator, make sure that there is a file called "legacy_discovery" at ultimate\arcropolis\config\2470593114292646594\15904440331188662786
+4. If you are on emulator, make sure that there is a file called "legacy_discovery" at ultimate\arcropolis\config\2470593114292646594\15904440331188662786
 If there isn't, you can make one by creating a file (no extension on the end) with "True" written in it
-
-
-Q: "I want to remove X character's changes"/"I want to just have Y character"
-A: Run "Ultimate S Setup.exe", it allows you to pick and choose which Ultimate S movesets you have.
 
 
 

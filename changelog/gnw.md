@@ -299,7 +299,7 @@ Autocancel - 1-9/38+
 |-|-|-|-|-|-|-|-|-|-|
 |Frame 9| 0|  3.0%|  367|  100 (Set)|  100| Reflectable|
 |Hitboxes terminated on Frame 14|
-|Frame 16| 0|  9.0%|  97|  47|  98| Reflectable|
+|Frame 16| 0|  9.0%|  97|  47|  90| Reflectable|
 |Hitboxes terminated on Frame 18|
 
 

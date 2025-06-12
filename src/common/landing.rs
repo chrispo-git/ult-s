@@ -88,16 +88,23 @@ unsafe extern "C" fn respawn_wakeup(fighter : &mut L2CFighterCommon) {
 		let end_frame = MotionModule::end_frame(boma);
 		let is_end = end_frame-frame < 3.0;
 		let situation_kind = StatusModule::situation_kind(boma);
+    	let fighter_kind = smash::app::utility::get_kind(boma);
 		let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-        if [*FIGHTER_STATUS_KIND_REBIRTH].contains(&status_kind) {
+        if [*FIGHTER_STATUS_KIND_REBIRTH].contains(&status_kind) && ![*FIGHTER_KIND_PFUSHIGISOU, *FIGHTER_KIND_PZENIGAME, *FIGHTER_KIND_PLIZARDON].contains(&fighter_kind) {
 			if !PREVENT_LOOP[ENTRY_ID] {
 				if hash40("wait") == MotionModule::motion_kind(boma) {
-					MotionModule::change_motion(fighter.module_accessor, Hash40::new("down_wait_u"), -1.0, 1.0, false, 0.0, false, false);
-				} else if hash40("down_wait_u") == MotionModule::motion_kind(boma) && is_end {
 					MotionModule::change_motion(fighter.module_accessor, Hash40::new("down_stand_u"), -1.0, 1.0, false, 0.0, false, false);
-				} else if hash40("down_stand_u") == MotionModule::motion_kind(boma) && is_end {
-					MotionModule::change_motion(fighter.module_accessor, Hash40::new("wait"), -1.0, 1.0, false, 0.0, false, false);
-					PREVENT_LOOP[ENTRY_ID] = true;
+				} else if hash40("down_stand_u") == MotionModule::motion_kind(boma) {
+					if is_end {
+						MotionModule::change_motion(fighter.module_accessor, Hash40::new("wait"), -1.0, 1.0, false, 0.0, false, false);
+						PREVENT_LOOP[ENTRY_ID] = true;
+					} else {
+						if frame < 3.0 {
+							MotionModule::set_rate(fighter.module_accessor, 0.05);
+						} else {
+							MotionModule::set_rate(fighter.module_accessor, 1.0);
+						}
+					}
 				}
 			}
 			
@@ -112,15 +119,12 @@ pub(crate) fn is_edge_cancel(fighter_kind : i32, status_kind : i32, is_added : b
 	let edge_cancel = [
 		[*FIGHTER_KIND_LUCARIO, *FIGHTER_STATUS_KIND_ATTACK_DASH],
 		[*FIGHTER_KIND_LUCARIO, *FIGHTER_STATUS_KIND_SPECIAL_LW],
-		[*FIGHTER_KIND_DIDDY, *FIGHTER_STATUS_KIND_ATTACK_DASH],
 		[*FIGHTER_KIND_DONKEY, *FIGHTER_STATUS_KIND_ATTACK_DASH],
 		[*FIGHTER_KIND_BUDDY, *FIGHTER_STATUS_KIND_ATTACK_DASH],
-		[*FIGHTER_KIND_LITTLEMAC, *FIGHTER_STATUS_KIND_ATTACK_DASH],
 		[*FIGHTER_KIND_KAMUI, *FIGHTER_STATUS_KIND_ATTACK_DASH],
 		[*FIGHTER_KIND_PURIN, *FIGHTER_STATUS_KIND_ATTACK_DASH],
 		[*FIGHTER_KIND_CAPTAIN, *FIGHTER_STATUS_KIND_ATTACK_DASH],
 		[*FIGHTER_KIND_RIDLEY, *FIGHTER_STATUS_KIND_LANDING_FALL_SPECIAL],
-		[*FIGHTER_KIND_RIDLEY, *FIGHTER_STATUS_KIND_ATTACK_DASH],
 		[*FIGHTER_KIND_RICHTER, *FIGHTER_STATUS_KIND_ATTACK_LW3],
 		[*FIGHTER_KIND_SAMUS, *FIGHTER_STATUS_KIND_ATTACK_LW3],
 		[*FIGHTER_KIND_SONIC, *FIGHTER_STATUS_KIND_SPECIAL_S],
@@ -128,7 +132,6 @@ pub(crate) fn is_edge_cancel(fighter_kind : i32, status_kind : i32, is_added : b
 		[*FIGHTER_KIND_YOUNGLINK, *FIGHTER_STATUS_KIND_ATTACK_DASH],
 		[*FIGHTER_KIND_CAPTAIN, *FIGHTER_STATUS_KIND_SPECIAL_LW],
 		[*FIGHTER_KIND_EDGE, *FIGHTER_STATUS_KIND_ATTACK_LW3],
-		[*FIGHTER_KIND_MIIGUNNER, *FIGHTER_STATUS_KIND_ATTACK_DASH],
 		[*FIGHTER_KIND_FALCO, *FIGHTER_STATUS_KIND_ATTACK_DASH],
 		[-*FIGHTER_KIND_PIKMIN, *FIGHTER_STATUS_KIND_RUN_BRAKE],
 		[*FIGHTER_KIND_KIRBY, *FIGHTER_KIRBY_STATUS_KIND_PIKMIN_SPECIAL_N],

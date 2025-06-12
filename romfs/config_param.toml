@@ -273,6 +273,13 @@ slots = [0,1,2,3,4,5,6,7]
 
 
 # JACK / JOKER
+[[param_int]]
+param = "escape_num_max"
+subparam = "reflector_radius_size"
+value = 10
+kinds = ["jack"]
+slots = [0,1,2,3,4,5,6,7]
+
 [[param_float]]
 param = "param_special_lw"
 subparam = "counter_attack_power_mul"
@@ -288,9 +295,44 @@ kinds = ["jack"]
 slots = [0,1,2,3,4,5,6,7]
 
 [[param_float]]
+param = "param_special_lw"
+subparam = "guard_rebel_gauge"
+value = 11.943
+kinds = ["jack"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_special_lw"
+subparam = "rebel_gauge_add"
+value = 0.00925
+kinds = ["jack"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_special_lw"
+subparam = "shield_radius_size"
+value = 8.0
+kinds = ["jack"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_special_lw"
+subparam = "reflector_radius_size"
+value = 9.0
+kinds = ["jack"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
 param = "param_private"
 subparam = "rebel_gauge_damage_add"
 value = 1.1
+kinds = ["jack"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_private"
+subparam = "rebel_gauge_add"
+value = 0.0
 kinds = ["jack"]
 slots = [0,1,2,3,4,5,6,7]
 
@@ -522,6 +564,15 @@ param = "param_special_lw"
 subparam = "start_air_acl_x"
 value = 0.00375
 kinds = ["lucina"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# LUIGI
+[[param_float]]
+param = "param_special_lw"
+subparam = "buoyancy_max"
+value = 1.4
+kinds = ["luigi"]
 slots = [0,1,2,3,4,5,6,7]
 
 
@@ -1229,50 +1280,6 @@ param = "param_holywater"
 subparam = "fire_pillar_life_frame"
 value = 45
 kinds = ["richter", "richter_holywater"]
-slots = [0,1,2,3,4,5,6,7]
-
-
-# RIDLEY
-[[param_float]]
-param = "param_special_s"
-subparam = "speed_x_mul_on_air"
-value = 1
-kinds = ["ridley"]
-slots = [0,1,2,3,4,5,6,7]
-
-[[param_float]]
-param = "param_special_s"
-subparam = "catch_speed_x_mul"
-value = 0.9
-kinds = ["ridley"]
-slots = [0,1,2,3,4,5,6,7]
-
-[[param_float]]
-param = "param_special_s"
-subparam = "catch_accel_y"
-value = 0
-kinds = ["ridley"]
-slots = [0,1,2,3,4,5,6,7]
-
-[[param_float]]
-param = "param_special_s"
-subparam = "catch_max_speed_y"
-value = -0.2
-kinds = ["ridley"]
-slots = [0,1,2,3,4,5,6,7]
-
-[[param_float]]
-param = "param_special_s"
-subparam = "brake_x_on_drag"
-value = 0.005
-kinds = ["ridley"]
-slots = [0,1,2,3,4,5,6,7]
-
-[[param_float]]
-param = "param_special_s"
-subparam = "accel_x_on_grab"
-value = 0.005
-kinds = ["ridley"]
 slots = [0,1,2,3,4,5,6,7]
 
 
