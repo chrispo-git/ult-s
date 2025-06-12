@@ -52,7 +52,11 @@ unsafe extern "C" fn peppy_frame(fighter: &mut L2CFighterCommon) {
 			} else {
 				DO_STALL[ENTRY_ID] = false;
 			};
-			if [hash40("special_air_s_start"), hash40("special_s_start")].contains(&motion_kind) {
+			if [hash40("special_s_start")].contains(&motion_kind) {
+				StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_JUMP, true);
+            	KineticModule::add_speed(boma, &Vector3f::new(0.0, -2.0, 0.0));
+			}
+			if [hash40("special_air_s_start")].contains(&motion_kind) {
 				if frame > 14.0 && frame < 35.0 {
 					let next_effect = EffectModule::req_on_joint(boma, smash::phx::Hash40::new("sys_raygun_bullet"), smash::phx::Hash40::new("throw"), &Vector3f{x: 0.0, y: 2.0, z: 0.0} as *const Vector3f, &Vector3f{x: 0.0, y: 60.0, z: 90.0} as *const Vector3f, 0.25, &Vector3f{x: 0.0, y: 0.0, z: 0.0} as *const Vector3f, &Vector3f{x: 0.0, y: 0.0, z: 0.0} as *const Vector3f, true, 0, 0, 0) as u32;
 					TETHER_EFFECTS.push(next_effect);
@@ -162,9 +166,6 @@ unsafe extern "C" fn peppy_frame(fighter: &mut L2CFighterCommon) {
 			if StatusModule::situation_kind(boma) != *SITUATION_KIND_AIR {
 				HAS_DOWNB[ENTRY_ID] = false;
 				DO_STALL[ENTRY_ID] = false;
-				CAN_SIDEB[ENTRY_ID] = 1;
-			} else {
-				CAN_SIDEB[ENTRY_ID] = 0;
 			}
 			if [*FIGHTER_STATUS_KIND_SPECIAL_N].contains(&status_kind) {
 				if StatusModule::is_situation_changed(boma) {
