@@ -357,7 +357,7 @@ unsafe extern "C" fn peppy_dsmash_eff(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 11.0);
     if macros::is_excute(agent) {
         macros::QUAKE(agent, *CAMERA_QUAKE_KIND_M);
-		macros::EFFECT(agent, Hash40::new("sys_bomb_b"), Hash40::new("throw"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
+		macros::EFFECT(agent, Hash40::new("sys_bomb_b"), Hash40::new("throw"), 0, 0, 0, 0, 0, 0, 0.75, 0, 0, 0, 0, 0, 0, false);
     }
 }	
 unsafe extern "C" fn peppy_dsmash_snd(agent: &mut L2CAgentBase) {
