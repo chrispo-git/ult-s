@@ -54,7 +54,7 @@ unsafe extern "C" fn peppy_frame(fighter: &mut L2CFighterCommon) {
 			};
 			if [hash40("special_s_start")].contains(&motion_kind) {
 				StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_JUMP, true);
-            	KineticModule::add_speed(boma, &Vector3f::new(0.0, -2.0, 0.0));
+            	KineticModule::add_speed(boma, smash::phx::Vector3f { x: 0.0, y: -2.0, z: 0.0 });
 			}
 			if [hash40("special_air_s_start")].contains(&motion_kind) {
 				if frame > 14.0 && frame < 35.0 {
