@@ -61,6 +61,15 @@ unsafe extern "C" fn peppy_frame(fighter: &mut L2CFighterCommon) {
 				}
 			}
 			if [hash40("special_air_s_start")].contains(&motion_kind) {
+				if (frame as i32)  == 14 {
+					macros::PLAY_SE(fighter, Hash40::new("se_item_beamsword_m"));
+					macros::PLAY_SE(fighter, Hash40::new("se_item_beamsword_m"));
+					macros::PLAY_SE(fighter, Hash40::new("se_item_beamsword_m"));
+					macros::PLAY_SE(fighter, Hash40::new("se_item_magicball_warpin"));
+				}
+				if (frame as i32)  == 41 {
+					macros::PLAY_SE(fighter, Hash40::new("vc_falco_heavyget"));
+				}
 				if frame > 14.0 && frame < 35.0 {
 					let next_effect = EffectModule::req_on_joint(boma, smash::phx::Hash40::new("sys_raygun_bullet"), smash::phx::Hash40::new("throw"), &Vector3f{x: 0.0, y: 2.0, z: 0.0} as *const Vector3f, &Vector3f{x: 0.0, y: 60.0, z: 90.0} as *const Vector3f, 0.25, &Vector3f{x: 0.0, y: 0.0, z: 0.0} as *const Vector3f, &Vector3f{x: 0.0, y: 0.0, z: 0.0} as *const Vector3f, true, 0, 0, 0) as u32;
 					TETHER_EFFECTS.push(next_effect);
@@ -114,6 +123,11 @@ unsafe extern "C" fn peppy_frame(fighter: &mut L2CFighterCommon) {
 							break;
 						}
 					}
+				}
+				if (frame as i32) < 2{
+					macros::PLAY_SE(fighter, Hash40::new("se_item_magicball_warpout"));
+					macros::PLAY_SE(fighter, Hash40::new("se_common_metal_landing_s"));
+        			macros::PLAY_SEQUENCE(fighter, Hash40::new("seq_falco_rnd_attack"));
 				}
 				if end_frame-frame < 5.0 {
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL, true);
