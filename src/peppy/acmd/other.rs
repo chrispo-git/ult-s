@@ -34,11 +34,6 @@ unsafe extern "C" fn peppy_utaunt_eff(agent: &mut L2CAgentBase) {
 unsafe extern "C" fn peppy_utaunt_snd(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 10.0); 
     if macros::is_excute(agent) {
-        let rand_num = smash::app::sv_math::rand(hash40("fighter"), 10);
-        if rand_num == 5 {
-            macros::PLAY_SE(agent, Hash40::new("vc_falco_appeal03"));
-        } else {
-            macros::PLAY_SE(agent, Hash40::new("vc_falco_win02"));
-        }
+        macros::PLAY_SE(agent, Hash40::new("vc_falco_appeal03"));
     }
 }
