@@ -150,7 +150,7 @@ unsafe extern "C" fn peppy_frame(fighter: &mut L2CFighterCommon) {
 					if DO_STALL[ENTRY_ID] {
 						KineticModule::suspend_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_GRAVITY);
 						KineticModule::suspend_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_CONTROL);
-                        macros::SET_SPEED_EX(fighter, 0.0, -0.227, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+                        macros::SET_SPEED_EX(fighter, 0.0, -0.4, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
 					};
 				};
 				if frame as i32 == 8 {
