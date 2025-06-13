@@ -354,13 +354,6 @@ unsafe extern "C" fn peppy_dsmash_eff(agent: &mut L2CAgentBase) {
     if macros::is_excute(agent) {
         macros::EFFECT(agent, Hash40::new("sys_smash_flash"), Hash40::new("haver"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, true);
     }
-    frame(agent.lua_state_agent, 5.0);
-    if macros::is_excute(agent) {
-        macros::EFFECT_FOLLOW(agent, Hash40::new("sys_attack_line"), Hash40::new("top"), 0, 1.8, -3.5, 0, 0, 0, 0.9, true);
-        macros::EFFECT_FOLLOW(agent, Hash40::new("sys_attack_line"), Hash40::new("top"), 0, 1.8, 3.5, 180, 0, 0, 0.9, true);
-        macros::EFFECT(agent, Hash40::new("sys_attack_impact"), Hash40::new("top"), 0, 2.5, 11, 0, 0, 0, 1.3, 0, 0, 0, 0, 0, 360, true);
-        macros::EFFECT(agent, Hash40::new("sys_attack_impact"), Hash40::new("top"), 0, 2.5, -12, 0, 0, 0, 1.3, 0, 0, 0, 0, 0, 360, true);
-    }
     frame(agent.lua_state_agent, 11.0);
     if macros::is_excute(agent) {
         macros::QUAKE(agent, *CAMERA_QUAKE_KIND_M);
