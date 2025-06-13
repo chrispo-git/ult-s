@@ -28,14 +28,14 @@ pub fn install() {
 unsafe extern "C" fn peppy_utaunt_eff(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 10.0); 
     if macros::is_excute(agent) {
-        macros::EFFECT(agent, Hash40::new("sys_hit_rush"), Hash40::new("haver"), 0,0,0, 0, 0, 0, 0.3, 0, 0, 0, 0, 0, 0, true);
+        macros::EFFECT(agent, Hash40::new("sys_hit_rush"), Hash40::new("havel"), 0,0,0, 0, 0, 0, 0.2, 0, 0, 0, 0, 0, 0, true);
     }
 }
 unsafe extern "C" fn peppy_utaunt_snd(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 10.0); 
     if macros::is_excute(agent) {
-        let rand_num = smash::app::sv_math::rand(hash40("fighter"), 40);
-        if rand_num == 37 {
+        let rand_num = smash::app::sv_math::rand(hash40("fighter"), 10);
+        if rand_num == 5 {
             macros::PLAY_SE(agent, Hash40::new("vc_falco_appeal03"));
         } else {
             macros::PLAY_SE(agent, Hash40::new("vc_falco_win02"));
