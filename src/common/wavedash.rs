@@ -106,7 +106,8 @@ unsafe extern "C" fn wavedash(fighter : &mut L2CFighterCommon) {
 		if [*FIGHTER_STATUS_KIND_JUMP_SQUAT].contains(&status_kind) && ControlModule::check_button_on_trriger(boma, *CONTROL_PAD_BUTTON_GUARD) {
 			IS_WAVEDASH[ENTRY_ID] = true;
 		}
-		if [*FIGHTER_STATUS_KIND_ESCAPE_AIR, *FIGHTER_STATUS_KIND_ESCAPE_AIR_SLIDE].contains(&status_kind) && frame < 4.0 && !is_neutral {
+		let is_from_tumble = [*FIGHTER_STATUS_KIND_DAMAGE_FLY, *FIGHTER_STATUS_KIND_DAMAGE_FLY_ROLL, *FIGHTER_STATUS_KIND_DAMAGE_FALL].contains(&StatusModule::prev_status_kind(boma, 0));
+		if [*FIGHTER_STATUS_KIND_ESCAPE_AIR, *FIGHTER_STATUS_KIND_ESCAPE_AIR_SLIDE].contains(&status_kind) && frame < 4.0 && !is_neutral && !is_from_tumble {
 			if stick_y < 0.5 && (IS_WAVEDASH[ENTRY_ID] || ray_check_pos(boma, 0.0, -6.0, true) == 1){
 				let distance_to_floor = 14;
 				if ray_check_pos(boma, 0.0, -(distance_to_floor as f32), true) == 1 {
