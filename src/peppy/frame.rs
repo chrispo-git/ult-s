@@ -52,6 +52,14 @@ unsafe extern "C" fn peppy_frame(fighter: &mut L2CFighterCommon) {
 			} else {
 				DO_STALL[ENTRY_ID] = false;
 			};
+			if [hash40("appeal_lw_r"), hash40("appeal_lw_l")].contains(&motion_kind) {
+				if frame > 100.0 && frame < 330.0 &&  ControlModule::check_button_off(fighter.module_accessor, *CONTROL_PAD_BUTTON_APPEAL_LW) {
+					MotionModule::set_frame_sync_anim_cmd(boma, 330.0, true, true, false);
+				}
+				if frame as i32 == 330 && ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_APPEAL_LW) {
+					MotionModule::set_frame_sync_anim_cmd(boma, 70.0, true, true, false);
+				}
+			}
 			if [hash40("special_s_start")].contains(&motion_kind) {
 				if frame < 10.0 {
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_JUMP, true);
