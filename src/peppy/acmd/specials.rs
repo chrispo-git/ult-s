@@ -128,14 +128,12 @@ unsafe extern "C" fn peppy_neutralb_shoot(agent: &mut L2CAgentBase) {
 	if macros::is_excute(agent) {
 		WorkModule::off_flag(agent.module_accessor, *FIGHTER_FALCO_BLASTER_STATUS_WORK_ID_FLAG_LOOP_ACCEPT);
 		if !ArticleModule::is_exist(agent.module_accessor, FIGHTER_FALCO_GENERATE_ARTICLE_MISSILE) {
+        	macros::PLAY_SE(agent, Hash40::new("se_common_bomb_m"));
 			ArticleModule::generate_article(agent.module_accessor, FIGHTER_FALCO_GENERATE_ARTICLE_MISSILE, false, -1);
 		}
     } 
 }	
 unsafe extern "C" fn peppy_neutralb_shoot_snd(agent: &mut L2CAgentBase) {
-    if macros::is_excute(agent) {
-        macros::PLAY_SE(agent, Hash40::new("se_common_bomb_m"));
-    }
 }	
 unsafe extern "C" fn peppy_neutralb_shoot_eff(agent: &mut L2CAgentBase) {
     if macros::is_excute(agent) {

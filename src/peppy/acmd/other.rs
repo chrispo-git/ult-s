@@ -46,14 +46,6 @@ unsafe extern "C" fn peppy_utaunt_snd(agent: &mut L2CAgentBase) {
     }
 }
 unsafe extern "C" fn peppy_dtaunt_eff(agent: &mut L2CAgentBase) {
-    frame(agent.lua_state_agent, 40.0); 
-    if macros::is_excute(agent) {
-            macros::LANDING_EFFECT(agent, Hash40::new("sys_down_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.5, 0, 0, 0, 0, 0, 0, true);
-    }
-    frame(agent.lua_state_agent, 340.0); 
-    if macros::is_excute(agent) {
-            macros::LANDING_EFFECT(agent, Hash40::new("sys_down_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.5, 0, 0, 0, 0, 0, 0, true);
-    }
 }
 unsafe extern "C" fn peppy_dtaunt_snd(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 40.0); 
@@ -68,8 +60,11 @@ unsafe extern "C" fn peppy_dtaunt_snd(agent: &mut L2CAgentBase) {
 unsafe extern "C" fn peppy_staunt_snd(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 65.0); 
     if macros::is_excute(agent) {
+        macros::PLAY_SE(agent, Hash40::new("vc_falco_damagefly02"));
+    }
+    frame(agent.lua_state_agent, 65.0); 
+    if macros::is_excute(agent) {
         macros::PLAY_SE(agent, Hash40::new("se_common_down_soil_s"));
-        macros::PLAY_SE(agent, Hash40::new("vc_falco_damage01"));
     }
     frame(agent.lua_state_agent, 90.0); 
     if macros::is_excute(agent) {
@@ -80,9 +75,5 @@ unsafe extern "C" fn peppy_staunt_eff(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 65.0); 
     if macros::is_excute(agent) {
         macros::EFFECT(agent, Hash40::new("sys_crown"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
-    }
-    frame(agent.lua_state_agent, 120.0); 
-    if macros::is_excute(agent) {
-            macros::LANDING_EFFECT(agent, Hash40::new("sys_down_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.5, 0, 0, 0, 0, 0, 0, true);
     }
 }
