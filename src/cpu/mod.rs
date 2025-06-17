@@ -39,7 +39,7 @@ pub(crate) unsafe fn main_logic(fighter: &mut L2CFighterCommon) -> () {
     if MotionModule::frame(fighter.module_accessor) == 0.0 {
         ANGLE_DEGREES = (angle * 180.0 / PI + 360.0) % 360.0;
     }
-    if cpu && (!training || IS_GLOW){
+    if cpu && (!training){
         let rand_num = smash::app::sv_math::rand(hash40("fighter"), 100);
         let rand_num2 = smash::app::sv_math::rand(hash40("fighter"), 100);
         let rand_1_val = if rand_num % 2 == 0 {1.0} else {-1.0};

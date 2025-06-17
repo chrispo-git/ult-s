@@ -163,8 +163,6 @@ pub unsafe fn is_enable_transition_term_hook(boma: &mut smash::app::BattleObject
 			} else {
 				return true 
 			}
-		} else if flag == *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_CLIFF_CLIMB && IS_GLOW && ENTRY_ID > 0 {
-			return false
 		}   else {
 			original!()(boma, flag)
 		}
