@@ -91,14 +91,6 @@ pub(crate) unsafe fn main_logic(fighter: &mut L2CFighterCommon) -> () {
                 y = rand_2_val;
             }
         }
-        if DI_DIR != 0 {
-            let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-            if POS_X[ENTRY_ID] > POS_X[0] {
-                x = DI_DIR as f32;
-            } else {
-                x = -DI_DIR as f32;
-            }
-        }
         WorkModule::set_float(fighter.module_accessor, x, *FIGHTER_STATUS_DAMAGE_WORK_FLOAT_VECOR_CORRECT_STICK_X);
         WorkModule::set_float(fighter.module_accessor, y, *FIGHTER_STATUS_DAMAGE_WORK_FLOAT_VECOR_CORRECT_STICK_Y);
     }
