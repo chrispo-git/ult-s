@@ -58,22 +58,10 @@ unsafe extern "C" fn peppy_dtaunt_snd(agent: &mut L2CAgentBase) {
     }
 }
 unsafe extern "C" fn peppy_staunt_snd(agent: &mut L2CAgentBase) {
-    frame(agent.lua_state_agent, 65.0); 
+    frame(agent.lua_state_agent, 25.0); 
     if macros::is_excute(agent) {
-        macros::PLAY_SE(agent, Hash40::new("vc_falco_damagefly02"));
-    }
-    frame(agent.lua_state_agent, 65.0); 
-    if macros::is_excute(agent) {
-        macros::PLAY_SE(agent, Hash40::new("se_common_down_soil_s"));
-    }
-    frame(agent.lua_state_agent, 90.0); 
-    if macros::is_excute(agent) {
-        macros::PLAY_SE(agent, Hash40::new("se_common_landing_soil"));
+        macros::PLAY_SE(agent, Hash40::new("vc_falco_appeal02"));
     }
 }
 unsafe extern "C" fn peppy_staunt_eff(agent: &mut L2CAgentBase) {
-    frame(agent.lua_state_agent, 65.0); 
-    if macros::is_excute(agent) {
-        macros::EFFECT(agent, Hash40::new("sys_crown"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
-    }
 }
