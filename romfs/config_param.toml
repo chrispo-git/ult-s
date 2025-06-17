@@ -2728,7 +2728,7 @@ slots = [120,121,122,123,124,125,126,127]
 [[param_float]]
 param = "landing_attack_air_frame_f"
 subparam = ""
-value = 9.0
+value = 13.0
 kinds = ["falco"]
 slots = [120,121,122,123,124,125,126,127]
 
