@@ -200,7 +200,7 @@ mod offsets_impl {
         }
     }
 
-    use crate::controls::util::byte_search;
+    use crate::controls::util::find_offset;
 
     struct CoreOffsets {
         pub exec_command: usize,
@@ -449,33 +449,33 @@ mod offsets_impl {
                 analog_trigger_r: 0
             };
 
-            offsets.exec_command = byte_search(EXEC_COMMAND_SEARCH_CODE).expect("Unable to find exec command hook!") - EXEC_COMMAND_OFFSET_FROM_START;
-            offsets.get_command_flag_cat = byte_search(GET_COMMAND_FLAG_CAT_SEARCH_CODE).expect("Unable to find get command flag cat hook!");
-            offsets.demon_on_link_capture_event = byte_search(DEMON_ON_LINK_CAPTURE_EVENT_SEARCH_CODE).expect("Unable to find Kazuya OnLinkCaptureEvent hook!") - DEMON_ON_LINK_CAPTURE_EVENT_OFFSET_FROM_START;
-            offsets.force_linear_histun = byte_search(FORCE_LINEAR_HISTUN_SEARCH_CODE).expect("Unable to find force linear histun hook!") + FORCE_LINEAR_HISTUN_OFFSET_TO_START;
-            offsets.set_fighter_vtable = byte_search(SET_FIGHTER_VTABLE_SEARCH_CODE).expect("Unable to find Fighter class constructor hook!") + SET_FIGHTER_VTABLE_OFFSET_TO_START;
-            offsets.set_weapon_vtable = byte_search(SET_WEAPON_VTABLE_SEARCH_CODE).expect("Unable to find Weapon class constructor hook!") + SET_WEAPON_VTABLE_OFFSET_TO_START;
-            offsets.set_item_vtable = byte_search(SET_ITEM_VTABLE_SEARCH_CODE).expect("Unable to find Item class constructor hook!") + SET_ITEM_VTABLE_OFFSET_TO_START;
-            offsets.get_battle_object_from_id = byte_search(GET_BATTLE_OBJECT_FROM_ID_SEARCH_CODE).expect("Unable to find Item class constructor hook!") + GET_BATTLE_OBJECT_FROM_ID_OFFSET_TO_START;
-            offsets.fighter_handle_damage = byte_search(FIGHTER_HANDLE_DAMAGE_SEARCH_CODE).expect("Unable to find Fighter::HandleDamage!");
+            offsets.exec_command = 0x6bac40; //find_offset("EXEC_COMMAND_SEARCH_CODE",EXEC_COMMAND_SEARCH_CODE).expect("Unable to find exec command hook!") - EXEC_COMMAND_OFFSET_FROM_START;
+            offsets.get_command_flag_cat = 0x6ba9a0; //find_offset("GET_COMMAND_FLAG_CAT_SEARCH_CODE",GET_COMMAND_FLAG_CAT_SEARCH_CODE).expect("Unable to find get command flag cat hook!");
+            offsets.demon_on_link_capture_event = 0x933824; //find_offset("DEMON_ON_LINK_CAPTURE_EVENT_SEARCH_CODE",DEMON_ON_LINK_CAPTURE_EVENT_SEARCH_CODE).expect("Unable to find Kazuya OnLinkCaptureEvent hook!") - DEMON_ON_LINK_CAPTURE_EVENT_OFFSET_FROM_START;
+            offsets.force_linear_histun = 0x62ba5c; //find_offset("FORCE_LINEAR_HISTUN_SEARCH_CODE",FORCE_LINEAR_HISTUN_SEARCH_CODE).expect("Unable to find force linear histun hook!") + FORCE_LINEAR_HISTUN_OFFSET_TO_START;
+            offsets.set_fighter_vtable = 0x14f4988; //find_offset("SET_FIGHTER_VTABLE_SEARCH_CODE",SET_FIGHTER_VTABLE_SEARCH_CODE).expect("Unable to find Fighter class constructor hook!") + SET_FIGHTER_VTABLE_OFFSET_TO_START;
+            offsets.set_weapon_vtable = 0x14f4e94; //find_offset("SET_WEAPON_VTABLE_SEARCH_CODE",SET_WEAPON_VTABLE_SEARCH_CODE).expect("Unable to find Weapon class constructor hook!") + SET_WEAPON_VTABLE_OFFSET_TO_START;
+            offsets.set_item_vtable = 0x14f512c; //find_offset("SET_ITEM_VTABLE_SEARCH_CODE",SET_ITEM_VTABLE_SEARCH_CODE).expect("Unable to find Item class constructor hook!") + SET_ITEM_VTABLE_OFFSET_TO_START;
+            offsets.get_battle_object_from_id = 0x3ac554; //find_offset("GET_BATTLE_OBJECT_FROM_ID_SEARCH_CODE",GET_BATTLE_OBJECT_FROM_ID_SEARCH_CODE).expect("Unable to find Item class constructor hook!") + GET_BATTLE_OBJECT_FROM_ID_OFFSET_TO_START;
+            offsets.fighter_handle_damage = 0x6310c0; //find_offset("FIGHTER_HANDLE_DAMAGE_SEARCH_CODE",FIGHTER_HANDLE_DAMAGE_SEARCH_CODE).expect("Unable to find Fighter::HandleDamage!");
             offsets.p_p_game_state = {
-                let offset = byte_search(GET_GAME_STATE_SEARCH_CODE).expect("Unable to find ppGameState!") + GET_GAME_STATE_OFFSET_FROM_START;
+                let offset = 0x14d4630; //find_offset("GET_GAME_STATE_SEARCH_CODE",GET_GAME_STATE_SEARCH_CODE).expect("Unable to find ppGameState!") + GET_GAME_STATE_OFFSET_FROM_START;
                 let adrp_offset = offset_from_adrp(offset);
                 let ldr_offset = offset_from_ldr(offset + 4);
                 adrp_offset + ldr_offset
             };
-            offsets.map_controls = byte_search(MAP_CONTROLS_SEARCH_CODE).expect("Unable to find control mapping function!");
-            offsets.once_per_game_frame = byte_search(ONCE_PER_GAME_FRAME_SEARCH_CODE).expect("Unable to find once-per-game-frame function!");
-            offsets.on_rule_select = byte_search(ON_RULE_SELECT_SEARCH_CODE).expect("Unable to find on-rule-select instructions!");
+            offsets.map_controls = 0x1750f70; //find_offset("MAP_CONTROLS_SEARCH_CODE",MAP_CONTROLS_SEARCH_CODE).expect("Unable to find control mapping function!");
+            offsets.once_per_game_frame = 0x135b810; //find_offset("ONCE_PER_GAME_FRAME_SEARCH_CODE",ONCE_PER_GAME_FRAME_SEARCH_CODE).expect("Unable to find once-per-game-frame function!");
+            offsets.on_rule_select = 0x1792dc0; //find_offset("ON_RULE_SELECT_SEARCH_CODE",ON_RULE_SELECT_SEARCH_CODE).expect("Unable to find on-rule-select instructions!");
             offsets.global_frame_counter = 0x52e6b44;
             offsets.get_match_mode = {
-                let offset = byte_search(GET_MATCH_MODE_SEARCH_CODE).expect("Unable to find get_match_mode!") - GET_MATCH_MODE_OFFSET_TO_START;
+                let offset = 0x1740584; //find_offset("GET_MATCH_MODE_SEARCH_CODE",GET_MATCH_MODE_SEARCH_CODE).expect("Unable to find get_match_mode!") - GET_MATCH_MODE_OFFSET_TO_START;
                 let bl_offset = offset_from_bl(offset);
                 offset + bl_offset
             };
-            offsets.kill_zoom_regular = byte_search(KILL_ZOOM_REGULAR_SEARCH_CODE).expect("Unable to find the regular kill zoom function!") - KILL_ZOOM_REGULAR_OFFSET_TO_START;
-            offsets.kill_zoom_throw = byte_search(KILL_ZOOM_THROW_SEARCH_CODE).expect("Unable to find the throw kill zoom function!") + KILL_ZOOM_THROW_OFFSET_FROM_START;
-            offsets.analog_trigger_l = byte_search(ANALOG_TRIGGER_L_SEARCH_CODE).expect("Unable to find the analog trigger l");
+            offsets.kill_zoom_regular = 0x633de4; //find_offset("KILL_ZOOM_REGULAR_SEARCH_CODE",KILL_ZOOM_REGULAR_SEARCH_CODE).expect("Unable to find the regular kill zoom function!") - KILL_ZOOM_REGULAR_OFFSET_TO_START;
+            offsets.kill_zoom_throw = 0x637384; //find_offset("KILL_ZOOM_THROW_SEARCH_CODE",KILL_ZOOM_THROW_SEARCH_CODE).expect("Unable to find the throw kill zoom function!") + KILL_ZOOM_THROW_OFFSET_FROM_START;
+            offsets.analog_trigger_l = 0x3666b00; //find_offset("ANALOG_TRIGGER_L_SEARCH_CODE",ANALOG_TRIGGER_L_SEARCH_CODE).expect("Unable to find the analog trigger l");
             offsets.analog_trigger_r = offsets.analog_trigger_l + ANALOG_TRIGGER_R_OFFSET_FROM_L;
             offsets
         };

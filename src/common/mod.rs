@@ -10,7 +10,6 @@ mod remove_quake;
 mod melee;
 mod faf_change;
 mod cancel;
-mod training;
 use smash::app::lua_bind::*;
 use smash::lib::lua_const::*;
 use smash::app::utility::get_kind;
@@ -20,24 +19,6 @@ use smashline::*;
 use smash_script::*;
 use smash::phx::Hash40;
 use crate::util::*;
-
-pub static mut IS_GLOW: bool = false;
-pub static mut DI_DIR: i32 = 0;
-pub static mut LEDGE_OPTION: i32 = 0;
-// 0 - Neutral Getup
-// 1 - Ledge Attack
-// 2 - Ledge Roll
-// 3 - Ledge Jump
-// 4 - Ledge Drop -> Double Jump
-// 5 - Wait at ledge for 30 more frames
-pub static mut LEDGE_OPTION_AFTER: i32 = 0;
-// 0 - None
-// 1 - Shield/Airdodge
-// 2 - Aerial/Tilt (Have 2 lists of whether to ftilt/dtilt)
-pub static mut LEDGE_DELAY : [i32; 8] = [0; 8];
-pub static mut DJ_DELAY : [i32; 8] = [0; 8];
-pub static mut DELAY_FRAMES: i32 = 30;
-pub static mut DJ_DELAY_FRAMES: i32 = 21;
 
 pub const MAX_WEIGHT : i32 = 150;
 pub const MIN_WEIGHT : i32 = 60;
@@ -94,11 +75,6 @@ pub fn install() {
 	remove_quake::install();
 	faf_change::install();
 	cancel::install();
-    training::install();
-    /*skyline::install_hooks!(
-        process_knockback,
-        calculate_knockback
-    );*/
 
     //Setting values for everybody!
     let all: Vec<i32> = vec![-1];
