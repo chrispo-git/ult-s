@@ -57,16 +57,16 @@ pub fn byte_search<T: Eq>(needle: &[T]) -> Option<usize> {
     text.windows(needle.len()).position(|window| window == needle)
 }
 // Wrapper around byte_search() with some additional logging
-fn find_offset(name: &str, needle: &[u8]) -> Option<usize> {
-    println!("Searching for {}", name);
+pub fn find_offset(name: &str, needle: &[u8]) -> Option<usize> {
+    println!("[ult-s] Searching for {}", name);
     let offset_opt = byte_search(needle);
     match offset_opt {
         Some(offset) => {
-            println!("Found offset for {} at {:#x}", name, offset);
+            println!("[ult-s] Found offset for {} at {:#x}", name, offset);
             Some(offset)
         }
         None => {
-            println!("Cound not find offset for {}", name);
+            println!("[ult-s] Cound not find offset for {}", name);
             None
         }
     }
