@@ -30,8 +30,33 @@ pub fn install() {
     .acmd("sound_throwlw", peppy_dthrow_snd, Priority::Low)  
     .acmd("game_catch", peppy_catch, Priority::Low)    
     .acmd("game_catchdash", peppy_catchdash, Priority::Low)    
-    .acmd("game_catchturn", peppy_catchturn, Priority::Low)    
+    .acmd("game_catchturn", peppy_catchturn, Priority::Low)   
+    .acmd("game_throwhi", peppy_uthrow, Priority::Low)    
+    .acmd("effect_throwhi", peppy_uthrow_eff, Priority::Low)    
+    .acmd("sound_throwhi", peppy_uthrow_snd, Priority::Low)     
     .install();
+}
+unsafe extern "C" fn peppy_uthrow(agent: &mut L2CAgentBase) {
+    if macros::is_excute(agent) {
+        macros::ATTACK_ABS(agent, *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, 0, 4.0, 95, 120, 0, 65, 0.0, 1.0, *ATTACK_LR_CHECK_F, 0.0, true, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_THROW);
+        macros::ATTACK_ABS(agent, *FIGHTER_ATTACK_ABSOLUTE_KIND_CATCH, 0, 3.0, 361, 100, 0, 60, 0.0, 1.0, *ATTACK_LR_CHECK_F, 0.0, true, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_THROW);
+    }
+    frame(agent.lua_state_agent, 7.0);
+    macros::FT_MOTION_RATE(agent, 0.5);
+    if macros::is_excute(agent) {
+		macros::ATK_HIT_ABS(agent, *FIGHTER_ATTACK_ABSOLUTE_KIND_THROW, Hash40::new("throw"), WorkModule::get_int64(agent.module_accessor,*FIGHTER_STATUS_THROW_WORK_INT_TARGET_OBJECT), WorkModule::get_int64(agent.module_accessor,*FIGHTER_STATUS_THROW_WORK_INT_TARGET_HIT_GROUP), WorkModule::get_int64(agent.module_accessor,*FIGHTER_STATUS_THROW_WORK_INT_TARGET_HIT_NO));
+		AttackModule::clear_all(agent.module_accessor);
+    }
+    wait(agent.lua_state_agent, 16.0);
+    macros::FT_MOTION_RATE(agent, 1.0);
+}
+unsafe extern "C" fn peppy_uthrow_eff(agent: &mut L2CAgentBase) {
+}
+unsafe extern "C" fn peppy_uthrow_snd(agent: &mut L2CAgentBase) {
+	frame(agent.lua_state_agent, 7.0);
+    if macros::is_excute(agent) {
+        macros::PLAY_SE(agent, Hash40::new("se_common_throw_02"));
+    }
 }
 unsafe extern "C" fn peppy_fthrow(fighter: &mut L2CAgentBase) {
         macros::FT_MOTION_RATE(fighter, 0.75);
