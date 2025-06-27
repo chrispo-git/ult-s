@@ -271,18 +271,16 @@ Autocancel - 1-4/37+
 ### Bair
 |Frame|ID|Damage|Angle|BKB|KBG|Notes| | | |
 |-|-|-|-|-|-|-|-|-|-|
-|Frame 9| 0|  12.0%|  361|  10|  105|
-|Frame 9| 1|  12.0%|  361|  10|  105|
-|Frame 11| 0|  7.0%|  361|  7|  78|
-|Frame 11| 1|  7.0%|  361|  7|  78|
-|Hitboxes terminated on Frame 17|
+|Frame 9| 0| 10.0%| 361| 55| 90|
+|Frame 9| 1| 10.0%| 361| 55| 90|
+|Frame 9| 2| 10.0%| 361| 55| 90|
+|Hitboxes terminated on Frame 12|
 
 
 FaF: 43
 
 
-
-Autocancel - 1-8/28+
+Autocancel - 1-8/23+
 
 
 
