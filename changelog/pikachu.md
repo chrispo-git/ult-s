@@ -17,7 +17,7 @@ Gravity | 0.14|
 Weight | 79|
 Nair Landing Lag | 7|
 Fair Landing Lag | 12|
-Bair Landing Lag | 6|
+Bair Landing Lag | 10|
 Uair Landing Lag | 8|
 Dair Landing Lag | 22|
 Wall Jump? | True|
