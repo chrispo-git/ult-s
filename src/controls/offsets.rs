@@ -475,8 +475,8 @@ mod offsets_impl {
             };
             offsets.kill_zoom_regular = 0x633de4; //find_offset("KILL_ZOOM_REGULAR_SEARCH_CODE",KILL_ZOOM_REGULAR_SEARCH_CODE).expect("Unable to find the regular kill zoom function!") - KILL_ZOOM_REGULAR_OFFSET_TO_START;
             offsets.kill_zoom_throw = 0x637384; //find_offset("KILL_ZOOM_THROW_SEARCH_CODE",KILL_ZOOM_THROW_SEARCH_CODE).expect("Unable to find the throw kill zoom function!") + KILL_ZOOM_THROW_OFFSET_FROM_START;
-            offsets.analog_trigger_l = 0x3666b00; //find_offset("ANALOG_TRIGGER_L_SEARCH_CODE",ANALOG_TRIGGER_L_SEARCH_CODE).expect("Unable to find the analog trigger l");
-            offsets.analog_trigger_r = offsets.analog_trigger_l + ANALOG_TRIGGER_R_OFFSET_FROM_L;
+            offsets.analog_trigger_l = 0x3666ee0; //find_offset("ANALOG_TRIGGER_L_SEARCH_CODE",ANALOG_TRIGGER_L_SEARCH_CODE).expect("Unable to find the analog trigger l");
+            offsets.analog_trigger_r = 0x3666ef4;
             offsets
         };
     }
