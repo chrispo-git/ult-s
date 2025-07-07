@@ -449,7 +449,7 @@ mod offsets_impl {
                 analog_trigger_r: 0
             };
 
-            offsets.exec_command = 0x6bac40; //find_offset("EXEC_COMMAND_SEARCH_CODE",EXEC_COMMAND_SEARCH_CODE).expect("Unable to find exec command hook!") - EXEC_COMMAND_OFFSET_FROM_START;
+            offsets.exec_command = 0x6bac40;//find_offset("EXEC_COMMAND_SEARCH_CODE",EXEC_COMMAND_SEARCH_CODE).expect("Unable to find exec command hook!") - EXEC_COMMAND_OFFSET_FROM_START;
             offsets.get_command_flag_cat = 0x6ba9a0; //find_offset("GET_COMMAND_FLAG_CAT_SEARCH_CODE",GET_COMMAND_FLAG_CAT_SEARCH_CODE).expect("Unable to find get command flag cat hook!");
             offsets.demon_on_link_capture_event = 0x933824; //find_offset("DEMON_ON_LINK_CAPTURE_EVENT_SEARCH_CODE",DEMON_ON_LINK_CAPTURE_EVENT_SEARCH_CODE).expect("Unable to find Kazuya OnLinkCaptureEvent hook!") - DEMON_ON_LINK_CAPTURE_EVENT_OFFSET_FROM_START;
             offsets.force_linear_histun = 0x62ba5c; //find_offset("FORCE_LINEAR_HISTUN_SEARCH_CODE",FORCE_LINEAR_HISTUN_SEARCH_CODE).expect("Unable to find force linear histun hook!") + FORCE_LINEAR_HISTUN_OFFSET_TO_START;
@@ -475,8 +475,9 @@ mod offsets_impl {
             };
             offsets.kill_zoom_regular = 0x633de4; //find_offset("KILL_ZOOM_REGULAR_SEARCH_CODE",KILL_ZOOM_REGULAR_SEARCH_CODE).expect("Unable to find the regular kill zoom function!") - KILL_ZOOM_REGULAR_OFFSET_TO_START;
             offsets.kill_zoom_throw = 0x637384; //find_offset("KILL_ZOOM_THROW_SEARCH_CODE",KILL_ZOOM_THROW_SEARCH_CODE).expect("Unable to find the throw kill zoom function!") + KILL_ZOOM_THROW_OFFSET_FROM_START;
-            offsets.analog_trigger_l = 0x3666b00; //find_offset("ANALOG_TRIGGER_L_SEARCH_CODE",ANALOG_TRIGGER_L_SEARCH_CODE).expect("Unable to find the analog trigger l");
-            offsets.analog_trigger_r = offsets.analog_trigger_l + ANALOG_TRIGGER_R_OFFSET_FROM_L;
+            offsets.analog_trigger_l = 0x3666ee0; //find_offset("ANALOG_TRIGGER_L_SEARCH_CODE",ANALOG_TRIGGER_L_SEARCH_CODE).expect("Unable to find the analog trigger l");
+            offsets.analog_trigger_r = 0x3666ef4;
+
             offsets
         };
     }
