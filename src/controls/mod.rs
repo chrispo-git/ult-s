@@ -364,24 +364,6 @@ unsafe fn map_controls_hook(
     }
 }
 
-#[skyline::hook(offset = offsets::analog_trigger_l(), inline)]
-unsafe fn analog_trigger_l(ctx: &mut skyline::hooks::InlineCtx) {
-    if *ctx.registers[9].x.as_ref() & 0x40 != 0 {
-        *ctx.registers[11].x.as_mut() = 0;
-    } else {
-        *ctx.registers[11].w.as_mut() = 0x27FF;
-    }
-}
-
-#[skyline::hook(offset = offsets::analog_trigger_r(), inline)]
-unsafe fn analog_trigger_r(ctx: &mut skyline::hooks::InlineCtx) {
-    if *ctx.registers[8].x.as_ref() & 0x80 != 0 {
-        *ctx.registers[11].x.as_mut() = 0;
-    } else {
-        *ctx.registers[11].w.as_mut() = 0x27FF;
-    }
-}
-
 #[repr(C)]
 struct ControlModuleInternal {
     vtable: *mut u8,
@@ -399,7 +381,7 @@ struct ControlModuleInternal {
 }
 
 unsafe fn get_mapped_controller_inputs(player: usize) -> &'static MappedInputs {
-    let base = *((skyline::hooks::getRegionAddress(skyline::hooks::Region::Text) as *mut u8).add(0x52c50f0) as *const u64);
+    let base = *((skyline::hooks::getRegionAddress(skyline::hooks::Region::Text) as *mut u8).add(0x52c40f0) as *const u64);
     &*((base + 0x2b8 + 0x8 * (player as u64)) as *const MappedInputs)
 }
 
@@ -476,8 +458,6 @@ unsafe fn handle_incoming_packet(ctx: &mut skyline::hooks::InlineCtx) {
 pub fn install() {
     skyline::install_hooks!(
         map_controls_hook,
-        analog_trigger_l,
-        analog_trigger_r,
         packed_packet_creation,
         write_packet,
         parse_inputs,
