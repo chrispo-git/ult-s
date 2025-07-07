@@ -185,6 +185,11 @@ unsafe extern "C" fn peppy_frame(fighter: &mut L2CFighterCommon) {
 					} else {
 						MotionModule::set_rate(boma, 1.0);
 					}
+					let stick_x = ControlModule::get_stick_x(boma) * PostureModule::lr(boma);
+					if stick_x < -0.5 {
+						PostureModule::reverse_lr(boma);
+						PostureModule::update_rot_y_lr(boma);
+					}
 				}
 			} else {
 				DO_STALL[ENTRY_ID] = false;
