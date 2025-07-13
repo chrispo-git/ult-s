@@ -76,12 +76,24 @@ unsafe extern "C" fn peppy_win1_eff(agent: &mut L2CAgentBase) {
         }
     }
 }
+unsafe extern "C" fn peppy_win1_sound(agent: &mut L2CAgentBase) {
+    if macros::is_excute(agent) {
+        macros::PLAY_SE(agent, Hash40::new("vc_falco_win01"));
+    }
+}
 unsafe extern "C" fn peppy_win2_eff(agent: &mut L2CAgentBase) {
+}
+unsafe extern "C" fn peppy_win2_sound(agent: &mut L2CAgentBase) {
 }
 unsafe extern "C" fn peppy_win3_eff(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 128.0); 
     if macros::is_excute(agent) {
         macros::LANDING_EFFECT(agent, Hash40::new("sys_down_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, true);
+    }
+}
+unsafe extern "C" fn peppy_win3_sound(agent: &mut L2CAgentBase) {
+    if macros::is_excute(agent) {
+        macros::PLAY_SE(agent, Hash40::new("vc_falco_win02"));
     }
 }
 
