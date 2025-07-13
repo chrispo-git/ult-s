@@ -31,6 +31,9 @@ pub fn install() {
     .acmd("effect_appealsr", peppy_staunt_eff, Priority::Low)    
     .acmd("sound_appealsl", peppy_staunt_snd, Priority::Low)    
     .acmd("sound_appealsr", peppy_staunt_snd, Priority::Low)    
+    .acmd("effect_win1", peppy_win1_eff, Priority::Low)    
+    .acmd("effect_win2", peppy_win2_eff, Priority::Low)    
+    .acmd("effect_win3", peppy_win3_eff, Priority::Low)    
     .install();
 }
 unsafe extern "C" fn peppy_utaunt_eff(agent: &mut L2CAgentBase) {
@@ -65,3 +68,20 @@ unsafe extern "C" fn peppy_staunt_snd(agent: &mut L2CAgentBase) {
 }
 unsafe extern "C" fn peppy_staunt_eff(agent: &mut L2CAgentBase) {
 }
+unsafe extern "C" fn peppy_win1_eff(agent: &mut L2CAgentBase) {
+    for _ in 0..i32::MAX {
+        wait(agent.lua_state_agent, 2.0); 
+        if macros::is_excute(agent) {
+            macros::EFFECT(agent, Hash40::new("sys_fireflower_shot"), Hash40::new("haver"), -0.8, 11.0, 0.8, 0, 0, 0, 0.8, 0, 0, 0, 0, 0, 0, true);
+        }
+    }
+}
+unsafe extern "C" fn peppy_win2_eff(agent: &mut L2CAgentBase) {
+}
+unsafe extern "C" fn peppy_win3_eff(agent: &mut L2CAgentBase) {
+    frame(agent.lua_state_agent, 128.0); 
+    if macros::is_excute(agent) {
+        macros::LANDING_EFFECT(agent, Hash40::new("sys_down_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, true);
+    }
+}
+
