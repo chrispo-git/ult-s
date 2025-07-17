@@ -36,6 +36,7 @@ pub fn install() {
     .acmd("effect_win3", peppy_win3_eff, Priority::Low)    
     .acmd("sound_win1", peppy_win1_sound, Priority::Low)    
     .acmd("sound_win2", peppy_win2_sound, Priority::Low)    
+    .acmd("sound_win2_default", peppy_win2_sound, Priority::Low)    
     .acmd("sound_win3", peppy_win3_sound, Priority::Low)    
     .install();
 }
