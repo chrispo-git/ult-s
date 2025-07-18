@@ -80,9 +80,9 @@ unsafe extern "C" fn peppy_frame(fighter: &mut L2CFighterCommon) {
 				}
 				if frame > 14.0 && frame < 35.0 {
 					let next_effect = EffectModule::req_on_joint(boma, smash::phx::Hash40::new("sys_raygun_bullet"), smash::phx::Hash40::new("throw"), &Vector3f{x: 0.0, y: 2.0, z: 0.0} as *const Vector3f, &Vector3f{x: 0.0, y: 60.0, z: 90.0} as *const Vector3f, 0.25, &Vector3f{x: 0.0, y: 0.0, z: 0.0} as *const Vector3f, &Vector3f{x: 0.0, y: 0.0, z: 0.0} as *const Vector3f, true, 0, 0, 0) as u32;
-					TETHER_EFFECTS.push(next_effect);
+					TETHER_EFFECTS[ENTRY_ID].push(next_effect);
 				} else if frame > 12.0 {
-					for i in &mut TETHER_EFFECTS {
+					for i in &mut TETHER_EFFECTS[ENTRY_ID] {
 						if *i != 0 {
 							if EffectModule::is_exist_effect(fighter.module_accessor, *i){
 								EffectModule::kill(fighter.module_accessor, *i, false,false);
@@ -122,7 +122,7 @@ unsafe extern "C" fn peppy_frame(fighter: &mut L2CFighterCommon) {
 				GroundModule::clear_pass_floor(boma);
 				CancelModule::enable_cancel(boma);
 				if frame > 1.0 {
-					for i in &mut TETHER_EFFECTS {
+					for i in &mut TETHER_EFFECTS[ENTRY_ID] {
 						if *i != 0 {
 							if EffectModule::is_exist_effect(fighter.module_accessor, *i){
 								EffectModule::kill(fighter.module_accessor, *i, false,false);
@@ -145,7 +145,7 @@ unsafe extern "C" fn peppy_frame(fighter: &mut L2CFighterCommon) {
 				}
 			}
 			if ![*FIGHTER_STATUS_KIND_SPECIAL_S].contains(&status_kind) {
-				for i in &mut TETHER_EFFECTS {
+				for i in &mut TETHER_EFFECTS[ENTRY_ID] {
 					if *i != 0 {
 						if EffectModule::is_exist_effect(fighter.module_accessor, *i){
 							EffectModule::kill(fighter.module_accessor, *i, false,false);
@@ -153,7 +153,7 @@ unsafe extern "C" fn peppy_frame(fighter: &mut L2CFighterCommon) {
 						*i = 0;
 					}
 				}
-				TETHER_EFFECTS.clear();
+				TETHER_EFFECTS[ENTRY_ID].clear();
 				EffectModule::kill_kind(boma, Hash40::new("sys_raygun_bullet"), false, false);
 			}
 			if ![*FIGHTER_STATUS_KIND_SPECIAL_S, *FIGHTER_STATUS_KIND_JUMP_AERIAL, *FIGHTER_STATUS_KIND_FALL, *FIGHTER_STATUS_KIND_ATTACK_AIR, *FIGHTER_STATUS_KIND_SPECIAL_N].contains(&status_kind) {
