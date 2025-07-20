@@ -15,7 +15,7 @@ pub fn install() {
 	frame::install();
 	status::install();
 	acmd::install();
-    // This creates a redirected ui_chara_db entry with ui_chara_mario as a base
+
     the_csk_collection_api::add_chara_db_entry_info(
         the_csk_collection_api::CharacterDatabaseEntry {
                 ui_chara_id: smash::hash40("ui_chara_peppy"),
@@ -30,8 +30,8 @@ pub fn install() {
                 exhibit_day_order: the_csk_collection_api::IntType::Overwrite(13102), 
                 extra_flags: the_csk_collection_api::IntType::Overwrite(0), 
                 ext_skill_page_num: the_csk_collection_api::SignedByteType::Overwrite(0), 
-                skill_list_order: the_csk_collection_api::SignedByteType::Overwrite(80), 
-                disp_order: the_csk_collection_api::SignedByteType::Optional(Some(80)), 
+                skill_list_order: the_csk_collection_api::SignedByteType::Overwrite(82), 
+                disp_order: the_csk_collection_api::SignedByteType::Optional(Some(82)), 
                 save_no: the_csk_collection_api::SignedByteType::Overwrite(82), 
                 chara_count: the_csk_collection_api::SignedByteType::Overwrite(1), 
                 is_img_ext_skill_page0: the_csk_collection_api::BoolType::Overwrite(false), 
