@@ -38,15 +38,16 @@ try:
     f.close()
 
     with open(r"src/lib.rs", 'w') as f:
-        for i in range(0,202):
+        for i in range(0,216):
             f.write(in_[i])
         for x in needed_folders:
             f.write(f"mod {x};\n")
-        for i in range(302,385):
+        for i in range(330,416):
             f.write(in_[i])
         for x in needed_folders:
             f.write(f"	{x}::install();\n")
-        f.write('}')
+        for i in range(864,878):
+            f.write(in_[i])
     f.close()
     os.chdir("scripts")
 

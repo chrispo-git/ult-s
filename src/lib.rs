@@ -205,6 +205,16 @@ fn change_version_string_hook(arg: u64, string: *const c_char) {
 
 
 
+
+
+
+
+
+
+
+
+
+
 mod util;
 mod controls;
 mod common;
@@ -308,6 +318,17 @@ mod zelda;
 
 
 
+
+
+
+
+
+
+
+
+
+
+
 std::arch::global_asm!(
     r#"
     .section .nro_header
@@ -377,6 +398,14 @@ pub extern "C" fn main() {
     }
     skyline::install_hooks!(change_version_string_hook);
 	nro::add_hook(nro_hook).unwrap();
+
+
+
+
+
+
+
+
 
 
 
@@ -818,6 +847,21 @@ pub extern "C" fn main() {
     
     println!("added chars installed");
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	//Stage Patching
 
 	//Arena Ferox Screenshake
@@ -829,3 +873,6 @@ pub extern "C" fn main() {
     the_csk_collection_api::add_narration_characall_entry("vc_narration_characall_peppy");
     the_csk_collection_api::add_narration_characall_entry("vc_narration_characall_bandana");
 }
+
+
+
