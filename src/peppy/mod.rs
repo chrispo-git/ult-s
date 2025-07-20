@@ -18,9 +18,40 @@ pub fn install() {
     // This creates a redirected ui_chara_db entry with ui_chara_mario as a base
     the_csk_collection_api::add_chara_db_entry_info(
         the_csk_collection_api::CharacterDatabaseEntry {
-            ui_chara_id: 0xea1b1c420, // Hash40 of ui_chara_peppy
-            clone_from_ui_chara_id: Some(0xe41749f82), // Hash40 of ui_chara_falco
-            name_id: the_csk_collection_api::StringType::Overwrite(the_csk_collection_api::CStrCSK::new("peppy")), 
+                ui_chara_id: smash::hash40("ui_chara_peppy"),
+                fighter_kind: the_csk_collection_api::Hash40Type::Overwrite(smash::hash40("fighter_kind_falco")), 
+                fighter_kind_corps: the_csk_collection_api::Hash40Type::Overwrite(smash::hash40("fighter_kind_falco")), 
+                ui_series_id: the_csk_collection_api::Hash40Type::Overwrite(smash::hash40("ui_series_starfox")), 
+                fighter_type: the_csk_collection_api::Hash40Type::Overwrite(0x1353795179 /* Hash40 of fighter_type_normal */), 
+                alt_chara_id: the_csk_collection_api::Hash40Type::Overwrite(0x2302D482A /* Hash40 of -1 */), 
+                shop_item_tag: the_csk_collection_api::Hash40Type::Overwrite(0x5E1155EA7 /* Hash40 of sc-09 */), 
+                name_id: the_csk_collection_api::StringType::Overwrite(the_csk_collection_api::CStrCSK::new("peppy")), 
+                exhibit_year: the_csk_collection_api::ShortType::Overwrite(1992), 
+                exhibit_day_order: the_csk_collection_api::IntType::Overwrite(13102), 
+                extra_flags: the_csk_collection_api::IntType::Overwrite(0), 
+                ext_skill_page_num: the_csk_collection_api::SignedByteType::Overwrite(0), 
+                skill_list_order: the_csk_collection_api::SignedByteType::Overwrite(80), 
+                disp_order: the_csk_collection_api::SignedByteType::Optional(Some(80)), 
+                save_no: the_csk_collection_api::SignedByteType::Overwrite(82), 
+                chara_count: the_csk_collection_api::SignedByteType::Overwrite(1), 
+                is_img_ext_skill_page0: the_csk_collection_api::BoolType::Overwrite(false), 
+                is_img_ext_skill_page1: the_csk_collection_api::BoolType::Overwrite(false), 
+                is_img_ext_skill_page2: the_csk_collection_api::BoolType::Overwrite(false), 
+                can_select: the_csk_collection_api::BoolType::Overwrite(true), 
+                is_usable_soundtest: the_csk_collection_api::BoolType::Overwrite(false), 
+                is_called_pokemon: the_csk_collection_api::BoolType::Overwrite(false), 
+                is_mii: the_csk_collection_api::BoolType::Overwrite(false), 
+                is_boss: the_csk_collection_api::BoolType::Overwrite(false), 
+                is_hidden_boss: the_csk_collection_api::BoolType::Overwrite(false), 
+                is_dlc: the_csk_collection_api::BoolType::Overwrite(false), 
+                is_patch: the_csk_collection_api::BoolType::Overwrite(false), 
+                is_plural_message: the_csk_collection_api::BoolType::Overwrite(false), 
+                is_plural_narration: the_csk_collection_api::BoolType::Overwrite(false), 
+                is_article: the_csk_collection_api::BoolType::Overwrite(false), 
+                unk_0x112b7bb52a: the_csk_collection_api::BoolType::Overwrite(false), 
+                result_pf0: the_csk_collection_api::BoolType::Overwrite(true), 
+                result_pf1: the_csk_collection_api::BoolType::Overwrite(true), 
+                result_pf2: the_csk_collection_api::BoolType::Overwrite(true), 
             color_num: the_csk_collection_api::UnsignedByteType::Overwrite(8),
             extra_index_maps: the_csk_collection_api::UnsignedByteMap::Overwrite(HashMap::from([
                 (smash::hash40("color_start_index") /* Hash40 of color_start_index */, the_csk_collection_api::UnsignedByteType::Overwrite(120))
@@ -42,17 +73,17 @@ pub fn install() {
                     (0x1BFB79118F /* Hash40 of characall_label_article_c05 */, the_csk_collection_api::Hash40Type::Overwrite(0x0)),
                     (0x1B62704035 /* Hash40 of characall_label_article_c06 */, the_csk_collection_api::Hash40Type::Overwrite(0x0)),
                     (0x1B157770A3 /* Hash40 of characall_label_article_c07 */, the_csk_collection_api::Hash40Type::Overwrite(0x0)),
-                (0x160ab9eb98 /* Hash40 of original_ui_chara_hash */, the_csk_collection_api::Hash40Type::Overwrite(0xe41749f82) /* Hash40 of ui_chara_falco*/)
+                (0x160ab9eb98 /* Hash40 of original_ui_chara_hash */, the_csk_collection_api::Hash40Type::Overwrite(smash::hash40("ui_chara_falco")) /* Hash40 of ui_chara_falco*/)
             ])),
             ..Default::default()
         },
     );
     the_csk_collection_api::add_chara_layout_db_entry_info(
         the_csk_collection_api::CharacterLayoutDatabaseEntry {
-            ui_layout_id: 0x114a8361d1, // Hash40 of ui_chara_peppy_00
-            clone_from_ui_layout_id: Some(0x11223e5a9f), // Hash40 of ui_chara_falco_00
+            ui_layout_id: smash::hash40("ui_chara_peppy_00"), // Hash40 of ui_chara_peppy_00
+            clone_from_ui_layout_id: Some(smash::hash40("ui_chara_falco_00")), // Hash40 of ui_chara_falco_00
             ui_chara_id: the_csk_collection_api::Hash40Type::Overwrite(
-                0xea1b1c420, // Hash40 of ui_chara_peppy
+                smash::hash40("ui_chara_peppy"), // Hash40 of ui_chara_peppy
             ),
             ..Default::default()
         },
