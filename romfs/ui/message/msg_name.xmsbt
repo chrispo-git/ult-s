@@ -70,4 +70,60 @@ dowards towards the stage and slams into the ground
 with a Megaton Punch. This punch shakes the ground 
 and damages any opponents around him.</text>
   </entry>
+
+  <entry label="nam_chr0_00_peppy">
+    <text>Peppy</text>
+  </entry>
+  <entry label="nam_chr1_00_peppy">
+    <text>Peppy</text>
+  </entry>
+  <entry label="nam_chr2_00_peppy">
+    <text>PEPPY</text>
+  </entry>
+  <entry label="nam_chr3_00_peppy">
+    <text>PEPPY</text>
+  </entry>
+  <entry label="nam_stage_name_00_peppy">
+    <text>Seasoned Pilot</text>
+  </entry>
+  <entry label="nam_special_lower_00_peppy">
+    <text>Reflector</text>
+  </entry>
+  <entry label="nam_special_lower_help_00_peppy">
+    <text>Shields and reflects projectiles, 
+upping their speed and power.</text>
+  </entry>
+  <entry label="nam_special_normal_00_peppy">
+    <text>Missile Launcher</text>
+  </entry>
+  <entry label="nam_special_normal_help_00_peppy">
+    <text>Shoots a missile that explodes on contact.
+Shot diagonally in the air.</text>
+  </entry>
+  <entry label="nam_special_side_00_peppy">
+    <text>Grapple Beam</text>
+  </entry>
+  <entry label="nam_special_side_help_00_peppy">
+    <text>Shoots a green beam to grab to a surface.
+If it touches a surface or a fighter, Peppy will
+be pulled to the opponent at high speed.</text>
+  </entry>
+  <entry label="nam_special_upper_00_peppy">
+    <text>Fire Peppy</text>
+  </entry>
+  <entry label="nam_special_upper_help_00_peppy">
+    <text>Rockets skyward while engulfed in
+flames. Can change the direction
+while charging.</text>
+  </entry>
+  <entry label="nam_final_arts_peppy">
+    <text>Team Star Fox</text>
+  </entry>
+  <entry label="nam_final_arts_help_peppy">
+    <text>Peppy uses a targeting reticle to
+lock on to any opponents right in
+front of him. If he acquires a target,
+the Star Fox team shows up and
+unleashes a formation attack.</text>
+  </entry>
 </xmsbt>
