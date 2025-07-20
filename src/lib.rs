@@ -871,7 +871,12 @@ pub extern "C" fn main() {
     skyline::patching::Patch::in_text(0x2844128+ 0xc80 + 0x20).nop();
 
     the_csk_collection_api::add_narration_characall_entry("vc_narration_characall_peppy");
-    the_csk_collection_api::add_narration_characall_entry("vc_narration_characall_bandana");
+    the_csk_collection_api::add_narration_characall_entry("vc_narration_characall_rayman");
+    the_csk_collection_api::add_narration_characall_entry("vc_narration_characall_bomberman");
+    the_csk_collection_api::add_narration_characall_entry("vc_narration_characall_toad");
+    the_csk_collection_api::add_narration_characall_entry("vc_narration_characall_toadette");
+    the_csk_collection_api::add_narration_characall_entry("vc_narration_characall_toadsworth");
+    the_csk_collection_api::add_narration_characall_entry("vc_narration_characall_captaintoad");
 }
 
 

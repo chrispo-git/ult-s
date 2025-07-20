@@ -107,9 +107,9 @@ pub fn install() {
                 exhibit_day_order: the_csk_collection_api::IntType::Overwrite(13102), 
                 extra_flags: the_csk_collection_api::IntType::Overwrite(0), 
                 ext_skill_page_num: the_csk_collection_api::SignedByteType::Overwrite(0), 
-                skill_list_order: the_csk_collection_api::SignedByteType::Overwrite(83), 
-                disp_order: the_csk_collection_api::SignedByteType::Optional(Some(83)), 
-                save_no: the_csk_collection_api::SignedByteType::Overwrite(87), 
+                skill_list_order: the_csk_collection_api::SignedByteType::Overwrite(82), 
+                disp_order: the_csk_collection_api::SignedByteType::Optional(Some(82)), 
+                save_no: the_csk_collection_api::SignedByteType::Overwrite(82), 
                 chara_count: the_csk_collection_api::SignedByteType::Overwrite(1), 
                 is_img_ext_skill_page0: the_csk_collection_api::BoolType::Overwrite(false), 
                 is_img_ext_skill_page1: the_csk_collection_api::BoolType::Overwrite(false), 
@@ -158,7 +158,7 @@ pub fn install() {
     the_csk_collection_api::add_chara_layout_db_entry_info(
         the_csk_collection_api::CharacterLayoutDatabaseEntry {
             ui_layout_id: smash::hash40("ui_chara_rayman_00"), // Hash40 of ui_chara_peppy_00
-            clone_from_ui_layout_id: Some(smash::hash40("ui_chara_pikmin_00")), // Hash40 of ui_chara_falco_00
+            clone_from_ui_layout_id: Some(smash::hash40("ui_chara_mario_00")), // Hash40 of ui_chara_falco_00
             ui_chara_id: the_csk_collection_api::Hash40Type::Overwrite(
                 smash::hash40("ui_chara_rayman"), // Hash40 of ui_chara_peppy
             ),
