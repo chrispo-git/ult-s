@@ -19,7 +19,7 @@ pub fn install() {
         the_csk_collection_api::CharacterDatabaseEntry {
             ui_chara_id: 0xea1b1c420, // Hash40 of ui_chara_peppy
             clone_from_ui_chara_id: Some(0xe41749f82), // Hash40 of ui_chara_falco
-            name_id: the_csk_collection_api::StringType::Overwrite(String::from("peppy")),
+            name_id: the_csk_collection_api::StringType::Overwrite(the_csk_collection_api::CStrCSK::new("peppy")), 
             color_num: the_csk_collection_api::UnsignedByteType::Overwrite(8),
             extra_index_maps: the_csk_collection_api::UnsignedByteMap::Overwrite(HashMap::from([
                 (smash::hash40("color_start_index") /* Hash40 of color_start_index */, the_csk_collection_api::UnsignedByteType::Overwrite(120))
