@@ -10,6 +10,7 @@ mod remove_quake;
 mod melee;
 mod faf_change;
 mod cancel;
+mod css;
 use smash::app::lua_bind::*;
 use smash::lib::lua_const::*;
 use smash::app::utility::get_kind;
@@ -28,6 +29,7 @@ pub const MIN_GRAVITY : f32 = 0.065;
 
 
 pub fn install() {
+	css::install();
     hitstun::install();
     dacus::install();
     landing::install();
