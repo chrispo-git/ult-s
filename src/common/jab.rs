@@ -13,9 +13,6 @@ use crate::util::*;
 //Jab Cancel
 unsafe extern "C" fn jabcancel(fighter : &mut L2CFighterCommon) {
     unsafe {
-		if !is_mechanics_enabled() {
-			return;
-		}
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);    
 		let fighter_kind = smash::app::utility::get_kind(boma);
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
@@ -33,6 +30,21 @@ unsafe extern "C" fn jabcancel(fighter : &mut L2CFighterCommon) {
 					MotionModule::change_motion(boma, Hash40::new("attack_13"), 2.0, 1.0, false, 0.0, false, false);
 			};
 		};
+		if !is_mechanics_enabled() {
+			if HAS_ENABLE_100_ON[ENTRY_ID] {
+					WorkModule::set_flag(boma, true, *FIGHTER_STATUS_ATTACK_FLAG_ENABLE_100);
+			};
+				if HAS_ENABLE_COMBO_ON[ENTRY_ID] {
+					WorkModule::set_flag(boma, true, *FIGHTER_STATUS_ATTACK_FLAG_ENABLE_COMBO);
+					if fighter_kind == *FIGHTER_KIND_DEMON {
+						WorkModule::set_flag(boma, true, *FIGHTER_DEMON_STATUS_ATTACK_COMBO_FLAG_CHANGE_STATUS);
+					};
+				};
+				if HAS_ENABLE_NO_HIT_COMBO_ON[ENTRY_ID] {
+					WorkModule::set_flag(boma, true, *FIGHTER_STATUS_ATTACK_FLAG_ENABLE_COMBO);
+				};
+			return;
+		}
 		//Prevents jab overriding
 		if [*FIGHTER_STATUS_KIND_ATTACK_100, *FIGHTER_STATUS_KIND_ATTACK, *FIGHTER_DEMON_STATUS_KIND_ATTACK_COMBO].contains(&status_kind) {
 			if ((stick_x <= 0.2 && stick_x >= -0.2) && (stick_y <= 0.2 && stick_y >= -0.2)) && ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_ATTACK) && ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_CATCH) && 

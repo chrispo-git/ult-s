@@ -39,8 +39,4 @@ pub fn install() {
 	remove_quake::install();
 	cancel::install();
 
-    //Setting values for everybody!
-    let all: Vec<i32> = vec![-1];
-    param_config::update_attribute_mul_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("damage_fly_top_air_accel_y"), 0, 1.05));
-    param_config::update_float_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("damage_fly_top_speed_y_stable"), 0, 1.84));
 }
