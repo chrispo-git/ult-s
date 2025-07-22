@@ -37,6 +37,11 @@ pub const TAP_JUMP_BUFFER_MAX : i32 = 6;
 pub static mut JC_GRAB_LOCKOUT : [i32; 8] = [0; 8];
 pub const MAX_LOCKOUT : i32 = 10;
 
+//Universal Settings
+
+pub static mut IS_MECHANICS_ENABLED : bool = true;
+pub static mut IS_SMALL_HOLD_BUFFER : bool = false;
+pub static mut IS_SMALL_TAP_BUFFER : bool = false;
 
 //Cstick
 pub static mut SUB_STICK: [Vector2f;9] = [Vector2f{x:0.0, y: 0.0};9];
@@ -623,7 +628,15 @@ pub(crate) unsafe fn is_tap_djc(boma: &mut smash::app::BattleObjectModuleAccesso
 	return TAP_JUMP_BUFFER[ENTRY_ID] <= 0;
 }
 
+pub(crate) unsafe fn is_mechanics_enabled() -> bool {
+	return IS_MECHANICS_ENABLED;
+}
 
+pub(crate) unsafe fn update_enabled_checks() -> () {
+	IS_MECHANICS_ENABLED = !Path::new("sd:/ultimate/ult-s/sys-flags/mechanics.flag").is_file();
+	IS_SMALL_HOLD_BUFFER = Path::new("sd:/ultimate/ult-s/sys-flags/hold.flag").is_file();
+	IS_SMALL_TAP_BUFFER = Path::new("sd:/ultimate/ult-s/sys-flags/tap.flag").is_file();
+}
 pub fn install() {
     Agent::new("fighter")
 	.on_line(Main, util_update)
@@ -633,4 +646,7 @@ pub fn install() {
 	skyline::install_hook!(on_flag_hook);
 	skyline::install_hook!(off_flag_hook);
 	skyline::install_hook!(article_hook);
+	unsafe {
+		update_enabled_checks();
+	}
 }

@@ -13,6 +13,9 @@ use crate::util::*;
 //Jab Cancel
 unsafe extern "C" fn jabcancel(fighter : &mut L2CFighterCommon) {
     unsafe {
+		if !is_mechanics_enabled() {
+			return;
+		}
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);    
 		let fighter_kind = smash::app::utility::get_kind(boma);
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);

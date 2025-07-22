@@ -7,8 +7,6 @@ mod movement;
 mod bone;
 mod projectile_invuln;
 mod remove_quake;
-mod melee;
-mod faf_change;
 mod cancel;
 mod css;
 use smash::app::lua_bind::*;
@@ -37,10 +35,8 @@ pub fn install() {
     jab::install();
     movement::install();
     bone::install();
-    melee::install();
 	projectile_invuln::install();
 	remove_quake::install();
-	faf_change::install();
 	cancel::install();
 
     //Setting values for everybody!

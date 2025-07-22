@@ -1,12 +1,73 @@
 
+use crate::util::*;
+
+
 #[skyline::hook(offset = 0x1a2b570)]
 unsafe fn css_main_loop(arg: *const CharaSelect) {
     {
         if ninput::any::is_down(ninput::Buttons::MINUS) {
-            println!("Minus Pressed!")
+            println!("Minus Pressed!");
+            show_mod_settings();
         }
         original!()(arg)
     }
+}
+
+lazy_static! {
+    static ref MENU_HTML: Vec<u8> = std::fs::read("mods:/ui/docs/menu.html").unwrap();
+    static ref MENU_JS: Vec<u8> = std::fs::read("mods:/ui/docs/menu.js").unwrap();
+    static ref COMMON_JS: Vec<u8> = std::fs::read("mods:/ui/docs/common.js").unwrap();
+    static ref COMMON_CSS: Vec<u8> = std::fs::read("mods:/ui/docs/common.css").unwrap();
+    static ref MENU_CSS: Vec<u8> = std::fs::read("mods:/ui/docs/menu.css").unwrap();
+    static ref TOGGLE_JS: Vec<u8> = std::fs::read("mods:/ui/docs/toggles.js").unwrap();
+}
+pub fn show_mod_settings() {
+    let path = "sd:/ultimate/ult-s/sys-flags/";
+    match std::fs::create_dir(path) {
+        Ok(_) => println!("Settings Folder Created!"),
+        Err(_) => {
+            match std::fs::remove_dir_all(path) {
+                Ok(_) => println!("Settings reset successfully!"),
+                Err(_) => println!("Error resetting settings!")
+            }
+            std::fs::create_dir(path);
+        }
+    }
+
+    let response = skyline_web::Webpage::new()
+        .htdocs_dir("contents")
+        .file("index.html", MENU_HTML.as_slice())
+        .file("menu.css", MENU_CSS.as_slice())
+        .file("menu.js", MENU_JS.as_slice())
+        .file("common.js", COMMON_JS.as_slice())
+        .file("toggles.js", TOGGLE_JS.as_slice())
+        .background(skyline_web::Background::Default)
+        .boot_display(skyline_web::BootDisplay::Default)
+        .open()
+        .unwrap();
+    
+    match response.get_last_url() {
+        Ok(url) => {
+            let options_str = url.trim_start_matches("http://localhost/");
+            println!("Options chosen: {}", options_str);
+            if options_str.is_empty() {
+                return;
+            }
+
+            let options = options_str.split("-");
+
+            for i in options {
+                println!("{}", i);
+                let mut file = std::fs::File::create(format!("{}{}.flag", path, i)).unwrap();
+            }
+        }
+        Err(_) => {
+            println!("Uh oh! Error getting options!");
+        }
+    }
+	unsafe {
+		update_enabled_checks();
+	}
 }
 
 // this structure is gross and largely undefined but it holds some useful information about the CSS instance
@@ -48,7 +109,7 @@ pub struct CharaSelect {
     player_buffer: *const u64,
     player_root: *const u64,
     _ptr_1a0: *const u64,
-    players: [[u64;2]; 8], // not researched enough
+    players: [[u64; 2]; 8], // not researched enough
     _pad2: [u64; 2],
     first_player: *const PlayerInfo,
     max_allowed_player: *const PlayerInfo,
@@ -65,7 +126,7 @@ pub struct CharaSelect {
 pub struct PlayerInfo {
     root: *const u64,
     card: *const PlayerCard,
-    next: *const PlayerInfo
+    next: *const PlayerInfo,
 }
 #[repr(C, align(8))]
 #[derive(Debug, Copy, Clone)]
@@ -138,10 +199,6 @@ pub struct PlayerCard {
     // theres more here
 }
 
-
-
 pub fn install() {
-    skyline::install_hooks!(
-        css_main_loop
-    );
+    skyline::install_hooks!(css_main_loop);
 }
