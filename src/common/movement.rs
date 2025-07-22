@@ -165,6 +165,10 @@ unsafe extern "C" fn hold_buffer_killer(fighter : &mut L2CFighterCommon) {
             *CONTROL_PAD_BUTTON_SPECIAL_RAW2
         ];
         let mut hold_buffer_lim = HOLD_BUFFER_LIMIT;
+        let precede = WorkModule::get_param_int(fighter.module_accessor, hash40("common"), hash40("precede"));
+        if IS_SMALL_HOLD_BUFFER {
+            hold_buffer_lim = precede; //hold buffer now matches precede
+        }
 
         //Multiplies hold buffer duration by 2x during damage states to allow for pressing buttons out of hitstun as per usual
         if (*FIGHTER_STATUS_KIND_DAMAGE..*FIGHTER_STATUS_KIND_DAMAGE_FALL).contains(&status_kind){
