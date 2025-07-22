@@ -1,14 +1,18 @@
 
 var enabled = [];
 var str = "";
-function toggle(mode_name, self, original, altered, elementID) {
+function toggle(mode_name, self, elementID) {
     const text = document.getElementById(elementID).innerHTML;
     if (enabled.includes(mode_name)) {
         enabled.splice(enabled.indexOf(mode_name), 1);
-        document.getElementById(elementID).innerHTML = text.replace("("+altered+")", "("+original+")");
     } else {
         enabled.push(mode_name);
-        document.getElementById(elementID).innerHTML = text.replace("("+original+")", "("+altered+")");
+    }
+    var x = document.getElementById(elementID);
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
     }
     self.blur();
     self.focus();

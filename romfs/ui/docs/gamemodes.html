@@ -50,25 +50,22 @@
     <div class="main" id="list">
         <div class="scrollbar">
             <div class="flex-container">
-                <button onclick="toggle('mechanics', this, 'mechanics-text')" onfocus="textFocus('Ultimate S System Mechanics such as Edge Cancelling, Wavedash or Perfect Pivot.')" class="flex-item">
-                        <div class="icon-background"><img id="mechanics-text" class="abstract-icon is-appear visible"
-                            src="check.svg" /></div>
+                <button onclick="toggle('mechanics', this, 'On', 'Off', 'mechanics-text')" onfocus="textFocus('Ultimate S System Mechanics such as Edge Cancelling, Wavedash or Perfect Pivot.')" class="flex-item">
+                        <div class="icon-background"></div>
                         <div class="item-container">
-                            <h2>Ultimate S Mechanics</h2>
+                            <h2 id="mechanics-text">Ultimate S Mechanics (On)</h2>
                         </div>
                     </button>
-                <button onclick="toggle('hold', this, 'hold-text')" onfocus="textFocus('Smash Ultimate\'s Hold Buffer mechanic.')" class="flex-item">
-                        <div class="icon-background"><img id="hold-text" class="abstract-icon is-appear visible"
-                            src="check.svg" /></div>
+                <button onclick="toggle('hold', this, 'On', 'Off', 'hold-text')" onfocus="textFocus('Smash Ultimate\'s Hold Buffer mechanic.')" class="flex-item">
+                        <div class="icon-background"></div>
                         <div class="item-container">
-                            <h2>Hold Buffer</h2>
+                            <h2 id="hold-text">Hold Buffer (On)</h2>
                         </div>
                     </button>
-                <button onclick="toggle('sh', this, 'sh-text')" onfocus="textFocus('Smash Ultimate\'s Shorthop Aerial Macro.')" class="flex-item">
-                        <div class="icon-background"><img id="sh-text" class="abstract-icon is-appear visible"
-                            src="check.svg" /></div>
+                <button onclick="toggle('sh', this, 'On', 'Off', 'sh-text')" onfocus="textFocus('Smash Ultimate\'s Shorthop Aerial Macro.')" class="flex-item">
+                        <div class="icon-background"></div>
                         <div class="item-container">
-                            <h2>Shorthop Aerial Macro</h2>
+                            <h2 id="sh-text">Shorthop Aerial Macro (On)</h2>
                         </div>
                     </button>
                 <button onclick="saveAndExit()" onfocus="textFocus('')" class="flex-item">
