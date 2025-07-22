@@ -16,6 +16,15 @@
     <script src="./common.js"></script>
     <script src="./menu.js"></script>
     <script src="./toggles.js"></script>
+    <style>
+    .footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    }
+    </style>
 </head>
 
 <body>
@@ -39,31 +48,35 @@
     <div class="main" id="list">
         <div class="scrollbar">
             <div class="flex-container">
-                <button onclick="toggle('mechanics', this, 'On', 'Off', 'mechanics-text')" class="flex-item">
+                <button onclick="toggle('mechanics', this, 'On', 'Off', 'mechanics-text')" onfocus="textFocus('Ultimate S System Mechanics such as Edge Cancelling, Wavedash or Perfect Pivot')" class="flex-item">
                         <div class="icon-background"></div>
                         <div class="item-container">
                             <h2 id="mechanics-text">Ultimate S Mechanics (On)</h2>
                         </div>
                     </button>
-                <button onclick="toggle('hold', this, 'On', 'Off', 'hold-text')" class="flex-item">
+                <button onclick="toggle('hold', this, 'On', 'Off', 'hold-text')" onfocus="textFocus('Smash Ultimate\'s Hold Buffer mechanic.')" class="flex-item">
                         <div class="icon-background"></div>
                         <div class="item-container">
                             <h2 id="hold-text">Hold Buffer (On)</h2>
                         </div>
                     </button>
-                <button onclick="toggle('sh', this, 'On', 'Off', 'sh-text')" class="flex-item">
+                <button onclick="toggle('sh', this, 'On', 'Off', 'sh-text')" onfocus="textFocus('Smash Ultimate\'s Shorthop Aerial Macro.')" class="flex-item">
                         <div class="icon-background"></div>
                         <div class="item-container">
                             <h2 id="sh-text">Shorthop Aerial Macro (On)</h2>
                         </div>
                     </button>
-                <button onclick="saveAndExit()" class="flex-item">
+                <button onclick="saveAndExit()" onfocus="textFocus('⠀')" class="flex-item">
                         <div class="icon-background"></div>
                         <div class="item-container">
                             <h2>Save Settings</h2>
                         </div>
                     </button>
             </div>
+        </div>
+        <div class="footer">
+            <hr>
+            <h2 id="focus-text">⠀</h2>
         </div>
     </div>
 </body>

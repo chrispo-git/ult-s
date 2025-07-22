@@ -15,6 +15,10 @@ function toggle(mode_name, self, original, altered, elementID) {
     str = enabled.join('-');
 }
 
+function textFocus(text) {
+    document.getElementById("focus-text").innerHTML = text;
+}
+
 function saveAndExit() {
     if (enabled === undefined || enabled.length == 0) {
         location.href = "http://localhost/";
