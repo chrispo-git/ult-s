@@ -11,10 +11,12 @@ use smash::phx::Vector2f;
 use crate::util::*;
 use std::collections::VecDeque;
 static NONE :  smash::phx::Vector3f =  smash::phx::Vector3f { x: 0.0, y: 0.0, z: 0.0 };
+const DEAD_MAX : i32 = 63;
 
 
 static mut IS_SUPERBOSS : [bool; 8] = [false; 8];
 static mut UPDATE_COUNTER : [i32; 8] = [0; 8];
+static mut DEAD_COUNT : [i32; 8] = [0; 8];
 static mut SUPERBOSS_CHOSEN : bool = false;
 static mut ACTIVE_PARTICIPANTS : VecDeque<i32> = VecDeque::new();
 static mut DEFENDERS : VecDeque<i32> = VecDeque::new();
@@ -34,6 +36,7 @@ unsafe extern "C" fn superboss(fighter : &mut L2CFighterCommon) {
             if UPDATE_COUNTER[ENTRY_ID] == 1 {
                 SUPERBOSS_CHOSEN = false;
                 SUPERBOSS_DEAD = false;
+                IS_SUPERBOSS[ENTRY_ID] = false;
                 ACTIVE_PARTICIPANTS.push_back(WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID));
                 DEFENDERS = VecDeque::new();
                 println!("Player {} participating", ENTRY_ID);
@@ -90,20 +93,23 @@ unsafe extern "C" fn superboss(fighter : &mut L2CFighterCommon) {
                 ACTIVE_PARTICIPANTS = VecDeque::new();
             }
         }
-        if WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) == DESIGNATED_WINNER && stock_count(boma) == 0 {
-            let next_up = DEFENDERS.pop_front();
-            match next_up {
-                Some(x) => {DESIGNATED_WINNER = x;  println!("Player {} is now next up!", x)}
-                None => println!("Nobody left?"),
+        if smash::app::sv_information::is_ready_go() {
+            if WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) == DESIGNATED_WINNER && DEAD_COUNT[ENTRY_ID] > DEAD_MAX {
+                let next_up = DEFENDERS.pop_front();
+                match next_up {
+                    Some(x) => {DESIGNATED_WINNER = x;  println!("Player {} is now next up!", x)}
+                    None => println!("Nobody left?"),
+                }
             }
         }
         if IS_SUPERBOSS[ENTRY_ID] {
             ModelModule::set_scale(boma, 1.8);
             AttackModule::set_attack_scale(boma, 1.0, true);
             GrabModule::set_size_mul(boma, 1.8);
+            ModelModule::enable_gold_eye(fighter.module_accessor);
             WorkModule::on_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_KINOKO);
+            WorkModule::on_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_GOLD);
             WorkModule::on_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_DISABLE_ESCAPE_AIR);
-
             WorkModule::unable_transition_term(boma, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_GUARD);
             WorkModule::unable_transition_term(boma, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_GUARD_ON);
             WorkModule::unable_transition_term(boma, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_ESCAPE);
@@ -113,7 +119,10 @@ unsafe extern "C" fn superboss(fighter : &mut L2CFighterCommon) {
             WorkModule::unable_transition_term(boma, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_TURN_DASH);
 
             if [*FIGHTER_STATUS_KIND_GUARD, *FIGHTER_STATUS_KIND_GUARD_ON].contains(&status_kind) {
-                StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_GUARD_OFF, false);
+                StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_WAIT, true);
+            }
+            if [*FIGHTER_STATUS_KIND_DASH, *FIGHTER_STATUS_KIND_TURN_DASH].contains(&status_kind) {
+                StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_WALK, false);
             }
 
             if ![*FIGHTER_STATUS_KIND_LANDING, *FIGHTER_STATUS_KIND_LANDING_ATTACK_AIR, *FIGHTER_STATUS_KIND_LANDING_FALL_SPECIAL].contains(&status_kind) {
@@ -126,16 +135,22 @@ unsafe extern "C" fn superboss(fighter : &mut L2CFighterCommon) {
             } else {
 			    damage!(fighter, *MA_MSC_DAMAGE_DAMAGE_NO_REACTION, *DAMAGE_NO_REACTION_MODE_DAMAGE_POWER, 10.0);
             }
-            println!("Superboss stock count : {}", stock_count(boma));
-            if stock_count(boma) == 0 {
+            if DEAD_COUNT[ENTRY_ID] > DEAD_MAX {
                 SUPERBOSS_DEAD = true;
             } else {
                 SUPERBOSS_DEAD = false;
             }
         }
+        if status_kind == *FIGHTER_STATUS_KIND_STANDBY {
+            DEAD_COUNT[ENTRY_ID] += 1;
+            //println!("DEAD COUNT : {}", DEAD_COUNT[ENTRY_ID]);
+        } else {
+            DEAD_COUNT[ENTRY_ID] = 0;
+        }
         if smash::app::sv_information::is_ready_go() && SUPERBOSS_DEAD {
-            if WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) != DESIGNATED_WINNER && stock_count(boma) > 0 {
+            if WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) != DESIGNATED_WINNER && DEAD_COUNT[ENTRY_ID] < DEAD_MAX {
                 println!("tough luck! time to die");
+                DEAD_COUNT[ENTRY_ID] = 0;
                 if ![*FIGHTER_STATUS_KIND_DEAD].contains(&status_kind) {
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_DEAD, false);
                 }
