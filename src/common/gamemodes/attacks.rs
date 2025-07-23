@@ -14,9 +14,6 @@ use smash::app::sv_math;
 #[skyline::hook(replace = smash::app::sv_animcmd::ATTACK)]
 unsafe fn attack_replace(lua_state: u64) {
     let mut l2c_agent = L2CAgent::new(lua_state);
-    if !is_gamemode("effects".to_string()) && !is_gamemode("angles".to_string()) {
-        original!()(lua_state);
-    }
 
     let boma = smash::app::sv_system::battle_object_module_accessor(lua_state);
     let mut effs = 0;
