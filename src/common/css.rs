@@ -1,6 +1,15 @@
 
 use crate::util::*;
-
+#[skyline::hook(offset = 0x1792dc0, inline)]
+unsafe fn on_rule_selection(_: &skyline::hooks::InlineCtx) {
+    println!("We Are On Rule Select");
+    if ninput::any::is_down(ninput::Buttons::R) {
+        println!("R Pressed!");
+        show_gamemodes();
+    } else {
+        reset_gamemodes();
+    }
+}
 
 #[skyline::hook(offset = 0x1a2b570)]
 unsafe fn css_main_loop(arg: *const CharaSelect) {
@@ -9,17 +18,63 @@ unsafe fn css_main_loop(arg: *const CharaSelect) {
             println!("Minus Pressed!");
             show_mod_settings();
         }
+        if ninput::any::is_down(ninput::Buttons::R) && ninput::any::is_down(ninput::Buttons::X) {
+            println!("Secret!");
+            show_gamemodes();
+        }
         original!()(arg)
     }
 }
 
 lazy_static! {
     static ref MENU_HTML: Vec<u8> = std::fs::read("mods:/ui/docs/menu.html").unwrap();
+    static ref GAMEMODES_HTML: Vec<u8> = std::fs::read("mods:/ui/docs/gamemodes.html").unwrap();
     static ref MENU_JS: Vec<u8> = std::fs::read("mods:/ui/docs/menu.js").unwrap();
+    static ref GRID_MENU_JS: Vec<u8> = std::fs::read("mods:/ui/docs/gridmenu.js").unwrap();
     static ref COMMON_JS: Vec<u8> = std::fs::read("mods:/ui/docs/common.js").unwrap();
     static ref COMMON_CSS: Vec<u8> = std::fs::read("mods:/ui/docs/common.css").unwrap();
     static ref MENU_CSS: Vec<u8> = std::fs::read("mods:/ui/docs/menu.css").unwrap();
     static ref TOGGLE_JS: Vec<u8> = std::fs::read("mods:/ui/docs/toggles.js").unwrap();
+}
+pub fn show_gamemodes() {
+    unsafe {
+        reset_gamemodes();
+    }
+    let response = skyline_web::Webpage::new()
+        .htdocs_dir("contents")
+        .file("index.html", GAMEMODES_HTML.as_slice())
+        .file("menu.css", MENU_CSS.as_slice())
+        .file("gridmenu.js", GRID_MENU_JS.as_slice())
+        .file("common.js", COMMON_JS.as_slice())
+        .file("toggles.js", TOGGLE_JS.as_slice())
+        .background(skyline_web::Background::Default)
+        .boot_display(skyline_web::BootDisplay::Default)
+        .open()
+        .unwrap();
+    match response.get_last_url() {
+        Ok(url) => {
+            let options_str = url.trim_start_matches("http://localhost/");
+            println!("Options chosen: {}", options_str);
+            if options_str.is_empty() {
+                return;
+            }
+
+            let options = options_str.split("-");
+
+            for i in options {
+                println!("{}", i);
+                unsafe {
+                    add_gamemode(i.to_string());
+                }
+            }
+        }
+        Err(_) => {
+            println!("Uh oh! Error getting options!");
+        }
+    }
+	unsafe {
+		update_enabled_checks();
+	}
 }
 pub fn show_mod_settings() {
     let path = "sd:/ultimate/ult-s/sys-flags/";
@@ -200,5 +255,5 @@ pub struct PlayerCard {
 }
 
 pub fn install() {
-    skyline::install_hooks!(css_main_loop);
+    skyline::install_hooks!(css_main_loop, on_rule_selection);
 }

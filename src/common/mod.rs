@@ -9,6 +9,8 @@ mod projectile_invuln;
 mod remove_quake;
 mod cancel;
 mod css;
+mod gamemodes;
+
 use smash::app::lua_bind::*;
 use smash::lib::lua_const::*;
 use smash::app::utility::get_kind;
@@ -28,6 +30,7 @@ pub const MIN_GRAVITY : f32 = 0.065;
 
 pub fn install() {
 	css::install();
+	gamemodes::install();
     hitstun::install();
     dacus::install();
     landing::install();
@@ -38,5 +41,4 @@ pub fn install() {
 	projectile_invuln::install();
 	remove_quake::install();
 	cancel::install();
-
 }

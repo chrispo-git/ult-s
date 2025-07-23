@@ -14,6 +14,8 @@ use std::{fs, path::Path};
 use crate::controls::ext::*;
 use crate::common::*;
 
+pub static mut GAMEMODES : Vec<String> = Vec::new();
+
 static mut STATUS_DURATION : [i32; 8] = [0; 8];
 static mut MOTION_DURATION : [i32; 8] = [0; 8];
 pub static mut POS_X : [f32; 8] = [0.0; 8];
@@ -655,6 +657,19 @@ pub(crate) unsafe fn update_enabled_checks() -> () {
 		param_config::update_float_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("damage_fly_top_speed_y_stable"), 0, 1.8));
 	}
 }
+
+pub (crate) unsafe fn reset_gamemodes() -> () {
+	GAMEMODES = Vec::new();
+}
+
+pub (crate) unsafe fn add_gamemode(mode: String) -> () {
+	GAMEMODES.push(mode);
+}
+
+pub (crate) unsafe fn is_gamemode(mode: String) -> bool {
+	return GAMEMODES.contains(&mode);
+}
+
 pub fn install() {
     Agent::new("fighter")
 	.on_line(Main, util_update)
