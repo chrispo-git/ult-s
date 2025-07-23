@@ -320,7 +320,7 @@ unsafe extern "C" fn util_update(fighter : &mut L2CFighterCommon) {
 		}
 		if TAP_JUMP_BUFFER[ENTRY_ID] > 0 {
 			TAP_JUMP_BUFFER[ENTRY_ID] -= 1;
-			println!("Tap Jump Buffer: {}", TAP_JUMP_BUFFER[ENTRY_ID]);
+			//println!("Tap Jump Buffer: {}", TAP_JUMP_BUFFER[ENTRY_ID]);
 		};
 		if  PostureModule::scale(boma) != 0.001345 {
 			PREV_SCALE[ENTRY_ID] = PostureModule::scale(boma);
