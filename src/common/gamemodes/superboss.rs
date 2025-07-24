@@ -120,8 +120,12 @@ unsafe extern "C" fn superboss(fighter : &mut L2CFighterCommon) {
             }
             if [*FIGHTER_STATUS_KIND_ATTACK_S4_START, *FIGHTER_STATUS_KIND_ATTACK_S4, *FIGHTER_STATUS_KIND_ATTACK_HI4_START, *FIGHTER_STATUS_KIND_ATTACK_HI4, *FIGHTER_STATUS_KIND_ATTACK_LW4_START, *FIGHTER_STATUS_KIND_ATTACK_LW4
             ].contains(&status_kind) {
+                MotionModule::set_rate(boma, 0.5);
 			    damage!(fighter, /*MSC*/ *MA_MSC_DAMAGE_DAMAGE_NO_REACTION, /*Type*/ *DAMAGE_NO_REACTION_MODE_ALWAYS, /*DamageThreshold*/ 0);
             } else {
+                if ![*FIGHTER_STATUS_KIND_LANDING, *FIGHTER_STATUS_KIND_LANDING_ATTACK_AIR, *FIGHTER_STATUS_KIND_LANDING_FALL_SPECIAL].contains(&status_kind) {
+                    MotionModule::set_rate(boma, 0.675);
+                }
 			    damage!(fighter, *MA_MSC_DAMAGE_DAMAGE_NO_REACTION, *DAMAGE_NO_REACTION_MODE_DAMAGE_POWER, 10.0);
             }
             WorkModule::on_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_GOLD);
@@ -131,9 +135,8 @@ unsafe extern "C" fn superboss(fighter : &mut L2CFighterCommon) {
             WorkModule::unable_transition_term(boma, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_DASH);
             WorkModule::unable_transition_term(boma, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_TURN_DASH);
 
-            
-            if ![*FIGHTER_STATUS_KIND_LANDING, *FIGHTER_STATUS_KIND_LANDING_ATTACK_AIR, *FIGHTER_STATUS_KIND_LANDING_FALL_SPECIAL, *FIGHTER_STATUS_KIND_REBIRTH].contains(&status_kind) {
-                MotionModule::set_rate(boma, 0.65);
+            if MotionModule::frame(boma) as i32 == 7 && status_kind == *FIGHTER_STATUS_KIND_REBIRTH && MotionModule::motion_kind(boma) == hash40("down_stand_u") {
+                EffectModule::req_follow(boma, smash::phx::Hash40::new("sys_special_all_up"), smash::phx::Hash40::new("hip"), &NONE, &NONE, 1.25, true, 0, 0, 0, 0, 0, true, true) as u32;
             }
         } else {
             TeamModule::set_hit_team(boma, 1);
