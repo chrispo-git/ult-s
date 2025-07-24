@@ -30,7 +30,7 @@ unsafe extern "C" fn superboss(fighter : &mut L2CFighterCommon) {
 		let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 		let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
         let status_kind = StatusModule::status_kind(boma);
-        if !smash::app::sv_information::is_ready_go() && ![*FIGHTER_STATUS_KIND_WIN, *FIGHTER_STATUS_KIND_LOSE].contains(&status_kind) && ![hash40("lose")].contains(&MotionModule::motion_kind(boma)) {
+        if !smash::app::sv_information::is_ready_go() && ![*FIGHTER_STATUS_KIND_WIN, *FIGHTER_STATUS_KIND_LOSE, *FIGHTER_STATUS_KIND_STANDBY, *FIGHTER_STATUS_KIND_DEAD].contains(&status_kind) && ![hash40("lose")].contains(&MotionModule::motion_kind(boma)) {
             UPDATE_COUNTER[ENTRY_ID] += 1;
 
             if UPDATE_COUNTER[ENTRY_ID] == 1 {
