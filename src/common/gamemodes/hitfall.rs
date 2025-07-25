@@ -18,9 +18,6 @@ unsafe extern "C" fn hitfall(fighter : &mut L2CFighterCommon) {
 		let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
         let status_kind = StatusModule::status_kind(boma);
 		let situation_kind = StatusModule::situation_kind(boma);
-        if [*FIGHTER_STATUS_KIND_CATCH_ATTACK].contains(&status_kind) {
-            return;
-        }
         if AttackModule::is_infliction_status(fighter.module_accessor, *COLLISION_KIND_MASK_HIT) && status_kind == *FIGHTER_STATUS_KIND_ATTACK_AIR && StopModule::is_stop(boma) {
 			let cat2 = ControlModule::get_command_flag_cat(boma, 1);
 			if (cat2 & *FIGHTER_PAD_CMD_CAT2_FLAG_FALL_JUMP) != 0 && ControlModule::get_stick_y(boma) < -0.66 {
