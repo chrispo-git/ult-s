@@ -7,6 +7,7 @@ mod itemduel;
 mod hitfall;
 mod parry;
 mod hitstunchange;
+mod sixtyfour;
 
 pub fn install() {
 	turbo::install();
@@ -18,4 +19,5 @@ pub fn install() {
     itemduel::install();
     parry::install();
     hitstunchange::install();
+    sixtyfour::install();
 }
