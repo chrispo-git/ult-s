@@ -21,16 +21,26 @@ unsafe extern "C" fn hitstun(fighter : &mut L2CFighterCommon) {
 		let situation_kind = StatusModule::situation_kind(boma);
         let remaining_hitstun = WorkModule::get_float(boma, *FIGHTER_INSTANCE_WORK_ID_FLOAT_DAMAGE_REACTION_FRAME);
         let total_hitstun = WorkModule::get_float(boma, *FIGHTER_INSTANCE_WORK_ID_FLOAT_DAMAGE_REACTION_FRAME_LAST);
-        let hitstun_mul = 1.5;
+        let mut hitstun_mul = 1.5;
+        if is_gamemode("sixtyfour".to_string()) {
+            hitstun_mul = 0.533/0.4;
+        }
         if remaining_hitstun > 0.0 {
             if remaining_hitstun == total_hitstun {
                 println!("Old hitstun {}, New Hitstun {}", remaining_hitstun, remaining_hitstun*hitstun_mul);
                 WorkModule::set_float(boma, remaining_hitstun*hitstun_mul, *FIGHTER_INSTANCE_WORK_ID_FLOAT_DAMAGE_REACTION_FRAME);
                 WorkModule::set_float(boma, (remaining_hitstun*hitstun_mul)+1.0, *FIGHTER_INSTANCE_WORK_ID_FLOAT_DAMAGE_REACTION_FRAME_LAST);
             } else {
-                println!("hitstun countdown! {}", remaining_hitstun);
+                //println!("hitstun countdown! {}", remaining_hitstun);
             }
         }
+		if remaining_hitstun > 0.0 && [*FIGHTER_STATUS_KIND_DAMAGE_AIR, *FIGHTER_STATUS_KIND_DAMAGE_FALL, *FIGHTER_STATUS_KIND_DAMAGE_FLY, *FIGHTER_STATUS_KIND_DAMAGE_FLY_ROLL, *FIGHTER_STATUS_KIND_DAMAGE_FLY_METEOR].contains(&status_kind) {
+			CAN_AIRDODGE[ENTRY_ID] = 1;
+			CAN_ATTACK_AIR[ENTRY_ID] = 1;
+		} else {
+			CAN_AIRDODGE[ENTRY_ID] = 0;
+			CAN_ATTACK_AIR[ENTRY_ID] = 0;
+		};
     };
 }
 pub fn install() {
