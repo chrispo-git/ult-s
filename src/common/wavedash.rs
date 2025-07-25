@@ -224,7 +224,6 @@ pub unsafe fn change_status_request_script_hook(boma: &mut smash::app::BattleObj
 						return 0 as u64
 					}
 			}
-			println!("Keep Smash");
 			original!()(boma, status_kind, arg3)
 		} else if next_status == *FIGHTER_STATUS_KIND_TURN && curr_status == *FIGHTER_STATUS_KIND_LANDING{
 			return 0 as u64
