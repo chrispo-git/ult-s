@@ -22,7 +22,7 @@ unsafe extern "C" fn hitstun(fighter : &mut L2CFighterCommon) {
         let remaining_hitstun = WorkModule::get_float(boma, *FIGHTER_INSTANCE_WORK_ID_FLOAT_DAMAGE_REACTION_FRAME);
         let total_hitstun = WorkModule::get_float(boma, *FIGHTER_INSTANCE_WORK_ID_FLOAT_DAMAGE_REACTION_FRAME_LAST);
         let mut hitstun_mul = 1.5;
-        if is_gamemode("sixtyfour".to_string()) {
+        if !is_gamemode("hitstun".to_string()) {
             hitstun_mul = 0.533/0.4;
         }
         if remaining_hitstun > 0.0 {
