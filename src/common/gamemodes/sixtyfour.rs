@@ -70,7 +70,7 @@ unsafe extern "C" fn sixtyfour(fighter : &mut L2CFighterCommon) {
         }
         for i in 0..6 {
             if AttackModule::is_attack(fighter.module_accessor, i, false) {
-                macros::ATK_SET_SHIELD_SETOFF_MUL(fighter, /*ID*/ i, /*ShieldstunMul*/ shieldstun_mul);
+                macros::ATK_SET_SHIELD_SETOFF_MUL(fighter, /*ID*/ i as u64, /*ShieldstunMul*/ shieldstun_mul);
             }
         }
         if [*FIGHTER_STATUS_KIND_DASH, *FIGHTER_STATUS_KIND_TURN_DASH].contains(&status_kind) {
