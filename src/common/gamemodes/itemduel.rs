@@ -16,7 +16,7 @@ static mut ITEM_HELD : [*mut smash::app::Item; 8] = [ptr::null_mut(); 8];
 static mut HAS_CHOSEN : [bool; 8] = [false; 8];
 static mut IS_IN_ENTRY : [bool; 8] = [false; 8];
 static mut REBIRTH_DO_NOW : [bool; 8] = [false; 8];
-
+static mut DELAY_UNTIL_ACT : [i32; 8] = [30; 8];
 unsafe extern "C" fn itemduel(fighter : &mut L2CFighterCommon) {
     unsafe {
         if !is_gamemode("itemduel".to_string()) {
@@ -26,12 +26,35 @@ unsafe extern "C" fn itemduel(fighter : &mut L2CFighterCommon) {
 		let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
         let status_kind = StatusModule::status_kind(boma);
 		let situation_kind = StatusModule::situation_kind(boma);
-        
-        WorkModule::unable_transition_term(boma, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_ITEM_THROW);
-        WorkModule::unable_transition_term(boma, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_ITEM_THROW_DASH);
-        WorkModule::unable_transition_term(boma, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_ITEM_THROW_FORCE);
-        WorkModule::unable_transition_term(boma, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_ITEM_THROW_FORCE_DASH);
-        WorkModule::unable_transition_term(boma, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_ITEM_THROW_GUARD);
+        if [*FIGHTER_STATUS_KIND_WIN, *FIGHTER_STATUS_KIND_LOSE, *FIGHTER_STATUS_KIND_NONE].contains(&status_kind) || 
+        ([*FIGHTER_STATUS_KIND_STANDBY, *FIGHTER_STATUS_KIND_DEAD].contains(&status_kind) && !smash::app::sv_information::is_ready_go()) ||
+        [
+            hash40("win_1"), hash40("win_1_wait"),
+            hash40("win_2"), hash40("win_2_wait"),
+            hash40("win_3"), hash40("win_3_wait"),
+            hash40("lose")
+            ].contains(&MotionModule::motion_kind(boma)) {
+            for i in 0..8 {
+                ITEM_OPTION[i] = -1;
+                ITEM_HELD[i] = ptr::null_mut();
+                HAS_CHOSEN[i] = false;
+                IS_IN_ENTRY[i] = false;
+                REBIRTH_DO_NOW[i] = false;
+                DELAY_UNTIL_ACT[i] = 30;
+            }
+            return;
+        }
+        if DELAY_UNTIL_ACT[ENTRY_ID] > 0 {
+            DELAY_UNTIL_ACT[ENTRY_ID] -= 1;
+            return;
+        }
+        if smash::app::sv_information::is_ready_go() {
+            WorkModule::unable_transition_term(boma, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_ITEM_THROW);
+            WorkModule::unable_transition_term(boma, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_ITEM_THROW_DASH);
+            WorkModule::unable_transition_term(boma, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_ITEM_THROW_FORCE);
+            WorkModule::unable_transition_term(boma, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_ITEM_THROW_FORCE_DASH);
+            WorkModule::unable_transition_term(boma, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_ITEM_THROW_GUARD);
+        }
         if smash::app::sv_information::is_ready_go() || status_kind == *FIGHTER_STATUS_KIND_WAIT {
             if ![*FIGHTER_STATUS_KIND_ITEM_SWING, *FIGHTER_STATUS_KIND_ITEM_SWING_S3, *FIGHTER_STATUS_KIND_ITEM_SWING_S4,
                 *FIGHTER_STATUS_KIND_ITEM_SHOOT_AIR, *FIGHTER_STATUS_KIND_ITEM_SHOOT_FLY, *FIGHTER_STATUS_KIND_ITEM_SHOOT_JUMP,
@@ -60,7 +83,7 @@ unsafe extern "C" fn itemduel(fighter : &mut L2CFighterCommon) {
         }
         if !ItemModule::is_have_item(boma, 0) && ![*FIGHTER_STATUS_KIND_DEAD, *FIGHTER_STATUS_KIND_STANDBY].contains(&status_kind) {
             if !ITEM_HELD[ENTRY_ID].is_null() {
-                println!("Player {} retrieving their item...", ENTRY_ID);
+                //println!("Player {} retrieving their item...", ENTRY_ID);
                 ItemModule::remove_item(boma, 0);
                 ItemModule::have_item_instance(boma, ITEM_HELD[ENTRY_ID], 0, false, false, false, false);
             } else {
@@ -79,13 +102,6 @@ unsafe extern "C" fn itemduel(fighter : &mut L2CFighterCommon) {
                 HAS_CHOSEN[ENTRY_ID] = true;
                 REBIRTH_DO_NOW[ENTRY_ID] = false;
             }
-        }
-        if [*FIGHTER_STATUS_KIND_WIN, *FIGHTER_STATUS_KIND_LOSE].contains(&status_kind) {
-            ITEM_OPTION[ENTRY_ID] = -1;
-            ITEM_HELD[ENTRY_ID] = ptr::null_mut();
-            HAS_CHOSEN[ENTRY_ID] = false;
-            IS_IN_ENTRY[ENTRY_ID] = false;
-            REBIRTH_DO_NOW[ENTRY_ID] = false
         }
         if [*FIGHTER_STATUS_KIND_DEAD, *FIGHTER_STATUS_KIND_STANDBY].contains(&status_kind){
             HAS_CHOSEN[ENTRY_ID] = false;
