@@ -58,10 +58,17 @@ unsafe extern "C" fn itemduel(fighter : &mut L2CFighterCommon) {
         if [*FIGHTER_STATUS_KIND_ITEM_THROW_DASH].contains(&status_kind) {
 			StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_CATCH_DASH, true);
         }
-        if !ItemModule::is_have_item(boma, 0) && !ITEM_HELD[ENTRY_ID].is_null() && ![*FIGHTER_STATUS_KIND_DEAD, *FIGHTER_STATUS_KIND_STANDBY].contains(&status_kind) {
-            println!("Player {} retrieving their item...", ENTRY_ID);
-            ItemModule::remove_item(boma, 0);
-            ItemModule::have_item_instance(boma, ITEM_HELD[ENTRY_ID], 0, false, false, false, false);
+        if !ItemModule::is_have_item(boma, 0) && ![*FIGHTER_STATUS_KIND_DEAD, *FIGHTER_STATUS_KIND_STANDBY].contains(&status_kind) {
+            if !ITEM_HELD[ENTRY_ID].is_null() {
+                println!("Player {} retrieving their item...", ENTRY_ID);
+                ItemModule::remove_item(boma, 0);
+                ItemModule::have_item_instance(boma, ITEM_HELD[ENTRY_ID], 0, false, false, false, false);
+            } else {
+                println!("Player {} can't find their item! creating new one...", ENTRY_ID);
+                setItem(fighter, ITEM_OPTION[ENTRY_ID]);
+                let item_manager = ItemManager::instance().unwrap();
+                ITEM_HELD[ENTRY_ID] = item_manager.find_active_item_from_id(ItemModule::get_have_item_id(boma, 0) as u32) as *mut smash::app::Item;
+            }
         }
         if (!smash::app::sv_information::is_ready_go() && status_kind != *FIGHTER_STATUS_KIND_WAIT && !IS_IN_ENTRY[ENTRY_ID]) || 
         (REBIRTH_DO_NOW[ENTRY_ID] && status_kind == *FIGHTER_STATUS_KIND_REBIRTH) {
@@ -73,7 +80,13 @@ unsafe extern "C" fn itemduel(fighter : &mut L2CFighterCommon) {
                 REBIRTH_DO_NOW[ENTRY_ID] = false;
             }
         }
-        
+        if [*FIGHTER_STATUS_KIND_WIN, *FIGHTER_STATUS_KIND_LOSE].contains(&status_kind) {
+            ITEM_OPTION[ENTRY_ID] = -1;
+            ITEM_HELD[ENTRY_ID] = ptr::null_mut();
+            HAS_CHOSEN[ENTRY_ID] = false;
+            IS_IN_ENTRY[ENTRY_ID] = false;
+            REBIRTH_DO_NOW[ENTRY_ID] = false
+        }
         if [*FIGHTER_STATUS_KIND_DEAD, *FIGHTER_STATUS_KIND_STANDBY].contains(&status_kind){
             HAS_CHOSEN[ENTRY_ID] = false;
             REBIRTH_DO_NOW[ENTRY_ID] = true;
@@ -105,7 +118,7 @@ unsafe fn setItem(fighter : &mut L2CFighterCommon, val : i32) -> () {
     ItemModule::remove_item(boma, 0);
     ItemModule::have_item(boma, item, 0, 0, false, false);
     macros::STOP_SE(fighter, Hash40::new("se_item_item_get"));
-	EffectModule::kill_kind(boma, smash::phx::Hash40::new("sys_item_get"), false, false);
+	//EffectModule::kill_kind(boma, smash::phx::Hash40::new("sys_item_get"), false, false);
 }
 
 #[skyline::hook(replace = ItemModule::drop_item)]
