@@ -6,6 +6,7 @@ mod superboss;
 mod itemduel;
 mod hitfall;
 mod parry;
+mod hitstunchange;
 
 pub fn install() {
 	turbo::install();
@@ -16,4 +17,5 @@ pub fn install() {
     superboss::install();
     itemduel::install();
     parry::install();
+    hitstunchange::install();
 }
