@@ -18,7 +18,8 @@ unsafe extern "C" fn hitstun(fighter : &mut L2CFighterCommon) {
         }
 		let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
         let status_kind = StatusModule::status_kind(boma);
-		let situation_kind = StatusModule::situation_kind(boma);
+		let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+        let situation_kind = StatusModule::situation_kind(boma);
         let remaining_hitstun = WorkModule::get_float(boma, *FIGHTER_INSTANCE_WORK_ID_FLOAT_DAMAGE_REACTION_FRAME);
         let total_hitstun = WorkModule::get_float(boma, *FIGHTER_INSTANCE_WORK_ID_FLOAT_DAMAGE_REACTION_FRAME_LAST);
         let mut hitstun_mul = 1.5;
