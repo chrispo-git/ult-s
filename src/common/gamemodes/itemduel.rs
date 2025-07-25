@@ -14,6 +14,8 @@ use std::ptr;
 static mut ITEM_OPTION : [i32; 8] = [-1; 8];
 static mut ITEM_HELD : [*mut smash::app::Item; 8] = [ptr::null_mut(); 8];
 static mut HAS_CHOSEN : [bool; 8] = [false; 8];
+static mut IS_IN_ENTRY : [bool; 8] = [false; 8];
+static mut REBIRTH_DO_NOW : [bool; 8] = [false; 8];
 
 unsafe extern "C" fn itemduel(fighter : &mut L2CFighterCommon) {
     unsafe {
@@ -38,7 +40,8 @@ unsafe extern "C" fn itemduel(fighter : &mut L2CFighterCommon) {
                 *FIGHTER_STATUS_KIND_ITEM_SWING_S4_START, *FIGHTER_STATUS_KIND_ITEM_SHOOT_WALK_BRAKE_B, *FIGHTER_STATUS_KIND_ITEM_SHOOT_WALK_BRAKE_F,
                 *FIGHTER_STATUS_KIND_ITEM_STARRING
             ].contains(&status_kind) {
-                if smash::app::sv_math::rand(hash40("fighter"), 240) == 0 {
+                if smash::app::sv_math::rand(hash40("fighter"), 500) == 0 {
+                    println!("Player {} having their item refreshed", ENTRY_ID);
                     setItem(fighter, ITEM_OPTION[ENTRY_ID]);
                     let item_manager = ItemManager::instance().unwrap();
                     ITEM_HELD[ENTRY_ID] = item_manager.find_active_item_from_id(ItemModule::get_have_item_id(boma, 0) as u32) as *mut smash::app::Item;
@@ -55,20 +58,31 @@ unsafe extern "C" fn itemduel(fighter : &mut L2CFighterCommon) {
         if [*FIGHTER_STATUS_KIND_ITEM_THROW_DASH].contains(&status_kind) {
 			StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_CATCH_DASH, true);
         }
-        if !ItemModule::is_have_item(boma, 0) && !ITEM_HELD[ENTRY_ID].is_null() {
+        if !ItemModule::is_have_item(boma, 0) && !ITEM_HELD[ENTRY_ID].is_null() && ![*FIGHTER_STATUS_KIND_DEAD, *FIGHTER_STATUS_KIND_STANDBY].contains(&status_kind) {
+            println!("Player {} retrieving their item...", ENTRY_ID);
             ItemModule::remove_item(boma, 0);
             ItemModule::have_item_instance(boma, ITEM_HELD[ENTRY_ID], 0, false, false, false, false);
         }
-        if (!smash::app::sv_information::is_ready_go() && status_kind != *FIGHTER_STATUS_KIND_WAIT) || [*FIGHTER_STATUS_KIND_DEAD].contains(&status_kind) {
+        if (!smash::app::sv_information::is_ready_go() && status_kind != *FIGHTER_STATUS_KIND_WAIT && !IS_IN_ENTRY[ENTRY_ID]) || 
+        (REBIRTH_DO_NOW[ENTRY_ID] && status_kind == *FIGHTER_STATUS_KIND_REBIRTH) {
             if !HAS_CHOSEN[ENTRY_ID] && ![*FIGHTER_STATUS_KIND_WIN, *FIGHTER_STATUS_KIND_LOSE].contains(&status_kind){
+                println!("Player {} choosing their item...", ENTRY_ID);
                 ITEM_OPTION[ENTRY_ID] = smash::app::sv_math::rand(hash40("fighter"), 11);
                 setItem(fighter, ITEM_OPTION[ENTRY_ID]);
                 HAS_CHOSEN[ENTRY_ID] = true;
+                REBIRTH_DO_NOW[ENTRY_ID] = false;
             }
         }
         
-        if [*FIGHTER_STATUS_KIND_DEAD, *FIGHTER_STATUS_KIND_STANDBY].contains(&status_kind) || !smash::app::sv_information::is_ready_go() {
+        if [*FIGHTER_STATUS_KIND_DEAD, *FIGHTER_STATUS_KIND_STANDBY].contains(&status_kind){
             HAS_CHOSEN[ENTRY_ID] = false;
+            REBIRTH_DO_NOW[ENTRY_ID] = true;
+        }
+
+        if status_kind == *FIGHTER_STATUS_KIND_ENTRY {
+            IS_IN_ENTRY[ENTRY_ID] = true;
+        } else {
+            IS_IN_ENTRY[ENTRY_ID] = false;
         }
     };
 }
