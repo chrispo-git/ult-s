@@ -136,6 +136,7 @@ unsafe extern "C" fn superboss(fighter : &mut L2CFighterCommon) {
             WorkModule::unable_transition_term(boma, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_TURN_DASH);
 
             if (MotionModule::frame(boma) as i32) < 2 && status_kind == *FIGHTER_STATUS_KIND_REBIRTH && MotionModule::motion_kind(boma) == hash40("down_stand_u") {
+                MotionModule::set_rate(boma, 1.0);
 				EffectModule::kill_kind(boma, smash::phx::Hash40::new("sys_special_all_up"), false, false);
                 EffectModule::req_follow(boma, smash::phx::Hash40::new("sys_special_all_up"), smash::phx::Hash40::new("hip"), &NONE, &NONE, 1.25, true, 0, 0, 0, 0, 0, true, true) as u32;
             }
