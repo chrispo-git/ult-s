@@ -5,6 +5,7 @@ mod vampire;
 mod superboss;
 mod itemduel;
 mod hitfall;
+mod parry;
 
 pub fn install() {
 	turbo::install();
@@ -14,4 +15,5 @@ pub fn install() {
     vampire::install();
     superboss::install();
     itemduel::install();
+    parry::install();
 }
