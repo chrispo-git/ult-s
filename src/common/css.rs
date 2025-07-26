@@ -18,10 +18,6 @@ unsafe fn css_main_loop(arg: *const CharaSelect) {
             println!("Minus Pressed!");
             show_mod_settings();
         }
-        if ninput::any::is_down(ninput::Buttons::R) && ninput::any::is_down(ninput::Buttons::X) {
-            println!("Secret!");
-            show_gamemodes();
-        }
         original!()(arg)
     }
 }
