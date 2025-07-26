@@ -30,7 +30,7 @@ unsafe extern "C" fn jabcancel(fighter : &mut L2CFighterCommon) {
 					MotionModule::change_motion(boma, Hash40::new("attack_13"), 2.0, 1.0, false, 0.0, false, false);
 			};
 		};
-		if !is_mechanics_enabled() {
+		if !is_mechanics_enabled() && !is_gamemode("fgmode".to_string()) {
 			if HAS_ENABLE_100_ON[ENTRY_ID] {
 					WorkModule::set_flag(boma, true, *FIGHTER_STATUS_ATTACK_FLAG_ENABLE_100);
 			};

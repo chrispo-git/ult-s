@@ -8,6 +8,7 @@ mod hitfall;
 mod parry;
 mod hitstunchange;
 mod sixtyfour;
+mod fgmode;
 
 pub fn install() {
 	turbo::install();
@@ -20,4 +21,5 @@ pub fn install() {
     parry::install();
     hitstunchange::install();
     sixtyfour::install();
+    fgmode::install();
 }
