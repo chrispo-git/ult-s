@@ -29,6 +29,9 @@ unsafe extern "C" fn kd_throw(fighter : &mut L2CFighterCommon) {
 }
 unsafe extern "C" fn non_tumble_di(fighter : &mut L2CFighterCommon) {
     unsafe {
+		if !is_mechanics_enabled() {
+            return;
+        }
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);  
         let status_kind = StatusModule::status_kind(boma);
         let status_kind_prev = StatusModule::prev_status_kind(boma, 0);
@@ -56,7 +59,9 @@ unsafe extern "C" fn non_tumble_di(fighter : &mut L2CFighterCommon) {
 #[skyline::hook(replace = smash::lua2cpp::L2CFighterCommon::ftStatusUniqProcessDamage_exec_common)]
 pub unsafe fn ftStatusUniqProcessDamage_exec_common_hook(fighter: &mut L2CFighterCommon){
     let ret = original!()(fighter);
-
+	if !is_mechanics_enabled() {
+        ret;
+    }
     smash::lua2cpp::L2CFighterCommon::FighterStatusDamage__correctDamageVector(fighter);
     println!("hook for hitstun being triggered");
 
@@ -65,7 +70,9 @@ pub unsafe fn ftStatusUniqProcessDamage_exec_common_hook(fighter: &mut L2CFighte
 #[skyline::hook(replace = smash::lua2cpp::L2CFighterCommon::ftStatusUniqProcessDamage_exec)]
 pub unsafe fn ftStatusUniqProcessDamage_exec_hook(fighter: &mut L2CFighterCommon){
     let ret = original!()(fighter);
-
+	if !is_mechanics_enabled() {
+        ret;
+    }
     smash::lua2cpp::L2CFighterCommon::FighterStatusDamage__correctDamageVector(fighter);
     println!("hook2 for hitstun being triggered");
 

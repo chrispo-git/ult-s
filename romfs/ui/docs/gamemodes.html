@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,height=device-height,user-scalable=no" />
+    <meta name="focus-ring-visibility" content="hidden" />
+    <title>Menu</title>
+    <script src="./help/js/jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" href="./menu.css" />
+    <link rel="stylesheet" href="./help/css/common.css" />
+    <script src="./common/js/wsnd.min.js"></script>
+    <script src="./common/js/keyhelp.js"></script>
+    <script src="./help/js/common.js"></script>
+    <script src="./common.js"></script>
+    <script src="./gridmenu.js"></script>
+    <script src="./toggles.js"></script>
+    <style>
+    .footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100px;
+    line-height: 70px;
+    text-align: center;
+    }
+    .column {
+    float: left;
+    width: 30%;
+    padding: 5px;
+    }
+    .row:after {
+    content: "";
+    display: table;
+    clear: both;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="bg"></div>
+
+    <div class="l-header">
+        <span class="background-clip"></span>
+        <div class="header">
+            <a id="ret-button" tabindex="-1" class="header-decoration" href="http://localhost/" nx-se-disabled="">
+                <div class="ret-icon-wrapper">
+                    <img class="ret-icon-shadow" ref="./help/img/icon/m_retnormal.svg" />
+                    <img class="ret-icon" ref="./help/img/icon/m_retnormal.svg" />
+                </div>
+            </a>
+            <div class="breadcrumb-list f-u-bold">
+                <p><span data-msgcom="true" data-msgid="textbox_id-10002" style="color: rgb(255, 255, 255); -webkit-text-stroke-width: 2px; -webkit-text-stroke-color: black; z-index: 1;" id="test">Custom Smash Modes</span></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="main" id="list">
+                <div class="flex-container">
+                    <div class="row">
+                        <div class="column">
+                            <button onclick="toggle('turbo', this, 'turbo')" onfocus="textFocus('Cancel all your moves into other moves!')" class="flex-item" style="width: 100%">
+                                    <div class="icon-background"><img id="turbo" class="abstract-icon is-appear " style="display:none"
+                                        src="check.svg" /></div>
+                                    <div class="item-container">
+                                        <h2>Turbo Mode</h2>
+                                    </div>
+                            </button>
+                            <button onclick="toggle('vampire', this, 'vampire')" onfocus="textFocus('Heal from attacking opponents!')" class="flex-item"  style="width: 100%">
+                                    <div class="icon-background"><img id="vampire" class="abstract-icon is-appear " style="display:none"
+                                        src="check.svg" /></div>
+                                    <div class="item-container">
+                                        <h2>Vampire Mode</h2>
+                                    </div>
+                            </button>
+                            <button onclick="toggle('fgmode', this, 'fgmode')" onfocus="textFocus('Gatling mode! Cancel from Jab -> Tilts -> Smashes -> Specials.')" class="flex-item"  style="width: 100%">
+                                    <div class="icon-background"><img id="fgmode" class="abstract-icon is-appear " style="display:none"
+                                        src="check.svg" /></div>
+                                    <div class="item-container">
+                                        <h2>Fighter Mode</h2>
+                                    </div>
+                            </button>
+                            <button onclick="toggle('sixtyfour', this, 'sixtyfour')" onfocus="textFocus('Return to Smash\'s roots! Increased hitstun, shieldstun and reduced landing lag.')" class="flex-item"  style="width: 100%">
+                                    <div class="icon-background"><img id="sixtyfour" class="abstract-icon is-appear " style="display:none"
+                                        src="check.svg" /></div>
+                                    <div class="item-container">
+                                        <h2>64 Mode</h2>
+                                    </div>
+                            </button>
+                        </div>
+                        <div class="column">
+                            <button onclick="toggle('superboss', this, 'superboss')" onfocus="textFocus('One player becomes giant and everyone else has to take them down.')" class="flex-item"  style="width: 100%">
+                                    <div class="icon-background"><img id="superboss" class="abstract-icon is-appear " style="display:none"
+                                        src="check.svg" /></div>
+                                    <div class="item-container">
+                                        <h2>Superboss Mode</h2>
+                                    </div>
+                            </button>
+                            <button onclick="toggle('airdash', this, 'airdash')" onfocus="textFocus('Airdodging now dashes in the air!')" class="flex-item"  style="width: 100%">
+                                    <div class="icon-background"><img id="airdash" class="abstract-icon is-appear " style="display:none"
+                                        src="check.svg" /></div>
+                                    <div class="item-container">
+                                        <h2>Airdash Mode</h2>
+                                    </div>
+                            </button>
+                            <button onclick="toggle('angles', this, 'angles')" onfocus="textFocus('Every move has random angles!')" class="flex-item"  style="width: 100%">
+                                    <div class="icon-background"><img id="angles" class="abstract-icon is-appear" style="display:none"
+                                        src="check.svg" /></div>
+                                    <div class="item-container">
+                                        <h2>Random Angles Mode</h2>
+                                    </div>
+                            </button>
+                            <button onclick="toggle('hitfall', this, 'hitfall')" onfocus="textFocus('Fastfall any aerial on hit!')" class="flex-item"  style="width: 100%">
+                                    <div class="icon-background"><img id="hitfall" class="abstract-icon is-appear" style="display:none"
+                                        src="check.svg" /></div>
+                                    <div class="item-container">
+                                        <h2>Hitfall Mode</h2>
+                                    </div>
+                            </button>
+                        </div>
+                        <div class="column">
+                            <button onclick="toggle('itemduel', this, 'itemduel')" onfocus="textFocus('Fight using a random provided item!')" class="flex-item"  style="width: 100%">
+                                    <div class="icon-background"><img id="itemduel" class="abstract-icon is-appear" style="display:none"
+                                        src="check.svg" /></div>
+                                    <div class="item-container">
+                                        <h2>Item Duel Mode</h2>
+                                    </div>
+                            </button>
+                            <button onclick="toggle('hitstun', this, 'hitstun')" onfocus="textFocus('Play with 1.5x the hitstun!')" class="flex-item"  style="width: 100%">
+                                    <div class="icon-background"><img id="hitstun" class="abstract-icon is-appear " style="display:none"
+                                        src="check.svg" /></div>
+                                    <div class="item-container">
+                                        <h2>Super Hitstun Mode</h2>
+                                    </div>
+                            </button>
+                            <button onclick="toggle('effects', this, 'effects')" onfocus="textFocus('Every move has random effects!')" class="flex-item"  style="width: 100%">
+                                    <div class="icon-background"><img id="effects" class="abstract-icon is-appear " style="display:none"
+                                        src="check.svg" /></div>
+                                    <div class="item-container">
+                                        <h2>Random Effects Mode</h2>
+                                    </div>
+                            </button>
+                            <button onclick="toggle('parry', this, 'parry')" onfocus="textFocus('Ditch your shield for a powerful parry!')" class="flex-item"  style="width: 100%">
+                                    <div class="icon-background"><img id="parry" class="abstract-icon is-appear " style="display:none"
+                                        src="check.svg" /></div>
+                                    <div class="item-container">
+                                        <h2>Parry Mode</h2>
+                                    </div>
+                            </button>
+                        </div>
+                    </div>
+                    <button onclick="saveAndExit()" onfocus="textFocus('')" class="flex-item"   style="width: 91.8%; margin-left: 6px;">
+                            <div class="icon-background"></div>
+                            <div class="item-container">
+                                <h2>Play!</h2>
+                            </div>
+                    </button>
+                </div>
+        <div class="footer">
+            <hr>
+            <h2 id="focus-text"></h2>
+        </div>
+    </div>
+</body>
+
+</html>

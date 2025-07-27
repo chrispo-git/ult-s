@@ -14,6 +14,9 @@ static mut PREVENT_LOOP: [bool; 8] = [false; 8];
 //Landing Lag Platform Cancel
 unsafe extern "C" fn llpc(fighter : &mut L2CFighterCommon) {
     unsafe {
+		if !is_mechanics_enabled() {
+			return;
+		}
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);  
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
 		let sticky = ControlModule::get_stick_y(boma);	
@@ -39,6 +42,9 @@ unsafe extern "C" fn llpc(fighter : &mut L2CFighterCommon) {
 }	
 unsafe extern "C" fn shielddrop(fighter : &mut L2CFighterCommon) {
     unsafe {
+		if !is_mechanics_enabled() {
+			return;
+		}
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);  
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
 		let sticky = ControlModule::get_stick_y(boma);	
@@ -56,6 +62,9 @@ unsafe extern "C" fn shielddrop(fighter : &mut L2CFighterCommon) {
 }	
 unsafe extern "C" fn endlag_drop(fighter : &mut L2CFighterCommon) {
     unsafe {
+		if !is_mechanics_enabled() {
+			return;
+		}
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);  
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
 		let sticky = ControlModule::get_stick_y(boma);	
@@ -80,6 +89,9 @@ unsafe extern "C" fn endlag_drop(fighter : &mut L2CFighterCommon) {
 }	
 unsafe extern "C" fn respawn_wakeup(fighter : &mut L2CFighterCommon) {
     unsafe {
+		if !is_mechanics_enabled() {
+			return;
+		}
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);  
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
 		let sticky = ControlModule::get_stick_y(boma);	
@@ -153,7 +165,10 @@ pub(crate) fn is_edge_cancel(fighter_kind : i32, status_kind : i32, is_added : b
 //Edge Cancelling Part A
 #[skyline::hook(replace = smash::app::lua_bind::StatusModule::init_settings)]
 unsafe fn init_settings_replace(module_accessor: &mut smash::app::BattleObjectModuleAccessor, situation_kind: i32, arg3: i32, arg4: u64, ground_cliff_check_kind: u64, arg6: bool, arg7: i32, arg8: i32, arg9: i32, arg10: i32) -> u64 {
-    let status_kind = StatusModule::status_kind(module_accessor);
+    if !is_mechanics_enabled() {
+        return original!()(module_accessor, situation_kind, arg3, arg4, ground_cliff_check_kind, arg6, arg7, arg8, arg9, arg10);
+	}
+	let status_kind = StatusModule::status_kind(module_accessor);
     let fighter_kind = smash::app::utility::get_kind(module_accessor);
 	let is_added = is_added(module_accessor);
     if smash::app::utility::get_category(module_accessor) != *BATTLE_OBJECT_CATEGORY_FIGHTER {
@@ -173,6 +188,9 @@ unsafe fn init_settings_replace(module_accessor: &mut smash::app::BattleObjectMo
 //Edge Cancelling Part B
 #[skyline::hook(replace = smash::app::lua_bind::GroundModule::correct)]
 unsafe fn correct_replace(module_accessor: &mut smash::app::BattleObjectModuleAccessor, ground_correct_kind: u32) -> u64 {
+	if !is_mechanics_enabled() {
+        return original!()(module_accessor, ground_correct_kind);
+	}
     let status_kind = StatusModule::status_kind(module_accessor);
     let fighter_kind = smash::app::utility::get_kind(module_accessor);
 	let is_added = is_added(module_accessor);
