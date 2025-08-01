@@ -422,7 +422,7 @@ def grab_dependencies():
     print("       OSE downloaded")
 
     #CSK Collection
-    download_dependency = f"https://gamebanana.com/dl/1302885"
+    download_dependency = f"https://gamebanana.com/dl/1476941"
     r = requests.get(download_dependency)
     f = open("downloads/csk_collection.zip","wb")
     f.write(r.content)
