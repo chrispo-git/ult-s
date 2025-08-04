@@ -103,7 +103,7 @@ unsafe extern "C" fn dsamus_upb_eff(fighter: &mut L2CAgentBase) {
 			EffectModule::set_frame(fighter.module_accessor, explode, 15.0);
 		}
 		for i in 0..13 {
-			EffectModule::set_frame(fighter.module_accessor, explode, 15.0 - i);
+			EffectModule::set_frame(fighter.module_accessor, explode, 15.0 - (i as f32));
 			wait(fighter.lua_state_agent, 1.0);
 		}
 		frame(fighter.lua_state_agent, 15.0);
@@ -163,9 +163,12 @@ unsafe extern "C" fn dsamus_upb_snd(fighter: &mut L2CAgentBase) {
 pub fn install() {
     Agent::new("samusd")
     .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
-        .effect_acmd("effect_speciallw", eff_dsamus_downb, Priority::Low)
-        .expression_acmd("expression_speciallw", expr_dsamus_downb, Priority::Low)
-        .game_acmd("game_speciallw", dsamus_downb, Priority::Low)
+        .game_acmd("game_specialhi", dsamus_upb, Priority::Low)
+        .effect_acmd("effect_specialhi", dsamus_upb_eff, Priority::Low)
+        .game_acmd("sound_specialhi", dsamus_upb_snd, Priority::Low)
+        .game_acmd("game_specialairhi", dsamus_upb, Priority::Low)
+        .effect_acmd("effect_specialairhi", dsamus_upb_eff, Priority::Low)
+        .game_acmd("sound_specialairhi", dsamus_upb_snd, Priority::Low)
         .install();
 
 	Agent::new("samusd_missile")
