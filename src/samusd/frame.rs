@@ -124,6 +124,7 @@ unsafe extern "C" fn samusd_frame(fighter: &mut L2CFighterCommon) {
 			};
 			//Teleport!
 			if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_HI {
+					let lr = PostureModule::lr(boma);
 					if MotionModule::frame(boma) < 48.0 {
 						if KineticModule::get_kinetic_type(boma) != *FIGHTER_KINETIC_TYPE_MOTION_AIR {
 							KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_MOTION_AIR);
@@ -146,7 +147,7 @@ unsafe extern "C" fn samusd_frame(fighter: &mut L2CFighterCommon) {
 					}else {
 						let stick_angle = UPB_ANGLE[ENTRY_ID];
 						let angle_radians = (stick_angle - 90.0) * (PI / 180.0);
-						let init_speed = 4.0;
+						let init_speed = 2.0;
 						let deccel = 0.01;
 						let speed = init_speed - (deccel * (frame-1.0));
 						let x_speed = angle_radians.cos() * speed;
