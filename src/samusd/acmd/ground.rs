@@ -72,7 +72,7 @@ unsafe extern "C" fn dsamus_jab(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 4.0);
 		if macros::is_excute(fighter) {
-			macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 9.0, /*Angle*/ 361, /*KBG*/ 106, /*FKB*/ 0, /*BKB*/ 30, /*Size*/ 4.0, /*X*/ 0.0, /*Y*/ 13.0, /*Z*/ 6.0, /*X2*/ Some(0.0), /*Y2*/ Some(6.0), /*Z2*/ Some(12.0), /*Hitlag*/ 1.2, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ -3, /*Trip*/ -1.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_cutup"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_CUTUP, /*Type*/ *ATTACK_REGION_PUNCH);
+			macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 9.0, /*Angle*/ 50, /*KBG*/ 106, /*FKB*/ 0, /*BKB*/ 30, /*Size*/ 4.0, /*X*/ 0.0, /*Y*/ 13.0, /*Z*/ 6.0, /*X2*/ Some(0.0), /*Y2*/ Some(6.0), /*Z2*/ Some(12.0), /*Hitlag*/ 1.2, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ -3, /*Trip*/ -1.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_cutup"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_CUTUP, /*Type*/ *ATTACK_REGION_PUNCH);
 		}
 		wait(fighter.lua_state_agent, 3.0);
 		if macros::is_excute(fighter) {
@@ -118,6 +118,34 @@ unsafe extern "C" fn dsamus_usmash(fighter: &mut L2CAgentBase) {
 		if macros::is_excute(fighter) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
+}	
+unsafe extern "C" fn dsamus_down_attack_d_eff(agent: &mut L2CAgentBase) {
+    frame(agent.lua_state_agent, 15.0);
+    if macros::is_excute(agent) {
+        macros::LANDING_EFFECT(agent, Hash40::new("sys_whirlwind_r"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
+    }
+    frame(agent.lua_state_agent, 7.0);
+    if macros::is_excute(agent) {
+        macros::EFFECT(agent, Hash40::new("sys_attack_arc_d"), Hash40::new("top"), 0, 4, 0, 180, 180, 10, 1.5, 0, 0, 0, 0, 0, 0, true);
+			macros::LAST_EFFECT_SET_COLOR(fighter,  0.1, 0.7, 3.0);
+    }
+    frame(agent.lua_state_agent, 22.0);
+    if macros::is_excute(agent) {
+        macros::EFFECT(agent, Hash40::new("sys_attack_arc_d"), Hash40::new("top"), 0, 3, 0, 180, 0, 10, 1.5, 0, 0, 0, 0, 0, 0, true);
+			macros::LAST_EFFECT_SET_COLOR(fighter,  0.1, 0.7, 3.0);
+    }
+}	
+unsafe extern "C" fn dsamus_cliff_attack_eff(agent: &mut L2CAgentBase) {
+    frame(agent.lua_state_agent, 14.0);
+    if macros::is_excute(agent) {
+        macros::EFFECT(agent, Hash40::new("sys_smash_flash"), Hash40::new("toer"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, true);
+    }
+    frame(agent.lua_state_agent, 24.0);
+    if macros::is_excute(agent) {
+        macros::LANDING_EFFECT(agent, Hash40::new("sys_atk_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
+        macros::EFFECT_FOLLOW(agent, Hash40::new("sys_attack_arc_d"), Hash40::new("top"), 1, 5.5, 0, 0, 6, -12, 1.1, true);
+		macros::LAST_EFFECT_SET_COLOR(fighter,  0.1, 0.7, 3.0);
+    }
 }	
 unsafe extern "C" fn dsamus_usmash_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
@@ -223,5 +251,7 @@ pub fn install() {
 		.effect_acmd("effect_attacklw4", dsamus_dsmash_eff, Priority::Low)
 		.sound_acmd("sound_attacklw4", dsamus_dsmash_snd, Priority::Low)
 		.expression_acmd("expression_attacklw4", dsamus_dsmash_expr, Priority::Low)
+		.acmd("effect_downattackd", dsamus_down_attack_d_eff, Priority::Low)
+		.acmd("effect_cliffattack", dsamus_cliff_attack_eff, Priority::Low)
 		.install();
 }
