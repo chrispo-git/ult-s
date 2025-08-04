@@ -1495,6 +1495,20 @@ value = 1.3
 kinds = ["samusd"]
 slots = [0,1,2,3,4,5,6,7]
 
+[[param_float]]
+param = "param_special_lw"
+subparam = "sp_lw_gr_vy0"
+value = 0.0
+kinds = ["samusd"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "param_special_lw"
+subparam = "sp_lw_ar_vy0"
+value = 0.0
+kinds = ["samusd"]
+slots = [0,1,2,3,4,5,6,7]
+
 
 # SHEIK
 [[param_int]]

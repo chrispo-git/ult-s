@@ -106,6 +106,11 @@ unsafe extern "C" fn samusd_frame(fighter: &mut L2CFighterCommon) {
 				};
 				MotionModule::set_rate(fighter.module_accessor, 1.5);
 			};
+			if status_kind == *FIGHTER_SAMUS_STATUS_KIND_SPECIAL_GROUND_LW {
+                GroundModule::attach_ground(fighter.module_accessor, true);
+                GroundModule::set_attach_ground(fighter.module_accessor, true);
+                StatusModule::set_situation_kind(boma, smash::app::SituationKind(*SITUATION_KIND_GROUND), true);
+			}
 			if [*FIGHTER_STATUS_KIND_SPECIAL_S, *FIGHTER_SAMUS_STATUS_KIND_SPECIAL_S1G, *FIGHTER_SAMUS_STATUS_KIND_SPECIAL_S1A].contains(&status_kind) {
 				if situation_kind == *SITUATION_KIND_GROUND {
 					StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_SAMUS_STATUS_KIND_SPECIAL_S2G, true);
@@ -186,7 +191,7 @@ unsafe extern "C" fn missile_frame(weapon: &mut L2CFighterBase) {
 		let ENTRY_ID = WorkModule::get_int(&mut *boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
         if smash::app::utility::get_kind(&mut *boma) == *FIGHTER_KIND_SAMUSD {
 			if MotionModule::frame(weapon.module_accessor) >= 5.0 && MotionModule::motion_kind(weapon.module_accessor) == hash40("homing") {
-				if IS_HOLD[ENTRY_ID] == true {
+				if IS_HOLD[ENTRY_ID] == true && MotionModule::frame(weapon.module_accessor) < 9.0 {
 					MotionModule::set_rate(weapon.module_accessor, 0.001);
 					println!("hold");
 				} else {
