@@ -12,6 +12,8 @@ use std::mem;
 use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
+use crate::samusd::*;
+use std::f32::consts::PI;
 use super::*;
 
 pub(crate) unsafe fn bone_const(boma: &mut smash::app::BattleObjectModuleAccessor, new_fighter_kind : i32, new_motion_kind : u64, bone : u64,
@@ -45,7 +47,7 @@ unsafe extern "C" fn samusd_frame(fighter: &mut L2CFighterCommon) {
 				IS_HOLD[ENTRY_ID] = false;
 				COOLDOWN[ENTRY_ID] = 0;
 				IS_ALLOWED[ENTRY_ID] = true;
-				CAN_SIDEB[ENTRY_ID] = 0;
+				CAN_DOWNB[ENTRY_ID] = 0;
 			};
 			if IS_HOLD[ENTRY_ID] == true && ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_SPECIAL) {
 				IS_HOLD[ENTRY_ID] = false;
@@ -82,9 +84,9 @@ unsafe extern "C" fn samusd_frame(fighter: &mut L2CFighterCommon) {
 					IS_ALLOWED[ENTRY_ID] = true;
 			};
 			if  IS_ALLOWED[ENTRY_ID] == false {
-				CAN_SIDEB[ENTRY_ID] = 1;
+				CAN_DOWNB[ENTRY_ID] = 1;
 			} else {
-				CAN_SIDEB[ENTRY_ID] = 0;
+				CAN_DOWNB[ENTRY_ID] = 0;
 			};
 			if status_kind == *FIGHTER_SAMUS_STATUS_KIND_SPECIAL_AIR_LW || status_kind == *FIGHTER_SAMUS_STATUS_KIND_SPECIAL_GROUND_LW {
 				if MotionModule::frame(boma) >= 18.0 && MotionModule::frame(boma) <= 20.0 {
@@ -121,72 +123,38 @@ unsafe extern "C" fn samusd_frame(fighter: &mut L2CFighterCommon) {
 				CancelModule::enable_cancel(boma);
 			};
 			//Teleport!
-			if [hash40("special_lw"), hash40("special_air_lw")].contains(&motion_kind) {
-					if frame > 12.0 && frame < 14.0 {
-						macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_smash_flash"), Hash40::new("hip"), -2, 0, 0, 0, 0, 0, 2.0, true);
-						macros::PLAY_SE(fighter, Hash40::new("se_common_spirits_critical_l_tail"));
-					};
-					if StatusModule::is_situation_changed(boma) && situation_kind == *SITUATION_KIND_GROUND {
-						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_LANDING, true);
-					};
-					if frame > 5.0 && frame < 7.0 {
-						macros::EFFECT_FOLLOW(fighter, Hash40::new("samusd_win3_aura"), Hash40::new("hip"), -2, 0, 0, 0, 0, 0, 2.5, true);
-						macros::EFFECT_FOLLOW(fighter, Hash40::new("samusd_win3_aura"), Hash40::new("colonellm"), 2, 0, 0.5, 0, 0, 0, 2, true);
-						macros::EFFECT_FOLLOW(fighter, Hash40::new("samusd_win3_aura"), Hash40::new("kneer"), 0, 0, -0.5, 0, 0, 0, 1.7, true);
-						macros::EFFECT_FOLLOW(fighter, Hash40::new("samusd_win3_aura"), Hash40::new("footr"), 0, 0, 0, 0, 0, 0, 2.1, true);
-						macros::EFFECT_FOLLOW(fighter, Hash40::new("samusd_win3_aura"), Hash40::new("armr"), 0, 0, 0, 0, 0, 0, 1.9, true);
-						macros::EFFECT_FOLLOW(fighter, Hash40::new("samusd_win3_aura"), Hash40::new("handr"), 0, 0, 0, 0, 0, 0, 2, true);
-						macros::EFFECT_FOLLOW(fighter, Hash40::new("samusd_win3_aura"), Hash40::new("colonells"), 2, 0, 0.5, 0, 0, 0, 2, true);
-						macros::EFFECT_FOLLOW(fighter, Hash40::new("samusd_win3_aura"), Hash40::new("kneel"), 0, 0, -0.5, 0, 0, 0, 1.7, true);
-						macros::EFFECT_FOLLOW(fighter, Hash40::new("samusd_win3_aura"), Hash40::new("footl"), 0, 0, 0, 0, 0, 0, 2.1, true);
-						macros::EFFECT_FOLLOW(fighter, Hash40::new("samusd_win3_aura"), Hash40::new("arml"), 0, 0, 0, 0, 0, 0, 1.9, true);
-						macros::EFFECT_FOLLOW(fighter, Hash40::new("samusd_win3_aura"), Hash40::new("handl"), 0, 0, 0, 0, 0, 0, 2, true);
-					};
-					if frame > 24.0 && frame < 47.0 {
-						HitModule::set_whole(boma, smash::app::HitStatus(*HIT_STATUS_XLU), 0);
-						VisibilityModule::set_whole(boma, false);
-						JostleModule::set_status(boma, false);	
+			if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_HI {
+					if MotionModule::frame(boma) < 48.0 {
 						if KineticModule::get_kinetic_type(boma) != *FIGHTER_KINETIC_TYPE_MOTION_AIR {
 							KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_MOTION_AIR);
 						};
-						macros::SET_SPEED_EX(fighter, 0.27, 0.05, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_NONE);
-					};
-					if frame > 47.0 || (frame > 30.0 && ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_SPECIAL)){
-						KineticModule::clear_speed_all(boma);
-						macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_smash_flash"), Hash40::new("hip"), -2, 0, 0, 0, 0, 0, 2.0, true);
-						HitModule::set_whole(boma, smash::app::HitStatus(*HIT_STATUS_NORMAL), 0);
-						VisibilityModule::set_whole(boma, true);
-						JostleModule::set_status(boma, true);	
-						MotionModule::change_motion(boma, Hash40::new("special_air_lw_end"), 0.0, 1.0, false, 0.0, false, false);
-					};
-					if situation_kind == *SITUATION_KIND_AIR {
-						StatusModule::set_keep_situation_air(boma, true);
 					} else {
-						StatusModule::set_situation_kind(boma, smash::app::SituationKind(*SITUATION_KIND_AIR), true);
-					};
-			};
-			if [hash40("special_lw_end"), hash40("special_air_lw_end")].contains(&motion_kind) {
-				StatusModule::set_keep_situation_air(boma, true);
-				if KineticModule::get_kinetic_type(boma) == *FIGHTER_KINETIC_TYPE_MOTION_AIR {
-					KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_FALL);
-				};
-				if frame < 2.0 {
-					macros::PLAY_SE(fighter, Hash40::new("se_common_spirits_critical_m_tail"));
-				};
-				if StatusModule::is_situation_changed(boma){
-					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_LANDING, true);
-				};
-				if frame > 29.0 {
-					macros::EFFECT_OFF_KIND(fighter, Hash40::new("samusd_win3_aura"), false, true);
-					if ray_check_pos(boma, 0.0, -3.0, true) == 0 {
-						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL, false);
-					} else {
-						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_WAIT, false);
-					};
-				};
-			};
-			if [*FIGHTER_STATUS_KIND_JUMP, *FIGHTER_STATUS_KIND_JUMP_AERIAL].contains(&status_kind) {
-				VisibilityModule::set_whole(boma, true);
+						if KineticModule::get_kinetic_type(boma) != *FIGHTER_KINETIC_TYPE_MOTION_FALL {
+							KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_MOTION_FALL);
+						};
+					}
+					if MotionModule::frame(boma) < 15.0 {
+						let stick_angle = get_stick_angle(boma);
+						if stick_angle != -1.0 {
+							UPB_ANGLE[ENTRY_ID] = stick_angle;
+							if (lr > 0.0) {
+								UPB_ANGLE[ENTRY_ID] = 360.0 - stick_angle;
+							}
+						} else {
+							UPB_ANGLE[ENTRY_ID] = 0.0;
+						}
+					}else {
+						let stick_angle = UPB_ANGLE[ENTRY_ID];
+						let angle_radians = (stick_angle - 90.0) * (PI / 180.0);
+						let init_speed = 4.0;
+						let deccel = 0.01;
+						let speed = init_speed - (deccel * (frame-1.0));
+						let x_speed = angle_radians.cos() * speed;
+						let y_speed = angle_radians.sin() * speed * -1.0;
+
+						macros::SET_SPEED_EX(fighter, x_speed, y_speed, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+						println!("Speed : ({},{}), Dir : {}", x_speed, y_speed, UPB_ANGLE[ENTRY_ID]);
+					}
 			};
 		}
     }

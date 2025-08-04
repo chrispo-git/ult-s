@@ -13,6 +13,7 @@ use smash::app::*;
 use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
+static NONE :  smash::phx::Vector3f =  smash::phx::Vector3f { x: 0.0, y: 5.0, z: 0.0 };
 
 unsafe extern "C" fn dsamus_homing(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
@@ -81,21 +82,83 @@ unsafe extern "C" fn eff_dsamus_homing(fighter: &mut L2CAgentBase) {
 			ModelModule::set_alpha(fighter.module_accessor, 0.0);
 		}
 }		
-unsafe extern "C" fn eff_dsamus_downb(fighter: &mut L2CAgentBase) {
-    let lua_state = fighter.lua_state_agent;
-	
-	
-}	
-unsafe extern "C" fn expr_dsamus_downb(fighter: &mut L2CAgentBase) {
-    let lua_state = fighter.lua_state_agent;
-	
-	
+unsafe extern "C" fn dsamus_upb_eff(fighter: &mut L2CAgentBase) {
+		let explode: u32 = 0;
+		frame(fighter.lua_state_agent, 2.0);
+		if macros::is_excute(fighter) {
+			macros::EFFECT_FOLLOW(fighter, Hash40::new("samusd_win3_aura"), Hash40::new("hip"), -2, 0, 0, 0, 0, 0, 2.5, true);
+			macros::EFFECT_FOLLOW(fighter, Hash40::new("samusd_win3_aura"), Hash40::new("colonellm"), 2, 0, 0.5, 0, 0, 0, 2, true);
+			macros::EFFECT_FOLLOW(fighter, Hash40::new("samusd_win3_aura"), Hash40::new("kneer"), 0, 0, -0.5, 0, 0, 0, 1.7, true);
+			macros::EFFECT_FOLLOW(fighter, Hash40::new("samusd_win3_aura"), Hash40::new("footr"), 0, 0, 0, 0, 0, 0, 2.1, true);
+			macros::EFFECT_FOLLOW(fighter, Hash40::new("samusd_win3_aura"), Hash40::new("armr"), 0, 0, 0, 0, 0, 0, 1.9, true);
+			macros::EFFECT_FOLLOW(fighter, Hash40::new("samusd_win3_aura"), Hash40::new("handr"), 0, 0, 0, 0, 0, 0, 2, true);
+			macros::EFFECT_FOLLOW(fighter, Hash40::new("samusd_win3_aura"), Hash40::new("colonells"), 2, 0, 0.5, 0, 0, 0, 2, true);
+			macros::EFFECT_FOLLOW(fighter, Hash40::new("samusd_win3_aura"), Hash40::new("kneel"), 0, 0, -0.5, 0, 0, 0, 1.7, true);
+			macros::EFFECT_FOLLOW(fighter, Hash40::new("samusd_win3_aura"), Hash40::new("footl"), 0, 0, 0, 0, 0, 0, 2.1, true);
+			macros::EFFECT_FOLLOW(fighter, Hash40::new("samusd_win3_aura"), Hash40::new("arml"), 0, 0, 0, 0, 0, 0, 1.9, true);
+			macros::EFFECT_FOLLOW(fighter, Hash40::new("samusd_win3_aura"), Hash40::new("handl"), 0, 0, 0, 0, 0, 0, 2, true);
+		    let explode: u32 = EffectModule::req_follow(fighter.module_accessor, smash::phx::Hash40::new("sys_smash_flash"), smash::phx::Hash40::new("hip"), &NONE, &NONE, 1.75, true, 0, 0, 0, 0, 0, true, true) as u32;
+        	macros::LAST_EFFECT_SET_COLOR(fighter, 3.0/255.0, 194.0/255.0, 252.0/255.0);
+			macros::LAST_EFFECT_SET_RATE(fighter, 0.0);
+			EffectModule::set_frame(fighter.module_accessor, explode, 15.0);
+		}
+		for i in 0..13 {
+			EffectModule::set_frame(fighter.module_accessor, explode, 15.0 - i);
+			wait(fighter.lua_state_agent, 1.0);
+		}
+		frame(fighter.lua_state_agent, 15.0);
+		if macros::is_excute(fighter) {
+			EffectModule::set_visible(fighter.module_accessor, explode, false);
+			EffectModule::kill_kind(fighter.module_accessor, smash::phx::Hash40::new("samusd_win3_aura"), false, false);
+		}
+		frame(fighter.lua_state_agent, 45.0);
+		if macros::is_excute(fighter) {
+			EffectModule::set_visible(fighter.module_accessor, explode, true);
+			EffectModule::set_rate(fighter.module_accessor, explode, 1.0);
+			macros::EFFECT_FOLLOW(fighter, Hash40::new("samusd_win3_aura"), Hash40::new("hip"), -2, 0, 0, 0, 0, 0, 2.5, true);
+			macros::EFFECT_FOLLOW(fighter, Hash40::new("samusd_win3_aura"), Hash40::new("colonellm"), 2, 0, 0.5, 0, 0, 0, 2, true);
+			macros::EFFECT_FOLLOW(fighter, Hash40::new("samusd_win3_aura"), Hash40::new("kneer"), 0, 0, -0.5, 0, 0, 0, 1.7, true);
+			macros::EFFECT_FOLLOW(fighter, Hash40::new("samusd_win3_aura"), Hash40::new("footr"), 0, 0, 0, 0, 0, 0, 2.1, true);
+			macros::EFFECT_FOLLOW(fighter, Hash40::new("samusd_win3_aura"), Hash40::new("armr"), 0, 0, 0, 0, 0, 0, 1.9, true);
+			macros::EFFECT_FOLLOW(fighter, Hash40::new("samusd_win3_aura"), Hash40::new("handr"), 0, 0, 0, 0, 0, 0, 2, true);
+			macros::EFFECT_FOLLOW(fighter, Hash40::new("samusd_win3_aura"), Hash40::new("colonells"), 2, 0, 0.5, 0, 0, 0, 2, true);
+			macros::EFFECT_FOLLOW(fighter, Hash40::new("samusd_win3_aura"), Hash40::new("kneel"), 0, 0, -0.5, 0, 0, 0, 1.7, true);
+			macros::EFFECT_FOLLOW(fighter, Hash40::new("samusd_win3_aura"), Hash40::new("footl"), 0, 0, 0, 0, 0, 0, 2.1, true);
+			macros::EFFECT_FOLLOW(fighter, Hash40::new("samusd_win3_aura"), Hash40::new("arml"), 0, 0, 0, 0, 0, 0, 1.9, true);
+			macros::EFFECT_FOLLOW(fighter, Hash40::new("samusd_win3_aura"), Hash40::new("handl"), 0, 0, 0, 0, 0, 0, 2, true);
+		}
+		frame(fighter.lua_state_agent, 79.0);
+		if macros::is_excute(fighter) {
+			EffectModule::kill_kind(fighter.module_accessor, smash::phx::Hash40::new("samusd_win3_aura"), false, false);
+		}
 }		
-unsafe extern "C" fn dsamus_downb(fighter: &mut L2CAgentBase) {
-    let lua_state = fighter.lua_state_agent;
-	
-	
-}	
+unsafe extern "C" fn dsamus_upb(fighter: &mut L2CAgentBase) {
+		frame(fighter.lua_state_agent, 12.0);
+		if macros::is_excute(fighter) {	
+			JostleModule::set_status(fighter.module_accessor, false);
+			notify_event_msc_cmd!(fighter, Hash40::new_raw(0x2127e37c07), *GROUND_CLIFF_CHECK_KIND_ALWAYS_BOTH_SIDES);
+		}
+		frame(fighter.lua_state_agent, 45.0);
+		if macros::is_excute(fighter) {
+			JostleModule::set_status(fighter.module_accessor, true);
+			macros::ATTACK(fighter, 0, 0, Hash40::new("hip"), 10.0, 361, 90, 0, 80, 10.0, 0.0, 0.0, 0.0, None, None, None, 1.5, 1.0, *ATTACK_SETOFF_KIND_THRU, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_cutup"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_CUTUP, *ATTACK_REGION_MAGIC);
+        	macros::ATTACK(fighter, 1, 0, Hash40::new("hip"), 7.0, 361, 90, 0, 60, 15.0, 0.0, 0.0, 0.0, None, None, None, 1.2, 1.0, *ATTACK_SETOFF_KIND_THRU, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_cutup"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_CUTUP, *ATTACK_REGION_MAGIC);
+		}		
+		wait(fighter.lua_state_agent, 2.0);
+		if macros::is_excute(fighter) {
+			AttackModule::clear_all(fighter.module_accessor);
+		}	
+}		
+unsafe extern "C" fn dsamus_upb_snd(fighter: &mut L2CAgentBase) {
+		frame(fighter.lua_state_agent, 12.0);
+		if macros::is_excute(fighter) {
+			macros::PLAY_SE(fighter, Hash40::new("se_common_spirits_critical_l_tail"));
+		}
+		frame(fighter.lua_state_agent, 45.0);
+		if macros::is_excute(fighter) {
+			macros::PLAY_SE(fighter, Hash40::new("se_common_spirits_critical_m_tail"));
+		}			
+}					
 
 pub fn install() {
     Agent::new("samusd")
