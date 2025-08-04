@@ -41,7 +41,11 @@ unsafe extern "C" fn special_lw_init(fighter: &mut L2CFighterCommon) -> L2CValue
 unsafe extern "C" fn special_air_lw_init(fighter: &mut L2CFighterCommon) -> L2CValue {
     return smashline::original_status(Init, fighter, *FIGHTER_SAMUS_STATUS_KIND_SPECIAL_S1A)(fighter);
 }	
-
+unsafe extern "C" fn special_hi_end(fighter: &mut L2CFighterCommon) -> L2CValue {
+    VisibilityModule::set_whole(fighter.module_accessor, true);
+    JostleModule::set_status(fighter.module_accessor, true);	
+    0.into()
+}	
 pub fn install() {
     Agent::new("samusd")
     .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
@@ -53,6 +57,7 @@ pub fn install() {
         .status(Init, *FIGHTER_SAMUS_STATUS_KIND_SPECIAL_GROUND_LW, special_lw_init)
         .status(End, *FIGHTER_SAMUS_STATUS_KIND_SPECIAL_AIR_LW, special_lw_end)
         .status(End, *FIGHTER_SAMUS_STATUS_KIND_SPECIAL_GROUND_LW, special_air_lw_end)
+        .status(End, *FIGHTER_STATUS_KIND_SPECIAL_HI, special_hi_end)
         .install();
 
     Agent::new("samusd_missile")

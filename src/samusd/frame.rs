@@ -124,8 +124,10 @@ unsafe extern "C" fn samusd_frame(fighter: &mut L2CFighterCommon) {
 			};
 			//Teleport!
 			if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_HI {
+					let pos = Vector3f{ x:0.0, y: 0.0, z: 0.0 };
+        			ModelModule::set_joint_translate(boma, Hash40::new("trans"), &pos, false, false);
 					let lr = PostureModule::lr(boma);
-					if MotionModule::frame(boma) < 48.0 {
+					if MotionModule::frame(boma) < 55.0 {
 						if KineticModule::get_kinetic_type(boma) != *FIGHTER_KINETIC_TYPE_MOTION_AIR {
 							KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_MOTION_AIR);
 						};
@@ -150,7 +152,7 @@ unsafe extern "C" fn samusd_frame(fighter: &mut L2CFighterCommon) {
 						let init_speed = 2.0;
 						let deccel = 0.01;
 						let speed = init_speed - (deccel * (frame-1.0));
-						let x_speed = angle_radians.cos() * speed;
+						let x_speed = angle_radians.cos() * speed * lr * -1.0;
 						let y_speed = angle_radians.sin() * speed * -1.0;
 
 						macros::SET_SPEED_EX(fighter, x_speed, y_speed, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
