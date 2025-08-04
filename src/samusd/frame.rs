@@ -86,7 +86,7 @@ unsafe extern "C" fn samusd_frame(fighter: &mut L2CFighterCommon) {
 			} else {
 				CAN_SIDEB[ENTRY_ID] = 0;
 			};
-			if status_kind == *FIGHTER_SAMUS_STATUS_KIND_SPECIAL_S1A || status_kind == *FIGHTER_SAMUS_STATUS_KIND_SPECIAL_S1G {
+			if status_kind == *FIGHTER_SAMUS_STATUS_KIND_SPECIAL_AIR_LW || status_kind == *FIGHTER_SAMUS_STATUS_KIND_SPECIAL_GROUND_LW {
 				if MotionModule::frame(boma) >= 18.0 && MotionModule::frame(boma) <= 20.0 {
 					IS_HOLD[ENTRY_ID] = true;
 				};
@@ -96,21 +96,13 @@ unsafe extern "C" fn samusd_frame(fighter: &mut L2CFighterCommon) {
 				};
 				MotionModule::set_rate(fighter.module_accessor, 1.5);
 			};
-			/*
-			if IS_ALLOWED[ENTRY_ID] == false {
-				if status_kind == *FIGHTER_SAMUS_STATUS_KIND_SPECIAL_S2A || status_kind == *FIGHTER_SAMUS_STATUS_KIND_SPECIAL_S1A {
-						StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_FALL, true);
-				};
-				if status_kind == *FIGHTER_SAMUS_STATUS_KIND_SPECIAL_S2G || status_kind == *FIGHTER_SAMUS_STATUS_KIND_SPECIAL_S1G {
-						StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_WAIT, true);
-				};
-			};*/
-			if status_kind == *FIGHTER_SAMUS_STATUS_KIND_SPECIAL_S2A{
-				StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_SAMUS_STATUS_KIND_SPECIAL_S1A, true);
-			};
-			if status_kind == *FIGHTER_SAMUS_STATUS_KIND_SPECIAL_S2G{
-				StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_SAMUS_STATUS_KIND_SPECIAL_S1G, true);
-			};
+			if [*FIGHTER_STATUS_KIND_SPECIAL_S, *FIGHTER_SAMUS_STATUS_KIND_SPECIAL_S1G, FIGHTER_SAMUS_STATUS_KIND_SPECIAL_S1A].contains(&status_kind) {
+				if situation_kind == *SITUATION_KIND_GROUND {
+					StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_SAMUS_STATUS_KIND_SPECIAL_S2G, true);
+				} else {
+					StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_SAMUS_STATUS_KIND_SPECIAL_S2A, true);
+				}
+			}
 			if IS_HOLD[ENTRY_ID] == false {
 				macros::STOP_SE(fighter, Hash40::new("se_samusd_win03_02"));
 			} else if HOLD[ENTRY_ID] % 70 == 0{
