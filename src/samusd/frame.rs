@@ -96,7 +96,7 @@ unsafe extern "C" fn samusd_frame(fighter: &mut L2CFighterCommon) {
 				};
 				MotionModule::set_rate(fighter.module_accessor, 1.5);
 			};
-			if [*FIGHTER_STATUS_KIND_SPECIAL_S, *FIGHTER_SAMUS_STATUS_KIND_SPECIAL_S1G, FIGHTER_SAMUS_STATUS_KIND_SPECIAL_S1A].contains(&status_kind) {
+			if [*FIGHTER_STATUS_KIND_SPECIAL_S, *FIGHTER_SAMUS_STATUS_KIND_SPECIAL_S1G, *FIGHTER_SAMUS_STATUS_KIND_SPECIAL_S1A].contains(&status_kind) {
 				if situation_kind == *SITUATION_KIND_GROUND {
 					StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_SAMUS_STATUS_KIND_SPECIAL_S2G, true);
 				} else {
