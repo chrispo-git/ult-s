@@ -11,6 +11,7 @@ use smash::lib::{L2CValue, L2CAgent};
 use std::mem;
 use smash::app::*;
 use smash::phx::Vector3f;
+use smash::phx::Vector2f;
 use crate::util::*;
 use crate::samusd::*;
 use std::f32::consts::PI;
@@ -56,10 +57,17 @@ unsafe extern "C" fn samusd_frame(fighter: &mut L2CFighterCommon) {
 				DamageModule::add_damage(boma, 0.075, 0);
 				HOLD[ENTRY_ID] += 1;
 			};
+			if !ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_SPECIAL) {
+				HOLD[ENTRY_ID] = 0;
+			}
 			if HOLD[ENTRY_ID] >= HOLD_MAX {
 				IS_HOLD[ENTRY_ID] = false;
 				HOLD[ENTRY_ID] = 0;
 			};
+			if ArticleModule::is_exist(boma, *FIGHTER_SAMUSD_GENERATE_ARTICLE_MISSILE) {
+				COOLDOWN[ENTRY_ID] = HOLD_COOLDOWN;
+				IS_ALLOWED[ENTRY_ID] = false;
+			}
 			if END[ENTRY_ID] == true {
 				COOLDOWN[ENTRY_ID] = HOLD_COOLDOWN;
 				ArticleModule::remove_exist(boma, *FIGHTER_SAMUSD_GENERATE_ARTICLE_MISSILE,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
@@ -68,7 +76,7 @@ unsafe extern "C" fn samusd_frame(fighter: &mut L2CFighterCommon) {
 			if COOLDOWN[ENTRY_ID] > 0 {
 				COOLDOWN[ENTRY_ID] -= 1;
 			};
-			if ArticleModule::is_exist(boma, *WEAPON_KIND_SAMUSD_MISSILE) == false && IS_ALLOWED[ENTRY_ID] == false && COOLDOWN[ENTRY_ID] == 0 && END[ENTRY_ID] == false {
+			if ArticleModule::is_exist(boma, *FIGHTER_SAMUSD_GENERATE_ARTICLE_MISSILE) == false && IS_ALLOWED[ENTRY_ID] == false && COOLDOWN[ENTRY_ID] == 0 && END[ENTRY_ID] == false {
 				END[ENTRY_ID] = true;
 			};
 			if COOLDOWN[ENTRY_ID] > 0 &&  COOLDOWN[ENTRY_ID] < 5{
@@ -124,19 +132,28 @@ unsafe extern "C" fn samusd_frame(fighter: &mut L2CFighterCommon) {
 			};
 			//Teleport!
 			if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_HI {
-					let pos = Vector3f{ x:0.0, y: 0.0, z: 0.0 };
-        			ModelModule::set_joint_translate(boma, Hash40::new("trans"), &pos, false, false);
+					WorkModule::off_flag(boma, *FIGHTER_INSTANCE_WORK_ID_FLAG_CURSOR);
 					let lr = PostureModule::lr(boma);
 					if MotionModule::frame(boma) < 55.0 {
+						if StatusModule::situation_kind(boma) == *SITUATION_KIND_GROUND {
+							StatusModule::set_situation_kind(boma, smash::app::SituationKind(*SITUATION_KIND_AIR), true);
+							StatusModule::set_keep_situation_air(boma, true);
+						}
 						if KineticModule::get_kinetic_type(boma) != *FIGHTER_KINETIC_TYPE_MOTION_AIR {
 							KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_MOTION_AIR);
 						};
 					} else {
-						if KineticModule::get_kinetic_type(boma) != *FIGHTER_KINETIC_TYPE_MOTION_FALL {
+						let is_near_ground = GroundModule::ray_check(fighter.module_accessor, &Vector2f{ x: PostureModule::pos_x(fighter.module_accessor), y: PostureModule::pos_y(fighter.module_accessor)}, &Vector2f{ x: 0.0, y: -1.0}, true);
+        				if KineticModule::get_kinetic_type(boma) != *FIGHTER_KINETIC_TYPE_MOTION_FALL {
 							KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_MOTION_FALL);
 						};
+						if is_near_ground == 1 {
+							StatusModule::set_situation_kind(boma, smash::app::SituationKind(*SITUATION_KIND_GROUND), true);
+							StatusModule::set_keep_situation_air(boma, false);
+							StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_LANDING_FALL_SPECIAL, true);
+						}
 					}
-					if MotionModule::frame(boma) < 15.0 {
+					if MotionModule::frame(boma) < 15.0{
 						let stick_angle = get_stick_angle(boma);
 						if stick_angle != -1.0 {
 							UPB_ANGLE[ENTRY_ID] = stick_angle;
@@ -146,12 +163,12 @@ unsafe extern "C" fn samusd_frame(fighter: &mut L2CFighterCommon) {
 						} else {
 							UPB_ANGLE[ENTRY_ID] = 0.0;
 						}
-					}else {
+					}else if MotionModule::frame(boma) < 55.0 {
 						let stick_angle = UPB_ANGLE[ENTRY_ID];
 						let angle_radians = (stick_angle - 90.0) * (PI / 180.0);
-						let init_speed = 2.0;
+						let init_speed = 3.0;
 						let deccel = 0.01;
-						let speed = init_speed - (deccel * (frame-1.0));
+						let speed = (init_speed - (deccel * (frame-1.0)))*MotionModule::rate(boma);
 						let x_speed = angle_radians.cos() * speed * lr * -1.0;
 						let y_speed = angle_radians.sin() * speed * -1.0;
 
