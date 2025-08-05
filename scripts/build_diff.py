@@ -58,11 +58,11 @@ def diff(home_dir, new_dir, old_dir, diff_dir):
     os.chdir(old_dir)
     for (root,dirs,files) in os.walk("."):
         for name in files:
-            old_dir_filelist.append(os.path.join(root, name).replace(".\\",f"{old_dir}\\"))
+            old_dir_filelist.append(os.path.join(root, name).replace("./",f"{old_dir}/"))
     os.chdir(new_dir)
     for (root,dirs,files) in os.walk(".", topdown=False):
         for name in files:
-            new_dir_filelist.append(os.path.join(root, name).replace(".\\",f"{new_dir}\\"))
+            new_dir_filelist.append(os.path.join(root, name).replace("./",f"{new_dir}/"))
     os.chdir(home_dir)
 
     print("Files Read")
