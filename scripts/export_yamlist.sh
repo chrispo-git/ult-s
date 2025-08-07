@@ -19,7 +19,7 @@ cd ..
 echo "romfs/fighter/$fighter/motion/body/c${alt}0/motion_list.bin"
 wine yamlist.exe disasm "romfs/fighter/$fighter/motion/body/c${alt}0/motion_list.bin" -l 'Labels.txt' -o "romfs/fighter/$fighter/motion/body/c${alt}0/motion_list.yml"
 xdg-open "romfs/fighter/$fighter/motion/body/c${alt}0/motion_list.yml"
-read -p "Press enter to continue"
+read "Press enter to continue"
 echo "romfs/fighter/$fighter/motion/body/c${alt}0/motion_list.bin"
 wine yamlist.exe asm "romfs/fighter/$fighter/motion/body/c${alt}0/motion_list.yml" -o "romfs/fighter/$fighter/motion/body/c${alt}0/motion_list.bin"
 rm "romfs/fighter/$fighter/motion/body/c${alt}0/motion_list.yml"
