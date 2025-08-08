@@ -24,7 +24,10 @@ static mut LAND_SIDEB_BOUNCE: [i32; 8] = [0; 8];
 static mut BEFORE_SIDEB_BOUNCE: [i32; 8] = [0; 8];
 static mut HAS_DOWNB: [bool; 8] = [false; 8];
 static mut HAS_DEADED: [bool; 8] = [false; 8];
-static mut BOUNCE_DA: [bool; 8] = [false; 8];
+static mut SIDEB_RESET: [bool; 8] = [false; 8];
+static mut SIDEB_LENGTH: [i32; 8] = [0; 8];
+
+pub const SIDEB_LENGTH_MAX : i32 = 60;
 
 pub(crate) unsafe fn attack_vc(fighter: &mut L2CAgentBase) -> () {
 	let rand_val = smash::app::sv_math::rand(hash40("fighter"), 7);
@@ -64,9 +67,9 @@ pub fn install() {
 	frame::install();
 	status::install();
 	acmd::install();
-    unsafe {
+    /*unsafe {
         FIGHTER_TOAD_GENERATE_ARTICLE_ICEBALL += smashline::clone_weapon("mario", *WEAPON_KIND_MARIO_FIREBALL, "murabito", "iceball", false);
-    }
+    }*/
 
     the_csk_collection_api::add_chara_db_entry_info(
         the_csk_collection_api::CharacterDatabaseEntry {

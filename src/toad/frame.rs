@@ -79,21 +79,6 @@ unsafe extern "C" fn toad(fighter : &mut L2CFighterCommon) {
 			} else {
 				HAS_DEADED[ENTRY_ID] = false;
 			};
-			if [*FIGHTER_STATUS_KIND_ATTACK_DASH].contains(&status_kind) {
-				if BOUNCE_DA[ENTRY_ID] {
-					BOUNCE_DA[ENTRY_ID] = false;
-					MotionModule::change_motion(fighter.module_accessor, smash::phx::Hash40::new("attack_dash"), 8.0, 1.0, false, 0.0, false, false);
-				};
-				let dist = 4.0*PostureModule::lr(boma);
-				if GroundModule::is_wall_touch_line(boma, *GROUND_TOUCH_FLAG_SIDE as u32) && (6..30).contains(&(MotionModule::frame(boma) as i32)) && ray_check_pos(boma, dist, 0.0, false) == 1 {
-					PostureModule::reverse_lr(boma);
-					PostureModule::update_rot_y_lr(boma);
-					BOUNCE_DA[ENTRY_ID] = true;
-					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_ATTACK_DASH, true);
-				};
-			} else {
-				BOUNCE_DA[ENTRY_ID] = false;
-			};
 			if ![*FIGHTER_STATUS_KIND_ATTACK_HI3, *FIGHTER_STATUS_KIND_ATTACK_S3, *FIGHTER_STATUS_KIND_ATTACK_LW3, *FIGHTER_STATUS_KIND_DOWN_STAND_ATTACK].contains(&status_kind) {
 				ArticleModule::remove_exist(boma, *FIGHTER_MURABITO_GENERATE_ARTICLE_UMBRELLA,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
 			};
@@ -138,7 +123,7 @@ unsafe extern "C" fn toad(fighter : &mut L2CFighterCommon) {
 				if [hash40("special_air_hi_screw"), hash40("special_air_hi_loop")].contains(&MotionModule::motion_kind(boma)){
 					let is_near_ground = GroundModule::ray_check(boma, &Vector2f{ x: PostureModule::pos_x(boma), y: PostureModule::pos_y(boma)}, &Vector2f{ x: 0.0, y: -1.0}, true) == 1;
 					if is_near_ground {
-						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_LANDING_FALL_SPECIAL, true);
+						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL_SPECIAL, true);
 					}
 				}
 			}
@@ -230,65 +215,82 @@ unsafe extern "C" fn toad(fighter : &mut L2CFighterCommon) {
 			//ArticleModule::remove_exist(boma, *FIGHTER_MURABITO_GENERATE_ARTICLE_CLAYROCKET,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
 			ArticleModule::remove_exist(boma, *FIGHTER_MURABITO_GENERATE_ARTICLE_BALLOON,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
 			WorkModule::off_flag(boma, *FIGHTER_MURABITO_INSTANCE_WORK_ID_FLAG_CATCHING);
-			if [*FIGHTER_STATUS_KIND_SPECIAL_S].contains(&status_kind) {
-				if BEFORE_SIDEB_BOUNCE[ENTRY_ID] > 0 {
-					BEFORE_SIDEB_BOUNCE[ENTRY_ID] -= 1;
+			if [hash40("special_s_jump"), hash40("special_s_loop"), hash40("special_air_s_loop")].contains(&status_kind) {
+				let lr = PostureModule::lr(boma);
+				let dist = 4.0*lr;
+				if GroundModule::is_wall_touch_line(boma, *GROUND_TOUCH_FLAG_SIDE as u32) 
+				&& ray_check_pos(boma, dist, 0.0, false) == 1 {
+					PostureModule::reverse_lr(boma);
+					PostureModule::update_rot_y_lr(boma);
 				};
-				if situation_kind == *SITUATION_KIND_GROUND {
-					if KineticModule::get_kinetic_type(boma) != *FIGHTER_KINETIC_TYPE_MOTION {
-						KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_MOTION);
-					};
-					if LAND_SIDEB_BOUNCE[ENTRY_ID] > 0 {
-						LAND_SIDEB_BOUNCE[ENTRY_ID] -= 1;
-						println!("Land Sideb: {}", LAND_SIDEB_BOUNCE[ENTRY_ID]);
-					};
-					if (11..20).contains(&(frame as i32)) || (LAND_SIDEB_BOUNCE[ENTRY_ID] > 0 && frame < 52.0){
-						if ControlModule::check_button_on_trriger(boma, *CONTROL_PAD_BUTTON_SPECIAL) {
-							StatusModule::change_status_request_from_script(boma, *FIGHTER_MURABITO_STATUS_KIND_SPECIAL_S_JUMP, true);
-						};
-					};
-					if BEFORE_SIDEB_BOUNCE[ENTRY_ID] > 0 {
-						StatusModule::change_status_request_from_script(boma, *FIGHTER_MURABITO_STATUS_KIND_SPECIAL_S_JUMP, true);
-					};
-				} else {
+			} else {
+				SIDEB_LENGTH[ENTRY_ID] = 0;
+			}
+			
+			if [*FIGHTER_STATUS_KIND_SPECIAL_S].contains(&status_kind) {
+				CAN_SIDEB[ENTRY_ID] = 1;
+				if [hash40("special_s"), hash40("special_air_s")].contains(&motion_kind) {
+					if MotionModule::end_frame(boma) - frame < 3.0 || SIDEB_RESET[ENTRY_ID] {
+                    	macros::SET_SPEED_EX(fighter, 3.0, -2.0, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+						if situation_kind == *SITUATION_KIND_GROUND {
+							MotionModule::change_motion(boma, smash::phx::Hash40::new("special_s_loop"), 0.0, 1.0, false, 0.0, false, false);
+						} else {
+							MotionModule::change_motion(boma, smash::phx::Hash40::new("special_air_s_loop"), 0.0, 1.0, false, 0.0, false, false);
+						}
+					}
 					if KineticModule::get_kinetic_type(boma) != *FIGHTER_KINETIC_TYPE_MOTION_FALL {
 						KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_MOTION_FALL);
 					};
-					if frame >= 15.0 && ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_ATTACK) {
-						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_ATTACK_AIR, false);
+				} else if [hash40("special_s_loop"), hash40("special_air_s_loop")].contains(&motion_kind) {
+					SIDEB_LENGTH[ENTRY_ID] += 1;
+					if SIDEB_LENGTH[ENTRY_ID] >= SIDEB_LENGTH_MAX {
+						if situation_kind == *SITUATION_KIND_GROUND {
+							MotionModule::change_motion(boma, smash::phx::Hash40::new("special_s_end"), 0.0, 1.0, false, 0.0, false, false);
+						} else {
+							MotionModule::change_motion(boma, smash::phx::Hash40::new("special_air_s_end"), 0.0, 1.0, false, 0.0, false, false);
+						}
 					}
-					if frame > 30.0 {
-						let cat1 = ControlModule::get_command_flag_cat(boma, 0);
-						if (cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_HI) != 0{
-							StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_SPECIAL_HI, true);
-						};
-						if ControlModule::check_button_on_trriger(boma, *CONTROL_PAD_BUTTON_SPECIAL) {
-							BEFORE_SIDEB_BOUNCE[ENTRY_ID] = 3;
-						};
-					};
-					LAND_SIDEB_BOUNCE[ENTRY_ID] = 8;
-					CAN_SIDEB[ENTRY_ID] = 1;
-				};
-			} else {
-				LAND_SIDEB_BOUNCE[ENTRY_ID] = 0;
-				BEFORE_SIDEB_BOUNCE[ENTRY_ID] = 0;
-			};
+					if check_jump(boma) && WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT) < WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT_MAX){
+						StatusModule::change_status_request_from_script(boma, *FIGHTER_MURABITO_STATUS_KIND_SPECIAL_S_JUMP, true);
+					}
+				} else if motion_kind == hash40("special_s_end") && MotionModule::end_frame(boma) - frame < 3.0 {
+					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_DOWN, true);
+				}
+			}
 			if situation_kind != *SITUATION_KIND_AIR || (*FIGHTER_STATUS_KIND_DAMAGE..*FIGHTER_STATUS_KIND_DAMAGE_FALL).contains(&status_kind){ 
 				CAN_SIDEB[ENTRY_ID] = 0;
 			}
 			if [*FIGHTER_MURABITO_STATUS_KIND_SPECIAL_S_JUMP].contains(&status_kind) {
-				if KineticModule::get_kinetic_type(boma) != *FIGHTER_KINETIC_TYPE_MOTION_FALL {
-					KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_MOTION_FALL);
+				SIDEB_RESET[ENTRY_ID] = true;
+				KineticModule::suspend_energy(boma, *FIGHTER_KINETIC_ENERGY_ID_CONTROL);
+				if KineticModule::get_kinetic_type(boma) != *FIGHTER_KINETIC_TYPE_JUMP_AERIAL {
+					KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_JUMP_AERIAL);
 				};
-				if frame >= 13.0 {
-					CancelModule::enable_cancel(boma);
-				};
-				if frame >= 14.0 {
-					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL, false);
-				};
-			};
+				if MotionModule::end_frame(boma) - frame < 3.0 {
+					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_SPECIAL_S, true);
+				}
+				if frame > 4.0 && check_jump(boma) && WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT) < WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT_MAX){
+					StatusModule::change_status_request_from_script(boma, *FIGHTER_MURABITO_STATUS_KIND_SPECIAL_S_JUMP, true);
+				}
+			} else {
+				SIDEB_RESET[ENTRY_ID] = false;
+			}
 		};
 	};
+}
+pub(crate) fn check_jump(boma: &mut smash::app::BattleObjectModuleAccessor) -> bool {
+	unsafe {
+		if ControlModule::check_button_on_trriger(boma, *CONTROL_PAD_BUTTON_JUMP) {
+			return true;
+		};
+		if ControlModule::check_button_on_trriger(boma, *CONTROL_PAD_BUTTON_FLICK_JUMP) {
+			return true;
+		};
+		if ControlModule::check_button_on_trriger(boma, *CONTROL_PAD_BUTTON_JUMP_MINI) {
+			return true;
+		};
+		return false;
+	}
 }
 
 unsafe extern "C" fn agent_reset(fighter: &mut L2CFighterCommon) {
