@@ -147,6 +147,57 @@ unsafe extern "C" fn special_hi_pre(fighter: &mut L2CFighterCommon) -> L2CValue 
     );
     0.into()
 }
+//Init, End and Exit don't exist for Mario's Fireball
+
+unsafe extern "C" fn regular_pre(weapon: &mut L2CWeaponCommon) -> L2CValue {
+    StatusModule::init_settings(weapon.module_accessor, SituationKind(*SITUATION_KIND_AIR), *WEAPON_KINETIC_TYPE_NORMAL, *GROUND_CORRECT_KIND_AIR as u32, GroundCliffCheckKind(0), false, 0, 0, 0, 0);
+    0.into()
+}
+
+unsafe extern "C" fn regular_init(weapon: &mut L2CWeaponCommon) -> L2CValue {
+    0.into()
+}
+
+unsafe extern "C" fn regular_main(weapon: &mut L2CWeaponCommon) -> L2CValue {
+    MotionModule::change_motion(weapon.module_accessor, Hash40::new("regular"), 0.0, 1.0, false, 0.0, false, false);
+    weapon.fastshift(L2CValue::Ptr(regular_main_loop as *const () as _))
+}
+
+unsafe extern "C" fn regular_main_loop(weapon: &mut L2CWeaponCommon) -> L2CValue {
+    let life = WorkModule::get_int(weapon.module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LIFE);
+    let remaining_life = life <= 0;
+    if !remaining_life {
+        if !GroundModule::is_touch(fighter.module_accessor, *GROUND_TOUCH_FLAG_ALL) {
+            return 0.into();
+        }
+        notify_event_msc_cmd!(weapon, Hash40::new_raw(0x18b78d41a0));
+        weapon.pop_lua_stack(1);
+        MotionAnimcmdModule::call_script_single(weapon.module_accessor, *WEAPON_ANIMCMD_EFFECT, Hash40::new("effect_bound"), -1);
+        if remaining_life {
+            notify_event_msc_cmd!(weapon, Hash40::new_raw(0x199c462b5d));
+            weapon.pop_lua_stack(1);
+            return 0.into();
+        }
+    }
+    else {
+        notify_event_msc_cmd!(weapon, Hash40::new_raw(0x199c462b5d));
+        weapon.pop_lua_stack(1);
+    }
+    0.into()
+}
+
+unsafe extern "C" fn regular_exec(weapon: &mut L2CWeaponCommon) -> L2CValue {
+    WorkModule::dec_int(weapon.module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LIFE);
+    0.into()
+}
+
+unsafe extern "C" fn regular_end(weapon: &mut L2CWeaponCommon) -> L2CValue {
+    0.into()
+}
+
+unsafe extern "C" fn regular_exec(weapon: &mut L2CWeaponCommon) -> L2CValue {
+    0.into()
+}
 
 pub fn install() {
     Agent::new("murabito")
@@ -160,5 +211,13 @@ pub fn install() {
         .status(Init, *FIGHTER_STATUS_KIND_THROW_KIRBY, throw_init)
         .status(Exit, *FIGHTER_STATUS_KIND_THROW_KIRBY, throw_exit)
         .status(Pre, *FIGHTER_MURABITO_STATUS_KIND_SPECIAL_HI_DETACH, special_hi_pre)
+        .install();
+    Agent::new("murabito_iceball")
+    .set_costume([120, 121, 122, 123, 124, 125, 126, 127].to_vec())
+        .status(Init, *WEAPON_MURABITO_CLAYROCKET_STATUS_KIND_READY, regular_init)
+        .status(Pre, *WEAPON_MURABITO_CLAYROCKET_STATUS_KIND_READY, regular_pre)
+        .status(Main, *WEAPON_MURABITO_CLAYROCKET_STATUS_KIND_READY, regular_main)
+        .status(Exec, *WEAPON_MURABITO_CLAYROCKET_STATUS_KIND_READY, regular_exec)
+        .status(End, *WEAPON_MURABITO_CLAYROCKET_STATUS_KIND_READY, regular_end)
         .install();
 }

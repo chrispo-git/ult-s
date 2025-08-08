@@ -11,6 +11,7 @@ use smash::lib::{L2CValue, L2CAgent};
 use std::mem;
 use smash::app::*;
 use smash::phx::Vector3f;
+use smash::phx::Vector2f;
 use crate::util::*;
 use super::*;
 
@@ -32,28 +33,6 @@ unsafe extern "C" fn bob_omb_frame(weapon: &mut L2CFighterBase) {
 			};
 		}
     }
-}
-unsafe extern "C" fn final_frame(weapon: &mut L2CFighterBase) {
-    unsafe {
-        let otarget_id = WorkModule::get_int(weapon.module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LINK_OWNER) as u32;
-        let boma = smash::app::sv_system::battle_object_module_accessor(weapon.lua_state_agent); 
-		let ENTRY_ID = WorkModule::get_int(&mut *boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-		let status_kind = StatusModule::status_kind(weapon.module_accessor);
-		let fighter_kind = smash::app::utility::get_kind(boma);
-		let owner_module_accessor = &mut *sv_battle_object::module_accessor((WorkModule::get_int(boma, *WEAPON_INSTANCE_WORK_ID_INT_LINK_OWNER)) as u32);
-        let is_toad_weapon = (WorkModule::get_int(owner_module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) >= 120 && WorkModule::get_int(owner_module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) <= 127);
-        
-        if fighter_kind == *WEAPON_KIND_MURABITO_CLAYROCKET && is_toad_weapon {
-			if status_kind == *WEAPON_MURABITO_CLAYROCKET_STATUS_KIND_READY {
-				StatusModule::change_status_request_from_script(weapon.module_accessor, *WEAPON_MURABITO_CLAYROCKET_STATUS_KIND_FLY, false);
-			};
-			if PostureModule::lr(weapon.module_accessor) < 0.0 {
-				let mut rotation = Vector3f{x: 0.0, y: -25.0 , z: 0.0 };
-				ModelModule::set_joint_rotate(boma, Hash40::new("trans"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});	
-			}
-			macros::SET_SPEED_EX(weapon, 2.0, 0.0, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_NONE);
-		}
-	}
 }
 unsafe extern "C" fn toad(fighter : &mut L2CFighterCommon) {
     unsafe {
@@ -88,13 +67,9 @@ unsafe extern "C" fn toad(fighter : &mut L2CFighterCommon) {
 		};*/
 		if (WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) >= 120 && WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) <= 127) && fighter_kind == *FIGHTER_KIND_MURABITO {
 			if ModelModule::scale(boma) == WorkModule::get_param_float(fighter.module_accessor, hash40("scale"), 0) {
-                ModelModule::set_scale(boma, 0.9);
-                AttackModule::set_attack_scale(boma, 0.9, true);
-                GrabModule::set_size_mul(boma, 0.9);
+				PostureModule::set_scale(fighter.module_accessor, 0.85, false);
+                GrabModule::set_size_mul(boma, 0.85);
             }
-			let scale = smash::phx::Vector3f { x: 0.8, y: 1.0, z: 1.0 };
-			ModelModule::set_joint_scale(boma, Hash40::new("shoulderl"), &scale);
-			ModelModule::set_joint_scale(boma, Hash40::new("shoulderr"), &scale);
 			WorkModule::set_int(boma, 1, *FIGHTER_MURABITO_INSTANCE_WORK_ID_INT_SPECIAL_N_TIME_LIMIT);
 			if status_kind == *FIGHTER_STATUS_KIND_DEAD {
 				if MotionModule::motion_kind(boma) == hash40("fall_damage") && !HAS_DEADED[ENTRY_ID] {
@@ -132,15 +107,40 @@ unsafe extern "C" fn toad(fighter : &mut L2CFighterCommon) {
 					};
 				};
 			};
+			ArticleModule::remove_exist(boma, *FIGHTER_MURABITO_GENERATE_ARTICLE_HELMET,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
 			if ![*FIGHTER_STATUS_KIND_APPEAL].contains(&status_kind) {
 				ArticleModule::remove_exist(boma, *FIGHTER_MURABITO_GENERATE_ARTICLE_BUTTERFLYNET,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
 			};
-			if ![*FIGHTER_MURABITO_STATUS_KIND_SPECIAL_HI_DETACH].contains(&status_kind) {
-				ArticleModule::remove_exist(boma, *FIGHTER_MURABITO_GENERATE_ARTICLE_HELMET,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
-			} else {
+			if [*FIGHTER_MURABITO_STATUS_KIND_SPECIAL_HI_DETACH].contains(&status_kind) {
 				if GroundModule::can_entry_cliff(boma) == 1 && WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_CLIFF_COUNT) < 7 && WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_CLIFF_NO_CATCH_FRAME) < 1 && ControlModule::get_stick_y(boma) > -0.5{
 					fighter.change_status(FIGHTER_STATUS_KIND_CLIFF_CATCH_MOVE.into(),false.into());
 				};
+				if MotionModule::frame(boma) > 10.0 && MotionModule::end_frame(boma) - MotionModule::frame(boma) < 3.0  && MotionModule::motion_kind(boma) == hash40("special_air_hi_detach") {
+					MotionModule::change_motion(boma, smash::phx::Hash40::new("special_air_hi_loop"), 0.0, 1.0, false, 0.0, false, false);
+				}
+				if MotionModule::motion_kind(boma) == hash40("special_air_hi_loop") {
+					if KineticModule::get_kinetic_type(boma) != *FIGHTER_KINETIC_TYPE_FALL {
+						KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_FALL);
+					};
+					let gravity = WorkModule::get_param_float(fighter.module_accessor, hash40("air_accel_y"), 0);
+                    let speed = smash::phx::Vector3f { x: 0.0, y: gravity*0.9, z: 0.0 };
+                    KineticModule::add_speed(boma, &speed);
+
+					if ControlModule::check_button_on_trriger(boma, *CONTROL_PAD_BUTTON_SPECIAL) {
+						MotionModule::change_motion(boma, smash::phx::Hash40::new("special_air_hi_screw"), 0.0, 1.0, false, 0.0, false, false);
+					}
+				}
+				if MotionModule::motion_kind(boma) == hash40("special_air_hi_screw") {
+                	KineticModule::suspend_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_CONTROL);
+                    macros::SET_SPEED_EX(fighter, 0.0, -4.0, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+				}
+				
+				if [hash40("special_air_hi_screw"), hash40("special_air_hi_loop")].contains(&MotionModule::motion_kind(boma)){
+					let is_near_ground = GroundModule::ray_check(boma, &Vector2f{ x: PostureModule::pos_x(boma), y: PostureModule::pos_y(boma)}, &Vector2f{ x: 0.0, y: -1.0}, true) == 1;
+					if is_near_ground {
+						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_LANDING_FALL_SPECIAL, true);
+					}
+				}
 			}
 			if ![*FIGHTER_STATUS_KIND_THROW].contains(&status_kind) {
 				ArticleModule::remove_exist(boma, *FIGHTER_MURABITO_GENERATE_ARTICLE_WEEDS,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
@@ -152,7 +152,7 @@ unsafe extern "C" fn toad(fighter : &mut L2CFighterCommon) {
 				if frame < 2.0 {
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_MURABITO_STATUS_KIND_SPECIAL_LW_WATER_JUMP, true);
 				} else {
-					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_LANDING, true);
+					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_LANDING_FALL_SPECIAL, true);
 				};
 			};
 			if [*FIGHTER_MURABITO_STATUS_KIND_SPECIAL_LW_WATER_JUMP].contains(&status_kind) {
@@ -169,6 +169,17 @@ unsafe extern "C" fn toad(fighter : &mut L2CFighterCommon) {
 				if frame > 5.0 && frame < 7.0{
 					macros::PLAY_SE(fighter, Hash40::new("se_murabito_attackdash01"));
 				}
+			};
+			if [hash40("special_air_lw_plant_failure")].contains(&MotionModule::motion_kind(boma)) {
+				if AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_ALL) && !AttackModule::is_infliction(boma, *COLLISION_KIND_MASK_ALL) && MotionModule::frame(boma) < 37.0{
+					KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_JUMP);
+					MotionModule::set_frame_sync_anim_cmd(boma, 38.0, true, true, false);
+                    let speed = smash::phx::Vector3f { x: 0.0, y: 0.6, z: 0.0 };
+                    KineticModule::add_speed(boma, &speed);
+					if !AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_HIT) {
+						MotionModule::set_rate(boma, 0.5);
+					};
+				};
 			};
 			if [*FIGHTER_MURABITO_STATUS_KIND_SPECIAL_LW_WATER_LANDING, *FIGHTER_MURABITO_STATUS_KIND_SPECIAL_LW_WATER_WAIT].contains(&status_kind) {
 				if situation_kind == *SITUATION_KIND_GROUND {
@@ -300,8 +311,4 @@ pub fn install() {
         .on_line(Main, toad)
         .install();
 
-    Agent::new("murabito_clayrocket")
-    .set_costume([120, 121, 122, 123, 124, 125, 126, 127].to_vec())
-        .on_line(Main, final_frame)
-        .install();
 }
