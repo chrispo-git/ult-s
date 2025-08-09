@@ -169,7 +169,7 @@ unsafe extern "C" fn toad(fighter : &mut L2CFighterCommon) {
 			if [*FIGHTER_MURABITO_STATUS_KIND_SPECIAL_LW_WATER_LANDING, *FIGHTER_MURABITO_STATUS_KIND_SPECIAL_LW_WATER_WAIT].contains(&status_kind) {
 				if situation_kind == *SITUATION_KIND_GROUND {
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_LANDING, true);
-				};
+				}; 
 			};
 			if situation_kind != *SITUATION_KIND_AIR {
 				HAS_DOWNB[ENTRY_ID] = false;
@@ -215,23 +215,48 @@ unsafe extern "C" fn toad(fighter : &mut L2CFighterCommon) {
 			//ArticleModule::remove_exist(boma, *FIGHTER_MURABITO_GENERATE_ARTICLE_CLAYROCKET,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
 			ArticleModule::remove_exist(boma, *FIGHTER_MURABITO_GENERATE_ARTICLE_BALLOON,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
 			WorkModule::off_flag(boma, *FIGHTER_MURABITO_INSTANCE_WORK_ID_FLAG_CATCHING);
-			if [hash40("special_s_jump"), hash40("special_s_loop"), hash40("special_air_s_loop")].contains(&status_kind) {
+			if [hash40("special_s_jump"), hash40("special_s_loop"), hash40("special_air_s_loop")].contains(&motion_kind) {
 				let lr = PostureModule::lr(boma);
 				let dist = 4.0*lr;
 				if GroundModule::is_wall_touch_line(boma, *GROUND_TOUCH_FLAG_SIDE as u32) 
 				&& ray_check_pos(boma, dist, 0.0, false) == 1 {
 					PostureModule::reverse_lr(boma);
 					PostureModule::update_rot_y_lr(boma);
+					let stop_rise  = smash::phx::Vector3f { x: -1.0, y: 1.0, z: 1.0 };
+					KineticModule::mul_speed(fighter.module_accessor, &stop_rise, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
 				};
+				SIDEB_LENGTH[ENTRY_ID] += 1;
 			} else {
 				SIDEB_LENGTH[ENTRY_ID] = 0;
 			}
-			
+			if [hash40("special_s_end"), hash40("special_air_s_end")].contains(&motion_kind) {
+				SIDEB_END[ENTRY_ID] = true;
+			}
 			if [*FIGHTER_STATUS_KIND_SPECIAL_S].contains(&status_kind) {
 				CAN_SIDEB[ENTRY_ID] = 1;
 				if [hash40("special_s"), hash40("special_air_s")].contains(&motion_kind) {
+					if SIDEB_END[ENTRY_ID] {
+						if situation_kind == *SITUATION_KIND_GROUND {
+							StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_DOWN, true);
+						} else {
+							StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_DAMAGE_FALL, true);
+						}
+					}
 					if MotionModule::end_frame(boma) - frame < 3.0 || SIDEB_RESET[ENTRY_ID] {
-                    	macros::SET_SPEED_EX(fighter, 3.0, -2.0, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+						KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_MOTION_FALL);
+						if !SIDEB_RESET[ENTRY_ID] {
+                    		macros::SET_SPEED_EX(fighter, 1.5, -2.0, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+							SIDEB_DIR[ENTRY_ID] = PostureModule::lr(boma);
+						} else {
+                    		macros::SET_SPEED_EX(fighter, 1.5, PREV_SPEED_Y[ENTRY_ID], *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+							if PostureModule::lr(boma) != SIDEB_DIR[ENTRY_ID] {
+								PostureModule::reverse_lr(boma);
+								PostureModule::update_rot_y_lr(boma);
+								let stop_rise  = smash::phx::Vector3f { x: -1.0, y: 1.0, z: 1.0 };
+								KineticModule::mul_speed(fighter.module_accessor, &stop_rise, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+							}
+						}
+						SIDEB_RESET[ENTRY_ID] = false;
 						if situation_kind == *SITUATION_KIND_GROUND {
 							MotionModule::change_motion(boma, smash::phx::Hash40::new("special_s_loop"), 0.0, 1.0, false, 0.0, false, false);
 						} else {
@@ -242,7 +267,6 @@ unsafe extern "C" fn toad(fighter : &mut L2CFighterCommon) {
 						KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_MOTION_FALL);
 					};
 				} else if [hash40("special_s_loop"), hash40("special_air_s_loop")].contains(&motion_kind) {
-					SIDEB_LENGTH[ENTRY_ID] += 1;
 					if SIDEB_LENGTH[ENTRY_ID] >= SIDEB_LENGTH_MAX {
 						if situation_kind == *SITUATION_KIND_GROUND {
 							MotionModule::change_motion(boma, smash::phx::Hash40::new("special_s_end"), 0.0, 1.0, false, 0.0, false, false);
@@ -251,29 +275,56 @@ unsafe extern "C" fn toad(fighter : &mut L2CFighterCommon) {
 						}
 					}
 					if check_jump(boma) && WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT) < WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT_MAX){
-						StatusModule::change_status_request_from_script(boma, *FIGHTER_MURABITO_STATUS_KIND_SPECIAL_S_JUMP, true);
+						
+						if situation_kind == *SITUATION_KIND_GROUND {
+							StatusModule::change_status_request_from_script(boma, *FIGHTER_MURABITO_STATUS_KIND_SPECIAL_S_JUMP, true);
+						} else {
+							StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_JUMP_AERIAL, true);
+							let speed = smash::phx::Vector3f { x:1.5, y: -0.5, z: 0.0 };
+							KineticModule::add_speed(boma, &speed);
+						}
+					}
+					if (ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_HI) != 0 {
+						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_SPECIAL_HI, true);
+					}
+					if AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_SHIELD) {
+						SIDEB_LENGTH[ENTRY_ID] = SIDEB_LENGTH_MAX+1;
 					}
 				} else if motion_kind == hash40("special_s_end") && MotionModule::end_frame(boma) - frame < 3.0 {
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_DOWN, true);
 				}
+			} else {
+				SIDEB_END[ENTRY_ID] = false;
+			}
+			if [hash40("special_s_jump"), hash40("special_air_s_loop"), hash40("special_s_loop")].contains(&motion_kind) {
+				SIDEB_RESET[ENTRY_ID] = true;
+			} else {
+				SIDEB_RESET[ENTRY_ID] = false;
 			}
 			if situation_kind != *SITUATION_KIND_AIR || (*FIGHTER_STATUS_KIND_DAMAGE..*FIGHTER_STATUS_KIND_DAMAGE_FALL).contains(&status_kind){ 
 				CAN_SIDEB[ENTRY_ID] = 0;
 			}
 			if [*FIGHTER_MURABITO_STATUS_KIND_SPECIAL_S_JUMP].contains(&status_kind) {
-				SIDEB_RESET[ENTRY_ID] = true;
 				KineticModule::suspend_energy(boma, *FIGHTER_KINETIC_ENERGY_ID_CONTROL);
 				if KineticModule::get_kinetic_type(boma) != *FIGHTER_KINETIC_TYPE_JUMP_AERIAL {
 					KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_JUMP_AERIAL);
+                    let speed = smash::phx::Vector3f { x:1.5, y: -0.5, z: 0.0 };
+                    KineticModule::add_speed(boma, &speed);
 				};
-				if MotionModule::end_frame(boma) - frame < 3.0 {
+				if AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_SHIELD) {
+					SIDEB_LENGTH[ENTRY_ID] = SIDEB_LENGTH_MAX+1;
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_SPECIAL_S, true);
+				} else {
+					if MotionModule::end_frame(boma) - frame < 3.0 {
+						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_SPECIAL_S, true);
+					}
+					if frame > 4.0 && check_jump(boma) && WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT) < WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT_MAX){
+						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_JUMP_AERIAL, true);
+					}
+					if frame > 4.0 && (ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_HI) != 0 {
+						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_SPECIAL_HI, true);
+					}
 				}
-				if frame > 4.0 && check_jump(boma) && WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT) < WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT_MAX){
-					StatusModule::change_status_request_from_script(boma, *FIGHTER_MURABITO_STATUS_KIND_SPECIAL_S_JUMP, true);
-				}
-			} else {
-				SIDEB_RESET[ENTRY_ID] = false;
 			}
 		};
 	};

@@ -118,6 +118,34 @@ unsafe extern "C" fn throw_exit(fighter: &mut L2CFighterCommon) -> L2CValue {
 		//original!(fighter)
 	//}
 }
+unsafe extern "C" fn special_s_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
+    StatusModule::init_settings(
+        fighter.module_accessor,
+        smash::app::SituationKind(*SITUATION_KIND_NONE),
+        *FIGHTER_KINETIC_TYPE_MOTION_FALL,
+        *GROUND_CORRECT_KIND_AIR as u32,
+		smash::app::GroundCliffCheckKind(*GROUND_CLIFF_CHECK_KIND_ALWAYS_BOTH_SIDES),
+        true,
+        *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_FLAG,
+        *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_INT,
+        *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_FLOAT,
+        0
+    );
+
+    FighterStatusModuleImpl::set_fighter_status_data(
+        fighter.module_accessor,
+        false,
+        *FIGHTER_TREADED_KIND_NO_REAC,
+        false,
+        false,
+        false,
+        (*FIGHTER_LOG_MASK_FLAG_ATTACK_KIND_SPECIAL_S | *FIGHTER_LOG_MASK_FLAG_ATTACK_KIND_AIR_LASSO | *FIGHTER_LOG_MASK_FLAG_ACTION_TRIGGER_ON) as u64,
+        0,
+        *FIGHTER_POWER_UP_ATTACK_BIT_SPECIAL_S as u32,
+        0
+    );
+    0.into()
+}
 
 unsafe extern "C" fn special_hi_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
     StatusModule::init_settings(
@@ -167,7 +195,7 @@ unsafe extern "C" fn regular_main_loop(weapon: &mut L2CWeaponCommon) -> L2CValue
     let life = WorkModule::get_int(weapon.module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LIFE);
     let remaining_life = life <= 0;
     if !remaining_life {
-        if !GroundModule::is_touch(fighter.module_accessor, *GROUND_TOUCH_FLAG_ALL) {
+        if !GroundModule::is_touch(weapon.module_accessor, *GROUND_TOUCH_FLAG_ALL as u32) {
             return 0.into();
         }
         notify_event_msc_cmd!(weapon, Hash40::new_raw(0x18b78d41a0));
@@ -195,9 +223,6 @@ unsafe extern "C" fn regular_end(weapon: &mut L2CWeaponCommon) -> L2CValue {
     0.into()
 }
 
-unsafe extern "C" fn regular_exec(weapon: &mut L2CWeaponCommon) -> L2CValue {
-    0.into()
-}
 
 pub fn install() {
     Agent::new("murabito")
@@ -211,6 +236,7 @@ pub fn install() {
         .status(Init, *FIGHTER_STATUS_KIND_THROW_KIRBY, throw_init)
         .status(Exit, *FIGHTER_STATUS_KIND_THROW_KIRBY, throw_exit)
         .status(Pre, *FIGHTER_MURABITO_STATUS_KIND_SPECIAL_HI_DETACH, special_hi_pre)
+        .status(Pre, *FIGHTER_STATUS_KIND_SPECIAL_S, special_s_pre)
         .install();
     Agent::new("murabito_iceball")
     .set_costume([120, 121, 122, 123, 124, 125, 126, 127].to_vec())
