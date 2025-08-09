@@ -17,7 +17,6 @@ mod status;
 mod frame;
 mod acmd;
 
-pub static mut FIGHTER_TOAD_GENERATE_ARTICLE_ICEBALL : i32 = 20;
 
 
 static mut LAND_SIDEB_BOUNCE: [i32; 8] = [0; 8];
@@ -68,10 +67,6 @@ pub fn install() {
 	frame::install();
 	status::install();
 	acmd::install();
-    unsafe {
-        FIGHTER_TOAD_GENERATE_ARTICLE_ICEBALL += smashline::clone_weapon("mario", *WEAPON_KIND_MARIO_FIREBALL, "murabito", "iceball", false);
-    }
-
     the_csk_collection_api::add_chara_db_entry_info(
         the_csk_collection_api::CharacterDatabaseEntry {
                 ui_chara_id: smash::hash40("ui_chara_toad"),
