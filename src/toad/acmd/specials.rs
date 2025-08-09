@@ -51,11 +51,10 @@ unsafe extern "C" fn toad_sideb_air_snd(fighter: &mut L2CAgentBase) {
 
 unsafe extern "C" fn toad_neutralb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
-		frame(fighter.lua_state_agent, 10.0);
+		frame(fighter.lua_state_agent, 15.0);
 		if macros::is_excute(fighter) {
-			if true{
-				ItemModule::have_item(fighter.module_accessor, smash::app::ItemKind(*ITEM_KIND_WOOD), 0, 0, false, false);
-			}
+			ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_MURABITO_GENERATE_ARTICLE_FLOWERPOT, true, 0);
+			ArticleModule::shoot(fighter.module_accessor, *FIGHTER_MURABITO_GENERATE_ARTICLE_FLOWERPOT, smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_LAST), false);
 		}
 }	
 unsafe extern "C" fn toad_neutralb_eff(fighter: &mut L2CAgentBase) {

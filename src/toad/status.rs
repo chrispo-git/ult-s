@@ -238,12 +238,4 @@ pub fn install() {
         .status(Pre, *FIGHTER_MURABITO_STATUS_KIND_SPECIAL_HI_DETACH, special_hi_pre)
         .status(Pre, *FIGHTER_STATUS_KIND_SPECIAL_S, special_s_pre)
         .install();
-    Agent::new("murabito_iceball")
-    .set_costume([120, 121, 122, 123, 124, 125, 126, 127].to_vec())
-        .status(Init, *WEAPON_MURABITO_CLAYROCKET_STATUS_KIND_READY, regular_init)
-        .status(Pre, *WEAPON_MURABITO_CLAYROCKET_STATUS_KIND_READY, regular_pre)
-        .status(Main, *WEAPON_MURABITO_CLAYROCKET_STATUS_KIND_READY, regular_main)
-        .status(Exec, *WEAPON_MURABITO_CLAYROCKET_STATUS_KIND_READY, regular_exec)
-        .status(End, *WEAPON_MURABITO_CLAYROCKET_STATUS_KIND_READY, regular_end)
-        .install();
-}
+} 

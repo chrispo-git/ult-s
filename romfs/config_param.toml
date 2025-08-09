@@ -2888,6 +2888,62 @@ value = -1.6
 kinds = ["murabito","murabito_clayrocket"]
 slots = [120,121,122,123,124,125,126,127]
 
+[[param_int]]
+param = "param_flowerpot"
+subparam = "burst_rate"
+value = 0
+kinds = ["murabito","murabito_flowerpot"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_int]]
+param = "param_flowerpot"
+subparam = "life"
+value = 70
+kinds = ["murabito","murabito_flowerpot"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_int]]
+param = "param_flowerpot"
+subparam = "is_penetration"
+value = 0
+kinds = ["murabito","murabito_flowerpot"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_int]]
+param = "param_flowerpot"
+subparam = "speed_x"
+value = 1.37
+kinds = ["murabito","murabito_flowerpot"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_int]]
+param = "param_flowerpot"
+subparam = "speed_y"
+value = 0.0
+kinds = ["murabito","murabito_flowerpot"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_int]]
+param = "param_flowerpot"
+subparam = "decel"
+value = 0.0
+kinds = ["murabito","murabito_flowerpot"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_int]]
+param = "param_flowerpot"
+subparam = "gravity"
+value = 0.1
+kinds = ["murabito","murabito_flowerpot"]
+slots = [120,121,122,123,124,125,126,127]
+
+[[param_int]]
+param = "param_flowerpot"
+subparam = "limit_gravity"
+value = 1.6
+kinds = ["murabito","murabito_flowerpot"]
+slots = [120,121,122,123,124,125,126,127]
+
 
 # BOMBERMAN
 
