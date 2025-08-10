@@ -75,9 +75,10 @@ unsafe extern "C" fn toad_bair_snd(fighter: &mut L2CAgentBase) {
 }	
 unsafe extern "C" fn toad_bair_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
-		frame(fighter.lua_state_agent, 7.0);
+		frame(fighter.lua_state_agent, 5.0);
 		if macros::is_excute(fighter) {
-			macros::EFFECT(fighter, Hash40::new("sys_attack_impact"), Hash40::new("legc"), 0, 0.0, 0.0, 0, 0, 0, 1.5, 0, 1, 1, 0, 0, 0, false);
+			macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_attack_arc_c"), Hash40::new("sys_attack_arc_c"), Hash40::new("top"), 1, 3, -4.5, -113, 70, 82, 0.8, true, *EF_FLIP_YZ);
+        	macros::LAST_EFFECT_SET_RATE(fighter, 1.7);
 		}
 }	
 unsafe extern "C" fn toad_uair_land(fighter: &mut L2CAgentBase) {
