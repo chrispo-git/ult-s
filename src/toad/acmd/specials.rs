@@ -57,19 +57,34 @@ unsafe extern "C" fn toad_neutralb(fighter: &mut L2CAgentBase) {
 			ArticleModule::shoot(fighter.module_accessor, *FIGHTER_MURABITO_GENERATE_ARTICLE_FLOWERPOT, smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_LAST), false);
 		}
 }	
-unsafe extern "C" fn toad_neutralb_eff(fighter: &mut L2CAgentBase) {
-    let lua_state = fighter.lua_state_agent;
-		frame(fighter.lua_state_agent, 9.0);
-		if macros::is_excute(fighter) {
-			macros::EFFECT(fighter, Hash40::new("murabito_grass"), Hash40::new("top"), 1, 0, 0.5, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
-		}
+unsafe extern "C" fn toad_iceball(agent: &mut L2CAgentBase) {
+    if macros::is_excute(agent) {
+        macros::ATTACK(agent, 0, 0, Hash40::new("have"), 7.0, 361, 20, 0, 18, 3.0, 0.0, 0.0, 0.0, None, None, None, 0.3, 1.8, *ATTACK_SETOFF_KIND_THRU, *ATTACK_LR_CHECK_F, false, -2.5, 0.0, 0, true, true, false, false, false, *COLLISION_SITUATION_MASK_G, *COLLISION_CATEGORY_MASK_NO_FLOOR, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_ice"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_FREEZE, *ATTACK_REGION_NONE);
+        macros::ATTACK(agent, 1, 0, Hash40::new("have"), 6.0, 361, 20, 0, 13, 1.8, 0.0, 0.0, 0.0, None, None, None, 0.3, 1.8, *ATTACK_SETOFF_KIND_THRU, *ATTACK_LR_CHECK_F, false, -2, 0.0, 0, true, true, false, false, false, *COLLISION_SITUATION_MASK_A, *COLLISION_CATEGORY_MASK_NO_FLOOR, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_ice"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_FREEZE, *ATTACK_REGION_NONE);
+    }
+    wait(agent.lua_state_agent, 30.0);
+    if macros::is_excute(agent) {
+        macros::ATTACK(agent, 0, 0, Hash40::new("have"), 6.0, 361, 20, 0, 18, 3.0, 0.0, 0.0, 0.0, None, None, None, 0.3, 1.8, *ATTACK_SETOFF_KIND_THRU, *ATTACK_LR_CHECK_F, false, -2, 0.0, 0, true, true, false, false, false, *COLLISION_SITUATION_MASK_G, *COLLISION_CATEGORY_MASK_NO_FLOOR, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_ice"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_FREEZE, *ATTACK_REGION_NONE);
+        macros::ATTACK(agent, 1, 0, Hash40::new("have"), 5.0, 361, 20, 0, 13, 1.8, 0.0, 0.0, 0.0, None, None, None, 0.3, 1.8, *ATTACK_SETOFF_KIND_THRU, *ATTACK_LR_CHECK_F, false, -1.5, 0.0, 0, true, true, false, false, false, *COLLISION_SITUATION_MASK_A, *COLLISION_CATEGORY_MASK_NO_FLOOR, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_ice"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_FREEZE, *ATTACK_REGION_NONE);
+    }
+    wait(agent.lua_state_agent, 30.0);
+    if macros::is_excute(agent) {
+        macros::ATTACK(agent, 0, 0, Hash40::new("have"), 5.0, 361, 20, 0, 18, 3.0, 0.0, 0.0, 0.0, None, None, None, 0.3, 1.8, *ATTACK_SETOFF_KIND_THRU, *ATTACK_LR_CHECK_F, false, -1.5, 0.0, 0, true, true, false, false, false, *COLLISION_SITUATION_MASK_G, *COLLISION_CATEGORY_MASK_NO_FLOOR, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_ice"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_FREEZE, *ATTACK_REGION_NONE);
+        macros::ATTACK(agent, 1, 0, Hash40::new("have"), 4.0, 361, 20, 0, 13, 1.8, 0.0, 0.0, 0.0, None, None, None, 0.3, 1.8, *ATTACK_SETOFF_KIND_THRU, *ATTACK_LR_CHECK_F, false, -1, 0.0, 0, true, true, false, false, false, *COLLISION_SITUATION_MASK_A, *COLLISION_CATEGORY_MASK_NO_FLOOR, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_ice"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_FREEZE, *ATTACK_REGION_NONE);
+    }
 }	
-unsafe extern "C" fn kirby_toad_neutralb_eff(fighter: &mut L2CAgentBase) {
-    let lua_state = fighter.lua_state_agent;
-		frame(fighter.lua_state_agent, 9.0);
-		if macros::is_excute(fighter) {
-			macros::EFFECT(fighter, Hash40::new("murabito_grass"), Hash40::new("top"), 1, 0, 0.5, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
+unsafe extern "C" fn toad_iceball_eff(agent: &mut L2CAgentBase) {
+	for _ in 0..i32::MAX {
+		if macros::is_excute(agent) {
+        	macros::EFFECT_FOLLOW(agent, Hash40::new("sys_magicball_aura"), Hash40::new("have"), 0, 0, 0, 0, 0, 0, 1.7, true);
+			//macros::LAST_EFFECT_SET_COLOR(fighter, 1.0, 20.0/255.0, 20.0/255.0);
 		}
+		wait(agent.lua_state_agent, 1.0);
+	}
+}	
+unsafe extern "C" fn toad_iceball_end_eff(agent: &mut L2CAgentBase) {
+}	
+unsafe extern "C" fn toad_neutralb_eff(fighter: &mut L2CAgentBase) {
 }	
 unsafe extern "C" fn toad_neutralb_snd(fighter: &mut L2CAgentBase) {
 	let lua_state = fighter.lua_state_agent;
@@ -227,6 +242,14 @@ unsafe extern "C" fn toad_downb_air_snd(fighter: &mut L2CAgentBase) {
 		}
 }
 pub fn install() {
+	Agent::new("murabito_flowerpot")
+    .set_costume([120, 121, 122, 123, 124, 125, 126, 127].to_vec())
+		.acmd("game_throwed", toad_iceball, Priority::Low)
+		.acmd("effect_throwed", toad_iceball_eff, Priority::Low)
+		.acmd("game_bound", toad_iceball, Priority::Low)
+		.acmd("effect_bound", toad_iceball_eff, Priority::Low)
+		.acmd("effect_burst", toad_iceball_end_eff, Priority::Low)
+		.install();
 	Agent::new("murabito")
     .set_costume([120, 121, 122, 123, 124, 125, 126, 127].to_vec())
 		.acmd("game_specialsloop", toad_sideb_hitbox, Priority::Low)

@@ -183,25 +183,46 @@ unsafe extern "C" fn regular_pre(weapon: &mut L2CWeaponCommon) -> L2CValue {
 }
 
 unsafe extern "C" fn regular_init(weapon: &mut L2CWeaponCommon) -> L2CValue {
+    let lr = PostureModule::lr(weapon.module_accessor);
+    let owner_id = WorkModule::get_int(weapon.module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LINK_OWNER) as u32;
+    let owner_boma = smash::app::sv_battle_object::module_accessor(owner_id);
+    let owner_pos_x = PostureModule::pos_x(&mut *owner_boma);
+    let owner_pos_y = PostureModule::pos_y(&mut *owner_boma);
+    let owner_pos_z = PostureModule::pos_z(&mut *owner_boma);
+    WorkModule::set_int(weapon.module_accessor, 90, *WEAPON_INSTANCE_WORK_ID_INT_LIFE);
+    PostureModule::set_pos(weapon.module_accessor, &Vector3f{x: owner_pos_x+(8.0*lr), y: owner_pos_y+7.0, z: owner_pos_z});
+    let speed_x = 1.38;
+    let speed_y = -0.3;
+    let gravity = 0.07;
+    weapon.clear_lua_stack();
+    sv_kinetic_energy!(set_speed, weapon, WEAPON_KINETIC_ENERGY_RESERVE_ID_NORMAL, speed_x*lr, speed_y);
+    sv_kinetic_energy!(set_stable_speed, weapon, WEAPON_KINETIC_ENERGY_RESERVE_ID_NORMAL, speed_x*lr, speed_y);
+    sv_kinetic_energy!(set_accel, weapon, WEAPON_KINETIC_ENERGY_RESERVE_ID_NORMAL, 0.0, -gravity);
+    KineticModule::enable_energy(weapon.module_accessor, *WEAPON_KINETIC_ENERGY_RESERVE_ID_NORMAL);
     0.into()
 }
 
 unsafe extern "C" fn regular_main(weapon: &mut L2CWeaponCommon) -> L2CValue {
-    MotionModule::change_motion(weapon.module_accessor, Hash40::new("regular"), 0.0, 1.0, false, 0.0, false, false);
+    MotionModule::change_motion(weapon.module_accessor, Hash40::new("throwed"), 0.0, 1.0, false, 0.0, false, false);
     weapon.fastshift(L2CValue::Ptr(regular_main_loop as *const () as _))
 }
 
 unsafe extern "C" fn regular_main_loop(weapon: &mut L2CWeaponCommon) -> L2CValue {
     let life = WorkModule::get_int(weapon.module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LIFE);
+    WorkModule::dec_int(weapon.module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LIFE);
     let remaining_life = life <= 0;
+    if AttackModule::is_infliction_status(weapon.module_accessor, *COLLISION_KIND_MASK_ALL) {
+        notify_event_msc_cmd!(weapon, Hash40::new_raw(0x199c462b5d));
+        weapon.pop_lua_stack(1);
+        return 0.into();
+    }
     if !remaining_life {
         if !GroundModule::is_touch(weapon.module_accessor, *GROUND_TOUCH_FLAG_ALL as u32) {
             return 0.into();
         }
-        notify_event_msc_cmd!(weapon, Hash40::new_raw(0x18b78d41a0));
-        weapon.pop_lua_stack(1);
-        MotionAnimcmdModule::call_script_single(weapon.module_accessor, *WEAPON_ANIMCMD_EFFECT, Hash40::new("effect_bound"), -1);
-        if remaining_life {
+        /*notify_event_msc_cmd!(weapon, Hash40::new_raw(0x18b78d41a0));
+        weapon.pop_lua_stack(1);*/
+        if remaining_life ||  GroundModule::is_wall_touch_line(weapon.module_accessor, *GROUND_TOUCH_FLAG_SIDE as u32) {
             notify_event_msc_cmd!(weapon, Hash40::new_raw(0x199c462b5d));
             weapon.pop_lua_stack(1);
             return 0.into();
@@ -215,7 +236,16 @@ unsafe extern "C" fn regular_main_loop(weapon: &mut L2CWeaponCommon) -> L2CValue
 }
 
 unsafe extern "C" fn regular_exec(weapon: &mut L2CWeaponCommon) -> L2CValue {
-    WorkModule::dec_int(weapon.module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LIFE);
+    let is_near_ground = GroundModule::ray_check(weapon.module_accessor, &Vector2f{ x: PostureModule::pos_x(weapon.module_accessor), y: PostureModule::pos_y(weapon.module_accessor)}, &Vector2f{ x: 0.0, y: -4.0}, true) == 1;
+
+    if is_near_ground {
+        let speed_x = 1.38;
+        let bounce = 1.0;
+        let lr = PostureModule::lr(weapon.module_accessor);
+        weapon.clear_lua_stack();
+        sv_kinetic_energy!(set_speed, weapon, WEAPON_KINETIC_ENERGY_RESERVE_ID_NORMAL, speed_x*lr, bounce);
+        sv_kinetic_energy!(set_stable_speed, weapon, WEAPON_KINETIC_ENERGY_RESERVE_ID_NORMAL, speed_x*lr, bounce);
+    }
     0.into()
 }
 
@@ -237,5 +267,13 @@ pub fn install() {
         .status(Exit, *FIGHTER_STATUS_KIND_THROW_KIRBY, throw_exit)
         .status(Pre, *FIGHTER_MURABITO_STATUS_KIND_SPECIAL_HI_DETACH, special_hi_pre)
         .status(Pre, *FIGHTER_STATUS_KIND_SPECIAL_S, special_s_pre)
+        .install();
+    Agent::new("murabito_flowerpot")
+    .set_costume([120, 121, 122, 123, 124, 125, 126, 127].to_vec())
+        .status(Init, *WEAPON_MURABITO_FLOWERPOT_STATUS_KIND_THROWED, regular_init)
+        .status(Pre, *WEAPON_MURABITO_FLOWERPOT_STATUS_KIND_THROWED, regular_pre)
+        .status(Main, *WEAPON_MURABITO_FLOWERPOT_STATUS_KIND_THROWED, regular_main)
+        .status(Exec, *WEAPON_MURABITO_FLOWERPOT_STATUS_KIND_THROWED, regular_exec)
+        .status(End, *WEAPON_MURABITO_FLOWERPOT_STATUS_KIND_THROWED, regular_end)
         .install();
 } 

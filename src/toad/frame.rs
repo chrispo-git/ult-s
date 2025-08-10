@@ -15,6 +15,23 @@ use smash::phx::Vector2f;
 use crate::util::*;
 use super::*;
 
+unsafe extern "C" fn iceball_frame(weapon: &mut L2CFighterBase) {
+    unsafe {
+        let otarget_id = WorkModule::get_int(weapon.module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LINK_OWNER) as u32;
+        let boma = smash::app::sv_system::battle_object_module_accessor(weapon.lua_state_agent); 
+		let ENTRY_ID = WorkModule::get_int(&mut *boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+		let status_kind = StatusModule::status_kind(weapon.module_accessor);
+		let fighter_kind = smash::app::utility::get_kind(boma);
+		let owner_module_accessor = &mut *sv_battle_object::module_accessor((WorkModule::get_int(boma, *WEAPON_INSTANCE_WORK_ID_INT_LINK_OWNER)) as u32);
+        let is_toad_weapon = (WorkModule::get_int(owner_module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) >= 120 && WorkModule::get_int(owner_module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) <= 127);
+        
+        WorkModule::on_flag(weapon.module_accessor, *WEAPON_MURABITO_FLOWERPOT_INSTANCE_WORK_ID_FLAG_BOUND);
+		if AttackModule::is_infliction(weapon.module_accessor, *COLLISION_KIND_MASK_ALL) {
+			WorkModule::set_int(weapon.module_accessor, 1, *WEAPON_INSTANCE_WORK_ID_INT_LIFE);
+		};
+    }
+}
+
 //bowling ball
 unsafe extern "C" fn bob_omb_frame(weapon: &mut L2CFighterBase) {
     unsafe {
@@ -363,5 +380,8 @@ pub fn install() {
 		.on_start(agent_reset)
         .on_line(Main, toad)
         .install();
-
+	/*Agent::new("murabito_flowerpot")
+    .set_costume([120, 121, 122, 123, 124, 125, 126, 127].to_vec())
+		.on_line(Main, iceball_frame)
+		.install();*/
 }
