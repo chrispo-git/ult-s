@@ -74,12 +74,8 @@ unsafe extern "C" fn toad_iceball(agent: &mut L2CAgentBase) {
     }
 }	
 unsafe extern "C" fn toad_iceball_eff(agent: &mut L2CAgentBase) {
-	for _ in 0..i32::MAX {
-		if macros::is_excute(agent) {
-        	macros::EFFECT_FOLLOW(agent, Hash40::new("sys_magicball_aura"), Hash40::new("have"), 0, 0, 0, 0, 0, 0, 1.7, true);
-			//macros::LAST_EFFECT_SET_COLOR(fighter, 1.0, 20.0/255.0, 20.0/255.0);
-		}
-		wait(agent.lua_state_agent, 1.0);
+	if macros::is_excute(agent) {
+		macros::EFFECT_FOLLOW(agent, Hash40::new("popo_iceshot_cold_a"), Hash40::new("top"), 0, -0.5, 0, 0, 0, 0, 1.0, true);
 	}
 }	
 unsafe extern "C" fn toad_iceball_end_eff(agent: &mut L2CAgentBase) {

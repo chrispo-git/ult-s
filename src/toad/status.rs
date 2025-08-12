@@ -199,6 +199,8 @@ unsafe extern "C" fn regular_init(weapon: &mut L2CWeaponCommon) -> L2CValue {
     sv_kinetic_energy!(set_stable_speed, weapon, WEAPON_KINETIC_ENERGY_RESERVE_ID_NORMAL, speed_x*lr, speed_y);
     sv_kinetic_energy!(set_accel, weapon, WEAPON_KINETIC_ENERGY_RESERVE_ID_NORMAL, 0.0, -gravity);
     KineticModule::enable_energy(weapon.module_accessor, *WEAPON_KINETIC_ENERGY_RESERVE_ID_NORMAL);
+    ModelModule::set_mesh_visibility(weapon.module_accessor,Hash40::new("ball"),false);
+    ModelModule::set_mesh_visibility(weapon.module_accessor,Hash40::new("ballroll"),true);
     0.into()
 }
 
@@ -210,6 +212,7 @@ unsafe extern "C" fn regular_main(weapon: &mut L2CWeaponCommon) -> L2CValue {
 unsafe extern "C" fn regular_main_loop(weapon: &mut L2CWeaponCommon) -> L2CValue {
     let life = WorkModule::get_int(weapon.module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LIFE);
     WorkModule::dec_int(weapon.module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LIFE);
+    ModelModule::set_scale(weapon.module_accessor, 1.5);
     let remaining_life = life <= 0;
     if AttackModule::is_infliction_status(weapon.module_accessor, *COLLISION_KIND_MASK_ALL) {
         notify_event_msc_cmd!(weapon, Hash40::new_raw(0x199c462b5d));
@@ -240,11 +243,14 @@ unsafe extern "C" fn regular_exec(weapon: &mut L2CWeaponCommon) -> L2CValue {
 
     if is_near_ground {
         let speed_x = 1.38;
-        let bounce = 1.0;
+        let bounce = 1.3;
         let lr = PostureModule::lr(weapon.module_accessor);
         weapon.clear_lua_stack();
         sv_kinetic_energy!(set_speed, weapon, WEAPON_KINETIC_ENERGY_RESERVE_ID_NORMAL, speed_x*lr, bounce);
         sv_kinetic_energy!(set_stable_speed, weapon, WEAPON_KINETIC_ENERGY_RESERVE_ID_NORMAL, speed_x*lr, bounce);
+		macros::EFFECT_FOLLOW(weapon, Hash40::new("popo_iceshot_cold_b"), Hash40::new("have"), 0, 0, 0, 0, 0, 0, 1, true);
+    } else {
+        macros::EFFECT_OFF_KIND(weapon, Hash40::new("popo_iceshot_cold_b"), false, true);
     }
     0.into()
 }
