@@ -226,7 +226,7 @@ unsafe extern "C" fn toad(fighter : &mut L2CFighterCommon) {
 			};
 			if [hash40("appeal_lw_l"), hash40("appeal_lw_r")].contains(&motion_kind) {
 				if MotionModule::frame(boma) as i32 == 70 && ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_APPEAL_LW) {
-					MotionModule::set_frame_sync_anim_cmd(boma, 25.0, true, true, false);
+					MotionModule::set_frame_sync_anim_cmd(boma, 25.0, true, true, true);
 				}
 				if MotionModule::frame(boma) > 25.0 && MotionModule::frame(boma) < 70.0 {
 					let stick_x = ControlModule::get_stick_x(boma) * PostureModule::lr(boma);
