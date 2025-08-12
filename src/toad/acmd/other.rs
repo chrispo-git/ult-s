@@ -328,79 +328,46 @@ unsafe extern "C" fn toad_down_attack_u_eff(fighter: &mut L2CAgentBase) {
 		}
 }	
 unsafe extern "C" fn toad_utaunt_eff(fighter: &mut L2CAgentBase) {
-    let lua_state = fighter.lua_state_agent;
-		frame(fighter.lua_state_agent, 50.0);
-		if macros::is_excute(fighter) {
-			macros::LANDING_EFFECT(fighter, Hash40::new("sys_down_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.6, 0, 0, 0, 0, 0, 0, false);
-			macros::LANDING_EFFECT(fighter, Hash40::new("sys_down_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.7, 0, 0, 0, 0, 0, 0, false);
-			macros::LANDING_EFFECT(fighter, Hash40::new("sys_landing_smoke_s"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.7, 0, 0, 0, 0, 0, 0, false);
-		}
 }	
 unsafe extern "C" fn toad_utaunt_snd(fighter: &mut L2CAgentBase) {
-    let lua_state = fighter.lua_state_agent;
-		frame(fighter.lua_state_agent, 14.0);
+		frame(fighter.lua_state_agent, 38.0);
 		if macros::is_excute(fighter) {
-			macros::PLAY_SE(fighter, Hash40::new("se_murabito_attackair_b02"));
-		}
-		frame(fighter.lua_state_agent, 50.0);
-		if macros::is_excute(fighter) {
-			macros::PLAY_SE(fighter, Hash40::new("se_common_landing_soil"));
-		}
-		frame(fighter.lua_state_agent, 53.0);
-		if macros::is_excute(fighter) {
-			macros::PLAY_SE(fighter, Hash40::new("se_murabito_attackair_h02"));
+			macros::PLAY_SE(fighter, Hash40::new("se_murabito_attackair_s01"));
 		}
 }	
 unsafe extern "C" fn toad_staunt_eff(fighter: &mut L2CAgentBase) {
-    let lua_state = fighter.lua_state_agent;
-		frame(fighter.lua_state_agent, 103.0);
-		if macros::is_excute(fighter) {
-			macros::LANDING_EFFECT(fighter, Hash40::new("sys_down_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.5, 0, 0, 0, 0, 0, 0, false);
-		}
+
 }	
 unsafe extern "C" fn toad_staunt_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
-		frame(fighter.lua_state_agent, 48.0);
+		frame(fighter.lua_state_agent, 30.0);
 		if macros::is_excute(fighter) {
-			macros::PLAY_SE(fighter, Hash40::new("se_murabito_attackair_h03"));
+			macros::PLAY_SE(fighter, Hash40::new("se_murabito_attackair_b02"));
 		}
-		frame(fighter.lua_state_agent, 103.0);
+		frame(fighter.lua_state_agent, 93.0);
 		if macros::is_excute(fighter) {
-			macros::PLAY_SE(fighter, Hash40::new("se_murabito_attackhard_l01"));
-		}
-		frame(fighter.lua_state_agent, 127.0);
-		if macros::is_excute(fighter) {
-			macros::PLAY_SE(fighter, Hash40::new("se_murabito_attackhard_s01"));
+			macros::PLAY_SE(fighter, Hash40::new("se_murabito_attackair_l03"));
 		}
 }	
 unsafe extern "C" fn toad_dtaunt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
-		frame(fighter.lua_state_agent, 16.0);
+		frame(fighter.lua_state_agent, 80.0);
 		if macros::is_excute(fighter) {
-			macros::EFFECT(fighter, Hash40::new("sys_erace_smoke"), Hash40::new("haver"), 0, 1, 0, 0, 0, 0, 0.85, 0, 0, 0, 0, 0, 0, false);
-		}
-		frame(fighter.lua_state_agent, 17.0);
-		if macros::is_excute(fighter) {
-			ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_MURABITO_GENERATE_ARTICLE_BUTTERFLYNET, false, 0);
-		}
-		frame(fighter.lua_state_agent, 46.0);
-		if macros::is_excute(fighter) {
-			macros::EFFECT(fighter, Hash40::new("sys_erace_smoke"), Hash40::new("haver"), 0, 1, 0, 0, 0, 0, 0.85, 0, 0, 0, 0, 0, 0, false);
-		}
-		frame(fighter.lua_state_agent, 48.0);
-		if macros::is_excute(fighter) {
-			ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_MURABITO_GENERATE_ARTICLE_BUTTERFLYNET,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
+			macros::LANDING_EFFECT(fighter, Hash40::new("sys_down_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.65, 0, 0, 0, 0, 0, 0, false);
 		}
 }	
 unsafe extern "C" fn toad_dtaunt_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
-		frame(fighter.lua_state_agent, 16.0);
-		if macros::is_excute(fighter) {
-			macros::PLAY_SE(fighter, Hash40::new("se_murabito_special_h03"));
+		frame(fighter.lua_state_agent, 25.0);
+		for _ in 0..5 {
+			if macros::is_excute(fighter) {
+				macros::PLAY_SE(fighter, Hash40::new("se_murabito_smash_h01"));
+			}
+			wait(fighter.lua_state_agent, 10.0);
 		}
-		frame(fighter.lua_state_agent, 46.0);
+		frame(fighter.lua_state_agent, 80.0);
 		if macros::is_excute(fighter) {
-			macros::PLAY_SE(fighter, Hash40::new("se_murabito_appear03"));
+			macros::PLAY_SE(fighter, Hash40::new("se_common_landing_soil"));
 		}
 }	
 unsafe extern "C" fn toad_win_snd(fighter: &mut L2CAgentBase) {

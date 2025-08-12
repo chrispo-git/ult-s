@@ -2772,14 +2772,14 @@ slots = [120,121,122,123,124,125,126,127]
 [[param_float]]
 param = "combo_attack_13_end"
 subparam = ""
-value = 28.0
+value = 0.0
 kinds = ["murabito"]
 slots = [120,121,122,123,124,125,126,127]
 
 [[param_int]]
 param = "attack_combo_max"
 subparam = ""
-value = 3
+value = 2
 kinds = ["murabito"]
 slots = [120,121,122,123,124,125,126,127]
 

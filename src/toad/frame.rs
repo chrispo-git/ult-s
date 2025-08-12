@@ -224,6 +224,29 @@ unsafe extern "C" fn toad(fighter : &mut L2CFighterCommon) {
 					};
 				};
 			};
+			if [hash40("appeal_lw_l"), hash40("appeal_lw_r")].contains(&motion_kind) {
+				if MotionModule::frame(boma) as i32 == 70 && ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_APPEAL_LW) {
+					MotionModule::set_frame_sync_anim_cmd(boma, 25.0, true, true, false);
+				}
+				if MotionModule::frame(boma) > 25.0 && MotionModule::frame(boma) < 70.0 {
+					let stick_x = ControlModule::get_stick_x(boma) * PostureModule::lr(boma);
+					let speed_x = KineticModule::get_sum_speed_x(boma, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN) * PostureModule::lr(boma);
+					if stick_x < -0.2 {
+						if speed_x > -0.9 {
+							let speed = smash::phx::Vector3f { x:-0.05, y: 0.0, z: 0.0 };
+							KineticModule::add_speed(boma, &speed);
+						}
+					} else if stick_x > 0.2 {
+						if speed_x < 0.9 {
+							let speed = smash::phx::Vector3f { x:0.05, y: 0.0, z: 0.0 };
+							KineticModule::add_speed(boma, &speed);
+						}
+					} else {
+						let speed = smash::phx::Vector3f { x:0.1*speed_x, y: 0.0, z: 0.0 };
+						KineticModule::add_speed(boma, &speed);
+					}
+				}
+			}
 			if ItemModule::is_have_item(boma, 0) {
 				CAN_NEUTRALB[ENTRY_ID] = 1;
 			} else {
