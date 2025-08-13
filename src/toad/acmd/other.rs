@@ -359,16 +359,7 @@ unsafe extern "C" fn toad_dtaunt(fighter: &mut L2CAgentBase) {
 unsafe extern "C" fn toad_dtaunt_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 25.0);
-		for _ in 0..5 {
-			if macros::is_excute(fighter) {
-				macros::PLAY_SE(fighter, Hash40::new("se_murabito_smash_h01"));
-			}
-			wait(fighter.lua_state_agent, 10.0);
-		}
-		frame(fighter.lua_state_agent, 80.0);
-		if macros::is_excute(fighter) {
-			macros::PLAY_SE(fighter, Hash40::new("se_common_landing_soil"));
-		}
+		
 }	
 unsafe extern "C" fn toad_win_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;

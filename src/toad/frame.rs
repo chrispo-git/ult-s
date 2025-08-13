@@ -14,24 +14,6 @@ use smash::phx::Vector3f;
 use smash::phx::Vector2f;
 use crate::util::*;
 use super::*;
-
-unsafe extern "C" fn iceball_frame(weapon: &mut L2CFighterBase) {
-    unsafe {
-        let otarget_id = WorkModule::get_int(weapon.module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LINK_OWNER) as u32;
-        let boma = smash::app::sv_system::battle_object_module_accessor(weapon.lua_state_agent); 
-		let ENTRY_ID = WorkModule::get_int(&mut *boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-		let status_kind = StatusModule::status_kind(weapon.module_accessor);
-		let fighter_kind = smash::app::utility::get_kind(boma);
-		let owner_module_accessor = &mut *sv_battle_object::module_accessor((WorkModule::get_int(boma, *WEAPON_INSTANCE_WORK_ID_INT_LINK_OWNER)) as u32);
-        let is_toad_weapon = (WorkModule::get_int(owner_module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) >= 120 && WorkModule::get_int(owner_module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) <= 127);
-        
-        WorkModule::on_flag(weapon.module_accessor, *WEAPON_MURABITO_FLOWERPOT_INSTANCE_WORK_ID_FLAG_BOUND);
-		if AttackModule::is_infliction(weapon.module_accessor, *COLLISION_KIND_MASK_ALL) {
-			WorkModule::set_int(weapon.module_accessor, 1, *WEAPON_INSTANCE_WORK_ID_INT_LIFE);
-		};
-    }
-}
-
 //bowling ball
 unsafe extern "C" fn bob_omb_frame(weapon: &mut L2CFighterBase) {
     unsafe {
@@ -144,6 +126,16 @@ unsafe extern "C" fn toad(fighter : &mut L2CFighterCommon) {
 					}
 				}
 			}
+			if status_kind == *FIGHTER_STATUS_KIND_LANDING_FALL_SPECIAL && StatusModule::prev_status_kind(boma, 1) == *FIGHTER_MURABITO_STATUS_KIND_SPECIAL_HI_DETACH {
+				if MotionModule::frame(boma) < 20.0 {
+    				ModelModule::set_mesh_visibility(fighter.module_accessor,Hash40::new("propeller"),true);
+				} else {
+    				ModelModule::set_mesh_visibility(fighter.module_accessor,Hash40::new("propeller"),false);
+				}
+				if (MotionModule::frame(boma) as i32) == 20 {
+					macros::EFFECT(fighter, Hash40::new("sys_erace_smoke"), Hash40::new("head"), 0, 0, 4.4, 0, 0, 0, 2.0, 0, 0, 0, 0, 0, 0, false);
+				}
+			}
 			if ![*FIGHTER_STATUS_KIND_THROW].contains(&status_kind) {
 				ArticleModule::remove_exist(boma, *FIGHTER_MURABITO_GENERATE_ARTICLE_WEEDS,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
 			};
@@ -228,7 +220,15 @@ unsafe extern "C" fn toad(fighter : &mut L2CFighterCommon) {
 				if MotionModule::frame(boma) as i32 == 70 && ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_APPEAL_LW) {
 					MotionModule::set_frame_sync_anim_cmd(boma, 25.0, true, true, true);
 				}
+				if MotionModule::frame(boma) > 20.0 && MotionModule::frame(boma) < 70.0 {
+					if ((MotionModule::frame(boma)+3.0) as i32) % 10 == 0 {
+						macros::PLAY_SE(fighter, Hash40::new("se_murabito_smash_h01"));
+					}
+				}
 				if MotionModule::frame(boma) > 25.0 && MotionModule::frame(boma) < 70.0 {
+					if KineticModule::get_kinetic_type(boma) != *FIGHTER_KINETIC_TYPE_MOTION {
+						KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_MOTION);
+					};
 					let stick_x = ControlModule::get_stick_x(boma) * PostureModule::lr(boma);
 					let speed_x = KineticModule::get_sum_speed_x(boma, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN) * PostureModule::lr(boma);
 					if stick_x < -0.2 {
@@ -260,6 +260,7 @@ unsafe extern "C" fn toad(fighter : &mut L2CFighterCommon) {
 				let dist = 4.0*lr;
 				if GroundModule::is_wall_touch_line(boma, *GROUND_TOUCH_FLAG_SIDE as u32) 
 				&& ray_check_pos(boma, dist, 0.0, false) == 1 {
+					macros::PLAY_SE(fighter, Hash40::new("se_murabito_smash_h02"));
 					PostureModule::reverse_lr(boma);
 					PostureModule::update_rot_y_lr(boma);
 					let stop_rise  = smash::phx::Vector3f { x: -1.0, y: 1.0, z: 1.0 };
@@ -403,8 +404,4 @@ pub fn install() {
 		.on_start(agent_reset)
         .on_line(Main, toad)
         .install();
-	/*Agent::new("murabito_flowerpot")
-    .set_costume([120, 121, 122, 123, 124, 125, 126, 127].to_vec())
-		.on_line(Main, iceball_frame)
-		.install();*/
 }

@@ -81,11 +81,20 @@ unsafe extern "C" fn toad_iceball_eff(agent: &mut L2CAgentBase) {
 unsafe extern "C" fn toad_iceball_end_eff(agent: &mut L2CAgentBase) {
 }	
 unsafe extern "C" fn toad_neutralb_eff(fighter: &mut L2CAgentBase) {
+	frame(fighter.lua_state_agent, 13.0);
+	if macros::is_excute(fighter) {
+		macros::EFFECT_FOLLOW(fighter, Hash40::new("popo_iceshot_cold_a"), Hash40::new("handl"), 0, 0.0, 0, 0, 0, 0, 0.4, true);
+	}
+	frame(fighter.lua_state_agent, 20.0);
+	if macros::is_excute(fighter) {
+		macros::EFFECT_OFF_KIND(fighter, Hash40::new("popo_iceshot_cold_a"), false, true);
+	}
 }	
 unsafe extern "C" fn toad_neutralb_snd(fighter: &mut L2CAgentBase) {
 	let lua_state = fighter.lua_state_agent;
-	frame(fighter.lua_state_agent, 9.0);
+	frame(fighter.lua_state_agent, 15.0);
 	if macros::is_excute(fighter) {
+		attack_vc(fighter);
 		macros::PLAY_SE(fighter, Hash40::new("se_murabito_special_h02"));
 	};
 }	
@@ -138,6 +147,50 @@ unsafe extern "C" fn toad_upb(fighter: &mut L2CAgentBase) {
 		frame(fighter.lua_state_agent, 4.0);
 		if macros::is_excute(fighter) {
 			macros::LANDING_EFFECT(fighter, Hash40::new("sys_landing_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.2, 0, 0, 0, 0, 0, 0, false);
+		}
+	}
+	unsafe extern "C" fn toad_upb_screw(fighter: &mut L2CAgentBase) {
+		if macros::is_excute(fighter) {
+			macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("hip"), /*Damage*/ 6.0, /*Angle*/ 270, /*KBG*/ 100, /*FKB*/ 160, /*BKB*/ 0, /*Size*/ 6.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 0.8, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_sting"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_CUTUP, /*Type*/ *ATTACK_REGION_BODY);
+			macros::ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("kneer"), /*Damage*/ 6.0, /*Angle*/ 270, /*KBG*/ 100, /*FKB*/ 160, /*BKB*/ 0, /*Size*/ 4.0, /*X*/ 4.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 0.8, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_sting"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_CUTUP, /*Type*/ *ATTACK_REGION_BODY);
+		}
+	}
+	unsafe extern "C" fn toad_upb_screw_eff(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+		for _ in 0..i32::MAX {
+			if macros::is_excute(fighter) {
+				macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("top"), 0, 10.0, 0, 0, 0, 0, 0.7, true, *EF_FLIP_YZ);
+				macros::LAST_EFFECT_SET_RATE(fighter, 1.3);
+			}
+			wait(fighter.lua_state_agent, 1.0);
+			if macros::is_excute(fighter) {
+				macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("top"), 0, 8.0, 0, 0, 0, 0, 0.6, true, *EF_FLIP_YZ);
+				macros::LAST_EFFECT_SET_RATE(fighter, 1.3);
+			}
+			wait(fighter.lua_state_agent, 1.0);
+			if macros::is_excute(fighter) {
+				macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("top"), 0, 6.0, 0, 0, 0, 0, 0.5, true, *EF_FLIP_YZ);
+				macros::LAST_EFFECT_SET_RATE(fighter, 1.3);
+			}
+			wait(fighter.lua_state_agent, 1.0);
+			if macros::is_excute(fighter) {
+				macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("top"), 0, 4.0, 0, 0, 0, 0, 0.4, true, *EF_FLIP_YZ);
+				macros::LAST_EFFECT_SET_RATE(fighter, 1.3);
+			}
+			wait(fighter.lua_state_agent, 1.0);
+			if macros::is_excute(fighter) {
+				macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("top"), 0, 2.0, 0, 0, 0, 0, 0.3, true, *EF_FLIP_YZ);
+				macros::LAST_EFFECT_SET_RATE(fighter, 1.3);
+			}
+			wait(fighter.lua_state_agent, 10.0);
+		}
+		frame(fighter.lua_state_agent, 1.0);
+	}
+	unsafe extern "C" fn toad_upb_screw_snd(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+		frame(fighter.lua_state_agent, 1.0);
+		if macros::is_excute(fighter) {
+			macros::PLAY_SE(fighter, Hash40::new("se_murabito_attackdash02"));
 		}
 	}
 
@@ -248,6 +301,9 @@ pub fn install() {
 		.install();
 	Agent::new("murabito")
     .set_costume([120, 121, 122, 123, 124, 125, 126, 127].to_vec())
+		.effect_acmd("effect_specialairhiscrew", toad_upb_screw_eff, Priority::Low)
+		.game_acmd("game_specialairhiscrew", toad_upb_screw, Priority::Low)
+		.sound_acmd("sound_specialairhiscrew", toad_upb_screw_snd, Priority::Low)
 		.acmd("game_specialsloop", toad_sideb_hitbox, Priority::Low)
 		.acmd("game_specialairsloop", toad_sideb_hitbox, Priority::Low)
 		.acmd("game_specialsjump", toad_sideb_hitbox, Priority::Low)

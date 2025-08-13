@@ -199,8 +199,6 @@ unsafe extern "C" fn regular_init(weapon: &mut L2CWeaponCommon) -> L2CValue {
     sv_kinetic_energy!(set_stable_speed, weapon, WEAPON_KINETIC_ENERGY_RESERVE_ID_NORMAL, speed_x*lr, speed_y);
     sv_kinetic_energy!(set_accel, weapon, WEAPON_KINETIC_ENERGY_RESERVE_ID_NORMAL, 0.0, -gravity);
     KineticModule::enable_energy(weapon.module_accessor, *WEAPON_KINETIC_ENERGY_RESERVE_ID_NORMAL);
-    ModelModule::set_mesh_visibility(weapon.module_accessor,Hash40::new("ball"),false);
-    ModelModule::set_mesh_visibility(weapon.module_accessor,Hash40::new("ballroll"),true);
     0.into()
 }
 

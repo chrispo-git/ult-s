@@ -38,7 +38,7 @@ unsafe extern "C" fn toad_jab1_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 3.0);
 		if macros::is_excute(fighter) {
-			macros::EFFECT(fighter, Hash40::new("sys_attack_impact"), Hash40::new("handl"), 0.0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 360, false);
+			macros::EFFECT(fighter, Hash40::new("sys_attack_impact"), Hash40::new("top"), 9, 7, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 360, false);
 			macros::LAST_EFFECT_SET_ALPHA(fighter, 0.7);
 		}
 }	
@@ -72,6 +72,7 @@ unsafe extern "C" fn toad_jab2_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 3.0);
 		if macros::is_excute(fighter) {
+			macros::PLAY_SE(fighter, Hash40::new("se_murabito_special_b01"));
 			macros::PLAY_SE(fighter, Hash40::new("se_murabito_swing_l"));
 		}
 }	
