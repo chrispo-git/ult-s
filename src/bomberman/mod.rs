@@ -90,10 +90,10 @@ pub fn install() {
     );
     the_csk_collection_api::add_chara_layout_db_entry_info(
         the_csk_collection_api::CharacterLayoutDatabaseEntry {
-            ui_layout_id: smash::hash40("ui_chara_bomberman_00"), // Hash40 of ui_chara_00
+            ui_layout_id: smash::hash40("ui_chara_bomberman_00"), // Hash40 of ui_chara_aaa_00
             clone_from_ui_layout_id: Some(smash::hash40("ui_chara_pacman_00")), // Hash40 of ui_chara_falco_00
             ui_chara_id: the_csk_collection_api::Hash40Type::Overwrite(
-                smash::hash40("ui_chara_bomberman"), // Hash40 of ui_chara
+                smash::hash40("ui_chara_bomberman"), // Hash40 of ui_chara_aaa
             ),
             ..Default::default()
         },
