@@ -159,26 +159,6 @@ unsafe extern "C" fn toad_final(fighter: &mut L2CAgentBase) {
 			macros::FT_SET_FINAL_FEAR_FACE(fighter, 40);
 			macros::FT_START_CUTIN(fighter, );
 		}
-		macros::FT_MOTION_RATE(fighter, /*FSM*/ 2);
-		frame(fighter.lua_state_agent, 5.0);
-		if macros::is_excute(fighter) {
-			macros::EFFECT(fighter, Hash40::new("sys_erace_smoke"), Hash40::new("top"), 10, 6, 8, 0, 0, 0, 1.5, 0, 0, 0, 0, 0, 0, false);
-			macros::EFFECT(fighter, Hash40::new("sys_erace_smoke"), Hash40::new("top"), -10, 6, 8, 0, 0, 0, 1.5, 0, 0, 0, 0, 0, 0, false);
-			macros::EFFECT(fighter, Hash40::new("sys_erace_smoke"), Hash40::new("top"), 0, 6, 8, 0, 0, 0, 1.5, 0, 0, 0, 0, 0, 0, false);
-		}
-		frame(fighter.lua_state_agent, 6.0);
-		macros::FT_MOTION_RATE(fighter, /*FSM*/ 1);
-		if macros::is_excute(fighter) {
-			ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_MURABITO_GENERATE_ARTICLE_CLAYROCKET, false, 0);
-			WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_MURABITO_STATUS_SPECIAL_S_FLAG_CLAYROCKET);
-			ArticleModule::shoot(fighter.module_accessor, *FIGHTER_MURABITO_GENERATE_ARTICLE_CLAYROCKET, smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL), false);
-		}
-		frame(fighter.lua_state_agent, 12.0);
-		macros::FT_MOTION_RATE(fighter, /*FSM*/ 10);
-		frame(fighter.lua_state_agent, 15.0);
-		if macros::is_excute(fighter) {
-			StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_MURABITO_STATUS_KIND_FINAL_END, false);
-		}
 	}
 	unsafe extern "C" fn toad_final_toad_army(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;

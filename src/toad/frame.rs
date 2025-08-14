@@ -129,8 +129,10 @@ unsafe extern "C" fn toad(fighter : &mut L2CFighterCommon) {
 			if status_kind == *FIGHTER_STATUS_KIND_LANDING_FALL_SPECIAL && StatusModule::prev_status_kind(boma, 1) == *FIGHTER_MURABITO_STATUS_KIND_SPECIAL_HI_DETACH {
 				if MotionModule::frame(boma) < 20.0 {
     				ModelModule::set_mesh_visibility(fighter.module_accessor,Hash40::new("propeller"),true);
+    				ModelModule::set_mesh_visibility(fighter.module_accessor,Hash40::new("mushroom"),false);
 				} else {
     				ModelModule::set_mesh_visibility(fighter.module_accessor,Hash40::new("propeller"),false);
+    				ModelModule::set_mesh_visibility(fighter.module_accessor,Hash40::new("mushroom"),true);
 				}
 				if (MotionModule::frame(boma) as i32) == 20 {
 					macros::EFFECT(fighter, Hash40::new("sys_erace_smoke"), Hash40::new("head"), 0, 0, 4.4, 0, 0, 0, 2.0, 0, 0, 0, 0, 0, 0, false);
@@ -272,6 +274,45 @@ unsafe extern "C" fn toad(fighter : &mut L2CFighterCommon) {
 			}
 			if [hash40("special_s_end"), hash40("special_air_s_end")].contains(&motion_kind) {
 				SIDEB_END[ENTRY_ID] = true;
+			}
+			if status_kind == *FIGHTER_MURABITO_STATUS_KIND_FINAL_END {
+				BIG_TIMER[ENTRY_ID] = BIG_TIMER_MAX;
+				if situation_kind == *SITUATION_KIND_GROUND {
+					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_WAIT, true);
+				} else {
+					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL, true);
+				}
+			}
+			if status_kind == *FIGHTER_STATUS_KIND_FINAL && MotionModule::end_frame(boma) - frame < 3.0 { 
+				StatusModule::change_status_request_from_script(boma, *FIGHTER_MURABITO_STATUS_KIND_FINAL_END, true);
+			}
+			if BIG_TIMER[ENTRY_ID] > 0 {
+				BIG_TIMER[ENTRY_ID] -= 1;
+				if BIG_TIMER[ENTRY_ID] > 180 {
+					PostureModule::set_scale(fighter.module_accessor, 2.0, false);
+					AttackModule::set_attack_scale(boma, 1.0, true);
+					GrabModule::set_size_mul(boma, 2.0);
+            		WorkModule::on_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_GOLD);
+			   		damage!(fighter, *MA_MSC_DAMAGE_DAMAGE_NO_REACTION, *DAMAGE_NO_REACTION_MODE_DAMAGE_POWER, 15.0);
+				} else if BIG_TIMER[ENTRY_ID] > 120 {
+					PostureModule::set_scale(fighter.module_accessor, 1.67, false);
+					AttackModule::set_attack_scale(boma, 1.0, true);
+					GrabModule::set_size_mul(boma, 1.67);
+            		WorkModule::off_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_GOLD);
+			   		damage!(fighter, *MA_MSC_DAMAGE_DAMAGE_NO_REACTION, *DAMAGE_NO_REACTION_MODE_DAMAGE_POWER, 12.0);
+				} else if BIG_TIMER[ENTRY_ID] > 60 {
+					PostureModule::set_scale(fighter.module_accessor, 1.33, false);
+					AttackModule::set_attack_scale(boma, 1.0, true);
+					GrabModule::set_size_mul(boma, 1.33);
+            		WorkModule::off_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_GOLD);
+			   		damage!(fighter, *MA_MSC_DAMAGE_DAMAGE_NO_REACTION, *DAMAGE_NO_REACTION_MODE_DAMAGE_POWER, 8.0);
+				} else {
+					PostureModule::set_scale(fighter.module_accessor, 1.0, false);
+					AttackModule::set_attack_scale(boma, 1.0, true);
+					GrabModule::set_size_mul(boma, 1.0);
+            		WorkModule::off_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_GOLD);
+			   		damage!(fighter, *MA_MSC_DAMAGE_DAMAGE_NO_REACTION, *DAMAGE_NO_REACTION_MODE_NORMAL, 0.0);
+				}
 			}
 			if [*FIGHTER_STATUS_KIND_SPECIAL_S].contains(&status_kind) {
 				CAN_SIDEB[ENTRY_ID] = 1;

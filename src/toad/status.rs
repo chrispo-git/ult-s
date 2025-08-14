@@ -118,6 +118,11 @@ unsafe extern "C" fn throw_exit(fighter: &mut L2CFighterCommon) -> L2CValue {
 		//original!(fighter)
 	//}
 }
+unsafe extern "C" fn landing_fall_special_exit(fighter: &mut L2CFighterCommon) -> L2CValue {
+    ModelModule::set_mesh_visibility(fighter.module_accessor,Hash40::new("propeller"),false);
+    ModelModule::set_mesh_visibility(fighter.module_accessor,Hash40::new("mushroom"),true);
+	0.into()
+}
 unsafe extern "C" fn special_s_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
     StatusModule::init_settings(
         fighter.module_accessor,
@@ -271,6 +276,7 @@ pub fn install() {
         .status(Exit, *FIGHTER_STATUS_KIND_THROW_KIRBY, throw_exit)
         .status(Pre, *FIGHTER_MURABITO_STATUS_KIND_SPECIAL_HI_DETACH, special_hi_pre)
         .status(Pre, *FIGHTER_STATUS_KIND_SPECIAL_S, special_s_pre)
+        .status(Exit, *FIGHTER_STATUS_KIND_LANDING_FALL_SPECIAL, landing_fall_special_exit)
         .install();
     Agent::new("murabito_flowerpot")
     .set_costume([120, 121, 122, 123, 124, 125, 126, 127].to_vec())
