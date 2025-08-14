@@ -16,7 +16,7 @@ static mut SIDEB_CATCH : [bool; 8] = [false; 8];
 static mut FORCE_END : [bool; 8] = [false; 8];
 static mut FALL_COUNT : [i32; 8] = [0; 8];
 use std::collections::HashMap;
-
+ 
 
 static mut EXPLODE : [bool; 8] = [false; 8];
 static mut BOMB :  smash::phx::Vector3f =  smash::phx::Vector3f { x: 0.0, y: 10.5, z: 0.0 };
@@ -90,10 +90,10 @@ pub fn install() {
     );
     the_csk_collection_api::add_chara_layout_db_entry_info(
         the_csk_collection_api::CharacterLayoutDatabaseEntry {
-            ui_layout_id: smash::hash40("ui_chara_bomberman_00"), // Hash40 of ui_chara_peppy_00
+            ui_layout_id: smash::hash40("ui_chara_bomberman_00"), // Hash40 of ui_chara_aaa_00
             clone_from_ui_layout_id: Some(smash::hash40("ui_chara_pacman_00")), // Hash40 of ui_chara_falco_00
             ui_chara_id: the_csk_collection_api::Hash40Type::Overwrite(
-                smash::hash40("ui_chara_bomberman"), // Hash40 of ui_chara_peppy
+                smash::hash40("ui_chara_bomberman"), // Hash40 of ui_chara_aaa
             ),
             ..Default::default()
         },

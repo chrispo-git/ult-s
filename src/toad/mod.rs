@@ -105,6 +105,22 @@ pub fn install() {
                 result_pf2: the_csk_collection_api::BoolType::Overwrite(true), 
             color_num: the_csk_collection_api::UnsignedByteType::Overwrite(8),
             extra_index_maps: the_csk_collection_api::UnsignedByteMap::Overwrite(HashMap::from([
+                    (0x915C075DE /* Hash40 of c00_index */, the_csk_collection_api::UnsignedByteType::Overwrite(0)), 
+                    (0x9B3B77E6A /* Hash40 of c01_index */, the_csk_collection_api::UnsignedByteType::Overwrite(0)), 
+                    (0x9825F64F7 /* Hash40 of c02_index */, the_csk_collection_api::UnsignedByteType::Overwrite(0)), 
+                    (0x924286F43 /* Hash40 of c03_index */, the_csk_collection_api::UnsignedByteType::Overwrite(0)), 
+                    (0x9E18F51CD /* Hash40 of c04_index */, the_csk_collection_api::UnsignedByteType::Overwrite(0)), 
+                    (0x947F85A79 /* Hash40 of c05_index */, the_csk_collection_api::UnsignedByteType::Overwrite(5)), 
+                    (0x9761040E4 /* Hash40 of c06_index */, the_csk_collection_api::UnsignedByteType::Overwrite(6)), 
+                    (0x9D0674B50 /* Hash40 of c07_index */, the_csk_collection_api::UnsignedByteType::Overwrite(7)), 
+                    (0x9E48F9289 /* Hash40 of n00_index */, the_csk_collection_api::UnsignedByteType::Overwrite(0)), 
+                    (0x942F8993D /* Hash40 of n01_index */, the_csk_collection_api::UnsignedByteType::Overwrite(0)), 
+                    (0x9731083A0 /* Hash40 of n02_index */, the_csk_collection_api::UnsignedByteType::Overwrite(0)), 
+                    (0x9D5678814 /* Hash40 of n03_index */, the_csk_collection_api::UnsignedByteType::Overwrite(0)), 
+                    (0x910C0B69A /* Hash40 of n04_index */, the_csk_collection_api::UnsignedByteType::Overwrite(0)), 
+                    (0x9B6B7BD2E /* Hash40 of n05_index */, the_csk_collection_api::UnsignedByteType::Overwrite(5)), 
+                    (0x9875FA7B3 /* Hash40 of n06_index */, the_csk_collection_api::UnsignedByteType::Overwrite(6)), 
+                    (0x92128AC07 /* Hash40 of n07_index */, the_csk_collection_api::UnsignedByteType::Overwrite(7)), 
                 (smash::hash40("color_start_index") /* Hash40 of color_start_index */, the_csk_collection_api::UnsignedByteType::Overwrite(120))
             ])),
             extra_hash_maps: the_csk_collection_api::Hash40Map::Overwrite(HashMap::from([
@@ -114,7 +130,7 @@ pub fn install() {
                     (0x13AEF5C094 /* Hash40 of characall_label_c03 */, the_csk_collection_api::Hash40Type::Overwrite(smash::hash40("vc_narration_characall_toad"))),
                     (0x1330915537 /* Hash40 of characall_label_c04 */, the_csk_collection_api::Hash40Type::Overwrite(smash::hash40("vc_narration_characall_toad"))),
                     (0x13479665A1 /* Hash40 of characall_label_c05 */, the_csk_collection_api::Hash40Type::Overwrite(smash::hash40("vc_narration_characall_toadette"))),
-                    (0x13DE9F341B /* Hash40 of characall_label_c06 */, the_csk_collection_api::Hash40Type::Overwrite(smash::hash40("vc_narration_characall_captaintoad"))),
+                    (0x13DE9F341B /* Hash40 of characall_label_c06 */, the_csk_collection_api::Hash40Type::Overwrite(smash::hash40("vc_narration_characall_toadcaptain"))),
                     (0x13A998048D /* Hash40 of characall_label_c07 */, the_csk_collection_api::Hash40Type::Overwrite(smash::hash40("vc_narration_characall_toadsworth"))),
                     (0x1B8B13E500 /* Hash40 of characall_label_article_c00 */, the_csk_collection_api::Hash40Type::Overwrite(smash::hash40("vc_narration_characall_toad"))),
                     (0x1BFC14D596 /* Hash40 of characall_label_article_c01 */, the_csk_collection_api::Hash40Type::Overwrite(smash::hash40("vc_narration_characall_toad"))),
@@ -122,7 +138,7 @@ pub fn install() {
                     (0x1B121AB4BA /* Hash40 of characall_label_article_c03 */, the_csk_collection_api::Hash40Type::Overwrite(smash::hash40("vc_narration_characall_toad"))),
                     (0x1B8C7E2119 /* Hash40 of characall_label_article_c04 */, the_csk_collection_api::Hash40Type::Overwrite(smash::hash40("vc_narration_characall_toad"))),
                     (0x1BFB79118F /* Hash40 of characall_label_article_c05 */, the_csk_collection_api::Hash40Type::Overwrite(smash::hash40("vc_narration_characall_toadette"))),
-                    (0x1B62704035 /* Hash40 of characall_label_article_c06 */, the_csk_collection_api::Hash40Type::Overwrite(smash::hash40("vc_narration_characall_captaintoad"))),
+                    (0x1B62704035 /* Hash40 of characall_label_article_c06 */, the_csk_collection_api::Hash40Type::Overwrite(smash::hash40("vc_narration_characall_toadcaptain"))),
                     (0x1B157770A3 /* Hash40 of characall_label_article_c07 */, the_csk_collection_api::Hash40Type::Overwrite(smash::hash40("vc_narration_characall_toadsworth"))),
                 (0x160ab9eb98 /* Hash40 of original_ui_chara_hash */, the_csk_collection_api::Hash40Type::Overwrite(smash::hash40("ui_chara_murabito")) /* Hash40 of ui_chara_falco*/)
             ])),
@@ -131,12 +147,12 @@ pub fn install() {
     );
     the_csk_collection_api::add_chara_layout_db_entry_info(
         the_csk_collection_api::CharacterLayoutDatabaseEntry {
-            ui_layout_id: smash::hash40("ui_chara_toad_00"), // Hash40 of ui_chara_peppy_00
+            ui_layout_id: smash::hash40("ui_chara_toad_00"), // Hash40 of ui_chara_aaa_00
             clone_from_ui_layout_id: Some(smash::hash40("ui_chara_murabito_00")), // Hash40 of ui_chara_falco_00
             ui_chara_id: the_csk_collection_api::Hash40Type::Overwrite(
-                smash::hash40("ui_chara_toad"), // Hash40 of ui_chara_peppy
+                smash::hash40("ui_chara_toad"), // Hash40 of ui_chara_aaa
             ),
             ..Default::default()
         },
     );
-}
+} 
