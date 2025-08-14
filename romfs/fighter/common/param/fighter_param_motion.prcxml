@@ -207,7 +207,6 @@
       <int hash="escape_air_slide_back_end_frame">-1</int>
       <float hash="landing_frame_escape_air_slide_max">12</float>
       <float hash="landing_frame_escape_air_slide">12</float>
-      <bool hash="flip">true</bool>
     </struct>
     <struct index="41">
       <int hash="escape_air_slide_back_end_frame">-1</int>
