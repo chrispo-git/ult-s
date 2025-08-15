@@ -64,6 +64,12 @@ unsafe extern "C" fn toad(fighter : &mut L2CFighterCommon) {
 				CAN_NEUTRALB[ENTRY_ID] = 0;
 			};
 		};*/
+		if is_reset() {
+			BIG_TIMER[ENTRY_ID] = 0;
+		}
+		if status_kind == *FIGHTER_STATUS_KIND_DEAD && BIG_TIMER[ENTRY_ID] > 1 {
+			BIG_TIMER[ENTRY_ID] = 1;
+		}
 		if (WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) >= 120 && WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) <= 127) && fighter_kind == *FIGHTER_KIND_MURABITO {
 			if ModelModule::scale(boma) == WorkModule::get_param_float(fighter.module_accessor, hash40("scale"), 0) {
 				PostureModule::set_scale(fighter.module_accessor, 0.85, false);
