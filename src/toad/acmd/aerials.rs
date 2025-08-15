@@ -203,7 +203,7 @@ unsafe extern "C" fn toad_dair_eff(fighter: &mut L2CAgentBase) {
 		}
 		frame(fighter.lua_state_agent, 42.0);
 		if macros::is_excute(fighter) {
-			macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_erace_smoke"), Hash40::new("spiny"), 4.0, 0, 0, 0, 0, 0, 1, true);
+			macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_erace_smoke"), Hash40::new("spiny"), 4.0, 0, 0, 0, 0, 0, 2.0, true);
 		}
 }
 unsafe extern "C" fn toad_dair_snd(fighter: &mut L2CAgentBase) {
@@ -221,7 +221,7 @@ unsafe extern "C" fn toad_land_dair(fighter: &mut L2CAgentBase) {
 		}
 		frame(fighter.lua_state_agent, 31.0);
 		if macros::is_excute(fighter) {
-			macros::EFFECT(fighter, Hash40::new("sys_erace_smoke"), Hash40::new("spiny"), 4.0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
+			macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_erace_smoke"), Hash40::new("top"), 0.0, 6.0, 0, 0, 0, 0, 2.0, true);
 		}
 		frame(fighter.lua_state_agent, 41.0);
 		if macros::is_excute(fighter) {
