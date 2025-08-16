@@ -24,6 +24,7 @@ SquidEnthusiast - Render
 Rayman:
 chrispo - Coding, Animation
 Challat - Animation, Modelling
+Nin10Doug - Modelling
 mRama - Animation
 
 Bomberman:
