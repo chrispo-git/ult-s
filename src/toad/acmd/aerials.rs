@@ -187,19 +187,19 @@ unsafe extern "C" fn toad_dair(fighter: &mut L2CAgentBase) {
 unsafe extern "C" fn toad_dair_eff(fighter: &mut L2CAgentBase) {
 		frame(fighter.lua_state_agent, 7.0);
 		if macros::is_excute(fighter) {
-			macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("top"), 0, 0.5, 0, 0, 0, 0, 0.9, true, *EF_FLIP_YZ);
+			macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("top"), 0, 0.5, 0, 0, 180, 0, 0.9, true, *EF_FLIP_YZ);
 		}
 		wait(fighter.lua_state_agent, 3.0);
 		if macros::is_excute(fighter) {
-			macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("top"), 0, -2.5, 0, 0, 0, 0, 0.4, true, *EF_FLIP_YZ);
+			macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("top"), 0, -2.5, 0, 0, 180, 0, 0.4, true, *EF_FLIP_YZ);
 		}
 		wait(fighter.lua_state_agent, 6.0);
 		if macros::is_excute(fighter) {
-			macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("top"), 0, 1.0, 0, 0, 0, 0, 0.9, true, *EF_FLIP_YZ);
+			macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("top"), 0, 1.0, 0, 0, 180, 0, 0.9, true, *EF_FLIP_YZ);
 		}
 		wait(fighter.lua_state_agent, 3.0);
 		if macros::is_excute(fighter) {
-			macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("top"), 0, -1.5, 0, 0, 0, 0, 0.4, true, *EF_FLIP_YZ);
+			macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("top"), 0, -1.5, 0, 0, 180, 0, 0.4, true, *EF_FLIP_YZ);
 		}
 		frame(fighter.lua_state_agent, 42.0);
 		if macros::is_excute(fighter) {

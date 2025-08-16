@@ -167,7 +167,7 @@ unsafe extern "C" fn toad_final(fighter: &mut L2CAgentBase) {
 unsafe extern "C" fn toad_final_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
-			EffectModule::req_screen(fighter.module_accessor, Hash40::new("bg_popo_final"), false, false, false);
+			EffectModule::req_screen(fighter.module_accessor, Hash40::new("sys_bg_vortex"), false, false, false);
 		}
 }
 	unsafe extern "C" fn toad_final_toad_army(fighter: &mut L2CAgentBase) {

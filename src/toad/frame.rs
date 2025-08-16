@@ -71,9 +71,10 @@ unsafe extern "C" fn toad(fighter : &mut L2CFighterCommon) {
 			BIG_TIMER[ENTRY_ID] = 1;
 		}
 		if (WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) >= 120 && WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) <= 127) && fighter_kind == *FIGHTER_KIND_MURABITO {
-			if ModelModule::scale(boma) == WorkModule::get_param_float(fighter.module_accessor, hash40("scale"), 0) {
+			if PostureModule::scale(boma) == 1.0 {
 				PostureModule::set_scale(fighter.module_accessor, 0.85, false);
                 GrabModule::set_size_mul(boma, 0.85);
+				println!("set small");
             }
 			WorkModule::set_int(boma, 1, *FIGHTER_MURABITO_INSTANCE_WORK_ID_INT_SPECIAL_N_TIME_LIMIT);
 			if status_kind == *FIGHTER_STATUS_KIND_DEAD {
@@ -309,9 +310,8 @@ unsafe extern "C" fn toad(fighter : &mut L2CFighterCommon) {
 			if [hash40("special_s_end"), hash40("special_air_s_end")].contains(&motion_kind) {
 				SIDEB_END[ENTRY_ID] = true;
 			}
-			if status_kind == *FIGHTER_MURABITO_STATUS_KIND_FINAL_END || (*FIGHTER_STATUS_KIND_FINAL == status_kind && MotionModule::frame(boma) > 160.0 ) {
+			if status_kind == *FIGHTER_MURABITO_STATUS_KIND_FINAL_END {
 				BIG_TIMER[ENTRY_ID] = BIG_TIMER_MAX;
-				EffectModule::req_screen(fighter.module_accessor, Hash40::new("bg_popo_final"), false, false, false);
 				macros::PLAY_SE(fighter, Hash40::new("se_murabito_final01"));
 				if situation_kind == *SITUATION_KIND_GROUND {
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_WAIT, true);
@@ -319,8 +319,12 @@ unsafe extern "C" fn toad(fighter : &mut L2CFighterCommon) {
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL, true);
 				}
 			}
-			if status_kind == *FIGHTER_STATUS_KIND_FINAL && MotionModule::end_frame(boma) - frame < 3.0 { 
+			if status_kind == *FIGHTER_STATUS_KIND_FINAL && MotionModule::end_frame(boma) - frame < 6.0 { 
 				StatusModule::change_status_request_from_script(boma, *FIGHTER_MURABITO_STATUS_KIND_FINAL_END, true);
+			}
+			if BIG_TIMER[ENTRY_ID] > BIG_TIMER_MAX-10 || status_kind == *FIGHTER_STATUS_KIND_FINAL {
+				EffectModule::req_screen(fighter.module_accessor, Hash40::new("sys_bg_vortex"), false, true, true);
+				println!("SYS BG VORTEX!!!");
 			}
 			if BIG_TIMER[ENTRY_ID] > 0 {
 				BIG_TIMER[ENTRY_ID] -= 1;
@@ -348,7 +352,7 @@ unsafe extern "C" fn toad(fighter : &mut L2CFighterCommon) {
 			   		damage!(fighter, *MA_MSC_DAMAGE_DAMAGE_NO_REACTION, *DAMAGE_NO_REACTION_MODE_DAMAGE_POWER, 8.0);
 				} else {
         			macros::CANCEL_FILL_SCREEN(fighter, 1, 30);
-        			EffectModule::remove_screen(fighter.module_accessor, Hash40::new("bg_popo_final"), -1);
+        			EffectModule::remove_screen(fighter.module_accessor, Hash40::new("sys_bg_vortex"), -1);
 					macros::STOP_SE(fighter, Hash40::new("se_murabito_final01"));
 					PostureModule::set_scale(fighter.module_accessor, 1.0*0.85, false);
 					AttackModule::set_attack_scale(boma, 1.0, true);
