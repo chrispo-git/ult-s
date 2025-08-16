@@ -159,7 +159,17 @@ unsafe extern "C" fn toad_final(fighter: &mut L2CAgentBase) {
 			macros::FT_SET_FINAL_FEAR_FACE(fighter, 40);
 			macros::FT_START_CUTIN(fighter, );
 		}
-	}
+		frame(fighter.lua_state_agent, 95.0);
+		if macros::is_excute(fighter) {
+			macros::PLAY_SE(fighter, Hash40::new("se_murabito_final02"));
+		}
+}
+unsafe extern "C" fn toad_final_eff(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+		if macros::is_excute(fighter) {
+			EffectModule::req_screen(fighter.module_accessor, Hash40::new("bg_popo_final"), false, false, false);
+		}
+}
 	unsafe extern "C" fn toad_final_toad_army(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
@@ -433,6 +443,10 @@ pub fn install() {
 		.game_acmd("game_finalltoad", toad_final, Priority::Low)
 		.game_acmd("game_finalairrtoad", toad_final, Priority::Low)
 		.game_acmd("game_finalairltoad", toad_final, Priority::Low)
+		.effect_acmd("effect_finalrtoad", toad_final_eff, Priority::Low)
+		.effect_acmd("effect_finalltoad", toad_final_eff, Priority::Low)
+		.effect_acmd("effect_finalairrtoad", toad_final_eff, Priority::Low)
+		.effect_acmd("effect_finalairltoad", toad_final_eff, Priority::Low)
 		.game_acmd("game_downattackdtoad", toad_down_attack_d, Priority::Low)
 		.effect_acmd("effect_downattackdtoad", toad_down_attack_d_eff, Priority::Low)
 		.game_acmd("game_downattackutoad", toad_down_attack_u, Priority::Low)

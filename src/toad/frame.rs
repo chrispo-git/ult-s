@@ -130,6 +130,8 @@ unsafe extern "C" fn toad(fighter : &mut L2CFighterCommon) {
 					}
 					let upb_loop_frame = MotionModule::frame(boma) as i32 % 14;
 					if upb_loop_frame == 0 {
+						macros::EFFECT_FOLLOW_FLIP_ALPHA(fighter, Hash40::new("sys_attack_speedline"), Hash40::new("sys_attack_speedline"), Hash40::new("top"), 0, 24, 1, 90, 0, 0, 1.4, true, *EF_FLIP_YZ, 0.3);
+						macros::LAST_EFFECT_SET_RATE(fighter, 8.0/14.0);
 						macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("top"), 0, 10.0, 0, 0, 0, 0, 0.7, true, *EF_FLIP_YZ);
 						macros::LAST_EFFECT_SET_RATE(fighter, 1.3);
 					}
@@ -307,8 +309,9 @@ unsafe extern "C" fn toad(fighter : &mut L2CFighterCommon) {
 			if [hash40("special_s_end"), hash40("special_air_s_end")].contains(&motion_kind) {
 				SIDEB_END[ENTRY_ID] = true;
 			}
-			if status_kind == *FIGHTER_MURABITO_STATUS_KIND_FINAL_END {
+			if status_kind == *FIGHTER_MURABITO_STATUS_KIND_FINAL_END || (*FIGHTER_STATUS_KIND_FINAL == status_kind && MotionModule::frame(boma) > 160.0 ) {
 				BIG_TIMER[ENTRY_ID] = BIG_TIMER_MAX;
+				EffectModule::req_screen(fighter.module_accessor, Hash40::new("bg_popo_final"), false, false, false);
 				macros::PLAY_SE(fighter, Hash40::new("se_murabito_final01"));
 				if situation_kind == *SITUATION_KIND_GROUND {
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_WAIT, true);
@@ -321,28 +324,32 @@ unsafe extern "C" fn toad(fighter : &mut L2CFighterCommon) {
 			}
 			if BIG_TIMER[ENTRY_ID] > 0 {
 				BIG_TIMER[ENTRY_ID] -= 1;
-				if BIG_TIMER[ENTRY_ID] > 180 {
+				if BIG_TIMER[ENTRY_ID] > 45 {
 					PostureModule::set_scale(fighter.module_accessor, 2.0*0.85, false);
 					AttackModule::set_attack_scale(boma, 1.0, true);
 					GrabModule::set_size_mul(boma, 2.0*0.85);
             		WorkModule::on_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_GOLD);
 			   		damage!(fighter, *MA_MSC_DAMAGE_DAMAGE_NO_REACTION, *DAMAGE_NO_REACTION_MODE_DAMAGE_POWER, 15.0);
-				} else if BIG_TIMER[ENTRY_ID] > 120 {
-					if BIG_TIMER[ENTRY_ID] == 178 {
+				} else if BIG_TIMER[ENTRY_ID] > 30 {
+					if BIG_TIMER[ENTRY_ID] == 44 {
 						macros::STOP_SE(fighter, Hash40::new("se_murabito_final01"));
+						macros::PLAY_SE(fighter, Hash40::new("se_item_mushd"));
 					}
 					PostureModule::set_scale(fighter.module_accessor, 1.67*0.85, false);
 					AttackModule::set_attack_scale(boma, 1.0, true);
 					GrabModule::set_size_mul(boma, 1.67*0.85);
             		WorkModule::off_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_GOLD);
 			   		damage!(fighter, *MA_MSC_DAMAGE_DAMAGE_NO_REACTION, *DAMAGE_NO_REACTION_MODE_DAMAGE_POWER, 12.0);
-				} else if BIG_TIMER[ENTRY_ID] > 60 {
+				} else if BIG_TIMER[ENTRY_ID] > 15 {
 					PostureModule::set_scale(fighter.module_accessor, 1.33*0.85, false);
 					AttackModule::set_attack_scale(boma, 1.0, true);
 					GrabModule::set_size_mul(boma, 1.33*0.85);
             		WorkModule::off_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_GOLD);
 			   		damage!(fighter, *MA_MSC_DAMAGE_DAMAGE_NO_REACTION, *DAMAGE_NO_REACTION_MODE_DAMAGE_POWER, 8.0);
 				} else {
+        			macros::CANCEL_FILL_SCREEN(fighter, 1, 30);
+        			EffectModule::remove_screen(fighter.module_accessor, Hash40::new("bg_popo_final"), -1);
+					macros::STOP_SE(fighter, Hash40::new("se_murabito_final01"));
 					PostureModule::set_scale(fighter.module_accessor, 1.0*0.85, false);
 					AttackModule::set_attack_scale(boma, 1.0, true);
 					GrabModule::set_size_mul(boma, 1.0*0.85);
