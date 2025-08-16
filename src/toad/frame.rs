@@ -117,6 +117,7 @@ unsafe extern "C" fn toad(fighter : &mut L2CFighterCommon) {
                     KineticModule::add_speed(boma, &speed);
 
 					if ControlModule::check_button_on_trriger(boma, *CONTROL_PAD_BUTTON_SPECIAL) {
+					macros::PLAY_SE(fighter, Hash40::new("se_murabito_special_h04"));
 						MotionModule::change_motion(boma, smash::phx::Hash40::new("special_air_hi_screw"), 0.0, 1.0, false, 0.0, false, false);
 					}
 				}
@@ -283,6 +284,7 @@ unsafe extern "C" fn toad(fighter : &mut L2CFighterCommon) {
 			}
 			if status_kind == *FIGHTER_MURABITO_STATUS_KIND_FINAL_END {
 				BIG_TIMER[ENTRY_ID] = BIG_TIMER_MAX;
+				macros::PLAY_SE(fighter, Hash40::new("se_murabito_final01"));
 				if situation_kind == *SITUATION_KIND_GROUND {
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_WAIT, true);
 				} else {
