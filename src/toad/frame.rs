@@ -124,6 +124,31 @@ unsafe extern "C" fn toad(fighter : &mut L2CFighterCommon) {
 				if MotionModule::motion_kind(boma) == hash40("special_air_hi_screw") {
                 	KineticModule::suspend_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_CONTROL);
                     macros::SET_SPEED_EX(fighter, 0.0, -4.0, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+					if MotionModule::frame(boma) < 3.0 {
+						macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("hip"), /*Damage*/ 6.0, /*Angle*/ 270, /*KBG*/ 100, /*FKB*/ 160, /*BKB*/ 0, /*Size*/ 6.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 0.8, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_sting"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_CUTUP, /*Type*/ *ATTACK_REGION_BODY);
+						macros::ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("kneer"), /*Damage*/ 6.0, /*Angle*/ 270, /*KBG*/ 100, /*FKB*/ 160, /*BKB*/ 0, /*Size*/ 4.0, /*X*/ 4.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 0.8, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_sting"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_CUTUP, /*Type*/ *ATTACK_REGION_BODY);
+					}
+					let upb_loop_frame = MotionModule::frame(boma) as i32 % 14;
+					if upb_loop_frame == 0 {
+						macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("top"), 0, 10.0, 0, 0, 0, 0, 0.7, true, *EF_FLIP_YZ);
+						macros::LAST_EFFECT_SET_RATE(fighter, 1.3);
+					}
+					if  upb_loop_frame == 2 {
+						macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("top"), 0, 8.0, 0, 0, 0, 0, 0.6, true, *EF_FLIP_YZ);
+						macros::LAST_EFFECT_SET_RATE(fighter, 1.3);
+					}
+					if  upb_loop_frame == 3 {
+						macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("top"), 0, 6.0, 0, 0, 0, 0, 0.5, true, *EF_FLIP_YZ);
+						macros::LAST_EFFECT_SET_RATE(fighter, 1.3);
+					}
+					if  upb_loop_frame == 4 {
+						macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("top"), 0, 4.0, 0, 0, 0, 0, 0.4, true, *EF_FLIP_YZ);
+						macros::LAST_EFFECT_SET_RATE(fighter, 1.3);
+					}
+					if  upb_loop_frame == 5 {
+						macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("top"), 0, 2.0, 0, 0, 0, 0, 0.3, true, *EF_FLIP_YZ);
+						macros::LAST_EFFECT_SET_RATE(fighter, 1.3);
+					}
 				}
 				
 				if [hash40("special_air_hi_screw"), hash40("special_air_hi_loop")].contains(&MotionModule::motion_kind(boma)){
@@ -297,27 +322,30 @@ unsafe extern "C" fn toad(fighter : &mut L2CFighterCommon) {
 			if BIG_TIMER[ENTRY_ID] > 0 {
 				BIG_TIMER[ENTRY_ID] -= 1;
 				if BIG_TIMER[ENTRY_ID] > 180 {
-					PostureModule::set_scale(fighter.module_accessor, 2.0, false);
+					PostureModule::set_scale(fighter.module_accessor, 2.0*0.85, false);
 					AttackModule::set_attack_scale(boma, 1.0, true);
-					GrabModule::set_size_mul(boma, 2.0);
+					GrabModule::set_size_mul(boma, 2.0*0.85);
             		WorkModule::on_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_GOLD);
 			   		damage!(fighter, *MA_MSC_DAMAGE_DAMAGE_NO_REACTION, *DAMAGE_NO_REACTION_MODE_DAMAGE_POWER, 15.0);
 				} else if BIG_TIMER[ENTRY_ID] > 120 {
-					PostureModule::set_scale(fighter.module_accessor, 1.67, false);
+					if BIG_TIMER[ENTRY_ID] == 178 {
+						macros::STOP_SE(fighter, Hash40::new("se_murabito_final01"));
+					}
+					PostureModule::set_scale(fighter.module_accessor, 1.67*0.85, false);
 					AttackModule::set_attack_scale(boma, 1.0, true);
-					GrabModule::set_size_mul(boma, 1.67);
+					GrabModule::set_size_mul(boma, 1.67*0.85);
             		WorkModule::off_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_GOLD);
 			   		damage!(fighter, *MA_MSC_DAMAGE_DAMAGE_NO_REACTION, *DAMAGE_NO_REACTION_MODE_DAMAGE_POWER, 12.0);
 				} else if BIG_TIMER[ENTRY_ID] > 60 {
-					PostureModule::set_scale(fighter.module_accessor, 1.33, false);
+					PostureModule::set_scale(fighter.module_accessor, 1.33*0.85, false);
 					AttackModule::set_attack_scale(boma, 1.0, true);
-					GrabModule::set_size_mul(boma, 1.33);
+					GrabModule::set_size_mul(boma, 1.33*0.85);
             		WorkModule::off_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_GOLD);
 			   		damage!(fighter, *MA_MSC_DAMAGE_DAMAGE_NO_REACTION, *DAMAGE_NO_REACTION_MODE_DAMAGE_POWER, 8.0);
 				} else {
-					PostureModule::set_scale(fighter.module_accessor, 1.0, false);
+					PostureModule::set_scale(fighter.module_accessor, 1.0*0.85, false);
 					AttackModule::set_attack_scale(boma, 1.0, true);
-					GrabModule::set_size_mul(boma, 1.0);
+					GrabModule::set_size_mul(boma, 1.0*0.85);
             		WorkModule::off_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_GOLD);
 			   		damage!(fighter, *MA_MSC_DAMAGE_DAMAGE_NO_REACTION, *DAMAGE_NO_REACTION_MODE_NORMAL, 0.0);
 				}
