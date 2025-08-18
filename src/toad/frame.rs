@@ -310,7 +310,7 @@ unsafe extern "C" fn toad(fighter : &mut L2CFighterCommon) {
 			if [hash40("special_s_end"), hash40("special_air_s_end")].contains(&motion_kind) {
 				SIDEB_END[ENTRY_ID] = true;
 			}
-			if status_kind == *FIGHTER_MURABITO_STATUS_KIND_FINAL_END {
+			/*if status_kind == *FIGHTER_MURABITO_STATUS_KIND_FINAL_END {
 				BIG_TIMER[ENTRY_ID] = BIG_TIMER_MAX;
 				macros::PLAY_SE(fighter, Hash40::new("se_murabito_final01"));
 				if situation_kind == *SITUATION_KIND_GROUND {
@@ -318,14 +318,14 @@ unsafe extern "C" fn toad(fighter : &mut L2CFighterCommon) {
 				} else {
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL, true);
 				}
-			}
+			}*/
 			if status_kind == *FIGHTER_STATUS_KIND_FINAL && MotionModule::end_frame(boma) - frame < 6.0 { 
 				StatusModule::change_status_request_from_script(boma, *FIGHTER_MURABITO_STATUS_KIND_FINAL_END, true);
 			}
-			if BIG_TIMER[ENTRY_ID] > BIG_TIMER_MAX-10 || status_kind == *FIGHTER_STATUS_KIND_FINAL {
-				EffectModule::req_screen(fighter.module_accessor, Hash40::new("sys_bg_vortex"), false, true, true);
-				println!("SYS BG VORTEX!!!");
-			}
+			/*if true{ //BIG_TIMER[ENTRY_ID] > BIG_TIMER_MAX-4 {
+				EffectModule::req_screen(boma, Hash40::new("bg_criticalhit"), false, true, true);
+				//EffectModule::req_screen(fighter.module_accessor, Hash40::new("sys_bg_vortex2"), false, true, true);
+			}*/
 			if BIG_TIMER[ENTRY_ID] > 0 {
 				BIG_TIMER[ENTRY_ID] -= 1;
 				if BIG_TIMER[ENTRY_ID] > 45 {
@@ -352,7 +352,7 @@ unsafe extern "C" fn toad(fighter : &mut L2CFighterCommon) {
 			   		damage!(fighter, *MA_MSC_DAMAGE_DAMAGE_NO_REACTION, *DAMAGE_NO_REACTION_MODE_DAMAGE_POWER, 8.0);
 				} else {
         			macros::CANCEL_FILL_SCREEN(fighter, 1, 30);
-        			EffectModule::remove_screen(fighter.module_accessor, Hash40::new("sys_bg_vortex"), -1);
+        			EffectModule::remove_screen(fighter.module_accessor, Hash40::new("sys_bg1"), -1);
 					macros::STOP_SE(fighter, Hash40::new("se_murabito_final01"));
 					PostureModule::set_scale(fighter.module_accessor, 1.0*0.85, false);
 					AttackModule::set_attack_scale(boma, 1.0, true);

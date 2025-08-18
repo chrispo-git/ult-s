@@ -118,6 +118,21 @@ unsafe extern "C" fn throw_exit(fighter: &mut L2CFighterCommon) -> L2CValue {
 		//original!(fighter)
 	//}
 }
+unsafe extern "C" fn final_end_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
+	let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+	let situation_kind = StatusModule::situation_kind(fighter.module_accessor);
+	BIG_TIMER[ENTRY_ID] = BIG_TIMER_MAX;
+	macros::PLAY_SE(fighter, Hash40::new("se_murabito_final01"));
+    macros::CANCEL_FILL_SCREEN(fighter, 1, 1);
+    EffectModule::remove_screen(fighter.module_accessor, Hash40::new("bg_popo_final"), -1);
+	EffectModule::req_screen(fighter.module_accessor, Hash40::new("bg_popo_final"), false, true, true);
+	if situation_kind == *SITUATION_KIND_GROUND {
+        fighter.change_status(FIGHTER_STATUS_KIND_WAIT.into(),true.into());
+	} else {
+        fighter.change_status(FIGHTER_STATUS_KIND_FALL.into(),true.into());
+	}
+	0.into()
+}
 unsafe extern "C" fn landing_fall_special_exit(fighter: &mut L2CFighterCommon) -> L2CValue {
     ModelModule::set_mesh_visibility(fighter.module_accessor,Hash40::new("propeller"),false);
     ModelModule::set_mesh_visibility(fighter.module_accessor,Hash40::new("mushroom"),true);
@@ -277,6 +292,7 @@ pub fn install() {
         .status(Pre, *FIGHTER_MURABITO_STATUS_KIND_SPECIAL_HI_DETACH, special_hi_pre)
         .status(Pre, *FIGHTER_STATUS_KIND_SPECIAL_S, special_s_pre)
         .status(Exit, *FIGHTER_STATUS_KIND_LANDING_FALL_SPECIAL, landing_fall_special_exit)
+        .status(Pre, *FIGHTER_MURABITO_STATUS_KIND_FINAL_END, final_end_pre)
         .install();
     Agent::new("murabito_flowerpot")
     .set_costume([120, 121, 122, 123, 124, 125, 126, 127].to_vec())
