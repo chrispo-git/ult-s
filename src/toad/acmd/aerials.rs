@@ -207,6 +207,30 @@ unsafe extern "C" fn toad_dair_eff(fighter: &mut L2CAgentBase) {
 		}
 }
 unsafe extern "C" fn toad_dair_snd(fighter: &mut L2CAgentBase) {
+		frame(fighter.lua_state_agent, 8.0);
+		if macros::is_excute(fighter) {
+			macros::PLAY_SE(fighter, Hash40::new("se_murabito_swing_s"));
+		}
+		frame(fighter.lua_state_agent, 10.0);
+		if macros::is_excute(fighter) {
+			macros::PLAY_SE(fighter, Hash40::new("se_murabito_swing_s"));
+		}
+		frame(fighter.lua_state_agent, 14.0);
+		if macros::is_excute(fighter) {
+			macros::PLAY_SE(fighter, Hash40::new("se_murabito_swing_m"));
+		}
+		frame(fighter.lua_state_agent, 20.0);
+		if macros::is_excute(fighter) {
+			macros::PLAY_SE(fighter, Hash40::new("se_murabito_swing_s"));
+		}
+		frame(fighter.lua_state_agent, 25.0);
+		if macros::is_excute(fighter) {
+			macros::PLAY_SE(fighter, Hash40::new("se_murabito_swing_s"));
+		}
+		frame(fighter.lua_state_agent, 29.0);
+		if macros::is_excute(fighter) {
+			macros::PLAY_SE(fighter, Hash40::new("se_murabito_swing_l"));
+		}
 }
 unsafe extern "C" fn toad_land_dair(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
