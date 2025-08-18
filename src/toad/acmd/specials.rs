@@ -40,6 +40,35 @@ unsafe extern "C" fn toad_sideb_snd(fighter: &mut L2CAgentBase) {
 		macros::PLAY_SE(fighter, Hash40::new("se_common_step_snow"));
 	};
 }	
+unsafe extern "C" fn toad_sideb_loop_snd(fighter: &mut L2CAgentBase) {
+		for _ in 0..i32::MAX {
+			if macros::is_excute(fighter) {
+				macros::PLAY_SE(fighter, Hash40::new("se_common_step_sand"));
+			}
+			wait(fighter.lua_state_agent, 1.0);
+			if macros::is_excute(fighter) {
+				macros::PLAY_SE(fighter, Hash40::new("se_common_step_snow"));
+				macros::PLAY_SE(fighter, Hash40::new("se_common_step_sand"));
+			}
+			wait(fighter.lua_state_agent, 1.0);
+			if macros::is_excute(fighter) {
+				macros::PLAY_SE(fighter, Hash40::new("se_common_step_snow"));
+				macros::PLAY_SE(fighter, Hash40::new("se_common_step_sand"));
+				macros::PLAY_SE(fighter, Hash40::new("se_common_step_sand"));
+			}
+			wait(fighter.lua_state_agent, 1.0);
+			if macros::is_excute(fighter) {
+				macros::PLAY_SE(fighter, Hash40::new("se_common_step_sand"));
+				macros::PLAY_SE(fighter, Hash40::new("se_common_step_sand"));
+			}
+			wait(fighter.lua_state_agent, 1.0);
+			if macros::is_excute(fighter) {
+				macros::PLAY_SE(fighter, Hash40::new("se_common_step_snow"));
+				macros::PLAY_SE(fighter, Hash40::new("se_common_step_snow"));
+			}
+			wait(fighter.lua_state_agent, 1.0);
+		}
+}
 unsafe extern "C" fn toad_sideb_air_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	frame(fighter.lua_state_agent, 4.0);
@@ -305,6 +334,7 @@ pub fn install() {
 		.game_acmd("game_specialairhiscrew", toad_upb_screw, Priority::Low)
 		.sound_acmd("sound_specialairhiscrew", toad_upb_screw_snd, Priority::Low)
 		.acmd("game_specialsloop", toad_sideb_hitbox, Priority::Low)
+		.acmd("sound_specialsloop", toad_sideb_loop_snd, Priority::Low)
 		.acmd("game_specialairsloop", toad_sideb_hitbox, Priority::Low)
 		.acmd("game_specialsjump", toad_sideb_hitbox, Priority::Low)
 		.game_acmd("game_specialstoad", toad_sideb, Priority::Low)
