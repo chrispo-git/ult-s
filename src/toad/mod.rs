@@ -148,13 +148,53 @@ pub fn install() {
         },
     );
     the_csk_collection_api::add_chara_layout_db_entry_info(
-        the_csk_collection_api::CharacterLayoutDatabaseEntry {
-            ui_layout_id: smash::hash40("ui_chara_toad_00"), // Hash40 of ui_chara_aaa_00
-            clone_from_ui_layout_id: Some(smash::hash40("ui_chara_murabito_00")), // Hash40 of ui_chara_falco_00
-            ui_chara_id: the_csk_collection_api::Hash40Type::Overwrite(
-                smash::hash40("ui_chara_toad"), // Hash40 of ui_chara_aaa
-            ),
-            ..Default::default()
-        },
+            the_csk_collection_api::CharacterLayoutDatabaseEntry {
+                ui_layout_id: smash::hash40("ui_chara_toad_00"), // Hash40 of ui_chara_aaa_00
+                clone_from_ui_layout_id: Some(smash::hash40("ui_chara_murabito_00")), // Hash40 of ui_chara_falco_00
+                ui_chara_id: the_csk_collection_api::Hash40Type::Overwrite(
+                    smash::hash40("ui_chara_toad"), // Hash40 of ui_chara_aaa
+                ),
+                ..Default::default()
+            },
     );
+    the_csk_collection_api::add_bgm_db_entry_info(&the_csk_collection_api::BgmDatabaseRootEntry {
+        ui_bgm_id: hash40("ui_bgm_z80_f_toad"),
+        clone_from_ui_bgm_id: Some(hash40("ui_bgm_z66_f_murabito")),
+        stream_set_id: the_csk_collection_api::Hash40Type::Overwrite(hash40("set_z80_f_toad")),
+        ..Default::default()
+    });
+
+    the_csk_collection_api::add_stream_set_entry_info(&the_csk_collection_api::StreamSetEntry { 
+        stream_set_id: hash40("set_z80_f_toad"),
+        info0: the_csk_collection_api::Hash40Type::Overwrite(hash40("info_z80_f_toad")),
+        ..Default::default()
+    });
+
+    the_csk_collection_api::add_assigned_info_entry_info(&the_csk_collection_api::AssignedInfoEntry { 
+        info_id: hash40("info_z80_f_toad"),
+        stream_id: the_csk_collection_api::Hash40Type::Overwrite(hash40("stream_z80_f_toad")),
+        condition: the_csk_collection_api::Hash40Type::Overwrite(hash40("sound_condition_none")),
+        condition_process: the_csk_collection_api::Hash40Type::Overwrite(hash40("sound_condition_process_add")),
+        change_fadeout_frame: the_csk_collection_api::IntType::Overwrite(60),
+        menu_change_fadeout_frame: the_csk_collection_api::IntType::Overwrite(60),
+        ..Default::default()
+    });
+
+    the_csk_collection_api::add_stream_property_entry_info(&the_csk_collection_api::StreamPropertyEntry {
+        stream_id: hash40("stream_z80_f_herobrine"),
+        data_name0: the_csk_collection_api::StringType::Overwrite(the_csk_collection_api::CStrCSK::new("z80_f_toad")),
+        ..Default::default()
+    });
+
+    the_csk_collection_api::add_new_bgm_property_entry(&smash_bgm_property::BgmPropertyEntry {
+        stream_name: hash40::Hash40::new("z80_f_toad"),
+        loop_start_ms: 0,
+        loop_start_sample: 0,
+        loop_end_ms: 0,
+        loop_end_sample: 0,
+        duration_ms: 7659,
+        duration_sample: 359424 
+    });
+
+    the_csk_collection_api::set_fighter_jingle(hash40("ui_chara_toad"), "z80_f_toad");
 } 

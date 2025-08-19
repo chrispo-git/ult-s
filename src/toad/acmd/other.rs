@@ -393,6 +393,10 @@ unsafe extern "C" fn toad_win3_eff(fighter: &mut L2CAgentBase) {
 }	
 unsafe extern "C" fn toad_entry(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
+	if macros::is_excute(fighter) {
+		let pipe_pos  = smash::phx::Vector3f { x: 0.0, y: 0.0, z: 0.0 };
+		ArticleModule::set_pos(fighter.module_accessor, *FIGHTER_MURABITO_GENERATE_ARTICLE_HOUSE, pipe_pos);
+	}
 }	
 
 pub fn install() {
