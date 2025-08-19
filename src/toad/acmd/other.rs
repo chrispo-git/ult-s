@@ -363,27 +363,22 @@ unsafe extern "C" fn toad_win1(fighter: &mut L2CAgentBase) {
 		}
 }	
 unsafe extern "C" fn toad_win3(fighter: &mut L2CAgentBase) {
-    let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
-			ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_MURABITO_GENERATE_ARTICLE_BEETLE, false, 0);
-			ArticleModule::change_motion(fighter.module_accessor, *FIGHTER_MURABITO_GENERATE_ARTICLE_BEETLE,smash::phx::Hash40::new("win_1"),false,0.0);
+			ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_MURABITO_GENERATE_ARTICLE_BEETLE,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
 		}
 }	
 unsafe extern "C" fn toad_win2_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
-		for _ in 0..5 
- {
-			if macros::is_excute(fighter) {
-				macros::LANDING_EFFECT(fighter, Hash40::new("sys_landing_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.85, 0, 0, 0, 0, 0, 0, true);
-			}
-			wait(fighter.lua_state_agent, 16.0);
+		frame(fighter.lua_state_agent, 30.0);
+		if macros::is_excute(fighter) {
+			macros::LANDING_EFFECT(fighter, Hash40::new("sys_landing_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.2, 0, 0, 0, 0, 0, 0, false);
 		}
 }	
 unsafe extern "C" fn toad_win1_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
-		frame(fighter.lua_state_agent, 116.0);
+		frame(fighter.lua_state_agent, 147.0);
 		if macros::is_excute(fighter) {
-			macros::LANDING_EFFECT(fighter, Hash40::new("sys_landing_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.85, 0, 0, 0, 0, 0, 0, true);
+			macros::LANDING_EFFECT(fighter, Hash40::new("sys_landing_smoke"), Hash40::new("trans"), 0, 0, 0, 0, 0, 0, 0.85, 0, 0, 0, 0, 0, 0, true);
 		}
 }	
 unsafe extern "C" fn toad_win1wait_eff(fighter: &mut L2CAgentBase) {
@@ -391,24 +386,13 @@ unsafe extern "C" fn toad_win1wait_eff(fighter: &mut L2CAgentBase) {
 }	
 unsafe extern "C" fn toad_win3_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
-		for _ in 0..9999 
- {
-			if macros::is_excute(fighter) {
-				macros::EFFECT(fighter, Hash40::new("sys_erace_smoke"), Hash40::new("top"), 37, 7, 20, 0, 0, 0, 1.2, 0, 0, 0, 0, 0, 0, false);
-				macros::EFFECT(fighter, Hash40::new("sys_erace_smoke"), Hash40::new("top"), 7, 7, 20, 0, 0, 0, 1.2, 0, 0, 0, 0, 0, 0, false);
-				macros::EFFECT(fighter, Hash40::new("sys_erace_smoke"), Hash40::new("top"), 37, 7, -25, 0, 0, 0, 1.2, 0, 0, 0, 0, 0, 0, false);
-				macros::EFFECT(fighter, Hash40::new("sys_erace_smoke"), Hash40::new("top"), 7, 7, -25, 0, 0, 0, 1.2, 0, 0, 0, 0, 0, 0, false);
-			}
-			wait(fighter.lua_state_agent, 10.0);
+		frame(fighter.lua_state_agent, 108.0);
+		if macros::is_excute(fighter) {
+			macros::LANDING_EFFECT(fighter, Hash40::new("sys_landing_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.2, 0, 0, 0, 0, 0, 0, false);
 		}
 }	
 unsafe extern "C" fn toad_entry(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
-		frame(fighter.lua_state_agent, 46.0);
-		if macros::is_excute(fighter) {
-			ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_MURABITO_GENERATE_ARTICLE_HOUSE,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
-			macros::EFFECT(fighter, Hash40::new("sys_erace_smoke"), Hash40::new("top"), 0, 6, -8, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, false);
-		}
 }	
 
 pub fn install() {
