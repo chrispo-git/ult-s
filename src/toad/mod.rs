@@ -101,7 +101,7 @@ pub fn install() {
                 is_plural_message: the_csk_collection_api::BoolType::Overwrite(false), 
                 is_plural_narration: the_csk_collection_api::BoolType::Overwrite(false), 
                 is_article: the_csk_collection_api::BoolType::Overwrite(true), 
-                unk_0x112b7bb52a: the_csk_collection_api::BoolType::Overwrite(false), 
+                has_multiple_face: the_csk_collection_api::BoolType::Overwrite(false), 
                 result_pf0: the_csk_collection_api::BoolType::Overwrite(true), 
                 result_pf1: the_csk_collection_api::BoolType::Overwrite(true), 
                 result_pf2: the_csk_collection_api::BoolType::Overwrite(true), 
