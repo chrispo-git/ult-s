@@ -7,8 +7,9 @@
 #![allow(non_upper_case_globals)]
 #![allow(warnings, unused)]
 
-#[cfg(feature = "main_nro")]
 use std::{fs, path::Path};
+
+#[cfg(feature = "main_nro")]
 use skyline_web::dialog_ok::DialogOk;
 
 #[macro_use]
@@ -154,7 +155,8 @@ unsafe fn set_interval_1(window: u64, _: i32) {
 
 #[skyline::hook(replace = OFFSET2, inline)]
 unsafe fn set_interval_2(ctx: &mut InlineCtx) {
-    *ctx.registers[8].x.as_mut() = 0;
+    ctx.registers[8].set_x(0);
+    
 }
 
 

@@ -62,9 +62,10 @@ unsafe fn get_button_label_by_operation_kind(hashed_string: &mut HashedString, o
 
 #[skyline::hook(offset = 0x1d334e8, inline)]
 unsafe fn add_footstool_to_gc(ctx: &skyline::hooks::InlineCtx) {
-    let button = *ctx.registers[25].w.as_ref();
+    let button = *(&ctx.registers[25].w());
+    
     if ![0x3, 0x4, 0x5, 0x8].contains(&button) {
-        let input_list_vector = &mut *((*ctx.registers[24].x.as_ref() + 0x148) as *mut CppVector<u8>);
+        let input_list_vector = &mut *((*(&ctx.registers[24].x()) + 0x148) as *mut CppVector<u8>);
 
         if input_list_vector.len() < 8 {
             input_list_vector.push(ext::InputKind::AppealHi as u8);
@@ -77,11 +78,11 @@ unsafe fn add_footstool_to_gc(ctx: &skyline::hooks::InlineCtx) {
 
 #[skyline::hook(offset = 0x1D331F8, inline)]
 unsafe fn add_footstool_to_fk(ctx: &skyline::hooks::InlineCtx) {
-    let button = *ctx.registers[25].w.as_ref();
+    let button = *(&ctx.registers[25].w());
     if [0x4, 0x5, 0x6, 0x9].contains(&button) {
         return;
-    }
-    let input_list_vector = &mut *((*ctx.registers[24].x.as_ref() + 0x148) as *mut CppVector<u8>);
+    } 
+    let input_list_vector = &mut *((*(&ctx.registers[24].x()) + 0x148) as *mut CppVector<u8>);
 
     if input_list_vector.len() < 8 {
         input_list_vector.push(ext::InputKind::AppealHi as u8);
@@ -93,7 +94,7 @@ unsafe fn add_footstool_to_fk(ctx: &skyline::hooks::InlineCtx) {
 
 #[skyline::hook(offset = 0x1D33CD8, inline)]
 unsafe fn add_footstool_to_jc(ctx: &skyline::hooks::InlineCtx) {
-    let input_list_vector = &mut *((*ctx.registers[24].x.as_ref() + 0x148) as *mut CppVector<u8>);
+    let input_list_vector = &mut *((*(&ctx.registers[24].x()) + 0x148) as *mut CppVector<u8>);
     
     if input_list_vector.len() < 8 {
         input_list_vector.push(ext::InputKind::AppealHi as u8);
@@ -105,9 +106,9 @@ unsafe fn add_footstool_to_jc(ctx: &skyline::hooks::InlineCtx) {
 
 #[skyline::hook(offset = 0x1D3594C, inline)]
 unsafe fn add_more_buttons(ctx: &mut skyline::hooks::InlineCtx) {
-    let input_list_vector = &mut *((*ctx.registers[24].x.as_ref() + 0x148) as *mut CppVector<u8>);
+    let input_list_vector = &mut *((*(&ctx.registers[24].x()) + 0x148) as *mut CppVector<u8>);
     // panic!("{}", input_list_vector.len());
-    *ctx.registers[25].x.as_mut() = input_list_vector.len() as u64;
+    ctx.registers[25].set_x(input_list_vector.len() as u64);
 }
 
 pub fn install() {
