@@ -165,4 +165,44 @@ pub fn install() {
             ..Default::default()
         },
     );
+    the_csk_collection_api::add_bgm_db_entry_info(&the_csk_collection_api::BgmDatabaseRootEntry {
+        ui_bgm_id: hash40("ui_bgm_z25_f_rayman"),
+        clone_from_ui_bgm_id: Some(hash40("ui_bgm_z25_f_pikmin")),
+        stream_set_id: the_csk_collection_api::Hash40Type::Overwrite(hash40("set_z25_f_rayman")),
+        ..Default::default()
+    });
+
+    the_csk_collection_api::add_stream_set_entry_info(&the_csk_collection_api::StreamSetEntry { 
+        stream_set_id: hash40("set_z25_f_rayman"),
+        info0: the_csk_collection_api::Hash40Type::Overwrite(hash40("info_z25_f_rayman")),
+        ..Default::default()
+    });
+
+    the_csk_collection_api::add_assigned_info_entry_info(&the_csk_collection_api::AssignedInfoEntry { 
+        info_id: hash40("info_z25_f_rayman"),
+        stream_id: the_csk_collection_api::Hash40Type::Overwrite(hash40("stream_z25_f_rayman")),
+        condition: the_csk_collection_api::Hash40Type::Overwrite(hash40("sound_condition_none")),
+        condition_process: the_csk_collection_api::Hash40Type::Overwrite(hash40("sound_condition_process_add")),
+        change_fadeout_frame: the_csk_collection_api::IntType::Overwrite(60),
+        menu_change_fadeout_frame: the_csk_collection_api::IntType::Overwrite(60),
+        ..Default::default()
+    });
+
+    the_csk_collection_api::add_stream_property_entry_info(&the_csk_collection_api::StreamPropertyEntry {
+        stream_id: hash40("stream_z25_f_rayman"),
+        data_name0: the_csk_collection_api::StringType::Overwrite(the_csk_collection_api::CStrCSK::new("z25_f_rayman")),
+        ..Default::default()
+    });
+
+    the_csk_collection_api::add_new_bgm_property_entry(&smash_bgm_property::BgmPropertyEntry {
+        stream_name: hash40::Hash40::new("z25_f_rayman"),
+        loop_start_ms: 0,
+        loop_start_sample: 0,
+        loop_end_ms: 0,
+        loop_end_sample: 0,
+        duration_ms: 7659,
+        duration_sample: 359424 
+    });
+
+    the_csk_collection_api::set_fighter_jingle(hash40("ui_chara_rayman"), "z25_f_rayman");
 }
