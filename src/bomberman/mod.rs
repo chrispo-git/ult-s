@@ -40,7 +40,7 @@ pub fn install() {
                 exhibit_day_order: the_csk_collection_api::IntType::Overwrite(13102), 
                 extra_flags: the_csk_collection_api::IntType::Overwrite(0), 
                 ext_skill_page_num: the_csk_collection_api::SignedByteType::Overwrite(0), 
-                skill_list_order: the_csk_collection_api::SignedByteType::Overwrite(85), 
+                skill_list_order: the_csk_collection_api::SignedByteType::Overwrite(92), 
                 disp_order: the_csk_collection_api::SignedByteType::Optional(Some(85)), 
                 save_no: the_csk_collection_api::SignedByteType::Overwrite(82), 
                 chara_count: the_csk_collection_api::SignedByteType::Overwrite(1), 
