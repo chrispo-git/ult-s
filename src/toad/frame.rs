@@ -257,6 +257,10 @@ unsafe extern "C" fn toad(fighter : &mut L2CFighterCommon) {
 				if MotionModule::frame(boma) as i32 == 70 && ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_APPEAL_LW) {
 					MotionModule::set_frame_sync_anim_cmd(boma, 25.0, true, true, true);
 				}
+				if MotionModule::frame(boma) as i32 == 80 {
+						macros::PLAY_SE(fighter, Hash40::new("se_common_landing_soil"));
+						macros::LANDING_EFFECT(fighter, Hash40::new("sys_down_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.65, 0, 0, 0, 0, 0, 0, false);
+				}
 				if MotionModule::frame(boma) > 20.0 && MotionModule::frame(boma) < 70.0 {
 					if ((MotionModule::frame(boma)+3.0) as i32) % 10 == 0 {
 						macros::PLAY_SE(fighter, Hash40::new("se_murabito_smash_h01"));
@@ -269,18 +273,11 @@ unsafe extern "C" fn toad(fighter : &mut L2CFighterCommon) {
 					let stick_x = ControlModule::get_stick_x(boma) * PostureModule::lr(boma);
 					let speed_x = KineticModule::get_sum_speed_x(boma, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN) * PostureModule::lr(boma);
 					if stick_x < -0.2 {
-						if speed_x > -0.9 {
-							let speed = smash::phx::Vector3f { x:-0.05, y: 0.0, z: 0.0 };
-							KineticModule::add_speed(boma, &speed);
-						}
+                    		macros::SET_SPEED_EX(fighter, -0.4, 0.0, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
 					} else if stick_x > 0.2 {
-						if speed_x < 0.9 {
-							let speed = smash::phx::Vector3f { x:0.05, y: 0.0, z: 0.0 };
-							KineticModule::add_speed(boma, &speed);
-						}
+                    		macros::SET_SPEED_EX(fighter, 0.4, 0.0, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
 					} else {
-						let speed = smash::phx::Vector3f { x:0.1*speed_x, y: 0.0, z: 0.0 };
-						KineticModule::add_speed(boma, &speed);
+                    		macros::SET_SPEED_EX(fighter, 0.0, 0.0, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
 					}
 				}
 			}

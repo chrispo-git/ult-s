@@ -158,6 +158,11 @@ unsafe extern "C" fn toad_final(fighter: &mut L2CAgentBase) {
 			macros::SLOW_OPPONENT(fighter, 5.0, 20.0);
 			macros::FT_SET_FINAL_FEAR_FACE(fighter, 40);
 			macros::FT_START_CUTIN(fighter, );
+			if !WorkModule::is_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_DISABLE_FINAL_START_CAMERA) {
+				fighter.clear_lua_stack();
+				lua_args!(fighter, hash40("d04finalr.nuanmb"), true, false);
+				sv_animcmd::REQ_FINAL_START_CAMERA_arg3(fighter.lua_state_agent);
+			}
 		}
 		frame(fighter.lua_state_agent, 95.0);
 		if macros::is_excute(fighter) {
@@ -343,10 +348,6 @@ unsafe extern "C" fn toad_staunt_snd(fighter: &mut L2CAgentBase) {
 }	
 unsafe extern "C" fn toad_dtaunt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
-		frame(fighter.lua_state_agent, 80.0);
-		if macros::is_excute(fighter) {
-			macros::LANDING_EFFECT(fighter, Hash40::new("sys_down_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.65, 0, 0, 0, 0, 0, 0, false);
-		}
 }	
 unsafe extern "C" fn toad_dtaunt_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
