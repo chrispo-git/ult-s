@@ -299,6 +299,7 @@ unsafe extern "C" fn toad(fighter : &mut L2CFighterCommon) {
 				&& ray_check_pos(boma, dist, 0.0, false) == 1 {
 					macros::PLAY_SE(fighter, Hash40::new("se_murabito_smash_h02"));
 					PostureModule::reverse_lr(boma);
+					SIDEB_DIR[ENTRY_ID] *= -1.0;
 					PostureModule::update_rot_y_lr(boma);
 					let stop_rise  = smash::phx::Vector3f { x: -1.0, y: 1.0, z: 1.0 };
 					KineticModule::mul_speed(fighter.module_accessor, &stop_rise, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
