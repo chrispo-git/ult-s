@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<struct>
+  <list hash="param_balloffire">
+    <struct index="0">
+      <int hash="life">32</int>
+      <float hash="speed">1.0</float>
+      <float hash="gravity_accel">0.0</float>
+      <float hash="angle">0</float>
+      <float hash="bound_ref_speed_mul">0.0</float>
+      <float hash="bounded_speed_y_min">0.0</float>
+      <float hash="bounded_speed_y_max">0.0</float>
+      <int hash="bound_count_max">7</int>
+      <float hash="wall_check_angle">0</float>
+      <int hash="is_penetration">0</int>
+      <float hash="gravity_acl_max">0</float>
+    </struct>
+    <struct index="1">
+      <int hash="life">0</int>
+      <float hash="speed">0</float>
+      <float hash="gravity_accel">0</float>
+      <float hash="angle">0</float>
+      <float hash="bound_ref_speed_mul">0</float>
+      <float hash="bounded_speed_y_min">0</float>
+      <float hash="bounded_speed_y_max">0</float>
+      <int hash="bound_count_max">0</int>
+      <float hash="wall_check_angle">0</float>
+      <int hash="is_penetration">0</int>
+      <float hash="gravity_acl_max">0</float>
+    </struct>
+    <struct index="2">
+      <int hash="life">0</int>
+      <float hash="speed">0</float>
+      <float hash="gravity_accel">0</float>
+      <float hash="angle">0</float>
+      <float hash="bound_ref_speed_mul">0</float>
+      <float hash="bounded_speed_y_min">0</float>
+      <float hash="bounded_speed_y_max">0</float>
+      <int hash="bound_count_max">0</int>
+      <float hash="wall_check_angle">0</float>
+      <int hash="is_penetration">0</int>
+      <float hash="gravity_acl_max">0</float>
+    </struct>
+    <struct index="3">
+      <int hash="life">0</int>
+      <float hash="speed">0</float>
+      <float hash="gravity_accel">0</float>
+      <float hash="angle">0</float>
+      <float hash="bound_ref_speed_mul">0</float>
+      <float hash="bounded_speed_y_min">0</float>
+      <float hash="bounded_speed_y_max">0</float>
+      <int hash="bound_count_max">0</int>
+      <float hash="wall_check_angle">0</float>
+      <int hash="is_penetration">0</int>
+      <float hash="gravity_acl_max">0</float>
+    </struct>
+  </list>
+  <list hash="param_pinkmagic">
+    <struct index="0">
+      <int hash="is_penetration">1</int>
+      <float hash="life">40</float>
+      <float hash="speed">3.4</float>
+      <float hash="brake">0.0</float>
+      <float hash="angle">0</float>
+      <float hash="ground_coll_offset_x">-0.5</float>
+      <float hash="ground_coll_offset_y">0.5</float>
+    </struct>
+    <struct index="1">
+      <int hash="is_penetration">0</int>
+      <float hash="life">0</float>
+      <float hash="speed">0</float>
+      <float hash="brake">0</float>
+      <float hash="angle">0</float>
+      <float hash="ground_coll_offset_x">0</float>
+      <float hash="ground_coll_offset_y">0</float>
+    </struct>
+    <struct index="2">
+      <int hash="is_penetration">0</int>
+      <float hash="life">0</float>
+      <float hash="speed">0</float>
+      <float hash="brake">0</float>
+      <float hash="angle">0</float>
+      <float hash="ground_coll_offset_x">0</float>
+      <float hash="ground_coll_offset_y">0</float>
+    </struct>
+    <struct index="3">
+      <int hash="is_penetration">0</int>
+      <float hash="life">0</float>
+      <float hash="speed">0</float>
+      <float hash="brake">0</float>
+      <float hash="angle">0</float>
+      <float hash="ground_coll_offset_x">0</float>
+      <float hash="ground_coll_offset_y">0</float>
+    </struct>
+  </list>
+  <list hash="param_book">
+    <struct index="0">
+      <int hash="life">13</int>
+      <float hash="speed">3.2</float>
+      <int hash="stick_frame">5</int>
+    </struct>
+  </list>
+  <list hash="param_finalmagic">
+    <struct index="0">
+      <int hash="life">90</int>
+      <float hash="speed">5.0</float>
+      <float hash="gravity_accel">0.0</float>
+      <float hash="angle">-90.0</float>
+      <float hash="bound_ref_speed_mul">0.0</float>
+      <float hash="bounded_speed_y_min">0.0</float>
+      <float hash="bounded_speed_y_max">0.0</float>
+      <int hash="bound_count_max">7</int>
+      <float hash="wall_check_angle">0</float>
+      <int hash="is_penetration">0</int>
+      <float hash="gravity_acl_max">0</float>
+    </struct>
+    <struct index="1">
+      <int hash="life">0</int>
+      <float hash="speed">0</float>
+      <float hash="gravity_accel">0</float>
+      <float hash="angle">0</float>
+      <float hash="bound_ref_speed_mul">0</float>
+      <float hash="bounded_speed_y_min">0</float>
+      <float hash="bounded_speed_y_max">0</float>
+      <int hash="bound_count_max">0</int>
+      <float hash="wall_check_angle">0</float>
+      <int hash="is_penetration">0</int>
+      <float hash="gravity_acl_max">0</float>
+    </struct>
+    <struct index="2">
+      <int hash="life">0</int>
+      <float hash="speed">0</float>
+      <float hash="gravity_accel">0</float>
+      <float hash="angle">0</float>
+      <float hash="bound_ref_speed_mul">0</float>
+      <float hash="bounded_speed_y_min">0</float>
+      <float hash="bounded_speed_y_max">0</float>
+      <int hash="bound_count_max">0</int>
+      <float hash="wall_check_angle">0</float>
+      <int hash="is_penetration">0</int>
+      <float hash="gravity_acl_max">0</float>
+    </struct>
+    <struct index="3">
+      <int hash="life">0</int>
+      <float hash="speed">0</float>
+      <float hash="gravity_accel">0</float>
+      <float hash="angle">0</float>
+      <float hash="bound_ref_speed_mul">0</float>
+      <float hash="bounded_speed_y_min">0</float>
+      <float hash="bounded_speed_y_max">0</float>
+      <int hash="bound_count_max">0</int>
+      <float hash="wall_check_angle">0</float>
+      <int hash="is_penetration">0</int>
+      <float hash="gravity_acl_max">0</float>
+    </struct>
+  </list>
+</struct>
