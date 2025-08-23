@@ -175,6 +175,7 @@ unsafe extern "C" fn toad_final_eff(fighter: &mut L2CAgentBase) {
         		macros::CANCEL_FILL_SCREEN(fighter, 1, 1);
         		EffectModule::remove_screen(fighter.module_accessor, Hash40::new("sys_bg1"), -1);
 				EffectModule::req_screen(fighter.module_accessor, Hash40::new("sys_bg1"), false, true, true);
+				macros::EFFECT(fighter, Hash40::new("sys_bg1"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, false);
 		}
 }
 	unsafe extern "C" fn toad_final_toad_army(fighter: &mut L2CAgentBase) {
