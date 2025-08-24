@@ -202,14 +202,11 @@ unsafe extern "C" fn toad(fighter : &mut L2CFighterCommon) {
 				}
 			};
 			if [hash40("special_air_lw_plant_failure")].contains(&MotionModule::motion_kind(boma)) {
-				if AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_ALL) && !AttackModule::is_infliction(boma, *COLLISION_KIND_MASK_ALL) && MotionModule::frame(boma) < 37.0{
+				if AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_HIT) && !AttackModule::is_infliction(boma, *COLLISION_KIND_MASK_HIT) && MotionModule::frame(boma) < 37.0{
 					KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_JUMP);
 					MotionModule::set_frame_sync_anim_cmd(boma, 38.0, true, true, false);
                     let speed = smash::phx::Vector3f { x: 0.0, y: 0.6, z: 0.0 };
                     KineticModule::add_speed(boma, &speed);
-					if !AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_HIT) {
-						MotionModule::set_rate(boma, 0.5);
-					};
 				};
 			};
 			if [*FIGHTER_MURABITO_STATUS_KIND_SPECIAL_LW_WATER_LANDING, *FIGHTER_MURABITO_STATUS_KIND_SPECIAL_LW_WATER_WAIT].contains(&status_kind) {
@@ -321,9 +318,10 @@ unsafe extern "C" fn toad(fighter : &mut L2CFighterCommon) {
 				StatusModule::change_status_request_from_script(boma, *FIGHTER_MURABITO_STATUS_KIND_FINAL_END, true);
 			}
 			if BIG_TIMER[ENTRY_ID] > BIG_TIMER_MAX-2 {
-				macros::EFFECT(fighter, Hash40::new("bg1"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, false);
+				macros::EFFECT(fighter, Hash40::new("bg_vortex"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, false);
 			}
 			if BIG_TIMER[ENTRY_ID] > 0 {
+				macros::EFFECT(fighter, Hash40::new("bg_vortex"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, false);
 				BIG_TIMER[ENTRY_ID] -= 1;
 				if BIG_TIMER[ENTRY_ID] > 45 {
 					PostureModule::set_scale(fighter.module_accessor, 2.0*0.85, false);
