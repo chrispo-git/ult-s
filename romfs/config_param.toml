@@ -10,7 +10,7 @@ kinds = ["bayonetta"]
 slots = [0,1,2,3,4,5,6,7]
 
 [[param_int]]
-param = "param_special_hi"
+param = "param_special_hi" 
 subparam = "act_landing_frame"
 value = 19
 kinds = ["bayonetta"]
