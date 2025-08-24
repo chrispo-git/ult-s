@@ -2790,6 +2790,13 @@ value = 0
 kinds = ["murabito"]
 slots = [120,121,122,123,124,125,126,127]
 
+[[param_float]]
+param = "shield_radius"
+subparam = ""
+value = 12.0
+kinds = ["murabito"]
+slots = [120,121,122,123,124,125,126,127]
+
 [[param_int]]
 param = "param_bowlingball"
 subparam = "is_penetration"
