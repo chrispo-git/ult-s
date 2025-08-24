@@ -320,10 +320,9 @@ unsafe extern "C" fn toad(fighter : &mut L2CFighterCommon) {
 			if status_kind == *FIGHTER_STATUS_KIND_FINAL && MotionModule::end_frame(boma) - frame < 6.0 { 
 				StatusModule::change_status_request_from_script(boma, *FIGHTER_MURABITO_STATUS_KIND_FINAL_END, true);
 			}
-			/*if true{ //BIG_TIMER[ENTRY_ID] > BIG_TIMER_MAX-4 {
-				EffectModule::req_screen(boma, Hash40::new("bg_criticalhit"), false, true, true);
-				//EffectModule::req_screen(fighter.module_accessor, Hash40::new("sys_bg_vortex2"), false, true, true);
-			}*/
+			if BIG_TIMER[ENTRY_ID] > BIG_TIMER_MAX-2 {
+				macros::EFFECT(fighter, Hash40::new("bg1"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, false);
+			}
 			if BIG_TIMER[ENTRY_ID] > 0 {
 				BIG_TIMER[ENTRY_ID] -= 1;
 				if BIG_TIMER[ENTRY_ID] > 45 {
@@ -351,6 +350,7 @@ unsafe extern "C" fn toad(fighter : &mut L2CFighterCommon) {
 				} else {
         			macros::CANCEL_FILL_SCREEN(fighter, 1, 30);
         			EffectModule::remove_screen(fighter.module_accessor, Hash40::new("sys_bg1"), -1);
+					EffectModule::kill_kind(boma, smash::phx::Hash40::new("bg1"), false, false);
 					macros::STOP_SE(fighter, Hash40::new("se_murabito_final01"));
 					PostureModule::set_scale(fighter.module_accessor, 1.0*0.85, false);
 					AttackModule::set_attack_scale(boma, 1.0, true);
