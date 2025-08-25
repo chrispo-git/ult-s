@@ -321,9 +321,9 @@ unsafe extern "C" fn toad(fighter : &mut L2CFighterCommon) {
 				macros::CANCEL_FILL_SCREEN(fighter, 1, 1);
 				EffectModule::remove_screen(fighter.module_accessor, Hash40::new("bg_popo_final"), -1);
 				EffectModule::req_screen(fighter.module_accessor, Hash40::new("bg_popo_final"), false, true, true);
-				macros::LAST_EFFECT_SET_RATE(fighter, 0.3);
 				CameraModule::reset_all(boma);
 			}
+			
 			if BIG_TIMER[ENTRY_ID] > 0 {
 				BIG_TIMER[ENTRY_ID] -= 1;
 				if BIG_TIMER[ENTRY_ID] > 45 {
@@ -332,10 +332,14 @@ unsafe extern "C" fn toad(fighter : &mut L2CFighterCommon) {
 					GrabModule::set_size_mul(boma, 2.0*0.85);
             		WorkModule::on_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_GOLD);
 			   		damage!(fighter, *MA_MSC_DAMAGE_DAMAGE_NO_REACTION, *DAMAGE_NO_REACTION_MODE_DAMAGE_POWER, 15.0);
+					if [*FIGHTER_STATUS_KIND_WAIT, *FIGHTER_STATUS_KIND_WALK, *FIGHTER_STATUS_KIND_DASH, *FIGHTER_STATUS_KIND_TURN_DASH, *FIGHTER_STATUS_KIND_TURN_RUN, *FIGHTER_STATUS_KIND_JUMP, *FIGHTER_STATUS_KIND_FALL, *FIGHTER_STATUS_KIND_FALL_AERIAL].contains(&status_kind) {
+						macros::ATTACK(fighter, /*ID*/ 4, /*Part*/ 0, /*Bone*/ Hash40::new("hip"), /*Damage*/ 9.0, /*Angle*/ 361, /*KBG*/ 45, /*FKB*/ 0, /*BKB*/ 30, /*Size*/ 13.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 35, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_HEAD);
+					}
 				} else if BIG_TIMER[ENTRY_ID] > 30 {
 					if BIG_TIMER[ENTRY_ID] == 44 {
 						macros::STOP_SE(fighter, Hash40::new("se_murabito_final01"));
 						macros::PLAY_SE(fighter, Hash40::new("se_item_mushd"));
+						AttackModule::clear_all(fighter.module_accessor);
 					}
 					PostureModule::set_scale(fighter.module_accessor, 1.67*0.85, false);
 					AttackModule::set_attack_scale(boma, 1.0, true);

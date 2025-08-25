@@ -162,22 +162,23 @@ unsafe extern "C" fn toad_final(fighter: &mut L2CAgentBase) {
 				fighter.clear_lua_stack();
 				lua_args!(fighter, true);
 				sv_animcmd::FT_REMOVE_FINAL_AURA(fighter.lua_state_agent);
-				macros::CAM_ZOOM_IN_arg5(fighter, /*frames*/ 20.0,/*no*/ 0.0,/*zoom*/ 1.8,/*yrot*/ 0.0,/*xrot*/ 0.0);
+    			CameraModule::zoom_in(fighter.module_accessor, 60, 0, 2.2, &Vector2f{x: 0.0, y: 6.0}, true);
 			}
 		}
 		frame(fighter.lua_state_agent, 60.0);
 		if macros::is_excute(fighter) {
-			if !WorkModule::is_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_DISABLE_FINAL_START_CAMERA) {
-				macros::CAM_ZOOM_IN_arg5(fighter, /*frames*/ 30.0,/*no*/ 0.0,/*zoom*/ 2.2,/*yrot*/ 0.0,/*xrot*/ 0.0);
-			}
 		}
 		frame(fighter.lua_state_agent, 95.0);
 		if macros::is_excute(fighter) {
 			macros::PLAY_SE(fighter, Hash40::new("se_murabito_final02"));
+		}
+		frame(fighter.lua_state_agent, 130.0);
+		if macros::is_excute(fighter) {
 			if !WorkModule::is_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_DISABLE_FINAL_START_CAMERA) {
-				macros::CAM_ZOOM_IN_arg5(fighter, /*frames*/ 48.0,/*no*/ 0.0,/*zoom*/ 0.5,/*yrot*/ 0.0,/*xrot*/ 0.0);
+    			CameraModule::reset_all(fighter.module_accessor);
 			}
 		}
+
 }
 unsafe extern "C" fn toad_final_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
