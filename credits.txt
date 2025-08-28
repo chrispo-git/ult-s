@@ -58,7 +58,7 @@ Cattail - Effects
 Peppy:
 chrispo - Coding, Animation, Modelling
 Hero-Zero - Modelling
-Challat - Modelling, Animation
+Challat - Modelling
 
 Bandana Dee:
 mRama - Coding, Animation, Modelling
