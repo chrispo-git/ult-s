@@ -16,10 +16,10 @@ Ella - Character Balance
 -Added Character Credits-
 
 Toad:
-chrispo - Coding, Animation, Modelling
+chrispo - Coding, Animation, Modelling, Render
 mRama - Animation
-SneakyKNG - Modelling
-SquidEnthusiast - Render
+Eriizer - Modelling
+Central - Modelling
 
 Rayman:
 chrispo - Coding, Animation
@@ -56,7 +56,7 @@ C# - Coding
 Cattail - Effects
 
 Peppy:
-chrispo - Coding, Animation, Modelling
+chrispo - Coding, Animation, Modelling, Render
 Hero-Zero - Modelling
 Challat - Modelling
 
