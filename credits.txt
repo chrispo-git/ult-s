@@ -99,7 +99,7 @@ Kybbler - Classic Mode Route
 
 -Special Thanks to-
 AParticularUser - Ridley Dair Animation
-blujay - Stage Select Screen, Additional Control Buttons, 1 Frame Delay Removal
+blujay - Stage Select Screen, Additional Control Buttons, 1 Frame Delay Removal, some of the code for custom gamemodes
 Chaos.A - Mario Nair animation
 CoolSonicKirby - Porting of Additional Control Buttons
 Devory - Colloseum, Gamecube Stages, Ready to Fight UI
