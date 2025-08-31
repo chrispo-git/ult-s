@@ -74,6 +74,13 @@ pub fn show_gamemodes() {
 }
 pub fn show_mod_settings() {
     let path = "sd:/ultimate/ult-s/sys-flags/";
+    let path1 = "sd:/ultimate/ult-s/";
+    match std::fs::create_dir(path1) {
+        Ok(_) => println!("ult-s Folder Created!"),
+        Err(_) => {
+            println!("ult-s folder already exists!");
+        }
+    }
     match std::fs::create_dir(path) {
         Ok(_) => println!("Settings Folder Created!"),
         Err(_) => {
