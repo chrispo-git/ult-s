@@ -67,13 +67,13 @@ unsafe extern "C" fn toad_ftilt_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 7.0);
 		if macros::is_excute(fighter) {
-			macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_attack_arc_c"), Hash40::new("sys_attack_arc_c"), Hash40::new("top"), -10, 10.5, 3, 0, -50, -90, 1.0, true, *EF_FLIP_YZ);
+			macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_attack_arc_c"), Hash40::new("sys_attack_arc_c"), Hash40::new("top"), -10, 10.5, 0, 0, -50, -90, 1.0, true, *EF_FLIP_YZ);
 			macros::LAST_EFFECT_SET_RATE(fighter, 1.7);
 		}
 		frame(fighter.lua_state_agent, 10.0);
 		if macros::is_excute(fighter) {
-        	macros::EFFECT(fighter, Hash40::new("sys_crown"), Hash40::new("top"), 5.5, 0, 0, 0, 0, 0, 0.4, 0, 0, 0, 0, 0, 0, false);
-			macros::LANDING_EFFECT(fighter, Hash40::new("sys_soil_landing"), Hash40::new("top"), 5.5, 0, 0, 0, 0, 0, 0.55, 0, 0, 0, 0, 0, 0, false);
+        	macros::EFFECT(fighter, Hash40::new("sys_crown"), Hash40::new("top"), 2.5, 0, 0, 0, 0, 0, 0.4, 0, 0, 0, 0, 0, 0, false);
+			macros::LANDING_EFFECT(fighter, Hash40::new("sys_soil_landing"), Hash40::new("top"), 2.5, 0, 0, 0, 0, 0, 0.55, 0, 0, 0, 0, 0, 0, false);
 		}
 		frame(fighter.lua_state_agent, 29.0);
 		if macros::is_excute(fighter) {

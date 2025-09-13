@@ -175,7 +175,16 @@ unsafe extern "C" fn toad_upb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 4.0);
 		if macros::is_excute(fighter) {
+			macros::LANDING_EFFECT(fighter, Hash40::new("sys_v_smoke_a"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.5, 0, 0, 0, 0, 0, 0, false);
 			macros::LANDING_EFFECT(fighter, Hash40::new("sys_landing_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.2, 0, 0, 0, 0, 0, 0, false);
+		}
+		frame(fighter.lua_state_agent, 5.0);
+		for _ in 0..4 {
+			if macros::is_excute(fighter) {
+				macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("top"), 0, 10.0, 0, 0, 0, 0, 0.6, true, *EF_FLIP_YZ);
+				macros::LAST_EFFECT_SET_RATE(fighter, 1.3);
+			}
+			wait(fighter.lua_state_agent, 10.0);
 		}
 	}
 	unsafe extern "C" fn toad_upb_screw(fighter: &mut L2CAgentBase) {

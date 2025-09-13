@@ -161,16 +161,28 @@ unsafe extern "C" fn toad(fighter : &mut L2CFighterCommon) {
 					}
 				}
 			}
-			if status_kind == *FIGHTER_STATUS_KIND_LANDING_FALL_SPECIAL && StatusModule::prev_status_kind(boma, 1) == *FIGHTER_MURABITO_STATUS_KIND_SPECIAL_HI_DETACH {
-				if MotionModule::frame(boma) < 20.0 {
-    				ModelModule::set_mesh_visibility(fighter.module_accessor,Hash40::new("propeller"),true);
-    				ModelModule::set_mesh_visibility(fighter.module_accessor,Hash40::new("mushroom"),false);
-				} else {
-    				ModelModule::set_mesh_visibility(fighter.module_accessor,Hash40::new("propeller"),false);
-    				ModelModule::set_mesh_visibility(fighter.module_accessor,Hash40::new("mushroom"),true);
+			if status_kind == *FIGHTER_STATUS_KIND_LANDING_FALL_SPECIAL {
+				if StatusModule::prev_status_kind(boma, 1) == *FIGHTER_MURABITO_STATUS_KIND_SPECIAL_HI_DETACH {
+					if MotionModule::frame(boma) < 20.0 {
+						ModelModule::set_mesh_visibility(fighter.module_accessor,Hash40::new("propeller"),true);
+						ModelModule::set_mesh_visibility(fighter.module_accessor,Hash40::new("mushroom"),false);
+					} else {
+						ModelModule::set_mesh_visibility(fighter.module_accessor,Hash40::new("propeller"),false);
+						ModelModule::set_mesh_visibility(fighter.module_accessor,Hash40::new("mushroom"),true);
+					}
+					if (MotionModule::frame(boma) as i32) == 20 {
+						macros::EFFECT(fighter, Hash40::new("sys_erace_smoke"), Hash40::new("head"), 0, 0, 4.4, 0, 0, 0, 2.0, 0, 0, 0, 0, 0, 0, false);
+					}
 				}
-				if (MotionModule::frame(boma) as i32) == 20 {
-					macros::EFFECT(fighter, Hash40::new("sys_erace_smoke"), Hash40::new("head"), 0, 0, 4.4, 0, 0, 0, 2.0, 0, 0, 0, 0, 0, 0, false);
+				if StatusModule::prev_status_kind(boma, 1) == *FIGHTER_MURABITO_STATUS_KIND_SPECIAL_LW_PLANT_FAIL {
+					if MotionModule::frame(boma) as i32 == 1 {
+						macros::EFFECT(fighter, Hash40::new("sys_crown"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, false);
+						macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 10.0, /*Angle*/ 361, /*KBG*/ 30, /*FKB*/ 0, /*BKB*/ 80, /*Size*/ 9.0, /*X*/ 0.0, /*Y*/ 9.0, /*Z*/ 12.5, /*X2*/ Some(0.0), /*Y2*/ Some(9.0), /*Z2*/ Some(-12.5), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_G, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_BODY);
+					} else {
+						if MotionModule::frame(boma) > 3.0 {
+							AttackModule::clear_all(boma);
+						}
+					}
 				}
 			}
 			if ![*FIGHTER_STATUS_KIND_THROW].contains(&status_kind) {
@@ -394,6 +406,7 @@ unsafe extern "C" fn toad(fighter : &mut L2CFighterCommon) {
 						} else {
 							MotionModule::change_motion(boma, smash::phx::Hash40::new("special_air_s_loop"), 0.0, 1.0, false, 0.0, false, false);
 						}
+						macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_greenshell_trace"), Hash40::new("throw"), 0, 0, 0, 0, 0, 0, 1, true);
 					}
 					if KineticModule::get_kinetic_type(boma) != *FIGHTER_KINETIC_TYPE_MOTION_FALL {
 						KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_MOTION_FALL);
