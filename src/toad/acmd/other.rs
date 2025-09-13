@@ -371,6 +371,7 @@ unsafe extern "C" fn toad_win_snd(fighter: &mut L2CAgentBase) {
 unsafe extern "C" fn toad_win1(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
+			macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_greenshell_trace"), Hash40::new("throw"), 0, 0, 0, 0, 0, 0, 1, true);
 			ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_MURABITO_GENERATE_ARTICLE_BEETLE,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
 		}
 }	
