@@ -192,8 +192,8 @@ unsafe extern "C" fn toad_usmash_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 13.0);
 		if macros::is_excute(fighter) {
-			macros::EFFECT(fighter, Hash40::new_raw(0x12de01e4e5), Hash40::new("havel"), 0, 0, 0, 0, 0, 0, 0.75, 0, 0, 0, 0, 0, 0, false);
-			macros::EFFECT(fighter, Hash40::new_raw(0x12de01e4e5), Hash40::new("havel"), 0, 0, 0, 270, 0, 0, 0.75, 0, 0, 0, 0, 0, 0, false);
+			macros::EFFECT(fighter, Hash40::new("sys_soil_landing"), Hash40::new("havel"), 0, 0, 0, 0, 0, 0, 0.75, 0, 0, 0, 0, 0, 0, false);
+			macros::EFFECT(fighter, Hash40::new("sys_soil_landing"), Hash40::new("havel"), 0, 0, 0, 270, 0, 0, 0.75, 0, 0, 0, 0, 0, 0, false);
 		}
 		frame(fighter.lua_state_agent, 48.0);
 		if macros::is_excute(fighter) {

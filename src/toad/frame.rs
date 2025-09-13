@@ -133,6 +133,8 @@ unsafe extern "C" fn toad(fighter : &mut L2CFighterCommon) {
 					if upb_loop_frame == 0 {
 						macros::EFFECT_FOLLOW_FLIP_ALPHA(fighter, Hash40::new("sys_attack_speedline"), Hash40::new("sys_attack_speedline"), Hash40::new("top"), 0, 24, 1, 90, 0, 0, 1.4, true, *EF_FLIP_YZ, 0.3);
 						macros::LAST_EFFECT_SET_RATE(fighter, 8.0/14.0);
+						macros::EFFECT_FOLLOW_FLIP_ALPHA(fighter, Hash40::new("sys_attack_speedline"), Hash40::new("sys_attack_speedline"), Hash40::new("top"), 0, 40, 1, 90, 0, 0, 1.4, true, *EF_FLIP_YZ, 0.3);
+						macros::LAST_EFFECT_SET_RATE(fighter, 8.0/14.0);
 						macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("top"), 0, 10.0, 0, 0, 0, 0, 0.7, true, *EF_FLIP_YZ);
 						macros::LAST_EFFECT_SET_RATE(fighter, 1.3);
 					}
@@ -173,8 +175,7 @@ unsafe extern "C" fn toad(fighter : &mut L2CFighterCommon) {
 					if (MotionModule::frame(boma) as i32) == 20 {
 						macros::EFFECT(fighter, Hash40::new("sys_erace_smoke"), Hash40::new("head"), 0, 0, 4.4, 0, 0, 0, 2.0, 0, 0, 0, 0, 0, 0, false);
 					}
-				}
-				if StatusModule::prev_status_kind(boma, 1) == *FIGHTER_MURABITO_STATUS_KIND_SPECIAL_LW_PLANT_FAIL {
+				} else if TO_FALL[ENTRY_ID]{
 					if MotionModule::frame(boma) as i32 == 1 {
 						macros::EFFECT(fighter, Hash40::new("sys_crown"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, false);
 						macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 10.0, /*Angle*/ 361, /*KBG*/ 30, /*FKB*/ 0, /*BKB*/ 80, /*Size*/ 9.0, /*X*/ 0.0, /*Y*/ 9.0, /*Z*/ 12.5, /*X2*/ Some(0.0), /*Y2*/ Some(9.0), /*Z2*/ Some(-12.5), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_G, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_BODY);
@@ -220,7 +221,11 @@ unsafe extern "C" fn toad(fighter : &mut L2CFighterCommon) {
                     let speed = smash::phx::Vector3f { x: 0.0, y: 0.6, z: 0.0 };
                     KineticModule::add_speed(boma, &speed);
 				};
+				TO_FALL[ENTRY_ID] = true;
 			};
+			if ![hash40("special_air_lw_plant_failure"), hash40("landing_fall_special")].contains(&MotionModule::motion_kind(boma))  {
+				TO_FALL[ENTRY_ID] = false;
+			}
 			if [*FIGHTER_MURABITO_STATUS_KIND_SPECIAL_LW_WATER_LANDING, *FIGHTER_MURABITO_STATUS_KIND_SPECIAL_LW_WATER_WAIT].contains(&status_kind) {
 				if situation_kind == *SITUATION_KIND_GROUND {
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_LANDING, true);
@@ -376,6 +381,9 @@ unsafe extern "C" fn toad(fighter : &mut L2CFighterCommon) {
 			   		damage!(fighter, *MA_MSC_DAMAGE_DAMAGE_NO_REACTION, *DAMAGE_NO_REACTION_MODE_NORMAL, 0.0);
 				}
 			}
+			if [hash40("special_s_jump"), hash40("special_s_loop"), hash40("special_air_s_loop")].contains(&motion_kind) && MotionModule::frame(boma) < 2.0 {
+				macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_greenshell_trace"), Hash40::new("throw"), 0, 0, 0, 0, 0, 0, 1, true);
+			}
 			if [*FIGHTER_STATUS_KIND_SPECIAL_S].contains(&status_kind) {
 				CAN_SIDEB[ENTRY_ID] = 1;
 				if [hash40("special_s"), hash40("special_air_s")].contains(&motion_kind) {
@@ -423,6 +431,7 @@ unsafe extern "C" fn toad(fighter : &mut L2CFighterCommon) {
 						
 						if situation_kind == *SITUATION_KIND_GROUND {
 							StatusModule::change_status_request_from_script(boma, *FIGHTER_MURABITO_STATUS_KIND_SPECIAL_S_JUMP, true);
+							macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_greenshell_trace"), Hash40::new("throw"), 0, 0, 0, 0, 0, 0, 1, true);
 						} else {
 							StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_JUMP_AERIAL, true);
 							let speed = smash::phx::Vector3f { x:1.5, y: -0.5, z: 0.0 };

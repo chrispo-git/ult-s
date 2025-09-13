@@ -179,12 +179,12 @@ unsafe extern "C" fn toad_upb(fighter: &mut L2CAgentBase) {
 			macros::LANDING_EFFECT(fighter, Hash40::new("sys_landing_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.2, 0, 0, 0, 0, 0, 0, false);
 		}
 		frame(fighter.lua_state_agent, 5.0);
-		for _ in 0..4 {
+		for _ in 0..8 {
 			if macros::is_excute(fighter) {
-				macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("top"), 0, 10.0, 0, 0, 0, 0, 0.6, true, *EF_FLIP_YZ);
+				macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("top"), 0, 22.0, 0, 0, 0, 0, 0.6, true, *EF_FLIP_YZ);
 				macros::LAST_EFFECT_SET_RATE(fighter, 1.3);
 			}
-			wait(fighter.lua_state_agent, 10.0);
+			wait(fighter.lua_state_agent, 5.0);
 		}
 	}
 	unsafe extern "C" fn toad_upb_screw(fighter: &mut L2CAgentBase) {
@@ -198,6 +198,8 @@ unsafe extern "C" fn toad_upb(fighter: &mut L2CAgentBase) {
 		for _ in 0..i32::MAX {
 			if macros::is_excute(fighter) {
 				macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("top"), 0, 10.0, 0, 0, 0, 0, 0.7, true, *EF_FLIP_YZ);
+				macros::LAST_EFFECT_SET_RATE(fighter, 1.3);
+				macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("top"), 0, 22.0, 0, 0, 0, 0, 0.6, true, *EF_FLIP_YZ);
 				macros::LAST_EFFECT_SET_RATE(fighter, 1.3);
 			}
 			wait(fighter.lua_state_agent, 1.0);
@@ -218,6 +220,8 @@ unsafe extern "C" fn toad_upb(fighter: &mut L2CAgentBase) {
 			wait(fighter.lua_state_agent, 1.0);
 			if macros::is_excute(fighter) {
 				macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("top"), 0, 2.0, 0, 0, 0, 0, 0.3, true, *EF_FLIP_YZ);
+				macros::LAST_EFFECT_SET_RATE(fighter, 1.3);
+				macros::EFFECT_FOLLOW_FLIP(fighter, Hash40::new("sys_spin_wind"), Hash40::new("sys_spin_wind"), Hash40::new("top"), 0, 22.0, 0, 0, 0, 0, 0.6, true, *EF_FLIP_YZ);
 				macros::LAST_EFFECT_SET_RATE(fighter, 1.3);
 			}
 			wait(fighter.lua_state_agent, 10.0);
