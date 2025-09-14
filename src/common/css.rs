@@ -1,11 +1,23 @@
 
 use crate::util::*;
+use std::path::Path;
+#[cfg(feature = "main_nro")]
+use skyline_web::dialog_ok::DialogOk;
+static mut IS_UNPRESSED : bool = false;
 #[skyline::hook(offset = 0x1792dc0, inline)]
 unsafe fn on_rule_selection(_: &skyline::hooks::InlineCtx) {
     println!("We Are On Rule Select");
     if ninput::any::is_down(ninput::Buttons::R) {
         println!("R Pressed!");
-        show_gamemodes();
+        if !is_on_ryujinx() {
+            show_gamemodes();
+        } else {
+            println!("Emu Mode!");
+            add_gamemode("airdash".to_string());
+            add_gamemode("parry".to_string());
+            add_gamemode("hitfall".to_string());
+            add_gamemode("fgmode".to_string());
+        }
     } else {
         reset_gamemodes();
     }
@@ -15,8 +27,18 @@ unsafe fn on_rule_selection(_: &skyline::hooks::InlineCtx) {
 unsafe fn css_main_loop(arg: *const CharaSelect) {
     {
         if ninput::any::is_down(ninput::Buttons::MINUS) {
-            println!("Minus Pressed!");
-            show_mod_settings();
+            if !IS_UNPRESSED {
+                println!("Minus Pressed!");
+                if !is_on_ryujinx() {
+                    show_mod_settings();
+                } else {
+                    println!("Emu Mode!");
+                    show_mod_settings_emu();
+                }
+            }
+            IS_UNPRESSED = true;
+        } else {
+            IS_UNPRESSED = false;
         }
         original!()(arg)
     }
@@ -66,6 +88,43 @@ pub fn show_gamemodes() {
         }
         Err(_) => {
             println!("Uh oh! Error getting options!");
+        }
+    }
+	unsafe {
+		update_enabled_checks();
+	}
+}
+pub fn show_mod_settings_emu() {
+    let path = "sd:/ultimate/ult-s/sys-flags/";
+    let path1 = "sd:/ultimate/ult-s/";
+    println!("Emulator Mod Settings.");
+    let is_toggle_off = Path::new("sd:/ultimate/ult-s/sys-flags/mechanics.flag").is_file();
+    println!("Is Toggle Off? {}", is_toggle_off);
+    match std::fs::create_dir(path1) {
+        Ok(_) => println!("ult-s Folder Created!"),
+        Err(_) => {
+            println!("ult-s folder already exists!");
+        }
+    }
+    match std::fs::create_dir(path) {
+        Ok(_) => println!("Settings Folder Created!"),
+        Err(_) => {
+            match std::fs::remove_dir_all(path) {
+                Ok(_) => println!("Settings reset successfully!"),
+                Err(_) => println!("Error resetting settings!")
+            }
+            std::fs::create_dir(path);
+        }
+    }
+    if !is_toggle_off {
+        std::fs::File::create(format!("{}mechanics.flag", path)).unwrap();
+        std::fs::File::create(format!("{}sh.flag", path)).unwrap();
+        println!("Toggling On!");
+    } else {
+        println!("Toggling Off!");
+        match std::fs::remove_dir_all(path) {
+            Ok(_) => println!("Settings reset successfully!"),
+            Err(_) => println!("Error resetting settings!")
         }
     }
 	unsafe {
