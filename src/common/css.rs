@@ -1,6 +1,8 @@
 
 use crate::util::*;
 use std::path::Path;
+use std::fs::*;
+use std::io::*;
 #[cfg(feature = "main_nro")]
 use skyline_web::dialog_ok::DialogOk;
 static mut IS_UNPRESSED : bool = false;
@@ -13,10 +15,7 @@ unsafe fn on_rule_selection(_: &skyline::hooks::InlineCtx) {
             show_gamemodes();
         } else {
             println!("Emu Mode!");
-            add_gamemode("airdash".to_string());
-            add_gamemode("parry".to_string());
-            add_gamemode("hitfall".to_string());
-            add_gamemode("fgmode".to_string());
+            show_gamemodes_emu();
         }
     } else {
         reset_gamemodes();
@@ -53,6 +52,34 @@ lazy_static! {
     static ref COMMON_CSS: Vec<u8> = std::fs::read("mods:/ui/docs/common.css").unwrap();
     static ref MENU_CSS: Vec<u8> = std::fs::read("mods:/ui/docs/menu.css").unwrap();
     static ref TOGGLE_JS: Vec<u8> = std::fs::read("mods:/ui/docs/toggles.js").unwrap();
+}
+pub fn show_gamemodes_emu() {
+    unsafe {
+        reset_gamemodes();
+        let path = "sd:/ultimate/ult-s/gamemode-default.txt";
+        if !Path::new(path).exists() {
+            let mut file = File::create(path);
+            file.expect("Can't Write To Gamemodes!").write_all("airdash\nparry\nhitfall\nfgmode".as_bytes());
+            println!("Default File Made");
+        }
+        let mut gamemodes = match std::fs::read_to_string(path) {
+            Ok(gamemodes) => gamemodes.trim().replace("\n", "-").to_string(),
+            Err(_) => {
+                String::from("airdash-parry-hitfall-fgmode")
+            }
+        };
+        if gamemodes.is_empty() {
+            return;
+        }
+        let options = gamemodes.split("-");
+
+        for i in options {
+            println!("{}", i);
+            unsafe {
+                add_gamemode(i.to_string());
+            }
+        }
+    }
 }
 pub fn show_gamemodes() {
     unsafe {

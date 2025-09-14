@@ -63,7 +63,22 @@ and follow these instructions: https://www.guru3d.com/page/how-to-use-rivatuner-
 Q: "I'm trying to access Ultimate S Settings and custom gamemodes and I'm not getting the menu!"
 A: You're likely on emulator, which doesn't support web menus. 
 Pressing Ultimate S Settings will toggle both Ultimate S Mechanics and Shorthop Aerial Macro as a workaround.
-Pressing custom gamemodes will let you play with Airdash Mode, Parry Mode, Hitfall Mode and FG Mode.
+If you want to remove one of these you can go to "ultimate/ult-s/sys-flags/" and remove either "mecahnics.flag" or "sh.flag"
+
+Pressing custom gamemodes will let you play with Airdash Mode, Parry Mode, Hitfall Mode and Fighter Mode by default. 
+If you want to change this, go to "ultimate/ult-s/gamemode-default.txt" and add the modes you want to play:
+"turbo" - Turbo Mode
+"vampire" - Vampire Mode 
+"fgmode" - Fighter Mode 
+"sixtyfour" - Smash 64 Mode 
+"superboss" - Superboss Mode 
+"airdash" - Airdash Mode
+"angles" - Random Angles Mode
+"hitfall" - Hitfall Mode 
+"itemduel" - Item Duel Mode 
+"hitstun" - Hitstun Mode 
+"effects" - Random Effects Mode 
+"parry" - Parry Mode
 
 Q: "The game is just vanilla!"
 A: Try going through these steps:
