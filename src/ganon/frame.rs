@@ -21,6 +21,10 @@ pub fn install() {
     .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
         .on_line(Main, ganon_float)
         .install();
+    Agent::new("kirby")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+        .on_line(Main, ganon_float)
+        .install();
 }
 		
 pub(crate) fn check_jump(boma: &mut smash::app::BattleObjectModuleAccessor) -> bool {
