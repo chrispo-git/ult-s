@@ -308,6 +308,9 @@ unsafe extern "C" fn util_update(fighter : &mut L2CFighterCommon) {
 			HAS_ENABLE_100_ON[ENTRY_ID] = false;
 			FULL_HOP_ENABLE_DELAY[ENTRY_ID] = 0;
 			STICK_DIR[ENTRY_ID] = 0.0;
+			if smash::app::smashball::is_training_mode() {
+				reset_gamemodes();
+			}
 		};
 		if FULL_HOP_ENABLE_DELAY[ENTRY_ID] > 0 {
 			FULL_HOP_ENABLE_DELAY[ENTRY_ID] -= 1;
