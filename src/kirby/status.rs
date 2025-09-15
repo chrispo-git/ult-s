@@ -14,6 +14,7 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use crate::kirby::*;
 use super::*;
+use std::path::Path;
 
 pub fn install() {
 	Agent::new("kirby")

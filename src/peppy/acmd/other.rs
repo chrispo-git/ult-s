@@ -81,9 +81,6 @@ unsafe extern "C" fn peppy_win1_eff(agent: &mut L2CAgentBase) {
     }
 }
 unsafe extern "C" fn peppy_win1_sound(agent: &mut L2CAgentBase) {
-    if macros::is_excute(agent) {
-        macros::PLAY_SE(agent, Hash40::new("vc_falco_win01"));
-    }
 }
 unsafe extern "C" fn peppy_win2_eff(agent: &mut L2CAgentBase) {
 }
