@@ -662,7 +662,7 @@ pub(crate) unsafe fn is_mechanics_enabled() -> bool {
 pub(crate) unsafe fn update_enabled_checks() -> () {
 	IS_MECHANICS_ENABLED = !Path::new("sd:/ultimate/ult-s/sys-flags/mechanics.flag").is_file();
 	IS_SMALL_HOLD_BUFFER = Path::new("sd:/ultimate/ult-s/sys-flags/hold.flag").is_file();
-	IS_SH_AERIAL = !Path::new("sd:/ultimate/ult-s/sys-flags/sh.flag").is_file();
+	IS_SH_AERIAL = Path::new("sd:/ultimate/ult-s/sys-flags/sh.flag").is_file();
 
 	let all: Vec<i32> = vec![-1];
 	if IS_MECHANICS_ENABLED {
