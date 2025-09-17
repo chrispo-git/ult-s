@@ -380,6 +380,7 @@ pub extern "C" fn main() {
             allow_ui_chara_hash_online(0xf1062d2e5); //rayman
             allow_ui_chara_hash_online(0xda4cbcb12); //toad
             allow_ui_chara_hash_online(0x12e2fb36c6); //bomberman
+            allow_ui_chara_hash_online(smash::hash40("ui_chara_peppy")); //peppy
         }
     }
 	
