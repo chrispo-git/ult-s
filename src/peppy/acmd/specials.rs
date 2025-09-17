@@ -137,7 +137,7 @@ unsafe extern "C" fn peppy_neutralb_shoot_snd(agent: &mut L2CAgentBase) {
 }	
 unsafe extern "C" fn peppy_neutralb_shoot_eff(agent: &mut L2CAgentBase) {
     if macros::is_excute(agent) {
-        macros::LANDING_EFFECT(agent, Hash40::new("sys_dash_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
+        macros::LANDING_EFFECT(agent, Hash40::new("sys_dash_smoke"), Hash40::new("top"), -4, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, false);
     }
 }	
 unsafe extern "C" fn peppy_tether_end(agent: &mut L2CAgentBase) {

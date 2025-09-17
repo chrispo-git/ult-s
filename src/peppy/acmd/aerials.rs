@@ -26,6 +26,7 @@ pub fn install() {
     .acmd("effect_attackairnpeppy", peppy_nair_eff, Priority::Low)    
     .acmd("sound_attackairnpeppy", peppy_nair_snd, Priority::Low)    
     .acmd("game_attackairlwpeppy", peppy_dair, Priority::Low)    
+    .acmd("effect_attackairlwpeppy", peppy_dair_eff, Priority::Low)    
     .acmd("sound_attackairlwpeppy", peppy_dair_snd, Priority::Low)   
     .acmd("game_attackairlw2peppy", peppy_dair2, Priority::Low)   
     .acmd("sound_attackairlw2peppy", peppy_dair2_snd, Priority::Low)   
@@ -62,7 +63,7 @@ unsafe extern "C" fn peppy_fair(agent: &mut L2CAgentBase) {
 unsafe extern "C" fn peppy_fair_eff(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 13.0);
     if macros::is_excute(agent) {
-        macros::EFFECT_FOLLOW(agent, Hash40::new("sys_attack_arc_d"), Hash40::new("top"), 2, 8.5, 2.2, -8.5, 17, 9.5, 1.25, true);
+        macros::EFFECT_FOLLOW(agent, Hash40::new("sys_attack_arc_d"), Hash40::new("top"), 2, 9, 2.3, -8.5, 17, 9.5, 1.25, true);
         macros::LAST_EFFECT_SET_RATE(agent, 1.8);
     }
 }	
@@ -174,6 +175,12 @@ unsafe extern "C" fn peppy_dair_snd(agent: &mut L2CAgentBase) {
         macros::PLAY_SE(agent, Hash40::new("se_common_swing_02"));
     }
 }
+unsafe extern "C" fn peppy_dair_eff(agent: &mut L2CAgentBase) {
+    frame(agent.lua_state_agent, 8.0);
+    if macros::is_excute(agent) {
+        macros::EFFECT_ALPHA(agent, Hash40::new("sys_attack_impact"), Hash40::new("footl"), 0, 0, 0, 0, 0, 0, 0.5, 0, 0, 0, 0, 0, 0, false, 0.5);
+    }
+}
 unsafe extern "C" fn peppy_dair2(agent: &mut L2CAgentBase) {
     if macros::is_excute(agent) {
         WorkModule::on_flag(agent.module_accessor, *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
@@ -268,12 +275,12 @@ unsafe extern "C" fn peppy_uair(agent: &mut L2CAgentBase) {
 unsafe extern "C" fn peppy_uair_eff(agent: &mut L2CAgentBase) {
     frame(agent.lua_state_agent, 5.0);
     if macros::is_excute(agent) {
-        macros::EFFECT_FOLLOW(agent, Hash40::new("sys_attack_arc_d"), Hash40::new("top"), -1.5, 6, -0.2, 0, 70, 100, 0.75, true);
+        macros::EFFECT_FOLLOW(agent, Hash40::new("sys_attack_arc_d"), Hash40::new("top"), -1.5, 7.2, -0.2, 0, 70, 100, 0.75, true);
         macros::LAST_EFFECT_SET_RATE(agent, 2);
     }
     frame(agent.lua_state_agent, 12.0);
     if macros::is_excute(agent) {
-        macros::EFFECT_FOLLOW(agent, Hash40::new("sys_attack_arc_d"), Hash40::new("top"), -1.5, 6, -0.2, 0, 70, 100, 0.75, true);
+        macros::EFFECT_FOLLOW(agent, Hash40::new("sys_attack_arc_d"), Hash40::new("top"), -1.5, 7.2, -0.2, 0, 70, 100, 0.75, true);
         macros::LAST_EFFECT_SET_RATE(agent, 2);
     }
 }
