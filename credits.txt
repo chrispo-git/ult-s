@@ -16,7 +16,8 @@ Ella - Character Balance
 -Added Character Credits-
 
 Toad:
-chrispo - Coding, Animation, Modelling, Render
+chrispo - Coding, Animation, Modelling
+MonadoJo - Render
 mRama - Animation
 Eriizer - Modelling
 Central - Modelling
