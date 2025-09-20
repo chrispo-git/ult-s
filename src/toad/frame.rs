@@ -383,6 +383,12 @@ unsafe extern "C" fn toad(fighter : &mut L2CFighterCommon) {
 			   		damage!(fighter, *MA_MSC_DAMAGE_DAMAGE_NO_REACTION, *DAMAGE_NO_REACTION_MODE_NORMAL, 0.0);
 				}
 			}
+			if POP_FALLBACK[ENTRY_ID] > 0 {
+				POP_FALLBACK[ENTRY_ID] -= 1;
+			}
+			if POP_FALLBACK[ENTRY_ID] == 1 {
+				IS_POP_MODE[ENTRY_ID] = false;
+			}
 			if [hash40("special_s_jump"), hash40("special_s_loop"), hash40("special_air_s_loop")].contains(&motion_kind) && MotionModule::frame(boma) < 2.0 {
 				macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_greenshell_trace"), Hash40::new("throw"), 0, 0, 0, 0, 0, 0, 1, true);
 			}

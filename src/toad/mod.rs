@@ -23,6 +23,7 @@ static mut LAND_SIDEB_BOUNCE: [i32; 8] = [0; 8];
 static mut BEFORE_SIDEB_BOUNCE: [i32; 8] = [0; 8];
 static mut IS_POP_MODE: [bool; 8] = [false; 8];
 static mut START_POP: [bool; 8] = [false; 8];
+static mut POP_FALLBACK: [i32; 8] = [0; 8];
 static mut TO_FALL: [bool; 8] = [false; 8];
 static mut HAS_DOWNB: [bool; 8] = [false; 8];
 static mut HAS_DEADED: [bool; 8] = [false; 8];

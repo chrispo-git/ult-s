@@ -291,7 +291,39 @@ unsafe extern "C" fn regular_exec(weapon: &mut L2CWeaponCommon) -> L2CValue {
 }
 
 unsafe extern "C" fn regular_end(weapon: &mut L2CWeaponCommon) -> L2CValue {
+    let owner_id = WorkModule::get_int(weapon.module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LINK_OWNER) as u32;
+    let owner_boma = smash::app::sv_battle_object::module_accessor(owner_id);
+	let ENTRY_ID = WorkModule::get_int(&mut *owner_boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+    IS_POP_MODE[ENTRY_ID] = false;
     0.into()
+}
+unsafe extern "C" fn special_n_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
+        StatusModule::init_settings(
+            fighter.module_accessor,
+            smash::app::SituationKind(*SITUATION_KIND_NONE),
+            *FIGHTER_KINETIC_TYPE_NONE,
+            *GROUND_CORRECT_KIND_KEEP as u32,
+            smash::app::GroundCliffCheckKind(*GROUND_CLIFF_CHECK_KIND_NONE),
+            true,
+            *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_FLAG,
+            *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_INT,
+            *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_FLOAT,
+            0
+        );
+    
+        FighterStatusModuleImpl::set_fighter_status_data(
+            fighter.module_accessor,
+            false,
+            *FIGHTER_TREADED_KIND_NO_REAC,
+            false,
+            false,
+            false,
+            (*FIGHTER_LOG_MASK_FLAG_ATTACK_KIND_SPECIAL_N | *FIGHTER_LOG_MASK_FLAG_ATTACK_KIND_AIR_LASSO | *FIGHTER_LOG_MASK_FLAG_ACTION_TRIGGER_ON) as u64,
+            *FIGHTER_STATUS_ATTR_START_TURN as u32,
+            *FIGHTER_POWER_UP_ATTACK_BIT_SPECIAL_N as u32,
+            0
+        );
+        0.into()
 }
 unsafe extern "C" fn special_n_main(fighter: &mut L2CFighterCommon) -> L2CValue {
     if fighter.global_table[0x16].get_i32() == *SITUATION_KIND_GROUND {
@@ -356,6 +388,7 @@ pub fn install() {
         .status(Main, *FIGHTER_STATUS_KIND_CATCH_PULL, main_catch_pull)
         .status(Main, *FIGHTER_STATUS_KIND_CATCH_WAIT, main_catch_wait)
         //.status(Main, *FIGHTER_STATUS_KIND_THROW, main_throw)
+        .status(Pre, *FIGHTER_STATUS_KIND_SPECIAL_N, special_n_pre)
         .status(Main, *FIGHTER_STATUS_KIND_SPECIAL_N, special_n_main)
         .status(Main, *FIGHTER_STATUS_KIND_THROW_KIRBY, main_throw_kirby)
         .status(Pre, *FIGHTER_STATUS_KIND_THROW_KIRBY, throw_pre)
@@ -374,5 +407,6 @@ pub fn install() {
         .status(Main, *WEAPON_MURABITO_FLOWERPOT_STATUS_KIND_THROWED, regular_main)
         .status(Exec, *WEAPON_MURABITO_FLOWERPOT_STATUS_KIND_THROWED, regular_exec)
         .status(End, *WEAPON_MURABITO_FLOWERPOT_STATUS_KIND_THROWED, regular_end)
+        .status(Exit, *WEAPON_MURABITO_FLOWERPOT_STATUS_KIND_THROWED, regular_end)
         .install();
 } 
