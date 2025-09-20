@@ -13,6 +13,7 @@
   <int hash="escape_penalty_recovry_frame">1</int>
   <float hash="escape_penalty_motion_rate">0</float>
   <float hash="escape_f_penalty_motion_rate">0</float>
+  <float hash="damage_ice_frame_mul">2.0</float>
   <float hash="damage_ice_frame_max">90.0</float>
   <float hash="damage_ice_frame_recovery_clatter">0.0</float>
   <float hash="damage_ice_damage_dec_mul">1.0</float>
