@@ -162,7 +162,9 @@ pub unsafe fn change_status_request_hook(boma: &mut smash::app::BattleObjectModu
 			if !is_mechanics_enabled() {
 				return original!()(boma, status_kind, arg3);
 			}
-			original!()(boma, *FIGHTER_STATUS_KIND_TREAD_FALL, true)
+            WorkModule::set_float(boma, 8.0, *FIGHTER_INSTANCE_WORK_ID_FLOAT_DAMAGE_REACTION_FRAME);
+            WorkModule::set_float(boma, 9.0, *FIGHTER_INSTANCE_WORK_ID_FLOAT_DAMAGE_REACTION_FRAME_LAST);
+			original!()(boma, *FIGHTER_STATUS_KIND_DAMAGE_FALL, true)
 		}else if next_status == *FIGHTER_STATUS_KIND_TURN && curr_status == *FIGHTER_STATUS_KIND_LANDING{
 			if !is_mechanics_enabled() {
 				return original!()(boma, status_kind, arg3);
@@ -224,6 +226,13 @@ pub unsafe fn change_status_request_script_hook(boma: &mut smash::app::BattleObj
 			return 0 as u64
 		} else if smash::app::utility::get_kind(boma) == *FIGHTER_KIND_TRAIL && [*FIGHTER_TRAIL_STATUS_KIND_ATTACK_AIR_F].contains(&status_kind) && Path::new("sd:/ultimate/ult-s/trail.flag").is_file(){
 			return 0 as u64
+		}  else if next_status == *FIGHTER_STATUS_KIND_ICE_JUMP {
+			if !is_mechanics_enabled() {
+				return original!()(boma, status_kind, arg3);
+			}
+            WorkModule::set_float(boma, 8.0, *FIGHTER_INSTANCE_WORK_ID_FLOAT_DAMAGE_REACTION_FRAME);
+            WorkModule::set_float(boma, 9.0, *FIGHTER_INSTANCE_WORK_ID_FLOAT_DAMAGE_REACTION_FRAME_LAST);
+			original!()(boma, *FIGHTER_STATUS_KIND_DAMAGE_FALL, true)
 		}else {
 			original!()(boma, status_kind, arg3)
 		}
