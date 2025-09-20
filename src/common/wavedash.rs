@@ -11,6 +11,7 @@ use smash::phx::Vector2f;
 use crate::util::*;
 use std::os::raw::c_int;
 use std::os::raw::c_ulong;
+use std::{fs, path::Path};
 
 static mut IS_WAVEDASH: [bool; 8] = [false; 8];
 static mut FORCE_WAVEDASH: [bool; 8] = [false; 8];
@@ -157,7 +158,12 @@ pub unsafe fn change_status_request_hook(boma: &mut smash::app::BattleObjectModu
 			}else {
 				original!()(boma, status_kind, arg3)
 			}
-		} else if next_status == *FIGHTER_STATUS_KIND_TURN && curr_status == *FIGHTER_STATUS_KIND_LANDING{
+		}  else if next_status == *FIGHTER_STATUS_KIND_ICE_JUMP {
+			if !is_mechanics_enabled() {
+				return original!()(boma, status_kind, arg3);
+			}
+			original!()(boma, *FIGHTER_STATUS_KIND_TREAD_FALL, true)
+		}else if next_status == *FIGHTER_STATUS_KIND_TURN && curr_status == *FIGHTER_STATUS_KIND_LANDING{
 			if !is_mechanics_enabled() {
 				return original!()(boma, status_kind, arg3);
 			}
@@ -165,9 +171,9 @@ pub unsafe fn change_status_request_hook(boma: &mut smash::app::BattleObjectModu
 		}  else if [*FIGHTER_STATUS_KIND_DOWN, *FIGHTER_STATUS_KIND_DOWN_WAIT, *FIGHTER_STATUS_KIND_SLIP_WAIT, *FIGHTER_STATUS_KIND_DAMAGE].contains(&curr_status) && next_status == *FIGHTER_STATUS_KIND_FALL{
 			//Clears buffer when sliding off in a damage state to prevent accidental airdodges/aerials
 			original!()(boma, status_kind, true)
-		} else if smash::app::utility::get_kind(boma) == *FIGHTER_KIND_TRAIL && [*FIGHTER_TRAIL_STATUS_KIND_ATTACK_AIR_F].contains(&status_kind){
+		} else if smash::app::utility::get_kind(boma) == *FIGHTER_KIND_TRAIL && [*FIGHTER_TRAIL_STATUS_KIND_ATTACK_AIR_F].contains(&status_kind) && Path::new("sd:/ultimate/ult-s/trail.flag").is_file(){
 			return 0 as u64
-		} else if smash::app::utility::get_kind(boma) == *FIGHTER_KIND_MURABITO && [*FIGHTER_MURABITO_STATUS_KIND_SPECIAL_N_POCKET].contains(&status_kind){
+		} else if smash::app::utility::get_kind(boma) == *FIGHTER_KIND_MURABITO && [*FIGHTER_MURABITO_STATUS_KIND_SPECIAL_N_POCKET].contains(&status_kind) && Path::new("sd:/ultimate/ult-s/murabito.flag").is_file(){
 			original!()(boma, *FIGHTER_STATUS_KIND_ITEM_THROW, arg3)
 		} else {
 			original!()(boma, status_kind, arg3)
@@ -214,20 +220,9 @@ pub unsafe fn change_status_request_script_hook(boma: &mut smash::app::BattleObj
 			}else {
 				original!()(boma, status_kind, arg3)
 			}
-		} else if [*FIGHTER_STATUS_KIND_ATTACK_S4_START, *FIGHTER_STATUS_KIND_ATTACK_HI4_START, *FIGHTER_STATUS_KIND_ATTACK_LW4_START].contains(&next_status){
-			
-			//Kills AB Smash
-			let specials_list = [*CONTROL_PAD_BUTTON_SPECIAL_RAW, *CONTROL_PAD_BUTTON_SPECIAL_RAW2, *CONTROL_PAD_BUTTON_SPECIAL];
-			for i in specials_list {
-					if ControlModule::check_button_on(boma, i) {
-						println!("Ban AB Smash");
-						return 0 as u64
-					}
-			}
-			original!()(boma, status_kind, arg3)
 		} else if next_status == *FIGHTER_STATUS_KIND_TURN && curr_status == *FIGHTER_STATUS_KIND_LANDING{
 			return 0 as u64
-		} else if smash::app::utility::get_kind(boma) == *FIGHTER_KIND_TRAIL && [*FIGHTER_TRAIL_STATUS_KIND_ATTACK_AIR_F].contains(&status_kind){
+		} else if smash::app::utility::get_kind(boma) == *FIGHTER_KIND_TRAIL && [*FIGHTER_TRAIL_STATUS_KIND_ATTACK_AIR_F].contains(&status_kind) && Path::new("sd:/ultimate/ult-s/trail.flag").is_file(){
 			return 0 as u64
 		}else {
 			original!()(boma, status_kind, arg3)
