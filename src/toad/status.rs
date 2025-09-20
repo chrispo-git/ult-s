@@ -209,6 +209,8 @@ unsafe extern "C" fn regular_init(weapon: &mut L2CWeaponCommon) -> L2CValue {
     let owner_pos_x = PostureModule::pos_x(&mut *owner_boma);
     let owner_pos_y = PostureModule::pos_y(&mut *owner_boma);
     let owner_pos_z = PostureModule::pos_z(&mut *owner_boma);
+	let ENTRY_ID = WorkModule::get_int(&mut *owner_boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+    IS_POP_MODE[ENTRY_ID] = true;
     WorkModule::set_int(weapon.module_accessor, 90, *WEAPON_INSTANCE_WORK_ID_INT_LIFE);
     PostureModule::set_pos(weapon.module_accessor, &Vector3f{x: owner_pos_x+(8.0*lr), y: owner_pos_y+7.0, z: owner_pos_z});
     let speed_x = 1.38;
@@ -224,18 +226,32 @@ unsafe extern "C" fn regular_init(weapon: &mut L2CWeaponCommon) -> L2CValue {
 
 unsafe extern "C" fn regular_main(weapon: &mut L2CWeaponCommon) -> L2CValue {
     MotionModule::change_motion(weapon.module_accessor, Hash40::new("throwed"), 0.0, 1.0, false, 0.0, false, false);
+    ModelModule::set_scale(weapon.module_accessor, 1.5);
     weapon.fastshift(L2CValue::Ptr(regular_main_loop as *const () as _))
 }
 
 unsafe extern "C" fn regular_main_loop(weapon: &mut L2CWeaponCommon) -> L2CValue {
     let life = WorkModule::get_int(weapon.module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LIFE);
+    let owner_id = WorkModule::get_int(weapon.module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LINK_OWNER) as u32;
+    let owner_boma = smash::app::sv_battle_object::module_accessor(owner_id);
+	let ENTRY_ID = WorkModule::get_int(&mut *owner_boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
     WorkModule::dec_int(weapon.module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LIFE);
-    ModelModule::set_scale(weapon.module_accessor, 1.5);
     let remaining_life = life <= 0;
     if AttackModule::is_infliction_status(weapon.module_accessor, *COLLISION_KIND_MASK_ALL) {
+        IS_POP_MODE[ENTRY_ID] = false;
         notify_event_msc_cmd!(weapon, Hash40::new_raw(0x199c462b5d));
         weapon.pop_lua_stack(1);
         return 0.into();
+    }
+    if START_POP[ENTRY_ID] {
+        MotionModule::change_motion(weapon.module_accessor, Hash40::new("pop"), 0.0, 1.0, false, 0.0, false, false);
+        IS_POP_MODE[ENTRY_ID] = false;
+        START_POP[ENTRY_ID] = false;
+    }
+    if AttackModule::is_infliction(weapon.module_accessor, *COLLISION_KIND_MASK_REFLECTOR) {
+        for i in 0..7 {
+            IS_POP_MODE[i] = false;
+        }
     }
     if !remaining_life {
         if !GroundModule::is_touch(weapon.module_accessor, *GROUND_TOUCH_FLAG_ALL as u32) {
@@ -250,6 +266,7 @@ unsafe extern "C" fn regular_main_loop(weapon: &mut L2CWeaponCommon) -> L2CValue
         }
     }
     else {
+        IS_POP_MODE[ENTRY_ID] = false;
         notify_event_msc_cmd!(weapon, Hash40::new_raw(0x199c462b5d));
         weapon.pop_lua_stack(1);
     }
@@ -276,6 +293,61 @@ unsafe extern "C" fn regular_exec(weapon: &mut L2CWeaponCommon) -> L2CValue {
 unsafe extern "C" fn regular_end(weapon: &mut L2CWeaponCommon) -> L2CValue {
     0.into()
 }
+unsafe extern "C" fn special_n_main(fighter: &mut L2CFighterCommon) -> L2CValue {
+    if fighter.global_table[0x16].get_i32() == *SITUATION_KIND_GROUND {
+        GroundModule::correct(fighter.module_accessor, smash::app::GroundCorrectKind(*GROUND_CORRECT_KIND_GROUND_CLIFF_STOP));
+        KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_GROUND_STOP);
+        MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_n"), 0.0, 1.0, false, 0.0, false, false);
+    }
+    else {
+        GroundModule::correct(fighter.module_accessor, smash::app::GroundCorrectKind(*GROUND_CORRECT_KIND_AIR));
+        KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_FALL);
+        MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_air_n"), 0.0, 1.0, false, 0.0, false, false);
+    }
+    fighter.sub_shift_status_main(L2CValue::Ptr(special_n_main_loop as *const () as _))
+}
+
+unsafe extern "C" fn special_n_main_loop(fighter: &mut L2CFighterCommon) -> L2CValue {
+    if CancelModule::is_enable_cancel(fighter.module_accessor) {
+        if fighter.sub_wait_ground_check_common(false.into()).get_bool() || fighter.sub_air_check_fall_common().get_bool() {
+            return 1.into();
+        }
+    }
+    if !StatusModule::is_changing(fighter.module_accessor) {
+        if StatusModule::is_situation_changed(fighter.module_accessor) {
+            if fighter.global_table[0x16].get_i32() == *SITUATION_KIND_GROUND {
+                GroundModule::correct(fighter.module_accessor, smash::app::GroundCorrectKind(*GROUND_CORRECT_KIND_GROUND));
+                KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_GROUND_STOP);
+                let motion = if MotionModule::motion_kind(fighter.module_accessor) == hash40("special_air_n_pop") { 
+                    Hash40::new("special_n_pop") 
+                } else { 
+                    Hash40::new("special_n") 
+                };
+                MotionModule::change_motion_inherit_frame(fighter.module_accessor, motion, -1.0, 1.0, 0.0, false, false);
+            }
+            else {
+                GroundModule::correct(fighter.module_accessor, smash::app::GroundCorrectKind(*GROUND_CORRECT_KIND_AIR));
+                KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_FALL);
+                let motion = if MotionModule::motion_kind(fighter.module_accessor) == hash40("special_n_pop") { 
+                    Hash40::new("special_air_n_pop") 
+                } else { 
+                    Hash40::new("special_air_n") 
+                };
+                MotionModule::change_motion_inherit_frame(fighter.module_accessor, motion, -1.0, 1.0, 0.0, false, false);
+            }
+        }
+    }
+    if MotionModule::is_end(fighter.module_accessor) {
+        if fighter.global_table[0x16].get_i32() == *SITUATION_KIND_GROUND {
+            StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_WAIT, false);
+        }
+        else {
+            StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_FALL, false);
+        }
+    }
+
+    return 0.into()
+}
 
 
 pub fn install() {
@@ -284,6 +356,7 @@ pub fn install() {
         .status(Main, *FIGHTER_STATUS_KIND_CATCH_PULL, main_catch_pull)
         .status(Main, *FIGHTER_STATUS_KIND_CATCH_WAIT, main_catch_wait)
         //.status(Main, *FIGHTER_STATUS_KIND_THROW, main_throw)
+        .status(Main, *FIGHTER_STATUS_KIND_SPECIAL_N, special_n_main)
         .status(Main, *FIGHTER_STATUS_KIND_THROW_KIRBY, main_throw_kirby)
         .status(Pre, *FIGHTER_STATUS_KIND_THROW_KIRBY, throw_pre)
         .status(End, *FIGHTER_STATUS_KIND_THROW_KIRBY, throw_end)

@@ -66,6 +66,8 @@ unsafe extern "C" fn toad(fighter : &mut L2CFighterCommon) {
 		};*/
 		if is_reset() {
 			BIG_TIMER[ENTRY_ID] = 0;
+			IS_POP_MODE[ENTRY_ID] = false;
+			START_POP[ENTRY_ID] = false;
 		}
 		if status_kind == *FIGHTER_STATUS_KIND_DEAD && BIG_TIMER[ENTRY_ID] > 1 {
 			BIG_TIMER[ENTRY_ID] = 1;
@@ -384,11 +386,14 @@ unsafe extern "C" fn toad(fighter : &mut L2CFighterCommon) {
 			if [hash40("special_s_jump"), hash40("special_s_loop"), hash40("special_air_s_loop")].contains(&motion_kind) && MotionModule::frame(boma) < 2.0 {
 				macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_greenshell_trace"), Hash40::new("throw"), 0, 0, 0, 0, 0, 0, 1, true);
 			}
-			if frame < 3.0 && [hash40("special_n"), hash40("special_air_n")].contains(&motion_kind) && ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_MURABITO_GENERATE_ARTICLE_FLOWERPOT) { 
-				if situation_kind == *SITUATION_KIND_GROUND {
-					MotionModule::change_motion(boma, smash::phx::Hash40::new("special_n_pop"), 0.0, 1.0, false, 0.0, false, false);
-				} else {
-					MotionModule::change_motion(boma, smash::phx::Hash40::new("special_air_n_pop"), 0.0, 1.0, false, 0.0, false, false);
+			if [hash40("special_n"), hash40("special_air_n")].contains(&motion_kind) && IS_POP_MODE[ENTRY_ID] { 
+				if frame < 3.0 || (frame > 20.0 && ControlModule::check_button_on_trriger(boma, *CONTROL_PAD_BUTTON_SPECIAL)) {
+					println!("Pop!");
+					if situation_kind == *SITUATION_KIND_GROUND {
+						MotionModule::change_motion(boma, smash::phx::Hash40::new("special_n_pop"), 0.0, 1.0, false, 0.0, false, false);
+					} else {
+						MotionModule::change_motion(boma, smash::phx::Hash40::new("special_air_n_pop"), 0.0, 1.0, false, 0.0, false, false);
+					}
 				}
 			}
 			if [*FIGHTER_STATUS_KIND_SPECIAL_S].contains(&status_kind) {
