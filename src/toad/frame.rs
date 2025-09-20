@@ -384,6 +384,13 @@ unsafe extern "C" fn toad(fighter : &mut L2CFighterCommon) {
 			if [hash40("special_s_jump"), hash40("special_s_loop"), hash40("special_air_s_loop")].contains(&motion_kind) && MotionModule::frame(boma) < 2.0 {
 				macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_greenshell_trace"), Hash40::new("throw"), 0, 0, 0, 0, 0, 0, 1, true);
 			}
+			if frame < 3.0 && [hash40("special_n"), hash40("special_air_n")].contains(&motion_kind) && ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_MURABITO_GENERATE_ARTICLE_FLOWERPOT) { 
+				if situation_kind == *SITUATION_KIND_GROUND {
+					MotionModule::change_motion(boma, smash::phx::Hash40::new("special_n_pop"), 0.0, 1.0, false, 0.0, false, false);
+				} else {
+					MotionModule::change_motion(boma, smash::phx::Hash40::new("special_air_n_pop"), 0.0, 1.0, false, 0.0, false, false);
+				}
+			}
 			if [*FIGHTER_STATUS_KIND_SPECIAL_S].contains(&status_kind) {
 				CAN_SIDEB[ENTRY_ID] = 1;
 				if [hash40("special_s"), hash40("special_air_s")].contains(&motion_kind) {
