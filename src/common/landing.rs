@@ -51,10 +51,12 @@ unsafe extern "C" fn shielddrop(fighter : &mut L2CFighterCommon) {
 		let cancel_frame = FighterMotionModuleImpl::get_cancel_frame(boma,smash::phx::Hash40::new_raw(MotionModule::motion_kind(boma)),false) as f32;
 		let frame = MotionModule::frame(boma);
 		let situation_kind = StatusModule::situation_kind(boma);
+		let shielddrop_threshold = -0.45;
         if [*FIGHTER_STATUS_KIND_GUARD_ON, *FIGHTER_STATUS_KIND_GUARD].contains(&status_kind) 
-		&&  sticky <= WorkModule::get_param_float(boma, hash40("common"), hash40("squat_stick_y"))  
+		&&  sticky <= shielddrop_threshold  
 		&& GroundModule::is_passable_ground(fighter.module_accessor)
 		&& (ControlModule::get_command_flag_cat(boma, 1) & *FIGHTER_PAD_CMD_CAT2_FLAG_STICK_ESCAPE) == 0
+		&& (ControlModule::get_flick_y(boma) < 3 || ControlModule::get_flick_y(boma) > 20)
 		{
 			StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_PASS, true);
 		};
