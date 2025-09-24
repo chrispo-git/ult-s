@@ -157,7 +157,10 @@ unsafe extern "C" fn peppy_frame(fighter: &mut L2CFighterCommon) {
 				EffectModule::kill_kind(boma, Hash40::new("sys_raygun_bullet"), false, false);
 			}
 			if ![*FIGHTER_STATUS_KIND_SPECIAL_S, *FIGHTER_STATUS_KIND_JUMP_AERIAL, *FIGHTER_STATUS_KIND_FALL, *FIGHTER_STATUS_KIND_ATTACK_AIR, *FIGHTER_STATUS_KIND_SPECIAL_N].contains(&status_kind) {
-				SUPER_LAUNCH[ENTRY_ID] = false;
+				if SUPER_LAUNCH[ENTRY_ID] {
+					SUPER_LAUNCH[ENTRY_ID] = false;
+					WorkModule::off_flag(boma, *FIGHTER_INSTANCE_WORK_ID_FLAG_JUMP_NO_LIMIT);
+				}
 			} else if SUPER_LAUNCH[ENTRY_ID] {
 				WorkModule::on_flag(boma, *FIGHTER_INSTANCE_WORK_ID_FLAG_JUMP_NO_LIMIT);
 			}
