@@ -14,6 +14,8 @@ use std::{fs, path::Path};
 use crate::controls::ext::*;
 use crate::common::*;
 
+pub static mut GAMEMODES : Vec<String> = Vec::new();
+
 static mut STATUS_DURATION : [i32; 8] = [0; 8];
 static mut MOTION_DURATION : [i32; 8] = [0; 8];
 pub static mut POS_X : [f32; 8] = [0.0; 8];
@@ -37,6 +39,11 @@ pub const TAP_JUMP_BUFFER_MAX : i32 = 6;
 pub static mut JC_GRAB_LOCKOUT : [i32; 8] = [0; 8];
 pub const MAX_LOCKOUT : i32 = 10;
 
+//Universal Settings
+
+pub static mut IS_MECHANICS_ENABLED : bool = true;
+pub static mut IS_SMALL_HOLD_BUFFER : bool = false;
+pub static mut IS_SH_AERIAL : bool = true;
 
 //Cstick
 pub static mut SUB_STICK: [Vector2f;9] = [Vector2f{x:0.0, y: 0.0};9];
@@ -193,12 +200,20 @@ pub unsafe fn on_flag_hook(boma: &mut smash::app::BattleObjectModuleAccessor, in
 			};
 		} else if int == *FIGHTER_STATUS_WORK_ID_FLAG_RESERVE_JUMP_MINI {
 			let ENTRY_ID =  WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-			//FULL_HOP_ENABLE_DELAY allows fullhop button to not give shorthops. 
+			//FULL_HOP_ENABLE_DELAY allows fullhop button to not give shorthops.
+			if IS_SH_AERIAL {
 				if !(FULL_HOP_ENABLE_DELAY[ENTRY_ID] > 0){
 					original!()(boma, int)
 				} else {
 					println!("SH height banned");
 				}
+			} else {
+				if (ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_JUMP) || ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP_MINI)) && !(FULL_HOP_ENABLE_DELAY[ENTRY_ID] > 0) {
+					original!()(boma, int)
+				} else {
+					println!("SH height banned");
+				}
+			}
 		} else if int == *FIGHTER_INSTANCE_WORK_ID_FLAG_CATCHED_BUTTERFLYNET {
 				original!()(boma, int)
 		}	else {
@@ -293,6 +308,9 @@ unsafe extern "C" fn util_update(fighter : &mut L2CFighterCommon) {
 			HAS_ENABLE_100_ON[ENTRY_ID] = false;
 			FULL_HOP_ENABLE_DELAY[ENTRY_ID] = 0;
 			STICK_DIR[ENTRY_ID] = 0.0;
+			if smash::app::smashball::is_training_mode() {
+				reset_gamemodes();
+			}
 		};
 		if FULL_HOP_ENABLE_DELAY[ENTRY_ID] > 0 {
 			FULL_HOP_ENABLE_DELAY[ENTRY_ID] -= 1;
@@ -305,7 +323,7 @@ unsafe extern "C" fn util_update(fighter : &mut L2CFighterCommon) {
 		}
 		if TAP_JUMP_BUFFER[ENTRY_ID] > 0 {
 			TAP_JUMP_BUFFER[ENTRY_ID] -= 1;
-			println!("Tap Jump Buffer: {}", TAP_JUMP_BUFFER[ENTRY_ID]);
+			//println!("Tap Jump Buffer: {}", TAP_JUMP_BUFFER[ENTRY_ID]);
 		};
 		if  PostureModule::scale(boma) != 0.001345 {
 			PREV_SCALE[ENTRY_ID] = PostureModule::scale(boma);
@@ -617,12 +635,63 @@ pub(crate) unsafe fn set_knockdown_throw(fighter: &mut L2CAgentBase) -> () {
 	let grabber_entry_id = WorkModule::get_int(&mut *grabber_boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 	IS_KD_THROW[grabber_entry_id] = true;
 }
+pub(crate) fn is_on_ryujinx() -> bool {
+    unsafe {
+        // Ryujinx skip based on text addr
+        let text_addr = skyline::hooks::getRegionAddress(skyline::hooks::Region::Text) as u64;
+        if text_addr == 0x8504000 || text_addr == 0x80004000 {
+            println!("we are on Emulator");
+            return true;
+        } else {
+            println!("we are not on Emulator");
+            return false;
+        }
+    }
+}
+
 
 pub(crate) unsafe fn is_tap_djc(boma: &mut smash::app::BattleObjectModuleAccessor) -> bool {
 	let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 	return TAP_JUMP_BUFFER[ENTRY_ID] <= 0;
 }
 
+pub(crate) unsafe fn is_mechanics_enabled() -> bool {
+	return IS_MECHANICS_ENABLED;
+}
+
+pub(crate) unsafe fn update_enabled_checks() -> () {
+	IS_MECHANICS_ENABLED = !Path::new("sd:/ultimate/ult-s/sys-flags/mechanics.flag").is_file();
+	IS_SMALL_HOLD_BUFFER = Path::new("sd:/ultimate/ult-s/sys-flags/hold.flag").is_file();
+	IS_SH_AERIAL = Path::new("sd:/ultimate/ult-s/sys-flags/sh.flag").is_file();
+
+	let all: Vec<i32> = vec![-1];
+	if IS_MECHANICS_ENABLED {
+		//Setting values for everybody!
+		param_config::update_attribute_mul_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("damage_fly_top_air_accel_y"), 0, 1.05));
+		param_config::update_float_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("damage_fly_top_speed_y_stable"), 0, 1.84));
+		param_config::update_int_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("param_motion"), smash::hash40("escape_air_slide_back_end_frame"), -1));
+		param_config::update_float_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("param_motion"), smash::hash40("landing_frame_escape_air_slide_max"), 12.0));
+		param_config::update_float_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("param_motion"), smash::hash40("landing_frame_escape_air_slide"), 12.0));
+	} else {
+		param_config::update_attribute_mul_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("damage_fly_top_air_accel_y"), 0, 1.0));
+		param_config::update_float_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("damage_fly_top_speed_y_stable"), 0, 1.8));
+		param_config::update_int_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("param_motion"), smash::hash40("escape_air_slide_back_end_frame"), 4));
+		param_config::update_float_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("param_motion"), smash::hash40("landing_frame_escape_air_slide_max"), 20.0));
+		param_config::update_float_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("param_motion"), smash::hash40("landing_frame_escape_air_slide"), 10.0));
+	}
+}
+
+pub (crate) unsafe fn reset_gamemodes() -> () {
+	GAMEMODES = Vec::new();
+}
+
+pub (crate) unsafe fn add_gamemode(mode: String) -> () {
+	GAMEMODES.push(mode);
+}
+
+pub (crate) unsafe fn is_gamemode(mode: String) -> bool {
+	return GAMEMODES.contains(&mode);
+}
 
 pub fn install() {
     Agent::new("fighter")
@@ -633,4 +702,7 @@ pub fn install() {
 	skyline::install_hook!(on_flag_hook);
 	skyline::install_hook!(off_flag_hook);
 	skyline::install_hook!(article_hook);
+	unsafe {
+		update_enabled_checks();
+	}
 }

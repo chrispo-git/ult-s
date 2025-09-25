@@ -106,14 +106,14 @@ pub fn install() {
                 exhibit_year: the_csk_collection_api::ShortType::Overwrite(1995), 
                 exhibit_day_order: the_csk_collection_api::IntType::Overwrite(13102), 
                 extra_flags: the_csk_collection_api::IntType::Overwrite(0), 
-                ext_skill_page_num: the_csk_collection_api::SignedByteType::Overwrite(0), 
-                skill_list_order: the_csk_collection_api::SignedByteType::Overwrite(82), 
-                disp_order: the_csk_collection_api::SignedByteType::Optional(Some(82)), 
+                ext_skill_page_num: the_csk_collection_api::SignedByteType::Overwrite(1), 
+                skill_list_order: the_csk_collection_api::SignedByteType::Overwrite(91), 
+                disp_order: the_csk_collection_api::SignedByteType::Optional(Some(84)), 
                 save_no: the_csk_collection_api::SignedByteType::Overwrite(82), 
                 chara_count: the_csk_collection_api::SignedByteType::Overwrite(1), 
-                is_img_ext_skill_page0: the_csk_collection_api::BoolType::Overwrite(false), 
-                is_img_ext_skill_page1: the_csk_collection_api::BoolType::Overwrite(false), 
-                is_img_ext_skill_page2: the_csk_collection_api::BoolType::Overwrite(false), 
+                is_img_ext_skill_page0: the_csk_collection_api::BoolType::Overwrite(true), 
+                is_img_ext_skill_page1: the_csk_collection_api::BoolType::Overwrite(true), 
+                is_img_ext_skill_page2: the_csk_collection_api::BoolType::Overwrite(true), 
                 can_select: the_csk_collection_api::BoolType::Overwrite(true), 
                 is_usable_soundtest: the_csk_collection_api::BoolType::Overwrite(false), 
                 is_called_pokemon: the_csk_collection_api::BoolType::Overwrite(false), 
@@ -125,7 +125,7 @@ pub fn install() {
                 is_plural_message: the_csk_collection_api::BoolType::Overwrite(false), 
                 is_plural_narration: the_csk_collection_api::BoolType::Overwrite(false), 
                 is_article: the_csk_collection_api::BoolType::Overwrite(false), 
-                unk_0x112b7bb52a: the_csk_collection_api::BoolType::Overwrite(false), 
+                has_multiple_face: the_csk_collection_api::BoolType::Overwrite(false), 
                 result_pf0: the_csk_collection_api::BoolType::Overwrite(true), 
                 result_pf1: the_csk_collection_api::BoolType::Overwrite(true), 
                 result_pf2: the_csk_collection_api::BoolType::Overwrite(true), 
@@ -165,4 +165,44 @@ pub fn install() {
             ..Default::default()
         },
     );
+    the_csk_collection_api::add_bgm_db_entry_info(&the_csk_collection_api::BgmDatabaseRootEntry {
+        ui_bgm_id: hash40("ui_bgm_z25_f_rayman"),
+        clone_from_ui_bgm_id: Some(hash40("ui_bgm_z25_f_pikmin")),
+        stream_set_id: the_csk_collection_api::Hash40Type::Overwrite(hash40("set_z25_f_rayman")),
+        ..Default::default()
+    });
+
+    the_csk_collection_api::add_stream_set_entry_info(&the_csk_collection_api::StreamSetEntry { 
+        stream_set_id: hash40("set_z25_f_rayman"),
+        info0: the_csk_collection_api::Hash40Type::Overwrite(hash40("info_z25_f_rayman")),
+        ..Default::default()
+    });
+
+    the_csk_collection_api::add_assigned_info_entry_info(&the_csk_collection_api::AssignedInfoEntry { 
+        info_id: hash40("info_z25_f_rayman"),
+        stream_id: the_csk_collection_api::Hash40Type::Overwrite(hash40("stream_z25_f_rayman")),
+        condition: the_csk_collection_api::Hash40Type::Overwrite(hash40("sound_condition_none")),
+        condition_process: the_csk_collection_api::Hash40Type::Overwrite(hash40("sound_condition_process_add")),
+        change_fadeout_frame: the_csk_collection_api::IntType::Overwrite(60),
+        menu_change_fadeout_frame: the_csk_collection_api::IntType::Overwrite(60),
+        ..Default::default()
+    });
+
+    the_csk_collection_api::add_stream_property_entry_info(&the_csk_collection_api::StreamPropertyEntry {
+        stream_id: hash40("stream_z25_f_rayman"),
+        data_name0: the_csk_collection_api::StringType::Overwrite(the_csk_collection_api::CStrCSK::new("z25_f_rayman")),
+        ..Default::default()
+    });
+
+    the_csk_collection_api::add_new_bgm_property_entry(&smash_bgm_property::BgmPropertyEntry {
+        stream_name: hash40::Hash40::new("z25_f_rayman"),
+        loop_start_ms: 0,
+        loop_start_sample: 0,
+        loop_end_ms: 0,
+        loop_end_sample: 0,
+        duration_ms: 7659,
+        duration_sample: 359424 
+    });
+
+    the_csk_collection_api::set_fighter_jingle(hash40("ui_chara_rayman"), "z25_f_rayman");
 }

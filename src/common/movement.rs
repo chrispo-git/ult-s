@@ -21,6 +21,9 @@ static HOLD_BUFFER_LIMIT : i32 = 20; //Max frames for hold buffer
 //Perfect Pivot
 unsafe extern "C" fn perfectpivot(fighter : &mut L2CFighterCommon) {
     unsafe {
+		if !is_mechanics_enabled() {
+			return;
+		}
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);  
 		let mut stickx = ControlModule::get_stick_x(boma);		
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
@@ -51,6 +54,9 @@ unsafe extern "C" fn perfectpivot(fighter : &mut L2CFighterCommon) {
 //Moonwalk
 unsafe extern "C" fn moonwalk(fighter : &mut L2CFighterCommon) {
     unsafe {
+		if !is_mechanics_enabled() {
+			return;
+		}
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);  
 		let mut stickx = ControlModule::get_stick_x(boma);		
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
@@ -81,6 +87,9 @@ unsafe extern "C" fn moonwalk(fighter : &mut L2CFighterCommon) {
 //JC Grab
 unsafe extern "C" fn jc_grab(fighter : &mut L2CFighterCommon) {
     unsafe {
+		if !is_mechanics_enabled() {
+			return;
+		}
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);  
 		let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
@@ -99,6 +108,9 @@ unsafe extern "C" fn jc_grab(fighter : &mut L2CFighterCommon) {
 //DJC
 unsafe extern "C" fn djc(fighter : &mut L2CFighterCommon) {
     unsafe {
+		if !is_mechanics_enabled() {
+			return;
+		}
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);    
 		let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 		let fighter_kind = smash::app::utility::get_kind(boma);
@@ -153,6 +165,10 @@ unsafe extern "C" fn hold_buffer_killer(fighter : &mut L2CFighterCommon) {
             *CONTROL_PAD_BUTTON_SPECIAL_RAW2
         ];
         let mut hold_buffer_lim = HOLD_BUFFER_LIMIT;
+        let precede = WorkModule::get_param_int(fighter.module_accessor, hash40("common"), hash40("precede"));
+        if IS_SMALL_HOLD_BUFFER {
+            hold_buffer_lim = precede; //hold buffer now matches precede
+        }
 
         //Multiplies hold buffer duration by 2x during damage states to allow for pressing buttons out of hitstun as per usual
         if (*FIGHTER_STATUS_KIND_DAMAGE..*FIGHTER_STATUS_KIND_DAMAGE_FALL).contains(&status_kind){
@@ -177,6 +193,9 @@ unsafe extern "C" fn hold_buffer_killer(fighter : &mut L2CFighterCommon) {
 //Dash changes
 unsafe extern "C" fn dash(fighter : &mut L2CFighterCommon) {
     unsafe {
+		if !is_mechanics_enabled() {
+			return;
+		}
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);  
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
 		if [*FIGHTER_STATUS_KIND_DASH, *FIGHTER_STATUS_KIND_TURN_DASH].contains(&status_kind) && get_to_run_flag(boma) {
@@ -205,6 +224,9 @@ unsafe extern "C" fn dash(fighter : &mut L2CFighterCommon) {
 //Parry Cancellable into a dash
 unsafe extern "C" fn parrycanceldash(fighter : &mut L2CFighterCommon) {
     unsafe {
+		if !is_mechanics_enabled() {
+			return;
+		}
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);  
 		let mut stickx = ControlModule::get_stick_x(boma);		
 		let mut lr = PostureModule::lr(boma);

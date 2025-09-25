@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<struct>
+  <list hash="param_boot">
+    <struct index="0">
+      <int hash="life">90</int>
+      <float hash="speed">5.0</float>
+      <float hash="gravity_accel">0.1</float>
+      <float hash="angle">27</float>
+      <float hash="bound_ref_speed_mul">0</float>
+      <float hash="bounded_speed_y_min">0</float>
+      <float hash="bounded_speed_y_max">0</float>
+      <int hash="bound_count_max">0</int>
+      <float hash="wall_check_angle">28</float>
+      <int hash="is_penetration">0</int>
+      <float hash="gravity_acl_max">0</float>
+    </struct>
+    <struct index="1">
+      <int hash="life">0</int>
+      <float hash="speed">0</float>
+      <float hash="gravity_accel">0</float>
+      <float hash="angle">0</float>
+      <float hash="bound_ref_speed_mul">0</float>
+      <float hash="bounded_speed_y_min">0</float>
+      <float hash="bounded_speed_y_max">0</float>
+      <int hash="bound_count_max">0</int>
+      <float hash="wall_check_angle">0</float>
+      <int hash="is_penetration">0</int>
+      <float hash="gravity_acl_max">0</float>
+    </struct>
+    <struct index="2">
+      <int hash="life">0</int>
+      <float hash="speed">0</float>
+      <float hash="gravity_accel">0</float>
+      <float hash="angle">0</float>
+      <float hash="bound_ref_speed_mul">0</float>
+      <float hash="bounded_speed_y_min">0</float>
+      <float hash="bounded_speed_y_max">0</float>
+      <int hash="bound_count_max">5</int>
+      <float hash="wall_check_angle">0</float>
+      <int hash="is_penetration">0</int>
+      <float hash="gravity_acl_max">0</float>
+    </struct>
+    <struct index="3">
+      <int hash="life">0</int>
+      <float hash="speed">0</float>
+      <float hash="gravity_accel">0</float>
+      <float hash="angle">0</float>
+      <float hash="bound_ref_speed_mul">0</float>
+      <float hash="bounded_speed_y_min">0</float>
+      <float hash="bounded_speed_y_max">0</float>
+      <int hash="bound_count_max">0</int>
+      <float hash="wall_check_angle">0</float>
+      <int hash="is_penetration">0</int>
+      <float hash="gravity_acl_max">0</float>
+    </struct>
+  </list>
+  <struct hash="param_glide">
+    <int hash="life">150</int>
+    <float hash="angle_up_max">60</float>
+    <float hash="angle_down_max">-60</float>
+    <float hash="glide_start_speed_y_add">0.75</float>
+    <float hash="glide_start_air_accel_y_mul">1.0</float>
+    <float hash="glide_start_speed_x_mul">1.0</float>
+    <float hash="base_power">1.8</float>
+    <float hash="angle_power_rate">0.02</float>
+    <float hash="max_speed">2.3</float>
+    <float hash="end_speed">0.7</float>
+    <float hash="gravity_accel">0.03</float>
+    <float hash="gravity_speed_max">0.5</float>
+    <float hash="angle_dummy">15.0</float>
+    <float hash="angle_more_power">-25.0</float>
+    <float hash="down_add_power_max">0.03</float>
+    <float hash="unknown">0.15</float>
+    <float hash="radial_stick_sensitivity">0.25</float>
+    <float hash="angle_accel_up">0.55</float>
+    <float hash="angle_accel_down">0.75</float>
+    <float hash="angle_speed_max">7.0</float>
+    <float hash="angle_speed_stick_add">1.0</float>
+    <int hash="jump_button_hold_glide_frame">16</int>
+    <float hash="glide_touch_decel">0.0</float>
+    <float hash="glide_landing_frame">60.0</float>
+    <float hash="glide_landing_speed">1.0</float>
+    <float hash="angle_up_set_motion_rate_partial">0.0</float>
+    <float hash="angle_down_set_motion_rate_partial">0.0</float>
+    <float hash="se_volume_max">1.1</float>
+    <float hash="angle_se_pitch_ratio">-0.0035</float>
+    <float hash="angle_se_pitch_partial_ratio">0.0</float>
+    <float hash="power_se_volume_ratio">0.5</float>
+  </struct>
+</struct>

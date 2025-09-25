@@ -180,25 +180,39 @@ unsafe fn run_scene_update(_: &skyline::hooks::InlineCtx) {
 fn change_version_string_hook(arg: u64, string: *const c_char) {
 	let original_str = unsafe { skyline::from_c_str(string) };
 	if original_str.contains("Ver.") {
-        let s_ver = match std::fs::read_to_string("sd:/ultimate/mods/Ultimate S Arcropolis/version.txt") {
-            Ok(version_value) => version_value.trim().to_string(),
-            Err(_) => {
-                #[cfg(feature = "main_nro")]
-                if !is_on_ryujinx() {
-                    skyline_web::dialog_ok::DialogOk::ok(
-                        "Ultimate S Version unknown!",
-                    );
+        if Path::new("sd:/ultimate/mods/Ultimate S Arcropolis/").is_dir() {
+            let mut s_ver = match std::fs::read_to_string("sd:/ultimate/mods/Ultimate S Arcropolis/version.txt") {
+                Ok(version_value) => version_value.trim().to_string(),
+                Err(_) => {
+                    String::from("UNKNOWN")
                 }
-
-                String::from("UNKNOWN")
-            }
-        };
-		let version_str = format!("{} / Ultimate S {}\0", original_str, s_ver);
-		call_original!(arg, skyline::c_str(&version_str))
+            };
+            let version_str = format!("{} / Ultimate S {}\0", original_str, s_ver);
+            call_original!(arg, skyline::c_str(&version_str))
+        } else {
+            let mut s_ver = match std::fs::read_to_string("sd:/ultimate/mods/Ultimate S Lite/version.txt") {
+                Ok(version_value) => version_value.trim().to_string(),
+                Err(_) => {
+                    String::from("UNKNOWN")
+                }
+            };
+            let version_str = format!("{} / Ultimate S {}\0", original_str, s_ver);
+            call_original!(arg, skyline::c_str(&version_str))
+        }
 	} else {
 		call_original!(arg, string)
 	}
 }
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -260,6 +274,7 @@ mod packun;
 mod pacman;
 mod palutena;
 mod peach;
+mod peppy;
 mod pichu;
 mod pikachu;
 mod pikmin;
@@ -296,6 +311,17 @@ mod wolf;
 mod younglink;
 mod yoshi;
 mod zelda;
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -354,6 +380,7 @@ pub extern "C" fn main() {
             allow_ui_chara_hash_online(0xf1062d2e5); //rayman
             allow_ui_chara_hash_online(0xda4cbcb12); //toad
             allow_ui_chara_hash_online(0x12e2fb36c6); //bomberman
+            allow_ui_chara_hash_online(smash::hash40("ui_chara_peppy")); //peppy
         }
     }
 	
@@ -374,6 +401,14 @@ pub extern "C" fn main() {
     }
     skyline::install_hooks!(change_version_string_hook);
 	nro::add_hook(nro_hook).unwrap();
+
+
+
+
+
+
+
+
 
 
 
@@ -811,8 +846,24 @@ pub extern "C" fn main() {
     rayman::install();
     bomberman::install();
     toad::install();
+    peppy::install();
     
     println!("added chars installed");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	//Stage Patching
 
@@ -821,4 +872,15 @@ pub extern "C" fn main() {
     skyline::patching::Patch::in_text(0x28440f4 + 0xc80 + 0x20).data(0x52800009u32);
     skyline::patching::Patch::in_text(0x2844500+ 0xc80 + 0x20).nop();
     skyline::patching::Patch::in_text(0x2844128+ 0xc80 + 0x20).nop();
+
+    the_csk_collection_api::add_narration_characall_entry("vc_narration_characall_peppy");
+    the_csk_collection_api::add_narration_characall_entry("vc_narration_characall_rayman");
+    the_csk_collection_api::add_narration_characall_entry("vc_narration_characall_bomberman");
+    the_csk_collection_api::add_narration_characall_entry("vc_narration_characall_toad");
+    the_csk_collection_api::add_narration_characall_entry("vc_narration_characall_toadette");
+    the_csk_collection_api::add_narration_characall_entry("vc_narration_characall_toadsworth");
+    the_csk_collection_api::add_narration_characall_entry("vc_narration_characall_captaintoad");
 }
+
+
+

@@ -1,13 +1,3 @@
-[bgm_z25_f_pikmin]
-costume_120 = 1
-costume_121 = 1
-costume_122 = 1
-costume_123 = 1
-costume_124 = 1
-costume_125 = 1
-costume_126 = 1
-costume_127 = 1
-
 [bgm_z60_f_mariod]
 costume_120 = 1
 costume_121 = 1
@@ -18,17 +8,7 @@ costume_125 = 1
 costume_126 = 1
 costume_127 = 1
 
-[bgm_z66_f_murabito]
-costume_120 = 1
-costume_121 = 1
-costume_122 = 1
-costume_123 = 1
-costume_124 = 1
-costume_125 = 1
-costume_126 = 1
-costume_127 = 1
-
-[bgm_z73_f_pacman]
+[bgm_zz05_f_edge]
 costume_120 = 1
 costume_121 = 1
 costume_122 = 1

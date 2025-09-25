@@ -14,6 +14,7 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use crate::kirby::*;
 use super::*;
+use std::path::Path;
 
 pub fn install() {
 	Agent::new("kirby")
@@ -45,12 +46,7 @@ unsafe extern "C" fn kirby_drink_exec(fighter: &mut L2CFighterCommon) -> L2CValu
                 let opponent_id = LinkModule::get_node_object_id(fighter.module_accessor, *LINK_NO_CAPTURE) as u32;
                 let opp = sv_battle_object::module_accessor(opponent_id);
                 let opp_kind = utility::get_kind(&mut *opp);
-                if (opp_kind == *FIGHTER_KIND_MURABITO && (WorkModule::get_int(opp, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) >= 120 && WorkModule::get_int(opp, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) <= 127)) //toad
-                    || (opp_kind == *FIGHTER_KIND_PIKMIN && (WorkModule::get_int(opp, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) >= 120 && WorkModule::get_int(opp, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) <= 127)) //rayman
-                    || (opp_kind == *FIGHTER_KIND_PACMAN && (WorkModule::get_int(opp, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) >= 120 && WorkModule::get_int(opp, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) <= 127)) //bomberman
-                    || (opp_kind == *FIGHTER_KIND_MARIOD && (WorkModule::get_int(opp, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) >= 120 && WorkModule::get_int(opp, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) <= 127)) //sandbag
-                    || (opp_kind == *FIGHTER_KIND_LUCAS && (WorkModule::get_int(opp, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) >= 120 && WorkModule::get_int(opp, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) <= 127)) //masked man
-                {
+                if WorkModule::get_int(opp, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) > 16 || (opp_kind == *FIGHTER_KIND_MURABITO && Path::new("sd:/ultimate/ult-s/murabito.flag").is_file()){
                      WorkModule::on_flag(fighter.module_accessor, FIGHTER_KIRBY_STATUS_SPECIAL_N_FLAG_CUSTOM_CHARACTER);
                 }
             }

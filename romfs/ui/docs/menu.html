@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,height=device-height,user-scalable=no" />
+    <meta name="focus-ring-visibility" content="hidden" />
+    <title>Menu</title>
+    <script src="./help/js/jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" href="./menu.css" />
+    <link rel="stylesheet" href="./help/css/common.css" />
+    <script src="./common/js/wsnd.min.js"></script>
+    <script src="./common/js/keyhelp.js"></script>
+    <script src="./help/js/common.js"></script>
+    <script src="./common.js"></script>
+    <script src="./menu.js"></script>
+    <script src="./toggles.js"></script>
+    <style>
+    .footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100px;
+    line-height: 70px;
+    text-align: center;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="bg"></div>
+
+    <div class="l-header">
+        <span class="background-clip"></span>
+        <div class="header">
+            <a id="ret-button" tabindex="-1" class="header-decoration" href="http://localhost/" nx-se-disabled="">
+                <div class="ret-icon-wrapper">
+                    <img class="ret-icon-shadow" ref="./help/img/icon/m_retnormal.svg" />
+                    <img class="ret-icon" ref="./help/img/icon/m_retnormal.svg" />
+                </div>
+            </a>
+            <div class="breadcrumb-list f-u-bold">
+                <p><span data-msgcom="true" data-msgid="textbox_id-10002" style="color: rgb(255, 255, 255); -webkit-text-stroke-width: 2px; -webkit-text-stroke-color: black; z-index: 1;" id="test">Ultimate S Settings</span></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="main" id="list">
+        <div class="scrollbar">
+            <div class="flex-container">
+                <button onclick="toggle('mechanics', this, 'mechanics-text')" onfocus="textFocus('Ultimate S System Mechanics such as Edge Cancelling, Wavedash or Perfect Pivot.')" class="flex-item">
+                        <div class="icon-background"><img id="mechanics-text" class="abstract-icon is-appear visible"
+                            src="check.svg" /></div>
+                        <div class="item-container">
+                            <h2>Ultimate S Mechanics</h2>
+                        </div>
+                    </button>
+                <button onclick="toggle('hold', this, 'hold-text')" onfocus="textFocus('Smash Ultimate\'s Hold Buffer mechanic.')" class="flex-item">
+                        <div class="icon-background"><img id="hold-text" class="abstract-icon is-appear visible"
+                            src="check.svg" /></div>
+                        <div class="item-container">
+                            <h2>Hold Buffer</h2>
+                        </div>
+                    </button>
+                <button onclick="toggle('sh', this, 'sh-text')" onfocus="textFocus('Smash Ultimate\'s Shorthop Aerial Macro.')" class="flex-item">
+                        <div class="icon-background"><img id="sh-text" class="abstract-icon is-appear " style="display:none"
+                                        src="check.svg" /></div>
+                        <div class="item-container">
+                            <h2>Shorthop Aerial Macro</h2>
+                        </div>
+                    </button>
+                <button onclick="saveAndExit()" onfocus="textFocus('')" class="flex-item">
+                        <div class="icon-background"></div>
+                        <div class="item-container">
+                            <h2>Save Settings</h2>
+                        </div>
+                    </button>
+            </div>
+        </div>
+        <div class="footer">
+            <hr>
+            <h2 id="focus-text"></h2>
+        </div>
+    </div>
+</body>
+
+</html>

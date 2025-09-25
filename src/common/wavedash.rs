@@ -11,6 +11,7 @@ use smash::phx::Vector2f;
 use crate::util::*;
 use std::os::raw::c_int;
 use std::os::raw::c_ulong;
+use std::{fs, path::Path};
 
 static mut IS_WAVEDASH: [bool; 8] = [false; 8];
 static mut FORCE_WAVEDASH: [bool; 8] = [false; 8];
@@ -69,6 +70,9 @@ pub(crate) fn get_wd_length(fighter_kind : i32) -> f32 {
 
 unsafe extern "C" fn wavedash(fighter : &mut L2CFighterCommon) {
     unsafe {
+		if !is_mechanics_enabled() {
+			return;
+		}
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);    
 		let fighter_kind = smash::app::utility::get_kind(boma);
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
@@ -142,6 +146,9 @@ pub unsafe fn change_status_request_hook(boma: &mut smash::app::BattleObjectModu
 	let is_clear_buffer = arg3;
 	if smash::app::utility::get_category(boma) == *BATTLE_OBJECT_CATEGORY_FIGHTER {
 		if [*FIGHTER_STATUS_KIND_ESCAPE, *FIGHTER_STATUS_KIND_ESCAPE_F, *FIGHTER_STATUS_KIND_ESCAPE_B].contains(&next_status) {
+			if !is_mechanics_enabled() {
+				return original!()(boma, status_kind, arg3);
+			}
 			if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP) || ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP_MINI) {
 				 original!()(boma, *FIGHTER_STATUS_KIND_JUMP_SQUAT, false)
 			} else if (prev_status_1 == *FIGHTER_STATUS_KIND_LANDING && prev_status_2 == *FIGHTER_STATUS_KIND_JUMP_SQUAT && curr_status == *FIGHTER_STATUS_KIND_WAIT) ||
@@ -151,14 +158,24 @@ pub unsafe fn change_status_request_hook(boma: &mut smash::app::BattleObjectModu
 			}else {
 				original!()(boma, status_kind, arg3)
 			}
-		} else if next_status == *FIGHTER_STATUS_KIND_TURN && curr_status == *FIGHTER_STATUS_KIND_LANDING{
+		}  else if next_status == *FIGHTER_STATUS_KIND_ICE_JUMP {
+			if !is_mechanics_enabled() {
+				return original!()(boma, status_kind, arg3);
+			}
+            WorkModule::set_float(boma, 8.0, *FIGHTER_INSTANCE_WORK_ID_FLOAT_DAMAGE_REACTION_FRAME);
+            WorkModule::set_float(boma, 9.0, *FIGHTER_INSTANCE_WORK_ID_FLOAT_DAMAGE_REACTION_FRAME_LAST);
+			original!()(boma, *FIGHTER_STATUS_KIND_DAMAGE_FALL, true)
+		}else if next_status == *FIGHTER_STATUS_KIND_TURN && curr_status == *FIGHTER_STATUS_KIND_LANDING{
+			if !is_mechanics_enabled() {
+				return original!()(boma, status_kind, arg3);
+			}
 			return 0 as u64
 		}  else if [*FIGHTER_STATUS_KIND_DOWN, *FIGHTER_STATUS_KIND_DOWN_WAIT, *FIGHTER_STATUS_KIND_SLIP_WAIT, *FIGHTER_STATUS_KIND_DAMAGE].contains(&curr_status) && next_status == *FIGHTER_STATUS_KIND_FALL{
 			//Clears buffer when sliding off in a damage state to prevent accidental airdodges/aerials
 			original!()(boma, status_kind, true)
-		} else if smash::app::utility::get_kind(boma) == *FIGHTER_KIND_TRAIL && [*FIGHTER_TRAIL_STATUS_KIND_ATTACK_AIR_F].contains(&status_kind){
+		} else if smash::app::utility::get_kind(boma) == *FIGHTER_KIND_TRAIL && [*FIGHTER_TRAIL_STATUS_KIND_ATTACK_AIR_F].contains(&status_kind) && Path::new("sd:/ultimate/ult-s/trail.flag").is_file(){
 			return 0 as u64
-		} else if smash::app::utility::get_kind(boma) == *FIGHTER_KIND_MURABITO && [*FIGHTER_MURABITO_STATUS_KIND_SPECIAL_N_POCKET].contains(&status_kind){
+		} else if smash::app::utility::get_kind(boma) == *FIGHTER_KIND_MURABITO && [*FIGHTER_MURABITO_STATUS_KIND_SPECIAL_N_POCKET].contains(&status_kind) && Path::new("sd:/ultimate/ult-s/murabito.flag").is_file(){
 			original!()(boma, *FIGHTER_STATUS_KIND_ITEM_THROW, arg3)
 		} else {
 			original!()(boma, status_kind, arg3)
@@ -173,6 +190,9 @@ unsafe extern "C" fn status_pre_EscapeAir(fighter: &mut L2CFighterCommon) -> L2C
 	let y = ControlModule::get_stick_y(boma);
 	let fighter_kind = smash::app::utility::get_kind(boma);
     //Handles wavedash
+	if !is_mechanics_enabled() {
+		return smashline::original_status(Pre, fighter, *FIGHTER_STATUS_KIND_ESCAPE_AIR)(fighter);
+	}
     if IS_WAVEDASH[ENTRY_ID] == true && y < 0.5 /*&& (ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_JUMP) || ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP_MINI))*/ && GroundModule::ray_check(boma, &Vector2f{ x: PostureModule::pos_x(boma), y: PostureModule::pos_y(boma)}, &Vector2f{ x: 0.0, y: -3.0}, true) == 1 && fighter_kind != *FIGHTER_KIND_DEMON{
         GroundModule::attach_ground(fighter.module_accessor, true);
         GroundModule::set_attach_ground(fighter.module_accessor, true);
@@ -188,6 +208,9 @@ pub unsafe fn change_status_request_script_hook(boma: &mut smash::app::BattleObj
 	let prev_status_1 = StatusModule::prev_status_kind(boma, 0);
 	let prev_status_2 = StatusModule::prev_status_kind(boma, 1);
 	let curr_status = StatusModule::status_kind(boma);
+	if !is_mechanics_enabled() {
+		return original!()(boma, status_kind, arg3);
+	}
 	if smash::app::utility::get_category(boma) == *BATTLE_OBJECT_CATEGORY_FIGHTER {
 		if [*FIGHTER_STATUS_KIND_ESCAPE, *FIGHTER_STATUS_KIND_ESCAPE_F, *FIGHTER_STATUS_KIND_ESCAPE_B].contains(&next_status) {
 			if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP) || ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP_MINI) {
@@ -199,22 +222,17 @@ pub unsafe fn change_status_request_script_hook(boma: &mut smash::app::BattleObj
 			}else {
 				original!()(boma, status_kind, arg3)
 			}
-		} else if [*FIGHTER_STATUS_KIND_ATTACK_S4_START, *FIGHTER_STATUS_KIND_ATTACK_HI4_START, *FIGHTER_STATUS_KIND_ATTACK_LW4_START].contains(&next_status){
-			
-			//Kills AB Smash
-			let specials_list = [*CONTROL_PAD_BUTTON_SPECIAL_RAW, *CONTROL_PAD_BUTTON_SPECIAL_RAW2, *CONTROL_PAD_BUTTON_SPECIAL];
-			for i in specials_list {
-					if ControlModule::check_button_on(boma, i) {
-						println!("Ban AB Smash");
-						return 0 as u64
-					}
-			}
-			println!("Keep Smash");
-			original!()(boma, status_kind, arg3)
 		} else if next_status == *FIGHTER_STATUS_KIND_TURN && curr_status == *FIGHTER_STATUS_KIND_LANDING{
 			return 0 as u64
-		} else if smash::app::utility::get_kind(boma) == *FIGHTER_KIND_TRAIL && [*FIGHTER_TRAIL_STATUS_KIND_ATTACK_AIR_F].contains(&status_kind){
+		} else if smash::app::utility::get_kind(boma) == *FIGHTER_KIND_TRAIL && [*FIGHTER_TRAIL_STATUS_KIND_ATTACK_AIR_F].contains(&status_kind) && Path::new("sd:/ultimate/ult-s/trail.flag").is_file(){
 			return 0 as u64
+		}  else if next_status == *FIGHTER_STATUS_KIND_ICE_JUMP {
+			if !is_mechanics_enabled() {
+				return original!()(boma, status_kind, arg3);
+			}
+            WorkModule::set_float(boma, 8.0, *FIGHTER_INSTANCE_WORK_ID_FLOAT_DAMAGE_REACTION_FRAME);
+            WorkModule::set_float(boma, 9.0, *FIGHTER_INSTANCE_WORK_ID_FLOAT_DAMAGE_REACTION_FRAME_LAST);
+			original!()(boma, *FIGHTER_STATUS_KIND_DAMAGE_FALL, true)
 		}else {
 			original!()(boma, status_kind, arg3)
 		}

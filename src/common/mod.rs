@@ -7,9 +7,10 @@ mod movement;
 mod bone;
 mod projectile_invuln;
 mod remove_quake;
-mod melee;
-mod faf_change;
 mod cancel;
+mod css;
+mod gamemodes;
+
 use smash::app::lua_bind::*;
 use smash::lib::lua_const::*;
 use smash::app::utility::get_kind;
@@ -28,6 +29,8 @@ pub const MIN_GRAVITY : f32 = 0.065;
 
 
 pub fn install() {
+	css::install();
+	gamemodes::install();
     hitstun::install();
     dacus::install();
     landing::install();
@@ -35,14 +38,7 @@ pub fn install() {
     jab::install();
     movement::install();
     bone::install();
-    melee::install();
 	projectile_invuln::install();
 	remove_quake::install();
-	faf_change::install();
 	cancel::install();
-
-    //Setting values for everybody!
-    let all: Vec<i32> = vec![-1];
-    param_config::update_attribute_mul_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("damage_fly_top_air_accel_y"), 0, 1.05));
-    param_config::update_float_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("damage_fly_top_speed_y_stable"), 0, 1.84));
 }

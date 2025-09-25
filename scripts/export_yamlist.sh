@@ -14,6 +14,10 @@ case $1 in
         fighter="pikmin"
         alt="12"
     ;;
+    peppy)
+        fighter="falco"
+        alt="12"
+    ;;
 esac
 cd ..
 echo "romfs/fighter/$fighter/motion/body/c${alt}0/motion_list.bin"

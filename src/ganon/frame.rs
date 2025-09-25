@@ -21,6 +21,10 @@ pub fn install() {
     .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
         .on_line(Main, ganon_float)
         .install();
+    Agent::new("kirby")
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+        .on_line(Main, ganon_float)
+        .install();
 }
 		
 pub(crate) fn check_jump(boma: &mut smash::app::BattleObjectModuleAccessor) -> bool {
@@ -178,6 +182,13 @@ unsafe extern "C" fn ganon_float(fighter : &mut L2CFighterCommon) {
 			};
 		};
 		if fighter_kind == *FIGHTER_KIND_KIRBY {
+			if !WorkModule::get_int(boma, *FIGHTER_KIRBY_INSTANCE_WORK_ID_INT_COPY_CHARA) == *FIGHTER_KIND_GANON {
+				if CAN_NEUTRALB[ENTRY_ID] != 0 && WorkModule::get_int(boma, *FIGHTER_KIRBY_INSTANCE_WORK_ID_INT_COPY_CHARA) == *FIGHTER_KIND_NONE{
+					println!("Empty");
+					CAN_NEUTRALB[ENTRY_ID] = 0;
+				};
+				return;
+			}
 			if StatusModule::situation_kind(boma) != SITUATION_KIND_AIR || smash::app::sv_information::is_ready_go() == false || [*FIGHTER_STATUS_KIND_WIN, *FIGHTER_STATUS_KIND_LOSE, *FIGHTER_STATUS_KIND_DEAD].contains(&status_kind) {
 				FLOAT[ENTRY_ID] = 0;
 			};
@@ -185,10 +196,9 @@ unsafe extern "C" fn ganon_float(fighter : &mut L2CFighterCommon) {
 					StatusModule::set_situation_kind(boma, smash::app::SituationKind(*SITUATION_KIND_AIR), true);
 					StatusModule::set_keep_situation_air(boma, true);
 			};
-			if FLOAT[ENTRY_ID] == 1 && WorkModule::get_int(boma, *FIGHTER_KIRBY_INSTANCE_WORK_ID_INT_COPY_CHARA) == *FIGHTER_KIND_GANON {
+			if FLOAT[ENTRY_ID] == 1 {
 				CAN_NEUTRALB[ENTRY_ID] = 1;
-			} else if WorkModule::get_int(boma, *FIGHTER_KIRBY_INSTANCE_WORK_ID_INT_COPY_CHARA) == *FIGHTER_KIND_NONE{
-				println!("Empty");
+			} else {
 				CAN_NEUTRALB[ENTRY_ID] = 0;
 			};
 			if FLOAT[ENTRY_ID] == 1{
