@@ -208,11 +208,12 @@ pub unsafe fn change_status_request_script_hook(boma: &mut smash::app::BattleObj
 	let prev_status_1 = StatusModule::prev_status_kind(boma, 0);
 	let prev_status_2 = StatusModule::prev_status_kind(boma, 1);
 	let curr_status = StatusModule::status_kind(boma);
-	if !is_mechanics_enabled() {
-		return original!()(boma, status_kind, arg3);
-	}
+	
 	if smash::app::utility::get_category(boma) == *BATTLE_OBJECT_CATEGORY_FIGHTER {
 		if [*FIGHTER_STATUS_KIND_ESCAPE, *FIGHTER_STATUS_KIND_ESCAPE_F, *FIGHTER_STATUS_KIND_ESCAPE_B].contains(&next_status) {
+			if !is_mechanics_enabled() {
+				return original!()(boma, status_kind, arg3);
+			}
 			if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP) || ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP_MINI) {
 				 original!()(boma, *FIGHTER_STATUS_KIND_JUMP_SQUAT, false)
 			} else if (prev_status_1 == *FIGHTER_STATUS_KIND_LANDING && prev_status_2 == *FIGHTER_STATUS_KIND_JUMP_SQUAT && curr_status == *FIGHTER_STATUS_KIND_WAIT) ||
@@ -223,6 +224,9 @@ pub unsafe fn change_status_request_script_hook(boma: &mut smash::app::BattleObj
 				original!()(boma, status_kind, arg3)
 			}
 		} else if next_status == *FIGHTER_STATUS_KIND_TURN && curr_status == *FIGHTER_STATUS_KIND_LANDING{
+			if !is_mechanics_enabled() {
+				return original!()(boma, status_kind, arg3);
+			}
 			return 0 as u64
 		} else if smash::app::utility::get_kind(boma) == *FIGHTER_KIND_TRAIL && [*FIGHTER_TRAIL_STATUS_KIND_ATTACK_AIR_F].contains(&status_kind) && Path::new("sd:/ultimate/ult-s/trail.flag").is_file(){
 			return 0 as u64
