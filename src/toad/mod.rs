@@ -185,7 +185,7 @@ pub fn install() {
     });
 
     the_csk_collection_api::add_stream_property_entry_info(&the_csk_collection_api::StreamPropertyEntry {
-        stream_id: hash40("stream_z80_f_herobrine"),
+        stream_id: hash40("stream_z80_f_toad"),
         data_name0: the_csk_collection_api::StringType::Overwrite(the_csk_collection_api::CStrCSK::new("z80_f_toad")),
         ..Default::default()
     });
