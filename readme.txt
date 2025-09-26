@@ -42,7 +42,7 @@ Place skyline in "/atmosphere/contents/01006A800016E000"
 -Common Issues-
 Q: "My game is crashing! What do I do?"
 A: There could be many things that could be causing this! Try going down this list to make sure that it isn't a user error:
-1. Make sure your version of smash ultimate is update 13.0.3 (other updates do not work)
+1. Make sure your version of smash ultimate is update 13.0.4 (other updates do not work)
 2. Make sure training modpack is not enabled (this means no training modpack plugin, and no param hook plugin)
 3. Make sure your plugin folder is CLEAN (this means the only plugins in the folder are libparam_config, libcsk_collection, libstage_config, libarcropolis, libnro_hook, libsmashline_plugin and libarena_latency_slider).
 
@@ -83,7 +83,7 @@ If you want to change this, go to "ultimate/ult-s/gamemode-default.txt" and add 
 Q: "The game is just vanilla!"
 A: Try going through these steps:
 1. Check your title screen, does it say Arcropolis in the top right? If not, arcropolis isn't running, make sure you have skyline AND arcropolis installed correctly.
-2. Check your title screen, what version is it? Make sure it is 13.0.3, and no other version.
+2. Check your title screen, what version is it? Make sure it is 13.0.4, and no other version.
 3. Make sure that Ultimate S is enabled (either by mod manager on the switch, or inside of the mods folder on Yuzu).
 4. Make sure you ran "Ultimate S Setup Tool.exe" and chose your preferred options (you can check in ultimate/ult-s to see which characters you have enabled)
 5. If you are on emulator, make sure that there is a file called "legacy_discovery" at ultimate\arcropolis\config\2470593114292646594\15904440331188662786
