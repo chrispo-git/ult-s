@@ -109,6 +109,11 @@ if os.path.exists(r'target'):
                 f.close()
                 shutil.copy(r'romfs/config.json', r'releases/ultimate/mods/Ultimate S Lite/config.json')
                 shutil.copy(r'romfs/victory.toml', r'releases/ultimate/mods/Ultimate S Lite/victory.toml')
+                for root, dirs, files in os.walk(r"releases/ultimate/mods/Ultimate S Lite/sound", topdown=False):
+                        for name in files:
+                            if "c0" in name:
+                                path = os.path.join(root, name)
+                                os.remove(path)
                 for i in os.listdir(r'romfs/fighter'):
                     for root, dirs, files in os.walk(f"romfs/fighter/{i}/", topdown=False):
                         for name in dirs:
