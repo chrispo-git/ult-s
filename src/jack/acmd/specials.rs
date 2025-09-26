@@ -27,10 +27,99 @@ pub fn install() {
     .acmd("sound_specials1", joker_sideb_snd, Priority::Low)    
     .acmd("sound_specialairs1", joker_sideb_snd, Priority::Low)    
     .acmd("sound_specials1", joker_sideb_expr, Priority::Low)    
-    .acmd("sound_specialairs1", joker_sideb_expr, Priority::Low)    
+    .acmd("sound_specialairs1", joker_sideb_expr, Priority::Low)  
+    .acmd("sound_specialnescapeb", joker_gun_escapeb, Priority::Low)  
+    .acmd("sound_specialairnescapeb", joker_gun_escapeb, Priority::Low)  
+    .acmd("sound_specialnescapef", joker_gun_escapef, Priority::Low)  
+    .acmd("sound_specialairnescapef", joker_gun_escapef, Priority::Low)  
+    .acmd("sound_specialnescapeb_ex", joker_gun_escapebex, Priority::Low)  
+    .acmd("sound_specialairnescapeb_ex", joker_gun_escapebex, Priority::Low)  
+    .acmd("sound_specialnescapef_ex", joker_gun_escapefex, Priority::Low)  
+    .acmd("sound_specialairnescapef_ex", joker_gun_escapefex, Priority::Low)  
+
     .install();
 }
 	
+unsafe extern "C" fn joker_gun_escapeb(agent: &mut L2CAgentBase) {
+    frame(agent.lua_state_agent, 5.0);
+    if macros::is_excute(agent) {
+        macros::PLAY_SE(agent, Hash40::new("se_jack_escape"));
+    }
+    frame(agent.lua_state_agent, 15.0);
+    if macros::is_excute(agent) {
+        macros::PLAY_STEP(agent, Hash40::new("se_jack_step_right_l"));
+    }
+    frame(agent.lua_state_agent, 19.0);
+    if macros::is_excute(agent) {
+        macros::PLAY_STEP(agent, Hash40::new("se_jack_step_left_l"));
+    }
+    frame(agent.lua_state_agent, 22.0);
+    if macros::is_excute(agent) {
+        macros::PLAY_SE(agent, Hash40::new("se_jack_special_n01"));
+    }
+}	
+unsafe extern "C" fn joker_gun_escapebex(agent: &mut L2CAgentBase) {
+    frame(agent.lua_state_agent, 5.0);
+    if macros::is_excute(agent) {
+        macros::PLAY_SE(agent, Hash40::new("se_jack_escape"));
+    }
+    frame(agent.lua_state_agent, 15.0);
+    if macros::is_excute(agent) {
+        macros::PLAY_STEP(agent, Hash40::new("se_jack_step_right_l"));
+    }
+    frame(agent.lua_state_agent, 19.0);
+    if macros::is_excute(agent) {
+        macros::PLAY_STEP(agent, Hash40::new("se_jack_step_left_l"));
+    }
+    frame(agent.lua_state_agent, 22.0);
+    if macros::is_excute(agent) {
+        macros::PLAY_SE(agent, Hash40::new("se_jack_special_n06"));
+    }
+    frame(agent.lua_state_agent, 28.0);
+    if macros::is_excute(agent) {
+        macros::PLAY_SE(agent, Hash40::new("se_jack_special_n06"));
+    }
+    frame(agent.lua_state_agent, 34.0);
+    if macros::is_excute(agent) {
+        macros::PLAY_SE(agent, Hash40::new("se_jack_special_n06"));
+    }
+}
+unsafe extern "C" fn joker_gun_escapef(agent: &mut L2CAgentBase) {
+    frame(agent.lua_state_agent, 4.0);
+    if macros::is_excute(agent) {
+        macros::PLAY_SE(agent, Hash40::new("se_jack_escape"));
+    }
+    frame(agent.lua_state_agent, 15.0);
+    if macros::is_excute(agent) {
+        macros::PLAY_STEP(agent, Hash40::new("se_jack_step_right_l"));
+    }
+    frame(agent.lua_state_agent, 20.0);
+    if macros::is_excute(agent) {
+        macros::PLAY_SE(agent, Hash40::new("se_jack_special_n01"));
+    }
+}
+unsafe extern "C" fn joker_gun_escapefex(agent: &mut L2CAgentBase) {
+    frame(agent.lua_state_agent, 4.0);
+    if macros::is_excute(agent) {
+        macros::PLAY_SE(agent, Hash40::new("se_jack_escape"));
+    }
+    frame(agent.lua_state_agent, 15.0);
+    if macros::is_excute(agent) {
+        macros::PLAY_STEP(agent, Hash40::new("se_jack_step_right_l"));
+    }
+    frame(agent.lua_state_agent, 20.0);
+    if macros::is_excute(agent) {
+        macros::PLAY_SE(agent, Hash40::new("se_jack_special_n06"));
+    }
+    frame(agent.lua_state_agent, 26.0);
+    if macros::is_excute(agent) {
+        macros::PLAY_SE(agent, Hash40::new("se_jack_special_n06"));
+    }
+    frame(agent.lua_state_agent, 32.0);
+    if macros::is_excute(agent) {
+        macros::PLAY_SE(agent, Hash40::new("se_jack_special_n06"));
+    }
+}
 unsafe extern "C" fn joker_eiagon(fighter: &mut L2CAgentBase) {
     	let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 1.0);
