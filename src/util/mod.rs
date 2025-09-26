@@ -665,7 +665,7 @@ pub(crate) unsafe fn update_enabled_checks() -> () {
 	IS_SH_AERIAL = Path::new("sd:/ultimate/ult-s/sys-flags/sh.flag").is_file();
 
 	let all: Vec<i32> = vec![-1];
-	if IS_MECHANICS_ENABLED || true {
+	if IS_MECHANICS_ENABLED  {
 		//Setting values for everybody!
 		param_config::update_attribute_mul_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("damage_fly_top_air_accel_y"), 0, 1.05));
 		param_config::update_float_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("damage_fly_top_speed_y_stable"), 0, 1.84));
