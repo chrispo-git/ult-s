@@ -117,7 +117,13 @@ if os.path.exists(r'target'):
                 for i in os.listdir(r'romfs/fighter'):
                     for root, dirs, files in os.walk(f"romfs/fighter/{i}/", topdown=False):
                         for name in dirs:
-                            if "c1" in name:
+                            is_added_param = False
+                            if "param" in name:
+                                path = os.path.join(root, name)
+                                for i in ["donkey"]:
+                                    if i in path:
+                                        is_added_param = True
+                            if "c1" in name or is_added_param:
                                 path = os.path.join(root, name)
                                 new_path = path.replace("romfs", "releases/ultimate/mods/Ultimate S Lite")
                                 if os.path.exists(new_path) == False:
