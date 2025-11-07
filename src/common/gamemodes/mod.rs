@@ -9,6 +9,7 @@ mod parry;
 mod hitstunchange;
 mod sixtyfour;
 mod fgmode;
+mod smym;
 
 pub fn install() {
 	turbo::install();
@@ -22,4 +23,5 @@ pub fn install() {
     hitstunchange::install();
     sixtyfour::install();
     fgmode::install();
+    smym::install();
 }
