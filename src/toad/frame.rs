@@ -74,8 +74,8 @@ unsafe extern "C" fn toad(fighter : &mut L2CFighterCommon) {
 		}
 		if (WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) >= 120 && WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) <= 127) && fighter_kind == *FIGHTER_KIND_MURABITO {
 			if PostureModule::scale(boma) == 1.0 {
-				PostureModule::set_scale(fighter.module_accessor, 0.65, false);
-                GrabModule::set_size_mul(boma, 0.65);
+				PostureModule::set_scale(fighter.module_accessor, 0.7, false);
+                GrabModule::set_size_mul(boma, 0.7);
 				println!("set small");
             }
 			WorkModule::set_int(boma, 1, *FIGHTER_MURABITO_INSTANCE_WORK_ID_INT_SPECIAL_N_TIME_LIMIT);
@@ -346,9 +346,9 @@ unsafe extern "C" fn toad(fighter : &mut L2CFighterCommon) {
 			if BIG_TIMER[ENTRY_ID] > 0 {
 				BIG_TIMER[ENTRY_ID] -= 1;
 				if BIG_TIMER[ENTRY_ID] > 45 {
-					PostureModule::set_scale(fighter.module_accessor, 2.0*0.65, false);
+					PostureModule::set_scale(fighter.module_accessor, 2.0*0.7, false);
 					AttackModule::set_attack_scale(boma, 1.0, true);
-					GrabModule::set_size_mul(boma, 2.0*0.65);
+					GrabModule::set_size_mul(boma, 2.0*0.7);
             		WorkModule::on_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_GOLD);
 			   		damage!(fighter, *MA_MSC_DAMAGE_DAMAGE_NO_REACTION, *DAMAGE_NO_REACTION_MODE_DAMAGE_POWER, 15.0);
 					if [*FIGHTER_STATUS_KIND_WAIT, *FIGHTER_STATUS_KIND_WALK, *FIGHTER_STATUS_KIND_DASH, *FIGHTER_STATUS_KIND_TURN_DASH, *FIGHTER_STATUS_KIND_TURN_RUN, *FIGHTER_STATUS_KIND_JUMP, *FIGHTER_STATUS_KIND_FALL, *FIGHTER_STATUS_KIND_FALL_AERIAL].contains(&status_kind) {
@@ -360,15 +360,15 @@ unsafe extern "C" fn toad(fighter : &mut L2CFighterCommon) {
 						macros::PLAY_SE(fighter, Hash40::new("se_item_mushd"));
 						AttackModule::clear_all(fighter.module_accessor);
 					}
-					PostureModule::set_scale(fighter.module_accessor, 1.67*0.65, false);
+					PostureModule::set_scale(fighter.module_accessor, 1.67*0.7, false);
 					AttackModule::set_attack_scale(boma, 1.0, true);
-					GrabModule::set_size_mul(boma, 1.67*0.65);
+					GrabModule::set_size_mul(boma, 1.67*0.7);
             		WorkModule::off_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_GOLD);
 			   		damage!(fighter, *MA_MSC_DAMAGE_DAMAGE_NO_REACTION, *DAMAGE_NO_REACTION_MODE_DAMAGE_POWER, 12.0);
 				} else if BIG_TIMER[ENTRY_ID] > 15 {
 					PostureModule::set_scale(fighter.module_accessor, 1.33*0.65, false);
 					AttackModule::set_attack_scale(boma, 1.0, true);
-					GrabModule::set_size_mul(boma, 1.33*0.65);
+					GrabModule::set_size_mul(boma, 1.33*0.7);
             		WorkModule::off_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_GOLD);
 			   		damage!(fighter, *MA_MSC_DAMAGE_DAMAGE_NO_REACTION, *DAMAGE_NO_REACTION_MODE_DAMAGE_POWER, 8.0);
 				} else {
@@ -376,9 +376,9 @@ unsafe extern "C" fn toad(fighter : &mut L2CFighterCommon) {
         			EffectModule::remove_screen(fighter.module_accessor, Hash40::new("bg_popo_final"), -1);
 					EffectModule::kill_kind(boma, smash::phx::Hash40::new("bg_popo_final"), false, false);
 					macros::STOP_SE(fighter, Hash40::new("se_murabito_final01"));
-					PostureModule::set_scale(fighter.module_accessor, 1.0*0.65, false);
+					PostureModule::set_scale(fighter.module_accessor, 1.0*0.7, false);
 					AttackModule::set_attack_scale(boma, 1.0, true);
-					GrabModule::set_size_mul(boma, 1.0*0.65);
+					GrabModule::set_size_mul(boma, 1.0*0.7);
             		WorkModule::off_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_GOLD);
 			   		damage!(fighter, *MA_MSC_DAMAGE_DAMAGE_NO_REACTION, *DAMAGE_NO_REACTION_MODE_NORMAL, 0.0);
 				}
