@@ -14,7 +14,7 @@ static NONE :  smash::phx::Vector3f =  smash::phx::Vector3f { x: 0.0, y: 0.0, z:
 
 unsafe extern "C" fn parry(fighter : &mut L2CFighterCommon) {
     unsafe {
-        if !is_gamemode("parry".to_string()) {
+        if !is_gamemode("parry".to_string()) &&  !is_gamemode("rivals".to_string()){
             return;
         }
 		let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
@@ -40,7 +40,11 @@ unsafe extern "C" fn parry(fighter : &mut L2CFighterCommon) {
 
             if MotionModule::frame(boma) > 6.0 {
                 macros::COL_NORMAL(fighter);
-                WorkModule::set_float(boma, 1.0, *FIGHTER_STATUS_WORK_ID_FLOAT_REBOUND_MOTION_RATE);
+                let mut rate = 1.0;
+                if is_gamemode("rivals".to_string()) {
+                    rate = 0.25;
+                }
+                WorkModule::set_float(boma, rate, *FIGHTER_STATUS_WORK_ID_FLOAT_REBOUND_MOTION_RATE);
 				StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_REBOUND, true);
             }
             if (MotionModule::frame(boma) as i32) == 1 {
@@ -50,6 +54,11 @@ unsafe extern "C" fn parry(fighter : &mut L2CFighterCommon) {
 
 			    macros::FLASH(fighter, 0.92, 0.99, 1, 0.5);
                 EffectModule::req_follow(boma, smash::phx::Hash40::new("sys_just_shield_hit"), smash::phx::Hash40::new("hip"), &NONE, &NONE, 0.7, true, 0, 0, 0, 0, 0, true, true) as u32;
+            }
+        }
+        if [*FIGHTER_STATUS_KIND_REBOUND].contains(&status_kind) && MotionModule::rate(boma) == 0.25 && is_gamemode("rivals".to_string()) {
+            if (MotionModule::frame(boma) as i32) == 1 {
+			    macros::FLASH(fighter, 0.25, 0.25, 0.25, 0.5);
             }
         }
         if PARRY_DUATION[ENTRY_ID] > 0 {

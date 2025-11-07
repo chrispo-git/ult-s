@@ -21,16 +21,7 @@ unsafe extern "C" fn jabcancel(fighter : &mut L2CFighterCommon) {
 		let stick_x = ControlModule::get_stick_x(boma);
 		let stick_y = ControlModule::get_stick_y(boma);
 		let frame = MotionModule::frame(boma);
-		//Speeds up jab 2s and 3s for certain chars
-		if [*FIGHTER_KIND_DOLLY, *FIGHTER_KIND_YOUNGLINK, *FIGHTER_KIND_KROOL].contains(&fighter_kind) {
-			if [hash40("attack_12")].contains(&motion_kind) && frame < 2.0 {
-					MotionModule::change_motion(boma, Hash40::new("attack_12"), 2.0, 1.0, false, 0.0, false, false);
-			};
-			if [hash40("attack_13")].contains(&motion_kind) && frame < 2.0 {
-					MotionModule::change_motion(boma, Hash40::new("attack_13"), 2.0, 1.0, false, 0.0, false, false);
-			};
-		};
-		if !is_mechanics_enabled() && !is_gamemode("fgmode".to_string()) {
+		if !is_mechanics_enabled() && !is_gamemode("fgmode".to_string()) && !is_gamemode("rivals".to_string()) {
 			if HAS_ENABLE_100_ON[ENTRY_ID] {
 					WorkModule::set_flag(boma, true, *FIGHTER_STATUS_ATTACK_FLAG_ENABLE_100);
 			};
@@ -45,6 +36,15 @@ unsafe extern "C" fn jabcancel(fighter : &mut L2CFighterCommon) {
 				};
 			return;
 		}
+		//Speeds up jab 2s and 3s for certain chars
+		if [*FIGHTER_KIND_DOLLY, *FIGHTER_KIND_YOUNGLINK, *FIGHTER_KIND_KROOL].contains(&fighter_kind) {
+			if [hash40("attack_12")].contains(&motion_kind) && frame < 2.0 {
+					MotionModule::change_motion(boma, Hash40::new("attack_12"), 2.0, 1.0, false, 0.0, false, false);
+			};
+			if [hash40("attack_13")].contains(&motion_kind) && frame < 2.0 {
+					MotionModule::change_motion(boma, Hash40::new("attack_13"), 2.0, 1.0, false, 0.0, false, false);
+			};
+		};
 		//Prevents jab overriding
 		if [*FIGHTER_STATUS_KIND_ATTACK_100, *FIGHTER_STATUS_KIND_ATTACK, *FIGHTER_DEMON_STATUS_KIND_ATTACK_COMBO].contains(&status_kind) {
 			if ((stick_x <= 0.2 && stick_x >= -0.2) && (stick_y <= 0.2 && stick_y >= -0.2)) && ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_ATTACK) && ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_CATCH) && 

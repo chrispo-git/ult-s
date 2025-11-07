@@ -70,7 +70,7 @@ pub(crate) fn get_wd_length(fighter_kind : i32) -> f32 {
 
 unsafe extern "C" fn wavedash(fighter : &mut L2CFighterCommon) {
     unsafe {
-		if !is_mechanics_enabled() {
+		if !is_mechanics_enabled() && !is_gamemode("rivals".to_string()) {
 			return;
 		}
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);    
@@ -146,7 +146,7 @@ pub unsafe fn change_status_request_hook(boma: &mut smash::app::BattleObjectModu
 	let is_clear_buffer = arg3;
 	if smash::app::utility::get_category(boma) == *BATTLE_OBJECT_CATEGORY_FIGHTER {
 		if [*FIGHTER_STATUS_KIND_ESCAPE, *FIGHTER_STATUS_KIND_ESCAPE_F, *FIGHTER_STATUS_KIND_ESCAPE_B].contains(&next_status) {
-			if !is_mechanics_enabled() {
+			if !is_mechanics_enabled()  && !is_gamemode("rivals".to_string()) {
 				return original!()(boma, status_kind, arg3);
 			}
 			if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP) || ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP_MINI) {
@@ -166,7 +166,7 @@ pub unsafe fn change_status_request_hook(boma: &mut smash::app::BattleObjectModu
             WorkModule::set_float(boma, 9.0, *FIGHTER_INSTANCE_WORK_ID_FLOAT_DAMAGE_REACTION_FRAME_LAST);
 			original!()(boma, *FIGHTER_STATUS_KIND_DAMAGE_FALL, true)
 		}else if next_status == *FIGHTER_STATUS_KIND_TURN && curr_status == *FIGHTER_STATUS_KIND_LANDING{
-			if !is_mechanics_enabled() {
+			if !is_mechanics_enabled()  && !is_gamemode("rivals".to_string()) {
 				return original!()(boma, status_kind, arg3);
 			}
 			return 0 as u64
@@ -190,7 +190,7 @@ unsafe extern "C" fn status_pre_EscapeAir(fighter: &mut L2CFighterCommon) -> L2C
 	let y = ControlModule::get_stick_y(boma);
 	let fighter_kind = smash::app::utility::get_kind(boma);
     //Handles wavedash
-	if !is_mechanics_enabled() {
+	if !is_mechanics_enabled()  && !is_gamemode("rivals".to_string()) {
 		return smashline::original_status(Pre, fighter, *FIGHTER_STATUS_KIND_ESCAPE_AIR)(fighter);
 	}
     if IS_WAVEDASH[ENTRY_ID] == true && y < 0.5 /*&& (ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_JUMP) || ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP_MINI))*/ && GroundModule::ray_check(boma, &Vector2f{ x: PostureModule::pos_x(boma), y: PostureModule::pos_y(boma)}, &Vector2f{ x: 0.0, y: -3.0}, true) == 1 && fighter_kind != *FIGHTER_KIND_DEMON{
@@ -208,7 +208,7 @@ pub unsafe fn change_status_request_script_hook(boma: &mut smash::app::BattleObj
 	let prev_status_1 = StatusModule::prev_status_kind(boma, 0);
 	let prev_status_2 = StatusModule::prev_status_kind(boma, 1);
 	let curr_status = StatusModule::status_kind(boma);
-	if !is_mechanics_enabled() {
+	if !is_mechanics_enabled() && !is_gamemode("rivals".to_string()) {
 		return original!()(boma, status_kind, arg3);
 	}
 	if smash::app::utility::get_category(boma) == *BATTLE_OBJECT_CATEGORY_FIGHTER {

@@ -87,7 +87,7 @@ unsafe extern "C" fn moonwalk(fighter : &mut L2CFighterCommon) {
 //JC Grab
 unsafe extern "C" fn jc_grab(fighter : &mut L2CFighterCommon) {
     unsafe {
-		if !is_mechanics_enabled() {
+		if !is_mechanics_enabled() || is_gamemode("rivals".to_string()) {
 			return;
 		}
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);  
