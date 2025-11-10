@@ -168,23 +168,27 @@ pub(crate) fn is_edge_cancel(fighter_kind : i32, status_kind : i32, is_added : b
 //Edge Cancelling Part A
 #[skyline::hook(replace = smash::app::lua_bind::StatusModule::init_settings)]
 unsafe fn init_settings_replace(module_accessor: &mut smash::app::BattleObjectModuleAccessor, situation_kind: i32, arg3: i32, arg4: u64, ground_cliff_check_kind: u64, arg6: bool, arg7: i32, arg8: i32, arg9: i32, arg10: i32) -> u64 {
-    if !is_mechanics_enabled() {
+    if !is_mechanics_enabled() && !is_gamemode("rivals".to_string()) {
         return original!()(module_accessor, situation_kind, arg3, arg4, ground_cliff_check_kind, arg6, arg7, arg8, arg9, arg10);
 	}
 	let status_kind = StatusModule::status_kind(module_accessor);
     let fighter_kind = smash::app::utility::get_kind(module_accessor);
 	let is_added = is_added(module_accessor);
+	let mut ground_cliff = ground_cliff_check_kind;
+	if !is_gamemode("rivals".to_string()) {
+		ground_cliff = *GROUND_CLIFF_CHECK_KIND_NONE;
+	}
     if smash::app::utility::get_category(module_accessor) != *BATTLE_OBJECT_CATEGORY_FIGHTER {
         return original!()(module_accessor, situation_kind, arg3, arg4, ground_cliff_check_kind, arg6, arg7, arg8, arg9, arg10);
     }
     if is_edge_cancel(fighter_kind, status_kind, is_added) && situation_kind == SITUATION_KIND_GROUND {
-        original!()(module_accessor, situation_kind, arg3, 1 as u64, ground_cliff_check_kind, arg6, arg7, arg8, arg9, arg10)
+        original!()(module_accessor, situation_kind, arg3, 1 as u64, ground_cliff, arg6, arg7, arg8, arg9, arg10)
     } 
     else if [*FIGHTER_STATUS_KIND_LANDING_ATTACK_AIR, *FIGHTER_STATUS_KIND_LANDING, *FIGHTER_STATUS_KIND_DASH, *FIGHTER_STATUS_KIND_TURN_DASH].contains(&status_kind) {
-        original!()(module_accessor, situation_kind, arg3, 1 as u64, ground_cliff_check_kind, arg6, arg7, arg8, arg9, arg10)
+        original!()(module_accessor, situation_kind, arg3, 1 as u64, ground_cliff, arg6, arg7, arg8, arg9, arg10)
     }
     else {
-        original!()(module_accessor, situation_kind, arg3, arg4, ground_cliff_check_kind, arg6, arg7, arg8, arg9, arg10)
+        original!()(module_accessor, situation_kind, arg3, arg4, ground_cliff, arg6, arg7, arg8, arg9, arg10)
     }
 }
 
