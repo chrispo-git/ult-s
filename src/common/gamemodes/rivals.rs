@@ -12,7 +12,72 @@ use crate::util::*;
 
 static mut PAUSE : [bool; 8] = [false; 8];
 static mut HAS_WALLJUMPED : [bool; 8] = [false; 8];
+static mut DRIFT_AMOUNT : [f32; 8] = [0.0; 8];
 
+unsafe extern "C" fn pivot(fighter : &mut L2CFighterCommon) {
+    unsafe {
+		if !is_gamemode("rivals".to_string()) {
+			return;
+		}
+        let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);  
+		let mut stickx = ControlModule::get_stick_x(boma);		
+		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
+		let lr = PostureModule::lr(boma);
+		stickx = stickx * lr;
+		let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+        if [*FIGHTER_STATUS_KIND_DASH, *FIGHTER_STATUS_KIND_TURN_DASH].contains(&status_kind) {
+			if MotionModule::frame(boma) <= 10.0 && MotionModule::frame(boma) > 6.0 {
+				CAN_DASH[ENTRY_ID] = 1;
+				CAN_TURNDASH[ENTRY_ID] = 1;
+				if stickx <= -0.5 {
+					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_TURN, true);
+				};
+			} else {
+				CAN_DASH[ENTRY_ID] = 0;
+				CAN_TURNDASH[ENTRY_ID] = 0;
+			};
+		} else {
+			CAN_DASH[ENTRY_ID] = 0;
+			CAN_TURNDASH[ENTRY_ID] = 0;
+		};
+		if status_kind == *FIGHTER_STATUS_KIND_TURN {
+			JostleModule::set_status(boma, false);
+		};
+    };
+}
+unsafe extern "C" fn drift_di(fighter : &mut L2CFighterCommon) {
+    unsafe {
+		if !is_gamemode("rivals".to_string()) {
+			return;
+		}
+        let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);  
+		let mut stickx = ControlModule::get_stick_x(boma);		
+		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
+		let lr = PostureModule::lr(boma);
+		stickx = stickx * lr;
+		let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+        if [*FIGHTER_STATUS_KIND_DAMAGE_FLY, *FIGHTER_STATUS_KIND_DAMAGE_FLY_ROLL].contains(&status_kind) {
+            let max_drift_change = 0.7;
+            let drift_add = 0.005;
+            let drift_mul = 0.01;
+            if DRIFT_AMOUNT[ENTRY_ID].abs() < max_drift_change  && stickx.abs() > 0.2{
+                let add_amount = drift_add*stickx.signum() + drift_mul*(stickx/1.0);
+                let speed = smash::phx::Vector3f { x: add_amount, y: 0.0, z: 0.0 };
+                KineticModule::add_speed(boma, &speed);
+            }
+        } else {
+            DRIFT_AMOUNT[ENTRY_ID] = 0.0;
+        }
+        if [*FIGHTER_STATUS_KIND_DASH, *FIGHTER_STATUS_KIND_TURN_DASH].contains(&status_kind) {
+			if stickx < -0.3 {
+				StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_TURN, true);
+			};
+		};
+		if status_kind == *FIGHTER_STATUS_KIND_TURN {
+			JostleModule::set_status(boma, false);
+		};
+    };
+}
 unsafe extern "C" fn rivals(fighter : &mut L2CFighterCommon) {
     unsafe {
         if !is_gamemode("rivals".to_string()){
@@ -73,7 +138,7 @@ unsafe extern "C" fn rivals(fighter : &mut L2CFighterCommon) {
             PAUSE[ENTRY_ID] = false;
         }
         
-        if AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_SHIELD) {
+        if AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_SHIELD) && ![*FIGHTER_STATUS_KIND_ATTACK, *FIGHTER_STATUS_KIND_ATTACK_100].contains(&status_kind){
             if situation_kind == *SITUATION_KIND_GROUND {
 			    StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_SAVING_DAMAGE, true);
                 //WorkModule::set_int(boma, 70, *FIGHTER_STATUS_SAVING_DAMAGE_WORK_INT_STUN_FRAME);
@@ -87,5 +152,6 @@ unsafe extern "C" fn rivals(fighter : &mut L2CFighterCommon) {
 pub fn install() {
     Agent::new("fighter")
 	.on_line(Main, rivals)
+	.on_line(Main, pivot)
 	.install();
 }
