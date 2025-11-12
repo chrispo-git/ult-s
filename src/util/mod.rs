@@ -672,7 +672,7 @@ pub(crate) unsafe fn update_enabled_checks() -> () {
 		param_config::update_int_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("param_motion"), smash::hash40("escape_air_slide_back_end_frame"), -1));
 		param_config::update_float_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("param_motion"), smash::hash40("landing_frame_escape_air_slide_max"), 12.0));
 		param_config::update_float_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("param_motion"), smash::hash40("landing_frame_escape_air_slide"), 12.0));
-	} else {
+	} else if !is_gamemode("rivals".to_string()) {
 		param_config::update_attribute_mul_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("damage_fly_top_air_accel_y"), 0, 1.0));
 		param_config::update_float_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("damage_fly_top_speed_y_stable"), 0, 1.8));
 		param_config::update_int_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("param_motion"), smash::hash40("escape_air_slide_back_end_frame"), 4));
@@ -683,6 +683,10 @@ pub(crate) unsafe fn update_enabled_checks() -> () {
 		param_config::update_int_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("param_motion"), smash::hash40("escape_air_slide_back_end_frame"), -1));
 		param_config::update_float_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("param_motion"), smash::hash40("landing_frame_escape_air_slide_max"), 5.0));
 		param_config::update_float_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("param_motion"), smash::hash40("landing_frame_escape_air_slide"), 5.0));
+		if !IS_MECHANICS_ENABLED {
+			param_config::update_attribute_mul_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("damage_fly_top_air_accel_y"), 0, 1.0));
+			param_config::update_float_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("damage_fly_top_speed_y_stable"), 0, 1.8));
+		}
 	}
 }
 

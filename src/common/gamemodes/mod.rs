@@ -9,6 +9,7 @@ mod parry;
 mod hitstunchange;
 mod sixtyfour;
 mod fgmode;
+mod rivals;
 mod smym;
 
 pub fn install() {
@@ -19,6 +20,7 @@ pub fn install() {
     vampire::install();
     superboss::install();
     itemduel::install();
+    rivals::install();
     parry::install();
     hitstunchange::install();
     sixtyfour::install();
