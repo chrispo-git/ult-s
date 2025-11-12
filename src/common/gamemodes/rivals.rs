@@ -11,6 +11,7 @@ use smash::phx::Vector2f;
 use crate::util::*;
 
 static mut PAUSE : [bool; 8] = [false; 8];
+static mut HAS_WALLJUMPED : [bool; 8] = [false; 8];
 
 unsafe extern "C" fn rivals(fighter : &mut L2CFighterCommon) {
     unsafe {
@@ -21,6 +22,11 @@ unsafe extern "C" fn rivals(fighter : &mut L2CFighterCommon) {
 		let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
         let status_kind = StatusModule::status_kind(boma);
 		let gravity = WorkModule::get_param_float(fighter.module_accessor, hash40("air_accel_y"), 0);
+        
+        CAN_GRAB[ENTRY_ID] = 1;
+        if fighter.sub_transition_group_check_air_wall_jump().get_bool() {
+            StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_PASSIVE_WALL_JUMP, true);
+        }
         if [*FIGHTER_STATUS_KIND_ESCAPE_AIR, *FIGHTER_STATUS_KIND_ESCAPE_AIR_SLIDE].contains(&status_kind) {
             if MotionModule::frame(boma) > 1.0 && MotionModule::frame(boma) < 3.0 {
                 if ControlModule::get_stick_x(boma).abs() < 0.2 && ControlModule::get_stick_y(boma).abs() < 0.2 {

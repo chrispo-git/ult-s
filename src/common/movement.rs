@@ -21,7 +21,7 @@ static HOLD_BUFFER_LIMIT : i32 = 20; //Max frames for hold buffer
 //Perfect Pivot
 unsafe extern "C" fn perfectpivot(fighter : &mut L2CFighterCommon) {
     unsafe {
-		if !is_mechanics_enabled() {
+		if !is_mechanics_enabled() || is_gamemode("rivals".to_string()) {
 			return;
 		}
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);  
@@ -54,7 +54,7 @@ unsafe extern "C" fn perfectpivot(fighter : &mut L2CFighterCommon) {
 //Moonwalk
 unsafe extern "C" fn moonwalk(fighter : &mut L2CFighterCommon) {
     unsafe {
-		if !is_mechanics_enabled() {
+		if !is_mechanics_enabled() && !is_gamemode("rivals".to_string()) {
 			return;
 		}
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);  
@@ -193,7 +193,7 @@ unsafe extern "C" fn hold_buffer_killer(fighter : &mut L2CFighterCommon) {
 //Dash changes
 unsafe extern "C" fn dash(fighter : &mut L2CFighterCommon) {
     unsafe {
-		if !is_mechanics_enabled() {
+		if !is_mechanics_enabled() && !is_gamemode("rivals".to_string())  {
 			return;
 		}
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);  
@@ -338,7 +338,7 @@ unsafe fn status_treadjump(fighter: &mut L2CFighterCommon) -> L2CValue {
 
 #[skyline::hook(replace = L2CFighterCommon_sub_tread_jump_uniq_check)]
 unsafe fn sub_tread_jump_uniq_check(fighter: &mut L2CFighterCommon) -> L2CValue {
-    if !WorkModule::is_flag(fighter.module_accessor, *FIGHTER_STATUS_TREAD_FLAG_NO_REACTION) {
+    if !WorkModule::is_flag(fighter.module_accessor, *FIGHTER_STATUS_TREAD_FLAG_NO_REACTION) && !is_gamemode("rivals".to_string()) {
         let jump_mini = if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_STATUS_TREAD_FLAG_BUTTON) {
             // If any valid footstool button is held, do not turn on the short hop flag
             ControlModule::check_button_off(fighter.module_accessor, *CONTROL_PAD_BUTTON_JUMP)

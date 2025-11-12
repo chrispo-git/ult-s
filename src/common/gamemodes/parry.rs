@@ -42,7 +42,7 @@ unsafe extern "C" fn parry(fighter : &mut L2CFighterCommon) {
                 macros::COL_NORMAL(fighter);
                 let mut rate = 1.0;
                 if is_gamemode("rivals".to_string()) {
-                    rate = 0.25;
+                    rate = 0.5;
                 }
                 WorkModule::set_float(boma, rate, *FIGHTER_STATUS_WORK_ID_FLOAT_REBOUND_MOTION_RATE);
 				StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_REBOUND, true);
@@ -56,7 +56,7 @@ unsafe extern "C" fn parry(fighter : &mut L2CFighterCommon) {
                 EffectModule::req_follow(boma, smash::phx::Hash40::new("sys_just_shield_hit"), smash::phx::Hash40::new("hip"), &NONE, &NONE, 0.7, true, 0, 0, 0, 0, 0, true, true) as u32;
             }
         }
-        if [*FIGHTER_STATUS_KIND_REBOUND].contains(&status_kind) && MotionModule::rate(boma) == 0.25 && is_gamemode("rivals".to_string()) {
+        if [*FIGHTER_STATUS_KIND_REBOUND].contains(&status_kind) && MotionModule::rate(boma) == 0.5 && is_gamemode("rivals".to_string()) {
             if (MotionModule::frame(boma) as i32) == 1 {
 			    macros::FLASH(fighter, 0.25, 0.25, 0.25, 0.5);
             }
@@ -67,6 +67,14 @@ unsafe extern "C" fn parry(fighter : &mut L2CFighterCommon) {
         if [hash40("just_shield"), hash40("just_shield_off")].contains(&MotionModule::motion_kind(boma)) {
             PARRY_DUATION[ENTRY_ID] = 10;
             println!("Parries");
+        }
+        if AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_SHIELD) && is_gamemode("rivals".to_string()) {
+            if situation_kind == *SITUATION_KIND_GROUND {
+                WorkModule::set_float(boma, 0.5, *FIGHTER_STATUS_WORK_ID_FLOAT_REBOUND_MOTION_RATE);
+			    StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_REBOUND, true);
+            } else {
+			    StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL_SPECIAL, true);
+            }
         }
         if PARRY_DUATION[ENTRY_ID] == 1 && !(*FIGHTER_STATUS_KIND_DAMAGE..*FIGHTER_STATUS_KIND_DAMAGE_FALL).contains(&status_kind){
 			StopModule::end_stop(boma);
