@@ -38,6 +38,8 @@ unsafe extern "C" fn critical(fighter: &mut L2CFighterCommon) {
                 DO_CRITICAL[ENTRY_ID] = false;
             }
         }
+    } else {
+        CRITICAL_FRAME[ENTRY_ID] = 0;
     }
 }	
 #[skyline::hook(replace = smash::app::sv_animcmd::ATTACK)]
@@ -45,7 +47,10 @@ unsafe fn attack_replace(lua_state: u64) {
     let mut l2c_agent = L2CAgent::new(lua_state);
 
     let boma = smash::app::sv_system::battle_object_module_accessor(lua_state);
-	let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+    let mut ENTRY_ID = 0;
+    if smash::app::utility::get_category(boma) == *BATTLE_OBJECT_CATEGORY_FIGHTER {
+	    ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+    }
     let mut effs = 0;
     let mut critical = 0;
     if is_gamemode("effects".to_string()) {
@@ -58,8 +63,10 @@ unsafe fn attack_replace(lua_state: u64) {
     l2c_agent.clear_lua_stack();
     for (i, x) in hitbox_params.iter_mut().enumerate().take(36) {
         if i == 3 && is_gamemode("critical".to_string()) && critical == 7 {
-            l2c_agent.push_lua_stack(&mut L2CValue::new_num(x.get_num() * 4));
-            DO_CRITICAL[ENTRY_ID] = true;
+            l2c_agent.push_lua_stack(&mut L2CValue::new_num(x.get_num() * 4.0));
+            if smash::app::utility::get_category(boma) == *BATTLE_OBJECT_CATEGORY_FIGHTER {
+                DO_CRITICAL[ENTRY_ID] = true;
+            }
         } else if i == 4 && is_gamemode("angles".to_string()) {
             l2c_agent.push_lua_stack(&mut L2CValue::new_num(sv_math::rand(hash40("fighter"), 361) as f32));
         } else if i == 32 && is_gamemode("effects".to_string()) {
@@ -67,7 +74,7 @@ unsafe fn attack_replace(lua_state: u64) {
         } else if i == 34 && is_gamemode("effects".to_string()) {
             l2c_agent.push_lua_stack(&mut L2CValue::new_int(get_sfx(effs) as u64));
         } else if i == 15 && is_gamemode("critical".to_string()) && critical == 7 {
-            l2c_agent.push_lua_stack(&mut L2CValue::new_num(x.get_num() * 4));
+            l2c_agent.push_lua_stack(&mut L2CValue::new_num(x.get_num() * 4.0));
         }else {
             l2c_agent.push_lua_stack(x);
         }
@@ -110,4 +117,7 @@ unsafe fn get_sfx(val: i32) -> i32 {
 }
 pub fn install() {
     skyline::install_hooks!(attack_replace);
+    Agent::new("fighter")
+	.on_line(Main, critical)
+	.install();
 }
