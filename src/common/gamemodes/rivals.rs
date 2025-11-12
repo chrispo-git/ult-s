@@ -25,6 +25,17 @@ unsafe extern "C" fn rivals(fighter : &mut L2CFighterCommon) {
 		let gravity = WorkModule::get_param_float(fighter.module_accessor, hash40("air_accel_y"), 0);
 		let frame = MotionModule::frame(boma);
 		let cancel_frame = FighterMotionModuleImpl::get_cancel_frame(boma,smash::phx::Hash40::new_raw(MotionModule::motion_kind(boma)),false) as f32;
+
+        if status_kind == *FIGHTER_STATUS_KIND_DASH {
+            if (frame as i32 == 3) && ControlModule::get_stick_x(boma).abs() < 0.2 {
+                StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_WAIT, true);
+            }
+        }
+        if status_kind == *FIGHTER_STATUS_KIND_TURN_DASH {
+            if (frame as i32 == 4) && ControlModule::get_stick_x(boma).abs() < 0.2 {
+                StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_WAIT, true);
+            }
+        }
         
         CAN_GRAB[ENTRY_ID] = 1;
 		let cat = ControlModule::get_command_flag_cat(fighter.module_accessor, 0);
