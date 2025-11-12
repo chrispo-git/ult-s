@@ -21,11 +21,27 @@ unsafe extern "C" fn rivals(fighter : &mut L2CFighterCommon) {
 		let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 		let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
         let status_kind = StatusModule::status_kind(boma);
+		let situation_kind = StatusModule::situation_kind(boma);
 		let gravity = WorkModule::get_param_float(fighter.module_accessor, hash40("air_accel_y"), 0);
+		let frame = MotionModule::frame(boma);
+		let cancel_frame = FighterMotionModuleImpl::get_cancel_frame(boma,smash::phx::Hash40::new_raw(MotionModule::motion_kind(boma)),false) as f32;
         
         CAN_GRAB[ENTRY_ID] = 1;
-        if fighter.sub_transition_group_check_air_wall_jump().get_bool() {
-            StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_PASSIVE_WALL_JUMP, true);
+		let cat = ControlModule::get_command_flag_cat(fighter.module_accessor, 0);
+        if 
+            [*FIGHTER_STATUS_KIND_FALL, *FIGHTER_STATUS_KIND_JUMP, *FIGHTER_STATUS_KIND_JUMP_AERIAL].contains(&status_kind) ||
+            ([*FIGHTER_STATUS_KIND_FALL_SPECIAL, *FIGHTER_STATUS_KIND_SPECIAL_HI].contains(&status_kind) && !HAS_WALLJUMPED[ENTRY_ID]) ||
+            ([*FIGHTER_STATUS_KIND_ATTACK_AIR].contains(&status_kind) && frame >= cancel_frame)
+        {
+            if (ControlModule::get_flick_x(boma) >= 3 && ControlModule::get_stick_x(boma) >= 0.7 && GroundModule::get_touch_flag(boma) == *GROUND_TOUCH_FLAG_LEFT as u64) 
+            || (ControlModule::get_flick_x(boma) >= 3 && ControlModule::get_stick_x(boma) <= -0.7 && GroundModule::get_touch_flag(boma) == *GROUND_TOUCH_FLAG_RIGHT as u64)
+            {
+                HAS_WALLJUMPED[ENTRY_ID] = true;
+                StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_WALL_JUMP, true);
+            }
+        }
+        if situation_kind == *SITUATION_KIND_GROUND {
+            HAS_WALLJUMPED[ENTRY_ID] = false;
         }
         if [*FIGHTER_STATUS_KIND_ESCAPE_AIR, *FIGHTER_STATUS_KIND_ESCAPE_AIR_SLIDE].contains(&status_kind) {
             if MotionModule::frame(boma) > 1.0 && MotionModule::frame(boma) < 3.0 {
@@ -46,6 +62,14 @@ unsafe extern "C" fn rivals(fighter : &mut L2CFighterCommon) {
             PAUSE[ENTRY_ID] = false;
         }
         
+        if AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_SHIELD) {
+            if situation_kind == *SITUATION_KIND_GROUND {
+			    StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_SAVING_DAMAGE, true);
+                //WorkModule::set_int(boma, 70, *FIGHTER_STATUS_SAVING_DAMAGE_WORK_INT_STUN_FRAME);
+            } else {
+			    StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL_SPECIAL, true);
+            }
+        }
         GroundModule::set_cliff_check(fighter.module_accessor, smash::app::GroundCliffCheckKind(*GROUND_CLIFF_CHECK_KIND_NONE));
     };
 }

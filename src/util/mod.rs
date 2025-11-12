@@ -656,7 +656,7 @@ pub(crate) unsafe fn is_tap_djc(boma: &mut smash::app::BattleObjectModuleAccesso
 }
 
 pub(crate) unsafe fn is_mechanics_enabled() -> bool {
-	return IS_MECHANICS_ENABLED;
+	return IS_MECHANICS_ENABLED || is_gamemode("rivals".to_string());
 }
 
 pub(crate) unsafe fn update_enabled_checks() -> () {

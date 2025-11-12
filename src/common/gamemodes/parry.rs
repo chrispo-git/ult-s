@@ -68,14 +68,6 @@ unsafe extern "C" fn parry(fighter : &mut L2CFighterCommon) {
             PARRY_DUATION[ENTRY_ID] = 10;
             println!("Parries");
         }
-        if AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_SHIELD) && is_gamemode("rivals".to_string()) {
-            if situation_kind == *SITUATION_KIND_GROUND {
-                WorkModule::set_float(boma, 0.5, *FIGHTER_STATUS_WORK_ID_FLOAT_REBOUND_MOTION_RATE);
-			    StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_REBOUND, true);
-            } else {
-			    StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL_SPECIAL, true);
-            }
-        }
         if PARRY_DUATION[ENTRY_ID] == 1 && !(*FIGHTER_STATUS_KIND_DAMAGE..*FIGHTER_STATUS_KIND_DAMAGE_FALL).contains(&status_kind){
 			StopModule::end_stop(boma);
             println!("End Stun Early");

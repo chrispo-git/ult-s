@@ -215,6 +215,15 @@ pub unsafe fn change_status_request_script_hook(boma: &mut smash::app::BattleObj
 	let prev_status_1 = StatusModule::prev_status_kind(boma, 0);
 	let prev_status_2 = StatusModule::prev_status_kind(boma, 1);
 	let curr_status = StatusModule::status_kind(boma);
+	if [*FIGHTER_STATUS_KIND_GUARD, *FIGHTER_STATUS_KIND_GUARD_ON, *FIGHTER_STATUS_KIND_GUARD_DAMAGE].contains(&next_status) {
+		if is_gamemode("rivals".to_string()) || is_gamemode("parry".to_string()) {
+			if !ControlModule::check_button_on_trriger(boma, *CONTROL_PAD_BUTTON_GUARD) {
+				ControlModule::reset_trigger(boma);
+                ControlModule::clear_command(boma, true);
+				return 0 as u64
+			}
+		}
+	}
 	if !is_mechanics_enabled() && !is_gamemode("rivals".to_string()) {
 		return original!()(boma, status_kind, arg3);
 	}
