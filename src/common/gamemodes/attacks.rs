@@ -37,8 +37,23 @@ unsafe extern "C" fn critical(fighter: &mut L2CFighterCommon) {
                 macros::CAM_ZOOM_OUT(fighter);
                 DO_CRITICAL[ENTRY_ID] = false;
             }
+        } else {
+            if CRITICAL_FRAME[ENTRY_ID] > 0 {
+                SlowModule::clear_whole(boma);
+                CameraModule::reset_all(boma);
+                EffectModule::kill_kind(boma, Hash40::new("sys_bg_criticalhit"), false, false);
+                macros::CAM_ZOOM_OUT(fighter);
+                DO_CRITICAL[ENTRY_ID] = false;
+            }
         }
     } else {
+        if CRITICAL_FRAME[ENTRY_ID] > 0 {
+            SlowModule::clear_whole(boma);
+            CameraModule::reset_all(boma);
+            EffectModule::kill_kind(boma, Hash40::new("sys_bg_criticalhit"), false, false);
+            macros::CAM_ZOOM_OUT(fighter);
+            DO_CRITICAL[ENTRY_ID] = false;
+        }
         CRITICAL_FRAME[ENTRY_ID] = 0;
     }
 }	
@@ -57,15 +72,21 @@ unsafe fn attack_replace(lua_state: u64) {
         effs = sv_math::rand(hash40("fighter"), 13);
     }
     if is_gamemode("critical".to_string()) {
-        critical = sv_math::rand(hash40("fighter"), 8);
+        critical = sv_math::rand(hash40("fighter"), 32);
+        if smash::app::utility::get_category(boma) == *BATTLE_OBJECT_CATEGORY_FIGHTER && critical == 7{
+            DO_CRITICAL[ENTRY_ID] = true;
+        }
     }
     let mut hitbox_params: Vec<L2CValue> = (0..36).map(|i| l2c_agent.pop_lua_stack(i + 1)).collect();
     l2c_agent.clear_lua_stack();
     for (i, x) in hitbox_params.iter_mut().enumerate().take(36) {
-        if i == 3 && is_gamemode("critical".to_string()) && critical == 7 {
-            l2c_agent.push_lua_stack(&mut L2CValue::new_num(x.get_num() * 4.0));
-            if smash::app::utility::get_category(boma) == *BATTLE_OBJECT_CATEGORY_FIGHTER {
-                DO_CRITICAL[ENTRY_ID] = true;
+        if i == 3 && is_gamemode("critical".to_string()) && DO_CRITICAL[ENTRY_ID] {
+            if x.get_num() < 2.5 {
+                println!("damage is too low! {}%", x.get_num());
+                l2c_agent.push_lua_stack(x);
+            } else {
+                println!("damage new : {}", x.get_num() * 2.0);
+                l2c_agent.push_lua_stack(&mut L2CValue::new_num(x.get_num() * 2.0));
             }
         } else if i == 4 && is_gamemode("angles".to_string()) {
             l2c_agent.push_lua_stack(&mut L2CValue::new_num(sv_math::rand(hash40("fighter"), 361) as f32));
@@ -73,8 +94,8 @@ unsafe fn attack_replace(lua_state: u64) {
             l2c_agent.push_lua_stack(&mut L2CValue::new_hash(get_effect(effs)));
         } else if i == 34 && is_gamemode("effects".to_string()) {
             l2c_agent.push_lua_stack(&mut L2CValue::new_int(get_sfx(effs) as u64));
-        } else if i == 15 && is_gamemode("critical".to_string()) && critical == 7 {
-            l2c_agent.push_lua_stack(&mut L2CValue::new_num(x.get_num() * 4.0));
+        } else if i == 15 && is_gamemode("critical".to_string()) &&  DO_CRITICAL[ENTRY_ID] {
+            l2c_agent.push_lua_stack(&mut L2CValue::new_num(x.get_num() * 2.0));
         }else {
             l2c_agent.push_lua_stack(x);
         }
