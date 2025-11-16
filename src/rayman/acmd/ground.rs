@@ -199,7 +199,7 @@ unsafe extern "C" fn rayman_dsmash(fighter: &mut L2CAgentBase) {
 
 unsafe extern "C" fn rayman_fsmash(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
-		macros::FT_MOTION_RATE(fighter, 4.0);
+		macros::FT_MOTION_RATE(fighter, 5.0);
 		wait(fighter.lua_state_agent, 1.0);
 		macros::FT_MOTION_RATE(fighter, 1.0);
 		frame(fighter.lua_state_agent, 7.0);
