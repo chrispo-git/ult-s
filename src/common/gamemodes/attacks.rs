@@ -72,7 +72,7 @@ unsafe fn attack_replace(lua_state: u64) {
         effs = sv_math::rand(hash40("fighter"), 13);
     }
     if is_gamemode("critical".to_string()) {
-        critical = sv_math::rand(hash40("fighter"), 32);
+        critical = sv_math::rand(hash40("fighter"), 14);
         if smash::app::utility::get_category(boma) == *BATTLE_OBJECT_CATEGORY_FIGHTER && critical == 7{
             DO_CRITICAL[ENTRY_ID] = true;
         }
