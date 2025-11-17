@@ -249,7 +249,7 @@ unsafe extern "C" fn rayman(fighter: &mut L2CFighterCommon) {
                         MotionModule::change_motion(fighter.module_accessor, Hash40::new("slide_jump_fall"), 0.0, 1.0, false, 0.0, false, false);
                     }
                     if frame < 111.0 {
-                        if GroundModule::is_wall_touch_line(boma, *GROUND_TOUCH_FLAG_SIDE as u32) || (AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_ALL) && WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_HIT_STOP_ATTACK_SUSPEND_FRAME) < 1){
+                        if GroundModule::is_wall_touch_line(boma, *GROUND_TOUCH_FLAG_SIDE as u32) || (AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_HIT) && WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_HIT_STOP_ATTACK_SUSPEND_FRAME) < 1){
                             StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_CAPTURE_JUMP, true);
                             if !AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_ALL) {
                                 macros::QUAKE(fighter, *CAMERA_QUAKE_KIND_L);
