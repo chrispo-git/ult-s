@@ -422,7 +422,9 @@ def grab_dependencies():
     print("       OSE downloaded")
 
     #CSK Collection
-    download_dependency = f"https://gamebanana.com/dl/1476941"
+    response = requests.get("https://api.gamebanana.com/Core/Item/Data?itemtype=Mod&itemid=499008&fields=Files().aFiles()")
+    latest = response.json()[0]
+    download_dependency = str(latest).split("'_sDownloadUrl': '")[1].split("'")[0]
     r = requests.get(download_dependency)
     f = open("downloads/csk_collection.zip","wb")
     f.write(r.content)
