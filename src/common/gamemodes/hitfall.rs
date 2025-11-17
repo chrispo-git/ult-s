@@ -12,7 +12,7 @@ use crate::util::*;
 
 unsafe extern "C" fn hitfall(fighter : &mut L2CFighterCommon) {
     unsafe {
-        if !is_gamemode("hitfall".to_string()) {
+        if !is_gamemode("hitfall".to_string()) && !is_gamemode("rivals".to_string()){
             return;
         }
 		let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
