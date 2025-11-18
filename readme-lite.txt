@@ -62,6 +62,9 @@ If you want to change this, go to "ultimate/ult-s/gamemode-default.txt" and add 
 "hitstun" - Hitstun Mode 
 "effects" - Random Effects Mode 
 "parry" - Parry Mode
+"smym" - Show Me Your Moves 
+"crit" - Critical Hit Mode 
+"rivals" - Rivals Mode 
 
 Q: "The game is going too fast!"
 A: You're likely on Yuzu or one of its forks. Make sure game speed is set to 50%, by going to emulation -> config -> system -> limit speed percent (on yuzu) and setting it to 50%, and this should make your game run at regular speeds.

@@ -79,6 +79,10 @@ If you want to change this, go to "ultimate/ult-s/gamemode-default.txt" and add 
 "hitstun" - Hitstun Mode 
 "effects" - Random Effects Mode 
 "parry" - Parry Mode
+"smym" - Show Me Your Moves 
+"crit" - Critical Hit Mode 
+"rivals" - Rivals Mode 
+
 
 Q: "The game is just vanilla!"
 A: Try going through these steps:
