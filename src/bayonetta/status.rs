@@ -19,10 +19,10 @@ unsafe extern "C" fn attack_air_f_exec(fighter: &mut L2CFighterCommon) -> L2CVal
         return smashline::original_status(Exec, fighter, *FIGHTER_BAYONETTA_STATUS_KIND_ATTACK_AIR_F)(fighter);
     }
 	if !AttackModule::is_infliction_status(fighter.module_accessor, *COLLISION_KIND_MASK_HIT) || 
-    WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_HIT_STOP_ATTACK_SUSPEND_FRAME) >= 1{
+    WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_HIT_STOP_ATTACK_SUSPEND_FRAME) >= 1{
         return smashline::original_status(Exec, fighter, *FIGHTER_BAYONETTA_STATUS_KIND_ATTACK_AIR_F)(fighter);
     }
-	if (ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_S) == 0{
+	if (ControlModule::get_command_flag_cat(fighter.module_accessor, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_S) == 0{
         return smashline::original_status(Exec, fighter, *FIGHTER_BAYONETTA_STATUS_KIND_ATTACK_AIR_F)(fighter);
     }
     fighter.change_status(FIGHTER_STATUS_KIND_SPECIAL_S.into(), false.into());
