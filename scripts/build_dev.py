@@ -46,7 +46,7 @@ try:
             f.write(in_[i])
         for x in needed_folders:
             f.write(f"	{x}::install();\n")
-        for i in range(864,878):
+        for i in range(864,886):
             f.write(in_[i])
     f.close()
     os.chdir("scripts")
