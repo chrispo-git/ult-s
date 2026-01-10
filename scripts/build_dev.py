@@ -4,7 +4,7 @@ import shutil
 from zipfile import ZipFile
 import subprocess
 
-needed_folders = ["util", "common", "controls", "cpu", "macros"]
+needed_folders = ["util", "common", "controls", "cpu", "s_macros"]
 all_folders = []
 in_ = []
 out_ = []

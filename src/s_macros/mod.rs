@@ -25,7 +25,7 @@ macro_rules! fastfall_land_cancel {
 				smash::app::lua_bind::StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_LANDING_FALL_SPECIAL, true);
 				smash::app::lua_bind::WorkModule::set_float(boma, $landing_lag, *FIGHTER_INSTANCE_WORK_ID_FLOAT_LANDING_FRAME);
 			};
-            fastfall!($fighter);
+            crate::fastfall!($fighter);
 		}
     };
 }

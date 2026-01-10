@@ -52,16 +52,7 @@ unsafe extern "C" fn hero(fighter : &mut L2CFighterCommon) {
 					WorkModule::set_int(boma, WorkModule::get_int(boma,*FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT_MAX), *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT);
 				};
 				if [hash40("special_n1"), hash40("special_air_n1"), hash40("special_n2"),  hash40("special_air_n2")].contains(&motion_kind){
-					if StatusModule::is_situation_changed(boma) {
-						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_LANDING_FALL_SPECIAL, true);
-						WorkModule::set_float(boma, 10.0, *FIGHTER_INSTANCE_WORK_ID_FLOAT_LANDING_FRAME);
-					};
-					if StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR {
-						let cat2 = ControlModule::get_command_flag_cat(boma, 1);
-						if (cat2 & *FIGHTER_PAD_CMD_CAT2_FLAG_FALL_JUMP) != 0 && stick_y < -0.66 && SPEED_Y[ENTRY_ID] <= 0.0 {
-							WorkModule::set_flag(boma, true, *FIGHTER_STATUS_WORK_ID_FLAG_RESERVE_DIVE);
-						}
-					};
+					crate::fastfall_land_cancel!(fighter, 10.0);
 				};
 			};
 		}
