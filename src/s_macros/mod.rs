@@ -29,3 +29,20 @@ macro_rules! fastfall_land_cancel {
 		}
     };
 }
+
+#[macro_export]
+macro_rules! fake_b_reverse {
+	($fighter:ident) => {
+		unsafe {
+			let boma = smash::app::sv_system::battle_object_module_accessor($fighter.lua_state_agent);
+			if MotionModule::frame(boma) as i32 == 5 {
+				if ControlModule::get_stick_x(boma)*PostureModule::lr(boma) < -0.5 {
+					PostureModule::reverse_lr(boma);
+					PostureModule::update_rot_y_lr(boma);
+					let b_reverse  = smash::phx::Vector3f { x: -1.0, y: 1.0, z: 1.0 };
+					KineticModule::mul_speed(boma, &b_reverse, *FIGHTER_KINETIC_ENERGY_ID_CONTROL);
+				};
+			}
+		}
+	}
+}
