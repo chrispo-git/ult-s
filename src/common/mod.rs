@@ -26,19 +26,30 @@ pub const MIN_WEIGHT : i32 = 60;
 pub const MAX_GRAVITY : f32 = 0.1;
 pub const MIN_GRAVITY : f32 = 0.065;
 
-
+unsafe extern "C" fn common(fighter : &mut L2CFighterCommon) {
+    unsafe {
+        let status_kind = StatusModule::status_kind(fighter.module_accessor);
+        let motion_kind = MotionModule::motion_kind(fighter.module_accessor);
+		let entry_id = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+        dacus::opff(fighter, status_kind, entry_id);
+        cancel::opff(fighter, status_kind);
+        hitstun::opff(fighter, status_kind);
+        jab::opff(fighter, status_kind, motion_kind, entry_id);
+    }
+}
 
 pub fn install() {
+    Agent::new("fighter")
+	.on_line(Main, common)
+	.install();
+
 	css::install();
 	gamemodes::install();
     hitstun::install();
-    dacus::install();
     landing::install();
     wavedash::install();
-    jab::install();
     movement::install();
     bone::install();
 	projectile_invuln::install();
 	remove_quake::install();
-	cancel::install();
 }

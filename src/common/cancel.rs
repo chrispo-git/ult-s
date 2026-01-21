@@ -76,43 +76,22 @@ pub(crate) fn check_jump(boma: &mut smash::app::BattleObjectModuleAccessor) -> b
 
 //
 
-unsafe extern "C" fn jump_cancel(fighter: &mut L2CFighterCommon) {
-    unsafe {
-        if is_mechanics_enabled() {
-            let lua_state = fighter.lua_state_agent;
-            let boma = smash::app::sv_system::battle_object_module_accessor(
-                fighter.lua_state_agent
-            );
-            let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
-            let fighter_kind = smash::app::utility::get_kind(boma);
-            let ENTRY_ID = WorkModule::get_int(
-                boma,
-                *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID
-            ) as usize;
-            let frame = MotionModule::frame(boma);
-            if is_jc(boma, fighter_kind, status_kind, frame) && check_jump(boma) {
-                if
-                    WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT) <
-                        WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT_MAX) &&
-                    StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR
-                {
-                    StatusModule::change_status_request_from_script(
-                        boma,
-                        *FIGHTER_STATUS_KIND_JUMP_AERIAL,
-                        true
-                    );
-                }
-                if StatusModule::situation_kind(boma) == *SITUATION_KIND_GROUND {
-                    StatusModule::change_status_request_from_script(
-                        boma,
-                        *FIGHTER_STATUS_KIND_JUMP_SQUAT,
-                        true
-                    );
-                }
-            }
-        }
+pub unsafe fn opff(fighter: &mut L2CFighterCommon, status_kind : i32) {
+    if !is_mechanics_enabled() {
+		return;
+	}
+    let situation_kind = StatusModule::situation_kind(fighter.module_accessor);
+    if  WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT) >=
+        WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT_MAX) &&
+        situation_kind == *SITUATION_KIND_AIR {
+        return;
+    };
+    let fighter_kind = smash::app::utility::get_kind(boma(fighter));
+    let frame = MotionModule::frame(fighter.module_accessor);
+    if is_jc(boma(fighter), fighter_kind, status_kind, frame) && check_jump(boma(fighter)) {
+        match situation_kind {
+            n if n == *SITUATION_KIND_AIR => StatusModule::change_status_request_from_script(fighter.module_accessor,*FIGHTER_STATUS_KIND_JUMP_AERIAL, true),
+            _ => StatusModule::change_status_request_from_script(fighter.module_accessor,*FIGHTER_STATUS_KIND_JUMP_SQUAT, true),
+        };
     }
-}
-pub fn install() {
-    Agent::new("fighter").on_line(Main, jump_cancel).install();
 }
