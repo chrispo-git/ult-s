@@ -25,7 +25,7 @@ unsafe fn cancel_to_falcon_punch(fighter: &mut L2CFighterCommon, status_kind: i3
         return;
     }
     if !AttackModule::is_infliction_status(fighter.module_accessor, *COLLISION_KIND_MASK_ALL) ||
-    is_hitlag(fighter.module_accessor) {
+    is_hitlag(boma(fighter)) {
         return;
     }
     let cat1 = ControlModule::get_command_flag_cat(fighter.module_accessor, 0);

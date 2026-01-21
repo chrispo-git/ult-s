@@ -570,6 +570,9 @@ pub(crate) unsafe fn is_hitlag(boma: &mut smash::app::BattleObjectModuleAccessor
 		return true
 	}
 }
+pub(crate) unsafe fn boma(fighter: &mut L2CFighterCommon) -> &mut smash::app::BattleObjectModuleAccessor {
+	return smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);
+}
 pub(crate) unsafe fn get_hitlag(boma: &mut smash::app::BattleObjectModuleAccessor) -> i32 {
 	return WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_HIT_STOP_ATTACK_SUSPEND_FRAME)
 }
