@@ -14,43 +14,41 @@ use smash::app::sv_math;
 static mut CRITICAL_FRAME : [i32; 8] = [0; 8];
 static mut DO_CRITICAL : [bool; 8] = [false; 8];
 
-unsafe extern "C" fn critical(fighter: &mut L2CFighterCommon) {
+pub unsafe fn critical_opff(fighter: &mut L2CFighterCommon, ENTRY_ID : usize) {
     if !is_gamemode("critical".to_string()) {
         return;
     }
-    let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);  
-	let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
     if DO_CRITICAL[ENTRY_ID] {
         if AttackModule::is_infliction_status(fighter.module_accessor, *COLLISION_KIND_MASK_HIT) {
             CRITICAL_FRAME[ENTRY_ID] += 1;
             if CRITICAL_FRAME[ENTRY_ID] < 2 {
-                SlowModule::set_whole(boma, 8, 80);
+                SlowModule::set_whole(fighter.module_accessor, 8, 80);
                 macros::CAM_ZOOM_IN_arg5(fighter, /*frames*/ 2.0,/*no*/ 0.0,/*zoom*/ 1.8,/*yrot*/ 0.0,/*xrot*/ 0.0);
-                EffectModule::req_follow(boma, Hash40::new("sys_bg_criticalhit"), Hash40::new("top"), &Vector3f{x: 0.0, y: 0.0, z: 0.0} as *const Vector3f, &Vector3f{x: 0.0, y: 0.0, z: 0.0} as *const Vector3f, 1.0, false, 0, 0, 0, 0, 0, false, false);
+                EffectModule::req_follow(fighter.module_accessor, Hash40::new("sys_bg_criticalhit"), Hash40::new("top"), &Vector3f{x: 0.0, y: 0.0, z: 0.0} as *const Vector3f, &Vector3f{x: 0.0, y: 0.0, z: 0.0} as *const Vector3f, 1.0, false, 0, 0, 0, 0, 0, false, false);
                 macros::PLAY_SE(fighter, Hash40::new("se_common_criticalhit"));
                 macros::QUAKE(fighter, *CAMERA_QUAKE_KIND_XL);
             }
             if CRITICAL_FRAME[ENTRY_ID] >= 6 {
-                SlowModule::clear_whole(boma);
-                CameraModule::reset_all(boma);
-                EffectModule::kill_kind(boma, Hash40::new("sys_bg_criticalhit"), false, false);
+                SlowModule::clear_whole(fighter.module_accessor);
+                CameraModule::reset_all(fighter.module_accessor);
+                EffectModule::kill_kind(fighter.module_accessor, Hash40::new("sys_bg_criticalhit"), false, false);
                 macros::CAM_ZOOM_OUT(fighter);
                 DO_CRITICAL[ENTRY_ID] = false;
             }
         } else {
             if CRITICAL_FRAME[ENTRY_ID] > 0 {
-                SlowModule::clear_whole(boma);
-                CameraModule::reset_all(boma);
-                EffectModule::kill_kind(boma, Hash40::new("sys_bg_criticalhit"), false, false);
+                SlowModule::clear_whole(fighter.module_accessor);
+                CameraModule::reset_all(fighter.module_accessor);
+                EffectModule::kill_kind(fighter.module_accessor, Hash40::new("sys_bg_criticalhit"), false, false);
                 macros::CAM_ZOOM_OUT(fighter);
                 DO_CRITICAL[ENTRY_ID] = false;
             }
         }
     } else {
         if CRITICAL_FRAME[ENTRY_ID] > 0 {
-            SlowModule::clear_whole(boma);
-            CameraModule::reset_all(boma);
-            EffectModule::kill_kind(boma, Hash40::new("sys_bg_criticalhit"), false, false);
+            SlowModule::clear_whole(fighter.module_accessor);
+            CameraModule::reset_all(fighter.module_accessor);
+            EffectModule::kill_kind(fighter.module_accessor, Hash40::new("sys_bg_criticalhit"), false, false);
             macros::CAM_ZOOM_OUT(fighter);
             DO_CRITICAL[ENTRY_ID] = false;
         }
@@ -138,7 +136,4 @@ unsafe fn get_sfx(val: i32) -> i32 {
 }
 pub fn install() {
     skyline::install_hooks!(attack_replace);
-    Agent::new("fighter")
-	.on_line(Main, critical)
-	.install();
 }
