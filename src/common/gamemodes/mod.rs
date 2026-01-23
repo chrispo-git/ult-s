@@ -26,10 +26,13 @@ unsafe extern "C" fn gamemodes(fighter : &mut L2CFighterCommon) {
     let status_kind = StatusModule::status_kind(fighter.module_accessor);
     let motion_kind = MotionModule::motion_kind(fighter.module_accessor);
     let entry_id = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+
     airdash::opff(fighter, status_kind, entry_id);
     attacks::critical_opff(fighter, entry_id);
     fgmode::opff(fighter, status_kind, motion_kind, entry_id);
     hitfall::opff(fighter, status_kind);
+    hitstunchange::opff(fighter, status_kind, entry_id);
+    itemduel::opff(fighter, status_kind, motion_kind, entry_id);
 }
 pub fn install() {
     Agent::new("fighter")
@@ -43,7 +46,6 @@ pub fn install() {
     itemduel::install();
     rivals::install();
     parry::install();
-    hitstunchange::install();
     sixtyfour::install();
     smym::install();
 }
