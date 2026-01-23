@@ -59,7 +59,6 @@ pub unsafe fn ftStatusUniqProcessDamage_exec_common_hook(fighter: &mut L2CFighte
         ret;
     }
     smash::lua2cpp::L2CFighterCommon::FighterStatusDamage__correctDamageVector(fighter);
-    println!("hook for hitstun being triggered");
 
     ret
 }
@@ -70,7 +69,6 @@ pub unsafe fn ftStatusUniqProcessDamage_exec_hook(fighter: &mut L2CFighterCommon
         ret;
     }
     smash::lua2cpp::L2CFighterCommon::FighterStatusDamage__correctDamageVector(fighter);
-    println!("hook2 for hitstun being triggered");
 
     ret
 }

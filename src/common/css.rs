@@ -8,13 +8,10 @@ use skyline_web::dialog_ok::DialogOk;
 static mut IS_UNPRESSED : bool = false;
 #[skyline::hook(offset = 0x1792dc0, inline)]
 unsafe fn on_rule_selection(_: &skyline::hooks::InlineCtx) {
-    println!("We Are On Rule Select");
     if ninput::any::is_down(ninput::Buttons::R) {
-        println!("R Pressed!");
         if !is_on_ryujinx() {
             show_gamemodes();
         } else {
-            println!("Emu Mode!");
             show_gamemodes_emu();
         }
     } else {
@@ -27,11 +24,9 @@ unsafe fn css_main_loop(arg: *const CharaSelect) {
     {
         if ninput::any::is_down(ninput::Buttons::MINUS) {
             if !IS_UNPRESSED {
-                println!("Minus Pressed!");
                 if !is_on_ryujinx() {
                     show_mod_settings();
                 } else {
-                    println!("Emu Mode!");
                     show_mod_settings_emu();
                 }
             }

@@ -9,6 +9,7 @@ use smash::phx::*;
 use smash::lib::{ L2CValue, L2CAgent };
 use smash::phx::Vector2f;
 use crate::util::*;
+use once_cell::sync::Lazy;
 
 //0 for hit_condition means it can always be jump cancelled
 //Otherwise, set hit_condition to a value such as *COLLISION_KIND_MASK_HIT
@@ -31,8 +32,7 @@ impl JumpCancelEntry {
         }
     }
 }
-#[inline(always)]
-pub(crate) fn jc_list() -> Vec<JumpCancelEntry> {
+static JC_LIST: Lazy<Vec<JumpCancelEntry>> = Lazy::new(|| {
     vec![
         JumpCancelEntry::new(*FIGHTER_KIND_KAMUI, *FIGHTER_KAMUI_STATUS_KIND_SPECIAL_N_HOLD, 0, -1, -1),
         JumpCancelEntry::new(*FIGHTER_KIND_FALCO, *FIGHTER_STATUS_KIND_SPECIAL_LW, 0, 4, 32),
@@ -48,7 +48,7 @@ pub(crate) fn jc_list() -> Vec<JumpCancelEntry> {
         JumpCancelEntry::new(*FIGHTER_KIND_MIIGUNNER, *FIGHTER_MIIGUNNER_STATUS_KIND_SPECIAL_LW1_LOOP, 0, -1, -1),
         JumpCancelEntry::new(*FIGHTER_KIND_MIIGUNNER, *FIGHTER_MIIGUNNER_STATUS_KIND_SPECIAL_LW1_HIT, 0, -1, -1),
     ]
-}
+});
 #[inline]
 pub(crate) fn is_jc(
     boma: &mut smash::app::BattleObjectModuleAccessor,
@@ -57,10 +57,8 @@ pub(crate) fn is_jc(
     frame: f32
 ) -> bool {
     unsafe {
-        let jc = jc_list();
-        for i in jc.iter() {
+        for i in JC_LIST.iter() {
             if fighter_kind == i.fighter_kind && status_kind == i.status_kind {
-                println!("jc status");
                 if i.jc_start != -1 && i.jc_end != -1 {
                     if (frame as i32) < i.jc_start || (frame as i32) >= i.jc_end {
                         continue;

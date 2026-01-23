@@ -92,7 +92,6 @@ pub unsafe fn opff(fighter : &mut L2CFighterCommon, status_kind : i32, motion_ki
 						(ControlModule::get_command_flag_cat(boma(fighter), 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_ATTACK_HI4) != 0 || 
 						(ControlModule::get_command_flag_cat(boma(fighter), 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_ATTACK_LW4) != 0
 						{
-							println!("No Cancel");
 						} else if (cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_ATTACK_S3) != 0 {
 							StatusModule::change_status_request_from_script(boma(fighter), *FIGHTER_STATUS_KIND_ATTACK_S3, true);
 						} else if (cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_ATTACK_HI3) != 0 {

@@ -71,7 +71,6 @@ unsafe extern "C" fn moonwalk(fighter : &mut L2CFighterCommon) {
         if [*FIGHTER_STATUS_KIND_DASH, *FIGHTER_STATUS_KIND_TURN_DASH].contains(&status_kind){
 			if stickx < -0.2 {
                 let moonwalk_speed = (stickx*walk_accel_mul - walk_accel_add)*mw_modifier;
-                //println!("Moonwalk stuff! {} speed, {} mw change, {} mw max",  (get_speed_x(boma)*lr), moonwalk_speed, max_moonwalk);
                 if (get_speed_x(boma)*lr)+moonwalk_speed > -max_moonwalk {
                     let speed = smash::phx::Vector3f { x: moonwalk_speed, y: 0.0, z: 0.0 };
                     KineticModule::add_speed(boma, &speed);
@@ -115,7 +114,6 @@ unsafe extern "C" fn djc(fighter : &mut L2CFighterCommon) {
 		let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 		let fighter_kind = smash::app::utility::get_kind(boma);
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
-        //println!("Is Tap Jump? {}", is_tap_jump);
 		if ([*FIGHTER_KIND_NESS].contains(&fighter_kind) && Path::new("sd:/ultimate/ult-s/ness.flag").is_file() ) ||
             ([*FIGHTER_KIND_LUCAS].contains(&fighter_kind) && Path::new("sd:/ultimate/ult-s/lucas.flag").is_file() ) ||
             ([*FIGHTER_KIND_MEWTWO].contains(&fighter_kind) && Path::new("sd:/ultimate/ult-s/mewtwo.flag").is_file() )
@@ -236,7 +234,6 @@ unsafe extern "C" fn parrycanceldash(fighter : &mut L2CFighterCommon) {
 			if (cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_DASH) != 0 {
 				StopModule::end_stop(boma);
 				StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_DASH, true);
-				//println!("Parry Cancel Dash!");
 			};
 		};
     };

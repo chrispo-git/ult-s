@@ -46,3 +46,23 @@ macro_rules! fake_b_reverse {
 		}
 	}
 }
+
+#[macro_export]
+macro_rules! is_motion {
+	($motion_kind:expr, $($string:expr),* $(,)?) => {
+        match $motion_kind {
+            $( x if x == hash40($string) => true, )*
+            _ => false,
+        }
+    };
+}
+
+#[macro_export]
+macro_rules! is_in {
+    ($value:expr, $($list:expr),* $(,)?) => {
+        match $value {
+            $( x if x == $list => true, )*
+            _ => false,
+        }
+    };
+}
