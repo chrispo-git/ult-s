@@ -38,6 +38,7 @@ unsafe extern "C" fn common(fighter : &mut L2CFighterCommon) {
         landing::opff(fighter, status_kind, motion_kind, entry_id);
         movement::opff(fighter, status_kind, motion_kind, entry_id);
         projectile_invuln::opff(fighter, motion_kind);
+        wavedash::opff(fighter, status_kind, motion_kind, entry_id);
     }
 }
 
@@ -53,6 +54,5 @@ pub fn install() {
     wavedash::install();
     movement::install();
     bone::install();
-	projectile_invuln::install();
 	remove_quake::install();
 }
