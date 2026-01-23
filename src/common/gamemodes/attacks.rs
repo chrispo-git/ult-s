@@ -101,7 +101,7 @@ unsafe fn attack_replace(lua_state: u64) {
     original!()(lua_state);
 }
 
-
+#[inline]
 unsafe fn get_effect(val: i32) -> u64 {
     match val {
         0 => hash40("collision_attr_fire"),
@@ -118,6 +118,8 @@ unsafe fn get_effect(val: i32) -> u64 {
         _ => hash40("collision_attr_normal")
     }
 }
+
+#[inline]
 unsafe fn get_sfx(val: i32) -> i32 {
     match val {
         0 => *COLLISION_SOUND_ATTR_FIRE,
