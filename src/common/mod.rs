@@ -36,6 +36,7 @@ unsafe extern "C" fn common(fighter : &mut L2CFighterCommon) {
         hitstun::opff(fighter, status_kind);
         jab::opff(fighter, status_kind, motion_kind, entry_id);
         landing::opff(fighter, status_kind, motion_kind, entry_id);
+        movement::opff(fighter, status_kind, motion_kind, entry_id);
     }
 }
 
