@@ -10,10 +10,46 @@ use smash::lib::{ L2CValue, L2CAgent };
 use smash::phx::Vector2f;
 use crate::util::*;
 
-//Jump Cancel List
 //0 for hit_condition means it can always be jump cancelled
 //Otherwise, set hit_condition to a value such as *COLLISION_KIND_MASK_HIT
 //-1 for jc_start/jc_end means it will always be jump cancellable at any point
+struct JumpCancelEntry {
+    pub fighter_kind : i32,
+    pub status_kind : i32,
+    pub hit_condition : i32,
+    pub jc_start : i32,
+    pub jc_end : i32,
+}
+impl JumpCancelEntry {
+    pub const fn new(kind: i32, status: i32, hit: i32, start: i32, end: i32) -> Self {
+        Self {
+            fighter_kind : kind,
+            status_kind: status,
+            hit_condition: hit,
+            jc_start: start,
+            jc_end: end,
+        }
+    }
+}
+#[inline(always)]
+pub(crate) fn jc_list() -> Vec<JumpCancelEntry> {
+    vec![
+        JumpCancelEntry::new(*FIGHTER_KIND_KAMUI, *FIGHTER_KAMUI_STATUS_KIND_SPECIAL_N_HOLD, 0, -1, -1),
+        JumpCancelEntry::new(*FIGHTER_KIND_FALCO, *FIGHTER_STATUS_KIND_SPECIAL_LW, 0, 4, 32),
+        JumpCancelEntry::new(*FIGHTER_KIND_WOLF, *FIGHTER_STATUS_KIND_SPECIAL_LW, 0, -1, -1),
+        JumpCancelEntry::new(*FIGHTER_KIND_WOLF, *FIGHTER_WOLF_STATUS_KIND_SPECIAL_LW_END, 0, -1, -1),
+        JumpCancelEntry::new(*FIGHTER_KIND_WOLF, *FIGHTER_WOLF_STATUS_KIND_SPECIAL_LW_HIT, 0, -1, -1),
+        JumpCancelEntry::new(*FIGHTER_KIND_WOLF, *FIGHTER_WOLF_STATUS_KIND_SPECIAL_LW_LOOP, 0, -1, -1),
+        JumpCancelEntry::new(*FIGHTER_KIND_FOX, *FIGHTER_STATUS_KIND_SPECIAL_LW, 0, -1, -1),
+        JumpCancelEntry::new(*FIGHTER_KIND_FOX, *FIGHTER_WOLF_STATUS_KIND_SPECIAL_LW_END, 0, -1, -1),
+        JumpCancelEntry::new(*FIGHTER_KIND_FOX, *FIGHTER_WOLF_STATUS_KIND_SPECIAL_LW_HIT, 0, -1, -1),
+        JumpCancelEntry::new(*FIGHTER_KIND_FOX, *FIGHTER_WOLF_STATUS_KIND_SPECIAL_LW_LOOP, 0, -1, -1),
+        JumpCancelEntry::new(*FIGHTER_KIND_MIIGUNNER, *FIGHTER_MIIGUNNER_STATUS_KIND_SPECIAL_LW1_END, 0, -1, -1),
+        JumpCancelEntry::new(*FIGHTER_KIND_MIIGUNNER, *FIGHTER_MIIGUNNER_STATUS_KIND_SPECIAL_LW1_LOOP, 0, -1, -1),
+        JumpCancelEntry::new(*FIGHTER_KIND_MIIGUNNER, *FIGHTER_MIIGUNNER_STATUS_KIND_SPECIAL_LW1_HIT, 0, -1, -1),
+    ]
+}
+#[inline]
 pub(crate) fn is_jc(
     boma: &mut smash::app::BattleObjectModuleAccessor,
     fighter_kind: i32,
@@ -21,32 +57,17 @@ pub(crate) fn is_jc(
     frame: f32
 ) -> bool {
     unsafe {
-        //[fighter_kind, status_kind, hit_condition, jc_start, jc_end]
-        let jump_cancel = [
-            [*FIGHTER_KIND_KAMUI, *FIGHTER_KAMUI_STATUS_KIND_SPECIAL_N_HOLD, 0, -1, -1],
-            [*FIGHTER_KIND_FALCO, *FIGHTER_STATUS_KIND_SPECIAL_LW, 0, 4, 32],
-            [*FIGHTER_KIND_WOLF, *FIGHTER_STATUS_KIND_SPECIAL_LW, 0, -1, -1],
-            [*FIGHTER_KIND_WOLF, *FIGHTER_WOLF_STATUS_KIND_SPECIAL_LW_END, 0, -1, -1],
-            [*FIGHTER_KIND_WOLF, *FIGHTER_WOLF_STATUS_KIND_SPECIAL_LW_HIT, 0, -1, -1],
-            [*FIGHTER_KIND_WOLF, *FIGHTER_WOLF_STATUS_KIND_SPECIAL_LW_LOOP, 0, -1, -1],
-            [*FIGHTER_KIND_FOX, *FIGHTER_STATUS_KIND_SPECIAL_LW, 0, -1, -1],
-            [*FIGHTER_KIND_FOX, *FIGHTER_WOLF_STATUS_KIND_SPECIAL_LW_END, 0, -1, -1],
-            [*FIGHTER_KIND_FOX, *FIGHTER_WOLF_STATUS_KIND_SPECIAL_LW_HIT, 0, -1, -1],
-            [*FIGHTER_KIND_FOX, *FIGHTER_WOLF_STATUS_KIND_SPECIAL_LW_LOOP, 0, -1, -1],
-            [*FIGHTER_KIND_MIIGUNNER, *FIGHTER_MIIGUNNER_STATUS_KIND_SPECIAL_LW1_END, 0, -1, -1],
-            [*FIGHTER_KIND_MIIGUNNER, *FIGHTER_MIIGUNNER_STATUS_KIND_SPECIAL_LW1_LOOP, 0, -1, -1],
-            [*FIGHTER_KIND_MIIGUNNER, *FIGHTER_MIIGUNNER_STATUS_KIND_SPECIAL_LW1_HIT, 0, -1, -1],
-        ];
-        for i in &jump_cancel {
-            if fighter_kind == i[0] && status_kind == i[1] {
+        let jc = jc_list();
+        for i in jc.iter() {
+            if fighter_kind == i.fighter_kind && status_kind == i.status_kind {
                 println!("jc status");
-                if i[3] != -1 && i[4] != -1 {
-                    if (frame as i32) < i[3] || (frame as i32) >= i[4] {
+                if i.jc_start != -1 && i.jc_end != -1 {
+                    if (frame as i32) < i.jc_start || (frame as i32) >= i.jc_end {
                         continue;
                     }
                 }
-                if i[2] != 0 {
-                    if AttackModule::is_infliction_status(boma, i[2]) {
+                if i.hit_condition != 0 {
+                    if AttackModule::is_infliction_status(boma, i.hit_condition) {
                         return true;
                     }
                 } else {
