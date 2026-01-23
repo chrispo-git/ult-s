@@ -57,8 +57,9 @@ pub(crate) fn is_jc(
     frame: f32
 ) -> bool {
     unsafe {
+	    let fighter = if is_default(boma) {fighter_kind} else {-fighter_kind};
         for i in JC_LIST.iter() {
-            if fighter_kind == i.fighter_kind && status_kind == i.status_kind {
+            if fighter == i.fighter_kind && status_kind == i.status_kind {
                 if i.jc_start != -1 && i.jc_end != -1 {
                     if (frame as i32) < i.jc_start || (frame as i32) >= i.jc_end {
                         continue;

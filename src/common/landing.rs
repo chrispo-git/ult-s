@@ -187,7 +187,7 @@ static EDGE_CANCEL_LIST: Lazy<Vec<EdgeCancelEntry>> = Lazy::new(|| {
 //Edge Cancel List
 #[inline]
 pub(crate) fn is_edge_cancel(fighter_kind : i32, status_kind : i32, is_added : bool) -> bool {
-	let mut fighter = if is_added{fighter_kind} else {-fighter_kind};
+	let fighter = if is_added {-fighter_kind} else {fighter_kind};
 	return EDGE_CANCEL_LIST.iter().any(|i| i.fighter_kind == fighter && i.status_kind == status_kind);
 }
 
