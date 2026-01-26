@@ -34,6 +34,7 @@ unsafe extern "C" fn gamemodes(fighter : &mut L2CFighterCommon) {
     hitstunchange::opff(fighter, status_kind, entry_id);
     itemduel::opff(fighter, status_kind, motion_kind, entry_id);
     parry::opff(fighter, status_kind, motion_kind, entry_id);
+    rivals::opff(fighter, status_kind, entry_id);
 }
 pub fn install() {
     Agent::new("fighter")
@@ -45,7 +46,6 @@ pub fn install() {
     vampire::install();
     superboss::install();
     itemduel::install();
-    rivals::install();
     parry::install();
     sixtyfour::install();
     smym::install();

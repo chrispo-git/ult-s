@@ -749,6 +749,25 @@ pub(crate) unsafe fn update_enabled_checks() -> () {
 #[inline(always)]
 pub (crate) unsafe fn reset_gamemodes() -> () {
 	GAMEMODES = Vec::new();
+	reset_attack_blockers();
+}
+
+#[inline(always)]
+pub (crate) unsafe fn reset_attack_blockers() -> () {
+    CAN_UPB.fill(0);
+    CAN_SIDEB.fill(0);
+    CAN_DOWNB.fill(0);
+    CAN_NEUTRALB.fill(0);
+    CAN_JUMP_SQUAT.fill(0);
+    CAN_DOUBLE_JUMP.fill(0);
+    CAN_CLIFF.fill(0);
+    CAN_ATTACK_AIR.fill(0);
+    CAN_AIRDODGE.fill(0);
+    CAN_RAPID_JAB.fill(0);
+    CAN_JAB.fill(0);
+    CAN_DASH.fill(0);
+    CAN_GRAB.fill(0);
+    CAN_TURNDASH.fill(0);
 }
 
 
