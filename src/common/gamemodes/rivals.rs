@@ -54,7 +54,7 @@ pub unsafe fn drift_di(fighter : &mut L2CFighterCommon, status_kind : i32, ENTRY
             if DRIFT_AMOUNT[ENTRY_ID].abs() < max_drift_change  && stickx.abs() > 0.2{
                 let add_amount = drift_add*stickx.signum() + drift_mul*(stickx/1.0);
                 let speed = smash::phx::Vector3f { x: add_amount, y: 0.0, z: 0.0 };
-                KineticModule::add_speed(boma, &speed);
+                KineticModule::add_speed(fighter.module_accessor, &speed);
             }
         } else {
             DRIFT_AMOUNT[ENTRY_ID] = 0.0;
@@ -91,33 +91,7 @@ pub unsafe fn expanded_walljump(fighter : &mut L2CFighterCommon, status_kind : i
         return;
     }
     let frame = MotionModule::frame(fighter.module_accessor);
-    let cancel_frame = FighterMotionModuleImpl::get_cancel_frame(boma,smash::phx::Hash40::new_raw(MotionModule::motion_kind(boma)),false) as f32;
-	if  !crate::is_in!(status_kind, *FIGHTER_STATUS_KIND_FALL, *FIGHTER_STATUS_KIND_JUMP, *FIGHTER_STATUS_KIND_JUMP_AERIAL) &&
-        (!crate::is_in!(status_kind, *FIGHTER_STATUS_KIND_FALL_SPECIAL, *FIGHTER_STATUS_KIND_SPECIAL_HI) || HAS_WALLJUMPED[ENTRY_ID]) &&
-        (status_kind != *FIGHTER_STATUS_KIND_ATTACK_AIR || frame < cancel_frame) {
-            return;
-    }
-    
-    let stickx = ControlModule::get_stick_x(fighter.module_accessor);
-    let touch_flag = GroundModule::get_touch_flag(fighter.module_accessor);
-    if  (touch_flag == *GROUND_TOUCH_FLAG_LEFT as u64 && stickx >= 0.7) ||
-        (touch_flag == *GROUND_TOUCH_FLAG_RIGHT as u64 && stickx <= -0.7) {
-                HAS_WALLJUMPED[ENTRY_ID] = true;
-                StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_WALL_JUMP, true);
-    }
-}
-pub unsafe fn expanded_walljump(fighter : &mut L2CFighterCommon, status_kind : i32, ENTRY_ID : usize) {
-	let situation_kind = StatusModule::situation_kind(fighter.module_accessor);
-    if situation_kind == *SITUATION_KIND_GROUND {
-        HAS_WALLJUMPED[ENTRY_ID] = false;
-        return;
-    }
-    let is_high_flick = ControlModule::get_flick_x(fighter.module_accessor) >= 3;
-    if !is_high_flick {
-        return;
-    }
-    let frame = MotionModule::frame(fighter.module_accessor);
-    let cancel_frame = FighterMotionModuleImpl::get_cancel_frame(boma,smash::phx::Hash40::new_raw(MotionModule::motion_kind(boma)),false) as f32;
+    let cancel_frame = FighterMotionModuleImpl::get_cancel_frame(fighter.module_accessor,smash::phx::Hash40::new_raw(MotionModule::motion_kind(fighter.module_accessor)),false) as f32;
 	if  !crate::is_in!(status_kind, *FIGHTER_STATUS_KIND_FALL, *FIGHTER_STATUS_KIND_JUMP, *FIGHTER_STATUS_KIND_JUMP_AERIAL) &&
         (!crate::is_in!(status_kind, *FIGHTER_STATUS_KIND_FALL_SPECIAL, *FIGHTER_STATUS_KIND_SPECIAL_HI) || HAS_WALLJUMPED[ENTRY_ID]) &&
         (status_kind != *FIGHTER_STATUS_KIND_ATTACK_AIR || frame < cancel_frame) {

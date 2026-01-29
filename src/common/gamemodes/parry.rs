@@ -60,13 +60,13 @@ pub unsafe fn opff(fighter : &mut L2CFighterCommon, status_kind : i32, motion_ki
                     macros::FLASH(fighter, 0.92, 0.99, 1, 0.5);
                     EffectModule::req_follow(fighter.module_accessor, smash::phx::Hash40::new("sys_just_shield_hit"), smash::phx::Hash40::new("hip"), &NONE, &NONE, 0.7, true, 0, 0, 0, 0, 0, true, true) as u32;
                 },
-                n if n > 6 {
+                n if n > 6 => {
                     macros::COL_NORMAL(fighter);
                     let rate = if is_gamemode("rivals".to_string()) { 0.5 } else { 1.0 };
                     WorkModule::set_float(fighter.module_accessor, rate, *FIGHTER_STATUS_WORK_ID_FLOAT_REBOUND_MOTION_RATE);
                     StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_REBOUND, true);
                 },
-                n if n > 4 {
+                n if n > 4 => {
                     WorkModule::unable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_CATCH);
                 },
                 _ => {},

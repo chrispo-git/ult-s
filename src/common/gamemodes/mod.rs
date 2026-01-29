@@ -22,10 +22,7 @@ use smash_script::*;
 use smash::phx::Hash40;
 use crate::util::*;
 
-unsafe extern "C" fn gamemodes(fighter : &mut L2CFighterCommon) {
-    let status_kind = StatusModule::status_kind(fighter.module_accessor);
-    let motion_kind = MotionModule::motion_kind(fighter.module_accessor);
-    let entry_id = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+pub unsafe fn opff(fighter : &mut L2CFighterCommon, status_kind : i32, motion_kind : u64, entry_id : usize) {
 
     airdash::opff(fighter, status_kind, entry_id);
     attacks::critical_opff(fighter, entry_id);
@@ -35,18 +32,14 @@ unsafe extern "C" fn gamemodes(fighter : &mut L2CFighterCommon) {
     itemduel::opff(fighter, status_kind, motion_kind, entry_id);
     parry::opff(fighter, status_kind, motion_kind, entry_id);
     rivals::opff(fighter, status_kind, entry_id);
+    turbo::opff(fighter, status_kind);
+    sixtyfour::opff(fighter, status_kind);
+    smym::opff(fighter, status_kind, entry_id);
+    vampire::opff(fighter, status_kind, entry_id);
 }
 pub fn install() {
-    Agent::new("fighter")
-	.on_line(Main, gamemodes)
-	.install();
-
-	turbo::install();
 	attacks::install();
-    vampire::install();
     superboss::install();
     itemduel::install();
     parry::install();
-    sixtyfour::install();
-    smym::install();
 }
