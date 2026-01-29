@@ -24,7 +24,7 @@ pub unsafe fn opff(fighter : &mut L2CFighterCommon, status_kind : i32, ENTRY_ID 
     }
     if remaining_hitstun > 0.0 {
         if remaining_hitstun == total_hitstun {
-            println!("Old hitstun {}, New Hitstun {}", remaining_hitstun, remaining_hitstun*hitstun_mul);
+            //println!("Old hitstun {}, New Hitstun {}", remaining_hitstun, remaining_hitstun*hitstun_mul);
             WorkModule::set_float(fighter.module_accessor, remaining_hitstun*hitstun_mul, *FIGHTER_INSTANCE_WORK_ID_FLOAT_DAMAGE_REACTION_FRAME);
             WorkModule::set_float(fighter.module_accessor, (remaining_hitstun*hitstun_mul)+1.0, *FIGHTER_INSTANCE_WORK_ID_FLOAT_DAMAGE_REACTION_FRAME_LAST);
         }

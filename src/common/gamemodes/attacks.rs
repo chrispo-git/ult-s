@@ -80,10 +80,10 @@ unsafe fn attack_replace(lua_state: u64) {
     for (i, x) in hitbox_params.iter_mut().enumerate().take(36) {
         if i == 3 && is_gamemode("critical".to_string()) && DO_CRITICAL[ENTRY_ID] {
             if x.get_num() < 2.5 {
-                println!("damage is too low! {}%", x.get_num());
+                //println!("damage is too low! {}%", x.get_num());
                 l2c_agent.push_lua_stack(x);
             } else {
-                println!("damage new : {}", x.get_num() * 2.0);
+                //println!("damage new : {}", x.get_num() * 2.0);
                 l2c_agent.push_lua_stack(&mut L2CValue::new_num(x.get_num() * 2.0));
             }
         } else if i == 4 && is_gamemode("angles".to_string()) {

@@ -31,7 +31,7 @@ pub unsafe fn opff(fighter : &mut L2CFighterCommon, status_kind : i32, motion_ki
 		let situation_kind = StatusModule::situation_kind(fighter.module_accessor);
         if situation_kind == *SITUATION_KIND_GROUND && PARRY_DURATION[ENTRY_ID] == 1 && !(*FIGHTER_STATUS_KIND_DAMAGE..*FIGHTER_STATUS_KIND_DAMAGE_FALL).contains(&status_kind) {
 			StopModule::end_stop(fighter.module_accessor);
-            println!("End Stun Early");
+            //println!("End Stun Early");
 			StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_WAIT, false);
             return;
         }

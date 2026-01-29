@@ -62,7 +62,7 @@ pub unsafe fn opff(fighter : &mut L2CFighterCommon, status_kind : i32, motion_ki
                 *FIGHTER_STATUS_KIND_ITEM_STARRING
             ].contains(&status_kind) {
                 if smash::app::sv_math::rand(hash40("fighter"), 500) == 0 {
-                    println!("Player {} having their item refreshed", ENTRY_ID);
+                    //println!("Player {} having their item refreshed", ENTRY_ID);
                     setItem(fighter, ITEM_OPTION[ENTRY_ID]);
                     let item_manager = ItemManager::instance().unwrap();
                     ITEM_HELD[ENTRY_ID] = item_manager.find_active_item_from_id(ItemModule::get_have_item_id(fighter.module_accessor, 0) as u32) as *mut smash::app::Item;
@@ -85,7 +85,7 @@ pub unsafe fn opff(fighter : &mut L2CFighterCommon, status_kind : i32, motion_ki
                 ItemModule::remove_item(fighter.module_accessor, 0);
                 ItemModule::have_item_instance(fighter.module_accessor, ITEM_HELD[ENTRY_ID], 0, false, false, false, false);
             } else {
-                println!("Player {} can't find their item! creating new one...", ENTRY_ID);
+                //println!("Player {} can't find their item! creating new one...", ENTRY_ID);
                 setItem(fighter, ITEM_OPTION[ENTRY_ID]);
                 let item_manager = ItemManager::instance().unwrap();
                 ITEM_HELD[ENTRY_ID] = item_manager.find_active_item_from_id(ItemModule::get_have_item_id(fighter.module_accessor, 0) as u32) as *mut smash::app::Item;
@@ -94,7 +94,7 @@ pub unsafe fn opff(fighter : &mut L2CFighterCommon, status_kind : i32, motion_ki
         if (!smash::app::sv_information::is_ready_go() && status_kind != *FIGHTER_STATUS_KIND_WAIT && !IS_IN_ENTRY[ENTRY_ID]) || 
         (REBIRTH_DO_NOW[ENTRY_ID] && status_kind == *FIGHTER_STATUS_KIND_REBIRTH) {
             if !HAS_CHOSEN[ENTRY_ID] && ![*FIGHTER_STATUS_KIND_WIN, *FIGHTER_STATUS_KIND_LOSE].contains(&status_kind){
-                println!("Player {} choosing their item...", ENTRY_ID);
+                //println!("Player {} choosing their item...", ENTRY_ID);
                 ITEM_OPTION[ENTRY_ID] = smash::app::sv_math::rand(hash40("fighter"), 11);
                 setItem(fighter, ITEM_OPTION[ENTRY_ID]);
                 HAS_CHOSEN[ENTRY_ID] = true;
