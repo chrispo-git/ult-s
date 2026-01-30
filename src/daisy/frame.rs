@@ -28,27 +28,18 @@ pub fn install() {
 
 unsafe extern "C" fn daisy_frame(fighter: &mut L2CFighterCommon) {
     unsafe {
-        let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
-		if is_default(boma) {
-			let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
-			let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-			let motion_kind = MotionModule::motion_kind(boma);
-			let frame = MotionModule::frame(boma);
-			if status_kind == *FIGHTER_PEACH_STATUS_KIND_SPECIAL_N_HIT && KineticModule::get_kinetic_type(boma) != *FIGHTER_KINETIC_TYPE_MOTION_AIR{
-				KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_MOTION_AIR);
-			};
-		}
+		neutral_special(fighter, *FIGHTER_PEACH_STATUS_KIND_SPECIAL_N_HIT);
     }
 }
 unsafe extern "C" fn kirby_daisy_frame(fighter: &mut L2CFighterCommon) {
     unsafe {
-        let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
-		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
-		let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-		let motion_kind = MotionModule::motion_kind(boma);
-		let frame = MotionModule::frame(boma);
-		if status_kind == *FIGHTER_KIRBY_STATUS_KIND_DAISY_SPECIAL_N_HIT && KineticModule::get_kinetic_type(boma) != *FIGHTER_KINETIC_TYPE_MOTION_AIR{
-			KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_MOTION_AIR);
-		};
+		neutral_special(fighter, *FIGHTER_KIRBY_STATUS_KIND_DAISY_SPECIAL_N_HIT);
     }
+}
+#[inline(always)]
+pub unsafe fn neutral_special(fighter: &mut L2CFighterCommon, target_status : i32) {
+	let status_kind = smash::app::lua_bind::StatusModule::status_kind(fighter.module_accessor);
+	if status_kind == target_status && KineticModule::get_kinetic_type(fighter.module_accessor)  {
+		KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_MOTION_AIR);
+	};
 }
