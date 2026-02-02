@@ -180,7 +180,7 @@ unsafe extern "C" fn main_neutralb(fighter: &mut L2CFighterCommon) -> L2CValue {
                     if KineticModule::get_kinetic_type(boma) != *FIGHTER_KINETIC_TYPE_MOTION_FALL {
                         KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_MOTION_FALL);
                     };
-                    println!("Falling!");
+                    //println!("Falling!");
                 }
                 if is_end {
                     if is_ground {

@@ -148,7 +148,7 @@ unsafe extern "C" fn counter_main(weapon: &mut L2CWeaponCommon) -> L2CValue {
             ModelModule::set_joint_rotate(weapon.module_accessor, Hash40::new("pacmanapple"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});    
         }
 
-        println!("Coin Count: {}", coin_count);
+        //println!("Coin Count: {}", coin_count);
         let tens = (coin_count / 10) as i32;
         let ones = (coin_count % 10) as i32;
         

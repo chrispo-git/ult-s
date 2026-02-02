@@ -43,7 +43,7 @@ pub(crate) unsafe fn attack_vc(fighter: &mut L2CAgentBase) -> () {
 		2 => macros::PLAY_SE(fighter, Hash40::new("se_murabito_attackair_f01")),
 		3 => macros::PLAY_SE(fighter, Hash40::new("se_murabito_attackair_f02")),
 		4 => macros::PLAY_SE(fighter, Hash40::new("se_murabito_attackair_h01")),
-		_ => println!("toad is silent"),
+		_ =>{},//println!("toad is silent"),
 	}
 }
 pub(crate) unsafe fn dmg_vc(fighter: &mut L2CAgentBase) -> () {

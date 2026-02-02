@@ -243,8 +243,8 @@ unsafe extern "C" fn main_final(fighter: &mut L2CFighterCommon) -> L2CValue {
             if y_add < 0.0 && Y[ENTRY_ID] < Y_MAX*-1.0 {
                 y_add = 0.0;
             };
-            println!("x{}, y{}", X[ENTRY_ID], Y[ENTRY_ID]);
-            println!("x_add{}, y_add{}", x_add, y_add);
+            //println!("x{}, y{}", X[ENTRY_ID], Y[ENTRY_ID]);
+            //println!("x_add{}, y_add{}", x_add, y_add);
             let speed = smash::phx::Vector3f { x: x_add, y: y_add, z: 0.0 };
             KineticModule::add_speed(fighter.module_accessor, &speed);
             X[ENTRY_ID] += x_add;

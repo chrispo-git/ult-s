@@ -42,7 +42,7 @@ pub(crate) unsafe fn attack_vc(fighter: &mut L2CAgentBase) -> () {
 		1 => macros::PLAY_SE(fighter, Hash40::new("se_pikmin_attackair_h01")),
 		2 => macros::PLAY_SE(fighter, Hash40::new("se_pikmin_attackair_f01")),
         3 => macros::PLAY_SE(fighter, Hash40::new("se_pikmin_attackdash02")),
-		_ => println!("rayman is silent"),
+		_ => {},//println!("rayman is silent"),
 	}
 }
 pub(crate) unsafe fn dmg_vc(fighter: &mut L2CAgentBase) -> () {
@@ -76,7 +76,7 @@ pub(crate) unsafe fn jump_vc(fighter: &mut L2CAgentBase) -> () {
 	macros::STOP_SE(fighter, Hash40::new("se_pikmin_attackdash02"));
 	match rand_val {
 		0 => macros::PLAY_SE(fighter, Hash40::new("se_pikmin_attackdash02")),
-        _ => println!("rayman is silent"),
+        _ =>{},//println!("rayman is silent"),
 	}
 }
 pub(crate) unsafe fn jump_aerial_vc(fighter: &mut L2CAgentBase) -> () {
@@ -84,7 +84,7 @@ pub(crate) unsafe fn jump_aerial_vc(fighter: &mut L2CAgentBase) -> () {
 	macros::STOP_SE(fighter, Hash40::new("se_pikmin_attackhard_s02"));
 	match rand_val {
 		0 => macros::PLAY_SE(fighter, Hash40::new("se_pikmin_attackhard_s02")),
-		_ => println!("rayman is silent"),
+		_ => {},//println!("rayman is silent"),
 	}
 }
 

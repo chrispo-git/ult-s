@@ -80,21 +80,21 @@ unsafe extern "C" fn villy_neutralb_1(agent: &mut L2CAgentBase) {
     if ArticleModule::is_exist(agent.module_accessor, *FIGHTER_MURABITO_GENERATE_ARTICLE_TREE) && ![hash40("special_n3"), hash40("special_n2_fail")].contains(&motion_kind) {
         if (TREE_POS_X[ENTRY_ID]-pos_x).abs() < X_DIST && (TREE_POS_Y[ENTRY_ID]-pos_y).abs() < Y_DIST  && is_facing_tree && !IS_FALLEN[ENTRY_ID] {
             MotionModule::change_motion(agent.module_accessor, Hash40::new("special_n3"), 0.0, 1.0, false, 0.0, false, false);
-            println!("special_n3");
+            //println!("special_n3");
             CHANGE_FRAME[ENTRY_ID] = true;
         } else {
             MotionModule::change_motion(agent.module_accessor, Hash40::new("special_n2_fail"), 0.0, 1.0, false, 0.0, false, false);
-            println!("special_n2_fail");
+            //println!("special_n2_fail");
             CHANGE_FRAME[ENTRY_ID] = true;
         }
     } else if ArticleModule::is_exist(agent.module_accessor, *FIGHTER_MURABITO_GENERATE_ARTICLE_SPROUT) && ![hash40("special_n2"), hash40("special_n2_fail")].contains(&motion_kind) {
         if (TREE_POS_X[ENTRY_ID]-pos_x).abs() < X_DIST && (TREE_POS_Y[ENTRY_ID]-pos_y).abs() < Y_DIST {
             MotionModule::change_motion(boma, Hash40::new("special_n2"), 0.0, 1.0, false, 0.0, false, false);
-            println!("special_n2");
+            //println!("special_n2");
             CHANGE_FRAME[ENTRY_ID] = true;
         } else {
             MotionModule::change_motion(boma, Hash40::new("special_n2_fail"), 0.0, 1.0, false, 0.0, false, false);
-            println!("special_n2_fail");
+            //println!("special_n2_fail");
             CHANGE_FRAME[ENTRY_ID] = true;
         }
     } else if motion_kind != hash40("special_n") {
