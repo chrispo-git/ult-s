@@ -25,11 +25,13 @@ pub unsafe fn opff(fighter : &mut L2CFighterCommon, status_kind : i32, ENTRY_ID 
         }
         let attacker_entry_id = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_SUCCEED_ATTACKER_ENTRY_ID) - 1;
         let damage_dealt = WorkModule::get_float(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLOAT_SUCCEED_HIT_DAMAGE);
-		if attacker_entry_id == -1 {
-            RESET[ENTRY_ID] = true;
-        } else if RESET[ENTRY_ID] {
-            TO_HEAL[attacker_entry_id as usize] += damage_dealt * HEAL_FACTOR;
-            RESET[ENTRY_ID] = false;
+        if attacker_entry_id < 8 {
+            if attacker_entry_id == -1 {
+                RESET[ENTRY_ID] = true;
+            } else if RESET[ENTRY_ID] {
+                TO_HEAL[attacker_entry_id as usize] += damage_dealt * HEAL_FACTOR;
+                RESET[ENTRY_ID] = false;
+            }
         }
         //println!("{}, {}", attacker_entry_id, damage_dealt);
         if TO_HEAL[ENTRY_ID] > 0.0 {
