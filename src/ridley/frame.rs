@@ -56,7 +56,7 @@ unsafe extern "C" fn ridley(fighter : &mut L2CFighterCommon) {
 					};
 					if StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR {
 						let cat2 = ControlModule::get_command_flag_cat(boma, 1);
-						if (cat2 & *FIGHTER_PAD_CMD_CAT2_FLAG_FALL_JUMP) != 0 && stick_y < -0.66 && SPEED_Y[ENTRY_ID] <= 0.0 {
+						if (cat2 & *FIGHTER_PAD_CMD_CAT2_FLAG_FALL_JUMP) != 0 && stick_y < -0.66 && get_speed_y(boma) <= 0.0 {
 							WorkModule::set_flag(boma, true, *FIGHTER_STATUS_WORK_ID_FLAG_RESERVE_DIVE);
 						}
 					};

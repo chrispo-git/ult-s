@@ -16,18 +16,6 @@ use crate::common::*;
 
 pub static mut GAMEMODES : Vec<String> = Vec::new();
 
-static mut STATUS_DURATION : [i32; 8] = [0; 8];
-static mut MOTION_DURATION : [i32; 8] = [0; 8];
-pub static mut POS_X : [f32; 8] = [0.0; 8];
-pub static mut POS_Y : [f32; 8] = [0.0; 8];
-pub static mut STICK_DIR: [f32; 8] = [0.0; 8];
-pub static mut PREV_SPEED_X : [f32; 8] = [0.0; 8];
-pub static mut PREV_SPEED_Y : [f32; 8] = [0.0; 8];
-pub static mut SPEED_X : [f32; 8] = [0.0; 8];
-pub static mut SPEED_Y : [f32; 8] = [0.0; 8];
-pub static mut ACCEL_X : [f32; 8] = [0.0; 8];
-pub static mut ACCEL_Y : [f32; 8] = [0.0; 8];
-static mut FULL_HOP_ENABLE_DELAY : [i32; 8] = [0; 8];
 pub static mut PREV_SCALE : [f32; 8] = [0.0; 8];
 pub static mut IS_AB : [bool; 8] = [false; 8];
 pub static mut IS_KD_THROW : [bool; 8] = [false; 8];
@@ -45,14 +33,37 @@ pub static mut IS_MECHANICS_ENABLED : bool = true;
 pub static mut IS_SMALL_HOLD_BUFFER : bool = false;
 pub static mut IS_SH_AERIAL : bool = true;
 
-//Cstick
-pub static mut SUB_STICK: [Vector2f;9] = [Vector2f{x:0.0, y: 0.0};9];
+
+// Info State
+#[derive(Clone, Copy)]
+pub struct InfoState {
+	pub pos_x: f32,
+	pub pos_y: f32,
+	pub speed_y: f32,
+	pub speed_x: f32,
+	pub prev_speed_x: f32,
+	pub prev_speed_y: f32,
+	pub accel_x : f32,
+	pub accel_y : f32,
+	pub stick_dir : f32,
+	pub status_duration : i32,
+	pub motion_duration : i32,
+	pub __status : i32,
+	pub __motion : u64,
+	pub sub_stick : Vector2f,
+	pub full_hop_enable_delay : i32,
+}
+impl Default for InfoState {
+    fn default() -> Self {
+        Self {
+            sub_stick: Vector2f { x: 0.0, y: 0.0 },
+            ..unsafe { std::mem::zeroed() } 
+        }
+    }
+}
 
 
-// Transition Hook static muts:
-// 0 - Don't change 
-// 1 - Force off
-// 2 - Force on 
+// Transition Enable State
 #[derive(Default, Clone, Copy)]
 pub struct TransitionEnableState {
     pub can_upb: i32,
@@ -105,6 +116,12 @@ macro_rules! transition_set {
 pub static mut TO_RUN_FLAG: [bool; 8] = [false; 8];
 
 //Jab Flags
+#[derive(Default, Clone, Copy)]
+pub struct JabState {
+	pub has_enable_combo_on : bool,
+	pub has_enable_100_on : bool,
+	pub has_enable_no_hit_combo_on : bool,
+}
 pub static mut HAS_ENABLE_COMBO_ON: [bool; 8] = [false; 8];
 pub static mut HAS_ENABLE_NO_HIT_COMBO_ON: [bool; 8] = [false; 8];
 pub static mut HAS_ENABLE_100_ON: [bool; 8] = [false; 8];
@@ -162,14 +179,20 @@ pub unsafe fn on_flag_hook(boma: &mut smash::app::BattleObjectModuleAccessor, in
 				original!()(boma, int)
 			};
 		} else if int == *FIGHTER_STATUS_ATTACK_FLAG_ENABLE_COMBO  && is_mechanics_enabled() {
-			HAS_ENABLE_COMBO_ON[WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize] = true;
+			let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+			crate::with_state!(ENTRY_ID, JabState, state, {
+				state.has_enable_combo_on = true;
+			});
 			let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
 			let fighter_kind = smash::app::utility::get_kind(boma);
 			if status_kind != *FIGHTER_STATUS_KIND_ATTACK  {
 				original!()(boma, int)
 			};
 		} else if int == *FIGHTER_STATUS_ATTACK_FLAG_ENABLE_NO_HIT_COMBO  && is_mechanics_enabled() {
-			HAS_ENABLE_NO_HIT_COMBO_ON[WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize] = true;
+			let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+			crate::with_state!(ENTRY_ID, JabState, state, {
+				state.has_enable_no_hit_combo_on = true;
+			});
 			let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
 			let fighter_kind = smash::app::utility::get_kind(boma);
 			if status_kind != *FIGHTER_STATUS_KIND_ATTACK  {
@@ -177,15 +200,15 @@ pub unsafe fn on_flag_hook(boma: &mut smash::app::BattleObjectModuleAccessor, in
 			};
 		} else if int == *FIGHTER_STATUS_WORK_ID_FLAG_RESERVE_JUMP_MINI {
 			let ENTRY_ID =  WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-			//FULL_HOP_ENABLE_DELAY allows fullhop button to not give shorthops.
+			//full_hop_enable_delay allows fullhop button to not give shorthops.
 			if IS_SH_AERIAL {
-				if !(FULL_HOP_ENABLE_DELAY[ENTRY_ID] > 0){
+				if !(crate::get_state!(ENTRY_ID, InfoState).full_hop_enable_delay > 0){
 					original!()(boma, int)
 				} else {
 					println!("SH height banned");
 				}
 			} else {
-				if (ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_JUMP) || ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP_MINI)) && !(FULL_HOP_ENABLE_DELAY[ENTRY_ID] > 0) {
+				if (ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_JUMP) || ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP_MINI)) && !(crate::get_state!(ENTRY_ID, InfoState).full_hop_enable_delay > 0) {
 					original!()(boma, int)
 				} else {
 					println!("SH height banned");
@@ -206,10 +229,16 @@ pub unsafe fn off_flag_hook(boma: &mut smash::app::BattleObjectModuleAccessor, i
 		original!()(boma, int)
 	}
 	if int == *FIGHTER_STATUS_ATTACK_FLAG_ENABLE_100 {
-		HAS_ENABLE_100_ON[WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize] = false;
+		let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+		crate::with_state!(ENTRY_ID, JabState, state, {
+			state.has_enable_100_on = false;
+		});
 		original!()(boma, int)
 	} else if int == *FIGHTER_STATUS_ATTACK_FLAG_ENABLE_COMBO {
-		HAS_ENABLE_COMBO_ON[WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize] = false;
+		let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+		crate::with_state!(ENTRY_ID, JabState, state, {
+			state.has_enable_combo_on = false;
+		});
 		original!()(boma, int)
 	} else {
 		original!()(boma, int)
@@ -260,27 +289,45 @@ unsafe extern "C" fn util_update(fighter : &mut L2CFighterCommon) {
 		let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 		let fighter_kind = smash::app::utility::get_kind(boma);
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
+		let motion_kind = smash::app::lua_bind::MotionModule::motion_kind(boma);
 		let prev_status = StatusModule::prev_status_kind(boma, 0);
-		//Checks Frames since entering a status
-		if status_kind != prev_status || is_reset() {
-			STATUS_DURATION[ENTRY_ID] = 0;
-		} else {
-			STATUS_DURATION[ENTRY_ID] += 1;
-		};
+		//Checks Frames since entering a status/frame
+		crate::with_state!(ENTRY_ID, InfoState, state, {
+			if status_kind != state.__status || is_reset() {
+				state.status_duration = 0;
+			} else {
+				state.status_duration+= 1;
+			};
+			if motion_kind != state.__motion || is_reset() {
+				state.motion_duration = 0;
+			} else {
+				state.motion_duration+= 1;
+			};
+			state.__status = status_kind;
+			state.__motion = motion_kind;
+		});
 		//Resets inability to special
 		if is_reset() {
 			crate::transitions_reset_all!(ENTRY_ID);
-			HAS_ENABLE_COMBO_ON[ENTRY_ID] = false;
-			HAS_ENABLE_100_ON[ENTRY_ID] = false;
-			FULL_HOP_ENABLE_DELAY[ENTRY_ID] = 0;
-			STICK_DIR[ENTRY_ID] = 0.0;
+			crate::with_state!(ENTRY_ID, InfoState, state, {
+				state.full_hop_enable_delay = 0;
+				state.stick_dir = 0.0;
+			});
+			crate::with_state!(ENTRY_ID, JabState, state, {
+				state.has_enable_combo_on = false;
+				state.has_enable_100_on = false;
+				state.has_enable_no_hit_combo_on = false;
+			});
 			if smash::app::smashball::is_training_mode() {
 				reset_gamemodes();
 			}
 		};
-		if FULL_HOP_ENABLE_DELAY[ENTRY_ID] > 0 {
-			FULL_HOP_ENABLE_DELAY[ENTRY_ID] -= 1;
-		};
+		crate::with_state!(ENTRY_ID, InfoState, state, {
+			if state.full_hop_enable_delay > 0 {
+				state.full_hop_enable_delay-= 1;
+			}
+
+		});
 		if JC_GRAB_LOCKOUT[ENTRY_ID] > 0 {
 			JC_GRAB_LOCKOUT[ENTRY_ID] -= 1;
 		};
@@ -320,95 +367,93 @@ unsafe extern "C" fn util_update(fighter : &mut L2CFighterCommon) {
 		let triggered_buttons: Buttons = unsafe {
 			Buttons::from_bits_unchecked(ControlModule::get_button(boma) & !ControlModule::get_button_prev(boma))
 		};
-		if triggered_buttons.intersects(Buttons::FullHop) {
-			FULL_HOP_ENABLE_DELAY[ENTRY_ID] = 14;
-		};
-		if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP_MINI) { //Removes possibility of FH coming out of a SH. Shorthop button has priority over Fullhop
-			FULL_HOP_ENABLE_DELAY[ENTRY_ID] = 0;
-		};
-		if status_kind == *FIGHTER_STATUS_KIND_JUMP_SQUAT && ControlModule::check_button_on_trriger(boma, *CONTROL_PAD_BUTTON_GUARD) {
-			FULL_HOP_ENABLE_DELAY[ENTRY_ID] = 0;
-			WorkModule::set_flag(boma, true, *FIGHTER_STATUS_WORK_ID_FLAG_RESERVE_JUMP_MINI);
-		};
-		if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_CSTICK_ON) {
-			if ControlModule::get_stick_x(boma) != 0.0 {
-				SUB_STICK[ENTRY_ID].x = ControlModule::get_stick_x(boma);
+		crate::with_state!(ENTRY_ID, InfoState, state, {
+			if triggered_buttons.intersects(Buttons::FullHop) {
+				state.full_hop_enable_delay = 14;
 			};
-			if ControlModule::get_stick_y(boma) != 0.0 {
-				SUB_STICK[ENTRY_ID].y = ControlModule::get_stick_y(boma);
+			if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP_MINI) { //Removes possibility of FH coming out of a SH. Shorthop button has priority over Fullhop
+				state.full_hop_enable_delay = 0;
 			};
-		} else {
-			SUB_STICK[ENTRY_ID].x = 0.0;
-			SUB_STICK[ENTRY_ID].y = 0.0;
-		};
+			if status_kind == *FIGHTER_STATUS_KIND_JUMP_SQUAT && ControlModule::check_button_on_trriger(boma, *CONTROL_PAD_BUTTON_GUARD) {
+				state.full_hop_enable_delay = 0;
+				WorkModule::set_flag(boma, true, *FIGHTER_STATUS_WORK_ID_FLAG_RESERVE_JUMP_MINI);
+			};
+		});
+		crate::with_state!(ENTRY_ID, InfoState, state, {
+			if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_CSTICK_ON) {
+				if ControlModule::get_stick_x(boma) != 0.0 {
+					state.sub_stick.x = ControlModule::get_stick_x(boma);
+				};
+				if ControlModule::get_stick_y(boma) != 0.0 {
+					state.sub_stick.y = ControlModule::get_stick_y(boma);
+				};
+			} else {
+				state.sub_stick.x = 0.0;
+				state.sub_stick.y = 0.0;
+			};
+		});
 		//Reset run flag check
 		if ![*FIGHTER_STATUS_KIND_DASH, *FIGHTER_STATUS_KIND_TURN_DASH].contains(&status_kind) {
 			TO_RUN_FLAG[ENTRY_ID] = false;
 		}
 
-		//Checks Frames since entering a motion
-		if MotionModule::frame(boma) < 2.0 || is_reset() {
-			MOTION_DURATION[ENTRY_ID] = 0;
-		} else {
-			MOTION_DURATION[ENTRY_ID] += 1;
-		};
-		if motion_duration(boma) < 1 {
-			HAS_ENABLE_COMBO_ON[ENTRY_ID] = false;
-			HAS_ENABLE_100_ON[ENTRY_ID] = false;
-			HAS_ENABLE_NO_HIT_COMBO_ON[ENTRY_ID] = false;
+		if motion_duration(boma) == 0 {
+			crate::with_state!(ENTRY_ID, JabState, state, {
+				state.has_enable_combo_on = false;
+				state.has_enable_100_on = false;
+				state.has_enable_no_hit_combo_on = false;
+			});
 		};
 		//Speed and acceleration checks
-		if is_reset() {
-			PREV_SPEED_X[ENTRY_ID] = 0.0;
-			PREV_SPEED_Y[ENTRY_ID] = 0.0;
-			SPEED_X[ENTRY_ID] = 0.0;
-			SPEED_Y[ENTRY_ID] = 0.0;
-			ACCEL_X[ENTRY_ID] = 0.0;
-			ACCEL_Y[ENTRY_ID] = 0.0;
-		};
 
-		let lr = PostureModule::lr(boma);
-		let stick_x = ControlModule::get_stick_x(boma) * lr;
-		let stick_y = ControlModule::get_stick_y(boma);
-		if !(stick_x.abs() < 0.05 && stick_y.abs() < 0.05) {
-			let mut angle = stick_x.atan2(stick_y).to_degrees();
-			if angle < 0.0 {
-				angle += 360.0;
+		crate::with_state!(ENTRY_ID, InfoState, state, {
+			if is_reset() {
+				state.prev_speed_x = 0.0;
+				state.prev_speed_y = 0.0;
+				state.speed_x = 0.0;
+				state.speed_y = 0.0;
+				state.accel_x = 0.0;
+				state.accel_y = 0.0;
+			};
+			let new_speed_x = KineticModule::get_sum_speed_x(boma, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+			let new_speed_y = KineticModule::get_sum_speed_y(boma, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+			state.accel_x = state.speed_x - new_speed_x;
+			state.accel_y = state.speed_y - new_speed_y;
+			state.prev_speed_x = state.speed_x;
+			state.prev_speed_y = state.speed_y;
+			state.speed_x = new_speed_x;
+			state.speed_y = new_speed_y;
+
+			state.pos_x = PostureModule::pos_x(boma);
+			state.pos_y = PostureModule::pos_y(boma);
+
+			let lr = PostureModule::lr(boma);
+			let stick_x = ControlModule::get_stick_x(boma) * lr;
+			let stick_y = ControlModule::get_stick_y(boma);
+			if !(stick_x.abs() < 0.05 && stick_y.abs() < 0.05) {
+				let mut angle = stick_x.atan2(stick_y).to_degrees();
+				if angle < 0.0 {
+					angle += 360.0;
+				}
+				if angle > 360.0 {
+					angle -= 360.0;
+				}
+				state.stick_dir = angle;
+			} else {
+				state.stick_dir = -1.0;
 			}
-			if angle > 360.0 {
-				angle -= 360.0;
-			}
-			STICK_DIR[ENTRY_ID] = angle;
-		} else {
-			STICK_DIR[ENTRY_ID] = -1.0;
-		}
-		ACCEL_X[ENTRY_ID] = SPEED_X[ENTRY_ID] - KineticModule::get_sum_speed_x(boma, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
-		ACCEL_Y[ENTRY_ID] = SPEED_Y[ENTRY_ID] - KineticModule::get_sum_speed_y(boma, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
-		PREV_SPEED_X[ENTRY_ID] = SPEED_X[ENTRY_ID];
-		PREV_SPEED_Y[ENTRY_ID] = SPEED_Y[ENTRY_ID];
-		SPEED_X[ENTRY_ID] = KineticModule::get_sum_speed_x(boma, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
-		SPEED_Y[ENTRY_ID] = KineticModule::get_sum_speed_y(boma, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
-		POS_X[ENTRY_ID] = PostureModule::pos_x(boma);
-		POS_Y[ENTRY_ID] = PostureModule::pos_y(boma);
-		//println!("X Accel: {}, Y Accel: {}, X Speed: {}, Y Speed: {}", ACCEL_X[ENTRY_ID], ACCEL_Y[ENTRY_ID], SPEED_X[ENTRY_ID], SPEED_Y[ENTRY_ID]);
-		/*if ENTRY_ID == 0 {
-			println!("Can Neutralb: {}, Can Sideb: {}, Can Upb: {}, Can Downb: {}", CAN_NEUTRALB[ENTRY_ID], CAN_SIDEB[ENTRY_ID], CAN_UPB[ENTRY_ID], CAN_DOWNB[ENTRY_ID]);
-		}*/
-		/*if ENTRY_ID < 2 {
-			println!("MOTION_DURATION {}, STATUS_DURATION {}, SPEED_X {}, SPEED_Y {}, ACCEL_X {}, ACCEL_Y {}", motion_duration(boma), status_duration(boma), get_speed_x(boma), get_speed_y(boma), get_accel_x(boma), get_accel_y(boma));
-			println!("total fighters {}, ray_check_pos {}, is_angel_plat {}, stock_count{}", total_fighters(), ray_check_pos(boma, 0.0, -10.0, false), is_angel_plat(boma), stock_count(boma));
-		}*/
+		});
     };
 }
 
 //Status and motion duration
 pub(crate) unsafe fn status_duration(boma: &mut smash::app::BattleObjectModuleAccessor) -> i32 {
 	let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-	return STATUS_DURATION[ENTRY_ID]
+	return crate::get_state!(ENTRY_ID, InfoState).status_duration;
 }
 pub(crate) unsafe fn motion_duration(boma: &mut smash::app::BattleObjectModuleAccessor) -> i32 {
 	let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-	return MOTION_DURATION[ENTRY_ID]
+	return crate::get_state!(ENTRY_ID, InfoState).motion_duration;
 }
 
 pub(crate) fn is_jump(boma: &mut smash::app::BattleObjectModuleAccessor) -> bool {
@@ -505,37 +550,37 @@ pub(crate) unsafe fn ray_check_pos(boma: &mut smash::app::BattleObjectModuleAcce
 #[inline(always)]
 pub(crate) unsafe fn get_prev_speed_x(boma: &mut smash::app::BattleObjectModuleAccessor) -> f32 {
 	let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-	return PREV_SPEED_X[ENTRY_ID]
+	return crate::get_state!(ENTRY_ID, InfoState).prev_speed_x
 }
 
 #[inline(always)]
 pub(crate) unsafe fn get_prev_speed_y(boma: &mut smash::app::BattleObjectModuleAccessor) -> f32 {
 	let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-	return PREV_SPEED_Y[ENTRY_ID]
+	return crate::get_state!(ENTRY_ID, InfoState).prev_speed_y
 }
 
 #[inline(always)]
 pub(crate) unsafe fn get_speed_x(boma: &mut smash::app::BattleObjectModuleAccessor) -> f32 {
 	let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-	return SPEED_X[ENTRY_ID]
+	return crate::get_state!(ENTRY_ID, InfoState).speed_x
 }
 
 #[inline(always)]
 pub(crate) unsafe fn get_speed_y(boma: &mut smash::app::BattleObjectModuleAccessor) -> f32 {
 	let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-	return SPEED_Y[ENTRY_ID]
+	return crate::get_state!(ENTRY_ID, InfoState).speed_y
 }
 
 #[inline(always)]
 pub(crate) unsafe fn get_accel_x(boma: &mut smash::app::BattleObjectModuleAccessor) -> f32 {
 	let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-	return ACCEL_X[ENTRY_ID]
+	return crate::get_state!(ENTRY_ID, InfoState).accel_x
 }
 
 #[inline(always)]
 pub(crate) unsafe fn get_accel_y(boma: &mut smash::app::BattleObjectModuleAccessor) -> f32 {
 	let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-	return ACCEL_X[ENTRY_ID]
+	return crate::get_state!(ENTRY_ID, InfoState).accel_y
 }
 
 #[inline(always)]
@@ -568,8 +613,7 @@ pub(crate) unsafe fn get_hitlag(boma: &mut smash::app::BattleObjectModuleAccesso
 #[inline(always)]
 pub(crate) unsafe fn get_stick_angle(boma: &mut smash::app::BattleObjectModuleAccessor) -> f32 {
 	let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-	println!("stick dir: {}", STICK_DIR[ENTRY_ID]);
-	return STICK_DIR[ENTRY_ID]
+	return crate::get_state!(ENTRY_ID, InfoState).stick_dir
 }
 
 //Misc.

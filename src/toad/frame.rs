@@ -209,7 +209,7 @@ unsafe extern "C" fn toad(fighter : &mut L2CFighterCommon) {
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_LANDING, true);
 				}
 				if AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_HIT) && !AttackModule::is_infliction(boma, *COLLISION_KIND_MASK_HIT) && frame < 50.0{
-					macros::SET_SPEED_EX(fighter, SPEED_X[ENTRY_ID]*PostureModule::lr(boma), 1.0, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+					macros::SET_SPEED_EX(fighter, get_speed_x(boma)*PostureModule::lr(boma), 1.0, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
 					MotionModule::change_motion(boma, smash::phx::Hash40::new("special_air_lw_water"), 51.0, 1.0, false, 0.0, false, false);
 				};
 				if frame > 5.0 && frame < 7.0{
@@ -418,7 +418,7 @@ unsafe extern "C" fn toad(fighter : &mut L2CFighterCommon) {
                     		macros::SET_SPEED_EX(fighter, 1.5, -2.0, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
 							SIDEB_DIR[ENTRY_ID] = PostureModule::lr(boma);
 						} else {
-                    		macros::SET_SPEED_EX(fighter, 1.5, PREV_SPEED_Y[ENTRY_ID], *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+                    		macros::SET_SPEED_EX(fighter, 1.5, get_prev_speed_y(boma), *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
 							if PostureModule::lr(boma) != SIDEB_DIR[ENTRY_ID] {
 								PostureModule::reverse_lr(boma);
 								PostureModule::update_rot_y_lr(boma);

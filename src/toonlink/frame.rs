@@ -45,7 +45,7 @@ unsafe extern "C" fn tink_frame(fighter: &mut L2CFighterCommon) {
 				if frame > 2.0 && frame < 12.0 && (frame as i32 % 3 == 0) {
 					macros::EFFECT(fighter, Hash40::new("sys_attack_speedline"),  Hash40::new("top"), 0, 3, 0, 90, 0, 0, 0.85, 0, 0, 0, 0, 0, 0, true);
 				};
-				if SPEED_Y[ENTRY_ID] <= 0.0 {
+				if get_speed_y(boma) <= 0.0 {
 					if (ControlModule::get_command_flag_cat(boma, 1) & *FIGHTER_PAD_CMD_CAT2_FLAG_FALL_JUMP) != 0 {
 						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL_SPECIAL, true);
 					};

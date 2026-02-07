@@ -84,8 +84,8 @@ unsafe extern "C" fn murabito_frame(fighter: &mut L2CFighterCommon) {
                         DO_BOUNCE[ENTRY_ID] = true;
                     };
                 }
-                if SPEED_Y[ENTRY_ID] > 2.0 {
-                    let speed = smash::phx::Vector3f { x: 0.0, y: (SPEED_Y[ENTRY_ID]-2.0)*-1.0, z: 0.0 };
+                if get_speed_y(boma) > 2.0 {
+                    let speed = smash::phx::Vector3f { x: 0.0, y: (get_speed_y(boma)-2.0)*-1.0, z: 0.0 };
                     KineticModule::add_speed(fighter.module_accessor, &speed);
                 }
             };

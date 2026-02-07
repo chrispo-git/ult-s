@@ -53,7 +53,7 @@ unsafe extern "C" fn bomber_main_frame(fighter: &mut L2CFighterCommon) {
                     macros::SET_SPEED_EX(fighter, 0.0, -2.6, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
                 }
                 damage!(fighter, *MA_MSC_DAMAGE_DAMAGE_NO_REACTION, /*Type*/ *DAMAGE_NO_REACTION_MODE_ALWAYS, /*DamageThreshold*/ 0);
-                if ((frame > 26.0 && SPEED_Y[ENTRY_ID] < 0.0 && is_near_ground == 1 ) || (is_kinda_near == 1 && frame > 39.0)) {
+                if ((frame > 26.0 && get_speed_y(boma) < 0.0 && is_near_ground == 1 ) || (is_kinda_near == 1 && frame > 39.0)) {
                     //println!("special s land");
                     StatusModule::set_situation_kind(boma, smash::app::SituationKind(*SITUATION_KIND_AIR), true);
                     StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_CATCH_CUT, true);
@@ -86,7 +86,7 @@ unsafe extern "C" fn bomber_main_frame(fighter: &mut L2CFighterCommon) {
                 }
                 if motion_kind == hash40("special_s_end") && frame > 25.0 {
                     StatusModule::set_keep_situation_air(boma, false);
-                    if situation_kind == *SITUATION_KIND_GROUND || (is_near_ground == 1 && SPEED_Y[ENTRY_ID] <= 0.0) {
+                    if situation_kind == *SITUATION_KIND_GROUND || (is_near_ground == 1 && get_speed_y(boma) <= 0.0) {
                         StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_LANDING, false);
                     }
                 }
@@ -115,7 +115,7 @@ unsafe extern "C" fn bomber_main_frame(fighter: &mut L2CFighterCommon) {
                 }
             }
             if [hash40("special_s_end")].contains(&motion_kind) {
-                if is_end || (is_near_ground == 1 && SPEED_Y[ENTRY_ID] <= 0.0 && frame > 26.0) {
+                if is_end || (is_near_ground == 1 && get_speed_y(boma) <= 0.0 && frame > 26.0) {
                     StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_FALL, false);
                 }
                 if frame >= cancel_frame {
@@ -181,7 +181,7 @@ unsafe extern "C" fn bomberman_frame(fighter: &mut L2CFighterCommon) {
             } else {
 				if StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR {
 					let cat2 = ControlModule::get_command_flag_cat(boma, 1);
-					if (cat2 & *FIGHTER_PAD_CMD_CAT2_FLAG_FALL_JUMP) != 0 && ControlModule::get_stick_y(boma) < -0.66 && SPEED_Y[ENTRY_ID] <= 0.0 {
+					if (cat2 & *FIGHTER_PAD_CMD_CAT2_FLAG_FALL_JUMP) != 0 && ControlModule::get_stick_y(boma) < -0.66 && get_speed_y(boma) <= 0.0 {
 						WorkModule::set_flag(boma, true, *FIGHTER_STATUS_WORK_ID_FLAG_RESERVE_DIVE);
 					}
 				};
