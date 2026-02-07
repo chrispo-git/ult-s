@@ -57,3 +57,11 @@ macro_rules! get_state {
         $crate::state_manager::edit_state::<$type, _, _>($entry as usize, |data| data.clone())
     };
 }
+#[macro_export]
+macro_rules! warm_up_states {
+    ($entry:expr, [$($t:ty),* $(,)?]) => {
+        $(
+            let _ = $crate::get_state!($entry, $t);
+        )*
+    };
+}

@@ -48,7 +48,7 @@ unsafe extern "C" fn common(fighter : &mut L2CFighterCommon) {
         projectile_invuln::opff(fighter, motion_kind);
         wavedash::opff(fighter, status_kind, motion_kind, entry_id);
         gamemodes::opff(fighter, status_kind, motion_kind, entry_id);
-
+        /*
         let duration = start.elapsed();
         FRAME_COUNT += 1;
         OPERATION_COUNT += duration.as_micros() as f32;
@@ -67,7 +67,7 @@ unsafe extern "C" fn common(fighter : &mut L2CFighterCommon) {
             FRAME_COUNT = 0;
             OPERATION_COUNT = 0.0;
             MAX_SPIKE = 0.0;
-        }
+        }*/
     }
 }
 
@@ -78,6 +78,13 @@ pub unsafe fn lazy_warm() {
     movement::lazy_warm();
     projectile_invuln::lazy_warm();
     wavedash::lazy_warm();
+    for entry_id in 0..8 {
+        crate::warm_up_states!(entry_id, [
+            crate::util::InfoState,
+            crate::util::TransitionEnableState,
+            crate::util::JabState,
+        ]);
+    }
 }
 
 pub fn install() {
