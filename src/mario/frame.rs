@@ -69,10 +69,10 @@ unsafe extern "C" fn mario_frame(fighter : &mut L2CFighterCommon) {
 
 			//Side Special
 			if StatusModule::situation_kind(boma) != *SITUATION_KIND_AIR || (*FIGHTER_STATUS_KIND_DAMAGE..*FIGHTER_STATUS_KIND_DAMAGE_FALL).contains(&status_kind) {
-				CAN_SIDEB[ENTRY_ID] = 0;
+				crate::transition_reset!(can_sideb);
 			};
 			if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_S  && MotionModule::frame(boma) > 9.0 && MotionModule::frame(boma) < 22.0 && StopModule::is_stop(boma) == false {
-				CAN_SIDEB[ENTRY_ID] = 1;
+				crate::transition_set!(can_sideb);
 				if SPIN_EFF[ENTRY_ID] == 0{
 					let handbg1: u32 = EffectModule::req_follow(boma, smash::phx::Hash40::new("sys_spin_wind"), smash::phx::Hash40::new("top"), &SPIN2, &NOSPIN, 1.1, true, 0, 0, 0, 0, 0, true, true) as u32;
 					let handbg2: u32 = EffectModule::req_follow(boma, smash::phx::Hash40::new("sys_spin_wind"), smash::phx::Hash40::new("top"), &SPIN3, &NOSPIN, 1.1, true, 0, 0, 0, 0, 0, true, true) as u32;

@@ -67,7 +67,7 @@ unsafe extern "C" fn bomber_main_frame(fighter: &mut L2CFighterCommon) {
                             MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_s_dash"), -1.0, 1.0, false, 0.0, false, false);
                         } else {
                             MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_air_s_dash"), -1.0, 1.0, false, 0.0, false, false);
-                            CAN_SIDEB[ENTRY_ID] = 1;
+                            crate::transition_set!(can_sideb);
                         }
                     } else if is_end && ![hash40("special_s_miss"), hash40("special_air_s_miss")].contains(&motion_kind){
                         if is_ground {
@@ -130,7 +130,7 @@ unsafe extern "C" fn bomber_main_frame(fighter: &mut L2CFighterCommon) {
                 CAN_GRAB[ENTRY_ID] = 1;
             }
             if situation_kind != *SITUATION_KIND_AIR {
-                CAN_SIDEB[ENTRY_ID] = 0;
+                crate::transition_reset!(can_sideb);
             }
         }
     }

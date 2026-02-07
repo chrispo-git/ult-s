@@ -54,9 +54,9 @@ unsafe extern "C" fn sonic(fighter : &mut L2CFighterCommon) {
 					BAN_SIDEB[ENTRY_ID] = false;
 				};
 				if BAN_SIDEB[ENTRY_ID] == true {
-						CAN_SIDEB[ENTRY_ID] = 1;
+						crate::transition_set!(can_sideb);
 				} else {
-						CAN_SIDEB[ENTRY_ID] = 0;
+						crate::transition_reset!(can_sideb);
 				};
 				if [hash40("special_s_start"), hash40("special_air_s_start")].contains(&MotionModule::motion_kind(boma)) {
 					reimpl_cancel_frame(fighter);

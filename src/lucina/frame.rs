@@ -149,7 +149,7 @@ unsafe extern "C" fn lucina(fighter : &mut L2CFighterCommon) {
 				if LUCINA_STANCE[ENTRY_ID] == 0 {
 					
 					if BAN_SIDEB[ENTRY_ID] == true && StatusModule::situation_kind(boma) != *SITUATION_KIND_AIR{
-						CAN_SIDEB[ENTRY_ID] = 0;
+						crate::transition_reset!(can_sideb);
 						BAN_SIDEB[ENTRY_ID] = false;
 					};
 					if [*FIGHTER_STATUS_KIND_SPECIAL_HI].contains(&status_kind) && MotionModule::frame(boma) <= 5.0 {
@@ -365,9 +365,9 @@ unsafe extern "C" fn lucina(fighter : &mut L2CFighterCommon) {
 						CAN_DOWNB[ENTRY_ID] = 0;
 					};
 					if BAN_SIDEB[ENTRY_ID] == true {
-							CAN_SIDEB[ENTRY_ID] = 1;
+							crate::transition_set!(can_sideb);
 					} else {
-							CAN_SIDEB[ENTRY_ID] = 0;
+							crate::transition_reset!(can_sideb);
 					};
 					if [*FIGHTER_STATUS_KIND_SPECIAL_S].contains(&status_kind) {
 						BAN_SIDEB[ENTRY_ID] = true;

@@ -40,31 +40,14 @@ pub fn is_on_ryujinx() -> bool {
         }
     }
 }
+mod state_manager;
+mod s_macros;
 
 
 pub fn quick_validate_install() -> bool {
-    let mut passed = true;
-    //plugin checks
     let has_param_config = Path::new(
         "rom:/skyline/plugins/libparam_config.nro",
-    )
-    .is_file();
-    let has_css_redirector = Path::new(
-        "rom:/skyline/plugins/libthe_csk_collection.nro",
-    )
-    .is_file();
-    let has_arcropolis = Path::new(
-        "rom:/skyline/plugins/libarcropolis.nro",
-    )
-    .is_file();
-    let has_nro_hook = Path::new(
-        "rom:/skyline/plugins/libnro_hook.nro"
-    )
-    .is_file();
-    let has_smashline = Path::new(
-        "rom:/skyline/plugins/libsmashline_plugin.nro",
-    )
-    .is_file();
+    ).is_file();
 
     if has_param_config {
         println!("libparam_config.nro is present");
@@ -74,8 +57,12 @@ pub fn quick_validate_install() -> bool {
         } else {
             DialogOk::ok("libparam_config.nro not found! This installation is incomplete. Please run Ultimate S Setup Tool.");
         }
-        passed = false;
+        return false;
     }
+    let has_css_redirector = Path::new(
+        "rom:/skyline/plugins/libthe_csk_collection.nro",
+    )
+    .is_file();
     if has_css_redirector {
         println!("libthe_csk_collection.nro is present");
     } else {
@@ -84,8 +71,12 @@ pub fn quick_validate_install() -> bool {
         } else {
             DialogOk::ok("libthe_csk_collection.nro not found! This installation is incomplete. Please run Ultimate S Setup Tool.");
         }
-        passed = false;
+        return false;
     }
+    let has_arcropolis = Path::new(
+        "rom:/skyline/plugins/libarcropolis.nro",
+    )
+    .is_file();
     if has_arcropolis {
         println!("libarcropolis.nro is present");
     } else {
@@ -94,8 +85,12 @@ pub fn quick_validate_install() -> bool {
         } else {
             DialogOk::ok("libarcropolis.nro not found! This installation is incomplete. Please run Ultimate S Setup Tool.");
         }
-        passed = false;
+        return false;
     }
+    let has_nro_hook = Path::new(
+        "rom:/skyline/plugins/libnro_hook.nro"
+    )
+    .is_file();
     if has_nro_hook {
         println!("libnro_hook.nro is present");
     } else {
@@ -104,8 +99,12 @@ pub fn quick_validate_install() -> bool {
         } else {
             DialogOk::ok("libnro_hook.nro not found! This installation is incomplete. Please run Ultimate S Setup Tool.");
         }
-        passed = false;
+        return false;
     }
+    let has_smashline = Path::new(
+        "rom:/skyline/plugins/libsmashline_plugin.nro",
+    )
+    .is_file();
     if has_smashline {
         println!("libsmashline_plugin.nro is present");
     } else {
@@ -114,10 +113,10 @@ pub fn quick_validate_install() -> bool {
         } else {
             DialogOk::ok("libsmashline_plugin.nro not found! This installation is incomplete. Please run Ultimate S Setup Tool.");
         }
-        passed = false;
+        return false;
     }
 
-    passed
+    return true;
 }
 
 extern "C" {
@@ -215,8 +214,6 @@ fn change_version_string_hook(arg: u64, string: *const c_char) {
 
 
 
-
-mod s_macros;
 mod util;
 mod controls;
 mod common;

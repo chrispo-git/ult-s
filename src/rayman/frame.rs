@@ -238,7 +238,7 @@ unsafe extern "C" fn rayman(fighter: &mut L2CFighterCommon) {
             };
             //Sideb
             if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_S {
-                CAN_SIDEB[ENTRY_ID] = 1;
+                crate::transition_set!(can_sideb);
                 if motion_kind != hash40("slide_jump_fall") {
                     StatusModule::set_situation_kind(boma, smash::app::SituationKind(*SITUATION_KIND_AIR), true);
                     StatusModule::set_keep_situation_air(boma, true);
@@ -269,7 +269,7 @@ unsafe extern "C" fn rayman(fighter: &mut L2CFighterCommon) {
                 }
             }
             if situation_kind != *SITUATION_KIND_AIR {
-                CAN_SIDEB[ENTRY_ID] = 0;
+                crate::transition_reset!(can_sideb);
                 CAN_NEUTRALB[ENTRY_ID] = 0;
             }
             if ![hash40("slide_jump_fall"),hash40("capture_jump"),hash40("special_s"),hash40("special_air_s")].contains(&MotionModule::motion_kind(boma)) {

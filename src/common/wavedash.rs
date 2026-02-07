@@ -14,9 +14,12 @@ use std::os::raw::c_ulong;
 use std::{fs, path::Path};
 use once_cell::sync::Lazy;
 
-static mut IS_WAVEDASH: [bool; 8] = [false; 8];
-static mut FORCE_WAVEDASH: [bool; 8] = [false; 8];
-static mut WAVEDASH_DONE: [bool; 8] = [false; 8];
+#[derive(Default, Clone, Copy)]
+struct WavedashState {
+    is_wavedash: bool,
+    force_wavedash: bool,
+    wavedash_done: bool,
+}
 const TRACTION_MAX: f32 = 0.086;
 const TRACTION_HIGH: f32 = 0.075;
 const TRACTION_MID: f32 = 0.06;
@@ -87,7 +90,10 @@ pub unsafe fn opff(fighter : &mut L2CFighterCommon, status_kind : i32, motion_ki
 		if !crate::is_in!(status_kind,
 			*FIGHTER_STATUS_KIND_JUMP_SQUAT, *FIGHTER_STATUS_KIND_ESCAPE_AIR, 
 			*FIGHTER_STATUS_KIND_ESCAPE_AIR_SLIDE, *FIGHTER_STATUS_KIND_JUMP){
-			IS_WAVEDASH[ENTRY_ID] = false;
+
+				crate::with_state!(ENTRY_ID, WavedashState, state, {
+					state.is_wavedash = false;
+				});
 		}
 		if !crate::is_in!(status_kind, 
 			*FIGHTER_STATUS_KIND_LANDING, *FIGHTER_STATUS_KIND_JUMP_SQUAT, 
@@ -95,7 +101,9 @@ pub unsafe fn opff(fighter : &mut L2CFighterCommon, status_kind : i32, motion_ki
 				return;
 		}
 		if status_kind == *FIGHTER_STATUS_KIND_JUMP_SQUAT && ControlModule::check_button_on_trriger(fighter.module_accessor, *CONTROL_PAD_BUTTON_GUARD) {
-			IS_WAVEDASH[ENTRY_ID] = true;
+			crate::with_state!(ENTRY_ID, WavedashState, state, {
+				state.is_wavedash = true;
+			});
 			return;
 		}
 		let fighter_kind = smash::app::utility::get_kind(boma(fighter));
@@ -142,24 +150,26 @@ pub unsafe fn opff(fighter : &mut L2CFighterCommon, status_kind : i32, motion_ki
 		if !crate::is_in!(status_kind, *FIGHTER_STATUS_KIND_ESCAPE_AIR, *FIGHTER_STATUS_KIND_ESCAPE_AIR_SLIDE) {
 			return;
 		}
-		if stick_y < 0.5 && (IS_WAVEDASH[ENTRY_ID] || ray_check_pos(boma(fighter), 0.0, -6.0, true) == 1) {
-			let distance_to_floor = 14;
-			if ray_check_pos(boma(fighter), 0.0, -(distance_to_floor as f32), true) == 1 {
-				GroundModule::attach_ground(fighter.module_accessor, true);
-				GroundModule::set_attach_ground(fighter.module_accessor, true);
-				let mut teleport_distance = -(distance_to_floor as f32);
-				for x in 0..distance_to_floor {
-					if ray_check_pos(boma(fighter), 0.0, -(x as f32), true) == 1 {
-						teleport_distance = -(x as f32);
-						break;
+		crate::with_state!(ENTRY_ID, WavedashState, state, {
+			if stick_y < 0.5 && (state.is_wavedash || ray_check_pos(boma(fighter), 0.0, -6.0, true) == 1) {
+				let distance_to_floor = 14;
+				if ray_check_pos(boma(fighter), 0.0, -(distance_to_floor as f32), true) == 1 {
+					GroundModule::attach_ground(fighter.module_accessor, true);
+					GroundModule::set_attach_ground(fighter.module_accessor, true);
+					let mut teleport_distance = -(distance_to_floor as f32);
+					for x in 0..distance_to_floor {
+						if ray_check_pos(boma(fighter), 0.0, -(x as f32), true) == 1 {
+							teleport_distance = -(x as f32);
+							break;
+						}
 					}
+					let pos = smash::phx::Vector3f { x: PostureModule::pos_x(fighter.module_accessor), y: PostureModule::pos_y(fighter.module_accessor)+(teleport_distance as f32), z: 0.0 };
+					PostureModule::set_pos(fighter.module_accessor, &pos);
+					fighter.change_status(FIGHTER_STATUS_KIND_LANDING.into(), false.into());
 				}
-				let pos = smash::phx::Vector3f { x: PostureModule::pos_x(fighter.module_accessor), y: PostureModule::pos_y(fighter.module_accessor)+(teleport_distance as f32), z: 0.0 };
-				PostureModule::set_pos(fighter.module_accessor, &pos);
-				fighter.change_status(FIGHTER_STATUS_KIND_LANDING.into(), false.into());
 			}
-		}
-		IS_WAVEDASH[ENTRY_ID] = false;
+			state.is_wavedash = false;
+		});
     };
 }
 
@@ -226,12 +236,13 @@ unsafe extern "C" fn status_pre_EscapeAir(fighter: &mut L2CFighterCommon) -> L2C
 	if !is_mechanics_enabled()  && !is_gamemode("rivals".to_string()) {
 		return smashline::original_status(Pre, fighter, *FIGHTER_STATUS_KIND_ESCAPE_AIR)(fighter);
 	}
-    if IS_WAVEDASH[ENTRY_ID] == true && y < 0.5 /*&& (ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_JUMP) || ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP_MINI))*/ && GroundModule::ray_check(boma, &Vector2f{ x: PostureModule::pos_x(boma), y: PostureModule::pos_y(boma)}, &Vector2f{ x: 0.0, y: -3.0}, true) == 1 && fighter_kind != *FIGHTER_KIND_DEMON{
-        GroundModule::attach_ground(fighter.module_accessor, true);
-        GroundModule::set_attach_ground(fighter.module_accessor, true);
-        fighter.change_status(FIGHTER_STATUS_KIND_LANDING.into(), false.into());
-        return 0.into();
-    }
+	let state = crate::get_state!(ENTRY_ID, WavedashState);
+	if state.is_wavedash == true && y < 0.5 /*&& (ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_JUMP) || ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP_MINI))*/ && GroundModule::ray_check(boma, &Vector2f{ x: PostureModule::pos_x(boma), y: PostureModule::pos_y(boma)}, &Vector2f{ x: 0.0, y: -3.0}, true) == 1 && fighter_kind != *FIGHTER_KIND_DEMON{
+		GroundModule::attach_ground(fighter.module_accessor, true);
+		GroundModule::set_attach_ground(fighter.module_accessor, true);
+		fighter.change_status(FIGHTER_STATUS_KIND_LANDING.into(), false.into());
+		return 0.into();
+	}
     return smashline::original_status(Pre, fighter, *FIGHTER_STATUS_KIND_ESCAPE_AIR)(fighter);
 }
 #[skyline::hook(replace = smash::app::lua_bind::StatusModule::change_status_request_from_script)]

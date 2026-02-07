@@ -53,21 +53,47 @@ pub static mut SUB_STICK: [Vector2f;9] = [Vector2f{x:0.0, y: 0.0};9];
 // 0 - Don't change 
 // 1 - Force off
 // 2 - Force on 
-pub static mut CAN_UPB: [i32; 8] = [0; 8];
-pub static mut CAN_SIDEB: [i32; 8] = [0; 8];
-pub static mut CAN_DOWNB: [i32; 8] = [0; 8];
-pub static mut CAN_NEUTRALB: [i32; 8] = [0; 8];
-pub static mut CAN_JUMP_SQUAT: [i32; 8] = [0; 8];
-pub static mut CAN_DOUBLE_JUMP: [i32; 8] = [0; 8];
-pub static mut CAN_CLIFF: [i32; 8] = [0; 8];
-pub static mut CAN_ATTACK_AIR: [i32; 8] = [0; 8];
-pub static mut CAN_AIRDODGE: [i32; 8] = [0; 8];
-pub static mut CAN_RAPID_JAB: [i32; 8] = [0; 8];
-pub static mut CAN_JAB: [i32; 8] = [0; 8];
-pub static mut CAN_DASH: [i32; 8] = [0; 8];
-pub static mut CAN_GRAB: [i32; 8] = [0; 8];
-pub static mut CAN_TURNDASH: [i32; 8] = [0; 8];
+#[derive(Default, Clone, Copy)]
+pub struct TransitionEnableState {
+    pub can_upb: i32,
+    pub can_sideb: i32,
+    pub can_downb: i32,
+    pub can_neutralb: i32,
+    pub can_jump_squat: i32,
+    pub can_double_jump: i32,
+    pub can_cliff: i32,
+    pub can_attack_air: i32,
+    pub can_airdodge: i32,
+    pub can_rapid_jab: i32,
+    pub can_jab: i32,
+    pub can_dash: i32,
+    pub can_grab: i32,
+    pub can_turndash: i32,
+}
+#[macro_export]
+macro_rules! transitions_reset_all {
+    ($entry:expr) => {
+        $crate::set_state!($entry, $crate::util::TransitionEnableState::default())
+    };
+}
 
+#[macro_export]
+macro_rules! transition_reset {
+    ($entry:expr, $field:ident) => {
+        $crate::with_state!($entry, $crate::util::TransitionEnableState, state, {
+            state.$field = 0;
+        })
+    };
+}
+
+#[macro_export]
+macro_rules! transition_set {
+    ($entry:expr, $field:ident) => {
+        $crate::with_state!($entry, $crate::util::TransitionEnableState, state, {
+            state.$field = 1;
+        })
+    };
+}
 pub static mut TO_RUN_FLAG: [bool; 8] = [false; 8];
 
 //Jab Flags
@@ -98,80 +124,23 @@ pub unsafe fn is_enable_transition_term_hook(boma: &mut smash::app::BattleObject
 		if smash::app::utility::get_category(boma) != *BATTLE_OBJECT_CATEGORY_FIGHTER {
 			original!()(boma, flag);
 		}
-		if CAN_UPB[ENTRY_ID] != 0 && flag == *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_SPECIAL_HI {
-			if CAN_UPB[ENTRY_ID] == 1 {
-				return false
-			} else {
-				return true 
-			}
-		} else if CAN_SIDEB[ENTRY_ID] != 0  && flag == *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_SPECIAL_S {
-			if CAN_SIDEB[ENTRY_ID] == 1 {
-				return false
-			} else {
-				return true 
-			}
-		}else if CAN_DOWNB[ENTRY_ID] != 0  && flag == *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_SPECIAL_LW {
-			if CAN_DOWNB[ENTRY_ID] == 1 {
-				return false
-			} else {
-				return true 
-			}
-		}else if CAN_CLIFF[ENTRY_ID] != 0  && flag == *FIGHTER_STATUS_TRANSITION_TERM_ID_CLIFF_CATCH{
-			if CAN_CLIFF[ENTRY_ID] == 1 {
-				return false
-			} else {
-				return true 
-			}
-		} else if CAN_AIRDODGE[ENTRY_ID] != 0  && flag == *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_ESCAPE_AIR {
-			if CAN_AIRDODGE[ENTRY_ID] == 1 {
-				return false
-			} else {
-				return true 
-			}
-		}  else if CAN_NEUTRALB[ENTRY_ID] != 0  && flag == *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_SPECIAL_N {
-			if CAN_NEUTRALB[ENTRY_ID] == 1 {
-				return false
-			} else {
-				return true 
-			}
-		} else if CAN_JUMP_SQUAT[ENTRY_ID] != 0  && (flag == *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_JUMP_SQUAT || flag == *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_JUMP_SQUAT_BUTTON) {
-			if CAN_JUMP_SQUAT[ENTRY_ID] == 1 {
-				return false
-			} else {
-				return true 
-			}
-		}  else if CAN_DOUBLE_JUMP[ENTRY_ID] != 0  && (flag == *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_JUMP_AERIAL || flag == *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_JUMP_AERIAL_BUTTON) {
-			if CAN_DOUBLE_JUMP[ENTRY_ID] == 1 {
-				return false
-			} else {
-				return true 
-			}
-		}  else if CAN_ATTACK_AIR[ENTRY_ID] != 0  && flag == *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_ATTACK_AIR  {
-			if CAN_ATTACK_AIR[ENTRY_ID] == 1 {
-				return false
-			} else {
-				return true 
-			}
-		}  else if CAN_DASH[ENTRY_ID] != 0  && flag == *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_DASH {
-			if CAN_DASH[ENTRY_ID] == 1 {
-				return false
-			} else {
-				return true 
-			}
-		}  else if CAN_GRAB[ENTRY_ID] != 0  && flag == *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_CATCH {
-			if CAN_GRAB[ENTRY_ID] == 1 {
-				return false
-			} else {
-				return true 
-			}
-		}  else if CAN_TURNDASH[ENTRY_ID] != 0  && flag == *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_TURN_DASH {
-			if CAN_TURNDASH[ENTRY_ID] == 1 {
-				return false
-			} else {
-				return true 
-			}
-		}   else {
-			original!()(boma, flag)
+		let state = crate::get_state!(ENTRY_ID, TransitionEnableState);
+		if 	(state.can_upb == 1 && flag == *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_SPECIAL_HI) ||
+			(state.can_sideb == 1 && flag == *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_SPECIAL_S) ||
+			(state.can_downb == 1 && flag == *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_SPECIAL_LW) ||
+			(state.can_neutralb == 1 && flag == *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_SPECIAL_N) ||
+			(state.can_cliff == 1 && flag == *FIGHTER_STATUS_TRANSITION_TERM_ID_CLIFF_CATCH) ||
+			(state.can_airdodge == 1 && flag == *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_ESCAPE_AIR) ||
+			(state.can_attack_air == 1 && flag == *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_ATTACK_AIR) ||
+			(state.can_dash == 1 && flag == *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_DASH) ||
+			(state.can_grab == 1 && flag == *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_CATCH) ||
+			(state.can_turndash == 1 && flag == *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_TURN_DASH) ||
+			(state.can_jump_squat == 1 && (flag == *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_JUMP_SQUAT || flag == *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_JUMP_SQUAT_BUTTON)) ||
+			(state.can_double_jump == 1 && (flag == *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_JUMP_AERIAL || flag == *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_JUMP_AERIAL_BUTTON)) 
+			{
+				false
+		} else {
+				original!()(boma, flag)
 		}
 }
 #[skyline::hook(replace = smash::app::lua_bind::WorkModule::on_flag)]
@@ -292,18 +261,7 @@ unsafe extern "C" fn util_update(fighter : &mut L2CFighterCommon) {
 		};
 		//Resets inability to special
 		if is_reset() {
-			JC_GRAB_LOCKOUT[ENTRY_ID] = 0;
-			CAN_ATTACK_AIR[ENTRY_ID] = 0;
-			CAN_JUMP_SQUAT[ENTRY_ID] = 0;
-			CAN_DOUBLE_JUMP[ENTRY_ID] = 0;
-			CAN_DOWNB[ENTRY_ID] = 0;
-			CAN_NEUTRALB[ENTRY_ID] = 0;
-			CAN_SIDEB[ENTRY_ID] = 0;
-			CAN_UPB[ENTRY_ID] = 0;
-			CAN_CLIFF[ENTRY_ID] = 0;
-			CAN_AIRDODGE[ENTRY_ID] = 0;
-			CAN_RAPID_JAB[ENTRY_ID] = 0;
-			CAN_JAB[ENTRY_ID] = 0;
+			crate::transitions_reset_all!(ENTRY_ID);
 			HAS_ENABLE_COMBO_ON[ENTRY_ID] = false;
 			HAS_ENABLE_100_ON[ENTRY_ID] = false;
 			FULL_HOP_ENABLE_DELAY[ENTRY_ID] = 0;
@@ -753,21 +711,12 @@ pub (crate) unsafe fn reset_gamemodes() -> () {
 }
 
 #[inline(always)]
-pub (crate) unsafe fn reset_attack_blockers() -> () {
-    CAN_UPB.fill(0);
-    CAN_SIDEB.fill(0);
-    CAN_DOWNB.fill(0);
-    CAN_NEUTRALB.fill(0);
-    CAN_JUMP_SQUAT.fill(0);
-    CAN_DOUBLE_JUMP.fill(0);
-    CAN_CLIFF.fill(0);
-    CAN_ATTACK_AIR.fill(0);
-    CAN_AIRDODGE.fill(0);
-    CAN_RAPID_JAB.fill(0);
-    CAN_JAB.fill(0);
-    CAN_DASH.fill(0);
-    CAN_GRAB.fill(0);
-    CAN_TURNDASH.fill(0);
+pub (crate) unsafe fn reset_attack_blockers() {
+    if let Ok(mut everybody) = crate::state_manager::PLAYER_STATE.lock() {
+        for player_map in everybody.iter_mut() {
+            player_map.remove(&std::any::TypeId::of::<TransitionEnableState>());
+        }
+    }
 }
 
 
