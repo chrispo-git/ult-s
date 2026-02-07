@@ -39,7 +39,7 @@ unsafe extern "C" fn kirby_daisy_frame(fighter: &mut L2CFighterCommon) {
 #[inline(always)]
 pub unsafe fn neutral_special(fighter: &mut L2CFighterCommon, target_status : i32) {
 	let status_kind = smash::app::lua_bind::StatusModule::status_kind(fighter.module_accessor);
-	if status_kind == target_status && KineticModule::get_kinetic_type(fighter.module_accessor)  {
+	if status_kind == target_status && KineticModule::get_kinetic_type(fighter.module_accessor) != *FIGHTER_KINETIC_TYPE_MOTION_AIR {
 		KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_MOTION_AIR);
 	};
 }
