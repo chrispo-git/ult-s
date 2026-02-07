@@ -63,16 +63,16 @@ unsafe extern "C" fn pitoo(fighter : &mut L2CFighterCommon) {
 				StatusModule::change_status_request_from_script(boma, *FIGHTER_PIT_STATUS_KIND_SPECIAL_HI_RUSH, false);
 			};
 			if situation_kind != *SITUATION_KIND_AIR  || (*FIGHTER_STATUS_KIND_DAMAGE..*FIGHTER_STATUS_KIND_DAMAGE_FALL).contains(&status_kind) {
-				crate::transition_reset!(can_sideb);
+				crate::transition_reset!(ENTRY_ID, can_sideb);
 			};
 			if status_kind == *FIGHTER_PIT_STATUS_KIND_SPECIAL_HI_RUSH {
-					crate::transition_set!(can_sideb);
+					crate::transition_set!(ENTRY_ID, can_sideb);
 					if MotionModule::frame(boma) > 10.0 {
 						StatusModule::change_status_request_from_script(boma, *FIGHTER_PIT_STATUS_KIND_SPECIAL_HI_RUSH_END, false);
 					};
 			};
 			if status_kind == *FIGHTER_PIT_STATUS_KIND_SPECIAL_HI_RUSH_END {
-					crate::transition_set!(can_sideb);
+					crate::transition_set!(ENTRY_ID, can_sideb);
 					reimpl_cancel_frame(fighter);
 					if end_frame - frame < 3.0 {
 						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL, true);

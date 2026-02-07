@@ -32,7 +32,7 @@ unsafe extern "C" fn lucas_frame(fighter: &mut L2CFighterCommon) {
 			let situation_kind = StatusModule::situation_kind(boma);
 			let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 			if [hash40("special_air_n_start"), hash40("special_n_start")].contains(&motion_kind) {
-				CAN_NEUTRALB[ENTRY_ID] = 1;
+				crate::transition_set!(ENTRY_ID, can_neutralb);
 				if end_frame - frame < 3.0 {
 					if situation_kind == *SITUATION_KIND_AIR {
 						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL, false);
@@ -42,7 +42,7 @@ unsafe extern "C" fn lucas_frame(fighter: &mut L2CFighterCommon) {
 				};
 			};
 			if situation_kind != *SITUATION_KIND_AIR {
-				CAN_NEUTRALB[ENTRY_ID] = 0;
+				crate::transition_reset!(ENTRY_ID, can_neutralb);
 			};
 		}
     }

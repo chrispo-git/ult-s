@@ -30,10 +30,10 @@ pub unsafe fn opff(fighter : &mut L2CFighterCommon, status_kind : i32, ENTRY_ID 
         }
     }
     if remaining_hitstun > 0.0 && [*FIGHTER_STATUS_KIND_DAMAGE_AIR, *FIGHTER_STATUS_KIND_DAMAGE_FALL, *FIGHTER_STATUS_KIND_DAMAGE_FLY, *FIGHTER_STATUS_KIND_DAMAGE_FLY_ROLL, *FIGHTER_STATUS_KIND_DAMAGE_FLY_METEOR].contains(&status_kind) {
-        CAN_AIRDODGE[ENTRY_ID] = 1;
-        CAN_ATTACK_AIR[ENTRY_ID] = 1;
+        crate::transition_set!(ENTRY_ID, can_airdodge);
+        crate::transition_set!(ENTRY_ID, can_attack_air);
     } else {
-        CAN_AIRDODGE[ENTRY_ID] = 0;
-        CAN_ATTACK_AIR[ENTRY_ID] = 0;
+        crate::transition_reset!(ENTRY_ID, can_airdodge);
+        crate::transition_reset!(ENTRY_ID, can_attack_air);
     };
 }

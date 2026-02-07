@@ -52,10 +52,10 @@ unsafe extern "C" fn gunner_frame(fighter: &mut L2CFighterCommon) {
                 };
             };
             if StatusModule::situation_kind(boma) != *SITUATION_KIND_AIR {
-                CAN_UPB[ENTRY_ID] = 0;
+                crate::transition_reset!(ENTRY_ID, can_upb);
             };
             if [hash40("special_hi1"), hash40("special_air_hi1")].contains(&MotionModule::motion_kind(boma)) {
-                CAN_UPB[ENTRY_ID] = 1;
+                crate::transition_set!(ENTRY_ID, can_upb);
                 if MotionModule::frame(boma) >= 30.0 {
                     StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL, false);
                 };

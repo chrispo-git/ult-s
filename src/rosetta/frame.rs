@@ -35,9 +35,9 @@ unsafe extern "C" fn rosa_frame(fighter: &mut L2CFighterCommon) {
 				let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 				let frame = MotionModule::frame(boma);
 				if IS_TICO_DEAD[ENTRY_ID] == true || COOLDOWN[ENTRY_ID] > 0{
-					CAN_DOWNB[ENTRY_ID] = 1;
+					crate::transition_set!(ENTRY_ID, can_downb);
 				} else {
-					CAN_DOWNB[ENTRY_ID] = 0;
+					crate::transition_reset!(ENTRY_ID, can_downb);
 				};
 				if smash::app::sv_information::is_ready_go() == false {
 					COOLDOWN[ENTRY_ID] = 0;

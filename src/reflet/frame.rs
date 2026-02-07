@@ -181,9 +181,9 @@ unsafe extern "C" fn robin(fighter : &mut L2CFighterCommon) {
 					};
 				};
 				if ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_CSTICK_ON) && ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_ATTACK_RAW)  && ControlModule::get_stick_y(boma) < -0.5 {
-					CAN_DOUBLE_JUMP[ENTRY_ID] = 1;
+					crate::transition_set!(ENTRY_ID, can_double_jump);
 				} else {
-					CAN_DOUBLE_JUMP[ENTRY_ID] = 0;
+					crate::transition_reset!(ENTRY_ID, can_double_jump);
 				}
 				if situation_kind == *SITUATION_KIND_AIR && (!(*FIGHTER_STATUS_KIND_DAMAGE..*FIGHTER_STATUS_KIND_DAMAGE_FALL).contains(&status_kind) && status_kind != *FIGHTER_STATUS_KIND_FALL_SPECIAL){
 					if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP) {

@@ -56,12 +56,12 @@ unsafe extern "C" fn toad(fighter : &mut L2CFighterCommon) {
 					};
 				};
 				if ItemModule::is_have_item(boma, 0) {
-					CAN_NEUTRALB[ENTRY_ID] = 1;
+					crate::transition_set!(ENTRY_ID, can_neutralb);
 				} else {
-					CAN_NEUTRALB[ENTRY_ID] = 0;
+					crate::transition_reset!(ENTRY_ID, can_neutralb);
 				};
 			} else {
-				CAN_NEUTRALB[ENTRY_ID] = 0;
+				crate::transition_reset!(ENTRY_ID, can_neutralb);
 			};
 		};*/
 		if is_reset() {
@@ -298,9 +298,9 @@ unsafe extern "C" fn toad(fighter : &mut L2CFighterCommon) {
 				}
 			}
 			if ItemModule::is_have_item(boma, 0) {
-				CAN_NEUTRALB[ENTRY_ID] = 1;
+				crate::transition_set!(ENTRY_ID, can_neutralb);
 			} else {
-				CAN_NEUTRALB[ENTRY_ID] = 0;
+				crate::transition_reset!(ENTRY_ID, can_neutralb);
 			};
 			//ArticleModule::remove_exist(boma, *FIGHTER_MURABITO_GENERATE_ARTICLE_CLAYROCKET,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
 			ArticleModule::remove_exist(boma, *FIGHTER_MURABITO_GENERATE_ARTICLE_BALLOON,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
@@ -403,7 +403,7 @@ unsafe extern "C" fn toad(fighter : &mut L2CFighterCommon) {
 				}
 			}
 			if [*FIGHTER_STATUS_KIND_SPECIAL_S].contains(&status_kind) {
-				crate::transition_set!(can_sideb);
+				crate::transition_set!(ENTRY_ID, can_sideb);
 				if [hash40("special_s"), hash40("special_air_s")].contains(&motion_kind) {
 					if SIDEB_END[ENTRY_ID] {
 						if situation_kind == *SITUATION_KIND_GROUND {
@@ -474,7 +474,7 @@ unsafe extern "C" fn toad(fighter : &mut L2CFighterCommon) {
 				SIDEB_RESET[ENTRY_ID] = false;
 			}
 			if situation_kind != *SITUATION_KIND_AIR || (*FIGHTER_STATUS_KIND_DAMAGE..*FIGHTER_STATUS_KIND_DAMAGE_FALL).contains(&status_kind){ 
-				crate::transition_reset!(can_sideb);
+				crate::transition_reset!(ENTRY_ID, can_sideb);
 			}
 			if [*FIGHTER_MURABITO_STATUS_KIND_SPECIAL_S_JUMP].contains(&status_kind) {
 				KineticModule::suspend_energy(boma, *FIGHTER_KINETIC_ENERGY_ID_CONTROL);

@@ -55,8 +55,8 @@ pub unsafe fn opff(fighter : &mut L2CFighterCommon, status_kind : i32, motion_ki
 				(cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_DASH) == 0 &&
 				ControlModule::check_button_off(boma(fighter), *CONTROL_PAD_BUTTON_JUMP)
 			){
-				CAN_JAB[ENTRY_ID] = 0;
-				CAN_RAPID_JAB[ENTRY_ID] = 0;
+				crate::transition_reset!(ENTRY_ID, can_jab);
+				crate::transition_reset!(ENTRY_ID, can_rapid_jab);
 				if HAS_ENABLE_100_ON[ENTRY_ID] {
 					WorkModule::set_flag(boma(fighter), true, *FIGHTER_STATUS_ATTACK_FLAG_ENABLE_100);
 				};
@@ -70,8 +70,8 @@ pub unsafe fn opff(fighter : &mut L2CFighterCommon, status_kind : i32, motion_ki
 					WorkModule::set_flag(boma(fighter), true, *FIGHTER_STATUS_ATTACK_FLAG_ENABLE_COMBO);
 				};
 			} else {
-				CAN_JAB[ENTRY_ID] = 1;
-				CAN_RAPID_JAB[ENTRY_ID] = 1;
+				crate::transition_set!(ENTRY_ID, can_jab);
+				crate::transition_set!(ENTRY_ID, can_rapid_jab);
 				if HAS_ENABLE_100_ON[ENTRY_ID] {
 					WorkModule::set_flag(boma(fighter), false, *FIGHTER_STATUS_ATTACK_FLAG_ENABLE_100);
 				};
@@ -83,8 +83,8 @@ pub unsafe fn opff(fighter : &mut L2CFighterCommon, status_kind : i32, motion_ki
 				};
 			};
 		} else {
-			CAN_JAB[ENTRY_ID] = 0;
-			CAN_RAPID_JAB[ENTRY_ID] = 0;
+			crate::transition_reset!(ENTRY_ID, can_jab);
+			crate::transition_reset!(ENTRY_ID, can_rapid_jab);
 		};
 		if [*FIGHTER_STATUS_KIND_ATTACK_100, *FIGHTER_STATUS_KIND_ATTACK, *FIGHTER_DEMON_STATUS_KIND_ATTACK_COMBO].contains(&status_kind) && !is_hitlag(boma(fighter)) && (HAS_ENABLE_100_ON[ENTRY_ID] || HAS_ENABLE_COMBO_ON[ENTRY_ID]){
 				if  (AttackModule::is_infliction_status(boma(fighter), *COLLISION_KIND_MASK_HIT) || (fighter_kind == *FIGHTER_KIND_SHEIK && AttackModule::is_infliction_status(boma(fighter), *COLLISION_KIND_MASK_ALL))) {

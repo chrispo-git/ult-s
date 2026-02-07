@@ -48,7 +48,7 @@ unsafe extern "C" fn samusd_frame(fighter: &mut L2CFighterCommon) {
 				IS_HOLD[ENTRY_ID] = false;
 				COOLDOWN[ENTRY_ID] = 0;
 				IS_ALLOWED[ENTRY_ID] = true;
-				CAN_DOWNB[ENTRY_ID] = 0;
+				crate::transition_reset!(ENTRY_ID, can_downb);
 			};
 			if IS_HOLD[ENTRY_ID] == true && ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_SPECIAL) {
 				IS_HOLD[ENTRY_ID] = false;
@@ -92,9 +92,9 @@ unsafe extern "C" fn samusd_frame(fighter: &mut L2CFighterCommon) {
 					IS_ALLOWED[ENTRY_ID] = true;
 			};
 			if  IS_ALLOWED[ENTRY_ID] == false {
-				CAN_DOWNB[ENTRY_ID] = 1;
+				crate::transition_set!(ENTRY_ID, can_downb);
 			} else {
-				CAN_DOWNB[ENTRY_ID] = 0;
+				crate::transition_reset!(ENTRY_ID, can_downb);
 			};
 			if status_kind == *FIGHTER_SAMUS_STATUS_KIND_SPECIAL_AIR_LW || status_kind == *FIGHTER_SAMUS_STATUS_KIND_SPECIAL_GROUND_LW {
 				if MotionModule::frame(boma) >= 18.0 && MotionModule::frame(boma) <= 20.0 {

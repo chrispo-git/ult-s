@@ -67,10 +67,10 @@ unsafe extern "C" fn chrom_frame(fighter: &mut L2CFighterCommon) {
 					};
 			};
 			if StatusModule::situation_kind(boma) != *SITUATION_KIND_AIR {
-				crate::transition_reset!(can_sideb);
+				crate::transition_reset!(ENTRY_ID, can_sideb);
 			};
 			if [hash40("special_s1"), hash40("special_air_s1")].contains(&MotionModule::motion_kind(boma)) {
-					crate::transition_set!(can_sideb);
+					crate::transition_set!(ENTRY_ID, can_sideb);
 			};
 			if hash40("attack_s3_lw") == MotionModule::motion_kind(boma) && MotionModule::frame(boma) >= 24.0 {
 				CancelModule::enable_cancel(boma);

@@ -78,6 +78,14 @@ macro_rules! transitions_reset_all {
 }
 
 #[macro_export]
+macro_rules! is_transition_set {
+    ($entry:expr, $field:ident) => {
+        // Returns true if the field is 1, false otherwise
+        $crate::get_state!($entry as usize, $crate::util::TransitionEnableState).$field == 1
+    };
+}
+
+#[macro_export]
 macro_rules! transition_reset {
     ($entry:expr, $field:ident) => {
         $crate::with_state!($entry, $crate::util::TransitionEnableState, state, {
@@ -712,10 +720,8 @@ pub (crate) unsafe fn reset_gamemodes() -> () {
 
 #[inline(always)]
 pub (crate) unsafe fn reset_attack_blockers() {
-    if let Ok(mut everybody) = crate::state_manager::PLAYER_STATE.lock() {
-        for player_map in everybody.iter_mut() {
-            player_map.remove(&std::any::TypeId::of::<TransitionEnableState>());
-        }
+    for id in 0..8 {
+        transitions_reset_all!(id);
     }
 }
 

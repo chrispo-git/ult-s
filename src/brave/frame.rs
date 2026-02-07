@@ -20,7 +20,7 @@ pub fn install() {
 }
 unsafe fn special_hi1_no_freefall(fighter : &mut L2CFighterCommon, entry_id: usize, motion_kind: u64, frame: f32, situation_kind: i32) -> () {
 	if situation_kind != *SITUATION_KIND_AIR {
-		CAN_UPB[entry_id] = 0;
+		crate::transition_reset!(entry_id, can_upb);
 	};
 	if ![hash40("special_hi1"), 
 			hash40("special_air_hi1"), 
@@ -29,7 +29,7 @@ unsafe fn special_hi1_no_freefall(fighter : &mut L2CFighterCommon, entry_id: usi
 	].contains(&motion_kind) {
 		return;
 	}
-	CAN_UPB[entry_id] = 1;
+	crate::transition_set!(entry_id, can_upb);
 	if frame >= 41.0 {
 		StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_FALL, false);
 		WorkModule::set_int(

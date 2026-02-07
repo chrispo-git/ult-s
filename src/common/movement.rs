@@ -49,22 +49,22 @@ pub unsafe fn perfectpivot(fighter : &mut L2CFighterCommon, status_kind : i32, E
 			JostleModule::set_status(fighter.module_accessor, false);
 		};
         if !crate::is_in!(status_kind, *FIGHTER_STATUS_KIND_DASH, *FIGHTER_STATUS_KIND_TURN_DASH) {
-            CAN_DASH[ENTRY_ID] = 0;
-            CAN_TURNDASH[ENTRY_ID] = 0;
+            crate::transition_reset!(ENTRY_ID, can_dash);
+            crate::transition_reset!(ENTRY_ID, can_turndash);
             return;
         }
         let frame = MotionModule::frame(fighter.module_accessor) as i32;
         if (3..5).contains(&frame) {
-			CAN_DASH[ENTRY_ID] = 1;
-			CAN_TURNDASH[ENTRY_ID] = 1;
+			crate::transition_set!(ENTRY_ID, can_dash);
+			crate::transition_set!(ENTRY_ID, can_turndash);
 		    let lr = PostureModule::lr(fighter.module_accessor);
             let stick_x = ControlModule::get_stick_x(fighter.module_accessor) * lr;	
             if stick_x <= -0.5 {
                 StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_TURN, true);
             };
         } else {
-            CAN_DASH[ENTRY_ID] = 0;
-            CAN_TURNDASH[ENTRY_ID] = 0;
+            crate::transition_reset!(ENTRY_ID, can_dash);
+            crate::transition_reset!(ENTRY_ID, can_turndash);
         };
     };
 }

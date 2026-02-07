@@ -36,10 +36,10 @@ unsafe extern "C" fn samus_frame(fighter: &mut L2CFighterCommon) {
 				};
 			};
 			if NO_WAVEDASH_TIMER[ENTRY_ID] > 0{
-				CAN_AIRDODGE[ENTRY_ID] = 1;
+				crate::transition_set!(ENTRY_ID, can_airdodge);
 				NO_WAVEDASH_TIMER[ENTRY_ID] -= 1;
 			} else {
-				CAN_AIRDODGE[ENTRY_ID] = 0;
+				crate::transition_reset!(ENTRY_ID, can_airdodge);
 			};
 		}
     }

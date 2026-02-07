@@ -71,9 +71,9 @@ unsafe extern "C" fn ganon_float(fighter : &mut L2CFighterCommon) {
 				};
 			};
 			if FLOAT[ENTRY_ID] == 1{
-				CAN_NEUTRALB[ENTRY_ID] = 1;
+				crate::transition_set!(ENTRY_ID, can_neutralb);
 			} else {
-				CAN_NEUTRALB[ENTRY_ID] = 0;
+				crate::transition_reset!(ENTRY_ID, can_neutralb);
 			};
 			if FLOAT[ENTRY_ID] == 1{
 				if KineticModule::get_kinetic_type(boma) == *FIGHTER_KINETIC_TYPE_MOTION_AIR && [*FIGHTER_STATUS_KIND_SPECIAL_LW, *FIGHTER_STATUS_KIND_SPECIAL_HI, *FIGHTER_STATUS_KIND_SPECIAL_S, *FIGHTER_GANON_STATUS_KIND_SPECIAL_AIR_S_CATCH, *FIGHTER_GANON_STATUS_KIND_SPECIAL_AIR_S_END].contains(&status_kind) == false {
@@ -183,9 +183,9 @@ unsafe extern "C" fn ganon_float(fighter : &mut L2CFighterCommon) {
 		};
 		if fighter_kind == *FIGHTER_KIND_KIRBY {
 			if !WorkModule::get_int(boma, *FIGHTER_KIRBY_INSTANCE_WORK_ID_INT_COPY_CHARA) == *FIGHTER_KIND_GANON {
-				if CAN_NEUTRALB[ENTRY_ID] != 0 && WorkModule::get_int(boma, *FIGHTER_KIRBY_INSTANCE_WORK_ID_INT_COPY_CHARA) == *FIGHTER_KIND_NONE{
+				if crate::is_transition_set!(ENTRY_ID, can_neutralb) && WorkModule::get_int(boma, *FIGHTER_KIRBY_INSTANCE_WORK_ID_INT_COPY_CHARA) == *FIGHTER_KIND_NONE{
 					println!("Empty");
-					CAN_NEUTRALB[ENTRY_ID] = 0;
+					crate::transition_reset!(ENTRY_ID, can_neutralb);
 				};
 				return;
 			}
@@ -197,9 +197,9 @@ unsafe extern "C" fn ganon_float(fighter : &mut L2CFighterCommon) {
 					StatusModule::set_keep_situation_air(boma, true);
 			};
 			if FLOAT[ENTRY_ID] == 1 {
-				CAN_NEUTRALB[ENTRY_ID] = 1;
+				crate::transition_set!(ENTRY_ID, can_neutralb);
 			} else {
-				CAN_NEUTRALB[ENTRY_ID] = 0;
+				crate::transition_reset!(ENTRY_ID, can_neutralb);
 			};
 			if FLOAT[ENTRY_ID] == 1{
 				if KineticModule::get_kinetic_type(boma) == *FIGHTER_KINETIC_TYPE_MOTION_AIR && [*FIGHTER_STATUS_KIND_SPECIAL_LW, *FIGHTER_STATUS_KIND_SPECIAL_HI, *FIGHTER_STATUS_KIND_SPECIAL_S, *FIGHTER_GANON_STATUS_KIND_SPECIAL_AIR_S_CATCH, *FIGHTER_GANON_STATUS_KIND_SPECIAL_AIR_S_END].contains(&status_kind) == false {

@@ -67,7 +67,7 @@ unsafe extern "C" fn bomber_main_frame(fighter: &mut L2CFighterCommon) {
                             MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_s_dash"), -1.0, 1.0, false, 0.0, false, false);
                         } else {
                             MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_air_s_dash"), -1.0, 1.0, false, 0.0, false, false);
-                            crate::transition_set!(can_sideb);
+                            crate::transition_set!(ENTRY_ID, can_sideb);
                         }
                     } else if is_end && ![hash40("special_s_miss"), hash40("special_air_s_miss")].contains(&motion_kind){
                         if is_ground {
@@ -127,10 +127,10 @@ unsafe extern "C" fn bomber_main_frame(fighter: &mut L2CFighterCommon) {
             }
             if [hash40("special_s_miss")].contains(&motion_kind) && end_frame-frame <= 3.0 {
                 StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_WAIT, false);
-                CAN_GRAB[ENTRY_ID] = 1;
+                crate::transition_set!(ENTRY_ID, can_grab);
             }
             if situation_kind != *SITUATION_KIND_AIR {
-                crate::transition_reset!(can_sideb);
+                crate::transition_reset!(ENTRY_ID, can_sideb);
             }
         }
     }
@@ -302,7 +302,7 @@ unsafe extern "C" fn bomberman_frame(fighter: &mut L2CFighterCommon) {
                 }
                 SIDEB_CATCH[ENTRY_ID] = false;
                 FORCE_END[ENTRY_ID] = false;
-                CAN_GRAB[ENTRY_ID] = 0;
+                crate::transition_reset!(ENTRY_ID, can_grab);
             }
             if StatusModule::prev_status_kind(fighter.module_accessor, 2) == *FIGHTER_STATUS_KIND_SPECIAL_S  && StatusModule::prev_status_kind(fighter.module_accessor, 0) == *FIGHTER_STATUS_KIND_CATCH_PULL  && status_kind == *FIGHTER_STATUS_KIND_CATCH_CUT{
                 if motion_kind != hash40("special_s_end") {

@@ -45,10 +45,10 @@ unsafe extern "C" fn pichu_frame(fighter: &mut L2CFighterCommon) {
 						WorkModule::set_int(boma, 0, *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT);
 					}
 				}
-				CAN_UPB[ENTRY_ID] = 1;
+				crate::transition_set!(ENTRY_ID, can_upb);
 			};
 			if  StatusModule::situation_kind(boma) != *SITUATION_KIND_AIR || (*FIGHTER_STATUS_KIND_DAMAGE..*FIGHTER_STATUS_KIND_DAMAGE_FALL).contains(&status_kind){
-				CAN_UPB[ENTRY_ID] = 0;
+				crate::transition_reset!(ENTRY_ID, can_upb);
 			};
 			if [hash40("attack_air_lw")].contains(&MotionModule::motion_kind(boma)) && !ONE_DAIR[ENTRY_ID] {
 				if AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_ALL) && !AttackModule::is_infliction(boma, *COLLISION_KIND_MASK_ALL) && MotionModule::frame(boma) < 46.0{
@@ -69,14 +69,14 @@ unsafe extern "C" fn pichu_frame(fighter: &mut L2CFighterCommon) {
 			};
 			if status_kind == *FIGHTER_PIKACHU_STATUS_KIND_SPECIAL_LW_HIT {
 				if StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR {
-					CAN_DOWNB[ENTRY_ID] = 1;
+					crate::transition_set!(ENTRY_ID, can_downb);
 				};
 			};
 			if StatusModule::situation_kind(boma) != *SITUATION_KIND_AIR {
 				HAS_DOWNB[ENTRY_ID] = false;
 				DO_STALL[ENTRY_ID] = true;
 				ONE_DAIR[ENTRY_ID] = false;
-				CAN_DOWNB[ENTRY_ID] = 0;
+				crate::transition_reset!(ENTRY_ID, can_downb);
 			};
 			if ![*FIGHTER_STATUS_KIND_ATTACK_AIR, *FIGHTER_STATUS_KIND_LANDING_ATTACK_AIR, *FIGHTER_PIKACHU_STATUS_KIND_SPECIAL_HI_END].contains(&status_kind) {
 				LAG_INCREASE[ENTRY_ID] = false;
