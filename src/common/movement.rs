@@ -39,6 +39,14 @@ static BUTTONS_LIST: Lazy<Vec<i32>> = Lazy::new(|| {
         *CONTROL_PAD_BUTTON_SPECIAL_RAW2
     ]
 });
+
+pub unsafe fn lazy_warm() {
+	Lazy::force(&HAS_NESS_FLAG);
+    Lazy::force(&HAS_LUCAS_FLAG);
+    Lazy::force(&HAS_MEWTWO_FLAG);
+    Lazy::force(&HAS_TRAIL_FLAG);
+    Lazy::force(&BUTTONS_LIST);
+}
 //Perfect Pivot
 pub unsafe fn perfectpivot(fighter : &mut L2CFighterCommon, status_kind : i32, ENTRY_ID : usize) {
     unsafe {
@@ -131,7 +139,7 @@ pub unsafe fn djc(fighter : &mut L2CFighterCommon, status_kind : i32) {
 		if !is_mechanics_enabled() {
 			return;
 		}
-        if crate::is_in!(status_kind, *FIGHTER_TRAIL_STATUS_KIND_ATTACK_AIR_N, *FIGHTER_STATUS_KIND_ATTACK_AIR, *FIGHTER_STATUS_KIND_AIR_LASSO) {
+        if !crate::is_in!(status_kind, *FIGHTER_TRAIL_STATUS_KIND_ATTACK_AIR_N, *FIGHTER_STATUS_KIND_ATTACK_AIR, *FIGHTER_STATUS_KIND_AIR_LASSO) {
             return;
         }
         let kinetic_type = KineticModule::get_kinetic_type(fighter.module_accessor);

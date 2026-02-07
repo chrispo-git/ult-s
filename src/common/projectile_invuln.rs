@@ -101,6 +101,9 @@ static REFLECTOR_DATA: Lazy<Vec<ReflectorParams>> = Lazy::new(|| {
         },
     ]
 });
+pub unsafe fn lazy_warm() {
+	Lazy::force(&REFLECTOR_DATA);
+}
 static LIFE_MUL : f32 = 0.1;
 static SPEED_MUL : f32 = 0.0;
 static DMG_MUL : f32 = 0.0;

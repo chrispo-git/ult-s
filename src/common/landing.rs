@@ -242,3 +242,7 @@ pub fn install() {
         correct_replace
     );
 }
+
+pub unsafe fn lazy_warm() {
+	Lazy::force(&EDGE_CANCEL_LIST);
+}

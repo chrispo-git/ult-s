@@ -115,3 +115,6 @@ pub unsafe fn opff(fighter: &mut L2CFighterCommon, status_kind : i32) {
         };
     }
 }
+pub unsafe fn lazy_warm() {
+	Lazy::force(&JC_LIST);
+}

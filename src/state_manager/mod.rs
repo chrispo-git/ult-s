@@ -6,7 +6,17 @@ use once_cell::sync::Lazy;
 type ComponentMap = HashMap<TypeId, Box<dyn Any + Send + Sync>>;
 
 static PLAYER_STATE: Lazy<Mutex<[ComponentMap; 8]>> = Lazy::new(|| {
-    Default::default()
+    let maps: [ComponentMap; 8] = [
+        HashMap::with_capacity(100),
+        HashMap::with_capacity(100),
+        HashMap::with_capacity(100),
+        HashMap::with_capacity(100),
+        HashMap::with_capacity(100),
+        HashMap::with_capacity(100),
+        HashMap::with_capacity(100),
+        HashMap::with_capacity(100),
+    ];
+    Mutex::new(maps)
 });
 
 pub fn edit_state<T, F, R>(entry_id: usize, f: F) -> R 

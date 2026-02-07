@@ -84,3 +84,12 @@ pub unsafe fn opff(fighter : &mut L2CFighterCommon, status_kind: i32, ENTRY_ID :
 	}
 	dacus(fighter, status_kind, ENTRY_ID);
 }
+
+pub unsafe fn lazy_warm() {
+	Lazy::force(&FIGHTERS_F6);
+    Lazy::force(&FIGHTERS_F10);
+    Lazy::force(&FIGHTERS_F11);
+    Lazy::force(&FIGHTERS_F12);
+    Lazy::force(&FIGHTERS_F14);
+    Lazy::force(&FIGHTERS_F16);
+}

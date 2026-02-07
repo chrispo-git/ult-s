@@ -71,6 +71,13 @@ pub static FIGHTERS_MIN: Lazy<Vec<i32>> = Lazy::new(|| {
         *FIGHTER_KIND_SAMUSD, *FIGHTER_KIND_PZENIGAME, *FIGHTER_KIND_EFLAME
     ]
 });
+
+pub unsafe fn lazy_warm() {
+	Lazy::force(&FIGHTERS_MAX);
+	Lazy::force(&FIGHTERS_HIGH);
+	Lazy::force(&FIGHTERS_LOW);
+	Lazy::force(&FIGHTERS_MIN);
+}
 #[inline(always)]
 pub(crate) fn get_wd_length(fighter_kind : i32) -> f32 {
 	match fighter_kind {
