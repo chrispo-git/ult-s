@@ -224,16 +224,16 @@ unsafe fn correct_replace(module_accessor: &mut smash::app::BattleObjectModuleAc
 	if !is_mechanics_enabled() {
         return original!()(module_accessor, ground_correct_kind);
 	}
-    let status_kind = StatusModule::status_kind(module_accessor);
+	let status_kind = StatusModule::status_kind(module_accessor);
     let fighter_kind = smash::app::utility::get_kind(module_accessor);
-	let is_added = is_added(module_accessor);
+	let costume = WorkModule::get_int(module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);
     if smash::app::utility::get_category(module_accessor) != *BATTLE_OBJECT_CATEGORY_FIGHTER {
         original!()(module_accessor, ground_correct_kind);
     }
     if [*FIGHTER_STATUS_KIND_LANDING_ATTACK_AIR, *FIGHTER_STATUS_KIND_LANDING, *FIGHTER_STATUS_KIND_DASH, *FIGHTER_STATUS_KIND_TURN_DASH].contains(&status_kind) {
         original!()(module_accessor, 1 as u32)
     }
-    else if is_edge_cancel(fighter_kind, status_kind, is_added) {
+    else if is_edge_cancel(fighter_kind, status_kind, costume) {
         original!()(module_accessor, *GROUND_CORRECT_KIND_GROUND as u32)
     }
     else {

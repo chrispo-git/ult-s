@@ -24,14 +24,14 @@ struct JumpCancelEntry {
     pub slot_count : i32,
 }
 impl JumpCancelEntry {
-    pub const fn new(kind: i32, status: i32, hit: i32, start: i32, end: i32, start: i32, slots : i32) -> Self {
+    pub const fn new(kind: i32, status: i32, hit: i32, start: i32, end: i32, start_slot: i32, slots : i32) -> Self {
         Self {
             fighter_kind : kind,
             status_kind: status,
             hit_condition: hit,
             jc_start: start,
             jc_end: end,
-            slot_start : start,
+            slot_start : start_slot,
             slot_count : slots,
         }
     }
