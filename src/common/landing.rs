@@ -149,46 +149,50 @@ pub unsafe fn opff(fighter : &mut L2CFighterCommon, status_kind : i32, motion_ki
 struct EdgeCancelEntry {
     pub fighter_kind : i32,
     pub status_kind : i32,
+    pub slot_start: i32,
+    pub slot_count : i32,
 }
 impl EdgeCancelEntry {
-    pub const fn new(kind: i32, status: i32) -> Self {
+    pub const fn new(kind: i32, status: i32, start: i32, slots : i32) -> Self {
         Self {
             fighter_kind : kind,
             status_kind: status,
+            slot_start : start,
+            slot_count : slots,
         }
     }
 }
 static EDGE_CANCEL_LIST: Lazy<Vec<EdgeCancelEntry>> = Lazy::new(|| {
     vec![
-        EdgeCancelEntry::new(*FIGHTER_KIND_LUCARIO, *FIGHTER_STATUS_KIND_ATTACK_DASH),
-        EdgeCancelEntry::new(*FIGHTER_KIND_LUCARIO, *FIGHTER_STATUS_KIND_SPECIAL_LW),
-        EdgeCancelEntry::new(*FIGHTER_KIND_DONKEY, *FIGHTER_STATUS_KIND_ATTACK_DASH),
-        EdgeCancelEntry::new(*FIGHTER_KIND_BUDDY, *FIGHTER_STATUS_KIND_ATTACK_DASH),
-        EdgeCancelEntry::new(*FIGHTER_KIND_KAMUI, *FIGHTER_STATUS_KIND_ATTACK_DASH),
-        EdgeCancelEntry::new(*FIGHTER_KIND_PURIN, *FIGHTER_STATUS_KIND_ATTACK_DASH),
-        EdgeCancelEntry::new(*FIGHTER_KIND_CAPTAIN, *FIGHTER_STATUS_KIND_ATTACK_DASH),
-        EdgeCancelEntry::new(*FIGHTER_KIND_RIDLEY, *FIGHTER_STATUS_KIND_LANDING_FALL_SPECIAL),
-        EdgeCancelEntry::new(*FIGHTER_KIND_RICHTER, *FIGHTER_STATUS_KIND_ATTACK_LW3),
-        EdgeCancelEntry::new(*FIGHTER_KIND_SAMUS, *FIGHTER_STATUS_KIND_ATTACK_LW3),
-        EdgeCancelEntry::new(*FIGHTER_KIND_SONIC, *FIGHTER_STATUS_KIND_SPECIAL_S),
-        EdgeCancelEntry::new(*FIGHTER_KIND_ROY, *FIGHTER_STATUS_KIND_ATTACK_DASH),
-        EdgeCancelEntry::new(*FIGHTER_KIND_YOUNGLINK, *FIGHTER_STATUS_KIND_ATTACK_DASH),
-        EdgeCancelEntry::new(*FIGHTER_KIND_CAPTAIN, *FIGHTER_STATUS_KIND_SPECIAL_LW),
-        EdgeCancelEntry::new(*FIGHTER_KIND_EDGE, *FIGHTER_STATUS_KIND_ATTACK_LW3),
-        EdgeCancelEntry::new(*FIGHTER_KIND_FALCO, *FIGHTER_STATUS_KIND_ATTACK_DASH),
-        EdgeCancelEntry::new(-*FIGHTER_KIND_PIKMIN, *FIGHTER_STATUS_KIND_RUN_BRAKE),
-        EdgeCancelEntry::new(-*FIGHTER_KIND_MURABITO, *FIGHTER_STATUS_KIND_SPECIAL_S),
-        EdgeCancelEntry::new(*FIGHTER_KIND_KIRBY, *FIGHTER_KIRBY_STATUS_KIND_PIKMIN_SPECIAL_N),
-        EdgeCancelEntry::new(*FIGHTER_KIND_INKLING, 25),
-        EdgeCancelEntry::new(*FIGHTER_KIND_MIIFIGHTER, *FIGHTER_MIIFIGHTER_STATUS_KIND_SPECIAL_LW2_KICK_LANDING),
+        EdgeCancelEntry::new(*FIGHTER_KIND_LUCARIO, *FIGHTER_STATUS_KIND_ATTACK_DASH, 0, 16),
+        EdgeCancelEntry::new(*FIGHTER_KIND_LUCARIO, *FIGHTER_STATUS_KIND_SPECIAL_LW, 0, 16),
+        EdgeCancelEntry::new(*FIGHTER_KIND_DONKEY, *FIGHTER_STATUS_KIND_ATTACK_DASH, 0, 16),
+        EdgeCancelEntry::new(*FIGHTER_KIND_BUDDY, *FIGHTER_STATUS_KIND_ATTACK_DASH, 0, 16),
+        EdgeCancelEntry::new(*FIGHTER_KIND_KAMUI, *FIGHTER_STATUS_KIND_ATTACK_DASH, 0, 16),
+        EdgeCancelEntry::new(*FIGHTER_KIND_PURIN, *FIGHTER_STATUS_KIND_ATTACK_DASH, 0, 16),
+        EdgeCancelEntry::new(*FIGHTER_KIND_CAPTAIN, *FIGHTER_STATUS_KIND_ATTACK_DASH, 0, 16),
+        EdgeCancelEntry::new(*FIGHTER_KIND_RIDLEY, *FIGHTER_STATUS_KIND_LANDING_FALL_SPECIAL, 0, 16),
+        EdgeCancelEntry::new(*FIGHTER_KIND_RICHTER, *FIGHTER_STATUS_KIND_ATTACK_LW3, 0, 16),
+        EdgeCancelEntry::new(*FIGHTER_KIND_SAMUS, *FIGHTER_STATUS_KIND_ATTACK_LW3, 0, 16),
+        EdgeCancelEntry::new(*FIGHTER_KIND_SONIC, *FIGHTER_STATUS_KIND_SPECIAL_S, 0, 16),
+        EdgeCancelEntry::new(*FIGHTER_KIND_ROY, *FIGHTER_STATUS_KIND_ATTACK_DASH, 0, 16),
+        EdgeCancelEntry::new(*FIGHTER_KIND_YOUNGLINK, *FIGHTER_STATUS_KIND_ATTACK_DASH, 0, 16),
+        EdgeCancelEntry::new(*FIGHTER_KIND_CAPTAIN, *FIGHTER_STATUS_KIND_SPECIAL_LW, 0, 16),
+        EdgeCancelEntry::new(*FIGHTER_KIND_EDGE, *FIGHTER_STATUS_KIND_ATTACK_LW3, 0, 16),
+        EdgeCancelEntry::new(*FIGHTER_KIND_FALCO, *FIGHTER_STATUS_KIND_ATTACK_DASH, 0, 16),
+        EdgeCancelEntry::new(*FIGHTER_KIND_PIKMIN, *FIGHTER_STATUS_KIND_RUN_BRAKE, 120, 8), // Rayman
+        EdgeCancelEntry::new(*FIGHTER_KIND_MURABITO, *FIGHTER_STATUS_KIND_SPECIAL_S, 120, 8), // Toad
+        EdgeCancelEntry::new(*FIGHTER_KIND_KIRBY, *FIGHTER_KIRBY_STATUS_KIND_PIKMIN_SPECIAL_N, 0, 16),
+        EdgeCancelEntry::new(*FIGHTER_KIND_INKLING, 25, 0, 16),
+        EdgeCancelEntry::new(*FIGHTER_KIND_MIIFIGHTER, *FIGHTER_MIIFIGHTER_STATUS_KIND_SPECIAL_LW2_KICK_LANDING, 0, 16),
     ]
 });
 
 //Edge Cancel List
 #[inline]
-pub(crate) fn is_edge_cancel(fighter_kind : i32, status_kind : i32, is_added : bool) -> bool {
-	let fighter = if is_added {-fighter_kind} else {fighter_kind};
-	return EDGE_CANCEL_LIST.iter().any(|i| i.fighter_kind == fighter && i.status_kind == status_kind);
+pub(crate) fn is_edge_cancel(fighter_kind : i32, status_kind : i32, costume : i32) -> bool {
+	let fighter = fighter_kind;
+	return EDGE_CANCEL_LIST.iter().any(|i| i.fighter_kind == fighter && i.status_kind == status_kind && costume >= i.slot_start && costume < (i.slot_start+i.slot_count));
 }
 
 //Edge Cancelling Part A
@@ -197,13 +201,13 @@ unsafe fn init_settings_replace(module_accessor: &mut smash::app::BattleObjectMo
     if !is_mechanics_enabled() && !is_gamemode("rivals".to_string()) {
         return original!()(module_accessor, situation_kind, arg3, arg4, ground_cliff_check_kind, arg6, arg7, arg8, arg9, arg10);
 	}
-	let status_kind = StatusModule::status_kind(module_accessor);
-    let fighter_kind = smash::app::utility::get_kind(module_accessor);
-	let is_added = is_added(module_accessor);
     if smash::app::utility::get_category(module_accessor) != *BATTLE_OBJECT_CATEGORY_FIGHTER {
         return original!()(module_accessor, situation_kind, arg3, arg4, ground_cliff_check_kind, arg6, arg7, arg8, arg9, arg10);
     }
-    if is_edge_cancel(fighter_kind, status_kind, is_added) && situation_kind == SITUATION_KIND_GROUND {
+	let status_kind = StatusModule::status_kind(module_accessor);
+    let fighter_kind = smash::app::utility::get_kind(module_accessor);
+	let costume = WorkModule::get_int(module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);
+    if is_edge_cancel(fighter_kind, status_kind, costume) && situation_kind == SITUATION_KIND_GROUND {
         original!()(module_accessor, situation_kind, arg3, 1 as u64, ground_cliff_check_kind, arg6, arg7, arg8, arg9, arg10)
     } 
     else if [*FIGHTER_STATUS_KIND_LANDING_ATTACK_AIR, *FIGHTER_STATUS_KIND_LANDING, *FIGHTER_STATUS_KIND_DASH, *FIGHTER_STATUS_KIND_TURN_DASH].contains(&status_kind) {

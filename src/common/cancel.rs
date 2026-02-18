@@ -20,33 +20,38 @@ struct JumpCancelEntry {
     pub hit_condition : i32,
     pub jc_start : i32,
     pub jc_end : i32,
+    pub slot_start: i32,
+    pub slot_count : i32,
 }
 impl JumpCancelEntry {
-    pub const fn new(kind: i32, status: i32, hit: i32, start: i32, end: i32) -> Self {
+    pub const fn new(kind: i32, status: i32, hit: i32, start: i32, end: i32, start: i32, slots : i32) -> Self {
         Self {
             fighter_kind : kind,
             status_kind: status,
             hit_condition: hit,
             jc_start: start,
             jc_end: end,
+            slot_start : start,
+            slot_count : slots,
         }
     }
 }
 static JC_LIST: Lazy<Vec<JumpCancelEntry>> = Lazy::new(|| {
     vec![
-        JumpCancelEntry::new(*FIGHTER_KIND_KAMUI, *FIGHTER_KAMUI_STATUS_KIND_SPECIAL_N_HOLD, 0, -1, -1),
-        JumpCancelEntry::new(*FIGHTER_KIND_FALCO, *FIGHTER_STATUS_KIND_SPECIAL_LW, 0, 4, 32),
-        JumpCancelEntry::new(*FIGHTER_KIND_WOLF, *FIGHTER_STATUS_KIND_SPECIAL_LW, 0, -1, -1),
-        JumpCancelEntry::new(*FIGHTER_KIND_WOLF, *FIGHTER_WOLF_STATUS_KIND_SPECIAL_LW_END, 0, -1, -1),
-        JumpCancelEntry::new(*FIGHTER_KIND_WOLF, *FIGHTER_WOLF_STATUS_KIND_SPECIAL_LW_HIT, 0, -1, -1),
-        JumpCancelEntry::new(*FIGHTER_KIND_WOLF, *FIGHTER_WOLF_STATUS_KIND_SPECIAL_LW_LOOP, 0, -1, -1),
-        JumpCancelEntry::new(*FIGHTER_KIND_FOX, *FIGHTER_STATUS_KIND_SPECIAL_LW, 0, -1, -1),
-        JumpCancelEntry::new(*FIGHTER_KIND_FOX, *FIGHTER_WOLF_STATUS_KIND_SPECIAL_LW_END, 0, -1, -1),
-        JumpCancelEntry::new(*FIGHTER_KIND_FOX, *FIGHTER_WOLF_STATUS_KIND_SPECIAL_LW_HIT, 0, -1, -1),
-        JumpCancelEntry::new(*FIGHTER_KIND_FOX, *FIGHTER_WOLF_STATUS_KIND_SPECIAL_LW_LOOP, 0, -1, -1),
-        JumpCancelEntry::new(*FIGHTER_KIND_MIIGUNNER, *FIGHTER_MIIGUNNER_STATUS_KIND_SPECIAL_LW1_END, 0, -1, -1),
-        JumpCancelEntry::new(*FIGHTER_KIND_MIIGUNNER, *FIGHTER_MIIGUNNER_STATUS_KIND_SPECIAL_LW1_LOOP, 0, -1, -1),
-        JumpCancelEntry::new(*FIGHTER_KIND_MIIGUNNER, *FIGHTER_MIIGUNNER_STATUS_KIND_SPECIAL_LW1_HIT, 0, -1, -1),
+        JumpCancelEntry::new(*FIGHTER_KIND_KAMUI, *FIGHTER_KAMUI_STATUS_KIND_SPECIAL_N_HOLD, 0, -1, -1, 0, 16),
+        JumpCancelEntry::new(*FIGHTER_KIND_FALCO, *FIGHTER_STATUS_KIND_SPECIAL_LW, 0, 4, 32, 0, 16), 
+        JumpCancelEntry::new(*FIGHTER_KIND_FALCO, *FIGHTER_STATUS_KIND_SPECIAL_LW, 0, 4, 32, 120, 8), // Peppy
+        JumpCancelEntry::new(*FIGHTER_KIND_WOLF, *FIGHTER_STATUS_KIND_SPECIAL_LW, 0, -1, -1, 0, 16),
+        JumpCancelEntry::new(*FIGHTER_KIND_WOLF, *FIGHTER_WOLF_STATUS_KIND_SPECIAL_LW_END, 0, -1, -1, 0, 16),
+        JumpCancelEntry::new(*FIGHTER_KIND_WOLF, *FIGHTER_WOLF_STATUS_KIND_SPECIAL_LW_HIT, 0, -1, -1, 0, 16),
+        JumpCancelEntry::new(*FIGHTER_KIND_WOLF, *FIGHTER_WOLF_STATUS_KIND_SPECIAL_LW_LOOP, 0, -1, -1, 0, 16),
+        JumpCancelEntry::new(*FIGHTER_KIND_FOX, *FIGHTER_STATUS_KIND_SPECIAL_LW, 0, -1, -1, 0, 16),
+        JumpCancelEntry::new(*FIGHTER_KIND_FOX, *FIGHTER_WOLF_STATUS_KIND_SPECIAL_LW_END, 0, -1, -1, 0, 16),
+        JumpCancelEntry::new(*FIGHTER_KIND_FOX, *FIGHTER_WOLF_STATUS_KIND_SPECIAL_LW_HIT, 0, -1, -1, 0, 16),
+        JumpCancelEntry::new(*FIGHTER_KIND_FOX, *FIGHTER_WOLF_STATUS_KIND_SPECIAL_LW_LOOP, 0, -1, -1, 0, 16),
+        JumpCancelEntry::new(*FIGHTER_KIND_MIIGUNNER, *FIGHTER_MIIGUNNER_STATUS_KIND_SPECIAL_LW1_END, 0, -1, -1, 0, 16),
+        JumpCancelEntry::new(*FIGHTER_KIND_MIIGUNNER, *FIGHTER_MIIGUNNER_STATUS_KIND_SPECIAL_LW1_LOOP, 0, -1, -1, 0, 16),
+        JumpCancelEntry::new(*FIGHTER_KIND_MIIGUNNER, *FIGHTER_MIIGUNNER_STATUS_KIND_SPECIAL_LW1_HIT, 0, -1, -1, 0, 16),
     ]
 });
 #[inline]
@@ -57,8 +62,12 @@ pub(crate) fn is_jc(
     frame: f32
 ) -> bool {
     unsafe {
-	    let fighter = if is_default(boma) {fighter_kind} else {-fighter_kind};
+	    let fighter = fighter_kind;
+        let costume = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);
         for i in JC_LIST.iter() {
+            if costume < i.slot_start || costume >= (i.slot_start+i.slot_count) {
+                continue;
+            }
             if fighter == i.fighter_kind && status_kind == i.status_kind {
                 if i.jc_start != -1 && i.jc_end != -1 {
                     if (frame as i32) < i.jc_start || (frame as i32) >= i.jc_end {
