@@ -189,6 +189,9 @@ pub unsafe fn hold_buffer_killer(fighter : &mut L2CFighterCommon, status_kind : 
         if crate::is_in!(status_kind, *FIGHTER_STATUS_KIND_GUARD, *FIGHTER_STATUS_KIND_GUARD_ON, *FIGHTER_STATUS_KIND_GUARD_DAMAGE, *FIGHTER_STATUS_KIND_GUARD_OFF, *FIGHTER_STATUS_KIND_JUMP_SQUAT) {
             return;
         }
+        if StatusModule::prev_status_kind(boma(fighter), 0) == *FIGHTER_STATUS_KIND_JUMP_SQUAT {
+            return;
+        }
         if  ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_APPEAL_S_L) || 
             ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_APPEAL_S_R) ||
             ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_APPEAL_HI) ||
