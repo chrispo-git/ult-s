@@ -178,7 +178,7 @@ unsafe fn run_scene_update(_: &skyline::hooks::InlineCtx) {
 #[skyline::hook(replace = change_version_string)]
 fn change_version_string_hook(arg: u64, string: *const c_char) {
 	let original_str = unsafe { skyline::from_c_str(string) };
-	if original_str.contains("Ver.") {
+	if original_str.contains("Ver. 13") {
         if Path::new("sd:/ultimate/mods/Ultimate S Arcropolis/").is_dir() {
             let mut s_ver = match std::fs::read_to_string("sd:/ultimate/mods/Ultimate S Arcropolis/version.txt") {
                 Ok(version_value) => version_value.trim().to_string(),
