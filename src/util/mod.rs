@@ -122,9 +122,6 @@ pub struct JabState {
 	pub has_enable_100_on : bool,
 	pub has_enable_no_hit_combo_on : bool,
 }
-pub static mut HAS_ENABLE_COMBO_ON: [bool; 8] = [false; 8];
-pub static mut HAS_ENABLE_NO_HIT_COMBO_ON: [bool; 8] = [false; 8];
-pub static mut HAS_ENABLE_100_ON: [bool; 8] = [false; 8];
 
 
 //Article cloning consts
@@ -172,7 +169,9 @@ pub unsafe fn is_enable_transition_term_hook(boma: &mut smash::app::BattleObject
 pub unsafe fn on_flag_hook(boma: &mut smash::app::BattleObjectModuleAccessor, int: c_int) -> () {
 	if smash::app::utility::get_category(boma) == *BATTLE_OBJECT_CATEGORY_FIGHTER { 
 		if int == *FIGHTER_STATUS_ATTACK_FLAG_ENABLE_100 && is_mechanics_enabled() {
-			HAS_ENABLE_100_ON[WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize] = true;
+			crate::with_state!(ENTRY_ID, JabState, state, {
+				state.has_enable_100_on = true;
+			});
 			let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
 			let fighter_kind = smash::app::utility::get_kind(boma);
 			if ![*FIGHTER_STATUS_KIND_ATTACK, *FIGHTER_DEMON_STATUS_KIND_ATTACK_COMBO].contains(&status_kind) {
