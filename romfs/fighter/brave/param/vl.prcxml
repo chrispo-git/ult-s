@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<struct>
+  <struct hash="param_private">
+    <float hash="sp_max">100</float>
+    <int hash="sp_recover_frame">600</int>
+    <float hash="recover_sp">10</float>
+    <float hash="sp_recover_damage_mul">0.5</float>
+    <float hash="sp_recover_shield_mul">1</float>
+    <float hash="sp_special_n1">10</float>
+    <float hash="sp_special_n2">20</float>
+    <float hash="sp_special_n3">40</float>
+    <float hash="sp_special_s1">15</float>
+    <float hash="sp_special_s2">20</float>
+    <float hash="sp_special_s3">40</float>
+    <float hash="sp_special_hi1">1</float>
+    <float hash="sp_special_hi2">5</float>
+    <float hash="sp_special_hi3">10</float>
+  </struct>
+  <list size="4" hash="param_special_n">
+    <struct index="0">
+      <float hash="sp_special_n1">10</float>
+      <float hash="sp_special_n2">20</float>
+      <float hash="sp_special_n3">40</float>
+    </struct>
+  </list>
+  <list size="4" hash="param_fireball">
+    <struct index="0">
+      <int hash="life_s">30</int>
+      <int hash="deccel_start_frame_s">15</int>
+    </struct>
+  </list>
+  <list size="4" hash="param_special_lw">
+    <struct index="0">
+      <float hash="cure_add_life">13</float>
+    </struct>
+  </list>
+  <list size="21" hash="param_special_lw_command_data">
+    <struct index="0">
+      <int hash="lot_prob">10</int>
+      <float hash="sp">10</float>
+    </struct>
+    <struct index="10">
+      <int hash="lot_prob">10</int>
+      <float hash="sp">20</float>
+    </struct>
+    <struct index="11">
+      <int hash="lot_prob">20</int>
+      <float hash="sp">20</float>
+    </struct>
+    <struct index="12">
+      <int hash="lot_prob">20</int>
+      <float hash="sp">10</float>
+    </struct>
+    <struct index="16">
+      <int hash="lot_prob">10</int>
+      <float hash="sp">15</float>
+    </struct>
+    <struct index="17">
+      <int hash="lot_prob">18</int>
+      <float hash="sp">10</float>
+    </struct>
+    <struct index="18">
+      <int hash="lot_prob">7</int>
+      <float hash="sp">1</float>
+    </struct>
+    <struct index="20">
+      <int hash="lot_prob">11</int>
+      <float hash="sp">15</float>
+    </struct>
+  </list>
+</struct>
