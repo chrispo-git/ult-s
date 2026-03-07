@@ -141,7 +141,7 @@ pub unsafe fn djc(fighter : &mut L2CFighterCommon, status_kind : i32) {
 		}
         let kinetic_type = KineticModule::get_kinetic_type(fighter.module_accessor);
         if  !crate::is_in!(status_kind, *FIGHTER_TRAIL_STATUS_KIND_ATTACK_AIR_N, *FIGHTER_STATUS_KIND_ATTACK_AIR, *FIGHTER_STATUS_KIND_AIR_LASSO) ||
-            crate::is_in!(kinetic_type, *FIGHTER_KINETIC_TYPE_JUMP_AERIAL_MOTION_2ND, *FIGHTER_KINETIC_TYPE_JUMP_AERIAL_MOTION, *FIGHTER_KINETIC_TYPE_JUMP_AERIAL)
+            !crate::is_in!(kinetic_type, *FIGHTER_KINETIC_TYPE_JUMP_AERIAL_MOTION_2ND, *FIGHTER_KINETIC_TYPE_JUMP_AERIAL_MOTION, *FIGHTER_KINETIC_TYPE_JUMP_AERIAL)
         {
             return;
         }
