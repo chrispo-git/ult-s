@@ -18,6 +18,8 @@ pub unsafe fn float_setter(fighter : &mut L2CFighterCommon) {
     WorkModule::set_float(fighter.module_accessor, 0.0, *FIGHTER_STATUS_DAMAGE_WORK_FLOAT_VECOR_CORRECT_STICK_Y);
     
     WorkModule::set_float(fighter.module_accessor, 65.0, *FIGHTER_INSTANCE_WORK_ID_FLOAT_GUARD_SHIELD_MAX);
+
+    crate::transition_set!(WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize, can_spotdodge);
 }
 pub unsafe fn status_force_change(fighter : & mut L2CFighterCommon, status_kind : i32) {
     match status_kind {

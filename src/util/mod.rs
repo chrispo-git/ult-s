@@ -75,6 +75,7 @@ pub struct TransitionEnableState {
     pub can_cliff: i32,
     pub can_attack_air: i32,
     pub can_airdodge: i32,
+	pub can_spotdodge: i32,
     pub can_rapid_jab: i32,
     pub can_jab: i32,
     pub can_dash: i32,
@@ -153,6 +154,7 @@ pub unsafe fn is_enable_transition_term_hook(boma: &mut smash::app::BattleObject
 			(state.can_neutralb == 1 && flag == *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_SPECIAL_N) ||
 			(state.can_cliff == 1 && flag == *FIGHTER_STATUS_TRANSITION_TERM_ID_CLIFF_CATCH) ||
 			(state.can_airdodge == 1 && flag == *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_ESCAPE_AIR) ||
+			(state.can_spotdodge == 1 && flag == *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_ESCAPE) ||
 			(state.can_attack_air == 1 && flag == *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_ATTACK_AIR) ||
 			(state.can_dash == 1 && flag == *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_DASH) ||
 			(state.can_grab == 1 && flag == *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_CATCH) ||
@@ -169,6 +171,7 @@ pub unsafe fn is_enable_transition_term_hook(boma: &mut smash::app::BattleObject
 pub unsafe fn on_flag_hook(boma: &mut smash::app::BattleObjectModuleAccessor, int: c_int) -> () {
 	if smash::app::utility::get_category(boma) == *BATTLE_OBJECT_CATEGORY_FIGHTER { 
 		if int == *FIGHTER_STATUS_ATTACK_FLAG_ENABLE_100 && is_mechanics_enabled() {
+			let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 			crate::with_state!(ENTRY_ID, JabState, state, {
 				state.has_enable_100_on = true;
 			});

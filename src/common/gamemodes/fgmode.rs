@@ -10,8 +10,11 @@ use smash::lib::{ L2CValue, L2CAgent };
 use smash::phx::Vector2f;
 use crate::util::*;
 
-static mut CAN_CANCEL: [bool; 8] = [false; 8];
-static mut CAN_CANCEL_TIMER: [i32; 8] = [30; 8];
+#[derive(Default, Clone, Copy)]
+pub struct GamemodeFGModeState {
+	pub can_cancel_timer : i32,
+	pub can_cancel : bool,
+}
 const WINDOW: i32 = 20;
 
 pub unsafe fn opff(fighter: &mut L2CFighterCommon, status_kind: i32, motion_kind: u64, ENTRY_ID : usize) {
@@ -26,20 +29,28 @@ pub unsafe fn opff(fighter: &mut L2CFighterCommon, status_kind: i32, motion_kind
 	let cat1 = ControlModule::get_command_flag_cat(fighter.module_accessor, 0);
 
 	if !AttackModule::is_infliction_status(fighter.module_accessor, *COLLISION_KIND_MASK_ALL) {
-		CAN_CANCEL[ENTRY_ID] = false;
+		crate::with_state!(ENTRY_ID, GamemodeFGModeState, state, {
+			state.can_cancel = false;
+		});
 	}
-	if CAN_CANCEL_TIMER[ENTRY_ID] > 0 {
+	if crate::get_state!(ENTRY_ID, GamemodeFGModeState).can_cancel_timer > 0 {
 		if WorkModule::get_int(fighter.module_accessor,*FIGHTER_INSTANCE_WORK_ID_INT_HIT_STOP_ATTACK_SUSPEND_FRAME) < 1 {
-			CAN_CANCEL_TIMER[ENTRY_ID] -= 1;
+			crate::with_state!(ENTRY_ID, GamemodeFGModeState, state, {
+				state.can_cancel_timer -= 1;
+			});
 		}
 	} else {
-		CAN_CANCEL[ENTRY_ID] = false;
+		crate::with_state!(ENTRY_ID, GamemodeFGModeState, state, {
+			state.can_cancel = false;
+		});
 	}
 	if AttackModule::is_infliction(fighter.module_accessor, *COLLISION_KIND_MASK_HIT) {
-		CAN_CANCEL[ENTRY_ID] = true;
-		CAN_CANCEL_TIMER[ENTRY_ID] = WINDOW;
+		crate::with_state!(ENTRY_ID, GamemodeFGModeState, state, {
+			state.can_cancel = true;
+			state.can_cancel_timer = WINDOW;
+		});
 	}
-	if CAN_CANCEL[ENTRY_ID] && !StopModule::is_stop(fighter.module_accessor) &&
+	if crate::get_state!(ENTRY_ID, GamemodeFGModeState).can_cancel && !StopModule::is_stop(fighter.module_accessor) &&
 		WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_HIT_STOP_ATTACK_SUSPEND_FRAME) < 1 {
 		// Gatlings
 		if 	[*FIGHTER_STATUS_KIND_ATTACK_S3,*FIGHTER_STATUS_KIND_ATTACK_HI3,
