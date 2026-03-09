@@ -17,7 +17,7 @@ use crate::bomberman::*;
 
 pub fn install() {
 	Agent::new("pacman")
-    .set_costume([120, 121, 122, 123, 124, 125, 126, 127].to_vec())
+    .set_costume(get_marked_costumes("pacman","bomberman"))
 	.acmd("game_catchbomb", bomb_catch, Priority::Low)
 	.acmd("game_catchdashbomb", bomb_catchdash, Priority::Low)
 	.acmd("game_catchturnbomb", bomb_catchturn, Priority::Low)
