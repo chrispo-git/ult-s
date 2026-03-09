@@ -13,6 +13,7 @@ use std::os::raw::c_ulong;
 use std::{fs, path::Path};
 use crate::controls::ext::*;
 use crate::common::*;
+use cached::proc_macro::cached;
 
 pub static mut GAMEMODES : Vec<String> = Vec::new();
 
@@ -781,6 +782,56 @@ pub (crate) unsafe fn add_gamemode(mode: String) -> () {
 #[inline(always)]
 pub (crate) unsafe fn is_gamemode(mode: String) -> bool {
 	return GAMEMODES.contains(&mode);
+}
+#[cached(
+    key = "String", 
+    convert = r#"{ format!("{}_{}", char_folder, marker_name) }"#
+)]
+pub(crate) fn get_marked_costumes(char_folder: &str, marker_name: &str) -> Vec<usize> {
+    let mut marked_slots = Vec::new();
+    
+    for x in 0..256 {
+        let path = format!("sd:/ultimate/mods/Ultimate S Arcropolis/fighter/{}/model/body/c{:02}/{}.marker", char_folder, x, marker_name);
+        
+        if std::fs::metadata(path).is_ok() {
+            marked_slots.push(x as usize);
+        }
+    }
+    println!("{}-{} slots - {:?}",char_folder, marker_name, marked_slots);
+    marked_slots
+}
+
+#[cached(
+    key = "String", 
+    convert = r#"{ format!("{}_{}", char_folder, marker_name) }"#
+)]
+pub(crate) fn get_lowest_marked_costume(char_folder: &str, marker_name: &str) -> i32 {
+    for x in 0..256 {
+        let path = format!("sd:/ultimate/mods/Ultimate S Arcropolis/fighter/{}/model/body/c{:02}/{}.marker", char_folder, x, marker_name);
+        
+        if std::fs::metadata(path).is_ok() {
+            return x as i32;
+        }
+    }
+    -1
+}
+
+#[cached(
+    key = "String", 
+    convert = r#"{ format!("{}_{}", char_folder, marker_name) }"#
+)]
+pub(crate) fn get_costume_count(char_folder: &str, marker_name: &str) -> i32 {
+    let mut count = 0;
+    for x in 0..256 {
+        let path = format!("sd:/ultimate/mods/Ultimate S Arcropolis/fighter/{}/model/body/c{:02}/{}.marker", char_folder, x, marker_name);
+        
+        if std::fs::metadata(path).is_ok() {
+            count += 1;
+        } else if count > 0 {
+            return count;
+        }
+    }
+    count
 }
 
 pub fn install() {

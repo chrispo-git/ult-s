@@ -366,9 +366,9 @@ pub extern "C" fn is_ultimate_s() {}
 #[no_mangle]
 pub extern "C" fn main() {
 
-    /*if !quick_validate_install() {
+    if !quick_validate_install() {
         return; // don't do anything else since they don't have all dependencies
-    }*/
+    }
 
     //allows online play with added chars
     unsafe { 
@@ -414,20 +414,21 @@ pub extern "C" fn main() {
 
 	
 	
+    println!("about to install scripts");
 	util::install();
+    println!("util installed");
 	common::install();
 	controls::install();
 	cpu::install();
 	
+    if Path::new("sd:/ultimate/ult-s/brave.flag").is_file() {
+        brave::install();
+        println!("brave installed");
+    }
 
 	if Path::new("sd:/ultimate/ult-s/bayonetta.flag").is_file() {
         bayonetta::install();
         println!("bayonetta installed");
-    }
-
-    if Path::new("sd:/ultimate/ult-s/brave.flag").is_file() {
-        brave::install();
-        println!("brave installed");
     }
 
     if Path::new("sd:/ultimate/ult-s/buddy.flag").is_file() {
@@ -868,7 +869,7 @@ pub extern "C" fn main() {
 	skyline::patching::Patch::in_text(0x28444cc + 0xc80 + 0x20).data(0x52800009u32);
     skyline::patching::Patch::in_text(0x28440f4 + 0xc80 + 0x20).data(0x52800009u32);
     skyline::patching::Patch::in_text(0x2844500+ 0xc80 + 0x20).nop();
-    skyline::patching::Patch::in_text(0x2844128+ 0xc80 + 0x20).nop();
+    skyline::patching::Patch::in_text(0x2844128+ 0xc80 + 0x20).nop(); 
 
     the_csk_collection_api::add_narration_characall_entry("vc_narration_characall_peppy");
     the_csk_collection_api::add_narration_characall_entry("vc_narration_characall_rayman");

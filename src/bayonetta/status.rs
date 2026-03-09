@@ -36,7 +36,7 @@ unsafe fn attack_air_f_check(fighter: &mut L2CFighterCommon) -> bool {
 }
 pub fn install() {
     Agent::new("bayonetta")
-    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .set_costume(get_marked_costumes("bayonetta","bayonetta"))
     	.status(Exec, *FIGHTER_BAYONETTA_STATUS_KIND_ATTACK_AIR_F, attack_air_f_exec)
         .install();
 }
