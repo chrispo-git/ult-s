@@ -17,7 +17,7 @@ use crate::jack::*;
 
 pub fn install() {
 	Agent::new("jack")
-    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .set_costume(get_marked_costumes("jack","jack"))
 	.on_line(Main, joker_frame)
 	.install();
 }

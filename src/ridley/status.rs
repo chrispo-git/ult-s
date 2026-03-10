@@ -18,7 +18,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("ridley")
-    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .set_costume(get_marked_costumes("ridley","ridley"))
     .status(Pre, *FIGHTER_RIDLEY_STATUS_KIND_SPECIAL_HI_CHARGE_HI, special_hi_charge_hi_pre)
     .status(Pre, *FIGHTER_RIDLEY_STATUS_KIND_SPECIAL_HI_CHARGE_F, special_hi_charge_other_pre)
     .status(Pre, *FIGHTER_RIDLEY_STATUS_KIND_SPECIAL_HI_CHARGE_B, special_hi_charge_other_pre)

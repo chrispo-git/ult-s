@@ -17,7 +17,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("szerosuit")
-    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .set_costume(get_marked_costumes("szerosuit","szerosuit"))
     .on_line(Main, zss)
     .install();
 }

@@ -16,7 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("ness_pkfire")
-    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .set_costume(get_marked_costumes("ness","ness"))
     .acmd("game_pillar", ness_pk_fire, Priority::Low)    
     .acmd("game_pillarair", ness_pk_fire, Priority::Low)    
     .install();

@@ -16,7 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("palutena")
-    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .set_costume(get_marked_costumes("palutena","palutena"))
     .on_line(Main, palu_frame)
     .install();
 }

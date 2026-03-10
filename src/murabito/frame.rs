@@ -17,18 +17,18 @@ use super::*;
 
 pub fn install() {
     Agent::new("murabito")
-    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .set_costume(get_marked_costumes("murabito","murabito"))
     .on_line(Main, murabito_frame2)
     .on_line(Main, murabito_frame)
     .install();
 
     Agent::new("murabito_tree")
-    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .set_costume(get_marked_costumes("murabito","murabito"))
     .on_line(Main, tree_frame)
     .install();
 
     Agent::new("murabito_sprout")
-    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .set_costume(get_marked_costumes("murabito","murabito"))
     .on_line(Main, seed_frame)
     .install();
 }

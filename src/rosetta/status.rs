@@ -25,7 +25,7 @@ unsafe extern "C" fn special_lw_end(fighter: &mut L2CFighterCommon) -> L2CValue 
 
 pub fn install() {
     Agent::new("rosetta")
-    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .set_costume(get_marked_costumes("rosetta","rosetta"))
         .status(End, *FIGHTER_STATUS_KIND_SPECIAL_LW, special_lw_end)
         .install();
 }

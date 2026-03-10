@@ -18,7 +18,7 @@ use crate::ganon::*;
 
 pub fn install() {
     Agent::new("ganon")
-    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .set_costume(get_marked_costumes("ganon","ganon"))
         .on_line(Main, ganon_float)
         .install();
     Agent::new("kirby")

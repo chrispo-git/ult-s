@@ -16,7 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("master_axe")
-    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .set_costume(get_marked_costumes("master","master"))
     .acmd("effect_attacklw4", axe_dsmash_eff, Priority::Low)    
     .install();
 }	

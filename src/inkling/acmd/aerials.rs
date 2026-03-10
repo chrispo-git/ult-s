@@ -16,7 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("inkling")
-    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .set_costume(get_marked_costumes("inkling","inkling"))
     .acmd("game_attackairf", ink_fair, Priority::Low)    
     .acmd("effect_attackairf", ink_fair_eff, Priority::Low)    
     .acmd("sound_attackairf", ink_fair_snd, Priority::Low)    

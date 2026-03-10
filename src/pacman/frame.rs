@@ -16,17 +16,17 @@ use super::*;
 
 pub fn install() {
     Agent::new("pacman")
-    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .set_costume(get_marked_costumes("pacman","pacman"))
     .on_line(Main, pacman_frame)
     .install();
 
 	Agent::new("pacman_firehydrant")
-    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .set_costume(get_marked_costumes("pacman","pacman"))
     .on_line(Main, hydrant_frame)
     .install();
 
 	Agent::new("pacman_trampoline")
-    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .set_costume(get_marked_costumes("pacman","pacman"))
     .on_line(Main, trampoline_frame)
     .install();
 }

@@ -16,7 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("robot")
-    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .set_costume(get_marked_costumes("robot","robot"))
     .acmd("game_specialairsend", rob_sideb, Priority::Low)    
     .install();
 }
