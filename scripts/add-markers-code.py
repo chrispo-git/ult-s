@@ -26,7 +26,6 @@ for char in folder_list:
     directory = f'{char}'
     old_str = '.set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())'
     new_str = f'.set_costume(get_marked_costumes("{char}","{char}"))'
-    # TODO - Write code that crawls through EVERY *.rs file and replaces 
 
     if not os.path.exists(directory):
         continue
@@ -52,11 +51,24 @@ added_char_markers = [
     ["falco", "peppy"]
 ]
 for char_pair in added_char_markers:
-    for slot in range(120,128):
-        directory = f'fighter/{char_pair[0]}/model/body/c{slot}'
-        path = f'{directory}/{char_pair[1]}.marker'
-        os.makedirs(directory, exist_ok=True)
-        if not os.path.isfile(path):
-            with open(path, 'w') as fp:
-                pass
+    directory = f'{char}'
+    old_str = '.set_costume([120, 121, 122, 123, 124, 125, 126, 127].to_vec())'
+    new_str = f'.set_costume(get_marked_costumes("{char_pair[0]}","{char_pair[1]}"))'
+
+    if not os.path.exists(directory):
+        continue
+    for root, dirs, files in os.walk(directory):
+        for filename in files:
+            if filename.endswith('.rs'):
+                file_path = os.path.join(root, filename)
+
+                with open(file_path, 'r', encoding='utf-8') as f:
+                    content = f.read()
+                
+                if old_str in content:
+                    new_content = content.replace(old_str, new_str)
+                    
+                    with open(file_path, 'w', encoding='utf-8') as f:
+                        f.write(new_content)
+                    print(f"Updated: {file_path}")
 print('done :)')
