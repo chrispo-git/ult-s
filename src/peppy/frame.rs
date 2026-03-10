@@ -20,7 +20,7 @@ pub fn install() {
 		FIGHTER_FALCO_GENERATE_ARTICLE_MISSILE += smashline::clone_weapon("koopajr", *WEAPON_KIND_KOOPAJR_CANNONBALL, "falco", "missile", false);
 	}
 	Agent::new("falco")
-    .set_costume([120, 121, 122, 123, 124, 125, 126, 127].to_vec())
+    .set_costume(get_marked_costumes("falco","peppy"))
 	.on_line(Main, peppy_frame)
 	.install();
 }
