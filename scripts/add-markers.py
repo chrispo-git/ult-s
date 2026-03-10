@@ -39,7 +39,7 @@ added_char_markers = [
 ]
 for char_pair in added_char_markers:
     for slot in range(120,128):
-        directory = f'fighter/{char_pair[0]}/model/body/c0{slot}'
+        directory = f'fighter/{char_pair[0]}/model/body/c{slot}'
         path = f'{directory}/{char_pair[1]}.marker'
         os.makedirs(directory, exist_ok=True)
         if not os.path.isfile(path):
