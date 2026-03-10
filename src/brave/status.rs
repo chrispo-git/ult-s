@@ -15,7 +15,7 @@ use crate::util::*;
 use super::*;
 pub fn install() {
     Agent::new("brave")
-    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .set_costume(get_marked_costumes("brave","brave"))
     	.status(Exec, *FIGHTER_BRAVE_STATUS_KIND_SPECIAL_N_SHOOT, special_n_shoot_exec)
         .install();
 }
