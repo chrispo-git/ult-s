@@ -37,7 +37,7 @@ added_char_markers = [
     ["pacman","bomberman"],
     ["falco", "peppy"]
 ]
-for char_pair in folder_list:
+for char_pair in added_char_markers:
     for slot in range(8):
         directory = f'fighter/{char_pair[0]}/model/body/c0{slot}'
         path = f'{directory}/{char_pair[1]}.marker'
