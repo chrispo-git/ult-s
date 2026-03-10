@@ -805,22 +805,22 @@ pub(crate) fn get_marked_costumes(char_folder: &str, marker_name: &str) -> Vec<u
     key = "String", 
     convert = r#"{ format!("{}_{}", char_folder, marker_name) }"#
 )]
-pub(crate) fn get_lowest_marked_costume(char_folder: &str, marker_name: &str) -> i32 {
+pub(crate) fn get_lowest_marked_costume(char_folder: &str, marker_name: &str) -> u8 {
     for x in 0..256 {
         let path = format!("sd:/ultimate/mods/Ultimate S Arcropolis/fighter/{}/model/body/c{:02}/{}.marker", char_folder, x, marker_name);
         
         if std::fs::metadata(path).is_ok() {
-            return x as i32;
+            return x as u8;
         }
     }
-    -1
+    255 as u8
 }
 
 #[cached(
     key = "String", 
     convert = r#"{ format!("{}_{}", char_folder, marker_name) }"#
 )]
-pub(crate) fn get_costume_count(char_folder: &str, marker_name: &str) -> i32 {
+pub(crate) fn get_costume_count(char_folder: &str, marker_name: &str) -> u8 {
     let mut count = 0;
     for x in 0..256 {
         let path = format!("sd:/ultimate/mods/Ultimate S Arcropolis/fighter/{}/model/body/c{:02}/{}.marker", char_folder, x, marker_name);
@@ -828,10 +828,10 @@ pub(crate) fn get_costume_count(char_folder: &str, marker_name: &str) -> i32 {
         if std::fs::metadata(path).is_ok() {
             count += 1;
         } else if count > 0 {
-            return count;
+            return count as u8;
         }
     }
-    count
+    count as u8
 }
 
 pub fn install() {

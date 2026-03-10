@@ -130,9 +130,9 @@ pub fn install() {
                 result_pf0: the_csk_collection_api::BoolType::Overwrite(true), 
                 result_pf1: the_csk_collection_api::BoolType::Overwrite(true), 
                 result_pf2: the_csk_collection_api::BoolType::Overwrite(true), 
-            color_num: the_csk_collection_api::UnsignedByteType::Overwrite(8),
-            extra_index_maps: the_csk_collection_api::UnsignedByteMap::Overwrite(HashMap::from([
-                (smash::hash40("color_start_index") /* Hash40 of color_start_index */, the_csk_collection_api::UnsignedByteType::Overwrite(120))
+            color_num: the_csk_collection_api::UnsignedByteType::Overwrite(get_costume_count("pikmin","rayman")),
+            extra_index_maps: the_csk_collection_api::UnsignedByteMap::Overwrite(HashMap::from([ 
+                (smash::hash40("color_start_index") /* Hash40 of color_start_index */, the_csk_collection_api::UnsignedByteType::Overwrite(get_lowest_marked_costume("pikmin","rayman")))
             ])),
             extra_hash_maps: the_csk_collection_api::Hash40Map::Overwrite(HashMap::from([
                     (0x1337FC912E /* Hash40 of characall_label_c00 */, the_csk_collection_api::Hash40Type::Overwrite(smash::hash40("vc_narration_characall_rayman"))),
