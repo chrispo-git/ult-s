@@ -1,6 +1,7 @@
 mod status;
 mod frame;
 mod acmd;
+use crate::util::*;
 
 static mut IS_BAIR : [bool; 8] = [false; 8];
 static mut IS_SIDEB_EAT : [bool; 8] = [false; 8];

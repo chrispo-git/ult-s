@@ -1,6 +1,7 @@
 mod status;
 mod frame;
 mod acmd;
+use crate::util::*;
 
 static mut HOLD : [i32; 8] = [0; 8];
 static mut IS_HOLD : [bool; 8] = [false; 8];

@@ -1,6 +1,7 @@
 mod status;
 mod frame;
 mod acmd;
+use crate::util::*;
 pub static mut FIGHTER_FALCO_GENERATE_ARTICLE_MISSILE: i32 = 6;
 use std::convert::TryInto;
 use std::collections::HashMap;

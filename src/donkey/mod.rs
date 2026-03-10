@@ -1,6 +1,7 @@
 mod status;
 mod frame;
 mod acmd;
+use crate::util::*;
 
 static mut IS_DK_START_ITEM_CHUCK: [bool; 8] = [false; 8];
 static mut IS_DK_UPB_BARREL: [bool; 8] = [false; 8];

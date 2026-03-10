@@ -16,6 +16,7 @@ use std::collections::HashMap;
 mod status;
 mod frame; 
 mod acmd;
+use crate::util::*;
 			
 static mut CURRENT_PIKMIN : [i32; 8] = [0; 8];
 static mut SET_UPB_FREEFALL: [bool; 8] = [false; 8];

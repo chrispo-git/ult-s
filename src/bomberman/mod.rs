@@ -1,6 +1,7 @@
 mod status;
 mod frame;
 mod acmd;
+use crate::util::*;
 
 static mut MAKE_NEW_BOMB : [bool; 8] = [false; 8];
 static mut NEW_BOMB_X : [f32; 8] = [0.0; 8];

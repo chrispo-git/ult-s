@@ -1,6 +1,7 @@
 mod status;
 mod frame;
 mod acmd;
+use crate::util::*;
 use smash::app::sv_animcmd::*;
 use smash::phx::Hash40;
 use smash::app::lua_bind::*;
