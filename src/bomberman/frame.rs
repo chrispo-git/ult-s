@@ -44,7 +44,7 @@ unsafe extern "C" fn bomber_main_frame(fighter: &mut L2CFighterCommon) {
         let is_end = MotionModule::is_end(fighter.module_accessor);
         let is_near_ground = GroundModule::ray_check(fighter.module_accessor, &Vector2f{ x: PostureModule::pos_x(fighter.module_accessor), y: PostureModule::pos_y(fighter.module_accessor)}, &Vector2f{ x: 0.0, y: -1.0}, true);
         let is_kinda_near = GroundModule::ray_check(fighter.module_accessor, &Vector2f{ x: PostureModule::pos_x(fighter.module_accessor), y: PostureModule::pos_y(fighter.module_accessor)}, &Vector2f{ x: 0.0, y: -2.0}, true);
-        if is_added(boma) {
+        {
             if motion_kind == hash40("special_s") {
                 //println!("in special S, {}", frame);
                 if frame >= 47.0 {
@@ -147,7 +147,7 @@ unsafe extern "C" fn bomberman_frame(fighter: &mut L2CFighterCommon) {
 		let end_frame = MotionModule::end_frame(boma);
 		let cancel_frame = FighterMotionModuleImpl::get_cancel_frame(boma,smash::phx::Hash40::new_raw(MotionModule::motion_kind(boma)),false) as f32;
         let lr = PostureModule::lr(boma);
-        if is_added(boma) {
+        {
             if status_kind == *FIGHTER_STATUS_KIND_ENTRY || is_reset() {
                 let custom_hurtboxes = [
                     //["bone", x1, y1, z1, x2, y2, z2, scale, collision_part, hit height]

@@ -26,7 +26,7 @@ unsafe extern "C" fn lucina(fighter : &mut L2CFighterCommon) {
     unsafe {
 		let lua_state = fighter.lua_state_agent;
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);
-		if is_default(boma) {
+		{
 			let fighter_kind = smash::app::utility::get_kind(boma);
 			let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
 			let situation_kind = smash::app::lua_bind::StatusModule::situation_kind(boma);

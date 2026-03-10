@@ -24,7 +24,7 @@ pub fn install() {
 unsafe extern "C" fn wolf(fighter : &mut L2CFighterCommon) {
     unsafe {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
-		if is_default(boma) {
+		{
 			let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
 			let fighter_kind = smash::app::utility::get_kind(boma);
 			if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_N {

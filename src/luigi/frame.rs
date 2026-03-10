@@ -28,7 +28,7 @@ unsafe extern "C" fn luigi(fighter : &mut L2CFighterCommon) {
 		let mut stick_x = ControlModule::get_stick_x(boma) ;
 		let fighter_kind = smash::app::utility::get_kind(boma);
 		let frame = MotionModule::frame(boma);
-		if is_default(boma) {
+		{
 			if (ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_ATTACK_LW3) != 0 && frame >= 13.0 && status_kind == *FIGHTER_STATUS_KIND_ATTACK_LW3{
 				MotionModule::change_motion(boma, smash::phx::Hash40::new("attack_lw3"), 0.0, 1.0, false, 0.0, false, false);
 			};

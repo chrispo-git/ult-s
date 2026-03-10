@@ -25,7 +25,7 @@ pub fn install() {
 unsafe extern "C" fn zss(fighter : &mut L2CFighterCommon) {
     unsafe {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);  
-		if is_default(boma) {
+		{
 			let fighter_kind = smash::app::utility::get_kind(boma);
 			let lr = PostureModule::lr(boma);
 			let stick_x = ControlModule::get_stick_x(boma)* lr;		
