@@ -1,4 +1,4 @@
-#![feature(concat_idents)]
+
 #![feature(proc_macro_hygiene)]
 #![feature(asm)]
 #![allow(unused_imports)]
