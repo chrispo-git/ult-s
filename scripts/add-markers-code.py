@@ -21,7 +21,6 @@ folder_list = [
 
 os.chdir('../')
 os.chdir('src')
-
 for char in folder_list:
     directory = f'{char}'
     old_str = '.set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())'
@@ -43,7 +42,7 @@ for char in folder_list:
                     with open(file_path, 'w', encoding='utf-8') as f:
                         f.write(new_content)
                     print(f"Updated: {file_path}")
-
+                    
 added_char_markers = [
     ["murabito", "toad"],
     ["pikmin", "rayman"],
@@ -51,7 +50,7 @@ added_char_markers = [
     ["falco", "peppy"]
 ]
 for char_pair in added_char_markers:
-    directory = f'{char}'
+    directory = f'{char_pair[1]}'
     old_str = '.set_costume([120, 121, 122, 123, 124, 125, 126, 127].to_vec())'
     new_str = f'.set_costume(get_marked_costumes("{char_pair[0]}","{char_pair[1]}"))'
 
