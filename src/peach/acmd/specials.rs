@@ -24,7 +24,7 @@ pub fn install() {
     .install();
 
 	Agent::new("kirby")
-    .set_costume(get_marked_costumes("peach","peach"))
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
 	.acmd("effect_peachspecialn", kirby_peach_neutralb_eff, Priority::Low)    
     .acmd("effect_peachspecialairn", kirby_peach_neutralb_eff, Priority::Low)    
     .install();

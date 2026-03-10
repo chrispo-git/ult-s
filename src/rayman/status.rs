@@ -531,7 +531,4 @@ pub fn install() {
         .status(Pre, *FIGHTER_STATUS_KIND_SPECIAL_LW, downb_pre)
         .install();
 
-    /*Agent::new("kirby")
-        .status(Pre, *FIGHTER_KIRBY_STATUS_KIND_PIKMIN_SPECIAL_N, kirby_copy_pre)
-        .install();*/
 }

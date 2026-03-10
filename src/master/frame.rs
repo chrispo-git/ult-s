@@ -22,7 +22,7 @@ pub fn install() {
     .install();
 
 	Agent::new("kirby")
-    .set_costume(get_marked_costumes("master","master"))
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .on_line(Main, master_kirby_frame)
     .install();
 }

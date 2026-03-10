@@ -50,7 +50,7 @@ pub fn install() {
     .install();
 
 	Agent::new("kirby")
-    .set_costume(get_marked_costumes("master","master"))
+    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("effect_masterspecialn", kirby_byleth_neutralb_eff, Priority::Low)    
     .acmd("effect_masterspecialairn", kirby_byleth_neutralb_eff, Priority::Low)    
     .install();
