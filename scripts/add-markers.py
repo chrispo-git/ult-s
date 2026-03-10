@@ -38,7 +38,7 @@ added_char_markers = [
     ["falco", "peppy"]
 ]
 for char_pair in added_char_markers:
-    for slot in range(8):
+    for slot in range(120,128):
         directory = f'fighter/{char_pair[0]}/model/body/c0{slot}'
         path = f'{directory}/{char_pair[1]}.marker'
         os.makedirs(directory, exist_ok=True)
