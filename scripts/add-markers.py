@@ -24,9 +24,10 @@ os.chdir('romfs')
 
 for char in folder_list:
     for slot in range(8):
-        path = f'fighter/{char}/model/body/c0{slot}/{char}.marker'
-        if os.path.isfile(path):
-            continue 
-        with open(path, 'w') as fp:
-            pass
+        directory = f'fighter/{char}/model/body/c0{slot}'
+        path = f'{directory}/{char}.marker'
+        os.makedirs(directory, exist_ok=True)
+        if not os.path.isfile(path):
+            with open(path, 'w') as fp:
+                pass
 print('done :)')
