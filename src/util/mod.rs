@@ -14,6 +14,7 @@ use std::{fs, path::Path};
 use crate::controls::ext::*;
 use crate::common::*;
 use cached::proc_macro::cached;
+use std::collections::BTreeSet;
 
 pub static mut GAMEMODES : Vec<String> = Vec::new();
 
@@ -788,16 +789,45 @@ pub (crate) unsafe fn is_gamemode(mode: String) -> bool {
     convert = r#"{ format!("{}_{}", char_folder, marker_name) }"#
 )]
 pub(crate) fn get_marked_costumes(char_folder: &str, marker_name: &str) -> Vec<usize> {
-    let mut marked_slots = Vec::new();
-    
-    for x in 0..256 {
-        let path = format!("sd:/ultimate/mods/Ultimate S Arcropolis/fighter/{}/model/body/c{:02}/{}.marker", char_folder, x, marker_name);
-        
-        if std::fs::metadata(path).is_ok() {
-            marked_slots.push(x as usize);
+    let mut unique_slots = BTreeSet::new();
+    let mods_root = Path::new("sd:/ultimate/mods/");
+
+    let Ok(mod_folders) = fs::read_dir(mods_root) else {
+        return Vec::new();
+    };
+
+    for mod_entry in mod_folders.flatten() {
+        let body_path = mod_entry.path().join(format!("fighter/{}/model/body", char_folder));
+
+        let Ok(c_entries) = fs::read_dir(body_path) else {
+            continue;
+        };
+
+        for c_folder in c_entries.flatten() {
+            let path = c_folder.path();
+            
+            let Some(name) = path.file_name().and_then(|n| n.to_str()) else {
+                continue;
+            };
+
+            if !name.starts_with('c') || name.len() < 2 {
+                continue;
+            }
+
+            let Ok(slot_idx) = name[1..].parse::<usize>() else {
+                continue;
+            };
+
+            if !path.join(format!("{}.marker", marker_name)).exists() {
+                continue;
+            }
+
+            unique_slots.insert(slot_idx);
         }
     }
-    println!("{}-{} slots - {:?}",char_folder, marker_name, marked_slots);
+
+    let marked_slots: Vec<usize> = unique_slots.into_iter().collect();
+    println!("{}-{} slots - {:?}", char_folder, marker_name, marked_slots);
     marked_slots
 }
 
@@ -806,14 +836,39 @@ pub(crate) fn get_marked_costumes(char_folder: &str, marker_name: &str) -> Vec<u
     convert = r#"{ format!("{}_{}", char_folder, marker_name) }"#
 )]
 pub(crate) fn get_lowest_marked_costume(char_folder: &str, marker_name: &str) -> u8 {
-    for x in 0..256 {
-        let path = format!("sd:/ultimate/mods/Ultimate S Arcropolis/fighter/{}/model/body/c{:02}/{}.marker", char_folder, x, marker_name);
-        
-        if std::fs::metadata(path).is_ok() {
-            return x as u8;
+    let mods_root = Path::new("sd:/ultimate/mods/");
+    let mut lowest_found: Option<u8> = None;
+
+    let mod_folders = match fs::read_dir(mods_root) {
+        Ok(entries) => entries.flatten(),
+        Err(_) => return 255,
+    };
+
+    for mod_entry in mod_folders {
+        let body_path = mod_entry.path().join(format!("fighter/{}/model/body", char_folder));
+        let c_entries = match fs::read_dir(body_path) {
+            Ok(entries) => entries.flatten(),
+            Err(_) => continue,
+        };
+
+        for c_entry in c_entries {
+            let path = c_entry.path();
+            if let Some(name) = path.file_name().and_then(|n| n.to_str()) {
+                if !name.starts_with('c') || name.len() < 2 {
+                    continue;
+                }
+
+                if let Ok(slot_idx) = name[1..].parse::<u8>() {
+                    if lowest_found.map_or(true, |low| slot_idx < low) {
+                        if path.join(format!("{}.marker", marker_name)).exists() {
+                            lowest_found = Some(slot_idx);
+                        }
+                    }
+                }
+            }
         }
     }
-    255 as u8
+    lowest_found.unwrap_or(255)
 }
 
 #[cached(
@@ -821,16 +876,39 @@ pub(crate) fn get_lowest_marked_costume(char_folder: &str, marker_name: &str) ->
     convert = r#"{ format!("{}_{}", char_folder, marker_name) }"#
 )]
 pub(crate) fn get_costume_count(char_folder: &str, marker_name: &str) -> u8 {
-    let mut count = 0;
-    for x in 0..256 {
-        let path = format!("sd:/ultimate/mods/Ultimate S Arcropolis/fighter/{}/model/body/c{:02}/{}.marker", char_folder, x, marker_name);
-        
-        if std::fs::metadata(path).is_ok() {
-            count += 1;
-        } else if count > 0 {
-            return count as u8;
+    let mut found_slots = [false; 256];
+    let mods_path = Path::new("sd:/ultimate/mods/");
+    
+    let mod_folders = match fs::read_dir(mods_path) {
+        Ok(folders) => folders.flatten(),
+        Err(_) => return 0,
+    };
+
+    for folder in mod_folders {
+        let body_path = folder.path().join(format!("fighter/{}/model/body", char_folder));
+        let Ok(c_folders) = fs::read_dir(body_path) else {
+            continue;
+        };
+
+        for c_entry in c_folders.flatten() {
+            let path = c_entry.path();
+            let Some(name) = path.file_name().and_then(|n| n.to_str()) else {
+                continue;
+            };
+            if !name.starts_with('c') || name.len() < 2 {
+                continue;
+            }
+
+            let Ok(index) = name[1..].parse::<usize>() else {
+                continue;
+            };
+            if index < 256 && path.join(format!("{}.marker", marker_name)).exists() {
+                found_slots[index] = true;
+            }
         }
     }
+    let count = found_slots.iter().take_while(|&&exists| exists).count();
+    
     count as u8
 }
 
