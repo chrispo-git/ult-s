@@ -16,6 +16,7 @@ use crate::common::*;
 use cached::proc_macro::cached;
 use std::collections::{HashMap, HashSet};
 use once_cell::sync::Lazy;
+use std::time::Instant;
 
 pub static mut GAMEMODES : Vec<String> = Vec::new();
 
@@ -795,8 +796,9 @@ impl ModRegistry {
     pub fn fill() -> Self {
         let mut registry = HashMap::new();
         let mods_root = Path::new("sd:/ultimate/mods/");
+		let start = Instant::now();
 
-        let Ok(mod_folders) = fs::read_dir(mods_root) else {
+        let Ok(mod_folders) = fs::read_dir(mods_root) else { 
             return Self { registry };
         };
 
@@ -833,7 +835,8 @@ impl ModRegistry {
                 }
             }
         }
-		println!("Mod Registry Filled!");
+        let duration = start.elapsed();
+		println!("Mod Registry Filled! Time Taken {:.4}s ({:.4}ms)", duration.as_micros() as f32 / 1000000.0, duration.as_micros() as f32 / 1000.0);
         Self { registry }
     }
     pub fn get_marked_costumes(&self, char_folder: &str, marker_name: &str) -> Vec<usize> {
@@ -850,18 +853,32 @@ impl ModRegistry {
     }
 
     pub fn get_costume_count(&self, char_folder: &str, marker_name: &str) -> u8 {
-        let Some(char_data) = self.registry.get(char_folder) else { return 0; };
-        
-        let mut count = 0;
-        for i in 0..256 {
-            let has_marker = char_data.get(&i).map_or(false, |m| m.contains(marker_name));
-            if has_marker {
-                count += 1;
-            } else {
-                break;
-            }
-        }
-        count
+		let Some(char_data) = self.registry.get(char_folder) else { 
+			return 0; 
+		};
+		
+		let start_idx = char_data.iter()
+			.filter(|(_, markers)| {
+				let found = markers.contains(marker_name);
+				found
+			})
+			.map(|(&slot, _)| slot)
+			.min();
+
+		if let Some(start) = start_idx {
+			let mut count = 0;
+			for i in start..256 {
+				let has_marker = char_data.get(&i).map_or(false, |m| m.contains(marker_name));
+				if has_marker {
+					count += 1;
+				} else {
+					break;
+				}
+			}
+			count as u8
+		} else {
+			0
+		}
     }
     pub fn get_lowest_marked_costume(&self, char_folder: &str, marker_name: &str) -> u8 {
         let Some(char_data) = self.registry.get(char_folder) else {return 255;};
