@@ -14,7 +14,8 @@ use std::{fs, path::Path};
 use crate::controls::ext::*;
 use crate::common::*;
 use cached::proc_macro::cached;
-use std::collections::BTreeSet;
+use std::collections::{HashMap, HashSet};
+use once_cell::sync::Lazy;
 
 pub static mut GAMEMODES : Vec<String> = Vec::new();
 
@@ -784,132 +785,121 @@ pub (crate) unsafe fn add_gamemode(mode: String) -> () {
 pub (crate) unsafe fn is_gamemode(mode: String) -> bool {
 	return GAMEMODES.contains(&mode);
 }
-#[cached(
-    key = "String", 
-    convert = r#"{ format!("{}_{}", char_folder, marker_name) }"#
-)]
-pub(crate) fn get_marked_costumes(char_folder: &str, marker_name: &str) -> Vec<usize> {
-    let mut unique_slots = BTreeSet::new();
-    let mods_root = Path::new("sd:/ultimate/mods/");
-
-    let Ok(mod_folders) = fs::read_dir(mods_root) else {
-        return Vec::new();
-    };
-
-    for mod_entry in mod_folders.flatten() {
-        let body_path = mod_entry.path().join(format!("fighter/{}/model/body", char_folder));
-
-        let Ok(c_entries) = fs::read_dir(body_path) else {
-            continue;
-        };
-
-        for c_folder in c_entries.flatten() {
-            let path = c_folder.path();
-            
-            let Some(name) = path.file_name().and_then(|n| n.to_str()) else {
-                continue;
-            };
-
-            if !name.starts_with('c') || name.len() < 2 {
-                continue;
-            }
-
-            let Ok(slot_idx) = name[1..].parse::<usize>() else {
-                continue;
-            };
-
-            if !path.join(format!("{}.marker", marker_name)).exists() {
-                continue;
-            }
-
-            unique_slots.insert(slot_idx);
-        }
-    }
-
-    let marked_slots: Vec<usize> = unique_slots.into_iter().collect();
-    println!("{}-{} slots - {:?}", char_folder, marker_name, marked_slots);
-    marked_slots
+/*
+MARKER SEARCH! Very big and annoying, and I hate it.
+*/
+pub struct ModRegistry {
+    registry: HashMap<String, HashMap<usize, HashSet<String>>>,
 }
+impl ModRegistry {
+    pub fn fill() -> Self {
+        let mut registry = HashMap::new();
+        let mods_root = Path::new("sd:/ultimate/mods/");
 
-#[cached(
-    key = "String", 
-    convert = r#"{ format!("{}_{}", char_folder, marker_name) }"#
-)]
-pub(crate) fn get_lowest_marked_costume(char_folder: &str, marker_name: &str) -> u8 {
-    let mods_root = Path::new("sd:/ultimate/mods/");
-    let mut lowest_found: Option<u8> = None;
-
-    let mod_folders = match fs::read_dir(mods_root) {
-        Ok(entries) => entries.flatten(),
-        Err(_) => return 255,
-    };
-
-    for mod_entry in mod_folders {
-        let body_path = mod_entry.path().join(format!("fighter/{}/model/body", char_folder));
-        let c_entries = match fs::read_dir(body_path) {
-            Ok(entries) => entries.flatten(),
-            Err(_) => continue,
+        let Ok(mod_folders) = fs::read_dir(mods_root) else {
+            return Self { registry };
         };
 
-        for c_entry in c_entries {
-            let path = c_entry.path();
-            if let Some(name) = path.file_name().and_then(|n| n.to_str()) {
-                if !name.starts_with('c') || name.len() < 2 {
-                    continue;
-                }
+        for mod_entry in mod_folders.flatten() {
+            let fighter_path = mod_entry.path().join("fighter");
+            let Ok(char_entries) = fs::read_dir(fighter_path) else { continue; };
 
-                if let Ok(slot_idx) = name[1..].parse::<u8>() {
-                    if lowest_found.map_or(true, |low| slot_idx < low) {
-                        if path.join(format!("{}.marker", marker_name)).exists() {
-                            lowest_found = Some(slot_idx);
+            for char_entry in char_entries.flatten() {
+                let char_name = char_entry.file_name().to_string_lossy().into_owned();
+                let body_path = char_entry.path().join("model/body");
+                
+                let Ok(c_entries) = fs::read_dir(body_path) else { continue; };
+
+                for c_entry in c_entries.flatten() {
+                    let path = c_entry.path();
+                    let Some(folder_name) = path.file_name().and_then(|n| n.to_str()) else { continue; };
+                    
+                    if !folder_name.starts_with('c') || folder_name.len() < 2 { continue; }
+                    let Ok(slot_idx) = folder_name[1..].parse::<usize>() else { continue; };
+
+                    let Ok(files) = fs::read_dir(&path) else { continue; };
+                    for file in files.flatten() {
+                        let file_path = file.path();
+                        if file_path.extension().and_then(|s| s.to_str()) == Some("marker") {
+                            if let Some(marker_base) = file_path.file_stem().and_then(|s| s.to_str()) {
+                                registry.entry(char_name.clone())
+                                    .or_insert_with(HashMap::new)
+                                    .entry(slot_idx)
+                                    .or_insert_with(HashSet::new)
+                                    .insert(marker_base.to_string());
+                            }
                         }
                     }
                 }
             }
         }
+		println!("Mod Registry Filled!");
+        Self { registry }
     }
-    lowest_found.unwrap_or(255)
-}
-
-#[cached(
-    key = "String", 
-    convert = r#"{ format!("{}_{}", char_folder, marker_name) }"#
-)]
-pub(crate) fn get_costume_count(char_folder: &str, marker_name: &str) -> u8 {
-    let mut found_slots = [false; 256];
-    let mods_path = Path::new("sd:/ultimate/mods/");
-    
-    let mod_folders = match fs::read_dir(mods_path) {
-        Ok(folders) => folders.flatten(),
-        Err(_) => return 0,
-    };
-
-    for folder in mod_folders {
-        let body_path = folder.path().join(format!("fighter/{}/model/body", char_folder));
-        let Ok(c_folders) = fs::read_dir(body_path) else {
-            continue;
-        };
-
-        for c_entry in c_folders.flatten() {
-            let path = c_entry.path();
-            let Some(name) = path.file_name().and_then(|n| n.to_str()) else {
-                continue;
-            };
-            if !name.starts_with('c') || name.len() < 2 {
-                continue;
-            }
-
-            let Ok(index) = name[1..].parse::<usize>() else {
-                continue;
-            };
-            if index < 256 && path.join(format!("{}.marker", marker_name)).exists() {
-                found_slots[index] = true;
+    pub fn get_marked_costumes(&self, char_folder: &str, marker_name: &str) -> Vec<usize> {
+        let mut slots = Vec::new();
+        if let Some(char_data) = self.registry.get(char_folder) {
+            for (&slot, markers) in char_data {
+                if markers.contains(marker_name) {
+                    slots.push(slot);
+                }
             }
         }
+        slots.sort_unstable();
+        slots
     }
-    let count = found_slots.iter().take_while(|&&exists| exists).count();
-    
-    count as u8
+
+    pub fn get_costume_count(&self, char_folder: &str, marker_name: &str) -> u8 {
+        let Some(char_data) = self.registry.get(char_folder) else { return 0; };
+        
+        let mut count = 0;
+        for i in 0..256 {
+            let has_marker = char_data.get(&i).map_or(false, |m| m.contains(marker_name));
+            if has_marker {
+                count += 1;
+            } else {
+                break;
+            }
+        }
+        count
+    }
+    pub fn get_lowest_marked_costume(&self, char_folder: &str, marker_name: &str) -> u8 {
+        let Some(char_data) = self.registry.get(char_folder) else {return 255;};
+
+        let lowest = char_data.iter().filter(|(_, markers)| markers.contains(marker_name)).map(|(&slot, _)| slot).min();
+
+        lowest.map(|idx| idx as u8).unwrap_or(255)
+    }
+}
+pub static REGISTRY: Lazy<ModRegistry> = Lazy::new(|| ModRegistry::fill());
+/*#[cached(
+    key = "String", 
+    convert = r#"{ format!("{}_{}", char_folder, marker_name) }"#
+)]*/
+pub(crate) fn get_marked_costumes(char_folder: &str, marker_name: &str) -> Vec<usize> {
+    let marked_slots = REGISTRY.get_marked_costumes(char_folder, marker_name);
+    println!("{}-{} slots - {:?}", char_folder, marker_name, marked_slots);
+	marked_slots
+}
+
+/*#[cached(
+    key = "String", 
+    convert = r#"{ format!("{}_{}", char_folder, marker_name) }"#
+)]*/
+pub(crate) fn get_lowest_marked_costume(char_folder: &str, marker_name: &str) -> u8 {
+    let lowest_marked = REGISTRY.get_lowest_marked_costume(char_folder, marker_name);
+    println!("{}-{} lowest slot - {:?}", char_folder, marker_name, lowest_marked);
+	lowest_marked
+}
+
+/*#[cached(
+    key = "String", 
+    convert = r#"{ format!("{}_{}", char_folder, marker_name) }"#
+)]*/
+pub(crate) fn get_costume_count(char_folder: &str, marker_name: &str) -> u8 {
+    let costume_count = REGISTRY.get_costume_count(char_folder, marker_name);
+	println!("{}-{} costume count - {:?}", char_folder, marker_name, costume_count);
+	costume_count
 }
 
 pub fn install() {

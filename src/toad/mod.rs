@@ -110,7 +110,7 @@ pub fn install() {
                 result_pf0: the_csk_collection_api::BoolType::Overwrite(true), 
                 result_pf1: the_csk_collection_api::BoolType::Overwrite(true), 
                 result_pf2: the_csk_collection_api::BoolType::Overwrite(true), 
-            color_num: the_csk_collection_api::UnsignedByteType::Overwrite(get_costume_count("murabito","toad")),
+            color_num: the_csk_collection_api::UnsignedByteType::Overwrite(REGISTRY.get_costume_count("murabito","toad")),
             extra_index_maps: the_csk_collection_api::UnsignedByteMap::Overwrite(HashMap::from([
                     (0x915C075DE /* Hash40 of c00_index */, the_csk_collection_api::UnsignedByteType::Overwrite(0)), 
                     (0x9B3B77E6A /* Hash40 of c01_index */, the_csk_collection_api::UnsignedByteType::Overwrite(0)), 
@@ -128,7 +128,7 @@ pub fn install() {
                     (0x9B6B7BD2E /* Hash40 of n05_index */, the_csk_collection_api::UnsignedByteType::Overwrite(5)), 
                     (0x9875FA7B3 /* Hash40 of n06_index */, the_csk_collection_api::UnsignedByteType::Overwrite(6)), 
                     (0x92128AC07 /* Hash40 of n07_index */, the_csk_collection_api::UnsignedByteType::Overwrite(7)), 
-                (smash::hash40("color_start_index") /* Hash40 of color_start_index */, the_csk_collection_api::UnsignedByteType::Overwrite(get_lowest_marked_costume("murabito","toad")))
+                (smash::hash40("color_start_index") /* Hash40 of color_start_index */, the_csk_collection_api::UnsignedByteType::Overwrite(REGISTRY.get_lowest_marked_costume("murabito","toad")))
             ])),
             extra_hash_maps: the_csk_collection_api::Hash40Map::Overwrite(HashMap::from([
                     (0x1337FC912E /* Hash40 of characall_label_c00 */, the_csk_collection_api::Hash40Type::Overwrite(smash::hash40("vc_narration_characall_toad"))),
