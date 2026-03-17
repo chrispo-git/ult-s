@@ -36,8 +36,8 @@ pub fn install() {
 
 unsafe extern "C" fn richter_neutralb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
-		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.3);
-		frame(fighter.lua_state_agent, 20.0);
+		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
+		frame(fighter.lua_state_agent, 30.0);
         macros::FT_MOTION_RATE(fighter, /*FSM*/ 1);
 		frame(fighter.lua_state_agent, 31.0);
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.75);
