@@ -35,6 +35,17 @@ unsafe fn cancel_to_falcon_punch(fighter: &mut L2CFighterCommon, status_kind: i3
 }
 unsafe extern "C" fn captain_frame(fighter: &mut L2CFighterCommon) {
     unsafe {
-        cancel_to_falcon_punch(fighter, StatusModule::status_kind(fighter.module_accessor));
+        let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
+		    if true {
+            let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
+            let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+            let motion_kind = MotionModule::motion_kind(boma);
+            if ![*FIGHTER_STATUS_KIND_THROW, *FIGHTER_STATUS_KIND_SPECIAL_N, *FIGHTER_CAPTAIN_STATUS_KIND_SPECIAL_N_TURN].contains(&status_kind) &&  AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_ALL) {
+                let cat1 = ControlModule::get_command_flag_cat(boma, 0);
+                if (cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_N) != 0 && !is_hitlag(boma){
+                    StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_SPECIAL_N, true);
+                };
+            };
+        }
     }
 }
