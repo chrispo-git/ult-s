@@ -129,14 +129,6 @@ pub struct JabState {
 }
 
 
-//Article cloning consts
-//Wario
-pub const FIGHTER_WARIO_GENERATE_ARTICLE_COIN: i32 = 0x3;
-pub const WEAPON_WARIO_COIN_STATUS_KIND_SHOOT: i32 = 0x0;
-
-pub const FIGHTER_WARIO_GENERATE_ARTICLE_COUNTER: i32 = 0x4;
-pub const WEAPON_WARIO_COUNTER_STATUS_KIND_APPEAR: i32 = 0x0;
-
 #[skyline::hook(replace = smash::app::lua_bind::WorkModule::enable_transition_term)]
 pub unsafe fn enable_transition_term_hook(boma: &mut smash::app::BattleObjectModuleAccessor, term: i32) -> () {
 		let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
