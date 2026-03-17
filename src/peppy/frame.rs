@@ -20,7 +20,7 @@ pub fn install() {
 		FIGHTER_FALCO_GENERATE_ARTICLE_MISSILE += smashline::clone_weapon("koopajr", *WEAPON_KIND_KOOPAJR_CANNONBALL, "falco", "missile", false);
 	}
 	Agent::new("falco")
-    .set_costume([120, 121, 122, 123, 124, 125, 126, 127].to_vec())
+    .set_costume(get_marked_costumes("falco","peppy"))
 	.on_line(Main, peppy_frame)
 	.install();
 }
@@ -28,7 +28,7 @@ pub fn install() {
 unsafe extern "C" fn peppy_frame(fighter: &mut L2CFighterCommon) {
     unsafe {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
-		if is_added(boma) {
+		{
 			let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
 			let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 			let motion_kind = MotionModule::motion_kind(boma);
@@ -207,7 +207,7 @@ unsafe extern "C" fn peppy_frame(fighter: &mut L2CFighterCommon) {
 				};
 				if StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR {
 					let cat2 = ControlModule::get_command_flag_cat(boma, 1);
-					if (cat2 & *FIGHTER_PAD_CMD_CAT2_FLAG_FALL_JUMP) != 0 && stick_y < -0.66 && SPEED_Y[ENTRY_ID] <= 0.0 {
+					if (cat2 & *FIGHTER_PAD_CMD_CAT2_FLAG_FALL_JUMP) != 0 && stick_y < -0.66 && get_speed_y(boma) <= 0.0 {
 						WorkModule::set_flag(boma, true, *FIGHTER_STATUS_WORK_ID_FLAG_RESERVE_DIVE);
 					}
 				};

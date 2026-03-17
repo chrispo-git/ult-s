@@ -17,18 +17,18 @@ use super::*;
 
 pub fn install() {
     Agent::new("murabito")
-    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .set_costume(get_marked_costumes("murabito","murabito"))
     .on_line(Main, murabito_frame2)
     .on_line(Main, murabito_frame)
     .install();
 
     Agent::new("murabito_tree")
-    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .set_costume(get_marked_costumes("murabito","murabito"))
     .on_line(Main, tree_frame)
     .install();
 
     Agent::new("murabito_sprout")
-    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .set_costume(get_marked_costumes("murabito","murabito"))
     .on_line(Main, seed_frame)
     .install();
 }
@@ -36,7 +36,7 @@ pub fn install() {
 unsafe extern "C" fn murabito_frame2(fighter: &mut L2CFighterCommon) {
     unsafe {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
-		if is_default(boma) {
+		{
             let frame = MotionModule::frame(boma);
             let situation_kind = StatusModule::situation_kind(boma);
 			let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
@@ -49,7 +49,7 @@ unsafe extern "C" fn murabito_frame2(fighter: &mut L2CFighterCommon) {
 unsafe extern "C" fn murabito_frame(fighter: &mut L2CFighterCommon) {
     unsafe {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
-		if is_default(boma) {
+		{
 			let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
 			let frame = MotionModule::frame(boma);
 			let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
@@ -84,8 +84,8 @@ unsafe extern "C" fn murabito_frame(fighter: &mut L2CFighterCommon) {
                         DO_BOUNCE[ENTRY_ID] = true;
                     };
                 }
-                if SPEED_Y[ENTRY_ID] > 2.0 {
-                    let speed = smash::phx::Vector3f { x: 0.0, y: (SPEED_Y[ENTRY_ID]-2.0)*-1.0, z: 0.0 };
+                if get_speed_y(boma) > 2.0 {
+                    let speed = smash::phx::Vector3f { x: 0.0, y: (get_speed_y(boma)-2.0)*-1.0, z: 0.0 };
                     KineticModule::add_speed(fighter.module_accessor, &speed);
                 }
             };
@@ -113,21 +113,21 @@ unsafe extern "C" fn murabito_frame(fighter: &mut L2CFighterCommon) {
                         if ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_MURABITO_GENERATE_ARTICLE_TREE) && ![hash40("special_n3"), hash40("special_n2_fail")].contains(&motion_kind) {
                             if (TREE_POS_X[ENTRY_ID]-pos_x).abs() < X_DIST && (TREE_POS_Y[ENTRY_ID]-pos_y).abs() < Y_DIST && is_facing_tree && !IS_FALLEN[ENTRY_ID] {
                                 MotionModule::change_motion(boma, Hash40::new("special_n3"), 0.0, 1.0, false, 0.0, false, false);
-                                println!("special_n3");
+                                //println!("special_n3");
                                 CHANGE_FRAME[ENTRY_ID] = true;
                             } else {
                                 MotionModule::change_motion(boma, Hash40::new("special_n2_fail"), 0.0, 1.0, false, 0.0, false, false);
-                                println!("special_n2_fail");
+                                //println!("special_n2_fail");
                                 CHANGE_FRAME[ENTRY_ID] = true;
                             }
                         } else if ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_MURABITO_GENERATE_ARTICLE_SPROUT) && ![hash40("special_n2"), hash40("special_n2_fail")].contains(&motion_kind) {
                             if (TREE_POS_X[ENTRY_ID]-pos_x).abs() < X_DIST && (TREE_POS_Y[ENTRY_ID]-pos_y).abs() < Y_DIST && is_facing_tree  {
                                 MotionModule::change_motion(boma, Hash40::new("special_n2"), 0.0, 1.0, false, 0.0, false, false);
-                                println!("special_n2");
+                                //println!("special_n2");
                                 CHANGE_FRAME[ENTRY_ID] = true;
                             } else {
                                 MotionModule::change_motion(boma, Hash40::new("special_n2_fail"), 0.0, 1.0, false, 0.0, false, false);
-                                println!("special_n2_fail");
+                                //println!("special_n2_fail");
                                 CHANGE_FRAME[ENTRY_ID] = true;
                             }
                         } else if motion_kind != hash40("special_n") {

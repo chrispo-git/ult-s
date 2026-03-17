@@ -19,7 +19,7 @@ use std::arch::asm;
 
 pub fn install() {
     Agent::new("pacman")
-    .set_costume([120, 121, 122, 123, 124, 125, 126, 127].to_vec())
+    .set_costume(get_marked_costumes("pacman","bomberman"))
     .status(Pre, *FIGHTER_STATUS_KIND_SPECIAL_N, special_n_pre)
     .status(Pre, *FIGHTER_STATUS_KIND_SPECIAL_HI, special_hi_pre)
     .status(Pre, *FIGHTER_PACMAN_STATUS_KIND_SPECIAL_HI_END, special_hi_end_pre)
@@ -180,7 +180,7 @@ unsafe extern "C" fn main_neutralb(fighter: &mut L2CFighterCommon) -> L2CValue {
                     if KineticModule::get_kinetic_type(boma) != *FIGHTER_KINETIC_TYPE_MOTION_FALL {
                         KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_MOTION_FALL);
                     };
-                    println!("Falling!");
+                    //println!("Falling!");
                 }
                 if is_end {
                     if is_ground {

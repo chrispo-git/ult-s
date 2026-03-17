@@ -39,15 +39,15 @@ unsafe extern "C" fn superboss(fighter : &mut L2CFighterCommon) {
                 IS_SUPERBOSS[ENTRY_ID] = false;
                 ACTIVE_PARTICIPANTS.push_back(WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID));
                 DEFENDERS = VecDeque::new();
-                println!("Player {} participating", ENTRY_ID);
+                //println!("Player {} participating", ENTRY_ID);
             } else if UPDATE_COUNTER[ENTRY_ID] == (2+WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID)) {
                 if !SUPERBOSS_CHOSEN {
                     let val = smash::app::sv_math::rand(hash40("stage"), ACTIVE_PARTICIPANTS.len() as i32);
-                    println!("There are {} players involved", ACTIVE_PARTICIPANTS.len());
+                    //println!("There are {} players involved", ACTIVE_PARTICIPANTS.len());
                     if val == 0 {
                         TeamModule::set_hit_team(boma, 0);
                         TeamModule::set_team(boma, 0, true);
-                        println!("Player {} is the superboss!", ENTRY_ID);
+                        //println!("Player {} is the superboss!", ENTRY_ID);
 			            EffectModule::req_follow(boma, smash::phx::Hash40::new("sys_special_all_up"), smash::phx::Hash40::new("hip"), &NONE, &NONE, 1.25, true, 0, 0, 0, 0, 0, true, true) as u32;
                         IS_SUPERBOSS[ENTRY_ID] = true;
                         SUPERBOSS_CHOSEN = true;
@@ -56,17 +56,17 @@ unsafe extern "C" fn superboss(fighter : &mut L2CFighterCommon) {
                         TeamModule::set_hit_team(boma, 1);
                         TeamModule::set_team(boma, 1, true);
                         IS_SUPERBOSS[ENTRY_ID] = false;
-                        println!("Player {} is NOT the superboss! next one (btw the value they got was {})", ENTRY_ID, val);
+                        //println!("Player {} is NOT the superboss! next one (btw the value they got was {})", ENTRY_ID, val);
                         let next_win = ACTIVE_PARTICIPANTS.pop_front();
                         if DESIGNATED_WINNER == -1 {
                             match next_win {
-                                Some(x) => {DESIGNATED_WINNER = x; println!("Player {} will be the winner if the superboss loses", DESIGNATED_WINNER);},
-                                None => println!("Nobody left?"),
+                                Some(x) => {DESIGNATED_WINNER = x; /*println!("Player {} will be the winner if the superboss loses", DESIGNATED_WINNER);*/},
+                                None => {},//println!("Nobody left?"),
                             }
                         } else {
                             match next_win {
-                                Some(x) => {DEFENDERS.push_back(x); println!("Player {} is a backup", x);},
-                                None => println!("Nobody left?"),
+                                Some(x) => {DEFENDERS.push_back(x); /*println!("Player {} is a backup", x);*/},
+                                None => {},//println!("Nobody left?"),
                             }
                         }
                     }
@@ -74,17 +74,17 @@ unsafe extern "C" fn superboss(fighter : &mut L2CFighterCommon) {
                         TeamModule::set_hit_team(boma, 1);
                         TeamModule::set_team(boma, 1, true);
                         IS_SUPERBOSS[ENTRY_ID] = false;
-                        println!("Superboss already chosen, skipping...");
+                        //println!("Superboss already chosen, skipping...");
                         let next_win = ACTIVE_PARTICIPANTS.pop_front();
                         if DESIGNATED_WINNER == -1 {
                             match next_win {
-                                Some(x) => {DESIGNATED_WINNER = x; println!("Player {} will be the winner if the superboss loses", DESIGNATED_WINNER);},
-                                None => println!("Nobody left?"),
+                                Some(x) => {DESIGNATED_WINNER = x;}, //println!("Player {} will be the winner if the superboss loses", DESIGNATED_WINNER);},
+                                None => {},//println!("Nobody left?"),
                             }
                         } else {
                             match next_win {
-                                Some(x) => {DEFENDERS.push_back(x); println!("Player {} is a backup", x);},
-                                None => println!("Nobody left?"),
+                                Some(x) => {DEFENDERS.push_back(x);}, //println!("Player {} is a backup", x);},
+                                None => {},//println!("Nobody left?"),
                             }
                         }
                 }
@@ -99,8 +99,8 @@ unsafe extern "C" fn superboss(fighter : &mut L2CFighterCommon) {
             if WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) == DESIGNATED_WINNER && DEAD_COUNT[ENTRY_ID] > DEAD_MAX {
                 let next_up = DEFENDERS.pop_front();
                 match next_up {
-                    Some(x) => {DESIGNATED_WINNER = x;  println!("Player {} is now next up!", x)}
-                    None => println!("Nobody left?"),
+                    Some(x) => {DESIGNATED_WINNER = x;}, //println!("Player {} is now next up!", x)}
+                    None => {},//println!("Nobody left?"),
                 }
             }
         }
@@ -159,9 +159,9 @@ unsafe extern "C" fn superboss(fighter : &mut L2CFighterCommon) {
 			PostureModule::set_scale(fighter.module_accessor, scale, false);
         }
         if smash::app::sv_information::is_ready_go() && SUPERBOSS_DEAD {
-            println!("superboss died!");
+            //println!("superboss died!");
             if WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) != DESIGNATED_WINNER && DEAD_COUNT[ENTRY_ID] < DEAD_MAX {
-                println!("tough luck! time to die");
+                //println!("tough luck! time to die");
                 DEAD_COUNT[ENTRY_ID] = 0;
                 if ![*FIGHTER_STATUS_KIND_DEAD].contains(&status_kind) {
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_DEAD, false);

@@ -19,7 +19,7 @@ use super::*;
 
 pub fn install() {
 	Agent::new("falco")
-    .set_costume([120, 121, 122, 123, 124, 125, 126, 127].to_vec())
+    .set_costume(get_marked_costumes("falco","peppy"))
     .status(End, *FIGHTER_STATUS_KIND_SPECIAL_S, sideb_end)
     .install();
     Agent::new("falco_missile")

@@ -1,4 +1,4 @@
-#![feature(concat_idents)]
+
 #![feature(proc_macro_hygiene)]
 #![feature(asm)]
 #![allow(unused_imports)]
@@ -40,31 +40,14 @@ pub fn is_on_ryujinx() -> bool {
         }
     }
 }
+mod state_manager;
+mod s_macros;
 
 
 pub fn quick_validate_install() -> bool {
-    let mut passed = true;
-    //plugin checks
     let has_param_config = Path::new(
         "rom:/skyline/plugins/libparam_config.nro",
-    )
-    .is_file();
-    let has_css_redirector = Path::new(
-        "rom:/skyline/plugins/libthe_csk_collection.nro",
-    )
-    .is_file();
-    let has_arcropolis = Path::new(
-        "rom:/skyline/plugins/libarcropolis.nro",
-    )
-    .is_file();
-    let has_nro_hook = Path::new(
-        "rom:/skyline/plugins/libnro_hook.nro"
-    )
-    .is_file();
-    let has_smashline = Path::new(
-        "rom:/skyline/plugins/libsmashline_plugin.nro",
-    )
-    .is_file();
+    ).is_file();
 
     if has_param_config {
         println!("libparam_config.nro is present");
@@ -74,8 +57,12 @@ pub fn quick_validate_install() -> bool {
         } else {
             DialogOk::ok("libparam_config.nro not found! This installation is incomplete. Please run Ultimate S Setup Tool.");
         }
-        passed = false;
+        return false;
     }
+    let has_css_redirector = Path::new(
+        "rom:/skyline/plugins/libthe_csk_collection.nro",
+    )
+    .is_file();
     if has_css_redirector {
         println!("libthe_csk_collection.nro is present");
     } else {
@@ -84,8 +71,12 @@ pub fn quick_validate_install() -> bool {
         } else {
             DialogOk::ok("libthe_csk_collection.nro not found! This installation is incomplete. Please run Ultimate S Setup Tool.");
         }
-        passed = false;
+        return false;
     }
+    let has_arcropolis = Path::new(
+        "rom:/skyline/plugins/libarcropolis.nro",
+    )
+    .is_file();
     if has_arcropolis {
         println!("libarcropolis.nro is present");
     } else {
@@ -94,8 +85,12 @@ pub fn quick_validate_install() -> bool {
         } else {
             DialogOk::ok("libarcropolis.nro not found! This installation is incomplete. Please run Ultimate S Setup Tool.");
         }
-        passed = false;
+        return false;
     }
+    let has_nro_hook = Path::new(
+        "rom:/skyline/plugins/libnro_hook.nro"
+    )
+    .is_file();
     if has_nro_hook {
         println!("libnro_hook.nro is present");
     } else {
@@ -104,8 +99,12 @@ pub fn quick_validate_install() -> bool {
         } else {
             DialogOk::ok("libnro_hook.nro not found! This installation is incomplete. Please run Ultimate S Setup Tool.");
         }
-        passed = false;
+        return false;
     }
+    let has_smashline = Path::new(
+        "rom:/skyline/plugins/libsmashline_plugin.nro",
+    )
+    .is_file();
     if has_smashline {
         println!("libsmashline_plugin.nro is present");
     } else {
@@ -114,10 +113,10 @@ pub fn quick_validate_install() -> bool {
         } else {
             DialogOk::ok("libsmashline_plugin.nro not found! This installation is incomplete. Please run Ultimate S Setup Tool.");
         }
-        passed = false;
+        return false;
     }
 
-    passed
+    return true;
 }
 
 extern "C" {
@@ -179,7 +178,7 @@ unsafe fn run_scene_update(_: &skyline::hooks::InlineCtx) {
 #[skyline::hook(replace = change_version_string)]
 fn change_version_string_hook(arg: u64, string: *const c_char) {
 	let original_str = unsafe { skyline::from_c_str(string) };
-	if original_str.contains("Ver.") {
+	if original_str.contains("Ver. 13") {
         if Path::new("sd:/ultimate/mods/Ultimate S Arcropolis/").is_dir() {
             let mut s_ver = match std::fs::read_to_string("sd:/ultimate/mods/Ultimate S Arcropolis/version.txt") {
                 Ok(version_value) => version_value.trim().to_string(),
@@ -203,8 +202,6 @@ fn change_version_string_hook(arg: u64, string: *const c_char) {
 		call_original!(arg, string)
 	}
 }
-
-
 
 
 
@@ -369,9 +366,9 @@ pub extern "C" fn is_ultimate_s() {}
 #[no_mangle]
 pub extern "C" fn main() {
 
-    /*if !quick_validate_install() {
+    if !quick_validate_install() {
         return; // don't do anything else since they don't have all dependencies
-    }*/
+    }
 
     //allows online play with added chars
     unsafe { 
@@ -417,20 +414,21 @@ pub extern "C" fn main() {
 
 	
 	
+    println!("about to install scripts");
 	util::install();
+    println!("util installed");
 	common::install();
 	controls::install();
 	cpu::install();
 	
+    if Path::new("sd:/ultimate/ult-s/brave.flag").is_file() {
+        brave::install();
+        println!("brave installed");
+    }
 
 	if Path::new("sd:/ultimate/ult-s/bayonetta.flag").is_file() {
         bayonetta::install();
         println!("bayonetta installed");
-    }
-
-    if Path::new("sd:/ultimate/ult-s/brave.flag").is_file() {
-        brave::install();
-        println!("brave installed");
     }
 
     if Path::new("sd:/ultimate/ult-s/buddy.flag").is_file() {
@@ -871,7 +869,7 @@ pub extern "C" fn main() {
 	skyline::patching::Patch::in_text(0x28444cc + 0xc80 + 0x20).data(0x52800009u32);
     skyline::patching::Patch::in_text(0x28440f4 + 0xc80 + 0x20).data(0x52800009u32);
     skyline::patching::Patch::in_text(0x2844500+ 0xc80 + 0x20).nop();
-    skyline::patching::Patch::in_text(0x2844128+ 0xc80 + 0x20).nop();
+    skyline::patching::Patch::in_text(0x2844128+ 0xc80 + 0x20).nop(); 
 
     the_csk_collection_api::add_narration_characall_entry("vc_narration_characall_peppy");
     the_csk_collection_api::add_narration_characall_entry("vc_narration_characall_rayman");

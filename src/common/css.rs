@@ -3,35 +3,40 @@ use crate::util::*;
 use std::path::Path;
 use std::fs::*;
 use std::io::*;
+use std::time::Instant;
+use crate::common::lazy_warm;
 #[cfg(feature = "main_nro")]
 use skyline_web::dialog_ok::DialogOk;
 static mut IS_UNPRESSED : bool = false;
 #[skyline::hook(offset = 0x1792dc0, inline)]
 unsafe fn on_rule_selection(_: &skyline::hooks::InlineCtx) {
-    println!("We Are On Rule Select");
     if ninput::any::is_down(ninput::Buttons::R) {
-        println!("R Pressed!");
         if !is_on_ryujinx() {
             show_gamemodes();
         } else {
-            println!("Emu Mode!");
             show_gamemodes_emu();
         }
     } else {
         reset_gamemodes();
     }
 }
+static mut HAS_WARMED_UP: bool = false;
 
 #[skyline::hook(offset = 0x1a2b570)]
 unsafe fn css_main_loop(arg: *const CharaSelect) {
-    {
+    {   
+        if !HAS_WARMED_UP {
+            let start = Instant::now();
+            lazy_warm();
+            let duration = start.elapsed();
+            println!("[Ultimate S] Warm-up took: {}µs", duration.as_micros() as f32);
+            HAS_WARMED_UP = true;
+        }
         if ninput::any::is_down(ninput::Buttons::MINUS) {
             if !IS_UNPRESSED {
-                println!("Minus Pressed!");
                 if !is_on_ryujinx() {
                     show_mod_settings();
                 } else {
-                    println!("Emu Mode!");
                     show_mod_settings_emu();
                 }
             }

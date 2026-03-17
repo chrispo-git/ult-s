@@ -35,11 +35,11 @@ unsafe extern "C" fn kirby_rayman_frame(fighter: &mut L2CFighterCommon) {
             EffectModule::kill_kind(boma, Hash40::new("pikmin_antenna_damage"), true, false);
 
             if situation_kind != *SITUATION_KIND_AIR {
-                CAN_NEUTRALB[ENTRY_ID] = 0;
+                crate::transition_reset!(ENTRY_ID, can_neutralb);
             }
             if status_kind == *FIGHTER_KIRBY_STATUS_KIND_PIKMIN_SPECIAL_N {
 
-                    CAN_NEUTRALB[ENTRY_ID] = 1;
+                    crate::transition_set!(ENTRY_ID, can_neutralb);
                     if KineticModule::get_kinetic_type(boma) != *FIGHTER_KINETIC_TYPE_MOTION_AIR {
                         KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_MOTION_AIR);
                     }
@@ -60,7 +60,7 @@ unsafe extern "C" fn kirby_rayman_frame(fighter: &mut L2CFighterCommon) {
                     }
             }
         } else {
-            CAN_NEUTRALB[ENTRY_ID] = 0;
+            crate::transition_reset!(ENTRY_ID, can_neutralb);
         }
     }
 }
@@ -229,7 +229,7 @@ unsafe extern "C" fn rayman(fighter: &mut L2CFighterCommon) {
                 }
                 if GroundModule::is_wall_touch_line(boma, *GROUND_TOUCH_FLAG_SIDE as u32) {
                     StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_PASSIVE_WALL_JUMP, true);
-                    CAN_NEUTRALB[ENTRY_ID] = 1;
+                    crate::transition_set!(ENTRY_ID, can_neutralb);
                 }
                 if DO_WALLJUMP_FORCE[ENTRY_ID] {
                     let the_speed = smash::phx::Vector3f { x: 0.5, y: 0.0, z: 0.0 };
@@ -238,7 +238,7 @@ unsafe extern "C" fn rayman(fighter: &mut L2CFighterCommon) {
             };
             //Sideb
             if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_S {
-                CAN_SIDEB[ENTRY_ID] = 1;
+                crate::transition_set!(ENTRY_ID, can_sideb);
                 if motion_kind != hash40("slide_jump_fall") {
                     StatusModule::set_situation_kind(boma, smash::app::SituationKind(*SITUATION_KIND_AIR), true);
                     StatusModule::set_keep_situation_air(boma, true);
@@ -269,8 +269,8 @@ unsafe extern "C" fn rayman(fighter: &mut L2CFighterCommon) {
                 }
             }
             if situation_kind != *SITUATION_KIND_AIR {
-                CAN_SIDEB[ENTRY_ID] = 0;
-                CAN_NEUTRALB[ENTRY_ID] = 0;
+                crate::transition_reset!(ENTRY_ID, can_sideb);
+                crate::transition_reset!(ENTRY_ID, can_neutralb);
             }
             if ![hash40("slide_jump_fall"),hash40("capture_jump"),hash40("special_s"),hash40("special_air_s")].contains(&MotionModule::motion_kind(boma)) {
                 macros::STOP_SE(fighter, Hash40::new("se_pikmin_attackair_n01"));
@@ -644,12 +644,12 @@ unsafe extern "C" fn kill_pikmin(weapon: &mut L2CFighterBase) {
 
 pub fn install() {
     Agent::new("pikmin")
-    .set_costume([120, 121, 122, 123, 124, 125, 126, 127].to_vec())
+    .set_costume(get_marked_costumes("pikmin","rayman"))
         .on_line(Main, rayman)
         .install();
 
     Agent::new("pikmin_pikmin")
-    .set_costume([120, 121, 122, 123, 124, 125, 126, 127].to_vec())
+    .set_costume(get_marked_costumes("pikmin","rayman"))
         .on_line(Main, kill_pikmin)
         .install();
 }

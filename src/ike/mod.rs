@@ -1,6 +1,7 @@
 mod status;
 mod frame;
 mod acmd;
+use crate::util::*;
 
 static mut IKE_INSTALL: [i32; 8] = [0; 8];
 static mut IKE_INSTALL_TIME: i32 = 1800;

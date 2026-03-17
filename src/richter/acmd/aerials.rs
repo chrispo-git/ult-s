@@ -16,7 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("richter")
-    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .set_costume(get_marked_costumes("richter","richter"))
     .acmd("game_attackairhi", richter_uair, Priority::Low)    
     .acmd("effect_attackairhi", richter_uair_eff, Priority::Low)    
     .acmd("sound_attackairhi", richter_uair_snd, Priority::Low)    
@@ -27,7 +27,7 @@ pub fn install() {
     .install();
 
 	Agent::new("richter_whip")
-    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .set_costume(get_marked_costumes("richter","richter"))
     .acmd("effect_attackairhi", richter_uair_whip, Priority::Low)    
     .install();
 }

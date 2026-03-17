@@ -16,7 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("wario")
-    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())   
+    .set_costume(get_marked_costumes("wario","wario"))   
     .acmd("game_attacklw4", wario_dsmash, Priority::Low)    
     .acmd("effect_attacklw4", wario_dsmash_eff, Priority::Low)    
     .acmd("sound_attacklw4", wario_dsmash_snd, Priority::Low)    

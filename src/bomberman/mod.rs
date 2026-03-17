@@ -1,6 +1,7 @@
 mod status;
 mod frame;
 mod acmd;
+use crate::util::*;
 
 static mut MAKE_NEW_BOMB : [bool; 8] = [false; 8];
 static mut NEW_BOMB_X : [f32; 8] = [0.0; 8];
@@ -62,9 +63,9 @@ pub fn install() {
                 result_pf0: the_csk_collection_api::BoolType::Overwrite(true), 
                 result_pf1: the_csk_collection_api::BoolType::Overwrite(true), 
                 result_pf2: the_csk_collection_api::BoolType::Overwrite(true), 
-            color_num: the_csk_collection_api::UnsignedByteType::Overwrite(8),
-            extra_index_maps: the_csk_collection_api::UnsignedByteMap::Overwrite(HashMap::from([
-                (smash::hash40("color_start_index") /* Hash40 of color_start_index */, the_csk_collection_api::UnsignedByteType::Overwrite(120))
+            color_num: the_csk_collection_api::UnsignedByteType::Overwrite(get_costume_count("pacman","bomberman")),
+            extra_index_maps: the_csk_collection_api::UnsignedByteMap::Overwrite(HashMap::from([ 
+                (smash::hash40("color_start_index") /* Hash40 of color_start_index */, the_csk_collection_api::UnsignedByteType::Overwrite(get_lowest_marked_costume("pacman","bomberman")))
             ])),
             extra_hash_maps: the_csk_collection_api::Hash40Map::Overwrite(HashMap::from([
                     (0x1337FC912E /* Hash40 of characall_label_c00 */, the_csk_collection_api::Hash40Type::Overwrite(smash::hash40("vc_narration_characall_bomberman"))),

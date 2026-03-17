@@ -18,13 +18,13 @@ use crate::bomberman::*;
 
 pub fn install() {
     Agent::new("pacman")
-    .set_costume([120, 121, 122, 123, 124, 125, 126, 127].to_vec())
+    .set_costume(get_marked_costumes("pacman","bomberman"))
     .on_line(Exec, bomber_main_frame)
     .on_line(Main, bomberman_frame)
     .install();
 
     Agent::new("pacman_firehydrant")
-    .set_costume([120, 121, 122, 123, 124, 125, 126, 127].to_vec())
+    .set_costume(get_marked_costumes("pacman","bomberman"))
     .on_line(Main, bomb_frame)
     .install();
 }
@@ -44,7 +44,7 @@ unsafe extern "C" fn bomber_main_frame(fighter: &mut L2CFighterCommon) {
         let is_end = MotionModule::is_end(fighter.module_accessor);
         let is_near_ground = GroundModule::ray_check(fighter.module_accessor, &Vector2f{ x: PostureModule::pos_x(fighter.module_accessor), y: PostureModule::pos_y(fighter.module_accessor)}, &Vector2f{ x: 0.0, y: -1.0}, true);
         let is_kinda_near = GroundModule::ray_check(fighter.module_accessor, &Vector2f{ x: PostureModule::pos_x(fighter.module_accessor), y: PostureModule::pos_y(fighter.module_accessor)}, &Vector2f{ x: 0.0, y: -2.0}, true);
-        if is_added(boma) {
+        {
             if motion_kind == hash40("special_s") {
                 //println!("in special S, {}", frame);
                 if frame >= 47.0 {
@@ -53,8 +53,8 @@ unsafe extern "C" fn bomber_main_frame(fighter: &mut L2CFighterCommon) {
                     macros::SET_SPEED_EX(fighter, 0.0, -2.6, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
                 }
                 damage!(fighter, *MA_MSC_DAMAGE_DAMAGE_NO_REACTION, /*Type*/ *DAMAGE_NO_REACTION_MODE_ALWAYS, /*DamageThreshold*/ 0);
-                if ((frame > 26.0 && SPEED_Y[ENTRY_ID] < 0.0 && is_near_ground == 1 ) || (is_kinda_near == 1 && frame > 39.0)) {
-                    println!("special s land");
+                if ((frame > 26.0 && get_speed_y(boma) < 0.0 && is_near_ground == 1 ) || (is_kinda_near == 1 && frame > 39.0)) {
+                    //println!("special s land");
                     StatusModule::set_situation_kind(boma, smash::app::SituationKind(*SITUATION_KIND_AIR), true);
                     StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_CATCH_CUT, true);
                     StatusModule::set_keep_situation_air(boma, true);
@@ -67,7 +67,7 @@ unsafe extern "C" fn bomber_main_frame(fighter: &mut L2CFighterCommon) {
                             MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_s_dash"), -1.0, 1.0, false, 0.0, false, false);
                         } else {
                             MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_air_s_dash"), -1.0, 1.0, false, 0.0, false, false);
-                            CAN_SIDEB[ENTRY_ID] = 1;
+                            crate::transition_set!(ENTRY_ID, can_sideb);
                         }
                     } else if is_end && ![hash40("special_s_miss"), hash40("special_air_s_miss")].contains(&motion_kind){
                         if is_ground {
@@ -79,14 +79,14 @@ unsafe extern "C" fn bomber_main_frame(fighter: &mut L2CFighterCommon) {
                 }
                 if status_kind == *FIGHTER_STATUS_KIND_CATCH_PULL {
                     if ![hash40("special_s_pull"), hash40("special_air_s_pull"), hash40("special_s"), hash40("special_s_end")].contains(&motion_kind) {
-                        println!("switch to special_s");
+                        //println!("switch to special_s");
                         MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_s"), -1.0, 1.0, false, 0.0, false, false);
                     }
-                    println!("Hello! I am in catch pull status! Here is my Motion Kind {}", motion_kind);
+                    //println!("Hello! I am in catch pull status! Here is my Motion Kind {}", motion_kind);
                 }
                 if motion_kind == hash40("special_s_end") && frame > 25.0 {
                     StatusModule::set_keep_situation_air(boma, false);
-                    if situation_kind == *SITUATION_KIND_GROUND || (is_near_ground == 1 && SPEED_Y[ENTRY_ID] <= 0.0) {
+                    if situation_kind == *SITUATION_KIND_GROUND || (is_near_ground == 1 && get_speed_y(boma) <= 0.0) {
                         StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_LANDING, false);
                     }
                 }
@@ -115,7 +115,7 @@ unsafe extern "C" fn bomber_main_frame(fighter: &mut L2CFighterCommon) {
                 }
             }
             if [hash40("special_s_end")].contains(&motion_kind) {
-                if is_end || (is_near_ground == 1 && SPEED_Y[ENTRY_ID] <= 0.0 && frame > 26.0) {
+                if is_end || (is_near_ground == 1 && get_speed_y(boma) <= 0.0 && frame > 26.0) {
                     StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_FALL, false);
                 }
                 if frame >= cancel_frame {
@@ -127,10 +127,10 @@ unsafe extern "C" fn bomber_main_frame(fighter: &mut L2CFighterCommon) {
             }
             if [hash40("special_s_miss")].contains(&motion_kind) && end_frame-frame <= 3.0 {
                 StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_WAIT, false);
-                CAN_GRAB[ENTRY_ID] = 1;
+                crate::transition_set!(ENTRY_ID, can_grab);
             }
             if situation_kind != *SITUATION_KIND_AIR {
-                CAN_SIDEB[ENTRY_ID] = 0;
+                crate::transition_reset!(ENTRY_ID, can_sideb);
             }
         }
     }
@@ -147,7 +147,7 @@ unsafe extern "C" fn bomberman_frame(fighter: &mut L2CFighterCommon) {
 		let end_frame = MotionModule::end_frame(boma);
 		let cancel_frame = FighterMotionModuleImpl::get_cancel_frame(boma,smash::phx::Hash40::new_raw(MotionModule::motion_kind(boma)),false) as f32;
         let lr = PostureModule::lr(boma);
-        if is_added(boma) {
+        {
             if status_kind == *FIGHTER_STATUS_KIND_ENTRY || is_reset() {
                 let custom_hurtboxes = [
                     //["bone", x1, y1, z1, x2, y2, z2, scale, collision_part, hit height]
@@ -181,7 +181,7 @@ unsafe extern "C" fn bomberman_frame(fighter: &mut L2CFighterCommon) {
             } else {
 				if StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR {
 					let cat2 = ControlModule::get_command_flag_cat(boma, 1);
-					if (cat2 & *FIGHTER_PAD_CMD_CAT2_FLAG_FALL_JUMP) != 0 && ControlModule::get_stick_y(boma) < -0.66 && SPEED_Y[ENTRY_ID] <= 0.0 {
+					if (cat2 & *FIGHTER_PAD_CMD_CAT2_FLAG_FALL_JUMP) != 0 && ControlModule::get_stick_y(boma) < -0.66 && get_speed_y(boma) <= 0.0 {
 						WorkModule::set_flag(boma, true, *FIGHTER_STATUS_WORK_ID_FLAG_RESERVE_DIVE);
 					}
 				};
@@ -298,15 +298,15 @@ unsafe extern "C" fn bomberman_frame(fighter: &mut L2CFighterCommon) {
             WorkModule::on_flag(boma, *FIGHTER_PACMAN_INSTANCE_WORK_ID_FLAG_SPECIAL_N_REMOVE_ITEM);
             if ![*FIGHTER_STATUS_KIND_THROW_KIRBY, *FIGHTER_STATUS_KIND_CATCH_PULL, *FIGHTER_STATUS_KIND_CATCH, *FIGHTER_STATUS_KIND_SPECIAL_S, *FIGHTER_STATUS_KIND_CATCH_CUT].contains(&status_kind) {
                 if SIDEB_CATCH[ENTRY_ID] {
-                    println!("sideb catch over");
+                    //println!("sideb catch over");
                 }
                 SIDEB_CATCH[ENTRY_ID] = false;
                 FORCE_END[ENTRY_ID] = false;
-                CAN_GRAB[ENTRY_ID] = 0;
+                crate::transition_reset!(ENTRY_ID, can_grab);
             }
             if StatusModule::prev_status_kind(fighter.module_accessor, 2) == *FIGHTER_STATUS_KIND_SPECIAL_S  && StatusModule::prev_status_kind(fighter.module_accessor, 0) == *FIGHTER_STATUS_KIND_CATCH_PULL  && status_kind == *FIGHTER_STATUS_KIND_CATCH_CUT{
                 if motion_kind != hash40("special_s_end") {
-                    println!("sideb end");
+                    //println!("sideb end");
                     MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_s_end"), -1.0, 1.0, false, 0.0, false, false);
                     let opponent_id = LinkModule::get_node_object_id(boma, *LINK_NO_CAPTURE) as u32;
                     let grabber_boma = smash::app::sv_battle_object::module_accessor(opponent_id);
@@ -335,7 +335,7 @@ unsafe extern "C" fn bomb_frame(weapon: &mut L2CFighterBase) {
                 let pos = smash::phx::Vector3f { x: NEW_BOMB_X[ENTRY_ID], y: NEW_BOMB_Y[ENTRY_ID]+4.0, z: 0.0 };
                 PostureModule::set_pos(weapon.module_accessor, &pos);
                 PostureModule::init_pos(weapon.module_accessor, &pos, true, true);
-                println!("New Bombed");
+                //println!("New Bombed");
             }
             if EXPLODE_END_TIMER[ENTRY_ID] == 0 {
                 if status_kind == *WEAPON_PACMAN_FIREHYDRANT_STATUS_KIND_FLY && (situation == *SITUATION_KIND_GROUND){
@@ -343,7 +343,7 @@ unsafe extern "C" fn bomb_frame(weapon: &mut L2CFighterBase) {
                     NEW_BOMB_X[ENTRY_ID] = PostureModule::pos_x(weapon.module_accessor);
                     NEW_BOMB_Y[ENTRY_ID] = PostureModule::pos_y(weapon.module_accessor);
                     ArticleModule::generate_article(&mut *boma, *FIGHTER_PACMAN_GENERATE_ARTICLE_FIREHYDRANT, false, -1);
-                    println!("End Bombed");
+                    //println!("End Bombed");
                 }
             }
             if EXPLODE_END_TIMER[ENTRY_ID] > 0{

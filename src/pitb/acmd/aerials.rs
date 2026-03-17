@@ -16,7 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("pitb")
-    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .set_costume(get_marked_costumes("pitb","pitb"))
     .acmd("game_attackairhi", dpit_uair, Priority::Low)    
 	.acmd("effect_attackairhi", dpit_uair_eff, Priority::Low)    
 	.acmd("sound_attackairhi", dpit_uair_snd, Priority::Low)    

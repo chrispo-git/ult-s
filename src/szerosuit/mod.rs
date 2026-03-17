@@ -17,6 +17,7 @@ use super::*;
 mod status;
 mod frame;
 mod acmd;
+use crate::util::*;
 
 static mut CAN_CANCEL : [bool; 8] = [false; 8];
 static mut CAN_CANCEL_TIMER : [i32; 8] = [0; 8];

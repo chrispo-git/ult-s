@@ -16,13 +16,13 @@ use super::*;
 
 pub fn install() {
     Agent::new("kamui_ryusensya")
-    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .set_costume(get_marked_costumes("kamui","kamui"))
     .acmd("game_regular", corrin_neutralb, Priority::Low)    
     .acmd("game_shotmax", corrin_neutralb_max, Priority::Low)    
     .install();
 
 	Agent::new("kamui_waterdragon")
-    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .set_costume(get_marked_costumes("kamui","kamui"))
     .acmd("game_speciallwhit", corrin_downb, Priority::Low)    
     .acmd("game_specialairlwhit", corrin_downb, Priority::Low)    
     .acmd("game_speciallwhitturn", corrin_downb, Priority::Low)    

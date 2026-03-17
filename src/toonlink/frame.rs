@@ -16,7 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("toonlink")
-    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .set_costume(get_marked_costumes("toonlink","toonlink"))
     .on_line(Main, tink_frame)
     .install();
 }
@@ -24,7 +24,7 @@ pub fn install() {
 unsafe extern "C" fn tink_frame(fighter: &mut L2CFighterCommon) {
     unsafe {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
-		if is_default(boma) {
+		{
 			let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
 			let motion_kind = MotionModule::motion_kind(boma);
 			let frame = MotionModule::frame(boma);
@@ -45,7 +45,7 @@ unsafe extern "C" fn tink_frame(fighter: &mut L2CFighterCommon) {
 				if frame > 2.0 && frame < 12.0 && (frame as i32 % 3 == 0) {
 					macros::EFFECT(fighter, Hash40::new("sys_attack_speedline"),  Hash40::new("top"), 0, 3, 0, 90, 0, 0, 0.85, 0, 0, 0, 0, 0, 0, true);
 				};
-				if SPEED_Y[ENTRY_ID] <= 0.0 {
+				if get_speed_y(boma) <= 0.0 {
 					if (ControlModule::get_command_flag_cat(boma, 1) & *FIGHTER_PAD_CMD_CAT2_FLAG_FALL_JUMP) != 0 {
 						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL_SPECIAL, true);
 					};

@@ -18,6 +18,7 @@ use super::*;
 mod status;
 mod frame;
 mod acmd;
+use crate::util::*;
 			
 static mut STATIC_MUT : [i32; 8] = [6; 8];
 static mut SNAKE_FLAG_ATTACK_S4_COMBO_ENABLE : [bool; 8] = [false; 8];

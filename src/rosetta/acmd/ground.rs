@@ -17,7 +17,7 @@ use super::super::*;
 
 pub fn install() {
     Agent::new("rosetta")
-    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .set_costume(get_marked_costumes("rosetta","rosetta"))
     .acmd("game_attack11", rosa_jab, Priority::Low)    
     .install();
 }

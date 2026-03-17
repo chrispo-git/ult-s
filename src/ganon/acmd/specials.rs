@@ -16,7 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("ganon")
-    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .set_costume(get_marked_costumes("ganon","ganon"))
     .acmd("game_specialn", ganon_teleport, Priority::Low)    
     .acmd("effect_specialn", ganon_teleport_eff, Priority::Low)    
     .acmd("sound_specialn", ganon_teleport_snd, Priority::Low)    

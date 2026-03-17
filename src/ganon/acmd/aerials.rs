@@ -16,7 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("ganon")
-    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .set_costume(get_marked_costumes("ganon","ganon"))
     .acmd("game_attackairn", ganon_nair, Priority::Low)    
     .acmd("game_attackairf", ganon_fair, Priority::Low)    
     .acmd("game_attackairhi", ganon_uair, Priority::Low)    

@@ -17,7 +17,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("wario")
-    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .set_costume(get_marked_costumes("wario","wario"))
     .acmd("game_specialssearch", wario_sideb, Priority::Low)    
     .acmd("game_specialairssearch", wario_sideb, Priority::Low)    
     .acmd("effect_specialssearch", wario_sideb_eff, Priority::Low)    
@@ -34,7 +34,7 @@ pub fn install() {
     .install();
 	
     Agent::new("wario_coin")
-    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .set_costume(get_marked_costumes("wario","wario"))
     .acmd("game_shoot", game_shoot, Priority::Low)
     .acmd("effect_shoot", effect_shoot, Priority::Low)
     .install();

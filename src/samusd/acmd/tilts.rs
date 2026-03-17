@@ -77,7 +77,7 @@ unsafe extern "C" fn dsamus_ftilt_lw_eff(agent: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("samusd")
-    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .set_costume(get_marked_costumes("samusd","samusd"))
         .game_acmd("game_attacklw3", dsamus_dtilt, Priority::Low)
         .acmd("effect_attackhi3", dsamus_utilt_eff, Priority::Low)
         .acmd("effect_attacks3lw", dsamus_ftilt_lw_eff, Priority::Low)

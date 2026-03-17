@@ -16,7 +16,7 @@ use super::*;
 
 pub fn install() {
 	Agent::new("gekkouga")
-    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .set_costume(get_marked_costumes("gekkouga","gekkouga"))
     .acmd("game_appeallwl", gren_dtaunt, Priority::Low)    
     .acmd("game_appeallwr", gren_dtaunt, Priority::Low)    
     .acmd("effect_appeallwl", gren_dtaunt_eff, Priority::Low)    

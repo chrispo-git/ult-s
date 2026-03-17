@@ -17,7 +17,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("peach")
-    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .set_costume(get_marked_costumes("peach","peach"))
     .on_line(Main, peach_frame)
     .install();
 
@@ -32,7 +32,7 @@ unsafe extern "C" fn peach_frame(fighter: &mut L2CFighterCommon) {
         //println!("It'sa me, Mario, wahoooooooo!");
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 		let is_near_ground = GroundModule::ray_check(fighter.module_accessor, &Vector2f{ x: PostureModule::pos_x(fighter.module_accessor), y: PostureModule::pos_y(fighter.module_accessor)}, &Vector2f{ x: 0.0, y: -1.0}, true);
-        if is_default(boma) {
+        {
 			let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
 			let frame = MotionModule::frame(boma);
 			if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_N {

@@ -29,6 +29,9 @@ lazy_static = "1.4.0"
 hash40 = "1.1"
 smash_singletons = { git = "https://github.com/WuBoytH/smash_singletons.git" }
 smash2 = { package = "smash", git = "https://github.com/blu-dev/smash-rs" }
+once_cell = { version = "1.15.0", default-features = false, features = ["alloc"] }
+parking_lot = "0.12.5"
+cached = "0.54"
 
 [profile.dev]
 panic = "abort"

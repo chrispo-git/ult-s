@@ -1,6 +1,7 @@
 mod status;
 mod frame;
 mod acmd;
+use crate::util::*;
 
 use smash::lib::lua_const::*;
 

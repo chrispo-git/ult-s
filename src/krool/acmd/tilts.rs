@@ -15,7 +15,7 @@ use crate::util::*;
 use super::*;
 pub fn install() {
     Agent::new("krool")
-    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .set_costume(get_marked_costumes("krool","krool"))
     .acmd("game_attackhi3", krool_utilt, Priority::Low) 
     .install();
 }
