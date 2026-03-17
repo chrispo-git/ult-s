@@ -15,10 +15,10 @@ nnsdk = { git = "https://github.com/ultimate-research/nnsdk-rs" }
 
 [dependencies]
 skyline = { git = "https://github.com/ultimate-research/skyline-rs" }
-ninput = { git = "https://github.com/blu-dev/ninput", version = "0.1.0" }
-skyline_smash = { git = "https://github.com/blu-dev/skyline-smash.git", features = ["weak_l2cvalue"] }
-smash_script = { git = "https://github.com/blu-dev/smash-script.git", branch = "development" }
-smashline = { git = "https://github.com/blu-dev/smashline-2" }
+ninput = { path = "../ninput" }
+skyline_smash = { git = "https://github.com/ultimate-research/skyline-smash.git", features = ["weak_l2cvalue"] }
+smash_script = { git = "https://github.com/WuBoytH/smash-script.git", branch = "development" }
+smashline = { git = "https://github.com/HDR-Development/smashline" }
 skyline-web = { git = "https://github.com/skyline-rs/skyline-web.git", optional = true }
 param_config = { git = "https://github.com/csharpm7/lib_paramconfig.git"}
 the_csk_collection_api = { git = "https://github.com/Coolsonickirby/the_csk_collection_api.git"}
@@ -28,7 +28,7 @@ modular-bitfield = "0.11.2"
 lazy_static = "1.4.0"
 hash40 = "1.1"
 smash_singletons = { git = "https://github.com/WuBoytH/smash_singletons.git" }
-smash2 = { package = "smash", git = "https://github.com/blu-dev/smash-rs" }
+smash2 = { package = "smash", git = "https://github.com/WuBoytH/smash-rs" }
 once_cell = { version = "1.15.0", default-features = false, features = ["alloc"] }
 parking_lot = "0.12.5"
 cached = "0.54"
