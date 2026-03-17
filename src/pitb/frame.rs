@@ -16,7 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("pitb")
-    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .set_costume(get_marked_costumes("pitb","pitb"))
     .on_line(Main, pitoo)
     .install();
 }
@@ -32,7 +32,7 @@ unsafe extern "C" fn pitoo(fighter : &mut L2CFighterCommon) {
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
 		let frame = MotionModule::frame(boma);
 		let end_frame = MotionModule::end_frame(boma);
-		if is_default(boma) {
+		{
 			if  MotionModule::motion_kind(boma) == hash40("special_lw_break_l") || MotionModule::motion_kind(boma) == hash40("special_lw_break_r"){
 				StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_DOWN, true);
 			};
@@ -63,21 +63,21 @@ unsafe extern "C" fn pitoo(fighter : &mut L2CFighterCommon) {
 				StatusModule::change_status_request_from_script(boma, *FIGHTER_PIT_STATUS_KIND_SPECIAL_HI_RUSH, false);
 			};
 			if situation_kind != *SITUATION_KIND_AIR  || (*FIGHTER_STATUS_KIND_DAMAGE..*FIGHTER_STATUS_KIND_DAMAGE_FALL).contains(&status_kind) {
-				CAN_SIDEB[ENTRY_ID] = 0;
+				crate::transition_reset!(ENTRY_ID, can_sideb);
 			};
 			if status_kind == *FIGHTER_PIT_STATUS_KIND_SPECIAL_HI_RUSH {
-					CAN_SIDEB[ENTRY_ID] = 1;
+					crate::transition_set!(ENTRY_ID, can_sideb);
 					if MotionModule::frame(boma) > 10.0 {
 						StatusModule::change_status_request_from_script(boma, *FIGHTER_PIT_STATUS_KIND_SPECIAL_HI_RUSH_END, false);
 					};
 			};
 			if status_kind == *FIGHTER_PIT_STATUS_KIND_SPECIAL_HI_RUSH_END {
-					CAN_SIDEB[ENTRY_ID] = 1;
+					crate::transition_set!(ENTRY_ID, can_sideb);
 					reimpl_cancel_frame(fighter);
 					if end_frame - frame < 3.0 {
 						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL, true);
 					};
-					if SPEED_X[ENTRY_ID] * PostureModule::lr(boma) > 0.4 {
+					if get_speed_x(boma) * PostureModule::lr(boma) > 0.4 {
                     	let speed = smash::phx::Vector3f { x: -0.2, y: 0.0, z: 0.0 };
                     	KineticModule::add_speed(boma, &speed);
 					};

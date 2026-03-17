@@ -17,7 +17,7 @@ use crate::jack::*;
 
 pub fn install() {
 	Agent::new("jack")
-    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .set_costume(get_marked_costumes("jack","jack"))
 	.on_line(Main, joker_frame)
 	.install();
 }
@@ -30,7 +30,7 @@ unsafe extern "C" fn joker_frame(fighter: &mut L2CFighterCommon) {
 		let cat1 = ControlModule::get_command_flag_cat(boma, 0);
 		let motion_kind = MotionModule::motion_kind(boma);
 		
-		if is_default(boma) {
+		{
 			if [*FIGHTER_STATUS_KIND_DEAD, *FIGHTER_STATUS_KIND_LOSE, *FIGHTER_STATUS_KIND_WIN, *FIGHTER_STATUS_KIND_ENTRY].contains(&status_kind) || smash::app::sv_information::is_ready_go() == false{
 				BATON_TYPE[ENTRY_ID] = 2;
 			};

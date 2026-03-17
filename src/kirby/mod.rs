@@ -1,6 +1,7 @@
 mod status;
 mod frame;
 mod acmd;
+use crate::util::*;
 
 static mut DOWNB_JUMP : [bool; 8] = [false; 8];
 static mut UPB_ANGLE : [i32; 8] = [1; 8];

@@ -16,7 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("purin")
-    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .set_costume(get_marked_costumes("purin","purin"))
     .acmd("game_throwlw", puff_dthrow, Priority::Low)    
     .install();
 }

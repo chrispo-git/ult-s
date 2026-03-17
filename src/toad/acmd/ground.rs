@@ -265,7 +265,7 @@ unsafe extern "C" fn toad_dsmash(fighter: &mut L2CAgentBase) {
 			ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_MURABITO_GENERATE_ARTICLE_FIREWORK, false, 0);
 			WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_FLAG_START_SMASH_HOLD);
 		}
-		frame(fighter.lua_state_agent, 21.0);
+		frame(fighter.lua_state_agent, 25.0);
 		if macros::is_excute(fighter) {
 			macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("throw"), /*Damage*/ 6.0, /*Angle*/ 270, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 40, /*Size*/ 10.0, /*X*/ 0.0, /*Y*/ 8.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 5, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_A, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_HEAVY, /*Type*/ *ATTACK_REGION_KICK);
 			macros::ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("throw"), /*Damage*/ 6.0, /*Angle*/ 270, /*KBG*/ 100, /*FKB*/ 0, /*BKB*/ 40, /*Size*/ 10.0, /*X*/ 0.0, /*Y*/ 8.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 5, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_G, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_bury"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_HEAVY, /*Type*/ *ATTACK_REGION_KICK);
@@ -388,7 +388,7 @@ unsafe extern "C" fn toad_fsmash_bomb(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("murabito")
-    .set_costume([120, 121, 122, 123, 124, 125, 126, 127].to_vec())
+    .set_costume(get_marked_costumes("murabito","toad"))
         .game_acmd("game_attack11toad", toad_jab1, Priority::Low)
         .effect_acmd("effect_attack11toad", toad_jab1_eff, Priority::Low)
         .game_acmd("game_attack12toad", toad_jab2, Priority::Low)
@@ -412,7 +412,7 @@ pub fn install() {
         .install();
 
 	Agent::new("murabito_slingshot")
-    .set_costume([120, 121, 122, 123, 124, 125, 126, 127].to_vec())
+    .set_costume(get_marked_costumes("murabito","toad"))
         .game_acmd("game_attackairftoad", toad_usmash_coin, Priority::Low)
 		.game_acmd("game_attackairbtoad", toad_usmash_coin, Priority::Low)
 		.sound_acmd("sound_attackairftoad", toad_usmash_coin_snd, Priority::Low)
@@ -422,7 +422,7 @@ pub fn install() {
 		.install();
 
 	Agent::new("murabito_bullet")
-    .set_costume([120, 121, 122, 123, 124, 125, 126, 127].to_vec())
+    .set_costume(get_marked_costumes("murabito","toad"))
         .game_acmd("game_shootftoad", toad_usmash_coin_bullet, Priority::Low)
 		.game_acmd("game_shootbtoad", toad_usmash_coin_bullet, Priority::Low)
 		.sound_acmd("sound_shootftoad", toad_usmash_coin_bullet_snd, Priority::Low)
@@ -432,7 +432,7 @@ pub fn install() {
 		.install();
 
 	Agent::new("murabito_bowlingball")
-    .set_costume([120, 121, 122, 123, 124, 125, 126, 127].to_vec())
+    .set_costume(get_marked_costumes("murabito","toad"))
         .game_acmd("game_falltoad", toad_fsmash_bomb, Priority::Low)
 		.install();
 }

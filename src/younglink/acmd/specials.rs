@@ -16,7 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("younglink_bowarrow")
-    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .set_costume(get_marked_costumes("younglink","younglink"))
     .acmd("game_fly", yink_arrow, Priority::Low)    
     .install();
 }

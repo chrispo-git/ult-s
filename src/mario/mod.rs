@@ -1,6 +1,7 @@
 mod status;
 mod frame;
 mod acmd;
+use crate::util::*;
 
 static mut SIDEB : [bool; 8] = [false; 8];
 static mut SPIN : [bool; 8] = [false; 8];

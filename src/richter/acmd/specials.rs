@@ -16,7 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("richter")
-    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .set_costume(get_marked_costumes("richter","richter"))
     .acmd("game_specialn", richter_neutralb, Priority::Low)    
     .acmd("game_specialairn", richter_neutralb, Priority::Low)    
     .acmd("game_specials1", richter_sideb, Priority::Low)    
@@ -28,7 +28,7 @@ pub fn install() {
     .install();
 
     Agent::new("richter_axe")
-    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .set_costume(get_marked_costumes("richter","richter"))
     .acmd("game_fly", richter_axe, Priority::Low)    
     .acmd("effect_fly", richter_axe_eff, Priority::Low)    
     .install();
@@ -36,8 +36,8 @@ pub fn install() {
 
 unsafe extern "C" fn richter_neutralb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
-		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.3);
-		frame(fighter.lua_state_agent, 20.0);
+		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.5);
+		frame(fighter.lua_state_agent, 30.0);
         macros::FT_MOTION_RATE(fighter, /*FSM*/ 1);
 		frame(fighter.lua_state_agent, 31.0);
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.75);

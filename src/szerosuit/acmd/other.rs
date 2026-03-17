@@ -17,7 +17,7 @@ use super::super::*;
 
 pub fn install() {
     Agent::new("szerosuit")
-    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .set_costume(get_marked_costumes("szerosuit","szerosuit"))
     .acmd("game_catch", zss_grab, Priority::Low)    
     .acmd("sound_catch", zss_grab_snd, Priority::Low)    
     .acmd("effect_catch", zss_grab_eff, Priority::Low)    
@@ -28,7 +28,7 @@ pub fn install() {
     .install();
 
     Agent::new("szerosuit_whip")
-    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .set_costume(get_marked_costumes("szerosuit","szerosuit"))
     .acmd("effect_catchdash", effect_catchdash, Priority::Low)    
     .acmd("effect_catchturn", effect_catchturn, Priority::Low)    
     .acmd("game_catchdash", game_catchdash2, Priority::Low)    

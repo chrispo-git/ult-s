@@ -15,7 +15,7 @@ use crate::util::*;
 use super::*;
 pub fn install() {
 	Agent::new("mario")
-    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .set_costume(get_marked_costumes("mario","mario"))
     .status(Pre, *FIGHTER_STATUS_KIND_SPECIAL_LW, downb_pre)
     .status(Main, *FIGHTER_STATUS_KIND_SPECIAL_LW, downb_main)
     .install();
@@ -82,7 +82,8 @@ unsafe extern "C" fn downb_main_loop(fighter: &mut L2CFighterCommon) -> L2CValue
         }
     }
 
-    if MotionModule::trans_move_speed(fighter.module_accessor).value[1] < 0.0 
+    let speed = MotionModule::trans_move_speed(fighter.module_accessor);
+    if speed.y() < 0.0 
     && fighter.sub_transition_group_check_air_landing().get_bool() {
         WorkModule::enable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_LANDING_LIGHT);
         return 0.into();

@@ -16,7 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("trail")
-    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .set_costume(get_marked_costumes("trail","trail"))
     .acmd("game_attack11", sora_jab1, Priority::Low)    
     .acmd("game_attack12", sora_jab2, Priority::Low)    
 	.install();

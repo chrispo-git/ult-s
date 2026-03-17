@@ -16,7 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("ryu")
-    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .set_costume(get_marked_costumes("ryu","ryu"))
     .acmd("game_attackairf", ryu_fair, Priority::Low)    
     .install();
 }

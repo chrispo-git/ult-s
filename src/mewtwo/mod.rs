@@ -1,6 +1,7 @@
 mod status;
 mod frame;
 mod acmd;
+use crate::util::*;
 
 static mut ATTACK_AIR_WINDOW : [i32; 8] = [0; 8];
 static mut MAX_ATTACK_AIR_WINDOW : i32 = 15;

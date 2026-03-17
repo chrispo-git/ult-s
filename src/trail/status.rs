@@ -16,7 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("trail")
-    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .set_costume(get_marked_costumes("trail","trail"))
     .status(Init, *FIGHTER_TRAIL_STATUS_KIND_ATTACK_AIR_F, fair_init)
     .status(Init, *FIGHTER_STATUS_KIND_ATTACK_AIR, init_attack_air)
     .status(Pre, *FIGHTER_STATUS_KIND_ATTACK_AIR, pre_attack_air)
@@ -71,8 +71,8 @@ unsafe extern "C" fn init_attack_air(fighter: &mut L2CFighterCommon) -> L2CValue
                 }
                 else {
                     KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_MOTION_FALL);
-					if SPEED_Y[ENTRY_ID] > 2.5 {
-						let new_speed = SPEED_X[ENTRY_ID]*PostureModule::lr(fighter.module_accessor);
+					if get_speed_y(boma(fighter)) > 2.5 {
+						let new_speed = get_speed_x(boma(fighter))*PostureModule::lr(fighter.module_accessor);
 						macros::SET_SPEED_EX(fighter, new_speed, 3.0, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
 					};
                 }
@@ -92,8 +92,8 @@ unsafe extern "C" fn init_attack_air(fighter: &mut L2CFighterCommon) -> L2CValue
             }
             else {
                 KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_MOTION_FALL);
-				if SPEED_Y[ENTRY_ID] > 3.0 {
-					let new_speed = SPEED_X[ENTRY_ID]*PostureModule::lr(fighter.module_accessor);
+				if get_speed_y(boma(fighter)) > 3.0 {
+					let new_speed = get_speed_x(boma(fighter))*PostureModule::lr(fighter.module_accessor);
 					macros::SET_SPEED_EX(fighter, new_speed, 3.0, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
 				};
             }
@@ -133,7 +133,7 @@ unsafe extern "C" fn exec_attack_air(fighter: &mut L2CFighterCommon) -> L2CValue
 	let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 	if [hash40("attack_air_n"), 0x0d7484f6cfu64, 0x0d0383c659u64].contains(&motion_kind) {
     	if AttackModule::is_infliction(fighter.module_accessor, *COLLISION_KIND_MASK_ALL) && !WorkModule::is_flag(fighter.module_accessor, *FIGHTER_STATUS_WORK_ID_FLAG_RESERVE_DIVE) && frame > 4.0{
-			let new_speed = SPEED_X[ENTRY_ID]*PostureModule::lr(fighter.module_accessor);
+			let new_speed = get_speed_x(boma(fighter))*PostureModule::lr(fighter.module_accessor);
 			macros::SET_SPEED_EX(fighter, new_speed, 1.0, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
 		};
 		if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_TRAIL_STATUS_ATTACK_AIR_N_FLAG_CHECK_COMBO_BUTTON_ON) && WorkModule::is_flag(fighter.module_accessor, *FIGHTER_TRAIL_STATUS_ATTACK_AIR_N_FLAG_ENABLE_COMBO) && ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_ATTACK) {

@@ -85,7 +85,7 @@ unsafe extern "C" fn rayman_utilt_snd(fighter: &mut L2CAgentBase) {
 		let rand_val = smash::app::sv_math::rand(hash40("fighter"), 5);
 	    match rand_val {
             0 => macros::PLAY_SE(fighter, Hash40::new("se_pikmin_attackair_n02")),
-            _ => println!("rayman is silent"),
+            _ =>{},//println!("rayman is silent"),
         }
 	}
 }
@@ -227,14 +227,14 @@ unsafe extern "C" fn rayman_slide_utilt_snd(fighter: &mut L2CAgentBase) {
 		let rand_val = smash::app::sv_math::rand(hash40("fighter"), 5);
 	    match rand_val {
             0 => macros::PLAY_SE(fighter, Hash40::new("se_pikmin_attackair_n02")),
-            _ => println!("rayman is silent"),
+            _ =>{},//println!("rayman is silent"),
         }
 	}
 }
 
 pub fn install() {
     Agent::new("pikmin")
-    .set_costume([120, 121, 122, 123, 124, 125, 126, 127].to_vec())
+    .set_costume(get_marked_costumes("pikmin","rayman"))
         .game_acmd("game_attacks3rayman", rayman_ftilt, Priority::Low)
         .effect_acmd("effect_attacks3rayman", rayman_ftilt_eff, Priority::Low)
         .sound_acmd("sound_attacks3", rayman_ftilt_snd, Priority::Low)

@@ -17,7 +17,7 @@ use super::super::*;
 
 pub fn install() {
     Agent::new("lucina")
-    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .set_costume(get_marked_costumes("lucina","lucina"))
     .on_line(Main, lucina)
     .install();
 }
@@ -26,7 +26,7 @@ unsafe extern "C" fn lucina(fighter : &mut L2CFighterCommon) {
     unsafe {
 		let lua_state = fighter.lua_state_agent;
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);
-		if is_default(boma) {
+		{
 			let fighter_kind = smash::app::utility::get_kind(boma);
 			let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
 			let situation_kind = smash::app::lua_bind::StatusModule::situation_kind(boma);
@@ -120,7 +120,7 @@ unsafe extern "C" fn lucina(fighter : &mut L2CFighterCommon) {
 				};
 				if [hash40("special_air_lw"), hash40("special_lw")].contains(&motion_kind) {
 					if situation_kind == *SITUATION_KIND_AIR {
-						CAN_DOWNB[ENTRY_ID] = 1;
+						crate::transition_set!(ENTRY_ID, can_downb);
 					}
 					if MotionModule::frame(boma) >= 10.0 && MotionModule::frame(boma) < 11.0 {
 						if LUCINA_STANCE[ENTRY_ID] == 0 {
@@ -149,7 +149,7 @@ unsafe extern "C" fn lucina(fighter : &mut L2CFighterCommon) {
 				if LUCINA_STANCE[ENTRY_ID] == 0 {
 					
 					if BAN_SIDEB[ENTRY_ID] == true && StatusModule::situation_kind(boma) != *SITUATION_KIND_AIR{
-						CAN_SIDEB[ENTRY_ID] = 0;
+						crate::transition_reset!(ENTRY_ID, can_sideb);
 						BAN_SIDEB[ENTRY_ID] = false;
 					};
 					if [*FIGHTER_STATUS_KIND_SPECIAL_HI].contains(&status_kind) && MotionModule::frame(boma) <= 5.0 {
@@ -200,7 +200,7 @@ unsafe extern "C" fn lucina(fighter : &mut L2CFighterCommon) {
 						wrist_rot = 0.0;
 					};
 					if  StatusModule::situation_kind(boma) != *SITUATION_KIND_AIR || (*FIGHTER_STATUS_KIND_DAMAGE..*FIGHTER_STATUS_KIND_DAMAGE_FALL).contains(&status_kind){
-						CAN_DOWNB[ENTRY_ID] = 0;
+						crate::transition_reset!(ENTRY_ID, can_downb);
 					};
 					/*bone_const(boma, *FIGHTER_KIND_LUCINA, hash40("attack_air_f2"), hash40("handr"), 0.0, 40.0, 0.0, 0.0, wrist_rot, wrist_rot, 0.0, 0.0);
 					bone_const(boma, *FIGHTER_KIND_LUCINA, hash40("attack_air_f2"), hash40("handr"), 40.0, 69.0, 0.0, 0.0, wrist_rot, 0.0, 0.0, 0.0);
@@ -362,12 +362,12 @@ unsafe extern "C" fn lucina(fighter : &mut L2CFighterCommon) {
 					};
 					if  StatusModule::situation_kind(boma) != *SITUATION_KIND_AIR || (*FIGHTER_STATUS_KIND_DAMAGE..*FIGHTER_STATUS_KIND_DAMAGE_FALL).contains(&status_kind){
 						BAN_SIDEB[ENTRY_ID] = false;
-						CAN_DOWNB[ENTRY_ID] = 0;
+						crate::transition_reset!(ENTRY_ID, can_downb);
 					};
 					if BAN_SIDEB[ENTRY_ID] == true {
-							CAN_SIDEB[ENTRY_ID] = 1;
+							crate::transition_set!(ENTRY_ID, can_sideb);
 					} else {
-							CAN_SIDEB[ENTRY_ID] = 0;
+							crate::transition_reset!(ENTRY_ID, can_sideb);
 					};
 					if [*FIGHTER_STATUS_KIND_SPECIAL_S].contains(&status_kind) {
 						BAN_SIDEB[ENTRY_ID] = true;

@@ -16,7 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("richter")
-    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .set_costume(get_marked_costumes("richter","richter"))
     .on_line(Main, richter_frame)
     .install();
 
@@ -29,7 +29,7 @@ pub fn install() {
 unsafe extern "C" fn richter_frame(fighter: &mut L2CFighterCommon) {
     unsafe {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
-		if is_default(boma) {
+		{
 			let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
 			let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 			let motion_kind = MotionModule::motion_kind(boma);

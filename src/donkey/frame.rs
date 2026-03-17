@@ -18,7 +18,7 @@ use crate::donkey::*;
 
 pub fn install() {
 	Agent::new("donkey")
-    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .set_costume(get_marked_costumes("donkey","donkey"))
     .on_line(Main, dk_frame)
     .install();
 }
@@ -26,7 +26,7 @@ pub fn install() {
 unsafe extern "C" fn dk_frame(fighter: &mut L2CFighterCommon) {
     unsafe {
 		let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);   
-		if is_default(boma) {
+		{
             let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
             let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize; 
             let frame = MotionModule::frame(boma);
@@ -80,7 +80,7 @@ unsafe extern "C" fn dk_frame(fighter: &mut L2CFighterCommon) {
                     UPB_ANGLE_Y[ENTRY_ID] += ((UPB_SPEED - UPB_30_Y)/30.0)*rate;
                     UPB_ANGLE_X[ENTRY_ID] += (1.0/30.0 * (UPB_30_X))*rate;
                 }
-                println!("X:{}, Y:{}", UPB_ANGLE_X[ENTRY_ID], UPB_ANGLE_Y[ENTRY_ID]);
+                //println!("X:{}, Y:{}", UPB_ANGLE_X[ENTRY_ID], UPB_ANGLE_Y[ENTRY_ID]);
                 if UPB_TIMER[ENTRY_ID] > 35 || (UPB_TIMER[ENTRY_ID] > 5 && ControlModule::check_button_on_trriger(fighter.module_accessor, *CONTROL_PAD_BUTTON_SPECIAL)){
                     MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_hi_shoot"), 0.0, 1.0, false, 0.0, false, false);
                 }
@@ -96,13 +96,13 @@ unsafe extern "C" fn dk_frame(fighter: &mut L2CFighterCommon) {
                 let fighter_kinetic_energy_control = mem::transmute::<u64, &mut smash::app::FighterKineticEnergyController>(KineticModule::get_energy(boma, *FIGHTER_KINETIC_ENERGY_ID_CONTROL));  
                 smash::app::lua_bind::FighterKineticEnergyController::mul_x_accel_mul(fighter_kinetic_energy_control, 0.95);
                 let cat2 = ControlModule::get_command_flag_cat(boma, 1);
-                if (cat2 & *FIGHTER_PAD_CMD_CAT2_FLAG_FALL_JUMP) != 0 && stick_y < -0.66 && SPEED_Y[ENTRY_ID] <= 0.0 {
+                if (cat2 & *FIGHTER_PAD_CMD_CAT2_FLAG_FALL_JUMP) != 0 && stick_y < -0.66 && get_speed_y(boma) <= 0.0 {
                     WorkModule::set_flag(boma, true, *FIGHTER_STATUS_WORK_ID_FLAG_RESERVE_DIVE);
                 }
             }
             if [hash40("special_hi_shoot")].contains(&motion_kind) {
                 let cat2 = ControlModule::get_command_flag_cat(boma, 1);
-                if (cat2 & *FIGHTER_PAD_CMD_CAT2_FLAG_FALL_JUMP) != 0 && stick_y < -0.66 && SPEED_Y[ENTRY_ID] < 0.0 {
+                if (cat2 & *FIGHTER_PAD_CMD_CAT2_FLAG_FALL_JUMP) != 0 && stick_y < -0.66 && get_speed_y(boma) < 0.0 {
                     WorkModule::set_flag(boma, true, *FIGHTER_STATUS_WORK_ID_FLAG_RESERVE_DIVE);
                 }
                 MotionModule::set_rate(boma, 2.0);

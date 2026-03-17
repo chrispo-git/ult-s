@@ -17,7 +17,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("koopajr")
-    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .set_costume(get_marked_costumes("koopajr","koopajr"))
 	.on_line(Main, jr)
 	.install();
 }
@@ -55,9 +55,9 @@ unsafe extern "C" fn jr(fighter : &mut L2CFighterCommon) {
 					};
 				};
 				if ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_CSTICK_ON) && ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_ATTACK_RAW)  && ControlModule::get_stick_y(boma) < -0.5 {
-					CAN_DOUBLE_JUMP[ENTRY_ID] = 1;
+					crate::transition_set!(ENTRY_ID, can_double_jump);
 				} else {
-					CAN_DOUBLE_JUMP[ENTRY_ID] = 0;
+					crate::transition_reset!(ENTRY_ID, can_double_jump);
 				}
 				if situation_kind == *SITUATION_KIND_AIR && (!(*FIGHTER_STATUS_KIND_DAMAGE..*FIGHTER_STATUS_KIND_DAMAGE_FALL).contains(&status_kind) && status_kind != *FIGHTER_STATUS_KIND_FALL_SPECIAL){
 					if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP) {
@@ -68,7 +68,11 @@ unsafe extern "C" fn jr(fighter : &mut L2CFighterCommon) {
 					if ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_CSTICK_ON) && ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_ATTACK_RAW) && ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP)  && stick_y < -0.5 {
 						CHECK_FLOAT[ENTRY_ID] = CHECK_FLOAT_MAX;
 					};
-					if (CHECK_FLOAT[ENTRY_ID] >= CHECK_FLOAT_MAX || JUMPSQUAT_FLOAT[ENTRY_ID]) && FLOAT[ENTRY_ID] == 0 {
+					
+					if ((CHECK_FLOAT[ENTRY_ID] >= CHECK_FLOAT_MAX && 
+						(![*FIGHTER_KINETIC_TYPE_JUMP, *FIGHTER_KINETIC_TYPE_JUMP_AERIAL].contains(&KineticModule::get_kinetic_type(boma))
+						|| get_speed_y(boma) <= 0.0
+					))|| JUMPSQUAT_FLOAT[ENTRY_ID]) && FLOAT[ENTRY_ID] == 0 {
 						START_FLOAT[ENTRY_ID] = true;
 					};
 				};

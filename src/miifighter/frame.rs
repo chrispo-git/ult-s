@@ -93,9 +93,9 @@ unsafe extern "C" fn brawler_frame(fighter: &mut L2CFighterCommon) {
 			};
 			if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_CUSTOMIZE_SPECIAL_LW_NO) == 0 {
 				if BAN_DOWNB[ENTRY_ID] == true {
-					CAN_DOWNB[ENTRY_ID] = 1;
+					crate::transition_set!(ENTRY_ID, can_downb);
 				} else {
-					CAN_DOWNB[ENTRY_ID] = 0;
+					crate::transition_reset!(ENTRY_ID, can_downb);
 				};
 			};
 			//Dair bounce

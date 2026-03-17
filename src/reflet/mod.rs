@@ -1,12 +1,13 @@
 mod status;
 mod frame;
 mod acmd;
+use crate::util::*;
 
 //Grima Install
 static mut IS_GRIMA : [bool; 8] = [false; 8];
 static mut DMG_COUNTER : [i32; 8] = [0; 8];
 static mut DMG_COUNTER_MAX : i32 = 60;
-static mut DMG_ADD : f32 = 1.5;
+static mut DMG_ADD : f32 = 0.7;
 static mut SPECIAL_HI_CURR : [i32; 8] = [0; 8]; 
 static mut SPECIAL_N_CURR : [i32; 8] = [0; 8]; 
 static mut SPECIAL_S_CURR : [f32; 8] = [0.0; 8]; 

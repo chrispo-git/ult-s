@@ -17,7 +17,7 @@ use super::*;
 pub fn install() {
 
     Agent::new("trail_thunder")
-    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .set_costume(get_marked_costumes("trail","trail"))
     .acmd("game_fall", thundaga_1, Priority::Low)    
 	.acmd("game_fallair", thundaga_2, Priority::Low)    
 	.acmd("game_falllast", thundaga_3, Priority::Low)    

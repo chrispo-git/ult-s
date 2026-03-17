@@ -16,7 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("peach")
-    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .set_costume(get_marked_costumes("peach","peach"))
     .acmd("game_specialn", peach_neutralb, Priority::Low)    
     .acmd("game_specialairn", peach_neutralb, Priority::Low)    
     .acmd("effect_specialn", peach_neutralb_eff, Priority::Low)    

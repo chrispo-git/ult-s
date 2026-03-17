@@ -17,7 +17,7 @@ use crate::ike::*;
 
 pub fn install() {
 	Agent::new("ike")
-    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .set_costume(get_marked_costumes("ike","ike"))
 	.on_line(Main, ike)
 	.install();
 }
@@ -48,7 +48,7 @@ unsafe extern "C" fn ike(fighter : &mut L2CFighterCommon) {
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
 		let motion_kind = MotionModule::motion_kind(boma);
 		let frame = MotionModule::frame(boma);
-		if is_default(boma) {
+		{
 			if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_N {
 				MotionModule::set_rate(boma, 10.0);
 			};
