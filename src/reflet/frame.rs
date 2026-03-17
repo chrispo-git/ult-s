@@ -107,7 +107,7 @@ unsafe extern "C" fn robin(fighter : &mut L2CFighterCommon) {
 						macros::LAST_EFFECT_SET_ALPHA(fighter, 0.75);
 					} else {
 						IS_GRIMA[ENTRY_ID] = true;
-						macros::FT_ADD_DAMAGE(fighter, DMG_ADD*5.0);
+						macros::FT_ADD_DAMAGE(fighter, DMG_ADD*4.0);
 						macros::EFFECT_FOLLOW(fighter, Hash40::new("reflet_gigafire_hold"), Hash40::new("waist"), 0, 0, 0, 0, 0, 0, 0.725, true);
 						macros::LAST_EFFECT_SET_COLOR(fighter, 0.25, 0.0, 3.0);
 						macros::LAST_EFFECT_SET_ALPHA(fighter, 0.75);
@@ -194,7 +194,11 @@ unsafe extern "C" fn robin(fighter : &mut L2CFighterCommon) {
 					if ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_CSTICK_ON) && ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_ATTACK_RAW) && ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP)  && stick_y < -0.5 {
 						CHECK_FLOAT[ENTRY_ID] = CHECK_FLOAT_MAX;
 					};
-					if (CHECK_FLOAT[ENTRY_ID] >= CHECK_FLOAT_MAX || JUMPSQUAT_FLOAT[ENTRY_ID]) && FLOAT[ENTRY_ID] == 0 {
+					if ((CHECK_FLOAT[ENTRY_ID] >= CHECK_FLOAT_MAX && 
+						(![*FIGHTER_KINETIC_TYPE_JUMP, *FIGHTER_KINETIC_TYPE_JUMP_AERIAL].contains(&KineticModule::get_kinetic_type(boma))
+						|| get_speed_y(boma) <= 0.0
+					)
+					) || JUMPSQUAT_FLOAT[ENTRY_ID]) && FLOAT[ENTRY_ID] == 0 {
 						START_FLOAT[ENTRY_ID] = true;
 					};
 				};
