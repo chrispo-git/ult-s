@@ -16,7 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("chrom")
-    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .set_costume(get_marked_costumes("chrom","chrom"))
 	.on_line(Main, chrom_frame)
 	.install();
 }
@@ -24,7 +24,7 @@ pub fn install() {
 unsafe extern "C" fn chrom_frame(fighter: &mut L2CFighterCommon) {
     unsafe {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
-		if is_default(boma) {
+		{
 			let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
 			let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 			let frame = MotionModule::frame(boma);
@@ -67,10 +67,10 @@ unsafe extern "C" fn chrom_frame(fighter: &mut L2CFighterCommon) {
 					};
 			};
 			if StatusModule::situation_kind(boma) != *SITUATION_KIND_AIR {
-				CAN_SIDEB[ENTRY_ID] = 0;
+				crate::transition_reset!(ENTRY_ID, can_sideb);
 			};
 			if [hash40("special_s1"), hash40("special_air_s1")].contains(&MotionModule::motion_kind(boma)) {
-					CAN_SIDEB[ENTRY_ID] = 1;
+					crate::transition_set!(ENTRY_ID, can_sideb);
 			};
 			if hash40("attack_s3_lw") == MotionModule::motion_kind(boma) && MotionModule::frame(boma) >= 24.0 {
 				CancelModule::enable_cancel(boma);

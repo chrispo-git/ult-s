@@ -16,12 +16,12 @@ use super::*;
 
 pub fn install() {
     Agent::new("rosetta")
-    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .set_costume(get_marked_costumes("rosetta","rosetta"))
     .on_line(Main, rosa_frame)
     .install();
 
 	Agent::new("rosetta_tico")
-    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .set_costume(get_marked_costumes("rosetta","rosetta"))
     .on_line(Main, tico_frame)
     .install();
 }
@@ -29,15 +29,15 @@ pub fn install() {
 unsafe extern "C" fn rosa_frame(fighter: &mut L2CFighterCommon) {
     unsafe {
 			let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
-			if is_default(boma) {
+			{
 				let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
 				let fighter_kind = smash::app::utility::get_kind(boma);
 				let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 				let frame = MotionModule::frame(boma);
 				if IS_TICO_DEAD[ENTRY_ID] == true || COOLDOWN[ENTRY_ID] > 0{
-					CAN_DOWNB[ENTRY_ID] = 1;
+					crate::transition_set!(ENTRY_ID, can_downb);
 				} else {
-					CAN_DOWNB[ENTRY_ID] = 0;
+					crate::transition_reset!(ENTRY_ID, can_downb);
 				};
 				if smash::app::sv_information::is_ready_go() == false {
 					COOLDOWN[ENTRY_ID] = 0;

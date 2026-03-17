@@ -16,7 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("chrom")
-    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .set_costume(get_marked_costumes("chrom","chrom"))
     .acmd("game_specials1", chrom_sideb, Priority::Low)    
     .acmd("game_specialairs1", chrom_sideb, Priority::Low)    
     .acmd("game_specials1", chrom_sideb_expr, Priority::Low)    

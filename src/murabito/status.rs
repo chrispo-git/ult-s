@@ -16,7 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("murabito")
-    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .set_costume(get_marked_costumes("murabito","murabito"))
     .status(Pre, *FIGHTER_STATUS_KIND_SPECIAL_N, special_n_pre)
     .status(Pre, *FIGHTER_MURABITO_STATUS_KIND_SPECIAL_N_POCKET, special_n_p_pre)
     .status(Pre, *FIGHTER_MURABITO_STATUS_KIND_SPECIAL_N_TAKE_OUT, special_n_t_pre)
@@ -27,8 +27,8 @@ unsafe extern "C" fn special_n_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
     let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
     let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
     if !is_added(boma) {
-        if SPEED_Y[ENTRY_ID] > 2.0 {
-            let speed = smash::phx::Vector3f { x: 0.0, y: (SPEED_Y[ENTRY_ID]-2.0)*-1.0, z: 0.0 };
+        if get_speed_y(boma) > 2.0 {
+            let speed = smash::phx::Vector3f { x: 0.0, y: (get_speed_y(boma)-2.0)*-1.0, z: 0.0 };
             KineticModule::add_speed(fighter.module_accessor, &speed);
         }
         fighter.change_status(FIGHTER_MURABITO_STATUS_KIND_SPECIAL_N_SEARCH.into(), false.into());
@@ -41,8 +41,8 @@ unsafe extern "C" fn special_n_p_pre(fighter: &mut L2CFighterCommon) -> L2CValue
     let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
     let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
     if !is_added(boma) {
-        if SPEED_Y[ENTRY_ID] > 2.0 {
-            let speed = smash::phx::Vector3f { x: 0.0, y: (SPEED_Y[ENTRY_ID]-2.0)*-1.0, z: 0.0 };
+        if get_speed_y(boma) > 2.0 {
+            let speed = smash::phx::Vector3f { x: 0.0, y: (get_speed_y(boma)-2.0)*-1.0, z: 0.0 };
             KineticModule::add_speed(fighter.module_accessor, &speed);
         }
         fighter.change_status(FIGHTER_MURABITO_STATUS_KIND_SPECIAL_N_SEARCH.into(), false.into());
@@ -55,8 +55,8 @@ unsafe extern "C" fn special_n_t_pre(fighter: &mut L2CFighterCommon) -> L2CValue
     let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
     let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
     if !is_added(boma) {
-        if SPEED_Y[ENTRY_ID] > 2.0 {
-            let speed = smash::phx::Vector3f { x: 0.0, y: (SPEED_Y[ENTRY_ID]-2.0)*-1.0, z: 0.0 };
+        if get_speed_y(boma) > 2.0 {
+            let speed = smash::phx::Vector3f { x: 0.0, y: (get_speed_y(boma)-2.0)*-1.0, z: 0.0 };
             KineticModule::add_speed(fighter.module_accessor, &speed);
         }
         fighter.change_status(FIGHTER_MURABITO_STATUS_KIND_SPECIAL_N_SEARCH.into(), false.into());

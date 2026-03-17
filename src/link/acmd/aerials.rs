@@ -16,7 +16,7 @@ use super::*;
 
 pub fn install() {
 	Agent::new("link")
-    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .set_costume(get_marked_costumes("link","link"))
     .acmd("game_attackairb", link_bair, Priority::Low)    
     .acmd("game_attackairf", link_fair, Priority::Low)    
     .acmd("effect_attackairf", link_fair_eff, Priority::Low)    

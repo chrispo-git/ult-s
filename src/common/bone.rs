@@ -48,14 +48,6 @@ unsafe extern "C" fn bone_rot(fighter : &mut L2CFighterCommon) {
 		//Dark Samus Fair angle down
 		bone_const(boma, *FIGHTER_KIND_SAMUSD, hash40("attack_air_f"), hash40("rot"), 0.0, 47.0, 22.5, 22.5, 0.0, 0.0, 0.0, 0.0);
 		bone_const(boma, *FIGHTER_KIND_SAMUSD, hash40("attack_air_f"), hash40("rot"), 47.0, 59.0, 22.5, 0.0, 0.0, 0.0, 0.0, 0.0);
-		
-		/*
-		//Dsamus Dair reverse
-		bone_const(boma, *FIGHTER_KIND_SAMUSD, hash40("attack_air_lw"), hash40("rot"), 0.0, 31.0, 0.0, 0.0, 180.0, 180.0, 0.0, 0.0);
-		bone_const(boma, *FIGHTER_KIND_SAMUSD, hash40("attack_air_lw"), hash40("rot"), 31.0, 60.0, 0.0, 0.0, 180.0, 0.0, 0.0, 0.0);
-		bone_const(boma, *FIGHTER_KIND_SAMUSD, hash40("landing_air_lw"), hash40("rot"), 0.0, 15.0, 0.0, 0.0, 180.0, 180.0, 0.0, 0.0);
-		bone_const(boma, *FIGHTER_KIND_SAMUSD, hash40("landing_air_lw"), hash40("rot"), 15.0, 59.0, 0.0, 0.0, 180.0, 0.0, 0.0, 0.0);
-		*/
 		 
 		//MiiGunner bair angle up
 		bone_const(boma, *FIGHTER_KIND_MIIGUNNER, hash40("attack_air_b"), hash40("rot"), 0.0, 24.0, 10.0, 10.0, 0.0, 0.0, 0.0, 0.0);
@@ -81,9 +73,6 @@ unsafe extern "C" fn bone_rot(fighter : &mut L2CFighterCommon) {
 		bone_const(boma, *FIGHTER_KIND_MASTER, hash40("special_air_s_front"), hash40("footr"), 0.0, 180.0, 0.0, 0.0, 0.0, 0.0, 55.0, 55.0);
 		bone_const(boma, *FIGHTER_KIND_MASTER, hash40("special_air_s_front_dash"), hash40("footl"), 0.0, 180.0, 0.0, 0.0, 0.0, 0.0, 55.0, 55.0);
 		bone_const(boma, *FIGHTER_KIND_MASTER, hash40("special_air_s_front_dash"), hash40("footr"), 0.0, 180.0, 0.0, 0.0, 0.0, 0.0, 55.0, 55.0);
-		
-		//Falco 
-		bone_const(boma, *FIGHTER_KIND_FALCO, hash40("throw_hi"), hash40("handr"), 13.0, 37.0, 0.0, 0.0, stick_x*20.0 -15.0, stick_x*20.0 -15.0, 0.0, 0.0);
 		
 		//Snake Fsmash angle up
 		bone_const(boma, *FIGHTER_KIND_SNAKE, hash40("attack_s4_s"), hash40("handr"), 21.0, 25.0, 0.0, -30.0, 0.0, 0.0, 0.0, 0.0);

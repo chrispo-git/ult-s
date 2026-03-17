@@ -18,7 +18,7 @@ use smash::phx::Vector2f;
 
 pub fn install() {
     Agent::new("wario_coin")
-    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .set_costume(get_marked_costumes("wario","wario"))
         .status(Pre, WEAPON_WARIO_COIN_STATUS_KIND_SHOOT, shoot_pre)
         .status(Init, WEAPON_WARIO_COIN_STATUS_KIND_SHOOT, shoot_init)
         .status(Main, WEAPON_WARIO_COIN_STATUS_KIND_SHOOT, shoot_main)
@@ -26,11 +26,11 @@ pub fn install() {
         .status(End, WEAPON_WARIO_COIN_STATUS_KIND_SHOOT, shoot_end)
         .install();
     Agent::new("wario_counter")
-    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .set_costume(get_marked_costumes("wario","wario"))
         .status(Main, WEAPON_WARIO_COUNTER_STATUS_KIND_APPEAR, counter_main)
         .install();
     Agent::new("wario")
-    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .set_costume(get_marked_costumes("wario","wario"))
         .status(Pre, *FIGHTER_STATUS_KIND_SPECIAL_LW, downb_pre)
         .status(Main, *FIGHTER_STATUS_KIND_SPECIAL_LW, downb_main)
         .status(End, *FIGHTER_STATUS_KIND_SPECIAL_LW, downb_end)
@@ -148,7 +148,7 @@ unsafe extern "C" fn counter_main(weapon: &mut L2CWeaponCommon) -> L2CValue {
             ModelModule::set_joint_rotate(weapon.module_accessor, Hash40::new("pacmanapple"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});    
         }
 
-        println!("Coin Count: {}", coin_count);
+        //println!("Coin Count: {}", coin_count);
         let tens = (coin_count / 10) as i32;
         let ones = (coin_count % 10) as i32;
         

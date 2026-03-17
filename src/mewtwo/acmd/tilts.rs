@@ -15,7 +15,7 @@ use crate::util::*;
 use super::*;
 pub fn install() {
     Agent::new("mewtwo")
-    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .set_costume(get_marked_costumes("mewtwo","mewtwo"))
     .acmd("game_attacks3", m2_ftilt, Priority::Low)  
     .acmd("game_attacks3hi", m2_ftilt, Priority::Low)  
     .acmd("game_attacks3lw", m2_ftilt, Priority::Low)  

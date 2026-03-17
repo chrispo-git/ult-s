@@ -16,7 +16,7 @@ use super::*;
 
 pub fn install() {
 	Agent::new("daisy")
-    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .set_costume(get_marked_costumes("daisy","daisy"))
     .acmd("game_speciallw", daisy_downb, Priority::Low)    
     .acmd("effect_speciallw", daisy_downb_eff, Priority::Low)    
     .acmd("game_specialhistart", daisy_upb, Priority::Low)    

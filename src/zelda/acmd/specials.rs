@@ -16,7 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("zelda_dein_s")
-    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .set_costume(get_marked_costumes("zelda","zelda"))
     .acmd("game_move", zelda_dins_fire, Priority::Low)    
     .install();
 }

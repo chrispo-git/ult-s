@@ -9,6 +9,7 @@ use smash::phx::*;
 use smash::lib::{L2CValue, L2CAgent};
 use std::{fs, path::Path};
 use smash::phx::Vector2f;
+use once_cell::sync::Lazy;
 use crate::util::*;
 static mut STALE_MAX : f32 = 1.0;
 static mut STALE_TIMER_MAX : i32 = 480;
@@ -18,152 +19,185 @@ static mut PERFECT_PIVOT: [bool; 8] = [false; 8];
 
 static HOLD_BUFFER_LIMIT : i32 = 20; //Max frames for hold buffer
 
+static HAS_NESS_FLAG: Lazy<bool> = Lazy::new(|| Path::new("sd:/ultimate/ult-s/ness.flag").exists());
+static HAS_LUCAS_FLAG: Lazy<bool> = Lazy::new(|| Path::new("sd:/ultimate/ult-s/lucas.flag").exists());
+static HAS_MEWTWO_FLAG: Lazy<bool> = Lazy::new(|| Path::new("sd:/ultimate/ult-s/mewtwo.flag").exists());
+static HAS_TRAIL_FLAG: Lazy<bool> = Lazy::new(|| Path::new("sd:/ultimate/ult-s/trail.flag").exists());
+
+static BUTTONS_LIST: Lazy<Vec<i32>> = Lazy::new(|| {
+    vec![
+        *CONTROL_PAD_BUTTON_ATTACK,
+        *CONTROL_PAD_BUTTON_JUMP,
+        *CONTROL_PAD_BUTTON_CATCH,
+        *CONTROL_PAD_BUTTON_GUARD,
+        *CONTROL_PAD_BUTTON_SMASH,
+        *CONTROL_PAD_BUTTON_SPECIAL,
+        *CONTROL_PAD_BUTTON_CSTICK_ON,
+        *CONTROL_PAD_BUTTON_JUMP_MINI,
+        *CONTROL_PAD_BUTTON_ATTACK_RAW,
+        *CONTROL_PAD_BUTTON_SPECIAL_RAW,
+        *CONTROL_PAD_BUTTON_SPECIAL_RAW2
+    ]
+});
+
+pub unsafe fn lazy_warm() {
+	Lazy::force(&HAS_NESS_FLAG);
+    Lazy::force(&HAS_LUCAS_FLAG);
+    Lazy::force(&HAS_MEWTWO_FLAG);
+    Lazy::force(&HAS_TRAIL_FLAG);
+    Lazy::force(&BUTTONS_LIST);
+}
 //Perfect Pivot
-unsafe extern "C" fn perfectpivot(fighter : &mut L2CFighterCommon) {
+pub unsafe fn perfectpivot(fighter : &mut L2CFighterCommon, status_kind : i32, ENTRY_ID : usize) {
     unsafe {
 		if !is_mechanics_enabled() || is_gamemode("rivals".to_string()) {
 			return;
 		}
-        let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);  
-		let mut stickx = ControlModule::get_stick_x(boma);		
-		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
-		let lr = PostureModule::lr(boma);
-		stickx = stickx * lr;
-		let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-        if [*FIGHTER_STATUS_KIND_DASH, *FIGHTER_STATUS_KIND_TURN_DASH].contains(&status_kind) {
-			if MotionModule::frame(boma) <= 4.0 && MotionModule::frame(boma) > 2.0 {
-				CAN_DASH[ENTRY_ID] = 1;
-				CAN_TURNDASH[ENTRY_ID] = 1;
-				if stickx <= -0.5 {
-					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_TURN, true);
-				};
-			} else {
-				CAN_DASH[ENTRY_ID] = 0;
-				CAN_TURNDASH[ENTRY_ID] = 0;
-			};
-		} else {
-			CAN_DASH[ENTRY_ID] = 0;
-			CAN_TURNDASH[ENTRY_ID] = 0;
-		};
 		if status_kind == *FIGHTER_STATUS_KIND_TURN {
-			JostleModule::set_status(boma, false);
+			JostleModule::set_status(fighter.module_accessor, false);
 		};
+        if !crate::is_in!(status_kind, *FIGHTER_STATUS_KIND_DASH, *FIGHTER_STATUS_KIND_TURN_DASH) {
+            crate::transition_reset!(ENTRY_ID, can_dash);
+            crate::transition_reset!(ENTRY_ID, can_turndash);
+            return;
+        }
+        let frame = MotionModule::frame(fighter.module_accessor) as i32;
+        if (3..5).contains(&frame) {
+			crate::transition_set!(ENTRY_ID, can_dash);
+			crate::transition_set!(ENTRY_ID, can_turndash);
+		    let lr = PostureModule::lr(fighter.module_accessor);
+            let stick_x = ControlModule::get_stick_x(fighter.module_accessor) * lr;	
+            if stick_x <= -0.5 {
+                StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_TURN, true);
+            };
+        } else {
+            crate::transition_reset!(ENTRY_ID, can_dash);
+            crate::transition_reset!(ENTRY_ID, can_turndash);
+        };
     };
 }
 
 //Moonwalk
-unsafe extern "C" fn moonwalk(fighter : &mut L2CFighterCommon) {
+pub unsafe fn moonwalk(fighter : &mut L2CFighterCommon, status_kind : i32, ENTRY_ID : usize) {
     unsafe {
 		if !is_mechanics_enabled() && !is_gamemode("rivals".to_string()) {
 			return;
 		}
-        let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);  
-		let mut stickx = ControlModule::get_stick_x(boma);		
-		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
-		let lr = PostureModule::lr(boma);
+        if !crate::is_in!(status_kind, *FIGHTER_STATUS_KIND_DASH, *FIGHTER_STATUS_KIND_TURN_DASH) {
+            return;
+        }
+		let lr = PostureModule::lr(fighter.module_accessor);
+		let mut stick_x = ControlModule::get_stick_x(fighter.module_accessor) * lr;	
+        if stick_x >= -0.2 {	
+            return;
+        }
         let walk_accel_add = WorkModule::get_param_float(fighter.module_accessor, hash40("walk_accel_add"), 0);
         let walk_accel_mul = WorkModule::get_param_float(fighter.module_accessor, hash40("walk_accel_mul"), 0);
         let walk_speed_max = WorkModule::get_param_float(fighter.module_accessor, hash40("walk_speed_max"), 0);
         let max_moonwalk = walk_speed_max * 1.8;
-		stickx = stickx * lr;
         let mw_modifier = 2.0;
-		let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-        if [*FIGHTER_STATUS_KIND_DASH, *FIGHTER_STATUS_KIND_TURN_DASH].contains(&status_kind){
-			if stickx < -0.2 {
-                let moonwalk_speed = (stickx*walk_accel_mul - walk_accel_add)*mw_modifier;
-                //println!("Moonwalk stuff! {} speed, {} mw change, {} mw max",  (get_speed_x(boma)*lr), moonwalk_speed, max_moonwalk);
-                if (get_speed_x(boma)*lr)+moonwalk_speed > -max_moonwalk {
-                    let speed = smash::phx::Vector3f { x: moonwalk_speed, y: 0.0, z: 0.0 };
-                    KineticModule::add_speed(boma, &speed);
-                } else {
-                    let current_back = (get_speed_x(boma)*lr);
-                    let speed = smash::phx::Vector3f { x:-(current_back+max_moonwalk), y: 0.0, z: 0.0 };
-                    KineticModule::add_speed(boma, &speed);
-                }
-            }
-		};
+        let moonwalk_speed = (stick_x*walk_accel_mul - walk_accel_add)*mw_modifier;
+        let speed_x = get_speed_x(boma(fighter))*lr;
+        if (speed_x)+moonwalk_speed > -max_moonwalk {
+            let speed = smash::phx::Vector3f { x: moonwalk_speed, y: 0.0, z: 0.0 };
+            KineticModule::add_speed(fighter.module_accessor, &speed);
+        } else {
+            let current_back = speed_x;
+            let speed = smash::phx::Vector3f { x:-(current_back+max_moonwalk), y: 0.0, z: 0.0 };
+            KineticModule::add_speed(fighter.module_accessor, &speed);
+        }
     };
 }
 //JC Grab
-unsafe extern "C" fn jc_grab(fighter : &mut L2CFighterCommon) {
+pub unsafe fn jc_grab(fighter : &mut L2CFighterCommon, status_kind : i32, ENTRY_ID : usize) {
     unsafe {
 		if !is_mechanics_enabled() || is_gamemode("rivals".to_string()) {
 			return;
 		}
-        let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);  
-		let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
-        if [*FIGHTER_STATUS_KIND_JUMP_SQUAT].contains(&status_kind) && StatusModule::situation_kind(boma) == *SITUATION_KIND_GROUND{
-            if JC_GRAB_LOCKOUT[ENTRY_ID] == 0 && ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_CATCH) {
-                JC_GRAB_LOCKOUT[ENTRY_ID] = MAX_LOCKOUT;
-                GroundModule::attach_ground(fighter.module_accessor, true);
-                GroundModule::set_attach_ground(fighter.module_accessor, true);
-                StatusModule::set_situation_kind(boma, smash::app::SituationKind(*SITUATION_KIND_GROUND), true);
-                StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_CATCH, true);
-            };
-		};
+        if status_kind != *FIGHTER_STATUS_KIND_JUMP_SQUAT {
+            return;
+        }
+        if StatusModule::situation_kind(fighter.module_accessor) != *SITUATION_KIND_GROUND {
+            return;
+        }
+        if ControlModule::check_button_off(fighter.module_accessor, *CONTROL_PAD_BUTTON_CATCH) {
+            return;
+        }
+        if JC_GRAB_LOCKOUT[ENTRY_ID] == 0{
+            JC_GRAB_LOCKOUT[ENTRY_ID] = MAX_LOCKOUT;
+            GroundModule::attach_ground(fighter.module_accessor, true);
+            GroundModule::set_attach_ground(fighter.module_accessor, true);
+            StatusModule::set_situation_kind(fighter.module_accessor, smash::app::SituationKind(*SITUATION_KIND_GROUND), true);
+            StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_CATCH, true);
+        };
     };
 }
 
 //DJC
-unsafe extern "C" fn djc(fighter : &mut L2CFighterCommon) {
+pub unsafe fn djc(fighter : &mut L2CFighterCommon, status_kind : i32) {
     unsafe {
 		if !is_mechanics_enabled() {
 			return;
 		}
-        let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);    
-		let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-		let fighter_kind = smash::app::utility::get_kind(boma);
-		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
-        //println!("Is Tap Jump? {}", is_tap_jump);
-		if ([*FIGHTER_KIND_NESS].contains(&fighter_kind) && Path::new("sd:/ultimate/ult-s/ness.flag").is_file() ) ||
-            ([*FIGHTER_KIND_LUCAS].contains(&fighter_kind) && Path::new("sd:/ultimate/ult-s/lucas.flag").is_file() ) ||
-            ([*FIGHTER_KIND_MEWTWO].contains(&fighter_kind) && Path::new("sd:/ultimate/ult-s/mewtwo.flag").is_file() )
-            {
-			if [*FIGHTER_KINETIC_TYPE_JUMP_AERIAL_MOTION_2ND, *FIGHTER_KINETIC_TYPE_JUMP_AERIAL_MOTION, *FIGHTER_KINETIC_TYPE_JUMP_AERIAL].contains(&KineticModule::get_kinetic_type(boma)) {
-                if ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_JUMP) && [*FIGHTER_TRAIL_STATUS_KIND_ATTACK_AIR_N, *FIGHTER_STATUS_KIND_ATTACK_AIR, *FIGHTER_STATUS_KIND_AIR_LASSO].contains(&status_kind) {
-					if is_tap_djc(boma) {
-                        KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_MOTION_FALL);
-                    }
+        let kinetic_type = KineticModule::get_kinetic_type(fighter.module_accessor);
+        if  !crate::is_in!(status_kind, *FIGHTER_TRAIL_STATUS_KIND_ATTACK_AIR_N, *FIGHTER_STATUS_KIND_ATTACK_AIR, *FIGHTER_STATUS_KIND_AIR_LASSO) ||
+            !crate::is_in!(kinetic_type, *FIGHTER_KINETIC_TYPE_JUMP_AERIAL_MOTION_2ND, *FIGHTER_KINETIC_TYPE_JUMP_AERIAL_MOTION, *FIGHTER_KINETIC_TYPE_JUMP_AERIAL)
+        {
+            return;
+        }
+		let fighter_kind = smash::app::utility::get_kind(boma(fighter));
+        if !crate::is_in!(fighter_kind, *FIGHTER_KIND_NESS, *FIGHTER_KIND_LUCAS, *FIGHTER_KIND_MEWTWO, *FIGHTER_KIND_TRAIL) {
+            return;
+        }
+        if 
+            (fighter_kind == *FIGHTER_KIND_NESS && !*HAS_NESS_FLAG) ||
+            (fighter_kind == *FIGHTER_KIND_LUCAS && !*HAS_LUCAS_FLAG) ||
+            (fighter_kind == *FIGHTER_KIND_MEWTWO && !*HAS_MEWTWO_FLAG) ||
+            (fighter_kind == *FIGHTER_KIND_TRAIL && !*HAS_TRAIL_FLAG)
+        {
+            return;
+        }
+        if fighter_kind == *FIGHTER_KIND_TRAIL && ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_JUMP) {
+            return;
+        }
+        if crate::is_in!(fighter_kind, *FIGHTER_KIND_NESS, *FIGHTER_KIND_LUCAS, *FIGHTER_KIND_MEWTWO) {
+            if ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_JUMP) {
+				if kinetic_type == *FIGHTER_KINETIC_TYPE_JUMP_AERIAL {
+					KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_JUMP_AERIAL_MOTION);
 				};
-				if KineticModule::get_kinetic_type(boma) == *FIGHTER_KINETIC_TYPE_JUMP_AERIAL {
-					KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_JUMP_AERIAL_MOTION);
-				};
-			};
-		};
-		if [*FIGHTER_KIND_TRAIL].contains(&fighter_kind) && Path::new("sd:/ultimate/ult-s/trail.flag").is_file() {
-			if [*FIGHTER_KINETIC_TYPE_JUMP_AERIAL_MOTION_2ND, *FIGHTER_KINETIC_TYPE_JUMP_AERIAL_MOTION, *FIGHTER_KINETIC_TYPE_JUMP_AERIAL].contains(&KineticModule::get_kinetic_type(boma)) {
-				if ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_JUMP) && [*FIGHTER_TRAIL_STATUS_KIND_ATTACK_AIR_N, *FIGHTER_STATUS_KIND_ATTACK_AIR, *FIGHTER_STATUS_KIND_AIR_LASSO].contains(&status_kind) {
-					if is_tap_djc(boma) {
-                        KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_MOTION_FALL);
-                        if SPEED_Y[ENTRY_ID] > 2.5 {
-                            let new_speed = SPEED_X[ENTRY_ID]*PostureModule::lr(fighter.module_accessor);
-                            macros::SET_SPEED_EX(fighter, new_speed, 3.0, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
-                        };
-                    }
-				};
-			};
-		};
+                return;
+            }
+            if !is_tap_djc(boma(fighter)) {
+                return;
+            }
+            KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_MOTION_FALL);
+        } else {
+            if !is_tap_djc(boma(fighter)) {
+                return;
+            }
+            KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_MOTION_FALL);
+            if get_speed_y(boma(fighter)) > 2.5 {
+                let new_speed = get_speed_x(boma(fighter))*PostureModule::lr(fighter.module_accessor);
+                macros::SET_SPEED_EX(fighter, new_speed, 3.0, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+            };
+        }
     };
 }
 
-unsafe extern "C" fn hold_buffer_killer(fighter : &mut L2CFighterCommon) {
+pub unsafe fn hold_buffer_killer(fighter : &mut L2CFighterCommon, status_kind : i32) {
     unsafe {
-        let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);  
-		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
-        let buttons_list = [
-            *CONTROL_PAD_BUTTON_ATTACK,
-            *CONTROL_PAD_BUTTON_JUMP,
-            *CONTROL_PAD_BUTTON_CATCH,
-            *CONTROL_PAD_BUTTON_GUARD,
-            *CONTROL_PAD_BUTTON_SMASH,
-            *CONTROL_PAD_BUTTON_SPECIAL,
-            *CONTROL_PAD_BUTTON_CSTICK_ON,
-            *CONTROL_PAD_BUTTON_JUMP_MINI,
-            *CONTROL_PAD_BUTTON_ATTACK_RAW,
-            *CONTROL_PAD_BUTTON_SPECIAL_RAW,
-            *CONTROL_PAD_BUTTON_SPECIAL_RAW2
-        ];
+        if crate::is_in!(status_kind, *FIGHTER_STATUS_KIND_GUARD, *FIGHTER_STATUS_KIND_GUARD_ON, *FIGHTER_STATUS_KIND_GUARD_DAMAGE, *FIGHTER_STATUS_KIND_GUARD_OFF, *FIGHTER_STATUS_KIND_JUMP_SQUAT) {
+            return;
+        }
+        if StatusModule::prev_status_kind(boma(fighter), 0) == *FIGHTER_STATUS_KIND_JUMP_SQUAT {
+            return;
+        }
+        if  ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_APPEAL_S_L) || 
+            ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_APPEAL_S_R) ||
+            ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_APPEAL_HI) ||
+            ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_APPEAL_LW) {
+                return;
+        }
         let mut hold_buffer_lim = HOLD_BUFFER_LIMIT;
         let precede = WorkModule::get_param_int(fighter.module_accessor, hash40("common"), hash40("precede"));
         if IS_SMALL_HOLD_BUFFER {
@@ -175,68 +209,65 @@ unsafe extern "C" fn hold_buffer_killer(fighter : &mut L2CFighterCommon) {
             hold_buffer_lim *= 2;
         }
         //If time since you've pressed the button exceeds hold buffer limit, kills the input
-        for i in buttons_list {
-                if ControlModule::get_trigger_count(fighter.module_accessor, i as u8) > hold_buffer_lim && ControlModule::check_button_on(boma, i) 
-                && ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_APPEAL_HI) && ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_APPEAL_LW) 
-                && !(ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_ATTACK) && ItemModule::is_have_item(boma, 0))
-                && !(ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_CATCH) && ItemModule::is_have_item(boma, 0))
-                && ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_APPEAL_S_L) && ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_APPEAL_S_R) //So taunts dont tpose
-                && ![*FIGHTER_STATUS_KIND_GUARD, *FIGHTER_STATUS_KIND_GUARD_ON, *FIGHTER_STATUS_KIND_GUARD_DAMAGE, *FIGHTER_STATUS_KIND_GUARD_OFF, *FIGHTER_STATUS_KIND_JUMP_SQUAT].contains(&status_kind){ //Ignores shield and js
+        for i in BUTTONS_LIST.iter() {
+                if ControlModule::get_trigger_count(fighter.module_accessor, *i as u8) > hold_buffer_lim && ControlModule::check_button_on(fighter.module_accessor, *i) 
+                && !(ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_ATTACK) && ItemModule::is_have_item(fighter.module_accessor, 0))
+                && !(ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_CATCH) && ItemModule::is_have_item(fighter.module_accessor, 0))
+                {
                     ControlModule::reset_trigger(fighter.module_accessor);
                     ControlModule::clear_command(fighter.module_accessor, true);
-                    //ControlModule::clear_command_one(fighter.module_accessor, *FIGHTER_PAD_COMMAND_CATEGORY1, *FIGHTER_PAD_CMD_CAT1_ESCAPE_F);
                 }
         }
     };
 }
 
 //Dash changes
-unsafe extern "C" fn dash(fighter : &mut L2CFighterCommon) {
+pub unsafe fn dash(fighter : &mut L2CFighterCommon, status_kind : i32) {
     unsafe {
 		if !is_mechanics_enabled() && !is_gamemode("rivals".to_string())  {
 			return;
 		}
-        let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);  
-		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
-		if [*FIGHTER_STATUS_KIND_DASH, *FIGHTER_STATUS_KIND_TURN_DASH].contains(&status_kind) && get_to_run_flag(boma) {
-			if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_GUARD) && ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_ATTACK) {
-					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_GUARD_ON, true);
+        if !crate::is_in!(status_kind, *FIGHTER_STATUS_KIND_DASH, *FIGHTER_STATUS_KIND_TURN_DASH, 
+            *FIGHTER_STATUS_KIND_RUN, *FIGHTER_STATUS_KIND_RUN_BRAKE, *FIGHTER_STATUS_KIND_TURN_RUN, 
+            *FIGHTER_STATUS_KIND_TURN_RUN_BRAKE) {
+            return;
+        }
+		if crate::is_in!(status_kind, *FIGHTER_STATUS_KIND_DASH, *FIGHTER_STATUS_KIND_TURN_DASH) && get_to_run_flag(boma(fighter)) {
+			if  ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_GUARD) && 
+                ControlModule::check_button_off(fighter.module_accessor, *CONTROL_PAD_BUTTON_ATTACK) {
+					StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_GUARD_ON, true);
 			};
 		};
-		if [*FIGHTER_STATUS_KIND_DASH, *FIGHTER_STATUS_KIND_TURN_DASH, *FIGHTER_STATUS_KIND_RUN, *FIGHTER_STATUS_KIND_RUN_BRAKE, *FIGHTER_STATUS_KIND_TURN_RUN, *FIGHTER_STATUS_KIND_TURN_RUN_BRAKE].contains(&status_kind) {
-            if GroundModule::is_passable_ground(fighter.module_accessor) {
-                if ControlModule::get_stick_y(boma) <= -0.6875 && ControlModule::get_flick_y(boma) >= 5 && ControlModule::get_flick_y(boma) < 20 {
-                    StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_PASS, true);
-                };
+		if GroundModule::is_passable_ground(fighter.module_accessor) {
+            let flick_y = ControlModule::get_flick_y(fighter.module_accessor);
+            if ControlModule::get_stick_y(fighter.module_accessor) <= -0.6875 && flick_y >= 5 && flick_y < 20 {
+                StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_PASS, true);
+                return;
+            };
+        }
+        let mut is_taunt_pressed = false;
+        for i in [*CONTROL_PAD_BUTTON_APPEAL_S_L, *CONTROL_PAD_BUTTON_APPEAL_HI, *CONTROL_PAD_BUTTON_APPEAL_LW, *CONTROL_PAD_BUTTON_APPEAL_S_R] {
+            if ControlModule::check_button_on_trriger(fighter.module_accessor, i) {
+                is_taunt_pressed = true;
+                break;
             }
-            let mut is_taunt_pressed = false;
-            for i in [*CONTROL_PAD_BUTTON_APPEAL_S_L, *CONTROL_PAD_BUTTON_APPEAL_HI, *CONTROL_PAD_BUTTON_APPEAL_LW, *CONTROL_PAD_BUTTON_APPEAL_S_R] {
-                if ControlModule::check_button_on_trriger(boma, i) {
-                    is_taunt_pressed = true;
-                }
-            }
-            if is_taunt_pressed {
-                StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_APPEAL, false);
-            }
+        }
+        if is_taunt_pressed {
+            StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_APPEAL, false);
         }
     };
 }
 //Parry Cancellable into a dash
-unsafe extern "C" fn parrycanceldash(fighter : &mut L2CFighterCommon) {
+pub unsafe fn parrycanceldash(fighter : &mut L2CFighterCommon, status_kind : i32, motion_kind : u64) {
     unsafe {
 		if !is_mechanics_enabled() {
 			return;
 		}
-        let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);  
-		let mut stickx = ControlModule::get_stick_x(boma);		
-		let mut lr = PostureModule::lr(boma);
-		stickx = stickx * lr;
-		let cat1 = ControlModule::get_command_flag_cat(boma, 0);
-        if MotionModule::motion_kind(boma) == hash40("just_shield_off") {
+        if motion_kind == hash40("just_shield_off") {
+		    let cat1 = ControlModule::get_command_flag_cat(fighter.module_accessor, 0);
 			if (cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_DASH) != 0 {
-				StopModule::end_stop(boma);
-				StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_DASH, true);
-				//println!("Parry Cancel Dash!");
+				StopModule::end_stop(fighter.module_accessor);
+				StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_DASH, true);
 			};
 		};
     };
@@ -368,15 +399,15 @@ fn nro_hook(info: &skyline::nro::NroInfo) {
     }
 }
 
+pub unsafe fn opff(fighter : &mut L2CFighterCommon, status_kind : i32, motion_kind : u64, ENTRY_ID : usize) {
+    perfectpivot(fighter, status_kind, ENTRY_ID);
+    parrycanceldash(fighter, status_kind, motion_kind);
+    dash(fighter, status_kind);
+    djc(fighter, status_kind);
+    hold_buffer_killer(fighter, status_kind);
+    moonwalk(fighter, status_kind, ENTRY_ID);
+    jc_grab(fighter, status_kind, ENTRY_ID);
+}
 pub fn install() {
-    Agent::new("fighter")
-	.on_line(Main, perfectpivot)
-	.on_line(Main, parrycanceldash)
-	.on_line(Main, dash)
-	.on_line(Main, djc)
-	.on_line(Main, hold_buffer_killer)
-    .on_line(Main, moonwalk)
-    .on_line(Main, jc_grab)
-	.install();
     skyline::nro::add_hook(nro_hook);
 }

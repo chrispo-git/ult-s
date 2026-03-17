@@ -16,13 +16,13 @@ use super::*;
 
 pub fn install() {
     Agent::new("ryu")
-    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .set_costume(get_marked_costumes("ryu","ryu"))
     .acmd("game_specialn", ryu_shinsu_hadou, Priority::Low)    
     .acmd("game_specialairn", ryu_shinsu_hadou_air, Priority::Low)    
     .install();
 
 	Agent::new("ryu_shinkuhadoken")
-    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .set_costume(get_marked_costumes("ryu","ryu"))
     .acmd("game_move", ryu_shinsu, Priority::Low)    
     .acmd("effect_move", ryu_shinsue, Priority::Low)    
     .install();

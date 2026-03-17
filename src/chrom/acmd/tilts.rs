@@ -16,7 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("chrom")
-    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .set_costume(get_marked_costumes("chrom","chrom"))
     .acmd("game_attacks3hi", chrom_ftilt_hi, Priority::Low)    
     .acmd("game_attacks3lw", chrom_ftilt_lw, Priority::Low)    
     .acmd("game_attacks3", chrom_ftilt_s, Priority::Low)    

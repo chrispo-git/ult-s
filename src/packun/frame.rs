@@ -16,12 +16,12 @@ use super::*;
 
 pub fn install() {
     Agent::new("packun")
-    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .set_costume(get_marked_costumes("packun","packun"))
     .on_line(Main, plant_frame)
     .install();
 
 	Agent::new("packun_poisonbreath")
-    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .set_costume(get_marked_costumes("packun","packun"))
     .on_line(Main, poison_frame)
     .install();
 }
@@ -29,7 +29,7 @@ pub fn install() {
 unsafe extern "C" fn plant_frame(fighter: &mut L2CFighterCommon) {
     unsafe {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
-		if is_default(boma) {
+		{
 			let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
 			let motion_kind = MotionModule::motion_kind(boma);
 			let frame = MotionModule::frame(boma);

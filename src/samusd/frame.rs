@@ -34,7 +34,7 @@ pub(crate) unsafe fn bone_const(boma: &mut smash::app::BattleObjectModuleAccesso
 unsafe extern "C" fn samusd_frame(fighter: &mut L2CFighterCommon) {
     unsafe {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
-		if is_default(boma) {
+		{
 			let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
 			let motion_kind = MotionModule::motion_kind(boma);
 			let frame = MotionModule::frame(boma);
@@ -48,7 +48,7 @@ unsafe extern "C" fn samusd_frame(fighter: &mut L2CFighterCommon) {
 				IS_HOLD[ENTRY_ID] = false;
 				COOLDOWN[ENTRY_ID] = 0;
 				IS_ALLOWED[ENTRY_ID] = true;
-				CAN_DOWNB[ENTRY_ID] = 0;
+				crate::transition_reset!(ENTRY_ID, can_downb);
 			};
 			if IS_HOLD[ENTRY_ID] == true && ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_SPECIAL) {
 				IS_HOLD[ENTRY_ID] = false;
@@ -92,9 +92,9 @@ unsafe extern "C" fn samusd_frame(fighter: &mut L2CFighterCommon) {
 					IS_ALLOWED[ENTRY_ID] = true;
 			};
 			if  IS_ALLOWED[ENTRY_ID] == false {
-				CAN_DOWNB[ENTRY_ID] = 1;
+				crate::transition_set!(ENTRY_ID, can_downb);
 			} else {
-				CAN_DOWNB[ENTRY_ID] = 0;
+				crate::transition_reset!(ENTRY_ID, can_downb);
 			};
 			if status_kind == *FIGHTER_SAMUS_STATUS_KIND_SPECIAL_AIR_LW || status_kind == *FIGHTER_SAMUS_STATUS_KIND_SPECIAL_GROUND_LW {
 				if MotionModule::frame(boma) >= 18.0 && MotionModule::frame(boma) <= 20.0 {
@@ -210,12 +210,12 @@ unsafe extern "C" fn missile_frame(weapon: &mut L2CFighterBase) {
 
 pub fn install() {
     Agent::new("samusd")
-    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .set_costume(get_marked_costumes("samusd","samusd"))
 		.on_line(Main, samusd_frame)
 		.install();
 
 	Agent::new("samusd_missile")
-    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .set_costume(get_marked_costumes("samusd","samusd"))
 		.on_line(Main, missile_frame)
 		.install();
 }

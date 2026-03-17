@@ -16,7 +16,7 @@ use crate::lucario::*;
 
 pub fn install() {
 	Agent::new("lucario")
-    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .set_costume(get_marked_costumes("lucario","lucario"))
     .on_line(Main, lucario)
     .install();
 }
@@ -37,7 +37,7 @@ unsafe extern "C" fn lucario(fighter : &mut L2CFighterCommon) {
 						KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_MOTION);
 					};
 				} else {
-					CAN_DOWNB[ENTRY_ID] = 1;
+					crate::transition_set!(ENTRY_ID, can_downb);
 					if frame < 29.0 {
 						if KineticModule::get_kinetic_type(boma) != *FIGHTER_KINETIC_TYPE_MOTION_AIR{
 							KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_MOTION_AIR);
@@ -51,7 +51,7 @@ unsafe extern "C" fn lucario(fighter : &mut L2CFighterCommon) {
 				smash::app::lua_bind::FighterKineticEnergyMotion::set_speed_mul(fighter_kinetic_energy_motion, 0.5);
 			};
 			if StatusModule::situation_kind(boma) != *SITUATION_KIND_AIR {
-				CAN_DOWNB[ENTRY_ID] = 0;
+				crate::transition_reset!(ENTRY_ID, can_downb);
 			}
 			if (cancel_frame - frame < 1.0 && cancel_frame != 0.0) || ![*FIGHTER_STATUS_KIND_ATTACK, *FIGHTER_STATUS_KIND_ATTACK_AIR, *FIGHTER_STATUS_KIND_ATTACK_LW3, *FIGHTER_STATUS_KIND_ATTACK_LW4, *FIGHTER_STATUS_KIND_ATTACK_S3, *FIGHTER_STATUS_KIND_ATTACK_S4, *FIGHTER_STATUS_KIND_ATTACK_HI3, *FIGHTER_STATUS_KIND_ATTACK_HI4, *FIGHTER_STATUS_KIND_SPECIAL_LW].contains(&status_kind) {
 				HAS_DOWNB[ENTRY_ID] = false;

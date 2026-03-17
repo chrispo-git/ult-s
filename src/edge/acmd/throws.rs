@@ -15,7 +15,7 @@ use crate::util::*;
 use super::*;
 pub fn install() {
     Agent::new("edge")
-    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .set_costume(get_marked_costumes("edge","edge"))
     .acmd("game_throwb", seph_bthrow, Priority::Low)    
     .acmd("game_throwhi", seph_uthrow, Priority::Low)    
     .acmd("game_throwlw", seph_dthrow, Priority::Low)    

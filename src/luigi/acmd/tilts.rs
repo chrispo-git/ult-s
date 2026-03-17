@@ -16,7 +16,7 @@ use super::*;
 
 pub fn install() {
 	Agent::new("luigi")
-    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .set_costume(get_marked_costumes("luigi","luigi"))
     .acmd("game_attacklw3", luigi_dtilt, Priority::Low)    
     .install();
 }

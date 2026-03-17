@@ -16,7 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("link")
-    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .set_costume(get_marked_costumes("link","link"))
     .acmd("game_throwf", link_fthrow, Priority::Low)    
     .acmd("effect_throwf", link_fthrow_eff, Priority::Low)    
     .acmd("sound_throwf", link_fthrow_snd, Priority::Low)    

@@ -18,7 +18,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("falco")
-    .set_costume([120, 121, 122, 123, 124, 125, 126, 127].to_vec())
+    .set_costume(get_marked_costumes("falco","peppy"))
     .acmd("game_throwf", peppy_fthrow, Priority::Low)    
     .acmd("effect_throwf", peppy_fthrow_eff, Priority::Low)    
     .acmd("sound_throwf", peppy_fthrow_snd, Priority::Low)    

@@ -1,6 +1,7 @@
 mod status;
 mod frame;
 mod acmd;
+use crate::util::*;
 
 static mut COUNTER_IS : [bool; 8] = [false; 8];
 static mut BAN_DOWNB : [bool; 8] = [false; 8];

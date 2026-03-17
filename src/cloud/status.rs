@@ -16,7 +16,7 @@ use super::*;
 
 pub fn install() {
 	Agent::new("cloud")
-    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .set_costume(get_marked_costumes("cloud","cloud"))
     .status(Pre, *FIGHTER_STATUS_KIND_SPECIAL_LW, special_lw_pre)
     .install();
 }

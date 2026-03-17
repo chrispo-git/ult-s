@@ -17,7 +17,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("ken")
-    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .set_costume(get_marked_costumes("ken","ken"))
 	.on_line(Main, supers)
 	.install();
 }
@@ -41,7 +41,7 @@ unsafe extern "C" fn supers(fighter : &mut L2CFighterCommon) {
 		let frame = MotionModule::frame(boma);
 		let cancel_frame = FighterMotionModuleImpl::get_cancel_frame(boma,smash::phx::Hash40::new_raw(MotionModule::motion_kind(boma)),false) as f32;
 		let mut ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-		if is_default(boma) {
+		{
 			let meter_half = KEN_MAX_METER as f32 * 0.5;
 			KEN_FX_TIMER[ENTRY_ID] += 1;
 			if smash::app::smashball::is_training_mode() == true {

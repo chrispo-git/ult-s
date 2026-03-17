@@ -10,29 +10,23 @@ use smash::lib::{L2CValue, L2CAgent};
 use smash::phx::Vector2f;
 use crate::util::*;
 
-unsafe extern "C" fn turbo(fighter : &mut L2CFighterCommon) {
+pub unsafe fn opff(fighter : &mut L2CFighterCommon, status_kind : i32) {
     unsafe {
         if !is_gamemode("turbo".to_string()) {
             return;
         }
-		let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
-        let status_kind = StatusModule::status_kind(boma);
-		let situation_kind = StatusModule::situation_kind(boma);
-        if [*FIGHTER_STATUS_KIND_CATCH_ATTACK].contains(&status_kind) {
+        if status_kind == *FIGHTER_STATUS_KIND_CATCH_ATTACK{
             return;
         }
-        if AttackModule::is_infliction_status(fighter.module_accessor, *COLLISION_KIND_MASK_HIT) {
-            CancelModule::enable_cancel(boma);
-            if situation_kind == *SITUATION_KIND_GROUND {
-                fighter.sub_wait_ground_check_common(false.into());
-            } else {
-                fighter.sub_air_check_fall_common();
-            }
+		let situation_kind = StatusModule::situation_kind(fighter.module_accessor);
+        if !AttackModule::is_infliction_status(fighter.module_accessor, *COLLISION_KIND_MASK_HIT) {
+            return;
+        }
+        CancelModule::enable_cancel(fighter.module_accessor);
+        if situation_kind == *SITUATION_KIND_GROUND {
+            fighter.sub_wait_ground_check_common(false.into());
+        } else {
+            fighter.sub_air_check_fall_common();
         }
     };
-}
-pub fn install() {
-    Agent::new("fighter")
-	.on_line(Main, turbo)
-	.install();
 }

@@ -16,7 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("sonic")
-    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .set_costume(get_marked_costumes("sonic","sonic"))
     .acmd("effect_specialsstart", sonic_sideb_eff, Priority::Low)    
     .acmd("sound_specialsstart", sonic_sideb_snd, Priority::Low)    
     .acmd("game_specialsstart", sonic_sideb, Priority::Low)    

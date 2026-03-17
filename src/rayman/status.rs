@@ -243,8 +243,8 @@ unsafe extern "C" fn main_final(fighter: &mut L2CFighterCommon) -> L2CValue {
             if y_add < 0.0 && Y[ENTRY_ID] < Y_MAX*-1.0 {
                 y_add = 0.0;
             };
-            println!("x{}, y{}", X[ENTRY_ID], Y[ENTRY_ID]);
-            println!("x_add{}, y_add{}", x_add, y_add);
+            //println!("x{}, y{}", X[ENTRY_ID], Y[ENTRY_ID]);
+            //println!("x_add{}, y_add{}", x_add, y_add);
             let speed = smash::phx::Vector3f { x: x_add, y: y_add, z: 0.0 };
             KineticModule::add_speed(fighter.module_accessor, &speed);
             X[ENTRY_ID] += x_add;
@@ -506,7 +506,7 @@ unsafe extern "C" fn downb_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
 
 pub fn install() {
     Agent::new("pikmin")
-    .set_costume([120, 121, 122, 123, 124, 125, 126, 127].to_vec())
+    .set_costume(get_marked_costumes("pikmin","rayman"))
         .status(Main, *FIGHTER_STATUS_KIND_CATCH_PULL, main_catch_pull)
         .status(Init, *FIGHTER_STATUS_KIND_CATCH_PULL, catch_pull_init)
         .status(Exit, *FIGHTER_STATUS_KIND_CATCH_PULL, catch_pull_exit)
@@ -531,7 +531,4 @@ pub fn install() {
         .status(Pre, *FIGHTER_STATUS_KIND_SPECIAL_LW, downb_pre)
         .install();
 
-    /*Agent::new("kirby")
-        .status(Pre, *FIGHTER_KIRBY_STATUS_KIND_PIKMIN_SPECIAL_N, kirby_copy_pre)
-        .install();*/
 }

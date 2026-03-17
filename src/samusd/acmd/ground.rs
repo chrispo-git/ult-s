@@ -238,7 +238,7 @@ unsafe extern "C" fn dsamus_dsmash_expr(fighter: &mut L2CAgentBase) {
 
 pub fn install() {
     Agent::new("samusd")
-    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .set_costume(get_marked_costumes("samusd","samusd"))
         .game_acmd("game_attackdash", dsamus_da, Priority::Low)
 		.effect_acmd("effect_attackdash", dsamus_da_eff, Priority::Low)
 		.sound_acmd("sound_attackdash", dsamus_da_snd, Priority::Low)

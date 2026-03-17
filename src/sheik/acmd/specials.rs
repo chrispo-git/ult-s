@@ -16,13 +16,13 @@ use super::*;
 
 pub fn install() {
     Agent::new("sheik")
-    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .set_costume(get_marked_costumes("sheik","sheik"))
     .acmd("game_speciallwattack", sheik_bf, Priority::Low)    
     .acmd("game_speciallwattackreturn", sheik_bfback, Priority::Low)    
     .install();
 
     Agent::new("sheik_needle")
-    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .set_costume(get_marked_costumes("sheik","sheik"))
     .acmd("game_move", sheik_needles, Priority::Low)    
     .install();
 }

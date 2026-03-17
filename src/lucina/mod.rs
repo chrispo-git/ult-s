@@ -18,6 +18,7 @@ use super::*;
 mod status;
 mod frame;
 mod acmd;
+use crate::util::*;
 
 static mut LUCINA_STANCE : [i32; 8] = [0; 8];
 static mut DOWNB_TIMER : [i32; 8] = [1; 8];

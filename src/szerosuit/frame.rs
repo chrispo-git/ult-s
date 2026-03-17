@@ -17,7 +17,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("szerosuit")
-    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .set_costume(get_marked_costumes("szerosuit","szerosuit"))
     .on_line(Main, zss)
     .install();
 }
@@ -25,7 +25,7 @@ pub fn install() {
 unsafe extern "C" fn zss(fighter : &mut L2CFighterCommon) {
     unsafe {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);  
-		if is_default(boma) {
+		{
 			let fighter_kind = smash::app::utility::get_kind(boma);
 			let lr = PostureModule::lr(boma);
 			let stick_x = ControlModule::get_stick_x(boma)* lr;		

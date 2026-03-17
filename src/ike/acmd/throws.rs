@@ -17,7 +17,7 @@ use crate::ike::*;
 
 pub fn install() {
     Agent::new("ike")
-    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .set_costume(get_marked_costumes("ike","ike"))
     .acmd("game_throwlw", ike_dthrow, Priority::Low)    
     .acmd("game_throwhi", ike_uthrow, Priority::Low)    
     .acmd("game_throwb", ike_bthrow, Priority::Low)    
