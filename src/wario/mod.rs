@@ -31,7 +31,7 @@ pub fn install() {
 	status::install();
 	acmd::install();
 
-	param_config::update_float_2(*FIGHTER_KIND_WARIO, get_marked_costumes("wario","wario"), (smash::hash40("air_accel_x_mul"), 0, 0.11));
-	param_config::update_float_2(*FIGHTER_KIND_WARIO, get_marked_costumes("wario","wario"), (smash::hash40("weight"), 0, 104.0));
+	param_config::update_float_2(*FIGHTER_KIND_WARIO, get_marked_costumes("wario","wario").into_iter().map(|x| x as i32).collect(), (smash::hash40("air_accel_x_mul"), 0, 0.11));
+	param_config::update_float_2(*FIGHTER_KIND_WARIO, get_marked_costumes("wario","wario").into_iter().map(|x| x as i32).collect(), (smash::hash40("weight"), 0, 104.0));
 
 }

@@ -47,7 +47,7 @@ pub fn install() {
 	status::install();
 	acmd::install();
 
-	param_config::update_float_2(-*FIGHTER_KIND_SAMUS, get_marked_costumes("samus","samus"), (smash::hash40("param_cshot"), smash::hash40("min_speed"), 2.5));
-	param_config::update_float_2(*FIGHTER_KIND_SAMUS, get_marked_costumes("samus","samus"), (smash::hash40("jump_speed_x_mul"), 0, 0.9));
+	param_config::update_float_2(-*FIGHTER_KIND_SAMUS, get_marked_costumes("samus","samus").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_cshot"), smash::hash40("min_speed"), 2.5));
+	param_config::update_float_2(*FIGHTER_KIND_SAMUS, get_marked_costumes("samus","samus").into_iter().map(|x| x as i32).collect(), (smash::hash40("jump_speed_x_mul"), 0, 0.9));
 
 }

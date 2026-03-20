@@ -20,10 +20,10 @@ pub fn install() {
 	status::install();
 	acmd::install();
 
-	param_config::update_float_2(*FIGHTER_KIND_IKE, get_marked_costumes("ike","ike"), (smash::hash40("dash_speed"), 0, 1.87));
-	param_config::update_float_2(*FIGHTER_KIND_IKE, get_marked_costumes("ike","ike"), (smash::hash40("run_speed_max"), 0, 1.6));
-	param_config::update_float_2(*FIGHTER_KIND_IKE, get_marked_costumes("ike","ike"), (smash::hash40("landing_attack_air_frame_n"), 0, 10.0));
-	param_config::update_float_2(*FIGHTER_KIND_IKE, get_marked_costumes("ike","ike"), (smash::hash40("landing_attack_air_frame_f"), 0, 11.0));
+	param_config::update_float_2(*FIGHTER_KIND_IKE, get_marked_costumes("ike","ike").into_iter().map(|x| x as i32).collect(), (smash::hash40("dash_speed"), 0, 1.87));
+	param_config::update_float_2(*FIGHTER_KIND_IKE, get_marked_costumes("ike","ike").into_iter().map(|x| x as i32).collect(), (smash::hash40("run_speed_max"), 0, 1.6));
+	param_config::update_float_2(*FIGHTER_KIND_IKE, get_marked_costumes("ike","ike").into_iter().map(|x| x as i32).collect(), (smash::hash40("landing_attack_air_frame_n"), 0, 10.0));
+	param_config::update_float_2(*FIGHTER_KIND_IKE, get_marked_costumes("ike","ike").into_iter().map(|x| x as i32).collect(), (smash::hash40("landing_attack_air_frame_f"), 0, 11.0));
 
 }
 

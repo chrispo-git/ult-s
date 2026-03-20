@@ -49,23 +49,23 @@ pub fn install() {
 	status::install();
 	acmd::install();
 
-	param_config::update_int_2(*FIGHTER_KIND_JACK, get_marked_costumes("jack","jack"), (smash::hash40("escape_num_max"), smash::hash40("reflector_radius_size"), 10));
-	param_config::update_float_2(*FIGHTER_KIND_JACK, get_marked_costumes("jack","jack"), (smash::hash40("param_special_lw"), smash::hash40("counter_attack_power_mul"), 1.4));
-	param_config::update_float_2(*FIGHTER_KIND_JACK, get_marked_costumes("jack","jack"), (smash::hash40("param_special_lw"), smash::hash40("reflector_attack_power_mul"), 1.4));
-	param_config::update_float_2(*FIGHTER_KIND_JACK, get_marked_costumes("jack","jack"), (smash::hash40("param_special_lw"), smash::hash40("guard_rebel_gauge"), 11.943));
-	param_config::update_float_2(*FIGHTER_KIND_JACK, get_marked_costumes("jack","jack"), (smash::hash40("param_special_lw"), smash::hash40("rebel_gauge_add"), 0.00925));
-	param_config::update_float_2(*FIGHTER_KIND_JACK, get_marked_costumes("jack","jack"), (smash::hash40("param_special_lw"), smash::hash40("shield_radius_size"), 8.0));
-	param_config::update_float_2(*FIGHTER_KIND_JACK, get_marked_costumes("jack","jack"), (smash::hash40("param_special_lw"), smash::hash40("reflector_radius_size"), 9.0));
-	param_config::update_float_2(*FIGHTER_KIND_JACK, get_marked_costumes("jack","jack"), (smash::hash40("param_private"), smash::hash40("rebel_gauge_damage_add"), 1.1));
-	param_config::update_float_2(*FIGHTER_KIND_JACK, get_marked_costumes("jack","jack"), (smash::hash40("param_private"), smash::hash40("rebel_gauge_add"), 0.0));
-	param_config::update_float_2(*FIGHTER_KIND_JACK, get_marked_costumes("jack","jack"), (smash::hash40("ground_brake"), 0, 0.09));
-	param_config::update_float_2(*FIGHTER_KIND_JACK, get_marked_costumes("jack","jack"), (smash::hash40("dash_speed"), 0, 2.17));
-	param_config::update_float_2(*FIGHTER_KIND_JACK, get_marked_costumes("jack","jack"), (smash::hash40("run_speed_max"), 0, 2.0));
-	param_config::update_float_2(*FIGHTER_KIND_JACK, get_marked_costumes("jack","jack"), (smash::hash40("jump_speed_x_mul"), 0, 1.0));
-	param_config::update_float_2(*FIGHTER_KIND_JACK, get_marked_costumes("jack","jack"), (smash::hash40("air_accel_x_mul"), 0, 0.06));
-	param_config::update_float_2(*FIGHTER_KIND_JACK, get_marked_costumes("jack","jack"), (smash::hash40("landing_attack_air_frame_b"), 0, 11.0));
-	param_config::update_float_2(*FIGHTER_KIND_JACK, get_marked_costumes("jack","jack"), (smash::hash40("air_speed_x_stable"), 0, 1.175));
-	param_config::update_float_2(*FIGHTER_KIND_JACK, get_marked_costumes("jack","jack"), (smash::hash40("air_speed_y_stable"), 0, 1.73));
-	param_config::update_float_2(*FIGHTER_KIND_JACK, get_marked_costumes("jack","jack"), (smash::hash40("dive_speed_y"), 0, 3.287));
+	param_config::update_int_2(*FIGHTER_KIND_JACK, get_marked_costumes("jack","jack").into_iter().map(|x| x as i32).collect(), (smash::hash40("escape_num_max"), smash::hash40("reflector_radius_size"), 10));
+	param_config::update_float_2(*FIGHTER_KIND_JACK, get_marked_costumes("jack","jack").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_special_lw"), smash::hash40("counter_attack_power_mul"), 1.4));
+	param_config::update_float_2(*FIGHTER_KIND_JACK, get_marked_costumes("jack","jack").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_special_lw"), smash::hash40("reflector_attack_power_mul"), 1.4));
+	param_config::update_float_2(*FIGHTER_KIND_JACK, get_marked_costumes("jack","jack").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_special_lw"), smash::hash40("guard_rebel_gauge"), 11.943));
+	param_config::update_float_2(*FIGHTER_KIND_JACK, get_marked_costumes("jack","jack").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_special_lw"), smash::hash40("rebel_gauge_add"), 0.00925));
+	param_config::update_float_2(*FIGHTER_KIND_JACK, get_marked_costumes("jack","jack").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_special_lw"), smash::hash40("shield_radius_size"), 8.0));
+	param_config::update_float_2(*FIGHTER_KIND_JACK, get_marked_costumes("jack","jack").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_special_lw"), smash::hash40("reflector_radius_size"), 9.0));
+	param_config::update_float_2(*FIGHTER_KIND_JACK, get_marked_costumes("jack","jack").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_private"), smash::hash40("rebel_gauge_damage_add"), 1.1));
+	param_config::update_float_2(*FIGHTER_KIND_JACK, get_marked_costumes("jack","jack").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_private"), smash::hash40("rebel_gauge_add"), 0.0));
+	param_config::update_float_2(*FIGHTER_KIND_JACK, get_marked_costumes("jack","jack").into_iter().map(|x| x as i32).collect(), (smash::hash40("ground_brake"), 0, 0.09));
+	param_config::update_float_2(*FIGHTER_KIND_JACK, get_marked_costumes("jack","jack").into_iter().map(|x| x as i32).collect(), (smash::hash40("dash_speed"), 0, 2.17));
+	param_config::update_float_2(*FIGHTER_KIND_JACK, get_marked_costumes("jack","jack").into_iter().map(|x| x as i32).collect(), (smash::hash40("run_speed_max"), 0, 2.0));
+	param_config::update_float_2(*FIGHTER_KIND_JACK, get_marked_costumes("jack","jack").into_iter().map(|x| x as i32).collect(), (smash::hash40("jump_speed_x_mul"), 0, 1.0));
+	param_config::update_float_2(*FIGHTER_KIND_JACK, get_marked_costumes("jack","jack").into_iter().map(|x| x as i32).collect(), (smash::hash40("air_accel_x_mul"), 0, 0.06));
+	param_config::update_float_2(*FIGHTER_KIND_JACK, get_marked_costumes("jack","jack").into_iter().map(|x| x as i32).collect(), (smash::hash40("landing_attack_air_frame_b"), 0, 11.0));
+	param_config::update_float_2(*FIGHTER_KIND_JACK, get_marked_costumes("jack","jack").into_iter().map(|x| x as i32).collect(), (smash::hash40("air_speed_x_stable"), 0, 1.175));
+	param_config::update_float_2(*FIGHTER_KIND_JACK, get_marked_costumes("jack","jack").into_iter().map(|x| x as i32).collect(), (smash::hash40("air_speed_y_stable"), 0, 1.73));
+	param_config::update_float_2(*FIGHTER_KIND_JACK, get_marked_costumes("jack","jack").into_iter().map(|x| x as i32).collect(), (smash::hash40("dive_speed_y"), 0, 3.287));
 
 }

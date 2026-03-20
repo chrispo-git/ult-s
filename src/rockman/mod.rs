@@ -14,7 +14,7 @@ pub fn install() {
 	status::install();
 	acmd::install();
 
-	param_config::update_float_2(*FIGHTER_KIND_ROCKMAN, get_marked_costumes("rockman","rockman"), (smash::hash40("landing_attack_air_frame_n"), 0, 11.0));
-	param_config::update_float_2(*FIGHTER_KIND_ROCKMAN, get_marked_costumes("rockman","rockman"), (smash::hash40("landing_attack_air_frame_b"), 0, 10.0));
+	param_config::update_float_2(*FIGHTER_KIND_ROCKMAN, get_marked_costumes("rockman","rockman").into_iter().map(|x| x as i32).collect(), (smash::hash40("landing_attack_air_frame_n"), 0, 11.0));
+	param_config::update_float_2(*FIGHTER_KIND_ROCKMAN, get_marked_costumes("rockman","rockman").into_iter().map(|x| x as i32).collect(), (smash::hash40("landing_attack_air_frame_b"), 0, 10.0));
 
 }

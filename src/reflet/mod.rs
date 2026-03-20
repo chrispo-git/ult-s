@@ -39,6 +39,6 @@ pub fn install() {
 	status::install();
 	acmd::install();
 
-	param_config::update_float_2(*FIGHTER_KIND_REFLET, get_marked_costumes("reflet","reflet"), (smash::hash40("run_speed_max"), 0, 1.4));
+	param_config::update_float_2(*FIGHTER_KIND_REFLET, get_marked_costumes("reflet","reflet").into_iter().map(|x| x as i32).collect(), (smash::hash40("run_speed_max"), 0, 1.4));
 
 }

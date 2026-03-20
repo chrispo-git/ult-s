@@ -10,7 +10,7 @@ Input format (one entry):
     slots = [0,1,2,3,4,5,6,7]
 
 Output format:
-    param_config::update_int_2(*FIGHTER_KIND_BAYONETTA, get_marked_costumes("bayonetta","bayonetta"), (smash::hash40("param_special_hi"), smash::hash40("landing_frame"), 15));
+    param_config::update_int_2(*FIGHTER_KIND_BAYONETTA, get_marked_costumes("bayonetta","bayonetta").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_special_hi"), smash::hash40("landing_frame"), 15));
 
 Rules:
   - param_float  -> update_float_2
