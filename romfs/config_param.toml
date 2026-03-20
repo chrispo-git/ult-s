@@ -3210,3 +3210,5455 @@ value = 0.0
 kinds = ["pacman", "pacman_firehydrantwater"]
 slots = [120,121,122,123,124,125,126,127]
 
+
+
+# ============================================================
+# BASE STAT OVERRIDES
+# ============================================================
+
+
+# LINK
+[[param_float]]
+param = "ground_brake"
+subparam = ""
+value = 0.08
+kinds = ["link"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "dash_speed"
+subparam = ""
+value = 2.01
+kinds = ["link"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "run_speed_max"
+subparam = ""
+value = 1.76
+kinds = ["link"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "jump_speed_x_mul"
+subparam = ""
+value = 0.875
+kinds = ["link"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "mini_jump_y"
+subparam = ""
+value = 12.7
+kinds = ["link"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "jump_aerial_y"
+subparam = ""
+value = 26.0
+kinds = ["link"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "air_speed_x_stable"
+subparam = ""
+value = 1.08
+kinds = ["link"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "weight"
+subparam = ""
+value = 102.0
+kinds = ["link"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_jump_speed_y_mul"
+subparam = ""
+value = 1.0
+kinds = ["link"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_mini_jump_speed_y_mul"
+subparam = ""
+value = 0.475
+kinds = ["link"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "clip_sphere_offset_y"
+subparam = ""
+value = -2.0
+kinds = ["link"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_hi"
+subparam = ""
+value = 7.0
+kinds = ["link"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_f"
+subparam = ""
+value = 13.0
+kinds = ["link"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_n"
+subparam = ""
+value = 9.0
+kinds = ["link"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_frame"
+subparam = ""
+value = 3.0
+kinds = ["link"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# SAMUS
+[[param_float]]
+param = "jump_speed_x_mul"
+subparam = ""
+value = 0.9
+kinds = ["samus"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_jump_speed_y_mul"
+subparam = ""
+value = 1.0
+kinds = ["samus"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_mini_jump_speed_y_mul"
+subparam = ""
+value = 0.475
+kinds = ["samus"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# YOSHI
+[[param_float]]
+param = "jump_speed_x_mul"
+subparam = ""
+value = 1.15
+kinds = ["yoshi"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "air_speed_x_stable"
+subparam = ""
+value = 1.285
+kinds = ["yoshi"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "air_speed_y_stable"
+subparam = ""
+value = 1.5
+kinds = ["yoshi"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_f"
+subparam = ""
+value = 10.0
+kinds = ["yoshi"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_b"
+subparam = ""
+value = 7.0
+kinds = ["yoshi"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_jump_speed_y_mul"
+subparam = ""
+value = 1.0
+kinds = ["yoshi"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_mini_jump_speed_y_mul"
+subparam = ""
+value = 0.475
+kinds = ["yoshi"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# KIRBY
+[[param_float]]
+param = "run_speed_max"
+subparam = ""
+value = 1.775
+kinds = ["kirby"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "jump_speed_x_mul"
+subparam = ""
+value = 1.0
+kinds = ["kirby"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "air_speed_x_stable"
+subparam = ""
+value = 0.95
+kinds = ["kirby"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_jump_speed_y_mul"
+subparam = ""
+value = 1.0
+kinds = ["kirby"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_mini_jump_speed_y_mul"
+subparam = ""
+value = 0.475
+kinds = ["kirby"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# FOX
+[[param_float]]
+param = "dash_speed"
+subparam = ""
+value = 2.37
+kinds = ["fox"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "run_speed_max"
+subparam = ""
+value = 2.0
+kinds = ["fox"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "jump_speed_x"
+subparam = ""
+value = 0.85
+kinds = ["fox"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "jump_speed_x_mul"
+subparam = ""
+value = 1.15
+kinds = ["fox"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "jump_speed_x_max"
+subparam = ""
+value = 2.5
+kinds = ["fox"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "air_accel_y"
+subparam = ""
+value = 0.175
+kinds = ["fox"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "air_speed_y_stable"
+subparam = ""
+value = 2.3
+kinds = ["fox"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "dive_speed_y"
+subparam = ""
+value = 4.025
+kinds = ["fox"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_lw"
+subparam = ""
+value = 12.0
+kinds = ["fox"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_jump_speed_y_mul"
+subparam = ""
+value = 1.0
+kinds = ["fox"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_mini_jump_speed_y_mul"
+subparam = ""
+value = 0.475
+kinds = ["fox"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# PIKACHU
+[[param_float]]
+param = "jump_speed_x"
+subparam = ""
+value = 1.0
+kinds = ["pikachu"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "jump_speed_x_mul"
+subparam = ""
+value = 1.0
+kinds = ["pikachu"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "jump_aerial_speed_x_mul"
+subparam = ""
+value = 1.0
+kinds = ["pikachu"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "mini_jump_y"
+subparam = ""
+value = 17.12
+kinds = ["pikachu"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "air_accel_x_mul"
+subparam = ""
+value = 0.105
+kinds = ["pikachu"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "air_speed_x_stable"
+subparam = ""
+value = 1.2
+kinds = ["pikachu"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "air_brake_x"
+subparam = ""
+value = 0.015
+kinds = ["pikachu"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "air_accel_y"
+subparam = ""
+value = 0.14
+kinds = ["pikachu"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "air_speed_y_stable"
+subparam = ""
+value = 1.8
+kinds = ["pikachu"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "dive_speed_y"
+subparam = ""
+value = 3.2
+kinds = ["pikachu"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_n"
+subparam = ""
+value = 7.0
+kinds = ["pikachu"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_b"
+subparam = ""
+value = 10.0
+kinds = ["pikachu"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_hi"
+subparam = ""
+value = 8.0
+kinds = ["pikachu"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_jump_speed_y_mul"
+subparam = ""
+value = 1.0
+kinds = ["pikachu"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_mini_jump_speed_y_mul"
+subparam = ""
+value = 0.475
+kinds = ["pikachu"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# LUIGI
+[[param_float]]
+param = "ground_brake"
+subparam = ""
+value = 0.04
+kinds = ["luigi"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "jump_speed_x_mul"
+subparam = ""
+value = 1.0
+kinds = ["luigi"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "air_speed_x_stable"
+subparam = ""
+value = 1.08
+kinds = ["luigi"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "dive_speed_y"
+subparam = ""
+value = 2.508
+kinds = ["luigi"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_jump_speed_y_mul"
+subparam = ""
+value = 1.0
+kinds = ["luigi"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_mini_jump_speed_y_mul"
+subparam = ""
+value = 0.475
+kinds = ["luigi"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_int]]
+param = "wall_jump_type"
+subparam = ""
+value = 1
+kinds = ["luigi"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# NESS
+[[param_float]]
+param = "ground_brake"
+subparam = ""
+value = 0.12
+kinds = ["ness"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "jump_speed_x_mul"
+subparam = ""
+value = 0.875
+kinds = ["ness"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "dive_speed_y"
+subparam = ""
+value = 2.47
+kinds = ["ness"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_n"
+subparam = ""
+value = 7.0
+kinds = ["ness"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_f"
+subparam = ""
+value = 8.0
+kinds = ["ness"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_jump_speed_y_mul"
+subparam = ""
+value = 1.0
+kinds = ["ness"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_mini_jump_speed_y_mul"
+subparam = ""
+value = 0.475
+kinds = ["ness"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_int]]
+param = "wall_jump_type"
+subparam = ""
+value = 1
+kinds = ["ness"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# CAPTAIN FALCON
+[[param_float]]
+param = "dash_speed"
+subparam = ""
+value = 2.35
+kinds = ["captain"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "jump_speed_x"
+subparam = ""
+value = 1.2
+kinds = ["captain"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "jump_speed_x_max"
+subparam = ""
+value = 2.8
+kinds = ["captain"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "mini_jump_y"
+subparam = ""
+value = 15.25
+kinds = ["captain"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "air_speed_x_stable"
+subparam = ""
+value = 1.28
+kinds = ["captain"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "air_speed_y_stable"
+subparam = ""
+value = 1.92
+kinds = ["captain"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "dive_speed_y"
+subparam = ""
+value = 3.072
+kinds = ["captain"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_f"
+subparam = ""
+value = 14.0
+kinds = ["captain"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_b"
+subparam = ""
+value = 8.0
+kinds = ["captain"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_hi"
+subparam = ""
+value = 6.0
+kinds = ["captain"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_jump_speed_y_mul"
+subparam = ""
+value = 1.0
+kinds = ["captain"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_mini_jump_speed_y_mul"
+subparam = ""
+value = 0.475
+kinds = ["captain"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# JIGGLYPUFF / PURIN
+[[param_float]]
+param = "walk_speed_max"
+subparam = ""
+value = 1.2
+kinds = ["purin"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "dash_speed"
+subparam = ""
+value = 1.76
+kinds = ["purin"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "run_speed_max"
+subparam = ""
+value = 1.35
+kinds = ["purin"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "weight"
+subparam = ""
+value = 72.0
+kinds = ["purin"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_lw"
+subparam = ""
+value = 9.0
+kinds = ["purin"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_jump_speed_y_mul"
+subparam = ""
+value = 1.0
+kinds = ["purin"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_mini_jump_speed_y_mul"
+subparam = ""
+value = 0.475
+kinds = ["purin"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# PEACH
+[[param_float]]
+param = "air_accel_x_mul"
+subparam = ""
+value = 0.06
+kinds = ["peach"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_n"
+subparam = ""
+value = 7.0
+kinds = ["peach"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_jump_speed_y_mul"
+subparam = ""
+value = 1.0
+kinds = ["peach"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_mini_jump_speed_y_mul"
+subparam = ""
+value = 0.475
+kinds = ["peach"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# BOWSER / KOOPA
+[[param_float]]
+param = "landing_attack_air_frame_n"
+subparam = ""
+value = 12.0
+kinds = ["koopa"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_lw"
+subparam = ""
+value = 18.0
+kinds = ["koopa"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_frame"
+subparam = ""
+value = 4.0
+kinds = ["koopa"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_jump_speed_y_mul"
+subparam = ""
+value = 1.0
+kinds = ["koopa"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_mini_jump_speed_y_mul"
+subparam = ""
+value = 0.475
+kinds = ["koopa"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# POPO
+[[param_float]]
+param = "ground_brake"
+subparam = ""
+value = 0.0525
+kinds = ["popo"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "air_speed_x_stable"
+subparam = ""
+value = 0.88
+kinds = ["popo"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "weight"
+subparam = ""
+value = 86.0
+kinds = ["popo"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "scale"
+subparam = ""
+value = 1.15
+kinds = ["popo"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "shield_radius"
+subparam = ""
+value = 11.6
+kinds = ["popo"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_jump_speed_y_mul"
+subparam = ""
+value = 1.0
+kinds = ["popo"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_mini_jump_speed_y_mul"
+subparam = ""
+value = 0.475
+kinds = ["popo"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# NANA / POPO
+[[param_float]]
+param = "ground_brake"
+subparam = ""
+value = 0.0602
+kinds = ["popo"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "air_speed_x_stable"
+subparam = ""
+value = 0.9
+kinds = ["popo"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "weight"
+subparam = ""
+value = 86.0
+kinds = ["popo"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "scale"
+subparam = ""
+value = 1.15
+kinds = ["popo"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "shield_radius"
+subparam = ""
+value = 11.6
+kinds = ["popo"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_jump_speed_y_mul"
+subparam = ""
+value = 1.0
+kinds = ["popo"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_mini_jump_speed_y_mul"
+subparam = ""
+value = 0.475
+kinds = ["popo"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# SHEIK
+[[param_float]]
+param = "air_speed_x_stable"
+subparam = ""
+value = 1.2
+kinds = ["sheik"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "weight"
+subparam = ""
+value = 80.0
+kinds = ["sheik"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_b"
+subparam = ""
+value = 7.0
+kinds = ["sheik"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_lw"
+subparam = ""
+value = 10.0
+kinds = ["sheik"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_jump_speed_y_mul"
+subparam = ""
+value = 1.0
+kinds = ["sheik"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_mini_jump_speed_y_mul"
+subparam = ""
+value = 0.475
+kinds = ["sheik"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# ZELDA
+[[param_float]]
+param = "jump_speed_x_mul"
+subparam = ""
+value = 0.8
+kinds = ["zelda"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "air_accel_x_mul"
+subparam = ""
+value = 0.09
+kinds = ["zelda"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_f"
+subparam = ""
+value = 11.0
+kinds = ["zelda"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_jump_speed_y_mul"
+subparam = ""
+value = 1.0
+kinds = ["zelda"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_mini_jump_speed_y_mul"
+subparam = ""
+value = 0.475
+kinds = ["zelda"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# DR. MARIO / MARIOD
+[[param_float]]
+param = "dash_speed"
+subparam = ""
+value = 1.92
+kinds = ["mariod"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "run_speed_max"
+subparam = ""
+value = 1.785
+kinds = ["mariod"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "jump_speed_x_mul"
+subparam = ""
+value = 1.0
+kinds = ["mariod"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "mini_jump_y"
+subparam = ""
+value = 16.0
+kinds = ["mariod"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "air_speed_x_stable"
+subparam = ""
+value = 1.12
+kinds = ["mariod"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "air_accel_y"
+subparam = ""
+value = 0.12
+kinds = ["mariod"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "air_speed_y_stable"
+subparam = ""
+value = 1.7
+kinds = ["mariod"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "damage_fly_top_air_accel_y"
+subparam = ""
+value = 0.0756
+kinds = ["mariod"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "dive_speed_y"
+subparam = ""
+value = 2.72
+kinds = ["mariod"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "weight"
+subparam = ""
+value = 100.0
+kinds = ["mariod"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_n"
+subparam = ""
+value = 6.0
+kinds = ["mariod"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_f"
+subparam = ""
+value = 10.0
+kinds = ["mariod"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_b"
+subparam = ""
+value = 13.0
+kinds = ["mariod"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "scale"
+subparam = ""
+value = 1.15
+kinds = ["mariod"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_jump_speed_y_mul"
+subparam = ""
+value = 1.0
+kinds = ["mariod"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_mini_jump_speed_y_mul"
+subparam = ""
+value = 0.475
+kinds = ["mariod"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# PICHU
+[[param_float]]
+param = "jump_speed_x_mul"
+subparam = ""
+value = 1.475
+kinds = ["pichu"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "air_speed_x_stable"
+subparam = ""
+value = 1.1
+kinds = ["pichu"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "weight"
+subparam = ""
+value = 75.0
+kinds = ["pichu"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_jump_speed_y_mul"
+subparam = ""
+value = 1.0
+kinds = ["pichu"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_mini_jump_speed_y_mul"
+subparam = ""
+value = 0.475
+kinds = ["pichu"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# FALCO
+[[param_float]]
+param = "dash_speed"
+subparam = ""
+value = 2.35
+kinds = ["falco"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "jump_speed_x"
+subparam = ""
+value = 0.8
+kinds = ["falco"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "jump_speed_x_mul"
+subparam = ""
+value = 1.2
+kinds = ["falco"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "jump_speed_x_max"
+subparam = ""
+value = 2.5
+kinds = ["falco"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "jump_y"
+subparam = ""
+value = 40.2
+kinds = ["falco"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "mini_jump_y"
+subparam = ""
+value = 16.4
+kinds = ["falco"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "jump_aerial_y"
+subparam = ""
+value = 40.2
+kinds = ["falco"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "air_speed_x_stable"
+subparam = ""
+value = 1.1
+kinds = ["falco"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "air_accel_y"
+subparam = ""
+value = 0.17
+kinds = ["falco"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "air_speed_y_stable"
+subparam = ""
+value = 1.825
+kinds = ["falco"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "dive_speed_y"
+subparam = ""
+value = 2.92
+kinds = ["falco"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_n"
+subparam = ""
+value = 6.0
+kinds = ["falco"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_b"
+subparam = ""
+value = 11.0
+kinds = ["falco"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_jump_speed_y_mul"
+subparam = ""
+value = 1.0
+kinds = ["falco"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_mini_jump_speed_y_mul"
+subparam = ""
+value = 0.475
+kinds = ["falco"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# MARTH
+[[param_float]]
+param = "walk_speed_max"
+subparam = ""
+value = 1.48
+kinds = ["marth"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "dash_speed"
+subparam = ""
+value = 2.175
+kinds = ["marth"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "jump_speed_x"
+subparam = ""
+value = 1.0
+kinds = ["marth"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "jump_speed_x_mul"
+subparam = ""
+value = 1.15
+kinds = ["marth"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "jump_speed_x_max"
+subparam = ""
+value = 2.0
+kinds = ["marth"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "air_speed_x_stable"
+subparam = ""
+value = 0.99
+kinds = ["marth"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "air_speed_y_stable"
+subparam = ""
+value = 1.7
+kinds = ["marth"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "weight"
+subparam = ""
+value = 85.0
+kinds = ["marth"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_n"
+subparam = ""
+value = 9.0
+kinds = ["marth"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_f"
+subparam = ""
+value = 12.0
+kinds = ["marth"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_frame"
+subparam = ""
+value = 3.0
+kinds = ["marth"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_jump_speed_y_mul"
+subparam = ""
+value = 1.0
+kinds = ["marth"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_mini_jump_speed_y_mul"
+subparam = ""
+value = 0.475
+kinds = ["marth"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "combo_attack_12_end"
+subparam = ""
+value = 0.0
+kinds = ["marth"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_int]]
+param = "attack_combo_max"
+subparam = ""
+value = 1
+kinds = ["marth"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# YOUNG LINK / YOUNGLINK
+[[param_float]]
+param = "jump_speed_x_mul"
+subparam = ""
+value = 0.85
+kinds = ["younglink"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "air_speed_x_stable"
+subparam = ""
+value = 1.1
+kinds = ["younglink"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "air_speed_y_stable"
+subparam = ""
+value = 1.92
+kinds = ["younglink"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "dive_speed_y"
+subparam = ""
+value = 3.072
+kinds = ["younglink"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_f"
+subparam = ""
+value = 10.0
+kinds = ["younglink"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_b"
+subparam = ""
+value = 8.0
+kinds = ["younglink"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_hi"
+subparam = ""
+value = 9.0
+kinds = ["younglink"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "scale"
+subparam = ""
+value = 1.05
+kinds = ["younglink"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "shield_radius"
+subparam = ""
+value = 10.5
+kinds = ["younglink"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_jump_speed_y_mul"
+subparam = ""
+value = 1.0
+kinds = ["younglink"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_mini_jump_speed_y_mul"
+subparam = ""
+value = 0.475
+kinds = ["younglink"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# GANONDORF / GANON
+[[param_float]]
+param = "walk_speed_max"
+subparam = ""
+value = 0.875
+kinds = ["ganon"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "run_speed_max"
+subparam = ""
+value = 1.45
+kinds = ["ganon"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "jump_aerial_y"
+subparam = ""
+value = 29.0
+kinds = ["ganon"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "air_accel_x_mul"
+subparam = ""
+value = 0.05
+kinds = ["ganon"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "air_speed_x_stable"
+subparam = ""
+value = 0.92
+kinds = ["ganon"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "weight"
+subparam = ""
+value = 115.0
+kinds = ["ganon"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_f"
+subparam = ""
+value = 13.0
+kinds = ["ganon"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_b"
+subparam = ""
+value = 12.0
+kinds = ["ganon"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_hi"
+subparam = ""
+value = 13.0
+kinds = ["ganon"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_lw"
+subparam = ""
+value = 18.0
+kinds = ["ganon"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_jump_speed_y_mul"
+subparam = ""
+value = 1.0
+kinds = ["ganon"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_mini_jump_speed_y_mul"
+subparam = ""
+value = 0.475
+kinds = ["ganon"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# MEWTWO
+[[param_float]]
+param = "jump_speed_x_mul"
+subparam = ""
+value = 0.8
+kinds = ["mewtwo"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "air_speed_x_stable"
+subparam = ""
+value = 1.2
+kinds = ["mewtwo"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "weight"
+subparam = ""
+value = 80.0
+kinds = ["mewtwo"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_f"
+subparam = ""
+value = 7.0
+kinds = ["mewtwo"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_b"
+subparam = ""
+value = 8.0
+kinds = ["mewtwo"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_hi"
+subparam = ""
+value = 9.0
+kinds = ["mewtwo"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_frame"
+subparam = ""
+value = 3.0
+kinds = ["mewtwo"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_jump_speed_y_mul"
+subparam = ""
+value = 1.0
+kinds = ["mewtwo"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_mini_jump_speed_y_mul"
+subparam = ""
+value = 0.475
+kinds = ["mewtwo"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# ROY
+[[param_float]]
+param = "dash_speed"
+subparam = ""
+value = 2.3
+kinds = ["roy"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "air_accel_x_mul"
+subparam = ""
+value = 0.05
+kinds = ["roy"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "air_speed_x_stable"
+subparam = ""
+value = 1.28
+kinds = ["roy"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "air_speed_y_stable"
+subparam = ""
+value = 1.75
+kinds = ["roy"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "dive_speed_y"
+subparam = ""
+value = 2.8
+kinds = ["roy"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_f"
+subparam = ""
+value = 9.0
+kinds = ["roy"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_hi"
+subparam = ""
+value = 7.0
+kinds = ["roy"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_jump_speed_y_mul"
+subparam = ""
+value = 1.0
+kinds = ["roy"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_mini_jump_speed_y_mul"
+subparam = ""
+value = 0.475
+kinds = ["roy"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# Mr. GAME & WATCH / GAMEWATCH
+[[param_float]]
+param = "dash_speed"
+subparam = ""
+value = 2.1
+kinds = ["gamewatch"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "jump_speed_x_mul"
+subparam = ""
+value = 0.975
+kinds = ["gamewatch"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_n"
+subparam = ""
+value = 9.0
+kinds = ["gamewatch"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_f"
+subparam = ""
+value = 12.0
+kinds = ["gamewatch"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_b"
+subparam = ""
+value = 15.0
+kinds = ["gamewatch"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_lw"
+subparam = ""
+value = 10.0
+kinds = ["gamewatch"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "scale"
+subparam = ""
+value = 0.89
+kinds = ["gamewatch"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_jump_speed_y_mul"
+subparam = ""
+value = 1.0
+kinds = ["gamewatch"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_mini_jump_speed_y_mul"
+subparam = ""
+value = 0.475
+kinds = ["gamewatch"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# META KNIGHT / METAKNIGHT
+[[param_float]]
+param = "jump_speed_x_mul"
+subparam = ""
+value = 1.15
+kinds = ["metaknight"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "jump_speed_x_max"
+subparam = ""
+value = 1.8
+kinds = ["metaknight"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "jump_y"
+subparam = ""
+value = 35.0
+kinds = ["metaknight"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "mini_jump_y"
+subparam = ""
+value = 11.5
+kinds = ["metaknight"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "air_accel_x_add"
+subparam = ""
+value = 0.02
+kinds = ["metaknight"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "air_speed_x_stable"
+subparam = ""
+value = 1.15
+kinds = ["metaknight"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "weight"
+subparam = ""
+value = 78.0
+kinds = ["metaknight"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_f"
+subparam = ""
+value = 8.0
+kinds = ["metaknight"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_lw"
+subparam = ""
+value = 18.0
+kinds = ["metaknight"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_jump_speed_y_mul"
+subparam = ""
+value = 1.0
+kinds = ["metaknight"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_mini_jump_speed_y_mul"
+subparam = ""
+value = 0.475
+kinds = ["metaknight"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# PIT
+[[param_float]]
+param = "walk_speed_max"
+subparam = ""
+value = 1.5
+kinds = ["pit"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "air_accel_x_mul"
+subparam = ""
+value = 0.1
+kinds = ["pit"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "air_speed_x_stable"
+subparam = ""
+value = 1.105
+kinds = ["pit"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_n"
+subparam = ""
+value = 9.0
+kinds = ["pit"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_jump_speed_y_mul"
+subparam = ""
+value = 1.0
+kinds = ["pit"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_mini_jump_speed_y_mul"
+subparam = ""
+value = 0.475
+kinds = ["pit"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# ZERO SUIT SAMUS / SZEROSUIT
+[[param_float]]
+param = "dash_speed"
+subparam = ""
+value = 2.3
+kinds = ["szerosuit"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "run_speed_max"
+subparam = ""
+value = 2.15
+kinds = ["szerosuit"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "mini_jump_y"
+subparam = ""
+value = 14.0
+kinds = ["szerosuit"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "air_accel_x_mul"
+subparam = ""
+value = 0.07
+kinds = ["szerosuit"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "weight"
+subparam = ""
+value = 83.0
+kinds = ["szerosuit"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_n"
+subparam = ""
+value = 8.0
+kinds = ["szerosuit"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_b"
+subparam = ""
+value = 11.0
+kinds = ["szerosuit"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_lw"
+subparam = ""
+value = 10.0
+kinds = ["szerosuit"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_jump_speed_y_mul"
+subparam = ""
+value = 1.0
+kinds = ["szerosuit"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_mini_jump_speed_y_mul"
+subparam = ""
+value = 0.475
+kinds = ["szerosuit"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "combo_attack_12_end"
+subparam = ""
+value = 0.0
+kinds = ["szerosuit"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "combo_attack_13_end"
+subparam = ""
+value = 0.0
+kinds = ["szerosuit"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_int]]
+param = "air_lasso_type"
+subparam = ""
+value = 1
+kinds = ["szerosuit"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# WARIO
+[[param_float]]
+param = "air_accel_x_mul"
+subparam = ""
+value = 0.11
+kinds = ["wario"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "weight"
+subparam = ""
+value = 104.0
+kinds = ["wario"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_jump_speed_y_mul"
+subparam = ""
+value = 1.0
+kinds = ["wario"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_mini_jump_speed_y_mul"
+subparam = ""
+value = 0.475
+kinds = ["wario"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# SNAKE
+[[param_float]]
+param = "scale"
+subparam = ""
+value = 1.075
+kinds = ["snake"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_jump_speed_y_mul"
+subparam = ""
+value = 1.0
+kinds = ["snake"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_mini_jump_speed_y_mul"
+subparam = ""
+value = 0.475
+kinds = ["snake"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# IKE
+[[param_float]]
+param = "dash_speed"
+subparam = ""
+value = 1.87
+kinds = ["ike"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "run_speed_max"
+subparam = ""
+value = 1.6
+kinds = ["ike"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_n"
+subparam = ""
+value = 10.0
+kinds = ["ike"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_f"
+subparam = ""
+value = 11.0
+kinds = ["ike"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_jump_speed_y_mul"
+subparam = ""
+value = 1.0
+kinds = ["ike"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_mini_jump_speed_y_mul"
+subparam = ""
+value = 0.475
+kinds = ["ike"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# SQUIRTLE / PZENIGAME
+[[param_float]]
+param = "run_speed_max"
+subparam = ""
+value = 1.82
+kinds = ["pzenigame"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "jump_speed_x_mul"
+subparam = ""
+value = 1.1
+kinds = ["pzenigame"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "air_speed_x_stable"
+subparam = ""
+value = 1.11
+kinds = ["pzenigame"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_f"
+subparam = ""
+value = 8.0
+kinds = ["pzenigame"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_hi"
+subparam = ""
+value = 8.0
+kinds = ["pzenigame"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_jump_speed_y_mul"
+subparam = ""
+value = 1.0
+kinds = ["pzenigame"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_mini_jump_speed_y_mul"
+subparam = ""
+value = 0.475
+kinds = ["pzenigame"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# IVYSAUR / PFUSHIGISOU
+[[param_float]]
+param = "landing_attack_air_frame_f"
+subparam = ""
+value = 11.0
+kinds = ["pfushigisou"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_hi"
+subparam = ""
+value = 16.0
+kinds = ["pfushigisou"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_lw"
+subparam = ""
+value = 16.0
+kinds = ["pfushigisou"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_jump_speed_y_mul"
+subparam = ""
+value = 1.0
+kinds = ["pfushigisou"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_mini_jump_speed_y_mul"
+subparam = ""
+value = 0.475
+kinds = ["pfushigisou"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# CHARIZARD / PLIZARDON
+[[param_float]]
+param = "jump_speed_x_mul"
+subparam = ""
+value = 1.05
+kinds = ["plizardon"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_f"
+subparam = ""
+value = 12.0
+kinds = ["plizardon"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_b"
+subparam = ""
+value = 15.0
+kinds = ["plizardon"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_jump_speed_y_mul"
+subparam = ""
+value = 1.0
+kinds = ["plizardon"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_mini_jump_speed_y_mul"
+subparam = ""
+value = 0.475
+kinds = ["plizardon"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# DIDDY KONG / DIDDY
+[[param_float]]
+param = "jump_speed_x_mul"
+subparam = ""
+value = 1.075
+kinds = ["diddy"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_jump_speed_y_mul"
+subparam = ""
+value = 1.0
+kinds = ["diddy"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_mini_jump_speed_y_mul"
+subparam = ""
+value = 0.475
+kinds = ["diddy"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "clip_sphere_offset_x"
+subparam = ""
+value = 0.0
+kinds = ["diddy"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "clip_sphere_offset_y"
+subparam = ""
+value = 0.0
+kinds = ["diddy"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# LUCAS
+[[param_float]]
+param = "ground_brake"
+subparam = ""
+value = 0.101
+kinds = ["lucas"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "dash_speed"
+subparam = ""
+value = 2.1
+kinds = ["lucas"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "run_speed_max"
+subparam = ""
+value = 1.725
+kinds = ["lucas"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "jump_speed_x_mul"
+subparam = ""
+value = 1.125
+kinds = ["lucas"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "jump_aerial_speed_x_mul"
+subparam = ""
+value = 1.25
+kinds = ["lucas"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "jump_aerial_y"
+subparam = ""
+value = 39.5
+kinds = ["lucas"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "air_speed_x_stable"
+subparam = ""
+value = 1.05
+kinds = ["lucas"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "air_accel_y"
+subparam = ""
+value = 0.125
+kinds = ["lucas"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "air_speed_y_stable"
+subparam = ""
+value = 1.9
+kinds = ["lucas"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "dive_speed_y"
+subparam = ""
+value = 3.04
+kinds = ["lucas"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_f"
+subparam = ""
+value = 9.0
+kinds = ["lucas"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_jump_speed_y_mul"
+subparam = ""
+value = 1.0
+kinds = ["lucas"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_mini_jump_speed_y_mul"
+subparam = ""
+value = 0.475
+kinds = ["lucas"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# SONIC
+[[param_float]]
+param = "walk_speed_max"
+subparam = ""
+value = 1.395
+kinds = ["sonic"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "ground_brake"
+subparam = ""
+value = 0.095
+kinds = ["sonic"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "dash_speed"
+subparam = ""
+value = 2.425
+kinds = ["sonic"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "run_speed_max"
+subparam = ""
+value = 2.35
+kinds = ["sonic"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "air_accel_x_mul"
+subparam = ""
+value = 0.025
+kinds = ["sonic"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "air_accel_y"
+subparam = ""
+value = 0.135
+kinds = ["sonic"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "air_speed_y_stable"
+subparam = ""
+value = 1.7625
+kinds = ["sonic"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "dive_speed_y"
+subparam = ""
+value = 2.82
+kinds = ["sonic"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "weight"
+subparam = ""
+value = 85.0
+kinds = ["sonic"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_n"
+subparam = ""
+value = 7.0
+kinds = ["sonic"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_f"
+subparam = ""
+value = 7.0
+kinds = ["sonic"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_b"
+subparam = ""
+value = 9.0
+kinds = ["sonic"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_hi"
+subparam = ""
+value = 8.0
+kinds = ["sonic"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_lw"
+subparam = ""
+value = 21.0
+kinds = ["sonic"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_jump_speed_y_mul"
+subparam = ""
+value = 1.0
+kinds = ["sonic"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_mini_jump_speed_y_mul"
+subparam = ""
+value = 0.475
+kinds = ["sonic"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_int]]
+param = "attack_combo_max"
+subparam = ""
+value = 2
+kinds = ["sonic"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_int]]
+param = "attack_100_enable_cnt"
+subparam = ""
+value = 6
+kinds = ["sonic"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_int]]
+param = "attack_100_rebound_count"
+subparam = ""
+value = 10
+kinds = ["sonic"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_int]]
+param = "attack100_type"
+subparam = ""
+value = 1
+kinds = ["sonic"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# KING DEDEDE
+[[param_float]]
+param = "run_speed_max"
+subparam = ""
+value = 1.675
+kinds = ["king_dedede"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "jump_aerial_y"
+subparam = ""
+value = 35.0
+kinds = ["king_dedede"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "air_speed_x_stable"
+subparam = ""
+value = 1.01
+kinds = ["king_dedede"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "air_speed_y_stable"
+subparam = ""
+value = 1.6
+kinds = ["king_dedede"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "dive_speed_y"
+subparam = ""
+value = 2.56
+kinds = ["king_dedede"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "weight"
+subparam = ""
+value = 120.0
+kinds = ["king_dedede"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_f"
+subparam = ""
+value = 12.0
+kinds = ["king_dedede"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_b"
+subparam = ""
+value = 9.0
+kinds = ["king_dedede"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_frame"
+subparam = ""
+value = 4.0
+kinds = ["king_dedede"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_jump_speed_y_mul"
+subparam = ""
+value = 1.0
+kinds = ["king_dedede"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_mini_jump_speed_y_mul"
+subparam = ""
+value = 0.475
+kinds = ["king_dedede"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# OLIMAR / PIKMIN
+[[param_float]]
+param = "tread_jump_speed_y_mul"
+subparam = ""
+value = 1.0
+kinds = ["pikmin"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_mini_jump_speed_y_mul"
+subparam = ""
+value = 0.475
+kinds = ["pikmin"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# LUCARIO
+[[param_float]]
+param = "air_speed_x_stable"
+subparam = ""
+value = 1.155
+kinds = ["lucario"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "mini_jump_y"
+subparam = ""
+value = 16.0
+kinds = ["lucario"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_jump_speed_y_mul"
+subparam = ""
+value = 1.0
+kinds = ["lucario"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_mini_jump_speed_y_mul"
+subparam = ""
+value = 0.475
+kinds = ["lucario"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# ROB / ROBOT
+[[param_float]]
+param = "air_speed_x_stable"
+subparam = ""
+value = 1.02
+kinds = ["robot"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "weight"
+subparam = ""
+value = 110.0
+kinds = ["robot"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_n"
+subparam = ""
+value = 10.0
+kinds = ["robot"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_f"
+subparam = ""
+value = 7.0
+kinds = ["robot"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_jump_speed_y_mul"
+subparam = ""
+value = 1.0
+kinds = ["robot"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_mini_jump_speed_y_mul"
+subparam = ""
+value = 0.475
+kinds = ["robot"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# TOON LINK / TOONLINK
+[[param_float]]
+param = "ground_brake"
+subparam = ""
+value = 0.07
+kinds = ["toonlink"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "dash_speed"
+subparam = ""
+value = 2.09
+kinds = ["toonlink"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "jump_speed_x_mul"
+subparam = ""
+value = 1.5
+kinds = ["toonlink"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "dive_speed_y"
+subparam = ""
+value = 2.622
+kinds = ["toonlink"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "weight"
+subparam = ""
+value = 87.0
+kinds = ["toonlink"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_jump_speed_y_mul"
+subparam = ""
+value = 1.0
+kinds = ["toonlink"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_mini_jump_speed_y_mul"
+subparam = ""
+value = 0.475
+kinds = ["toonlink"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# WOLF
+[[param_float]]
+param = "jump_speed_x_mul"
+subparam = ""
+value = 1.0
+kinds = ["wolf"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "weight"
+subparam = ""
+value = 87.0
+kinds = ["wolf"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_n"
+subparam = ""
+value = 11.0
+kinds = ["wolf"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "scale"
+subparam = ""
+value = 1.14
+kinds = ["wolf"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_jump_speed_y_mul"
+subparam = ""
+value = 1.0
+kinds = ["wolf"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_mini_jump_speed_y_mul"
+subparam = ""
+value = 0.475
+kinds = ["wolf"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# VILLAGER / MURABITO
+[[param_float]]
+param = "tread_jump_speed_y_mul"
+subparam = ""
+value = 1.0
+kinds = ["murabito"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_mini_jump_speed_y_mul"
+subparam = ""
+value = 0.475
+kinds = ["murabito"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# MEGAMAN / ROCKMAN
+[[param_float]]
+param = "landing_attack_air_frame_n"
+subparam = ""
+value = 11.0
+kinds = ["rockman"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_b"
+subparam = ""
+value = 10.0
+kinds = ["rockman"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_jump_speed_y_mul"
+subparam = ""
+value = 1.0
+kinds = ["rockman"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_mini_jump_speed_y_mul"
+subparam = ""
+value = 0.475
+kinds = ["rockman"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# WII FIT TRAINER / WIIFIT
+[[param_float]]
+param = "jump_speed_x_mul"
+subparam = ""
+value = 1.2
+kinds = ["wiifit"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "air_speed_y_stable"
+subparam = ""
+value = 1.75
+kinds = ["wiifit"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "dive_speed_y"
+subparam = ""
+value = 2.72
+kinds = ["wiifit"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_jump_speed_y_mul"
+subparam = ""
+value = 1.0
+kinds = ["wiifit"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_mini_jump_speed_y_mul"
+subparam = ""
+value = 0.475
+kinds = ["wiifit"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# ROSALINA & LUMA / ROSETTA
+[[param_float]]
+param = "dash_speed"
+subparam = ""
+value = 1.8
+kinds = ["rosetta"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "run_speed_max"
+subparam = ""
+value = 1.7
+kinds = ["rosetta"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "jump_speed_x_mul"
+subparam = ""
+value = 1.1
+kinds = ["rosetta"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_jump_speed_y_mul"
+subparam = ""
+value = 1.0
+kinds = ["rosetta"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_mini_jump_speed_y_mul"
+subparam = ""
+value = 0.475
+kinds = ["rosetta"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# LITTLE MAC / LITTLEMAC
+[[param_float]]
+param = "jump_speed_x_mul"
+subparam = ""
+value = 1.0
+kinds = ["littlemac"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "jump_y"
+subparam = ""
+value = 30.0
+kinds = ["littlemac"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "mini_jump_y"
+subparam = ""
+value = 14.0
+kinds = ["littlemac"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "jump_aerial_y"
+subparam = ""
+value = 30.0
+kinds = ["littlemac"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_n"
+subparam = ""
+value = 5.0
+kinds = ["littlemac"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_f"
+subparam = ""
+value = 9.0
+kinds = ["littlemac"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_b"
+subparam = ""
+value = 9.0
+kinds = ["littlemac"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_jump_speed_y_mul"
+subparam = ""
+value = 1.0
+kinds = ["littlemac"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_mini_jump_speed_y_mul"
+subparam = ""
+value = 0.475
+kinds = ["littlemac"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# GRENINJA / GEKKOUGA
+[[param_float]]
+param = "ground_brake"
+subparam = ""
+value = 0.0725
+kinds = ["gekkouga"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "run_speed_max"
+subparam = ""
+value = 2.225
+kinds = ["gekkouga"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "mini_jump_y"
+subparam = ""
+value = 15.0
+kinds = ["gekkouga"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "weight"
+subparam = ""
+value = 84.0
+kinds = ["gekkouga"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_n"
+subparam = ""
+value = 9.0
+kinds = ["gekkouga"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_jump_speed_y_mul"
+subparam = ""
+value = 1.0
+kinds = ["gekkouga"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_mini_jump_speed_y_mul"
+subparam = ""
+value = 0.475
+kinds = ["gekkouga"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# PALUTENA
+[[param_float]]
+param = "air_accel_x_mul"
+subparam = ""
+value = 0.11
+kinds = ["palutena"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "air_speed_x_stable"
+subparam = ""
+value = 1.05
+kinds = ["palutena"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_lw"
+subparam = ""
+value = 10.0
+kinds = ["palutena"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_jump_speed_y_mul"
+subparam = ""
+value = 1.0
+kinds = ["palutena"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_mini_jump_speed_y_mul"
+subparam = ""
+value = 0.475
+kinds = ["palutena"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# PAC-MAN / PACMAN
+[[param_float]]
+param = "ground_brake"
+subparam = ""
+value = 0.085
+kinds = ["pacman"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "dash_speed"
+subparam = ""
+value = 1.9
+kinds = ["pacman"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "run_speed_max"
+subparam = ""
+value = 1.75
+kinds = ["pacman"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "jump_speed_x_mul"
+subparam = ""
+value = 1.0
+kinds = ["pacman"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_hi"
+subparam = ""
+value = 8.0
+kinds = ["pacman"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_lw"
+subparam = ""
+value = 9.0
+kinds = ["pacman"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_jump_speed_y_mul"
+subparam = ""
+value = 1.0
+kinds = ["pacman"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_mini_jump_speed_y_mul"
+subparam = ""
+value = 0.475
+kinds = ["pacman"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# ROBIN / REFLET
+[[param_float]]
+param = "run_speed_max"
+subparam = ""
+value = 1.4
+kinds = ["reflet"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_jump_speed_y_mul"
+subparam = ""
+value = 1.0
+kinds = ["reflet"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_mini_jump_speed_y_mul"
+subparam = ""
+value = 0.475
+kinds = ["reflet"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# SHULK
+[[param_float]]
+param = "jump_speed_x_mul"
+subparam = ""
+value = 1.2
+kinds = ["shulk"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_n"
+subparam = ""
+value = 10.0
+kinds = ["shulk"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_jump_speed_y_mul"
+subparam = ""
+value = 1.0
+kinds = ["shulk"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_mini_jump_speed_y_mul"
+subparam = ""
+value = 0.475
+kinds = ["shulk"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# BOWSER JR. / KOOPAJR
+[[param_float]]
+param = "dash_speed"
+subparam = ""
+value = 1.86
+kinds = ["koopajr"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "run_speed_max"
+subparam = ""
+value = 1.7
+kinds = ["koopajr"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "jump_speed_x_mul"
+subparam = ""
+value = 1.1
+kinds = ["koopajr"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_f"
+subparam = ""
+value = 11.0
+kinds = ["koopajr"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_jump_speed_y_mul"
+subparam = ""
+value = 1.0
+kinds = ["koopajr"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_mini_jump_speed_y_mul"
+subparam = ""
+value = 0.475
+kinds = ["koopajr"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "clip_sphere_offset_x"
+subparam = ""
+value = 0.5
+kinds = ["koopajr"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# DUCK HUNT / DUCKHUNT
+[[param_float]]
+param = "ground_brake"
+subparam = ""
+value = 0.06
+kinds = ["duckhunt"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "dash_speed"
+subparam = ""
+value = 1.87
+kinds = ["duckhunt"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "jump_speed_x_mul"
+subparam = ""
+value = 1.0
+kinds = ["duckhunt"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "air_speed_x_stable"
+subparam = ""
+value = 1.2
+kinds = ["duckhunt"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "air_speed_y_stable"
+subparam = ""
+value = 1.7
+kinds = ["duckhunt"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "dive_speed_y"
+subparam = ""
+value = 2.72
+kinds = ["duckhunt"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_f"
+subparam = ""
+value = 7.0
+kinds = ["duckhunt"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_hi"
+subparam = ""
+value = 10.0
+kinds = ["duckhunt"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_jump_speed_y_mul"
+subparam = ""
+value = 1.0
+kinds = ["duckhunt"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_mini_jump_speed_y_mul"
+subparam = ""
+value = 0.475
+kinds = ["duckhunt"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# RYU
+[[param_float]]
+param = "air_speed_x_stable"
+subparam = ""
+value = 1.1
+kinds = ["ryu"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_n"
+subparam = ""
+value = 6.0
+kinds = ["ryu"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_jump_speed_y_mul"
+subparam = ""
+value = 1.0
+kinds = ["ryu"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_mini_jump_speed_y_mul"
+subparam = ""
+value = 0.475
+kinds = ["ryu"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# CLOUD
+[[param_float]]
+param = "walk_accel_mul"
+subparam = ""
+value = 0.15
+kinds = ["cloud"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "walk_slow_speed_mul"
+subparam = ""
+value = 0.253
+kinds = ["cloud"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "walk_middle_ratio"
+subparam = ""
+value = 0.621
+kinds = ["cloud"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "walk_fast_ratio"
+subparam = ""
+value = 0.978
+kinds = ["cloud"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "jump_speed_x_mul"
+subparam = ""
+value = 1.175
+kinds = ["cloud"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "jump_initial_y"
+subparam = ""
+value = 12.496
+kinds = ["cloud"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "jump_y"
+subparam = ""
+value = 32.69
+kinds = ["cloud"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "jump_aerial_y"
+subparam = ""
+value = 32.69
+kinds = ["cloud"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "damage_fly_top_air_accel_y"
+subparam = ""
+value = 0.076608
+kinds = ["cloud"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_b"
+subparam = ""
+value = 10.0
+kinds = ["cloud"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_lw"
+subparam = ""
+value = 21.0
+kinds = ["cloud"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_jump_speed_y_mul"
+subparam = ""
+value = 1.0
+kinds = ["cloud"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_mini_jump_speed_y_mul"
+subparam = ""
+value = 0.475
+kinds = ["cloud"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# CORRIN / KAMUI
+[[param_float]]
+param = "walk_speed_max"
+subparam = ""
+value = 1.4075
+kinds = ["kamui"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "dash_speed"
+subparam = ""
+value = 1.95
+kinds = ["kamui"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "run_speed_max"
+subparam = ""
+value = 1.8
+kinds = ["kamui"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "jump_speed_x_mul"
+subparam = ""
+value = 1.15
+kinds = ["kamui"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "jump_y"
+subparam = ""
+value = 30.0
+kinds = ["kamui"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "air_accel_x_mul"
+subparam = ""
+value = 0.06
+kinds = ["kamui"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "air_speed_x_stable"
+subparam = ""
+value = 1.1
+kinds = ["kamui"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_f"
+subparam = ""
+value = 10.0
+kinds = ["kamui"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_b"
+subparam = ""
+value = 12.0
+kinds = ["kamui"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_hi"
+subparam = ""
+value = 11.0
+kinds = ["kamui"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "scale"
+subparam = ""
+value = 1.0395
+kinds = ["kamui"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_jump_speed_y_mul"
+subparam = ""
+value = 1.0
+kinds = ["kamui"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_mini_jump_speed_y_mul"
+subparam = ""
+value = 0.475
+kinds = ["kamui"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "combo_attack_12_end"
+subparam = ""
+value = 0.0
+kinds = ["kamui"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "combo_attack_13_end"
+subparam = ""
+value = 0.0
+kinds = ["kamui"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_int]]
+param = "attack_combo_max"
+subparam = ""
+value = 1
+kinds = ["kamui"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# BAYONETTA
+[[param_float]]
+param = "jump_speed_x_mul"
+subparam = ""
+value = 1.5
+kinds = ["bayonetta"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_jump_speed_y_mul"
+subparam = ""
+value = 1.0
+kinds = ["bayonetta"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_mini_jump_speed_y_mul"
+subparam = ""
+value = 0.475
+kinds = ["bayonetta"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# INKLING
+[[param_float]]
+param = "run_speed_max"
+subparam = ""
+value = 2.0
+kinds = ["inkling"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "jump_speed_x"
+subparam = ""
+value = 1.4
+kinds = ["inkling"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "jump_speed_x_mul"
+subparam = ""
+value = 1.6
+kinds = ["inkling"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "jump_speed_x_max"
+subparam = ""
+value = 1.7
+kinds = ["inkling"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "jump_y"
+subparam = ""
+value = 40.0
+kinds = ["inkling"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "air_speed_y_stable"
+subparam = ""
+value = 1.7
+kinds = ["inkling"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "dive_speed_y"
+subparam = ""
+value = 2.72
+kinds = ["inkling"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_n"
+subparam = ""
+value = 5.0
+kinds = ["inkling"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_f"
+subparam = ""
+value = 11.0
+kinds = ["inkling"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_b"
+subparam = ""
+value = 7.0
+kinds = ["inkling"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_jump_speed_y_mul"
+subparam = ""
+value = 1.0
+kinds = ["inkling"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_mini_jump_speed_y_mul"
+subparam = ""
+value = 0.475
+kinds = ["inkling"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# RIDLEY
+[[param_float]]
+param = "dash_speed"
+subparam = ""
+value = 2.0
+kinds = ["ridley"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "jump_speed_x_mul"
+subparam = ""
+value = 1.0
+kinds = ["ridley"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "weight"
+subparam = ""
+value = 113.0
+kinds = ["ridley"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_f"
+subparam = ""
+value = 13.0
+kinds = ["ridley"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_hi"
+subparam = ""
+value = 11.0
+kinds = ["ridley"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_jump_speed_y_mul"
+subparam = ""
+value = 1.0
+kinds = ["ridley"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_mini_jump_speed_y_mul"
+subparam = ""
+value = 0.475
+kinds = ["ridley"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# SIMON
+[[param_float]]
+param = "jump_speed_x_mul"
+subparam = ""
+value = 1.075
+kinds = ["simon"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "air_speed_y_stable"
+subparam = ""
+value = 1.6
+kinds = ["simon"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "shield_radius"
+subparam = ""
+value = 13.0
+kinds = ["simon"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_jump_speed_y_mul"
+subparam = ""
+value = 1.0
+kinds = ["simon"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_mini_jump_speed_y_mul"
+subparam = ""
+value = 0.475
+kinds = ["simon"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# KING K. ROOL - KROOL
+[[param_float]]
+param = "landing_frame"
+subparam = ""
+value = 4.0
+kinds = ["king_k._rool_-_krool"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_jump_speed_y_mul"
+subparam = ""
+value = 1.0
+kinds = ["king_k._rool_-_krool"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_mini_jump_speed_y_mul"
+subparam = ""
+value = 0.475
+kinds = ["king_k._rool_-_krool"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# ISABELLE / SHIZUE
+[[param_float]]
+param = "ground_brake"
+subparam = ""
+value = 0.075
+kinds = ["shizue"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "dash_speed"
+subparam = ""
+value = 2.1583
+kinds = ["shizue"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "run_speed_max"
+subparam = ""
+value = 1.76
+kinds = ["shizue"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "jump_speed_x_mul"
+subparam = ""
+value = 1.2
+kinds = ["shizue"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "air_speed_x_stable"
+subparam = ""
+value = 0.95
+kinds = ["shizue"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "air_speed_y_stable"
+subparam = ""
+value = 1.675
+kinds = ["shizue"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "dive_speed_y"
+subparam = ""
+value = 2.68
+kinds = ["shizue"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "weight"
+subparam = ""
+value = 85.0
+kinds = ["shizue"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_n"
+subparam = ""
+value = 5.0
+kinds = ["shizue"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_f"
+subparam = ""
+value = 17.0
+kinds = ["shizue"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_b"
+subparam = ""
+value = 9.0
+kinds = ["shizue"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_hi"
+subparam = ""
+value = 6.0
+kinds = ["shizue"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_lw"
+subparam = ""
+value = 6.0
+kinds = ["shizue"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "scale"
+subparam = ""
+value = 1.05
+kinds = ["shizue"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_jump_speed_y_mul"
+subparam = ""
+value = 1.0
+kinds = ["shizue"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_mini_jump_speed_y_mul"
+subparam = ""
+value = 0.475
+kinds = ["shizue"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# INCINEROAR / GAOGAEN
+[[param_float]]
+param = "dash_speed"
+subparam = ""
+value = 1.8
+kinds = ["gaogaen"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "run_speed_max"
+subparam = ""
+value = 1.3
+kinds = ["gaogaen"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "air_speed_x_stable"
+subparam = ""
+value = 0.9875
+kinds = ["gaogaen"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_f"
+subparam = ""
+value = 11.0
+kinds = ["gaogaen"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_b"
+subparam = ""
+value = 8.0
+kinds = ["gaogaen"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_jump_speed_y_mul"
+subparam = ""
+value = 1.0
+kinds = ["gaogaen"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_mini_jump_speed_y_mul"
+subparam = ""
+value = 0.475
+kinds = ["gaogaen"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# PIRANHA PLANT / PACKUN
+[[param_float]]
+param = "dash_speed"
+subparam = ""
+value = 1.92
+kinds = ["packun"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "run_speed_max"
+subparam = ""
+value = 1.82
+kinds = ["packun"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "jump_speed_x_mul"
+subparam = ""
+value = 0.95
+kinds = ["packun"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "air_speed_x_stable"
+subparam = ""
+value = 1.075
+kinds = ["packun"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_f"
+subparam = ""
+value = 9.0
+kinds = ["packun"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_b"
+subparam = ""
+value = 12.0
+kinds = ["packun"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_lw"
+subparam = ""
+value = 12.0
+kinds = ["packun"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_jump_speed_y_mul"
+subparam = ""
+value = 1.0
+kinds = ["packun"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_mini_jump_speed_y_mul"
+subparam = ""
+value = 0.475
+kinds = ["packun"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# JOKER / JACK
+[[param_float]]
+param = "ground_brake"
+subparam = ""
+value = 0.09
+kinds = ["jack"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "dash_speed"
+subparam = ""
+value = 2.17
+kinds = ["jack"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "run_speed_max"
+subparam = ""
+value = 2.0
+kinds = ["jack"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "jump_speed_x_mul"
+subparam = ""
+value = 1.0
+kinds = ["jack"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "air_accel_x_mul"
+subparam = ""
+value = 0.06
+kinds = ["jack"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_b"
+subparam = ""
+value = 11.0
+kinds = ["jack"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "air_speed_x_stable"
+subparam = ""
+value = 1.175
+kinds = ["jack"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "air_speed_y_stable"
+subparam = ""
+value = 1.73
+kinds = ["jack"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "dive_speed_y"
+subparam = ""
+value = 3.287
+kinds = ["jack"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_jump_speed_y_mul"
+subparam = ""
+value = 1.0
+kinds = ["jack"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_mini_jump_speed_y_mul"
+subparam = ""
+value = 0.475
+kinds = ["jack"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# HERO / BRAVE
+[[param_float]]
+param = "jump_speed_x_mul"
+subparam = ""
+value = 1.0
+kinds = ["brave"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_jump_speed_y_mul"
+subparam = ""
+value = 1.0
+kinds = ["brave"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_mini_jump_speed_y_mul"
+subparam = ""
+value = 0.475
+kinds = ["brave"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_f"
+subparam = ""
+value = 10.0
+kinds = ["brave"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_b"
+subparam = ""
+value = 11.0
+kinds = ["brave"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_hi"
+subparam = ""
+value = 6.0
+kinds = ["brave"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# BANJO & KAZOOIE / BUDDY
+[[param_float]]
+param = "jump_speed_x_mul"
+subparam = ""
+value = 1.0
+kinds = ["buddy"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_n"
+subparam = ""
+value = 12.0
+kinds = ["buddy"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_b"
+subparam = ""
+value = 11.0
+kinds = ["buddy"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_hi"
+subparam = ""
+value = 10.0
+kinds = ["buddy"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_jump_speed_y_mul"
+subparam = ""
+value = 1.0
+kinds = ["buddy"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_mini_jump_speed_y_mul"
+subparam = ""
+value = 0.475
+kinds = ["buddy"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# TERRY / DOLLY
+[[param_float]]
+param = "tread_jump_speed_y_mul"
+subparam = ""
+value = 1.0
+kinds = ["dolly"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_mini_jump_speed_y_mul"
+subparam = ""
+value = 0.475
+kinds = ["dolly"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "clip_sphere_offset_x"
+subparam = ""
+value = 2.0
+kinds = ["dolly"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "clip_sphere_offset_y"
+subparam = ""
+value = 2.0
+kinds = ["dolly"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_f"
+subparam = ""
+value = 10.0
+kinds = ["dolly"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# BYLETH / MASTER
+[[param_float]]
+param = "walk_speed_max"
+subparam = ""
+value = 1.05
+kinds = ["master"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "dash_speed"
+subparam = ""
+value = 2.2
+kinds = ["master"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "run_speed_max"
+subparam = ""
+value = 1.9
+kinds = ["master"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "jump_speed_x_mul"
+subparam = ""
+value = 1.125
+kinds = ["master"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "air_speed_x_stable"
+subparam = ""
+value = 0.99
+kinds = ["master"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_n"
+subparam = ""
+value = 9.0
+kinds = ["master"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_f"
+subparam = ""
+value = 9.0
+kinds = ["master"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_b"
+subparam = ""
+value = 11.0
+kinds = ["master"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_hi"
+subparam = ""
+value = 11.0
+kinds = ["master"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_lw"
+subparam = ""
+value = 20.0
+kinds = ["master"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_jump_speed_y_mul"
+subparam = ""
+value = 1.0
+kinds = ["master"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_mini_jump_speed_y_mul"
+subparam = ""
+value = 0.475
+kinds = ["master"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# MIN MIN / TANTAN
+[[param_float]]
+param = "walk_speed_max"
+subparam = ""
+value = 1.3
+kinds = ["tantan"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "ground_brake"
+subparam = ""
+value = 0.07
+kinds = ["tantan"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "run_speed_max"
+subparam = ""
+value = 1.8
+kinds = ["tantan"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "air_speed_x_stable"
+subparam = ""
+value = 1.0
+kinds = ["tantan"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "weight"
+subparam = ""
+value = 85.0
+kinds = ["tantan"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_n"
+subparam = ""
+value = 10.0
+kinds = ["tantan"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_f"
+subparam = ""
+value = 10.0
+kinds = ["tantan"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_jump_speed_y_mul"
+subparam = ""
+value = 1.0
+kinds = ["tantan"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_mini_jump_speed_y_mul"
+subparam = ""
+value = 0.475
+kinds = ["tantan"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# STEVE / PICKEL
+[[param_float]]
+param = "dash_speed"
+subparam = ""
+value = 1.5
+kinds = ["pickel"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "jump_speed_x_mul"
+subparam = ""
+value = 1.05
+kinds = ["pickel"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "air_speed_x_stable"
+subparam = ""
+value = 0.91
+kinds = ["pickel"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_jump_speed_y_mul"
+subparam = ""
+value = 1.0
+kinds = ["pickel"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_mini_jump_speed_y_mul"
+subparam = ""
+value = 0.475
+kinds = ["pickel"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# KAZUYA / DEMON
+[[param_float]]
+param = "ground_brake"
+subparam = ""
+value = 0.1
+kinds = ["demon"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "dash_speed"
+subparam = ""
+value = 1.825
+kinds = ["demon"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "run_speed_max"
+subparam = ""
+value = 1.6
+kinds = ["demon"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "jump_y"
+subparam = ""
+value = 22.0
+kinds = ["demon"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "jump_aerial_y"
+subparam = ""
+value = 50.0
+kinds = ["demon"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "air_accel_x_mul"
+subparam = ""
+value = 0.05
+kinds = ["demon"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "air_speed_x_stable"
+subparam = ""
+value = 1.075
+kinds = ["demon"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "weight"
+subparam = ""
+value = 105.0
+kinds = ["demon"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_lw"
+subparam = ""
+value = 25.0
+kinds = ["demon"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "attack_s4_smash_hold_attack_up"
+subparam = ""
+value = 1.3
+kinds = ["demon"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "attack_hi4_smash_hold_attack_up"
+subparam = ""
+value = 1.3
+kinds = ["demon"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "attack_lw4_smash_hold_attack_up"
+subparam = ""
+value = 1.3
+kinds = ["demon"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_int]]
+param = "jump_squat_frame"
+subparam = ""
+value = 5
+kinds = ["demon"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_jump_speed_y_mul"
+subparam = ""
+value = 1.0
+kinds = ["demon"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_mini_jump_speed_y_mul"
+subparam = ""
+value = 0.475
+kinds = ["demon"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# SORA / TRAIL
+[[param_float]]
+param = "dash_speed"
+subparam = ""
+value = 1.825
+kinds = ["trail"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "run_speed_max"
+subparam = ""
+value = 1.78
+kinds = ["trail"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "jump_speed_x_mul"
+subparam = ""
+value = 1.5
+kinds = ["trail"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "air_speed_x_stable"
+subparam = ""
+value = 1.175
+kinds = ["trail"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "air_speed_y_stable"
+subparam = ""
+value = 1.75
+kinds = ["trail"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "dive_speed_y"
+subparam = ""
+value = 2.8
+kinds = ["trail"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_n"
+subparam = ""
+value = 9.0
+kinds = ["trail"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_f"
+subparam = ""
+value = 8.0
+kinds = ["trail"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_hi"
+subparam = ""
+value = 9.0
+kinds = ["trail"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_jump_speed_y_mul"
+subparam = ""
+value = 1.0
+kinds = ["trail"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_mini_jump_speed_y_mul"
+subparam = ""
+value = 0.475
+kinds = ["trail"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# PYRA / EFLAME
+[[param_float]]
+param = "walk_accel_add"
+subparam = ""
+value = 0.5
+kinds = ["eflame"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "walk_speed_max"
+subparam = ""
+value = 1.25
+kinds = ["eflame"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "ground_brake"
+subparam = ""
+value = 0.075
+kinds = ["eflame"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "run_speed_max"
+subparam = ""
+value = 1.5
+kinds = ["eflame"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "jump_speed_x_mul"
+subparam = ""
+value = 1.15
+kinds = ["eflame"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "jump_aerial_y"
+subparam = ""
+value = 32.0
+kinds = ["eflame"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "air_speed_x_stable"
+subparam = ""
+value = 1.14
+kinds = ["eflame"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "weight"
+subparam = ""
+value = 97.0
+kinds = ["eflame"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_n"
+subparam = ""
+value = 10.0
+kinds = ["eflame"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_f"
+subparam = ""
+value = 15.0
+kinds = ["eflame"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_jump_speed_y_mul"
+subparam = ""
+value = 1.0
+kinds = ["eflame"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_mini_jump_speed_y_mul"
+subparam = ""
+value = 0.475
+kinds = ["eflame"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# MYTHRA / ELIGHT
+[[param_float]]
+param = "ground_brake"
+subparam = ""
+value = 0.14
+kinds = ["elight"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "dash_speed"
+subparam = ""
+value = 2.3
+kinds = ["elight"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "run_speed_max"
+subparam = ""
+value = 2.2
+kinds = ["elight"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "jump_speed_x_mul"
+subparam = ""
+value = 1.2
+kinds = ["elight"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "jump_speed_x_max"
+subparam = ""
+value = 1.5
+kinds = ["elight"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "jump_aerial_y"
+subparam = ""
+value = 27.5
+kinds = ["elight"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "weight"
+subparam = ""
+value = 85.0
+kinds = ["elight"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_lw"
+subparam = ""
+value = 8.0
+kinds = ["elight"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_jump_speed_y_mul"
+subparam = ""
+value = 1.0
+kinds = ["elight"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_mini_jump_speed_y_mul"
+subparam = ""
+value = 0.475
+kinds = ["elight"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# SEPHIROTH / EDGE
+[[param_float]]
+param = "air_speed_x_stable"
+subparam = ""
+value = 1.1
+kinds = ["edge"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_n"
+subparam = ""
+value = 8.0
+kinds = ["edge"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_hi"
+subparam = ""
+value = 15.0
+kinds = ["edge"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_jump_speed_y_mul"
+subparam = ""
+value = 1.0
+kinds = ["edge"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_mini_jump_speed_y_mul"
+subparam = ""
+value = 0.475
+kinds = ["edge"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "clip_sphere_offset_x"
+subparam = ""
+value = 0.0
+kinds = ["edge"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "clip_sphere_offset_y"
+subparam = ""
+value = -0.7
+kinds = ["edge"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# MII BRAWLER / MIIFIGHTER
+[[param_float]]
+param = "ground_brake"
+subparam = ""
+value = 0.125
+kinds = ["miifighter"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "dash_speed"
+subparam = ""
+value = 2.12
+kinds = ["miifighter"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "jump_speed_x_mul"
+subparam = ""
+value = 1.3
+kinds = ["miifighter"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "air_accel_x_mul"
+subparam = ""
+value = 0.045
+kinds = ["miifighter"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "air_speed_x_stable"
+subparam = ""
+value = 1.2
+kinds = ["miifighter"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "weight"
+subparam = ""
+value = 90.0
+kinds = ["miifighter"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_f"
+subparam = ""
+value = 10.0
+kinds = ["miifighter"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_b"
+subparam = ""
+value = 8.0
+kinds = ["miifighter"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_lw"
+subparam = ""
+value = 26.0
+kinds = ["miifighter"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_jump_speed_y_mul"
+subparam = ""
+value = 1.0
+kinds = ["miifighter"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_mini_jump_speed_y_mul"
+subparam = ""
+value = 0.475
+kinds = ["miifighter"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# MII SWORDFIGHTER / MIISWORDSMAN
+[[param_float]]
+param = "dash_speed"
+subparam = ""
+value = 1.82
+kinds = ["miiswordsman"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "run_speed_max"
+subparam = ""
+value = 1.7
+kinds = ["miiswordsman"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "jump_speed_x_mul"
+subparam = ""
+value = 1.1
+kinds = ["miiswordsman"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_b"
+subparam = ""
+value = 11.0
+kinds = ["miiswordsman"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_jump_speed_y_mul"
+subparam = ""
+value = 1.0
+kinds = ["miiswordsman"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_mini_jump_speed_y_mul"
+subparam = ""
+value = 0.475
+kinds = ["miiswordsman"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_n"
+subparam = ""
+value = 7.0
+kinds = ["miiswordsman"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_hi"
+subparam = ""
+value = 8.0
+kinds = ["miiswordsman"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# MII GUNNER / MIIGUNNER
+[[param_float]]
+param = "ground_brake"
+subparam = ""
+value = 0.07
+kinds = ["miigunner"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "dash_speed"
+subparam = ""
+value = 1.7
+kinds = ["miigunner"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "run_speed_max"
+subparam = ""
+value = 1.45
+kinds = ["miigunner"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "jump_speed_x_mul"
+subparam = ""
+value = 0.8
+kinds = ["miigunner"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "air_speed_x_stable"
+subparam = ""
+value = 0.89
+kinds = ["miigunner"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "weight"
+subparam = ""
+value = 102.0
+kinds = ["miigunner"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_n"
+subparam = ""
+value = 9.0
+kinds = ["miigunner"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_f"
+subparam = ""
+value = 12.0
+kinds = ["miigunner"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_lw"
+subparam = ""
+value = 15.0
+kinds = ["miigunner"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_jump_speed_y_mul"
+subparam = ""
+value = 1.0
+kinds = ["miigunner"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_mini_jump_speed_y_mul"
+subparam = ""
+value = 0.475
+kinds = ["miigunner"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# DARK SAMUS / SAMUSD
+[[param_float]]
+param = "ground_brake"
+subparam = ""
+value = 0.06
+kinds = ["samusd"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "dash_speed"
+subparam = ""
+value = 1.92
+kinds = ["samusd"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "run_speed_max"
+subparam = ""
+value = 1.8
+kinds = ["samusd"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "jump_speed_x_mul"
+subparam = ""
+value = 1.25
+kinds = ["samusd"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "jump_aerial_y"
+subparam = ""
+value = 40.0
+kinds = ["samusd"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "air_accel_y"
+subparam = ""
+value = 0.1375
+kinds = ["samusd"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "air_speed_y_stable"
+subparam = ""
+value = 1.5
+kinds = ["samusd"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "dive_speed_y"
+subparam = ""
+value = 2.4
+kinds = ["samusd"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "weight"
+subparam = ""
+value = 98.0
+kinds = ["samusd"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_n"
+subparam = ""
+value = 6.0
+kinds = ["samusd"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_f"
+subparam = ""
+value = 10.0
+kinds = ["samusd"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_b"
+subparam = ""
+value = 6.0
+kinds = ["samusd"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_hi"
+subparam = ""
+value = 12.0
+kinds = ["samusd"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_jump_speed_y_mul"
+subparam = ""
+value = 1.0
+kinds = ["samusd"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_mini_jump_speed_y_mul"
+subparam = ""
+value = 0.475
+kinds = ["samusd"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "combo_attack_12_end"
+subparam = ""
+value = 0.0
+kinds = ["samusd"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_int]]
+param = "attack_combo_max"
+subparam = ""
+value = 1
+kinds = ["samusd"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# DAISY
+[[param_float]]
+param = "run_speed_max"
+subparam = ""
+value = 1.625
+kinds = ["daisy"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "jump_y"
+subparam = ""
+value = 28.0
+kinds = ["daisy"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "mini_jump_y"
+subparam = ""
+value = 13.5
+kinds = ["daisy"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "jump_aerial_y"
+subparam = ""
+value = 28.0
+kinds = ["daisy"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "air_accel_x_mul"
+subparam = ""
+value = 0.15
+kinds = ["daisy"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "air_speed_y_stable"
+subparam = ""
+value = 1.73
+kinds = ["daisy"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "dive_speed_y"
+subparam = ""
+value = 2.752
+kinds = ["daisy"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "weight"
+subparam = ""
+value = 83.0
+kinds = ["daisy"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_n"
+subparam = ""
+value = 11.0
+kinds = ["daisy"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_b"
+subparam = ""
+value = 9.0
+kinds = ["daisy"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_jump_speed_y_mul"
+subparam = ""
+value = 1.0
+kinds = ["daisy"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_mini_jump_speed_y_mul"
+subparam = ""
+value = 0.475
+kinds = ["daisy"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# LUCINA
+[[param_float]]
+param = "walk_speed_max"
+subparam = ""
+value = 1.48
+kinds = ["lucina"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "ground_brake"
+subparam = ""
+value = 0.09
+kinds = ["lucina"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "dash_speed"
+subparam = ""
+value = 1.7
+kinds = ["lucina"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "run_accel_mul"
+subparam = ""
+value = 0.037
+kinds = ["lucina"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "run_accel_add"
+subparam = ""
+value = 0.025
+kinds = ["lucina"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "run_speed_max"
+subparam = ""
+value = 1.825
+kinds = ["lucina"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "jump_speed_x_mul"
+subparam = ""
+value = 1.0
+kinds = ["lucina"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "air_speed_x_stable"
+subparam = ""
+value = 1.05
+kinds = ["lucina"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "air_speed_y_stable"
+subparam = ""
+value = 1.78
+kinds = ["lucina"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "dive_speed_y"
+subparam = ""
+value = 2.848
+kinds = ["lucina"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "weight"
+subparam = ""
+value = 85.0
+kinds = ["lucina"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_n"
+subparam = ""
+value = 9.0
+kinds = ["lucina"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_f"
+subparam = ""
+value = 12.0
+kinds = ["lucina"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_jump_speed_y_mul"
+subparam = ""
+value = 1.0
+kinds = ["lucina"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_mini_jump_speed_y_mul"
+subparam = ""
+value = 0.475
+kinds = ["lucina"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# CHROM
+[[param_float]]
+param = "jump_speed_x_mul"
+subparam = ""
+value = 1.0
+kinds = ["chrom"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "jump_aerial_y"
+subparam = ""
+value = 30.0
+kinds = ["chrom"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "air_accel_x_mul"
+subparam = ""
+value = 0.03
+kinds = ["chrom"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "air_speed_x_stable"
+subparam = ""
+value = 1.1
+kinds = ["chrom"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "damage_fly_top_speed_y_stable"
+subparam = ""
+value = 1.9
+kinds = ["chrom"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "dive_speed_y"
+subparam = ""
+value = 3.04
+kinds = ["chrom"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "weight"
+subparam = ""
+value = 93.0
+kinds = ["chrom"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_n"
+subparam = ""
+value = 9.0
+kinds = ["chrom"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_b"
+subparam = ""
+value = 10.0
+kinds = ["chrom"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_hi"
+subparam = ""
+value = 8.0
+kinds = ["chrom"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_jump_speed_y_mul"
+subparam = ""
+value = 1.0
+kinds = ["chrom"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_mini_jump_speed_y_mul"
+subparam = ""
+value = 0.475
+kinds = ["chrom"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "combo_attack_12_end"
+subparam = ""
+value = 32.0
+kinds = ["chrom"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_int]]
+param = "attack_combo_max"
+subparam = ""
+value = 2
+kinds = ["chrom"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# DARK PIT / PITB
+[[param_float]]
+param = "ground_brake"
+subparam = ""
+value = 0.17
+kinds = ["pitb"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "dash_speed"
+subparam = ""
+value = 2.12
+kinds = ["pitb"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "run_speed_max"
+subparam = ""
+value = 1.9
+kinds = ["pitb"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "jump_y"
+subparam = ""
+value = 33.0
+kinds = ["pitb"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_int]]
+param = "jump_count_max"
+subparam = ""
+value = 2
+kinds = ["pitb"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "jump_aerial_y"
+subparam = ""
+value = 33.0
+kinds = ["pitb"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "air_speed_x_stable"
+subparam = ""
+value = 1.1
+kinds = ["pitb"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "air_accel_y"
+subparam = ""
+value = 0.112
+kinds = ["pitb"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "air_speed_y_stable"
+subparam = ""
+value = 1.92
+kinds = ["pitb"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "dive_speed_y"
+subparam = ""
+value = 2.88
+kinds = ["pitb"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "weight"
+subparam = ""
+value = 90.0
+kinds = ["pitb"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_n"
+subparam = ""
+value = 7.0
+kinds = ["pitb"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_f"
+subparam = ""
+value = 9.0
+kinds = ["pitb"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_hi"
+subparam = ""
+value = 8.0
+kinds = ["pitb"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_frame"
+subparam = ""
+value = 3.0
+kinds = ["pitb"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_jump_speed_y_mul"
+subparam = ""
+value = 1.0
+kinds = ["pitb"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_mini_jump_speed_y_mul"
+subparam = ""
+value = 0.475
+kinds = ["pitb"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# KEN
+[[param_float]]
+param = "dash_speed"
+subparam = ""
+value = 1.85
+kinds = ["ken"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "run_speed_max"
+subparam = ""
+value = 1.68
+kinds = ["ken"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "air_speed_x_stable"
+subparam = ""
+value = 1.1
+kinds = ["ken"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_n"
+subparam = ""
+value = 6.0
+kinds = ["ken"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_jump_speed_y_mul"
+subparam = ""
+value = 1.0
+kinds = ["ken"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_mini_jump_speed_y_mul"
+subparam = ""
+value = 0.475
+kinds = ["ken"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# RICHTER
+[[param_float]]
+param = "dash_speed"
+subparam = ""
+value = 1.98
+kinds = ["richter"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "run_speed_max"
+subparam = ""
+value = 1.87
+kinds = ["richter"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "air_accel_x_mul"
+subparam = ""
+value = 0.05
+kinds = ["richter"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "air_speed_x_stable"
+subparam = ""
+value = 1.08
+kinds = ["richter"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_n"
+subparam = ""
+value = 7.0
+kinds = ["richter"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_f"
+subparam = ""
+value = 11.0
+kinds = ["richter"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_b"
+subparam = ""
+value = 13.0
+kinds = ["richter"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_hi"
+subparam = ""
+value = 6.0
+kinds = ["richter"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "shield_radius"
+subparam = ""
+value = 13.0
+kinds = ["richter"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "mini_jump_y"
+subparam = ""
+value = 14.0
+kinds = ["richter"]
+slots = [0,1,2,3,4,5,6,7]

@@ -23,4 +23,6 @@ pub fn install() {
 	frame::install();
 	status::install();
 	acmd::install();
+
+	param_config::update_float_2(*FIGHTER_KIND_MARIO, get_marked_costumes("mario","mario"), (smash::hash40("jump_speed_x_mul"), 0, 1.2));
 }

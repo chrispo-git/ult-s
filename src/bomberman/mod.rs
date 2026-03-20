@@ -139,4 +139,34 @@ pub fn install() {
     });
 
     the_csk_collection_api::set_fighter_jingle(hash40("ui_chara_bomberman"), "z73_f_bomberman");
+
+
+    param_config::update_float_2(*FIGHTER_KIND_PACMAN, get_marked_costumes("pacman", "bomberman"), (smash::hash40("dash_speed"), 0, 1.92));
+    param_config::update_float_2(*FIGHTER_KIND_PACMAN, get_marked_costumes("pacman", "bomberman"), (smash::hash40("run_speed_max"), 0, 1.75));
+    param_config::update_float_2(*FIGHTER_KIND_PACMAN, get_marked_costumes("pacman", "bomberman"), (smash::hash40("walk_speed_max"), 0, 1.2));
+    param_config::update_float_2(*FIGHTER_KIND_PACMAN, get_marked_costumes("pacman", "bomberman"), (smash::hash40("ground_brake"), 0, 0.09));
+    param_config::update_float_2(*FIGHTER_KIND_PACMAN, get_marked_costumes("pacman", "bomberman"), (smash::hash40("jump_speed_x_mul"), 0, 1.1));
+    param_config::update_float_2(*FIGHTER_KIND_PACMAN, get_marked_costumes("pacman", "bomberman"), (smash::hash40("air_accel_x_mul"), 0, 0.06));
+    param_config::update_float_2(*FIGHTER_KIND_PACMAN, get_marked_costumes("pacman", "bomberman"), (smash::hash40("air_accel_x_add"), 0, 0.01));
+    param_config::update_float_2(*FIGHTER_KIND_PACMAN, get_marked_costumes("pacman", "bomberman"), (smash::hash40("air_speed_x_stable"), 0, 1.071));
+    param_config::update_float_2(*FIGHTER_KIND_PACMAN, get_marked_costumes("pacman", "bomberman"), (smash::hash40("air_speed_y_stable"), 0, 1.62));
+    param_config::update_float_2(*FIGHTER_KIND_PACMAN, get_marked_costumes("pacman", "bomberman"), (smash::hash40("air_accel_y"), 0, 0.09));
+    param_config::update_float_2(*FIGHTER_KIND_PACMAN, get_marked_costumes("pacman", "bomberman"), (smash::hash40("dive_speed_y"), 0, 2.592));
+    param_config::update_float_2(*FIGHTER_KIND_PACMAN, get_marked_costumes("pacman", "bomberman"), (smash::hash40("jump_y"), 0, 32.0));
+    param_config::update_float_2(*FIGHTER_KIND_PACMAN, get_marked_costumes("pacman", "bomberman"), (smash::hash40("mini_jump_y"), 0, 18.0));
+    param_config::update_float_2(*FIGHTER_KIND_PACMAN, get_marked_costumes("pacman", "bomberman"), (smash::hash40("jump_aerial_y"), 0, 32.0));
+    param_config::update_float_2(*FIGHTER_KIND_PACMAN, get_marked_costumes("pacman", "bomberman"), (smash::hash40("weight"), 0, 87.0));
+    param_config::update_float_2(*FIGHTER_KIND_PACMAN, get_marked_costumes("pacman", "bomberman"), (smash::hash40("landing_attack_air_frame_n"), 0, 8.0));
+    param_config::update_float_2(*FIGHTER_KIND_PACMAN, get_marked_costumes("pacman", "bomberman"), (smash::hash40("landing_attack_air_frame_f"), 0, 8.0));
+    param_config::update_float_2(*FIGHTER_KIND_PACMAN, get_marked_costumes("pacman", "bomberman"), (smash::hash40("landing_attack_air_frame_b"), 0, 9.0));
+    param_config::update_float_2(*FIGHTER_KIND_PACMAN, get_marked_costumes("pacman", "bomberman"), (smash::hash40("landing_attack_air_frame_hi"), 0, 10.0));
+    param_config::update_float_2(*FIGHTER_KIND_PACMAN, get_marked_costumes("pacman", "bomberman"), (smash::hash40("landing_attack_air_frame_lw"), 0, 9.0));
+    param_config::update_int_2(*FIGHTER_KIND_PACMAN, get_marked_costumes("pacman", "bomberman"), (smash::hash40("height"), 0, 20));
+    param_config::update_int_2(*FIGHTER_KIND_PACMAN, get_marked_costumes("pacman", "bomberman"), (smash::hash40("squat_walk_type"), 0, 0));
+    param_config::update_int_2(-*FIGHTER_KIND_PACMAN, get_marked_costumes("pacman", "bomberman"), (smash::hash40("param_firehydrant"), smash::hash40("life"), 240));
+    param_config::update_int_2(-*FIGHTER_KIND_PACMAN, get_marked_costumes("pacman", "bomberman"), (smash::hash40("param_firehydrant"), smash::hash40("max_shoot_num"), 0));
+    param_config::update_int_2(-*FIGHTER_KIND_PACMAN, get_marked_costumes("pacman", "bomberman"), (smash::hash40("param_firehydrant"), smash::hash40("shoot_frame"), 999));
+    param_config::update_int_2(-*FIGHTER_KIND_PACMAN, get_marked_costumes("pacman", "bomberman"), (smash::hash40("param_firehydrant"), smash::hash40("hp"), 1));
+    param_config::update_int_2(-*FIGHTER_KIND_PACMAN, get_marked_costumes("pacman", "bomberman"), (smash::hash40("param_firehydrantwater"), smash::hash40("life"), 0));
+    param_config::update_float_2(-*FIGHTER_KIND_PACMAN, get_marked_costumes("pacman", "bomberman"), (smash::hash40("param_firehydrantwater"), smash::hash40("speed"), 0.0));
 } 

@@ -21,4 +21,13 @@ pub fn install() {
 	frame::install();
 	status::install();
 	acmd::install();
+
+	param_config::update_int_2(-*FIGHTER_KIND_KIRBY, get_marked_costumes("kirby","kirby"), (smash::hash40("param_finalcuttershot"), smash::hash40("is_penetration"), 1));
+	param_config::update_float_2(-*FIGHTER_KIND_KIRBY, get_marked_costumes("kirby","kirby"), (smash::hash40("param_finalcuttershot"), smash::hash40("life"), 40.0));
+	param_config::update_float_2(-*FIGHTER_KIND_KIRBY, get_marked_costumes("kirby","kirby"), (smash::hash40("param_finalcuttershot"), smash::hash40("speed"), 3.4));
+	param_config::update_float_2(-*FIGHTER_KIND_KIRBY, get_marked_costumes("kirby","kirby"), (smash::hash40("param_finalcuttershot"), smash::hash40("brake"), 0.0));
+	param_config::update_float_2(*FIGHTER_KIND_KIRBY, get_marked_costumes("kirby","kirby"), (smash::hash40("run_speed_max"), 0, 1.775));
+	param_config::update_float_2(*FIGHTER_KIND_KIRBY, get_marked_costumes("kirby","kirby"), (smash::hash40("jump_speed_x_mul"), 0, 1.0));
+	param_config::update_float_2(*FIGHTER_KIND_KIRBY, get_marked_costumes("kirby","kirby"), (smash::hash40("air_speed_x_stable"), 0, 0.95));
+
 }

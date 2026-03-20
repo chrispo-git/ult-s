@@ -730,6 +730,8 @@ pub(crate) unsafe fn update_enabled_checks() -> () {
 	let all: Vec<i32> = vec![-1];
 	if IS_MECHANICS_ENABLED  {
 		//Setting values for everybody!
+		param_config::update_float_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("tread_mini_jump_speed_y_mul"), 0, 1.0));
+		param_config::update_float_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("tread_mini_jump_speed_y_mul"), 0, 0.475));
 		param_config::update_attribute_mul_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("damage_fly_top_air_accel_y"), 0, 1.05));
 		param_config::update_float_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("damage_fly_top_speed_y_stable"), 0, 1.84));
 		param_config::update_int_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("param_motion"), smash::hash40("escape_air_slide_back_end_frame"), -1));
