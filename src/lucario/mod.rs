@@ -2,6 +2,8 @@ mod status;
 mod frame;
 mod acmd;
 use crate::util::*;
+use smash::lib::lua_const::*;
+use smash::hash40;
 
 static mut HAS_DOWNB : [bool; 8] = [false; 8];
 static mut DOWNB_X : [f32; 8] = [0.0; 8];

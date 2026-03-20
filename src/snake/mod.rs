@@ -14,8 +14,6 @@ use smash::phx::Vector3f;
 use smash::phx::Vector2f;
 use crate::util::*;
 use super::*;
-use smash::lib::lua_const::*;
-use smash::hash40;
 
 mod status;
 mod frame;

@@ -16,6 +16,7 @@ use crate::common::*;
 use cached::proc_macro::cached;
 use std::collections::{HashMap, HashSet};
 use std::time::Instant;
+use once_cell::sync::Lazy;
 
 pub static mut GAMEMODES : Vec<String> = Vec::new();
 

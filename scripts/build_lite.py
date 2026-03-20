@@ -87,7 +87,7 @@ if os.path.exists(r'target'):
             if os.path.exists(r'romfs'):
                 print("Starting copy")
                 copytree(r'romfs/fighter/common', r'releases/ultimate/mods/Ultimate S Lite/fighter/common')
-                os.remove(r'releases/ultimate/mods/Ultimate S Lite/fighter/common/param/fighter_param.prcxml')
+                #os.remove(r'releases/ultimate/mods/Ultimate S Lite/fighter/common/param/fighter_param.prcxml')
                 copytree(r'romfs/item', r'releases/ultimate/mods/Ultimate S Lite/item')
                 shutil.rmtree(r'releases/ultimate/mods/Ultimate S Lite/item/barrel')
                 shutil.rmtree(r'releases/ultimate/mods/Ultimate S Lite/item/daisydaikon')
@@ -97,16 +97,16 @@ if os.path.exists(r'target'):
                 copytree(r'romfs/sound', r'releases/ultimate/mods/Ultimate S Lite/sound')
                 copytree(r'romfs/prebuilt', r'releases/ultimate/mods/Ultimate S Lite/prebuilt')
                 copytree(r'romfs/stream;', r'releases/ultimate/mods/Ultimate S Lite/stream;')
-                shutil.copy(r'romfs/config_param.toml', r'releases/ultimate/mods/Ultimate S Lite/config_param.toml')
-                f = open(r'releases/ultimate/mods/Ultimate S Lite/config_param.toml')
-                config_param = f.readlines()
-                f.close()
-                cut = config_param.index("# CUSTOM CHARACTERS\n")
-                cut_config_param = config_param[cut:]
-                f = open(r'releases/ultimate/mods/Ultimate S Lite/config_param.toml', "w")
-                for i in cut_config_param:
-                    f.write(i)
-                f.close()
+                #shutil.copy(r'romfs/config_param.toml', r'releases/ultimate/mods/Ultimate S Lite/config_param.toml')
+                #f = open(r'releases/ultimate/mods/Ultimate S Lite/config_param.toml')
+                #config_param = f.readlines()
+                #f.close()
+                #cut = config_param.index("# CUSTOM CHARACTERS\n")
+                #cut_config_param = config_param[cut:]
+                #f = open(r'releases/ultimate/mods/Ultimate S Lite/config_param.toml', "w")
+                #for i in cut_config_param:
+                    #f.write(i)
+                #f.close()
                 shutil.copy(r'romfs/config.json', r'releases/ultimate/mods/Ultimate S Lite/config.json')
                 for root, dirs, files in os.walk(r"releases/ultimate/mods/Ultimate S Lite/sound", topdown=False):
                         for name in files:
