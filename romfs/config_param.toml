@@ -150,6 +150,70 @@ kinds = ["diddy"]
 slots = [0,1,2,3,4,5,6,7]
 
 
+# DONKEY KONG
+[[param_float]]
+param = "landing_attack_air_frame_n"
+subparam = ""
+value = 9.0
+kinds = ["donkey"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_f"
+subparam = ""
+value = 13.0
+kinds = ["donkey"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_hi"
+subparam = ""
+value = 13.0
+kinds = ["donkey"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "landing_attack_air_frame_lw"
+subparam = ""
+value = 14.0
+kinds = ["donkey"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "jump_speed_x_mul"
+subparam = ""
+value = 1.0
+kinds = ["donkey"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_jump_speed_y_mul"
+subparam = ""
+value = 1.0
+kinds = ["donkey"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_mini_jump_speed_y_mul"
+subparam = ""
+value = 0.475
+kinds = ["donkey"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "clip_sphere_offset_y"
+subparam = ""
+value = 3.0
+kinds = ["donkey"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_int]]
+param = "wall_jump_type"
+subparam = ""
+value = 1
+kinds = ["donkey"]
+slots = [0,1,2,3,4,5,6,7]
+
 
 # TERRY / DOLLY
 [[param_int]]
@@ -573,6 +637,29 @@ param = "param_special_lw"
 subparam = "buoyancy_max"
 value = 1.4
 kinds = ["luigi"]
+slots = [0,1,2,3,4,5,6,7]
+
+
+# MARIO
+[[param_float]]
+param = "jump_speed_x_mul"
+subparam = ""
+value = 1.2
+kinds = ["mario"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_jump_speed_y_mul"
+subparam = ""
+value = 1.0
+kinds = ["mario"]
+slots = [0,1,2,3,4,5,6,7]
+
+[[param_float]]
+param = "tread_mini_jump_speed_y_mul"
+subparam = ""
+value = 0.475
+kinds = ["mario"]
 slots = [0,1,2,3,4,5,6,7]
 
 

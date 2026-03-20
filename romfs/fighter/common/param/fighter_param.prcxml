@@ -363,13 +363,6 @@ When adding a new change, make sure it is in ORDER! Here is an example of the or
 -->
 <struct>
   <list hash="fighter_param_table">
-    <!--MARIO-->
-    <struct index="0">
-      <float hash="jump_speed_x_mul">1.2</float>
-      
-      <float hash="tread_jump_speed_y_mul">1.0</float>
-      <float hash="tread_mini_jump_speed_y_mul">0.475</float>
-    </struct>
     <!--DONKEY KONG-->
     <struct index="1">
       <float hash="landing_attack_air_frame_n">9</float>
