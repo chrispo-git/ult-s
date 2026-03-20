@@ -19,4 +19,16 @@ pub fn install() {
 	frame::install();
 	status::install();
 	acmd::install();
+
+	param_config::update_float_2(-*FIGHTER_KIND_RYU, get_marked_costumes("ryu","ryu"), (smash::hash40("param_hadoken"), smash::hash40("command_power_mul"), 1.25));
+	param_config::update_float_2(*FIGHTER_KIND_RYU, get_marked_costumes("ryu","ryu"), (smash::hash40("param_special_s"), smash::hash40("air_speed_x_w"), 1.3));
+	param_config::update_float_2(*FIGHTER_KIND_RYU, get_marked_costumes("ryu","ryu"), (smash::hash40("param_special_s"), smash::hash40("air_speed_x_m"), 0.9));
+	param_config::update_float_2(*FIGHTER_KIND_RYU, get_marked_costumes("ryu","ryu"), (smash::hash40("param_special_s"), smash::hash40("air_speed_x_s"), 1.1));
+	param_config::update_int_2(*FIGHTER_KIND_RYU, get_marked_costumes("ryu","ryu"), (smash::hash40("param_special_s"), smash::hash40("air_end_weak_frame_w"), 29));
+	param_config::update_int_2(*FIGHTER_KIND_RYU, get_marked_costumes("ryu","ryu"), (smash::hash40("param_special_s"), smash::hash40("air_end_weak_frame_m"), 29));
+	param_config::update_int_2(*FIGHTER_KIND_RYU, get_marked_costumes("ryu","ryu"), (smash::hash40("param_special_s"), smash::hash40("air_end_weak_frame_s"), 29));
+	param_config::update_float_2(*FIGHTER_KIND_RYU, get_marked_costumes("ryu","ryu"), (smash::hash40("param_private"), smash::hash40("near_opponent_range_x"), 0.0));
+	param_config::update_float_2(*FIGHTER_KIND_RYU, get_marked_costumes("ryu","ryu"), (smash::hash40("air_speed_x_stable"), 0, 1.1));
+	param_config::update_float_2(*FIGHTER_KIND_RYU, get_marked_costumes("ryu","ryu"), (smash::hash40("landing_attack_air_frame_n"), 0, 6.0));
+
 }

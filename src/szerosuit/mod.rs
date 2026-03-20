@@ -49,4 +49,19 @@ pub fn install() {
 	frame::install();
 	status::install();
 	acmd::install();
+
+	param_config::update_float_2(*FIGHTER_KIND_SZEROSUIT, get_marked_costumes("szerosuit","szerosuit"), (smash::hash40("param_special_lw"), smash::hash40("speed_mul"), 0.90));
+	param_config::update_float_2(*FIGHTER_KIND_SZEROSUIT, get_marked_costumes("szerosuit","szerosuit"), (smash::hash40("param_special_lw"), smash::hash40("control_speed_x_mul"), 0.70));
+	param_config::update_float_2(*FIGHTER_KIND_SZEROSUIT, get_marked_costumes("szerosuit","szerosuit"), (smash::hash40("dash_speed"), 0, 2.3));
+	param_config::update_float_2(*FIGHTER_KIND_SZEROSUIT, get_marked_costumes("szerosuit","szerosuit"), (smash::hash40("run_speed_max"), 0, 2.15));
+	param_config::update_float_2(*FIGHTER_KIND_SZEROSUIT, get_marked_costumes("szerosuit","szerosuit"), (smash::hash40("mini_jump_y"), 0, 14.0));
+	param_config::update_float_2(*FIGHTER_KIND_SZEROSUIT, get_marked_costumes("szerosuit","szerosuit"), (smash::hash40("air_accel_x_mul"), 0, 0.07));
+	param_config::update_float_2(*FIGHTER_KIND_SZEROSUIT, get_marked_costumes("szerosuit","szerosuit"), (smash::hash40("weight"), 0, 83.0));
+	param_config::update_float_2(*FIGHTER_KIND_SZEROSUIT, get_marked_costumes("szerosuit","szerosuit"), (smash::hash40("landing_attack_air_frame_n"), 0, 8.0));
+	param_config::update_float_2(*FIGHTER_KIND_SZEROSUIT, get_marked_costumes("szerosuit","szerosuit"), (smash::hash40("landing_attack_air_frame_b"), 0, 11.0));
+	param_config::update_float_2(*FIGHTER_KIND_SZEROSUIT, get_marked_costumes("szerosuit","szerosuit"), (smash::hash40("landing_attack_air_frame_lw"), 0, 10.0));
+	param_config::update_float_2(*FIGHTER_KIND_SZEROSUIT, get_marked_costumes("szerosuit","szerosuit"), (smash::hash40("combo_attack_12_end"), 0, 0.0));
+	param_config::update_float_2(*FIGHTER_KIND_SZEROSUIT, get_marked_costumes("szerosuit","szerosuit"), (smash::hash40("combo_attack_13_end"), 0, 0.0));
+	param_config::update_int_2(*FIGHTER_KIND_SZEROSUIT, get_marked_costumes("szerosuit","szerosuit"), (smash::hash40("air_lasso_type"), 0, 1));
+
 }
