@@ -5,6 +5,8 @@ use crate::util::*;
 pub static mut FIGHTER_FALCO_GENERATE_ARTICLE_MISSILE: i32 = 6;
 use std::convert::TryInto;
 use std::collections::HashMap;
+use smash::lib::lua_const::*;
+use smash::hash40;
 
 static mut AIR_SHOT : [bool; 8] = [false; 8];
 static mut HAS_DOWNB : [bool; 8] = [false; 8];

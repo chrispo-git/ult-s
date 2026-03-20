@@ -2,6 +2,8 @@ mod status;
 mod frame;
 mod acmd;
 use crate::util::*;
+use smash::lib::lua_const::*;
+use smash::hash40;
 
 static mut COUNTER_IS : [bool; 8] = [false; 8];
 static mut BAN_DOWNB : [bool; 8] = [false; 8];

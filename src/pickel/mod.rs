@@ -2,6 +2,8 @@ mod status;
 mod frame;
 mod acmd;
 use crate::util::*;
+use smash::lib::lua_const::*;
+use smash::hash40;
 			
 
 
@@ -9,7 +11,7 @@ pub fn install() {
 	frame::install();
 	status::install();
 	acmd::install();
-	
+
 	param_config::update_float_2(*FIGHTER_KIND_PICKEL, get_marked_costumes("pickel","pickel"), (smash::hash40("param_special_n"), smash::hash40("0x1a89765685"), 2.5));
 	param_config::update_float_2(*FIGHTER_KIND_PICKEL, get_marked_costumes("pickel","pickel"), (smash::hash40("param_special_n"), smash::hash40("0x1a0a95e89a"), 0.93));
 	param_config::update_float_2(*FIGHTER_KIND_PICKEL, get_marked_costumes("pickel","pickel"), (smash::hash40("param_special_n"), smash::hash40("0x1a1bb90606"), 1.25));

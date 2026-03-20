@@ -2,6 +2,8 @@ mod status;
 mod frame;
 mod acmd;
 use crate::util::*;
+use smash::lib::lua_const::*;
+use smash::hash40;
 
 static mut FIREBALL : [i32; 8] = [0; 8];
 static mut SPECIAL_ZOOM_GFX : [i32; 8] = [0; 8];

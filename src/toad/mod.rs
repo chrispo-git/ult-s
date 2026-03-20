@@ -12,6 +12,8 @@ use std::mem;
 use smash::app::*;
 use crate::util::*;
 use std::collections::HashMap;
+use smash::lib::lua_const::*;
+use smash::hash40;
 
 mod status;
 mod frame;

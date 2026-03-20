@@ -2,6 +2,8 @@ mod status;
 mod frame;
 mod acmd;
 use crate::util::*;
+use smash::lib::lua_const::*;
+use smash::hash40;
 
 //Float Stuff
 static mut CHECK_FLOAT : [i32; 8] = [0; 8];

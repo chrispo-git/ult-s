@@ -1,6 +1,8 @@
 mod status;
 mod frame;
 mod acmd;
+use smash::lib::lua_const::*;
+use smash::hash40;
 use crate::util::*;
 
 static mut TICO_X : [f32; 8] = [0.0; 8];

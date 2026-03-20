@@ -2,12 +2,14 @@ mod status;
 mod frame;
 mod acmd;
 use crate::util::*;
+use smash::lib::lua_const::*;
+use smash::hash40;
 
 pub fn install() {
 	frame::install();
 	status::install();
 	acmd::install();
-	
+
 	param_config::update_float_2(*FIGHTER_KIND_FOX, get_marked_costumes("fox","fox"), (smash::hash40("param_special_hi"), smash::hash40("fire_rush_speed"), 3.2));
 	param_config::update_float_2(*FIGHTER_KIND_FOX, get_marked_costumes("fox","fox"), (smash::hash40("dash_speed"), 0, 2.37));
 	param_config::update_float_2(*FIGHTER_KIND_FOX, get_marked_costumes("fox","fox"), (smash::hash40("run_speed_max"), 0, 2.0));

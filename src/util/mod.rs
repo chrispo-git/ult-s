@@ -16,6 +16,8 @@ use crate::common::*;
 use cached::proc_macro::cached;
 use std::collections::{HashMap, HashSet};
 use once_cell::sync::Lazy;
+use smash::lib::lua_const::*;
+use smash::hash40;
 use std::time::Instant;
 
 pub static mut GAMEMODES : Vec<String> = Vec::new();

@@ -1,6 +1,8 @@
 mod status;
 mod frame;
 mod acmd;
+use smash::lib::lua_const::*;
+use smash::hash40;
 use crate::util::*;
 
 static mut HOLD : [i32; 8] = [0; 8];
@@ -20,7 +22,7 @@ pub fn install() {
 	frame::install();
 	status::install();
 	acmd::install();
-	
+
 	param_config::update_int_2(-*FIGHTER_KIND_SAMUSD, get_marked_costumes("samusd","samusd"), (smash::hash40("param_missile"), smash::hash40("h_life"), 290));
 	param_config::update_float_2(-*FIGHTER_KIND_SAMUSD, get_marked_costumes("samusd","samusd"), (smash::hash40("param_missile"), smash::hash40("h_spd"), 0.0));
 	param_config::update_float_2(-*FIGHTER_KIND_SAMUSD, get_marked_costumes("samusd","samusd"), (smash::hash40("param_missile"), smash::hash40("h_anglemax"), 0.0));

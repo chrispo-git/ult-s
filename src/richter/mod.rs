@@ -2,6 +2,8 @@ mod status;
 mod frame;
 mod acmd;
 use crate::util::*;
+use smash::lib::lua_const::*;
+use smash::hash40;
 		
 static mut WAS_AIR : [bool; 8] = [false; 8];	
 
@@ -10,7 +12,7 @@ pub fn install() {
 	frame::install();
 	status::install();
 	acmd::install();
-	
+
 	param_config::update_float_2(-*FIGHTER_KIND_RICHTER, get_marked_costumes("richter","richter"), (smash::hash40("param_axe"), smash::hash40("gravity"), 0.0));
 	param_config::update_float_2(-*FIGHTER_KIND_RICHTER, get_marked_costumes("richter","richter"), (smash::hash40("param_axe"), smash::hash40("throw_angle"), 0.0));
 	param_config::update_float_2(-*FIGHTER_KIND_RICHTER, get_marked_costumes("richter","richter"), (smash::hash40("param_axe"), smash::hash40("throw_speed"), 4.0));

@@ -2,6 +2,8 @@ mod status;
 mod frame;
 mod acmd;
 use crate::util::*;
+use smash::lib::lua_const::*;
+use smash::hash40;
 			
 
 
@@ -9,7 +11,7 @@ pub fn install() {
 	frame::install();
 	status::install();
 	acmd::install();
-	
+
 	param_config::update_float_2(*FIGHTER_KIND_PALUTENA, get_marked_costumes("palutena","palutena"), (smash::hash40("param_special_n"), smash::hash40("special_n_auto_target_deg_angle"), 0.0));
 	param_config::update_float_2(*FIGHTER_KIND_PALUTENA, get_marked_costumes("palutena","palutena"), (smash::hash40("param_special_n"), smash::hash40("special_n_auto_target_distance"), 0.0));
 	param_config::update_float_2(-*FIGHTER_KIND_PALUTENA, get_marked_costumes("palutena","palutena"), (smash::hash40("param_autoaimbullet"), smash::hash40("life"), 19.0));

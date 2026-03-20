@@ -2,6 +2,8 @@ mod status;
 mod frame;
 mod acmd;
 use crate::util::*;
+use smash::lib::lua_const::*;
+use smash::hash40;
 
 static mut MAKE_NEW_BOMB : [bool; 8] = [false; 8];
 static mut NEW_BOMB_X : [f32; 8] = [0.0; 8];
@@ -17,7 +19,6 @@ static mut SIDEB_CATCH : [bool; 8] = [false; 8];
 static mut FORCE_END : [bool; 8] = [false; 8];
 static mut FALL_COUNT : [i32; 8] = [0; 8];
 use std::collections::HashMap;
-use smash::hash40;
 
 static mut EXPLODE : [bool; 8] = [false; 8];
 static mut BOMB :  smash::phx::Vector3f =  smash::phx::Vector3f { x: 0.0, y: 10.5, z: 0.0 };
