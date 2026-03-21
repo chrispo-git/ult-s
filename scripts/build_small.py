@@ -19,15 +19,20 @@ def copytree(src, dst, symlinks=False, ignore=None):
     log(f"[copytree] Done copying {src}")
 
 log("[build_small] Starting cargo skyline build...")
-result = subprocess.run(
+process = subprocess.Popen(
     'cargo skyline build --release --features="main_nro"',
     shell=True,
-    stdout=sys.stdout,
-    stderr=sys.stderr
+    stdout=subprocess.PIPE,
+    stderr=subprocess.STDOUT,
+    text=True
 )
-log(f"[build_small] cargo skyline build exited with code {result.returncode}")
-if result.returncode != 0:
-    raise Exception(f"cargo skyline build failed with return code {result.returncode}")
+for line in process.stdout:
+    print(line, end='', flush=True)
+process.wait()
+result_code = process.returncode
+log(f"[build_small] cargo skyline build exited with code {result_code}")
+if result_code != 0:
+    raise Exception(f"cargo skyline build failed with return code {result_code}")
 
 os.chdir('../')
 log(f"[build_small] Now in: {os.getcwd()}")
