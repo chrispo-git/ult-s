@@ -4,8 +4,11 @@ from zipfile import ZipFile
 import sys
 import subprocess
 
+def log(msg):
+    print(msg, flush=True)
 
 def copytree(src, dst, symlinks=False, ignore=None):
+    log(f"[copytree] Copying {src} -> {dst}")
     for item in os.listdir(src):
         s = os.path.join(src, item)
         d = os.path.join(dst, item)
@@ -13,17 +16,31 @@ def copytree(src, dst, symlinks=False, ignore=None):
             shutil.copytree(s, d, symlinks, ignore)
         else:
             shutil.copy2(s, d)
+    log(f"[copytree] Done copying {src}")
 
-subprocess.run('cargo skyline build --release --features="main_nro"', shell=True)
+log("[build_small] Starting cargo skyline build...")
+process = subprocess.Popen(
+    'cargo skyline build --release --features="main_nro"',
+    shell=True,
+    stdout=subprocess.PIPE,
+    stderr=subprocess.STDOUT,
+    text=True
+)
+for line in process.stdout:
+    print(line, end='', flush=True)
+process.wait()
+result_code = process.returncode
+log(f"[build_small] cargo skyline build exited with code {result_code}")
+if result_code != 0:
+    raise Exception(f"cargo skyline build failed with return code {result_code}")
+
 os.chdir('../')
-print(os.getcwd())
-old = r"target\aarch64-skyline-switch\release\libplugin.nro"
+log(f"[build_small] Now in: {os.getcwd()}")
 new = r"releases/ultimate/mods/Ultimate S Arcropolis (plugin and common files only)"
-old_rename = r"libplugin.nro"
-rename = r"plugin.nro"
 
 def empty_folder():
     folder = r'releases'
+    log(f"[build_small] Emptying folder: {folder}")
     for filename in os.listdir(folder):
         file_path = os.path.join(folder, filename)
         try:
@@ -32,69 +49,68 @@ def empty_folder():
             elif os.path.isdir(file_path):
                 shutil.rmtree(file_path)
         except Exception as e:
-            print('Failed to delete %s. Reason: %s' % (file_path, e))
+            log(f'[build_small] Failed to delete {file_path}. Reason: {e}')
 
 def get_all_file_paths(directory):
-  
-    # initializing empty file paths list
     file_paths = []
-  
-    # crawling through directory and subdirectories
     for root, directories, files in os.walk(directory):
         for filename in files:
-            # join the two strings in order to form the full filepath.
             filepath = os.path.join(root, filename)
             file_paths.append(filepath)
-  
-    # returning all file paths
-    return file_paths       
+    return file_paths
 
-print("Finished Building... now compiling Romfs")
+log("[build_small] Finished building... now compiling Romfs")
 
 if os.path.exists(r'target'):
+    log("[build_small] Found target/ directory")
     os.chdir(r'target')
-    print(os.listdir())
+    log(f"[build_small] Contents of target/: {os.listdir()}")
     if os.path.exists(r'aarch64-skyline-switch'):
         os.chdir(r'aarch64-skyline-switch')
-        print(os.listdir())
+        log(f"[build_small] Contents of aarch64-skyline-switch/: {os.listdir()}")
         if os.path.exists(r'release'):
             os.chdir(r'release')
-            #print(os.listdir())
             old = os.path.join(os.path.abspath(os.getcwd()), r'libplugin.nro')
+            log(f"[build_small] Found libplugin.nro at: {old}")
             os.chdir('../')
             os.chdir('../')
             os.chdir('../')
-            print(os.getcwd())
+            log(f"[build_small] Back in: {os.getcwd()}")
             if os.path.exists(r'releases'):
+                log("[build_small] Emptying existing releases/ folder")
                 empty_folder()
-            if os.path.exists(new) == False:
+            if not os.path.exists(new):
+                log(f"[build_small] Creating output directory: {new}")
                 os.makedirs(new)
-            #print(old)
+            log(f"[build_small] Moving {old} -> {new}")
             shutil.move(old, new)
-            #print(os.listdir())
-            if os.path.exists(r'releases/ultimate/mods/Ultimate S Arcropolis (plugin and common files only)') == False:
+            if not os.path.exists(r'releases/ultimate/mods/Ultimate S Arcropolis (plugin and common files only)'):
                 os.makedirs(r'releases/ultimate/mods/Ultimate S Arcropolis (plugin and common files only)')
+            log("[build_small] Renaming libplugin.nro -> plugin.nro")
             shutil.move(os.path.join(new, r'libplugin.nro'), os.path.join(new, r'plugin.nro'))
             if os.path.exists(r'romfs'):
-                print("Starting copy")
+                log("[build_small] Starting romfs copy")
                 copytree(r'romfs/fighter/common', r'releases/ultimate/mods/Ultimate S Arcropolis (plugin and common files only)/fighter/common')
                 copytree(r'romfs/prebuilt', r'releases/ultimate/mods/Ultimate S Arcropolis (plugin and common files only)/prebuilt')
-                shutil.copy(r'romfs/config_param.toml', r'releases/ultimate/mods/Ultimate S Arcropolis (plugin and common files only)/config_param.toml')
-                print("Copying from romfs finished, now zipping")
+                log("[build_small] Copying from romfs finished, now zipping")
             else:
-                print("Error! No romfs folder! Please check your install")
-            
+                log("[build_small] ERROR: No romfs folder! Please check your install")
 
-            if os.path.exists(r'releases/Ultimate S Arcropolis (plugin and common files only).zip'):
-                os.remove(r'releases/Ultimate S Arcropolis (plugin and common files only).zip')
+            zip_path = r'releases/Ultimate S Arcropolis (plugin and common files only).zip'
+            if os.path.exists(zip_path):
+                log(f"[build_small] Removing old zip: {zip_path}")
+                os.remove(zip_path)
+            log("[build_small] Gathering files to zip...")
             file_paths = get_all_file_paths(new)
-            with ZipFile(r'releases/Ultimate S Arcropolis (plugin and common files only).zip','w') as zip:
+            log(f"[build_small] Zipping {len(file_paths)} files into {zip_path}")
+            with ZipFile(zip_path, 'w') as zip:
                 for file in file_paths:
+                    log(f"[build_small]   Adding: {file}")
                     zip.write(file)
-            print("Done!")
+            log("[build_small] Done!")
         else:
-            print('aarch64-skyline-switch does not exist')
+            log('[build_small] ERROR: release/ does not exist inside aarch64-skyline-switch/')
     else:
-        print('aarch64-skyline-switch does not exist')
+        log('[build_small] ERROR: aarch64-skyline-switch does not exist inside target/')
 else:
-    print('target does not exist')
+    log('[build_small] ERROR: target/ does not exist')
