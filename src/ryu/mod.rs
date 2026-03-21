@@ -22,7 +22,7 @@ pub fn install() {
 	status::install();
 	acmd::install();
 
-	param_config::update_float_2(-*FIGHTER_KIND_RYU, get_marked_costumes("ryu","ryu").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_hadoken"), smash::hash40("command_power_mul"), 1.25));
+	param_config::update_float_2(-*WEAPON_KIND_RYU_HADOKEN, get_marked_costumes("ryu","ryu").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_hadoken"), smash::hash40("command_power_mul"), 1.25));
 	param_config::update_float_2(*FIGHTER_KIND_RYU, get_marked_costumes("ryu","ryu").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_special_s"), smash::hash40("air_speed_x_w"), 1.3));
 	param_config::update_float_2(*FIGHTER_KIND_RYU, get_marked_costumes("ryu","ryu").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_special_s"), smash::hash40("air_speed_x_m"), 0.9));
 	param_config::update_float_2(*FIGHTER_KIND_RYU, get_marked_costumes("ryu","ryu").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_special_s"), smash::hash40("air_speed_x_s"), 1.1));

@@ -164,10 +164,10 @@ pub fn install() {
     param_config::update_float_2(*FIGHTER_KIND_PACMAN, get_marked_costumes("pacman","bomberman").into_iter().map(|x| x as i32).collect(), (smash::hash40("landing_attack_air_frame_lw"), 0, 9.0));
     param_config::update_int_2(*FIGHTER_KIND_PACMAN, get_marked_costumes("pacman","bomberman").into_iter().map(|x| x as i32).collect(), (smash::hash40("height"), 0, 20));
     param_config::update_int_2(*FIGHTER_KIND_PACMAN, get_marked_costumes("pacman","bomberman").into_iter().map(|x| x as i32).collect(), (smash::hash40("squat_walk_type"), 0, 0));
-    param_config::update_int_2(-*FIGHTER_KIND_PACMAN, get_marked_costumes("pacman","bomberman").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_firehydrant"), smash::hash40("life"), 240));
-    param_config::update_int_2(-*FIGHTER_KIND_PACMAN, get_marked_costumes("pacman","bomberman").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_firehydrant"), smash::hash40("max_shoot_num"), 0));
-    param_config::update_int_2(-*FIGHTER_KIND_PACMAN, get_marked_costumes("pacman","bomberman").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_firehydrant"), smash::hash40("shoot_frame"), 999));
-    param_config::update_int_2(-*FIGHTER_KIND_PACMAN, get_marked_costumes("pacman","bomberman").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_firehydrant"), smash::hash40("hp"), 1));
-    param_config::update_int_2(-*FIGHTER_KIND_PACMAN, get_marked_costumes("pacman","bomberman").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_firehydrantwater"), smash::hash40("life"), 0));
-    param_config::update_float_2(-*FIGHTER_KIND_PACMAN, get_marked_costumes("pacman","bomberman").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_firehydrantwater"), smash::hash40("speed"), 0.0));
+    param_config::update_int_2(-*WEAPON_KIND_PACMAN_FIREHYDRANT, get_marked_costumes("pacman","bomberman").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_firehydrant"), smash::hash40("life"), 240));
+    param_config::update_int_2(-*WEAPON_KIND_PACMAN_FIREHYDRANT, get_marked_costumes("pacman","bomberman").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_firehydrant"), smash::hash40("max_shoot_num"), 0));
+    param_config::update_int_2(-*WEAPON_KIND_PACMAN_FIREHYDRANT, get_marked_costumes("pacman","bomberman").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_firehydrant"), smash::hash40("shoot_frame"), 999));
+    param_config::update_int_2(-*WEAPON_KIND_PACMAN_FIREHYDRANT, get_marked_costumes("pacman","bomberman").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_firehydrant"), smash::hash40("hp"), 1));
+    param_config::update_int_2(-*WEAPON_KIND_PACMAN_FIREHYDRANT_WATER, get_marked_costumes("pacman","bomberman").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_firehydrantwater"), smash::hash40("life"), 0));
+    param_config::update_float_2(-*WEAPON_KIND_PACMAN_FIREHYDRANT_WATER, get_marked_costumes("pacman","bomberman").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_firehydrantwater"), smash::hash40("speed"), 0.0));
 } 

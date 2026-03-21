@@ -23,14 +23,14 @@ pub fn install() {
 	status::install();
 	acmd::install();
 
-	param_config::update_int_2(-*FIGHTER_KIND_SAMUSD, get_marked_costumes("samusd","samusd").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_missile"), smash::hash40("h_life"), 290));
-	param_config::update_float_2(-*FIGHTER_KIND_SAMUSD, get_marked_costumes("samusd","samusd").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_missile"), smash::hash40("h_spd"), 0.0));
-	param_config::update_float_2(-*FIGHTER_KIND_SAMUSD, get_marked_costumes("samusd","samusd").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_missile"), smash::hash40("h_anglemax"), 0.0));
-	param_config::update_float_2(-*FIGHTER_KIND_SAMUSD, get_marked_costumes("samusd","samusd").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_missile"), smash::hash40("h_angle"), 0.0));
-	param_config::update_float_2(-*FIGHTER_KIND_SAMUSD, get_marked_costumes("samusd","samusd").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_missile"), smash::hash40("h_angleplay"), 0.0));
-	param_config::update_int_2(-*FIGHTER_KIND_SAMUSD, get_marked_costumes("samusd","samusd").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_missile"), smash::hash40("h_homingf"), 0));
-	param_config::update_float_2(-*FIGHTER_KIND_SAMUSD, get_marked_costumes("samusd","samusd").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_missile"), smash::hash40("h_spdmul"), 0.0));
-	param_config::update_float_2(-*FIGHTER_KIND_SAMUSD, get_marked_costumes("samusd","samusd").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_missile"), smash::hash40("h_spdmin"), 0.0));
+	param_config::update_int_2(-*WEAPON_KIND_SAMUSD_MISSILE, get_marked_costumes("samusd","samusd").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_missile"), smash::hash40("h_life"), 290));
+	param_config::update_float_2(-*WEAPON_KIND_SAMUSD_MISSILE, get_marked_costumes("samusd","samusd").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_missile"), smash::hash40("h_spd"), 0.0));
+	param_config::update_float_2(-*WEAPON_KIND_SAMUSD_MISSILE, get_marked_costumes("samusd","samusd").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_missile"), smash::hash40("h_anglemax"), 0.0));
+	param_config::update_float_2(-*WEAPON_KIND_SAMUSD_MISSILE, get_marked_costumes("samusd","samusd").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_missile"), smash::hash40("h_angle"), 0.0));
+	param_config::update_float_2(-*WEAPON_KIND_SAMUSD_MISSILE, get_marked_costumes("samusd","samusd").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_missile"), smash::hash40("h_angleplay"), 0.0));
+	param_config::update_int_2(-*WEAPON_KIND_SAMUSD_MISSILE, get_marked_costumes("samusd","samusd").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_missile"), smash::hash40("h_homingf"), 0));
+	param_config::update_float_2(-*WEAPON_KIND_SAMUSD_MISSILE, get_marked_costumes("samusd","samusd").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_missile"), smash::hash40("h_spdmul"), 0.0));
+	param_config::update_float_2(-*WEAPON_KIND_SAMUSD_MISSILE, get_marked_costumes("samusd","samusd").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_missile"), smash::hash40("h_spdmin"), 0.0));
 	param_config::update_float_2(*FIGHTER_KIND_SAMUSD, get_marked_costumes("samusd","samusd").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_special_hi"), smash::hash40("sjump_ar_vy0"), 4.0));
 	param_config::update_float_2(*FIGHTER_KIND_SAMUSD, get_marked_costumes("samusd","samusd").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_special_hi"), smash::hash40("sjump_fall_x_mul"), 1.3));
 	param_config::update_float_2(*FIGHTER_KIND_SAMUSD, get_marked_costumes("samusd","samusd").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_special_lw"), smash::hash40("sp_lw_gr_vy0"), 0.0));

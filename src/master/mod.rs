@@ -16,8 +16,8 @@ pub fn install() {
 	param_config::update_int_2(*FIGHTER_KIND_MASTER, get_marked_costumes("master","master").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_special_n"), smash::hash40("cancel_start_frame"), 300));
 	param_config::update_int_2(*FIGHTER_KIND_MASTER, get_marked_costumes("master","master").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_special_n"), smash::hash40("cancel_end_frame"), 350));
 	param_config::update_float_2(*FIGHTER_KIND_MASTER, get_marked_costumes("master","master").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_special_n"), smash::hash40("arrow_offset_x"), 4.0));
-	param_config::update_int_2(-*FIGHTER_KIND_MASTER, get_marked_costumes("master","master").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_arrow1"), smash::hash40("life"), 10));
-	param_config::update_int_2(-*FIGHTER_KIND_MASTER, get_marked_costumes("master","master").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_arrow1"), smash::hash40("vanish_frame"), 8));
+	param_config::update_int_2(-*WEAPON_KIND_MASTER_ARROW1, get_marked_costumes("master","master").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_arrow1"), smash::hash40("life"), 10));
+	param_config::update_int_2(-*WEAPON_KIND_MASTER_ARROW1, get_marked_costumes("master","master").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_arrow1"), smash::hash40("vanish_frame"), 8));
 	param_config::update_float_2(*FIGHTER_KIND_MASTER, get_marked_costumes("master","master").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_special_hi"), smash::hash40("overtake_attack_hp_rate"), 75.0));
 	param_config::update_float_2(*FIGHTER_KIND_MASTER, get_marked_costumes("master","master").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_special_hi"), smash::hash40("overtake_attack_damage"), 75.0));
 	param_config::update_float_2(*FIGHTER_KIND_MASTER, get_marked_costumes("master","master").into_iter().map(|x| x as i32).collect(), (smash::hash40("walk_speed_max"), 0, 1.05));

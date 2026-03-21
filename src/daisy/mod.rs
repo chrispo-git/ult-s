@@ -23,15 +23,15 @@ pub fn install() {
 	param_config::update_float_2(*FIGHTER_KIND_DAISY, get_marked_costumes("daisy","daisy").into_iter().map(|x| x as i32).collect(), (smash::hash40("landing_attack_air_frame_n"), 0, 11.0));
 	param_config::update_float_2(*FIGHTER_KIND_DAISY, get_marked_costumes("daisy","daisy").into_iter().map(|x| x as i32).collect(), (smash::hash40("landing_attack_air_frame_b"), 0, 9.0));
 	
-	param_config::update_float_2(-*FIGHTER_KIND_DAISY, get_marked_costumes("daisy","daisy").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_daisydaikon"), smash::hash40("daikon_throw_speed_mul"), 1.0));
-	param_config::update_float_2(-*FIGHTER_KIND_DAISY, get_marked_costumes("daisy","daisy").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_daisydaikon"), smash::hash40("daikon_life_frame"), 200.0));
-	param_config::update_float_2(-*FIGHTER_KIND_DAISY, get_marked_costumes("daisy","daisy").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_daisydaikon"), smash::hash40("daikon_1_power"), 3.0));
-	param_config::update_float_2(-*FIGHTER_KIND_DAISY, get_marked_costumes("daisy","daisy").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_daisydaikon"), smash::hash40("daikon_2_power"), 3.0));
-	param_config::update_float_2(-*FIGHTER_KIND_DAISY, get_marked_costumes("daisy","daisy").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_daisydaikon"), smash::hash40("daikon_3_power"), 3.0));
-	param_config::update_float_2(-*FIGHTER_KIND_DAISY, get_marked_costumes("daisy","daisy").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_daisydaikon"), smash::hash40("daikon_4_power"), 3.0));
-	param_config::update_float_2(-*FIGHTER_KIND_DAISY, get_marked_costumes("daisy","daisy").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_daisydaikon"), smash::hash40("daikon_5_power"), 3.0));
-	param_config::update_float_2(-*FIGHTER_KIND_DAISY, get_marked_costumes("daisy","daisy").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_daisydaikon"), smash::hash40("daikon_6_power"), 3.0));
-	param_config::update_float_2(-*FIGHTER_KIND_DAISY, get_marked_costumes("daisy","daisy").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_daisydaikon"), smash::hash40("daikon_7_power"), 3.0));
-	param_config::update_float_2(-*FIGHTER_KIND_DAISY, get_marked_costumes("daisy","daisy").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_daisydaikon"), smash::hash40("daikon_8_power"), 3.0));
+	param_config::update_float_2(*FIGHTER_KIND_DAISY, get_marked_costumes("daisy","daisy").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_daisydaikon"), smash::hash40("daikon_throw_speed_mul"), 1.0));
+	param_config::update_float_2(*FIGHTER_KIND_DAISY, get_marked_costumes("daisy","daisy").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_daisydaikon"), smash::hash40("daikon_life_frame"), 200.0));
+	param_config::update_float_2(*FIGHTER_KIND_DAISY, get_marked_costumes("daisy","daisy").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_daisydaikon"), smash::hash40("daikon_1_power"), 3.0));
+	param_config::update_float_2(*FIGHTER_KIND_DAISY, get_marked_costumes("daisy","daisy").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_daisydaikon"), smash::hash40("daikon_2_power"), 3.0));
+	param_config::update_float_2(*FIGHTER_KIND_DAISY, get_marked_costumes("daisy","daisy").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_daisydaikon"), smash::hash40("daikon_3_power"), 3.0));
+	param_config::update_float_2(*FIGHTER_KIND_DAISY, get_marked_costumes("daisy","daisy").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_daisydaikon"), smash::hash40("daikon_4_power"), 3.0));
+	param_config::update_float_2(*FIGHTER_KIND_DAISY, get_marked_costumes("daisy","daisy").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_daisydaikon"), smash::hash40("daikon_5_power"), 3.0));
+	param_config::update_float_2(*FIGHTER_KIND_DAISY, get_marked_costumes("daisy","daisy").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_daisydaikon"), smash::hash40("daikon_6_power"), 3.0));
+	param_config::update_float_2(*FIGHTER_KIND_DAISY, get_marked_costumes("daisy","daisy").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_daisydaikon"), smash::hash40("daikon_7_power"), 3.0));
+	param_config::update_float_2(*FIGHTER_KIND_DAISY, get_marked_costumes("daisy","daisy").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_daisydaikon"), smash::hash40("daikon_8_power"), 3.0));
 
 }

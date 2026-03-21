@@ -17,7 +17,7 @@ pub fn install() {
 	frame::install();
 	status::install();
 	acmd::install();
-	param_config::update_float_2(-*FIGHTER_KIND_PITB, get_marked_costumes("pitb","pitb").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_bowarrow"), smash::hash40("control_angle"), 1.2));
+	param_config::update_float_2(-*WEAPON_KIND_PITB_BOWARROW, get_marked_costumes("pitb","pitb").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_bowarrow"), smash::hash40("control_angle"), 1.2));
 	param_config::update_float_2(*FIGHTER_KIND_PITB, get_marked_costumes("pitb","pitb").into_iter().map(|x| x as i32).collect(), (smash::hash40("ground_brake"), 0, 0.17));
 	param_config::update_float_2(*FIGHTER_KIND_PITB, get_marked_costumes("pitb","pitb").into_iter().map(|x| x as i32).collect(), (smash::hash40("dash_speed"), 0, 2.12));
 	param_config::update_float_2(*FIGHTER_KIND_PITB, get_marked_costumes("pitb","pitb").into_iter().map(|x| x as i32).collect(), (smash::hash40("run_speed_max"), 0, 1.9));

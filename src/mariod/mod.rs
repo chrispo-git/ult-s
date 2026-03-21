@@ -31,7 +31,7 @@ pub fn install() {
 	param_config::update_float_2(*FIGHTER_KIND_MARIOD, get_marked_costumes("mariod","mariod").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_special_hi"), smash::hash40("special_hi_lr_stick_x"), 0.3));
 	param_config::update_float_2(*FIGHTER_KIND_MARIOD, get_marked_costumes("mariod","mariod").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_special_hi"), smash::hash40("special_hi_trans_move_end_speed_x_mul"), 1.0));
 	param_config::update_float_2(*FIGHTER_KIND_MARIOD, get_marked_costumes("mariod","mariod").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_special_hi"), smash::hash40("special_hi_trans_move_end_speed_y_mul"), 1.0));
-	param_config::update_float_2(-*FIGHTER_KIND_MARIOD, get_marked_costumes("mariod","mariod").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_adjust"), smash::hash40("attack_point"), 0.0));
+	param_config::update_float_2(*FIGHTER_KIND_MARIOD, get_marked_costumes("mariod","mariod").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_adjust"), smash::hash40("attack_point"), 0.0));
 	param_config::update_float_2(*FIGHTER_KIND_MARIOD, get_marked_costumes("mariod","mariod").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_adjust"), smash::hash40("move_point"), 0.0));
 	param_config::update_float_2(*FIGHTER_KIND_MARIOD, get_marked_costumes("mariod","mariod").into_iter().map(|x| x as i32).collect(), (smash::hash40("dash_speed"), 0, 1.92));
 	param_config::update_float_2(*FIGHTER_KIND_MARIOD, get_marked_costumes("mariod","mariod").into_iter().map(|x| x as i32).collect(), (smash::hash40("run_speed_max"), 0, 1.785));

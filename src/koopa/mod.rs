@@ -29,10 +29,10 @@ pub fn install() {
 	param_config::update_int_2(*FIGHTER_KIND_KOOPA, get_marked_costumes("koopa","koopa").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_special_n"), smash::hash40("quake_interval"), 100));
 	param_config::update_float_2(*FIGHTER_KIND_KOOPA, get_marked_costumes("koopa","koopa").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_special_n"), smash::hash40("fire_scale_min_frame"), 96.0));
 	param_config::update_float_2(*FIGHTER_KIND_KOOPA, get_marked_costumes("koopa","koopa").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_special_n"), smash::hash40("fire_scale_max_frame"), 1080.0));
-	param_config::update_float_2(-*FIGHTER_KIND_KOOPA, get_marked_costumes("koopa","koopa").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_breath"), smash::hash40("life"), 70.0));
-	param_config::update_float_2(-*FIGHTER_KIND_KOOPA, get_marked_costumes("koopa","koopa").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_breath"), smash::hash40("hit_frames"), 70.0));
-	param_config::update_float_2(-*FIGHTER_KIND_KOOPA, get_marked_costumes("koopa","koopa").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_breath"), smash::hash40("min_speed"), 0.8));
-	param_config::update_float_2(-*FIGHTER_KIND_KOOPA, get_marked_costumes("koopa","koopa").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_breath"), smash::hash40("max_speed"), 0.8));
+	param_config::update_float_2(-*WEAPON_KIND_KOOPA_BREATH, get_marked_costumes("koopa","koopa").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_breath"), smash::hash40("life"), 70.0));
+	param_config::update_float_2(-*WEAPON_KIND_KOOPA_BREATH, get_marked_costumes("koopa","koopa").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_breath"), smash::hash40("hit_frames"), 70.0));
+	param_config::update_float_2(-*WEAPON_KIND_KOOPA_BREATH, get_marked_costumes("koopa","koopa").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_breath"), smash::hash40("min_speed"), 0.8));
+	param_config::update_float_2(-*WEAPON_KIND_KOOPA_BREATH, get_marked_costumes("koopa","koopa").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_breath"), smash::hash40("max_speed"), 0.8));
 	param_config::update_float_2(*FIGHTER_KIND_KOOPA, get_marked_costumes("koopa","koopa").into_iter().map(|x| x as i32).collect(), (smash::hash40("landing_attack_air_frame_n"), 0, 12.0));
 	param_config::update_float_2(*FIGHTER_KIND_KOOPA, get_marked_costumes("koopa","koopa").into_iter().map(|x| x as i32).collect(), (smash::hash40("landing_attack_air_frame_lw"), 0, 18.0));
 	param_config::update_float_2(*FIGHTER_KIND_KOOPA, get_marked_costumes("koopa","koopa").into_iter().map(|x| x as i32).collect(), (smash::hash40("landing_frame"), 0, 4.0));

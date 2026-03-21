@@ -18,7 +18,7 @@ pub fn install() {
 	status::install();
 	acmd::install();
 
-	param_config::update_float_2(-*FIGHTER_KIND_SONIC, get_marked_costumes("sonic","sonic").into_iter().map(|x| x as i32).collect(), (smash::hash40("cliff_hang_data"), smash::hash40("p2_y"), 5.0));
+	param_config::update_float_2(*FIGHTER_KIND_SONIC, get_marked_costumes("sonic","sonic").into_iter().map(|x| x as i32).collect(), (smash::hash40("cliff_hang_data"), smash::hash40("p2_y"), 5.0));
 	param_config::update_int_2(*FIGHTER_KIND_SONIC, get_marked_costumes("sonic","sonic").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_special_n"), smash::hash40("special_n_start_enable_attack_frame"), 5));
 	param_config::update_int_2(*FIGHTER_KIND_SONIC, get_marked_costumes("sonic","sonic").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_special_n"), smash::hash40("special_n_start_auto_attack_frame"), 30));
 	param_config::update_float_2(*FIGHTER_KIND_SONIC, get_marked_costumes("sonic","sonic").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_special_n"), smash::hash40("special_n_add_attack_power"), 5.0));

@@ -15,13 +15,13 @@ pub fn install() {
 	status::install();
 	acmd::install();
 
-	param_config::update_float_2(-*FIGHTER_KIND_SHIZUE, get_marked_costumes("shizue","shizue").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_pot"), smash::hash40("speed_x"), 1.5));
-	param_config::update_float_2(-*FIGHTER_KIND_SHIZUE, get_marked_costumes("shizue","shizue").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_pot"), smash::hash40("speed_y"), 2.0));
-	param_config::update_int_2(-*FIGHTER_KIND_SHIZUE, get_marked_costumes("shizue","shizue").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_bullet"), smash::hash40("life"), 20));
-	param_config::update_float_2(-*FIGHTER_KIND_SHIZUE, get_marked_costumes("shizue","shizue").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_bullet"), smash::hash40("limit_gravity"), 0.5));
-	param_config::update_float_2(-*FIGHTER_KIND_SHIZUE, get_marked_costumes("shizue","shizue").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_bullet"), smash::hash40("speed"), 4.0));
-	param_config::update_float_2(-*FIGHTER_KIND_SHIZUE, get_marked_costumes("shizue","shizue").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_bullet"), smash::hash40("limit_speed"), 1.5));
-	param_config::update_float_2(-*FIGHTER_KIND_SHIZUE, get_marked_costumes("shizue","shizue").into_iter().map(|x| x as i32).collect(), (smash::hash40("map_collision_clayrocket"), smash::hash40("half_width"), 0.0));
+	param_config::update_float_2(-*WEAPON_KIND_SHIZUE_POT, get_marked_costumes("shizue","shizue").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_pot"), smash::hash40("speed_x"), 1.5));
+	param_config::update_float_2(-*WEAPON_KIND_SHIZUE_POT, get_marked_costumes("shizue","shizue").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_pot"), smash::hash40("speed_y"), 2.0));
+	param_config::update_int_2(-*WEAPON_KIND_SHIZUE_BULLET, get_marked_costumes("shizue","shizue").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_bullet"), smash::hash40("life"), 20));
+	param_config::update_float_2(-*WEAPON_KIND_SHIZUE_BULLET, get_marked_costumes("shizue","shizue").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_bullet"), smash::hash40("limit_gravity"), 0.5));
+	param_config::update_float_2(-*WEAPON_KIND_SHIZUE_BULLET, get_marked_costumes("shizue","shizue").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_bullet"), smash::hash40("speed"), 4.0));
+	param_config::update_float_2(-*WEAPON_KIND_SHIZUE_BULLET, get_marked_costumes("shizue","shizue").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_bullet"), smash::hash40("limit_speed"), 1.5));
+	param_config::update_float_2(-*WEAPON_KIND_SHIZUE_CLAYROCKET, get_marked_costumes("shizue","shizue").into_iter().map(|x| x as i32).collect(), (smash::hash40("map_collision_clayrocket"), smash::hash40("half_width"), 0.0));
 	param_config::update_float_2(*FIGHTER_KIND_SHIZUE, get_marked_costumes("shizue","shizue").into_iter().map(|x| x as i32).collect(), (smash::hash40("ground_brake"), 0, 0.075));
 	param_config::update_float_2(*FIGHTER_KIND_SHIZUE, get_marked_costumes("shizue","shizue").into_iter().map(|x| x as i32).collect(), (smash::hash40("dash_speed"), 0, 2.1583));
 	param_config::update_float_2(*FIGHTER_KIND_SHIZUE, get_marked_costumes("shizue","shizue").into_iter().map(|x| x as i32).collect(), (smash::hash40("run_speed_max"), 0, 1.76));

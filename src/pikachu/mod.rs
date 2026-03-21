@@ -12,9 +12,9 @@ pub fn install() {
 	status::install();
 	acmd::install();
 
-	param_config::update_float_2(-*FIGHTER_KIND_PIKACHU, get_marked_costumes("pikachu","pikachu").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_dengeki"), smash::hash40("move_rate_"), 0.8));
+	param_config::update_float_2(-*WEAPON_KIND_PIKACHU_DENGEKI, get_marked_costumes("pikachu","pikachu").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_dengeki"), smash::hash40("move_rate_"), 0.8));
 	param_config::update_float_2(*FIGHTER_KIND_PIKACHU, get_marked_costumes("pikachu","pikachu").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_special_lw"), smash::hash40("special_lw_offset_y_"), 7.0));
-	param_config::update_float_2(-*FIGHTER_KIND_PIKACHU, get_marked_costumes("pikachu","pikachu").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_kaminari"), smash::hash40("width_"), 2.4));
+	param_config::update_float_2(-*WEAPON_KIND_PIKACHU_KAMINARI, get_marked_costumes("pikachu","pikachu").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_kaminari"), smash::hash40("width_"), 2.4));
 	param_config::update_float_2(*FIGHTER_KIND_PIKACHU, get_marked_costumes("pikachu","pikachu").into_iter().map(|x| x as i32).collect(), (smash::hash40("jump_speed_x"), 0, 1.0));
 	param_config::update_float_2(*FIGHTER_KIND_PIKACHU, get_marked_costumes("pikachu","pikachu").into_iter().map(|x| x as i32).collect(), (smash::hash40("jump_speed_x_mul"), 0, 1.0));
 	param_config::update_float_2(*FIGHTER_KIND_PIKACHU, get_marked_costumes("pikachu","pikachu").into_iter().map(|x| x as i32).collect(), (smash::hash40("jump_aerial_speed_x_mul"), 0, 1.0));
