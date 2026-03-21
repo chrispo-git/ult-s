@@ -12,6 +12,7 @@ jobs:
   build:
     name: Build Full Release (build.py)
     runs-on: windows-latest
+    timeout-minutes: 45
 
     steps:
       - name: Checkout repository
@@ -33,20 +34,26 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-cargo-full-
 
+      - name: Cache cargo-skyline binary
+        id: cache-cargo-skyline
+        uses: actions/cache@v4
+        with:
+          path: ~/.cargo/bin/cargo-skyline.exe
+          key: ${{ runner.os }}-cargo-skyline-3.5.0
+
       - name: Install cargo-skyline
-        run: cargo install cargo-skyline
+        if: steps.cache-cargo-skyline.outputs.cache-hit != 'true'
+        run: cargo install cargo-skyline --version 3.5.0 --locked
 
       - name: Install Python dependencies
         run: pip install --upgrade pip
 
-      - name: Test cargo fetch
-        working-directory: .
-        run: cargo fetch
-        timeout-minutes: 5
-        
       - name: Run build.py
         working-directory: scripts
-        run: python build.py ${{ github.event.pull_request.number }}
+        env:
+          PYTHONUNBUFFERED: "1"
+          CARGO_TERM_COLOR: always
+        run: python -u build.py ${{ github.event.pull_request.number }}
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
