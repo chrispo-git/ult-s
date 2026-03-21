@@ -48,6 +48,11 @@ jobs:
           echo "safe_title=$SAFE_TITLE" >> $GITHUB_OUTPUT
           echo "Using sanitized title: $SAFE_TITLE"
 
+      - name: Test cargo fetch
+        working-directory: .
+        run: cargo fetch
+        timeout-minutes: 5
+
       - name: Run build_char.py with PR title
         working-directory: scripts
         run: python build_char.py "${{ steps.sanitize.outputs.safe_title }}"

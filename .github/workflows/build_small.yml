@@ -39,6 +39,11 @@ jobs:
       - name: Install Python dependencies
         run: pip install --upgrade pip
 
+      - name: Test cargo fetch
+        working-directory: .
+        run: cargo fetch
+        timeout-minutes: 5
+
       - name: Run build_small.py
         working-directory: scripts
         run: python build_small.py
