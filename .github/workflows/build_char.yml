@@ -49,7 +49,7 @@ jobs:
           echo "Using sanitized title: $SAFE_TITLE"
 
       - name: Run build_char.py with PR title
-        working-directory: plugin
+        working-directory: scripts
         run: python build_char.py "${{ steps.sanitize.outputs.safe_title }}"
 
       - name: Upload artifact

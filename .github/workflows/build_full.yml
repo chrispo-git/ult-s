@@ -40,7 +40,7 @@ jobs:
         run: pip install --upgrade pip
 
       - name: Run build.py
-        working-directory: plugin
+        working-directory: scripts
         run: python build.py ${{ github.event.pull_request.number }}
 
       - name: Upload artifact
