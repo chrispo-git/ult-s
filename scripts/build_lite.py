@@ -122,7 +122,7 @@ if os.path.exists(r'target'):
                                 for i in ["donkey"]:
                                     if i in path:
                                         is_added_param = True
-                            if "c1" in name or is_added_param:
+                            if ("c" in name and not "c0" in name) or is_added_param:
                                 path = os.path.join(root, name)
                                 new_path = path.replace("romfs", "releases/ultimate/mods/Ultimate S Lite")
                                 if os.path.exists(new_path) == False:
