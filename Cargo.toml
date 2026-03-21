@@ -15,7 +15,7 @@ nnsdk = { git = "https://github.com/ultimate-research/nnsdk-rs" }
 
 [dependencies]
 skyline = { git = "https://github.com/ultimate-research/skyline-rs" }
-ninput = { path = "../ninput" }
+ninput = { git = "https://github.com/blu-dev/ninput" }
 skyline_smash = { git = "https://github.com/ultimate-research/skyline-smash.git", features = ["weak_l2cvalue"] }
 smash_script = { git = "https://github.com/WuBoytH/smash-script.git", branch = "development" }
 smashline = { git = "https://github.com/HDR-Development/smashline" }
