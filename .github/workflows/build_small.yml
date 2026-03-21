@@ -11,7 +11,7 @@ permissions:
 jobs:
   build:
     name: Build Small Release (build_small.py)
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
       - name: Checkout repository

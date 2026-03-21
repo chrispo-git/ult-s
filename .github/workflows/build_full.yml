@@ -11,7 +11,7 @@ permissions:
 jobs:
   build:
     name: Build Full Release (build.py)
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
       - name: Checkout repository

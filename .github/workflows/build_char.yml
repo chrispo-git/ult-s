@@ -11,7 +11,7 @@ permissions:
 jobs:
   build:
     name: Build Character Release (build_char.py)
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
       - name: Checkout repository
