@@ -12,6 +12,7 @@ jobs:
   build:
     name: Build Character Release (build_char.py)
     runs-on: windows-latest
+    timeout-minutes: 45
 
     steps:
       - name: Checkout repository
@@ -33,8 +34,16 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-cargo-char-
 
+      - name: Cache cargo-skyline binary
+        id: cache-cargo-skyline
+        uses: actions/cache@v4
+        with:
+          path: ~/.cargo/bin/cargo-skyline.exe
+          key: ${{ runner.os }}-cargo-skyline-3.5.0
+
       - name: Install cargo-skyline
-        run: cargo install cargo-skyline
+        if: steps.cache-cargo-skyline.outputs.cache-hit != 'true'
+        run: cargo install cargo-skyline --version 3.5.0 --locked
 
       - name: Install Python dependencies
         run: pip install --upgrade pip
@@ -42,20 +51,17 @@ jobs:
       - name: Sanitize PR title for use as argument
         id: sanitize
         run: |
-          # Strip any characters that could cause shell injection issues
-          TITLE="${{ github.event.pull_request.title }}"
-          SAFE_TITLE=$(echo "$TITLE" | tr -cd '[:alnum:] _-')
-          echo "safe_title=$SAFE_TITLE" >> $GITHUB_OUTPUT
-          echo "Using sanitized title: $SAFE_TITLE"
-
-      - name: Test cargo fetch
-        working-directory: .
-        run: cargo fetch
-        timeout-minutes: 5
+          $title = "${{ github.event.pull_request.title }}"
+          $safe = $title -replace '[^a-zA-Z0-9 _-]', ''
+          echo "safe_title=$safe" >> $env:GITHUB_OUTPUT
+          echo "Using sanitized title: $safe"
 
       - name: Run build_char.py with PR title
         working-directory: scripts
-        run: python build_char.py "${{ steps.sanitize.outputs.safe_title }}"
+        env:
+          PYTHONUNBUFFERED: "1"
+          CARGO_TERM_COLOR: always
+        run: python -u build_char.py "${{ steps.sanitize.outputs.safe_title }}"
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
