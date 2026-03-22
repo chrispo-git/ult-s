@@ -1,0 +1,350 @@
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version number (e.g. 1.2.3)"
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Build & Release v${{ github.event.inputs.version }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+
+    steps:
+      # -----------------------------------------------------------------------
+      # 1. Checkout
+      # -----------------------------------------------------------------------
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # -----------------------------------------------------------------------
+      # 2. Rust / cargo-skyline setup
+      # -----------------------------------------------------------------------
+      - name: Install Rust nightly
+        uses: dtolnay/rust-toolchain@nightly
+        with:
+          targets: aarch64-unknown-linux-gnu
+
+      - name: Cache Cargo registry
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            target
+          key: ${{ runner.os }}-cargo-release-${{ hashFiles('**/Cargo.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-cargo-release-
+
+      - name: Cache cargo-skyline binary
+        id: cache-cargo-skyline
+        uses: actions/cache@v4
+        with:
+          path: ~/.cargo/bin/cargo-skyline
+          key: ${{ runner.os }}-cargo-skyline-3.5.0
+
+      - name: Install cargo-skyline
+        if: steps.cache-cargo-skyline.outputs.cache-hit != 'true'
+        run: cargo install cargo-skyline --version 3.5.0 --locked
+
+      - name: Download skyline stdlib
+        run: cargo skyline update-std
+
+      # -----------------------------------------------------------------------
+      # 3. Compile
+      # -----------------------------------------------------------------------
+      - name: Build with cargo skyline
+        env:
+          CARGO_TERM_COLOR: never
+        run: |
+          cargo skyline build --release --features="main_nro" > build.log 2>&1 &
+          BUILD_PID=$!
+          echo "Build started with PID $BUILD_PID"
+          while kill -0 $BUILD_PID 2>/dev/null; do
+            tail -n5 build.log 2>/dev/null || true
+            sleep 10
+          done
+          wait $BUILD_PID
+          EXIT_CODE=$?
+          echo "--- Full build log ---"
+          cat build.log
+          exit $EXIT_CODE
+
+      # -----------------------------------------------------------------------
+      # 4. Full build
+      # -----------------------------------------------------------------------
+      - name: Package full release
+        env:
+          PYTHONUNBUFFERED: "1"
+        run: python -u scripts/build_release.py "${{ github.event.inputs.version }}" full
+
+      # -----------------------------------------------------------------------
+      # 5. Lite build (reuses same .nro)
+      # -----------------------------------------------------------------------
+      - name: Package lite release
+        env:
+          PYTHONUNBUFFERED: "1"
+        run: python -u scripts/build_release.py "${{ github.event.inputs.version }}" lite
+
+      # -----------------------------------------------------------------------
+      # 6. Fetch previous full release zip and extract old folders for diff
+      # -----------------------------------------------------------------------
+      - name: Fetch previous full release asset
+        id: prev_release
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { owner, repo } = context.repo;
+
+            // Get all releases, find the latest one that has a non-lite,
+            // non-diff zip asset
+            const releases = await github.paginate(github.rest.repos.listReleases, {
+              owner, repo
+            });
+
+            let targetAsset = null;
+            for (const release of releases) {
+              const asset = release.assets.find(a =>
+                a.name.endsWith('.zip') &&
+                !a.name.toLowerCase().includes('lite') &&
+                !a.name.toLowerCase().includes('diff')
+              );
+              if (asset) {
+                console.log(`Found previous full release: ${release.tag_name} -> ${asset.name}`);
+                core.setOutput('asset_url', asset.browser_download_url);
+                core.setOutput('asset_name', asset.name);
+                targetAsset = asset;
+                break;
+              }
+            }
+
+            if (!targetAsset) {
+              console.log('No previous full release found - diff will be skipped');
+              core.setOutput('asset_url', '');
+            }
+
+      - name: Download and extract previous full release
+        if: steps.prev_release.outputs.asset_url != ''
+        run: |
+          mkdir -p prev_release
+          curl -L "${{ steps.prev_release.outputs.asset_url }}" -o prev_release/prev.zip
+          unzip -q prev_release/prev.zip -d prev_release/extracted
+          echo "Extracted contents:"
+          find prev_release/extracted -maxdepth 4 | head -40
+
+      - name: Locate old Arcropolis and Stages folders
+        if: steps.prev_release.outputs.asset_url != ''
+        id: prev_dirs
+        run: |
+          # Find the "Ultimate S Arcropolis" folder inside ultimate/mods/
+          OLD_ARC=$(find prev_release/extracted -type d -name "Ultimate S Arcropolis" | head -1)
+          OLD_STAGES=$(find prev_release/extracted -type d -name "Ultimate S Stages" | head -1)
+          echo "old_arcropolis=$OLD_ARC" >> $GITHUB_OUTPUT
+          echo "old_stages=$OLD_STAGES" >> $GITHUB_OUTPUT
+          echo "Old Arcropolis: $OLD_ARC"
+          echo "Old Stages: $OLD_STAGES"
+
+      # -----------------------------------------------------------------------
+      # 7. Diff build
+      # -----------------------------------------------------------------------
+      - name: Package diff release
+        if: steps.prev_release.outputs.asset_url != '' && steps.prev_dirs.outputs.old_arcropolis != ''
+        env:
+          PYTHONUNBUFFERED: "1"
+        run: |
+          python -u scripts/build_release.py \
+            "${{ github.event.inputs.version }}" \
+            diff \
+            "${{ steps.prev_dirs.outputs.old_arcropolis }}" \
+            "${{ steps.prev_dirs.outputs.old_stages }}"
+
+      - name: Skip diff (no previous release found)
+        if: steps.prev_release.outputs.asset_url == ''
+        run: echo "No previous full release found — skipping diff build."
+
+      # -----------------------------------------------------------------------
+      # 8. Fetch all assets from latest Ultimate-S-Setup release and bundle
+      #    them into the full release folder
+      # -----------------------------------------------------------------------
+      - name: Fetch Ultimate-S-Setup release assets
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.SETUP_REPO_TOKEN }}
+          script: |
+            const fs = require('fs');
+            const path = require('path');
+
+            const release = await github.rest.repos.getLatestRelease({
+              owner: 'chrispo-git',
+              repo: 'Ultimate-S-Setup'
+            });
+
+            console.log(`Fetching assets from Ultimate-S-Setup ${release.data.tag_name}`);
+            fs.mkdirSync('setup_assets', { recursive: true });
+
+            for (const asset of release.data.assets) {
+              console.log(`  Downloading: ${asset.name}`);
+              const response = await github.rest.repos.getReleaseAsset({
+                owner: 'chrispo-git',
+                repo: 'Ultimate-S-Setup',
+                asset_id: asset.id,
+                headers: { Accept: 'application/octet-stream' }
+              });
+              fs.writeFileSync(
+                path.join('setup_assets', asset.name),
+                Buffer.from(response.data)
+              );
+            }
+
+            console.log('All setup assets downloaded.');
+
+      - name: Extract and place setup assets into full release
+        run: |
+          FULL_DIR="releases/ultimate/mods/Ultimate S Arcropolis"
+          RELEASES_ROOT="releases"
+
+          for f in setup_assets/*; do
+            name=$(basename "$f")
+            echo "Processing: $name"
+
+            # Unzip each asset into a temp dir, then place contents
+            tmp="setup_tmp/$name"
+            mkdir -p "$tmp"
+
+            if [[ "$f" == *.zip ]]; then
+              unzip -q "$f" -d "$tmp"
+            else
+              # Non-zip asset (unlikely but handle gracefully)
+              cp "$f" "$tmp/"
+            fi
+
+            # Place .app (macOS) at releases root (same level as "ultimate" folder)
+            find "$tmp" -name "*.app" -exec cp -r {} "$RELEASES_ROOT/" \;
+
+            # Place .exe (Windows) at releases root
+            find "$tmp" -name "*.exe" -exec cp {} "$RELEASES_ROOT/" \;
+
+            # Place .sh (Linux) and anything else in the same dir at releases root
+            find "$tmp" -name "*.sh"  -exec cp {} "$RELEASES_ROOT/" \;
+
+            # Copy any other loose files/folders at the zip root to releases root
+            for item in "$tmp"/*/; do
+              item_name=$(basename "$item")
+              # Skip if already handled or is the ultimate folder structure
+              if [[ "$item_name" != "ultimate" ]]; then
+                cp -r "$item" "$RELEASES_ROOT/" 2>/dev/null || true
+              fi
+            done
+          done
+
+          echo "Setup assets placed. Full releases/ contents:"
+          find releases -maxdepth 3 | head -60
+
+      # -----------------------------------------------------------------------
+      # 9. Re-zip full release now that setup assets are included
+      # -----------------------------------------------------------------------
+      - name: Re-zip full release with setup assets
+        run: |
+          FULL_MOD_DIR="releases/ultimate/mods/Ultimate S Arcropolis"
+          ZIP="releases/Ultimate S Arcropolis.zip"
+          rm -f "$ZIP"
+          # Zip the entire releases folder structure (mirrors original build.py behaviour)
+          cd releases
+          zip -r "Ultimate S Arcropolis.zip" "ultimate/mods/Ultimate S Arcropolis"
+          cd ..
+          echo "Re-zipped: $ZIP"
+
+      # -----------------------------------------------------------------------
+      # 10. Create draft GitHub release and upload all artifacts
+      # -----------------------------------------------------------------------
+      - name: Create draft release
+        id: create_release
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { owner, repo } = context.repo;
+            const version = '${{ github.event.inputs.version }}';
+
+            const release = await github.rest.repos.createRelease({
+              owner,
+              repo,
+              tag_name: `v${version}`,
+              name: `v${version}`,
+              body: '<!-- Add release notes here -->',
+              draft: true,
+              prerelease: false
+            });
+
+            console.log(`Created draft release: ${release.data.html_url}`);
+            core.setOutput('release_id', release.data.id);
+            core.setOutput('upload_url', release.data.upload_url);
+
+      - name: Upload Full Release artifact
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const path = require('path');
+            const zipPath = 'releases/Ultimate S Arcropolis.zip';
+            const data = fs.readFileSync(zipPath);
+            await github.rest.repos.uploadReleaseAsset({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              release_id: ${{ steps.create_release.outputs.release_id }},
+              name: 'Ultimate S Arcropolis.zip',
+              data,
+              headers: { 'content-type': 'application/zip', 'content-length': data.length }
+            });
+            console.log('Uploaded: Ultimate S Arcropolis.zip');
+
+      - name: Upload Lite artifact
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const zipPath = 'releases-lite/Ultimate S Lite.zip';
+            const data = fs.readFileSync(zipPath);
+            await github.rest.repos.uploadReleaseAsset({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              release_id: ${{ steps.create_release.outputs.release_id }},
+              name: 'Ultimate S Lite.zip',
+              data,
+              headers: { 'content-type': 'application/zip', 'content-length': data.length }
+            });
+            console.log('Uploaded: Ultimate S Lite.zip');
+
+      - name: Upload Diff artifact
+        if: steps.prev_release.outputs.asset_url != '' && steps.prev_dirs.outputs.old_arcropolis != ''
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const zipPath = 'releases-diff/ult_s_diff.zip';
+            if (!fs.existsSync(zipPath)) {
+              console.log('No diff zip found, skipping.');
+              return;
+            }
+            const data = fs.readFileSync(zipPath);
+            await github.rest.repos.uploadReleaseAsset({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              release_id: ${{ steps.create_release.outputs.release_id }},
+              name: 'ult_s_diff.zip',
+              data,
+              headers: { 'content-type': 'application/zip', 'content-length': data.length }
+            });
+            console.log('Uploaded: ult_s_diff.zip');
+
+      - name: Release URL
+        run: |
+          echo "Draft release created!"
+          echo "https://github.com/${{ github.repository }}/releases"
+          echo "Version: v${{ github.event.inputs.version }}"
