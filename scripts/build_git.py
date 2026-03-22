@@ -9,7 +9,7 @@ def log(msg):
 
 try:
     inputs = ("".join(sys.argv)).lower()
-    inputs = inputs.replace('build.py', "").replace('\n', "").strip()
+    inputs = inputs.replace('build_git.py', "").replace('\n', "").strip()
     log(f"[build] Version input: {inputs}")
 except IndexError:
     raise Exception("No version inputted!")
@@ -30,7 +30,6 @@ def is_changed(src_path):
     """Return True if this file was changed in the PR, or if we have no changed files list."""
     if not changed_files:
         return True
-    # Normalize to forward slashes for comparison
     norm = src_path.replace('\\', '/')
     for cf in changed_files:
         cf_norm = cf.replace('\\', '/')
@@ -38,14 +37,14 @@ def is_changed(src_path):
             return True
     return False
 
-def copytree_changed(src, dst, symlinks=False, ignore=None):
+def copytree_changed(src, dst):
     log(f"[copytree] Scanning {src} -> {dst}")
     copied = 0
     for item in os.listdir(src):
         s = os.path.join(src, item)
         d = os.path.join(dst, item)
         if os.path.isdir(s):
-            copytree_changed(s, d, symlinks, ignore)
+            copytree_changed(s, d)
         else:
             if is_changed(s):
                 os.makedirs(os.path.dirname(d), exist_ok=True)
@@ -55,6 +54,13 @@ def copytree_changed(src, dst, symlinks=False, ignore=None):
             else:
                 log(f"[copytree]   Skipped (unchanged): {s}")
     log(f"[copytree] Done — {copied} files copied from {src}")
+
+def copytree_full(src, dst):
+    log(f"[copytree-full] Copying {src} -> {dst}")
+    if os.path.exists(dst):
+        shutil.rmtree(dst)
+    shutil.copytree(src, dst)
+    log(f"[copytree-full] Done copying {src}")
 
 def get_all_file_paths(directory):
     file_paths = []
@@ -75,9 +81,20 @@ def empty_folder(folder):
         except Exception as e:
             log(f'[build] Failed to delete {file_path}. Reason: {e}')
 
-new = r"releases/ultimate/mods/Ultimate S Arcropolis"
+def build_zip(out_dir, zip_path):
+    if os.path.exists(zip_path):
+        os.remove(zip_path)
+    file_paths = get_all_file_paths(out_dir)
+    log(f"[build] Zipping {len(file_paths)} files into {zip_path}")
+    with ZipFile(zip_path, 'w') as zip:
+        for file in file_paths:
+            log(f"[build]   Adding: {file}")
+            zip.write(file)
 
-log("[build] Finished building... now packaging Romfs")
+new_changed = r"releases/ultimate/mods/Ultimate S Arcropolis"
+new_full    = r"releases-full/ultimate/mods/Ultimate S Arcropolis"
+
+log("[build] Finished building... now packaging")
 log(f"[build] Changing directory up one level from: {os.getcwd()}")
 os.chdir("..")
 log(f"[build] Now in: {os.getcwd()}")
@@ -85,54 +102,69 @@ log(f"[build] Now in: {os.getcwd()}")
 if os.path.exists(r'target'):
     log("[build] Found target/ directory")
     os.chdir(r'target')
-    log(f"[build] Contents of target/: {os.listdir()}")
     if os.path.exists(r'aarch64-skyline-switch'):
         os.chdir(r'aarch64-skyline-switch')
-        log(f"[build] Contents of aarch64-skyline-switch/: {os.listdir()}")
         if os.path.exists(r'release'):
             os.chdir(r'release')
-            old = os.path.join(os.path.abspath(os.getcwd()), r'libplugin.nro')
-            log(f"[build] Found libplugin.nro at: {old}")
+            nro_path = os.path.join(os.path.abspath(os.getcwd()), r'libplugin.nro')
+            log(f"[build] Found libplugin.nro at: {nro_path}")
             os.chdir('../../../')
             log(f"[build] Back in: {os.getcwd()}")
 
+            # ----------------------------------------------------------------
+            # Changed-files-only build
+            # ----------------------------------------------------------------
+            log("[build] === Building changed-files-only release ===")
             if os.path.exists(r'releases'):
                 empty_folder(r'releases')
-            if not os.path.exists(new):
-                log(f"[build] Creating output directory: {new}")
-                os.makedirs(new)
+            os.makedirs(new_changed, exist_ok=True)
 
-            log(f"[build] Moving {old} -> {new}")
-            shutil.move(old, new)
-            log("[build] Renaming libplugin.nro -> plugin.nro")
-            shutil.move(os.path.join(new, r'libplugin.nro'), os.path.join(new, r'plugin.nro'))
+            shutil.copy2(nro_path, os.path.join(new_changed, r'plugin.nro'))
+            log("[build] Copied libplugin.nro -> plugin.nro")
 
             if os.path.exists(r'romfs'):
                 log("[build] Starting romfs copy (changed files only)")
-                copytree_changed(r'romfs', r'releases/ultimate/mods/Ultimate S Arcropolis')
+                copytree_changed(r'romfs', new_changed)
                 log("[build] Romfs copy finished")
             else:
-                log("[build] ERROR: No romfs folder! Please check your install")
+                log("[build] ERROR: No romfs folder!")
 
-            log("[build] Writing version.txt")
-            with open(r'releases/ultimate/mods/Ultimate S Arcropolis/version.txt', "w") as f:
+            with open(os.path.join(new_changed, r'version.txt'), "w") as f:
                 f.write(f"v.{inputs}")
-
-            log("[build] Copying readme and credits")
             shutil.copy(r'readme.txt', r'releases/readme.txt')
             shutil.copy(r'credits.txt', r'releases/credits.txt')
             copytree_changed(r'ultimate-s-setup', r'releases')
 
-            zip_path = r'releases/Ultimate S Arcropolis.zip'
-            if os.path.exists(zip_path):
-                os.remove(zip_path)
-            file_paths = get_all_file_paths(new)
-            log(f"[build] Zipping {len(file_paths)} files into {zip_path}")
-            with ZipFile(zip_path, 'w') as zip:
-                for file in file_paths:
-                    log(f"[build]   Adding: {file}")
-                    zip.write(file)
-            log("[build] Done!")
+            build_zip(new_changed, r'releases/Ultimate S Arcropolis.zip')
+            log("[build] Changed-files-only zip done!")
+
+            # ----------------------------------------------------------------
+            # Full romfs build
+            # ----------------------------------------------------------------
+            log("[build] === Building full romfs release ===")
+            if os.path.exists(r'releases-full'):
+                shutil.rmtree(r'releases-full')
+            os.makedirs(new_full, exist_ok=True)
+
+            shutil.copy2(nro_path, os.path.join(new_full, r'plugin.nro'))
+            log("[build] Copied libplugin.nro -> plugin.nro")
+
+            if os.path.exists(r'romfs'):
+                log("[build] Starting full romfs copy")
+                copytree_full(r'romfs', os.path.join(new_full, r'romfs'))
+                log("[build] Full romfs copy finished")
+            else:
+                log("[build] ERROR: No romfs folder!")
+
+            with open(os.path.join(new_full, r'version.txt'), "w") as f:
+                f.write(f"v.{inputs}")
+            shutil.copy(r'readme.txt', r'releases-full/readme.txt')
+            shutil.copy(r'credits.txt', r'releases-full/credits.txt')
+            copytree_full(r'ultimate-s-setup', r'releases-full/ultimate-s-setup')
+
+            build_zip(new_full, r'releases-full/Ultimate S Arcropolis (Full).zip')
+            log("[build] Full romfs zip done!")
+
         else:
             log('[build] ERROR: release/ does not exist inside aarch64-skyline-switch/')
     else:
