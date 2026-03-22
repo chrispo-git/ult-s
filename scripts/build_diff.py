@@ -40,14 +40,13 @@ def get_all_file_paths(directory):
 BUFFER = 65536
 
 os.chdir('../')
+
 home_dir = os.getcwd()
 
 new_dir = filedialog.askdirectory(title="Select the new version of Ultimate S Arcropolis folder")
 old_dir = filedialog.askdirectory(title="Select the old version of Ultimate S Arcropolis folder")
 new_stages = filedialog.askdirectory(title="Select the new version of Ultimate S Stages folder")
 old_stages = filedialog.askdirectory(title="Select the old version of Ultimate S Stages folder")
-#old_dir = r"D:\Smash Ultimate Mod Workspace\Ultimate S Packed\diff_test2"
-#new_dir = r"D:\Smash Ultimate Mod Workspace\Ultimate S Packed\diff_test"
 
 removed_files = []
 
@@ -129,9 +128,15 @@ diff(home_dir, new_stages, old_stages, "Ultimate S Stages")
 
 f = open("releases/removed_files.txt", "w")
 for i in removed_files:
-    path = i.replace("\n","")
+    path = i.replace("\n","").replace("\\", "/")
+    marker = "ultimate/mods/"
+    idx = path.lower().find(marker)
+    if idx != -1:
+        path = path[idx:]
     f.write(f"{path}\n")
 f.close()
+
+shutil.copy(r'scripts/apply_diff.py', r'releases/click me to apply the diff.py')
 
 all_files = get_all_file_paths("releases")
 with ZipFile(r'releases/ult_s_diff.zip','w') as zip:
