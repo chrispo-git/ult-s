@@ -115,7 +115,7 @@ jobs:
             const body = [
               '## Build Complete',
               '',
-              `**[⬇️ Download Ultimate S Arcropolis.zip](${artifactUrl})**`,
+              `**[Download Ultimate S Arcropolis.zip](${artifactUrl})**`,
               '',
               '_Expires after 90 days. Requires being logged in to GitHub._',
               '',
