@@ -89,14 +89,21 @@ jobs:
           PYTHONUNBUFFERED: "1"
         run: python -u build_git.py ${{ github.event.pull_request.number }}
 
-      - name: Upload artifact
+      - name: Upload changed-files artifact
         uses: actions/upload-artifact@v4
         with:
           name: ultimate-s-arcropolis-full
           path: releases/Ultimate S Arcropolis.zip
           if-no-files-found: error
 
-      - name: Comment on PR with download link
+      - name: Upload full romfs artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ultimate-s-arcropolis-full-romfs
+          path: releases-full/Ultimate S Arcropolis (Full).zip
+          if-no-files-found: error
+
+      - name: Comment on PR with download links
         uses: actions/github-script@v7
         with:
           script: |
@@ -104,18 +111,26 @@ jobs:
             const prNumber = context.payload.pull_request.number;
             const runId = context.runId;
 
-            const artifacts = await github.rest.actions.listWorkflowRunArtifacts({
+            const { data: { artifacts } } = await github.rest.actions.listWorkflowRunArtifacts({
               owner, repo, run_id: runId
             });
-            const artifact = artifacts.data.artifacts.find(a => a.name === 'ultimate-s-arcropolis-full');
-            const artifactUrl = artifact
-              ? `https://github.com/${owner}/${repo}/actions/runs/${runId}/artifacts/${artifact.id}`
+
+            const changedArtifact = artifacts.find(a => a.name === 'ultimate-s-arcropolis-full');
+            const fullArtifact    = artifacts.find(a => a.name === 'ultimate-s-arcropolis-full-romfs');
+
+            const changedUrl = changedArtifact
+              ? `https://github.com/${owner}/${repo}/actions/runs/${runId}/artifacts/${changedArtifact.id}`
+              : `https://github.com/${owner}/${repo}/actions/runs/${runId}`;
+            const fullUrl = fullArtifact
+              ? `https://github.com/${owner}/${repo}/actions/runs/${runId}/artifacts/${fullArtifact.id}`
               : `https://github.com/${owner}/${repo}/actions/runs/${runId}`;
 
             const body = [
               '## Build Complete',
               '',
-              `**[Download Ultimate S Arcropolis.zip](${artifactUrl})**`,
+              `**[Download (PR changes only)](${changedUrl})**`,
+              '',
+              `**[Download (Full romfs)](${fullUrl})**`,
               '',
               '_Expires after 90 days. Requires being logged in to GitHub._',
               '',
