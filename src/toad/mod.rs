@@ -202,4 +202,49 @@ pub fn install() {
     });
 
     the_csk_collection_api::set_fighter_jingle(hash40("ui_chara_toad"), "z80_f_toad");
+
+
+    param_config::update_float_2(*FIGHTER_KIND_MURABITO, get_marked_costumes("murabito","toad").into_iter().map(|x| x as i32).collect(), (smash::hash40("walk_speed_max"), 0, 1.26));
+    param_config::update_float_2(*FIGHTER_KIND_MURABITO, get_marked_costumes("murabito","toad").into_iter().map(|x| x as i32).collect(), (smash::hash40("ground_brake"), 0, 0.111));
+    param_config::update_float_2(*FIGHTER_KIND_MURABITO, get_marked_costumes("murabito","toad").into_iter().map(|x| x as i32).collect(), (smash::hash40("dash_speed"), 0, 2.211));
+    param_config::update_float_2(*FIGHTER_KIND_MURABITO, get_marked_costumes("murabito","toad").into_iter().map(|x| x as i32).collect(), (smash::hash40("run_speed_max"), 0, 1.97));
+    param_config::update_float_2(*FIGHTER_KIND_MURABITO, get_marked_costumes("murabito","toad").into_iter().map(|x| x as i32).collect(), (smash::hash40("jump_y"), 0, 29.8));
+    param_config::update_float_2(*FIGHTER_KIND_MURABITO, get_marked_costumes("murabito","toad").into_iter().map(|x| x as i32).collect(), (smash::hash40("mini_jump_y"), 0, 12.5));
+    param_config::update_float_2(*FIGHTER_KIND_MURABITO, get_marked_costumes("murabito","toad").into_iter().map(|x| x as i32).collect(), (smash::hash40("jump_aerial_y"), 0, 29.8));
+    param_config::update_float_2(*FIGHTER_KIND_MURABITO, get_marked_costumes("murabito","toad").into_iter().map(|x| x as i32).collect(), (smash::hash40("air_accel_x_mul"), 0, 0.05));
+    param_config::update_float_2(*FIGHTER_KIND_MURABITO, get_marked_costumes("murabito","toad").into_iter().map(|x| x as i32).collect(), (smash::hash40("air_accel_x_add"), 0, 0.01));
+    param_config::update_float_2(*FIGHTER_KIND_MURABITO, get_marked_costumes("murabito","toad").into_iter().map(|x| x as i32).collect(), (smash::hash40("air_speed_x_stable"), 0, 1.01));
+    param_config::update_float_2(*FIGHTER_KIND_MURABITO, get_marked_costumes("murabito","toad").into_iter().map(|x| x as i32).collect(), (smash::hash40("air_accel_y"), 0, 0.09));
+    param_config::update_float_2(*FIGHTER_KIND_MURABITO, get_marked_costumes("murabito","toad").into_iter().map(|x| x as i32).collect(), (smash::hash40("air_speed_y_stable"), 0, 1.9));
+    param_config::update_float_2(*FIGHTER_KIND_MURABITO, get_marked_costumes("murabito","toad").into_iter().map(|x| x as i32).collect(), (smash::hash40("dive_speed_y"), 0, 3.04));
+    param_config::update_float_2(*FIGHTER_KIND_MURABITO, get_marked_costumes("murabito","toad").into_iter().map(|x| x as i32).collect(), (smash::hash40("weight"), 0, 88.0));
+    param_config::update_float_2(*FIGHTER_KIND_MURABITO, get_marked_costumes("murabito","toad").into_iter().map(|x| x as i32).collect(), (smash::hash40("landing_attack_air_frame_n"), 0, 6.0));
+    param_config::update_float_2(*FIGHTER_KIND_MURABITO, get_marked_costumes("murabito","toad").into_iter().map(|x| x as i32).collect(), (smash::hash40("landing_attack_air_frame_f"), 0, 12.0));
+    param_config::update_float_2(*FIGHTER_KIND_MURABITO, get_marked_costumes("murabito","toad").into_iter().map(|x| x as i32).collect(), (smash::hash40("landing_attack_air_frame_b"), 0, 7.0));
+    param_config::update_float_2(*FIGHTER_KIND_MURABITO, get_marked_costumes("murabito","toad").into_iter().map(|x| x as i32).collect(), (smash::hash40("landing_attack_air_frame_hi"), 0, 8.0));
+    param_config::update_float_2(*FIGHTER_KIND_MURABITO, get_marked_costumes("murabito","toad").into_iter().map(|x| x as i32).collect(), (smash::hash40("landing_attack_air_frame_lw"), 0, 14.0));
+    param_config::update_float_2(*FIGHTER_KIND_MURABITO, get_marked_costumes("murabito","toad").into_iter().map(|x| x as i32).collect(), (smash::hash40("landing_frame"), 0, 4.0));
+    param_config::update_float_2(*FIGHTER_KIND_MURABITO, get_marked_costumes("murabito","toad").into_iter().map(|x| x as i32).collect(), (smash::hash40("combo_attack_12_end"), 0, 28.0));
+    param_config::update_float_2(*FIGHTER_KIND_MURABITO, get_marked_costumes("murabito","toad").into_iter().map(|x| x as i32).collect(), (smash::hash40("combo_attack_13_end"), 0, 0.0));
+    param_config::update_int_2(*FIGHTER_KIND_MURABITO, get_marked_costumes("murabito","toad").into_iter().map(|x| x as i32).collect(), (smash::hash40("attack_combo_max"), 0, 2));
+    param_config::update_int_2(*FIGHTER_KIND_MURABITO, get_marked_costumes("murabito","toad").into_iter().map(|x| x as i32).collect(), (smash::hash40("attack100_type"), 0, 0));
+    param_config::update_float_2(*FIGHTER_KIND_MURABITO, get_marked_costumes("murabito","toad").into_iter().map(|x| x as i32).collect(), (smash::hash40("shield_radius"), 0, 12.0));
+    param_config::update_int_2(-*WEAPON_KIND_MURABITO_BOWLING_BALL, get_marked_costumes("murabito","toad").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_bowlingball"), smash::hash40("is_penetration"), 0));
+    param_config::update_int_2(-*WEAPON_KIND_MURABITO_BULLET, get_marked_costumes("murabito","toad").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_bullet"), smash::hash40("life"), 21));
+    param_config::update_float_2(-*WEAPON_KIND_MURABITO_BULLET, get_marked_costumes("murabito","toad").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_bullet"), smash::hash40("gravity"), -0.1));
+    param_config::update_int_2(-*WEAPON_KIND_MURABITO_BULLET, get_marked_costumes("murabito","toad").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_bullet"), smash::hash40("is_penetration"), 1));
+    param_config::update_float_2(-*WEAPON_KIND_MURABITO_BULLET, get_marked_costumes("murabito","toad").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_bullet"), smash::hash40("speed"), 0.01));
+    param_config::update_float_2(-*WEAPON_KIND_MURABITO_BULLET, get_marked_costumes("murabito","toad").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_bullet"), smash::hash40("limit_speed"), 0.01));
+    param_config::update_int_2(-*WEAPON_KIND_MURABITO_CLAYROCKET, get_marked_costumes("murabito","toad").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_clayrocket"), smash::hash40("is_penetration"), 1));
+    param_config::update_float_2(-*WEAPON_KIND_MURABITO_CLAYROCKET, get_marked_costumes("murabito","toad").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_clayrocket"), smash::hash40("fly_limit_speed_air"), -1.8));
+    param_config::update_float_2(-*WEAPON_KIND_MURABITO_CLAYROCKET, get_marked_costumes("murabito","toad").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_clayrocket"), smash::hash40("fly_gravity"), 0.0));
+    param_config::update_float_2(-*WEAPON_KIND_MURABITO_CLAYROCKET, get_marked_costumes("murabito","toad").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_clayrocket"), smash::hash40("fly_limit_gravity"), 0.0));
+    param_config::update_float_2(-*WEAPON_KIND_MURABITO_CLAYROCKET, get_marked_costumes("murabito","toad").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_clayrocket"), smash::hash40("fall_start_frame"), 9999999.0));
+    param_config::update_float_2(-*WEAPON_KIND_MURABITO_CLAYROCKET, get_marked_costumes("murabito","toad").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_clayrocket"), smash::hash40("rot_limit_speed_air"), 0.0));
+    param_config::update_float_2(-*WEAPON_KIND_MURABITO_CLAYROCKET, get_marked_costumes("murabito","toad").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_clayrocket"), smash::hash40("rot_limit_speed_ground"), 0.0));
+    param_config::update_float_2(-*WEAPON_KIND_MURABITO_CLAYROCKET, get_marked_costumes("murabito","toad").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_clayrocket"), smash::hash40("fly_limit_speed_ground"), -1.6));
+    param_config::update_int_2(-*WEAPON_KIND_MURABITO_FLOWERPOT, get_marked_costumes("murabito","toad").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_flowerpot"), smash::hash40("burst_rate"), 0));
+    param_config::update_int_2(-*WEAPON_KIND_MURABITO_FLOWERPOT, get_marked_costumes("murabito","toad").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_flowerpot"), smash::hash40("life"), 70));
+    param_config::update_int_2(-*WEAPON_KIND_MURABITO_FLOWERPOT, get_marked_costumes("murabito","toad").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_flowerpot"), smash::hash40("is_penetration"), 0));
+
 } 

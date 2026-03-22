@@ -2,6 +2,8 @@ mod status;
 mod frame;
 mod acmd;
 use crate::util::*;
+use smash::lib::lua_const::*;
+use smash::hash40;
 
 
 static mut HIT0: [f32; 8] = [0.0; 8];
@@ -27,4 +29,15 @@ pub fn install() {
 	frame::install();
 	status::install();
 	acmd::install();
+
+	param_config::update_float_2(*FIGHTER_KIND_DEDEDE, get_marked_costumes("dedede","dedede").into_iter().map(|x| x as i32).collect(), (smash::hash40("run_speed_max"), 0, 1.675));
+	param_config::update_float_2(*FIGHTER_KIND_DEDEDE, get_marked_costumes("dedede","dedede").into_iter().map(|x| x as i32).collect(), (smash::hash40("jump_aerial_y"), 0, 35.0));
+	param_config::update_float_2(*FIGHTER_KIND_DEDEDE, get_marked_costumes("dedede","dedede").into_iter().map(|x| x as i32).collect(), (smash::hash40("air_speed_x_stable"), 0, 1.01));
+	param_config::update_float_2(*FIGHTER_KIND_DEDEDE, get_marked_costumes("dedede","dedede").into_iter().map(|x| x as i32).collect(), (smash::hash40("air_speed_y_stable"), 0, 1.6));
+	param_config::update_float_2(*FIGHTER_KIND_DEDEDE, get_marked_costumes("dedede","dedede").into_iter().map(|x| x as i32).collect(), (smash::hash40("dive_speed_y"), 0, 2.56));
+	param_config::update_float_2(*FIGHTER_KIND_DEDEDE, get_marked_costumes("dedede","dedede").into_iter().map(|x| x as i32).collect(), (smash::hash40("weight"), 0, 120.0));
+	param_config::update_float_2(*FIGHTER_KIND_DEDEDE, get_marked_costumes("dedede","dedede").into_iter().map(|x| x as i32).collect(), (smash::hash40("landing_attack_air_frame_f"), 0, 12.0));
+	param_config::update_float_2(*FIGHTER_KIND_DEDEDE, get_marked_costumes("dedede","dedede").into_iter().map(|x| x as i32).collect(), (smash::hash40("landing_attack_air_frame_b"), 0, 9.0));
+	param_config::update_float_2(*FIGHTER_KIND_DEDEDE, get_marked_costumes("dedede","dedede").into_iter().map(|x| x as i32).collect(), (smash::hash40("landing_frame"), 0, 4.0));
+
 }

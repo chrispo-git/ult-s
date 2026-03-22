@@ -2,6 +2,8 @@ mod status;
 mod frame;
 mod acmd;
 use crate::util::*;
+use smash::lib::lua_const::*;
+use smash::hash40;
 
 //Float Stuff
 static mut FLOAT : [i32; 8] = [0; 8]; //Logs Float Time
@@ -24,4 +26,11 @@ pub fn install() {
 	frame::install();
 	status::install();
 	acmd::install();
+
+	param_config::update_float_2(*FIGHTER_KIND_KOOPAJR, get_marked_costumes("koopajr","koopajr").into_iter().map(|x| x as i32).collect(), (smash::hash40("dash_speed"), 0, 1.86));
+	param_config::update_float_2(*FIGHTER_KIND_KOOPAJR, get_marked_costumes("koopajr","koopajr").into_iter().map(|x| x as i32).collect(), (smash::hash40("run_speed_max"), 0, 1.7));
+	param_config::update_float_2(*FIGHTER_KIND_KOOPAJR, get_marked_costumes("koopajr","koopajr").into_iter().map(|x| x as i32).collect(), (smash::hash40("jump_speed_x_mul"), 0, 1.1));
+	param_config::update_float_2(*FIGHTER_KIND_KOOPAJR, get_marked_costumes("koopajr","koopajr").into_iter().map(|x| x as i32).collect(), (smash::hash40("landing_attack_air_frame_f"), 0, 11.0));
+	param_config::update_float_2(*FIGHTER_KIND_KOOPAJR, get_marked_costumes("koopajr","koopajr").into_iter().map(|x| x as i32).collect(), (smash::hash40("clip_sphere_offset_x"), 0, 0.5));
+
 }

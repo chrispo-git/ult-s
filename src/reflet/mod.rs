@@ -2,6 +2,8 @@ mod status;
 mod frame;
 mod acmd;
 use crate::util::*;
+use smash::lib::lua_const::*;
+use smash::hash40;
 
 //Grima Install
 static mut IS_GRIMA : [bool; 8] = [false; 8];
@@ -36,4 +38,7 @@ pub fn install() {
 	frame::install();
 	status::install();
 	acmd::install();
+
+	param_config::update_float_2(*FIGHTER_KIND_REFLET, get_marked_costumes("reflet","reflet").into_iter().map(|x| x as i32).collect(), (smash::hash40("run_speed_max"), 0, 1.4));
+
 }
