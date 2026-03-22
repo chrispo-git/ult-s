@@ -118,7 +118,8 @@ jobs:
               );
               if (asset) {
                 console.log(`Found previous full release: ${release.tag_name} -> ${asset.name}`);
-                core.setOutput('asset_url', asset.browser_download_url);
+                core.setOutput('asset_id', asset.id);
+                core.setOutput('asset_url', 'found');
                 core.setOutput('asset_name', asset.name);
                 targetAsset = asset;
                 break;
@@ -128,13 +129,19 @@ jobs:
             if (!targetAsset) {
               console.log('No previous full release found - diff will be skipped');
               core.setOutput('asset_url', '');
+              core.setOutput('asset_id', '');
             }
 
       - name: Download and extract previous full release
         if: steps.prev_release.outputs.asset_url != ''
         run: |
           mkdir -p prev_release
-          curl -L "${{ steps.prev_release.outputs.asset_url }}" -o prev_release/prev.zip
+          curl -fSL --retry 5 --retry-delay 5 \
+            -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+            -H "Accept: application/octet-stream" \
+            "https://api.github.com/repos/${{ github.repository }}/releases/assets/${{ steps.prev_release.outputs.asset_id }}" \
+            -o prev_release/prev.zip
+          echo "Downloaded $(du -sh prev_release/prev.zip | cut -f1)"
           unzip -q prev_release/prev.zip -d prev_release/extracted
           echo "Extracted contents:"
           find prev_release/extracted -maxdepth 4 | head -40
@@ -299,7 +306,7 @@ jobs:
       - name: Upload Lite artifact
         run: |
           UPLOAD_URL="https://uploads.github.com/repos/${{ github.repository }}/releases/${{ steps.create_release.outputs.release_id }}/assets?name=Ultimate+S+Lite.zip"
-          curl -fS --retry 5 --retry-delay-5 \
+          curl -fS --retry 5 --retry-delay 5 \
             -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
             -H "Content-Type: application/zip" \
             --data-binary @"releases-lite/Ultimate S Lite.zip" \
