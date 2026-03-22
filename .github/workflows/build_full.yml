@@ -12,7 +12,7 @@ jobs:
   build:
     name: Build Full Release (build_git.py)
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 120
 
     steps:
       - name: Checkout repository
@@ -44,14 +44,26 @@ jobs:
       - name: Install cargo-skyline
         if: steps.cache-cargo-skyline.outputs.cache-hit != 'true'
         run: cargo install cargo-skyline --version 3.5.0 --locked
- 
+
+      - name: Download skyline stdlib
+        run: cargo skyline update-std
+
       - name: Build with cargo skyline
         env:
-          CARGO_TERM_COLOR: always
-          CARGO_LOG: cargo::core::compiler::fingerprint=info
+          CARGO_TERM_COLOR: never
         run: |
-          stdbuf -oL -eL cargo skyline build --release --features="main_nro" 2>&1 | tee build.log
-          exit ${PIPESTATUS[0]}
+          cargo skyline build --release --features="main_nro" > build.log 2>&1 &
+          BUILD_PID=$!
+          echo "Build started with PID $BUILD_PID"
+          while kill -0 $BUILD_PID 2>/dev/null; do
+            tail -n5 build.log 2>/dev/null || true
+            sleep 10
+          done
+          wait $BUILD_PID
+          EXIT_CODE=$?
+          echo "--- Full build log ---"
+          cat build.log
+          exit $EXIT_CODE
 
       - name: Get changed files in PR
         uses: actions/github-script@v7
