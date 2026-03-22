@@ -287,61 +287,39 @@ jobs:
             core.setOutput('upload_url', release.data.upload_url);
 
       - name: Upload Full Release artifact
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const fs = require('fs');
-            const path = require('path');
-            const zipPath = 'releases/Ultimate S Arcropolis.zip';
-            const data = fs.readFileSync(zipPath);
-            await github.rest.repos.uploadReleaseAsset({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              release_id: ${{ steps.create_release.outputs.release_id }},
-              name: 'Ultimate S Arcropolis.zip',
-              data,
-              headers: { 'content-type': 'application/zip', 'content-length': data.length }
-            });
-            console.log('Uploaded: Ultimate S Arcropolis.zip');
+        run: |
+          UPLOAD_URL="https://uploads.github.com/repos/${{ github.repository }}/releases/${{ steps.create_release.outputs.release_id }}/assets?name=Ultimate+S+Arcropolis.zip"
+          curl -fS --retry 3 \
+            -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+            -H "Content-Type: application/zip" \
+            --data-binary @"releases/Ultimate S Arcropolis.zip" \
+            "$UPLOAD_URL"
+          echo "Uploaded: Ultimate S Arcropolis.zip"
 
       - name: Upload Lite artifact
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const fs = require('fs');
-            const zipPath = 'releases-lite/Ultimate S Lite.zip';
-            const data = fs.readFileSync(zipPath);
-            await github.rest.repos.uploadReleaseAsset({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              release_id: ${{ steps.create_release.outputs.release_id }},
-              name: 'Ultimate S Lite.zip',
-              data,
-              headers: { 'content-type': 'application/zip', 'content-length': data.length }
-            });
-            console.log('Uploaded: Ultimate S Lite.zip');
+        run: |
+          UPLOAD_URL="https://uploads.github.com/repos/${{ github.repository }}/releases/${{ steps.create_release.outputs.release_id }}/assets?name=Ultimate+S+Lite.zip"
+          curl -fS --retry 5 --retry-delay-5 \
+            -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+            -H "Content-Type: application/zip" \
+            --data-binary @"releases-lite/Ultimate S Lite.zip" \
+            "$UPLOAD_URL"
+          echo "Uploaded: Ultimate S Lite.zip"
 
       - name: Upload Diff artifact
         if: steps.prev_release.outputs.asset_url != '' && steps.prev_dirs.outputs.old_arcropolis != ''
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const fs = require('fs');
-            const zipPath = 'releases-diff/ult_s_diff.zip';
-            if (!fs.existsSync(zipPath)) {
-              console.log('No diff zip found, skipping.');
-              return;
-            }
-            const data = fs.readFileSync(zipPath);
-            await github.rest.repos.uploadReleaseAsset({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              release_id: ${{ steps.create_release.outputs.release_id }},
-              name: 'ult_s_diff.zip',
-              data,
-              headers: { 'content-type': 'application/zip', 'content-length': data.length }
-            });
-            console.log('Uploaded: ult_s_diff.zip');
+        run: |
+          if [ ! -f "releases-diff/ult_s_diff.zip" ]; then
+            echo "No diff zip found, skipping."
+            exit 0
+          fi
+          UPLOAD_URL="https://uploads.github.com/repos/${{ github.repository }}/releases/${{ steps.create_release.outputs.release_id }}/assets?name=ult_s_diff.zip"
+          curl -fS --retry 5 --retry-delay 5 \
+            -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+            -H "Content-Type: application/zip" \
+            --data-binary @"releases-diff/ult_s_diff.zip" \
+            "$UPLOAD_URL"
+          echo "Uploaded: ult_s_diff.zip"
 
       - name: Release URL
         run: |
