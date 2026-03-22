@@ -133,7 +133,6 @@ if os.path.exists(r'target'):
                 f.write(f"v.{inputs}")
             shutil.copy(r'readme.txt', r'releases/readme.txt')
             shutil.copy(r'credits.txt', r'releases/credits.txt')
-            copytree_changed(r'ultimate-s-setup', r'releases')
 
             build_zip(new_changed, r'releases/Ultimate S Arcropolis.zip')
             log("[build] Changed-files-only zip done!")
@@ -160,7 +159,6 @@ if os.path.exists(r'target'):
                 f.write(f"v.{inputs}")
             shutil.copy(r'readme.txt', r'releases-full/readme.txt')
             shutil.copy(r'credits.txt', r'releases-full/credits.txt')
-            copytree_full(r'ultimate-s-setup', r'releases-full/ultimate-s-setup')
 
             build_zip(new_full, r'releases-full/Ultimate S Arcropolis (Full).zip')
             log("[build] Full romfs zip done!")

@@ -96,8 +96,6 @@ def build_full(version):
 
     shutil.copy('readme.txt',  os.path.join('releases', 'readme.txt'))
     shutil.copy('credits.txt', os.path.join('releases', 'credits.txt'))
-    if os.path.exists('ultimate-s-setup'):
-        copytree('ultimate-s-setup', 'releases')
 
     make_zip(out_dir, os.path.join('releases', 'Ultimate S Arcropolis.zip'))
     log("=== Full build done ===")

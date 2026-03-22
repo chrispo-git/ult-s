@@ -238,28 +238,37 @@ jobs:
             tmp="setup_tmp/$name"
             mkdir -p "$tmp"
 
-            if [[ "$f" == *.zip ]]; then
+            if [[ "$f" == *.tar.gz ]]; then
+              tar -xzf "$f" -C "$tmp"
+            elif [[ "$f" == *.zip ]]; then
               unzip -q "$f" -d "$tmp"
             else
               cp "$f" "$tmp/"
             fi
 
-            # Place .app (macOS) at releases root
-            find "$tmp" -name "*.app" -exec cp -r {} "$RELEASES_ROOT/" \;
+            echo "  Extracted contents of $name:"
+            find "$tmp" -maxdepth 2
 
-            # Place .exe (Windows) at releases root
-            find "$tmp" -name "*.exe" -exec cp {} "$RELEASES_ROOT/" \;
+            # Linux .tar.gz — copy everything to releases root
+            if [[ "$name" == *linux* ]]; then
+              cp -r "$tmp"/. "$RELEASES_ROOT/"
+              echo "  Placed Linux release at releases root"
 
-            # Place .sh (Linux) at releases root
-            find "$tmp" -name "*.sh" -exec cp {} "$RELEASES_ROOT/" \;
+            # Mac .zip — copy everything to releases root
+            elif [[ "$name" == *mac* ]]; then
+              cp -r "$tmp"/. "$RELEASES_ROOT/"
+              echo "  Placed Mac release at releases root"
 
-            # Copy any other loose files/folders at the zip root to releases root
-            for item in "$tmp"/*/; do
-              item_name=$(basename "$item")
-              if [[ "$item_name" != "ultimate" ]]; then
-                cp -r "$item" "$RELEASES_ROOT/" 2>/dev/null || true
-              fi
-            done
+            # Windows .zip — copy everything to releases root
+            elif [[ "$name" == *windows* ]]; then
+              cp -r "$tmp"/. "$RELEASES_ROOT/"
+              echo "  Placed Windows release at releases root"
+
+            else
+              # Unknown asset — copy to releases root anyway
+              cp -r "$tmp"/. "$RELEASES_ROOT/"
+              echo "  Placed unknown asset at releases root"
+            fi
           done
 
           echo "Setup assets placed. Full releases/ contents:"
@@ -308,21 +317,29 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh release upload "v${{ github.event.inputs.version }}" \
-            "releases/Ultimate S Arcropolis.zip" \
+          VERSION="${{ github.event.inputs.version }}"
+          DOTVER="${VERSION//./.}"
+          FNAME="Ultimate.S.${DOTVER}.zip"
+          cp "releases/Ultimate S Arcropolis.zip" "releases/${FNAME}"
+          gh release upload "v${VERSION}" \
+            "releases/${FNAME}" \
             --repo "${{ github.repository }}" \
             --clobber
-          echo "Uploaded: Ultimate S Arcropolis.zip"
+          echo "Uploaded: ${FNAME}"
 
       - name: Upload Lite artifact
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh release upload "v${{ github.event.inputs.version }}" \
-            "releases-lite/Ultimate S Lite.zip" \
+          VERSION="${{ github.event.inputs.version }}"
+          DOTVER="${VERSION//./.}"
+          FNAME="Ultimate.S.Lite.${DOTVER}.zip"
+          cp "releases-lite/Ultimate S Lite.zip" "releases-lite/${FNAME}"
+          gh release upload "v${VERSION}" \
+            "releases-lite/${FNAME}" \
             --repo "${{ github.repository }}" \
             --clobber
-          echo "Uploaded: Ultimate S Lite.zip"
+          echo "Uploaded: ${FNAME}"
 
       - name: Upload Diff artifact
         if: steps.prev_release.outputs.asset_url != '' && steps.prev_dirs.outputs.old_arcropolis != ''
