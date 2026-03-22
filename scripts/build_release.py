@@ -60,7 +60,7 @@ def make_zip(src_dir, zip_path):
         os.remove(zip_path)
     file_paths = get_all_file_paths(src_dir)
     log(f"  Zipping {len(file_paths)} files -> {zip_path}")
-    with ZipFile(zip_path, 'w', compression=zipfile.ZIP_DEFLATED, compresslevel=9) as z:
+    with ZipFile(zip_path, 'w', compression=zipfile.ZIP_DEFLATED, compresslevel=6) as z:
         for fp in file_paths:
             z.write(fp)
     log(f"  Zip complete: {zip_path}")
@@ -142,33 +142,27 @@ def build_lite(version):
             if 'c0' in name:
                 os.remove(os.path.join(root, name))
 
-    # Copy only non-c00 costume dirs (and special param dirs e.g. donkey)
-    # Costume dirs are named c01, c02, ... c09, c10, etc.
-    import re
-    costume_pattern = re.compile(r'^c\d{2,}$')
+    # For each fighter, copy everything EXCEPT costume dirs c00-c07
+    COSTUME_DIRS = {'c00', 'c01', 'c02', 'c03', 'c04', 'c05', 'c06', 'c07'}
 
     for fighter in os.listdir(os.path.join('romfs', 'fighter')):
         fighter_src = os.path.join('romfs', 'fighter', fighter)
         if not os.path.isdir(fighter_src):
             continue
-        for root, dirs, files in os.walk(fighter_src, topdown=False):
-            for name in dirs:
-                is_added_param = False
-                if 'param' in name:
-                    path = os.path.join(root, name)
-                    if 'donkey' in path:
-                        is_added_param = True
-                # Match costume dirs like c01, c02 ... but NOT c00
-                is_alt_costume = bool(costume_pattern.match(name)) and name != 'c00'
-                if is_alt_costume or is_added_param:
-                    src_path = os.path.join(root, name)
-                    dst_path = src_path.replace(
-                        'romfs',
-                        os.path.join('releases-lite', 'ultimate', 'mods', 'Ultimate S Lite'),
-                        1  # only replace first occurrence
-                    )
-                    os.makedirs(dst_path, exist_ok=True)
-                    copytree(src_path, dst_path)
+        if fighter == 'common':
+            continue
+        for root, dirs, files in os.walk(fighter_src, topdown=True):
+            dirs[:] = [d for d in dirs if d not in COSTUME_DIRS]
+
+            for name in files:
+                src_path = os.path.join(root, name)
+                dst_path = src_path.replace(
+                    'romfs',
+                    os.path.join('releases-lite', 'ultimate', 'mods', 'Ultimate S Lite'),
+                    1
+                )
+                os.makedirs(os.path.dirname(dst_path), exist_ok=True)
+                shutil.copy2(src_path, dst_path)
 
     with open(os.path.join(out_dir, 'version.txt'), 'w') as f:
         f.write(f"v.{version}-LITE")
@@ -242,7 +236,7 @@ def build_diff(version, old_arcropolis_dir, old_stages_dir):
     empty_or_create('releases-diff')
 
     new_arcropolis = os.path.join('releases', 'ultimate', 'mods', 'Ultimate S Arcropolis')
-    new_stages     = os.path.join('romfs-stages', 'ultimate', 'mods', 'Ultimate S Stages')
+    new_stages     = os.path.join('releases', 'ultimate', 'mods', 'Ultimate S Stages')
 
     removed_files = []
     diff(new_arcropolis, old_arcropolis_dir, 'Ultimate S Arcropolis', removed_files)

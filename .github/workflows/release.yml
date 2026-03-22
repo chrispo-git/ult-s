@@ -85,6 +85,13 @@ jobs:
           PYTHONUNBUFFERED: "1"
         run: python -u scripts/build_release.py "${{ github.event.inputs.version }}" full
 
+      - name: Clone Ultimate S Stages and add to full release
+        run: |
+          git clone https://x-access-token:${{ secrets.STAGES_REPO_TOKEN }}@github.com/chrispo-git/Ultimate-S-Stages.git stages_repo
+          cp -r "stages_repo/Ultimate S Stages" "releases/ultimate/mods/Ultimate S Stages"
+          echo "Stages folder copied. Contents:"
+          find "releases/ultimate/mods/Ultimate S Stages" -maxdepth 2 | head -20
+
       # -----------------------------------------------------------------------
       # 5. Lite build (reuses same .nro)
       # -----------------------------------------------------------------------
@@ -92,12 +99,7 @@ jobs:
         env:
           PYTHONUNBUFFERED: "1"
         run: python -u scripts/build_release.py "${{ github.event.inputs.version }}" lite
-      
-      - name: Debug lite size
-        run: |
-          du -sh releases-lite/
-          du -sh "releases-lite/ultimate/mods/Ultimate S Lite/"
-          find "releases-lite/ultimate/mods/Ultimate S Lite/" -type f | wc -l
+
       # -----------------------------------------------------------------------
       # 6. Fetch previous full release zip and extract old folders for diff
       # -----------------------------------------------------------------------
@@ -108,14 +110,18 @@ jobs:
           script: |
             const { owner, repo } = context.repo;
 
-            // Get all releases, find the latest one that has a non-lite,
-            // non-diff zip asset
+            // Get all releases, skip drafts, find the latest published one
+            // that has a non-lite, non-diff zip asset
             const releases = await github.paginate(github.rest.repos.listReleases, {
               owner, repo
             });
 
             let targetAsset = null;
             for (const release of releases) {
+              if (release.draft) {
+                console.log(`Skipping draft release: ${release.tag_name}`);
+                continue;
+              }
               const asset = release.assets.find(a =>
                 a.name.endsWith('.zip') &&
                 !a.name.toLowerCase().includes('lite') &&
@@ -185,71 +191,71 @@ jobs:
       # 8. Fetch all assets from latest Ultimate-S-Setup release and bundle
       #    them into the full release folder
       # -----------------------------------------------------------------------
-      - name: Fetch Ultimate-S-Setup release assets
+      - name: Fetch Ultimate-S-Setup release asset list
+        id: setup_assets
         uses: actions/github-script@v7
         with:
           github-token: ${{ secrets.SETUP_REPO_TOKEN }}
           script: |
-            const fs = require('fs');
-            const path = require('path');
-
             const release = await github.rest.repos.getLatestRelease({
               owner: 'chrispo-git',
               repo: 'Ultimate-S-Setup'
             });
+            console.log(`Latest Ultimate-S-Setup release: ${release.data.tag_name}`);
+            const assets = release.data.assets.map(a => ({ id: a.id, name: a.name }));
+            console.log(`Assets: ${assets.map(a => a.name).join(', ')}`);
+            core.setOutput('assets_json', JSON.stringify(assets));
 
-            console.log(`Fetching assets from Ultimate-S-Setup ${release.data.tag_name}`);
-            fs.mkdirSync('setup_assets', { recursive: true });
-
-            for (const asset of release.data.assets) {
-              console.log(`  Downloading: ${asset.name}`);
-              const response = await github.rest.repos.getReleaseAsset({
-                owner: 'chrispo-git',
-                repo: 'Ultimate-S-Setup',
-                asset_id: asset.id,
-                headers: { Accept: 'application/octet-stream' }
-              });
-              fs.writeFileSync(
-                path.join('setup_assets', asset.name),
-                Buffer.from(response.data)
-              );
-            }
-
-            console.log('All setup assets downloaded.');
+      - name: Download Ultimate-S-Setup assets via curl
+        run: |
+          mkdir -p setup_assets
+          echo '${{ steps.setup_assets.outputs.assets_json }}' | python3 -c "
+          import json, sys, os, subprocess
+          assets = json.load(sys.stdin)
+          for asset in assets:
+              url = f\"https://api.github.com/repos/chrispo-git/Ultimate-S-Setup/releases/assets/{asset['id']}\"
+              out = f\"setup_assets/{asset['name']}\"
+              print(f\"Downloading: {asset['name']}\")
+              subprocess.run([
+                  'curl', '-fSL', '--retry', '5', '--retry-delay', '5',
+                  '-H', 'Authorization: Bearer ${{ secrets.SETUP_REPO_TOKEN }}',
+                  '-H', 'Accept: application/octet-stream',
+                  url, '-o', out
+              ], check=True)
+              print(f\"  Saved to: {out} ({os.path.getsize(out)} bytes)\")
+          "
+          echo "Downloaded assets:"
+          ls -lh setup_assets/
 
       - name: Extract and place setup assets into full release
         run: |
-          FULL_DIR="releases/ultimate/mods/Ultimate S Arcropolis"
           RELEASES_ROOT="releases"
 
           for f in setup_assets/*; do
             name=$(basename "$f")
             echo "Processing: $name"
 
-            # Unzip each asset into a temp dir, then place contents
             tmp="setup_tmp/$name"
             mkdir -p "$tmp"
 
             if [[ "$f" == *.zip ]]; then
               unzip -q "$f" -d "$tmp"
             else
-              # Non-zip asset (unlikely but handle gracefully)
               cp "$f" "$tmp/"
             fi
 
-            # Place .app (macOS) at releases root (same level as "ultimate" folder)
+            # Place .app (macOS) at releases root
             find "$tmp" -name "*.app" -exec cp -r {} "$RELEASES_ROOT/" \;
 
             # Place .exe (Windows) at releases root
             find "$tmp" -name "*.exe" -exec cp {} "$RELEASES_ROOT/" \;
 
-            # Place .sh (Linux) and anything else in the same dir at releases root
-            find "$tmp" -name "*.sh"  -exec cp {} "$RELEASES_ROOT/" \;
+            # Place .sh (Linux) at releases root
+            find "$tmp" -name "*.sh" -exec cp {} "$RELEASES_ROOT/" \;
 
             # Copy any other loose files/folders at the zip root to releases root
             for item in "$tmp"/*/; do
               item_name=$(basename "$item")
-              # Skip if already handled or is the ultimate folder structure
               if [[ "$item_name" != "ultimate" ]]; then
                 cp -r "$item" "$RELEASES_ROOT/" 2>/dev/null || true
               fi
@@ -260,18 +266,18 @@ jobs:
           find releases -maxdepth 3 | head -60
 
       # -----------------------------------------------------------------------
-      # 9. Re-zip full release now that setup assets are included
+      # 9. Re-zip full release now that setup assets and stages are included
       # -----------------------------------------------------------------------
-      - name: Re-zip full release with setup assets
+      - name: Re-zip full release with setup assets and stages
         run: |
-          FULL_MOD_DIR="releases/ultimate/mods/Ultimate S Arcropolis"
           ZIP="releases/Ultimate S Arcropolis.zip"
           rm -f "$ZIP"
-          # Zip the entire releases folder structure (mirrors original build.py behaviour)
+          # Zip everything in releases/ except the zip itself
           cd releases
-          zip -r "Ultimate S Arcropolis.zip" "ultimate/mods/Ultimate S Arcropolis"
+          zip -r "Ultimate S Arcropolis.zip" . --exclude "Ultimate S Arcropolis.zip"
           cd ..
           echo "Re-zipped: $ZIP"
+          ls -lh "$ZIP"
 
       # -----------------------------------------------------------------------
       # 10. Create draft GitHub release and upload all artifacts
