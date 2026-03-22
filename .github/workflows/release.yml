@@ -92,7 +92,12 @@ jobs:
         env:
           PYTHONUNBUFFERED: "1"
         run: python -u scripts/build_release.py "${{ github.event.inputs.version }}" lite
-
+      
+      - name: Debug lite size
+        run: |
+          du -sh releases-lite/
+          du -sh "releases-lite/ultimate/mods/Ultimate S Lite/"
+          find "releases-lite/ultimate/mods/Ultimate S Lite/" -type f | wc -l
       # -----------------------------------------------------------------------
       # 6. Fetch previous full release zip and extract old folders for diff
       # -----------------------------------------------------------------------
