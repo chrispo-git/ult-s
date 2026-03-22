@@ -103,16 +103,21 @@ jobs:
             const { owner, repo } = context.repo;
             const prNumber = context.payload.pull_request.number;
             const runId = context.runId;
-            const runUrl = `https://github.com/${owner}/${repo}/actions/runs/${runId}`;
+
+            const artifacts = await github.rest.actions.listWorkflowRunArtifacts({
+              owner, repo, run_id: runId
+            });
+            const artifact = artifacts.data.artifacts.find(a => a.name === 'ultimate-s-arcropolis-full');
+            const artifactUrl = artifact
+              ? `https://github.com/${owner}/${repo}/actions/runs/${runId}/artifacts/${artifact.id}`
+              : `https://github.com/${owner}/${repo}/actions/runs/${runId}`;
 
             const body = [
-              '## ✅ Full Build Complete',
+              '## Build Complete',
               '',
-              `**Workflow run:** [View Run](${runUrl})`,
+              `**[⬇️ Download Ultimate S Arcropolis.zip](${artifactUrl})**`,
               '',
-              '**Artifact:** `Ultimate S Arcropolis.zip`',
-              '',
-              `> Download the artifact from the [Actions run page](${runUrl}) under the **Artifacts** section.`,
+              '_Expires after 90 days. Requires being logged in to GitHub._',
               '',
               '---',
               `*Built from commit \`${{ github.event.pull_request.head.sha }}\` on PR #${prNumber}*`
