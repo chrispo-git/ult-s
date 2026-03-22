@@ -44,9 +44,14 @@ jobs:
       - name: Install cargo-skyline
         if: steps.cache-cargo-skyline.outputs.cache-hit != 'true'
         run: cargo install cargo-skyline --version 3.5.0 --locked
-
+ 
       - name: Build with cargo skyline
-        run: cargo skyline build --release --features="main_nro"
+        env:
+          CARGO_TERM_COLOR: always
+          CARGO_LOG: cargo::core::compiler::fingerprint=info
+        run: |
+          stdbuf -oL -eL cargo skyline build --release --features="main_nro" 2>&1 | tee build.log
+          exit ${PIPESTATUS[0]}
 
       - name: Get changed files in PR
         uses: actions/github-script@v7
