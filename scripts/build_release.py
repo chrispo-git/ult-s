@@ -18,6 +18,7 @@ import sys
 import shutil
 import hashlib
 import json
+import zipfile
 from zipfile import ZipFile
 
 # ---------------------------------------------------------------------------
@@ -59,7 +60,7 @@ def make_zip(src_dir, zip_path):
         os.remove(zip_path)
     file_paths = get_all_file_paths(src_dir)
     log(f"  Zipping {len(file_paths)} files -> {zip_path}")
-    with ZipFile(zip_path, 'w') as z:
+    with ZipFile(zip_path, 'w', compression=zipfile.ZIP_DEFLATED, compresslevel=9) as z:
         for fp in file_paths:
             z.write(fp)
     log(f"  Zip complete: {zip_path}")
@@ -142,6 +143,10 @@ def build_lite(version):
                 os.remove(os.path.join(root, name))
 
     # Copy only non-c00 costume dirs (and special param dirs e.g. donkey)
+    # Costume dirs are named c01, c02, ... c09, c10, etc.
+    import re
+    costume_pattern = re.compile(r'^c\d{2,}$')
+
     for fighter in os.listdir(os.path.join('romfs', 'fighter')):
         fighter_src = os.path.join('romfs', 'fighter', fighter)
         if not os.path.isdir(fighter_src):
@@ -153,11 +158,14 @@ def build_lite(version):
                     path = os.path.join(root, name)
                     if 'donkey' in path:
                         is_added_param = True
-                if ('c' in name and 'c0' not in name) or is_added_param:
+                # Match costume dirs like c01, c02 ... but NOT c00
+                is_alt_costume = bool(costume_pattern.match(name)) and name != 'c00'
+                if is_alt_costume or is_added_param:
                     src_path = os.path.join(root, name)
                     dst_path = src_path.replace(
-                        os.path.join('romfs'),
-                        os.path.join('releases-lite', 'ultimate', 'mods', 'Ultimate S Lite')
+                        'romfs',
+                        os.path.join('releases-lite', 'ultimate', 'mods', 'Ultimate S Lite'),
+                        1  # only replace first occurrence
                     )
                     os.makedirs(dst_path, exist_ok=True)
                     copytree(src_path, dst_path)
