@@ -12,7 +12,7 @@ jobs:
   build:
     name: Build Full Release (build_git.py)
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 120
 
     steps:
       - name: Checkout repository
@@ -44,14 +44,26 @@ jobs:
       - name: Install cargo-skyline
         if: steps.cache-cargo-skyline.outputs.cache-hit != 'true'
         run: cargo install cargo-skyline --version 3.5.0 --locked
- 
+
+      - name: Download skyline stdlib
+        run: cargo skyline update-std
+
       - name: Build with cargo skyline
         env:
-          CARGO_TERM_COLOR: always
-          CARGO_LOG: cargo::core::compiler::fingerprint=info
+          CARGO_TERM_COLOR: never
         run: |
-          stdbuf -oL -eL cargo skyline build --release --features="main_nro" 2>&1 | tee build.log
-          exit ${PIPESTATUS[0]}
+          cargo skyline build --release --features="main_nro" > build.log 2>&1 &
+          BUILD_PID=$!
+          echo "Build started with PID $BUILD_PID"
+          while kill -0 $BUILD_PID 2>/dev/null; do
+            tail -n5 build.log 2>/dev/null || true
+            sleep 10
+          done
+          wait $BUILD_PID
+          EXIT_CODE=$?
+          echo "--- Full build log ---"
+          cat build.log
+          exit $EXIT_CODE
 
       - name: Get changed files in PR
         uses: actions/github-script@v7
@@ -91,16 +103,21 @@ jobs:
             const { owner, repo } = context.repo;
             const prNumber = context.payload.pull_request.number;
             const runId = context.runId;
-            const runUrl = `https://github.com/${owner}/${repo}/actions/runs/${runId}`;
+
+            const artifacts = await github.rest.actions.listWorkflowRunArtifacts({
+              owner, repo, run_id: runId
+            });
+            const artifact = artifacts.data.artifacts.find(a => a.name === 'ultimate-s-arcropolis-full');
+            const artifactUrl = artifact
+              ? `https://github.com/${owner}/${repo}/actions/runs/${runId}/artifacts/${artifact.id}`
+              : `https://github.com/${owner}/${repo}/actions/runs/${runId}`;
 
             const body = [
-              '## ✅ Full Build Complete',
+              '## Build Complete',
               '',
-              `**Workflow run:** [View Run](${runUrl})`,
+              `**[Download Ultimate S Arcropolis.zip](${artifactUrl})**`,
               '',
-              '**Artifact:** `Ultimate S Arcropolis.zip`',
-              '',
-              `> Download the artifact from the [Actions run page](${runUrl}) under the **Artifacts** section.`,
+              '_Expires after 90 days. Requires being logged in to GitHub._',
               '',
               '---',
               `*Built from commit \`${{ github.event.pull_request.head.sha }}\` on PR #${prNumber}*`
