@@ -249,23 +249,26 @@ jobs:
             echo "  Extracted contents of $name:"
             find "$tmp" -maxdepth 2
 
-            # Linux .tar.gz — copy everything to releases root
+            # Linux .tar.gz — contents are already at the right level
             if [[ "$name" == *linux* ]]; then
               cp -r "$tmp"/. "$RELEASES_ROOT/"
               echo "  Placed Linux release at releases root"
 
-            # Mac .zip — copy everything to releases root
+            # Mac .zip — strip one level (/UltimateSSetup/) before placing
             elif [[ "$name" == *mac* ]]; then
-              cp -r "$tmp"/. "$RELEASES_ROOT/"
+              MAC_INNER=$(find "$tmp" -mindepth 1 -maxdepth 1 -type d | head -1)
+              echo "  Mac inner dir: $MAC_INNER"
+              cp -r "$MAC_INNER"/. "$RELEASES_ROOT/"
               echo "  Placed Mac release at releases root"
 
-            # Windows .zip — copy everything to releases root
+            # Windows .zip — strip two levels (/UltimateSSetup/UltimateSSetup/) before placing
             elif [[ "$name" == *windows* ]]; then
-              cp -r "$tmp"/. "$RELEASES_ROOT/"
+              WIN_INNER=$(find "$tmp" -mindepth 2 -maxdepth 2 -type d | head -1)
+              echo "  Windows inner dir: $WIN_INNER"
+              cp -r "$WIN_INNER"/. "$RELEASES_ROOT/"
               echo "  Placed Windows release at releases root"
 
             else
-              # Unknown asset — copy to releases root anyway
               cp -r "$tmp"/. "$RELEASES_ROOT/"
               echo "  Placed unknown asset at releases root"
             fi
