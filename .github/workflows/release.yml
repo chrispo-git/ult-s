@@ -294,38 +294,38 @@ jobs:
             core.setOutput('upload_url', release.data.upload_url);
 
       - name: Upload Full Release artifact
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          UPLOAD_URL="https://uploads.github.com/repos/${{ github.repository }}/releases/${{ steps.create_release.outputs.release_id }}/assets?name=Ultimate+S+Arcropolis.zip"
-          curl -fS --retry 3 \
-            -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
-            -H "Content-Type: application/zip" \
-            --data-binary @"releases/Ultimate S Arcropolis.zip" \
-            "$UPLOAD_URL"
+          gh release upload "v${{ github.event.inputs.version }}" \
+            "releases/Ultimate S Arcropolis.zip" \
+            --repo "${{ github.repository }}" \
+            --clobber
           echo "Uploaded: Ultimate S Arcropolis.zip"
 
       - name: Upload Lite artifact
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          UPLOAD_URL="https://uploads.github.com/repos/${{ github.repository }}/releases/${{ steps.create_release.outputs.release_id }}/assets?name=Ultimate+S+Lite.zip"
-          curl -fS --retry 5 --retry-delay 5 \
-            -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
-            -H "Content-Type: application/zip" \
-            --data-binary @"releases-lite/Ultimate S Lite.zip" \
-            "$UPLOAD_URL"
+          gh release upload "v${{ github.event.inputs.version }}" \
+            "releases-lite/Ultimate S Lite.zip" \
+            --repo "${{ github.repository }}" \
+            --clobber
           echo "Uploaded: Ultimate S Lite.zip"
 
       - name: Upload Diff artifact
         if: steps.prev_release.outputs.asset_url != '' && steps.prev_dirs.outputs.old_arcropolis != ''
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           if [ ! -f "releases-diff/ult_s_diff.zip" ]; then
             echo "No diff zip found, skipping."
             exit 0
           fi
-          UPLOAD_URL="https://uploads.github.com/repos/${{ github.repository }}/releases/${{ steps.create_release.outputs.release_id }}/assets?name=ult_s_diff.zip"
-          curl -fS --retry 5 --retry-delay 5 \
-            -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
-            -H "Content-Type: application/zip" \
-            --data-binary @"releases-diff/ult_s_diff.zip" \
-            "$UPLOAD_URL"
+          gh release upload "v${{ github.event.inputs.version }}" \
+            "releases-diff/ult_s_diff.zip" \
+            --repo "${{ github.repository }}" \
+            --clobber
           echo "Uploaded: ult_s_diff.zip"
 
       - name: Release URL
