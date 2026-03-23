@@ -96,7 +96,12 @@ def build_full(version):
 
     shutil.copy('readme.txt',  os.path.join('releases', 'readme.txt'))
     shutil.copy('credits.txt', os.path.join('releases', 'credits.txt'))
+    
+    flag_list = ["bayonetta","brave","buddy","captain","chrom","cloud","daisy","dedede","demon","diddy","dolly","donkey","duckhunt","edge","element","falco","fox","gamewatch","ganon","gaogaen","gekkouga","ike","inkling" ,"jack","kamui","ken","kirby","koopa","koopajr","krool","link","littlemac","lucario","lucas","lucina","luigi","mario","mariod","marth","master","metaknight","mewtwo","miifighter","miigunner","miiswordsman","murabito","ness","packun","pacman","palutena","peach","pichu","pikachu","pikmin","pit","pitb","popo","ptrainer","purin","reflet","richter","ridley","robot","rockman","rosetta","roy","ryu","samus","samusd","sheik","shizue","shulk","simon","snake","sonic","szerosuit","tantan","toonlink","trail","wario","wiifit","wolf","younglink","yoshi","zelda"]
 
+    for flag in flag_list:
+        with open(os.path.join('releases', 'ultimate', 'ult-s', f"{flag}.flag"), 'w') as f:
+            f.close()
     make_zip(out_dir, os.path.join('releases', 'Ultimate S Arcropolis.zip'))
     log("=== Full build done ===")
 
