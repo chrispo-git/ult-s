@@ -1,4 +1,4 @@
-name: Build Full Release
+name: Build PR Release
 
 on:
   pull_request:
