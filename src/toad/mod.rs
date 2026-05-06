@@ -33,8 +33,9 @@ static mut SIDEB_END: [bool; 8] = [false; 8];
 static mut SIDEB_LENGTH: [i32; 8] = [0; 8];
 static mut SIDEB_DIR : [f32; 8] = [1.0; 8];
 static mut BIG_TIMER: [i32; 8] = [0; 8];
+static mut DOWNB_SHOULD_BOUNCE: [bool; 8] = [false; 8];
 pub const SIDEB_LENGTH_MAX : i32 = 53;
-pub const BIG_TIMER_MAX : i32 = 400;
+pub const BIG_TIMER_MAX : i32 = 800;
 
 pub(crate) unsafe fn attack_vc(fighter: &mut L2CAgentBase) -> () {
 	let rand_val = smash::app::sv_math::rand(hash40("fighter"), 7);

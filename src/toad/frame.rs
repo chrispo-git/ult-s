@@ -223,16 +223,26 @@ unsafe extern "C" fn toad(fighter : &mut L2CFighterCommon) {
 				if frame > 5.0 && frame < 7.0{
 					macros::PLAY_SE(fighter, Hash40::new("se_murabito_attackdash01"));
 				}
-			};
+			}
 			if [hash40("special_air_lw_plant_failure")].contains(&MotionModule::motion_kind(boma)) {
-				if AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_HIT) && !AttackModule::is_infliction(boma, *COLLISION_KIND_MASK_HIT) && MotionModule::frame(boma) < 37.0{
+				if frame < 18.0 {
+					DOWNB_SHOULD_BOUNCE[ENTRY_ID] = false;
+				}
+				if AttackModule::is_infliction(boma, *COLLISION_KIND_MASK_HIT) {
+					if frame > 18.0 {
+						DOWNB_SHOULD_BOUNCE[ENTRY_ID] = true;
+					}
+				}
+				if DOWNB_SHOULD_BOUNCE[ENTRY_ID] && !AttackModule::is_infliction(boma, *COLLISION_KIND_MASK_HIT) && MotionModule::frame(boma) < 37.0{
 					KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_JUMP);
 					MotionModule::set_frame_sync_anim_cmd(boma, 38.0, true, true, false);
                     let speed = smash::phx::Vector3f { x: 0.0, y: 0.6, z: 0.0 };
                     KineticModule::add_speed(boma, &speed);
 				};
 				TO_FALL[ENTRY_ID] = true;
-			};
+			} else {
+				DOWNB_SHOULD_BOUNCE[ENTRY_ID] = false;
+			}
 			if ![hash40("special_air_lw_plant_failure"), hash40("landing_fall_special")].contains(&MotionModule::motion_kind(boma))  {
 				TO_FALL[ENTRY_ID] = false;
 			}
