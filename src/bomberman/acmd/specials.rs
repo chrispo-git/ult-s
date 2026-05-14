@@ -63,6 +63,20 @@ pub fn install() {
 	.acmd("game_down", bomb_bomb_down, Priority::Low)
 	.acmd("game_wait", bomb_bomb_wait, Priority::Low)
 	.install();
+
+    Agent::new("pacman_firehydrantwater")
+    .set_costume(get_marked_costumes("pacman","bomberman"))
+    .acmd("game_fly", bomb_water_kill, Priority::Low)
+	.install();
+}
+
+unsafe extern "C" fn bomb_water_kill(agent: &mut L2CAgentBase) {
+    if macros::is_excute(agent) {
+        ModelModule::set_scale(agent.module_accessor, 0.00001);
+        notify_event_msc_cmd!(agent, Hash40::new_raw(0x18b78d41a0));
+        notify_event_msc_cmd!(agent, Hash40::new_raw(0x199c462b5d));
+        agent.pop_lua_stack(1);
+    }
 }
 
 unsafe extern "C" fn bomb_neutralbcharge_eff(agent: &mut L2CAgentBase) {
