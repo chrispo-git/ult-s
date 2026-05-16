@@ -21,6 +21,8 @@ import json
 import zipfile
 from zipfile import ZipFile
 
+from merge_config import merge_configs
+
 # ---------------------------------------------------------------------------
 # Helpers
 # ---------------------------------------------------------------------------
@@ -91,6 +93,8 @@ def build_full(version):
     else:
         raise FileNotFoundError("romfs/ not found")
 
+    merge_configs(out_dir)
+    
     with open(os.path.join(out_dir, 'version.txt'), 'w') as f:
         f.write(f"v.{version}")
 
@@ -137,7 +141,8 @@ def build_lite(version):
     copytree(os.path.join('romfs', 'sound'),     os.path.join(out_dir, 'sound'))
     copytree(os.path.join('romfs', 'prebuilt'),  os.path.join(out_dir, 'prebuilt'))
     copytree(os.path.join('romfs', 'stream;'),   os.path.join(out_dir, 'stream;'))
-    shutil.copy(os.path.join('romfs', 'config.json'), os.path.join(out_dir, 'config.json'))
+
+    merge_configs(out_dir)
 
     # Remove c0x sound files (keep only alt costume sounds)
     for root, dirs, files in os.walk(os.path.join(out_dir, 'sound'), topdown=False):
