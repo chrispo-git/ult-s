@@ -1,0 +1,32 @@
+{
+  "new-dir-infos": [],
+  "new-dir-infos-base": {},
+  "share-to-vanilla": {},
+  "new-dir-files": {
+    "fighter/roy/c00": [
+      "fighter/roy/motion/body/c00/c00attackdash2.nuanmb"
+    ],
+    "fighter/roy/c01": [
+      "fighter/roy/motion/body/c01/c00attackdash2.nuanmb"
+    ],
+    "fighter/roy/c02": [
+      "fighter/roy/motion/body/c02/c00attackdash2.nuanmb"
+    ],
+    "fighter/roy/c03": [
+      "fighter/roy/motion/body/c03/c00attackdash2.nuanmb"
+    ],
+    "fighter/roy/c04": [
+      "fighter/roy/motion/body/c04/c00attackdash2.nuanmb"
+    ],
+    "fighter/roy/c05": [
+      "fighter/roy/motion/body/c05/c00attackdash2.nuanmb"
+    ],
+    "fighter/roy/c06": [
+      "fighter/roy/motion/body/c06/c00attackdash2.nuanmb"
+    ],
+    "fighter/roy/c07": [
+      "fighter/roy/motion/body/c07/c00attackdash2.nuanmb"
+    ]
+  },
+  "share-to-added": {}
+}

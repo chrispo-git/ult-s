@@ -1,0 +1,126 @@
+{
+  "new-dir-infos": [],
+  "new-dir-infos-base": {},
+  "share-to-vanilla": {
+    "sound/bank/fighter/se_edge_c00.tonelabel": [
+      "sound/bank/fighter/se_edge_c120.tonelabel",
+      "sound/bank/fighter/se_edge_c121.tonelabel",
+      "sound/bank/fighter/se_edge_c122.tonelabel",
+      "sound/bank/fighter/se_edge_c123.tonelabel",
+      "sound/bank/fighter/se_edge_c124.tonelabel",
+      "sound/bank/fighter/se_edge_c125.tonelabel",
+      "sound/bank/fighter/se_edge_c126.tonelabel",
+      "sound/bank/fighter/se_edge_c127.tonelabel"
+    ],
+    "sound/bank/fighter_voice/vc_edge_c00.tonelabel": [
+      "sound/bank/fighter_voice/vc_edge_c120.tonelabel",
+      "sound/bank/fighter_voice/vc_edge_c121.tonelabel",
+      "sound/bank/fighter_voice/vc_edge_c122.tonelabel",
+      "sound/bank/fighter_voice/vc_edge_c123.tonelabel",
+      "sound/bank/fighter_voice/vc_edge_c124.tonelabel",
+      "sound/bank/fighter_voice/vc_edge_c125.tonelabel",
+      "sound/bank/fighter_voice/vc_edge_c126.tonelabel",
+      "sound/bank/fighter_voice/vc_edge_c127.tonelabel"
+    ],
+    "sound/bank/fighter_voice/vc_edge_cheer_c00.nus3audio": [
+      "sound/bank/fighter_voice/vc_edge_cheer_c120.nus3audio",
+      "sound/bank/fighter_voice/vc_edge_cheer_c121.nus3audio",
+      "sound/bank/fighter_voice/vc_edge_cheer_c122.nus3audio",
+      "sound/bank/fighter_voice/vc_edge_cheer_c123.nus3audio",
+      "sound/bank/fighter_voice/vc_edge_cheer_c124.nus3audio",
+      "sound/bank/fighter_voice/vc_edge_cheer_c125.nus3audio",
+      "sound/bank/fighter_voice/vc_edge_cheer_c126.nus3audio",
+      "sound/bank/fighter_voice/vc_edge_cheer_c127.nus3audio"
+    ],
+    "sound/bank/fighter_voice/vc_edge_cheer_c00.nus3bank": [
+      "sound/bank/fighter_voice/vc_edge_cheer_c120.nus3bank",
+      "sound/bank/fighter_voice/vc_edge_cheer_c121.nus3bank",
+      "sound/bank/fighter_voice/vc_edge_cheer_c122.nus3bank",
+      "sound/bank/fighter_voice/vc_edge_cheer_c123.nus3bank",
+      "sound/bank/fighter_voice/vc_edge_cheer_c124.nus3bank",
+      "sound/bank/fighter_voice/vc_edge_cheer_c125.nus3bank",
+      "sound/bank/fighter_voice/vc_edge_cheer_c126.nus3bank",
+      "sound/bank/fighter_voice/vc_edge_cheer_c127.nus3bank"
+    ],
+    "sound/bank/fighter_voice/vc_edge_cheer_c00.tonelabel": [
+      "sound/bank/fighter_voice/vc_edge_cheer_c120.tonelabel",
+      "sound/bank/fighter_voice/vc_edge_cheer_c121.tonelabel",
+      "sound/bank/fighter_voice/vc_edge_cheer_c122.tonelabel",
+      "sound/bank/fighter_voice/vc_edge_cheer_c123.tonelabel",
+      "sound/bank/fighter_voice/vc_edge_cheer_c124.tonelabel",
+      "sound/bank/fighter_voice/vc_edge_cheer_c125.tonelabel",
+      "sound/bank/fighter_voice/vc_edge_cheer_c126.tonelabel",
+      "sound/bank/fighter_voice/vc_edge_cheer_c127.tonelabel"
+    ],
+    "prebuilt:/movie/fighter/edge/c00/final_00.h264": [
+      "prebuilt:/movie/fighter/edge/c120/final_00.h264",
+      "prebuilt:/movie/fighter/edge/c121/final_00.h264",
+      "prebuilt:/movie/fighter/edge/c122/final_00.h264",
+      "prebuilt:/movie/fighter/edge/c123/final_00.h264",
+      "prebuilt:/movie/fighter/edge/c124/final_00.h264",
+      "prebuilt:/movie/fighter/edge/c125/final_00.h264",
+      "prebuilt:/movie/fighter/edge/c126/final_00.h264",
+      "prebuilt:/movie/fighter/edge/c127/final_00.h264"
+    ]
+  },
+  "new-dir-files": {
+    "fighter/edge/cmn/effect": [
+      "effect/fighter/edge/trail/tex_bandana_spear1.nutexb",
+      "effect/fighter/edge/trail/tex_bandana_spear2.nutexb",
+      "effect/fighter/edge/trail/tex_bandana_spear3.nutexb",
+      "effect/fighter/edge/trail/tex_bandana_spear4.nutexb",
+      "effect/fighter/edge/trail/tex_bandana_spear5.nutexb",
+      "effect/fighter/edge/trail/tex_bandana_spear6.nutexb",
+      "effect/fighter/edge/trail/tex_bandana_spear7.nutexb",
+      "effect/fighter/edge/trail/tex_bandana_spear8.nutexb"
+    ]
+  },
+  "share-to-added": {
+    "sound/bank/fighter/se_edge_c120.nus3audio": [
+      "sound/bank/fighter/se_edge_c121.nus3audio",
+      "sound/bank/fighter/se_edge_c122.nus3audio",
+      "sound/bank/fighter/se_edge_c123.nus3audio",
+      "sound/bank/fighter/se_edge_c124.nus3audio",
+      "sound/bank/fighter/se_edge_c125.nus3audio",
+      "sound/bank/fighter/se_edge_c126.nus3audio",
+      "sound/bank/fighter/se_edge_c127.nus3audio"
+    ],
+    "sound/bank/fighter/se_edge_c120.nus3bank": [
+      "sound/bank/fighter/se_edge_c121.nus3bank",
+      "sound/bank/fighter/se_edge_c122.nus3bank",
+      "sound/bank/fighter/se_edge_c123.nus3bank",
+      "sound/bank/fighter/se_edge_c124.nus3bank",
+      "sound/bank/fighter/se_edge_c125.nus3bank",
+      "sound/bank/fighter/se_edge_c126.nus3bank",
+      "sound/bank/fighter/se_edge_c127.nus3bank"
+    ],
+    "sound/bank/fighter_voice/vc_edge_c120.nus3audio": [
+      "sound/bank/fighter_voice/vc_edge_c121.nus3audio",
+      "sound/bank/fighter_voice/vc_edge_c122.nus3audio",
+      "sound/bank/fighter_voice/vc_edge_c123.nus3audio",
+      "sound/bank/fighter_voice/vc_edge_c124.nus3audio",
+      "sound/bank/fighter_voice/vc_edge_c125.nus3audio",
+      "sound/bank/fighter_voice/vc_edge_c126.nus3audio",
+      "sound/bank/fighter_voice/vc_edge_c127.nus3audio"
+    ],
+    "sound/bank/fighter_voice/vc_edge_c120.nus3bank": [
+      "sound/bank/fighter_voice/vc_edge_c121.nus3bank",
+      "sound/bank/fighter_voice/vc_edge_c122.nus3bank",
+      "sound/bank/fighter_voice/vc_edge_c123.nus3bank",
+      "sound/bank/fighter_voice/vc_edge_c124.nus3bank",
+      "sound/bank/fighter_voice/vc_edge_c125.nus3bank",
+      "sound/bank/fighter_voice/vc_edge_c126.nus3bank",
+      "sound/bank/fighter_voice/vc_edge_c127.nus3bank"
+    ],
+    "camera/fighter/edge/c00/d04visualscene01.nuanmb": [
+      "camera/fighter/edge/c120/d04visualscene01.nuanmb",
+      "camera/fighter/edge/c121/d04visualscene01.nuanmb",
+      "camera/fighter/edge/c122/d04visualscene01.nuanmb",
+      "camera/fighter/edge/c123/d04visualscene01.nuanmb",
+      "camera/fighter/edge/c124/d04visualscene01.nuanmb",
+      "camera/fighter/edge/c125/d04visualscene01.nuanmb",
+      "camera/fighter/edge/c126/d04visualscene01.nuanmb",
+      "camera/fighter/edge/c127/d04visualscene01.nuanmb"
+    ]
+  }
+}

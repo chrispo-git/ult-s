@@ -1,0 +1,110 @@
+{
+  "new-dir-infos": [],
+  "new-dir-infos-base": {},
+  "share-to-vanilla": {
+    "sound/bank/fighter/se_donkey_c00.tonelabel": [
+      "sound/bank/fighter/se_donkey_c120.tonelabel",
+      "sound/bank/fighter/se_donkey_c121.tonelabel",
+      "sound/bank/fighter/se_donkey_c122.tonelabel",
+      "sound/bank/fighter/se_donkey_c123.tonelabel",
+      "sound/bank/fighter/se_donkey_c124.tonelabel",
+      "sound/bank/fighter/se_donkey_c125.tonelabel",
+      "sound/bank/fighter/se_donkey_c126.tonelabel",
+      "sound/bank/fighter/se_donkey_c127.tonelabel"
+    ],
+    "sound/bank/fighter_voice/vc_donkey_c00.tonelabel": [
+      "sound/bank/fighter_voice/vc_donkey_c120.tonelabel",
+      "sound/bank/fighter_voice/vc_donkey_c121.tonelabel",
+      "sound/bank/fighter_voice/vc_donkey_c122.tonelabel",
+      "sound/bank/fighter_voice/vc_donkey_c123.tonelabel",
+      "sound/bank/fighter_voice/vc_donkey_c124.tonelabel",
+      "sound/bank/fighter_voice/vc_donkey_c125.tonelabel",
+      "sound/bank/fighter_voice/vc_donkey_c126.tonelabel",
+      "sound/bank/fighter_voice/vc_donkey_c127.tonelabel"
+    ],
+    "sound/bank/fighter_voice/vc_donkey_cheer_c00.nus3audio": [
+      "sound/bank/fighter_voice/vc_donkey_cheer_c120.nus3audio",
+      "sound/bank/fighter_voice/vc_donkey_cheer_c121.nus3audio",
+      "sound/bank/fighter_voice/vc_donkey_cheer_c122.nus3audio",
+      "sound/bank/fighter_voice/vc_donkey_cheer_c123.nus3audio",
+      "sound/bank/fighter_voice/vc_donkey_cheer_c124.nus3audio",
+      "sound/bank/fighter_voice/vc_donkey_cheer_c125.nus3audio",
+      "sound/bank/fighter_voice/vc_donkey_cheer_c126.nus3audio",
+      "sound/bank/fighter_voice/vc_donkey_cheer_c127.nus3audio"
+    ],
+    "sound/bank/fighter_voice/vc_donkey_cheer_c00.nus3bank": [
+      "sound/bank/fighter_voice/vc_donkey_cheer_c120.nus3bank",
+      "sound/bank/fighter_voice/vc_donkey_cheer_c121.nus3bank",
+      "sound/bank/fighter_voice/vc_donkey_cheer_c122.nus3bank",
+      "sound/bank/fighter_voice/vc_donkey_cheer_c123.nus3bank",
+      "sound/bank/fighter_voice/vc_donkey_cheer_c124.nus3bank",
+      "sound/bank/fighter_voice/vc_donkey_cheer_c125.nus3bank",
+      "sound/bank/fighter_voice/vc_donkey_cheer_c126.nus3bank",
+      "sound/bank/fighter_voice/vc_donkey_cheer_c127.nus3bank"
+    ],
+    "sound/bank/fighter_voice/vc_donkey_cheer_c00.tonelabel": [
+      "sound/bank/fighter_voice/vc_donkey_cheer_c120.tonelabel",
+      "sound/bank/fighter_voice/vc_donkey_cheer_c121.tonelabel",
+      "sound/bank/fighter_voice/vc_donkey_cheer_c122.tonelabel",
+      "sound/bank/fighter_voice/vc_donkey_cheer_c123.tonelabel",
+      "sound/bank/fighter_voice/vc_donkey_cheer_c124.tonelabel",
+      "sound/bank/fighter_voice/vc_donkey_cheer_c125.tonelabel",
+      "sound/bank/fighter_voice/vc_donkey_cheer_c126.tonelabel",
+      "sound/bank/fighter_voice/vc_donkey_cheer_c127.tonelabel"
+    ],
+    "camera/fighter/donkey/c00/d04finalstart.nuanmb": [
+      "camera/fighter/donkey/c120/d04finalstart.nuanmb",
+      "camera/fighter/donkey/c121/d04finalstart.nuanmb",
+      "camera/fighter/donkey/c122/d04finalstart.nuanmb",
+      "camera/fighter/donkey/c123/d04finalstart.nuanmb",
+      "camera/fighter/donkey/c124/d04finalstart.nuanmb",
+      "camera/fighter/donkey/c125/d04finalstart.nuanmb",
+      "camera/fighter/donkey/c126/d04finalstart.nuanmb",
+      "camera/fighter/donkey/c127/d04finalstart.nuanmb"
+    ]
+  },
+  "new-dir-files": {
+    "fighter/donkey/cmn/effect": [
+      "effect/fighter/donkey/trail/tex_funky_sword2.nutexb",
+      "effect/fighter/donkey/trail/tex_funky_sword6.nutexb"
+    ]
+  },
+  "share-to-added": {
+    "sound/bank/fighter/se_donkey_c120.nus3audio": [
+      "sound/bank/fighter/se_donkey_c121.nus3audio",
+      "sound/bank/fighter/se_donkey_c122.nus3audio",
+      "sound/bank/fighter/se_donkey_c123.nus3audio",
+      "sound/bank/fighter/se_donkey_c124.nus3audio",
+      "sound/bank/fighter/se_donkey_c125.nus3audio",
+      "sound/bank/fighter/se_donkey_c126.nus3audio",
+      "sound/bank/fighter/se_donkey_c127.nus3audio"
+    ],
+    "sound/bank/fighter/se_donkey_c120.nus3bank": [
+      "sound/bank/fighter/se_donkey_c121.nus3bank",
+      "sound/bank/fighter/se_donkey_c122.nus3bank",
+      "sound/bank/fighter/se_donkey_c123.nus3bank",
+      "sound/bank/fighter/se_donkey_c124.nus3bank",
+      "sound/bank/fighter/se_donkey_c125.nus3bank",
+      "sound/bank/fighter/se_donkey_c126.nus3bank",
+      "sound/bank/fighter/se_donkey_c127.nus3bank"
+    ],
+    "sound/bank/fighter_voice/vc_donkey_c120.nus3audio": [
+      "sound/bank/fighter_voice/vc_donkey_c121.nus3audio",
+      "sound/bank/fighter_voice/vc_donkey_c122.nus3audio",
+      "sound/bank/fighter_voice/vc_donkey_c123.nus3audio",
+      "sound/bank/fighter_voice/vc_donkey_c124.nus3audio",
+      "sound/bank/fighter_voice/vc_donkey_c125.nus3audio",
+      "sound/bank/fighter_voice/vc_donkey_c126.nus3audio",
+      "sound/bank/fighter_voice/vc_donkey_c127.nus3audio"
+    ],
+    "sound/bank/fighter_voice/vc_donkey_c120.nus3bank": [
+      "sound/bank/fighter_voice/vc_donkey_c121.nus3bank",
+      "sound/bank/fighter_voice/vc_donkey_c122.nus3bank",
+      "sound/bank/fighter_voice/vc_donkey_c123.nus3bank",
+      "sound/bank/fighter_voice/vc_donkey_c124.nus3bank",
+      "sound/bank/fighter_voice/vc_donkey_c125.nus3bank",
+      "sound/bank/fighter_voice/vc_donkey_c126.nus3bank",
+      "sound/bank/fighter_voice/vc_donkey_c127.nus3bank"
+    ]
+  }
+}

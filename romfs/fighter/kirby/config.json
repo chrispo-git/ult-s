@@ -1,0 +1,3283 @@
+{
+  "new-dir-infos": [],
+  "new-dir-infos-base": {},
+  "share-to-vanilla": {
+    "fighter/kirby/model/copy_falco_fitkirby/c05/dark_model.numatb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c125/dark_model.numatb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c05/def_kirby_falco_001_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c125/def_kirby_falco_001_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c05/def_kirby_falco_001_nor.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c125/def_kirby_falco_001_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c05/def_kirby_falco_001_prm.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c125/def_kirby_falco_001_prm.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c05/def_kirby_falco_002_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c125/def_kirby_falco_002_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c05/def_kirby_falco_002_nor.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c125/def_kirby_falco_002_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c05/def_kirby_falco_002_prm.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c125/def_kirby_falco_002_prm.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c05/deyes_eye_kirby_b2d_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c125/deyes_eye_kirby_b2d_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c05/deyes_eye_kirby_cd_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c125/deyes_eye_kirby_cd_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c05/deyes_eye_kirby_dd_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c125/deyes_eye_kirby_dd_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c05/deyes_eye_kirby_ed_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c125/deyes_eye_kirby_ed_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c05/deyes_eye_kirby_fd_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c125/deyes_eye_kirby_fd_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c05/deyes_eye_kirby_gd_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c125/deyes_eye_kirby_gd_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c05/deyes_eye_kirby_wd_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c125/deyes_eye_kirby_wd_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c05/eye_kirby_b2g_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c125/eye_kirby_b2g_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c05/eye_kirby_b2g_nor.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c125/eye_kirby_b2g_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c05/eye_kirby_b2g_prm.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c125/eye_kirby_b2g_prm.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c05/eye_kirby_cg_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c125/eye_kirby_cg_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c05/eye_kirby_cg_nor.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c125/eye_kirby_cg_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c05/eye_kirby_cg_prm.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c125/eye_kirby_cg_prm.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c05/eye_kirby_dg_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c125/eye_kirby_dg_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c05/eye_kirby_dg_nor.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c125/eye_kirby_dg_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c05/eye_kirby_dg_prm.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c125/eye_kirby_dg_prm.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c05/eye_kirby_eg_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c125/eye_kirby_eg_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c05/eye_kirby_eg_nor.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c125/eye_kirby_eg_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c05/eye_kirby_eg_prm.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c125/eye_kirby_eg_prm.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c05/eye_kirby_falco_001_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c125/eye_kirby_falco_001_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c05/eye_kirby_falco_001_nor.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c125/eye_kirby_falco_001_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c05/eye_kirby_falco_001_prm.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c125/eye_kirby_falco_001_prm.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c05/eye_kirby_falco_002_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c125/eye_kirby_falco_002_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c05/eye_kirby_falco_003_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c125/eye_kirby_falco_003_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c05/eye_kirby_falco_005_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c125/eye_kirby_falco_005_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c05/eye_kirby_falco_006_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c125/eye_kirby_falco_006_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c05/eye_kirby_falco_007_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c125/eye_kirby_falco_007_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c05/eye_kirby_fg_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c125/eye_kirby_fg_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c05/eye_kirby_fg_nor.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c125/eye_kirby_fg_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c05/eye_kirby_fg_prm.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c125/eye_kirby_fg_prm.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c05/eye_kirby_gg_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c125/eye_kirby_gg_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c05/eye_kirby_gg_nor.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c125/eye_kirby_gg_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c05/eye_kirby_gg_prm.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c125/eye_kirby_gg_prm.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c05/eye_kirby_wg_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c125/eye_kirby_wg_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c05/eye_kirby_wg_nor.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c125/eye_kirby_wg_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c05/eye_kirby_wg_prm.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c125/eye_kirby_wg_prm.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c05/leyes_eye_kirby_b2l_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c125/leyes_eye_kirby_b2l_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c05/leyes_eye_kirby_cl_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c125/leyes_eye_kirby_cl_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c05/leyes_eye_kirby_dl_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c125/leyes_eye_kirby_dl_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c05/leyes_eye_kirby_el_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c125/leyes_eye_kirby_el_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c05/leyes_eye_kirby_fl_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c125/leyes_eye_kirby_fl_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c05/leyes_eye_kirby_gl_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c125/leyes_eye_kirby_gl_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c05/leyes_eye_kirby_wl_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c125/leyes_eye_kirby_wl_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c05/light_model.numatb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c125/light_model.numatb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c05/melee_eye_kirby_b2_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c125/melee_eye_kirby_b2_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c05/melee_eye_kirby_c_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c125/melee_eye_kirby_c_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c05/melee_eye_kirby_d_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c125/melee_eye_kirby_d_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c05/melee_eye_kirby_e_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c125/melee_eye_kirby_e_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c05/melee_eye_kirby_f_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c125/melee_eye_kirby_f_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c05/melee_eye_kirby_g_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c125/melee_eye_kirby_g_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c05/melee_eye_kirby_w_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c125/melee_eye_kirby_w_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c05/metamon_model.numatb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c125/metamon_model.numatb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c05/model.nuanmb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c125/model.nuanmb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c05/model.nuhlpb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c125/model.nuhlpb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c05/model.numatb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c125/model.numatb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c05/model.numdlb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c125/model.numdlb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c05/model.numshb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c125/model.numshb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c05/model.numshexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c125/model.numshexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c05/model.nusktb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c125/model.nusktb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c05/model.nusrcmdlb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c125/model.nusrcmdlb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c05/model.xmb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c125/model.xmb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c05/skin_kirby_001_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c125/skin_kirby_001_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c05/skin_kirby_001_nor.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c125/skin_kirby_001_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c05/skin_kirby_001_prm.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c125/skin_kirby_001_prm.nutexb"
+    ],
+    "fighter/kirby/motion/copy_falco_fitkirby/c05/flip.prc": [
+      "fighter/kirby/motion/copy_falco_fitkirby/c125/flip.prc"
+    ],
+    "fighter/kirby/motion/copy_falco_fitkirby/c05/update.prc": [
+      "fighter/kirby/motion/copy_falco_fitkirby/c125/update.prc"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c01/dark_model.numatb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c121/dark_model.numatb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c01/def_kirby_falco_001_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c121/def_kirby_falco_001_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c01/def_kirby_falco_001_nor.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c121/def_kirby_falco_001_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c01/def_kirby_falco_001_prm.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c121/def_kirby_falco_001_prm.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c01/def_kirby_falco_002_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c121/def_kirby_falco_002_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c01/def_kirby_falco_002_nor.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c121/def_kirby_falco_002_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c01/def_kirby_falco_002_prm.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c121/def_kirby_falco_002_prm.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c01/deyes_eye_kirby_b2d_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c121/deyes_eye_kirby_b2d_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c01/deyes_eye_kirby_cd_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c121/deyes_eye_kirby_cd_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c01/deyes_eye_kirby_dd_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c121/deyes_eye_kirby_dd_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c01/deyes_eye_kirby_ed_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c121/deyes_eye_kirby_ed_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c01/deyes_eye_kirby_fd_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c121/deyes_eye_kirby_fd_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c01/deyes_eye_kirby_gd_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c121/deyes_eye_kirby_gd_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c01/deyes_eye_kirby_wd_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c121/deyes_eye_kirby_wd_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c01/eye_kirby_b2g_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c121/eye_kirby_b2g_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c01/eye_kirby_b2g_nor.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c121/eye_kirby_b2g_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c01/eye_kirby_b2g_prm.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c121/eye_kirby_b2g_prm.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c01/eye_kirby_cg_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c121/eye_kirby_cg_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c01/eye_kirby_cg_nor.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c121/eye_kirby_cg_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c01/eye_kirby_cg_prm.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c121/eye_kirby_cg_prm.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c01/eye_kirby_dg_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c121/eye_kirby_dg_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c01/eye_kirby_dg_nor.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c121/eye_kirby_dg_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c01/eye_kirby_dg_prm.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c121/eye_kirby_dg_prm.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c01/eye_kirby_eg_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c121/eye_kirby_eg_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c01/eye_kirby_eg_nor.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c121/eye_kirby_eg_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c01/eye_kirby_eg_prm.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c121/eye_kirby_eg_prm.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c01/eye_kirby_falco_001_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c121/eye_kirby_falco_001_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c01/eye_kirby_falco_001_nor.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c121/eye_kirby_falco_001_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c01/eye_kirby_falco_001_prm.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c121/eye_kirby_falco_001_prm.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c01/eye_kirby_falco_002_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c121/eye_kirby_falco_002_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c01/eye_kirby_falco_003_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c121/eye_kirby_falco_003_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c01/eye_kirby_falco_005_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c121/eye_kirby_falco_005_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c01/eye_kirby_falco_006_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c121/eye_kirby_falco_006_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c01/eye_kirby_falco_007_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c121/eye_kirby_falco_007_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c01/eye_kirby_fg_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c121/eye_kirby_fg_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c01/eye_kirby_fg_nor.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c121/eye_kirby_fg_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c01/eye_kirby_fg_prm.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c121/eye_kirby_fg_prm.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c01/eye_kirby_gg_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c121/eye_kirby_gg_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c01/eye_kirby_gg_nor.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c121/eye_kirby_gg_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c01/eye_kirby_gg_prm.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c121/eye_kirby_gg_prm.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c01/eye_kirby_wg_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c121/eye_kirby_wg_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c01/eye_kirby_wg_nor.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c121/eye_kirby_wg_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c01/eye_kirby_wg_prm.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c121/eye_kirby_wg_prm.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c01/leyes_eye_kirby_b2l_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c121/leyes_eye_kirby_b2l_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c01/leyes_eye_kirby_cl_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c121/leyes_eye_kirby_cl_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c01/leyes_eye_kirby_dl_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c121/leyes_eye_kirby_dl_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c01/leyes_eye_kirby_el_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c121/leyes_eye_kirby_el_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c01/leyes_eye_kirby_fl_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c121/leyes_eye_kirby_fl_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c01/leyes_eye_kirby_gl_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c121/leyes_eye_kirby_gl_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c01/leyes_eye_kirby_wl_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c121/leyes_eye_kirby_wl_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c01/light_model.numatb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c121/light_model.numatb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c01/melee_eye_kirby_b2_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c121/melee_eye_kirby_b2_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c01/melee_eye_kirby_c_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c121/melee_eye_kirby_c_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c01/melee_eye_kirby_d_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c121/melee_eye_kirby_d_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c01/melee_eye_kirby_e_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c121/melee_eye_kirby_e_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c01/melee_eye_kirby_f_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c121/melee_eye_kirby_f_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c01/melee_eye_kirby_g_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c121/melee_eye_kirby_g_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c01/melee_eye_kirby_w_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c121/melee_eye_kirby_w_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c01/metamon_model.numatb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c121/metamon_model.numatb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c01/model.nuanmb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c121/model.nuanmb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c01/model.nuhlpb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c121/model.nuhlpb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c01/model.numatb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c121/model.numatb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c01/model.numdlb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c121/model.numdlb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c01/model.numshb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c121/model.numshb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c01/model.numshexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c121/model.numshexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c01/model.nusktb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c121/model.nusktb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c01/model.nusrcmdlb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c121/model.nusrcmdlb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c01/model.xmb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c121/model.xmb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c01/skin_kirby_001_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c121/skin_kirby_001_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c01/skin_kirby_001_nor.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c121/skin_kirby_001_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c01/skin_kirby_001_prm.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c121/skin_kirby_001_prm.nutexb"
+    ],
+    "fighter/kirby/motion/copy_falco_fitkirby/c01/flip.prc": [
+      "fighter/kirby/motion/copy_falco_fitkirby/c121/flip.prc"
+    ],
+    "fighter/kirby/motion/copy_falco_fitkirby/c01/update.prc": [
+      "fighter/kirby/motion/copy_falco_fitkirby/c121/update.prc"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c00/dark_model.numatb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c120/dark_model.numatb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c00/def_kirby_falco_001_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c120/def_kirby_falco_001_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c00/def_kirby_falco_001_nor.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c120/def_kirby_falco_001_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c00/def_kirby_falco_001_prm.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c120/def_kirby_falco_001_prm.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c00/def_kirby_falco_002_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c120/def_kirby_falco_002_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c00/def_kirby_falco_002_nor.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c120/def_kirby_falco_002_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c00/def_kirby_falco_002_prm.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c120/def_kirby_falco_002_prm.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c00/deyes_eye_kirby_b2d_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c120/deyes_eye_kirby_b2d_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c00/deyes_eye_kirby_cd_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c120/deyes_eye_kirby_cd_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c00/deyes_eye_kirby_dd_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c120/deyes_eye_kirby_dd_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c00/deyes_eye_kirby_ed_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c120/deyes_eye_kirby_ed_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c00/deyes_eye_kirby_fd_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c120/deyes_eye_kirby_fd_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c00/deyes_eye_kirby_gd_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c120/deyes_eye_kirby_gd_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c00/deyes_eye_kirby_wd_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c120/deyes_eye_kirby_wd_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c00/eye_kirby_b2g_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c120/eye_kirby_b2g_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c00/eye_kirby_b2g_nor.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c120/eye_kirby_b2g_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c00/eye_kirby_b2g_prm.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c120/eye_kirby_b2g_prm.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c00/eye_kirby_cg_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c120/eye_kirby_cg_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c00/eye_kirby_cg_nor.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c120/eye_kirby_cg_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c00/eye_kirby_cg_prm.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c120/eye_kirby_cg_prm.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c00/eye_kirby_dg_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c120/eye_kirby_dg_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c00/eye_kirby_dg_nor.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c120/eye_kirby_dg_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c00/eye_kirby_dg_prm.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c120/eye_kirby_dg_prm.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c00/eye_kirby_eg_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c120/eye_kirby_eg_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c00/eye_kirby_eg_nor.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c120/eye_kirby_eg_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c00/eye_kirby_eg_prm.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c120/eye_kirby_eg_prm.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c00/eye_kirby_falco_001_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c120/eye_kirby_falco_001_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c00/eye_kirby_falco_001_nor.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c120/eye_kirby_falco_001_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c00/eye_kirby_falco_001_prm.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c120/eye_kirby_falco_001_prm.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c00/eye_kirby_falco_002_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c120/eye_kirby_falco_002_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c00/eye_kirby_falco_003_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c120/eye_kirby_falco_003_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c00/eye_kirby_falco_005_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c120/eye_kirby_falco_005_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c00/eye_kirby_falco_006_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c120/eye_kirby_falco_006_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c00/eye_kirby_falco_007_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c120/eye_kirby_falco_007_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c00/eye_kirby_fg_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c120/eye_kirby_fg_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c00/eye_kirby_fg_nor.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c120/eye_kirby_fg_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c00/eye_kirby_fg_prm.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c120/eye_kirby_fg_prm.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c00/eye_kirby_gg_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c120/eye_kirby_gg_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c00/eye_kirby_gg_nor.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c120/eye_kirby_gg_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c00/eye_kirby_gg_prm.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c120/eye_kirby_gg_prm.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c00/eye_kirby_wg_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c120/eye_kirby_wg_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c00/eye_kirby_wg_nor.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c120/eye_kirby_wg_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c00/eye_kirby_wg_prm.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c120/eye_kirby_wg_prm.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c00/leyes_eye_kirby_b2l_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c120/leyes_eye_kirby_b2l_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c00/leyes_eye_kirby_cl_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c120/leyes_eye_kirby_cl_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c00/leyes_eye_kirby_dl_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c120/leyes_eye_kirby_dl_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c00/leyes_eye_kirby_el_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c120/leyes_eye_kirby_el_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c00/leyes_eye_kirby_fl_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c120/leyes_eye_kirby_fl_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c00/leyes_eye_kirby_gl_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c120/leyes_eye_kirby_gl_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c00/leyes_eye_kirby_wl_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c120/leyes_eye_kirby_wl_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c00/light_model.numatb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c120/light_model.numatb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c00/melee_eye_kirby_b2_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c120/melee_eye_kirby_b2_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c00/melee_eye_kirby_c_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c120/melee_eye_kirby_c_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c00/melee_eye_kirby_d_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c120/melee_eye_kirby_d_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c00/melee_eye_kirby_e_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c120/melee_eye_kirby_e_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c00/melee_eye_kirby_f_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c120/melee_eye_kirby_f_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c00/melee_eye_kirby_g_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c120/melee_eye_kirby_g_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c00/melee_eye_kirby_w_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c120/melee_eye_kirby_w_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c00/metamon_model.numatb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c120/metamon_model.numatb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c00/model.nuanmb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c120/model.nuanmb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c00/model.nuhlpb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c120/model.nuhlpb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c00/model.numatb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c120/model.numatb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c00/model.numdlb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c120/model.numdlb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c00/model.numshb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c120/model.numshb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c00/model.numshexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c120/model.numshexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c00/model.nusktb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c120/model.nusktb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c00/model.nusrcmdlb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c120/model.nusrcmdlb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c00/model.xmb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c120/model.xmb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c00/skin_kirby_001_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c120/skin_kirby_001_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c00/skin_kirby_001_nor.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c120/skin_kirby_001_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c00/skin_kirby_001_prm.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c120/skin_kirby_001_prm.nutexb"
+    ],
+    "fighter/kirby/motion/copy_falco_fitkirby/c00/flip.prc": [
+      "fighter/kirby/motion/copy_falco_fitkirby/c120/flip.prc"
+    ],
+    "fighter/kirby/motion/copy_falco_fitkirby/c00/update.prc": [
+      "fighter/kirby/motion/copy_falco_fitkirby/c120/update.prc"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c02/dark_model.numatb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c122/dark_model.numatb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c02/def_kirby_falco_001_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c122/def_kirby_falco_001_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c02/def_kirby_falco_001_nor.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c122/def_kirby_falco_001_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c02/def_kirby_falco_001_prm.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c122/def_kirby_falco_001_prm.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c02/def_kirby_falco_002_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c122/def_kirby_falco_002_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c02/def_kirby_falco_002_nor.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c122/def_kirby_falco_002_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c02/def_kirby_falco_002_prm.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c122/def_kirby_falco_002_prm.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c02/deyes_eye_kirby_b2d_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c122/deyes_eye_kirby_b2d_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c02/deyes_eye_kirby_cd_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c122/deyes_eye_kirby_cd_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c02/deyes_eye_kirby_dd_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c122/deyes_eye_kirby_dd_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c02/deyes_eye_kirby_ed_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c122/deyes_eye_kirby_ed_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c02/deyes_eye_kirby_fd_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c122/deyes_eye_kirby_fd_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c02/deyes_eye_kirby_gd_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c122/deyes_eye_kirby_gd_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c02/deyes_eye_kirby_wd_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c122/deyes_eye_kirby_wd_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c02/eye_kirby_b2g_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c122/eye_kirby_b2g_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c02/eye_kirby_b2g_nor.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c122/eye_kirby_b2g_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c02/eye_kirby_b2g_prm.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c122/eye_kirby_b2g_prm.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c02/eye_kirby_cg_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c122/eye_kirby_cg_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c02/eye_kirby_cg_nor.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c122/eye_kirby_cg_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c02/eye_kirby_cg_prm.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c122/eye_kirby_cg_prm.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c02/eye_kirby_dg_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c122/eye_kirby_dg_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c02/eye_kirby_dg_nor.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c122/eye_kirby_dg_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c02/eye_kirby_dg_prm.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c122/eye_kirby_dg_prm.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c02/eye_kirby_eg_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c122/eye_kirby_eg_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c02/eye_kirby_eg_nor.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c122/eye_kirby_eg_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c02/eye_kirby_eg_prm.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c122/eye_kirby_eg_prm.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c02/eye_kirby_falco_001_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c122/eye_kirby_falco_001_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c02/eye_kirby_falco_001_nor.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c122/eye_kirby_falco_001_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c02/eye_kirby_falco_001_prm.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c122/eye_kirby_falco_001_prm.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c02/eye_kirby_falco_002_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c122/eye_kirby_falco_002_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c02/eye_kirby_falco_003_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c122/eye_kirby_falco_003_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c02/eye_kirby_falco_005_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c122/eye_kirby_falco_005_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c02/eye_kirby_falco_006_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c122/eye_kirby_falco_006_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c02/eye_kirby_falco_007_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c122/eye_kirby_falco_007_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c02/eye_kirby_fg_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c122/eye_kirby_fg_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c02/eye_kirby_fg_nor.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c122/eye_kirby_fg_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c02/eye_kirby_fg_prm.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c122/eye_kirby_fg_prm.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c02/eye_kirby_gg_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c122/eye_kirby_gg_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c02/eye_kirby_gg_nor.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c122/eye_kirby_gg_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c02/eye_kirby_gg_prm.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c122/eye_kirby_gg_prm.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c02/eye_kirby_wg_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c122/eye_kirby_wg_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c02/eye_kirby_wg_nor.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c122/eye_kirby_wg_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c02/eye_kirby_wg_prm.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c122/eye_kirby_wg_prm.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c02/leyes_eye_kirby_b2l_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c122/leyes_eye_kirby_b2l_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c02/leyes_eye_kirby_cl_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c122/leyes_eye_kirby_cl_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c02/leyes_eye_kirby_dl_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c122/leyes_eye_kirby_dl_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c02/leyes_eye_kirby_el_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c122/leyes_eye_kirby_el_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c02/leyes_eye_kirby_fl_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c122/leyes_eye_kirby_fl_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c02/leyes_eye_kirby_gl_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c122/leyes_eye_kirby_gl_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c02/leyes_eye_kirby_wl_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c122/leyes_eye_kirby_wl_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c02/light_model.numatb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c122/light_model.numatb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c02/melee_eye_kirby_b2_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c122/melee_eye_kirby_b2_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c02/melee_eye_kirby_c_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c122/melee_eye_kirby_c_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c02/melee_eye_kirby_d_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c122/melee_eye_kirby_d_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c02/melee_eye_kirby_e_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c122/melee_eye_kirby_e_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c02/melee_eye_kirby_f_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c122/melee_eye_kirby_f_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c02/melee_eye_kirby_g_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c122/melee_eye_kirby_g_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c02/melee_eye_kirby_w_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c122/melee_eye_kirby_w_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c02/metamon_model.numatb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c122/metamon_model.numatb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c02/model.nuanmb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c122/model.nuanmb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c02/model.nuhlpb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c122/model.nuhlpb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c02/model.numatb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c122/model.numatb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c02/model.numdlb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c122/model.numdlb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c02/model.numshb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c122/model.numshb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c02/model.numshexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c122/model.numshexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c02/model.nusktb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c122/model.nusktb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c02/model.nusrcmdlb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c122/model.nusrcmdlb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c02/model.xmb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c122/model.xmb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c02/skin_kirby_001_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c122/skin_kirby_001_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c02/skin_kirby_001_nor.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c122/skin_kirby_001_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c02/skin_kirby_001_prm.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c122/skin_kirby_001_prm.nutexb"
+    ],
+    "fighter/kirby/motion/copy_falco_fitkirby/c02/flip.prc": [
+      "fighter/kirby/motion/copy_falco_fitkirby/c122/flip.prc"
+    ],
+    "fighter/kirby/motion/copy_falco_fitkirby/c02/update.prc": [
+      "fighter/kirby/motion/copy_falco_fitkirby/c122/update.prc"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c03/dark_model.numatb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c123/dark_model.numatb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c03/def_kirby_falco_001_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c123/def_kirby_falco_001_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c03/def_kirby_falco_001_nor.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c123/def_kirby_falco_001_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c03/def_kirby_falco_001_prm.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c123/def_kirby_falco_001_prm.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c03/def_kirby_falco_002_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c123/def_kirby_falco_002_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c03/def_kirby_falco_002_nor.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c123/def_kirby_falco_002_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c03/def_kirby_falco_002_prm.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c123/def_kirby_falco_002_prm.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c03/deyes_eye_kirby_b2d_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c123/deyes_eye_kirby_b2d_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c03/deyes_eye_kirby_cd_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c123/deyes_eye_kirby_cd_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c03/deyes_eye_kirby_dd_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c123/deyes_eye_kirby_dd_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c03/deyes_eye_kirby_ed_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c123/deyes_eye_kirby_ed_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c03/deyes_eye_kirby_fd_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c123/deyes_eye_kirby_fd_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c03/deyes_eye_kirby_gd_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c123/deyes_eye_kirby_gd_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c03/deyes_eye_kirby_wd_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c123/deyes_eye_kirby_wd_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c03/eye_kirby_b2g_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c123/eye_kirby_b2g_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c03/eye_kirby_b2g_nor.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c123/eye_kirby_b2g_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c03/eye_kirby_b2g_prm.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c123/eye_kirby_b2g_prm.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c03/eye_kirby_cg_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c123/eye_kirby_cg_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c03/eye_kirby_cg_nor.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c123/eye_kirby_cg_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c03/eye_kirby_cg_prm.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c123/eye_kirby_cg_prm.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c03/eye_kirby_dg_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c123/eye_kirby_dg_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c03/eye_kirby_dg_nor.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c123/eye_kirby_dg_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c03/eye_kirby_dg_prm.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c123/eye_kirby_dg_prm.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c03/eye_kirby_eg_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c123/eye_kirby_eg_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c03/eye_kirby_eg_nor.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c123/eye_kirby_eg_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c03/eye_kirby_eg_prm.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c123/eye_kirby_eg_prm.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c03/eye_kirby_falco_001_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c123/eye_kirby_falco_001_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c03/eye_kirby_falco_001_nor.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c123/eye_kirby_falco_001_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c03/eye_kirby_falco_001_prm.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c123/eye_kirby_falco_001_prm.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c03/eye_kirby_falco_002_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c123/eye_kirby_falco_002_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c03/eye_kirby_falco_003_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c123/eye_kirby_falco_003_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c03/eye_kirby_falco_005_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c123/eye_kirby_falco_005_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c03/eye_kirby_falco_006_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c123/eye_kirby_falco_006_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c03/eye_kirby_falco_007_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c123/eye_kirby_falco_007_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c03/eye_kirby_fg_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c123/eye_kirby_fg_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c03/eye_kirby_fg_nor.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c123/eye_kirby_fg_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c03/eye_kirby_fg_prm.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c123/eye_kirby_fg_prm.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c03/eye_kirby_gg_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c123/eye_kirby_gg_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c03/eye_kirby_gg_nor.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c123/eye_kirby_gg_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c03/eye_kirby_gg_prm.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c123/eye_kirby_gg_prm.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c03/eye_kirby_wg_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c123/eye_kirby_wg_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c03/eye_kirby_wg_nor.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c123/eye_kirby_wg_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c03/eye_kirby_wg_prm.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c123/eye_kirby_wg_prm.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c03/leyes_eye_kirby_b2l_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c123/leyes_eye_kirby_b2l_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c03/leyes_eye_kirby_cl_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c123/leyes_eye_kirby_cl_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c03/leyes_eye_kirby_dl_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c123/leyes_eye_kirby_dl_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c03/leyes_eye_kirby_el_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c123/leyes_eye_kirby_el_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c03/leyes_eye_kirby_fl_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c123/leyes_eye_kirby_fl_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c03/leyes_eye_kirby_gl_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c123/leyes_eye_kirby_gl_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c03/leyes_eye_kirby_wl_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c123/leyes_eye_kirby_wl_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c03/light_model.numatb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c123/light_model.numatb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c03/melee_eye_kirby_b2_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c123/melee_eye_kirby_b2_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c03/melee_eye_kirby_c_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c123/melee_eye_kirby_c_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c03/melee_eye_kirby_d_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c123/melee_eye_kirby_d_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c03/melee_eye_kirby_e_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c123/melee_eye_kirby_e_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c03/melee_eye_kirby_f_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c123/melee_eye_kirby_f_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c03/melee_eye_kirby_g_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c123/melee_eye_kirby_g_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c03/melee_eye_kirby_w_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c123/melee_eye_kirby_w_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c03/metamon_model.numatb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c123/metamon_model.numatb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c03/model.nuanmb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c123/model.nuanmb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c03/model.nuhlpb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c123/model.nuhlpb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c03/model.numatb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c123/model.numatb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c03/model.numdlb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c123/model.numdlb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c03/model.numshb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c123/model.numshb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c03/model.numshexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c123/model.numshexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c03/model.nusktb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c123/model.nusktb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c03/model.nusrcmdlb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c123/model.nusrcmdlb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c03/model.xmb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c123/model.xmb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c03/skin_kirby_001_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c123/skin_kirby_001_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c03/skin_kirby_001_nor.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c123/skin_kirby_001_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c03/skin_kirby_001_prm.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c123/skin_kirby_001_prm.nutexb"
+    ],
+    "fighter/kirby/motion/copy_falco_fitkirby/c03/flip.prc": [
+      "fighter/kirby/motion/copy_falco_fitkirby/c123/flip.prc"
+    ],
+    "fighter/kirby/motion/copy_falco_fitkirby/c03/update.prc": [
+      "fighter/kirby/motion/copy_falco_fitkirby/c123/update.prc"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c04/dark_model.numatb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c124/dark_model.numatb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c04/def_kirby_falco_001_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c124/def_kirby_falco_001_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c04/def_kirby_falco_001_nor.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c124/def_kirby_falco_001_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c04/def_kirby_falco_001_prm.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c124/def_kirby_falco_001_prm.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c04/def_kirby_falco_002_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c124/def_kirby_falco_002_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c04/def_kirby_falco_002_nor.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c124/def_kirby_falco_002_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c04/def_kirby_falco_002_prm.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c124/def_kirby_falco_002_prm.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c04/deyes_eye_kirby_b2d_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c124/deyes_eye_kirby_b2d_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c04/deyes_eye_kirby_cd_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c124/deyes_eye_kirby_cd_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c04/deyes_eye_kirby_dd_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c124/deyes_eye_kirby_dd_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c04/deyes_eye_kirby_ed_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c124/deyes_eye_kirby_ed_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c04/deyes_eye_kirby_fd_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c124/deyes_eye_kirby_fd_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c04/deyes_eye_kirby_gd_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c124/deyes_eye_kirby_gd_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c04/deyes_eye_kirby_wd_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c124/deyes_eye_kirby_wd_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c04/eye_kirby_b2g_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c124/eye_kirby_b2g_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c04/eye_kirby_b2g_nor.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c124/eye_kirby_b2g_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c04/eye_kirby_b2g_prm.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c124/eye_kirby_b2g_prm.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c04/eye_kirby_cg_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c124/eye_kirby_cg_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c04/eye_kirby_cg_nor.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c124/eye_kirby_cg_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c04/eye_kirby_cg_prm.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c124/eye_kirby_cg_prm.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c04/eye_kirby_dg_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c124/eye_kirby_dg_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c04/eye_kirby_dg_nor.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c124/eye_kirby_dg_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c04/eye_kirby_dg_prm.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c124/eye_kirby_dg_prm.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c04/eye_kirby_eg_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c124/eye_kirby_eg_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c04/eye_kirby_eg_nor.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c124/eye_kirby_eg_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c04/eye_kirby_eg_prm.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c124/eye_kirby_eg_prm.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c04/eye_kirby_falco_001_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c124/eye_kirby_falco_001_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c04/eye_kirby_falco_001_nor.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c124/eye_kirby_falco_001_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c04/eye_kirby_falco_001_prm.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c124/eye_kirby_falco_001_prm.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c04/eye_kirby_falco_002_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c124/eye_kirby_falco_002_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c04/eye_kirby_falco_003_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c124/eye_kirby_falco_003_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c04/eye_kirby_falco_005_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c124/eye_kirby_falco_005_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c04/eye_kirby_falco_006_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c124/eye_kirby_falco_006_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c04/eye_kirby_falco_007_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c124/eye_kirby_falco_007_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c04/eye_kirby_fg_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c124/eye_kirby_fg_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c04/eye_kirby_fg_nor.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c124/eye_kirby_fg_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c04/eye_kirby_fg_prm.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c124/eye_kirby_fg_prm.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c04/eye_kirby_gg_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c124/eye_kirby_gg_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c04/eye_kirby_gg_nor.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c124/eye_kirby_gg_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c04/eye_kirby_gg_prm.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c124/eye_kirby_gg_prm.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c04/eye_kirby_wg_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c124/eye_kirby_wg_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c04/eye_kirby_wg_nor.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c124/eye_kirby_wg_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c04/eye_kirby_wg_prm.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c124/eye_kirby_wg_prm.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c04/leyes_eye_kirby_b2l_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c124/leyes_eye_kirby_b2l_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c04/leyes_eye_kirby_cl_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c124/leyes_eye_kirby_cl_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c04/leyes_eye_kirby_dl_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c124/leyes_eye_kirby_dl_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c04/leyes_eye_kirby_el_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c124/leyes_eye_kirby_el_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c04/leyes_eye_kirby_fl_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c124/leyes_eye_kirby_fl_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c04/leyes_eye_kirby_gl_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c124/leyes_eye_kirby_gl_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c04/leyes_eye_kirby_wl_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c124/leyes_eye_kirby_wl_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c04/light_model.numatb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c124/light_model.numatb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c04/melee_eye_kirby_b2_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c124/melee_eye_kirby_b2_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c04/melee_eye_kirby_c_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c124/melee_eye_kirby_c_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c04/melee_eye_kirby_d_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c124/melee_eye_kirby_d_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c04/melee_eye_kirby_e_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c124/melee_eye_kirby_e_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c04/melee_eye_kirby_f_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c124/melee_eye_kirby_f_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c04/melee_eye_kirby_g_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c124/melee_eye_kirby_g_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c04/melee_eye_kirby_w_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c124/melee_eye_kirby_w_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c04/metamon_model.numatb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c124/metamon_model.numatb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c04/model.nuanmb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c124/model.nuanmb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c04/model.nuhlpb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c124/model.nuhlpb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c04/model.numatb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c124/model.numatb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c04/model.numdlb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c124/model.numdlb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c04/model.numshb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c124/model.numshb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c04/model.numshexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c124/model.numshexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c04/model.nusktb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c124/model.nusktb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c04/model.nusrcmdlb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c124/model.nusrcmdlb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c04/model.xmb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c124/model.xmb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c04/skin_kirby_001_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c124/skin_kirby_001_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c04/skin_kirby_001_nor.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c124/skin_kirby_001_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c04/skin_kirby_001_prm.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c124/skin_kirby_001_prm.nutexb"
+    ],
+    "fighter/kirby/motion/copy_falco_fitkirby/c04/flip.prc": [
+      "fighter/kirby/motion/copy_falco_fitkirby/c124/flip.prc"
+    ],
+    "fighter/kirby/motion/copy_falco_fitkirby/c04/update.prc": [
+      "fighter/kirby/motion/copy_falco_fitkirby/c124/update.prc"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c06/dark_model.numatb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c126/dark_model.numatb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c06/def_kirby_falco_001_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c126/def_kirby_falco_001_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c06/def_kirby_falco_001_nor.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c126/def_kirby_falco_001_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c06/def_kirby_falco_001_prm.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c126/def_kirby_falco_001_prm.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c06/def_kirby_falco_002_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c126/def_kirby_falco_002_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c06/def_kirby_falco_002_nor.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c126/def_kirby_falco_002_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c06/def_kirby_falco_002_prm.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c126/def_kirby_falco_002_prm.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c06/deyes_eye_kirby_b2d_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c126/deyes_eye_kirby_b2d_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c06/deyes_eye_kirby_cd_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c126/deyes_eye_kirby_cd_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c06/deyes_eye_kirby_dd_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c126/deyes_eye_kirby_dd_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c06/deyes_eye_kirby_ed_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c126/deyes_eye_kirby_ed_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c06/deyes_eye_kirby_fd_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c126/deyes_eye_kirby_fd_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c06/deyes_eye_kirby_gd_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c126/deyes_eye_kirby_gd_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c06/deyes_eye_kirby_wd_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c126/deyes_eye_kirby_wd_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c06/eye_kirby_b2g_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c126/eye_kirby_b2g_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c06/eye_kirby_b2g_nor.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c126/eye_kirby_b2g_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c06/eye_kirby_b2g_prm.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c126/eye_kirby_b2g_prm.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c06/eye_kirby_cg_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c126/eye_kirby_cg_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c06/eye_kirby_cg_nor.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c126/eye_kirby_cg_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c06/eye_kirby_cg_prm.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c126/eye_kirby_cg_prm.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c06/eye_kirby_dg_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c126/eye_kirby_dg_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c06/eye_kirby_dg_nor.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c126/eye_kirby_dg_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c06/eye_kirby_dg_prm.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c126/eye_kirby_dg_prm.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c06/eye_kirby_eg_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c126/eye_kirby_eg_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c06/eye_kirby_eg_nor.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c126/eye_kirby_eg_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c06/eye_kirby_eg_prm.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c126/eye_kirby_eg_prm.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c06/eye_kirby_falco_001_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c126/eye_kirby_falco_001_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c06/eye_kirby_falco_001_nor.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c126/eye_kirby_falco_001_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c06/eye_kirby_falco_001_prm.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c126/eye_kirby_falco_001_prm.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c06/eye_kirby_falco_002_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c126/eye_kirby_falco_002_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c06/eye_kirby_falco_003_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c126/eye_kirby_falco_003_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c06/eye_kirby_falco_005_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c126/eye_kirby_falco_005_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c06/eye_kirby_falco_006_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c126/eye_kirby_falco_006_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c06/eye_kirby_falco_007_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c126/eye_kirby_falco_007_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c06/eye_kirby_fg_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c126/eye_kirby_fg_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c06/eye_kirby_fg_nor.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c126/eye_kirby_fg_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c06/eye_kirby_fg_prm.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c126/eye_kirby_fg_prm.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c06/eye_kirby_gg_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c126/eye_kirby_gg_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c06/eye_kirby_gg_nor.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c126/eye_kirby_gg_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c06/eye_kirby_gg_prm.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c126/eye_kirby_gg_prm.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c06/eye_kirby_wg_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c126/eye_kirby_wg_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c06/eye_kirby_wg_nor.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c126/eye_kirby_wg_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c06/eye_kirby_wg_prm.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c126/eye_kirby_wg_prm.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c06/leyes_eye_kirby_b2l_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c126/leyes_eye_kirby_b2l_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c06/leyes_eye_kirby_cl_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c126/leyes_eye_kirby_cl_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c06/leyes_eye_kirby_dl_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c126/leyes_eye_kirby_dl_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c06/leyes_eye_kirby_el_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c126/leyes_eye_kirby_el_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c06/leyes_eye_kirby_fl_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c126/leyes_eye_kirby_fl_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c06/leyes_eye_kirby_gl_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c126/leyes_eye_kirby_gl_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c06/leyes_eye_kirby_wl_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c126/leyes_eye_kirby_wl_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c06/light_model.numatb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c126/light_model.numatb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c06/melee_eye_kirby_b2_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c126/melee_eye_kirby_b2_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c06/melee_eye_kirby_c_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c126/melee_eye_kirby_c_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c06/melee_eye_kirby_d_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c126/melee_eye_kirby_d_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c06/melee_eye_kirby_e_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c126/melee_eye_kirby_e_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c06/melee_eye_kirby_f_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c126/melee_eye_kirby_f_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c06/melee_eye_kirby_g_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c126/melee_eye_kirby_g_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c06/melee_eye_kirby_w_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c126/melee_eye_kirby_w_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c06/metamon_model.numatb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c126/metamon_model.numatb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c06/model.nuanmb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c126/model.nuanmb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c06/model.nuhlpb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c126/model.nuhlpb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c06/model.numatb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c126/model.numatb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c06/model.numdlb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c126/model.numdlb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c06/model.numshb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c126/model.numshb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c06/model.numshexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c126/model.numshexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c06/model.nusktb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c126/model.nusktb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c06/model.nusrcmdlb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c126/model.nusrcmdlb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c06/model.xmb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c126/model.xmb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c06/skin_kirby_001_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c126/skin_kirby_001_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c06/skin_kirby_001_nor.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c126/skin_kirby_001_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c06/skin_kirby_001_prm.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c126/skin_kirby_001_prm.nutexb"
+    ],
+    "fighter/kirby/motion/copy_falco_fitkirby/c06/flip.prc": [
+      "fighter/kirby/motion/copy_falco_fitkirby/c126/flip.prc"
+    ],
+    "fighter/kirby/motion/copy_falco_fitkirby/c06/update.prc": [
+      "fighter/kirby/motion/copy_falco_fitkirby/c126/update.prc"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c07/dark_model.numatb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c127/dark_model.numatb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c07/def_kirby_falco_001_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c127/def_kirby_falco_001_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c07/def_kirby_falco_001_nor.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c127/def_kirby_falco_001_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c07/def_kirby_falco_001_prm.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c127/def_kirby_falco_001_prm.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c07/def_kirby_falco_002_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c127/def_kirby_falco_002_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c07/def_kirby_falco_002_nor.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c127/def_kirby_falco_002_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c07/def_kirby_falco_002_prm.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c127/def_kirby_falco_002_prm.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c07/deyes_eye_kirby_b2d_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c127/deyes_eye_kirby_b2d_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c07/deyes_eye_kirby_cd_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c127/deyes_eye_kirby_cd_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c07/deyes_eye_kirby_dd_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c127/deyes_eye_kirby_dd_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c07/deyes_eye_kirby_ed_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c127/deyes_eye_kirby_ed_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c07/deyes_eye_kirby_fd_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c127/deyes_eye_kirby_fd_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c07/deyes_eye_kirby_gd_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c127/deyes_eye_kirby_gd_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c07/deyes_eye_kirby_wd_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c127/deyes_eye_kirby_wd_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c07/eye_kirby_b2g_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c127/eye_kirby_b2g_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c07/eye_kirby_b2g_nor.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c127/eye_kirby_b2g_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c07/eye_kirby_b2g_prm.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c127/eye_kirby_b2g_prm.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c07/eye_kirby_cg_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c127/eye_kirby_cg_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c07/eye_kirby_cg_nor.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c127/eye_kirby_cg_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c07/eye_kirby_cg_prm.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c127/eye_kirby_cg_prm.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c07/eye_kirby_dg_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c127/eye_kirby_dg_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c07/eye_kirby_dg_nor.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c127/eye_kirby_dg_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c07/eye_kirby_dg_prm.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c127/eye_kirby_dg_prm.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c07/eye_kirby_eg_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c127/eye_kirby_eg_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c07/eye_kirby_eg_nor.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c127/eye_kirby_eg_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c07/eye_kirby_eg_prm.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c127/eye_kirby_eg_prm.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c07/eye_kirby_falco_001_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c127/eye_kirby_falco_001_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c07/eye_kirby_falco_001_nor.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c127/eye_kirby_falco_001_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c07/eye_kirby_falco_001_prm.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c127/eye_kirby_falco_001_prm.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c07/eye_kirby_falco_002_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c127/eye_kirby_falco_002_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c07/eye_kirby_falco_003_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c127/eye_kirby_falco_003_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c07/eye_kirby_falco_005_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c127/eye_kirby_falco_005_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c07/eye_kirby_falco_006_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c127/eye_kirby_falco_006_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c07/eye_kirby_falco_007_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c127/eye_kirby_falco_007_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c07/eye_kirby_fg_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c127/eye_kirby_fg_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c07/eye_kirby_fg_nor.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c127/eye_kirby_fg_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c07/eye_kirby_fg_prm.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c127/eye_kirby_fg_prm.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c07/eye_kirby_gg_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c127/eye_kirby_gg_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c07/eye_kirby_gg_nor.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c127/eye_kirby_gg_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c07/eye_kirby_gg_prm.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c127/eye_kirby_gg_prm.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c07/eye_kirby_wg_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c127/eye_kirby_wg_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c07/eye_kirby_wg_nor.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c127/eye_kirby_wg_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c07/eye_kirby_wg_prm.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c127/eye_kirby_wg_prm.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c07/leyes_eye_kirby_b2l_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c127/leyes_eye_kirby_b2l_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c07/leyes_eye_kirby_cl_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c127/leyes_eye_kirby_cl_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c07/leyes_eye_kirby_dl_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c127/leyes_eye_kirby_dl_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c07/leyes_eye_kirby_el_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c127/leyes_eye_kirby_el_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c07/leyes_eye_kirby_fl_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c127/leyes_eye_kirby_fl_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c07/leyes_eye_kirby_gl_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c127/leyes_eye_kirby_gl_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c07/leyes_eye_kirby_wl_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c127/leyes_eye_kirby_wl_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c07/light_model.numatb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c127/light_model.numatb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c07/melee_eye_kirby_b2_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c127/melee_eye_kirby_b2_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c07/melee_eye_kirby_c_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c127/melee_eye_kirby_c_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c07/melee_eye_kirby_d_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c127/melee_eye_kirby_d_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c07/melee_eye_kirby_e_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c127/melee_eye_kirby_e_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c07/melee_eye_kirby_f_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c127/melee_eye_kirby_f_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c07/melee_eye_kirby_g_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c127/melee_eye_kirby_g_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c07/melee_eye_kirby_w_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c127/melee_eye_kirby_w_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c07/metamon_model.numatb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c127/metamon_model.numatb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c07/model.nuanmb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c127/model.nuanmb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c07/model.nuhlpb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c127/model.nuhlpb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c07/model.numatb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c127/model.numatb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c07/model.numdlb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c127/model.numdlb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c07/model.numshb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c127/model.numshb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c07/model.numshexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c127/model.numshexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c07/model.nusktb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c127/model.nusktb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c07/model.nusrcmdlb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c127/model.nusrcmdlb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c07/model.xmb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c127/model.xmb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c07/skin_kirby_001_col.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c127/skin_kirby_001_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c07/skin_kirby_001_nor.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c127/skin_kirby_001_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_falco_fitkirby/c07/skin_kirby_001_prm.nutexb": [
+      "fighter/kirby/model/copy_falco_fitkirby/c127/skin_kirby_001_prm.nutexb"
+    ],
+    "fighter/kirby/motion/copy_falco_fitkirby/c07/flip.prc": [
+      "fighter/kirby/motion/copy_falco_fitkirby/c127/flip.prc"
+    ],
+    "fighter/kirby/motion/copy_falco_fitkirby/c07/update.prc": [
+      "fighter/kirby/motion/copy_falco_fitkirby/c127/update.prc"
+    ],
+    "fighter/kirby/model/copy_pacman_fitkirby/c00/dark_model.numatb": [
+      "fighter/kirby/model/copy_pacman_fitkirby/c120/dark_model.numatb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c121/dark_model.numatb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c122/dark_model.numatb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c123/dark_model.numatb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c124/dark_model.numatb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c125/dark_model.numatb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c126/dark_model.numatb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c127/dark_model.numatb"
+    ],
+    "fighter/kirby/model/copy_pacman_fitkirby/c00/eye_kirby_w_col.nutexb": [
+      "fighter/kirby/model/copy_pacman_fitkirby/c120/eye_kirby_w_col.nutexb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c121/eye_kirby_w_col.nutexb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c122/eye_kirby_w_col.nutexb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c123/eye_kirby_w_col.nutexb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c124/eye_kirby_w_col.nutexb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c125/eye_kirby_w_col.nutexb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c126/eye_kirby_w_col.nutexb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c127/eye_kirby_w_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_pacman_fitkirby/c00/eye_kirby_w_nor.nutexb": [
+      "fighter/kirby/model/copy_pacman_fitkirby/c120/eye_kirby_w_nor.nutexb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c121/eye_kirby_w_nor.nutexb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c122/eye_kirby_w_nor.nutexb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c123/eye_kirby_w_nor.nutexb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c124/eye_kirby_w_nor.nutexb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c125/eye_kirby_w_nor.nutexb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c126/eye_kirby_w_nor.nutexb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c127/eye_kirby_w_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_pacman_fitkirby/c00/eye_kirby_w_prm.nutexb": [
+      "fighter/kirby/model/copy_pacman_fitkirby/c120/eye_kirby_w_prm.nutexb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c121/eye_kirby_w_prm.nutexb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c122/eye_kirby_w_prm.nutexb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c123/eye_kirby_w_prm.nutexb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c124/eye_kirby_w_prm.nutexb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c125/eye_kirby_w_prm.nutexb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c126/eye_kirby_w_prm.nutexb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c127/eye_kirby_w_prm.nutexb"
+    ],
+    "fighter/kirby/model/copy_pacman_fitkirby/c00/eye_kirby_wg_col.nutexb": [
+      "fighter/kirby/model/copy_pacman_fitkirby/c120/eye_kirby_wg_col.nutexb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c121/eye_kirby_wg_col.nutexb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c122/eye_kirby_wg_col.nutexb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c123/eye_kirby_wg_col.nutexb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c124/eye_kirby_wg_col.nutexb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c125/eye_kirby_wg_col.nutexb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c126/eye_kirby_wg_col.nutexb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c127/eye_kirby_wg_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_pacman_fitkirby/c00/eye_kirby_wg_nor.nutexb": [
+      "fighter/kirby/model/copy_pacman_fitkirby/c120/eye_kirby_wg_nor.nutexb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c121/eye_kirby_wg_nor.nutexb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c122/eye_kirby_wg_nor.nutexb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c123/eye_kirby_wg_nor.nutexb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c124/eye_kirby_wg_nor.nutexb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c125/eye_kirby_wg_nor.nutexb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c126/eye_kirby_wg_nor.nutexb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c127/eye_kirby_wg_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_pacman_fitkirby/c00/eye_kirby_wg_prm.nutexb": [
+      "fighter/kirby/model/copy_pacman_fitkirby/c120/eye_kirby_wg_prm.nutexb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c121/eye_kirby_wg_prm.nutexb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c122/eye_kirby_wg_prm.nutexb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c123/eye_kirby_wg_prm.nutexb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c124/eye_kirby_wg_prm.nutexb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c125/eye_kirby_wg_prm.nutexb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c126/eye_kirby_wg_prm.nutexb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c127/eye_kirby_wg_prm.nutexb"
+    ],
+    "fighter/kirby/model/copy_pacman_fitkirby/c00/light_model.numatb": [
+      "fighter/kirby/model/copy_pacman_fitkirby/c120/light_model.numatb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c121/light_model.numatb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c122/light_model.numatb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c123/light_model.numatb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c124/light_model.numatb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c125/light_model.numatb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c126/light_model.numatb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c127/light_model.numatb"
+    ],
+    "fighter/kirby/model/copy_pacman_fitkirby/c00/metamon_model.numatb": [
+      "fighter/kirby/model/copy_pacman_fitkirby/c120/metamon_model.numatb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c121/metamon_model.numatb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c122/metamon_model.numatb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c123/metamon_model.numatb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c124/metamon_model.numatb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c125/metamon_model.numatb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c126/metamon_model.numatb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c127/metamon_model.numatb"
+    ],
+    "fighter/kirby/model/copy_pacman_fitkirby/c00/model.nuhlpb": [
+      "fighter/kirby/model/copy_pacman_fitkirby/c120/model.nuhlpb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c121/model.nuhlpb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c122/model.nuhlpb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c123/model.nuhlpb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c124/model.nuhlpb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c125/model.nuhlpb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c126/model.nuhlpb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c127/model.nuhlpb"
+    ],
+    "fighter/kirby/model/copy_pacman_fitkirby/c00/model.numatb": [
+      "fighter/kirby/model/copy_pacman_fitkirby/c120/model.numatb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c121/model.numatb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c122/model.numatb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c123/model.numatb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c124/model.numatb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c125/model.numatb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c126/model.numatb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c127/model.numatb"
+    ],
+    "fighter/kirby/model/copy_pacman_fitkirby/c00/model.numdlb": [
+      "fighter/kirby/model/copy_pacman_fitkirby/c120/model.numdlb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c121/model.numdlb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c122/model.numdlb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c123/model.numdlb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c124/model.numdlb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c125/model.numdlb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c126/model.numdlb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c127/model.numdlb"
+    ],
+    "fighter/kirby/model/copy_pacman_fitkirby/c00/model.numshb": [
+      "fighter/kirby/model/copy_pacman_fitkirby/c120/model.numshb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c121/model.numshb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c122/model.numshb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c123/model.numshb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c124/model.numshb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c125/model.numshb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c126/model.numshb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c127/model.numshb"
+    ],
+    "fighter/kirby/model/copy_pacman_fitkirby/c00/model.numshexb": [
+      "fighter/kirby/model/copy_pacman_fitkirby/c120/model.numshexb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c121/model.numshexb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c122/model.numshexb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c123/model.numshexb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c124/model.numshexb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c125/model.numshexb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c126/model.numshexb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c127/model.numshexb"
+    ],
+    "fighter/kirby/model/copy_pacman_fitkirby/c00/model.nusktb": [
+      "fighter/kirby/model/copy_pacman_fitkirby/c120/model.nusktb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c121/model.nusktb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c122/model.nusktb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c123/model.nusktb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c124/model.nusktb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c125/model.nusktb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c126/model.nusktb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c127/model.nusktb"
+    ],
+    "fighter/kirby/model/copy_pacman_fitkirby/c00/model.nusrcmdlb": [
+      "fighter/kirby/model/copy_pacman_fitkirby/c120/model.nusrcmdlb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c121/model.nusrcmdlb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c122/model.nusrcmdlb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c123/model.nusrcmdlb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c124/model.nusrcmdlb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c125/model.nusrcmdlb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c126/model.nusrcmdlb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c127/model.nusrcmdlb"
+    ],
+    "fighter/kirby/model/copy_pacman_fitkirby/c00/model.xmb": [
+      "fighter/kirby/model/copy_pacman_fitkirby/c120/model.xmb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c121/model.xmb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c122/model.xmb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c123/model.xmb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c124/model.xmb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c125/model.xmb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c126/model.xmb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c127/model.xmb"
+    ],
+    "fighter/kirby/model/copy_pacman_fitkirby/c00/skin_pacman_001_col.nutexb": [
+      "fighter/kirby/model/copy_pacman_fitkirby/c120/skin_pacman_001_col.nutexb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c121/skin_pacman_001_col.nutexb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c122/skin_pacman_001_col.nutexb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c123/skin_pacman_001_col.nutexb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c124/skin_pacman_001_col.nutexb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c125/skin_pacman_001_col.nutexb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c126/skin_pacman_001_col.nutexb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c127/skin_pacman_001_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_pacman_fitkirby/c00/skin_pacman_001_nor.nutexb": [
+      "fighter/kirby/model/copy_pacman_fitkirby/c120/skin_pacman_001_nor.nutexb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c121/skin_pacman_001_nor.nutexb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c122/skin_pacman_001_nor.nutexb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c123/skin_pacman_001_nor.nutexb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c124/skin_pacman_001_nor.nutexb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c125/skin_pacman_001_nor.nutexb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c126/skin_pacman_001_nor.nutexb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c127/skin_pacman_001_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_pacman_fitkirby/c00/skin_pacman_001_prm.nutexb": [
+      "fighter/kirby/model/copy_pacman_fitkirby/c120/skin_pacman_001_prm.nutexb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c121/skin_pacman_001_prm.nutexb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c122/skin_pacman_001_prm.nutexb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c123/skin_pacman_001_prm.nutexb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c124/skin_pacman_001_prm.nutexb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c125/skin_pacman_001_prm.nutexb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c126/skin_pacman_001_prm.nutexb",
+      "fighter/kirby/model/copy_pacman_fitkirby/c127/skin_pacman_001_prm.nutexb"
+    ],
+    "fighter/kirby/model/copy_murabito_cap/c00/dark_model.numatb": [
+      "fighter/kirby/model/copy_murabito_cap/c120/dark_model.numatb",
+      "fighter/kirby/model/copy_murabito_cap/c121/dark_model.numatb",
+      "fighter/kirby/model/copy_murabito_cap/c122/dark_model.numatb",
+      "fighter/kirby/model/copy_murabito_cap/c123/dark_model.numatb",
+      "fighter/kirby/model/copy_murabito_cap/c124/dark_model.numatb",
+      "fighter/kirby/model/copy_murabito_cap/c125/dark_model.numatb",
+      "fighter/kirby/model/copy_murabito_cap/c126/dark_model.numatb",
+      "fighter/kirby/model/copy_murabito_cap/c127/dark_model.numatb"
+    ],
+    "fighter/kirby/model/copy_murabito_cap/c00/def_copymurabito_001_col.nutexb": [
+      "fighter/kirby/model/copy_murabito_cap/c120/def_copymurabito_001_col.nutexb",
+      "fighter/kirby/model/copy_murabito_cap/c121/def_copymurabito_001_col.nutexb",
+      "fighter/kirby/model/copy_murabito_cap/c122/def_copymurabito_001_col.nutexb",
+      "fighter/kirby/model/copy_murabito_cap/c123/def_copymurabito_001_col.nutexb",
+      "fighter/kirby/model/copy_murabito_cap/c124/def_copymurabito_001_col.nutexb",
+      "fighter/kirby/model/copy_murabito_cap/c125/def_copymurabito_001_col.nutexb",
+      "fighter/kirby/model/copy_murabito_cap/c126/def_copymurabito_001_col.nutexb",
+      "fighter/kirby/model/copy_murabito_cap/c127/def_copymurabito_001_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_murabito_cap/c00/def_copymurabito_001_nor.nutexb": [
+      "fighter/kirby/model/copy_murabito_cap/c120/def_copymurabito_001_nor.nutexb",
+      "fighter/kirby/model/copy_murabito_cap/c121/def_copymurabito_001_nor.nutexb",
+      "fighter/kirby/model/copy_murabito_cap/c122/def_copymurabito_001_nor.nutexb",
+      "fighter/kirby/model/copy_murabito_cap/c123/def_copymurabito_001_nor.nutexb",
+      "fighter/kirby/model/copy_murabito_cap/c124/def_copymurabito_001_nor.nutexb",
+      "fighter/kirby/model/copy_murabito_cap/c125/def_copymurabito_001_nor.nutexb",
+      "fighter/kirby/model/copy_murabito_cap/c126/def_copymurabito_001_nor.nutexb",
+      "fighter/kirby/model/copy_murabito_cap/c127/def_copymurabito_001_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_murabito_cap/c00/def_copymurabito_001_prm.nutexb": [
+      "fighter/kirby/model/copy_murabito_cap/c120/def_copymurabito_001_prm.nutexb",
+      "fighter/kirby/model/copy_murabito_cap/c121/def_copymurabito_001_prm.nutexb",
+      "fighter/kirby/model/copy_murabito_cap/c122/def_copymurabito_001_prm.nutexb",
+      "fighter/kirby/model/copy_murabito_cap/c123/def_copymurabito_001_prm.nutexb",
+      "fighter/kirby/model/copy_murabito_cap/c124/def_copymurabito_001_prm.nutexb",
+      "fighter/kirby/model/copy_murabito_cap/c125/def_copymurabito_001_prm.nutexb",
+      "fighter/kirby/model/copy_murabito_cap/c126/def_copymurabito_001_prm.nutexb",
+      "fighter/kirby/model/copy_murabito_cap/c127/def_copymurabito_001_prm.nutexb"
+    ],
+    "fighter/kirby/model/copy_murabito_cap/c00/light_model.numatb": [
+      "fighter/kirby/model/copy_murabito_cap/c120/light_model.numatb",
+      "fighter/kirby/model/copy_murabito_cap/c121/light_model.numatb",
+      "fighter/kirby/model/copy_murabito_cap/c122/light_model.numatb",
+      "fighter/kirby/model/copy_murabito_cap/c123/light_model.numatb",
+      "fighter/kirby/model/copy_murabito_cap/c124/light_model.numatb",
+      "fighter/kirby/model/copy_murabito_cap/c125/light_model.numatb",
+      "fighter/kirby/model/copy_murabito_cap/c126/light_model.numatb",
+      "fighter/kirby/model/copy_murabito_cap/c127/light_model.numatb"
+    ],
+    "fighter/kirby/model/copy_murabito_cap/c00/metamon_model.numatb": [
+      "fighter/kirby/model/copy_murabito_cap/c120/metamon_model.numatb",
+      "fighter/kirby/model/copy_murabito_cap/c121/metamon_model.numatb",
+      "fighter/kirby/model/copy_murabito_cap/c122/metamon_model.numatb",
+      "fighter/kirby/model/copy_murabito_cap/c123/metamon_model.numatb",
+      "fighter/kirby/model/copy_murabito_cap/c124/metamon_model.numatb",
+      "fighter/kirby/model/copy_murabito_cap/c125/metamon_model.numatb",
+      "fighter/kirby/model/copy_murabito_cap/c126/metamon_model.numatb",
+      "fighter/kirby/model/copy_murabito_cap/c127/metamon_model.numatb"
+    ],
+    "fighter/kirby/model/copy_murabito_cap/c00/model.nuanmb": [
+      "fighter/kirby/model/copy_murabito_cap/c120/model.nuanmb",
+      "fighter/kirby/model/copy_murabito_cap/c121/model.nuanmb",
+      "fighter/kirby/model/copy_murabito_cap/c122/model.nuanmb",
+      "fighter/kirby/model/copy_murabito_cap/c123/model.nuanmb",
+      "fighter/kirby/model/copy_murabito_cap/c124/model.nuanmb",
+      "fighter/kirby/model/copy_murabito_cap/c125/model.nuanmb",
+      "fighter/kirby/model/copy_murabito_cap/c126/model.nuanmb",
+      "fighter/kirby/model/copy_murabito_cap/c127/model.nuanmb"
+    ],
+    "fighter/kirby/model/copy_murabito_cap/c00/model.nuhlpb": [
+      "fighter/kirby/model/copy_murabito_cap/c120/model.nuhlpb",
+      "fighter/kirby/model/copy_murabito_cap/c121/model.nuhlpb",
+      "fighter/kirby/model/copy_murabito_cap/c122/model.nuhlpb",
+      "fighter/kirby/model/copy_murabito_cap/c123/model.nuhlpb",
+      "fighter/kirby/model/copy_murabito_cap/c124/model.nuhlpb",
+      "fighter/kirby/model/copy_murabito_cap/c125/model.nuhlpb",
+      "fighter/kirby/model/copy_murabito_cap/c126/model.nuhlpb",
+      "fighter/kirby/model/copy_murabito_cap/c127/model.nuhlpb"
+    ],
+    "fighter/kirby/model/copy_murabito_cap/c00/model.numatb": [
+      "fighter/kirby/model/copy_murabito_cap/c120/model.numatb",
+      "fighter/kirby/model/copy_murabito_cap/c121/model.numatb",
+      "fighter/kirby/model/copy_murabito_cap/c122/model.numatb",
+      "fighter/kirby/model/copy_murabito_cap/c123/model.numatb",
+      "fighter/kirby/model/copy_murabito_cap/c124/model.numatb",
+      "fighter/kirby/model/copy_murabito_cap/c125/model.numatb",
+      "fighter/kirby/model/copy_murabito_cap/c126/model.numatb",
+      "fighter/kirby/model/copy_murabito_cap/c127/model.numatb"
+    ],
+    "fighter/kirby/model/copy_murabito_cap/c00/model.numdlb": [
+      "fighter/kirby/model/copy_murabito_cap/c120/model.numdlb",
+      "fighter/kirby/model/copy_murabito_cap/c121/model.numdlb",
+      "fighter/kirby/model/copy_murabito_cap/c122/model.numdlb",
+      "fighter/kirby/model/copy_murabito_cap/c123/model.numdlb",
+      "fighter/kirby/model/copy_murabito_cap/c124/model.numdlb",
+      "fighter/kirby/model/copy_murabito_cap/c125/model.numdlb",
+      "fighter/kirby/model/copy_murabito_cap/c126/model.numdlb",
+      "fighter/kirby/model/copy_murabito_cap/c127/model.numdlb"
+    ],
+    "fighter/kirby/model/copy_murabito_cap/c00/model.numshb": [
+      "fighter/kirby/model/copy_murabito_cap/c120/model.numshb",
+      "fighter/kirby/model/copy_murabito_cap/c121/model.numshb",
+      "fighter/kirby/model/copy_murabito_cap/c122/model.numshb",
+      "fighter/kirby/model/copy_murabito_cap/c123/model.numshb",
+      "fighter/kirby/model/copy_murabito_cap/c124/model.numshb",
+      "fighter/kirby/model/copy_murabito_cap/c125/model.numshb",
+      "fighter/kirby/model/copy_murabito_cap/c126/model.numshb",
+      "fighter/kirby/model/copy_murabito_cap/c127/model.numshb"
+    ],
+    "fighter/kirby/model/copy_murabito_cap/c00/model.numshexb": [
+      "fighter/kirby/model/copy_murabito_cap/c120/model.numshexb",
+      "fighter/kirby/model/copy_murabito_cap/c121/model.numshexb",
+      "fighter/kirby/model/copy_murabito_cap/c122/model.numshexb",
+      "fighter/kirby/model/copy_murabito_cap/c123/model.numshexb",
+      "fighter/kirby/model/copy_murabito_cap/c124/model.numshexb",
+      "fighter/kirby/model/copy_murabito_cap/c125/model.numshexb",
+      "fighter/kirby/model/copy_murabito_cap/c126/model.numshexb",
+      "fighter/kirby/model/copy_murabito_cap/c127/model.numshexb"
+    ],
+    "fighter/kirby/model/copy_murabito_cap/c00/model.nusktb": [
+      "fighter/kirby/model/copy_murabito_cap/c120/model.nusktb",
+      "fighter/kirby/model/copy_murabito_cap/c121/model.nusktb",
+      "fighter/kirby/model/copy_murabito_cap/c122/model.nusktb",
+      "fighter/kirby/model/copy_murabito_cap/c123/model.nusktb",
+      "fighter/kirby/model/copy_murabito_cap/c124/model.nusktb",
+      "fighter/kirby/model/copy_murabito_cap/c125/model.nusktb",
+      "fighter/kirby/model/copy_murabito_cap/c126/model.nusktb",
+      "fighter/kirby/model/copy_murabito_cap/c127/model.nusktb"
+    ],
+    "fighter/kirby/model/copy_murabito_cap/c00/model.nusrcmdlb": [
+      "fighter/kirby/model/copy_murabito_cap/c120/model.nusrcmdlb",
+      "fighter/kirby/model/copy_murabito_cap/c121/model.nusrcmdlb",
+      "fighter/kirby/model/copy_murabito_cap/c122/model.nusrcmdlb",
+      "fighter/kirby/model/copy_murabito_cap/c123/model.nusrcmdlb",
+      "fighter/kirby/model/copy_murabito_cap/c124/model.nusrcmdlb",
+      "fighter/kirby/model/copy_murabito_cap/c125/model.nusrcmdlb",
+      "fighter/kirby/model/copy_murabito_cap/c126/model.nusrcmdlb",
+      "fighter/kirby/model/copy_murabito_cap/c127/model.nusrcmdlb"
+    ],
+    "fighter/kirby/model/copy_murabito_cap/c00/model.xmb": [
+      "fighter/kirby/model/copy_murabito_cap/c120/model.xmb",
+      "fighter/kirby/model/copy_murabito_cap/c121/model.xmb",
+      "fighter/kirby/model/copy_murabito_cap/c122/model.xmb",
+      "fighter/kirby/model/copy_murabito_cap/c123/model.xmb",
+      "fighter/kirby/model/copy_murabito_cap/c124/model.xmb",
+      "fighter/kirby/model/copy_murabito_cap/c125/model.xmb",
+      "fighter/kirby/model/copy_murabito_cap/c126/model.xmb",
+      "fighter/kirby/model/copy_murabito_cap/c127/model.xmb"
+    ],
+    "fighter/kirby/model/copy_pikmin_fitkirby/c00/dark_model.numatb": [
+      "fighter/kirby/model/copy_pikmin_fitkirby/c120/dark_model.numatb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c121/dark_model.numatb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c122/dark_model.numatb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c123/dark_model.numatb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c124/dark_model.numatb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c125/dark_model.numatb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c126/dark_model.numatb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c127/dark_model.numatb"
+    ],
+    "fighter/kirby/model/copy_pikmin_fitkirby/c00/light_model.numatb": [
+      "fighter/kirby/model/copy_pikmin_fitkirby/c120/light_model.numatb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c121/light_model.numatb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c122/light_model.numatb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c123/light_model.numatb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c124/light_model.numatb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c125/light_model.numatb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c126/light_model.numatb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c127/light_model.numatb"
+    ],
+    "fighter/kirby/model/copy_pikmin_fitkirby/c00/metal_copypikmin_001_col.nutexb": [
+      "fighter/kirby/model/copy_pikmin_fitkirby/c120/metal_copypikmin_001_col.nutexb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c121/metal_copypikmin_001_col.nutexb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c122/metal_copypikmin_001_col.nutexb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c123/metal_copypikmin_001_col.nutexb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c124/metal_copypikmin_001_col.nutexb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c125/metal_copypikmin_001_col.nutexb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c126/metal_copypikmin_001_col.nutexb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c127/metal_copypikmin_001_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_pikmin_fitkirby/c00/metal_copypikmin_001_nor.nutexb": [
+      "fighter/kirby/model/copy_pikmin_fitkirby/c120/metal_copypikmin_001_nor.nutexb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c121/metal_copypikmin_001_nor.nutexb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c122/metal_copypikmin_001_nor.nutexb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c123/metal_copypikmin_001_nor.nutexb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c124/metal_copypikmin_001_nor.nutexb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c125/metal_copypikmin_001_nor.nutexb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c126/metal_copypikmin_001_nor.nutexb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c127/metal_copypikmin_001_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_pikmin_fitkirby/c00/metal_copypikmin_001_prm.nutexb": [
+      "fighter/kirby/model/copy_pikmin_fitkirby/c120/metal_copypikmin_001_prm.nutexb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c121/metal_copypikmin_001_prm.nutexb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c122/metal_copypikmin_001_prm.nutexb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c123/metal_copypikmin_001_prm.nutexb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c124/metal_copypikmin_001_prm.nutexb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c125/metal_copypikmin_001_prm.nutexb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c126/metal_copypikmin_001_prm.nutexb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c127/metal_copypikmin_001_prm.nutexb"
+    ],
+    "fighter/kirby/model/copy_pikmin_fitkirby/c00/metamon_model.numatb": [
+      "fighter/kirby/model/copy_pikmin_fitkirby/c120/metamon_model.numatb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c121/metamon_model.numatb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c122/metamon_model.numatb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c123/metamon_model.numatb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c124/metamon_model.numatb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c125/metamon_model.numatb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c126/metamon_model.numatb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c127/metamon_model.numatb"
+    ],
+    "fighter/kirby/model/copy_pikmin_fitkirby/c00/model.nuanmb": [
+      "fighter/kirby/model/copy_pikmin_fitkirby/c120/model.nuanmb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c121/model.nuanmb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c122/model.nuanmb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c123/model.nuanmb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c124/model.nuanmb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c125/model.nuanmb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c126/model.nuanmb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c127/model.nuanmb"
+    ],
+    "fighter/kirby/model/copy_pikmin_fitkirby/c00/model.nuhlpb": [
+      "fighter/kirby/model/copy_pikmin_fitkirby/c120/model.nuhlpb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c121/model.nuhlpb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c122/model.nuhlpb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c123/model.nuhlpb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c124/model.nuhlpb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c125/model.nuhlpb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c126/model.nuhlpb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c127/model.nuhlpb"
+    ],
+    "fighter/kirby/model/copy_pikmin_fitkirby/c00/model.numatb": [
+      "fighter/kirby/model/copy_pikmin_fitkirby/c120/model.numatb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c121/model.numatb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c122/model.numatb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c123/model.numatb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c124/model.numatb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c125/model.numatb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c126/model.numatb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c127/model.numatb"
+    ],
+    "fighter/kirby/model/copy_pikmin_fitkirby/c00/model.numdlb": [
+      "fighter/kirby/model/copy_pikmin_fitkirby/c120/model.numdlb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c121/model.numdlb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c122/model.numdlb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c123/model.numdlb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c124/model.numdlb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c125/model.numdlb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c126/model.numdlb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c127/model.numdlb"
+    ],
+    "fighter/kirby/model/copy_pikmin_fitkirby/c00/model.numshb": [
+      "fighter/kirby/model/copy_pikmin_fitkirby/c120/model.numshb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c121/model.numshb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c122/model.numshb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c123/model.numshb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c124/model.numshb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c125/model.numshb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c126/model.numshb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c127/model.numshb"
+    ],
+    "fighter/kirby/model/copy_pikmin_fitkirby/c00/model.numshexb": [
+      "fighter/kirby/model/copy_pikmin_fitkirby/c120/model.numshexb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c121/model.numshexb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c122/model.numshexb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c123/model.numshexb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c124/model.numshexb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c125/model.numshexb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c126/model.numshexb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c127/model.numshexb"
+    ],
+    "fighter/kirby/model/copy_pikmin_fitkirby/c00/model.nusktb": [
+      "fighter/kirby/model/copy_pikmin_fitkirby/c120/model.nusktb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c121/model.nusktb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c122/model.nusktb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c123/model.nusktb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c124/model.nusktb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c125/model.nusktb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c126/model.nusktb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c127/model.nusktb"
+    ],
+    "fighter/kirby/model/copy_pikmin_fitkirby/c00/model.nusrcmdlb": [
+      "fighter/kirby/model/copy_pikmin_fitkirby/c120/model.nusrcmdlb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c121/model.nusrcmdlb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c122/model.nusrcmdlb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c123/model.nusrcmdlb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c124/model.nusrcmdlb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c125/model.nusrcmdlb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c126/model.nusrcmdlb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c127/model.nusrcmdlb"
+    ],
+    "fighter/kirby/model/copy_pikmin_fitkirby/c00/model.xmb": [
+      "fighter/kirby/model/copy_pikmin_fitkirby/c120/model.xmb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c121/model.xmb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c122/model.xmb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c123/model.xmb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c124/model.xmb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c125/model.xmb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c126/model.xmb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c127/model.xmb"
+    ],
+    "fighter/kirby/model/copy_pikmin_fitkirby/c00/skin_copypikmin_001_col.nutexb": [
+      "fighter/kirby/model/copy_pikmin_fitkirby/c120/skin_copypikmin_001_col.nutexb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c121/skin_copypikmin_001_col.nutexb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c122/skin_copypikmin_001_col.nutexb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c123/skin_copypikmin_001_col.nutexb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c124/skin_copypikmin_001_col.nutexb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c125/skin_copypikmin_001_col.nutexb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c126/skin_copypikmin_001_col.nutexb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c127/skin_copypikmin_001_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_pikmin_fitkirby/c00/skin_copypikmin_001_nor.nutexb": [
+      "fighter/kirby/model/copy_pikmin_fitkirby/c120/skin_copypikmin_001_nor.nutexb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c121/skin_copypikmin_001_nor.nutexb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c122/skin_copypikmin_001_nor.nutexb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c123/skin_copypikmin_001_nor.nutexb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c124/skin_copypikmin_001_nor.nutexb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c125/skin_copypikmin_001_nor.nutexb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c126/skin_copypikmin_001_nor.nutexb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c127/skin_copypikmin_001_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_pikmin_fitkirby/c00/skin_copypikmin_001_prm.nutexb": [
+      "fighter/kirby/model/copy_pikmin_fitkirby/c120/skin_copypikmin_001_prm.nutexb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c121/skin_copypikmin_001_prm.nutexb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c122/skin_copypikmin_001_prm.nutexb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c123/skin_copypikmin_001_prm.nutexb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c124/skin_copypikmin_001_prm.nutexb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c125/skin_copypikmin_001_prm.nutexb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c126/skin_copypikmin_001_prm.nutexb",
+      "fighter/kirby/model/copy_pikmin_fitkirby/c127/skin_copypikmin_001_prm.nutexb"
+    ],
+    "fighter/kirby/model/copy_lucas_cap/c00/alp_lucas_001_col.nutexb": [
+      "fighter/kirby/model/copy_lucas_cap/c120/alp_lucas_001_col.nutexb",
+      "fighter/kirby/model/copy_lucas_cap/c121/alp_lucas_001_col.nutexb",
+      "fighter/kirby/model/copy_lucas_cap/c122/alp_lucas_001_col.nutexb",
+      "fighter/kirby/model/copy_lucas_cap/c123/alp_lucas_001_col.nutexb",
+      "fighter/kirby/model/copy_lucas_cap/c124/alp_lucas_001_col.nutexb",
+      "fighter/kirby/model/copy_lucas_cap/c125/alp_lucas_001_col.nutexb",
+      "fighter/kirby/model/copy_lucas_cap/c126/alp_lucas_001_col.nutexb",
+      "fighter/kirby/model/copy_lucas_cap/c127/alp_lucas_001_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_lucas_cap/c00/alp_lucas_001_nor.nutexb": [
+      "fighter/kirby/model/copy_lucas_cap/c120/alp_lucas_001_nor.nutexb",
+      "fighter/kirby/model/copy_lucas_cap/c121/alp_lucas_001_nor.nutexb",
+      "fighter/kirby/model/copy_lucas_cap/c122/alp_lucas_001_nor.nutexb",
+      "fighter/kirby/model/copy_lucas_cap/c123/alp_lucas_001_nor.nutexb",
+      "fighter/kirby/model/copy_lucas_cap/c124/alp_lucas_001_nor.nutexb",
+      "fighter/kirby/model/copy_lucas_cap/c125/alp_lucas_001_nor.nutexb",
+      "fighter/kirby/model/copy_lucas_cap/c126/alp_lucas_001_nor.nutexb",
+      "fighter/kirby/model/copy_lucas_cap/c127/alp_lucas_001_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_lucas_cap/c00/alp_lucas_001_prm.nutexb": [
+      "fighter/kirby/model/copy_lucas_cap/c120/alp_lucas_001_prm.nutexb",
+      "fighter/kirby/model/copy_lucas_cap/c121/alp_lucas_001_prm.nutexb",
+      "fighter/kirby/model/copy_lucas_cap/c122/alp_lucas_001_prm.nutexb",
+      "fighter/kirby/model/copy_lucas_cap/c123/alp_lucas_001_prm.nutexb",
+      "fighter/kirby/model/copy_lucas_cap/c124/alp_lucas_001_prm.nutexb",
+      "fighter/kirby/model/copy_lucas_cap/c125/alp_lucas_001_prm.nutexb",
+      "fighter/kirby/model/copy_lucas_cap/c126/alp_lucas_001_prm.nutexb",
+      "fighter/kirby/model/copy_lucas_cap/c127/alp_lucas_001_prm.nutexb"
+    ],
+    "fighter/kirby/model/copy_lucas_cap/c00/alp_lucas_002_col.nutexb": [
+      "fighter/kirby/model/copy_lucas_cap/c120/alp_lucas_002_col.nutexb",
+      "fighter/kirby/model/copy_lucas_cap/c121/alp_lucas_002_col.nutexb",
+      "fighter/kirby/model/copy_lucas_cap/c122/alp_lucas_002_col.nutexb",
+      "fighter/kirby/model/copy_lucas_cap/c123/alp_lucas_002_col.nutexb",
+      "fighter/kirby/model/copy_lucas_cap/c124/alp_lucas_002_col.nutexb",
+      "fighter/kirby/model/copy_lucas_cap/c125/alp_lucas_002_col.nutexb",
+      "fighter/kirby/model/copy_lucas_cap/c126/alp_lucas_002_col.nutexb",
+      "fighter/kirby/model/copy_lucas_cap/c127/alp_lucas_002_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_lucas_cap/c00/alp_lucas_002_nor.nutexb": [
+      "fighter/kirby/model/copy_lucas_cap/c120/alp_lucas_002_nor.nutexb",
+      "fighter/kirby/model/copy_lucas_cap/c121/alp_lucas_002_nor.nutexb",
+      "fighter/kirby/model/copy_lucas_cap/c122/alp_lucas_002_nor.nutexb",
+      "fighter/kirby/model/copy_lucas_cap/c123/alp_lucas_002_nor.nutexb",
+      "fighter/kirby/model/copy_lucas_cap/c124/alp_lucas_002_nor.nutexb",
+      "fighter/kirby/model/copy_lucas_cap/c125/alp_lucas_002_nor.nutexb",
+      "fighter/kirby/model/copy_lucas_cap/c126/alp_lucas_002_nor.nutexb",
+      "fighter/kirby/model/copy_lucas_cap/c127/alp_lucas_002_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_lucas_cap/c00/alp_lucas_002_prm.nutexb": [
+      "fighter/kirby/model/copy_lucas_cap/c120/alp_lucas_002_prm.nutexb",
+      "fighter/kirby/model/copy_lucas_cap/c121/alp_lucas_002_prm.nutexb",
+      "fighter/kirby/model/copy_lucas_cap/c122/alp_lucas_002_prm.nutexb",
+      "fighter/kirby/model/copy_lucas_cap/c123/alp_lucas_002_prm.nutexb",
+      "fighter/kirby/model/copy_lucas_cap/c124/alp_lucas_002_prm.nutexb",
+      "fighter/kirby/model/copy_lucas_cap/c125/alp_lucas_002_prm.nutexb",
+      "fighter/kirby/model/copy_lucas_cap/c126/alp_lucas_002_prm.nutexb",
+      "fighter/kirby/model/copy_lucas_cap/c127/alp_lucas_002_prm.nutexb"
+    ],
+    "fighter/kirby/model/copy_lucas_cap/c00/dark_model.numatb": [
+      "fighter/kirby/model/copy_lucas_cap/c120/dark_model.numatb",
+      "fighter/kirby/model/copy_lucas_cap/c121/dark_model.numatb",
+      "fighter/kirby/model/copy_lucas_cap/c122/dark_model.numatb",
+      "fighter/kirby/model/copy_lucas_cap/c123/dark_model.numatb",
+      "fighter/kirby/model/copy_lucas_cap/c124/dark_model.numatb",
+      "fighter/kirby/model/copy_lucas_cap/c125/dark_model.numatb",
+      "fighter/kirby/model/copy_lucas_cap/c126/dark_model.numatb",
+      "fighter/kirby/model/copy_lucas_cap/c127/dark_model.numatb"
+    ],
+    "fighter/kirby/model/copy_lucas_cap/c00/light_model.numatb": [
+      "fighter/kirby/model/copy_lucas_cap/c120/light_model.numatb",
+      "fighter/kirby/model/copy_lucas_cap/c121/light_model.numatb",
+      "fighter/kirby/model/copy_lucas_cap/c122/light_model.numatb",
+      "fighter/kirby/model/copy_lucas_cap/c123/light_model.numatb",
+      "fighter/kirby/model/copy_lucas_cap/c124/light_model.numatb",
+      "fighter/kirby/model/copy_lucas_cap/c125/light_model.numatb",
+      "fighter/kirby/model/copy_lucas_cap/c126/light_model.numatb",
+      "fighter/kirby/model/copy_lucas_cap/c127/light_model.numatb"
+    ],
+    "fighter/kirby/model/copy_lucas_cap/c00/metamon_model.numatb": [
+      "fighter/kirby/model/copy_lucas_cap/c120/metamon_model.numatb",
+      "fighter/kirby/model/copy_lucas_cap/c121/metamon_model.numatb",
+      "fighter/kirby/model/copy_lucas_cap/c122/metamon_model.numatb",
+      "fighter/kirby/model/copy_lucas_cap/c123/metamon_model.numatb",
+      "fighter/kirby/model/copy_lucas_cap/c124/metamon_model.numatb",
+      "fighter/kirby/model/copy_lucas_cap/c125/metamon_model.numatb",
+      "fighter/kirby/model/copy_lucas_cap/c126/metamon_model.numatb",
+      "fighter/kirby/model/copy_lucas_cap/c127/metamon_model.numatb"
+    ],
+    "fighter/kirby/model/copy_lucas_cap/c00/model.nuanmb": [
+      "fighter/kirby/model/copy_lucas_cap/c120/model.nuanmb",
+      "fighter/kirby/model/copy_lucas_cap/c121/model.nuanmb",
+      "fighter/kirby/model/copy_lucas_cap/c122/model.nuanmb",
+      "fighter/kirby/model/copy_lucas_cap/c123/model.nuanmb",
+      "fighter/kirby/model/copy_lucas_cap/c124/model.nuanmb",
+      "fighter/kirby/model/copy_lucas_cap/c125/model.nuanmb",
+      "fighter/kirby/model/copy_lucas_cap/c126/model.nuanmb",
+      "fighter/kirby/model/copy_lucas_cap/c127/model.nuanmb"
+    ],
+    "fighter/kirby/model/copy_lucas_cap/c00/model.nuhlpb": [
+      "fighter/kirby/model/copy_lucas_cap/c120/model.nuhlpb",
+      "fighter/kirby/model/copy_lucas_cap/c121/model.nuhlpb",
+      "fighter/kirby/model/copy_lucas_cap/c122/model.nuhlpb",
+      "fighter/kirby/model/copy_lucas_cap/c123/model.nuhlpb",
+      "fighter/kirby/model/copy_lucas_cap/c124/model.nuhlpb",
+      "fighter/kirby/model/copy_lucas_cap/c125/model.nuhlpb",
+      "fighter/kirby/model/copy_lucas_cap/c126/model.nuhlpb",
+      "fighter/kirby/model/copy_lucas_cap/c127/model.nuhlpb"
+    ],
+    "fighter/kirby/model/copy_lucas_cap/c00/model.numatb": [
+      "fighter/kirby/model/copy_lucas_cap/c120/model.numatb",
+      "fighter/kirby/model/copy_lucas_cap/c121/model.numatb",
+      "fighter/kirby/model/copy_lucas_cap/c122/model.numatb",
+      "fighter/kirby/model/copy_lucas_cap/c123/model.numatb",
+      "fighter/kirby/model/copy_lucas_cap/c124/model.numatb",
+      "fighter/kirby/model/copy_lucas_cap/c125/model.numatb",
+      "fighter/kirby/model/copy_lucas_cap/c126/model.numatb",
+      "fighter/kirby/model/copy_lucas_cap/c127/model.numatb"
+    ],
+    "fighter/kirby/model/copy_lucas_cap/c00/model.numdlb": [
+      "fighter/kirby/model/copy_lucas_cap/c120/model.numdlb",
+      "fighter/kirby/model/copy_lucas_cap/c121/model.numdlb",
+      "fighter/kirby/model/copy_lucas_cap/c122/model.numdlb",
+      "fighter/kirby/model/copy_lucas_cap/c123/model.numdlb",
+      "fighter/kirby/model/copy_lucas_cap/c124/model.numdlb",
+      "fighter/kirby/model/copy_lucas_cap/c125/model.numdlb",
+      "fighter/kirby/model/copy_lucas_cap/c126/model.numdlb",
+      "fighter/kirby/model/copy_lucas_cap/c127/model.numdlb"
+    ],
+    "fighter/kirby/model/copy_lucas_cap/c00/model.numshb": [
+      "fighter/kirby/model/copy_lucas_cap/c120/model.numshb",
+      "fighter/kirby/model/copy_lucas_cap/c121/model.numshb",
+      "fighter/kirby/model/copy_lucas_cap/c122/model.numshb",
+      "fighter/kirby/model/copy_lucas_cap/c123/model.numshb",
+      "fighter/kirby/model/copy_lucas_cap/c124/model.numshb",
+      "fighter/kirby/model/copy_lucas_cap/c125/model.numshb",
+      "fighter/kirby/model/copy_lucas_cap/c126/model.numshb",
+      "fighter/kirby/model/copy_lucas_cap/c127/model.numshb"
+    ],
+    "fighter/kirby/model/copy_lucas_cap/c00/model.numshexb": [
+      "fighter/kirby/model/copy_lucas_cap/c120/model.numshexb",
+      "fighter/kirby/model/copy_lucas_cap/c121/model.numshexb",
+      "fighter/kirby/model/copy_lucas_cap/c122/model.numshexb",
+      "fighter/kirby/model/copy_lucas_cap/c123/model.numshexb",
+      "fighter/kirby/model/copy_lucas_cap/c124/model.numshexb",
+      "fighter/kirby/model/copy_lucas_cap/c125/model.numshexb",
+      "fighter/kirby/model/copy_lucas_cap/c126/model.numshexb",
+      "fighter/kirby/model/copy_lucas_cap/c127/model.numshexb"
+    ],
+    "fighter/kirby/model/copy_lucas_cap/c00/model.nusktb": [
+      "fighter/kirby/model/copy_lucas_cap/c120/model.nusktb",
+      "fighter/kirby/model/copy_lucas_cap/c121/model.nusktb",
+      "fighter/kirby/model/copy_lucas_cap/c122/model.nusktb",
+      "fighter/kirby/model/copy_lucas_cap/c123/model.nusktb",
+      "fighter/kirby/model/copy_lucas_cap/c124/model.nusktb",
+      "fighter/kirby/model/copy_lucas_cap/c125/model.nusktb",
+      "fighter/kirby/model/copy_lucas_cap/c126/model.nusktb",
+      "fighter/kirby/model/copy_lucas_cap/c127/model.nusktb"
+    ],
+    "fighter/kirby/model/copy_lucas_cap/c00/model.nusrcmdlb": [
+      "fighter/kirby/model/copy_lucas_cap/c120/model.nusrcmdlb",
+      "fighter/kirby/model/copy_lucas_cap/c121/model.nusrcmdlb",
+      "fighter/kirby/model/copy_lucas_cap/c122/model.nusrcmdlb",
+      "fighter/kirby/model/copy_lucas_cap/c123/model.nusrcmdlb",
+      "fighter/kirby/model/copy_lucas_cap/c124/model.nusrcmdlb",
+      "fighter/kirby/model/copy_lucas_cap/c125/model.nusrcmdlb",
+      "fighter/kirby/model/copy_lucas_cap/c126/model.nusrcmdlb",
+      "fighter/kirby/model/copy_lucas_cap/c127/model.nusrcmdlb"
+    ],
+    "fighter/kirby/model/copy_lucas_cap/c00/model.xmb": [
+      "fighter/kirby/model/copy_lucas_cap/c120/model.xmb",
+      "fighter/kirby/model/copy_lucas_cap/c121/model.xmb",
+      "fighter/kirby/model/copy_lucas_cap/c122/model.xmb",
+      "fighter/kirby/model/copy_lucas_cap/c123/model.xmb",
+      "fighter/kirby/model/copy_lucas_cap/c124/model.xmb",
+      "fighter/kirby/model/copy_lucas_cap/c125/model.xmb",
+      "fighter/kirby/model/copy_lucas_cap/c126/model.xmb",
+      "fighter/kirby/model/copy_lucas_cap/c127/model.xmb"
+    ],
+    "fighter/kirby/model/copy_mariod_parts/c00/dark_model.numatb": [
+      "fighter/kirby/model/copy_mariod_parts/c120/dark_model.numatb",
+      "fighter/kirby/model/copy_mariod_parts/c121/dark_model.numatb",
+      "fighter/kirby/model/copy_mariod_parts/c122/dark_model.numatb",
+      "fighter/kirby/model/copy_mariod_parts/c123/dark_model.numatb",
+      "fighter/kirby/model/copy_mariod_parts/c124/dark_model.numatb",
+      "fighter/kirby/model/copy_mariod_parts/c125/dark_model.numatb",
+      "fighter/kirby/model/copy_mariod_parts/c126/dark_model.numatb",
+      "fighter/kirby/model/copy_mariod_parts/c127/dark_model.numatb"
+    ],
+    "fighter/kirby/model/copy_mariod_parts/c00/light_model.numatb": [
+      "fighter/kirby/model/copy_mariod_parts/c120/light_model.numatb",
+      "fighter/kirby/model/copy_mariod_parts/c121/light_model.numatb",
+      "fighter/kirby/model/copy_mariod_parts/c122/light_model.numatb",
+      "fighter/kirby/model/copy_mariod_parts/c123/light_model.numatb",
+      "fighter/kirby/model/copy_mariod_parts/c124/light_model.numatb",
+      "fighter/kirby/model/copy_mariod_parts/c125/light_model.numatb",
+      "fighter/kirby/model/copy_mariod_parts/c126/light_model.numatb",
+      "fighter/kirby/model/copy_mariod_parts/c127/light_model.numatb"
+    ],
+    "fighter/kirby/model/copy_mariod_parts/c00/metal_kirbyrmariod_00_col.nutexb": [
+      "fighter/kirby/model/copy_mariod_parts/c120/metal_kirbyrmariod_00_col.nutexb",
+      "fighter/kirby/model/copy_mariod_parts/c121/metal_kirbyrmariod_00_col.nutexb",
+      "fighter/kirby/model/copy_mariod_parts/c122/metal_kirbyrmariod_00_col.nutexb",
+      "fighter/kirby/model/copy_mariod_parts/c123/metal_kirbyrmariod_00_col.nutexb",
+      "fighter/kirby/model/copy_mariod_parts/c124/metal_kirbyrmariod_00_col.nutexb",
+      "fighter/kirby/model/copy_mariod_parts/c125/metal_kirbyrmariod_00_col.nutexb",
+      "fighter/kirby/model/copy_mariod_parts/c126/metal_kirbyrmariod_00_col.nutexb",
+      "fighter/kirby/model/copy_mariod_parts/c127/metal_kirbyrmariod_00_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_mariod_parts/c00/metal_kirbyrmariod_00_nor.nutexb": [
+      "fighter/kirby/model/copy_mariod_parts/c120/metal_kirbyrmariod_00_nor.nutexb",
+      "fighter/kirby/model/copy_mariod_parts/c121/metal_kirbyrmariod_00_nor.nutexb",
+      "fighter/kirby/model/copy_mariod_parts/c122/metal_kirbyrmariod_00_nor.nutexb",
+      "fighter/kirby/model/copy_mariod_parts/c123/metal_kirbyrmariod_00_nor.nutexb",
+      "fighter/kirby/model/copy_mariod_parts/c124/metal_kirbyrmariod_00_nor.nutexb",
+      "fighter/kirby/model/copy_mariod_parts/c125/metal_kirbyrmariod_00_nor.nutexb",
+      "fighter/kirby/model/copy_mariod_parts/c126/metal_kirbyrmariod_00_nor.nutexb",
+      "fighter/kirby/model/copy_mariod_parts/c127/metal_kirbyrmariod_00_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_mariod_parts/c00/metal_kirbyrmariod_00_prm.nutexb": [
+      "fighter/kirby/model/copy_mariod_parts/c120/metal_kirbyrmariod_00_prm.nutexb",
+      "fighter/kirby/model/copy_mariod_parts/c121/metal_kirbyrmariod_00_prm.nutexb",
+      "fighter/kirby/model/copy_mariod_parts/c122/metal_kirbyrmariod_00_prm.nutexb",
+      "fighter/kirby/model/copy_mariod_parts/c123/metal_kirbyrmariod_00_prm.nutexb",
+      "fighter/kirby/model/copy_mariod_parts/c124/metal_kirbyrmariod_00_prm.nutexb",
+      "fighter/kirby/model/copy_mariod_parts/c125/metal_kirbyrmariod_00_prm.nutexb",
+      "fighter/kirby/model/copy_mariod_parts/c126/metal_kirbyrmariod_00_prm.nutexb",
+      "fighter/kirby/model/copy_mariod_parts/c127/metal_kirbyrmariod_00_prm.nutexb"
+    ],
+    "fighter/kirby/model/copy_mariod_parts/c00/metamon_model.numatb": [
+      "fighter/kirby/model/copy_mariod_parts/c120/metamon_model.numatb",
+      "fighter/kirby/model/copy_mariod_parts/c121/metamon_model.numatb",
+      "fighter/kirby/model/copy_mariod_parts/c122/metamon_model.numatb",
+      "fighter/kirby/model/copy_mariod_parts/c123/metamon_model.numatb",
+      "fighter/kirby/model/copy_mariod_parts/c124/metamon_model.numatb",
+      "fighter/kirby/model/copy_mariod_parts/c125/metamon_model.numatb",
+      "fighter/kirby/model/copy_mariod_parts/c126/metamon_model.numatb",
+      "fighter/kirby/model/copy_mariod_parts/c127/metamon_model.numatb"
+    ],
+    "fighter/kirby/model/copy_mariod_parts/c00/model.nuhlpb": [
+      "fighter/kirby/model/copy_mariod_parts/c120/model.nuhlpb",
+      "fighter/kirby/model/copy_mariod_parts/c121/model.nuhlpb",
+      "fighter/kirby/model/copy_mariod_parts/c122/model.nuhlpb",
+      "fighter/kirby/model/copy_mariod_parts/c123/model.nuhlpb",
+      "fighter/kirby/model/copy_mariod_parts/c124/model.nuhlpb",
+      "fighter/kirby/model/copy_mariod_parts/c125/model.nuhlpb",
+      "fighter/kirby/model/copy_mariod_parts/c126/model.nuhlpb",
+      "fighter/kirby/model/copy_mariod_parts/c127/model.nuhlpb"
+    ],
+    "fighter/kirby/model/copy_mariod_parts/c00/model.numatb": [
+      "fighter/kirby/model/copy_mariod_parts/c120/model.numatb",
+      "fighter/kirby/model/copy_mariod_parts/c121/model.numatb",
+      "fighter/kirby/model/copy_mariod_parts/c122/model.numatb",
+      "fighter/kirby/model/copy_mariod_parts/c123/model.numatb",
+      "fighter/kirby/model/copy_mariod_parts/c124/model.numatb",
+      "fighter/kirby/model/copy_mariod_parts/c125/model.numatb",
+      "fighter/kirby/model/copy_mariod_parts/c126/model.numatb",
+      "fighter/kirby/model/copy_mariod_parts/c127/model.numatb"
+    ],
+    "fighter/kirby/model/copy_mariod_parts/c00/model.numdlb": [
+      "fighter/kirby/model/copy_mariod_parts/c120/model.numdlb",
+      "fighter/kirby/model/copy_mariod_parts/c121/model.numdlb",
+      "fighter/kirby/model/copy_mariod_parts/c122/model.numdlb",
+      "fighter/kirby/model/copy_mariod_parts/c123/model.numdlb",
+      "fighter/kirby/model/copy_mariod_parts/c124/model.numdlb",
+      "fighter/kirby/model/copy_mariod_parts/c125/model.numdlb",
+      "fighter/kirby/model/copy_mariod_parts/c126/model.numdlb",
+      "fighter/kirby/model/copy_mariod_parts/c127/model.numdlb"
+    ],
+    "fighter/kirby/model/copy_mariod_parts/c00/model.numshb": [
+      "fighter/kirby/model/copy_mariod_parts/c120/model.numshb",
+      "fighter/kirby/model/copy_mariod_parts/c121/model.numshb",
+      "fighter/kirby/model/copy_mariod_parts/c122/model.numshb",
+      "fighter/kirby/model/copy_mariod_parts/c123/model.numshb",
+      "fighter/kirby/model/copy_mariod_parts/c124/model.numshb",
+      "fighter/kirby/model/copy_mariod_parts/c125/model.numshb",
+      "fighter/kirby/model/copy_mariod_parts/c126/model.numshb",
+      "fighter/kirby/model/copy_mariod_parts/c127/model.numshb"
+    ],
+    "fighter/kirby/model/copy_mariod_parts/c00/model.numshexb": [
+      "fighter/kirby/model/copy_mariod_parts/c120/model.numshexb",
+      "fighter/kirby/model/copy_mariod_parts/c121/model.numshexb",
+      "fighter/kirby/model/copy_mariod_parts/c122/model.numshexb",
+      "fighter/kirby/model/copy_mariod_parts/c123/model.numshexb",
+      "fighter/kirby/model/copy_mariod_parts/c124/model.numshexb",
+      "fighter/kirby/model/copy_mariod_parts/c125/model.numshexb",
+      "fighter/kirby/model/copy_mariod_parts/c126/model.numshexb",
+      "fighter/kirby/model/copy_mariod_parts/c127/model.numshexb"
+    ],
+    "fighter/kirby/model/copy_mariod_parts/c00/model.nusktb": [
+      "fighter/kirby/model/copy_mariod_parts/c120/model.nusktb",
+      "fighter/kirby/model/copy_mariod_parts/c121/model.nusktb",
+      "fighter/kirby/model/copy_mariod_parts/c122/model.nusktb",
+      "fighter/kirby/model/copy_mariod_parts/c123/model.nusktb",
+      "fighter/kirby/model/copy_mariod_parts/c124/model.nusktb",
+      "fighter/kirby/model/copy_mariod_parts/c125/model.nusktb",
+      "fighter/kirby/model/copy_mariod_parts/c126/model.nusktb",
+      "fighter/kirby/model/copy_mariod_parts/c127/model.nusktb"
+    ],
+    "fighter/kirby/model/copy_mariod_parts/c00/model.nusrcmdlb": [
+      "fighter/kirby/model/copy_mariod_parts/c120/model.nusrcmdlb",
+      "fighter/kirby/model/copy_mariod_parts/c121/model.nusrcmdlb",
+      "fighter/kirby/model/copy_mariod_parts/c122/model.nusrcmdlb",
+      "fighter/kirby/model/copy_mariod_parts/c123/model.nusrcmdlb",
+      "fighter/kirby/model/copy_mariod_parts/c124/model.nusrcmdlb",
+      "fighter/kirby/model/copy_mariod_parts/c125/model.nusrcmdlb",
+      "fighter/kirby/model/copy_mariod_parts/c126/model.nusrcmdlb",
+      "fighter/kirby/model/copy_mariod_parts/c127/model.nusrcmdlb"
+    ],
+    "fighter/kirby/model/copy_mariod_parts/c00/model.xmb": [
+      "fighter/kirby/model/copy_mariod_parts/c120/model.xmb",
+      "fighter/kirby/model/copy_mariod_parts/c121/model.xmb",
+      "fighter/kirby/model/copy_mariod_parts/c122/model.xmb",
+      "fighter/kirby/model/copy_mariod_parts/c123/model.xmb",
+      "fighter/kirby/model/copy_mariod_parts/c124/model.xmb",
+      "fighter/kirby/model/copy_mariod_parts/c125/model.xmb",
+      "fighter/kirby/model/copy_mariod_parts/c126/model.xmb",
+      "fighter/kirby/model/copy_mariod_parts/c127/model.xmb"
+    ],
+    "fighter/kirby/model/copy_edge_cap/c00/alp_edge_copy_000_col.nutexb": [
+      "fighter/kirby/model/copy_edge_cap/c120/alp_edge_copy_000_col.nutexb",
+      "fighter/kirby/model/copy_edge_cap/c121/alp_edge_copy_000_col.nutexb",
+      "fighter/kirby/model/copy_edge_cap/c122/alp_edge_copy_000_col.nutexb",
+      "fighter/kirby/model/copy_edge_cap/c123/alp_edge_copy_000_col.nutexb",
+      "fighter/kirby/model/copy_edge_cap/c124/alp_edge_copy_000_col.nutexb",
+      "fighter/kirby/model/copy_edge_cap/c125/alp_edge_copy_000_col.nutexb",
+      "fighter/kirby/model/copy_edge_cap/c126/alp_edge_copy_000_col.nutexb",
+      "fighter/kirby/model/copy_edge_cap/c127/alp_edge_copy_000_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_edge_cap/c00/alp_edge_copy_000_nor.nutexb": [
+      "fighter/kirby/model/copy_edge_cap/c120/alp_edge_copy_000_nor.nutexb",
+      "fighter/kirby/model/copy_edge_cap/c121/alp_edge_copy_000_nor.nutexb",
+      "fighter/kirby/model/copy_edge_cap/c122/alp_edge_copy_000_nor.nutexb",
+      "fighter/kirby/model/copy_edge_cap/c123/alp_edge_copy_000_nor.nutexb",
+      "fighter/kirby/model/copy_edge_cap/c124/alp_edge_copy_000_nor.nutexb",
+      "fighter/kirby/model/copy_edge_cap/c125/alp_edge_copy_000_nor.nutexb",
+      "fighter/kirby/model/copy_edge_cap/c126/alp_edge_copy_000_nor.nutexb",
+      "fighter/kirby/model/copy_edge_cap/c127/alp_edge_copy_000_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_edge_cap/c00/alp_edge_copy_000_prm.nutexb": [
+      "fighter/kirby/model/copy_edge_cap/c120/alp_edge_copy_000_prm.nutexb",
+      "fighter/kirby/model/copy_edge_cap/c121/alp_edge_copy_000_prm.nutexb",
+      "fighter/kirby/model/copy_edge_cap/c122/alp_edge_copy_000_prm.nutexb",
+      "fighter/kirby/model/copy_edge_cap/c123/alp_edge_copy_000_prm.nutexb",
+      "fighter/kirby/model/copy_edge_cap/c124/alp_edge_copy_000_prm.nutexb",
+      "fighter/kirby/model/copy_edge_cap/c125/alp_edge_copy_000_prm.nutexb",
+      "fighter/kirby/model/copy_edge_cap/c126/alp_edge_copy_000_prm.nutexb",
+      "fighter/kirby/model/copy_edge_cap/c127/alp_edge_copy_000_prm.nutexb"
+    ],
+    "fighter/kirby/model/copy_edge_cap/c00/alp_edge_copy_001_col.nutexb": [
+      "fighter/kirby/model/copy_edge_cap/c120/alp_edge_copy_001_col.nutexb",
+      "fighter/kirby/model/copy_edge_cap/c121/alp_edge_copy_001_col.nutexb",
+      "fighter/kirby/model/copy_edge_cap/c122/alp_edge_copy_001_col.nutexb",
+      "fighter/kirby/model/copy_edge_cap/c123/alp_edge_copy_001_col.nutexb",
+      "fighter/kirby/model/copy_edge_cap/c124/alp_edge_copy_001_col.nutexb",
+      "fighter/kirby/model/copy_edge_cap/c125/alp_edge_copy_001_col.nutexb",
+      "fighter/kirby/model/copy_edge_cap/c126/alp_edge_copy_001_col.nutexb",
+      "fighter/kirby/model/copy_edge_cap/c127/alp_edge_copy_001_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_edge_cap/c00/alp_edge_copy_001_nor.nutexb": [
+      "fighter/kirby/model/copy_edge_cap/c120/alp_edge_copy_001_nor.nutexb",
+      "fighter/kirby/model/copy_edge_cap/c121/alp_edge_copy_001_nor.nutexb",
+      "fighter/kirby/model/copy_edge_cap/c122/alp_edge_copy_001_nor.nutexb",
+      "fighter/kirby/model/copy_edge_cap/c123/alp_edge_copy_001_nor.nutexb",
+      "fighter/kirby/model/copy_edge_cap/c124/alp_edge_copy_001_nor.nutexb",
+      "fighter/kirby/model/copy_edge_cap/c125/alp_edge_copy_001_nor.nutexb",
+      "fighter/kirby/model/copy_edge_cap/c126/alp_edge_copy_001_nor.nutexb",
+      "fighter/kirby/model/copy_edge_cap/c127/alp_edge_copy_001_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_edge_cap/c00/alp_edge_copy_001_prm.nutexb": [
+      "fighter/kirby/model/copy_edge_cap/c120/alp_edge_copy_001_prm.nutexb",
+      "fighter/kirby/model/copy_edge_cap/c121/alp_edge_copy_001_prm.nutexb",
+      "fighter/kirby/model/copy_edge_cap/c122/alp_edge_copy_001_prm.nutexb",
+      "fighter/kirby/model/copy_edge_cap/c123/alp_edge_copy_001_prm.nutexb",
+      "fighter/kirby/model/copy_edge_cap/c124/alp_edge_copy_001_prm.nutexb",
+      "fighter/kirby/model/copy_edge_cap/c125/alp_edge_copy_001_prm.nutexb",
+      "fighter/kirby/model/copy_edge_cap/c126/alp_edge_copy_001_prm.nutexb",
+      "fighter/kirby/model/copy_edge_cap/c127/alp_edge_copy_001_prm.nutexb"
+    ],
+    "fighter/kirby/model/copy_edge_cap/c00/dark_model.numatb": [
+      "fighter/kirby/model/copy_edge_cap/c120/dark_model.numatb",
+      "fighter/kirby/model/copy_edge_cap/c121/dark_model.numatb",
+      "fighter/kirby/model/copy_edge_cap/c122/dark_model.numatb",
+      "fighter/kirby/model/copy_edge_cap/c123/dark_model.numatb",
+      "fighter/kirby/model/copy_edge_cap/c124/dark_model.numatb",
+      "fighter/kirby/model/copy_edge_cap/c125/dark_model.numatb",
+      "fighter/kirby/model/copy_edge_cap/c126/dark_model.numatb",
+      "fighter/kirby/model/copy_edge_cap/c127/dark_model.numatb"
+    ],
+    "fighter/kirby/model/copy_edge_cap/c00/light_model.numatb": [
+      "fighter/kirby/model/copy_edge_cap/c120/light_model.numatb",
+      "fighter/kirby/model/copy_edge_cap/c121/light_model.numatb",
+      "fighter/kirby/model/copy_edge_cap/c122/light_model.numatb",
+      "fighter/kirby/model/copy_edge_cap/c123/light_model.numatb",
+      "fighter/kirby/model/copy_edge_cap/c124/light_model.numatb",
+      "fighter/kirby/model/copy_edge_cap/c125/light_model.numatb",
+      "fighter/kirby/model/copy_edge_cap/c126/light_model.numatb",
+      "fighter/kirby/model/copy_edge_cap/c127/light_model.numatb"
+    ],
+    "fighter/kirby/model/copy_edge_cap/c00/metamon_model.numatb": [
+      "fighter/kirby/model/copy_edge_cap/c120/metamon_model.numatb",
+      "fighter/kirby/model/copy_edge_cap/c121/metamon_model.numatb",
+      "fighter/kirby/model/copy_edge_cap/c122/metamon_model.numatb",
+      "fighter/kirby/model/copy_edge_cap/c123/metamon_model.numatb",
+      "fighter/kirby/model/copy_edge_cap/c124/metamon_model.numatb",
+      "fighter/kirby/model/copy_edge_cap/c125/metamon_model.numatb",
+      "fighter/kirby/model/copy_edge_cap/c126/metamon_model.numatb",
+      "fighter/kirby/model/copy_edge_cap/c127/metamon_model.numatb"
+    ],
+    "fighter/kirby/model/copy_edge_cap/c00/model.nuanmb": [
+      "fighter/kirby/model/copy_edge_cap/c120/model.nuanmb",
+      "fighter/kirby/model/copy_edge_cap/c121/model.nuanmb",
+      "fighter/kirby/model/copy_edge_cap/c122/model.nuanmb",
+      "fighter/kirby/model/copy_edge_cap/c123/model.nuanmb",
+      "fighter/kirby/model/copy_edge_cap/c124/model.nuanmb",
+      "fighter/kirby/model/copy_edge_cap/c125/model.nuanmb",
+      "fighter/kirby/model/copy_edge_cap/c126/model.nuanmb",
+      "fighter/kirby/model/copy_edge_cap/c127/model.nuanmb"
+    ],
+    "fighter/kirby/model/copy_edge_cap/c00/model.nuhlpb": [
+      "fighter/kirby/model/copy_edge_cap/c120/model.nuhlpb",
+      "fighter/kirby/model/copy_edge_cap/c121/model.nuhlpb",
+      "fighter/kirby/model/copy_edge_cap/c122/model.nuhlpb",
+      "fighter/kirby/model/copy_edge_cap/c123/model.nuhlpb",
+      "fighter/kirby/model/copy_edge_cap/c124/model.nuhlpb",
+      "fighter/kirby/model/copy_edge_cap/c125/model.nuhlpb",
+      "fighter/kirby/model/copy_edge_cap/c126/model.nuhlpb",
+      "fighter/kirby/model/copy_edge_cap/c127/model.nuhlpb"
+    ],
+    "fighter/kirby/model/copy_edge_cap/c00/model.numatb": [
+      "fighter/kirby/model/copy_edge_cap/c120/model.numatb",
+      "fighter/kirby/model/copy_edge_cap/c121/model.numatb",
+      "fighter/kirby/model/copy_edge_cap/c122/model.numatb",
+      "fighter/kirby/model/copy_edge_cap/c123/model.numatb",
+      "fighter/kirby/model/copy_edge_cap/c124/model.numatb",
+      "fighter/kirby/model/copy_edge_cap/c125/model.numatb",
+      "fighter/kirby/model/copy_edge_cap/c126/model.numatb",
+      "fighter/kirby/model/copy_edge_cap/c127/model.numatb"
+    ],
+    "fighter/kirby/model/copy_edge_cap/c00/model.numdlb": [
+      "fighter/kirby/model/copy_edge_cap/c120/model.numdlb",
+      "fighter/kirby/model/copy_edge_cap/c121/model.numdlb",
+      "fighter/kirby/model/copy_edge_cap/c122/model.numdlb",
+      "fighter/kirby/model/copy_edge_cap/c123/model.numdlb",
+      "fighter/kirby/model/copy_edge_cap/c124/model.numdlb",
+      "fighter/kirby/model/copy_edge_cap/c125/model.numdlb",
+      "fighter/kirby/model/copy_edge_cap/c126/model.numdlb",
+      "fighter/kirby/model/copy_edge_cap/c127/model.numdlb"
+    ],
+    "fighter/kirby/model/copy_edge_cap/c00/model.numshb": [
+      "fighter/kirby/model/copy_edge_cap/c120/model.numshb",
+      "fighter/kirby/model/copy_edge_cap/c121/model.numshb",
+      "fighter/kirby/model/copy_edge_cap/c122/model.numshb",
+      "fighter/kirby/model/copy_edge_cap/c123/model.numshb",
+      "fighter/kirby/model/copy_edge_cap/c124/model.numshb",
+      "fighter/kirby/model/copy_edge_cap/c125/model.numshb",
+      "fighter/kirby/model/copy_edge_cap/c126/model.numshb",
+      "fighter/kirby/model/copy_edge_cap/c127/model.numshb"
+    ],
+    "fighter/kirby/model/copy_edge_cap/c00/model.numshexb": [
+      "fighter/kirby/model/copy_edge_cap/c120/model.numshexb",
+      "fighter/kirby/model/copy_edge_cap/c121/model.numshexb",
+      "fighter/kirby/model/copy_edge_cap/c122/model.numshexb",
+      "fighter/kirby/model/copy_edge_cap/c123/model.numshexb",
+      "fighter/kirby/model/copy_edge_cap/c124/model.numshexb",
+      "fighter/kirby/model/copy_edge_cap/c125/model.numshexb",
+      "fighter/kirby/model/copy_edge_cap/c126/model.numshexb",
+      "fighter/kirby/model/copy_edge_cap/c127/model.numshexb"
+    ],
+    "fighter/kirby/model/copy_edge_cap/c00/model.nusktb": [
+      "fighter/kirby/model/copy_edge_cap/c120/model.nusktb",
+      "fighter/kirby/model/copy_edge_cap/c121/model.nusktb",
+      "fighter/kirby/model/copy_edge_cap/c122/model.nusktb",
+      "fighter/kirby/model/copy_edge_cap/c123/model.nusktb",
+      "fighter/kirby/model/copy_edge_cap/c124/model.nusktb",
+      "fighter/kirby/model/copy_edge_cap/c125/model.nusktb",
+      "fighter/kirby/model/copy_edge_cap/c126/model.nusktb",
+      "fighter/kirby/model/copy_edge_cap/c127/model.nusktb"
+    ],
+    "fighter/kirby/model/copy_edge_cap/c00/model.nusrcmdlb": [
+      "fighter/kirby/model/copy_edge_cap/c120/model.nusrcmdlb",
+      "fighter/kirby/model/copy_edge_cap/c121/model.nusrcmdlb",
+      "fighter/kirby/model/copy_edge_cap/c122/model.nusrcmdlb",
+      "fighter/kirby/model/copy_edge_cap/c123/model.nusrcmdlb",
+      "fighter/kirby/model/copy_edge_cap/c124/model.nusrcmdlb",
+      "fighter/kirby/model/copy_edge_cap/c125/model.nusrcmdlb",
+      "fighter/kirby/model/copy_edge_cap/c126/model.nusrcmdlb",
+      "fighter/kirby/model/copy_edge_cap/c127/model.nusrcmdlb"
+    ],
+    "fighter/kirby/model/copy_edge_cap/c00/model.xmb": [
+      "fighter/kirby/model/copy_edge_cap/c120/model.xmb",
+      "fighter/kirby/model/copy_edge_cap/c121/model.xmb",
+      "fighter/kirby/model/copy_edge_cap/c122/model.xmb",
+      "fighter/kirby/model/copy_edge_cap/c123/model.xmb",
+      "fighter/kirby/model/copy_edge_cap/c124/model.xmb",
+      "fighter/kirby/model/copy_edge_cap/c125/model.xmb",
+      "fighter/kirby/model/copy_edge_cap/c126/model.xmb",
+      "fighter/kirby/model/copy_edge_cap/c127/model.xmb"
+    ],
+    "fighter/kirby/model/copy_donkey_cap/c00/dark_model.numatb": [
+      "fighter/kirby/model/copy_donkey_cap/c120/dark_model.numatb",
+      "fighter/kirby/model/copy_donkey_cap/c121/dark_model.numatb",
+      "fighter/kirby/model/copy_donkey_cap/c122/dark_model.numatb",
+      "fighter/kirby/model/copy_donkey_cap/c123/dark_model.numatb",
+      "fighter/kirby/model/copy_donkey_cap/c124/dark_model.numatb",
+      "fighter/kirby/model/copy_donkey_cap/c125/dark_model.numatb",
+      "fighter/kirby/model/copy_donkey_cap/c126/dark_model.numatb",
+      "fighter/kirby/model/copy_donkey_cap/c127/dark_model.numatb"
+    ],
+    "fighter/kirby/model/copy_donkey_cap/c00/light_model.numatb": [
+      "fighter/kirby/model/copy_donkey_cap/c120/light_model.numatb",
+      "fighter/kirby/model/copy_donkey_cap/c121/light_model.numatb",
+      "fighter/kirby/model/copy_donkey_cap/c122/light_model.numatb",
+      "fighter/kirby/model/copy_donkey_cap/c123/light_model.numatb",
+      "fighter/kirby/model/copy_donkey_cap/c124/light_model.numatb",
+      "fighter/kirby/model/copy_donkey_cap/c125/light_model.numatb",
+      "fighter/kirby/model/copy_donkey_cap/c126/light_model.numatb",
+      "fighter/kirby/model/copy_donkey_cap/c127/light_model.numatb"
+    ],
+    "fighter/kirby/model/copy_donkey_cap/c00/metamon_model.numatb": [
+      "fighter/kirby/model/copy_donkey_cap/c120/metamon_model.numatb",
+      "fighter/kirby/model/copy_donkey_cap/c121/metamon_model.numatb",
+      "fighter/kirby/model/copy_donkey_cap/c122/metamon_model.numatb",
+      "fighter/kirby/model/copy_donkey_cap/c123/metamon_model.numatb",
+      "fighter/kirby/model/copy_donkey_cap/c124/metamon_model.numatb",
+      "fighter/kirby/model/copy_donkey_cap/c125/metamon_model.numatb",
+      "fighter/kirby/model/copy_donkey_cap/c126/metamon_model.numatb",
+      "fighter/kirby/model/copy_donkey_cap/c127/metamon_model.numatb"
+    ],
+    "fighter/kirby/model/copy_donkey_cap/c00/model.nuhlpb": [
+      "fighter/kirby/model/copy_donkey_cap/c120/model.nuhlpb",
+      "fighter/kirby/model/copy_donkey_cap/c121/model.nuhlpb",
+      "fighter/kirby/model/copy_donkey_cap/c122/model.nuhlpb",
+      "fighter/kirby/model/copy_donkey_cap/c123/model.nuhlpb",
+      "fighter/kirby/model/copy_donkey_cap/c124/model.nuhlpb",
+      "fighter/kirby/model/copy_donkey_cap/c125/model.nuhlpb",
+      "fighter/kirby/model/copy_donkey_cap/c126/model.nuhlpb",
+      "fighter/kirby/model/copy_donkey_cap/c127/model.nuhlpb"
+    ],
+    "fighter/kirby/model/copy_donkey_cap/c00/model.numatb": [
+      "fighter/kirby/model/copy_donkey_cap/c120/model.numatb",
+      "fighter/kirby/model/copy_donkey_cap/c121/model.numatb",
+      "fighter/kirby/model/copy_donkey_cap/c122/model.numatb",
+      "fighter/kirby/model/copy_donkey_cap/c123/model.numatb",
+      "fighter/kirby/model/copy_donkey_cap/c124/model.numatb",
+      "fighter/kirby/model/copy_donkey_cap/c125/model.numatb",
+      "fighter/kirby/model/copy_donkey_cap/c126/model.numatb",
+      "fighter/kirby/model/copy_donkey_cap/c127/model.numatb"
+    ],
+    "fighter/kirby/model/copy_donkey_cap/c00/model.numdlb": [
+      "fighter/kirby/model/copy_donkey_cap/c120/model.numdlb",
+      "fighter/kirby/model/copy_donkey_cap/c121/model.numdlb",
+      "fighter/kirby/model/copy_donkey_cap/c122/model.numdlb",
+      "fighter/kirby/model/copy_donkey_cap/c123/model.numdlb",
+      "fighter/kirby/model/copy_donkey_cap/c124/model.numdlb",
+      "fighter/kirby/model/copy_donkey_cap/c125/model.numdlb",
+      "fighter/kirby/model/copy_donkey_cap/c126/model.numdlb",
+      "fighter/kirby/model/copy_donkey_cap/c127/model.numdlb"
+    ],
+    "fighter/kirby/model/copy_donkey_cap/c00/model.numshb": [
+      "fighter/kirby/model/copy_donkey_cap/c120/model.numshb",
+      "fighter/kirby/model/copy_donkey_cap/c121/model.numshb",
+      "fighter/kirby/model/copy_donkey_cap/c122/model.numshb",
+      "fighter/kirby/model/copy_donkey_cap/c123/model.numshb",
+      "fighter/kirby/model/copy_donkey_cap/c124/model.numshb",
+      "fighter/kirby/model/copy_donkey_cap/c125/model.numshb",
+      "fighter/kirby/model/copy_donkey_cap/c126/model.numshb",
+      "fighter/kirby/model/copy_donkey_cap/c127/model.numshb"
+    ],
+    "fighter/kirby/model/copy_donkey_cap/c00/model.numshexb": [
+      "fighter/kirby/model/copy_donkey_cap/c120/model.numshexb",
+      "fighter/kirby/model/copy_donkey_cap/c121/model.numshexb",
+      "fighter/kirby/model/copy_donkey_cap/c122/model.numshexb",
+      "fighter/kirby/model/copy_donkey_cap/c123/model.numshexb",
+      "fighter/kirby/model/copy_donkey_cap/c124/model.numshexb",
+      "fighter/kirby/model/copy_donkey_cap/c125/model.numshexb",
+      "fighter/kirby/model/copy_donkey_cap/c126/model.numshexb",
+      "fighter/kirby/model/copy_donkey_cap/c127/model.numshexb"
+    ],
+    "fighter/kirby/model/copy_donkey_cap/c00/model.nusktb": [
+      "fighter/kirby/model/copy_donkey_cap/c120/model.nusktb",
+      "fighter/kirby/model/copy_donkey_cap/c121/model.nusktb",
+      "fighter/kirby/model/copy_donkey_cap/c122/model.nusktb",
+      "fighter/kirby/model/copy_donkey_cap/c123/model.nusktb",
+      "fighter/kirby/model/copy_donkey_cap/c124/model.nusktb",
+      "fighter/kirby/model/copy_donkey_cap/c125/model.nusktb",
+      "fighter/kirby/model/copy_donkey_cap/c126/model.nusktb",
+      "fighter/kirby/model/copy_donkey_cap/c127/model.nusktb"
+    ],
+    "fighter/kirby/model/copy_donkey_cap/c00/model.nusrcmdlb": [
+      "fighter/kirby/model/copy_donkey_cap/c120/model.nusrcmdlb",
+      "fighter/kirby/model/copy_donkey_cap/c121/model.nusrcmdlb",
+      "fighter/kirby/model/copy_donkey_cap/c122/model.nusrcmdlb",
+      "fighter/kirby/model/copy_donkey_cap/c123/model.nusrcmdlb",
+      "fighter/kirby/model/copy_donkey_cap/c124/model.nusrcmdlb",
+      "fighter/kirby/model/copy_donkey_cap/c125/model.nusrcmdlb",
+      "fighter/kirby/model/copy_donkey_cap/c126/model.nusrcmdlb",
+      "fighter/kirby/model/copy_donkey_cap/c127/model.nusrcmdlb"
+    ],
+    "fighter/kirby/model/copy_donkey_cap/c00/model.xmb": [
+      "fighter/kirby/model/copy_donkey_cap/c120/model.xmb",
+      "fighter/kirby/model/copy_donkey_cap/c121/model.xmb",
+      "fighter/kirby/model/copy_donkey_cap/c122/model.xmb",
+      "fighter/kirby/model/copy_donkey_cap/c123/model.xmb",
+      "fighter/kirby/model/copy_donkey_cap/c124/model.xmb",
+      "fighter/kirby/model/copy_donkey_cap/c125/model.xmb",
+      "fighter/kirby/model/copy_donkey_cap/c126/model.xmb",
+      "fighter/kirby/model/copy_donkey_cap/c127/model.xmb"
+    ],
+    "fighter/kirby/model/copy_donkey_cap/c00/skin_donkey_001_col.nutexb": [
+      "fighter/kirby/model/copy_donkey_cap/c120/skin_donkey_001_col.nutexb",
+      "fighter/kirby/model/copy_donkey_cap/c121/skin_donkey_001_col.nutexb",
+      "fighter/kirby/model/copy_donkey_cap/c122/skin_donkey_001_col.nutexb",
+      "fighter/kirby/model/copy_donkey_cap/c123/skin_donkey_001_col.nutexb",
+      "fighter/kirby/model/copy_donkey_cap/c124/skin_donkey_001_col.nutexb",
+      "fighter/kirby/model/copy_donkey_cap/c125/skin_donkey_001_col.nutexb",
+      "fighter/kirby/model/copy_donkey_cap/c126/skin_donkey_001_col.nutexb",
+      "fighter/kirby/model/copy_donkey_cap/c127/skin_donkey_001_col.nutexb"
+    ],
+    "fighter/kirby/model/copy_donkey_cap/c00/skin_donkey_001_nor.nutexb": [
+      "fighter/kirby/model/copy_donkey_cap/c120/skin_donkey_001_nor.nutexb",
+      "fighter/kirby/model/copy_donkey_cap/c121/skin_donkey_001_nor.nutexb",
+      "fighter/kirby/model/copy_donkey_cap/c122/skin_donkey_001_nor.nutexb",
+      "fighter/kirby/model/copy_donkey_cap/c123/skin_donkey_001_nor.nutexb",
+      "fighter/kirby/model/copy_donkey_cap/c124/skin_donkey_001_nor.nutexb",
+      "fighter/kirby/model/copy_donkey_cap/c125/skin_donkey_001_nor.nutexb",
+      "fighter/kirby/model/copy_donkey_cap/c126/skin_donkey_001_nor.nutexb",
+      "fighter/kirby/model/copy_donkey_cap/c127/skin_donkey_001_nor.nutexb"
+    ],
+    "fighter/kirby/model/copy_donkey_cap/c00/skin_donkey_001_prm.nutexb": [
+      "fighter/kirby/model/copy_donkey_cap/c120/skin_donkey_001_prm.nutexb",
+      "fighter/kirby/model/copy_donkey_cap/c121/skin_donkey_001_prm.nutexb",
+      "fighter/kirby/model/copy_donkey_cap/c122/skin_donkey_001_prm.nutexb",
+      "fighter/kirby/model/copy_donkey_cap/c123/skin_donkey_001_prm.nutexb",
+      "fighter/kirby/model/copy_donkey_cap/c124/skin_donkey_001_prm.nutexb",
+      "fighter/kirby/model/copy_donkey_cap/c125/skin_donkey_001_prm.nutexb",
+      "fighter/kirby/model/copy_donkey_cap/c126/skin_donkey_001_prm.nutexb",
+      "fighter/kirby/model/copy_donkey_cap/c127/skin_donkey_001_prm.nutexb"
+    ]
+  },
+  "new-dir-files": {
+    "fighter/kirby/c00": [
+      "fighter/kirby/model/finalcutter/c00/def_ultrasword_001_col.nutexb",
+      "fighter/kirby/model/finalcutter/c00/def_ultrasword_001_nor.nutexb",
+      "fighter/kirby/model/finalcutter/c00/def_ultrasword_001_prm.nutexb",
+      "fighter/kirby/motion/body/c00/d02specialinput.nuanmb",
+      "fighter/kirby/model/finalcutter/c00/def_parasol_001_col.nutexb",
+      "fighter/kirby/model/finalcutter/c00/def_spear_001_col.nutexb",
+      "fighter/kirby/model/finalcutter/c00/def_speartip_001_col.nutexb",
+      "fighter/kirby/model/finalcutter/c00/def_wandball_001_col.nutexb",
+      "fighter/kirby/model/finalcutter/c00/def_wandhandle_001_col.nutexb",
+      "fighter/kirby/model/finalcutter/c00/def_wheel_001_col.nutexb",
+      "fighter/kirby/motion/finalcutter/c00/d02specialhi5.nuanmb"
+    ],
+    "fighter/kirby/c01": [
+      "fighter/kirby/model/finalcutter/c01/def_ultrasword_001_col.nutexb",
+      "fighter/kirby/model/finalcutter/c01/def_ultrasword_001_nor.nutexb",
+      "fighter/kirby/model/finalcutter/c01/def_ultrasword_001_prm.nutexb",
+      "fighter/kirby/motion/body/c01/d02specialinput.nuanmb",
+      "fighter/kirby/model/finalcutter/c01/def_parasol_001_col.nutexb",
+      "fighter/kirby/model/finalcutter/c01/def_spear_001_col.nutexb",
+      "fighter/kirby/model/finalcutter/c01/def_speartip_001_col.nutexb",
+      "fighter/kirby/model/finalcutter/c01/def_wandball_001_col.nutexb",
+      "fighter/kirby/model/finalcutter/c01/def_wandhandle_001_col.nutexb",
+      "fighter/kirby/model/finalcutter/c01/def_wheel_001_col.nutexb",
+      "fighter/kirby/motion/finalcutter/c01/d02specialhi5.nuanmb"
+    ],
+    "fighter/kirby/c02": [
+      "fighter/kirby/model/finalcutter/c02/def_ultrasword_001_col.nutexb",
+      "fighter/kirby/model/finalcutter/c02/def_ultrasword_001_nor.nutexb",
+      "fighter/kirby/model/finalcutter/c02/def_ultrasword_001_prm.nutexb",
+      "fighter/kirby/motion/body/c02/d02specialinput.nuanmb",
+      "fighter/kirby/model/finalcutter/c02/def_parasol_001_col.nutexb",
+      "fighter/kirby/model/finalcutter/c02/def_spear_001_col.nutexb",
+      "fighter/kirby/model/finalcutter/c02/def_speartip_001_col.nutexb",
+      "fighter/kirby/model/finalcutter/c02/def_wandball_001_col.nutexb",
+      "fighter/kirby/model/finalcutter/c02/def_wandhandle_001_col.nutexb",
+      "fighter/kirby/model/finalcutter/c02/def_wheel_001_col.nutexb",
+      "fighter/kirby/motion/finalcutter/c02/d02specialhi5.nuanmb"
+    ],
+    "fighter/kirby/c03": [
+      "fighter/kirby/model/finalcutter/c03/def_ultrasword_001_col.nutexb",
+      "fighter/kirby/model/finalcutter/c03/def_ultrasword_001_nor.nutexb",
+      "fighter/kirby/model/finalcutter/c03/def_ultrasword_001_prm.nutexb",
+      "fighter/kirby/motion/body/c03/d02specialinput.nuanmb",
+      "fighter/kirby/model/finalcutter/c03/def_parasol_001_col.nutexb",
+      "fighter/kirby/model/finalcutter/c03/def_spear_001_col.nutexb",
+      "fighter/kirby/model/finalcutter/c03/def_speartip_001_col.nutexb",
+      "fighter/kirby/model/finalcutter/c03/def_wandball_001_col.nutexb",
+      "fighter/kirby/model/finalcutter/c03/def_wandhandle_001_col.nutexb",
+      "fighter/kirby/model/finalcutter/c03/def_wheel_001_col.nutexb",
+      "fighter/kirby/motion/finalcutter/c03/d02specialhi5.nuanmb"
+    ],
+    "fighter/kirby/c04": [
+      "fighter/kirby/model/finalcutter/c04/def_ultrasword_001_col.nutexb",
+      "fighter/kirby/model/finalcutter/c04/def_ultrasword_001_nor.nutexb",
+      "fighter/kirby/model/finalcutter/c04/def_ultrasword_001_prm.nutexb",
+      "fighter/kirby/motion/body/c04/d02specialinput.nuanmb",
+      "fighter/kirby/model/finalcutter/c04/def_parasol_001_col.nutexb",
+      "fighter/kirby/model/finalcutter/c04/def_spear_001_col.nutexb",
+      "fighter/kirby/model/finalcutter/c04/def_speartip_001_col.nutexb",
+      "fighter/kirby/model/finalcutter/c04/def_wandball_001_col.nutexb",
+      "fighter/kirby/model/finalcutter/c04/def_wandhandle_001_col.nutexb",
+      "fighter/kirby/model/finalcutter/c04/def_wheel_001_col.nutexb",
+      "fighter/kirby/motion/finalcutter/c04/d02specialhi5.nuanmb"
+    ],
+    "fighter/kirby/c05": [
+      "fighter/kirby/model/finalcutter/c05/def_ultrasword_001_col.nutexb",
+      "fighter/kirby/model/finalcutter/c05/def_ultrasword_001_nor.nutexb",
+      "fighter/kirby/model/finalcutter/c05/def_ultrasword_001_prm.nutexb",
+      "fighter/kirby/motion/body/c05/d02specialinput.nuanmb",
+      "fighter/kirby/model/finalcutter/c05/def_parasol_001_col.nutexb",
+      "fighter/kirby/model/finalcutter/c05/def_spear_001_col.nutexb",
+      "fighter/kirby/model/finalcutter/c05/def_speartip_001_col.nutexb",
+      "fighter/kirby/model/finalcutter/c05/def_wandball_001_col.nutexb",
+      "fighter/kirby/model/finalcutter/c05/def_wandhandle_001_col.nutexb",
+      "fighter/kirby/model/finalcutter/c05/def_wheel_001_col.nutexb",
+      "fighter/kirby/motion/finalcutter/c05/d02specialhi5.nuanmb"
+    ],
+    "fighter/kirby/c06": [
+      "fighter/kirby/model/finalcutter/c06/def_ultrasword_001_col.nutexb",
+      "fighter/kirby/model/finalcutter/c06/def_ultrasword_001_nor.nutexb",
+      "fighter/kirby/model/finalcutter/c06/def_ultrasword_001_prm.nutexb",
+      "fighter/kirby/motion/body/c06/d02specialinput.nuanmb",
+      "fighter/kirby/model/finalcutter/c06/def_parasol_001_col.nutexb",
+      "fighter/kirby/model/finalcutter/c06/def_spear_001_col.nutexb",
+      "fighter/kirby/model/finalcutter/c06/def_speartip_001_col.nutexb",
+      "fighter/kirby/model/finalcutter/c06/def_wandball_001_col.nutexb",
+      "fighter/kirby/model/finalcutter/c06/def_wandhandle_001_col.nutexb",
+      "fighter/kirby/model/finalcutter/c06/def_wheel_001_col.nutexb",
+      "fighter/kirby/motion/finalcutter/c06/d02specialhi5.nuanmb"
+    ],
+    "fighter/kirby/c07": [
+      "fighter/kirby/model/finalcutter/c07/def_ultrasword_001_col.nutexb",
+      "fighter/kirby/model/finalcutter/c07/def_ultrasword_001_nor.nutexb",
+      "fighter/kirby/model/finalcutter/c07/def_ultrasword_001_prm.nutexb",
+      "fighter/kirby/motion/body/c07/d02specialinput.nuanmb",
+      "fighter/kirby/model/finalcutter/c07/def_parasol_001_col.nutexb",
+      "fighter/kirby/model/finalcutter/c07/def_spear_001_col.nutexb",
+      "fighter/kirby/model/finalcutter/c07/def_speartip_001_col.nutexb",
+      "fighter/kirby/model/finalcutter/c07/def_wandball_001_col.nutexb",
+      "fighter/kirby/model/finalcutter/c07/def_wandhandle_001_col.nutexb",
+      "fighter/kirby/model/finalcutter/c07/def_wheel_001_col.nutexb",
+      "fighter/kirby/motion/finalcutter/c07/d02specialhi5.nuanmb"
+    ]
+  },
+  "share-to-added": {
+    "fighter/kirby/motion/copy_pacman_fitkirby/c00/flip.prc": [
+      "fighter/kirby/motion/copy_pacman_fitkirby/c120/flip.prc",
+      "fighter/kirby/motion/copy_pacman_fitkirby/c121/flip.prc",
+      "fighter/kirby/motion/copy_pacman_fitkirby/c122/flip.prc",
+      "fighter/kirby/motion/copy_pacman_fitkirby/c123/flip.prc",
+      "fighter/kirby/motion/copy_pacman_fitkirby/c124/flip.prc",
+      "fighter/kirby/motion/copy_pacman_fitkirby/c125/flip.prc",
+      "fighter/kirby/motion/copy_pacman_fitkirby/c126/flip.prc",
+      "fighter/kirby/motion/copy_pacman_fitkirby/c127/flip.prc"
+    ],
+    "fighter/kirby/motion/copy_pacman_fitkirby/c00/update.prc": [
+      "fighter/kirby/motion/copy_pacman_fitkirby/c120/update.prc",
+      "fighter/kirby/motion/copy_pacman_fitkirby/c121/update.prc",
+      "fighter/kirby/motion/copy_pacman_fitkirby/c122/update.prc",
+      "fighter/kirby/motion/copy_pacman_fitkirby/c123/update.prc",
+      "fighter/kirby/motion/copy_pacman_fitkirby/c124/update.prc",
+      "fighter/kirby/motion/copy_pacman_fitkirby/c125/update.prc",
+      "fighter/kirby/motion/copy_pacman_fitkirby/c126/update.prc",
+      "fighter/kirby/motion/copy_pacman_fitkirby/c127/update.prc"
+    ],
+    "fighter/kirby/motion/copy_murabito_cap/c00/flip.prc": [
+      "fighter/kirby/motion/copy_murabito_cap/c120/flip.prc",
+      "fighter/kirby/motion/copy_murabito_cap/c121/flip.prc",
+      "fighter/kirby/motion/copy_murabito_cap/c122/flip.prc",
+      "fighter/kirby/motion/copy_murabito_cap/c123/flip.prc",
+      "fighter/kirby/motion/copy_murabito_cap/c124/flip.prc",
+      "fighter/kirby/motion/copy_murabito_cap/c125/flip.prc",
+      "fighter/kirby/motion/copy_murabito_cap/c126/flip.prc",
+      "fighter/kirby/motion/copy_murabito_cap/c127/flip.prc"
+    ],
+    "fighter/kirby/motion/copy_murabito_cap/c00/update.prc": [
+      "fighter/kirby/motion/copy_murabito_cap/c120/update.prc",
+      "fighter/kirby/motion/copy_murabito_cap/c121/update.prc",
+      "fighter/kirby/motion/copy_murabito_cap/c122/update.prc",
+      "fighter/kirby/motion/copy_murabito_cap/c123/update.prc",
+      "fighter/kirby/motion/copy_murabito_cap/c124/update.prc",
+      "fighter/kirby/motion/copy_murabito_cap/c125/update.prc",
+      "fighter/kirby/motion/copy_murabito_cap/c126/update.prc",
+      "fighter/kirby/motion/copy_murabito_cap/c127/update.prc"
+    ],
+    "fighter/kirby/motion/copy_pikmin_fitkirby/c00/flip.prc": [
+      "fighter/kirby/motion/copy_pikmin_fitkirby/c120/flip.prc",
+      "fighter/kirby/motion/copy_pikmin_fitkirby/c121/flip.prc",
+      "fighter/kirby/motion/copy_pikmin_fitkirby/c122/flip.prc",
+      "fighter/kirby/motion/copy_pikmin_fitkirby/c123/flip.prc",
+      "fighter/kirby/motion/copy_pikmin_fitkirby/c124/flip.prc",
+      "fighter/kirby/motion/copy_pikmin_fitkirby/c125/flip.prc",
+      "fighter/kirby/motion/copy_pikmin_fitkirby/c126/flip.prc",
+      "fighter/kirby/motion/copy_pikmin_fitkirby/c127/flip.prc"
+    ],
+    "fighter/kirby/motion/copy_pikmin_fitkirby/c00/motion_list.bin": [
+      "fighter/kirby/motion/copy_pikmin_fitkirby/c120/motion_list.bin",
+      "fighter/kirby/motion/copy_pikmin_fitkirby/c121/motion_list.bin",
+      "fighter/kirby/motion/copy_pikmin_fitkirby/c122/motion_list.bin",
+      "fighter/kirby/motion/copy_pikmin_fitkirby/c123/motion_list.bin",
+      "fighter/kirby/motion/copy_pikmin_fitkirby/c124/motion_list.bin",
+      "fighter/kirby/motion/copy_pikmin_fitkirby/c125/motion_list.bin",
+      "fighter/kirby/motion/copy_pikmin_fitkirby/c126/motion_list.bin",
+      "fighter/kirby/motion/copy_pikmin_fitkirby/c127/motion_list.bin"
+    ],
+    "fighter/kirby/motion/copy_pikmin_fitkirby/c00/swing.prc": [
+      "fighter/kirby/motion/copy_pikmin_fitkirby/c120/swing.prc",
+      "fighter/kirby/motion/copy_pikmin_fitkirby/c121/swing.prc",
+      "fighter/kirby/motion/copy_pikmin_fitkirby/c122/swing.prc",
+      "fighter/kirby/motion/copy_pikmin_fitkirby/c123/swing.prc",
+      "fighter/kirby/motion/copy_pikmin_fitkirby/c124/swing.prc",
+      "fighter/kirby/motion/copy_pikmin_fitkirby/c125/swing.prc",
+      "fighter/kirby/motion/copy_pikmin_fitkirby/c126/swing.prc",
+      "fighter/kirby/motion/copy_pikmin_fitkirby/c127/swing.prc"
+    ],
+    "fighter/kirby/motion/copy_pikmin_fitkirby/c00/update.prc": [
+      "fighter/kirby/motion/copy_pikmin_fitkirby/c120/update.prc",
+      "fighter/kirby/motion/copy_pikmin_fitkirby/c121/update.prc",
+      "fighter/kirby/motion/copy_pikmin_fitkirby/c122/update.prc",
+      "fighter/kirby/motion/copy_pikmin_fitkirby/c123/update.prc",
+      "fighter/kirby/motion/copy_pikmin_fitkirby/c124/update.prc",
+      "fighter/kirby/motion/copy_pikmin_fitkirby/c125/update.prc",
+      "fighter/kirby/motion/copy_pikmin_fitkirby/c126/update.prc",
+      "fighter/kirby/motion/copy_pikmin_fitkirby/c127/update.prc"
+    ],
+    "fighter/kirby/motion/copy_pikmin_head/c00/update.prc": [
+      "fighter/kirby/motion/copy_pikmin_head/c120/update.prc",
+      "fighter/kirby/motion/copy_pikmin_head/c121/update.prc",
+      "fighter/kirby/motion/copy_pikmin_head/c122/update.prc",
+      "fighter/kirby/motion/copy_pikmin_head/c123/update.prc",
+      "fighter/kirby/motion/copy_pikmin_head/c124/update.prc",
+      "fighter/kirby/motion/copy_pikmin_head/c125/update.prc",
+      "fighter/kirby/motion/copy_pikmin_head/c126/update.prc",
+      "fighter/kirby/motion/copy_pikmin_head/c127/update.prc"
+    ],
+    "fighter/kirby/motion/copy_lucas_cap/c00/flip.prc": [
+      "fighter/kirby/motion/copy_lucas_cap/c120/flip.prc",
+      "fighter/kirby/motion/copy_lucas_cap/c121/flip.prc",
+      "fighter/kirby/motion/copy_lucas_cap/c122/flip.prc",
+      "fighter/kirby/motion/copy_lucas_cap/c123/flip.prc",
+      "fighter/kirby/motion/copy_lucas_cap/c124/flip.prc",
+      "fighter/kirby/motion/copy_lucas_cap/c125/flip.prc",
+      "fighter/kirby/motion/copy_lucas_cap/c126/flip.prc",
+      "fighter/kirby/motion/copy_lucas_cap/c127/flip.prc"
+    ],
+    "fighter/kirby/motion/copy_lucas_cap/c00/update.prc": [
+      "fighter/kirby/motion/copy_lucas_cap/c120/update.prc",
+      "fighter/kirby/motion/copy_lucas_cap/c121/update.prc",
+      "fighter/kirby/motion/copy_lucas_cap/c122/update.prc",
+      "fighter/kirby/motion/copy_lucas_cap/c123/update.prc",
+      "fighter/kirby/motion/copy_lucas_cap/c124/update.prc",
+      "fighter/kirby/motion/copy_lucas_cap/c125/update.prc",
+      "fighter/kirby/motion/copy_lucas_cap/c126/update.prc",
+      "fighter/kirby/motion/copy_lucas_cap/c127/update.prc"
+    ],
+    "fighter/kirby/motion/copy_mariod_parts/c00/flip.prc": [
+      "fighter/kirby/motion/copy_mariod_parts/c120/flip.prc",
+      "fighter/kirby/motion/copy_mariod_parts/c121/flip.prc",
+      "fighter/kirby/motion/copy_mariod_parts/c122/flip.prc",
+      "fighter/kirby/motion/copy_mariod_parts/c123/flip.prc",
+      "fighter/kirby/motion/copy_mariod_parts/c124/flip.prc",
+      "fighter/kirby/motion/copy_mariod_parts/c125/flip.prc",
+      "fighter/kirby/motion/copy_mariod_parts/c126/flip.prc",
+      "fighter/kirby/motion/copy_mariod_parts/c127/flip.prc"
+    ],
+    "fighter/kirby/motion/copy_mariod_parts/c00/update.prc": [
+      "fighter/kirby/motion/copy_mariod_parts/c120/update.prc",
+      "fighter/kirby/motion/copy_mariod_parts/c121/update.prc",
+      "fighter/kirby/motion/copy_mariod_parts/c122/update.prc",
+      "fighter/kirby/motion/copy_mariod_parts/c123/update.prc",
+      "fighter/kirby/motion/copy_mariod_parts/c124/update.prc",
+      "fighter/kirby/motion/copy_mariod_parts/c125/update.prc",
+      "fighter/kirby/motion/copy_mariod_parts/c126/update.prc",
+      "fighter/kirby/motion/copy_mariod_parts/c127/update.prc"
+    ],
+    "fighter/kirby/motion/copy_edge_cap/c00/d00specialairn1.nuanmb": [
+      "fighter/kirby/motion/copy_edge_cap/c120/d00specialairn1.nuanmb",
+      "fighter/kirby/motion/copy_edge_cap/c121/d00specialairn1.nuanmb",
+      "fighter/kirby/motion/copy_edge_cap/c122/d00specialairn1.nuanmb",
+      "fighter/kirby/motion/copy_edge_cap/c123/d00specialairn1.nuanmb",
+      "fighter/kirby/motion/copy_edge_cap/c124/d00specialairn1.nuanmb",
+      "fighter/kirby/motion/copy_edge_cap/c126/d00specialairn1.nuanmb",
+      "fighter/kirby/motion/copy_edge_cap/c127/d00specialairn1.nuanmb"
+    ],
+    "fighter/kirby/motion/copy_edge_cap/c00/d00specialairn2.nuanmb": [
+      "fighter/kirby/motion/copy_edge_cap/c120/d00specialairn2.nuanmb",
+      "fighter/kirby/motion/copy_edge_cap/c121/d00specialairn2.nuanmb",
+      "fighter/kirby/motion/copy_edge_cap/c122/d00specialairn2.nuanmb",
+      "fighter/kirby/motion/copy_edge_cap/c123/d00specialairn2.nuanmb",
+      "fighter/kirby/motion/copy_edge_cap/c124/d00specialairn2.nuanmb",
+      "fighter/kirby/motion/copy_edge_cap/c126/d00specialairn2.nuanmb",
+      "fighter/kirby/motion/copy_edge_cap/c127/d00specialairn2.nuanmb"
+    ],
+    "fighter/kirby/motion/copy_edge_cap/c00/d00specialairncancel.nuanmb": [
+      "fighter/kirby/motion/copy_edge_cap/c120/d00specialairncancel.nuanmb",
+      "fighter/kirby/motion/copy_edge_cap/c121/d00specialairncancel.nuanmb",
+      "fighter/kirby/motion/copy_edge_cap/c122/d00specialairncancel.nuanmb",
+      "fighter/kirby/motion/copy_edge_cap/c123/d00specialairncancel.nuanmb",
+      "fighter/kirby/motion/copy_edge_cap/c124/d00specialairncancel.nuanmb",
+      "fighter/kirby/motion/copy_edge_cap/c126/d00specialairncancel.nuanmb",
+      "fighter/kirby/motion/copy_edge_cap/c127/d00specialairncancel.nuanmb"
+    ],
+    "fighter/kirby/motion/copy_edge_cap/c00/d00specialairnstart.nuanmb": [
+      "fighter/kirby/motion/copy_edge_cap/c120/d00specialairnstart.nuanmb",
+      "fighter/kirby/motion/copy_edge_cap/c121/d00specialairnstart.nuanmb",
+      "fighter/kirby/motion/copy_edge_cap/c122/d00specialairnstart.nuanmb",
+      "fighter/kirby/motion/copy_edge_cap/c123/d00specialairnstart.nuanmb",
+      "fighter/kirby/motion/copy_edge_cap/c124/d00specialairnstart.nuanmb",
+      "fighter/kirby/motion/copy_edge_cap/c126/d00specialairnstart.nuanmb",
+      "fighter/kirby/motion/copy_edge_cap/c127/d00specialairnstart.nuanmb"
+    ],
+    "fighter/kirby/motion/copy_edge_cap/c00/d00specialn1.nuanmb": [
+      "fighter/kirby/motion/copy_edge_cap/c120/d00specialn1.nuanmb",
+      "fighter/kirby/motion/copy_edge_cap/c121/d00specialn1.nuanmb",
+      "fighter/kirby/motion/copy_edge_cap/c122/d00specialn1.nuanmb",
+      "fighter/kirby/motion/copy_edge_cap/c123/d00specialn1.nuanmb",
+      "fighter/kirby/motion/copy_edge_cap/c124/d00specialn1.nuanmb",
+      "fighter/kirby/motion/copy_edge_cap/c126/d00specialn1.nuanmb",
+      "fighter/kirby/motion/copy_edge_cap/c127/d00specialn1.nuanmb"
+    ],
+    "fighter/kirby/motion/copy_edge_cap/c00/d00specialn2.nuanmb": [
+      "fighter/kirby/motion/copy_edge_cap/c120/d00specialn2.nuanmb",
+      "fighter/kirby/motion/copy_edge_cap/c121/d00specialn2.nuanmb",
+      "fighter/kirby/motion/copy_edge_cap/c122/d00specialn2.nuanmb",
+      "fighter/kirby/motion/copy_edge_cap/c123/d00specialn2.nuanmb",
+      "fighter/kirby/motion/copy_edge_cap/c124/d00specialn2.nuanmb",
+      "fighter/kirby/motion/copy_edge_cap/c126/d00specialn2.nuanmb",
+      "fighter/kirby/motion/copy_edge_cap/c127/d00specialn2.nuanmb"
+    ],
+    "fighter/kirby/motion/copy_edge_cap/c00/d00specialncancel.nuanmb": [
+      "fighter/kirby/motion/copy_edge_cap/c120/d00specialncancel.nuanmb",
+      "fighter/kirby/motion/copy_edge_cap/c121/d00specialncancel.nuanmb",
+      "fighter/kirby/motion/copy_edge_cap/c122/d00specialncancel.nuanmb",
+      "fighter/kirby/motion/copy_edge_cap/c123/d00specialncancel.nuanmb",
+      "fighter/kirby/motion/copy_edge_cap/c124/d00specialncancel.nuanmb",
+      "fighter/kirby/motion/copy_edge_cap/c126/d00specialncancel.nuanmb",
+      "fighter/kirby/motion/copy_edge_cap/c127/d00specialncancel.nuanmb"
+    ],
+    "fighter/kirby/motion/copy_edge_cap/c00/d00specialnstart.nuanmb": [
+      "fighter/kirby/motion/copy_edge_cap/c120/d00specialnstart.nuanmb",
+      "fighter/kirby/motion/copy_edge_cap/c121/d00specialnstart.nuanmb",
+      "fighter/kirby/motion/copy_edge_cap/c122/d00specialnstart.nuanmb",
+      "fighter/kirby/motion/copy_edge_cap/c123/d00specialnstart.nuanmb",
+      "fighter/kirby/motion/copy_edge_cap/c124/d00specialnstart.nuanmb",
+      "fighter/kirby/motion/copy_edge_cap/c126/d00specialnstart.nuanmb",
+      "fighter/kirby/motion/copy_edge_cap/c127/d00specialnstart.nuanmb"
+    ],
+    "fighter/kirby/motion/copy_edge_cap/c00/flip.prc": [
+      "fighter/kirby/motion/copy_edge_cap/c120/flip.prc",
+      "fighter/kirby/motion/copy_edge_cap/c121/flip.prc",
+      "fighter/kirby/motion/copy_edge_cap/c122/flip.prc",
+      "fighter/kirby/motion/copy_edge_cap/c123/flip.prc",
+      "fighter/kirby/motion/copy_edge_cap/c124/flip.prc",
+      "fighter/kirby/motion/copy_edge_cap/c126/flip.prc",
+      "fighter/kirby/motion/copy_edge_cap/c127/flip.prc"
+    ],
+    "fighter/kirby/motion/copy_edge_cap/c00/motion_list.bin": [
+      "fighter/kirby/motion/copy_edge_cap/c120/motion_list.bin",
+      "fighter/kirby/motion/copy_edge_cap/c121/motion_list.bin",
+      "fighter/kirby/motion/copy_edge_cap/c122/motion_list.bin",
+      "fighter/kirby/motion/copy_edge_cap/c123/motion_list.bin",
+      "fighter/kirby/motion/copy_edge_cap/c124/motion_list.bin",
+      "fighter/kirby/motion/copy_edge_cap/c126/motion_list.bin",
+      "fighter/kirby/motion/copy_edge_cap/c127/motion_list.bin"
+    ],
+    "fighter/kirby/motion/copy_edge_cap/c00/swing.prc": [
+      "fighter/kirby/motion/copy_edge_cap/c120/swing.prc",
+      "fighter/kirby/motion/copy_edge_cap/c121/swing.prc",
+      "fighter/kirby/motion/copy_edge_cap/c122/swing.prc",
+      "fighter/kirby/motion/copy_edge_cap/c123/swing.prc",
+      "fighter/kirby/motion/copy_edge_cap/c124/swing.prc",
+      "fighter/kirby/motion/copy_edge_cap/c126/swing.prc",
+      "fighter/kirby/motion/copy_edge_cap/c127/swing.prc"
+    ],
+    "fighter/kirby/motion/copy_edge_cap/c00/swingblend.prc": [
+      "fighter/kirby/motion/copy_edge_cap/c120/swingblend.prc",
+      "fighter/kirby/motion/copy_edge_cap/c121/swingblend.prc",
+      "fighter/kirby/motion/copy_edge_cap/c122/swingblend.prc",
+      "fighter/kirby/motion/copy_edge_cap/c123/swingblend.prc",
+      "fighter/kirby/motion/copy_edge_cap/c124/swingblend.prc",
+      "fighter/kirby/motion/copy_edge_cap/c126/swingblend.prc",
+      "fighter/kirby/motion/copy_edge_cap/c127/swingblend.prc"
+    ],
+    "fighter/kirby/motion/copy_edge_cap/c00/update.prc": [
+      "fighter/kirby/motion/copy_edge_cap/c120/update.prc",
+      "fighter/kirby/motion/copy_edge_cap/c121/update.prc",
+      "fighter/kirby/motion/copy_edge_cap/c122/update.prc",
+      "fighter/kirby/motion/copy_edge_cap/c123/update.prc",
+      "fighter/kirby/motion/copy_edge_cap/c124/update.prc",
+      "fighter/kirby/motion/copy_edge_cap/c126/update.prc",
+      "fighter/kirby/motion/copy_edge_cap/c127/update.prc"
+    ]
+  }
+}
