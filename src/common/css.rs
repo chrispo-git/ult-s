@@ -182,10 +182,18 @@ pub fn show_mod_settings() {
             std::fs::create_dir(path);
         }
     }
+    let mechanics_already = Path::new("sd:/ultimate/ult-s/sys-flags/mechanics.flag").is_file(); 
+    let hold_already = Path::new("sd:/ultimate/ult-s/sys-flags/hold.flag").is_file(); 
+    let sh_already = Path::new("sd:/ultimate/ult-s/sys-flags/sh.flag").is_file();
 
+    let config_js = format!(
+        "var mechanics_already = {}; var hold_already = {}; var sh_already = {};",
+        mechanics_already, hold_already, sh_already
+    );
     let response = skyline_web::Webpage::new()
         .htdocs_dir("contents")
         .file("index.html", MENU_HTML.as_slice())
+        .file("config.js", config_js.as_bytes())
         .file("menu.css", MENU_CSS.as_slice())
         .file("menu.js", MENU_JS.as_slice())
         .file("common.js", COMMON_JS.as_slice())
