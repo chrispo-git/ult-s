@@ -1,0 +1,40 @@
+{
+  "new-dir-infos": [],
+  "new-dir-infos-base": {},
+  "share-to-vanilla": {},
+  "new-dir-files": {
+    "fighter/inkling/c00": [
+      "fighter/inkling/motion/body/c00/d02specialhidown.nuanmb",
+      "fighter/inkling/motion/squid/c00/d02specialhidown.nuanmb"
+    ],
+    "fighter/inkling/c01": [
+      "fighter/inkling/motion/body/c01/d02specialhidown.nuanmb",
+      "fighter/inkling/motion/squid/c01/d02specialhidown.nuanmb"
+    ],
+    "fighter/inkling/c02": [
+      "fighter/inkling/motion/body/c02/d02specialhidown.nuanmb",
+      "fighter/inkling/motion/squid/c02/d02specialhidown.nuanmb"
+    ],
+    "fighter/inkling/c03": [
+      "fighter/inkling/motion/body/c03/d02specialhidown.nuanmb",
+      "fighter/inkling/motion/squid/c03/d02specialhidown.nuanmb"
+    ],
+    "fighter/inkling/c04": [
+      "fighter/inkling/motion/body/c04/d02specialhidown.nuanmb",
+      "fighter/inkling/motion/squid/c04/d02specialhidown.nuanmb"
+    ],
+    "fighter/inkling/c05": [
+      "fighter/inkling/motion/body/c05/d02specialhidown.nuanmb",
+      "fighter/inkling/motion/squid/c05/d02specialhidown.nuanmb"
+    ],
+    "fighter/inkling/c06": [
+      "fighter/inkling/motion/body/c06/d02specialhidown.nuanmb",
+      "fighter/inkling/motion/squid/c06/d02specialhidown.nuanmb"
+    ],
+    "fighter/inkling/c07": [
+      "fighter/inkling/motion/body/c07/d02specialhidown.nuanmb",
+      "fighter/inkling/motion/squid/c07/d02specialhidown.nuanmb"
+    ]
+  },
+  "share-to-added": {}
+}

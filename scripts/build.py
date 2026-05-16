@@ -4,6 +4,8 @@ import sys
 from zipfile import ZipFile
 import subprocess
 
+from merge_config import merge_configs
+
 def log(msg):
     print(msg, flush=True)
 
@@ -106,6 +108,7 @@ if os.path.exists(r'target'):
             if os.path.exists(r'romfs'):
                 log("[build] Starting romfs copy")
                 copytree(r'romfs', r'releases/ultimate/mods/Ultimate S Arcropolis')
+                merge_configs(r'releases/ultimate/mods/Ultimate S Arcropolis')
                 log("[build] Copying from romfs finished, now zipping")
             else:
                 log("[build] ERROR: No romfs folder! Please check your install")

@@ -1,0 +1,48 @@
+{
+  "new-dir-infos": [],
+  "new-dir-infos-base": {},
+  "share-to-vanilla": {},
+  "new-dir-files": {
+    "fighter/chrom/c00": [
+      "fighter/chrom/motion/body/c00/c00attack12.nuanmb",
+      "fighter/chrom/motion/body/c00/c01attacks3hi.nuanmb",
+      "fighter/chrom/motion/body/c00/c01attacks3lw.nuanmb"
+    ],
+    "fighter/chrom/c01": [
+      "fighter/chrom/motion/body/c01/c00attack12.nuanmb",
+      "fighter/chrom/motion/body/c01/c01attacks3hi.nuanmb",
+      "fighter/chrom/motion/body/c01/c01attacks3lw.nuanmb"
+    ],
+    "fighter/chrom/c02": [
+      "fighter/chrom/motion/body/c02/c00attack12.nuanmb",
+      "fighter/chrom/motion/body/c02/c01attacks3hi.nuanmb",
+      "fighter/chrom/motion/body/c02/c01attacks3lw.nuanmb"
+    ],
+    "fighter/chrom/c03": [
+      "fighter/chrom/motion/body/c03/c00attack12.nuanmb",
+      "fighter/chrom/motion/body/c03/c01attacks3hi.nuanmb",
+      "fighter/chrom/motion/body/c03/c01attacks3lw.nuanmb"
+    ],
+    "fighter/chrom/c04": [
+      "fighter/chrom/motion/body/c04/c00attack12.nuanmb",
+      "fighter/chrom/motion/body/c04/c01attacks3hi.nuanmb",
+      "fighter/chrom/motion/body/c04/c01attacks3lw.nuanmb"
+    ],
+    "fighter/chrom/c05": [
+      "fighter/chrom/motion/body/c05/c00attack12.nuanmb",
+      "fighter/chrom/motion/body/c05/c01attacks3hi.nuanmb",
+      "fighter/chrom/motion/body/c05/c01attacks3lw.nuanmb"
+    ],
+    "fighter/chrom/c06": [
+      "fighter/chrom/motion/body/c06/c00attack12.nuanmb",
+      "fighter/chrom/motion/body/c06/c01attacks3hi.nuanmb",
+      "fighter/chrom/motion/body/c06/c01attacks3lw.nuanmb"
+    ],
+    "fighter/chrom/c07": [
+      "fighter/chrom/motion/body/c07/c00attack12.nuanmb",
+      "fighter/chrom/motion/body/c07/c01attacks3hi.nuanmb",
+      "fighter/chrom/motion/body/c07/c01attacks3lw.nuanmb"
+    ]
+  },
+  "share-to-added": {}
+}

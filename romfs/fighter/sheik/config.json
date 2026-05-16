@@ -1,0 +1,32 @@
+{
+  "new-dir-infos": [],
+  "new-dir-infos-base": {},
+  "share-to-vanilla": {},
+  "new-dir-files": {
+    "fighter/sheik/c00": [
+      "fighter/sheik/motion/body/c00/d00specialinput.nuanmb"
+    ],
+    "fighter/sheik/c01": [
+      "fighter/sheik/motion/body/c01/d00specialinput.nuanmb"
+    ],
+    "fighter/sheik/c02": [
+      "fighter/sheik/motion/body/c02/d00specialinput.nuanmb"
+    ],
+    "fighter/sheik/c03": [
+      "fighter/sheik/motion/body/c03/d00specialinput.nuanmb"
+    ],
+    "fighter/sheik/c04": [
+      "fighter/sheik/motion/body/c04/d00specialinput.nuanmb"
+    ],
+    "fighter/sheik/c05": [
+      "fighter/sheik/motion/body/c05/d00specialinput.nuanmb"
+    ],
+    "fighter/sheik/c06": [
+      "fighter/sheik/motion/body/c06/d00specialinput.nuanmb"
+    ],
+    "fighter/sheik/c07": [
+      "fighter/sheik/motion/body/c07/d00specialinput.nuanmb"
+    ]
+  },
+  "share-to-added": {}
+}

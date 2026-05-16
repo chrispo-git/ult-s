@@ -1,0 +1,28 @@
+{
+  "new-dir-infos": [],
+  "new-dir-infos-base": {},
+  "share-to-vanilla": {},
+  "new-dir-files": {},
+  "share-to-added": {
+    "fighter/kirby/motion/copy_donkey_fitkirby/c120/flip.prc": [
+      "fighter/kirby/motion/copy_donkey_fitkirby/c120/flip.prc",
+      "fighter/kirby/motion/copy_donkey_fitkirby/c121/flip.prc",
+      "fighter/kirby/motion/copy_donkey_fitkirby/c122/flip.prc",
+      "fighter/kirby/motion/copy_donkey_fitkirby/c123/flip.prc",
+      "fighter/kirby/motion/copy_donkey_fitkirby/c124/flip.prc",
+      "fighter/kirby/motion/copy_donkey_fitkirby/c125/flip.prc",
+      "fighter/kirby/motion/copy_donkey_fitkirby/c126/flip.prc",
+      "fighter/kirby/motion/copy_donkey_fitkirby/c127/flip.prc"
+    ],
+    "fighter/kirby/motion/copy_donkey_fitkirby/c120/update.prc": [
+      "fighter/kirby/motion/copy_donkey_fitkirby/c120/update.prc",
+      "fighter/kirby/motion/copy_donkey_fitkirby/c121/update.prc",
+      "fighter/kirby/motion/copy_donkey_fitkirby/c122/update.prc",
+      "fighter/kirby/motion/copy_donkey_fitkirby/c123/update.prc",
+      "fighter/kirby/motion/copy_donkey_fitkirby/c124/update.prc",
+      "fighter/kirby/motion/copy_donkey_fitkirby/c125/update.prc",
+      "fighter/kirby/motion/copy_donkey_fitkirby/c126/update.prc",
+      "fighter/kirby/motion/copy_donkey_fitkirby/c127/update.prc"
+    ]
+  }
+}

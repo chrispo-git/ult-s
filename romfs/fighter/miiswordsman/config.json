@@ -1,0 +1,13 @@
+{
+  "new-dir-infos": [],
+  "new-dir-infos-base": {},
+  "share-to-vanilla": {},
+  "new-dir-files": {
+    "fighter/miiswordsman/c00": [
+      "fighter/miiswordsman/motion/body/c00/d01specialairs1hit.nuanmb",
+      "fighter/miiswordsman/motion/body/c00/c01attacks3hi.nuanmb",
+      "fighter/miiswordsman/motion/body/c00/c01attacks3lw.nuanmb"
+    ]
+  },
+  "share-to-added": {}
+}

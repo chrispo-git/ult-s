@@ -1,0 +1,1904 @@
+{
+  "new-dir-infos": [],
+  "new-dir-infos-base": {},
+  "share-to-vanilla": {
+    "fighter/falco/model/arwing/c05/arwing_cokpit_001_col.nutexb": [
+      "fighter/falco/model/arwing/c125/arwing_cokpit_001_col.nutexb"
+    ],
+    "fighter/falco/model/arwing/c05/arwing_cokpit_001_nor.nutexb": [
+      "fighter/falco/model/arwing/c125/arwing_cokpit_001_nor.nutexb"
+    ],
+    "fighter/falco/model/arwing/c05/arwing_cokpit_001_prm.nutexb": [
+      "fighter/falco/model/arwing/c125/arwing_cokpit_001_prm.nutexb"
+    ],
+    "fighter/falco/model/arwing/c05/dark_model.numatb": [
+      "fighter/falco/model/arwing/c125/dark_model.numatb"
+    ],
+    "fighter/falco/model/arwing/c05/light_model.numatb": [
+      "fighter/falco/model/arwing/c125/light_model.numatb"
+    ],
+    "fighter/falco/model/arwing/c05/metal_arwing_001_col.nutexb": [
+      "fighter/falco/model/arwing/c125/metal_arwing_001_col.nutexb"
+    ],
+    "fighter/falco/model/arwing/c05/metal_arwing_001_nor.nutexb": [
+      "fighter/falco/model/arwing/c125/metal_arwing_001_nor.nutexb"
+    ],
+    "fighter/falco/model/arwing/c05/metal_arwing_001_prm.nutexb": [
+      "fighter/falco/model/arwing/c125/metal_arwing_001_prm.nutexb"
+    ],
+    "fighter/falco/model/arwing/c05/metamon_model.numatb": [
+      "fighter/falco/model/arwing/c125/metamon_model.numatb"
+    ],
+    "fighter/falco/model/arwing/c05/model.nuanmb": [
+      "fighter/falco/model/arwing/c125/model.nuanmb"
+    ],
+    "fighter/falco/model/arwing/c05/model.nuhlpb": [
+      "fighter/falco/model/arwing/c125/model.nuhlpb"
+    ],
+    "fighter/falco/model/arwing/c05/model.numatb": [
+      "fighter/falco/model/arwing/c125/model.numatb"
+    ],
+    "fighter/falco/model/arwing/c05/model.numdlb": [
+      "fighter/falco/model/arwing/c125/model.numdlb"
+    ],
+    "fighter/falco/model/arwing/c05/model.numshb": [
+      "fighter/falco/model/arwing/c125/model.numshb"
+    ],
+    "fighter/falco/model/arwing/c05/model.numshexb": [
+      "fighter/falco/model/arwing/c125/model.numshexb"
+    ],
+    "fighter/falco/model/arwing/c05/model.nusktb": [
+      "fighter/falco/model/arwing/c125/model.nusktb"
+    ],
+    "fighter/falco/model/arwing/c05/model.nusrcmdlb": [
+      "fighter/falco/model/arwing/c125/model.nusrcmdlb"
+    ],
+    "fighter/falco/model/arwing/c05/model.xmb": [
+      "fighter/falco/model/arwing/c125/model.xmb"
+    ],
+    "fighter/falco/model/blaster/c05/dark_model.numatb": [
+      "fighter/falco/model/blaster/c125/dark_model.numatb"
+    ],
+    "fighter/falco/model/blaster/c05/fox_blaster_002.nutexb": [
+      "fighter/falco/model/blaster/c125/fox_blaster_002.nutexb"
+    ],
+    "fighter/falco/model/blaster/c05/light_model.numatb": [
+      "fighter/falco/model/blaster/c125/light_model.numatb"
+    ],
+    "fighter/falco/model/blaster/c05/metal_blaster_001_col.nutexb": [
+      "fighter/falco/model/blaster/c125/metal_blaster_001_col.nutexb"
+    ],
+    "fighter/falco/model/blaster/c05/metal_blaster_001_emi.nutexb": [
+      "fighter/falco/model/blaster/c125/metal_blaster_001_emi.nutexb"
+    ],
+    "fighter/falco/model/blaster/c05/metal_blaster_001_nor.nutexb": [
+      "fighter/falco/model/blaster/c125/metal_blaster_001_nor.nutexb"
+    ],
+    "fighter/falco/model/blaster/c05/metal_blaster_001_prm.nutexb": [
+      "fighter/falco/model/blaster/c125/metal_blaster_001_prm.nutexb"
+    ],
+    "fighter/falco/model/blaster/c05/metal_blaster_002_col.nutexb": [
+      "fighter/falco/model/blaster/c125/metal_blaster_002_col.nutexb"
+    ],
+    "fighter/falco/model/blaster/c05/metamon_model.numatb": [
+      "fighter/falco/model/blaster/c125/metamon_model.numatb"
+    ],
+    "fighter/falco/model/blaster/c05/model.nuanmb": [
+      "fighter/falco/model/blaster/c125/model.nuanmb"
+    ],
+    "fighter/falco/model/blaster/c05/model.nuhlpb": [
+      "fighter/falco/model/blaster/c125/model.nuhlpb"
+    ],
+    "fighter/falco/model/blaster/c05/model.numatb": [
+      "fighter/falco/model/blaster/c125/model.numatb"
+    ],
+    "fighter/falco/model/blaster/c05/model.numdlb": [
+      "fighter/falco/model/blaster/c125/model.numdlb"
+    ],
+    "fighter/falco/model/blaster/c05/model.numshb": [
+      "fighter/falco/model/blaster/c125/model.numshb"
+    ],
+    "fighter/falco/model/blaster/c05/model.numshexb": [
+      "fighter/falco/model/blaster/c125/model.numshexb"
+    ],
+    "fighter/falco/model/blaster/c05/model.nusktb": [
+      "fighter/falco/model/blaster/c125/model.nusktb"
+    ],
+    "fighter/falco/model/blaster/c05/model.nusrcmdlb": [
+      "fighter/falco/model/blaster/c125/model.nusrcmdlb"
+    ],
+    "fighter/falco/model/blaster/c05/model.xmb": [
+      "fighter/falco/model/blaster/c125/model.xmb"
+    ],
+    "fighter/falco/model/reticle/c05/alp_reticle_001_col.nutexb": [
+      "fighter/falco/model/reticle/c125/alp_reticle_001_col.nutexb"
+    ],
+    "fighter/falco/model/reticle/c05/dark_model.numatb": [
+      "fighter/falco/model/reticle/c125/dark_model.numatb"
+    ],
+    "fighter/falco/model/reticle/c05/light_model.numatb": [
+      "fighter/falco/model/reticle/c125/light_model.numatb"
+    ],
+    "fighter/falco/model/reticle/c05/metamon_model.numatb": [
+      "fighter/falco/model/reticle/c125/metamon_model.numatb"
+    ],
+    "fighter/falco/model/reticle/c05/model.nuhlpb": [
+      "fighter/falco/model/reticle/c125/model.nuhlpb"
+    ],
+    "fighter/falco/model/reticle/c05/model.numatb": [
+      "fighter/falco/model/reticle/c125/model.numatb"
+    ],
+    "fighter/falco/model/reticle/c05/model.numdlb": [
+      "fighter/falco/model/reticle/c125/model.numdlb"
+    ],
+    "fighter/falco/model/reticle/c05/model.numshb": [
+      "fighter/falco/model/reticle/c125/model.numshb"
+    ],
+    "fighter/falco/model/reticle/c05/model.numshexb": [
+      "fighter/falco/model/reticle/c125/model.numshexb"
+    ],
+    "fighter/falco/model/reticle/c05/model.nusktb": [
+      "fighter/falco/model/reticle/c125/model.nusktb"
+    ],
+    "fighter/falco/model/reticle/c05/model.nusrcmdlb": [
+      "fighter/falco/model/reticle/c125/model.nusrcmdlb"
+    ],
+    "fighter/falco/model/reticle/c05/model.xmb": [
+      "fighter/falco/model/reticle/c125/model.xmb"
+    ],
+    "fighter/falco/motion/arwing/c05/d04finallockon01.nuanmb": [
+      "fighter/falco/motion/arwing/c125/d04finallockon01.nuanmb"
+    ],
+    "fighter/falco/motion/arwing/c05/d04finallockon02.nuanmb": [
+      "fighter/falco/motion/arwing/c125/d04finallockon02.nuanmb"
+    ],
+    "fighter/falco/motion/arwing/c05/d04finallockon03.nuanmb": [
+      "fighter/falco/motion/arwing/c125/d04finallockon03.nuanmb"
+    ],
+    "fighter/falco/motion/arwing/c05/d04finalvisualscene.nuanmb": [
+      "fighter/falco/motion/arwing/c125/d04finalvisualscene.nuanmb"
+    ],
+    "fighter/falco/motion/arwing/c05/d04finalvisualscene01.nuanmb": [
+      "fighter/falco/motion/arwing/c125/d04finalvisualscene01.nuanmb"
+    ],
+    "fighter/falco/motion/arwing/c05/d04finalvisualscene02.nuanmb": [
+      "fighter/falco/motion/arwing/c125/d04finalvisualscene02.nuanmb"
+    ],
+    "fighter/falco/motion/arwing/c05/d04finalvisualscene03.nuanmb": [
+      "fighter/falco/motion/arwing/c125/d04finalvisualscene03.nuanmb"
+    ],
+    "fighter/falco/motion/arwing/c05/j00entryl.nuanmb": [
+      "fighter/falco/motion/arwing/c125/j00entryl.nuanmb"
+    ],
+    "fighter/falco/motion/arwing/c05/j00entryr.nuanmb": [
+      "fighter/falco/motion/arwing/c125/j00entryr.nuanmb"
+    ],
+    "fighter/falco/motion/arwing/c05/motion_list.bin": [
+      "fighter/falco/motion/arwing/c125/motion_list.bin"
+    ],
+    "fighter/falco/motion/arwing/c05/update.prc": [
+      "fighter/falco/motion/arwing/c125/update.prc"
+    ],
+    "fighter/falco/motion/arwingshot/c05/motion_list.bin": [
+      "fighter/falco/motion/arwingshot/c125/motion_list.bin"
+    ],
+    "fighter/falco/motion/blaster/c05/blasterclose.nuanmb": [
+      "fighter/falco/motion/blaster/c125/blasterclose.nuanmb"
+    ],
+    "fighter/falco/motion/blaster/c05/blasterloop.nuanmb": [
+      "fighter/falco/motion/blaster/c125/blasterloop.nuanmb"
+    ],
+    "fighter/falco/motion/blaster/c05/blasteropen.nuanmb": [
+      "fighter/falco/motion/blaster/c125/blasteropen.nuanmb"
+    ],
+    "fighter/falco/motion/blaster/c05/motion_list.bin": [
+      "fighter/falco/motion/blaster/c125/motion_list.bin"
+    ],
+    "fighter/falco/motion/blaster/c05/update.prc": [
+      "fighter/falco/motion/blaster/c125/update.prc"
+    ],
+    "fighter/falco/motion/illusion/c05/motion_list.bin": [
+      "fighter/falco/motion/illusion/c125/motion_list.bin"
+    ],
+    "fighter/falco/motion/landmaster/c05/update.prc": [
+      "fighter/falco/motion/landmaster/c125/update.prc"
+    ],
+    "fighter/falco/motion/reticle/c05/motion_list.bin": [
+      "fighter/falco/motion/reticle/c125/motion_list.bin"
+    ],
+    "sound/bank/fighter/se_falco_c05.nus3audio": [
+      "sound/bank/fighter/se_falco_c125.nus3audio"
+    ],
+    "sound/bank/fighter/se_falco_c05.nus3bank": [
+      "sound/bank/fighter/se_falco_c125.nus3bank"
+    ],
+    "sound/bank/fighter/se_falco_c05.tonelabel": [
+      "sound/bank/fighter/se_falco_c125.tonelabel"
+    ],
+    "sound/bank/fighter_voice/vc_falco_c05.nus3bank": [
+      "sound/bank/fighter_voice/vc_falco_c125.nus3bank"
+    ],
+    "sound/bank/fighter_voice/vc_falco_c05.tonelabel": [
+      "sound/bank/fighter_voice/vc_falco_c125.tonelabel"
+    ],
+    "sound/bank/fighter_voice/vc_falco_cheer_c05.nus3audio": [
+      "sound/bank/fighter_voice/vc_falco_cheer_c125.nus3audio"
+    ],
+    "sound/bank/fighter_voice/vc_falco_cheer_c05.nus3bank": [
+      "sound/bank/fighter_voice/vc_falco_cheer_c125.nus3bank"
+    ],
+    "sound/bank/fighter_voice/vc_falco_cheer_c05.tonelabel": [
+      "sound/bank/fighter_voice/vc_falco_cheer_c125.tonelabel"
+    ],
+    "camera/fighter/falco/c05/d04finallockon.nuanmb": [
+      "camera/fighter/falco/c125/d04finallockon.nuanmb"
+    ],
+    "camera/fighter/falco/c05/d04finallockon02.nuanmb": [
+      "camera/fighter/falco/c125/d04finallockon02.nuanmb"
+    ],
+    "camera/fighter/falco/c05/d04finalvisualscene.nuanmb": [
+      "camera/fighter/falco/c125/d04finalvisualscene.nuanmb"
+    ],
+    "fighter/falco/model/arwing/c01/arwing_cokpit_001_col.nutexb": [
+      "fighter/falco/model/arwing/c121/arwing_cokpit_001_col.nutexb"
+    ],
+    "fighter/falco/model/arwing/c01/arwing_cokpit_001_nor.nutexb": [
+      "fighter/falco/model/arwing/c121/arwing_cokpit_001_nor.nutexb"
+    ],
+    "fighter/falco/model/arwing/c01/arwing_cokpit_001_prm.nutexb": [
+      "fighter/falco/model/arwing/c121/arwing_cokpit_001_prm.nutexb"
+    ],
+    "fighter/falco/model/arwing/c01/dark_model.numatb": [
+      "fighter/falco/model/arwing/c121/dark_model.numatb"
+    ],
+    "fighter/falco/model/arwing/c01/light_model.numatb": [
+      "fighter/falco/model/arwing/c121/light_model.numatb"
+    ],
+    "fighter/falco/model/arwing/c01/metal_arwing_001_col.nutexb": [
+      "fighter/falco/model/arwing/c121/metal_arwing_001_col.nutexb"
+    ],
+    "fighter/falco/model/arwing/c01/metal_arwing_001_nor.nutexb": [
+      "fighter/falco/model/arwing/c121/metal_arwing_001_nor.nutexb"
+    ],
+    "fighter/falco/model/arwing/c01/metal_arwing_001_prm.nutexb": [
+      "fighter/falco/model/arwing/c121/metal_arwing_001_prm.nutexb"
+    ],
+    "fighter/falco/model/arwing/c01/metamon_model.numatb": [
+      "fighter/falco/model/arwing/c121/metamon_model.numatb"
+    ],
+    "fighter/falco/model/arwing/c01/model.nuanmb": [
+      "fighter/falco/model/arwing/c121/model.nuanmb"
+    ],
+    "fighter/falco/model/arwing/c01/model.nuhlpb": [
+      "fighter/falco/model/arwing/c121/model.nuhlpb"
+    ],
+    "fighter/falco/model/arwing/c01/model.numatb": [
+      "fighter/falco/model/arwing/c121/model.numatb"
+    ],
+    "fighter/falco/model/arwing/c01/model.numdlb": [
+      "fighter/falco/model/arwing/c121/model.numdlb"
+    ],
+    "fighter/falco/model/arwing/c01/model.numshb": [
+      "fighter/falco/model/arwing/c121/model.numshb"
+    ],
+    "fighter/falco/model/arwing/c01/model.numshexb": [
+      "fighter/falco/model/arwing/c121/model.numshexb"
+    ],
+    "fighter/falco/model/arwing/c01/model.nusktb": [
+      "fighter/falco/model/arwing/c121/model.nusktb"
+    ],
+    "fighter/falco/model/arwing/c01/model.nusrcmdlb": [
+      "fighter/falco/model/arwing/c121/model.nusrcmdlb"
+    ],
+    "fighter/falco/model/arwing/c01/model.xmb": [
+      "fighter/falco/model/arwing/c121/model.xmb"
+    ],
+    "fighter/falco/model/blaster/c01/dark_model.numatb": [
+      "fighter/falco/model/blaster/c121/dark_model.numatb"
+    ],
+    "fighter/falco/model/blaster/c01/fox_blaster_002.nutexb": [
+      "fighter/falco/model/blaster/c121/fox_blaster_002.nutexb"
+    ],
+    "fighter/falco/model/blaster/c01/light_model.numatb": [
+      "fighter/falco/model/blaster/c121/light_model.numatb"
+    ],
+    "fighter/falco/model/blaster/c01/metal_blaster_001_col.nutexb": [
+      "fighter/falco/model/blaster/c121/metal_blaster_001_col.nutexb"
+    ],
+    "fighter/falco/model/blaster/c01/metal_blaster_001_emi.nutexb": [
+      "fighter/falco/model/blaster/c121/metal_blaster_001_emi.nutexb"
+    ],
+    "fighter/falco/model/blaster/c01/metal_blaster_001_nor.nutexb": [
+      "fighter/falco/model/blaster/c121/metal_blaster_001_nor.nutexb"
+    ],
+    "fighter/falco/model/blaster/c01/metal_blaster_001_prm.nutexb": [
+      "fighter/falco/model/blaster/c121/metal_blaster_001_prm.nutexb"
+    ],
+    "fighter/falco/model/blaster/c01/metal_blaster_002_col.nutexb": [
+      "fighter/falco/model/blaster/c121/metal_blaster_002_col.nutexb"
+    ],
+    "fighter/falco/model/blaster/c01/metamon_model.numatb": [
+      "fighter/falco/model/blaster/c121/metamon_model.numatb"
+    ],
+    "fighter/falco/model/blaster/c01/model.nuanmb": [
+      "fighter/falco/model/blaster/c121/model.nuanmb"
+    ],
+    "fighter/falco/model/blaster/c01/model.nuhlpb": [
+      "fighter/falco/model/blaster/c121/model.nuhlpb"
+    ],
+    "fighter/falco/model/blaster/c01/model.numatb": [
+      "fighter/falco/model/blaster/c121/model.numatb"
+    ],
+    "fighter/falco/model/blaster/c01/model.numdlb": [
+      "fighter/falco/model/blaster/c121/model.numdlb"
+    ],
+    "fighter/falco/model/blaster/c01/model.numshb": [
+      "fighter/falco/model/blaster/c121/model.numshb"
+    ],
+    "fighter/falco/model/blaster/c01/model.numshexb": [
+      "fighter/falco/model/blaster/c121/model.numshexb"
+    ],
+    "fighter/falco/model/blaster/c01/model.nusktb": [
+      "fighter/falco/model/blaster/c121/model.nusktb"
+    ],
+    "fighter/falco/model/blaster/c01/model.nusrcmdlb": [
+      "fighter/falco/model/blaster/c121/model.nusrcmdlb"
+    ],
+    "fighter/falco/model/blaster/c01/model.xmb": [
+      "fighter/falco/model/blaster/c121/model.xmb"
+    ],
+    "fighter/falco/model/reticle/c01/alp_reticle_001_col.nutexb": [
+      "fighter/falco/model/reticle/c121/alp_reticle_001_col.nutexb"
+    ],
+    "fighter/falco/model/reticle/c01/dark_model.numatb": [
+      "fighter/falco/model/reticle/c121/dark_model.numatb"
+    ],
+    "fighter/falco/model/reticle/c01/light_model.numatb": [
+      "fighter/falco/model/reticle/c121/light_model.numatb"
+    ],
+    "fighter/falco/model/reticle/c01/metamon_model.numatb": [
+      "fighter/falco/model/reticle/c121/metamon_model.numatb"
+    ],
+    "fighter/falco/model/reticle/c01/model.nuhlpb": [
+      "fighter/falco/model/reticle/c121/model.nuhlpb"
+    ],
+    "fighter/falco/model/reticle/c01/model.numatb": [
+      "fighter/falco/model/reticle/c121/model.numatb"
+    ],
+    "fighter/falco/model/reticle/c01/model.numdlb": [
+      "fighter/falco/model/reticle/c121/model.numdlb"
+    ],
+    "fighter/falco/model/reticle/c01/model.numshb": [
+      "fighter/falco/model/reticle/c121/model.numshb"
+    ],
+    "fighter/falco/model/reticle/c01/model.numshexb": [
+      "fighter/falco/model/reticle/c121/model.numshexb"
+    ],
+    "fighter/falco/model/reticle/c01/model.nusktb": [
+      "fighter/falco/model/reticle/c121/model.nusktb"
+    ],
+    "fighter/falco/model/reticle/c01/model.nusrcmdlb": [
+      "fighter/falco/model/reticle/c121/model.nusrcmdlb"
+    ],
+    "fighter/falco/model/reticle/c01/model.xmb": [
+      "fighter/falco/model/reticle/c121/model.xmb"
+    ],
+    "fighter/falco/motion/arwing/c01/d04finallockon01.nuanmb": [
+      "fighter/falco/motion/arwing/c121/d04finallockon01.nuanmb"
+    ],
+    "fighter/falco/motion/arwing/c01/d04finallockon02.nuanmb": [
+      "fighter/falco/motion/arwing/c121/d04finallockon02.nuanmb"
+    ],
+    "fighter/falco/motion/arwing/c01/d04finallockon03.nuanmb": [
+      "fighter/falco/motion/arwing/c121/d04finallockon03.nuanmb"
+    ],
+    "fighter/falco/motion/arwing/c01/d04finalvisualscene.nuanmb": [
+      "fighter/falco/motion/arwing/c121/d04finalvisualscene.nuanmb"
+    ],
+    "fighter/falco/motion/arwing/c01/d04finalvisualscene01.nuanmb": [
+      "fighter/falco/motion/arwing/c121/d04finalvisualscene01.nuanmb"
+    ],
+    "fighter/falco/motion/arwing/c01/d04finalvisualscene02.nuanmb": [
+      "fighter/falco/motion/arwing/c121/d04finalvisualscene02.nuanmb"
+    ],
+    "fighter/falco/motion/arwing/c01/d04finalvisualscene03.nuanmb": [
+      "fighter/falco/motion/arwing/c121/d04finalvisualscene03.nuanmb"
+    ],
+    "fighter/falco/motion/arwing/c01/j00entryl.nuanmb": [
+      "fighter/falco/motion/arwing/c121/j00entryl.nuanmb"
+    ],
+    "fighter/falco/motion/arwing/c01/j00entryr.nuanmb": [
+      "fighter/falco/motion/arwing/c121/j00entryr.nuanmb"
+    ],
+    "fighter/falco/motion/arwing/c01/motion_list.bin": [
+      "fighter/falco/motion/arwing/c121/motion_list.bin"
+    ],
+    "fighter/falco/motion/arwing/c01/update.prc": [
+      "fighter/falco/motion/arwing/c121/update.prc"
+    ],
+    "fighter/falco/motion/arwingshot/c01/motion_list.bin": [
+      "fighter/falco/motion/arwingshot/c121/motion_list.bin"
+    ],
+    "fighter/falco/motion/blaster/c01/blasterclose.nuanmb": [
+      "fighter/falco/motion/blaster/c121/blasterclose.nuanmb"
+    ],
+    "fighter/falco/motion/blaster/c01/blasterloop.nuanmb": [
+      "fighter/falco/motion/blaster/c121/blasterloop.nuanmb"
+    ],
+    "fighter/falco/motion/blaster/c01/blasteropen.nuanmb": [
+      "fighter/falco/motion/blaster/c121/blasteropen.nuanmb"
+    ],
+    "fighter/falco/motion/blaster/c01/motion_list.bin": [
+      "fighter/falco/motion/blaster/c121/motion_list.bin"
+    ],
+    "fighter/falco/motion/blaster/c01/update.prc": [
+      "fighter/falco/motion/blaster/c121/update.prc"
+    ],
+    "fighter/falco/motion/illusion/c01/motion_list.bin": [
+      "fighter/falco/motion/illusion/c121/motion_list.bin"
+    ],
+    "fighter/falco/motion/landmaster/c01/update.prc": [
+      "fighter/falco/motion/landmaster/c121/update.prc"
+    ],
+    "fighter/falco/motion/reticle/c01/motion_list.bin": [
+      "fighter/falco/motion/reticle/c121/motion_list.bin"
+    ],
+    "sound/bank/fighter/se_falco_c01.nus3audio": [
+      "sound/bank/fighter/se_falco_c121.nus3audio"
+    ],
+    "sound/bank/fighter/se_falco_c01.nus3bank": [
+      "sound/bank/fighter/se_falco_c121.nus3bank"
+    ],
+    "sound/bank/fighter/se_falco_c01.tonelabel": [
+      "sound/bank/fighter/se_falco_c121.tonelabel"
+    ],
+    "sound/bank/fighter_voice/vc_falco_c01.nus3bank": [
+      "sound/bank/fighter_voice/vc_falco_c121.nus3bank"
+    ],
+    "sound/bank/fighter_voice/vc_falco_c01.tonelabel": [
+      "sound/bank/fighter_voice/vc_falco_c121.tonelabel"
+    ],
+    "sound/bank/fighter_voice/vc_falco_cheer_c01.nus3audio": [
+      "sound/bank/fighter_voice/vc_falco_cheer_c121.nus3audio"
+    ],
+    "sound/bank/fighter_voice/vc_falco_cheer_c01.nus3bank": [
+      "sound/bank/fighter_voice/vc_falco_cheer_c121.nus3bank"
+    ],
+    "sound/bank/fighter_voice/vc_falco_cheer_c01.tonelabel": [
+      "sound/bank/fighter_voice/vc_falco_cheer_c121.tonelabel"
+    ],
+    "camera/fighter/falco/c01/d04finallockon.nuanmb": [
+      "camera/fighter/falco/c121/d04finallockon.nuanmb"
+    ],
+    "camera/fighter/falco/c01/d04finallockon02.nuanmb": [
+      "camera/fighter/falco/c121/d04finallockon02.nuanmb"
+    ],
+    "camera/fighter/falco/c01/d04finalvisualscene.nuanmb": [
+      "camera/fighter/falco/c121/d04finalvisualscene.nuanmb"
+    ],
+    "fighter/falco/model/arwing/c00/arwing_cokpit_001_col.nutexb": [
+      "fighter/falco/model/arwing/c120/arwing_cokpit_001_col.nutexb"
+    ],
+    "fighter/falco/model/arwing/c00/arwing_cokpit_001_nor.nutexb": [
+      "fighter/falco/model/arwing/c120/arwing_cokpit_001_nor.nutexb"
+    ],
+    "fighter/falco/model/arwing/c00/arwing_cokpit_001_prm.nutexb": [
+      "fighter/falco/model/arwing/c120/arwing_cokpit_001_prm.nutexb"
+    ],
+    "fighter/falco/model/arwing/c00/dark_model.numatb": [
+      "fighter/falco/model/arwing/c120/dark_model.numatb"
+    ],
+    "fighter/falco/model/arwing/c00/light_model.numatb": [
+      "fighter/falco/model/arwing/c120/light_model.numatb"
+    ],
+    "fighter/falco/model/arwing/c00/metal_arwing_001_col.nutexb": [
+      "fighter/falco/model/arwing/c120/metal_arwing_001_col.nutexb"
+    ],
+    "fighter/falco/model/arwing/c00/metal_arwing_001_nor.nutexb": [
+      "fighter/falco/model/arwing/c120/metal_arwing_001_nor.nutexb"
+    ],
+    "fighter/falco/model/arwing/c00/metal_arwing_001_prm.nutexb": [
+      "fighter/falco/model/arwing/c120/metal_arwing_001_prm.nutexb"
+    ],
+    "fighter/falco/model/arwing/c00/metamon_model.numatb": [
+      "fighter/falco/model/arwing/c120/metamon_model.numatb"
+    ],
+    "fighter/falco/model/arwing/c00/model.nuanmb": [
+      "fighter/falco/model/arwing/c120/model.nuanmb"
+    ],
+    "fighter/falco/model/arwing/c00/model.nuhlpb": [
+      "fighter/falco/model/arwing/c120/model.nuhlpb"
+    ],
+    "fighter/falco/model/arwing/c00/model.numatb": [
+      "fighter/falco/model/arwing/c120/model.numatb"
+    ],
+    "fighter/falco/model/arwing/c00/model.numdlb": [
+      "fighter/falco/model/arwing/c120/model.numdlb"
+    ],
+    "fighter/falco/model/arwing/c00/model.numshb": [
+      "fighter/falco/model/arwing/c120/model.numshb"
+    ],
+    "fighter/falco/model/arwing/c00/model.numshexb": [
+      "fighter/falco/model/arwing/c120/model.numshexb"
+    ],
+    "fighter/falco/model/arwing/c00/model.nusktb": [
+      "fighter/falco/model/arwing/c120/model.nusktb"
+    ],
+    "fighter/falco/model/arwing/c00/model.nusrcmdlb": [
+      "fighter/falco/model/arwing/c120/model.nusrcmdlb"
+    ],
+    "fighter/falco/model/arwing/c00/model.xmb": [
+      "fighter/falco/model/arwing/c120/model.xmb"
+    ],
+    "fighter/falco/model/blaster/c00/dark_model.numatb": [
+      "fighter/falco/model/blaster/c120/dark_model.numatb"
+    ],
+    "fighter/falco/model/blaster/c00/fox_blaster_002.nutexb": [
+      "fighter/falco/model/blaster/c120/fox_blaster_002.nutexb"
+    ],
+    "fighter/falco/model/blaster/c00/light_model.numatb": [
+      "fighter/falco/model/blaster/c120/light_model.numatb"
+    ],
+    "fighter/falco/model/blaster/c00/metal_blaster_001_col.nutexb": [
+      "fighter/falco/model/blaster/c120/metal_blaster_001_col.nutexb"
+    ],
+    "fighter/falco/model/blaster/c00/metal_blaster_001_emi.nutexb": [
+      "fighter/falco/model/blaster/c120/metal_blaster_001_emi.nutexb"
+    ],
+    "fighter/falco/model/blaster/c00/metal_blaster_001_nor.nutexb": [
+      "fighter/falco/model/blaster/c120/metal_blaster_001_nor.nutexb"
+    ],
+    "fighter/falco/model/blaster/c00/metal_blaster_001_prm.nutexb": [
+      "fighter/falco/model/blaster/c120/metal_blaster_001_prm.nutexb"
+    ],
+    "fighter/falco/model/blaster/c00/metal_blaster_002_col.nutexb": [
+      "fighter/falco/model/blaster/c120/metal_blaster_002_col.nutexb"
+    ],
+    "fighter/falco/model/blaster/c00/metamon_model.numatb": [
+      "fighter/falco/model/blaster/c120/metamon_model.numatb"
+    ],
+    "fighter/falco/model/blaster/c00/model.nuanmb": [
+      "fighter/falco/model/blaster/c120/model.nuanmb"
+    ],
+    "fighter/falco/model/blaster/c00/model.nuhlpb": [
+      "fighter/falco/model/blaster/c120/model.nuhlpb"
+    ],
+    "fighter/falco/model/blaster/c00/model.numatb": [
+      "fighter/falco/model/blaster/c120/model.numatb"
+    ],
+    "fighter/falco/model/blaster/c00/model.numdlb": [
+      "fighter/falco/model/blaster/c120/model.numdlb"
+    ],
+    "fighter/falco/model/blaster/c00/model.numshb": [
+      "fighter/falco/model/blaster/c120/model.numshb"
+    ],
+    "fighter/falco/model/blaster/c00/model.numshexb": [
+      "fighter/falco/model/blaster/c120/model.numshexb"
+    ],
+    "fighter/falco/model/blaster/c00/model.nusktb": [
+      "fighter/falco/model/blaster/c120/model.nusktb"
+    ],
+    "fighter/falco/model/blaster/c00/model.nusrcmdlb": [
+      "fighter/falco/model/blaster/c120/model.nusrcmdlb"
+    ],
+    "fighter/falco/model/blaster/c00/model.xmb": [
+      "fighter/falco/model/blaster/c120/model.xmb"
+    ],
+    "fighter/falco/model/reticle/c00/alp_reticle_001_col.nutexb": [
+      "fighter/falco/model/reticle/c120/alp_reticle_001_col.nutexb"
+    ],
+    "fighter/falco/model/reticle/c00/dark_model.numatb": [
+      "fighter/falco/model/reticle/c120/dark_model.numatb"
+    ],
+    "fighter/falco/model/reticle/c00/light_model.numatb": [
+      "fighter/falco/model/reticle/c120/light_model.numatb"
+    ],
+    "fighter/falco/model/reticle/c00/metamon_model.numatb": [
+      "fighter/falco/model/reticle/c120/metamon_model.numatb"
+    ],
+    "fighter/falco/model/reticle/c00/model.nuhlpb": [
+      "fighter/falco/model/reticle/c120/model.nuhlpb"
+    ],
+    "fighter/falco/model/reticle/c00/model.numatb": [
+      "fighter/falco/model/reticle/c120/model.numatb"
+    ],
+    "fighter/falco/model/reticle/c00/model.numdlb": [
+      "fighter/falco/model/reticle/c120/model.numdlb"
+    ],
+    "fighter/falco/model/reticle/c00/model.numshb": [
+      "fighter/falco/model/reticle/c120/model.numshb"
+    ],
+    "fighter/falco/model/reticle/c00/model.numshexb": [
+      "fighter/falco/model/reticle/c120/model.numshexb"
+    ],
+    "fighter/falco/model/reticle/c00/model.nusktb": [
+      "fighter/falco/model/reticle/c120/model.nusktb"
+    ],
+    "fighter/falco/model/reticle/c00/model.nusrcmdlb": [
+      "fighter/falco/model/reticle/c120/model.nusrcmdlb"
+    ],
+    "fighter/falco/model/reticle/c00/model.xmb": [
+      "fighter/falco/model/reticle/c120/model.xmb"
+    ],
+    "fighter/falco/motion/arwing/c00/d04finallockon01.nuanmb": [
+      "fighter/falco/motion/arwing/c120/d04finallockon01.nuanmb"
+    ],
+    "fighter/falco/motion/arwing/c00/d04finallockon02.nuanmb": [
+      "fighter/falco/motion/arwing/c120/d04finallockon02.nuanmb"
+    ],
+    "fighter/falco/motion/arwing/c00/d04finallockon03.nuanmb": [
+      "fighter/falco/motion/arwing/c120/d04finallockon03.nuanmb"
+    ],
+    "fighter/falco/motion/arwing/c00/d04finalvisualscene.nuanmb": [
+      "fighter/falco/motion/arwing/c120/d04finalvisualscene.nuanmb"
+    ],
+    "fighter/falco/motion/arwing/c00/d04finalvisualscene01.nuanmb": [
+      "fighter/falco/motion/arwing/c120/d04finalvisualscene01.nuanmb"
+    ],
+    "fighter/falco/motion/arwing/c00/d04finalvisualscene02.nuanmb": [
+      "fighter/falco/motion/arwing/c120/d04finalvisualscene02.nuanmb"
+    ],
+    "fighter/falco/motion/arwing/c00/d04finalvisualscene03.nuanmb": [
+      "fighter/falco/motion/arwing/c120/d04finalvisualscene03.nuanmb"
+    ],
+    "fighter/falco/motion/arwing/c00/j00entryl.nuanmb": [
+      "fighter/falco/motion/arwing/c120/j00entryl.nuanmb"
+    ],
+    "fighter/falco/motion/arwing/c00/j00entryr.nuanmb": [
+      "fighter/falco/motion/arwing/c120/j00entryr.nuanmb"
+    ],
+    "fighter/falco/motion/arwing/c00/motion_list.bin": [
+      "fighter/falco/motion/arwing/c120/motion_list.bin"
+    ],
+    "fighter/falco/motion/arwing/c00/update.prc": [
+      "fighter/falco/motion/arwing/c120/update.prc"
+    ],
+    "fighter/falco/motion/arwingshot/c00/motion_list.bin": [
+      "fighter/falco/motion/arwingshot/c120/motion_list.bin"
+    ],
+    "fighter/falco/motion/blaster/c00/blasterclose.nuanmb": [
+      "fighter/falco/motion/blaster/c120/blasterclose.nuanmb"
+    ],
+    "fighter/falco/motion/blaster/c00/blasterloop.nuanmb": [
+      "fighter/falco/motion/blaster/c120/blasterloop.nuanmb"
+    ],
+    "fighter/falco/motion/blaster/c00/blasteropen.nuanmb": [
+      "fighter/falco/motion/blaster/c120/blasteropen.nuanmb"
+    ],
+    "fighter/falco/motion/blaster/c00/motion_list.bin": [
+      "fighter/falco/motion/blaster/c120/motion_list.bin"
+    ],
+    "fighter/falco/motion/blaster/c00/update.prc": [
+      "fighter/falco/motion/blaster/c120/update.prc"
+    ],
+    "fighter/falco/motion/illusion/c00/motion_list.bin": [
+      "fighter/falco/motion/illusion/c120/motion_list.bin"
+    ],
+    "fighter/falco/motion/landmaster/c00/update.prc": [
+      "fighter/falco/motion/landmaster/c120/update.prc"
+    ],
+    "fighter/falco/motion/reticle/c00/motion_list.bin": [
+      "fighter/falco/motion/reticle/c120/motion_list.bin"
+    ],
+    "sound/bank/fighter/se_falco_c00.nus3audio": [
+      "sound/bank/fighter/se_falco_c120.nus3audio"
+    ],
+    "sound/bank/fighter/se_falco_c00.nus3bank": [
+      "sound/bank/fighter/se_falco_c120.nus3bank"
+    ],
+    "sound/bank/fighter/se_falco_c00.tonelabel": [
+      "sound/bank/fighter/se_falco_c120.tonelabel"
+    ],
+    "sound/bank/fighter_voice/vc_falco_c00.nus3bank": [
+      "sound/bank/fighter_voice/vc_falco_c120.nus3bank"
+    ],
+    "sound/bank/fighter_voice/vc_falco_c00.tonelabel": [
+      "sound/bank/fighter_voice/vc_falco_c120.tonelabel"
+    ],
+    "sound/bank/fighter_voice/vc_falco_cheer_c00.nus3audio": [
+      "sound/bank/fighter_voice/vc_falco_cheer_c120.nus3audio"
+    ],
+    "sound/bank/fighter_voice/vc_falco_cheer_c00.nus3bank": [
+      "sound/bank/fighter_voice/vc_falco_cheer_c120.nus3bank"
+    ],
+    "sound/bank/fighter_voice/vc_falco_cheer_c00.tonelabel": [
+      "sound/bank/fighter_voice/vc_falco_cheer_c120.tonelabel"
+    ],
+    "camera/fighter/falco/c00/d04finallockon.nuanmb": [
+      "camera/fighter/falco/c120/d04finallockon.nuanmb"
+    ],
+    "camera/fighter/falco/c00/d04finallockon02.nuanmb": [
+      "camera/fighter/falco/c120/d04finallockon02.nuanmb"
+    ],
+    "camera/fighter/falco/c00/d04finalvisualscene.nuanmb": [
+      "camera/fighter/falco/c120/d04finalvisualscene.nuanmb"
+    ],
+    "fighter/falco/model/arwing/c02/arwing_cokpit_001_col.nutexb": [
+      "fighter/falco/model/arwing/c122/arwing_cokpit_001_col.nutexb"
+    ],
+    "fighter/falco/model/arwing/c02/arwing_cokpit_001_nor.nutexb": [
+      "fighter/falco/model/arwing/c122/arwing_cokpit_001_nor.nutexb"
+    ],
+    "fighter/falco/model/arwing/c02/arwing_cokpit_001_prm.nutexb": [
+      "fighter/falco/model/arwing/c122/arwing_cokpit_001_prm.nutexb"
+    ],
+    "fighter/falco/model/arwing/c02/dark_model.numatb": [
+      "fighter/falco/model/arwing/c122/dark_model.numatb"
+    ],
+    "fighter/falco/model/arwing/c02/light_model.numatb": [
+      "fighter/falco/model/arwing/c122/light_model.numatb"
+    ],
+    "fighter/falco/model/arwing/c02/metal_arwing_001_col.nutexb": [
+      "fighter/falco/model/arwing/c122/metal_arwing_001_col.nutexb"
+    ],
+    "fighter/falco/model/arwing/c02/metal_arwing_001_nor.nutexb": [
+      "fighter/falco/model/arwing/c122/metal_arwing_001_nor.nutexb"
+    ],
+    "fighter/falco/model/arwing/c02/metal_arwing_001_prm.nutexb": [
+      "fighter/falco/model/arwing/c122/metal_arwing_001_prm.nutexb"
+    ],
+    "fighter/falco/model/arwing/c02/metamon_model.numatb": [
+      "fighter/falco/model/arwing/c122/metamon_model.numatb"
+    ],
+    "fighter/falco/model/arwing/c02/model.nuanmb": [
+      "fighter/falco/model/arwing/c122/model.nuanmb"
+    ],
+    "fighter/falco/model/arwing/c02/model.nuhlpb": [
+      "fighter/falco/model/arwing/c122/model.nuhlpb"
+    ],
+    "fighter/falco/model/arwing/c02/model.numatb": [
+      "fighter/falco/model/arwing/c122/model.numatb"
+    ],
+    "fighter/falco/model/arwing/c02/model.numdlb": [
+      "fighter/falco/model/arwing/c122/model.numdlb"
+    ],
+    "fighter/falco/model/arwing/c02/model.numshb": [
+      "fighter/falco/model/arwing/c122/model.numshb"
+    ],
+    "fighter/falco/model/arwing/c02/model.numshexb": [
+      "fighter/falco/model/arwing/c122/model.numshexb"
+    ],
+    "fighter/falco/model/arwing/c02/model.nusktb": [
+      "fighter/falco/model/arwing/c122/model.nusktb"
+    ],
+    "fighter/falco/model/arwing/c02/model.nusrcmdlb": [
+      "fighter/falco/model/arwing/c122/model.nusrcmdlb"
+    ],
+    "fighter/falco/model/arwing/c02/model.xmb": [
+      "fighter/falco/model/arwing/c122/model.xmb"
+    ],
+    "fighter/falco/model/blaster/c02/dark_model.numatb": [
+      "fighter/falco/model/blaster/c122/dark_model.numatb"
+    ],
+    "fighter/falco/model/blaster/c02/fox_blaster_002.nutexb": [
+      "fighter/falco/model/blaster/c122/fox_blaster_002.nutexb"
+    ],
+    "fighter/falco/model/blaster/c02/light_model.numatb": [
+      "fighter/falco/model/blaster/c122/light_model.numatb"
+    ],
+    "fighter/falco/model/blaster/c02/metal_blaster_001_col.nutexb": [
+      "fighter/falco/model/blaster/c122/metal_blaster_001_col.nutexb"
+    ],
+    "fighter/falco/model/blaster/c02/metal_blaster_001_emi.nutexb": [
+      "fighter/falco/model/blaster/c122/metal_blaster_001_emi.nutexb"
+    ],
+    "fighter/falco/model/blaster/c02/metal_blaster_001_nor.nutexb": [
+      "fighter/falco/model/blaster/c122/metal_blaster_001_nor.nutexb"
+    ],
+    "fighter/falco/model/blaster/c02/metal_blaster_001_prm.nutexb": [
+      "fighter/falco/model/blaster/c122/metal_blaster_001_prm.nutexb"
+    ],
+    "fighter/falco/model/blaster/c02/metal_blaster_002_col.nutexb": [
+      "fighter/falco/model/blaster/c122/metal_blaster_002_col.nutexb"
+    ],
+    "fighter/falco/model/blaster/c02/metamon_model.numatb": [
+      "fighter/falco/model/blaster/c122/metamon_model.numatb"
+    ],
+    "fighter/falco/model/blaster/c02/model.nuanmb": [
+      "fighter/falco/model/blaster/c122/model.nuanmb"
+    ],
+    "fighter/falco/model/blaster/c02/model.nuhlpb": [
+      "fighter/falco/model/blaster/c122/model.nuhlpb"
+    ],
+    "fighter/falco/model/blaster/c02/model.numatb": [
+      "fighter/falco/model/blaster/c122/model.numatb"
+    ],
+    "fighter/falco/model/blaster/c02/model.numdlb": [
+      "fighter/falco/model/blaster/c122/model.numdlb"
+    ],
+    "fighter/falco/model/blaster/c02/model.numshb": [
+      "fighter/falco/model/blaster/c122/model.numshb"
+    ],
+    "fighter/falco/model/blaster/c02/model.numshexb": [
+      "fighter/falco/model/blaster/c122/model.numshexb"
+    ],
+    "fighter/falco/model/blaster/c02/model.nusktb": [
+      "fighter/falco/model/blaster/c122/model.nusktb"
+    ],
+    "fighter/falco/model/blaster/c02/model.nusrcmdlb": [
+      "fighter/falco/model/blaster/c122/model.nusrcmdlb"
+    ],
+    "fighter/falco/model/blaster/c02/model.xmb": [
+      "fighter/falco/model/blaster/c122/model.xmb"
+    ],
+    "fighter/falco/model/reticle/c02/alp_reticle_001_col.nutexb": [
+      "fighter/falco/model/reticle/c122/alp_reticle_001_col.nutexb"
+    ],
+    "fighter/falco/model/reticle/c02/dark_model.numatb": [
+      "fighter/falco/model/reticle/c122/dark_model.numatb"
+    ],
+    "fighter/falco/model/reticle/c02/light_model.numatb": [
+      "fighter/falco/model/reticle/c122/light_model.numatb"
+    ],
+    "fighter/falco/model/reticle/c02/metamon_model.numatb": [
+      "fighter/falco/model/reticle/c122/metamon_model.numatb"
+    ],
+    "fighter/falco/model/reticle/c02/model.nuhlpb": [
+      "fighter/falco/model/reticle/c122/model.nuhlpb"
+    ],
+    "fighter/falco/model/reticle/c02/model.numatb": [
+      "fighter/falco/model/reticle/c122/model.numatb"
+    ],
+    "fighter/falco/model/reticle/c02/model.numdlb": [
+      "fighter/falco/model/reticle/c122/model.numdlb"
+    ],
+    "fighter/falco/model/reticle/c02/model.numshb": [
+      "fighter/falco/model/reticle/c122/model.numshb"
+    ],
+    "fighter/falco/model/reticle/c02/model.numshexb": [
+      "fighter/falco/model/reticle/c122/model.numshexb"
+    ],
+    "fighter/falco/model/reticle/c02/model.nusktb": [
+      "fighter/falco/model/reticle/c122/model.nusktb"
+    ],
+    "fighter/falco/model/reticle/c02/model.nusrcmdlb": [
+      "fighter/falco/model/reticle/c122/model.nusrcmdlb"
+    ],
+    "fighter/falco/model/reticle/c02/model.xmb": [
+      "fighter/falco/model/reticle/c122/model.xmb"
+    ],
+    "fighter/falco/motion/arwing/c02/d04finallockon01.nuanmb": [
+      "fighter/falco/motion/arwing/c122/d04finallockon01.nuanmb"
+    ],
+    "fighter/falco/motion/arwing/c02/d04finallockon02.nuanmb": [
+      "fighter/falco/motion/arwing/c122/d04finallockon02.nuanmb"
+    ],
+    "fighter/falco/motion/arwing/c02/d04finallockon03.nuanmb": [
+      "fighter/falco/motion/arwing/c122/d04finallockon03.nuanmb"
+    ],
+    "fighter/falco/motion/arwing/c02/d04finalvisualscene.nuanmb": [
+      "fighter/falco/motion/arwing/c122/d04finalvisualscene.nuanmb"
+    ],
+    "fighter/falco/motion/arwing/c02/d04finalvisualscene01.nuanmb": [
+      "fighter/falco/motion/arwing/c122/d04finalvisualscene01.nuanmb"
+    ],
+    "fighter/falco/motion/arwing/c02/d04finalvisualscene02.nuanmb": [
+      "fighter/falco/motion/arwing/c122/d04finalvisualscene02.nuanmb"
+    ],
+    "fighter/falco/motion/arwing/c02/d04finalvisualscene03.nuanmb": [
+      "fighter/falco/motion/arwing/c122/d04finalvisualscene03.nuanmb"
+    ],
+    "fighter/falco/motion/arwing/c02/j00entryl.nuanmb": [
+      "fighter/falco/motion/arwing/c122/j00entryl.nuanmb"
+    ],
+    "fighter/falco/motion/arwing/c02/j00entryr.nuanmb": [
+      "fighter/falco/motion/arwing/c122/j00entryr.nuanmb"
+    ],
+    "fighter/falco/motion/arwing/c02/motion_list.bin": [
+      "fighter/falco/motion/arwing/c122/motion_list.bin"
+    ],
+    "fighter/falco/motion/arwing/c02/update.prc": [
+      "fighter/falco/motion/arwing/c122/update.prc"
+    ],
+    "fighter/falco/motion/arwingshot/c02/motion_list.bin": [
+      "fighter/falco/motion/arwingshot/c122/motion_list.bin"
+    ],
+    "fighter/falco/motion/blaster/c02/blasterclose.nuanmb": [
+      "fighter/falco/motion/blaster/c122/blasterclose.nuanmb"
+    ],
+    "fighter/falco/motion/blaster/c02/blasterloop.nuanmb": [
+      "fighter/falco/motion/blaster/c122/blasterloop.nuanmb"
+    ],
+    "fighter/falco/motion/blaster/c02/blasteropen.nuanmb": [
+      "fighter/falco/motion/blaster/c122/blasteropen.nuanmb"
+    ],
+    "fighter/falco/motion/blaster/c02/motion_list.bin": [
+      "fighter/falco/motion/blaster/c122/motion_list.bin"
+    ],
+    "fighter/falco/motion/blaster/c02/update.prc": [
+      "fighter/falco/motion/blaster/c122/update.prc"
+    ],
+    "fighter/falco/motion/illusion/c02/motion_list.bin": [
+      "fighter/falco/motion/illusion/c122/motion_list.bin"
+    ],
+    "fighter/falco/motion/landmaster/c02/update.prc": [
+      "fighter/falco/motion/landmaster/c122/update.prc"
+    ],
+    "fighter/falco/motion/reticle/c02/motion_list.bin": [
+      "fighter/falco/motion/reticle/c122/motion_list.bin"
+    ],
+    "sound/bank/fighter/se_falco_c02.nus3audio": [
+      "sound/bank/fighter/se_falco_c122.nus3audio"
+    ],
+    "sound/bank/fighter/se_falco_c02.nus3bank": [
+      "sound/bank/fighter/se_falco_c122.nus3bank"
+    ],
+    "sound/bank/fighter/se_falco_c02.tonelabel": [
+      "sound/bank/fighter/se_falco_c122.tonelabel"
+    ],
+    "sound/bank/fighter_voice/vc_falco_c02.nus3bank": [
+      "sound/bank/fighter_voice/vc_falco_c122.nus3bank"
+    ],
+    "sound/bank/fighter_voice/vc_falco_c02.tonelabel": [
+      "sound/bank/fighter_voice/vc_falco_c122.tonelabel"
+    ],
+    "sound/bank/fighter_voice/vc_falco_cheer_c02.nus3audio": [
+      "sound/bank/fighter_voice/vc_falco_cheer_c122.nus3audio"
+    ],
+    "sound/bank/fighter_voice/vc_falco_cheer_c02.nus3bank": [
+      "sound/bank/fighter_voice/vc_falco_cheer_c122.nus3bank"
+    ],
+    "sound/bank/fighter_voice/vc_falco_cheer_c02.tonelabel": [
+      "sound/bank/fighter_voice/vc_falco_cheer_c122.tonelabel"
+    ],
+    "camera/fighter/falco/c02/d04finallockon.nuanmb": [
+      "camera/fighter/falco/c122/d04finallockon.nuanmb"
+    ],
+    "camera/fighter/falco/c02/d04finallockon02.nuanmb": [
+      "camera/fighter/falco/c122/d04finallockon02.nuanmb"
+    ],
+    "camera/fighter/falco/c02/d04finalvisualscene.nuanmb": [
+      "camera/fighter/falco/c122/d04finalvisualscene.nuanmb"
+    ],
+    "fighter/falco/model/arwing/c03/arwing_cokpit_001_col.nutexb": [
+      "fighter/falco/model/arwing/c123/arwing_cokpit_001_col.nutexb"
+    ],
+    "fighter/falco/model/arwing/c03/arwing_cokpit_001_nor.nutexb": [
+      "fighter/falco/model/arwing/c123/arwing_cokpit_001_nor.nutexb"
+    ],
+    "fighter/falco/model/arwing/c03/arwing_cokpit_001_prm.nutexb": [
+      "fighter/falco/model/arwing/c123/arwing_cokpit_001_prm.nutexb"
+    ],
+    "fighter/falco/model/arwing/c03/dark_model.numatb": [
+      "fighter/falco/model/arwing/c123/dark_model.numatb"
+    ],
+    "fighter/falco/model/arwing/c03/light_model.numatb": [
+      "fighter/falco/model/arwing/c123/light_model.numatb"
+    ],
+    "fighter/falco/model/arwing/c03/metal_arwing_001_col.nutexb": [
+      "fighter/falco/model/arwing/c123/metal_arwing_001_col.nutexb"
+    ],
+    "fighter/falco/model/arwing/c03/metal_arwing_001_nor.nutexb": [
+      "fighter/falco/model/arwing/c123/metal_arwing_001_nor.nutexb"
+    ],
+    "fighter/falco/model/arwing/c03/metal_arwing_001_prm.nutexb": [
+      "fighter/falco/model/arwing/c123/metal_arwing_001_prm.nutexb"
+    ],
+    "fighter/falco/model/arwing/c03/metamon_model.numatb": [
+      "fighter/falco/model/arwing/c123/metamon_model.numatb"
+    ],
+    "fighter/falco/model/arwing/c03/model.nuanmb": [
+      "fighter/falco/model/arwing/c123/model.nuanmb"
+    ],
+    "fighter/falco/model/arwing/c03/model.nuhlpb": [
+      "fighter/falco/model/arwing/c123/model.nuhlpb"
+    ],
+    "fighter/falco/model/arwing/c03/model.numatb": [
+      "fighter/falco/model/arwing/c123/model.numatb"
+    ],
+    "fighter/falco/model/arwing/c03/model.numdlb": [
+      "fighter/falco/model/arwing/c123/model.numdlb"
+    ],
+    "fighter/falco/model/arwing/c03/model.numshb": [
+      "fighter/falco/model/arwing/c123/model.numshb"
+    ],
+    "fighter/falco/model/arwing/c03/model.numshexb": [
+      "fighter/falco/model/arwing/c123/model.numshexb"
+    ],
+    "fighter/falco/model/arwing/c03/model.nusktb": [
+      "fighter/falco/model/arwing/c123/model.nusktb"
+    ],
+    "fighter/falco/model/arwing/c03/model.nusrcmdlb": [
+      "fighter/falco/model/arwing/c123/model.nusrcmdlb"
+    ],
+    "fighter/falco/model/arwing/c03/model.xmb": [
+      "fighter/falco/model/arwing/c123/model.xmb"
+    ],
+    "fighter/falco/model/blaster/c03/dark_model.numatb": [
+      "fighter/falco/model/blaster/c123/dark_model.numatb"
+    ],
+    "fighter/falco/model/blaster/c03/fox_blaster_002.nutexb": [
+      "fighter/falco/model/blaster/c123/fox_blaster_002.nutexb"
+    ],
+    "fighter/falco/model/blaster/c03/light_model.numatb": [
+      "fighter/falco/model/blaster/c123/light_model.numatb"
+    ],
+    "fighter/falco/model/blaster/c03/metal_blaster_001_col.nutexb": [
+      "fighter/falco/model/blaster/c123/metal_blaster_001_col.nutexb"
+    ],
+    "fighter/falco/model/blaster/c03/metal_blaster_001_emi.nutexb": [
+      "fighter/falco/model/blaster/c123/metal_blaster_001_emi.nutexb"
+    ],
+    "fighter/falco/model/blaster/c03/metal_blaster_001_nor.nutexb": [
+      "fighter/falco/model/blaster/c123/metal_blaster_001_nor.nutexb"
+    ],
+    "fighter/falco/model/blaster/c03/metal_blaster_001_prm.nutexb": [
+      "fighter/falco/model/blaster/c123/metal_blaster_001_prm.nutexb"
+    ],
+    "fighter/falco/model/blaster/c03/metal_blaster_002_col.nutexb": [
+      "fighter/falco/model/blaster/c123/metal_blaster_002_col.nutexb"
+    ],
+    "fighter/falco/model/blaster/c03/metamon_model.numatb": [
+      "fighter/falco/model/blaster/c123/metamon_model.numatb"
+    ],
+    "fighter/falco/model/blaster/c03/model.nuanmb": [
+      "fighter/falco/model/blaster/c123/model.nuanmb"
+    ],
+    "fighter/falco/model/blaster/c03/model.nuhlpb": [
+      "fighter/falco/model/blaster/c123/model.nuhlpb"
+    ],
+    "fighter/falco/model/blaster/c03/model.numatb": [
+      "fighter/falco/model/blaster/c123/model.numatb"
+    ],
+    "fighter/falco/model/blaster/c03/model.numdlb": [
+      "fighter/falco/model/blaster/c123/model.numdlb"
+    ],
+    "fighter/falco/model/blaster/c03/model.numshb": [
+      "fighter/falco/model/blaster/c123/model.numshb"
+    ],
+    "fighter/falco/model/blaster/c03/model.numshexb": [
+      "fighter/falco/model/blaster/c123/model.numshexb"
+    ],
+    "fighter/falco/model/blaster/c03/model.nusktb": [
+      "fighter/falco/model/blaster/c123/model.nusktb"
+    ],
+    "fighter/falco/model/blaster/c03/model.nusrcmdlb": [
+      "fighter/falco/model/blaster/c123/model.nusrcmdlb"
+    ],
+    "fighter/falco/model/blaster/c03/model.xmb": [
+      "fighter/falco/model/blaster/c123/model.xmb"
+    ],
+    "fighter/falco/model/reticle/c03/alp_reticle_001_col.nutexb": [
+      "fighter/falco/model/reticle/c123/alp_reticle_001_col.nutexb"
+    ],
+    "fighter/falco/model/reticle/c03/dark_model.numatb": [
+      "fighter/falco/model/reticle/c123/dark_model.numatb"
+    ],
+    "fighter/falco/model/reticle/c03/light_model.numatb": [
+      "fighter/falco/model/reticle/c123/light_model.numatb"
+    ],
+    "fighter/falco/model/reticle/c03/metamon_model.numatb": [
+      "fighter/falco/model/reticle/c123/metamon_model.numatb"
+    ],
+    "fighter/falco/model/reticle/c03/model.nuhlpb": [
+      "fighter/falco/model/reticle/c123/model.nuhlpb"
+    ],
+    "fighter/falco/model/reticle/c03/model.numatb": [
+      "fighter/falco/model/reticle/c123/model.numatb"
+    ],
+    "fighter/falco/model/reticle/c03/model.numdlb": [
+      "fighter/falco/model/reticle/c123/model.numdlb"
+    ],
+    "fighter/falco/model/reticle/c03/model.numshb": [
+      "fighter/falco/model/reticle/c123/model.numshb"
+    ],
+    "fighter/falco/model/reticle/c03/model.numshexb": [
+      "fighter/falco/model/reticle/c123/model.numshexb"
+    ],
+    "fighter/falco/model/reticle/c03/model.nusktb": [
+      "fighter/falco/model/reticle/c123/model.nusktb"
+    ],
+    "fighter/falco/model/reticle/c03/model.nusrcmdlb": [
+      "fighter/falco/model/reticle/c123/model.nusrcmdlb"
+    ],
+    "fighter/falco/model/reticle/c03/model.xmb": [
+      "fighter/falco/model/reticle/c123/model.xmb"
+    ],
+    "fighter/falco/motion/arwing/c03/d04finallockon01.nuanmb": [
+      "fighter/falco/motion/arwing/c123/d04finallockon01.nuanmb"
+    ],
+    "fighter/falco/motion/arwing/c03/d04finallockon02.nuanmb": [
+      "fighter/falco/motion/arwing/c123/d04finallockon02.nuanmb"
+    ],
+    "fighter/falco/motion/arwing/c03/d04finallockon03.nuanmb": [
+      "fighter/falco/motion/arwing/c123/d04finallockon03.nuanmb"
+    ],
+    "fighter/falco/motion/arwing/c03/d04finalvisualscene.nuanmb": [
+      "fighter/falco/motion/arwing/c123/d04finalvisualscene.nuanmb"
+    ],
+    "fighter/falco/motion/arwing/c03/d04finalvisualscene01.nuanmb": [
+      "fighter/falco/motion/arwing/c123/d04finalvisualscene01.nuanmb"
+    ],
+    "fighter/falco/motion/arwing/c03/d04finalvisualscene02.nuanmb": [
+      "fighter/falco/motion/arwing/c123/d04finalvisualscene02.nuanmb"
+    ],
+    "fighter/falco/motion/arwing/c03/d04finalvisualscene03.nuanmb": [
+      "fighter/falco/motion/arwing/c123/d04finalvisualscene03.nuanmb"
+    ],
+    "fighter/falco/motion/arwing/c03/j00entryl.nuanmb": [
+      "fighter/falco/motion/arwing/c123/j00entryl.nuanmb"
+    ],
+    "fighter/falco/motion/arwing/c03/j00entryr.nuanmb": [
+      "fighter/falco/motion/arwing/c123/j00entryr.nuanmb"
+    ],
+    "fighter/falco/motion/arwing/c03/motion_list.bin": [
+      "fighter/falco/motion/arwing/c123/motion_list.bin"
+    ],
+    "fighter/falco/motion/arwing/c03/update.prc": [
+      "fighter/falco/motion/arwing/c123/update.prc"
+    ],
+    "fighter/falco/motion/arwingshot/c03/motion_list.bin": [
+      "fighter/falco/motion/arwingshot/c123/motion_list.bin"
+    ],
+    "fighter/falco/motion/blaster/c03/blasterclose.nuanmb": [
+      "fighter/falco/motion/blaster/c123/blasterclose.nuanmb"
+    ],
+    "fighter/falco/motion/blaster/c03/blasterloop.nuanmb": [
+      "fighter/falco/motion/blaster/c123/blasterloop.nuanmb"
+    ],
+    "fighter/falco/motion/blaster/c03/blasteropen.nuanmb": [
+      "fighter/falco/motion/blaster/c123/blasteropen.nuanmb"
+    ],
+    "fighter/falco/motion/blaster/c03/motion_list.bin": [
+      "fighter/falco/motion/blaster/c123/motion_list.bin"
+    ],
+    "fighter/falco/motion/blaster/c03/update.prc": [
+      "fighter/falco/motion/blaster/c123/update.prc"
+    ],
+    "fighter/falco/motion/illusion/c03/motion_list.bin": [
+      "fighter/falco/motion/illusion/c123/motion_list.bin"
+    ],
+    "fighter/falco/motion/landmaster/c03/update.prc": [
+      "fighter/falco/motion/landmaster/c123/update.prc"
+    ],
+    "fighter/falco/motion/reticle/c03/motion_list.bin": [
+      "fighter/falco/motion/reticle/c123/motion_list.bin"
+    ],
+    "sound/bank/fighter/se_falco_c03.nus3audio": [
+      "sound/bank/fighter/se_falco_c123.nus3audio"
+    ],
+    "sound/bank/fighter/se_falco_c03.nus3bank": [
+      "sound/bank/fighter/se_falco_c123.nus3bank"
+    ],
+    "sound/bank/fighter/se_falco_c03.tonelabel": [
+      "sound/bank/fighter/se_falco_c123.tonelabel"
+    ],
+    "sound/bank/fighter_voice/vc_falco_c03.nus3bank": [
+      "sound/bank/fighter_voice/vc_falco_c123.nus3bank"
+    ],
+    "sound/bank/fighter_voice/vc_falco_c03.tonelabel": [
+      "sound/bank/fighter_voice/vc_falco_c123.tonelabel"
+    ],
+    "sound/bank/fighter_voice/vc_falco_cheer_c03.nus3audio": [
+      "sound/bank/fighter_voice/vc_falco_cheer_c123.nus3audio"
+    ],
+    "sound/bank/fighter_voice/vc_falco_cheer_c03.nus3bank": [
+      "sound/bank/fighter_voice/vc_falco_cheer_c123.nus3bank"
+    ],
+    "sound/bank/fighter_voice/vc_falco_cheer_c03.tonelabel": [
+      "sound/bank/fighter_voice/vc_falco_cheer_c123.tonelabel"
+    ],
+    "camera/fighter/falco/c03/d04finallockon.nuanmb": [
+      "camera/fighter/falco/c123/d04finallockon.nuanmb"
+    ],
+    "camera/fighter/falco/c03/d04finallockon02.nuanmb": [
+      "camera/fighter/falco/c123/d04finallockon02.nuanmb"
+    ],
+    "camera/fighter/falco/c03/d04finalvisualscene.nuanmb": [
+      "camera/fighter/falco/c123/d04finalvisualscene.nuanmb"
+    ],
+    "fighter/falco/model/arwing/c04/arwing_cokpit_001_col.nutexb": [
+      "fighter/falco/model/arwing/c124/arwing_cokpit_001_col.nutexb"
+    ],
+    "fighter/falco/model/arwing/c04/arwing_cokpit_001_nor.nutexb": [
+      "fighter/falco/model/arwing/c124/arwing_cokpit_001_nor.nutexb"
+    ],
+    "fighter/falco/model/arwing/c04/arwing_cokpit_001_prm.nutexb": [
+      "fighter/falco/model/arwing/c124/arwing_cokpit_001_prm.nutexb"
+    ],
+    "fighter/falco/model/arwing/c04/dark_model.numatb": [
+      "fighter/falco/model/arwing/c124/dark_model.numatb"
+    ],
+    "fighter/falco/model/arwing/c04/light_model.numatb": [
+      "fighter/falco/model/arwing/c124/light_model.numatb"
+    ],
+    "fighter/falco/model/arwing/c04/metal_arwing_001_col.nutexb": [
+      "fighter/falco/model/arwing/c124/metal_arwing_001_col.nutexb"
+    ],
+    "fighter/falco/model/arwing/c04/metal_arwing_001_nor.nutexb": [
+      "fighter/falco/model/arwing/c124/metal_arwing_001_nor.nutexb"
+    ],
+    "fighter/falco/model/arwing/c04/metal_arwing_001_prm.nutexb": [
+      "fighter/falco/model/arwing/c124/metal_arwing_001_prm.nutexb"
+    ],
+    "fighter/falco/model/arwing/c04/metamon_model.numatb": [
+      "fighter/falco/model/arwing/c124/metamon_model.numatb"
+    ],
+    "fighter/falco/model/arwing/c04/model.nuanmb": [
+      "fighter/falco/model/arwing/c124/model.nuanmb"
+    ],
+    "fighter/falco/model/arwing/c04/model.nuhlpb": [
+      "fighter/falco/model/arwing/c124/model.nuhlpb"
+    ],
+    "fighter/falco/model/arwing/c04/model.numatb": [
+      "fighter/falco/model/arwing/c124/model.numatb"
+    ],
+    "fighter/falco/model/arwing/c04/model.numdlb": [
+      "fighter/falco/model/arwing/c124/model.numdlb"
+    ],
+    "fighter/falco/model/arwing/c04/model.numshb": [
+      "fighter/falco/model/arwing/c124/model.numshb"
+    ],
+    "fighter/falco/model/arwing/c04/model.numshexb": [
+      "fighter/falco/model/arwing/c124/model.numshexb"
+    ],
+    "fighter/falco/model/arwing/c04/model.nusktb": [
+      "fighter/falco/model/arwing/c124/model.nusktb"
+    ],
+    "fighter/falco/model/arwing/c04/model.nusrcmdlb": [
+      "fighter/falco/model/arwing/c124/model.nusrcmdlb"
+    ],
+    "fighter/falco/model/arwing/c04/model.xmb": [
+      "fighter/falco/model/arwing/c124/model.xmb"
+    ],
+    "fighter/falco/model/blaster/c04/dark_model.numatb": [
+      "fighter/falco/model/blaster/c124/dark_model.numatb"
+    ],
+    "fighter/falco/model/blaster/c04/fox_blaster_002.nutexb": [
+      "fighter/falco/model/blaster/c124/fox_blaster_002.nutexb"
+    ],
+    "fighter/falco/model/blaster/c04/light_model.numatb": [
+      "fighter/falco/model/blaster/c124/light_model.numatb"
+    ],
+    "fighter/falco/model/blaster/c04/metal_blaster_001_col.nutexb": [
+      "fighter/falco/model/blaster/c124/metal_blaster_001_col.nutexb"
+    ],
+    "fighter/falco/model/blaster/c04/metal_blaster_001_emi.nutexb": [
+      "fighter/falco/model/blaster/c124/metal_blaster_001_emi.nutexb"
+    ],
+    "fighter/falco/model/blaster/c04/metal_blaster_001_nor.nutexb": [
+      "fighter/falco/model/blaster/c124/metal_blaster_001_nor.nutexb"
+    ],
+    "fighter/falco/model/blaster/c04/metal_blaster_001_prm.nutexb": [
+      "fighter/falco/model/blaster/c124/metal_blaster_001_prm.nutexb"
+    ],
+    "fighter/falco/model/blaster/c04/metal_blaster_002_col.nutexb": [
+      "fighter/falco/model/blaster/c124/metal_blaster_002_col.nutexb"
+    ],
+    "fighter/falco/model/blaster/c04/metamon_model.numatb": [
+      "fighter/falco/model/blaster/c124/metamon_model.numatb"
+    ],
+    "fighter/falco/model/blaster/c04/model.nuanmb": [
+      "fighter/falco/model/blaster/c124/model.nuanmb"
+    ],
+    "fighter/falco/model/blaster/c04/model.nuhlpb": [
+      "fighter/falco/model/blaster/c124/model.nuhlpb"
+    ],
+    "fighter/falco/model/blaster/c04/model.numatb": [
+      "fighter/falco/model/blaster/c124/model.numatb"
+    ],
+    "fighter/falco/model/blaster/c04/model.numdlb": [
+      "fighter/falco/model/blaster/c124/model.numdlb"
+    ],
+    "fighter/falco/model/blaster/c04/model.numshb": [
+      "fighter/falco/model/blaster/c124/model.numshb"
+    ],
+    "fighter/falco/model/blaster/c04/model.numshexb": [
+      "fighter/falco/model/blaster/c124/model.numshexb"
+    ],
+    "fighter/falco/model/blaster/c04/model.nusktb": [
+      "fighter/falco/model/blaster/c124/model.nusktb"
+    ],
+    "fighter/falco/model/blaster/c04/model.nusrcmdlb": [
+      "fighter/falco/model/blaster/c124/model.nusrcmdlb"
+    ],
+    "fighter/falco/model/blaster/c04/model.xmb": [
+      "fighter/falco/model/blaster/c124/model.xmb"
+    ],
+    "fighter/falco/model/reticle/c04/alp_reticle_001_col.nutexb": [
+      "fighter/falco/model/reticle/c124/alp_reticle_001_col.nutexb"
+    ],
+    "fighter/falco/model/reticle/c04/dark_model.numatb": [
+      "fighter/falco/model/reticle/c124/dark_model.numatb"
+    ],
+    "fighter/falco/model/reticle/c04/light_model.numatb": [
+      "fighter/falco/model/reticle/c124/light_model.numatb"
+    ],
+    "fighter/falco/model/reticle/c04/metamon_model.numatb": [
+      "fighter/falco/model/reticle/c124/metamon_model.numatb"
+    ],
+    "fighter/falco/model/reticle/c04/model.nuhlpb": [
+      "fighter/falco/model/reticle/c124/model.nuhlpb"
+    ],
+    "fighter/falco/model/reticle/c04/model.numatb": [
+      "fighter/falco/model/reticle/c124/model.numatb"
+    ],
+    "fighter/falco/model/reticle/c04/model.numdlb": [
+      "fighter/falco/model/reticle/c124/model.numdlb"
+    ],
+    "fighter/falco/model/reticle/c04/model.numshb": [
+      "fighter/falco/model/reticle/c124/model.numshb"
+    ],
+    "fighter/falco/model/reticle/c04/model.numshexb": [
+      "fighter/falco/model/reticle/c124/model.numshexb"
+    ],
+    "fighter/falco/model/reticle/c04/model.nusktb": [
+      "fighter/falco/model/reticle/c124/model.nusktb"
+    ],
+    "fighter/falco/model/reticle/c04/model.nusrcmdlb": [
+      "fighter/falco/model/reticle/c124/model.nusrcmdlb"
+    ],
+    "fighter/falco/model/reticle/c04/model.xmb": [
+      "fighter/falco/model/reticle/c124/model.xmb"
+    ],
+    "fighter/falco/motion/arwing/c04/d04finallockon01.nuanmb": [
+      "fighter/falco/motion/arwing/c124/d04finallockon01.nuanmb"
+    ],
+    "fighter/falco/motion/arwing/c04/d04finallockon02.nuanmb": [
+      "fighter/falco/motion/arwing/c124/d04finallockon02.nuanmb"
+    ],
+    "fighter/falco/motion/arwing/c04/d04finallockon03.nuanmb": [
+      "fighter/falco/motion/arwing/c124/d04finallockon03.nuanmb"
+    ],
+    "fighter/falco/motion/arwing/c04/d04finalvisualscene.nuanmb": [
+      "fighter/falco/motion/arwing/c124/d04finalvisualscene.nuanmb"
+    ],
+    "fighter/falco/motion/arwing/c04/d04finalvisualscene01.nuanmb": [
+      "fighter/falco/motion/arwing/c124/d04finalvisualscene01.nuanmb"
+    ],
+    "fighter/falco/motion/arwing/c04/d04finalvisualscene02.nuanmb": [
+      "fighter/falco/motion/arwing/c124/d04finalvisualscene02.nuanmb"
+    ],
+    "fighter/falco/motion/arwing/c04/d04finalvisualscene03.nuanmb": [
+      "fighter/falco/motion/arwing/c124/d04finalvisualscene03.nuanmb"
+    ],
+    "fighter/falco/motion/arwing/c04/j00entryl.nuanmb": [
+      "fighter/falco/motion/arwing/c124/j00entryl.nuanmb"
+    ],
+    "fighter/falco/motion/arwing/c04/j00entryr.nuanmb": [
+      "fighter/falco/motion/arwing/c124/j00entryr.nuanmb"
+    ],
+    "fighter/falco/motion/arwing/c04/motion_list.bin": [
+      "fighter/falco/motion/arwing/c124/motion_list.bin"
+    ],
+    "fighter/falco/motion/arwing/c04/update.prc": [
+      "fighter/falco/motion/arwing/c124/update.prc"
+    ],
+    "fighter/falco/motion/arwingshot/c04/motion_list.bin": [
+      "fighter/falco/motion/arwingshot/c124/motion_list.bin"
+    ],
+    "fighter/falco/motion/blaster/c04/blasterclose.nuanmb": [
+      "fighter/falco/motion/blaster/c124/blasterclose.nuanmb"
+    ],
+    "fighter/falco/motion/blaster/c04/blasterloop.nuanmb": [
+      "fighter/falco/motion/blaster/c124/blasterloop.nuanmb"
+    ],
+    "fighter/falco/motion/blaster/c04/blasteropen.nuanmb": [
+      "fighter/falco/motion/blaster/c124/blasteropen.nuanmb"
+    ],
+    "fighter/falco/motion/blaster/c04/motion_list.bin": [
+      "fighter/falco/motion/blaster/c124/motion_list.bin"
+    ],
+    "fighter/falco/motion/blaster/c04/update.prc": [
+      "fighter/falco/motion/blaster/c124/update.prc"
+    ],
+    "fighter/falco/motion/illusion/c04/motion_list.bin": [
+      "fighter/falco/motion/illusion/c124/motion_list.bin"
+    ],
+    "fighter/falco/motion/landmaster/c04/update.prc": [
+      "fighter/falco/motion/landmaster/c124/update.prc"
+    ],
+    "fighter/falco/motion/reticle/c04/motion_list.bin": [
+      "fighter/falco/motion/reticle/c124/motion_list.bin"
+    ],
+    "sound/bank/fighter/se_falco_c04.nus3audio": [
+      "sound/bank/fighter/se_falco_c124.nus3audio"
+    ],
+    "sound/bank/fighter/se_falco_c04.nus3bank": [
+      "sound/bank/fighter/se_falco_c124.nus3bank"
+    ],
+    "sound/bank/fighter/se_falco_c04.tonelabel": [
+      "sound/bank/fighter/se_falco_c124.tonelabel"
+    ],
+    "sound/bank/fighter_voice/vc_falco_c04.nus3bank": [
+      "sound/bank/fighter_voice/vc_falco_c124.nus3bank"
+    ],
+    "sound/bank/fighter_voice/vc_falco_c04.tonelabel": [
+      "sound/bank/fighter_voice/vc_falco_c124.tonelabel"
+    ],
+    "sound/bank/fighter_voice/vc_falco_cheer_c04.nus3audio": [
+      "sound/bank/fighter_voice/vc_falco_cheer_c124.nus3audio"
+    ],
+    "sound/bank/fighter_voice/vc_falco_cheer_c04.nus3bank": [
+      "sound/bank/fighter_voice/vc_falco_cheer_c124.nus3bank"
+    ],
+    "sound/bank/fighter_voice/vc_falco_cheer_c04.tonelabel": [
+      "sound/bank/fighter_voice/vc_falco_cheer_c124.tonelabel"
+    ],
+    "camera/fighter/falco/c04/d04finallockon.nuanmb": [
+      "camera/fighter/falco/c124/d04finallockon.nuanmb"
+    ],
+    "camera/fighter/falco/c04/d04finallockon02.nuanmb": [
+      "camera/fighter/falco/c124/d04finallockon02.nuanmb"
+    ],
+    "camera/fighter/falco/c04/d04finalvisualscene.nuanmb": [
+      "camera/fighter/falco/c124/d04finalvisualscene.nuanmb"
+    ],
+    "fighter/falco/model/arwing/c06/arwing_cokpit_001_col.nutexb": [
+      "fighter/falco/model/arwing/c126/arwing_cokpit_001_col.nutexb"
+    ],
+    "fighter/falco/model/arwing/c06/arwing_cokpit_001_nor.nutexb": [
+      "fighter/falco/model/arwing/c126/arwing_cokpit_001_nor.nutexb"
+    ],
+    "fighter/falco/model/arwing/c06/arwing_cokpit_001_prm.nutexb": [
+      "fighter/falco/model/arwing/c126/arwing_cokpit_001_prm.nutexb"
+    ],
+    "fighter/falco/model/arwing/c06/dark_model.numatb": [
+      "fighter/falco/model/arwing/c126/dark_model.numatb"
+    ],
+    "fighter/falco/model/arwing/c06/light_model.numatb": [
+      "fighter/falco/model/arwing/c126/light_model.numatb"
+    ],
+    "fighter/falco/model/arwing/c06/metal_arwing_001_col.nutexb": [
+      "fighter/falco/model/arwing/c126/metal_arwing_001_col.nutexb"
+    ],
+    "fighter/falco/model/arwing/c06/metal_arwing_001_nor.nutexb": [
+      "fighter/falco/model/arwing/c126/metal_arwing_001_nor.nutexb"
+    ],
+    "fighter/falco/model/arwing/c06/metal_arwing_001_prm.nutexb": [
+      "fighter/falco/model/arwing/c126/metal_arwing_001_prm.nutexb"
+    ],
+    "fighter/falco/model/arwing/c06/metamon_model.numatb": [
+      "fighter/falco/model/arwing/c126/metamon_model.numatb"
+    ],
+    "fighter/falco/model/arwing/c06/model.nuanmb": [
+      "fighter/falco/model/arwing/c126/model.nuanmb"
+    ],
+    "fighter/falco/model/arwing/c06/model.nuhlpb": [
+      "fighter/falco/model/arwing/c126/model.nuhlpb"
+    ],
+    "fighter/falco/model/arwing/c06/model.numatb": [
+      "fighter/falco/model/arwing/c126/model.numatb"
+    ],
+    "fighter/falco/model/arwing/c06/model.numdlb": [
+      "fighter/falco/model/arwing/c126/model.numdlb"
+    ],
+    "fighter/falco/model/arwing/c06/model.numshb": [
+      "fighter/falco/model/arwing/c126/model.numshb"
+    ],
+    "fighter/falco/model/arwing/c06/model.numshexb": [
+      "fighter/falco/model/arwing/c126/model.numshexb"
+    ],
+    "fighter/falco/model/arwing/c06/model.nusktb": [
+      "fighter/falco/model/arwing/c126/model.nusktb"
+    ],
+    "fighter/falco/model/arwing/c06/model.nusrcmdlb": [
+      "fighter/falco/model/arwing/c126/model.nusrcmdlb"
+    ],
+    "fighter/falco/model/arwing/c06/model.xmb": [
+      "fighter/falco/model/arwing/c126/model.xmb"
+    ],
+    "fighter/falco/model/blaster/c06/dark_model.numatb": [
+      "fighter/falco/model/blaster/c126/dark_model.numatb"
+    ],
+    "fighter/falco/model/blaster/c06/fox_blaster_002.nutexb": [
+      "fighter/falco/model/blaster/c126/fox_blaster_002.nutexb"
+    ],
+    "fighter/falco/model/blaster/c06/light_model.numatb": [
+      "fighter/falco/model/blaster/c126/light_model.numatb"
+    ],
+    "fighter/falco/model/blaster/c06/metal_blaster_001_col.nutexb": [
+      "fighter/falco/model/blaster/c126/metal_blaster_001_col.nutexb"
+    ],
+    "fighter/falco/model/blaster/c06/metal_blaster_001_emi.nutexb": [
+      "fighter/falco/model/blaster/c126/metal_blaster_001_emi.nutexb"
+    ],
+    "fighter/falco/model/blaster/c06/metal_blaster_001_nor.nutexb": [
+      "fighter/falco/model/blaster/c126/metal_blaster_001_nor.nutexb"
+    ],
+    "fighter/falco/model/blaster/c06/metal_blaster_001_prm.nutexb": [
+      "fighter/falco/model/blaster/c126/metal_blaster_001_prm.nutexb"
+    ],
+    "fighter/falco/model/blaster/c06/metal_blaster_002_col.nutexb": [
+      "fighter/falco/model/blaster/c126/metal_blaster_002_col.nutexb"
+    ],
+    "fighter/falco/model/blaster/c06/metamon_model.numatb": [
+      "fighter/falco/model/blaster/c126/metamon_model.numatb"
+    ],
+    "fighter/falco/model/blaster/c06/model.nuanmb": [
+      "fighter/falco/model/blaster/c126/model.nuanmb"
+    ],
+    "fighter/falco/model/blaster/c06/model.nuhlpb": [
+      "fighter/falco/model/blaster/c126/model.nuhlpb"
+    ],
+    "fighter/falco/model/blaster/c06/model.numatb": [
+      "fighter/falco/model/blaster/c126/model.numatb"
+    ],
+    "fighter/falco/model/blaster/c06/model.numdlb": [
+      "fighter/falco/model/blaster/c126/model.numdlb"
+    ],
+    "fighter/falco/model/blaster/c06/model.numshb": [
+      "fighter/falco/model/blaster/c126/model.numshb"
+    ],
+    "fighter/falco/model/blaster/c06/model.numshexb": [
+      "fighter/falco/model/blaster/c126/model.numshexb"
+    ],
+    "fighter/falco/model/blaster/c06/model.nusktb": [
+      "fighter/falco/model/blaster/c126/model.nusktb"
+    ],
+    "fighter/falco/model/blaster/c06/model.nusrcmdlb": [
+      "fighter/falco/model/blaster/c126/model.nusrcmdlb"
+    ],
+    "fighter/falco/model/blaster/c06/model.xmb": [
+      "fighter/falco/model/blaster/c126/model.xmb"
+    ],
+    "fighter/falco/model/reticle/c06/alp_reticle_001_col.nutexb": [
+      "fighter/falco/model/reticle/c126/alp_reticle_001_col.nutexb"
+    ],
+    "fighter/falco/model/reticle/c06/dark_model.numatb": [
+      "fighter/falco/model/reticle/c126/dark_model.numatb"
+    ],
+    "fighter/falco/model/reticle/c06/light_model.numatb": [
+      "fighter/falco/model/reticle/c126/light_model.numatb"
+    ],
+    "fighter/falco/model/reticle/c06/metamon_model.numatb": [
+      "fighter/falco/model/reticle/c126/metamon_model.numatb"
+    ],
+    "fighter/falco/model/reticle/c06/model.nuhlpb": [
+      "fighter/falco/model/reticle/c126/model.nuhlpb"
+    ],
+    "fighter/falco/model/reticle/c06/model.numatb": [
+      "fighter/falco/model/reticle/c126/model.numatb"
+    ],
+    "fighter/falco/model/reticle/c06/model.numdlb": [
+      "fighter/falco/model/reticle/c126/model.numdlb"
+    ],
+    "fighter/falco/model/reticle/c06/model.numshb": [
+      "fighter/falco/model/reticle/c126/model.numshb"
+    ],
+    "fighter/falco/model/reticle/c06/model.numshexb": [
+      "fighter/falco/model/reticle/c126/model.numshexb"
+    ],
+    "fighter/falco/model/reticle/c06/model.nusktb": [
+      "fighter/falco/model/reticle/c126/model.nusktb"
+    ],
+    "fighter/falco/model/reticle/c06/model.nusrcmdlb": [
+      "fighter/falco/model/reticle/c126/model.nusrcmdlb"
+    ],
+    "fighter/falco/model/reticle/c06/model.xmb": [
+      "fighter/falco/model/reticle/c126/model.xmb"
+    ],
+    "fighter/falco/motion/arwing/c06/d04finallockon01.nuanmb": [
+      "fighter/falco/motion/arwing/c126/d04finallockon01.nuanmb"
+    ],
+    "fighter/falco/motion/arwing/c06/d04finallockon02.nuanmb": [
+      "fighter/falco/motion/arwing/c126/d04finallockon02.nuanmb"
+    ],
+    "fighter/falco/motion/arwing/c06/d04finallockon03.nuanmb": [
+      "fighter/falco/motion/arwing/c126/d04finallockon03.nuanmb"
+    ],
+    "fighter/falco/motion/arwing/c06/d04finalvisualscene.nuanmb": [
+      "fighter/falco/motion/arwing/c126/d04finalvisualscene.nuanmb"
+    ],
+    "fighter/falco/motion/arwing/c06/d04finalvisualscene01.nuanmb": [
+      "fighter/falco/motion/arwing/c126/d04finalvisualscene01.nuanmb"
+    ],
+    "fighter/falco/motion/arwing/c06/d04finalvisualscene02.nuanmb": [
+      "fighter/falco/motion/arwing/c126/d04finalvisualscene02.nuanmb"
+    ],
+    "fighter/falco/motion/arwing/c06/d04finalvisualscene03.nuanmb": [
+      "fighter/falco/motion/arwing/c126/d04finalvisualscene03.nuanmb"
+    ],
+    "fighter/falco/motion/arwing/c06/j00entryl.nuanmb": [
+      "fighter/falco/motion/arwing/c126/j00entryl.nuanmb"
+    ],
+    "fighter/falco/motion/arwing/c06/j00entryr.nuanmb": [
+      "fighter/falco/motion/arwing/c126/j00entryr.nuanmb"
+    ],
+    "fighter/falco/motion/arwing/c06/motion_list.bin": [
+      "fighter/falco/motion/arwing/c126/motion_list.bin"
+    ],
+    "fighter/falco/motion/arwing/c06/update.prc": [
+      "fighter/falco/motion/arwing/c126/update.prc"
+    ],
+    "fighter/falco/motion/arwingshot/c06/motion_list.bin": [
+      "fighter/falco/motion/arwingshot/c126/motion_list.bin"
+    ],
+    "fighter/falco/motion/blaster/c06/blasterclose.nuanmb": [
+      "fighter/falco/motion/blaster/c126/blasterclose.nuanmb"
+    ],
+    "fighter/falco/motion/blaster/c06/blasterloop.nuanmb": [
+      "fighter/falco/motion/blaster/c126/blasterloop.nuanmb"
+    ],
+    "fighter/falco/motion/blaster/c06/blasteropen.nuanmb": [
+      "fighter/falco/motion/blaster/c126/blasteropen.nuanmb"
+    ],
+    "fighter/falco/motion/blaster/c06/motion_list.bin": [
+      "fighter/falco/motion/blaster/c126/motion_list.bin"
+    ],
+    "fighter/falco/motion/blaster/c06/update.prc": [
+      "fighter/falco/motion/blaster/c126/update.prc"
+    ],
+    "fighter/falco/motion/illusion/c06/motion_list.bin": [
+      "fighter/falco/motion/illusion/c126/motion_list.bin"
+    ],
+    "fighter/falco/motion/landmaster/c06/update.prc": [
+      "fighter/falco/motion/landmaster/c126/update.prc"
+    ],
+    "fighter/falco/motion/reticle/c06/motion_list.bin": [
+      "fighter/falco/motion/reticle/c126/motion_list.bin"
+    ],
+    "sound/bank/fighter/se_falco_c06.nus3audio": [
+      "sound/bank/fighter/se_falco_c126.nus3audio"
+    ],
+    "sound/bank/fighter/se_falco_c06.nus3bank": [
+      "sound/bank/fighter/se_falco_c126.nus3bank"
+    ],
+    "sound/bank/fighter/se_falco_c06.tonelabel": [
+      "sound/bank/fighter/se_falco_c126.tonelabel"
+    ],
+    "sound/bank/fighter_voice/vc_falco_c06.nus3bank": [
+      "sound/bank/fighter_voice/vc_falco_c126.nus3bank"
+    ],
+    "sound/bank/fighter_voice/vc_falco_c06.tonelabel": [
+      "sound/bank/fighter_voice/vc_falco_c126.tonelabel"
+    ],
+    "sound/bank/fighter_voice/vc_falco_cheer_c06.nus3audio": [
+      "sound/bank/fighter_voice/vc_falco_cheer_c126.nus3audio"
+    ],
+    "sound/bank/fighter_voice/vc_falco_cheer_c06.nus3bank": [
+      "sound/bank/fighter_voice/vc_falco_cheer_c126.nus3bank"
+    ],
+    "sound/bank/fighter_voice/vc_falco_cheer_c06.tonelabel": [
+      "sound/bank/fighter_voice/vc_falco_cheer_c126.tonelabel"
+    ],
+    "camera/fighter/falco/c06/d04finallockon.nuanmb": [
+      "camera/fighter/falco/c126/d04finallockon.nuanmb"
+    ],
+    "camera/fighter/falco/c06/d04finallockon02.nuanmb": [
+      "camera/fighter/falco/c126/d04finallockon02.nuanmb"
+    ],
+    "camera/fighter/falco/c06/d04finalvisualscene.nuanmb": [
+      "camera/fighter/falco/c126/d04finalvisualscene.nuanmb"
+    ],
+    "fighter/falco/model/arwing/c07/arwing_cokpit_001_col.nutexb": [
+      "fighter/falco/model/arwing/c127/arwing_cokpit_001_col.nutexb"
+    ],
+    "fighter/falco/model/arwing/c07/arwing_cokpit_001_nor.nutexb": [
+      "fighter/falco/model/arwing/c127/arwing_cokpit_001_nor.nutexb"
+    ],
+    "fighter/falco/model/arwing/c07/arwing_cokpit_001_prm.nutexb": [
+      "fighter/falco/model/arwing/c127/arwing_cokpit_001_prm.nutexb"
+    ],
+    "fighter/falco/model/arwing/c07/dark_model.numatb": [
+      "fighter/falco/model/arwing/c127/dark_model.numatb"
+    ],
+    "fighter/falco/model/arwing/c07/light_model.numatb": [
+      "fighter/falco/model/arwing/c127/light_model.numatb"
+    ],
+    "fighter/falco/model/arwing/c07/metal_arwing_001_col.nutexb": [
+      "fighter/falco/model/arwing/c127/metal_arwing_001_col.nutexb"
+    ],
+    "fighter/falco/model/arwing/c07/metal_arwing_001_nor.nutexb": [
+      "fighter/falco/model/arwing/c127/metal_arwing_001_nor.nutexb"
+    ],
+    "fighter/falco/model/arwing/c07/metal_arwing_001_prm.nutexb": [
+      "fighter/falco/model/arwing/c127/metal_arwing_001_prm.nutexb"
+    ],
+    "fighter/falco/model/arwing/c07/metamon_model.numatb": [
+      "fighter/falco/model/arwing/c127/metamon_model.numatb"
+    ],
+    "fighter/falco/model/arwing/c07/model.nuanmb": [
+      "fighter/falco/model/arwing/c127/model.nuanmb"
+    ],
+    "fighter/falco/model/arwing/c07/model.nuhlpb": [
+      "fighter/falco/model/arwing/c127/model.nuhlpb"
+    ],
+    "fighter/falco/model/arwing/c07/model.numatb": [
+      "fighter/falco/model/arwing/c127/model.numatb"
+    ],
+    "fighter/falco/model/arwing/c07/model.numdlb": [
+      "fighter/falco/model/arwing/c127/model.numdlb"
+    ],
+    "fighter/falco/model/arwing/c07/model.numshb": [
+      "fighter/falco/model/arwing/c127/model.numshb"
+    ],
+    "fighter/falco/model/arwing/c07/model.numshexb": [
+      "fighter/falco/model/arwing/c127/model.numshexb"
+    ],
+    "fighter/falco/model/arwing/c07/model.nusktb": [
+      "fighter/falco/model/arwing/c127/model.nusktb"
+    ],
+    "fighter/falco/model/arwing/c07/model.nusrcmdlb": [
+      "fighter/falco/model/arwing/c127/model.nusrcmdlb"
+    ],
+    "fighter/falco/model/arwing/c07/model.xmb": [
+      "fighter/falco/model/arwing/c127/model.xmb"
+    ],
+    "fighter/falco/model/blaster/c07/dark_model.numatb": [
+      "fighter/falco/model/blaster/c127/dark_model.numatb"
+    ],
+    "fighter/falco/model/blaster/c07/fox_blaster_002.nutexb": [
+      "fighter/falco/model/blaster/c127/fox_blaster_002.nutexb"
+    ],
+    "fighter/falco/model/blaster/c07/light_model.numatb": [
+      "fighter/falco/model/blaster/c127/light_model.numatb"
+    ],
+    "fighter/falco/model/blaster/c07/metal_blaster_001_col.nutexb": [
+      "fighter/falco/model/blaster/c127/metal_blaster_001_col.nutexb"
+    ],
+    "fighter/falco/model/blaster/c07/metal_blaster_001_emi.nutexb": [
+      "fighter/falco/model/blaster/c127/metal_blaster_001_emi.nutexb"
+    ],
+    "fighter/falco/model/blaster/c07/metal_blaster_001_nor.nutexb": [
+      "fighter/falco/model/blaster/c127/metal_blaster_001_nor.nutexb"
+    ],
+    "fighter/falco/model/blaster/c07/metal_blaster_001_prm.nutexb": [
+      "fighter/falco/model/blaster/c127/metal_blaster_001_prm.nutexb"
+    ],
+    "fighter/falco/model/blaster/c07/metal_blaster_002_col.nutexb": [
+      "fighter/falco/model/blaster/c127/metal_blaster_002_col.nutexb"
+    ],
+    "fighter/falco/model/blaster/c07/metamon_model.numatb": [
+      "fighter/falco/model/blaster/c127/metamon_model.numatb"
+    ],
+    "fighter/falco/model/blaster/c07/model.nuanmb": [
+      "fighter/falco/model/blaster/c127/model.nuanmb"
+    ],
+    "fighter/falco/model/blaster/c07/model.nuhlpb": [
+      "fighter/falco/model/blaster/c127/model.nuhlpb"
+    ],
+    "fighter/falco/model/blaster/c07/model.numatb": [
+      "fighter/falco/model/blaster/c127/model.numatb"
+    ],
+    "fighter/falco/model/blaster/c07/model.numdlb": [
+      "fighter/falco/model/blaster/c127/model.numdlb"
+    ],
+    "fighter/falco/model/blaster/c07/model.numshb": [
+      "fighter/falco/model/blaster/c127/model.numshb"
+    ],
+    "fighter/falco/model/blaster/c07/model.numshexb": [
+      "fighter/falco/model/blaster/c127/model.numshexb"
+    ],
+    "fighter/falco/model/blaster/c07/model.nusktb": [
+      "fighter/falco/model/blaster/c127/model.nusktb"
+    ],
+    "fighter/falco/model/blaster/c07/model.nusrcmdlb": [
+      "fighter/falco/model/blaster/c127/model.nusrcmdlb"
+    ],
+    "fighter/falco/model/blaster/c07/model.xmb": [
+      "fighter/falco/model/blaster/c127/model.xmb"
+    ],
+    "fighter/falco/model/reticle/c07/alp_reticle_001_col.nutexb": [
+      "fighter/falco/model/reticle/c127/alp_reticle_001_col.nutexb"
+    ],
+    "fighter/falco/model/reticle/c07/dark_model.numatb": [
+      "fighter/falco/model/reticle/c127/dark_model.numatb"
+    ],
+    "fighter/falco/model/reticle/c07/light_model.numatb": [
+      "fighter/falco/model/reticle/c127/light_model.numatb"
+    ],
+    "fighter/falco/model/reticle/c07/metamon_model.numatb": [
+      "fighter/falco/model/reticle/c127/metamon_model.numatb"
+    ],
+    "fighter/falco/model/reticle/c07/model.nuhlpb": [
+      "fighter/falco/model/reticle/c127/model.nuhlpb"
+    ],
+    "fighter/falco/model/reticle/c07/model.numatb": [
+      "fighter/falco/model/reticle/c127/model.numatb"
+    ],
+    "fighter/falco/model/reticle/c07/model.numdlb": [
+      "fighter/falco/model/reticle/c127/model.numdlb"
+    ],
+    "fighter/falco/model/reticle/c07/model.numshb": [
+      "fighter/falco/model/reticle/c127/model.numshb"
+    ],
+    "fighter/falco/model/reticle/c07/model.numshexb": [
+      "fighter/falco/model/reticle/c127/model.numshexb"
+    ],
+    "fighter/falco/model/reticle/c07/model.nusktb": [
+      "fighter/falco/model/reticle/c127/model.nusktb"
+    ],
+    "fighter/falco/model/reticle/c07/model.nusrcmdlb": [
+      "fighter/falco/model/reticle/c127/model.nusrcmdlb"
+    ],
+    "fighter/falco/model/reticle/c07/model.xmb": [
+      "fighter/falco/model/reticle/c127/model.xmb"
+    ],
+    "fighter/falco/motion/arwing/c07/d04finallockon01.nuanmb": [
+      "fighter/falco/motion/arwing/c127/d04finallockon01.nuanmb"
+    ],
+    "fighter/falco/motion/arwing/c07/d04finallockon02.nuanmb": [
+      "fighter/falco/motion/arwing/c127/d04finallockon02.nuanmb"
+    ],
+    "fighter/falco/motion/arwing/c07/d04finallockon03.nuanmb": [
+      "fighter/falco/motion/arwing/c127/d04finallockon03.nuanmb"
+    ],
+    "fighter/falco/motion/arwing/c07/d04finalvisualscene.nuanmb": [
+      "fighter/falco/motion/arwing/c127/d04finalvisualscene.nuanmb"
+    ],
+    "fighter/falco/motion/arwing/c07/d04finalvisualscene01.nuanmb": [
+      "fighter/falco/motion/arwing/c127/d04finalvisualscene01.nuanmb"
+    ],
+    "fighter/falco/motion/arwing/c07/d04finalvisualscene02.nuanmb": [
+      "fighter/falco/motion/arwing/c127/d04finalvisualscene02.nuanmb"
+    ],
+    "fighter/falco/motion/arwing/c07/d04finalvisualscene03.nuanmb": [
+      "fighter/falco/motion/arwing/c127/d04finalvisualscene03.nuanmb"
+    ],
+    "fighter/falco/motion/arwing/c07/j00entryl.nuanmb": [
+      "fighter/falco/motion/arwing/c127/j00entryl.nuanmb"
+    ],
+    "fighter/falco/motion/arwing/c07/j00entryr.nuanmb": [
+      "fighter/falco/motion/arwing/c127/j00entryr.nuanmb"
+    ],
+    "fighter/falco/motion/arwing/c07/motion_list.bin": [
+      "fighter/falco/motion/arwing/c127/motion_list.bin"
+    ],
+    "fighter/falco/motion/arwing/c07/update.prc": [
+      "fighter/falco/motion/arwing/c127/update.prc"
+    ],
+    "fighter/falco/motion/arwingshot/c07/motion_list.bin": [
+      "fighter/falco/motion/arwingshot/c127/motion_list.bin"
+    ],
+    "fighter/falco/motion/blaster/c07/blasterclose.nuanmb": [
+      "fighter/falco/motion/blaster/c127/blasterclose.nuanmb"
+    ],
+    "fighter/falco/motion/blaster/c07/blasterloop.nuanmb": [
+      "fighter/falco/motion/blaster/c127/blasterloop.nuanmb"
+    ],
+    "fighter/falco/motion/blaster/c07/blasteropen.nuanmb": [
+      "fighter/falco/motion/blaster/c127/blasteropen.nuanmb"
+    ],
+    "fighter/falco/motion/blaster/c07/motion_list.bin": [
+      "fighter/falco/motion/blaster/c127/motion_list.bin"
+    ],
+    "fighter/falco/motion/blaster/c07/update.prc": [
+      "fighter/falco/motion/blaster/c127/update.prc"
+    ],
+    "fighter/falco/motion/illusion/c07/motion_list.bin": [
+      "fighter/falco/motion/illusion/c127/motion_list.bin"
+    ],
+    "fighter/falco/motion/landmaster/c07/update.prc": [
+      "fighter/falco/motion/landmaster/c127/update.prc"
+    ],
+    "fighter/falco/motion/reticle/c07/motion_list.bin": [
+      "fighter/falco/motion/reticle/c127/motion_list.bin"
+    ],
+    "sound/bank/fighter/se_falco_c07.nus3audio": [
+      "sound/bank/fighter/se_falco_c127.nus3audio"
+    ],
+    "sound/bank/fighter/se_falco_c07.nus3bank": [
+      "sound/bank/fighter/se_falco_c127.nus3bank"
+    ],
+    "sound/bank/fighter/se_falco_c07.tonelabel": [
+      "sound/bank/fighter/se_falco_c127.tonelabel"
+    ],
+    "sound/bank/fighter_voice/vc_falco_c07.nus3bank": [
+      "sound/bank/fighter_voice/vc_falco_c127.nus3bank"
+    ],
+    "sound/bank/fighter_voice/vc_falco_c07.tonelabel": [
+      "sound/bank/fighter_voice/vc_falco_c127.tonelabel"
+    ],
+    "sound/bank/fighter_voice/vc_falco_cheer_c07.nus3audio": [
+      "sound/bank/fighter_voice/vc_falco_cheer_c127.nus3audio"
+    ],
+    "sound/bank/fighter_voice/vc_falco_cheer_c07.nus3bank": [
+      "sound/bank/fighter_voice/vc_falco_cheer_c127.nus3bank"
+    ],
+    "sound/bank/fighter_voice/vc_falco_cheer_c07.tonelabel": [
+      "sound/bank/fighter_voice/vc_falco_cheer_c127.tonelabel"
+    ],
+    "camera/fighter/falco/c07/d04finallockon.nuanmb": [
+      "camera/fighter/falco/c127/d04finallockon.nuanmb"
+    ],
+    "camera/fighter/falco/c07/d04finallockon02.nuanmb": [
+      "camera/fighter/falco/c127/d04finallockon02.nuanmb"
+    ],
+    "camera/fighter/falco/c07/d04finalvisualscene.nuanmb": [
+      "camera/fighter/falco/c127/d04finalvisualscene.nuanmb"
+    ]
+  },
+  "new-dir-files": {},
+  "share-to-added": {}
+}

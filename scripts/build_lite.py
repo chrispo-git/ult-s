@@ -4,6 +4,8 @@ from zipfile import ZipFile
 import sys
 import subprocess
 
+from merge_config import merge_configs
+
 try:
     inputs = ("".join(sys.argv)).lower()
     inputs = inputs.replace('build_lite.py', "")
@@ -107,7 +109,6 @@ if os.path.exists(r'target'):
                 #for i in cut_config_param:
                     #f.write(i)
                 #f.close()
-                shutil.copy(r'romfs/config.json', r'releases/ultimate/mods/Ultimate S Lite/config.json')
                 for root, dirs, files in os.walk(r"releases/ultimate/mods/Ultimate S Lite/sound", topdown=False):
                         for name in files:
                             if "c0" in name:
@@ -131,6 +132,7 @@ if os.path.exists(r'target'):
 
                 #Version Text
                 
+                merge_configs(r'releases/ultimate/mods/Ultimate S Lite')
                 print("Copying from romfs finished, now zipping")
             else:
                 print("Error! No romfs folder! Please check your install")
