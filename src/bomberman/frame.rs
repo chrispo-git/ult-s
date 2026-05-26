@@ -328,6 +328,7 @@ unsafe extern "C" fn bomb_frame(weapon: &mut L2CFighterBase) {
         let situation = StatusModule::situation_kind(weapon.module_accessor);
 		let ENTRY_ID = WorkModule::get_int(&mut *boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 		let is_near_ground = GroundModule::ray_check(weapon.module_accessor, &Vector2f{ x: PostureModule::pos_x(weapon.module_accessor), y: PostureModule::pos_y(weapon.module_accessor)}, &Vector2f{ x: 0.0, y: -1.0}, true);
+        ArticleModule::remove_exist(weapon.module_accessor, *WEAPON_PACMAN_FIREHYDRANT_GENERATE_ARTICLE_WATER,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
         if smash::app::utility::get_kind(&mut *boma) == *FIGHTER_KIND_PACMAN  && is_added(&mut *boma) {
 			ModelModule::set_scale(weapon.module_accessor, 0.769);
             if MAKE_NEW_BOMB[ENTRY_ID] {
