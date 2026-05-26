@@ -1,0 +1,32 @@
+{
+  "new-dir-infos": [],
+  "new-dir-infos-base": {},
+  "share-to-vanilla": {},
+  "new-dir-files": {
+    "fighter/mario/c00": [
+      "fighter/mario/motion/body/c00/a02runmax.nuanmb"
+    ],
+    "fighter/mario/c01": [
+      "fighter/mario/motion/body/c01/a02runmax.nuanmb"
+    ],
+    "fighter/mario/c02": [
+      "fighter/mario/motion/body/c02/a02runmax.nuanmb"
+    ],
+    "fighter/mario/c03": [
+      "fighter/mario/motion/body/c03/a02runmax.nuanmb"
+    ],
+    "fighter/mario/c04": [
+      "fighter/mario/motion/body/c04/a02runmax.nuanmb"
+    ],
+    "fighter/mario/c05": [
+      "fighter/mario/motion/body/c05/a02runmax.nuanmb"
+    ],
+    "fighter/mario/c06": [
+      "fighter/mario/motion/body/c06/a02runmax.nuanmb"
+    ],
+    "fighter/mario/c07": [
+      "fighter/mario/motion/body/c07/a02runmax.nuanmb"
+    ]
+  },
+  "share-to-added": {}
+}

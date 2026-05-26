@@ -4,6 +4,8 @@ from zipfile import ZipFile
 import sys
 import subprocess
 
+from merge_config import merge_configs
+
 def log(msg):
     print(msg, flush=True)
 
@@ -228,7 +230,6 @@ if os.path.exists(r'target'):
                 log("[build_char] Starting romfs copy")
                 copytree(r'romfs/fighter/common', r'releases/ultimate/mods/Ultimate S Arcropolis (plugin, singular character)/fighter/common')
                 copytree(r'romfs/prebuilt', r'releases/ultimate/mods/Ultimate S Arcropolis (plugin, singular character)/prebuilt')
-                shutil.copy(r'romfs/config.json', r'releases/ultimate/mods/Ultimate S Arcropolis (plugin, singular character)/config.json')
                 char_romfs = os.path.join(r'romfs/fighter', output_folder)
                 char_out = os.path.join(r'releases/ultimate/mods/Ultimate S Arcropolis (plugin, singular character)/fighter', output_folder)
                 if os.path.exists(char_romfs):
@@ -236,6 +237,7 @@ if os.path.exists(r'target'):
                     copytree(char_romfs, char_out)
                 else:
                     log(f"[build_char] WARNING: No romfs folder found for '{output_folder}' at {char_romfs}")
+                merge_configs(r'releases/ultimate/mods/Ultimate S Arcropolis (plugin, singular character)')
                 log("[build_char] Copying from romfs finished, now zipping")
             else:
                 log("[build_char] ERROR: No romfs folder! Please check your install")

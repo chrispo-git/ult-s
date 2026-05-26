@@ -1,0 +1,40 @@
+{
+  "new-dir-infos": [],
+  "new-dir-infos-base": {},
+  "share-to-vanilla": {},
+  "new-dir-files": {
+    "fighter/toonlink/c00": [
+      "fighter/toonlink/motion/bow/c00/c03attacks4s.nuanmb",
+      "fighter/toonlink/motion/bow/c00/d02specialairhi.nuanmb"
+    ],
+    "fighter/toonlink/c01": [
+      "fighter/toonlink/motion/bow/c01/c03attacks4s.nuanmb",
+      "fighter/toonlink/motion/bow/c01/d02specialairhi.nuanmb"
+    ],
+    "fighter/toonlink/c02": [
+      "fighter/toonlink/motion/bow/c02/c03attacks4s.nuanmb",
+      "fighter/toonlink/motion/bow/c02/d02specialairhi.nuanmb"
+    ],
+    "fighter/toonlink/c03": [
+      "fighter/toonlink/motion/bow/c03/c03attacks4s.nuanmb",
+      "fighter/toonlink/motion/bow/c03/d02specialairhi.nuanmb"
+    ],
+    "fighter/toonlink/c04": [
+      "fighter/toonlink/motion/bow/c04/c03attacks4s.nuanmb",
+      "fighter/toonlink/motion/bow/c04/d02specialairhi.nuanmb"
+    ],
+    "fighter/toonlink/c05": [
+      "fighter/toonlink/motion/bow/c05/c03attacks4s.nuanmb",
+      "fighter/toonlink/motion/bow/c05/d02specialairhi.nuanmb"
+    ],
+    "fighter/toonlink/c06": [
+      "fighter/toonlink/motion/bow/c06/c03attacks4s.nuanmb",
+      "fighter/toonlink/motion/bow/c06/d02specialairhi.nuanmb"
+    ],
+    "fighter/toonlink/c07": [
+      "fighter/toonlink/motion/bow/c07/c03attacks4s.nuanmb",
+      "fighter/toonlink/motion/bow/c07/d02specialairhi.nuanmb"
+    ]
+  },
+  "share-to-added": {}
+}

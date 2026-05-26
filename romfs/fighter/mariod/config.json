@@ -1,0 +1,450 @@
+{
+  "new-dir-infos": [],
+  "new-dir-infos-base": {},
+  "share-to-vanilla": {
+    "sound/bank/fighter/se_mariod_c00.tonelabel": [
+      "sound/bank/fighter/se_mariod_c120.tonelabel",
+      "sound/bank/fighter/se_mariod_c121.tonelabel",
+      "sound/bank/fighter/se_mariod_c122.tonelabel",
+      "sound/bank/fighter/se_mariod_c123.tonelabel",
+      "sound/bank/fighter/se_mariod_c124.tonelabel",
+      "sound/bank/fighter/se_mariod_c125.tonelabel",
+      "sound/bank/fighter/se_mariod_c126.tonelabel",
+      "sound/bank/fighter/se_mariod_c127.tonelabel"
+    ],
+    "sound/bank/fighter_voice/vc_mariod_c00.tonelabel": [
+      "sound/bank/fighter_voice/vc_mariod_c120.tonelabel",
+      "sound/bank/fighter_voice/vc_mariod_c121.tonelabel",
+      "sound/bank/fighter_voice/vc_mariod_c122.tonelabel",
+      "sound/bank/fighter_voice/vc_mariod_c123.tonelabel",
+      "sound/bank/fighter_voice/vc_mariod_c124.tonelabel",
+      "sound/bank/fighter_voice/vc_mariod_c125.tonelabel",
+      "sound/bank/fighter_voice/vc_mariod_c126.tonelabel",
+      "sound/bank/fighter_voice/vc_mariod_c127.tonelabel"
+    ],
+    "sound/bank/fighter_voice/vc_mariod_cheer_c00.nus3audio": [
+      "sound/bank/fighter_voice/vc_mariod_cheer_c120.nus3audio",
+      "sound/bank/fighter_voice/vc_mariod_cheer_c121.nus3audio",
+      "sound/bank/fighter_voice/vc_mariod_cheer_c122.nus3audio",
+      "sound/bank/fighter_voice/vc_mariod_cheer_c123.nus3audio",
+      "sound/bank/fighter_voice/vc_mariod_cheer_c124.nus3audio",
+      "sound/bank/fighter_voice/vc_mariod_cheer_c125.nus3audio",
+      "sound/bank/fighter_voice/vc_mariod_cheer_c126.nus3audio",
+      "sound/bank/fighter_voice/vc_mariod_cheer_c127.nus3audio"
+    ],
+    "sound/bank/fighter_voice/vc_mariod_cheer_c00.nus3bank": [
+      "sound/bank/fighter_voice/vc_mariod_cheer_c120.nus3bank",
+      "sound/bank/fighter_voice/vc_mariod_cheer_c121.nus3bank",
+      "sound/bank/fighter_voice/vc_mariod_cheer_c122.nus3bank",
+      "sound/bank/fighter_voice/vc_mariod_cheer_c123.nus3bank",
+      "sound/bank/fighter_voice/vc_mariod_cheer_c124.nus3bank",
+      "sound/bank/fighter_voice/vc_mariod_cheer_c125.nus3bank",
+      "sound/bank/fighter_voice/vc_mariod_cheer_c126.nus3bank",
+      "sound/bank/fighter_voice/vc_mariod_cheer_c127.nus3bank"
+    ],
+    "sound/bank/fighter_voice/vc_mariod_cheer_c00.tonelabel": [
+      "sound/bank/fighter_voice/vc_mariod_cheer_c120.tonelabel",
+      "sound/bank/fighter_voice/vc_mariod_cheer_c121.tonelabel",
+      "sound/bank/fighter_voice/vc_mariod_cheer_c122.tonelabel",
+      "sound/bank/fighter_voice/vc_mariod_cheer_c123.tonelabel",
+      "sound/bank/fighter_voice/vc_mariod_cheer_c124.tonelabel",
+      "sound/bank/fighter_voice/vc_mariod_cheer_c125.tonelabel",
+      "sound/bank/fighter_voice/vc_mariod_cheer_c126.tonelabel",
+      "sound/bank/fighter_voice/vc_mariod_cheer_c127.tonelabel"
+    ]
+  },
+  "new-dir-files": {
+    "fighter/mariod/c00": [
+      "fighter/mariod/motion/body/c00/d02specialhi2.nuanmb",
+      "fighter/mariod/motion/body/c00/d02specialhilanding.nuanmb",
+      "fighter/mariod/motion/body/c00/d00specialinput.nuanmb"
+    ],
+    "fighter/mariod/c01": [
+      "fighter/mariod/motion/body/c01/d02specialhi2.nuanmb",
+      "fighter/mariod/motion/body/c01/d02specialhilanding.nuanmb",
+      "fighter/mariod/motion/body/c01/d00specialinput.nuanmb"
+    ],
+    "fighter/mariod/c02": [
+      "fighter/mariod/motion/body/c02/d02specialhi2.nuanmb",
+      "fighter/mariod/motion/body/c02/d02specialhilanding.nuanmb",
+      "fighter/mariod/motion/body/c02/d00specialinput.nuanmb"
+    ],
+    "fighter/mariod/c03": [
+      "fighter/mariod/motion/body/c03/d02specialhi2.nuanmb",
+      "fighter/mariod/motion/body/c03/d02specialhilanding.nuanmb",
+      "fighter/mariod/motion/body/c03/d00specialinput.nuanmb"
+    ],
+    "fighter/mariod/c04": [
+      "fighter/mariod/motion/body/c04/d02specialhi2.nuanmb",
+      "fighter/mariod/motion/body/c04/d02specialhilanding.nuanmb",
+      "fighter/mariod/motion/body/c04/d00specialinput.nuanmb"
+    ],
+    "fighter/mariod/c05": [
+      "fighter/mariod/motion/body/c05/d02specialhi2.nuanmb",
+      "fighter/mariod/motion/body/c05/d02specialhilanding.nuanmb",
+      "fighter/mariod/motion/body/c05/d00specialinput.nuanmb"
+    ],
+    "fighter/mariod/c06": [
+      "fighter/mariod/motion/body/c06/d02specialhi2.nuanmb",
+      "fighter/mariod/motion/body/c06/d02specialhilanding.nuanmb",
+      "fighter/mariod/motion/body/c06/d00specialinput.nuanmb"
+    ],
+    "fighter/mariod/c07": [
+      "fighter/mariod/motion/body/c07/d02specialhi2.nuanmb",
+      "fighter/mariod/motion/body/c07/d02specialhilanding.nuanmb",
+      "fighter/mariod/motion/body/c07/d00specialinput.nuanmb"
+    ]
+  },
+  "share-to-added": {
+    "fighter/mariod/motion/body/c00/c00attack12.nuanmb": [
+      "fighter/mariod/motion/body/c120/c00attack12.nuanmb",
+      "fighter/mariod/motion/body/c121/c00attack12.nuanmb",
+      "fighter/mariod/motion/body/c122/c00attack12.nuanmb",
+      "fighter/mariod/motion/body/c123/c00attack12.nuanmb",
+      "fighter/mariod/motion/body/c124/c00attack12.nuanmb",
+      "fighter/mariod/motion/body/c125/c00attack12.nuanmb",
+      "fighter/mariod/motion/body/c126/c00attack12.nuanmb",
+      "fighter/mariod/motion/body/c127/c00attack12.nuanmb"
+    ],
+    "fighter/mariod/motion/body/c00/c00attack13.nuanmb": [
+      "fighter/mariod/motion/body/c120/c00attack13.nuanmb",
+      "fighter/mariod/motion/body/c121/c00attack13.nuanmb",
+      "fighter/mariod/motion/body/c122/c00attack13.nuanmb",
+      "fighter/mariod/motion/body/c123/c00attack13.nuanmb",
+      "fighter/mariod/motion/body/c124/c00attack13.nuanmb",
+      "fighter/mariod/motion/body/c125/c00attack13.nuanmb",
+      "fighter/mariod/motion/body/c126/c00attack13.nuanmb",
+      "fighter/mariod/motion/body/c127/c00attack13.nuanmb"
+    ],
+    "fighter/mariod/motion/body/c00/c01attacks3hi.nuanmb": [
+      "fighter/mariod/motion/body/c120/c01attacks3hi.nuanmb",
+      "fighter/mariod/motion/body/c121/c01attacks3hi.nuanmb",
+      "fighter/mariod/motion/body/c122/c01attacks3hi.nuanmb",
+      "fighter/mariod/motion/body/c123/c01attacks3hi.nuanmb",
+      "fighter/mariod/motion/body/c124/c01attacks3hi.nuanmb",
+      "fighter/mariod/motion/body/c125/c01attacks3hi.nuanmb",
+      "fighter/mariod/motion/body/c126/c01attacks3hi.nuanmb",
+      "fighter/mariod/motion/body/c127/c01attacks3hi.nuanmb"
+    ],
+    "fighter/mariod/motion/body/c00/c01attacks3lw.nuanmb": [
+      "fighter/mariod/motion/body/c120/c01attacks3lw.nuanmb",
+      "fighter/mariod/motion/body/c121/c01attacks3lw.nuanmb",
+      "fighter/mariod/motion/body/c122/c01attacks3lw.nuanmb",
+      "fighter/mariod/motion/body/c123/c01attacks3lw.nuanmb",
+      "fighter/mariod/motion/body/c124/c01attacks3lw.nuanmb",
+      "fighter/mariod/motion/body/c125/c01attacks3lw.nuanmb",
+      "fighter/mariod/motion/body/c126/c01attacks3lw.nuanmb",
+      "fighter/mariod/motion/body/c127/c01attacks3lw.nuanmb"
+    ],
+    "fighter/mariod/motion/body/c00/c01attacks3s.nuanmb": [
+      "fighter/mariod/motion/body/c120/c01attacks3s.nuanmb",
+      "fighter/mariod/motion/body/c121/c01attacks3s.nuanmb",
+      "fighter/mariod/motion/body/c122/c01attacks3s.nuanmb",
+      "fighter/mariod/motion/body/c123/c01attacks3s.nuanmb",
+      "fighter/mariod/motion/body/c124/c01attacks3s.nuanmb",
+      "fighter/mariod/motion/body/c125/c01attacks3s.nuanmb",
+      "fighter/mariod/motion/body/c126/c01attacks3s.nuanmb",
+      "fighter/mariod/motion/body/c127/c01attacks3s.nuanmb"
+    ],
+    "fighter/mariod/motion/body/c00/c03attacks4hi.nuanmb": [
+      "fighter/mariod/motion/body/c120/c03attacks4hi.nuanmb",
+      "fighter/mariod/motion/body/c121/c03attacks4hi.nuanmb",
+      "fighter/mariod/motion/body/c122/c03attacks4hi.nuanmb",
+      "fighter/mariod/motion/body/c123/c03attacks4hi.nuanmb",
+      "fighter/mariod/motion/body/c124/c03attacks4hi.nuanmb",
+      "fighter/mariod/motion/body/c125/c03attacks4hi.nuanmb",
+      "fighter/mariod/motion/body/c126/c03attacks4hi.nuanmb",
+      "fighter/mariod/motion/body/c127/c03attacks4hi.nuanmb"
+    ],
+    "fighter/mariod/motion/body/c00/c03attacks4lw.nuanmb": [
+      "fighter/mariod/motion/body/c120/c03attacks4lw.nuanmb",
+      "fighter/mariod/motion/body/c121/c03attacks4lw.nuanmb",
+      "fighter/mariod/motion/body/c122/c03attacks4lw.nuanmb",
+      "fighter/mariod/motion/body/c123/c03attacks4lw.nuanmb",
+      "fighter/mariod/motion/body/c124/c03attacks4lw.nuanmb",
+      "fighter/mariod/motion/body/c125/c03attacks4lw.nuanmb",
+      "fighter/mariod/motion/body/c126/c03attacks4lw.nuanmb",
+      "fighter/mariod/motion/body/c127/c03attacks4lw.nuanmb"
+    ],
+    "fighter/mariod/motion/body/c00/swing.prc": [
+      "fighter/mariod/motion/body/c120/swing.prc",
+      "fighter/mariod/motion/body/c121/swing.prc",
+      "fighter/mariod/motion/body/c122/swing.prc",
+      "fighter/mariod/motion/body/c123/swing.prc",
+      "fighter/mariod/motion/body/c124/swing.prc",
+      "fighter/mariod/motion/body/c125/swing.prc",
+      "fighter/mariod/motion/body/c126/swing.prc",
+      "fighter/mariod/motion/body/c127/swing.prc"
+    ],
+    "fighter/mariod/motion/body/c00/swingblend.prc": [
+      "fighter/mariod/motion/body/c120/swingblend.prc",
+      "fighter/mariod/motion/body/c121/swingblend.prc",
+      "fighter/mariod/motion/body/c122/swingblend.prc",
+      "fighter/mariod/motion/body/c123/swingblend.prc",
+      "fighter/mariod/motion/body/c124/swingblend.prc",
+      "fighter/mariod/motion/body/c125/swingblend.prc",
+      "fighter/mariod/motion/body/c126/swingblend.prc",
+      "fighter/mariod/motion/body/c127/swingblend.prc"
+    ],
+    "fighter/mariod/motion/capsuleblock/c00/j00entry.nuanmb": [
+      "fighter/mariod/motion/capsuleblock/c120/j00entry.nuanmb",
+      "fighter/mariod/motion/capsuleblock/c121/j00entry.nuanmb",
+      "fighter/mariod/motion/capsuleblock/c122/j00entry.nuanmb",
+      "fighter/mariod/motion/capsuleblock/c123/j00entry.nuanmb",
+      "fighter/mariod/motion/capsuleblock/c124/j00entry.nuanmb",
+      "fighter/mariod/motion/capsuleblock/c125/j00entry.nuanmb",
+      "fighter/mariod/motion/capsuleblock/c126/j00entry.nuanmb",
+      "fighter/mariod/motion/capsuleblock/c127/j00entry.nuanmb"
+    ],
+    "fighter/mariod/motion/capsuleblock/c00/flip.prc": [
+      "fighter/mariod/motion/capsuleblock/c120/flip.prc",
+      "fighter/mariod/motion/capsuleblock/c121/flip.prc",
+      "fighter/mariod/motion/capsuleblock/c122/flip.prc",
+      "fighter/mariod/motion/capsuleblock/c123/flip.prc",
+      "fighter/mariod/motion/capsuleblock/c124/flip.prc",
+      "fighter/mariod/motion/capsuleblock/c125/flip.prc",
+      "fighter/mariod/motion/capsuleblock/c126/flip.prc",
+      "fighter/mariod/motion/capsuleblock/c127/flip.prc"
+    ],
+    "fighter/mariod/motion/capsuleblock/c00/motion_list.bin": [
+      "fighter/mariod/motion/capsuleblock/c120/motion_list.bin",
+      "fighter/mariod/motion/capsuleblock/c121/motion_list.bin",
+      "fighter/mariod/motion/capsuleblock/c122/motion_list.bin",
+      "fighter/mariod/motion/capsuleblock/c123/motion_list.bin",
+      "fighter/mariod/motion/capsuleblock/c124/motion_list.bin",
+      "fighter/mariod/motion/capsuleblock/c125/motion_list.bin",
+      "fighter/mariod/motion/capsuleblock/c126/motion_list.bin",
+      "fighter/mariod/motion/capsuleblock/c127/motion_list.bin"
+    ],
+    "fighter/mariod/motion/capsuleblock/c00/update.prc": [
+      "fighter/mariod/motion/capsuleblock/c120/update.prc",
+      "fighter/mariod/motion/capsuleblock/c121/update.prc",
+      "fighter/mariod/motion/capsuleblock/c122/update.prc",
+      "fighter/mariod/motion/capsuleblock/c123/update.prc",
+      "fighter/mariod/motion/capsuleblock/c124/update.prc",
+      "fighter/mariod/motion/capsuleblock/c125/update.prc",
+      "fighter/mariod/motion/capsuleblock/c126/update.prc",
+      "fighter/mariod/motion/capsuleblock/c127/update.prc"
+    ],
+    "fighter/mariod/motion/drcapsule/c00/flip.prc": [
+      "fighter/mariod/motion/drcapsule/c120/flip.prc",
+      "fighter/mariod/motion/drcapsule/c121/flip.prc",
+      "fighter/mariod/motion/drcapsule/c122/flip.prc",
+      "fighter/mariod/motion/drcapsule/c123/flip.prc",
+      "fighter/mariod/motion/drcapsule/c124/flip.prc",
+      "fighter/mariod/motion/drcapsule/c125/flip.prc",
+      "fighter/mariod/motion/drcapsule/c126/flip.prc",
+      "fighter/mariod/motion/drcapsule/c127/flip.prc"
+    ],
+    "fighter/mariod/motion/drcapsule/c00/model.nuanmb": [
+      "fighter/mariod/motion/drcapsule/c120/model.nuanmb",
+      "fighter/mariod/motion/drcapsule/c121/model.nuanmb",
+      "fighter/mariod/motion/drcapsule/c122/model.nuanmb",
+      "fighter/mariod/motion/drcapsule/c123/model.nuanmb",
+      "fighter/mariod/motion/drcapsule/c124/model.nuanmb",
+      "fighter/mariod/motion/drcapsule/c125/model.nuanmb",
+      "fighter/mariod/motion/drcapsule/c126/model.nuanmb",
+      "fighter/mariod/motion/drcapsule/c127/model.nuanmb"
+    ],
+    "fighter/mariod/motion/drcapsule/c00/update.prc": [
+      "fighter/mariod/motion/drcapsule/c120/update.prc",
+      "fighter/mariod/motion/drcapsule/c121/update.prc",
+      "fighter/mariod/motion/drcapsule/c122/update.prc",
+      "fighter/mariod/motion/drcapsule/c123/update.prc",
+      "fighter/mariod/motion/drcapsule/c124/update.prc",
+      "fighter/mariod/motion/drcapsule/c125/update.prc",
+      "fighter/mariod/motion/drcapsule/c126/update.prc",
+      "fighter/mariod/motion/drcapsule/c127/update.prc"
+    ],
+    "fighter/mariod/motion/drmantle/c00/d01specialairs.nuanmb": [
+      "fighter/mariod/motion/drmantle/c120/d01specialairs.nuanmb",
+      "fighter/mariod/motion/drmantle/c121/d01specialairs.nuanmb",
+      "fighter/mariod/motion/drmantle/c122/d01specialairs.nuanmb",
+      "fighter/mariod/motion/drmantle/c123/d01specialairs.nuanmb",
+      "fighter/mariod/motion/drmantle/c124/d01specialairs.nuanmb",
+      "fighter/mariod/motion/drmantle/c125/d01specialairs.nuanmb",
+      "fighter/mariod/motion/drmantle/c126/d01specialairs.nuanmb",
+      "fighter/mariod/motion/drmantle/c127/d01specialairs.nuanmb"
+    ],
+    "fighter/mariod/motion/drmantle/c00/d01specials.nuanmb": [
+      "fighter/mariod/motion/drmantle/c120/d01specials.nuanmb",
+      "fighter/mariod/motion/drmantle/c121/d01specials.nuanmb",
+      "fighter/mariod/motion/drmantle/c122/d01specials.nuanmb",
+      "fighter/mariod/motion/drmantle/c123/d01specials.nuanmb",
+      "fighter/mariod/motion/drmantle/c124/d01specials.nuanmb",
+      "fighter/mariod/motion/drmantle/c125/d01specials.nuanmb",
+      "fighter/mariod/motion/drmantle/c126/d01specials.nuanmb",
+      "fighter/mariod/motion/drmantle/c127/d01specials.nuanmb"
+    ],
+    "fighter/mariod/motion/drmantle/c00/flip.prc": [
+      "fighter/mariod/motion/drmantle/c120/flip.prc",
+      "fighter/mariod/motion/drmantle/c121/flip.prc",
+      "fighter/mariod/motion/drmantle/c122/flip.prc",
+      "fighter/mariod/motion/drmantle/c123/flip.prc",
+      "fighter/mariod/motion/drmantle/c124/flip.prc",
+      "fighter/mariod/motion/drmantle/c125/flip.prc",
+      "fighter/mariod/motion/drmantle/c126/flip.prc",
+      "fighter/mariod/motion/drmantle/c127/flip.prc"
+    ],
+    "fighter/mariod/motion/drmantle/c00/motion_list.bin": [
+      "fighter/mariod/motion/drmantle/c120/motion_list.bin",
+      "fighter/mariod/motion/drmantle/c121/motion_list.bin",
+      "fighter/mariod/motion/drmantle/c122/motion_list.bin",
+      "fighter/mariod/motion/drmantle/c123/motion_list.bin",
+      "fighter/mariod/motion/drmantle/c124/motion_list.bin",
+      "fighter/mariod/motion/drmantle/c125/motion_list.bin",
+      "fighter/mariod/motion/drmantle/c126/motion_list.bin",
+      "fighter/mariod/motion/drmantle/c127/motion_list.bin"
+    ],
+    "fighter/mariod/motion/drmantle/c00/update.prc": [
+      "fighter/mariod/motion/drmantle/c120/update.prc",
+      "fighter/mariod/motion/drmantle/c121/update.prc",
+      "fighter/mariod/motion/drmantle/c122/update.prc",
+      "fighter/mariod/motion/drmantle/c123/update.prc",
+      "fighter/mariod/motion/drmantle/c124/update.prc",
+      "fighter/mariod/motion/drmantle/c125/update.prc",
+      "fighter/mariod/motion/drmantle/c126/update.prc",
+      "fighter/mariod/motion/drmantle/c127/update.prc"
+    ],
+    "fighter/mariod/motion/hugecapsule/c00/main.nuanmb": [
+      "fighter/mariod/motion/hugecapsule/c120/main.nuanmb",
+      "fighter/mariod/motion/hugecapsule/c121/main.nuanmb",
+      "fighter/mariod/motion/hugecapsule/c122/main.nuanmb",
+      "fighter/mariod/motion/hugecapsule/c123/main.nuanmb",
+      "fighter/mariod/motion/hugecapsule/c124/main.nuanmb",
+      "fighter/mariod/motion/hugecapsule/c125/main.nuanmb",
+      "fighter/mariod/motion/hugecapsule/c126/main.nuanmb",
+      "fighter/mariod/motion/hugecapsule/c127/main.nuanmb"
+    ],
+    "fighter/mariod/motion/hugecapsule/c00/flip.prc": [
+      "fighter/mariod/motion/hugecapsule/c120/flip.prc",
+      "fighter/mariod/motion/hugecapsule/c121/flip.prc",
+      "fighter/mariod/motion/hugecapsule/c122/flip.prc",
+      "fighter/mariod/motion/hugecapsule/c123/flip.prc",
+      "fighter/mariod/motion/hugecapsule/c124/flip.prc",
+      "fighter/mariod/motion/hugecapsule/c125/flip.prc",
+      "fighter/mariod/motion/hugecapsule/c126/flip.prc",
+      "fighter/mariod/motion/hugecapsule/c127/flip.prc"
+    ],
+    "fighter/mariod/motion/hugecapsule/c00/model.nuanmb": [
+      "fighter/mariod/motion/hugecapsule/c120/model.nuanmb",
+      "fighter/mariod/motion/hugecapsule/c121/model.nuanmb",
+      "fighter/mariod/motion/hugecapsule/c122/model.nuanmb",
+      "fighter/mariod/motion/hugecapsule/c123/model.nuanmb",
+      "fighter/mariod/motion/hugecapsule/c124/model.nuanmb",
+      "fighter/mariod/motion/hugecapsule/c125/model.nuanmb",
+      "fighter/mariod/motion/hugecapsule/c126/model.nuanmb",
+      "fighter/mariod/motion/hugecapsule/c127/model.nuanmb"
+    ],
+    "fighter/mariod/motion/hugecapsule/c00/motion_list.bin": [
+      "fighter/mariod/motion/hugecapsule/c120/motion_list.bin",
+      "fighter/mariod/motion/hugecapsule/c121/motion_list.bin",
+      "fighter/mariod/motion/hugecapsule/c122/motion_list.bin",
+      "fighter/mariod/motion/hugecapsule/c123/motion_list.bin",
+      "fighter/mariod/motion/hugecapsule/c124/motion_list.bin",
+      "fighter/mariod/motion/hugecapsule/c125/motion_list.bin",
+      "fighter/mariod/motion/hugecapsule/c126/motion_list.bin",
+      "fighter/mariod/motion/hugecapsule/c127/motion_list.bin"
+    ],
+    "fighter/mariod/motion/hugecapsule/c00/update.prc": [
+      "fighter/mariod/motion/hugecapsule/c120/update.prc",
+      "fighter/mariod/motion/hugecapsule/c121/update.prc",
+      "fighter/mariod/motion/hugecapsule/c122/update.prc",
+      "fighter/mariod/motion/hugecapsule/c123/update.prc",
+      "fighter/mariod/motion/hugecapsule/c124/update.prc",
+      "fighter/mariod/motion/hugecapsule/c125/update.prc",
+      "fighter/mariod/motion/hugecapsule/c126/update.prc",
+      "fighter/mariod/motion/hugecapsule/c127/update.prc"
+    ],
+    "fighter/mariod/motion/stethoscope/c00/j02win2.nuanmb": [
+      "fighter/mariod/motion/stethoscope/c120/j02win2.nuanmb",
+      "fighter/mariod/motion/stethoscope/c121/j02win2.nuanmb",
+      "fighter/mariod/motion/stethoscope/c122/j02win2.nuanmb",
+      "fighter/mariod/motion/stethoscope/c123/j02win2.nuanmb",
+      "fighter/mariod/motion/stethoscope/c124/j02win2.nuanmb",
+      "fighter/mariod/motion/stethoscope/c125/j02win2.nuanmb",
+      "fighter/mariod/motion/stethoscope/c126/j02win2.nuanmb",
+      "fighter/mariod/motion/stethoscope/c127/j02win2.nuanmb"
+    ],
+    "fighter/mariod/motion/stethoscope/c00/j02win2wait.nuanmb": [
+      "fighter/mariod/motion/stethoscope/c120/j02win2wait.nuanmb",
+      "fighter/mariod/motion/stethoscope/c121/j02win2wait.nuanmb",
+      "fighter/mariod/motion/stethoscope/c122/j02win2wait.nuanmb",
+      "fighter/mariod/motion/stethoscope/c123/j02win2wait.nuanmb",
+      "fighter/mariod/motion/stethoscope/c124/j02win2wait.nuanmb",
+      "fighter/mariod/motion/stethoscope/c125/j02win2wait.nuanmb",
+      "fighter/mariod/motion/stethoscope/c126/j02win2wait.nuanmb",
+      "fighter/mariod/motion/stethoscope/c127/j02win2wait.nuanmb"
+    ],
+    "fighter/mariod/motion/stethoscope/c00/flip.prc": [
+      "fighter/mariod/motion/stethoscope/c120/flip.prc",
+      "fighter/mariod/motion/stethoscope/c121/flip.prc",
+      "fighter/mariod/motion/stethoscope/c122/flip.prc",
+      "fighter/mariod/motion/stethoscope/c123/flip.prc",
+      "fighter/mariod/motion/stethoscope/c124/flip.prc",
+      "fighter/mariod/motion/stethoscope/c125/flip.prc",
+      "fighter/mariod/motion/stethoscope/c126/flip.prc",
+      "fighter/mariod/motion/stethoscope/c127/flip.prc"
+    ],
+    "fighter/mariod/motion/stethoscope/c00/motion_list.bin": [
+      "fighter/mariod/motion/stethoscope/c120/motion_list.bin",
+      "fighter/mariod/motion/stethoscope/c121/motion_list.bin",
+      "fighter/mariod/motion/stethoscope/c122/motion_list.bin",
+      "fighter/mariod/motion/stethoscope/c123/motion_list.bin",
+      "fighter/mariod/motion/stethoscope/c124/motion_list.bin",
+      "fighter/mariod/motion/stethoscope/c125/motion_list.bin",
+      "fighter/mariod/motion/stethoscope/c126/motion_list.bin",
+      "fighter/mariod/motion/stethoscope/c127/motion_list.bin"
+    ],
+    "fighter/mariod/motion/stethoscope/c00/update.prc": [
+      "fighter/mariod/motion/stethoscope/c120/update.prc",
+      "fighter/mariod/motion/stethoscope/c121/update.prc",
+      "fighter/mariod/motion/stethoscope/c122/update.prc",
+      "fighter/mariod/motion/stethoscope/c123/update.prc",
+      "fighter/mariod/motion/stethoscope/c124/update.prc",
+      "fighter/mariod/motion/stethoscope/c125/update.prc",
+      "fighter/mariod/motion/stethoscope/c126/update.prc",
+      "fighter/mariod/motion/stethoscope/c127/update.prc"
+    ],
+    "camera/fighter/mariod/c00/d04final.nuanmb": [
+      "camera/fighter/mariod/c120/d04final.nuanmb",
+      "camera/fighter/mariod/c121/d04final.nuanmb",
+      "camera/fighter/mariod/c122/d04final.nuanmb",
+      "camera/fighter/mariod/c123/d04final.nuanmb",
+      "camera/fighter/mariod/c124/d04final.nuanmb",
+      "camera/fighter/mariod/c125/d04final.nuanmb",
+      "camera/fighter/mariod/c126/d04final.nuanmb",
+      "camera/fighter/mariod/c127/d04final.nuanmb"
+    ],
+    "camera/fighter/mariod/c00/j02win1.nuanmb": [
+      "camera/fighter/mariod/c120/j02win1.nuanmb",
+      "camera/fighter/mariod/c121/j02win1.nuanmb",
+      "camera/fighter/mariod/c122/j02win1.nuanmb",
+      "camera/fighter/mariod/c123/j02win1.nuanmb",
+      "camera/fighter/mariod/c124/j02win1.nuanmb",
+      "camera/fighter/mariod/c125/j02win1.nuanmb",
+      "camera/fighter/mariod/c126/j02win1.nuanmb",
+      "camera/fighter/mariod/c127/j02win1.nuanmb"
+    ],
+    "camera/fighter/mariod/c00/j02win2.nuanmb": [
+      "camera/fighter/mariod/c120/j02win2.nuanmb",
+      "camera/fighter/mariod/c121/j02win2.nuanmb",
+      "camera/fighter/mariod/c122/j02win2.nuanmb",
+      "camera/fighter/mariod/c123/j02win2.nuanmb",
+      "camera/fighter/mariod/c124/j02win2.nuanmb",
+      "camera/fighter/mariod/c125/j02win2.nuanmb",
+      "camera/fighter/mariod/c126/j02win2.nuanmb",
+      "camera/fighter/mariod/c127/j02win2.nuanmb"
+    ],
+    "camera/fighter/mariod/c00/j02win3.nuanmb": [
+      "camera/fighter/mariod/c120/j02win3.nuanmb",
+      "camera/fighter/mariod/c121/j02win3.nuanmb",
+      "camera/fighter/mariod/c122/j02win3.nuanmb",
+      "camera/fighter/mariod/c123/j02win3.nuanmb",
+      "camera/fighter/mariod/c124/j02win3.nuanmb",
+      "camera/fighter/mariod/c125/j02win3.nuanmb",
+      "camera/fighter/mariod/c126/j02win3.nuanmb",
+      "camera/fighter/mariod/c127/j02win3.nuanmb"
+    ]
+  }
+}

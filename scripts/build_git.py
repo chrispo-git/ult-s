@@ -4,6 +4,8 @@ import sys
 import json
 from zipfile import ZipFile
 
+from merge_config import merge_configs
+
 def log(msg):
     print(msg, flush=True)
 
@@ -125,6 +127,7 @@ if os.path.exists(r'target'):
             if os.path.exists(r'romfs'):
                 log("[build] Starting romfs copy (changed files only)")
                 copytree_changed(r'romfs', new_changed)
+                merge_configs(new_changed)
                 log("[build] Romfs copy finished")
             else:
                 log("[build] ERROR: No romfs folder!")
@@ -151,6 +154,7 @@ if os.path.exists(r'target'):
             if os.path.exists(r'romfs'):
                 log("[build] Starting full romfs copy")
                 copytree_full(r'romfs', os.path.join(new_full, r'romfs'))
+                merge_configs(os.path.join(new_full, r'romfs'))
                 log("[build] Full romfs copy finished")
             else:
                 log("[build] ERROR: No romfs folder!")

@@ -1,0 +1,18 @@
+{
+  "new-dir-infos": [],
+  "new-dir-infos-base": {},
+  "share-to-vanilla": {},
+  "new-dir-files": {
+    "fighter/szerosuit/c06": [
+      "fighter/szerosuit/model/body/c06/def_szerosuit_001_col.nutexb",
+      "fighter/szerosuit/model/body/c06/def_szerosuit_001_nor.nutexb",
+      "fighter/szerosuit/model/body/c06/def_szerosuit_001_prm.nutexb"
+    ],
+    "fighter/szerosuit/c07": [
+      "fighter/szerosuit/model/body/c07/def_szerosuit_001_col.nutexb",
+      "fighter/szerosuit/model/body/c07/def_szerosuit_001_nor.nutexb",
+      "fighter/szerosuit/model/body/c07/def_szerosuit_001_prm.nutexb"
+    ]
+  },
+  "share-to-added": {}
+}
