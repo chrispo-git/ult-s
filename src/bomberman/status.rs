@@ -38,59 +38,44 @@ pub fn install() {
 unsafe extern "C" fn special_n_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
     let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 	let fighter_kind = smash::app::utility::get_kind(boma);
-    if is_added(boma) && fighter_kind == *FIGHTER_KIND_PACMAN { 
-        StatusModule::init_settings(
-            fighter.module_accessor,
-            smash::app::SituationKind(*SITUATION_KIND_NONE),
-            *FIGHTER_KINETIC_TYPE_NONE,
-            *GROUND_CORRECT_KIND_KEEP as u32,
-            smash::app::GroundCliffCheckKind(*GROUND_CLIFF_CHECK_KIND_NONE),
-            true,
-            *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_FLAG,
-            *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_INT,
-            *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_FLOAT,
-            0
-        );
-    
-        FighterStatusModuleImpl::set_fighter_status_data(
-            fighter.module_accessor,
-            false,
-            *FIGHTER_TREADED_KIND_NO_REAC,
-            false,
-            false,
-            false,
-            (*FIGHTER_LOG_MASK_FLAG_ATTACK_KIND_SPECIAL_N | *FIGHTER_LOG_MASK_FLAG_ATTACK_KIND_AIR_LASSO | *FIGHTER_LOG_MASK_FLAG_ACTION_TRIGGER_ON) as u64,
-            *FIGHTER_STATUS_ATTR_START_TURN as u32,
-            *FIGHTER_POWER_UP_ATTACK_BIT_SPECIAL_N as u32,
-            0
-        );
-        0.into()
-    }
-    else{
-        return smashline::original_status(Pre, fighter, *FIGHTER_STATUS_KIND_SPECIAL_N)(fighter);
-    }
+    StatusModule::init_settings(
+        fighter.module_accessor,
+        smash::app::SituationKind(*SITUATION_KIND_NONE),
+        *FIGHTER_KINETIC_TYPE_NONE,
+        *GROUND_CORRECT_KIND_KEEP as u32,
+        smash::app::GroundCliffCheckKind(*GROUND_CLIFF_CHECK_KIND_NONE),
+        true,
+        *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_FLAG,
+        *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_INT,
+        *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_FLOAT,
+        0
+    );
+
+    FighterStatusModuleImpl::set_fighter_status_data(
+        fighter.module_accessor,
+        false,
+        *FIGHTER_TREADED_KIND_NO_REAC,
+        false,
+        false,
+        false,
+        (*FIGHTER_LOG_MASK_FLAG_ATTACK_KIND_SPECIAL_N | *FIGHTER_LOG_MASK_FLAG_ATTACK_KIND_AIR_LASSO | *FIGHTER_LOG_MASK_FLAG_ACTION_TRIGGER_ON) as u64,
+        *FIGHTER_STATUS_ATTR_START_TURN as u32,
+        *FIGHTER_POWER_UP_ATTACK_BIT_SPECIAL_N as u32,
+        0
+    );
+    0.into()
 }
 unsafe extern "C" fn special_hi_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
     let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 	let fighter_kind = smash::app::utility::get_kind(boma);
-    if is_added(boma) && fighter_kind == *FIGHTER_KIND_PACMAN { 
-        fighter.change_status(FIGHTER_PACMAN_STATUS_KIND_SPECIAL_HI_LOOP.into(), true.into());
-        0.into()
-    }
-    else{
-        return smashline::original_status(Pre, fighter, *FIGHTER_STATUS_KIND_SPECIAL_HI)(fighter);
-    }
+    fighter.change_status(FIGHTER_PACMAN_STATUS_KIND_SPECIAL_HI_LOOP.into(), true.into());
+    0.into()
 }
 unsafe extern "C" fn special_hi_end_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
     let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 	let fighter_kind = smash::app::utility::get_kind(boma);
-    if is_added(boma) && fighter_kind == *FIGHTER_KIND_PACMAN { 
-        fighter.change_status(FIGHTER_STATUS_KIND_FALL_SPECIAL.into(), true.into());
-        0.into()
-    }
-    else{
-        return smashline::original_status(Pre, fighter, *FIGHTER_PACMAN_STATUS_KIND_SPECIAL_HI_END)(fighter);
-    }
+    fighter.change_status(FIGHTER_STATUS_KIND_FALL_SPECIAL.into(), true.into());
+    0.into()
 }
 unsafe extern "C" fn main_upb(fighter: &mut L2CFighterCommon) -> L2CValue {
     let motion_kind = MotionModule::motion_kind(fighter.module_accessor);
@@ -104,38 +89,33 @@ unsafe extern "C" fn main_upb(fighter: &mut L2CFighterCommon) -> L2CValue {
     let is_end = MotionModule::is_end(fighter.module_accessor);
     let fighter_kinetic_energy_motion = mem::transmute::<u64, &mut smash::app::FighterKineticEnergyMotion>(KineticModule::get_energy(boma, *FIGHTER_KINETIC_ENERGY_ID_MOTION));  
     let is_near_ground = GroundModule::ray_check(fighter.module_accessor, &Vector2f{ x: PostureModule::pos_x(fighter.module_accessor), y: PostureModule::pos_y(fighter.module_accessor)}, &Vector2f{ x: 0.0, y: -1.0}, true) == 1;
-    if is_added(boma) && fighter_kind == *FIGHTER_KIND_PACMAN { 
-        if ![hash40("special_hi_loop"), hash40("special_air_hi_loop")].contains(&motion_kind){
-            if is_ground || is_near_ground{
-                MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_hi_loop"), -1.0, 1.0, false, 0.0, false, false);
-            } else {
-                MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_air_hi_loop"), -1.0, 1.0, false, 0.0, false, false);
-            }
+    if ![hash40("special_hi_loop"), hash40("special_air_hi_loop")].contains(&motion_kind){
+        if is_ground || is_near_ground{
+            MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_hi_loop"), -1.0, 1.0, false, 0.0, false, false);
         } else {
-            if is_end {
-                fighter.change_status(FIGHTER_STATUS_KIND_FALL_SPECIAL.into(), true.into());
-            }
+            MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_air_hi_loop"), -1.0, 1.0, false, 0.0, false, false);
         }
-        0.into() 
+    } else {
+        if is_end {
+            fighter.change_status(FIGHTER_STATUS_KIND_FALL_SPECIAL.into(), true.into());
+        }
     }
-    else{
-        return smashline::original_status(Main, fighter, *FIGHTER_PACMAN_STATUS_KIND_SPECIAL_HI_LOOP)(fighter);
-    }
+    0.into() 
 } 
 
 unsafe extern "C" fn main_neutralb(fighter: &mut L2CFighterCommon) -> L2CValue {
-    let motion_kind = MotionModule::motion_kind(fighter.module_accessor);
-    let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-    let frame = MotionModule::frame(fighter.module_accessor);
-	let cancel_frame = FighterMotionModuleImpl::get_cancel_frame(fighter.module_accessor,smash::phx::Hash40::new_raw(MotionModule::motion_kind(fighter.module_accessor)),false) as f32; //Cancel frame
-	let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
-	let fighter_kind = smash::app::utility::get_kind(boma);
-    let situation_kind = StatusModule::situation_kind(boma);
-    let is_ground = situation_kind == *SITUATION_KIND_GROUND;
-    let is_near_ground = GroundModule::ray_check(fighter.module_accessor, &Vector2f{ x: PostureModule::pos_x(fighter.module_accessor), y: PostureModule::pos_y(fighter.module_accessor)}, &Vector2f{ x: 0.0, y: -1.0}, true) == 1;
-    let is_end = MotionModule::is_end(fighter.module_accessor);
-    let fighter_kinetic_energy_motion = mem::transmute::<u64, &mut smash::app::FighterKineticEnergyMotion>(KineticModule::get_energy(boma, *FIGHTER_KINETIC_ENERGY_ID_MOTION));  
-    if is_added(boma) && fighter_kind == *FIGHTER_KIND_PACMAN { 
+        let motion_kind = MotionModule::motion_kind(fighter.module_accessor);
+        let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+        let frame = MotionModule::frame(fighter.module_accessor);
+        let cancel_frame = FighterMotionModuleImpl::get_cancel_frame(fighter.module_accessor,smash::phx::Hash40::new_raw(MotionModule::motion_kind(fighter.module_accessor)),false) as f32; //Cancel frame
+        let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
+        let fighter_kind = smash::app::utility::get_kind(boma);
+        let situation_kind = StatusModule::situation_kind(boma);
+        let is_ground = situation_kind == *SITUATION_KIND_GROUND;
+        let is_near_ground = GroundModule::ray_check(fighter.module_accessor, &Vector2f{ x: PostureModule::pos_x(fighter.module_accessor), y: PostureModule::pos_y(fighter.module_accessor)}, &Vector2f{ x: 0.0, y: -1.0}, true) == 1;
+        let is_end = MotionModule::is_end(fighter.module_accessor);
+        let fighter_kinetic_energy_motion = mem::transmute::<u64, &mut smash::app::FighterKineticEnergyMotion>(KineticModule::get_energy(boma, *FIGHTER_KINETIC_ENERGY_ID_MOTION));  
+    
         if ![hash40("special_n"), hash40("special_n_hold"), hash40("special_n_shoot"), hash40("special_air_n"), hash40("special_air_n_hold"), hash40("special_air_n_shoot")].contains(&motion_kind){
             if is_ground {
                 MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_n"), -1.0, 1.0, false, 0.0, false, false);
@@ -258,20 +238,16 @@ unsafe extern "C" fn main_neutralb(fighter: &mut L2CFighterCommon) -> L2CValue {
         }
 
         0.into() 
-    }
-    else{
-        return smashline::original_status(Main, fighter, *FIGHTER_STATUS_KIND_SPECIAL_N)(fighter);
-    }
 } 
 
 unsafe extern "C" fn catch_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
-    let situation = if SIDEB_CATCH[WorkModule::get_int(smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent), *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize] && is_added(smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent)) {
+    let situation = if SIDEB_CATCH[WorkModule::get_int(smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent), *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize] {
         *SITUATION_KIND_NONE
     }
     else {
         *SITUATION_KIND_GROUND
     };
-    let correct_kind = if SIDEB_CATCH[WorkModule::get_int(smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent), *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize] && is_added(smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent)) {
+    let correct_kind = if SIDEB_CATCH[WorkModule::get_int(smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent), *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize] {
         *GROUND_CORRECT_KIND_KEEP
     }
     else {
@@ -311,7 +287,7 @@ unsafe extern "C" fn catch_main(fighter: &mut L2CFighterCommon) -> L2CValue {
     let is_ground = situation_kind == *SITUATION_KIND_GROUND;
     let motion_kind = MotionModule::motion_kind(fighter.module_accessor);
     let is_end = MotionModule::is_end(fighter.module_accessor);
-    if !(SIDEB_CATCH[WorkModule::get_int(smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent), *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize] && is_added(smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent))) {
+    if !(SIDEB_CATCH[WorkModule::get_int(smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent), *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize] {
        fighter.status_Catch();
     } else {
         if is_end && ![hash40("special_s_dash"), hash40("special_air_s_dash"), hash40("special_s_start"), hash40("special_air_s_start")].contains(&motion_kind){
@@ -326,13 +302,13 @@ unsafe extern "C" fn catch_main(fighter: &mut L2CFighterCommon) -> L2CValue {
 }
 unsafe extern "C" fn catch_pull_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
     
-    let situation = if SIDEB_CATCH[WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize] && is_added(smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent)) {
+    let situation = if SIDEB_CATCH[WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize] {
         *SITUATION_KIND_NONE
     }
     else {
         *SITUATION_KIND_GROUND
     };
-    let keep = if SIDEB_CATCH[WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize] && is_added(smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent)) {
+    let keep = if SIDEB_CATCH[WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize] {
         *GROUND_CORRECT_KIND_AIR as u32
     } else {
         *GROUND_CORRECT_KIND_GROUND_CLIFF_STOP as u32
@@ -364,7 +340,7 @@ unsafe extern "C" fn catch_pull_pre(fighter: &mut L2CFighterCommon) -> L2CValue 
         0,
         0
     );
-    /*if SIDEB_CATCH[WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize] && is_added(smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent)) {
+    /*if SIDEB_CATCH[WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize] {
         fighter.change_status(FIGHTER_STATUS_KIND_THROW_KIRBY.into(), false.into());
     }*/
     0.into()
@@ -372,7 +348,7 @@ unsafe extern "C" fn catch_pull_pre(fighter: &mut L2CFighterCommon) -> L2CValue 
 
 unsafe extern "C" fn catch_pull_main(fighter: &mut L2CFighterCommon) -> L2CValue {
     let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-    if SIDEB_CATCH[ENTRY_ID] && is_added(smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent)) {
+    if SIDEB_CATCH[ENTRY_ID] {
         sv_kinetic_energy!(
             clear_speed,
             fighter,
@@ -396,7 +372,7 @@ unsafe extern "C" fn catch_pull_main(fighter: &mut L2CFighterCommon) -> L2CValue
 
 unsafe extern "C" fn catch_pull_main_loop(fighter: &mut L2CFighterCommon) -> L2CValue {
     let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-    if SIDEB_CATCH[ENTRY_ID] && is_added(smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent)) {
+    if SIDEB_CATCH[ENTRY_ID] {
         1.into()
     }
     else {
@@ -415,26 +391,21 @@ unsafe extern "C" fn main_sideb(fighter: &mut L2CFighterCommon) -> L2CValue {
     let situation_kind = StatusModule::situation_kind(boma);
     let is_ground = situation_kind == *SITUATION_KIND_GROUND;
     let is_end = MotionModule::is_end(fighter.module_accessor);
-    if is_added(boma) && fighter_kind == *FIGHTER_KIND_PACMAN { 
-        if ![hash40("special_s_start"), hash40("special_air_s_start")].contains(&motion_kind){
-            if is_ground {
-                MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_s_start"), -1.0, 1.0, false, 0.0, false, false);
-            } else {
-                MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_air_s_start"), -1.0, 1.0, false, 0.0, false, false);
-            }
-            SIDEB_CATCH[ENTRY_ID] = true;
+    if ![hash40("special_s_start"), hash40("special_air_s_start")].contains(&motion_kind){
+        if is_ground {
+            MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_s_start"), -1.0, 1.0, false, 0.0, false, false);
         } else {
-            if is_end {
-                SIDEB_CATCH[ENTRY_ID] = true;
-                fighter.change_status(FIGHTER_STATUS_KIND_CATCH.into(), false.into());
-            }
+            MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_air_s_start"), -1.0, 1.0, false, 0.0, false, false);
         }
+        SIDEB_CATCH[ENTRY_ID] = true;
+    } else {
+        if is_end {
+            SIDEB_CATCH[ENTRY_ID] = true;
+            fighter.change_status(FIGHTER_STATUS_KIND_CATCH.into(), false.into());
+        }
+    }
 
-        0.into() 
-    }
-    else{
-        return smashline::original_status(Main, fighter, *FIGHTER_STATUS_KIND_SPECIAL_S)(fighter);
-    }
+    0.into() 
 } 
 
 unsafe extern "C" fn throw_kirby_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
@@ -474,35 +445,30 @@ unsafe extern "C" fn throw_kirby_pre(fighter: &mut L2CFighterCommon) -> L2CValue
 unsafe extern "C" fn special_s_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
     let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 	let fighter_kind = smash::app::utility::get_kind(boma);
-    if is_added(boma) && fighter_kind == *FIGHTER_KIND_PACMAN { 
-        StatusModule::init_settings(
-            fighter.module_accessor,
-            smash::app::SituationKind(*SITUATION_KIND_NONE),
-            *FIGHTER_KINETIC_TYPE_NONE,
-            *GROUND_CORRECT_KIND_KEEP as u32,
-            smash::app::GroundCliffCheckKind(*GROUND_CLIFF_CHECK_KIND_NONE),
-            true,
-            *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_FLAG,
-            *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_INT,
-            *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_FLOAT,
-            0
-        );
-    
-        FighterStatusModuleImpl::set_fighter_status_data(
-            fighter.module_accessor,
-            false,
-            *FIGHTER_TREADED_KIND_NO_REAC,
-            false,
-            false,
-            false,
-            (*FIGHTER_LOG_MASK_FLAG_ATTACK_KIND_SPECIAL_S | *FIGHTER_LOG_MASK_FLAG_ATTACK_KIND_AIR_LASSO | *FIGHTER_LOG_MASK_FLAG_ACTION_TRIGGER_ON) as u64,
-            *FIGHTER_STATUS_ATTR_START_TURN as u32,
-            *FIGHTER_POWER_UP_ATTACK_BIT_SPECIAL_S as u32,
-            0
-        );
-        0.into()
-    }
-    else{
-        return smashline::original_status(Pre, fighter, *FIGHTER_STATUS_KIND_SPECIAL_S)(fighter);
-    }
+    StatusModule::init_settings(
+        fighter.module_accessor,
+        smash::app::SituationKind(*SITUATION_KIND_NONE),
+        *FIGHTER_KINETIC_TYPE_NONE,
+        *GROUND_CORRECT_KIND_KEEP as u32,
+        smash::app::GroundCliffCheckKind(*GROUND_CLIFF_CHECK_KIND_NONE),
+        true,
+        *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_FLAG,
+        *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_INT,
+        *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_FLOAT,
+        0
+    );
+
+    FighterStatusModuleImpl::set_fighter_status_data(
+        fighter.module_accessor,
+        false,
+        *FIGHTER_TREADED_KIND_NO_REAC,
+        false,
+        false,
+        false,
+        (*FIGHTER_LOG_MASK_FLAG_ATTACK_KIND_SPECIAL_S | *FIGHTER_LOG_MASK_FLAG_ATTACK_KIND_AIR_LASSO | *FIGHTER_LOG_MASK_FLAG_ACTION_TRIGGER_ON) as u64,
+        *FIGHTER_STATUS_ATTR_START_TURN as u32,
+        *FIGHTER_POWER_UP_ATTACK_BIT_SPECIAL_S as u32,
+        0
+    );
+    0.into()
 }

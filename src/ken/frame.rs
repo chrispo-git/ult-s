@@ -36,7 +36,7 @@ unsafe extern "C" fn supers(fighter : &mut L2CFighterCommon) {
 		let fighter_kind = smash::app::utility::get_kind(boma);
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
 		let lua_state = fighter.lua_state_agent;
-		let color_id = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);
+		let color_id = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) - get_lowest_marked_costume("ken","ken");
 		let motion_kind = MotionModule::motion_kind(boma);
 		let frame = MotionModule::frame(boma);
 		let cancel_frame = FighterMotionModuleImpl::get_cancel_frame(boma,smash::phx::Hash40::new_raw(MotionModule::motion_kind(boma)),false) as f32;

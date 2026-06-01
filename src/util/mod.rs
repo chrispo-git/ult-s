@@ -248,14 +248,26 @@ pub unsafe fn article_hook(boma: &mut smash::app::BattleObjectModuleAccessor, in
 		return original!()(boma, int, arg3, arg4)
 	}
 	if int == *FIGHTER_WARIO_GENERATE_ARTICLE_WARIOBIKE && smash::app::utility::get_kind(boma) == *FIGHTER_KIND_WARIO && Path::new("sd:/ultimate/ult-s/wario.flag").is_file() {
+		let costumes = get_marked_costumes("wario","wario");
+		let curr_costume = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);
+		if !costumes.contains(&curr_costume) {
+			return original!()(boma, int, arg3, arg4)
+		}
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
 		if ![*FIGHTER_STATUS_KIND_ENTRY, *FIGHTER_STATUS_KIND_WIN].contains(&status_kind) && smash::app::sv_information::is_ready_go() {
 			return 0
 		} else {
 			return original!()(boma, int, arg3, arg4)
 		}
-	} else if smash::app::utility::get_kind(boma) == *FIGHTER_KIND_MURABITO && is_added(boma) {
+	} else if smash::app::utility::get_kind(boma) == *FIGHTER_KIND_MURABITO {
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
+
+		let costumes = get_marked_costumes("murabito","toad");
+		let curr_costume = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);
+		if !costumes.contains(&curr_costume) {
+			return original!()(boma, int, arg3, arg4)
+		}
+		
 		if int == *FIGHTER_MURABITO_GENERATE_ARTICLE_CLAYROCKET {
 			if ![*FIGHTER_STATUS_KIND_FINAL, *FIGHTER_MURABITO_STATUS_KIND_FINAL_END, *FIGHTER_MURABITO_STATUS_KIND_FINAL_CHEER, *FIGHTER_MURABITO_STATUS_KIND_FINAL_HAPPY, *FIGHTER_MURABITO_STATUS_KIND_FINAL_MONEY, *FIGHTER_MURABITO_STATUS_KIND_FINAL_SURPRISE].contains(&status_kind) {
 				return 0
@@ -665,23 +677,7 @@ pub(crate) unsafe fn stock_count(boma: &mut smash::app::BattleObjectModuleAccess
 }
 
 
-#[inline(always)]
-pub(crate) unsafe fn is_default(boma: &mut smash::app::BattleObjectModuleAccessor) -> bool {
-	if WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) < 16  {
-		return true 
-	} else {
-		return false
-	}
-}
 
-#[inline(always)]
-pub(crate) unsafe fn is_added(boma: &mut smash::app::BattleObjectModuleAccessor) -> bool {
-	if (WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) >= 120 && WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) <= 127)  {
-		return true 
-	} else {
-		return false
-	}
-}
 
 #[inline(always)]
 pub(crate) unsafe fn set_knockdown_throw(fighter: &mut L2CAgentBase) -> () {

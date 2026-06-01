@@ -58,49 +58,17 @@ unsafe extern "C" fn mac_jab1_snd(agent: &mut L2CAgentBase) {
     }
 }
 unsafe extern "C" fn mac_jab1_eff(agent: &mut L2CAgentBase) {
+	let color_id = WorkModule::get_int(agent.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) - get_lowest_marked_costume("littlemac","littlemac");
     frame(agent.lua_state_agent, 2.0);
     if macros::is_excute(agent) {
         macros::EFFECT(agent, Hash40::new("littlemac_attack_line_glove"), Hash40::new("top"), -1, 10.5, -1.5, 0, 0, 0, 0.75, 0, 0, 0, 0, 0, 0, true);
-    }
-    if WorkModule::get_int(agent.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 0 {
-        if macros::is_excute(agent) {
-            macros::LAST_PARTICLE_SET_COLOR(agent, 0.43, 1, 0.3);
-        }
-    }
-    if WorkModule::get_int(agent.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 1 {
-        if macros::is_excute(agent) {
-            macros::LAST_PARTICLE_SET_COLOR(agent, 1, 0.6, 0.3);
-        }
-    }
-    if WorkModule::get_int(agent.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 2 {
-        if macros::is_excute(agent) {
-            macros::LAST_PARTICLE_SET_COLOR(agent, 0.4, 0.4, 0.4);
-        }
-    }
-    if WorkModule::get_int(agent.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 3 {
-        if macros::is_excute(agent) {
-            macros::LAST_PARTICLE_SET_COLOR(agent, 1, 0.3, 0.3);
-        }
-    }
-    if WorkModule::get_int(agent.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 4 {
-        if macros::is_excute(agent) {
-            macros::LAST_PARTICLE_SET_COLOR(agent, 0.43, 1, 0.3);
-        }
-    }
-    if WorkModule::get_int(agent.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 5 {
-        if macros::is_excute(agent) {
-            macros::LAST_PARTICLE_SET_COLOR(agent, 0.43, 1, 0.3);
-        }
-    }
-    if WorkModule::get_int(agent.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 6 {
-        if macros::is_excute(agent) {
-            macros::LAST_PARTICLE_SET_COLOR(agent, 0.43, 1, 0.3);
-        }
-    }
-    if WorkModule::get_int(agent.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 7 {
-        if macros::is_excute(agent) {
-            macros::LAST_PARTICLE_SET_COLOR(agent, 1, 0.4, 0.5);
-        }
+		match color_id {
+			case 1 => macros::LAST_PARTICLE_SET_COLOR(agent, 1, 0.6, 0.3);
+			case 2 => macros::LAST_PARTICLE_SET_COLOR(agent, 0.4, 0.4, 0.4);
+			case 3 => macros::LAST_PARTICLE_SET_COLOR(agent, 1, 0.3, 0.3);
+			case 7 => macros::LAST_PARTICLE_SET_COLOR(agent, 1, 0.4, 0.5);
+			case _ => macros::LAST_PARTICLE_SET_COLOR(agent, 0.43, 1, 0.3);
+		};
     }
     frame(agent.lua_state_agent, 2.0);
     if macros::is_excute(agent) {
