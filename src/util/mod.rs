@@ -250,7 +250,7 @@ pub unsafe fn article_hook(boma: &mut smash::app::BattleObjectModuleAccessor, in
 	if int == *FIGHTER_WARIO_GENERATE_ARTICLE_WARIOBIKE && smash::app::utility::get_kind(boma) == *FIGHTER_KIND_WARIO && Path::new("sd:/ultimate/ult-s/wario.flag").is_file() {
 		let costumes = get_marked_costumes("wario","wario");
 		let curr_costume = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);
-		if !costumes.contains(&curr_costume) {
+		if !costumes.contains(&(curr_costume as usize)) {
 			return original!()(boma, int, arg3, arg4)
 		}
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
@@ -264,7 +264,7 @@ pub unsafe fn article_hook(boma: &mut smash::app::BattleObjectModuleAccessor, in
 
 		let costumes = get_marked_costumes("murabito","toad");
 		let curr_costume = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);
-		if !costumes.contains(&curr_costume) {
+		if !costumes.contains(&(curr_costume as usize)) {
 			return original!()(boma, int, arg3, arg4)
 		}
 		
@@ -357,7 +357,9 @@ unsafe extern "C" fn util_update(fighter : &mut L2CFighterCommon) {
 			let grabber_kind = smash::app::utility::get_kind(&mut *grabber_boma);
 			let graber_entry_id = WorkModule::get_int(&mut *grabber_boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 			//Toad Specific Code. Has the opponent be made real small while in the pipe, and removes the grab model changes present in villy
-			if grabber_kind == *FIGHTER_KIND_MURABITO && is_added(&mut *grabber_boma) {
+			let costumes = get_marked_costumes("murabito","toad");
+			let curr_costume = WorkModule::get_int(&mut *grabber_boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);
+			if grabber_kind == *FIGHTER_KIND_MURABITO && costumes.contains(&(curr_costume as usize)) {
 				println!("Turning off butterfly net flag");
 				let grabber_motion = MotionModule::motion_kind(grabber_boma);
 				let grabber_frame = MotionModule::frame(grabber_boma);

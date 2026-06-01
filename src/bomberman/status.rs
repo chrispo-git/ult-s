@@ -287,7 +287,7 @@ unsafe extern "C" fn catch_main(fighter: &mut L2CFighterCommon) -> L2CValue {
     let is_ground = situation_kind == *SITUATION_KIND_GROUND;
     let motion_kind = MotionModule::motion_kind(fighter.module_accessor);
     let is_end = MotionModule::is_end(fighter.module_accessor);
-    if !(SIDEB_CATCH[WorkModule::get_int(smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent), *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize] {
+    if !(SIDEB_CATCH[WorkModule::get_int(smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent), *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize]) {
        fighter.status_Catch();
     } else {
         if is_end && ![hash40("special_s_dash"), hash40("special_air_s_dash"), hash40("special_s_start"), hash40("special_air_s_start")].contains(&motion_kind){
