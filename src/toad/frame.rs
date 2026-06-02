@@ -43,27 +43,6 @@ unsafe extern "C" fn toad(fighter : &mut L2CFighterCommon) {
 		let fighter_kind = smash::app::utility::get_kind(boma);
 		let situation_kind = StatusModule::situation_kind(boma);
 		let end_frame = MotionModule::end_frame(boma);
-		//Kirby neutralb logic
-		/*if fighter_kind == *FIGHTER_KIND_KIRBY {
-			if WorkModule::get_int(boma, *FIGHTER_KIRBY_INSTANCE_WORK_ID_INT_COPY_CHARA) == *FIGHTER_KIND_MURABITO {
-				if status_kind == *FIGHTER_KIRBY_STATUS_KIND_MURABITO_SPECIAL_N_SEARCH {
-					if frame > 38.0 {
-						if situation_kind == *SITUATION_KIND_GROUND {
-							StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_WAIT, false);
-						} else {
-							StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL, false);
-						};
-					};
-				};
-				if ItemModule::is_have_item(boma, 0) {
-					crate::transition_set!(ENTRY_ID, can_neutralb);
-				} else {
-					crate::transition_reset!(ENTRY_ID, can_neutralb);
-				};
-			} else {
-				crate::transition_reset!(ENTRY_ID, can_neutralb);
-			};
-		};*/
 		if is_reset() {
 			BIG_TIMER[ENTRY_ID] = 0;
 			IS_POP_MODE[ENTRY_ID] = false;
@@ -215,6 +194,7 @@ unsafe extern "C" fn toad(fighter : &mut L2CFighterCommon) {
 			}
 			if ![hash40("special_air_lw_plant_failure"), hash40("landing_fall_special")].contains(&MotionModule::motion_kind(boma))  {
 				TO_FALL[ENTRY_ID] = false;
+			}
 		}
 		if ![*FIGHTER_STATUS_KIND_THROW].contains(&status_kind) {
 			ArticleModule::remove_exist(boma, *FIGHTER_MURABITO_GENERATE_ARTICLE_WEEDS,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
@@ -330,7 +310,6 @@ unsafe extern "C" fn toad(fighter : &mut L2CFighterCommon) {
 		} else {
 			crate::transition_reset!(ENTRY_ID, can_neutralb);
 		};
-		//ArticleModule::remove_exist(boma, *FIGHTER_MURABITO_GENERATE_ARTICLE_CLAYROCKET,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
 		ArticleModule::remove_exist(boma, *FIGHTER_MURABITO_GENERATE_ARTICLE_BALLOON,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
 		WorkModule::off_flag(boma, *FIGHTER_MURABITO_INSTANCE_WORK_ID_FLAG_CATCHING);
 		if [hash40("special_s_jump"), hash40("special_s_loop"), hash40("special_air_s_loop")].contains(&motion_kind) {
@@ -352,15 +331,6 @@ unsafe extern "C" fn toad(fighter : &mut L2CFighterCommon) {
 		if [hash40("special_s_end"), hash40("special_air_s_end")].contains(&motion_kind) {
 			SIDEB_END[ENTRY_ID] = true;
 		}
-		/*if status_kind == *FIGHTER_MURABITO_STATUS_KIND_FINAL_END {
-			BIG_TIMER[ENTRY_ID] = BIG_TIMER_MAX;
-			macros::PLAY_SE(fighter, Hash40::new("se_murabito_final01"));
-			if situation_kind == *SITUATION_KIND_GROUND {
-				StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_WAIT, true);
-			} else {
-				StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL, true);
-			}
-		}*/
 		if status_kind == *FIGHTER_STATUS_KIND_FINAL && MotionModule::end_frame(boma) - frame < 6.0 { 
 			StatusModule::change_status_request_from_script(boma, *FIGHTER_MURABITO_STATUS_KIND_FINAL_END, true);
 		}

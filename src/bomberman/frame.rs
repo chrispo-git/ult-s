@@ -327,9 +327,10 @@ unsafe extern "C" fn bomb_frame(weapon: &mut L2CFighterBase) {
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(weapon.module_accessor);
         let situation = StatusModule::situation_kind(weapon.module_accessor);
 		let ENTRY_ID = WorkModule::get_int(&mut *boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+		let costumes = get_marked_costumes("pacman","bomberman");
+		let curr_costume = WorkModule::get_int(&mut *boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);
 		let is_near_ground = GroundModule::ray_check(weapon.module_accessor, &Vector2f{ x: PostureModule::pos_x(weapon.module_accessor), y: PostureModule::pos_y(weapon.module_accessor)}, &Vector2f{ x: 0.0, y: -1.0}, true);
-        ArticleModule::remove_exist(weapon.module_accessor, *WEAPON_PACMAN_FIREHYDRANT_GENERATE_ARTICLE_WATER,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
-        if smash::app::utility::get_kind(&mut *boma) == *FIGHTER_KIND_PACMAN  && is_added(&mut *boma) {
+        if smash::app::utility::get_kind(&mut *boma) == *FIGHTER_KIND_PACMAN  && costumes.contains(&(curr_costume as usize)) {
 			ModelModule::set_scale(weapon.module_accessor, 0.769);
             if MAKE_NEW_BOMB[ENTRY_ID] {
                 MAKE_NEW_BOMB[ENTRY_ID] = false;
@@ -367,43 +368,7 @@ unsafe extern "C" fn bomb_frame(weapon: &mut L2CFighterBase) {
             }
             if smash::app::sv_math::rand(hash40("fighter"), 5) == 0{
                 let fire: u32 = EffectModule::req_follow(weapon.module_accessor, smash::phx::Hash40::new("sys_damage_fire"), smash::phx::Hash40::new("rot"), &BOMB, &BOMB, 0.5, true, 0, 0, 0, 0, 0, true, true) as u32;
-        ModelModule::set_scale(weapon.module_accessor, 0.769);
-        if MAKE_NEW_BOMB[ENTRY_ID] {
-            MAKE_NEW_BOMB[ENTRY_ID] = false;
-            let pos = smash::phx::Vector3f { x: NEW_BOMB_X[ENTRY_ID], y: NEW_BOMB_Y[ENTRY_ID]+4.0, z: 0.0 };
-            PostureModule::set_pos(weapon.module_accessor, &pos);
-            PostureModule::init_pos(weapon.module_accessor, &pos, true, true);
-            //println!("New Bombed");
-        }
-        if EXPLODE_END_TIMER[ENTRY_ID] == 0 {
-            if status_kind == *WEAPON_PACMAN_FIREHYDRANT_STATUS_KIND_FLY && (situation == *SITUATION_KIND_GROUND){
-                MAKE_NEW_BOMB[ENTRY_ID] = true;
-                NEW_BOMB_X[ENTRY_ID] = PostureModule::pos_x(weapon.module_accessor);
-                NEW_BOMB_Y[ENTRY_ID] = PostureModule::pos_y(weapon.module_accessor);
-                ArticleModule::generate_article(&mut *boma, *FIGHTER_PACMAN_GENERATE_ARTICLE_FIREHYDRANT, false, -1);
-                //println!("End Bombed");
             }
-        }
-        if EXPLODE_END_TIMER[ENTRY_ID] > 0{
-            EXPLODE_END_TIMER[ENTRY_ID] -= 1;
-        }
-        if EXPLODE_END_TIMER[ENTRY_ID] == 1{
-            EXPLODE[ENTRY_ID] = false;
-            StatusModule::change_status_request_from_script(weapon.module_accessor, *WEAPON_PACMAN_FIREHYDRANT_STATUS_KIND_REMOVE, false);
-        }
-        if EXPLODE_END_TIMER[ENTRY_ID] == 15{
-            AttackModule::clear_all(weapon.module_accessor);
-        }
-        if EXPLODE_END_TIMER[ENTRY_ID] == 0 && (AttackModule::is_infliction_status(weapon.module_accessor, *COLLISION_KIND_MASK_ALL) || EXPLODE[ENTRY_ID] == true) {
-            KineticModule::clear_speed_all(weapon.module_accessor);
-            EXPLODE_END_TIMER[ENTRY_ID] = 19;
-            AttackModule::clear_all(weapon.module_accessor);
-            VisibilityModule::set_model_visible(weapon.module_accessor, false);
-            macros::EFFECT(weapon, Hash40::new("sys_bomb_a"), Hash40::new("rot"), 0, 0, 0, 0, 0, 0, 1.25, 0, 0, 0, 0, 0, 0, true);
-            macros::ATTACK(weapon, 0, 0, Hash40::new("rot"), 13.0, 45, 90, 0, 30, 13.0, 0.0, 0.0, 0.0, None, None, None, 1.4, 1.4, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_SPEED, false, -3.3, 0.0, 0, true, false, false, false, false, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_fire"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_OBJECT);
-        }
-        if smash::app::sv_math::rand(hash40("fighter"), 5) == 0{
-            let fire: u32 = EffectModule::req_follow(weapon.module_accessor, smash::phx::Hash40::new("sys_damage_fire"), smash::phx::Hash40::new("rot"), &BOMB, &BOMB, 0.5, true, 0, 0, 0, 0, 0, true, true) as u32;
-        }
+        };
     }
 }
