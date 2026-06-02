@@ -68,33 +68,11 @@ unsafe extern "C" fn palu_utilt_eff(fighter: &mut L2CAgentBase) {
     if macros::is_excute(fighter) {
         macros::EFFECT_FOLLOW(fighter, Hash40::new("palutena_wand_light1"), Hash40::new("stick"), 0, 8.65, 0, 0, 0, 0, 1, true);
         macros::EFFECT_FOLLOW(fighter, Hash40::new("palutena_wand_light4"), Hash40::new("stick"), 0, 8.65, 0, 0, 180, 0, 1, true);
-		/*match WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) {
-			0 => macros::EFFECT_FOLLOW(fighter, Hash40::new("palutena_wand_trace_01"), Hash40::new("stick"), 0, 0, 0, 0, 0, 0, 1, true),
-			1 => macros::EFFECT_FOLLOW(fighter, Hash40::new("palutena_wand_trace_02"), Hash40::new("stick"), 0, 0, 0, 0, 0, 0, 1, true),
-			2 => macros::EFFECT_FOLLOW(fighter, Hash40::new("palutena_wand_trace_03"), Hash40::new("stick"), 0, 0, 0, 0, 0, 0, 1, true),
-			3 => macros::EFFECT_FOLLOW(fighter, Hash40::new("palutena_wand_trace_04"), Hash40::new("stick"), 0, 0, 0, 0, 0, 0, 1, true),
-			4 => macros::EFFECT_FOLLOW(fighter, Hash40::new("palutena_wand_trace_05"), Hash40::new("stick"), 0, 0, 0, 0, 0, 0, 1, true),
-			5 => macros::EFFECT_FOLLOW(fighter, Hash40::new("palutena_wand_trace_06"), Hash40::new("stick"), 0, 0, 0, 0, 0, 0, 1, true),
-			6 => macros::EFFECT_FOLLOW(fighter, Hash40::new("palutena_wand_trace_07"), Hash40::new("stick"), 0, 0, 0, 0, 0, 0, 1, true),
-			7 => macros::EFFECT_FOLLOW(fighter, Hash40::new("palutena_wand_trace_08"), Hash40::new("stick"), 0, 0, 0, 0, 0, 0, 1, true),
-			_ => macros::EFFECT_FOLLOW(fighter, Hash40::new("palutena_wand_trace_01"), Hash40::new("stick"), 0, 0, 0, 0, 0, 0, 1, true)
-		};*/
     }
 	frame(fighter.lua_state_agent, 27.0);
     if macros::is_excute(fighter) {
 		macros::EFFECT_OFF_KIND(fighter, Hash40::new("palutena_wand_light1"), false, false);
 		macros::EFFECT_OFF_KIND(fighter, Hash40::new("palutena_wand_light4"), false, false);
-		/*match WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) {
-			0 => macros::EFFECT_OFF_KIND(fighter, Hash40::new("palutena_wand_trace_01"), false, false),
-			1 => macros::EFFECT_OFF_KIND(fighter, Hash40::new("palutena_wand_trace_02"), false, false),
-			2 => macros::EFFECT_OFF_KIND(fighter, Hash40::new("palutena_wand_trace_03"), false, false),
-			3 => macros::EFFECT_OFF_KIND(fighter, Hash40::new("palutena_wand_trace_04"), false, false),
-			4 => macros::EFFECT_OFF_KIND(fighter, Hash40::new("palutena_wand_trace_05"), false, false),
-			5 => macros::EFFECT_OFF_KIND(fighter, Hash40::new("palutena_wand_trace_06"), false, false),
-			6 => macros::EFFECT_OFF_KIND(fighter, Hash40::new("palutena_wand_trace_07"), false, false),
-			7 => macros::EFFECT_OFF_KIND(fighter, Hash40::new("palutena_wand_trace_08"), false, false),
-			_ => macros::EFFECT_OFF_KIND(fighter, Hash40::new("palutena_wand_trace_01"), false, false)
-		};*/
     }
 }		
 
