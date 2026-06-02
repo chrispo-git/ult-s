@@ -130,7 +130,6 @@ def build_lite(version):
 
     copytree(os.path.join('romfs', 'fighter', 'common'), os.path.join(out_dir, 'fighter', 'common'))
     copytree(os.path.join('romfs', 'item'),    os.path.join(out_dir, 'item'))
-    # Remove excluded item folders
     for excl in ['barrel', 'daisydaikon']:
         excl_path = os.path.join(out_dir, 'item', excl)
         if os.path.exists(excl_path):
@@ -144,26 +143,21 @@ def build_lite(version):
     copytree(os.path.join('romfs', 'prebuilt'),  os.path.join(out_dir, 'prebuilt'))
     copytree(os.path.join('romfs', 'stream;'),   os.path.join(out_dir, 'stream;'))
 
-    merge_configs(out_dir)
-
-    # Remove c0x sound files (keep only alt costume sounds)
+    # Remove c0x sound files
     for root, dirs, files in os.walk(os.path.join(out_dir, 'sound'), topdown=False):
         for name in files:
             if 'c0' in name:
                 os.remove(os.path.join(root, name))
 
-    # For each fighter, copy everything EXCEPT costume dirs c00-c07
+    # Copy fighter files excluding costume dirs
     COSTUME_DIRS = {'c00', 'c01', 'c02', 'c03', 'c04', 'c05', 'c06', 'c07'}
 
     for fighter in os.listdir(os.path.join('romfs', 'fighter')):
         fighter_src = os.path.join('romfs', 'fighter', fighter)
-        if not os.path.isdir(fighter_src):
-            continue
-        if fighter == 'common':
+        if not os.path.isdir(fighter_src) or fighter == 'common':
             continue
         for root, dirs, files in os.walk(fighter_src, topdown=True):
             dirs[:] = [d for d in dirs if d not in COSTUME_DIRS]
-
             for name in files:
                 src_path = os.path.join(root, name)
                 dst_path = src_path.replace(
@@ -173,6 +167,46 @@ def build_lite(version):
                 )
                 os.makedirs(os.path.dirname(dst_path), exist_ok=True)
                 shutil.copy2(src_path, dst_path)
+
+    # Copy config.json files only where the destination folder already exists
+    log("  Copying config.json files (only where destination folder exists)...")
+    configs_copied = 0
+    for root, dirs, files in os.walk('romfs'):
+        for name in files:
+            if name != 'config.json':
+                continue
+            src_path = os.path.join(root, name)
+            dst_path = src_path.replace('romfs', out_dir, 1)
+            dst_folder = os.path.dirname(dst_path)
+            if os.path.exists(dst_folder):
+                shutil.copy2(src_path, dst_path)
+                log(f"    Copied config: {src_path}")
+                configs_copied += 1
+            else:
+                log(f"    Skipped config (folder absent): {src_path}")
+    log(f"  {configs_copied} config.json file(s) copied")
+
+    log("  Pruning orphan config.json files...")
+    for root, dirs, files in os.walk(out_dir, topdown=False):
+        if 'config.json' not in files:
+            continue
+        # Count all files in this subtree excluding the config itself
+        subtree_files = sum(
+            len(f) for _, _, f in os.walk(root)
+        ) - 1  # subtract the config.json itself
+        if subtree_files == 0:
+            config_path = os.path.join(root, 'config.json')
+            os.remove(config_path)
+            log(f"    Removed orphan config: {config_path}")
+            parent = root
+            while os.path.normpath(parent) != os.path.normpath(out_dir):
+                if not os.listdir(parent):
+                    os.rmdir(parent)
+                    parent = os.path.dirname(parent)
+                else:
+                    break
+
+    merge_configs(out_dir)
 
     with open(os.path.join(out_dir, 'version.txt'), 'w') as f:
         f.write(f"v.{version}-LITE")
