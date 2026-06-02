@@ -179,7 +179,7 @@ unsafe extern "C" fn toad_upb(fighter: &mut L2CAgentBase) {
 		if macros::is_excute(fighter) {
 			if true{
 				let x_speed = PostureModule::lr(fighter.module_accessor) * ControlModule::get_stick_x(fighter.module_accessor) * 0.75;
-				macros::SET_SPEED_EX(fighter, x_speed, 3.35, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+				macros::SET_SPEED_EX(fighter, x_speed, 3.5, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
 			}
 			notify_event_msc_cmd!(fighter, Hash40::new_raw(0x2127e37c07), *GROUND_CLIFF_CHECK_KIND_ALWAYS_BOTH_SIDES);
 			notify_event_msc_cmd!(fighter, Hash40::new_raw(0x2127e37c07 as u64), *GROUND_CLIFF_CHECK_KIND_ALWAYS_BOTH_SIDES);
