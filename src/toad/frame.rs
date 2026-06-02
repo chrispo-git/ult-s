@@ -194,7 +194,6 @@ unsafe extern "C" fn toad(fighter : &mut L2CFighterCommon) {
 					}
 				}
 			}
-<<<<<<< toad-changes
 			if [hash40("special_air_lw_plant_failure")].contains(&MotionModule::motion_kind(boma)) {
 				if frame < 18.0 {
 					DOWNB_SHOULD_BOUNCE[ENTRY_ID] = false;
@@ -216,7 +215,6 @@ unsafe extern "C" fn toad(fighter : &mut L2CFighterCommon) {
 			}
 			if ![hash40("special_air_lw_plant_failure"), hash40("landing_fall_special")].contains(&MotionModule::motion_kind(boma))  {
 				TO_FALL[ENTRY_ID] = false;
-=======
 		}
 		if ![*FIGHTER_STATUS_KIND_THROW].contains(&status_kind) {
 			ArticleModule::remove_exist(boma, *FIGHTER_MURABITO_GENERATE_ARTICLE_WEEDS,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
@@ -237,7 +235,6 @@ unsafe extern "C" fn toad(fighter : &mut L2CFighterCommon) {
 			};
 			if frame > 30.0 && situation_kind == *SITUATION_KIND_GROUND {
 				StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_LANDING, true);
->>>>>>> main
 			}
 			if AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_HIT) && !AttackModule::is_infliction(boma, *COLLISION_KIND_MASK_HIT) && frame < 50.0{
 				macros::SET_SPEED_EX(fighter, get_speed_x(boma)*PostureModule::lr(boma), 1.0, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
