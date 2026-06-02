@@ -163,29 +163,44 @@ pub fn show_mod_settings_emu() {
 		update_enabled_checks();
 	}
 }
-pub fn show_mod_settings() {
-    let path = "sd:/ultimate/ult-s/sys-flags/";
+pub fn generate_config_filename(m : bool, h : bool, s : bool) -> String {
+    let m_digit = if m {1} else {0};
+    let h_digit = if h {1} else {0};
+    let s_digit = if s {1} else {0};
+    let config_filename = format!("config_{}{}{}.js", m_digit, h_digit, s_digit);
+
+    return config_filename;
+}
+
+pub fn show_mod_settings() {let path = "sd:/ultimate/ult-s/sys-flags/";
     let path1 = "sd:/ultimate/ult-s/";
-    match std::fs::create_dir(path1) {
-        Ok(_) => println!("ult-s Folder Created!"),
-        Err(_) => {
-            println!("ult-s folder already exists!");
-        }
-    }
-    match std::fs::create_dir(path) {
-        Ok(_) => println!("Settings Folder Created!"),
-        Err(_) => {
-            match std::fs::remove_dir_all(path) {
-                Ok(_) => println!("Settings reset successfully!"),
-                Err(_) => println!("Error resetting settings!")
-            }
-            std::fs::create_dir(path);
+
+    if !Path::new(path).exists() {
+        if let Err(e) = std::fs::create_dir_all(path) {
+            println!("Error creating settings directories: {:?}", e);
+        } else {
+            println!("Settings folders initialized successfully!");
         }
     }
 
+    let mechanics_already = Path::new("sd:/ultimate/ult-s/sys-flags/mechanics.flag").is_file(); 
+    let hold_already = Path::new("sd:/ultimate/ult-s/sys-flags/hold.flag").is_file(); 
+    let sh_already = Path::new("sd:/ultimate/ult-s/sys-flags/sh.flag").is_file();
+
+    let config_filename = generate_config_filename(mechanics_already, hold_already, sh_already);
+
+    let config_js = format!(
+        "var mechanics_already = {}; var hold_already = {}; var sh_already = {};",
+        mechanics_already, hold_already, sh_already
+    );
+
+    let html_string = String::from_utf8_lossy(MENU_HTML.as_slice());
+    let final_html = html_string.replace("config.js", &config_filename);
+    
     let response = skyline_web::Webpage::new()
         .htdocs_dir("contents")
-        .file("index.html", MENU_HTML.as_slice())
+        .file("index.html", final_html.as_bytes())
+        .file(&config_filename, config_js.as_bytes())
         .file("menu.css", MENU_CSS.as_slice())
         .file("menu.js", MENU_JS.as_slice())
         .file("common.js", COMMON_JS.as_slice())
@@ -199,24 +214,40 @@ pub fn show_mod_settings() {
         Ok(url) => {
             let options_str = url.trim_start_matches("http://localhost/");
             println!("Options chosen: {}", options_str);
+            
+            match std::fs::remove_dir_all(path) {
+                Ok(_) => println!("Old flags folder deleted successfully!"),
+                Err(e) => println!("Note: Folders didn't exist or couldn't be deleted: {:?}", e),
+            }
+            
+            if let Err(e) = std::fs::create_dir_all(path) {
+                println!("Critical Error re-creating flag directory: {:?}", e);
+                return; 
+            }
+
             if options_str.is_empty() {
+                println!("All flags set to false.");
                 return;
             }
 
             let options = options_str.split("-");
-
             for i in options {
-                println!("{}", i);
-                let mut file = std::fs::File::create(format!("{}{}.flag", path, i)).unwrap();
+                if !i.is_empty() {
+                    let flag_path = format!("{}{}.flag", path, i);
+                    println!("Creating flag: {}", flag_path);
+                    if let Err(e) = std::fs::File::create(&flag_path) {
+                        println!("Failed to create flag file {}: {:?}", flag_path, e);
+                    }
+                }
             }
         }
         Err(_) => {
             println!("Uh oh! Error getting options!");
         }
     }
-	unsafe {
-		update_enabled_checks();
-	}
+    unsafe {
+        update_enabled_checks();
+    }
 }
 
 // this structure is gross and largely undefined but it holds some useful information about the CSS instance

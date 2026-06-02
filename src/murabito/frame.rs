@@ -175,15 +175,13 @@ unsafe extern "C" fn tree_frame(weapon: &mut L2CFighterBase) {
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(weapon.module_accessor);
         let boma = smash::app::sv_battle_object::module_accessor(otarget_id);
 		let ENTRY_ID = WorkModule::get_int(&mut *boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-        if smash::app::utility::get_kind(&mut *boma) == *FIGHTER_KIND_MURABITO && is_default(&mut *boma) {
-            if status_kind == *WEAPON_MURABITO_TREE_STATUS_KIND_STAND || status_kind == *WEAPON_MURABITO_TREE_STATUS_KIND_APPEAR {
-                IS_FALLEN[ENTRY_ID] = false;
-            } else {
-                IS_FALLEN[ENTRY_ID] = true;
-            }
-            TREE_POS_X[ENTRY_ID] = PostureModule::pos_x(weapon.module_accessor);
-            TREE_POS_Y[ENTRY_ID] = PostureModule::pos_y(weapon.module_accessor);
-		};
+        if status_kind == *WEAPON_MURABITO_TREE_STATUS_KIND_STAND || status_kind == *WEAPON_MURABITO_TREE_STATUS_KIND_APPEAR {
+            IS_FALLEN[ENTRY_ID] = false;
+        } else {
+            IS_FALLEN[ENTRY_ID] = true;
+        }
+        TREE_POS_X[ENTRY_ID] = PostureModule::pos_x(weapon.module_accessor);
+        TREE_POS_Y[ENTRY_ID] = PostureModule::pos_y(weapon.module_accessor);
     }
 }
 unsafe extern "C" fn seed_frame(weapon: &mut L2CFighterBase) {
@@ -192,9 +190,7 @@ unsafe extern "C" fn seed_frame(weapon: &mut L2CFighterBase) {
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(weapon.module_accessor);
         let boma = smash::app::sv_battle_object::module_accessor(otarget_id);
 		let ENTRY_ID = WorkModule::get_int(&mut *boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-        if smash::app::utility::get_kind(&mut *boma) == *FIGHTER_KIND_MURABITO && is_default(&mut *boma) {
-            TREE_POS_X[ENTRY_ID] = PostureModule::pos_x(weapon.module_accessor);
-            TREE_POS_Y[ENTRY_ID] = PostureModule::pos_y(weapon.module_accessor);
-		};
+        TREE_POS_X[ENTRY_ID] = PostureModule::pos_x(weapon.module_accessor);
+        TREE_POS_Y[ENTRY_ID] = PostureModule::pos_y(weapon.module_accessor);
     }
 }

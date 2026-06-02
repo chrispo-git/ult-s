@@ -20,13 +20,8 @@ unsafe extern "C" fn main_catch_pull(fighter: &mut L2CFighterCommon) -> L2CValue
     let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 	let fighter_kind = smash::app::utility::get_kind(boma);
 
-    if (WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) >= 120 && WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) <= 127) && fighter_kind == *FIGHTER_KIND_MURABITO { //rayman slots
-        fighter.status_CatchPull();
-		0.into()
-	}
-	else{
-		return smashline::original_status(Main, fighter, *FIGHTER_STATUS_KIND_CATCH_PULL)(fighter);
-	}
+    fighter.status_CatchPull();
+	0.into()
 }
 unsafe extern "C" fn main_catch_wait(fighter: &mut L2CFighterCommon) -> L2CValue {
     let motion_kind = MotionModule::motion_kind(fighter.module_accessor);
@@ -34,13 +29,8 @@ unsafe extern "C" fn main_catch_wait(fighter: &mut L2CFighterCommon) -> L2CValue
     let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 	let fighter_kind = smash::app::utility::get_kind(boma);
 
-    if (WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) >= 120 && WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) <= 127) && fighter_kind == *FIGHTER_KIND_MURABITO { //rayman slots
-        fighter.status_CatchWait();
-		0.into()
-	}
-	else{
-		return smashline::original_status(Main, fighter, *FIGHTER_STATUS_KIND_CATCH_WAIT)(fighter);
-	}
+    fighter.status_CatchWait();
+	0.into()
 }
 unsafe extern "C" fn main_throw(fighter: &mut L2CFighterCommon) -> L2CValue {
     let motion_kind = MotionModule::motion_kind(fighter.module_accessor);
@@ -48,75 +38,48 @@ unsafe extern "C" fn main_throw(fighter: &mut L2CFighterCommon) -> L2CValue {
 	let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 	let fighter_kind = smash::app::utility::get_kind(boma);
 
-    //if (WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) >= 120 && WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) <= 127) && fighter_kind == *FIGHTER_KIND_MURABITO { //rayman slots
     if motion_kind == hash40("throw_f") {
 			fighter.change_status(
 				L2CValue::I32(*FIGHTER_STATUS_KIND_THROW_KIRBY),
 				L2CValue::Bool(false)
 			);
 	}
-	//}
 	return smashline::original_status(Main, fighter, *FIGHTER_STATUS_KIND_THROW)(fighter);
 }
 unsafe extern "C" fn main_throw_kirby(fighter: &mut L2CFighterCommon) -> L2CValue {
     let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 	let fighter_kind = smash::app::utility::get_kind(boma);
 
-    //if (WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) >= 120 && WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) <= 127) && fighter_kind == *FIGHTER_KIND_MURABITO { //rayman slots
     fighter.status_ThrowKirby();
 	0.into()
-	//}
-	//else{
-		//original!(fighter)
-	//}
 }
 unsafe extern "C" fn throw_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
     let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 	let fighter_kind = smash::app::utility::get_kind(boma);
 
-    //if (WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) >= 120 && WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) <= 127) && fighter_kind == *FIGHTER_KIND_MURABITO { //rayman slots
     fighter.status_pre_ThrowKirby();
 	0.into()
-	//}
-	//else{
-		//original!(fighter)
-	//}
 }
 unsafe extern "C" fn throw_end(fighter: &mut L2CFighterCommon) -> L2CValue {
     let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 	let fighter_kind = smash::app::utility::get_kind(boma);
 
-    //if (WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) >= 120 && WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) <= 127) && fighter_kind == *FIGHTER_KIND_MURABITO { //rayman slots
     fighter.status_end_ThrowKirby();
 	0.into()
-	//}
-	//else{
-		//original!(fighter)
-	//}
 }
 unsafe extern "C" fn throw_init(fighter: &mut L2CFighterCommon) -> L2CValue {
     let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 	let fighter_kind = smash::app::utility::get_kind(boma);
 
-    //if (WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) >= 120 && WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) <= 127) && fighter_kind == *FIGHTER_KIND_MURABITO { //rayman slots
     L2CFighterCommon::sub_status_uniq_process_ThrowKirby_initStatus(fighter);
 	0.into()
-	//}
-	//else{
-		//original!(fighter)
-	//}
 }
 unsafe extern "C" fn throw_exit(fighter: &mut L2CFighterCommon) -> L2CValue {
     let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 	let fighter_kind = smash::app::utility::get_kind(boma);
 
-    //if (WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) >= 120 && WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) <= 127) && fighter_kind == *FIGHTER_KIND_MURABITO { //rayman slots
     L2CFighterCommon::sub_status_uniq_process_ThrowKirby_exitStatus(fighter);
 	0.into()
-	//}
-	//else{
-		//original!(fighter)
-	//}
 }
 unsafe extern "C" fn final_end_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
 	let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;

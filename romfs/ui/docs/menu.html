@@ -13,6 +13,7 @@
     <script src="./common/js/wsnd.min.js"></script>
     <script src="./common/js/keyhelp.js"></script>
     <script src="./help/js/common.js"></script>
+    <script src="./config.js"></script>
     <script src="./common.js"></script>
     <script src="./menu.js"></script>
     <script src="./toggles.js"></script>
@@ -50,21 +51,21 @@
     <div class="main" id="list">
         <div class="scrollbar">
             <div class="flex-container">
-                <button onclick="toggle('mechanics', this, 'mechanics-text')" onfocus="textFocus('Ultimate S System Mechanics such as Edge Cancelling, Wavedash or Perfect Pivot.')" class="flex-item">
+                <button id="mechanics-button" onclick="toggle('mechanics', this, 'mechanics-text')" onfocus="textFocus('Ultimate S System Mechanics such as Edge Cancelling, Wavedash or Perfect Pivot.')" class="flex-item">
                         <div class="icon-background"><img id="mechanics-text" class="abstract-icon is-appear visible"
                             src="check.svg" /></div>
                         <div class="item-container">
                             <h2>Ultimate S Mechanics</h2>
                         </div>
                     </button>
-                <button onclick="toggle('hold', this, 'hold-text')" onfocus="textFocus('Smash Ultimate\'s Hold Buffer mechanic.')" class="flex-item">
+                <button id="hold-button" onclick="toggle('hold', this, 'hold-text')" onfocus="textFocus('Smash Ultimate\'s Hold Buffer mechanic.')" class="flex-item">
                         <div class="icon-background"><img id="hold-text" class="abstract-icon is-appear visible"
                             src="check.svg" /></div>
                         <div class="item-container">
                             <h2>Hold Buffer</h2>
                         </div>
                     </button>
-                <button onclick="toggle('sh', this, 'sh-text')" onfocus="textFocus('Smash Ultimate\'s Shorthop Aerial Macro.')" class="flex-item">
+                <button id="sh-button" onclick="toggle('sh', this, 'sh-text')" onfocus="textFocus('Smash Ultimate\'s Shorthop Aerial Macro.')" class="flex-item">
                         <div class="icon-background"><img id="sh-text" class="abstract-icon is-appear " style="display:none"
                                         src="check.svg" /></div>
                         <div class="item-container">
@@ -84,6 +85,19 @@
             <h2 id="focus-text"></h2>
         </div>
     </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            if (mechanics_already == true) {
+                toggle('mechanics', document.getElementById('mechanics-button'), 'mechanics-text');
+            };
+            if (hold_already == true) {
+                toggle('hold', document.getElementById('hold-button'), 'hold-text');
+            };
+            if (sh_already == true) {
+                toggle('sh', document.getElementById('sh-button'), 'sh-text');
+            };
+        });
+    </script>
 </body>
 
 </html>
