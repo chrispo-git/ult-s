@@ -21,5 +21,5 @@ pub fn install() {
 	param_config::update_float_2(*FIGHTER_KIND_CLOUD, get_marked_costumes("cloud","cloud").into_iter().map(|x| x as i32).collect(), (smash::hash40("damage_fly_top_air_accel_y"), 0, 0.076608));
 	param_config::update_float_2(*FIGHTER_KIND_CLOUD, get_marked_costumes("cloud","cloud").into_iter().map(|x| x as i32).collect(), (smash::hash40("landing_attack_air_frame_b"), 0, 10.0));
 	param_config::update_float_2(*FIGHTER_KIND_CLOUD, get_marked_costumes("cloud","cloud").into_iter().map(|x| x as i32).collect(), (smash::hash40("landing_attack_air_frame_lw"), 0, 21.0));
-
+	param_config::update_float_2(*FIGHTER_KIND_CLOUD, get_marked_costumes("cloud","cloud").into_iter().map(|x| x as i32).collect(), (smash::hash40("tread_mini_jump_speed_y_mul"), 0, 0.35));
 }
