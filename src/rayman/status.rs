@@ -63,7 +63,7 @@ unsafe extern "C" fn pre_throw(fighter: &mut L2CFighterCommon) -> L2CValue {
 } 
 unsafe extern "C" fn throw_init(fighter: &mut L2CFighterCommon) -> L2CValue {
     let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
-    let is_ray = (WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) >= 120 && WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) <= 127);
+    let is_ray = true;
     if is_ray {
         L2CFighterCommon::sub_throw_uniq_process_init(fighter);
         0.into()
@@ -80,7 +80,7 @@ unsafe extern "C" fn main_dtilt(fighter: &mut L2CFighterCommon) -> L2CValue {
     let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
     let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 	let fighter_kind = smash::app::utility::get_kind(boma);
-    let is_ray = (WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) >= 120 && WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) <= 127);
+    let is_ray = true;
     if is_ray && fighter_kind == *FIGHTER_KIND_PIKMIN { //rayman slots
         if !IS_SLIDE_MOVE[ENTRY_ID] && motion_kind != hash40("slide_attack_lw"){
             return smashline::original_status(Main, fighter, *FIGHTER_STATUS_KIND_ATTACK_LW3)(fighter);
@@ -102,7 +102,7 @@ unsafe extern "C" fn main_jab(fighter: &mut L2CFighterCommon) -> L2CValue {
     let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
     let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 	let fighter_kind = smash::app::utility::get_kind(boma);
-    let is_ray = (WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) >= 120 && WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) <= 127);
+    let is_ray = true;
     if is_ray && fighter_kind == *FIGHTER_KIND_PIKMIN { //rayman slots
         if !IS_SLIDE_MOVE[ENTRY_ID] && motion_kind != hash40("slide_attack"){
             return smashline::original_status(Main, fighter, *FIGHTER_STATUS_KIND_ATTACK)(fighter);
@@ -128,7 +128,7 @@ unsafe extern "C" fn main_jumpsquat(fighter: &mut L2CFighterCommon) -> L2CValue 
     let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
     let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 	let fighter_kind = smash::app::utility::get_kind(boma);
-    let is_ray = (WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) >= 120 && WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) <= 127);
+    let is_ray = true;
     if is_ray && fighter_kind == *FIGHTER_KIND_PIKMIN { //rayman slots
         if !IS_SLIDE_MOVE[ENTRY_ID] && motion_kind != hash40("slide_jump_squat"){
             return smashline::original_status(Main, fighter, *FIGHTER_STATUS_KIND_JUMP_SQUAT)(fighter);
@@ -156,7 +156,7 @@ unsafe extern "C" fn main_final(fighter: &mut L2CFighterCommon) -> L2CValue {
     let speed_y = KineticModule::get_sum_speed_y(fighter.module_accessor, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
     let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 	let fighter_kind = smash::app::utility::get_kind(boma);
-    let is_ray = (WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) >= 120 && WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) <= 127);
+    let is_ray = true;
     if is_ray && fighter_kind == *FIGHTER_KIND_PIKMIN { //rayman slots
         ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_PIKMIN_GENERATE_ARTICLE_DOLFIN,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
         StatusModule::set_keep_situation_air(fighter.module_accessor, true);
@@ -276,7 +276,7 @@ unsafe extern "C" fn main_downb(fighter: &mut L2CFighterCommon) -> L2CValue {
 	let cancel_frame = FighterMotionModuleImpl::get_cancel_frame(fighter.module_accessor,smash::phx::Hash40::new_raw(MotionModule::motion_kind(fighter.module_accessor)),false) as f32; //Cancel frame
     let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 	let fighter_kind = smash::app::utility::get_kind(boma);
-    let is_ray = (WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) >= 120 && WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) <= 127);
+    let is_ray = true;
     if is_ray && fighter_kind == *FIGHTER_KIND_PIKMIN { //rayman slots
         if ![hash40("special_lw"), hash40("special_air_lw"), hash40("special_air_lw_loop"), hash40("special_lw_land")].contains(&motion_kind) {
             if situation_kind == *SITUATION_KIND_AIR {
@@ -362,7 +362,7 @@ unsafe extern "C" fn main_utilt(fighter: &mut L2CFighterCommon) -> L2CValue {
 	let cancel_frame = FighterMotionModuleImpl::get_cancel_frame(fighter.module_accessor,smash::phx::Hash40::new_raw(MotionModule::motion_kind(fighter.module_accessor)),false) as f32; //Cancel frame
 	let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 	let fighter_kind = smash::app::utility::get_kind(boma);
-    let is_ray = (WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) >= 120 && WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) <= 127);
+    let is_ray = true;
     if is_ray && fighter_kind == *FIGHTER_KIND_PIKMIN { //rayman slots
         if !IS_SLIDE_MOVE[ENTRY_ID] && motion_kind != hash40("slide_attack_hi"){
             if motion_kind != hash40("attack_hi3") {
@@ -392,7 +392,7 @@ unsafe extern "C" fn main_utilt(fighter: &mut L2CFighterCommon) -> L2CValue {
 unsafe extern "C" fn utilt_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
     let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 	let fighter_kind = smash::app::utility::get_kind(boma);
-    let is_ray = (WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) >= 120 && WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) <= 127);
+    let is_ray = true;
     if is_ray && fighter_kind == *FIGHTER_KIND_PIKMIN { //rayman slots
         fighter.sub_status_pre_SpecialNCommon();
         StatusModule::init_settings(
@@ -430,7 +430,7 @@ unsafe extern "C" fn utilt_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
 unsafe extern "C" fn kirby_copy_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
     let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 	let fighter_kind = smash::app::utility::get_kind(boma);
-    let is_ray = (WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) >= 120 && WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) <= 127);
+    let is_ray = true;
     if is_ray && fighter_kind == *FIGHTER_KIND_PIKMIN { //rayman slots
         fighter.sub_status_pre_SpecialNCommon();
         StatusModule::init_settings(
@@ -468,7 +468,7 @@ unsafe extern "C" fn kirby_copy_pre(fighter: &mut L2CFighterCommon) -> L2CValue 
 unsafe extern "C" fn downb_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
     let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 	let fighter_kind = smash::app::utility::get_kind(boma);
-    let is_ray = (WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) >= 120 && WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) <= 127);
+    let is_ray = true;
     if is_ray && fighter_kind == *FIGHTER_KIND_PIKMIN { //rayman slots
         fighter.sub_status_pre_SpecialNCommon();
         StatusModule::init_settings(

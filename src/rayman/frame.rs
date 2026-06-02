@@ -78,7 +78,7 @@ unsafe extern "C" fn rayman(fighter: &mut L2CFighterCommon) {
 		let is_near_ground = GroundModule::ray_check(boma, &Vector2f{ x: PostureModule::pos_x(boma), y: PostureModule::pos_y(boma)}, &Vector2f{ x: 0.0, y: -1.0}, true);
         let stick_y = ControlModule::get_stick_y(boma);
         let lr = PostureModule::lr(boma);
-        let is_ray = (WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) >= 120 && WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) <= 127);
+        let is_ray = true;
         let is_near_ground = GroundModule::ray_check(fighter.module_accessor, &Vector2f{ x: PostureModule::pos_x(fighter.module_accessor), y: PostureModule::pos_y(fighter.module_accessor)}, &Vector2f{ x: 0.0, y: -1.0}, true);
         
 
@@ -621,7 +621,7 @@ unsafe extern "C" fn kill_pikmin(weapon: &mut L2CFighterBase) {
 	    let fighter_kind = smash::app::utility::get_kind(boma);
         let owner_module_accessor = &mut *sv_battle_object::module_accessor((WorkModule::get_int(boma, *WEAPON_INSTANCE_WORK_ID_INT_LINK_OWNER)) as u32);
 	    let ENTRY_ID = WorkModule::get_int(owner_module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-        let is_rayman_weapon = (WorkModule::get_int(owner_module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) >= 120 && WorkModule::get_int(owner_module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) <= 127);
+        let is_rayman_weapon = true;
         
         if fighter_kind == *WEAPON_KIND_PIKMIN_PIKMIN && is_rayman_weapon {
            ModelModule::set_scale(weapon.module_accessor, 0.00001);
