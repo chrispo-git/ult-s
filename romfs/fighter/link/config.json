@@ -1,0 +1,64 @@
+{
+  "new-dir-infos": [],
+  "new-dir-infos-base": {},
+  "share-to-vanilla": {},
+  "new-dir-files": {
+    "fighter/link/c00": [
+      "fighter/link/model/bow/c00/def_blade_001_col.nutexb",
+      "fighter/link/model/bow/c00/def_spear_001_col.nutexb",
+      "fighter/link/model/bow/c00/def_spoon_001_col.nutexb",
+      "fighter/link/motion/bow/c00/c05attackairfb.nuanmb",
+      "fighter/link/motion/bow/c00/c05attackairhib.nuanmb"
+    ],
+    "fighter/link/c01": [
+      "fighter/link/model/bow/c01/def_blade_001_col.nutexb",
+      "fighter/link/model/bow/c01/def_spear_001_col.nutexb",
+      "fighter/link/model/bow/c01/def_spoon_001_col.nutexb",
+      "fighter/link/motion/bow/c01/c05attackairfb.nuanmb",
+      "fighter/link/motion/bow/c01/c05attackairhib.nuanmb"
+    ],
+    "fighter/link/c02": [
+      "fighter/link/model/bow/c02/def_blade_001_col.nutexb",
+      "fighter/link/model/bow/c02/def_spear_001_col.nutexb",
+      "fighter/link/model/bow/c02/def_spoon_001_col.nutexb",
+      "fighter/link/motion/bow/c02/c05attackairfb.nuanmb",
+      "fighter/link/motion/bow/c02/c05attackairhib.nuanmb"
+    ],
+    "fighter/link/c03": [
+      "fighter/link/model/bow/c03/def_blade_001_col.nutexb",
+      "fighter/link/model/bow/c03/def_spear_001_col.nutexb",
+      "fighter/link/model/bow/c03/def_spoon_001_col.nutexb",
+      "fighter/link/motion/bow/c03/c05attackairfb.nuanmb",
+      "fighter/link/motion/bow/c03/c05attackairhib.nuanmb"
+    ],
+    "fighter/link/c04": [
+      "fighter/link/model/bow/c04/def_blade_001_col.nutexb",
+      "fighter/link/model/bow/c04/def_spear_001_col.nutexb",
+      "fighter/link/model/bow/c04/def_spoon_001_col.nutexb",
+      "fighter/link/motion/bow/c04/c05attackairfb.nuanmb",
+      "fighter/link/motion/bow/c04/c05attackairhib.nuanmb"
+    ],
+    "fighter/link/c05": [
+      "fighter/link/model/bow/c05/def_blade_001_col.nutexb",
+      "fighter/link/model/bow/c05/def_spear_001_col.nutexb",
+      "fighter/link/model/bow/c05/def_spoon_001_col.nutexb",
+      "fighter/link/motion/bow/c05/c05attackairfb.nuanmb",
+      "fighter/link/motion/bow/c05/c05attackairhib.nuanmb"
+    ],
+    "fighter/link/c06": [
+      "fighter/link/model/bow/c06/def_blade_001_col.nutexb",
+      "fighter/link/model/bow/c06/def_spear_001_col.nutexb",
+      "fighter/link/model/bow/c06/def_spoon_001_col.nutexb",
+      "fighter/link/motion/bow/c06/c05attackairfb.nuanmb",
+      "fighter/link/motion/bow/c06/c05attackairhib.nuanmb"
+    ],
+    "fighter/link/c07": [
+      "fighter/link/model/bow/c07/def_blade_001_col.nutexb",
+      "fighter/link/model/bow/c07/def_spear_001_col.nutexb",
+      "fighter/link/model/bow/c07/def_spoon_001_col.nutexb",
+      "fighter/link/motion/bow/c07/c05attackairfb.nuanmb",
+      "fighter/link/motion/bow/c07/c05attackairhib.nuanmb"
+    ]
+  },
+  "share-to-added": {}
+}

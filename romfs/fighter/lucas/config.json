@@ -1,0 +1,144 @@
+{
+  "new-dir-infos": [],
+  "new-dir-infos-base": {},
+  "share-to-vanilla": {
+    "sound/bank/fighter/se_lucas_c00.tonelabel": [
+      "sound/bank/fighter/se_lucas_c120.tonelabel",
+      "sound/bank/fighter/se_lucas_c121.tonelabel",
+      "sound/bank/fighter/se_lucas_c122.tonelabel",
+      "sound/bank/fighter/se_lucas_c123.tonelabel",
+      "sound/bank/fighter/se_lucas_c124.tonelabel",
+      "sound/bank/fighter/se_lucas_c125.tonelabel",
+      "sound/bank/fighter/se_lucas_c126.tonelabel",
+      "sound/bank/fighter/se_lucas_c127.tonelabel"
+    ],
+    "sound/bank/fighter_voice/vc_lucas_c00.tonelabel": [
+      "sound/bank/fighter_voice/vc_lucas_c120.tonelabel",
+      "sound/bank/fighter_voice/vc_lucas_c121.tonelabel",
+      "sound/bank/fighter_voice/vc_lucas_c122.tonelabel",
+      "sound/bank/fighter_voice/vc_lucas_c123.tonelabel",
+      "sound/bank/fighter_voice/vc_lucas_c124.tonelabel",
+      "sound/bank/fighter_voice/vc_lucas_c125.tonelabel",
+      "sound/bank/fighter_voice/vc_lucas_c126.tonelabel",
+      "sound/bank/fighter_voice/vc_lucas_c127.tonelabel"
+    ],
+    "sound/bank/fighter_voice/vc_lucas_cheer_c00.nus3audio": [
+      "sound/bank/fighter_voice/vc_lucas_cheer_c120.nus3audio",
+      "sound/bank/fighter_voice/vc_lucas_cheer_c121.nus3audio",
+      "sound/bank/fighter_voice/vc_lucas_cheer_c122.nus3audio",
+      "sound/bank/fighter_voice/vc_lucas_cheer_c123.nus3audio",
+      "sound/bank/fighter_voice/vc_lucas_cheer_c124.nus3audio",
+      "sound/bank/fighter_voice/vc_lucas_cheer_c125.nus3audio",
+      "sound/bank/fighter_voice/vc_lucas_cheer_c126.nus3audio",
+      "sound/bank/fighter_voice/vc_lucas_cheer_c127.nus3audio"
+    ],
+    "sound/bank/fighter_voice/vc_lucas_cheer_c00.nus3bank": [
+      "sound/bank/fighter_voice/vc_lucas_cheer_c120.nus3bank",
+      "sound/bank/fighter_voice/vc_lucas_cheer_c121.nus3bank",
+      "sound/bank/fighter_voice/vc_lucas_cheer_c122.nus3bank",
+      "sound/bank/fighter_voice/vc_lucas_cheer_c123.nus3bank",
+      "sound/bank/fighter_voice/vc_lucas_cheer_c124.nus3bank",
+      "sound/bank/fighter_voice/vc_lucas_cheer_c125.nus3bank",
+      "sound/bank/fighter_voice/vc_lucas_cheer_c126.nus3bank",
+      "sound/bank/fighter_voice/vc_lucas_cheer_c127.nus3bank"
+    ],
+    "sound/bank/fighter_voice/vc_lucas_cheer_c00.tonelabel": [
+      "sound/bank/fighter_voice/vc_lucas_cheer_c120.tonelabel",
+      "sound/bank/fighter_voice/vc_lucas_cheer_c121.tonelabel",
+      "sound/bank/fighter_voice/vc_lucas_cheer_c122.tonelabel",
+      "sound/bank/fighter_voice/vc_lucas_cheer_c123.tonelabel",
+      "sound/bank/fighter_voice/vc_lucas_cheer_c124.tonelabel",
+      "sound/bank/fighter_voice/vc_lucas_cheer_c125.tonelabel",
+      "sound/bank/fighter_voice/vc_lucas_cheer_c126.tonelabel",
+      "sound/bank/fighter_voice/vc_lucas_cheer_c127.tonelabel"
+    ],
+    "camera/fighter/lucas/c00/d04final.nuanmb": [
+      "camera/fighter/lucas/c120/d04final.nuanmb",
+      "camera/fighter/lucas/c121/d04final.nuanmb",
+      "camera/fighter/lucas/c122/d04final.nuanmb",
+      "camera/fighter/lucas/c123/d04final.nuanmb",
+      "camera/fighter/lucas/c124/d04final.nuanmb",
+      "camera/fighter/lucas/c125/d04final.nuanmb",
+      "camera/fighter/lucas/c126/d04final.nuanmb",
+      "camera/fighter/lucas/c127/d04final.nuanmb"
+    ],
+    "camera/fighter/lucas/c00/j02win1.nuanmb": [
+      "camera/fighter/lucas/c120/j02win1.nuanmb",
+      "camera/fighter/lucas/c121/j02win1.nuanmb",
+      "camera/fighter/lucas/c122/j02win1.nuanmb",
+      "camera/fighter/lucas/c123/j02win1.nuanmb",
+      "camera/fighter/lucas/c124/j02win1.nuanmb",
+      "camera/fighter/lucas/c125/j02win1.nuanmb",
+      "camera/fighter/lucas/c126/j02win1.nuanmb",
+      "camera/fighter/lucas/c127/j02win1.nuanmb"
+    ],
+    "camera/fighter/lucas/c00/j02win2.nuanmb": [
+      "camera/fighter/lucas/c120/j02win2.nuanmb",
+      "camera/fighter/lucas/c121/j02win2.nuanmb",
+      "camera/fighter/lucas/c122/j02win2.nuanmb",
+      "camera/fighter/lucas/c123/j02win2.nuanmb",
+      "camera/fighter/lucas/c124/j02win2.nuanmb",
+      "camera/fighter/lucas/c125/j02win2.nuanmb",
+      "camera/fighter/lucas/c126/j02win2.nuanmb",
+      "camera/fighter/lucas/c127/j02win2.nuanmb"
+    ],
+    "camera/fighter/lucas/c00/j02win3.nuanmb": [
+      "camera/fighter/lucas/c120/j02win3.nuanmb",
+      "camera/fighter/lucas/c121/j02win3.nuanmb",
+      "camera/fighter/lucas/c122/j02win3.nuanmb",
+      "camera/fighter/lucas/c123/j02win3.nuanmb",
+      "camera/fighter/lucas/c124/j02win3.nuanmb",
+      "camera/fighter/lucas/c125/j02win3.nuanmb",
+      "camera/fighter/lucas/c126/j02win3.nuanmb",
+      "camera/fighter/lucas/c127/j02win3.nuanmb"
+    ]
+  },
+  "new-dir-files": {
+    "fighter/lucas/cmn/effect": [
+      "effect/fighter/lucas/trail/tex_maskedman_sword1.nutexb",
+      "effect/fighter/lucas/trail/tex_maskedman_sword2.nutexb",
+      "effect/fighter/lucas/trail/tex_maskedman_sword3.nutexb",
+      "effect/fighter/lucas/trail/tex_maskedman_sword4.nutexb",
+      "effect/fighter/lucas/trail/tex_maskedman_sword5.nutexb",
+      "effect/fighter/lucas/trail/tex_maskedman_sword6.nutexb"
+    ]
+  },
+  "share-to-added": {
+    "sound/bank/fighter/se_lucas_c120.nus3audio": [
+      "sound/bank/fighter/se_lucas_c121.nus3audio",
+      "sound/bank/fighter/se_lucas_c122.nus3audio",
+      "sound/bank/fighter/se_lucas_c123.nus3audio",
+      "sound/bank/fighter/se_lucas_c124.nus3audio",
+      "sound/bank/fighter/se_lucas_c125.nus3audio",
+      "sound/bank/fighter/se_lucas_c126.nus3audio",
+      "sound/bank/fighter/se_lucas_c127.nus3audio"
+    ],
+    "sound/bank/fighter/se_lucas_c120.nus3bank": [
+      "sound/bank/fighter/se_lucas_c121.nus3bank",
+      "sound/bank/fighter/se_lucas_c122.nus3bank",
+      "sound/bank/fighter/se_lucas_c123.nus3bank",
+      "sound/bank/fighter/se_lucas_c124.nus3bank",
+      "sound/bank/fighter/se_lucas_c125.nus3bank",
+      "sound/bank/fighter/se_lucas_c126.nus3bank",
+      "sound/bank/fighter/se_lucas_c127.nus3bank"
+    ],
+    "sound/bank/fighter_voice/vc_lucas_c120.nus3audio": [
+      "sound/bank/fighter_voice/vc_lucas_c121.nus3audio",
+      "sound/bank/fighter_voice/vc_lucas_c122.nus3audio",
+      "sound/bank/fighter_voice/vc_lucas_c123.nus3audio",
+      "sound/bank/fighter_voice/vc_lucas_c124.nus3audio",
+      "sound/bank/fighter_voice/vc_lucas_c125.nus3audio",
+      "sound/bank/fighter_voice/vc_lucas_c126.nus3audio",
+      "sound/bank/fighter_voice/vc_lucas_c127.nus3audio"
+    ],
+    "sound/bank/fighter_voice/vc_lucas_c120.nus3bank": [
+      "sound/bank/fighter_voice/vc_lucas_c121.nus3bank",
+      "sound/bank/fighter_voice/vc_lucas_c122.nus3bank",
+      "sound/bank/fighter_voice/vc_lucas_c123.nus3bank",
+      "sound/bank/fighter_voice/vc_lucas_c124.nus3bank",
+      "sound/bank/fighter_voice/vc_lucas_c125.nus3bank",
+      "sound/bank/fighter_voice/vc_lucas_c126.nus3bank",
+      "sound/bank/fighter_voice/vc_lucas_c127.nus3bank"
+    ]
+  }
+}
