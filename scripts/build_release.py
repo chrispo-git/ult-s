@@ -149,7 +149,8 @@ def build_lite(version):
             if 'c0' in name:
                 os.remove(os.path.join(root, name))
 
-    # Copy fighter files excluding costume dirs
+    # Copy fighter files excluding costume dirs and config.json
+    # (configs handled separately below)
     COSTUME_DIRS = {'c00', 'c01', 'c02', 'c03', 'c04', 'c05', 'c06', 'c07'}
 
     for fighter in os.listdir(os.path.join('romfs', 'fighter')):
@@ -159,6 +160,8 @@ def build_lite(version):
         for root, dirs, files in os.walk(fighter_src, topdown=True):
             dirs[:] = [d for d in dirs if d not in COSTUME_DIRS]
             for name in files:
+                if name == 'config.json':
+                    continue
                 src_path = os.path.join(root, name)
                 dst_path = src_path.replace(
                     'romfs',
@@ -168,43 +171,33 @@ def build_lite(version):
                 os.makedirs(os.path.dirname(dst_path), exist_ok=True)
                 shutil.copy2(src_path, dst_path)
 
-    # Copy config.json files only where the destination folder already exists
-    log("  Copying config.json files (only where destination folder exists)...")
+    # Copy fighter config.json files only where the fighter has real content
+    # in lite — check the fighter root dst exists, then copy all configs found
+    # anywhere in that fighter's tree (creating subdirs like added/ as needed)
+    log("  Copying fighter config.json files...")
     configs_copied = 0
-    for root, dirs, files in os.walk('romfs'):
-        for name in files:
-            if name != 'config.json':
-                continue
-            src_path = os.path.join(root, name)
-            dst_path = src_path.replace('romfs', out_dir, 1)
-            dst_folder = os.path.dirname(dst_path)
-            if os.path.exists(dst_folder):
-                shutil.copy2(src_path, dst_path)
-                log(f"    Copied config: {src_path}")
-                configs_copied += 1
-            else:
-                log(f"    Skipped config (folder absent): {src_path}")
-    log(f"  {configs_copied} config.json file(s) copied")
-
-    log("  Pruning orphan config.json files...")
-    for root, dirs, files in os.walk(out_dir, topdown=False):
-        if 'config.json' not in files:
+    for fighter in os.listdir(os.path.join('romfs', 'fighter')):
+        fighter_src = os.path.join('romfs', 'fighter', fighter)
+        if not os.path.isdir(fighter_src) or fighter == 'common':
             continue
-        # Count all files in this subtree excluding the config itself
-        subtree_files = sum(
-            len(f) for _, _, f in os.walk(root)
-        ) - 1  # subtract the config.json itself
-        if subtree_files == 0:
-            config_path = os.path.join(root, 'config.json')
-            os.remove(config_path)
-            log(f"    Removed orphan config: {config_path}")
-            parent = root
-            while os.path.normpath(parent) != os.path.normpath(out_dir):
-                if not os.listdir(parent):
-                    os.rmdir(parent)
-                    parent = os.path.dirname(parent)
-                else:
-                    break
+        fighter_dst = os.path.join(out_dir, 'fighter', fighter)
+        if not os.path.exists(fighter_dst):
+            log(f"    Skipped (no content): fighter/{fighter}")
+            continue
+        for root, dirs, files in os.walk(fighter_src, topdown=True):
+            dirs[:] = [d for d in dirs if d not in COSTUME_DIRS]
+            if 'config.json' in files:
+                src_path = os.path.join(root, 'config.json')
+                dst_path = src_path.replace(
+                    'romfs',
+                    os.path.join('releases-lite', 'ultimate', 'mods', 'Ultimate S Lite'),
+                    1
+                )
+                os.makedirs(os.path.dirname(dst_path), exist_ok=True)
+                shutil.copy2(src_path, dst_path)
+                log(f"    Copied: {src_path}")
+                configs_copied += 1
+    log(f"  {configs_copied} fighter config.json file(s) copied")
 
     merge_configs(out_dir)
 

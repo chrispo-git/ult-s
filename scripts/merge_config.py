@@ -36,7 +36,11 @@ def merge_configs(mod_dir):
                 merged[key].extend(data[key])
         for key in DICT_KEYS:
             if key in data:
-                merged[key].update(data[key])
+                for k, v in data[key].items():
+                    if isinstance(v, list) and k in merged[key] and isinstance(merged[key][k], list):
+                        merged[key][k] = merged[key][k] + v
+                    else:
+                        merged[key][k] = v
 
     with open(root_config, "w", encoding="utf-8") as f:
         json.dump(merged, f, indent=2, ensure_ascii=False)
@@ -47,7 +51,7 @@ def merge_configs(mod_dir):
             continue
         os.remove(path)
         parent = os.path.dirname(path)
-        while parent != mod_dir:
+        while os.path.normpath(parent) != os.path.normpath(mod_dir):
             if not os.listdir(parent):
                 os.rmdir(parent)
                 parent = os.path.dirname(parent)
