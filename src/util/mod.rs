@@ -24,6 +24,7 @@ pub static mut GAMEMODES : Vec<String> = Vec::new();
 pub static mut PREV_SCALE : [f32; 8] = [0.0; 8];
 pub static mut IS_AB : [bool; 8] = [false; 8];
 pub static mut IS_KD_THROW : [bool; 8] = [false; 8];
+static mut PARRY_DURATION : [i32; 8] = [0; 8];
 
 pub static mut TAP_JUMP_BUFFER : [i32; 8] = [0; 8];
 pub const TAP_JUMP_BUFFER_MAX : i32 = 6;
@@ -292,6 +293,90 @@ pub unsafe fn article_hook(boma: &mut smash::app::BattleObjectModuleAccessor, in
 }
 
 
+pub unsafe fn shieldstun_alter(fighter : &mut L2CFighterCommon, status_kind : i32, value: f32) {
+    let shieldstun_mul = (value/0.8) / match status_kind {
+        n if n == *FIGHTER_STATUS_KIND_ATTACK_AIR => 0.33,
+        n if crate::is_in!(n, *FIGHTER_STATUS_KIND_ATTACK_S4, *FIGHTER_STATUS_KIND_ATTACK_LW4, *FIGHTER_STATUS_KIND_ATTACK_HI4) => 0.725,
+        _ => 1.0,
+    };
+
+    for i in 0..6 {
+        if AttackModule::is_attack(fighter.module_accessor, i, false) {
+            macros::ATK_SET_SHIELD_SETOFF_MUL(fighter, /*ID*/ i as u64, /*ShieldstunMul*/ shieldstun_mul);
+        }
+    }
+}
+
+//Parry Reflects
+#[skyline::hook(replace=smash::app::FighterUtil::is_valid_just_shield_reflector)]
+unsafe fn is_valid_just_shield_reflector(module_accessor: &mut smash::app::BattleObjectModuleAccessor) -> bool {
+    if config::get().special.parry_reflect != 0 {return true; }
+    original!()(module_accessor)
+}
+static NONE :  smash::phx::Vector3f =  smash::phx::Vector3f { x: 0.0, y: 0.0, z: 0.0 };
+
+pub unsafe fn parry_only(fighter : &mut L2CFighterCommon, status_kind : i32, motion_kind : u64, ENTRY_ID : usize) {
+    unsafe {
+        if !is_gamemode("parry".to_string()) &&  !is_gamemode("rivals".to_string()){
+            return;
+        }
+        if PARRY_DURATION[ENTRY_ID] > 0 {
+            PARRY_DURATION[ENTRY_ID] -= 1;
+        }
+        if crate::is_in!(status_kind, *FIGHTER_STATUS_KIND_GUARD, *FIGHTER_STATUS_KIND_GUARD_ON, *FIGHTER_STATUS_KIND_GUARD_DAMAGE) {
+			StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_GUARD_OFF, false);
+            return;
+        }
+        if crate::is_motion!(motion_kind, "just_shield", "just_shield_off") {
+            PARRY_DURATION[ENTRY_ID] = 10;
+            return;
+        }
+		let situation_kind = StatusModule::situation_kind(fighter.module_accessor);
+        if situation_kind == *SITUATION_KIND_GROUND && PARRY_DURATION[ENTRY_ID] == 1 && !(*FIGHTER_STATUS_KIND_DAMAGE..*FIGHTER_STATUS_KIND_DAMAGE_FALL).contains(&status_kind) {
+			StopModule::end_stop(fighter.module_accessor);
+            //println!("End Stun Early");
+			StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_WAIT, false);
+            return;
+        }
+        let frame = MotionModule::frame(fighter.module_accessor);
+        if status_kind == *FIGHTER_STATUS_KIND_REBOUND && (frame as i32) == 1 {
+            if is_gamemode("rivals".to_string()) && MotionModule::rate(fighter.module_accessor) == 0.5 {
+                macros::FLASH(fighter, 0.25, 0.25, 0.25, 0.5);
+            }
+        }
+        if status_kind == *FIGHTER_STATUS_KIND_GUARD_OFF {
+            WorkModule::unable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_ESCAPE);
+            WorkModule::unable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_ESCAPE_F);
+            WorkModule::unable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_ESCAPE_B);
+            WorkModule::unable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_JUMP_SQUAT_BUTTON);
+            WorkModule::unable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_JUMP_SQUAT);
+            WorkModule::unable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_ATTACK_HI4_START);
+            WorkModule::unable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_SPECIAL_HI);
+            WorkModule::unable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_SPECIAL_HI_COMMAND);
+
+            match (frame as i32) {
+                1 => {
+                    macros::PLAY_SE(fighter, Hash40::new("se_common_step_snow"));
+                    macros::PLAY_SE(fighter, Hash40::new("se_common_step_sand"));
+                    macros::PLAY_SE(fighter, Hash40::new("se_common_step_sand"));
+
+                    macros::FLASH(fighter, 0.92, 0.99, 1, 0.5);
+                    EffectModule::req_follow(fighter.module_accessor, smash::phx::Hash40::new("sys_just_shield_hit"), smash::phx::Hash40::new("hip"), &NONE, &NONE, 0.7, true, 0, 0, 0, 0, 0, true, true) as u32;
+                },
+                n if n > 6 => {
+                    macros::COL_NORMAL(fighter);
+                    let rate = if is_gamemode("rivals".to_string()) { 0.5 } else { 1.0 };
+                    WorkModule::set_float(fighter.module_accessor, rate, *FIGHTER_STATUS_WORK_ID_FLOAT_REBOUND_MOTION_RATE);
+                    StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_REBOUND, true);
+                },
+                n if n > 4 => {
+                    WorkModule::unable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_CATCH);
+                },
+                _ => {},
+            };
+        }
+    };
+}
 unsafe extern "C" fn util_update(fighter : &mut L2CFighterCommon) {
     unsafe {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);    
@@ -340,8 +425,42 @@ unsafe extern "C" fn util_update(fighter : &mut L2CFighterCommon) {
 		if config::get().attacks.grab != 0 {
     		crate::transition_set!(ENTRY_ID, can_grab);
 		}
+		if config::get().defense.airdodge == 3 {
+    		WorkModule::on_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_DISABLE_ESCAPE_AIR);    
+		}
 		if config::get().general.ledges != 0 {
     		GroundModule::set_cliff_check(fighter.module_accessor, smash::app::GroundCliffCheckKind(*GROUND_CLIFF_CHECK_KIND_NONE));
+		}
+		let shield_health = match config::get().defense.shield_health {
+			0 => 50.0,
+			1 => 65.0,
+			_ => 35.0,
+		};
+		WorkModule::set_float(fighter.module_accessor, shield_health, *FIGHTER_INSTANCE_WORK_ID_FLOAT_GUARD_SHIELD_MAX);
+
+		if config::get().defense.shieldstun != 0 {
+			let shieldstun_mul = match config::get().defense.shieldstun {
+				0 => 0.8,
+				1 => 1.75,
+				2 => 0.4
+			};
+			shieldstun_alter(fighter, status_kind, shieldstun_mul);
+		}
+
+		match config::get().defense.shield {
+			0 => {},
+			1 => {
+				parry_only(fighter, status_kind, motion_kind, ENTRY_ID);
+			},
+			2 => {
+				WorkModule::off_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_DISABLE_GUARD);
+			},
+		};
+
+		if crate::is_in!(status_kind, *FIGHTER_STATUS_KIND_ATTACK, *FIGHTER_STATUS_KIND_ATTACK_DASH, *FIGHTER_STATUS_KIND_ATTACK_S3, *FIGHTER_STATUS_KIND_ATTACK_HI3, *FIGHTER_STATUS_KIND_ATTACK_LW3,  *FIGHTER_STATUS_KIND_ATTACK_S4_START, *FIGHTER_STATUS_KIND_ATTACK_HI4_START, *FIGHTER_STATUS_KIND_ATTACK_LW4_START){
+			if config::get().attacks.ac != 0 {
+				WorkModule::on_flag(fighter.module_accessor, *FIGHTER_STATUS_WORK_ID_FLAG_RESERVE_ATTACK_DISABLE_MINI_JUMP_ATTACK);
+			}
 		}
 		if config::get().movement.hitfall != 0 {
 			if AttackModule::is_infliction_status(fighter.module_accessor, *COLLISION_KIND_MASK_HIT) && status_kind == *FIGHTER_STATUS_KIND_ATTACK_AIR && is_hitlag(boma(fighter)) {
@@ -770,14 +889,69 @@ pub(crate) unsafe fn reload_config_values() -> () {
 		}
 	};
 	
-	let ll_multiplier = match config.attacks.ll {
+	let ll_multiplier = match config.stats.ll {
 		0 => 1.0, 
 		1 => 1.5, 
 		_ => 0.7,
 	};
 	for attr in ["landing_attack_air_frame_n", "landing_attack_air_frame_f", "landing_attack_air_frame_b", "landing_attack_air_frame_hi", "landing_attack_air_frame_lw"] {
 		param_config::update_attribute_mul_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40(attr), 0, ll_multiplier));
-	}
+	};
+	let groundspeed_mul = match config.stats.groundspeed {
+		0 => 1.0,
+		1 => 1.25,
+		_ => 0.75,
+	};
+	for attr in ["dash_speed", "run_speed_max", "walk_speed_max"] {
+		param_config::update_attribute_mul_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40(attr), 0, groundspeed_mul));
+	};
+	let airspeed_mul = match config.stats.airspeed {
+		0 => 1.0,
+		1 => 1.25,
+		_ => 0.75,
+	};
+	param_config::update_attribute_mul_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("air_speed_x_stable"), 0, airspeed_mul));
+	
+	let airaccel_mul = match config.stats.airaccel {
+		0 => 1.0,
+		1 => 1.25,
+		_ => 0.75,
+	};
+	for attr in ["air_accel_x_mul", "air_accel_x_add"] {
+		param_config::update_attribute_mul_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40(attr), 0, airaccel_mul));
+	};
+
+
+	let fallspeed_mul = match config.stats.fallspeed {
+		0 => 1.0,
+		1 => 1.33,
+		_ => 0.8,
+	};
+	param_config::update_attribute_mul_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("air_speed_y_stable"), 0, fallspeed_mul));
+
+
+	let jump_mul = match config.stats.jump {
+		0 => 1.0,
+		1 => 1.25,
+		_ => 0.75,
+	};
+	for attr in ["mini_jump_y", "jump_y", "jump_aerial_y", "cliff_jump_y"] {
+		param_config::update_attribute_mul_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40(attr), 0, jump_mul));
+	};
+	
+	let gravity_mul = match config.stats.gravity {
+		0 => 1.0,
+		1 => 1.25,
+		_ => 0.75,
+	};
+	param_config::update_attribute_mul_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("air_accel_y"), 0, gravity_mul));
+	
+	let weight_mul = match config.stats.weight {
+		0 => 1.0,
+		1 => 1.25,
+		_ => 0.75,
+	};
+	param_config::update_attribute_mul_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("weight"), 0, weight_mul));
 	
 	let mut escape_air_slide_back_end_frame = 4;
 	let mut landing_frame_escape_air_slide_max = 20.0;
@@ -976,6 +1150,7 @@ pub fn install() {
 	skyline::install_hook!(on_flag_hook);
 	skyline::install_hook!(off_flag_hook);
 	skyline::install_hook!(article_hook);
+	skyline::install_hook!(is_valid_just_shield_reflector);
 	unsafe {
 		reload_config_values();
 	}

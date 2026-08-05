@@ -51,7 +51,7 @@ pub unsafe fn lazy_warm() {
 //Perfect Pivot
 pub unsafe fn perfectpivot(fighter : &mut L2CFighterCommon, status_kind : i32, ENTRY_ID : usize) {
     unsafe {
-		if !is_mechanics_enabled() || is_gamemode("rivals".to_string()) {
+		if config::get().movement.pivots == 2 {
 			return;
 		}
 		if status_kind == *FIGHTER_STATUS_KIND_TURN {
@@ -63,7 +63,8 @@ pub unsafe fn perfectpivot(fighter : &mut L2CFighterCommon, status_kind : i32, E
             return;
         }
         let frame = MotionModule::frame(fighter.module_accessor) as i32;
-        if (3..5).contains(&frame) {
+        let max = if config::get().movement.pivots == 0 {5} else {10};
+        if (3..max).contains(&frame) {
 			crate::transition_set!(ENTRY_ID, can_dash);
 			crate::transition_set!(ENTRY_ID, can_turndash);
 		    let lr = PostureModule::lr(fighter.module_accessor);
@@ -112,7 +113,7 @@ pub unsafe fn moonwalk(fighter : &mut L2CFighterCommon, status_kind : i32, ENTRY
 //JC Grab
 pub unsafe fn jc_grab(fighter : &mut L2CFighterCommon, status_kind : i32, ENTRY_ID : usize) {
     unsafe {
-		if !is_mechanics_enabled() || is_gamemode("rivals".to_string()) {
+		if config::get().attacks.jcg != 0 {
 			return;
 		}
         if status_kind != *FIGHTER_STATUS_KIND_JUMP_SQUAT {
