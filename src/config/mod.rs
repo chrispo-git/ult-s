@@ -1,29 +1,24 @@
-use arc_swap::ArcSwap;
-use serde::Deserialize;
+use serde_derive::Deserialize;
 use std::fs;
-use std::sync::{Arc, OnceLock};
+use std::sync::{OnceLock, RwLock};
+
+
+static mut CONFIG: Option<Config> = None;
 
 const CONFIG_PATH: &str = "sd:/ultimate/ult-s/config.toml";
-static CONFIG: OnceLock<ArcSwap<Config>> = OnceLock::new();
 
 #[derive(Debug, Deserialize)]
 pub struct Config {
-    #[serde(rename = "General")]
     pub general: General,
 
-    #[serde(rename = "Movement")]
     pub movement: Movement,
 
-    #[serde(rename = "Attacks")]
     pub attacks: Attacks,
 
-    #[serde(rename = "Defense")]
     pub defense: Defense,
 
-    #[serde(rename = "Stats")]
     pub stats: Stats,
 
-    #[serde(rename = "Special")]
     pub special: Special,
 }
 
@@ -106,37 +101,38 @@ pub struct Special {
 }
 
 
-fn load_from_file() -> Result<Config, Box<dyn std::error::Error>> {
-    let contents = fs::read_to_string(CONFIG_PATH)?;
-    let config = toml::from_str(&contents)?;
+pub fn load() -> Result<Config, String> {
+    let contents = std::fs::read_to_string(CONFIG_PATH)
+        .map_err(|e| format!("Failed to read config: {e}"))?;
 
-    Ok(config)
+    toml::from_str(&contents)
+        .map_err(|e| format!("Failed to parse config: {e}"))
 }
 
-pub fn init() -> Result<(), Box<dyn std::error::Error>> {
-    let config = load_from_file()?;
+pub fn init() -> Result<(), String> {
+    let config = load()?;
 
-    CONFIG
-        .set(ArcSwap::from_pointee(config))
-        .map_err(|_| "Config already initialized")?;
+    unsafe {
+        CONFIG = Some(config);
+    }
 
     Ok(())
 }
 
-pub fn reload() -> Result<(), Box<dyn std::error::Error>> {
-    let config = load_from_file()?;
+pub fn reload() -> Result<(), String> {
+    let config = load()?;
 
-    CONFIG
-        .get()
-        .ok_or("Config not initialized")?
-        .store(Arc::new(config));
+    unsafe {
+        CONFIG = Some(config);
+    }
 
     Ok(())
 }
 
-pub fn get() -> Arc<Config> {
-    CONFIG
-        .get()
-        .expect("Config not initialized")
-        .load_full()
+pub fn get() -> &'static Config {
+    unsafe {
+        CONFIG
+            .as_ref()
+            .expect("Config has not been initialized")
+    }
 }

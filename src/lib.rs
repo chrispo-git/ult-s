@@ -366,12 +366,16 @@ pub extern "C" fn is_ultimate_s() {}
 
 #[no_mangle]
 pub extern "C" fn main() {
-    config::init().expect("Failed to load config at ultimate/ult-s/config.toml. Could you check that it's valid?");
+    println!("Running config setup");
+    config::init();
+    println!("Complete config setup.");
 
     if !quick_validate_install() {
         return; // don't do anything else since they don't have all dependencies
     }
 
+
+    println!("Doing online play stuff");
     //allows online play with added chars
     unsafe { 
         if Path::new("sd:/atmosphere/contents/01006a800016e000/romfs/skyline/plugins/libthe_csk_collection.nro").is_file() {
@@ -383,6 +387,7 @@ pub extern "C" fn main() {
         }
     }
 	
+    println!("Installing some hooks");
 	//Common
     if !is_on_ryujinx(){
         println!("We're on switch! Yay!");

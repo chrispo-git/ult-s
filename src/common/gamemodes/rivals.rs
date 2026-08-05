@@ -128,7 +128,6 @@ pub unsafe fn opff(fighter : &mut L2CFighterCommon, status_kind : i32, ENTRY_ID 
 
 
     rivals_pivot(fighter, status_kind, ENTRY_ID, stickx);
-    drift_di(fighter, status_kind, ENTRY_ID, stickx);
     airdodge(fighter, status_kind, ENTRY_ID, stickx);
     expanded_walljump(fighter, status_kind, ENTRY_ID);
     babydash(fighter, status_kind, stickx);

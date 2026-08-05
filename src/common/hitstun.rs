@@ -42,7 +42,7 @@ pub unsafe fn drift_di(fighter : &mut L2CFighterCommon, status_kind : i32) {
 		}
 
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-        let stick_x = ControlModule::get_stick_x(fighter.module_accessor);
+        let stickx = ControlModule::get_stick_x(fighter.module_accessor);
         if crate::is_in!(status_kind, *FIGHTER_STATUS_KIND_DAMAGE_FLY, *FIGHTER_STATUS_KIND_DAMAGE_FLY_ROLL) {
             let max_drift_change = 0.7;
             let drift_add = 0.005;

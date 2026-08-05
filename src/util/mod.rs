@@ -442,7 +442,7 @@ unsafe extern "C" fn util_update(fighter : &mut L2CFighterCommon) {
 			let shieldstun_mul = match config::get().defense.shieldstun {
 				0 => 0.8,
 				1 => 1.75,
-				2 => 0.4
+				_ => 0.4
 			};
 			shieldstun_alter(fighter, status_kind, shieldstun_mul);
 		}
@@ -452,7 +452,7 @@ unsafe extern "C" fn util_update(fighter : &mut L2CFighterCommon) {
 			1 => {
 				parry_only(fighter, status_kind, motion_kind, ENTRY_ID);
 			},
-			2 => {
+			_ => {
 				WorkModule::off_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_DISABLE_GUARD);
 			},
 		};
@@ -463,7 +463,7 @@ unsafe extern "C" fn util_update(fighter : &mut L2CFighterCommon) {
 			}
 		}
 		if config::get().movement.hitfall != 0 {
-			if AttackModule::is_infliction_status(fighter.module_accessor, *COLLISION_KIND_MASK_HIT) && status_kind == *FIGHTER_STATUS_KIND_ATTACK_AIR && is_hitlag(boma(fighter)) {
+			if AttackModule::is_infliction_status(fighter.module_accessor, *COLLISION_KIND_MASK_HIT) && status_kind == *FIGHTER_STATUS_KIND_ATTACK_AIR && is_hitlag(boma) {
 				let cat2 = ControlModule::get_command_flag_cat(fighter.module_accessor, 1);
 				if (cat2 & *FIGHTER_PAD_CMD_CAT2_FLAG_FALL_JUMP) != 0 && ControlModule::get_stick_y(fighter.module_accessor) < -0.66 {
 					WorkModule::set_flag(fighter.module_accessor, true, *FIGHTER_STATUS_WORK_ID_FLAG_RESERVE_DIVE);

@@ -32,9 +32,9 @@ smash2 = { package = "smash", git = "https://github.com/WuBoytH/smash-rs" }
 once_cell = { version = "1.15.0", default-features = false, features = ["alloc"] }
 parking_lot = "0.12.5"
 cached = "0.54"
-serde = { version = "1", features = ["derive"] } 
-toml = "0.8"
-arc-swap = "1"
+toml = "0.5.2"
+serde = "1.0.136"
+serde_derive = "1.0.136"
 
 [profile.dev]
 panic = "abort"

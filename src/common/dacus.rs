@@ -10,6 +10,7 @@ use smash::lib::{L2CValue, L2CAgent};
 use smash::phx::Vector2f;
 use crate::util::*;
 use once_cell::sync::Lazy;
+use crate::config;
 
 static FIGHTERS_F6: Lazy<Vec<i32>> = Lazy::new(|| {
     vec![
