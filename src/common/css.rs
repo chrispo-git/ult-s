@@ -123,7 +123,7 @@ pub fn show_gamemodes() {
         }
     }
 	unsafe {
-		update_enabled_checks();
+		reload_config_values();
 	}
 }
 pub fn show_mod_settings_emu() {
@@ -160,7 +160,7 @@ pub fn show_mod_settings_emu() {
         }
     }
 	unsafe {
-		update_enabled_checks();
+		reload_config_values();
 	}
 }
 pub fn generate_config_filename(m : bool, h : bool, s : bool) -> String {
@@ -246,7 +246,7 @@ pub fn show_mod_settings() {let path = "sd:/ultimate/ult-s/sys-flags/";
         }
     }
     unsafe {
-        update_enabled_checks();
+        reload_config_values();
     }
 }
 

@@ -44,6 +44,7 @@ pub struct Movement {
     pub hitfall: u8,
     pub agt: u8,
     pub djc: u8,
+    pub footstool: u8,
 }
 
 #[derive(Debug, Deserialize)]
@@ -68,6 +69,7 @@ pub struct Defense {
     pub sdi: u8,
     pub cc: u8,
     pub hitstun_cancel: u8,
+    pub vertical_gravity: u8,
 }
 
 #[derive(Debug, Deserialize)]
@@ -115,4 +117,3 @@ pub fn get() -> Arc<Config> {
         .expect("Config not initialized")
         .load_full()
 }
-```

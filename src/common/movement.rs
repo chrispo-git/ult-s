@@ -11,6 +11,7 @@ use std::{fs, path::Path};
 use smash::phx::Vector2f;
 use once_cell::sync::Lazy;
 use crate::util::*;
+use crate::config;
 static mut STALE_MAX : f32 = 1.0;
 static mut STALE_TIMER_MAX : i32 = 480;
 static mut FOOTSTOOL_STALE: [f32; 8] = [21.0; 8];
@@ -136,7 +137,7 @@ pub unsafe fn jc_grab(fighter : &mut L2CFighterCommon, status_kind : i32, ENTRY_
 //DJC
 pub unsafe fn djc(fighter : &mut L2CFighterCommon, status_kind : i32) {
     unsafe {
-		if !is_mechanics_enabled() {
+		if config::get().movement.djc == 1  {
 			return;
 		}
         let kinetic_type = KineticModule::get_kinetic_type(fighter.module_accessor);
@@ -200,7 +201,7 @@ pub unsafe fn hold_buffer_killer(fighter : &mut L2CFighterCommon, status_kind : 
         }
         let mut hold_buffer_lim = HOLD_BUFFER_LIMIT;
         let precede = WorkModule::get_param_int(fighter.module_accessor, hash40("common"), hash40("precede"));
-        if IS_SMALL_HOLD_BUFFER {
+        if config::get().general.tap_buffer == 0 {
             hold_buffer_lim = precede; //hold buffer now matches precede
         }
 
@@ -336,11 +337,11 @@ pub unsafe fn sub_transition_group_check_air_tread_jump(fighter: &mut L2CFighter
 #[skyline::hook(replace = L2CFighterCommon_status_TreadJump)]
 unsafe fn status_treadjump(fighter: &mut L2CFighterCommon) -> L2CValue {
     // Added taunt buttons to the "Is Button Footstool" check
-    if ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_JUMP)
+    if config::get().movement.footstool != 2 && (ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_JUMP)
     || ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_APPEAL_HI)
     || ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_APPEAL_S_L)
     || ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_APPEAL_S_R)
-    || ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_APPEAL_LW) {
+    || ControlModule::check_button_on(fighter.module_accessor, *CONTROL_PAD_BUTTON_APPEAL_LW)) {
         WorkModule::on_flag(fighter.module_accessor, *FIGHTER_STATUS_TREAD_FLAG_BUTTON);
         ControlModule::reset_trigger(fighter.module_accessor);
     }

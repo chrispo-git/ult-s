@@ -146,8 +146,6 @@ pub unsafe fn opff(fighter : &mut L2CFighterCommon, status_kind : i32, ENTRY_ID 
     let lr = PostureModule::lr(fighter.module_accessor);
     let stickx = ControlModule::get_stick_x(fighter.module_accessor) * lr;		
 
-    crate::transition_set!(ENTRY_ID, can_grab);
-    GroundModule::set_cliff_check(fighter.module_accessor, smash::app::GroundCliffCheckKind(*GROUND_CLIFF_CHECK_KIND_NONE));
 
     rivals_pivot(fighter, status_kind, ENTRY_ID, stickx);
     drift_di(fighter, status_kind, ENTRY_ID, stickx);
