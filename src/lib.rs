@@ -42,6 +42,7 @@ pub fn is_on_ryujinx() -> bool {
 }
 mod state_manager;
 mod s_macros;
+mod config;
 
 
 pub fn quick_validate_install() -> bool {
@@ -365,6 +366,7 @@ pub extern "C" fn is_ultimate_s() {}
 
 #[no_mangle]
 pub extern "C" fn main() {
+    config::init().expect("Failed to load config at ultimate/ult-s/config.toml. Could you check that it's valid?");
 
     if !quick_validate_install() {
         return; // don't do anything else since they don't have all dependencies
