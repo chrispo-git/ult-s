@@ -317,9 +317,6 @@ static NONE :  smash::phx::Vector3f =  smash::phx::Vector3f { x: 0.0, y: 0.0, z:
 
 pub unsafe fn parry_only(fighter : &mut L2CFighterCommon, status_kind : i32, motion_kind : u64, ENTRY_ID : usize) {
     unsafe {
-        if !is_gamemode("parry".to_string()) &&  !is_gamemode("rivals".to_string()){
-            return;
-        }
         if PARRY_DURATION[ENTRY_ID] > 0 {
             PARRY_DURATION[ENTRY_ID] -= 1;
         }
