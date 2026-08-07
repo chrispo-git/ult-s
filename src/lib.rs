@@ -331,6 +331,19 @@ mod zelda;
 #[skyline::main(name = "ult-s")]
 pub fn main() {
     println!("Running config setup");
+    match config::init() {
+        Ok(_) => {
+            println!("Config loaded successfully");
+        }
+        Err(e) => {
+            if is_on_ryujinx() {
+                println!("Your config.toml is incorrect! Please provide a correct one.");
+            } else {
+                DialogOk::ok("Your config.toml is incorrect! Please provide a correct one.");
+            }
+            return;
+        }
+    }
     config::init();
     println!("Complete config setup.");
 

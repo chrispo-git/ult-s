@@ -10,6 +10,7 @@ use smash::lib::{L2CValue, L2CAgent};
 use smash::phx::Vector2f;
 use crate::util::*;
 use smash::app::sv_math;
+use crate::config;
 
 #[derive(Default, Clone, Copy)]
 pub struct GamemodeAttacksState {
@@ -109,6 +110,10 @@ unsafe fn attack_replace(lua_state: u64) {
             l2c_agent.push_lua_stack(&mut L2CValue::new_int(get_sfx(effs) as u64));
         } else if i == 15 && is_gamemode("critical".to_string()) &&  crate::get_state!(ENTRY_ID, GamemodeAttacksState).do_critical {
             l2c_agent.push_lua_stack(&mut L2CValue::new_num(x.get_num() * 2.0));
+        } else if i == 15 && config::get().general.hitlag == 2 {
+            l2c_agent.push_lua_stack(&mut L2CValue::new_num(x.get_num() * 0.7));
+        } else if i == 15 && config::get().general.hitlag == 1 {
+            l2c_agent.push_lua_stack(&mut L2CValue::new_num(x.get_num() * 1.2));
         }else {
             l2c_agent.push_lua_stack(x);
         }

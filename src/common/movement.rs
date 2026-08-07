@@ -82,7 +82,7 @@ pub unsafe fn perfectpivot(fighter : &mut L2CFighterCommon, status_kind : i32, E
 //Moonwalk
 pub unsafe fn moonwalk(fighter : &mut L2CFighterCommon, status_kind : i32, ENTRY_ID : usize) {
     unsafe {
-		if !is_mechanics_enabled() && !is_gamemode("rivals".to_string()) {
+		if config::get().movement.moonwalk != 0  && !is_gamemode("rivals".to_string()) {
 			return;
 		}
         if !crate::is_in!(status_kind, *FIGHTER_STATUS_KIND_DASH, *FIGHTER_STATUS_KIND_TURN_DASH) {
@@ -202,7 +202,7 @@ pub unsafe fn hold_buffer_killer(fighter : &mut L2CFighterCommon, status_kind : 
         }
         let mut hold_buffer_lim = HOLD_BUFFER_LIMIT;
         let precede = WorkModule::get_param_int(fighter.module_accessor, hash40("common"), hash40("precede"));
-        if config::get().general.tap_buffer == 0 {
+        if config::get().general.hold_buffer == 0 {
             hold_buffer_lim = precede; //hold buffer now matches precede
         }
 
@@ -226,7 +226,7 @@ pub unsafe fn hold_buffer_killer(fighter : &mut L2CFighterCommon, status_kind : 
 //Dash changes
 pub unsafe fn dash(fighter : &mut L2CFighterCommon, status_kind : i32) {
     unsafe {
-		if !is_mechanics_enabled() && !is_gamemode("rivals".to_string())  {
+		if config::get().movement.dash != 0  && !is_gamemode("rivals".to_string())  {
 			return;
 		}
         if !crate::is_in!(status_kind, *FIGHTER_STATUS_KIND_DASH, *FIGHTER_STATUS_KIND_TURN_DASH, 
@@ -262,7 +262,7 @@ pub unsafe fn dash(fighter : &mut L2CFighterCommon, status_kind : i32) {
 //Parry Cancellable into a dash
 pub unsafe fn parrycanceldash(fighter : &mut L2CFighterCommon, status_kind : i32, motion_kind : u64) {
     unsafe {
-		if !is_mechanics_enabled() {
+		if config::get().movement.dash != 0 {
 			return;
 		}
         if motion_kind == hash40("just_shield_off") {

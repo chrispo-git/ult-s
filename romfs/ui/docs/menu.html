@@ -18,15 +18,15 @@
     <script src="./menu.js"></script>
     <script src="./toggles.js"></script>
     <style>
-    .footer {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    height: 100px;
-    line-height: 70px;
-    text-align: center;
-    }
+        .footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 100px;
+            line-height: 70px;
+            text-align: center;
+        }
     </style>
 </head>
 
@@ -43,7 +43,9 @@
                 </div>
             </a>
             <div class="breadcrumb-list f-u-bold">
-                <p><span data-msgcom="true" data-msgid="textbox_id-10002" style="color: rgb(255, 255, 255); -webkit-text-stroke-width: 2px; -webkit-text-stroke-color: black; z-index: 1;" id="test">Ultimate S Settings</span></p>
+                <p><span data-msgcom="true" data-msgid="textbox_id-10002"
+                        style="color: rgb(255, 255, 255); -webkit-text-stroke-width: 2px; -webkit-text-stroke-color: black; z-index: 1;"
+                        id="test">Ultimate S Settings</span></p>
             </div>
         </div>
     </div>
@@ -51,33 +53,420 @@
     <div class="main" id="list">
         <div class="scrollbar">
             <div class="flex-container">
-                <button id="mechanics-button" onclick="toggle('mechanics', this, 'mechanics-text')" onfocus="textFocus('Ultimate S System Mechanics such as Edge Cancelling, Wavedash or Perfect Pivot.')" class="flex-item">
-                        <div class="icon-background"><img id="mechanics-text" class="abstract-icon is-appear visible"
-                            src="check.svg" /></div>
-                        <div class="item-container">
-                            <h2>Ultimate S Mechanics</h2>
-                        </div>
-                    </button>
-                <button id="hold-button" onclick="toggle('hold', this, 'hold-text')" onfocus="textFocus('Smash Ultimate\'s Hold Buffer mechanic.')" class="flex-item">
-                        <div class="icon-background"><img id="hold-text" class="abstract-icon is-appear visible"
-                            src="check.svg" /></div>
-                        <div class="item-container">
-                            <h2>Hold Buffer</h2>
-                        </div>
-                    </button>
-                <button id="sh-button" onclick="toggle('sh', this, 'sh-text')" onfocus="textFocus('Smash Ultimate\'s Shorthop Aerial Macro.')" class="flex-item">
-                        <div class="icon-background"><img id="sh-text" class="abstract-icon is-appear " style="display:none"
-                                        src="check.svg" /></div>
+                <!-- =General= -->
+                <div class="category-column active" id="category-0" data-title="General">
+                    <button id="sh_macro_button" onclick="nextVal(this, 'sh_macro', ['Off', 'On'], 'sh_macro_text')"
+                        onfocus="textFocus('Shorthop Aerial Macro.')" class="flex-item">
                         <div class="item-container">
                             <h2>Shorthop Aerial Macro</h2>
+                        <div class="toggle-box" id="sh_macro_text">Off</div>
                         </div>
                     </button>
-                <button onclick="saveAndExit()" onfocus="textFocus('')" class="flex-item">
-                        <div class="icon-background"></div>
+                    <button id="hold_buffer_button" onclick="nextVal(this, 'hold_buffer', ['Off', 'On'], 'hold_buffer_text')"
+                        onfocus="textFocus('Hold Buffer.')" class="flex-item">
                         <div class="item-container">
-                            <h2>Save Settings</h2>
+                            <h2>Hold Buffer</h2>
+                        <div class="toggle-box" id="hold_buffer_text">Off</div>
                         </div>
                     </button>
+                    <button id="hitstun_button" onclick="nextVal(this, 'hitstun', ['Normal', 'High', 'Low'], 'hitstun_text')"
+                        onfocus="textFocus('Hitstun.')" class="flex-item">
+                        <div class="item-container">
+                            <h2>Hitstun</h2>
+                        <div class="toggle-box" id="hitstun_text">Normal</div>
+                        </div>
+                    </button>
+                    <button id="hitlag_button" onclick="nextVal(this, 'hitlag', ['Vanilla', 'High', 'Low'], 'hitlag_text')"
+                        onfocus="textFocus('Hitlag.')" class="flex-item">
+                        <div class="item-container">
+                            <h2>Hitlag</h2>
+                        <div class="toggle-box" id="hitlag_text">Vanilla</div>
+                        </div>
+                    </button>
+                    <button id="ledges_button" onclick="nextVal(this, 'ledges', ['Yes', 'No'], 'ledges_text')"
+                        onfocus="textFocus('Ledges.')" class="flex-item">
+                        <div class="item-container">
+                            <h2>Ledges</h2>
+                        <div class="toggle-box" id="ledges_text">Yes</div>
+                        </div>
+                    </button>
+                    <button id="respawn_anim_button"
+                        onclick="nextVal(this, 'respawn_anim', ['Ult S', 'Vanilla'], 'respawn_anim_text')"
+                        onfocus="textFocus('Respawn Anim.')" class="flex-item">
+                        <div class="item-container">
+                            <h2>Respawn Anim</h2>
+                        <div class="toggle-box" id="respawn_anim_text">Ult S</div>
+                        </div>
+                    </button>
+                </div>
+
+                <!-- =Movement= -->
+                <div class="category-column" id="category-1" data-title="Movement">
+                    <button id="pivots_button" onclick="nextVal(this, 'pivots', ['Ult S', 'Smash 64', 'None'], 'pivots_text')"
+                        onfocus="textFocus('Pivots.')" class="flex-item">
+                        <div class="item-container">
+                            <h2>Pivots</h2>
+                        <div class="toggle-box" id="pivots_text">Ult S</div>
+                        </div>
+                    </button>
+                    <button id="dash_button" onclick="nextVal(this, 'dash', ['Ult S', 'Vanilla'], 'dash_text')"
+                        onfocus="textFocus('Dash.')" class="flex-item">
+                        <div class="item-container">
+                            <h2>Dash</h2>
+                        <div class="toggle-box" id="dash_text">Ult S</div>
+                        </div>
+                    </button>
+                    <button id="moonwalk_button" onclick="nextVal(this, 'moonwalk', ['Yes', 'No'], 'moonwalk_text')"
+                        onfocus="textFocus('Moonwalk.')" class="flex-item">
+                        <div class="item-container">
+                            <h2>Moonwalk</h2>
+                        <div class="toggle-box" id="moonwalk_text">Yes</div>
+                        </div>
+                    </button>
+                    <button id="llpc_button" onclick="nextVal(this, 'llpc', ['Yes', 'No'], 'llpc_text')"
+                        onfocus="textFocus('Landing Lag Platdrop Cancel.')" class="flex-item">
+                        <div class="item-container">
+                            <h2>Landing Lag Platdrop Cancel</h2>
+                        <div class="toggle-box" id="llpc_text">Yes</div>
+                        </div>
+                    </button>
+                    <button id="jump_accel_button"
+                        onclick="nextVal(this, 'jump_accel', ['Vanilla', 'Smash 4'], 'jump_accel_text')"
+                        onfocus="textFocus('Jump Acceleration.')" class="flex-item">
+                        <div class="item-container">
+                            <h2>Jump Acceleration</h2>
+                        <div class="toggle-box" id="jump_accel_text">Vanilla</div>
+                        </div>
+                    </button>
+                    <button id="hitfall_button" onclick="nextVal(this, 'hitfall', ['No', 'Yes'], 'hitfall_text')"
+                        onfocus="textFocus('Hitfalling.')" class="flex-item">
+                        <div class="item-container">
+                            <h2>Hitfalling</h2>
+                        <div class="toggle-box" id="hitfall_text">No</div>
+                        </div>
+                    </button>
+                    <button id="agt_button" onclick="nextVal(this, 'agt', ['No', 'Yes'], 'agt_text')"
+                        onfocus="textFocus('Aerial Glide Toss.')" class="flex-item">
+                        <div class="item-container">
+                            <h2>Aerial Glide Toss</h2>
+                        <div class="toggle-box" id="agt_text">No</div>
+                        </div>
+                    </button>
+                    <button id="djc_button" onclick="nextVal(this, 'djc', ['Yes', 'No'], 'djc_text')"
+                        onfocus="textFocus('DJC.')" class="flex-item">
+                        <div class="item-container">
+                            <h2>DJC</h2>
+                        <div class="toggle-box" id="djc_text">Yes</div>
+                        </div>
+                    </button>
+                    <button id="footstool_button"
+                        onclick="nextVal(this, 'footstool', ['Ult S', 'Vanilla', 'Off'], 'footstool_text')"
+                        onfocus="textFocus('Footstools.')" class="flex-item">
+                        <div class="item-container">
+                            <h2>Footstools</h2>
+                        <div class="toggle-box" id="footstool_text">Ult S</div>
+                        </div>
+                    </button>
+                    <button id="edge_cancel_button"
+                        onclick="nextVal(this, 'edge_cancel', ['Ult S', 'Vanilla'], 'edge_cancel_text')"
+                        onfocus="textFocus('Edge Cancels.')" class="flex-item">
+                        <div class="item-container">
+                            <h2>Edge Cancels</h2>
+                        <div class="toggle-box" id="edge_cancel_text">Ult S</div>
+                        </div>
+                    </button>
+                    <button id="jump_cancel_button"
+                        onclick="nextVal(this, 'jump_cancel', ['Ult S', 'Vanilla'], 'jump_cancel_text')"
+                        onfocus="textFocus('Jump Cancels.')" class="flex-item">
+                        <div class="item-container">
+                            <h2>Jump Cancels</h2>
+                        <div class="toggle-box" id="jump_cancel_text">Ult S</div>
+                        </div>
+                    </button>
+                    <button id="g2a_button" onclick="nextVal(this, 'g2a', ['Vanilla', 'Conserve'], 'g2a_text')"
+                        onfocus="textFocus('Ground To Air Momentum.')" class="flex-item">
+                        <div class="item-container">
+                            <h2>Ground To Air Momentum</h2>
+                        <div class="toggle-box" id="g2a_text">Vanilla</div>
+                        </div>
+                    </button>
+                </div>
+
+                <!-- =Attacks= -->
+                <div class="category-column" id="category-2" data-title="Attacks">
+                    <button id="jab_cancel_button"
+                        onclick="nextVal(this, 'jab_cancel', ['On Hit', 'Always', 'None'], 'jab_cancel_text')"
+                        onfocus="textFocus('Jab Cancels.')" class="flex-item">
+                        <div class="item-container">
+                            <h2>Jab Cancels</h2>
+                        <div class="toggle-box" id="jab_cancel_text">On Hit</div>
+                        </div>
+                    </button>
+                    <button id="dacus_button" onclick="nextVal(this, 'dacus', ['Yes', 'No'], 'dacus_text')"
+                        onfocus="textFocus('DACUS.')" class="flex-item">
+                        <div class="item-container">
+                            <h2>DACUS</h2>
+                        <div class="toggle-box" id="dacus_text">Yes</div>
+                        </div>
+                    </button>
+                    <button id="ac_button" onclick="nextVal(this, 'ac', ['Yes', 'No'], 'ac_text')"
+                        onfocus="textFocus('Attack Cancels.')" class="flex-item">
+                        <div class="item-container">
+                            <h2>Attack Cancels</h2>
+                        <div class="toggle-box" id="ac_text">Yes</div>
+                        </div>
+                    </button>
+                    <button id="jcg_button" onclick="nextVal(this, 'jcg', ['Yes', 'No'], 'jcg_text')"
+                        onfocus="textFocus('Jump Cancel Grab.')" class="flex-item">
+                        <div class="item-container">
+                            <h2>Jump Cancel Grab</h2>
+                        <div class="toggle-box" id="jcg_text">Yes</div>
+                        </div>
+                    </button>
+                    <button id="grab_button" onclick="nextVal(this, 'grab', ['Yes', 'No'], 'grab_text')"
+                        onfocus="textFocus('Grabs.')" class="flex-item">
+                        <div class="item-container">
+                            <h2>Grabs</h2>
+                        <div class="toggle-box" id="grab_text">Yes</div>
+                        </div>
+                    </button>
+                    <button id="lcancel_button" onclick="nextVal(this, 'lcancel', ['No', 'Yes', 'Z Cancels'], 'lcancel_text')"
+                        onfocus="textFocus('L Cancels.')" class="flex-item">
+                        <div class="item-container">
+                            <h2>L Cancels</h2>
+                        <div class="toggle-box" id="lcancel_text">No</div>
+                        </div>
+                    </button>
+                    <button id="special_cancel_button"
+                        onclick="nextVal(this, 'special_cancel', ['None', 'On Hit', 'Always'], 'special_cancel_text')"
+                        onfocus="textFocus('Special Cancels.')" class="flex-item">
+                        <div class="item-container">
+                            <h2>Special Cancels</h2>
+                        <div class="toggle-box" id="special_cancel_text">None</div>
+                        </div>
+                    </button>
+                </div>
+
+                <!-- =Defense= -->
+                <div class="category-column" id="category-3" data-title="Defense">
+                    <button id="shield_button" onclick="nextVal(this, 'shield', ['Yes', 'Parry Only', 'No'], 'shield_text')"
+                        onfocus="textFocus('Shield.')" class="flex-item">
+                        <div class="item-container">
+                            <h2>Shield</h2>
+                        <div class="toggle-box" id="shield_text">Yes</div>
+                        </div>
+                    </button>
+                    <button id="shield_health_button"
+                        onclick="nextVal(this, 'shield_health', ['Normal', 'High', 'Low'], 'shield_health_text')"
+                        onfocus="textFocus('Shield Health.')" class="flex-item">
+                        <div class="item-container">
+                            <h2>Shield Health</h2>
+                        <div class="toggle-box" id="shield_health_text">Normal</div>
+                        </div>
+                    </button>
+                    <button id="shieldstun_button"
+                        onclick="nextVal(this, 'shieldstun', ['Normal', 'High', 'Low'], 'shieldstun_text')"
+                        onfocus="textFocus('Shieldstun.')" class="flex-item">
+                        <div class="item-container">
+                            <h2>Shieldstun</h2>
+                        <div class="toggle-box" id="shieldstun_text">Normal</div>
+                        </div>
+                    </button>
+                    <button id="airdodge_button"
+                        onclick="nextVal(this, 'airdodge', ['Ult S', 'Vanilla', 'Smash 4', 'None'], 'airdodge_text')"
+                        onfocus="textFocus('Airdodge.')" class="flex-item">
+                        <div class="item-container">
+                            <h2>Airdodge</h2>
+                        <div class="toggle-box" id="airdodge_text">Ult S</div>
+                        </div>
+                    </button>
+                    <button id="shield_drop_button" onclick="nextVal(this, 'shield_drop', ['Yes', 'No'], 'shield_drop_text')"
+                        onfocus="textFocus('Shield Plat Drops.')" class="flex-item">
+                        <div class="item-container">
+                            <h2>Shield Plat Drops</h2>
+                        <div class="toggle-box" id="shield_drop_text">Yes</div>
+                        </div>
+                    </button>
+                    <button id="di_button" onclick="nextVal(this, 'di', ['Yes', 'No'], 'di_text')" onfocus="textFocus('DI.')"
+                        class="flex-item">
+                        <div class="item-container">
+                            <h2>DI</h2>
+                        <div class="toggle-box" id="di_text">Yes</div>
+                        </div>
+                    </button>
+                    <button id="no_tumble_di_button"
+                        onclick="nextVal(this, 'no_tumble_di', ['Yes', 'No'], 'no_tumble_di_text')"
+                        onfocus="textFocus('Non Tumble DI.')" class="flex-item">
+                        <div class="item-container">
+                            <h2>Non Tumble DI</h2>
+                        <div class="toggle-box" id="no_tumble_di_text">Yes</div>
+                        </div>
+                    </button>
+                    <button id="drift_di_button" onclick="nextVal(this, 'drift_di', ['No', 'Yes'], 'drift_di_text')"
+                        onfocus="textFocus('Drift DI.')" class="flex-item">
+                        <div class="item-container">
+                            <h2>Drift DI</h2>
+                        <div class="toggle-box" id="drift_di_text">No</div>
+                        </div>
+                    </button>
+                    <button id="hitstun_cancel_button"
+                        onclick="nextVal(this, 'hitstun_cancel', ['Vanilla', 'Brawl', 'None'], 'hitstun_cancel_text')"
+                        onfocus="textFocus('Hitstun Cancelling.')" class="flex-item">
+                        <div class="item-container">
+                            <h2>Hitstun Cancelling</h2>
+                        <div class="toggle-box" id="hitstun_cancel_text">Vanilla</div>
+                        </div>
+                    </button>
+                    <button id="vertical_gravity_button"
+                        onclick="nextVal(this, 'vertical_gravity', ['Ult S', 'Vanilla', 'Very High', 'Very Low'], 'vertical_gravity_text')"
+                        onfocus="textFocus('Vertical Knockback Gravity.')" class="flex-item">
+                        <div class="item-container">
+                            <h2>Vertical Knockback Gravity</h2>
+                        <div class="toggle-box" id="vertical_gravity_text">Ult S</div>
+                        </div>
+                    </button>
+                </div>
+
+                <!-- =Stats= -->
+                <div class="category-column" id="category-4" data-title="Stats">
+                    <button id="ll_button"
+                        onclick="nextVal(this, 'll', ['1.0x', '1.1x', '1.25x', '1.5x', '0.5x', '0.75x', '0.9x'], 'll_text')"
+                        onfocus="textFocus('Landing Lag Multiplier.')" class="flex-item">
+                        <div class="item-container">
+                            <h2>Landing Lag</h2>
+                        <div class="toggle-box" id="ll_text">1.0x</div>
+                        </div>
+                    </button>
+                    <button id="initial_dash_button"
+                        onclick="nextVal(this, 'initial_dash', ['1.0x', '1.1x', '1.25x', '1.5x', '0.5x', '0.75x', '0.9x'], 'initial_dash_text')"
+                        onfocus="textFocus('Initial Dash Multiplier.')" class="flex-item">
+                        <div class="item-container">
+                            <h2>Initial Dash</h2>
+                        <div class="toggle-box" id="initial_dash_text">1.0x</div>
+                        </div>
+                    </button>
+                    <button id="runspeed_button"
+                        onclick="nextVal(this, 'runspeed', ['1.0x', '1.1x', '1.25x', '1.5x', '0.5x', '0.75x', '0.9x'], 'runspeed_text')"
+                        onfocus="textFocus('Run Speed Multiplier.')" class="flex-item">
+                        <div class="item-container">
+                            <h2>Run Speed</h2>
+                        <div class="toggle-box" id="runspeed_text">1.0x</div>
+                        </div>
+                    </button>
+                    <button id="walkspeed_button"
+                        onclick="nextVal(this, 'walkspeed', ['1.0x', '1.1x', '1.25x', '1.5x', '0.5x', '0.75x', '0.9x'], 'walkspeed_text')"
+                        onfocus="textFocus('Walk Speed Multiplier.')" class="flex-item">
+                        <div class="item-container">
+                            <h2>Walk Speed</h2>
+                        <div class="toggle-box" id="walkspeed_text">1.0x</div>
+                        </div>
+                    </button>
+                    <button id="airspeed_button"
+                        onclick="nextVal(this, 'airspeed', ['1.0x', '1.1x', '1.25x', '1.5x', '0.5x', '0.75x', '0.9x'], 'airspeed_text')"
+                        onfocus="textFocus('Air Speed Multiplier.')" class="flex-item">
+                        <div class="item-container">
+                            <h2>Air Speed</h2>
+                        <div class="toggle-box" id="airspeed_text">1.0x</div>
+                        </div>
+                    </button>
+                    <button id="airaccel_button"
+                        onclick="nextVal(this, 'airaccel', ['1.0x', '1.1x', '1.25x', '1.5x', '0.5x', '0.75x', '0.9x'], 'airaccel_text')"
+                        onfocus="textFocus('Air Acceleration Multiplier.')" class="flex-item">
+                        <div class="item-container">
+                            <h2>Air Acceleration</h2>
+                        <div class="toggle-box" id="airaccel_text">1.0x</div>
+                        </div>
+                    </button>
+                    <button id="traction_button"
+                        onclick="nextVal(this, 'traction', ['1.0x', '1.1x', '1.25x', '1.5x', '0.5x', '0.75x', '0.9x'], 'traction_text')"
+                        onfocus="textFocus('Traction Multiplier.')" class="flex-item">
+                        <div class="item-container">
+                            <h2>Traction</h2>
+                        <div class="toggle-box" id="traction_text">1.0x</div>
+                        </div>
+                    </button>
+                    <button id="fallspeed_button"
+                        onclick="nextVal(this, 'fallspeed', ['1.0x', '1.1x', '1.25x', '1.5x', '0.5x', '0.75x', '0.9x'], 'fallspeed_text')"
+                        onfocus="textFocus('Fallspeed Multiplier.')" class="flex-item">
+                        <div class="item-container">
+                            <h2>Fallspeed</h2>
+                        <div class="toggle-box" id="fallspeed_text">1.0x</div>
+                        </div>
+                    </button>
+                    <button id="jump_button"
+                        onclick="nextVal(this, 'jump', ['1.0x', '1.1x', '1.25x', '1.5x', '0.5x', '0.75x', '0.9x'], 'jump_text')"
+                        onfocus="textFocus('Jump Height Multiplier.')" class="flex-item">
+                        <div class="item-container">
+                            <h2>Jump Height</h2>
+                        <div class="toggle-box" id="jump_text">1.0x</div>
+                        </div>
+                    </button>
+                    <button id="gravity_button"
+                        onclick="nextVal(this, 'gravity', ['1.0x', '1.1x', '1.25x', '1.5x', '0.5x', '0.75x', '0.9x'], 'gravity_text')"
+                        onfocus="textFocus('Gravity Multiplier.')" class="flex-item">
+                        <div class="item-container">
+                            <h2>Gravity</h2>
+                        <div class="toggle-box" id="gravity_text">1.0x</div>
+                        </div>
+                    </button>
+                    <button id="weight_button"
+                        onclick="nextVal(this, 'weight', ['1.0x', '1.1x', '1.25x', '1.5x', '0.5x', '0.75x', '0.9x'], 'weight_text')"
+                        onfocus="textFocus('Weight Multiplier.')" class="flex-item">
+                        <div class="item-container">
+                            <h2>Weight</h2>
+                        <div class="toggle-box" id="weight_text">1.0x</div>
+                        </div>
+                    </button>
+                </div>
+
+                <!-- =Special= -->
+                <div class="category-column" id="category-5" data-title="Special">
+                    <button id="cancel_to_taunt_button"
+                        onclick="nextVal(this, 'cancel_to_taunt', ['No', 'Yes'], 'cancel_to_taunt_text')"
+                        onfocus="textFocus('Cancel Into Taunt.')" class="flex-item">
+                        <div class="item-container">
+                            <h2>Cancel Into Taunt</h2>
+                        <div class="toggle-box" id="cancel_to_taunt_text">No</div>
+                        </div>
+                    </button>
+                    <button id="parry_reflect_button"
+                        onclick="nextVal(this, 'parry_reflect', ['No', 'Yes'], 'parry_reflect_text')"
+                        onfocus="textFocus('Parry Reflect.')" class="flex-item">
+                        <div class="item-container">
+                            <h2>Parry Reflect</h2>
+                        <div class="toggle-box" id="parry_reflect_text">No</div>
+                        </div>
+                    </button>
+                    <button id="taunt_cancel_button"
+                        onclick="nextVal(this, 'taunt_cancel', ['No', 'Yes'], 'taunt_cancel_text')"
+                        onfocus="textFocus('Taunt Cancel.')" class="flex-item">
+                        <div class="item-container">
+                            <h2>Taunt Cancel</h2>
+                        <div class="toggle-box" id="taunt_cancel_text">No</div>
+                        </div>
+                    </button>
+                    <button id="no_special_fall_button"
+                        onclick="nextVal(this, 'no_special_fall', ['No', 'Yes'], 'no_special_fall_text')"
+                        onfocus="textFocus('No Special Fall.')" class="flex-item">
+                        <div class="item-container">
+                            <h2>No Special Fall</h2>
+                        <div class="toggle-box" id="no_special_fall_text">No</div>
+                        </div>
+                    </button>
+                    <button id="random_trip_button" onclick="nextVal(this, 'random_trip', ['No', 'Yes'], 'random_trip_text')"
+                        onfocus="textFocus('Random Tripping.')" class="flex-item">
+                        <div class="item-container">
+                            <h2>Random Tripping</h2>
+                        <div class="toggle-box" id="random_trip_text">No</div>
+                        </div>
+                    </button>
+                </div>
+                <button onclick="saveTOMLandQuit()" onfocus="textFocus('')" class="flex-item">
+                    <div class="icon-background"></div>
+                    <div class="item-container">
+                        <h2>Save Settings</h2>
+                    </div>
+                </button>
             </div>
         </div>
         <div class="footer">
@@ -86,17 +475,144 @@
         </div>
     </div>
     <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            if (mechanics_already == true) {
-                toggle('mechanics', document.getElementById('mechanics-button'), 'mechanics-text');
-            };
-            if (hold_already == true) {
-                toggle('hold', document.getElementById('hold-button'), 'hold-text');
-            };
-            if (sh_already == true) {
-                toggle('sh', document.getElementById('sh-button'), 'sh-text');
-            };
+        var config_map = {
+            "sh_macro": 0,
+            "hold_buffer": 0,
+            "hitstun": 0,
+            "hitlag": 0,
+            "ledges": 0,
+            "respawn_anim": 0,
+            "dash": 0,
+            "moonwalk": 0,
+            "pivots": 0,
+            "llpc": 0,
+            "jump_accel": 0,
+            "hitfall": 0,
+            "agt": 0,
+            "djc": 0,
+            "footstool": 0,
+            "edge_cancel": 0,
+            "jump_cancel": 0,
+            "g2a": 0,
+            "jab_cancel": 0,
+            "dacus": 0,
+            "ac": 0,
+            "jcg": 0,
+            "grab": 0,
+            "lcancel": 0,
+            "special_cancel": 0,
+            "shield": 0,
+            "shield_health": 0,
+            "shieldstun": 0,
+            "airdodge": 0,
+            "shield_drop": 0,
+            "di": 0,
+            "no_tumble_di": 0,
+            "drift_di": 0,
+            "hitstun_cancel": 0,
+            "vertical_gravity": 0,
+            "ll": 0,
+            "initial_dash": 0,
+            "runspeed": 0,
+            "walkspeed": 0,
+            "airspeed": 0,
+            "airaccel": 0,
+            "traction": 0,
+            "fallspeed": 0,
+            "jump": 0,
+            "gravity": 0,
+            "weight": 0,
+            "cancel_to_taunt": 0,
+            "parry_reflect": 0,
+            "taunt_cancel": 0,
+            "no_special_fall": 0,
+            "random_trip": 0
+        };
+
+        document.addEventListener("DOMContentLoaded", function() {
+            if (typeof mechanics_already !== 'undefined' && mechanics_already === true) {
+                if (typeof toggle === 'function') toggle('mechanics', document.getElementById('mechanics-button'), 'mechanics-text');
+            }
+            if (typeof hold_already !== 'undefined' && hold_already === true) {
+                if (typeof toggle === 'function') toggle('hold', document.getElementById('hold-button'), 'hold-text');
+            }
+            if (typeof sh_already !== 'undefined' && sh_already === true) {
+                if (typeof toggle === 'function') toggle('sh', document.getElementById('sh-button'), 'sh-text');
+            }
         });
+
+        // 2. Explicitly bind to window so HTML onclick="..." can ALWAYS reach it
+        window.nextVal = function(self, key, labels, labelID) {
+            if (!labels || !labels.length) return;
+
+            // Fetch current value safely
+            var currVal = config_map.hasOwnProperty(key) ? config_map[key] : 0;
+            var next = (currVal + 1) % labels.length;
+            config_map[key] = next;
+
+            // Target update
+            var x = document.getElementById(labelID);
+            if (!x && self && self.querySelector) {
+                x = self.querySelector('.toggle-box') || self.querySelector('div');
+            }
+
+            if (x) {
+                // textContent is reliable across all WebKit versions
+                x.textContent = labels[next];
+                
+                // Force WebKit screen repaint
+                void x.offsetHeight;
+            }
+        };
+
+        function generateTOML(map) {
+            var categories = {
+                "general": [
+                    "sh_macro", "hold_buffer", "hitstun", "hitlag", "ledges", "respawn_anim"
+                ],
+                "movement": [
+                    "dash", "moonwalk", "pivots", "llpc", "jump_accel", "hitfall", 
+                    "agt", "djc", "footstool", "edge_cancel", "jump_cancel", "g2a"
+                ],
+                "attacks": [
+                    "jab_cancel", "dacus", "ac", "jcg", "grab", "lcancel", "special_cancel"
+                ],
+                "defense": [
+                    "shield", "shield_health", "shieldstun", "airdodge", "shield_drop", 
+                    "di", "no_tumble_di", "drift_di", "hitstun_cancel", "vertical_gravity"
+                ],
+                "stats": [
+                    "ll", "initial_dash", "runspeed", "walkspeed", "airspeed", 
+                    "airaccel", "traction", "fallspeed", "jump", "gravity", "weight"
+                ],
+                "special": [
+                    "cancel_to_taunt", "parry_reflect", "taunt_cancel", "no_special_fall", "random_trip"
+                ]
+            };
+
+            var lines = [];
+
+            for (var category in categories) {
+                if (categories.hasOwnProperty(category)) {
+                    lines.push("[" + category + "]");
+
+                    var keys = categories[category];
+                    for (var i = 0; i < keys.length; i++) {
+                        var key = keys[i];
+                        var val = map.hasOwnProperty(key) ? map[key] : 0;
+                        lines.push(key + "=" + val);
+                    }
+
+                    lines.push("");
+                }
+            }
+
+            return lines.join("~").trim();
+        };
+        function saveTOMLandQuit() {
+            str = generateTOML(config_map);
+            location.href = "http://localhost/" + str;
+        };
     </script>
 </body>
 

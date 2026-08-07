@@ -8,6 +8,15 @@
     }
 }
 
+.category-column {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+}
+
+.category-column.active {
+    display: flex;
+}
 
 * {
     font-family: Arial, Helvetica, sans-serif;
@@ -58,6 +67,21 @@ body {
     background-color: white;
     padding: 20px;
     padding-bottom: 22px;
+}
+
+.toggle-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 150px;
+    height: 40px;
+    margin-right: 15px;
+    margin-left: auto; 
+    padding: 0 12px;
+    border: 2px solid black;
+    box-sizing: border-box;
+    font-size: 18px;
+    font-weight: bold;
 }
 
 .flex-item>.icon-background::before {
