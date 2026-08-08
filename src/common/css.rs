@@ -5,6 +5,10 @@ use std::fs::*;
 use std::io::*;
 use std::time::Instant;
 use crate::common::lazy_warm;
+use crate::config;
+use std::collections::hash_map::DefaultHasher;
+use std::hash::{Hash, Hasher};
+
 #[cfg(feature = "main_nro")]
 use skyline_web::dialog_ok::DialogOk;
 static mut IS_UNPRESSED : bool = false;
@@ -57,6 +61,8 @@ lazy_static! {
     static ref COMMON_CSS: Vec<u8> = std::fs::read("mods:/ui/docs/common.css").unwrap();
     static ref MENU_CSS: Vec<u8> = std::fs::read("mods:/ui/docs/menu.css").unwrap();
     static ref TOGGLE_JS: Vec<u8> = std::fs::read("mods:/ui/docs/toggles.js").unwrap();
+    static ref SWITCH_L: Vec<u8> = std::fs::read("mods:/ui/docs/SwitchL.webp").unwrap();
+    static ref SWITCH_R: Vec<u8> = std::fs::read("mods:/ui/docs/SwitchR.webp").unwrap();
 }
 pub fn show_gamemodes_emu() {
     unsafe {
@@ -163,17 +169,13 @@ pub fn show_mod_settings_emu() {
 		reload_config_values();
 	}
 }
-pub fn generate_config_filename(m : bool, h : bool, s : bool) -> String {
-    let m_digit = if m {1} else {0};
-    let h_digit = if h {1} else {0};
-    let s_digit = if s {1} else {0};
-    let config_filename = format!("config_{}{}{}.js", m_digit, h_digit, s_digit);
-
-    return config_filename;
+fn calculate_hash<T: Hash>(t: &T) -> u64 {
+    let mut s = DefaultHasher::new();
+    t.hash(&mut s);
+    s.finish()
 }
-
-pub fn show_mod_settings() {let path = "sd:/ultimate/ult-s/sys-flags/";
-    let path1 = "sd:/ultimate/ult-s/";
+pub fn show_mod_settings() {
+    let path = "sd:/ultimate/ult-s/";
 
     if !Path::new(path).exists() {
         if let Err(e) = std::fs::create_dir_all(path) {
@@ -183,16 +185,11 @@ pub fn show_mod_settings() {let path = "sd:/ultimate/ult-s/sys-flags/";
         }
     }
 
-    let mechanics_already = Path::new("sd:/ultimate/ult-s/sys-flags/mechanics.flag").is_file(); 
-    let hold_already = Path::new("sd:/ultimate/ult-s/sys-flags/hold.flag").is_file(); 
-    let sh_already = Path::new("sd:/ultimate/ult-s/sys-flags/sh.flag").is_file();
+    let config_js = config::get().to_js();
 
-    let config_filename = generate_config_filename(mechanics_already, hold_already, sh_already);
 
-    let config_js = format!(
-        "var mechanics_already = {}; var hold_already = {}; var sh_already = {};",
-        mechanics_already, hold_already, sh_already
-    );
+    let config_filename = format!("config_{}.js", calculate_hash(&config::get()));
+
 
     let html_string = String::from_utf8_lossy(MENU_HTML.as_slice());
     let final_html = html_string.replace("config.js", &config_filename);
@@ -205,45 +202,28 @@ pub fn show_mod_settings() {let path = "sd:/ultimate/ult-s/sys-flags/";
         .file("menu.js", MENU_JS.as_slice())
         .file("common.js", COMMON_JS.as_slice())
         .file("toggles.js", TOGGLE_JS.as_slice())
+        .file("SwitchL.webp", SWITCH_L.as_slice())
+        .file("SwitchR.webp", SWITCH_R.as_slice())
         .background(skyline_web::Background::Default)
         .boot_display(skyline_web::BootDisplay::Default)
         .open()
         .unwrap();
     
-    match response.get_last_url() {
-        Ok(url) => {
-            let options_str = url.trim_start_matches("http://localhost/");
-            println!("Options chosen: {}", options_str);
-            
-            match std::fs::remove_dir_all(path) {
-                Ok(_) => println!("Old flags folder deleted successfully!"),
-                Err(e) => println!("Note: Folders didn't exist or couldn't be deleted: {:?}", e),
-            }
-            
-            if let Err(e) = std::fs::create_dir_all(path) {
-                println!("Critical Error re-creating flag directory: {:?}", e);
-                return; 
-            }
+    if let Ok(url) = response.get_last_url() {
+        let options_str = url.strip_prefix("http://localhost/").unwrap_or(&url);
+        let decoded_str = options_str
+            .replace("%5B", "[")
+            .replace("%5D", "]")
+            .replace("%20", " ")
+            .replace("%3D", "=")
+            .replace("~", "\n")
+            .replace("%22", "\"");
 
-            if options_str.is_empty() {
-                println!("All flags set to false.");
-                return;
-            }
-
-            let options = options_str.split("-");
-            for i in options {
-                if !i.is_empty() {
-                    let flag_path = format!("{}{}.flag", path, i);
-                    println!("Creating flag: {}", flag_path);
-                    if let Err(e) = std::fs::File::create(&flag_path) {
-                        println!("Failed to create flag file {}: {:?}", flag_path, e);
-                    }
-                }
-            }
+        if let Err(e) = std::fs::write("sd:/ultimate/ult-s/config.toml", decoded_str) {
+            println!("Failed to write config file: {}", e);
         }
-        Err(_) => {
-            println!("Uh oh! Error getting options!");
-        }
+    } else {
+        println!("Uh oh! Error getting options!");
     }
     unsafe {
         reload_config_values();

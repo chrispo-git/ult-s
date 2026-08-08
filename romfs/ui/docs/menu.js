@@ -47,18 +47,22 @@ function updateFocus(index) {
     if (!buttons.length) return;
 
     // Clamp index within bounds
-    if (index < 0) index = 0;
+    if (index < 0) index = -1;
     if (index >= buttons.length) index = buttons.length - 1;
 
     currentButtonIndex = index;
+
+    if (currentButtonIndex < 0) currentButtonIndex = 0;
 
     // Clear .is-focused from ALL buttons
     var allButtons = document.querySelectorAll('button');
     for (var i = 0; i < allButtons.length; i++) {
         allButtons[i].classList.remove('is-focused');
     }
-
-    var targetBtn = buttons[currentButtonIndex];
+    var targetBtn = document.getElementById('save_settings_button');
+    if (index >= 0) {
+        targetBtn = buttons[currentButtonIndex];
+    };
     if (targetBtn) {
         targetBtn.classList.add('is-focused');
         

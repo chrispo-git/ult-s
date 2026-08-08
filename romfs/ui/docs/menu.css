@@ -78,7 +78,7 @@ body {
     margin-right: 15px;
     margin-left: auto; 
     padding: 0 12px;
-    border: 2px solid black;
+    border: 3px solid black;
     box-sizing: border-box;
     font-size: 18px;
     font-weight: bold;
@@ -156,11 +156,18 @@ body {
     background-attachment: scroll;
 }
 
+.settingsin {
+    margin-left: 20px;
+    max-height: 400px;
+    width: 89%;
+    padding-right: 25px;
+}
+
 .scrollbar {
     position: absolute;
     margin-left: 20px;
     overflow-y: overlay;
-    max-height: 626px;
+    max-height: 400px;
     width: 90%;
     padding-right: 25px;
 }
