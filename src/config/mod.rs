@@ -5,22 +5,28 @@ use std::hash::{Hash, Hasher};
 
 static CONFIG: ConfigCell = ConfigCell(UnsafeCell::new(None));
 struct ConfigCell(UnsafeCell<Option<Config>>);
-
 unsafe impl Sync for ConfigCell {}
+
+static PRESETS: PresetCell = PresetCell(UnsafeCell::new(Vec::new()));
+struct PresetCell(UnsafeCell<Vec<Preset>>);
+unsafe impl Sync for PresetCell {}
+
 const CONFIG_PATH: &str = "sd:/ultimate/ult-s/config.toml";
+const PRESETS_DIR: &str = "sd:/ultimate/ult-s/presets";
+
+#[derive(Debug, Clone, Hash)]
+pub struct Preset {
+    pub name: String,
+    pub config: Config,
+}
 
 #[derive(Debug, Deserialize, Clone, Hash)]
 pub struct Config {
     pub general: General,
-
     pub movement: Movement,
-
     pub attacks: Attacks,
-
     pub defense: Defense,
-
     pub stats: Stats,
-
     pub special: Special,
 } 
 
@@ -90,7 +96,6 @@ pub struct Stats {
     pub weight: u8,
 }
 
-
 #[derive(Debug, Deserialize, Clone, Hash)]
 pub struct Special {
     pub cancel_to_taunt: u8,
@@ -101,61 +106,61 @@ pub struct Special {
 }
 
 impl Config {
-    pub fn to_js(&self) -> String {
+    pub fn to_js_object(&self) -> String {
         format!(
-            r#"var config_map = {{
-    "sh_macro": {},
-    "hold_buffer": {},
-    "hitstun": {},
-    "hitlag": {},
-    "ledges": {},
-    "respawn_anim": {},
-    "dash": {},
-    "moonwalk": {},
-    "pivots": {},
-    "llpc": {},
-    "jump_accel": {},
-    "hitfall": {},
-    "agt": {},
-    "djc": {},
-    "footstool": {},
-    "edge_cancel": {},
-    "jump_cancel": {},
-    "g2a": {},
-    "jab_cancel": {},
-    "dacus": {},
-    "ac": {},
-    "jcg": {},
-    "grab": {},
-    "lcancel": {},
-    "special_cancel": {},
-    "shield": {},
-    "shield_health": {},
-    "shieldstun": {},
-    "airdodge": {},
-    "shield_drop": {},
-    "di": {},
-    "no_tumble_di": {},
-    "drift_di": {},
-    "hitstun_cancel": {},
-    "vertical_gravity": {},
-    "ll": {},
-    "initial_dash": {},
-    "runspeed": {},
-    "walkspeed": {},
-    "airspeed": {},
-    "airaccel": {},
-    "traction": {},
-    "fallspeed": {},
-    "jump": {},
-    "gravity": {},
-    "weight": {},
-    "cancel_to_taunt": {},
-    "parry_reflect": {},
-    "taunt_cancel": {},
-    "no_special_fall": {},
-    "random_trip": {}
-}};"#,
+            r#"{{
+        "sh_macro": {},
+        "hold_buffer": {},
+        "hitstun": {},
+        "hitlag": {},
+        "ledges": {},
+        "respawn_anim": {},
+        "dash": {},
+        "moonwalk": {},
+        "pivots": {},
+        "llpc": {},
+        "jump_accel": {},
+        "hitfall": {},
+        "agt": {},
+        "djc": {},
+        "footstool": {},
+        "edge_cancel": {},
+        "jump_cancel": {},
+        "g2a": {},
+        "jab_cancel": {},
+        "dacus": {},
+        "ac": {},
+        "jcg": {},
+        "grab": {},
+        "lcancel": {},
+        "special_cancel": {},
+        "shield": {},
+        "shield_health": {},
+        "shieldstun": {},
+        "airdodge": {},
+        "shield_drop": {},
+        "di": {},
+        "no_tumble_di": {},
+        "drift_di": {},
+        "hitstun_cancel": {},
+        "vertical_gravity": {},
+        "ll": {},
+        "initial_dash": {},
+        "runspeed": {},
+        "walkspeed": {},
+        "airspeed": {},
+        "airaccel": {},
+        "traction": {},
+        "fallspeed": {},
+        "jump": {},
+        "gravity": {},
+        "weight": {},
+        "cancel_to_taunt": {},
+        "parry_reflect": {},
+        "taunt_cancel": {},
+        "no_special_fall": {},
+        "random_trip": {}
+    }}"#,
             self.general.sh_macro,
             self.general.hold_buffer,
             self.general.hitstun,
@@ -209,8 +214,24 @@ impl Config {
             self.special.random_trip
         )
     }
-}
 
+    pub fn to_js(&self) -> String {
+        format!("var config_map = {};", self.to_js_object())
+    }
+}
+pub fn presets_to_js() -> String {
+    let presets = get_presets();
+
+    let items: Vec<String> = presets
+        .iter()
+        .map(|p| {
+            let safe_name = p.name.replace('"', "\\\"");
+            format!("[\"{}\", {}]", safe_name, p.config.to_js_object())
+        })
+        .collect();
+
+    format!("var presets = [\n  {}\n];", items.join(",\n  "))
+}
 pub fn load() -> Result<Config, String> {
     let contents = fs::read_to_string(CONFIG_PATH)
         .map_err(|e| format!("Failed to read config: {e}"))?;
@@ -218,15 +239,61 @@ pub fn load() -> Result<Config, String> {
     toml::from_str(&contents) 
         .map_err(|e| format!("Failed to parse config: {e}"))
 }
+
+pub fn load_presets() -> Vec<Preset> {
+    let mut presets = Vec::new();
+
+    if let Ok(entries) = fs::read_dir(PRESETS_DIR) {
+        for entry in entries.flatten() {
+            let path = entry.path();
+            
+            if path.is_file() && path.extension().and_then(|s| s.to_str()) == Some("toml") {
+                if let Some(file_stem) = path.file_stem().and_then(|s| s.to_str()) {
+                    if let Ok(contents) = fs::read_to_string(&path) {
+                        if let Ok(config) = toml::from_str::<Config>(&contents) {
+                            presets.push(Preset {
+                                name: file_stem.to_string(),
+                                config,
+                            });
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    presets
+}
+pub fn save_as_preset(name: &str) -> Result<(), String> {
+    fs::create_dir_all(PRESETS_DIR)
+        .map_err(|e| format!("Failed to create presets directory: {e}"))?;
+
+    let filename = if name.ends_with(".toml") {
+        name.to_string()
+    } else {
+        format!("{}.toml", name)
+    };
+
+    let target_path = format!("{}/{}", PRESETS_DIR, filename);
+
+    fs::copy(CONFIG_PATH, &target_path)
+        .map_err(|e| format!("Failed to copy config.toml to {target_path}: {e}"))?;
+
+    *unsafe { &mut *PRESETS.0.get() } = load_presets();
+
+    Ok(())
+}
 pub fn init() -> Result<(), String> {
     let config = load()?;
     *unsafe { &mut *CONFIG.0.get() } = Some(config);
+    *unsafe { &mut *PRESETS.0.get() } = load_presets();
 
     Ok(())
 }
 
 pub fn reload() -> Result<(), String> {
     *unsafe { &mut *CONFIG.0.get() } = Some(load()?);
+    *unsafe { &mut *PRESETS.0.get() } = load_presets();
     Ok(())
 }
 
@@ -236,5 +303,11 @@ pub fn get() -> Config {
             .as_ref()
             .expect("Config has not been initialized")
             .clone()
+    }
+}
+
+pub fn get_presets() -> Vec<Preset> {
+    unsafe {
+        (*PRESETS.0.get()).clone()
     }
 }

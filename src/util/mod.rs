@@ -617,6 +617,7 @@ unsafe extern "C" fn util_update(fighter : &mut L2CFighterCommon) {
 			let curr_frame = WorkModule::get_int(fighter.module_accessor, *FIGHTER_STATUS_ESCAPE_WORK_INT_FRAME);
 			if crate::is_in!(status_kind, *FIGHTER_STATUS_KIND_ESCAPE_AIR, *FIGHTER_STATUS_KIND_ESCAPE_AIR_SLIDE) {
 				if 	ItemModule::is_have_item(fighter.module_accessor, 0)
+					&& ControlModule::check_button_on_trriger(fighter.module_accessor, *CONTROL_PAD_BUTTON_ATTACK)
 					&& curr_frame < 6 {
 					fighter.clear_lua_stack();
 					lua_args!(fighter, MA_MSC_ITEM_CHECK_HAVE_ITEM_TRAIT, ITEM_TRAIT_FLAG_NO_THROW);

@@ -184,20 +184,23 @@ pub fn show_mod_settings() {
             println!("Settings folders initialized successfully!");
         }
     }
+    let presets_js = config::presets_to_js();
 
     let config_js = config::get().to_js();
 
 
     let config_filename = format!("config_{}.js", calculate_hash(&config::get()));
+    let presets_filename = format!("presets_{}.js", calculate_hash(&config::get_presets()));
 
 
     let html_string = String::from_utf8_lossy(MENU_HTML.as_slice());
-    let final_html = html_string.replace("config.js", &config_filename);
+    let final_html = html_string.replace("config.js", &config_filename).replace("presets.js", &presets_filename);
     
     let response = skyline_web::Webpage::new()
         .htdocs_dir("contents")
         .file("index.html", final_html.as_bytes())
         .file(&config_filename, config_js.as_bytes())
+        .file(&presets_filename, presets_js.as_bytes())
         .file("menu.css", MENU_CSS.as_slice())
         .file("menu.js", MENU_JS.as_slice())
         .file("common.js", COMMON_JS.as_slice())
@@ -208,19 +211,46 @@ pub fn show_mod_settings() {
         .boot_display(skyline_web::BootDisplay::Default)
         .open()
         .unwrap();
-    
     if let Ok(url) = response.get_last_url() {
         let options_str = url.strip_prefix("http://localhost/").unwrap_or(&url);
-        let decoded_str = options_str
-            .replace("%5B", "[")
-            .replace("%5D", "]")
-            .replace("%20", " ")
-            .replace("%3D", "=")
-            .replace("~", "\n")
-            .replace("%22", "\"");
 
-        if let Err(e) = std::fs::write("sd:/ultimate/ult-s/config.toml", decoded_str) {
-            println!("Failed to write config file: {}", e);
+        if let Some(rest) = options_str.strip_prefix("newpreset/") {
+            if let Some((raw_name, raw_config)) = rest.split_once('/') {
+                let preset_name = raw_name.replace("%20", " ");
+
+                let decoded_str = raw_config
+                    .replace("%5B", "[")
+                    .replace("%5D", "]")
+                    .replace("%20", " ")
+                    .replace("%3D", "=")
+                    .replace("~", "\n")
+                    .replace("%22", "\"");
+
+                if !decoded_str.trim().is_empty() {
+                    if let Err(e) = std::fs::write("sd:/ultimate/ult-s/config.toml", &decoded_str) {
+                        println!("Failed to write config file: {}", e);
+                    }
+                    if let Err(e) = config::save_as_preset(&preset_name) {
+                        println!("Error saving preset: {}", e);
+                    }
+                } else {
+                    println!("Warning: Attempted to save empty preset!");
+                }
+            }
+        } else {
+            let decoded_str = options_str
+                .replace("%5B", "[")
+                .replace("%5D", "]")
+                .replace("%20", " ")
+                .replace("%3D", "=")
+                .replace("~", "\n")
+                .replace("%22", "\"");
+
+            if !decoded_str.trim().is_empty() {
+                if let Err(e) = std::fs::write("sd:/ultimate/ult-s/config.toml", &decoded_str) {
+                    println!("Failed to write config file: {}", e);
+                }
+            }
         }
     } else {
         println!("Uh oh! Error getting options!");

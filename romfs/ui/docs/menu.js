@@ -1,5 +1,11 @@
 var currentCategoryIndex = 0;
 var currentButtonIndex = 0;
+var currentButtonCol = 0;
+var buttonRow = [
+    document.getElementById('save_settings_button'),
+    document.getElementById('switch_preset_button'),
+    document.getElementById('save_preset_button')
+];
 
 // Retrieve all buttons inside the currently active category
 function getActiveButtons() {
@@ -52,7 +58,6 @@ function updateFocus(index) {
 
     currentButtonIndex = index;
 
-    if (currentButtonIndex < 0) currentButtonIndex = 0;
 
     // Clear .is-focused from ALL buttons
     var allButtons = document.querySelectorAll('button');
@@ -145,6 +150,8 @@ window.addEventListener("DOMContentLoaded", function() {
 
         var buttons = getActiveButtons();
         if (!buttons.length) return;
+        
+        if (currentButtonIndex >= 0) currentButtonCol = 0;
 
         if (e.keyCode == keyUp) {
             if (currentButtonIndex > 0) {
@@ -153,6 +160,42 @@ window.addEventListener("DOMContentLoaded", function() {
         } else if (e.keyCode == keyDown) {
             if (currentButtonIndex < buttons.length - 1) {
                 updateFocus(currentButtonIndex + 1);
+            }
+        } else if (e.keyCode == LEFT) {
+            if (currentButtonIndex == -1 && currentButtonCol > 0) {
+                currentButtonCol--;
+                var allButtons = document.querySelectorAll('button');
+                for (var i = 0; i < allButtons.length; i++) {
+                    allButtons[i].classList.remove('is-focused');
+                }
+                var targetBtn = buttonRow[currentButtonCol];
+                if (targetBtn) {
+                    targetBtn.classList.add('is-focused');
+                    try {
+                        targetBtn.focus({ preventScroll: true });
+                    } catch(e) {
+                        targetBtn.focus();
+                    }
+                    ensureVisible(targetBtn);
+                }
+            }
+        } else if (e.keyCode == RIGHT) {
+            if (currentButtonIndex == -1 && currentButtonCol < (buttonRow.length-1)) {
+                currentButtonCol++;
+                var allButtons = document.querySelectorAll('button');
+                for (var i = 0; i < allButtons.length; i++) {
+                    allButtons[i].classList.remove('is-focused');
+                }
+                var targetBtn = buttonRow[currentButtonCol];
+                if (targetBtn) {
+                    targetBtn.classList.add('is-focused');
+                    try {
+                        targetBtn.focus({ preventScroll: true });
+                    } catch(e) {
+                        targetBtn.focus();
+                    }
+                    ensureVisible(targetBtn);
+                }
             }
         }
     });
