@@ -196,9 +196,6 @@ pub unsafe fn change_status_request_hook(boma: &mut smash::app::BattleObjectModu
 				}
 			}
 		}
-		if next_status == *FIGHTER_STATUS_KIND_ESCAPE_AIR_SLIDE && config::get().defense.airdodge == 2 {
-			return original!()(boma, *FIGHTER_STATUS_KIND_ESCAPE_AIR, arg3);
-		}
 		if [*FIGHTER_STATUS_KIND_ESCAPE, *FIGHTER_STATUS_KIND_ESCAPE_F, *FIGHTER_STATUS_KIND_ESCAPE_B].contains(&next_status) {
 			if config::get().defense.airdodge != 0  && !is_gamemode("rivals".to_string()) {
 				return original!()(boma, status_kind, arg3);
@@ -268,9 +265,6 @@ pub unsafe fn change_status_request_script_hook(boma: &mut smash::app::BattleObj
 				return 0 as u64
 			}
 		}
-	}
-	if next_status == *FIGHTER_STATUS_KIND_ESCAPE_AIR_SLIDE && config::get().defense.airdodge == 2 {
-		return original!()(boma, *FIGHTER_STATUS_KIND_ESCAPE_AIR, arg3);
 	}
 	if config::get().defense.airdodge != 0 && !is_gamemode("rivals".to_string()) {
 		return original!()(boma, status_kind, arg3);

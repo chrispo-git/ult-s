@@ -120,6 +120,8 @@ if os.path.exists(r'target'):
             log("[build] Copying readme and credits")
             shutil.copy(r'readme.txt', r'releases/readme.txt')
             shutil.copy(r'credits.txt', r'releases/credits.txt')
+            shutil.copytree('presets', os.path.join('releases', 'ultimate', 'ult-s', 'presets'))
+            shutil.copy(r'presets/ult-s.toml', os.path.join('releases', 'ultimate', 'ult-s', 'config.toml'))
 
             zip_path = r'releases/Ultimate S Arcropolis.zip'
             if os.path.exists(zip_path):

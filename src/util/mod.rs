@@ -176,7 +176,12 @@ pub unsafe fn on_flag_hook(boma: &mut smash::app::BattleObjectModuleAccessor, in
 			if ![*FIGHTER_STATUS_KIND_ATTACK, *FIGHTER_DEMON_STATUS_KIND_ATTACK_COMBO].contains(&status_kind) {
 				original!()(boma, int)
 			};
-		} else if int == *FIGHTER_STATUS_ATTACK_FLAG_ENABLE_COMBO  && is_mechanics_enabled() {
+		} else if int == *FIGHTER_STATUS_ESCAPE_AIR_FLAG_SLIDE && config::get().defense.airdodge == 2{
+			let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
+			if ![*FIGHTER_STATUS_KIND_ESCAPE_AIR, *FIGHTER_STATUS_KIND_ESCAPE_AIR_SLIDE].contains(&status_kind) {
+				original!()(boma, int)
+			};
+		} else if int == *FIGHTER_STATUS_ATTACK_FLAG_ENABLE_COMBO  && config::get().attacks.jab_cancel != 2 {
 			let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 			crate::with_state!(ENTRY_ID, JabState, state, {
 				state.has_enable_combo_on = true;
@@ -186,7 +191,7 @@ pub unsafe fn on_flag_hook(boma: &mut smash::app::BattleObjectModuleAccessor, in
 			if status_kind != *FIGHTER_STATUS_KIND_ATTACK  {
 				original!()(boma, int)
 			};
-		} else if int == *FIGHTER_STATUS_ATTACK_FLAG_ENABLE_NO_HIT_COMBO  && is_mechanics_enabled() {
+		} else if int == *FIGHTER_STATUS_ATTACK_FLAG_ENABLE_NO_HIT_COMBO  && config::get().attacks.jab_cancel != 2 {
 			let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 			crate::with_state!(ENTRY_ID, JabState, state, {
 				state.has_enable_no_hit_combo_on = true;
@@ -606,11 +611,6 @@ unsafe extern "C" fn util_update(fighter : &mut L2CFighterCommon) {
 			} else {
 				crate::transition_reset!(ENTRY_ID, can_attack_air);
 				crate::transition_reset!(ENTRY_ID, can_airdodge);
-			}
-		}
-		if config::get().defense.airdodge == 2 {
-			if status_kind == *FIGHTER_STATUS_KIND_ESCAPE_AIR_SLIDE {
-        		StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_ESCAPE_AIR, false);
 			}
 		}
 		if config::get().movement.agt != 0 {
@@ -1268,7 +1268,7 @@ pub(crate) unsafe fn reload_config_values() -> () {
 			escape_air_slide_back_end_frame = -1;
 			landing_frame_escape_air_slide_max = 23.0;
 			landing_frame_escape_air_slide = 23.0;
-			escape_air_cancel_frame_mul = 0.61;
+			escape_air_cancel_frame_mul = 1.0/0.61;
 		}
 	};
 	param_config::update_int_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("param_motion"), smash::hash40("escape_air_slide_back_end_frame"), escape_air_slide_back_end_frame));
