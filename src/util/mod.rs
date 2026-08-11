@@ -756,38 +756,38 @@ pub(crate) unsafe fn reload_config_values() -> () {
 	let all: Vec<i32> = vec![-1];
 	match config.movement.jump_accel {
 		0 => {
-			param_config::update_attribute_mul_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("jump_initial_y"), 0, 1.0));
+			crate::param_cache::update_attribute_mul(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("jump_initial_y"), 0, 1.0));
 		},
 		_ => {
-			param_config::update_attribute_mul_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("jump_initial_y"), 0, 0.6));
+			crate::param_cache::update_attribute_mul(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("jump_initial_y"), 0, 0.6));
 		}
 	};
 	match config.movement.footstool  {
 		0 => {
-			param_config::update_float_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("tread_jump_speed_y_mul"), 0, 1.0));
-			param_config::update_float_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("tread_mini_jump_speed_y_mul"), 0, 0.475));
+			 crate::param_cache::update_float_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("tread_jump_speed_y_mul"), 0, 1.0));
+			 crate::param_cache::update_float_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("tread_mini_jump_speed_y_mul"), 0, 0.475));
 		},
 		_ => {
-			param_config::update_float_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("tread_jump_speed_y_mul"), 0, 1.3));
-			param_config::update_float_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("tread_mini_jump_speed_y_mul"), 0, 0.7));
+			 crate::param_cache::update_float_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("tread_jump_speed_y_mul"), 0, 1.3));
+			 crate::param_cache::update_float_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("tread_mini_jump_speed_y_mul"), 0, 0.7));
 		}
 	};
 	match config.defense.vertical_gravity  {
 		0 => {
-			param_config::update_attribute_mul_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("damage_fly_top_air_accel_y"), 0, 1.05));
-			param_config::update_float_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("damage_fly_top_speed_y_stable"), 0, 1.84));
+			crate::param_cache::update_attribute_mul(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("damage_fly_top_air_accel_y"), 0, 1.05));
+			 crate::param_cache::update_float_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("damage_fly_top_speed_y_stable"), 0, 1.84));
 		},
 		1 => {
-			param_config::update_attribute_mul_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("damage_fly_top_air_accel_y"), 0, 1.0));
-			param_config::update_float_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("damage_fly_top_speed_y_stable"), 0, 1.8));
+			crate::param_cache::update_attribute_mul(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("damage_fly_top_air_accel_y"), 0, 1.0));
+			 crate::param_cache::update_float_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("damage_fly_top_speed_y_stable"), 0, 1.8));
 		},
 		2 => {
-			param_config::update_attribute_mul_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("damage_fly_top_air_accel_y"), 0, 1.1));
-			param_config::update_float_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("damage_fly_top_speed_y_stable"), 0, 2.1));
+			crate::param_cache::update_attribute_mul(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("damage_fly_top_air_accel_y"), 0, 1.1));
+			 crate::param_cache::update_float_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("damage_fly_top_speed_y_stable"), 0, 2.1));
 		},
 		_ => {
-			param_config::update_attribute_mul_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("damage_fly_top_air_accel_y"), 0, 0.9));
-			param_config::update_float_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("damage_fly_top_speed_y_stable"), 0, 1.5));
+			crate::param_cache::update_attribute_mul(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("damage_fly_top_air_accel_y"), 0, 0.9));
+			 crate::param_cache::update_float_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("damage_fly_top_speed_y_stable"), 0, 1.5));
 		}
 	};
 	
@@ -801,7 +801,7 @@ pub(crate) unsafe fn reload_config_values() -> () {
 		_ => 0.9,
 	};
 	for attr in ["landing_attack_air_frame_n", "landing_attack_air_frame_f", "landing_attack_air_frame_b", "landing_attack_air_frame_hi", "landing_attack_air_frame_lw"] {
-		param_config::update_attribute_mul_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40(attr), 0, ll_multiplier));
+		crate::param_cache::update_attribute_mul(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40(attr), 0, ll_multiplier));
 	};
 	let initial_dash_mul = match config.stats.initial_dash {
 		0 => 1.0, 
@@ -812,7 +812,7 @@ pub(crate) unsafe fn reload_config_values() -> () {
 		5 => 0.75, 
 		_ => 0.9,
 	};
-	param_config::update_attribute_mul_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("dash_speed"), 0, initial_dash_mul));
+	crate::param_cache::update_attribute_mul(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("dash_speed"), 0, initial_dash_mul));
 	let runspeed_mul = match config.stats.runspeed {
 		0 => 1.0, 
 		1 => 1.1, 
@@ -822,7 +822,7 @@ pub(crate) unsafe fn reload_config_values() -> () {
 		5 => 0.75, 
 		_ => 0.9,
 	};
-	param_config::update_attribute_mul_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("run_speed_max"), 0, runspeed_mul));
+	crate::param_cache::update_attribute_mul(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("run_speed_max"), 0, runspeed_mul));
 	let walkspeed_mul = match config.stats.walkspeed {
 		0 => 1.0, 
 		1 => 1.1, 
@@ -832,7 +832,7 @@ pub(crate) unsafe fn reload_config_values() -> () {
 		5 => 0.75, 
 		_ => 0.9,
 	};
-	param_config::update_attribute_mul_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("walk_speed_max"), 0, walkspeed_mul));
+	crate::param_cache::update_attribute_mul(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("walk_speed_max"), 0, walkspeed_mul));
 	let airspeed_mul = match config.stats.airspeed {
 		0 => 1.0, 
 		1 => 1.1, 
@@ -842,7 +842,7 @@ pub(crate) unsafe fn reload_config_values() -> () {
 		5 => 0.75, 
 		_ => 0.9,
 	};
-	param_config::update_attribute_mul_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("air_speed_x_stable"), 0, airspeed_mul));
+	crate::param_cache::update_attribute_mul(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("air_speed_x_stable"), 0, airspeed_mul));
 	
 	let airaccel_mul = match config.stats.airaccel {
 		0 => 1.0, 
@@ -854,7 +854,7 @@ pub(crate) unsafe fn reload_config_values() -> () {
 		_ => 0.9,
 	};
 	for attr in ["air_accel_x_mul", "air_accel_x_add"] {
-		param_config::update_attribute_mul_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40(attr), 0, airaccel_mul));
+		crate::param_cache::update_attribute_mul(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40(attr), 0, airaccel_mul));
 	};
 
 
@@ -867,7 +867,7 @@ pub(crate) unsafe fn reload_config_values() -> () {
 		5 => 0.75, 
 		_ => 0.9,
 	};
-	param_config::update_attribute_mul_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("air_speed_y_stable"), 0, fallspeed_mul));
+	crate::param_cache::update_attribute_mul(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("air_speed_y_stable"), 0, fallspeed_mul));
 
 
 	let jump_mul = match config.stats.jump {
@@ -880,7 +880,7 @@ pub(crate) unsafe fn reload_config_values() -> () {
 		_ => 0.9,
 	};
 	for attr in ["mini_jump_y", "jump_y", "jump_aerial_y", "cliff_jump_y"] {
-		param_config::update_attribute_mul_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40(attr), 0, jump_mul));
+		crate::param_cache::update_attribute_mul(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40(attr), 0, jump_mul));
 	};
 	
 	let gravity_mul = match config.stats.gravity {
@@ -892,7 +892,7 @@ pub(crate) unsafe fn reload_config_values() -> () {
 		5 => 0.75, 
 		_ => 0.9,
 	};
-	param_config::update_attribute_mul_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("air_accel_y"), 0, gravity_mul));
+	crate::param_cache::update_attribute_mul(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("air_accel_y"), 0, gravity_mul));
 	
 	let weight_mul = match config.stats.weight {
 		0 => 1.0, 
@@ -903,7 +903,7 @@ pub(crate) unsafe fn reload_config_values() -> () {
 		5 => 0.75, 
 		_ => 0.9,
 	};
-	param_config::update_attribute_mul_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("weight"), 0, weight_mul));
+	crate::param_cache::update_attribute_mul(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("weight"), 0, weight_mul));
 	
 	let mut escape_air_slide_back_end_frame = 4;
 	let mut landing_frame_escape_air_slide_max = 20.0;
@@ -928,11 +928,11 @@ pub(crate) unsafe fn reload_config_values() -> () {
 			escape_air_cancel_frame_mul = 1.0/0.61;
 		}
 	};
-	param_config::update_int_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("param_motion"), smash::hash40("escape_air_slide_back_end_frame"), escape_air_slide_back_end_frame));
-	param_config::update_float_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("param_motion"), smash::hash40("landing_frame_escape_air_slide_max"), landing_frame_escape_air_slide_max));
-	param_config::update_float_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("param_motion"), smash::hash40("landing_speed_mul_escape_air_slide"), landing_speed_mul_escape_air_slide));
-	param_config::update_float_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("param_motion"), smash::hash40("landing_frame_escape_air_slide"), landing_frame_escape_air_slide));
-	param_config::update_attribute_mul_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("param_motion"), smash::hash40("escape_air_cancel_frame"), escape_air_cancel_frame_mul));
+	crate::param_cache::update_int_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("param_motion"), smash::hash40("escape_air_slide_back_end_frame"), escape_air_slide_back_end_frame));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("param_motion"), smash::hash40("landing_frame_escape_air_slide_max"), landing_frame_escape_air_slide_max));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("param_motion"), smash::hash40("landing_speed_mul_escape_air_slide"), landing_speed_mul_escape_air_slide));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("param_motion"), smash::hash40("landing_frame_escape_air_slide"), landing_frame_escape_air_slide));
+	crate::param_cache::update_attribute_mul(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("param_motion"), smash::hash40("escape_air_cancel_frame"), escape_air_cancel_frame_mul));
 }
 
 
@@ -1103,7 +1103,11 @@ pub fn install() {
 	skyline::install_hook!(off_flag_hook);
 	skyline::install_hook!(article_hook);
 	skyline::install_hook!(is_valid_just_shield_reflector);
-	unsafe {
-		reload_config_values();
-	}
+	// reload_config_values() is deliberately NOT called here - this runs
+	// before any character's own install() has registered its param
+	// overrides (e.g. Toad's custom run_speed_max), and reload_config_values
+	// needs those to already exist to apply global multipliers on top of
+	// them correctly instead of shadowing them. It's called once, after
+	// every character install, at the end of the main plugin install in
+	// lib.rs instead.
 }

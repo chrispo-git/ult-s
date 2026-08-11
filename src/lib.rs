@@ -859,6 +859,14 @@ pub extern "C" fn main() {
     
     println!("added chars installed");
 
+    // Runs once here, after every character's own install() has registered
+    // its param overrides, so global multipliers apply on top of those
+    // (e.g. Toad's custom run_speed_max) instead of shadowing them - see
+    // the comment in util::install() for why this isn't called there.
+    unsafe {
+        util::reload_config_values();
+    }
+
 
 
 

@@ -988,7 +988,7 @@ if os.path.isfile(mod_rs_path):
     with open(mod_rs_path) as fh:
         mod_rs_lines = fh.readlines()
     for line in mod_rs_lines:
-        if "param_config::update_float_2" not in line and "param_config::update_int_2" not in line:
+        if " crate::param_cache::update_float_2" not in line and "crate::param_cache::update_int_2" not in line:
             continue
         is_int = "update_int_2" in line
         for x in range(0, len(attribute_list)):
