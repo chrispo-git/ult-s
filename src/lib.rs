@@ -42,6 +42,7 @@ pub fn is_on_ryujinx() -> bool {
 }
 mod state_manager;
 mod variable_module;
+mod param_cache;
 mod s_macros;
 mod config;
 mod config_apply;
