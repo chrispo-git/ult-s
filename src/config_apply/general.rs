@@ -22,27 +22,25 @@ pub unsafe fn hitstun_change(fighter : &mut L2CFighterCommon, status_kind : i32,
         }
     }
 }
-pub unsafe fn hitstun(fighter: &mut L2CFighterCommon,config : &config::Config) {
+pub unsafe fn hitstun(fighter: &mut L2CFighterCommon, config : &config::Config, status_kind : i32, entry_id : usize) {
     if config.general.hitstun == 0 {
         return;
     }
-    let status_kind = StatusModule::status_kind(fighter.module_accessor);
-    let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 	match config.general.hitstun {
         0 => {},
-        1 => {hitstun_change(fighter, status_kind, ENTRY_ID, 1.5)},
-        _ => {hitstun_change(fighter, status_kind, ENTRY_ID, 0.75)},
+        1 => {hitstun_change(fighter, status_kind, entry_id, 1.5)},
+        _ => {hitstun_change(fighter, status_kind, entry_id, 0.75)},
     }
 }
 
-pub unsafe fn ledges(fighter: &mut L2CFighterCommon,config : &config::Config) {
+pub unsafe fn ledges(fighter: &mut L2CFighterCommon, config : &config::Config) {
     if config.general.ledges == 0 {
         return;
     }
 	GroundModule::set_cliff_check(fighter.module_accessor, smash::app::GroundCliffCheckKind(*GROUND_CLIFF_CHECK_KIND_NONE));
 }
 
-pub unsafe fn opff(fighter: &mut L2CFighterCommon,config : &config::Config) {
-    hitstun(fighter, config);
+pub unsafe fn opff(fighter: &mut L2CFighterCommon, config : &config::Config, status_kind : i32, entry_id : usize) {
+    hitstun(fighter, config, status_kind, entry_id);
     ledges(fighter, config);
 }

@@ -11,11 +11,10 @@ use crate::common::*;
 use crate::util::*;
 use crate::config;
 
-pub unsafe fn agt(fighter : &mut L2CFighterCommon,config : &config::Config) {
+pub unsafe fn agt(fighter : &mut L2CFighterCommon, config : &config::Config, status_kind : i32) {
     if config.movement.agt == 0 {
         return;
     }
-    let status_kind = StatusModule::status_kind(fighter.module_accessor);
     let curr_frame = WorkModule::get_int(fighter.module_accessor, *FIGHTER_STATUS_ESCAPE_WORK_INT_FRAME);
     if crate::is_in!(status_kind, *FIGHTER_STATUS_KIND_ESCAPE_AIR, *FIGHTER_STATUS_KIND_ESCAPE_AIR_SLIDE) {
         if 	ItemModule::is_have_item(fighter.module_accessor, 0)
@@ -32,12 +31,11 @@ pub unsafe fn agt(fighter : &mut L2CFighterCommon,config : &config::Config) {
     }
 }
 
-pub unsafe fn g2a(fighter : &mut L2CFighterCommon,config : &config::Config) {
+pub unsafe fn g2a(fighter : &mut L2CFighterCommon, config : &config::Config, status_kind : i32) {
     if config.movement.g2a == 0 {
         return;
     }
-    let status_kind = StatusModule::status_kind(fighter.module_accessor);
-    if !crate::is_in!(status_kind, 
+    if !crate::is_in!(status_kind,
         *FIGHTER_GAOGAEN_STATUS_KIND_SPECIAL_HI_END, *FIGHTER_GAOGAEN_STATUS_KIND_SPECIAL_HI_LOOP, *FIGHTER_GAOGAEN_STATUS_KIND_SPECIAL_HI_FALL
     ) {
         if !WorkModule::is_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_JUMP_NO_LIMIT) {
@@ -48,11 +46,10 @@ pub unsafe fn g2a(fighter : &mut L2CFighterCommon,config : &config::Config) {
     };
 }
 
-pub unsafe fn hitfall(fighter : &mut L2CFighterCommon,config : &config::Config) {
+pub unsafe fn hitfall(fighter : &mut L2CFighterCommon, config : &config::Config, status_kind : i32) {
     if config.movement.hitfall == 0 {
         return;
     }
-    let status_kind = StatusModule::status_kind(fighter.module_accessor);
     if AttackModule::is_infliction_status(fighter.module_accessor, *COLLISION_KIND_MASK_HIT) && status_kind == *FIGHTER_STATUS_KIND_ATTACK_AIR && is_hitlag(boma(fighter)) {
         let cat2 = ControlModule::get_command_flag_cat(fighter.module_accessor, 1);
         if (cat2 & *FIGHTER_PAD_CMD_CAT2_FLAG_FALL_JUMP) != 0 && ControlModule::get_stick_y(fighter.module_accessor) < -0.66 {
@@ -61,8 +58,8 @@ pub unsafe fn hitfall(fighter : &mut L2CFighterCommon,config : &config::Config) 
     }
 }
 
-pub unsafe fn opff(fighter : &mut L2CFighterCommon,config : &config::Config) {
-    hitfall(fighter, config);
-    g2a(fighter, config);
-    agt(fighter, config);
+pub unsafe fn opff(fighter : &mut L2CFighterCommon, config : &config::Config, status_kind : i32) {
+    hitfall(fighter, config, status_kind);
+    g2a(fighter, config, status_kind);
+    agt(fighter, config, status_kind);
 }

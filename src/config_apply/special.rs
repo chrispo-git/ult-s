@@ -12,12 +12,11 @@ use crate::util::*;
 use crate::config;
 
 
-pub unsafe fn cancel_to_taunt(fighter: &mut L2CFighterCommon,config : &config::Config) {
+pub unsafe fn cancel_to_taunt(fighter: &mut L2CFighterCommon, config : &config::Config, status_kind : i32, situation_kind : i32) {
     if config.special.cancel_to_taunt == 0 {
         return;
     }
-    let status_kind = StatusModule::status_kind(fighter.module_accessor);
-    if crate::is_in!(status_kind, *FIGHTER_STATUS_KIND_THROW, *FIGHTER_STATUS_KIND_APPEAL) || StatusModule::situation_kind(fighter.module_accessor) != *SITUATION_KIND_GROUND  {
+    if crate::is_in!(status_kind, *FIGHTER_STATUS_KIND_THROW, *FIGHTER_STATUS_KIND_APPEAL) || situation_kind != *SITUATION_KIND_GROUND  {
         return;
     }
     if !AttackModule::is_infliction_status(fighter.module_accessor, *COLLISION_KIND_MASK_ALL) ||
@@ -33,20 +32,19 @@ pub unsafe fn cancel_to_taunt(fighter: &mut L2CFighterCommon,config : &config::C
     }
 }
 
-pub unsafe fn taunt_cancel(fighter: &mut L2CFighterCommon,config : &config::Config) {
+pub unsafe fn taunt_cancel(fighter: &mut L2CFighterCommon, config : &config::Config, status_kind : i32) {
     if config.special.taunt_cancel == 0 {
         return;
     }
-    if StatusModule::status_kind(fighter.module_accessor) == *FIGHTER_STATUS_KIND_APPEAL {
+    if status_kind == *FIGHTER_STATUS_KIND_APPEAL {
         CancelModule::enable_cancel(fighter.module_accessor);
     }
 }
 
-pub unsafe fn random_trip(fighter: &mut L2CFighterCommon,config : &config::Config) {
+pub unsafe fn random_trip(fighter: &mut L2CFighterCommon, config : &config::Config, status_kind : i32) {
     if config.special.random_trip == 0 {
         return;
     }
-    let status_kind = StatusModule::status_kind(fighter.module_accessor);
     if crate::is_in!(status_kind, *FIGHTER_STATUS_KIND_DASH, *FIGHTER_STATUS_KIND_TURN_DASH) {
         if MotionModule::frame(fighter.module_accessor) as i32 == 5 {
             if smash::app::sv_math::rand(hash40("fighter"), 100) < 6 {
@@ -56,25 +54,29 @@ pub unsafe fn random_trip(fighter: &mut L2CFighterCommon,config : &config::Confi
     }
 }
 
-pub unsafe fn no_special_fall(fighter: &mut L2CFighterCommon,config : &config::Config) {
+pub unsafe fn no_special_fall(fighter: &mut L2CFighterCommon, config : &config::Config, status_kind : i32, situation_kind : i32, entry_id : usize) {
     if config.special.no_special_fall == 0 {
         return;
     }
-    let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-	let status_kind = StatusModule::status_kind(fighter.module_accessor);
     if status_kind == *FIGHTER_STATUS_KIND_FALL_SPECIAL {
         StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_FALL_AERIAL, false);
-        crate::transition_set!(ENTRY_ID, can_upb);
+        crate::transition_set!(entry_id, can_upb);
     }
-    let state = crate::get_state!(ENTRY_ID, TransitionEnableState);
-    if StatusModule::situation_kind(fighter.module_accessor) != *SITUATION_KIND_AIR && state.can_upb == 1 {
-        crate::transition_reset!(ENTRY_ID, can_upb);
+    let state = crate::get_state!(entry_id, TransitionEnableState);
+    if situation_kind != *SITUATION_KIND_AIR && state.can_upb == 1 {
+        crate::transition_reset!(entry_id, can_upb);
     }
 }
 
-pub unsafe fn opff(fighter: &mut L2CFighterCommon,config : &config::Config) {
-    no_special_fall(fighter, config);
-    random_trip(fighter, config);
-    taunt_cancel(fighter, config);
-    cancel_to_taunt(fighter, config);
+pub unsafe fn opff(fighter: &mut L2CFighterCommon, config : &config::Config, status_kind : i32, entry_id : usize) {
+    // situation_kind is only needed by these two, so only fetch it if at least one is enabled.
+    let situation_kind = if config.special.cancel_to_taunt != 0 || config.special.no_special_fall != 0 {
+        StatusModule::situation_kind(fighter.module_accessor)
+    } else {
+        0
+    };
+    no_special_fall(fighter, config, status_kind, situation_kind, entry_id);
+    random_trip(fighter, config, status_kind);
+    taunt_cancel(fighter, config, status_kind);
+    cancel_to_taunt(fighter, config, status_kind, situation_kind);
 }
