@@ -154,6 +154,8 @@ pub unsafe fn is_enable_transition_term_hook(boma: &mut smash::app::BattleObject
 			(state.can_attack_air == 1 && flag == *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_ATTACK_AIR) ||
 			(state.can_dash == 1 && flag == *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_DASH) ||
 			(state.can_grab == 1 && flag == *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_CATCH) ||
+			(state.can_grab == 1 && flag == *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_CATCH_DASH) ||
+			(state.can_grab == 1 && flag == *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_CATCH_TURN) ||
 			(state.can_turndash == 1 && flag == *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_TURN_DASH) ||
 			(state.can_jump_squat == 1 && (flag == *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_JUMP_SQUAT || flag == *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_JUMP_SQUAT_BUTTON)) ||
 			(state.can_double_jump == 1 && (flag == *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_JUMP_AERIAL || flag == *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_JUMP_AERIAL_BUTTON)) 
