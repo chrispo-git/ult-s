@@ -43,6 +43,7 @@ pub fn is_on_ryujinx() -> bool {
 mod state_manager;
 mod s_macros;
 mod config;
+mod config_apply;
 
 
 pub fn quick_validate_install() -> bool {
@@ -418,6 +419,8 @@ pub extern "C" fn main() {
     println!("about to install scripts");
 	util::install();
     println!("util installed");
+    config_apply::install();
+    println!("config_apply installed");
 	common::install();
 	controls::install();
 	cpu::install();

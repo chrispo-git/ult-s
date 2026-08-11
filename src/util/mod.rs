@@ -24,7 +24,6 @@ pub static mut GAMEMODES : Vec<String> = Vec::new();
 pub static mut PREV_SCALE : [f32; 8] = [0.0; 8];
 pub static mut IS_AB : [bool; 8] = [false; 8];
 pub static mut IS_KD_THROW : [bool; 8] = [false; 8];
-static mut PARRY_DURATION : [i32; 8] = [0; 8];
 
 pub static mut TAP_JUMP_BUFFER : [i32; 8] = [0; 8];
 pub const TAP_JUMP_BUFFER_MAX : i32 = 6;
@@ -168,6 +167,7 @@ pub unsafe fn is_enable_transition_term_hook(boma: &mut smash::app::BattleObject
 #[skyline::hook(replace = smash::app::lua_bind::WorkModule::on_flag)]
 pub unsafe fn on_flag_hook(boma: &mut smash::app::BattleObjectModuleAccessor, int: c_int) -> () {
 	if smash::app::utility::get_category(boma) == *BATTLE_OBJECT_CATEGORY_FIGHTER { 
+		let config = config::get();
 		if int == *FIGHTER_STATUS_ATTACK_FLAG_ENABLE_100 && is_mechanics_enabled() {
 			let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 			crate::with_state!(ENTRY_ID, JabState, state, {
@@ -178,12 +178,12 @@ pub unsafe fn on_flag_hook(boma: &mut smash::app::BattleObjectModuleAccessor, in
 			if ![*FIGHTER_STATUS_KIND_ATTACK, *FIGHTER_DEMON_STATUS_KIND_ATTACK_COMBO].contains(&status_kind) {
 				original!()(boma, int)
 			};
-		} else if int == *FIGHTER_STATUS_ESCAPE_AIR_FLAG_SLIDE && config::get().defense.airdodge == 2{
+		} else if int == *FIGHTER_STATUS_ESCAPE_AIR_FLAG_SLIDE && config.defense.airdodge == 2{
 			let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
 			if ![*FIGHTER_STATUS_KIND_ESCAPE_AIR, *FIGHTER_STATUS_KIND_ESCAPE_AIR_SLIDE].contains(&status_kind) {
 				original!()(boma, int)
 			};
-		} else if int == *FIGHTER_STATUS_ATTACK_FLAG_ENABLE_COMBO  && config::get().attacks.jab_cancel != 2 {
+		} else if int == *FIGHTER_STATUS_ATTACK_FLAG_ENABLE_COMBO  && config.attacks.jab_cancel != 2 {
 			let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 			crate::with_state!(ENTRY_ID, JabState, state, {
 				state.has_enable_combo_on = true;
@@ -193,7 +193,7 @@ pub unsafe fn on_flag_hook(boma: &mut smash::app::BattleObjectModuleAccessor, in
 			if status_kind != *FIGHTER_STATUS_KIND_ATTACK  {
 				original!()(boma, int)
 			};
-		} else if int == *FIGHTER_STATUS_ATTACK_FLAG_ENABLE_NO_HIT_COMBO  && config::get().attacks.jab_cancel != 2 {
+		} else if int == *FIGHTER_STATUS_ATTACK_FLAG_ENABLE_NO_HIT_COMBO  && config.attacks.jab_cancel != 2 {
 			let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 			crate::with_state!(ENTRY_ID, JabState, state, {
 				state.has_enable_no_hit_combo_on = true;
@@ -206,7 +206,7 @@ pub unsafe fn on_flag_hook(boma: &mut smash::app::BattleObjectModuleAccessor, in
 		} else if int == *FIGHTER_STATUS_WORK_ID_FLAG_RESERVE_JUMP_MINI {
 			let ENTRY_ID =  WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 			//full_hop_enable_delay allows fullhop button to not give shorthops.
-			if config::get().general.sh_macro != 0 {
+			if config.general.sh_macro != 0 {
 				if !(crate::get_state!(ENTRY_ID, InfoState).full_hop_enable_delay > 0){
 					original!()(boma, int)
 				} else {
@@ -300,19 +300,6 @@ pub unsafe fn article_hook(boma: &mut smash::app::BattleObjectModuleAccessor, in
 }
 
 
-pub unsafe fn shieldstun_alter(fighter : &mut L2CFighterCommon, status_kind : i32, value: f32) {
-    let shieldstun_mul = (value/0.8) / match status_kind {
-        n if n == *FIGHTER_STATUS_KIND_ATTACK_AIR => 0.33,
-        n if crate::is_in!(n, *FIGHTER_STATUS_KIND_ATTACK_S4, *FIGHTER_STATUS_KIND_ATTACK_LW4, *FIGHTER_STATUS_KIND_ATTACK_HI4) => 0.725,
-        _ => 1.0,
-    };
-
-    for i in 0..6 {
-        if AttackModule::is_attack(fighter.module_accessor, i, false) {
-            macros::ATK_SET_SHIELD_SETOFF_MUL(fighter, /*ID*/ i as u64, /*ShieldstunMul*/ shieldstun_mul);
-        }
-    }
-}
 
 //Parry Reflects
 #[skyline::hook(replace=smash::app::FighterUtil::is_valid_just_shield_reflector)]
@@ -322,179 +309,10 @@ unsafe fn is_valid_just_shield_reflector(module_accessor: &mut smash::app::Battl
 }
 static NONE :  smash::phx::Vector3f =  smash::phx::Vector3f { x: 0.0, y: 0.0, z: 0.0 };
 
-pub unsafe fn parry_only(fighter : &mut L2CFighterCommon, status_kind : i32, motion_kind : u64, ENTRY_ID : usize) {
-    unsafe {
-        if PARRY_DURATION[ENTRY_ID] > 0 {
-            PARRY_DURATION[ENTRY_ID] -= 1;
-        }
-        if crate::is_in!(status_kind, *FIGHTER_STATUS_KIND_GUARD, *FIGHTER_STATUS_KIND_GUARD_ON, *FIGHTER_STATUS_KIND_GUARD_DAMAGE) {
-			StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_GUARD_OFF, false);
-            return;
-        }
-        if crate::is_motion!(motion_kind, "just_shield", "just_shield_off") {
-            PARRY_DURATION[ENTRY_ID] = 10;
-            return;
-        }
-		let situation_kind = StatusModule::situation_kind(fighter.module_accessor);
-        if situation_kind == *SITUATION_KIND_GROUND && PARRY_DURATION[ENTRY_ID] == 1 && !(*FIGHTER_STATUS_KIND_DAMAGE..*FIGHTER_STATUS_KIND_DAMAGE_FALL).contains(&status_kind) {
-			StopModule::end_stop(fighter.module_accessor);
-            //println!("End Stun Early");
-			StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_WAIT, false);
-            return;
-        }
-        let frame = MotionModule::frame(fighter.module_accessor);
-        if status_kind == *FIGHTER_STATUS_KIND_REBOUND && (frame as i32) == 1 {
-            if is_gamemode("rivals".to_string()) && MotionModule::rate(fighter.module_accessor) == 0.5 {
-                macros::FLASH(fighter, 0.25, 0.25, 0.25, 0.5);
-            }
-        }
-        if status_kind == *FIGHTER_STATUS_KIND_GUARD_OFF {
-            WorkModule::unable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_ESCAPE);
-            WorkModule::unable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_ESCAPE_F);
-            WorkModule::unable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_ESCAPE_B);
-            WorkModule::unable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_JUMP_SQUAT_BUTTON);
-            WorkModule::unable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_JUMP_SQUAT);
-            WorkModule::unable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_ATTACK_HI4_START);
-            WorkModule::unable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_SPECIAL_HI);
-            WorkModule::unable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_SPECIAL_HI_COMMAND);
-
-            match (frame as i32) {
-                1 => {
-                    macros::PLAY_SE(fighter, Hash40::new("se_common_step_snow"));
-                    macros::PLAY_SE(fighter, Hash40::new("se_common_step_sand"));
-                    macros::PLAY_SE(fighter, Hash40::new("se_common_step_sand"));
-
-                    macros::FLASH(fighter, 0.92, 0.99, 1, 0.5);
-                    EffectModule::req_follow(fighter.module_accessor, smash::phx::Hash40::new("sys_just_shield_hit"), smash::phx::Hash40::new("hip"), &NONE, &NONE, 0.7, true, 0, 0, 0, 0, 0, true, true) as u32;
-                },
-                n if n > 6 => {
-                    macros::COL_NORMAL(fighter);
-                    let rate = if is_gamemode("rivals".to_string()) { 0.5 } else { 1.0 };
-                    WorkModule::set_float(fighter.module_accessor, rate, *FIGHTER_STATUS_WORK_ID_FLOAT_REBOUND_MOTION_RATE);
-                    StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_REBOUND, true);
-                },
-                n if n > 4 => {
-                    WorkModule::unable_transition_term(fighter.module_accessor, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_CATCH);
-                },
-                _ => {},
-            };
-        }
-    };
-}
-pub unsafe fn parry_recoil(fighter : &mut L2CFighterCommon, status_kind : i32) {
-    if !AttackModule::is_infliction_status(fighter.module_accessor, *COLLISION_KIND_MASK_SHIELD) {
-        return;
-    }
-    if crate::is_in!(status_kind, *FIGHTER_STATUS_KIND_ATTACK, *FIGHTER_STATUS_KIND_ATTACK_100) {
-        return;
-    }
-	let situation_kind = StatusModule::situation_kind(fighter.module_accessor);
-    match situation_kind {
-        n if n == *SITUATION_KIND_GROUND => {
-            StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_SAVING_DAMAGE, true);
-        },
-        _ => {
-            StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_FALL_SPECIAL, true);
-        },
-    };
-}
-unsafe fn cancel_to_taunt(fighter: &mut L2CFighterCommon, status_kind: i32) {
-    if [*FIGHTER_STATUS_KIND_THROW, *FIGHTER_STATUS_KIND_APPEAL].contains(&status_kind) || StatusModule::situation_kind(fighter.module_accessor) != *SITUATION_KIND_GROUND  {
-        return;
-    }
-    if !AttackModule::is_infliction_status(fighter.module_accessor, *COLLISION_KIND_MASK_ALL) ||
-    is_hitlag(boma(fighter)) {
-        return;
-    }
-    let cat2 = ControlModule::get_command_flag_cat(fighter.module_accessor, 1);
-    if (cat2 & *FIGHTER_PAD_CMD_CAT2_FLAG_APPEAL_S_L) != 0 
-		|| (cat2 & *FIGHTER_PAD_CMD_CAT2_FLAG_APPEAL_S_R) != 0 
-		|| (cat2 & *FIGHTER_PAD_CMD_CAT2_FLAG_APPEAL_HI) != 0 
-		|| (cat2 & *FIGHTER_PAD_CMD_CAT2_FLAG_APPEAL_LW) != 0  {
-        StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_APPEAL, false);
-    }
-}
 
 
-#[derive(Default, Clone, Copy)]
-pub struct SpecialCancelState {
-	pub can_cancel_timer : i32,
-	pub can_cancel : bool,
-}
-const SPECIAL_CANCEL_WINDOW: i32 = 20;
 
-pub unsafe fn special_cancels(fighter: &mut L2CFighterCommon, status_kind: i32, motion_kind: u64, ENTRY_ID : usize) {
-	if is_gamemode("fgmode".to_string()) {
-		return;
-	}
-	let lr = PostureModule::lr(fighter.module_accessor);
-	let stick_x = ControlModule::get_stick_x(fighter.module_accessor) * lr;
-	let stick_y = ControlModule::get_stick_y(fighter.module_accessor);
-	let situation_kind = StatusModule::situation_kind(fighter.module_accessor);
-	let frame = MotionModule::frame(fighter.module_accessor);
-	let cat1 = ControlModule::get_command_flag_cat(fighter.module_accessor, 0);
 
-	if !AttackModule::is_infliction_status(fighter.module_accessor, *COLLISION_KIND_MASK_ALL) {
-		crate::with_state!(ENTRY_ID, SpecialCancelState, state, {
-			state.can_cancel = false;
-		});
-	}
-	if crate::get_state!(ENTRY_ID, SpecialCancelState).can_cancel_timer > 0 {
-		if WorkModule::get_int(fighter.module_accessor,*FIGHTER_INSTANCE_WORK_ID_INT_HIT_STOP_ATTACK_SUSPEND_FRAME) < 1 {
-			crate::with_state!(ENTRY_ID, SpecialCancelState, state, {
-				state.can_cancel_timer -= 1;
-			});
-		}
-	} else {
-		crate::with_state!(ENTRY_ID, SpecialCancelState, state, {
-			state.can_cancel = false;
-		});
-	}
-	if AttackModule::is_infliction(fighter.module_accessor, *COLLISION_KIND_MASK_HIT) {
-		crate::with_state!(ENTRY_ID, SpecialCancelState, state, {
-			state.can_cancel = true;
-			state.can_cancel_timer = SPECIAL_CANCEL_WINDOW;
-		});
-	}
-	if crate::get_state!(ENTRY_ID, SpecialCancelState).can_cancel && !StopModule::is_stop(fighter.module_accessor) &&
-		WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_HIT_STOP_ATTACK_SUSPEND_FRAME) < 1 {
-		// Special Cancels
-		if 	[*FIGHTER_STATUS_KIND_ATTACK_S4, *FIGHTER_STATUS_KIND_ATTACK_HI4, 
-			*FIGHTER_STATUS_KIND_ATTACK_LW4, *FIGHTER_STATUS_KIND_ATTACK,
-			*FIGHTER_STATUS_KIND_ATTACK_S3, *FIGHTER_STATUS_KIND_ATTACK_HI3,
-			*FIGHTER_STATUS_KIND_ATTACK_LW3, *FIGHTER_STATUS_KIND_ATTACK_AIR].contains(&status_kind) {
-			match cat1 {
-				n if (n & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_N) != 0 => {
-						StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_SPECIAL_N, true)
-					},
-				n if (n & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_HI) != 0 => {
-						StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_SPECIAL_HI, true)
-					},
-				n if (n & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_LW) != 0 => {
-						StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_SPECIAL_LW, true)
-					},
-				n if (n & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_S) != 0 => {
-						StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_SPECIAL_S, true)
-					},
-				_ => 0,
-			};
-		}
-	}
-}
-pub unsafe fn hitstun_change(fighter : &mut L2CFighterCommon, status_kind : i32, ENTRY_ID : usize, hitstun_mul: f32) {
-    if !is_gamemode("hitstun".to_string()) && !is_gamemode("sixtyfour".to_string()) {
-        return;
-    }
-    let situation_kind = StatusModule::situation_kind(fighter.module_accessor);
-    let remaining_hitstun = WorkModule::get_float(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLOAT_DAMAGE_REACTION_FRAME);
-    let total_hitstun = WorkModule::get_float(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLOAT_DAMAGE_REACTION_FRAME_LAST);
-    if remaining_hitstun > 0.0 {
-        if remaining_hitstun == total_hitstun {
-            WorkModule::set_float(fighter.module_accessor, remaining_hitstun*hitstun_mul, *FIGHTER_INSTANCE_WORK_ID_FLOAT_DAMAGE_REACTION_FRAME);
-            WorkModule::set_float(fighter.module_accessor, (remaining_hitstun*hitstun_mul)+1.0, *FIGHTER_INSTANCE_WORK_ID_FLOAT_DAMAGE_REACTION_FRAME_LAST);
-        }
-    }
-}
 unsafe extern "C" fn util_update(fighter : &mut L2CFighterCommon) {
     unsafe {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);    
@@ -540,176 +358,10 @@ unsafe extern "C" fn util_update(fighter : &mut L2CFighterCommon) {
 			}
 
 		});
-		if config::get().attacks.grab != 0 {
-    		crate::transition_set!(ENTRY_ID, can_grab);
-		}
-		if config::get().special.cancel_to_taunt != 0 {
-			cancel_to_taunt(fighter, status_kind);
-		}
-		if config::get().special.taunt_cancel != 0 {
-			if status_kind == *FIGHTER_STATUS_KIND_APPEAL {
-				CancelModule::enable_cancel(fighter.module_accessor);
-			}
-		}
-		if config::get().attacks.special_cancel != 0 {
-			special_cancels(fighter, status_kind, motion_kind, ENTRY_ID);
-		}
 
-		if config::get().attacks.lcancel == 1 {
-			if (2..8).contains(&ControlModule::get_trigger_count(fighter.module_accessor, *CONTROL_PAD_BUTTON_GUARD as u8)) &&
-			status_kind == *FIGHTER_STATUS_KIND_LANDING_ATTACK_AIR && MotionModule::frame(fighter.module_accessor) < 4.0 {
-				if motion_kind == hash40("landing_air_n") {
-					let landing = 1.0/(((WorkModule::get_param_float(boma, hash40("landing_attack_air_frame_n"), 0)*0.5))/ FighterMotionModuleImpl::get_cancel_frame(boma,smash::phx::Hash40::new_raw(MotionModule::motion_kind(boma)), false)as f32);
-					MotionModule::set_rate(boma, landing);
-				} else if motion_kind == hash40("landing_air_f") {
-					let landing = 1.0/(((WorkModule::get_param_float(boma, hash40("landing_attack_air_frame_f"), 0)*0.5))/ FighterMotionModuleImpl::get_cancel_frame(boma,smash::phx::Hash40::new_raw(MotionModule::motion_kind(boma)), false)as f32);
-					MotionModule::set_rate(boma, landing);
-				} else if motion_kind == hash40("landing_air_b") {
-					let landing = 1.0/(((WorkModule::get_param_float(boma, hash40("landing_attack_air_frame_b"), 0)*0.5))/ FighterMotionModuleImpl::get_cancel_frame(boma,smash::phx::Hash40::new_raw(MotionModule::motion_kind(boma)), false)as f32);
-					MotionModule::set_rate(boma, landing);
-				} else if motion_kind == hash40("landing_air_hi") {
-					let landing = 1.0/(((WorkModule::get_param_float(boma, hash40("landing_attack_air_frame_hi"), 0)*0.5))/ FighterMotionModuleImpl::get_cancel_frame(boma,smash::phx::Hash40::new_raw(MotionModule::motion_kind(boma)), false)as f32);
-					MotionModule::set_rate(boma, landing);
-				} else {
-					let landing = 1.0/(((WorkModule::get_param_float(boma, hash40("landing_attack_air_frame_lw"), 0)*0.5))/ FighterMotionModuleImpl::get_cancel_frame(boma,smash::phx::Hash40::new_raw(MotionModule::motion_kind(boma)), false)as f32);
-					MotionModule::set_rate(boma, landing);
-				};
-			}
-		}
-		if config::get().attacks.lcancel == 2 {
-			if (2..8).contains(&ControlModule::get_trigger_count(fighter.module_accessor, *CONTROL_PAD_BUTTON_GUARD as u8)) &&
-			status_kind == *FIGHTER_STATUS_KIND_LANDING_ATTACK_AIR && MotionModule::frame(fighter.module_accessor) < 4.0 {
-        		StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_LANDING, false);
-			}
-		}
-		if config::get().defense.di != 0 {
-    		WorkModule::set_float(fighter.module_accessor, 0.0, *FIGHTER_STATUS_DAMAGE_WORK_FLOAT_VECOR_CORRECT_STICK_X);
-    		WorkModule::set_float(fighter.module_accessor, 0.0, *FIGHTER_STATUS_DAMAGE_WORK_FLOAT_VECOR_CORRECT_STICK_Y);
-		}
 
-		match config::get().general.hitstun {
-			0 => {},
-			1 => {hitstun_change(fighter, status_kind, ENTRY_ID, 1.5)},
-			_ => {hitstun_change(fighter, status_kind, ENTRY_ID, 0.75)},
-		}
 
-		if config::get().defense.hitstun_cancel != 0 {
-			let remaining_hitstun = WorkModule::get_float(boma, *FIGHTER_INSTANCE_WORK_ID_FLOAT_DAMAGE_REACTION_FRAME);
-			let total_hitstun = WorkModule::get_float(boma, *FIGHTER_INSTANCE_WORK_ID_FLOAT_DAMAGE_REACTION_FRAME_LAST);
-			if remaining_hitstun > 0.0 && [*FIGHTER_STATUS_KIND_DAMAGE_AIR, *FIGHTER_STATUS_KIND_DAMAGE_FALL, *FIGHTER_STATUS_KIND_DAMAGE_FLY, *FIGHTER_STATUS_KIND_DAMAGE_FLY_ROLL, *FIGHTER_STATUS_KIND_DAMAGE_FLY_METEOR].contains(&status_kind) {
-				if config::get().defense.hitstun_cancel == 1 {
-					if total_hitstun - remaining_hitstun > 15.0 {
-						if ControlModule::check_button_on_trriger(fighter.module_accessor, *CONTROL_PAD_BUTTON_GUARD) {
-        					StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_ESCAPE_AIR, false);
-						};
-						if ControlModule::check_button_on_trriger(fighter.module_accessor, *CONTROL_PAD_BUTTON_ATTACK) {
-        					StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_ATTACK_AIR, false);
-						};
-					}
-				} else {
-					crate::transition_set!(ENTRY_ID, can_attack_air);
-					crate::transition_set!(ENTRY_ID, can_airdodge);
-				}
-			} else {
-				crate::transition_reset!(ENTRY_ID, can_attack_air);
-				crate::transition_reset!(ENTRY_ID, can_airdodge);
-			}
-		}
-		if config::get().movement.agt != 0 {
-			let curr_frame = WorkModule::get_int(fighter.module_accessor, *FIGHTER_STATUS_ESCAPE_WORK_INT_FRAME);
-			if crate::is_in!(status_kind, *FIGHTER_STATUS_KIND_ESCAPE_AIR, *FIGHTER_STATUS_KIND_ESCAPE_AIR_SLIDE) {
-				if 	ItemModule::is_have_item(fighter.module_accessor, 0)
-					&& ControlModule::check_button_on_trriger(fighter.module_accessor, *CONTROL_PAD_BUTTON_ATTACK)
-					&& curr_frame < 6 {
-					fighter.clear_lua_stack();
-					lua_args!(fighter, MA_MSC_ITEM_CHECK_HAVE_ITEM_TRAIT, ITEM_TRAIT_FLAG_NO_THROW);
-					smash::app::sv_module_access::item(fighter.lua_state_agent);
-					let throwable = !fighter.pop_lua_stack(1).get_bool();
-					if throwable {
-        				StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_ITEM_THROW, false);
-					}
-				}
-			}
-		}
-		if config::get().defense.airdodge == 2 {
-			WorkModule::off_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_DISABLE_ESCAPE_AIR);
-		}
-		if config::get().defense.airdodge == 3 {
-    		WorkModule::on_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_DISABLE_ESCAPE_AIR);    
-		}
-		if config::get().special.random_trip != 0 {
-			if crate::is_in!(status_kind, *FIGHTER_STATUS_KIND_DASH, *FIGHTER_STATUS_KIND_TURN_DASH) {
-				if MotionModule::frame(fighter.module_accessor) as i32 == 5 {
-					if smash::app::sv_math::rand(hash40("fighter"), 100) < 6 {
-        				StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_SLIP, false);
-					};
-				}
-			}
-		}
-		if config::get().special.no_special_fall != 0 {
-			if status_kind == *FIGHTER_STATUS_KIND_FALL_SPECIAL {
-        		StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_FALL_AERIAL, false);
-    			crate::transition_set!(ENTRY_ID, can_upb);
-			}
-			let state = crate::get_state!(ENTRY_ID, TransitionEnableState);
-			if StatusModule::situation_kind(fighter.module_accessor) != *SITUATION_KIND_AIR && state.can_upb == 1 {
-    			crate::transition_reset!(ENTRY_ID, can_upb);
-			}
-		}
-		if config::get().movement.g2a != 0 {
-			if ![
-				*FIGHTER_GAOGAEN_STATUS_KIND_SPECIAL_HI_END, *FIGHTER_GAOGAEN_STATUS_KIND_SPECIAL_HI_LOOP, *FIGHTER_GAOGAEN_STATUS_KIND_SPECIAL_HI_FALL
-			].contains(&status_kind) {
-				if !WorkModule::is_flag(boma, *FIGHTER_INSTANCE_WORK_ID_FLAG_JUMP_NO_LIMIT) {
-					WorkModule::on_flag(boma, *FIGHTER_INSTANCE_WORK_ID_FLAG_JUMP_NO_LIMIT);
-				};
-			}else {
-				WorkModule::off_flag(boma, *FIGHTER_INSTANCE_WORK_ID_FLAG_JUMP_NO_LIMIT);
-			};
-		}
-		if config::get().general.ledges != 0 {
-    		GroundModule::set_cliff_check(fighter.module_accessor, smash::app::GroundCliffCheckKind(*GROUND_CLIFF_CHECK_KIND_NONE));
-		}
-		let shield_health = match config::get().defense.shield_health {
-			0 => 50.0,
-			1 => 65.0,
-			_ => 35.0,
-		};
-		WorkModule::set_float(fighter.module_accessor, shield_health, *FIGHTER_INSTANCE_WORK_ID_FLOAT_GUARD_SHIELD_MAX);
 
-		if config::get().defense.shieldstun != 0 {
-			let shieldstun_mul = match config::get().defense.shieldstun {
-				0 => 0.8,
-				1 => 1.75,
-				_ => 0.4
-			};
-			shieldstun_alter(fighter, status_kind, shieldstun_mul);
-		}
-
-		match config::get().defense.shield {
-			0 => {},
-			1 => {
-				parry_only(fighter, status_kind, motion_kind, ENTRY_ID);
-				parry_recoil(fighter, status_kind);
-			},
-			_ => {
-				WorkModule::off_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_DISABLE_GUARD);
-			},
-		};
-
-		if crate::is_in!(status_kind, *FIGHTER_STATUS_KIND_ATTACK, *FIGHTER_STATUS_KIND_ATTACK_DASH, *FIGHTER_STATUS_KIND_ATTACK_S3, *FIGHTER_STATUS_KIND_ATTACK_HI3, *FIGHTER_STATUS_KIND_ATTACK_LW3,  *FIGHTER_STATUS_KIND_ATTACK_S4_START, *FIGHTER_STATUS_KIND_ATTACK_HI4_START, *FIGHTER_STATUS_KIND_ATTACK_LW4_START){
-			if config::get().attacks.ac != 0 {
-				WorkModule::on_flag(fighter.module_accessor, *FIGHTER_STATUS_WORK_ID_FLAG_RESERVE_ATTACK_DISABLE_MINI_JUMP_ATTACK);
-			}
-		}
-		if config::get().movement.hitfall != 0 {
-			if AttackModule::is_infliction_status(fighter.module_accessor, *COLLISION_KIND_MASK_HIT) && status_kind == *FIGHTER_STATUS_KIND_ATTACK_AIR && is_hitlag(boma) {
-				let cat2 = ControlModule::get_command_flag_cat(fighter.module_accessor, 1);
-				if (cat2 & *FIGHTER_PAD_CMD_CAT2_FLAG_FALL_JUMP) != 0 && ControlModule::get_stick_y(fighter.module_accessor) < -0.66 {
-					WorkModule::set_flag(fighter.module_accessor, true, *FIGHTER_STATUS_WORK_ID_FLAG_RESERVE_DIVE);
-				}
-			}
-		}
 		if JC_GRAB_LOCKOUT[ENTRY_ID] > 0 {
 			JC_GRAB_LOCKOUT[ENTRY_ID] -= 1;
 		};
