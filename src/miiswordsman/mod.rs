@@ -5,7 +5,7 @@ use crate::util::*;
 use smash::lib::lua_const::*;
 use smash::hash40;
 
-static FIGHTER_MIISWORDSMAN_INSTANCE_WORK_ID_FLAG_STORE_COUNTER : i32 = 0;
+static FIGHTER_MIISWORDSMAN_INSTANCE_WORK_ID_INT_TORNADO_COOLDOWN : i32 = 0;
 static TORNADO_MAX : i32 = 70;
 
 

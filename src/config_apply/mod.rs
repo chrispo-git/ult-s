@@ -25,6 +25,7 @@ static mut MAX_SPIKE : f32 = 0.0;
 unsafe extern "C" fn config_apply(fighter : &mut L2CFighterCommon) {
     unsafe {
 
+        let config = config::get();
         let status_kind = StatusModule::status_kind(fighter.module_accessor);
         let entry_id = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 
