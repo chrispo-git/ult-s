@@ -25,6 +25,16 @@ impl VariableModule {
             .insert(key(module_accessor, id), value);
     }
 
+    pub unsafe fn inc_int(module_accessor: *mut BattleObjectModuleAccessor, id: i32) {
+        let value = Self::get_int(module_accessor, id) + 1;
+        Self::set_int(module_accessor, value, id);
+    }
+
+    pub unsafe fn dec_int(module_accessor: *mut BattleObjectModuleAccessor, id: i32) {
+        let value = Self::get_int(module_accessor, id) - 1;
+        Self::set_int(module_accessor, value, id);
+    }
+
     pub unsafe fn get_float(module_accessor: *mut BattleObjectModuleAccessor, id: i32) -> f32 {
         FLOAT_VARS.get_or_insert_with(HashMap::new)
             .get(&key(module_accessor, id))

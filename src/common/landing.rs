@@ -233,10 +233,10 @@ unsafe fn init_settings_replace(module_accessor: &mut smash::app::BattleObjectMo
         && smash::app::utility::get_category(module_accessor) != *BATTLE_OBJECT_CATEGORY_FIGHTER {
         VariableModule::clear(module_accessor as *mut _);
     }
-  smash::app::utility::get_category(module_accessor) != *BATTLE_OBJECT_CATEGORY_FIGHTER  if config::get().movement.edge_cancel != 0 {
+    if config::get().movement.edge_cancel != 0 {
         return original!()(module_accessor, situation_kind, arg3, arg4, ground_cliff_check_kind, arg6, arg7, arg8, arg9, arg10);
 	}
-    if  {
+    if smash::app::utility::get_category(module_accessor) != *BATTLE_OBJECT_CATEGORY_FIGHTER {
         return original!()(module_accessor, situation_kind, arg3, arg4, ground_cliff_check_kind, arg6, arg7, arg8, arg9, arg10);
     }
 	let status_kind = StatusModule::status_kind(module_accessor);
