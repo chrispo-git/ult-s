@@ -19,6 +19,8 @@ use std::time::Instant;
 use once_cell::sync::Lazy;
 use crate::config;
 
+pub use crate::variable_module::VariableModule;
+
 pub static mut GAMEMODES : Vec<String> = Vec::new();
 
 pub static mut PREV_SCALE : [f32; 8] = [0.0; 8];
@@ -338,6 +340,7 @@ unsafe extern "C" fn util_update(fighter : &mut L2CFighterCommon) {
 		});
 		//Resets inability to special
 		if is_reset() {
+			VariableModule::clear(boma as *mut _);
 			crate::transitions_reset_all!(ENTRY_ID);
 			crate::with_state!(ENTRY_ID, InfoState, state, {
 				state.full_hop_enable_delay = 0;

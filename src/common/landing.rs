@@ -223,10 +223,20 @@ pub(crate) fn is_edge_cancel(fighter_kind : i32, status_kind : i32, costume : i3
 //Edge Cancelling Part A
 #[skyline::hook(replace = smash::app::lua_bind::StatusModule::init_settings)]
 unsafe fn init_settings_replace(module_accessor: &mut smash::app::BattleObjectModuleAccessor, situation_kind: i32, arg3: i32, arg4: u64, ground_cliff_check_kind: u64, arg6: bool, arg7: i32, arg8: i32, arg9: i32, arg10: i32) -> u64 {
-    if config::get().movement.edge_cancel != 0 {
+    // The engine's own "reset this object's work variables" signal - weapons/articles
+    // don't run util_update, so this is their equivalent of a fighter's is_reset() for
+    // clearing out VariableModule entries before something new reuses this object's
+    // battle_object_id. Checked ahead of the edge_cancel/category early returns below
+    // since those bypass non-fighter objects entirely and this must not depend on them.
+    if arg7 == *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_FLAG && arg8 == *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_INT
+        && arg9 == *FIGHTER_STATUS_WORK_KEEP_FLAG_NONE_FLOAT
+        && smash::app::utility::get_category(module_accessor) != *BATTLE_OBJECT_CATEGORY_FIGHTER {
+        VariableModule::clear(module_accessor as *mut _);
+    }
+  smash::app::utility::get_category(module_accessor) != *BATTLE_OBJECT_CATEGORY_FIGHTER  if config::get().movement.edge_cancel != 0 {
         return original!()(module_accessor, situation_kind, arg3, arg4, ground_cliff_check_kind, arg6, arg7, arg8, arg9, arg10);
 	}
-    if smash::app::utility::get_category(module_accessor) != *BATTLE_OBJECT_CATEGORY_FIGHTER {
+    if  {
         return original!()(module_accessor, situation_kind, arg3, arg4, ground_cliff_check_kind, arg6, arg7, arg8, arg9, arg10);
     }
 	let status_kind = StatusModule::status_kind(module_accessor);
