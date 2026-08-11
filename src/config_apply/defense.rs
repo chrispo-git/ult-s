@@ -7,30 +7,10 @@ use smashline::*;
 use smash_script::*;
 use std::os::raw::c_int;
 use std::os::raw::c_ulong;
-use std::time::Instant;
 use crate::common::*;
 use crate::util::*;
 use crate::config;
 static mut PARRY_DURATION : [i32; 8] = [0; 8];
-
-// Temporary per-function breakdown of opff, to find which piece of defense
-// is actually spiking. Remove once identified.
-const SECTION_NAMES : [&str; 6] = ["shield", "shieldstun", "shield_health", "airdodge", "di", "hitstun_cancel"];
-static mut SECTION_TOTAL : [f32; 6] = [0.0; 6];
-static mut SECTION_MAX : [f32; 6] = [0.0; 6];
-static mut SECTION_FRAMES : i32 = 0;
-
-pub unsafe fn debug_print_sections() {
-    for i in 0..6 {
-        let avg = SECTION_TOTAL[i] / (SECTION_FRAMES.max(1) as f32);
-        println!("    defense::[{}] avg {:.4}us, max spike {:.4}us", SECTION_NAMES[i], avg, SECTION_MAX[i]);
-    }
-}
-pub unsafe fn debug_reset_sections() {
-    SECTION_TOTAL = [0.0; 6];
-    SECTION_MAX = [0.0; 6];
-    SECTION_FRAMES = 0;
-}
 
 static NONE :  smash::phx::Vector3f =  smash::phx::Vector3f { x: 0.0, y: 0.0, z: 0.0 };
 
@@ -205,24 +185,10 @@ pub unsafe fn shield(fighter : &mut L2CFighterCommon, config : &config::Config, 
 }
 
 pub unsafe fn opff(fighter : &mut L2CFighterCommon, config : &config::Config, status_kind : i32, entry_id : usize) {
-    macro_rules! timed {
-        ($idx:expr, $body:expr) => {{
-            let section_start = Instant::now();
-            let result = $body;
-            let section_us = section_start.elapsed().as_micros() as f32;
-            SECTION_TOTAL[$idx] += section_us;
-            if section_us > SECTION_MAX[$idx] { SECTION_MAX[$idx] = section_us; }
-            result
-        }};
-    }
-
-    timed!(0, shield(fighter, config, status_kind, entry_id));
-    timed!(1, shieldstun(fighter, config, status_kind));
-    timed!(2, shield_health(fighter, config));
-    timed!(3, airdodge(fighter, config));
-    timed!(4, di(fighter, config));
-    timed!(5, hitstun_cancel(fighter, config, status_kind, entry_id));
-    if entry_id == 0 {
-        SECTION_FRAMES += 1;
-    }
+    shield(fighter, config, status_kind, entry_id);
+    shieldstun(fighter, config, status_kind);
+    shield_health(fighter, config);
+    airdodge(fighter, config);
+    di(fighter, config);
+    hitstun_cancel(fighter, config, status_kind, entry_id);
 }

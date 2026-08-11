@@ -7,47 +7,9 @@ use smashline::*;
 use smash_script::*;
 use std::os::raw::c_int;
 use std::os::raw::c_ulong;
-use std::time::Instant;
 use crate::common::*;
 use crate::util::*;
 use crate::config;
-
-// Temporary per-function breakdown of opff, to find which piece of attacks
-// is actually costing time. Remove once identified.
-const SECTION_NAMES : [&str; 4] = ["grab", "special_cancels", "lcancel", "ac"];
-static mut SECTION_TOTAL : [f32; 4] = [0.0; 4];
-static mut SECTION_MAX : [f32; 4] = [0.0; 4];
-static mut SECTION_FRAMES : i32 = 0;
-
-pub unsafe fn debug_print_sections() {
-    for i in 0..4 {
-        let avg = SECTION_TOTAL[i] / (SECTION_FRAMES.max(1) as f32);
-        println!("    attacks::[{}] avg {:.4}us, max spike {:.4}us", SECTION_NAMES[i], avg, SECTION_MAX[i]);
-    }
-}
-pub unsafe fn debug_reset_sections() {
-    SECTION_TOTAL = [0.0; 4];
-    SECTION_MAX = [0.0; 4];
-    SECTION_FRAMES = 0;
-}
-
-// One level deeper: which part of special_cancels specifically is costing time.
-const SC_SECTION_NAMES : [&str; 4] = ["is_gamemode", "native_reads", "with_state", "cancel_dispatch"];
-static mut SC_SECTION_TOTAL : [f32; 4] = [0.0; 4];
-static mut SC_SECTION_MAX : [f32; 4] = [0.0; 4];
-static mut SC_SECTION_FRAMES : i32 = 0;
-
-pub unsafe fn debug_print_sc_sections() {
-    for i in 0..4 {
-        let avg = SC_SECTION_TOTAL[i] / (SC_SECTION_FRAMES.max(1) as f32);
-        println!("      special_cancels::[{}] avg {:.4}us, max spike {:.4}us", SC_SECTION_NAMES[i], avg, SC_SECTION_MAX[i]);
-    }
-}
-pub unsafe fn debug_reset_sc_sections() {
-    SC_SECTION_TOTAL = [0.0; 4];
-    SC_SECTION_MAX = [0.0; 4];
-    SC_SECTION_FRAMES = 0;
-}
 
 #[derive(Default, Clone, Copy)]
 pub struct SpecialCancelState {
@@ -106,17 +68,6 @@ pub unsafe fn lcancel(fighter : &mut L2CFighterCommon, config : &config::Config,
 }
 
 pub unsafe fn special_cancels(fighter: &mut L2CFighterCommon, config : &config::Config, status_kind : i32, entry_id : usize) {
-	macro_rules! timed {
-		($idx:expr, $body:expr) => {{
-			let section_start = Instant::now();
-			let result = $body;
-			let section_us = section_start.elapsed().as_micros() as f32;
-			SC_SECTION_TOTAL[$idx] += section_us;
-			if section_us > SC_SECTION_MAX[$idx] { SC_SECTION_MAX[$idx] = section_us; }
-			result
-		}};
-	}
-
 	if config.attacks.special_cancel == 0 {
         return;
     }
@@ -134,19 +85,16 @@ pub unsafe fn special_cancels(fighter: &mut L2CFighterCommon, config : &config::
         *FIGHTER_STATUS_KIND_ATTACK_LW3, *FIGHTER_STATUS_KIND_ATTACK_AIR) {
         return;
     }
-    if timed!(0, is_gamemode("fgmode".to_string())) {
+    if is_gamemode("fgmode".to_string()) {
 		return;
 	}
-	let (cat1, is_infliction_status, is_infliction_hit, hit_stop_clear) = timed!(1, {
-		let cat1 = ControlModule::get_command_flag_cat(fighter.module_accessor, 0);
-		let is_infliction_status = AttackModule::is_infliction_status(fighter.module_accessor, *COLLISION_KIND_MASK_ALL);
-		let is_infliction_hit = AttackModule::is_infliction(fighter.module_accessor, *COLLISION_KIND_MASK_HIT);
-		let hit_stop_clear = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_HIT_STOP_ATTACK_SUSPEND_FRAME) < 1;
-		(cat1, is_infliction_status, is_infliction_hit, hit_stop_clear)
-	});
+	let cat1 = ControlModule::get_command_flag_cat(fighter.module_accessor, 0);
+	let is_infliction_status = AttackModule::is_infliction_status(fighter.module_accessor, *COLLISION_KIND_MASK_ALL);
+	let is_infliction_hit = AttackModule::is_infliction(fighter.module_accessor, *COLLISION_KIND_MASK_HIT);
+	let hit_stop_clear = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_HIT_STOP_ATTACK_SUSPEND_FRAME) < 1;
 
 	// Single lock/read/write pass instead of the up-to-5 separate state accesses this used to do.
-	let can_cancel = timed!(2, crate::with_state!(entry_id, SpecialCancelState, state, {
+	let can_cancel = crate::with_state!(entry_id, SpecialCancelState, state, {
 		if !is_infliction_status {
 			state.can_cancel = false;
 		}
@@ -162,57 +110,38 @@ pub unsafe fn special_cancels(fighter: &mut L2CFighterCommon, config : &config::
 			state.can_cancel_timer = SPECIAL_CANCEL_WINDOW;
 		}
 		state.can_cancel
-	}));
-
-	timed!(3, {
-		// status_kind is already known to be one of the cancel-eligible attack
-		// statuses - the early return above guarantees it.
-		if can_cancel && !StopModule::is_stop(fighter.module_accessor) && hit_stop_clear {
-			// Special Cancels
-			match cat1 {
-				n if (n & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_N) != 0 => {
-						StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_SPECIAL_N, true)
-					},
-				n if (n & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_HI) != 0 => {
-						StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_SPECIAL_HI, true)
-					},
-				n if (n & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_LW) != 0 => {
-						StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_SPECIAL_LW, true)
-					},
-				n if (n & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_S) != 0 => {
-						StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_SPECIAL_S, true)
-					},
-				_ => 0,
-			};
-		}
 	});
-	if entry_id == 0 {
-		SC_SECTION_FRAMES += 1;
+
+	// status_kind is already known to be one of the cancel-eligible attack
+	// statuses - the early return above guarantees it.
+	if can_cancel && !StopModule::is_stop(fighter.module_accessor) && hit_stop_clear {
+		// Special Cancels
+		match cat1 {
+			n if (n & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_N) != 0 => {
+					StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_SPECIAL_N, true)
+				},
+			n if (n & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_HI) != 0 => {
+					StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_SPECIAL_HI, true)
+				},
+			n if (n & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_LW) != 0 => {
+					StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_SPECIAL_LW, true)
+				},
+			n if (n & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_S) != 0 => {
+					StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_SPECIAL_S, true)
+				},
+			_ => 0,
+		};
 	}
 }
 
 pub unsafe fn opff(fighter: &mut L2CFighterCommon, config : &config::Config, status_kind : i32, entry_id : usize) {
-    macro_rules! timed {
-        ($idx:expr, $body:expr) => {{
-            let section_start = Instant::now();
-            let result = $body;
-            let section_us = section_start.elapsed().as_micros() as f32;
-            SECTION_TOTAL[$idx] += section_us;
-            if section_us > SECTION_MAX[$idx] { SECTION_MAX[$idx] = section_us; }
-            result
-        }};
-    }
-
-    timed!(0, grab(fighter, config, entry_id));
-    timed!(1, special_cancels(fighter, config, status_kind, entry_id));
+    grab(fighter, config, entry_id);
+    special_cancels(fighter, config, status_kind, entry_id);
     let motion_kind = if config.attacks.lcancel != 0 {
         MotionModule::motion_kind(fighter.module_accessor)
     } else {
         0
     };
-    timed!(2, lcancel(fighter, config, status_kind, motion_kind));
-    timed!(3, ac(fighter, config, status_kind));
-    if entry_id == 0 {
-        SECTION_FRAMES += 1;
-    }
+    lcancel(fighter, config, status_kind, motion_kind);
+    ac(fighter, config, status_kind);
 }
