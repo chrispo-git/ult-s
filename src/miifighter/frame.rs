@@ -84,13 +84,13 @@ unsafe extern "C" fn brawler_frame(fighter: &mut L2CFighterCommon) {
 				StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL, true);
 				KineticModule::clear_speed_all(boma);
 			};
-			BAN_DOWNB[ENTRY_ID] = true;
+			VariableModule::set_flag((boma) as *mut _, true, FIGHTER_MIIFIGHTER_INSTANCE_WORK_ID_FLAG_BAN_DOWNB);
 		};
 		if situation_kind != *SITUATION_KIND_AIR {
-			BAN_DOWNB[ENTRY_ID] = false;
+			VariableModule::set_flag((boma) as *mut _, false, FIGHTER_MIIFIGHTER_INSTANCE_WORK_ID_FLAG_BAN_DOWNB);
 		};
 		if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_CUSTOMIZE_SPECIAL_LW_NO) == 0 {
-			if BAN_DOWNB[ENTRY_ID] == true {
+			if VariableModule::is_flag((boma) as *mut _, FIGHTER_MIIFIGHTER_INSTANCE_WORK_ID_FLAG_BAN_DOWNB) == true {
 				crate::transition_set!(ENTRY_ID, can_downb);
 			} else {
 				crate::transition_reset!(ENTRY_ID, can_downb);
@@ -122,15 +122,15 @@ unsafe extern "C" fn brawler_frame(fighter: &mut L2CFighterCommon) {
 			MotionModule::change_motion(boma, smash::phx::Hash40::new("throw_f"), 12.0, 1.0, false, 0.0, false, false);
 			shield!(fighter, *MA_MSC_CMD_REFLECTOR, *COLLISION_KIND_REFLECTOR, 0, hash40("top"), 5.0, 0.0, 6.5, 3.5, 0.0, 6.5, 5.5, 1.4, 1.5, 50, false, 0.5, *FIGHTER_REFLECTOR_GROUP_HOMERUNBAT);
 			println!("reflection!");
-			COUNTER_IS[ENTRY_ID] = true;
+			VariableModule::set_flag((boma) as *mut _, true, FIGHTER_MIIFIGHTER_INSTANCE_WORK_ID_FLAG_COUNTER_IS);
 		};
 		if MotionModule::motion_kind(boma) == hash40("throw_f") && MotionModule::frame(boma) > 20.0 {		
 			search!(fighter, *MA_MSC_CMD_SEARCH_SEARCH_SCH_CLR_ALL);
 			macros::COL_NORMAL(fighter);
 		};
-		if MotionModule::motion_kind(boma) == hash40("special_lw3") && COUNTER_IS[ENTRY_ID] == true {
+		if MotionModule::motion_kind(boma) == hash40("special_lw3") && VariableModule::is_flag((boma) as *mut _, FIGHTER_MIIFIGHTER_INSTANCE_WORK_ID_FLAG_COUNTER_IS) == true {
 			MotionModule::change_motion(boma, smash::phx::Hash40::new("throw_f"), 12.0, 1.0, false, 0.0, false, false);
-			COUNTER_IS[ENTRY_ID] = false;
+			VariableModule::set_flag((boma) as *mut _, false, FIGHTER_MIIFIGHTER_INSTANCE_WORK_ID_FLAG_COUNTER_IS);
 			search!(fighter, *MA_MSC_CMD_SEARCH_SEARCH_SCH_CLR_ALL);
 			macros::COL_NORMAL(fighter);
 		};
@@ -146,7 +146,7 @@ unsafe extern "C" fn brawler_frame(fighter: &mut L2CFighterCommon) {
 			}
 		};
 		if [hash40("special_lw3"), hash40("special_air_lw3"), hash40("throw_f")].contains(&MotionModule::motion_kind(boma)) == false {
-			COUNTER_IS[ENTRY_ID] = false;
+			VariableModule::set_flag((boma) as *mut _, false, FIGHTER_MIIFIGHTER_INSTANCE_WORK_ID_FLAG_COUNTER_IS);
 		};
 		
 		//Onslaught
@@ -163,13 +163,13 @@ unsafe extern "C" fn brawler_frame(fighter: &mut L2CFighterCommon) {
 		};
 		
 		//ESK
-		if ESK_CHARGE[ENTRY_ID] > 0 && total_hitstun > 0.0 {
+		if VariableModule::get_int((boma) as *mut _, FIGHTER_MIIFIGHTER_INSTANCE_WORK_ID_INT_ESK_CHARGE) > 0 && total_hitstun > 0.0 {
 			if StatusModule::prev_status_kind(boma, 0) == *FIGHTER_STATUS_KIND_SPECIAL_N {
-				ESK_CHARGE[ENTRY_ID] = 0;
+				VariableModule::set_int((boma) as *mut _, 0, FIGHTER_MIIFIGHTER_INSTANCE_WORK_ID_INT_ESK_CHARGE);
 			};
 		};
 		if smash::app::sv_information::is_ready_go() == false || [*FIGHTER_STATUS_KIND_WIN, *FIGHTER_STATUS_KIND_LOSE, *FIGHTER_STATUS_KIND_DEAD].contains(&status_kind) {
-			ESK_CHARGE[ENTRY_ID] = 0;
+			VariableModule::set_int((boma) as *mut _, 0, FIGHTER_MIIFIGHTER_INSTANCE_WORK_ID_INT_ESK_CHARGE);
 		};
 		if [hash40("special_n3"), hash40("special_air_n3")].contains(&MotionModule::motion_kind(boma)) {
 			if motion_duration(boma) == 5 {
@@ -181,7 +181,7 @@ unsafe extern "C" fn brawler_frame(fighter: &mut L2CFighterCommon) {
 				};
 			};
 			if MotionModule::frame(boma) > 12.0 && MotionModule::frame(boma) < 20.0 {
-				if ESK_CHARGE[ENTRY_ID] % 18 == 0 || MotionModule::frame(boma) == 13.0 {
+				if VariableModule::get_int((boma) as *mut _, FIGHTER_MIIFIGHTER_INSTANCE_WORK_ID_INT_ESK_CHARGE) % 18 == 0 || MotionModule::frame(boma) == 13.0 {
 					EffectModule::req_follow(boma, smash::phx::Hash40::new_raw(0x198abfaca9), smash::phx::Hash40::new("toel"), &ESK, &ESK, 1.0, true, 0, 0, 0, 0, 0, true, true);
 				};
 				if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_GUARD) {
@@ -210,7 +210,7 @@ unsafe extern "C" fn brawler_frame(fighter: &mut L2CFighterCommon) {
 					macros::PLAY_SE(fighter, smash::phx::Hash40::new("se_miifighter_special_c3_n01"));
 				};
 				let cat1 = ControlModule::get_command_flag_cat(boma, 0);
-				if (cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_ANY) != 0 || ESK_CHARGE[ENTRY_ID] >= 186 {
+				if (cat1 & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_ANY) != 0 || VariableModule::get_int((boma) as *mut _, FIGHTER_MIIFIGHTER_INSTANCE_WORK_ID_INT_ESK_CHARGE) >= 186 {
 					EffectModule::kill_kind(boma, smash::phx::Hash40::new_raw(0x198abfaca9), false, false);
 					macros::STOP_SE(fighter, smash::phx::Hash40::new("se_miifighter_special_c3_n01"));
 					if StatusModule::situation_kind(boma) == *SITUATION_KIND_GROUND {
@@ -229,8 +229,8 @@ unsafe extern "C" fn brawler_frame(fighter: &mut L2CFighterCommon) {
 					MotionModule::change_motion(boma, smash::phx::Hash40::new("special_air_n3"), 16.0, 1.0, false, 0.0, false, false);
 				};
 			};
-			if ESK_CHARGE[ENTRY_ID] == 185 {
-				ESK_CHARGE[ENTRY_ID] += 1;
+			if VariableModule::get_int((boma) as *mut _, FIGHTER_MIIFIGHTER_INSTANCE_WORK_ID_INT_ESK_CHARGE) == 185 {
+				VariableModule::inc_int((boma) as *mut _, FIGHTER_MIIFIGHTER_INSTANCE_WORK_ID_INT_ESK_CHARGE);
 				smash::app::FighterUtil::flash_eye_info(boma);
 				EffectModule::req_follow(boma, smash::phx::Hash40::new("sys_smash_flash"), smash::phx::Hash40::new("footl"), &ESK, &ESK, 0.5, true, 0, 0, 0, 0, 0, true, true) as u32;
 				if StatusModule::situation_kind(boma) == *SITUATION_KIND_GROUND {
@@ -243,8 +243,8 @@ unsafe extern "C" fn brawler_frame(fighter: &mut L2CFighterCommon) {
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL, true);
 				};
 			};
-			if ESK_CHARGE[ENTRY_ID] < 187 {
-				ESK_CHARGE[ENTRY_ID] += 1;
+			if VariableModule::get_int((boma) as *mut _, FIGHTER_MIIFIGHTER_INSTANCE_WORK_ID_INT_ESK_CHARGE) < 187 {
+				VariableModule::inc_int((boma) as *mut _, FIGHTER_MIIFIGHTER_INSTANCE_WORK_ID_INT_ESK_CHARGE);
 			};
 		};
     }

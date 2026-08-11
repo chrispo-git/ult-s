@@ -5,14 +5,14 @@ use smash::lib::lua_const::*;
 use smash::hash40;
 use crate::util::*;
 
-static mut HOLD : [i32; 8] = [0; 8];
-static mut IS_HOLD : [bool; 8] = [false; 8];
-static mut END : [bool; 8] = [false; 8];
+static FIGHTER_SAMUSD_INSTANCE_WORK_ID_INT_HOLD : i32 = 0;
+static FIGHTER_SAMUSD_INSTANCE_WORK_ID_FLAG_IS_HOLD : i32 = 1;
+static FIGHTER_SAMUSD_INSTANCE_WORK_ID_FLAG_END : i32 = 2;
 static mut HOLD_MAX : i32 = 300;
-static mut COOLDOWN : [i32; 8] = [0; 8];
-static mut IS_ALLOWED : [bool; 8] = [true; 8];
+static FIGHTER_SAMUSD_INSTANCE_WORK_ID_INT_COOLDOWN : i32 = 3;
+static FIGHTER_SAMUSD_INSTANCE_WORK_ID_FLAG_IS_ALLOWED : i32 = 4;
 static mut HOLD_COOLDOWN : i32 = 120;
-static mut UPB_ANGLE : [f32; 8] = [0.0; 8];
+static FIGHTER_SAMUSD_INSTANCE_WORK_ID_FLOAT_UPB_ANGLE : i32 = 5;
 static mut HANDS :  smash::phx::Vector3f =  smash::phx::Vector3f { x: 0.0, y: 0.0, z: 0.0 };
 
 			

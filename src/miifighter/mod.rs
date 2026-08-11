@@ -5,9 +5,9 @@ use crate::util::*;
 use smash::lib::lua_const::*;
 use smash::hash40;
 
-static mut COUNTER_IS : [bool; 8] = [false; 8];
-static mut BAN_DOWNB : [bool; 8] = [false; 8];
-static mut ESK_CHARGE : [i32; 8] = [0; 8];
+static FIGHTER_MIIFIGHTER_INSTANCE_WORK_ID_FLAG_COUNTER_IS : i32 = 0;
+static FIGHTER_MIIFIGHTER_INSTANCE_WORK_ID_FLAG_BAN_DOWNB : i32 = 1;
+static FIGHTER_MIIFIGHTER_INSTANCE_WORK_ID_INT_ESK_CHARGE : i32 = 2;
 static mut ESK :  smash::phx::Vector3f =  smash::phx::Vector3f { x: 0.0, y: 0.0, z: 0.0 };
 
 
