@@ -8,10 +8,10 @@ use smash::hash40;
 
 static mut max_meter : i32 = 1;
 static mut PPP: i32 = 3;
-static mut RYU_SUPER : [i32; 8] = [0; 8];
-static mut HAS_ADDED : [bool; 8] = [false; 8];
-static mut RYU_FX_TIMER : [i32; 8] = [0; 8];
-static mut IS_SUPER : [bool; 8] = [false; 8];
+static FIGHTER_RYU_INSTANCE_WORK_ID_INT_RYU_SUPER : i32 = 0;
+static FIGHTER_RYU_INSTANCE_WORK_ID_FLAG_HAS_ADDED : i32 = 1;
+static FIGHTER_RYU_INSTANCE_WORK_ID_INT_RYU_FX_TIMER : i32 = 2;
+static FIGHTER_RYU_INSTANCE_WORK_ID_FLAG_IS_SUPER : i32 = 3;
 static mut HANDS :  smash::phx::Vector3f =  smash::phx::Vector3f { x: 0.0, y: 0.0, z: 0.0 };
 static mut FEET :  smash::phx::Vector3f =  smash::phx::Vector3f { x: 1.0, y: 0.0, z: 0.0 };
 			

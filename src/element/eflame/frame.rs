@@ -32,7 +32,7 @@ unsafe extern "C" fn pyra_frame(fighter: &mut L2CFighterCommon) {
 			let frame = MotionModule::frame(boma);
 			let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 			if ![*FIGHTER_STATUS_KIND_SPECIAL_LW, *FIGHTER_ELIGHT_STATUS_KIND_SPECIAL_LW_OUT, *FIGHTER_ELIGHT_STATUS_KIND_SPECIAL_LW_STANDBY, *FIGHTER_EFLAME_STATUS_KIND_SPECIAL_LW_OUT, *FIGHTER_EFLAME_STATUS_KIND_SPECIAL_LW_STANDBY].contains(&status_kind) || smash::app::sv_information::is_ready_go() == false{
-				FAST_SWITCH[ENTRY_ID] = false;
+				VariableModule::set_flag((boma) as *mut _, false, FIGHTER_ELEMENT_INSTANCE_WORK_ID_FLAG_FAST_SWITCH);
 			};
 			if status_kind == *FIGHTER_STATUS_KIND_THROW {
 				let mut can_do = false;
@@ -52,10 +52,10 @@ unsafe extern "C" fn pyra_frame(fighter: &mut L2CFighterCommon) {
 				}
 				if can_do == true {
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_SPECIAL_LW, true);
-					FAST_SWITCH[ENTRY_ID] = true;
+					VariableModule::set_flag((boma) as *mut _, true, FIGHTER_ELEMENT_INSTANCE_WORK_ID_FLAG_FAST_SWITCH);
 				};
 			};
-			if FAST_SWITCH[ENTRY_ID] == true && [*FIGHTER_STATUS_KIND_SPECIAL_LW, *FIGHTER_ELIGHT_STATUS_KIND_SPECIAL_LW_OUT, *FIGHTER_ELIGHT_STATUS_KIND_SPECIAL_LW_STANDBY, *FIGHTER_EFLAME_STATUS_KIND_SPECIAL_LW_OUT, *FIGHTER_EFLAME_STATUS_KIND_SPECIAL_LW_STANDBY].contains(&status_kind) {
+			if VariableModule::is_flag((boma) as *mut _, FIGHTER_ELEMENT_INSTANCE_WORK_ID_FLAG_FAST_SWITCH) == true && [*FIGHTER_STATUS_KIND_SPECIAL_LW, *FIGHTER_ELIGHT_STATUS_KIND_SPECIAL_LW_OUT, *FIGHTER_ELIGHT_STATUS_KIND_SPECIAL_LW_STANDBY, *FIGHTER_EFLAME_STATUS_KIND_SPECIAL_LW_OUT, *FIGHTER_EFLAME_STATUS_KIND_SPECIAL_LW_STANDBY].contains(&status_kind) {
 				if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_LW {
 					MotionModule::set_rate(boma, 2.75);
 				} else {

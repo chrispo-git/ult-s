@@ -37,7 +37,7 @@ unsafe extern "C" fn master_frame(fighter: &mut L2CFighterCommon) {
 				ArticleModule::remove_exist(boma, *FIGHTER_MASTER_GENERATE_ARTICLE_SPEAR,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
 			};
 			if smash::app::sv_information::is_ready_go() == false {
-				IS_THUNDER[ENTRY_ID] = false;
+				VariableModule::set_flag((boma) as *mut _, false, FIGHTER_MASTER_INSTANCE_WORK_ID_FLAG_IS_THUNDER);
 			};
 			if [*FIGHTER_MASTER_STATUS_KIND_SPECIAL_N_HOLD, *FIGHTER_STATUS_KIND_SPECIAL_N].contains(&status_kind){
 				StatusModule::change_status_request_from_script(boma, *FIGHTER_MASTER_STATUS_KIND_SPECIAL_N_SHOOT, true);
@@ -76,7 +76,7 @@ unsafe extern "C" fn master_kirby_frame(fighter: &mut L2CFighterCommon) {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 		let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 		if smash::app::sv_information::is_ready_go() == false {
-			IS_THUNDER[ENTRY_ID] = false;
+			VariableModule::set_flag((boma) as *mut _, false, FIGHTER_MASTER_INSTANCE_WORK_ID_FLAG_IS_THUNDER);
 		};
 	}
 }

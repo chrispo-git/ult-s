@@ -7,9 +7,9 @@ use smash::hash40;
 
 //Float Stuff
 static mut FLOAT : [i32; 8] = [0; 8]; //Logs Float Time
-static mut START_FLOAT : [bool; 8] = [false; 8];
-static mut JUMPSQUAT_FLOAT : [bool; 8] = [false; 8];
-static mut CHECK_FLOAT : [i32; 8] = [0; 8];
+static FIGHTER_KOOPAJR_INSTANCE_WORK_ID_FLAG_START_FLOAT : i32 = 0;
+static FIGHTER_KOOPAJR_INSTANCE_WORK_ID_FLAG_JUMPSQUAT_FLOAT : i32 = 1;
+static FIGHTER_KOOPAJR_INSTANCE_WORK_ID_INT_CHECK_FLOAT : i32 = 2;
 static mut CHECK_FLOAT_MAX : i32 = 15; //Frames where jump needs to be held to start floating
 static mut X : [f32; 8] = [0.0; 8]; //Logs speed
 static mut Y : [f32; 8] = [0.0; 8]; //Logs speed

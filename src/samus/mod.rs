@@ -19,7 +19,7 @@ mod frame;
 mod acmd;
 use crate::util::*;
 
-static mut NO_WAVEDASH_TIMER : [i32; 8] = [0; 8];
+static FIGHTER_SAMUS_INSTANCE_WORK_ID_INT_NO_WAVEDASH_TIMER : i32 = 0;
 static NO_WAVEDASH_MAX : i32 = 8;
 
 

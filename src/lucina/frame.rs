@@ -41,10 +41,10 @@ unsafe extern "C" fn lucina(fighter : &mut L2CFighterCommon) {
 			let mask_is_exist = ArticleModule::is_exist(boma, *FIGHTER_LUCINA_GENERATE_ARTICLE_MASK);
 			if fighter_kind == *FIGHTER_KIND_LUCINA {
 				if [*FIGHTER_STATUS_KIND_ENTRY, *FIGHTER_STATUS_KIND_WIN, *FIGHTER_STATUS_KIND_LOSE].contains(&status_kind) || (smash::app::sv_information::is_ready_go() == false && !smash::app::smashball::is_training_mode()) {
-					LUCINA_STANCE[ENTRY_ID] = 0;
-					TIMER[ENTRY_ID] = 5;
+					VariableModule::set_int((boma) as *mut _, 0, FIGHTER_LUCINA_INSTANCE_WORK_ID_INT_LUCINA_STANCE);
+					VariableModule::set_int((boma) as *mut _, 5, FIGHTER_LUCINA_INSTANCE_WORK_ID_INT_TIMER);
 				};
-				TIMER[ENTRY_ID] += 1;
+				VariableModule::inc_int((boma) as *mut _, FIGHTER_LUCINA_INSTANCE_WORK_ID_INT_TIMER);
 				if [
 					*FIGHTER_STATUS_KIND_ATTACK, *FIGHTER_STATUS_KIND_ATTACK_DASH, *FIGHTER_STATUS_KIND_SPECIAL_HI, *FIGHTER_STATUS_KIND_ATTACK_S3, 
 					*FIGHTER_STATUS_KIND_ATTACK_S3, *FIGHTER_STATUS_KIND_ATTACK_HI3,
@@ -53,17 +53,17 @@ unsafe extern "C" fn lucina(fighter : &mut L2CFighterCommon) {
 					*FIGHTER_STATUS_KIND_ATTACK_S4_HOLD, *FIGHTER_STATUS_KIND_ATTACK_LW4_HOLD, *FIGHTER_STATUS_KIND_ATTACK_HI4_HOLD,
 					*FIGHTER_MARTH_STATUS_KIND_SPECIAL_S2, *FIGHTER_MARTH_STATUS_KIND_SPECIAL_S3, *FIGHTER_MARTH_STATUS_KIND_SPECIAL_S4,
 					*FIGHTER_STATUS_KIND_CLIFF_ATTACK, *FIGHTER_STATUS_KIND_DOWN_STAND_ATTACK, *FIGHTER_STATUS_KIND_ENTRY, *FIGHTER_STATUS_KIND_WIN, *FIGHTER_STATUS_KIND_LOSE, *FIGHTER_STATUS_KIND_APPEAL
-				].contains(&status_kind) || (status_kind == *FIGHTER_STATUS_KIND_ATTACK_LW3 && LUCINA_STANCE[ENTRY_ID] == 0) || (status_kind == *FIGHTER_STATUS_KIND_SPECIAL_S && LUCINA_STANCE[ENTRY_ID] == 0){
-						TIMER[ENTRY_ID] = 5;
+				].contains(&status_kind) || (status_kind == *FIGHTER_STATUS_KIND_ATTACK_LW3 && VariableModule::get_int((boma) as *mut _, FIGHTER_LUCINA_INSTANCE_WORK_ID_INT_LUCINA_STANCE) == 0) || (status_kind == *FIGHTER_STATUS_KIND_SPECIAL_S && VariableModule::get_int((boma) as *mut _, FIGHTER_LUCINA_INSTANCE_WORK_ID_INT_LUCINA_STANCE) == 0){
+						VariableModule::set_int((boma) as *mut _, 5, FIGHTER_LUCINA_INSTANCE_WORK_ID_INT_TIMER);
 				};
 				if status_kind == *FIGHTER_STATUS_KIND_ATTACK_AIR {
-					if LUCINA_STANCE[ENTRY_ID] == 0 {
+					if VariableModule::get_int((boma) as *mut _, FIGHTER_LUCINA_INSTANCE_WORK_ID_INT_LUCINA_STANCE) == 0 {
 						if [hash40("attack_air_n"), hash40("attack_air_b"), hash40("attack_air_f"), hash40("attack_air_hi"), hash40("attack_air_lw")].contains(&motion_kind) {
-							TIMER[ENTRY_ID] = 5;
+							VariableModule::set_int((boma) as *mut _, 5, FIGHTER_LUCINA_INSTANCE_WORK_ID_INT_TIMER);
 						}
 					} else {
 						if [hash40("attack_air_n"), hash40("attack_air_lw")].contains(&motion_kind) {
-							TIMER[ENTRY_ID] = 5;
+							VariableModule::set_int((boma) as *mut _, 5, FIGHTER_LUCINA_INSTANCE_WORK_ID_INT_TIMER);
 						}
 					}
 				}
@@ -77,8 +77,8 @@ unsafe extern "C" fn lucina(fighter : &mut L2CFighterCommon) {
 					macros::EFFECT_OFF_KIND(fighter, Hash40::new("sys_damage_fire"), false, true);
 					macros::EFFECT_OFF_KIND(fighter, Hash40::new("sys_damage_elec"), false, true);
 				};
-				if TIMER[ENTRY_ID] >= 6 && smash::app::sv_information::is_ready_go() && ![*FIGHTER_STATUS_KIND_WIN, *FIGHTER_STATUS_KIND_LOSE].contains(&status_kind){
-						TIMER[ENTRY_ID] = 0;
+				if VariableModule::get_int((boma) as *mut _, FIGHTER_LUCINA_INSTANCE_WORK_ID_INT_TIMER) >= 6 && smash::app::sv_information::is_ready_go() && ![*FIGHTER_STATUS_KIND_WIN, *FIGHTER_STATUS_KIND_LOSE].contains(&status_kind){
+						VariableModule::set_int((boma) as *mut _, 0, FIGHTER_LUCINA_INSTANCE_WORK_ID_INT_TIMER);
 						let elec1: u32 = EffectModule::req_follow(boma, smash::phx::Hash40::new("sys_damage_elec"), smash::phx::Hash40::new("sword1"), &S1, &S1, 0.075, true, 0, 0, 0, 0, 0, true, true) as u32;
 						let elec2: u32 = EffectModule::req_follow(boma, smash::phx::Hash40::new("sys_damage_elec"), smash::phx::Hash40::new("sword1"), &S2, &S2, 0.15, true, 0, 0, 0, 0, 0, true, true) as u32;
 						let elec3: u32 = EffectModule::req_follow(boma, smash::phx::Hash40::new("sys_damage_elec"), smash::phx::Hash40::new("sword1"), &S3, &S3, 0.15, true, 0, 0, 0, 0, 0, true, true) as u32;
@@ -91,7 +91,7 @@ unsafe extern "C" fn lucina(fighter : &mut L2CFighterCommon) {
 						EffectModule::set_rgb(boma, fire1, 0.0, 0.5, 6.0);
 						EffectModule::set_rgb(boma, fire2, 0.0, 0.5, 6.0);
 						EffectModule::set_rgb(boma, fire3, 0.0, 0.5, 6.0);
-						if LUCINA_STANCE[ENTRY_ID] == 1 {
+						if VariableModule::get_int((boma) as *mut _, FIGHTER_LUCINA_INSTANCE_WORK_ID_INT_LUCINA_STANCE) == 1 {
 							EffectModule::set_visible(boma, elec1, true);
 							EffectModule::set_visible(boma, elec2, true);
 							EffectModule::set_visible(boma, elec3, true);
@@ -100,7 +100,7 @@ unsafe extern "C" fn lucina(fighter : &mut L2CFighterCommon) {
 							EffectModule::set_visible(boma, elec2, false);
 							EffectModule::set_visible(boma, elec3, false);
 						};
-						if LUCINA_STANCE[ENTRY_ID] == 0 {
+						if VariableModule::get_int((boma) as *mut _, FIGHTER_LUCINA_INSTANCE_WORK_ID_INT_LUCINA_STANCE) == 0 {
 							EffectModule::set_visible(boma, fire1, true);
 							EffectModule::set_visible(boma, fire2, true);
 							EffectModule::set_visible(boma, fire3, true);
@@ -123,10 +123,10 @@ unsafe extern "C" fn lucina(fighter : &mut L2CFighterCommon) {
 						crate::transition_set!(ENTRY_ID, can_downb);
 					}
 					if MotionModule::frame(boma) >= 10.0 && MotionModule::frame(boma) < 11.0 {
-						if LUCINA_STANCE[ENTRY_ID] == 0 {
-							LUCINA_STANCE[ENTRY_ID] = 1;
+						if VariableModule::get_int((boma) as *mut _, FIGHTER_LUCINA_INSTANCE_WORK_ID_INT_LUCINA_STANCE) == 0 {
+							VariableModule::set_int((boma) as *mut _, 1, FIGHTER_LUCINA_INSTANCE_WORK_ID_INT_LUCINA_STANCE);
 						} else {
-							LUCINA_STANCE[ENTRY_ID] = 0;
+							VariableModule::set_int((boma) as *mut _, 0, FIGHTER_LUCINA_INSTANCE_WORK_ID_INT_LUCINA_STANCE);
 						};
 					};
 					if MotionModule::frame(boma) >= 20.0 {
@@ -142,15 +142,15 @@ unsafe extern "C" fn lucina(fighter : &mut L2CFighterCommon) {
 				};
 
 				if ![*FIGHTER_STATUS_KIND_SPECIAL_HI, *FIGHTER_STATUS_KIND_LANDING_FALL_SPECIAL, *FIGHTER_STATUS_KIND_FALL_SPECIAL].contains(&status_kind) {
-					UPB_FALL[ENTRY_ID] = false;
+					VariableModule::set_flag((boma) as *mut _, false, FIGHTER_LUCINA_INSTANCE_WORK_ID_FLAG_UPB_FALL);
 				};
 
 				//Stance Specific Shit
-				if LUCINA_STANCE[ENTRY_ID] == 0 {
+				if VariableModule::get_int((boma) as *mut _, FIGHTER_LUCINA_INSTANCE_WORK_ID_INT_LUCINA_STANCE) == 0 {
 					
-					if BAN_SIDEB[ENTRY_ID] == true && StatusModule::situation_kind(boma) != *SITUATION_KIND_AIR{
+					if VariableModule::is_flag((boma) as *mut _, FIGHTER_LUCINA_INSTANCE_WORK_ID_FLAG_BAN_SIDEB) == true && StatusModule::situation_kind(boma) != *SITUATION_KIND_AIR{
 						crate::transition_reset!(ENTRY_ID, can_sideb);
-						BAN_SIDEB[ENTRY_ID] = false;
+						VariableModule::set_flag((boma) as *mut _, false, FIGHTER_LUCINA_INSTANCE_WORK_ID_FLAG_BAN_SIDEB);
 					};
 					if [*FIGHTER_STATUS_KIND_SPECIAL_HI].contains(&status_kind) && MotionModule::frame(boma) <= 5.0 {
 						HitModule::set_whole(boma, smash::app::HitStatus(*HIT_STATUS_XLU), 0);
@@ -361,16 +361,16 @@ unsafe extern "C" fn lucina(fighter : &mut L2CFighterCommon) {
 						};
 					};
 					if  StatusModule::situation_kind(boma) != *SITUATION_KIND_AIR || (*FIGHTER_STATUS_KIND_DAMAGE..*FIGHTER_STATUS_KIND_DAMAGE_FALL).contains(&status_kind){
-						BAN_SIDEB[ENTRY_ID] = false;
+						VariableModule::set_flag((boma) as *mut _, false, FIGHTER_LUCINA_INSTANCE_WORK_ID_FLAG_BAN_SIDEB);
 						crate::transition_reset!(ENTRY_ID, can_downb);
 					};
-					if BAN_SIDEB[ENTRY_ID] == true {
+					if VariableModule::is_flag((boma) as *mut _, FIGHTER_LUCINA_INSTANCE_WORK_ID_FLAG_BAN_SIDEB) == true {
 							crate::transition_set!(ENTRY_ID, can_sideb);
 					} else {
 							crate::transition_reset!(ENTRY_ID, can_sideb);
 					};
 					if [*FIGHTER_STATUS_KIND_SPECIAL_S].contains(&status_kind) {
-						BAN_SIDEB[ENTRY_ID] = true;
+						VariableModule::set_flag((boma) as *mut _, true, FIGHTER_LUCINA_INSTANCE_WORK_ID_FLAG_BAN_SIDEB);
 						//StatusModule::change_status_request_from_script(boma, *FIGHTER_MARTH_STATUS_KIND_SPECIAL_S3, true);
 						if StatusModule::is_situation_changed(boma) || (StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR && ray_check_pos(boma, 0.0, -3.0, true) == 1 && KineticModule::get_kinetic_type(boma) == *FIGHTER_KINETIC_TYPE_FALL) {
 							StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL_SPECIAL, true);
@@ -425,13 +425,13 @@ unsafe extern "C" fn lucina(fighter : &mut L2CFighterCommon) {
 						if MotionModule::frame(boma) >= 0.0 {
 							macros::SET_SPEED_EX(fighter,0.0, -6.0, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
 						};
-						UPB_FALL[ENTRY_ID] = true;
+						VariableModule::set_flag((boma) as *mut _, true, FIGHTER_LUCINA_INSTANCE_WORK_ID_FLAG_UPB_FALL);
 						GroundModule::clear_pass_floor(boma);
 					};
-					if UPB_FALL[ENTRY_ID] == true && (status_kind == *FIGHTER_STATUS_KIND_LANDING_FALL_SPECIAL || [hash40("special_hi"),hash40("special_air_hi")].contains(&MotionModule::motion_kind(boma))) {
+					if VariableModule::is_flag((boma) as *mut _, FIGHTER_LUCINA_INSTANCE_WORK_ID_FLAG_UPB_FALL) == true && (status_kind == *FIGHTER_STATUS_KIND_LANDING_FALL_SPECIAL || [hash40("special_hi"),hash40("special_air_hi")].contains(&MotionModule::motion_kind(boma))) {
 						MotionModule::change_motion(boma, smash::phx::Hash40::new("special_hi_3"), 0.0, 1.0, false, 0.0, false, false);
 						StatusModule::set_situation_kind(boma, smash::app::SituationKind(*SITUATION_KIND_GROUND), true);
-						UPB_FALL[ENTRY_ID] = false;
+						VariableModule::set_flag((boma) as *mut _, false, FIGHTER_LUCINA_INSTANCE_WORK_ID_FLAG_UPB_FALL);
 					};
 					if [hash40("special_hi_3")].contains(&MotionModule::motion_kind(boma)) {
 						if MotionModule::frame(boma) >= 52.0 {

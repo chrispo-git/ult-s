@@ -75,7 +75,7 @@ unsafe extern "C" fn ike_dair(fighter: &mut L2CAgentBase) {
 		if macros::is_excute(fighter) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
-		if IKE_INSTALL[entry_id] > 0 {
+		if VariableModule::get_int((fighter.module_accessor) as *mut _, FIGHTER_IKE_INSTANCE_WORK_ID_INT_IKE_INSTALL) > 0 {
 		frame(fighter.lua_state_agent, 25.0);
 		if macros::is_excute(fighter) {
 		   WorkModule::off_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING);
@@ -91,7 +91,7 @@ unsafe extern "C" fn ike_bair_eff(fighter: &mut L2CAgentBase) {
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 		frame(fighter.lua_state_agent, 6.0);
 		if macros::is_excute(fighter) {
-			if IKE_INSTALL[ENTRY_ID] > 0 {
+			if VariableModule::get_int((fighter.module_accessor) as *mut _, FIGHTER_IKE_INSTANCE_WORK_ID_INT_IKE_INSTALL) > 0 {
 				macros::AFTER_IMAGE4_ON_arg29(fighter, Hash40::new("tex_ike_sword5"), Hash40::new("tex_ike_sword2"), 4, Hash40::new("sword"), 0.0, 1.0, 0.0, Hash40::new("sword"), -0.0, 16.2, 0.0, true, Hash40::new("ike_sword2"), Hash40::new("sword"), 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0, *EFFECT_AXIS_X, 0, *TRAIL_BLEND_ALPHA, 101, *TRAIL_CULL_NONE, 1.4, 0.1);
 			} else {
 				macros::AFTER_IMAGE4_ON_arg29(fighter, Hash40::new("tex_ike_sword6"), Hash40::new("tex_ike_sword2"), 4, Hash40::new("sword"), 0.0, 1.0, 0.0, Hash40::new("sword"), -0.0, 16.2, 0.0, true, Hash40::new("ike_sword"), Hash40::new("sword"), 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0, *EFFECT_AXIS_X, 0, *TRAIL_BLEND_ALPHA, 101, *TRAIL_CULL_NONE, 1.4, 0.1);
@@ -107,7 +107,7 @@ unsafe extern "C" fn ike_fair_eff(fighter: &mut L2CAgentBase) {
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 		frame(fighter.lua_state_agent, 10.0);
 		if macros::is_excute(fighter) {
-			if IKE_INSTALL[ENTRY_ID] > 0 {
+			if VariableModule::get_int((fighter.module_accessor) as *mut _, FIGHTER_IKE_INSTANCE_WORK_ID_INT_IKE_INSTALL) > 0 {
 				macros::AFTER_IMAGE4_ON_arg29(fighter, Hash40::new("tex_ike_sword5"), Hash40::new("tex_ike_sword2"), 4, Hash40::new("sword"), 0.0, 1.0, 0.0, Hash40::new("sword"), -0.0, 16.2, 0.0, true, Hash40::new("ike_sword2"), Hash40::new("sword"), 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0, *EFFECT_AXIS_X, 0, *TRAIL_BLEND_ALPHA, 101, *TRAIL_CULL_NONE, 1.4, 0.1);
 			} else {
 				macros::AFTER_IMAGE4_ON_arg29(fighter, Hash40::new("tex_ike_sword6"), Hash40::new("tex_ike_sword2"), 4, Hash40::new("sword"), 0.0, 1.0, 0.0, Hash40::new("sword"), -0.0, 16.2, 0.0, true, Hash40::new("ike_sword"), Hash40::new("sword"), 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0, *EFFECT_AXIS_X, 0, *TRAIL_BLEND_ALPHA, 101, *TRAIL_CULL_NONE, 1.4, 0.1);
@@ -123,7 +123,7 @@ unsafe extern "C" fn ike_uair_eff(fighter: &mut L2CAgentBase) {
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 		frame(fighter.lua_state_agent, 12.0);
 		if macros::is_excute(fighter) {
-			if IKE_INSTALL[ENTRY_ID] > 0 {
+			if VariableModule::get_int((fighter.module_accessor) as *mut _, FIGHTER_IKE_INSTANCE_WORK_ID_INT_IKE_INSTALL) > 0 {
 				macros::AFTER_IMAGE4_ON_arg29(fighter, Hash40::new("tex_ike_sword5"), Hash40::new("tex_ike_sword2"), 4, Hash40::new("sword"), 0.0, 1.0, 0.0, Hash40::new("sword"), -0.0, 16.2, 0.0, true, Hash40::new("ike_sword2"), Hash40::new("sword"), 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0, *EFFECT_AXIS_X, 0, *TRAIL_BLEND_ALPHA, 101, *TRAIL_CULL_NONE, 1.4, 0.1);
 			} else {
 				macros::AFTER_IMAGE4_ON_arg29(fighter, Hash40::new("tex_ike_sword6"), Hash40::new("tex_ike_sword2"), 4, Hash40::new("sword"), 0.0, 1.0, 0.0, Hash40::new("sword"), -0.0, 16.2, 0.0, true, Hash40::new("ike_sword"), Hash40::new("sword"), 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0, *EFFECT_AXIS_X, 0, *TRAIL_BLEND_ALPHA, 101, *TRAIL_CULL_NONE, 1.4, 0.1);
@@ -143,7 +143,7 @@ unsafe extern "C" fn ike_dair_eff(fighter: &mut L2CAgentBase) {
 		};
 		frame(fighter.lua_state_agent, 14.0);
 		if macros::is_excute(fighter) {
-			if IKE_INSTALL[ENTRY_ID] > 0 {
+			if VariableModule::get_int((fighter.module_accessor) as *mut _, FIGHTER_IKE_INSTANCE_WORK_ID_INT_IKE_INSTALL) > 0 {
 				macros::AFTER_IMAGE4_ON_arg29(fighter, Hash40::new("tex_ike_sword5"), Hash40::new("tex_ike_sword2"), 4, Hash40::new("sword"), 0.0, 1.0, 0.0, Hash40::new("sword"), -0.0, 16.2, 0.0, true, Hash40::new("ike_sword2"), Hash40::new("sword"), 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0, *EFFECT_AXIS_X, 0, *TRAIL_BLEND_ALPHA, 101, *TRAIL_CULL_NONE, 1.4, 0.1);
 			} else {
 				macros::AFTER_IMAGE4_ON_arg29(fighter, Hash40::new("tex_ike_sword6"), Hash40::new("tex_ike_sword2"), 4, Hash40::new("sword"), 0.0, 1.0, 0.0, Hash40::new("sword"), -0.0, 16.2, 0.0, true, Hash40::new("ike_sword"), Hash40::new("sword"), 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0, *EFFECT_AXIS_X, 0, *TRAIL_BLEND_ALPHA, 101, *TRAIL_CULL_NONE, 1.4, 0.1);
@@ -163,7 +163,7 @@ unsafe extern "C" fn ike_nair_eff(fighter: &mut L2CAgentBase) {
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 		frame(fighter.lua_state_agent, 9.0);
 		if macros::is_excute(fighter) {
-			if IKE_INSTALL[ENTRY_ID] > 0 {
+			if VariableModule::get_int((fighter.module_accessor) as *mut _, FIGHTER_IKE_INSTANCE_WORK_ID_INT_IKE_INSTALL) > 0 {
 				macros::AFTER_IMAGE4_ON_arg29(fighter, Hash40::new("tex_ike_sword5"), Hash40::new("tex_u"), 4, Hash40::new("sword"), 0.0, 1.0, 0.0, Hash40::new("sword"), -0.0, 16.2, 0.0, true, Hash40::new("ike_sword2"), Hash40::new("sword"), 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0, *EFFECT_AXIS_X, 0, *TRAIL_BLEND_ALPHA, 101, *TRAIL_CULL_NONE, 1.4, 0.1);
 			} else {
 				macros::AFTER_IMAGE4_ON_arg29(fighter, Hash40::new("tex_ike_sword6"), Hash40::new("tex_ike_sword2"), 4, Hash40::new("sword"), 0.0, 1.0, 0.0, Hash40::new("sword"), -0.0, 16.2, 0.0, true, Hash40::new("ike_sword"), Hash40::new("sword"), 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0, *EFFECT_AXIS_X, 0, *TRAIL_BLEND_ALPHA, 101, *TRAIL_CULL_NONE, 1.4, 0.1);

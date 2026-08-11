@@ -74,7 +74,7 @@ unsafe extern "C" fn dk_sideb(fighter: &mut L2CAgentBase) {
     frame(fighter.lua_state_agent, 4.0);
     if macros::is_excute(fighter) {
         ItemModule::have_item(fighter.module_accessor, smash::app::ItemKind(*ITEM_KIND_BARREL), 0, 0, false, false);
-        IS_DK_START_ITEM_CHUCK[ENTRY_ID] = true;
+        VariableModule::set_flag((boma) as *mut _, true, FIGHTER_DONKEY_INSTANCE_WORK_ID_FLAG_IS_DK_START_ITEM_CHUCK);
     }
     frame(fighter.lua_state_agent, 33.0);
     macros::FT_MOTION_RATE(fighter, 1.0);
@@ -83,7 +83,7 @@ unsafe extern "C" fn dk_sideb(fighter: &mut L2CAgentBase) {
     } 
     frame(fighter.lua_state_agent, 35.0);
     if macros::is_excute(fighter) {
-        IS_DK_START_ITEM_CHUCK[ENTRY_ID] = false;
+        VariableModule::set_flag((boma) as *mut _, false, FIGHTER_DONKEY_INSTANCE_WORK_ID_FLAG_IS_DK_START_ITEM_CHUCK);
     }
 }
 unsafe extern "C" fn dk_upb(fighter: &mut L2CAgentBase) {

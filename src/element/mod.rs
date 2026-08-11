@@ -2,7 +2,7 @@
 mod elight;
 mod eflame;
 
-static mut FAST_SWITCH : [bool; 8] = [false; 8];
+static FIGHTER_ELEMENT_INSTANCE_WORK_ID_FLAG_FAST_SWITCH : i32 = 0;
 
 pub fn install() {
 	elight::install();

@@ -20,20 +20,20 @@ use crate::util::*;
 
 
 
-static mut LAND_SIDEB_BOUNCE: [i32; 8] = [0; 8];
-static mut BEFORE_SIDEB_BOUNCE: [i32; 8] = [0; 8];
+static FIGHTER_TOAD_INSTANCE_WORK_ID_INT_LAND_SIDEB_BOUNCE : i32 = 0;
+static FIGHTER_TOAD_INSTANCE_WORK_ID_INT_BEFORE_SIDEB_BOUNCE : i32 = 1;
 static mut IS_POP_MODE: [bool; 8] = [false; 8];
-static mut START_POP: [bool; 8] = [false; 8];
-static mut POP_FALLBACK: [i32; 8] = [0; 8];
-static mut TO_FALL: [bool; 8] = [false; 8];
-static mut HAS_DOWNB: [bool; 8] = [false; 8];
-static mut HAS_DEADED: [bool; 8] = [false; 8];
-static mut SIDEB_RESET: [bool; 8] = [false; 8];
-static mut SIDEB_END: [bool; 8] = [false; 8];
-static mut SIDEB_LENGTH: [i32; 8] = [0; 8];
-static mut SIDEB_DIR : [f32; 8] = [1.0; 8];
-static mut BIG_TIMER: [i32; 8] = [0; 8];
-static mut DOWNB_SHOULD_BOUNCE: [bool; 8] = [false; 8];
+static FIGHTER_TOAD_INSTANCE_WORK_ID_FLAG_START_POP : i32 = 2;
+static FIGHTER_TOAD_INSTANCE_WORK_ID_INT_POP_FALLBACK : i32 = 3;
+static FIGHTER_TOAD_INSTANCE_WORK_ID_FLAG_TO_FALL : i32 = 4;
+static FIGHTER_TOAD_INSTANCE_WORK_ID_FLAG_HAS_DOWNB : i32 = 5;
+static FIGHTER_TOAD_INSTANCE_WORK_ID_FLAG_HAS_DEADED : i32 = 6;
+static FIGHTER_TOAD_INSTANCE_WORK_ID_FLAG_SIDEB_RESET : i32 = 7;
+static FIGHTER_TOAD_INSTANCE_WORK_ID_FLAG_SIDEB_END : i32 = 8;
+static FIGHTER_TOAD_INSTANCE_WORK_ID_INT_SIDEB_LENGTH : i32 = 9;
+static FIGHTER_TOAD_INSTANCE_WORK_ID_FLOAT_SIDEB_DIR : i32 = 10;
+static FIGHTER_TOAD_INSTANCE_WORK_ID_INT_BIG_TIMER : i32 = 11;
+static FIGHTER_TOAD_INSTANCE_WORK_ID_FLAG_DOWNB_SHOULD_BOUNCE : i32 = 12;
 pub const SIDEB_LENGTH_MAX : i32 = 53;
 pub const BIG_TIMER_MAX : i32 = 800;
 

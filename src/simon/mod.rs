@@ -5,7 +5,7 @@ use crate::util::*;
 use smash::lib::lua_const::*;
 use smash::hash40;
 
-static mut STATIC_MUT : [i32; 8] = [6; 8];
+static FIGHTER_SIMON_INSTANCE_WORK_ID_INT_STATIC_MUT : i32 = 0;
 			
 
 

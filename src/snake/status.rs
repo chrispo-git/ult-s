@@ -50,9 +50,9 @@ unsafe extern "C" fn snake_side_special_status_main(fighter: &mut L2CFighterComm
 #[status_script(agent = "snake", status = FIGHTER_STATUS_KIND_ATTACK_S4, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_END)]
 unsafe fn snake_side_smash_status_end(fighter: &mut L2CFighterCommon) -> L2CValue {
     let entry_id = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-    SNAKE_FLAG_ATTACK_S4_COMBO_ENABLE[entry_id] = false;
-    SNAKE_FLAG_ATTACK_S4_COMBO_IS_BUFFERED[entry_id] = false;
-    SNAKE_INT_ATTACK_S4_COMBO_COUNT[entry_id] = 0;
+    VariableModule::set_flag((fighter.module_accessor) as *mut _, false, FIGHTER_SNAKE_INSTANCE_WORK_ID_FLAG_SNAKE_FLAG_ATTACK_S4_COMBO_ENABLE);
+    VariableModule::set_flag((fighter.module_accessor) as *mut _, false, FIGHTER_SNAKE_INSTANCE_WORK_ID_FLAG_SNAKE_FLAG_ATTACK_S4_COMBO_IS_BUFFERED);
+    VariableModule::set_int((fighter.module_accessor) as *mut _, 0, FIGHTER_SNAKE_INSTANCE_WORK_ID_INT_SNAKE_INT_ATTACK_S4_COMBO_COUNT);
     original!(fighter)
 }*/
 
@@ -93,8 +93,8 @@ unsafe extern "C" fn snake_down_taunt_wait_status_main(fighter: &mut L2CFighterC
     let appeal_wait_frame = WorkModule::get_param_int(fighter.module_accessor, hash40("param_private"), hash40("appeal_wait_frame"));
     WorkModule::set_int(fighter.module_accessor, appeal_wait_frame, *FIGHTER_SNAKE_STATUS_APPEAL_WORK_INT_WAIT_COUNTER);
     let entry_id = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-    SNAKE_FLAG_APPEAL_LW_C4_EXLPODE[entry_id] = false;
-    SNAKE_FLAG_APPEAL_LW_GRENADE_WAIT_COUNT[entry_id] = 0;
+    VariableModule::set_flag((fighter.module_accessor) as *mut _, false, FIGHTER_SNAKE_INSTANCE_WORK_ID_FLAG_SNAKE_FLAG_APPEAL_LW_C4_EXLPODE);
+    VariableModule::set_int((fighter.module_accessor) as *mut _, 0, FIGHTER_SNAKE_INSTANCE_WORK_ID_INT_SNAKE_FLAG_APPEAL_LW_GRENADE_WAIT_COUNT);
     fighter.sub_shift_status_main(L2CValue::Ptr(snake_down_taunt_wait_main_loop as *const () as _))
     // 0.into()
 }
@@ -113,8 +113,8 @@ unsafe extern "C" fn snake_down_taunt_wait_status_end(fighter: &mut L2CFighterCo
 }
 unsafe extern "C" fn snake_down_taunt_end_status_main(fighter: &mut L2CFighterCommon) -> L2CValue {
     let entry_id = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-    if SNAKE_FLAG_APPEAL_LW_C4_EXLPODE[entry_id] {
-        SNAKE_FLAG_APPEAL_LW_C4_EXLPODE[entry_id] = false;
+    if VariableModule::is_flag((fighter.module_accessor) as *mut _, FIGHTER_SNAKE_INSTANCE_WORK_ID_FLAG_SNAKE_FLAG_APPEAL_LW_C4_EXLPODE) {
+        VariableModule::set_flag((fighter.module_accessor) as *mut _, false, FIGHTER_SNAKE_INSTANCE_WORK_ID_FLAG_SNAKE_FLAG_APPEAL_LW_C4_EXLPODE);
         MotionModule::change_motion(fighter.module_accessor, Hash40::new("appeal_end_explode"), 0.0, 1.0, false, 0.0, false, false);
     }else {
         MotionModule::change_motion(fighter.module_accessor, Hash40::new("appeal_end"), 0.0, 1.0, false, 0.0, false, false);

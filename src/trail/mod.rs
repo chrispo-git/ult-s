@@ -6,8 +6,8 @@ use smash::lib::lua_const::*;
 use smash::hash40;
 		
 static mut HANDS :  smash::phx::Vector3f =  smash::phx::Vector3f { x: 0.0, y: 0.0, z: 0.0 };
-static mut HAS_WALLJUMP: [bool; 8] = [false; 8];
-static mut TO_FAIR: [bool; 8] = [false; 8];
+static FIGHTER_TRAIL_INSTANCE_WORK_ID_FLAG_HAS_WALLJUMP : i32 = 0;
+static FIGHTER_TRAIL_INSTANCE_WORK_ID_FLAG_TO_FAIR : i32 = 1;
 			
 
 

@@ -6,7 +6,7 @@ use smash::lib::lua_const::*;
 use smash::hash40;
 
 
-static mut SET_UPB_FREEFALL: [bool; 8] = [false; 8];
+static FIGHTER_TOONLINK_INSTANCE_WORK_ID_FLAG_SET_UPB_FREEFALL : i32 = 0;
 
 pub fn install() {
 	frame::install();

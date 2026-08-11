@@ -5,22 +5,22 @@ use crate::util::*;
 use smash::lib::lua_const::*;
 use smash::hash40;
 
-static mut MAKE_NEW_BOMB : [bool; 8] = [false; 8];
-static mut NEW_BOMB_X : [f32; 8] = [0.0; 8];
-static mut NEW_BOMB_Y : [f32; 8] = [0.0; 8];
-static mut EXPLODE_END_TIMER : [i32; 8] = [0; 8];
-static mut NEUTRALB_CHARGE : [i32; 8] = [0; 8];
+static FIGHTER_BOMBERMAN_INSTANCE_WORK_ID_FLAG_MAKE_NEW_BOMB : i32 = 0;
+static FIGHTER_BOMBERMAN_INSTANCE_WORK_ID_FLOAT_NEW_BOMB_X : i32 = 1;
+static FIGHTER_BOMBERMAN_INSTANCE_WORK_ID_FLOAT_NEW_BOMB_Y : i32 = 2;
+static FIGHTER_BOMBERMAN_INSTANCE_WORK_ID_INT_EXPLODE_END_TIMER : i32 = 3;
+static FIGHTER_BOMBERMAN_INSTANCE_WORK_ID_INT_NEUTRALB_CHARGE : i32 = 4;
 static mut NEUTRALB_MAX : i32 = 120;
 static mut MIN_DISTANCE : f32 = 0.75;
 static mut MAX_DISTANCE : f32 = 1.75;
-static mut NEUTRALB_DIST : [f32; 8] = [1.0; 8];
-static mut BOMB_TO_REMOVE : [bool; 8] = [false; 8];
+static FIGHTER_BOMBERMAN_INSTANCE_WORK_ID_FLOAT_NEUTRALB_DIST : i32 = 5;
+static FIGHTER_BOMBERMAN_INSTANCE_WORK_ID_FLAG_BOMB_TO_REMOVE : i32 = 6;
 static mut SIDEB_CATCH : [bool; 8] = [false; 8];
-static mut FORCE_END : [bool; 8] = [false; 8];
-static mut FALL_COUNT : [i32; 8] = [0; 8];
+static FIGHTER_BOMBERMAN_INSTANCE_WORK_ID_FLAG_FORCE_END : i32 = 7;
+static FIGHTER_BOMBERMAN_INSTANCE_WORK_ID_INT_FALL_COUNT : i32 = 8;
 use std::collections::HashMap;
 
-static mut EXPLODE : [bool; 8] = [false; 8];
+static FIGHTER_BOMBERMAN_INSTANCE_WORK_ID_FLAG_EXPLODE : i32 = 9;
 static mut BOMB :  smash::phx::Vector3f =  smash::phx::Vector3f { x: 0.0, y: 10.5, z: 0.0 };
 
 pub fn install() {

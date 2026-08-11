@@ -5,8 +5,8 @@ use crate::util::*;
 use smash::lib::lua_const::*;
 use smash::hash40;
 			
-static mut ISA_RESHOOT_TIME: [i32; 8] = [0; 8];
-static mut ISA_SHOT_KIND: [i32; 8] = [1; 8];
+static FIGHTER_SHIZUE_INSTANCE_WORK_ID_INT_ISA_RESHOOT_TIME : i32 = 0;
+static FIGHTER_SHIZUE_INSTANCE_WORK_ID_INT_ISA_SHOT_KIND : i32 = 1;
 			
 
 

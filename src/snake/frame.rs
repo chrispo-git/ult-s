@@ -50,18 +50,18 @@ unsafe extern "C" fn snake_frame(fighter: &mut L2CFighterCommon) {
                 }
             }
             if StatusModule::status_kind(fighter.module_accessor) == *FIGHTER_STATUS_KIND_ATTACK_S4 {
-                if SNAKE_FLAG_ATTACK_S4_COMBO_IS_BUFFERED[ENTRY_ID] == false {
+                if VariableModule::is_flag((boma) as *mut _, FIGHTER_SNAKE_INSTANCE_WORK_ID_FLAG_SNAKE_FLAG_ATTACK_S4_COMBO_IS_BUFFERED) == false {
                     if ControlModule::check_button_on_trriger(fighter.module_accessor, *CONTROL_PAD_BUTTON_ATTACK)
                     || ControlModule::check_button_on_trriger(fighter.module_accessor, *CONTROL_PAD_BUTTON_SMASH) {
-                        SNAKE_FLAG_ATTACK_S4_COMBO_IS_BUFFERED[ENTRY_ID] = true;
+                        VariableModule::set_flag((boma) as *mut _, true, FIGHTER_SNAKE_INSTANCE_WORK_ID_FLAG_SNAKE_FLAG_ATTACK_S4_COMBO_IS_BUFFERED);
                     }
                 }
-                if SNAKE_FLAG_ATTACK_S4_COMBO_ENABLE[ENTRY_ID]
-                && SNAKE_FLAG_ATTACK_S4_COMBO_IS_BUFFERED[ENTRY_ID] {
-                    SNAKE_FLAG_ATTACK_S4_COMBO_ENABLE[ENTRY_ID] = false;
-                    SNAKE_FLAG_ATTACK_S4_COMBO_IS_BUFFERED[ENTRY_ID] = false;
-                    if SNAKE_INT_ATTACK_S4_COMBO_COUNT[ENTRY_ID] == 0 {
-                        SNAKE_INT_ATTACK_S4_COMBO_COUNT[ENTRY_ID] = 1;
+                if VariableModule::is_flag((boma) as *mut _, FIGHTER_SNAKE_INSTANCE_WORK_ID_FLAG_SNAKE_FLAG_ATTACK_S4_COMBO_ENABLE)
+                && VariableModule::is_flag((boma) as *mut _, FIGHTER_SNAKE_INSTANCE_WORK_ID_FLAG_SNAKE_FLAG_ATTACK_S4_COMBO_IS_BUFFERED) {
+                    VariableModule::set_flag((boma) as *mut _, false, FIGHTER_SNAKE_INSTANCE_WORK_ID_FLAG_SNAKE_FLAG_ATTACK_S4_COMBO_ENABLE);
+                    VariableModule::set_flag((boma) as *mut _, false, FIGHTER_SNAKE_INSTANCE_WORK_ID_FLAG_SNAKE_FLAG_ATTACK_S4_COMBO_IS_BUFFERED);
+                    if VariableModule::get_int((boma) as *mut _, FIGHTER_SNAKE_INSTANCE_WORK_ID_INT_SNAKE_INT_ATTACK_S4_COMBO_COUNT) == 0 {
+                        VariableModule::set_int((boma) as *mut _, 1, FIGHTER_SNAKE_INSTANCE_WORK_ID_INT_SNAKE_INT_ATTACK_S4_COMBO_COUNT);
                         ControlModule::reset_trigger(fighter.module_accessor);
                         MotionModule::change_motion(fighter.module_accessor, Hash40::new("attack_s4_s2"), 0.0, 1.0, false, 0.0, false, false);
                     }else {

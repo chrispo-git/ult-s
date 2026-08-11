@@ -5,9 +5,9 @@ use crate::util::*;
 use smash::lib::lua_const::*;
 use smash::hash40;
 
-static mut FIREBALL : [i32; 8] = [0; 8];
-static mut SPECIAL_ZOOM_GFX : [i32; 8] = [0; 8];
-static mut KOOPA_EXCELLENT_SMASH : [bool; 8] = [false; 8];
+static FIGHTER_KOOPA_INSTANCE_WORK_ID_INT_FIREBALL : i32 = 0;
+static FIGHTER_KOOPA_INSTANCE_WORK_ID_INT_SPECIAL_ZOOM_GFX : i32 = 1;
+static FIGHTER_KOOPA_INSTANCE_WORK_ID_FLAG_KOOPA_EXCELLENT_SMASH : i32 = 2;
 static NONE :  smash::phx::Vector3f =  smash::phx::Vector3f { x: 0.0, y: 0.0, z: 0.0 };
 		
 pub fn install() {

@@ -5,11 +5,11 @@ use crate::util::*;
 use smash::lib::lua_const::*;
 use smash::hash40;
 
-static mut IS_BAIR : [bool; 8] = [false; 8];
-static mut IS_SIDEB_EAT : [bool; 8] = [false; 8];
+static FIGHTER_PACKUN_INSTANCE_WORK_ID_FLAG_IS_BAIR : i32 = 0;
+static FIGHTER_PACKUN_INSTANCE_WORK_ID_FLAG_IS_SIDEB_EAT : i32 = 1;
 
-static mut BREATH_POS_X : [f32; 8] = [0.0; 8];
-static mut BREATH_POS_Y : [f32; 8] = [0.0; 8];
+static FIGHTER_PACKUN_INSTANCE_WORK_ID_FLOAT_BREATH_POS_X : i32 = 2;
+static FIGHTER_PACKUN_INSTANCE_WORK_ID_FLOAT_BREATH_POS_Y : i32 = 3;
 			
 
 

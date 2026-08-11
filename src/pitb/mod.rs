@@ -6,7 +6,7 @@ use smash::lib::lua_const::*;
 use smash::hash40;
 
 //Float Stuff
-static mut CHECK_FLOAT : [i32; 8] = [0; 8];
+static FIGHTER_PITB_INSTANCE_WORK_ID_INT_CHECK_FLOAT : i32 = 0;
 static mut CHECK_FLOAT_MAX : i32 = 14; //Frames where jump needs to be held to start floating
 static mut FLOAT_FALLSPEED : f32 = 0.365;
 static mut HITLAG_MULT : f32 = 0.45;

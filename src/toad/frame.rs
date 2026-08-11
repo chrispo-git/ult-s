@@ -44,12 +44,12 @@ unsafe extern "C" fn toad(fighter : &mut L2CFighterCommon) {
 		let situation_kind = StatusModule::situation_kind(boma);
 		let end_frame = MotionModule::end_frame(boma);
 		if is_reset() {
-			BIG_TIMER[ENTRY_ID] = 0;
+			VariableModule::set_int((boma) as *mut _, 0, FIGHTER_TOAD_INSTANCE_WORK_ID_INT_BIG_TIMER);
 			IS_POP_MODE[ENTRY_ID] = false;
-			START_POP[ENTRY_ID] = false;
+			VariableModule::set_flag((boma) as *mut _, false, FIGHTER_TOAD_INSTANCE_WORK_ID_FLAG_START_POP);
 		}
-		if status_kind == *FIGHTER_STATUS_KIND_DEAD && BIG_TIMER[ENTRY_ID] > 1 {
-			BIG_TIMER[ENTRY_ID] = 1;
+		if status_kind == *FIGHTER_STATUS_KIND_DEAD && VariableModule::get_int((boma) as *mut _, FIGHTER_TOAD_INSTANCE_WORK_ID_INT_BIG_TIMER) > 1 {
+			VariableModule::set_int((boma) as *mut _, 1, FIGHTER_TOAD_INSTANCE_WORK_ID_INT_BIG_TIMER);
 		}
 		if ![*FIGHTER_STATUS_KIND_WIN, *FIGHTER_STATUS_KIND_LOSE, *FIGHTER_STATUS_KIND_NONE].contains(&status_kind) {
 			if PostureModule::scale(boma) == 1.0 {
@@ -66,12 +66,12 @@ unsafe extern "C" fn toad(fighter : &mut L2CFighterCommon) {
 		}
 		WorkModule::set_int(boma, 1, *FIGHTER_MURABITO_INSTANCE_WORK_ID_INT_SPECIAL_N_TIME_LIMIT);
 		if status_kind == *FIGHTER_STATUS_KIND_DEAD {
-			if MotionModule::motion_kind(boma) == hash40("fall_damage") && !HAS_DEADED[ENTRY_ID] {
+			if MotionModule::motion_kind(boma) == hash40("fall_damage") && !VariableModule::is_flag((boma) as *mut _, FIGHTER_TOAD_INSTANCE_WORK_ID_FLAG_HAS_DEADED) {
 				macros::PLAY_SE(fighter, Hash40::new("se_murabito_catch_net"));
-				HAS_DEADED[ENTRY_ID] = true;
+				VariableModule::set_flag((boma) as *mut _, true, FIGHTER_TOAD_INSTANCE_WORK_ID_FLAG_HAS_DEADED);
 			};
 		} else {
-			HAS_DEADED[ENTRY_ID] = false;
+			VariableModule::set_flag((boma) as *mut _, false, FIGHTER_TOAD_INSTANCE_WORK_ID_FLAG_HAS_DEADED);
 		};
 		if ![*FIGHTER_STATUS_KIND_ATTACK_HI3, *FIGHTER_STATUS_KIND_ATTACK_S3, *FIGHTER_STATUS_KIND_ATTACK_LW3, *FIGHTER_STATUS_KIND_DOWN_STAND_ATTACK].contains(&status_kind) {
 			ArticleModule::remove_exist(boma, *FIGHTER_MURABITO_GENERATE_ARTICLE_UMBRELLA,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
@@ -163,7 +163,7 @@ unsafe extern "C" fn toad(fighter : &mut L2CFighterCommon) {
 				if (MotionModule::frame(boma) as i32) == 20 {
 					macros::EFFECT(fighter, Hash40::new("sys_erace_smoke"), Hash40::new("head"), 0, 0, 4.4, 0, 0, 0, 2.0, 0, 0, 0, 0, 0, 0, false);
 				}
-			} else if TO_FALL[ENTRY_ID]{
+			} else if VariableModule::is_flag((boma) as *mut _, FIGHTER_TOAD_INSTANCE_WORK_ID_FLAG_TO_FALL){
 				if MotionModule::frame(boma) as i32 == 1 {
 					macros::EFFECT(fighter, Hash40::new("sys_crown"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, false);
 					macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 10.0, /*Angle*/ 361, /*KBG*/ 30, /*FKB*/ 0, /*BKB*/ 80, /*Size*/ 9.0, /*X*/ 0.0, /*Y*/ 9.0, /*Z*/ 12.5, /*X2*/ Some(0.0), /*Y2*/ Some(9.0), /*Z2*/ Some(-12.5), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_ON, /*FacingRestrict*/ *ATTACK_LR_CHECK_POS, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_G, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_KICK, /*Type*/ *ATTACK_REGION_BODY);
@@ -175,25 +175,25 @@ unsafe extern "C" fn toad(fighter : &mut L2CFighterCommon) {
 			}
 			if [hash40("special_air_lw_plant_failure")].contains(&MotionModule::motion_kind(boma)) {
 				if frame < 18.0 {
-					DOWNB_SHOULD_BOUNCE[ENTRY_ID] = false;
+					VariableModule::set_flag((boma) as *mut _, false, FIGHTER_TOAD_INSTANCE_WORK_ID_FLAG_DOWNB_SHOULD_BOUNCE);
 				}
 				if AttackModule::is_infliction(boma, *COLLISION_KIND_MASK_HIT) {
 					if frame > 18.0 {
-						DOWNB_SHOULD_BOUNCE[ENTRY_ID] = true;
+						VariableModule::set_flag((boma) as *mut _, true, FIGHTER_TOAD_INSTANCE_WORK_ID_FLAG_DOWNB_SHOULD_BOUNCE);
 					}
 				}
-				if DOWNB_SHOULD_BOUNCE[ENTRY_ID] && !AttackModule::is_infliction(boma, *COLLISION_KIND_MASK_HIT) && MotionModule::frame(boma) < 37.0{
+				if VariableModule::is_flag((boma) as *mut _, FIGHTER_TOAD_INSTANCE_WORK_ID_FLAG_DOWNB_SHOULD_BOUNCE) && !AttackModule::is_infliction(boma, *COLLISION_KIND_MASK_HIT) && MotionModule::frame(boma) < 37.0{
 					KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_JUMP);
 					MotionModule::set_frame_sync_anim_cmd(boma, 38.0, true, true, false);
                     let speed = smash::phx::Vector3f { x: 0.0, y: 0.6, z: 0.0 };
                     KineticModule::add_speed(boma, &speed);
 				};
-				TO_FALL[ENTRY_ID] = true;
+				VariableModule::set_flag((boma) as *mut _, true, FIGHTER_TOAD_INSTANCE_WORK_ID_FLAG_TO_FALL);
 			} else {
-				DOWNB_SHOULD_BOUNCE[ENTRY_ID] = false;
+				VariableModule::set_flag((boma) as *mut _, false, FIGHTER_TOAD_INSTANCE_WORK_ID_FLAG_DOWNB_SHOULD_BOUNCE);
 			}
 			if ![hash40("special_air_lw_plant_failure"), hash40("landing_fall_special")].contains(&MotionModule::motion_kind(boma))  {
-				TO_FALL[ENTRY_ID] = false;
+				VariableModule::set_flag((boma) as *mut _, false, FIGHTER_TOAD_INSTANCE_WORK_ID_FLAG_TO_FALL);
 			}
 		}
 		if ![*FIGHTER_STATUS_KIND_THROW].contains(&status_kind) {
@@ -231,10 +231,10 @@ unsafe extern "C" fn toad(fighter : &mut L2CFighterCommon) {
 				let speed = smash::phx::Vector3f { x: 0.0, y: 0.6, z: 0.0 };
 				KineticModule::add_speed(boma, &speed);
 			};
-			TO_FALL[ENTRY_ID] = true;
+			VariableModule::set_flag((boma) as *mut _, true, FIGHTER_TOAD_INSTANCE_WORK_ID_FLAG_TO_FALL);
 		};
 		if ![hash40("special_air_lw_plant_failure"), hash40("landing_fall_special")].contains(&MotionModule::motion_kind(boma))  {
-			TO_FALL[ENTRY_ID] = false;
+			VariableModule::set_flag((boma) as *mut _, false, FIGHTER_TOAD_INSTANCE_WORK_ID_FLAG_TO_FALL);
 		}
 		if [*FIGHTER_MURABITO_STATUS_KIND_SPECIAL_LW_WATER_LANDING, *FIGHTER_MURABITO_STATUS_KIND_SPECIAL_LW_WATER_WAIT].contains(&status_kind) {
 			if situation_kind == *SITUATION_KIND_GROUND {
@@ -242,7 +242,7 @@ unsafe extern "C" fn toad(fighter : &mut L2CFighterCommon) {
 			}; 
 		};
 		if situation_kind != *SITUATION_KIND_AIR {
-			HAS_DOWNB[ENTRY_ID] = false;
+			VariableModule::set_flag((boma) as *mut _, false, FIGHTER_TOAD_INSTANCE_WORK_ID_FLAG_HAS_DOWNB);
 		};
 		if [hash40("special_air_hi"), hash40("special_hi"), hash40("special_air_hi_wait1"), hash40("special_air_hi_wait2"), hash40("special_air_hi_flap1"), hash40("special_air_hi_flap2"), hash40("special_air_hi_flap1")].contains(&MotionModule::motion_kind(boma)) {
 			fighter.clear_lua_stack();
@@ -319,31 +319,31 @@ unsafe extern "C" fn toad(fighter : &mut L2CFighterCommon) {
 			&& ray_check_pos(boma, dist, 0.0, false) == 1 {
 				macros::PLAY_SE(fighter, Hash40::new("se_murabito_smash_h02"));
 				PostureModule::reverse_lr(boma);
-				SIDEB_DIR[ENTRY_ID] *= -1.0;
+				VariableModule::mul_float((boma) as *mut _, -1.0, FIGHTER_TOAD_INSTANCE_WORK_ID_FLOAT_SIDEB_DIR);
 				PostureModule::update_rot_y_lr(boma);
 				let stop_rise  = smash::phx::Vector3f { x: -1.0, y: 1.0, z: 1.0 };
 				KineticModule::mul_speed(fighter.module_accessor, &stop_rise, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
 			};
-			SIDEB_LENGTH[ENTRY_ID] += 1;
+			VariableModule::inc_int((boma) as *mut _, FIGHTER_TOAD_INSTANCE_WORK_ID_INT_SIDEB_LENGTH);
 		} else {
-			SIDEB_LENGTH[ENTRY_ID] = 0;
+			VariableModule::set_int((boma) as *mut _, 0, FIGHTER_TOAD_INSTANCE_WORK_ID_INT_SIDEB_LENGTH);
 		}
 		if [hash40("special_s_end"), hash40("special_air_s_end")].contains(&motion_kind) {
-			SIDEB_END[ENTRY_ID] = true;
+			VariableModule::set_flag((boma) as *mut _, true, FIGHTER_TOAD_INSTANCE_WORK_ID_FLAG_SIDEB_END);
 		}
 		if status_kind == *FIGHTER_STATUS_KIND_FINAL && MotionModule::end_frame(boma) - frame < 6.0 { 
 			StatusModule::change_status_request_from_script(boma, *FIGHTER_MURABITO_STATUS_KIND_FINAL_END, true);
 		}
-		if BIG_TIMER[ENTRY_ID] > BIG_TIMER_MAX-2 {
+		if VariableModule::get_int((boma) as *mut _, FIGHTER_TOAD_INSTANCE_WORK_ID_INT_BIG_TIMER) > BIG_TIMER_MAX-2 {
 			macros::CANCEL_FILL_SCREEN(fighter, 1, 1);
 			EffectModule::remove_screen(fighter.module_accessor, Hash40::new("bg_popo_final"), -1);
 			EffectModule::req_screen(fighter.module_accessor, Hash40::new("bg_popo_final"), false, true, true);
 			CameraModule::reset_all(boma);
 		}
 		
-		if BIG_TIMER[ENTRY_ID] > 0 {
-			BIG_TIMER[ENTRY_ID] -= 1;
-			if BIG_TIMER[ENTRY_ID] > 45 {
+		if VariableModule::get_int((boma) as *mut _, FIGHTER_TOAD_INSTANCE_WORK_ID_INT_BIG_TIMER) > 0 {
+			VariableModule::dec_int((boma) as *mut _, FIGHTER_TOAD_INSTANCE_WORK_ID_INT_BIG_TIMER);
+			if VariableModule::get_int((boma) as *mut _, FIGHTER_TOAD_INSTANCE_WORK_ID_INT_BIG_TIMER) > 45 {
 				PostureModule::set_scale(fighter.module_accessor, 2.0*0.7, false);
 				AttackModule::set_attack_scale(boma, 1.0, true);
 				GrabModule::set_size_mul(boma, 2.0*0.7);
@@ -352,8 +352,8 @@ unsafe extern "C" fn toad(fighter : &mut L2CFighterCommon) {
 				if [*FIGHTER_STATUS_KIND_WAIT, *FIGHTER_STATUS_KIND_WALK, *FIGHTER_STATUS_KIND_DASH, *FIGHTER_STATUS_KIND_TURN_DASH, *FIGHTER_STATUS_KIND_TURN_RUN, *FIGHTER_STATUS_KIND_JUMP, *FIGHTER_STATUS_KIND_FALL, *FIGHTER_STATUS_KIND_FALL_AERIAL].contains(&status_kind) {
 					macros::ATTACK(fighter, /*ID*/ 4, /*Part*/ 0, /*Bone*/ Hash40::new("hip"), /*Damage*/ 9.0, /*Angle*/ 361, /*KBG*/ 45, /*FKB*/ 0, /*BKB*/ 30, /*Size*/ 13.0, /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 0.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 35, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_normal"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_PUNCH, /*Type*/ *ATTACK_REGION_HEAD);
 				}
-			} else if BIG_TIMER[ENTRY_ID] > 30 {
-				if BIG_TIMER[ENTRY_ID] == 44 {
+			} else if VariableModule::get_int((boma) as *mut _, FIGHTER_TOAD_INSTANCE_WORK_ID_INT_BIG_TIMER) > 30 {
+				if VariableModule::get_int((boma) as *mut _, FIGHTER_TOAD_INSTANCE_WORK_ID_INT_BIG_TIMER) == 44 {
 					macros::STOP_SE(fighter, Hash40::new("se_murabito_final01"));
 					macros::PLAY_SE(fighter, Hash40::new("se_item_mushd"));
 					AttackModule::clear_all(fighter.module_accessor);
@@ -363,7 +363,7 @@ unsafe extern "C" fn toad(fighter : &mut L2CFighterCommon) {
 				GrabModule::set_size_mul(boma, 1.67*0.7);
 				WorkModule::off_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_GOLD);
 				damage!(fighter, *MA_MSC_DAMAGE_DAMAGE_NO_REACTION, *DAMAGE_NO_REACTION_MODE_DAMAGE_POWER, 12.0);
-			} else if BIG_TIMER[ENTRY_ID] > 15 {
+			} else if VariableModule::get_int((boma) as *mut _, FIGHTER_TOAD_INSTANCE_WORK_ID_INT_BIG_TIMER) > 15 {
 				PostureModule::set_scale(fighter.module_accessor, 1.33*0.65, false);
 				AttackModule::set_attack_scale(boma, 1.0, true);
 				GrabModule::set_size_mul(boma, 1.33*0.7);
@@ -381,10 +381,10 @@ unsafe extern "C" fn toad(fighter : &mut L2CFighterCommon) {
 				damage!(fighter, *MA_MSC_DAMAGE_DAMAGE_NO_REACTION, *DAMAGE_NO_REACTION_MODE_NORMAL, 0.0);
 			}
 		}
-		if POP_FALLBACK[ENTRY_ID] > 0 {
-			POP_FALLBACK[ENTRY_ID] -= 1;
+		if VariableModule::get_int((boma) as *mut _, FIGHTER_TOAD_INSTANCE_WORK_ID_INT_POP_FALLBACK) > 0 {
+			VariableModule::dec_int((boma) as *mut _, FIGHTER_TOAD_INSTANCE_WORK_ID_INT_POP_FALLBACK);
 		}
-		if POP_FALLBACK[ENTRY_ID] == 1 {
+		if VariableModule::get_int((boma) as *mut _, FIGHTER_TOAD_INSTANCE_WORK_ID_INT_POP_FALLBACK) == 1 {
 			IS_POP_MODE[ENTRY_ID] = false;
 		}
 		if [hash40("special_s_jump"), hash40("special_s_loop"), hash40("special_air_s_loop")].contains(&motion_kind) && MotionModule::frame(boma) < 2.0 {
@@ -403,28 +403,28 @@ unsafe extern "C" fn toad(fighter : &mut L2CFighterCommon) {
 		if [*FIGHTER_STATUS_KIND_SPECIAL_S].contains(&status_kind) {
 			crate::transition_set!(ENTRY_ID, can_sideb);
 			if [hash40("special_s"), hash40("special_air_s")].contains(&motion_kind) {
-				if SIDEB_END[ENTRY_ID] {
+				if VariableModule::is_flag((boma) as *mut _, FIGHTER_TOAD_INSTANCE_WORK_ID_FLAG_SIDEB_END) {
 					if situation_kind == *SITUATION_KIND_GROUND {
 						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_DOWN, true);
 					} else {
 						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_DAMAGE_FALL, true);
 					}
 				}
-				if MotionModule::end_frame(boma) - frame < 3.0 || SIDEB_RESET[ENTRY_ID] {
+				if MotionModule::end_frame(boma) - frame < 3.0 || VariableModule::is_flag((boma) as *mut _, FIGHTER_TOAD_INSTANCE_WORK_ID_FLAG_SIDEB_RESET) {
 					KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_MOTION_FALL);
-					if !SIDEB_RESET[ENTRY_ID] {
+					if !VariableModule::is_flag((boma) as *mut _, FIGHTER_TOAD_INSTANCE_WORK_ID_FLAG_SIDEB_RESET) {
 						macros::SET_SPEED_EX(fighter, 1.5, -2.0, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
-						SIDEB_DIR[ENTRY_ID] = PostureModule::lr(boma);
+						VariableModule::set_float((boma) as *mut _, PostureModule::lr(boma), FIGHTER_TOAD_INSTANCE_WORK_ID_FLOAT_SIDEB_DIR);
 					} else {
 						macros::SET_SPEED_EX(fighter, 1.5, get_prev_speed_y(boma), *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
-						if PostureModule::lr(boma) != SIDEB_DIR[ENTRY_ID] {
+						if PostureModule::lr(boma) != VariableModule::get_float((boma) as *mut _, FIGHTER_TOAD_INSTANCE_WORK_ID_FLOAT_SIDEB_DIR) {
 							PostureModule::reverse_lr(boma);
 							PostureModule::update_rot_y_lr(boma);
 							let stop_rise  = smash::phx::Vector3f { x: -1.0, y: 1.0, z: 1.0 };
 							KineticModule::mul_speed(fighter.module_accessor, &stop_rise, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
 						}
 					}
-					SIDEB_RESET[ENTRY_ID] = false;
+					VariableModule::set_flag((boma) as *mut _, false, FIGHTER_TOAD_INSTANCE_WORK_ID_FLAG_SIDEB_RESET);
 					if situation_kind == *SITUATION_KIND_GROUND {
 						MotionModule::change_motion(boma, smash::phx::Hash40::new("special_s_loop"), 0.0, 1.0, false, 0.0, false, false);
 					} else {
@@ -436,7 +436,7 @@ unsafe extern "C" fn toad(fighter : &mut L2CFighterCommon) {
 					KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_MOTION_FALL);
 				};
 			} else if [hash40("special_s_loop"), hash40("special_air_s_loop")].contains(&motion_kind) {
-				if SIDEB_LENGTH[ENTRY_ID] >= SIDEB_LENGTH_MAX {
+				if VariableModule::get_int((boma) as *mut _, FIGHTER_TOAD_INSTANCE_WORK_ID_INT_SIDEB_LENGTH) >= SIDEB_LENGTH_MAX {
 					if situation_kind == *SITUATION_KIND_GROUND {
 						MotionModule::change_motion(boma, smash::phx::Hash40::new("special_s_end"), 0.0, 1.0, false, 0.0, false, false);
 					} else {
@@ -458,18 +458,18 @@ unsafe extern "C" fn toad(fighter : &mut L2CFighterCommon) {
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_SPECIAL_HI, true);
 				}
 				if AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_SHIELD) {
-					SIDEB_LENGTH[ENTRY_ID] = SIDEB_LENGTH_MAX+1;
+					VariableModule::set_int((boma) as *mut _, SIDEB_LENGTH_MAX+1, FIGHTER_TOAD_INSTANCE_WORK_ID_INT_SIDEB_LENGTH);
 				}
 			} else if motion_kind == hash40("special_s_end") && MotionModule::end_frame(boma) - frame < 3.0 {
 				StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_DOWN, true);
 			}
 		} else {
-			SIDEB_END[ENTRY_ID] = false;
+			VariableModule::set_flag((boma) as *mut _, false, FIGHTER_TOAD_INSTANCE_WORK_ID_FLAG_SIDEB_END);
 		}
 		if [hash40("special_s_jump"), hash40("special_air_s_loop"), hash40("special_s_loop")].contains(&motion_kind) {
-			SIDEB_RESET[ENTRY_ID] = true;
+			VariableModule::set_flag((boma) as *mut _, true, FIGHTER_TOAD_INSTANCE_WORK_ID_FLAG_SIDEB_RESET);
 		} else {
-			SIDEB_RESET[ENTRY_ID] = false;
+			VariableModule::set_flag((boma) as *mut _, false, FIGHTER_TOAD_INSTANCE_WORK_ID_FLAG_SIDEB_RESET);
 		}
 		if situation_kind != *SITUATION_KIND_AIR || (*FIGHTER_STATUS_KIND_DAMAGE..*FIGHTER_STATUS_KIND_DAMAGE_FALL).contains(&status_kind){ 
 			crate::transition_reset!(ENTRY_ID, can_sideb);
@@ -482,7 +482,7 @@ unsafe extern "C" fn toad(fighter : &mut L2CFighterCommon) {
 				KineticModule::add_speed(boma, &speed);
 			};
 			if AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_SHIELD) {
-				SIDEB_LENGTH[ENTRY_ID] = SIDEB_LENGTH_MAX+1;
+				VariableModule::set_int((boma) as *mut _, SIDEB_LENGTH_MAX+1, FIGHTER_TOAD_INSTANCE_WORK_ID_INT_SIDEB_LENGTH);
 				StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_SPECIAL_S, true);
 			} else {
 				if MotionModule::end_frame(boma) - frame < 3.0 {

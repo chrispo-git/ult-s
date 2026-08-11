@@ -5,7 +5,7 @@ use crate::util::*;
 use smash::lib::lua_const::*;
 use smash::hash40;
 
-static mut FLOAT : [i32; 8] = [0; 8];
+static FIGHTER_GANON_INSTANCE_WORK_ID_INT_FLOAT : i32 = 0;
 static mut X : [f32; 8] = [0.0; 8];
 static mut Y : [f32; 8] = [0.0; 8];
 static mut FLOAT_MAX : i32 = 90;

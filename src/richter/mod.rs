@@ -5,7 +5,7 @@ use crate::util::*;
 use smash::lib::lua_const::*;
 use smash::hash40;
 		
-static mut WAS_AIR : [bool; 8] = [false; 8];	
+static FIGHTER_RICHTER_INSTANCE_WORK_ID_FLAG_WAS_AIR : i32 = 0;
 
 
 pub fn install() {

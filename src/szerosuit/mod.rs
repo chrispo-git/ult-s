@@ -19,10 +19,10 @@ mod frame;
 mod acmd;
 use crate::util::*;
 
-static mut CAN_CANCEL : [bool; 8] = [false; 8];
-static mut CAN_CANCEL_TIMER : [i32; 8] = [0; 8];
-static mut NO_WAVEDASH_TIMER : [i32; 8] = [0; 8];
-static mut IS_AIR_SIDEB : [bool; 8] = [false; 8];
+static FIGHTER_SZEROSUIT_INSTANCE_WORK_ID_FLAG_CAN_CANCEL : i32 = 0;
+static FIGHTER_SZEROSUIT_INSTANCE_WORK_ID_INT_CAN_CANCEL_TIMER : i32 = 1;
+static FIGHTER_SZEROSUIT_INSTANCE_WORK_ID_INT_NO_WAVEDASH_TIMER : i32 = 2;
+static FIGHTER_SZEROSUIT_INSTANCE_WORK_ID_FLAG_IS_AIR_SIDEB : i32 = 3;
 static NO_WAVEDASH_MAX : i32 = 8;
 static WINDOW : i32 = 20;
 

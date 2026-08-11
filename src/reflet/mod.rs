@@ -6,19 +6,19 @@ use smash::lib::lua_const::*;
 use smash::hash40;
 
 //Grima Install
-static mut IS_GRIMA : [bool; 8] = [false; 8];
-static mut DMG_COUNTER : [i32; 8] = [0; 8];
+static FIGHTER_REFLET_INSTANCE_WORK_ID_FLAG_IS_GRIMA : i32 = 0;
+static FIGHTER_REFLET_INSTANCE_WORK_ID_INT_DMG_COUNTER : i32 = 1;
 static mut DMG_COUNTER_MAX : i32 = 60;
 static mut DMG_ADD : f32 = 0.7;
-static mut SPECIAL_HI_CURR : [i32; 8] = [0; 8]; 
-static mut SPECIAL_N_CURR : [i32; 8] = [0; 8]; 
-static mut SPECIAL_S_CURR : [f32; 8] = [0.0; 8]; 
+static FIGHTER_REFLET_INSTANCE_WORK_ID_INT_SPECIAL_HI_CURR : i32 = 2;
+static FIGHTER_REFLET_INSTANCE_WORK_ID_INT_SPECIAL_N_CURR : i32 = 3;
+static FIGHTER_REFLET_INSTANCE_WORK_ID_FLOAT_SPECIAL_S_CURR : i32 = 4;
 
 //Float Stuff
 static mut FLOAT : [i32; 8] = [0; 8]; //Logs Float Time
-static mut START_FLOAT : [bool; 8] = [false; 8];
-static mut JUMPSQUAT_FLOAT : [bool; 8] = [false; 8];
-static mut CHECK_FLOAT : [i32; 8] = [0; 8];
+static FIGHTER_REFLET_INSTANCE_WORK_ID_FLAG_START_FLOAT : i32 = 5;
+static FIGHTER_REFLET_INSTANCE_WORK_ID_FLAG_JUMPSQUAT_FLOAT : i32 = 6;
+static FIGHTER_REFLET_INSTANCE_WORK_ID_INT_CHECK_FLOAT : i32 = 7;
 static mut CHECK_FLOAT_MAX : i32 = 15; //Frames where jump needs to be held to start floating
 static mut X : [f32; 8] = [0.0; 8]; //Logs speed
 static mut Y : [f32; 8] = [0.0; 8]; //Logs speed

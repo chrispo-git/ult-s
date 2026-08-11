@@ -76,31 +76,31 @@ unsafe extern "C" fn villy_neutralb_1(agent: &mut L2CAgentBase) {
     let pos_x = PostureModule::pos_x(boma);
     let pos_y = PostureModule::pos_y(boma);
     let lr = PostureModule::lr(boma);
-    let is_facing_tree = lr*(TREE_POS_X[ENTRY_ID]-pos_x) > 0.0;
+    let is_facing_tree = lr*(VariableModule::get_float((boma) as *mut _, FIGHTER_MURABITO_INSTANCE_WORK_ID_FLOAT_TREE_POS_X)-pos_x) > 0.0;
     if ArticleModule::is_exist(agent.module_accessor, *FIGHTER_MURABITO_GENERATE_ARTICLE_TREE) && ![hash40("special_n3"), hash40("special_n2_fail")].contains(&motion_kind) {
-        if (TREE_POS_X[ENTRY_ID]-pos_x).abs() < X_DIST && (TREE_POS_Y[ENTRY_ID]-pos_y).abs() < Y_DIST  && is_facing_tree && !IS_FALLEN[ENTRY_ID] {
+        if (VariableModule::get_float((boma) as *mut _, FIGHTER_MURABITO_INSTANCE_WORK_ID_FLOAT_TREE_POS_X)-pos_x).abs() < X_DIST && (VariableModule::get_float((boma) as *mut _, FIGHTER_MURABITO_INSTANCE_WORK_ID_FLOAT_TREE_POS_Y)-pos_y).abs() < Y_DIST  && is_facing_tree && !VariableModule::is_flag((boma) as *mut _, FIGHTER_MURABITO_INSTANCE_WORK_ID_FLAG_IS_FALLEN) {
             MotionModule::change_motion(agent.module_accessor, Hash40::new("special_n3"), 0.0, 1.0, false, 0.0, false, false);
             //println!("special_n3");
-            CHANGE_FRAME[ENTRY_ID] = true;
+            VariableModule::set_flag((boma) as *mut _, true, FIGHTER_MURABITO_INSTANCE_WORK_ID_FLAG_CHANGE_FRAME);
         } else {
             MotionModule::change_motion(agent.module_accessor, Hash40::new("special_n2_fail"), 0.0, 1.0, false, 0.0, false, false);
             //println!("special_n2_fail");
-            CHANGE_FRAME[ENTRY_ID] = true;
+            VariableModule::set_flag((boma) as *mut _, true, FIGHTER_MURABITO_INSTANCE_WORK_ID_FLAG_CHANGE_FRAME);
         }
     } else if ArticleModule::is_exist(agent.module_accessor, *FIGHTER_MURABITO_GENERATE_ARTICLE_SPROUT) && ![hash40("special_n2"), hash40("special_n2_fail")].contains(&motion_kind) {
-        if (TREE_POS_X[ENTRY_ID]-pos_x).abs() < X_DIST && (TREE_POS_Y[ENTRY_ID]-pos_y).abs() < Y_DIST {
+        if (VariableModule::get_float((boma) as *mut _, FIGHTER_MURABITO_INSTANCE_WORK_ID_FLOAT_TREE_POS_X)-pos_x).abs() < X_DIST && (VariableModule::get_float((boma) as *mut _, FIGHTER_MURABITO_INSTANCE_WORK_ID_FLOAT_TREE_POS_Y)-pos_y).abs() < Y_DIST {
             MotionModule::change_motion(boma, Hash40::new("special_n2"), 0.0, 1.0, false, 0.0, false, false);
             //println!("special_n2");
-            CHANGE_FRAME[ENTRY_ID] = true;
+            VariableModule::set_flag((boma) as *mut _, true, FIGHTER_MURABITO_INSTANCE_WORK_ID_FLAG_CHANGE_FRAME);
         } else {
             MotionModule::change_motion(boma, Hash40::new("special_n2_fail"), 0.0, 1.0, false, 0.0, false, false);
             //println!("special_n2_fail");
-            CHANGE_FRAME[ENTRY_ID] = true;
+            VariableModule::set_flag((boma) as *mut _, true, FIGHTER_MURABITO_INSTANCE_WORK_ID_FLAG_CHANGE_FRAME);
         }
     } else if motion_kind != hash40("special_n") {
         MotionModule::change_motion(boma, Hash40::new("special_n"), 0.0, 1.0, false, 0.0, false, false);
     } else {
-        CHANGE_FRAME[ENTRY_ID] = true;
+        VariableModule::set_flag((boma) as *mut _, true, FIGHTER_MURABITO_INSTANCE_WORK_ID_FLAG_CHANGE_FRAME);
     }
     if macros::is_excute(agent) {
         ItemModule::set_have_item_visibility(agent.module_accessor, false, 0 );

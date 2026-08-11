@@ -69,7 +69,7 @@ unsafe extern "C" fn isa_neutralb_hit(fighter: &mut L2CAgentBase) {
 			ModelModule::set_mesh_visibility(fighter.module_accessor,Hash40::new("furniture23"),false);
 			ModelModule::set_mesh_visibility(fighter.module_accessor,Hash40::new("furniture24"),false);
 			ModelModule::set_mesh_visibility(fighter.module_accessor,Hash40::new("furniture25"),false);
-			if ISA_SHOT_KIND[ENTRY_ID] == 1 {
+			if VariableModule::get_int((boma) as *mut _, FIGHTER_SHIZUE_INSTANCE_WORK_ID_INT_ISA_SHOT_KIND) == 1 {
 				MotionModule::change_motion(fighter.module_accessor, Hash40::new("item_1"), 0.0, 1.0, false, 0.0, false, false);
 				ModelModule::set_mesh_visibility(fighter.module_accessor,Hash40::new("furniture01"),true); //Photo
 
@@ -86,7 +86,7 @@ unsafe extern "C" fn isa_neutralb_hit(fighter: &mut L2CAgentBase) {
 				}
 			
 			};
-			if ISA_SHOT_KIND[ENTRY_ID] == 2 {
+			if VariableModule::get_int((boma) as *mut _, FIGHTER_SHIZUE_INSTANCE_WORK_ID_INT_ISA_SHOT_KIND) == 2 {
 				MotionModule::change_motion(fighter.module_accessor, Hash40::new("item_2"), 0.0, 1.0, false, 0.0, false, false);
 				ModelModule::set_mesh_visibility(fighter.module_accessor,Hash40::new("furniture05"),true); //Rug
 
@@ -103,7 +103,7 @@ unsafe extern "C" fn isa_neutralb_hit(fighter: &mut L2CAgentBase) {
 				}
 			
 			};
-			if ISA_SHOT_KIND[ENTRY_ID] == 3 {
+			if VariableModule::get_int((boma) as *mut _, FIGHTER_SHIZUE_INSTANCE_WORK_ID_INT_ISA_SHOT_KIND) == 3 {
 				MotionModule::change_motion(fighter.module_accessor, Hash40::new("item_3"), 0.0, 1.0, false, 0.0, false, false);
 				ModelModule::set_mesh_visibility(fighter.module_accessor,Hash40::new("furniture04"),true); //Triforce
 
@@ -123,7 +123,7 @@ unsafe extern "C" fn isa_neutralb_hit(fighter: &mut L2CAgentBase) {
 					AttackModule::clear_all(fighter.module_accessor);
 				}
 			};
-			if ISA_SHOT_KIND[ENTRY_ID] == 4 {
+			if VariableModule::get_int((boma) as *mut _, FIGHTER_SHIZUE_INSTANCE_WORK_ID_INT_ISA_SHOT_KIND) == 4 {
 				MotionModule::change_motion(fighter.module_accessor, Hash40::new("item_4"), 0.0, 1.0, false, 0.0, false, false);
 				ModelModule::set_mesh_visibility(fighter.module_accessor,Hash40::new("furniture07"),true); //Table
 
@@ -139,7 +139,7 @@ unsafe extern "C" fn isa_neutralb_hit(fighter: &mut L2CAgentBase) {
 					AttackModule::enable_safe_pos(fighter.module_accessor);
 				}
 			};
-			if ISA_SHOT_KIND[ENTRY_ID] == 5 {
+			if VariableModule::get_int((boma) as *mut _, FIGHTER_SHIZUE_INSTANCE_WORK_ID_INT_ISA_SHOT_KIND) == 5 {
 				MotionModule::change_motion(fighter.module_accessor, Hash40::new("item_5"), 0.0, 1.0, false, 0.0, false, false);
 				ModelModule::set_mesh_visibility(fighter.module_accessor,Hash40::new("furniture09"),true); //Trophy
 
@@ -156,7 +156,7 @@ unsafe extern "C" fn isa_neutralb_hit(fighter: &mut L2CAgentBase) {
 					AttackModule::enable_safe_pos(fighter.module_accessor);
 				}
 			};
-			if ISA_SHOT_KIND[ENTRY_ID] == 6 {
+			if VariableModule::get_int((boma) as *mut _, FIGHTER_SHIZUE_INSTANCE_WORK_ID_INT_ISA_SHOT_KIND) == 6 {
 				MotionModule::change_motion(fighter.module_accessor, Hash40::new("item_6"), 0.0, 1.0, false, 0.0, false, false);
 				ModelModule::set_mesh_visibility(fighter.module_accessor,Hash40::new("furniture11"),true); //Froggy
 
@@ -172,7 +172,7 @@ unsafe extern "C" fn isa_neutralb_hit(fighter: &mut L2CAgentBase) {
 					AttackModule::enable_safe_pos(fighter.module_accessor);
 				}
 			};
-			if ISA_SHOT_KIND[ENTRY_ID] == 7 {
+			if VariableModule::get_int((boma) as *mut _, FIGHTER_SHIZUE_INSTANCE_WORK_ID_INT_ISA_SHOT_KIND) == 7 {
 				MotionModule::change_motion(fighter.module_accessor, Hash40::new("item_7"), 0.0, 1.0, false, 0.0, false, false);
 				ModelModule::set_mesh_visibility(fighter.module_accessor,Hash40::new("furniture20"),true); //Moyai
 
@@ -189,7 +189,7 @@ unsafe extern "C" fn isa_neutralb_hit(fighter: &mut L2CAgentBase) {
 				}
 			
 			};
-			if ISA_SHOT_KIND[ENTRY_ID] == 8 {
+			if VariableModule::get_int((boma) as *mut _, FIGHTER_SHIZUE_INSTANCE_WORK_ID_INT_ISA_SHOT_KIND) == 8 {
 				MotionModule::change_motion(fighter.module_accessor, Hash40::new("item_8"), 0.0, 1.0, false, 0.0, false, false);
 				ModelModule::set_mesh_visibility(fighter.module_accessor,Hash40::new("furniture14"),true); //Couch
 
@@ -255,7 +255,7 @@ unsafe extern "C" fn isa_neutralb(fighter: &mut L2CAgentBase) {
 		if macros::is_excute(fighter) {
 			let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 			let rand_val = smash::app::sv_math::rand(hash40("fighter"), 8);
-			ISA_SHOT_KIND[ENTRY_ID] = rand_val + 1;
+			VariableModule::set_int((fighter.module_accessor) as *mut _, rand_val + 1, FIGHTER_SHIZUE_INSTANCE_WORK_ID_INT_ISA_SHOT_KIND);
 		}
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 2.5);
 		frame(fighter.lua_state_agent, 8.0);
@@ -290,9 +290,9 @@ unsafe extern "C" fn isa_neutralb_snd(fighter: &mut L2CAgentBase) {
 unsafe extern "C" fn isa_lloid_end(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-	if ISA_RESHOOT_TIME[ENTRY_ID] < 1 {
+	if VariableModule::get_int((fighter.module_accessor) as *mut _, FIGHTER_SHIZUE_INSTANCE_WORK_ID_INT_ISA_RESHOOT_TIME) < 1 {
 		ArticleModule::shoot_exist(fighter.module_accessor, *FIGHTER_SHIZUE_GENERATE_ARTICLE_CLAYROCKET, smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL), false);
-		ISA_RESHOOT_TIME[ENTRY_ID] = 130;
+		VariableModule::set_int((fighter.module_accessor) as *mut _, 130, FIGHTER_SHIZUE_INSTANCE_WORK_ID_INT_ISA_RESHOOT_TIME);
 	};
 }
 unsafe extern "C" fn isa_lloid_set(fighter: &mut L2CAgentBase) {

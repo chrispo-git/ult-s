@@ -5,7 +5,7 @@ use crate::util::*;
 use smash::lib::lua_const::*;
 use smash::hash40;
 
-static mut MEGA_AERIAL : [bool; 8] = [false; 8];
+static FIGHTER_ROCKMAN_INSTANCE_WORK_ID_FLAG_MEGA_AERIAL : i32 = 0;
 			
 
 

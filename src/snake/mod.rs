@@ -20,13 +20,13 @@ mod frame;
 mod acmd;
 use crate::util::*;
 			
-static mut STATIC_MUT : [i32; 8] = [6; 8];
-static mut SNAKE_FLAG_ATTACK_S4_COMBO_ENABLE : [bool; 8] = [false; 8];
-static mut SNAKE_FLAG_ATTACK_S4_COMBO_IS_BUFFERED : [bool; 8] = [false; 8];
-static mut SNAKE_INT_ATTACK_S4_COMBO_COUNT : [i32; 8] = [0; 8];
-static mut SNAKE_FLAG_APPEAL_LW_C4_EXLPODE : [bool; 8] = [false; 8];
-static mut SNAKE_FLAG_APPEAL_LW_GRENADE_WAIT_COUNT : [i32; 8] = [0; 8];
-static mut SNAKE_FLAG_CATCH_WAIT_IS_WALK : [bool; 8] = [false; 8];
+static FIGHTER_SNAKE_INSTANCE_WORK_ID_INT_STATIC_MUT : i32 = 0;
+static FIGHTER_SNAKE_INSTANCE_WORK_ID_FLAG_SNAKE_FLAG_ATTACK_S4_COMBO_ENABLE : i32 = 1;
+static FIGHTER_SNAKE_INSTANCE_WORK_ID_FLAG_SNAKE_FLAG_ATTACK_S4_COMBO_IS_BUFFERED : i32 = 2;
+static FIGHTER_SNAKE_INSTANCE_WORK_ID_INT_SNAKE_INT_ATTACK_S4_COMBO_COUNT : i32 = 3;
+static FIGHTER_SNAKE_INSTANCE_WORK_ID_FLAG_SNAKE_FLAG_APPEAL_LW_C4_EXLPODE : i32 = 4;
+static FIGHTER_SNAKE_INSTANCE_WORK_ID_INT_SNAKE_FLAG_APPEAL_LW_GRENADE_WAIT_COUNT : i32 = 5;
+static FIGHTER_SNAKE_INSTANCE_WORK_ID_FLAG_SNAKE_FLAG_CATCH_WAIT_IS_WALK : i32 = 6;
 static SNAKE_APPEAL_LW_GRENADE_WAIT_MAX : i32 = 30;
 
 //implimented function for checking if an article is "constrained" to snake
@@ -89,7 +89,7 @@ pub unsafe fn snake_grab_pull_main_loop(fighter: &mut L2CFighterCommon) -> L2CVa
     }else if MotionModule::is_end(fighter.module_accessor) {
         if PostureModule::lr(fighter.module_accessor)*ControlModule::get_stick_x(fighter.module_accessor) > 0.1
         || PostureModule::lr(fighter.module_accessor)*ControlModule::get_stick_x(fighter.module_accessor) < -0.1{
-            SNAKE_FLAG_CATCH_WAIT_IS_WALK[entry_id] = true;
+            VariableModule::set_flag((fighter.module_accessor) as *mut _, true, FIGHTER_SNAKE_INSTANCE_WORK_ID_FLAG_SNAKE_FLAG_CATCH_WAIT_IS_WALK);
         }
         fighter.change_status(FIGHTER_STATUS_KIND_CATCH_WAIT.into(), false.into());
         return true.into()
@@ -149,7 +149,7 @@ pub unsafe fn snake_grab_attack_main_loop(fighter: &mut L2CFighterCommon) -> L2C
                 fighter.change_status(FIGHTER_STATUS_KIND_THROW.into(), false.into());
                 return true.into()
             }else{
-                SNAKE_FLAG_CATCH_WAIT_IS_WALK[entry_id] = true;
+                VariableModule::set_flag((fighter.module_accessor) as *mut _, true, FIGHTER_SNAKE_INSTANCE_WORK_ID_FLAG_SNAKE_FLAG_CATCH_WAIT_IS_WALK);
                 fighter.change_status(FIGHTER_STATUS_KIND_CATCH_WAIT.into(), false.into());
                 return true.into()
             }
@@ -159,7 +159,7 @@ pub unsafe fn snake_grab_attack_main_loop(fighter: &mut L2CFighterCommon) -> L2C
                 fighter.change_status(FIGHTER_STATUS_KIND_THROW.into(), false.into());
                 return true.into()
             }else{
-                SNAKE_FLAG_CATCH_WAIT_IS_WALK[entry_id] = true;
+                VariableModule::set_flag((fighter.module_accessor) as *mut _, true, FIGHTER_SNAKE_INSTANCE_WORK_ID_FLAG_SNAKE_FLAG_CATCH_WAIT_IS_WALK);
                 fighter.change_status(FIGHTER_STATUS_KIND_CATCH_WAIT.into(), false.into());
                 return true.into()
             }
@@ -198,23 +198,23 @@ pub unsafe fn snake_grab_wait_main_loop(fighter: &mut L2CFighterCommon) -> L2CVa
         }
     }
     else if PostureModule::lr(fighter.module_accessor)*ControlModule::get_stick_x(fighter.module_accessor) < -0.1 {
-        if SNAKE_FLAG_CATCH_WAIT_IS_WALK[entry_id] == false {
-            SNAKE_FLAG_CATCH_WAIT_IS_WALK[entry_id] = true;
+        if VariableModule::is_flag((fighter.module_accessor) as *mut _, FIGHTER_SNAKE_INSTANCE_WORK_ID_FLAG_SNAKE_FLAG_CATCH_WAIT_IS_WALK) == false {
+            VariableModule::set_flag((fighter.module_accessor) as *mut _, true, FIGHTER_SNAKE_INSTANCE_WORK_ID_FLAG_SNAKE_FLAG_CATCH_WAIT_IS_WALK);
             MotionModule::change_motion(fighter.module_accessor, Hash40::new("catch_walk_b"), 0.0, 1.0, false, 0.0, false, false);
         }
         let walk_speed:f32 = 1.6*(PostureModule::lr(fighter.module_accessor)*ControlModule::get_stick_x(fighter.module_accessor)*-1.0);
         MotionModule::set_rate(fighter.module_accessor, walk_speed);
     }
     else if PostureModule::lr(fighter.module_accessor)*ControlModule::get_stick_x(fighter.module_accessor) > 0.1 {
-        if SNAKE_FLAG_CATCH_WAIT_IS_WALK[entry_id] == false {
-            SNAKE_FLAG_CATCH_WAIT_IS_WALK[entry_id] = true;
+        if VariableModule::is_flag((fighter.module_accessor) as *mut _, FIGHTER_SNAKE_INSTANCE_WORK_ID_FLAG_SNAKE_FLAG_CATCH_WAIT_IS_WALK) == false {
+            VariableModule::set_flag((fighter.module_accessor) as *mut _, true, FIGHTER_SNAKE_INSTANCE_WORK_ID_FLAG_SNAKE_FLAG_CATCH_WAIT_IS_WALK);
             MotionModule::change_motion(fighter.module_accessor, Hash40::new("catch_walk_f"), 0.0, 1.0, false, 0.0, false, false);
         }
         let walk_speed:f32 = 1.4*(PostureModule::lr(fighter.module_accessor)*ControlModule::get_stick_x(fighter.module_accessor));
         MotionModule::set_rate(fighter.module_accessor, walk_speed);
     }
-    else if SNAKE_FLAG_CATCH_WAIT_IS_WALK[entry_id] {
-        SNAKE_FLAG_CATCH_WAIT_IS_WALK[entry_id] = false;
+    else if VariableModule::is_flag((fighter.module_accessor) as *mut _, FIGHTER_SNAKE_INSTANCE_WORK_ID_FLAG_SNAKE_FLAG_CATCH_WAIT_IS_WALK) {
+        VariableModule::set_flag((fighter.module_accessor) as *mut _, false, FIGHTER_SNAKE_INSTANCE_WORK_ID_FLAG_SNAKE_FLAG_CATCH_WAIT_IS_WALK);
         MotionModule::change_motion(fighter.module_accessor, Hash40::new("catch_wait"), 0.0, 1.0, false, 0.0, false, false);
     }
     return false.into()
@@ -244,8 +244,8 @@ pub unsafe fn snake_taunt_main_loop(fighter: &mut L2CFighterCommon) -> L2CValue 
 
 pub unsafe fn snake_down_taunt_wait_main_loop(fighter: &mut L2CFighterCommon) -> L2CValue {
     let entry_id = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-    if SNAKE_FLAG_APPEAL_LW_GRENADE_WAIT_COUNT[entry_id] > 0 {
-        SNAKE_FLAG_APPEAL_LW_GRENADE_WAIT_COUNT[entry_id] -= 1;
+    if VariableModule::get_int((fighter.module_accessor) as *mut _, FIGHTER_SNAKE_INSTANCE_WORK_ID_INT_SNAKE_FLAG_APPEAL_LW_GRENADE_WAIT_COUNT) > 0 {
+        VariableModule::dec_int((fighter.module_accessor) as *mut _, FIGHTER_SNAKE_INSTANCE_WORK_ID_INT_SNAKE_FLAG_APPEAL_LW_GRENADE_WAIT_COUNT);
     }
     WorkModule::dec_int(fighter.module_accessor, *FIGHTER_SNAKE_STATUS_APPEAL_WORK_INT_WAIT_COUNTER);
     if StatusModule::situation_kind(fighter.module_accessor) == *SITUATION_KIND_AIR {
@@ -260,7 +260,7 @@ pub unsafe fn snake_down_taunt_wait_main_loop(fighter: &mut L2CFighterCommon) ->
     }else if ControlModule::get_command_flag_cat(fighter.module_accessor, 0) == *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_LW
     && ControlModule::check_button_trigger(fighter.module_accessor, *CONTROL_PAD_BUTTON_SPECIAL) {
         if ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_SNAKE_GENERATE_ARTICLE_C4) {
-            SNAKE_FLAG_APPEAL_LW_C4_EXLPODE[entry_id] = true;
+            VariableModule::set_flag((fighter.module_accessor) as *mut _, true, FIGHTER_SNAKE_INSTANCE_WORK_ID_FLAG_SNAKE_FLAG_APPEAL_LW_C4_EXLPODE);
             fighter.change_status(FIGHTER_SNAKE_STATUS_KIND_APPEAL_END.into(), false.into());
         }else {
             ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_SNAKE_GENERATE_ARTICLE_C4, false, 0);
@@ -271,9 +271,9 @@ pub unsafe fn snake_down_taunt_wait_main_loop(fighter: &mut L2CFighterCommon) ->
     }else if ControlModule::get_command_flag_cat(fighter.module_accessor, 0) == *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_N
     && ControlModule::check_button_trigger(fighter.module_accessor, *CONTROL_PAD_BUTTON_SPECIAL)
     && ArticleModule::is_generatable(fighter.module_accessor, *FIGHTER_SNAKE_GENERATE_ARTICLE_GRENADE)
-    && SNAKE_FLAG_APPEAL_LW_GRENADE_WAIT_COUNT[entry_id] <= 0
+    && VariableModule::get_int((fighter.module_accessor) as *mut _, FIGHTER_SNAKE_INSTANCE_WORK_ID_INT_SNAKE_FLAG_APPEAL_LW_GRENADE_WAIT_COUNT) <= 0
     {
-        SNAKE_FLAG_APPEAL_LW_GRENADE_WAIT_COUNT[entry_id] = SNAKE_APPEAL_LW_GRENADE_WAIT_MAX;
+        VariableModule::set_int((fighter.module_accessor) as *mut _, SNAKE_APPEAL_LW_GRENADE_WAIT_MAX, FIGHTER_SNAKE_INSTANCE_WORK_ID_INT_SNAKE_FLAG_APPEAL_LW_GRENADE_WAIT_COUNT);
 
         ////adjusts first grenade position only
         ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_SNAKE_GENERATE_ARTICLE_GRENADE, false, 0);

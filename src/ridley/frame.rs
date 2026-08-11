@@ -74,19 +74,19 @@ unsafe extern "C" fn ridley(fighter : &mut L2CFighterCommon) {
 					if [*FIGHTER_RIDLEY_STATUS_KIND_SPECIAL_HI_HOVER].contains(&status_kind) {
 						let stick_angle = get_stick_angle(boma);
 						if stick_angle != -1.0 {
-							UPB_ANGLE[ENTRY_ID] = stick_angle;
+							VariableModule::set_float((boma) as *mut _, stick_angle, FIGHTER_RIDLEY_INSTANCE_WORK_ID_FLOAT_UPB_ANGLE);
 							if (lr > 0.0) {
-								UPB_ANGLE[ENTRY_ID] = 360.0 - stick_angle;
+								VariableModule::set_float((boma) as *mut _, 360.0 - stick_angle, FIGHTER_RIDLEY_INSTANCE_WORK_ID_FLOAT_UPB_ANGLE);
 							}
 						} else {
-							UPB_ANGLE[ENTRY_ID] = 0.0;
+							VariableModule::set_float((boma) as *mut _, 0.0, FIGHTER_RIDLEY_INSTANCE_WORK_ID_FLOAT_UPB_ANGLE);
 						}
 					}
 					if KineticModule::get_kinetic_type(boma) != *FIGHTER_KINETIC_TYPE_MOTION_AIR {
 						KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_MOTION_AIR);
 					};
 					if [*FIGHTER_RIDLEY_STATUS_KIND_SPECIAL_HI_CHARGE_HI, *FIGHTER_RIDLEY_STATUS_KIND_SPECIAL_HI_CHARGE_B, *FIGHTER_RIDLEY_STATUS_KIND_SPECIAL_HI_CHARGE_F, *FIGHTER_RIDLEY_STATUS_KIND_SPECIAL_HI_CHARGE_LW].contains(&status_kind) {
-						let stick_angle = UPB_ANGLE[ENTRY_ID];
+						let stick_angle = VariableModule::get_float((boma) as *mut _, FIGHTER_RIDLEY_INSTANCE_WORK_ID_FLOAT_UPB_ANGLE);
 						let angle_radians = (stick_angle - 90.0) * (PI / 180.0);
 						let init_speed = 5.0;
 						let deccel = 0.15;
@@ -95,7 +95,7 @@ unsafe extern "C" fn ridley(fighter : &mut L2CFighterCommon) {
 						let y_speed = angle_radians.sin() * speed * -1.0;
 
 						macros::SET_SPEED_EX(fighter, x_speed, y_speed, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
-						println!("Speed : ({},{}), Dir : {}", x_speed, y_speed, UPB_ANGLE[ENTRY_ID]);
+						println!("Speed : ({},{}), Dir : {}", x_speed, y_speed, VariableModule::get_float((boma) as *mut _, FIGHTER_RIDLEY_INSTANCE_WORK_ID_FLOAT_UPB_ANGLE));
 						let mut rotation = Vector3f{x: stick_angle, y: 0.0 , z: 0.0};
 						ModelModule::set_joint_rotate(fighter.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
 					
@@ -113,7 +113,7 @@ unsafe extern "C" fn ridley(fighter : &mut L2CFighterCommon) {
 								}
 								let pos = smash::phx::Vector3f { x: PostureModule::pos_x(boma), y: PostureModule::pos_y(boma)+teleport_distance, z: 0.0 };
 								PostureModule::set_pos(boma, &pos);
-								if UPB_ANGLE[ENTRY_ID] > 180.0 {
+								if VariableModule::get_float((boma) as *mut _, FIGHTER_RIDLEY_INSTANCE_WORK_ID_FLOAT_UPB_ANGLE) > 180.0 {
 									PostureModule::set_lr(fighter.module_accessor, 1.0);
 								} else {
 									PostureModule::set_lr(fighter.module_accessor, -1.0);
@@ -125,7 +125,7 @@ unsafe extern "C" fn ridley(fighter : &mut L2CFighterCommon) {
 				}
 				if [*FIGHTER_RIDLEY_STATUS_KIND_SPECIAL_HI_END, *FIGHTER_RIDLEY_STATUS_KIND_SPECIAL_HI_STOP_WALL, *FIGHTER_RIDLEY_STATUS_KIND_SPECIAL_HI_STOP_CEIL].contains(&status_kind) {
 					if (frame as i32) == 1 {
-						if UPB_ANGLE[ENTRY_ID] > 180.0 {
+						if VariableModule::get_float((boma) as *mut _, FIGHTER_RIDLEY_INSTANCE_WORK_ID_FLOAT_UPB_ANGLE) > 180.0 {
 							PostureModule::set_lr(fighter.module_accessor, -1.0);
 						} else {
 							PostureModule::set_lr(fighter.module_accessor, 1.0);

@@ -20,10 +20,10 @@ use super::*;
 
 
 //Joker Gun Cancel 
-static mut IS_ARSENE: [bool; 8] = [false; 8];
+static FIGHTER_JACK_INSTANCE_WORK_ID_FLAG_IS_ARSENE : i32 = 0;
 static mut X: [f32; 8] = [0.0; 8];
 static mut Y: [f32; 8] = [0.0; 8];
-static mut BATON_TYPE: [i32; 8] = [0; 8];
+static FIGHTER_JACK_INSTANCE_WORK_ID_INT_BATON_TYPE : i32 = 1;
 static BATON_MAX : i32 = 2;
 
 

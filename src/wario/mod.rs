@@ -6,12 +6,12 @@ use smash::lib::lua_const::*;
 use smash::hash40;
 
 
-static mut BAN_SIDEB : [bool; 8] = [false; 8];
-static mut HAS_BOUNCE : [bool; 8] = [false; 8];
-static mut IS_JUMP : [bool; 8] = [false; 8];
-static mut SHOW_COUNT : [bool; 8] = [false; 8];
-static mut COIN_COUNT : [i32; 8] = [0; 8];
-static mut ALPHA_COUNTER : [f32; 8] = [0.0; 8];
+static FIGHTER_WARIO_INSTANCE_WORK_ID_FLAG_BAN_SIDEB : i32 = 0;
+static FIGHTER_WARIO_INSTANCE_WORK_ID_FLAG_HAS_BOUNCE : i32 = 1;
+static FIGHTER_WARIO_INSTANCE_WORK_ID_FLAG_IS_JUMP : i32 = 2;
+static FIGHTER_WARIO_INSTANCE_WORK_ID_FLAG_SHOW_COUNT : i32 = 3;
+static FIGHTER_WARIO_INSTANCE_WORK_ID_INT_COIN_COUNT : i32 = 4;
+static FIGHTER_WARIO_INSTANCE_WORK_ID_FLOAT_ALPHA_COUNTER : i32 = 5;
 			
 pub static mut FIGHTER_WARIO_GENERATE_ARTICLE_COIN: i32 = 0x3;
 pub const WEAPON_WARIO_COIN_STATUS_KIND_SHOOT: i32 = 0x0;

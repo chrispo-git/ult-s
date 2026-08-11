@@ -5,7 +5,7 @@ use crate::util::*;
 use smash::lib::lua_const::*;
 use smash::hash40;
 
-static mut IS_UPB_DOWN: [bool; 8] = [false; 8];
+static FIGHTER_INKLING_INSTANCE_WORK_ID_FLAG_IS_UPB_DOWN : i32 = 0;
 
 pub fn install() {
 	frame::install();

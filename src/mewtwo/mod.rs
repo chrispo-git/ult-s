@@ -5,10 +5,10 @@ use crate::util::*;
 use smash::lib::lua_const::*;
 use smash::hash40;
 
-static mut ATTACK_AIR_WINDOW : [i32; 8] = [0; 8];
+static FIGHTER_MEWTWO_INSTANCE_WORK_ID_INT_ATTACK_AIR_WINDOW : i32 = 0;
 static mut MAX_ATTACK_AIR_WINDOW : i32 = 15;
-static mut HAS_ATTACK_AIR: [bool; 8] = [false; 8];
-static mut HAS_ALREADY_TELECANCEL: [bool; 8] = [false; 8];
+static FIGHTER_MEWTWO_INSTANCE_WORK_ID_FLAG_HAS_ATTACK_AIR : i32 = 1;
+static FIGHTER_MEWTWO_INSTANCE_WORK_ID_FLAG_HAS_ALREADY_TELECANCEL : i32 = 2;
 
 
 

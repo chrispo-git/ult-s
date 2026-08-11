@@ -5,13 +5,13 @@ use crate::util::*;
 use smash::lib::lua_const::*;
 use smash::hash40;
 
-static mut HYDRANT_POS_X : [f32; 8] = [0.0; 8];
-static mut HYDRANT_POS_Y : [f32; 8] = [0.0; 8];
-static mut TRAMPOLINE_POS_X : [f32; 8] = [0.0; 8];
-static mut TRAMPOLINE_POS_Y : [f32; 8] = [0.0; 8];
-static mut TRAMPOLINE_DELETE_TIMER : [i32; 8] = [0; 8];
-static mut HAS_UPB_ENDS : [bool; 8] = [false; 8];
-static mut WE_BOUNCE_NOW : [bool; 8] = [false; 8];
+static FIGHTER_PACMAN_INSTANCE_WORK_ID_FLOAT_HYDRANT_POS_X : i32 = 0;
+static FIGHTER_PACMAN_INSTANCE_WORK_ID_FLOAT_HYDRANT_POS_Y : i32 = 1;
+static FIGHTER_PACMAN_INSTANCE_WORK_ID_FLOAT_TRAMPOLINE_POS_X : i32 = 2;
+static FIGHTER_PACMAN_INSTANCE_WORK_ID_FLOAT_TRAMPOLINE_POS_Y : i32 = 3;
+static FIGHTER_PACMAN_INSTANCE_WORK_ID_INT_TRAMPOLINE_DELETE_TIMER : i32 = 4;
+static FIGHTER_PACMAN_INSTANCE_WORK_ID_FLAG_HAS_UPB_ENDS : i32 = 5;
+static FIGHTER_PACMAN_INSTANCE_WORK_ID_FLAG_WE_BOUNCE_NOW : i32 = 6;
 			
 
 

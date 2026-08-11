@@ -46,8 +46,8 @@ unsafe extern "C" fn wario_sideb(fighter: &mut L2CAgentBase) {
 	let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 		frame(fighter.lua_state_agent, 15.0);
 		if macros::is_excute(fighter) {
-			if COIN_COUNT[ENTRY_ID] > 0 {
-				COIN_COUNT[ENTRY_ID] -= 1;
+			if VariableModule::get_int((boma) as *mut _, FIGHTER_WARIO_INSTANCE_WORK_ID_INT_COIN_COUNT) > 0 {
+				VariableModule::dec_int((boma) as *mut _, FIGHTER_WARIO_INSTANCE_WORK_ID_INT_COIN_COUNT);
                 macros::PLAY_SE(fighter, Hash40::new("se_common_coin"));
 				ArticleModule::generate_article(fighter.module_accessor, FIGHTER_WARIO_GENERATE_ARTICLE_COIN, false, -1);
 			}

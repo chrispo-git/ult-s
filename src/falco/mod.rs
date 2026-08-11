@@ -5,8 +5,8 @@ use crate::util::*;
 use smash::lib::lua_const::*;
 use smash::hash40;
 
-static mut HAS_DOWNB : [bool; 8] = [false; 8];
-static mut DO_STALL : [bool; 8] = [false; 8];
+static FIGHTER_FALCO_INSTANCE_WORK_ID_FLAG_HAS_DOWNB : i32 = 0;
+static FIGHTER_FALCO_INSTANCE_WORK_ID_FLAG_DO_STALL : i32 = 1;
 
 pub fn install() {
 	frame::install();

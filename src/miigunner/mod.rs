@@ -6,8 +6,8 @@ use smash::lib::lua_const::*;
 use smash::hash40;
 
 /*static mut SIDEB_COOLDOWN : i32 = 300;*/
-static mut CHARGE_FRAMES : [i32; 8] = [0; 8];
-static mut NO_FP : [i32; 8] = [0; 8];
+static FIGHTER_MIIGUNNER_INSTANCE_WORK_ID_INT_CHARGE_FRAMES : i32 = 0;
+static FIGHTER_MIIGUNNER_INSTANCE_WORK_ID_INT_NO_FP : i32 = 1;
 static MAX_FRAMES : i32 = 60;
 static FP_DELAY : i32 = 100;
 

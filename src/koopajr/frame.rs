@@ -40,8 +40,8 @@ unsafe extern "C" fn jr(fighter : &mut L2CFighterCommon) {
 		let motion_kind = MotionModule::motion_kind(boma);
 		if StatusModule::situation_kind(boma) != SITUATION_KIND_AIR {
 			FLOAT[ENTRY_ID] = 0;
-			START_FLOAT[ENTRY_ID] = false;
-			CHECK_FLOAT[ENTRY_ID] = 0;
+			VariableModule::set_flag((boma) as *mut _, false, FIGHTER_KOOPAJR_INSTANCE_WORK_ID_FLAG_START_FLOAT);
+			VariableModule::set_int((boma) as *mut _, 0, FIGHTER_KOOPAJR_INSTANCE_WORK_ID_INT_CHECK_FLOAT);
 		};
 		//Effect Code
 		if FLOAT[ENTRY_ID] % 5 == 0 && FLOAT[ENTRY_ID] > 1{
@@ -60,37 +60,37 @@ unsafe extern "C" fn jr(fighter : &mut L2CFighterCommon) {
 		}
 		if situation_kind == *SITUATION_KIND_AIR && (!(*FIGHTER_STATUS_KIND_DAMAGE..*FIGHTER_STATUS_KIND_DAMAGE_FALL).contains(&status_kind) && status_kind != *FIGHTER_STATUS_KIND_FALL_SPECIAL){
 			if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP) {
-				CHECK_FLOAT[ENTRY_ID] += 1;
+				VariableModule::inc_int((boma) as *mut _, FIGHTER_KOOPAJR_INSTANCE_WORK_ID_INT_CHECK_FLOAT);
 			} else {
-				CHECK_FLOAT[ENTRY_ID] = 0;
+				VariableModule::set_int((boma) as *mut _, 0, FIGHTER_KOOPAJR_INSTANCE_WORK_ID_INT_CHECK_FLOAT);
 			};
 			if ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_CSTICK_ON) && ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_ATTACK_RAW) && ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP)  && stick_y < -0.5 {
-				CHECK_FLOAT[ENTRY_ID] = CHECK_FLOAT_MAX;
+				VariableModule::set_int((boma) as *mut _, CHECK_FLOAT_MAX, FIGHTER_KOOPAJR_INSTANCE_WORK_ID_INT_CHECK_FLOAT);
 			};
 			
-			if ((CHECK_FLOAT[ENTRY_ID] >= CHECK_FLOAT_MAX && 
+			if ((VariableModule::get_int((boma) as *mut _, FIGHTER_KOOPAJR_INSTANCE_WORK_ID_INT_CHECK_FLOAT) >= CHECK_FLOAT_MAX && 
 				(![*FIGHTER_KINETIC_TYPE_JUMP, *FIGHTER_KINETIC_TYPE_JUMP_AERIAL].contains(&KineticModule::get_kinetic_type(boma))
 				|| get_speed_y(boma) <= 0.0
-			))|| JUMPSQUAT_FLOAT[ENTRY_ID]) && FLOAT[ENTRY_ID] == 0 {
-				START_FLOAT[ENTRY_ID] = true;
+			))|| VariableModule::is_flag((boma) as *mut _, FIGHTER_KOOPAJR_INSTANCE_WORK_ID_FLAG_JUMPSQUAT_FLOAT)) && FLOAT[ENTRY_ID] == 0 {
+				VariableModule::set_flag((boma) as *mut _, true, FIGHTER_KOOPAJR_INSTANCE_WORK_ID_FLAG_START_FLOAT);
 			};
 		};
-		if status_kind == *FIGHTER_STATUS_KIND_JUMP && JUMPSQUAT_FLOAT[ENTRY_ID] {
+		if status_kind == *FIGHTER_STATUS_KIND_JUMP && VariableModule::is_flag((boma) as *mut _, FIGHTER_KOOPAJR_INSTANCE_WORK_ID_FLAG_JUMPSQUAT_FLOAT) {
 			StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL, true);
 		};
 		if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_ATTACK_RAW) || ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_CSTICK_ON){
-			JUMPSQUAT_FLOAT[ENTRY_ID] = false;
+			VariableModule::set_flag((boma) as *mut _, false, FIGHTER_KOOPAJR_INSTANCE_WORK_ID_FLAG_JUMPSQUAT_FLOAT);
 		}
 		if status_kind == *FIGHTER_STATUS_KIND_JUMP_SQUAT {
 			if ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_CSTICK_ON) && ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_ATTACK_RAW) && ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP) && ControlModule::get_stick_y(boma) < -0.5 {
-				JUMPSQUAT_FLOAT[ENTRY_ID] = true;
+				VariableModule::set_flag((boma) as *mut _, true, FIGHTER_KOOPAJR_INSTANCE_WORK_ID_FLAG_JUMPSQUAT_FLOAT);
 				WorkModule::set_flag(boma, false, *FIGHTER_STATUS_WORK_ID_FLAG_RESERVE_JUMP_MINI);
 			} else {
-				JUMPSQUAT_FLOAT[ENTRY_ID] = false;
-				CHECK_FLOAT[ENTRY_ID] = 0;
+				VariableModule::set_flag((boma) as *mut _, false, FIGHTER_KOOPAJR_INSTANCE_WORK_ID_FLAG_JUMPSQUAT_FLOAT);
+				VariableModule::set_int((boma) as *mut _, 0, FIGHTER_KOOPAJR_INSTANCE_WORK_ID_INT_CHECK_FLOAT);
 			};
 		} else {
-			JUMPSQUAT_FLOAT[ENTRY_ID] = false;
+			VariableModule::set_flag((boma) as *mut _, false, FIGHTER_KOOPAJR_INSTANCE_WORK_ID_FLAG_JUMPSQUAT_FLOAT);
 		};
 		if [
 			*FIGHTER_STATUS_KIND_ESCAPE_AIR, *FIGHTER_STATUS_KIND_ESCAPE_AIR_SLIDE, *FIGHTER_STATUS_KIND_SPECIAL_N, 
@@ -175,9 +175,9 @@ unsafe extern "C" fn jr(fighter : &mut L2CFighterCommon) {
 			X[ENTRY_ID] = 0.0;
 			Y[ENTRY_ID] = 0.0;
 		};
-		if START_FLOAT[ENTRY_ID] == true {
+		if VariableModule::is_flag((boma) as *mut _, FIGHTER_KOOPAJR_INSTANCE_WORK_ID_FLAG_START_FLOAT) == true {
 			FLOAT[ENTRY_ID] = FLOAT_MAX;
-			START_FLOAT[ENTRY_ID] = false;
+			VariableModule::set_flag((boma) as *mut _, false, FIGHTER_KOOPAJR_INSTANCE_WORK_ID_FLAG_START_FLOAT);
 			ControlModule::clear_command(boma, false);
 			WorkModule::set_flag(boma, false, *FIGHTER_STATUS_WORK_ID_FLAG_RESERVE_DIVE);
 		};

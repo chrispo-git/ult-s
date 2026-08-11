@@ -51,9 +51,9 @@ unsafe extern "C" fn sonic(fighter : &mut L2CFighterCommon) {
 					};
 				};
 				if situation_kind != *SITUATION_KIND_AIR || (*FIGHTER_STATUS_KIND_DAMAGE..*FIGHTER_STATUS_KIND_DAMAGE_FALL).contains(&status_kind){
-					BAN_SIDEB[ENTRY_ID] = false;
+					VariableModule::set_flag((boma) as *mut _, false, FIGHTER_SONIC_INSTANCE_WORK_ID_FLAG_BAN_SIDEB);
 				};
-				if BAN_SIDEB[ENTRY_ID] == true {
+				if VariableModule::is_flag((boma) as *mut _, FIGHTER_SONIC_INSTANCE_WORK_ID_FLAG_BAN_SIDEB) == true {
 						crate::transition_set!(ENTRY_ID, can_sideb);
 				} else {
 						crate::transition_reset!(ENTRY_ID, can_sideb);
@@ -127,7 +127,7 @@ unsafe extern "C" fn sonic(fighter : &mut L2CFighterCommon) {
 							KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_FALL);
 						} 
 					}
-					if MotionModule::frame(boma) == 14.0 && !HAS_MADE_SIDEB_EFF[ENTRY_ID]{
+					if MotionModule::frame(boma) == 14.0 && !VariableModule::is_flag((boma) as *mut _, FIGHTER_SONIC_INSTANCE_WORK_ID_FLAG_HAS_MADE_SIDEB_EFF){
 						let lightspeed: u32 = EffectModule::req_follow(boma, smash::phx::Hash40::new("sys_attack_speedline"), smash::phx::Hash40::new("top"), &LIGHTSPEED, &LIGHTSPEED_ROT, 2.2, true, 0, 0, 0, 0, 0, true, true) as u32;
 						EffectModule::set_rgb(boma, lightspeed, 0.2, 0.4, 10.0);
 						EffectModule::set_rate(boma, lightspeed, 0.2);
@@ -136,7 +136,7 @@ unsafe extern "C" fn sonic(fighter : &mut L2CFighterCommon) {
 						macros::PLAY_SE(fighter, Hash40::new("se_sonic_swing_m"));
 						macros::PLAY_SE(fighter, Hash40::new("se_sonic_swing_l"));
 						macros::PLAY_SE(fighter, Hash40::new("se_sonic_attackair_l01"));
-						HAS_MADE_SIDEB_EFF[ENTRY_ID] = true;
+						VariableModule::set_flag((boma) as *mut _, true, FIGHTER_SONIC_INSTANCE_WORK_ID_FLAG_HAS_MADE_SIDEB_EFF);
 					};
 					if MotionModule::frame(boma) == 1.0 {
 						macros::PLAY_SE(fighter, Hash40::new("se_sonic_smash_h01"));
@@ -146,9 +146,9 @@ unsafe extern "C" fn sonic(fighter : &mut L2CFighterCommon) {
 					notify_event_msc_cmd!(fighter, Hash40::new_raw(0x2127e37c07u64), *GROUND_CLIFF_CHECK_KIND_ALWAYS);
 					notify_event_msc_cmd!(fighter, 0x2127e37c07 as u64, *GROUND_CLIFF_CHECK_KIND_ALWAYS);
 					notify_event_msc_cmd!(fighter, 0x2127e37c07u64, *GROUND_CLIFF_CHECK_KIND_ALWAYS);
-					BAN_SIDEB[ENTRY_ID] = true;
+					VariableModule::set_flag((boma) as *mut _, true, FIGHTER_SONIC_INSTANCE_WORK_ID_FLAG_BAN_SIDEB);
 				} else {
-					HAS_MADE_SIDEB_EFF[ENTRY_ID] = false;
+					VariableModule::set_flag((boma) as *mut _, false, FIGHTER_SONIC_INSTANCE_WORK_ID_FLAG_HAS_MADE_SIDEB_EFF);
 				}
 			};
 		}

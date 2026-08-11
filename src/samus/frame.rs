@@ -32,12 +32,12 @@ unsafe extern "C" fn samus_frame(fighter: &mut L2CFighterCommon) {
 			if [hash40("attack_lw3")].contains(&motion_kind) {
 				if check_jump(boma) && frame > 6.0 && AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_HIT) && !ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_SPECIAL) && !ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_GUARD){
 					CancelModule::enable_cancel(boma);
-					NO_WAVEDASH_TIMER[ENTRY_ID] = NO_WAVEDASH_MAX;
+					VariableModule::set_int((boma) as *mut _, NO_WAVEDASH_MAX, FIGHTER_SAMUS_INSTANCE_WORK_ID_INT_NO_WAVEDASH_TIMER);
 				};
 			};
-			if NO_WAVEDASH_TIMER[ENTRY_ID] > 0{
+			if VariableModule::get_int((boma) as *mut _, FIGHTER_SAMUS_INSTANCE_WORK_ID_INT_NO_WAVEDASH_TIMER) > 0{
 				crate::transition_set!(ENTRY_ID, can_airdodge);
-				NO_WAVEDASH_TIMER[ENTRY_ID] -= 1;
+				VariableModule::dec_int((boma) as *mut _, FIGHTER_SAMUS_INSTANCE_WORK_ID_INT_NO_WAVEDASH_TIMER);
 			} else {
 				crate::transition_reset!(ENTRY_ID, can_airdodge);
 			};

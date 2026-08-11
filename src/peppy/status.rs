@@ -60,12 +60,12 @@ unsafe extern "C" fn regular_init(weapon: &mut L2CWeaponCommon) -> L2CValue {
         sv_kinetic_energy!(set_speed, weapon, WEAPON_KINETIC_ENERGY_RESERVE_ID_NORMAL, speed_x*lr, speed_y);
         sv_kinetic_energy!(set_stable_speed, weapon, WEAPON_KINETIC_ENERGY_RESERVE_ID_NORMAL, speed_x*lr, speed_y);
         PostureModule::set_pos(weapon.module_accessor, &Vector3f{x: owner_pos_x+(12.0*lr), y: owner_pos_y, z: owner_pos_z});
-        AIR_SHOT[ENTRY_ID] = true;
+        VariableModule::set_flag((owner_boma) as *mut _, true, FIGHTER_PEPPY_INSTANCE_WORK_ID_FLAG_AIR_SHOT);
     } else {
         sv_kinetic_energy!(set_speed, weapon, WEAPON_KINETIC_ENERGY_RESERVE_ID_NORMAL, speed*lr, 0.0);
         sv_kinetic_energy!(set_stable_speed, weapon, WEAPON_KINETIC_ENERGY_RESERVE_ID_NORMAL, speed*lr, 0.0);
         PostureModule::set_pos(weapon.module_accessor, &Vector3f{x: owner_pos_x+(15.0*lr), y: owner_pos_y+7.0, z: owner_pos_z});
-        AIR_SHOT[ENTRY_ID] = false;
+        VariableModule::set_flag((owner_boma) as *mut _, false, FIGHTER_PEPPY_INSTANCE_WORK_ID_FLAG_AIR_SHOT);
     }
     sv_kinetic_energy!(set_accel, weapon, WEAPON_KINETIC_ENERGY_RESERVE_ID_NORMAL, 0.0, 0.0);
     KineticModule::enable_energy(weapon.module_accessor, *WEAPON_KINETIC_ENERGY_RESERVE_ID_NORMAL);
@@ -87,7 +87,7 @@ unsafe extern "C" fn regular_main_loop(weapon: &mut L2CWeaponCommon) -> L2CValue
     let owner_id = WorkModule::get_int(weapon.module_accessor, *WEAPON_INSTANCE_WORK_ID_INT_LINK_OWNER) as u32;
     let owner_boma = smash::app::sv_battle_object::module_accessor(owner_id);
     let ENTRY_ID = WorkModule::get_int(&mut *owner_boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-    if AIR_SHOT[ENTRY_ID] {
+    if VariableModule::is_flag((owner_boma) as *mut _, FIGHTER_PEPPY_INSTANCE_WORK_ID_FLAG_AIR_SHOT) {
         let mut rotation = Vector3f{x: 45.0, y: 0.0 , z: 0.0};
         ModelModule::set_joint_rotate(weapon.module_accessor, Hash40::new("rot"), &rotation,  smash::app::MotionNodeRotateCompose{_address: *MOTION_NODE_ROTATE_COMPOSE_AFTER as u8},  smash::app::MotionNodeRotateOrder{_address: *MOTION_NODE_ROTATE_ORDER_XYZ as u8});
     }

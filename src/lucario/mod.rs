@@ -5,9 +5,9 @@ use crate::util::*;
 use smash::lib::lua_const::*;
 use smash::hash40;
 
-static mut HAS_DOWNB : [bool; 8] = [false; 8];
-static mut DOWNB_X : [f32; 8] = [0.0; 8];
-static mut DOWNB_Y : [f32; 8] = [0.0; 8];
+static FIGHTER_LUCARIO_INSTANCE_WORK_ID_FLAG_HAS_DOWNB : i32 = 0;
+static FIGHTER_LUCARIO_INSTANCE_WORK_ID_FLOAT_DOWNB_X : i32 = 1;
+static FIGHTER_LUCARIO_INSTANCE_WORK_ID_FLOAT_DOWNB_Y : i32 = 2;
 			
 
 pub fn install() {

@@ -42,6 +42,11 @@ impl VariableModule {
             .unwrap_or(0.0)
     }
 
+    pub unsafe fn mul_float(module_accessor: *mut BattleObjectModuleAccessor, value: f32, id: i32) {
+        let value = Self::get_float(module_accessor, id) * value;
+        Self::set_float(module_accessor, value, id);
+    }
+    
     pub unsafe fn set_float(module_accessor: *mut BattleObjectModuleAccessor, value: f32, id: i32) {
         FLOAT_VARS.get_or_insert_with(HashMap::new)
             .insert(key(module_accessor, id), value);

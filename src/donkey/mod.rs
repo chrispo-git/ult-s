@@ -5,11 +5,11 @@ use crate::util::*;
 use smash::lib::lua_const::*;
 use smash::hash40;
 
-static mut IS_DK_START_ITEM_CHUCK: [bool; 8] = [false; 8];
-static mut IS_DK_UPB_BARREL: [bool; 8] = [false; 8];
-static mut UPB_TIMER: [i32; 8] = [0; 8];
-static mut UPB_ANGLE_X: [f32; 8] = [0.0; 8];
-static mut UPB_ANGLE_Y: [f32; 8] = [0.0; 8];
+static FIGHTER_DONKEY_INSTANCE_WORK_ID_FLAG_IS_DK_START_ITEM_CHUCK : i32 = 0;
+static FIGHTER_DONKEY_INSTANCE_WORK_ID_FLAG_IS_DK_UPB_BARREL : i32 = 1;
+static FIGHTER_DONKEY_INSTANCE_WORK_ID_INT_UPB_TIMER : i32 = 2;
+static FIGHTER_DONKEY_INSTANCE_WORK_ID_FLOAT_UPB_ANGLE_X : i32 = 3;
+static FIGHTER_DONKEY_INSTANCE_WORK_ID_FLOAT_UPB_ANGLE_Y : i32 = 4;
 
 const UPB_SPEED: f32 = 2.5;
 static mut UPB_30_X: f32 = 0.0;

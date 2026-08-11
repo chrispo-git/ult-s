@@ -37,10 +37,10 @@ unsafe extern "C" fn dk_frame(fighter: &mut L2CFighterCommon) {
 			let fallspeed = WorkModule::get_param_float(fighter.module_accessor, hash40("air_speed_y_stable"), 0);
             UPB_30_X = 30.0_f32.sin() * UPB_SPEED;
             UPB_30_Y = 0.89 * UPB_SPEED;
-            if IS_DK_START_ITEM_CHUCK[ENTRY_ID] == true {
+            if VariableModule::is_flag((boma) as *mut _, FIGHTER_DONKEY_INSTANCE_WORK_ID_FLAG_IS_DK_START_ITEM_CHUCK) == true {
                 if ![*FIGHTER_STATUS_KIND_SPECIAL_S].contains(&status_kind) {
                     ItemModule::throw_item(fighter.module_accessor, 0.0, 0.0, 1.0, 0, true, 0.0);
-                    IS_DK_START_ITEM_CHUCK[ENTRY_ID] = false;
+                    VariableModule::set_flag((boma) as *mut _, false, FIGHTER_DONKEY_INSTANCE_WORK_ID_FLAG_IS_DK_START_ITEM_CHUCK);
                 };
             };
             if [hash40("appeal_s_r"), hash40("appeal_s_l")].contains(&motion_kind) {
@@ -58,36 +58,36 @@ unsafe extern "C" fn dk_frame(fighter: &mut L2CFighterCommon) {
                 StatusModule::set_keep_situation_air(boma, true);
                 macros::SET_SPEED_EX(fighter, 0.0, 0.0, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
                 KineticModule::suspend_energy(boma, *FIGHTER_KINETIC_ENERGY_ID_CONTROL);
-                IS_DK_UPB_BARREL[ENTRY_ID] = true;
-                UPB_TIMER[ENTRY_ID] += 1;
+                VariableModule::set_flag((boma) as *mut _, true, FIGHTER_DONKEY_INSTANCE_WORK_ID_FLAG_IS_DK_UPB_BARREL);
+                VariableModule::inc_int((boma) as *mut _, FIGHTER_DONKEY_INSTANCE_WORK_ID_INT_UPB_TIMER);
                 //This sucks! Don't do it :)
                 MotionModule::set_rate(boma, 1.0);
                 if frame < 2.0 {
-                    UPB_ANGLE_X[ENTRY_ID] = 0.0;
-                    UPB_ANGLE_Y[ENTRY_ID] = UPB_SPEED;
+                    VariableModule::set_float((boma) as *mut _, 0.0, FIGHTER_DONKEY_INSTANCE_WORK_ID_FLOAT_UPB_ANGLE_X);
+                    VariableModule::set_float((boma) as *mut _, UPB_SPEED, FIGHTER_DONKEY_INSTANCE_WORK_ID_FLOAT_UPB_ANGLE_Y);
                 }
                 if frame < 30.0 {
-                    UPB_ANGLE_Y[ENTRY_ID] += ((UPB_30_Y - UPB_SPEED)/30.0)*rate;
-                    UPB_ANGLE_X[ENTRY_ID] += (1.0/30.0 * (UPB_30_X))*rate;
+                    VariableModule::set_float((boma) as *mut _, VariableModule::get_float((boma) as *mut _, FIGHTER_DONKEY_INSTANCE_WORK_ID_FLOAT_UPB_ANGLE_Y) + (((UPB_30_Y - UPB_SPEED)/30.0)*rate), FIGHTER_DONKEY_INSTANCE_WORK_ID_FLOAT_UPB_ANGLE_Y);
+                    VariableModule::set_float((boma) as *mut _, VariableModule::get_float((boma) as *mut _, FIGHTER_DONKEY_INSTANCE_WORK_ID_FLOAT_UPB_ANGLE_X) + ((1.0/30.0 * (UPB_30_X))*rate), FIGHTER_DONKEY_INSTANCE_WORK_ID_FLOAT_UPB_ANGLE_X);
                 } else if frame < 90.0 {
                     if frame < 60.0 {
-                        UPB_ANGLE_Y[ENTRY_ID] += ((UPB_SPEED - UPB_30_Y)/30.0)*rate;
+                        VariableModule::set_float((boma) as *mut _, VariableModule::get_float((boma) as *mut _, FIGHTER_DONKEY_INSTANCE_WORK_ID_FLOAT_UPB_ANGLE_Y) + (((UPB_SPEED - UPB_30_Y)/30.0)*rate), FIGHTER_DONKEY_INSTANCE_WORK_ID_FLOAT_UPB_ANGLE_Y);
                     } else {
-                        UPB_ANGLE_Y[ENTRY_ID] += ((UPB_30_Y - UPB_SPEED)/30.0)*rate;
+                        VariableModule::set_float((boma) as *mut _, VariableModule::get_float((boma) as *mut _, FIGHTER_DONKEY_INSTANCE_WORK_ID_FLOAT_UPB_ANGLE_Y) + (((UPB_30_Y - UPB_SPEED)/30.0)*rate), FIGHTER_DONKEY_INSTANCE_WORK_ID_FLOAT_UPB_ANGLE_Y);
                     }
-                    UPB_ANGLE_X[ENTRY_ID] -= (1.0/30.0 * (UPB_30_X))*rate;
+                    VariableModule::set_float((boma) as *mut _, VariableModule::get_float((boma) as *mut _, FIGHTER_DONKEY_INSTANCE_WORK_ID_FLOAT_UPB_ANGLE_X) - ((1.0/30.0 * (UPB_30_X))*rate), FIGHTER_DONKEY_INSTANCE_WORK_ID_FLOAT_UPB_ANGLE_X);
                 } else {
-                    UPB_ANGLE_Y[ENTRY_ID] += ((UPB_SPEED - UPB_30_Y)/30.0)*rate;
-                    UPB_ANGLE_X[ENTRY_ID] += (1.0/30.0 * (UPB_30_X))*rate;
+                    VariableModule::set_float((boma) as *mut _, VariableModule::get_float((boma) as *mut _, FIGHTER_DONKEY_INSTANCE_WORK_ID_FLOAT_UPB_ANGLE_Y) + (((UPB_SPEED - UPB_30_Y)/30.0)*rate), FIGHTER_DONKEY_INSTANCE_WORK_ID_FLOAT_UPB_ANGLE_Y);
+                    VariableModule::set_float((boma) as *mut _, VariableModule::get_float((boma) as *mut _, FIGHTER_DONKEY_INSTANCE_WORK_ID_FLOAT_UPB_ANGLE_X) + ((1.0/30.0 * (UPB_30_X))*rate), FIGHTER_DONKEY_INSTANCE_WORK_ID_FLOAT_UPB_ANGLE_X);
                 }
-                //println!("X:{}, Y:{}", UPB_ANGLE_X[ENTRY_ID], UPB_ANGLE_Y[ENTRY_ID]);
-                if UPB_TIMER[ENTRY_ID] > 35 || (UPB_TIMER[ENTRY_ID] > 5 && ControlModule::check_button_on_trriger(fighter.module_accessor, *CONTROL_PAD_BUTTON_SPECIAL)){
+                //println!("X:{}, Y:{}", VariableModule::get_float((boma) as *mut _, FIGHTER_DONKEY_INSTANCE_WORK_ID_FLOAT_UPB_ANGLE_X), VariableModule::get_float((boma) as *mut _, FIGHTER_DONKEY_INSTANCE_WORK_ID_FLOAT_UPB_ANGLE_Y));
+                if VariableModule::get_int((boma) as *mut _, FIGHTER_DONKEY_INSTANCE_WORK_ID_INT_UPB_TIMER) > 35 || (VariableModule::get_int((boma) as *mut _, FIGHTER_DONKEY_INSTANCE_WORK_ID_INT_UPB_TIMER) > 5 && ControlModule::check_button_on_trriger(fighter.module_accessor, *CONTROL_PAD_BUTTON_SPECIAL)){
                     MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_hi_shoot"), 0.0, 1.0, false, 0.0, false, false);
                 }
             } else {
-                UPB_TIMER[ENTRY_ID] = 0;
-                if IS_DK_UPB_BARREL[ENTRY_ID] {
-                    IS_DK_UPB_BARREL[ENTRY_ID] = false;
+                VariableModule::set_int((boma) as *mut _, 0, FIGHTER_DONKEY_INSTANCE_WORK_ID_INT_UPB_TIMER);
+                if VariableModule::is_flag((boma) as *mut _, FIGHTER_DONKEY_INSTANCE_WORK_ID_FLAG_IS_DK_UPB_BARREL) {
+                    VariableModule::set_flag((boma) as *mut _, false, FIGHTER_DONKEY_INSTANCE_WORK_ID_FLAG_IS_DK_UPB_BARREL);
                     ItemModule::remove_item(boma, 0);
                 }
             }
@@ -107,7 +107,7 @@ unsafe extern "C" fn dk_frame(fighter: &mut L2CFighterCommon) {
                 }
                 MotionModule::set_rate(boma, 2.0);
                 KineticModule::suspend_energy(boma, *FIGHTER_KINETIC_ENERGY_ID_CONTROL);
-                macros::SET_SPEED_EX(fighter, UPB_ANGLE_X[ENTRY_ID]*-0.7, UPB_ANGLE_Y[ENTRY_ID], *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+                macros::SET_SPEED_EX(fighter, VariableModule::get_float((boma) as *mut _, FIGHTER_DONKEY_INSTANCE_WORK_ID_FLOAT_UPB_ANGLE_X)*-0.7, VariableModule::get_float((boma) as *mut _, FIGHTER_DONKEY_INSTANCE_WORK_ID_FLOAT_UPB_ANGLE_Y), *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
             };
         }
 	}

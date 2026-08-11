@@ -8,10 +8,10 @@ use std::collections::HashMap;
 use smash::lib::lua_const::*;
 use smash::hash40;
 
-static mut AIR_SHOT : [bool; 8] = [false; 8];
-static mut HAS_DOWNB : [bool; 8] = [false; 8];
-static mut DO_STALL : [bool; 8] = [false; 8];
-static mut SUPER_LAUNCH : [bool; 8] = [false; 8];
+static FIGHTER_PEPPY_INSTANCE_WORK_ID_FLAG_AIR_SHOT : i32 = 0;
+static FIGHTER_PEPPY_INSTANCE_WORK_ID_FLAG_HAS_DOWNB : i32 = 1;
+static FIGHTER_PEPPY_INSTANCE_WORK_ID_FLAG_DO_STALL : i32 = 2;
+static FIGHTER_PEPPY_INSTANCE_WORK_ID_FLAG_SUPER_LAUNCH : i32 = 3;
 static mut TETHER_EFFECTS : [Vec<u32>; 8] = [vec![], vec![], vec![], vec![], vec![], vec![], vec![], vec![]];
 
 pub fn install() {

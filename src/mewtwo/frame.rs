@@ -31,27 +31,27 @@ unsafe extern "C" fn mew2_frame(fighter: &mut L2CFighterCommon) {
 			let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 			let cancel_frame = FighterMotionModuleImpl::get_cancel_frame(boma,smash::phx::Hash40::new_raw(MotionModule::motion_kind(boma)),false) as f32;
 			let motion_kind = MotionModule::motion_kind(boma);
-			if (status_kind == *FIGHTER_STATUS_KIND_FALL_SPECIAL || status_kind == *FIGHTER_MEWTWO_STATUS_KIND_SPECIAL_HI_3 )&& !HAS_ALREADY_TELECANCEL[ENTRY_ID] {
-				ATTACK_AIR_WINDOW[ENTRY_ID] += 1;
+			if (status_kind == *FIGHTER_STATUS_KIND_FALL_SPECIAL || status_kind == *FIGHTER_MEWTWO_STATUS_KIND_SPECIAL_HI_3 )&& !VariableModule::is_flag((boma) as *mut _, FIGHTER_MEWTWO_INSTANCE_WORK_ID_FLAG_HAS_ALREADY_TELECANCEL) {
+				VariableModule::inc_int((boma) as *mut _, FIGHTER_MEWTWO_INSTANCE_WORK_ID_INT_ATTACK_AIR_WINDOW);
 			} else {
-				ATTACK_AIR_WINDOW[ENTRY_ID] = 0;
+				VariableModule::set_int((boma) as *mut _, 0, FIGHTER_MEWTWO_INSTANCE_WORK_ID_INT_ATTACK_AIR_WINDOW);
 			};
-			if ATTACK_AIR_WINDOW[ENTRY_ID] > 3 && ATTACK_AIR_WINDOW[ENTRY_ID] < MAX_ATTACK_AIR_WINDOW && StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR{
+			if VariableModule::get_int((boma) as *mut _, FIGHTER_MEWTWO_INSTANCE_WORK_ID_INT_ATTACK_AIR_WINDOW) > 3 && VariableModule::get_int((boma) as *mut _, FIGHTER_MEWTWO_INSTANCE_WORK_ID_INT_ATTACK_AIR_WINDOW) < MAX_ATTACK_AIR_WINDOW && StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR{
 				if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_ATTACK) {
-					HAS_ATTACK_AIR[ENTRY_ID] = true;
-					HAS_ALREADY_TELECANCEL[ENTRY_ID] = true;
+					VariableModule::set_flag((boma) as *mut _, true, FIGHTER_MEWTWO_INSTANCE_WORK_ID_FLAG_HAS_ATTACK_AIR);
+					VariableModule::set_flag((boma) as *mut _, true, FIGHTER_MEWTWO_INSTANCE_WORK_ID_FLAG_HAS_ALREADY_TELECANCEL);
 					WorkModule::set_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT_MAX, *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT);
 					WorkModule::set_flag(boma, true, *FIGHTER_INSTANCE_WORK_ID_FLAG_DISABLE_ESCAPE_AIR);
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_ATTACK_AIR, true);
 				};
 			};
 			if StatusModule::situation_kind(boma) != *SITUATION_KIND_AIR {
-					HAS_ALREADY_TELECANCEL[ENTRY_ID] = false;
-					HAS_ATTACK_AIR[ENTRY_ID] = false;
+					VariableModule::set_flag((boma) as *mut _, false, FIGHTER_MEWTWO_INSTANCE_WORK_ID_FLAG_HAS_ALREADY_TELECANCEL);
+					VariableModule::set_flag((boma) as *mut _, false, FIGHTER_MEWTWO_INSTANCE_WORK_ID_FLAG_HAS_ATTACK_AIR);
 			};
 			if [*FIGHTER_STATUS_KIND_DEAD, *FIGHTER_STATUS_KIND_LOSE, *FIGHTER_STATUS_KIND_WIN].contains(&status_kind) || smash::app::sv_information::is_ready_go() == false{
-				HAS_ATTACK_AIR[ENTRY_ID] = false;
-				ATTACK_AIR_WINDOW[ENTRY_ID] = 0;
+				VariableModule::set_flag((boma) as *mut _, false, FIGHTER_MEWTWO_INSTANCE_WORK_ID_FLAG_HAS_ATTACK_AIR);
+				VariableModule::set_int((boma) as *mut _, 0, FIGHTER_MEWTWO_INSTANCE_WORK_ID_INT_ATTACK_AIR_WINDOW);
 			};
 		}
     }

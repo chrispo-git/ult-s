@@ -5,10 +5,10 @@ use crate::util::*;
 use smash::lib::lua_const::*;
 use smash::hash40;
 
-static mut SIDEB : [bool; 8] = [false; 8];
-static mut SPIN : [bool; 8] = [false; 8];
-static mut SPIN_EFF : [i32; 8] = [0; 8];
-static mut RUNLOOPCOUNT : [i32; 8] = [0; 8];
+static FIGHTER_MARIO_INSTANCE_WORK_ID_FLAG_SIDEB : i32 = 0;
+static FIGHTER_MARIO_INSTANCE_WORK_ID_FLAG_SPIN : i32 = 1;
+static FIGHTER_MARIO_INSTANCE_WORK_ID_INT_SPIN_EFF : i32 = 2;
+static FIGHTER_MARIO_INSTANCE_WORK_ID_INT_RUNLOOPCOUNT : i32 = 3;
 static mut SPIN1 :  smash::phx::Vector3f =  smash::phx::Vector3f { x: 0.0, y: 8.25, z: 0.0 };
 static mut SPIN2 :  smash::phx::Vector3f =  smash::phx::Vector3f { x: 0.0, y: 8.2, z: 0.0 };
 static mut SPIN3 :  smash::phx::Vector3f =  smash::phx::Vector3f { x: 0.0, y: 8.15, z: 0.0 };

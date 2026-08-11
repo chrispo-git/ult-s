@@ -20,11 +20,11 @@ mod frame;
 mod acmd;
 use crate::util::*;
 
-static mut LUCINA_STANCE : [i32; 8] = [0; 8];
-static mut DOWNB_TIMER : [i32; 8] = [1; 8];
-static mut BAN_SIDEB : [bool; 8] = [false; 8];
-static mut UPB_FALL : [bool; 8] = [false; 8];
-static mut TIMER : [i32; 8] = [0; 8];
+static FIGHTER_LUCINA_INSTANCE_WORK_ID_INT_LUCINA_STANCE : i32 = 0;
+static FIGHTER_LUCINA_INSTANCE_WORK_ID_INT_DOWNB_TIMER : i32 = 1;
+static FIGHTER_LUCINA_INSTANCE_WORK_ID_FLAG_BAN_SIDEB : i32 = 2;
+static FIGHTER_LUCINA_INSTANCE_WORK_ID_FLAG_UPB_FALL : i32 = 3;
+static FIGHTER_LUCINA_INSTANCE_WORK_ID_INT_TIMER : i32 = 4;
 static SWORDMASTER_DASH : f32 = 2.38;
 static SWORDMASTER_AIR_SPEED : f32 = 2.0;
 static SWORDMASTER_MAX_GRAVITY: f32 = 0.1;

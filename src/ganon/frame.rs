@@ -54,7 +54,7 @@ unsafe extern "C" fn ganon_float(fighter : &mut L2CFighterCommon) {
 		let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 		if fighter_kind == *FIGHTER_KIND_GANON {
 			if StatusModule::situation_kind(boma) != SITUATION_KIND_AIR || smash::app::sv_information::is_ready_go() == false || [*FIGHTER_STATUS_KIND_WIN, *FIGHTER_STATUS_KIND_LOSE, *FIGHTER_STATUS_KIND_DEAD].contains(&status_kind) {
-				FLOAT[ENTRY_ID] = 0;
+				VariableModule::set_int((boma) as *mut _, 0, FIGHTER_GANON_INSTANCE_WORK_ID_INT_FLOAT);
 			};
 			if [hash40("special_air_n")].contains(&MotionModule::motion_kind(boma)) {
 					StatusModule::set_situation_kind(boma, smash::app::SituationKind(*SITUATION_KIND_AIR), true);
@@ -70,12 +70,12 @@ unsafe extern "C" fn ganon_float(fighter : &mut L2CFighterCommon) {
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_GANON_STATUS_KIND_SPECIAL_LW_END, true);
 				};
 			};
-			if FLOAT[ENTRY_ID] == 1{
+			if VariableModule::get_int((boma) as *mut _, FIGHTER_GANON_INSTANCE_WORK_ID_INT_FLOAT) == 1{
 				crate::transition_set!(ENTRY_ID, can_neutralb);
 			} else {
 				crate::transition_reset!(ENTRY_ID, can_neutralb);
 			};
-			if FLOAT[ENTRY_ID] == 1{
+			if VariableModule::get_int((boma) as *mut _, FIGHTER_GANON_INSTANCE_WORK_ID_INT_FLOAT) == 1{
 				if KineticModule::get_kinetic_type(boma) == *FIGHTER_KINETIC_TYPE_MOTION_AIR && [*FIGHTER_STATUS_KIND_SPECIAL_LW, *FIGHTER_STATUS_KIND_SPECIAL_HI, *FIGHTER_STATUS_KIND_SPECIAL_S, *FIGHTER_GANON_STATUS_KIND_SPECIAL_AIR_S_CATCH, *FIGHTER_GANON_STATUS_KIND_SPECIAL_AIR_S_END].contains(&status_kind) == false {
 					KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_FALL);
 				};
@@ -83,29 +83,29 @@ unsafe extern "C" fn ganon_float(fighter : &mut L2CFighterCommon) {
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL, true);
 				};
 			};
-			if [*FIGHTER_STATUS_KIND_ESCAPE_AIR, *FIGHTER_STATUS_KIND_ESCAPE_AIR_SLIDE, *FIGHTER_STATUS_KIND_JUMP_AERIAL].contains(&status_kind) && FLOAT[ENTRY_ID] > 1{
-				FLOAT[ENTRY_ID] = 1;
+			if [*FIGHTER_STATUS_KIND_ESCAPE_AIR, *FIGHTER_STATUS_KIND_ESCAPE_AIR_SLIDE, *FIGHTER_STATUS_KIND_JUMP_AERIAL].contains(&status_kind) && VariableModule::get_int((boma) as *mut _, FIGHTER_GANON_INSTANCE_WORK_ID_INT_FLOAT) > 1{
+				VariableModule::set_int((boma) as *mut _, 1, FIGHTER_GANON_INSTANCE_WORK_ID_INT_FLOAT);
 			};
 			if [*FIGHTER_STATUS_KIND_SPECIAL_LW, *FIGHTER_STATUS_KIND_SPECIAL_HI, *FIGHTER_STATUS_KIND_SPECIAL_S, *FIGHTER_GANON_STATUS_KIND_SPECIAL_AIR_S_CATCH, *FIGHTER_GANON_STATUS_KIND_SPECIAL_AIR_S_END].contains(&status_kind){
-				FLOAT[ENTRY_ID] = 0;
+				VariableModule::set_int((boma) as *mut _, 0, FIGHTER_GANON_INSTANCE_WORK_ID_INT_FLOAT);
 			};
-			if FLOAT[ENTRY_ID] > 1{
-				if FLOAT[ENTRY_ID] % 30 == 0 {
+			if VariableModule::get_int((boma) as *mut _, FIGHTER_GANON_INSTANCE_WORK_ID_INT_FLOAT) > 1{
+				if VariableModule::get_int((boma) as *mut _, FIGHTER_GANON_INSTANCE_WORK_ID_INT_FLOAT) % 30 == 0 {
 					macros::EFFECT_FOLLOW(fighter, Hash40::new("ganon_rekkikyaku"), Hash40::new("kneer"), 12, -1.5, 0, 0, 0, 0, 0.5, true);
 					macros::EFFECT_FOLLOW(fighter, Hash40::new("ganon_rekkikyaku"), Hash40::new("kneel"), 12, -1.5, 0, 0, 0, 0, 0.5, true);
 				};
 				if [*FIGHTER_STATUS_KIND_FALL, *FIGHTER_STATUS_KIND_FALL_AERIAL].contains(&status_kind) && MotionModule::motion_kind(boma) != hash40("special_air_n") {
 					MotionModule::change_motion(boma, smash::phx::Hash40::new("special_air_n"), 1.0, 1.0, false, 0.0, false, false);
 				};
-				FLOAT[ENTRY_ID] -= 1;
+				VariableModule::dec_int((boma) as *mut _, FIGHTER_GANON_INSTANCE_WORK_ID_INT_FLOAT);
 				if KineticModule::get_kinetic_type(boma) != *FIGHTER_KINETIC_TYPE_MOTION_AIR {
 					KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_MOTION_AIR);
 				};
 				if ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_SPECIAL){
-					FLOAT[ENTRY_ID] = 1;
+					VariableModule::set_int((boma) as *mut _, 1, FIGHTER_GANON_INSTANCE_WORK_ID_INT_FLOAT);
 				};
 				if check_jump(boma) {
-					FLOAT[ENTRY_ID] = 1;
+					VariableModule::set_int((boma) as *mut _, 1, FIGHTER_GANON_INSTANCE_WORK_ID_INT_FLOAT);
 				};
 				let mut y_add = 0.0;
 				let mut x_add = 0.0;
@@ -171,11 +171,11 @@ unsafe extern "C" fn ganon_float(fighter : &mut L2CFighterCommon) {
 				Y[ENTRY_ID] = 0.0;
 			};
 			if [hash40("special_air_n")].contains(&MotionModule::motion_kind(boma)) {
-				if MotionModule::frame(boma) == 2.0 && FLOAT[ENTRY_ID] == 0 {
-					FLOAT[ENTRY_ID] = FLOAT_MAX;
+				if MotionModule::frame(boma) == 2.0 && VariableModule::get_int((boma) as *mut _, FIGHTER_GANON_INSTANCE_WORK_ID_INT_FLOAT) == 0 {
+					VariableModule::set_int((boma) as *mut _, FLOAT_MAX, FIGHTER_GANON_INSTANCE_WORK_ID_INT_FLOAT);
 					macros::PLAY_SE(fighter, Hash40::new("se_ganon_special_l01"));
 				};
-				if FLOAT[ENTRY_ID] == 1 {
+				if VariableModule::get_int((boma) as *mut _, FIGHTER_GANON_INSTANCE_WORK_ID_INT_FLOAT) == 1 {
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL_AERIAL, true);
 				};
 				CancelModule::enable_cancel(boma);
@@ -190,18 +190,18 @@ unsafe extern "C" fn ganon_float(fighter : &mut L2CFighterCommon) {
 				return;
 			}
 			if StatusModule::situation_kind(boma) != SITUATION_KIND_AIR || smash::app::sv_information::is_ready_go() == false || [*FIGHTER_STATUS_KIND_WIN, *FIGHTER_STATUS_KIND_LOSE, *FIGHTER_STATUS_KIND_DEAD].contains(&status_kind) {
-				FLOAT[ENTRY_ID] = 0;
+				VariableModule::set_int((boma) as *mut _, 0, FIGHTER_GANON_INSTANCE_WORK_ID_INT_FLOAT);
 			};
 			if [hash40("ganon_special_air_n")].contains(&MotionModule::motion_kind(boma)) {
 					StatusModule::set_situation_kind(boma, smash::app::SituationKind(*SITUATION_KIND_AIR), true);
 					StatusModule::set_keep_situation_air(boma, true);
 			};
-			if FLOAT[ENTRY_ID] == 1 {
+			if VariableModule::get_int((boma) as *mut _, FIGHTER_GANON_INSTANCE_WORK_ID_INT_FLOAT) == 1 {
 				crate::transition_set!(ENTRY_ID, can_neutralb);
 			} else {
 				crate::transition_reset!(ENTRY_ID, can_neutralb);
 			};
-			if FLOAT[ENTRY_ID] == 1{
+			if VariableModule::get_int((boma) as *mut _, FIGHTER_GANON_INSTANCE_WORK_ID_INT_FLOAT) == 1{
 				if KineticModule::get_kinetic_type(boma) == *FIGHTER_KINETIC_TYPE_MOTION_AIR && [*FIGHTER_STATUS_KIND_SPECIAL_LW, *FIGHTER_STATUS_KIND_SPECIAL_HI, *FIGHTER_STATUS_KIND_SPECIAL_S, *FIGHTER_GANON_STATUS_KIND_SPECIAL_AIR_S_CATCH, *FIGHTER_GANON_STATUS_KIND_SPECIAL_AIR_S_END].contains(&status_kind) == false {
 					KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_FALL);
 				};
@@ -209,29 +209,29 @@ unsafe extern "C" fn ganon_float(fighter : &mut L2CFighterCommon) {
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL, true);
 				};
 			};
-			if [*FIGHTER_STATUS_KIND_ESCAPE_AIR, *FIGHTER_STATUS_KIND_ESCAPE_AIR_SLIDE, *FIGHTER_STATUS_KIND_JUMP_AERIAL].contains(&status_kind) && FLOAT[ENTRY_ID] > 1{
-				FLOAT[ENTRY_ID] = 1;
+			if [*FIGHTER_STATUS_KIND_ESCAPE_AIR, *FIGHTER_STATUS_KIND_ESCAPE_AIR_SLIDE, *FIGHTER_STATUS_KIND_JUMP_AERIAL].contains(&status_kind) && VariableModule::get_int((boma) as *mut _, FIGHTER_GANON_INSTANCE_WORK_ID_INT_FLOAT) > 1{
+				VariableModule::set_int((boma) as *mut _, 1, FIGHTER_GANON_INSTANCE_WORK_ID_INT_FLOAT);
 			};
 			if [*FIGHTER_STATUS_KIND_SPECIAL_LW, *FIGHTER_STATUS_KIND_SPECIAL_HI, *FIGHTER_STATUS_KIND_SPECIAL_S, *FIGHTER_GANON_STATUS_KIND_SPECIAL_AIR_S_CATCH, *FIGHTER_GANON_STATUS_KIND_SPECIAL_AIR_S_END].contains(&status_kind){
-				FLOAT[ENTRY_ID] = 1;
+				VariableModule::set_int((boma) as *mut _, 1, FIGHTER_GANON_INSTANCE_WORK_ID_INT_FLOAT);
 			};
-			if FLOAT[ENTRY_ID] > 1{
-				if FLOAT[ENTRY_ID] % 30 == 0 {
+			if VariableModule::get_int((boma) as *mut _, FIGHTER_GANON_INSTANCE_WORK_ID_INT_FLOAT) > 1{
+				if VariableModule::get_int((boma) as *mut _, FIGHTER_GANON_INSTANCE_WORK_ID_INT_FLOAT) % 30 == 0 {
 					macros::EFFECT_FOLLOW(fighter, Hash40::new("ganon_rekkikyaku"), Hash40::new("haver"), 0, 3, 0, 0, 0, 0, 0.22, true);
 					macros::EFFECT_FOLLOW(fighter, Hash40::new("ganon_rekkikyaku"), Hash40::new("havel"), 0, 3, 0, 0, 0, 0, 0.22, true);
 				};
 				if [*FIGHTER_STATUS_KIND_FALL, *FIGHTER_STATUS_KIND_FALL_AERIAL].contains(&status_kind) && MotionModule::motion_kind(boma) != hash40("ganon_special_air_n") {
 					MotionModule::change_motion(boma, smash::phx::Hash40::new("ganon_special_air_n"), 1.0, 1.0, false, 0.0, false, false);
 				};
-				FLOAT[ENTRY_ID] -= 1;
+				VariableModule::dec_int((boma) as *mut _, FIGHTER_GANON_INSTANCE_WORK_ID_INT_FLOAT);
 				if KineticModule::get_kinetic_type(boma) != *FIGHTER_KINETIC_TYPE_MOTION_AIR {
 					KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_MOTION_AIR);
 				};
 				if ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_SPECIAL){
-					FLOAT[ENTRY_ID] = 1;
+					VariableModule::set_int((boma) as *mut _, 1, FIGHTER_GANON_INSTANCE_WORK_ID_INT_FLOAT);
 				};
 				if check_jump(boma) {
-					FLOAT[ENTRY_ID] = 1;
+					VariableModule::set_int((boma) as *mut _, 1, FIGHTER_GANON_INSTANCE_WORK_ID_INT_FLOAT);
 				};
 				let mut y_add = 0.0;
 				let mut x_add = 0.0;
@@ -297,11 +297,11 @@ unsafe extern "C" fn ganon_float(fighter : &mut L2CFighterCommon) {
 				Y[ENTRY_ID] = 0.0;
 			};
 			if [hash40("ganon_special_air_n")].contains(&MotionModule::motion_kind(boma)) {
-				if MotionModule::frame(boma) == 0.3 && FLOAT[ENTRY_ID] == 0 {
-					FLOAT[ENTRY_ID] = FLOAT_MAX;
+				if MotionModule::frame(boma) == 0.3 && VariableModule::get_int((boma) as *mut _, FIGHTER_GANON_INSTANCE_WORK_ID_INT_FLOAT) == 0 {
+					VariableModule::set_int((boma) as *mut _, FLOAT_MAX, FIGHTER_GANON_INSTANCE_WORK_ID_INT_FLOAT);
 					macros::PLAY_SE(fighter, Hash40::new("se_ganon_special_l01"));
 				};
-				if FLOAT[ENTRY_ID] == 1 {
+				if VariableModule::get_int((boma) as *mut _, FIGHTER_GANON_INSTANCE_WORK_ID_INT_FLOAT) == 1 {
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL_AERIAL, true);
 				};
 				CancelModule::enable_cancel(boma);

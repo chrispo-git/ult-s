@@ -31,12 +31,12 @@ unsafe extern "C" fn mario_frame(fighter : &mut L2CFighterCommon) {
 		let motion_kind = smash::app::lua_bind::MotionModule::motion_kind(boma);
 		if [hash40("run"),hash40("run_max"),hash40("run_brake_r"),hash40("run_brake_l"),hash40("turn_run"),hash40("turn_run_brake")].contains(&motion_kind) {
 			if motion_kind == hash40("run"){
-				if RUNLOOPCOUNT[ENTRY_ID] >= 30 {
+				if VariableModule::get_int((boma) as *mut _, FIGHTER_MARIO_INSTANCE_WORK_ID_INT_RUNLOOPCOUNT) >= 30 {
 					MotionModule::change_motion(boma, smash::phx::Hash40::new("run_max"), 0.0, 1.0, false, 0.0, false, false);
 				}
 			}
 		}	else {
-			RUNLOOPCOUNT[ENTRY_ID] = 0;
+			VariableModule::set_int((boma) as *mut _, 0, FIGHTER_MARIO_INSTANCE_WORK_ID_INT_RUNLOOPCOUNT);
 		}
 		//Down Special
 		if [hash40("special_air_lw_start"),hash40("special_lw_start")].contains(&motion_kind) {
@@ -72,7 +72,7 @@ unsafe extern "C" fn mario_frame(fighter : &mut L2CFighterCommon) {
 		};
 		if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_S  && MotionModule::frame(boma) > 9.0 && MotionModule::frame(boma) < 22.0 && StopModule::is_stop(boma) == false {
 			crate::transition_set!(ENTRY_ID, can_sideb);
-			if SPIN_EFF[ENTRY_ID] == 0{
+			if VariableModule::get_int((boma) as *mut _, FIGHTER_MARIO_INSTANCE_WORK_ID_INT_SPIN_EFF) == 0{
 				let handbg1: u32 = EffectModule::req_follow(boma, smash::phx::Hash40::new("sys_spin_wind"), smash::phx::Hash40::new("top"), &SPIN2, &NOSPIN, 1.1, true, 0, 0, 0, 0, 0, true, true) as u32;
 				let handbg2: u32 = EffectModule::req_follow(boma, smash::phx::Hash40::new("sys_spin_wind"), smash::phx::Hash40::new("top"), &SPIN3, &NOSPIN, 1.1, true, 0, 0, 0, 0, 0, true, true) as u32;
 				let handbg3: u32 = EffectModule::req_follow(boma, smash::phx::Hash40::new("sys_spin_wind"), smash::phx::Hash40::new("top"), &SPIN4, &NOSPIN, 1.1, true, 0, 0, 0, 0, 0, true, true) as u32;
@@ -110,12 +110,12 @@ unsafe extern "C" fn mario_frame(fighter : &mut L2CFighterCommon) {
 				EffectModule::set_alpha(boma, star6, 0.6);
 				EffectModule::set_alpha(boma, star7, 0.6);
 			};
-			SPIN_EFF[ENTRY_ID] += 1;
-			if SPIN_EFF[ENTRY_ID] > 4 {
-				SPIN_EFF[ENTRY_ID] = 0;
+			VariableModule::inc_int((boma) as *mut _, FIGHTER_MARIO_INSTANCE_WORK_ID_INT_SPIN_EFF);
+			if VariableModule::get_int((boma) as *mut _, FIGHTER_MARIO_INSTANCE_WORK_ID_INT_SPIN_EFF) > 4 {
+				VariableModule::set_int((boma) as *mut _, 0, FIGHTER_MARIO_INSTANCE_WORK_ID_INT_SPIN_EFF);
 			};
 		} else {
-			SPIN_EFF[ENTRY_ID] = 0;
+			VariableModule::set_int((boma) as *mut _, 0, FIGHTER_MARIO_INSTANCE_WORK_ID_INT_SPIN_EFF);
 		};
     }
 }

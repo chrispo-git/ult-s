@@ -88,7 +88,7 @@ unsafe extern "C" fn plant_sideb(agent: &mut L2CAgentBase) {
 	frame(agent.lua_state_agent, 6.0);
     if WorkModule::is_flag(agent.module_accessor, *FIGHTER_PACKUN_STATUS_SPECIAL_S_FLAG_FAILURE) {
 		if macros::is_excute(agent) {
-			IS_SIDEB_EAT[ENTRY_ID] = true;
+			VariableModule::set_flag((agent.module_accessor) as *mut _, true, FIGHTER_PACKUN_INSTANCE_WORK_ID_FLAG_IS_SIDEB_EAT);
         	macros::ATTACK(agent, 0, 0, Hash40::new("top"), 6.0, 361, 100, 70, 0, 5.0, 0.0, 7.0, 7.0, Some(0.0), Some(7.0), Some(16.0), 1.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_fire"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_NONE);
 		}
 	}
@@ -101,7 +101,7 @@ unsafe extern "C" fn plant_sideb(agent: &mut L2CAgentBase) {
 	frame(agent.lua_state_agent, 14.0);
     if WorkModule::is_flag(agent.module_accessor, *FIGHTER_PACKUN_STATUS_SPECIAL_S_FLAG_FAILURE) {
 		if macros::is_excute(agent) {
-			IS_SIDEB_EAT[ENTRY_ID] = false;
+			VariableModule::set_flag((agent.module_accessor) as *mut _, false, FIGHTER_PACKUN_INSTANCE_WORK_ID_FLAG_IS_SIDEB_EAT);
         	AttackModule::clear_all(agent.module_accessor);
 		}
 	}

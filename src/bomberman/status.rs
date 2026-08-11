@@ -126,8 +126,8 @@ unsafe extern "C" fn main_neutralb(fighter: &mut L2CFighterCommon) -> L2CValue {
             if [hash40("special_n"), hash40("special_air_n")].contains(&motion_kind) {
                 KineticModule::suspend_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_CONTROL);
                 if is_end {
-                    if NEUTRALB_CHARGE[ENTRY_ID] >= NEUTRALB_MAX {
-                        NEUTRALB_DIST[ENTRY_ID] = MIN_DISTANCE + ((MAX_DISTANCE-MIN_DISTANCE))*((NEUTRALB_CHARGE[ENTRY_ID] as f32)/(NEUTRALB_MAX as f32));
+                    if VariableModule::get_int((fighter.module_accessor) as *mut _, FIGHTER_BOMBERMAN_INSTANCE_WORK_ID_INT_NEUTRALB_CHARGE) >= NEUTRALB_MAX {
+                        VariableModule::set_float((fighter.module_accessor) as *mut _, MIN_DISTANCE + ((MAX_DISTANCE-MIN_DISTANCE))*((VariableModule::get_int((fighter.module_accessor) as *mut _, FIGHTER_BOMBERMAN_INSTANCE_WORK_ID_INT_NEUTRALB_CHARGE) as f32)/(NEUTRALB_MAX as f32)), FIGHTER_BOMBERMAN_INSTANCE_WORK_ID_FLOAT_NEUTRALB_DIST);
                         if is_ground {
                             MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_n_shoot"), -1.0, 1.0, false, 0.0, false, false);
                         } else {
@@ -169,14 +169,14 @@ unsafe extern "C" fn main_neutralb(fighter: &mut L2CFighterCommon) -> L2CValue {
                         MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_air_n_hold"), -1.0, 1.0, false, 0.0, false, false);
                     }
                 }
-                NEUTRALB_CHARGE[ENTRY_ID] += 1;
+                VariableModule::inc_int((fighter.module_accessor) as *mut _, FIGHTER_BOMBERMAN_INSTANCE_WORK_ID_INT_NEUTRALB_CHARGE);
                 let jc = is_jump(boma) && (WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT) < WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT_MAX) || is_ground);
                 let sc = ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_GUARD) && (!WorkModule::is_flag(boma, *FIGHTER_INSTANCE_WORK_ID_FLAG_DISABLE_ESCAPE_AIR) || is_ground);
-                if NEUTRALB_CHARGE[ENTRY_ID] >= NEUTRALB_MAX {
+                if VariableModule::get_int((fighter.module_accessor) as *mut _, FIGHTER_BOMBERMAN_INSTANCE_WORK_ID_INT_NEUTRALB_CHARGE) >= NEUTRALB_MAX {
 					smash::app::FighterUtil::flash_eye_info(boma);
                     EffectModule::req_common(boma, Hash40::new("charge_max"), 0.0);
                 }
-                if NEUTRALB_CHARGE[ENTRY_ID] >= NEUTRALB_MAX || jc || sc  {
+                if VariableModule::get_int((fighter.module_accessor) as *mut _, FIGHTER_BOMBERMAN_INSTANCE_WORK_ID_INT_NEUTRALB_CHARGE) >= NEUTRALB_MAX || jc || sc  {
                     if is_ground {
                         fighter.change_status(FIGHTER_STATUS_KIND_WAIT.into(), false.into());
                     } else {
@@ -184,7 +184,7 @@ unsafe extern "C" fn main_neutralb(fighter: &mut L2CFighterCommon) -> L2CValue {
                     }
                 }
                 if ControlModule::check_button_on_trriger(boma, *CONTROL_PAD_BUTTON_SPECIAL) {
-                    NEUTRALB_DIST[ENTRY_ID] = MIN_DISTANCE + ((MAX_DISTANCE-MIN_DISTANCE))*((NEUTRALB_CHARGE[ENTRY_ID] as f32)/(NEUTRALB_MAX as f32));
+                    VariableModule::set_float((fighter.module_accessor) as *mut _, MIN_DISTANCE + ((MAX_DISTANCE-MIN_DISTANCE))*((VariableModule::get_int((fighter.module_accessor) as *mut _, FIGHTER_BOMBERMAN_INSTANCE_WORK_ID_INT_NEUTRALB_CHARGE) as f32)/(NEUTRALB_MAX as f32)), FIGHTER_BOMBERMAN_INSTANCE_WORK_ID_FLOAT_NEUTRALB_DIST);
                     if is_ground || is_near_ground{
                         MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_n_shoot"), -1.0, 1.0, false, 0.0, false, false);
                     } else {
@@ -210,7 +210,7 @@ unsafe extern "C" fn main_neutralb(fighter: &mut L2CFighterCommon) -> L2CValue {
                         fighter.change_status(FIGHTER_STATUS_KIND_FALL.into(), false.into());
                     }
                 }
-                smash::app::lua_bind::FighterKineticEnergyMotion::set_speed_mul(fighter_kinetic_energy_motion, NEUTRALB_DIST[ENTRY_ID]);
+                smash::app::lua_bind::FighterKineticEnergyMotion::set_speed_mul(fighter_kinetic_energy_motion, VariableModule::get_float((fighter.module_accessor) as *mut _, FIGHTER_BOMBERMAN_INSTANCE_WORK_ID_FLOAT_NEUTRALB_DIST));
 				if !is_ground {
                     if frame < 23.0  {
                         if KineticModule::get_kinetic_type(boma) != *FIGHTER_KINETIC_TYPE_MOTION_AIR{

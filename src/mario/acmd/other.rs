@@ -32,7 +32,7 @@ unsafe extern "C" fn mario_run_game(fighter: &mut L2CAgentBase) {
 	frame(fighter.lua_state_agent, 1.0);
 		for _ in 0..i32::MAX {
 			if macros::is_excute(fighter) {
-				RUNLOOPCOUNT[ENTRY_ID] += 1;
+				VariableModule::inc_int((fighter.module_accessor) as *mut _, FIGHTER_MARIO_INSTANCE_WORK_ID_INT_RUNLOOPCOUNT);
 			}
 			wait(fighter.lua_state_agent, 1.0);
 		}

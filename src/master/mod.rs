@@ -5,7 +5,7 @@ use crate::util::*;
 use smash::lib::lua_const::*;
 use smash::hash40;
 
-static mut IS_THUNDER : [bool; 8] = [false; 8];
+static FIGHTER_MASTER_INSTANCE_WORK_ID_FLAG_IS_THUNDER : i32 = 0;
 
 
 pub fn install() {

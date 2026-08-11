@@ -53,13 +53,13 @@ unsafe extern "C" fn tink_frame(fighter: &mut L2CFighterCommon) {
 				};
 			};
             if ![*FIGHTER_STATUS_KIND_SPECIAL_HI, *FIGHTER_STATUS_KIND_ATTACK_AIR].contains(&status_kind) {
-                SET_UPB_FREEFALL[ENTRY_ID] = false;
-            } else if (frame >= cancel_frame - 5.0 || frame >= end_frame - 5.0) && SET_UPB_FREEFALL[ENTRY_ID]{
+                VariableModule::set_flag((boma) as *mut _, false, FIGHTER_TOONLINK_INSTANCE_WORK_ID_FLAG_SET_UPB_FREEFALL);
+            } else if (frame >= cancel_frame - 5.0 || frame >= end_frame - 5.0) && VariableModule::is_flag((boma) as *mut _, FIGHTER_TOONLINK_INSTANCE_WORK_ID_FLAG_SET_UPB_FREEFALL){
                 StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_FALL_SPECIAL, false);
             }
             if [*FIGHTER_STATUS_KIND_SPECIAL_HI].contains(&status_kind) && ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_ATTACK) && frame >= 12.0{
                 StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_ATTACK_AIR, false);
-                SET_UPB_FREEFALL[ENTRY_ID] = true;
+                VariableModule::set_flag((boma) as *mut _, true, FIGHTER_TOONLINK_INSTANCE_WORK_ID_FLAG_SET_UPB_FREEFALL);
             }
 		}
 	}

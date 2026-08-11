@@ -25,7 +25,7 @@ pub fn install() {
 
 unsafe extern "C" fn special_hi_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
 	let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-	if LUCINA_STANCE[ENTRY_ID] == 0 {
+	if VariableModule::get_int((fighter.module_accessor) as *mut _, FIGHTER_LUCINA_INSTANCE_WORK_ID_INT_LUCINA_STANCE) == 0 {
 		StatusModule::init_settings(
 			fighter.module_accessor,
 			smash::app::SituationKind(*SITUATION_KIND_NONE),

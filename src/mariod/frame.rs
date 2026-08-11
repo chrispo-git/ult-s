@@ -41,15 +41,15 @@ unsafe extern "C" fn mariod_frame(fighter : &mut L2CFighterCommon) {
 						StatusModule::change_status_request_from_script(boma, *FIGHTER_MARIOD_STATUS_SPECIAL_S_FLAG_SPECIAL_FALL, true);
 					};
 					if MotionModule::frame(boma) >= 19.0 && ControlModule::check_button_on_trriger(boma, *CONTROL_PAD_BUTTON_SPECIAL) {
-						HAS_BUFFER_B[ENTRY_ID] = true;
+						VariableModule::set_flag((boma) as *mut _, true, FIGHTER_MARIOD_INSTANCE_WORK_ID_FLAG_HAS_BUFFER_B);
 					};
 					if MotionModule::frame(boma) >= 26.0 && ControlModule::check_button_on_trriger(boma, *CONTROL_PAD_BUTTON_SPECIAL) {
 						MotionModule::change_motion(boma, smash::phx::Hash40::new("special_hi_2"), 0.0, 1.0, false, 0.0, false, false);
-						HAS_BUFFER_B[ENTRY_ID] = false;
+						VariableModule::set_flag((boma) as *mut _, false, FIGHTER_MARIOD_INSTANCE_WORK_ID_FLAG_HAS_BUFFER_B);
 					};
-					if MotionModule::frame(boma) >= 28.0 && HAS_BUFFER_B[ENTRY_ID] {
+					if MotionModule::frame(boma) >= 28.0 && VariableModule::is_flag((boma) as *mut _, FIGHTER_MARIOD_INSTANCE_WORK_ID_FLAG_HAS_BUFFER_B) {
 						MotionModule::change_motion(boma, smash::phx::Hash40::new("special_hi_2"), 0.0, 1.0, false, 0.0, false, false);
-						HAS_BUFFER_B[ENTRY_ID] = false;
+						VariableModule::set_flag((boma) as *mut _, false, FIGHTER_MARIOD_INSTANCE_WORK_ID_FLAG_HAS_BUFFER_B);
 					};
 				};
 				if [hash40("special_input")].contains(&MotionModule::motion_kind(boma)) {
@@ -62,7 +62,7 @@ unsafe extern "C" fn mariod_frame(fighter : &mut L2CFighterCommon) {
 					if MotionModule::frame(boma) >= 0.0 {
 						macros::SET_SPEED_EX(fighter,0.0, -5.25, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
 					};
-					UPB_FALL[ENTRY_ID] = true;
+					VariableModule::set_flag((boma) as *mut _, true, FIGHTER_MARIOD_INSTANCE_WORK_ID_FLAG_UPB_FALL);
 					let stick_y = ControlModule::get_stick_y(boma);
 					if stick_y <= -0.5 {
 						GroundModule::pass_floor(boma);
@@ -79,13 +79,13 @@ unsafe extern "C" fn mariod_frame(fighter : &mut L2CFighterCommon) {
 					};
 				};
 				if ![*FIGHTER_STATUS_KIND_SPECIAL_HI, *FIGHTER_STATUS_KIND_LANDING_FALL_SPECIAL].contains(&status_kind) {
-					UPB_FALL[ENTRY_ID] = false;
-					HAS_BUFFER_B[ENTRY_ID] = false;
+					VariableModule::set_flag((boma) as *mut _, false, FIGHTER_MARIOD_INSTANCE_WORK_ID_FLAG_UPB_FALL);
+					VariableModule::set_flag((boma) as *mut _, false, FIGHTER_MARIOD_INSTANCE_WORK_ID_FLAG_HAS_BUFFER_B);
 				};
-				if UPB_FALL[ENTRY_ID] == true && (status_kind == *FIGHTER_STATUS_KIND_LANDING_FALL_SPECIAL || [hash40("special_hi"),hash40("special_air_hi")].contains(&MotionModule::motion_kind(boma))) {
+				if VariableModule::is_flag((boma) as *mut _, FIGHTER_MARIOD_INSTANCE_WORK_ID_FLAG_UPB_FALL) == true && (status_kind == *FIGHTER_STATUS_KIND_LANDING_FALL_SPECIAL || [hash40("special_hi"),hash40("special_air_hi")].contains(&MotionModule::motion_kind(boma))) {
 					MotionModule::change_motion(boma, smash::phx::Hash40::new("special_hi_landing"), 0.0, 1.0, false, 0.0, false, false);
 					StatusModule::set_situation_kind(boma, smash::app::SituationKind(*SITUATION_KIND_GROUND), true);
-					UPB_FALL[ENTRY_ID] = false;
+					VariableModule::set_flag((boma) as *mut _, false, FIGHTER_MARIOD_INSTANCE_WORK_ID_FLAG_UPB_FALL);
 				};
 				if [hash40("special_hi_landing")].contains(&MotionModule::motion_kind(boma)) {
 					if MotionModule::frame(boma) >= 40.0 {
