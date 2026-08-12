@@ -421,8 +421,6 @@ pub extern "C" fn main() {
     println!("about to install scripts");
 	util::install();
     println!("util installed");
-    param_cache::install();
-    println!("param_cache installed");
     config_apply::install();
     println!("config_apply installed");
 	common::install();
@@ -861,10 +859,8 @@ pub extern "C" fn main() {
     
     println!("added chars installed");
 
-    // Runs once here, after every character's own install() has registered
-    // its param overrides, so global multipliers apply on top of those
-    // (e.g. Toad's custom run_speed_max) instead of shadowing them - see
-    // the comment in util::install() for why this isn't called there.
+    param_cache::install();
+    println!("param_cache installed");
     unsafe {
         util::reload_config_values();
     }
