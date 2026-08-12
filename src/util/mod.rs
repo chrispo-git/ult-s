@@ -1026,6 +1026,19 @@ impl ModRegistry {
         slots
     }
 
+    pub fn get_unrecognized_marked_costumes(&self, char_folder: &str, known_markers: &[&str]) -> Vec<usize> {
+        let mut slots = Vec::new();
+        if let Some(char_data) = self.registry.get(char_folder) {
+            for (&slot, markers) in char_data {
+                if markers.iter().any(|m| !known_markers.contains(&m.as_str())) {
+                    slots.push(slot);
+                }
+            }
+        }
+        slots.sort_unstable();
+        slots
+    }
+
     pub fn get_costume_count(&self, char_folder: &str, marker_name: &str) -> u8 {
 		let Some(char_data) = self.registry.get(char_folder) else { 
 			return 0; 
