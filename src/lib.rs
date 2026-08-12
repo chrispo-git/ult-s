@@ -421,6 +421,8 @@ pub extern "C" fn main() {
     println!("about to install scripts");
 	util::install();
     println!("util installed");
+    param_cache::install();
+    println!("param_cache installed");
     config_apply::install();
     println!("config_apply installed");
 	common::install();
