@@ -17,6 +17,9 @@ use cached::proc_macro::cached;
 use std::collections::{HashMap, HashSet};
 use std::time::Instant;
 use once_cell::sync::Lazy;
+use crate::config;
+
+pub use crate::variable_module::VariableModule;
 
 pub static mut GAMEMODES : Vec<String> = Vec::new();
 
@@ -34,8 +37,6 @@ pub const MAX_LOCKOUT : i32 = 10;
 //Universal Settings
 
 pub static mut IS_MECHANICS_ENABLED : bool = true;
-pub static mut IS_SMALL_HOLD_BUFFER : bool = false;
-pub static mut IS_SH_AERIAL : bool = true;
 
 
 // Info State
@@ -154,6 +155,8 @@ pub unsafe fn is_enable_transition_term_hook(boma: &mut smash::app::BattleObject
 			(state.can_attack_air == 1 && flag == *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_ATTACK_AIR) ||
 			(state.can_dash == 1 && flag == *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_DASH) ||
 			(state.can_grab == 1 && flag == *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_CATCH) ||
+			(state.can_grab == 1 && flag == *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_CATCH_DASH) ||
+			(state.can_grab == 1 && flag == *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_CATCH_TURN) ||
 			(state.can_turndash == 1 && flag == *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_TURN_DASH) ||
 			(state.can_jump_squat == 1 && (flag == *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_JUMP_SQUAT || flag == *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_JUMP_SQUAT_BUTTON)) ||
 			(state.can_double_jump == 1 && (flag == *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_JUMP_AERIAL || flag == *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_JUMP_AERIAL_BUTTON)) 
@@ -166,6 +169,7 @@ pub unsafe fn is_enable_transition_term_hook(boma: &mut smash::app::BattleObject
 #[skyline::hook(replace = smash::app::lua_bind::WorkModule::on_flag)]
 pub unsafe fn on_flag_hook(boma: &mut smash::app::BattleObjectModuleAccessor, int: c_int) -> () {
 	if smash::app::utility::get_category(boma) == *BATTLE_OBJECT_CATEGORY_FIGHTER { 
+		let config = config::get();
 		if int == *FIGHTER_STATUS_ATTACK_FLAG_ENABLE_100 && is_mechanics_enabled() {
 			let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 			crate::with_state!(ENTRY_ID, JabState, state, {
@@ -176,7 +180,12 @@ pub unsafe fn on_flag_hook(boma: &mut smash::app::BattleObjectModuleAccessor, in
 			if ![*FIGHTER_STATUS_KIND_ATTACK, *FIGHTER_DEMON_STATUS_KIND_ATTACK_COMBO].contains(&status_kind) {
 				original!()(boma, int)
 			};
-		} else if int == *FIGHTER_STATUS_ATTACK_FLAG_ENABLE_COMBO  && is_mechanics_enabled() {
+		} else if int == *FIGHTER_STATUS_ESCAPE_AIR_FLAG_SLIDE && config.defense.airdodge == 2{
+			let status_kind = smash::app::lua_bind::StatusModule::status_kind(boma);
+			if ![*FIGHTER_STATUS_KIND_ESCAPE_AIR, *FIGHTER_STATUS_KIND_ESCAPE_AIR_SLIDE].contains(&status_kind) {
+				original!()(boma, int)
+			};
+		} else if int == *FIGHTER_STATUS_ATTACK_FLAG_ENABLE_COMBO  && config.attacks.jab_cancel != 2 {
 			let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 			crate::with_state!(ENTRY_ID, JabState, state, {
 				state.has_enable_combo_on = true;
@@ -186,7 +195,7 @@ pub unsafe fn on_flag_hook(boma: &mut smash::app::BattleObjectModuleAccessor, in
 			if status_kind != *FIGHTER_STATUS_KIND_ATTACK  {
 				original!()(boma, int)
 			};
-		} else if int == *FIGHTER_STATUS_ATTACK_FLAG_ENABLE_NO_HIT_COMBO  && is_mechanics_enabled() {
+		} else if int == *FIGHTER_STATUS_ATTACK_FLAG_ENABLE_NO_HIT_COMBO  && config.attacks.jab_cancel != 2 {
 			let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 			crate::with_state!(ENTRY_ID, JabState, state, {
 				state.has_enable_no_hit_combo_on = true;
@@ -199,7 +208,7 @@ pub unsafe fn on_flag_hook(boma: &mut smash::app::BattleObjectModuleAccessor, in
 		} else if int == *FIGHTER_STATUS_WORK_ID_FLAG_RESERVE_JUMP_MINI {
 			let ENTRY_ID =  WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 			//full_hop_enable_delay allows fullhop button to not give shorthops.
-			if IS_SH_AERIAL {
+			if config.general.sh_macro != 0 {
 				if !(crate::get_state!(ENTRY_ID, InfoState).full_hop_enable_delay > 0){
 					original!()(boma, int)
 				} else {
@@ -293,6 +302,19 @@ pub unsafe fn article_hook(boma: &mut smash::app::BattleObjectModuleAccessor, in
 }
 
 
+
+//Parry Reflects
+#[skyline::hook(replace=smash::app::FighterUtil::is_valid_just_shield_reflector)]
+unsafe fn is_valid_just_shield_reflector(module_accessor: &mut smash::app::BattleObjectModuleAccessor) -> bool {
+    if config::get().special.parry_reflect != 0 {return true; }
+    original!()(module_accessor)
+}
+static NONE :  smash::phx::Vector3f =  smash::phx::Vector3f { x: 0.0, y: 0.0, z: 0.0 };
+
+
+
+
+
 unsafe extern "C" fn util_update(fighter : &mut L2CFighterCommon) {
     unsafe {
         let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);    
@@ -318,6 +340,7 @@ unsafe extern "C" fn util_update(fighter : &mut L2CFighterCommon) {
 		});
 		//Resets inability to special
 		if is_reset() {
+			VariableModule::clear(boma as *mut _);
 			crate::transitions_reset_all!(ENTRY_ID);
 			crate::with_state!(ENTRY_ID, InfoState, state, {
 				state.full_hop_enable_delay = 0;
@@ -338,6 +361,10 @@ unsafe extern "C" fn util_update(fighter : &mut L2CFighterCommon) {
 			}
 
 		});
+
+
+
+
 		if JC_GRAB_LOCKOUT[ENTRY_ID] > 0 {
 			JC_GRAB_LOCKOUT[ENTRY_ID] -= 1;
 		};
@@ -717,40 +744,195 @@ pub(crate) unsafe fn is_tap_djc(boma: &mut smash::app::BattleObjectModuleAccesso
 
 #[inline(always)]
 pub(crate) unsafe fn is_mechanics_enabled() -> bool {
-	return IS_MECHANICS_ENABLED || is_gamemode("rivals".to_string());
+	return true;
 }
 
-pub(crate) unsafe fn update_enabled_checks() -> () {
+pub(crate) unsafe fn reload_config_values() -> () {
 	IS_MECHANICS_ENABLED = !Path::new("sd:/ultimate/ult-s/sys-flags/mechanics.flag").is_file();
-	IS_SMALL_HOLD_BUFFER = Path::new("sd:/ultimate/ult-s/sys-flags/hold.flag").is_file();
-	IS_SH_AERIAL = Path::new("sd:/ultimate/ult-s/sys-flags/sh.flag").is_file();
 
+	config::reload();
+
+	let config = config::get();
 	let all: Vec<i32> = vec![-1];
-	if IS_MECHANICS_ENABLED  {
-		//Setting values for everybody!
-		param_config::update_float_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("tread_mini_jump_speed_y_mul"), 0, 1.0));
-		param_config::update_float_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("tread_mini_jump_speed_y_mul"), 0, 0.475));
-		param_config::update_attribute_mul_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("damage_fly_top_air_accel_y"), 0, 1.05));
-		param_config::update_float_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("damage_fly_top_speed_y_stable"), 0, 1.84));
-		param_config::update_int_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("param_motion"), smash::hash40("escape_air_slide_back_end_frame"), -1));
-		param_config::update_float_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("param_motion"), smash::hash40("landing_frame_escape_air_slide_max"), 12.0));
-		param_config::update_float_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("param_motion"), smash::hash40("landing_frame_escape_air_slide"), 12.0));
-	} else if !is_gamemode("rivals".to_string()) {
-		param_config::update_attribute_mul_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("damage_fly_top_air_accel_y"), 0, 1.0));
-		param_config::update_float_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("damage_fly_top_speed_y_stable"), 0, 1.8));
-		param_config::update_int_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("param_motion"), smash::hash40("escape_air_slide_back_end_frame"), 4));
-		param_config::update_float_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("param_motion"), smash::hash40("landing_frame_escape_air_slide_max"), 20.0));
-		param_config::update_float_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("param_motion"), smash::hash40("landing_frame_escape_air_slide"), 10.0));
-	}
-	if is_gamemode("rivals".to_string()){
-		param_config::update_int_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("param_motion"), smash::hash40("escape_air_slide_back_end_frame"), -1));
-		param_config::update_float_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("param_motion"), smash::hash40("landing_frame_escape_air_slide_max"), 5.0));
-		param_config::update_float_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("param_motion"), smash::hash40("landing_frame_escape_air_slide"), 5.0));
-		if !IS_MECHANICS_ENABLED {
-			param_config::update_attribute_mul_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("damage_fly_top_air_accel_y"), 0, 1.0));
-			param_config::update_float_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("damage_fly_top_speed_y_stable"), 0, 1.8));
+	match config.movement.jump_accel {
+		0 => {
+			crate::param_cache::set_global_multiplier(smash::hash40("jump_initial_y"), 0, 1.0);
+		},
+		_ => {
+			crate::param_cache::set_global_multiplier(smash::hash40("jump_initial_y"), 0, 0.6);
 		}
-	}
+	};
+	match config.movement.footstool  {
+		0 => {
+			 crate::param_cache::update_float_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("tread_jump_speed_y_mul"), 0, 1.0));
+			 crate::param_cache::update_float_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("tread_mini_jump_speed_y_mul"), 0, 0.475));
+		},
+		_ => {
+			 crate::param_cache::update_float_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("tread_jump_speed_y_mul"), 0, 1.3));
+			 crate::param_cache::update_float_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("tread_mini_jump_speed_y_mul"), 0, 0.7));
+		}
+	};
+	match config.defense.vertical_gravity  {
+		0 => {
+			crate::param_cache::set_global_multiplier(smash::hash40("damage_fly_top_air_accel_y"), 0, 1.05);
+			 crate::param_cache::update_float_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("damage_fly_top_speed_y_stable"), 0, 1.84));
+		},
+		1 => {
+			crate::param_cache::set_global_multiplier(smash::hash40("damage_fly_top_air_accel_y"), 0, 1.0);
+			 crate::param_cache::update_float_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("damage_fly_top_speed_y_stable"), 0, 1.8));
+		},
+		2 => {
+			crate::param_cache::set_global_multiplier(smash::hash40("damage_fly_top_air_accel_y"), 0, 1.1);
+			 crate::param_cache::update_float_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("damage_fly_top_speed_y_stable"), 0, 2.1));
+		},
+		_ => {
+			crate::param_cache::set_global_multiplier(smash::hash40("damage_fly_top_air_accel_y"), 0, 0.9);
+			 crate::param_cache::update_float_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("damage_fly_top_speed_y_stable"), 0, 1.5));
+		}
+	};
+	
+	let ll_multiplier = match config.stats.ll {
+		0 => 1.0, 
+		1 => 1.1, 
+		2 => 1.25, 
+		3 => 1.5, 
+		4 => 0.5, 
+		5 => 0.75, 
+		_ => 0.9,
+	};
+	for attr in ["landing_attack_air_frame_n", "landing_attack_air_frame_f", "landing_attack_air_frame_b", "landing_attack_air_frame_hi", "landing_attack_air_frame_lw"] {
+		crate::param_cache::set_global_multiplier(smash::hash40(attr), 0, ll_multiplier);
+	};
+	let initial_dash_mul = match config.stats.initial_dash {
+		0 => 1.0, 
+		1 => 1.1, 
+		2 => 1.25, 
+		3 => 1.5, 
+		4 => 0.5, 
+		5 => 0.75, 
+		_ => 0.9,
+	};
+	crate::param_cache::set_global_multiplier(smash::hash40("dash_speed"), 0, initial_dash_mul);
+	let runspeed_mul = match config.stats.runspeed {
+		0 => 1.0, 
+		1 => 1.1, 
+		2 => 1.25, 
+		3 => 1.5, 
+		4 => 0.5, 
+		5 => 0.75, 
+		_ => 0.9,
+	};
+	crate::param_cache::set_global_multiplier(smash::hash40("run_speed_max"), 0, runspeed_mul);
+	let walkspeed_mul = match config.stats.walkspeed {
+		0 => 1.0, 
+		1 => 1.1, 
+		2 => 1.25, 
+		3 => 1.5, 
+		4 => 0.5, 
+		5 => 0.75, 
+		_ => 0.9,
+	};
+	crate::param_cache::set_global_multiplier(smash::hash40("walk_speed_max"), 0, walkspeed_mul);
+	let airspeed_mul = match config.stats.airspeed {
+		0 => 1.0, 
+		1 => 1.1, 
+		2 => 1.25, 
+		3 => 1.5, 
+		4 => 0.5, 
+		5 => 0.75, 
+		_ => 0.9,
+	};
+	crate::param_cache::set_global_multiplier(smash::hash40("air_speed_x_stable"), 0, airspeed_mul);
+	
+	let airaccel_mul = match config.stats.airaccel {
+		0 => 1.0, 
+		1 => 1.1, 
+		2 => 1.25, 
+		3 => 1.5, 
+		4 => 0.5, 
+		5 => 0.75, 
+		_ => 0.9,
+	};
+	for attr in ["air_accel_x_mul", "air_accel_x_add"] {
+		crate::param_cache::set_global_multiplier(smash::hash40(attr), 0, airaccel_mul);
+	};
+
+
+	let fallspeed_mul = match config.stats.fallspeed {
+		0 => 1.0, 
+		1 => 1.1, 
+		2 => 1.25, 
+		3 => 1.5, 
+		4 => 0.5, 
+		5 => 0.75, 
+		_ => 0.9,
+	};
+	crate::param_cache::set_global_multiplier(smash::hash40("air_speed_y_stable"), 0, fallspeed_mul);
+
+
+	let jump_mul = match config.stats.jump {
+		0 => 1.0, 
+		1 => 1.1, 
+		2 => 1.25, 
+		3 => 1.5, 
+		4 => 2.0, 
+		5 => 0.75, 
+		_ => 0.9,
+	};
+	for attr in ["mini_jump_y", "jump_y", "jump_aerial_y", "cliff_jump_y"] {
+		crate::param_cache::set_global_multiplier(smash::hash40(attr), 0, jump_mul);
+	};
+	
+	let gravity_mul = match config.stats.gravity {
+		0 => 1.0, 
+		1 => 1.1, 
+		2 => 1.25, 
+		3 => 1.5, 
+		4 => 0.5, 
+		5 => 0.75, 
+		_ => 0.9,
+	};
+	crate::param_cache::set_global_multiplier(smash::hash40("air_accel_y"), 0, gravity_mul);
+	
+	let weight_mul = match config.stats.weight {
+		0 => 1.0, 
+		1 => 1.1, 
+		2 => 1.25, 
+		3 => 1.5, 
+		4 => 0.5, 
+		5 => 0.75, 
+		_ => 0.9,
+	};
+	crate::param_cache::set_global_multiplier(smash::hash40("weight"), 0, weight_mul);
+	
+	let mut escape_air_slide_back_end_frame = 4;
+	let mut landing_frame_escape_air_slide_max = 20.0;
+	let mut landing_frame_escape_air_slide = 10.0;
+	let mut landing_frame_escape_air_slide = 10.0;
+	let mut landing_speed_mul_escape_air_slide = 0.85;
+	let mut escape_air_cancel_frame_mul = 1.0;
+	match config.defense.airdodge {
+		0 => {
+			escape_air_slide_back_end_frame = -1;
+			landing_frame_escape_air_slide_max = 8.0;
+			landing_frame_escape_air_slide = 8.0;
+			landing_speed_mul_escape_air_slide = 1.0;
+		},
+		1 => {
+		
+		},
+		_ => {
+			escape_air_slide_back_end_frame = -1;
+			landing_frame_escape_air_slide_max = 23.0;
+			landing_frame_escape_air_slide = 23.0;
+			escape_air_cancel_frame_mul = 1.0/0.61;
+		}
+	};
+	crate::param_cache::update_int_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("param_motion"), smash::hash40("escape_air_slide_back_end_frame"), escape_air_slide_back_end_frame));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("param_motion"), smash::hash40("landing_frame_escape_air_slide_max"), landing_frame_escape_air_slide_max));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("param_motion"), smash::hash40("landing_speed_mul_escape_air_slide"), landing_speed_mul_escape_air_slide));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("param_motion"), smash::hash40("landing_frame_escape_air_slide"), landing_frame_escape_air_slide));
+	crate::param_cache::set_global_multiplier(smash::hash40("param_motion"), smash::hash40("escape_air_cancel_frame"), escape_air_cancel_frame_mul);
 }
 
 
@@ -844,6 +1026,19 @@ impl ModRegistry {
         slots
     }
 
+    pub fn get_unrecognized_marked_costumes(&self, char_folder: &str, known_markers: &[&str]) -> Vec<usize> {
+        let mut slots = Vec::new();
+        if let Some(char_data) = self.registry.get(char_folder) {
+            for (&slot, markers) in char_data {
+                if markers.iter().any(|m| !known_markers.contains(&m.as_str())) {
+                    slots.push(slot);
+                }
+            }
+        }
+        slots.sort_unstable();
+        slots
+    }
+
     pub fn get_costume_count(&self, char_folder: &str, marker_name: &str) -> u8 {
 		let Some(char_data) = self.registry.get(char_folder) else { 
 			return 0; 
@@ -920,7 +1115,12 @@ pub fn install() {
 	skyline::install_hook!(on_flag_hook);
 	skyline::install_hook!(off_flag_hook);
 	skyline::install_hook!(article_hook);
-	unsafe {
-		update_enabled_checks();
-	}
+	skyline::install_hook!(is_valid_just_shield_reflector);
+	// reload_config_values() is deliberately NOT called here - this runs
+	// before any character's own install() has registered its param
+	// overrides (e.g. Toad's custom run_speed_max), and reload_config_values
+	// needs those to already exist to apply global multipliers on top of
+	// them correctly instead of shadowing them. It's called once, after
+	// every character install, at the end of the main plugin install in
+	// lib.rs instead.
 }

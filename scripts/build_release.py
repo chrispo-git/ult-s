@@ -108,6 +108,8 @@ def build_full(version):
         os.makedirs(os.path.dirname(path), exist_ok=True)
         with open(path, 'w') as f:
             f.close()
+    shutil.copytree('presets', os.path.join('releases', 'ultimate', 'ult-s', 'presets'))
+    shutil.copy(r'presets/ult-s.toml', os.path.join('releases', 'ultimate', 'ult-s', 'config.toml'))
     make_zip(out_dir, os.path.join('releases', 'Ultimate S Arcropolis.zip'))
     log("=== Full build done ===")
 
@@ -207,6 +209,8 @@ def build_lite(version):
     shutil.copy('readme-lite.txt', os.path.join('releases-lite', 'readme.txt'))
     shutil.copy('credits.txt',     os.path.join('releases-lite', 'credits.txt'))
 
+    shutil.copytree('presets', os.path.join('releases', 'ultimate', 'ult-s', 'presets'))
+    shutil.copy(r'presets/vanilla.toml', os.path.join('releases', 'ultimate', 'ult-s', 'config.toml'))
     make_zip(out_dir, os.path.join('releases-lite', 'Ultimate S Lite.zip'))
     log("=== Lite build done ===")
 

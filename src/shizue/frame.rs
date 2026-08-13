@@ -31,11 +31,11 @@ unsafe extern "C" fn shizue_frame(fighter: &mut L2CFighterCommon) {
 			let motion_kind = MotionModule::motion_kind(boma);
 			let stick_y = ControlModule::get_stick_y(boma);
 			if [*FIGHTER_STATUS_KIND_DEAD, *FIGHTER_STATUS_KIND_LOSE, *FIGHTER_STATUS_KIND_WIN].contains(&status_kind) || smash::app::sv_information::is_ready_go() == false{
-				ISA_RESHOOT_TIME[ENTRY_ID] = 0;
-				ISA_SHOT_KIND[ENTRY_ID] = 1;
+				VariableModule::set_int((boma) as *mut _, 0, FIGHTER_SHIZUE_INSTANCE_WORK_ID_INT_ISA_RESHOOT_TIME);
+				VariableModule::set_int((boma) as *mut _, 1, FIGHTER_SHIZUE_INSTANCE_WORK_ID_INT_ISA_SHOT_KIND);
 			};
-			if ISA_RESHOOT_TIME[ENTRY_ID] > 0 {
-				ISA_RESHOOT_TIME[ENTRY_ID] -= 1;
+			if VariableModule::get_int((boma) as *mut _, FIGHTER_SHIZUE_INSTANCE_WORK_ID_INT_ISA_RESHOOT_TIME) > 0 {
+				VariableModule::dec_int((boma) as *mut _, FIGHTER_SHIZUE_INSTANCE_WORK_ID_INT_ISA_RESHOOT_TIME);
 			};
 			if status_kind == *FIGHTER_SHIZUE_STATUS_KIND_SPECIAL_LW_FIRE {
 					if motion_duration(boma) == 5 {
@@ -80,7 +80,7 @@ unsafe extern "C" fn shizue_frame(fighter: &mut L2CFighterCommon) {
 					}
 				};
 			};
-			if ISA_RESHOOT_TIME[ENTRY_ID] < 1{
+			if VariableModule::get_int((boma) as *mut _, FIGHTER_SHIZUE_INSTANCE_WORK_ID_INT_ISA_RESHOOT_TIME) < 1{
 				if [
 					*FIGHTER_STATUS_KIND_GUARD_ON, *FIGHTER_STATUS_KIND_GUARD_OFF, *FIGHTER_STATUS_KIND_GUARD_DAMAGE, *FIGHTER_STATUS_KIND_GUARD, *FIGHTER_STATUS_KIND_ATTACK, *FIGHTER_STATUS_KIND_ATTACK_DASH, 
 					*FIGHTER_STATUS_KIND_ATTACK_LW3, *FIGHTER_STATUS_KIND_ATTACK_S3, *FIGHTER_STATUS_KIND_ATTACK_HI3, *FIGHTER_STATUS_KIND_ATTACK_AIR, *FIGHTER_STATUS_KIND_LANDING_ATTACK_AIR, *FIGHTER_STATUS_KIND_ATTACK_S4_START, 
@@ -92,7 +92,7 @@ unsafe extern "C" fn shizue_frame(fighter: &mut L2CFighterCommon) {
 				].contains(&status_kind) {
 					if ControlModule::get_stick_y(boma) <= -0.5 && ControlModule::check_button_on_trriger(boma, *CONTROL_PAD_BUTTON_SPECIAL) {
 						ArticleModule::shoot_exist(boma, *FIGHTER_SHIZUE_GENERATE_ARTICLE_CLAYROCKET, smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL), false);
-						ISA_RESHOOT_TIME[ENTRY_ID] = 130;
+						VariableModule::set_int((boma) as *mut _, 130, FIGHTER_SHIZUE_INSTANCE_WORK_ID_INT_ISA_RESHOOT_TIME);
 					};
 				};
 			};

@@ -19,7 +19,7 @@ mod frame;
 mod acmd;
 use crate::util::*;
 
-static mut NO_WAVEDASH_TIMER : [i32; 8] = [0; 8];
+static FIGHTER_SAMUS_INSTANCE_WORK_ID_INT_NO_WAVEDASH_TIMER : i32 = 0;
 static NO_WAVEDASH_MAX : i32 = 8;
 
 
@@ -47,7 +47,7 @@ pub fn install() {
 	status::install();
 	acmd::install();
 
-	param_config::update_float_2(-*WEAPON_KIND_SAMUS_CSHOT, get_marked_costumes("samus","samus").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_cshot"), smash::hash40("min_speed"), 2.5));
-	param_config::update_float_2(*FIGHTER_KIND_SAMUS, get_marked_costumes("samus","samus").into_iter().map(|x| x as i32).collect(), (smash::hash40("jump_speed_x_mul"), 0, 0.9));
+	 crate::param_cache::update_float_2(-*WEAPON_KIND_SAMUS_CSHOT, get_marked_costumes("samus","samus").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_cshot"), smash::hash40("min_speed"), 2.5));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_SAMUS, get_marked_costumes("samus","samus").into_iter().map(|x| x as i32).collect(), (smash::hash40("jump_speed_x_mul"), 0, 0.9));
 
 }

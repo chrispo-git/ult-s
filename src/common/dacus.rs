@@ -10,6 +10,7 @@ use smash::lib::{L2CValue, L2CAgent};
 use smash::phx::Vector2f;
 use crate::util::*;
 use once_cell::sync::Lazy;
+use crate::config;
 
 static FIGHTERS_F6: Lazy<Vec<i32>> = Lazy::new(|| {
     vec![
@@ -79,7 +80,7 @@ unsafe fn dacus(fighter : &mut L2CFighterCommon, status_kind : i32, ENTRY_ID : u
 
 }
 pub unsafe fn opff(fighter : &mut L2CFighterCommon, status_kind: i32, ENTRY_ID : usize) {
-	if !is_mechanics_enabled() {
+	if config::get().attacks.dacus != 0 {
 		return;
 	}
 	dacus(fighter, status_kind, ENTRY_ID);

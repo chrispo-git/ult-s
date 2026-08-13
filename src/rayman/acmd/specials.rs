@@ -153,7 +153,7 @@ unsafe extern "C" fn rayman_neutralb(fighter: &mut L2CAgentBase) {
     let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
     let fighter_kind = smash::app::utility::get_kind(boma);
     if macros::is_excute(fighter) {
-        PULL_DISTANCE[ENTRY_ID] = 0;
+        VariableModule::set_int((boma) as *mut _, 0, FIGHTER_RAYMAN_INSTANCE_WORK_ID_INT_PULL_DISTANCE);
         if fighter_kind == *FIGHTER_KIND_PIKMIN {
             ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_PIKMIN_GENERATE_ARTICLE_PIKMIN, false, -1);
             ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_PIKMIN_GENERATE_ARTICLE_PIKMIN, false, -1);
@@ -162,7 +162,7 @@ unsafe extern "C" fn rayman_neutralb(fighter: &mut L2CAgentBase) {
     }
     frame(fighter.lua_state_agent, 15.0);
     if macros::is_excute(fighter) {
-        PULL_DISTANCE[ENTRY_ID] = 0;
+        VariableModule::set_int((boma) as *mut _, 0, FIGHTER_RAYMAN_INSTANCE_WORK_ID_INT_PULL_DISTANCE);
         macros::ATTACK(fighter, 0, 0, Hash40::new("throw"), 5.0, 361, 100, 30, 0, 5.0, 0.0, 0.0, 5.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, -5, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_G, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_PUNCH);
         AttackModule::set_add_reaction_frame(fighter.module_accessor, /*ID*/ 1, /*Frames*/ -3.0, /*Unk*/ false);
         macros::ATTACK(fighter, 1, 0, Hash40::new("throw"), 5.0, 90, 100, 30, 0, 5.0, 0.0, 0.0, 5.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, -5, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_A, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_PUNCH);
@@ -171,14 +171,14 @@ unsafe extern "C" fn rayman_neutralb(fighter: &mut L2CAgentBase) {
     }
     frame(fighter.lua_state_agent, 16.0);
     if macros::is_excute(fighter) {
-        PULL_DISTANCE[ENTRY_ID] = 1;
+        VariableModule::set_int((boma) as *mut _, 1, FIGHTER_RAYMAN_INSTANCE_WORK_ID_INT_PULL_DISTANCE);
         macros::ATTACK(fighter, 0, 0, Hash40::new("throw"), 5.0, 361, 100, 30, 0, 5.0, 0.0, 0.0, 16.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, -5, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_G, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_PUNCH);
         macros::ATTACK(fighter, 1, 0, Hash40::new("throw"), 5.0, 90, 100, 30, 0, 5.0, 0.0, 0.0, 16.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, -5, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_A, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_PUNCH);
         macros::ATK_SET_SHIELD_SETOFF_MUL(fighter, /*ID*/ 0, /*ShieldstunMul*/ 0.2);
     }
     frame(fighter.lua_state_agent, 18.0);
     if macros::is_excute(fighter) {
-        PULL_DISTANCE[ENTRY_ID] = 2;
+        VariableModule::set_int((boma) as *mut _, 2, FIGHTER_RAYMAN_INSTANCE_WORK_ID_INT_PULL_DISTANCE);
         macros::ATTACK(fighter, 0, 0, Hash40::new("throw"), 5.0, 361, 100, 30, 0, 5.0, 0.0, 0.0, 20.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, -5, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_G, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_PUNCH);
         AttackModule::set_add_reaction_frame(fighter.module_accessor, /*ID*/ 0, /*Frames*/ 1.0, /*Unk*/ false);
         macros::ATTACK(fighter, 1, 0, Hash40::new("throw"), 5.0, 90, 100, 30, 0, 5.0, 0.0, 0.0, 20.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, -5, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_A, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_PUNCH);
@@ -187,7 +187,7 @@ unsafe extern "C" fn rayman_neutralb(fighter: &mut L2CAgentBase) {
     }
     frame(fighter.lua_state_agent, 20.0);
     if macros::is_excute(fighter) { 
-        PULL_DISTANCE[ENTRY_ID] = 3;
+        VariableModule::set_int((boma) as *mut _, 3, FIGHTER_RAYMAN_INSTANCE_WORK_ID_INT_PULL_DISTANCE);
         macros::ATTACK(fighter, 0, 0, Hash40::new("throw"), 5.0, 361, 100, 30, 0, 5.0, 0.0, 0.0, 25.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, -5, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_G, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_PUNCH);
         AttackModule::set_add_reaction_frame(fighter.module_accessor, /*ID*/ 0, /*Frames*/ 3.0, /*Unk*/ false);
         macros::ATTACK(fighter, 1, 0, Hash40::new("throw"), 5.0, 90, 100, 30, 0, 5.0, 0.0, 0.0, 25.0, None, None, None, 0.0, 1.0, *ATTACK_SETOFF_KIND_OFF, *ATTACK_LR_CHECK_F, false, -5, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_A, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_S, *COLLISION_SOUND_ATTR_NONE, *ATTACK_REGION_PUNCH);
@@ -196,7 +196,7 @@ unsafe extern "C" fn rayman_neutralb(fighter: &mut L2CAgentBase) {
     }
     frame(fighter.lua_state_agent, 22.0);
     if macros::is_excute(fighter) {
-        PULL_DISTANCE[ENTRY_ID] = 0;
+        VariableModule::set_int((boma) as *mut _, 0, FIGHTER_RAYMAN_INSTANCE_WORK_ID_INT_PULL_DISTANCE);
         AttackModule::clear_all(fighter.module_accessor);
     }
 }

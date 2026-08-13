@@ -30,7 +30,6 @@ pub unsafe fn opff(fighter : &mut L2CFighterCommon, status_kind : i32, motion_ki
     hitfall::opff(fighter, status_kind);
     hitstunchange::opff(fighter, status_kind, entry_id);
     itemduel::opff(fighter, status_kind, motion_kind, entry_id);
-    parry::opff(fighter, status_kind, motion_kind, entry_id);
     rivals::opff(fighter, status_kind, entry_id);
     turbo::opff(fighter, status_kind);
     sixtyfour::opff(fighter, status_kind);
@@ -41,5 +40,4 @@ pub fn install() {
 	attacks::install();
     superboss::install();
     itemduel::install();
-    parry::install();
 }

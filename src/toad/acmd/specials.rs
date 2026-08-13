@@ -85,8 +85,8 @@ unsafe extern "C" fn toad_neutralb(fighter: &mut L2CAgentBase) {
 		macros::FT_MOTION_RATE(fighter, 1.0);
 		if macros::is_excute(fighter) {
 			let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-			START_POP[ENTRY_ID] = false;
-			POP_FALLBACK[ENTRY_ID] = 90;
+			VariableModule::set_flag((fighter.module_accessor) as *mut _, false, FIGHTER_TOAD_INSTANCE_WORK_ID_FLAG_START_POP);
+			VariableModule::set_int((fighter.module_accessor) as *mut _, 90, FIGHTER_TOAD_INSTANCE_WORK_ID_INT_POP_FALLBACK);
 			ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_MURABITO_GENERATE_ARTICLE_FLOWERPOT, true, 0);
 			ArticleModule::shoot(fighter.module_accessor, *FIGHTER_MURABITO_GENERATE_ARTICLE_FLOWERPOT, smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_LAST), false);
 		}
@@ -99,7 +99,7 @@ unsafe extern "C" fn toad_neutralb_pop(fighter: &mut L2CAgentBase) {
 		if macros::is_excute(fighter) {
 			let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 			if IS_POP_MODE[ENTRY_ID] {
-				START_POP[ENTRY_ID] = true;
+				VariableModule::set_flag((fighter.module_accessor) as *mut _, true, FIGHTER_TOAD_INSTANCE_WORK_ID_FLAG_START_POP);
 			}
 		}
 }	

@@ -84,7 +84,7 @@ unsafe extern "C" fn throw_exit(fighter: &mut L2CFighterCommon) -> L2CValue {
 unsafe extern "C" fn final_end_pre(fighter: &mut L2CFighterCommon) -> L2CValue {
 	let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 	let situation_kind = StatusModule::situation_kind(fighter.module_accessor);
-	BIG_TIMER[ENTRY_ID] = BIG_TIMER_MAX;
+	VariableModule::set_int((fighter.module_accessor) as *mut _, BIG_TIMER_MAX, FIGHTER_TOAD_INSTANCE_WORK_ID_INT_BIG_TIMER);
 	macros::PLAY_SE(fighter, Hash40::new("se_murabito_final01"));
     macros::CANCEL_FILL_SCREEN(fighter, 1, 1);
     EffectModule::remove_screen(fighter.module_accessor, Hash40::new("bg_popo_final"), -1);
@@ -206,10 +206,10 @@ unsafe extern "C" fn regular_main_loop(weapon: &mut L2CWeaponCommon) -> L2CValue
         weapon.pop_lua_stack(1);
         return 0.into();
     }
-    if START_POP[ENTRY_ID] {
+    if VariableModule::is_flag((owner_boma) as *mut _, FIGHTER_TOAD_INSTANCE_WORK_ID_FLAG_START_POP) {
         MotionModule::change_motion(weapon.module_accessor, Hash40::new("pop"), 0.0, 1.0, false, 0.0, false, false);
         IS_POP_MODE[ENTRY_ID] = false;
-        START_POP[ENTRY_ID] = false;
+        VariableModule::set_flag((owner_boma) as *mut _, false, FIGHTER_TOAD_INSTANCE_WORK_ID_FLAG_START_POP);
     }
     if AttackModule::is_infliction(weapon.module_accessor, *COLLISION_KIND_MASK_REFLECTOR) {
         for i in 0..7 {

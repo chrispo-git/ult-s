@@ -40,21 +40,21 @@ unsafe extern "C" fn robin(fighter : &mut L2CFighterCommon) {
 			let motion_kind = MotionModule::motion_kind(boma);
 
 			WorkModule::set_int(boma, 10, *FIGHTER_REFLET_INSTANCE_WORK_ID_INT_SPECIAL_LW_CURRENT_POINT);
-			if !IS_GRIMA[ENTRY_ID] {
-				SPECIAL_HI_CURR[ENTRY_ID] = WorkModule::get_int(boma, *FIGHTER_REFLET_INSTANCE_WORK_ID_INT_SPECIAL_HI_CURRENT_POINT);
-				SPECIAL_N_CURR[ENTRY_ID] = WorkModule::get_int(boma, *FIGHTER_REFLET_INSTANCE_WORK_ID_INT_SPECIAL_N_CURRENT_POINT);
-				SPECIAL_S_CURR[ENTRY_ID] = WorkModule::get_float(boma, *FIGHTER_REFLET_INSTANCE_WORK_ID_FLOAT_SPECIAL_S_CURRENT_POINT);
+			if !VariableModule::is_flag((boma) as *mut _, FIGHTER_REFLET_INSTANCE_WORK_ID_FLAG_IS_GRIMA) {
+				VariableModule::set_int((boma) as *mut _, WorkModule::get_int(boma, *FIGHTER_REFLET_INSTANCE_WORK_ID_INT_SPECIAL_HI_CURRENT_POINT), FIGHTER_REFLET_INSTANCE_WORK_ID_INT_SPECIAL_HI_CURR);
+				VariableModule::set_int((boma) as *mut _, WorkModule::get_int(boma, *FIGHTER_REFLET_INSTANCE_WORK_ID_INT_SPECIAL_N_CURRENT_POINT), FIGHTER_REFLET_INSTANCE_WORK_ID_INT_SPECIAL_N_CURR);
+				VariableModule::set_float((boma) as *mut _, WorkModule::get_float(boma, *FIGHTER_REFLET_INSTANCE_WORK_ID_FLOAT_SPECIAL_S_CURRENT_POINT), FIGHTER_REFLET_INSTANCE_WORK_ID_FLOAT_SPECIAL_S_CURR);
 			} else {
-				if SPECIAL_HI_CURR[ENTRY_ID] > 2 {
-					WorkModule::set_int(boma, SPECIAL_HI_CURR[ENTRY_ID], *FIGHTER_REFLET_INSTANCE_WORK_ID_INT_SPECIAL_HI_CURRENT_POINT);
+				if VariableModule::get_int((boma) as *mut _, FIGHTER_REFLET_INSTANCE_WORK_ID_INT_SPECIAL_HI_CURR) > 2 {
+					WorkModule::set_int(boma, VariableModule::get_int((boma) as *mut _, FIGHTER_REFLET_INSTANCE_WORK_ID_INT_SPECIAL_HI_CURR), *FIGHTER_REFLET_INSTANCE_WORK_ID_INT_SPECIAL_HI_CURRENT_POINT);
 				} else {
 					WorkModule::set_int(boma, 2, *FIGHTER_REFLET_INSTANCE_WORK_ID_INT_SPECIAL_HI_CURRENT_POINT);
 				};
-				WorkModule::set_int(boma, SPECIAL_N_CURR[ENTRY_ID], *FIGHTER_REFLET_INSTANCE_WORK_ID_INT_SPECIAL_N_CURRENT_POINT);
-				WorkModule::set_float(boma, SPECIAL_S_CURR[ENTRY_ID], *FIGHTER_REFLET_INSTANCE_WORK_ID_FLOAT_SPECIAL_S_CURRENT_POINT);
+				WorkModule::set_int(boma, VariableModule::get_int((boma) as *mut _, FIGHTER_REFLET_INSTANCE_WORK_ID_INT_SPECIAL_N_CURR), *FIGHTER_REFLET_INSTANCE_WORK_ID_INT_SPECIAL_N_CURRENT_POINT);
+				WorkModule::set_float(boma, VariableModule::get_float((boma) as *mut _, FIGHTER_REFLET_INSTANCE_WORK_ID_FLOAT_SPECIAL_S_CURR), *FIGHTER_REFLET_INSTANCE_WORK_ID_FLOAT_SPECIAL_S_CURRENT_POINT);
 			};
 			if [hash40("special_hi"), hash40("special_air_hi"), hash40("special_hi_fail"), hash40("special_air_hi_fail")].contains(&motion_kind) {
-				if IS_GRIMA[ENTRY_ID] == false {
+				if VariableModule::is_flag((boma) as *mut _, FIGHTER_REFLET_INSTANCE_WORK_ID_FLAG_IS_GRIMA) == false {
 					if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_GUARD) && !WorkModule::is_flag(boma, *FIGHTER_INSTANCE_WORK_ID_FLAG_DISABLE_ESCAPE_AIR) && MotionModule::frame(boma) >= 8.0 {
 						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_ESCAPE_AIR, false);
 					};
@@ -62,19 +62,19 @@ unsafe extern "C" fn robin(fighter : &mut L2CFighterCommon) {
 					MotionModule::change_motion(boma, smash::phx::Hash40::new("special_hi3"), 0.0, 1.0, false, 0.0, false, false);
 				};
 			};
-			if IS_GRIMA[ENTRY_ID]{
+			if VariableModule::is_flag((boma) as *mut _, FIGHTER_REFLET_INSTANCE_WORK_ID_FLAG_IS_GRIMA){
 				WorkModule::set_int(boma, 0, *FIGHTER_REFLET_INSTANCE_WORK_ID_INT_SPECIAL_N_THUNDER_KIND);
 				if status_kind == *FIGHTER_REFLET_STATUS_KIND_SPECIAL_N_HOLD {
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_REFLET_STATUS_KIND_SPECIAL_N_SHOOT, true);
 				};
 			};
 			/*if [hash40("special_n_start")].contains(&motion_kind) {
-				if IS_GRIMA[ENTRY_ID]{
+				if VariableModule::is_flag((boma) as *mut _, FIGHTER_REFLET_INSTANCE_WORK_ID_FLAG_IS_GRIMA){
 					MotionModule::change_motion(boma, smash::phx::Hash40::new("special_n"), -1.0, 1.0, false, 0.0, false, false);
 				};
 			};
 			if [hash40("special_air_n_start")].contains(&motion_kind) {
-				if IS_GRIMA[ENTRY_ID]  {
+				if VariableModule::is_flag((boma) as *mut _, FIGHTER_REFLET_INSTANCE_WORK_ID_FLAG_IS_GRIMA)  {
 					MotionModule::change_motion(boma, smash::phx::Hash40::new("special_air_n"), -1.0, 1.0, false, 0.0, false, false);
 				};
 			};*/
@@ -94,8 +94,8 @@ unsafe extern "C" fn robin(fighter : &mut L2CFighterCommon) {
 			};
 			if [hash40("special_lw_start"), hash40("special_air_lw_start"), hash40("special_lw"), hash40("special_air_lw")].contains(&motion_kind) {
 				if MotionModule::frame(boma) == 8.0 {
-					if IS_GRIMA[ENTRY_ID] == true {
-						IS_GRIMA[ENTRY_ID] = false;
+					if VariableModule::is_flag((boma) as *mut _, FIGHTER_REFLET_INSTANCE_WORK_ID_FLAG_IS_GRIMA) == true {
+						VariableModule::set_flag((boma) as *mut _, false, FIGHTER_REFLET_INSTANCE_WORK_ID_FLAG_IS_GRIMA);
 						macros::EFFECT_FOLLOW(fighter, Hash40::new("reflet_gigafire_hold"), Hash40::new("waist"), 0, 0, 0, 0, 0, 0, 0.725, true);
 						macros::LAST_EFFECT_SET_COLOR(fighter, 1.0, 1.15, 1.0);
 						macros::LAST_EFFECT_SET_ALPHA(fighter, 0.75);
@@ -106,7 +106,7 @@ unsafe extern "C" fn robin(fighter : &mut L2CFighterCommon) {
 						macros::LAST_EFFECT_SET_COLOR(fighter, 1.0, 1.15, 1.0);
 						macros::LAST_EFFECT_SET_ALPHA(fighter, 0.75);
 					} else {
-						IS_GRIMA[ENTRY_ID] = true;
+						VariableModule::set_flag((boma) as *mut _, true, FIGHTER_REFLET_INSTANCE_WORK_ID_FLAG_IS_GRIMA);
 						macros::FT_ADD_DAMAGE(fighter, DMG_ADD*4.0);
 						macros::EFFECT_FOLLOW(fighter, Hash40::new("reflet_gigafire_hold"), Hash40::new("waist"), 0, 0, 0, 0, 0, 0, 0.725, true);
 						macros::LAST_EFFECT_SET_COLOR(fighter, 0.25, 0.0, 3.0);
@@ -140,18 +140,18 @@ unsafe extern "C" fn robin(fighter : &mut L2CFighterCommon) {
 			};
 			if StatusModule::situation_kind(boma) != SITUATION_KIND_AIR {
 				FLOAT[ENTRY_ID] = 0;
-				START_FLOAT[ENTRY_ID] = false;
-				CHECK_FLOAT[ENTRY_ID] = 0;
+				VariableModule::set_flag((boma) as *mut _, false, FIGHTER_REFLET_INSTANCE_WORK_ID_FLAG_START_FLOAT);
+				VariableModule::set_int((boma) as *mut _, 0, FIGHTER_REFLET_INSTANCE_WORK_ID_INT_CHECK_FLOAT);
 			};
 			if smash::app::sv_information::is_ready_go() == false || [*FIGHTER_STATUS_KIND_WIN, *FIGHTER_STATUS_KIND_LOSE, *FIGHTER_STATUS_KIND_DEAD].contains(&status_kind) {
-				IS_GRIMA[ENTRY_ID] = false;
-				DMG_COUNTER[ENTRY_ID] = DMG_COUNTER_MAX;
+				VariableModule::set_flag((boma) as *mut _, false, FIGHTER_REFLET_INSTANCE_WORK_ID_FLAG_IS_GRIMA);
+				VariableModule::set_int((boma) as *mut _, DMG_COUNTER_MAX, FIGHTER_REFLET_INSTANCE_WORK_ID_INT_DMG_COUNTER);
 			};
-			if IS_GRIMA[ENTRY_ID] == true {
-				if DMG_COUNTER[ENTRY_ID] > 0 {
-					DMG_COUNTER[ENTRY_ID] -= 1;
+			if VariableModule::is_flag((boma) as *mut _, FIGHTER_REFLET_INSTANCE_WORK_ID_FLAG_IS_GRIMA) == true {
+				if VariableModule::get_int((boma) as *mut _, FIGHTER_REFLET_INSTANCE_WORK_ID_INT_DMG_COUNTER) > 0 {
+					VariableModule::dec_int((boma) as *mut _, FIGHTER_REFLET_INSTANCE_WORK_ID_INT_DMG_COUNTER);
 				} else {
-					DMG_COUNTER[ENTRY_ID] = DMG_COUNTER_MAX;
+					VariableModule::set_int((boma) as *mut _, DMG_COUNTER_MAX, FIGHTER_REFLET_INSTANCE_WORK_ID_INT_DMG_COUNTER);
 					if DamageModule::damage(boma, 0) < 120.0 {
 						macros::FT_ADD_DAMAGE(fighter, DMG_ADD);
 					};
@@ -164,7 +164,7 @@ unsafe extern "C" fn robin(fighter : &mut L2CFighterCommon) {
 					};
 				};
 				//Effect Code
-				if DMG_COUNTER[ENTRY_ID] % 40 == 0 {
+				if VariableModule::get_int((boma) as *mut _, FIGHTER_REFLET_INSTANCE_WORK_ID_INT_DMG_COUNTER) % 40 == 0 {
 					macros::EFFECT_FOLLOW(fighter, Hash40::new("reflet_rizaia_capture"), Hash40::new("havel"), 0, 0, 0, 0, 0, 0, 0.25, true);
 					macros::EFFECT_FOLLOW(fighter, Hash40::new("reflet_rizaia_capture"), Hash40::new("haver"), 0, 0, 0, 0, 0, 0, 0.25, true);
 					let a1: u32 = EffectModule::req_follow(boma, smash::phx::Hash40::new("sys_magicball_aura"), smash::phx::Hash40::new("waist"), &HANDS, &HANDS, 1.0, true, 0, 0, 0, 0, 0, true, true) as u32;
@@ -187,37 +187,37 @@ unsafe extern "C" fn robin(fighter : &mut L2CFighterCommon) {
 				}
 				if situation_kind == *SITUATION_KIND_AIR && (!(*FIGHTER_STATUS_KIND_DAMAGE..*FIGHTER_STATUS_KIND_DAMAGE_FALL).contains(&status_kind) && status_kind != *FIGHTER_STATUS_KIND_FALL_SPECIAL){
 					if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP) {
-						CHECK_FLOAT[ENTRY_ID] += 1;
+						VariableModule::inc_int((boma) as *mut _, FIGHTER_REFLET_INSTANCE_WORK_ID_INT_CHECK_FLOAT);
 					} else {
-						CHECK_FLOAT[ENTRY_ID] = 0;
+						VariableModule::set_int((boma) as *mut _, 0, FIGHTER_REFLET_INSTANCE_WORK_ID_INT_CHECK_FLOAT);
 					};
 					if ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_CSTICK_ON) && ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_ATTACK_RAW) && ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP)  && stick_y < -0.5 {
-						CHECK_FLOAT[ENTRY_ID] = CHECK_FLOAT_MAX;
+						VariableModule::set_int((boma) as *mut _, CHECK_FLOAT_MAX, FIGHTER_REFLET_INSTANCE_WORK_ID_INT_CHECK_FLOAT);
 					};
-					if ((CHECK_FLOAT[ENTRY_ID] >= CHECK_FLOAT_MAX && 
+					if ((VariableModule::get_int((boma) as *mut _, FIGHTER_REFLET_INSTANCE_WORK_ID_INT_CHECK_FLOAT) >= CHECK_FLOAT_MAX && 
 						(![*FIGHTER_KINETIC_TYPE_JUMP, *FIGHTER_KINETIC_TYPE_JUMP_AERIAL].contains(&KineticModule::get_kinetic_type(boma))
 						|| get_speed_y(boma) <= 0.0
 					)
-					) || JUMPSQUAT_FLOAT[ENTRY_ID]) && FLOAT[ENTRY_ID] == 0 {
-						START_FLOAT[ENTRY_ID] = true;
+					) || VariableModule::is_flag((boma) as *mut _, FIGHTER_REFLET_INSTANCE_WORK_ID_FLAG_JUMPSQUAT_FLOAT)) && FLOAT[ENTRY_ID] == 0 {
+						VariableModule::set_flag((boma) as *mut _, true, FIGHTER_REFLET_INSTANCE_WORK_ID_FLAG_START_FLOAT);
 					};
 				};
-				if status_kind == *FIGHTER_STATUS_KIND_JUMP && JUMPSQUAT_FLOAT[ENTRY_ID] {
+				if status_kind == *FIGHTER_STATUS_KIND_JUMP && VariableModule::is_flag((boma) as *mut _, FIGHTER_REFLET_INSTANCE_WORK_ID_FLAG_JUMPSQUAT_FLOAT) {
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL, true);
 				};
 				if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_ATTACK_RAW) || ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_CSTICK_ON){
-					JUMPSQUAT_FLOAT[ENTRY_ID] = false;
+					VariableModule::set_flag((boma) as *mut _, false, FIGHTER_REFLET_INSTANCE_WORK_ID_FLAG_JUMPSQUAT_FLOAT);
 				}
 				if status_kind == *FIGHTER_STATUS_KIND_JUMP_SQUAT {
 					if ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_CSTICK_ON) && ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_ATTACK_RAW) && ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP) && ControlModule::get_stick_y(boma) < -0.5 {
-						JUMPSQUAT_FLOAT[ENTRY_ID] = true;
+						VariableModule::set_flag((boma) as *mut _, true, FIGHTER_REFLET_INSTANCE_WORK_ID_FLAG_JUMPSQUAT_FLOAT);
 						WorkModule::set_flag(boma, false, *FIGHTER_STATUS_WORK_ID_FLAG_RESERVE_JUMP_MINI);
 					} else {
-						JUMPSQUAT_FLOAT[ENTRY_ID] = false;
-						CHECK_FLOAT[ENTRY_ID] = 0;
+						VariableModule::set_flag((boma) as *mut _, false, FIGHTER_REFLET_INSTANCE_WORK_ID_FLAG_JUMPSQUAT_FLOAT);
+						VariableModule::set_int((boma) as *mut _, 0, FIGHTER_REFLET_INSTANCE_WORK_ID_INT_CHECK_FLOAT);
 					};
 				} else {
-					JUMPSQUAT_FLOAT[ENTRY_ID] = false;
+					VariableModule::set_flag((boma) as *mut _, false, FIGHTER_REFLET_INSTANCE_WORK_ID_FLAG_JUMPSQUAT_FLOAT);
 				};
 				if [
 					*FIGHTER_STATUS_KIND_ESCAPE_AIR, *FIGHTER_STATUS_KIND_ESCAPE_AIR_SLIDE, *FIGHTER_STATUS_KIND_SPECIAL_N, 
@@ -307,9 +307,9 @@ unsafe extern "C" fn robin(fighter : &mut L2CFighterCommon) {
 						};
 					};
 				};
-				if START_FLOAT[ENTRY_ID] == true {
+				if VariableModule::is_flag((boma) as *mut _, FIGHTER_REFLET_INSTANCE_WORK_ID_FLAG_START_FLOAT) == true {
 					FLOAT[ENTRY_ID] = FLOAT_MAX;
-					START_FLOAT[ENTRY_ID] = false;
+					VariableModule::set_flag((boma) as *mut _, false, FIGHTER_REFLET_INSTANCE_WORK_ID_FLAG_START_FLOAT);
 					ControlModule::clear_command(boma, false);
 					WorkModule::set_flag(boma, false, *FIGHTER_STATUS_WORK_ID_FLAG_RESERVE_DIVE);
 					/*if status_kind == *FIGHTER_STATUS_KIND_JUMP {

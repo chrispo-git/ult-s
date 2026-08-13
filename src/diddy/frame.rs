@@ -26,7 +26,7 @@ pub fn install() {
 	.install();
 }
 
-static mut DIDDY_PEANUT_CANCEL : [i32; 8] = [0; 8];
+static FIGHTER_DIDDY_INSTANCE_WORK_ID_INT_DIDDY_PEANUT_CANCEL : i32 = 0;
 
 unsafe extern "C" fn diddy_frame(fighter: &mut L2CFighterCommon) {
     unsafe {
@@ -38,13 +38,13 @@ unsafe extern "C" fn diddy_frame(fighter: &mut L2CFighterCommon) {
 			let end_frame = MotionModule::end_frame(boma);
 			let motion_kind = MotionModule::motion_kind(boma);
 			if [hash40("special_air_n_start"), hash40("special_air_n_shoot")].contains(&MotionModule::motion_kind(boma)) {
-				DIDDY_PEANUT_CANCEL[ENTRY_ID] = 1;
+				VariableModule::set_int((boma) as *mut _, 1, FIGHTER_DIDDY_INSTANCE_WORK_ID_INT_DIDDY_PEANUT_CANCEL);
 			};
 			if [hash40("special_n_blow"), hash40("special_air_n_blow"), hash40("special_air_n_shoot"), hash40("special_n_shoot"), hash40("special_air_n_start"), hash40("special_n_start")].contains(&MotionModule::motion_kind(boma)) == false{
-				DIDDY_PEANUT_CANCEL[ENTRY_ID] = 0;
+				VariableModule::set_int((boma) as *mut _, 0, FIGHTER_DIDDY_INSTANCE_WORK_ID_INT_DIDDY_PEANUT_CANCEL);
 			};
-			if [hash40("special_n_shoot"), hash40("special_n_blow"), hash40("special_n_start")].contains(&MotionModule::motion_kind(boma)) && DIDDY_PEANUT_CANCEL[ENTRY_ID] == 1 {
-				DIDDY_PEANUT_CANCEL[ENTRY_ID] = 0;
+			if [hash40("special_n_shoot"), hash40("special_n_blow"), hash40("special_n_start")].contains(&MotionModule::motion_kind(boma)) && VariableModule::get_int((boma) as *mut _, FIGHTER_DIDDY_INSTANCE_WORK_ID_INT_DIDDY_PEANUT_CANCEL) == 1 {
+				VariableModule::set_int((boma) as *mut _, 0, FIGHTER_DIDDY_INSTANCE_WORK_ID_INT_DIDDY_PEANUT_CANCEL);
 				StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_LANDING, true);
 			};
 			if [hash40("appeal_s_r"), hash40("appeal_s_l")].contains(&motion_kind) {

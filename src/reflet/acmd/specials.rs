@@ -138,7 +138,7 @@ unsafe extern "C" fn robin_grima_upb_snd(fighter: &mut L2CAgentBase) {
 unsafe extern "C" fn robin_grima_neutralb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-	if IS_GRIMA[ENTRY_ID] {
+	if VariableModule::is_flag((fighter.module_accessor) as *mut _, FIGHTER_REFLET_INSTANCE_WORK_ID_FLAG_IS_GRIMA) {
 			frame(fighter.lua_state_agent, 1.0);
 			macros::FT_MOTION_RATE(fighter, /*FSM*/ 5.0);
 			wait(fighter.lua_state_agent, 1.0);
@@ -164,7 +164,7 @@ unsafe extern "C" fn robin_grima_neutralb(fighter: &mut L2CAgentBase) {
 unsafe extern "C" fn robin_grima_neutralb_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-	if IS_GRIMA[ENTRY_ID] {
+	if VariableModule::is_flag((fighter.module_accessor) as *mut _, FIGHTER_REFLET_INSTANCE_WORK_ID_FLAG_IS_GRIMA) {
 			frame(fighter.lua_state_agent, 6.0);
 			if macros::is_excute(fighter) {
 				macros::EFFECT_FOLLOW_NO_STOP(fighter, Hash40::new("sys_flash"), Hash40::new("havel"), -1, 1, 0, 0, 0, 0, 0.45, true);
@@ -185,7 +185,7 @@ unsafe extern "C" fn robin_grima_neutralb_eff(fighter: &mut L2CAgentBase) {
 unsafe extern "C" fn robin_grima_neutralb_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-	if IS_GRIMA[ENTRY_ID] {
+	if VariableModule::is_flag((fighter.module_accessor) as *mut _, FIGHTER_REFLET_INSTANCE_WORK_ID_FLAG_IS_GRIMA) {
 			frame(fighter.lua_state_agent, 10.0);
 			if macros::is_excute(fighter) {
 				macros::PLAY_SE(fighter, Hash40::new("vc_reflet_attack07"));
@@ -202,7 +202,7 @@ unsafe extern "C" fn robin_grima_neutralb_snd(fighter: &mut L2CAgentBase) {
 unsafe extern "C" fn robin_grima_sideb(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-	if IS_GRIMA[ENTRY_ID] {
+	if VariableModule::is_flag((fighter.module_accessor) as *mut _, FIGHTER_REFLET_INSTANCE_WORK_ID_FLAG_IS_GRIMA) {
 			macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.7);
 			wait(fighter.lua_state_agent, 20.0);
 			macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.0);
@@ -228,7 +228,7 @@ unsafe extern "C" fn robin_grima_sideb(fighter: &mut L2CAgentBase) {
 unsafe extern "C" fn robin_grima_sideb_eff(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-	if IS_GRIMA[ENTRY_ID] {
+	if VariableModule::is_flag((fighter.module_accessor) as *mut _, FIGHTER_REFLET_INSTANCE_WORK_ID_FLAG_IS_GRIMA) {
 		if macros::is_excute(fighter) {
 			macros::EFFECT_OFF_KIND(fighter, Hash40::new_raw(0x0dec313736), false, true);
 			macros::EFFECT_FOLLOW_NO_STOP(fighter, Hash40::new_raw(0x15f3d27868), Hash40::new("top"), 0, 5, 15, 0, 0, 0, 1, true);
@@ -253,7 +253,7 @@ unsafe extern "C" fn robin_grima_sideb_eff(fighter: &mut L2CAgentBase) {
 unsafe extern "C" fn robin_grima_sideb_snd(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 	let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-	if IS_GRIMA[ENTRY_ID] {
+	if VariableModule::is_flag((fighter.module_accessor) as *mut _, FIGHTER_REFLET_INSTANCE_WORK_ID_FLAG_IS_GRIMA) {
 		frame(fighter.lua_state_agent, 16.0);
 		if macros::is_excute(fighter) {
 			macros::PLAY_SE(fighter, Hash40::new("se_reflet_special_l01"));

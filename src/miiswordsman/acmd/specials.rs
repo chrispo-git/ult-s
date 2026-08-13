@@ -29,8 +29,6 @@ pub fn install() {
     .acmd("game_specialairn1", sword_nado, Priority::Low)    
     .acmd("game_specials2attack", sword_gale_stab, Priority::Low)    
     .acmd("game_specialairs2attack", sword_air_gale_stab, Priority::Low)    
-    .acmd("game_speciallw1hit", sword_counter, Priority::Low)    
-    .acmd("game_specialairlw1hit", sword_counter, Priority::Low)    
     .acmd("game_specialhi1", sword_ss_rise, Priority::Low)    
     .acmd("game_specialairhi1", sword_ss_rise, Priority::Low)    
     .acmd("game_specialairn3start", sword_airgrab_start, Priority::Low)    
@@ -146,14 +144,13 @@ unsafe extern "C" fn sword_hs_start(fighter: &mut L2CAgentBase) {
 
 unsafe extern "C" fn sword_nado(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
-	let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 		frame(fighter.lua_state_agent, 1.0);
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.7058823529411765);
 		frame(fighter.lua_state_agent, 17.0);
 		if macros::is_excute(fighter) {
-			if NADO_COOLDOWN[ENTRY_ID] <= 0 {
+			if VariableModule::get_int(fighter.module_accessor, FIGHTER_MIISWORDSMAN_INSTANCE_WORK_ID_INT_TORNADO_COOLDOWN) <= 0 {
 				ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_MIISWORDSMAN_GENERATE_ARTICLE_TORNADOSHOT, false, 0);
-				NADO_COOLDOWN[ENTRY_ID] = NADO_MAX;
+				VariableModule::set_int(fighter.module_accessor, TORNADO_MAX, FIGHTER_MIISWORDSMAN_INSTANCE_WORK_ID_INT_TORNADO_COOLDOWN)
 			} else {
 				macros::EFFECT(fighter, Hash40::new("sys_erace_smoke"), Hash40::new("top"), 0, 7, 14, 0, 0, 0, 0.7, 0, 0, 0, 0, 0, 0, true);
 			}
@@ -203,31 +200,6 @@ unsafe extern "C" fn sword_air_gale_stab(agent: &mut L2CAgentBase) {
         notify_event_msc_cmd!(agent, Hash40::new_raw(0x2127e37c07), *GROUND_CLIFF_CHECK_KIND_ALWAYS_BOTH_SIDES);
     }
 }
-
-unsafe extern "C" fn sword_counter(fighter: &mut L2CAgentBase) {
-    let lua_state = fighter.lua_state_agent;
-			macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.4);
-			if macros::is_excute(fighter) {
-				WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_MIISWORDSMAN_STATUS_COUNTER_FLAG_GRAVITY_OFF);
-			}
-			frame(fighter.lua_state_agent, 10.0);
-			macros::FT_MOTION_RATE(fighter, /*FSM*/ 1.0);
-			frame(fighter.lua_state_agent, 21.0);
-			if macros::is_excute(fighter) {
-				macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 8.0, /*Angle*/ 80, /*KBG*/ 60, /*FKB*/ 0, /*BKB*/ 85, /*Size*/ 8.8, /*X*/ 0.0, /*Y*/ 8.0, /*Z*/ 15.0, /*X2*/ Some(0.0), /*Y2*/ Some(8.0), /*Z2*/ Some(3.0), /*Hitlag*/ 2.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ f32::NAN, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_cutup"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_CUTUP, /*Type*/ *ATTACK_REGION_SWORD);
-				AttackModule::set_force_reaction(fighter.module_accessor, 0, true, false);
-				if true{
-					let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-					COUNTER_STORE[ENTRY_ID] = false;
-				}
-			}
-			frame(fighter.lua_state_agent, 23.0);
-			if macros::is_excute(fighter) {
-				AttackModule::clear_all(fighter.module_accessor);
-				WorkModule::on_flag(fighter.module_accessor, /*Flag*/ *FIGHTER_MIISWORDSMAN_STATUS_COUNTER_FLAG_GRAVITY_ON);
-			}
-			macros::FT_MOTION_RATE(fighter, /*FSM*/ 0.65);
-}		
 
 unsafe extern "C" fn sword_ss_rise(fighter: &mut L2CAgentBase) {
 		let lua_state = fighter.lua_state_agent;

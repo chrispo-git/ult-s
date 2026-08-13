@@ -13,6 +13,7 @@ use std::os::raw::c_int;
 use std::os::raw::c_ulong;
 use std::{fs, path::Path};
 use once_cell::sync::Lazy;
+use crate::config;
 
 #[derive(Default, Clone, Copy)]
 struct WavedashState {
@@ -91,7 +92,7 @@ pub(crate) fn get_wd_length(fighter_kind : i32) -> f32 {
 
 pub unsafe fn opff(fighter : &mut L2CFighterCommon, status_kind : i32, motion_kind : u64, ENTRY_ID : usize) {
     unsafe {
-		if !is_mechanics_enabled() && !is_gamemode("rivals".to_string()) {
+		if config::get().defense.airdodge != 0 && !is_gamemode("rivals".to_string()) {
 			return;
 		}
 		if !crate::is_in!(status_kind,
@@ -196,7 +197,7 @@ pub unsafe fn change_status_request_hook(boma: &mut smash::app::BattleObjectModu
 			}
 		}
 		if [*FIGHTER_STATUS_KIND_ESCAPE, *FIGHTER_STATUS_KIND_ESCAPE_F, *FIGHTER_STATUS_KIND_ESCAPE_B].contains(&next_status) {
-			if !is_mechanics_enabled()  && !is_gamemode("rivals".to_string()) {
+			if config::get().defense.airdodge != 0  && !is_gamemode("rivals".to_string()) {
 				return original!()(boma, status_kind, arg3);
 			}
 			if ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP) || ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP_MINI) {
@@ -209,14 +210,11 @@ pub unsafe fn change_status_request_hook(boma: &mut smash::app::BattleObjectModu
 				original!()(boma, status_kind, arg3)
 			}
 		}  else if next_status == *FIGHTER_STATUS_KIND_ICE_JUMP {
-			if !is_mechanics_enabled() {
-				return original!()(boma, status_kind, arg3);
-			}
             WorkModule::set_float(boma, 8.0, *FIGHTER_INSTANCE_WORK_ID_FLOAT_DAMAGE_REACTION_FRAME);
             WorkModule::set_float(boma, 9.0, *FIGHTER_INSTANCE_WORK_ID_FLOAT_DAMAGE_REACTION_FRAME_LAST);
 			original!()(boma, *FIGHTER_STATUS_KIND_DAMAGE_FALL, true)
 		}else if next_status == *FIGHTER_STATUS_KIND_TURN && curr_status == *FIGHTER_STATUS_KIND_LANDING{
-			if !is_mechanics_enabled()  && !is_gamemode("rivals".to_string()) {
+			if config::get().movement.pivots == 2  && !is_gamemode("rivals".to_string()) {
 				return original!()(boma, status_kind, arg3);
 			}
 			return 0 as u64
@@ -240,7 +238,7 @@ unsafe extern "C" fn status_pre_EscapeAir(fighter: &mut L2CFighterCommon) -> L2C
 	let y = ControlModule::get_stick_y(boma);
 	let fighter_kind = smash::app::utility::get_kind(boma);
     //Handles wavedash
-	if !is_mechanics_enabled()  && !is_gamemode("rivals".to_string()) {
+	if config::get().defense.airdodge != 0  && !is_gamemode("rivals".to_string()) {
 		return smashline::original_status(Pre, fighter, *FIGHTER_STATUS_KIND_ESCAPE_AIR)(fighter);
 	}
 	let state = crate::get_state!(ENTRY_ID, WavedashState);
@@ -268,7 +266,7 @@ pub unsafe fn change_status_request_script_hook(boma: &mut smash::app::BattleObj
 			}
 		}
 	}
-	if !is_mechanics_enabled() && !is_gamemode("rivals".to_string()) {
+	if config::get().defense.airdodge != 0 && !is_gamemode("rivals".to_string()) {
 		return original!()(boma, status_kind, arg3);
 	}
 	if smash::app::utility::get_category(boma) == *BATTLE_OBJECT_CATEGORY_FIGHTER {
@@ -287,7 +285,7 @@ pub unsafe fn change_status_request_script_hook(boma: &mut smash::app::BattleObj
 		} else if smash::app::utility::get_kind(boma) == *FIGHTER_KIND_TRAIL && [*FIGHTER_TRAIL_STATUS_KIND_ATTACK_AIR_F].contains(&status_kind) && Path::new("sd:/ultimate/ult-s/trail.flag").is_file(){
 			return 0 as u64
 		}  else if next_status == *FIGHTER_STATUS_KIND_ICE_JUMP {
-			if !is_mechanics_enabled() {
+			if config::get().defense.airdodge != 0 {
 				return original!()(boma, status_kind, arg3);
 			}
             WorkModule::set_float(boma, 8.0, *FIGHTER_INSTANCE_WORK_ID_FLOAT_DAMAGE_REACTION_FRAME);

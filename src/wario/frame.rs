@@ -72,17 +72,17 @@ unsafe extern "C" fn wario_frame(fighter: &mut L2CFighterCommon) {
 				}
 			};
 			if [*FIGHTER_STATUS_KIND_CATCH_ATTACK].contains(&status_kind) && (frame as i32) == 5 {
-				COIN_COUNT[ENTRY_ID] += 1;
+				VariableModule::inc_int((boma) as *mut _, FIGHTER_WARIO_INSTANCE_WORK_ID_INT_COIN_COUNT);
 			};
-			if COIN_COUNT[ENTRY_ID] > 30 {
-				COIN_COUNT[ENTRY_ID] = 30;
+			if VariableModule::get_int((boma) as *mut _, FIGHTER_WARIO_INSTANCE_WORK_ID_INT_COIN_COUNT) > 30 {
+				VariableModule::set_int((boma) as *mut _, 30, FIGHTER_WARIO_INSTANCE_WORK_ID_INT_COIN_COUNT);
 			}
 			if smash::app::smashball::is_training_mode() {
                 if ControlModule::check_button_on_trriger(boma, *CONTROL_PAD_BUTTON_APPEAL_HI) {
-					COIN_COUNT[ENTRY_ID] = 30;
+					VariableModule::set_int((boma) as *mut _, 30, FIGHTER_WARIO_INSTANCE_WORK_ID_INT_COIN_COUNT);
 				}
 			}
-			let tens = (COIN_COUNT[ENTRY_ID] / 10) as i32;
+			let tens = (VariableModule::get_int((boma) as *mut _, FIGHTER_WARIO_INSTANCE_WORK_ID_INT_COIN_COUNT) / 10) as i32;
 			if [*FIGHTER_STATUS_KIND_SPECIAL_LW].contains(&status_kind) {
 				if tens == 3 {
 					if (frame as i32) == 9 {
@@ -111,14 +111,14 @@ unsafe extern "C" fn wario_frame(fighter: &mut L2CFighterCommon) {
 			}
 
 			if [*FIGHTER_WARIO_STATUS_KIND_SPECIAL_S_START, *FIGHTER_STATUS_KIND_SPECIAL_LW, *FIGHTER_STATUS_KIND_GUARD_ON, *FIGHTER_STATUS_KIND_GUARD, *FIGHTER_STATUS_KIND_CATCH_ATTACK, *FIGHTER_STATUS_KIND_CATCH_WAIT, *FIGHTER_STATUS_KIND_TURN, *FIGHTER_STATUS_KIND_WALK, *FIGHTER_STATUS_KIND_WALK_BRAKE, *FIGHTER_STATUS_KIND_WAIT].contains(&status_kind) {
-				SHOW_COUNT[ENTRY_ID] = true;
+				VariableModule::set_flag((boma) as *mut _, true, FIGHTER_WARIO_INSTANCE_WORK_ID_FLAG_SHOW_COUNT);
 			} else {
-				SHOW_COUNT[ENTRY_ID] = false;
+				VariableModule::set_flag((boma) as *mut _, false, FIGHTER_WARIO_INSTANCE_WORK_ID_FLAG_SHOW_COUNT);
 			}
 			if is_reset() {
-				COIN_COUNT[ENTRY_ID] = 0;
-				SHOW_COUNT[ENTRY_ID] = false;
-                ALPHA_COUNTER[ENTRY_ID] = 0.0;
+				VariableModule::set_int((boma) as *mut _, 0, FIGHTER_WARIO_INSTANCE_WORK_ID_INT_COIN_COUNT);
+				VariableModule::set_flag((boma) as *mut _, false, FIGHTER_WARIO_INSTANCE_WORK_ID_FLAG_SHOW_COUNT);
+                VariableModule::set_float((boma) as *mut _, 0.0, FIGHTER_WARIO_INSTANCE_WORK_ID_FLOAT_ALPHA_COUNTER);
 				ArticleModule::remove_exist(boma, FIGHTER_WARIO_GENERATE_ARTICLE_COUNTER,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
 			} else {
 				if !ArticleModule::is_exist(fighter.module_accessor, FIGHTER_WARIO_GENERATE_ARTICLE_COUNTER) {

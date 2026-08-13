@@ -147,17 +147,17 @@ unsafe extern "C" fn joker_sideb(fighter: &mut L2CAgentBase) {
         let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 		if macros::is_excute(fighter) {
-			BATON_TYPE[ENTRY_ID] += 1;
-			if BATON_TYPE[ENTRY_ID] > BATON_MAX {
-				BATON_TYPE[ENTRY_ID] = 0;
+			VariableModule::inc_int((fighter.module_accessor) as *mut _, FIGHTER_JACK_INSTANCE_WORK_ID_INT_BATON_TYPE);
+			if VariableModule::get_int((fighter.module_accessor) as *mut _, FIGHTER_JACK_INSTANCE_WORK_ID_INT_BATON_TYPE) > BATON_MAX {
+				VariableModule::set_int((fighter.module_accessor) as *mut _, 0, FIGHTER_JACK_INSTANCE_WORK_ID_INT_BATON_TYPE);
 			}
 		};
 		frame(fighter.lua_state_agent, 5.0);
 		if macros::is_excute(fighter) {
-			if BATON_TYPE[ENTRY_ID] == 0 {
+			if VariableModule::get_int((fighter.module_accessor) as *mut _, FIGHTER_JACK_INSTANCE_WORK_ID_INT_BATON_TYPE) == 0 {
 				ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_JACK_GENERATE_ARTICLE_MONA, false, 0);
 				ArticleModule::change_motion(fighter.module_accessor, *FIGHTER_JACK_GENERATE_ARTICLE_MONA,smash::phx::Hash40::new("special_s1"),false,0.0);
-			} else if BATON_TYPE[ENTRY_ID] == 1 {
+			} else if VariableModule::get_int((fighter.module_accessor) as *mut _, FIGHTER_JACK_INSTANCE_WORK_ID_INT_BATON_TYPE) == 1 {
 				ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_JACK_GENERATE_ARTICLE_MONA, false, 0);
 				ArticleModule::change_motion(fighter.module_accessor, *FIGHTER_JACK_GENERATE_ARTICLE_MONA,smash::phx::Hash40::new("special_s2"),false,0.0);
 			} else {
@@ -166,7 +166,7 @@ unsafe extern "C" fn joker_sideb(fighter: &mut L2CAgentBase) {
 			};
 		}
 		//ACMD for each one of the baton passes
-		if BATON_TYPE[ENTRY_ID] == 0 { //Skull (Ryuji)
+		if VariableModule::get_int((fighter.module_accessor) as *mut _, FIGHTER_JACK_INSTANCE_WORK_ID_INT_BATON_TYPE) == 0 { //Skull (Ryuji)
 			frame(fighter.lua_state_agent, 15.0);
 			if macros::is_excute(fighter) {
 				macros::ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 6.0, /*Angle*/ 270, /*KBG*/ 90, /*FKB*/ 0, /*BKB*/ 40, /*Size*/ 4.0, /*X*/ 0.0, /*Y*/ 55.0, /*Z*/ 28.0, /*X2*/ Some(0.0), /*Y2*/ Some(40.0), /*Z2*/ Some(28.0), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 3, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ true, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_elec"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_ELEC, /*Type*/ *ATTACK_REGION_ENERGY);
@@ -177,7 +177,7 @@ unsafe extern "C" fn joker_sideb(fighter: &mut L2CAgentBase) {
 			if macros::is_excute(fighter) {
 				AttackModule::clear_all(fighter.module_accessor);
 			};
-		} else if BATON_TYPE[ENTRY_ID] == 1 { // Panther (Ann)
+		} else if VariableModule::get_int((fighter.module_accessor) as *mut _, FIGHTER_JACK_INSTANCE_WORK_ID_INT_BATON_TYPE) == 1 { // Panther (Ann)
 			frame(fighter.lua_state_agent, 20.0);
 			if macros::is_excute(fighter) {
 				macros::ATTACK(fighter, /*ID*/ 0, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 14.0, /*Angle*/ 361, /*KBG*/ 92, /*FKB*/ 0, /*BKB*/ 40, /*Size*/ 13.0, /*X*/ 0.0, /*Y*/ 8.0, /*Z*/ 30.0, /*X2*/ None, /*Y2*/ None, /*Z2*/ None, /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 0, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ false, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ true, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_fire"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_L, /*SFXType*/ *COLLISION_SOUND_ATTR_FIRE, /*Type*/ *ATTACK_REGION_BOMB);
@@ -211,13 +211,13 @@ unsafe extern "C" fn joker_sideb_eff(fighter: &mut L2CAgentBase) {
         let lua_state = fighter.lua_state_agent;
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 		frame(fighter.lua_state_agent, 2.0);
-		if BATON_TYPE[ENTRY_ID] == 0 { //Skull (Ryuji)
+		if VariableModule::get_int((fighter.module_accessor) as *mut _, FIGHTER_JACK_INSTANCE_WORK_ID_INT_BATON_TYPE) == 0 { //Skull (Ryuji)
 			frame(fighter.lua_state_agent, 14.0);
 			if macros::is_excute(fighter) {
 				macros::EFFECT(fighter, Hash40::new("sys_thunder_flash"), Hash40::new("top"), 0, 0, 28, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, true);
 			};
 			println!("");
-		} else if BATON_TYPE[ENTRY_ID] == 1 { // Panther (Ann)
+		} else if VariableModule::get_int((fighter.module_accessor) as *mut _, FIGHTER_JACK_INSTANCE_WORK_ID_INT_BATON_TYPE) == 1 { // Panther (Ann)
 			frame(fighter.lua_state_agent, 19.0);
 			if macros::is_excute(fighter) {
 				macros::EFFECT(fighter, Hash40::new("sys_bomb_a"), Hash40::new("top"), 0.0, 8.0, 30.0, 0, 0, 0, 0.8, 0, 0, 0, 0, 0, 0, true);
@@ -265,7 +265,7 @@ unsafe extern "C" fn joker_sideb_eff(fighter: &mut L2CAgentBase) {
 		}
 		frame(fighter.lua_state_agent, 47.0);
 		if macros::is_excute(fighter) {
-			if BATON_TYPE[ENTRY_ID] != 2 { //Not Mona
+			if VariableModule::get_int((fighter.module_accessor) as *mut _, FIGHTER_JACK_INSTANCE_WORK_ID_INT_BATON_TYPE) != 2 { //Not Mona
 				macros::EFFECT(fighter, Hash40::new("jack_mona_smoke"), Hash40::new("top"), 0.0, 6.0, 15.0, 0, 0, 0, 3.0, 0, 0, 0, 0, 0, 0, true);
 			} else {
 				macros::EFFECT(fighter, Hash40::new("jack_mona_smoke"), Hash40::new("top"), 0.0, 2.0, 15.0, 0, 0, 0, 1.0, 0, 0, 0, 0, 0, 0, true);
@@ -277,7 +277,7 @@ unsafe extern "C" fn joker_sideb_snd(fighter: &mut L2CAgentBase) {
 		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 		frame(fighter.lua_state_agent, 3.0);
 		let rand_val = smash::app::sv_math::rand(hash40("fighter"), 3);
-		if BATON_TYPE[ENTRY_ID] == 0 { //Skull (Ryuji)
+		if VariableModule::get_int((fighter.module_accessor) as *mut _, FIGHTER_JACK_INSTANCE_WORK_ID_INT_BATON_TYPE) == 0 { //Skull (Ryuji)
 			frame(fighter.lua_state_agent, 6.0);
 			if macros::is_excute(fighter) {
 				if rand_val == 0 {
@@ -293,7 +293,7 @@ unsafe extern "C" fn joker_sideb_snd(fighter: &mut L2CAgentBase) {
 				macros::PLAY_SE(fighter, Hash40::new("se_common_electric_hit_s"));
 			};
 			println!("");
-		} else if BATON_TYPE[ENTRY_ID] == 1 { // Panther (Ann)
+		} else if VariableModule::get_int((fighter.module_accessor) as *mut _, FIGHTER_JACK_INSTANCE_WORK_ID_INT_BATON_TYPE) == 1 { // Panther (Ann)
 			frame(fighter.lua_state_agent, 8.0);
 			if macros::is_excute(fighter) {
 				if rand_val == 0 {
@@ -341,13 +341,13 @@ unsafe extern "C" fn joker_sideb_snd(fighter: &mut L2CAgentBase) {
 unsafe extern "C" fn joker_sideb_expr(agent: &mut L2CAgentBase) {
 	let lua_state = agent.lua_state_agent;
 	let ENTRY_ID = WorkModule::get_int(agent.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-	if BATON_TYPE[ENTRY_ID] == 0 { //Skull (Ryuji)
+	if VariableModule::get_int((agent.module_accessor) as *mut _, FIGHTER_JACK_INSTANCE_WORK_ID_INT_BATON_TYPE) == 0 { //Skull (Ryuji)
 		frame(agent.lua_state_agent, 15.0);
 		if macros::is_excute(agent) {
 			macros::RUMBLE_HIT(agent, Hash40::new("rbkind_attackl"), 0);
 			ControlModule::set_rumble(agent.module_accessor, Hash40::new("rbkind_elecattack"), 0, true, *BATTLE_OBJECT_ID_INVALID as u32);
 		}
-	} else if BATON_TYPE[ENTRY_ID] == 1 { // Panther (Ann)
+	} else if VariableModule::get_int((agent.module_accessor) as *mut _, FIGHTER_JACK_INSTANCE_WORK_ID_INT_BATON_TYPE) == 1 { // Panther (Ann)
 		frame(agent.lua_state_agent, 20.0);
 		if macros::is_excute(agent) {
 			macros::RUMBLE_HIT(agent, Hash40::new("rbkind_explosion"), 0);

@@ -62,11 +62,11 @@ unsafe extern "C" fn snake_dash_attack_throw(fighter: &mut L2CAgentBase) {
     }
     frame(fighter.lua_state_agent, 21.0);
     if is_excute(fighter) {
-        SNAKE_FLAG_ATTACK_S4_COMBO_ENABLE[entry_id] = true;
+        VariableModule::set_flag((fighter.module_accessor) as *mut _, true, FIGHTER_SNAKE_INSTANCE_WORK_ID_FLAG_SNAKE_FLAG_ATTACK_S4_COMBO_ENABLE);
     }
     frame(fighter.lua_state_agent, 38.0);
     if is_excute(fighter) {
-        SNAKE_FLAG_ATTACK_S4_COMBO_ENABLE[entry_id] = false;
+        VariableModule::set_flag((fighter.module_accessor) as *mut _, false, FIGHTER_SNAKE_INSTANCE_WORK_ID_FLAG_SNAKE_FLAG_ATTACK_S4_COMBO_ENABLE);
     }
     frame(fighter.lua_state_agent, 54.0);
     if is_excute(fighter) {
@@ -153,12 +153,12 @@ unsafe extern "C" fn snake_side_smash_2_game(fighter : &mut L2CAgentBase) {
     }
     frame(fighter.lua_state_agent, 13.0);
     if is_excute(fighter) {
-        SNAKE_FLAG_ATTACK_S4_COMBO_ENABLE[entry_id] = true;
+        VariableModule::set_flag((fighter.module_accessor) as *mut _, true, FIGHTER_SNAKE_INSTANCE_WORK_ID_FLAG_SNAKE_FLAG_ATTACK_S4_COMBO_ENABLE);
         // WorkModule::on_flag(fighter.module_accessor, *FIGHTER_STATUS_ATTACK_FLAG_ENABLE_COMBO);
     }
     frame(fighter.lua_state_agent, 34.0);
     if is_excute(fighter) {
-        SNAKE_FLAG_ATTACK_S4_COMBO_ENABLE[entry_id] = false;
+        VariableModule::set_flag((fighter.module_accessor) as *mut _, false, FIGHTER_SNAKE_INSTANCE_WORK_ID_FLAG_SNAKE_FLAG_ATTACK_S4_COMBO_ENABLE);
         // WorkModule::off_flag(fighter.module_accessor, *FIGHTER_STATUS_ATTACK_FLAG_ENABLE_COMBO);
     }
     frame(fighter.lua_state_agent, 50.0);

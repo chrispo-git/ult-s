@@ -33,12 +33,12 @@ unsafe extern "C" fn megaman(fighter : &mut L2CFighterCommon) {
 			if fighter_kind == *FIGHTER_KIND_ROCKMAN {
 				let is_shooting = [*FIGHTER_ROCKMAN_STATUS_KIND_ROCKBUSTER_SHOOT_AIR, *FIGHTER_ROCKMAN_STATUS_KIND_ROCKBUSTER_SHOOT_JUMP, *FIGHTER_ROCKMAN_STATUS_KIND_ROCKBUSTER_SHOOT_TURN, *FIGHTER_ROCKMAN_STATUS_KIND_ROCKBUSTER_SHOOT_WAIT, *FIGHTER_ROCKMAN_STATUS_KIND_ROCKBUSTER_SHOOT_WALK, *FIGHTER_ROCKMAN_STATUS_KIND_ROCKBUSTER_SHOOT_LANDING, *FIGHTER_ROCKMAN_STATUS_KIND_ROCKBUSTER_SHOOT_JUMP_SQUAT, *FIGHTER_ROCKMAN_STATUS_KIND_ROCKBUSTER_SHOOT_WALK_BRAKE].contains(&status_kind);
 				if status_kind == 54 {
-					MEGA_AERIAL[ENTRY_ID] = true;
+					VariableModule::set_flag((boma) as *mut _, true, FIGHTER_ROCKMAN_INSTANCE_WORK_ID_FLAG_MEGA_AERIAL);
 				};
 				if status_kind != 54 && !is_shooting{
-					MEGA_AERIAL[ENTRY_ID] = false;
+					VariableModule::set_flag((boma) as *mut _, false, FIGHTER_ROCKMAN_INSTANCE_WORK_ID_FLAG_MEGA_AERIAL);
 				};
-				if is_shooting && MEGA_AERIAL[ENTRY_ID] {
+				if is_shooting && VariableModule::is_flag((boma) as *mut _, FIGHTER_ROCKMAN_INSTANCE_WORK_ID_FLAG_MEGA_AERIAL) {
 					WorkModule::set_float(boma, nair_landing-1.0, *FIGHTER_INSTANCE_WORK_ID_FLOAT_LANDING_FRAME);
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_LANDING_FALL_SPECIAL, true);
 				};

@@ -64,9 +64,9 @@ unsafe extern "C" fn kirby_bowser_frame(fighter: &mut L2CFighterCommon) {
 				StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL, true);
 		};
 		if ArticleModule::is_exist(boma, *FIGHTER_KOOPA_GENERATE_ARTICLE_BREATH) {
-			FIREBALL[ENTRY_ID] += 1;
+			VariableModule::inc_int((boma) as *mut _, FIGHTER_KOOPA_INSTANCE_WORK_ID_INT_FIREBALL);
 		} else {
-			FIREBALL[ENTRY_ID] = 0;
+			VariableModule::set_int((boma) as *mut _, 0, FIGHTER_KOOPA_INSTANCE_WORK_ID_INT_FIREBALL);
 		};
 		macros::EFFECT_OFF_KIND(fighter, Hash40::new("koopa_breath_m_fire"), false, true);
 	}
@@ -111,33 +111,33 @@ unsafe extern "C" fn bowser_frame(fighter: &mut L2CFighterCommon) {
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL, true);
 			};
 			if ArticleModule::is_exist(boma, *FIGHTER_KOOPA_GENERATE_ARTICLE_BREATH) {
-				FIREBALL[ENTRY_ID] += 1;
+				VariableModule::inc_int((boma) as *mut _, FIGHTER_KOOPA_INSTANCE_WORK_ID_INT_FIREBALL);
 			} else {
-				FIREBALL[ENTRY_ID] = 0;
+				VariableModule::set_int((boma) as *mut _, 0, FIGHTER_KOOPA_INSTANCE_WORK_ID_INT_FIREBALL);
 			};
 			macros::EFFECT_OFF_KIND(fighter, Hash40::new("koopa_breath_m_fire"), false, true);
 
 			//Fsmash shit
 			if status_kind == *FIGHTER_STATUS_KIND_ATTACK_S4_HOLD {
 				if frame >= 50.0 && frame < 60.0 {
-					KOOPA_EXCELLENT_SMASH[ENTRY_ID] = true;
+					VariableModule::set_flag((boma) as *mut _, true, FIGHTER_KOOPA_INSTANCE_WORK_ID_FLAG_KOOPA_EXCELLENT_SMASH);
 				}
 				else {
-					KOOPA_EXCELLENT_SMASH[ENTRY_ID] = false;
+					VariableModule::set_flag((boma) as *mut _, false, FIGHTER_KOOPA_INSTANCE_WORK_ID_FLAG_KOOPA_EXCELLENT_SMASH);
 				}
 			}
 			if [*FIGHTER_STATUS_KIND_ATTACK_S4_START, *FIGHTER_STATUS_KIND_ATTACK_S4].contains(&status_kind) {
-				if KOOPA_EXCELLENT_SMASH[ENTRY_ID] == true {
+				if VariableModule::is_flag((boma) as *mut _, FIGHTER_KOOPA_INSTANCE_WORK_ID_FLAG_KOOPA_EXCELLENT_SMASH) == true {
 					if AttackModule::is_infliction_status(fighter.module_accessor, *COLLISION_KIND_MASK_HIT) {
-						SPECIAL_ZOOM_GFX[ENTRY_ID] += 1;
-						if SPECIAL_ZOOM_GFX[ENTRY_ID] < 2 {
+						VariableModule::inc_int((boma) as *mut _, FIGHTER_KOOPA_INSTANCE_WORK_ID_INT_SPECIAL_ZOOM_GFX);
+						if VariableModule::get_int((boma) as *mut _, FIGHTER_KOOPA_INSTANCE_WORK_ID_INT_SPECIAL_ZOOM_GFX) < 2 {
 							SlowModule::set_whole(boma, 8, 80);
 							macros::CAM_ZOOM_IN_arg5(fighter, /*frames*/ 2.0,/*no*/ 0.0,/*zoom*/ 1.8,/*yrot*/ 0.0,/*xrot*/ 0.0);
 							EffectModule::req_follow(boma, Hash40::new("sys_bg_criticalhit"), Hash40::new("top"), &Vector3f{x: 0.0, y: 0.0, z: 0.0} as *const Vector3f, &Vector3f{x: 0.0, y: 0.0, z: 0.0} as *const Vector3f, 1.0, false, 0, 0, 0, 0, 0, false, false);
 							macros::PLAY_SE(fighter, Hash40::new("se_common_criticalhit"));
 							macros::QUAKE(fighter, *CAMERA_QUAKE_KIND_XL);
 						}
-						if SPECIAL_ZOOM_GFX[ENTRY_ID] >= 6 {
+						if VariableModule::get_int((boma) as *mut _, FIGHTER_KOOPA_INSTANCE_WORK_ID_INT_SPECIAL_ZOOM_GFX) >= 6 {
 							SlowModule::clear_whole(boma);
 							CameraModule::reset_all(boma);
 							EffectModule::kill_kind(boma, Hash40::new("sys_bg_criticalhit"), false, false);
@@ -147,8 +147,8 @@ unsafe extern "C" fn bowser_frame(fighter: &mut L2CFighterCommon) {
 				}
 			}
 			if ![*FIGHTER_STATUS_KIND_ATTACK_S4_HOLD, *FIGHTER_STATUS_KIND_ATTACK_S4_START, *FIGHTER_STATUS_KIND_ATTACK_S4].contains(&status_kind) {
-				KOOPA_EXCELLENT_SMASH[ENTRY_ID] = false;
-				SPECIAL_ZOOM_GFX[ENTRY_ID] = 0;
+				VariableModule::set_flag((boma) as *mut _, false, FIGHTER_KOOPA_INSTANCE_WORK_ID_FLAG_KOOPA_EXCELLENT_SMASH);
+				VariableModule::set_int((boma) as *mut _, 0, FIGHTER_KOOPA_INSTANCE_WORK_ID_INT_SPECIAL_ZOOM_GFX);
 			}
 		}
 	}
@@ -159,13 +159,13 @@ unsafe extern "C" fn fireball_frame(weapon : &mut L2CFighterBase) {
         let boma = smash::app::sv_battle_object::module_accessor(otarget_id);
 		let ENTRY_ID = WorkModule::get_int(&mut *boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 		if smash::app::utility::get_kind(&mut *boma) == *FIGHTER_KIND_KIRBY {
-			if FIREBALL[ENTRY_ID] % 4 == 0 {
+			if VariableModule::get_int((boma) as *mut _, FIGHTER_KOOPA_INSTANCE_WORK_ID_INT_FIREBALL) % 4 == 0 {
 					EffectModule::kill_kind(weapon.module_accessor, Hash40::new("sys_fireflower_shot"), false, true);
 					let f1: u32 = EffectModule::req_follow(weapon.module_accessor, smash::phx::Hash40::new("sys_fireflower_shot"), smash::phx::Hash40::new("top"), &NONE, &NONE, 0.9, true, 0, 0, 0, 0, 0, true, true) as u32;
 					EffectModule::set_rgb(boma, f1, 1.5, 0.5, 0.5);
 			};
 		} else {
-			if FIREBALL[ENTRY_ID] % 14 == 0 {
+			if VariableModule::get_int((boma) as *mut _, FIGHTER_KOOPA_INSTANCE_WORK_ID_INT_FIREBALL) % 14 == 0 {
 					EffectModule::kill_kind(weapon.module_accessor, Hash40::new("koopa_breath_m_fire"), false, true);
 					let f1: u32 = EffectModule::req_follow(weapon.module_accessor, smash::phx::Hash40::new("sys_fireflower_shot"), smash::phx::Hash40::new("top"), &NONE, &NONE, 0.8, true, 0, 0, 0, 0, 0, true, true) as u32;
 					EffectModule::set_rgb(boma, f1, 1.5, 0.5, 0.5);

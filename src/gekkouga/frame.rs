@@ -29,6 +29,11 @@ unsafe extern "C" fn gren_frame(fighter: &mut L2CFighterCommon) {
 			let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize; 
 			let frame = MotionModule::frame(boma);
 			let end_frame = MotionModule::end_frame(boma);
+			if MotionModule::motion_kind(boma) == hash40("attack_air_b") {
+				if frame > 3.0 && frame < 5.0 {
+        			MotionModule::set_frame_sync_anim_cmd(fighter.module_accessor, 9.0, true, true, false);	
+				}
+			}
 			if StatusModule::is_situation_changed(boma) && status_kind == *FIGHTER_STATUS_KIND_SPECIAL_LW {
 				if AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_HIT) {
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_LANDING, true);

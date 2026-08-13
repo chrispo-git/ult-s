@@ -54,9 +54,9 @@ unsafe extern "C" fn lucario(fighter : &mut L2CFighterCommon) {
 			crate::transition_reset!(ENTRY_ID, can_downb);
 		}
 		if (cancel_frame - frame < 1.0 && cancel_frame != 0.0) || ![*FIGHTER_STATUS_KIND_ATTACK, *FIGHTER_STATUS_KIND_ATTACK_AIR, *FIGHTER_STATUS_KIND_ATTACK_LW3, *FIGHTER_STATUS_KIND_ATTACK_LW4, *FIGHTER_STATUS_KIND_ATTACK_S3, *FIGHTER_STATUS_KIND_ATTACK_S4, *FIGHTER_STATUS_KIND_ATTACK_HI3, *FIGHTER_STATUS_KIND_ATTACK_HI4, *FIGHTER_STATUS_KIND_SPECIAL_LW].contains(&status_kind) {
-			HAS_DOWNB[ENTRY_ID] = false;
+			VariableModule::set_flag((boma) as *mut _, false, FIGHTER_LUCARIO_INSTANCE_WORK_ID_FLAG_HAS_DOWNB);
 		}
-		if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_LW && HAS_DOWNB[ENTRY_ID]{
+		if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_LW && VariableModule::is_flag((boma) as *mut _, FIGHTER_LUCARIO_INSTANCE_WORK_ID_FLAG_HAS_DOWNB){
 			if StatusModule::situation_kind(boma) != *SITUATION_KIND_AIR && frame > 22.0 {
 				if (ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_CATCH) != 0 {
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_CATCH_DASH, true);
@@ -88,8 +88,8 @@ unsafe extern "C" fn lucario(fighter : &mut L2CFighterCommon) {
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_SPECIAL_N, true);
 				} else if (ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_HI) != 0 {
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_SPECIAL_HI, true);
-				} else if (ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_LW) != 0 && HAS_DOWNB[ENTRY_ID] == false {
-					HAS_DOWNB[ENTRY_ID] = true;
+				} else if (ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_LW) != 0 && VariableModule::is_flag((boma) as *mut _, FIGHTER_LUCARIO_INSTANCE_WORK_ID_FLAG_HAS_DOWNB) == false {
+					VariableModule::set_flag((boma) as *mut _, true, FIGHTER_LUCARIO_INSTANCE_WORK_ID_FLAG_HAS_DOWNB);
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_SPECIAL_LW, true);
 				} else if (ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_SPECIAL_S) != 0 {
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_SPECIAL_S, true);

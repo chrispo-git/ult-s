@@ -10,10 +10,14 @@ use smashline::*;
 use smash_script::*;
 use smash::lua2cpp::*;
 use crate::util::*;
+use crate::config;
+
+static mut DRIFT_AMOUNT : [f32; 8] = [0.0; 8];
 
 pub unsafe fn opff(fighter: &mut L2CFighterCommon, status_kind : i32) {
     kd_throw(fighter, status_kind);
     non_tumble_di(fighter, status_kind);
+    drift_di(fighter, status_kind);
 }
 
 pub unsafe fn kd_throw(fighter : &mut L2CFighterCommon, status_kind : i32) {
@@ -31,8 +35,30 @@ pub unsafe fn kd_throw(fighter : &mut L2CFighterCommon, status_kind : i32) {
 			macros::SET_SPEED_EX(fighter, 0, -y_speed, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
         }
 }
+pub unsafe fn drift_di(fighter : &mut L2CFighterCommon, status_kind : i32) {
+    unsafe {
+		if config::get().defense.drift_di != 1 {
+			return;
+		}
+
+		let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+        let stickx = ControlModule::get_stick_x(fighter.module_accessor);
+        if crate::is_in!(status_kind, *FIGHTER_STATUS_KIND_DAMAGE_FLY, *FIGHTER_STATUS_KIND_DAMAGE_FLY_ROLL) {
+            let max_drift_change = 0.7;
+            let drift_add = 0.005;
+            let drift_mul = 0.01;
+            if DRIFT_AMOUNT[ENTRY_ID].abs() < max_drift_change  && stickx.abs() > 0.2{
+                let add_amount = drift_add*stickx.signum() + drift_mul*(stickx/1.0);
+                let speed = smash::phx::Vector3f { x: add_amount, y: 0.0, z: 0.0 };
+                KineticModule::add_speed(fighter.module_accessor, &speed);
+            }
+        } else {
+            DRIFT_AMOUNT[ENTRY_ID] = 0.0;
+        }
+    };
+}
 pub unsafe fn non_tumble_di(fighter : &mut L2CFighterCommon, status_kind : i32) {
-		if !is_mechanics_enabled() {
+		if config::get().defense.no_tumble_di != 0 {
             return;
         }
         let status_kind_prev = StatusModule::prev_status_kind(fighter.module_accessor, 0);

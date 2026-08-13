@@ -32,7 +32,7 @@ unsafe extern "C" fn joker_frame(fighter: &mut L2CFighterCommon) {
 		
 		{
 			if [*FIGHTER_STATUS_KIND_DEAD, *FIGHTER_STATUS_KIND_LOSE, *FIGHTER_STATUS_KIND_WIN, *FIGHTER_STATUS_KIND_ENTRY].contains(&status_kind) || smash::app::sv_information::is_ready_go() == false{
-				BATON_TYPE[ENTRY_ID] = 2;
+				VariableModule::set_int((boma) as *mut _, 2, FIGHTER_JACK_INSTANCE_WORK_ID_INT_BATON_TYPE);
 			};
 			if ![*FIGHTER_STATUS_KIND_APPEAL, *FIGHTER_STATUS_KIND_SPECIAL_S, *FIGHTER_STATUS_KIND_WIN].contains(&status_kind) && smash::app::sv_information::is_ready_go(){
 				ArticleModule::remove_exist(boma, *FIGHTER_JACK_GENERATE_ARTICLE_MONA,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));

@@ -133,23 +133,23 @@ unsafe extern "C" fn rayman(fighter: &mut L2CFighterCommon) {
 
             //Star KO Shit
             if status_kind == *FIGHTER_STATUS_KIND_DEAD {
-                if MotionModule::motion_kind(boma) == hash40("fall_damage") && !HAS_DEADED[ENTRY_ID] {
+                if MotionModule::motion_kind(boma) == hash40("fall_damage") && !VariableModule::is_flag((boma) as *mut _, FIGHTER_RAYMAN_INSTANCE_WORK_ID_FLAG_HAS_DEADED) {
                     macros::PLAY_SE(fighter, Hash40::new("se_pikmin_final01"));
-                    HAS_DEADED[ENTRY_ID] = true;
+                    VariableModule::set_flag((boma) as *mut _, true, FIGHTER_RAYMAN_INSTANCE_WORK_ID_FLAG_HAS_DEADED);
                 };
             } else {
-                HAS_DEADED[ENTRY_ID] = false;
+                VariableModule::set_flag((boma) as *mut _, false, FIGHTER_RAYMAN_INSTANCE_WORK_ID_FLAG_HAS_DEADED);
             };
             if status_kind == *FIGHTER_STATUS_KIND_CAPTURE_PULLED && MotionModule::frame(boma) > 20.0 {
-                CAPTURE_TIME[ENTRY_ID] -= 1;
+                VariableModule::dec_int((boma) as *mut _, FIGHTER_RAYMAN_INSTANCE_WORK_ID_INT_CAPTURE_TIME);
                 if ((ControlModule::get_flick_y(boma) >= 3 && ControlModule::get_flick_y(boma) < 20)) || ((ControlModule::get_flick_x(boma) >= 3 && ControlModule::get_flick_x(boma) < 20)) ||
                 ControlModule::check_button_on_trriger(boma, *CONTROL_PAD_BUTTON_JUMP) ||
                 ControlModule::check_button_on_trriger(boma, *CONTROL_PAD_BUTTON_ATTACK) ||
                 ControlModule::check_button_on_trriger(boma, *CONTROL_PAD_BUTTON_CATCH) ||
                 ControlModule::check_button_on_trriger(boma, *CONTROL_PAD_BUTTON_SPECIAL) {
-                    CAPTURE_TIME[ENTRY_ID] -= 8;
+                    VariableModule::set_int((boma) as *mut _, VariableModule::get_int((boma) as *mut _, FIGHTER_RAYMAN_INSTANCE_WORK_ID_INT_CAPTURE_TIME) - (8), FIGHTER_RAYMAN_INSTANCE_WORK_ID_INT_CAPTURE_TIME);
                 }
-                if CAPTURE_TIME[ENTRY_ID] <= 0 {
+                if VariableModule::get_int((boma) as *mut _, FIGHTER_RAYMAN_INSTANCE_WORK_ID_INT_CAPTURE_TIME) <= 0 {
                     if ControlModule::get_stick_y(boma) >= 0.5 || is_near_ground == 0 {
                         StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_CAPTURE_JUMP, true);
                     } else {
@@ -158,12 +158,12 @@ unsafe extern "C" fn rayman(fighter: &mut L2CFighterCommon) {
                 }
 
             } else {
-                CAPTURE_TIME[ENTRY_ID] = 90 + (DamageModule::damage(boma,0)*1.7) as i32;
+                VariableModule::set_int((boma) as *mut _, 90 + (DamageModule::damage(boma,0)*1.7) as i32, FIGHTER_RAYMAN_INSTANCE_WORK_ID_INT_CAPTURE_TIME);
             }
 
             //Neutralb
             if ![hash40("special_air_n_pull"), hash40("special_n_pull")].contains(&motion_kind){
-                DO_WALLJUMP_FORCE[ENTRY_ID] = false;
+                VariableModule::set_flag((boma) as *mut _, false, FIGHTER_RAYMAN_INSTANCE_WORK_ID_FLAG_DO_WALLJUMP_FORCE);
             }
             if [hash40("special_air_n_failure"), hash40("special_n_failure"), hash40("special_n_start")].contains(&motion_kind){
                 StatusModule::set_keep_situation_air(boma, true);
@@ -177,13 +177,13 @@ unsafe extern "C" fn rayman(fighter: &mut L2CFighterCommon) {
                 let mut into_frame = 0.0;
                 let mut check_dist = 0.0;
                 //Later into the pull anim if you hit neutralb earlier in the shot... because rayman gotta go less distance
-                if PULL_DISTANCE[ENTRY_ID] == 0 {
+                if VariableModule::get_int((boma) as *mut _, FIGHTER_RAYMAN_INSTANCE_WORK_ID_INT_PULL_DISTANCE) == 0 {
                     into_frame = 7.0;
                     check_dist = 12.0;
-                } else if PULL_DISTANCE[ENTRY_ID] == 1 {
+                } else if VariableModule::get_int((boma) as *mut _, FIGHTER_RAYMAN_INSTANCE_WORK_ID_INT_PULL_DISTANCE) == 1 {
                     into_frame = 5.0;
                     check_dist = 23.0;
-                } else if PULL_DISTANCE[ENTRY_ID] == 2 {
+                } else if VariableModule::get_int((boma) as *mut _, FIGHTER_RAYMAN_INSTANCE_WORK_ID_INT_PULL_DISTANCE) == 2 {
                     into_frame = 4.0;
                     check_dist = 27.0;
                 } else {
@@ -211,7 +211,7 @@ unsafe extern "C" fn rayman(fighter: &mut L2CFighterCommon) {
                 ) && frame < 22.0 && frame > 13.0;
                 //println!("X:{}, Y:{}, Z:{}, is_wall:{}", joint.x, joint.y, joint.z, is_wall);
                 if is_wall {
-                    DO_WALLJUMP_FORCE[ENTRY_ID] = true;
+                    VariableModule::set_flag((boma) as *mut _, true, FIGHTER_RAYMAN_INSTANCE_WORK_ID_FLAG_DO_WALLJUMP_FORCE);
                 }
                 if AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_HIT) || is_wall {
                     AttackModule::clear_all(fighter.module_accessor);
@@ -231,7 +231,7 @@ unsafe extern "C" fn rayman(fighter: &mut L2CFighterCommon) {
                     StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_PASSIVE_WALL_JUMP, true);
                     crate::transition_set!(ENTRY_ID, can_neutralb);
                 }
-                if DO_WALLJUMP_FORCE[ENTRY_ID] {
+                if VariableModule::is_flag((boma) as *mut _, FIGHTER_RAYMAN_INSTANCE_WORK_ID_FLAG_DO_WALLJUMP_FORCE) {
                     let the_speed = smash::phx::Vector3f { x: 0.5, y: 0.0, z: 0.0 };
                     KineticModule::add_speed(boma, &the_speed);
                 }
@@ -284,10 +284,10 @@ unsafe extern "C" fn rayman(fighter: &mut L2CFighterCommon) {
                 macros::STOP_SE(fighter, Hash40::new("se_pikmin_special_l03"));
             }
             //Slide Stuff
-            if WAS_SLIDE[ENTRY_ID] {
+            if VariableModule::is_flag((boma) as *mut _, FIGHTER_RAYMAN_INSTANCE_WORK_ID_FLAG_WAS_SLIDE) {
                 if motion_kind == hash40("fall") || motion_kind == hash40("fall_f") || motion_kind == hash40("fall_b"){
                     MotionModule::change_motion(fighter.module_accessor, Hash40::new("slide_fall"), 0.0, 1.0, false, 0.0, false, false);
-                    WAS_SLIDE[ENTRY_ID] = false;
+                    VariableModule::set_flag((boma) as *mut _, false, FIGHTER_RAYMAN_INSTANCE_WORK_ID_FLAG_WAS_SLIDE);
                 }
             }
             if motion_kind == hash40("slide_fall"){
@@ -310,8 +310,8 @@ unsafe extern "C" fn rayman(fighter: &mut L2CFighterCommon) {
                     WorkModule::unable_transition_term(boma, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_ATTACK_S4_START);
                     WorkModule::unable_transition_term(boma, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_ATTACK_S3);
                     WorkModule::unable_transition_term(boma, *FIGHTER_STATUS_TRANSITION_TERM_ID_CONT_CATCH);
-                    IS_SLIDE_MOVE[ENTRY_ID] = true;
-                    WAS_SLIDE[ENTRY_ID] = true;
+                    VariableModule::set_flag((boma) as *mut _, true, FIGHTER_RAYMAN_INSTANCE_WORK_ID_FLAG_IS_SLIDE_MOVE);
+                    VariableModule::set_flag((boma) as *mut _, true, FIGHTER_RAYMAN_INSTANCE_WORK_ID_FLAG_WAS_SLIDE);
                 }
             }
             if [hash40("slide")].contains(&motion_kind) {
@@ -371,14 +371,14 @@ unsafe extern "C" fn rayman(fighter: &mut L2CFighterCommon) {
                 MotionModule::change_motion(fighter.module_accessor, Hash40::new("slide_jump_fall"), 0.0, 1.0, false, 0.0, false, false);
             }
             if ![*FIGHTER_STATUS_KIND_RUN_BRAKE, *FIGHTER_STATUS_KIND_JUMP_SQUAT, *FIGHTER_STATUS_KIND_JUMP, *FIGHTER_STATUS_KIND_ATTACK, *FIGHTER_STATUS_KIND_ATTACK_LW3, *FIGHTER_STATUS_KIND_ATTACK_S3, *FIGHTER_STATUS_KIND_ATTACK_HI3].contains(&status_kind) {
-                IS_SLIDE_MOVE[ENTRY_ID] = false;
-                WAS_SLIDE[ENTRY_ID] = false;
-            } else if IS_SLIDE_MOVE[ENTRY_ID]{
+                VariableModule::set_flag((boma) as *mut _, false, FIGHTER_RAYMAN_INSTANCE_WORK_ID_FLAG_IS_SLIDE_MOVE);
+                VariableModule::set_flag((boma) as *mut _, false, FIGHTER_RAYMAN_INSTANCE_WORK_ID_FLAG_WAS_SLIDE);
+            } else if VariableModule::is_flag((boma) as *mut _, FIGHTER_RAYMAN_INSTANCE_WORK_ID_FLAG_IS_SLIDE_MOVE){
                 if status_kind == *FIGHTER_STATUS_KIND_ATTACK_LW3 {
                     if motion_kind != hash40("slide_attack_lw") {
                         MotionModule::change_motion(fighter.module_accessor, Hash40::new("slide_attack_lw"), -1.0, 1.0, false, 0.0, false, false);
-                        IS_SLIDE_MOVE[ENTRY_ID] = false;
-                        WAS_SLIDE[ENTRY_ID] = false;
+                        VariableModule::set_flag((boma) as *mut _, false, FIGHTER_RAYMAN_INSTANCE_WORK_ID_FLAG_IS_SLIDE_MOVE);
+                        VariableModule::set_flag((boma) as *mut _, false, FIGHTER_RAYMAN_INSTANCE_WORK_ID_FLAG_WAS_SLIDE);
                     }
                 }
                 if status_kind == *FIGHTER_STATUS_KIND_ATTACK {
@@ -387,22 +387,22 @@ unsafe extern "C" fn rayman(fighter: &mut L2CFighterCommon) {
                 if status_kind == *FIGHTER_STATUS_KIND_ATTACK_HI3 {
                     if motion_kind != hash40("slide_attack_hi") {
                         MotionModule::change_motion(fighter.module_accessor, Hash40::new("slide_attack_hi"), -1.0, 1.0, false, 0.0, false, false);
-                        IS_SLIDE_MOVE[ENTRY_ID] = false;
-                        WAS_SLIDE[ENTRY_ID] = false;
+                        VariableModule::set_flag((boma) as *mut _, false, FIGHTER_RAYMAN_INSTANCE_WORK_ID_FLAG_IS_SLIDE_MOVE);
+                        VariableModule::set_flag((boma) as *mut _, false, FIGHTER_RAYMAN_INSTANCE_WORK_ID_FLAG_WAS_SLIDE);
                     }
                 }
                 if status_kind == *FIGHTER_STATUS_KIND_ATTACK_S3 {
                     if motion_kind != hash40("slide_attack") {
                         MotionModule::change_motion(fighter.module_accessor, Hash40::new("slide_attack"), -1.0, 1.0, false, 0.0, false, false);
-                        IS_SLIDE_MOVE[ENTRY_ID] = false;
-                        WAS_SLIDE[ENTRY_ID] = false;
+                        VariableModule::set_flag((boma) as *mut _, false, FIGHTER_RAYMAN_INSTANCE_WORK_ID_FLAG_IS_SLIDE_MOVE);
+                        VariableModule::set_flag((boma) as *mut _, false, FIGHTER_RAYMAN_INSTANCE_WORK_ID_FLAG_WAS_SLIDE);
                     }
                 }
                 if status_kind == *FIGHTER_STATUS_KIND_JUMP {
                     if motion_kind != hash40("slide_jump") {
                         MotionModule::change_motion(fighter.module_accessor, Hash40::new("slide_jump"), -1.0, 1.0, false, 0.0, false, false);
-                        IS_SLIDE_MOVE[ENTRY_ID] = false;
-                        WAS_SLIDE[ENTRY_ID] = false;
+                        VariableModule::set_flag((boma) as *mut _, false, FIGHTER_RAYMAN_INSTANCE_WORK_ID_FLAG_IS_SLIDE_MOVE);
+                        VariableModule::set_flag((boma) as *mut _, false, FIGHTER_RAYMAN_INSTANCE_WORK_ID_FLAG_WAS_SLIDE);
                     }
                 }
             }
@@ -453,13 +453,13 @@ unsafe extern "C" fn rayman(fighter: &mut L2CFighterCommon) {
                 }
             }
             if ![*FIGHTER_PIKMIN_STATUS_KIND_SPECIAL_HI_WAIT, *FIGHTER_PIKMIN_STATUS_KIND_SPECIAL_HI_END, *FIGHTER_STATUS_KIND_SPECIAL_HI, *FIGHTER_STATUS_KIND_ATTACK_AIR].contains(&status_kind) {
-                SET_UPB_FREEFALL[ENTRY_ID] = false;
-            } else if (frame >= cancel_frame - 5.0 || frame >= end_frame - 5.0) && SET_UPB_FREEFALL[ENTRY_ID]{
+                VariableModule::set_flag((boma) as *mut _, false, FIGHTER_RAYMAN_INSTANCE_WORK_ID_FLAG_SET_UPB_FREEFALL);
+            } else if (frame >= cancel_frame - 5.0 || frame >= end_frame - 5.0) && VariableModule::is_flag((boma) as *mut _, FIGHTER_RAYMAN_INSTANCE_WORK_ID_FLAG_SET_UPB_FREEFALL){
                 StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_FALL_SPECIAL, false);
             }
             if [*FIGHTER_PIKMIN_STATUS_KIND_SPECIAL_HI_WAIT,  *FIGHTER_STATUS_KIND_SPECIAL_HI].contains(&status_kind) && ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_ATTACK){
                 StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_ATTACK_AIR, false);
-                SET_UPB_FREEFALL[ENTRY_ID] = true;
+                VariableModule::set_flag((boma) as *mut _, true, FIGHTER_RAYMAN_INSTANCE_WORK_ID_FLAG_SET_UPB_FREEFALL);
             }
             if [*FIGHTER_PIKMIN_STATUS_KIND_SPECIAL_HI_WAIT, *FIGHTER_STATUS_KIND_SPECIAL_HI].contains(&status_kind)  {
                 if ![124, 127].contains(&WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR)) {
@@ -636,7 +636,7 @@ unsafe extern "C" fn kill_pikmin(weapon: &mut L2CFighterBase) {
             //};
         } else {
             if smash::app::sv_battle_object::is_active(weapon.battle_object_id) {
-                CURRENT_PIKMIN[ENTRY_ID] = WorkModule::get_int(weapon.module_accessor, *WEAPON_PIKMIN_PIKMIN_INSTANCE_WORK_ID_INT_VARIATION);
+                VariableModule::set_int((owner_module_accessor) as *mut _, WorkModule::get_int(weapon.module_accessor, *WEAPON_PIKMIN_PIKMIN_INSTANCE_WORK_ID_INT_VARIATION), FIGHTER_RAYMAN_INSTANCE_WORK_ID_INT_CURRENT_PIKMIN);
             }
         }
     }

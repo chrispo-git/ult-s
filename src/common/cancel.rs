@@ -9,6 +9,7 @@ use smash::phx::*;
 use smash::lib::{ L2CValue, L2CAgent };
 use smash::phx::Vector2f;
 use crate::util::*;
+use crate::config;
 use once_cell::sync::Lazy;
 
 //0 for hit_condition means it can always be jump cancelled
@@ -120,7 +121,7 @@ pub(crate) fn check_jump(boma: &mut smash::app::BattleObjectModuleAccessor) -> b
 //
 
 pub unsafe fn opff(fighter: &mut L2CFighterCommon, status_kind : i32) {
-    if !is_mechanics_enabled() {
+    if config::get().movement.jump_cancel != 0 {
 		return;
 	}
     let situation_kind = StatusModule::situation_kind(fighter.module_accessor);

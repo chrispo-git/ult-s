@@ -38,14 +38,14 @@ unsafe extern "C" fn plant_frame(fighter: &mut L2CFighterCommon) {
 			let end_frame = MotionModule::end_frame(boma);
 			let cancel_frame = FighterMotionModuleImpl::get_cancel_frame(boma,smash::phx::Hash40::new_raw(MotionModule::motion_kind(boma)),false) as f32;
 			if smash::app::sv_information::is_ready_go() == false {
-				BREATH_POS_X[ENTRY_ID] = 0.0;
-				BREATH_POS_Y[ENTRY_ID] = 0.0;
-				IS_BAIR[ENTRY_ID] = false;
-				IS_SIDEB_EAT[ENTRY_ID] = false;
+				VariableModule::set_float((boma) as *mut _, 0.0, FIGHTER_PACKUN_INSTANCE_WORK_ID_FLOAT_BREATH_POS_X);
+				VariableModule::set_float((boma) as *mut _, 0.0, FIGHTER_PACKUN_INSTANCE_WORK_ID_FLOAT_BREATH_POS_Y);
+				VariableModule::set_flag((boma) as *mut _, false, FIGHTER_PACKUN_INSTANCE_WORK_ID_FLAG_IS_BAIR);
+				VariableModule::set_flag((boma) as *mut _, false, FIGHTER_PACKUN_INSTANCE_WORK_ID_FLAG_IS_SIDEB_EAT);
 			};
 			if !ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_PACKUN_GENERATE_ARTICLE_POISONBREATH) {
-				BREATH_POS_X[ENTRY_ID] = 0.0;
-				BREATH_POS_Y[ENTRY_ID] = 0.0;
+				VariableModule::set_float((boma) as *mut _, 0.0, FIGHTER_PACKUN_INSTANCE_WORK_ID_FLOAT_BREATH_POS_X);
+				VariableModule::set_float((boma) as *mut _, 0.0, FIGHTER_PACKUN_INSTANCE_WORK_ID_FLOAT_BREATH_POS_Y);
 			} else {
 				if [hash40("special_s_shoot"), hash40("special_air_s_shoot")].contains(&motion_kind) {
 					ModelModule::set_mesh_visibility(boma, Hash40::new("heada"), true);
@@ -55,8 +55,8 @@ unsafe extern "C" fn plant_frame(fighter: &mut L2CFighterCommon) {
 
 
 			if ![hash40("attack_air_b"), hash40("special_s_shoot"), hash40("special_air_s_shoot")].contains(&motion_kind) {
-				IS_BAIR[ENTRY_ID] = false;
-				IS_SIDEB_EAT[ENTRY_ID] = false;
+				VariableModule::set_flag((boma) as *mut _, false, FIGHTER_PACKUN_INSTANCE_WORK_ID_FLAG_IS_BAIR);
+				VariableModule::set_flag((boma) as *mut _, false, FIGHTER_PACKUN_INSTANCE_WORK_ID_FLAG_IS_SIDEB_EAT);
 			}
 		}
 	}
@@ -70,26 +70,26 @@ unsafe extern "C" fn poison_frame(weapon: &mut L2CFighterBase) {
 		let parent_motion_kind = MotionModule::motion_kind(&mut *boma);
 		let ENTRY_ID = WorkModule::get_int(&mut *boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
         if smash::app::utility::get_kind(&mut *boma) == *FIGHTER_KIND_PACKUN {
-			BREATH_POS_X[ENTRY_ID] = PostureModule::pos_x(weapon.module_accessor);
-			BREATH_POS_Y[ENTRY_ID] = PostureModule::pos_y(weapon.module_accessor);
+			VariableModule::set_float((boma) as *mut _, PostureModule::pos_x(weapon.module_accessor), FIGHTER_PACKUN_INSTANCE_WORK_ID_FLOAT_BREATH_POS_X);
+			VariableModule::set_float((boma) as *mut _, PostureModule::pos_y(weapon.module_accessor), FIGHTER_PACKUN_INSTANCE_WORK_ID_FLOAT_BREATH_POS_Y);
 			let scale = PostureModule::scale(weapon.module_accessor);
 			let lr = PostureModule::lr(&mut *boma);
 			let pos_x = PostureModule::pos_x(&mut *boma)+(-11.0*lr);
 			let pos_x2 = PostureModule::pos_x(&mut *boma)+(28.0*lr);
 			let pos_y = PostureModule::pos_y(&mut *boma)+4.0;
-			//println!("Breath Pos [{},{}] Plant Pos [{}, {}]", BREATH_POS_X[ENTRY_ID], BREATH_POS_Y[ENTRY_ID], pos_x, pos_y);
-			if ((BREATH_POS_X[ENTRY_ID]  - pos_x).abs() < 9.0*scale) &&
-				((BREATH_POS_Y[ENTRY_ID]  - pos_y).abs() < 9.0*scale) &&
-				BREATH_POS_Y[ENTRY_ID] != 0.0 && 
-				IS_BAIR[ENTRY_ID] &&
+			//println!("Breath Pos [{},{}] Plant Pos [{}, {}]", VariableModule::get_float((boma) as *mut _, FIGHTER_PACKUN_INSTANCE_WORK_ID_FLOAT_BREATH_POS_X), VariableModule::get_float((boma) as *mut _, FIGHTER_PACKUN_INSTANCE_WORK_ID_FLOAT_BREATH_POS_Y), pos_x, pos_y);
+			if ((VariableModule::get_float((boma) as *mut _, FIGHTER_PACKUN_INSTANCE_WORK_ID_FLOAT_BREATH_POS_X)  - pos_x).abs() < 9.0*scale) &&
+				((VariableModule::get_float((boma) as *mut _, FIGHTER_PACKUN_INSTANCE_WORK_ID_FLOAT_BREATH_POS_Y)  - pos_y).abs() < 9.0*scale) &&
+				VariableModule::get_float((boma) as *mut _, FIGHTER_PACKUN_INSTANCE_WORK_ID_FLOAT_BREATH_POS_Y) != 0.0 && 
+				VariableModule::is_flag((boma) as *mut _, FIGHTER_PACKUN_INSTANCE_WORK_ID_FLAG_IS_BAIR) &&
 				motion_kind != hash40("explode")
 				{
 					//println!("Woo!");
 					MotionModule::change_motion(weapon.module_accessor, Hash40::new("explode"), 0.0, 1.0, false, 0.0, false, false);
-			}else if ((BREATH_POS_X[ENTRY_ID]  - pos_x2).abs() < 9.0*scale) &&
-				((BREATH_POS_Y[ENTRY_ID]  - pos_y).abs() < 9.0*scale) &&
-				BREATH_POS_Y[ENTRY_ID] != 0.0 && 
-				IS_SIDEB_EAT[ENTRY_ID] &&
+			}else if ((VariableModule::get_float((boma) as *mut _, FIGHTER_PACKUN_INSTANCE_WORK_ID_FLOAT_BREATH_POS_X)  - pos_x2).abs() < 9.0*scale) &&
+				((VariableModule::get_float((boma) as *mut _, FIGHTER_PACKUN_INSTANCE_WORK_ID_FLOAT_BREATH_POS_Y)  - pos_y).abs() < 9.0*scale) &&
+				VariableModule::get_float((boma) as *mut _, FIGHTER_PACKUN_INSTANCE_WORK_ID_FLOAT_BREATH_POS_Y) != 0.0 && 
+				VariableModule::is_flag((boma) as *mut _, FIGHTER_PACKUN_INSTANCE_WORK_ID_FLAG_IS_SIDEB_EAT) &&
 				motion_kind != hash40("explode")
 				{
 					//println!("Woo!");

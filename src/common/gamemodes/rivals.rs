@@ -41,26 +41,6 @@ pub unsafe fn rivals_pivot(fighter : &mut L2CFighterCommon, status_kind : i32, E
         }
     };
 }
-pub unsafe fn drift_di(fighter : &mut L2CFighterCommon, status_kind : i32, ENTRY_ID : usize, stickx : f32) {
-    unsafe {
-		if !is_gamemode("rivals".to_string()) {
-			return;
-		}
-
-        if crate::is_in!(status_kind, *FIGHTER_STATUS_KIND_DAMAGE_FLY, *FIGHTER_STATUS_KIND_DAMAGE_FLY_ROLL) {
-            let max_drift_change = 0.7;
-            let drift_add = 0.005;
-            let drift_mul = 0.01;
-            if DRIFT_AMOUNT[ENTRY_ID].abs() < max_drift_change  && stickx.abs() > 0.2{
-                let add_amount = drift_add*stickx.signum() + drift_mul*(stickx/1.0);
-                let speed = smash::phx::Vector3f { x: add_amount, y: 0.0, z: 0.0 };
-                KineticModule::add_speed(fighter.module_accessor, &speed);
-            }
-        } else {
-            DRIFT_AMOUNT[ENTRY_ID] = 0.0;
-        }
-    };
-}
 pub unsafe fn airdodge(fighter : &mut L2CFighterCommon, status_kind : i32, ENTRY_ID : usize, stickx : f32) {
     if !crate::is_in!(status_kind, *FIGHTER_STATUS_KIND_ESCAPE_AIR, *FIGHTER_STATUS_KIND_ESCAPE_AIR_SLIDE) {
         PAUSE[ENTRY_ID] = false;
@@ -146,11 +126,8 @@ pub unsafe fn opff(fighter : &mut L2CFighterCommon, status_kind : i32, ENTRY_ID 
     let lr = PostureModule::lr(fighter.module_accessor);
     let stickx = ControlModule::get_stick_x(fighter.module_accessor) * lr;		
 
-    crate::transition_set!(ENTRY_ID, can_grab);
-    GroundModule::set_cliff_check(fighter.module_accessor, smash::app::GroundCliffCheckKind(*GROUND_CLIFF_CHECK_KIND_NONE));
 
     rivals_pivot(fighter, status_kind, ENTRY_ID, stickx);
-    drift_di(fighter, status_kind, ENTRY_ID, stickx);
     airdodge(fighter, status_kind, ENTRY_ID, stickx);
     expanded_walljump(fighter, status_kind, ENTRY_ID);
     babydash(fighter, status_kind, stickx);

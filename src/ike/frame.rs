@@ -58,35 +58,35 @@ unsafe extern "C" fn ike(fighter : &mut L2CFighterCommon) {
 			if status_kind == *FIGHTER_IKE_STATUS_KIND_SPECIAL_N_END && AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_HIT) {
 				if MotionModule::frame(boma) >= 25.0 {
 					CancelModule::enable_cancel(boma);
-					IKE_INSTALL[ENTRY_ID] = IKE_INSTALL_TIME;
+					VariableModule::set_int((boma) as *mut _, IKE_INSTALL_TIME, FIGHTER_IKE_INSTANCE_WORK_ID_INT_IKE_INSTALL);
 					EffectModule::kill_kind(boma, smash::phx::Hash40::new_raw(0x10ae069777), false, false);
 				};
 			};
-			if IKE_INSTALL[ENTRY_ID] > 0 && [*FIGHTER_IKE_STATUS_KIND_SPECIAL_S_DASH, *FIGHTER_IKE_STATUS_KIND_SPECIAL_S_END, *FIGHTER_IKE_STATUS_KIND_SPECIAL_S_ATTACK].contains(&status_kind) && check_jump(boma) && !AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_SHIELD){
+			if VariableModule::get_int((boma) as *mut _, FIGHTER_IKE_INSTANCE_WORK_ID_INT_IKE_INSTALL) > 0 && [*FIGHTER_IKE_STATUS_KIND_SPECIAL_S_DASH, *FIGHTER_IKE_STATUS_KIND_SPECIAL_S_END, *FIGHTER_IKE_STATUS_KIND_SPECIAL_S_ATTACK].contains(&status_kind) && check_jump(boma) && !AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_SHIELD){
 				if StatusModule::situation_kind(boma) == *SITUATION_KIND_GROUND {
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_JUMP_SQUAT, true);
 				} else if WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT) < WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_JUMP_COUNT_MAX) && StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR {
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_JUMP_AERIAL, true);
 				};
 			};
-			if IKE_INSTALL[ENTRY_ID] > 0 {
-				IKE_INSTALL[ENTRY_ID] -= 1;
+			if VariableModule::get_int((boma) as *mut _, FIGHTER_IKE_INSTANCE_WORK_ID_INT_IKE_INSTALL) > 0 {
+				VariableModule::dec_int((boma) as *mut _, FIGHTER_IKE_INSTANCE_WORK_ID_INT_IKE_INSTALL);
 			} else {
 				EffectModule::kill_kind(boma, smash::phx::Hash40::new_raw(0x10ae069777), false, false);
 			};
 			if [*FIGHTER_STATUS_KIND_CAPTURE_PULLED, *FIGHTER_STATUS_KIND_CAPTURE_CUT, *FIGHTER_STATUS_KIND_CAPTURE_ITEM, *FIGHTER_STATUS_KIND_CAPTURE_JUMP, *FIGHTER_STATUS_KIND_CAPTURE_WAIT].contains(&status_kind) {
-				IKE_INSTALL[ENTRY_ID] = 0;
+				VariableModule::set_int((boma) as *mut _, 0, FIGHTER_IKE_INSTANCE_WORK_ID_INT_IKE_INSTALL);
 			};
 			if [*FIGHTER_STATUS_KIND_DEAD, *FIGHTER_STATUS_KIND_LOSE, *FIGHTER_STATUS_KIND_WIN].contains(&status_kind) || smash::app::sv_information::is_ready_go() == false{
-				IKE_INSTALL[ENTRY_ID] = 0;
+				VariableModule::set_int((boma) as *mut _, 0, FIGHTER_IKE_INSTANCE_WORK_ID_INT_IKE_INSTALL);
 			};
-			if IKE_INSTALL[ENTRY_ID] > 0{
-				TIMER[ENTRY_ID] += 1;
+			if VariableModule::get_int((boma) as *mut _, FIGHTER_IKE_INSTANCE_WORK_ID_INT_IKE_INSTALL) > 0{
+				VariableModule::inc_int((boma) as *mut _, FIGHTER_IKE_INSTANCE_WORK_ID_INT_TIMER);
 				if [*FIGHTER_IKE_STATUS_KIND_SPECIAL_HI_2, *FIGHTER_IKE_STATUS_KIND_SPECIAL_HI_3].contains(&status_kind) {
-					TIMER[ENTRY_ID] = 3;
+					VariableModule::set_int((boma) as *mut _, 3, FIGHTER_IKE_INSTANCE_WORK_ID_INT_TIMER);
 				};
-				if TIMER[ENTRY_ID] >= 5 {
-					TIMER[ENTRY_ID] = 0;
+				if VariableModule::get_int((boma) as *mut _, FIGHTER_IKE_INSTANCE_WORK_ID_INT_TIMER) >= 5 {
+					VariableModule::set_int((boma) as *mut _, 0, FIGHTER_IKE_INSTANCE_WORK_ID_INT_TIMER);
 					let fire1: u32 = EffectModule::req_follow(boma, smash::phx::Hash40::new("sys_damage_fire"), smash::phx::Hash40::new("sword"), &S1, &S1, 0.5, true, 0, 0, 0, 0, 0, true, true) as u32;
 					let fire2: u32 = EffectModule::req_follow(boma, smash::phx::Hash40::new("sys_damage_fire"), smash::phx::Hash40::new("sword"), &S2, &S2, 0.5, true, 0, 0, 0, 0, 0, true, true) as u32;
 					let fire3: u32 = EffectModule::req_follow(boma, smash::phx::Hash40::new("sys_damage_fire"), smash::phx::Hash40::new("sword"), &S3, &S3, 0.5, true, 0, 0, 0, 0, 0, true, true) as u32;
@@ -95,7 +95,7 @@ unsafe extern "C" fn ike(fighter : &mut L2CFighterCommon) {
 					EffectModule::set_rgb(boma, fire3, 0.0, 0.8, 15.0);
 				};
 			};
-			if IKE_INSTALL[ENTRY_ID] > 0 {
+			if VariableModule::get_int((boma) as *mut _, FIGHTER_IKE_INSTANCE_WORK_ID_INT_IKE_INSTALL) > 0 {
 				if status_kind == *FIGHTER_STATUS_KIND_ATTACK_LW3 {
 					if MotionModule::frame(boma) >= 22.0 {
 						CancelModule::enable_cancel(boma);
@@ -155,32 +155,32 @@ unsafe extern "C" fn ike(fighter : &mut L2CFighterCommon) {
 			if status_kind == *FIGHTER_KIRBY_STATUS_KIND_IKE_SPECIAL_N_END && AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_HIT) {
 				if MotionModule::frame(boma) >= 25.0 {
 					CancelModule::enable_cancel(boma);
-					IKE_INSTALL[ENTRY_ID] = IKE_INSTALL_TIME;
+					VariableModule::set_int((boma) as *mut _, IKE_INSTALL_TIME, FIGHTER_IKE_INSTANCE_WORK_ID_INT_IKE_INSTALL);
 					EffectModule::kill_kind(boma, smash::phx::Hash40::new_raw(0x10ae069777), false, false);
 				};
 			};
 			if [*FIGHTER_STATUS_KIND_DEAD, *FIGHTER_STATUS_KIND_LOSE, *FIGHTER_STATUS_KIND_WIN].contains(&status_kind) || smash::app::sv_information::is_ready_go() == false{
-				IKE_INSTALL[ENTRY_ID] = 0;
+				VariableModule::set_int((boma) as *mut _, 0, FIGHTER_IKE_INSTANCE_WORK_ID_INT_IKE_INSTALL);
 			};
-			if IKE_INSTALL[ENTRY_ID] > 0 {
-				IKE_INSTALL[ENTRY_ID] -= 1;
+			if VariableModule::get_int((boma) as *mut _, FIGHTER_IKE_INSTANCE_WORK_ID_INT_IKE_INSTALL) > 0 {
+				VariableModule::dec_int((boma) as *mut _, FIGHTER_IKE_INSTANCE_WORK_ID_INT_IKE_INSTALL);
 			} else {
 				EffectModule::kill_kind(boma, smash::phx::Hash40::new_raw(0x10ae069777), false, false);
 			};
 			if [*FIGHTER_STATUS_KIND_CAPTURE_PULLED, *FIGHTER_STATUS_KIND_CAPTURE_CUT, *FIGHTER_STATUS_KIND_CAPTURE_ITEM, *FIGHTER_STATUS_KIND_CAPTURE_JUMP, *FIGHTER_STATUS_KIND_CAPTURE_WAIT].contains(&status_kind) {
-				IKE_INSTALL[ENTRY_ID] = 0;
+				VariableModule::set_int((boma) as *mut _, 0, FIGHTER_IKE_INSTANCE_WORK_ID_INT_IKE_INSTALL);
 			};
-			if IKE_INSTALL[ENTRY_ID] > 0{
-				TIMER[ENTRY_ID] += 1;
-				if TIMER[ENTRY_ID] >= 5 {
-					TIMER[ENTRY_ID] = 0;
+			if VariableModule::get_int((boma) as *mut _, FIGHTER_IKE_INSTANCE_WORK_ID_INT_IKE_INSTALL) > 0{
+				VariableModule::inc_int((boma) as *mut _, FIGHTER_IKE_INSTANCE_WORK_ID_INT_TIMER);
+				if VariableModule::get_int((boma) as *mut _, FIGHTER_IKE_INSTANCE_WORK_ID_INT_TIMER) >= 5 {
+					VariableModule::set_int((boma) as *mut _, 0, FIGHTER_IKE_INSTANCE_WORK_ID_INT_TIMER);
 					let fire1: u32 = EffectModule::req_follow(boma, smash::phx::Hash40::new("sys_damage_fire"), smash::phx::Hash40::new("havel"), &S3, &S3, 0.5, true, 0, 0, 0, 0, 0, true, true) as u32;
 					let fire2: u32 = EffectModule::req_follow(boma, smash::phx::Hash40::new("sys_damage_fire"), smash::phx::Hash40::new("haver"), &S3, &S3, 0.5, true, 0, 0, 0, 0, 0, true, true) as u32;
 					EffectModule::set_rgb(boma, fire1, 0.0, 0.8, 15.0);
 					EffectModule::set_rgb(boma, fire2, 0.0, 0.8, 15.0);
 				};
 			};
-			if IKE_INSTALL[ENTRY_ID] > 0 {
+			if VariableModule::get_int((boma) as *mut _, FIGHTER_IKE_INSTANCE_WORK_ID_INT_IKE_INSTALL) > 0 {
 				if status_kind == *FIGHTER_STATUS_KIND_LANDING_ATTACK_AIR {
 					if motion_kind == hash40("landing_air_f") {
 						let landing = 1.0/(((WorkModule::get_param_float(boma, hash40("landing_attack_air_frame_f"), 0)-2.0))/ FighterMotionModuleImpl::get_cancel_frame(boma,smash::phx::Hash40::new_raw(MotionModule::motion_kind(boma)), false)as f32);

@@ -31,11 +31,11 @@ unsafe extern "C" fn gunner_frame(fighter: &mut L2CFighterCommon) {
             let motion_kind = MotionModule::motion_kind(boma);
             let frame = MotionModule::frame(boma);
             let stick_y = ControlModule::get_stick_y(boma);
-            if NO_FP[ENTRY_ID] > 0 {
-                NO_FP[ENTRY_ID] -= 1;
+            if VariableModule::get_int((boma) as *mut _, FIGHTER_MIIGUNNER_INSTANCE_WORK_ID_INT_NO_FP) > 0 {
+                VariableModule::dec_int((boma) as *mut _, FIGHTER_MIIGUNNER_INSTANCE_WORK_ID_INT_NO_FP);
             }
             if is_reset() {
-                NO_FP[ENTRY_ID] = 0;
+                VariableModule::set_int((boma) as *mut _, 0, FIGHTER_MIIGUNNER_INSTANCE_WORK_ID_INT_NO_FP);
             }
             if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_CUSTOMIZE_SPECIAL_N_NO) == 1 {
                 if [*FIGHTER_STATUS_KIND_SPECIAL_N].contains(&status_kind){

@@ -9,6 +9,7 @@ use smash::phx::*;
 use smash::lib::{L2CValue, L2CAgent};
 use smash::phx::Vector2f;
 use crate::util::*;
+use crate::config;
 
 //Jab Cancel
 pub unsafe fn opff(fighter : &mut L2CFighterCommon, status_kind : i32, motion_kind : u64, ENTRY_ID : usize) {
@@ -18,7 +19,7 @@ pub unsafe fn opff(fighter : &mut L2CFighterCommon, status_kind : i32, motion_ki
 		let stick_y = ControlModule::get_stick_y(boma(fighter));
 		let frame = MotionModule::frame(boma(fighter));
 		
-		if (!is_mechanics_enabled() && !is_gamemode("fgmode".to_string()) && !is_gamemode("rivals".to_string())) {
+		if (config::get().attacks.jab_cancel == 2 && !is_gamemode("fgmode".to_string()) && !is_gamemode("rivals".to_string())) {
 			if crate::get_state!(ENTRY_ID, JabState).has_enable_100_on {
 					WorkModule::set_flag(boma(fighter), true, *FIGHTER_STATUS_ATTACK_FLAG_ENABLE_100);
 			};
@@ -92,7 +93,7 @@ pub unsafe fn opff(fighter : &mut L2CFighterCommon, status_kind : i32, motion_ki
 		if crate::is_in!(status_kind, *FIGHTER_STATUS_KIND_ATTACK_100, *FIGHTER_STATUS_KIND_ATTACK, *FIGHTER_DEMON_STATUS_KIND_ATTACK_COMBO) 
 		&& !is_hitlag(boma(fighter)) 
 		&& (crate::get_state!(ENTRY_ID, JabState).has_enable_combo_on || crate::get_state!(ENTRY_ID, JabState).has_enable_100_on){
-				if  (AttackModule::is_infliction_status(boma(fighter), *COLLISION_KIND_MASK_HIT) || (fighter_kind == *FIGHTER_KIND_SHEIK && AttackModule::is_infliction_status(boma(fighter), *COLLISION_KIND_MASK_ALL))) {
+				if  (AttackModule::is_infliction_status(boma(fighter), *COLLISION_KIND_MASK_HIT) || (config::get().attacks.jab_cancel == 1 && AttackModule::is_infliction_status(boma(fighter), *COLLISION_KIND_MASK_ALL))) {
 						if (ControlModule::get_command_flag_cat(boma(fighter), 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_ATTACK_S4) != 0 || 
 						(ControlModule::get_command_flag_cat(boma(fighter), 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_ATTACK_HI4) != 0 || 
 						(ControlModule::get_command_flag_cat(boma(fighter), 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_ATTACK_LW4) != 0

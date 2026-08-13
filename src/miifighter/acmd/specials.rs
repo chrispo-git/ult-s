@@ -105,12 +105,12 @@ unsafe extern "C" fn brawler_esk(fighter: &mut L2CAgentBase) {
 			if true{
 				let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
 				let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-				AttackModule::set_power(boma, 0, (ESK_CHARGE[ENTRY_ID] as f32 * 0.075)+10.5, false);
-				AttackModule::set_power(boma, 1, (ESK_CHARGE[ENTRY_ID] as f32 * 0.065)+9.0, false);
-				if ESK_CHARGE[ENTRY_ID] > 170 {
+				AttackModule::set_power(boma, 0, (VariableModule::get_int((boma) as *mut _, FIGHTER_MIIFIGHTER_INSTANCE_WORK_ID_INT_ESK_CHARGE) as f32 * 0.075)+10.5, false);
+				AttackModule::set_power(boma, 1, (VariableModule::get_int((boma) as *mut _, FIGHTER_MIIFIGHTER_INSTANCE_WORK_ID_INT_ESK_CHARGE) as f32 * 0.065)+9.0, false);
+				if VariableModule::get_int((boma) as *mut _, FIGHTER_MIIFIGHTER_INSTANCE_WORK_ID_INT_ESK_CHARGE) > 170 {
 					macros::ATK_SET_SHIELD_SETOFF_MUL_arg3(fighter, /*ID1*/0,/*ID2*/1,/*ShieldstunMul*/0.8);	
 				};
-				ESK_CHARGE[ENTRY_ID] = 0;
+				VariableModule::set_int((boma) as *mut _, 0, FIGHTER_MIIFIGHTER_INSTANCE_WORK_ID_INT_ESK_CHARGE);
 			}
 		}
 		wait(fighter.lua_state_agent, 3.0);

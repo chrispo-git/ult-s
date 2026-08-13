@@ -50,7 +50,7 @@ unsafe extern "C" fn pichu_frame(fighter: &mut L2CFighterCommon) {
 			if  StatusModule::situation_kind(boma) != *SITUATION_KIND_AIR || (*FIGHTER_STATUS_KIND_DAMAGE..*FIGHTER_STATUS_KIND_DAMAGE_FALL).contains(&status_kind){
 				crate::transition_reset!(ENTRY_ID, can_upb);
 			};
-			if [hash40("attack_air_lw")].contains(&MotionModule::motion_kind(boma)) && !ONE_DAIR[ENTRY_ID] {
+			if [hash40("attack_air_lw")].contains(&MotionModule::motion_kind(boma)) && !VariableModule::is_flag((boma) as *mut _, FIGHTER_PICHU_INSTANCE_WORK_ID_FLAG_ONE_DAIR) {
 				if AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_ALL) && !AttackModule::is_infliction(boma, *COLLISION_KIND_MASK_ALL) && MotionModule::frame(boma) < 46.0{
 					KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_JUMP);
 					MotionModule::set_frame_sync_anim_cmd(boma, 47.0, true, true, false);
@@ -60,7 +60,7 @@ unsafe extern "C" fn pichu_frame(fighter: &mut L2CFighterCommon) {
 					if !AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_HIT) {
 						MotionModule::set_rate(boma, 0.5);
 					};
-					ONE_DAIR[ENTRY_ID] = true;
+					VariableModule::set_flag((boma) as *mut _, true, FIGHTER_PICHU_INSTANCE_WORK_ID_FLAG_ONE_DAIR);
 				};
 			};
 			if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_LW {
@@ -73,13 +73,13 @@ unsafe extern "C" fn pichu_frame(fighter: &mut L2CFighterCommon) {
 				};
 			};
 			if StatusModule::situation_kind(boma) != *SITUATION_KIND_AIR {
-				HAS_DOWNB[ENTRY_ID] = false;
-				DO_STALL[ENTRY_ID] = true;
-				ONE_DAIR[ENTRY_ID] = false;
+				VariableModule::set_flag((boma) as *mut _, false, FIGHTER_PICHU_INSTANCE_WORK_ID_FLAG_HAS_DOWNB);
+				VariableModule::set_flag((boma) as *mut _, true, FIGHTER_PICHU_INSTANCE_WORK_ID_FLAG_DO_STALL);
+				VariableModule::set_flag((boma) as *mut _, false, FIGHTER_PICHU_INSTANCE_WORK_ID_FLAG_ONE_DAIR);
 				crate::transition_reset!(ENTRY_ID, can_downb);
 			};
 			if ![*FIGHTER_STATUS_KIND_ATTACK_AIR, *FIGHTER_STATUS_KIND_LANDING_ATTACK_AIR, *FIGHTER_PIKACHU_STATUS_KIND_SPECIAL_HI_END].contains(&status_kind) {
-				LAG_INCREASE[ENTRY_ID] = false;
+				VariableModule::set_flag((boma) as *mut _, false, FIGHTER_PICHU_INSTANCE_WORK_ID_FLAG_LAG_INCREASE);
 			};
 		}
     }

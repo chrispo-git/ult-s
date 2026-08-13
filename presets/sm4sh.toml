@@ -1,0 +1,62 @@
+[general]
+sh_macro = 0
+hold_buffer = 0
+hitstun = 0
+hitlag = 2
+ledges = 0
+respawn_anim = 0
+
+[movement]
+dash = 1
+moonwalk = 1
+pivots = 0
+llpc = 1
+jump_accel = 1
+hitfall = 0
+agt = 0
+djc = 1
+footstool = 0
+edge_cancel = 0
+jump_cancel = 1
+g2a = 0
+
+[attacks]
+jab_cancel = 2
+dacus = 0
+ac = 0
+jcg = 0
+grab = 0
+lcancel = 0
+special_cancel = 0
+
+[defense]
+shield = 0
+shield_health = 0
+shieldstun = 2
+airdodge = 2
+shield_drop = 0
+di = 0
+no_tumble_di = 1
+drift_di = 0
+hitstun_cancel = 0
+vertical_gravity = 1
+
+[stats]
+ll = 2
+initial_dash = 5
+runspeed = 0
+walkspeed = 0
+airspeed = 6
+airaccel = 0
+traction = 4
+fallspeed = 0
+jump = 0
+gravity = 5
+weight = 0
+
+[special]
+cancel_to_taunt = 0
+parry_reflect = 0
+taunt_cancel = 0
+no_special_fall = 0
+random_trip = 0

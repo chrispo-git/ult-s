@@ -20,11 +20,11 @@ mod frame;
 mod acmd;
 use crate::util::*;
 
-static mut LUCINA_STANCE : [i32; 8] = [0; 8];
-static mut DOWNB_TIMER : [i32; 8] = [1; 8];
-static mut BAN_SIDEB : [bool; 8] = [false; 8];
-static mut UPB_FALL : [bool; 8] = [false; 8];
-static mut TIMER : [i32; 8] = [0; 8];
+static FIGHTER_LUCINA_INSTANCE_WORK_ID_INT_LUCINA_STANCE : i32 = 0;
+static FIGHTER_LUCINA_INSTANCE_WORK_ID_INT_DOWNB_TIMER : i32 = 1;
+static FIGHTER_LUCINA_INSTANCE_WORK_ID_FLAG_BAN_SIDEB : i32 = 2;
+static FIGHTER_LUCINA_INSTANCE_WORK_ID_FLAG_UPB_FALL : i32 = 3;
+static FIGHTER_LUCINA_INSTANCE_WORK_ID_INT_TIMER : i32 = 4;
 static SWORDMASTER_DASH : f32 = 2.38;
 static SWORDMASTER_AIR_SPEED : f32 = 2.0;
 static SWORDMASTER_MAX_GRAVITY: f32 = 0.1;
@@ -76,20 +76,20 @@ pub fn install() {
 	status::install();
 	acmd::install();
 
-	param_config::update_float_2(*FIGHTER_KIND_LUCINA, get_marked_costumes("lucina","lucina").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_special_lw"), smash::hash40("start_mul_spd_x"), 1.0));
-	param_config::update_float_2(*FIGHTER_KIND_LUCINA, get_marked_costumes("lucina","lucina").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_special_lw"), smash::hash40("start_air_acl_x"), 0.00375));
-	param_config::update_float_2(*FIGHTER_KIND_LUCINA, get_marked_costumes("lucina","lucina").into_iter().map(|x| x as i32).collect(), (smash::hash40("walk_speed_max"), 0, 1.48));
-	param_config::update_float_2(*FIGHTER_KIND_LUCINA, get_marked_costumes("lucina","lucina").into_iter().map(|x| x as i32).collect(), (smash::hash40("ground_brake"), 0, 0.09));
-	param_config::update_float_2(*FIGHTER_KIND_LUCINA, get_marked_costumes("lucina","lucina").into_iter().map(|x| x as i32).collect(), (smash::hash40("dash_speed"), 0, 1.7));
-	param_config::update_float_2(*FIGHTER_KIND_LUCINA, get_marked_costumes("lucina","lucina").into_iter().map(|x| x as i32).collect(), (smash::hash40("run_accel_mul"), 0, 0.037));
-	param_config::update_float_2(*FIGHTER_KIND_LUCINA, get_marked_costumes("lucina","lucina").into_iter().map(|x| x as i32).collect(), (smash::hash40("run_accel_add"), 0, 0.025));
-	param_config::update_float_2(*FIGHTER_KIND_LUCINA, get_marked_costumes("lucina","lucina").into_iter().map(|x| x as i32).collect(), (smash::hash40("run_speed_max"), 0, 1.825));
-	param_config::update_float_2(*FIGHTER_KIND_LUCINA, get_marked_costumes("lucina","lucina").into_iter().map(|x| x as i32).collect(), (smash::hash40("jump_speed_x_mul"), 0, 1.0));
-	param_config::update_float_2(*FIGHTER_KIND_LUCINA, get_marked_costumes("lucina","lucina").into_iter().map(|x| x as i32).collect(), (smash::hash40("air_speed_x_stable"), 0, 1.05));
-	param_config::update_float_2(*FIGHTER_KIND_LUCINA, get_marked_costumes("lucina","lucina").into_iter().map(|x| x as i32).collect(), (smash::hash40("air_speed_y_stable"), 0, 1.78));
-	param_config::update_float_2(*FIGHTER_KIND_LUCINA, get_marked_costumes("lucina","lucina").into_iter().map(|x| x as i32).collect(), (smash::hash40("dive_speed_y"), 0, 2.848));
-	param_config::update_float_2(*FIGHTER_KIND_LUCINA, get_marked_costumes("lucina","lucina").into_iter().map(|x| x as i32).collect(), (smash::hash40("weight"), 0, 85.0));
-	param_config::update_float_2(*FIGHTER_KIND_LUCINA, get_marked_costumes("lucina","lucina").into_iter().map(|x| x as i32).collect(), (smash::hash40("landing_attack_air_frame_n"), 0, 9.0));
-	param_config::update_float_2(*FIGHTER_KIND_LUCINA, get_marked_costumes("lucina","lucina").into_iter().map(|x| x as i32).collect(), (smash::hash40("landing_attack_air_frame_f"), 0, 12.0));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_LUCINA, get_marked_costumes("lucina","lucina").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_special_lw"), smash::hash40("start_mul_spd_x"), 1.0));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_LUCINA, get_marked_costumes("lucina","lucina").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_special_lw"), smash::hash40("start_air_acl_x"), 0.00375));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_LUCINA, get_marked_costumes("lucina","lucina").into_iter().map(|x| x as i32).collect(), (smash::hash40("walk_speed_max"), 0, 1.48));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_LUCINA, get_marked_costumes("lucina","lucina").into_iter().map(|x| x as i32).collect(), (smash::hash40("ground_brake"), 0, 0.09));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_LUCINA, get_marked_costumes("lucina","lucina").into_iter().map(|x| x as i32).collect(), (smash::hash40("dash_speed"), 0, 1.7));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_LUCINA, get_marked_costumes("lucina","lucina").into_iter().map(|x| x as i32).collect(), (smash::hash40("run_accel_mul"), 0, 0.037));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_LUCINA, get_marked_costumes("lucina","lucina").into_iter().map(|x| x as i32).collect(), (smash::hash40("run_accel_add"), 0, 0.025));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_LUCINA, get_marked_costumes("lucina","lucina").into_iter().map(|x| x as i32).collect(), (smash::hash40("run_speed_max"), 0, 1.825));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_LUCINA, get_marked_costumes("lucina","lucina").into_iter().map(|x| x as i32).collect(), (smash::hash40("jump_speed_x_mul"), 0, 1.0));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_LUCINA, get_marked_costumes("lucina","lucina").into_iter().map(|x| x as i32).collect(), (smash::hash40("air_speed_x_stable"), 0, 1.05));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_LUCINA, get_marked_costumes("lucina","lucina").into_iter().map(|x| x as i32).collect(), (smash::hash40("air_speed_y_stable"), 0, 1.78));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_LUCINA, get_marked_costumes("lucina","lucina").into_iter().map(|x| x as i32).collect(), (smash::hash40("dive_speed_y"), 0, 2.848));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_LUCINA, get_marked_costumes("lucina","lucina").into_iter().map(|x| x as i32).collect(), (smash::hash40("weight"), 0, 85.0));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_LUCINA, get_marked_costumes("lucina","lucina").into_iter().map(|x| x as i32).collect(), (smash::hash40("landing_attack_air_frame_n"), 0, 9.0));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_LUCINA, get_marked_costumes("lucina","lucina").into_iter().map(|x| x as i32).collect(), (smash::hash40("landing_attack_air_frame_f"), 0, 12.0));
 
 }

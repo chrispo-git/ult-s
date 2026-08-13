@@ -33,29 +33,29 @@ unsafe extern "C" fn falco_frame(fighter: &mut L2CFighterCommon) {
 			let fallspeed = WorkModule::get_param_float(fighter.module_accessor, hash40("air_speed_y_stable"), 0);
 
 			if [hash40("special_lw"), hash40("special_lw_r"), hash40("special_lw_l"), hash40("special_air_lw"), hash40("special_air_lw_r"), hash40("special_air_lw_l")].contains(&motion_kind) {
-				if !HAS_DOWNB[ENTRY_ID] && StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR {
-					HAS_DOWNB[ENTRY_ID] = true;
-					DO_STALL[ENTRY_ID] = true;
+				if !VariableModule::is_flag((boma) as *mut _, FIGHTER_FALCO_INSTANCE_WORK_ID_FLAG_HAS_DOWNB) && StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR {
+					VariableModule::set_flag((boma) as *mut _, true, FIGHTER_FALCO_INSTANCE_WORK_ID_FLAG_HAS_DOWNB);
+					VariableModule::set_flag((boma) as *mut _, true, FIGHTER_FALCO_INSTANCE_WORK_ID_FLAG_DO_STALL);
 				};
 				
 				if frame > 32.0 {
-					DO_STALL[ENTRY_ID] = false; 
+					VariableModule::set_flag((boma) as *mut _, false, FIGHTER_FALCO_INSTANCE_WORK_ID_FLAG_DO_STALL);
 					KineticModule::resume_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_GRAVITY);
 					KineticModule::resume_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_CONTROL);
 					CancelModule::enable_cancel(boma);
 				} else {
-					if DO_STALL[ENTRY_ID] {
+					if VariableModule::is_flag((boma) as *mut _, FIGHTER_FALCO_INSTANCE_WORK_ID_FLAG_DO_STALL) {
 						KineticModule::suspend_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_GRAVITY);
 						KineticModule::suspend_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_CONTROL);
                         macros::SET_SPEED_EX(fighter, 0.0, -0.227, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
 					};
 				};
 			} else {
-				DO_STALL[ENTRY_ID] = false;
+				VariableModule::set_flag((boma) as *mut _, false, FIGHTER_FALCO_INSTANCE_WORK_ID_FLAG_DO_STALL);
 			};
 			if StatusModule::situation_kind(boma) != *SITUATION_KIND_AIR {
-				HAS_DOWNB[ENTRY_ID] = false;
-				DO_STALL[ENTRY_ID] = false;
+				VariableModule::set_flag((boma) as *mut _, false, FIGHTER_FALCO_INSTANCE_WORK_ID_FLAG_HAS_DOWNB);
+				VariableModule::set_flag((boma) as *mut _, false, FIGHTER_FALCO_INSTANCE_WORK_ID_FLAG_DO_STALL);
 			};
 			if [*FIGHTER_STATUS_KIND_SPECIAL_N].contains(&status_kind) {
 				if StatusModule::is_situation_changed(boma) {

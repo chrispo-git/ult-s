@@ -102,14 +102,14 @@ unsafe extern "C" fn bomber_main_frame(fighter: &mut L2CFighterCommon) {
                 }
                 if status_kind == *FIGHTER_STATUS_KIND_THROW_KIRBY {
                     if ![hash40("special_s"), hash40("special_s_end")].contains(&motion_kind) {
-                        //if FORCE_END[ENTRY_ID] {
+                        //if VariableModule::is_flag((boma) as *mut _, FIGHTER_BOMBERMAN_INSTANCE_WORK_ID_FLAG_FORCE_END) {
                             MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_s_end"), -1.0, 1.0, false, 0.0, false, false);
                             let opponent_id = LinkModule::get_node_object_id(boma, *LINK_NO_CAPTURE) as u32;
 	                        let grabber_boma = smash::app::sv_battle_object::module_accessor(opponent_id);
                             ControlModule::set_clatter_time(grabber_boma, 0.0, 0);
                             ControlModule::set_dec_time(grabber_boma, 0.0, 0);
                             KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_CAPTURE_JUMP);
-                            FORCE_END[ENTRY_ID] = false;
+                            VariableModule::set_flag((boma) as *mut _, false, FIGHTER_BOMBERMAN_INSTANCE_WORK_ID_FLAG_FORCE_END);
                         //}
                     }
                 }
@@ -166,7 +166,7 @@ unsafe extern "C" fn bomberman_frame(fighter: &mut L2CFighterCommon) {
                 GrabModule::set_size_mul(boma, 0.94);
             }
             if !ArticleModule::is_exist(boma, *FIGHTER_PACMAN_GENERATE_ARTICLE_FIREHYDRANT) {
-                EXPLODE[ENTRY_ID] = false;
+                VariableModule::set_flag((boma) as *mut _, false, FIGHTER_BOMBERMAN_INSTANCE_WORK_ID_FLAG_EXPLODE);
             } else {
                 if [
                     *FIGHTER_STATUS_KIND_ATTACK, *FIGHTER_STATUS_KIND_ATTACK_AIR, *FIGHTER_STATUS_KIND_ATTACK_S3, *FIGHTER_STATUS_KIND_ATTACK_LW3, *FIGHTER_STATUS_KIND_ATTACK_DASH,
@@ -238,40 +238,40 @@ unsafe extern "C" fn bomberman_frame(fighter: &mut L2CFighterCommon) {
                 if frame < 14.0 {
                     ModelModule::set_mesh_visibility(boma,Hash40::new("bomber_bombhavel"),true);
                     ModelModule::set_mesh_visibility(boma,Hash40::new("bomber_bombhaver"),false);
-                    BOMB_TO_REMOVE[ENTRY_ID] = true;
+                    VariableModule::set_flag((boma) as *mut _, true, FIGHTER_BOMBERMAN_INSTANCE_WORK_ID_FLAG_BOMB_TO_REMOVE);
                 } else {
                     ModelModule::set_mesh_visibility(boma,Hash40::new("bomber_bombhavel"),false);
                     ModelModule::set_mesh_visibility(boma,Hash40::new("bomber_bombhaver"),false);
-                    BOMB_TO_REMOVE[ENTRY_ID] = false;
+                    VariableModule::set_flag((boma) as *mut _, false, FIGHTER_BOMBERMAN_INSTANCE_WORK_ID_FLAG_BOMB_TO_REMOVE);
                 }
             } else if [hash40("throw_f")].contains(&motion_kind) && lr < 0.0{
                 if frame < 31.0 && frame >= 3.0 {
                     ModelModule::set_mesh_visibility(boma,Hash40::new("bomber_bombhaver"),true);
                     ModelModule::set_mesh_visibility(boma,Hash40::new("bomber_bombhavel"),false);
-                    BOMB_TO_REMOVE[ENTRY_ID] = true;
+                    VariableModule::set_flag((boma) as *mut _, true, FIGHTER_BOMBERMAN_INSTANCE_WORK_ID_FLAG_BOMB_TO_REMOVE);
                 } else {
                     ModelModule::set_mesh_visibility(boma,Hash40::new("bomber_bombhavel"),false);
                     ModelModule::set_mesh_visibility(boma,Hash40::new("bomber_bombhaver"),false);
-                    BOMB_TO_REMOVE[ENTRY_ID] = false;
+                    VariableModule::set_flag((boma) as *mut _, false, FIGHTER_BOMBERMAN_INSTANCE_WORK_ID_FLAG_BOMB_TO_REMOVE);
                 }
             } else if [hash40("throw_lw")].contains(&motion_kind) && lr < 0.0{
                 if frame < 30.0 && frame >= 9.0 {
                     ModelModule::set_mesh_visibility(boma,Hash40::new("bomber_bombhavel"),true);
                     ModelModule::set_mesh_visibility(boma,Hash40::new("bomber_bombhaver"),false);
-                    BOMB_TO_REMOVE[ENTRY_ID] = true;
+                    VariableModule::set_flag((boma) as *mut _, true, FIGHTER_BOMBERMAN_INSTANCE_WORK_ID_FLAG_BOMB_TO_REMOVE);
                 } else {
                     ModelModule::set_mesh_visibility(boma,Hash40::new("bomber_bombhavel"),false);
                     ModelModule::set_mesh_visibility(boma,Hash40::new("bomber_bombhaver"),false);
-                    BOMB_TO_REMOVE[ENTRY_ID] = false;
+                    VariableModule::set_flag((boma) as *mut _, false, FIGHTER_BOMBERMAN_INSTANCE_WORK_ID_FLAG_BOMB_TO_REMOVE);
                 }
-            } else if BOMB_TO_REMOVE[ENTRY_ID] {
+            } else if VariableModule::is_flag((boma) as *mut _, FIGHTER_BOMBERMAN_INSTANCE_WORK_ID_FLAG_BOMB_TO_REMOVE) {
                 ModelModule::set_mesh_visibility(boma,Hash40::new("bomber_bombhavel"),false);
                 ModelModule::set_mesh_visibility(boma,Hash40::new("bomber_bombhaver"),false);
-                BOMB_TO_REMOVE[ENTRY_ID] = false;
+                VariableModule::set_flag((boma) as *mut _, false, FIGHTER_BOMBERMAN_INSTANCE_WORK_ID_FLAG_BOMB_TO_REMOVE);
             }
             
             if is_reset() || status_kind == *FIGHTER_STATUS_KIND_DEAD {
-                NEUTRALB_CHARGE[ENTRY_ID] = 0;
+                VariableModule::set_int((boma) as *mut _, 0, FIGHTER_BOMBERMAN_INSTANCE_WORK_ID_INT_NEUTRALB_CHARGE);
             }
             if [hash40("special_n_hold"), hash40("special_air_n_hold")].contains(&motion_kind) {
                 MotionModule::set_rate(boma, 0.5);
@@ -301,7 +301,7 @@ unsafe extern "C" fn bomberman_frame(fighter: &mut L2CFighterCommon) {
                     //println!("sideb catch over");
                 }
                 SIDEB_CATCH[ENTRY_ID] = false;
-                FORCE_END[ENTRY_ID] = false;
+                VariableModule::set_flag((boma) as *mut _, false, FIGHTER_BOMBERMAN_INSTANCE_WORK_ID_FLAG_FORCE_END);
                 crate::transition_reset!(ENTRY_ID, can_grab);
             }
             if StatusModule::prev_status_kind(fighter.module_accessor, 2) == *FIGHTER_STATUS_KIND_SPECIAL_S  && StatusModule::prev_status_kind(fighter.module_accessor, 0) == *FIGHTER_STATUS_KIND_CATCH_PULL  && status_kind == *FIGHTER_STATUS_KIND_CATCH_CUT{
@@ -313,7 +313,7 @@ unsafe extern "C" fn bomberman_frame(fighter: &mut L2CFighterCommon) {
                     ControlModule::set_clatter_time(grabber_boma, 0.0, 0);
                     ControlModule::set_dec_time(grabber_boma, 0.0, 0);
                     KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_CAPTURE_JUMP);
-                    FORCE_END[ENTRY_ID] = false;
+                    VariableModule::set_flag((boma) as *mut _, false, FIGHTER_BOMBERMAN_INSTANCE_WORK_ID_FLAG_FORCE_END);
                 }
             }
         }
@@ -332,35 +332,35 @@ unsafe extern "C" fn bomb_frame(weapon: &mut L2CFighterBase) {
 		let is_near_ground = GroundModule::ray_check(weapon.module_accessor, &Vector2f{ x: PostureModule::pos_x(weapon.module_accessor), y: PostureModule::pos_y(weapon.module_accessor)}, &Vector2f{ x: 0.0, y: -1.0}, true);
         if smash::app::utility::get_kind(&mut *boma) == *FIGHTER_KIND_PACMAN  && costumes.contains(&(curr_costume as usize)) {
 			ModelModule::set_scale(weapon.module_accessor, 0.769);
-            if MAKE_NEW_BOMB[ENTRY_ID] {
-                MAKE_NEW_BOMB[ENTRY_ID] = false;
-                let pos = smash::phx::Vector3f { x: NEW_BOMB_X[ENTRY_ID], y: NEW_BOMB_Y[ENTRY_ID]+4.0, z: 0.0 };
+            if VariableModule::is_flag((boma) as *mut _, FIGHTER_BOMBERMAN_INSTANCE_WORK_ID_FLAG_MAKE_NEW_BOMB) {
+                VariableModule::set_flag((boma) as *mut _, false, FIGHTER_BOMBERMAN_INSTANCE_WORK_ID_FLAG_MAKE_NEW_BOMB);
+                let pos = smash::phx::Vector3f { x: VariableModule::get_float((boma) as *mut _, FIGHTER_BOMBERMAN_INSTANCE_WORK_ID_FLOAT_NEW_BOMB_X), y: VariableModule::get_float((boma) as *mut _, FIGHTER_BOMBERMAN_INSTANCE_WORK_ID_FLOAT_NEW_BOMB_Y)+4.0, z: 0.0 };
                 PostureModule::set_pos(weapon.module_accessor, &pos);
                 PostureModule::init_pos(weapon.module_accessor, &pos, true, true);
                 //println!("New Bombed");
             }
-            if EXPLODE_END_TIMER[ENTRY_ID] == 0 {
+            if VariableModule::get_int((boma) as *mut _, FIGHTER_BOMBERMAN_INSTANCE_WORK_ID_INT_EXPLODE_END_TIMER) == 0 {
                 if status_kind == *WEAPON_PACMAN_FIREHYDRANT_STATUS_KIND_FLY && (situation == *SITUATION_KIND_GROUND){
-                    MAKE_NEW_BOMB[ENTRY_ID] = true;
-                    NEW_BOMB_X[ENTRY_ID] = PostureModule::pos_x(weapon.module_accessor);
-                    NEW_BOMB_Y[ENTRY_ID] = PostureModule::pos_y(weapon.module_accessor);
+                    VariableModule::set_flag((boma) as *mut _, true, FIGHTER_BOMBERMAN_INSTANCE_WORK_ID_FLAG_MAKE_NEW_BOMB);
+                    VariableModule::set_float((boma) as *mut _, PostureModule::pos_x(weapon.module_accessor), FIGHTER_BOMBERMAN_INSTANCE_WORK_ID_FLOAT_NEW_BOMB_X);
+                    VariableModule::set_float((boma) as *mut _, PostureModule::pos_y(weapon.module_accessor), FIGHTER_BOMBERMAN_INSTANCE_WORK_ID_FLOAT_NEW_BOMB_Y);
                     ArticleModule::generate_article(&mut *boma, *FIGHTER_PACMAN_GENERATE_ARTICLE_FIREHYDRANT, false, -1);
                     //println!("End Bombed");
                 }
             }
-            if EXPLODE_END_TIMER[ENTRY_ID] > 0{
-                EXPLODE_END_TIMER[ENTRY_ID] -= 1;
+            if VariableModule::get_int((boma) as *mut _, FIGHTER_BOMBERMAN_INSTANCE_WORK_ID_INT_EXPLODE_END_TIMER) > 0{
+                VariableModule::dec_int((boma) as *mut _, FIGHTER_BOMBERMAN_INSTANCE_WORK_ID_INT_EXPLODE_END_TIMER);
             }
-            if EXPLODE_END_TIMER[ENTRY_ID] == 1{
-                EXPLODE[ENTRY_ID] = false;
+            if VariableModule::get_int((boma) as *mut _, FIGHTER_BOMBERMAN_INSTANCE_WORK_ID_INT_EXPLODE_END_TIMER) == 1{
+                VariableModule::set_flag((boma) as *mut _, false, FIGHTER_BOMBERMAN_INSTANCE_WORK_ID_FLAG_EXPLODE);
                 StatusModule::change_status_request_from_script(weapon.module_accessor, *WEAPON_PACMAN_FIREHYDRANT_STATUS_KIND_REMOVE, false);
             }
-            if EXPLODE_END_TIMER[ENTRY_ID] == 15{
+            if VariableModule::get_int((boma) as *mut _, FIGHTER_BOMBERMAN_INSTANCE_WORK_ID_INT_EXPLODE_END_TIMER) == 15{
                 AttackModule::clear_all(weapon.module_accessor);
             }
-            if EXPLODE_END_TIMER[ENTRY_ID] == 0 && (AttackModule::is_infliction_status(weapon.module_accessor, *COLLISION_KIND_MASK_ALL) || EXPLODE[ENTRY_ID] == true) {
+            if VariableModule::get_int((boma) as *mut _, FIGHTER_BOMBERMAN_INSTANCE_WORK_ID_INT_EXPLODE_END_TIMER) == 0 && (AttackModule::is_infliction_status(weapon.module_accessor, *COLLISION_KIND_MASK_ALL) || VariableModule::is_flag((boma) as *mut _, FIGHTER_BOMBERMAN_INSTANCE_WORK_ID_FLAG_EXPLODE) == true) {
                 KineticModule::clear_speed_all(weapon.module_accessor);
-                EXPLODE_END_TIMER[ENTRY_ID] = 19;
+                VariableModule::set_int((boma) as *mut _, 19, FIGHTER_BOMBERMAN_INSTANCE_WORK_ID_INT_EXPLODE_END_TIMER);
                 AttackModule::clear_all(weapon.module_accessor);
                 VisibilityModule::set_model_visible(weapon.module_accessor, false);
                 macros::EFFECT(weapon, Hash40::new("sys_bomb_a"), Hash40::new("rot"), 0, 0, 0, 0, 0, 0, 1.25, 0, 0, 0, 0, 0, 0, true);

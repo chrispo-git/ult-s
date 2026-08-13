@@ -73,9 +73,9 @@ unsafe extern "C" fn gunner_s1(agent: &mut L2CAgentBase) {
     let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
     frame(agent.lua_state_agent, 21.0);
     if macros::is_excute(agent) {
-        if NO_FP[ENTRY_ID] <= 0 {
+        if VariableModule::get_int((boma) as *mut _, FIGHTER_MIIGUNNER_INSTANCE_WORK_ID_INT_NO_FP) <= 0 {
             ArticleModule::generate_article(agent.module_accessor, *FIGHTER_MIIGUNNER_GENERATE_ARTICLE_FLAMEPILLAR, false, -1);
-            NO_FP[ENTRY_ID] = FP_DELAY;
+            VariableModule::set_int((boma) as *mut _, FP_DELAY, FIGHTER_MIIGUNNER_INSTANCE_WORK_ID_INT_NO_FP);
         }
     }
 }

@@ -31,13 +31,10 @@ unsafe extern "C" fn sword(fighter : &mut L2CFighterCommon) {
 		let frame = MotionModule::frame(boma);
 		let end_frame = MotionModule::end_frame(boma);
 		if [*FIGHTER_STATUS_KIND_DEAD, *FIGHTER_STATUS_KIND_LOSE, *FIGHTER_STATUS_KIND_WIN].contains(&status_kind) || smash::app::sv_information::is_ready_go() == false{
-			COUNTER_STORE[ENTRY_ID] = false;
-			BOMB_TIME[ENTRY_ID] = 0;
-			CUSTOM_BOMB[ENTRY_ID] = false;
-			NADO_COOLDOWN[ENTRY_ID] = 0;
+			VariableModule::set_int(fighter.module_accessor, 0, FIGHTER_MIISWORDSMAN_INSTANCE_WORK_ID_INT_TORNADO_COOLDOWN);
 		};
-		if NADO_COOLDOWN[ENTRY_ID] > 0 {
-			NADO_COOLDOWN[ENTRY_ID] -= 1;
+		if VariableModule::get_int(fighter.module_accessor, FIGHTER_MIISWORDSMAN_INSTANCE_WORK_ID_INT_TORNADO_COOLDOWN) > 0 {
+			VariableModule::dec_int(fighter.module_accessor, FIGHTER_MIISWORDSMAN_INSTANCE_WORK_ID_INT_TORNADO_COOLDOWN);
 		};
 		
 		if [hash40("special_air_n2")].contains(&MotionModule::motion_kind(boma)){
@@ -84,24 +81,8 @@ unsafe extern "C" fn sword(fighter : &mut L2CFighterCommon) {
 				StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL, true);
 			};
 		};
-		if BOMB_TIME[ENTRY_ID] > 0 {
-			BOMB_TIME[ENTRY_ID] -= 1;
-		};
 		if [hash40("special_s1_hit"), hash40("special_air_s1_hit")].contains(&MotionModule::motion_kind(boma)) {
 			MotionModule::set_rate(boma, 1.42857142);
-		};
-		if status_kind == *FIGHTER_MIISWORDSMAN_STATUS_KIND_SPECIAL_LW1_HIT && COUNTER_STORE[ENTRY_ID] == false {
-			if MotionModule::frame(boma) < 12.0 && ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_GUARD) {
-				if StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR {
-					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL_AERIAL, false);
-				} else {
-					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_GUARD_OFF, false);
-				};
-				COUNTER_STORE[ENTRY_ID] = true;
-			};
-		};
-		if status_kind == *FIGHTER_STATUS_KIND_SPECIAL_LW && COUNTER_STORE[ENTRY_ID] == true{
-			StatusModule::change_status_request_from_script(boma, *FIGHTER_MIISWORDSMAN_STATUS_KIND_SPECIAL_LW1_HIT, false);
 		};
     };
 }	

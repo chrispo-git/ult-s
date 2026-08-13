@@ -141,7 +141,7 @@ unsafe extern "C" fn counter_main(weapon: &mut L2CWeaponCommon) -> L2CValue {
     let boma = smash::app::sv_battle_object::module_accessor(otarget_id);
     let ENTRY_ID = WorkModule::get_int(&mut *boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
     let status_kind = StatusModule::status_kind(weapon.module_accessor);
-    let coin_count = COIN_COUNT[ENTRY_ID];
+    let coin_count = VariableModule::get_int((boma) as *mut _, FIGHTER_WARIO_INSTANCE_WORK_ID_INT_COIN_COUNT);
     if true {
         if PostureModule::rot_y_lr(&mut *boma) < 0.0 {
             let mut rotation = Vector3f{x: 0.0, y: 180.0 , z: 0.0};
@@ -188,20 +188,20 @@ unsafe extern "C" fn counter_main(weapon: &mut L2CWeaponCommon) -> L2CValue {
             9 => ModelModule::set_mesh_visibility(weapon.module_accessor,Hash40::new("0_9"),true),
             _ => ModelModule::set_mesh_visibility(weapon.module_accessor,Hash40::new("0_0"),true),
         };
-        if SHOW_COUNT[ENTRY_ID] {
-            if ALPHA_COUNTER[ENTRY_ID] < 1.0 {
-                ALPHA_COUNTER[ENTRY_ID] += 0.075;
+        if VariableModule::is_flag((boma) as *mut _, FIGHTER_WARIO_INSTANCE_WORK_ID_FLAG_SHOW_COUNT) {
+            if VariableModule::get_float((boma) as *mut _, FIGHTER_WARIO_INSTANCE_WORK_ID_FLOAT_ALPHA_COUNTER) < 1.0 {
+                VariableModule::set_float((boma) as *mut _, VariableModule::get_float((boma) as *mut _, FIGHTER_WARIO_INSTANCE_WORK_ID_FLOAT_ALPHA_COUNTER) + (0.075), FIGHTER_WARIO_INSTANCE_WORK_ID_FLOAT_ALPHA_COUNTER);
             } else {
-                ALPHA_COUNTER[ENTRY_ID] = 1.0;
+                VariableModule::set_float((boma) as *mut _, 1.0, FIGHTER_WARIO_INSTANCE_WORK_ID_FLOAT_ALPHA_COUNTER);
             }
         } else {
-            if ALPHA_COUNTER[ENTRY_ID] > 0.0 {
-                ALPHA_COUNTER[ENTRY_ID] -= 0.1;
+            if VariableModule::get_float((boma) as *mut _, FIGHTER_WARIO_INSTANCE_WORK_ID_FLOAT_ALPHA_COUNTER) > 0.0 {
+                VariableModule::set_float((boma) as *mut _, VariableModule::get_float((boma) as *mut _, FIGHTER_WARIO_INSTANCE_WORK_ID_FLOAT_ALPHA_COUNTER) - (0.1), FIGHTER_WARIO_INSTANCE_WORK_ID_FLOAT_ALPHA_COUNTER);
             } else {
-                ALPHA_COUNTER[ENTRY_ID] = 0.0;
+                VariableModule::set_float((boma) as *mut _, 0.0, FIGHTER_WARIO_INSTANCE_WORK_ID_FLOAT_ALPHA_COUNTER);
             }
         }
-        ModelModule::set_alpha(weapon.module_accessor, ALPHA_COUNTER[ENTRY_ID]);
+        ModelModule::set_alpha(weapon.module_accessor, VariableModule::get_float((boma) as *mut _, FIGHTER_WARIO_INSTANCE_WORK_ID_FLOAT_ALPHA_COUNTER));
     };
     0.into()
 }
@@ -209,7 +209,7 @@ unsafe extern "C" fn counter_main(weapon: &mut L2CWeaponCommon) -> L2CValue {
 unsafe extern "C" fn downb_pre(fighter: &mut L2CWeaponCommon) -> L2CValue {
     let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
     let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-    let tens = (COIN_COUNT[ENTRY_ID] / 10) as i32;
+    let tens = (VariableModule::get_int((boma) as *mut _, FIGHTER_WARIO_INSTANCE_WORK_ID_INT_COIN_COUNT) / 10) as i32;
     let fly = WorkModule::get_int(fighter.module_accessor, *FIGHTER_WARIO_GASS_LEVEL_FLY);
     let l = WorkModule::get_int(fighter.module_accessor, *FIGHTER_WARIO_GASS_LEVEL_L);
     let m = WorkModule::get_int(fighter.module_accessor, *FIGHTER_WARIO_GASS_LEVEL_M);
@@ -289,7 +289,7 @@ unsafe extern "C" fn downb_main_loop(fighter: &mut L2CFighterCommon) -> L2CValue
         }
     }
     let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-    let tens = (COIN_COUNT[ENTRY_ID] / 10) as i32;
+    let tens = (VariableModule::get_int((fighter.module_accessor) as *mut _, FIGHTER_WARIO_INSTANCE_WORK_ID_INT_COIN_COUNT) / 10) as i32;
     let fly = WorkModule::get_int(fighter.module_accessor, *FIGHTER_WARIO_GASS_LEVEL_FLY);
     let l = WorkModule::get_int(fighter.module_accessor, *FIGHTER_WARIO_GASS_LEVEL_L);
     let m = WorkModule::get_int(fighter.module_accessor, *FIGHTER_WARIO_GASS_LEVEL_M);
@@ -322,6 +322,6 @@ unsafe extern "C" fn downb_main_loop(fighter: &mut L2CFighterCommon) -> L2CValue
 unsafe extern "C" fn downb_end(fighter: &mut L2CWeaponCommon) -> L2CValue {
     let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 
     let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-    COIN_COUNT[ENTRY_ID] = 0;
+    VariableModule::set_int((boma) as *mut _, 0, FIGHTER_WARIO_INSTANCE_WORK_ID_INT_COIN_COUNT);
     0.into()
 }

@@ -90,7 +90,7 @@ unsafe extern "C" fn byleth_neutralb(fighter: &mut L2CAgentBase) {
 		if macros::is_excute(fighter) {
 				let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);   
 				let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-				if ArticleModule::is_exist(boma, *FIGHTER_MASTER_GENERATE_ARTICLE_ARROW1) == false && IS_THUNDER[ENTRY_ID] == false {
+				if ArticleModule::is_exist(boma, *FIGHTER_MASTER_GENERATE_ARTICLE_ARROW1) == false && VariableModule::is_flag((boma) as *mut _, FIGHTER_MASTER_INSTANCE_WORK_ID_FLAG_IS_THUNDER) == false {
 					ArticleModule::generate_article(boma, *FIGHTER_MASTER_GENERATE_ARTICLE_ARROW1,false,0);
 				};
 		}
@@ -98,7 +98,7 @@ unsafe extern "C" fn byleth_neutralb(fighter: &mut L2CAgentBase) {
 		if macros::is_excute(fighter) {
 				let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);   
 				let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-				if IS_THUNDER[ENTRY_ID] == false {
+				if VariableModule::is_flag((boma) as *mut _, FIGHTER_MASTER_INSTANCE_WORK_ID_FLAG_IS_THUNDER) == false {
 					ArticleModule::shoot_exist(boma, *FIGHTER_MASTER_GENERATE_ARTICLE_ARROW1, smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL), false);
 				} else {
 					macros::ATTACK(fighter, /*ID*/ 1, /*Part*/ 0, /*Bone*/ Hash40::new("top"), /*Damage*/ 6.0, /*Angle*/ 270, /*KBG*/ 95, /*FKB*/ 0, /*BKB*/ 40, /*Size*/ 3.6, /*X*/ 0.0, /*Y*/ 55.0, /*Z*/ 28.0, /*X2*/ Some(0.0), /*Y2*/ Some(40.0), /*Z2*/ Some(28.0), /*Hitlag*/ 1.0, /*SDI*/ 1.0, /*Clang_Rebound*/ *ATTACK_SETOFF_KIND_OFF, /*FacingRestrict*/ *ATTACK_LR_CHECK_F, /*SetWeight*/ false, /*ShieldDamage*/ 3, /*Trip*/ 0.0, /*Rehit*/ 0, /*Reflectable*/ false, /*Absorbable*/ true, /*Flinchless*/ false, /*DisableHitlag*/ false, /*Direct_Hitbox*/ false, /*Ground_or_Air*/ *COLLISION_SITUATION_MASK_GA, /*Hitbits*/ *COLLISION_CATEGORY_MASK_ALL, /*CollisionPart*/ *COLLISION_PART_MASK_ALL, /*FriendlyFire*/ false, /*Effect*/ Hash40::new("collision_attr_elec"), /*SFXLevel*/ *ATTACK_SOUND_LEVEL_M, /*SFXType*/ *COLLISION_SOUND_ATTR_ELEC, /*Type*/ *ATTACK_REGION_ENERGY);
@@ -114,10 +114,10 @@ unsafe extern "C" fn byleth_neutralb(fighter: &mut L2CAgentBase) {
 				AttackModule::clear_all(fighter.module_accessor);
 				let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);   
 				let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-				if IS_THUNDER[ENTRY_ID] == false {
-					IS_THUNDER[ENTRY_ID] = true;
+				if VariableModule::is_flag((boma) as *mut _, FIGHTER_MASTER_INSTANCE_WORK_ID_FLAG_IS_THUNDER) == false {
+					VariableModule::set_flag((boma) as *mut _, true, FIGHTER_MASTER_INSTANCE_WORK_ID_FLAG_IS_THUNDER);
 				} else {
-					IS_THUNDER[ENTRY_ID] = false;
+					VariableModule::set_flag((boma) as *mut _, false, FIGHTER_MASTER_INSTANCE_WORK_ID_FLAG_IS_THUNDER);
 				};
 		}
 		frame(fighter.lua_state_agent, 27.0);
@@ -131,7 +131,7 @@ unsafe extern "C" fn byleth_neutralb_eff(fighter: &mut L2CAgentBase) {
 		if macros::is_excute(fighter) {
 				let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);  
 				let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize; 
-				if IS_THUNDER[ENTRY_ID] == true {
+				if VariableModule::is_flag((boma) as *mut _, FIGHTER_MASTER_INSTANCE_WORK_ID_FLAG_IS_THUNDER) == true {
 					if StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR {
 						macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_thunder"), Hash40::new("haver"), 0, 0, 0, 0, 0, 0, 0.75, true);
 					} else {
@@ -147,7 +147,7 @@ unsafe extern "C" fn kirby_byleth_neutralb_eff(fighter: &mut L2CAgentBase) {
 		if macros::is_excute(fighter) {
 				let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);  
 				let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize; 
-				if IS_THUNDER[ENTRY_ID] == true {
+				if VariableModule::is_flag((boma) as *mut _, FIGHTER_MASTER_INSTANCE_WORK_ID_FLAG_IS_THUNDER) == true {
 					if StatusModule::situation_kind(boma) == *SITUATION_KIND_AIR {
 						macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_thunder"), Hash40::new("haver"), 0, 0, 0, 0, 0, 0, 0.75, true);
 					} else {
@@ -163,7 +163,7 @@ unsafe extern "C" fn byleth_neutralb_snd(fighter: &mut L2CAgentBase) {
 		if macros::is_excute(fighter) {
 				let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);  
 				let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize; 
-				if IS_THUNDER[ENTRY_ID] == true {
+				if VariableModule::is_flag((boma) as *mut _, FIGHTER_MASTER_INSTANCE_WORK_ID_FLAG_IS_THUNDER) == true {
 					macros::PLAY_SE(fighter, Hash40::new("se_common_smashswing_02"));
 					macros::PLAY_SE(fighter, Hash40::new("se_common_down_m_02"));
 					macros::PLAY_SE(fighter, Hash40::new("se_common_electric_hit_s"));

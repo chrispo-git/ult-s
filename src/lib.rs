@@ -41,7 +41,11 @@ pub fn is_on_ryujinx() -> bool {
     }
 }
 mod state_manager;
+mod variable_module;
+mod param_cache;
 mod s_macros;
+mod config;
+mod config_apply;
 
 
 pub fn quick_validate_install() -> bool {
@@ -309,25 +313,6 @@ mod younglink;
 mod yoshi;
 mod zelda;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 std::arch::global_asm!(
     r#"
     .section .nro_header
@@ -365,11 +350,29 @@ pub extern "C" fn is_ultimate_s() {}
 
 #[no_mangle]
 pub extern "C" fn main() {
+    println!("Running config setup");
+    match config::init() {
+        Ok(_) => {
+            println!("Config loaded successfully");
+        }
+        Err(e) => {
+            if is_on_ryujinx() {
+                println!("Your config.toml is incorrect! Please provide a correct one.");
+            } else {
+                DialogOk::ok("Your config.toml is incorrect! Please provide a correct one.");
+            }
+            return;
+        }
+    }
+    config::init();
+    println!("Complete config setup.");
 
     if !quick_validate_install() {
         return; // don't do anything else since they don't have all dependencies
     }
 
+
+    println!("Doing online play stuff");
     //allows online play with added chars
     unsafe { 
         if Path::new("sd:/atmosphere/contents/01006a800016e000/romfs/skyline/plugins/libthe_csk_collection.nro").is_file() {
@@ -381,6 +384,7 @@ pub extern "C" fn main() {
         }
     }
 	
+    println!("Installing some hooks");
 	//Common
     if !is_on_ryujinx(){
         println!("We're on switch! Yay!");
@@ -417,6 +421,8 @@ pub extern "C" fn main() {
     println!("about to install scripts");
 	util::install();
     println!("util installed");
+    config_apply::install();
+    println!("config_apply installed");
 	common::install();
 	controls::install();
 	cpu::install();
@@ -852,6 +858,12 @@ pub extern "C" fn main() {
     peppy::install();
     
     println!("added chars installed");
+
+    param_cache::install();
+    println!("param_cache installed");
+    unsafe {
+        util::reload_config_values();
+    }
 
 
 

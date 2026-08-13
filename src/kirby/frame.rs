@@ -57,17 +57,17 @@ unsafe extern "C" fn kirby_frame(fighter: &mut L2CFighterCommon) {
 			};
 
 			//Downb shit
-			if DOWNB_JUMP[ENTRY_ID] && status_kind == *FIGHTER_STATUS_KIND_JUMP {
+			if VariableModule::is_flag((boma) as *mut _, FIGHTER_KIRBY_INSTANCE_WORK_ID_FLAG_DOWNB_JUMP) && status_kind == *FIGHTER_STATUS_KIND_JUMP {
 				MotionModule::change_motion(boma, smash::phx::Hash40::new("special_lw2"), 0.0, 1.0, false, 0.0, false, false);
-				DOWNB_JUMP[ENTRY_ID] = false;
+				VariableModule::set_flag((boma) as *mut _, false, FIGHTER_KIRBY_INSTANCE_WORK_ID_FLAG_DOWNB_JUMP);
 			};
-			if DOWNB_JUMP[ENTRY_ID] && status_kind != *FIGHTER_STATUS_KIND_JUMP {
-				DOWNB_JUMP[ENTRY_ID] = false;
+			if VariableModule::is_flag((boma) as *mut _, FIGHTER_KIRBY_INSTANCE_WORK_ID_FLAG_DOWNB_JUMP) && status_kind != *FIGHTER_STATUS_KIND_JUMP {
+				VariableModule::set_flag((boma) as *mut _, false, FIGHTER_KIRBY_INSTANCE_WORK_ID_FLAG_DOWNB_JUMP);
 			};
 			if [hash40("special_lw")].contains(&MotionModule::motion_kind(boma)) {
 				if MotionModule::frame(boma) >= 4.0 && MotionModule::frame(boma) <= 24.0 {
 					if AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_HIT){
-						DOWNB_JUMP[ENTRY_ID] = true;
+						VariableModule::set_flag((boma) as *mut _, true, FIGHTER_KIRBY_INSTANCE_WORK_ID_FLAG_DOWNB_JUMP);
 						macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_jump_smoke"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1, false);
 						macros::PLAY_SE(fighter, Hash40::new("se_kirby_jump01"));
 						StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_JUMP, true);
@@ -98,34 +98,34 @@ unsafe extern "C" fn kirby_frame(fighter: &mut L2CFighterCommon) {
 				if  MotionModule::frame(boma) < 2.0 {
 					let stick_x = ControlModule::get_stick_x(boma) * PostureModule::lr(boma);
 					if stick_x <= -0.3 {
-						UPB_ANGLE[ENTRY_ID] = 0;
+						VariableModule::set_int((boma) as *mut _, 0, FIGHTER_KIRBY_INSTANCE_WORK_ID_INT_UPB_ANGLE);
 					} else if stick_x >= 0.45 {
-						UPB_ANGLE[ENTRY_ID] = 2;
+						VariableModule::set_int((boma) as *mut _, 2, FIGHTER_KIRBY_INSTANCE_WORK_ID_INT_UPB_ANGLE);
 					} else {
-						UPB_ANGLE[ENTRY_ID] = 1;
+						VariableModule::set_int((boma) as *mut _, 1, FIGHTER_KIRBY_INSTANCE_WORK_ID_INT_UPB_ANGLE);
 					};
 				};
 				if MotionModule::frame(boma) <= 6.0 && !is_hitlag(boma) {
-					if UPB_ANGLE[ENTRY_ID] == 1 {
+					if VariableModule::get_int((boma) as *mut _, FIGHTER_KIRBY_INSTANCE_WORK_ID_INT_UPB_ANGLE) == 1 {
 						//let speed = smash::phx::Vector3f { x: *(((6.0/MotionModule::frame(boma))*0.003)/6.0)*0.2)-0.03, y: 0.0, z: 0.0 };
 						//KineticModule::add_speed(boma, &speed);
 						macros::SET_SPEED_EX(fighter, 1.0, 0.12, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
 					};
-					if UPB_ANGLE[ENTRY_ID] == 2 {
+					if VariableModule::get_int((boma) as *mut _, FIGHTER_KIRBY_INSTANCE_WORK_ID_INT_UPB_ANGLE) == 2 {
 						//let speed = smash::phx::Vector3f { x: ((6.0/MotionModule::frame(boma))*0.05)/6.0, y: -0.03, z: 0.0 };
 						//KineticModule::add_speed(boma, &speed);
 						macros::SET_SPEED_EX(fighter, 1.75, 0.08, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
 					};
-					if UPB_ANGLE[ENTRY_ID] == 0 {
+					if VariableModule::get_int((boma) as *mut _, FIGHTER_KIRBY_INSTANCE_WORK_ID_INT_UPB_ANGLE) == 0 {
 						//let speed = smash::phx::Vector3f { x: *(((6.0/MotionModule::frame(boma))*0.003)/6.0)*0.2)-0.03, y: 0.0, z: 0.0 };
 						//KineticModule::add_speed(boma, &speed);
 						macros::SET_SPEED_EX(fighter, 0.0, 0.16, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
 					};
 				};
 				if MotionModule::frame(boma) <= 10.0 && MotionModule::frame(boma) > 6.0 && !is_hitlag(boma) {
-					if UPB_ANGLE[ENTRY_ID] != 0 {
+					if VariableModule::get_int((boma) as *mut _, FIGHTER_KIRBY_INSTANCE_WORK_ID_INT_UPB_ANGLE) != 0 {
 						KineticModule::clear_speed_all(boma);
-						if UPB_ANGLE[ENTRY_ID] == 1 {
+						if VariableModule::get_int((boma) as *mut _, FIGHTER_KIRBY_INSTANCE_WORK_ID_INT_UPB_ANGLE) == 1 {
 							let speed = smash::phx::Vector3f { x: -0.1, y: 0.0, z: 0.0 };
 							KineticModule::add_speed(boma, &speed);
 						};
@@ -134,7 +134,7 @@ unsafe extern "C" fn kirby_frame(fighter: &mut L2CFighterCommon) {
 					};
 				};
 			} else {
-				UPB_ANGLE[ENTRY_ID] = 1;
+				VariableModule::set_int((boma) as *mut _, 1, FIGHTER_KIRBY_INSTANCE_WORK_ID_INT_UPB_ANGLE);
 			};
 			if status_kind == *FIGHTER_KIRBY_STATUS_KIND_SPECIAL_HI3 {
 				StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL_SPECIAL, true);
@@ -143,9 +143,9 @@ unsafe extern "C" fn kirby_frame(fighter: &mut L2CFighterCommon) {
 				StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_LANDING_FALL_SPECIAL, true);
 			};
 			if status_kind == *FIGHTER_STATUS_KIND_FINAL || status_kind == *FIGHTER_STATUS_KIND_FINAL_JUMP_END {
-				IS_FINAL[ENTRY_ID] = true;
+				VariableModule::set_flag((boma) as *mut _, true, FIGHTER_KIRBY_INSTANCE_WORK_ID_FLAG_IS_FINAL);
 			} else {
-				IS_FINAL[ENTRY_ID] = false;
+				VariableModule::set_flag((boma) as *mut _, false, FIGHTER_KIRBY_INSTANCE_WORK_ID_FLAG_IS_FINAL);
 			};
 			if [*FIGHTER_STATUS_KIND_ATTACK_AIR, *FIGHTER_STATUS_KIND_SPECIAL_S, *FIGHTER_KIRBY_STATUS_KIND_SPECIAL_S_ATTACK, *FIGHTER_STATUS_KIND_ATTACK_LW4, *FIGHTER_STATUS_KIND_ATTACK_LW4_HOLD, *FIGHTER_STATUS_KIND_ATTACK_LW4_START].contains(&status_kind) == false {
 				ArticleModule::remove_exist(boma, *FIGHTER_KIRBY_GENERATE_ARTICLE_FINALCUTTER,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
@@ -171,14 +171,14 @@ unsafe extern "C" fn ball_frame(weapon : &mut L2CFighterBase) {
 		if frame < 15 {
 			if frame >= 2 {
 				if frame % 4 == 0 {
-					variance[ENTRY_ID] = 8.0;
+					VariableModule::set_float((boma) as *mut _, 8.0, FIGHTER_KIRBY_INSTANCE_WORK_ID_FLOAT_variance);
 				} else if (frame+1) % 2 == 0 {
-					variance[ENTRY_ID] = 4.0;
+					VariableModule::set_float((boma) as *mut _, 4.0, FIGHTER_KIRBY_INSTANCE_WORK_ID_FLOAT_variance);
 				} else {
-					variance[ENTRY_ID] = -2.0;
+					VariableModule::set_float((boma) as *mut _, -2.0, FIGHTER_KIRBY_INSTANCE_WORK_ID_FLOAT_variance);
 				};
 			} else {
-				variance[ENTRY_ID] = 0.0;
+				VariableModule::set_float((boma) as *mut _, 0.0, FIGHTER_KIRBY_INSTANCE_WORK_ID_FLOAT_variance);
 			};
 			if frame % 3 == 0 {
 				let f1: u32 = EffectModule::req_follow(weapon.module_accessor, smash::phx::Hash40::new("sys_fireflower_shot"), smash::phx::Hash40::new("top"), &NONE, &NONE, 1.0, true, 0, 0, 0, 0, 0, true, true) as u32;
@@ -217,11 +217,11 @@ unsafe extern "C" fn ball_frame(weapon : &mut L2CFighterBase) {
 				EffectModule::set_alpha(weapon.module_accessor, F4[ENTRY_ID], 0.5);
 			};
 			if frame >= 2 {
-				let n1 =  smash::phx::Vector3f { x: 0.0, y: 2.0+variance[ENTRY_ID], z: -15.0 };
+				let n1 =  smash::phx::Vector3f { x: 0.0, y: 2.0+VariableModule::get_float((boma) as *mut _, FIGHTER_KIRBY_INSTANCE_WORK_ID_FLOAT_variance), z: -15.0 };
 				EffectModule::set_pos(boma, F3[ENTRY_ID], &n1);
 			};
 			if frame >= 5 {
-				let n2 =  smash::phx::Vector3f { x: 0.0, y: 8.0-variance[ENTRY_ID], z: -24.0 };
+				let n2 =  smash::phx::Vector3f { x: 0.0, y: 8.0-VariableModule::get_float((boma) as *mut _, FIGHTER_KIRBY_INSTANCE_WORK_ID_FLOAT_variance), z: -24.0 };
 				EffectModule::set_pos(boma, F4[ENTRY_ID], &n2);
 			};
 		} else {

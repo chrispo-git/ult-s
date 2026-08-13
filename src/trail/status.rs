@@ -47,7 +47,7 @@ unsafe extern "C" fn fair_init(fighter: &mut L2CFighterCommon) -> L2CValue {
     }
     let _ = fighter.sub_attack_air_uniq_process_init();
 	let ENTRY_ID = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
-	TO_FAIR[ENTRY_ID] = true;
+	VariableModule::set_flag((fighter.module_accessor) as *mut _, true, FIGHTER_TRAIL_INSTANCE_WORK_ID_FLAG_TO_FAIR);
     StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_ATTACK_AIR, false);
     0.into()
 }

@@ -43,41 +43,41 @@ unsafe extern "C" fn pacman_frame(fighter: &mut L2CFighterCommon) {
 			let end_frame = MotionModule::end_frame(boma);
 			let cancel_frame = FighterMotionModuleImpl::get_cancel_frame(boma,smash::phx::Hash40::new_raw(MotionModule::motion_kind(boma)),false) as f32;
 			if smash::app::sv_information::is_ready_go() == false {
-				HYDRANT_POS_X[ENTRY_ID] = 0.0;
-				HYDRANT_POS_Y[ENTRY_ID] = 0.0;
-				TRAMPOLINE_POS_X[ENTRY_ID] = 0.0;
-				TRAMPOLINE_POS_Y[ENTRY_ID] = 0.0;
-				TRAMPOLINE_DELETE_TIMER[ENTRY_ID] = 0;
-				HAS_UPB_ENDS[ENTRY_ID] = false;
+				VariableModule::set_float((boma) as *mut _, 0.0, FIGHTER_PACMAN_INSTANCE_WORK_ID_FLOAT_HYDRANT_POS_X);
+				VariableModule::set_float((boma) as *mut _, 0.0, FIGHTER_PACMAN_INSTANCE_WORK_ID_FLOAT_HYDRANT_POS_Y);
+				VariableModule::set_float((boma) as *mut _, 0.0, FIGHTER_PACMAN_INSTANCE_WORK_ID_FLOAT_TRAMPOLINE_POS_X);
+				VariableModule::set_float((boma) as *mut _, 0.0, FIGHTER_PACMAN_INSTANCE_WORK_ID_FLOAT_TRAMPOLINE_POS_Y);
+				VariableModule::set_int((boma) as *mut _, 0, FIGHTER_PACMAN_INSTANCE_WORK_ID_INT_TRAMPOLINE_DELETE_TIMER);
+				VariableModule::set_flag((boma) as *mut _, false, FIGHTER_PACMAN_INSTANCE_WORK_ID_FLAG_HAS_UPB_ENDS);
 			};
 			if !ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_PACMAN_GENERATE_ARTICLE_FIREHYDRANT) {
-				HYDRANT_POS_X[ENTRY_ID] = 0.0;
-				HYDRANT_POS_Y[ENTRY_ID] = 0.0;
-				WE_BOUNCE_NOW[ENTRY_ID] = false;
+				VariableModule::set_float((boma) as *mut _, 0.0, FIGHTER_PACMAN_INSTANCE_WORK_ID_FLOAT_HYDRANT_POS_X);
+				VariableModule::set_float((boma) as *mut _, 0.0, FIGHTER_PACMAN_INSTANCE_WORK_ID_FLOAT_HYDRANT_POS_Y);
+				VariableModule::set_flag((boma) as *mut _, false, FIGHTER_PACMAN_INSTANCE_WORK_ID_FLAG_WE_BOUNCE_NOW);
 			}
 			if !ArticleModule::is_exist(fighter.module_accessor, *FIGHTER_PACMAN_GENERATE_ARTICLE_TRAMPOLINE) {
-				TRAMPOLINE_POS_X[ENTRY_ID] = 0.0;
-				TRAMPOLINE_POS_Y[ENTRY_ID] = 0.0;
-				TRAMPOLINE_DELETE_TIMER[ENTRY_ID] = 0;
-				WE_BOUNCE_NOW[ENTRY_ID] = false;
+				VariableModule::set_float((boma) as *mut _, 0.0, FIGHTER_PACMAN_INSTANCE_WORK_ID_FLOAT_TRAMPOLINE_POS_X);
+				VariableModule::set_float((boma) as *mut _, 0.0, FIGHTER_PACMAN_INSTANCE_WORK_ID_FLOAT_TRAMPOLINE_POS_Y);
+				VariableModule::set_int((boma) as *mut _, 0, FIGHTER_PACMAN_INSTANCE_WORK_ID_INT_TRAMPOLINE_DELETE_TIMER);
+				VariableModule::set_flag((boma) as *mut _, false, FIGHTER_PACMAN_INSTANCE_WORK_ID_FLAG_WE_BOUNCE_NOW);
 			}
-			if TRAMPOLINE_DELETE_TIMER[ENTRY_ID] > 0 {
-				TRAMPOLINE_DELETE_TIMER[ENTRY_ID] -= 1; 
+			if VariableModule::get_int((boma) as *mut _, FIGHTER_PACMAN_INSTANCE_WORK_ID_INT_TRAMPOLINE_DELETE_TIMER) > 0 {
+				VariableModule::dec_int((boma) as *mut _, FIGHTER_PACMAN_INSTANCE_WORK_ID_INT_TRAMPOLINE_DELETE_TIMER);
 			}
 			if status_kind == *FIGHTER_PACMAN_STATUS_KIND_SPECIAL_HI_LOOP && frame > 5.0{
 				StatusModule::change_status_request_from_script(boma, *FIGHTER_PACMAN_STATUS_KIND_SPECIAL_S_RETURN, false);
-				HAS_UPB_ENDS[ENTRY_ID] = true;
+				VariableModule::set_flag((boma) as *mut _, true, FIGHTER_PACMAN_INSTANCE_WORK_ID_FLAG_HAS_UPB_ENDS);
 			}
 			if situation_kind != *SITUATION_KIND_AIR || (*FIGHTER_STATUS_KIND_DAMAGE..*FIGHTER_STATUS_KIND_DAMAGE_FALL).contains(&status_kind) || StopModule::is_damage(boma) {
-				HAS_UPB_ENDS[ENTRY_ID] = false;
+				VariableModule::set_flag((boma) as *mut _, false, FIGHTER_PACMAN_INSTANCE_WORK_ID_FLAG_HAS_UPB_ENDS);
 				WorkModule::off_flag(boma, *FIGHTER_PACMAN_INSTANCE_WORK_ID_FLAG_SPECIAL_HI_FALL);
 			}
-			if status_kind != *FIGHTER_PACMAN_STATUS_KIND_SPECIAL_S_RETURN && situation_kind == *SITUATION_KIND_AIR && HAS_UPB_ENDS[ENTRY_ID]{
+			if status_kind != *FIGHTER_PACMAN_STATUS_KIND_SPECIAL_S_RETURN && situation_kind == *SITUATION_KIND_AIR && VariableModule::is_flag((boma) as *mut _, FIGHTER_PACMAN_INSTANCE_WORK_ID_FLAG_HAS_UPB_ENDS){
 				if cancel_frame != 0.0 && cancel_frame - frame < 4.0 {
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL_SPECIAL, false);
 				}
 			}
-			if status_kind == *FIGHTER_PACMAN_STATUS_KIND_SPECIAL_S_RETURN && situation_kind == *SITUATION_KIND_AIR && HAS_UPB_ENDS[ENTRY_ID]{
+			if status_kind == *FIGHTER_PACMAN_STATUS_KIND_SPECIAL_S_RETURN && situation_kind == *SITUATION_KIND_AIR && VariableModule::is_flag((boma) as *mut _, FIGHTER_PACMAN_INSTANCE_WORK_ID_FLAG_HAS_UPB_ENDS){
 				let accel_y = WorkModule::get_param_float(fighter.module_accessor, hash40("air_accel_y"), 0);
 				let stable_accel_y = WorkModule::get_param_float(fighter.module_accessor, hash40("air_speed_y_stable"), 0);
 				KineticModule::resume_energy(boma, *FIGHTER_KINETIC_ENERGY_ID_CONTROL);
@@ -104,7 +104,7 @@ unsafe extern "C" fn pacman_frame(fighter: &mut L2CFighterCommon) {
 			}
 		}
 		//println!("Jump num: {}", WorkModule::get_int(boma, *FIGHTER_PACMAN_INSTANCE_WORK_ID_INT_SPECIAL_HI_JUMP_NUM));
-		//println!("Hydrant [{}, {}] Trampoline [{}, {}]", HYDRANT_POS_X[ENTRY_ID], HYDRANT_POS_Y[ENTRY_ID], TRAMPOLINE_POS_X[ENTRY_ID], TRAMPOLINE_POS_Y[ENTRY_ID]);
+		//println!("Hydrant [{}, {}] Trampoline [{}, {}]", VariableModule::get_float((boma) as *mut _, FIGHTER_PACMAN_INSTANCE_WORK_ID_FLOAT_HYDRANT_POS_X), VariableModule::get_float((boma) as *mut _, FIGHTER_PACMAN_INSTANCE_WORK_ID_FLOAT_HYDRANT_POS_Y), VariableModule::get_float((boma) as *mut _, FIGHTER_PACMAN_INSTANCE_WORK_ID_FLOAT_TRAMPOLINE_POS_X), VariableModule::get_float((boma) as *mut _, FIGHTER_PACMAN_INSTANCE_WORK_ID_FLOAT_TRAMPOLINE_POS_Y));
 	}
 }
 unsafe extern "C" fn hydrant_frame(weapon: &mut L2CFighterBase) {
@@ -118,12 +118,12 @@ unsafe extern "C" fn hydrant_frame(weapon: &mut L2CFighterBase) {
 			if KineticModule::get_sum_speed_y(weapon.module_accessor, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN) < 0.0 {
 				offset = 0.0;
 			}
-			HYDRANT_POS_X[ENTRY_ID] = PostureModule::pos_x(weapon.module_accessor);
-			HYDRANT_POS_Y[ENTRY_ID] = PostureModule::pos_y(weapon.module_accessor) + offset;
-			if ((HYDRANT_POS_X[ENTRY_ID]  - TRAMPOLINE_POS_X[ENTRY_ID]).abs() < 11.0) &&
-				((HYDRANT_POS_Y[ENTRY_ID]  - TRAMPOLINE_POS_Y[ENTRY_ID]).abs() < 3.0) &&
-				(ArticleModule::is_exist(&mut *boma, *FIGHTER_PACMAN_GENERATE_ARTICLE_TRAMPOLINE) && TRAMPOLINE_POS_Y[ENTRY_ID] != 0.0)  {
-					WE_BOUNCE_NOW[ENTRY_ID] = true;
+			VariableModule::set_float((boma) as *mut _, PostureModule::pos_x(weapon.module_accessor), FIGHTER_PACMAN_INSTANCE_WORK_ID_FLOAT_HYDRANT_POS_X);
+			VariableModule::set_float((boma) as *mut _, PostureModule::pos_y(weapon.module_accessor) + offset, FIGHTER_PACMAN_INSTANCE_WORK_ID_FLOAT_HYDRANT_POS_Y);
+			if ((VariableModule::get_float((boma) as *mut _, FIGHTER_PACMAN_INSTANCE_WORK_ID_FLOAT_HYDRANT_POS_X)  - VariableModule::get_float((boma) as *mut _, FIGHTER_PACMAN_INSTANCE_WORK_ID_FLOAT_TRAMPOLINE_POS_X)).abs() < 11.0) &&
+				((VariableModule::get_float((boma) as *mut _, FIGHTER_PACMAN_INSTANCE_WORK_ID_FLOAT_HYDRANT_POS_Y)  - VariableModule::get_float((boma) as *mut _, FIGHTER_PACMAN_INSTANCE_WORK_ID_FLOAT_TRAMPOLINE_POS_Y)).abs() < 3.0) &&
+				(ArticleModule::is_exist(&mut *boma, *FIGHTER_PACMAN_GENERATE_ARTICLE_TRAMPOLINE) && VariableModule::get_float((boma) as *mut _, FIGHTER_PACMAN_INSTANCE_WORK_ID_FLOAT_TRAMPOLINE_POS_Y) != 0.0)  {
+					VariableModule::set_flag((boma) as *mut _, true, FIGHTER_PACMAN_INSTANCE_WORK_ID_FLAG_WE_BOUNCE_NOW);
 					if status_kind != *WEAPON_PACMAN_FIREHYDRANT_STATUS_KIND_FLY {
 						StatusModule::change_status_request_from_script(weapon.module_accessor, *WEAPON_PACMAN_FIREHYDRANT_STATUS_KIND_FLY, false);
 						macros::SET_SPEED_EX(weapon, 0.0, 1.5, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
@@ -144,16 +144,16 @@ unsafe extern "C" fn trampoline_frame(weapon: &mut L2CFighterBase) {
 		let status_kind = smash::app::lua_bind::StatusModule::status_kind(weapon.module_accessor);
 		let ENTRY_ID = WorkModule::get_int(&mut *boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
         if smash::app::utility::get_kind(&mut *boma) == *FIGHTER_KIND_PACMAN {
-			TRAMPOLINE_POS_X[ENTRY_ID] = PostureModule::pos_x(weapon.module_accessor);
-			TRAMPOLINE_POS_Y[ENTRY_ID] = PostureModule::pos_y(weapon.module_accessor);
-			if ((((HYDRANT_POS_X[ENTRY_ID]  - TRAMPOLINE_POS_X[ENTRY_ID]).abs() < 11.0) && ((HYDRANT_POS_Y[ENTRY_ID]  - TRAMPOLINE_POS_Y[ENTRY_ID]).abs() < 3.0)) ||
-				WE_BOUNCE_NOW[ENTRY_ID]) &&
-				(ArticleModule::is_exist(&mut *boma, *FIGHTER_PACMAN_GENERATE_ARTICLE_FIREHYDRANT) && HYDRANT_POS_Y[ENTRY_ID] != 0.0) &&
-				(![*WEAPON_PACMAN_TRAMPOLINE_STATUS_KIND_SHAKE, *WEAPON_PACMAN_TRAMPOLINE_STATUS_KIND_REMOVE].contains(&status_kind) || TRAMPOLINE_DELETE_TIMER[ENTRY_ID] == 0) {
+			VariableModule::set_float((boma) as *mut _, PostureModule::pos_x(weapon.module_accessor), FIGHTER_PACMAN_INSTANCE_WORK_ID_FLOAT_TRAMPOLINE_POS_X);
+			VariableModule::set_float((boma) as *mut _, PostureModule::pos_y(weapon.module_accessor), FIGHTER_PACMAN_INSTANCE_WORK_ID_FLOAT_TRAMPOLINE_POS_Y);
+			if ((((VariableModule::get_float((boma) as *mut _, FIGHTER_PACMAN_INSTANCE_WORK_ID_FLOAT_HYDRANT_POS_X)  - VariableModule::get_float((boma) as *mut _, FIGHTER_PACMAN_INSTANCE_WORK_ID_FLOAT_TRAMPOLINE_POS_X)).abs() < 11.0) && ((VariableModule::get_float((boma) as *mut _, FIGHTER_PACMAN_INSTANCE_WORK_ID_FLOAT_HYDRANT_POS_Y)  - VariableModule::get_float((boma) as *mut _, FIGHTER_PACMAN_INSTANCE_WORK_ID_FLOAT_TRAMPOLINE_POS_Y)).abs() < 3.0)) ||
+				VariableModule::is_flag((boma) as *mut _, FIGHTER_PACMAN_INSTANCE_WORK_ID_FLAG_WE_BOUNCE_NOW)) &&
+				(ArticleModule::is_exist(&mut *boma, *FIGHTER_PACMAN_GENERATE_ARTICLE_FIREHYDRANT) && VariableModule::get_float((boma) as *mut _, FIGHTER_PACMAN_INSTANCE_WORK_ID_FLOAT_HYDRANT_POS_Y) != 0.0) &&
+				(![*WEAPON_PACMAN_TRAMPOLINE_STATUS_KIND_SHAKE, *WEAPON_PACMAN_TRAMPOLINE_STATUS_KIND_REMOVE].contains(&status_kind) || VariableModule::get_int((boma) as *mut _, FIGHTER_PACMAN_INSTANCE_WORK_ID_INT_TRAMPOLINE_DELETE_TIMER) == 0) {
 					StatusModule::change_status_request_from_script(weapon.module_accessor, *WEAPON_PACMAN_TRAMPOLINE_STATUS_KIND_SHAKE, false);
-					TRAMPOLINE_DELETE_TIMER[ENTRY_ID] = 30;
+					VariableModule::set_int((boma) as *mut _, 30, FIGHTER_PACMAN_INSTANCE_WORK_ID_INT_TRAMPOLINE_DELETE_TIMER);
 			}
-			if TRAMPOLINE_DELETE_TIMER[ENTRY_ID] == 1 {
+			if VariableModule::get_int((boma) as *mut _, FIGHTER_PACMAN_INSTANCE_WORK_ID_INT_TRAMPOLINE_DELETE_TIMER) == 1 {
 				StatusModule::change_status_request_from_script(weapon.module_accessor, *WEAPON_PACMAN_TRAMPOLINE_STATUS_KIND_REMOVE, false);
 			}
 		};

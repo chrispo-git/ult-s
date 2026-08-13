@@ -38,22 +38,22 @@ unsafe extern "C" fn sora(fighter : &mut L2CFighterCommon) {
 					WorkModule::off_flag(boma, *FIGHTER_TRAIL_INSTANCE_WORK_ID_FLOAT_LANDING_ATTACK_AIR_FRAME_F);
 				};
 				if [*FIGHTER_STATUS_KIND_DEAD, *FIGHTER_STATUS_KIND_LOSE, *FIGHTER_STATUS_KIND_WIN].contains(&status_kind) || smash::app::sv_information::is_ready_go() == false || StatusModule::situation_kind(boma) != *SITUATION_KIND_AIR {
-					HAS_WALLJUMP[ENTRY_ID] = false;
+					VariableModule::set_flag((boma) as *mut _, false, FIGHTER_TRAIL_INSTANCE_WORK_ID_FLAG_HAS_WALLJUMP);
 				};
 				if status_kind == *FIGHTER_STATUS_KIND_ATTACK_AIR {
-					if TO_FAIR[ENTRY_ID] == true && MotionModule::motion_kind(boma) != hash40("attack_air_f"){
+					if VariableModule::is_flag((boma) as *mut _, FIGHTER_TRAIL_INSTANCE_WORK_ID_FLAG_TO_FAIR) == true && MotionModule::motion_kind(boma) != hash40("attack_air_f"){
 						MotionModule::change_motion(boma, Hash40::new("attack_air_f"), 2.0, 1.0, false, 0.0, false, false);
 					};
 					if !WorkModule::is_flag(boma, *FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING) && MotionModule::frame(boma) > 5.0 {
-						TO_FAIR[ENTRY_ID] = false;
+						VariableModule::set_flag((boma) as *mut _, false, FIGHTER_TRAIL_INSTANCE_WORK_ID_FLAG_TO_FAIR);
 					};
 				} else if status_kind == *FIGHTER_STATUS_KIND_LANDING_ATTACK_AIR {
-					if TO_FAIR[ENTRY_ID] == true && MotionModule::motion_kind(boma) != hash40("landing_air_f"){
+					if VariableModule::is_flag((boma) as *mut _, FIGHTER_TRAIL_INSTANCE_WORK_ID_FLAG_TO_FAIR) == true && MotionModule::motion_kind(boma) != hash40("landing_air_f"){
 						let landing = 1.0/(((WorkModule::get_param_float(boma, hash40("landing_attack_air_frame_f"), 0)))/ FighterMotionModuleImpl::get_cancel_frame(boma,smash::phx::Hash40::new_raw(MotionModule::motion_kind(boma)), false)as f32);
 						MotionModule::change_motion(boma, Hash40::new("landing_air_f"), 2.0, landing, false, 0.0, false, false);
 					};
 				} else {
-					TO_FAIR[ENTRY_ID] = false;
+					VariableModule::set_flag((boma) as *mut _, false, FIGHTER_TRAIL_INSTANCE_WORK_ID_FLAG_TO_FAIR);
 				};
 			};
 		}

@@ -82,13 +82,13 @@ unsafe extern "C" fn main_dtilt(fighter: &mut L2CFighterCommon) -> L2CValue {
 	let fighter_kind = smash::app::utility::get_kind(boma);
     let is_ray = true;
     if is_ray && fighter_kind == *FIGHTER_KIND_PIKMIN { //rayman slots
-        if !IS_SLIDE_MOVE[ENTRY_ID] && motion_kind != hash40("slide_attack_lw"){
+        if !VariableModule::is_flag((fighter.module_accessor) as *mut _, FIGHTER_RAYMAN_INSTANCE_WORK_ID_FLAG_IS_SLIDE_MOVE) && motion_kind != hash40("slide_attack_lw"){
             return smashline::original_status(Main, fighter, *FIGHTER_STATUS_KIND_ATTACK_LW3)(fighter);
         } else {
             if motion_kind != hash40("slide_attack_lw") && motion_kind != hash40("slide_stand") {
                 MotionModule::change_motion(fighter.module_accessor, Hash40::new("slide_attack_lw"), -1.0, 1.0, false, 0.0, false, false);
-                IS_SLIDE_MOVE[ENTRY_ID] = false;
-                WAS_SLIDE[ENTRY_ID] = false;
+                VariableModule::set_flag((fighter.module_accessor) as *mut _, false, FIGHTER_RAYMAN_INSTANCE_WORK_ID_FLAG_IS_SLIDE_MOVE);
+                VariableModule::set_flag((fighter.module_accessor) as *mut _, false, FIGHTER_RAYMAN_INSTANCE_WORK_ID_FLAG_WAS_SLIDE);
             }
             0.into() 
         }
@@ -104,13 +104,13 @@ unsafe extern "C" fn main_jab(fighter: &mut L2CFighterCommon) -> L2CValue {
 	let fighter_kind = smash::app::utility::get_kind(boma);
     let is_ray = true;
     if is_ray && fighter_kind == *FIGHTER_KIND_PIKMIN { //rayman slots
-        if !IS_SLIDE_MOVE[ENTRY_ID] && motion_kind != hash40("slide_attack"){
+        if !VariableModule::is_flag((fighter.module_accessor) as *mut _, FIGHTER_RAYMAN_INSTANCE_WORK_ID_FLAG_IS_SLIDE_MOVE) && motion_kind != hash40("slide_attack"){
             return smashline::original_status(Main, fighter, *FIGHTER_STATUS_KIND_ATTACK)(fighter);
         } else {
             if motion_kind != hash40("slide_attack") {
                 MotionModule::change_motion(fighter.module_accessor, Hash40::new("slide_attack"), -1.0, 1.0, false, 0.0, false, false);
-                IS_SLIDE_MOVE[ENTRY_ID] = false;
-                WAS_SLIDE[ENTRY_ID] = false;
+                VariableModule::set_flag((fighter.module_accessor) as *mut _, false, FIGHTER_RAYMAN_INSTANCE_WORK_ID_FLAG_IS_SLIDE_MOVE);
+                VariableModule::set_flag((fighter.module_accessor) as *mut _, false, FIGHTER_RAYMAN_INSTANCE_WORK_ID_FLAG_WAS_SLIDE);
             }
             if MotionModule::is_end(fighter.module_accessor) {
                 fighter.change_status(FIGHTER_STATUS_KIND_WAIT.into(), false.into());
@@ -130,7 +130,7 @@ unsafe extern "C" fn main_jumpsquat(fighter: &mut L2CFighterCommon) -> L2CValue 
 	let fighter_kind = smash::app::utility::get_kind(boma);
     let is_ray = true;
     if is_ray && fighter_kind == *FIGHTER_KIND_PIKMIN { //rayman slots
-        if !IS_SLIDE_MOVE[ENTRY_ID] && motion_kind != hash40("slide_jump_squat"){
+        if !VariableModule::is_flag((fighter.module_accessor) as *mut _, FIGHTER_RAYMAN_INSTANCE_WORK_ID_FLAG_IS_SLIDE_MOVE) && motion_kind != hash40("slide_jump_squat"){
             return smashline::original_status(Main, fighter, *FIGHTER_STATUS_KIND_JUMP_SQUAT)(fighter);
         } else {
             if motion_kind != hash40("slide_jump_squat") {
@@ -173,7 +173,7 @@ unsafe extern "C" fn main_final(fighter: &mut L2CFighterCommon) -> L2CValue {
             KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_FALL);
             KineticModule::suspend_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_CONTROL);
             KineticModule::suspend_energy(fighter.module_accessor, *FIGHTER_KINETIC_ENERGY_ID_GRAVITY);
-            FINAL_DURATION[ENTRY_ID] = 900;
+            VariableModule::set_int((fighter.module_accessor) as *mut _, 900, FIGHTER_RAYMAN_INSTANCE_WORK_ID_INT_FINAL_DURATION);
             X[ENTRY_ID] = 0.0;
             Y[ENTRY_ID] = 0.0;
             ItemModule::remove_item(fighter.module_accessor, 0);
@@ -185,7 +185,7 @@ unsafe extern "C" fn main_final(fighter: &mut L2CFighterCommon) -> L2CValue {
             if MotionModule::is_end(fighter.module_accessor) {
                 MotionModule::change_motion(fighter.module_accessor, Hash40::new("final"), 0.0, 1.0, false, 0.0, false, false);
             }
-            if FINAL_DURATION[ENTRY_ID] < 990 {
+            if VariableModule::get_int((fighter.module_accessor) as *mut _, FIGHTER_RAYMAN_INSTANCE_WORK_ID_INT_FINAL_DURATION) < 990 {
                 if ControlModule::check_button_on_trriger(fighter.module_accessor, *CONTROL_PAD_BUTTON_SPECIAL) || ControlModule::check_button_on_trriger(fighter.module_accessor, *CONTROL_PAD_BUTTON_ATTACK) {
                     MotionModule::change_motion(fighter.module_accessor, Hash40::new("final_shoot"), 0.0, 1.0, false, 0.0, false, false);
                 }
@@ -249,8 +249,8 @@ unsafe extern "C" fn main_final(fighter: &mut L2CFighterCommon) -> L2CValue {
             KineticModule::add_speed(fighter.module_accessor, &speed);
             X[ENTRY_ID] += x_add;
             Y[ENTRY_ID] += y_add;
-            FINAL_DURATION[ENTRY_ID] -= 1;
-            if FINAL_DURATION[ENTRY_ID] <= 0 {
+            VariableModule::dec_int((fighter.module_accessor) as *mut _, FIGHTER_RAYMAN_INSTANCE_WORK_ID_INT_FINAL_DURATION);
+            if VariableModule::get_int((fighter.module_accessor) as *mut _, FIGHTER_RAYMAN_INSTANCE_WORK_ID_INT_FINAL_DURATION) <= 0 {
                 macros::STOP_SE(fighter, Hash40::new("se_common_spirits_pfog_loop"));
                 macros::PLAY_SE(fighter, Hash40::new("se_pikmin_attackhard_l01"));
                 macros::PLAY_SE(fighter, Hash40::new("se_common_blowaway_s"));
@@ -364,7 +364,7 @@ unsafe extern "C" fn main_utilt(fighter: &mut L2CFighterCommon) -> L2CValue {
 	let fighter_kind = smash::app::utility::get_kind(boma);
     let is_ray = true;
     if is_ray && fighter_kind == *FIGHTER_KIND_PIKMIN { //rayman slots
-        if !IS_SLIDE_MOVE[ENTRY_ID] && motion_kind != hash40("slide_attack_hi"){
+        if !VariableModule::is_flag((fighter.module_accessor) as *mut _, FIGHTER_RAYMAN_INSTANCE_WORK_ID_FLAG_IS_SLIDE_MOVE) && motion_kind != hash40("slide_attack_hi"){
             if motion_kind != hash40("attack_hi3") {
                 MotionModule::change_motion(fighter.module_accessor, Hash40::new("attack_hi3"), -1.0, 1.0, false, 0.0, false, false);
             }
@@ -374,8 +374,8 @@ unsafe extern "C" fn main_utilt(fighter: &mut L2CFighterCommon) -> L2CValue {
         } else {
             if motion_kind != hash40("slide_attack_hi") {
                 MotionModule::change_motion(fighter.module_accessor, Hash40::new("slide_attack_hi"), -1.0, 1.0, false, 0.0, false, false);
-                IS_SLIDE_MOVE[ENTRY_ID] = false;
-                WAS_SLIDE[ENTRY_ID] = false;
+                VariableModule::set_flag((fighter.module_accessor) as *mut _, false, FIGHTER_RAYMAN_INSTANCE_WORK_ID_FLAG_IS_SLIDE_MOVE);
+                VariableModule::set_flag((fighter.module_accessor) as *mut _, false, FIGHTER_RAYMAN_INSTANCE_WORK_ID_FLAG_WAS_SLIDE);
             }
             if MotionModule::is_end(fighter.module_accessor) {
                 fighter.change_status(FIGHTER_STATUS_KIND_FALL.into(), false.into());
