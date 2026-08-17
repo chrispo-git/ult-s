@@ -36,7 +36,6 @@ pub const MAX_LOCKOUT : i32 = 10;
 
 //Universal Settings
 
-pub static mut IS_MECHANICS_ENABLED : bool = true;
 
 
 // Info State
@@ -170,7 +169,7 @@ pub unsafe fn is_enable_transition_term_hook(boma: &mut smash::app::BattleObject
 pub unsafe fn on_flag_hook(boma: &mut smash::app::BattleObjectModuleAccessor, int: c_int) -> () {
 	if smash::app::utility::get_category(boma) == *BATTLE_OBJECT_CATEGORY_FIGHTER { 
 		let config = config::get();
-		if int == *FIGHTER_STATUS_ATTACK_FLAG_ENABLE_100 && is_mechanics_enabled() {
+		if int == *FIGHTER_STATUS_ATTACK_FLAG_ENABLE_100 && config.attacks.jab_cancel != 2 {
 			let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
 			crate::with_state!(ENTRY_ID, JabState, state, {
 				state.has_enable_100_on = true;
@@ -741,14 +740,7 @@ pub(crate) unsafe fn is_tap_djc(boma: &mut smash::app::BattleObjectModuleAccesso
 	return TAP_JUMP_BUFFER[ENTRY_ID] <= 0;
 }
 
-
-#[inline(always)]
-pub(crate) unsafe fn is_mechanics_enabled() -> bool {
-	return true;
-}
-
 pub(crate) unsafe fn reload_config_values() -> () {
-	IS_MECHANICS_ENABLED = !Path::new("sd:/ultimate/ult-s/sys-flags/mechanics.flag").is_file();
 
 	config::reload();
 
