@@ -71,6 +71,13 @@ impl VariableModule {
     pub unsafe fn off_flag(module_accessor: *mut BattleObjectModuleAccessor, id: i32) {
         Self::set_flag(module_accessor, false, id);
     }
+    pub unsafe fn flip_flag(module_accessor: *mut BattleObjectModuleAccessor, id: i32) {
+        if Self::is_flag(module_accessor, id) {
+            Self::set_flag(module_accessor, false, id);
+        } else {
+            Self::set_flag(module_accessor, true, id);
+        }
+    }
 
     pub unsafe fn clear(module_accessor: *mut BattleObjectModuleAccessor) {
         let id = (*module_accessor).battle_object_id;
