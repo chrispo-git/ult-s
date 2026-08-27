@@ -5,8 +5,8 @@ use crate::util::*;
 use smash::lib::lua_const::*;
 use smash::hash40;
 
-static FIGHTER_KIRBY_INSTANCE_WORK_ID_FLAG_DOWNB_JUMP : i32 = 0;
-static FIGHTER_KIRBY_INSTANCE_WORK_ID_INT_UPB_ANGLE : i32 = 1;
+static FIGHTER_KIRBY_INSTANCE_WORK_ID_FLAG_DOWNB_JUMP : i32 = 300;
+static FIGHTER_KIRBY_INSTANCE_WORK_ID_INT_UPB_ANGLE : i32 = 301;
 //0 - Inwards
 //1 - Middle
 //2 - Outwards
