@@ -52,7 +52,7 @@ unsafe extern "C" fn pac_dair(fighter: &mut L2CAgentBase) {
 		}
 		frame(fighter.lua_state_agent, 14.0);
 		if macros::is_excute(fighter) {
-            macros::SET_SPEED_EX(fighter, 0.0, -2.8, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+            macros::SET_SPEED_EX(fighter, 0.0, -3.5, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
             JostleModule::set_status(fighter.module_accessor, false);
         }
 		frame(fighter.lua_state_agent, 15.0);
