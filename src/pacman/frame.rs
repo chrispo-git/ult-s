@@ -89,7 +89,7 @@ unsafe extern "C" fn pacman_frame(fighter: &mut L2CFighterCommon) {
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL_SPECIAL, false);
 				}
 			}
-			if [hash40("special_lw_failure"), hash40("special_air_lw_failure")].contains(&motion_kind) {
+			if crate::is_motion!(motion_kind, "attack_air_lw") {
 				if StatusModule::is_situation_changed(boma) && situation_kind == *SITUATION_KIND_GROUND{
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_LANDING_FALL_SPECIAL, true);
 					WorkModule::set_float(boma, 25.0, *FIGHTER_INSTANCE_WORK_ID_FLOAT_LANDING_FRAME);
