@@ -58,17 +58,21 @@ pub fn install() {
 		
 unsafe extern "C" fn byleth_arrow_effect(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
-		if macros::is_excute(fighter) {
-        	macros::EFFECT_FOLLOW(fighter, Hash40::new("sys_fireflower_shot"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.25, false);
-			EffectModule::set_rate_last(fighter.module_accessor, 0.1);
-		}
 		for _ in 0..i32::MAX {
 			if macros::is_excute(fighter) {
-				macros::EFFECT(fighter, Hash40::new("sys_fireflower_shot"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 0.5, 0, 0, 0, 0, 0, 0, true);
+				let scale = smash::phx::Vector3f { x: 0.4, y: 0.4, z: 0.4};
+				EffectModule::set_scale_last(fighter.module_accessor, &scale);
+				macros::EFFECT(fighter, Hash40::new("sys_fireflower_shot"), Hash40::new("top"), 0, 0, 0, 0, 0, 0, 1.25, 0, 0, 0, 0, 0, 0, true);
+				EffectModule::set_rate_last(fighter.module_accessor, 0.75);
 			}
 			wait(fighter.lua_state_agent, 1.0);
 		}
-}
+		wait(fighter.lua_state_agent, 1.0);
+		if macros::is_excute(fighter) {
+			let scale = smash::phx::Vector3f { x: 0.4, y: 0.4, z: 0.4};
+			EffectModule::set_scale_last(fighter.module_accessor, &scale);
+		}
+	}
 unsafe extern "C" fn byleth_arrow(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
