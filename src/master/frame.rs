@@ -54,7 +54,7 @@ unsafe extern "C" fn master_frame(fighter: &mut L2CFighterCommon) {
 unsafe extern "C" fn master_kirby_frame(fighter: &mut L2CFighterCommon) {
     unsafe {
 		if smash::app::sv_information::is_ready_go() == false {
-			VariableModule::set_flag(fighter.module_accessor false, FIGHTER_MASTER_INSTANCE_WORK_ID_FLAG_IS_THUNDER);
+			VariableModule::set_flag(fighter.module_accessor, false, FIGHTER_MASTER_INSTANCE_WORK_ID_FLAG_IS_THUNDER);
 		};
 	}
 }

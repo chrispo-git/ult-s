@@ -150,7 +150,7 @@ unsafe extern "C" fn byleth_air_neutralb_exp(fighter: &mut L2CAgentBase) {
 unsafe extern "C" fn byleth_neutralb_start(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
-			if smash::app::utility::get_kind(fighter.module_accessor) == *FIGHTER_KIND_MASTER {
+			if smash::app::utility::get_kind(smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent)) == *FIGHTER_KIND_MASTER {
 				StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_MASTER_STATUS_KIND_SPECIAL_N_SHOOT, true);
 			} else {
 				StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_KIRBY_STATUS_KIND_MASTER_SPECIAL_N_SHOOT, true);
