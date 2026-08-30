@@ -733,6 +733,21 @@ pub(crate) fn is_on_ryujinx() -> bool {
     }
 }
 
+/// Whether the native Skyline web-menu implementation should be used.
+///
+/// The legacy address heuristic remains the safe default for emulators that do
+/// not implement the WebApplet protocol. Implementations that do support it
+/// can opt in without pretending to be hardware by creating this file.
+#[inline(always)]
+pub(crate) fn web_menus_supported() -> bool {
+    if Path::new("sd:/ultimate/ult-s/web_menus.flag").is_file() {
+        println!("Using native web menus (web_menus.flag present)");
+        return true;
+    }
+
+    !is_on_ryujinx()
+}
+
 
 
 #[inline(always)]

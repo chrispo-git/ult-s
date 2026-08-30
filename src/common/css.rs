@@ -15,7 +15,7 @@ static mut IS_UNPRESSED : bool = false;
 #[skyline::hook(offset = 0x1792dc0, inline)]
 unsafe fn on_rule_selection(_: &skyline::hooks::InlineCtx) {
     if ninput::any::is_down(ninput::Buttons::R) {
-        if !is_on_ryujinx() {
+        if web_menus_supported() {
             show_gamemodes();
         } else {
             show_gamemodes_emu();
@@ -38,7 +38,7 @@ unsafe fn css_main_loop(arg: *const CharaSelect) {
         }
         if ninput::any::is_down(ninput::Buttons::MINUS) {
             if !IS_UNPRESSED {
-                if !is_on_ryujinx() {
+                if web_menus_supported() {
                     show_mod_settings();
                 } else {
                     show_mod_settings_emu();
