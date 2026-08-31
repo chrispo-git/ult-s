@@ -87,6 +87,7 @@ pub fn install() {
         .status(End, *FIGHTER_SAMUS_STATUS_KIND_SPECIAL_AIR_LW, special_lw_end)
         .status(End, *FIGHTER_SAMUS_STATUS_KIND_SPECIAL_GROUND_LW, special_air_lw_end)
         .status(End, *FIGHTER_STATUS_KIND_SPECIAL_HI, special_hi_end)
+        .status(Exit, *FIGHTER_STATUS_KIND_SPECIAL_HI, special_hi_end)
         .status(Pre, *FIGHTER_STATUS_KIND_SPECIAL_HI, special_hi_pre)
         .install();
 
