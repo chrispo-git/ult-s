@@ -19,9 +19,7 @@ pub fn install() {
     Agent::new("miigunner")
     .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("game_attacks4", gunner_fsmash, Priority::Low)    
-    .acmd("game_attackhi4", gunner_usmash, Priority::Low)    
-    .acmd("game_attacklw4", gunner_dsmash, Priority::Low)    
-    .acmd("sound_attacklw4", gunner_dsmash_sound, Priority::Low)      
+    .acmd("game_attackhi4", gunner_usmash, Priority::Low)       
     .install();
 }
 
@@ -120,49 +118,5 @@ unsafe extern "C" fn gunner_usmash(fighter: &mut L2CAgentBase) {
     wait(fighter.lua_state_agent, 2.0);
     if macros::is_excute(fighter) {
         AttackModule::clear_all(fighter.module_accessor);
-    }
-}
-
-unsafe extern "C" fn gunner_dsmash(fighter: &mut L2CAgentBase) {
-    frame(fighter.lua_state_agent, 6.0);
-    if macros::is_excute(fighter) {
-        WorkModule::on_flag(fighter.module_accessor, *FIGHTER_STATUS_ATTACK_FLAG_START_SMASH_HOLD);
-    }
-	frame(fighter.lua_state_agent, 1.0);
-    macros::FT_MOTION_RATE(fighter, 1.111111111111111);
-    frame(fighter.lua_state_agent, 9.0);
-	macros::FT_MOTION_RATE(fighter, 1.0);
-    if macros::is_excute(fighter) {
-        macros::ATTACK(fighter, 0, 0, Hash40::new("top"), 4.0, 160, 100, 95, 0, 4.0, 0.0, 5.0, 14.0, Some(0.0), Some(5.0), Some(10.0), 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_POS, true, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_fire"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_BOMB);
-        AttackModule::set_attack_height_all(fighter.module_accessor, AttackHeight(*ATTACK_HEIGHT_LOW), false);
-    }
-    wait(fighter.lua_state_agent, 1.0);
-    if macros::is_excute(fighter) {
-        AttackModule::clear_all(fighter.module_accessor);
-    }
-    frame(fighter.lua_state_agent, 24.0);
-    if macros::is_excute(fighter) {
-        macros::ATTACK(fighter, 0, 0, Hash40::new("top"), 12.5, 40, 65, 0, 65, 4.5, 0.0, 5.5, -17.0, Some(0.0), Some(6.0), Some(-10.0), 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_B, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_fire"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_FIRE, *ATTACK_REGION_BOMB);
-        AttackModule::set_attack_height_all(fighter.module_accessor, AttackHeight(*ATTACK_HEIGHT_LOW), false);
-    }
-    wait(fighter.lua_state_agent, 3.0);
-    if macros::is_excute(fighter) {
-        AttackModule::clear_all(fighter.module_accessor);
-    }
-}
-
-unsafe extern "C" fn gunner_dsmash_sound(fighter: &mut L2CAgentBase) {
-    frame(fighter.lua_state_agent, 7.0);
-    if macros::is_excute(fighter) {
-        macros::STOP_SE(fighter, Hash40::new("se_common_smash_start"));
-    }
-    wait(fighter.lua_state_agent, 3.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_SE(fighter, Hash40::new("se_miigunner_smash_l01"));
-        macros::PLAY_SEQUENCE(fighter, Hash40::new("seq_miigunner_rnd_attack03"));
-    }
-    wait(fighter.lua_state_agent, 14.0);
-    if macros::is_excute(fighter) {
-        macros::PLAY_SE(fighter, Hash40::new("se_miigunner_smash_l02"));
     }
 }
