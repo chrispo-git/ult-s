@@ -49,6 +49,10 @@ unsafe extern "C" fn gren_downb(fighter: &mut L2CAgentBase) {
 		if macros::is_excute(fighter) {
 			AttackModule::clear_all(fighter.module_accessor);
 		}
+		frame(fighter.lua_state_agent, 33.0);
+		if AttackModule::is_infliction_status(fighter.module_accessor, *COLLISION_KIND_MASK_HIT) {
+			CancelModule::enable_cancel(fighter.module_accessor);
+		}
 }	
 unsafe extern "C" fn gren_downb_air(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
@@ -78,6 +82,10 @@ unsafe extern "C" fn gren_downb_air(fighter: &mut L2CAgentBase) {
 		macros::FT_MOTION_RATE(fighter, /*FSM*/ 1);
 		if macros::is_excute(fighter) {
 			AttackModule::clear_all(fighter.module_accessor);
+		}
+		frame(fighter.lua_state_agent, 30.0);
+		if AttackModule::is_infliction_status(fighter.module_accessor, *COLLISION_KIND_MASK_HIT) {
+			CancelModule::enable_cancel(fighter.module_accessor);
 		}
 }	
 unsafe extern "C" fn gren_downb_eff(fighter: &mut L2CAgentBase) {
