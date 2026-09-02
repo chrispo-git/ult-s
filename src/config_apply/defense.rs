@@ -156,15 +156,12 @@ pub unsafe fn parry_only(fighter : &mut L2CFighterCommon, status_kind : i32, mot
         }
         if situation_kind == *SITUATION_KIND_GROUND && PARRY_DURATION[ENTRY_ID] == 1 && !(*FIGHTER_STATUS_KIND_DAMAGE..*FIGHTER_STATUS_KIND_DAMAGE_FALL).contains(&status_kind) {
 			StopModule::end_stop(fighter.module_accessor);
-            //println!("End Stun Early");
 			StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_WAIT, false);
             return;
         }
         let frame = MotionModule::frame(fighter.module_accessor);
         if status_kind == *FIGHTER_STATUS_KIND_REBOUND && (frame as i32) == 1 {
-            if is_gamemode("rivals".to_string()) && MotionModule::rate(fighter.module_accessor) == 0.5 {
-                macros::FLASH(fighter, 0.25, 0.25, 0.25, 0.5);
-            }
+            macros::FLASH(fighter, 0.25, 0.25, 0.25, 0.5);
         }
         if status_kind == *FIGHTER_STATUS_KIND_GUARD_OFF {
             WorkModule::on_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_DISABLE_GUARD);
@@ -187,7 +184,7 @@ pub unsafe fn parry_only(fighter : &mut L2CFighterCommon, status_kind : i32, mot
                 },
                 n if n > 6 => {
                     macros::COL_NORMAL(fighter);
-                    let rate = if is_gamemode("rivals".to_string()) { 0.5 } else { 1.0 };
+                    let rate = 0.75;
                     WorkModule::set_float(fighter.module_accessor, rate, *FIGHTER_STATUS_WORK_ID_FLOAT_REBOUND_MOTION_RATE);
                     StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_REBOUND, true);
                 },

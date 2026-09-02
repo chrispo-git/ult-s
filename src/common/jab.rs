@@ -19,7 +19,7 @@ pub unsafe fn opff(fighter : &mut L2CFighterCommon, status_kind : i32, motion_ki
 		let stick_y = ControlModule::get_stick_y(boma(fighter));
 		let frame = MotionModule::frame(boma(fighter));
 		
-		if (config::get().attacks.jab_cancel == 2 && !is_gamemode("fgmode".to_string()) && !is_gamemode("rivals".to_string())) {
+		if (config::get().attacks.jab_cancel == 2 && !is_gamemode("fgmode".to_string()) {
 			if crate::get_state!(ENTRY_ID, JabState).has_enable_100_on {
 					WorkModule::set_flag(boma(fighter), true, *FIGHTER_STATUS_ATTACK_FLAG_ENABLE_100);
 			};
