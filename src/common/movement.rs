@@ -51,7 +51,7 @@ pub unsafe fn lazy_warm() {
 //Perfect Pivot
 pub unsafe fn perfectpivot(fighter : &mut L2CFighterCommon, status_kind : i32, ENTRY_ID : usize) {
     unsafe {
-		if config::get().movement.pivots == 2 {
+		if config::get().movement.pivots == 2 && !is_gamemode("sixtyfour".to_string()) {
 			return;
 		}
 		if status_kind == *FIGHTER_STATUS_KIND_TURN {
@@ -63,7 +63,7 @@ pub unsafe fn perfectpivot(fighter : &mut L2CFighterCommon, status_kind : i32, E
             return;
         }
         let frame = MotionModule::frame(fighter.module_accessor) as i32;
-        let max = if config::get().movement.pivots == 0 {5} else {10};
+        let max = if config::get().movement.pivots == 0 && !is_gamemode("sixtyfour".to_string()) {5}  else {10};
         if (3..max).contains(&frame) {
 			crate::transition_set!(ENTRY_ID, can_dash);
 			crate::transition_set!(ENTRY_ID, can_turndash);
