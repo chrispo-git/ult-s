@@ -14,7 +14,17 @@ static mut PARRY_DURATION : [i32; 8] = [0; 8];
 
 static NONE :  smash::phx::Vector3f =  smash::phx::Vector3f { x: 0.0, y: 0.0, z: 0.0 };
 
-pub unsafe fn airdodge(fighter : &mut L2CFighterCommon, config : &config::Config) {
+
+#[derive(Default, Clone, Copy)]
+pub struct GamemodeAirdashState {
+	pub pause : bool,
+}
+
+pub unsafe fn airdodge(fighter : &mut L2CFighterCommon, config : &config::Config, status_kind : i32, ENTRY_ID : usize) {
+    if is_gamemode("sixtyfour".to_string()) {
+        WorkModule::on_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_DISABLE_ESCAPE_AIR); 
+        return;
+    }
     if crate::is_in!(config.defense.airdodge, 0, 1, 4) {
         return;
     }
@@ -22,11 +32,42 @@ pub unsafe fn airdodge(fighter : &mut L2CFighterCommon, config : &config::Config
         WorkModule::off_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_DISABLE_ESCAPE_AIR);
     }else if config.defense.airdodge == 3 {
         WorkModule::on_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_DISABLE_ESCAPE_AIR);    
+    } else if config.defense.airdodge == 4 {
+		let gravity = WorkModule::get_param_float(fighter.module_accessor, hash40("air_accel_y"), 0);
+        if [*FIGHTER_STATUS_KIND_ESCAPE_AIR, *FIGHTER_STATUS_KIND_ESCAPE_AIR_SLIDE].contains(&status_kind) {
+            CancelModule::enable_cancel(fighter.module_accessor);
+            fighter.sub_air_check_fall_common();
+			HitModule::set_whole(fighter.module_accessor, smash::app::HitStatus(*HIT_STATUS_NORMAL), 0);
+            if MotionModule::frame(fighter.module_accessor) > 1.0 && MotionModule::frame(fighter.module_accessor) < 3.0 {
+                if ControlModule::get_stick_x(fighter.module_accessor).abs() < 0.2 && ControlModule::get_stick_y(fighter.module_accessor).abs() < 0.2 { 
+                    crate::with_state!(ENTRY_ID, GamemodeAirdashState, state, {
+                        state.pause = true;
+                    });
+                }
+            }
+            if MotionModule::frame(fighter.module_accessor) > 28.0 {
+                crate::with_state!(ENTRY_ID, GamemodeAirdashState, state, {
+                    state.pause = false;
+                });
+            } else if MotionModule::frame(fighter.module_accessor) > 16.0 {
+                crate::with_state!(ENTRY_ID, GamemodeAirdashState, state, {
+                    state.pause = true;
+                });
+            }
+            if crate::get_state!(ENTRY_ID, GamemodeAirdashState).pause { 
+				KineticModule::clear_speed_all(fighter.module_accessor);
+				macros::SET_SPEED_EX(fighter, 0.0, gravity, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+            }
+        } else {
+            crate::with_state!(ENTRY_ID, GamemodeAirdashState, state, {
+                state.pause = false;
+            });
+        }
     }
 }
 
 pub unsafe fn di(fighter : &mut L2CFighterCommon,config : &config::Config) {
-    if config.defense.di == 0 {
+    if config.defense.di == 0 && !is_gamemode("sixtyfour".to_string()) {
         return;
     }
     WorkModule::set_float(fighter.module_accessor, 0.0, *FIGHTER_STATUS_DAMAGE_WORK_FLOAT_VECOR_CORRECT_STICK_X);
@@ -34,13 +75,13 @@ pub unsafe fn di(fighter : &mut L2CFighterCommon,config : &config::Config) {
 }
 
 pub unsafe fn hitstun_cancel(fighter : &mut L2CFighterCommon, config : &config::Config, status_kind : i32, entry_id : usize) {
-    if config.defense.hitstun_cancel == 0 {
+    if config.defense.hitstun_cancel == 0 && !is_gamemode("sixtyfour".to_string()){
         return;
     }
     let remaining_hitstun = WorkModule::get_float(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLOAT_DAMAGE_REACTION_FRAME);
     let total_hitstun = WorkModule::get_float(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLOAT_DAMAGE_REACTION_FRAME_LAST);
 	if remaining_hitstun > 0.0 && crate::is_in!(status_kind, *FIGHTER_STATUS_KIND_DAMAGE_AIR, *FIGHTER_STATUS_KIND_DAMAGE_FALL, *FIGHTER_STATUS_KIND_DAMAGE_FLY, *FIGHTER_STATUS_KIND_DAMAGE_FLY_ROLL, *FIGHTER_STATUS_KIND_DAMAGE_FLY_METEOR) {
-        if config.defense.hitstun_cancel == 1 {
+        if config.defense.hitstun_cancel == 1 && !is_gamemode("sixtyfour".to_string()) {
             if total_hitstun - remaining_hitstun > 15.0 {
                 if ControlModule::check_button_on_trriger(fighter.module_accessor, *CONTROL_PAD_BUTTON_GUARD) {
                     StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_ESCAPE_AIR, false);
@@ -59,6 +100,10 @@ pub unsafe fn hitstun_cancel(fighter : &mut L2CFighterCommon, config : &config::
     }
 }
 pub unsafe fn shield_health(fighter : &mut L2CFighterCommon, config : &config::Config) {
+    if is_gamemode("sixtyfour".to_string()) {
+        WorkModule::set_float(fighter.module_accessor, 65.0, *FIGHTER_INSTANCE_WORK_ID_FLOAT_GUARD_SHIELD_MAX);
+        return;
+    }
     if config.defense.shield_health == 0 {
         return;
     }
@@ -71,14 +116,17 @@ pub unsafe fn shield_health(fighter : &mut L2CFighterCommon, config : &config::C
 }
 
 pub unsafe fn shieldstun(fighter : &mut L2CFighterCommon, config : &config::Config, status_kind : i32) {
-    if config.defense.shieldstun == 0 {
+    if config.defense.shieldstun == 0 && !is_gamemode("sixtyfour".to_string()) {
         return;
     }
-    let stun_mul = match config.defense.shieldstun {
+    let mut stun_mul = match config.defense.shieldstun {
         0 => 0.8,
-        1 => 1.75,
+        1 => 1.8,
         _ => 0.4
     };
+    if is_gamemode("sixtyfour".to_string()) {
+        stun_mul = 1.62;
+    }
 
     let shieldstun_mul = (stun_mul/0.8) / match status_kind {
         n if n == *FIGHTER_STATUS_KIND_ATTACK_AIR => 0.33,
@@ -108,15 +156,12 @@ pub unsafe fn parry_only(fighter : &mut L2CFighterCommon, status_kind : i32, mot
         }
         if situation_kind == *SITUATION_KIND_GROUND && PARRY_DURATION[ENTRY_ID] == 1 && !(*FIGHTER_STATUS_KIND_DAMAGE..*FIGHTER_STATUS_KIND_DAMAGE_FALL).contains(&status_kind) {
 			StopModule::end_stop(fighter.module_accessor);
-            //println!("End Stun Early");
 			StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_WAIT, false);
             return;
         }
         let frame = MotionModule::frame(fighter.module_accessor);
         if status_kind == *FIGHTER_STATUS_KIND_REBOUND && (frame as i32) == 1 {
-            if is_gamemode("rivals".to_string()) && MotionModule::rate(fighter.module_accessor) == 0.5 {
-                macros::FLASH(fighter, 0.25, 0.25, 0.25, 0.5);
-            }
+            macros::FLASH(fighter, 0.25, 0.25, 0.25, 0.5);
         }
         if status_kind == *FIGHTER_STATUS_KIND_GUARD_OFF {
             WorkModule::on_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_DISABLE_GUARD);
@@ -139,7 +184,7 @@ pub unsafe fn parry_only(fighter : &mut L2CFighterCommon, status_kind : i32, mot
                 },
                 n if n > 6 => {
                     macros::COL_NORMAL(fighter);
-                    let rate = if is_gamemode("rivals".to_string()) { 0.5 } else { 1.0 };
+                    let rate = 0.75;
                     WorkModule::set_float(fighter.module_accessor, rate, *FIGHTER_STATUS_WORK_ID_FLOAT_REBOUND_MOTION_RATE);
                     StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_REBOUND, true);
                 },
@@ -170,6 +215,9 @@ pub unsafe fn parry_recoil(fighter : &mut L2CFighterCommon, status_kind : i32, s
     };
 }
 pub unsafe fn shield(fighter : &mut L2CFighterCommon, config : &config::Config, status_kind : i32, entry_id : usize) {
+    if is_gamemode("sixtyfour".to_string()) {
+        return;
+    }
     match config.defense.shield {
         0 => {},
         1 => {
@@ -188,7 +236,7 @@ pub unsafe fn opff(fighter : &mut L2CFighterCommon, config : &config::Config, st
     shield(fighter, config, status_kind, entry_id);
     shieldstun(fighter, config, status_kind);
     shield_health(fighter, config);
-    airdodge(fighter, config);
+    airdodge(fighter, config, status_kind, entry_id);
     di(fighter, config);
     hitstun_cancel(fighter, config, status_kind, entry_id);
 }

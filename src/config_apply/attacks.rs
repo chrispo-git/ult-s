@@ -35,35 +35,34 @@ pub unsafe fn ac(fighter : &mut L2CFighterCommon, config : &config::Config, stat
 }
 
 pub unsafe fn lcancel(fighter : &mut L2CFighterCommon, config : &config::Config, status_kind : i32, motion_kind : u64) {
-    if config.attacks.lcancel == 0 {
-        return;
-    }
-    if config.attacks.lcancel == 1 {
-        if (2..8).contains(&ControlModule::get_trigger_count(fighter.module_accessor, *CONTROL_PAD_BUTTON_GUARD as u8)) &&
-        status_kind == *FIGHTER_STATUS_KIND_LANDING_ATTACK_AIR && MotionModule::frame(fighter.module_accessor) < 4.0 {
-            let cancel_frame = FighterMotionModuleImpl::get_cancel_frame(fighter.module_accessor,smash::phx::Hash40::new_raw(motion_kind), false) as f32;
-            if motion_kind == hash40("landing_air_n") {
-                let landing = 1.0/(((WorkModule::get_param_float(fighter.module_accessor, hash40("landing_attack_air_frame_n"), 0)*0.5))/ cancel_frame);
-                MotionModule::set_rate(fighter.module_accessor, landing);
-            } else if motion_kind == hash40("landing_air_f") {
-                let landing = 1.0/(((WorkModule::get_param_float(fighter.module_accessor, hash40("landing_attack_air_frame_f"), 0)*0.5))/ cancel_frame);
-                MotionModule::set_rate(fighter.module_accessor, landing);
-            } else if motion_kind == hash40("landing_air_b") {
-                let landing = 1.0/(((WorkModule::get_param_float(fighter.module_accessor, hash40("landing_attack_air_frame_b"), 0)*0.5))/ cancel_frame);
-                MotionModule::set_rate(fighter.module_accessor, landing);
-            } else if motion_kind == hash40("landing_air_hi") {
-                let landing = 1.0/(((WorkModule::get_param_float(fighter.module_accessor, hash40("landing_attack_air_frame_hi"), 0)*0.5))/ cancel_frame);
-                MotionModule::set_rate(fighter.module_accessor, landing);
-            } else {
-                let landing = 1.0/(((WorkModule::get_param_float(fighter.module_accessor, hash40("landing_attack_air_frame_lw"), 0)*0.5))/ cancel_frame);
-                MotionModule::set_rate(fighter.module_accessor, landing);
-            };
-		}
-    } else {
+    if is_gamemode("sixtyfour".to_string()) || config.attacks.lcancel == 2 {
         if (2..8).contains(&ControlModule::get_trigger_count(fighter.module_accessor, *CONTROL_PAD_BUTTON_GUARD as u8)) &&
         status_kind == *FIGHTER_STATUS_KIND_LANDING_ATTACK_AIR && MotionModule::frame(fighter.module_accessor) < 4.0 {
             StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_LANDING, false);
         }
+    }
+    if config.attacks.lcancel == 0 {
+        return;
+    }
+    if (2..8).contains(&ControlModule::get_trigger_count(fighter.module_accessor, *CONTROL_PAD_BUTTON_GUARD as u8)) &&
+    status_kind == *FIGHTER_STATUS_KIND_LANDING_ATTACK_AIR && MotionModule::frame(fighter.module_accessor) < 4.0 {
+        let cancel_frame = FighterMotionModuleImpl::get_cancel_frame(fighter.module_accessor,smash::phx::Hash40::new_raw(motion_kind), false) as f32;
+        if motion_kind == hash40("landing_air_n") {
+            let landing = 1.0/(((WorkModule::get_param_float(fighter.module_accessor, hash40("landing_attack_air_frame_n"), 0)*0.5))/ cancel_frame);
+            MotionModule::set_rate(fighter.module_accessor, landing);
+        } else if motion_kind == hash40("landing_air_f") {
+            let landing = 1.0/(((WorkModule::get_param_float(fighter.module_accessor, hash40("landing_attack_air_frame_f"), 0)*0.5))/ cancel_frame);
+            MotionModule::set_rate(fighter.module_accessor, landing);
+        } else if motion_kind == hash40("landing_air_b") {
+            let landing = 1.0/(((WorkModule::get_param_float(fighter.module_accessor, hash40("landing_attack_air_frame_b"), 0)*0.5))/ cancel_frame);
+            MotionModule::set_rate(fighter.module_accessor, landing);
+        } else if motion_kind == hash40("landing_air_hi") {
+            let landing = 1.0/(((WorkModule::get_param_float(fighter.module_accessor, hash40("landing_attack_air_frame_hi"), 0)*0.5))/ cancel_frame);
+            MotionModule::set_rate(fighter.module_accessor, landing);
+        } else {
+            let landing = 1.0/(((WorkModule::get_param_float(fighter.module_accessor, hash40("landing_attack_air_frame_lw"), 0)*0.5))/ cancel_frame);
+            MotionModule::set_rate(fighter.module_accessor, landing);
+        };
     }
 }
 
