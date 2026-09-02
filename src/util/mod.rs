@@ -742,6 +742,8 @@ pub(crate) unsafe fn is_tap_djc(boma: &mut smash::app::BattleObjectModuleAccesso
 
 pub(crate) unsafe fn reload_config_values() -> () {
 
+	let all: Vec<i32> = vec![-1];
+	
 	// Specific Special Multipliers for 64 Mode!
 	if is_gamemode("sixtyfour".to_string()) {
 		crate::param_cache::set_global_multiplier(smash::hash40("jump_initial_y"), 0, 0.6);
@@ -767,7 +769,6 @@ pub(crate) unsafe fn reload_config_values() -> () {
 	config::reload();
 
 	let config = config::get();
-	let all: Vec<i32> = vec![-1];
 	match config.movement.jump_accel {
 		0 => {
 			crate::param_cache::set_global_multiplier(smash::hash40("jump_initial_y"), 0, 1.0);

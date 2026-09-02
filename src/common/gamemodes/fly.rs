@@ -13,10 +13,10 @@ use crate::util::*;
 
 static mut X: [f32; 8] = [0.0; 8];
 static mut Y: [f32; 8] = [0.0; 8];
-static mut X_MAX : f32 = 1.2; //Max Horizontal movespeed
+static mut X_MAX : f32 = 1.5; //Max Horizontal movespeed
 static mut X_ACCEL_ADD : f32 = 0.02; //Air Accel Add
 static mut X_ACCEL_MUL : f32 = 0.09; //Air Accel Mul
-static mut Y_MAX : f32 = 1.2; //Max Vertical movespeed
+static mut Y_MAX : f32 = 1.5; //Max Vertical movespeed
 static mut Y_ACCEL_ADD : f32 = 0.02;
 static mut Y_ACCEL_MUL : f32 = 0.05;
 
@@ -36,6 +36,8 @@ pub unsafe fn opff(fighter : &mut L2CFighterCommon, status_kind : i32, ENTRY_ID 
             };
             let stick_x = ControlModule::get_stick_x(fighter.module_accessor) * PostureModule::lr(fighter.module_accessor);
             let stick_y = ControlModule::get_stick_y(fighter.module_accessor);
+            let speed_x = KineticModule::get_sum_speed_x(fighter.module_accessor, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
+            let speed_y = KineticModule::get_sum_speed_y(fighter.module_accessor, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
             let mut y_add = 0.0;
             let mut x_add = 0.0;
             if stick_x > 0.2 {
