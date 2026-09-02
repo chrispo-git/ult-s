@@ -22,6 +22,7 @@ unsafe fn on_rule_selection(_: &skyline::hooks::InlineCtx) {
         }
     } else {
         reset_gamemodes();
+		reload_config_values();
     }
 }
 static mut HAS_WARMED_UP: bool = false;

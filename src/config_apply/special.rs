@@ -69,7 +69,6 @@ pub unsafe fn no_special_fall(fighter: &mut L2CFighterCommon, config : &config::
 }
 
 pub unsafe fn opff(fighter: &mut L2CFighterCommon, config : &config::Config, status_kind : i32, entry_id : usize) {
-    // situation_kind is only needed by these two, so only fetch it if at least one is enabled.
     let situation_kind = if config.special.cancel_to_taunt != 0 || config.special.no_special_fall != 0 {
         StatusModule::situation_kind(fighter.module_accessor)
     } else {
