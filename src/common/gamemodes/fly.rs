@@ -31,15 +31,11 @@ pub unsafe fn opff(fighter : &mut L2CFighterCommon, status_kind : i32, ENTRY_ID 
             *FIGHTER_KINETIC_TYPE_DAMAGE_AIR_REFLECT_U, *FIGHTER_KINETIC_TYPE_DAMAGE_AIR_REFLECT_D, *FIGHTER_KINETIC_TYPE_DAMAGE_AIR_REFLECT_LR
         ) &&
         crate::is_in!(status_kind, *FIGHTER_STATUS_KIND_ATTACK_AIR, *FIGHTER_STATUS_KIND_FALL, *FIGHTER_STATUS_KIND_FALL_AERIAL, *FIGHTER_STATUS_KIND_AIR_LASSO) {
-            if KineticModule::get_kinetic_type(boma) != *FIGHTER_KINETIC_TYPE_MOTION_AIR {
-                KineticModule::change_kinetic(boma, *FIGHTER_KINETIC_TYPE_MOTION_AIR);
+            if KineticModule::get_kinetic_type(fighter.module_accessor) != *FIGHTER_KINETIC_TYPE_MOTION_AIR {
+                KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_MOTION_AIR);
             };
-            if ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_JUMP) {
-                FLOAT[ENTRY_ID] = 1;
-            };
-            if ControlModule::check_button_on_trriger(boma, *CONTROL_PAD_BUTTON_SPECIAL) {
-                FLOAT[ENTRY_ID] = 1;
-            };
+            let stick_x = ControlModule::get_stick_x(fighter.module_accessor) * PostureModule::lr(fighter.module_accessor);
+            let stick_y = ControlModule::get_stick_y(fighter.module_accessor);
             let mut y_add = 0.0;
             let mut x_add = 0.0;
             if stick_x > 0.2 {
