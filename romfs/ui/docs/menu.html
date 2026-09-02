@@ -614,7 +614,9 @@
         function saveThisPreset() {
             presetOut = generateTOML(config_map);
             new_preset = prompt("Name your preset", "My Awesome Preset");
-            location.href = "http://localhost/newpreset/" + new_preset + "/" + presetOut;
+            if (new_preset) {
+                location.href = "http://localhost/newpreset/" + new_preset + "/" + presetOut;
+            }
         };
 
 
