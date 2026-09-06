@@ -29,6 +29,7 @@ pub fn install() {
 	 crate::param_cache::update_float_2(*FIGHTER_KIND_PITB, get_marked_costumes("pitb","pitb").into_iter().map(|x| x as i32).collect(), (smash::hash40("air_speed_y_stable"), 0, 1.92));
 	 crate::param_cache::update_float_2(*FIGHTER_KIND_PITB, get_marked_costumes("pitb","pitb").into_iter().map(|x| x as i32).collect(), (smash::hash40("dive_speed_y"), 0, 2.88));
 	 crate::param_cache::update_float_2(*FIGHTER_KIND_PITB, get_marked_costumes("pitb","pitb").into_iter().map(|x| x as i32).collect(), (smash::hash40("weight"), 0, 90.0));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_PITB, get_marked_costumes("pitb","pitb").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_special_hi"), smash::hash40("rush_speed"), 2.5));
 	 crate::param_cache::update_float_2(*FIGHTER_KIND_PITB, get_marked_costumes("pitb","pitb").into_iter().map(|x| x as i32).collect(), (smash::hash40("landing_attack_air_frame_n"), 0, 7.0));
 	 crate::param_cache::update_float_2(*FIGHTER_KIND_PITB, get_marked_costumes("pitb","pitb").into_iter().map(|x| x as i32).collect(), (smash::hash40("landing_attack_air_frame_f"), 0, 9.0));
 	 crate::param_cache::update_float_2(*FIGHTER_KIND_PITB, get_marked_costumes("pitb","pitb").into_iter().map(|x| x as i32).collect(), (smash::hash40("landing_attack_air_frame_hi"), 0, 8.0));
