@@ -46,7 +46,7 @@ unsafe extern "C" fn villy_neutralb_air(agent: &mut L2CAgentBase) {
     }
     frame(agent.lua_state_agent, 14.0);
     if macros::is_excute(agent) {
-        macros::ATTACK(agent, 0, 0, Hash40::new("top"), 13.0, 60, 80, 0, 30, 4.2, 1.0, 1.5, 0.0, Some(1.0), Some(4.0), Some(0.0), 1.2, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_sting"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_CUTUP, *ATTACK_REGION_SWORD);
+        macros::ATTACK(agent, 0, 0, Hash40::new("top"), 13.0, 60, 80, 0, 30, 6.0, 1.0, 0.0, 0.0, Some(1.0), Some(3.5), Some(0.0), 1.2, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_POS, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_sting"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_CUTUP, *ATTACK_REGION_SWORD);
     }
     frame(agent.lua_state_agent, 22.0);
     if macros::is_excute(agent) {
@@ -71,7 +71,6 @@ unsafe extern "C" fn villy_neutralb_air_eff(agent: &mut L2CAgentBase) {
 }	
 unsafe extern "C" fn villy_neutralb_1(agent: &mut L2CAgentBase) {
     let boma = smash::app::sv_system::battle_object_module_accessor(agent.lua_state_agent); 
-    let ENTRY_ID = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
     let motion_kind = MotionModule::motion_kind(boma);
     let pos_x = PostureModule::pos_x(boma);
     let pos_y = PostureModule::pos_y(boma);
@@ -81,10 +80,6 @@ unsafe extern "C" fn villy_neutralb_1(agent: &mut L2CAgentBase) {
         if (VariableModule::get_float((boma) as *mut _, FIGHTER_MURABITO_INSTANCE_WORK_ID_FLOAT_TREE_POS_X)-pos_x).abs() < X_DIST && (VariableModule::get_float((boma) as *mut _, FIGHTER_MURABITO_INSTANCE_WORK_ID_FLOAT_TREE_POS_Y)-pos_y).abs() < Y_DIST  && is_facing_tree && !VariableModule::is_flag((boma) as *mut _, FIGHTER_MURABITO_INSTANCE_WORK_ID_FLAG_IS_FALLEN) {
             MotionModule::change_motion(agent.module_accessor, Hash40::new("special_n3"), 0.0, 1.0, false, 0.0, false, false);
             //println!("special_n3");
-            VariableModule::set_flag((boma) as *mut _, true, FIGHTER_MURABITO_INSTANCE_WORK_ID_FLAG_CHANGE_FRAME);
-        } else {
-            MotionModule::change_motion(agent.module_accessor, Hash40::new("special_n2_fail"), 0.0, 1.0, false, 0.0, false, false);
-            //println!("special_n2_fail");
             VariableModule::set_flag((boma) as *mut _, true, FIGHTER_MURABITO_INSTANCE_WORK_ID_FLAG_CHANGE_FRAME);
         }
     } else if ArticleModule::is_exist(agent.module_accessor, *FIGHTER_MURABITO_GENERATE_ARTICLE_SPROUT) && ![hash40("special_n2"), hash40("special_n2_fail")].contains(&motion_kind) {
@@ -112,9 +107,9 @@ unsafe extern "C" fn villy_neutralb_1(agent: &mut L2CAgentBase) {
     }
     frame(agent.lua_state_agent, 5.0);
     if macros::is_excute(agent) {
-        macros::ATTACK(agent, 0, 0, Hash40::new("stickr"), 14.0, 80, 95, 0, 32, 4.5, 0.0, 0.0, 3.8, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_sting"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_CUTUP, *ATTACK_REGION_SWORD);
-        macros::ATTACK(agent, 1, 0, Hash40::new("stickr"), 14.0, 80, 95, 0, 32, 4.5, 0.0, 0.0, 10.8, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_sting"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_CUTUP, *ATTACK_REGION_SWORD);
-        macros::ATTACK(agent, 4, 0, Hash40::new("armr"), 14.0, 80, 95, 0, 32, 2.0, 0.0, 0.0, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_sting"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_CUTUP, *ATTACK_REGION_SWORD);
+        macros::ATTACK(agent, 0, 0, Hash40::new("stickr"), 14.5, 80, 95, 0, 32, 4.5, 0.0, 0.0, 3.8, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_sting"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_CUTUP, *ATTACK_REGION_SWORD);
+        macros::ATTACK(agent, 1, 0, Hash40::new("stickr"), 14.5, 80, 95, 0, 32, 4.5, 0.0, 0.0, 10.8, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_sting"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_CUTUP, *ATTACK_REGION_SWORD);
+        macros::ATTACK(agent, 4, 0, Hash40::new("armr"), 14.5, 80, 95, 0, 32, 2.0, 0.0, 0.0, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_sting"), *ATTACK_SOUND_LEVEL_L, *COLLISION_SOUND_ATTR_CUTUP, *ATTACK_REGION_SWORD);
     }
     frame(agent.lua_state_agent, 17.0);
     if macros::is_excute(agent) {
@@ -236,11 +231,11 @@ unsafe extern "C" fn villy_neutralb_3(agent: &mut L2CAgentBase) {
     if macros::is_excute(agent) {
         ItemModule::set_have_item_visibility(agent.module_accessor, true, 0 );
         let rand_num = smash::app::sv_math::rand(hash40("fighter"), 100);
-        if rand_num < 2 {
+        if rand_num < 3 {
             ItemModule::have_item(agent.module_accessor, smash::app::ItemKind(*ITEM_KIND_DEKU), 0, 0, false, false);
-        } else if rand_num < 4 {
+        } else if rand_num < 7 {
             ItemModule::have_item(agent.module_accessor, smash::app::ItemKind(*ITEM_KIND_DOSEISAN), 0, 0, false, false);
-        } else if rand_num < 6 {
+        } else if rand_num < 12 {
             ItemModule::have_item(agent.module_accessor, smash::app::ItemKind(*ITEM_KIND_MAGICBALL), 0, 0, false, false);
         } else if rand_num < 50 {
             ItemModule::have_item(agent.module_accessor, smash::app::ItemKind(*ITEM_KIND_BANANA), 0, 0, false, false);
