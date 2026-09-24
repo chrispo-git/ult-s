@@ -21,21 +21,21 @@ unsafe extern "C" fn dsamus_crouch_sound(fighter: &mut L2CAgentBase) {
 unsafe extern "C" fn dsamus_catchpull_expr(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
-			VisibilityModule::set_int64(fighter.module_accessor, hash40("body") as i64, hash40("body_hide_gun") as i64);
+			VisibilityModule::set_int64(fighter.module_accessor, hash40("body")as u64, hash40("body_hide_gun")as u64);
 			ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_SAMUSD_GENERATE_ARTICLE_GUN,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
 			ArticleModule::generate_article(fighter.module_accessor, *FIGHTER_SAMUSD_GENERATE_ARTICLE_GUN, false, 0);
 			ArticleModule::change_motion(fighter.module_accessor, *FIGHTER_SAMUSD_GENERATE_ARTICLE_GUN,smash::phx::Hash40::new("catch_pull"),false,0.0);
 		}
 		frame(fighter.lua_state_agent, 5.0);
 		if macros::is_excute(fighter) {
-			VisibilityModule::set_int64(fighter.module_accessor, hash40("body") as i64, hash40("body_normal") as i64);
+			VisibilityModule::set_int64(fighter.module_accessor, hash40("body")as u64, hash40("body_normal")as u64);
 			ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_SAMUSD_GENERATE_ARTICLE_GUN,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
 		}
 }	
 unsafe extern "C" fn dsamus_catchwait_expr(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
-			VisibilityModule::set_int64(fighter.module_accessor, hash40("body") as i64, hash40("body_normal") as i64);
+			VisibilityModule::set_int64(fighter.module_accessor, hash40("body")as u64, hash40("body_normal")as u64);
 			ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_SAMUSD_GENERATE_ARTICLE_GUN,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
 		}
 }	
@@ -61,14 +61,14 @@ unsafe extern "C" fn dsamus_catchattack_eff(fighter: &mut L2CAgentBase) {
 unsafe extern "C" fn dsamus_catchattack_expr(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
-			VisibilityModule::set_int64(fighter.module_accessor, hash40("body") as i64, hash40("body_normal") as i64);
+			VisibilityModule::set_int64(fighter.module_accessor, hash40("body")as u64, hash40("body_normal")as u64);
 			ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_SAMUSD_GENERATE_ARTICLE_GUN,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
 		}
 }	
 unsafe extern "C" fn dsamus_catchcut_expr(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
-			VisibilityModule::set_int64(fighter.module_accessor, hash40("body") as i64, hash40("body_normal") as i64);
+			VisibilityModule::set_int64(fighter.module_accessor, hash40("body")as u64, hash40("body_normal")as u64);
 			ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_SAMUSD_GENERATE_ARTICLE_GUN,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
 		}
 }	
