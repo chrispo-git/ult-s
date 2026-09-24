@@ -47,7 +47,7 @@ unsafe extern "C" fn tink_upb_air(fighter: &mut L2CAgentBase) {
 unsafe extern "C" fn tink_upb_air_expr(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
-			VisibilityModule::set_int64(fighter.module_accessor, hash40("shield") as i64, hash40("shield_back") as i64);
+			VisibilityModule::set_int64(fighter.module_accessor, hash40("shield")as u64, hash40("shield_back")as u64);
 			ItemModule::set_have_item_visibility(fighter.module_accessor, false, 0);
 		}
 }	
