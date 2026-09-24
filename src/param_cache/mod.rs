@@ -39,10 +39,10 @@ unsafe fn ults_get_param_float_hook(module: u64, param_type: u64, param_hash: u6
 }
 
 #[skyline::hook(offset = HOOK_INT64_OFFSET)]
-unsafe fn ults_get_param_int64_hook(module: u64, param_type: u64, param_hash: u64) -> i64 {
+unsafe fn ults_get_param_int64_hook(module: u64, param_type: u64, param_hash: u64) -> u64 {
     let original_value = original!()(module, param_type, param_hash);
     match GLOBAL_MULTIPLIERS.lock().get(&(param_type, param_hash)).copied() {
-        Some(mult) => (original_value as f32 * mult).round() as i64,
+        Some(mult) => (original_value as f32 * mult).round()as u64,
         None => original_value,
     }
 }

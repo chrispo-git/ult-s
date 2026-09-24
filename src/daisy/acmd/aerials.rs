@@ -71,7 +71,7 @@ unsafe extern "C" fn daisy_uair_expr(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 3.0);
 		if macros::is_excute(fighter) {
-			VisibilityModule::set_int64(fighter.module_accessor, hash40("smash_item") as i64, hash40("smash_item_racket") as i64);
+			VisibilityModule::set_int64(fighter.module_accessor, hash40("smash_item")as u64, hash40("smash_item_racket")as u64);
 			ItemModule::set_have_item_visibility(fighter.module_accessor, false, 0);
 		}
 		frame(fighter.lua_state_agent, 8.0);
@@ -84,7 +84,7 @@ unsafe extern "C" fn daisy_uair_expr(fighter: &mut L2CAgentBase) {
 		}
 		frame(fighter.lua_state_agent, 27.0);
 		if macros::is_excute(fighter) {
-			VisibilityModule::set_int64(fighter.module_accessor, hash40("smash_item") as i64, hash40("smash_item_none") as i64);
+			VisibilityModule::set_int64(fighter.module_accessor, hash40("smash_item")as u64, hash40("smash_item_none")as u64);
 			ItemModule::set_have_item_visibility(fighter.module_accessor, true, 0);
 		}
 }
