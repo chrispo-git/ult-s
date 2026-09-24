@@ -30,8 +30,8 @@ pub fn install() {
 unsafe extern "C" fn snake_side_special_status_main(fighter: &mut L2CFighterCommon) -> L2CValue {
     PostureModule::set_stick_lr(fighter.module_accessor, 0.0);
     PostureModule::update_rot_y_lr(fighter.module_accessor);
-    WorkModule::set_int64(fighter.module_accessor, hash40("special_s_start") as i64, *FIGHTER_SNAKE_STATUS_WORK_INT_MOT_KIND);
-    WorkModule::set_int64(fighter.module_accessor, hash40("special_air_s_start") as i64, *FIGHTER_SNAKE_STATUS_WORK_INT_MOT_AIR_KIND);
+    WorkModule::set_int64(fighter.module_accessor, hash40("special_s_start")as u64, *FIGHTER_SNAKE_STATUS_WORK_INT_MOT_KIND);
+    WorkModule::set_int64(fighter.module_accessor, hash40("special_air_s_start")as u64, *FIGHTER_SNAKE_STATUS_WORK_INT_MOT_AIR_KIND);
     if StatusModule::situation_kind(fighter.module_accessor) == *SITUATION_KIND_GROUND {
         KineticModule::change_kinetic(fighter.module_accessor, *FIGHTER_KINETIC_TYPE_GROUND_STOP);
         MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_s_start"), 0.0, 1.0, false, 0.0, false, false);

@@ -43,7 +43,7 @@ unsafe extern "C" fn dsamus_bthrow_eff(fighter: &mut L2CAgentBase) {
 unsafe extern "C" fn dsamus_bthrow_expr(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
-			VisibilityModule::set_int64(fighter.module_accessor, hash40("body") as i64, hash40("body_normal") as i64);
+			VisibilityModule::set_int64(fighter.module_accessor, hash40("body")as u64, hash40("body_normal")as u64);
 			ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_SAMUSD_GENERATE_ARTICLE_GUN,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
 		}
 }	
@@ -108,7 +108,7 @@ unsafe extern "C" fn dsamus_fthrow_eff(fighter: &mut L2CAgentBase) {
 unsafe extern "C" fn dsamus_fthrow_expr(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
-			VisibilityModule::set_int64(fighter.module_accessor, hash40("body") as i64, hash40("body_normal") as i64);
+			VisibilityModule::set_int64(fighter.module_accessor, hash40("body")as u64, hash40("body_normal")as u64);
 			ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_SAMUSD_GENERATE_ARTICLE_GUN,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
 		}
 }	
@@ -164,7 +164,7 @@ unsafe extern "C" fn dsamus_dthrow_eff(fighter: &mut L2CAgentBase) {
 unsafe extern "C" fn dsamus_dthrow_expr(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		if macros::is_excute(fighter) {
-			VisibilityModule::set_int64(fighter.module_accessor, hash40("body") as i64, hash40("body_normal") as i64);
+			VisibilityModule::set_int64(fighter.module_accessor, hash40("body")as u64, hash40("body_normal")as u64);
 			ArticleModule::remove_exist(fighter.module_accessor, *FIGHTER_SAMUSD_GENERATE_ARTICLE_GUN,smash::app::ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL));
 		}
 }	
