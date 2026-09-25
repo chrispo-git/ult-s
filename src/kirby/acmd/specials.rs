@@ -17,7 +17,7 @@ use crate::kirby::*;
 
 pub fn install() {
     Agent::new("kirby")
-    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .set_costume(get_marked_costumes("kirby","kirby"))
     .acmd("game_specialhi", kirby_upb1, Priority::Low)    
 	.acmd("game_specialairhi", kirby_upb1, Priority::Low)    
 	.acmd("sound_specialhi4", kirby_upb4_sound, Priority::Low)    
@@ -59,7 +59,7 @@ pub fn install() {
 	.install();
 
 	Agent::new("kirby_finalcuttershot")
-    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .set_costume(get_marked_costumes("kirby","kirby"))
 	.acmd("effect_finalcutterregular", kirby_beam_eff, Priority::Low)    
     .acmd("game_finalcutterregular", kirby_beam, Priority::Low)    
     .install();
