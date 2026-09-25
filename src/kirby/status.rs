@@ -46,7 +46,8 @@ unsafe extern "C" fn kirby_drink_exec(fighter: &mut L2CFighterCommon) -> L2CValu
                 let opponent_id = LinkModule::get_node_object_id(fighter.module_accessor, *LINK_NO_CAPTURE) as u32;
                 let opp = sv_battle_object::module_accessor(opponent_id);
                 let opp_kind = utility::get_kind(&mut *opp);
-                if WorkModule::get_int(opp, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) > 16 || (opp_kind == *FIGHTER_KIND_MURABITO && Path::new("sd:/ultimate/ult-s/murabito.flag").is_file()){
+                let opp_costume = WorkModule::get_int(opp, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);
+                if opp_costume > 8 || (opp_kind == *FIGHTER_KIND_MURABITO && get_marked_costumes("murabito", "murabito").contains(&costume)){
                      WorkModule::on_flag(fighter.module_accessor, FIGHTER_KIRBY_STATUS_SPECIAL_N_FLAG_CUSTOM_CHARACTER);
                 }
             }

@@ -187,6 +187,7 @@ pub unsafe fn change_status_request_hook(boma: &mut smash::app::BattleObjectModu
 	let curr_status = StatusModule::status_kind(boma);
 	let prev_status_1 = StatusModule::prev_status_kind(boma, 0);
 	let prev_status_2 = StatusModule::prev_status_kind(boma, 1);
+	let costume = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);
 	let is_clear_buffer = arg3;
 	if smash::app::utility::get_category(boma) == *BATTLE_OBJECT_CATEGORY_FIGHTER {
 		if [*FIGHTER_STATUS_KIND_GUARD, *FIGHTER_STATUS_KIND_GUARD_ON, *FIGHTER_STATUS_KIND_GUARD_DAMAGE].contains(&next_status) {
@@ -221,9 +222,9 @@ pub unsafe fn change_status_request_hook(boma: &mut smash::app::BattleObjectModu
 		}  else if [*FIGHTER_STATUS_KIND_DOWN, *FIGHTER_STATUS_KIND_DOWN_WAIT, *FIGHTER_STATUS_KIND_SLIP_WAIT, *FIGHTER_STATUS_KIND_DAMAGE].contains(&curr_status) && next_status == *FIGHTER_STATUS_KIND_FALL{
 			//Clears buffer when sliding off in a damage state to prevent accidental airdodges/aerials
 			original!()(boma, status_kind, true)
-		} else if smash::app::utility::get_kind(boma) == *FIGHTER_KIND_TRAIL && [*FIGHTER_TRAIL_STATUS_KIND_ATTACK_AIR_F].contains(&status_kind) && Path::new("sd:/ultimate/ult-s/trail.flag").is_file(){
+		} else if smash::app::utility::get_kind(boma) == *FIGHTER_KIND_TRAIL && [*FIGHTER_TRAIL_STATUS_KIND_ATTACK_AIR_F].contains(&status_kind) && get_marked_costumes("trail", "trail").contains(&costume){
 			return 0 as u64
-		} else if smash::app::utility::get_kind(boma) == *FIGHTER_KIND_MURABITO && [*FIGHTER_MURABITO_STATUS_KIND_SPECIAL_N_POCKET].contains(&status_kind) && Path::new("sd:/ultimate/ult-s/murabito.flag").is_file(){
+		} else if smash::app::utility::get_kind(boma) == *FIGHTER_KIND_MURABITO && [*FIGHTER_MURABITO_STATUS_KIND_SPECIAL_N_POCKET].contains(&status_kind) && get_marked_costumes("murabito", "murabito").contains(&costume){
 			original!()(boma, *FIGHTER_STATUS_KIND_ITEM_THROW, arg3)
 		} else {
 			original!()(boma, status_kind, arg3)
@@ -257,6 +258,7 @@ pub unsafe fn change_status_request_script_hook(boma: &mut smash::app::BattleObj
 	let prev_status_1 = StatusModule::prev_status_kind(boma, 0);
 	let prev_status_2 = StatusModule::prev_status_kind(boma, 1);
 	let curr_status = StatusModule::status_kind(boma);
+	let costume = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);
 	if [*FIGHTER_STATUS_KIND_GUARD, *FIGHTER_STATUS_KIND_GUARD_ON, *FIGHTER_STATUS_KIND_GUARD_DAMAGE].contains(&next_status) {
 		if is_gamemode("rivals".to_string()) || is_gamemode("parry".to_string()) {
 			if !ControlModule::check_button_on_trriger(boma, *CONTROL_PAD_BUTTON_GUARD) {
@@ -282,7 +284,7 @@ pub unsafe fn change_status_request_script_hook(boma: &mut smash::app::BattleObj
 			}
 		} else if next_status == *FIGHTER_STATUS_KIND_TURN && curr_status == *FIGHTER_STATUS_KIND_LANDING{
 			return 0 as u64
-		} else if smash::app::utility::get_kind(boma) == *FIGHTER_KIND_TRAIL && [*FIGHTER_TRAIL_STATUS_KIND_ATTACK_AIR_F].contains(&status_kind) && Path::new("sd:/ultimate/ult-s/trail.flag").is_file(){
+		} else if smash::app::utility::get_kind(boma) == *FIGHTER_KIND_TRAIL && [*FIGHTER_TRAIL_STATUS_KIND_ATTACK_AIR_F].contains(&status_kind) && get_marked_costumes("trail", "trail").contains(&costume){
 			return 0 as u64
 		}  else if next_status == *FIGHTER_STATUS_KIND_ICE_JUMP {
 			if config::get().defense.airdodge != 0 {
