@@ -15,6 +15,9 @@ use crate::util::*;
 use super::*;
 
 pub fn install() {
+	if get_costume_count("miigunner","miigunner") < 1 {
+		return;
+	}
     Agent::new("miigunner")
     .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .on_line(Main, gunner_frame)

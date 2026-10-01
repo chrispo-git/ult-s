@@ -256,7 +256,7 @@ pub unsafe fn article_hook(boma: &mut smash::app::BattleObjectModuleAccessor, in
 	if smash::app::utility::get_category(boma) != *BATTLE_OBJECT_CATEGORY_FIGHTER {
 		return original!()(boma, int, arg3, arg4)
 	}
-	if int == *FIGHTER_WARIO_GENERATE_ARTICLE_WARIOBIKE && smash::app::utility::get_kind(boma) == *FIGHTER_KIND_WARIO && Path::new("sd:/ultimate/ult-s/wario.flag").is_file() {
+	if int == *FIGHTER_WARIO_GENERATE_ARTICLE_WARIOBIKE && smash::app::utility::get_kind(boma) == *FIGHTER_KIND_WARIO {
 		let costumes = get_marked_costumes("wario","wario");
 		let curr_costume = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);
 		if !costumes.contains(&(curr_costume as usize)) {
