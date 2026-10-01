@@ -139,7 +139,7 @@ pub unsafe fn djc(fighter : &mut L2CFighterCommon, status_kind : i32) {
         if !crate::is_in!(fighter_kind, *FIGHTER_KIND_NESS, *FIGHTER_KIND_LUCAS, *FIGHTER_KIND_MEWTWO, *FIGHTER_KIND_TRAIL) {
             return;
         }
-	    let costume = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);
+	    let costume = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) as usize;
         if 
             (fighter_kind == *FIGHTER_KIND_NESS && !get_marked_costumes("ness","ness").contains(&costume)) ||
             (fighter_kind == *FIGHTER_KIND_LUCAS && !get_marked_costumes("lucas","lucas").contains(&costume)) ||
