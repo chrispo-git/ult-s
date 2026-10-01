@@ -464,19 +464,19 @@ mod offsets_impl {
                 let ldr_offset = offset_from_ldr(offset + 4);
                 adrp_offset + ldr_offset
             };
-            offsets.map_controls = 0x1750f70; //find_offset("MAP_CONTROLS_SEARCH_CODE",MAP_CONTROLS_SEARCH_CODE).expect("Unable to find control mapping function!");
+            offsets.map_controls = 0x1750dd0; //find_offset("MAP_CONTROLS_SEARCH_CODE",MAP_CONTROLS_SEARCH_CODE).expect("Unable to find control mapping function!");
             offsets.once_per_game_frame = 0x135b810; //find_offset("ONCE_PER_GAME_FRAME_SEARCH_CODE",ONCE_PER_GAME_FRAME_SEARCH_CODE).expect("Unable to find once-per-game-frame function!");
-            offsets.on_rule_select = 0x1792dc0; //find_offset("ON_RULE_SELECT_SEARCH_CODE",ON_RULE_SELECT_SEARCH_CODE).expect("Unable to find on-rule-select instructions!");
-            offsets.global_frame_counter = 0x52e6b44;
+            offsets.on_rule_select = 0x1792ce0; //find_offset("ON_RULE_SELECT_SEARCH_CODE",ON_RULE_SELECT_SEARCH_CODE).expect("Unable to find on-rule-select instructions!");
+            offsets.global_frame_counter = 0x52e7b44;
             offsets.get_match_mode = {
-                let offset = 0x1740584; //find_offset("GET_MATCH_MODE_SEARCH_CODE",GET_MATCH_MODE_SEARCH_CODE).expect("Unable to find get_match_mode!") - GET_MATCH_MODE_OFFSET_TO_START;
+                let offset = 0x17403e4; //find_offset("GET_MATCH_MODE_SEARCH_CODE",GET_MATCH_MODE_SEARCH_CODE).expect("Unable to find get_match_mode!") - GET_MATCH_MODE_OFFSET_TO_START;
                 let bl_offset = offset_from_bl(offset);
                 offset + bl_offset
             };
             offsets.kill_zoom_regular = 0x633de4; //find_offset("KILL_ZOOM_REGULAR_SEARCH_CODE",KILL_ZOOM_REGULAR_SEARCH_CODE).expect("Unable to find the regular kill zoom function!") - KILL_ZOOM_REGULAR_OFFSET_TO_START;
             offsets.kill_zoom_throw = 0x637384; //find_offset("KILL_ZOOM_THROW_SEARCH_CODE",KILL_ZOOM_THROW_SEARCH_CODE).expect("Unable to find the throw kill zoom function!") + KILL_ZOOM_THROW_OFFSET_FROM_START;
-            offsets.analog_trigger_l = 0x3666ee0; //find_offset("ANALOG_TRIGGER_L_SEARCH_CODE",ANALOG_TRIGGER_L_SEARCH_CODE).expect("Unable to find the analog trigger l");
-            offsets.analog_trigger_r = 0x3666ef4;
+            offsets.analog_trigger_l = 0x3667490; //find_offset("ANALOG_TRIGGER_L_SEARCH_CODE",ANALOG_TRIGGER_L_SEARCH_CODE).expect("Unable to find the analog trigger l");
+            offsets.analog_trigger_r = 0x36674a4;
 
             offsets
         };

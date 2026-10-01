@@ -12,7 +12,7 @@ use std::hash::{Hash, Hasher};
 #[cfg(feature = "main_nro")]
 use skyline_web::dialog_ok::DialogOk;
 static mut IS_UNPRESSED : bool = false;
-#[skyline::hook(offset = 0x1792dc0, inline)]
+#[skyline::hook(offset = 0x1792ce0, inline)]
 unsafe fn on_rule_selection(_: &skyline::hooks::InlineCtx) {
     if ninput::any::is_down(ninput::Buttons::R) {
         if !is_on_ryujinx() {
