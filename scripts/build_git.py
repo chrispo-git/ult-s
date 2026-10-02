@@ -163,6 +163,8 @@ if os.path.exists(r'target'):
                 f.write(f"v.{inputs}")
             shutil.copy(r'readme.txt', r'releases-full/readme.txt')
             shutil.copy(r'credits.txt', r'releases-full/credits.txt')
+            shutil.copytree('presets', os.path.join('releases-full', 'ultimate', 'ult-s', 'presets'))
+            shutil.copy(r'presets/ult-s.toml', os.path.join('releases-full', 'ultimate', 'ult-s', 'config.toml'))
 
             build_zip(new_full, r'releases-full/Ultimate S Arcropolis (Full).zip')
             log("[build] Full romfs zip done!")

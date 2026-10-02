@@ -2,19 +2,12 @@ Thank you for downloading Ultimate S!
 
 
 -Instructions-
-1. Run the "Ultimate S Setup.exe" that comes with your download
+1. Run the "Ultimate S Setup.exe" (or whatever corresponds to your OS) that comes with your download
 2. Enable and Disable whichever characters you would like to, then click "Update" 
 3. If you have an internet connection, press "Update Dependencies" to get the latest dependencies automatically
 4. You're done! Now you can either
 a. move Ultimate S manually - copy your "atmosphere" and "ultimate" mod folders to the root of your SD card
 b. move Ultimate S automatically - press "Install Ultimate S To Folder" and select the root of your SD card (or sdmc folder on emulator)
-
-If you are on mac or linux - the older python based setup tool has been included for compatibility:
-1. Run "old_setup_tool.py" that comes with your download
-2. Pick either lite or full, and then specify which characters you would like to keep or remove
-3. download dependencies from the internet
-4. set up on your SD card/folder
-
 
 If you haven't set up smash ultimate modding as a whole, here's some wonderful guides!
 Setting up CFW on switch - https://switch.homebrew.guide/
@@ -43,8 +36,9 @@ Place skyline in "/atmosphere/contents/01006A800016E000"
 Q: "My game is crashing! What do I do?"
 A: There could be many things that could be causing this! Try going down this list to make sure that it isn't a user error:
 1. Make sure your version of smash ultimate is update 13.0.4 (other updates do not work)
-2. Make sure training modpack is not enabled (this means no training modpack plugin, and no param hook plugin)
-3. Make sure your plugin folder is CLEAN (this means the only plugins in the folder are libparam_config, libcsk_collection, libstage_config, libarcropolis, libnro_hook, libsmashline_plugin and libarena_latency_slider).
+2. Try running Ultimate S by itself
+3. Make sure you have the latest of every dependency
+4. Try redownloading the mod
 
 Q: "The character's attacks are messed up! They're doing their vanilla animations but the custom attack effects!"
 A: This sounds like you have a mod conflict. If you're on switch, this is easy because arcropolis will tell you this, and create a conflicts.json for you (which you can use to disable the conflicting mods).
@@ -62,8 +56,8 @@ and follow these instructions: https://www.guru3d.com/page/how-to-use-rivatuner-
 
 Q: "I'm trying to access Ultimate S Settings and custom gamemodes and I'm not getting the menu!"
 A: You're likely on emulator, which doesn't support web menus. 
-Pressing Ultimate S Settings will toggle both Ultimate S Mechanics and Shorthop Aerial Macro as a workaround.
-If you want to remove one of these you can go to "ultimate/ult-s/sys-flags/" and remove either "mecahnics.flag" or "sh.flag"
+Pressing Ultimate S Settings will cycle through the presets as a workaround.
+If you want to adjust the settings manually, you can open config.toml in ultimate/ult-s/config.toml
 
 Pressing custom gamemodes will let you play with Airdash Mode, Parry Mode, Hitfall Mode and Fighter Mode by default. 
 If you want to change this, go to "ultimate/ult-s/gamemode-default.txt" and add the modes you want to play:
@@ -90,7 +84,7 @@ A: Try going through these steps:
 2. Check your title screen, what version is it? Make sure it is 13.0.4, and no other version.
 3. Make sure that Ultimate S is enabled (either by mod manager on the switch, or inside of the mods folder on Yuzu).
 4. Make sure you ran "Ultimate S Setup Tool.exe" and chose your preferred options (you can check in ultimate/ult-s to see which characters you have enabled)
-5. If you are on emulator, make sure that there is a file called "legacy_discovery" at ultimate\arcropolis\config\2470593114292646594\15904440331188662786
+5. If you are on emulator, make sure that there is a file called "legacy_discovery" at ultimate/arcropolis/config/2470593114292646594/15904440331188662786
 If there isn't, you can make one by creating a file (no extension on the end) with "True" written in it
 
 

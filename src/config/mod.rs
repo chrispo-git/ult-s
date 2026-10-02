@@ -65,6 +65,7 @@ pub struct Attacks {
     pub grab: u8,
     pub lcancel: u8,
     pub special_cancel: u8,
+    pub damage_mul : u8,
 }
 
 #[derive(Debug, Deserialize, Clone, Hash)]
@@ -134,6 +135,7 @@ impl Config {
         "grab": {},
         "lcancel": {},
         "special_cancel": {},
+        "damage_mul": {},
         "shield": {},
         "shield_health": {},
         "shieldstun": {},
@@ -186,6 +188,7 @@ impl Config {
             self.attacks.grab,
             self.attacks.lcancel,
             self.attacks.special_cancel,
+            self.attacks.damage_mul,
             self.defense.shield,
             self.defense.shield_health,
             self.defense.shieldstun,

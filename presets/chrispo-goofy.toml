@@ -28,12 +28,13 @@ jcg = 0
 grab = 0
 lcancel = 2
 special_cancel = 1
+damage_mul = 0
 
 [defense]
 shield = 0
 shield_health = 0
 shieldstun = 1
-airdodge = 0
+airdodge = 4
 shield_drop = 0
 di = 0
 no_tumble_di = 0
