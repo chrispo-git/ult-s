@@ -61,8 +61,9 @@ If you're on Ryujinx, try download RTSS Rivatuner here: https://www.guru3d.com/d
 and follow these instructions: https://www.guru3d.com/page/how-to-use-rivatuner-to-limit-fps
 
 Q: "I'm trying to access Ultimate S Settings and custom gamemodes and I'm not getting the menu!"
-A: You're likely on emulator, which doesn't support web menus. 
-Pressing Ultimate S Settings will toggle both Ultimate S Mechanics and Shorthop Aerial Macro as a workaround.
+A: You're likely on emulator, which doesn't support web menus.
+Emulators that actually support web menus can opt in by creating an empty file at `ultimate/ult-s/web_menus.flag` on the SD card.
+For other emulators without web menu support, pressing Ultimate S Settings will toggle both Ultimate S Mechanics and Shorthop Aerial Macro as a workaround.
 If you want to remove one of these you can go to "ultimate/ult-s/sys-flags/" and remove either "mecahnics.flag" or "sh.flag"
 
 Pressing custom gamemodes will let you play with Airdash Mode, Parry Mode, Hitfall Mode and Fighter Mode by default. 
