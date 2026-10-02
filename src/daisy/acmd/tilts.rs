@@ -78,11 +78,11 @@ unsafe extern "C" fn daisy_ftilt_snd(agent: &mut L2CAgentBase) {
 unsafe extern "C" fn daisy_ftilt_expr(agent: &mut L2CAgentBase) {
 	if macros::is_excute(agent) {
 		ItemModule::set_have_item_visibility(agent.module_accessor, false, 0);
-		VisibilityModule::set_int64(agent.module_accessor, hash40("smash_item") as i64, hash40("smash_item_pan") as i64);
+		VisibilityModule::set_int64(agent.module_accessor, hash40("smash_item")as u64, hash40("smash_item_pan")as u64);
 	}
 	frame(agent.lua_state_agent, 19.0);
 	if macros::is_excute(agent) {
 		ItemModule::set_have_item_visibility(agent.module_accessor, false, 0);
-		VisibilityModule::set_int64(agent.module_accessor, hash40("smash_item") as i64, hash40("smash_item_none") as i64);
+		VisibilityModule::set_int64(agent.module_accessor, hash40("smash_item")as u64, hash40("smash_item_none")as u64);
 	}
 }

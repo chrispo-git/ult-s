@@ -25,6 +25,16 @@ impl VariableModule {
             .insert(key(module_accessor, id), value);
     }
 
+    pub unsafe fn add_int(module_accessor: *mut BattleObjectModuleAccessor, value: i32, id: i32) {
+        let value = Self::get_int(module_accessor, id) + value;
+        Self::set_int(module_accessor, value, id);
+    }
+
+    pub unsafe fn sub_int(module_accessor: *mut BattleObjectModuleAccessor, value: i32, id: i32) {
+        let value = Self::get_int(module_accessor, id) - value;
+        Self::set_int(module_accessor, value, id);
+    }
+
     pub unsafe fn inc_int(module_accessor: *mut BattleObjectModuleAccessor, id: i32) {
         let value = Self::get_int(module_accessor, id) + 1;
         Self::set_int(module_accessor, value, id);
