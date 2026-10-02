@@ -60,8 +60,8 @@ unsafe extern "C" fn link_fthrow_snd(fighter: &mut L2CAgentBase) {
 unsafe extern "C" fn link_fthrow_expr(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
         if macros::is_excute(fighter) {
-            VisibilityModule::set_int64(fighter.module_accessor, hash40("shield") as i64, hash40("shield_normal") as i64);
-            VisibilityModule::set_int64(fighter.module_accessor, hash40("sword") as i64, hash40("sword_normal") as i64);
+            VisibilityModule::set_int64(fighter.module_accessor, hash40("shield")as u64, hash40("shield_normal")as u64);
+            VisibilityModule::set_int64(fighter.module_accessor, hash40("sword")as u64, hash40("sword_normal")as u64);
             ItemModule::set_have_item_visibility(fighter.module_accessor, true, 0);
         }
 }
