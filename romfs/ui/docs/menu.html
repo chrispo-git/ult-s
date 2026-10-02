@@ -274,6 +274,14 @@
                         <div class="toggle-box" id="special_cancel_text">None</div>
                         </div>
                     </button>
+                    <button id="damage_mul_button"
+                        onclick="nextVal(this, 'damage_mul', ['1.0x', '1.25x', '1.5x', '2.0x', '0.5x', '0.75x'], 'damage_mul_text')"
+                        onfocus="textFocus('Toggle Special Cancels.')" class="flex-item">
+                        <div class="item-container">
+                            <h2>Damage Multiplier</h2>
+                        <div class="toggle-box" id="damage_mul_text">1.0x</div>
+                        </div>
+                    </button>
                 </div>
 
                 <!-- =Defense= -->
@@ -573,7 +581,7 @@
                     "agt", "djc", "footstool", "edge_cancel", "jump_cancel", "g2a"
                 ],
                 "attacks": [
-                    "jab_cancel", "dacus", "ac", "jcg", "grab", "lcancel", "special_cancel"
+                    "jab_cancel", "dacus", "ac", "jcg", "grab", "lcancel", "special_cancel", "damage_mul"
                 ],
                 "defense": [
                     "shield", "shield_health", "shieldstun", "airdodge", "shield_drop", 

@@ -28,6 +28,7 @@ jcg = 0
 grab = 0
 lcancel = 2
 special_cancel = 1
+damage_mul = 0
 
 [defense]
 shield = 0
