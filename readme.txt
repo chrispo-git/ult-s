@@ -59,23 +59,20 @@ A: You're likely on emulator, which doesn't support web menus.
 Pressing Ultimate S Settings will cycle through the presets as a workaround.
 If you want to adjust the settings manually, you can open config.toml in ultimate/ult-s/config.toml
 
-Pressing custom gamemodes will let you play with Airdash Mode, Parry Mode, Hitfall Mode and Fighter Mode by default. 
+Pressing custom gamemodes will let you play with Turbo Mode, Random Angles Mode & Critical Mode by default. 
 If you want to change this, go to "ultimate/ult-s/gamemode-default.txt" and add the modes you want to play:
 "turbo" - Turbo Mode
 "vampire" - Vampire Mode 
 "fgmode" - Fighter Mode 
 "sixtyfour" - Smash 64 Mode 
 "superboss" - Superboss Mode 
-"airdash" - Airdash Mode
 "angles" - Random Angles Mode
-"hitfall" - Hitfall Mode 
+"pogo" - Pogo Mode 
+"fly" - Fly Mode 
 "itemduel" - Item Duel Mode 
-"hitstun" - Hitstun Mode 
 "effects" - Random Effects Mode 
-"parry" - Parry Mode
 "smym" - Show Me Your Moves 
 "crit" - Critical Hit Mode 
-"rivals" - Rivals Mode 
 
 
 Q: "The game is just vanilla!"

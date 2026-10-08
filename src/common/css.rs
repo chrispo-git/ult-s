@@ -71,7 +71,7 @@ pub fn show_gamemodes_emu() {
         let path = "sd:/ultimate/ult-s/gamemode-default.txt";
         if !Path::new(path).exists() {
             let mut file = File::create(path);
-            file.expect("Can't Write To Gamemodes!").write_all("airdash\nparry\nhitfall\nfgmode".as_bytes());
+            file.expect("Can't Write To Gamemodes!").write_all("turbo\ncritical\nangles".as_bytes());
             println!("Default File Made");
         }
         let mut gamemodes = match std::fs::read_to_string(path) {
