@@ -17,10 +17,24 @@ use super::*;
 pub fn install() {
     Agent::new("pacman")
     .set_costume(get_marked_costumes("pacman","pacman"))
+    .acmd("game_attacks3", pac_ftilt, Priority::Low)    
+    .acmd("game_attacks3hi", pac_ftilt, Priority::Low)    
+    .acmd("game_attacks3lw", pac_ftilt, Priority::Low)    
     .acmd("game_attackhi3", pac_utilt, Priority::Low)    
     .install();
 }
-
+unsafe extern "C" fn pac_ftilt(agent: &mut L2CAgentBase) {
+    frame(agent.lua_state_agent, 5.0);
+    if macros::is_excute(agent) {
+        macros::ATTACK(agent, 0, 0, Hash40::new("kneel"), 8.0, 361, 124, 0, 30, 4.8, 7.0, -1.0, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_KICK, *ATTACK_REGION_KICK);
+        macros::ATTACK(agent, 1, 0, Hash40::new("kneel"), 8.0, 361, 124, 0, 30, 3.6, 0.8, 0.0, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_KICK, *ATTACK_REGION_KICK);
+        macros::ATTACK(agent, 2, 0, Hash40::new("hip"), 8.0, 361, 124, 0, 30, 3.0, 1.1, 0.0, 0.0, None, None, None, 1.0, 1.0, *ATTACK_SETOFF_KIND_ON, *ATTACK_LR_CHECK_F, false, 0, 0.0, 0, false, false, false, false, true, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_ALL, *COLLISION_PART_MASK_ALL, false, Hash40::new("collision_attr_normal"), *ATTACK_SOUND_LEVEL_M, *COLLISION_SOUND_ATTR_KICK, *ATTACK_REGION_KICK);
+    }
+    wait(agent.lua_state_agent, 3.0);
+    if macros::is_excute(agent) {
+        AttackModule::clear_all(agent.module_accessor);
+    }
+}
 unsafe extern "C" fn pac_utilt(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
 		frame(fighter.lua_state_agent, 5.0);
