@@ -32,7 +32,7 @@ pub unsafe fn agt(fighter : &mut L2CFighterCommon, config : &config::Config, sta
 }
 
 pub unsafe fn g2a(fighter : &mut L2CFighterCommon, config : &config::Config, status_kind : i32) {
-    if config.movement.g2a == 0 {
+    if config.movement.g2a == 0 || is_gamemode("sixtyfour".to_string()) {
         return;
     }
     if !crate::is_in!(status_kind,

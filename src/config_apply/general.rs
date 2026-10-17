@@ -23,6 +23,9 @@ pub unsafe fn hitstun_change(fighter : &mut L2CFighterCommon, status_kind : i32,
     }
 }
 pub unsafe fn hitstun(fighter: &mut L2CFighterCommon, config : &config::Config, status_kind : i32, entry_id : usize) {
+    if is_gamemode("sixtyfour".to_string()) {
+        return hitstun_change(fighter, status_kind, entry_id, 1.3325);
+    }
     if config.general.hitstun == 0 {
         return;
     }

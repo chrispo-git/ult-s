@@ -20,11 +20,6 @@ static mut PERFECT_PIVOT: [bool; 8] = [false; 8];
 
 static HOLD_BUFFER_LIMIT : i32 = 20; //Max frames for hold buffer
 
-static HAS_NESS_FLAG: Lazy<bool> = Lazy::new(|| Path::new("sd:/ultimate/ult-s/ness.flag").exists());
-static HAS_LUCAS_FLAG: Lazy<bool> = Lazy::new(|| Path::new("sd:/ultimate/ult-s/lucas.flag").exists());
-static HAS_MEWTWO_FLAG: Lazy<bool> = Lazy::new(|| Path::new("sd:/ultimate/ult-s/mewtwo.flag").exists());
-static HAS_TRAIL_FLAG: Lazy<bool> = Lazy::new(|| Path::new("sd:/ultimate/ult-s/trail.flag").exists());
-
 static BUTTONS_LIST: Lazy<Vec<i32>> = Lazy::new(|| {
     vec![
         *CONTROL_PAD_BUTTON_ATTACK,
@@ -41,17 +36,10 @@ static BUTTONS_LIST: Lazy<Vec<i32>> = Lazy::new(|| {
     ]
 });
 
-pub unsafe fn lazy_warm() {
-	Lazy::force(&HAS_NESS_FLAG);
-    Lazy::force(&HAS_LUCAS_FLAG);
-    Lazy::force(&HAS_MEWTWO_FLAG);
-    Lazy::force(&HAS_TRAIL_FLAG);
-    Lazy::force(&BUTTONS_LIST);
-}
 //Perfect Pivot
 pub unsafe fn perfectpivot(fighter : &mut L2CFighterCommon, status_kind : i32, ENTRY_ID : usize) {
     unsafe {
-		if config::get().movement.pivots == 2 {
+		if config::get().movement.pivots == 2 && !is_gamemode("sixtyfour".to_string()) {
 			return;
 		}
 		if status_kind == *FIGHTER_STATUS_KIND_TURN {
@@ -63,7 +51,7 @@ pub unsafe fn perfectpivot(fighter : &mut L2CFighterCommon, status_kind : i32, E
             return;
         }
         let frame = MotionModule::frame(fighter.module_accessor) as i32;
-        let max = if config::get().movement.pivots == 0 {5} else {10};
+        let max = if config::get().movement.pivots == 0 && !is_gamemode("sixtyfour".to_string()) {5}  else {10};
         if (3..max).contains(&frame) {
 			crate::transition_set!(ENTRY_ID, can_dash);
 			crate::transition_set!(ENTRY_ID, can_turndash);
@@ -82,7 +70,7 @@ pub unsafe fn perfectpivot(fighter : &mut L2CFighterCommon, status_kind : i32, E
 //Moonwalk
 pub unsafe fn moonwalk(fighter : &mut L2CFighterCommon, status_kind : i32, ENTRY_ID : usize) {
     unsafe {
-		if config::get().movement.moonwalk != 0  && !is_gamemode("rivals".to_string()) {
+		if config::get().movement.moonwalk != 0 {
 			return;
 		}
         if !crate::is_in!(status_kind, *FIGHTER_STATUS_KIND_DASH, *FIGHTER_STATUS_KIND_TURN_DASH) {
@@ -151,11 +139,12 @@ pub unsafe fn djc(fighter : &mut L2CFighterCommon, status_kind : i32) {
         if !crate::is_in!(fighter_kind, *FIGHTER_KIND_NESS, *FIGHTER_KIND_LUCAS, *FIGHTER_KIND_MEWTWO, *FIGHTER_KIND_TRAIL) {
             return;
         }
+	    let costume = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) as usize;
         if 
-            (fighter_kind == *FIGHTER_KIND_NESS && !*HAS_NESS_FLAG) ||
-            (fighter_kind == *FIGHTER_KIND_LUCAS && !*HAS_LUCAS_FLAG) ||
-            (fighter_kind == *FIGHTER_KIND_MEWTWO && !*HAS_MEWTWO_FLAG) ||
-            (fighter_kind == *FIGHTER_KIND_TRAIL && !*HAS_TRAIL_FLAG)
+            (fighter_kind == *FIGHTER_KIND_NESS && !get_marked_costumes("ness","ness").contains(&costume)) ||
+            (fighter_kind == *FIGHTER_KIND_LUCAS && !get_marked_costumes("lucas","lucas").contains(&costume)) ||
+            (fighter_kind == *FIGHTER_KIND_MEWTWO && !get_marked_costumes("mewtwo","mewtwo").contains(&costume)) ||
+            (fighter_kind == *FIGHTER_KIND_TRAIL && !get_marked_costumes("trail","trail").contains(&costume))
         {
             return;
         }
@@ -226,7 +215,7 @@ pub unsafe fn hold_buffer_killer(fighter : &mut L2CFighterCommon, status_kind : 
 //Dash changes
 pub unsafe fn dash(fighter : &mut L2CFighterCommon, status_kind : i32) {
     unsafe {
-		if config::get().movement.dash != 0  && !is_gamemode("rivals".to_string())  {
+		if config::get().movement.dash != 0  {
 			return;
 		}
         if !crate::is_in!(status_kind, *FIGHTER_STATUS_KIND_DASH, *FIGHTER_STATUS_KIND_TURN_DASH, 
@@ -371,7 +360,7 @@ unsafe fn status_treadjump(fighter: &mut L2CFighterCommon) -> L2CValue {
 
 #[skyline::hook(replace = L2CFighterCommon_sub_tread_jump_uniq_check)]
 unsafe fn sub_tread_jump_uniq_check(fighter: &mut L2CFighterCommon) -> L2CValue {
-    if !WorkModule::is_flag(fighter.module_accessor, *FIGHTER_STATUS_TREAD_FLAG_NO_REACTION) && !is_gamemode("rivals".to_string()) {
+    if !WorkModule::is_flag(fighter.module_accessor, *FIGHTER_STATUS_TREAD_FLAG_NO_REACTION) {
         let jump_mini = if WorkModule::is_flag(fighter.module_accessor, *FIGHTER_STATUS_TREAD_FLAG_BUTTON) {
             // If any valid footstool button is held, do not turn on the short hop flag
             ControlModule::check_button_off(fighter.module_accessor, *CONTROL_PAD_BUTTON_JUMP)

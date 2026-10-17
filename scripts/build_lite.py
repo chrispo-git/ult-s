@@ -3,6 +3,7 @@ import shutil
 from zipfile import ZipFile
 import sys
 import subprocess
+import re
 
 from merge_config import merge_configs
 
@@ -21,7 +22,7 @@ def copytree(src, dst, symlinks=False, ignore=None):
         s = os.path.join(src, item)
         d = os.path.join(dst, item)
         if os.path.isdir(s):
-            shutil.copytree(s, d, symlinks, ignore)
+            shutil.copytree(s, d, symlinks, ignore, dirs_exist_ok=True)
         else:
             shutil.copy2(s, d)
 
@@ -130,8 +131,19 @@ if os.path.exists(r'target'):
                                     os.makedirs(new_path)
                                 copytree(path, new_path)
 
+                # config.json files live outside the copied costume folders, so pull them in before merging.
+                # Only take the ones that reference added slots (c1xx etc.); vanilla-slot configs belong to the full build
+                for root, dirs, files in os.walk(r'romfs/fighter'):
+                    if "config.json" in files:
+                        with open(os.path.join(root, "config.json"), encoding="utf-8") as f:
+                            if not re.search(r'(?<![a-z])c[1-9][0-9]+', f.read()):
+                                continue
+                        new_path = root.replace("romfs", "releases/ultimate/mods/Ultimate S Lite", 1)
+                        os.makedirs(new_path, exist_ok=True)
+                        shutil.copy2(os.path.join(root, "config.json"), new_path)
+
                 #Version Text
-                
+
                 merge_configs(r'releases/ultimate/mods/Ultimate S Lite')
                 print("Copying from romfs finished, now zipping")
             else:

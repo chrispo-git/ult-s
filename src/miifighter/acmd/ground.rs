@@ -15,6 +15,9 @@ use crate::util::*;
 use super::*;
 
 pub fn install() {
+	if get_costume_count("miifighter","miifighter") < 1 {
+		return;
+	}
 	Agent::new("miifighter")
     .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("game_attack11", brawler_jab1, Priority::Low)    

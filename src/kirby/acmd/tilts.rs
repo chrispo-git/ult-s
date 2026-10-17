@@ -16,7 +16,7 @@ use super::*;
 
 pub fn install() {
     Agent::new("kirby")
-    .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
+    .set_costume(get_marked_costumes("kirby","kirby"))
     .acmd("game_attacklw3", kirby_dtilt, Priority::Low)    
     .install();
 }

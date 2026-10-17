@@ -15,13 +15,14 @@ static mut IS_UNPRESSED : bool = false;
 #[skyline::hook(offset = 0x1792b80, inline)]
 unsafe fn on_rule_selection(_: &skyline::hooks::InlineCtx) {
     if ninput::any::is_down(ninput::Buttons::R) {
-        if !is_on_ryujinx() {
+        if web_menus_supported() {
             show_gamemodes();
         } else {
             show_gamemodes_emu();
         }
     } else {
         reset_gamemodes();
+		reload_config_values();
     }
 }
 static mut HAS_WARMED_UP: bool = false;
@@ -38,7 +39,7 @@ unsafe fn css_main_loop(arg: *const CharaSelect) {
         }
         if ninput::any::is_down(ninput::Buttons::MINUS) {
             if !IS_UNPRESSED {
-                if !is_on_ryujinx() {
+                if web_menus_supported() {
                     show_mod_settings();
                 } else {
                     show_mod_settings_emu();
@@ -70,7 +71,7 @@ pub fn show_gamemodes_emu() {
         let path = "sd:/ultimate/ult-s/gamemode-default.txt";
         if !Path::new(path).exists() {
             let mut file = File::create(path);
-            file.expect("Can't Write To Gamemodes!").write_all("airdash\nparry\nhitfall\nfgmode".as_bytes());
+            file.expect("Can't Write To Gamemodes!").write_all("turbo\ncritical\nangles".as_bytes());
             println!("Default File Made");
         }
         let mut gamemodes = match std::fs::read_to_string(path) {
@@ -132,42 +133,38 @@ pub fn show_gamemodes() {
 		reload_config_values();
 	}
 }
+static mut PRESET_CYCLE_INDEX: usize = 0;
+
 pub fn show_mod_settings_emu() {
-    let path = "sd:/ultimate/ult-s/sys-flags/";
-    let path1 = "sd:/ultimate/ult-s/";
     println!("Emulator Mod Settings.");
-    let is_toggle_off = Path::new("sd:/ultimate/ult-s/sys-flags/mechanics.flag").is_file();
-    println!("Is Toggle Off? {}", is_toggle_off);
-    match std::fs::create_dir(path1) {
-        Ok(_) => println!("ult-s Folder Created!"),
-        Err(_) => {
-            println!("ult-s folder already exists!");
+    let path1 = "sd:/ultimate/ult-s/";
+    if !Path::new(path1).exists() {
+        if let Err(e) = std::fs::create_dir_all(path1) {
+            println!("Error creating settings directories: {:?}", e);
         }
     }
-    match std::fs::create_dir(path) {
-        Ok(_) => println!("Settings Folder Created!"),
-        Err(_) => {
-            match std::fs::remove_dir_all(path) {
-                Ok(_) => println!("Settings reset successfully!"),
-                Err(_) => println!("Error resetting settings!")
-            }
-            std::fs::create_dir(path);
-        }
+
+    let presets = config::get_presets();
+    if presets.is_empty() {
+        println!("No presets found to cycle through!");
+        return;
     }
-    if !is_toggle_off {
-        std::fs::File::create(format!("{}mechanics.flag", path)).unwrap();
-        std::fs::File::create(format!("{}sh.flag", path)).unwrap();
-        println!("Toggling On!");
-    } else {
-        println!("Toggling Off!");
-        match std::fs::remove_dir_all(path) {
-            Ok(_) => println!("Settings reset successfully!"),
-            Err(_) => println!("Error resetting settings!")
+
+    unsafe {
+        let index = PRESET_CYCLE_INDEX % presets.len();
+        let preset = &presets[index];
+        let preset_path = format!("sd:/ultimate/ult-s/presets/{}.toml", preset.name);
+
+        match std::fs::copy(&preset_path, "sd:/ultimate/ult-s/config.toml") {
+            Ok(_) => println!("Applied preset: {}", preset.name),
+            Err(e) => println!("Failed to apply preset '{}': {:?}", preset.name, e),
         }
+
+        PRESET_CYCLE_INDEX = (index + 1) % presets.len();
+
+        reload_config_values();
+        DialogOk::ok(format!("Switched to {} preset.", preset.name));
     }
-	unsafe {
-		reload_config_values();
-	}
 }
 fn calculate_hash<T: Hash>(t: &T) -> u64 {
     let mut s = DefaultHasher::new();
