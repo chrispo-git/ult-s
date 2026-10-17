@@ -48,6 +48,7 @@ Q: "I'm trying to access Ultimate S Settings and custom gamemodes and I'm not ge
 A: You're likely on emulator, which doesn't support web menus. 
 Pressing Ultimate S Settings will cycle through the presets as a workaround.
 If you want to adjust the settings manually, you can open config.toml in ultimate/ult-s/config.toml
+Emulators that actually support web menus can opt in by creating an empty file at `ultimate/ult-s/web_menus.flag` on the SD card.
 
 Pressing custom gamemodes will let you play with Turbo Mode, Random Angles Mode & Critical Mode by default. 
 If you want to change this, go to "ultimate/ult-s/gamemode-default.txt" and add the modes you want to play:

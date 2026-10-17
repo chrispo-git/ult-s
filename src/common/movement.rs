@@ -20,11 +20,6 @@ static mut PERFECT_PIVOT: [bool; 8] = [false; 8];
 
 static HOLD_BUFFER_LIMIT : i32 = 20; //Max frames for hold buffer
 
-static HAS_NESS_FLAG: Lazy<bool> = Lazy::new(|| Path::new("sd:/ultimate/ult-s/ness.flag").exists());
-static HAS_LUCAS_FLAG: Lazy<bool> = Lazy::new(|| Path::new("sd:/ultimate/ult-s/lucas.flag").exists());
-static HAS_MEWTWO_FLAG: Lazy<bool> = Lazy::new(|| Path::new("sd:/ultimate/ult-s/mewtwo.flag").exists());
-static HAS_TRAIL_FLAG: Lazy<bool> = Lazy::new(|| Path::new("sd:/ultimate/ult-s/trail.flag").exists());
-
 static BUTTONS_LIST: Lazy<Vec<i32>> = Lazy::new(|| {
     vec![
         *CONTROL_PAD_BUTTON_ATTACK,
@@ -41,13 +36,6 @@ static BUTTONS_LIST: Lazy<Vec<i32>> = Lazy::new(|| {
     ]
 });
 
-pub unsafe fn lazy_warm() {
-	Lazy::force(&HAS_NESS_FLAG);
-    Lazy::force(&HAS_LUCAS_FLAG);
-    Lazy::force(&HAS_MEWTWO_FLAG);
-    Lazy::force(&HAS_TRAIL_FLAG);
-    Lazy::force(&BUTTONS_LIST);
-}
 //Perfect Pivot
 pub unsafe fn perfectpivot(fighter : &mut L2CFighterCommon, status_kind : i32, ENTRY_ID : usize) {
     unsafe {
@@ -151,11 +139,12 @@ pub unsafe fn djc(fighter : &mut L2CFighterCommon, status_kind : i32) {
         if !crate::is_in!(fighter_kind, *FIGHTER_KIND_NESS, *FIGHTER_KIND_LUCAS, *FIGHTER_KIND_MEWTWO, *FIGHTER_KIND_TRAIL) {
             return;
         }
+	    let costume = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) as usize;
         if 
-            (fighter_kind == *FIGHTER_KIND_NESS && !*HAS_NESS_FLAG) ||
-            (fighter_kind == *FIGHTER_KIND_LUCAS && !*HAS_LUCAS_FLAG) ||
-            (fighter_kind == *FIGHTER_KIND_MEWTWO && !*HAS_MEWTWO_FLAG) ||
-            (fighter_kind == *FIGHTER_KIND_TRAIL && !*HAS_TRAIL_FLAG)
+            (fighter_kind == *FIGHTER_KIND_NESS && !get_marked_costumes("ness","ness").contains(&costume)) ||
+            (fighter_kind == *FIGHTER_KIND_LUCAS && !get_marked_costumes("lucas","lucas").contains(&costume)) ||
+            (fighter_kind == *FIGHTER_KIND_MEWTWO && !get_marked_costumes("mewtwo","mewtwo").contains(&costume)) ||
+            (fighter_kind == *FIGHTER_KIND_TRAIL && !get_marked_costumes("trail","trail").contains(&costume))
         {
             return;
         }

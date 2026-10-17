@@ -75,7 +75,6 @@ pub unsafe fn lazy_warm() {
     cancel::lazy_warm();
     dacus::lazy_warm();
     landing::lazy_warm();
-    movement::lazy_warm();
     projectile_invuln::lazy_warm();
     wavedash::lazy_warm();
     for entry_id in 0..8 {

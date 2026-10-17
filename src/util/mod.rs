@@ -255,7 +255,7 @@ pub unsafe fn article_hook(boma: &mut smash::app::BattleObjectModuleAccessor, in
 	if smash::app::utility::get_category(boma) != *BATTLE_OBJECT_CATEGORY_FIGHTER {
 		return original!()(boma, int, arg3, arg4)
 	}
-	if int == *FIGHTER_WARIO_GENERATE_ARTICLE_WARIOBIKE && smash::app::utility::get_kind(boma) == *FIGHTER_KIND_WARIO && Path::new("sd:/ultimate/ult-s/wario.flag").is_file() {
+	if int == *FIGHTER_WARIO_GENERATE_ARTICLE_WARIOBIKE && smash::app::utility::get_kind(boma) == *FIGHTER_KIND_WARIO {
 		let costumes = get_marked_costumes("wario","wario");
 		let curr_costume = WorkModule::get_int(boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);
 		if !costumes.contains(&(curr_costume as usize)) {
@@ -730,6 +730,21 @@ pub(crate) fn is_on_ryujinx() -> bool {
             return false;
         }
     }
+}
+
+/// Whether the native Skyline web-menu implementation should be used.
+///
+/// The legacy address heuristic remains the safe default for emulators that do
+/// not implement the WebApplet protocol. Implementations that do support it
+/// can opt in without pretending to be hardware by creating this file.
+#[inline(always)]
+pub(crate) fn web_menus_supported() -> bool {
+    if Path::new("sd:/ultimate/ult-s/web_menus.flag").is_file() {
+        println!("Using native web menus (web_menus.flag present)");
+        return true;
+    }
+
+    !is_on_ryujinx()
 }
 
 
