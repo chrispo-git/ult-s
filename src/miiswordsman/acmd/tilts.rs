@@ -17,6 +17,9 @@ use super::*;
 use super::super::*;
 
 pub fn install() {
+	if get_costume_count("miigunner","miigunner") < 1 {
+		return;
+	}
     Agent::new("miiswordsman")
     .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
     .acmd("game_attacklw3", sword_dtilt, Priority::Low)    
