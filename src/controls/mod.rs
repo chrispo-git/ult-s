@@ -15,14 +15,14 @@ use smash::app::lua_bind::*;
 use smash::lua2cpp::*;
 use smash::lib::{*, lua_const::*};
 
-#[skyline::hook(offset = 0x16d85dc, inline)]
+#[skyline::hook(offset = 0x16d843c, inline)]
 unsafe fn packed_packet_creation(ctx: &mut skyline::hooks::InlineCtx) {
     // *ctx.registers[8].x.as_mut() |= 0xFC_00000000;
     ctx.registers[22].set_x(0x2);
     // println!("{:#x} | {:#x}", *ctx.registers[8].x.as_ref(), *ctx.registers[22].x.as_ref());
 }
 
-#[skyline::hook(offset = 0x16d8610, inline)]
+#[skyline::hook(offset = 0x16d8470, inline)]
 unsafe fn write_packet(ctx: &mut skyline::hooks::InlineCtx) {
     let raw = *(&ctx.registers[19].x());
     
@@ -382,7 +382,7 @@ struct ControlModuleInternal {
 }
 
 unsafe fn get_mapped_controller_inputs(player: usize) -> &'static MappedInputs {
-    let base = *((skyline::hooks::getRegionAddress(skyline::hooks::Region::Text) as *mut u8).add(0x52c40f0) as *const u64);
+    let base = *((skyline::hooks::getRegionAddress(skyline::hooks::Region::Text) as *mut u8).add(0x52c50f0) as *const u64);
     &*((base + 0x2b8 + 0x8 * (player as u64)) as *const MappedInputs)
 }
 
@@ -430,7 +430,7 @@ unsafe fn after_exec(ctx: &skyline::hooks::InlineCtx) {
     *(internal_class as *mut f32).add(0x44 / 0x4) = LAST_ALT_STICK[1];
 }
 
-#[skyline::hook(offset = 0x16d7ee4, inline)]
+#[skyline::hook(offset = 0x16d7d44, inline)]
 unsafe fn handle_incoming_packet(ctx: &mut skyline::hooks::InlineCtx) {
     let packet = *(&ctx.registers[15].x());
 
