@@ -81,7 +81,7 @@ pub unsafe fn non_tumble_di(fighter : &mut L2CFighterCommon, status_kind : i32) 
 #[skyline::hook(replace = smash::lua2cpp::L2CFighterCommon::ftStatusUniqProcessDamage_exec_common)]
 pub unsafe fn ftStatusUniqProcessDamage_exec_common_hook(fighter: &mut L2CFighterCommon){
     let ret = original!()(fighter);
-	if !is_mechanics_enabled() {
+    if config::get().defense.no_tumble_di != 0 {
         ret;
     }
     smash::lua2cpp::L2CFighterCommon::FighterStatusDamage__correctDamageVector(fighter);
@@ -91,7 +91,7 @@ pub unsafe fn ftStatusUniqProcessDamage_exec_common_hook(fighter: &mut L2CFighte
 #[skyline::hook(replace = smash::lua2cpp::L2CFighterCommon::ftStatusUniqProcessDamage_exec)]
 pub unsafe fn ftStatusUniqProcessDamage_exec_hook(fighter: &mut L2CFighterCommon){
     let ret = original!()(fighter);
-	if !is_mechanics_enabled() {
+    if config::get().defense.no_tumble_di != 0 {
         ret;
     }
     smash::lua2cpp::L2CFighterCommon::FighterStatusDamage__correctDamageVector(fighter);

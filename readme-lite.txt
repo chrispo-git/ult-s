@@ -31,8 +31,9 @@ Place skyline in "/atmosphere/contents/01006A800016E000"
 Q: "My game is crashing! What do I do?"
 A: There could be many things that could be causing this! Try going down this list to make sure that it isn't a user error:
 1. Make sure your version of smash ultimate is update 13.0.4 (other updates do not work)
-2. Make sure training modpack is not enabled (this means no training modpack plugin, and no param hook plugin)
-3. Make sure your plugin folder is CLEAN (this means the only plugins in the folder are libparam_config, libcsk_collection, libstage_config, libarcropolis, libnro_hook, libsmashline_plugin and libarena_latency_slider).
+2. Try running Ultimate S by itself
+3. Make sure you have the latest of every dependency
+4. Try redownloading the mod
 
 Q: "The character's attacks are messed up! They're doing their vanilla animations but the custom attack effects!"
 A: This sounds like you have a mod conflict. If you're on switch, this is easy because arcropolis will tell you this, and create a conflicts.json for you (which you can use to disable the conflicting mods).
@@ -44,28 +45,25 @@ Q: "The character's attacks are messed up! They're doing their custom animations
 A: This also sounds like a mod conflict! Refer to above.
 
 Q: "I'm trying to access Ultimate S Settings and custom gamemodes and I'm not getting the menu!"
-A: You're likely on emulator, which doesn't support web menus.
+A: You're likely on emulator, which doesn't support web menus. 
+Pressing Ultimate S Settings will cycle through the presets as a workaround.
+If you want to adjust the settings manually, you can open config.toml in ultimate/ult-s/config.toml
 Emulators that actually support web menus can opt in by creating an empty file at `ultimate/ult-s/web_menus.flag` on the SD card.
-For other emulators without web menu support, pressing Ultimate S Settings will toggle both Ultimate S Mechanics and Shorthop Aerial Macro as a workaround.
-If you want to remove one of these you can go to "ultimate/ult-s/sys-flags/" and remove either "mecahnics.flag" or "sh.flag"
 
-Pressing custom gamemodes will let you play with Airdash Mode, Parry Mode, Hitfall Mode and Fighter Mode by default. 
+Pressing custom gamemodes will let you play with Turbo Mode, Random Angles Mode & Critical Mode by default. 
 If you want to change this, go to "ultimate/ult-s/gamemode-default.txt" and add the modes you want to play:
 "turbo" - Turbo Mode
 "vampire" - Vampire Mode 
 "fgmode" - Fighter Mode 
 "sixtyfour" - Smash 64 Mode 
 "superboss" - Superboss Mode 
-"airdash" - Airdash Mode
 "angles" - Random Angles Mode
-"hitfall" - Hitfall Mode 
+"pogo" - Pogo Mode 
+"fly" - Fly Mode 
 "itemduel" - Item Duel Mode 
-"hitstun" - Hitstun Mode 
 "effects" - Random Effects Mode 
-"parry" - Parry Mode
 "smym" - Show Me Your Moves 
 "crit" - Critical Hit Mode 
-"rivals" - Rivals Mode 
 
 Q: "The game is going too fast!"
 A: You're likely on Yuzu or one of its forks. Make sure game speed is set to 50%, by going to emulation -> config -> system -> limit speed percent (on yuzu) and setting it to 50%, and this should make your game run at regular speeds.
@@ -77,7 +75,7 @@ A: Try going through these steps:
 1. Check your title screen, does it say Arcropolis in the top right? If not, arcropolis isn't running, make sure you have skyline AND arcropolis installed correctly.
 2. Check your title screen, what version is it? Make sure it is 13.0.4, and no other version.
 3. Make sure that Ultimate S is enabled (either by mod manager on the switch, or inside of the mods folder on Yuzu).
-4. If you are on emulator, make sure that there is a file called "legacy_discovery" at ultimate\arcropolis\config\2470593114292646594\15904440331188662786
+5. If you are on emulator, make sure that there is a file called "legacy_discovery" at ultimate/arcropolis/config/2470593114292646594/15904440331188662786
 If there isn't, you can make one by creating a file (no extension on the end) with "True" written in it
 
 

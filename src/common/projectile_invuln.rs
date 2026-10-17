@@ -9,6 +9,7 @@ use once_cell::sync::Lazy;
 
 pub struct ReflectorParams {
     pub fighter_kind: i32,
+    pub slots: Vec<usize>,
     pub motions: &'static [&'static str],
     pub start_frame: f32,
     pub end_frame: f32,
@@ -31,6 +32,7 @@ static REFLECTOR_DATA: Lazy<Vec<ReflectorParams>> = Lazy::new(|| {
     vec![
         ReflectorParams {
             fighter_kind: *FIGHTER_KIND_LUIGI,
+            slots: get_marked_costumes("luigi", "luigi"),
             motions: &["special_s", "special_air_s", "special_s_discharge"],
             start_frame: 0.0,
             end_frame: f32::MAX,
@@ -41,6 +43,7 @@ static REFLECTOR_DATA: Lazy<Vec<ReflectorParams>> = Lazy::new(|| {
         },
         ReflectorParams {
             fighter_kind: *FIGHTER_KIND_DEDEDE,
+            slots: get_marked_costumes("dedede", "dedede"),
             motions: &["attack_dash"],
             start_frame: 15.0,
             end_frame: 28.0,
@@ -51,6 +54,7 @@ static REFLECTOR_DATA: Lazy<Vec<ReflectorParams>> = Lazy::new(|| {
         },
         ReflectorParams {
             fighter_kind: *FIGHTER_KIND_MURABITO,
+            slots: get_marked_costumes("murabito", "murabito"),
             motions: &["special_n"],
             start_frame: 3.0,
             end_frame: 10.0,
@@ -61,6 +65,7 @@ static REFLECTOR_DATA: Lazy<Vec<ReflectorParams>> = Lazy::new(|| {
         },
         ReflectorParams {
             fighter_kind: *FIGHTER_KIND_MIISWORDSMAN,
+            slots: [0, 1, 2, 3, 4, 5, 6, 7].to_vec(),
             motions: &["special_s1", "special_air_s1"],
             start_frame: 0.0,
             end_frame: f32::MAX,
@@ -71,6 +76,7 @@ static REFLECTOR_DATA: Lazy<Vec<ReflectorParams>> = Lazy::new(|| {
         },
         ReflectorParams {
             fighter_kind: *FIGHTER_KIND_RYU,
+            slots: get_marked_costumes("ryu", "ryu"),
             motions: &["special_s"],
             start_frame: 0.0,
             end_frame: f32::MAX,
@@ -81,6 +87,7 @@ static REFLECTOR_DATA: Lazy<Vec<ReflectorParams>> = Lazy::new(|| {
         },
         ReflectorParams {
             fighter_kind: *FIGHTER_KIND_GAOGAEN,
+            slots: get_marked_costumes("gaogaen", "gaogaen"),
             motions: &["attack_dash"],
             start_frame: 7.0,
             end_frame: 19.0,
@@ -91,6 +98,7 @@ static REFLECTOR_DATA: Lazy<Vec<ReflectorParams>> = Lazy::new(|| {
         },
         ReflectorParams {
             fighter_kind: *FIGHTER_KIND_KROOL,
+            slots: get_marked_costumes("krool", "krool"),
             motions: &["attack_dash"],
             start_frame: 10.0,
             end_frame: 29.0,
@@ -111,12 +119,10 @@ static REFLECTOR_MAX : f32 = 50.0;
 
 pub unsafe fn opff(fighter : &mut L2CFighterCommon, motion_kind : u64) {
     unsafe {
-		if !is_mechanics_enabled() {
-			return;
-		}
+        let slot = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) as usize;
 		let fighter_kind = smash::app::utility::get_kind(boma(fighter));
 		let active_reflector = REFLECTOR_DATA.iter().find(|r| {
-			r.fighter_kind == fighter_kind && r.is_motion(motion_kind)
+			r.fighter_kind == fighter_kind && r.is_motion(motion_kind) && r.slots.contains(&slot)
 		});
 		if let Some(r) = active_reflector {
 			let frame = MotionModule::frame(fighter.module_accessor);

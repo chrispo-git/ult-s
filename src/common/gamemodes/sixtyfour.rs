@@ -12,10 +12,6 @@ use smash::phx::Vector2f;
 use crate::util::*;
 
 pub unsafe fn float_setter(fighter : &mut L2CFighterCommon) {
-    
-    WorkModule::set_float(fighter.module_accessor, 0.0, *FIGHTER_STATUS_DAMAGE_WORK_FLOAT_VECOR_CORRECT_STICK_X);
-    WorkModule::set_float(fighter.module_accessor, 0.0, *FIGHTER_STATUS_DAMAGE_WORK_FLOAT_VECOR_CORRECT_STICK_Y);
-    
     WorkModule::set_float(fighter.module_accessor, 65.0, *FIGHTER_INSTANCE_WORK_ID_FLOAT_GUARD_SHIELD_MAX);
 
     crate::transition_set!(WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize, can_spotdodge);
@@ -31,7 +27,7 @@ pub unsafe fn status_force_change(fighter : & mut L2CFighterCommon, status_kind 
         n if n == *FIGHTER_STATUS_KIND_ATTACK_LW4_HOLD => {
             StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_ATTACK_LW4, false);
         },
-        n if n == *FIGHTER_STATUS_KIND_CATCH_DASH => {
+        n if crate::is_in!(n, *FIGHTER_STATUS_KIND_CATCH_DASH, *FIGHTER_STATUS_KIND_CATCH_TURN) => {
             StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_CATCH, false);
         },
         _ => {},

@@ -94,13 +94,24 @@ unsafe fn attack_replace(lua_state: u64) {
     let mut hitbox_params: Vec<L2CValue> = (0..36).map(|i| l2c_agent.pop_lua_stack(i + 1)).collect();
     l2c_agent.clear_lua_stack();
     for (i, x) in hitbox_params.iter_mut().enumerate().take(36) {
-        if i == 3 && is_gamemode("critical".to_string()) && crate::get_state!(ENTRY_ID, GamemodeAttacksState).do_critical {
-            if x.get_num() < 2.5 {
-                //println!("damage is too low! {}%", x.get_num());
-                l2c_agent.push_lua_stack(x);
+        if i == 3  {
+            if is_gamemode("critical".to_string()) && crate::get_state!(ENTRY_ID, GamemodeAttacksState).do_critical {
+                if x.get_num() < 2.5 {
+                    //println!("damage is too low! {}%", x.get_num());
+                    l2c_agent.push_lua_stack(x);
+                } else {
+                    //println!("damage new : {}", x.get_num() * 2.0);
+                    l2c_agent.push_lua_stack(&mut L2CValue::new_num(x.get_num() * 2.0));
+                }
             } else {
-                //println!("damage new : {}", x.get_num() * 2.0);
-                l2c_agent.push_lua_stack(&mut L2CValue::new_num(x.get_num() * 2.0));
+                match config::get().attacks.damage_mul {
+                    1 => l2c_agent.push_lua_stack(&mut L2CValue::new_num(x.get_num() * 1.25)),
+                    2 => l2c_agent.push_lua_stack(&mut L2CValue::new_num(x.get_num() * 1.5)),
+                    3 => l2c_agent.push_lua_stack(&mut L2CValue::new_num(x.get_num() * 2.0)),
+                    4 => l2c_agent.push_lua_stack(&mut L2CValue::new_num(x.get_num() * 0.5)),
+                    5 => l2c_agent.push_lua_stack(&mut L2CValue::new_num(x.get_num() * 0.75)),
+                    _ => l2c_agent.push_lua_stack(x),
+                };
             }
         } else if i == 4 && is_gamemode("angles".to_string()) {
             l2c_agent.push_lua_stack(&mut L2CValue::new_num(sv_math::rand(hash40("fighter"), 361) as f32));
