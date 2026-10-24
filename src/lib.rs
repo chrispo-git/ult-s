@@ -32,10 +32,10 @@ pub fn is_on_ryujinx() -> bool {
         // Ryujinx skip based on text addr
         let text_addr = skyline::hooks::getRegionAddress(skyline::hooks::Region::Text) as u64;
         if text_addr == 0x8504000 || text_addr == 0x80004000 {
-            println!("we are on Emulator");
+            crate::debug!("[Ultimate S] we are on Emulator");
             return true;
         } else {
-            println!("we are not on Emulator");
+            crate::debug!("[Ultimate S] we are not on Emulator");
             return false;
         }
     }
@@ -54,10 +54,10 @@ pub fn quick_validate_install() -> bool {
     ).is_file();
 
     if has_param_config {
-        println!("libparam_config.nro is present");
+        crate::debug!("[Ultimate S] libparam_config.nro is present");
     } else {
         if is_on_ryujinx() {
-            println!("libparam_config.nro not found! This installation is incomplete. Please run Ultimate S Setup Tool.");
+            crate::debug!("[Ultimate S] libparam_config.nro not found! This installation is incomplete. Please run Ultimate S Setup Tool.");
         } else {
             DialogOk::ok("libparam_config.nro not found! This installation is incomplete. Please run Ultimate S Setup Tool.");
         }
@@ -68,10 +68,10 @@ pub fn quick_validate_install() -> bool {
     )
     .is_file();
     if has_css_redirector {
-        println!("libthe_csk_collection.nro is present");
+        crate::debug!("[Ultimate S] libthe_csk_collection.nro is present");
     } else {
         if is_on_ryujinx() {
-            println!("libthe_csk_collection.nro not found! This installation is incomplete. Please run Ultimate S Setup Tool.");
+            crate::debug!("[Ultimate S] libthe_csk_collection.nro not found! This installation is incomplete. Please run Ultimate S Setup Tool.");
         } else {
             DialogOk::ok("libthe_csk_collection.nro not found! This installation is incomplete. Please run Ultimate S Setup Tool.");
         }
@@ -82,10 +82,10 @@ pub fn quick_validate_install() -> bool {
     )
     .is_file();
     if has_arcropolis {
-        println!("libarcropolis.nro is present");
+        crate::debug!("[Ultimate S] libarcropolis.nro is present");
     } else {
         if is_on_ryujinx() {
-            println!("libarcropolis.nro not found! This installation is incomplete. Please run Ultimate S Setup Tool.");
+            crate::debug!("[Ultimate S] libarcropolis.nro not found! This installation is incomplete. Please run Ultimate S Setup Tool.");
         } else {
             DialogOk::ok("libarcropolis.nro not found! This installation is incomplete. Please run Ultimate S Setup Tool.");
         }
@@ -96,10 +96,10 @@ pub fn quick_validate_install() -> bool {
     )
     .is_file();
     if has_nro_hook {
-        println!("libnro_hook.nro is present");
+        crate::debug!("[Ultimate S] libnro_hook.nro is present");
     } else {
         if is_on_ryujinx() {
-            println!("libnro_hook.nro not found! This installation is incomplete. Please run Ultimate S Setup Tool.");
+            crate::debug!("[Ultimate S] libnro_hook.nro not found! This installation is incomplete. Please run Ultimate S Setup Tool.");
         } else {
             DialogOk::ok("libnro_hook.nro not found! This installation is incomplete. Please run Ultimate S Setup Tool.");
         }
@@ -110,10 +110,10 @@ pub fn quick_validate_install() -> bool {
     )
     .is_file();
     if has_smashline {
-        println!("libsmashline_plugin.nro is present");
+        crate::debug!("[Ultimate S] libsmashline_plugin.nro is present");
     } else {
         if is_on_ryujinx() {
-            println!("libsmashline_plugin.nro not found! This installation is incomplete. Please run Ultimate S Setup Tool.");
+            crate::debug!("[Ultimate S] libsmashline_plugin.nro not found! This installation is incomplete. Please run Ultimate S Setup Tool.");
         } else {
             DialogOk::ok("libsmashline_plugin.nro not found! This installation is incomplete. Please run Ultimate S Setup Tool.");
         }
@@ -351,14 +351,19 @@ pub extern "C" fn is_ultimate_s() {}
 
 #[no_mangle]
 pub extern "C" fn main() {
-    println!("Running config setup");
+    let prev = std::panic::take_hook();
+    std::panic::set_hook(Box::new(move |info| {
+        crate::s_macros::write_log(&format!("PANIC: {}", info));
+        prev(info);
+    }));
+    crate::debug!("[Ultimate S] Running config setup");
     match config::init() {
         Ok(_) => {
-            println!("Config loaded successfully");
+            crate::debug!("[Ultimate S] Config loaded successfully");
         }
         Err(e) => {
             if is_on_ryujinx() {
-                println!("Your config.toml is incorrect! Please provide a correct one.");
+                crate::debug!("[Ultimate S] Your config.toml is incorrect! Please provide a correct one.");
             } else {
                 DialogOk::ok("Your config.toml is incorrect! Please provide a correct one.");
             }
@@ -366,14 +371,14 @@ pub extern "C" fn main() {
         }
     }
     config::init();
-    println!("Complete config setup.");
+    crate::debug!("[Ultimate S] Complete config setup.");
 
     if !quick_validate_install() {
         return; // don't do anything else since they don't have all dependencies
     }
 
 
-    println!("Doing online play stuff");
+    crate::debug!("[Ultimate S] Doing online play stuff");
     //allows online play with added chars
     unsafe { 
         if Path::new("sd:/atmosphere/contents/01006a800016e000/romfs/skyline/plugins/libthe_csk_collection.nro").is_file() {
@@ -385,10 +390,10 @@ pub extern "C" fn main() {
         }
     }
 	
-    println!("Installing some hooks");
+    crate::debug!("[Ultimate S] Installing some hooks");
 	//Common
     if !is_on_ryujinx(){
-        println!("We're on switch! Yay!");
+        crate::debug!("[Ultimate S] We're on switch! Yay!");
         unsafe {
                 OFFSET1 = calc_nnsdk_offset() + 0x429d60;
                 OFFSET2 = calc_nnsdk_offset() + 0x26e94;
@@ -419,438 +424,438 @@ pub extern "C" fn main() {
 
 	
 	
-    println!("about to install scripts");
+    crate::debug!("[Ultimate S] about to install scripts");
 	util::install();
-    println!("util installed");
+    crate::debug!("[Ultimate S] util installed");
     config_apply::install();
-    println!("config_apply installed");
+    crate::debug!("[Ultimate S] config_apply installed");
 	common::install();
 	controls::install();
 	cpu::install();
 	
 
     brave::install();
-    println!("brave installed");
+    crate::debug!("[Ultimate S] brave installed");
 
 
 
     bayonetta::install();
-    println!("bayonetta installed");
+    crate::debug!("[Ultimate S] bayonetta installed");
 
 
 
     buddy::install();
-    println!("buddy installed");
+    crate::debug!("[Ultimate S] buddy installed");
 
 
 
     captain::install();
-    println!("captain installed");
+    crate::debug!("[Ultimate S] captain installed");
 
 
 
     chrom::install();
-    println!("chrom installed");
+    crate::debug!("[Ultimate S] chrom installed");
 
 
 
     cloud::install();
-    println!("cloud installed");
+    crate::debug!("[Ultimate S] cloud installed");
 
 
 
     daisy::install();
-    println!("daisy installed");
+    crate::debug!("[Ultimate S] daisy installed");
 
 
 
     dedede::install();
-    println!("dedede installed");
+    crate::debug!("[Ultimate S] dedede installed");
 
 
 
     demon::install();
-    println!("demon installed");
+    crate::debug!("[Ultimate S] demon installed");
 
 
 
     diddy::install();
-    println!("diddy installed");
+    crate::debug!("[Ultimate S] diddy installed");
 
 
 
     dolly::install();
-    println!("dolly installed");
+    crate::debug!("[Ultimate S] dolly installed");
 
 
 
     donkey::install();
-    println!("donkey installed");
+    crate::debug!("[Ultimate S] donkey installed");
 
 
 
     duckhunt::install();
-    println!("duckhunt installed");
+    crate::debug!("[Ultimate S] duckhunt installed");
 
 
 
     edge::install();
-    println!("edge installed");
+    crate::debug!("[Ultimate S] edge installed");
 
 
 
     element::install();
-    println!("element installed");
+    crate::debug!("[Ultimate S] element installed");
 
 
 
     falco::install();
-    println!("falco installed");
+    crate::debug!("[Ultimate S] falco installed");
 
 
 
     fox::install();
-    println!("fox installed");
+    crate::debug!("[Ultimate S] fox installed");
 
 
 
     gamewatch::install();
-    println!("gamewatch installed");
+    crate::debug!("[Ultimate S] gamewatch installed");
 
 
 
     ganon::install();
-    println!("ganon installed");
+    crate::debug!("[Ultimate S] ganon installed");
 
 
 
     gaogaen::install();
-    println!("gaogaen installed");
+    crate::debug!("[Ultimate S] gaogaen installed");
 
 
 
     gekkouga::install();
-    println!("gekkouga installed");
+    crate::debug!("[Ultimate S] gekkouga installed");
 
 
 
     ike::install();
-    println!("ike installed");
+    crate::debug!("[Ultimate S] ike installed");
 
 
 
     inkling::install();
-    println!("inkling installed");
+    crate::debug!("[Ultimate S] inkling installed");
 
 
 
     jack::install();
-    println!("jack installed");
+    crate::debug!("[Ultimate S] jack installed");
 
 
 
     kamui::install();
-    println!("kamui installed");
+    crate::debug!("[Ultimate S] kamui installed");
 
 
 
     ken::install();
-    println!("ken installed");
+    crate::debug!("[Ultimate S] ken installed");
 
 
 
     kirby::install();
-    println!("kirby installed");
+    crate::debug!("[Ultimate S] kirby installed");
 
 
 
     koopa::install();
-    println!("koopa installed");
+    crate::debug!("[Ultimate S] koopa installed");
 
 
 
     koopajr::install();
-    println!("koopajr installed");
+    crate::debug!("[Ultimate S] koopajr installed");
 
 
 
     krool::install();
-    println!("krool installed");
+    crate::debug!("[Ultimate S] krool installed");
 
 
 
     link::install();
-    println!("link installed");
+    crate::debug!("[Ultimate S] link installed");
 
 
 
     littlemac::install();
-    println!("littlemac installed");
+    crate::debug!("[Ultimate S] littlemac installed");
 
 
 
     lucario::install();
-    println!("lucario installed");
+    crate::debug!("[Ultimate S] lucario installed");
 
 
 
     lucas::install();
-    println!("lucas installed");
+    crate::debug!("[Ultimate S] lucas installed");
 
 
 
     lucina::install();
-    println!("lucina installed");
+    crate::debug!("[Ultimate S] lucina installed");
 
 
 
     luigi::install();
-    println!("luigi installed");
+    crate::debug!("[Ultimate S] luigi installed");
 
 
 
     mario::install();
-    println!("mario installed");
+    crate::debug!("[Ultimate S] mario installed");
 
 
 
     mariod::install();
-    println!("mariod installed");
+    crate::debug!("[Ultimate S] mariod installed");
 
 
 
     marth::install();
-    println!("marth installed");
+    crate::debug!("[Ultimate S] marth installed");
 
 
 
     master::install();
-    println!("master installed");
+    crate::debug!("[Ultimate S] master installed");
 
 
 
     metaknight::install();
-    println!("metaknight installed");
+    crate::debug!("[Ultimate S] metaknight installed");
 
 
 
     mewtwo::install();
-    println!("mewtwo installed");
+    crate::debug!("[Ultimate S] mewtwo installed");
 
 
 
     miifighter::install();
-    println!("miifighter installed");
+    crate::debug!("[Ultimate S] miifighter installed");
 
 
 
     miigunner::install();
-    println!("miigunner installed");
+    crate::debug!("[Ultimate S] miigunner installed");
 
 
 
     miiswordsman::install();
-    println!("miiswordsman installed");
+    crate::debug!("[Ultimate S] miiswordsman installed");
 
 
 
     murabito::install();
-    println!("murabito installed");
+    crate::debug!("[Ultimate S] murabito installed");
 
 
 
     ness::install();
-    println!("ness installed");
+    crate::debug!("[Ultimate S] ness installed");
 
 
 
     packun::install();
-    println!("packun installed");
+    crate::debug!("[Ultimate S] packun installed");
 
 
 
     pacman::install();
-    println!("pacman installed");
+    crate::debug!("[Ultimate S] pacman installed");
 
 
 
     palutena::install();
-    println!("palutena installed");
+    crate::debug!("[Ultimate S] palutena installed");
 
 
 
     peach::install();
-    println!("peach installed");
+    crate::debug!("[Ultimate S] peach installed");
 
 
 
     pichu::install();
-    println!("pichu installed");
+    crate::debug!("[Ultimate S] pichu installed");
 
 
 
     pickel::install();
-    println!("pickel installed");
+    crate::debug!("[Ultimate S] pickel installed");
 
 
 
     pikachu::install();
-    println!("pikachu installed");
+    crate::debug!("[Ultimate S] pikachu installed");
 
 
 
     pit::install();
-    println!("pit installed");
+    crate::debug!("[Ultimate S] pit installed");
 
 
 
     pitb::install();
-    println!("pitb installed");
+    crate::debug!("[Ultimate S] pitb installed");
 
 
 
     popo::install();
-    println!("popo installed");
+    crate::debug!("[Ultimate S] popo installed");
 
 
 
     ptrainer::install();
-    println!("ptrainer installed");
+    crate::debug!("[Ultimate S] ptrainer installed");
 
 
 
     purin::install();
-    println!("purin installed");
+    crate::debug!("[Ultimate S] purin installed");
 
 
 
     reflet::install();
-    println!("reflet installed");
+    crate::debug!("[Ultimate S] reflet installed");
 
 
 
     richter::install();
-    println!("richter installed");
+    crate::debug!("[Ultimate S] richter installed");
 
 
 
     ridley::install();
-    println!("ridley installed");
+    crate::debug!("[Ultimate S] ridley installed");
 
 
 
     robot::install();
-    println!("robot installed");
+    crate::debug!("[Ultimate S] robot installed");
 
 
 
     rockman::install();
-    println!("rockman installed");
+    crate::debug!("[Ultimate S] rockman installed");
 
 
 
     rosetta::install();
-    println!("rosetta installed");
+    crate::debug!("[Ultimate S] rosetta installed");
 
 
 
     roy::install();
-    println!("roy installed");
+    crate::debug!("[Ultimate S] roy installed");
 
 
 
     ryu::install();
-    println!("ryu installed");
+    crate::debug!("[Ultimate S] ryu installed");
 
 
 
     samus::install();
-    println!("samus installed");
+    crate::debug!("[Ultimate S] samus installed");
 
 
 
     samusd::install();
-    println!("samusd installed");
+    crate::debug!("[Ultimate S] samusd installed");
 
 
 
     sheik::install();
-    println!("sheik installed");
+    crate::debug!("[Ultimate S] sheik installed");
 
 
 
     shizue::install();
-    println!("shizue installed");
+    crate::debug!("[Ultimate S] shizue installed");
 
 
 
     shulk::install();
-    println!("shulk installed");
+    crate::debug!("[Ultimate S] shulk installed");
 
 
 
     simon::install();
-    println!("simon installed");
+    crate::debug!("[Ultimate S] simon installed");
 
 
 
     snake::install();
-    println!("snake installed");
+    crate::debug!("[Ultimate S] snake installed");
 
 
 
     sonic::install();
-    println!("sonic installed");
+    crate::debug!("[Ultimate S] sonic installed");
 
 
 
     szerosuit::install();
-    println!("szerosuit installed");
+    crate::debug!("[Ultimate S] szerosuit installed");
 
 
 
     tantan::install();
-    println!("tantan installed");
+    crate::debug!("[Ultimate S] tantan installed");
 
 
 
     toonlink::install();
-    println!("toonlink installed");
+    crate::debug!("[Ultimate S] toonlink installed");
 
 
 
     trail::install();
-    println!("trail installed");
+    crate::debug!("[Ultimate S] trail installed");
 
 
 
     wario::install();
-    println!("wario installed");
+    crate::debug!("[Ultimate S] wario installed");
 
 
 
     wiifit::install();
-    println!("wiifit installed");
+    crate::debug!("[Ultimate S] wiifit installed");
 
 
 
     wolf::install();
-    println!("wolf installed");
+    crate::debug!("[Ultimate S] wolf installed");
 
 
 
     younglink::install();
-    println!("younglink installed");
+    crate::debug!("[Ultimate S] younglink installed");
 
 
 
     yoshi::install();
-    println!("yoshi installed");
+    crate::debug!("[Ultimate S] yoshi installed");
 
 
 
     zelda::install();
-    println!("zelda installed");
+    crate::debug!("[Ultimate S] zelda installed");
 
 	
     rayman::install();
@@ -858,10 +863,10 @@ pub extern "C" fn main() {
     toad::install();
     peppy::install();
     
-    println!("added chars installed");
+    crate::debug!("[Ultimate S] added chars installed");
 
     param_cache::install();
-    println!("param_cache installed");
+    crate::debug!("[Ultimate S] param_cache installed");
     unsafe {
         util::reload_config_values();
     }

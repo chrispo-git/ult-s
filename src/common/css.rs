@@ -38,10 +38,13 @@ unsafe fn css_main_loop(arg: *const CharaSelect) {
             HAS_WARMED_UP = true;
         }
         if ninput::any::is_down(ninput::Buttons::MINUS) {
+            crate::debug!("[Ultimate S] running menu for settings");
             if !IS_UNPRESSED {
                 if web_menus_supported() {
+                    crate::debug!("[Ultimate S] web menu supported");
                     show_mod_settings();
                 } else {
+                    crate::debug!("[Ultimate S] emu menu supported");
                     show_mod_settings_emu();
                 }
             }
@@ -93,10 +96,36 @@ pub fn show_gamemodes_emu() {
         }
     }
 }
+
+fn prepare_htdocs_dir() {
+    let program_id = skyline::info::get_program_id();
+    crate::debug!("[Ultimate S] Program ID: {:016X}", program_id);
+    let program_dir = format!("{:016X}", program_id);
+    let mut current = std::path::PathBuf::from("sd:/");
+    for part in ["atmosphere", "contents", program_dir.as_str(), "manual_html", "html-document", "contents.htdocs"] {
+        current.push(part);
+        let meta = std::fs::metadata(&current);
+        match meta {
+            Ok(m) if m.is_dir() => {}
+            Ok(_) => crate::debug!("[Ultimate S] {:?} exists but is NOT a folder!", current),
+            Err(_) => match std::fs::create_dir(&current) {
+                Ok(_) => crate::debug!("[Ultimate S] Created {:?}", current),
+                Err(e) => crate::debug!("[Ultimate S] Couldn't create {:?}: {:?}", current, e),
+            },
+        }
+    }
+    let test_path = current.join("write_test.txt");
+    match std::fs::write(&test_path, b"test") {
+        Ok(_) => crate::debug!("[Ultimate S] Test write to {:?} OK", test_path),
+        Err(e) => crate::debug!("[Ultimate S] Test write to {:?} failed: {:?}", test_path, e),
+    }
+}
 pub fn show_gamemodes() {
+    crate::debug!("[Ultimate S] resetting gamemodes");
     unsafe {
         reset_gamemodes();
     }
+    prepare_htdocs_dir();
     let response = skyline_web::Webpage::new()
         .htdocs_dir("contents")
         .file("index.html", GAMEMODES_HTML.as_slice())
@@ -108,6 +137,7 @@ pub fn show_gamemodes() {
         .boot_display(skyline_web::BootDisplay::Default)
         .open()
         .unwrap();
+    crate::debug!("[Ultimate S] web menu end");
     match response.get_last_url() {
         Ok(url) => {
             let options_str = url.trim_start_matches("http://localhost/");
@@ -173,6 +203,7 @@ fn calculate_hash<T: Hash>(t: &T) -> u64 {
 }
 pub fn show_mod_settings() {
     let path = "sd:/ultimate/ult-s/";
+    crate::debug!("[Ultimate S] mod settings start");
 
     if !Path::new(path).exists() {
         if let Err(e) = std::fs::create_dir_all(path) {
@@ -193,6 +224,8 @@ pub fn show_mod_settings() {
     let html_string = String::from_utf8_lossy(MENU_HTML.as_slice());
     let final_html = html_string.replace("config.js", &config_filename).replace("presets.js", &presets_filename);
     
+    crate::debug!("[Ultimate S] mod settings open");
+    prepare_htdocs_dir();
     let response = skyline_web::Webpage::new()
         .htdocs_dir("contents")
         .file("index.html", final_html.as_bytes())
@@ -208,6 +241,7 @@ pub fn show_mod_settings() {
         .boot_display(skyline_web::BootDisplay::Default)
         .open()
         .unwrap();
+    crate::debug!("[Ultimate S] mod settings end");
     if let Ok(url) = response.get_last_url() {
         let options_str = url.strip_prefix("http://localhost/").unwrap_or(&url);
 
@@ -255,6 +289,7 @@ pub fn show_mod_settings() {
     unsafe {
         reload_config_values();
     }
+    crate::debug!("[Ultimate S] web menu exit");
 }
 
 // this structure is gross and largely undefined but it holds some useful information about the CSS instance

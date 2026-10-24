@@ -67,3 +67,30 @@ macro_rules! is_in {
         }
     };
 }
+
+lazy_static! {
+    static ref LOGS_ENABLED: bool = true;//std::path::Path::new("sd:/ultimate/ult-s/enable_logs.flag").is_file();
+}
+
+pub fn write_log(msg: &str) {
+    use std::io::Write;
+    if !*LOGS_ENABLED {
+        return;
+    }
+    if let Ok(mut f) = std::fs::OpenOptions::new()
+        .create(true)
+        .append(true)
+        .open("sd:/ultimate/ult-s/log.txt")
+    {
+        let _ = writeln!(f, "{}", msg);
+    }
+}
+
+#[macro_export]
+macro_rules! debug {
+    ($($arg:tt)*) => {{
+        let msg = format!($($arg)*);
+        println!("{}", msg);
+        $crate::s_macros::write_log(&msg);
+    }};
+}
