@@ -16,8 +16,15 @@ use crate::util::*;
 use crate::peppy::*;
 
 pub fn install() {
+	let missile = smashline::clone_weapon(
+		"falco", 
+		"missile",
+		*WEAPON_KIND_KOOPAJR_CANNONBALL,
+		false
+	);
 	unsafe {
-		FIGHTER_FALCO_GENERATE_ARTICLE_MISSILE += smashline::clone_weapon("koopajr", *WEAPON_KIND_KOOPAJR_CANNONBALL, "falco", "missile", false);
+		FIGHTER_FALCO_GENERATE_ARTICLE_MISSILE = missile.generate_id; 
+		WEAPON_KIND_FALCO_MISSILE = missile.weapon_id;
 	}
 	Agent::new("falco")
     .set_costume(get_marked_costumes("falco","peppy"))
