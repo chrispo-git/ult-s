@@ -13,18 +13,32 @@ static FIGHTER_WARIO_INSTANCE_WORK_ID_FLAG_SHOW_COUNT : i32 = 3;
 static FIGHTER_WARIO_INSTANCE_WORK_ID_INT_COIN_COUNT : i32 = 4;
 static FIGHTER_WARIO_INSTANCE_WORK_ID_FLOAT_ALPHA_COUNTER : i32 = 5;
 			
-pub static mut FIGHTER_WARIO_GENERATE_ARTICLE_COIN: i32 = 0x3;
+pub static mut FIGHTER_WARIO_GENERATE_ARTICLE_COIN: i32 = 0;
+pub static mut WEAPON_KIND_WARIO_COIN: i32 = 0;
 pub const WEAPON_WARIO_COIN_STATUS_KIND_SHOOT: i32 = 0x0;
 
-pub static mut FIGHTER_WARIO_GENERATE_ARTICLE_COUNTER: i32 = 0x3;
+pub static mut FIGHTER_WARIO_GENERATE_ARTICLE_COUNTER: i32 = 0;
+pub static mut WEAPON_KIND_WARIO_COUNTER: i32 = 0;
 pub const WEAPON_WARIO_COUNTER_STATUS_KIND_APPEAR: i32 = 0x0;
 
 
 
 pub fn install() {
 	unsafe {
-		FIGHTER_WARIO_GENERATE_ARTICLE_COIN += smashline::clone_weapon("koopajr", *WEAPON_KIND_KOOPAJR_CANNONBALL, "wario", "coin", false);
-		FIGHTER_WARIO_GENERATE_ARTICLE_COUNTER += smashline::clone_weapon("peach", *WEAPON_KIND_PEACH_KINOPIO, "wario", "counter", false);
+		let coin = smashline::clone_weapon(
+			"wario", "coin", 
+			*WEAPON_KIND_KOOPAJR_CANNONBALL, 
+			false
+		);
+		let counter = smashline::clone_weapon(
+			"wario", "counter", 
+			*WEAPON_KIND_PEACH_KINOPIO, 
+			false
+		);
+		FIGHTER_WARIO_GENERATE_ARTICLE_COIN = coin.generate_id;
+		WEAPON_KIND_WARIO_COIN = coin.weapon_id;
+		FIGHTER_WARIO_GENERATE_ARTICLE_COUNTER = counter.generate_id;
+		WEAPON_KIND_WARIO_COUNTER = counter.weapon_id;
 	}
 	
 	frame::install();
