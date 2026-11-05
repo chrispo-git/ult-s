@@ -740,7 +740,11 @@ pub(crate) fn is_on_ryujinx() -> bool {
 #[inline(always)]
 pub(crate) fn web_menus_supported() -> bool {
     if Path::new("sd:/ultimate/ult-s/web_menus.flag").is_file() {
-        println!("Using native web menus (web_menus.flag present)");
+        crate::debug!("Using no web menus (no_web_menus.flag present)");
+        return false;
+    }
+    if Path::new("sd:/ultimate/ult-s/web_menus.flag").is_file() {
+        crate::debug!("Using native web menus (web_menus.flag present)");
         return true;
     }
 
