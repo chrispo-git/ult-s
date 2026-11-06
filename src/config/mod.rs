@@ -20,7 +20,8 @@ pub struct Preset {
     pub config: Config,
 }
 
-#[derive(Debug, Deserialize, Clone, Hash)]
+#[derive(Debug, Default, Deserialize, Clone, Hash)]
+#[serde(default)]
 pub struct Config {
     pub general: General,
     pub movement: Movement,
@@ -28,9 +29,10 @@ pub struct Config {
     pub defense: Defense,
     pub stats: Stats,
     pub special: Special,
-} 
+}
 
-#[derive(Debug, Deserialize, Clone, Hash)]
+#[derive(Debug, Default, Deserialize, Clone, Hash)]
+#[serde(default)]
 pub struct General {
     pub sh_macro: u8,
     pub hold_buffer: u8,
@@ -40,7 +42,8 @@ pub struct General {
     pub respawn_anim: u8,
 }
 
-#[derive(Debug, Deserialize, Clone, Hash)]
+#[derive(Debug, Default, Deserialize, Clone, Hash)]
+#[serde(default)]
 pub struct Movement {
     pub dash: u8,
     pub moonwalk: u8,
@@ -56,7 +59,8 @@ pub struct Movement {
     pub g2a: u8,
 }
 
-#[derive(Debug, Deserialize, Clone, Hash)]
+#[derive(Debug, Default, Deserialize, Clone, Hash)]
+#[serde(default)]
 pub struct Attacks {
     pub jab_cancel: u8,
     pub dacus: u8,
@@ -68,7 +72,8 @@ pub struct Attacks {
     pub damage_mul : u8,
 }
 
-#[derive(Debug, Deserialize, Clone, Hash)]
+#[derive(Debug, Default, Deserialize, Clone, Hash)]
+#[serde(default)]
 pub struct Defense {
     pub shield: u8,
     pub shield_health: u8,
@@ -82,7 +87,8 @@ pub struct Defense {
     pub drift_di: u8,
 }
 
-#[derive(Debug, Deserialize, Clone, Hash)]
+#[derive(Debug, Default, Deserialize, Clone, Hash)]
+#[serde(default)]
 pub struct Stats {
     pub ll: u8,
     pub initial_dash: u8,
@@ -97,7 +103,8 @@ pub struct Stats {
     pub weight: u8,
 }
 
-#[derive(Debug, Deserialize, Clone, Hash)]
+#[derive(Debug, Default, Deserialize, Clone, Hash)]
+#[serde(default)]
 pub struct Special {
     pub cancel_to_taunt: u8,
     pub parry_reflect: u8,
