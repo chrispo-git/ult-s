@@ -25,7 +25,7 @@ pub unsafe fn airdodge(fighter : &mut L2CFighterCommon, config : &config::Config
         WorkModule::on_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_DISABLE_ESCAPE_AIR); 
         return;
     }
-    if crate::is_in!(config.defense.airdodge, 0, 1, 4) {
+    if crate::is_in!(config.defense.airdodge, 0, 1) {
         return;
     }
     if config.defense.airdodge == 2 {
