@@ -12,7 +12,7 @@ use crate::util::*;
 
 pub unsafe fn opff(fighter : &mut L2CFighterCommon, status_kind : i32) {
     unsafe {
-        if !is_gamemode("turbo".to_string()) {
+        if !is_gamemode("turbo") {
             return;
         }
         if status_kind == *FIGHTER_STATUS_KIND_CATCH_ATTACK{

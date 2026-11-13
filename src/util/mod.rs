@@ -14,15 +14,14 @@ use std::{fs, path::Path};
 use crate::controls::ext::*;
 use crate::common::*;
 use cached::proc_macro::cached;
-use std::collections::{HashMap, HashSet};
-use rustc_hash::FxHashMap;
+use rustc_hash::{FxHashMap, FxHashSet, FxBuildHasher};
 use std::time::Instant;
 use once_cell::sync::Lazy;
 use crate::config;
 
 pub use crate::variable_module::VariableModule;
 
-pub static mut GAMEMODES : Vec<String> = Vec::new();
+pub static mut GAMEMODES : FxHashSet<String> = FxHashSet::with_hasher(FxBuildHasher::default());
 
 pub static mut PREV_SCALE : [f32; 8] = [0.0; 8];
 pub static mut IS_AB : [bool; 8] = [false; 8];
@@ -765,7 +764,7 @@ pub(crate) unsafe fn reload_config_values() -> () {
 	let all: Vec<i32> = vec![-1];
 	
 	// Specific Special Multipliers for 64 Mode!
-	if is_gamemode("sixtyfour".to_string()) {
+	if is_gamemode("sixtyfour") {
 		crate::param_cache::set_global_multiplier(smash::hash40("jump_initial_y"), 0, 0.6);
 		crate::param_cache::update_float_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("tread_jump_speed_y_mul"), 0, 1.3));
 		crate::param_cache::update_float_2(*FIGHTER_KIND_ALL, all.clone(), (smash::hash40("tread_mini_jump_speed_y_mul"), 0, 0.7));
@@ -973,7 +972,7 @@ pub(crate) unsafe fn reload_config_values() -> () {
 
 #[inline(always)]
 pub (crate) unsafe fn reset_gamemodes() -> () {
-	GAMEMODES = Vec::new();
+	GAMEMODES = FxHashSet::default();
 	reset_attack_blockers();
 }
 
@@ -987,19 +986,19 @@ pub (crate) unsafe fn reset_attack_blockers() {
 
 #[inline(always)]
 pub (crate) unsafe fn add_gamemode(mode: String) -> () {
-	GAMEMODES.push(mode);
+	GAMEMODES.insert(mode);
 }
 
 
 #[inline(always)]
-pub (crate) unsafe fn is_gamemode(mode: String) -> bool {
-	return GAMEMODES.contains(&mode);
+pub (crate) unsafe fn is_gamemode(mode: &str) -> bool {
+	return GAMEMODES.contains(mode);
 }
 /*
 MARKER SEARCH! Very big and annoying, and I hate it.
 */
 pub struct ModRegistry {
-    registry: FxHashMap<String, FxHashMap<usize, HashSet<String>>>,
+    registry: FxHashMap<String, FxHashMap<usize, FxHashSet<String>>>,
 }
 impl ModRegistry {
     pub fn fill() -> Self {
@@ -1034,9 +1033,9 @@ impl ModRegistry {
                         if file_path.extension().and_then(|s| s.to_str()) == Some("marker") {
                             if let Some(marker_base) = file_path.file_stem().and_then(|s| s.to_str()) {
                                 registry.entry(char_name.clone())
-                                    .or_insert_with(HashMap::default)
+                                    .or_insert_with(FxHashMap::default)
                                     .entry(slot_idx)
-                                    .or_insert_with(HashSet::new)
+                                    .or_insert_with(FxHashSet::default)
                                     .insert(marker_base.to_string());
                             }
                         }

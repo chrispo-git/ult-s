@@ -24,7 +24,7 @@ static mut DESIGNATED_WINNER : i32 = -1;
 static mut SUPERBOSS_DEAD : bool = false;
 unsafe extern "C" fn superboss(fighter : &mut L2CFighterCommon) {
     unsafe {
-        if !is_gamemode("superboss".to_string()) {
+        if !is_gamemode("superboss") {
             return;
         }
 		let boma = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent); 

@@ -1,6 +1,5 @@
 use once_cell::sync::Lazy;
 use parking_lot::Mutex;
-use std::collections::HashMap;
 use rustc_hash::FxHashMap;
 
 pub fn update_float_2(kind: i32, slots: Vec<i32>, param: (u64, u64, f32)) {
