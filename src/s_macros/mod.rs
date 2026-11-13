@@ -69,7 +69,7 @@ macro_rules! is_in {
 }
 
 lazy_static! {
-    static ref LOGS_ENABLED: bool = true;//std::path::Path::new("sd:/ultimate/ult-s/enable_logs.flag").is_file();
+    static ref LOGS_ENABLED: bool = std::path::Path::new("sd:/ultimate/ult-s/enable_logs.flag").is_file();
 }
 
 pub fn write_log(msg: &str) {
