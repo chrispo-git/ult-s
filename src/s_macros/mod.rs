@@ -89,8 +89,10 @@ pub fn write_log(msg: &str) {
 #[macro_export]
 macro_rules! debug {
     ($($arg:tt)*) => {{
-        let msg = format!($($arg)*);
-        println!("{}", msg);
-        $crate::s_macros::write_log(&msg);
+        if *LOGS_ENABLED {
+            let msg = format!($($arg)*);
+            println!("{}", msg);
+            $crate::s_macros::write_log(&msg);
+        };
     }};
 }
