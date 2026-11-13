@@ -2,19 +2,20 @@ use std::any::{Any, TypeId};
 use std::collections::HashMap;
 use parking_lot::Mutex;
 use once_cell::sync::Lazy;
+use rustc_hash::FxHashMap;
 
 type ComponentMap = HashMap<TypeId, Box<dyn Any + Send + Sync>>;
 
 static PLAYER_STATE: Lazy<Mutex<[ComponentMap; 8]>> = Lazy::new(|| {
     let maps: [ComponentMap; 8] = [
-        HashMap::with_capacity(100),
-        HashMap::with_capacity(100),
-        HashMap::with_capacity(100),
-        HashMap::with_capacity(100),
-        HashMap::with_capacity(100),
-        HashMap::with_capacity(100),
-        HashMap::with_capacity(100),
-        HashMap::with_capacity(100),
+        FxHashMap::with_capacity(100),
+        FxHashMap::with_capacity(100),
+        FxHashMap::with_capacity(100),
+        FxHashMap::with_capacity(100),
+        FxHashMap::with_capacity(100),
+        FxHashMap::with_capacity(100),
+        FxHashMap::with_capacity(100),
+        FxHashMap::with_capacity(100),
     ];
     Mutex::new(maps)
 });
