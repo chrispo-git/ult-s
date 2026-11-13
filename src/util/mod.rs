@@ -15,6 +15,7 @@ use crate::controls::ext::*;
 use crate::common::*;
 use cached::proc_macro::cached;
 use std::collections::{HashMap, HashSet};
+use rustc_hash::FxHashMap;
 use std::time::Instant;
 use once_cell::sync::Lazy;
 use crate::config;
@@ -998,11 +999,11 @@ pub (crate) unsafe fn is_gamemode(mode: String) -> bool {
 MARKER SEARCH! Very big and annoying, and I hate it.
 */
 pub struct ModRegistry {
-    registry: HashMap<String, HashMap<usize, HashSet<String>>>,
+    registry: FxHashMap<String, FxHashMap<usize, HashSet<String>>>,
 }
 impl ModRegistry {
     pub fn fill() -> Self {
-        let mut registry = HashMap::new();
+        let mut registry = FxHashMap::default();
         let mods_root = Path::new("sd:/ultimate/mods/");
 		let start = Instant::now();
 
@@ -1033,7 +1034,7 @@ impl ModRegistry {
                         if file_path.extension().and_then(|s| s.to_str()) == Some("marker") {
                             if let Some(marker_base) = file_path.file_stem().and_then(|s| s.to_str()) {
                                 registry.entry(char_name.clone())
-                                    .or_insert_with(HashMap::new)
+                                    .or_insert_with(HashMap::default)
                                     .entry(slot_idx)
                                     .or_insert_with(HashSet::new)
                                     .insert(marker_base.to_string());
