@@ -92,7 +92,7 @@ unsafe fn attack_replace(lua_state: u64) {
             });
         }
     }
-    let mut hitbox_params: Vec<L2CValue> = (0..36).map(|i| l2c_agent.pop_lua_stack(i + 1)).collect();
+    let mut hitbox_params: [L2CValue; 36] = std::array::from_fn(|i| l2c_agent.pop_lua_stack(i as i32 + 1));
     l2c_agent.clear_lua_stack();
     for (i, x) in hitbox_params.iter_mut().enumerate().take(36) {
         if i == 3  {
