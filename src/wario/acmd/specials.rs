@@ -16,8 +16,9 @@ use crate::wario::*;
 use super::*;
 
 pub fn install() {
+    let costumes_wario_wario: Vec<usize> = get_marked_costumes("wario", "wario");
     Agent::new("wario")
-    .set_costume(get_marked_costumes("wario","wario"))
+    .set_costume(costumes_wario_wario.clone())
     .acmd("game_specialssearch", wario_sideb, Priority::Low)    
     .acmd("game_specialairssearch", wario_sideb, Priority::Low)    
     .acmd("effect_specialssearch", wario_sideb_eff, Priority::Low)    
@@ -34,7 +35,7 @@ pub fn install() {
     .install();
 	
     Agent::new("wario_coin")
-    .set_costume(get_marked_costumes("wario","wario"))
+    .set_costume(costumes_wario_wario.clone())
     .acmd("game_shoot", game_shoot, Priority::Low)
     .acmd("effect_shoot", effect_shoot, Priority::Low)
     .install();

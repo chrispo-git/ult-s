@@ -15,13 +15,14 @@ use crate::util::*;
 use super::*;
 
 pub fn install() {
+    let costumes_rosetta_rosetta: Vec<usize> = get_marked_costumes("rosetta", "rosetta");
     Agent::new("rosetta")
-    .set_costume(get_marked_costumes("rosetta","rosetta"))
+    .set_costume(costumes_rosetta_rosetta.clone())
     .on_line(Main, rosa_frame)
     .install();
 
 	Agent::new("rosetta_tico")
-    .set_costume(get_marked_costumes("rosetta","rosetta"))
+    .set_costume(costumes_rosetta_rosetta.clone())
     .on_line(Main, tico_frame)
     .install();
 }

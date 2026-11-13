@@ -15,8 +15,9 @@ use crate::util::*;
 use super::*;
 
 pub fn install() {
+    let costumes_pitb_pitb: Vec<usize> = get_marked_costumes("pitb", "pitb");
     Agent::new("pitb")
-    .set_costume(get_marked_costumes("pitb","pitb"))
+    .set_costume(costumes_pitb_pitb.clone())
     .acmd("game_specialairsend", dpit_upb, Priority::Low)    
 	.acmd("effect_specialairsend", dpit_upb_eff, Priority::Low)    
 	.acmd("game_specialsend", dpit_upb_ground, Priority::Low)    
@@ -27,7 +28,7 @@ pub fn install() {
 	.install();
 
 	Agent::new("pitb_bowarrow")
-    .set_costume(get_marked_costumes("pitb","pitb"))
+    .set_costume(costumes_pitb_pitb.clone())
     .acmd("game_fly", dpit_arrow, Priority::Low)    
 	.install();
 }

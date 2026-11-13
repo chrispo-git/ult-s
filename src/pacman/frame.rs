@@ -15,18 +15,19 @@ use crate::util::*;
 use super::*;
 
 pub fn install() {
+    let costumes_pacman_pacman: Vec<usize> = get_marked_costumes("pacman", "pacman");
     Agent::new("pacman")
-    .set_costume(get_marked_costumes("pacman","pacman"))
+    .set_costume(costumes_pacman_pacman.clone())
     .on_line(Main, pacman_frame)
     .install();
 
 	Agent::new("pacman_firehydrant")
-    .set_costume(get_marked_costumes("pacman","pacman"))
+    .set_costume(costumes_pacman_pacman.clone())
     .on_line(Main, hydrant_frame)
     .install();
 
 	Agent::new("pacman_trampoline")
-    .set_costume(get_marked_costumes("pacman","pacman"))
+    .set_costume(costumes_pacman_pacman.clone())
     .on_line(Main, trampoline_frame)
     .install();
 }

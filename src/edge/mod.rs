@@ -6,17 +6,18 @@ use smash::lib::lua_const::*;
 use smash::hash40;
 
 pub fn install() {
+	let costumes_edge_edge: Vec<i32> = get_marked_costumes("edge", "edge").into_iter().map(|x| x as i32).collect();
 	frame::install();
 	status::install();
 	acmd::install();
 
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_EDGE, get_marked_costumes("edge","edge").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_one_winged"), smash::hash40("dash_speed_mul"), 1.13));
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_EDGE, get_marked_costumes("edge","edge").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_one_winged"), smash::hash40("air_accel_x_mul"), 1.2));
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_EDGE, get_marked_costumes("edge","edge").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_one_winged"), smash::hash40("air_speed_x_stable_mul"), 1.0857));
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_EDGE, get_marked_costumes("edge","edge").into_iter().map(|x| x as i32).collect(), (smash::hash40("air_speed_x_stable"), 0, 1.1));
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_EDGE, get_marked_costumes("edge","edge").into_iter().map(|x| x as i32).collect(), (smash::hash40("landing_attack_air_frame_n"), 0, 8.0));
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_EDGE, get_marked_costumes("edge","edge").into_iter().map(|x| x as i32).collect(), (smash::hash40("landing_attack_air_frame_hi"), 0, 15.0));
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_EDGE, get_marked_costumes("edge","edge").into_iter().map(|x| x as i32).collect(), (smash::hash40("clip_sphere_offset_x"), 0, 0.0));
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_EDGE, get_marked_costumes("edge","edge").into_iter().map(|x| x as i32).collect(), (smash::hash40("clip_sphere_offset_y"), 0, -0.7));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_EDGE, costumes_edge_edge.clone(), (smash::hash40("param_one_winged"), smash::hash40("dash_speed_mul"), 1.13));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_EDGE, costumes_edge_edge.clone(), (smash::hash40("param_one_winged"), smash::hash40("air_accel_x_mul"), 1.2));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_EDGE, costumes_edge_edge.clone(), (smash::hash40("param_one_winged"), smash::hash40("air_speed_x_stable_mul"), 1.0857));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_EDGE, costumes_edge_edge.clone(), (smash::hash40("air_speed_x_stable"), 0, 1.1));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_EDGE, costumes_edge_edge.clone(), (smash::hash40("landing_attack_air_frame_n"), 0, 8.0));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_EDGE, costumes_edge_edge.clone(), (smash::hash40("landing_attack_air_frame_hi"), 0, 15.0));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_EDGE, costumes_edge_edge.clone(), (smash::hash40("clip_sphere_offset_x"), 0, 0.0));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_EDGE, costumes_edge_edge.clone(), (smash::hash40("clip_sphere_offset_y"), 0, -0.7));
 
 }

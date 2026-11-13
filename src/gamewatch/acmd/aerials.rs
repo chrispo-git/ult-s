@@ -15,8 +15,9 @@ use crate::util::*;
 use super::*;
 
 pub fn install() {
+	let costumes_gamewatch_gamewatch: Vec<usize> = get_marked_costumes("gamewatch", "gamewatch");
 	Agent::new("gamewatch")
-    .set_costume(get_marked_costumes("gamewatch","gamewatch"))
+    .set_costume(costumes_gamewatch_gamewatch.clone())
     .acmd("game_attackairlw", gnw_dair, Priority::Low)    
     .acmd("game_landingairlw", gnw_dair_land, Priority::Low)    
     .acmd("game_attackairf", gnw_fair, Priority::Low)      
@@ -24,7 +25,7 @@ pub fn install() {
     .install();
 
 	Agent::new("gamewatch_breath")
-    .set_costume(get_marked_costumes("gamewatch","gamewatch"))
+    .set_costume(costumes_gamewatch_gamewatch.clone())
     .acmd("game_attackairhi", gnw_uair_breath, Priority::Low)    
     .install();
 }

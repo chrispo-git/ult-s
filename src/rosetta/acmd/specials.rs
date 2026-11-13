@@ -16,8 +16,9 @@ use super::*;
 use super::super::*;
 
 pub fn install() {
+    let costumes_rosetta_rosetta: Vec<usize> = get_marked_costumes("rosetta", "rosetta");
     Agent::new("rosetta")
-    .set_costume(get_marked_costumes("rosetta","rosetta"))
+    .set_costume(costumes_rosetta_rosetta.clone())
     .acmd("game_specialhistart", rosa_upb_start, Priority::Low)    
     .acmd("game_specialairhistart", rosa_upb_start, Priority::Low)    
     .acmd("game_specialhi", rosa_upb, Priority::Low)    
@@ -26,7 +27,7 @@ pub fn install() {
     .install();
 
 	Agent::new("rosetta_tico")
-    .set_costume(get_marked_costumes("rosetta","rosetta"))
+    .set_costume(costumes_rosetta_rosetta.clone())
     .acmd("game_explode", luma_boom, Priority::Low)    
     .acmd("effect_explode", luma_boom_eff, Priority::Low)    
     .acmd("sound_explode", luma_boom_snd, Priority::Low)    

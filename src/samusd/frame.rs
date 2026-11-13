@@ -209,13 +209,14 @@ unsafe extern "C" fn missile_frame(weapon: &mut L2CFighterBase) {
 }
 
 pub fn install() {
+    let costumes_samusd_samusd: Vec<usize> = get_marked_costumes("samusd", "samusd");
     Agent::new("samusd")
-    .set_costume(get_marked_costumes("samusd","samusd"))
+    .set_costume(costumes_samusd_samusd.clone())
 		.on_line(Main, samusd_frame)
 		.install();
 
 	Agent::new("samusd_missile")
-    .set_costume(get_marked_costumes("samusd","samusd"))
+    .set_costume(costumes_samusd_samusd.clone())
 		.on_line(Main, missile_frame)
 		.install();
 }

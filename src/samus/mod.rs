@@ -43,11 +43,12 @@ pub(crate) fn check_jump(boma: &mut smash::app::BattleObjectModuleAccessor) -> b
 
 
 pub fn install() {
+	let costumes_samus_samus: Vec<i32> = get_marked_costumes("samus", "samus").into_iter().map(|x| x as i32).collect();
 	frame::install();
 	status::install();
 	acmd::install();
 
-	 crate::param_cache::update_float_2(-*WEAPON_KIND_SAMUS_CSHOT, get_marked_costumes("samus","samus").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_cshot"), smash::hash40("min_speed"), 2.5));
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_SAMUS, get_marked_costumes("samus","samus").into_iter().map(|x| x as i32).collect(), (smash::hash40("jump_speed_x_mul"), 0, 0.9));
+	 crate::param_cache::update_float_2(-*WEAPON_KIND_SAMUS_CSHOT, costumes_samus_samus.clone(), (smash::hash40("param_cshot"), smash::hash40("min_speed"), 2.5));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_SAMUS, costumes_samus_samus.clone(), (smash::hash40("jump_speed_x_mul"), 0, 0.9));
 
 }

@@ -16,8 +16,9 @@ use super::*;
 use crate::bomberman::*;
 
 pub fn install() {
+	let costumes_pacman_bomberman: Vec<usize> = get_marked_costumes("pacman", "bomberman");
 	Agent::new("pacman")
-    .set_costume(get_marked_costumes("pacman","bomberman"))
+    .set_costume(costumes_pacman_bomberman.clone())
 	.acmd("game_specialairlwbomb", bomb_air_downb, Priority::Low) 
 	.acmd("game_speciallwbomb", bomb_downb, Priority::Low)
 	.acmd("sound_speciallwbomb", bomb_downb_snd, Priority::Low)
@@ -57,7 +58,7 @@ pub fn install() {
 	.install();
 
     Agent::new("pacman_firehydrant")
-    .set_costume(get_marked_costumes("pacman","bomberman"))
+    .set_costume(costumes_pacman_bomberman.clone())
     .acmd("game_fly", bomb_bomb_fly, Priority::Low)
 	.acmd("game_fall", bomb_bomb_fall, Priority::Low)
 	.acmd("game_down", bomb_bomb_down, Priority::Low)
@@ -65,7 +66,7 @@ pub fn install() {
 	.install();
 
     Agent::new("pacman_firehydrantwater")
-    .set_costume(get_marked_costumes("pacman","bomberman"))
+    .set_costume(costumes_pacman_bomberman.clone())
     .acmd("game_fly", bomb_water_kill, Priority::Low)
 	.install();
 }

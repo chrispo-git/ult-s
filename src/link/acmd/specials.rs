@@ -16,8 +16,9 @@ use crate::link::*;
 use super::*;
 
 pub fn install() {
+    let costumes_link_link: Vec<usize> = get_marked_costumes("link", "link");
     Agent::new("link")
-    .set_costume(get_marked_costumes("link","link"))
+    .set_costume(costumes_link_link.clone())
     .acmd("game_specialairnstart", link_arrow_air, Priority::Low)    
     .acmd("game_specialnstart", link_arrow, Priority::Low)    
     .acmd("game_speciallwblast", link_downb, Priority::Low)    
@@ -29,7 +30,7 @@ pub fn install() {
     .install();
 
 	Agent::new("link_boomerang")
-    .set_costume(get_marked_costumes("link","link"))
+    .set_costume(costumes_link_link.clone())
     .acmd("game_fly", linkerang, Priority::Low)    
     .install();
 }

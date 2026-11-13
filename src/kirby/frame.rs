@@ -17,23 +17,24 @@ use crate::kirby::*;
 use super::*;
 
 pub fn install() {
+	let costumes_kirby_kirby: Vec<usize> = get_marked_costumes("kirby", "kirby");
 	Agent::new("kirby")
-    .set_costume(get_marked_costumes("kirby","kirby"))
+    .set_costume(costumes_kirby_kirby.clone())
 	.on_line(Main, kirby_frame)
 	.install();
 
 	Agent::new("kirby_finalcuttershot")
-    .set_costume(get_marked_costumes("kirby","kirby"))
+    .set_costume(costumes_kirby_kirby.clone())
 	.on_line(Main, ball_frame)
 	.install();
 
 	Agent::new("kirby_hammer")
-    .set_costume(get_marked_costumes("kirby","kirby"))
+    .set_costume(costumes_kirby_kirby.clone())
 	.on_line(Main, finalcutter_frame)
 	.install();
 
 	Agent::new("kirby_hat")
-    .set_costume(get_marked_costumes("kirby","kirby"))
+    .set_costume(costumes_kirby_kirby.clone())
 	.on_line(Main, hat_frame)
 	.install();
 }

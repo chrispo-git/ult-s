@@ -15,8 +15,9 @@ use crate::util::*;
 use super::*;
 
 pub fn install() {
+    let costumes_falco_falco: Vec<usize> = get_marked_costumes("falco", "falco");
     Agent::new("falco")
-    .set_costume(get_marked_costumes("falco","falco"))
+    .set_costume(costumes_falco_falco.clone())
     .acmd("game_speciallw", falco_shine, Priority::Low)    
     .acmd("game_specialairlw", falco_shine, Priority::Low)     
     .acmd("effect_speciallw", falco_shine_eff, Priority::Low)   
@@ -26,7 +27,7 @@ pub fn install() {
     .install();
 
 	Agent::new("falco_blaster_bullet")
-    .set_costume(get_marked_costumes("falco","falco"))
+    .set_costume(costumes_falco_falco.clone())
     .acmd("game_fly", falco_laser, Priority::Low)    
     .install();
 }	
