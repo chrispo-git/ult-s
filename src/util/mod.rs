@@ -1106,30 +1106,30 @@ impl ModRegistry {
     }
 }
 pub static REGISTRY: Lazy<ModRegistry> = Lazy::new(|| ModRegistry::fill());
-/*#[cached(
-    key = "String", 
+#[cached(
+    key = "String",
     convert = r#"{ format!("{}_{}", char_folder, marker_name) }"#
-)]*/
+)]
 pub(crate) fn get_marked_costumes(char_folder: &str, marker_name: &str) -> Vec<usize> {
     let marked_slots = REGISTRY.get_marked_costumes(char_folder, marker_name);
     crate::debug!("[Ultimate S] {}-{} slots - {:?}", char_folder, marker_name, marked_slots);
 	marked_slots
 }
 
-/*#[cached(
-    key = "String", 
+#[cached(
+    key = "String",
     convert = r#"{ format!("{}_{}", char_folder, marker_name) }"#
-)]*/
+)]
 pub(crate) fn get_lowest_marked_costume(char_folder: &str, marker_name: &str) -> u8 {
     let lowest_marked = REGISTRY.get_lowest_marked_costume(char_folder, marker_name);
     crate::debug!("[Ultimate S] {}-{} lowest slot - {:?}", char_folder, marker_name, lowest_marked);
 	lowest_marked
 }
 
-/*#[cached(
-    key = "String", 
+#[cached(
+    key = "String",
     convert = r#"{ format!("{}_{}", char_folder, marker_name) }"#
-)]*/
+)]
 pub(crate) fn get_costume_count(char_folder: &str, marker_name: &str) -> u8 {
     let costume_count = REGISTRY.get_costume_count(char_folder, marker_name);
 	crate::debug!("[Ultimate S] {}-{} costume count - {:?}", char_folder, marker_name, costume_count);
