@@ -20,7 +20,7 @@ const COUNTER_MAX : i32 = 90;
 const SELF_DAMAGE : f32 = 2.5;
 pub unsafe fn opff(fighter : &mut L2CFighterCommon, status_kind : i32, ENTRY_ID : usize) {
     unsafe {
-        if !is_gamemode("vampire".to_string()) {
+        if !is_gamemode("vampire") {
             return;
         }
         let attacker_entry_id = WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_SUCCEED_ATTACKER_ENTRY_ID) - 1;

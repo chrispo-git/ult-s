@@ -19,7 +19,7 @@ pub struct GamemodeAttacksState {
 }
 
 pub unsafe fn critical_opff(fighter: &mut L2CFighterCommon, ENTRY_ID : usize) {
-    if !is_gamemode("critical".to_string()) {
+    if !is_gamemode("critical") {
         return;
     }
     if crate::get_state!(ENTRY_ID, GamemodeAttacksState).do_critical {
@@ -80,10 +80,10 @@ unsafe fn attack_replace(lua_state: u64) {
     }
     let mut effs = 0;
     let mut critical = 0;
-    if is_gamemode("effects".to_string()) {
+    if is_gamemode("effects") {
         effs = sv_math::rand(hash40("fighter"), 13);
     }
-    if is_gamemode("critical".to_string()) {
+    if is_gamemode("critical") {
         critical = sv_math::rand(hash40("fighter"), 14);
         if smash::app::utility::get_category(boma) == *BATTLE_OBJECT_CATEGORY_FIGHTER && critical == 7{
             crate::with_state!(ENTRY_ID, GamemodeAttacksState, state, {
@@ -95,7 +95,7 @@ unsafe fn attack_replace(lua_state: u64) {
     l2c_agent.clear_lua_stack();
     for (i, x) in hitbox_params.iter_mut().enumerate().take(36) {
         if i == 3  {
-            if is_gamemode("critical".to_string()) && crate::get_state!(ENTRY_ID, GamemodeAttacksState).do_critical {
+            if is_gamemode("critical") && crate::get_state!(ENTRY_ID, GamemodeAttacksState).do_critical {
                 if x.get_num() < 2.5 {
                     //println!("damage is too low! {}%", x.get_num());
                     l2c_agent.push_lua_stack(x);
@@ -113,13 +113,13 @@ unsafe fn attack_replace(lua_state: u64) {
                     _ => l2c_agent.push_lua_stack(x),
                 };
             }
-        } else if i == 4 && is_gamemode("angles".to_string()) {
+        } else if i == 4 && is_gamemode("angles") {
             l2c_agent.push_lua_stack(&mut L2CValue::new_num(sv_math::rand(hash40("fighter"), 361) as f32));
-        } else if i == 32 && is_gamemode("effects".to_string()) {
+        } else if i == 32 && is_gamemode("effects") {
             l2c_agent.push_lua_stack(&mut L2CValue::new_hash(get_effect(effs)));
-        } else if i == 34 && is_gamemode("effects".to_string()) {
+        } else if i == 34 && is_gamemode("effects") {
             l2c_agent.push_lua_stack(&mut L2CValue::new_int(get_sfx(effs) as u64));
-        } else if i == 15 && is_gamemode("critical".to_string()) &&  crate::get_state!(ENTRY_ID, GamemodeAttacksState).do_critical {
+        } else if i == 15 && is_gamemode("critical") &&  crate::get_state!(ENTRY_ID, GamemodeAttacksState).do_critical {
             l2c_agent.push_lua_stack(&mut L2CValue::new_num(x.get_num() * 2.0));
         } else if i == 15 && config::get().general.hitlag == 2 {
             l2c_agent.push_lua_stack(&mut L2CValue::new_num(x.get_num() * 0.7));
