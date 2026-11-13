@@ -72,6 +72,10 @@ lazy_static! {
     static ref LOGS_ENABLED: bool = std::path::Path::new("sd:/ultimate/ult-s/enable_logs.flag").is_file();
 }
 
+pub fn logs_enabled() -> bool {
+    *LOGS_ENABLED
+}
+
 pub fn write_log(msg: &str) {
     use std::io::Write;
     if !*LOGS_ENABLED {
@@ -89,7 +93,7 @@ pub fn write_log(msg: &str) {
 #[macro_export]
 macro_rules! debug {
     ($($arg:tt)*) => {{
-        if *LOGS_ENABLED {
+        if $crate::s_macros::logs_enabled() {
             let msg = format!($($arg)*);
             println!("{}", msg);
             $crate::s_macros::write_log(&msg);
