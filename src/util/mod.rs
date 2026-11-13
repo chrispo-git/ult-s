@@ -21,7 +21,7 @@ use crate::config;
 
 pub use crate::variable_module::VariableModule;
 
-pub static mut GAMEMODES : FxHashSet<String> = FxHashSet::with_hasher(FxBuildHasher::default());
+pub static mut GAMEMODES : FxHashSet<String> = FxHashSet::with_hasher(FxBuildHasher);
 
 pub static mut PREV_SCALE : [f32; 8] = [0.0; 8];
 pub static mut IS_AB : [bool; 8] = [false; 8];
