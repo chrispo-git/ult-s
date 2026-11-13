@@ -193,7 +193,7 @@ unsafe extern "C" fn missile_frame(weapon: &mut L2CFighterBase) {
 			if MotionModule::frame(weapon.module_accessor) >= 5.0 && MotionModule::motion_kind(weapon.module_accessor) == hash40("homing") {
 				if VariableModule::is_flag((boma) as *mut _, FIGHTER_SAMUSD_INSTANCE_WORK_ID_FLAG_IS_HOLD) == true && MotionModule::frame(weapon.module_accessor) < 9.0 {
 					MotionModule::set_rate(weapon.module_accessor, 0.001);
-					println!("hold");
+					//println!("hold");
 				} else {
 					MotionModule::set_rate(weapon.module_accessor, 1.0);
 				};

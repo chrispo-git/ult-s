@@ -51,6 +51,6 @@ unsafe extern "C" fn simon_downb(fighter: &mut L2CAgentBase) {
 		};
 		let power = hypotenuse * 2.5;
 		ItemModule::throw_item(fighter.module_accessor, angle, power, 1.0, 0, true, 0.0);
-		println!("Power {}, Angle {}", power, angle);
+		//println!("Power {}, Angle {}", power, angle);
 	}
 }
