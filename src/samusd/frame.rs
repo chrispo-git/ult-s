@@ -178,7 +178,7 @@ unsafe extern "C" fn samusd_frame(fighter: &mut L2CFighterCommon) {
 						let y_speed = angle_radians.sin() * speed * -1.0;
 
 						macros::SET_SPEED_EX(fighter, x_speed, y_speed, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
-						println!("Speed : ({},{}), Dir : {}", x_speed, y_speed, VariableModule::get_float(fighter.module_accessor, FIGHTER_SAMUSD_INSTANCE_WORK_ID_FLOAT_UPB_ANGLE));
+						//println!("Speed : ({},{}), Dir : {}", x_speed, y_speed, VariableModule::get_float(fighter.module_accessor, FIGHTER_SAMUSD_INSTANCE_WORK_ID_FLOAT_UPB_ANGLE));
 					}
 			};
 		}

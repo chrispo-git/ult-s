@@ -124,7 +124,7 @@ unsafe extern "C" fn brawler_frame(fighter: &mut L2CFighterCommon) {
 		if [hash40("special_lw3"), hash40("special_air_lw3")].contains(&MotionModule::motion_kind(boma)) && SearchModule::is_inflict(boma) {
 			MotionModule::change_motion(boma, smash::phx::Hash40::new("throw_f"), 12.0, 1.0, false, 0.0, false, false);
 			shield!(fighter, *MA_MSC_CMD_REFLECTOR, *COLLISION_KIND_REFLECTOR, 0, hash40("top"), 5.0, 0.0, 6.5, 3.5, 0.0, 6.5, 5.5, 1.4, 1.5, 50, false, 0.5, *FIGHTER_REFLECTOR_GROUP_HOMERUNBAT);
-			println!("reflection!");
+			//println!("reflection!");
 			VariableModule::set_flag((boma) as *mut _, true, FIGHTER_MIIFIGHTER_INSTANCE_WORK_ID_FLAG_COUNTER_IS);
 		};
 		if MotionModule::motion_kind(boma) == hash40("throw_f") && MotionModule::frame(boma) > 20.0 {		

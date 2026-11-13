@@ -210,14 +210,10 @@ pub unsafe fn on_flag_hook(boma: &mut smash::app::BattleObjectModuleAccessor, in
 			if config.general.sh_macro != 0 {
 				if !(crate::get_state!(ENTRY_ID, InfoState).full_hop_enable_delay > 0){
 					original!()(boma, int)
-				} else {
-					println!("SH height banned");
 				}
 			} else {
 				if (ControlModule::check_button_off(boma, *CONTROL_PAD_BUTTON_JUMP) || ControlModule::check_button_on(boma, *CONTROL_PAD_BUTTON_JUMP_MINI)) && !(crate::get_state!(ENTRY_ID, InfoState).full_hop_enable_delay > 0) {
 					original!()(boma, int)
-				} else {
-					println!("SH height banned");
 				}
 			}
 		} else if int == *FIGHTER_INSTANCE_WORK_ID_FLAG_CATCHED_BUTTERFLYNET {
@@ -386,7 +382,7 @@ unsafe extern "C" fn util_update(fighter : &mut L2CFighterCommon) {
 			let costumes = get_marked_costumes("murabito","toad");
 			let curr_costume = WorkModule::get_int(&mut *grabber_boma, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR);
 			if grabber_kind == *FIGHTER_KIND_MURABITO && costumes.contains(&(curr_costume as usize)) {
-				println!("Turning off butterfly net flag");
+				//println!("Turning off butterfly net flag");
 				let grabber_motion = MotionModule::motion_kind(grabber_boma);
 				let grabber_frame = MotionModule::frame(grabber_boma);
 				if grabber_motion == hash40("throw_hi") && (3..35).contains(&(grabber_frame as i32)) {
@@ -1116,7 +1112,7 @@ pub static REGISTRY: Lazy<ModRegistry> = Lazy::new(|| ModRegistry::fill());
 )]*/
 pub(crate) fn get_marked_costumes(char_folder: &str, marker_name: &str) -> Vec<usize> {
     let marked_slots = REGISTRY.get_marked_costumes(char_folder, marker_name);
-    println!("{}-{} slots - {:?}", char_folder, marker_name, marked_slots);
+    crate::debug!("[Ultimate S] {}-{} slots - {:?}", char_folder, marker_name, marked_slots);
 	marked_slots
 }
 
@@ -1126,7 +1122,7 @@ pub(crate) fn get_marked_costumes(char_folder: &str, marker_name: &str) -> Vec<u
 )]*/
 pub(crate) fn get_lowest_marked_costume(char_folder: &str, marker_name: &str) -> u8 {
     let lowest_marked = REGISTRY.get_lowest_marked_costume(char_folder, marker_name);
-    println!("{}-{} lowest slot - {:?}", char_folder, marker_name, lowest_marked);
+    crate::debug!("[Ultimate S] {}-{} lowest slot - {:?}", char_folder, marker_name, lowest_marked);
 	lowest_marked
 }
 
@@ -1136,7 +1132,7 @@ pub(crate) fn get_lowest_marked_costume(char_folder: &str, marker_name: &str) ->
 )]*/
 pub(crate) fn get_costume_count(char_folder: &str, marker_name: &str) -> u8 {
     let costume_count = REGISTRY.get_costume_count(char_folder, marker_name);
-	println!("{}-{} costume count - {:?}", char_folder, marker_name, costume_count);
+	crate::debug!("[Ultimate S] {}-{} costume count - {:?}", char_folder, marker_name, costume_count);
 	costume_count
 }
 

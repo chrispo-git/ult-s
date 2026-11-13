@@ -111,7 +111,7 @@ unsafe extern "C" fn tico_frame(weapon: &mut L2CFighterBase) {
 			if [*WEAPON_ROSETTA_TICO_STATUS_KIND_REBIRTH].contains(&status_kind) {
 				VariableModule::set_flag((boma) as *mut _, false, FIGHTER_ROSETTA_INSTANCE_WORK_ID_FLAG_IS_TICO_DEAD);
 			};
-			println!("TICO_X {}, TICO_Y {}",TICO_X[ENTRY_ID], TICO_Y[ENTRY_ID] );
+			//println!("TICO_X {}, TICO_Y {}",TICO_X[ENTRY_ID], TICO_Y[ENTRY_ID] );
 			if VariableModule::is_flag((boma) as *mut _, FIGHTER_ROSETTA_INSTANCE_WORK_ID_FLAG_IS_TELEPORT) == true {
 				if VariableModule::get_int((boma) as *mut _, FIGHTER_ROSETTA_INSTANCE_WORK_ID_INT_INVIS_FRAMES) == 1 {
 					macros::EFFECT(weapon, Hash40::new("rosetta_escape"), Hash40::new("rot"), 0, 0, 0, 0, 0, 0, 0.5, 0, 0, 0, 0, 0, 0, true);

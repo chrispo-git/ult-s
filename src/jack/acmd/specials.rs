@@ -216,7 +216,6 @@ unsafe extern "C" fn joker_sideb_eff(fighter: &mut L2CAgentBase) {
 			if macros::is_excute(fighter) {
 				macros::EFFECT(fighter, Hash40::new("sys_thunder_flash"), Hash40::new("top"), 0, 0, 28, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, true);
 			};
-			println!("");
 		} else if VariableModule::get_int((fighter.module_accessor) as *mut _, FIGHTER_JACK_INSTANCE_WORK_ID_INT_BATON_TYPE) == 1 { // Panther (Ann)
 			frame(fighter.lua_state_agent, 19.0);
 			if macros::is_excute(fighter) {

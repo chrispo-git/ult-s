@@ -55,13 +55,13 @@ unsafe extern "C" fn toad(fighter : &mut L2CFighterCommon) {
 			if PostureModule::scale(boma) == 1.0 {
 				PostureModule::set_scale(fighter.module_accessor, 0.7, false);
 				GrabModule::set_size_mul(boma, 0.7);
-				println!("set small");
+				//println!("set small");
 			}
 		} else {
 			if PostureModule::scale(boma) != 0.85 {
 				PostureModule::set_scale(fighter.module_accessor, 0.85, false);
 				GrabModule::set_size_mul(boma, 0.85);
-				println!("set small2");
+				//println!("set small2");
 			}
 		}
 		WorkModule::set_int(boma, 1, *FIGHTER_MURABITO_INSTANCE_WORK_ID_INT_SPECIAL_N_TIME_LIMIT);

@@ -20,18 +20,19 @@ pub unsafe fn opff(fighter : &mut L2CFighterCommon, status_kind : i32, motion_ki
 		let frame = MotionModule::frame(boma(fighter));
 		
 		if (config::get().attacks.jab_cancel == 2 && !is_gamemode("fgmode".to_string())) {
-			if crate::get_state!(ENTRY_ID, JabState).has_enable_100_on {
+			let jab_state = crate::get_state!(ENTRY_ID, JabState);
+			if jab_state.has_enable_100_on {
 					WorkModule::set_flag(boma(fighter), true, *FIGHTER_STATUS_ATTACK_FLAG_ENABLE_100);
 			};
-				if crate::get_state!(ENTRY_ID, JabState).has_enable_combo_on {
-					WorkModule::set_flag(boma(fighter), true, *FIGHTER_STATUS_ATTACK_FLAG_ENABLE_COMBO);
-					if fighter_kind == *FIGHTER_KIND_DEMON {
-						WorkModule::set_flag(boma(fighter), true, *FIGHTER_DEMON_STATUS_ATTACK_COMBO_FLAG_CHANGE_STATUS);
-					};
+			if jab_state.has_enable_combo_on {
+				WorkModule::set_flag(boma(fighter), true, *FIGHTER_STATUS_ATTACK_FLAG_ENABLE_COMBO);
+				if fighter_kind == *FIGHTER_KIND_DEMON {
+					WorkModule::set_flag(boma(fighter), true, *FIGHTER_DEMON_STATUS_ATTACK_COMBO_FLAG_CHANGE_STATUS);
 				};
-				if crate::get_state!(ENTRY_ID, JabState).has_enable_no_hit_combo_on {
-					WorkModule::set_flag(boma(fighter), true, *FIGHTER_STATUS_ATTACK_FLAG_ENABLE_COMBO);
-				};
+			};
+			if jab_state.has_enable_no_hit_combo_on {
+				WorkModule::set_flag(boma(fighter), true, *FIGHTER_STATUS_ATTACK_FLAG_ENABLE_COMBO);
+			};
 			return;
 		}
 		//Speeds up jab 2s and 3s for certain chars

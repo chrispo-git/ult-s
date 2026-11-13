@@ -34,7 +34,7 @@ static mut MAX_SPIKE : f32 = 0.0;
 
 unsafe extern "C" fn common(fighter : &mut L2CFighterCommon) {
     unsafe {
-        let start = Instant::now();
+        //let start = Instant::now();
 
         let status_kind = StatusModule::status_kind(fighter.module_accessor);
         let motion_kind = MotionModule::motion_kind(fighter.module_accessor);
