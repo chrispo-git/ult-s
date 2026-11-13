@@ -15,15 +15,16 @@ use crate::util::*;
 use super::*;
 
 pub fn install() {
+    let costumes_simon_simon: Vec<usize> = get_marked_costumes("simon", "simon");
     Agent::new("simon")
-    .set_costume(get_marked_costumes("simon","simon"))
+    .set_costume(costumes_simon_simon.clone())
     .acmd("game_attacklw3", simon_dtilt, Priority::Low)    
     .acmd("effect_attacklw3", simon_dtilt_eff, Priority::Low)    
     .acmd("sound_attacklw3", simon_dtilt_snd, Priority::Low)    
     .install();
 
     Agent::new("simon_whip")
-    .set_costume(get_marked_costumes("simon","simon"))
+    .set_costume(costumes_simon_simon.clone())
     .acmd("game_attacklw3", whip_dtilt, Priority::Low)    
     .install();
 }

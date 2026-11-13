@@ -15,13 +15,14 @@ use crate::util::*;
 use super::*;
 
 pub fn install() {
+    let costumes_packun_packun: Vec<usize> = get_marked_costumes("packun", "packun");
     Agent::new("packun")
-    .set_costume(get_marked_costumes("packun","packun"))
+    .set_costume(costumes_packun_packun.clone())
     .on_line(Main, plant_frame)
     .install();
 
 	Agent::new("packun_poisonbreath")
-    .set_costume(get_marked_costumes("packun","packun"))
+    .set_costume(costumes_packun_packun.clone())
     .on_line(Main, poison_frame)
     .install();
 }

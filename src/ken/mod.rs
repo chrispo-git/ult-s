@@ -19,14 +19,15 @@ static mut FEET :  smash::phx::Vector3f =  smash::phx::Vector3f { x: 1.0, y: 0.0
 
 
 pub fn install() {
+	let costumes_ken_ken: Vec<i32> = get_marked_costumes("ken", "ken").into_iter().map(|x| x as i32).collect();
 	frame::install();
 	status::install();
 	acmd::install();
 
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_KEN, get_marked_costumes("ken","ken").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_special_lw"), smash::hash40("step_cancel_invalid_frame"), 999.0));
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_KEN, get_marked_costumes("ken","ken").into_iter().map(|x| x as i32).collect(), (smash::hash40("dash_speed"), 0, 1.85));
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_KEN, get_marked_costumes("ken","ken").into_iter().map(|x| x as i32).collect(), (smash::hash40("run_speed_max"), 0, 1.68));
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_KEN, get_marked_costumes("ken","ken").into_iter().map(|x| x as i32).collect(), (smash::hash40("air_speed_x_stable"), 0, 1.1));
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_KEN, get_marked_costumes("ken","ken").into_iter().map(|x| x as i32).collect(), (smash::hash40("landing_attack_air_frame_n"), 0, 6.0));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_KEN, costumes_ken_ken.clone(), (smash::hash40("param_special_lw"), smash::hash40("step_cancel_invalid_frame"), 999.0));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_KEN, costumes_ken_ken.clone(), (smash::hash40("dash_speed"), 0, 1.85));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_KEN, costumes_ken_ken.clone(), (smash::hash40("run_speed_max"), 0, 1.68));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_KEN, costumes_ken_ken.clone(), (smash::hash40("air_speed_x_stable"), 0, 1.1));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_KEN, costumes_ken_ken.clone(), (smash::hash40("landing_attack_air_frame_n"), 0, 6.0));
 
 }

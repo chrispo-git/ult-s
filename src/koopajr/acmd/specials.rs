@@ -14,15 +14,16 @@ use smash::phx::Vector3f;
 use crate::util::*;
 use super::*;
 pub fn install() {
+    let costumes_koopajr_koopajr: Vec<usize> = get_marked_costumes("koopajr", "koopajr");
     Agent::new("koopajr")
-    .set_costume(get_marked_costumes("koopajr","koopajr"))
+    .set_costume(costumes_koopajr_koopajr.clone())
     .acmd("game_specialhistart", game_specialhistart, Priority::Low)     
     .acmd("game_specialairhistart", game_specialhistart, Priority::Low)     
     .acmd("game_speciallw", game_speciallw, Priority::Low)     
     .acmd("game_specialairlw", game_speciallw, Priority::Low)     
     .install();
 	Agent::new("koopajr_remainclown")
-    .set_costume(get_marked_costumes("koopajr","koopajr"))
+    .set_costume(costumes_koopajr_koopajr.clone())
     .acmd("game_specialairhiclownfall", game_specialhiclownfall, Priority::Low)     
     .acmd("game_specialhiclownfall", game_specialhiclownfall, Priority::Low)
     .acmd("game_specialhiburst", game_specialhiburst, Priority::Low)        

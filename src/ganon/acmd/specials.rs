@@ -174,9 +174,6 @@ unsafe extern "C" fn ganon_downb(fighter: &mut L2CAgentBase) {
 		frame(fighter.lua_state_agent, 10.0);
 		if macros::is_excute(fighter) {
 			JostleModule::set_status(fighter.module_accessor, false);
-			if true{
-				println!("ganon_downb!");
-			}
 		}
 		frame(fighter.lua_state_agent, 16.0);
 		if macros::is_excute(fighter) {

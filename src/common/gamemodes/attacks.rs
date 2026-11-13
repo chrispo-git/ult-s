@@ -22,19 +22,20 @@ pub unsafe fn critical_opff(fighter: &mut L2CFighterCommon, ENTRY_ID : usize) {
     if !is_gamemode("critical".to_string()) {
         return;
     }
-    if crate::get_state!(ENTRY_ID, GamemodeAttacksState).do_critical {
+    let gamemode_attacks_state = crate::get_state!(ENTRY_ID, GamemodeAttacksState);
+    if gamemode_attacks_state.do_critical {
         if AttackModule::is_infliction_status(fighter.module_accessor, *COLLISION_KIND_MASK_HIT) {
             crate::with_state!(ENTRY_ID, GamemodeAttacksState, state, {
                 state.critical_frame += 1;
             });
-            if crate::get_state!(ENTRY_ID, GamemodeAttacksState).critical_frame < 2 {
+            if gamemode_attacks_state.critical_frame < 2 {
                 SlowModule::set_whole(fighter.module_accessor, 8, 80);
                 macros::CAM_ZOOM_IN_arg5(fighter, /*frames*/ 2.0,/*no*/ 0.0,/*zoom*/ 1.8,/*yrot*/ 0.0,/*xrot*/ 0.0);
                 EffectModule::req_follow(fighter.module_accessor, Hash40::new("sys_bg_criticalhit"), Hash40::new("top"), &Vector3f{x: 0.0, y: 0.0, z: 0.0} as *const Vector3f, &Vector3f{x: 0.0, y: 0.0, z: 0.0} as *const Vector3f, 1.0, false, 0, 0, 0, 0, 0, false, false);
                 macros::PLAY_SE(fighter, Hash40::new("se_common_criticalhit"));
                 macros::QUAKE(fighter, *CAMERA_QUAKE_KIND_XL);
             }
-            if crate::get_state!(ENTRY_ID, GamemodeAttacksState).critical_frame >= 6 {
+            if gamemode_attacks_state.critical_frame >= 6 {
                 SlowModule::clear_whole(fighter.module_accessor);
                 CameraModule::reset_all(fighter.module_accessor);
                 EffectModule::kill_kind(fighter.module_accessor, Hash40::new("sys_bg_criticalhit"), false, false);
@@ -44,7 +45,7 @@ pub unsafe fn critical_opff(fighter: &mut L2CFighterCommon, ENTRY_ID : usize) {
                 });
             }
         } else {
-            if crate::get_state!(ENTRY_ID, GamemodeAttacksState).critical_frame > 0 {
+            if gamemode_attacks_state.critical_frame > 0 {
                 SlowModule::clear_whole(fighter.module_accessor);
                 CameraModule::reset_all(fighter.module_accessor);
                 EffectModule::kill_kind(fighter.module_accessor, Hash40::new("sys_bg_criticalhit"), false, false);
@@ -91,7 +92,7 @@ unsafe fn attack_replace(lua_state: u64) {
             });
         }
     }
-    let mut hitbox_params: Vec<L2CValue> = (0..36).map(|i| l2c_agent.pop_lua_stack(i + 1)).collect();
+    let mut hitbox_params: [L2CValue; 36] = std::array::from_fn(|i| l2c_agent.pop_lua_stack(i as i32 + 1));
     l2c_agent.clear_lua_stack();
     for (i, x) in hitbox_params.iter_mut().enumerate().take(36) {
         if i == 3  {

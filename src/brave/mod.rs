@@ -6,13 +6,14 @@ use smash::lib::lua_const::*;
 use smash::hash40;
 
 pub fn install() {
+	let costumes_brave_brave: Vec<i32> = get_marked_costumes("brave", "brave").into_iter().map(|x| x as i32).collect();
 	frame::install();
 	status::install();
 	acmd::install();
 
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_BRAVE, get_marked_costumes("brave","brave").into_iter().map(|x| x as i32).collect(), (smash::hash40("jump_speed_x_mul"), 0, 1.0));
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_BRAVE, get_marked_costumes("brave","brave").into_iter().map(|x| x as i32).collect(), (smash::hash40("landing_attack_air_frame_f"), 0, 10.0));
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_BRAVE, get_marked_costumes("brave","brave").into_iter().map(|x| x as i32).collect(), (smash::hash40("landing_attack_air_frame_b"), 0, 11.0));
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_BRAVE, get_marked_costumes("brave","brave").into_iter().map(|x| x as i32).collect(), (smash::hash40("landing_attack_air_frame_hi"), 0, 6.0));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_BRAVE, costumes_brave_brave.clone(), (smash::hash40("jump_speed_x_mul"), 0, 1.0));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_BRAVE, costumes_brave_brave.clone(), (smash::hash40("landing_attack_air_frame_f"), 0, 10.0));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_BRAVE, costumes_brave_brave.clone(), (smash::hash40("landing_attack_air_frame_b"), 0, 11.0));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_BRAVE, costumes_brave_brave.clone(), (smash::hash40("landing_attack_air_frame_hi"), 0, 6.0));
 
 }

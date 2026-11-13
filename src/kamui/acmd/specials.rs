@@ -15,14 +15,15 @@ use crate::util::*;
 use super::*;
 
 pub fn install() {
+    let costumes_kamui_kamui: Vec<usize> = get_marked_costumes("kamui", "kamui");
     Agent::new("kamui_ryusensya")
-    .set_costume(get_marked_costumes("kamui","kamui"))
+    .set_costume(costumes_kamui_kamui.clone())
     .acmd("game_regular", corrin_neutralb, Priority::Low)    
     .acmd("game_shotmax", corrin_neutralb_max, Priority::Low)    
     .install();
 
 	Agent::new("kamui_waterdragon")
-    .set_costume(get_marked_costumes("kamui","kamui"))
+    .set_costume(costumes_kamui_kamui.clone())
     .acmd("game_speciallwhit", corrin_downb, Priority::Low)    
     .acmd("game_specialairlwhit", corrin_downb, Priority::Low)    
     .acmd("game_speciallwhitturn", corrin_downb, Priority::Low)    

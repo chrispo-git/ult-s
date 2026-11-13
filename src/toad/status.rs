@@ -346,8 +346,9 @@ unsafe extern "C" fn special_n_main_loop(fighter: &mut L2CFighterCommon) -> L2CV
 
 
 pub fn install() {
+    let costumes_murabito_toad: Vec<usize> = get_marked_costumes("murabito", "toad");
     Agent::new("murabito")
-    .set_costume(get_marked_costumes("murabito","toad"))
+    .set_costume(costumes_murabito_toad.clone())
         .status(Main, *FIGHTER_STATUS_KIND_CATCH_PULL, main_catch_pull)
         .status(Main, *FIGHTER_STATUS_KIND_CATCH_WAIT, main_catch_wait)
         //.status(Main, *FIGHTER_STATUS_KIND_THROW, main_throw)
@@ -364,7 +365,7 @@ pub fn install() {
         .status(Pre, *FIGHTER_MURABITO_STATUS_KIND_FINAL_END, final_end_pre)
         .install();
     Agent::new("murabito_flowerpot")
-    .set_costume(get_marked_costumes("murabito","toad"))
+    .set_costume(costumes_murabito_toad.clone())
         .status(Init, *WEAPON_MURABITO_FLOWERPOT_STATUS_KIND_THROWED, regular_init)
         .status(Pre, *WEAPON_MURABITO_FLOWERPOT_STATUS_KIND_THROWED, regular_pre)
         .status(Main, *WEAPON_MURABITO_FLOWERPOT_STATUS_KIND_THROWED, regular_main)

@@ -423,8 +423,9 @@ unsafe extern "C" fn toad_entry(fighter: &mut L2CAgentBase) {
 }	
 
 pub fn install() {
+	let costumes_murabito_toad: Vec<usize> = get_marked_costumes("murabito", "toad");
 	Agent::new("murabito")
-    .set_costume(get_marked_costumes("murabito","toad"))
+    .set_costume(costumes_murabito_toad.clone())
 		.game_acmd("game_catchtoad", toad_catch, Priority::Low)
 		.sound_acmd("sound_catchtoad", toad_catch_snd, Priority::Low)
 		.game_acmd("game_catchdashtoad", toad_catchdash, Priority::Low)
@@ -488,7 +489,7 @@ pub fn install() {
 		.install();
 
 	Agent::new("murabito_clayrocket")
-    .set_costume(get_marked_costumes("murabito","toad"))
+    .set_costume(costumes_murabito_toad.clone())
 		.game_acmd("game_flytoad", toad_final_toad_army, Priority::Low)
 		.game_acmd("game_falltoad", toad_final_toad_army, Priority::Low)
 		.effect_acmd("effect_flytoad", toad_final_toad_army_eff, Priority::Low)

@@ -55,13 +55,13 @@ unsafe extern "C" fn toad(fighter : &mut L2CFighterCommon) {
 			if PostureModule::scale(boma) == 1.0 {
 				PostureModule::set_scale(fighter.module_accessor, 0.7, false);
 				GrabModule::set_size_mul(boma, 0.7);
-				println!("set small");
+				//println!("set small");
 			}
 		} else {
 			if PostureModule::scale(boma) != 0.85 {
 				PostureModule::set_scale(fighter.module_accessor, 0.85, false);
 				GrabModule::set_size_mul(boma, 0.85);
-				println!("set small2");
+				//println!("set small2");
 			}
 		}
 		WorkModule::set_int(boma, 1, *FIGHTER_MURABITO_INSTANCE_WORK_ID_INT_SPECIAL_N_TIME_LIMIT);
@@ -392,7 +392,7 @@ unsafe extern "C" fn toad(fighter : &mut L2CFighterCommon) {
 		}
 		if [hash40("special_n"), hash40("special_air_n")].contains(&motion_kind) && IS_POP_MODE[ENTRY_ID] { 
 			if frame < 3.0 || (frame > 20.0 && ControlModule::check_button_on_trriger(boma, *CONTROL_PAD_BUTTON_SPECIAL)) {
-				println!("Pop!");
+				//println!("Pop!");
 				if situation_kind == *SITUATION_KIND_GROUND {
 					MotionModule::change_motion(boma, smash::phx::Hash40::new("special_n_pop"), 0.0, 1.0, false, 0.0, false, false);
 				} else {

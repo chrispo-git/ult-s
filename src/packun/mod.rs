@@ -14,16 +14,17 @@ static FIGHTER_PACKUN_INSTANCE_WORK_ID_FLOAT_BREATH_POS_Y : i32 = 3;
 
 
 pub fn install() {
+	let costumes_packun_packun: Vec<i32> = get_marked_costumes("packun", "packun").into_iter().map(|x| x as i32).collect();
 	frame::install();
 	status::install();
 	acmd::install();
 
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_PACKUN, get_marked_costumes("packun","packun").into_iter().map(|x| x as i32).collect(), (smash::hash40("dash_speed"), 0, 1.92));
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_PACKUN, get_marked_costumes("packun","packun").into_iter().map(|x| x as i32).collect(), (smash::hash40("run_speed_max"), 0, 1.82));
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_PACKUN, get_marked_costumes("packun","packun").into_iter().map(|x| x as i32).collect(), (smash::hash40("jump_speed_x_mul"), 0, 0.95));
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_PACKUN, get_marked_costumes("packun","packun").into_iter().map(|x| x as i32).collect(), (smash::hash40("air_speed_x_stable"), 0, 1.075));
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_PACKUN, get_marked_costumes("packun","packun").into_iter().map(|x| x as i32).collect(), (smash::hash40("landing_attack_air_frame_f"), 0, 9.0));
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_PACKUN, get_marked_costumes("packun","packun").into_iter().map(|x| x as i32).collect(), (smash::hash40("landing_attack_air_frame_b"), 0, 12.0));
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_PACKUN, get_marked_costumes("packun","packun").into_iter().map(|x| x as i32).collect(), (smash::hash40("landing_attack_air_frame_lw"), 0, 12.0));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_PACKUN, costumes_packun_packun.clone(), (smash::hash40("dash_speed"), 0, 1.92));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_PACKUN, costumes_packun_packun.clone(), (smash::hash40("run_speed_max"), 0, 1.82));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_PACKUN, costumes_packun_packun.clone(), (smash::hash40("jump_speed_x_mul"), 0, 0.95));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_PACKUN, costumes_packun_packun.clone(), (smash::hash40("air_speed_x_stable"), 0, 1.075));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_PACKUN, costumes_packun_packun.clone(), (smash::hash40("landing_attack_air_frame_f"), 0, 9.0));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_PACKUN, costumes_packun_packun.clone(), (smash::hash40("landing_attack_air_frame_b"), 0, 12.0));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_PACKUN, costumes_packun_packun.clone(), (smash::hash40("landing_attack_air_frame_lw"), 0, 12.0));
 
 }

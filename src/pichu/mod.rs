@@ -15,12 +15,13 @@ static RECHARGE_MAX : i32 = 90;
 
 
 pub fn install() {
+	let costumes_pichu_pichu: Vec<i32> = get_marked_costumes("pichu", "pichu").into_iter().map(|x| x as i32).collect();
 	frame::install();
 	status::install();
 	acmd::install();
 
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_PICHU, get_marked_costumes("pichu","pichu").into_iter().map(|x| x as i32).collect(), (smash::hash40("jump_speed_x_mul"), 0, 1.475));
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_PICHU, get_marked_costumes("pichu","pichu").into_iter().map(|x| x as i32).collect(), (smash::hash40("air_speed_x_stable"), 0, 1.1));
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_PICHU, get_marked_costumes("pichu","pichu").into_iter().map(|x| x as i32).collect(), (smash::hash40("weight"), 0, 75.0));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_PICHU, costumes_pichu_pichu.clone(), (smash::hash40("jump_speed_x_mul"), 0, 1.475));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_PICHU, costumes_pichu_pichu.clone(), (smash::hash40("air_speed_x_stable"), 0, 1.1));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_PICHU, costumes_pichu_pichu.clone(), (smash::hash40("weight"), 0, 75.0));
 
 }

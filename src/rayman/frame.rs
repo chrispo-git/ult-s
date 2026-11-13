@@ -643,13 +643,14 @@ unsafe extern "C" fn kill_pikmin(weapon: &mut L2CFighterBase) {
 }
 
 pub fn install() {
+    let costumes_pikmin_rayman: Vec<usize> = get_marked_costumes("pikmin", "rayman");
     Agent::new("pikmin")
-    .set_costume(get_marked_costumes("pikmin","rayman"))
+    .set_costume(costumes_pikmin_rayman.clone())
         .on_line(Main, rayman)
         .install();
 
     Agent::new("pikmin_pikmin")
-    .set_costume(get_marked_costumes("pikmin","rayman"))
+    .set_costume(costumes_pikmin_rayman.clone())
         .on_line(Main, kill_pikmin)
         .install();
 }

@@ -15,14 +15,15 @@ use crate::util::*;
 use super::*;
 
 pub fn install() {
+    let costumes_sheik_sheik: Vec<usize> = get_marked_costumes("sheik", "sheik");
     Agent::new("sheik")
-    .set_costume(get_marked_costumes("sheik","sheik"))
+    .set_costume(costumes_sheik_sheik.clone())
     .acmd("game_speciallwattack", sheik_bf, Priority::Low)    
     .acmd("game_speciallwattackreturn", sheik_bfback, Priority::Low)    
     .install();
 
     Agent::new("sheik_needle")
-    .set_costume(get_marked_costumes("sheik","sheik"))
+    .set_costume(costumes_sheik_sheik.clone())
     .acmd("game_move", sheik_needles, Priority::Low)    
     .install();
 }

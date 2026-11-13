@@ -91,8 +91,8 @@ pub unsafe fn opff(fighter : &mut L2CFighterCommon, status_kind : i32, ENTRY_ID 
             if y_add < 0.0 && Y[ENTRY_ID] < Y_MAX*-1.0 {
                 y_add = 0.0;
             };
-            println!("x{}, y{}", X[ENTRY_ID], Y[ENTRY_ID]);
-            println!("x_add{}, y_add{}", x_add, y_add);
+            //println!("x{}, y{}", X[ENTRY_ID], Y[ENTRY_ID]);
+            //println!("x_add{}, y_add{}", x_add, y_add);
             X[ENTRY_ID] += x_add;
             Y[ENTRY_ID] += y_add;
             macros::SET_SPEED_EX(fighter, X[ENTRY_ID], Y[ENTRY_ID]+0.075, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);

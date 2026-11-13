@@ -82,6 +82,7 @@ If there isn't, you can make one by creating a file (no extension on the end) wi
 
 
 Any other issues or queries should be directed to the discord server (https://discord.gg/YXaPzC5WGd)
+Please before asking for help with crashes, place an empty file at "sd:/ultimate/ult-s/enable_logs.flag", run the game until it crashes or has a problem, and provide the log file at "sd:/ultimate/ult-s/log.txt"
 
 Have fun!
 
