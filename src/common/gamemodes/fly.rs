@@ -21,7 +21,7 @@ static mut Y_ACCEL_ADD : f32 = 0.02;
 static mut Y_ACCEL_MUL : f32 = 0.05;
 
 pub unsafe fn opff(fighter : &mut L2CFighterCommon, status_kind : i32, ENTRY_ID : usize, situation_kind : i32) {
-    if !is_gamemode("fly".to_string()){
+    if !is_gamemode("fly"){
         return;
     }
     if  situation_kind == *SITUATION_KIND_AIR &&

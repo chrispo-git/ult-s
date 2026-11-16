@@ -1,20 +1,20 @@
 use std::any::{Any, TypeId};
-use std::collections::HashMap;
 use parking_lot::Mutex;
 use once_cell::sync::Lazy;
+use rustc_hash::{FxBuildHasher, FxHashMap};
 
-type ComponentMap = HashMap<TypeId, Box<dyn Any + Send + Sync>>;
+type ComponentMap = FxHashMap<TypeId, Box<dyn Any + Send + Sync>>;
 
 static PLAYER_STATE: Lazy<Mutex<[ComponentMap; 8]>> = Lazy::new(|| {
     let maps: [ComponentMap; 8] = [
-        HashMap::with_capacity(100),
-        HashMap::with_capacity(100),
-        HashMap::with_capacity(100),
-        HashMap::with_capacity(100),
-        HashMap::with_capacity(100),
-        HashMap::with_capacity(100),
-        HashMap::with_capacity(100),
-        HashMap::with_capacity(100),
+        FxHashMap::with_capacity_and_hasher(100, FxBuildHasher::default()),
+        FxHashMap::with_capacity_and_hasher(100, FxBuildHasher::default()),
+        FxHashMap::with_capacity_and_hasher(100, FxBuildHasher::default()),
+        FxHashMap::with_capacity_and_hasher(100, FxBuildHasher::default()),
+        FxHashMap::with_capacity_and_hasher(100, FxBuildHasher::default()),
+        FxHashMap::with_capacity_and_hasher(100, FxBuildHasher::default()),
+        FxHashMap::with_capacity_and_hasher(100, FxBuildHasher::default()),
+        FxHashMap::with_capacity_and_hasher(100, FxBuildHasher::default()),
     ];
     Mutex::new(maps)
 });

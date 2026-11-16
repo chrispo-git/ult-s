@@ -20,7 +20,7 @@ static mut DELAY_UNTIL_ACT : [i32; 8] = [30; 8];
 
 pub unsafe fn opff(fighter : &mut L2CFighterCommon, status_kind : i32, motion_kind : u64, ENTRY_ID : usize) {
     unsafe {
-        if !is_gamemode("itemduel".to_string()) {
+        if !is_gamemode("itemduel") {
             return;
         }
 		let situation_kind = StatusModule::situation_kind(fighter.module_accessor);
@@ -137,7 +137,7 @@ unsafe fn setItem(fighter : &mut L2CFighterCommon, val : i32) -> () {
 
 #[skyline::hook(replace = ItemModule::drop_item)]
 pub unsafe fn drop_item_hook(boma: &mut smash::app::BattleObjectModuleAccessor, arg1: f32, arg2: f32, arg3: i32) -> u64 {
-        if is_gamemode("itemduel".to_string()) {
+        if is_gamemode("itemduel") {
             return 0;
         }
         original!()(boma, arg1, arg2, arg3)

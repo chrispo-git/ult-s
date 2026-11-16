@@ -11,7 +11,7 @@ use smash::phx::Vector2f;
 use crate::util::*;
 
 pub unsafe fn opff(fighter : &mut L2CFighterCommon, status_kind : i32, situation_kind : i32) {
-    if !is_gamemode("pogo".to_string()){
+    if !is_gamemode("pogo"){
         return;
     }
     if situation_kind == *SITUATION_KIND_GROUND && !crate::is_in!(status_kind, *FIGHTER_STATUS_KIND_ENTRY, *FIGHTER_STATUS_KIND_JUMP_SQUAT) {

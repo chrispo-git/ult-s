@@ -55,7 +55,7 @@ pub unsafe fn shieldstun_alter(fighter : &mut L2CFighterCommon, status_kind : i3
 }
 pub unsafe fn opff(fighter : &mut L2CFighterCommon, status_kind : i32) {
     unsafe {
-        if !is_gamemode("sixtyfour".to_string()) {
+        if !is_gamemode("sixtyfour") {
             return;
         }
         float_setter(fighter);
