@@ -20,16 +20,17 @@ static mut F4 : [u32; 8] = [0; 8];
 
 
 pub fn install() {
+	let costumes_kirby_kirby: Vec<i32> = get_marked_costumes("kirby", "kirby").into_iter().map(|x| x as i32).collect();
 	frame::install();
 	status::install();
 	acmd::install();
 
-	crate::param_cache::update_int_2(-*WEAPON_KIND_KIRBY_FINALCUTTERSHOT, get_marked_costumes("kirby","kirby").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_finalcuttershot"), smash::hash40("is_penetration"), 1));
-	 crate::param_cache::update_float_2(-*WEAPON_KIND_KIRBY_FINALCUTTERSHOT, get_marked_costumes("kirby","kirby").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_finalcuttershot"), smash::hash40("life"), 40.0));
-	 crate::param_cache::update_float_2(-*WEAPON_KIND_KIRBY_FINALCUTTERSHOT, get_marked_costumes("kirby","kirby").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_finalcuttershot"), smash::hash40("speed"), 3.4));
-	 crate::param_cache::update_float_2(-*WEAPON_KIND_KIRBY_FINALCUTTERSHOT, get_marked_costumes("kirby","kirby").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_finalcuttershot"), smash::hash40("brake"), 0.0));
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_KIRBY, get_marked_costumes("kirby","kirby").into_iter().map(|x| x as i32).collect(), (smash::hash40("run_speed_max"), 0, 1.775));
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_KIRBY, get_marked_costumes("kirby","kirby").into_iter().map(|x| x as i32).collect(), (smash::hash40("jump_speed_x_mul"), 0, 1.0));
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_KIRBY, get_marked_costumes("kirby","kirby").into_iter().map(|x| x as i32).collect(), (smash::hash40("air_speed_x_stable"), 0, 0.95));
+	crate::param_cache::update_int_2(-*WEAPON_KIND_KIRBY_FINALCUTTERSHOT, costumes_kirby_kirby.clone(), (smash::hash40("param_finalcuttershot"), smash::hash40("is_penetration"), 1));
+	 crate::param_cache::update_float_2(-*WEAPON_KIND_KIRBY_FINALCUTTERSHOT, costumes_kirby_kirby.clone(), (smash::hash40("param_finalcuttershot"), smash::hash40("life"), 40.0));
+	 crate::param_cache::update_float_2(-*WEAPON_KIND_KIRBY_FINALCUTTERSHOT, costumes_kirby_kirby.clone(), (smash::hash40("param_finalcuttershot"), smash::hash40("speed"), 3.4));
+	 crate::param_cache::update_float_2(-*WEAPON_KIND_KIRBY_FINALCUTTERSHOT, costumes_kirby_kirby.clone(), (smash::hash40("param_finalcuttershot"), smash::hash40("brake"), 0.0));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_KIRBY, costumes_kirby_kirby.clone(), (smash::hash40("run_speed_max"), 0, 1.775));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_KIRBY, costumes_kirby_kirby.clone(), (smash::hash40("jump_speed_x_mul"), 0, 1.0));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_KIRBY, costumes_kirby_kirby.clone(), (smash::hash40("air_speed_x_stable"), 0, 0.95));
 
 }

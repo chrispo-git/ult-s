@@ -76,8 +76,9 @@ unsafe extern "C" fn special_hi_pre(fighter: &mut L2CFighterCommon) -> L2CValue 
     return 0.into();
 }
 pub fn install() {
+    let costumes_samusd_samusd: Vec<usize> = get_marked_costumes("samusd", "samusd");
     Agent::new("samusd")
-    .set_costume(get_marked_costumes("samusd","samusd"))
+    .set_costume(costumes_samusd_samusd.clone())
         .status(Pre, *FIGHTER_SAMUS_STATUS_KIND_SPECIAL_AIR_LW, special_air_lw_pre)
         .status(Pre, *FIGHTER_SAMUS_STATUS_KIND_SPECIAL_GROUND_LW, special_lw_pre)
         .status(Main, *FIGHTER_SAMUS_STATUS_KIND_SPECIAL_AIR_LW, special_air_lw_main)
@@ -92,7 +93,7 @@ pub fn install() {
         .install();
 
     Agent::new("samusd_missile")
-    .set_costume(get_marked_costumes("samusd","samusd"))
+    .set_costume(costumes_samusd_samusd.clone())
         .status(Exec, *WEAPON_SAMUS_MISSILE_STATUS_KIND_HOMING, missile_exec)
         .install();
 }

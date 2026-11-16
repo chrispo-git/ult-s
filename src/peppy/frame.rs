@@ -108,11 +108,11 @@ unsafe extern "C" fn peppy_frame(fighter: &mut L2CFighterCommon) {
 						GroundModule::ray_check(boma, &Vector2f{ x: tether_pos.x, y: tether_pos.y}, &Vector2f{ x: 7.0*PostureModule::lr(boma), y: 0.0}, true) == 1 ||
 						AttackModule::is_infliction_status(boma, *COLLISION_KIND_MASK_ALL)
 					{
-						println!("tether! x{} y{}", tether_pos.x, tether_pos.y);
+						//println!("tether! x{} y{}", tether_pos.x, tether_pos.y);
 						MotionModule::change_motion(fighter.module_accessor, Hash40::new("special_air_s"), -1.0, 1.0, false, 0.0, false, false);
 					} else {
 					}
-					println!("tether? x{} y{}", tether_pos.x, tether_pos.y);
+					//println!("tether? x{} y{}", tether_pos.x, tether_pos.y);
 				}
 				if end_frame-frame < 3.0 {
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_STATUS_KIND_FALL, true);

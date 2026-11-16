@@ -90,6 +90,7 @@ pub(crate) unsafe fn jump_aerial_vc(fighter: &mut L2CAgentBase) -> () {
 }
 
 pub fn install() {
+	let costumes_pikmin_rayman: Vec<i32> = get_marked_costumes("pikmin", "rayman").into_iter().map(|x| x as i32).collect();
 	frame::install();
 	status::install();
 	acmd::install();
@@ -208,34 +209,34 @@ pub fn install() {
     the_csk_collection_api::set_fighter_jingle(hash40("ui_chara_rayman"), "z25_f_rayman");
 
 
-    crate::param_cache::update_int_2(*FIGHTER_KIND_PIKMIN, get_marked_costumes("pikmin","rayman").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_motion"), smash::hash40("flip"), 1));
-     crate::param_cache::update_float_2(*FIGHTER_KIND_PIKMIN, get_marked_costumes("pikmin","rayman").into_iter().map(|x| x as i32).collect(), (smash::hash40("dash_speed"), 0, 1.92));
-     crate::param_cache::update_float_2(*FIGHTER_KIND_PIKMIN, get_marked_costumes("pikmin","rayman").into_iter().map(|x| x as i32).collect(), (smash::hash40("run_speed_max"), 0, 2.1));
-     crate::param_cache::update_float_2(*FIGHTER_KIND_PIKMIN, get_marked_costumes("pikmin","rayman").into_iter().map(|x| x as i32).collect(), (smash::hash40("walk_speed_max"), 0, 1.01));
-     crate::param_cache::update_float_2(*FIGHTER_KIND_PIKMIN, get_marked_costumes("pikmin","rayman").into_iter().map(|x| x as i32).collect(), (smash::hash40("ground_brake"), 0, 0.07));
-     crate::param_cache::update_float_2(*FIGHTER_KIND_PIKMIN, get_marked_costumes("pikmin","rayman").into_iter().map(|x| x as i32).collect(), (smash::hash40("jump_speed_x_mul"), 0, 1.075));
-     crate::param_cache::update_float_2(*FIGHTER_KIND_PIKMIN, get_marked_costumes("pikmin","rayman").into_iter().map(|x| x as i32).collect(), (smash::hash40("air_accel_x_mul"), 0, 0.067));
-     crate::param_cache::update_float_2(*FIGHTER_KIND_PIKMIN, get_marked_costumes("pikmin","rayman").into_iter().map(|x| x as i32).collect(), (smash::hash40("air_accel_x_add"), 0, 0.01));
-     crate::param_cache::update_float_2(*FIGHTER_KIND_PIKMIN, get_marked_costumes("pikmin","rayman").into_iter().map(|x| x as i32).collect(), (smash::hash40("air_speed_x_stable"), 0, 1.075));
-     crate::param_cache::update_float_2(*FIGHTER_KIND_PIKMIN, get_marked_costumes("pikmin","rayman").into_iter().map(|x| x as i32).collect(), (smash::hash40("air_speed_y_stable"), 0, 1.55));
-     crate::param_cache::update_float_2(*FIGHTER_KIND_PIKMIN, get_marked_costumes("pikmin","rayman").into_iter().map(|x| x as i32).collect(), (smash::hash40("air_accel_y"), 0, 0.09));
-     crate::param_cache::update_float_2(*FIGHTER_KIND_PIKMIN, get_marked_costumes("pikmin","rayman").into_iter().map(|x| x as i32).collect(), (smash::hash40("dive_speed_y"), 0, 2.48));
-     crate::param_cache::update_float_2(*FIGHTER_KIND_PIKMIN, get_marked_costumes("pikmin","rayman").into_iter().map(|x| x as i32).collect(), (smash::hash40("jump_y"), 0, 34.0));
-     crate::param_cache::update_float_2(*FIGHTER_KIND_PIKMIN, get_marked_costumes("pikmin","rayman").into_iter().map(|x| x as i32).collect(), (smash::hash40("mini_jump_y"), 0, 16.18));
-     crate::param_cache::update_float_2(*FIGHTER_KIND_PIKMIN, get_marked_costumes("pikmin","rayman").into_iter().map(|x| x as i32).collect(), (smash::hash40("jump_aerial_y"), 0, 35.2));
-     crate::param_cache::update_float_2(*FIGHTER_KIND_PIKMIN, get_marked_costumes("pikmin","rayman").into_iter().map(|x| x as i32).collect(), (smash::hash40("weight"), 0, 93.0));
-     crate::param_cache::update_float_2(*FIGHTER_KIND_PIKMIN, get_marked_costumes("pikmin","rayman").into_iter().map(|x| x as i32).collect(), (smash::hash40("landing_attack_air_frame_n"), 0, 8.0));
-     crate::param_cache::update_float_2(*FIGHTER_KIND_PIKMIN, get_marked_costumes("pikmin","rayman").into_iter().map(|x| x as i32).collect(), (smash::hash40("landing_attack_air_frame_f"), 0, 10.0));
-     crate::param_cache::update_float_2(*FIGHTER_KIND_PIKMIN, get_marked_costumes("pikmin","rayman").into_iter().map(|x| x as i32).collect(), (smash::hash40("landing_attack_air_frame_b"), 0, 14.0));
-     crate::param_cache::update_float_2(*FIGHTER_KIND_PIKMIN, get_marked_costumes("pikmin","rayman").into_iter().map(|x| x as i32).collect(), (smash::hash40("landing_attack_air_frame_hi"), 0, 13.0));
-     crate::param_cache::update_float_2(*FIGHTER_KIND_PIKMIN, get_marked_costumes("pikmin","rayman").into_iter().map(|x| x as i32).collect(), (smash::hash40("landing_attack_air_frame_lw"), 0, 9.0));
-     crate::param_cache::update_float_2(*FIGHTER_KIND_PIKMIN, get_marked_costumes("pikmin","rayman").into_iter().map(|x| x as i32).collect(), (smash::hash40("landing_frame"), 0, 4.0));
-     crate::param_cache::update_float_2(*FIGHTER_KIND_PIKMIN, get_marked_costumes("pikmin","rayman").into_iter().map(|x| x as i32).collect(), (smash::hash40("shield_radius"), 0, 7.0));
-     crate::param_cache::update_float_2(*FIGHTER_KIND_PIKMIN, get_marked_costumes("pikmin","rayman").into_iter().map(|x| x as i32).collect(), (smash::hash40("combo_attack_12_end"), 0, 28.0));
-     crate::param_cache::update_float_2(*FIGHTER_KIND_PIKMIN, get_marked_costumes("pikmin","rayman").into_iter().map(|x| x as i32).collect(), (smash::hash40("combo_attack_13_end"), 0, 28.0));
-    crate::param_cache::update_int_2(*FIGHTER_KIND_PIKMIN, get_marked_costumes("pikmin","rayman").into_iter().map(|x| x as i32).collect(), (smash::hash40("attack_combo_max"), 0, 3));
-    crate::param_cache::update_int_2(*FIGHTER_KIND_PIKMIN, get_marked_costumes("pikmin","rayman").into_iter().map(|x| x as i32).collect(), (smash::hash40("wall_jump_type"), 0, 1));
-    crate::param_cache::update_int_2(*FIGHTER_KIND_PIKMIN, get_marked_costumes("pikmin","rayman").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_special_hi"), smash::hash40("disable_landing_frame"), 1));
-     crate::param_cache::update_float_2(*FIGHTER_KIND_PIKMIN, get_marked_costumes("pikmin","rayman").into_iter().map(|x| x as i32).collect(), (smash::hash40("limit_frame"), smash::hash40("disable_landing_frame"), 100.0));
+    crate::param_cache::update_int_2(*FIGHTER_KIND_PIKMIN, costumes_pikmin_rayman.clone(), (smash::hash40("param_motion"), smash::hash40("flip"), 1));
+     crate::param_cache::update_float_2(*FIGHTER_KIND_PIKMIN, costumes_pikmin_rayman.clone(), (smash::hash40("dash_speed"), 0, 1.92));
+     crate::param_cache::update_float_2(*FIGHTER_KIND_PIKMIN, costumes_pikmin_rayman.clone(), (smash::hash40("run_speed_max"), 0, 2.1));
+     crate::param_cache::update_float_2(*FIGHTER_KIND_PIKMIN, costumes_pikmin_rayman.clone(), (smash::hash40("walk_speed_max"), 0, 1.01));
+     crate::param_cache::update_float_2(*FIGHTER_KIND_PIKMIN, costumes_pikmin_rayman.clone(), (smash::hash40("ground_brake"), 0, 0.07));
+     crate::param_cache::update_float_2(*FIGHTER_KIND_PIKMIN, costumes_pikmin_rayman.clone(), (smash::hash40("jump_speed_x_mul"), 0, 1.075));
+     crate::param_cache::update_float_2(*FIGHTER_KIND_PIKMIN, costumes_pikmin_rayman.clone(), (smash::hash40("air_accel_x_mul"), 0, 0.067));
+     crate::param_cache::update_float_2(*FIGHTER_KIND_PIKMIN, costumes_pikmin_rayman.clone(), (smash::hash40("air_accel_x_add"), 0, 0.01));
+     crate::param_cache::update_float_2(*FIGHTER_KIND_PIKMIN, costumes_pikmin_rayman.clone(), (smash::hash40("air_speed_x_stable"), 0, 1.075));
+     crate::param_cache::update_float_2(*FIGHTER_KIND_PIKMIN, costumes_pikmin_rayman.clone(), (smash::hash40("air_speed_y_stable"), 0, 1.55));
+     crate::param_cache::update_float_2(*FIGHTER_KIND_PIKMIN, costumes_pikmin_rayman.clone(), (smash::hash40("air_accel_y"), 0, 0.09));
+     crate::param_cache::update_float_2(*FIGHTER_KIND_PIKMIN, costumes_pikmin_rayman.clone(), (smash::hash40("dive_speed_y"), 0, 2.48));
+     crate::param_cache::update_float_2(*FIGHTER_KIND_PIKMIN, costumes_pikmin_rayman.clone(), (smash::hash40("jump_y"), 0, 34.0));
+     crate::param_cache::update_float_2(*FIGHTER_KIND_PIKMIN, costumes_pikmin_rayman.clone(), (smash::hash40("mini_jump_y"), 0, 16.18));
+     crate::param_cache::update_float_2(*FIGHTER_KIND_PIKMIN, costumes_pikmin_rayman.clone(), (smash::hash40("jump_aerial_y"), 0, 35.2));
+     crate::param_cache::update_float_2(*FIGHTER_KIND_PIKMIN, costumes_pikmin_rayman.clone(), (smash::hash40("weight"), 0, 93.0));
+     crate::param_cache::update_float_2(*FIGHTER_KIND_PIKMIN, costumes_pikmin_rayman.clone(), (smash::hash40("landing_attack_air_frame_n"), 0, 8.0));
+     crate::param_cache::update_float_2(*FIGHTER_KIND_PIKMIN, costumes_pikmin_rayman.clone(), (smash::hash40("landing_attack_air_frame_f"), 0, 10.0));
+     crate::param_cache::update_float_2(*FIGHTER_KIND_PIKMIN, costumes_pikmin_rayman.clone(), (smash::hash40("landing_attack_air_frame_b"), 0, 14.0));
+     crate::param_cache::update_float_2(*FIGHTER_KIND_PIKMIN, costumes_pikmin_rayman.clone(), (smash::hash40("landing_attack_air_frame_hi"), 0, 13.0));
+     crate::param_cache::update_float_2(*FIGHTER_KIND_PIKMIN, costumes_pikmin_rayman.clone(), (smash::hash40("landing_attack_air_frame_lw"), 0, 9.0));
+     crate::param_cache::update_float_2(*FIGHTER_KIND_PIKMIN, costumes_pikmin_rayman.clone(), (smash::hash40("landing_frame"), 0, 4.0));
+     crate::param_cache::update_float_2(*FIGHTER_KIND_PIKMIN, costumes_pikmin_rayman.clone(), (smash::hash40("shield_radius"), 0, 7.0));
+     crate::param_cache::update_float_2(*FIGHTER_KIND_PIKMIN, costumes_pikmin_rayman.clone(), (smash::hash40("combo_attack_12_end"), 0, 28.0));
+     crate::param_cache::update_float_2(*FIGHTER_KIND_PIKMIN, costumes_pikmin_rayman.clone(), (smash::hash40("combo_attack_13_end"), 0, 28.0));
+    crate::param_cache::update_int_2(*FIGHTER_KIND_PIKMIN, costumes_pikmin_rayman.clone(), (smash::hash40("attack_combo_max"), 0, 3));
+    crate::param_cache::update_int_2(*FIGHTER_KIND_PIKMIN, costumes_pikmin_rayman.clone(), (smash::hash40("wall_jump_type"), 0, 1));
+    crate::param_cache::update_int_2(*FIGHTER_KIND_PIKMIN, costumes_pikmin_rayman.clone(), (smash::hash40("param_special_hi"), smash::hash40("disable_landing_frame"), 1));
+     crate::param_cache::update_float_2(*FIGHTER_KIND_PIKMIN, costumes_pikmin_rayman.clone(), (smash::hash40("limit_frame"), smash::hash40("disable_landing_frame"), 100.0));
 
 }

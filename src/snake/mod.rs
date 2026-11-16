@@ -320,34 +320,35 @@ pub unsafe fn snake_down_taunt_end_main_loop(fighter: &mut L2CFighterCommon) -> 
 }
 
 pub fn install() {
+	let costumes_snake_snake: Vec<i32> = get_marked_costumes("snake", "snake").into_iter().map(|x| x as i32).collect();
 	frame::install();
 	status::install();
 	acmd::install();
     
-     crate::param_cache::update_float_2(-*WEAPON_KIND_SNAKE_NIKITA_MISSILE, get_marked_costumes("snake","snake").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_nikitamissile"), smash::hash40("rot_limit_speed"), 9999.0));
-    crate::param_cache::update_int_2(-*WEAPON_KIND_SNAKE_NIKITA_MISSILE, get_marked_costumes("snake","snake").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_nikitamissile"), smash::hash40("start_brake_frame"), 10));
-     crate::param_cache::update_float_2(-*WEAPON_KIND_SNAKE_NIKITA_MISSILE, get_marked_costumes("snake","snake").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_nikitamissile"), smash::hash40("brake_speed"), 0.1));
-    crate::param_cache::update_int_2(-*WEAPON_KIND_SNAKE_NIKITA_MISSILE, get_marked_costumes("snake","snake").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_nikitamissile"), smash::hash40("end_brake_frame"), 50));
-    crate::param_cache::update_int_2(-*WEAPON_KIND_SNAKE_NIKITA_MISSILE, get_marked_costumes("snake","snake").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_nikitamissile"), smash::hash40("start_light_flush_frame"), 160));
-     crate::param_cache::update_float_2(-*WEAPON_KIND_SNAKE_NIKITA_MISSILE, get_marked_costumes("snake","snake").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_nikitamissile"), smash::hash40("fall_speed_mul"), 0.7));
-     crate::param_cache::update_float_2(-*WEAPON_KIND_SNAKE_NIKITA_MISSILE, get_marked_costumes("snake","snake").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_nikitamissile"), smash::hash40("fall_brake_speed"), 0.1));
-     crate::param_cache::update_float_2(-*WEAPON_KIND_SNAKE_NIKITA_MISSILE, get_marked_costumes("snake","snake").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_nikitamissile"), smash::hash40("fall_rot_x_speed"), 2.0));
-    crate::param_cache::update_int_2(-*WEAPON_KIND_SNAKE_NIKITA_MISSILE, get_marked_costumes("snake","snake").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_nikitamissile"), smash::hash40("hi_explosion_frame"), 32));
-     crate::param_cache::update_float_2(-*WEAPON_KIND_SNAKE_NIKITA_MISSILE, get_marked_costumes("snake","snake").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_nikitamissile"), smash::hash40("damage_rot_rate"), 6.0));
-    crate::param_cache::update_int_2(-*WEAPON_KIND_SNAKE_NIKITA_MISSILE, get_marked_costumes("snake","snake").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_nikitamissile"), smash::hash40("damage_rot_frame"), 7));
-    crate::param_cache::update_int_2(-*WEAPON_KIND_SNAKE_NIKITA_MISSILE, get_marked_costumes("snake","snake").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_nikitamissile"), smash::hash40("attack_restart_frame"), 60));
-    crate::param_cache::update_int_2(-*WEAPON_KIND_SNAKE_NIKITA_MISSILE, get_marked_costumes("snake","snake").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_nikitamissile"), smash::hash40("hp"), 1));
-     crate::param_cache::update_float_2(-*WEAPON_KIND_SNAKE_NIKITA_MISSILE, get_marked_costumes("snake","snake").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_nikitamissile"), smash::hash40("rot_z_speed_init"), 5.0));
-     crate::param_cache::update_float_2(-*WEAPON_KIND_SNAKE_NIKITA_MISSILE, get_marked_costumes("snake","snake").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_nikitamissile"), smash::hash40("rot_z_accel"), 2.0));
-     crate::param_cache::update_float_2(-*WEAPON_KIND_SNAKE_NIKITA_MISSILE, get_marked_costumes("snake","snake").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_nikitamissile"), smash::hash40("rot_z_stable_speed_max"), 10.0));
-     crate::param_cache::update_float_2(-*WEAPON_KIND_SNAKE_NIKITA_MISSILE, get_marked_costumes("snake","snake").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_nikitamissile"), smash::hash40("rot_z_stable_speed_min"), 45.0));
-    crate::param_cache::update_int_2(-*WEAPON_KIND_SNAKE_NIKITA_MISSILE, get_marked_costumes("snake","snake").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_nikitamissile"), smash::hash40("rot_se_interval"), 6));
-     crate::param_cache::update_float_2(-*WEAPON_KIND_SNAKE_NIKITA_MISSILE, get_marked_costumes("snake","snake").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_nikitamissile"), smash::hash40("rot_se_angle"), 30.0));
-     crate::param_cache::update_float_2(-*WEAPON_KIND_SNAKE_NIKITA_MISSILE, get_marked_costumes("snake","snake").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_nikitamissile"), smash::hash40("pitch_max"), 3.0));
-     crate::param_cache::update_float_2(-*WEAPON_KIND_SNAKE_NIKITA_MISSILE, get_marked_costumes("snake","snake").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_nikitamissile"), smash::hash40("pitch_min"), 0.8));
-     crate::param_cache::update_float_2(-*WEAPON_KIND_SNAKE_NIKITA_MISSILE, get_marked_costumes("snake","snake").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_nikitamissile"), smash::hash40("pitch_max_y"), 100.0));
-     crate::param_cache::update_float_2(-*WEAPON_KIND_SNAKE_NIKITA_MISSILE, get_marked_costumes("snake","snake").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_nikitamissile"), smash::hash40("pitch_min_y"), -100.0));
-     crate::param_cache::update_float_2(-*WEAPON_KIND_SNAKE_NIKITA_MISSILE, get_marked_costumes("snake","snake").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_nikitamissile"), smash::hash40("control_distance"), 80.0));
-     crate::param_cache::update_float_2(*FIGHTER_KIND_SNAKE, get_marked_costumes("snake","snake").into_iter().map(|x| x as i32).collect(), (smash::hash40("scale"), 0, 1.075));
+     crate::param_cache::update_float_2(-*WEAPON_KIND_SNAKE_NIKITA_MISSILE, costumes_snake_snake.clone(), (smash::hash40("param_nikitamissile"), smash::hash40("rot_limit_speed"), 9999.0));
+    crate::param_cache::update_int_2(-*WEAPON_KIND_SNAKE_NIKITA_MISSILE, costumes_snake_snake.clone(), (smash::hash40("param_nikitamissile"), smash::hash40("start_brake_frame"), 10));
+     crate::param_cache::update_float_2(-*WEAPON_KIND_SNAKE_NIKITA_MISSILE, costumes_snake_snake.clone(), (smash::hash40("param_nikitamissile"), smash::hash40("brake_speed"), 0.1));
+    crate::param_cache::update_int_2(-*WEAPON_KIND_SNAKE_NIKITA_MISSILE, costumes_snake_snake.clone(), (smash::hash40("param_nikitamissile"), smash::hash40("end_brake_frame"), 50));
+    crate::param_cache::update_int_2(-*WEAPON_KIND_SNAKE_NIKITA_MISSILE, costumes_snake_snake.clone(), (smash::hash40("param_nikitamissile"), smash::hash40("start_light_flush_frame"), 160));
+     crate::param_cache::update_float_2(-*WEAPON_KIND_SNAKE_NIKITA_MISSILE, costumes_snake_snake.clone(), (smash::hash40("param_nikitamissile"), smash::hash40("fall_speed_mul"), 0.7));
+     crate::param_cache::update_float_2(-*WEAPON_KIND_SNAKE_NIKITA_MISSILE, costumes_snake_snake.clone(), (smash::hash40("param_nikitamissile"), smash::hash40("fall_brake_speed"), 0.1));
+     crate::param_cache::update_float_2(-*WEAPON_KIND_SNAKE_NIKITA_MISSILE, costumes_snake_snake.clone(), (smash::hash40("param_nikitamissile"), smash::hash40("fall_rot_x_speed"), 2.0));
+    crate::param_cache::update_int_2(-*WEAPON_KIND_SNAKE_NIKITA_MISSILE, costumes_snake_snake.clone(), (smash::hash40("param_nikitamissile"), smash::hash40("hi_explosion_frame"), 32));
+     crate::param_cache::update_float_2(-*WEAPON_KIND_SNAKE_NIKITA_MISSILE, costumes_snake_snake.clone(), (smash::hash40("param_nikitamissile"), smash::hash40("damage_rot_rate"), 6.0));
+    crate::param_cache::update_int_2(-*WEAPON_KIND_SNAKE_NIKITA_MISSILE, costumes_snake_snake.clone(), (smash::hash40("param_nikitamissile"), smash::hash40("damage_rot_frame"), 7));
+    crate::param_cache::update_int_2(-*WEAPON_KIND_SNAKE_NIKITA_MISSILE, costumes_snake_snake.clone(), (smash::hash40("param_nikitamissile"), smash::hash40("attack_restart_frame"), 60));
+    crate::param_cache::update_int_2(-*WEAPON_KIND_SNAKE_NIKITA_MISSILE, costumes_snake_snake.clone(), (smash::hash40("param_nikitamissile"), smash::hash40("hp"), 1));
+     crate::param_cache::update_float_2(-*WEAPON_KIND_SNAKE_NIKITA_MISSILE, costumes_snake_snake.clone(), (smash::hash40("param_nikitamissile"), smash::hash40("rot_z_speed_init"), 5.0));
+     crate::param_cache::update_float_2(-*WEAPON_KIND_SNAKE_NIKITA_MISSILE, costumes_snake_snake.clone(), (smash::hash40("param_nikitamissile"), smash::hash40("rot_z_accel"), 2.0));
+     crate::param_cache::update_float_2(-*WEAPON_KIND_SNAKE_NIKITA_MISSILE, costumes_snake_snake.clone(), (smash::hash40("param_nikitamissile"), smash::hash40("rot_z_stable_speed_max"), 10.0));
+     crate::param_cache::update_float_2(-*WEAPON_KIND_SNAKE_NIKITA_MISSILE, costumes_snake_snake.clone(), (smash::hash40("param_nikitamissile"), smash::hash40("rot_z_stable_speed_min"), 45.0));
+    crate::param_cache::update_int_2(-*WEAPON_KIND_SNAKE_NIKITA_MISSILE, costumes_snake_snake.clone(), (smash::hash40("param_nikitamissile"), smash::hash40("rot_se_interval"), 6));
+     crate::param_cache::update_float_2(-*WEAPON_KIND_SNAKE_NIKITA_MISSILE, costumes_snake_snake.clone(), (smash::hash40("param_nikitamissile"), smash::hash40("rot_se_angle"), 30.0));
+     crate::param_cache::update_float_2(-*WEAPON_KIND_SNAKE_NIKITA_MISSILE, costumes_snake_snake.clone(), (smash::hash40("param_nikitamissile"), smash::hash40("pitch_max"), 3.0));
+     crate::param_cache::update_float_2(-*WEAPON_KIND_SNAKE_NIKITA_MISSILE, costumes_snake_snake.clone(), (smash::hash40("param_nikitamissile"), smash::hash40("pitch_min"), 0.8));
+     crate::param_cache::update_float_2(-*WEAPON_KIND_SNAKE_NIKITA_MISSILE, costumes_snake_snake.clone(), (smash::hash40("param_nikitamissile"), smash::hash40("pitch_max_y"), 100.0));
+     crate::param_cache::update_float_2(-*WEAPON_KIND_SNAKE_NIKITA_MISSILE, costumes_snake_snake.clone(), (smash::hash40("param_nikitamissile"), smash::hash40("pitch_min_y"), -100.0));
+     crate::param_cache::update_float_2(-*WEAPON_KIND_SNAKE_NIKITA_MISSILE, costumes_snake_snake.clone(), (smash::hash40("param_nikitamissile"), smash::hash40("control_distance"), 80.0));
+     crate::param_cache::update_float_2(*FIGHTER_KIND_SNAKE, costumes_snake_snake.clone(), (smash::hash40("scale"), 0, 1.075));
 
 }

@@ -18,19 +18,20 @@ static mut FEET :  smash::phx::Vector3f =  smash::phx::Vector3f { x: 1.0, y: 0.0
 
 
 pub fn install() {
+	let costumes_ryu_ryu: Vec<i32> = get_marked_costumes("ryu", "ryu").into_iter().map(|x| x as i32).collect();
 	frame::install();
 	status::install();
 	acmd::install();
 
-	 crate::param_cache::update_float_2(-*WEAPON_KIND_RYU_HADOKEN, get_marked_costumes("ryu","ryu").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_hadoken"), smash::hash40("command_power_mul"), 1.25));
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_RYU, get_marked_costumes("ryu","ryu").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_special_s"), smash::hash40("air_speed_x_w"), 1.3));
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_RYU, get_marked_costumes("ryu","ryu").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_special_s"), smash::hash40("air_speed_x_m"), 0.9));
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_RYU, get_marked_costumes("ryu","ryu").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_special_s"), smash::hash40("air_speed_x_s"), 1.1));
-	crate::param_cache::update_int_2(*FIGHTER_KIND_RYU, get_marked_costumes("ryu","ryu").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_special_s"), smash::hash40("air_end_weak_frame_w"), 29));
-	crate::param_cache::update_int_2(*FIGHTER_KIND_RYU, get_marked_costumes("ryu","ryu").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_special_s"), smash::hash40("air_end_weak_frame_m"), 29));
-	crate::param_cache::update_int_2(*FIGHTER_KIND_RYU, get_marked_costumes("ryu","ryu").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_special_s"), smash::hash40("air_end_weak_frame_s"), 29));
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_RYU, get_marked_costumes("ryu","ryu").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_private"), smash::hash40("near_opponent_range_x"), 0.0));
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_RYU, get_marked_costumes("ryu","ryu").into_iter().map(|x| x as i32).collect(), (smash::hash40("air_speed_x_stable"), 0, 1.1));
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_RYU, get_marked_costumes("ryu","ryu").into_iter().map(|x| x as i32).collect(), (smash::hash40("landing_attack_air_frame_n"), 0, 6.0));
+	 crate::param_cache::update_float_2(-*WEAPON_KIND_RYU_HADOKEN, costumes_ryu_ryu.clone(), (smash::hash40("param_hadoken"), smash::hash40("command_power_mul"), 1.25));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_RYU, costumes_ryu_ryu.clone(), (smash::hash40("param_special_s"), smash::hash40("air_speed_x_w"), 1.3));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_RYU, costumes_ryu_ryu.clone(), (smash::hash40("param_special_s"), smash::hash40("air_speed_x_m"), 0.9));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_RYU, costumes_ryu_ryu.clone(), (smash::hash40("param_special_s"), smash::hash40("air_speed_x_s"), 1.1));
+	crate::param_cache::update_int_2(*FIGHTER_KIND_RYU, costumes_ryu_ryu.clone(), (smash::hash40("param_special_s"), smash::hash40("air_end_weak_frame_w"), 29));
+	crate::param_cache::update_int_2(*FIGHTER_KIND_RYU, costumes_ryu_ryu.clone(), (smash::hash40("param_special_s"), smash::hash40("air_end_weak_frame_m"), 29));
+	crate::param_cache::update_int_2(*FIGHTER_KIND_RYU, costumes_ryu_ryu.clone(), (smash::hash40("param_special_s"), smash::hash40("air_end_weak_frame_s"), 29));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_RYU, costumes_ryu_ryu.clone(), (smash::hash40("param_private"), smash::hash40("near_opponent_range_x"), 0.0));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_RYU, costumes_ryu_ryu.clone(), (smash::hash40("air_speed_x_stable"), 0, 1.1));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_RYU, costumes_ryu_ryu.clone(), (smash::hash40("landing_attack_air_frame_n"), 0, 6.0));
 
 }

@@ -16,14 +16,15 @@ static mut S3 :  smash::phx::Vector3f =  smash::phx::Vector3f { x: 0.0, y: 3.0, 
 
 
 pub fn install() {
+	let costumes_ike_ike: Vec<i32> = get_marked_costumes("ike", "ike").into_iter().map(|x| x as i32).collect();
 	frame::install();
 	status::install();
 	acmd::install();
 
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_IKE, get_marked_costumes("ike","ike").into_iter().map(|x| x as i32).collect(), (smash::hash40("dash_speed"), 0, 1.87));
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_IKE, get_marked_costumes("ike","ike").into_iter().map(|x| x as i32).collect(), (smash::hash40("run_speed_max"), 0, 1.6));
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_IKE, get_marked_costumes("ike","ike").into_iter().map(|x| x as i32).collect(), (smash::hash40("landing_attack_air_frame_n"), 0, 10.0));
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_IKE, get_marked_costumes("ike","ike").into_iter().map(|x| x as i32).collect(), (smash::hash40("landing_attack_air_frame_f"), 0, 11.0));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_IKE, costumes_ike_ike.clone(), (smash::hash40("dash_speed"), 0, 1.87));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_IKE, costumes_ike_ike.clone(), (smash::hash40("run_speed_max"), 0, 1.6));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_IKE, costumes_ike_ike.clone(), (smash::hash40("landing_attack_air_frame_n"), 0, 10.0));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_IKE, costumes_ike_ike.clone(), (smash::hash40("landing_attack_air_frame_f"), 0, 11.0));
 
 }
 

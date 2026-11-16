@@ -15,13 +15,14 @@ use crate::util::*;
 use super::*;
 
 pub fn install() {
+	let costumes_diddy_diddy: Vec<usize> = get_marked_costumes("diddy", "diddy");
 	Agent::new("diddy")
-    .set_costume(get_marked_costumes("diddy","diddy"))
+    .set_costume(costumes_diddy_diddy.clone())
 	.on_line(Main, diddy_frame)
 	.install();
 
 	Agent::new("diddy_gun")
-    .set_costume(get_marked_costumes("diddy","diddy"))
+    .set_costume(costumes_diddy_diddy.clone())
 	.on_line(Main, gun_frame)
 	.install();
 }

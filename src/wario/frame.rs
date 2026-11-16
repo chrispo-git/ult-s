@@ -16,13 +16,14 @@ use crate::util::*;
 use super::*;
 
 pub fn install() {
+    let costumes_wario_wario: Vec<usize> = get_marked_costumes("wario", "wario");
     Agent::new("wario")
-    .set_costume(get_marked_costumes("wario","wario"))
+    .set_costume(costumes_wario_wario.clone())
     .on_line(Main, wario_frame)
     .install();
 
 	Agent::new("wario_wariobike")
-    .set_costume(get_marked_costumes("wario","wario"))
+    .set_costume(costumes_wario_wario.clone())
     .on_line(Main, bike_frame)
     .install();
 }

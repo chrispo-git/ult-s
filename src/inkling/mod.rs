@@ -8,21 +8,22 @@ use smash::hash40;
 static FIGHTER_INKLING_INSTANCE_WORK_ID_FLAG_IS_UPB_DOWN : i32 = 0;
 
 pub fn install() {
+	let costumes_inkling_inkling: Vec<i32> = get_marked_costumes("inkling", "inkling").into_iter().map(|x| x as i32).collect();
 	frame::install();
 	status::install();
 	acmd::install();
 
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_INKLING, get_marked_costumes("inkling","inkling").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_special_hi"), smash::hash40("height_mul_on_air"), 1.0));
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_INKLING, get_marked_costumes("inkling","inkling").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_special_hi"), smash::hash40("height_mul_on_ground"), 1.0));
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_INKLING, get_marked_costumes("inkling","inkling").into_iter().map(|x| x as i32).collect(), (smash::hash40("run_speed_max"), 0, 2.0));
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_INKLING, get_marked_costumes("inkling","inkling").into_iter().map(|x| x as i32).collect(), (smash::hash40("jump_speed_x"), 0, 1.4));
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_INKLING, get_marked_costumes("inkling","inkling").into_iter().map(|x| x as i32).collect(), (smash::hash40("jump_speed_x_mul"), 0, 1.6));
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_INKLING, get_marked_costumes("inkling","inkling").into_iter().map(|x| x as i32).collect(), (smash::hash40("jump_speed_x_max"), 0, 1.7));
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_INKLING, get_marked_costumes("inkling","inkling").into_iter().map(|x| x as i32).collect(), (smash::hash40("jump_y"), 0, 40.0));
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_INKLING, get_marked_costumes("inkling","inkling").into_iter().map(|x| x as i32).collect(), (smash::hash40("air_speed_y_stable"), 0, 1.7));
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_INKLING, get_marked_costumes("inkling","inkling").into_iter().map(|x| x as i32).collect(), (smash::hash40("dive_speed_y"), 0, 2.72));
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_INKLING, get_marked_costumes("inkling","inkling").into_iter().map(|x| x as i32).collect(), (smash::hash40("landing_attack_air_frame_n"), 0, 5.0));
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_INKLING, get_marked_costumes("inkling","inkling").into_iter().map(|x| x as i32).collect(), (smash::hash40("landing_attack_air_frame_f"), 0, 11.0));
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_INKLING, get_marked_costumes("inkling","inkling").into_iter().map(|x| x as i32).collect(), (smash::hash40("landing_attack_air_frame_b"), 0, 7.0));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_INKLING, costumes_inkling_inkling.clone(), (smash::hash40("param_special_hi"), smash::hash40("height_mul_on_air"), 1.0));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_INKLING, costumes_inkling_inkling.clone(), (smash::hash40("param_special_hi"), smash::hash40("height_mul_on_ground"), 1.0));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_INKLING, costumes_inkling_inkling.clone(), (smash::hash40("run_speed_max"), 0, 2.0));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_INKLING, costumes_inkling_inkling.clone(), (smash::hash40("jump_speed_x"), 0, 1.4));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_INKLING, costumes_inkling_inkling.clone(), (smash::hash40("jump_speed_x_mul"), 0, 1.6));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_INKLING, costumes_inkling_inkling.clone(), (smash::hash40("jump_speed_x_max"), 0, 1.7));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_INKLING, costumes_inkling_inkling.clone(), (smash::hash40("jump_y"), 0, 40.0));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_INKLING, costumes_inkling_inkling.clone(), (smash::hash40("air_speed_y_stable"), 0, 1.7));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_INKLING, costumes_inkling_inkling.clone(), (smash::hash40("dive_speed_y"), 0, 2.72));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_INKLING, costumes_inkling_inkling.clone(), (smash::hash40("landing_attack_air_frame_n"), 0, 5.0));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_INKLING, costumes_inkling_inkling.clone(), (smash::hash40("landing_attack_air_frame_f"), 0, 11.0));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_INKLING, costumes_inkling_inkling.clone(), (smash::hash40("landing_attack_air_frame_b"), 0, 7.0));
 
 }

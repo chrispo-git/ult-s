@@ -8,16 +8,17 @@ use smash::hash40;
 			
 
 pub fn install() {
+	let costumes_roy_roy: Vec<i32> = get_marked_costumes("roy", "roy").into_iter().map(|x| x as i32).collect();
 	frame::install();
 	status::install();
 	acmd::install();
 
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_ROY, get_marked_costumes("roy","roy").into_iter().map(|x| x as i32).collect(), (smash::hash40("dash_speed"), 0, 2.3));
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_ROY, get_marked_costumes("roy","roy").into_iter().map(|x| x as i32).collect(), (smash::hash40("air_accel_x_mul"), 0, 0.05));
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_ROY, get_marked_costumes("roy","roy").into_iter().map(|x| x as i32).collect(), (smash::hash40("air_speed_x_stable"), 0, 1.28));
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_ROY, get_marked_costumes("roy","roy").into_iter().map(|x| x as i32).collect(), (smash::hash40("air_speed_y_stable"), 0, 1.75));
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_ROY, get_marked_costumes("roy","roy").into_iter().map(|x| x as i32).collect(), (smash::hash40("dive_speed_y"), 0, 2.8));
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_ROY, get_marked_costumes("roy","roy").into_iter().map(|x| x as i32).collect(), (smash::hash40("landing_attack_air_frame_f"), 0, 9.0));
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_ROY, get_marked_costumes("roy","roy").into_iter().map(|x| x as i32).collect(), (smash::hash40("landing_attack_air_frame_hi"), 0, 7.0));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_ROY, costumes_roy_roy.clone(), (smash::hash40("dash_speed"), 0, 2.3));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_ROY, costumes_roy_roy.clone(), (smash::hash40("air_accel_x_mul"), 0, 0.05));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_ROY, costumes_roy_roy.clone(), (smash::hash40("air_speed_x_stable"), 0, 1.28));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_ROY, costumes_roy_roy.clone(), (smash::hash40("air_speed_y_stable"), 0, 1.75));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_ROY, costumes_roy_roy.clone(), (smash::hash40("dive_speed_y"), 0, 2.8));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_ROY, costumes_roy_roy.clone(), (smash::hash40("landing_attack_air_frame_f"), 0, 9.0));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_ROY, costumes_roy_roy.clone(), (smash::hash40("landing_attack_air_frame_hi"), 0, 7.0));
 
 }

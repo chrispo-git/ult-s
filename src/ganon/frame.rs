@@ -160,8 +160,8 @@ unsafe extern "C" fn ganon_float(fighter : &mut L2CFighterCommon) {
 				if y_add < 0.0 && Y[ENTRY_ID] < Y_MAX*-1.0 {
 					y_add = 0.0;
 				};
-				println!("x{}, y{}", X[ENTRY_ID], Y[ENTRY_ID]);
-				println!("x_add{}, y_add{}", x_add, y_add);
+				//println!("x{}, y{}", X[ENTRY_ID], Y[ENTRY_ID]);
+				//println!("x_add{}, y_add{}", x_add, y_add);
 				let speed = smash::phx::Vector3f { x: x_add, y: y_add, z: 0.0 };
 				KineticModule::add_speed(boma, &speed);
 				X[ENTRY_ID] += x_add;
@@ -184,7 +184,7 @@ unsafe extern "C" fn ganon_float(fighter : &mut L2CFighterCommon) {
 		if fighter_kind == *FIGHTER_KIND_KIRBY {
 			if !WorkModule::get_int(boma, *FIGHTER_KIRBY_INSTANCE_WORK_ID_INT_COPY_CHARA) == *FIGHTER_KIND_GANON {
 				if crate::is_transition_set!(ENTRY_ID, can_neutralb) && WorkModule::get_int(boma, *FIGHTER_KIRBY_INSTANCE_WORK_ID_INT_COPY_CHARA) == *FIGHTER_KIND_NONE{
-					println!("Empty");
+					//println!("Empty");
 					crate::transition_reset!(ENTRY_ID, can_neutralb);
 				};
 				return;
@@ -286,8 +286,8 @@ unsafe extern "C" fn ganon_float(fighter : &mut L2CFighterCommon) {
 				if y_add < 0.0 && Y[ENTRY_ID] < Y_MAX*-1.0 {
 					y_add = 0.0;
 				};
-				println!("x{}, y{}", X[ENTRY_ID], Y[ENTRY_ID]);
-				println!("x_add{}, y_add{}", x_add, y_add);
+				//println!("x{}, y{}", X[ENTRY_ID], Y[ENTRY_ID]);
+				//println!("x_add{}, y_add{}", x_add, y_add);
 				let speed = smash::phx::Vector3f { x: x_add, y: y_add, z: 0.0 };
 				KineticModule::add_speed(boma, &speed);
 				X[ENTRY_ID] += x_add;

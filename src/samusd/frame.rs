@@ -178,7 +178,7 @@ unsafe extern "C" fn samusd_frame(fighter: &mut L2CFighterCommon) {
 						let y_speed = angle_radians.sin() * speed * -1.0;
 
 						macros::SET_SPEED_EX(fighter, x_speed, y_speed, *KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN);
-						println!("Speed : ({},{}), Dir : {}", x_speed, y_speed, VariableModule::get_float(fighter.module_accessor, FIGHTER_SAMUSD_INSTANCE_WORK_ID_FLOAT_UPB_ANGLE));
+						//println!("Speed : ({},{}), Dir : {}", x_speed, y_speed, VariableModule::get_float(fighter.module_accessor, FIGHTER_SAMUSD_INSTANCE_WORK_ID_FLOAT_UPB_ANGLE));
 					}
 			};
 		}
@@ -193,7 +193,7 @@ unsafe extern "C" fn missile_frame(weapon: &mut L2CFighterBase) {
 			if MotionModule::frame(weapon.module_accessor) >= 5.0 && MotionModule::motion_kind(weapon.module_accessor) == hash40("homing") {
 				if VariableModule::is_flag((boma) as *mut _, FIGHTER_SAMUSD_INSTANCE_WORK_ID_FLAG_IS_HOLD) == true && MotionModule::frame(weapon.module_accessor) < 9.0 {
 					MotionModule::set_rate(weapon.module_accessor, 0.001);
-					println!("hold");
+					//println!("hold");
 				} else {
 					MotionModule::set_rate(weapon.module_accessor, 1.0);
 				};
@@ -209,13 +209,14 @@ unsafe extern "C" fn missile_frame(weapon: &mut L2CFighterBase) {
 }
 
 pub fn install() {
+    let costumes_samusd_samusd: Vec<usize> = get_marked_costumes("samusd", "samusd");
     Agent::new("samusd")
-    .set_costume(get_marked_costumes("samusd","samusd"))
+    .set_costume(costumes_samusd_samusd.clone())
 		.on_line(Main, samusd_frame)
 		.install();
 
 	Agent::new("samusd_missile")
-    .set_costume(get_marked_costumes("samusd","samusd"))
+    .set_costume(costumes_samusd_samusd.clone())
 		.on_line(Main, missile_frame)
 		.install();
 }

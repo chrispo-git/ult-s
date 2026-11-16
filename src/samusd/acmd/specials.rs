@@ -168,8 +168,9 @@ unsafe extern "C" fn dsamus_downb(fighter: &mut L2CAgentBase) {
 }					
 
 pub fn install() {
+    let costumes_samusd_samusd: Vec<usize> = get_marked_costumes("samusd", "samusd");
     Agent::new("samusd")
-    .set_costume(get_marked_costumes("samusd","samusd"))
+    .set_costume(costumes_samusd_samusd.clone())
         .acmd("game_specialhi", dsamus_upb, Priority::Low)
         .acmd("effect_specialhi", dsamus_upb_eff, Priority::Low)
         .acmd("sound_specialhi", dsamus_upb_snd, Priority::Low)
@@ -185,7 +186,7 @@ pub fn install() {
         .install();
 
 	Agent::new("samusd_missile")
-    .set_costume(get_marked_costumes("samusd","samusd"))
+    .set_costume(costumes_samusd_samusd.clone())
 		.game_acmd("game_homing", dsamus_homing, Priority::Low)
 		.sound_acmd("sound_homing", sound_dsamus_homing, Priority::Low)
 		.effect_acmd("effect_special", dsamus_special_eff, Priority::Low)

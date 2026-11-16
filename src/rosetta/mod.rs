@@ -20,16 +20,17 @@ static mut HANDS :  smash::phx::Vector3f =  smash::phx::Vector3f { x: 0.0, y: 0.
 
 
 pub fn install() {
+	let costumes_rosetta_rosetta: Vec<i32> = get_marked_costumes("rosetta", "rosetta").into_iter().map(|x| x as i32).collect();
 	frame::install();
 	status::install();
 	acmd::install();
 
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_ROSETTA, get_marked_costumes("rosetta","rosetta").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_special_lw"), smash::hash40("weapon_search_radius"), 0.01));
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_ROSETTA, get_marked_costumes("rosetta","rosetta").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_special_lw"), smash::hash40("item_search_radius"), 0.01));
-	 crate::param_cache::update_float_2(-*WEAPON_KIND_ROSETTA_TICO, get_marked_costumes("rosetta","rosetta").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_tico"), smash::hash40("hp"), 30.0));
-	 crate::param_cache::update_float_2(-*WEAPON_KIND_ROSETTA_TICO, get_marked_costumes("rosetta","rosetta").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_tico"), smash::hash40("follow_damage_air_brake"), 0.075));
-	 crate::param_cache::update_float_2(-*WEAPON_KIND_ROSETTA_TICO, get_marked_costumes("rosetta","rosetta").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_tico"), smash::hash40("free_damage_air_brake"), 0.07));
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_ROSETTA, get_marked_costumes("rosetta","rosetta").into_iter().map(|x| x as i32).collect(), (smash::hash40("dash_speed"), 0, 1.8));
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_ROSETTA, get_marked_costumes("rosetta","rosetta").into_iter().map(|x| x as i32).collect(), (smash::hash40("run_speed_max"), 0, 1.7));
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_ROSETTA, get_marked_costumes("rosetta","rosetta").into_iter().map(|x| x as i32).collect(), (smash::hash40("jump_speed_x_mul"), 0, 1.1));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_ROSETTA, costumes_rosetta_rosetta.clone(), (smash::hash40("param_special_lw"), smash::hash40("weapon_search_radius"), 0.01));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_ROSETTA, costumes_rosetta_rosetta.clone(), (smash::hash40("param_special_lw"), smash::hash40("item_search_radius"), 0.01));
+	 crate::param_cache::update_float_2(-*WEAPON_KIND_ROSETTA_TICO, costumes_rosetta_rosetta.clone(), (smash::hash40("param_tico"), smash::hash40("hp"), 30.0));
+	 crate::param_cache::update_float_2(-*WEAPON_KIND_ROSETTA_TICO, costumes_rosetta_rosetta.clone(), (smash::hash40("param_tico"), smash::hash40("follow_damage_air_brake"), 0.075));
+	 crate::param_cache::update_float_2(-*WEAPON_KIND_ROSETTA_TICO, costumes_rosetta_rosetta.clone(), (smash::hash40("param_tico"), smash::hash40("free_damage_air_brake"), 0.07));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_ROSETTA, costumes_rosetta_rosetta.clone(), (smash::hash40("dash_speed"), 0, 1.8));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_ROSETTA, costumes_rosetta_rosetta.clone(), (smash::hash40("run_speed_max"), 0, 1.7));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_ROSETTA, costumes_rosetta_rosetta.clone(), (smash::hash40("jump_speed_x_mul"), 0, 1.1));
 }

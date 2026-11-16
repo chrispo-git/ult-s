@@ -15,13 +15,14 @@ use crate::util::*;
 use super::*;
 
 pub fn install() {
+    let costumes_brave_brave: Vec<usize> = get_marked_costumes("brave", "brave");
     Agent::new("brave_fireball")
-    .set_costume(get_marked_costumes("brave","brave"))
+    .set_costume(costumes_brave_brave.clone())
 	.acmd("game_specialn1", hero_frizz, Priority::Low)
 	.install();
 
     Agent::new("brave_spark")
-    .set_costume(get_marked_costumes("brave","brave"))
+    .set_costume(costumes_brave_brave.clone())
 	.acmd("game_specials1", hero_zap_spark, Priority::Low)
 	.install();
 }

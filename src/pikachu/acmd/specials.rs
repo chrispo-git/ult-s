@@ -15,8 +15,9 @@ use crate::util::*;
 use super::*;
 
 pub fn install() {
+    let costumes_pikachu_pikachu: Vec<usize> = get_marked_costumes("pikachu", "pikachu");
     Agent::new("pikachu")
-    .set_costume(get_marked_costumes("pikachu","pikachu"))
+    .set_costume(costumes_pikachu_pikachu.clone())
     .acmd("game_speciallwhit", pika_shock, Priority::Low)    
     .acmd("game_specialairlwhit", pika_shock, Priority::Low)    
     .acmd("game_speciallw", pika_thunder, Priority::Low)    
@@ -24,7 +25,7 @@ pub fn install() {
     .install();
 
     Agent::new("pikachu_kaminari")
-    .set_costume(get_marked_costumes("pikachu","pikachu"))
+    .set_costume(costumes_pikachu_pikachu.clone())
     .acmd("game_regular", pika_lightning, Priority::Low)    
     .install();
 }

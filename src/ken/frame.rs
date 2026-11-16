@@ -94,7 +94,7 @@ unsafe extern "C" fn supers(fighter : &mut L2CFighterCommon) {
 				VariableModule::set_int((boma) as *mut _, 0, FIGHTER_KEN_INSTANCE_WORK_ID_INT_KEN_FX_TIMER);
 			};
 			if [*FIGHTER_STATUS_KIND_ENTRY, *FIGHTER_STATUS_KIND_WIN].contains(&status_kind) {
-				println!("Reset!");
+				//println!("Reset!");
 				VariableModule::set_int((boma) as *mut _, 0, FIGHTER_KEN_INSTANCE_WORK_ID_INT_KEN_SUPER);
 				VariableModule::set_int((boma) as *mut _, 0, FIGHTER_KEN_INSTANCE_WORK_ID_INT_KEN_FX_TIMER);
 				VariableModule::set_flag((boma) as *mut _, false, FIGHTER_KEN_INSTANCE_WORK_ID_FLAG_KEN_IS_EX);
@@ -104,7 +104,7 @@ unsafe extern "C" fn supers(fighter : &mut L2CFighterCommon) {
 			};
 			if AttackModule::is_infliction(boma, *COLLISION_KIND_MASK_ALL) && status_kind != *FIGHTER_STATUS_KIND_CATCH_ATTACK && !VariableModule::is_flag((boma) as *mut _, FIGHTER_KEN_INSTANCE_WORK_ID_FLAG_HAS_ADDED) {
 				VariableModule::set_int((boma) as *mut _, VariableModule::get_int((boma) as *mut _, FIGHTER_KEN_INSTANCE_WORK_ID_INT_KEN_SUPER) + (3), FIGHTER_KEN_INSTANCE_WORK_ID_INT_KEN_SUPER);
-				println!("attacks! {} ", VariableModule::get_int((boma) as *mut _, FIGHTER_KEN_INSTANCE_WORK_ID_INT_KEN_SUPER));
+				//println!("attacks! {} ", VariableModule::get_int((boma) as *mut _, FIGHTER_KEN_INSTANCE_WORK_ID_INT_KEN_SUPER));
 				VariableModule::set_flag((boma) as *mut _, true, FIGHTER_KEN_INSTANCE_WORK_ID_FLAG_HAS_ADDED);
 			};
 			if VariableModule::get_int((boma) as *mut _, FIGHTER_KEN_INSTANCE_WORK_ID_INT_KEN_SUPER) >= KEN_MAX_METER{
@@ -134,14 +134,14 @@ unsafe extern "C" fn supers(fighter : &mut L2CFighterCommon) {
 					if stick_x >= 0.665 {
 						if is_eligble_meter {
 							VariableModule::set_int((boma) as *mut _, VariableModule::get_int((boma) as *mut _, FIGHTER_KEN_INSTANCE_WORK_ID_INT_KEN_SUPER) - (meter_half as i32), FIGHTER_KEN_INSTANCE_WORK_ID_INT_KEN_SUPER);
-							println!("meter spent! {} ", VariableModule::get_int((boma) as *mut _, FIGHTER_KEN_INSTANCE_WORK_ID_INT_KEN_SUPER));
+							//println!("meter spent! {} ", VariableModule::get_int((boma) as *mut _, FIGHTER_KEN_INSTANCE_WORK_ID_INT_KEN_SUPER));
 							VariableModule::set_flag((boma) as *mut _, true, FIGHTER_KEN_INSTANCE_WORK_ID_FLAG_EX_DOWNB);
 						}; 
 						StatusModule::change_status_request_from_script(boma, *FIGHTER_RYU_STATUS_KIND_SPECIAL_LW_STEP_F, true);
 					} else if stick_x <= -0.665 {
 						if is_eligble_meter {
 							VariableModule::set_int((boma) as *mut _, VariableModule::get_int((boma) as *mut _, FIGHTER_KEN_INSTANCE_WORK_ID_INT_KEN_SUPER) - (meter_half as i32), FIGHTER_KEN_INSTANCE_WORK_ID_INT_KEN_SUPER);
-							println!("meter spent! {} ", VariableModule::get_int((boma) as *mut _, FIGHTER_KEN_INSTANCE_WORK_ID_INT_KEN_SUPER));
+							//println!("meter spent! {} ", VariableModule::get_int((boma) as *mut _, FIGHTER_KEN_INSTANCE_WORK_ID_INT_KEN_SUPER));
 							VariableModule::set_flag((boma) as *mut _, true, FIGHTER_KEN_INSTANCE_WORK_ID_FLAG_EX_DOWNB);
 						};
 						StatusModule::change_status_request_from_script(boma, *FIGHTER_RYU_STATUS_KIND_SPECIAL_LW_STEP_B, true);
@@ -162,11 +162,11 @@ unsafe extern "C" fn supers(fighter : &mut L2CFighterCommon) {
 				stick_x *= PostureModule::lr(boma);
 				if stick_x >= 0.665 && (ControlModule::get_command_flag_cat(boma, 0) & *FIGHTER_PAD_CMD_CAT1_FLAG_DASH) != 0 {
 					VariableModule::set_int((boma) as *mut _, VariableModule::get_int((boma) as *mut _, FIGHTER_KEN_INSTANCE_WORK_ID_INT_KEN_SUPER) - (meter_half as i32), FIGHTER_KEN_INSTANCE_WORK_ID_INT_KEN_SUPER);
-					println!("meter spent! {} ", VariableModule::get_int((boma) as *mut _, FIGHTER_KEN_INSTANCE_WORK_ID_INT_KEN_SUPER));
+					//println!("meter spent! {} ", VariableModule::get_int((boma) as *mut _, FIGHTER_KEN_INSTANCE_WORK_ID_INT_KEN_SUPER));
 					VariableModule::set_flag((boma) as *mut _, true, FIGHTER_KEN_INSTANCE_WORK_ID_FLAG_EX_DOWNB);
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_RYU_STATUS_KIND_SPECIAL_LW_STEP_F, true);
 				} else if stick_x <= -0.665 {
-					println!("meter spent! {} ", VariableModule::get_int((boma) as *mut _, FIGHTER_KEN_INSTANCE_WORK_ID_INT_KEN_SUPER));
+					//println!("meter spent! {} ", VariableModule::get_int((boma) as *mut _, FIGHTER_KEN_INSTANCE_WORK_ID_INT_KEN_SUPER));
 					VariableModule::set_int((boma) as *mut _, VariableModule::get_int((boma) as *mut _, FIGHTER_KEN_INSTANCE_WORK_ID_INT_KEN_SUPER) - (meter_half as i32), FIGHTER_KEN_INSTANCE_WORK_ID_INT_KEN_SUPER);
 					VariableModule::set_flag((boma) as *mut _, true, FIGHTER_KEN_INSTANCE_WORK_ID_FLAG_EX_DOWNB);
 					StatusModule::change_status_request_from_script(boma, *FIGHTER_RYU_STATUS_KIND_SPECIAL_LW_STEP_B, true);
@@ -179,7 +179,7 @@ unsafe extern "C" fn supers(fighter : &mut L2CFighterCommon) {
 					if [hash40("special_hi"), hash40("special_air_hi")].contains(&motion_kind) && MotionModule::frame(boma) < 5.0 {
 						if is_attack_btn(boma) {
 							VariableModule::set_int((boma) as *mut _, VariableModule::get_int((boma) as *mut _, FIGHTER_KEN_INSTANCE_WORK_ID_INT_KEN_SUPER) - (meter_half as i32), FIGHTER_KEN_INSTANCE_WORK_ID_INT_KEN_SUPER);
-							println!("meter spent! {} ", VariableModule::get_int((boma) as *mut _, FIGHTER_KEN_INSTANCE_WORK_ID_INT_KEN_SUPER));
+							//println!("meter spent! {} ", VariableModule::get_int((boma) as *mut _, FIGHTER_KEN_INSTANCE_WORK_ID_INT_KEN_SUPER));
 							MotionModule::change_motion(boma, Hash40::new("special_hi_ex"), -1.0, 1.0, false, 0.0, false, false);
 						};
 					};
@@ -188,7 +188,7 @@ unsafe extern "C" fn supers(fighter : &mut L2CFighterCommon) {
 					if [hash40("special_s_start"), hash40("special_air_s_start")].contains(&motion_kind) && MotionModule::frame(boma) < 5.0 {
 						if is_attack_btn(boma) {
 							VariableModule::set_int((boma) as *mut _, VariableModule::get_int((boma) as *mut _, FIGHTER_KEN_INSTANCE_WORK_ID_INT_KEN_SUPER) - (meter_half as i32), FIGHTER_KEN_INSTANCE_WORK_ID_INT_KEN_SUPER);
-							println!("meter spent! {} ", VariableModule::get_int((boma) as *mut _, FIGHTER_KEN_INSTANCE_WORK_ID_INT_KEN_SUPER));
+							//println!("meter spent! {} ", VariableModule::get_int((boma) as *mut _, FIGHTER_KEN_INSTANCE_WORK_ID_INT_KEN_SUPER));
 							MotionModule::change_motion(boma, Hash40::new("special_s_ex"), -1.0, 1.0, false, 0.0, false, false);
 						};
 					};

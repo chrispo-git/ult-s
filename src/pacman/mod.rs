@@ -16,19 +16,20 @@ static FIGHTER_PACMAN_INSTANCE_WORK_ID_FLAG_WE_BOUNCE_NOW : i32 = 6;
 
 
 pub fn install() {
+	let costumes_pacman_pacman: Vec<i32> = get_marked_costumes("pacman", "pacman").into_iter().map(|x| x as i32).collect();
 	frame::install();
 	status::install();
 	acmd::install();
 
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_PACMAN, get_marked_costumes("pacman","pacman").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_key"), smash::hash40("speed"), 3.45));
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_PACMAN, get_marked_costumes("pacman","pacman").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_special_hi"), smash::hash40("air_accel_x_mul"), 1.5));
-	crate::param_cache::update_int_2(-*WEAPON_KIND_PACMAN_FIREHYDRANT, get_marked_costumes("pacman","pacman").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_firehydrant"), smash::hash40("life"), 275));
-	crate::param_cache::update_int_2(-*WEAPON_KIND_PACMAN_FIREHYDRANT, get_marked_costumes("pacman","pacman").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_firehydrant"), smash::hash40("hp"), 7));
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_PACMAN, get_marked_costumes("pacman","pacman").into_iter().map(|x| x as i32).collect(), (smash::hash40("ground_brake"), 0, 0.085));
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_PACMAN, get_marked_costumes("pacman","pacman").into_iter().map(|x| x as i32).collect(), (smash::hash40("dash_speed"), 0, 1.9));
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_PACMAN, get_marked_costumes("pacman","pacman").into_iter().map(|x| x as i32).collect(), (smash::hash40("run_speed_max"), 0, 1.75));
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_PACMAN, get_marked_costumes("pacman","pacman").into_iter().map(|x| x as i32).collect(), (smash::hash40("jump_speed_x_mul"), 0, 1.0));
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_PACMAN, get_marked_costumes("pacman","pacman").into_iter().map(|x| x as i32).collect(), (smash::hash40("landing_attack_air_frame_hi"), 0, 8.0));
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_PACMAN, get_marked_costumes("pacman","pacman").into_iter().map(|x| x as i32).collect(), (smash::hash40("landing_attack_air_frame_lw"), 0, 23.0));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_PACMAN, costumes_pacman_pacman.clone(), (smash::hash40("param_key"), smash::hash40("speed"), 3.45));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_PACMAN, costumes_pacman_pacman.clone(), (smash::hash40("param_special_hi"), smash::hash40("air_accel_x_mul"), 1.5));
+	crate::param_cache::update_int_2(-*WEAPON_KIND_PACMAN_FIREHYDRANT, costumes_pacman_pacman.clone(), (smash::hash40("param_firehydrant"), smash::hash40("life"), 275));
+	crate::param_cache::update_int_2(-*WEAPON_KIND_PACMAN_FIREHYDRANT, costumes_pacman_pacman.clone(), (smash::hash40("param_firehydrant"), smash::hash40("hp"), 7));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_PACMAN, costumes_pacman_pacman.clone(), (smash::hash40("ground_brake"), 0, 0.085));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_PACMAN, costumes_pacman_pacman.clone(), (smash::hash40("dash_speed"), 0, 1.9));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_PACMAN, costumes_pacman_pacman.clone(), (smash::hash40("run_speed_max"), 0, 1.75));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_PACMAN, costumes_pacman_pacman.clone(), (smash::hash40("jump_speed_x_mul"), 0, 1.0));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_PACMAN, costumes_pacman_pacman.clone(), (smash::hash40("landing_attack_air_frame_hi"), 0, 8.0));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_PACMAN, costumes_pacman_pacman.clone(), (smash::hash40("landing_attack_air_frame_lw"), 0, 23.0));
 
 }

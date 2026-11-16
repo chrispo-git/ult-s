@@ -15,8 +15,9 @@ use crate::util::*;
 use super::*;
 
 pub fn install() {
+    let costumes_richter_richter: Vec<usize> = get_marked_costumes("richter", "richter");
     Agent::new("richter")
-    .set_costume(get_marked_costumes("richter","richter"))
+    .set_costume(costumes_richter_richter.clone())
     .acmd("game_attackairhi", richter_uair, Priority::Low)    
     .acmd("effect_attackairhi", richter_uair_eff, Priority::Low)    
     .acmd("sound_attackairhi", richter_uair_snd, Priority::Low)    
@@ -27,7 +28,7 @@ pub fn install() {
     .install();
 
 	Agent::new("richter_whip")
-    .set_costume(get_marked_costumes("richter","richter"))
+    .set_costume(costumes_richter_richter.clone())
     .acmd("effect_attackairhi", richter_uair_whip, Priority::Low)    
     .install();
 }

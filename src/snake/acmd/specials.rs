@@ -15,8 +15,9 @@ use crate::util::*;
 use super::*;
 
 pub fn install() {
+    let costumes_snake_snake: Vec<usize> = get_marked_costumes("snake", "snake");
     Agent::new("snake")
-    .set_costume(get_marked_costumes("snake","snake"))
+    .set_costume(costumes_snake_snake.clone())
     .acmd("game_specialsstart", snake_side_special_game, Priority::Low)    
     .acmd("game_specialairsstart", snake_side_special_air_game, Priority::Low)    
     .acmd("expression_specialsstart", snake_side_special_expr, Priority::Low)    
@@ -28,13 +29,13 @@ pub fn install() {
     .install();
 
     Agent::new("snake_nikita")
-    .set_costume(get_marked_costumes("snake","snake"))
+    .set_costume(costumes_snake_snake.clone())
     .acmd("sound_start", snake_tranq_gun_start_snd, Priority::Low)    
     .acmd("sound_shoot", snake_tranq_gun_shoot_snd, Priority::Low)    
     .install();
 
     Agent::new("snake_nikitamissile")
-    .set_costume(get_marked_costumes("snake","snake"))
+    .set_costume(costumes_snake_snake.clone())
     .acmd("game_fly", snake_tranq_dart_fly_game, Priority::Low)    
     .acmd("game_flyattackcommon", snake_tranq_dart_fly_game, Priority::Low)    
     .acmd("game_stopfall", snake_tranq_dart_fly_game, Priority::Low)    

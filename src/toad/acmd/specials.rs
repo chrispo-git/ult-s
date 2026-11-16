@@ -386,8 +386,9 @@ unsafe extern "C" fn toad_downb_air_snd(fighter: &mut L2CAgentBase) {
 		}
 }
 pub fn install() {
+	let costumes_murabito_toad: Vec<usize> = get_marked_costumes("murabito", "toad");
 	Agent::new("murabito_flowerpot")
-    .set_costume(get_marked_costumes("murabito","toad"))
+    .set_costume(costumes_murabito_toad.clone())
 		.acmd("game_throwed", toad_iceball, Priority::Low)
 		.acmd("effect_throwed", toad_iceball_eff, Priority::Low)
 		.acmd("game_bound", toad_iceball, Priority::Low)
@@ -398,7 +399,7 @@ pub fn install() {
 		.acmd("sound_pop", toad_iceball_pop_snd, Priority::Low)
 		.install();
 	Agent::new("murabito")
-    .set_costume(get_marked_costumes("murabito","toad"))
+    .set_costume(costumes_murabito_toad.clone())
 		.effect_acmd("effect_specialairhiscrew", toad_upb_screw_eff, Priority::Low)
 		.game_acmd("game_specialairhiscrew", toad_upb_screw, Priority::Low)
 		.sound_acmd("sound_specialairhiscrew", toad_upb_screw_snd, Priority::Low)

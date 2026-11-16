@@ -16,18 +16,19 @@ use crate::koopa::*;
 use super::*;
 
 pub fn install() {
+    let costumes_koopa_koopa: Vec<usize> = get_marked_costumes("koopa", "koopa");
     Agent::new("kirby")
     .set_costume([0, 1, 2, 3, 4, 5, 6, 7].to_vec())
 	.on_line(Main, kirby_bowser_frame)
 	.install();
 
 	Agent::new("koopa")
-    .set_costume(get_marked_costumes("koopa","koopa"))
+    .set_costume(costumes_koopa_koopa.clone())
 	.on_line(Main, bowser_frame)
 	.install();
 
 	Agent::new("koopa_breath")
-    .set_costume(get_marked_costumes("koopa","koopa"))
+    .set_costume(costumes_koopa_koopa.clone())
 	.on_line(Main, fireball_frame)
 	.install();
 }

@@ -15,13 +15,14 @@ use crate::util::*;
 use super::*;
 
 pub fn install() {
+    let costumes_rosetta_rosetta: Vec<usize> = get_marked_costumes("rosetta", "rosetta");
     Agent::new("rosetta")
-    .set_costume(get_marked_costumes("rosetta","rosetta"))
+    .set_costume(costumes_rosetta_rosetta.clone())
     .on_line(Main, rosa_frame)
     .install();
 
 	Agent::new("rosetta_tico")
-    .set_costume(get_marked_costumes("rosetta","rosetta"))
+    .set_costume(costumes_rosetta_rosetta.clone())
     .on_line(Main, tico_frame)
     .install();
 }
@@ -111,7 +112,7 @@ unsafe extern "C" fn tico_frame(weapon: &mut L2CFighterBase) {
 			if [*WEAPON_ROSETTA_TICO_STATUS_KIND_REBIRTH].contains(&status_kind) {
 				VariableModule::set_flag((boma) as *mut _, false, FIGHTER_ROSETTA_INSTANCE_WORK_ID_FLAG_IS_TICO_DEAD);
 			};
-			println!("TICO_X {}, TICO_Y {}",TICO_X[ENTRY_ID], TICO_Y[ENTRY_ID] );
+			//println!("TICO_X {}, TICO_Y {}",TICO_X[ENTRY_ID], TICO_Y[ENTRY_ID] );
 			if VariableModule::is_flag((boma) as *mut _, FIGHTER_ROSETTA_INSTANCE_WORK_ID_FLAG_IS_TELEPORT) == true {
 				if VariableModule::get_int((boma) as *mut _, FIGHTER_ROSETTA_INSTANCE_WORK_ID_INT_INVIS_FRAMES) == 1 {
 					macros::EFFECT(weapon, Hash40::new("rosetta_escape"), Hash40::new("rot"), 0, 0, 0, 0, 0, 0, 0.5, 0, 0, 0, 0, 0, 0, true);

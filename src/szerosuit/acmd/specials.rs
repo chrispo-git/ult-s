@@ -16,8 +16,9 @@ use super::*;
 use super::super::*;
 
 pub fn install() {
+    let costumes_szerosuit_szerosuit: Vec<usize> = get_marked_costumes("szerosuit", "szerosuit");
     Agent::new("szerosuit")
-    .set_costume(get_marked_costumes("szerosuit","szerosuit"))
+    .set_costume(costumes_szerosuit_szerosuit.clone())
     .acmd("game_specialairlwflip", zss_bury, Priority::Low)    
     .acmd("game_specialairlwkick", zss_kick, Priority::Low)    
     .acmd("game_specialairhi", zss_air_upb, Priority::Low)    
@@ -25,7 +26,7 @@ pub fn install() {
     .install();
 
 	Agent::new("szerosuit_paralyzer_bullet")
-    .set_costume(get_marked_costumes("szerosuit","szerosuit"))
+    .set_costume(costumes_szerosuit_szerosuit.clone())
 	.acmd("game_shoot", zss_neutralb, Priority::Low)    
     .install();
 }

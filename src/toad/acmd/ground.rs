@@ -390,8 +390,9 @@ unsafe extern "C" fn toad_fsmash_bomb(fighter: &mut L2CAgentBase) {
 	}
 
 pub fn install() {
+    let costumes_murabito_toad: Vec<usize> = get_marked_costumes("murabito", "toad");
     Agent::new("murabito")
-    .set_costume(get_marked_costumes("murabito","toad"))
+    .set_costume(costumes_murabito_toad.clone())
         .game_acmd("game_attack11toad", toad_jab1, Priority::Low)
         .effect_acmd("effect_attack11toad", toad_jab1_eff, Priority::Low)
         .game_acmd("game_attack12toad", toad_jab2, Priority::Low)
@@ -415,7 +416,7 @@ pub fn install() {
         .install();
 
 	Agent::new("murabito_slingshot")
-    .set_costume(get_marked_costumes("murabito","toad"))
+    .set_costume(costumes_murabito_toad.clone())
         .game_acmd("game_attackairftoad", toad_usmash_coin, Priority::Low)
 		.game_acmd("game_attackairbtoad", toad_usmash_coin, Priority::Low)
 		.sound_acmd("sound_attackairftoad", toad_usmash_coin_snd, Priority::Low)
@@ -425,7 +426,7 @@ pub fn install() {
 		.install();
 
 	Agent::new("murabito_bullet")
-    .set_costume(get_marked_costumes("murabito","toad"))
+    .set_costume(costumes_murabito_toad.clone())
         .game_acmd("game_shootftoad", toad_usmash_coin_bullet, Priority::Low)
 		.game_acmd("game_shootbtoad", toad_usmash_coin_bullet, Priority::Low)
 		.sound_acmd("sound_shootftoad", toad_usmash_coin_bullet_snd, Priority::Low)
@@ -435,7 +436,7 @@ pub fn install() {
 		.install();
 
 	Agent::new("murabito_bowlingball")
-    .set_costume(get_marked_costumes("murabito","toad"))
+    .set_costume(costumes_murabito_toad.clone())
         .game_acmd("game_falltoad", toad_fsmash_bomb, Priority::Low)
 		.install();
 }

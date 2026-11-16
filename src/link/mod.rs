@@ -12,22 +12,23 @@ static mut SHOOT :  smash::phx::Vector3f =  smash::phx::Vector3f { x: 0.0, y: 10
 
 
 pub fn install() {
+	let costumes_link_link: Vec<i32> = get_marked_costumes("link", "link").into_iter().map(|x| x as i32).collect();
 	frame::install();
 	status::install();
 	acmd::install();
 
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_LINK, get_marked_costumes("link","link").into_iter().map(|x| x as i32).collect(), (smash::hash40("ground_brake"), 0, 0.08));
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_LINK, get_marked_costumes("link","link").into_iter().map(|x| x as i32).collect(), (smash::hash40("dash_speed"), 0, 2.01));
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_LINK, get_marked_costumes("link","link").into_iter().map(|x| x as i32).collect(), (smash::hash40("run_speed_max"), 0, 1.76));
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_LINK, get_marked_costumes("link","link").into_iter().map(|x| x as i32).collect(), (smash::hash40("jump_speed_x_mul"), 0, 0.875));
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_LINK, get_marked_costumes("link","link").into_iter().map(|x| x as i32).collect(), (smash::hash40("mini_jump_y"), 0, 12.7));
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_LINK, get_marked_costumes("link","link").into_iter().map(|x| x as i32).collect(), (smash::hash40("jump_aerial_y"), 0, 26.0));
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_LINK, get_marked_costumes("link","link").into_iter().map(|x| x as i32).collect(), (smash::hash40("air_speed_x_stable"), 0, 1.08));
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_LINK, get_marked_costumes("link","link").into_iter().map(|x| x as i32).collect(), (smash::hash40("weight"), 0, 102.0));
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_LINK, get_marked_costumes("link","link").into_iter().map(|x| x as i32).collect(), (smash::hash40("clip_sphere_offset_y"), 0, -2.0));
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_LINK, get_marked_costumes("link","link").into_iter().map(|x| x as i32).collect(), (smash::hash40("landing_attack_air_frame_hi"), 0, 7.0));
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_LINK, get_marked_costumes("link","link").into_iter().map(|x| x as i32).collect(), (smash::hash40("landing_attack_air_frame_f"), 0, 13.0));
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_LINK, get_marked_costumes("link","link").into_iter().map(|x| x as i32).collect(), (smash::hash40("landing_attack_air_frame_n"), 0, 9.0));
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_LINK, get_marked_costumes("link","link").into_iter().map(|x| x as i32).collect(), (smash::hash40("landing_frame"), 0, 3.0));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_LINK, costumes_link_link.clone(), (smash::hash40("ground_brake"), 0, 0.08));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_LINK, costumes_link_link.clone(), (smash::hash40("dash_speed"), 0, 2.01));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_LINK, costumes_link_link.clone(), (smash::hash40("run_speed_max"), 0, 1.76));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_LINK, costumes_link_link.clone(), (smash::hash40("jump_speed_x_mul"), 0, 0.875));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_LINK, costumes_link_link.clone(), (smash::hash40("mini_jump_y"), 0, 12.7));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_LINK, costumes_link_link.clone(), (smash::hash40("jump_aerial_y"), 0, 26.0));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_LINK, costumes_link_link.clone(), (smash::hash40("air_speed_x_stable"), 0, 1.08));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_LINK, costumes_link_link.clone(), (smash::hash40("weight"), 0, 102.0));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_LINK, costumes_link_link.clone(), (smash::hash40("clip_sphere_offset_y"), 0, -2.0));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_LINK, costumes_link_link.clone(), (smash::hash40("landing_attack_air_frame_hi"), 0, 7.0));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_LINK, costumes_link_link.clone(), (smash::hash40("landing_attack_air_frame_f"), 0, 13.0));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_LINK, costumes_link_link.clone(), (smash::hash40("landing_attack_air_frame_n"), 0, 9.0));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_LINK, costumes_link_link.clone(), (smash::hash40("landing_frame"), 0, 3.0));
 
 }

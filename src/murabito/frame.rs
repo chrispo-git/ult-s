@@ -16,19 +16,20 @@ use crate::murabito::*;
 use super::*;
 
 pub fn install() {
+    let costumes_murabito_murabito: Vec<usize> = get_marked_costumes("murabito", "murabito");
     Agent::new("murabito")
-    .set_costume(get_marked_costumes("murabito","murabito"))
+    .set_costume(costumes_murabito_murabito.clone())
     .on_line(Main, murabito_frame2)
     .on_line(Main, murabito_frame)
     .install();
 
     Agent::new("murabito_tree")
-    .set_costume(get_marked_costumes("murabito","murabito"))
+    .set_costume(costumes_murabito_murabito.clone())
     .on_line(Main, tree_frame)
     .install();
 
     Agent::new("murabito_sprout")
-    .set_costume(get_marked_costumes("murabito","murabito"))
+    .set_costume(costumes_murabito_murabito.clone())
     .on_line(Main, seed_frame)
     .install();
 }

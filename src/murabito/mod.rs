@@ -15,39 +15,28 @@ static Y_DIST: f32 = 10.0;
 static X_DIST: f32 = 10.0;
 
 pub fn install() {
+    let costumes_murabito_murabito: Vec<i32> = get_marked_costumes("murabito", "murabito").into_iter().map(|x| x as i32).collect();
     frame::install();
     status::install();
     acmd::install();
     crate::param_cache::update_float_2(
         *FIGHTER_KIND_MURABITO,
-        get_marked_costumes("murabito", "murabito")
-            .into_iter()
-            .map(|x| x as i32)
-            .collect(),
+        costumes_murabito_murabito.clone(),
         (smash::hash40("run_speed_max"), 0, 1.5)
     );
     crate::param_cache::update_float_2(
         *FIGHTER_KIND_MURABITO,
-        get_marked_costumes("murabito", "murabito")
-            .into_iter()
-            .map(|x| x as i32)
-            .collect(),
+        costumes_murabito_murabito.clone(),
         (smash::hash40("air_speed_x_stable"), 0, 1.1)
     );
     crate::param_cache::update_float_2(
         *FIGHTER_KIND_MURABITO,
-        get_marked_costumes("murabito", "murabito")
-            .into_iter()
-            .map(|x| x as i32)
-            .collect(),
+        costumes_murabito_murabito.clone(),
         (smash::hash40("landing_attack_air_frame_f"), 0, 12.0)
     );
     crate::param_cache::update_float_2(
         *FIGHTER_KIND_MURABITO,
-        get_marked_costumes("murabito", "murabito")
-            .into_iter()
-            .map(|x| x as i32)
-            .collect(),
+        costumes_murabito_murabito.clone(),
         (smash::hash40("landing_attack_air_frame_b"), 0, 12.0)
     );
 }

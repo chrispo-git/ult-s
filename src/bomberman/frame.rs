@@ -17,14 +17,15 @@ use super::*;
 use crate::bomberman::*;
 
 pub fn install() {
+    let costumes_pacman_bomberman: Vec<usize> = get_marked_costumes("pacman", "bomberman");
     Agent::new("pacman")
-    .set_costume(get_marked_costumes("pacman","bomberman"))
+    .set_costume(costumes_pacman_bomberman.clone())
     .on_line(Exec, bomber_main_frame)
     .on_line(Main, bomberman_frame)
     .install();
 
     Agent::new("pacman_firehydrant")
-    .set_costume(get_marked_costumes("pacman","bomberman"))
+    .set_costume(costumes_pacman_bomberman.clone())
     .on_line(Main, bomb_frame)
     .install();
 }

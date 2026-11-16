@@ -15,12 +15,13 @@ use crate::util::*;
 use super::*;
 
 pub fn install() {
+	let costumes_dedede_dedede: Vec<usize> = get_marked_costumes("dedede", "dedede");
 	Agent::new("dedede")
-    .set_costume(get_marked_costumes("dedede","dedede"))
+    .set_costume(costumes_dedede_dedede.clone())
 	.on_line(Main, dedede_frame)
 	.install();
 	Agent::new("dedede_gordo")
-    .set_costume(get_marked_costumes("dedede","dedede"))
+    .set_costume(costumes_dedede_dedede.clone())
 	.on_line(Main, gordo_frame)
 	.install();
 }
@@ -58,7 +59,7 @@ unsafe extern "C" fn dedede_frame(fighter : &mut L2CFighterCommon) {
 				VariableModule::set_float((boma) as *mut _, AttackModule::size(boma, 0), FIGHTER_DEDEDE_INSTANCE_WORK_ID_FLOAT_HIT0S);
 				/*macros::SEARCH(fighter, 0, 0, Hash40::new("top"), VariableModule::get_float((boma) as *mut _, FIGHTER_DEDEDE_INSTANCE_WORK_ID_FLOAT_HIT0S)+1.0, 0.0, lower_y, (VariableModule::get_float((boma) as *mut _, FIGHTER_DEDEDE_INSTANCE_WORK_ID_FLOAT_HIT0)-pos_x)*lr, Some(0.0), Some(upper_y), Some((VariableModule::get_float((boma) as *mut _, FIGHTER_DEDEDE_INSTANCE_WORK_ID_FLOAT_HIT0)-pos_x)*lr), *COLLISION_KIND_MASK_HIT, *HIT_STATUS_MASK_ALL, 0, *COLLISION_SITUATION_MASK_GA, *COLLISION_CATEGORY_MASK_NO_STAGE_GIMMICK, *COLLISION_PART_MASK_ALL, false);
 				search!(agent, *MA_MSC_CMD_SEARCH_SET_OPPONENT, 0, 0, *COLLISION_TARGET_PROPERTY, *COLLISION_PROPERTY_MASK_REFLECT);*/
-				println!("Pos X{}, Scale {}, upper_y {}, lower_y {}", VariableModule::get_float((boma) as *mut _, FIGHTER_DEDEDE_INSTANCE_WORK_ID_FLOAT_HIT0), VariableModule::get_float((boma) as *mut _, FIGHTER_DEDEDE_INSTANCE_WORK_ID_FLOAT_HIT0S), upper_y, lower_y);
+				//println!("Pos X{}, Scale {}, upper_y {}, lower_y {}", VariableModule::get_float((boma) as *mut _, FIGHTER_DEDEDE_INSTANCE_WORK_ID_FLOAT_HIT0), VariableModule::get_float((boma) as *mut _, FIGHTER_DEDEDE_INSTANCE_WORK_ID_FLOAT_HIT0S), upper_y, lower_y);
 			} else {
 				VariableModule::set_float((boma) as *mut _, 999.0, FIGHTER_DEDEDE_INSTANCE_WORK_ID_FLOAT_HIT0);
 				VariableModule::set_float((boma) as *mut _, 0.01, FIGHTER_DEDEDE_INSTANCE_WORK_ID_FLOAT_HIT0S);
@@ -170,9 +171,9 @@ unsafe extern "C" fn gordo_frame(fighter : &mut L2CFighterCommon) {
 				TeamModule::set_team(fighter.module_accessor, -1, true);
 				TeamModule::set_team_owner_id(fighter.module_accessor, 0x50000000);
 				HitModule::set_no_team(fighter.module_accessor, true);
-				println!("gordo switch!");
+				//println!("gordo switch!");
 			}
-			println!("Pos X Gordo {}, Pos Y Gordo {}", pos_x, pos_y);
+			//println!("Pos X Gordo {}, Pos Y Gordo {}", pos_x, pos_y);
 		}
 	};
 }

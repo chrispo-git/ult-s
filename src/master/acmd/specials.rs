@@ -16,8 +16,9 @@ use crate::master::*;
 use super::*;
 
 pub fn install() {
+    let costumes_master_master: Vec<usize> = get_marked_costumes("master", "master");
     Agent::new("master")
-    .set_costume(get_marked_costumes("master","master"))
+    .set_costume(costumes_master_master.clone())
     .acmd("game_specialn", byleth_neutralb, Priority::Low)    
     .acmd("game_specialairn", byleth_neutralb, Priority::Low)    
     .acmd("effect_specialn", byleth_neutralb_eff, Priority::Low)    
@@ -38,13 +39,13 @@ pub fn install() {
     .install();
 
 	Agent::new("master_arrow1")
-    .set_costume(get_marked_costumes("master","master"))
+    .set_costume(costumes_master_master.clone())
     .acmd("effect_fly", byleth_arrow_effect, Priority::Low)    
     .acmd("game_fly", byleth_arrow, Priority::Low)    
     .install();
 
 	Agent::new("master_axe")
-    .set_costume(get_marked_costumes("master","master"))
+    .set_costume(costumes_master_master.clone())
     .acmd("game_speciallw", axe_downb, Priority::Low)    
     .acmd("game_specialairlw", axe_downb, Priority::Low)    
     .install();

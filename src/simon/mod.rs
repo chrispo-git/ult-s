@@ -10,15 +10,16 @@ static FIGHTER_SIMON_INSTANCE_WORK_ID_INT_STATIC_MUT : i32 = 0;
 
 
 pub fn install() {
+	let costumes_simon_simon: Vec<i32> = get_marked_costumes("simon", "simon").into_iter().map(|x| x as i32).collect();
 	frame::install();
 	status::install();
 	acmd::install();
 
-	 crate::param_cache::update_float_2(-*WEAPON_KIND_SIMON_AXE, get_marked_costumes("simon","simon").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_axe"), smash::hash40("throw_angle"), 30.0));
-	 crate::param_cache::update_float_2(-*WEAPON_KIND_SIMON_AXE, get_marked_costumes("simon","simon").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_axe"), smash::hash40("throw_angle_stick_back"), 40.0));
-	 crate::param_cache::update_float_2(-*WEAPON_KIND_SIMON_AXE, get_marked_costumes("simon","simon").into_iter().map(|x| x as i32).collect(), (smash::hash40("param_axe"), smash::hash40("throw_angle_stick_front"), 20.0));
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_SIMON, get_marked_costumes("simon","simon").into_iter().map(|x| x as i32).collect(), (smash::hash40("jump_speed_x_mul"), 0, 1.075));
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_SIMON, get_marked_costumes("simon","simon").into_iter().map(|x| x as i32).collect(), (smash::hash40("air_speed_y_stable"), 0, 1.6));
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_SIMON, get_marked_costumes("simon","simon").into_iter().map(|x| x as i32).collect(), (smash::hash40("shield_radius"), 0, 13.0));
+	 crate::param_cache::update_float_2(-*WEAPON_KIND_SIMON_AXE, costumes_simon_simon.clone(), (smash::hash40("param_axe"), smash::hash40("throw_angle"), 30.0));
+	 crate::param_cache::update_float_2(-*WEAPON_KIND_SIMON_AXE, costumes_simon_simon.clone(), (smash::hash40("param_axe"), smash::hash40("throw_angle_stick_back"), 40.0));
+	 crate::param_cache::update_float_2(-*WEAPON_KIND_SIMON_AXE, costumes_simon_simon.clone(), (smash::hash40("param_axe"), smash::hash40("throw_angle_stick_front"), 20.0));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_SIMON, costumes_simon_simon.clone(), (smash::hash40("jump_speed_x_mul"), 0, 1.075));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_SIMON, costumes_simon_simon.clone(), (smash::hash40("air_speed_y_stable"), 0, 1.6));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_SIMON, costumes_simon_simon.clone(), (smash::hash40("shield_radius"), 0, 13.0));
 
 }

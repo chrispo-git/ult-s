@@ -26,18 +26,19 @@ static mut HIGH_ADD: f32 = 10.0;
 static mut LOW_ADD: f32 = -10.0;
 
 pub fn install() {
+	let costumes_dedede_dedede: Vec<i32> = get_marked_costumes("dedede", "dedede").into_iter().map(|x| x as i32).collect();
 	frame::install();
 	status::install();
 	acmd::install();
 
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_DEDEDE, get_marked_costumes("dedede","dedede").into_iter().map(|x| x as i32).collect(), (smash::hash40("run_speed_max"), 0, 1.675));
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_DEDEDE, get_marked_costumes("dedede","dedede").into_iter().map(|x| x as i32).collect(), (smash::hash40("jump_aerial_y"), 0, 35.0));
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_DEDEDE, get_marked_costumes("dedede","dedede").into_iter().map(|x| x as i32).collect(), (smash::hash40("air_speed_x_stable"), 0, 1.01));
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_DEDEDE, get_marked_costumes("dedede","dedede").into_iter().map(|x| x as i32).collect(), (smash::hash40("air_speed_y_stable"), 0, 1.6));
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_DEDEDE, get_marked_costumes("dedede","dedede").into_iter().map(|x| x as i32).collect(), (smash::hash40("dive_speed_y"), 0, 2.56));
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_DEDEDE, get_marked_costumes("dedede","dedede").into_iter().map(|x| x as i32).collect(), (smash::hash40("weight"), 0, 120.0));
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_DEDEDE, get_marked_costumes("dedede","dedede").into_iter().map(|x| x as i32).collect(), (smash::hash40("landing_attack_air_frame_f"), 0, 12.0));
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_DEDEDE, get_marked_costumes("dedede","dedede").into_iter().map(|x| x as i32).collect(), (smash::hash40("landing_attack_air_frame_b"), 0, 9.0));
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_DEDEDE, get_marked_costumes("dedede","dedede").into_iter().map(|x| x as i32).collect(), (smash::hash40("landing_frame"), 0, 4.0));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_DEDEDE, costumes_dedede_dedede.clone(), (smash::hash40("run_speed_max"), 0, 1.675));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_DEDEDE, costumes_dedede_dedede.clone(), (smash::hash40("jump_aerial_y"), 0, 35.0));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_DEDEDE, costumes_dedede_dedede.clone(), (smash::hash40("air_speed_x_stable"), 0, 1.01));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_DEDEDE, costumes_dedede_dedede.clone(), (smash::hash40("air_speed_y_stable"), 0, 1.6));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_DEDEDE, costumes_dedede_dedede.clone(), (smash::hash40("dive_speed_y"), 0, 2.56));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_DEDEDE, costumes_dedede_dedede.clone(), (smash::hash40("weight"), 0, 120.0));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_DEDEDE, costumes_dedede_dedede.clone(), (smash::hash40("landing_attack_air_frame_f"), 0, 12.0));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_DEDEDE, costumes_dedede_dedede.clone(), (smash::hash40("landing_attack_air_frame_b"), 0, 9.0));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_DEDEDE, costumes_dedede_dedede.clone(), (smash::hash40("landing_frame"), 0, 4.0));
 
 }

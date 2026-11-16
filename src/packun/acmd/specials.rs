@@ -16,8 +16,9 @@ use super::*;
 use super::super::*;
 
 pub fn install() {
+    let costumes_packun_packun: Vec<usize> = get_marked_costumes("packun", "packun");
     Agent::new("packun")
-    .set_costume(get_marked_costumes("packun","packun"))
+    .set_costume(costumes_packun_packun.clone())
     .acmd("game_specialsshoot", plant_sideb, Priority::Low)    
     .acmd("effect_specialsshoot", plant_sideb_eff, Priority::Low)    
     .acmd("sound_specialsshoot", plant_sideb_snd, Priority::Low)    
@@ -27,7 +28,7 @@ pub fn install() {
     .install();
 
     Agent::new("packun_poisonbreath")
-    .set_costume(get_marked_costumes("packun","packun"))
+    .set_costume(costumes_packun_packun.clone())
     .acmd("game_explode", poison_explosion, Priority::Low)    
     .acmd("effect_explode", poison_explosion_eff, Priority::Low)    
     .acmd("sound_explode", poison_explosion_snd, Priority::Low)    

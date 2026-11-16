@@ -15,16 +15,17 @@ use crate::util::*;
 use super::*;
 
 pub fn install() {
+    let costumes_inkling_inkling: Vec<usize> = get_marked_costumes("inkling", "inkling");
     Agent::new("inkling_splashbomb")
-    .set_costume(get_marked_costumes("inkling","inkling"))
+    .set_costume(costumes_inkling_inkling.clone())
     .acmd("game_explode", ink_bomb, Priority::Low)    
     .install();
     Agent::new("inkling")
-    .set_costume(get_marked_costumes("inkling","inkling"))
+    .set_costume(costumes_inkling_inkling.clone())
     .acmd("game_specialhidown", ink_upb_down, Priority::Low)    
     .install();
     Agent::new("inkling_squid")
-    .set_costume(get_marked_costumes("inkling","inkling"))
+    .set_costume(costumes_inkling_inkling.clone())
     .acmd("effect_specialhi2", ink_upb_down_eff, Priority::Low)    
     .install();
 }
