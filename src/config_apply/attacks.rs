@@ -35,7 +35,7 @@ pub unsafe fn ac(fighter : &mut L2CFighterCommon, config : &config::Config, stat
 }
 
 pub unsafe fn lcancel(fighter : &mut L2CFighterCommon, config : &config::Config, status_kind : i32, motion_kind : u64) {
-    if is_gamemode("sixtyfour".to_string()) || config.attacks.lcancel == 2 {
+    if is_gamemode("sixtyfour") || config.attacks.lcancel == 2 {
         if (2..8).contains(&ControlModule::get_trigger_count(fighter.module_accessor, *CONTROL_PAD_BUTTON_GUARD as u8)) &&
         status_kind == *FIGHTER_STATUS_KIND_LANDING_ATTACK_AIR && MotionModule::frame(fighter.module_accessor) < 4.0 {
             StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_LANDING, false);
@@ -84,7 +84,7 @@ pub unsafe fn special_cancels(fighter: &mut L2CFighterCommon, config : &config::
         *FIGHTER_STATUS_KIND_ATTACK_LW3, *FIGHTER_STATUS_KIND_ATTACK_AIR) {
         return;
     }
-    if is_gamemode("fgmode".to_string()) {
+    if is_gamemode("fgmode") {
 		return;
 	}
 	let cat1 = ControlModule::get_command_flag_cat(fighter.module_accessor, 0);

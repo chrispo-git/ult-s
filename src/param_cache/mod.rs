@@ -1,6 +1,6 @@
 use once_cell::sync::Lazy;
 use parking_lot::Mutex;
-use std::collections::HashMap;
+use rustc_hash::FxHashMap;
 
 pub fn update_float_2(kind: i32, slots: Vec<i32>, param: (u64, u64, f32)) {
     param_config::update_float_2(kind, slots, param);
@@ -10,7 +10,7 @@ pub fn update_int_2(kind: i32, slots: Vec<i32>, param: (u64, u64, i32)) {
     param_config::update_int_2(kind, slots, param);
 }
 
-static GLOBAL_MULTIPLIERS: Lazy<Mutex<HashMap<(u64, u64), f32>>> = Lazy::new(|| Mutex::new(HashMap::new()));
+static GLOBAL_MULTIPLIERS: Lazy<Mutex<FxHashMap<(u64, u64), f32>>> = Lazy::new(|| Mutex::new(FxHashMap::default()));
 
 pub fn set_global_multiplier(type_hash: u64, name_hash: u64, multiplier: f32) {
     GLOBAL_MULTIPLIERS.lock().insert((type_hash, name_hash), multiplier);

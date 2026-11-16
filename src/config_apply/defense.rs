@@ -21,7 +21,7 @@ pub struct GamemodeAirdashState {
 }
 
 pub unsafe fn airdodge(fighter : &mut L2CFighterCommon, config : &config::Config, status_kind : i32, ENTRY_ID : usize) {
-    if is_gamemode("sixtyfour".to_string()) {
+    if is_gamemode("sixtyfour") {
         WorkModule::on_flag(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_DISABLE_ESCAPE_AIR); 
         return;
     }
@@ -67,7 +67,7 @@ pub unsafe fn airdodge(fighter : &mut L2CFighterCommon, config : &config::Config
 }
 
 pub unsafe fn di(fighter : &mut L2CFighterCommon,config : &config::Config) {
-    if config.defense.di == 0 && !is_gamemode("sixtyfour".to_string()) {
+    if config.defense.di == 0 && !is_gamemode("sixtyfour") {
         return;
     }
     WorkModule::set_float(fighter.module_accessor, 0.0, *FIGHTER_STATUS_DAMAGE_WORK_FLOAT_VECOR_CORRECT_STICK_X);
@@ -75,13 +75,13 @@ pub unsafe fn di(fighter : &mut L2CFighterCommon,config : &config::Config) {
 }
 
 pub unsafe fn hitstun_cancel(fighter : &mut L2CFighterCommon, config : &config::Config, status_kind : i32, entry_id : usize) {
-    if config.defense.hitstun_cancel == 0 && !is_gamemode("sixtyfour".to_string()){
+    if config.defense.hitstun_cancel == 0 && !is_gamemode("sixtyfour"){
         return;
     }
     let remaining_hitstun = WorkModule::get_float(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLOAT_DAMAGE_REACTION_FRAME);
     let total_hitstun = WorkModule::get_float(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLOAT_DAMAGE_REACTION_FRAME_LAST);
 	if remaining_hitstun > 0.0 && crate::is_in!(status_kind, *FIGHTER_STATUS_KIND_DAMAGE_AIR, *FIGHTER_STATUS_KIND_DAMAGE_FALL, *FIGHTER_STATUS_KIND_DAMAGE_FLY, *FIGHTER_STATUS_KIND_DAMAGE_FLY_ROLL, *FIGHTER_STATUS_KIND_DAMAGE_FLY_METEOR) {
-        if config.defense.hitstun_cancel == 1 && !is_gamemode("sixtyfour".to_string()) {
+        if config.defense.hitstun_cancel == 1 && !is_gamemode("sixtyfour") {
             if total_hitstun - remaining_hitstun > 15.0 {
                 if ControlModule::check_button_on_trriger(fighter.module_accessor, *CONTROL_PAD_BUTTON_GUARD) {
                     StatusModule::change_status_request_from_script(fighter.module_accessor, *FIGHTER_STATUS_KIND_ESCAPE_AIR, false);
@@ -100,7 +100,7 @@ pub unsafe fn hitstun_cancel(fighter : &mut L2CFighterCommon, config : &config::
     }
 }
 pub unsafe fn shield_health(fighter : &mut L2CFighterCommon, config : &config::Config) {
-    if is_gamemode("sixtyfour".to_string()) {
+    if is_gamemode("sixtyfour") {
         WorkModule::set_float(fighter.module_accessor, 65.0, *FIGHTER_INSTANCE_WORK_ID_FLOAT_GUARD_SHIELD_MAX);
         return;
     }
@@ -116,7 +116,7 @@ pub unsafe fn shield_health(fighter : &mut L2CFighterCommon, config : &config::C
 }
 
 pub unsafe fn shieldstun(fighter : &mut L2CFighterCommon, config : &config::Config, status_kind : i32) {
-    if config.defense.shieldstun == 0 && !is_gamemode("sixtyfour".to_string()) {
+    if config.defense.shieldstun == 0 && !is_gamemode("sixtyfour") {
         return;
     }
     let mut stun_mul = match config.defense.shieldstun {
@@ -124,7 +124,7 @@ pub unsafe fn shieldstun(fighter : &mut L2CFighterCommon, config : &config::Conf
         1 => 1.8,
         _ => 0.4
     };
-    if is_gamemode("sixtyfour".to_string()) {
+    if is_gamemode("sixtyfour") {
         stun_mul = 1.62;
     }
 
@@ -215,7 +215,7 @@ pub unsafe fn parry_recoil(fighter : &mut L2CFighterCommon, status_kind : i32, s
     };
 }
 pub unsafe fn shield(fighter : &mut L2CFighterCommon, config : &config::Config, status_kind : i32, entry_id : usize) {
-    if is_gamemode("sixtyfour".to_string()) {
+    if is_gamemode("sixtyfour") {
         return;
     }
     match config.defense.shield {

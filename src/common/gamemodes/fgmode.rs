@@ -18,7 +18,7 @@ pub struct GamemodeFGModeState {
 const WINDOW: i32 = 20;
 
 pub unsafe fn opff(fighter: &mut L2CFighterCommon, status_kind: i32, motion_kind: u64, ENTRY_ID : usize) {
-	if !is_gamemode("fgmode".to_string()) {
+	if !is_gamemode("fgmode") {
 		return;
 	}
 	let lr = PostureModule::lr(fighter.module_accessor);

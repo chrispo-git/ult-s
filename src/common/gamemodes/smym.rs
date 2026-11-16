@@ -126,7 +126,7 @@ pub unsafe fn boon_powers(fighter : & mut L2CFighterCommon, status_kind : i32, E
 }
 pub unsafe fn opff(fighter : &mut L2CFighterCommon, status_kind : i32, ENTRY_ID : usize) {
     unsafe {
-        if !is_gamemode("smym".to_string()) {
+        if !is_gamemode("smym") {
             return;
         }
         reset_on_restart(ENTRY_ID);
