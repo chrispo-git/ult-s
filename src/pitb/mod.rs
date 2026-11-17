@@ -24,7 +24,7 @@ pub fn install() {
 	 crate::param_cache::update_float_2(*FIGHTER_KIND_PITB, costumes_pitb_pitb.clone(), (smash::hash40("run_speed_max"), 0, 1.9));
 	 crate::param_cache::update_float_2(*FIGHTER_KIND_PITB, costumes_pitb_pitb.clone(), (smash::hash40("jump_y"), 0, 33.0));
 	crate::param_cache::update_int_2(*FIGHTER_KIND_PITB, costumes_pitb_pitb.clone(), (smash::hash40("jump_count_max"), 0, 2));
-	 crate::param_cache::update_float_2(*FIGHTER_KIND_PITB, costumes_pitb_pitb.clone(), (smash::hash40("jump_aerial_y"), 0, 33.0));
+	 crate::param_cache::update_float_2(*FIGHTER_KIND_PITB, costumes_pitb_pitb.clone(), (smash::hash40("jump_aerial_y"), 0, 42.0));
 	 crate::param_cache::update_float_2(*FIGHTER_KIND_PITB, costumes_pitb_pitb.clone(), (smash::hash40("air_speed_x_stable"), 0, 1.1));
 	 crate::param_cache::update_float_2(*FIGHTER_KIND_PITB, costumes_pitb_pitb.clone(), (smash::hash40("air_accel_y"), 0, 0.112));
 	 crate::param_cache::update_float_2(*FIGHTER_KIND_PITB, costumes_pitb_pitb.clone(), (smash::hash40("air_speed_y_stable"), 0, 1.92));
