@@ -57,14 +57,15 @@ def empty_or_create(folder):
         shutil.rmtree(folder)
     os.makedirs(folder)
 
-def make_zip(src_dir, zip_path):
+def make_zip(src_dir, zip_path, arcbase=None):
     if os.path.exists(zip_path):
         os.remove(zip_path)
     file_paths = get_all_file_paths(src_dir)
     log(f"  Zipping {len(file_paths)} files -> {zip_path}")
     with ZipFile(zip_path, 'w', compression=zipfile.ZIP_DEFLATED, compresslevel=6) as z:
         for fp in file_paths:
-            z.write(fp)
+            arcname = os.path.relpath(fp, arcbase) if arcbase else fp
+            z.write(fp, arcname)
     log(f"  Zip complete: {zip_path}")
 
 def locate_nro():
@@ -202,9 +203,9 @@ def build_lite(version):
     shutil.copy('readme-lite.txt', os.path.join('releases-lite', 'readme.txt'))
     shutil.copy('credits.txt',     os.path.join('releases-lite', 'credits.txt'))
 
-    shutil.copytree('presets', os.path.join('releases', 'ultimate', 'ult-s', 'presets'))
-    shutil.copy(r'presets/vanilla.toml', os.path.join('releases', 'ultimate', 'ult-s', 'config.toml'))
-    make_zip(out_dir, os.path.join('releases-lite', 'Ultimate S Lite.zip'))
+    shutil.copytree('presets', os.path.join('releases-lite', 'ultimate', 'ult-s', 'presets'))
+    shutil.copy(r'presets/vanilla.toml', os.path.join('releases-lite', 'ultimate', 'ult-s', 'config.toml'))
+    make_zip('releases-lite', os.path.join('releases-lite', 'Ultimate S Lite.zip'), arcbase='releases-lite')
     log("=== Lite build done ===")
 
 # ---------------------------------------------------------------------------
