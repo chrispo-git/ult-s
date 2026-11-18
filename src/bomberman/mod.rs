@@ -27,6 +27,9 @@ pub fn install() {
 	frame::install();
 	status::install();
 	acmd::install();
+    if (get_costume_count("pacman", "bomberman") < 1) {
+        return;
+    }
 
     the_csk_collection_api::add_chara_db_entry_info(
         the_csk_collection_api::CharacterDatabaseEntry {

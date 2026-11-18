@@ -21,6 +21,10 @@ pub fn install() {
 	status::install();
 	acmd::install();
 
+    if (get_costume_count("falco", "peppy") < 1) {
+        return;
+    }
+
     the_csk_collection_api::add_chara_db_entry_info(
         the_csk_collection_api::CharacterDatabaseEntry {
                 ui_chara_id: smash::hash40("ui_chara_peppy"),
