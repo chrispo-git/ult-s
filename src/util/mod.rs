@@ -13,7 +13,6 @@ use std::os::raw::c_ulong;
 use std::{fs, path::Path};
 use crate::controls::ext::*;
 use crate::common::*;
-use cached::proc_macro::cached;
 use rustc_hash::{FxHashMap, FxHashSet, FxBuildHasher};
 use std::time::Instant;
 use once_cell::sync::Lazy;
@@ -1053,7 +1052,11 @@ impl ModRegistry {
             }
         }
         slots.sort_unstable();
-        slots
+        if slots.is_empty() {
+            vec![256]
+        } else {
+            slots
+        }
     }
 
     pub fn get_unrecognized_marked_costumes(&self, char_folder: &str, known_markers: &[&str]) -> Vec<usize> {
