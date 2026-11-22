@@ -15,7 +15,7 @@ use crate::util::*;
 use super::*;
 
 pub fn install() {
-	if get_costume_count("miigunner","miigunner") < 1 {
+	if get_costume_count("miiswordsman","miiswordsman") < 1 {
 		return;
 	}
     Agent::new("miiswordsman")
